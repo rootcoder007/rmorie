@@ -24,3 +24,6 @@ Optimal levels-point scalar codebook
 A list with \code{estimate}, \code{codebook},   \code{boundaries}, \code{distortion},   \code{distortion_history}, \code{iterations}, \code{converged},   \code{source}, \code{levels}, \code{lo}, \code{hi} (uniform   only), \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_tqlld()
+}

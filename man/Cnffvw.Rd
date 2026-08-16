@@ -35,3 +35,7 @@ carry a second implementation -- which would agree with the first at
 Cinelli & Hazlett (2020), Making Sense of Sensitivity,
 JRSS B 82(1):39-67.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Cnffvw(V, V)
+}

@@ -20,3 +20,7 @@ Part of the bhltmsm_native implementation; see the file header for the source it
 A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se}, \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+fit_msm(V, V)
+}

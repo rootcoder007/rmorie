@@ -19,3 +19,7 @@ by hand -- extract sign/exponent/mantissa from the double, then
 round the mantissa to 10 bits with ties-to-even, handling overflow
 to Inf and underflow to subnormal/zero exactly as IEEE-754 requires.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_fp16_quant(V)
+}

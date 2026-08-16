@@ -14,3 +14,6 @@ qpdual_cheatsheet
 A character value.
 }
 \keyword{internal}
+\examples{
+qpdual_cheatsheet()
+}

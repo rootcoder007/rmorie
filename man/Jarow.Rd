@@ -30,3 +30,7 @@ Formula: \code{jaro = (m/|s1| + m/|s2| + (m - t)/m)/3},
 Winkler, W. E. (1990). Proc Surv Res Meth Sect ASA
 354-359; Jaro, M. A. (1989) JASA 84:414-420.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Jarow(V, V)
+}

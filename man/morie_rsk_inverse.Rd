@@ -17,3 +17,7 @@ RSK is a bijection, so this must return the original word exactly.
 Round-tripping is the strongest available check on the forward map,
 and is what the tests use.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rsk_inverse(V, V)
+}

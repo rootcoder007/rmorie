@@ -37,3 +37,7 @@ List with \code{theta}, \code{step}, \code{m}, \code{u}, \code{m_hat}.
 u <- max(b2 u, |g|); only m is bias-corrected, because an
 exponentially weighted max needs no correction.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_adamax(V)
+}

@@ -37,3 +37,7 @@ is applied \code{n_layers} times, so depth costs no extra parameters --
 which is why \code{n_params} is independent of \code{n_layers} while
 \code{n_params_unshared} is not. Token ids are 0-based.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_albert(V)
+}

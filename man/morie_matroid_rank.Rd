@@ -17,3 +17,7 @@ Integer rank.
 \description{
 Rank of a subset: the size of its largest independent subset
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_matroid_rank(V, V)
+}

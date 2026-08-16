@@ -21,3 +21,7 @@ stream is episodic (truncated at each `done`), the intrinsic stream is non-episo
 A list with \code{estimate}, \code{return_ext}, \code{return_int}, \code{return_total}, \code{gamma_ext}, \code{gamma_int}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rndnet_combine_returns(V, V)
+}

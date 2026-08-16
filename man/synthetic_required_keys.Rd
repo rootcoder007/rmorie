@@ -14,3 +14,6 @@ Part of the synthetic implementation; see the file header for the source it foll
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+synthetic_required_keys()
+}

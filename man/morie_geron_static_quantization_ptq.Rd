@@ -20,3 +20,7 @@ Static post-training quantization (PTQ) from calibration ranges (Geron App B, hm
 A list with \code{quantized_weights}, \code{dequantized_weights}, \code{weight_scale}, \code{activation_scale}, \code{zero_point}, \code{activation_range}, \code{max_weight_error}, \code{compression}, \code{bits}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_static_quantization_ptq(V, V)
+}

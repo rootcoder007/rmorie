@@ -24,3 +24,8 @@ attributed to the book:
 MSE = mean_i (mean_b f_b(x_i) - y_i)^2 + mean_i var_b(f_b(x_i)) +
 noisevar.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+morie_bvdecomp(M, S)
+}

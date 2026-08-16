@@ -28,3 +28,7 @@ estimate, n, method.
 L = recon MSE + codebook loss + beta*commitment loss; straight-through
 estimator copies the decoder gradient at z_q onto z_e.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_vq_vae(V)
+}

@@ -38,3 +38,6 @@ s_k^2 = 1/n + tau2 1{k < K};  pi_K propto m_K(y) exp(-lam K log n).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.1.
 }
+\examples{
+Ghosaladaptthm()
+}

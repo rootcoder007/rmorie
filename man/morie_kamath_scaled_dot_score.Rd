@@ -18,3 +18,7 @@ morie_kamath_scaled_dot_score
 A list with \code{estimate}, \code{d_k}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_scaled_dot_score(V, V)
+}

@@ -25,3 +25,7 @@ clamp.
 \references{
 Pettitt (1979), JRSS C 28:126-135.  Paywalled; the coded form was read from Pohlert's CRAN package trend (R/pettitt.test.R), which follows Verstraeten et al. (2006).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Pettitt(V)
+}

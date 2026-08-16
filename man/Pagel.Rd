@@ -14,3 +14,7 @@ Page\'s L test -- eqs. (12.3.1)-(12.3.2), pp. 448-449
 A list with \code{statistic}, \code{z}, \code{p_value}, \code{rav}, \code{rank_sums}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Pagel(D)
+}

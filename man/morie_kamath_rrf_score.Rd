@@ -18,3 +18,7 @@ Score_RRF = 1/(r + k) per 1-based rank, SUMMED across rankings, with Cormack et 
 A list with \code{estimate}, \code{scores}, \code{ranks}, \code{k}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_rrf_score(V)
+}

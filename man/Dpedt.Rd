@@ -30,3 +30,7 @@ blocks is sum}{i=1..n} alpha/(alpha + i - 1).
 Blackwell & MacQueen (1973), Ann. Statist. 1(2):353-355;
 Pitman (2006), Combinatorial Stochastic Processes, Springer, ch. 3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dpedt(V)
+}

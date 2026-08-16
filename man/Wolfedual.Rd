@@ -14,3 +14,7 @@ Wolfedual(f, grad_f, h = NULL, grad_h = NULL, g = NULL, grad_g = NULL, lam = NUL
 A list with \code{L}, \code{stationarity}, \code{max_stationarity}, \code{alpha_nonnegative}, \code{n_equality}, \code{n_inequality}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wolfedual(V, V)
+}

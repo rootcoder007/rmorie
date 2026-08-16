@@ -14,3 +14,7 @@ Natural direct effect (Zheng & van der Laan 2012)
 A list with \code{estimate}, \code{se}, \code{mean_y10}, \code{mean_y00}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ndeff(V, V)
+}

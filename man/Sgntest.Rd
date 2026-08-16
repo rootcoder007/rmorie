@@ -30,3 +30,7 @@ Association 41(236), 557-566 -- the primary source. Wasserman (2004),
 All of Statistics, does NOT contain the sign test; the full text of
 the book was fetched and searched to establish that.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sgntest(V)
+}

@@ -27,3 +27,7 @@ List with K_dequantized, V_dequantized, bytes_before, bytes_after, compression_r
 \description{
 KV-cache quantization (Geron Ch 17, morie.fn hmkvc)
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_kv_cache_compress(M, M)
+}

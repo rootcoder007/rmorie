@@ -34,3 +34,7 @@ the primary sources. Wasserman (2004), All of Statistics, does NOT
 contain the rank-sum test; the full text of the book was fetched and
 searched to establish that.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ranksum(V, V)
+}

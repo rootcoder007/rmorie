@@ -14,3 +14,7 @@ Tie-corrected Friedman Q -- eq. (12.2.12), p. 445
 A list with \code{statistic}, \code{q_raw}, \code{tiesum}, \code{factor}, \code{s}, \code{rank_sums}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Friedties(D)
+}

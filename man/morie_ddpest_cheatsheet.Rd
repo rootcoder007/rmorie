@@ -14,3 +14,6 @@ One-paragraph summary of the model
 A character string.
 }
 \keyword{internal}
+\examples{
+morie_ddpest_cheatsheet()
+}

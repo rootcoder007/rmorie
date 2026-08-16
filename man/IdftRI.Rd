@@ -17,3 +17,7 @@ residue is reported, not discarded -- a large one means the spectrum was not con
 A list with \code{x}, \code{complex}, \code{n}, \code{max_imaginary}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IdftRI(V)
+}

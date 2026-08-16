@@ -31,3 +31,7 @@ Gamma = 1 that reduces to the ordinary Wilcoxon signed-rank test.
 Rosenbaum (2002), Observational Studies, 2nd ed.,
 Springer, section 4.3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CnsRos(V)
+}

@@ -17,3 +17,7 @@ function(X_new) -> predictions.
 \description{
 Ridge regression closed form, the grid-search default estimator (hmgrs)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ridge_estimator(V, V)
+}

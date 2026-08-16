@@ -25,3 +25,6 @@ See Also
 :mod:`morie.fn.informer` -- the implementation.
 }
 \keyword{internal}
+\examples{
+morie_infmer_cheatsheet()
+}

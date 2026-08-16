@@ -32,3 +32,7 @@ Sablayrolles, A., Douze, M., Schmid, C. & Jegou, H. (2019)
 arXiv:1806.03198.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+koleo(M)
+}

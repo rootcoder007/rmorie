@@ -17,3 +17,7 @@ list(w, mean, sd, cvbefore, cvafter, n)
 \description{
 Log transformation with an optional offset (ch. 6 p. 163)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_logtrans(V)
+}

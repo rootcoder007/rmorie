@@ -17,3 +17,7 @@ removes any locally linear trend, so T-wave limbs and baseline drift give nothin
 A list with \code{y1}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsDeriv2(V)
+}

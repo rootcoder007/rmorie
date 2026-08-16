@@ -19,3 +19,7 @@ Part of the painn_native implementation; see the file header for the source it f
 A list with \code{dipole}, \code{magnitude}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+dipole_moment(V, V)
+}

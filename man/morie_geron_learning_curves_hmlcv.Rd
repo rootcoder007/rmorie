@@ -31,3 +31,7 @@ List with train_sizes, rmse_train, rmse_val, final_gap, verdict, estimate, n, me
 \description{
 Split order via the shared LCG stream, not numpy PCG64 permutation.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_learning_curves_hmlcv(V, V)
+}

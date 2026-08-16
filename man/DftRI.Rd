@@ -17,3 +17,7 @@ imaginary part is MINUS the projection onto the corresponding sine.
 A list with \code{X}, \code{cos_projection}, \code{sin_projection}, \code{real}, \code{imag}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DftRI(V)
+}

@@ -31,3 +31,7 @@ ARIMA model is Box, Jenkins and Reinsel (1994), Chapter 4.  Standard
 published form; neither source is in the local corpus and neither
 was read.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Arimahr(V)
+}

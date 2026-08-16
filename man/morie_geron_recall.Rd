@@ -19,3 +19,7 @@ List with \code{recall}, \code{tp}, \code{fn}, \code{per_class}, \code{f1}.
 \description{
 Recall TP/(TP+FN) (Geron Ch 3, morie.fn grrec)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_recall(V, V)
+}

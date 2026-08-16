@@ -19,3 +19,7 @@ of month and day of week, so December sits next to January. The
 calendar arithmetic is proleptic Gregorian and written out here, so
 both language arms agree without depending on a date library.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_calfeat(M)
+}

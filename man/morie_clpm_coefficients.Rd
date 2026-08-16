@@ -42,3 +42,7 @@ database; the citation appears to be fabricated and has been
 replaced with the three verifiable sources above.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_clpm_coefficients(M, M)
+}

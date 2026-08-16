@@ -24,3 +24,8 @@ Cover & Thomas (2006), Theorem 5.4.3, eq. (5.42), p. 115.
 \references{
 Cover & Thomas (2006), Theorem 5.4.3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Predcomp(V, M)
+}

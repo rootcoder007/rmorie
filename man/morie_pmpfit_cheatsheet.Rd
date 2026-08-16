@@ -14,3 +14,6 @@ One-paragraph summary of the construction and why the extra parameter fattens th
 A character string.
 }
 \keyword{internal}
+\examples{
+morie_pmpfit_cheatsheet()
+}

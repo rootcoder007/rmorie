@@ -20,3 +20,7 @@ Zero-padding for valid/same convolutions (Geron Ch 12, hmpd)
 A list with \code{padded}, \code{pad_h}, \code{pad_w}, \code{output_shape}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_padding(M)
+}

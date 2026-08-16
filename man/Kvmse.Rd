@@ -13,3 +13,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later ' Quantize every key in a cache and m
 A list with components \code{mse}, \code{relative_mse}, \code{mean_mse}, \code{mean_relative}, \code{worst_relative}, \code{bound}, \code{within_bound}, \code{n}, \code{d}, \code{b}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kvmse(V)
+}

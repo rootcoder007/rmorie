@@ -32,3 +32,7 @@ w_j = -G_j/(H_j+lambda); gain = 0.5*(GL^2/(HL+lam) + GR^2/(HR+lam) -
 G^2/(H+lam)) - gamma. Exact greedy split search over sorted feature
 values.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_xgboost(V, V)
+}

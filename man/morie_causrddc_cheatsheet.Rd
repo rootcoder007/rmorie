@@ -14,3 +14,6 @@ Part of the causrddc_native implementation; see the file header for the source i
 A character value.
 }
 \keyword{internal}
+\examples{
+morie_causrddc_cheatsheet()
+}

@@ -19,3 +19,7 @@ List with \code{y}, \code{angles}, \code{theta}, \code{positions}.
 \description{
 Rotates feature PAIRS by m * base^(-2i/d) at explicit positions.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_rotary_positional_embedding(V)
+}

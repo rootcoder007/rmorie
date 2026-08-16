@@ -14,3 +14,7 @@ Kruskal-Wallis multiple comparisons -- eq. (10.4.8), p. 357
 A list with \code{bound}, \code{bounds}, \code{diffs}, \code{significant}, \code{zstar}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kwmc(V, V)
+}

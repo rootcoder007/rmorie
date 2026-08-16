@@ -18,3 +18,7 @@ runs BACKWARDS in time, its first entry being the current sample; getting that o
 A list with \code{d_hat}, \code{order}, \code{vector_is_time_reversed}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+WienerDot(V, V)
+}

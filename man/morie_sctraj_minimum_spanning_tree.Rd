@@ -19,3 +19,7 @@ With ends given, the tree is built on the non-terminal clusters and each termina
 A list with \code{edges}, \code{adjacency}, \code{nodes}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_sctraj_minimum_spanning_tree(D, D)
+}

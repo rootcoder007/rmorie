@@ -17,3 +17,7 @@ Greedy and sampled decoding (Alammar Ch 6)
 A list with \code{tokens}, \code{had_ties}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_greedy_decoding(V)
+}

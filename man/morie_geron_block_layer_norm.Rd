@@ -19,3 +19,7 @@ Normalized matrix.
 \description{
 Layer norm used by the transformer blocks (morie.fn grteb)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_block_layer_norm(V)
+}

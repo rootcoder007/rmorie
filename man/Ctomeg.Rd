@@ -32,3 +32,8 @@ alpha; otherwise omega is the larger of the two.
 McDonald (1999), Test Theory: A Unified Treatment,
 Erlbaum, ch. 6.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+Ctomeg(M, S)
+}

@@ -29,3 +29,7 @@ Part of the wrd2v_native implementation; see the file header for the source it f
 A list with \code{estimate}, \code{vectors}, \code{output_vectors}, \code{vocab}, \code{loss_curve}, \code{final_loss}, \code{similarity}, \code{most_similar}, \code{size}, \code{window}, \code{architecture}, \code{loss}, \code{negative}, \code{noise}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_wrd2v_wrd2v(V)
+}

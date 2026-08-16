@@ -17,3 +17,7 @@ part of the complex cepstrum.  The odd part, where the phase lives, is annihilat
 A list with \code{from_complex}, \code{direct}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{phase_lost}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PCepRel(V)
+}

@@ -34,3 +34,7 @@ and Theorem 1. Fetched from arXiv. The paper specifies the codebook
 only as the MSE-minimising centroids; the Lloyd-Max construction is
 documented in the batch helper .b1_codebook.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kvquant(V)
+}

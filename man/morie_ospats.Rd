@@ -44,3 +44,6 @@ of Brus (2022). The print edition tags E_xi of the stratum variance as
 13.16 (untagged on the web) and the Ospats objective as 13.17 (web
 13.16).
 }
+\examples{
+morie_ospats()
+}

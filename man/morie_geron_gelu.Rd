@@ -21,3 +21,7 @@ tanh approximation. GELU is non-monotone: the derivative
 Phi(z) + z phi(z) is negative near z = -1, which the parity test
 checks by finite differences.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gelu(V)
+}

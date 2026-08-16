@@ -15,3 +15,7 @@ List with \code{estimate}, \code{p_n}.
 \description{
 BLEU clipped n-gram precision (Kamath Eq 8.2)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ch8_bleu_precision(V)
+}

@@ -29,3 +29,6 @@ Part of the ttrace_native implementation; see the file header for the source it 
 A list with \code{controlled}, \code{total_cases}, \code{weekly}, \code{hit_cap}, \code{extinct}.
 }
 \keyword{internal}
+\examples{
+simulate_outbreak()
+}

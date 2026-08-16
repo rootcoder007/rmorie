@@ -18,3 +18,7 @@ highpass factor, at Nyquist from the moving-average factor -- peaking at w = pi/
 A list with \code{magnitude}, \code{omega}, \code{T}, \code{dc_gain}, \code{nyquist_gain}, \code{peak_at}, \code{bandpass}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CDiff3Mag(V)
+}

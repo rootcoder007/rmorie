@@ -36,3 +36,7 @@ non-zero weight.  That identity is the whole design.
 Zhang, Rao & Agrawala (2023), Adding Conditional Control
 to Text-to-Image Diffusion Models, ICCV 2023:3836-3847.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Cncpat(V, V)
+}

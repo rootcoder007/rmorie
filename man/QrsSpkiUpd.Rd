@@ -18,3 +18,7 @@ rule A beat found only by search-back was missed by the primary threshold, so th
 A list with \code{spki}, \code{previous}, \code{peaki}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsSpkiUpd(V, V)
+}

@@ -29,3 +29,7 @@ Welch's method when \code{tr = 0}; \code{morie_yuen_paired} is the dependent
 groups version, whose standard error subtracts the Winsorized
 covariance.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_welch_test(V, V)
+}

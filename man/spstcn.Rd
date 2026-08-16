@@ -78,3 +78,7 @@ its arguments does not belong behind a keyword.
 \references{
 Schabenberger Ch 9, Sec 9.3, eqs (9.7)-(9.17)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+spstcn(V, V)
+}

@@ -24,3 +24,7 @@ Numeric vector of length T.
 \description{
 Beta schedule values for T diffusion steps (hmdfw)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_beta_schedule_values(V)
+}

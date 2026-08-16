@@ -31,3 +31,7 @@ Spans replaced by one sentinel each. The span layout is drawn from the
 SAME linear congruential generator Python uses (\code{.morie_al_lcg}), so a
 given seed reproduces the Python output draw for draw.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_t5_span_corruption(V)
+}

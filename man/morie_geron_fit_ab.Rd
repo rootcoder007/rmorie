@@ -17,3 +17,7 @@ list(a, b, sse).
 \description{
 Deterministic grid search on log(a) and b (no optimiser dependency).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_fit_ab(V)
+}

@@ -14,3 +14,7 @@ Percentile modified rank test for scale -- Sec. 9.6, p. 323
 A list with \code{statistic}, \code{tupper}, \code{blower}, \code{mean}, \code{var}, \code{mean_book}, \code{var_book}, \code{z}, \code{p_value}, \code{S}, \code{R}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Pctranksc(V, V)
+}

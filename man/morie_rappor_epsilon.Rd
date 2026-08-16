@@ -24,3 +24,7 @@ RAPPOR privacy parameters (Theorems 1 and 2)
 \references{
 Erlingsson, Pihur & Korolova (2014), ACM CCS.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rappor_epsilon(V, V)
+}

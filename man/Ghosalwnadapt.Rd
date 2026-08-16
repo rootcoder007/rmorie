@@ -37,3 +37,6 @@ l_0 = log(1 - pi) + log phi(y_k; 0, 1/n).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.3.2.
 }
+\examples{
+Ghosalwnadapt()
+}

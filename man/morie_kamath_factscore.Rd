@@ -18,3 +18,7 @@ List with \code{estimate}, \code{supported}, \code{unsupported}.
 Share of atomic claims the knowledge base supports; the ratio core is
 km111.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_factscore(V, V)
+}

@@ -17,3 +17,7 @@ GAIL\'s whole framing is that imitation is occupancy-measure matching, so this i
 Named numeric vector of pair frequencies.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+gail_occupancy_measure(V, V)
+}

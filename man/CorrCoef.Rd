@@ -18,3 +18,7 @@ Part of the rangayyan_ccf implementation; see the file header for the source it 
 A list with \code{r}, \code{r_squared}, \code{n}, \code{means}, \code{cosine_without_removing_means}, \code{means_are_removed}, \code{invariant_to_positive_affine_change}, \code{says_nothing_about_agreement}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CorrCoef(V, V)
+}

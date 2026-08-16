@@ -39,3 +39,7 @@ Ioffe and Szegedy (2015), arXiv:1502.03167, Sect. 3.1 and
 Algorithm 2.  Read from the ar5iv rendering; the same paper is in the
 local corpus.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bnrunstat(V)
+}

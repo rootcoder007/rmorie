@@ -14,3 +14,7 @@ Attainable exact sizes of a discrete test -- Sec. 1.2.9, p. 26
 A list with \code{sizes}, \code{alpha_exact}, \code{cut}, \code{nlevels}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Exactsize(V)
+}

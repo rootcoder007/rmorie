@@ -22,3 +22,7 @@ rss, deficient, estimate, n, method.
 \description{
 theta = X^+ y = V Sigma^+ U^T y; minimum-norm solution when rank deficient.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_svd_pseudoinverse(V, V)
+}

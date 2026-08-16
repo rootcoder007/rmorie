@@ -33,3 +33,7 @@ Data, Chapter 8 (the log-ratio distance being clustered on); Lloyd
 (1982), Least squares quantization in PCM, IEEE Transactions on
 Information Theory 28(2), 129-137 (the algorithm itself).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compkm(V)
+}

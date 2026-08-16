@@ -18,3 +18,7 @@ Without this, bisection lands on the cdf plateau around zero -- betainc\\'s 1 - 
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Qt(V, V)
+}

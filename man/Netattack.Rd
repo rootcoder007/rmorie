@@ -24,3 +24,7 @@ Formula: remove f N nodes, then report S = |largest cluster| / N, \if{html}{\out
 \references{
 Albert, Jeong and Barabasi (2000), Error and attack tolerance of complex networks, Nature 406:378-382, arXiv:cond-mat/0008064. Verified against the paper for the definitions of d, S and \if{html}{\out{<s>}}.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Netattack(M)
+}

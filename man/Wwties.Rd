@@ -14,3 +14,7 @@ Runs-test tie bounds -- Sec. 6.2.1, p. 233
 A list with \code{rmin}, \code{rmax}, \code{nties}, \code{ambiguous}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wwties(V, V)
+}

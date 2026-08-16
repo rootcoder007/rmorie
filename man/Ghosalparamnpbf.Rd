@@ -33,3 +33,6 @@ log m_1 = lgamma(4) - lgamma(4 + n) + sum_j lgamma(1 + c_j).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.5.3.
 }
+\examples{
+Ghosalparamnpbf()
+}

@@ -18,3 +18,7 @@ PERIODIC: multiplying N-point DFTs gives the circular convolution of eq (3.90), 
 A list with \code{linear}, \code{circular}, \code{from_dft}, \code{padded_length}, \code{n_linear}, \code{n_circular}, \code{max_difference}, \code{holds}, \code{wraps_if_unpadded}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DftConv(V, V)
+}

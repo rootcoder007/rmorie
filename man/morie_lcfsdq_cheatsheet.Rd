@@ -25,3 +25,6 @@ A character scalar.
     Patterns," 2nd edition. Arnold, chapter 2.
 }
 \keyword{internal}
+\examples{
+morie_lcfsdq_cheatsheet()
+}

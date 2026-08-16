@@ -51,3 +51,6 @@ reproduced rather than tidied away.
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. eq. (44)-(47)
 }
+\examples{
+Alfviol()
+}

@@ -20,3 +20,7 @@ Returns the FIRST bad index; everything before it is still evidence and everythi
 List with \code{intact} (==\code{estimate}),   \code{first_bad}, \code{verified_through}, \code{n}, \code{method},   \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_sechsh_verify_chain(V, V)
+}

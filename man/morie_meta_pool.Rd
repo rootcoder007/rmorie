@@ -28,3 +28,7 @@ Higgins' I squared, the DerSimonian-Laird tau squared, random-effects
 weights, and the Qwithin / Qbetween partition. Mirrors ca11e34 to
 ca11e46.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_meta_pool(V, V)
+}

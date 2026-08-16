@@ -30,3 +30,7 @@ List with \code{total_params}, \code{config}, \code{loss}, \code{perplexity}, \c
 \description{
 GPT-1 architecture (delegated to hmdctr) plus the causal LM objective (hmgpt1)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gpt1(V)
+}

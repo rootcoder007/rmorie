@@ -18,3 +18,7 @@ Print method for \code{morie_bigint} objects
 The value of \code{invisible}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+print.morie_bigint(V)
+}

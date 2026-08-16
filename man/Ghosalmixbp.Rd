@@ -34,3 +34,6 @@ weights.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.3.4.
 }
+\examples{
+Ghosalmixbp()
+}

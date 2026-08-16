@@ -23,3 +23,7 @@ Renormalises both inputs to sum to one and returns
 \eqn{(\alpha - 1)^{-1} \log \sum_i p_i^{\alpha} q_i^{1 - \alpha}}.
 The order \code{alpha} must differ from 1; no check is performed.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_renyi(V, V)
+}

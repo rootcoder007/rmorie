@@ -19,3 +19,7 @@ that reading is contested -- HF is reasonably vagal, but LF reflects both branch
 A list with \code{lf_hf_ratio}, \code{lf}, \code{hf}, \code{vlf}, \code{total_power}, \code{lf_nu}, \code{hf_nu}, \code{order}, \code{bands}, \code{interpretation_caveat}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HrvRatio(V)
+}

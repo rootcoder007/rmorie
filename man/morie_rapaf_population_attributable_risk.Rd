@@ -18,3 +18,7 @@ Bruzzi et al. (1985) eq. (6): AR = 1 - sum_j rho_j / R_j, where rho_j is the pro
 A list with \code{estimate}, \code{ar},   \code{case_proportions}, \code{rate_ratios}, \code{n_cases},   \code{n_strata}, \code{uses_control_distribution}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rapaf_population_attributable_risk(V, V)
+}

@@ -17,3 +17,7 @@ List with \code{q}, \code{scale}, \code{dequantized}.
 \description{
 Symmetric quantization kernel (morie.fn grq8 \code{quantize_symmetric})
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_quantize_symmetric(V)
+}

@@ -33,3 +33,6 @@ Equations 6.21 to 6.25 of Bilder & Loughin (2025): Bayes rule, the
 Beta posterior, the Bayes estimate decomposition, and grid-normalized
 regression posteriors.
 }
+\examples{
+morie_bayes_binomial()
+}

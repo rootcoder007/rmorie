@@ -19,3 +19,7 @@ equal periods.  Both routes -- the modular sum and the inverse DFT of X(k)H(k) -
 A list with \code{y}, \code{via_dft}, \code{N}, \code{max_difference}, \code{agrees}, \code{equals_linear}, \code{linear_length}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CircConv(V, V)
+}

@@ -32,3 +32,7 @@ List with Theta, probabilities, prediction, loss_history, loss, accuracy, estima
 \description{
 Softmax regression fitted by batch gradient descent (Geron Ch 4, morie.fn hmmnl)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_multinomial_logistic(V, V)
+}

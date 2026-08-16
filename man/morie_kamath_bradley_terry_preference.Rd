@@ -15,3 +15,7 @@ List with \code{estimate}, \code{p_pref}, \code{reward_difference}.
 \description{
 Stable sigmoid of the winner-minus-loser reward difference.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_bradley_terry_preference(V, V)
+}

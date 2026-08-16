@@ -37,3 +37,6 @@ Sigma_{11} = ((K^(-1) + diag(Lambda))^(-1))_{11}.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.7.4.
 }
+\examples{
+Ghosalepgp()
+}

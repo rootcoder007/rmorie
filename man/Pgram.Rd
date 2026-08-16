@@ -17,3 +17,7 @@ covariance form of eq (4.58).  THE ZERO FREQUENCY IS EXCLUDED: the derivation of
 A list with \code{omega}, \code{periodogram}, \code{from_covariance}, \code{max_difference}, \code{acov}, \code{zero_frequency_excluded}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Pgram(V)
+}

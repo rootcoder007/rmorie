@@ -21,3 +21,7 @@ Part of the rangayyan_class2 implementation; see the file header for the source 
 A list with \code{coefficients}, \code{atoms}, \code{indices}, \code{residual}, \code{reconstruction}, \code{decay}, \code{energyratio}, \code{parameters}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MPursuit(V)
+}

@@ -19,3 +19,7 @@ the values differ by one by design, not by accident.)
 \description{
 Row-insert one value into a tableau, bumping
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rsk_insert(V, V)
+}

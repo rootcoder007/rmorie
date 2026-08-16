@@ -20,3 +20,7 @@ Online (streaming) learning: sequential SGD, prequential loss (Geron Ch 1, hmonl
 A list with \code{theta}, \code{trajectory}, \code{losses}, \code{cumulative_loss}, \code{mean_loss}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_online_learning(V, V)
+}

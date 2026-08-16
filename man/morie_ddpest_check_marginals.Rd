@@ -18,3 +18,7 @@ Every G_x must still be a probability measure
 Named list with ok, offenders, n_x, note.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ddpest_check_marginals(V)
+}

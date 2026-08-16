@@ -15,3 +15,7 @@ List with \code{estimate}, \code{ss_score}, \code{bias_magnitude}, \code{n_ties}
 \description{
 Fraction of pairs preferring the stereotype; 0.5 is unbiased.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_stereoset_bias(V, V)
+}

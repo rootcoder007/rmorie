@@ -30,3 +30,7 @@ xtilde <- DeQuant_mse(idx) + (sqrt(pi/2)/d) ||r|| S' qjl
 Zandieh et al., arXiv:2504.19874, Algorithm 2 lines 2-12.
 Fetched from arXiv.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Vcquant(V)
+}

@@ -22,3 +22,7 @@ Part of the edgrn_native implementation; see the file header for the source it f
 A list with \code{factor}, \code{log2_factor}, \code{n_used}, \code{n_genes}, \code{trimmed_m}, \code{trimmed_a}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+edgrn_tmm_factor(V, V)
+}

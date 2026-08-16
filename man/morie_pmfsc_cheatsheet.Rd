@@ -34,3 +34,6 @@ sources in words rather than given as formulas, so they are named here
 as choices rather than attributed.
 }
 \keyword{internal}
+\examples{
+morie_pmfsc_cheatsheet()
+}

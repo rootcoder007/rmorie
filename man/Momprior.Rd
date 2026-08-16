@@ -29,3 +29,7 @@ NO formula; the realisability condition is Hausdorff (1921),
 Mathematische Zeitschrift 9, 74-109, and is cited to its own source.
 Ghosal read from the copy of the book held in the corpus.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Momprior(V)
+}

@@ -18,3 +18,7 @@ because the cepstrum is of infinite duration (eq 4.73) and the DFT truncates it;
 A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{truncation_note}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CCepSum(V, V)
+}

@@ -18,3 +18,7 @@ the whole of the operator\\'s highpass character.
 A list with \code{H}, \code{z}, \code{T}, \code{zeros}, \code{zero_at_dc}, \code{dc_gain}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FDiffTf(V)
+}

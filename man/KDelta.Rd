@@ -19,3 +19,7 @@ is an ordinary sequence, evaluable at the origin.
 A list with \code{delta}, \code{n}, \code{shift}, \code{amplitude}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+KDelta(V)
+}

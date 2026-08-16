@@ -19,3 +19,7 @@ controls the noise amplification.  The book warns the price is accuracy -- the a
 A list with \code{y}, \code{value}, \code{index}, \code{T}, \code{as_averaged_first_differences}, \code{max_difference}, \code{derivation_agrees}, \code{controls_noise_amplification}, \code{poor_above_fs_over_10}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CDiff3(V)
+}

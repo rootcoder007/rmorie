@@ -17,3 +17,8 @@ list(rows, target, lags, nrows, ncols, mean)
 \description{
 Lag features (ch. 6 p. 170)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_lagfeat(V, M)
+}

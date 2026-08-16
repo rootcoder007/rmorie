@@ -18,3 +18,7 @@ List with \code{scaled}, \code{data_min}, \code{data_max}, \code{data_range},
 \description{
 Min-max feature scaling (Geron Ch 2, morie.fn grmms)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_minmax_scaler(V)
+}

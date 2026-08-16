@@ -33,3 +33,6 @@ Formula: beta_k <- sum_i (y_i - sum_{j != k} beta_j s_ij) s_ik
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.5.
 }
+\examples{
+Ghosalfuncreg()
+}

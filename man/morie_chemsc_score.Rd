@@ -43,3 +43,6 @@ A list with the free energy estimate, the fitness and every   term separately so
     Proteins 52(4), 609-623.
 }
 \keyword{internal}
+\examples{
+morie_chemsc_score()
+}

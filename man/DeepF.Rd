@@ -41,3 +41,7 @@ Guo, Tang, Ye, Li & He (2017), DeepFM, IJCAI
 2017:1725-1731; Rendle (2010), Factorization Machines,
 ICDM 2010:995-1000.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DeepF(V)
+}

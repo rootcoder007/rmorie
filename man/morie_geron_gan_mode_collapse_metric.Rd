@@ -22,3 +22,7 @@ A sample counts for its nearest true mode when within \code{tol}; the
 default \code{tol} is half the smallest inter-mode distance. Mode indices
 are 0-based.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_gan_mode_collapse_metric(M, M)
+}

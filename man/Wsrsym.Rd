@@ -14,3 +14,7 @@ Signed-rank test of symmetry -- Sec. 5.7.7, p. 211
 A list with \code{statistic}, \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{skewdir}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wsrsym(V)
+}

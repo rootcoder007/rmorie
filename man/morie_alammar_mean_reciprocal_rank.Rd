@@ -18,3 +18,7 @@ Retrieval metrics: MRR, recall@k, NDCG@k, MTEB aggregation
 A list with \code{estimate}, \code{reciprocal_ranks}, \code{queries_missed}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_mean_reciprocal_rank(V, V)
+}

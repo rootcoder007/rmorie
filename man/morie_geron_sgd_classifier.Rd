@@ -30,3 +30,7 @@ Subgradient update: violated margin (y_i f(x_i) < 1) -> w -= lr*(alpha\emph{w - 
 b += lr}y_i; satisfied -> w -= lr\emph{alpha}w. Sample order drawn from a
 deterministic LCG Fisher-Yates shuffle.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_sgd_classifier(V, V)
+}

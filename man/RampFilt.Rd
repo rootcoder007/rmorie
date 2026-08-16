@@ -20,3 +20,6 @@ The text immediately after states the output was divided by the sum of all value
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+RampFilt()
+}

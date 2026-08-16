@@ -20,3 +20,7 @@ List with \code{precision}, \code{tp}, \code{fp}, \code{per_class}.
 Counts delegated to \code{\link[=morie_geron_confusion_matrix]{morie_geron_confusion_matrix()}}; macro averaging
 skips classes that were never predicted.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_precision(V, V)
+}

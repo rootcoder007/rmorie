@@ -32,3 +32,7 @@ treatment effect (Manski and Pepper 2000; Manski 2007, eqs.
 Manski, C. F. and Pepper, J. V. (2000). Monotone
 instrumental variables. Econometrica, 68(4), 997-1010.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_bndapp(V, V)
+}

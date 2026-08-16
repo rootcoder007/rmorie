@@ -31,3 +31,7 @@ Weisberg, S. (2014). Applied Linear Regression, 4th ed,
 section 9.1; Belsley, Kuh & Welsch (1980), Regression Diagnostics,
 ch 2.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Studrs(V, V)
+}

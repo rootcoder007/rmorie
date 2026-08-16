@@ -34,3 +34,7 @@ arXiv:1804.06788 -- the primary source. Bayesian Data Analysis, 3rd
 edition, was fetched in full and searched; it predates
 simulation-based calibration and does NOT contain it.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sbcrank(V, V)
+}

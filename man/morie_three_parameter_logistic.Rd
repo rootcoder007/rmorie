@@ -14,3 +14,7 @@ morie_three_parameter_logistic
 A list with \code{p}, \code{logit}, \code{theta}, \code{a}, \code{b}, \code{c}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_three_parameter_logistic(V)
+}

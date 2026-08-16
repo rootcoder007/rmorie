@@ -33,3 +33,7 @@ A list with the zero-based pair matrix and the pair count.
     Information Theory in Psychology, 95-100.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+morie_rnacov_nussinov(S)
+}

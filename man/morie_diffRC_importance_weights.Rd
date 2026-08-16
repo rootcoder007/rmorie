@@ -19,3 +19,7 @@ Uniform sampling spends most of its budget where the model is already right.
 A list with \code{weights} and \code{effective_steps}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_diffRC_importance_weights(V)
+}

@@ -25,3 +25,7 @@ The percentage bend correlation clips standardised deviations to
 \verb{[-1, 1]}; the Winsorized correlation is Pearson's on the Winsorized
 values, tested with \verb{n - 2g - 2} degrees of freedom.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_percentage_bend_correlation(V, V)
+}

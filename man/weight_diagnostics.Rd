@@ -17,3 +17,7 @@ Part of the bhltmsm_native implementation; see the file header for the source it
 A list with \code{mean}, \code{max}, \code{min}, \code{effective_n}, \code{n}, \code{efficiency}, \code{mean_near_one}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+weight_diagnostics(V)
+}

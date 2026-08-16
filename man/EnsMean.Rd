@@ -18,3 +18,7 @@ Part of the rangayyan_ch3 implementation; see the file header for the source it 
 A list with \code{mean}, \code{m}, \code{sd}, \code{se}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+EnsMean(V)
+}

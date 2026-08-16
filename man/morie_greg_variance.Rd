@@ -35,3 +35,6 @@ mc_variance (as supplied).
 \description{
 Equations 10.13, 10.14, 10.17, 10.18, 10.25, 10.42 of Brus (2022).
 }
+\examples{
+morie_greg_variance()
+}

@@ -30,3 +30,7 @@ bins differently and is kept for backwards compatibility.
 Schabenberger O, Gotway CA (2005), Sec 4.4.1, eq (4.24)
 and (4.25), pp. 153-158.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_matheron_estimator(V, V)
+}

@@ -14,3 +14,7 @@ Inverse-probability weight truncation (Cole & Hernan 2008)
 A list with \code{weights}, \code{cap}, \code{n_truncated}, \code{n}, \code{mean_before}, \code{mean_after}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wtrunc(V)
+}

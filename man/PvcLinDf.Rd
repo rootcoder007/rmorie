@@ -19,3 +19,7 @@ interval and a more complex waveshape, and the form factor of eq (5.26) turns th
 A list with \code{labels}, \code{discriminant}, \code{coefficients}, \code{prototypes}, \code{source}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PvcLinDf(V, V)
+}

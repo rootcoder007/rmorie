@@ -17,3 +17,7 @@ list(bc, estimate, numerator, denominator, similarity, n)
 \description{
 Bray & Curtis (1957) dissimilarity between two non-negative vectors
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+BrayCurt(V, V)
+}

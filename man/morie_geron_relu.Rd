@@ -18,3 +18,7 @@ Rectified linear unit activation, with a leaky negative slope and dead-fraction 
 A list with \code{a}, \code{output}, \code{gradient}, \code{dead_fraction}, \code{leaky}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_relu(V)
+}

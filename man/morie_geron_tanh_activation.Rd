@@ -15,3 +15,7 @@ List with \code{activation}, \code{derivative}, \code{saturated}.
 \description{
 Hyperbolic tangent activation (morie.fn grtnh)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tanh_activation(V)
+}

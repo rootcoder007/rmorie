@@ -24,3 +24,7 @@ List with \code{Y}, \code{out_shape}, \code{padded_shape}, \code{n_multiply_adds
 Cross-correlation, not flipped convolution -- as in every DL library.
 Multi-channel input is a list of matrices or a 3-D array (C, H, W).
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_conv2d_forward(M, M)
+}

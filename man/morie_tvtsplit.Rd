@@ -23,3 +23,7 @@ to [0, 1) and cut at testratio and testratio + valratio -- is OURS,
 not the book's, and is used because it stays deterministic across
 both language arms. The p. 58 hash rule itself is the book's.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tvtsplit(V)
+}

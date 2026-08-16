@@ -33,3 +33,7 @@ A number below two to the thirty-second.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+morie_avalon_fnv(S)
+}

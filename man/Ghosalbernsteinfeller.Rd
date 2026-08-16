@@ -31,3 +31,7 @@ points of |F_K(x) - F(x)|.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 2.3.4.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalbernsteinfeller(V)
+}

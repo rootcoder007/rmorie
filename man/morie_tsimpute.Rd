@@ -22,3 +22,7 @@ options: ffill, bfill, linear, mean, or seasonal. Leading or
 trailing gaps a method cannot reach fall back to the series mean,
 so the output never contains a hole.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tsimpute(V)
+}

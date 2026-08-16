@@ -14,3 +14,7 @@ General k-sample rank statistic -- eqs. (10.5.1)-(10.5.2), pp. 362-363
 A list with \code{q}, \code{statistic}, \code{df}, \code{p_value}, \code{abar}, \code{score_sums}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Krankstat(V)
+}

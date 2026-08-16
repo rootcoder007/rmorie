@@ -31,3 +31,6 @@ recovers the Dirichlet process exactly.
 \references{
 Pitman & Yor (1997), Ann. Probab. 25(2):855-900.
 }
+\examples{
+Dpparit()
+}

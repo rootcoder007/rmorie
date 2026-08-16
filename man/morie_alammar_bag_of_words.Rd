@@ -17,3 +17,7 @@ BoW, c-TF-IDF, BIO tagging, vocabulary overlap (Alammar Ch 1-5)
 A list with \code{bow_vector}, \code{oov_count}, \code{estimate}, \code{vocab_size}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_bag_of_words(V, V)
+}

@@ -43,3 +43,7 @@ by the trapezoid rule, and the reported density is the draw average.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, sections 10.4 and 10.4.1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalfrsdensity(V)
+}

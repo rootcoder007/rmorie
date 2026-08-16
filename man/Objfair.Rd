@@ -49,3 +49,8 @@ Zemel, R. (2012). Fairness through awareness. Proceedings of the
 3rd Innovations in Theoretical Computer Science Conference,
 214-226. doi:10.1145/2090236.2090255
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Objfair(V, M)
+}

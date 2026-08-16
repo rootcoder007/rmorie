@@ -35,3 +35,7 @@ McKean-Shrader (1984) standard error of the median, which Wilcox
 warns is unreliable with ties.  \code{morie_winsorized_regression} solves
 the normal equations built from Winsorized covariances.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_akp_effect_size(V, V)
+}

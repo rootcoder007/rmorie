@@ -23,3 +23,7 @@ F-test of the x-lag block in an AR model for y. Mirrors
 \references{
 Granger CWJ (1969). \emph{Econometrica} 37(3), 424-438.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_granger_test(V, V)
+}

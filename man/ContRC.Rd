@@ -36,3 +36,7 @@ degenerate case that pins the weighting.
 Pazzani & Billsus (2007), Content-Based Recommendation
 Systems, in The Adaptive Web, LNCS 4321:325-341.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ContRC(V, V)
+}

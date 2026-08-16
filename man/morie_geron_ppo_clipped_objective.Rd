@@ -22,3 +22,7 @@ L = mean min(rA, clip(r, 1-e, 1+e) A). \code{clipped_fraction} uses an
 isTRUE(all.equal)-style tolerance matching numpy's isclose defaults
 (rtol 1e-5, atol 1e-8).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_ppo_clipped_objective(V, V)
+}

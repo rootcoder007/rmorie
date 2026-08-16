@@ -33,3 +33,7 @@ List with \code{total_params}, \code{block_params}, \code{per_block},
 \description{
 Decoder-only transformer (GPT family), resolved to exact param counts (hmdctr)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_decoder_only(V)
+}

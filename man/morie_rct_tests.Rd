@@ -43,3 +43,6 @@ Confounded and randomized treatment coefficients (equations 9.1, 9.2),
 pooled-variance independent t (9.3, 9.11), the 2 by 2 chi square (9.4)
 and paired t (9.10). Mirrors ca9e1 to ca9e4, ca9e10, ca9e11.
 }
+\examples{
+morie_rct_tests()
+}

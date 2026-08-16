@@ -14,3 +14,7 @@ Alias of \code{morie_dp_exponential_mechanism}: selects candidate r with probabi
 The value of \code{morie_dp_exponential_mechanism}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Expmc(V, V)
+}

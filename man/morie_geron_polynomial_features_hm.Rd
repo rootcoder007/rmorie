@@ -19,3 +19,7 @@ Polynomial feature expansion up to a given total degree (Geron Ch 4, hmplf)
 A list with \code{features}, \code{powers}, \code{names}, \code{n_output_features}, \code{degree}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_polynomial_features_hm(V, V)
+}

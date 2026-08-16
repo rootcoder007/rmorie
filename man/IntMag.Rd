@@ -17,3 +17,7 @@ the response is plotted; a magnitude cannot be negative, so the absolute value i
 A list with \code{magnitude}, \code{omega}, \code{book_prints_one_over_omega}, \code{absolute_value_needed_for_negative_omega}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IntMag(V)
+}

@@ -18,3 +18,7 @@ Formula: s_i = sum_j a_ij w_ij
 \references{
 Barrat, Barthelemy, Pastor-Satorras and Vespignani (2004), The architecture of complex weighted networks, PNAS 101:3747-3752, arXiv:cond-mat/0311416, equation (2). Verified against the paper.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Vstrength(V)
+}

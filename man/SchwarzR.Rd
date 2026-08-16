@@ -20,3 +20,7 @@ functions collinear as vectors in function space.
 A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{k}, \code{collinear}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SchwarzR(V, V)
+}

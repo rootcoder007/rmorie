@@ -14,3 +14,7 @@ k-sample control median test -- Sec. 10.3, eq. (10.3.1), pp. 350-351
 A list with \code{counts}, \code{cuts}, \code{r}, \code{pcell}, \code{statistic}, \code{df}, \code{p_value}, \code{k}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kctrlmed(V)
+}

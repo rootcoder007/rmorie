@@ -31,3 +31,7 @@ Growth is delegated to \code{morie_geron_cart_algorithm}; this adds the
 per-row class probability vector read off the leaf frequencies, so a
 pure leaf predicts with probability 1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_classification_tree(V, V)
+}

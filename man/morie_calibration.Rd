@@ -34,3 +34,6 @@ Equations 10.32, 10.36, 10.38, 10.40 of Brus (2022): poststratified
 mean, the mixed calibration estimator, its intercept, and the SI
 shortcut.
 }
+\examples{
+morie_calibration()
+}

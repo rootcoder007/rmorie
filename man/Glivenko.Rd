@@ -37,3 +37,7 @@ Massart (1990), Annals of Probability 18(3), 1269-1283; it is NOT in
 Kosorok and is cited to its own source.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Glivenko(V, V)
+}

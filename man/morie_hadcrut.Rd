@@ -46,3 +46,7 @@ A list with the blended grid, the global and hemispheric   means, the three unce
     Environment 116, 140-158.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_hadcrut(V, V)
+}

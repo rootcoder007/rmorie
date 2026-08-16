@@ -23,3 +23,7 @@ Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 4. Consistent with the sibling module aitcen in this
 package, whose centre is the closed vector of column geometric means.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Complrm(V)
+}

@@ -19,3 +19,7 @@ Named list with \code{score_dmt}, \code{score_pcb},
 R parity of \code{morie.entheo.san_score}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+san_score(V)
+}

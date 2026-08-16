@@ -18,3 +18,7 @@ Part of the rangayyan_ccf implementation; see the file header for the source it 
 A list with \code{gamma}, \code{dot_product}, \code{norms}, \code{pearson}, \code{is_a_cosine_not_an_agreement}, \code{unity_for_a_positive_rescaling}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CorrDot(V, V)
+}

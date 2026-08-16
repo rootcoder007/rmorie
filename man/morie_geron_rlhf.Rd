@@ -20,3 +20,7 @@ Reinforcement learning from human feedback: reward maximised under a KL penalty 
 A list with \code{policy}, \code{reference_policy}, \code{optimal_policy}, \code{max_deviation}, \code{objective}, \code{objective_history}, \code{mean_reward}, \code{kl}, \code{beta}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_rlhf(M, M)
+}

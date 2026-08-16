@@ -36,3 +36,6 @@ Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.8,
 eqs. (11.3)-(11.4).
 }
+\examples{
+Ghosalstatgpspec()
+}

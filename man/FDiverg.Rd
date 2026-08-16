@@ -23,3 +23,7 @@ list(divergence, estimate, terms, support, generator, f_inf, n)
 \description{
 Csiszar (1967) f-divergence D_f(p || q) = sum q f(p/q)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FDiverg(V, V)
+}

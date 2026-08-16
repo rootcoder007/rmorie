@@ -25,3 +25,7 @@ Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 4. The relation totvar = (1/D) sum_{i<j} tau_ij is the
 one already used by the sibling module aittvr in this package.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compvar(V)
+}

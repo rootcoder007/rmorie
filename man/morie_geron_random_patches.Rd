@@ -19,3 +19,7 @@ Random patches: subsample BOTH rows and features per base model (Geron Ch 6, hmr
 A list with \code{predict}, \code{train_pred}, \code{train_mse}, \code{patches}, \code{feature_usage}, \code{row_usage}, \code{estimators}, \code{max_samples}, \code{max_features}, \code{task}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_random_patches(V, V)
+}

@@ -31,3 +31,6 @@ Formula: ((lambda t)^(2H)) / (t^(2H)) = lambda^(2H).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.5.1.
 }
+\examples{
+Ghosalselfsimgp()
+}

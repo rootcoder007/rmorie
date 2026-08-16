@@ -61,3 +61,7 @@ Schabenberger Ch 3, Sec 3.4.4, eqs (3.9)-(3.10), pp. 103-105.
 Lotwick and Silverman (1982), JRSS B 44:406-413. Diggle (1983). Diggle
 and Chetwynd (1991), Biometrics 47:1155-1163.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+spkcrs(V, V)
+}

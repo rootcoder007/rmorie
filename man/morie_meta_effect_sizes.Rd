@@ -37,3 +37,6 @@ pooled SD, Hedges' correction and its standard error, d from t, risk
 and odds ratios with logged standard errors, and Fisher's Z with its
 standard error. Mirrors ca11e1 to ca11e14.
 }
+\examples{
+morie_meta_effect_sizes()
+}

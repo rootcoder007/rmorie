@@ -34,3 +34,7 @@ Formula: f = L Z with L L' = K, K_ij = var exp(-(x_i - x_j)^2 /
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 2.2.1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalgppriordef(V)
+}

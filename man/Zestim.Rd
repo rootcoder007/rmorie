@@ -40,3 +40,7 @@ the full text of the book. The Huber psi is Huber (1964), Annals of
 Mathematical Statistics 35(1), 73-101.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Zestim(V)
+}

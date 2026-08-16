@@ -17,3 +17,7 @@ List with \code{encoded}, \code{levels}, \code{mapping}.
 \description{
 enc(level k) = k, 0-based over the declared level order.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_ordinal_encoding_grord(V)
+}

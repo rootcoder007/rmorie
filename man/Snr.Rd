@@ -19,3 +19,7 @@ interchangeable: the power ratio (10 log10) and the peak-to-peak amplitude over 
 A list with \code{snr_db}, \code{snr_power_db}, \code{snr_peak_db}, \code{signal_power}, \code{noise_power}, \code{noise_rms}, \code{definition}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Snr(V, V)
+}

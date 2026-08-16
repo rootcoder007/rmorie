@@ -17,3 +17,7 @@ Log-odds classifier matrix
 spec with spec[i][k] = log(motif[i][k] / background[k]).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_motfsr_log_odds_matrix(V, V)
+}

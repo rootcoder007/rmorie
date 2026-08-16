@@ -17,3 +17,7 @@ Empirical chibar(u) (Coles 2001 sec. 8.4 p.164)
 A vector.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_evt_chibar(V, V)
+}

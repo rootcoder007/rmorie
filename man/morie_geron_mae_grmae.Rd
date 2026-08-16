@@ -16,3 +16,7 @@ List with \code{mae}, \code{rmse}, \code{max_error},
 \description{
 Mean absolute error (Geron Eq 2-2, morie.fn grmae)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_mae_grmae(V, V)
+}

@@ -37,3 +37,7 @@ A list with the total and the per-contact energies.
     Journal of Computer-Aided Molecular Design 11(5), 425-445.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_glides_vdw(D)
+}

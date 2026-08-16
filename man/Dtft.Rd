@@ -19,3 +19,7 @@ distinction from the DFT of eq (3.80), which samples this at N points.
 A list with \code{X}, \code{omega}, \code{n0}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dtft(V, V)
+}

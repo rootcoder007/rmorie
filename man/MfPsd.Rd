@@ -18,3 +18,7 @@ nonnegative -- the phase has been cancelled exactly, the frequency-domain statem
 A list with \code{Y}, \code{psd}, \code{max_imaginary}, \code{max_difference}, \code{is_psd}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MfPsd(V)
+}

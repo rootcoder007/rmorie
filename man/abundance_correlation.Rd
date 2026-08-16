@@ -18,3 +18,7 @@ Part of the metabd_native implementation; see the file header for the source it 
 A list with \code{correlation}, \code{n_samples}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+abundance_correlation(V, V)
+}

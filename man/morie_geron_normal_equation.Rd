@@ -21,3 +21,7 @@ Solves (X^T X) theta = X^T y as a linear system, never forming the
 inverse, and refuses a rank-deficient Gram matrix rather than
 returning an arbitrary member of the solution set.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_normal_equation(V, V)
+}

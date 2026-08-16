@@ -16,3 +16,7 @@ list(content, query), each a T x T 0/1 matrix.
 content[t,j]=1 when j precedes-or-equals t in perm (0-based perm);
 query[t,j]=1 only for strictly earlier positions.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_permutation_masks(V)
+}

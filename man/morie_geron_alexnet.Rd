@@ -29,3 +29,6 @@ out = floor((in - k + 2p)/s) + 1 and params = filters*(k\emph{k}C) + filters,
 so an input size that collapses a feature map to zero is an error
 rather than a silent negative dimension.
 }
+\examples{
+morie_geron_alexnet()
+}

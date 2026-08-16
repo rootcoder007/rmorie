@@ -17,3 +17,7 @@ Character vector, the restored sequence.
 \description{
 Rebuild the original sequence from a T5-corrupted input and its target
 }
+\examples{
+S <- c("a", "b", "c")
+morie_geron_t5_restore(S, S)
+}

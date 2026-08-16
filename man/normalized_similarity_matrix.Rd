@@ -22,3 +22,6 @@ Part of the mafft_native implementation; see the file header for the source it f
 A list with \code{matrix}, \code{s_a}, \code{alphabet}, \code{average1}, \code{average2}, \code{freqs}, \code{mode}.
 }
 \keyword{internal}
+\examples{
+normalized_similarity_matrix()
+}

@@ -19,3 +19,7 @@ Part of the blip2v_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+project_to_llm(V, V)
+}

@@ -15,3 +15,7 @@ list(ratio, product, logratio, n)
 \description{
 Posterior model ratio as a product of penalties (eq. 28.13-28.14, p. 351)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_evratio(V)
+}

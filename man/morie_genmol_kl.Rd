@@ -33,3 +33,7 @@ A non-negative number.
     Frontiers in Pharmacology 11, 565644.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_genmol_kl(V, V)
+}

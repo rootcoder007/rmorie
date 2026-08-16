@@ -35,3 +35,7 @@ A list with the effect, its standard error, the t statistic   and the two sided 
     studies." Biometrics 55(4), 997-1004.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_blinkg_scan(V, V)
+}

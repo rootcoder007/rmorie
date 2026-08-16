@@ -23,3 +23,7 @@ List with lr, lr_diverge, lr_min_loss, min_loss, diverged, estimate, n, method.
 \description{
 Learning-rate finder heuristic: divergence point / safety (Geron Ch 9, morie.fn hmlrh)
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_learning_rate_heuristic(M)
+}

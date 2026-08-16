@@ -18,3 +18,7 @@ primary input.  Filtering the primary would cancel the signal too.
 A list with \code{y}, \code{n}, \code{order}, \code{settled_from}, \code{filters_the_reference}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LmsOut(V, V)
+}

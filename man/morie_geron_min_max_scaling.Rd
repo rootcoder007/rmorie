@@ -17,3 +17,7 @@ List with X_scaled, data_min, data_max, data_range, scale, estimate, n, method.
 \description{
 Min-max scaling to a target range (Geron Ch 2, morie.fn hmmms)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_min_max_scaling(V)
+}

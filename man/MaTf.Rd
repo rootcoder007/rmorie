@@ -19,3 +19,7 @@ so an FIR filter is stable whatever its coefficients.
 A list with \code{H}, \code{z}, \code{b}, \code{N}, \code{dc_gain}, \code{always_stable}, \code{poles_only_at_the_origin}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MaTf(V, V)
+}

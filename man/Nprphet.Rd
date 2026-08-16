@@ -36,3 +36,7 @@ linear AR \code{A(t) = sum_i w_i y(t - i)}.
 Triebe, O. et al. (2021). NeuralProphet: explainable
 forecasting at scale. arXiv:2111.15397.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nprphet(V, V)
+}

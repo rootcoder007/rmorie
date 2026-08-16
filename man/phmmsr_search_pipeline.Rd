@@ -45,3 +45,7 @@ Durbin, R., Eddy, S. R., Krogh, A. & Mitchison, G. (1998)
 doi:10.1017/CBO9780511790492. Profile HMMs.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+phmmsr_search_pipeline(V, V)
+}

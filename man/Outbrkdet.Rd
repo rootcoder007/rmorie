@@ -24,3 +24,7 @@ Formula: same run-length recursion as bocpd with a Gamma-Poisson run model; pred
 \references{
 Adams and MacKay (2007), Bayesian Online Changepoint Detection, arXiv:0710.3742. Equations (2)-(5) for the recursion and the changepoint prior, Section 2.3 and Algorithm 1 for the conjugate-exponential update of the run-specific sufficient statistics. Verified against the paper.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Outbrkdet(V)
+}

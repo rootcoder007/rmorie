@@ -19,3 +19,7 @@ list(w, mean, var, dropped, n)
 \description{
 Differencing, ordinary and seasonal (ch. 6 pp. 155-158)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_diffser(V)
+}

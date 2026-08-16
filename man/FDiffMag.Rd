@@ -18,3 +18,7 @@ FDiffMag(omega, T = 1)
 A list with \code{magnitude}, \code{omega}, \code{T}, \code{dc_gain}, \code{nyquist_gain}, \code{roughly_proportional_to_frequency}, \code{book_omits_the_absolute_value}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FDiffMag(V)
+}

@@ -19,3 +19,7 @@ List with \code{a}, \code{grad}, \code{mean}, \code{var} (population), \code{lam
 Scaled ELU with the Klambauer self-normalising constants. Note the
 branch is z <= 0 here (not z < 0), matching the Python module.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_selu(V)
+}

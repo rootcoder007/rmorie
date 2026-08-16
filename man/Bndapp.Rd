@@ -44,3 +44,7 @@ Response, Econometrica 65(6):1311-1334, Proposition M2, as printed
 in Molinari, F. (2021), Handbook of Econometrics 7A, eq. (2.13)
 (arXiv:2004.11751).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bndapp(V, V)
+}

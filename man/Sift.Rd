@@ -19,3 +19,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{reconstruction_error}, \code{energy_per_imf}, \code{tol}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sift(V)
+}

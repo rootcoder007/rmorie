@@ -14,3 +14,7 @@ Rank von Neumann test -- eqs. (3.5.1)-(3.5.2), p. 95
 A list with \code{statistic}, \code{nm}, \code{denom}, \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Rvntest(V)
+}

@@ -42,3 +42,6 @@ List with the requested sample sizes and criteria.
 Equations 12.3, 12.7, 12.10, 12.11, 12.14, 12.17 to 12.19, 12.24,
 12.25, 12.27 of Brus (2022).
 }
+\examples{
+morie_sample_size()
+}

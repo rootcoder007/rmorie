@@ -29,3 +29,7 @@ Kabsch, W. (1976). A solution for the best rotation to
 relate two sets of vectors. Acta Crystallographica, A32,
 922-923.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rmsdtr(V, V)
+}

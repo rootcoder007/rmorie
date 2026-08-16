@@ -18,3 +18,7 @@ Part of the sbert_native implementation; see the file header for the source it f
 A list with \code{features}, \code{u}, \code{v}, \code{abs_diff}, \code{dim}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+classification_features(V, V)
+}

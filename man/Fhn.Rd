@@ -26,3 +26,6 @@ Part of the rangayyan_phys implementation; see the file header for the source it
 A list with \code{t}, \code{v}, \code{w}, \code{peak}, \code{min}, \code{n_spikes}, \code{spike_times}, \code{period}, \code{a}, \code{b}, \code{eps}, \code{I_ext}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Fhn()
+}

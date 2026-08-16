@@ -19,3 +19,8 @@ Turn the distance matrix into the attention bias
 List with bias, unreachable_bias, note.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+spatial_bias(M, V)
+}

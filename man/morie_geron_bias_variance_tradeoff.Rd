@@ -20,3 +20,7 @@ List with \code{bias2}, \code{variance}, \code{noise}, \code{mse}, \code{mean_pr
 Variance across models is the POPULATION variance (ddof = 0); the
 identity only closes with the biased estimator.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bias_variance_tradeoff(V, V)
+}

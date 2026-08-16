@@ -18,3 +18,7 @@ Part of the rangayyan_ccf implementation; see the file header for the source it 
 A list with \code{ccf}, \code{via_convolution}, \code{lags}, \code{max_difference}, \code{identity_holds}, \code{correlation_is_convolution_with_one_reversed}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CorrConv(V, V)
+}

@@ -35,3 +35,7 @@ Data, 2nd ed. Chapman & Hall/CRC.  van Buuren, S. and
 Groothuis-Oudshoorn, K. (2011). JSS, 45(3).  Rubin, D. B.
 (1987). Multiple Imputation for Nonresponse in Surveys. Wiley.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_miord2(V)
+}

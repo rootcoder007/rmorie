@@ -34,3 +34,6 @@ A character scalar.
     113(523), 1228-1242.
 }
 \keyword{internal}
+\examples{
+morie_qbcfgs_cheatsheet()
+}

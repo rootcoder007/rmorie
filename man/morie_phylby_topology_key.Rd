@@ -17,3 +17,7 @@ Part of the phylby_native implementation; see the file header for the source it 
 The value of \code{.phylby_topology_key}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_phylby_topology_key(V)
+}

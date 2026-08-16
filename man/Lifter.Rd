@@ -20,3 +20,7 @@ excitation at the pitch period and its multiples.  The window is applied SYMMETR
 A list with \code{liftered}, \code{n}, \code{low}, \code{high}, \code{keep}, \code{symmetric}, \code{n_kept}, \code{energy_kept}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Lifter(V)
+}

@@ -25,3 +25,6 @@ pentagram contains a triangle.
 \references{
 Goodman AW (1959); Greenwood RE, Gleason AM (1955).
 }
+\examples{
+morie_party_problem()
+}

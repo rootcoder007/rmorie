@@ -33,3 +33,7 @@ The book's prose calls lambda the weight of the null while its own
 formula gives the null the weight 1 - lambda; the FORMULA is
 followed here. Read from the copy of the book held in the corpus.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ptnulltst(V, V)
+}

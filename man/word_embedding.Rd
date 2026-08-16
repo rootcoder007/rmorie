@@ -24,3 +24,7 @@ Named list with tensor, E, ids, shape, method.
 Embedding row lookup (Mikolov 2013)
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+word_embedding(V)
+}

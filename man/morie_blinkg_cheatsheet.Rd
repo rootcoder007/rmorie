@@ -29,3 +29,6 @@ A character scalar.
     studies." Biometrics 55(4), 997-1004.
 }
 \keyword{internal}
+\examples{
+morie_blinkg_cheatsheet()
+}

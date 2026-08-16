@@ -19,3 +19,7 @@ Part of the samseg_native implementation; see the file header for the source it 
 A list with \code{embedding}, \code{sparse}, \code{note}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+encode_mask_prompt(M, M)
+}

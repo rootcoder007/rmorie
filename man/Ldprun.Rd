@@ -48,3 +48,7 @@ analyses. American Journal of Human Genetics 81(3), 559-575
 documentation, indep-pairwise, cog-genomics.org/plink/1.9/ld
 (fetched 2026-08-09).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ldprun(V)
+}

@@ -14,3 +14,7 @@ Randomized decision rule of exact size -- Sec. 1.2.9, pp. 26-27
 A list with \code{gamma}, \code{t2}, \code{t1}, \code{size_hard}, \code{size}, \code{power}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Randtest(V)
+}

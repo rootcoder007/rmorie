@@ -28,3 +28,7 @@ American Statistical Association* 90(429), 330-341,
 doi:10.1080/01621459.1995.10476517.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_stahdo(D)
+}

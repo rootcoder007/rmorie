@@ -17,3 +17,6 @@ Available scan methods
 A list with the available methods, or a per-method status.
 }
 \keyword{internal}
+\examples{
+morie_mqtmpl_method_status()
+}

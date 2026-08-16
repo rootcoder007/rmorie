@@ -19,3 +19,7 @@ List with \code{y} (0/1), \code{z}, \code{w}, \code{b}, \code{estimate}, \code{n
 \description{
 step(w^T x + b) with step(0) = 1. A vector \code{x} is one row.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tlu(V, V)
+}

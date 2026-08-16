@@ -14,3 +14,7 @@ Westenberg interquartile scale test -- eq. (9.9.1), p. 329
 A list with \code{statistic}, \code{p_value}, \code{pmf}, \code{q1}, \code{q3}, \code{mean}, \code{var}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wstnbrg(V, V)
+}

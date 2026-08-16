@@ -27,3 +27,7 @@ A list of lists of numeric vectors.
     5998-6008.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alfomg_opm(V)
+}

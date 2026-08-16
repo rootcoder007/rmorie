@@ -17,3 +17,7 @@ morie_kamath_softmax_element
 A list with \code{estimate}, \code{index}, \code{full_weights}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_softmax_element(V, V)
+}

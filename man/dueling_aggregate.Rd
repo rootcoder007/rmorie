@@ -19,3 +19,7 @@ Implements the recombination rules of Wang et al. (2016) for the dueling network
 Numeric vector of Q(s, .).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+dueling_aggregate(V, V)
+}

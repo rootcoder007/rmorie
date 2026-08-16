@@ -45,3 +45,7 @@ Formula: k(x, x') -> k(g(x, w), g(x', w)).
 Wilson, Hu, Salakhutdinov and Xing (2016), Deep kernel
 learning, AISTATS 2016, PMLR 51:370-378, eq. (1). arXiv:1511.02222
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gpdkl(V, V)
+}

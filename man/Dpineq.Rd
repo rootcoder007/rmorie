@@ -25,3 +25,7 @@ deterministic identity, not a hypothesis test.
 \references{
 Cover & Thomas (2006), Theorem 2.8.1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dpineq(V)
+}

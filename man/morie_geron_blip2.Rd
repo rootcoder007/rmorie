@@ -36,3 +36,7 @@ Learned queries cross-attend frozen image patch features and are
 projected to the LLM width. Only the Q-Former is trainable, which is
 what \code{trainable_params} makes explicit.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_blip2(V, V)
+}

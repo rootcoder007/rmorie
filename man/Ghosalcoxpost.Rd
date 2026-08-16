@@ -37,3 +37,6 @@ Formula: log pi(b | data) = -b^2/(2 prior_sd^2)
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.6.1.
 }
+\examples{
+Ghosalcoxpost()
+}

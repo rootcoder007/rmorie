@@ -20,3 +20,7 @@ two can never drift apart.
 The value of \code{Ctft}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CtftF(V, V)
+}

@@ -17,3 +17,7 @@ Part of the prsPEG_native implementation; see the file header for the source it 
 The value of \code{fn}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_prsPEG_and_(V)
+}

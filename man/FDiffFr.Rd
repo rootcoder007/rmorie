@@ -18,3 +18,7 @@ real gain; the factor of j is what puts the phase a quarter turn ahead, the +pi/
 A list with \code{H}, \code{omega}, \code{T}, \code{split_form}, \code{max_difference}, \code{forms_agree}, \code{half_sample_delay}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FDiffFr(V)
+}

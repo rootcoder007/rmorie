@@ -18,3 +18,7 @@ List with \code{scaled}, \code{mean}, \code{scale}.
 z = (x - mean)/sd per column with ddof = 0 by default; a constant
 column raises.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_standardization_grstd(V)
+}

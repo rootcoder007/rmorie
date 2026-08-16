@@ -51,3 +51,6 @@ difference estimator, GLS coefficients (population and sample forms),
 the general and slope-form regression estimators, and the ratio
 estimator with its constant g-weight.
 }
+\examples{
+morie_model_assisted()
+}

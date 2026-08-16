@@ -19,3 +19,7 @@ List with \code{quantized}, \code{scales}, \code{zero_points}, \code{dequantized
 \description{
 Dynamic quantization: static per-tensor weights, dynamic per-batch activations (hmdqnt)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_dynamic_quantization_alt(V)
+}

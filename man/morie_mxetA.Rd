@@ -20,3 +20,7 @@ Part of the mxetA_mixedcase_native implementation; see the file header for the s
 A list with \code{fields}, \code{scales}, \code{n_points}, \code{frechet_uniform}, \code{seed}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mxetA(V)
+}

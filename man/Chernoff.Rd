@@ -20,3 +20,7 @@ coefficient is exactly this at a = 1/2, which is the relationship the whole fami
 A list with \code{coefficient}, \code{alpha}, \code{information}, \code{bhattacharyya_coefficient}, \code{bhattacharyya_is_alpha_one_half}, \code{alpha_searched}, \code{at_least_as_tight_as_bhattacharyya}, \code{reference}, \code{not_from_this_book}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Chernoff(V, V)
+}

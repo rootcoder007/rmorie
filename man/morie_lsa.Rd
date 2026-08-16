@@ -21,3 +21,7 @@ Part of the lsa_native implementation; see the file header for the source it fol
 The value of \code{lsa_decompose}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_lsa(M)
+}

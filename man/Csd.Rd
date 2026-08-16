@@ -19,3 +19,7 @@ CSD -- the transform of the CCF and the product -- are computed and compared; th
 A list with \code{csd}, \code{via_ccf}, \code{ccf_circular}, \code{freqs}, \code{max_difference}, \code{agrees}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Csd(V, V)
+}

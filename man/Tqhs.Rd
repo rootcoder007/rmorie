@@ -29,3 +29,7 @@ Zandieh, A., Daliri, M. & Han, I. (2024). QJL: 1-bit
 quantized JL transform for KV cache quantization with zero
 overhead. arXiv:2406.03482, definition 3.1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tqhs(V, V)
+}

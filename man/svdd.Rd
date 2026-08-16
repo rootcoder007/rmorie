@@ -22,3 +22,7 @@ Part of the deepSVDD_native implementation; see the file header for the source i
 A list with \code{alpha}, \code{center}, \code{radius2}, \code{support}, \code{outliers}, \code{kkt_violation}, \code{kernel}, \code{C}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+svdd(M)
+}

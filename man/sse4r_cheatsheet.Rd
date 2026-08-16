@@ -37,3 +37,6 @@ Recommendation", *ICDM 2018*, 197-206, arXiv:1808.09781. SASRec, the
 unpersonalised model being extended; implemented in :mod:`sasRec`.
 }
 \keyword{internal}
+\examples{
+sse4r_cheatsheet()
+}

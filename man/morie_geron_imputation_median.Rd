@@ -23,3 +23,7 @@ object columns, which has no faithful R equivalent without deciding
 a factor/character convention, so that arm is NOT ported (see the
 package NOTE in the parity tests).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_imputation_median(V)
+}

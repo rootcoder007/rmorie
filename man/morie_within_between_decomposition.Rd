@@ -41,3 +41,7 @@ database; the citation appears to be fabricated and has been
 replaced with the three verifiable sources above.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_within_between_decomposition(V)
+}

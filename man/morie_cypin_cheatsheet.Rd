@@ -23,3 +23,6 @@ A character scalar.
     2nd edition, Chapman and Hall.
 }
 \keyword{internal}
+\examples{
+morie_cypin_cheatsheet()
+}

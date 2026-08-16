@@ -18,3 +18,7 @@ Least-squares projection c-hat = (Psi\'Psi)^-1 Psi\'x of a discretely observed c
 numeric vector of basis coefficients
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_fda_coefficients(V, V)
+}

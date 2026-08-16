@@ -18,3 +18,7 @@ Share of subjects whose blip sits within tol of zero
 Scalar in [0,1].
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+exceptional_law_share(V)
+}

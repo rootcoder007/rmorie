@@ -19,3 +19,7 @@ List with q, dequantized, scale, zero_point, max_error, rel_error, compression, 
 \description{
 Post-training integer quantization (Geron Ch 17, morie.fn hmint8)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_int8_quant(V)
+}

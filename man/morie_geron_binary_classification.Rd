@@ -23,3 +23,7 @@ given, \code{tp}, \code{fp}, \code{fn}, \code{tn}, \code{accuracy}, \code{precis
 p_hat = sigmoid(X theta) computed branch-free (exp only on <= 0), then
 y_pred = 1[p_hat >= threshold].
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_binary_classification(V, V)
+}

@@ -32,3 +32,7 @@ List with \code{weights}, \code{probabilities}, \code{priorities},
 P ~ (|delta| + eps)^alpha; w = (N P)^-beta normalised by its maximum,
 so max(w) = 1. \code{max_weight_index} is 0-based.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_prioritized_experience_weight(V)
+}

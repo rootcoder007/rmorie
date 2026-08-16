@@ -20,3 +20,7 @@ Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (
 A list with \code{tokens}, \code{segment_ids}, \code{cls_vector}, \code{logit}, \code{probability}, \code{prediction}, \code{loss}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_next_sentence_prediction(V, V)
+}

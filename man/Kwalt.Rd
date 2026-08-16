@@ -14,3 +14,7 @@ Kruskal-Wallis defining form -- eqs. (10.4.2)/(10.4.7), pp. 354, 357
 A list with \code{statistic}, \code{h_computing}, \code{resid}, \code{df}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kwalt(V, V)
+}

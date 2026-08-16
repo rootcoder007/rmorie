@@ -19,3 +19,7 @@ Principal components via SVD, sign-fixed, reconstruction error reported (Geron C
 A list with \code{components}, \code{scores}, \code{explained_variance}, \code{explained_variance_ratio}, \code{reconstruction_error}, \code{n_components}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_principal_components(V)
+}

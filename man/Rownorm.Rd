@@ -18,3 +18,7 @@ Formula: w'_ij = w_ij / sum_j w_ij
 \references{
 Anselin (1988), Spatial Econometrics: Methods and Models, Kluwer. Not held locally; row standardisation w_ij / sum_j w_ij is the standard published convention and is what spdep's style = 'W' computes.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Rownorm(V)
+}

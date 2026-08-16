@@ -15,3 +15,7 @@ list(cost, split) with cost the min multiplication count.
 \description{
 Optimal parenthesisation of a matrix chain (matrix-chain DP)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_matmul_order(V)
+}

@@ -21,3 +21,7 @@ Part of the baytsm_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{smoothed}, \code{smoothed_var}, \code{filtered}, \code{filtered_var}, \code{forecast}, \code{forecast_var}, \code{adaptive_coefficient}, \code{forecast_error}, \code{loglik}, \code{signal_to_noise}, \code{n}, \code{V}, \code{W}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_baytsm_dlm_local_level(V)
+}

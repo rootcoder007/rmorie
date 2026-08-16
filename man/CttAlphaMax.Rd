@@ -16,3 +16,7 @@ estimate, n_items, n)
 \description{
 Cronbach (1951) alpha with each item deleted in turn
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+CttAlphaMax(M)
+}

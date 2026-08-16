@@ -33,3 +33,7 @@ and step by df/2, with lambda = exp(min(f, 30)).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 2.6.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalnppoissonreg(V, V)
+}

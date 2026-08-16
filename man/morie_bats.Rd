@@ -26,3 +26,7 @@ Equations 3a-3f (BATS) or with the trigonometric seasonal of 4a-4c (TBATS) of De
 A named list matching the Python payload keys:   \code{model, omega, phi, alpha, beta, gamma, ar, ma, seed_state,   fitted, fitted_transformed, residuals, loglik, aic, n_par,   sigma2, spectral_radius, forecastable, forecast,   forecast_transformed, candidates, spec, method, note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_bats(V)
+}

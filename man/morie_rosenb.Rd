@@ -31,3 +31,7 @@ could explain the result away.
 Rosenbaum, P. R. (2002). Observational Studies, 2nd
 ed. Springer, Chapter 4.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rosenb(V)
+}

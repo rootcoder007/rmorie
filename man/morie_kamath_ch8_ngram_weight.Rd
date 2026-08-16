@@ -17,3 +17,7 @@ List with \code{estimate}, \code{weights}, \code{Z}.
 \description{
 Window idf sum divided by the normaliser Z.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ch8_ngram_weight(V)
+}

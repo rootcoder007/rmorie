@@ -20,3 +20,6 @@ List with \code{mask_index} (0-based), \code{tokens}, \code{estimate}.
 \description{
 Exactly one mask must be present; \code{mask_index} is 0-BASED.
 }
+\examples{
+morie_kamath_ch3_dante_cloze()
+}

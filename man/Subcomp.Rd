@@ -28,3 +28,7 @@ Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 2, where the subcomposition is defined as the closure
 of the selected subvector.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Subcomp(V, V)
+}

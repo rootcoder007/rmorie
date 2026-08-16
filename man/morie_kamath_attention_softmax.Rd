@@ -17,3 +17,7 @@ morie_kamath_attention_softmax
 A list with \code{weights}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_attention_softmax(V)
+}

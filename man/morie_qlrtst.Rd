@@ -33,3 +33,7 @@ Quandt, R. E. (1960). JASA, 55, 324-330.  Andrews,
 D. W. K. (1993). Econometrica, 61, 821-856.  Hansen, B. E.
 (1997). Journal of Business & Economic Statistics, 15, 60-67.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_qlrtst(V)
+}

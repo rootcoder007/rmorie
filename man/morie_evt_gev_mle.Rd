@@ -15,3 +15,7 @@ list(mu, sigma, xi, loglik, cov, n, converged)
 \description{
 GEV maximum-likelihood fit (Coles 2001 sec. 3.3.2)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_evt_gev_mle(V)
+}

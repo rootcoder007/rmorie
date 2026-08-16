@@ -14,3 +14,7 @@ Chi-square test of independence -- Sec. 14.2, p. 505
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{expected}, \code{n}, \code{r}, \code{c}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Chiindep(M)
+}

@@ -31,3 +31,7 @@ independence and max(t, 1-t) under perfect dependence.
 \references{
 Pickands (1981), Bull. Int. Statist. Inst. 49:859-878.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Evpdfn(V, V)
+}

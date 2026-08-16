@@ -17,3 +17,7 @@ Part of the tagRC_native implementation; see the file header for the source it f
 A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples}, \code{note}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+tripartite_graph(D)
+}

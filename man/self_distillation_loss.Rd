@@ -36,3 +36,7 @@ Sablayrolles, A., Douze, M., Schmid, C. & Jegou, H. (2019)
 arXiv:1806.03198.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+self_distillation_loss(V, V)
+}

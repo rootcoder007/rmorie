@@ -17,3 +17,7 @@ List with \code{scores} and 0-based \code{argmax}.
 \description{
 Softmax class scores (morie.fn grsmxs)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_softmax_score_grsmxs(V, V)
+}

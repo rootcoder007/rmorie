@@ -31,3 +31,7 @@ is a_il = lambda_il / sqrt(1 - lambda_i R lambda_i').
 Reckase, M. D. (2009). Multidimensional Item Response
 Theory. Springer.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mfird(V)
+}

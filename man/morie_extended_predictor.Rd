@@ -14,3 +14,7 @@ morie_extended_predictor
 A list with \code{design}, \code{widths}, \code{n_columns}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_extended_predictor(V)
+}

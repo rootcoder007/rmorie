@@ -20,3 +20,7 @@ Named list with tensor, keep_mask, n_kept, p, method.
 Top-p nucleus sampling (Holtzman 2020)
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+top_p_nucleus(V)
+}

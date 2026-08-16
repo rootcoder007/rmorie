@@ -20,3 +20,7 @@ signal H = (beta-1)/2, FD = (5-beta)/2.  beta is MINUS the slope of log10 P agai
 A list with \code{fd}, \code{beta}, \code{hurst}, \code{slope}, \code{intercept}, \code{n_bins}, \code{r_squared}, \code{in_range}, \code{band}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FdPsd(V, V)
+}

@@ -25,3 +25,7 @@ List with mu_spmi, mu_three, eta_glmm (as supplied).
 \description{
 Equations 6.14 to 6.18, 6.20 of Bilder & Loughin (2025).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mrcv_glmm(V)
+}

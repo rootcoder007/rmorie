@@ -28,3 +28,6 @@ A character scalar.
     Mathematik 30, 51-94.
 }
 \keyword{internal}
+\examples{
+morie_manfd_cheatsheet()
+}

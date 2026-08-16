@@ -19,3 +19,7 @@ A list with components \code{error}, \code{subset}, \code{median_sq_residual}.
   doi:10.1111/j.1467-9868.2008.00692.x.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_forwsr_lms_start(V, V)
+}

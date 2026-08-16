@@ -16,3 +16,7 @@ List with \code{W}, \code{shape}, \code{rank}, \code{n_params}.
 W = A (x) B. rank(A (x) B) = rank(A) rank(B), so KronA can be full rank
 at LoRA's parameter count; the rank is reported.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ch4_kronecker_product(V, V)
+}

@@ -18,3 +18,7 @@ List with \code{probabilities}, \code{entropy}, \code{perplexity}, \code{argmax}
 p = softmax(z/T); T -> 0 greedy, T -> inf uniform, ranking never
 changes. \code{argmax} is 0-based.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_temperature_sampling(V)
+}

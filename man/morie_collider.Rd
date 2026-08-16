@@ -17,3 +17,7 @@ list(ncolliders, colliders, iscollider, shielded, nedges)
 \description{
 Collider structures (immoralities, v-structures), ch. 5 p. 82
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_collider(V)
+}

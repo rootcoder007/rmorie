@@ -30,3 +30,7 @@ Dwork, C., & Roth, A. (2014). *FnT-TCS*, 9(3-4), section 3.2.
     Local source: /run/media/rootcoder/WD_BLACK/library/pdf/fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_locdp(V)
+}

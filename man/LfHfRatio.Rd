@@ -19,3 +19,7 @@ and the RR variance alongside it so it can be interpreted rather than read bare.
 A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct}, \code{rrvar}, \code{bands}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LfHfRatio(V)
+}

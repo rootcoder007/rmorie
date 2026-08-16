@@ -21,3 +21,6 @@ Part of the blstn_native implementation; see the file header for the source it f
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+morie_score_distribution()
+}

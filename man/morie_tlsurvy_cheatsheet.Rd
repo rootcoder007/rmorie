@@ -37,3 +37,6 @@ Adaptive Survey Sampling", in Targeted Learning in Data Science,
 Springer, doi:10.1007/978-3-319-65304-4_29.
 }
 \keyword{internal}
+\examples{
+morie_tlsurvy_cheatsheet()
+}

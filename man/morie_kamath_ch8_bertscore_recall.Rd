@@ -34,3 +34,7 @@ km119 -> \code{morie_kamath_ch8_bertscore_recall}, km120 ->
 \code{morie_kamath_ch8_bertscore_precision}, km121 ->
 \code{morie_kamath_ch8_bertscore_f1}. \code{greedy_match} is 0-BASED.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ch8_bertscore_recall(V, V)
+}

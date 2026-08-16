@@ -17,3 +17,7 @@ zeros, so the filter is still FIR despite the recursive implementation.  At z = 
 A list with \code{H}, \code{z}, \code{pole_at_dc_cancelled_by_a_zero}, \code{still_fir}, \code{dc_gain}, \code{removable_singularity_at_z_equals_one}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ma8RecTf(V)
+}

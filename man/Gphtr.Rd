@@ -53,3 +53,7 @@ Formula: y(x) = f(x) + eps(x), f ~ GP, log var(eps(x)) ~ GP.
 Goldberg, Williams and Bishop (1998), Regression with
 input-dependent noise: a Gaussian process treatment, NIPS 10.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gphtr(V, V)
+}

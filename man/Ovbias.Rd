@@ -38,3 +38,6 @@ Formula: bias = delta gamma; equivalently |bias| = se(tau_res) sqrt(R2_YZ.DX R2_
 \references{
 Cinelli and Hazlett (2020), Making Sense of Sensitivity: Extending Omitted Variable Bias, JRSS-B 82:39-67. Verified against the author's copy of the paper: bias = delta gamma (Section 4.1), equation (12) for the adjusted standard error, equation (13) for the bias in partial-R2 form, equation (14) for the relative bias.
 }
+\examples{
+Ovbias()
+}

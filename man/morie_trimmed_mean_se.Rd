@@ -27,3 +27,7 @@ The Tukey-McLaughlin standard error,
 \verb{sqrt(winvar) / ((1 - 2 tr) sqrt(n))}, and the confidence interval it
 gives with \verb{df = n - 2 floor(tr n) - 1}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_trimmed_mean_se(V)
+}

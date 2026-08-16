@@ -30,3 +30,7 @@ A list with the distances and the neighbour indices, the   latter zero-based to 
     Patterns," 2nd edition. Arnold, chapter 2.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_lcfsdq_nn(M)
+}

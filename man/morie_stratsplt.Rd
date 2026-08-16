@@ -23,3 +23,7 @@ order, so the result is reproducible without a seed. maxdev is the
 largest gap between a stratum's share of the test set and its share
 of the population, the quantity the book checks on p. 61.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_stratsplt(V)
+}

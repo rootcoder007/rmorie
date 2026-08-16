@@ -18,3 +18,7 @@ h(1) = -a1; h(n) = -a_n - sum_{k=1}^{n-1} (1 - k/n) a_k h(n-k) Going through the
 A list with \code{cepstrum}, \code{c0}, \code{order}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ARtoCepstrum(V)
+}

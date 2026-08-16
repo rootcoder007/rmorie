@@ -20,3 +20,7 @@ phase.  Differentiating is wrong at any zero on the unit circle, where the phase
 A list with \code{f}, \code{group_delay}, \code{fs}, \code{mean}, \code{max_deviation}, \code{approximately_constant}, \code{defined}, \code{n_undefined}, \code{from_the_coefficients}, \code{phase_differentiation_breaks_at_unit_circle_zeros}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+GrpDelay(V)
+}

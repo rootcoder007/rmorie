@@ -20,3 +20,7 @@ List with \code{Z}, \code{attention}, \code{compression}.
 Learned queries attend to the visual patches through
 \code{morie_alammar_sdp_attention}, with an optional output projection.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_q_former(V, V)
+}

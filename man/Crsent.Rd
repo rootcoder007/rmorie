@@ -21,3 +21,7 @@ Cover & Thomas (2006), eq. (2.1) and (2.26).
 \references{
 Cover & Thomas (2006), eq. (2.26).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Crsent(V, V)
+}

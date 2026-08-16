@@ -21,3 +21,7 @@ List with \code{p_hat}, \code{logits}, \code{prediction} (0/1),
 sigma(theta^T x) with the overflow-safe two-branch sigmoid. The
 decision boundary is the linear set theta^T x = 0.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_logistic_probability(V, V)
+}

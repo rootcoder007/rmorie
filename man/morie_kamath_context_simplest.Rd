@@ -18,3 +18,7 @@ morie_kamath_context_simplest
 A list with \code{context}, \code{agrees_with_eq22}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_context_simplest(V)
+}

@@ -25,3 +25,7 @@ dependence in an ordered stream.
 Geyer CJ (1992) \emph{Statistical Science} 7(4):473-483,
 \doi{10.1214/ss/1177011137}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ess_autocorrelation(V)
+}

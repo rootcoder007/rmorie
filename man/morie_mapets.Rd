@@ -19,3 +19,7 @@ The book's own warning is honoured: MAPE breaks down when an actual
 observation is zero, so zero actuals raise rather than silently
 returning infinity.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mapets(V, V)
+}

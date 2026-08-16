@@ -18,3 +18,7 @@ QrsHPassTf(freq, fs = 200)
 A list with \code{freq}, \code{mag}, \code{phase}, \code{fs}, \code{fsnote}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsHPassTf(V)
+}

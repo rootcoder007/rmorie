@@ -29,3 +29,7 @@ Formula: flag \code{x < H_L - k (H_U - H_L)} or
 Tukey, J. W. (1977). Exploratory Data Analysis.
 Addison-Wesley, chapters 2 and 3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IqrA(V)
+}

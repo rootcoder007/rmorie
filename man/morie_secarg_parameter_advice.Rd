@@ -21,3 +21,6 @@ Saarinen, M.-J. & Aumasson, J.-P. (2015) "BLAKE2", RFC 7693,
 doi:10.17487/RFC7693.
 }
 \keyword{internal}
+\examples{
+morie_secarg_parameter_advice()
+}

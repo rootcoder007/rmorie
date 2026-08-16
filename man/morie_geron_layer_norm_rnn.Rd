@@ -27,3 +27,7 @@ List with h, normalized, mu, var, estimate, n, method.
 \description{
 Layer normalization inside an RNN cell (Geron Ch 13, morie.fn hmlnr)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_layer_norm_rnn(V)
+}

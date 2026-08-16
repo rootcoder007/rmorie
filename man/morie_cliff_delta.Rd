@@ -23,3 +23,7 @@ interval of Cliff (1996, p.140, eq. 5.12).  \code{morie_brunner_munzel} is
 the heteroscedastic analogue of Wilcoxon-Mann-Whitney: it does not
 assume the two distributions share a shape.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_cliff_delta(V, V)
+}

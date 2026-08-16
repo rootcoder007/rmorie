@@ -20,3 +20,7 @@ Part of the droPDSI_native implementation; see the file header for the source it
 A list with \code{estimate}, \code{pdsi}, \code{z_index}, \code{departure}, \code{cafec_precip}, \code{alpha}, \code{beta}, \code{gamma}, \code{delta}, \code{K}, \code{K_month}, \code{mean_abs_departure}, \code{evapotranspiration}, \code{recharge}, \code{runoff}, \code{loss}, \code{soil_surface_capacity}, \code{soil_under_capacity}, \code{n}, \code{duration_factor}, \code{duration_divisor}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_droPDSI_palmer_pdsi(V, V)
+}

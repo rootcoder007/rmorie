@@ -35,3 +35,6 @@ A character scalar.
     464-469.
 }
 \keyword{internal}
+\examples{
+morie_frgrow_cheatsheet()
+}

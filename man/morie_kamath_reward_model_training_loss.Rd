@@ -15,3 +15,7 @@ List with \code{estimate}, \code{per_pair}, \code{margins}, \code{accuracy}.
 \description{
 mean log(1 + exp(-(r_w - r_l))), with the pair accuracy reported.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_reward_model_training_loss(V, V)
+}

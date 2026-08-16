@@ -18,3 +18,7 @@ Legendre polynomials in \code{cos(alpha)}, evaluated by the standard three-term 
 Numeric vector of length \code{n_basis}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_dimNet_spherical_harmonic_basis(V)
+}

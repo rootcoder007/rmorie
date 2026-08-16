@@ -36,3 +36,6 @@ Equations 6.7 to 6.11 of Bilder & Loughin (2025): weighted category
 totals, jackknife variances, the delta-method proportion variance, and
 the Kott-Carr effective-sample-size interval.
 }
+\examples{
+morie_survey_categorical()
+}

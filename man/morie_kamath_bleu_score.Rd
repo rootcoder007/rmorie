@@ -20,3 +20,7 @@ List with \code{estimate}, \code{p_n}, \code{brevity_penalty}.
 Counts clipped n-grams against the best-matching reference count, then
 delegates to km114 (precision), km116 (brevity penalty) and km117 (final).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_bleu_score(V, V)
+}

@@ -31,3 +31,7 @@ accumulating eligibility traces e_t = gamma lambda \verb{e_\{t-1\}} + 1
 forwards, and the per-step share of the total return. \code{normalize}
 uses the POPULATION sd (numpy default), not R's \code{sd()}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_credit_assignment(V)
+}

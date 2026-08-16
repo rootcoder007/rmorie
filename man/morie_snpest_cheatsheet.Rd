@@ -28,3 +28,6 @@ A character scalar.
   Escobar, M.D. and West, M. (1995) JASA 90(430), 577-588.
 }
 \keyword{internal}
+\examples{
+morie_snpest_cheatsheet()
+}

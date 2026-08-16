@@ -20,3 +20,7 @@ Formula: x_i = w_i (y_i - theta_FE)^2; y_i = (theta_FE - theta_FE(-i))^2 / var(t
 \references{
 Baujat, Mahe, Pignon and Hill (2002), A graphical method for exploring heterogeneity in meta-analyses, Statistics in Medicine 21:2641-2652. Paywalled; the two axes are as documented by metafor::baujat, the reference implementation -- the x-axis is each study's contribution to the Q statistic and the y-axis the standardised squared difference between the overall estimate with and without that study.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Baujat(V, V)
+}

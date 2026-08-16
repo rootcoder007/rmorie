@@ -19,3 +19,7 @@ X exactly, so the joint design carrying both X and X_EF is rank deficient and be
 A list with \code{X_EF}, \code{levels}, \code{kept_levels}, \code{reference}, \code{n_columns}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_fda_env_interaction(V, V)
+}

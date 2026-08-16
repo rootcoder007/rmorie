@@ -17,3 +17,7 @@ Outside this region the planar flow is not invertible and the change-of-variable
 A list with \code{u, adjusted, u_dot_w, u_dot_w_after, note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+enforce_invertibility(V, V)
+}

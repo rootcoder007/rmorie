@@ -21,3 +21,7 @@ Part of the rangayyan_filt2 implementation; see the file header for the source i
 A list with \code{f}, \code{phase}, \code{wrapped}, \code{unwrapped}, \code{unwrap}, \code{fs}, \code{defined}, \code{n_undefined}, \code{phase_undefined_where_the_response_vanishes}, \code{wrapping_is_an_arctangent_artifact}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PhaseResp(V)
+}

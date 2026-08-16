@@ -23,3 +23,7 @@ Green, P. J. and Silverman, B. W. (1994) Nonparametric Regression and
 Generalized Linear Models, Chapman and Hall, ISBN 978-0-412-30040-0, Sec 2.1.2.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_funBand_gcv_score(V, V)
+}

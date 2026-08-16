@@ -19,3 +19,7 @@ it is nearly unbiased, and it is deterministic -- there is only one way to leave
 A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{misclassified}, \code{n}, \code{n_fits}, \code{deterministic}, \code{nearly_unbiased}, \code{high_variance}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LooCv(V, V)
+}

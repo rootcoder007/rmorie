@@ -18,3 +18,7 @@ in Schabenberger & Gotway: "Daniell" and "smoothed periodogram" are absent from 
 A list with \code{omega}, \code{smoothed}, \code{raw}, \code{span}, \code{equivalent_df}, \code{circular_window}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SmPgram(V)
+}

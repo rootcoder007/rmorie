@@ -35,3 +35,7 @@ Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
 reused here from survrsf.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_surxgb_pdf(V)
+}

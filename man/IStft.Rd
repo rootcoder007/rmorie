@@ -19,3 +19,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start}, \code{valid_end}, \code{n_frames}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+IStft(M)
+}

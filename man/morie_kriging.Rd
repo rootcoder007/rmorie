@@ -36,3 +36,6 @@ gamma(0) = 0: the book's own prose (95 percent of the sill at three
 distance parameters) pins this form; the printed exp term is a display
 typo.
 }
+\examples{
+morie_kriging()
+}

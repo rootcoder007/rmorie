@@ -19,3 +19,6 @@ Part of the chronos_native implementation; see the file header for the source it
 A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}.
 }
 \keyword{internal}
+\examples{
+uniform_bins()
+}

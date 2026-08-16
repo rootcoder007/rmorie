@@ -18,3 +18,7 @@ MAXIMUM A POSTERIORI rule.  Comparing likelihoods alone is maximum likelihood, a
 A list with \code{d}, \code{posterior}, \code{assigned}, \code{maximum_likelihood_choice}, \code{prior_changed_the_decision}, \code{priors}, \code{uniform_priors}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+BayesCls(V)
+}

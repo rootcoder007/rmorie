@@ -14,3 +14,7 @@ Exact two-sample runs test -- Sec. 6.2, p. 231
 A list with \code{statistic}, \code{p_value}, \code{p_left}, \code{p_right}, \code{support}, \code{pmf}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wwexact(V, V)
+}

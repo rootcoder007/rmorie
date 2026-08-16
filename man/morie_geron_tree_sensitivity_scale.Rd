@@ -29,3 +29,7 @@ List with \code{predictions_match}, \code{thresholds}, \code{scaled_thresholds},
 \description{
 Decision-tree scale invariance: CART thresholds under x' = a*x + b (hmdtst)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tree_sensitivity_scale(V, V)
+}

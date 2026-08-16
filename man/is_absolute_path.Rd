@@ -17,3 +17,7 @@ Part of the paths implementation; see the file header for the source it follows.
 The value of \code{grepl}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+is_absolute_path(V)
+}

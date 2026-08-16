@@ -25,3 +25,6 @@ Part of the blstn_native implementation; see the file header for the source it f
 A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C}, \code{delta}, \code{terms}, \code{series}, \code{mean_score}, \code{distribution}.
 }
 \keyword{internal}
+\examples{
+morie_karlin_altschul()
+}

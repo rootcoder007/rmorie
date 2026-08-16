@@ -25,3 +25,7 @@ match the Python mirror).
 \references{
 Helly E (1923) \emph{Jahresbericht DMV} 32:175-176.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_helly_intervals(D)
+}

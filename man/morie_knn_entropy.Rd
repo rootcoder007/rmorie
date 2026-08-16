@@ -33,3 +33,7 @@ negative.
 Kozachenko LF, Leonenko NN (1987). Kraskov A, Stogbauer H,
 Grassberger P (2004) \emph{Phys Rev E} 69:066138.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_knn_entropy(V)
+}

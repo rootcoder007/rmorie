@@ -36,3 +36,8 @@ Diggle, P. J. (2003). Statistical Analysis of Spatial
 Point Patterns, 2nd edition, Arnold; section 2.3 defines G and
 section 4.3 the border correction.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Nndist(M, V)
+}

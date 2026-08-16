@@ -18,3 +18,7 @@ Part of the samdec_native implementation; see the file header for the source it 
 A list with \code{prompt_tokens}, \code{image_tokens}, \code{prompt_to_image}, \code{image_to_prompt}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+two_way_block(V, V)
+}

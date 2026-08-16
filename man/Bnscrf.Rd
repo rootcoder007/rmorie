@@ -27,3 +27,7 @@ Imbens, G. W. and Manski, C. F. (2004). Confidence intervals
 for partially identified parameters. Econometrica 72(6), 1845-1857,
 equation (6). \doi{10.1111/j.1468-0262.2004.00555.x}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bnscrf(V, V)
+}

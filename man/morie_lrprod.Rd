@@ -15,3 +15,7 @@ list(ratio, p1, logratio, n)
 \description{
 Posterior odds as a running product of ratios (eq. 3.31, p. 63)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_lrprod(V, V)
+}

@@ -24,3 +24,7 @@ Data, Chapter 4. Verified against the reference implementation in the
 CRAN package compositions 2.0-9, whose scalar applies the centred
 log-ratio to both arguments and sums the elementwise product.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compip(V, V)
+}

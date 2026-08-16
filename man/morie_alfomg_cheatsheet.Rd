@@ -24,3 +24,6 @@ A character scalar.
     5998-6008.
 }
 \keyword{internal}
+\examples{
+morie_alfomg_cheatsheet()
+}

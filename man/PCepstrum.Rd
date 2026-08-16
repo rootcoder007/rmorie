@@ -18,3 +18,7 @@ definitions, and that it matters: WITH the square, eq (4.82) holds only when the
 A list with \code{cepstrum}, \code{unsquared}, \code{log_power}, \code{n}, \code{squared}, \code{zero_bins}, \code{retains_phase}, \code{additivity_exact}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PCepstrum(V)
+}

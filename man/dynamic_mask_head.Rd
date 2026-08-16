@@ -19,3 +19,8 @@ Part of the samdec_native implementation; see the file header for the source it 
 A list with \code{logits}, \code{probability}, \code{weights}, \code{note}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+dynamic_mask_head(S, M)
+}

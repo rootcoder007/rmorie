@@ -23,3 +23,7 @@ conditional relative entropy of eq. (2.65).
 \references{
 Cover & Thomas (2006), eq. (2.65), (2.67).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Klchain(V, V)
+}

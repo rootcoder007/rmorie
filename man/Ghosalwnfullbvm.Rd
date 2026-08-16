@@ -34,3 +34,6 @@ posterior variance = 1 / (1/prior_var + n).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.4.1.
 }
+\examples{
+Ghosalwnfullbvm()
+}

@@ -14,3 +14,7 @@ k-sample median test -- Sec. 10.2, pp. 344-346
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{u}, \code{t}, \code{median}, \code{prob}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kmedtest(V)
+}

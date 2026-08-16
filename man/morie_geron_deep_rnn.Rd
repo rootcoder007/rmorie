@@ -32,3 +32,7 @@ List with \code{outputs}, \code{states}, \code{final_states}, \code{layer_sizes}
 \description{
 Deep (stacked) RNN forward pass, bottom-up per time step (hmdrnn)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_deep_rnn(V)
+}

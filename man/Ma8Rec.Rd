@@ -18,3 +18,7 @@ sample instead of eight, and it "clearly depicts the integration aspect".  The c
 A list with \code{y}, \code{value}, \code{index}, \code{direct_form}, \code{max_difference}, \code{agrees_with_direct_form}, \code{additions_per_sample}, \code{direct_form_additions}, \code{error_accumulates}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ma8Rec(V)
+}

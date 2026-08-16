@@ -23,3 +23,7 @@ Eigenvector SIGNS are not pinned in the Python (numpy eigh's LAPACK
 convention), so the parity tests compare eigenvalues, the kernel and
 |projection|.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_kernel_pca_rbf(M)
+}

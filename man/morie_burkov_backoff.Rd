@@ -18,3 +18,7 @@ N-gram backoff with per-level discount (Burkov Ch 2)
 The value of \code{stop}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_burkov_backoff(D)
+}

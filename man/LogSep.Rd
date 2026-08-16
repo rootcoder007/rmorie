@@ -18,3 +18,7 @@ book states that side condition, so a zero is rejected rather than giving -Inf; 
 A list with \code{log_y}, \code{log_x}, \code{log_p}, \code{sum}, \code{max_difference}, \code{additive}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LogSep(V, V)
+}

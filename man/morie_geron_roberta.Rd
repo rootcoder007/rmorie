@@ -40,3 +40,7 @@ Same encoder stack as BERT with two deliberate differences: no NSP head
 fresh mask drawn every epoch instead of frozen in preprocessing.
 \code{masks} records sequence 0's positions per epoch, 0-based.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_roberta(V)
+}

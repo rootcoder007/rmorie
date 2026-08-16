@@ -18,3 +18,7 @@ List with \code{q}, \code{scale}, \code{dequantized}, \code{max_abs_error},
 \description{
 s = max|x|/qmax, q = round(x/s) clipped; zero maps to zero exactly.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_int8_quantization(V)
+}
