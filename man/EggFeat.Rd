@@ -19,3 +19,9 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+fs <- 1
+egg <- sin(2 * pi * 0.05 * (1:600)) + 0.2 * rnorm(600)
+EggFeat(egg, fs = fs)
+}

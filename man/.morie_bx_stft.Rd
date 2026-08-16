@@ -19,3 +19,8 @@ A step of the rangayyan_class2 implementation. Called by \code{FecgNmf}. See the
 A list with \code{re}, \code{im}, \code{mag}, \code{win}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+x <- sin(2 * pi * (1:128) / 16)
+.morie_bx_stft(x, nwin = 32L, hop = 16L)
+}

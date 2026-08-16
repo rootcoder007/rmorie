@@ -20,3 +20,10 @@ A step of the rangayyan_class2 implementation. Called by \code{DictCode}, \code{
 A list with \code{coefficients}, \code{support}, \code{residual}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+D <- matrix(rnorm(40), 5, 8)
+D <- D / sqrt(rowSums(D^2))
+x <- D[2, ] * 1.5 - 0.7 * D[4, ]
+.morie_bx_omp(x, D, sparsity = 2L, tol = 1e-8)
+}

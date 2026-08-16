@@ -27,3 +27,8 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+img <- matrix(1:16, 4, 4)
+k <- matrix(c(1, 0, 0, -1), 2, 2)
+morie_conv2d(img, k)
+}

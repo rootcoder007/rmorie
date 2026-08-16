@@ -21,3 +21,9 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{epochs}, \code{seizure_detected}, \code{n_flagged}, \code{seizure_intervals_s}, \code{baseline_slow_fraction}, \code{threshold_slow_fraction}, \code{baseline_epochs}, \code{n_epochs}, \code{epoch_s}, \code{fs_hz}, \code{binnie_bands_hz}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+fs <- 100
+eeg <- c(rnorm(fs * 5, 0, 1), rnorm(fs * 2, 0, 4), rnorm(fs * 3, 0, 1))
+SeizDet(eeg, fs = fs)
+}
