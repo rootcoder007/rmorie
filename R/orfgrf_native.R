@@ -49,48 +49,111 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{build}.
 #' @export
+#' Internal: honest leaf value, with a fallback when the leaf half is empty
+#'
+#' The value of a leaf is the outcome mean over the LEAF half of the
+#' sample, which is what makes the estimate honest. When no leaf-half
+#' row lands in the node that mean is undefined, and the node falls
+#' back to the rows it does have rather than reporting NaN.
+#'
+#' @param y Outcome vector.
+#' @param leaf Row indices of the leaf half.
+#' @param idxs Row indices in this node.
+#' @return A numeric value.
+#' @keywords internal
+.orfgrf_leaf_value <- function(y, leaf, idxs) {
+  v <- y[leaf[leaf %in% idxs]]
+  if (length(v)) return(mean(v))
+  if (length(idxs)) return(mean(y[idxs]))
+  0
+}
+
+#' Internal: one honest tree
+#'
+#' Honesty means the rows that CHOOSE a split are not the rows that
+#' value the leaf. That requires carrying both halves down the
+#' recursion and partitioning each by the chosen threshold: the split
+#' half J scores candidate cuts, the estimation half I supplies the leaf
+#' value, and a cut is only taken if BOTH halves keep at least
+#' \code{min_leaf} rows on each side.
+#'
+#' The previous version carried only the split half down and left the
+#' estimation half as a fixed set, so \code{leaf[leaf \%in\% idxs]} was
+#' empty at every node -- the two halves are disjoint by construction --
+#' and every candidate scored \code{NaN}. No split was ever taken and
+#' every tree was a single leaf.
+#'
+#' @param X Numeric matrix of features.
+#' @param y Outcome, used for leaf values.
+#' @param indices Rows available to this tree.
+#' @param min_leaf Minimum rows per side, in both halves.
+#' @param alpha Imbalance floor: a side must keep at least this
+#'   fraction of the node's split-half rows.
+#' @param max_depth Depth limit.
+#' @param e The shared random stream.
+#' @param split_target What the splits are scored on: the treatment for
+#'   a propensity tree, the outcome otherwise.
+#' @return A nested list of nodes, each either a leaf with a
+#'   \code{value} or a split with \code{j}, \code{cut}, \code{left} and
+#'   \code{right}.
+#' @keywords internal
 .grow_one_tree <- function(X, y, indices, min_leaf, alpha,
-                           max_depth, e) {
+                           max_depth, e, split_target = NULL) {
+  st <- if (is.null(split_target)) y else as.numeric(split_target)
   n <- length(indices)
-  # shuffle indices in place using the shared generator
   perm <- indices[order(.ghc_unif(e, n))]
   half <- floor(n / 2)
   if (half < 2L) half <- 2L
-  struct <- perm[seq_len(half)]
-  leaf <- perm[(half + 1L):n]
-  build <- function(idxs, depth) {
-    if (length(idxs) <= min_leaf || depth >= max_depth) {
-      return(list(leaf = TRUE, value = mean(y[leaf[leaf %in% idxs]])))
+  J <- perm[seq_len(min(half, n))]
+  I <- perm[(min(half, n) + 1L):n]
+  if (!length(I)) I <- J
+
+  leaf_value <- function(rows_I) {
+    if (!length(rows_I)) return(0)
+    mean(y[rows_I])
+  }
+
+  build <- function(rows_J, rows_I, depth) {
+    node <- list(leaf = TRUE, value = leaf_value(rows_I),
+                 n_I = length(rows_I))
+    if (depth >= max_depth || length(rows_I) < 2L * min_leaf ||
+        length(rows_J) < 2L * min_leaf) {
+      return(node)
     }
-    p <- ncol(X)
     best <- list(gain = -Inf)
-    for (j in seq_len(p)) {
-      vals <- sort(unique(X[idxs, j]))
+    for (j in seq_len(ncol(X))) {
+      vals <- sort(unique(X[rows_J, j]))
       if (length(vals) < 2L) next
       cuts <- (vals[-length(vals)] + vals[-1L]) / 2
       for (cut in cuts) {
-        left <- idxs[X[idxs, j] <= cut]
-        right <- idxs[X[idxs, j] > cut]
-        if (length(left) < min_leaf || length(right) < min_leaf) next
-        # honesty: mean over leaf-sample residuals
-        ml <- mean(y[leaf[leaf %in% left]])
-        mr <- mean(y[leaf[leaf %in% right]])
-        parent <- mean(y[leaf[leaf %in% idxs]])
-        gain <- parent - 0.5 * (ml + mr)
-        if (gain > best$gain) {
+        JL <- rows_J[X[rows_J, j] <= cut]
+        JR <- rows_J[X[rows_J, j] > cut]
+        if (length(JL) < min_leaf || length(JR) < min_leaf) next
+        # the imbalance floor, on the half that chooses the split
+        if (min(length(JL), length(JR)) < alpha * length(rows_J)) next
+        ml <- mean(st[JL]); mr <- mean(st[JR])
+        nl <- length(JL); nr <- length(JR)
+        # the usual variance-reduction gain: the between-group sum of
+        # squares the cut creates
+        gain <- (nl * nr / (nl + nr)) * (ml - mr)^2
+        if (is.finite(gain) && gain > best$gain) {
           best <- list(gain = gain, j = j, cut = cut)
         }
       }
     }
-    if (is.null(best$j))
-      return(list(leaf = TRUE, value = mean(y[leaf[leaf %in% idxs]])))
-    left <- idxs[X[idxs, best$j] <= best$cut]
-    right <- idxs[X[idxs, best$j] > best$cut]
+    if (is.null(best$j)) return(node)
+    IL <- rows_I[X[rows_I, best$j] <= best$cut]
+    IR <- rows_I[X[rows_I, best$j] > best$cut]
+    # both halves have to survive, or the leaf value would come from
+    # rows the split never saw
+    if (length(IL) < min_leaf || length(IR) < min_leaf) return(node)
+    JL <- rows_J[X[rows_J, best$j] <= best$cut]
+    JR <- rows_J[X[rows_J, best$j] > best$cut]
     list(leaf = FALSE, j = best$j, cut = best$cut,
-         left = build(left, depth + 1L),
-         right = build(right, depth + 1L))
+         left = build(JL, IL, depth + 1L),
+         right = build(JR, IR, depth + 1L))
   }
-  build(struct, 0L)
+  build(J, I, 0L)
 }
 
 #' .orfgrf_grow_forest
@@ -114,6 +177,17 @@
                         n_trees = 100, min_leaf = 5, alpha = 0.05,
                         max_depth = 12, seed = 0) {
   n <- length(y)
+  if (identical(kind, "propensity")) {
+    if (is.null(W)) {
+      stop("orfgrf: a propensity forest splits on the treatment, so W ",
+           "is required.", call. = FALSE)
+    }
+    if (length(W) != n) {
+      stop("orfgrf: W has length ", length(W), "; expected ", n,
+           ", one per observation.", call. = FALSE)
+    }
+  }
+  split_target <- if (identical(kind, "propensity")) as.numeric(W) else y
   e <- .ghc_rng(as.numeric(seed))
   trees <- list()
   bags <- list()
@@ -127,7 +201,7 @@
     }
     trees[[length(trees) + 1L]] <- .grow_one_tree(
       X, y, sel, as.integer(min_leaf), as.numeric(alpha),
-      as.integer(max_depth), e)
+      as.integer(max_depth), e, split_target = split_target)
     bags[[length(bags) + 1L]] <- sel
   }
   list(trees = trees, bags = bags, s = NULL)

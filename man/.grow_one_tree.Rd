@@ -3,23 +3,24 @@
 % the formals.
 \name{.grow_one_tree}
 \alias{.grow_one_tree}
-\title{Minimal honest CART builder. Each tree gets half the observations}
+\title{Internal: one honest tree}
 \usage{
-.grow_one_tree(X, y, indices, min_leaf, alpha, max_depth, e)
+.grow_one_tree(X, y, indices, min_leaf, alpha, max_depth, e, split_target = NULL)
 }
 \arguments{
-\item{X}{A matrix; indexed by row and column.}
-\item{y}{A vector; indexed elementwise.}
-\item{indices}{A vector; its length is taken and its elements indexed.}
-\item{min_leaf}{See Usage.}
-\item{alpha}{Accepted by the signature and not used anywhere in the body.}
-\item{max_depth}{See Usage.}
-\item{e}{Passed to \code{.ghc_unif}.}
+\item{X}{Numeric matrix of features.}
+\item{y}{Outcome, used for leaf values.}
+\item{indices}{Rows available to this tree.}
+\item{min_leaf}{Minimum rows per side, in both halves.}
+\item{alpha}{Imbalance floor: a side must keep at least this   fraction of the node\'s split-half rows.}
+\item{max_depth}{Depth limit.}
+\item{e}{The shared random stream.}
+\item{split_target}{What the splits are scored on: the treatment for   a propensity tree, the outcome otherwise.}
 }
 \description{
-chosen uniformly without replacement; honesty is enforced by splitting each tree\\'s bag into a structure half and a leaf half.
+Honesty means the rows that CHOOSE a split are not the rows that value the leaf. That requires carrying both halves down the recursion and partitioning each by the chosen threshold: the split half J scores candidate cuts, the estimation half I supplies the leaf value, and a cut is only taken if BOTH halves keep at least \code{min_leaf} rows on each side. The previous version carried only the split half down and left the estimation half as a fixed set, so \code{leaf[leaf \%in\% idxs]} was empty at every node -- the two halves are disjoint by construction -- and every candidate scored \code{NaN}. No split was ever taken and every tree was a single leaf.
 }
 \value{
-The value of \code{build}.
+A nested list of nodes, each either a leaf with a   \code{value} or a split with \code{j}, \code{cut}, \code{left} and   \code{right}.
 }
 \keyword{internal}

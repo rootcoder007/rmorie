@@ -98,7 +98,7 @@
 #' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
 #' @export
 .morie_aft_fit <- function(t, e, X, family = "weibull", max_iter = 500L,
-                           tol = 1e-6, add_intercept = TRUE) {
+                           tol = 1e-14, add_intercept = TRUE) {
   n <- length(t)
   A <- if (add_intercept) cbind(1, X) else as.matrix(X)
   p <- ncol(A)
@@ -113,14 +113,24 @@
   start <- c(as.vector(qr.solve(A, logt)), 0)
   res <- stats::optim(start, nll,
     method = "BFGS",
-    control = list(maxit = max_iter, reltol = 1e-14)
+    # the caller's tolerance, not a hard-wired one: tol was accepted
+    # and ignored, so neither loosening it for a hard fit nor
+    # tightening it for a delicate one did anything. The default is
+    # set to the value that used to be wired in, so no existing call
+    # changes its answer.
+    control = list(maxit = max_iter, reltol = tol)
   )
   # A second pass from the first answer: BFGS stops on a relative
   # criterion, and restarting resets the approximation, which buys the
   # last few digits that the cross-language comparison needs.
   res <- stats::optim(res$par, nll,
     method = "BFGS",
-    control = list(maxit = max_iter, reltol = 1e-14)
+    # the caller's tolerance, not a hard-wired one: tol was accepted
+    # and ignored, so neither loosening it for a hard fit nor
+    # tightening it for a delicate one did anything. The default is
+    # set to the value that used to be wired in, so no existing call
+    # changes its answer.
+    control = list(maxit = max_iter, reltol = tol)
   )
   theta <- res$par
   list(
