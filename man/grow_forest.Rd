@@ -28,3 +28,10 @@ A step of the hntfst_native implementation. Called by \code{.center_cate}, \code
 A list with \code{trees}, \code{bags}, \code{s}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+X <- matrix(rnorm(120), 60, 2)
+y <- X[, 1] + rnorm(60, 0, 0.3)
+f <- grow_forest(X, y, n_trees = 10L)
+length(f$trees)
+}

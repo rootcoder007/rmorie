@@ -17,3 +17,7 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}, \c
 The value of \code{D}, as built in the body.
 }
 \keyword{internal}
+\examples{
+seqs <- c("MKVLA", "MKVLG", "MRVLA")
+sixtuple_distance(seqs)
+}

@@ -23,3 +23,8 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}, \c
 The value of \code{.mafft_nw}.
 }
 \keyword{internal}
+\examples{
+sc <- normalized_similarity_matrix(seq_type = "aa")
+r <- group_align(list("MKVLA"), list("MKVLG"), sc)
+str(r, max.level = 1)
+}

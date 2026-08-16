@@ -30,3 +30,10 @@ A step of the hntfst_native implementation. No other function in the package cal
 The value of \code{honest_forest}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+X <- matrix(rnorm(120), 60, 2)
+y <- X[, 1] + rnorm(60, 0, 0.3)
+r <- morie_hntfst(X, y, n_trees = 10L)
+str(r, max.level = 1)
+}

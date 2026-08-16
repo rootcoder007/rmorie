@@ -22,3 +22,11 @@ Augmented outcome-weighted-learning weights of Liu et al. (2018). The prognostic
 A list with \code{weights}, \code{labels} (possibly with   some signs flipped), \code{residual}, \code{prognostic},   \code{n_flipped}, \code{cv} and \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 40
+H <- matrix(rnorm(n * 2), n, 2)
+A <- sample(c(-1, 1), n, replace = TRUE)
+R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+aol_weights(R, A, H)
+}

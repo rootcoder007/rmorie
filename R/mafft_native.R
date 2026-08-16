@@ -128,8 +128,9 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
     }
     return(comps)
   }
-  chars <- strsplit(paste(rows, collapse = "\n"), "")[[1L]]
-  char_mat <- matrix(chars, nrow = length(rows), ncol = L, byrow = TRUE)
+  # split per ROW: joining with a separator put the separator chars
+  # into the matrix and shifted every subsequent row by one
+  char_mat <- do.call(rbind, lapply(rows, function(s) strsplit(s, "")[[1L]]))
   vol <- numeric(L); pol <- numeric(L)
   for (n in seq_len(L)) {
     for (i in seq_along(rows)) {
@@ -591,19 +592,22 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
   for (i in 2L:(n + 1L)) {
     for (j in 2L:(m + 1L)) {
       h <- .mafft_site_score(M, g1, g2, w1, w2, i - 1L, j - 1L)
+      # backpointers hold the PREDECESSOR cell in the 0-based frame the
+      # traceback walks (R row i is that frame plus one): M stored the
+      # current cell and the traceback spun on it forever
       best_v <- P[i - 1L, j - 1L]
-      best_b <- list(kind = "M", pi = i - 1L, pj = j - 1L)
+      best_b <- list(kind = "M", pi = i - 2L, pj = j - 2L)
       for (x in 0L:(i - 1L)) {
         if (is.infinite(P[x + 1L, j])) next
         pen <- s_op * (1.0 - (gs1[x + 1L] + ge1[i - 1L]) / 2.0)
         v <- P[x + 1L, j] - pen
-        if (v > best_v) { best_v <- v; best_b <- list(kind = "I", pi = x, pj = j - 1L) }
+        if (v > best_v) { best_v <- v; best_b <- list(kind = "I", pi = x, pj = j - 2L) }
       }
       for (y in 0L:(j - 1L)) {
         if (is.infinite(P[i, y + 1L])) next
         pen <- s_op * (1.0 - (gs2[y + 1L] + ge2[j - 1L]) / 2.0)
         v <- P[i, y + 1L] - pen
-        if (v > best_v) { best_v <- v; best_b <- list(kind = "D", pi = i - 1L, pj = y) }
+        if (v > best_v) { best_v <- v; best_b <- list(kind = "D", pi = i - 2L, pj = y) }
       }
       P[i, j] <- h + best_v
       back[[i, j]] <- best_b
@@ -615,14 +619,16 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
     b <- back[[i + 1L, j + 1L]]
     cols[[length(cols) + 1L]] <- c(i - 1L, j - 1L)
     if (b$kind == "I") {
-      for (t in (i - 2L):b$pi) cols[[length(cols) + 1L]] <- c(t, NA)
+      if (i - 2L >= b$pi) for (t in (i - 2L):b$pi) cols[[length(cols) + 1L]] <- c(t, NA)
     } else if (b$kind == "D") {
-      for (t in (j - 2L):b$pj) cols[[length(cols) + 1L]] <- c(NA, t)
+      if (j - 2L >= b$pj) for (t in (j - 2L):b$pj) cols[[length(cols) + 1L]] <- c(NA, t)
     }
     i <- b$pi; j <- b$pj
   }
-  for (t in (i - 1L):0L) cols[[length(cols) + 1L]] <- c(t, NA)
-  for (t in (j - 1L):0L) cols[[length(cols) + 1L]] <- c(NA, t)
+  # guard the tails: the colon ASCENDS from -1 when i or j is already
+  # 0, where the reference range is empty
+  if (i > 0L) for (t in (i - 1L):0L) cols[[length(cols) + 1L]] <- c(t, NA)
+  if (j > 0L) for (t in (j - 1L):0L) cols[[length(cols) + 1L]] <- c(NA, t)
   cols <- rev(cols)
   cols <- do.call(rbind, cols)
   out1 <- vapply(g1, function(s) {
@@ -659,9 +665,13 @@ group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NUL
   g2 <- vapply(group2, function(s) toupper(as.character(s)), character(1))
   if (length(g1) == 0L || length(g2) == 0L)
     stop("mafft: both groups must be non-empty")
-  lens <- c(vapply(g1, nchar, integer(1)), vapply(g2, nchar, integer(1)))
-  if (length(unique(lens)) != 2L)
-    stop("mafft: a group must be aligned to one length")
+  # per GROUP, as the Python arm reads: each group internally one
+  # length; the pooled two-distinct-lengths check rejected two groups
+  # that happen to share a length
+  for (g in list(g1, g2)) {
+    if (length(unique(vapply(g, nchar, integer(1)))) != 1L)
+      stop("mafft: a group must be aligned to one length")
+  }
   w1 <- if (is.null(weights1)) rep(1.0 / length(g1), length(g1)) else weights1
   w2 <- if (is.null(weights2)) rep(1.0 / length(g2), length(g2)) else weights2
   if (length(w1) != length(g1) || length(w2) != length(g2))
@@ -902,7 +912,11 @@ guide_tree <- function(D) {
   if (n < 2L) stop("mafft: a guide tree needs at least two sequences")
   clusters <- as.list(seq_len(n))
   for (i in seq_len(n)) clusters[[i]] <- list(i)
-  dist <- matrix(0, n, n)
+  # the Python arm keys distances by pair in a dict; merged clusters
+  # get ids up to 2n-1, so the matrix must hold them, and the inner
+  # pair loop must not run when k is already the last active id (the
+  # descending colon indexed active[length+1] = NA)
+  dist <- matrix(0, 2L * n, 2L * n)
   for (i in seq_len(n)) for (j in seq_len(n)) dist[i, j] <- D[i, j]
   merges <- list()
   nxt <- n + 1L
@@ -911,7 +925,7 @@ guide_tree <- function(D) {
     best_d <- Inf; bi <- 0L; bj <- 0L
     for (k in seq_along(active)) {
       i <- active[k]
-      for (kk in (k + 1L):length(active)) {
+      for (kk in seq_len(length(active) - k) + k) {
         j <- active[kk]
         if (dist[i, j] < best_d) { best_d <- dist[i, j]; bi <- i; bj <- j }
       }
@@ -965,8 +979,12 @@ progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
   if (length(seqs) < 2L)
     stop("mafft: at least two sequences are needed")
   if (is.null(tree)) tree <- guide_tree(sixtuple_distance(seqs))
+  # a profile is a plain character vector of aligned sequences, as in
+  # the reference arm; the old (index, seq) pair shape made a MERGED
+  # two-sequence profile indistinguishable from a pair, and the unwrap
+  # below silently threw one sequence away
   profiles <- as.list(seq_along(seqs))
-  for (i in seq_along(seqs)) profiles[[i]] <- list(i, seqs[i])
+  for (i in seq_along(seqs)) profiles[[i]] <- seqs[i]
   names(profiles) <- as.character(seq_along(seqs))
   members <- as.list(seq_along(seqs))
   for (i in seq_along(seqs)) members[[i]] <- list(i)
@@ -975,10 +993,6 @@ progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
   for (m in tree) {
     i <- as.character(m$i); j <- as.character(m$j); new <- as.character(m$new)
     g1 <- profiles[[i]]; g2 <- profiles[[j]]
-    if (length(g1) == 2L) g1 <- g1[[2L]]
-    if (length(g2) == 2L) g2 <- g2[[2L]]
-    if (is.list(g1) && !is.character(g1)) g1 <- unlist(g1)
-    if (is.list(g2) && !is.character(g2)) g2 <- unlist(g2)
     anchors <- NULL
     if (use_fft) {
       segs <- find_homologous_segments(g1, g2, scoring,
@@ -1031,7 +1045,9 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
   w <- if (is.null(weights)) .mafft_weights(k) else weights
   total <- 0.0
   for (i in seq_len(k)) {
-    for (j in (i + 1L):k) {
+    # seq_len, not (i+1):k -- the colon counts DOWN at i = k and
+    # indexes row k+1
+    for (j in seq_len(k - i) + i) {
       pair <- w[i] * w[j]
       opened <- FALSE
       cols_i <- strsplit(aln[i], "")[[1L]]
@@ -1104,7 +1120,8 @@ iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
   groups <- list()
   aln_n <- length(aln)
   for (m in tree[-length(tree)]) {
-    members <- m$members
+    # guide_tree hands members back as a nested list of ids
+    members <- unlist(m$members)
     rest <- setdiff(seq_len(aln_n), members)
     if (length(members) > 0L && length(rest) > 0L)
       groups[[length(groups) + 1L]] <- list(members = members, rest = rest)

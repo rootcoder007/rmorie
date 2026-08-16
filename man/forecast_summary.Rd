@@ -19,3 +19,7 @@ A step of the chronos_native implementation. No other function in the package ca
 A list with \code{mean}, \code{quantiles}, \code{mode}, \code{note}.
 }
 \keyword{internal}
+\examples{
+b <- uniform_bins(-3, 3, n_bins = 8L)
+forecast_summary(rep(1 / 8, 8), b)
+}

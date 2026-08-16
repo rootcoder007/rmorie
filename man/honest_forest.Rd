@@ -30,3 +30,10 @@ A step of the hntfst_native implementation. Called by \code{morie_hntfst}. See t
 A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{s}, \code{n_trees}, \code{split_counts}, \code{split_share}, \code{mean_depth}, \code{kind}, \code{honest}, \code{correction}, \code{level}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+X <- matrix(rnorm(120), 60, 2)
+y <- X[, 1] + rnorm(60, 0, 0.3)
+r <- honest_forest(X, y, n_trees = 20L)
+str(r, max.level = 1)
+}
