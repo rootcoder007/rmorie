@@ -21,3 +21,6 @@ Part of the tlhaltm_native implementation; see the file header for the source it
 A list with \code{estimate}, \code{remainder_bound}, \code{root_n}, \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient}, \code{positivity_delta}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+efficiency_check(err_Q = 5L, err_g = 5L, delta = 0.5, n = 5L)
+}

@@ -35,3 +35,9 @@ A list with the stepped coordinates and summary geometry.
     124-132.
 }
 \keyword{internal}
+\examples{
+NA_ <- 6L
+shrink <- function(x, sigma) (1/(1 + sigma)) * x
+NOISY <- matrix(0, NA_, 3L)
+morie_alf3df(NOISY, 4, shrink, sigma_next = 1)
+}

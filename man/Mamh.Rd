@@ -35,3 +35,6 @@ Cancer Institute 22(4):719-748. \doi{10.1093/jnci/22.4.719}.
 \seealso{
 \code{\link{Mhors}}
 }
+\examples{
+Mamh(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

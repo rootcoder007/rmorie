@@ -22,3 +22,6 @@ Part of the rangayyan_cep implementation; see the file header for the source it 
 A list with \code{cepstrum}, \code{quefrency}, \code{c0}, \code{positive}, \code{negative}, \code{causal}, \code{anticausal}, \code{infinite_duration}, \code{nmax}, \code{method}.
 }
 \keyword{internal}
+\examples{
+CCepClosed(gain = 5L, zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8), zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8), poles_in = c(1, 2, 3, 4, 5, 6, 7, 8), poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

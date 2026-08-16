@@ -29,3 +29,6 @@ sum_k w_k Phi((x - mu_k)/sqrt(s2_k)).
     through morie_slbpdg.
 }
 \keyword{internal}
+\examples{
+morie_bnppct_cdf(x = 5L, w = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), s2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

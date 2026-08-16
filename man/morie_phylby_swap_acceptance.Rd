@@ -20,3 +20,6 @@ Part of the phylby_native implementation; see the file header for the source it 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_phylby_swap_acceptance(beta_j = c(1, 2, 3, 4, 5, 6, 7, 8), beta_k = c(1, 2, 3, 4, 5, 6, 7, 8), logp_j = c(1, 2, 3, 4, 5, 6, 7, 8), logp_k = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -21,3 +21,6 @@ List with m_opt, n_for_variance, n_for_budget.
 \description{
 Equations 7.9 to 7.11 of Brus (2022).
 }
+\examples{
+morie_twostage_design(s_w = c(1, 2, 3, 4, 5, 6, 7, 8), s_b = c(1, 2, 3, 4, 5, 6, 7, 8), c1 = c(1, 2, 3, 4, 5, 6, 7, 8), c2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -37,3 +37,22 @@ A list with per-pair mutual information and support, the   total, the pairs used
     Information Theory in Psychology, 95-100.
 }
 \keyword{internal}
+\examples{
+STRUCT <- "(((((...))))).."
+PSET <- list(c("G", "C"), c("C", "G"), c("A", "U"), c("U", "A"))
+STEM <- list(c(0L, 12L), c(1L, 11L), c(2L, 10L), c(3L, 9L), c(4L, 
+    8L))
+ALN <- vapply(0:7, function(sq) {
+    row <- rep(".", 15L)
+    for (k in seq_along(STEM)) {
+        ab <- PSET[[(sq + k - 1L)%%4L + 1L]]
+        row[STEM[[k]][1] + 1L] <- ab[1]
+        row[STEM[[k]][2] + 1L] <- ab[2]
+    }
+    row[6] <- "A"
+    row[7] <- substr("ACGU", sq%%4L + 1L, sq%%4L + 1L)
+    row[8] <- "G"
+    paste(row, collapse = "")
+}, character(1))
+morie_rnacov(ALN, STRUCT)
+}

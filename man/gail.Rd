@@ -25,3 +25,6 @@ policy Full-batch gradient ascent on eq. 17 (the gradient of E_pi[log D] + E_piE
 A named list whose names match the Python RichResult   payload keys: \code{estimate} and \code{cost} are log D(s, a) for   each policy sample (the per-step cost a TRPO-style optimiser   consumes); also \code{Q} (eq. 18\'s per-pair average over the   policy samples), \code{D_policy}, \code{D_expert}, \code{objective}   (eq. 16), \code{accuracy}, \code{weights}, \code{occupancy_policy},   \code{occupancy_expert}, \code{n_policy}, \code{n_expert},   \code{method}.
 }
 \keyword{internal}
+\examples{
+gail(expert_states = c(1, 2, 3, 4, 5, 6, 7, 8), expert_actions = c(1, 2, 3, 4, 5, 6, 7, 8), policy_states = c(1, 2, 3, 4, 5, 6, 7, 8), policy_actions = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

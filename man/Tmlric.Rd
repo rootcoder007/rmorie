@@ -37,3 +37,6 @@ Tran, L., Petersen, M., Schwab, J. & van der Laan, M. J.
 estimation. arXiv:1810.03030. Case-control weights follow van der
 Laan (2008), IJB 4(1):17.
 }
+\examples{
+Tmlric(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), prevalence = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

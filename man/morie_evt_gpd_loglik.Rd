@@ -14,3 +14,6 @@ GPD log-likelihood over excesses (Coles 2001 eq. 4.10)
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_evt_gpd_loglik(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
+}

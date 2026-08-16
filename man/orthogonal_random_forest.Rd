@@ -30,3 +30,6 @@ Part of the orfgrf_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n}, \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features}, \code{orthogonal}, \code{method}.
 }
 \keyword{internal}
+\examples{
+orthogonal_random_forest(Y = c(1, 2, 3, 4, 5, 6, 7, 8), T = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), X = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

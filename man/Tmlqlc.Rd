@@ -39,3 +39,6 @@ within each stage and equal counts per stage.
 Murphy, S. A. (2003). JRSS B 65(2):331-355; Petersen, M.
 et al. (2014). Journal of Causal Inference 2(2):147-185.
 }
+\examples{
+Tmlqlc(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

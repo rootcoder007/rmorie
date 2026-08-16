@@ -14,3 +14,6 @@ SSE_lambda(beta) = sum_i ( y_i - mu - sum_l x_il beta_l )^2 + lambda J_beta, wit
 A list with \code{sse}, \code{penalty}, \code{lambda}, \code{objective}, \code{fitted}, \code{residuals}.
 }
 \keyword{internal}
+\examples{
+Pensse(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, lam = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5)
+}

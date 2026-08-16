@@ -38,3 +38,6 @@ der Laan). The score-equation view of the targeting step is van der
 Laan & Rubin (2006), International Journal of Biostatistics 2(1),
 Article 11.
 }
+\examples{
+Tmleqs(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -14,3 +14,6 @@ Multilevel Poisson log-rate (Lawson eq. 15.2)
 A list with \code{lograte}, \code{rate}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Mlpois(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8), age = c(1, 2, 3, 4, 5, 6, 7, 8), race_effect = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

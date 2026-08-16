@@ -35,3 +35,6 @@ Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
 }
+\examples{
+morie_gh_dp_posterior(G0_A = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, n_in_A = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

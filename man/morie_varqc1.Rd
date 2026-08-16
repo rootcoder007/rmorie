@@ -43,3 +43,9 @@ A list with per-record FILTER strings and counts, and for the   VQSR routes the 
     1-38.
 }
 \keyword{internal}
+\examples{
+FIELDS <- c("QD", "QUAL", "SOR", "FS", "MQ", "MQRankSum", "ReadPosRankSum")
+N <- 60L
+VCF <- matrix(0, N, 7)
+morie_varqc1(VCF, fields = FIELDS, mode = "snp")
+}

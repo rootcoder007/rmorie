@@ -19,3 +19,6 @@ Refit by least squares on the selected support
 A list with \code{support}, \code{coef}, \code{intercept},   \code{predict}, \code{lasso_beta}, \code{selected_by},   \code{note}.
 }
 \keyword{internal}
+\examples{
+post_lasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+}

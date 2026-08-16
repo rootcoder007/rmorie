@@ -20,3 +20,6 @@ Part of the rangayyan_adapt implementation; see the file header for the source i
 A list with \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{time_varying}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LmsVarStep(w = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8), mu_n = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

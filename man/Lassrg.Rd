@@ -44,3 +44,6 @@ Society Series B 58(1):267-288.
 \seealso{
 \code{\link{Esllso}}
 }
+\examples{
+Lassrg(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+}

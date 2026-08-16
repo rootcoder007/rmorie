@@ -25,3 +25,6 @@ Core/border/noise classification is delegated to
 \code{morie_geron_dbscan_core_point}; this wrapper merges cores into
 clusters and assigns border points.
 }
+\examples{
+morie_geron_dbscan(X = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5, min_samples = 5L)
+}

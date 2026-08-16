@@ -27,3 +27,6 @@ eq. (2) for the plan; Peyre & Cuturi (2019), Remark 4.11.
 \references{
 Cuturi (2013), eq. (2).
 }
+\examples{
+Otsoftas(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}

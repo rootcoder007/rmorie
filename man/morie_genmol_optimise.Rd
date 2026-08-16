@@ -36,3 +36,7 @@ A list with the endpoint, the trajectory and the values.
     Frontiers in Pharmacology 11, 565644.
 }
 \keyword{internal}
+\examples{
+prop <- function(z) -((z[1] - 1)^2 + (z[2] + 0.5)^2)
+morie_genmol_optimise(c(-2, 3), prop, 20L, 0.1)
+}

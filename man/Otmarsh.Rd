@@ -34,3 +34,6 @@ Caffarelli and McCann (2010).
 Caffarelli, L. A. and McCann, R. J. (2010). Annals of
 Mathematics 171(2):673-730. \doi{10.4007/annals.2010.171.673}.
 }
+\examples{
+Otmarsh(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), delta = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

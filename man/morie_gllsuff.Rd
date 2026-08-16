@@ -23,3 +23,6 @@ list(loglik, n, s, sigman)
 \description{
 Gaussian log likelihood in sufficient statistics (eq. 24.5-24.6, p. 319)
 }
+\examples{
+morie_gllsuff(xbar = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, mu = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+}

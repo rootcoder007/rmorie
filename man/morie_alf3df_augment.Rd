@@ -33,3 +33,10 @@ A list with the augmented coordinates and the old centroid.
     124-132.
 }
 \keyword{internal}
+\examples{
+NA_ <- 6L
+TRUEX <- matrix(0, NA_, 3L)
+e <- .ghc_rng(5)
+e <- .ghc_rng(5)
+morie_alf3df_augment(TRUEX, e)
+}

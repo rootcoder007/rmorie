@@ -36,3 +36,6 @@ Wang, S., Li, B. Z., Khabsa, M., Fang, H. and Ma, H.
 (2020), arXiv:2006.04768, Section 4, Eq 7. Local source:
 fetched-wave3/wang-etal-2020-linformer-arxiv2006.04768.pdf.
 }
+\examples{
+Linatt(Q = 0.5, K = 5L, V = 5L, E = c(1, 2, 3, 4, 5, 6, 7, 8), F_ = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

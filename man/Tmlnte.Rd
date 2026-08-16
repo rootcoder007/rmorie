@@ -32,3 +32,6 @@ Formula: \code{NTE = E[Y(1) - Y(0)] = NDE + NIE}, targeted with
 VanderWeele (2015), Explanation in Causal Inference, ch 2;
 van der Laan & Rubin (2006) IJB 2(1):11.
 }
+\examples{
+Tmlnte(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, M = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

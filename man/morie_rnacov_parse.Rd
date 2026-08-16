@@ -32,3 +32,7 @@ A two-column matrix of zero-based pair positions.
     Information Theory in Psychology, 95-100.
 }
 \keyword{internal}
+\examples{
+STRUCT <- "(((((...))))).."
+morie_rnacov_parse(STRUCT)
+}

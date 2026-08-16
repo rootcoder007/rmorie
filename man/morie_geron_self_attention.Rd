@@ -20,3 +20,6 @@ List with \code{output}, \code{weights}, \code{Q}, \code{K}, \code{V}.
 SA(X) = softmax(XWq (XWk)^T / sqrt(d_k)) XWv through the shared
 attention kernel.
 }
+\examples{
+morie_geron_self_attention(X = 5L, WQ = c(1, 2, 3, 4, 5, 6, 7, 8), WK = c(1, 2, 3, 4, 5, 6, 7, 8), WV = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

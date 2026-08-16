@@ -22,3 +22,6 @@ Part of the rangayyan_cep implementation; see the file header for the source it 
 A list with \code{alpha}, \code{K}, \code{bound}, \code{quefrency}, \code{decays_at_least_as_one_over_n}, \code{near_unit_circle}, \code{method}.
 }
 \keyword{internal}
+\examples{
+CCepDecay(zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8), zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8), poles_in = c(1, 2, 3, 4, 5, 6, 7, 8), poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,6 @@ GPD distribution function (Coles 2001 eq. 4.2-4.4)
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+morie_evt_gpd_cdf(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
+}

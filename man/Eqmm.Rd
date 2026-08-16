@@ -36,3 +36,6 @@ consistent only with A as written here.
 Loyd & Hoover (1980), Journal of Educational Measurement
 17(3):179-193, doi:10.1111/j.1745-3984.1980.tb00825.x.
 }
+\examples{
+Eqmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), a_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), a_F = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

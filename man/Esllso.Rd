@@ -37,3 +37,6 @@ quadratic program is needed.
 Tibshirani, R. (1996). Journal of the Royal Statistical
 Society Series B 58(1):267-288. \doi{10.1111/j.2517-6161.1996.tb02080.x}.
 }
+\examples{
+Esllso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda_ = 5L)
+}

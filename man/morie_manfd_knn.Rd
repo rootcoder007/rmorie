@@ -33,3 +33,11 @@ The adjacency matrix, infinite where there is no edge.
     Mathematik 30, 51-94.
 }
 \keyword{internal}
+\examples{
+N <- 18L
+P <- 12L
+GRID <- vapply(0:(P - 1L), function(t) t/(P - 1), numeric(1))
+Y <- matrix(0, N, P)
+D <- morie_manfd_l2(Y, GRID)
+morie_manfd_knn(D, 3L)
+}

@@ -19,3 +19,6 @@ The reference cell is dropped from each set so the design has full rank.  Return
 A list with \code{coef} (length-p numeric, no intercept),   \code{full} (numeric vector of all fitted coefficients   including the intercept, in order: intercept, X, unit dummies,   period dummies), \code{n_units}, \code{n_periods},   \code{n_columns}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_two_way_fixed_effects(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

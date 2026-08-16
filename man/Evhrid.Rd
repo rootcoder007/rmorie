@@ -30,3 +30,6 @@ dependence; as lam -> infinity it tends to x + y, independence.
 Husler & Reiss (1989), Statist. Probab. Letters
 7(4):283-286.
 }
+\examples{
+Evhrid(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+}

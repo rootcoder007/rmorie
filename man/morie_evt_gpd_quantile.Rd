@@ -17,3 +17,6 @@ GPD quantile (inverse of Coles 2001 eq. 4.2)
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_evt_gpd_quantile(p = 0.5, sigma = 0.5, xi = 5L)
+}

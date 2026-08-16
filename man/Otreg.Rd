@@ -36,3 +36,6 @@ the dual value reduces to \code{<a,f> + <b,g> - eps}.
 Genevay, A., Cuturi, M., Peyre, G. and Bach, F. (2016).
 Advances in Neural Information Processing Systems 29:3440-3448.
 }
+\examples{
+Otreg(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}

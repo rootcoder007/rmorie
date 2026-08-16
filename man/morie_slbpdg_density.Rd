@@ -31,3 +31,11 @@ The density value.
     stick-breaking priors." JASA 96(453), 161-173.
 }
 \keyword{internal}
+\examples{
+V <- c(0.3, 0.5, 0.2, 0.8, 0.1)
+sw <- morie_slbpdg_weights(V)
+w <- sw$w
+x <- -12
+morie_slbpdg_density(x, w, c(-2, 0, 1, 3, 5), c(0.5, 1, 0.25, 
+    2, 0.75))
+}

@@ -20,3 +20,6 @@ smfd_bspline_one(x, k, degree, knots)
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+smfd_bspline_one(x = 5L, k = 3L, degree = 3L, knots = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

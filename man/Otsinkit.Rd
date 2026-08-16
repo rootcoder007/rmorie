@@ -30,3 +30,6 @@ first index below \code{tol} is read off the finished trace.  Cuturi
 \references{
 Cuturi (2013), Sec. 4.1.
 }
+\examples{
+Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L, tol = 0.5)
+}

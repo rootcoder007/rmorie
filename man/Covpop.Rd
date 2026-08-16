@@ -33,3 +33,6 @@ is built to satisfy.
 Sarndal, Swensson & Wretman (1992), Model Assisted Survey
 Sampling, Springer, section 7.6.
 }
+\examples{
+Covpop(y = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), target_totals = 5L)
+}

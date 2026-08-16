@@ -20,3 +20,6 @@ List with \code{cost}, \code{mse}, \code{penalty}, \code{gradient}.
 J = MSE + (alpha/2) \verb{sum_\{i>=1\}} theta_i^2 with the bias unpenalised;
 the gradient is returned alongside.
 }
+\examples{
+morie_geron_ridge_cost_grridg(X = 5L, y = 5L, theta = 0.5, alpha = 0.5)
+}

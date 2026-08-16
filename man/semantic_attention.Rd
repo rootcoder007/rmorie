@@ -20,3 +20,6 @@ Part of the hetgnn_native implementation; see the file header for the source it 
 A list with \code{beta}, \code{scores}, \code{metapaths}, \code{note}.
 }
 \keyword{internal}
+\examples{
+semantic_attention(Z_per_metapath = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), W = 5L, b = 5L, q = 0.5)
+}

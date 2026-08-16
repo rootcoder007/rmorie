@@ -22,3 +22,6 @@ Part of the node2v_native implementation; see the file header for the source it 
 A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
 }
 \keyword{internal}
+\examples{
+transition_probabilities(adj = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), v = 5L, p = 0.5, q = 0.5)
+}

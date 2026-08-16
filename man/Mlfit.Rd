@@ -29,3 +29,6 @@ rather than producing a finite nonsense value.
 Hartley and Rao (1967), Biometrika 54(1-2), 93-108,
 \doi{10.1093/biomet/54.1-2.93}.
 }
+\examples{
+Mlfit(y = 5L, X = 5L, V = 5L)
+}
