@@ -24,3 +24,12 @@ Computes the weights, fits a weighted linear classifier, and reports its inverse
 A list with \code{estimate}, \code{value}, \code{rule},   \code{coef}, \code{weights}, \code{labels}, \code{weight_cv},   \code{method}, \code{n}, \code{n_flipped} (AOL only, else   \code{NULL}), \code{shift} (OWL only, else \code{NULL}) and   \code{reference}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 40
+H <- matrix(rnorm(n * 2), n, 2)
+A <- sample(c(-1, 1), n, replace = TRUE)
+R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+r <- fit_aol(R, A, H)
+str(r, max.level = 1)
+}

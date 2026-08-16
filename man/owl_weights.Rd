@@ -21,3 +21,11 @@ Computes the outcome-weighted-learning weights of Zhao et al. (2012). Because th
 A list with \code{weights}, \code{labels} (the treatment   codes, unchanged), \code{shift} (the constant actually used),   \code{cv} (coefficient of variation of the weights) and   \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 40
+H <- matrix(rnorm(n * 2), n, 2)
+A <- sample(c(-1, 1), n, replace = TRUE)
+R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+owl_weights(R, A, H)
+}

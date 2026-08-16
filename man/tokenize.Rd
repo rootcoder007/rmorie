@@ -21,3 +21,8 @@ A step of the chronos_native implementation. Called by \code{morie_chronos}. See
 A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped}, \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+b <- uniform_bins(-3, 3, n_bins = 16L)
+tokenize(rnorm(10), b)
+}
