@@ -19,3 +19,6 @@ A step of the tldapar_native implementation. Called by \code{data_adaptive_param
 A list with \code{estimation}, \code{training}, \code{V}.
 }
 \keyword{internal}
+\examples{
+str(split_sample(30, V = 5), max.level = 1)
+}

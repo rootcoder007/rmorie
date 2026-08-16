@@ -42,3 +42,16 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 40
+W <- matrix(rnorm(n * 2), n, 2)
+A <- rbinom(n, 1, 0.5)
+y <- plogis(-0.3 + 0.8 * A + 0.5 * W[, 1] + rnorm(n, 0, 0.5))
+cand <- list(name = "W1", cols = 0L, interact = FALSE)
+ct <- morie_tmlcic_candidate_tmle(y, A, W, cand, g1 = function(i) 0.5)
+psi <- mean(ct$q1 - ct$q0)
+D <- morie_tmlcic_influence_curve(y, A, ct$q1, ct$q0, ct$qa,
+                                  rep(0.5, n), seq_len(n), psi, "SATE")
+head(D)
+}

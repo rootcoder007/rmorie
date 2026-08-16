@@ -45,3 +45,12 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+n <- 40
+X <- matrix(rnorm(n * 2), n, 2)
+D <- rep(c(0, 1), 20)
+y <- plogis(-0.3 + 0.8 * D + 0.5 * X[, 1] + rnorm(n, 0, 0.5))
+r <- morie_tmlcic_tmle_cluster_ic(y, D, X)
+str(r, max.level = 1)
+}
