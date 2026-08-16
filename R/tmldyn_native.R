@@ -95,6 +95,34 @@
   as.numeric(Z %*% b)
 }
 
+#' Internal: ridge-penalised logistic fit for the treatment mechanism
+#'
+#' Newton steps on the penalised binomial log-likelihood. The penalty
+#' is what keeps the fit finite when the covariates nearly separate
+#' the treatment, which is the case a propensity model most often
+#' meets and least often survives.
+#'
+#' @param X Design matrix, intercept included.
+#' @param y Binary treatment.
+#' @param penalty Ridge penalty; zero gives the unpenalised fit.
+#' @param max_iter Iteration cap.
+#' @return The coefficient vector.
+#' @keywords internal
+.tmldyn_logit_irls <- function(X, y, penalty = 0, max_iter = 60L) {
+  X <- as.matrix(X); y <- as.numeric(y)
+  b <- rep(0, ncol(X))
+  for (i in seq_len(max_iter)) {
+    p <- 1 / (1 + exp(-as.numeric(X %*% b)))
+    w <- pmax(p * (1 - p), 1e-10)
+    I <- crossprod(X, w * X) + diag(as.numeric(penalty) + 1e-10, ncol(X))
+    g <- crossprod(X, y - p) - as.numeric(penalty) * b
+    step <- tryCatch(solve(I, g), error = function(e) rep(0, ncol(X)))
+    b <- b + as.numeric(step)
+    if (max(abs(step)) < 1e-10) break
+  }
+  b
+}
+
 #' The intervention mechanism
 #'
 #' \code{known} supplies the true probabilities of receiving treatment
@@ -121,14 +149,10 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
       stop("tmldyn: known g has the wrong length")
   } else {
     X0 <- cbind(1, L0)
-    b0 <- as.numeric(suppressWarnings(
-      coef(glm(A0 ~ ., data = data.frame(X0[, -1, drop = FALSE]),
-               family = binomial()))))
+    b0 <- .tmldyn_logit_irls(X0, A0, penalty = penalty)
     p0 <- .tmldyn_expit(as.numeric(X0 %*% b0))
     X1 <- cbind(1, A0, L0, L1)
-    b1 <- as.numeric(suppressWarnings(
-      coef(glm(A1 ~ ., data = data.frame(X1[, -1, drop = FALSE]),
-               family = binomial()))))
+    b1 <- .tmldyn_logit_irls(X1, A1, penalty = penalty)
     p1 <- .tmldyn_expit(as.numeric(X1 %*% b1))
   }
   t <- as.numeric(trim)
