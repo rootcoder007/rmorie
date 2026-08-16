@@ -114,3 +114,9 @@ spi <- morie_droSPI
 .droSPI_cheatsheet <- function() {
   "droSPI: gamma-fit totals (Thom MLE), H=q+(1-q)G, A-S normal transform"
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_drospi <- morie_droSPI

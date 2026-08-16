@@ -34,3 +34,9 @@ morie_perK <- function(x1, x2 = NULL, period = 1, lengthscale = 1,
     method = "periodic kernel (MacKay 1998; R&W 2006 Sec. 4.2.3)"
   )
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_perk <- morie_perK

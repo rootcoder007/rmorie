@@ -78,3 +78,9 @@ morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
                     "mu* per Campolongo et al. 2007)")
   )
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_morrism <- morie_morrisM

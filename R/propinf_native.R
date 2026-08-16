@@ -352,7 +352,10 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 .propinf_rng <- function(seed) {
   st <- as.integer(seed)
-  if (st < 0L) st <- st + 2147483648L
+  # 2^31 exceeds .Machine$integer.max, so it cannot be an integer
+  # literal: with the L suffix R warns and silently uses the double
+  # anyway. Written as a double, which is what was always computed.
+  if (st < 0L) st <- st + 2147483648
   if (st == 0L) st <- 1L
   st <- st %% 2147483647L
   e <- new.env(parent = emptyenv())

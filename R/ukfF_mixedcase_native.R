@@ -181,3 +181,9 @@ morie_unscented_kalman <- morie_ukfF
 morie_ukfF_cheatsheet <- function() {
   "ukfF: 2n+1 sigma points, UT predict + Kalman gain update"
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_ukff <- morie_ukfF
