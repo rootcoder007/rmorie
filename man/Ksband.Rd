@@ -14,3 +14,7 @@ KS confidence band -- Sec. 4.4.2, p. 121
 A list with \code{at}, \code{edf}, \code{lower}, \code{upper}, \code{width}, \code{dcrit}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+Ksband(rnorm(25), dcrit = 0.264)
+}

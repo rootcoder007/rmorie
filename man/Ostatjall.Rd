@@ -14,3 +14,6 @@ Joint density of all n order statistics -- Sec. 2.2, p. 31
 A list with \code{pdf}, \code{coef}, \code{prod}, \code{ordered}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Ostatjall(x = c(-1.2, -0.3, 0.4, 1.1), pdf = dnorm)
+}

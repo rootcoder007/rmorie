@@ -14,3 +14,7 @@ KS statistics via the PIT -- Theorem 4.3.1, p. 111
 A list with \code{statistic}, \code{dplus}, \code{dminus}, \code{z}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+Ksdistfree(rnorm(25), cdf = pnorm)
+}

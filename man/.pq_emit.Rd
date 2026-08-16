@@ -27,3 +27,8 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+w <- .pq_writer()
+.pq_emit(w, as.raw(c(0x01, 0x02)))
+w$buf
+}

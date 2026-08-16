@@ -14,3 +14,7 @@ Joint density of X_(r), X_(s) -- Sec. 2.5, p. 39
 A list with \code{pdf}, \code{coef}, \code{fx}, \code{fy}, \code{r}, \code{s}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Ostatjoint(x = -0.5, y = 0.5, r = 1, s = 3, n = 5,
+           cdf = pnorm, pdf = dnorm)
+}

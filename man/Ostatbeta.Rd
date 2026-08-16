@@ -14,3 +14,6 @@ Uniform order statistic is Beta(r, n-r+1) -- Theorem 2.4.3, p. 38
 A list with \code{pdf}, \code{cdf}, \code{mean}, \code{var}, \code{alpha}, \code{beta}, \code{r}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Ostatbeta(u = 0.3, r = 2, n = 5)
+}

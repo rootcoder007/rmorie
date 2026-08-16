@@ -26,3 +26,9 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+w <- .pq_writer()
+.pq_wbinary(w, charToRaw("hello"))
+r <- .pq_reader(do.call(c, w$parts))
+rawToChar(.pq_binary(r))
+}

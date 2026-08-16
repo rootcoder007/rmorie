@@ -14,3 +14,6 @@ KS sample size for uniform error c -- Sec. 4.4.3, p. 122
 A list with \code{n}, \code{n_asymp}, \code{k_alpha}, \code{coverage}, \code{c}, \code{alpha}.
 }
 \keyword{internal}
+\examples{
+Ksn(c = 0.2, alpha = 0.05)
+}

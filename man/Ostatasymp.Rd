@@ -14,3 +14,6 @@ Asymptotic normality of the sample quantile -- Theorem 2.10.1, p. 60
 A list with \code{mean}, \code{var}, \code{se}, \code{p}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Ostatasymp(p = 0.5, n = 100, xp = 0, fxp = dnorm(0))
+}
