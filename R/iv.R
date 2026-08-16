@@ -185,14 +185,29 @@ morie_iv_tsls <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, cluster = NULL,
                           robust = TRUE, alpha = 0.05) {
   d <- .morie_iv_design(data, outcome, endogenous, instruments, exogenous)
+  cl <- NULL
+  if (!is.null(cluster)) {
+    if (!cluster %in% names(data)) {
+      stop("`cluster` names a column that is not in `data`: ", cluster,
+           ".", call. = FALSE)
+    }
+    # The design drops incomplete rows; the cluster labels must be
+    # dropped with them or they line up with the wrong observations.
+    keep <- stats::complete.cases(
+      data[, unique(c(outcome, endogenous, instruments, exogenous,
+                      cluster)), drop = FALSE])
+    cl <- data[[cluster]][keep]
+  }
   fit <- .morie_iv_kclass_native(d$y, d$X, d$Z, kappa = 1,
-                                 robust = robust)
+                                 robust = robust, cluster = cl)
   .morie_iv_result(fit$beta, fit$se, fit$n,
                    method = "2sls (rmorie native)",
                    alpha = alpha, dof = fit$df,
                    details = list(residuals = fit$residuals,
                                   vcov = fit$vcov,
-                                  se_type = if (robust) "HC1" else "const"))
+                                  se_type = if (!is.null(cl)) "cluster"
+                                            else if (robust) "HC1"
+                                            else "const"))
 }
 
 #' Limited-Information Maximum Likelihood (LIML)
