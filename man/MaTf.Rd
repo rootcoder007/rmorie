@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{MaTf}
+\alias{MaTf}
+\title{Eq (3.99): a polynomial in z^-1 with no poles away from the origin,}
+\usage{
+MaTf(b_k, z, N = NULL)
+}
+\arguments{
+\item{b_k}{See Usage.}
+\item{z}{See Usage.}
+\item{N}{Defaults to \code{NULL}.}
+}
+\description{
+so an FIR filter is stable whatever its coefficients.
+}
+\value{
+A list with \code{H}, \code{z}, \code{b}, \code{N}, \code{dc_gain}, \code{always_stable}, \code{poles_only_at_the_origin}, \code{method}.
+}
+\keyword{internal}

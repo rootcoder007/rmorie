@@ -32,6 +32,16 @@
   m
 }
 
+#' morie_gsageemd_aggregate
+#'
+#' Part of the gsageemd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param vectors See Usage.
+#' @param how Defaults to \code{"mean"}.
+#' @param W Defaults to \code{NULL}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
   if (!(how %in% .GSAGEEMD_AGGS))
     stop(paste0("gsageemd: aggregator must be one of ",

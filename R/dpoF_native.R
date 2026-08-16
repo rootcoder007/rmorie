@@ -51,6 +51,22 @@
   return(v)
 }
 
+#' morie_dpoF
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param logp_w Defaults to \code{NULL}.
+#' @param logp_l Defaults to \code{NULL}.
+#' @param logp_ref_w Defaults to \code{NULL}.
+#' @param logp_ref_l Defaults to \code{NULL}.
+#' @param beta Defaults to \code{0.1}.
+#' @param model Defaults to \code{"bradley-terry"}.
+#' @param logp Defaults to \code{NULL}.
+#' @param logp_ref Defaults to \code{NULL}.
+#' @param label_smoothing Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{reward_w}, \code{reward_l}, \code{margin}, \code{grad_weight}, \code{accuracy}, \code{beta}, \code{n}, \code{model}, \code{method}.
+#' @export
 morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
                        logp_ref_w = NULL, logp_ref_l = NULL,
                        beta = 0.1, model = "bradley-terry",
@@ -178,6 +194,16 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
   ))
 }
 
+#' optimal_policy
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param logp_ref See Usage.
+#' @param reward See Usage.
+#' @param beta See Usage.
+#' @return The value of \code{list}.
+#' @export
 optimal_policy <- function(logp_ref, reward, beta) {
   lr <- .dpoF_vec(logp_ref, "logp_ref")
   rr <- .dpoF_vec(reward, "reward")

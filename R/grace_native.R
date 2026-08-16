@@ -171,28 +171,94 @@
         "symmetrically. Fully unsupervised.", collapse = "")
 }
 
+#' morie_drop_edges
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param p See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{.grace_drop_edges}.
+#' @export
 morie_drop_edges <- function(edges, p, rng) {
   .grace_drop_edges(edges, p, rng)
 }
 
+#' morie_mask_features
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param p See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{.grace_mask_features}.
+#' @export
 morie_mask_features <- function(X, p, rng) {
   .grace_mask_features(X, p, rng)
 }
 
+#' morie_generate_view
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param edges See Usage.
+#' @param p_edge See Usage.
+#' @param p_feature See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{.grace_generate_view}.
+#' @export
 morie_generate_view <- function(X, edges, p_edge, p_feature, rng) {
   .grace_generate_view(X, edges, p_edge, p_feature, rng)
 }
 
+#' morie_pair_loss
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param U See Usage.
+#' @param V See Usage.
+#' @param i See Usage.
+#' @param tau Defaults to \code{0.5}.
+#' @param intra Defaults to \code{TRUE}.
+#' @return The value of \code{.grace_pair_loss}.
+#' @export
 morie_pair_loss <- function(U, V, i, tau = 0.5, intra = TRUE) {
   U <- as.matrix(U)
   V <- as.matrix(V)
   .grace_pair_loss(U, V, i, tau, intra)
 }
 
+#' morie_grace
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param U See Usage.
+#' @param V See Usage.
+#' @param tau Defaults to \code{0.5}.
+#' @param intra Defaults to \code{TRUE}.
+#' @return The value of \code{.grace_objective}.
+#' @export
 morie_grace <- function(U, V, tau = 0.5, intra = TRUE) {
   .grace_objective(U, V, tau, intra)
 }
 
+#' morie_graphcontrastive
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param U See Usage.
+#' @param V See Usage.
+#' @param tau Defaults to \code{0.5}.
+#' @param intra Defaults to \code{TRUE}.
+#' @return The value of \code{.grace_objective}.
+#' @export
 morie_graphcontrastive <- function(U, V, tau = 0.5, intra = TRUE) {
   .grace_objective(U, V, tau, intra)
 }

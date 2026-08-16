@@ -25,6 +25,22 @@
 # same influence-curve diagnostic, and the same selection-criterion
 # anchors.
 
+#' morie_tlctmle
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param W See Usage.
+#' @param g_models See Usage.
+#' @param V Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @param penalty Defaults to \code{TRUE}.
+#' @return The value of \code{ctmle}.
+#' @export
 morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
                           seed = 0L, penalty = TRUE) {
   ctmle(A, Y, Q1, Q0, W, g_models, V = V, seed = seed,
@@ -60,6 +76,15 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
          .ctmle_expit(off[j] + e * h[j]), numeric(1)))
 }
 
+#' targeted_loss
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q_star See Usage.
+#' @param Y See Usage.
+#' @return A numeric value.
+#' @export
 targeted_loss <- function(Q_star, Y) {
   q <- as.numeric(Q_star)
   y <- as.numeric(Y)
@@ -72,6 +97,16 @@ targeted_loss <- function(Q_star, Y) {
   tot / n
 }
 
+#' candidate_sequence
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param g_models See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 candidate_sequence <- function(A, W, g_models) {
   a <- as.numeric(A)
   rows <- as.matrix(W)
@@ -113,6 +148,15 @@ candidate_sequence <- function(A, W, g_models) {
   out
 }
 
+#' instrument_penalty
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param g_small See Usage.
+#' @param g_large See Usage.
+#' @return A list with \code{small}, \code{large}, \code{ratio}, \code{note}.
+#' @export
 instrument_penalty <- function(g_small, g_large) {
   gs <- as.numeric(g_small); gl <- as.numeric(g_large)
   a <- max(max(1 / gs), max(1 / (1 - gs)))
@@ -121,6 +165,22 @@ instrument_penalty <- function(g_small, g_large) {
        note = "a pure instrument raises this without removing any bias")
 }
 
+#' ctmle
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param W See Usage.
+#' @param g_models See Usage.
+#' @param V Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @param penalty Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{psi}, \code{selected}, \code{selected_covariates}, \code{cv_risks}, \code{cv_losses}, \code{variance_penalties}, \code{penalized}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method}, \code{note}.
+#' @export
 ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
                   penalty = TRUE) {
   a <- as.numeric(A)

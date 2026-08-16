@@ -16,6 +16,17 @@
   out
 }
 
+#' morie_randIE_mediator_distribution
+#'
+#' Part of the randIE_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param M See Usage.
+#' @param C Defaults to \code{NULL}.
+#' @param laplace Defaults to \code{0}.
+#' @return A list with \code{p}, \code{levels}, \code{strata}, \code{arms}, \code{n}.
+#' @export
 morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
   a <- .labels(A, "A"); m <- .labels(M, "M"); n <- length(a)
   if (length(m) != n)
@@ -52,6 +63,21 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
        n = n)
 }
 
+#' morie_randIE_interventional_mean
+#'
+#' Part of the randIE_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param M See Usage.
+#' @param C Defaults to \code{NULL}.
+#' @param a Defaults to \code{"1"}.
+#' @param a.star Defaults to \code{"0"}.
+#' @param route Defaults to \code{"gformula"}.
+#' @param laplace Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{a}, \code{a.star}, \code{route}, \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
+#' @export
 morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
                                              a.star = "0",
                                              route = "gformula",
@@ -136,6 +162,21 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
        note = "psi(a, a) is not the observed arm mean unless the mediator is degenerate: drawing M from p(m|a,c) breaks the individual-level M-Y dependence")
 }
 
+#' morie_randIE_randomized_interventional_effect
+#'
+#' Part of the randIE_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param M See Usage.
+#' @param C Defaults to \code{NULL}.
+#' @param treated Defaults to \code{"1"}.
+#' @param control Defaults to \code{"0"}.
+#' @param route Defaults to \code{"gformula"}.
+#' @param laplace Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{total}, \code{direct}, \code{indirect}, \code{direct.control.arm}, \code{psi}, \code{route}, \code{treated}, \code{control}, \code{identity}, \code{method}.
+#' @export
 morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
                                                          treated = "1",
                                                          control = "0",
@@ -158,6 +199,14 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
        method = "randomized interventional direct/indirect effects, Didelez, Dawid & Geneletti (2006) Secs. 3-4")
 }
 
+#' morie_randIE_decompose
+#'
+#' Part of the randIE_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param result See Usage.
+#' @return A list with \code{total}, \code{direct}, \code{indirect}, \code{residual}, \code{proportion.mediated}.
+#' @export
 morie_randIE_decompose <- function(result) {
   tot <- result$total; d <- result$direct; i <- result$indirect
   list(total = tot, direct = d, indirect = i,

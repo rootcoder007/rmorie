@@ -15,6 +15,14 @@ FAIL <- NA_integer_
   fn(text, pos, ctx)
 }
 
+#' morie_prsPEG_lit
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return The value of \code{fn}, as built in the body.
+#' @export
 morie_prsPEG_lit <- function(s) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -24,6 +32,14 @@ morie_prsPEG_lit <- function(s) {
   fn
 }
 
+#' morie_prsPEG_seq
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{fn}, as built in the body.
+#' @export
 morie_prsPEG_seq <- function(...) {
   es <- list(...)
   fn <- function(text, pos, ctx) {
@@ -39,6 +55,14 @@ morie_prsPEG_seq <- function(...) {
   fn
 }
 
+#' morie_prsPEG_choice
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{fn}, as built in the body.
+#' @export
 morie_prsPEG_choice <- function(...) {
   es <- list(...)
   fn <- function(text, pos, ctx) {
@@ -53,6 +77,14 @@ morie_prsPEG_choice <- function(...) {
   fn
 }
 
+#' morie_prsPEG_star
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{fn}, as built in the body.
+#' @export
 morie_prsPEG_star <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -67,10 +99,34 @@ morie_prsPEG_star <- function(e) {
   fn
 }
 
+#' morie_prsPEG_plus
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{morie_prsPEG_seq}.
+#' @export
 morie_prsPEG_plus <- function(e) morie_prsPEG_seq(e, morie_prsPEG_star(e))
 
+#' morie_prsPEG_opt
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{morie_prsPEG_choice}.
+#' @export
 morie_prsPEG_opt <- function(e) morie_prsPEG_choice(e, morie_prsPEG_lit(""))
 
+#' morie_prsPEG_and_
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{fn}, as built in the body.
+#' @export
 morie_prsPEG_and_ <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -80,6 +136,14 @@ morie_prsPEG_and_ <- function(e) {
   fn
 }
 
+#' morie_prsPEG_not_
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{fn}, as built in the body.
+#' @export
 morie_prsPEG_not_ <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -89,6 +153,16 @@ morie_prsPEG_not_ <- function(e) {
   fn
 }
 
+#' morie_prsPEG_parse
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param expr See Usage.
+#' @param text See Usage.
+#' @param full Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{consumed}, \code{steps}, \code{memoised}, \code{method}, \code{note}.
+#' @export
 morie_prsPEG_parse <- function(expr, text, full = TRUE) {
   ctx <- list(steps = 0L, memo = NULL)
   end <- expr(as.character(text), 0L, ctx)
@@ -100,6 +174,16 @@ morie_prsPEG_parse <- function(expr, text, full = TRUE) {
        note = "prioritised choice, so there is at most ONE parse")
 }
 
+#' morie_prsPEG_packrat_parse
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param expr See Usage.
+#' @param text See Usage.
+#' @param full Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{steps}, \code{memo.entries}, \code{memoised}, \code{method}.
+#' @export
 morie_prsPEG_packrat_parse <- function(expr, text, full = TRUE) {
   memo <- new.env(parent = emptyenv())
   ctx <- list(steps = 0L, memo = memo)

@@ -84,6 +84,15 @@
   list(as.integer(x))
 }
 
+#' merge_panels
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param panels See Usage.
+#' @param study_snps See Usage.
+#' @return A list with \code{scaffold}, \code{targets}, \code{union}, \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain}, \code{note}.
+#' @export
 merge_panels <- function(panels, study_snps) {
   if (length(panels) == 0L) {
     stop("impfun: no reference panels given")
@@ -122,6 +131,17 @@ merge_panels <- function(panels, study_snps) {
   )
 }
 
+#' copying_model
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param study_hap See Usage.
+#' @param reference_haps See Usage.
+#' @param rho Defaults to \code{0.001}.
+#' @param theta Defaults to \code{0.01}.
+#' @return A list with \code{posterior}, \code{n_templates}, \code{n_sites}, \code{log_likelihood}.
+#' @export
 copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) {
   h <- as.integer(study_hap)
   R_list <- .impfun_as_int_list(reference_haps)
@@ -174,6 +194,16 @@ copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
   )
 }
 
+#' impute_dosage
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param posterior See Usage.
+#' @param reference_haps See Usage.
+#' @param site See Usage.
+#' @return A list with \code{dosage}, \code{allele_freq}, \code{certainty}, \code{note}.
+#' @export
 impute_dosage <- function(posterior, reference_haps, site) {
   P <- .impfun_as_double_matrix(posterior)
   R_mat <- .impfun_as_double_matrix(reference_haps)
@@ -193,6 +223,14 @@ impute_dosage <- function(posterior, reference_haps, site) {
   )
 }
 
+#' info_score
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dosages See Usage.
+#' @return A list with \code{info}, \code{theta}, \code{note}.
+#' @export
 info_score <- function(dosages) {
   d <- .impfun_as_double_vec(dosages)
   n <- length(d)
@@ -218,6 +256,15 @@ info_score <- function(dosages) {
   )
 }
 
+#' concordance
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param imputed See Usage.
+#' @param truth See Usage.
+#' @return A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error}, \code{n}, \code{method}.
+#' @export
 concordance <- function(imputed, truth) {
   a <- .impfun_as_double_vec(imputed)
   b <- .impfun_as_double_vec(truth)

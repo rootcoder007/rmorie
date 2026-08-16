@@ -262,6 +262,18 @@
 
 # ---- main entry point: morie_<module> -------------------------------------
 
+#' morie_tl1step
+#'
+#' Part of the tl1step_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q See Usage.
+#' @param H_fn See Usage.
+#' @param Y See Usage.
+#' @param eps_max Defaults to \code{3}.
+#' @param steps Defaults to \code{600}.
+#' @return The value of \code{.tl1step_one_step_tmle}.
+#' @export
 morie_tl1step <- function(Q, H_fn, Y, eps_max = 3.0, steps = 600) {
   .tl1step_one_step_tmle(Q, H_fn, Y, eps_max, steps)
 }

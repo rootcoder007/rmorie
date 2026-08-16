@@ -1,0 +1,22 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{MantelZ}
+\alias{MantelZ}
+\title{Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states}
+\usage{
+MantelZ(coords, x, w, u = NULL)
+}
+\arguments{
+\item{coords}{See Usage.}
+\item{x}{See Usage.}
+\item{w}{See Usage.}
+\item{u}{Defaults to \code{NULL}.}
+}
+\description{
+the approach but does not print Eg[M2] or Varg[M2]; both are derived from the quadratic-form moments and are stated in the Python docstring.  Only the SYMMETRIC part of W contributes.
+}
+\value{
+A list with \code{m2}, \code{expectation}, \code{variance}, \code{z}, \code{p_value}, \code{sigma2}, \code{n}, \code{gaussian_moments_apply}, \code{method}.
+}
+\keyword{internal}

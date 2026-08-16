@@ -1,0 +1,19 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{IdftRI}
+\alias{IdftRI}
+\title{Eq (3.86): synthesis as a weighted sum of sinusoids.  The imaginary}
+\usage{
+IdftRI(X)
+}
+\arguments{
+\item{X}{See Usage.}
+}
+\description{
+residue is reported, not discarded -- a large one means the spectrum was not conjugate-symmetric and the "real signal" reading is wrong.
+}
+\value{
+A list with \code{x}, \code{complex}, \code{n}, \code{max_imaginary}, \code{method}.
+}
+\keyword{internal}

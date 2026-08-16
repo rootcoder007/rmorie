@@ -57,6 +57,21 @@
 .inlasm_EPS <- 1e-12
 .MAX_HYPER <- 6
 
+#' gaussian_approximation
+#'
+#' Part of the inlasm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param log_lik See Usage.
+#' @param log_lik_d1 See Usage.
+#' @param log_lik_d2 See Usage.
+#' @param prior_mean See Usage.
+#' @param prior_precision See Usage.
+#' @param x0 Defaults to \code{0}.
+#' @param iters Defaults to \code{60}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{mode}, \code{precision}, \code{sd}, \code{iterations}, \code{log_norm}, \code{note}.
+#' @export
 gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
                                     prior_mean, prior_precision,
                                     x0 = 0.0, iters = 60, tol = 1e-12) {
@@ -90,6 +105,15 @@ gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
   )
 }
 
+#' skewness_correction
+#'
+#' Part of the inlasm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param third_derivative See Usage.
+#' @param precision See Usage.
+#' @return A list with \code{skewness}, \code{gaussian_adequate}, \code{note}.
+#' @export
 skewness_correction <- function(third_derivative, precision) {
   d3 <- as.numeric(third_derivative)
   prec <- as.numeric(precision)
@@ -103,6 +127,16 @@ skewness_correction <- function(third_derivative, precision) {
   )
 }
 
+#' laplace_marginal
+#'
+#' Part of the inlasm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param log_joint See Usage.
+#' @param x_grid See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{x}, \code{density}, \code{mean}, \code{sd}, \code{log_scale}.
+#' @export
 laplace_marginal <- function(log_joint, x_grid, theta) {
   xs <- as.numeric(x_grid)
   if (length(xs) < 2L) {
@@ -139,6 +173,17 @@ laplace_marginal <- function(log_joint, x_grid, theta) {
   )
 }
 
+#' hyperparameter_design
+#'
+#' Part of the inlasm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mode See Usage.
+#' @param curvature See Usage.
+#' @param step Defaults to \code{1}.
+#' @param dim Defaults to \code{NULL}.
+#' @return A list with \code{points}, \code{n_points}, \code{dim}, \code{cost_scaling}, \code{note}.
+#' @export
 hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
   m <- as.numeric(mode)
   d <- if (is.null(dim)) length(m) else as.integer(dim)
@@ -170,6 +215,16 @@ hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
   )
 }
 
+#' integrate_marginals
+#'
+#' Part of the inlasm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param conditional_marginals See Usage.
+#' @param log_weights See Usage.
+#' @param x_grid See Usage.
+#' @return A list with \code{estimate}, \code{mean}, \code{sd}, \code{density}, \code{x}, \code{theta_weights}, \code{n_theta}, \code{method}, \code{note}.
+#' @export
 integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
   M <- lapply(conditional_marginals, function(row) as.numeric(row))
   lw <- as.numeric(log_weights)

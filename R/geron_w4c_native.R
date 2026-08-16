@@ -668,6 +668,15 @@ morie_geron_onnx_export <- function(model, args, file = NULL) {
 }
 # ponytail: no jsonlite dependency declared for this package; write() only when a file path is
 # actually given, and fall back to a minimal deparse so the optional side effect never hard-fails.
+#' Ponytail: no jsonlite dependency declared for this package; write()
+#' only when a file path is
+#'
+#' actually given, and fall back to a minimal deparse so the optional
+#' side effect never hard-fails.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 jsonlite_toJSON_or_stub <- function(x) {
   if (requireNamespace("jsonlite", quietly = TRUE)) {
     .s03json_toJSON(x, auto_unbox = TRUE, pretty = TRUE)

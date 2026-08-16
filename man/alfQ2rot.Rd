@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{alfQ2rot}
+\alias{alfQ2rot}
+\title{Non-unit quaternion (1, b, c, d) to a rotation matrix -- Algorithm 23}
+\usage{
+alfQ2rot(b, c, d)
+}
+\arguments{
+\item{b}{See Usage.}
+\item{c}{See Usage.}
+\item{d}{See Usage.}
+}
+\description{
+lines 2-3.  Fixing the leading component to 1 before normalisation both guarantees a unit quaternion and makes zero input the identity rotation.
+}
+\value{
+A matrix, from \code{matrix}.
+}
+\keyword{internal}

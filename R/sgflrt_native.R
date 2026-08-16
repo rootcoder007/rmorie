@@ -192,6 +192,26 @@
   0.5 * (a + b)
 }
 
+#' morie_sgflrt_spatial_glmm_fit
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param coords See Usage.
+#' @param family Defaults to \code{"poisson"}.
+#' @param model Defaults to \code{"exponential"}.
+#' @param sigma2 Defaults to \code{NULL}.
+#' @param phi Defaults to \code{NULL}.
+#' @param kappa Defaults to \code{1.5}.
+#' @param nugget Defaults to \code{0}.
+#' @param dispersion Defaults to \code{NULL}.
+#' @param inner_iter Defaults to \code{50L}.
+#' @param outer_cycles Defaults to \code{3L}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z}, \code{spatial_effect}, \code{fitted}, \code{linear_predictor}, \code{sigma2}, \code{phi}, \code{dispersion}, \code{sigma2_at_lower_bound}, \code{spatial_signal}, \code{kappa}, \code{nugget}, \code{loglik}, \code{laplace_loglik}, \code{gls_identity_gap}, \code{covariance}, \code{family}, \code{model}, \code{n}, \code{p}, \code{d}, \code{min_distance}, \code{max_distance}, \code{method}, \code{note}.
+#' @export
 morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
                                           model = "exponential",
                                           sigma2 = NULL, phi = NULL,

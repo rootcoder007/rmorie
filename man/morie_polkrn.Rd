@@ -1,0 +1,44 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_polkrn}
+\alias{morie_polkrn}
+\title{morie_polkrn}
+\usage{
+morie_polkrn(y, A_history, H_history, degree = 2, basis = "both", summary = "cumulative", n_centres = 5, width = NULL, kind = "binary", stabilize = TRUE, trim = NULL, grid = NULL)
+}
+\arguments{
+\item{y}{See Usage.}
+\item{A_history}{See Usage.}
+\item{H_history}{See Usage.}
+\item{degree}{Defaults to \code{2}.}
+\item{basis}{Defaults to \code{"both"}.}
+\item{summary}{Defaults to \code{"cumulative"}.}
+\item{n_centres}{Defaults to \code{5}.}
+\item{width}{Defaults to \code{NULL}.}
+\item{kind}{Defaults to \code{"binary"}.}
+\item{stabilize}{Defaults to \code{TRUE}.}
+\item{trim}{Defaults to \code{NULL}.}
+\item{grid}{Defaults to \code{NULL}.}
+}
+\description{
+Part of the polkrn_native implementation; see the file header for the source it follows.
+}
+\value{
+The value of \code{out}, as built in the body.
+}
+\references{
+----------
+Hernan, M. A., Brumback, B. & Robins, J. M. (2002) "Estimating the
+causal effect of zidovudine on CD4 count with a marginal structural
+model for repeated measures", Statistics in Medicine 21(12),
+1689-1709, doi:10.1002/sim.1144.
+
+Robins, J. M., Hernan, M. A. & Brumback, B. (2000) "Marginal structural
+models and causal inference in epidemiology", Epidemiology 11(5),
+550-560, doi:10.1097/00001648-200009000-00011 -- the weights.
+
+Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
+Chapman & Hall/CRC, Sec. 21.2.
+}
+\keyword{internal}

@@ -34,6 +34,17 @@
   return(0.5 * (lo + hi))
 }
 
+#' morie_vcomp
+#'
+#' Part of the vcomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param group See Usage.
+#' @param method Defaults to \code{"reml"}.
+#' @param conf_level Defaults to \code{0.95}.
+#' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{icc}, \code{icc_lower}, \code{icc_upper}, \code{method_used}, \code{balanced}, \code{a}, \code{N}, \code{fit}, \code{method}.
+#' @export
 morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
   if (!(method %in% c("reml", "anova"))) {
     stop("method must be 'reml' or 'anova'")

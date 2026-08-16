@@ -232,6 +232,14 @@ morie_attrInf <- function(tree, targets, priors,
   node[["label"]]
 }
 
+#' tree_paths
+#'
+#' Part of the attrInf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 tree_paths <- function(tree) {
   out <- list()
   walk <- function(node, cons) {
@@ -264,6 +272,15 @@ tree_paths <- function(tree) {
   out
 }
 
+#' confusion_error
+#'
+#' Part of the attrInf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param C See Usage.
+#' @param labels Defaults to \code{NULL}.
+#' @return The value of \code{err}, as built in the body.
+#' @export
 confusion_error <- function(C, labels = NULL) {
   if (is.matrix(C)) {
     if (nrow(C) == 0L || ncol(C) == 0L)
@@ -304,6 +321,20 @@ confusion_error <- function(C, labels = NULL) {
   err
 }
 
+#' map_invert
+#'
+#' Part of the attrInf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param model See Usage.
+#' @param y See Usage.
+#' @param known See Usage.
+#' @param candidates See Usage.
+#' @param err See Usage.
+#' @param priors See Usage.
+#' @param sensitive Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{scores}.
+#' @export
 map_invert <- function(model, y, known, candidates, err, priors,
                        sensitive = 0L) {
   if (length(candidates) == 0L)
@@ -328,6 +359,19 @@ map_invert <- function(model, y, known, candidates, err, priors,
   list(estimate = best, scores = scores)
 }
 
+#' wbwc_invert
+#'
+#' Part of the attrInf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tree See Usage.
+#' @param known See Usage.
+#' @param candidates See Usage.
+#' @param priors See Usage.
+#' @param sensitive Defaults to \code{0L}.
+#' @param unknown Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{scores}, \code{n_paths}, \code{N}.
+#' @export
 wbwc_invert <- function(tree, known, candidates, priors,
                         sensitive = 0L, unknown = NULL) {
   if (length(candidates) == 0L)

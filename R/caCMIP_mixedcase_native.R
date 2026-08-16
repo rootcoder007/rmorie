@@ -13,6 +13,18 @@
   sqrt(sum((as.numeric(a) - as.numeric(b))^2) / n)
 }
 
+#' caCMIP
+#'
+#' Part of the caCMIP_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param models See Usage.
+#' @param obs See Usage.
+#' @param sigma_d See Usage.
+#' @param sigma_s See Usage.
+#' @param projections Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{weights}, \code{unweighted_mean}, \code{d}, \code{n_models}, \code{effective_n}, \code{method}.
+#' @export
 caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
   mods <- lapply(models, function(m) as.numeric(m))
   ob <- as.numeric(obs)
@@ -62,6 +74,15 @@ caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
        method = "Knutti et al. (2017) Eq. 1 weighting")
 }
 
+#' cmip_ensemble
+#'
+#' Part of the caCMIP_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param models See Usage.
+#' @param weights See Usage.
+#' @return A list with \code{estimate}, \code{n}, \code{method}.
+#' @export
 cmip_ensemble <- function(models, weights) {
   mods <- as.numeric(models)
   ws <- as.numeric(weights)
@@ -79,6 +100,13 @@ cmipensemble <- cmip_ensemble
 
 morie_caCMIP <- caCMIP
 
+#' caCMIP_cheatsheet
+#'
+#' Part of the caCMIP_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @return A character value.
+#' @export
 caCMIP_cheatsheet <- function() {
   "caCMIP: Knutti 2017 performance+independence CMIP weighting"
 }

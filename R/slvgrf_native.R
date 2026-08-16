@@ -33,6 +33,18 @@
   list(g = g, s = s)
 }
 
+#' aipw_scores
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param W See Usage.
+#' @param mu1 See Usage.
+#' @param mu0 See Usage.
+#' @param e See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 aipw_scores <- function(Y, W, mu1, mu0, e) {
   y <- as.numeric(Y)
   w <- as.numeric(W)
@@ -65,6 +77,15 @@ aipw_scores <- function(Y, W, mu1, mu0, e) {
   as.numeric(out)
 }
 
+#' toc_curve
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param priority See Usage.
+#' @return A list with \code{u}, \code{toc}, \code{ate}, \code{order}, \code{n}.
+#' @export
 toc_curve <- function(scores, priority) {
   chk <- .slvgrf_check(scores, priority)
   g <- chk$g; s <- chk$s
@@ -84,6 +105,16 @@ toc_curve <- function(scores, priority) {
        n = as.integer(n))
 }
 
+#' rate
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param priority See Usage.
+#' @param weight Defaults to \code{"autoc"}.
+#' @return A list with \code{estimate}, \code{weight}, \code{curve}, \code{n}.
+#' @export
 rate <- function(scores, priority, weight = "autoc") {
   if (!(weight %in% .SLVGRF_WEIGHTS))
     stop(sprintf("slvgrf: weight must be one of %s, got %r",
@@ -98,14 +129,42 @@ rate <- function(scores, priority, weight = "autoc") {
   list(estimate = val, weight = weight, curve = c, n = n)
 }
 
+#' autoc
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param priority See Usage.
+#' @return The value of \code{$}.
+#' @export
 autoc <- function(scores, priority) {
   rate(scores, priority, weight = "autoc")$estimate
 }
 
+#' qini_coefficient
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param priority See Usage.
+#' @return The value of \code{$}.
+#' @export
 qini_coefficient <- function(scores, priority) {
   rate(scores, priority, weight = "qini")$estimate
 }
 
+#' qini_curve
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param priority See Usage.
+#' @param cost Defaults to \code{NULL}.
+#' @return A list with \code{spend}, \code{gain}, \code{ate}, \code{n}, \code{constrained}.
+#' @export
 qini_curve <- function(scores, priority, cost = NULL) {
   chk <- .slvgrf_check(scores, priority)
   g <- chk$g; s <- chk$s
@@ -137,6 +196,18 @@ qini_curve <- function(scores, priority, cost = NULL) {
        constrained = !is.null(cost))
 }
 
+#' rate_test
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param priority See Usage.
+#' @param weight Defaults to \code{"autoc"}.
+#' @param reps Defaults to \code{500}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{weight}, \code{reps}, \code{n}, \code{null}, \code{method}.
+#' @export
 rate_test <- function(scores, priority, weight = "autoc", reps = 500,
                       seed = 0) {
   chk <- .slvgrf_check(scores, priority)

@@ -1,20 +1,25 @@
-% Generated from the module source by ledger/gen_rd.R -- roxygen2 hangs
-% on this package. Usage comes from args(), so it tracks the formals.
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
 \name{morie_fgam_functional_gam}
 \alias{morie_fgam_functional_gam}
-\alias{morie_fgam}
-\title{The functional generalized additive model}
+\title{morie_fgam_functional_gam}
 \usage{
 morie_fgam_functional_gam(X, Y, basis = NULL, n_x = 6, n_t = 6, lam_x = 1, lam_t = 1)
 }
+\arguments{
+\item{X}{See Usage.}
+\item{Y}{See Usage.}
+\item{basis}{Defaults to \code{NULL}.}
+\item{n_x}{Defaults to \code{6}.}
+\item{n_t}{Defaults to \code{6}.}
+\item{lam_x}{Defaults to \code{1}.}
+\item{lam_t}{Defaults to \code{1}.}
+}
 \description{
-R arm of fgam -- the functional generalized additive model   E[Y|X] = theta0 + int F(X(t), t) dt with F a tensor product of cubic B-splines and separate second-difference penalties in the level and time directions. "Functional generalized additive models", Journal of Computational and two arms agree basis function by basis function rather than only in the fit.
+Part of the fgam_native implementation; see the file header for the source it follows.
 }
 \value{
-A list with components \code{n}, \code{byrow}, \code{estimate}, \code{fitted}, \code{residuals}, \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf}, \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t}, \code{linear_deviation}, \code{method}, \code{note}.
-}
-\references{
-McLean, M. W., Hooker, G., Staicu, A.-M., Scheipl, F. & Ruppert, D. (2014)
-Graphical Statistics 23(1), 249-269, doi:10.1080/10618600.2012.729985.
+A list with \code{estimate}, \code{fitted}, \code{residuals}, \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf}, \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t}, \code{linear_deviation}, \code{n}, \code{method}, \code{note}.
 }
 \keyword{internal}

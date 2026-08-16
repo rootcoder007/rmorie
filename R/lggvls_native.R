@@ -217,11 +217,39 @@
 # ---- public API -------------------------------------------------------
 
 # Covariates at time `k_time` together with `lag` earlier values.
+#' Covariates at time `k_time` together with `lag` earlier values
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L_hist See Usage.
+#' @param Y_hist Defaults to \code{NULL}.
+#' @param k_time Defaults to \code{0}.
+#' @param lag Defaults to \code{1}.
+#' @return The value of \code{.lggvls_lagged_design}.
+#' @export
 lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
   .lggvls_lagged_design(L_hist, Y_hist, k_time, lag)
 }
 
 # IPTW for a sustained exposure, with lagged values in the treatment model.
+#' IPTW for a sustained exposure, with lagged values in the treatment
+#' model
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param lag Defaults to \code{1}.
+#' @param Y_hist Defaults to \code{NULL}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @param kind Defaults to \code{"binary"}.
+#' @param trim Defaults to \code{NULL}.
+#' @param contrast Defaults to \code{"cumulative"}.
+#' @return A list with \code{estimate}, \code{se}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{cumulative_exposure}, \code{per_time}, \code{n_times}, \code{lag}, \code{n}, \code{contrast}, \code{method}.
+#' @export
 morie_lggvls <- function(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE,
                         kind = "binary", trim = NULL,
                         contrast = "cumulative") {

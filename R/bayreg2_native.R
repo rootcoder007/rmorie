@@ -5,6 +5,19 @@
 
 .bayreg2_EPS <- 1e-12
 
+#' morie_bayreg2_student_t_regression
+#'
+#' Part of the bayreg2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param nu Defaults to \code{4}.
+#' @param max_iter Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param add_intercept Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{weights}, \code{residuals}, \code{scale2}, \code{fitted}, \code{iterations}, \code{converged}, \code{nu}, \code{loglik}, \code{n}, \code{p}, \code{method}, \code{note}.
+#' @export
 morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
                                                max_iter = 200, tol = 1e-10,
                                                add_intercept = TRUE) {

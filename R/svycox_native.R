@@ -361,6 +361,20 @@
     ))
 }
 
+#' morie_svycox
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param strata Defaults to \code{NULL}.
+#' @param cluster Defaults to \code{NULL}.
+#' @param ... Passed through.
+#' @return The value of \code{.svycox_svycoxph}.
+#' @export
 morie_svycox <- function(time, event, X, weights = NULL, strata = NULL,
                          cluster = NULL, ...) {
     .svycox_svycoxph(time, event, X, weights = weights, strata = strata,

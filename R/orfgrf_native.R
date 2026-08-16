@@ -143,6 +143,18 @@
 # forest kernel weights alpha_i(x), so the fit is local by
 # construction. exclude drops one index for the leave-one-out
 # residual.
+#' Weighted linear fit of `target` on W near a point. weights are the
+#'
+#' forest kernel weights alpha_i(x), so the fit is local by
+#' construction. exclude drops one index for the leave-one-out residual.
+#'
+#' @param target See Usage.
+#' @param W See Usage.
+#' @param weights See Usage.
+#' @param exclude Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{fit}, \code{coef}.
+#' @export
 local_nuisance <- function(target, W, weights, exclude = NULL,
                           ridge = 1e-8) {
   Wm <- as.matrix(W)
@@ -169,6 +181,15 @@ local_nuisance <- function(target, W, weights, exclude = NULL,
 
 # Solve sum_i alpha_i T~(Y~ - theta T~) = 0. Refuses when the
 # residualized treatment has no weighted variation left.
+#' Solve sum_i alpha_i T~(Y~ - theta T~) = 0. Refuses when the
+#'
+#' residualized treatment has no weighted variation left.
+#'
+#' @param y_res See Usage.
+#' @param t_res See Usage.
+#' @param weights See Usage.
+#' @return A list with \code{theta}, \code{den}.
+#' @export
 orthogonal_moment <- function(y_res, t_res, weights) {
   n <- length(y_res)
   if (length(t_res) != n || length(weights) != n)
@@ -187,6 +208,23 @@ orthogonal_moment <- function(y_res, t_res, weights) {
 # nuisances under the same kernel weights used for the second
 # stage -- the ORF proposal. "global" fits them once on the whole
 # sample, the "local centering" benchmark.
+#' One point estimate theta(x). residualize="local" fits the
+#'
+#' nuisances under the same kernel weights used for the second stage --
+#' the ORF proposal. "global" fits them once on the whole sample, the
+#' "local centering" benchmark.
+#'
+#' @param Y See Usage.
+#' @param T See Usage.
+#' @param X See Usage.
+#' @param W See Usage.
+#' @param x See Usage.
+#' @param trees See Usage.
+#' @param residualize Defaults to \code{"local"}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param leave_one_out Defaults to \code{TRUE}.
+#' @return A list with \code{theta}, \code{den}, \code{w}.
+#' @export
 orf_estimate <- function(Y, T, X, W, x, trees,
                          residualize = "local", ridge = 1e-8,
                          leave_one_out = TRUE) {
@@ -221,6 +259,27 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 }
 
 # ORF for the heterogeneous treatment effect theta_0(x).
+#' ORF for the heterogeneous treatment effect theta_0(x)
+#'
+#' Part of the orfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param T See Usage.
+#' @param X See Usage.
+#' @param W See Usage.
+#' @param x_eval Defaults to \code{NULL}.
+#' @param n_trees Defaults to \code{100}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param max_depth Defaults to \code{12}.
+#' @param seed Defaults to \code{0}.
+#' @param residualize Defaults to \code{"local"}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param leave_one_out Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n}, \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features}, \code{orthogonal}, \code{method}.
+#' @export
 orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                                      n_trees = 100, min_leaf = 5,
                                      alpha = 0.05, max_depth = 12,

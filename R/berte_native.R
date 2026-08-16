@@ -5,6 +5,14 @@
 .berte_EPS <- 1e-12
 .berte_NEG <- -1e9
 
+#' GELU exact using erf; avoid pnorm dependency for portability
+#'
+#' Part of the berte_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 gelu <- function(x) {
   # GELU exact using erf; avoid pnorm dependency for portability
   x <- as.numeric(x)
@@ -21,6 +29,17 @@ gelu <- function(x) {
   }))
 }
 
+#' layer_norm
+#'
+#' Part of the berte_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param gain Defaults to \code{NULL}.
+#' @param bias Defaults to \code{NULL}.
+#' @param eps Defaults to \code{1e-12}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
   x <- as.numeric(x)
   d <- length(x)
@@ -48,6 +67,18 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
   if (is.null(b)) v else v + as.numeric(b)
 }
 
+#' attention_weights
+#'
+#' Part of the berte_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param n_heads See Usage.
+#' @param pad_mask Defaults to \code{NULL}.
+#' @param causal Defaults to \code{FALSE}.
+#' @return The value of \code{heads}, as built in the body.
+#' @export
 attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
   Q <- as.matrix(Q); storage.mode(Q) <- "double"
   K <- as.matrix(K); storage.mode(K) <- "double"
@@ -78,6 +109,19 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
   heads
 }
 
+#' multi_head_attention
+#'
+#' Part of the berte_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @param n_heads See Usage.
+#' @param pad_mask Defaults to \code{NULL}.
+#' @param causal Defaults to \code{FALSE}.
+#' @return A list with \code{out}, \code{weights}.
+#' @export
 multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
                                  causal = FALSE) {
   Q <- as.matrix(Q); storage.mode(Q) <- "double"
@@ -93,6 +137,29 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
   list(out = out, weights = w)
 }
 
+#' encoder_block
+#'
+#' Part of the berte_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Wq See Usage.
+#' @param Wk See Usage.
+#' @param Wv See Usage.
+#' @param Wo See Usage.
+#' @param W1 See Usage.
+#' @param b1 See Usage.
+#' @param W2 See Usage.
+#' @param b2 See Usage.
+#' @param n_heads See Usage.
+#' @param pad_mask Defaults to \code{NULL}.
+#' @param gain1 Defaults to \code{NULL}.
+#' @param bias1 Defaults to \code{NULL}.
+#' @param gain2 Defaults to \code{NULL}.
+#' @param bias2 Defaults to \code{NULL}.
+#' @param pre_norm Defaults to \code{FALSE}.
+#' @return A list with \code{out}, \code{weights}.
+#' @export
 encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
                           pad_mask = NULL, gain1 = NULL, bias1 = NULL,
                           gain2 = NULL, bias2 = NULL, pre_norm = FALSE) {
@@ -123,6 +190,18 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
   list(out = x2, weights = mha$weights)
 }
 
+#' bert_encoder
+#'
+#' Part of the berte_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param blocks See Usage.
+#' @param n_heads See Usage.
+#' @param pad_mask Defaults to \code{NULL}.
+#' @param pre_norm Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{output}, \code{attention}, \code{pooled}, \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm}, \code{bidirectional}, \code{method}.
+#' @export
 bert_encoder <- function(X, blocks, n_heads, pad_mask = NULL,
                          pre_norm = FALSE) {
   cur <- as.matrix(X); storage.mode(cur) <- "double"

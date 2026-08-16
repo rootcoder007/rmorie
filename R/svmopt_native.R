@@ -27,6 +27,18 @@
 .SVMOPT_EPS <- 1e-12
 .SVMOPT_TAU <- 1e-12
 
+#' kernel_matrix
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param kernel Defaults to \code{"linear"}.
+#' @param gamma Defaults to \code{1}.
+#' @param degree Defaults to \code{3}.
+#' @param coef0 Defaults to \code{0}.
+#' @return The value of \code{K}, as built in the body.
+#' @export
 kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
                           coef0 = 0.0) {
   M <- as.matrix(X)
@@ -51,6 +63,16 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
   K
 }
 
+#' dual_objective
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param K See Usage.
+#' @return A numeric value.
+#' @export
 dual_objective <- function(alpha, y, K) {
   a <- as.numeric(alpha); yy <- as.numeric(y)
   n <- length(a)
@@ -73,6 +95,20 @@ dual_objective <- function(alpha, y, K) {
   list(L = L, H = Hh)
 }
 
+#' solve_pair
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param i See Usage.
+#' @param j See Usage.
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param K See Usage.
+#' @param grad See Usage.
+#' @param C See Usage.
+#' @return A list with \code{alpha}, \code{moved}, \code{clipped}, \code{L}, \code{H}, \code{eta}, \code{step}.
+#' @export
 solve_pair <- function(i, j, alpha, y, K, grad, C) {
   a <- as.numeric(alpha)
   if (i == j)
@@ -99,6 +135,17 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
        L = L, H = Hh, eta = eta, step = step)
 }
 
+#' kkt_violation
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param grad See Usage.
+#' @param C See Usage.
+#' @return A list with \code{gap}, \code{i}, \code{j}, \code{n_up}, \code{n_low}.
+#' @export
 kkt_violation <- function(alpha, y, grad, C) {
   a <- as.numeric(alpha); yy <- as.numeric(y)
   up <- integer(0); low <- integer(0)
@@ -117,6 +164,17 @@ kkt_violation <- function(alpha, y, grad, C) {
        i = i, j = j, n_up = length(up), n_low = length(low))
 }
 
+#' recover_bias
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param grad See Usage.
+#' @param C See Usage.
+#' @return A list with \code{b}, \code{n_free}, \code{bracketed}, \code{note}.
+#' @export
 recover_bias <- function(alpha, y, grad, C) {
   a <- as.numeric(alpha); yy <- as.numeric(y)
   free <- which(a > .SVMOPT_EPS & a < C - .SVMOPT_EPS)
@@ -133,6 +191,18 @@ recover_bias <- function(alpha, y, grad, C) {
        note = "no free support vector, so b is only bracketed")
 }
 
+#' smo
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param K See Usage.
+#' @param C Defaults to \code{1}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param max_iter Defaults to \code{20000}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{gap}, \code{iterations}, \code{converged}, \code{support_vectors}, \code{n_sv}, \code{n_free}, \code{equality_residual}, \code{objective}, \code{method}, \code{note}.
+#' @export
 smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
   yy <- as.numeric(y)
   n <- length(yy)

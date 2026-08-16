@@ -98,6 +98,24 @@
   exp(logt)
 }
 
+#' morie_alfesf_esmfold_confidence
+#'
+#' Part of the alfesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lddt_logits Defaults to \code{NULL}.
+#' @param pae_logits Defaults to \code{NULL}.
+#' @param features Defaults to \code{NULL}.
+#' @param weights Defaults to \code{NULL}.
+#' @param lddt Defaults to \code{NULL}.
+#' @param chain_id Defaults to \code{NULL}.
+#' @param temperature Defaults to \code{1}.
+#' @param l2 Defaults to \code{0.001}.
+#' @param iters Defaults to \code{300L}.
+#' @param lr Defaults to \code{0.5}.
+#' @param pae_bin_width Defaults to \code{0.5}.
+#' @return A list with \code{estimate}, \code{plddt}, \code{plddt_mean}, \code{ptm}, \code{iptm}, \code{pae}, \code{d0}, \code{temperature}, \code{weights}, \code{route}, \code{n_lddt_bins}, \code{n_pae_bins}, \code{method}, \code{note}.
+#' @export
 morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
                                             pae_logits = NULL,
                                             features = NULL, weights = NULL,

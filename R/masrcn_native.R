@@ -42,6 +42,17 @@
   }
 }
 
+#' roi_pool
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param features See Usage.
+#' @param box See Usage.
+#' @param out_size Defaults to \code{2L}.
+#' @param stride Defaults to \code{1}.
+#' @return A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift}, \code{caveat}.
+#' @export
 roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
   F <- .masrcn_mat(features)
   y0 <- as.numeric(box[1L]) / as.numeric(stride)
@@ -79,6 +90,18 @@ roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
        caveat = "the box AND the bins are rounded to the feature grid")
 }
 
+#' roi_align
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param features See Usage.
+#' @param box See Usage.
+#' @param out_size Defaults to \code{2L}.
+#' @param stride Defaults to \code{1}.
+#' @param samples Defaults to \code{2L}.
+#' @return A list with \code{pooled}, \code{exact_box}, \code{samples_per_bin}, \code{note}.
+#' @export
 roi_align <- function(features, box, out_size = 2L, stride = 1.0,
                       samples = 2L) {
   F <- .masrcn_mat(features)
@@ -112,6 +135,17 @@ roi_align <- function(features, box, out_size = 2L, stride = 1.0,
        note = "no quantisation of the box or the bins")
 }
 
+#' alignment_error
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param features See Usage.
+#' @param box See Usage.
+#' @param out_size Defaults to \code{2L}.
+#' @param stride Defaults to \code{1}.
+#' @return A list with \code{feature_shift}, \code{input_pixel_shift}, \code{stride}, \code{note}.
+#' @export
 alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
   p <- roi_pool(features, box, out_size, stride)
   shift <- p$quantisation_shift
@@ -122,6 +156,16 @@ alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
        note = "a sub-pixel error on the feature map is a several-pixel error in the image at stride 16 or 32")
 }
 
+#' mask_loss
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param logits See Usage.
+#' @param target See Usage.
+#' @param decoupled Defaults to \code{TRUE}.
+#' @return A list with \code{loss}, \code{kind}, \code{caveat}.
+#' @export
 mask_loss <- function(logits, target, decoupled = TRUE) {
   L <- .masrcn_mat(logits)
   T <- .masrcn_mat(target)
@@ -155,6 +199,16 @@ mask_loss <- function(logits, target, decoupled = TRUE) {
        caveat = "classes COMPETE, so a pixel assigned to one is evidence against another")
 }
 
+#' multitask_loss
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param l_cls See Usage.
+#' @param l_box See Usage.
+#' @param l_mask See Usage.
+#' @return A list with \code{total}, \code{cls}, \code{box}, \code{mask}, \code{note}.
+#' @export
 multitask_loss <- function(l_cls, l_box, l_mask) {
   list(total = as.numeric(l_cls) + as.numeric(l_box) + as.numeric(l_mask),
        cls = as.numeric(l_cls), box = as.numeric(l_box),
@@ -178,6 +232,15 @@ mask_rcnn_segmentation <- roi_align
         "losses simply add.", sep = "")
 }
 
+#' morie_masrcn
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_masrcn <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("masrcn: op must be one of roi_pool, roi_align, alignment_error, mask_loss, multitask_loss, cheatsheet")

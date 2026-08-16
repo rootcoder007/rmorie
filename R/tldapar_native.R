@@ -22,6 +22,24 @@
 # variable-importance construction, and the same naive-reuse
 # diagnostic.
 
+#' morie_tldapar
+#'
+#' Part of the tldapar_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param V Defaults to \code{10L}.
+#' @param seed Defaults to \code{0L}.
+#' @param define_on_training Defaults to \code{NULL}.
+#' @param estimate_on_holdout Defaults to \code{NULL}.
+#' @param fold_estimates Defaults to \code{NULL}.
+#' @param fold_ics Defaults to \code{NULL}.
+#' @param effect Defaults to \code{NULL}.
+#' @param screen Defaults to \code{NULL}.
+#' @param reuse_fn Defaults to \code{NULL}.
+#' @param mode Defaults to \code{c("split", "combine", "vimp", "reuse")}.
+#' @return The value of \code{variable_importance}.
+#' @export
 morie_tldapar <- function(n, V = 10L, seed = 0L,
                           define_on_training = NULL,
                           estimate_on_holdout = NULL,
@@ -40,6 +58,16 @@ morie_tldapar <- function(n, V = 10L, seed = 0L,
   variable_importance(NULL, NULL, screen, effect, V = V, seed = seed)
 }
 
+#' split_sample
+#'
+#' Part of the tldapar_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param V Defaults to \code{10L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimation}, \code{training}, \code{V}.
+#' @export
 split_sample <- function(n, V = 10L, seed = 0L) {
   n <- as.integer(n)
   V <- as.integer(V)
@@ -61,6 +89,18 @@ split_sample <- function(n, V = 10L, seed = 0L) {
        V = V)
 }
 
+#' data_adaptive_parameter
+#'
+#' Part of the tldapar_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param define_on_training See Usage.
+#' @param estimate_on_holdout See Usage.
+#' @param n See Usage.
+#' @param V Defaults to \code{10L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{psi}, \code{fold_estimates}, \code{fold_parameters}, \code{se}, \code{ci}, \code{V}, \code{method}, \code{note}.
+#' @export
 data_adaptive_parameter <- function(define_on_training,
                                    estimate_on_holdout,
                                    n, V = 10L, seed = 0L) {
@@ -88,6 +128,16 @@ data_adaptive_parameter <- function(define_on_training,
        note = "the parameter is FIXED conditional on the training split, so the reported quantity is the one that was estimated")
 }
 
+#' cv_tmle
+#'
+#' Part of the tldapar_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fold_estimates See Usage.
+#' @param fold_ics See Usage.
+#' @param n See Usage.
+#' @return A list with \code{psi}, \code{se}, \code{ci}, \code{mean_ic}, \code{note}.
+#' @export
 cv_tmle <- function(fold_estimates, fold_ics, n) {
   e <- as.numeric(fold_estimates)
   if (length(e) == 0L)
@@ -105,6 +155,19 @@ cv_tmle <- function(fold_estimates, fold_ics, n) {
        note = "each fold's fit is independent of the data it is evaluated on, which is what removes the Donsker condition")
 }
 
+#' variable_importance
+#'
+#' Part of the tldapar_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param screen See Usage.
+#' @param effect See Usage.
+#' @param V Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{importance}, \code{V}, \code{method}.
+#' @export
 variable_importance <- function(X, Y, screen, effect, V = 5L,
                                 seed = 0L) {
   rows <- as.matrix(X)
@@ -138,6 +201,16 @@ variable_importance <- function(X, Y, screen, effect, V = 5L,
        method = "CV-TMLE variable importance; van der Laan & Rose (2018) Chap. 9, as in varImpact")
 }
 
+#' naive_reuse
+#'
+#' Part of the tldapar_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param define_and_estimate See Usage.
+#' @param n See Usage.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{warning}.
+#' @export
 naive_reuse <- function(define_and_estimate, n, seed = 0L) {
   r <- define_and_estimate(seq_len(as.integer(n)))
   list(estimate = as.numeric(r$estimate),

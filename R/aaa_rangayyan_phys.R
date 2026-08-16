@@ -314,6 +314,21 @@
 
 
 # -- ApWave: idealised action-potential waveform (ramp and decay).
+#' ApWave: idealised action-potential waveform (ramp and decay)
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param v_rest Defaults to \code{-70}.
+#' @param v_peak Defaults to \code{30}.
+#' @param t_rise Defaults to \code{0.5}.
+#' @param t_fall Defaults to \code{1}.
+#' @param t_onset Defaults to \code{0}.
+#' @param v_undershoot Defaults to \code{NULL}.
+#' @param t_recover Defaults to \code{NULL}.
+#' @return A list with \code{t_ms}, \code{V_mV}, \code{amplitude_mV}, \code{peak_time_ms}, \code{v_rest_mV}, \code{v_peak_mV}, \code{t_rise_ms}, \code{t_fall_ms}, \code{width_half_ms}, \code{units}, \code{method}.
+#' @export
 ApWave <- function(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1,
                    t_onset = 0, v_undershoot = NULL, t_recover = NULL) {
   ts <- as.numeric(t)
@@ -372,6 +387,18 @@ ApWave <- function(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1,
 
 
 # -- Ghk: Goldman-Hodgkin-Katz voltage equation for the resting potential.
+#' Ghk: Goldman-Hodgkin-Katz voltage equation for the resting potential
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ion_concs See Usage.
+#' @param P_K Defaults to \code{1}.
+#' @param P_Na Defaults to \code{0.04}.
+#' @param P_Cl Defaults to \code{0.45}.
+#' @param T Defaults to \code{310.15}.
+#' @return A list with \code{potential_mV}, \code{potential_V}, \code{numerator_mM}, \code{denominator_mM}, \code{slope_mV}, \code{permeabilities}, \code{T_K}, \code{units}, \code{method}.
+#' @export
 Ghk <- function(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15) {
   if (!is.list(ion_concs)) {
     stop("ion_concs must be a dict of concentrations in mM")
@@ -419,6 +446,18 @@ Ghk <- function(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15) {
 
 
 # -- Nernst: equilibrium (reverse) potential of a single ionic species.
+#' Nernst: equilibrium (reverse) potential of a single ionic species
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param T Defaults to \code{310.15}.
+#' @param z Defaults to \code{1}.
+#' @param conc_out Defaults to \code{5}.
+#' @param conc_in Defaults to \code{140}.
+#' @param ion Defaults to \code{"K+"}.
+#' @return A list with \code{ion}, \code{potential_mV}, \code{potential_V}, \code{slope_mV}, \code{ratio}, \code{T_K}, \code{z}, \code{conc_out_mM}, \code{conc_in_mM}, \code{units}, \code{method}.
+#' @export
 Nernst <- function(T = 310.15, z = 1, conc_out = 5, conc_in = 140,
                    ion = "K+") {
   T <- as.numeric(T)
@@ -447,6 +486,20 @@ Nernst <- function(T = 310.15, z = 1, conc_out = 5, conc_in = 140,
 
 
 # -- HhGate: Hodgkin-Huxley gating variables m, h, n at a clamped potential.
+#' HhGate: Hodgkin-Huxley gating variables m, h, n at a clamped
+#' potential
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param V See Usage.
+#' @param dt Defaults to \code{0.01}.
+#' @param m Defaults to \code{NULL}.
+#' @param h Defaults to \code{NULL}.
+#' @param n Defaults to \code{NULL}.
+#' @param steps Defaults to \code{1L}.
+#' @return A list with \code{V_mV}, \code{dt_ms}, \code{steps}, \code{m}, \code{h}, \code{n}, \code{m_inf}, \code{h_inf}, \code{n_inf}, \code{tau_m_ms}, \code{tau_h_ms}, \code{tau_n_ms}, \code{alpha_per_ms}, \code{beta_per_ms}, \code{units}, \code{method}.
+#' @export
 HhGate <- function(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) {
   V <- as.numeric(V)
   dt <- as.numeric(dt)
@@ -502,6 +555,26 @@ HhGate <- function(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) {
 
 
 # -- HhModel: four-variable Hodgkin-Huxley membrane model, RK4.
+#' HhModel: four-variable Hodgkin-Huxley membrane model, RK4
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param duration Defaults to \code{30}.
+#' @param dt Defaults to \code{0.01}.
+#' @param I_ext Defaults to \code{10}.
+#' @param stim_start Defaults to \code{5}.
+#' @param stim_stop Defaults to \code{6}.
+#' @param C_m Defaults to \code{1}.
+#' @param g_Na Defaults to \code{120}.
+#' @param g_K Defaults to \code{36}.
+#' @param g_L Defaults to \code{0.3}.
+#' @param E_Na Defaults to \code{50}.
+#' @param E_K Defaults to \code{-77}.
+#' @param E_L Defaults to \code{-54.387}.
+#' @param V0 Defaults to \code{-65}.
+#' @return A list with \code{t_ms}, \code{V_mV}, \code{m}, \code{h}, \code{n}, \code{I_Na_uA_cm2}, \code{I_K_uA_cm2}, \code{I_L_uA_cm2}, \code{peak_mV}, \code{peak_time_ms}, \code{rest_mV}, \code{min_mV}, \code{spiked}, \code{n_spikes}, \code{dt_ms}, \code{I_ext_uA_cm2}, \code{units}, \code{method}.
+#' @export
 HhModel <- function(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5,
                     stim_stop = 6, C_m = 1, g_Na = 120, g_K = 36, g_L = 0.3,
                     E_Na = 50, E_K = -77, E_L = -54.387, V0 = -65) {
@@ -604,6 +677,23 @@ HhModel <- function(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5,
 
 
 # -- Fhn: FitzHugh-Nagumo two-variable excitable-medium neuron model.
+#' Fhn: FitzHugh-Nagumo two-variable excitable-medium neuron model
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param duration Defaults to \code{200}.
+#' @param dt Defaults to \code{0.01}.
+#' @param I_ext Defaults to \code{0.5}.
+#' @param a Defaults to \code{0.7}.
+#' @param b Defaults to \code{0.8}.
+#' @param eps Defaults to \code{0.08}.
+#' @param v0 Defaults to \code{-1.2}.
+#' @param w0 Defaults to \code{-0.6}.
+#' @param stim_start Defaults to \code{0}.
+#' @param stim_stop Defaults to \code{NULL}.
+#' @return A list with \code{t}, \code{v}, \code{w}, \code{peak}, \code{min}, \code{n_spikes}, \code{spike_times}, \code{period}, \code{a}, \code{b}, \code{eps}, \code{I_ext}, \code{units}, \code{method}.
+#' @export
 Fhn <- function(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8,
                 eps = 0.08, v0 = -1.2, w0 = -0.6, stim_start = 0,
                 stim_stop = NULL) {
@@ -672,6 +762,18 @@ Fhn <- function(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8,
 
 
 # -- RcMemb: passive RC membrane potential dynamics.
+#' RcMemb: passive RC membrane potential dynamics
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param I_inj Defaults to \code{0}.
+#' @param C_m Defaults to \code{0.2}.
+#' @param R_m Defaults to \code{100}.
+#' @param V_rest Defaults to \code{-65}.
+#' @return A list with \code{t_ms}, \code{V_mV}, \code{tau_ms}, \code{V_steady_mV}, \code{input_resistance_MOhm}, \code{peak_mV}, \code{final_mV}, \code{V_rest_mV}, \code{units}, \code{method}.
+#' @export
 RcMemb <- function(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65) {
   ts <- as.numeric(t)
   if (length(ts) < 1L) {
@@ -719,6 +821,28 @@ RcMemb <- function(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65) {
 
 # -- BiDomain: 1-D monodomain propagation with the bidomain extracellular
 #    field; Rangayyan (2024) eqs. (7.143)-(7.149), Section 7.8.2.
+#' BiDomain: 1-D monodomain propagation with the bidomain extracellular
+#'
+#' field; Rangayyan (2024) eqs. (7.143)-(7.149), Section 7.8.2.
+#'
+#' @param n_nodes Defaults to \code{100}.
+#' @param dx_cm Defaults to \code{0.02}.
+#' @param duration_ms Defaults to \code{60}.
+#' @param dt_ms Defaults to \code{0.005}.
+#' @param sigma_i Defaults to \code{1}.
+#' @param sigma_e Defaults to \code{2}.
+#' @param C_m Defaults to \code{1}.
+#' @param Sv Defaults to \code{1000}.
+#' @param I_ion Defaults to \code{NULL}.
+#' @param stim_nodes Defaults to \code{5}.
+#' @param I_stim Defaults to \code{50}.
+#' @param stim_ms Defaults to \code{1}.
+#' @param v_rest Defaults to \code{-85}.
+#' @param v_peak Defaults to \code{20}.
+#' @param I_ion_peak Defaults to \code{10}.
+#' @param threshold_frac Defaults to \code{0.25}.
+#' @return A list with \code{x_cm}, \code{Vm_mV}, \code{phi_e_mV}, \code{phi_i_mV}, \code{Im_uA_cm2}, \code{activation_ms}, \code{n_activated}, \code{cv_cm_per_ms}, \code{D_cm2_per_ms}, \code{sigma_bulk_mS_cm}, \code{dt_ms}, \code{dx_cm}, \code{stability_limit_ms}, \code{units}, \code{method}.
+#' @export
 BiDomain <- function(n_nodes = 100, dx_cm = 0.02, duration_ms = 60,
                      dt_ms = 0.005, sigma_i = 1, sigma_e = 2, C_m = 1,
                      Sv = 1000, I_ion = NULL, stim_nodes = 5, I_stim = 50,
@@ -862,6 +986,18 @@ BiDomain <- function(n_nodes = 100, dx_cm = 0.02, duration_ms = 60,
 
 
 # -- CadAcou: coronary artery disease detection from acoustic signals.
+#' CadAcou: coronary artery disease detection from acoustic signals
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coronary_sound See Usage.
+#' @param fs See Usage.
+#' @param order Defaults to \code{8}.
+#' @param hf_band Defaults to \code{c(300, 900)}.
+#' @param ref_band Defaults to \code{c(50, 300)}.
+#' @return A vector, from \code{c}.
+#' @export
 CadAcou <- function(coronary_sound, fs, order = 8, hf_band = c(300, 900),
                     ref_band = c(50, 300)) {
   xs <- as.numeric(coronary_sound)
@@ -914,6 +1050,18 @@ CadAcou <- function(coronary_sound, fs, order = 8, hf_band = c(300, 900),
 
 # -- CorSound: coronary artery sound generation model (turbulent flow);
 #    Rangayyan (2024) eqs. (7.135)-(7.136), Section 7.7.2.
+#' CorSound: coronary artery sound generation model (turbulent flow);
+#'
+#' Rangayyan (2024) eqs. (7.135)-(7.136), Section 7.7.2.
+#'
+#' @param diameter See Usage.
+#' @param flow_velocity See Usage.
+#' @param stenosis_pct Defaults to \code{0}.
+#' @param p2max Defaults to \code{1}.
+#' @param freqs Defaults to \code{NULL}.
+#' @param nu Defaults to \code{3.5e-06}.
+#' @return A list with \code{freq_hz}, \code{psd_Pa2_per_Hz}, \code{D_normal_m}, \code{d_stenotic_m}, \code{U_normal_m_s}, \code{u_stenotic_m_s}, \code{stenosis_pct}, \code{corner_freq_hz}, \code{reynolds_param_x}, \code{reynolds_number}, \code{total_power_Pa2}, \code{units}, \code{method}.
+#' @export
 CorSound <- function(diameter, flow_velocity, stenosis_pct = 0, p2max = 1,
                      freqs = NULL, nu = 3.5e-6) {
   D <- as.numeric(diameter)
@@ -961,6 +1109,19 @@ CorSound <- function(diameter, flow_velocity, stenosis_pct = 0, p2max = 1,
 
 
 # -- InfantCry: cry F0 track, melody coding and formants.
+#' InfantCry: cry F0 track, melody coding and formants
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param cry See Usage.
+#' @param fs See Usage.
+#' @param window_ms Defaults to \code{40}.
+#' @param f0_range Defaults to \code{c(200, 1000)}.
+#' @param order Defaults to \code{NULL}.
+#' @param flat_tolerance Defaults to \code{0.06}.
+#' @return A list with \code{f0_track_hz}, \code{t_track_s}, \code{melody}, \code{melody_units}, \code{mean_f0_hz}, \code{sd_f0_hz}, \code{min_f0_hz}, \code{max_f0_hz}, \code{f0_range_semitones}, \code{voiced_fraction}, \code{in_common_band_fraction}, \code{high_pitched}, \code{formants_hz}, \code{window_ms}, \code{n_windows}, \code{fs_hz}, \code{flat_tolerance}, \code{units}, \code{method}.
+#' @export
 InfantCry <- function(cry, fs, window_ms = 40, f0_range = c(200, 1000),
                       order = NULL, flat_tolerance = 0.06) {
   xs <- as.numeric(cry)
@@ -1076,6 +1237,16 @@ InfantCry <- function(cry, fs, window_ms = 40, f0_range = c(200, 1000),
 
 
 # -- EggFeat: electrogastrogram dominant frequency and band powers.
+#' EggFeat: electrogastrogram dominant frequency and band powers
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param egg See Usage.
+#' @param fs See Usage.
+#' @param normal_band Defaults to \code{c(0.0333, 0.0667)}.
+#' @return A vector, from \code{c}.
+#' @export
 EggFeat <- function(egg, fs, normal_band = c(0.0333, 0.0667)) {
   fs <- as.numeric(fs)
   if (fs <= 0) stop("fs must be positive (Hz)")
@@ -1129,6 +1300,20 @@ EggFeat <- function(egg, fs, normal_band = c(0.0333, 0.0667)) {
 
 
 # -- EngCap: ENG compound action potential from a fibre-velocity population.
+#' EngCap: ENG compound action potential from a fibre-velocity
+#' population
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param distance_m Defaults to \code{0.1}.
+#' @param n_fibers Defaults to \code{40}.
+#' @param cv_range Defaults to \code{c(45, 70)}.
+#' @param amp_range Defaults to \code{c(0.5, 2)}.
+#' @param width_ms Defaults to \code{0.3}.
+#' @return A list with \code{t_ms}, \code{cap_uV}, \code{peak_uV}, \code{peak_latency_ms}, \code{onset_latency_ms}, \code{cv_from_peak_m_s}, \code{cv_from_onset_m_s}, \code{latencies_ms}, \code{velocities_m_s}, \code{distance_m}, \code{units}, \code{method}.
+#' @export
 EngCap <- function(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70),
                    amp_range = c(0.5, 2), width_ms = 0.3) {
   ts <- as.numeric(t)
@@ -1198,6 +1383,18 @@ EngCap <- function(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70),
 
 
 # -- SeizDet: epileptic seizure detection in EEG.
+#' SeizDet: epileptic seizure detection in EEG
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param eeg See Usage.
+#' @param fs See Usage.
+#' @param epoch_s Defaults to \code{1}.
+#' @param ratio_threshold Defaults to \code{2}.
+#' @param baseline_epochs Defaults to \code{NULL}.
+#' @return A list with \code{epochs}, \code{seizure_detected}, \code{n_flagged}, \code{seizure_intervals_s}, \code{baseline_slow_fraction}, \code{threshold_slow_fraction}, \code{baseline_epochs}, \code{n_epochs}, \code{epoch_s}, \code{fs_hz}, \code{binnie_bands_hz}, \code{units}, \code{method}.
+#' @export
 SeizDet <- function(eeg, fs, epoch_s = 1, ratio_threshold = 2,
                     baseline_epochs = NULL) {
   xs <- as.numeric(eeg)
@@ -1313,6 +1510,18 @@ SeizDet <- function(eeg, fs, epoch_s = 1, ratio_threshold = 2,
 
 
 # -- ErpFeat: event-related potential latency and amplitude features.
+#' ErpFeat: event-related potential latency and amplitude features
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param erp See Usage.
+#' @param fs See Usage.
+#' @param t0 Defaults to \code{0}.
+#' @param components Defaults to \code{NULL}.
+#' @param baseline_ms Defaults to \code{list(NULL, 0)}.
+#' @return A list with \code{components}, \code{peak_to_peak_uV}, \code{baseline_uV}, \code{t_ms}, \code{erp_uV}, \code{fs_hz}, \code{t0_ms}, \code{units}, \code{method}.
+#' @export
 ErpFeat <- function(erp, fs, t0 = 0, components = NULL,
                     baseline_ms = list(NULL, 0)) {
   xs <- as.numeric(erp)
@@ -1375,6 +1584,18 @@ ErpFeat <- function(erp, fs, t0 = 0, components = NULL,
 
 
 # -- ErdErs: event-related desynchronisation / synchronisation for BCI.
+#' ErdErs: event-related desynchronisation / synchronisation for BCI
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param eeg See Usage.
+#' @param fs See Usage.
+#' @param ref_window See Usage.
+#' @param active_window See Usage.
+#' @param band Defaults to \code{c(8, 13)}.
+#' @return A list with \code{erd_percent}, \code{ref_power}, \code{active_power}, \code{power_ratio}, \code{event}, \code{band_hz}, \code{ref_window_s}, \code{active_window_s}, \code{ref_samples}, \code{active_samples}, \code{fs_hz}, \code{sign_convention}, \code{units}, \code{method}.
+#' @export
 ErdErs <- function(eeg, fs, ref_window, active_window, band = c(8, 13)) {
   xs <- as.numeric(eeg)
   fs <- as.numeric(fs)
@@ -1442,6 +1663,16 @@ ErdErs <- function(eeg, fs, ref_window, active_window, band = c(8, 13)) {
 
 
 # -- CadSpec: frequency-domain feature extraction for CAD.
+#' CadSpec: frequency-domain feature extraction for CAD
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param bands Defaults to \code{NULL}.
+#' @return A vector, from \code{c}.
+#' @export
 CadSpec <- function(x, fs, bands = NULL) {
   fs <- as.numeric(fs)
   sp <- .bsapsd(x, fs)
@@ -1480,6 +1711,20 @@ CadSpec <- function(x, fs, bands = NULL) {
 
 
 # -- VagClean: muscle-contraction artifact removal from VAG signals (LMS).
+#' VagClean: muscle-contraction artifact removal from VAG signals (LMS)
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param vag See Usage.
+#' @param emg_ref See Usage.
+#' @param fs See Usage.
+#' @param n_taps Defaults to \code{8}.
+#' @param mu Defaults to \code{0.05}.
+#' @param alpha Defaults to \code{0.02}.
+#' @param adaptive_mu Defaults to \code{TRUE}.
+#' @return A list with \code{cleaned}, \code{artifact_estimate}, \code{weights}, \code{rms_before}, \code{rms_after}, \code{artifact_reduction_db}, \code{mu_trace}, \code{n_taps}, \code{alpha}, \code{adaptive_mu}, \code{fs_hz}, \code{units}, \code{method}.
+#' @export
 VagClean <- function(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02,
                      adaptive_mu = TRUE) {
   xs <- as.numeric(vag)
@@ -1566,6 +1811,21 @@ VagClean <- function(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02,
 
 
 # -- MuapModel: motor unit action potential as summed single-fibre potentials.
+#' MuapModel: motor unit action potential as summed single-fibre
+#' potentials
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param n_fibers Defaults to \code{25}.
+#' @param conduction_vel Defaults to \code{4}.
+#' @param spread_mm Defaults to \code{3}.
+#' @param amp_uV Defaults to \code{8}.
+#' @param width_ms Defaults to \code{1}.
+#' @param phases Defaults to \code{3}.
+#' @return A list with \code{t_ms}, \code{muap_uV}, \code{peak_to_peak_uV}, \code{peak_uV}, \code{duration_ms}, \code{n_phases_observed}, \code{delays_ms}, \code{n_fibers}, \code{conduction_vel_m_s}, \code{in_normal_duration_band}, \code{units}, \code{method}.
+#' @export
 MuapModel <- function(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3,
                       amp_uV = 8, width_ms = 1, phases = 3) {
   ts <- as.numeric(t)
@@ -1631,6 +1891,19 @@ MuapModel <- function(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3,
 
 
 # -- MurmSpec: heart murmur frequency analysis; Rangayyan (2024) eq. (6.45).
+#' MurmSpec: heart murmur frequency analysis; Rangayyan (2024) eq.
+#' (6.45)
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pcg See Usage.
+#' @param fs See Usage.
+#' @param f1 Defaults to \code{25}.
+#' @param f2 Defaults to \code{75}.
+#' @param f3 Defaults to \code{150}.
+#' @return A vector, from \code{c}.
+#' @export
 MurmSpec <- function(pcg, fs, f1 = 25, f2 = 75, f3 = 150) {
   fs <- as.numeric(fs)
   f1 <- as.numeric(f1)
@@ -1668,6 +1941,17 @@ MurmSpec <- function(pcg, fs, f1 = 25, f2 = 75, f3 = 150) {
 
 
 # -- OaeFeat: otoacoustic emission band analysis.
+#' OaeFeat: otoacoustic emission band analysis
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param oae See Usage.
+#' @param fs See Usage.
+#' @param noise_floor Defaults to \code{NULL}.
+#' @param bands Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 OaeFeat <- function(oae, fs, noise_floor = NULL, bands = NULL) {
   fs <- as.numeric(fs)
   if (fs <= 0) stop("fs must be positive (Hz)")
@@ -1740,6 +2024,18 @@ OaeFeat <- function(oae, fs, noise_floor = NULL, bands = NULL) {
 
 
 # -- PdMonitor: Parkinson's disease monitoring via multimodal signals.
+#' PdMonitor: Parkinson\'s disease monitoring via multimodal signals
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param eeg See Usage.
+#' @param emg See Usage.
+#' @param gait See Usage.
+#' @param fs See Usage.
+#' @param tremor_band Defaults to \code{c(3, 7)}.
+#' @return A list with \code{eeg_bands}, \code{eeg_beta_fraction}, \code{emg_tremor_fraction}, \code{emg_tremor_freq_hz}, \code{gait_tremor_fraction}, \code{gait_tremor_freq_hz}, \code{emg_form_factor}, \code{emg_turns_per_second}, \code{gait_rate_hz}, \code{gait_regularity}, \code{tremor_present}, \code{tremor_band_hz}, \code{fs_hz}, \code{units}, \code{method}.
+#' @export
 PdMonitor <- function(eeg, emg, gait, fs, tremor_band = c(3, 7)) {
   fs <- as.numeric(fs)
   if (fs < 60) stop("fs must be at least 60 Hz")
@@ -1826,6 +2122,18 @@ PdMonitor <- function(eeg, emg, gait, fs, tremor_band = c(3, 7)) {
 
 
 # -- PcgEeg: PCG-EEG magnitude coherence; Rangayyan (2024) eq. (4.32).
+#' PcgEeg: PCG-EEG magnitude coherence; Rangayyan (2024) eq. (4.32)
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pcg See Usage.
+#' @param eeg See Usage.
+#' @param fs See Usage.
+#' @param n_segments Defaults to \code{8}.
+#' @param band Defaults to \code{c(1, 100)}.
+#' @return A list with \code{freq_hz}, \code{coherence}, \code{coherence_sq}, \code{phase_rad}, \code{peak_coherence}, \code{peak_freq_hz}, \code{mean_coherence}, \code{delay_ms_at_peak}, \code{significance_level}, \code{n_segments}, \code{segment_samples}, \code{band_hz}, \code{fs_hz}, \code{units}, \code{method}.
+#' @export
 PcgEeg <- function(pcg, eeg, fs, n_segments = 8, band = c(1, 100)) {
   xs <- as.numeric(pcg)
   ys <- as.numeric(eeg)
@@ -1904,6 +2212,17 @@ PcgEeg <- function(pcg, eeg, fs, n_segments = 8, band = c(1, 100)) {
 
 
 # -- MurmDet: murmur presence detection in PCG via spectral analysis.
+#' MurmDet: murmur presence detection in PCG via spectral analysis
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pcg See Usage.
+#' @param fs See Usage.
+#' @param threshold Defaults to \code{0.15}.
+#' @param hf_band Defaults to \code{c(150, 600)}.
+#' @return A vector, from \code{c}.
+#' @export
 MurmDet <- function(pcg, fs, threshold = 0.15, hf_band = c(150, 600)) {
   fs <- as.numeric(fs)
   threshold <- as.numeric(threshold)
@@ -1937,6 +2256,18 @@ MurmDet <- function(pcg, fs, threshold = 0.15, hf_band = c(150, 600)) {
 
 
 # -- PsgStage: polysomnography signal fusion for sleep staging.
+#' PsgStage: polysomnography signal fusion for sleep staging
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param eeg See Usage.
+#' @param eog See Usage.
+#' @param emg See Usage.
+#' @param fs See Usage.
+#' @param epoch_len Defaults to \code{30}.
+#' @return A list with \code{epochs}, \code{stage_sequence}, \code{stage_minutes}, \code{total_sleep_time_min}, \code{recording_time_min}, \code{sleep_efficiency}, \code{n_epochs}, \code{epoch_len_s}, \code{fs_hz}, \code{heuristic}, \code{units}, \code{method}.
+#' @export
 PsgStage <- function(eeg, eog, emg, fs, epoch_len = 30) {
   a <- as.numeric(eeg)
   b <- as.numeric(eog)
@@ -2027,6 +2358,16 @@ PsgStage <- function(eeg, eog, emg, fs, epoch_len = 30) {
 
 
 # -- IeiStats: point-process inter-event interval statistics.
+#' IeiStats: point-process inter-event interval statistics
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param event_times See Usage.
+#' @param T Defaults to \code{NULL}.
+#' @param n_bins Defaults to \code{20}.
+#' @return A list with \code{mean_ipi_s}, \code{sd_ipi_s}, \code{cv_ipi}, \code{mean_rate_pps}, \code{sd_rate_pps}, \code{cv_rate}, \code{event_rate_pps}, \code{min_ipi_s}, \code{max_ipi_s}, \code{median_ipi_s}, \code{fano_factor}, \code{ipi_histogram}, \code{n_events}, \code{n_intervals}, \code{duration_s}, \code{regularity}, \code{units}, \code{method}.
+#' @export
 IeiStats <- function(event_times, T = NULL, n_bins = 20) {
   ts <- as.numeric(event_times)
   if (length(ts) < 3L) {
@@ -2106,6 +2447,17 @@ IeiStats <- function(event_times, T = NULL, n_bins = 20) {
 
 
 # -- ValvePcg: prosthetic heart valve evaluation via PCG AR spectrum.
+#' ValvePcg: prosthetic heart valve evaluation via PCG AR spectrum
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pcg See Usage.
+#' @param fs See Usage.
+#' @param n_peaks Defaults to \code{3}.
+#' @param order Defaults to \code{NULL}.
+#' @return A vector, from \code{c}.
+#' @export
 ValvePcg <- function(pcg, fs, n_peaks = 3, order = NULL) {
   xs <- as.numeric(pcg)
   fs <- as.numeric(fs)
@@ -2152,6 +2504,17 @@ ValvePcg <- function(pcg, fs, n_peaks = 3, order = NULL) {
 
 
 # -- RespFeat: respiratory rate, depth and I:E ratio.
+#' RespFeat: respiratory rate, depth and I:E ratio
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param resp See Usage.
+#' @param fs See Usage.
+#' @param signal_type Defaults to \code{"flow"}.
+#' @param min_breath_s Defaults to \code{1}.
+#' @return A list with \code{rate_breaths_per_min}, \code{mean_period_s}, \code{sd_period_s}, \code{regularity_cv}, \code{depth}, \code{mean_ti_s}, \code{mean_te_s}, \code{ie_ratio}, \code{breaths}, \code{n_breaths}, \code{signal_type}, \code{fs_hz}, \code{units}, \code{method}.
+#' @export
 RespFeat <- function(resp, fs, signal_type = "flow", min_breath_s = 1) {
   xs <- as.numeric(resp)
   fs <- as.numeric(fs)
@@ -2240,6 +2603,23 @@ RespFeat <- function(resp, fs, signal_type = "flow", min_breath_s = 1) {
 
 # -- RespSound: respiratory sound generation model (bronchial turbulence);
 #    Rangayyan (2024) eqs. (7.122), (7.127), (7.128), (7.129), Section 7.7.1.
+#' RespSound: respiratory sound generation model (bronchial turbulence);
+#'
+#' Rangayyan (2024) eqs. (7.122), (7.127), (7.128), (7.129), Section
+#' 7.7.1.
+#'
+#' @param length_m Defaults to \code{0.1}.
+#' @param radius_m Defaults to \code{0.009}.
+#' @param freqs Defaults to \code{NULL}.
+#' @param rho Defaults to \code{1.2}.
+#' @param c Defaults to \code{343}.
+#' @param mu Defaults to \code{1.8e-05}.
+#' @param P0 Defaults to \code{101325}.
+#' @param eta Defaults to \code{1.4}.
+#' @param lam Defaults to \code{0.026}.
+#' @param cp Defaults to \code{1005}.
+#' @return A list with \code{freq_hz}, \code{transfer_mag}, \code{transfer_db}, \code{La_kg_per_m4}, \code{Ca_m3_per_Pa}, \code{Ra_Pa_s_per_m3}, \code{Ga_m3_per_Pa_s}, \code{resonance_hz}, \code{area_m2}, \code{circumference_m}, \code{volume_m3}, \code{units}, \code{method}.
+#' @export
 RespSound <- function(length_m = 0.1, radius_m = 0.009, freqs = NULL,
                       rho = 1.2, c = 343, mu = 1.8e-5, P0 = 101325,
                       eta = 1.4, lam = 0.026, cp = 1005) {
@@ -2302,6 +2682,19 @@ RespSound <- function(length_m = 0.1, radius_m = 0.009, freqs = NULL,
 
 
 # -- ApneaDet: sleep apnea detection from ECG, SpO2 and snore.
+#' ApneaDet: sleep apnea detection from ECG, SpO2 and snore
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ecg See Usage.
+#' @param spo2 See Usage.
+#' @param snore See Usage.
+#' @param fs See Usage.
+#' @param epoch_s Defaults to \code{60}.
+#' @param desat_pct Defaults to \code{4}.
+#' @return A list with \code{epochs}, \code{n_flagged}, \code{apnea_suspected}, \code{events_per_hour}, \code{severity}, \code{n_epochs}, \code{epoch_s}, \code{fs_hz}, \code{desat_criterion_pct}, \code{heuristic}, \code{units}, \code{method}.
+#' @export
 ApneaDet <- function(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4) {
   e <- as.numeric(ecg)
   s <- as.numeric(spo2)
@@ -2403,6 +2796,18 @@ ApneaDet <- function(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4) {
 
 
 # -- SpeechFeat: speech formants and autocorrelation pitch.
+#' SpeechFeat: speech formants and autocorrelation pitch
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param speech See Usage.
+#' @param fs See Usage.
+#' @param order Defaults to \code{NULL}.
+#' @param n_formants Defaults to \code{4}.
+#' @param f0_range Defaults to \code{c(60, 400)}.
+#' @return A list with \code{formants_hz}, \code{formant_bandwidths_hz}, \code{formant_powers}, \code{f0_hz}, \code{pitch_period_ms}, \code{voiced}, \code{voicing_strength}, \code{voicing_threshold}, \code{zero_crossing_rate}, \code{order}, \code{ar_coeffs}, \code{prediction_error}, \code{freq_hz}, \code{lpc_psd}, \code{fs_hz}, \code{units}, \code{method}.
+#' @export
 SpeechFeat <- function(speech, fs, order = NULL, n_formants = 4,
                        f0_range = c(60, 400)) {
   xs <- as.numeric(speech)
@@ -2467,6 +2872,16 @@ SpeechFeat <- function(speech, fs, order = NULL, n_formants = 4,
 
 
 # -- VagFeat: statistical vibroarthrogram characterisation.
+#' VagFeat: statistical vibroarthrogram characterisation
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param vag See Usage.
+#' @param fs See Usage.
+#' @param n_segments Defaults to \code{8}.
+#' @return A list with \code{mean}, \code{variance}, \code{skewness}, \code{kurtosis}, \code{kurtosis_excess}, \code{form_factor}, \code{mobility}, \code{activity}, \code{turns_count}, \code{turns_per_second}, \code{var_of_segment_means}, \code{var_of_segment_ms}, \code{segment_means}, \code{segment_ms}, \code{entropy_bits}, \code{rms}, \code{duration_s}, \code{fs_hz}, \code{n_segments}, \code{units}, \code{method}.
+#' @export
 VagFeat <- function(vag, fs, n_segments = 8) {
   xs <- as.numeric(vag)
   fs <- as.numeric(fs)
@@ -2534,6 +2949,17 @@ VagFeat <- function(vag, fs, n_segments = 8) {
 
 # -- VagKnee: linear-discriminant screening of a VAG signal for knee
 #    cartilage pathology.
+#' VagKnee: linear-discriminant screening of a VAG signal for knee
+#'
+#' cartilage pathology.
+#'
+#' @param vag See Usage.
+#' @param fs See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param bias Defaults to \code{NULL}.
+#' @param n_segments Defaults to \code{8}.
+#' @return The value of \code{base}, as built in the body.
+#' @export
 VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {
   base <- VagFeat(vag, fs, n_segments = n_segments)
   varms <- base$var_of_segment_ms
@@ -2596,6 +3022,15 @@ VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {
 
 # -- CLogProd: complex log turning Y = X H into log X + log H;
 #    Rangayyan (2024) eq. (4.63), Section 4.8.
+#' CLogProd: complex log turning Y = X H into log X + log H;
+#'
+#' Rangayyan (2024) eq. (4.63), Section 4.8.
+#'
+#' @param X See Usage.
+#' @param H See Usage.
+#' @param omega Defaults to \code{NULL}.
+#' @return A list with \code{omega}, \code{Y_real}, \code{Y_imag}, \code{log_Y_real}, \code{log_Y_imag}, \code{log_X_real}, \code{log_X_imag}, \code{log_H_real}, \code{log_H_imag}, \code{max_abs_error}, \code{units}, \code{method}.
+#' @export
 CLogProd <- function(X, H, omega = NULL) {
   xs <- as.complex(X)
   hs <- as.complex(H)
@@ -2651,6 +3086,23 @@ CLogProd <- function(X, H, omega = NULL) {
 
 # -- CLogPz: complex log of a rational X(z) over its poles and zeros;
 #    Rangayyan (2024) eq. (4.68) with eq. (4.67).
+#' CLogPz: complex log of a rational X(z) over its poles and zeros;
+#'
+#' Rangayyan (2024) eq. (4.68) with eq. (4.67).
+#'
+#' @param z See Usage.
+#' @param A Defaults to \code{1}.
+#' @param r Defaults to \code{0}.
+#' @param a_k Defaults to \code{complex(0)}.
+#' @param b_k Defaults to \code{complex(0)}.
+#' @param c_k Defaults to \code{complex(0)}.
+#' @param d_k Defaults to \code{complex(0)}.
+#' @param M_I Defaults to \code{NULL}.
+#' @param M_O Defaults to \code{NULL}.
+#' @param N_I Defaults to \code{NULL}.
+#' @param N_O Defaults to \code{NULL}.
+#' @return A list with \code{z_real}, \code{z_imag}, \code{xhat_real}, \code{xhat_imag}, \code{X_real}, \code{X_imag}, \code{max_abs_error}, \code{terms}, \code{counts}, \code{units}, \code{method}.
+#' @export
 CLogPz <- function(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0),
                    c_k = complex(0), d_k = complex(0),
                    M_I = NULL, M_O = NULL, N_I = NULL, N_O = NULL) {

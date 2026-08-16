@@ -153,6 +153,21 @@
   out
 }
 
+#' morie_netsts
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param horizon See Usage.
+#' @param hidden Defaults to \code{8}.
+#' @param n_lags Defaults to \code{4}.
+#' @param strategy Defaults to \code{"recursive"}.
+#' @param forget_bias Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @param ridge Defaults to \code{1e-06}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{strategy}, \code{hidden}, \code{n_lags}, \code{forget_bias}, \code{mean}, \code{sd}, \code{n_models}, \code{retention_10}, \code{method}.
+#' @export
 morie_netsts <- function(y, horizon, hidden = 8, n_lags = 4,
                          strategy = "recursive", forget_bias = 1.0,
                          seed = 0, ridge = 1e-6) {

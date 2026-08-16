@@ -36,6 +36,14 @@
   c(118, 140, 166, 194, 201, 229, 278, 306, 336, 337, 405, 432)
 )
 
+#' series_g
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param log Defaults to \code{FALSE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 series_g <- function(log = FALSE) {
   out <- numeric(144)
   idx <- 0
@@ -47,6 +55,17 @@ series_g <- function(log = FALSE) {
   out
 }
 
+#' difference
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param d Defaults to \code{0}.
+#' @param D Defaults to \code{0}.
+#' @param s Defaults to \code{1}.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 difference <- function(y, d = 0, D = 0, s = 1) {
   d <- as.integer(d); D <- as.integer(D); s <- as.integer(s)
   if (d < 0 || D < 0) stop("sarima: d and D must be non-negative")
@@ -75,6 +94,18 @@ difference <- function(y, d = 0, D = 0, s = 1) {
   out
 }
 
+#' expand_polynomials
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param phi Defaults to \code{numeric(0)}.
+#' @param Phi Defaults to \code{numeric(0)}.
+#' @param theta Defaults to \code{numeric(0)}.
+#' @param Theta Defaults to \code{numeric(0)}.
+#' @param s Defaults to \code{12}.
+#' @return A list with \code{ar}, \code{ma}.
+#' @export
 expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
                                 theta = numeric(0), Theta = numeric(0), s = 12) {
   s <- as.integer(s)
@@ -87,6 +118,15 @@ expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
   list(ar = -ar_poly[-1], ma = -ma_poly[-1])
 }
 
+#' sample_acf
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param lags See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 sample_acf <- function(x, lags) {
   n <- length(x)
   if (n < 2) stop("sarima: need at least two observations")
@@ -101,6 +141,16 @@ sample_acf <- function(x, lags) {
   out
 }
 
+#' airline_autocovariances
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param Theta See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @return A list with \code{gamma}, \code{rho}, \code{rho_1}, \code{rho_12}, \code{nonzero_lags}.
+#' @export
 airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
   th <- as.numeric(theta); TH <- as.numeric(Theta)
   g0 <- (1 + th * th) * (1 + TH * TH) * sigma2
@@ -124,8 +174,25 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
   if (r != 0) (-1 + disc) / (2 * r) else 0
 }
 
+#' moment_estimate
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rho See Usage.
+#' @return The value of \code{.sarima_invert_rho}.
+#' @export
 moment_estimate <- function(rho) .sarima_invert_rho(rho)
 
+#' preliminary_estimates
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @param s Defaults to \code{12}.
+#' @return A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1}, \code{r_s}, \code{method}.
+#' @export
 preliminary_estimates <- function(w, s = 12) {
   r <- sample_acf(w, c(1, as.integer(s)))
   th <- .sarima_invert_rho(r[["1"]])
@@ -135,6 +202,17 @@ preliminary_estimates <- function(w, s = 12) {
        method = "moments from rho_1 and rho_s; Box et al. (2016) Sec. 9.2.3")
 }
 
+#' css
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @param ar Defaults to \code{numeric(0)}.
+#' @param ma Defaults to \code{numeric(0)}.
+#' @param full Defaults to \code{FALSE}.
+#' @return The value of \code{ssq}, as built in the body.
+#' @export
 css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
   ar <- as.numeric(ar); ma <- as.numeric(ma)
   n <- length(w)
@@ -179,6 +257,16 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
   P
 }
 
+#' loglik
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @param ar Defaults to \code{numeric(0)}.
+#' @param ma Defaults to \code{numeric(0)}.
+#' @return A list with \code{loglik}, \code{sigma2}, \code{n}, \code{exact_ssq}, \code{sum_log_f}.
+#' @export
 loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   ar <- as.numeric(ar); ma <- as.numeric(ma)
   n <- length(w)
@@ -412,6 +500,15 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   psi
 }
 
+#' forecast
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fitted See Usage.
+#' @param h Defaults to \code{12}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{variance}, \code{se}, \code{psi}, \code{method}.
+#' @export
 forecast <- function(fitted, h = 12) {
   h <- as.integer(h)
   if (h < 1) stop("sarima: h must be at least 1")
@@ -447,6 +544,16 @@ forecast <- function(fitted, h = 12) {
        method = "difference-equation forecasts; Box et al. (2016) Sec. 9.2.2")
 }
 
+#' large_sample_se
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param Theta See Usage.
+#' @param n See Usage.
+#' @return A list with \code{var_theta}, \code{var_Theta}, \code{se_theta}, \code{se_Theta}, \code{cov}, \code{off_diagonal_term}.
+#' @export
 large_sample_se <- function(theta, Theta, n) {
   th <- as.numeric(theta); TH <- as.numeric(Theta); n <- as.integer(n)
   if (n < 1) stop("sarima: n must be positive")
@@ -458,6 +565,15 @@ large_sample_se <- function(theta, Theta, n) {
        off_diagonal_term = th^11 / (1 - th^12 * TH))
 }
 
+#' bartlett_se
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rho See Usage.
+#' @param n See Usage.
+#' @return A list with \code{variance}, \code{se}, \code{white_noise_se}.
+#' @export
 bartlett_se <- function(rho, n) {
   n <- as.integer(n)
   if (n < 1) stop("sarima: n must be positive")
@@ -471,6 +587,14 @@ bartlett_se <- function(rho, n) {
   list(variance = var, se = sqrt(var), white_noise_se = sqrt(1 / n))
 }
 
+#' r_convention
+#'
+#' Part of the sarima_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fitted See Usage.
+#' @return A list with \code{ma}, \code{sma}, \code{ar}, \code{sar}, \code{sigma2}, \code{loglik}, \code{aic}, \code{note}.
+#' @export
 r_convention <- function(fitted) {
   list(ma = -as.numeric(fitted$theta), sma = -as.numeric(fitted$Theta),
        ar = as.numeric(fitted$phi), sar = as.numeric(fitted$Phi),

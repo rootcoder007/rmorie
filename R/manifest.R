@@ -1,3 +1,11 @@
+#' escape_regex
+#'
+#' Part of the manifest implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{gsub}.
+#' @export
 escape_regex <- function(x) {
   gsub("([][{}()+*^$.|\\\\?])", "\\\\\\1", x)
 }

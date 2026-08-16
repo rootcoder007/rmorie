@@ -68,6 +68,14 @@ OBJECTIVES <- c("maxmin", "maxsum")
   intersect_len / union_len
 }
 
+#' distance_matrix
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fps See Usage.
+#' @return The value of \code{D}, as built in the body.
+#' @export
 distance_matrix <- function(fps) {
   F <- lapply(fps, .tncomp_fingerprint)
   n <- length(F)
@@ -124,14 +132,44 @@ distance_matrix <- function(fps) {
   list(chosen = chosen, M = M)
 }
 
+#' maxmin_selection
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fps See Usage.
+#' @param k See Usage.
+#' @param seed Defaults to \code{NULL}.
+#' @return The value of \code{$}.
+#' @export
 maxmin_selection <- function(fps, k, seed = NULL) {
   .tncomp_select(fps, k, "maxmin", seed)$chosen
 }
 
+#' maxsum_selection
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fps See Usage.
+#' @param k See Usage.
+#' @param seed Defaults to \code{NULL}.
+#' @return The value of \code{$}.
+#' @export
 maxsum_selection <- function(fps, k, seed = NULL) {
   .tncomp_select(fps, k, "maxsum", seed)$chosen
 }
 
+#' diversity
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fps See Usage.
+#' @param subset See Usage.
+#' @param D Defaults to \code{NULL}.
+#' @return A list with \code{min_distance}, \code{mean_distance}, \code{max_distance}, \code{n_pairs}.
+#' @export
 diversity <- function(fps, subset, D = NULL) {
   M <- if (is.null(D)) distance_matrix(fps) else D
   S <- as.integer(subset)
@@ -156,6 +194,17 @@ diversity <- function(fps, subset, D = NULL) {
   )
 }
 
+#' morie_tncomp
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fps See Usage.
+#' @param k See Usage.
+#' @param objective Defaults to \code{"maxmin"}.
+#' @param seed Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_tncomp <- function(fps, k, objective = "maxmin", seed = NULL) {
   result <- .tncomp_select(fps, k, objective, seed)
   chosen <- result$chosen

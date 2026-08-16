@@ -24,6 +24,16 @@
 
 # Internal: evenly spaced knots, extended by 'degree' at each end.
 # Mirrors Python knot_sequence(xmin, xmax, nseg, degree) in smfd.
+#' Internal: evenly spaced knots, extended by \'degree\' at each end
+#'
+#' Mirrors Python knot_sequence(xmin, xmax, nseg, degree) in smfd.
+#'
+#' @param xmin See Usage.
+#' @param xmax See Usage.
+#' @param nseg Defaults to \code{10L}.
+#' @param degree Defaults to \code{3L}.
+#' @return A numeric value.
+#' @export
 smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
   nseg   <- as.integer(nseg)
   degree <- as.integer(degree)
@@ -38,6 +48,18 @@ smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
 # (Python k-1 in 0-based). Mirrors Python .bspline(x, k, degree,
 # knots) in smfd, including the half-open support, the special
 # right-closed last interval, and the strict-positive denominators.
+#' Internal: Cox-de Boor recursion for one B-spline. k is 1-based
+#'
+#' (Python k-1 in 0-based). Mirrors Python .bspline(x, k, degree, knots)
+#' in smfd, including the half-open support, the special right-closed
+#' last interval, and the strict-positive denominators.
+#'
+#' @param x See Usage.
+#' @param k See Usage.
+#' @param degree See Usage.
+#' @param knots See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 smfd_bspline_one <- function(x, k, degree, knots) {
   if (degree == 0L) {
     last <- k == length(knots) - 1L
@@ -59,6 +81,15 @@ smfd_bspline_one <- function(x, k, degree, knots) {
 
 # Internal: the n x p B-spline design matrix. Mirrors Python
 # bspline_basis(x, knots, degree) in smfd.
+#' Internal: the n x p B-spline design matrix. Mirrors Python
+#'
+#' bspline_basis(x, knots, degree) in smfd.
+#'
+#' @param x See Usage.
+#' @param knots See Usage.
+#' @param degree Defaults to \code{3L}.
+#' @return The value of \code{B}, as built in the body.
+#' @export
 smfd_bspline_basis <- function(x, knots, degree = 3L) {
   degree <- as.integer(degree)
   p <- length(knots) - degree - 1L
@@ -76,6 +107,15 @@ smfd_bspline_basis <- function(x, knots, degree = 3L) {
 # Internal: the d-th order difference matrix, built by iterated
 # first differences starting from the identity. Mirrors Python
 # difference_matrix(p, order) in smfd.
+#' Internal: the d-th order difference matrix, built by iterated
+#'
+#' first differences starting from the identity. Mirrors Python
+#' difference_matrix(p, order) in smfd.
+#'
+#' @param p See Usage.
+#' @param order Defaults to \code{2L}.
+#' @return The value of \code{D}, as built in the body.
+#' @export
 smfd_difference_matrix <- function(p, order = 2L) {
   p     <- as.integer(p)
   order <- as.integer(order)

@@ -4,6 +4,16 @@
 # docstrings numbered these from the extraction sequence, not the book,
 # and were wrong by up to eleven.
 
+#' Eq (3.54): X(z) = sum_n x(n) z^-n; eq (3.55) is the causal FIR case
+#'
+#' Part of the rangayyan_xfrm implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param z Defaults to \code{NULL}.
+#' @param n0 Defaults to \code{0}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 Ztrans <- function(x, z = NULL, n0 = 0) {
   # eq (3.54): X(z) = sum_n x(n) z^-n; eq (3.55) is the causal FIR case.
   xs <- as.numeric(x)
@@ -41,6 +51,15 @@ Ztrans <- function(x, z = NULL, n0 = 0) {
   }, numeric(1))
 }
 
+#' Eq (3.56): y = x * h => Y(z) = X(z) H(z).  Both sides computed
+#'
+#' separately so the property is demonstrated, not assumed.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param z See Usage.
+#' @return A list with \code{y}, \code{Y}, \code{XH}, \code{z}, \code{max_difference}, \code{holds}, \code{method}.
+#' @export
 ZtConv <- function(x, h, z) {
   # eq (3.56): y = x * h  =>  Y(z) = X(z) H(z).  Both sides computed
   # separately so the property is demonstrated, not assumed.
@@ -67,6 +86,15 @@ ZtConv <- function(x, h, z) {
   )
 }
 
+#' Eq (3.66): the Fourier transform is the z-transform on the unit
+#'
+#' circle, z = exp(j omega T).  fs = NULL reads omega as normalized.
+#'
+#' @param x See Usage.
+#' @param omega See Usage.
+#' @param fs Defaults to \code{NULL}.
+#' @return A list with \code{X}, \code{z}, \code{omega}, \code{T}, \code{n}, \code{on_unit_circle}, \code{method}.
+#' @export
 DtftZ <- function(x, omega, fs = NULL) {
   # eq (3.66): the Fourier transform is the z-transform on the unit
   # circle, z = exp(j omega T).  fs = NULL reads omega as normalized.
@@ -86,6 +114,15 @@ DtftZ <- function(x, omega, fs = NULL) {
   )
 }
 
+#' Eq (3.74): exp(j omega t) = cos(omega t) + j sin(omega t)
+#'
+#' Part of the rangayyan_xfrm implementation; see the file header for
+#' the source it follows.
+#'
+#' @param omega See Usage.
+#' @param t Defaults to \code{0}.
+#' @return A list with \code{value}, \code{real}, \code{imag}, \code{angle}, \code{unit_modulus}, \code{method}.
+#' @export
 Euler <- function(omega, t = 0) {
   # eq (3.74): exp(j omega t) = cos(omega t) + j sin(omega t)
   ws <- as.numeric(omega)
@@ -107,6 +144,18 @@ Euler <- function(omega, t = 0) {
   )
 }
 
+#' Eqs (3.75)-(3.76): one transform in two frequency variables,
+#'
+#' omega = 2 pi f.  Integrated over the supplied samples, so the limits
+#' are the duration of the signal.
+#'
+#' @param x See Usage.
+#' @param t Defaults to \code{NULL}.
+#' @param omega Defaults to \code{NULL}.
+#' @param f Defaults to \code{NULL}.
+#' @param dt Defaults to \code{NULL}.
+#' @return A list with \code{X}, \code{omega}, \code{f}, \code{variable}, \code{duration}, \code{method}.
+#' @export
 Ctft <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
   # eqs (3.75)-(3.76): one transform in two frequency variables,
   # omega = 2 pi f.  Integrated over the supplied samples, so the limits
@@ -141,17 +190,49 @@ Ctft <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
   )
 }
 
+#' Eq (3.76), the Hz spelling of eq (3.75); one implementation so the
+#'
+#' two can never drift apart.
+#'
+#' @param x See Usage.
+#' @param f See Usage.
+#' @param t Defaults to \code{NULL}.
+#' @param dt Defaults to \code{NULL}.
+#' @return The value of \code{Ctft}.
+#' @export
 CtftF <- function(x, f, t = NULL, dt = NULL) {
   # eq (3.76), the Hz spelling of eq (3.75); one implementation so the
   # two can never drift apart.
   Ctft(x, t = t, f = f, dt = dt)
 }
 
+#' Eqs (3.75)-(3.76); the name Section 3.4.4 uses
+#'
+#' Part of the rangayyan_xfrm implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param t Defaults to \code{NULL}.
+#' @param omega Defaults to \code{NULL}.
+#' @param f Defaults to \code{NULL}.
+#' @param dt Defaults to \code{NULL}.
+#' @return The value of \code{Ctft}.
+#' @export
 Fourier <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
   # eqs (3.75)-(3.76); the name Section 3.4.4 uses.
   Ctft(x, t = t, omega = omega, f = f, dt = dt)
 }
 
+#' Eq (3.77): the 1/(2 pi) belongs to the omega form only.  Getting that
+#'
+#' factor wrong scales the synthesis by 6.28, so the branch is explicit.
+#'
+#' @param X See Usage.
+#' @param t See Usage.
+#' @param omega Defaults to \code{NULL}.
+#' @param f Defaults to \code{NULL}.
+#' @return A list with \code{x}, \code{t}, \code{variable}, \code{scale}, \code{method}.
+#' @export
 Ictft <- function(X, t, omega = NULL, f = NULL) {
   # eq (3.77): the 1/(2 pi) belongs to the omega form only.  Getting that
   # factor wrong scales the synthesis by 6.28, so the branch is explicit.
@@ -192,6 +273,16 @@ Ictft <- function(X, t, omega = NULL, f = NULL) {
   )
 }
 
+#' Eq (3.78): discrete signal, CONTINUOUS frequency -- that is the whole
+#'
+#' distinction from the DFT of eq (3.80), which samples this at N
+#' points.
+#'
+#' @param x See Usage.
+#' @param omega See Usage.
+#' @param n0 Defaults to \code{0}.
+#' @return A list with \code{X}, \code{omega}, \code{n0}, \code{n}, \code{method}.
+#' @export
 Dtft <- function(x, omega, n0 = 0) {
   # eq (3.78): discrete signal, CONTINUOUS frequency -- that is the whole
   # distinction from the DFT of eq (3.80), which samples this at N points.
@@ -213,6 +304,14 @@ Dtft <- function(x, omega, n0 = 0) {
   )
 }
 
+#' Eq (3.79): K need not equal N.  K > N samples the same DTFT more
+#'
+#' finely; K < N folds and the signal cannot be recovered.
+#'
+#' @param x See Usage.
+#' @param k_points See Usage.
+#' @return A list with \code{X}, \code{K}, \code{n}, \code{aliased}, \code{method}.
+#' @export
 DftK <- function(x, k_points) {
   # eq (3.79): K need not equal N.  K > N samples the same DTFT more
   # finely; K < N folds and the signal cannot be recovered.
@@ -234,6 +333,14 @@ DftK <- function(x, k_points) {
   )
 }
 
+#' Eq (3.80), evaluated straight from the definition: exact at any N,
+#'
+#' with no power-of-two requirement.  eq (3.85) is the same sum split
+#' into cos and sin parts, returned here so the two cannot disagree.
+#'
+#' @param x See Usage.
+#' @return A list with \code{X}, \code{real}, \code{imag}, \code{n}, \code{magnitude}, \code{conjugate_symmetric}, \code{method}.
+#' @export
 Dft <- function(x) {
   # eq (3.80), evaluated straight from the definition: exact at any N,
   # with no power-of-two requirement.  eq (3.85) is the same sum split
@@ -260,6 +367,14 @@ Dft <- function(x) {
   )
 }
 
+#' Eq (3.80) with bin k at k fs / N.  Figure 3.38: for even N, DC and
+#'
+#' the folding frequency fs/2 are the two real-valued bins.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 DftX <- function(x, fs = 1) {
   # eq (3.80) with bin k at k fs / N.  Figure 3.38: for even N, DC and
   # the folding frequency fs/2 are the two real-valued bins.
@@ -272,6 +387,15 @@ DftX <- function(x, fs = 1) {
   r
 }
 
+#' Eq (3.82): W_N = exp(-j 2 pi / N), the N-th root of unity
+#'
+#' Part of the rangayyan_xfrm implementation; see the file header for
+#' the source it follows.
+#'
+#' @param npoints See Usage.
+#' @param power Defaults to \code{1}.
+#' @return A list with \code{W}, \code{N}, \code{power}, \code{root_of_unity}, \code{method}.
+#' @export
 Twiddle <- function(npoints, power = 1) {
   # eq (3.82): W_N = exp(-j 2 pi / N), the N-th root of unity.
   n <- as.integer(npoints)
@@ -290,6 +414,14 @@ Twiddle <- function(npoints, power = 1) {
   )
 }
 
+#' Eq (3.83): the same transform written with twiddle factors, which is
+#'
+#' the structure the FFT exploits via eqs (3.88)-(3.89).  Checked
+#' against Dft() rather than assumed equal.
+#'
+#' @param x See Usage.
+#' @return A list with \code{X}, \code{W}, \code{n}, \code{max_difference}, \code{agrees_with_definition}, \code{method}.
+#' @export
 DftTw <- function(x) {
   # eq (3.83): the same transform written with twiddle factors, which is
   # the structure the FFT exploits via eqs (3.88)-(3.89).  Checked
@@ -317,6 +449,16 @@ DftTw <- function(x) {
   )
 }
 
+#' Eq (3.84): W_N^(nk) = cos(.) - j sin(.).  Note the MINUS on the sine:
+#'
+#' the DFT projects onto the conjugated exponential, and that sign is
+#' the commonest transcription error in a hand-written DFT.
+#'
+#' @param npoints See Usage.
+#' @param n See Usage.
+#' @param k See Usage.
+#' @return A list with \code{W}, \code{cos}, \code{sin}, \code{angle}, \code{N}, \code{n}, \code{k}, \code{method}.
+#' @export
 TwidCS <- function(npoints, n, k) {
   # eq (3.84): W_N^(nk) = cos(.) - j sin(.).  Note the MINUS on the sine:
   # the DFT projects onto the conjugated exponential, and that sign is
@@ -333,6 +475,13 @@ TwidCS <- function(npoints, n, k) {
   )
 }
 
+#' Eq (3.85): the real part is the projection onto the k-th cosine, the
+#'
+#' imaginary part is MINUS the projection onto the corresponding sine.
+#'
+#' @param x See Usage.
+#' @return A list with \code{X}, \code{cos_projection}, \code{sin_projection}, \code{real}, \code{imag}, \code{n}, \code{method}.
+#' @export
 DftRI <- function(x) {
   # eq (3.85): the real part is the projection onto the k-th cosine, the
   # imaginary part is MINUS the projection onto the corresponding sine.
@@ -356,6 +505,14 @@ DftRI <- function(x) {
   )
 }
 
+#' Eq (3.86): synthesis as a weighted sum of sinusoids.  The imaginary
+#'
+#' residue is reported, not discarded -- a large one means the spectrum
+#' was not conjugate-symmetric and the "real signal" reading is wrong.
+#'
+#' @param X See Usage.
+#' @return A list with \code{x}, \code{complex}, \code{n}, \code{max_imaginary}, \code{method}.
+#' @export
 IdftRI <- function(X) {
   # eq (3.86): synthesis as a weighted sum of sinusoids.  The imaginary
   # residue is reported, not discarded -- a large one means the spectrum
@@ -375,6 +532,16 @@ IdftRI <- function(X) {
   )
 }
 
+#' Eq (3.87).  The book is explicit that the convolution here is
+#'
+#' PERIODIC: multiplying N-point DFTs gives the circular convolution of
+#' eq (3.90), and the linear one needs L >= Nx + Nh - 1 with both
+#' sequences zero-padded.  Both are returned so the wrap is visible.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @return A list with \code{linear}, \code{circular}, \code{from_dft}, \code{padded_length}, \code{n_linear}, \code{n_circular}, \code{max_difference}, \code{holds}, \code{wraps_if_unpadded}, \code{method}.
+#' @export
 DftConv <- function(x, h) {
   # eq (3.87).  The book is explicit that the convolution here is
   # PERIODIC: multiplying N-point DFTs gives the circular convolution of
@@ -408,6 +575,15 @@ DftConv <- function(x, h) {
   )
 }
 
+#' Eq (3.88): W_N^(-nk) = conj(W_N^(nk)) -- a negative power costs only
+#'
+#' a sign flip, one of the two properties the FFT is built on.
+#'
+#' @param npoints See Usage.
+#' @param n See Usage.
+#' @param k See Usage.
+#' @return A list with \code{negative_power}, \code{conjugate}, \code{difference}, \code{holds}, \code{N}, \code{n}, \code{k}, \code{method}.
+#' @export
 TwidConj <- function(npoints, n, k) {
   # eq (3.88): W_N^(-nk) = conj(W_N^(nk)) -- a negative power costs only
   # a sign flip, one of the two properties the FFT is built on.
@@ -426,6 +602,15 @@ TwidConj <- function(npoints, n, k) {
   )
 }
 
+#' Eq (3.89): indices reduce modulo N -- why the same roots of unity are
+#'
+#' reused at every FFT stage, and why every DFT relation is periodic.
+#'
+#' @param npoints See Usage.
+#' @param n See Usage.
+#' @param k See Usage.
+#' @return A list with \code{base}, \code{shift_k}, \code{shift_n}, \code{max_difference}, \code{holds}, \code{N}, \code{n}, \code{k}, \code{method}.
+#' @export
 TwidPer <- function(npoints, n, k) {
   # eq (3.89): indices reduce modulo N -- why the same roots of unity are
   # reused at every FFT stage, and why every DFT relation is periodic.
@@ -450,6 +635,16 @@ TwidPer <- function(npoints, n, k) {
   )
 }
 
+#' Eq (3.90): y_p(n) = sum_k x_p(k) h_p[(n-k) mod N], defined only for
+#'
+#' equal periods.  Both routes -- the modular sum and the inverse DFT of
+#' X(k)H(k) -- are computed; their agreement is eq (3.87) at equal N.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param npoints Defaults to \code{NULL}.
+#' @return A list with \code{y}, \code{via_dft}, \code{N}, \code{max_difference}, \code{agrees}, \code{equals_linear}, \code{linear_length}, \code{method}.
+#' @export
 CircConv <- function(x, h, npoints = NULL) {
   # eq (3.90): y_p(n) = sum_k x_p(k) h_p[(n-k) mod N], defined only for
   # equal periods.  Both routes -- the modular sum and the inverse DFT of
@@ -515,6 +710,15 @@ CircConv <- function(x, h, npoints = NULL) {
   )
 }
 
+#' Eq (3.92): x_e(n) = 0.5 [x(n) + x(-n)].  x(-n) must exist, so the
+#'
+#' index grid has to be symmetric; reflecting a causal sequence about 0
+#' instead computes x/2, which is something else entirely.
+#'
+#' @param x See Usage.
+#' @param n Defaults to \code{NULL}.
+#' @return A vector, from \code{c}.
+#' @export
 EvenPart <- function(x, n = NULL) {
   # eq (3.92): x_e(n) = 0.5 [x(n) + x(-n)].  x(-n) must exist, so the
   # index grid has to be symmetric; reflecting a causal sequence about 0
@@ -522,11 +726,28 @@ EvenPart <- function(x, n = NULL) {
   c(.morie_rg_evenodd(x, n), method = "Rangayyan (2024) eq. (3.92)")
 }
 
+#' Eq (3.93): x_o(n) = 0.5 [x(n) - x(-n)]; forced to 0 at the origin
+#'
+#' Part of the rangayyan_xfrm implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param n Defaults to \code{NULL}.
+#' @return A vector, from \code{c}.
+#' @export
 OddPart <- function(x, n = NULL) {
   # eq (3.93): x_o(n) = 0.5 [x(n) - x(-n)]; forced to 0 at the origin.
   c(.morie_rg_evenodd(x, n), method = "Rangayyan (2024) eq. (3.93)")
 }
 
+#' Eqs (3.92)-(3.94).  Eq (3.94) is an identity, so the reconstruction
+#'
+#' error checks the index bookkeeping, not the arithmetic.
+#'
+#' @param x See Usage.
+#' @param n Defaults to \code{NULL}.
+#' @return A vector, from \code{c}.
+#' @export
 EvenOdd <- function(x, n = NULL) {
   # eqs (3.92)-(3.94).  Eq (3.94) is an identity, so the reconstruction
   # error checks the index bookkeeping, not the arithmetic.
@@ -535,6 +756,18 @@ EvenOdd <- function(x, n = NULL) {
   )
 }
 
+#' Eqs (4.58)-(4.60): y = x p, log y = log x + log p, and so
+#'
+#' Y_l(omega) = X_l(omega) + P_l(omega).  Eq (4.59) needs both factors
+#' nonzero, so zeros are rejected rather than yielding -Inf.
+#'
+#' @param x See Usage.
+#' @param p See Usage.
+#' @param omega See Usage.
+#' @param t Defaults to \code{NULL}.
+#' @param dt Defaults to \code{NULL}.
+#' @return A list with \code{y}, \code{Yl}, \code{Xl}, \code{Pl}, \code{max_difference}, \code{additive}, \code{method}.
+#' @export
 LogFT <- function(x, p, omega, t = NULL, dt = NULL) {
   # eqs (4.58)-(4.60): y = x p, log y = log x + log p, and so
   # Y_l(omega) = X_l(omega) + P_l(omega).  Eq (4.59) needs both factors
@@ -563,6 +796,18 @@ LogFT <- function(x, p, omega, t = NULL, dt = NULL) {
   )
 }
 
+#' Eqs (4.61)-(4.62): the Fourier transform turns the convolution into a
+#'
+#' product, which eq (4.63) then turns into a sum.  The convolution is
+#' scaled by dt as in eq (3.30), so the identity holds in the
+#' continuous-time sense rather than up to a sampling-interval factor.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param omega See Usage.
+#' @param dt Defaults to \code{1}.
+#' @return A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{max_difference}, \code{holds}, \code{method}.
+#' @export
 FtConv <- function(x, h, omega, dt = 1) {
   # eqs (4.61)-(4.62): the Fourier transform turns the convolution into a
   # product, which eq (4.63) then turns into a sum.  The convolution is
@@ -603,6 +848,17 @@ FtConv <- function(x, h, omega, dt = 1) {
   )
 }
 
+#' Eqs (4.63), (4.65): complex logs of the z-transforms add.  Arg() is a
+#'
+#' principal value in (-pi, pi], so the two sides can differ by an
+#' integer multiple of 2 pi j; that is reported as branch_offset rather
+#' than papered over -- it is the phase-unwrapping problem itself.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param z See Usage.
+#' @return A list with \code{y}, \code{Y_hat}, \code{X_hat}, \code{H_hat}, \code{magnitude_difference}, \code{branch_offset}, \code{holds_up_to_branch}, \code{method}.
+#' @export
 ClogSum <- function(x, h, z) {
   # eqs (4.63), (4.65): complex logs of the z-transforms add.  Arg() is a
   # principal value in (-pi, pi], so the two sides can differ by an
@@ -645,6 +901,14 @@ ClogSum <- function(x, h, z) {
   )
 }
 
+#' Eq (4.69): log(1 + x) = x - x^2/2 + x^3/3 - ..., |x| < 1.  The radius
+#'
+#' is exactly 1, so |x| >= 1 is refused instead of diverging quietly.
+#'
+#' @param x See Usage.
+#' @param terms Defaults to \code{20}.
+#' @return A list with \code{value}, \code{exact}, \code{error}, \code{error_bound}, \code{terms}, \code{method}.
+#' @export
 LogSeries <- function(x, terms = 20) {
   # eq (4.69): log(1 + x) = x - x^2/2 + x^3/3 - ..., |x| < 1.  The radius
   # is exactly 1, so |x| >= 1 is refused instead of diverging quietly.
@@ -675,6 +939,16 @@ LogSeries <- function(x, terms = 20) {
   )
 }
 
+#' Eq (4.70): log(1 - alpha z^-1) = -sum alpha^n/n z^-n, |z| > |alpha|
+#'
+#' The coefficients sit at POSITIVE quefrency and decay at least as fast
+#' as 1/n: the minimum-phase cepstrum is causal.
+#'
+#' @param alpha See Usage.
+#' @param terms Defaults to \code{20}.
+#' @param z Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 LogMinPh <- function(alpha, terms = 20, z = NULL) {
   # eq (4.70): log(1 - alpha z^-1) = -sum alpha^n/n z^-n, |z| > |alpha|.
   # The coefficients sit at POSITIVE quefrency and decay at least as fast
@@ -701,6 +975,17 @@ LogMinPh <- function(alpha, terms = 20, z = NULL) {
   out
 }
 
+#' Eq (4.71): log(1 - beta z) = -sum beta^n/n z^n, |z| < 1/|beta|.  The
+#'
+#' mirror of eq (4.70): positive powers of z, so the maximum-phase part
+#' of the cepstrum is anticausal -- which is why liftering windows for
+#' homomorphic deconvolution are two-sided.
+#'
+#' @param beta See Usage.
+#' @param terms Defaults to \code{20}.
+#' @param z Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 LogMaxPh <- function(beta, terms = 20, z = NULL) {
   # eq (4.71): log(1 - beta z) = -sum beta^n/n z^n, |z| < 1/|beta|.  The
   # mirror of eq (4.70): positive powers of z, so the maximum-phase part

@@ -128,6 +128,26 @@
   length(buf$data)
 }
 
+#' morie_dqnv
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @param R See Usage.
+#' @param n_states See Usage.
+#' @param n_actions See Usage.
+#' @param gamma Defaults to \code{0.99}.
+#' @param alpha Defaults to \code{0.1}.
+#' @param steps Defaults to \code{20000}.
+#' @param C Defaults to \code{100}.
+#' @param buffer_size Defaults to \code{1000}.
+#' @param batch Defaults to \code{16}.
+#' @param seed Defaults to \code{0}.
+#' @param use_replay Defaults to \code{TRUE}.
+#' @param use_target Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{Q}, \code{residual_history}, \code{final_residual}, \code{greedy_policy}, \code{used_replay}, \code{used_target_network}, \code{C}, \code{method}.
+#' @export
 morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
                       steps = 20000, C = 100, buffer_size = 1000, batch = 16,
                       seed = 0, use_replay = TRUE, use_target = TRUE) {

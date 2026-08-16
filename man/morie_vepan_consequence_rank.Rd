@@ -1,0 +1,19 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_vepan_consequence_rank}
+\alias{morie_vepan_consequence_rank}
+\title{Severity rank of an SO term; 1 is worst. Unknown terms sort last}
+\usage{
+morie_vepan_consequence_rank(term)
+}
+\arguments{
+\item{term}{See Usage.}
+}
+\description{
+Part of the vepan_native implementation; see the file header for the source it follows.
+}
+\value{
+One of two values, depending on the branch taken.
+}
+\keyword{internal}

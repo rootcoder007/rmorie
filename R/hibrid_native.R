@@ -123,6 +123,22 @@
   list(ll = ll, beta = beta, s2e = s2e, L = L)
 }
 
+#' morie_hibrid_hibrid_prediction
+#'
+#' Part of the hibrid_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param p1_geno See Usage.
+#' @param p2_geno See Usage.
+#' @param sigma2_sca Defaults to \code{NULL}.
+#' @param X Defaults to \code{NULL}.
+#' @param p1_new Defaults to \code{NULL}.
+#' @param p2_new Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{300L}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{gca_effect}, \code{sca_effect}, \code{coefficients}, \code{sigma2_gca}, \code{sigma2_sca}, \code{sigma2_e}, \code{sca_share}, \code{h2}, \code{gca_kernel}, \code{sca_kernel}, \code{reml_path}, \code{reml_loglik}, \code{iterations}, \code{converged}, \code{sca_fixed}, \code{prediction_new}, \code{residuals}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.
+#' @export
 morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
                                            sigma2_sca = NULL, X = NULL,
                                            p1_new = NULL, p2_new = NULL,

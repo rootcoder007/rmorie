@@ -173,6 +173,21 @@
   list(weights=cum_w, per_time=per_time)
 }
 
+#' morie_tdcvar
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param L_t See Usage.
+#' @param time Defaults to \code{NULL}.
+#' @param contrast Defaults to \code{"cumulative"}.
+#' @param kind Defaults to \code{"binary"}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @param trim Defaults to \code{NULL}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_tdcvar <- function(y, A, L_t, time=NULL, contrast="cumulative",
                           kind="binary", stabilize=TRUE, trim=NULL) {
   if (!contrast %in% c("cumulative", "final", "everexposed")) {
@@ -289,6 +304,13 @@ morie_tdcvar <- function(y, A, L_t, time=NULL, contrast="cumulative",
   result
 }
 
+#' morie_tdcvar_cheatsheet
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_tdcvar_cheatsheet <- function() {
   "tdcvar: time-varying IPTW MSM (H&R Ch.21). Returns the weighted MSM plus the two biased comparators -- adjusting for a treatment-affected confounder over-adjusts, omitting it under-adjusts, and Ch.20 says they straddle the truth."
 }

@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_lsa}
+\alias{morie_lsa}
+\title{morie_lsa}
+\usage{
+morie_lsa(X, k_dim = NULL, how = "log_entropy", query = NULL, top_k = 5L)
+}
+\arguments{
+\item{X}{See Usage.}
+\item{k_dim}{Defaults to \code{NULL}.}
+\item{how}{Defaults to \code{"log_entropy"}.}
+\item{query}{Defaults to \code{NULL}.}
+\item{top_k}{Defaults to \code{5L}.}
+}
+\description{
+Part of the lsa_native implementation; see the file header for the source it follows.
+}
+\value{
+The value of \code{lsa_decompose}.
+}
+\keyword{internal}

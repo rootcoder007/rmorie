@@ -77,6 +77,17 @@
   }
 }
 
+#' morie_twoT_tower_embedding
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param features See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @param normalise Defaults to \code{TRUE}.
+#' @return A list with \code{embedding}, \code{norm}, \code{normalised}.
+#' @export
 morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) {
   x <- .twoT_as_vec(features)
   Wm <- .twoT_as_mat(W)
@@ -101,6 +112,16 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
   list(embedding = z / n, norm = n, normalised = TRUE)
 }
 
+#' morie_twoT_corrected_logits
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param probabilities See Usage.
+#' @param temperature Defaults to \code{1}.
+#' @return A list with \code{corrected}, \code{raw}, \code{shift}, \code{note}.
+#' @export
 morie_twoT_corrected_logits <- function(scores, probabilities,
                                         temperature = 1.0) {
   s <- .twoT_as_vec(scores)
@@ -131,6 +152,17 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
   integer(0)
 }
 
+#' morie_twoT_streaming_frequency
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hits See Usage.
+#' @param n_steps See Usage.
+#' @param alpha Defaults to \code{0.05}.
+#' @param init Defaults to \code{NULL}.
+#' @return A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
+#' @export
 morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
                                           init = NULL) {
   a <- as.numeric(alpha)
@@ -163,6 +195,17 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
                     "so 1/B is the sampling probability"))
 }
 
+#' morie_twoT_batch_softmax_loss
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query_embeddings See Usage.
+#' @param item_embeddings See Usage.
+#' @param probabilities Defaults to \code{NULL}.
+#' @param temperature Defaults to \code{0.05}.
+#' @return A list with \code{loss}, \code{per_example}, \code{corrected}.
+#' @export
 morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
                                           probabilities = NULL,
                                           temperature = 0.05) {
@@ -197,6 +240,18 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
        corrected = !is.null(probabilities))
 }
 
+#' morie_twoT_retrieve
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query_embedding See Usage.
+#' @param item_embeddings See Usage.
+#' @param probabilities Defaults to \code{NULL}.
+#' @param top_k Defaults to \code{5}.
+#' @param temperature Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{top_k}, \code{uncorrected_top_k}, \code{scores}, \code{corrected_scores}, \code{changed}, \code{method}, \code{note}.
+#' @export
 morie_twoT_retrieve <- function(query_embedding, item_embeddings,
                                 probabilities = NULL, top_k = 5,
                                 temperature = 1.0) {
@@ -224,6 +279,13 @@ morie_twoT_retrieve <- function(query_embedding, item_embeddings,
                     "for irrelevance"))
 }
 
+#' morie_twoT_cheatsheet
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_twoT_cheatsheet <- function() {
   paste("twoT: a softmax over millions of items is impossible, so ",
         "use IN-BATCH negatives -- which are drawn from the ",

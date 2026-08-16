@@ -83,6 +83,24 @@
   if (r < 0.0) 2.0 * r else r
 }
 
+#' morie_agalfsy_rl_pose_search
+#'
+#' Part of the agalfsy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param receptor See Usage.
+#' @param ligand See Usage.
+#' @param site Defaults to \code{NULL}.
+#' @param policy Defaults to \code{NULL}.
+#' @param critic Defaults to \code{NULL}.
+#' @param max_steps Defaults to \code{600L}.
+#' @param min_steps Defaults to \code{300L}.
+#' @param window Defaults to \code{50L}.
+#' @param tol Defaults to \code{0.3}.
+#' @param box Defaults to \code{18}.
+#' @param seed Defaults to \code{2}.
+#' @return A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start}, \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason}, \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions}, \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method}, \code{note}.
+#' @export
 morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
                                          policy = NULL, critic = NULL,
                                          max_steps = 600L, min_steps = 300L,

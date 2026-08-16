@@ -12,6 +12,18 @@
 # 41st International Conference on Machine Learning, PMLR 235,
 # arXiv:2310.10688.
 
+#' morie_timesf
+#'
+#' Part of the timesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param history See Usage.
+#' @param predictor See Usage.
+#' @param horizon See Usage.
+#' @param input_patch_len See Usage.
+#' @param output_patch_len See Usage.
+#' @return The value of \code{morie_timesfm}.
+#' @export
 morie_timesf <- function(history, predictor, horizon, input_patch_len,
                          output_patch_len) {
   morie_timesfm(history, predictor, horizon, input_patch_len,

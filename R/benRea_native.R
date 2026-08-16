@@ -4,6 +4,14 @@
 
 .benRea_NEG <- -Inf
 
+#' bio_labels
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param types See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 bio_labels <- function(types) {
   ts <- as.character(types)
   if (length(ts) == 0) stop("benRea: no entity types given")
@@ -26,6 +34,14 @@ bio_labels <- function(types) {
   list(p = substr(label, 1, 1), t = substr(label, 3, nchar(label)))
 }
 
+#' valid_transitions
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param labels See Usage.
+#' @return The value of \code{T}, as built in the body.
+#' @export
 valid_transitions <- function(labels) {
   n <- length(labels)
   T <- matrix(TRUE, n, n)
@@ -42,10 +58,26 @@ valid_transitions <- function(labels) {
   T
 }
 
+#' start_allowed
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param labels See Usage.
+#' @return The value of \code{!=}.
+#' @export
 start_allowed <- function(labels) {
   substr(labels, 1, 1) != "I"
 }
 
+#' is_valid_bio
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param path See Usage.
+#' @return A logical value.
+#' @export
 is_valid_bio <- function(path) {
   prev <- "O"
   prev_t <- NA
@@ -59,12 +91,32 @@ is_valid_bio <- function(path) {
   TRUE
 }
 
+#' greedy_decode
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param emissions See Usage.
+#' @param labels See Usage.
+#' @return The value of \code{apply}.
+#' @export
 greedy_decode <- function(emissions, labels) {
   em <- as.matrix(emissions)
   storage.mode(em) <- "double"
   apply(em, 1, function(r) labels[which.max(r)])
 }
 
+#' viterbi_decode
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param emissions See Usage.
+#' @param labels See Usage.
+#' @param transitions Defaults to \code{NULL}.
+#' @param transition_scores Defaults to \code{NULL}.
+#' @return A list with \code{path}, \code{score}.
+#' @export
 viterbi_decode <- function(emissions, labels, transitions = NULL,
                            transition_scores = NULL) {
   em <- as.matrix(emissions)
@@ -102,6 +154,14 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
   list(path = labels[path_idx], score = dp[L, end])
 }
 
+#' extract_spans
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param path See Usage.
+#' @return The value of \code{spans}, as built in the body.
+#' @export
 extract_spans <- function(path) {
   spans <- list()
   cur_t <- NA; cur_s <- NA
@@ -134,6 +194,15 @@ extract_spans <- function(path) {
   spans
 }
 
+#' span_f1
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pred See Usage.
+#' @param gold See Usage.
+#' @return A list with \code{precision}, \code{recall}, \code{f1}, \code{true_positives}, \code{n_pred}, \code{n_gold}.
+#' @export
 span_f1 <- function(pred, gold) {
   p <- extract_spans(pred); g <- extract_spans(gold)
   pk <- sapply(p, function(s) paste(s, collapse = ":"))
@@ -146,6 +215,18 @@ span_f1 <- function(pred, gold) {
        true_positives = tp, n_pred = length(p), n_gold = length(g))
 }
 
+#' ner_decode
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param emissions See Usage.
+#' @param types See Usage.
+#' @param decoder Defaults to \code{"viterbi"}.
+#' @param transition_scores Defaults to \code{NULL}.
+#' @param gold Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 ner_decode <- function(emissions, types, decoder = "viterbi",
                        transition_scores = NULL, gold = NULL) {
   if (!(decoder %in% c("viterbi", "greedy")))

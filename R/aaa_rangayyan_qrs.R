@@ -173,6 +173,19 @@
 }
 
 
+#' Eqs (3.132)-(3.133): H(z) = (1/T)(1 - z^-1)/(1 - 0.995 z^-1).  The
+#' zero at
+#'
+#' z = 1 kills DC (which is what baseline wander is); the pole close to
+#' it restores the gain to roughly unity by about 0.5 Hz so the QRS
+#' survives. The 1/T factor is applied as written, so the output is
+#' scaled by fs.
+#'
+#' @param ecg See Usage.
+#' @param fs See Usage.
+#' @param pole Defaults to \code{0.995}.
+#' @return A list with \code{ecg_detrended}, \code{n}, \code{fs}, \code{pole}, \code{gain_dc}, \code{gain_at_half_hz}, \code{gain_at_nyquist}, \code{gain_relative_at_half_hz}, \code{dc_is_rejected}, \code{zero_at_z_equals_one}, \code{pole_restores_gain_above_the_wander_band}, \code{differentiates_by_the_one_over_T_factor}, \code{method}.
+#' @export
 BlWander <- function(ecg, fs, pole = 0.995) {
   # eqs (3.132)-(3.133): H(z) = (1/T)(1 - z^-1)/(1 - 0.995 z^-1).  The zero at
   # z = 1 kills DC (which is what baseline wander is); the pole close to it
@@ -221,6 +234,20 @@ BlWander <- function(ecg, fs, pole = 0.995) {
 }
 
 
+#' Lehner and Rangayyan, Section 4.3.5.  The noncausal least-squares
+#' second
+#'
+#' derivative of eq (4.22), squared and smoothed by eq (4.23).  The
+#' second derivative is used because the notch rides on the falling limb
+#' of the pulse, which a first derivative cannot separate from the limb
+#' itself.
+#'
+#' @param cp See Usage.
+#' @param fs See Usage.
+#' @param qrs Defaults to \code{NULL}.
+#' @param mwin Defaults to \code{16}.
+#' @return A list with \code{notch}, \code{upstroke}, \code{s}, \code{p}, \code{mwin}, \code{fs}, \code{tolerancems}, \code{method}.
+#' @export
 DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
   # Lehner and Rangayyan, Section 4.3.5.  The noncausal least-squares second
   # derivative of eq (4.22), squared and smoothed by eq (4.23).  The second
@@ -288,6 +315,18 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
 }
 
 
+#' Carotid pulse landmarks (Section 1.2.10) and the systolic time
+#' intervals
+#'
+#' of Section 4.9.  PEPC = PEP + 0.4 HR and ETC = ET + 1.6 HR are the
+#' rate corrections that make the intervals comparable between subjects.
+#'
+#' @param cp See Usage.
+#' @param fs See Usage.
+#' @param qrs See Usage.
+#' @param hr Defaults to \code{NULL}.
+#' @return A list with \code{upstroke}, \code{percussion}, \code{notch}, \code{dicwave}, \code{pep}, \code{et}, \code{pepc}, \code{etc}, \code{peppmean}, \code{etmean}, \code{pepcmean}, \code{etcmean}, \code{hr}, \code{fs}, \code{normpepc}, \code{normetcmale}, \code{normetcfemale}, \code{method}.
+#' @export
 CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
   # Carotid pulse landmarks (Section 1.2.10) and the systolic time intervals
   # of Section 4.9.  PEPC = PEP + 0.4 HR and ETC = ET + 1.6 HR are the
@@ -345,6 +384,19 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
 }
 
 
+#' Balda et al., Section 4.3.1: y0 by eq (4.1), y1 by eq (4.2), combined
+#' as
+#'
+#' y2 = 1.3 y0 + 1.1 y1 (eq 4.3), scanned with a threshold of 1.0 on a
+#' maximum-normalised ECG.  Six of eight successive samples must pass,
+#' which is what makes the decision robust to single-sample derivative
+#' spikes.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param thresh Defaults to \code{1}.
+#' @return A list with \code{qrs}, \code{y0}, \code{y1}, \code{y2}, \code{y3}, \code{mask}, \code{thresh}, \code{fs}, \code{hr}, \code{method}.
+#' @export
 QrsDeriv <- function(x, fs, thresh = 1) {
   # Balda et al., Section 4.3.1: y0 by eq (4.1), y1 by eq (4.2), combined as
   # y2 = 1.3 y0 + 1.1 y1 (eq 4.3), scanned with a threshold of 1.0 on a
@@ -404,6 +456,18 @@ QrsDeriv <- function(x, fs, thresh = 1) {
 }
 
 
+#' Section 2.2.6 (EMG RMS and mean frequency rise with contraction)
+#' meets
+#'
+#' Section 2.2.5 (rate rises with effort).  Both series are sampled on
+#' the same beat grid so the correlation between them is well defined.
+#'
+#' @param ecg See Usage.
+#' @param emg See Usage.
+#' @param qrs See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{hr}, \code{rms}, \code{meanfreq}, \code{rrms}, \code{rmnf}, \code{nbeats}, \code{fs}, \code{method}.
+#' @export
 EcgEmgCpl <- function(ecg, emg, qrs, fs) {
   # Section 2.2.6 (EMG RMS and mean frequency rise with contraction) meets
   # Section 2.2.5 (rate rises with effort).  Both series are sampled on the
@@ -452,6 +516,18 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
 }
 
 
+#' Section 1.2.4 waves and intervals.  Amplitudes are measured against
+#' the
+#'
+#' PQ segment, not against zero: the PQ segment is the isoelectric
+#' reference the book names, and it absorbs any residual baseline
+#' offset.
+#'
+#' @param x See Usage.
+#' @param qrs See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{pamp}, \code{qamp}, \code{ramp}, \code{samp}, \code{tamp}, \code{qrsdur}, \code{pdur}, \code{tdur}, \code{prdur}, \code{qtdur}, \code{qrsdurmean}, \code{prdurmean}, \code{qtdurmean}, \code{rampmean}, \code{nbeats}, \code{fs}, \code{method}.
+#' @export
 EcgFeat <- function(x, qrs, fs) {
   # Section 1.2.4 waves and intervals.  Amplitudes are measured against the
   # PQ segment, not against zero: the PQ segment is the isoelectric reference
@@ -544,6 +620,18 @@ EcgFeat <- function(x, qrs, fs) {
 }
 
 
+#' EcgWaveShp
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param qrsdur See Usage.
+#' @param stdev See Usage.
+#' @param rdur Defaults to \code{NULL}.
+#' @param sdur Defaults to \code{NULL}.
+#' @param qpresent Defaults to \code{NULL}.
+#' @return A list with \code{qrsdurms}, \code{qrswide}, \code{lbbbdur}, \code{rbbbdur}, \code{sdurok}, \code{rdurok}, \code{qabsent}, \code{stdev}, \code{stfinding}, \code{required}, \code{method}.
+#' @export
 EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
                        qpresent = NULL) {
   # Sections 1.2.4 (ST deviation against the PQ reference) and 10.2.1 (the
@@ -589,6 +677,20 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
 }
 
 
+#' ST level at J + jofs relative to the PQ isoelectric level, and the
+#' slope
+#'
+#' of the segment that follows (Section 1.2.4).  The 0.1 mV threshold is
+#' the conventional clinical figure, NOT a book value -- the payload
+#' says so.
+#'
+#' @param x See Usage.
+#' @param qrs See Usage.
+#' @param fs See Usage.
+#' @param jofs Defaults to \code{0.06}.
+#' @param thresh Defaults to \code{0.1}.
+#' @return A list with \code{stdev}, \code{stslope}, \code{pattern}, \code{stdevmean}, \code{stslopemean}, \code{flagged}, \code{thresh}, \code{threshnote}, \code{jofs}, \code{fs}, \code{method}.
+#' @export
 ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
   # ST level at J + jofs relative to the PQ isoelectric level, and the slope
   # of the segment that follows (Section 1.2.4).  The 0.1 mV threshold is the
@@ -646,6 +748,17 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
 }
 
 
+#' Section 8.12.  Task Force bands by default; Bianchi et al. bands on
+#'
+#' request.  The RR series is a series of EVENTS, so it is interpolated
+#' onto a uniform grid before the periodogram; the mean is removed first
+#' so DC does not leak into VLF.
+#'
+#' @param rr See Usage.
+#' @param fsr Defaults to \code{4}.
+#' @param bands Defaults to \code{"taskforce"}.
+#' @return A list with \code{vlf}, \code{lf}, \code{hf}, \code{total}, \code{vlfpct}, \code{lfpct}, \code{hfpct}, \code{lfhf}, \code{bands}, \code{limits}, \code{fsr}, \code{n}, \code{method}.
+#' @export
 HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12.  Task Force bands by default; Bianchi et al. bands on
   # request.  The RR series is a series of EVENTS, so it is interpolated onto
@@ -707,6 +820,15 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
 }
 
 
+#' SDNN, RMSSD and pNN50.  Section 2.2.5 motivates these but does not
+#' define
+#'
+#' them; the definitions are the Task Force ones, Circulation
+#' 93(5):1043- 1065, 1996, reference [84] of the book\'s Chapter 8.
+#'
+#' @param rr See Usage.
+#' @return A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50}, \code{meannn}, \code{meanhr}, \code{n}, \code{units}, \code{method}.
+#' @export
 HrvTime <- function(rr) {
   # SDNN, RMSSD and pNN50.  Section 2.2.5 motivates these but does not define
   # them; the definitions are the Task Force ones, Circulation 93(5):1043-
@@ -734,6 +856,19 @@ HrvTime <- function(rr) {
 }
 
 
+#' Section 4.9.  S1 at the QRS onset; S2 from the dicrotic notch minus
+#' the
+#'
+#' standardised 52.6 ms (mean + 2 SD of the 42.6 +/- 5 ms Lehner and
+#' Rangayyan measurement).  The notch lags the sound because it is the
+#' same aortic-valve closure observed after propagation up the arterial
+#' tree.
+#'
+#' @param ecg See Usage.
+#' @param cp See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{s1}, \code{s2}, \code{notch}, \code{qrs}, \code{s2delayms}, \code{s2delaymeasured}, \code{searchwindowms}, \code{fs}, \code{method}.
+#' @export
 HSoundId <- function(ecg, cp, fs) {
   # Section 4.9.  S1 at the QRS onset; S2 from the dicrotic notch minus the
   # standardised 52.6 ms (mean + 2 SD of the 42.6 +/- 5 ms Lehner and
@@ -763,6 +898,19 @@ HSoundId <- function(ecg, cp, fs) {
 }
 
 
+#' Sections 3.3.5 and 9.7.2: the thoracic lead is the reference input of
+#' an
+#'
+#' adaptive noise canceller whose primary input is the abdominal lead,
+#' so the residual error is the fetal ECG.  Normalised LMS, weights
+#' start at zero, no random initialisation.
+#'
+#' @param abd See Usage.
+#' @param thor See Usage.
+#' @param order Defaults to \code{16}.
+#' @param mu Defaults to \code{0.01}.
+#' @return A list with \code{fetal}, \code{maternal}, \code{weights}, \code{order}, \code{mu}, \code{n}, \code{method}.
+#' @export
 MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
   # Sections 3.3.5 and 9.7.2: the thoracic lead is the reference input of an
   # adaptive noise canceller whose primary input is the abdominal lead, so the
@@ -810,6 +958,18 @@ MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
 }
 
 
+#' Section 1.2.11 characterises motion artifact but gives no detection
+#'
+#' equation, so none is attributed to the book.  Window range and window
+#' activity are both compared against their MEDIANS, because the mean is
+#' dragged upward by the very segments being detected.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param win Defaults to \code{1}.
+#' @param factor Defaults to \code{4}.
+#' @return A list with \code{clean}, \code{artifact}, \code{nsegments}, \code{fraction}, \code{win}, \code{factor}, \code{fs}, \code{method}.
+#' @export
 MotionArt <- function(x, fs, win = 1, factor = 4) {
   # Section 1.2.11 characterises motion artifact but gives no detection
   # equation, so none is attributed to the book.  Window range and window
@@ -884,6 +1044,16 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
 }
 
 
+#' Pan-Tompkins, Section 4.3.2, eqs (4.8)-(4.18) plus search-back.  The
+#'
+#' filter coefficients are integers designed for fs = 200 Hz and DO NOT
+#' rescale; the timing constants (150 ms integrator, 200 ms refractory)
+#' do.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{200}.
+#' @return A list with \code{qrs}, \code{rr}, \code{hr}, \code{integrated}, \code{bandpass}, \code{delay}, \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2}, \code{searchback}, \code{fs}, \code{fsnote}, \code{method}.
+#' @export
 QrsDetect <- function(x, fs = 200) {
   # Pan-Tompkins, Section 4.3.2, eqs (4.8)-(4.18) plus search-back.  The
   # filter coefficients are integers designed for fs = 200 Hz and DO NOT
@@ -990,6 +1160,18 @@ QrsDetect <- function(x, fs = 200) {
 }
 
 
+#' The six-step procedure of Section 4.9.  Timing is imported from the
+#' ECG
+#'
+#' and the carotid pulse because S1 and S2 are not reliably the loudest
+#' events in a PCG once murmurs are present.
+#'
+#' @param pcg See Usage.
+#' @param ecg See Usage.
+#' @param cp See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{s1}, \code{s2}, \code{systole}, \code{diastole}, \code{systolerms}, \code{diastolerms}, \code{fs}, \code{method}.
+#' @export
 PcgParts <- function(pcg, ecg, cp, fs) {
   # The six-step procedure of Section 4.9.  Timing is imported from the ECG
   # and the carotid pulse because S1 and S2 are not reliably the loudest
@@ -1037,6 +1219,18 @@ PcgParts <- function(pcg, ecg, cp, fs) {
 }
 
 
+#' Eq (3.150): H(z) = 1 - 2 cos(wo) z^-1 + z^-2, divided by its DC gain
+#'
+#' H(1) = 2 - 2 cos(wo) so the passband gain at DC is unity.  Extra
+#' zeros at n fo / fs make it a comb for the harmonics of a
+#' non-sinusoidal mains waveform.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param f0 Defaults to \code{60}.
+#' @param harmonics Defaults to \code{1}.
+#' @return A list with \code{y}, \code{coeffs}, \code{notched}, \code{f0}, \code{fs}, \code{n}, \code{method}.
+#' @export
 PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
   # eq (3.150): H(z) = 1 - 2 cos(wo) z^-1 + z^-2, divided by its DC gain
   # H(1) = 2 - 2 cos(wo) so the passband gain at DC is unity.  Extra zeros at
@@ -1082,6 +1276,19 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
 }
 
 
+#' Section 1.2.11.  The notch is located with the SAME machinery the
+#' book
+#'
+#' gives for the carotid pulse in Section 4.3.5 (eqs 4.22, 4.23),
+#' because the PPG pulse shape mirrors the carotid pulse.  The perfusion
+#' index says how much of the reading is pulsatile blood volume rather
+#' than static tissue absorption.
+#'
+#' @param ppg See Usage.
+#' @param fs See Usage.
+#' @param mwin Defaults to \code{16}.
+#' @return A list with \code{systolic}, \code{notch}, \code{diastolic}, \code{onset}, \code{amplitude}, \code{ac}, \code{dc}, \code{pi}, \code{rate}, \code{fs}, \code{method}.
+#' @export
 PpgFeat <- function(ppg, fs, mwin = 16) {
   # Section 1.2.11.  The notch is located with the SAME machinery the book
   # gives for the carotid pulse in Section 4.3.5 (eqs 4.22, 4.23), because
@@ -1129,6 +1336,20 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
 }
 
 
+#' Hengeveld and van Bemmel, Section 4.3.3.  The P wave is never
+#' searched for
+#'
+#' directly: the QRS is deleted, the residue bandpassed 3-11 Hz,
+#' ternarised at 50% and 75% of the interval maximum, and matched
+#' against a ternary template.  Matching a TERNARY version is what makes
+#' it tolerant of P-wave amplitude and shape variation.
+#'
+#' @param x See Usage.
+#' @param qrs See Usage.
+#' @param fs See Usage.
+#' @param template Defaults to \code{NULL}.
+#' @return A list with \code{p}, \code{template}, \code{windows}, \code{bandpass}, \code{fs}, \code{method}.
+#' @export
 PWaveDet <- function(x, qrs, fs, template = NULL) {
   # Hengeveld and van Bemmel, Section 4.3.3.  The P wave is never searched for
   # directly: the QRS is deleted, the residue bandpassed 3-11 Hz, ternarised
@@ -1225,6 +1446,20 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
 }
 
 
+#' Section 2.2.4 for the physiology; the estimator is Arunachalam and
+#' Brown,
+#'
+#' Proc. IEEE EMBC 2009, pp. 5681-5684 (reference [52] of Chapter 2).
+#' Chest motion swings the cardiac electrical axis, so the R amplitude
+#' sampled once per beat is a respiratory signal without a respiration
+#' sensor.
+#'
+#' @param x See Usage.
+#' @param qrs See Usage.
+#' @param fs See Usage.
+#' @param fsr Defaults to \code{4}.
+#' @return A list with \code{edr}, \code{amp}, \code{times}, \code{resprate}, \code{fsr}, \code{nbeats}, \code{method}.
+#' @export
 EdrSignal <- function(x, qrs, fs, fsr = 4) {
   # Section 2.2.4 for the physiology; the estimator is Arunachalam and Brown,
   # Proc. IEEE EMBC 2009, pp. 5681-5684 (reference [52] of Chapter 2).  Chest
@@ -1284,6 +1519,20 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
 }
 
 
+#' Section 10.2.5 frames the problem and the AHI but gives NO detection
+#'
+#' algorithm, so none is attributed to it.  Requiring BOTH a respiratory
+#' pause and an SpO2 desaturation is what keeps a motion-induced flat
+#' stretch of EDR from being scored as an apnea.
+#'
+#' @param edr See Usage.
+#' @param spo2 See Usage.
+#' @param fs See Usage.
+#' @param hours Defaults to \code{NULL}.
+#' @param mindur Defaults to \code{10}.
+#' @param desat Defaults to \code{3}.
+#' @return A list with \code{events}, \code{nevents}, \code{ahi}, \code{desatdepth}, \code{hours}, \code{mindur}, \code{desat}, \code{fs}, \code{method}.
+#' @export
 ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
   # Section 10.2.5 frames the problem and the AHI but gives NO detection
   # algorithm, so none is attributed to it.  Requiring BOTH a respiratory
@@ -1345,6 +1594,17 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
 }
 
 
+#' Section 8.12 and Figure 8.38.  The ratio alone, with the band powers
+#' and
+#'
+#' the RR variance alongside it so it can be interpreted rather than
+#' read bare.
+#'
+#' @param rr See Usage.
+#' @param fsr Defaults to \code{4}.
+#' @param bands Defaults to \code{"taskforce"}.
+#' @return A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct}, \code{rrvar}, \code{bands}, \code{n}, \code{method}.
+#' @export
 LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12 and Figure 8.38.  The ratio alone, with the band powers and
   # the RR variance alongside it so it can be interpreted rather than read
@@ -1365,6 +1625,17 @@ LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
 }
 
 
+#' Section 9.10 citing Smith et al., Circulation 77(1):110-121, 1988
+#'
+#' Alternation every other beat is a period of exactly two beats, so it
+#' lands on 0.5 cycles per beat -- the last bin of the beat-series
+#' spectrum. An EVEN beat count is required or that is not an exact bin.
+#'
+#' @param twaves See Usage.
+#' @param noiselo Defaults to \code{0.33}.
+#' @param noisehi Defaults to \code{0.45}.
+#' @return A list with \code{valt}, \code{kscore}, \code{altpower}, \code{noisemean}, \code{noisesd}, \code{nbeats}, \code{npoints}, \code{cyclesperbeat}, \code{present}, \code{method}.
+#' @export
 TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
   # Section 9.10 citing Smith et al., Circulation 77(1):110-121, 1988.
   # Alternation every other beat is a period of exactly two beats, so it
@@ -1424,6 +1695,19 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
 }
 
 
+#' Gritzali et al., Section 4.3.4.  The QRS is detected first, blanked
+#' to the
+#'
+#' isoelectric baseline, and the length transform of eq (4.21) re-run
+#' with the window at the average T duration.  Working ACROSS channels
+#' is what makes T detection tractable.
+#'
+#' @param chans See Usage.
+#' @param qrs See Usage.
+#' @param fs See Usage.
+#' @param tdur Defaults to \code{0.16}.
+#' @return A list with \code{t}, \code{onset}, \code{offset}, \code{length}, \code{tdur}, \code{nchan}, \code{fs}, \code{method}.
+#' @export
 TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
   # Gritzali et al., Section 4.3.4.  The QRS is detected first, blanked to the
   # isoelectric baseline, and the length transform of eq (4.21) re-run with
@@ -1491,6 +1775,22 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
 }
 
 
+#' Sections 1.2.4 and 8.11 describe VF but give NO detector and NO
+#'
+#' threshold, and no external primary source was verified here.  The
+#' rule below is therefore stated as what it is: a two-part heuristic
+#' from the two properties the book DOES assert -- no discrete QRS
+#' complexes (so the integrator crest factor is small) and
+#' quasi-sinusoidal 4-7 Hz activity (so the spectral concentration is
+#' high).
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param win Defaults to \code{4}.
+#' @param conc Defaults to \code{0.6}.
+#' @param crest Defaults to \code{4}.
+#' @return A list with \code{flag}, \code{domfreq}, \code{concentration}, \code{crest}, \code{rate}, \code{conc}, \code{crestmax}, \code{nwin}, \code{fraction}, \code{win}, \code{fs}, \code{method}.
+#' @export
 VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
   # Sections 1.2.4 and 8.11 describe VF but give NO detector and NO
   # threshold, and no external primary source was verified here.  The rule
@@ -1557,6 +1857,15 @@ VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
 }
 
 
+#' Eq (4.1): y0(n) = |x(n) - x(n-2)|.  The two-sample span is what makes
+#' it
+#'
+#' "smoothed"; the absolute value makes an inverted QRS give the same
+#' response.
+#'
+#' @param x See Usage.
+#' @return A list with \code{y0}, \code{n}, \code{method}.
+#' @export
 QrsDeriv1 <- function(x) {
   # eq (4.1): y0(n) = |x(n) - x(n-2)|.  The two-sample span is what makes it
   # "smoothed"; the absolute value makes an inverted QRS give the same
@@ -1573,6 +1882,14 @@ QrsDeriv1 <- function(x) {
 }
 
 
+#' Eq (4.2): y1(n) = |x(n) - 2 x(n-2) + x(n-4)|.  The second difference
+#'
+#' removes any locally linear trend, so T-wave limbs and baseline drift
+#' give nothing while the QRS curvature gives a large output.
+#'
+#' @param x See Usage.
+#' @return A list with \code{y1}, \code{n}, \code{method}.
+#' @export
 QrsDeriv2 <- function(x) {
   # eq (4.2): y1(n) = |x(n) - 2 x(n-2) + x(n-4)|.  The second difference
   # removes any locally linear trend, so T-wave limbs and baseline drift give
@@ -1590,6 +1907,16 @@ QrsDeriv2 <- function(x) {
 }
 
 
+#' Eq (4.3): y2(n) = 1.3 y0(n) + 1.1 y1(n).  Slope and curvature respond
+#' to
+#'
+#' different parts of the complex; the mix has its peak reliably inside
+#' it.
+#'
+#' @param y0 See Usage.
+#' @param y1 See Usage.
+#' @return A list with \code{y2}, \code{w0}, \code{w1}, \code{n}, \code{method}.
+#' @export
 QrsDerivMx <- function(y0, y1) {
   # eq (4.3): y2(n) = 1.3 y0(n) + 1.1 y1(n).  Slope and curvature respond to
   # different parts of the complex; the mix has its peak reliably inside it.
@@ -1606,6 +1933,15 @@ QrsDerivMx <- function(y0, y1) {
 }
 
 
+#' Eq (4.4) (Murthy and Rangaraj): g1(n) = sum_i |x(n-i+1) - x(n-i)|^2
+#'
+#' (N - i + 1).  Squaring rewards the large QRS differences; the
+#' linearly falling weight smooths the result without a separate filter.
+#'
+#' @param x See Usage.
+#' @param nwin Defaults to \code{8}.
+#' @return A list with \code{g1}, \code{nwin}, \code{n}, \code{method}.
+#' @export
 QrsWSqDrv <- function(x, nwin = 8) {
   # eq (4.4) (Murthy and Rangaraj): g1(n) = sum_i |x(n-i+1) - x(n-i)|^2
   # (N - i + 1).  Squaring rewards the large QRS differences; the linearly
@@ -1632,6 +1968,14 @@ QrsWSqDrv <- function(x, nwin = 8) {
 }
 
 
+#' Eq (4.5): the M-point moving average that collapses the several
+#'
+#' derivative peaks across the Q-R-S swings into one pulse per beat.
+#'
+#' @param g1 See Usage.
+#' @param mwin Defaults to \code{8}.
+#' @return A list with \code{g}, \code{mwin}, \code{n}, \code{method}.
+#' @export
 QrsDrvSmth <- function(g1, mwin = 8) {
   # eq (4.5): the M-point moving average that collapses the several
   # derivative peaks across the Q-R-S swings into one pulse per beat.
@@ -1648,6 +1992,16 @@ QrsDrvSmth <- function(g1, mwin = 8) {
 }
 
 
+#' Eq (4.7): H(z) = (1/32)(1 - z^-6)^2 / (1 - z^-1)^2, evaluated in its
+#'
+#' equivalent finite form (sum_{k=0}^{5} z^-k)^2 / 32 so the apparent
+#' pole at z = 1 is removed exactly rather than numerically.  fc = 11
+#' Hz, 5-sample delay, >35 dB at 60 Hz -- all tied to fs = 200 Hz.
+#'
+#' @param freq See Usage.
+#' @param fs Defaults to \code{200}.
+#' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{a}, \code{fs}, \code{fsnote}, \code{method}.
+#' @export
 QrsLPassTf <- function(freq, fs = 200) {
   # eq (4.7): H(z) = (1/32)(1 - z^-6)^2 / (1 - z^-1)^2, evaluated in its
   # equivalent finite form (sum_{k=0}^{5} z^-k)^2 / 32 so the apparent pole at
@@ -1684,6 +2038,14 @@ QrsLPassTf <- function(freq, fs = 200) {
 }
 
 
+#' Eq (4.8): y(n) = 2 y(n-1) - y(n-2) + (1/32)[x(n) - 2 x(n-6) +
+#' x(n-12)]
+#'
+#' Adds and one shift by 32 -- which is why it was chosen for real time.
+#'
+#' @param x See Usage.
+#' @return A list with \code{y}, \code{delay}, \code{n}, \code{fsnote}, \code{method}.
+#' @export
 QrsLPassDf <- function(x) {
   # eq (4.8): y(n) = 2 y(n-1) - y(n-2) + (1/32)[x(n) - 2 x(n-6) + x(n-12)].
   # Adds and one shift by 32 -- which is why it was chosen for real time.
@@ -1707,6 +2069,15 @@ QrsLPassDf <- function(x) {
 }
 
 
+#' Eq (4.9): Hlp(z) = (1 - z^-32)/(1 - z^-1), a running sum of 32
+#' samples
+#'
+#' Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
+#'
+#' @param freq See Usage.
+#' @param fs Defaults to \code{200}.
+#' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{fs}, \code{method}.
+#' @export
 QrsHpLpTf <- function(freq, fs = 200) {
   # eq (4.9): Hlp(z) = (1 - z^-32)/(1 - z^-1), a running sum of 32 samples.
   # Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
@@ -1733,6 +2104,14 @@ QrsHpLpTf <- function(freq, fs = 200) {
 }
 
 
+#' Eq (4.10): y(n) = y(n-1) + x(n) - x(n-32).  One add and one subtract
+#' per
+#'
+#' sample regardless of window length.
+#'
+#' @param x See Usage.
+#' @return A list with \code{y}, \code{n}, \code{method}.
+#' @export
 QrsHpLpDf <- function(x) {
   # eq (4.10): y(n) = y(n-1) + x(n) - x(n-32).  One add and one subtract per
   # sample regardless of window length.
@@ -1750,6 +2129,16 @@ QrsHpLpDf <- function(x) {
 }
 
 
+#' Eq (4.11): Hhp(z) = z^-16 - (1/32) Hlp(z).  An allpass (a pure
+#' 16-sample
+#'
+#' delay) minus a scaled lowpass, so it shares the running sum already
+#' computed.  fc = 5 Hz and 80 ms delay hold at fs = 200 Hz.
+#'
+#' @param freq See Usage.
+#' @param fs Defaults to \code{200}.
+#' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{fs}, \code{fsnote}, \code{method}.
+#' @export
 QrsHPassTf <- function(freq, fs = 200) {
   # eq (4.11): Hhp(z) = z^-16 - (1/32) Hlp(z).  An allpass (a pure 16-sample
   # delay) minus a scaled lowpass, so it shares the running sum already
@@ -1780,6 +2169,15 @@ QrsHPassTf <- function(freq, fs = 200) {
 }
 
 
+#' Eq (4.12): p(n) = x(n-16) - (1/32)[y(n-1) + x(n) - x(n-32)], where
+#' the
+#'
+#' bracketed group is exactly y(n) of eq (4.10), so the running-sum
+#' state is reused directly.
+#'
+#' @param x See Usage.
+#' @return A list with \code{p}, \code{y}, \code{n}, \code{method}.
+#' @export
 QrsHPassDf <- function(x) {
   # eq (4.12): p(n) = x(n-16) - (1/32)[y(n-1) + x(n) - x(n-32)], where the
   # bracketed group is exactly y(n) of eq (4.10), so the running-sum state is
@@ -1805,6 +2203,14 @@ QrsHPassDf <- function(x) {
 }
 
 
+#' Eq (4.13): p(n) = p(n-1) - (1/32) x(n) + x(n-16) - x(n-17) +
+#'
+#' (1/32) x(n-32).  Eqs (4.9)-(4.12) folded into one recursion: four
+#' adds per sample and a single state variable.
+#'
+#' @param x See Usage.
+#' @return A list with \code{p}, \code{n}, \code{delayms}, \code{fsnote}, \code{method}.
+#' @export
 QrsHPassIo <- function(x) {
   # eq (4.13): p(n) = p(n-1) - (1/32) x(n) + x(n-16) - x(n-17) +
   # (1/32) x(n-32).  Eqs (4.9)-(4.12) folded into one recursion: four adds
@@ -1829,6 +2235,14 @@ QrsHPassIo <- function(x) {
 }
 
 
+#' Eq (4.14): y(n) = (1/8)[2 x(n) + x(n-1) - x(n-3) - 2 x(n-4)].  The
+#'
+#' antisymmetric taps make it exactly zero on any constant or linear
+#' baseline.
+#'
+#' @param x See Usage.
+#' @return A list with \code{y}, \code{b}, \code{n}, \code{fsnote}, \code{method}.
+#' @export
 QrsDerivOp <- function(x) {
   # eq (4.14): y(n) = (1/8)[2 x(n) + x(n-1) - x(n-3) - 2 x(n-4)].  The
   # antisymmetric taps make it exactly zero on any constant or linear
@@ -1847,6 +2261,16 @@ QrsDerivOp <- function(x) {
 }
 
 
+#' Eq (4.15).  N matters: too wide merges QRS and T, too narrow leaves
+#'
+#' multiple peaks.  The book found N = 30 at fs = 200 Hz, i.e. 150 ms,
+#' and supplying fs preserves the 150 ms window at any rate.
+#'
+#' @param x See Usage.
+#' @param nwin Defaults to \code{30}.
+#' @param fs Defaults to \code{NULL}.
+#' @return A list with \code{y}, \code{nwin}, \code{widthsec}, \code{n}, \code{method}.
+#' @export
 QrsMwInt <- function(x, nwin = 30, fs = NULL) {
   # eq (4.15).  N matters: too wide merges QRS and T, too narrow leaves
   # multiple peaks.  The book found N = 30 at fs = 200 Hz, i.e. 150 ms, and
@@ -1867,6 +2291,19 @@ QrsMwInt <- function(x, nwin = 30, fs = NULL) {
 }
 
 
+#' Eqs (4.16) and (4.17).  The 0.125/0.875 split is a long-memory
+#' recursive
+#'
+#' average, so the estimates track slow drift without being thrown by
+#' one artifact.  I1 sits a quarter of the way from noise up to signal;
+#' I2 is half of I1 and is reserved for search-back.
+#'
+#' @param peaki See Usage.
+#' @param spki See Usage.
+#' @param npki See Usage.
+#' @param issignal See Usage.
+#' @return A list with \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2}, \code{peaki}, \code{issignal}, \code{method}.
+#' @export
 QrsThresh <- function(peaki, spki, npki, issignal) {
   # eqs (4.16) and (4.17).  The 0.125/0.875 split is a long-memory recursive
   # average, so the estimates track slow drift without being thrown by one
@@ -1892,6 +2329,17 @@ QrsThresh <- function(peaki, spki, npki, issignal) {
 }
 
 
+#' Eq (4.18): SPKI = 0.25 PEAKI + 0.75 SPKI, replacing the 0.125/0.875
+#' rule
+#'
+#' A beat found only by search-back was missed by the primary threshold,
+#' so the running estimate is too high and the heavier weight pulls it
+#' down.
+#'
+#' @param peaki See Usage.
+#' @param spki See Usage.
+#' @return A list with \code{spki}, \code{previous}, \code{peaki}, \code{method}.
+#' @export
 QrsSpkiUpd <- function(peaki, spki) {
   # eq (4.18): SPKI = 0.25 PEAKI + 0.75 SPKI, replacing the 0.125/0.875 rule.
   # A beat found only by search-back was missed by the primary threshold, so
@@ -1908,6 +2356,16 @@ QrsSpkiUpd <- function(peaki, spki) {
 }
 
 
+#' Eq (4.19): HR = 60 NB / T.  The counting estimate averages over the
+#' whole
+#'
+#' window, so unlike the beat-to-beat form of eq (4.20) it is
+#' insensitive to a single mis-detected interval.
+#'
+#' @param nbeats See Usage.
+#' @param duration See Usage.
+#' @return A list with \code{hr}, \code{nbeats}, \code{duration}, \code{method}.
+#' @export
 HrFromCnt <- function(nbeats, duration) {
   # eq (4.19): HR = 60 NB / T.  The counting estimate averages over the whole
   # window, so unlike the beat-to-beat form of eq (4.20) it is insensitive to
@@ -1926,6 +2384,19 @@ HrFromCnt <- function(nbeats, duration) {
 }
 
 
+#' Eq (4.21) (Gritzali et al.).  Since (dx/dt) dt = dx, the transform is
+#' the
+#'
+#' arc length of the MULTICHANNEL trajectory accumulated over a w-second
+#' window.  Summing the squared derivative across channels before
+#' integrating is the whole point: a wave well defined in only one lead
+#' still contributes.
+#'
+#' @param chans See Usage.
+#' @param wwin See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{length}, \code{nchan}, \code{wsamp}, \code{wsec}, \code{fs}, \code{n}, \code{method}.
+#' @export
 LengthXfm <- function(chans, wwin, fs) {
   # eq (4.21) (Gritzali et al.).  Since (dx/dt) dt = dx, the transform is the
   # arc length of the MULTICHANNEL trajectory accumulated over a w-second
@@ -1966,6 +2437,17 @@ LengthXfm <- function(chans, wwin, fs) {
 }
 
 
+#' Eq (4.23) (Lehner and Rangayyan): s(n) = sum_k p^2(n-k+1) (M - k + 1)
+#'
+#' Squaring discards the sign of the curvature; the linearly decaying
+#' weight smooths while keeping the response prompt at the newest
+#' sample.  s(n) has two peaks per cycle: the upstroke onset, then the
+#' dicrotic notch.
+#'
+#' @param p See Usage.
+#' @param mwin Defaults to \code{16}.
+#' @return A list with \code{s}, \code{weights}, \code{mwin}, \code{n}, \code{method}.
+#' @export
 DNotchSmth <- function(p, mwin = 16) {
   # eq (4.23) (Lehner and Rangayyan): s(n) = sum_k p^2(n-k+1) (M - k + 1).
   # Squaring discards the sign of the curvature; the linearly decaying weight

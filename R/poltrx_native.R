@@ -164,6 +164,15 @@ poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
 # Marsaglia-Tsang Gamma sampler, shape >= 1, matching the Python arm.
 # Strict: the SAME uniform draws in the SAME order as the Python
 # implementation, so both arms agree on every variate.
+#' Marsaglia-Tsang Gamma sampler, shape >= 1, matching the Python arm
+#'
+#' Strict: the SAME uniform draws in the SAME order as the Python
+#' implementation, so both arms agree on every variate.
+#'
+#' @param e See Usage.
+#' @param shape See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 poltrx_gamma <- function(e, shape) {
   if (shape < 1) {
     # Python: u = max(r.uniform(), 1e-15); gamma(shape+1) * u**(1/shape)
@@ -187,6 +196,14 @@ poltrx_gamma <- function(e, shape) {
 }
 
 # Convert a list key of the form "(0,1,1)" back to an integer vector.
+#' Convert a list key of the form "(0,1,1)" back to an integer vector
+#'
+#' Part of the poltrx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param key See Usage.
+#' @return The value of \code{as.integer}.
+#' @export
 poltrx_eps_from_key <- function(key) {
   if (key == "()") return(integer(0))
   as.integer(strsplit(sub("^\\(|\\)$", "", key), ",")[[1]])

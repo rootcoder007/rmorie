@@ -18,6 +18,15 @@
 
 # Base R only, faithful translation of node2v_python_reference.py.
 
+#' node2v_check_pq
+#'
+#' Part of the node2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return A list with \code{p}, \code{q}.
+#' @export
 node2v_check_pq <- function(p, q) {
   p <- as.numeric(p)
   q <- as.numeric(q)
@@ -26,6 +35,16 @@ node2v_check_pq <- function(p, q) {
   list(p = p, q = q)
 }
 
+#' alpha_pq
+#'
+#' Part of the node2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d_tx See Usage.
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 alpha_pq <- function(d_tx, p, q) {
   d <- as.integer(d_tx)
   pq <- node2v_check_pq(p, q)
@@ -46,6 +65,19 @@ alpha_pq <- function(d_tx, p, q) {
   2L
 }
 
+#' transition_probabilities
+#'
+#' Part of the node2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param t See Usage.
+#' @param v See Usage.
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
+#' @export
 transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
   nb <- adj[[v]]
   if (is.null(nb) || length(nb) == 0L) {
@@ -78,6 +110,20 @@ transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
   )
 }
 
+#' walk
+#'
+#' Part of the node2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param start See Usage.
+#' @param length See Usage.
+#' @param p Defaults to \code{1}.
+#' @param q Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @param weights Defaults to \code{NULL}.
+#' @return The value of \code{path}, as built in the body.
+#' @export
 walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
                  weights = NULL) {
   len <- as.integer(length)
@@ -105,6 +151,20 @@ walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
   path
 }
 
+#' generate_walks
+#'
+#' Part of the node2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param num_walks Defaults to \code{10}.
+#' @param length Defaults to \code{10}.
+#' @param p Defaults to \code{1}.
+#' @param q Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{walks}, \code{p}, \code{q}, \code{n_walks}, \code{length}, \code{method}, \code{note}.
+#' @export
 generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,
                            q = 1.0, seed = 0, weights = NULL) {
   nw <- as.integer(num_walks)
@@ -134,6 +194,15 @@ generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,
 # compact alias per ledger/NAMING.md
 node2vec <- generate_walks
 
+#' skipgram_pairs
+#'
+#' Part of the node2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param walks See Usage.
+#' @param window Defaults to \code{2}.
+#' @return The value of \code{do.call}.
+#' @export
 skipgram_pairs <- function(walks, window = 2) {
   w <- as.integer(window)
   if (w < 1L)

@@ -197,6 +197,17 @@
 
 # ---- normal ----------------------------------------------------------
 
+#' Dnorm
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param mean Defaults to \code{0}.
+#' @param sd Defaults to \code{1}.
+#' @param log Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Dnorm <- function(x, mean = 0, sd = 1, log = FALSE) {
   if (sd <= 0) stop("sd must be positive")
   z <- (x - mean) / sd
@@ -204,6 +215,17 @@ Dnorm <- function(x, mean = 0, sd = 1, log = FALSE) {
   if (log) lg else exp(lg)
 }
 
+#' Pnorm
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param mean Defaults to \code{0}.
+#' @param sd Defaults to \code{1}.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Pnorm <- function(q, mean = 0, sd = 1, lower_tail = TRUE) {
   if (sd <= 0) stop("sd must be positive")
   z <- (q - mean) / sd
@@ -216,6 +238,17 @@ Pnorm <- function(q, mean = 0, sd = 1, lower_tail = TRUE) {
   }
 }
 
+#' Qnorm
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param mean Defaults to \code{0}.
+#' @param sd Defaults to \code{1}.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return A numeric value.
+#' @export
 Qnorm <- function(p, mean = 0, sd = 1, lower_tail = TRUE) {
   if (sd <= 0) stop("sd must be positive")
   pp <- if (lower_tail) p else 1 - p
@@ -223,6 +256,17 @@ Qnorm <- function(p, mean = 0, sd = 1, lower_tail = TRUE) {
   mean + sd * .morie_normal_quantile(pp)
 }
 
+#' Inversion of the Philox uniform stream: draw k depends only on
+#'
+#' uniform k, so the stream is stable when n changes
+#'
+#' @param n See Usage.
+#' @param mean Defaults to \code{0}.
+#' @param sd Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @param stream Defaults to \code{0}.
+#' @return The value of \code{Qnorm}.
+#' @export
 Rnorm <- function(n, mean = 0, sd = 1, seed = 0, stream = 0) {
   # inversion of the Philox uniform stream: draw k depends only on
   # uniform k, so the stream is stable when n changes
@@ -233,24 +277,64 @@ Rnorm <- function(n, mean = 0, sd = 1, seed = 0, stream = 0) {
 
 # ---- exponential -----------------------------------------------------
 
+#' Dexp
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param rate Defaults to \code{1}.
+#' @param log Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Dexp <- function(x, rate = 1, log = FALSE) {
   if (rate <= 0) stop("rate must be positive")
   lg <- ifelse(x < 0, -Inf, log(rate) - rate * x)
   if (log) lg else exp(lg)
 }
 
+#' Pexp
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param rate Defaults to \code{1}.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Pexp <- function(q, rate = 1, lower_tail = TRUE) {
   if (rate <= 0) stop("rate must be positive")
   p <- ifelse(q < 0, 0, -expm1(-rate * q))
   if (lower_tail) p else ifelse(q < 0, 1, exp(-rate * q))
 }
 
+#' Qexp
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param rate Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 Qexp <- function(p, rate = 1) {
   if (rate <= 0) stop("rate must be positive")
   if (any(p < 0 | p >= 1)) stop("p must lie in [0, 1)")
   -log1p(-p) / rate
 }
 
+#' Rexp
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param rate Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @param stream Defaults to \code{0}.
+#' @return The value of \code{Qexp}.
+#' @export
 Rexp <- function(n, rate = 1, seed = 0, stream = 0) {
   u <- .morie_random_uniform(n, seed = seed, stream = stream)
   Qexp(pmin(u, 1 - 1e-16), rate)
@@ -258,6 +342,17 @@ Rexp <- function(n, rate = 1, seed = 0, stream = 0) {
 
 # ---- gamma / chi-square ---------------------------------------------
 
+#' Dgamma
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param shape See Usage.
+#' @param rate Defaults to \code{1}.
+#' @param log Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Dgamma <- function(x, shape, rate = 1, log = FALSE) {
   if (shape <= 0 || rate <= 0) stop("shape and rate must be positive")
   lg <- ifelse(x <= 0, -Inf,
@@ -267,6 +362,17 @@ Dgamma <- function(x, shape, rate = 1, log = FALSE) {
   if (log) lg else exp(lg)
 }
 
+#' Pgamma
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param shape See Usage.
+#' @param rate Defaults to \code{1}.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Pgamma <- function(q, shape, rate = 1, lower_tail = TRUE) {
   p <- vapply(q, function(v) {
     if (v <= 0) 0 else .morie_gammainc_p(shape, rate * v)
@@ -274,6 +380,16 @@ Pgamma <- function(q, shape, rate = 1, lower_tail = TRUE) {
   if (lower_tail) p else 1 - p
 }
 
+#' Qgamma
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param shape See Usage.
+#' @param rate Defaults to \code{1}.
+#' @return A vector, from \code{vapply}.
+#' @export
 Qgamma <- function(p, shape, rate = 1) {
   vapply(
     p, function(pp) {
@@ -283,14 +399,53 @@ Qgamma <- function(p, shape, rate = 1) {
   )
 }
 
+#' Dchisq
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param df See Usage.
+#' @param log Defaults to \code{FALSE}.
+#' @return The value of \code{Dgamma}.
+#' @export
 Dchisq <- function(x, df, log = FALSE) Dgamma(x, df / 2, 0.5, log)
+#' Pchisq
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param df See Usage.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return The value of \code{Pgamma}.
+#' @export
 Pchisq <- function(q, df, lower_tail = TRUE) {
   Pgamma(q, df / 2, 0.5, lower_tail)
 }
+#' Qchisq
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param df See Usage.
+#' @return The value of \code{Qgamma}.
+#' @export
 Qchisq <- function(p, df) Qgamma(p, df / 2, 0.5)
 
 # ---- Poisson / binomial ---------------------------------------------
 
+#' Dpois
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param lambda See Usage.
+#' @param log Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Dpois <- function(x, lambda, log = FALSE) {
   if (lambda < 0) stop("lambda must be non-negative")
   k <- round(x)
@@ -304,6 +459,16 @@ Dpois <- function(x, lambda, log = FALSE) {
   if (log) lg else exp(lg)
 }
 
+#' P(X <= k) = Q(k+1, lambda), the UPPER regularized incomplete gamma
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param lambda See Usage.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Ppois <- function(q, lambda, lower_tail = TRUE) {
   # P(X <= k) = Q(k+1, lambda), the UPPER regularized incomplete gamma
   p <- vapply(q, function(v) {
@@ -313,6 +478,15 @@ Ppois <- function(q, lambda, lower_tail = TRUE) {
   if (lower_tail) p else 1 - p
 }
 
+#' Smallest k with cdf(k) >= p, as R defines it
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param lambda See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 Qpois <- function(p, lambda) {
   # smallest k with cdf(k) >= p, as R defines it
   vapply(p, function(pp) {
@@ -323,6 +497,17 @@ Qpois <- function(p, lambda) {
   }, numeric(1))
 }
 
+#' Dbinom
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param size See Usage.
+#' @param prob See Usage.
+#' @param log Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Dbinom <- function(x, size, prob, log = FALSE) {
   if (prob < 0 || prob > 1) stop("prob must lie in [0, 1]")
   k <- round(x)
@@ -342,6 +527,17 @@ Dbinom <- function(x, size, prob, log = FALSE) {
   if (log) lg else exp(lg)
 }
 
+#' P(X <= k) = I_{1-p}(n - k, k + 1)
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param size See Usage.
+#' @param prob See Usage.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Pbinom <- function(q, size, prob, lower_tail = TRUE) {
   # P(X <= k) = I_{1-p}(n - k, k + 1)
   p <- vapply(q, function(v) {
@@ -357,6 +553,16 @@ Pbinom <- function(q, size, prob, lower_tail = TRUE) {
   if (lower_tail) p else 1 - p
 }
 
+#' Qbinom
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param size See Usage.
+#' @param prob See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 Qbinom <- function(p, size, prob) {
   vapply(p, function(pp) {
     if (pp < 0 || pp > 1) stop("p must lie in [0, 1]")
@@ -368,6 +574,17 @@ Qbinom <- function(p, size, prob) {
 
 # ---- beta / t / F ----------------------------------------------------
 
+#' Dbeta
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param shape1 See Usage.
+#' @param shape2 See Usage.
+#' @param log Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Dbeta <- function(x, shape1, shape2, log = FALSE) {
   if (shape1 <= 0 || shape2 <= 0) stop("shape parameters must be positive")
   lg <- ifelse(x <= 0 | x >= 1, -Inf,
@@ -377,11 +594,32 @@ Dbeta <- function(x, shape1, shape2, log = FALSE) {
   if (log) lg else exp(lg)
 }
 
+#' Pbeta
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param shape1 See Usage.
+#' @param shape2 See Usage.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Pbeta <- function(q, shape1, shape2, lower_tail = TRUE) {
   p <- vapply(q, function(v) .morie_betainc(shape1, shape2, v), numeric(1))
   if (lower_tail) p else 1 - p
 }
 
+#' Qbeta
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param shape1 See Usage.
+#' @param shape2 See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 Qbeta <- function(p, shape1, shape2) {
   vapply(
     p, function(pp) {
@@ -393,6 +631,16 @@ Qbeta <- function(p, shape1, shape2) {
   )
 }
 
+#' Dt
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param df See Usage.
+#' @param log Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Dt <- function(x, df, log = FALSE) {
   if (df <= 0) stop("df must be positive")
   lg <- lgamma((df + 1) / 2) - lgamma(df / 2) - 0.5 * log(df * pi) -
@@ -400,6 +648,16 @@ Dt <- function(x, df, log = FALSE) {
   if (log) lg else exp(lg)
 }
 
+#' Pt
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param df See Usage.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Pt <- function(q, df, lower_tail = TRUE) {
   p <- vapply(q, function(v) {
     xb <- df / (df + v * v)
@@ -409,6 +667,16 @@ Pt <- function(q, df, lower_tail = TRUE) {
   if (lower_tail) p else 1 - p
 }
 
+#' The t is symmetric: qt(p) = -qt(1 - p) and qt(0.5) = 0 exactly
+#'
+#' Without this, bisection lands on the cdf plateau around zero --
+#' betainc\'s 1 - xb underflows for |v| < ~1e-8, the cdf sits at exactly
+#' 0.5 there, and both bisection and Newton are blind inside it.
+#'
+#' @param p See Usage.
+#' @param df See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 Qt <- function(p, df) {
   # The t is symmetric: qt(p) = -qt(1 - p) and qt(0.5) = 0 exactly.
   # Without this, bisection lands on the cdf plateau around zero --
@@ -425,6 +693,17 @@ Qt <- function(p, df) {
   }, numeric(1))
 }
 
+#' Pf
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param df1 See Usage.
+#' @param df2 See Usage.
+#' @param lower_tail Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 Pf <- function(q, df1, df2, lower_tail = TRUE) {
   p <- vapply(q, function(v) {
     if (v <= 0) {
@@ -436,6 +715,16 @@ Pf <- function(q, df1, df2, lower_tail = TRUE) {
   if (lower_tail) p else 1 - p
 }
 
+#' Qf
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param df1 See Usage.
+#' @param df2 See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 Qf <- function(p, df1, df2) {
   vapply(p, function(pp) {
     .morie_bisect_q(function(v) Pf(v, df1, df2), pp, 0, 1)

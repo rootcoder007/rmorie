@@ -27,6 +27,25 @@
 # same Lipschitz step from a power iteration, the same predict
 # routine, and the same V-fold CV for lambda.
 
+#' morie_tlhal
+#'
+#' Part of the tlhal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lambdas Defaults to \code{NULL}.
+#' @param V Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @param lam Defaults to \code{1}.
+#' @param iters Defaults to \code{2000L}.
+#' @param step Defaults to \code{0.05}.
+#' @param max_order Defaults to \code{2L}.
+#' @param knots Defaults to \code{NULL}.
+#' @param intercept Defaults to \code{TRUE}.
+#' @param mode Defaults to \code{c("fit", "predict", "cv", "norm")}.
+#' @return The value of \code{hal_fit}.
+#' @export
 morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
                         lam = 1.0, iters = 2000L, step = 0.05,
                         max_order = 2L, knots = NULL,
@@ -47,6 +66,16 @@ morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
           intercept = intercept)
 }
 
+#' indicator_basis
+#'
+#' Part of the tlhal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param knots Defaults to \code{NULL}.
+#' @param max_order Defaults to \code{2L}.
+#' @return A list with \code{design}, \code{columns}, \code{n_basis}, \code{max_order}.
+#' @export
 indicator_basis <- function(X, knots = NULL, max_order = 2L) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
@@ -90,11 +119,34 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
        max_order = as.integer(max_order))
 }
 
+#' variation_norm
+#'
+#' Part of the tlhal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @return A numeric value.
+#' @export
 variation_norm <- function(beta) {
   b <- as.numeric(beta)
   sum(abs(b))
 }
 
+#' hal_fit
+#'
+#' Part of the tlhal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lam Defaults to \code{1}.
+#' @param iters Defaults to \code{2000L}.
+#' @param step Defaults to \code{0.05}.
+#' @param max_order Defaults to \code{2L}.
+#' @param knots Defaults to \code{NULL}.
+#' @param intercept Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns}, \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history}, \code{max_order}, \code{method}, \code{note}.
+#' @export
 hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
                     max_order = 2L, knots = NULL, intercept = TRUE) {
   B <- indicator_basis(X, knots, max_order)
@@ -152,6 +204,15 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
   sign(v) * pmax(abs(v) - theta, 0)
 }
 
+#' hal_predict
+#'
+#' Part of the tlhal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model See Usage.
+#' @param X See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 hal_predict <- function(model, X) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
@@ -172,6 +233,19 @@ hal_predict <- function(model, X) {
   out
 }
 
+#' cv_select_lambda
+#'
+#' Part of the tlhal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lambdas See Usage.
+#' @param V Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @param ... Passed through.
+#' @return A list with \code{lambda}, \code{cv_risks}, \code{note}.
+#' @export
 cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
                              ...) {
   rows <- as.matrix(X)

@@ -8,6 +8,15 @@
 .bndsmw_GHC_EPS <- 1e-12
 .S_FORMS <- c("sum", "qlr", "max")
 
+#' morie_hypercube_instruments
+#'
+#' Part of the bndsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param n_levels Defaults to \code{3L}.
+#' @return A list with \code{instruments}, \code{n_instruments}, \code{n_levels}, \code{note}.
+#' @export
 morie_hypercube_instruments <- function(X, n_levels = 3L) {
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"
   n <- nrow(Xm)
@@ -40,6 +49,15 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
        note = "non-negative indicator weights; the conditional inequality is equivalent to the unconditional family holding for ALL of them")
 }
 
+#' morie_weighted_moments
+#'
+#' Part of the bndsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param g See Usage.
+#' @return A list with \code{mean}, \code{sd}, \code{n}.
+#' @export
 morie_weighted_moments <- function(m, g) {
   M <- as.matrix(m); storage.mode(M) <- "double"
   n <- nrow(M)
@@ -61,6 +79,16 @@ morie_weighted_moments <- function(m, g) {
   list(mean = means, sd = sds, n = n)
 }
 
+#' morie_S_function
+#'
+#' Part of the bndsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param std_moments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @return A numeric value.
+#' @export
 morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   if (!(form %in% .S_FORMS))
     stop("bndsmw: form must be one of ", paste(.S_FORMS, collapse = ", "))
@@ -75,6 +103,18 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   s + sum(eq^2)
 }
 
+#' morie_cvm_statistic
+#'
+#' Part of the bndsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param instruments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
+#' @export
 morie_cvm_statistic <- function(m, instruments, form = "sum",
                                 n_equality = 0L, weights = NULL) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
@@ -101,6 +141,21 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
        method = "Cramer-von Mises: integral of S over Q (Andrews & Shi, Sec. 1)")
 }
 
+#' morie_gms_critical_value
+#'
+#' Part of the bndsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param instruments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @param level Defaults to \code{0.95}.
+#' @param reps Defaults to \code{200L}.
+#' @param seed Defaults to \code{0}.
+#' @param kappa Defaults to \code{NULL}.
+#' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}, \code{method}.
+#' @export
 morie_gms_critical_value <- function(m, instruments, form = "sum",
                                      n_equality = 0L, level = 0.95,
                                      reps = 200L, seed = 0, kappa = NULL) {
@@ -140,6 +195,22 @@ morie_gms_critical_value <- function(m, instruments, form = "sum",
        method = "GMS bootstrap (Andrews & Soares 2010, extended to infinitely many moments)")
 }
 
+#' morie_confidence_set
+#'
+#' Part of the bndsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param moment_fn See Usage.
+#' @param theta_grid See Usage.
+#' @param X See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @param level Defaults to \code{0.95}.
+#' @param n_levels Defaults to \code{2L}.
+#' @param reps Defaults to \code{100L}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds}, \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
+#' @export
 morie_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                                  n_equality = 0L, level = 0.95,
                                  n_levels = 2L, reps = 100L, seed = 0) {

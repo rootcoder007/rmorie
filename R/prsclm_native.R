@@ -18,6 +18,20 @@
   m
 }
 
+#' morie_prsclm_prs_cs_clump
+#'
+#' Part of the prsclm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sumstats See Usage.
+#' @param ld_ref See Usage.
+#' @param p_threshold Defaults to \code{NULL}.
+#' @param r2 Defaults to \code{0.1}.
+#' @param window Defaults to \code{250000}.
+#' @param genotypes Defaults to \code{NULL}.
+#' @param standardize Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{n_retained}, \code{thresholds}, \code{retained}, \code{score}, \code{score_threshold}, \code{scores_by_threshold}, \code{index_variants}, \code{index_variant_names}, \code{clump_of}, \code{clump_members}, \code{clump_sizes}, \code{index_is_most_significant}, \code{n_clumps}, \code{n_variants}, \code{n_individuals}, \code{r2}, \code{window}, \code{standardized}, \code{weights}, \code{method}, \code{note}.
+#' @export
 morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
                                       r2 = 0.1, window = 250000.0,
                                       genotypes = NULL,

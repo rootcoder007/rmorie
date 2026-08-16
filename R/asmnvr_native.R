@@ -101,6 +101,20 @@ morie_asmnvr <- function(reads, k = NULL, multiplicity = "set") {
 # their multiplicities. Returns a list (edges, indeg, outdeg);
 # edges/indeg/outdeg are environments keyed by vertex (string),
 # paralleling the Python dict-of-lists + counter-dicts.
+#' Build G(S, l) with l = k. Vertices are (k-1)-mers; each k-mer is
+#'
+#' an edge from its prefix to its suffix. multiplicity="set" gives one
+#' edge per distinct k-mer (the Idury-Waterman construction); "count"
+#' gives one per occurrence for callers who already know their
+#' multiplicities. Returns a list (edges, indeg, outdeg);
+#' edges/indeg/outdeg are environments keyed by vertex (string),
+#' paralleling the Python dict-of-lists + counter-dicts.
+#'
+#' @param reads See Usage.
+#' @param k See Usage.
+#' @param multiplicity Defaults to \code{"set"}.
+#' @return A list with \code{edges}, \code{indeg}, \code{outdeg}.
+#' @export
 de_bruijn_graph <- function(reads, k, multiplicity = "set") {
   if (!(multiplicity %in% c("set", "count")))
     stop(sprintf("asmnvr: multiplicity must be 'set' or 'count', got '%s'",
@@ -191,6 +205,18 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 # vertex with out - in = 1 (start) and one with in - out = 1 (end).
 # Returns NULL when no Eulerian path exists -- ambiguous or
 # disconnected graphs are reported, not guessed at.
+#' Hierholzer\'s algorithm with the exact existence condition checked:
+#'
+#' connected, and either all in/out degrees equal, or exactly one vertex
+#' with out - in = 1 (start) and one with in - out = 1 (end). Returns
+#' NULL when no Eulerian path exists -- ambiguous or disconnected graphs
+#' are reported, not guessed at.
+#'
+#' @param edges See Usage.
+#' @param indeg See Usage.
+#' @param outdeg See Usage.
+#' @return The value of \code{path}, as built in the body.
+#' @export
 eulerian_path <- function(edges, indeg, outdeg) {
   verts <- unique(c(ls(indeg, all.names = TRUE),
                     ls(outdeg, all.names = TRUE)))

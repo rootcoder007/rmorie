@@ -1,0 +1,20 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{Dwt2Tap}
+\alias{Dwt2Tap}
+\title{Two-tap (Haar / db1) orthogonal DWT}
+\usage{
+Dwt2Tap(x, levels = 3)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{levels}{Defaults to \code{3}.}
+}
+\description{
+Part of the rangayyan_tf implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{energy}, \code{input_energy}, \code{method}.
+}
+\keyword{internal}

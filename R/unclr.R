@@ -14,10 +14,34 @@
 
 # --- small linear algebra (standard; no owning source) ---------------
 
+#' morie_unclr_dft_amp
+#'
+#' Part of the unclr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{Mod}.
+#' @export
 morie_unclr_dft_amp <- function(x) Mod(stats::fft(as.numeric(x)))
 
+#' morie_unclr_phi
+#'
+#' Part of the unclr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 morie_unclr_phi <- function(z) exp(-0.5 * z^2) / sqrt(2 * pi)
 
+#' morie_unclr_Phi
+#'
+#' Part of the unclr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{stats::pnorm}.
+#' @export
 morie_unclr_Phi <- function(z) stats::pnorm(z)
 
 # ====================================================================
@@ -345,13 +369,41 @@ Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
 # Palarea-Albaladejo & Martin-Fernandez, lrEM (2008) / lrDA (2013).
 # ====================================================================
 
+#' morie_unclr_alr
+#'
+#' Part of the unclr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 morie_unclr_alr <- function(x) log(x[-length(x)] / x[length(x)])
 
+#' morie_unclr_alr_inv
+#'
+#' Part of the unclr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param z See Usage.
+#' @param total See Usage.
+#' @return A numeric value.
+#' @export
 morie_unclr_alr_inv <- function(z, total) {
   e <- c(exp(z), 1)
   total * e / sum(e)
 }
 
+#' morie_unclr_lr_impute
+#'
+#' Part of the unclr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @param dl See Usage.
+#' @param n_iter See Usage.
+#' @param draw Defaults to \code{NULL}.
+#' @return A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.
+#' @export
 morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
   Xm <- as.matrix(X); n <- nrow(Xm); d <- ncol(Xm)
   dlv <- as.numeric(dl)
@@ -711,6 +763,15 @@ Ginagg <- function(A, H, eps = 0) {
   list(H = (1 + e) * Hm + Am %*% Hm, eps = e, n_nodes = n, dim = ncol(Hm))
 }
 
+#' morie_unclr_sym_norm
+#'
+#' Part of the unclr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param A See Usage.
+#' @param self_loops See Usage.
+#' @return A numeric value.
+#' @export
 morie_unclr_sym_norm <- function(A, self_loops) {
   n <- nrow(A)
   M <- A + if (self_loops) diag(1, n) else 0

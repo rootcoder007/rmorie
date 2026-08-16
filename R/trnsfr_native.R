@@ -73,6 +73,17 @@
   list(coef=.s03ridgesolve(XtWX, XtWy, 1e-10))
 }
 
+#' Odds-of-membership weights for the source cohort. Fits pi(x) by
+#'
+#' logistic regression on the pooled data and returns, for each source
+#' unit, (1-pi)/pi, normalised to mean 1. Target units get 0.
+#'
+#' @param X See Usage.
+#' @param S See Usage.
+#' @param trim Defaults to \code{0.001}.
+#' @param ridge Defaults to \code{1e-06}.
+#' @return A list with \code{weights}, \code{pi}, \code{max_weight}, \code{ess}, \code{ess_fraction}, \code{n_source}, \code{coef}, \code{method}.
+#' @export
 morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
   # Odds-of-membership weights for the source cohort. Fits pi(x) by
   # logistic regression on the pooled data and returns, for each
@@ -110,6 +121,17 @@ morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
                      "2.2 applied to S rather than W"))
 }
 
+#' Minimum-variance weights that match the target\'s X means: solve
+#'
+#' min sum w_i^2 over source units subject to sum w_i Xtilde_i =
+#' Xbar_target with Xtilde = (1, X). Weights may go negative, which is
+#' reported.
+#'
+#' @param X See Usage.
+#' @param S See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{weights}, \code{target_moments}, \code{achieved}, \code{max_imbalance}, \code{n_negative}, \code{positive_mass}, \code{method}.
+#' @export
 morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
   # Minimum-variance weights that match the target's X means: solve
   # min sum w_i^2 over source units subject to sum w_i Xtilde_i =
@@ -145,6 +167,21 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
                      "Wager (2025) Sec. 7.1"))
 }
 
+#' morie_trnsfr_transport_ate
+#'
+#' Part of the trnsfr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param S See Usage.
+#' @param method Defaults to \code{"dr"}.
+#' @param e Defaults to \code{NULL}.
+#' @param trim Defaults to \code{0.001}.
+#' @param ridge Defaults to \code{1e-06}.
+#' @return A list with \code{estimate}, \code{source_ate}, \code{outcome_route}, \code{n_source}, \code{n_target}, \code{method}, \code{diagnostics}, \code{assumption}.
+#' @export
 morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
                                        trim=1e-3, ridge=1e-6) {
   # The source-cohort effect, transported to the target cohort.
@@ -236,6 +273,21 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
                          "support lies inside the source's"))
 }
 
+#' morie_trnsfr_transfer_msm
+#'
+#' Part of the trnsfr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param cohort See Usage.
+#' @param target Defaults to \code{0}.
+#' @param e Defaults to \code{NULL}.
+#' @param trim Defaults to \code{0.001}.
+#' @param ridge Defaults to \code{1e-06}.
+#' @return A list with \code{estimate}, \code{intercept}, \code{coef}, \code{weights}, \code{transport_weights}, \code{msm_weights}, \code{target}, \code{cohorts}, \code{n}, \code{method}.
+#' @export
 morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target=0, e=NULL,
                                       trim=1e-3, ridge=1e-6) {
   # A marginal structural model fitted with transported weights. Every
@@ -291,6 +343,13 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target=0, e=NULL,
                      "and 7.1"))
 }
 
+#' morie_trnsfr_cheatsheet
+#'
+#' Part of the trnsfr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_trnsfr_cheatsheet <- function() {
   paste0(
     "trnsfr: move an effect between cohorts by reweighting. ",

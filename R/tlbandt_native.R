@@ -67,6 +67,21 @@
   if (b > 0) 1.0 - d else d
 }
 
+#' morie_tlbandt
+#'
+#' Part of the tlbandt_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param W See Usage.
+#' @param Y1 See Usage.
+#' @param Y0 See Usage.
+#' @param blip_fn See Usage.
+#' @param delta Defaults to \code{0.1}.
+#' @param seed Defaults to \code{0}.
+#' @param greedy Defaults to \code{FALSE}.
+#' @param burn_in Defaults to \code{20L}.
+#' @return A list with \code{A}, \code{Y}, \code{g}, \code{history}, \code{greedy}, \code{min_g}, \code{max_g}, \code{note}.
+#' @export
 morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
                           greedy = FALSE, burn_in = 20L) {
   if (is.list(W) && !is.data.frame(W) && !is.matrix(W)) {

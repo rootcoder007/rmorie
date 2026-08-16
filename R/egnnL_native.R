@@ -31,12 +31,35 @@
   sum((a - b)^2)
 }
 
+#' Eq. (3). Positions enter ONLY as ||x_i - x_j||^2, which is what
+#'
+#' makes the message invariant.
+#'
+#' @param h_i See Usage.
+#' @param h_j See Usage.
+#' @param x_i See Usage.
+#' @param x_j See Usage.
+#' @param phi_e See Usage.
+#' @param a_ij Defaults to \code{NULL}.
+#' @return The value of \code{phi_e}.
+#' @export
 edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
   # Eq. (3). Positions enter ONLY as ||x_i - x_j||^2, which is what
   # makes the message invariant.
   phi_e(as.numeric(h_i), as.numeric(h_j), .sqdist(x_i, x_j), a_ij)
 }
 
+#' Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_{ij})
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param M See Usage.
+#' @param phi_x See Usage.
+#' @param C Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 coord_update <- function(X, M, phi_x, C = NULL) {
   # Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_{ij}).
   n <- length(X)
@@ -58,6 +81,24 @@ coord_update <- function(X, M, phi_x, C = NULL) {
   out
 }
 
+#' egcl
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @param V Defaults to \code{NULL}.
+#' @param mode Defaults to \code{"position"}.
+#' @param phi_v Defaults to \code{NULL}.
+#' @param dt Defaults to \code{1}.
+#' @return A list with \code{H}, \code{X}, \code{V}, \code{messages}.
+#' @export
 egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
                  V = NULL, mode = "position", phi_v = NULL,
                  dt = 1) {
@@ -114,6 +155,21 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
   list(H = Hn, X = Xn, V = Vn, messages = M)
 }
 
+#' run_egnn
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method}, \code{note}.
+#' @export
 run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                      C = NULL) {
   # Compose layers; equivariance is preserved inductively.
@@ -129,6 +185,22 @@ run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
        note = "h is E(n) INVARIANT, x is E(n) EQUIVARIANT")
 }
 
+#' morie_egnnL_equivariance_error
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param Q See Usage.
+#' @param g See Usage.
+#' @param layers Defaults to \code{2}.
+#' @param C Defaults to \code{NULL}.
+#' @return A list with \code{coordinate_error}, \code{feature_error}, \code{equivariant}, \code{invariant}, \code{note}.
+#' @export
 morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
                                layers = 2, C = NULL) {
   # Transform the input, run, and compare against transforming the
@@ -180,22 +252,82 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
 }
 
 # compact alias per ledger/NAMING.md
+#' Compact alias per ledger/NAMING.md
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return The value of \code{run_egnn}.
+#' @export
 equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                            C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
 }
 
 # public names resolved by fn/_lazy_map.json
+#' Public names resolved by fn/_lazy_map.json
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return The value of \code{run_egnn}.
+#' @export
 egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                        C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
 }
+#' egnnlayer
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return The value of \code{run_egnn}.
+#' @export
 egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                       C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
 }
 
 # morie entry point: matches the Python payload keys
+#' Morie entry point: matches the Python payload keys
+#'
+#' Part of the egnnL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return The value of \code{run_egnn}.
+#' @export
 morie_egnnL <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                         C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)

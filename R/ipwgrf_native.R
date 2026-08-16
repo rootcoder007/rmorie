@@ -111,6 +111,24 @@
   list(g = g, weights = weights)
 }
 
+#' morie_ipwgrf
+#'
+#' Part of the ipwgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param n_folds Defaults to \code{5}.
+#' @param n_trees Defaults to \code{120}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param trim Defaults to \code{0.02}.
+#' @param seed Defaults to \code{0}.
+#' @param level Defaults to \code{0.95}.
+#' @param break_outcome Defaults to \code{FALSE}.
+#' @param break_propensity Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{ate}, \code{se}, \code{ci}, \code{scores}, \code{mu1}, \code{mu0}, \code{propensity}, \code{plug_in}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{trim}, \code{n}, \code{level}, \code{broken_outcome}, \code{broken_propensity}, \code{method}.
+#' @export
 morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
                          trim = 0.02, seed = 0, level = 0.95,
                          break_outcome = FALSE, break_propensity = FALSE) {

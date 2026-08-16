@@ -98,6 +98,23 @@
   )
 }
 
+#' morie_gan_an
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param generator See Usage.
+#' @param feature_fn See Usage.
+#' @param z_dim See Usage.
+#' @param steps Defaults to \code{200}.
+#' @param lr Defaults to \code{0.05}.
+#' @param lam Defaults to \code{0.1}.
+#' @param seed Defaults to \code{0}.
+#' @param h Defaults to \code{1e-04}.
+#' @param step_decay Defaults to \code{0.05}.
+#' @return A list with \code{estimate}, \code{score}, \code{z}, \code{reconstruction}, \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step}, \code{method}, \code{note}.
+#' @export
 morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
                          lr = 0.05, lam = 0.1, seed = 0, h = 1e-4,
                          step_decay = 0.05) {
@@ -160,18 +177,58 @@ morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
   )
 }
 
+#' residual_loss
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param g_z See Usage.
+#' @return The value of \code{.gan_an_residual_loss_impl}.
+#' @export
 residual_loss <- function(x, g_z) {
   .gan_an_residual_loss_impl(x, g_z)
 }
 
+#' discrimination_loss
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f_x See Usage.
+#' @param f_gz See Usage.
+#' @return The value of \code{.gan_an_discrimination_loss_impl}.
+#' @export
 discrimination_loss <- function(f_x, f_gz) {
   .gan_an_discrimination_loss_impl(f_x, f_gz)
 }
 
+#' anomaly_score
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param g_z See Usage.
+#' @param f_x See Usage.
+#' @param f_gz See Usage.
+#' @param lam Defaults to \code{0.1}.
+#' @return The value of \code{.gan_an_anomaly_score_impl}.
+#' @export
 anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
   .gan_an_anomaly_score_impl(x, g_z, f_x, f_gz, lam)
 }
 
+#' residual_map
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param g_z See Usage.
+#' @param shape Defaults to \code{NULL}.
+#' @return A list with \code{map}, \code{max}, \code{note}.
+#' @export
 residual_map <- function(x, g_z, shape = NULL) {
   a <- .gan_an_as_num(x)
   b <- .gan_an_as_num(g_z)
@@ -195,6 +252,15 @@ residual_map <- function(x, g_z, shape = NULL) {
   )
 }
 
+#' score_separation
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param normal_scores See Usage.
+#' @param anomalous_scores See Usage.
+#' @return A list with \code{auc}, \code{mean_normal}, \code{mean_anomalous}, \code{separated}, \code{note}.
+#' @export
 score_separation <- function(normal_scores, anomalous_scores) {
   a <- .gan_an_as_num(normal_scores)
   b <- .gan_an_as_num(anomalous_scores)

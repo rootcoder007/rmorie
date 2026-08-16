@@ -161,6 +161,17 @@
 }
 
 
+#' morie_tlsieve
+#'
+#' Part of the tlsieve_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param F_vac_matched See Usage.
+#' @param F_pla_matched See Usage.
+#' @param F_vac_mismatched See Usage.
+#' @param F_pla_mismatched See Usage.
+#' @return A list with \code{estimate}, \code{sieve_effect}, \code{ve_matched}, \code{ve_mismatched}, \code{method}, \code{note}.
+#' @export
 morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
                           F_pla_mismatched) {
   ve_m <- .tlsieve_vaccine_efficacy(F_vac_matched, F_pla_matched)

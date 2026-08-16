@@ -330,6 +330,18 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
   )
 }
 
+#' morie_stahdo
+#'
+#' Part of the stahdo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param directions Defaults to \code{"subsample"}.
+#' @param n_directions Defaults to \code{500}.
+#' @param seed Defaults to \code{1}.
+#' @param cutoff Defaults to \code{NULL}.
+#' @return The value of \code{.stahdo_stahel_donoho}.
+#' @export
 morie_stahdo <- function(X, directions = "subsample",
                         n_directions = 500, seed = 1,
                         cutoff = NULL) {

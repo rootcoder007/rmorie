@@ -144,28 +144,94 @@
   )
 }
 
+#' morie_warpL_alpha_weights
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param scheme Defaults to \code{"reciprocal"}.
+#' @return The value of \code{.warpL_alpha_weights}.
+#' @export
 morie_warpL_alpha_weights <- function(n, scheme = "reciprocal") {
   .warpL_alpha_weights(n, scheme)
 }
 
+#' morie_warpL_rank_weight
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rank See Usage.
+#' @param alphas See Usage.
+#' @return The value of \code{.warpL_rank_weight}.
+#' @export
 morie_warpL_rank_weight <- function(rank, alphas) {
   .warpL_rank_weight(rank, alphas)
 }
 
+#' morie_warpL_estimate_rank
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_draws See Usage.
+#' @param n_labels See Usage.
+#' @return The value of \code{.warpL_estimate_rank}.
+#' @export
 morie_warpL_estimate_rank <- function(n_draws, n_labels) {
   .warpL_estimate_rank(n_draws, n_labels)
 }
 
+#' morie_warpL_sample_violation
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param score_positive See Usage.
+#' @param negative_scorer See Usage.
+#' @param n_labels See Usage.
+#' @param rng See Usage.
+#' @param margin Defaults to \code{1}.
+#' @param max_draws Defaults to \code{NULL}.
+#' @return The value of \code{.warpL_sample_violation}.
+#' @export
 morie_warpL_sample_violation <- function(score_positive, negative_scorer, n_labels,
                                           rng, margin = 1.0, max_draws = NULL) {
   .warpL_sample_violation(score_positive, negative_scorer, n_labels, rng, margin, max_draws)
 }
 
+#' morie_warpL_warp_loss
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param score_positive See Usage.
+#' @param score_negative See Usage.
+#' @param estimated_rank See Usage.
+#' @param alphas See Usage.
+#' @param margin Defaults to \code{1}.
+#' @return The value of \code{.warpL_warp_loss}.
+#' @export
 morie_warpL_warp_loss <- function(score_positive, score_negative, estimated_rank,
                                    alphas, margin = 1.0) {
   .warpL_warp_loss(score_positive, score_negative, estimated_rank, alphas, margin)
 }
 
+#' morie_warpL_warp_step
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param positive See Usage.
+#' @param negatives See Usage.
+#' @param embed_user See Usage.
+#' @param rng See Usage.
+#' @param alphas See Usage.
+#' @param lr Defaults to \code{0.05}.
+#' @param margin Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{updated}, \code{loss}, \code{user}, \code{draws}, \code{estimated_rank}, \code{rank_weight}, \code{negative}, \code{method}, \code{note}.
+#' @export
 morie_warpL_warp_step <- function(positive, negatives, embed_user, rng, alphas,
                                    lr = 0.05, margin = 1.0) {
   u <- .warpL_vec(embed_user)
@@ -211,6 +277,13 @@ morie_warpL_warp_step <- function(positive, negatives, embed_user, rng, alphas,
   )
 }
 
+#' morie_warpL_cheatsheet
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_warpL_cheatsheet <- function() {
   "warpL: with tens of thousands of labels what matters is precision at k, but pairwise losses optimise the WHOLE ordering and top-targeting losses are costly to train. Estimate the rank by SAMPLING: draw negatives until one violates the margin, and if it took N draws the rank is about (Y-1)/N -- a violation on the first draw means a badly ranked positive, many draws means it is already near the top. Nothing is sorted. Then WEIGHT by L(r) = sum_{j<=r} alpha_j with alpha non-increasing: alpha_j = 1/j optimises the top, constant alpha recovers the plain pairwise loss. Cap the draws and SAY when the cap was hit."
 }

@@ -9,6 +9,16 @@
 #   Construction for the Indian Buffet Process", AISTATS 2007,
 #   PMLR 2, 556-563.
 
+#' sample_ibp
+#'
+#' Part of the ibpfa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param alpha See Usage.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n}, \code{features_per_object}, \code{note}.
+#' @export
 sample_ibp <- function(n, alpha, seed = 0L) {
   N <- as.integer(n)
   a <- as.numeric(alpha)
@@ -59,6 +69,15 @@ sample_ibp <- function(n, alpha, seed = 0L) {
        note = paste("the number of features is INFERRED, not fixed"))
 }
 
+#' expected_features
+#'
+#' Part of the ibpfa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param alpha See Usage.
+#' @return A list with \code{expected_total_features}, \code{harmonic}, \code{expected_per_object}, \code{expected_nonzeros}, \code{note}.
+#' @export
 expected_features <- function(n, alpha) {
   N <- as.integer(n)
   a <- as.numeric(alpha)
@@ -71,6 +90,14 @@ expected_features <- function(n, alpha) {
        note = paste("total grows like alpha log n; per object it is CONSTANT at alpha"))
 }
 
+#' left_ordered_form
+#'
+#' Part of the ibpfa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @return A list with \code{Z}, \code{order}, \code{note}.
+#' @export
 left_ordered_form <- function(Z) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -90,6 +117,15 @@ left_ordered_form <- function(Z) {
        note = paste("columns are an unordered SET; left-ordering picks the canonical representative"))
 }
 
+#' ibp_log_probability
+#'
+#' Part of the ibpfa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param alpha See Usage.
+#' @return The value of \code{lp}, as built in the body.
+#' @export
 ibp_log_probability <- function(Z, alpha) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -107,6 +143,18 @@ ibp_log_probability <- function(Z, alpha) {
   lp
 }
 
+#' gibbs_feature_update
+#'
+#' Part of the ibpfa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param i See Usage.
+#' @param kk See Usage.
+#' @param likelihood See Usage.
+#' @param alpha See Usage.
+#' @return A list with \code{p_on}, \code{prior}, \code{z}, \code{note}.
+#' @export
 gibbs_feature_update <- function(Z, i, kk, likelihood, alpha) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -130,6 +178,16 @@ gibbs_feature_update <- function(Z, i, kk, likelihood, alpha) {
 indianbuffet <- sample_ibp
 indian_buffet_factor <- sample_ibp
 
+#' morie_ibpfa
+#'
+#' Part of the ibpfa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param alpha See Usage.
+#' @param seed Defaults to \code{0L}.
+#' @return The value of \code{sample_ibp}.
+#' @export
 morie_ibpfa <- function(n, alpha, seed = 0L) {
   sample_ibp(n, alpha, seed)
 }

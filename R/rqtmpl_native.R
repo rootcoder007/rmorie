@@ -39,6 +39,14 @@ LOG10E <- log10(exp(1))
 .rqtmpl_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 .rqtmpl_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
+#' morie_haldane
+#'
+#' Part of the rqtmpl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param distance See Usage.
+#' @return A numeric value.
+#' @export
 morie_haldane <- function(distance) {
   d <- as.numeric(distance)
   if (d < 0) stop("rqtmpl: map distance cannot be negative")

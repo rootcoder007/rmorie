@@ -13,6 +13,17 @@
 .fmFM_EPS <- 1e-12
 
 # --- eq. (1) as written -- the O(kn^2) double sum -------------------
+#' Eq. (1) as written -- the O(kn^2) double sum -------------------
+#'
+#' Part of the fmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param w0 See Usage.
+#' @param w See Usage.
+#' @param V See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 predict_naive <- function(x, w0, w, V) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -45,6 +56,17 @@ predict_naive <- function(x, w0, w, V) {
 }
 
 # --- d/d v_{i,f} of hat y, used in the SGD step --------------------
+#' D/d v_{i,f} of hat y, used in the SGD step --------------------
+#'
+#' Part of the fmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param V See Usage.
+#' @param f See Usage.
+#' @param i See Usage.
+#' @return A numeric value.
+#' @export
 gradient <- function(x, V, f, i) {
   xs <- as.numeric(x)
   a <- sum(vapply(seq_along(xs), function(j) V[[j]][f] * xs[j],
@@ -55,6 +77,17 @@ gradient <- function(x, V, f, i) {
 # --- encoding under which an FM IS matrix factorisation -------------
 # One indicator for the user, one for the item. The only non-zero
 # interaction is then <v_u, v_i>.
+#' Encoding under which an FM IS matrix factorisation -------------
+#'
+#' One indicator for the user, one for the item. The only non-zero
+#' interaction is then <v_u, v_i>.
+#'
+#' @param u See Usage.
+#' @param i See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 design_mf <- function(u, i, n_users, n_items) {
   x <- rep(0, as.integer(n_users) + as.integer(n_items))
   x[as.integer(u) + 1L] <- 1
@@ -63,6 +96,20 @@ design_mf <- function(u, i, n_users, n_items) {
 }
 
 # --- least-squares FM by stochastic gradient descent ----------------
+#' Least-squares FM by stochastic gradient descent ----------------
+#'
+#' Part of the fmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param k_dim Defaults to \code{4}.
+#' @param iters Defaults to \code{300}.
+#' @param alpha Defaults to \code{0.02}.
+#' @param lam Defaults to \code{0.01}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{w0}, \code{w}, \code{V}, \code{mse_history}, \code{final_mse}, \code{k}, \code{n_features}, \code{method}.
+#' @export
 fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
                    lam = 0.01, seed = 0) {
   rows <- as.matrix(X); storage.mode(rows) <- "double"

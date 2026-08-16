@@ -3,6 +3,16 @@
 # held in the corpus (Biomedical Signal Analysis, 2024).  Nothing here
 # calls stats:: or signal::.
 
+#' Rangayyan eq. (7.60): I(P) = log(eps_P) + 2P/Ne, Ne = 0.4 N for a
+#'
+#' Hamming window -- the EFFECTIVE sample count after windowing, which
+#' is what distinguishes this from the textbook N log(sigma^2) + 2p.
+#'
+#' @param prediction_errors See Usage.
+#' @param n_samples See Usage.
+#' @param window Defaults to \code{"hamming"}.
+#' @return A list with \code{order}, \code{criterion}, \code{n_effective}, \code{method}.
+#' @export
 AICorder <- function(prediction_errors, n_samples, window = "hamming") {
   # Rangayyan eq. (7.60):  I(P) = log(eps_P) + 2P/Ne,  Ne = 0.4 N for a
   # Hamming window -- the EFFECTIVE sample count after windowing, which
@@ -43,6 +53,17 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
   }, numeric(1))
 }
 
+#' BartlettPSD
+#'
+#' Part of the rangayyan_sig implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param n_segments Defaults to \code{NULL}.
+#' @param segment_length Defaults to \code{NULL}.
+#' @return A list with \code{psd}, \code{freqs}, \code{n_segments}, \code{segment_length}, \code{method}.
+#' @export
 BartlettPSD <- function(x, fs = 1, n_segments = NULL,
                         segment_length = NULL) {
   # Rangayyan eqs. (6.14)-(6.16): split into K DISJOINT segments of M
@@ -80,6 +101,16 @@ BartlettPSD <- function(x, fs = 1, n_segments = NULL,
   )
 }
 
+#' Rangayyan eq. (7.65):
+#'
+#' h(1) = -a1; h(n) = -a_n - sum_{k=1}^{n-1} (1 - k/n) a_k h(n-k) Going
+#' through the AR coefficients avoids the phase unwrapping the FFT
+#' cepstrum needs (Section 4.7.3).
+#'
+#' @param a_coeffs See Usage.
+#' @param gain Defaults to \code{NULL}.
+#' @return A list with \code{cepstrum}, \code{c0}, \code{order}, \code{method}.
+#' @export
 ARtoCepstrum <- function(a_coeffs, gain = NULL) {
   # Rangayyan eq. (7.65):
   #   h(1) = -a1;  h(n) = -a_n - sum_{k=1}^{n-1} (1 - k/n) a_k h(n-k)

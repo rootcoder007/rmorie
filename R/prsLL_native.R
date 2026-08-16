@@ -454,6 +454,16 @@
 }
 
 # ----- Entry point -----
+#' Entry point -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param grammar_ See Usage.
+#' @param tokens See Usage.
+#' @param route Defaults to \code{"table"}.
+#' @return A list with \code{estimate}, \code{tree}, \code{route}, \code{tokens}, \code{yield}, \code{method}.
+#' @export
 morie_prsLL <- function(grammar_, tokens, route = "table") {
   if (is.list(grammar_) && !is.null(grammar_$rules) && !is.null(grammar_$start)) {
     g <- grammar_

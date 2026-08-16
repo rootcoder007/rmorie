@@ -128,6 +128,14 @@ morie_evt_gev_mle <- function(x) {
 }
 
 # pseudo-inverse fallback for a singular observed information
+#' Pseudo-inverse fallback for a singular observed information
+#'
+#' Part of the evt_coles implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 MASS_ginv_fallback <- function(H) {
   e <- eigen(H, symmetric = TRUE)
   pos <- e$values > max(e$values) * 1e-12

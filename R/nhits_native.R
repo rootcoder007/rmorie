@@ -156,6 +156,18 @@
   list(total = total, resid = resid, trace = trace)
 }
 
+#' morie_nhits
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param horizon See Usage.
+#' @param lookback Defaults to \code{NULL}.
+#' @param blocks Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{total_knots}, \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.
+#' @export
 morie_nhits <- function(y, horizon, lookback = NULL, blocks = NULL,
                         ridge = 1e-8) {
   yv <- .nhits_vec(y)

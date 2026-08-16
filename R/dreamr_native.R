@@ -90,6 +90,19 @@
   )
 }
 
+#' morie_dreamr_imagine
+#'
+#' Part of the dreamr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param action_model See Usage.
+#' @param transition See Usage.
+#' @param reward_model See Usage.
+#' @param horizon See Usage.
+#' @param value_model Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{method}.
+#' @export
 morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
                                   horizon, value_model = NULL) {
   H <- as.integer(horizon)
@@ -130,6 +143,19 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
   )
 }
 
+#' morie_dreamr_lambda_return
+#'
+#' Part of the dreamr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rewards See Usage.
+#' @param values See Usage.
+#' @param gamma Defaults to \code{0.99}.
+#' @param lam Defaults to \code{0.95}.
+#' @param estimator Defaults to \code{"lambda"}.
+#' @param k Defaults to \code{1}.
+#' @return The value of \code{.dreamr_pack}.
+#' @export
 morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95,
                                         estimator = "lambda", k = 1) {
   if (!is.character(estimator) || length(estimator) != 1L ||
@@ -197,6 +223,15 @@ morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95
   .dreamr_pack(out, "V_lambda (eq. 6)")
 }
 
+#' morie_dreamr_value_update
+#'
+#' Part of the dreamr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @param targets See Usage.
+#' @return A list with \code{estimate}, \code{loss}, \code{residual}, \code{grad}, \code{method}.
+#' @export
 morie_dreamr_value_update <- function(values, targets) {
   v <- .dreamr_vec(values, "values")
   t <- .dreamr_vec(targets, "targets")
@@ -215,6 +250,23 @@ morie_dreamr_value_update <- function(values, targets) {
   )
 }
 
+#' morie_dreamr
+#'
+#' Part of the dreamr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param action_model See Usage.
+#' @param transition See Usage.
+#' @param reward_model See Usage.
+#' @param value_model See Usage.
+#' @param horizon Defaults to \code{15}.
+#' @param gamma Defaults to \code{0.99}.
+#' @param lam Defaults to \code{0.95}.
+#' @param estimator Defaults to \code{"lambda"}.
+#' @param k Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{returns}, \code{objective}, \code{value_loss}, \code{residual}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{gamma}, \code{lam}, \code{estimator}, \code{method}.
+#' @export
 morie_dreamr <- function(state, action_model, transition, reward_model, value_model,
                           horizon = 15, gamma = 0.99, lam = 0.95,
                           estimator = "lambda", k = 1) {
@@ -243,6 +295,13 @@ morie_dreamr <- function(state, action_model, transition, reward_model, value_mo
 
 morie_dreamer <- morie_dreamr
 
+#' morie_dreamr_cheatsheet
+#'
+#' Part of the dreamr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_dreamr_cheatsheet <- function() {
   paste0("dreamr: learn behaviour inside a latent world model ",
          "(Hafner 2020). Imagine H steps with the TRANSITION model ",

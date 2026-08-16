@@ -1,0 +1,22 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{XCorrCont}
+\alias{XCorrCont}
+\title{The continuous-time form, evaluated by the trapezoidal rule on the}
+\usage{
+XCorrCont(x, y, t, delays)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{y}{See Usage.}
+\item{t}{See Usage.}
+\item{delays}{See Usage.}
+}
+\description{
+samples that BOTH signals cover.  Long delays use less data, so the overlap fraction travels with the estimate.
+}
+\value{
+A list with \code{ccf}, \code{delays}, \code{overlap_fraction}, \code{interpolated}, \code{trapezoidal}, \code{long_delays_use_less_data}, \code{method}.
+}
+\keyword{internal}

@@ -6,6 +6,17 @@
 .bigtm_EPS <- 1e-300
 .PRIORS <- c(1, 2)
 
+#' dirichlet_predictive
+#'
+#' Part of the bigtm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param N_ij See Usage.
+#' @param N_j See Usage.
+#' @param beta See Usage.
+#' @param m See Usage.
+#' @return A list with \code{predictive}, \code{lambda}, \code{f}, \code{interpolated}, \code{note}.
+#' @export
 dirichlet_predictive <- function(N_ij, N_j, beta, m) {
   n <- as.numeric(N_ij)
   mm <- as.numeric(m)
@@ -24,6 +35,17 @@ dirichlet_predictive <- function(N_ij, N_j, beta, m) {
                     "so m_i plays the role of the marginal frequency"))
 }
 
+#' lda_predictive
+#'
+#' Part of the bigtm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param N_ik See Usage.
+#' @param N_k See Usage.
+#' @param beta See Usage.
+#' @param m See Usage.
+#' @return A list with \code{predictive}, \code{lambda}, \code{eq15_as_printed}, \code{note}.
+#' @export
 lda_predictive <- function(N_ik, N_k, beta, m) {
   n <- as.numeric(N_ik)
   mm <- as.numeric(m)
@@ -39,6 +61,18 @@ lda_predictive <- function(N_ik, N_k, beta, m) {
                     "Eq. (13) is used."))
 }
 
+#' bigram_topic_predictive
+#'
+#' Part of the bigtm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param N_ijk See Usage.
+#' @param N_jk See Usage.
+#' @param beta See Usage.
+#' @param m See Usage.
+#' @param prior Defaults to \code{1}.
+#' @return A list with \code{predictive}, \code{prior}, \code{smoothed_by}.
+#' @export
 bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
   if (!(as.integer(prior) %in% .PRIORS))
     stop(sprintf("bigtm: prior must be 1 or 2, got %s", prior))
@@ -80,6 +114,24 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
   .ghc_unif(.ghc_rng(as.numeric(seed)), n)
 }
 
+#' gibbs_bigram_topic
+#'
+#' Part of the bigtm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param docs See Usage.
+#' @param T See Usage.
+#' @param V See Usage.
+#' @param alpha Defaults to \code{0.5}.
+#' @param beta Defaults to \code{0.5}.
+#' @param m Defaults to \code{NULL}.
+#' @param n Defaults to \code{NULL}.
+#' @param prior Defaults to \code{1}.
+#' @param iters Defaults to \code{200L}.
+#' @param seed Defaults to \code{0L}.
+#' @param burn Defaults to \code{50L}.
+#' @return A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta}, \code{N_ijk}, \code{N_jk}, \code{T}, \code{V}, \code{prior}, \code{iterations}, \code{burn_in}, \code{samples_kept}, \code{method}, \code{caveat}.
+#' @export
 gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
                                m = NULL, n = NULL, prior = 1,
                                iters = 200L, seed = 0L, burn = 50L) {
@@ -201,6 +253,21 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
   tot
 }
 
+#' log_evidence
+#'
+#' Part of the bigtm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param docs See Usage.
+#' @param T See Usage.
+#' @param V See Usage.
+#' @param z See Usage.
+#' @param alpha Defaults to \code{0.5}.
+#' @param beta Defaults to \code{0.5}.
+#' @param m Defaults to \code{NULL}.
+#' @param n Defaults to \code{NULL}.
+#' @return The value of \code{.log_evidence}.
+#' @export
 log_evidence <- function(docs, T, V, z, alpha = 0.5, beta = 0.5,
                          m = NULL, n = NULL) {
   D <- lapply(docs, function(d) as.integer(d))

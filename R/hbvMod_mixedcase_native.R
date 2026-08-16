@@ -44,6 +44,18 @@
   w
 }
 
+#' morie_hbvMod
+#'
+#' Part of the hbvMod_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param precip See Usage.
+#' @param temp See Usage.
+#' @param epot See Usage.
+#' @param params See Usage.
+#' @param init Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
   p <- as.numeric(precip)
   t <- as.numeric(temp)

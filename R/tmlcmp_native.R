@@ -102,6 +102,19 @@
   b
 }
 
+#' cause_specific_hazards
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event_type See Usage.
+#' @param times See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param arm Defaults to \code{NULL}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{hazards}, \code{types}, \code{times}, \code{n}.
+#' @export
 cause_specific_hazards <- function(time, event_type, times,
                                    A=NULL, arm=NULL, weights=NULL) {
   t <- .tmlcmp_vec(time)
@@ -150,6 +163,15 @@ cause_specific_hazards <- function(time, event_type, times,
   list(hazards=out_haz, types=types, times=as.numeric(times), n=length(keep))
 }
 
+#' cumulative_incidence
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hazards See Usage.
+#' @param times See Usage.
+#' @return A list with \code{F}, \code{survival}, \code{types}, \code{closure}.
+#' @export
 cumulative_incidence <- function(hazards, times) {
   types <- sort(as.numeric(names(hazards)))
   if (length(types) == 0) {
@@ -186,6 +208,16 @@ cumulative_incidence <- function(hazards, times) {
   list(F=F, survival=surv, types=types, closure=closure)
 }
 
+#' one_minus_km
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hazards See Usage.
+#' @param times See Usage.
+#' @param cause See Usage.
+#' @return A list with \code{estimate}, \code{caveat}.
+#' @export
 one_minus_km <- function(hazards, times, cause) {
   j <- as.numeric(cause)
   j_str <- as.character(j)
@@ -203,6 +235,22 @@ one_minus_km <- function(hazards, times, cause) {
                     "answers a different question and overstates F_j"))
 }
 
+#' morie_tmlcmp
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event_type See Usage.
+#' @param D See Usage.
+#' @param X See Usage.
+#' @param times Defaults to \code{NULL}.
+#' @param cause Defaults to \code{1}.
+#' @param horizon Defaults to \code{NULL}.
+#' @param g Defaults to \code{NULL}.
+#' @param iters Defaults to \code{50}.
+#' @return A list with \code{estimate}, \code{psi}, \code{F_treated}, \code{F_control}, \code{curve_treated}, \code{curve_control}, \code{se}, \code{ci}, \code{horizon}, \code{cause}, \code{times}, \code{closure_treated}, \code{method}, \code{note}.
+#' @export
 morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
                          cause=1, horizon=NULL, g=NULL, iters=50) {
   t <- .tmlcmp_vec(time)

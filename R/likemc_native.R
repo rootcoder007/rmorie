@@ -57,6 +57,20 @@
   -log(x * sigma * sqrt(2 * pi)) - 0.5 * z * z
 }
 
+#' morie_likemc
+#'
+#' Part of the likemc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model See Usage.
+#' @param data See Usage.
+#' @param priors See Usage.
+#' @param n_iter See Usage.
+#' @param seed Defaults to \code{1}.
+#' @param step Defaults to \code{0.15}.
+#' @param burn Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{beta_mean}, \code{gamma_mean}, \code{chain}, \code{n_draws}, \code{n_iter}, \code{acceptance_rate}, \code{R0_mean}, \code{R0_q025}, \code{R0_median}, \code{R0_q975}, \code{logpost_final}, \code{seed}, \code{step}, \code{method}.
+#' @export
 morie_likemc <- function(model, data, priors, n_iter, seed = 1,
                          step = 0.15, burn = 0) {
   y <- as.numeric(data)

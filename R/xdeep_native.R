@@ -60,6 +60,15 @@
   m
 }
 
+#' xdeep_hadamard
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 xdeep_hadamard <- function(a, b) {
   x <- .xdeep_to_vec(a)
   y <- .xdeep_to_vec(b)
@@ -70,6 +79,16 @@ xdeep_hadamard <- function(a, b) {
   x * y
 }
 
+#' xdeep_cin_layer
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X_prev See Usage.
+#' @param X0 See Usage.
+#' @param W See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 xdeep_cin_layer <- function(X_prev, X0, W) {
   P <- .xdeep_to_mat(X_prev)
   Z <- .xdeep_to_mat(X0)
@@ -96,6 +115,15 @@ xdeep_cin_layer <- function(X_prev, X0, W) {
   out
 }
 
+#' xdeep_cin
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X0 See Usage.
+#' @param Ws See Usage.
+#' @return A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees}, \code{n_layers}, \code{method}, \code{note}.
+#' @export
 xdeep_cin <- function(X0, Ws) {
   Z <- .xdeep_to_mat(X0)
   cur <- Z
@@ -120,6 +148,14 @@ xdeep_cin <- function(X0, Ws) {
   )
 }
 
+#' xdeep_interaction_degree
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param layer_index See Usage.
+#' @return A list with \code{layer}, \code{degree}, \code{note}.
+#' @export
 xdeep_interaction_degree <- function(layer_index) {
   i <- as.integer(layer_index)
   if (i < 0L) {
@@ -133,6 +169,21 @@ xdeep_interaction_degree <- function(layer_index) {
   )
 }
 
+#' xdeep_xdeepfm_score
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x_linear See Usage.
+#' @param w_linear See Usage.
+#' @param X0 See Usage.
+#' @param Ws See Usage.
+#' @param w_cin See Usage.
+#' @param dnn_output Defaults to \code{0}.
+#' @param w_dnn Defaults to \code{1}.
+#' @param bias Defaults to \code{0}.
+#' @return A list with \code{logit}, \code{probability}, \code{linear}, \code{cin}, \code{dnn}, \code{note}.
+#' @export
 xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
                                 dnn_output = 0.0, w_dnn = 1.0,
                                 bias = 0.0) {
@@ -163,6 +214,13 @@ xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
   )
 }
 
+#' xdeep_cheatsheet
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 xdeep_cheatsheet <- function() {
   paste("xdeep: a DNN represents interactions IMPLICITLY and",
         "BIT-WISE -- mixing individual embedding coordinates",

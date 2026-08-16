@@ -27,6 +27,19 @@
 # the same V-fold CV-TMLE, and the same O(h^s) / O(1/sqrt(nh))
 # bias/SE trade.
 
+#' morie_tlcvnp
+#'
+#' Part of the tlcvnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param x0 See Usage.
+#' @param bandwidths See Usage.
+#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @param V Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @return The value of \code{cv_tmle_smoothed}.
+#' @export
 morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
                          V = 5L, seed = 0L) {
   cv_tmle_smoothed(X, x0, bandwidths, kernel = kernel, V = V,
@@ -35,6 +48,15 @@ morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
 
 .tlcvnp_kernels <- c("epanechnikov", "gaussian", "uniform")
 
+#' kernel_smooth
+#'
+#' Part of the tlcvnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @return A numeric value.
+#' @export
 kernel_smooth <- function(u, kernel = "epanechnikov") {
   if (!(kernel %in% .tlcvnp_kernels))
     stop(sprintf("tlcvnp: kernel must be one of %s, got %s",
@@ -47,6 +69,17 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
   exp(-0.5 * v * v) / sqrt(2 * pi)
 }
 
+#' smoothed_parameter
+#'
+#' Part of the tlcvnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param x0 See Usage.
+#' @param h See Usage.
+#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @return A list with \code{psi_h}, \code{se}, \code{h}, \code{n}, \code{influence_curve}, \code{note}.
+#' @export
 smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
   v <- as.numeric(X)
   hh <- as.numeric(h)
@@ -65,6 +98,17 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
        note = "the SMOOTHED parameter is pathwise differentiable; the density at a point is not")
 }
 
+#' smoothing_bias
+#'
+#' Part of the tlcvnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param true_density See Usage.
+#' @param x0 See Usage.
+#' @param h See Usage.
+#' @param smoothness Defaults to \code{2}.
+#' @return A list with \code{bias_order}, \code{h}, \code{smoothness}, \code{note}.
+#' @export
 smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
   hh <- as.numeric(h); s <- as.numeric(smoothness)
   if (hh <= 0 || s <= 0)
@@ -73,6 +117,19 @@ smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
        note = "inference is for the SMOOTHED parameter; it transfers to the target only when the approximation bias is dominated")
 }
 
+#' select_bandwidth
+#'
+#' Part of the tlcvnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param x0 See Usage.
+#' @param bandwidths See Usage.
+#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @param criterion Defaults to \code{"lepski"}.
+#' @param C Defaults to \code{1}.
+#' @return A list with \code{h}, \code{fit}, \code{criterion}, \code{all}, \code{note}.
+#' @export
 select_bandwidth <- function(X, x0, bandwidths,
                              kernel = "epanechnikov",
                              criterion = "lepski", C = 1.0) {
@@ -111,6 +168,19 @@ select_bandwidth <- function(X, x0, bandwidths,
        note = "the smallest bandwidth consistent with every larger one")
 }
 
+#' cv_tmle_smoothed
+#'
+#' Part of the tlcvnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param x0 See Usage.
+#' @param bandwidths See Usage.
+#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @param V Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{psi}, \code{se}, \code{ci}, \code{bandwidths}, \code{fold_estimates}, \code{V}, \code{method}, \code{note}.
+#' @export
 cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
                              V = 5L, seed = 0L) {
   v <- as.numeric(X)

@@ -54,6 +54,16 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
   sqrt(sum(v * v))
 }
 
+#' project_box
+#'
+#' Part of the pgdsdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param lower Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @return The value of \code{pmin}.
+#' @export
 project_box <- function(x, lower = NULL, upper = NULL) {
   v <- as.numeric(x)
   n <- length(v)
@@ -82,10 +92,28 @@ project_box <- function(x, lower = NULL, upper = NULL) {
   pmin(pmax(v, lo), up)
 }
 
+#' project_nonneg
+#'
+#' Part of the pgdsdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 project_nonneg <- function(x) {
   pmax(0.0, as.numeric(x))
 }
 
+#' project_ball
+#'
+#' Part of the pgdsdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param radius Defaults to \code{1}.
+#' @param centre Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 project_ball <- function(x, radius = 1.0, centre = NULL) {
   r <- as.numeric(radius)
   if (r <= 0) {
@@ -130,6 +158,21 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
   pmax(v - theta, 0.0)
 }
 
+#' projected_gradient
+#'
+#' Part of the pgdsdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param grad See Usage.
+#' @param x0 See Usage.
+#' @param project See Usage.
+#' @param step Defaults to \code{NULL}.
+#' @param rule Defaults to \code{"backtracking"}.
+#' @param max_iter Defaults to \code{2000}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{iterations}, \code{history}, \code{step}, \code{rule}, \code{n_backtracks}, \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.
+#' @export
 projected_gradient <- function(f, grad, x0, project, step = NULL,
                                 rule = "backtracking", max_iter = 2000,
                                 tol = 1e-10) {

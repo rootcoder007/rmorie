@@ -10,6 +10,24 @@
 # of Mnih, V. et al. (2015) "Human-level control through deep
 # reinforcement learning", *Nature* 518(7540), 529-533.
 
+#' bcq
+#'
+#' Part of the bcq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dataset See Usage.
+#' @param states Defaults to \code{NULL}.
+#' @param actions Defaults to \code{NULL}.
+#' @param tau Defaults to \code{0.3}.
+#' @param gamma Defaults to \code{0.99}.
+#' @param lr Defaults to \code{0.5}.
+#' @param iters Defaults to \code{2000}.
+#' @param loss Defaults to \code{"huber"}.
+#' @param huber_c Defaults to \code{1}.
+#' @param behavior Defaults to \code{NULL}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{allowed}, \code{behavior}, \code{value}, \code{n_eliminated}, \code{bellman_error}, \code{tau}, \code{gamma}, \code{n_transitions}, \code{method}.
+#' @export
 bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
                 gamma = 0.99, lr = 0.5, iters = 2000, loss = "huber",
                 huber_c = 1.0, behavior = NULL, tol = 1e-12) {
@@ -193,4 +211,12 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
 
 batch_constrained_q <- bcq
 
+#' morie_bcq
+#'
+#' Part of the bcq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{bcq}.
+#' @export
 morie_bcq <- function(...) bcq(...)

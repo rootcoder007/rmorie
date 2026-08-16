@@ -107,6 +107,21 @@
   return(list(y = y, a = a, Xm = Xm, p = p, n = n, arms = arms))
 }
 
+#' trclrn_rule_value
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param X See Usage.
+#' @param rule See Usage.
+#' @param propensity Defaults to \code{NULL}.
+#' @param method Defaults to \code{"ipw"}.
+#' @param outcome_model Defaults to \code{NULL}.
+#' @param min_propensity Defaults to \code{0.01}.
+#' @return A numeric value.
+#' @export
 trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
                               method = "ipw", outcome_model = NULL,
                               min_propensity = 0.01) {
@@ -159,6 +174,23 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
   return(list(best = best, bv = bv))
 }
 
+#' trclrn_fit_tree
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param X See Usage.
+#' @param propensity Defaults to \code{NULL}.
+#' @param method Defaults to \code{"ipw"}.
+#' @param outcome_model Defaults to \code{NULL}.
+#' @param max_depth Defaults to \code{3}.
+#' @param min_leaf Defaults to \code{10}.
+#' @param n_thresholds Defaults to \code{20}.
+#' @param min_propensity Defaults to \code{0.01}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
                             outcome_model = NULL, max_depth = 3,
                             min_leaf = 10, n_thresholds = 20,
@@ -269,6 +301,15 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
   return(.trclrn_count_leaves(nd$left) + .trclrn_count_leaves(nd$right))
 }
 
+#' trclrn_predict_rule
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param X See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 trclrn_predict_rule <- function(tree, X) {
   if (is.data.frame(X)) {
     Xm <- as.matrix(X)
@@ -293,6 +334,16 @@ trclrn_predict_rule <- function(tree, X) {
   return(out)
 }
 
+#' trclrn_tree_rules
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param names Defaults to \code{NULL}.
+#' @param indent Defaults to \code{0}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
   pad <- paste(rep(" ", indent), collapse = "")
   if (tree$leaf) {
@@ -308,6 +359,13 @@ trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
   return(out)
 }
 
+#' trclrn_cheatsheet
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 trclrn_cheatsheet <- function() {
   return(paste0(
     "trclrn: tree-based ITR. Value V(pi) = mean of Y * ",

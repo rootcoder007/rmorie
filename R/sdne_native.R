@@ -148,6 +148,20 @@
        note = "many legitimate links are missing, so the first-order set is far the smaller")
 }
 
+#' morie_sdne
+#'
+#' Part of the sdne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adjacency See Usage.
+#' @param reconstruction See Usage.
+#' @param embeddings See Usage.
+#' @param beta Defaults to \code{5}.
+#' @param alpha Defaults to \code{0.1}.
+#' @param nu Defaults to \code{0}.
+#' @param parameters Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{loss}, \code{second_order}, \code{first_order}, \code{regulariser}, \code{alpha}, \code{beta}, \code{method}, \code{note}.
+#' @export
 morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
                        alpha = 0.1, nu = 0.0, parameters = NULL) {
   s2 <- .sdne_second_order_loss(adjacency, reconstruction, beta)
@@ -169,6 +183,13 @@ morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
        note = "unsupervised autoencoder for the GLOBAL structure, supervised Laplacian term for the LOCAL one")
 }
 
+#' morie_sdne_cheatsheet
+#'
+#' Part of the sdne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_sdne_cheatsheet <- function() {
   paste0("sdne: shallow embeddings (IsoMap, Laplacian Eigenmaps, ",
          "LINE) cannot capture a highly NON-LINEAR network, so go ",

@@ -1,21 +1,31 @@
-% Generated from the module source by ledger/gen_rd.R -- roxygen2 hangs
-% on this package. Usage comes from args(), so it tracks the formals.
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
 \name{morie_sgflrt_spatial_glmm_fit}
 \alias{morie_sgflrt_spatial_glmm_fit}
-\alias{morie_sgflrt}
-\title{Spatial GLMM by the Laplace approximation, with the}
+\title{morie_sgflrt_spatial_glmm_fit}
 \usage{
 morie_sgflrt_spatial_glmm_fit(y, X, coords, family = "poisson", model = "exponential", sigma2 = NULL, phi = NULL, kappa = 1.5, nugget = 0, dispersion = NULL, inner_iter = 50L, outer_cycles = 3L, tol = 1e-10)
 }
+\arguments{
+\item{y}{See Usage.}
+\item{X}{See Usage.}
+\item{coords}{See Usage.}
+\item{family}{Defaults to \code{"poisson"}.}
+\item{model}{Defaults to \code{"exponential"}.}
+\item{sigma2}{Defaults to \code{NULL}.}
+\item{phi}{Defaults to \code{NULL}.}
+\item{kappa}{Defaults to \code{1.5}.}
+\item{nugget}{Defaults to \code{0}.}
+\item{dispersion}{Defaults to \code{NULL}.}
+\item{inner_iter}{Defaults to \code{50L}.}
+\item{outer_cycles}{Defaults to \code{3L}.}
+\item{tol}{Defaults to \code{1e-10}.}
+}
 \description{
-R arm of sgflrt -- spatial GLMM by the Laplace approximation, with the random effect carried as u = Lv so Sigma^-1 is never formed.
+Part of the sgflrt_native implementation; see the file header for the source it follows.
 }
 \value{
-A list with components \code{n}, \code{family}, \code{nrow}, \code{estimate}, \code{coefficients}, \code{std_error}, \code{z}, \code{spatial_effect}, \code{fitted}, \code{linear_predictor}, \code{sigma2}, \code{phi}, \code{dispersion}, \code{sigma2_at_lower_bound}, \code{spatial_signal}, \code{kappa}, \code{nugget}, \code{loglik}, \code{laplace_loglik}, \code{gls_identity_gap}, \code{covariance}, \code{model}, \code{p}, \code{d}, \code{min_distance}, \code{max_distance}, \code{method}, \code{note}.
-}
-\references{
-Diggle, P. J., Tawn, J. A. & Moyeed, R. A. (1998) JRSS-C 47(3), 299-350;
-Breslow, N. E. & Clayton, D. G. (1993) JASA 88(421), 9-25;
-Tierney, L. & Kadane, J. B. (1986) JASA 81(393), 82-86.
+A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z}, \code{spatial_effect}, \code{fitted}, \code{linear_predictor}, \code{sigma2}, \code{phi}, \code{dispersion}, \code{sigma2_at_lower_bound}, \code{spatial_signal}, \code{kappa}, \code{nugget}, \code{loglik}, \code{laplace_loglik}, \code{gls_identity_gap}, \code{covariance}, \code{family}, \code{model}, \code{n}, \code{p}, \code{d}, \code{min_distance}, \code{max_distance}, \code{method}, \code{note}.
 }
 \keyword{internal}

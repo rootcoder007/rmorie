@@ -35,6 +35,25 @@
 # up the paper's own example, total-variation denoising, where
 # :math:`F^*` is the projection onto the :math:`\ell_\infty` ball.
 
+#' morie_primal
+#'
+#' Part of the primal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param K See Usage.
+#' @param Kt See Usage.
+#' @param prox_f_star See Usage.
+#' @param prox_g See Usage.
+#' @param x0 See Usage.
+#' @param y0 See Usage.
+#' @param tau Defaults to \code{NULL}.
+#' @param sigma Defaults to \code{NULL}.
+#' @param theta Defaults to \code{1}.
+#' @param norm_K Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{500}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
                          tau = NULL, sigma = NULL,
                          theta = 1.0, norm_K = NULL,
@@ -121,6 +140,18 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
   return(result)
 }
 
+#' morie_tv_denoise_1d
+#'
+#' Part of the primal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param signal See Usage.
+#' @param lam Defaults to \code{1}.
+#' @param max_iter Defaults to \code{1000}.
+#' @param tol Defaults to \code{1e-12}.
+#' @param theta Defaults to \code{1}.
+#' @return The value of \code{res}, as built in the body.
+#' @export
 morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
                                 tol = 1e-12, theta = 1.0) {
   b <- as.numeric(signal)

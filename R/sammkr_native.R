@@ -29,6 +29,14 @@
   as.numeric(M)
 }
 
+#' average_of_valid_masks
+#'
+#' Part of the sammkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param masks See Usage.
+#' @return A list with \code{mask}, \code{ambiguous_fraction}, \code{n_averaged}, \code{note}.
+#' @export
 average_of_valid_masks <- function(masks) {
   if (length(masks) == 0)
     stop("sammkr: no masks given")
@@ -44,6 +52,16 @@ average_of_valid_masks <- function(masks) {
        note = "pixels strictly between 0 and 1 belong to no single valid interpretation")
 }
 
+#' iou
+#'
+#' Part of the sammkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param threshold Defaults to \code{0.5}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 iou <- function(a, b, threshold = 0.5) {
   x <- as.numeric(.sammkr_flat(a) > threshold)
   y <- as.numeric(.sammkr_flat(b) > threshold)
@@ -54,6 +72,16 @@ iou <- function(a, b, threshold = 0.5) {
   if (union == 0) 1.0 else inter / union
 }
 
+#' min_loss_over_masks
+#'
+#' Part of the sammkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param predictions See Usage.
+#' @param target See Usage.
+#' @param loss_fn See Usage.
+#' @return A list with \code{loss}, \code{index}, \code{losses}, \code{mean_loss}, \code{gap}, \code{note}.
+#' @export
 min_loss_over_masks <- function(predictions, target, loss_fn) {
   if (length(predictions) == 0)
     stop("sammkr: no predictions given")
@@ -66,6 +94,15 @@ min_loss_over_masks <- function(predictions, target, loss_fn) {
                       as.integer(j) - 1L))
 }
 
+#' whole_part_subpart
+#'
+#' Part of the sammkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param masks See Usage.
+#' @param target_hierarchy Defaults to \code{NULL}.
+#' @return A list with \code{assignment}, \code{sizes}, \code{nested}, \code{note}.
+#' @export
 whole_part_subpart <- function(masks, target_hierarchy = NULL) {
   if (length(masks) != 3)
     stop(sprintf("sammkr: the paper's argument is about THREE outputs (whole, part, subpart), got %d",
@@ -86,6 +123,16 @@ whole_part_subpart <- function(masks, target_hierarchy = NULL) {
        note = "nested masks are often at most three deep")
 }
 
+#' rank_masks
+#'
+#' Part of the sammkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param masks See Usage.
+#' @param predicted_iou See Usage.
+#' @param target Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 rank_masks <- function(masks, predicted_iou, target = NULL) {
   p <- as.numeric(unlist(predicted_iou))
   if (length(p) != length(masks))

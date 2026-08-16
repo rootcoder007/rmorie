@@ -185,6 +185,16 @@
 
 # --- Ch 1: autocorrelation, Mantel, Moran, LISA -----------------------------
 
+#' Empirical correlogram R(h) = C(h)/C(0), Schabenberger & Gotway (2005)
+#'
+#' Sec. 1.4.2 and Chapter problem 1.14.  C(0) uses the 1/n divisor.
+#'
+#' @param coords See Usage.
+#' @param z See Usage.
+#' @param bins Defaults to \code{NULL}.
+#' @param cutoff Defaults to \code{NULL}.
+#' @return A list with \code{lags}, \code{centres}, \code{cov}, \code{acf}, \code{c0}, \code{npairs}, \code{n}, \code{incomplete_description_of_second_order_structure}, \code{method}.
+#' @export
 SpAcf <- function(coords, z, bins = NULL, cutoff = NULL) {
   # Empirical correlogram R(h) = C(h)/C(0), Schabenberger & Gotway (2005)
   # Sec. 1.4.2 and Chapter problem 1.14.  C(0) uses the 1/n divisor.
@@ -252,6 +262,14 @@ SpAcf <- function(coords, z, bins = NULL, cutoff = NULL) {
   )
 }
 
+#' Eq (1.17), Sec. 1.3.3.  sum_i I(s_i) = w.. I is checked, not assumed:
+#'
+#' a non-zero gap means the weights or the scaling are wrong.
+#'
+#' @param x See Usage.
+#' @param w See Usage.
+#' @return A list with \code{local}, \code{expectation}, \code{lagged}, \code{global_i}, \code{s0}, \code{sum_identity_gap}, \code{n}, \code{method}.
+#' @export
 LisaI <- function(x, w) {
   # eq (1.17), Sec. 1.3.3.  sum_i I(s_i) = w.. I is checked, not assumed:
   # a non-zero gap means the weights or the scaling are wrong.
@@ -282,6 +300,17 @@ LisaI <- function(x, w) {
   )
 }
 
+#' Eqs (1.4) and (1.5) with the book\'s own default choices,
+#'
+#' W_ij = ||s_i - s_j|| and U_ij = |Z_i - Z_j|, plus the regression
+#' slope beta = M2 / sum sum W_ij^2 displayed in Sec. 1.3.1.
+#'
+#' @param coords See Usage.
+#' @param x See Usage.
+#' @param w Defaults to \code{NULL}.
+#' @param u Defaults to \code{NULL}.
+#' @return A list with \code{m1}, \code{m2}, \code{beta}, \code{sw2}, \code{s0}, \code{mean_attribute}, \code{n}, \code{method}.
+#' @export
 MantelM2 <- function(coords, x, w = NULL, u = NULL) {
   # eqs (1.4) and (1.5) with the book's own default choices,
   # W_ij = ||s_i - s_j|| and U_ij = |Z_i - Z_j|, plus the regression slope
@@ -324,6 +353,18 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
   )
 }
 
+#' Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states
+#'
+#' the approach but does not print Eg[M2] or Varg[M2]; both are derived
+#' from the quadratic-form moments and are stated in the Python
+#' docstring.  Only the SYMMETRIC part of W contributes.
+#'
+#' @param coords See Usage.
+#' @param x See Usage.
+#' @param w See Usage.
+#' @param u Defaults to \code{NULL}.
+#' @return A list with \code{m2}, \code{expectation}, \code{variance}, \code{z}, \code{p_value}, \code{sigma2}, \code{n}, \code{gaussian_moments_apply}, \code{method}.
+#' @export
 MantelZ <- function(coords, x, w, u = NULL) {
   # Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states
   # the approach but does not print Eg[M2] or Varg[M2]; both are derived
@@ -380,6 +421,17 @@ MantelZ <- function(coords, x, w, u = NULL) {
   )
 }
 
+#' Eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book\'s own
+#'
+#' formula, Sec. 1.3.2, and is reproduced term for term.  The variance
+#' is derived from the exact moments of a ratio of quadratic forms in
+#' the same Gaussian projection.
+#'
+#' @param residuals See Usage.
+#' @param w See Usage.
+#' @param x Defaults to \code{NULL}.
+#' @return A list with \code{i}, \code{expectation}, \code{variance}, \code{z}, \code{p_value}, \code{s0}, \code{tr_mw}, \code{k}, \code{n}, \code{not_minus_one_over_n_minus_one}, \code{method}.
+#' @export
 MoranRes <- function(residuals, w, x = NULL) {
   # eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book's own
   # formula, Sec. 1.3.2, and is reproduced term for term.  The variance is
@@ -442,6 +494,17 @@ MoranRes <- function(residuals, w, x = NULL) {
 
 # --- Ch 3: point patterns --------------------------------------------------
 
+#' R(h) = K\'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the
+#'
+#' intensity of eq (3.8).  The naive estimator is NEGATIVELY BIASED (the
+#' book says so outright), hence the border correction by default.
+#'
+#' @param points See Usage.
+#' @param region Defaults to \code{NULL}.
+#' @param r Defaults to \code{NULL}.
+#' @param correction Defaults to \code{"border"}.
+#' @return A list with \code{r}, \code{k}, \code{pcf}, \code{lambda}, \code{area}, \code{csr_k}, \code{csr_pcf_is_one}, \code{correction}, \code{n}, \code{method}.
+#' @export
 Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
   # R(h) = K'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the
   # intensity of eq (3.8).  The naive estimator is NEGATIVELY BIASED (the
@@ -539,6 +602,18 @@ Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
 
 # --- Ch 4: semivariogram and periodogram -----------------------------------
 
+#' Gamma(h) = c0 + c{3h/(2a) - (1/2)(h/a)^3} on 0 < h <= a, eq (4.15)
+#'
+#' plus the nugget of Sec. 4.3.6; covariance eq (4.14).  gamma(0) = 0
+#' ALWAYS -- the discontinuity at the origin IS the nugget, and dropping
+#' the h = 0 case is the usual way to lose it.
+#'
+#' @param h See Usage.
+#' @param c0 Defaults to \code{0}.
+#' @param c Defaults to \code{1}.
+#' @param a Defaults to \code{1}.
+#' @return A list with \code{h}, \code{gamma}, \code{cov}, \code{nugget}, \code{psill}, \code{sill}, \code{range}, \code{true_range}, \code{n}, \code{method}.
+#' @export
 SphVario <- function(h, c0 = 0, c = 1, a = 1) {
   # gamma(h) = c0 + c{3h/(2a) - (1/2)(h/a)^3} on 0 < h <= a, eq (4.15)
   # plus the nugget of Sec. 4.3.6; covariance eq (4.14).  gamma(0) = 0
@@ -580,6 +655,15 @@ SphVario <- function(h, c0 = 0, c = 1, a = 1) {
   )
 }
 
+#' Eq (4.57) specialised to R^1 in Sec. 4.7.1.1, checked against the
+#'
+#' covariance form of eq (4.58).  THE ZERO FREQUENCY IS EXCLUDED: the
+#' derivation of (4.58) turns on sum_u cos(w_j u) = 0, true at every
+#' Fourier frequency EXCEPT w = 0.
+#'
+#' @param y See Usage.
+#' @return A list with \code{omega}, \code{periodogram}, \code{from_covariance}, \code{max_difference}, \code{acov}, \code{zero_frequency_excluded}, \code{n}, \code{method}.
+#' @export
 Pgram <- function(y) {
   # eq (4.57) specialised to R^1 in Sec. 4.7.1.1, checked against the
   # covariance form of eq (4.58).  THE ZERO FREQUENCY IS EXCLUDED: the
@@ -625,6 +709,19 @@ Pgram <- function(y) {
   )
 }
 
+#' Daniell (equal-weight) smoothing of the eq (4.57) periodogram.  NOT
+#' in
+#'
+#' Schabenberger & Gotway: "Daniell" and "smoothed periodogram" are
+#' absent from the book, whose Sec. 4.7.2 fits a parametric spectral
+#' density instead.  See Bloomfield (2000), Fourier Analysis of Time
+#' Series, 2nd edn, Ch. 8.  The window is CIRCULAR; a truncating window
+#' would bias both ends.
+#'
+#' @param y See Usage.
+#' @param span Defaults to \code{3L}.
+#' @return A list with \code{omega}, \code{smoothed}, \code{raw}, \code{span}, \code{equivalent_df}, \code{circular_window}, \code{n}, \code{method}.
+#' @export
 SmPgram <- function(y, span = 3L) {
   # Daniell (equal-weight) smoothing of the eq (4.57) periodogram.  NOT in
   # Schabenberger & Gotway: "Daniell" and "smoothed periodogram" are
@@ -664,6 +761,17 @@ SmPgram <- function(y, span = 3L) {
 
 # --- Ch 6: spatial autoregression ------------------------------------------
 
+#' The SAR bound |rho| < 1/rho(W) comes from the non-singularity
+#'
+#' condition in the PROSE of Sec. 6.2.2.1, p. 336 (1/theta_min < rho <
+#' 1/theta_max, after Haining 1990 p. 82) -- NOT from eq (6.48), which
+#' is the CAR information matrix.  Anything in this package citing
+#' (6.48) for the rho interval is miscited.
+#'
+#' @param g See Usage.
+#' @param iters Defaults to \code{400L}.
+#' @return A list with \code{rho}, \code{dominant_eigenvalue}, \code{eigenvector}, \code{sar_rho_bound}, \code{symmetric}, \code{iterations}, \code{n}, \code{method}.
+#' @export
 SpecRad <- function(g, iters = 400L) {
   # The SAR bound |rho| < 1/rho(W) comes from the non-singularity
   # condition in the PROSE of Sec. 6.2.2.1, p. 336 (1/theta_min < rho <
@@ -729,6 +837,20 @@ SpecRad <- function(g, iters = 400L) {
   list(v = n * log(2 * pi * s2) + n - 2 * sl[2L], b = b, s2 = s2)
 }
 
+#' SAR ERROR model, eqs (6.35)-(6.37) of Sec. 6.2.2.1 -- NOT the
+#' spatially
+#'
+#' lagged model of eq (6.38).  Whitening by A = I - rho W profiles beta
+#' and sigma^2 out, so only a ONE-dimensional search in rho remains; the
+#' -2 log|A| Jacobian is what makes naive OLS-in-rho wrong.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param n_grid Defaults to \code{201L}.
+#' @param refine Defaults to \code{60L}.
+#' @return A list with \code{rho}, \code{beta}, \code{sigma2}, \code{neg2loglik}, \code{rho_bounds}, \code{ols_beta}, \code{spectral_radius}, \code{is_error_model_not_lag_model}, \code{k}, \code{n}, \code{method}.
+#' @export
 SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
   # SAR ERROR model, eqs (6.35)-(6.37) of Sec. 6.2.2.1 -- NOT the spatially
   # lagged model of eq (6.38).  Whitening by A = I - rho W profiles beta
@@ -819,6 +941,16 @@ SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
 
 # --- methods NOT in Schabenberger & Gotway ---------------------------------
 
+#' Cohen\'s kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than
+#'
+#' same-site pairs; the pairing is Mantel\'s M2, eq (1.5), with U_ij =
+#' I{x_i = y_j}.  The kappa coefficient itself is NOT in the book.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{kappa}, \code{p_observed}, \code{p_expected}, \code{categories}, \code{s0}, \code{compares_neighbours_not_same_site}, \code{n}, \code{method}.
+#' @export
 SpKappa <- function(x, y, w) {
   # Cohen's kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than
   # same-site pairs; the pairing is Mantel's M2, eq (1.5), with
@@ -867,6 +999,19 @@ SpKappa <- function(x, y, w) {
   )
 }
 
+#' Local Moran eq (1.17) with EXACT conditional-randomization moments
+#'
+#' (simple random sampling without replacement of the other n-1
+#' deviations into the neighbour slots).  The HH/LL/HL/LH labels are
+#' Anselin (1996)\'s Moran scatterplot, NOT in Schabenberger & Gotway; a
+#' fixed-string search of the book for "quadrant" and "Moran scatter"
+#' finds only an unrelated kriging search neighbourhood.
+#'
+#' @param x See Usage.
+#' @param w See Usage.
+#' @param alpha Defaults to \code{0.05}.
+#' @return A list with \code{labels}, \code{local}, \code{z}, \code{p_value}, \code{lagged_mean}, \code{counts}, \code{alpha}, \code{conditional_randomization}, \code{hl_and_lh_are_outliers_not_clusters}, \code{n}, \code{method}.
+#' @export
 LisaClust <- function(x, w, alpha = 0.05) {
   # Local Moran eq (1.17) with EXACT conditional-randomization moments
   # (simple random sampling without replacement of the other n-1
@@ -940,6 +1085,19 @@ LisaClust <- function(x, w, alpha = 0.05) {
   )
 }
 
+#' Tukey (1977), Exploratory Data Analysis.  NOT in Schabenberger &
+#'
+#' Gotway -- a fixed-string search for "polish" returns nothing; the
+#' book\'s trend removal is the OLS trend surface of Sec. 5.3.1.  Median
+#' polish is resistant to outliers, which is why the geostatistical
+#' literature reaches for it first.  A sweep must run row-then-column in
+#' a FIXED order; median polish is not order-invariant.
+#'
+#' @param values See Usage.
+#' @param grid Defaults to \code{NULL}.
+#' @param iters Defaults to \code{10L}.
+#' @return A list with \code{overall}, \code{row}, \code{col}, \code{residuals}, \code{fitted}, \code{abs_residual_sum}, \code{sweeps}, \code{resistant_to_outliers}, \code{nrow}, \code{ncol}, \code{n}, \code{method}.
+#' @export
 MedPolish <- function(values, grid = NULL, iters = 10L) {
   # Tukey (1977), Exploratory Data Analysis.  NOT in Schabenberger &
   # Gotway -- a fixed-string search for "polish" returns nothing; the
@@ -1006,6 +1164,20 @@ MedPolish <- function(values, grid = NULL, iters = 10L) {
   )
 }
 
+#' Thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),
+#'
+#' lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on
+#' the CLUSTER\'S OWN SIZE; a common lambda over-shrinks the large
+#' clusters. Stein (1956); Morris (1983) JASA 78:47-55.  NOT in
+#' Schabenberger & Gotway -- a fixed-string search for "shrinkage"
+#' returns nothing.
+#'
+#' @param y See Usage.
+#' @param cluster See Usage.
+#' @param sigma2_u See Usage.
+#' @param sigma2_e See Usage.
+#' @return A list with \code{clusters}, \code{shrunk}, \code{raw}, \code{lambda}, \code{sizes}, \code{grand_mean}, \code{sigma2_u}, \code{sigma2_e}, \code{shrinkage_depends_on_cluster_size}, \code{n}, \code{method}.
+#' @export
 ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
   # thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),
   # lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on the
@@ -1054,6 +1226,19 @@ ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
   )
 }
 
+#' SparseVector
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param queries See Usage.
+#' @param threshold See Usage.
+#' @param c Defaults to \code{1L}.
+#' @param epsilon Defaults to \code{1}.
+#' @param threshold_noise Defaults to \code{0}.
+#' @param query_noise Defaults to \code{NULL}.
+#' @return A list with \code{above}, \code{released}, \code{halted_at}, \code{n_above}, \code{noisy_threshold}, \code{noise_scales}, \code{epsilon_split}, \code{epsilon}, \code{c}, \code{cost_scales_with_c_not_with_m}, \code{answered}, \code{n}, \code{method}.
+#' @export
 SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
                          threshold_noise = 0, query_noise = NULL) {
   # AboveThreshold / sparse vector (Dwork & Roth 2014, Alg. 2; Hardt &
@@ -1112,6 +1297,18 @@ SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
   )
 }
 
+#' Alpha = sum_x min(p,q) = 1 - TV(p,q); E[tokens] =
+#'
+#' (1 - alpha^(gamma+1))/(1 - alpha), capped at gamma+1 (a rejected
+#' token is resampled from the residual and still counts).  Leviathan,
+#' Kalman & Matias (2023).  NOT in Schabenberger & Gotway.
+#' Deterministic: the expectation, not a sampled run.
+#'
+#' @param draft See Usage.
+#' @param target See Usage.
+#' @param gamma Defaults to \code{4L}.
+#' @return A list with \code{alpha}, \code{tv_distance}, \code{expected_tokens}, \code{gamma}, \code{max_tokens}, \code{deterministic_expectation_not_a_sampled_run}, \code{n}, \code{method}.
+#' @export
 SpecDec <- function(draft, target, gamma = 4L) {
   # alpha = sum_x min(p,q) = 1 - TV(p,q); E[tokens] =
   # (1 - alpha^(gamma+1))/(1 - alpha), capped at gamma+1 (a rejected token
@@ -1153,6 +1350,16 @@ SpecDec <- function(draft, target, gamma = 4L) {
   )
 }
 
+#' Raw cross-periodogram S_xy(w) = X(w) conj(Y(w)) / (2 pi n) on
+#'
+#' MEAN-REMOVED records (Brillinger 2001, Ch. 7).  NOT in Schabenberger
+#' & Gotway -- a fixed-string search for "cross-spectr" finds one
+#' bibliography entry and no method.  Zero frequency dropped.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A list with \code{omega}, \code{cospectrum}, \code{quadrature}, \code{amplitude}, \code{phase}, \code{means_removed}, \code{raw_not_consistent}, \code{n}, \code{method}.
+#' @export
 CrossSpec <- function(x, y) {
   # Raw cross-periodogram S_xy(w) = X(w) conj(Y(w)) / (2 pi n) on
   # MEAN-REMOVED records (Brillinger 2001, Ch. 7).  NOT in Schabenberger &
@@ -1188,6 +1395,19 @@ CrossSpec <- function(x, y) {
   )
 }
 
+#' C_xy = |S_xy|^2 / (S_xx S_yy) by Welch averaging (Bendat & Piersol
+#'
+#' 2010, Ch. 5).  NOT in Schabenberger & Gotway -- a fixed-string search
+#' for "coherence" returns nothing.  AVERAGING IS NOT OPTIONAL: on a
+#' single segment the coherence of ANY two records is exactly 1, so
+#' fewer than two segments raises.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param nperseg Defaults to \code{NULL}.
+#' @param overlap Defaults to \code{0.5}.
+#' @return A list with \code{omega}, \code{coherence}, \code{sxx}, \code{syy}, \code{n_segments}, \code{nperseg}, \code{step}, \code{single_segment_coherence_is_identically_one}, \code{n}, \code{method}.
+#' @export
 MsCoh <- function(x, y, nperseg = NULL, overlap = 0.5) {
   # C_xy = |S_xy|^2 / (S_xx S_yy) by Welch averaging (Bendat & Piersol
   # 2010, Ch. 5).  NOT in Schabenberger & Gotway -- a fixed-string search
@@ -1252,6 +1472,17 @@ MsCoh <- function(x, y, nperseg = NULL, overlap = 0.5) {
   )
 }
 
+#' Spectral residual saliency (Hou & Zhang 2007).  NOT in Schabenberger
+#' &
+#'
+#' Gotway.  THE PHASE IS KEPT: rebuilding from the residual amplitude
+#' with the ORIGINAL phase is the whole mechanism.  The moving average
+#' is circular, matching the periodicity of the DFT.
+#'
+#' @param x See Usage.
+#' @param q Defaults to \code{3L}.
+#' @return A list with \code{saliency}, \code{peak}, \code{peak_index}, \code{residual}, \code{log_amplitude}, \code{floored}, \code{phase_is_preserved}, \code{q}, \code{n}, \code{method}.
+#' @export
 SpecAnom <- function(x, q = 3L) {
   # Spectral residual saliency (Hou & Zhang 2007).  NOT in Schabenberger &
   # Gotway.  THE PHASE IS KEPT: rebuilding from the residual amplitude
@@ -1290,6 +1521,18 @@ SpecAnom <- function(x, q = 3L) {
   )
 }
 
+#' L_sym = I - D^-1/2 A D^-1/2.  The clustering lives in the SMALLEST
+#'
+#' eigenvalues, so power iteration runs on 2I - L_sym and the values are
+#' mapped back; running it on L_sym and taking the top vectors gets this
+#' exactly backwards.  Ng, Jordan & Weiss (2001).  NOT in Schabenberger
+#' & Gotway.  A zero-degree node RAISES rather than being quietly
+#' assigned.
+#'
+#' @param a See Usage.
+#' @param k Defaults to \code{2L}.
+#' @return A list with \code{labels}, \code{sizes}, \code{eigenvalues}, \code{fiedler}, \code{degree}, \code{smallest_eigenvalues_not_largest}, \code{k}, \code{n}, \code{method}.
+#' @export
 SpecClust <- function(a, k = 2L) {
   # L_sym = I - D^-1/2 A D^-1/2.  The clustering lives in the SMALLEST
   # eigenvalues, so power iteration runs on 2I - L_sym and the values are
@@ -1352,6 +1595,20 @@ SpecClust <- function(a, k = 2L) {
   )
 }
 
+#' MULTISPATI: diagonalise H = (1/n) X\' ((W + W\')/2) X on the centred,
+#'
+#' unit-variance X, so an axis is scored by SPATIAL covariance, not
+#' variance.  Eigenvalues may be NEGATIVE -- that is a local-contrast
+#' axis, which ordinary PCA cannot express -- and are returned signed. W
+#' is symmetrised first: a row-standardised W is ASYMMETRIC and a
+#' symmetric eigensolver would read one triangle only.  Dray, Said &
+#' Debias (2008).  NOT in Schabenberger & Gotway.
+#'
+#' @param x See Usage.
+#' @param w See Usage.
+#' @param naxes Defaults to \code{2L}.
+#' @return A list with \code{eigenvalues}, \code{loadings}, \code{scores}, \code{lagged_scores}, \code{total_variance}, \code{eigenvalues_may_be_negative}, \code{weights_symmetrised}, \code{naxes}, \code{n}, \code{method}.
+#' @export
 SpatialPca <- function(x, w, naxes = 2L) {
   # MULTISPATI: diagonalise H = (1/n) X' ((W + W')/2) X on the centred,
   # unit-variance X, so an axis is scored by SPATIAL covariance, not
@@ -1401,6 +1658,21 @@ SpatialPca <- function(x, w, naxes = 2L) {
   )
 }
 
+#' Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved
+#' as
+#'
+#' the saddle-point system [K + n lam I, T; T\', 0].  T = [1, s1, s2, X]
+#' spans the null space of the penalty and must NOT be shrunk; dropping
+#' the T\'c = 0 block leaves the system singular.  Duchon (1977); Wood
+#' (2006) Ch. 4.  NOT in Schabenberger & Gotway, whose parametric
+#' analogue is Sec. 5.3.1.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @param coords See Usage.
+#' @param lam Defaults to \code{0}.
+#' @return A list with \code{fitted}, \code{residuals}, \code{coef}, \code{spline_weights}, \code{rss}, \code{penalty}, \code{lam}, \code{null_space_is_unpenalised}, \code{n}, \code{method}.
+#' @export
 SpGam <- function(y, x, coords, lam = 0) {
   # Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved as
   # the saddle-point system [K + n lam I, T; T', 0].  T = [1, s1, s2, X]
@@ -1466,6 +1738,19 @@ SpGam <- function(y, x, coords, lam = 0) {
   )
 }
 
+#' I = H(R) - H(R|S), bits.  H_noise is the STIMULUS-WEIGHTED average of
+#'
+#' the per-stimulus entropies; weighting them equally inflates I
+#' whenever the classes are unbalanced.  Equal-COUNT bins, not
+#' equal-width: on a skewed count distribution equal-width bins report I
+#' near 0 regardless of the truth.  Strong et al. (1998); biased upward
+#' at small n, no correction applied.  NOT in Schabenberger & Gotway.
+#'
+#' @param spike See Usage.
+#' @param stim See Usage.
+#' @param nbins Defaults to \code{2L}.
+#' @return A list with \code{information}, \code{h_total}, \code{h_noise}, \code{n_stimuli}, \code{nbins}, \code{n_per_cell}, \code{bits}, \code{biased_upward_at_small_n}, \code{equal_count_bins}, \code{n}, \code{method}.
+#' @export
 SpikeInfo <- function(spike, stim, nbins = 2L) {
   # I = H(R) - H(R|S), bits.  H_noise is the STIMULUS-WEIGHTED average of
   # the per-stimulus entropies; weighting them equally inflates I whenever
@@ -1529,6 +1814,21 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
   )
 }
 
+#' Psi = E[ {g(A - delta | H) / g(A | H)} Y ] -- the density ratio at
+#' the
+#'
+#' BACK-shifted exposure.  Forward-shifting is the sign error this
+#' estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2),
+#' so w = exp{(delta/tau^2)(A - H\'gamma - delta/2)}.  Diaz & van der
+#' Laan (2012, 2018).  NOT in Schabenberger & Gotway.
+#'
+#' @param y See Usage.
+#' @param a See Usage.
+#' @param h See Usage.
+#' @param delta Defaults to \code{1}.
+#' @param trim Defaults to \code{NULL}.
+#' @return A list with \code{psi}, \code{naive_mean}, \code{weights}, \code{max_weight}, \code{mean_weight}, \code{tau2}, \code{gamma}, \code{delta}, \code{weight_uses_back_shifted_density}, \code{gaussian_working_model}, \code{n}, \code{method}.
+#' @export
 ShiftInt <- function(y, a, h, delta = 1, trim = NULL) {
   # psi = E[ {g(A - delta | H) / g(A | H)} Y ] -- the density ratio at the
   # BACK-shifted exposure.  Forward-shifting is the sign error this

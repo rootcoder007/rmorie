@@ -11,6 +11,17 @@
 
 .sortP_eps <- 1e-12
 
+#' wl_colours
+#'
+#' Part of the sortP_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param n See Usage.
+#' @param rounds Defaults to \code{2}.
+#' @param initial Defaults to \code{NULL}.
+#' @return The value of \code{c}, as built in the body.
+#' @export
 wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
   n <- as.integer(n)
   c <- if (is.null(initial)) rep(1.0, n) else as.numeric(initial)
@@ -32,6 +43,16 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
   c
 }
 
+#' sort_pooling
+#'
+#' Part of the sortP_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param features See Usage.
+#' @param k_keep See Usage.
+#' @param sort_channel Defaults to \code{-1}.
+#' @return A list with \code{pooled}, \code{order}, \code{n_truncated}, \code{n_padded}, \code{k}, \code{sort_channel}, \code{note}.
+#' @export
 sort_pooling <- function(features, k_keep, sort_channel = -1) {
   X <- if (is.matrix(features)) features else
     do.call(rbind, lapply(features, function(r) as.numeric(r)))
@@ -54,6 +75,15 @@ sort_pooling <- function(features, k_keep, sort_channel = -1) {
        note = "a fixed-size, ordered representation, so an ordinary CNN can read it")
 }
 
+#' choose_k
+#'
+#' Part of the sortP_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param graph_sizes See Usage.
+#' @param coverage Defaults to \code{0.6}.
+#' @return A list with \code{k}, \code{coverage}, \code{fraction_untruncated}, \code{note}.
+#' @export
 choose_k <- function(graph_sizes, coverage = 0.6) {
   s <- sort(as.integer(graph_sizes))
   c <- as.numeric(coverage)
@@ -68,6 +98,18 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
        note = "k is the coverage quantile of the size distribution")
 }
 
+#' order_is_graph_determined
+#'
+#' Part of the sortP_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param features See Usage.
+#' @param adj See Usage.
+#' @param perm See Usage.
+#' @param k_keep See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{max_deviation}, \code{invariant}, \code{note}.
+#' @export
 order_is_graph_determined <- function(features, adj, perm, k_keep,
                                       tol = 1e-9) {
   X <- if (is.matrix(features)) features else

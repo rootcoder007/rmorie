@@ -41,6 +41,18 @@ ROOT_TOL <- 1.001
   list(v = r$residuals, f = rep(1.0, length(w)))
 }
 
+#' profile_beta
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param wy See Usage.
+#' @param wX See Usage.
+#' @param ar Defaults to \code{numeric(0)}.
+#' @param ma Defaults to \code{numeric(0)}.
+#' @param filter Defaults to \code{"exact"}.
+#' @return A list with \code{beta}, \code{ssq}, \code{v}, \code{f}, \code{information}, \code{sum_log_f}.
+#' @export
 profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
                          filter = "exact") {
   n <- length(wy)
@@ -194,16 +206,45 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
        method = "regression with seasonal ARIMA errors, beta profiled out by exact GLS; Box et al. (2016) Sec. 9.5, Hyndman & Khandakar (2008) Sec. 3.1")
 }
 
+#' aic
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param loglik See Usage.
+#' @param n_par See Usage.
+#' @return A numeric value.
+#' @export
 aic <- function(loglik, n_par) {
   -2.0 * as.numeric(loglik) + 2.0 * as.integer(n_par)
 }
 
+#' aicc
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param loglik See Usage.
+#' @param n_par See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 aicc <- function(loglik, n_par, n) {
   k <- as.integer(n_par); n <- as.integer(n)
   if (n - k - 1L <= 0L) return(Inf)
   aic(loglik, k) + 2.0 * k * (k + 1L) / (n - k - 1L)
 }
 
+#' starting_models
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param d See Usage.
+#' @param D See Usage.
+#' @param s See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 starting_models <- function(d, D, s) {
   if (as.integer(s) > 1L) {
     list(c(2, d, 2), c(0, d, 0), c(1, d, 0), c(0, d, 1))
@@ -212,6 +253,17 @@ starting_models <- function(d, D, s) {
   }
 }
 
+#' neighbours
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param order See Usage.
+#' @param seasonal_order See Usage.
+#' @param constant See Usage.
+#' @param s See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 neighbours <- function(order, seasonal_order, constant, s) {
   p <- order[1]; d <- order[2]; q <- order[3]
   P <- seasonal_order[1]; D <- seasonal_order[2]; Q <- seasonal_order[3]
@@ -244,6 +296,20 @@ neighbours <- function(order, seasonal_order, constant, s) {
            error = function(e) NULL)
 }
 
+#' auto_order
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @param d Defaults to \code{0}.
+#' @param D Defaults to \code{0}.
+#' @param s Defaults to \code{1}.
+#' @param method Defaults to \code{"css"}.
+#' @param max_steps Defaults to \code{20}.
+#' @return A list with \code{estimate}, \code{aic}, \code{fit}, \code{order}, \code{seasonal_order}, \code{constant}, \code{steps}, \code{n_models_tried}, \code{tried}, \code{s}, \code{search_method}, \code{differencing_note}, \code{method}.
+#' @export
 auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
                        max_steps = 20) {
   d <- as.integer(d); D <- as.integer(D); s <- as.integer(s)
@@ -319,6 +385,14 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
         "implemented.")
 }
 
+#' morie_sarimax
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{.sarimax_fit}.
+#' @export
 morie_sarimax <- function(...) {
   .sarimax_fit(...)
 }

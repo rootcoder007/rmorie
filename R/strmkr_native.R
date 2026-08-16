@@ -20,6 +20,21 @@
   m
 }
 
+#' morie_strmkr_strauss_process
+#'
+#' Part of the strmkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param coords See Usage.
+#' @param r See Usage.
+#' @param gamma Defaults to \code{NULL}.
+#' @param window Defaults to \code{NULL}.
+#' @param nx Defaults to \code{12L}.
+#' @param ny Defaults to \code{12L}.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-11}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
                                          window = NULL, nx = 12L, ny = 12L,
                                          max_iter = 100L, tol = 1e-11) {

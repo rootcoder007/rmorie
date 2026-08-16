@@ -82,6 +82,17 @@
   list(w = w, intercept = icept)
 }
 
+#' unit_weights
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param treated See Usage.
+#' @param t_post See Usage.
+#' @param zeta Defaults to \code{NULL}.
+#' @return A list with \code{weights}, \code{intercept}, \code{zeta}.
+#' @export
 unit_weights <- function(Y, treated, t_post, zeta = NULL) {
   g <- .causscd_grid(Y, treated, t_post)
   rows <- g$rows; n <- g$n; T <- g$T; tr <- g$tr; t_post <- g$t_post
@@ -116,6 +127,16 @@ unit_weights <- function(Y, treated, t_post, zeta = NULL) {
   list(weights = full, intercept = fit$intercept, zeta = zeta)
 }
 
+#' time_weights
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param treated See Usage.
+#' @param t_post See Usage.
+#' @return A list with \code{weights}, \code{intercept}.
+#' @export
 time_weights <- function(Y, treated, t_post) {
   g <- .causscd_grid(Y, treated, t_post)
   rows <- g$rows; n <- g$n; T <- g$T; tr <- g$tr; t_post <- g$t_post
@@ -135,6 +156,18 @@ time_weights <- function(Y, treated, t_post) {
   list(weights = full, intercept = fit$intercept)
 }
 
+#' sdid
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param treated See Usage.
+#' @param t_post See Usage.
+#' @param method Defaults to \code{"sdid"}.
+#' @param zeta Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{tau}, \code{unit_weights}, \code{time_weights}, \code{zeta}, \code{delta_treated}, \code{delta_control}, \code{method_name}, \code{n_treated}, \code{n_control}, \code{t_pre}, \code{t_post}, \code{method}, \code{note}.
+#' @export
 sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
   g <- .causscd_grid(Y, treated, t_post)
   rows <- g$rows; n <- g$n; T <- g$T; tr <- g$tr; t_post <- g$t_post
@@ -194,6 +227,17 @@ sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
   )
 }
 
+#' causscd
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param treated See Usage.
+#' @param t_post See Usage.
+#' @param zeta Defaults to \code{NULL}.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 causscd <- function(Y, treated, t_post, zeta = NULL) {
   out <- sdid(Y, treated, t_post, "sdid", zeta)
   p <- out
@@ -203,6 +247,17 @@ causscd <- function(Y, treated, t_post, zeta = NULL) {
   p
 }
 
+#' morie_causscd
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param treated See Usage.
+#' @param t_post See Usage.
+#' @param zeta Defaults to \code{NULL}.
+#' @return The value of \code{causscd}.
+#' @export
 morie_causscd <- function(Y, treated, t_post, zeta = NULL) {
   causscd(Y, treated, t_post, zeta)
 }

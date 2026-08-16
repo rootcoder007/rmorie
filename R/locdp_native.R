@@ -46,6 +46,19 @@
 #     p       : numeric, the flip probability 1 / (1 + exp(epsilon))
 #     n       : integer, length of x
 #     rng     : the RNG state returned by .ghc_rng / .ghc_unif
+#' Returns:
+#'
+#' Named list (RichResult payload) with components: y : numeric vector,
+#' randomized responses (same length as x) epsilon : numeric, the
+#' privacy parameter used p : numeric, the flip probability 1 / (1 +
+#' exp(epsilon)) n : integer, length of x rng : the RNG state returned
+#' by .ghc_rng / .ghc_unif
+#'
+#' @param x See Usage.
+#' @param epsilon Defaults to \code{1}.
+#' @param seed Defaults to \code{NULL}.
+#' @return A list with \code{y}, \code{epsilon}, \code{p}, \code{n}, \code{rng}.
+#' @export
 morie_locdp <- function(x, epsilon = 1.0, seed = NULL) {
   if (!is.numeric(epsilon) || length(epsilon) != 1L ||
       is.na(epsilon) || epsilon < 0) {
@@ -85,6 +98,13 @@ morie_local_dp <- morie_locdp
 morie_localdp  <- morie_locdp
 
 # morie_locdp_cheatsheet: short description string.
+#' Morie_locdp_cheatsheet: short description string
+#'
+#' Part of the locdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_locdp_cheatsheet <- function() {
   "locdp: local DP randomized response (alias of rrand.randomized_response)."
 }

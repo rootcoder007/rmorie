@@ -86,6 +86,16 @@
   list(as.numeric(x))
 }
 
+#' strec_trilinear
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @return A numeric value.
+#' @export
 strec_trilinear <- function(a, b, c) {
   A <- as.numeric(a)
   B <- as.numeric(b)
@@ -97,6 +107,14 @@ strec_trilinear <- function(a, b, c) {
   sum(A * B * C)
 }
 
+#' strec_session_average
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param embeddings See Usage.
+#' @return A list with \code{m_s}, \code{m_t}, \code{length}, \code{note}.
+#' @export
 strec_session_average <- function(embeddings) {
   X <- .strec_as_rows(embeddings)
   t <- length(X)
@@ -116,6 +134,17 @@ strec_session_average <- function(embeddings) {
        note = "m_t is the LAST CLICK, and it is also part of the external memory")
 }
 
+#' strec_mlp_cell
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @param activation Defaults to \code{"tanh"}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
   v <- as.numeric(m)
   W <- as.matrix(W)
@@ -138,6 +167,19 @@ strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
   }
 }
 
+#' strec_attention_weights
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param embeddings See Usage.
+#' @param W1 See Usage.
+#' @param W2 See Usage.
+#' @param W3 See Usage.
+#' @param W0 See Usage.
+#' @param b_a Defaults to \code{NULL}.
+#' @return A list with \code{alpha}, \code{m_a}, \code{sum_alpha}, \code{m_s}, \code{note}.
+#' @export
 strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
   X <- .strec_as_rows(embeddings)
   t <- length(X)
@@ -191,6 +233,20 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
        note = "no softmax: the composition is a weighted sum, so the weights need not sum to 1")
 }
 
+#' strec_stamp_scores
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param embeddings See Usage.
+#' @param item_table See Usage.
+#' @param Ws See Usage.
+#' @param Wt See Usage.
+#' @param bs Defaults to \code{NULL}.
+#' @param bt Defaults to \code{NULL}.
+#' @param attention Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{ranking}, \code{probability}, \code{score}, \code{h_s}, \code{h_t}, \code{attention_used}, \code{model}, \code{method}, \code{note}.
+#' @export
 strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL,
                                 attention = NULL) {
   X <- .strec_as_rows(embeddings)
@@ -231,6 +287,15 @@ strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = N
   )
 }
 
+#' strec_cross_entropy
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param probability See Usage.
+#' @param target_index See Usage.
+#' @return A numeric value.
+#' @export
 strec_cross_entropy <- function(probability, target_index) {
   p <- as.numeric(probability)
   j <- as.integer(target_index)
@@ -246,6 +311,13 @@ strec_cross_entropy <- function(probability, target_index) {
   -tot
 }
 
+#' strec_cheatsheet
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 strec_cheatsheet <- function() {
   "strec: a session recommender has no profile, only the clicks -- and interests DRIFT, often from unintended clicks. Keep TWO memories: m_s, the average of the session prefix (general interest), and m_t = x_t, the LAST CLICK (current interest), each through its own MLP cell. Score TRILINEARLY, sigma(<h_s, h_t, x_i>), so a candidate must match both at once -- a sum would let a stale long-term signal override the last click. The average weights every click equally, which is what breaks in a long session, so STAMP replaces it with attention alpha_i = W0 sigma(W1 x_i + W2 x_t + W3 m_s + b_a). No softmax on alpha."
 }

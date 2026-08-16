@@ -1,0 +1,20 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{Euler}
+\alias{Euler}
+\title{Eq (3.74): exp(j omega t) = cos(omega t) + j sin(omega t)}
+\usage{
+Euler(omega, t = 0)
+}
+\arguments{
+\item{omega}{See Usage.}
+\item{t}{Defaults to \code{0}.}
+}
+\description{
+Part of the rangayyan_xfrm implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{value}, \code{real}, \code{imag}, \code{angle}, \code{unit_modulus}, \code{method}.
+}
+\keyword{internal}

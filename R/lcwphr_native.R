@@ -50,6 +50,21 @@
        fitted = 1.0 / (1.0 + exp(-pmax(-500.0, pmin(500.0, eta)))))
 }
 
+#' morie_lcwphr_latent_class_weighted
+#'
+#' Part of the lcwphr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param K See Usage.
+#' @param trim Defaults to \code{0}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @param max_iter Defaults to \code{500L}.
+#' @param tol Defaults to \code{1e-11}.
+#' @return A list with \code{estimate}, \code{class_ate}, \code{class_mean_treated}, \code{class_mean_control}, \code{naive_class_ate}, \code{naive_class_mean_treated}, \code{naive_class_mean_control}, \code{ate}, \code{naive_ate}, \code{marginal_ate}, \code{unweighted_ate}, \code{class_prevalence}, \code{item_probabilities}, \code{posterior}, \code{labels}, \code{propensity}, \code{propensity_coefficients}, \code{weights}, \code{effective_sample_size}, \code{weight_max}, \code{weight_mean}, \code{loglik}, \code{loglik_path}, \code{bic}, \code{entropy}, \code{n_parameters}, \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{Q}, \code{stabilized}, \code{trim}, \code{method}, \code{note}.
+#' @export
 morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
                                                stabilize = TRUE,
                                                max_iter = 500L,

@@ -81,6 +81,19 @@
   list(z = z, kl = kl)
 }
 
+#' morie_glr_test
+#'
+#' Part of the glm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param p0 See Usage.
+#' @param p1 See Usage.
+#' @param threshold Defaults to \code{NULL}.
+#' @param family Defaults to \code{"bernoulli"}.
+#' @param sd Defaults to \code{1}.
+#' @return The value of \code{payload}, as built in the body.
+#' @export
 morie_glr_test <- function(x, p0, p1, threshold = NULL,
                       family = "bernoulli", sd = 1.0) {
   if (is.null(x) || length(x) == 0L)
@@ -162,12 +175,38 @@ morie_glr_test <- function(x, p0, p1, threshold = NULL,
   payload
 }
 
+#' page_cusum
+#'
+#' Part of the glm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param p0 See Usage.
+#' @param p1 See Usage.
+#' @param threshold Defaults to \code{NULL}.
+#' @param family Defaults to \code{"bernoulli"}.
+#' @param sd Defaults to \code{1}.
+#' @return The value of \code{morie_glr_test}.
+#' @export
 page_cusum <- function(x, p0, p1, threshold = NULL,
                        family = "bernoulli", sd = 1.0) {
   morie_glr_test(x = x, p0 = p0, p1 = p1, threshold = threshold,
             family = family, sd = sd)
 }
 
+#' glrtest
+#'
+#' Part of the glm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param p0 See Usage.
+#' @param p1 See Usage.
+#' @param threshold Defaults to \code{NULL}.
+#' @param family Defaults to \code{"bernoulli"}.
+#' @param sd Defaults to \code{1}.
+#' @return The value of \code{morie_glr_test}.
+#' @export
 glrtest <- function(x, p0, p1, threshold = NULL,
                     family = "bernoulli", sd = 1.0) {
   morie_glr_test(x = x, p0 = p0, p1 = p1, threshold = threshold,

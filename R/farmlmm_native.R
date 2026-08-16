@@ -165,8 +165,28 @@
   )
 }
 
+#' morie_farmlmm
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param G See Usage.
+#' @param max_iter Defaults to \code{10L}.
+#' @param threshold Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0L}.
+#' @return The value of \code{.farmcpu}.
+#' @export
 morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
   .farmcpu(y = y, G = G, max_iter = max_iter, threshold = threshold, seed = seed)
 }
 
+#' erf
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 erf <- function(x) 2 * pnorm(x) - 1

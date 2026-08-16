@@ -222,6 +222,19 @@
   min(candidates)
 }
 
+#' morie_sacrb_bleu
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param candidates See Usage.
+#' @param references See Usage.
+#' @param max_n Defaults to \code{4L}.
+#' @param weights Defaults to \code{NULL}.
+#' @param tokenizer Defaults to \code{"13a"}.
+#' @param lowercase Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{bleu}, \code{score}, \code{precisions}, \code{bp}, \code{candidate_length}, \code{reference_length}, \code{ratio}, \code{tokenizer}, \code{lowercase}, \code{max_n}, \code{signature}, \code{method}.
+#' @export
 morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
                              weights = NULL, tokenizer = "13a",
                              lowercase = FALSE) {

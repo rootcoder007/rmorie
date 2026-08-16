@@ -138,6 +138,16 @@
 }
 
 # Main entry point -- compact alias per ledger/NAMING.md
+#' Main entry point -- compact alias per ledger/NAMING.md
+#'
+#' Part of the tloilr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param kappa See Usage.
+#' @return The value of \code{.tloilr_constrained_value}.
+#' @export
 morie_tloilr <- function(Q1, Q0, kappa) {
   .tloilr_constrained_value(Q1, Q0, kappa)
 }

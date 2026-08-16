@@ -1,0 +1,50 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_tlnetlg_community_estimand}
+\alias{morie_tlnetlg_community_estimand}
+\title{morie_tlnetlg_community_estimand}
+\usage{
+morie_tlnetlg_community_estimand(Q_fn, friends, W, policy)
+}
+\arguments{
+\item{Q_fn}{See Usage.}
+\item{friends}{See Usage.}
+\item{W}{See Usage.}
+\item{policy}{See Usage.}
+}
+\description{
+Part of the tlnetlg_native implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{psi}, \code{assigned}, \code{individual}, \code{N}.
+}
+\references{
+----------
+van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
+Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 20 (Sofrygin
+& van der Laan): existing causal inference assumes n independent,
+causally unconnected units, so causal models need only describe
+relations within a unit and inference rests on n independent
+realisations; in many cluster randomized trials or observational
+studies of few communities the number of independent units is not
+large enough for limit-distribution inference; the extreme case of a
+single community of causally connected individuals and whether a
+community-level intervention\'s effect on a community-level outcome can
+still be evaluated; and the requirement that causal models incorporate
+all units and that identifiability be established under minimal
+assumptions WITHOUT relying on asymptotics in a number of independent
+units. Chap. 21 (the restriction of dependence to the known network
+and the condition that |F_i|/N vanishes).
+
+Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
+and Inference for the Mean Outcome of the Single Time-Point
+Intervention in a Causally Connected Population", *Journal of Causal
+Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
+
+Ogburn, E. L. & VanderWeele, T. J. (2014) "Causal Diagrams for
+Interference", *Statistical Science* 29(4), 559-578,
+doi:10.1214/14-STS501.
+"""
+}
+\keyword{internal}

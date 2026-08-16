@@ -31,6 +31,16 @@
 }
 .metabd_vec <- function(v) as.numeric(unlist(v))
 
+#' tetranucleotide_frequency
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param kk Defaults to \code{4L}.
+#' @param canonical Defaults to \code{TRUE}.
+#' @return A list with \code{frequency}, \code{vector}, \code{kmers}, \code{n_kmers}, \code{canonical}.
+#' @export
 tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
   s <- toupper(as.character(seq))
   K <- as.integer(kk)
@@ -59,6 +69,15 @@ tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
        canonical = isTRUE(canonical))
 }
 
+#' abundance_correlation
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cov_a See Usage.
+#' @param cov_b See Usage.
+#' @return A list with \code{correlation}, \code{n_samples}.
+#' @export
 abundance_correlation <- function(cov_a, cov_b) {
   a <- .metabd_vec(cov_a); b <- .metabd_vec(cov_b)
   if (length(a) != length(b))
@@ -72,6 +91,16 @@ abundance_correlation <- function(cov_a, cov_b) {
        n_samples = length(a))
 }
 
+#' length_weight
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param length See Usage.
+#' @param l_min Defaults to \code{2500}.
+#' @param l_ref Defaults to \code{1e+05}.
+#' @return A list with \code{weight}, \code{length}, \code{below_minimum}.
+#' @export
 length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
   L <- as.numeric(length)
   if (L <= 0) stop("metabd: the contig length must be positive")
@@ -82,6 +111,20 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
   list(weight = min(max(w, 0), 1), length = L, below_minimum = FALSE)
 }
 
+#' composite_distance
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tnf_a See Usage.
+#' @param tnf_b See Usage.
+#' @param cov_a Defaults to \code{NULL}.
+#' @param cov_b Defaults to \code{NULL}.
+#' @param len_a Defaults to \code{NULL}.
+#' @param len_b Defaults to \code{NULL}.
+#' @param w_abundance Defaults to \code{0.5}.
+#' @return A list with \code{distance}, \code{composition}, \code{abundance}, \code{abundance_usable}, \code{confidence}, \code{effective_weight}, \code{note}.
+#' @export
 composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
                                len_a = NULL, len_b = NULL,
                                w_abundance = 0.5) {
@@ -108,6 +151,18 @@ composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
        note = "with a single sample the abundance term drops out automatically")
 }
 
+#' bin_contigs
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tnfs See Usage.
+#' @param coverages Defaults to \code{NULL}.
+#' @param lengths Defaults to \code{NULL}.
+#' @param threshold Defaults to \code{0.15}.
+#' @param min_bin_size Defaults to \code{2e+05}.
+#' @return A list with \code{estimate}, \code{bins}, \code{unbinned}, \code{n_bins}, \code{n_unbinned}, \code{method}, \code{note}.
+#' @export
 bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
                         threshold = 0.15, min_bin_size = 200000.0) {
   T <- .metabd_mat(tnfs)
@@ -142,6 +197,15 @@ bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
        note = "sub-threshold groups are UNBINNED, not reported as draft genomes")
 }
 
+#' purity_completeness
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bins See Usage.
+#' @param truth See Usage.
+#' @return A list with \code{per_bin}, \code{mean_purity}, \code{mean_completeness}, \code{note}.
+#' @export
 purity_completeness <- function(bins, truth) {
   t <- as.list(unlist(truth))
   per_bin <- list()
@@ -179,6 +243,15 @@ metagenome_binning <- bin_contigs
         "separate failures and are reported separately.", sep = "")
 }
 
+#' morie_metabd
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_metabd <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("metabd: op must be one of tetranucleotide_frequency, abundance_correlation, length_weight, composite_distance, bin_contigs, purity_completeness, cheatsheet")

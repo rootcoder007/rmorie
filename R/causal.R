@@ -351,6 +351,20 @@ NULL
 }
 
 
+#' morie_estimate_propensity_scores
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param data See Usage.
+#' @param treatment See Usage.
+#' @param covariates See Usage.
+#' @param trim Defaults to \code{c(0.01, 0.99)}.
+#' @param trim_type Defaults to \code{"value"}.
+#' @param ps_model Defaults to \code{"mle"}.
+#' @param ridge_lambda Defaults to \code{1}.
+#' @return The value of \code{.mor_trim_ps}.
+#' @export
 morie_estimate_propensity_scores <- function(data, treatment, covariates,
                                              trim = c(0.01, 0.99),
                                              trim_type = "value",
@@ -613,6 +627,24 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 }
 
 
+#' morie_estimate_aipw
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param data See Usage.
+#' @param treatment See Usage.
+#' @param outcome See Usage.
+#' @param covariates See Usage.
+#' @param propensity_col Defaults to \code{NULL}.
+#' @param outcome_model Defaults to \code{c("linear", "logistic")}.
+#' @param trim Defaults to \code{c(0.01, 0.99)}.
+#' @param trim_type Defaults to \code{"value"}.
+#' @param ps_model Defaults to \code{"mle"}.
+#' @param ridge_lambda Defaults to \code{1}.
+#' @param outcome_fit Defaults to \code{"separate"}.
+#' @return A list with \code{n_used}, \code{n_discarded}, \code{estimand}, \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}.
+#' @export
 morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
                                 outcome_model = c("linear", "logistic"),

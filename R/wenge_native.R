@@ -138,6 +138,20 @@
   list(fe1=fe1, fm=fm, ey=ey)
 }
 
+#' morie_wenge_mediation_functional
+#'
+#' Part of the wenge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param E See Usage.
+#' @param M See Usage.
+#' @param X See Usage.
+#' @param strategy Defaults to \code{"em"}.
+#' @param saturated Defaults to \code{TRUE}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_wenge_mediation_functional <- function(Y, E, M, X, strategy="em",
                                              saturated=TRUE, ridge=1e-8) {
   # theta_0 = E(Y_{1, M_0}) by one of the paper's three strategies.
@@ -237,6 +251,19 @@ morie_wenge_mediation_functional <- function(Y, E, M, X, strategy="em",
   out
 }
 
+#' morie_wenge_weight_based_mediation
+#'
+#' Part of the wenge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param M See Usage.
+#' @param C See Usage.
+#' @param Y See Usage.
+#' @param strategy Defaults to \code{"em"}.
+#' @param saturated Defaults to \code{TRUE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy="em",
                                                saturated=TRUE) {
   # Natural direct and indirect effects by inverse-odds weighting. The
@@ -276,6 +303,13 @@ morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy="em",
   out
 }
 
+#' morie_wenge_cheatsheet
+#'
+#' Part of the wenge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_wenge_cheatsheet <- function() {
   paste0(
     "wenge: mediation functional theta = E(Y_1,M_0) three ways ",

@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{density_kink_test}
+\alias{density_kink_test}
+\title{density_kink_test}
+\usage{
+density_kink_test(V, kink, bandwidth, n_bins = 20L, order = 1L)
+}
+\arguments{
+\item{V}{See Usage.}
+\item{kink}{See Usage.}
+\item{bandwidth}{See Usage.}
+\item{n_bins}{Defaults to \code{20L}.}
+\item{order}{Defaults to \code{1L}.}
+}
+\description{
+Part of the bnskt2_native implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{slope_change}, \code{relative}, \code{slope_right}, \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth}, \code{interpretation}.
+}
+\keyword{internal}

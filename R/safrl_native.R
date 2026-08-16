@@ -255,6 +255,20 @@
 }
 
 
+#' morie_safrl
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param H See Usage.
+#' @param B Defaults to \code{NULL}.
+#' @param c Defaults to \code{NULL}.
+#' @param delta Defaults to \code{0.01}.
+#' @param tol Defaults to \code{1e-12}.
+#' @param max_iter Defaults to \code{5000}.
+#' @return The value of \code{.safrl_finish}.
+#' @export
 morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
                          tol = 1e-12, max_iter = 5000) {
   gv <- .safrl_vec(g, "g")
@@ -380,6 +394,23 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 }
 
 
+#' morie_safrl_cmdp_returns
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param policy See Usage.
+#' @param states See Usage.
+#' @param actions See Usage.
+#' @param step See Usage.
+#' @param reward See Usage.
+#' @param costs See Usage.
+#' @param gamma Defaults to \code{0.9}.
+#' @param start Defaults to \code{NULL}.
+#' @param iters Defaults to \code{5000}.
+#' @param tol Defaults to \code{1e-14}.
+#' @return A list with \code{estimate}, \code{J}, \code{J_C}, \code{gamma}, \code{method}.
+#' @export
 morie_safrl_cmdp_returns <- function(policy, states, actions, step,
                                       reward, costs, gamma = 0.9,
                                       start = NULL, iters = 5000,
@@ -438,6 +469,16 @@ morie_safrl_cmdp_returns <- function(policy, states, actions, step,
 }
 
 
+#' morie_safrl_worst_case_violation
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param delta See Usage.
+#' @param gamma See Usage.
+#' @param epsilon See Usage.
+#' @return A numeric value.
+#' @export
 morie_safrl_worst_case_violation <- function(delta, gamma, epsilon) {
   delta <- as.numeric(delta)
   gamma <- as.numeric(gamma)

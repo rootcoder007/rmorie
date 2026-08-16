@@ -42,6 +42,18 @@ clpopt_pivots <- c("bland", "dantzig")
 
 # Internal: convert an inequality-form program to Ax = b, x >= 0.
 # Mirrors clpopt.standard_form.
+#' Internal: convert an inequality-form program to Ax = b, x >= 0
+#'
+#' Mirrors clpopt.standard_form.
+#'
+#' @param c See Usage.
+#' @param A_ub Defaults to \code{NULL}.
+#' @param b_ub Defaults to \code{NULL}.
+#' @param A_eq Defaults to \code{NULL}.
+#' @param b_eq Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @return A list with \code{A}, \code{b}, \code{c}, \code{n_original}, \code{n_slack}, \code{row_kinds}.
+#' @export
 standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
                           b_eq = NULL, upper = NULL) {
   cv <- as.numeric(c)
@@ -204,6 +216,19 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 }
 
 # Two-phase primal simplex on Ax = b, x >= 0. Mirrors clpopt.simplex.
+#' Two-phase primal simplex on Ax = b, x >= 0. Mirrors clpopt.simplex
+#'
+#' Part of the clpopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param c See Usage.
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param rule Defaults to \code{"bland"}.
+#' @param max_iter Defaults to \code{10000}.
+#' @param initial_basis Defaults to \code{NULL}.
+#' @return The value of \code{.clpopt_report}.
+#' @export
 simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
                     initial_basis = NULL) {
   if (!(rule %in% clpopt_pivots))
@@ -332,6 +357,21 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
 
 # Main entry point: solve an inequality-form linear program.
 # Mirrors clpopt.linprog.
+#' Main entry point: solve an inequality-form linear program
+#'
+#' Mirrors clpopt.linprog.
+#'
+#' @param c See Usage.
+#' @param A_ub Defaults to \code{NULL}.
+#' @param b_ub Defaults to \code{NULL}.
+#' @param A_eq Defaults to \code{NULL}.
+#' @param b_eq Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @param rule Defaults to \code{"bland"}.
+#' @param maximise Defaults to \code{FALSE}.
+#' @param max_iter Defaults to \code{10000}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_clpopt <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
                          b_eq = NULL, upper = NULL, rule = "bland",
                          maximise = FALSE, max_iter = 10000) {

@@ -56,6 +56,23 @@
   best
 }
 
+#' honest_tree
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param min_leaf Defaults to \code{5L}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @param max_depth Defaults to \code{12L}.
+#' @param seed Defaults to \code{0L}.
+#' @param subsample Defaults to \code{NULL}.
+#' @return A list with \code{tree}, \code{info}.
+#' @export
 honest_tree <- function(X, y, W = NULL, kind = "double-sample",
                         min_leaf = 5L, alpha = 0.05, pi = 0.5,
                         max_depth = 12L, seed = 0L,
@@ -130,6 +147,15 @@ honest_tree <- function(X, y, W = NULL, kind = "double-sample",
                                  kind = kind, subsample = sub))
 }
 
+#' leaf_of
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param x See Usage.
+#' @return A list with \code{node}, \code{path}.
+#' @export
 leaf_of <- function(tree, x) {
   node <- tree
   path <- list()
@@ -146,6 +172,18 @@ leaf_of <- function(tree, x) {
   leaf_of(tree, x)$node$value
 }
 
+#' infinitesimal_jackknife
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param preds See Usage.
+#' @param in_bag See Usage.
+#' @param n See Usage.
+#' @param s See Usage.
+#' @param correction Defaults to \code{TRUE}.
+#' @return The value of \code{total}, as built in the body.
+#' @export
 infinitesimal_jackknife <- function(preds, in_bag, n, s,
                                     correction = TRUE) {
   B <- length(preds)
@@ -172,6 +210,27 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
   total
 }
 
+#' honest_forest
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param n_trees Defaults to \code{200L}.
+#' @param subsample_frac Defaults to \code{0.5}.
+#' @param min_leaf Defaults to \code{5L}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @param max_depth Defaults to \code{12L}.
+#' @param seed Defaults to \code{0L}.
+#' @param at Defaults to \code{NULL}.
+#' @param level Defaults to \code{0.95}.
+#' @param correction Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{s}, \code{n_trees}, \code{split_counts}, \code{split_share}, \code{mean_depth}, \code{kind}, \code{honest}, \code{correction}, \code{level}, \code{method}.
+#' @export
 honest_forest <- function(X, y, W = NULL, kind = "double-sample",
                           n_trees = 200L, subsample_frac = 0.5,
                           min_leaf = 5L, alpha = 0.05, pi = 0.5,
@@ -251,6 +310,25 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
        method = paste("honest random forest, Wager & Athey (2018) Procedures 1-2, Definitions 1-5, eq. (8)"))
 }
 
+#' grow_forest
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param n_trees Defaults to \code{200L}.
+#' @param subsample_frac Defaults to \code{0.5}.
+#' @param min_leaf Defaults to \code{5L}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @param max_depth Defaults to \code{12L}.
+#' @param seed Defaults to \code{0L}.
+#' @param clusters Defaults to \code{NULL}.
+#' @return A list with \code{trees}, \code{bags}, \code{s}.
+#' @export
 grow_forest <- function(X, y, W = NULL, kind = "double-sample",
                         n_trees = 200L, subsample_frac = 0.5,
                         min_leaf = 5L, alpha = 0.05, pi = 0.5,
@@ -293,6 +371,16 @@ grow_forest <- function(X, y, W = NULL, kind = "double-sample",
   list(trees = trees, bags = bags, s = s)
 }
 
+#' forest_weights
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param trees See Usage.
+#' @param X See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 forest_weights <- function(trees, X, x) {
   n <- nrow(as.matrix(X))
   w <- numeric(n)
@@ -317,6 +405,27 @@ forest_weights <- function(trees, X, x) {
 honestforest <- honest_forest
 honest_random_forest <- honest_forest
 
+#' morie_hntfst
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param n_trees Defaults to \code{200L}.
+#' @param subsample_frac Defaults to \code{0.5}.
+#' @param min_leaf Defaults to \code{5L}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @param max_depth Defaults to \code{12L}.
+#' @param seed Defaults to \code{0L}.
+#' @param at Defaults to \code{NULL}.
+#' @param level Defaults to \code{0.95}.
+#' @param correction Defaults to \code{TRUE}.
+#' @return The value of \code{honest_forest}.
+#' @export
 morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
                          n_trees = 200L, subsample_frac = 0.5,
                          min_leaf = 5L, alpha = 0.05, pi = 0.5,

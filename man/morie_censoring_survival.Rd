@@ -1,0 +1,43 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_censoring_survival}
+\alias{morie_censoring_survival}
+\title{Censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j |}
+\usage{
+morie_censoring_survival(times, censored, A = NULL, W = NULL, grid = NULL, by_covariate = TRUE, ridge = 1e-08)
+}
+\arguments{
+\item{times}{See Usage.}
+\item{censored}{See Usage.}
+\item{A}{Defaults to \code{NULL}.}
+\item{W}{Defaults to \code{NULL}.}
+\item{grid}{Defaults to \code{NULL}.}
+\item{by_covariate}{Defaults to \code{TRUE}.}
+\item{ridge}{Defaults to \code{1e-08}.}
+}
+\description{
+A, W)) Part of the tmlcen_native implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{G}, \code{grid}, \code{b}.
+}
+\references{
+----------
+Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
+Raton: Chapman & Hall/CRC, Ch. 17 "Causal survival analysis" --
+Sec. 17.2 hazards to risks, Sec. 17.3 why censoring matters, Sec. 17.4
+IP weighting of marginal structural models.
+
+van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in
+Data Science, Springer Series in Statistics,
+doi:10.1007/978-3-319-65304-4, Sec. 8.5 "Causal Effect of Binary
+Treatment on Interval Censored Time to Event" -- the data structure,
+the coarsening C(o) = (L(o), R(o)], and the IPCW estimator above.
+
+Note on the ledger citation: its key "Stitelman-Lendle-vdL (2011)" does
+not resolve to any paper; a bibliographic search returns the ltmle
+software package instead. The two sources above are what this is built
+from.
+}
+\keyword{internal}
