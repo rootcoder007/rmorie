@@ -19,3 +19,6 @@ list(posterior, evidence, map, prior)
 \description{
 Posterior over a discrete urn hypothesis (eq. 2.25-2.26, p. 28)
 }
+\examples{
+morie_urnpost(nb = 5L, ntot = 5L)
+}

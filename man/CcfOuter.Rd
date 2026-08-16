@@ -20,3 +20,6 @@ pairwise delays -- which is why the outer product appears in the Wiener and RLS 
 A list with \code{theta}, \code{order}, \code{n_positions}, \code{toeplitz_deviation}, \code{relative_deviation}, \code{tol}, \code{toeplitz}, \code{method}.
 }
 \keyword{internal}
+\examples{
+CcfOuter(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+}

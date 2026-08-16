@@ -19,3 +19,6 @@ List with \code{estimate}, \code{top_k_indices}, \code{top_k_scores}, \code{scor
 \description{
 Bi-encoder dot products with a STABLE top-k; indices are 0-BASED.
 }
+\examples{
+morie_kamath_dense_passage_retrieval(q_embed = 5L, p_embeds = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

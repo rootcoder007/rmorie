@@ -14,3 +14,6 @@ Friedman multiple comparisons -- eq. (12.2.13), p. 445
 A list with \code{bound}, \code{zstar}, \code{diffs}, \code{significant}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Friedmc(rank_sums = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

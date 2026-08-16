@@ -17,3 +17,6 @@ Part of the vepan_native implementation; see the file header for the source it f
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+morie_vepan_consequence_rank(term = 5L)
+}

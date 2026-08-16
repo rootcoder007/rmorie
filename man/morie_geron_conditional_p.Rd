@@ -21,3 +21,6 @@ list(P, betas).
 \description{
 Binary search on beta = 1/(2 sigma^2) per row until row entropy equals log(perplexity).
 }
+\examples{
+morie_geron_conditional_p(D2 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), perplexity = 5L)
+}

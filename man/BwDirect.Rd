@@ -19,3 +19,6 @@ there is no warping to prewarp for.  The filter so defined has zero phase, which
 A list with \code{squared_magnitude}, \code{magnitude}, \code{omega}, \code{omega_c}, \code{N}, \code{half_power_at_cutoff}, \code{no_warping}, \code{zero_phase}, \code{not_causal}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwDirect(omega = c(1, 2, 3, 4, 5, 6, 7, 8), omega_c = 5L, N = 5L)
+}

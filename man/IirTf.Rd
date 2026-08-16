@@ -21,3 +21,6 @@ so a_k is a_1..a_M WITHOUT it; passing a vector that already carries a leading 1
 A list with \code{H}, \code{z}, \code{numerator}, \code{denominator}, \code{N}, \code{M}, \code{leading_one_is_implicit}, \code{method}.
 }
 \keyword{internal}
+\examples{
+IirTf(b_k = c(1, 2, 3, 4, 5, 6, 7, 8), a_k = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

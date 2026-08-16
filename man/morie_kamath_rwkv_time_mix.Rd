@@ -20,3 +20,6 @@ List with \code{wkv}, \code{estimate}.
 Decayed normalised value average, computed in log space so long decays
 never overflow.
 }
+\examples{
+morie_kamath_rwkv_time_mix(k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), w = 5L)
+}

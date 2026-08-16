@@ -27,3 +27,6 @@ looks reasonable. \code{ekr_regime} reports which case applies.
 Erdos P, Ko C, Rado R (1961) \emph{Quart J Math}
 12:313-320.
 }
+\examples{
+morie_erdos_ko_rado(n = 5L, k = 5L)
+}

@@ -18,3 +18,6 @@ The sum \code{sum alpha/(alpha+i)} for \code{i = 0..n-1}, which grows like \code
 A list with \code{expected}, \code{n}, \code{alpha},   \code{log_approximation}, \code{note}.
 }
 \keyword{internal}
+\examples{
+expected_clusters(n = 5L, alpha = 0.5)
+}

@@ -30,3 +30,6 @@ A list with betas, alphas and abar.
     sets of vectors." Acta Crystallographica A32(5), 922-923.
 }
 \keyword{internal}
+\examples{
+morie_alfrf2_schedule(T = 5L)
+}

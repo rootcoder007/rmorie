@@ -21,3 +21,6 @@ Part of the nrfrad_native implementation; see the file header for the source it 
 A vector, from \code{sort}.
 }
 \keyword{internal}
+\examples{
+sample_pdf(bins = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
+}

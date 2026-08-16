@@ -19,3 +19,6 @@ The returned c satisfies E[(<x_hat, y> - <x, y>)^2] <= c ||x||^2 ||y||^2 for the
 A single numeric constant.
 }
 \keyword{internal}
+\examples{
+morie_tqipb_constant(bits = 5L, d = 5L)
+}

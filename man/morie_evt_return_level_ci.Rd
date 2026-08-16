@@ -19,3 +19,6 @@ Delta-method CI for a GEV return level (Coles 2001 eq. 3.10-3.11)
 A list with \code{z_T}, \code{ci_lo}, \code{ci_hi}, \code{se}.
 }
 \keyword{internal}
+\examples{
+morie_evt_return_level_ci(x = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
+}

@@ -19,3 +19,6 @@ Computes the posterior probability that two adjacent regions differ -- \code{P(p
 A list with \code{estimate} (boundary pairs), \code{boundaries}   (same as \code{estimate}), \code{ranked} (list of one entry per   adjacent pair, sorted by descending \code{p_difference}),   \code{n_adjacent}, \code{n_boundaries}, \code{threshold},   \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_dpgrf(W = 5L, label_draws = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

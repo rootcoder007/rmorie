@@ -31,3 +31,6 @@ A Cox model on the subdistribution hazard, in which subjects failing from a comp
 \references{
 Fine, J. P. and Gray, R. J. (1999). A proportional hazards model for the subdistribution of a competing risk. JASA 94(446), 496-509.
 }
+\examples{
+Finegray(time = c(1, 2, 3, 4, 5, 6, 7, 8), cause = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

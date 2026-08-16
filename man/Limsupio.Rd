@@ -14,3 +14,6 @@ Limit-superior event, infinitely often (Deshmukh eq. 6.1)
 A list with \code{threshold}, \code{in_event}, \code{prob}, \code{n_paths}.
 }
 \keyword{internal}
+\examples{
+Limsupio(dev = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

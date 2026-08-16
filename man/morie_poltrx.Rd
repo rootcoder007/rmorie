@@ -20,3 +20,6 @@ A thin wrapper that mirrors the Python module\'s public surface. The main entry 
 A named list with \code{level_parameters},   \code{continuity_regime}, \code{tree}, \code{density} and   \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_poltrx(levels = 5L)
+}

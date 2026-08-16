@@ -18,3 +18,6 @@ List with \code{y}, \code{folded_shape}, \code{products_avoided}.
 (A (x) B) x = gamma(B eta(x) A^T). Both folds are COLUMN-MAJOR, which is
 R's native \code{matrix()} layout and what makes the identity hold.
 }
+\examples{
+morie_kamath_ch4_krona_efficient(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L, x = 5L)
+}

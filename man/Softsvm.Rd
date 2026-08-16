@@ -14,3 +14,6 @@ Softsvm(X, y, T, ...)
 A list with \code{beta}, \code{beta0}, \code{norm_beta}, \code{margin}, \code{zeta}, \code{slack_sum}, \code{n_violating}, \code{n_misclassified}, \code{alpha}, \code{support_vectors}, \code{objective}.
 }
 \keyword{internal}
+\examples{
+Softsvm(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), T = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

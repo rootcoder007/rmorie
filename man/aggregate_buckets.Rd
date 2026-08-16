@@ -19,3 +19,6 @@ Non-overlapping keeps the LAST complete buckets so the most recent history is re
 Numeric vector of bucket sums.
 }
 \keyword{internal}
+\examples{
+aggregate_buckets(y = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+}

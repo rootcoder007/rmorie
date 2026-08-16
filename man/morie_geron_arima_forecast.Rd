@@ -25,3 +25,6 @@ forecast is formed on the differenced scale, and the differencing is
 undone by adding back the last value of each lower-order difference.
 \code{theta} uses the PLUS sign convention.
 }
+\examples{
+morie_geron_arima_forecast(y = c(1, 2, 3, 4, 5, 6, 7, 8), phi = 0.5, theta = 0.5)
+}

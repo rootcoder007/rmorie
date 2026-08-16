@@ -19,3 +19,6 @@ Sliding-window attention mask
 An L x L logical matrix.
 }
 \keyword{internal}
+\examples{
+morie_mistr_sliding_window_mask(L = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+}

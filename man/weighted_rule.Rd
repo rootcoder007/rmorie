@@ -20,3 +20,6 @@ Minimises weighted squared error against the labels, the surrogate used here for
 A list with \code{rule} (a function from covariate vectors   to -1/+1) and \code{coef} (intercept followed by feature   coefficients).
 }
 \keyword{internal}
+\examples{
+weighted_rule(H = 0.5, labels = 5L, weights = 5L)
+}

@@ -18,3 +18,6 @@ Proposition 1.3: (rho + 2 sqrt(rho log(1/delta)), delta)-DP
 A list with \code{epsilon}, \code{delta}, \code{rho}.
 }
 \keyword{internal}
+\examples{
+to_approx_dp(rho = 0.5, delta = 0.5)
+}

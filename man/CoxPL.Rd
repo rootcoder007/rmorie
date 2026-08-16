@@ -23,3 +23,6 @@ fitted \\\' \\\' Breslow handling of tied event times.  When beta is NULL the pa
 A list with \code{loglik}, \code{score}, \code{information}, \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event}, \code{iterations}, \code{converged}, \code{method}.
 }
 \keyword{internal}
+\examples{
+CoxPL(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

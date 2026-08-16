@@ -19,3 +19,6 @@ Lpc(x, order, method = "autocorrelation")
 A list with \code{a}, \code{gain}, \code{error}, \code{reflection}, \code{acf}, \code{order}, \code{residual}, \code{residual_energy}, \code{stable}, \code{normalized_error}, \code{sign_convention}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Lpc(x = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+}

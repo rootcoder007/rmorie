@@ -25,3 +25,6 @@ Att(Q,K,V) = softmax(Q K^T / sqrt(d_k)) V. Masked entries are set to
 -Inf before the row-wise softmax; a query row with no visible key is
 an error.
 }
+\examples{
+morie_geron_scaled_dot_product(Q = 0.5, K = 5L, V = 5L)
+}

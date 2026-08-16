@@ -17,3 +17,6 @@ N-gram MLE probability (Burkov Ch 2)
 A list with \code{estimate}, \code{count_ngram}, \code{count_prefix}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_ngram_mle(counts_ngram = 5L, counts_prefix = 5L)
+}

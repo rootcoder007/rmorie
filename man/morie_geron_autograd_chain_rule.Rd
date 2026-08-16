@@ -19,3 +19,6 @@ Walks the chain from the output end, one vector-Jacobian product per
 node. Nodes are matrices (out_dim, in_dim) or functions g -> g J.
 \code{intermediate_grads} is output-end first, as in Python.
 }
+\examples{
+morie_geron_autograd_chain_rule(graph = c(1, 2, 3, 4, 5, 6, 7, 8), grad_output = 5L)
+}

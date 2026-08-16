@@ -23,3 +23,6 @@ that gets subtracted.
 \references{
 Peyre & Cuturi (2019), eq. (4.2).
 }
+\examples{
+Otentreg(T = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}

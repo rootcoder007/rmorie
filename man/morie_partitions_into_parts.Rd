@@ -16,3 +16,6 @@ A \code{morie_bigint}.
 \eqn{p(n,k) = p(n-1,k-1) + p(n-k,k)}: either the smallest part is 1,
 or every part exceeds 1 and one can be removed from each.
 }
+\examples{
+morie_partitions_into_parts(n = 5L, k = 5L)
+}

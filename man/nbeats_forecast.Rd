@@ -21,3 +21,6 @@ Part of the nbeats_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{forecast}, \code{residual}, \code{backcast}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{residual_norm}, \code{window_norm}, \code{n_blocks}, \code{method}.
 }
 \keyword{internal}
+\examples{
+nbeats_forecast(y = c(1, 2, 3, 4, 5, 6, 7, 8), horizon = 5L)
+}

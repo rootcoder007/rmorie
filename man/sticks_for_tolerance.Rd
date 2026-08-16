@@ -18,3 +18,6 @@ Part of the slowdp_native implementation; see the file header for the source it 
 A list with \code{K}, \code{expected_tail}, \code{tolerance}, \code{note}.
 }
 \keyword{internal}
+\examples{
+sticks_for_tolerance(alpha = 0.5)
+}

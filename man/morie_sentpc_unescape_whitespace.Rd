@@ -18,3 +18,6 @@ Invert \code{escape_whitespace} exactly
 Character.
 }
 \keyword{internal}
+\examples{
+morie_sentpc_unescape_whitespace(text = 5L)
+}

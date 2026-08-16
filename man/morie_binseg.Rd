@@ -37,3 +37,6 @@ Scott, A. J. and Knott, M. (1974). A cluster analysis
 method for grouping means in the analysis of variance.
 Biometrics, 30(3), 507-512.
 }
+\examples{
+morie_binseg(x = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
+}

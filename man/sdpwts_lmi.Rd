@@ -42,3 +42,6 @@ doi:10.1137/1.9781611970791. Self-concordance, which is what makes
 the barrier method\'s complexity claim hold.
 }
 \keyword{internal}
+\examples{
+sdpwts_lmi(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -30,3 +30,6 @@ List with \code{estimate}, \code{Delta_W}, \code{s_pruned}, \code{kept}.
 P diag(s) Q^T after zeroing all but the top-importance singular values.
 \code{kept} is 0-BASED and sorted.
 }
+\examples{
+morie_kamath_adalora_rank_allocation(P = 0.5, s = 5L, Q = 0.5)
+}

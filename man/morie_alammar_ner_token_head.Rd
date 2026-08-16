@@ -18,3 +18,6 @@ morie_alammar_ner_token_head
 A list with \code{probabilities}, \code{predicted_tags}, \code{cross_entropy}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_ner_token_head(h_tokens = c(1, 2, 3, 4, 5, 6, 7, 8), W = 5L, b = 5L)
+}

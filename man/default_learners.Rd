@@ -18,3 +18,6 @@ Part of the flxipt_native implementation; see the file header for the source it 
 The value of \code{lib}, as built in the body.
 }
 \keyword{internal}
+\examples{
+default_learners(p = 0.5)
+}

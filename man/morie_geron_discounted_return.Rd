@@ -18,3 +18,6 @@ List with \code{returns}, \code{G0}, \code{effective_horizon}.
 G_t = r_t + gamma \verb{G_\{t+1\}} by a backward sweep; effective horizon
 1/(1-gamma).
 }
+\examples{
+morie_geron_discounted_return(rewards = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+}

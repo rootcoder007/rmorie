@@ -18,3 +18,6 @@ Boyd equation 11.10: \code{lambda_i*(t) = -1 / (t f_i(x))}.
 Numeric vector of dual multipliers.
 }
 \keyword{internal}
+\examples{
+central_path_dual(fvals = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L)
+}

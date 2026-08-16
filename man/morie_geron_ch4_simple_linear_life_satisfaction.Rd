@@ -21,3 +21,6 @@ List with \code{life_satisfaction}, \code{theta_0}, \code{theta_1}.
 \description{
 Delegates to \code{\link[=morie_geron_ch4_linear_regression_prediction]{morie_geron_ch4_linear_regression_prediction()}}.
 }
+\examples{
+morie_geron_ch4_simple_linear_life_satisfaction(theta_0 = 5L, theta_1 = 5L, GDP_per_capita = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

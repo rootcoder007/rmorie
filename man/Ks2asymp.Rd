@@ -14,3 +14,6 @@ Two-sample KS asymptotic -- Sec. 6.3, p. 241
 A list with \code{p_value}, \code{k}, \code{neff}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Ks2asymp(d = 5L, m = 5L, n = 5L)
+}

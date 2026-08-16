@@ -30,3 +30,6 @@ Diaz I (2017). Efficient estimation of quantiles in
 missing data models. \emph{Journal of Statistical Planning and
 Inference} 190, 39-51.
 }
+\examples{
+morie_tmle_quantile(y = 5L, d = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

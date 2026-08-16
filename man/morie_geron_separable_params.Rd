@@ -19,3 +19,6 @@ Integer parameter count k\emph{k}c_in + c_in*c_out.
 \description{
 Depthwise separable convolution weight count
 }
+\examples{
+morie_geron_separable_params(k = 5L, c_in = c(1, 2, 3, 4, 5, 6, 7, 8), c_out = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

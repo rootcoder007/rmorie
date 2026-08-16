@@ -19,3 +19,6 @@ Part of the sarima_native implementation; see the file header for the source it 
 A list with \code{var_theta}, \code{var_Theta}, \code{se_theta}, \code{se_Theta}, \code{cov}, \code{off_diagonal_term}.
 }
 \keyword{internal}
+\examples{
+large_sample_se(theta = 0.5, Theta = 0.5, n = 5L)
+}

@@ -33,3 +33,6 @@ Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
 arXiv:1904.01355.
 }
 \keyword{internal}
+\examples{
+morie_yolovx_decode_box(ltrb = c(1, 2, 3, 4, 5, 6, 7, 8), cx = c(1, 2, 3, 4, 5, 6, 7, 8), cy = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

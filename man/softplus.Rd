@@ -17,3 +17,6 @@ Part of the mambss_native implementation; see the file header for the source it 
 The value of \code{log1p}.
 }
 \keyword{internal}
+\examples{
+softplus(z = 5L)
+}

@@ -19,3 +19,6 @@ Part of the masrcn_native implementation; see the file header for the source it 
 A list with \code{total}, \code{cls}, \code{box}, \code{mask}, \code{note}.
 }
 \keyword{internal}
+\examples{
+multitask_loss(l_cls = c(1, 2, 3, 4, 5, 6, 7, 8), l_box = c(1, 2, 3, 4, 5, 6, 7, 8), l_mask = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

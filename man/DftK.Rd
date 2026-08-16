@@ -18,3 +18,6 @@ finely; K < N folds and the signal cannot be recovered.
 A list with \code{X}, \code{K}, \code{n}, \code{aliased}, \code{method}.
 }
 \keyword{internal}
+\examples{
+DftK(x = c(1, 2, 3, 4, 5, 6, 7, 8), k_points = 5L)
+}

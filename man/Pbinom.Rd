@@ -20,3 +20,6 @@ Part of the dist_native implementation; see the file header for the source it fo
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+Pbinom(q = 0.5, size = 5L, prob = 0.5)
+}

@@ -20,3 +20,6 @@ Part of the qrntcq_native implementation; see the file header for the source it 
 A list with \code{efficacy}, \code{prevented.mass}, \code{remaining.mass}, \code{t.Q}, \code{t.R}, \code{max.attainable}, \code{pre.quarantine.mass}.
 }
 \keyword{internal}
+\examples{
+morie_qrntcq_quarantine_efficacy(t.Q = 5L, t.R = 5L)
+}

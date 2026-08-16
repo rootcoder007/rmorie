@@ -17,3 +17,6 @@ the rectangle\\'s largest sidelobe, about -43 dB, at the cost of a wider main lo
 A list with \code{w}, \code{N}, \code{sum}, \code{endpoints}, \code{reaches_zero_at_the_ends}, \code{coherent_gain}, \code{symmetric}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HammingW(N = 5L)
+}

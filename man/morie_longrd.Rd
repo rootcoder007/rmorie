@@ -38,3 +38,6 @@ A list with the polished sequence, the per-position depth and   support, the run
     Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 }
 \keyword{internal}
+\examples{
+morie_longrd(assembly = 5L, reads = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -47,3 +47,6 @@ Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
 equivariant.
 }
 \keyword{internal}
+\examples{
+morie_se3T_radial_kernel(distance = 5L)
+}

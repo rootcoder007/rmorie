@@ -19,3 +19,6 @@ Part of the bayrjmcmc_native implementation; see the file header for the source 
 A list with \code{eta}, \code{pi}, \code{b}, \code{d}, \code{c}.
 }
 \keyword{internal}
+\examples{
+changepoint_move_probabilities(lam = 5L, k_max = 5L)
+}

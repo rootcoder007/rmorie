@@ -14,3 +14,6 @@ Two-sample t efficacy -- eq. (13.3.9), p. 494
 A list with \code{efficacy}, \code{m}, \code{n}, \code{sigma2}.
 }
 \keyword{internal}
+\examples{
+Efft2(m = 5L, n = 5L, sigma2 = 5L)
+}

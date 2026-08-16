@@ -21,3 +21,6 @@ List with X_projected, eigenvalues, alphas, K, n_negative_eigenvalues, is_psd, e
 \description{
 Kernel PCA with sigmoid kernel (Geron Ch 7, morie.fn hmkpsg)
 }
+\examples{
+morie_geron_kernel_pca_sigmoid(X = c(1, 2, 3, 4, 5, 6, 7, 8), n_components = 5L)
+}

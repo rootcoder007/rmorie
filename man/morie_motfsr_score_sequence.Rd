@@ -20,3 +20,6 @@ Score every W-mer of a sequence
 Vector of scores, or list(scores, hits).
 }
 \keyword{internal}
+\examples{
+morie_motfsr_score_sequence(spec = c(1, 2, 3, 4, 5, 6, 7, 8), sequence = c(1, 2, 3, 4, 5, 6, 7, 8), alphabet = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

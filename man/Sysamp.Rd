@@ -32,3 +32,6 @@ Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 so the standard published form is used; rho is reported by inverting
 V(ybar_sy) = (S^2/n)\link{1 + (n - 1) rho}.
 }
+\examples{
+Sysamp(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L)
+}

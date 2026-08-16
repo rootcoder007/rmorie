@@ -26,3 +26,6 @@ A number strictly between zero and one.
     2nd edition, Chapman and Hall.
 }
 \keyword{internal}
+\examples{
+morie_cypin_logistic(z = 5L)
+}

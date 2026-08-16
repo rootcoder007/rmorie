@@ -18,3 +18,6 @@ Part of the crtT_mixedcase_native implementation; see the file header for the so
 A list with \code{estimate}, \code{modulus}, \code{residues}, \code{moduli}, \code{method}.
 }
 \keyword{internal}
+\examples{
+crtT(residues = 5L, moduli = 5L)
+}

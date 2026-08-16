@@ -27,3 +27,6 @@ List with \code{estimate}, \code{N_opt}, \code{D_opt}, \code{compute_check}.
 \description{
 N = sqrt(C / (6 * 20)), D = 20 N, checked against C = 6 N D.
 }
+\examples{
+morie_kamath_chinchilla_compute_optimal(compute_budget = 5L)
+}

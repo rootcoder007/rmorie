@@ -38,3 +38,6 @@ Pickands (1975), Statistical inference using extreme
 order statistics, Annals of Statistics 3(1):119-131.
 \doi{10.1214/aos/1176343003}
 }
+\examples{
+GpdD(sigma = 0.5, xi = 5L)
+}

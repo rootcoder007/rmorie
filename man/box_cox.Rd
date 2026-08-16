@@ -18,3 +18,6 @@ Part of the bats_native implementation; see the file header for the source it fo
 A numeric value.
 }
 \keyword{internal}
+\examples{
+box_cox(y = c(1, 2, 3, 4, 5, 6, 7, 8), omega = 5L)
+}

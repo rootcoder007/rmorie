@@ -32,3 +32,6 @@ degrees of freedom with multiple imputation. Biometrika, 86,
 948-955.  van Buuren, S. (2018). Flexible Imputation of Missing
 Data, 2nd ed., Sec. 2.3.6.
 }
+\examples{
+morie_midegf(b = 5L, t = 5L, m = 5L)
+}

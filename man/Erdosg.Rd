@@ -41,3 +41,6 @@ Gilbert (1959), Ann. Math. Statist. 30(4):1141-1144,
 doi:10.1214/aoms/1177706098; Erdos & Renyi (1959), Publ. Math.
 Debrecen 6:290-297 (the G(n,M) model).
 }
+\examples{
+Erdosg(n = 5L, p = 0.5)
+}

@@ -20,3 +20,6 @@ Integer parameter count.
 (k - 1) weights + k*d means + k * per-covariance, with per-covariance
 d(d+1)/2 (full), d (diag) or 1 (spherical).
 }
+\examples{
+morie_geron_gmm_n_params(k = 5L, d = 5L)
+}

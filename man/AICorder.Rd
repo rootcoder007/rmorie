@@ -19,3 +19,6 @@ Hamming window -- the EFFECTIVE sample count after windowing, which is what dist
 A list with \code{order}, \code{criterion}, \code{n_effective}, \code{method}.
 }
 \keyword{internal}
+\examples{
+AICorder(prediction_errors = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
+}

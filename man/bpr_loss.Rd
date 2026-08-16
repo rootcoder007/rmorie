@@ -18,3 +18,6 @@ BPR ranking loss
 Scalar loss.
 }
 \keyword{internal}
+\examples{
+bpr_loss(r_target = 5L, r_negatives = 5L)
+}

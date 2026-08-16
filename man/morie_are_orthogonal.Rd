@@ -26,3 +26,6 @@ Euler conjectured in 1782 that no pair exists for
 Shrikhande and Parker constructed a pair of order 10 in 1960, 178
 years later.
 }
+\examples{
+morie_are_orthogonal(square_a = 5L, square_b = 5L)
+}

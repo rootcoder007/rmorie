@@ -20,3 +20,6 @@ product, which eq (4.63) then turns into a sum.  The convolution is scaled by dt
 A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{max_difference}, \code{holds}, \code{method}.
 }
 \keyword{internal}
+\examples{
+FtConv(x = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

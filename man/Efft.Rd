@@ -14,3 +14,6 @@ One-sample t efficacy -- eq. (13.3.2), p. 488
 A list with \code{efficacy}, \code{per_obs}, \code{n}, \code{sigma2}.
 }
 \keyword{internal}
+\examples{
+Efft(n = 5L, sigma2 = 5L)
+}

@@ -36,3 +36,6 @@ Leskovec, Chakrabarti, Kleinberg, Faloutsos and
 Ghahramani (2010), Kronecker graphs: an approach to modeling
 networks, Journal of Machine Learning Research 11:985-1042.
 }
+\examples{
+Krfgrp(seed = 1, k = 5L)
+}

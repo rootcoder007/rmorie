@@ -17,3 +17,6 @@ List with \code{estimate}, \code{scores}, \code{probabilities}.
 \description{
 Expected rating under the evaluator's score posterior.
 }
+\examples{
+morie_kamath_ch8_geval_score(s_i = 5L, p = 1)
+}

@@ -17,3 +17,6 @@ Part of the sarima_native implementation; see the file header for the source it 
 The value of \code{.sarima_invert_rho}.
 }
 \keyword{internal}
+\examples{
+moment_estimate(rho = 0.5)
+}

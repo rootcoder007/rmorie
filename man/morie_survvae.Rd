@@ -25,3 +25,6 @@ Nelder-Mead over the stacked vector \eqn{(W, b, \log \beta, \log \eta)} with ran
 Named list with element names matching the Python   payload keys: \code{estimate}, \code{elbo}, \code{loglik},   \code{jensen_gap}, \code{W}, \code{bias}, \code{shapes},   \code{scales}, \code{K}, \code{primitive}, \code{alpha},   \code{prior}, \code{times}, \code{events}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_survvae(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

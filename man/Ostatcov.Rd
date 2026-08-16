@@ -14,3 +14,6 @@ Covariance of two uniform order statistics -- Sec. 2.4, p. 38
 A list with \code{cov}, \code{corr}, \code{var_r}, \code{var_s}, \code{r}, \code{s}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Ostatcov(r = 5L, s = 5L, n = 5L)
+}

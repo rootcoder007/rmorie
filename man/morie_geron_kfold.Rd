@@ -29,3 +29,6 @@ List with cv_score, fold_scores, train_indices, test_indices, fold_sizes, estima
 \description{
 K-fold partition plus CV score (Geron Ch 2, morie.fn hmkfd)
 }
+\examples{
+morie_geron_kfold(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), k = 3L)
+}

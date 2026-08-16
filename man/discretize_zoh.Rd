@@ -20,3 +20,6 @@ Part of the mambss_native implementation; see the file header for the source it 
 A list with \code{Abar}, \code{Bbar}.
 }
 \keyword{internal}
+\examples{
+discretize_zoh(delta = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,6 @@ Part of the bats_native implementation; see the file header for the source it fo
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+seasonal_harmonics(m = 5L)
+}

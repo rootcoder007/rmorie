@@ -36,3 +36,6 @@ A value in the unit interval.
     Proteins 52(4), 609-623.
 }
 \keyword{internal}
+\examples{
+morie_chemsc_hbond(r = 5L, alpha = 0.5, betas = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

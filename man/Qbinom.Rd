@@ -19,3 +19,6 @@ Part of the dist_native implementation; see the file header for the source it fo
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+Qbinom(p = 0.5, size = 5L, prob = 0.5)
+}

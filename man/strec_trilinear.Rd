@@ -48,3 +48,6 @@ important, where STAMP explicitly privileges the last click;
 implemented in :mod:`narm`.
 }
 \keyword{internal}
+\examples{
+strec_trilinear(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

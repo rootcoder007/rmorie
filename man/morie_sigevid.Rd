@@ -21,3 +21,6 @@ list(logevidence, bestfit, logoccam)
 \description{
 Log evidence for the noise level (eq. 24.13, p. 320)
 }
+\examples{
+morie_sigevid(s = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, sigma = 0.5)
+}

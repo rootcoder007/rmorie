@@ -21,3 +21,6 @@ List with \code{loss_scaled}, \code{overflow}, \code{scaled_gradients},
 \description{
 FP16 mixed precision with loss scaling (Geron Ch 19, morie.fn grfp6)
 }
+\examples{
+morie_geron_fp16_mixed_precision(loss = 5L, S = 5L)
+}

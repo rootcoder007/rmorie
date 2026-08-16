@@ -16,3 +16,6 @@ List with \code{estimate}, \code{count_ngram}, \code{count_prefix}.
 count(ngram) / count(prefix); 0/0 is refused. Delegates to
 \code{morie_burkov_ngram_mle}.
 }
+\examples{
+morie_kamath_ngram_language_model(counts_ngram = 5L, counts_prefix = 5L)
+}

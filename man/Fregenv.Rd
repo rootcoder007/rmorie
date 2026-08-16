@@ -14,3 +14,6 @@ y = 1_n mu + X_E beta_E + X beta + e (14.13), and with the environment-by-reflec
 A list with \code{coef}, \code{mu}, \code{beta_E}, \code{beta}, \code{beta_EF}, \code{widths}, \code{design}, \code{fitted}, \code{residuals}, \code{sse}, \code{n_columns}, \code{has_interaction}.
 }
 \keyword{internal}
+\examples{
+Fregenv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

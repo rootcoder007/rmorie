@@ -14,3 +14,6 @@ Runs up-and-down moments -- Sec. 3.4, p. 93 (Levene 1952)
 A list with \code{mean}, \code{var}, \code{sd}, \code{z_left}, \code{z_right}, \code{p_value}, \code{zcrit}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Runsudvar(n = 5L)
+}

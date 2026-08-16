@@ -14,3 +14,6 @@ Sign-test sample size -- eq. (5.4.9), p. 179
 A list with \code{n}, \code{n_raw}, \code{root_n}, \code{z_alpha}, \code{z_beta}, \code{theta}.
 }
 \keyword{internal}
+\examples{
+Signn(theta = 0.05)
+}

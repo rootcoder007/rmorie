@@ -17,3 +17,6 @@ Centre a Gram matrix in feature space (Geron Ch 7, morie.fn hmkprbf helper)
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_geron_center_gram(K = 5L)
+}

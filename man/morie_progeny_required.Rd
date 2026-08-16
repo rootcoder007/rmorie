@@ -19,3 +19,6 @@ Equation (6) of Lander & Botstein (1989): the ratio of the single-marker thresho
 A named list with keys \code{n}, \code{threshold},   \code{elod}.
 }
 \keyword{internal}
+\examples{
+morie_progeny_required(var_qtl = 5L, var_residual = 5L)
+}

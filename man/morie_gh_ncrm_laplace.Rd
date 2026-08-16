@@ -28,3 +28,6 @@ Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
 }
+\examples{
+morie_gh_ncrm_laplace(f = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -43,3 +43,6 @@ David A. Freedman*, IMS, 335-421, doi:10.1214/193940307000000527.
 Higher-order influence functions.
 }
 \keyword{internal}
+\examples{
+morie_tlhoest_rate_requirement(order = 5L)
+}

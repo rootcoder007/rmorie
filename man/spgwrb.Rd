@@ -97,3 +97,6 @@ parameter variance, eq (2.20) the hat-matrix row, and golden section as
 the book's own named search method (p. 60, after Greig 1980).
 Independently checked against spgwr's published NY8 output.
 }
+\examples{
+spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

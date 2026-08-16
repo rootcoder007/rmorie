@@ -21,3 +21,6 @@ Part of the patchT_native implementation; see the file header for the source it 
 A list with \code{n_patches}, \code{pointwise}, \code{patched}, \code{reduction}, \code{stride}, \code{patch_len}, \code{note}.
 }
 \keyword{internal}
+\examples{
+attention_cost(L = 5L, patch_len = 5L)
+}

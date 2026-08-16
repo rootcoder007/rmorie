@@ -34,3 +34,6 @@ Formula: \code{delta(a) = b1 (th2 + th3 a)},
 Imai, K., Keele, L. & Yamamoto, T. (2010). Statistical
 Science 25:51-71, equations (7) and (8).
 }
+\examples{
+Imai(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -19,3 +19,6 @@ apart, symmetric about the imaginary axis and never on it.  For odd N a pole fal
 A list with \code{poles}, \code{left_half_plane}, \code{value}, \code{k}, \code{Omega_c}, \code{N}, \code{radius}, \code{angular_spacing}, \code{n_left_half_plane}, \code{none_on_the_imaginary_axis}, \code{real_pole_for_odd_order}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwPoles(Omega_c = 5L, N = 5L)
+}

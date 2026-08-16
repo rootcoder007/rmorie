@@ -18,3 +18,6 @@ sqrt(2 pi sigma); only the reading sigma = N/4 (the VARIANCE) makes
 eq. (1.41) agree with eq. (1.40). Both quantities are returned so
 the discrepancy stays visible.
 }
+\examples{
+morie_binsumga(n = 5L)
+}

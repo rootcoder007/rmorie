@@ -18,3 +18,6 @@ Part of the sbert_native implementation; see the file header for the source it f
 A list with \code{forward_passes}, \code{cross_encoder}, \code{bi_encoder}, \code{speedup}, \code{n}, \code{note}.
 }
 \keyword{internal}
+\examples{
+pair_cost(n = 5L)
+}

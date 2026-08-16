@@ -23,3 +23,6 @@ The effect curve theta(a) = E(Y^a) for a continuous treatment
 A list with \code{estimate}, \code{se}, \code{curve},   \code{grid}, \code{slopes}, \code{pseudo_outcome},   \code{bandwidth}, \code{marginal_density}, \code{standardized_mu},   \code{pi_obs}, \code{fit}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_tmlcps(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,6 @@ morie_alammar_infonce_loss
 A list with \code{estimate}, \code{positive_similarity}, \code{negative_similarities}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_infonce_loss(anchor = c(1, 2, 3, 4, 5, 6, 7, 8), positive = c(1, 2, 3, 4, 5, 6, 7, 8), negatives = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

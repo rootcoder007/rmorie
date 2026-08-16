@@ -18,3 +18,6 @@ A list with \code{square}, \code{order}, \code{valid}.
 The cyclic construction \eqn{L\[i\]\[j\] = (i + j) \bmod n} works for
 every \eqn{n}, so Latin squares exist unconditionally.
 }
+\examples{
+morie_latin_square(n = 5L)
+}

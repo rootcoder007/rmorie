@@ -37,3 +37,6 @@ The energy.
     defaults and the two split potentials.
 }
 \keyword{internal}
+\examples{
+morie_goldsc_lj(r = 5L, r0 = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
+}

@@ -23,3 +23,6 @@ draw-for-draw; the normal arm draws a SECOND stream seeded
 \code{seed + 7919} and combines the two by Box-Muller, exactly as the
 Python module does. The reshape is row-major, so byrow = TRUE.
 }
+\examples{
+morie_geron_glorot_init(fan_in = 5L, fan_out = 5L)
+}

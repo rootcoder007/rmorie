@@ -20,3 +20,6 @@ Part of the ragRet_native implementation; see the file header for the source it 
 A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric}, \code{comparisons}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_ragRet_top_k(query = 5L, corpus = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

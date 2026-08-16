@@ -18,3 +18,6 @@ Part of the slowdp_native implementation; see the file header for the source it 
 A list with \code{realised_tail}, \code{expected_tail}, \code{ratio}, \code{largest_index}, \code{monotone}, \code{note}.
 }
 \keyword{internal}
+\examples{
+decay_diagnostics(weights = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+}

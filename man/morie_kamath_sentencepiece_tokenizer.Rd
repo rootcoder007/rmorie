@@ -33,3 +33,6 @@ List with \code{vocab}, \code{probs}, \code{log_likelihood}, \code{n_prune_round
 Seed vocabulary, EM through \code{morie_kamath_unigram_lm_tokenizer}, then
 prune by the EXACT likelihood loss of dropping each multi-character piece.
 }
+\examples{
+morie_kamath_sentencepiece_tokenizer(corpus = c("a", "b", "c"), vocab_size = 5L)
+}

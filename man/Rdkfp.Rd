@@ -72,3 +72,6 @@ Code/GraphMol/Fingerprints/RDKitFPGenerator.cpp lines 44-54 and
 196-249, and Code/GraphMol/Fingerprints/FingerprintUtil.cpp lines
 357-444, master revision fetched 2026-08-09.
 }
+\examples{
+Rdkfp(adjacency = 5L, atomnum = 5L)
+}

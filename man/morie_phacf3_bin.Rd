@@ -31,3 +31,6 @@ The zero-based bin index, or -1.
     classification and prediction." IBM internal report.
 }
 \keyword{internal}
+\examples{
+morie_phacf3_bin(d = 5L, edges = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

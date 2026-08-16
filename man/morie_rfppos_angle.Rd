@@ -30,3 +30,6 @@ Degrees.
     ledger entry names.
 }
 \keyword{internal}
+\examples{
+morie_rfppos_angle(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

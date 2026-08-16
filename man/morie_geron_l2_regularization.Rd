@@ -21,3 +21,6 @@ List with penalty, gradient, l2_norm, shrink_factor, estimate, n, method.
 \description{
 L2 (ridge) regularization penalty (Geron Ch 11, morie.fn hml2r)
 }
+\examples{
+morie_geron_l2_regularization(theta = 0.5, alpha = 0.5)
+}

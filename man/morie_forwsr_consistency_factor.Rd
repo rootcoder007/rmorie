@@ -18,3 +18,6 @@ The subset of size \code{m} holds the \code{m} SMALLEST squared residuals, so \c
 The multiplier, 1 when \code{m >= n}.
 }
 \keyword{internal}
+\examples{
+morie_forwsr_consistency_factor(m = 5L, n = 5L)
+}

@@ -19,3 +19,6 @@ rows Z=0,1,2 and columns I=0,1,2 (lower triangle zero).
 The value of \code{rbind}.
 }
 \keyword{internal}
+\examples{
+morie_snpqc1_ibs_given_ibd(x_count = 5L, y_count = 5L)
+}

@@ -22,3 +22,6 @@ The rescaling is uniform, so the update direction is unchanged.
 Pass a numeric vector/matrix for the single-tensor form, or a list
 of them for the multi-tensor form (which returns a list).
 }
+\examples{
+morie_geron_gradient_clipping(grads = c(1, 2, 3, 4, 5, 6, 7, 8), max_norm = 5L)
+}

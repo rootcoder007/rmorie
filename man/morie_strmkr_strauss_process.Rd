@@ -24,3 +24,6 @@ Part of the strmkr_native implementation; see the file header for the source it 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+morie_strmkr_strauss_process(coords = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), r = 5L)
+}

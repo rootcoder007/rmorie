@@ -29,3 +29,6 @@ Constant width w (default 2d) across L hidden layers, with the
 parameter count per layer. This is the LAYER-ALGEBRA route that the
 parity test checks against a direct count.
 }
+\examples{
+morie_geron_neurons_per_layer(n_features = 5L)
+}

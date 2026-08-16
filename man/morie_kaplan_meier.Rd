@@ -27,3 +27,6 @@ one can.  Note \code{survival::survfit}'s \code{std.err} is the error of the
 CUMULATIVE HAZARD; \code{se} here is the error of \code{S(t)} and \code{se_cumhaz}
 is survfit's, the two differing by a factor of \code{S}.
 }
+\examples{
+morie_kaplan_meier(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
+}

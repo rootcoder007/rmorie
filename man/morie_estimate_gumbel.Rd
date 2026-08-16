@@ -26,3 +26,6 @@ Part of the blstn_native implementation; see the file header for the source it f
 A list with \code{lam}, \code{K}, \code{scores}.
 }
 \keyword{internal}
+\examples{
+morie_estimate_gumbel(m = 5L, n = 5L, letter_freqs = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

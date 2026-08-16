@@ -21,3 +21,6 @@ poles at the origin that balance the orders; dropping it is easy, since it vanis
 A list with \code{phase}, \code{wrapped}, \code{origin_term}, \code{zero_angle_sum}, \code{pole_angle_sum}, \code{z_0_angle}, \code{n_zeros}, \code{n_poles}, \code{origin_term_vanishes_when_orders_match}, \code{method}.
 }
 \keyword{internal}
+\examples{
+PzPhase(z_0 = 5L, alpha_k = c(1, 2, 3, 4, 5, 6, 7, 8), beta_k = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

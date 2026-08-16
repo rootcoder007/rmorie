@@ -41,3 +41,6 @@ The ligand efficiency.
     464-469.
 }
 \keyword{internal}
+\examples{
+morie_frgrow_le(kd = 5L, hac = 5L)
+}

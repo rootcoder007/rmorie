@@ -16,3 +16,6 @@ List with \code{cost}, \code{rmse}, \code{residuals}, \code{predictions}.
 The shared core: grlaso, grelas, grn011, grn013 add penalties to it,
 grn007 differentiates it, greast / grmgd / grlrnc iterate it.
 }
+\examples{
+morie_geron_linreg_mse_cost_grmse(X = 5L, y = 5L, theta = 0.5)
+}

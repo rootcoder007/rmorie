@@ -19,3 +19,6 @@ list(mean, var, se, n)
 \description{
 Posterior over the mean at known noise level (eq. 24.9-24.11, p. 320)
 }
+\examples{
+morie_mupostsg(xbar = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, sigma = 0.5)
+}

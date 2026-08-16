@@ -21,3 +21,6 @@ List with \code{theta}, \code{fitted}, \code{residuals}, \code{rss},
 Rejects a collinear design by reciprocal condition number rather than
 by rank.
 }
+\examples{
+morie_geron_normal_equation_grnorm(X = 5L, y = 5L)
+}

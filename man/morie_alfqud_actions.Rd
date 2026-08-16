@@ -27,3 +27,6 @@ A list of instructions.
     Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 }
 \keyword{internal}
+\examples{
+morie_alfqud_actions(n_mem = c(1, 2, 3, 4, 5, 6, 7, 8), n_reg = 5L)
+}

@@ -19,3 +19,6 @@ For real-valued series.
 Numeric log-density.
 }
 \keyword{internal}
+\examples{
+morie_deepar_gaussian_loglik(z = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+}

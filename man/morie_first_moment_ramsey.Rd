@@ -26,3 +26,6 @@ letting the cap read as a result.
 \references{
 Erdos P (1947) \emph{Bull AMS} 53:292-294.
 }
+\examples{
+morie_first_moment_ramsey(k = 5L)
+}

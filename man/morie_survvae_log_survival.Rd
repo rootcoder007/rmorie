@@ -20,3 +20,6 @@ Closed-form log survival of the chosen primitive, used by \code{morie_survvae_el
 Numeric scalar, the log survival.
 }
 \keyword{internal}
+\examples{
+morie_survvae_log_survival(t = 5L, shape = c(1, 2, 3, 4, 5, 6, 7, 8), scale = TRUE)
+}

@@ -24,3 +24,6 @@ and the statistic is not t-distributed under that null -- compare it
 with the Dickey-Fuller critical values returned here, never with
 normal ones.  Matches \code{urca::ur.df}.
 }
+\examples{
+morie_adf_test(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+}

@@ -17,3 +17,6 @@ List with \code{aic}, \code{log_likelihood}, \code{n_params}, \code{penalty}.
 \description{
 AIC = 2p - 2 log L.
 }
+\examples{
+morie_geron_aic_gmm(log_likelihood = 5L, n_params = 5L)
+}

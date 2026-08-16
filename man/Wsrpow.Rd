@@ -14,3 +14,6 @@ Signed-rank power -- eqs. (5.7.13)-(5.7.14), p. 205
 A list with \code{power}, \code{z_beta}, \code{shift}, \code{sd0}, \code{n}, \code{p1}, \code{p2}.
 }
 \keyword{internal}
+\examples{
+Wsrpow(n = 5L, p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

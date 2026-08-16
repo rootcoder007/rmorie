@@ -14,3 +14,6 @@ morie_rating_scale_model
 A list with \code{p}, \code{expected}, \code{info}, \code{test_expected}, \code{test_info}, \code{theta}, \code{b}, \code{tau}, \code{ncat}, \code{n}, \code{k}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_rating_scale_model(theta = 0.5, b = 5L, tau = 0.5)
+}

@@ -45,3 +45,6 @@ ECML 2010 paper above is the one held locally and is the text this
 module follows.
 }
 \keyword{internal}
+\examples{
+morie_warpL_rank_weight(rank = 5L, alphas = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -36,3 +36,6 @@ A zero-based fold index per observation.
     Oncology 32(22), 2380-2385.
 }
 \keyword{internal}
+\examples{
+morie_crsfst_folds(n = 5L, k = 5L)
+}

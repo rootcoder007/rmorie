@@ -21,3 +21,6 @@ Goodman's identity gives
 \references{
 Goodman AW (1959) \emph{Amer Math Monthly} 66(9):778-783.
 }
+\examples{
+morie_goodman_minimum(n = 5L)
+}

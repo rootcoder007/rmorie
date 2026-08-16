@@ -33,3 +33,6 @@ Factorization-Machine based Neural Network for CTR Prediction",
 *IJCAI 2017*, 1725-1731, doi:10.24963/ijcai.2017/239.
 }
 \keyword{internal}
+\examples{
+xdeep_cin_layer(X_prev = 5L, X0 = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

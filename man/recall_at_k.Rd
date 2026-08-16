@@ -19,3 +19,6 @@ Recall at k
 1 if target in top kk, else 0.
 }
 \keyword{internal}
+\examples{
+recall_at_k(ranked = c(1, 2, 3, 4, 5, 6, 7, 8), target = 5L)
+}

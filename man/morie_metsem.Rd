@@ -34,3 +34,6 @@ A list with the contigs longest first, their coverage, the   N50, and what the c
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+morie_metsem(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
+}

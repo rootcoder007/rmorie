@@ -29,3 +29,6 @@ Logic, in which the parenthesis-free notation is introduced; usually
 dated to his 1924 lectures. The evaluation procedure is the standard
 stack algorithm and is not attributed to that source.
 }
+\examples{
+Prefixev(tokens = 5L)
+}

@@ -19,3 +19,6 @@ List with \code{d_min}, \code{d_min_exact}, \code{eps}, \code{n_points},
 d_min = ceil(4 ln n / (eps^2/2 - eps^3/3)). Independent of the
 original dimensionality, and loose in practice.
 }
+\examples{
+morie_geron_johnson_lindenstrauss(n = 5L, eps = 0.5)
+}

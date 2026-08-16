@@ -14,3 +14,6 @@ Mann-Whitney / rank-sum efficacy -- eq. (13.3.10), p. 494
 A list with \code{efficacy}, \code{integral}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Effwrs(m = 5L, n = 5L, integral = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

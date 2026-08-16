@@ -21,3 +21,6 @@ Streams K/V in blocks of \code{block_size}, rescaling the running softmax
 denominator; exact against the plain attention kernel at every block
 size.
 }
+\examples{
+morie_geron_flash_attention_tile(Q = 0.5, K = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

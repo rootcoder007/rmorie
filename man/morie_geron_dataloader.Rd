@@ -30,3 +30,6 @@ List with \code{batches} (0-based indices), \code{order}, \code{n_batches}, \cod
 \description{
 Mini-batch index plan with deterministic Fisher-Yates shuffling (hmdld)
 }
+\examples{
+morie_geron_dataloader(dataset = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), batch_size = 5L)
+}

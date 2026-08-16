@@ -17,3 +17,6 @@ Part of the timesfm_native implementation; see the file header for the source it
 A list with \code{mask}, \code{n_patches}, \code{training_signals}.
 }
 \keyword{internal}
+\examples{
+morie_timesfm_causal_mask(n_patches = 5L)
+}

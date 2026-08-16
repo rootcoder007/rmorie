@@ -21,3 +21,6 @@ Part of the rangayyan_phys implementation; see the file header for the source it
 A list with \code{components}, \code{peak_to_peak_uV}, \code{baseline_uV}, \code{t_ms}, \code{erp_uV}, \code{fs_hz}, \code{t0_ms}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+ErpFeat(erp = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+}

@@ -18,3 +18,6 @@ whole window, so unlike the beat-to-beat form of eq (4.20) it is insensitive to 
 A list with \code{hr}, \code{nbeats}, \code{duration}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HrFromCnt(nbeats = 5L, duration = 5L)
+}

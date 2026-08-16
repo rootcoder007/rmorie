@@ -22,3 +22,6 @@ The canonical statement is TFT eq. (25): QL(y, yhat, q) =
 q (y - yhat)\emph{+ + (1 - q)(yhat - y)}+ -- Lim, Arik, Loeff and
 Pfister, arXiv:1912.09363.
 }
+\examples{
+morie_pinball(y = c(1, 2, 3, 4, 5, 6, 7, 8), qhat = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
+}

@@ -23,3 +23,6 @@ mean_distortion, estimate, n, method.
 R_ij = +-sqrt(s/d_out) with prob 1/(2s) each (s = 1/density), else 0.
 Measures realised pairwise-distance distortion.
 }
+\examples{
+morie_geron_sparse_rand_projection(X = c(1, 2, 3, 4, 5, 6, 7, 8), d_out = 5L)
+}

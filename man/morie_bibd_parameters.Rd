@@ -27,3 +27,6 @@ existence.
 \references{
 Fisher RA (1940). Stinson DR (2004).
 }
+\examples{
+morie_bibd_parameters(v = 5L, k = 5L, lam = 5L)
+}

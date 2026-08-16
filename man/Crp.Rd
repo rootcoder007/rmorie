@@ -24,3 +24,6 @@ Formula: P(z_i = k) = n_k / (i - 1 + alpha) for an occupied table k, and alpha /
 \references{
 Aldous (1985), Exchangeability and related topics, Ecole d'Ete de Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes. Neither is held locally; the seating rule and the E\link{K} = sum_i alpha/(alpha + i - 1) identity are the standard published forms.
 }
+\examples{
+Crp(n = 5L)
+}

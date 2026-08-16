@@ -16,3 +16,6 @@ Numeric variance estimate.
 \description{
 Equation 8.2 of Brus (2022): sum((z_k/p_k - t_hat)^2)/(n(n-1)).
 }
+\examples{
+morie_pps_variance(z = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8), t_hat = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

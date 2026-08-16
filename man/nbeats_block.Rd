@@ -22,3 +22,6 @@ Part of the nbeats_native implementation; see the file header for the source it 
 A list with \code{backcast}, \code{forecast}, \code{theta}.
 }
 \keyword{internal}
+\examples{
+nbeats_block(window = 5L, horizon = 5L)
+}

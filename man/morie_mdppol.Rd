@@ -23,3 +23,6 @@ Part of the mdppol_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve}, \code{n_eval}, \code{policy_stable}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_mdppol(P = 0.5, R = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+}

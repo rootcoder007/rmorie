@@ -18,3 +18,6 @@ contraction and shows as a wider-than-normal QRS; the published logic is a conju
 A list with \code{blocktype}, \code{qrsdur}, \code{wide}, \code{left}, \code{right}, \code{satisfied}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Bbb(qrsdur = 5L)
+}

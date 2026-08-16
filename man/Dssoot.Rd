@@ -41,3 +41,6 @@ resampling strategies for assessing and comparing indirect effects
 in multiple mediator models. Behavior Research Methods 40(3),
 879-891.
 }
+\examples{
+Dssoot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

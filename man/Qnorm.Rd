@@ -20,3 +20,6 @@ Part of the dist_native implementation; see the file header for the source it fo
 A numeric value.
 }
 \keyword{internal}
+\examples{
+Qnorm(p = 0.5)
+}

@@ -18,3 +18,6 @@ Part of the snpqc1_native implementation; see the file header for the source it 
 The value of \code{$}.
 }
 \keyword{internal}
+\examples{
+morie_snpqc1_pihat_matrix(genotypes = list(a = 1, b = 2))
+}

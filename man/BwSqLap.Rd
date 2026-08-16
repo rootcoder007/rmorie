@@ -19,3 +19,6 @@ filter until the N left-half-plane ones are selected by eq (3.138).
 A list with \code{H}, \code{s}, \code{Omega_c}, \code{N}, \code{n_poles}, \code{half_are_right_half_plane}, \code{not_a_filter_until_the_poles_are_selected}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwSqLap(s = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), Omega_c = 5L, N = 5L)
+}

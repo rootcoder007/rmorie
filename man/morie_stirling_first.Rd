@@ -25,3 +25,6 @@ is \eqn{s(n,k) = (-1)^{n-k} c(n,k)}.
 \references{
 Stanley RP (2011) vol. 1, Sec 1.3.
 }
+\examples{
+morie_stirling_first(n = 5L)
+}

@@ -29,3 +29,6 @@ codes and the two Golay codes.
 \references{
 Hamming RW (1950) \emph{Bell Syst Tech J} 29:147-160.
 }
+\examples{
+morie_hamming_bound(n = 5L, d = 5L)
+}

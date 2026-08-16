@@ -18,3 +18,6 @@ variance falls monotonically with p (eq 7.39), so without a penalty the criterio
 A list with \code{order}, \code{criterion}, \code{n}, \code{start_order}, \code{method}.
 }
 \keyword{internal}
+\examples{
+FpeOrder(errors = 5L, n_samples = 5L)
+}

@@ -19,3 +19,6 @@ Part of the bndpcb_native implementation; see the file header for the source it 
 A list with \code{lower}, \code{upper}, \code{width}, \code{empty}, \code{z}, \code{level}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_truncated_normal_interval(x = 5L)
+}

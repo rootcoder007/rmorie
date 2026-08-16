@@ -17,3 +17,6 @@ Part of the andmnh_native implementation; see the file header for the source it 
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+tukey_hanning_kernel(x = 5L)
+}

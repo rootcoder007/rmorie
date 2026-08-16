@@ -37,3 +37,6 @@ VanderWeele, T. J. (2015). Explanation in Causal
 Inference, Oxford University Press, chapter 14; VanderWeele (2014)
 Epidemiology 25:749-761.
 }
+\examples{
+Causmnde(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

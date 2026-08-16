@@ -16,3 +16,6 @@ A list with components \code{estimate}, \code{se}, \code{n}, \code{trend_order},
 Cressie (1993) sec. 3.4.5; Schabenberger & Gotway (2005) ch. 5.
 }
 \keyword{internal}
+\examples{
+morie_krigun(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8), s_predict = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

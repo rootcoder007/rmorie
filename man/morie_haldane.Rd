@@ -17,3 +17,6 @@ Part of the rqtmpl_native implementation; see the file header for the source it 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_haldane(distance = 5L)
+}

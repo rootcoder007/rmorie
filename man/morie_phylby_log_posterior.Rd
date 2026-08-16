@@ -24,3 +24,6 @@ Part of the phylby_native implementation; see the file header for the source it 
 The value of \code{.phylby_log_posterior}.
 }
 \keyword{internal}
+\examples{
+morie_phylby_log_posterior(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"))
+}

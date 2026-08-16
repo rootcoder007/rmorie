@@ -29,3 +29,6 @@ Wasserman (2004), All of Statistics, Definition 10.3 and
 equation (10.5), with Theorem 10.4 giving the asymptotic size.
 Fetched as the full text of the book.
 }
+\examples{
+Waldstat(theta_hat = c(1, 2, 3, 4, 5, 6, 7, 8), se = 5L)
+}

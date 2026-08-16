@@ -30,3 +30,6 @@ List with \code{x_t}, \code{x_chain}, \code{betas}, \code{alphas}, \code{alpha_b
 \description{
 Diffusion forward process: chain and closed form, cross-checked (hmdfw)
 }
+\examples{
+morie_geron_diffusion_forward(x0 = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
+}

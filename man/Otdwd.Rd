@@ -30,3 +30,6 @@ repeated -- Sinkhorn and Knopp (1967), Theorem 1.
 Sinkhorn, R. and Knopp, P. (1967). Pacific Journal of
 Mathematics 21(2):343-348. \doi{10.2140/pjm.1967.21.343}.
 }
+\examples{
+Otdwd(K = 5L)
+}

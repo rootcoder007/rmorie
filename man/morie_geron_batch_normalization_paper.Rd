@@ -35,3 +35,6 @@ running-statistic convention: defaults are zeros/ones, the update is
 optional (only when \code{momentum} is given), and it uses the BIASED batch
 variance rather than the unbiased one.
 }
+\examples{
+morie_geron_batch_normalization_paper(X = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5, beta = 0.5)
+}

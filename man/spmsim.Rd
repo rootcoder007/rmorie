@@ -112,3 +112,6 @@ package, mgwr/search.py, function multi_bw -- the authors' own
 implementation. Schabenberger Ch 6, Sec 6.1.3.1, pp. 316-317, for the
 single-scale GWR this generalises.
 }
+\examples{
+spmsim(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

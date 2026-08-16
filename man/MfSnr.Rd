@@ -18,3 +18,6 @@ SNR.  The matched filter maximizes the output at ONE INSTANT, which is the right
 A list with \code{snr}, \code{snr_db}, \code{amplitude_snr}, \code{my}, \code{noise_power}, \code{peak_to_mean}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MfSnr(my = 5L, noise_power = 5L)
+}

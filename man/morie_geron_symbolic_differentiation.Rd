@@ -21,3 +21,6 @@ List with \code{derivative}, \code{derivative_str}, \code{expression_str},
 Expression trees are lists like \code{list("*", "x", 3)}; sum, product,
 quotient, power and chain rules, then constant folding.
 }
+\examples{
+morie_geron_symbolic_differentiation(expression = 5L)
+}

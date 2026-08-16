@@ -21,3 +21,6 @@ Part of the qrntcq_native implementation; see the file header for the source it 
 A list with \code{relative.utility}, \code{utility.a}, \code{utility.b}, \code{efficacy.a}, \code{efficacy.b}, \code{independent.of.infected.fraction}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_qrntcq_relative_utility(t.R.a = 5L, t.R.b = 5L)
+}

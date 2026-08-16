@@ -19,3 +19,6 @@ Variance is \code{mu (1 + mu alpha)}, so \code{alpha} IS the overdispersion and 
 Numeric log-density.
 }
 \keyword{internal}
+\examples{
+morie_deepar_negative_binomial_loglik(z = 5L, mu = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+}

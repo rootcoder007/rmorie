@@ -21,3 +21,6 @@ Part of the sv_dl_native implementation; see the file header for the source it f
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+morie_sv_dl_kmer_diagonals(read = 5L, ref = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -31,3 +31,6 @@ Schrittwieser et al. (2020), Nature 588, 604-609;
 arXiv:1911.08265, Equation (2) and the paragraph after Equation (4).
 Read from the ar5iv rendering of the arXiv source.
 }
+\examples{
+Mzpuct(Q = 0.5, N = 5L, P = 0.5)
+}

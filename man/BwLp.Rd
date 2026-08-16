@@ -20,3 +20,6 @@ eq (3.137), keep the left-half-plane ones by eq (3.138), apply the bilinear tran
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+BwLp(cutoff_hz = 5L)
+}

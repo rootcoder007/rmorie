@@ -26,3 +26,6 @@ is carried out and checked: every pair covered exactly once.
 \references{
 Kirkman TP (1847); Bose RC (1939).
 }
+\examples{
+morie_steiner_triple_system(v = 5L)
+}

@@ -18,3 +18,6 @@ Validates 0 <= alpha < 1 and theta > -alpha. The range is dictated by Propositio
 A list with `alpha`, `theta`, `is_dirichlet`, `note`.
 }
 \keyword{internal}
+\examples{
+morie_pmpfit_check(alpha = 0.5, theta = 0.5)
+}

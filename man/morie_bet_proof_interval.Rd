@@ -20,3 +20,6 @@ Part of the bndpcb_native implementation; see the file header for the source it 
 A list with \code{lower}, \code{upper}, \code{width}, \code{empty}, \code{min_width}, \code{naive_width}, \code{naive_empty}, \code{widened}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_bet_proof_interval(x = 5L)
+}

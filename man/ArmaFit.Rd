@@ -20,3 +20,6 @@ nulls as well as resonances -- an all-pole model can only make peaks. Fitted in 
 A list with \code{a}, \code{b}, \code{p}, \code{q}, \code{gain}, \code{poles}, \code{zeros}, \code{stable}, \code{ar_error}, \code{two_stage}, \code{method}.
 }
 \keyword{internal}
+\examples{
+ArmaFit(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 1, q = 0.5)
+}

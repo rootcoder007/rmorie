@@ -22,3 +22,6 @@ Formula: phat(x) = 2(e^eps + 1)/(e^eps - 1) * (phat(C_x) - 1/2)
 \references{
 Acharya, Sun and Zhang (2019), Hadamard Response: Estimating Distributions Privately, Efficiently, and with Little Communication, AISTATS, PMLR 89. Equations (8), (9) and (10). Verified against the paper.
 }
+\examples{
+Ldphr(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}

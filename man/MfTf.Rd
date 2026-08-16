@@ -20,3 +20,6 @@ cancels the signal\\'s phase so every component arrives in step at t0 -- that co
 A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude}, \code{conjugate_of_signal}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MfTf(X = c(1, 2, 3, 4, 5, 6, 7, 8), freqs = c(1, 2, 3, 4, 5, 6, 7, 8), t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

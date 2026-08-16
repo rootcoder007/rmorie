@@ -26,3 +26,6 @@ where it comes from. The residual \eqn{au^2} is the part the
 van Houwelingen, H. C., Arends, L. R. and Stijnen, T.
 (2002). Statistics in Medicine 21(4):589-624. \doi{10.1002/sim.1040}.
 }
+\examples{
+Mareg(yi = c(1, 2, 3, 4, 5, 6, 7, 8), vi = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

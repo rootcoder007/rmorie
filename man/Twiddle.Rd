@@ -18,3 +18,6 @@ Part of the rangayyan_xfrm implementation; see the file header for the source it
 A list with \code{W}, \code{N}, \code{power}, \code{root_of_unity}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Twiddle(npoints = 5L)
+}

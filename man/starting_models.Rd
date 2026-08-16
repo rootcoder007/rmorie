@@ -19,3 +19,6 @@ Part of the sarimax_native implementation; see the file header for the source it
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+starting_models(d = 5L, D = 5L, s = 5L)
+}

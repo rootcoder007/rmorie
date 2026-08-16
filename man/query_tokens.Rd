@@ -20,3 +20,6 @@ Part of the blip2v_native implementation; see the file header for the source it 
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+query_tokens(n_queries = 5L, dim = 5L)
+}

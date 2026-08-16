@@ -43,3 +43,6 @@ a list with temperature, deep_temperature and imbalance.
     doi:10.1175/JCLI-D-12-00195.1
 }
 \keyword{internal}
+\examples{
+morie_ecsTCR_integrate(forcing = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+}

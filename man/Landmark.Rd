@@ -38,3 +38,6 @@ Subjects failing or censored before the landmark are dropped and the clock is re
 \references{
 Anderson, J. R., Cain, K. C. and Gelber, R. D. (1983). Analysis of survival by tumor response. Journal of Clinical Oncology 1(11), 710-719.
 }
+\examples{
+Landmark(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), landmark_time = 5L)
+}

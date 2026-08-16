@@ -35,3 +35,6 @@ Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
 reused here from survrsf.
 }
 \keyword{internal}
+\examples{
+morie_surxgb_cdf(z = 5L)
+}

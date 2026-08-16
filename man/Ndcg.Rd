@@ -29,3 +29,6 @@ perfect 1.
 Jarvelin and Kekalainen (2002), ACM TOIS 20(4), 422-446,
 \doi{10.1145/582415.582418}.
 }
+\examples{
+Ndcg(pred_rank = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

@@ -34,3 +34,6 @@ A linear encoder/decoder trained by gradient descent to reconstruct
 \code{morie_geron_denoising_autoencoder} (the grdae core); this function is
 the training loop, distinct from that core by the \verb{_train} suffix.
 }
+\examples{
+morie_geron_denoising_autoencoder_train(X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+}

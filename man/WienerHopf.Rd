@@ -18,3 +18,6 @@ error are orthogonal, and so are the output and the error -- the orthogonality p
 A list with \code{w}, \code{residual}, \code{max_residual}, \code{order}, \code{condition}, \code{orthogonality}, \code{method}.
 }
 \keyword{internal}
+\examples{
+WienerHopf(phi = 0.5, theta = 0.5)
+}

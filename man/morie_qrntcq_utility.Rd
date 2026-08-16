@@ -18,3 +18,6 @@ Part of the qrntcq_native implementation; see the file header for the source it 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_qrntcq_utility(efficacy = c(1, 2, 3, 4, 5, 6, 7, 8), days.in.quarantine = 5L)
+}

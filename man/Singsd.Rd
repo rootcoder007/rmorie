@@ -53,3 +53,6 @@ Vautard, R., Yiou, P. & Ghil, M. (1992). Singular-spectrum
 analysis: a toolkit for short, noisy chaotic signals. Physica D
 58(1-4), 95-126. \doi{10.1016/0167-2789(92)90103-T}
 }
+\examples{
+Singsd(y = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+}

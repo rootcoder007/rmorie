@@ -42,3 +42,6 @@ A list with the attention weights, the context vectors, the   logits, the scale 
     sequence models." Transactions of the ACL 8, 156-171.
 }
 \keyword{internal}
+\examples{
+morie_vit2lf(q = 0.5, k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

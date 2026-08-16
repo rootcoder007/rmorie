@@ -14,3 +14,6 @@ Table D: exact runs distribution -- Theorem 3.2.2, p. 79
 A list with \code{support}, \code{pmf}, \code{cdf}, \code{pmf_r}, \code{cdf_r}, \code{sf_r}, \code{mean}, \code{var}, \code{n1}, \code{n2}.
 }
 \keyword{internal}
+\examples{
+Runstab(n1 = 5L, n2 = 5L)
+}

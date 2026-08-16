@@ -31,3 +31,6 @@ pair order used by grhei / grgrp. \code{achieved_variance} is the
 ddof = 0 variance. The weight matrix is reshaped ROW-MAJOR into
 (fan_in, fan_out).
 }
+\examples{
+morie_geron_glorot_xavier_init(fan_in = 5L, fan_out = 5L)
+}

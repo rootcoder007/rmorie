@@ -21,3 +21,6 @@ normal PDF is an exponential and ln is monotonic: the ranking is unchanged while
 A list with \code{d}, \code{d_full}, \code{d_dropped_constant}, \code{assigned}, \code{priors}, \code{constant_term}, \code{surfaces_are_hyperquadrics}, \code{linear_when_covariances_are_equal}, \code{log_form_avoids_underflow}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BayesNorm(x = 5L, means = c(1, 2, 3, 4, 5, 6, 7, 8), covs = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

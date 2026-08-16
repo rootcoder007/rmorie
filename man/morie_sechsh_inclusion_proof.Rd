@@ -18,3 +18,6 @@ Returns \code{log2(n)} sibling hashes, top-down; the verifier folds them in reve
 List with \code{path}, \code{path_hex}, \code{length},   \code{index}, \code{size}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_sechsh_inclusion_proof(leaves = c(1, 2, 3, 4, 5, 6, 7, 8), index = 5L)
+}

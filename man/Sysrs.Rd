@@ -35,3 +35,6 @@ this batch, so the standard published form is used. The design
 standard error is the exact one computed by the sibling module
 systmp.
 }
+\examples{
+Sysrs(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L)
+}

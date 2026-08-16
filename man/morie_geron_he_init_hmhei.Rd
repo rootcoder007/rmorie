@@ -27,3 +27,6 @@ affine map (uniform); not bit-portable to numpy's PCG64. Exact anchors
 use the deterministic targets (var_target/std_target/limit/shape); the
 draw itself is checked only statistically.
 }
+\examples{
+morie_geron_he_init_hmhei(fan_in = 5L)
+}

@@ -14,3 +14,6 @@ Sign-test normal approximation -- eq. (5.4.7), p. 174
 A list with \code{z}, \code{p_value}, \code{statistic}, \code{n}, \code{mean}, \code{var}, \code{alternative}.
 }
 \keyword{internal}
+\examples{
+Signz(k = 5L, n = 5L)
+}

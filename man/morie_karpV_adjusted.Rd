@@ -17,3 +17,6 @@ Adjusted fitness
 1/(1+raw), which is what selection uses.
 }
 \keyword{internal}
+\examples{
+morie_karpV_adjusted(raw = 5L)
+}

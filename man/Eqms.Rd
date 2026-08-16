@@ -36,3 +36,6 @@ NEW form on the REFERENCE metric, the orientation implemented here.
 Marco (1977), Journal of Educational Measurement
 14(2):139-160, doi:10.1111/j.1745-3984.1977.tb00033.x.
 }
+\examples{
+Eqms(y = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

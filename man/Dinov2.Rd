@@ -50,3 +50,6 @@ features from piling up.
 Oquab et al. (2024), DINOv2, TMLR 2024; Zhou et al.
 (2022), iBOT, ICLR 2022; Sablayrolles et al. (2019), ICLR 2019.
 }
+\examples{
+Dinov2(x = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8), teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

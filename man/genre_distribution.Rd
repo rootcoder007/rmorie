@@ -19,3 +19,6 @@ Implements eqs. (2)-(3): a per-genre average of the genre memberships, weighted 
 Numeric vector \eqn{q(g)} of length G, the weighted   average.
 }
 \keyword{internal}
+\examples{
+genre_distribution(items = list(a = 1, b = 2), p_g_given_i = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

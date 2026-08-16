@@ -21,3 +21,6 @@ vocab, labels, estimate, n, method.
 L = -sum_i log P(y_i | x_i). Softmax head trained by exact-gradient
 descent on bag-of-words (string prompts) or raw numeric features.
 }
+\examples{
+morie_geron_sft(instruction_data = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

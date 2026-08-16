@@ -19,3 +19,6 @@ cross-correlation vector from data and solve for the tap weights. The biased (1/
 A list with \code{w}, \code{phi}, \code{theta}, \code{Phi}, \code{order}, \code{j_min}, \code{var_d}, \code{toeplitz}, \code{acf_biased}, \code{condition}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Whopf(x = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+}

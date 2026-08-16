@@ -20,3 +20,6 @@ so the band is an argument, not a constant.  Both the band AND the amplitude hav
 A list with \code{acf}, \code{band}, \code{lag_range}, \code{peak_lag}, \code{peak}, \code{frequency_hz}, \code{threshold}, \code{present}, \code{needs_both_the_band_and_the_amplitude}, \code{same_test_serves_other_bands}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+AlphaRhy(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+}

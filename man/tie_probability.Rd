@@ -17,3 +17,6 @@ The probability that the second draw from the urn equals the first, \code{1/(1+a
 A list with \code{tie}, \code{new}, \code{alpha}.
 }
 \keyword{internal}
+\examples{
+tie_probability(alpha = 0.5)
+}

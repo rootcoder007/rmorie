@@ -19,3 +19,6 @@ Part of the dist_native implementation; see the file header for the source it fo
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+Ppois(q = 0.5, lambda = 0.5)
+}

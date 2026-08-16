@@ -24,3 +24,6 @@ Part of the cnvlfc_native implementation; see the file header for the source it 
 The value of \code{.cnvlfc_coupled_logistic}.
 }
 \keyword{internal}
+\examples{
+cnvlfc_coupled_logistic(n = 5L)
+}
