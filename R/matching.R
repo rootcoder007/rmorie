@@ -590,7 +590,8 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
   # so their covariate moments match the treated moments. Weight scale
   # follows ebal::ebalance (control weights sum to n_control);
   # cross-validated against ebal + WeightIt in tests.
-  fit <- .morie_entropy_balance(t_mask, X, max_iter = max_iter)
+  fit <- .morie_entropy_balance(t_mask, X, max_iter = max_iter,
+                                tol = tol)
   if (!fit$converged) {
     warning("entropy balancing did not fully converge; ",
             "max moment imbalance = ",
