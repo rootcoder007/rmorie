@@ -11,14 +11,14 @@ log_evidence(docs, T, V, z, alpha = 0.5, beta = 0.5, m = NULL, n = NULL)
 \item{docs}{See Usage.}
 \item{T}{See Usage.}
 \item{V}{See Usage.}
-\item{z}{See Usage.}
+\item{z}{Passed to \code{.log_evidence}.}
 \item{alpha}{Defaults to \code{0.5}.}
 \item{beta}{Defaults to \code{0.5}.}
 \item{m}{Defaults to \code{NULL}.}
 \item{n}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the bigtm_native implementation; see the file header for the source it follows.
+A step of the bigtm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.log_evidence}.

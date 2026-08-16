@@ -8,10 +8,10 @@
 .scumap_matrix(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the scumap_native implementation; see the file header for the source it follows.
+A step of the scumap_native implementation. Called by \code{morie_scumap_fuzzy_simplicial_set}, \code{morie_scumap_umap_singlecell}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{M}, as built in the body.

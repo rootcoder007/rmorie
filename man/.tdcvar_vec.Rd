@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the tdcvar_native implementation; see the file header for the source it follows.
+A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

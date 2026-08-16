@@ -8,7 +8,7 @@
 .pq_u32(r)
 }
 \arguments{
-\item{r}{See Usage.}
+\item{r}{A vector; its length is taken.}
 }
 \description{
 so unsigned 32-bit values (byte-array lengths, the footer length, the low half of an INT64) have to be read signed and folded back up.

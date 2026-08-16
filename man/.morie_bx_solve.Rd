@@ -8,8 +8,8 @@
 .morie_bx_solve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{b}{A vector; its length is taken.}
 }
 \description{
 returning garbage on a singular system

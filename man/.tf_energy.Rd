@@ -11,7 +11,7 @@
 \item{v}{See Usage.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{AtomTfd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_fsum}.

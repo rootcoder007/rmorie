@@ -24,10 +24,11 @@
 
 #' .samdec_mat
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. Called by \code{decode_mask}, \code{two_way_block}, \code{upsample}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
 #' @export
 .samdec_mat <- function(x) {
@@ -41,10 +42,11 @@
 
 #' .samdec_vec
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. Called by \code{dynamic_mask_head}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; indexed by row and column.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .samdec_vec <- function(x) {
@@ -57,12 +59,13 @@
 
 #' .samdec_attend
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. Called by \code{two_way_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
-#' @param V See Usage.
+#' @param Q A matrix; indexed by row and column.
+#' @param K A matrix; passed to \code{nrow}.
+#' @param V A matrix; passed to \code{crossprod}.
 #' @return A list with \code{out}, \code{W}.
 #' @export
 .samdec_attend <- function(Q, K, V) {
@@ -84,11 +87,12 @@
 
 #' two_way_block
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. Called by \code{decode_mask}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param prompt_tokens See Usage.
-#' @param image_tokens See Usage.
+#' @param prompt_tokens Passed to \code{.samdec_mat}.
+#' @param image_tokens Passed to \code{.samdec_mat}.
 #' @return A list with \code{prompt_tokens}, \code{image_tokens}, \code{prompt_to_image}, \code{image_to_prompt}, \code{note}.
 #' @export
 two_way_block <- function(prompt_tokens, image_tokens) {
@@ -112,10 +116,11 @@ two_way_block <- function(prompt_tokens, image_tokens) {
 
 #' upsample
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. Called by \code{decode_mask}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param grid See Usage.
+#' @param grid Passed to \code{.samdec_mat}.
 #' @param factor Defaults to \code{2}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -151,11 +156,12 @@ upsample <- function(grid, factor = 2) {
 
 #' dynamic_mask_head
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. Called by \code{decode_mask}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param output_token See Usage.
-#' @param image_grid_vectors See Usage.
+#' @param output_token Passed to \code{.samdec_vec}.
+#' @param image_grid_vectors A matrix; passed to \code{as.matrix}.
 #' @param mlp Defaults to \code{NULL}.
 #' @return A list with \code{logits}, \code{probability}, \code{weights}, \code{note}.
 #' @export
@@ -199,7 +205,8 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
 
 #' focal_loss
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param prob See Usage.
@@ -230,7 +237,8 @@ focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
 
 #' dice_loss
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param prob See Usage.
@@ -253,12 +261,13 @@ dice_loss <- function(prob, target) {
 
 #' decode_mask
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. Called by \code{morie_samdec}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param prompt_tokens See Usage.
-#' @param image_tokens See Usage.
-#' @param grid_shape See Usage.
+#' @param prompt_tokens Passed to \code{.samdec_mat}.
+#' @param image_tokens Passed to \code{.samdec_mat}.
+#' @param grid_shape A vector; indexed elementwise.
 #' @param n_blocks Defaults to \code{2}.
 #' @param upsample_factor Defaults to \code{2}.
 #' @param output_index Defaults to \code{0}.
@@ -306,7 +315,8 @@ decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
 
 #' morie_samdec
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param prompt_tokens See Usage.
@@ -330,7 +340,8 @@ sammaskdecoder <- decode_mask
 
 #' .samdec_cheatsheet
 #'
-#' Part of the samdec_native implementation; see the file header for the
+#' A step of the samdec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

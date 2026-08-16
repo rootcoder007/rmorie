@@ -3,7 +3,7 @@
 % the formals.
 \name{.forwsr_norm_ppf}
 \alias{.forwsr_norm_ppf}
-\title{R\\\'s qnorm IS Wichura AS 241 (PPND16); the Python arm implements the}
+\title{R\\'s qnorm IS Wichura AS 241 (PPND16); the Python arm implements the}
 \usage{
 .forwsr_norm_ppf(p)
 }

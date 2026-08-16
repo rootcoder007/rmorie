@@ -10,10 +10,10 @@ negbinom_offspring(R0, dispersion, e)
 \arguments{
 \item{R0}{See Usage.}
 \item{dispersion}{See Usage.}
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.gamma_draw}.}
 }
 \description{
-Part of the ttrace_native implementation; see the file header for the source it follows.
+A step of the ttrace_native implementation. Called by \code{simulate_outbreak}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.poisson_draw}.

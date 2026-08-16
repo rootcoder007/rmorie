@@ -8,15 +8,15 @@
 morie_survroc_sensitivity(times, events, marker, threshold, t, route = "km")
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{marker}{See Usage.}
-\item{threshold}{See Usage.}
-\item{t}{See Usage.}
-\item{route}{Defaults to \code{"km"}.}
+\item{times}{Passed to \code{.survroc_pair}.}
+\item{events}{Passed to \code{.survroc_pair}.}
+\item{marker}{Passed to \code{.survroc_pair}.}
+\item{threshold}{Passed to \code{.survroc_pair}.}
+\item{t}{Passed to \code{.survroc_pair}.}
+\item{route}{Passed to \code{.survroc_pair}. Defaults to \code{"km"}.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[[}.

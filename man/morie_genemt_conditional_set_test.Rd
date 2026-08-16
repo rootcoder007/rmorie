@@ -11,10 +11,10 @@ morie_genemt_conditional_set_test(z_scores, set_a, set_b, covariates = NULL)
 \item{z_scores}{See Usage.}
 \item{set_a}{See Usage.}
 \item{set_b}{See Usage.}
-\item{covariates}{Defaults to \code{NULL}.}
+\item{covariates}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the genemt_native implementation; see the file header for the source it follows.
+A step of the genemt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta}, \code{conditional_p}, \code{attenuation}, \code{note}.

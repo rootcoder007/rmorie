@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{seq}{See Usage.}
-\item{g}{See Usage.}
+\item{g}{Passed to \code{.prsLL_first_sets}.}
 \item{first}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.prsLL_first_seq}.

@@ -8,10 +8,10 @@
 .fgam_grid_weights(n_t)
 }
 \arguments{
-\item{n_t}{See Usage.}
+\item{n_t}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the fgam_native implementation; see the file header for the source it follows.
+A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{w}, as built in the body.

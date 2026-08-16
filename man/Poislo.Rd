@@ -15,7 +15,7 @@ Poislo(Y, Yhat)
 List with \code{loss}, \code{mean_loss}, \code{n}, \code{L}.
 }
 \description{
-Formula: L(w) = sum_i sum_j \link{ yhat_ij - y_ij log(yhat_ij) }
+Formula: L(w) = sum_i sum_j [ yhat_ij - y_ij log(yhat_ij) ]
 }
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7, pp. 400-403.  Read from the chapter PDF, not recalled.  The Poisson display carries its sign correctly and is implemented exactly as printed.

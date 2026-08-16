@@ -77,10 +77,11 @@
 
 #' .vit2lf_norm
 #'
-#' Part of the vit2lf_native implementation; see the file header for the
+#' A step of the vit2lf_native implementation. Called by \code{morie_vit2lf_logits}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{.w3_dot}.
 #' @return A numeric value.
 #' @export
 .vit2lf_norm <- function(v) sqrt(.w3_dot(v, v))

@@ -8,13 +8,13 @@
 EchoLogPsd(H, a, n_0, omega)
 }
 \arguments{
-\item{H}{See Usage.}
-\item{a}{See Usage.}
+\item{H}{A vector; its length is taken.}
+\item{a}{Numeric; combined arithmetically in the body.}
 \item{n_0}{See Usage.}
 \item{omega}{See Usage.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{log_power}, \code{wavelet_log_power}, \code{echo_log_power}, \code{dc_term}, \code{ripple}, \code{modulation_index}, \code{ripple_period}, \code{decomposition_error}, \code{omega}, \code{a}, \code{n_0}, \code{method}.

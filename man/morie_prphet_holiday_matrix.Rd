@@ -8,13 +8,13 @@
 morie_prphet_holiday_matrix(t, holidays, lower = 0, upper = 0)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{holidays}{See Usage.}
-\item{lower}{Defaults to \code{0}.}
-\item{upper}{Defaults to \code{0}.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{holidays}{A vector; indexed elementwise.}
+\item{lower}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{upper}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the prphet_native implementation; see the file header for the source it follows.
+A step of the prphet_native implementation. Called by \code{morie_prphet_design}, \code{prophe_additive_components}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rows}, \code{names}.

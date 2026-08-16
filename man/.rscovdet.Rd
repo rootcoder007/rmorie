@@ -8,7 +8,7 @@
 .rscovdet(S)
 }
 \arguments{
-\item{S}{See Usage.}
+\item{S}{Passed to \code{.rsludet}.}
 }
 \description{
 .rsludet is a general determinant and may return a small negative number for a positive-semidefinite matrix that is singular to working precision. Every objective in this shelf is minimised over such determinants, so an unclamped negative rounding artefact wins the minimisation outright and the search returns whichever subset happened to round furthest below zero.  Clamping at zero makes the comparison pick the FIRST exactly-degenerate subset instead, which is both correct and identical in the two language arms.

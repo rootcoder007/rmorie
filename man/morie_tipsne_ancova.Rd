@@ -32,11 +32,11 @@ A list with beta, the residual sum of squares, the residual   degrees of freedom
 \examples{
 N <- 60L
 ii <- 0:(N - 1L)
-ARM <- ifelse(ii%%2L == 0L, 1, 0)
-COV <- cbind((ii%%5L) - 2, cos(0.7 * ii))
+ARM <- ifelse(ii\%\%2L == 0L, 1, 0)
+COV <- cbind((ii\%\%5L) - 2, cos(0.7 * ii))
 BASE <- 2 + 0.8 * COV[, 1] + 0.4 * COV[, 2] + 0.9 * ARM + 0.5 * 
     sin(3 * ii) + 0.3 * cos(7 * ii)
-MISS <- as.integer((ARM == 1 & ii%%7L == 3L) | (ARM == 0 & ii%%11L == 
+MISS <- as.integer((ARM == 1 & ii\%\%7L == 3L) | (ARM == 0 & ii\%\%11L == 
     5L))
 DES <- cbind(1, ARM, COV[, 1], COV[, 2])[MISS == 0L, , drop = FALSE]
 YO <- BASE[MISS == 0L]

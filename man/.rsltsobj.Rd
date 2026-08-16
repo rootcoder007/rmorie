@@ -8,15 +8,15 @@
 .rsltsobj(Xm, yy, th, n, p, h)
 }
 \arguments{
-\item{Xm}{See Usage.}
-\item{yy}{See Usage.}
-\item{th}{See Usage.}
-\item{n}{See Usage.}
-\item{p}{See Usage.}
-\item{h}{See Usage.}
+\item{Xm}{A matrix; indexed by row and column.}
+\item{yy}{A vector; indexed elementwise.}
+\item{th}{A vector; indexed elementwise.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
+\item{h}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the helpers_rouss implementation; see the file header for the source it follows.
+A step of the helpers_rouss implementation. Called by \code{Ltsreg}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tot}, \code{idx}, \code{sq}.

@@ -8,18 +8,18 @@
 .alfqud_mcts(inputs, targets, acts, n_reg, max_len, lw, rf, n_sim, c_puct)
 }
 \arguments{
-\item{inputs}{See Usage.}
-\item{targets}{See Usage.}
-\item{acts}{See Usage.}
-\item{n_reg}{See Usage.}
+\item{inputs}{Passed to \code{.alfqud_score}.}
+\item{targets}{Passed to \code{.alfqud_score}.}
+\item{acts}{A vector; its length is taken and its elements indexed.}
+\item{n_reg}{Passed to \code{.alfqud_score}.}
 \item{max_len}{See Usage.}
-\item{lw}{See Usage.}
-\item{rf}{See Usage.}
+\item{lw}{Passed to \code{.alfqud_score}.}
+\item{rf}{Passed to \code{.alfqud_score}.}
 \item{n_sim}{See Usage.}
-\item{c_puct}{See Usage.}
+\item{c_puct}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the alfqud_native implementation; see the file header for the source it follows.
+A step of the alfqud_native implementation. Called by \code{morie_alfqud}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{prog}, \code{s}, \code{c}, \code{seen}.

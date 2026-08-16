@@ -8,10 +8,10 @@
 .unetbk_as_matrix(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the unetbk_native implementation; see the file header for the source it follows.
+A step of the unetbk_native implementation. Called by \code{mirror_pad}, \code{separation_weight_map}, \code{skip_concat}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{as.matrix}.

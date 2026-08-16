@@ -12,10 +12,11 @@
 
 #' .mor_hot_znorm
 #'
-#' Part of the hot_native implementation; see the file header for the
+#' A step of the hot_native implementation. Called by \code{morie_hot}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seg See Usage.
+#' @param seg A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .mor_hot_znorm <- function(seg) {

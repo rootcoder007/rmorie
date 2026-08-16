@@ -38,7 +38,7 @@ A list with the nearest-neighbour distances, the Clark-Evans   index and test, t
 \keyword{internal}
 \examples{
 ii <- 0:35
-LAT <- cbind(ii%%6L, ii%/%6L)
-XATT <- sin(0.7 * ii) + 0.4 * (ii%%4L)
+LAT <- cbind(ii\%\%6L, ii\%/\%6L)
+XATT <- sin(0.7 * ii) + 0.4 * (ii\%\%4L)
 morie_lcfsdq(XATT, LAT)
 }

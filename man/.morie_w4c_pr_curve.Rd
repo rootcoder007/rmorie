@@ -8,8 +8,8 @@
 .morie_w4c_pr_curve(y_bin, s)
 }
 \arguments{
-\item{y_bin}{See Usage.}
-\item{s}{See Usage.}
+\item{y_bin}{A vector; indexed elementwise.}
+\item{s}{A vector; indexed elementwise.}
 }
 \description{
 score order, one vertex per distinct score, leading (recall=0, precision=1) point from a threshold above every score, step-function average precision.

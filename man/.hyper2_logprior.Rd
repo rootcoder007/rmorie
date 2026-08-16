@@ -8,7 +8,7 @@
 .hyper2_logprior(theta)
 }
 \arguments{
-\item{theta}{See Usage.}
+\item{theta}{Numeric; combined arithmetically in the body.}
 }
 \description{
 is proper -- an improper flat prior on a log lengthscale gives an improper posterior whenever the data cannot rule out an arbitrarily long one, and a sampler will wander off into that region without ever saying so.

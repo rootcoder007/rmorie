@@ -8,23 +8,23 @@
 .svycox_score_and_info(T, E, M, w, beta, n, p)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{E}{See Usage.}
-\item{M}{See Usage.}
-\item{w}{See Usage.}
-\item{beta}{See Usage.}
-\item{n}{See Usage.}
-\item{p}{See Usage.}
+\item{T}{Numeric; passed to \code{order}.}
+\item{E}{A vector; indexed elementwise.}
+\item{M}{A vector; indexed elementwise.}
+\item{w}{A vector; indexed elementwise.}
+\item{beta}{Numeric; combined arithmetically in the body.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the svycox_native implementation; see the file header for the source it follows.
+A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{U}, \code{I}, \code{resid}.
 }
 \references{
 ----------
-Binder, D. A. (1992) "Fitting Cox\\'s proportional hazards models from
+Binder, D. A. (1992) "Fitting Cox\'s proportional hazards models from
 survey data", *Biometrika* 79(1), 139-147,
 doi:10.1093/biomet/79.1.139. The weighted estimating equation above,
 the interpretation of :math:`\hat\beta` as a finite-population census

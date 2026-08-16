@@ -11,7 +11,7 @@
 \item{u}{See Usage.}
 }
 \description{
-Part of the fauzi_native implementation; see the file header for the source it follows.
+A step of the fauzi_native implementation. Called by \code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2}, \code{morie_fauzi_mrl_naive}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

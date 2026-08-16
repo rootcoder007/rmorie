@@ -23,7 +23,7 @@ Sobol (1993), Mathematical Modelling and Computational Experiments
 1(4), 407-414.  On the unit cube with independent inputs, f = f_0 +
 sum_i f_i(x_i) + sum_(i<j) f_ij(x_i, x_j) + ... uniquely, every summand
 integrating to zero over each of its own variables, with f_0 = E\link[fixest:f]{f},
-f_i = E\link{f | x_i} - f_0 and f_ij = E\link{f | x_i, x_j} - f_i - f_j - f_0;
+f_i = E[f | x_i] - f_0 and f_ij = E[f | x_i, x_j] - f_i - f_j - f_0;
 the component variances sum to the total.  The 1993 paper was not
 retrievable here; the decomposition and its orthogonality are quoted in
 their standard published form.  The conditional expectations are

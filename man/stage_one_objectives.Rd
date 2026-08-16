@@ -8,12 +8,12 @@
 stage_one_objectives(query_out, text_out, temperature = 0.07)
 }
 \arguments{
-\item{query_out}{See Usage.}
+\item{query_out}{A matrix; passed to \code{as.matrix}.}
 \item{text_out}{See Usage.}
 \item{temperature}{Defaults to \code{0.07}.}
 }
 \description{
-Part of the blip2v_native implementation; see the file header for the source it follows.
+A step of the blip2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{per_query_similarity}, \code{image_text_similarity}, \code{best_query}, \code{logit}, \code{note}.

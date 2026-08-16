@@ -9,8 +9,8 @@ rRD(protected, step = 10, normalize = TRUE)
 }
 \arguments{
 \item{protected}{See Usage.}
-\item{step}{Defaults to \code{10}.}
-\item{normalize}{Defaults to \code{TRUE}.}
+\item{step}{Passed to \code{.measure}. Defaults to \code{10}.}
+\item{normalize}{Passed to \code{.measure}. Defaults to \code{TRUE}.}
 }
 \description{
 group is the minority -- it does not treat the two groups symmetrically.

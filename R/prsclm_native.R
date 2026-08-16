@@ -11,10 +11,11 @@
 
 #' .prsclm_rows
 #'
-#' Part of the prsclm_native implementation; see the file header for the
+#' A step of the prsclm_native implementation. Called by \code{morie_prsclm_prs_cs_clump}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .prsclm_rows <- function(x) {
@@ -28,16 +29,17 @@
 
 #' morie_prsclm_prs_cs_clump
 #'
-#' Part of the prsclm_native implementation; see the file header for the
+#' A step of the prsclm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sumstats See Usage.
-#' @param ld_ref See Usage.
+#' @param sumstats A list; the body reads \code{$beta}, \code{$p}, \code{$position}, \code{$snp} from it.
+#' @param ld_ref Passed to \code{.prsclm_rows}.
 #' @param p_threshold Defaults to \code{NULL}.
 #' @param r2 Defaults to \code{0.1}.
 #' @param window Defaults to \code{250000}.
-#' @param genotypes Defaults to \code{NULL}.
-#' @param standardize Defaults to \code{FALSE}.
+#' @param genotypes Optional; may be \code{NULL}. Passed to \code{.prsclm_rows}.
+#' @param standardize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{n_retained}, \code{thresholds}, \code{retained}, \code{score}, \code{score_threshold}, \code{scores_by_threshold}, \code{index_variants}, \code{index_variant_names}, \code{clump_of}, \code{clump_members}, \code{clump_sizes}, \code{index_is_most_significant}, \code{n_clumps}, \code{n_variants}, \code{n_individuals}, \code{r2}, \code{window}, \code{standardized}, \code{weights}, \code{method}, \code{note}.
 #' @export
 morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
@@ -177,7 +179,8 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
 
 #' .prsclm_cheatsheet
 #'
-#' Part of the prsclm_native implementation; see the file header for the
+#' A step of the prsclm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

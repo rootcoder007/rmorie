@@ -83,12 +83,13 @@ morie_slbpdg_weights <- function(v) {
 
 #' .slbpdg_dnorm
 #'
-#' Part of the slbpdg_native implementation; see the file header for the
+#' A step of the slbpdg_native implementation. Called by \code{morie_slbpdg}, \code{morie_slbpdg_density}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param mu See Usage.
-#' @param s2 See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param s2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .slbpdg_dnorm <- function(x, mu, s2) {
@@ -120,12 +121,12 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' they are not fitted to anything, so their parameters must come from
 #' the prior and not from some neighbour.
 #'
-#' @param e See Usage.
-#' @param ys See Usage.
-#' @param m0 See Usage.
-#' @param kappa0 See Usage.
-#' @param a0 See Usage.
-#' @param b0 See Usage.
+#' @param e Passed to \code{.ghc_gamma1}.
+#' @param ys A vector; its length is taken.
+#' @param m0 Numeric; combined arithmetically in the body.
+#' @param kappa0 Numeric; combined arithmetically in the body.
+#' @param a0 Numeric; combined arithmetically in the body.
+#' @param b0 Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .slbpdg_theta <- function(e, ys, m0, kappa0, a0, b0) {
@@ -159,8 +160,8 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' by the same total -- consistency between the two sums is what
 #' matters, not their accuracy.
 #'
-#' @param e See Usage.
-#' @param weights See Usage.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param weights A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .slbpdg_categorical <- function(e, weights) {
@@ -187,8 +188,8 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' and the two part company in the last bit exactly where the comparison
 #' xi_k > u_i decides how many components to carry.
 #'
-#' @param kappa See Usage.
-#' @param k See Usage.
+#' @param kappa Numeric; combined arithmetically in the body.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .slbpdg_xi <- function(kappa, k) {
@@ -200,12 +201,13 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 # Linear interpolation, used only to integrate the density grid.
 #' Linear interpolation, used only to integrate the density grid
 #'
-#' Part of the slbpdg_native implementation; see the file header for the
+#' A step of the slbpdg_native implementation. Called by \code{morie_slbpdg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param xs See Usage.
-#' @param ys See Usage.
-#' @param x See Usage.
+#' @param xs A vector; its length is taken and its elements indexed.
+#' @param ys A vector; indexed elementwise.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .slbpdg_interp <- function(xs, ys, x) {

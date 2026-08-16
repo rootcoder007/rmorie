@@ -8,9 +8,9 @@
 VfDetect(x, fs, win = 4, conc = 0.6, crest = 4)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{win}{Defaults to \code{4}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{win}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
 \item{conc}{Defaults to \code{0.6}.}
 \item{crest}{Defaults to \code{4}.}
 }

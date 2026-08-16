@@ -11,7 +11,7 @@
 \item{net}{See Usage.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_train_vector_meta}, \code{.propinf_zero_grads}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

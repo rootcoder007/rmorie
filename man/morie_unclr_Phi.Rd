@@ -11,7 +11,7 @@ morie_unclr_Phi(z)
 \item{z}{See Usage.}
 }
 \description{
-Part of the unclr implementation; see the file header for the source it follows.
+A step of the unclr implementation. Called by \code{morie_unclr_lr_impute}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{stats::pnorm}.

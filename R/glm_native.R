@@ -41,11 +41,12 @@
 
 #' .glm_score_bernoulli
 #'
-#' Part of the glm_native implementation; see the file header for the
+#' A step of the glm_native implementation. Called by \code{morie_glr_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p0 See Usage.
-#' @param p1 See Usage.
+#' @param p0 A vector; its length is taken.
+#' @param p1 A vector; its length is taken.
 #' @return A list with \code{z}, \code{kl}.
 #' @export
 .glm_score_bernoulli <- function(p0, p1) {
@@ -66,12 +67,13 @@
 
 #' .glm_score_normal
 #'
-#' Part of the glm_native implementation; see the file header for the
+#' A step of the glm_native implementation. Called by \code{morie_glr_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p0 See Usage.
-#' @param p1 See Usage.
-#' @param sd See Usage.
+#' @param p0 Numeric; combined arithmetically in the body.
+#' @param p1 Numeric; combined arithmetically in the body.
+#' @param sd A vector; its length is taken.
 #' @return A list with \code{z}, \code{kl}.
 #' @export
 .glm_score_normal <- function(p0, p1, sd) {
@@ -87,11 +89,12 @@
 
 #' .glm_score_poisson
 #'
-#' Part of the glm_native implementation; see the file header for the
+#' A step of the glm_native implementation. Called by \code{morie_glr_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p0 See Usage.
-#' @param p1 See Usage.
+#' @param p0 A vector; its length is taken.
+#' @param p1 A vector; its length is taken.
 #' @return A list with \code{z}, \code{kl}.
 #' @export
 .glm_score_poisson <- function(p0, p1) {
@@ -111,12 +114,13 @@
 
 #' morie_glr_test
 #'
-#' Part of the glm_native implementation; see the file header for the
+#' A step of the glm_native implementation. Called by \code{glrtest}, \code{page_cusum}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param p0 See Usage.
-#' @param p1 See Usage.
+#' @param x Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param p0 A vector; its length is taken.
+#' @param p1 A vector; its length is taken.
 #' @param threshold Defaults to \code{NULL}.
 #' @param family Defaults to \code{"bernoulli"}.
 #' @param sd Defaults to \code{1}.
@@ -205,15 +209,16 @@ morie_glr_test <- function(x, p0, p1, threshold = NULL,
 
 #' page_cusum
 #'
-#' Part of the glm_native implementation; see the file header for the
+#' A step of the glm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param p0 See Usage.
-#' @param p1 See Usage.
-#' @param threshold Defaults to \code{NULL}.
-#' @param family Defaults to \code{"bernoulli"}.
-#' @param sd Defaults to \code{1}.
+#' @param x Passed to \code{morie_glr_test}.
+#' @param p0 Passed to \code{morie_glr_test}.
+#' @param p1 Passed to \code{morie_glr_test}.
+#' @param threshold Passed to \code{morie_glr_test}.
+#' @param family Passed to \code{morie_glr_test}. Defaults to \code{"bernoulli"}.
+#' @param sd Passed to \code{morie_glr_test}. Defaults to \code{1}.
 #' @return The value of \code{morie_glr_test}.
 #' @export
 page_cusum <- function(x, p0, p1, threshold = NULL,
@@ -224,15 +229,16 @@ page_cusum <- function(x, p0, p1, threshold = NULL,
 
 #' glrtest
 #'
-#' Part of the glm_native implementation; see the file header for the
+#' A step of the glm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param p0 See Usage.
-#' @param p1 See Usage.
-#' @param threshold Defaults to \code{NULL}.
-#' @param family Defaults to \code{"bernoulli"}.
-#' @param sd Defaults to \code{1}.
+#' @param x Passed to \code{morie_glr_test}.
+#' @param p0 Passed to \code{morie_glr_test}.
+#' @param p1 Passed to \code{morie_glr_test}.
+#' @param threshold Passed to \code{morie_glr_test}.
+#' @param family Passed to \code{morie_glr_test}. Defaults to \code{"bernoulli"}.
+#' @param sd Passed to \code{morie_glr_test}. Defaults to \code{1}.
 #' @return The value of \code{morie_glr_test}.
 #' @export
 glrtest <- function(x, p0, p1, threshold = NULL,
@@ -243,7 +249,8 @@ glrtest <- function(x, p0, p1, threshold = NULL,
 
 #' .glm_cheatsheet
 #'
-#' Part of the glm_native implementation; see the file header for the
+#' A step of the glm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

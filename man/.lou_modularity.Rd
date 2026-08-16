@@ -8,12 +8,12 @@
 .lou_modularity(A, z, resolution = 1)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{z}{See Usage.}
-\item{resolution}{Defaults to \code{1}.}
+\item{A}{A matrix; indexed by row and column.}
+\item{z}{A vector; indexed elementwise.}
+\item{resolution}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the comlou implementation; see the file header for the source it follows.
+A step of the comlou implementation. Called by \code{Comlou}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -9,14 +9,14 @@ particle_filter_simple(y, n_particles, init, step, loglik, seed = 0L)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{n_particles}{See Usage.}
+\item{n_particles}{A count; the body uses it as \code{rep(...)}.}
 \item{init}{See Usage.}
 \item{step}{See Usage.}
 \item{loglik}{See Usage.}
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{
-Part of the pftrep_native implementation; see the file header for the source it follows.
+A step of the pftrep_native implementation. Called by \code{replicated_pfilter}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loglik}, \code{min_ess}.

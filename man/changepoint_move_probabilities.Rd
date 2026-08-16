@@ -8,12 +8,12 @@
 changepoint_move_probabilities(lam, k_max, cap = 0.9)
 }
 \arguments{
-\item{lam}{See Usage.}
-\item{k_max}{See Usage.}
-\item{cap}{Defaults to \code{0.9}.}
+\item{lam}{Numeric; combined arithmetically in the body.}
+\item{k_max}{Numeric; combined arithmetically in the body.}
+\item{cap}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{eta}, \code{pi}, \code{b}, \code{d}, \code{c}.

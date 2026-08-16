@@ -7,9 +7,9 @@
 Ghosalbernsteinfeller(x, F = NULL, K = 30)
 }
 \arguments{
-\item{x}{Evaluation points; clipped to \link{0, 1}.}
+\item{x}{Evaluation points; clipped to [0, 1].}
 
-\item{F}{A CDF on \link{0, 1}; t^2 when NULL.}
+\item{F}{A CDF on [0, 1]; t^2 when NULL.}
 
 \item{K}{Bernstein degree, at least 1.}
 }

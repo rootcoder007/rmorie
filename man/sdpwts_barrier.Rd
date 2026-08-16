@@ -13,7 +13,7 @@ sdpwts_barrier(x, F0, Fs)
 \item{Fs}{See Usage.}
 }
 \description{
-Part of the sdpwts_native implementation; see the file header for the source it follows.
+A step of the sdpwts_native implementation. Called by \code{.sdpwts_objective}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{value}, \code{feasible}, \code{min_eigenvalue}, \code{eigenvalues}.

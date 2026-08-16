@@ -8,12 +8,12 @@
 .rw_within(theta, uni, scale)
 }
 \arguments{
-\item{theta}{See Usage.}
+\item{theta}{A vector; its length is taken and its elements indexed.}
 \item{uni}{See Usage.}
-\item{scale}{See Usage.}
+\item{scale}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_mcmc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,12 +8,12 @@
 .gentmt_treatment_density(A, H, kind = "normal")
 }
 \arguments{
-\item{A}{See Usage.}
-\item{H}{See Usage.}
+\item{A}{Passed to \code{.gentmt_vec}.}
+\item{H}{A matrix; passed to \code{as.matrix}.}
 \item{kind}{Defaults to \code{"normal"}.}
 }
 \description{
-Part of the gentmt_native implementation; see the file header for the source it follows.
+A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_ip_weights}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dens}, \code{info}.

@@ -8,15 +8,15 @@
 .alfqud_score(program, inputs, targets, n_reg, lw, rf)
 }
 \arguments{
-\item{program}{See Usage.}
-\item{inputs}{See Usage.}
-\item{targets}{See Usage.}
-\item{n_reg}{See Usage.}
+\item{program}{A vector; its length is taken.}
+\item{inputs}{Passed to \code{morie_alfqud_correctness}.}
+\item{targets}{Passed to \code{morie_alfqud_correctness}.}
+\item{n_reg}{Passed to \code{morie_alfqud_correctness}.}
 \item{lw}{See Usage.}
 \item{rf}{See Usage.}
 }
 \description{
-Part of the alfqud_native implementation; see the file header for the source it follows.
+A step of the alfqud_native implementation. Called by \code{.alfqud_bfs}, \code{.alfqud_mcts}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

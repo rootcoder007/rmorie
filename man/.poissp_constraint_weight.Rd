@@ -8,10 +8,10 @@
 .poissp_constraint_weight(m)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{A vector; its length is taken.}
 }
 \description{
-Part of the poissp_native implementation; see the file header for the source it follows.
+A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{.poissp_joint_hessian}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

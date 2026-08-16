@@ -8,10 +8,10 @@
 .linwlr_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the linwlr_native implementation; see the file header for the source it follows.
+A step of the linwlr_native implementation. Called by \code{morie_linwlr}, \code{morie_linwlr_blip}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{as.matrix}.

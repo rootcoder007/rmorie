@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{node}{See Usage.}
-\item{site}{See Usage.}
-\item{pi}{See Usage.}
+\item{site}{A vector; indexed elementwise.}
+\item{pi}{Passed to \code{.felsen_prune}.}
 }
 \description{
-Part of the felsen_native implementation; see the file header for the source it follows.
+A step of the felsen_native implementation. Called by \code{morie_felsen}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

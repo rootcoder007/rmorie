@@ -16,7 +16,7 @@ EegAdapt(x, fs, window = NULL, step = NULL, order = 4, threshold = NULL)
 \item{threshold}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+A step of the rangayyan_ccf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{d}, \code{d_fixed_reference}, \code{times}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad}, \code{window}, \code{step}, \code{order}, \code{fs}, \code{reference_restarts_at_boundaries}, \code{robust_threshold}, \code{method}.

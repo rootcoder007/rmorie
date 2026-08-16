@@ -8,7 +8,7 @@
 cv_select_lambda(X, y, lambdas, V = 5L, seed = 0L, ...)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 \item{lambdas}{See Usage.}
 \item{V}{Defaults to \code{5L}.}
@@ -16,7 +16,7 @@ cv_select_lambda(X, y, lambdas, V = 5L, seed = 0L, ...)
 \item{...}{Passed through.}
 }
 \description{
-Part of the tlhal_native implementation; see the file header for the source it follows.
+A step of the tlhal_native implementation. Called by \code{morie_tlhal}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lambda}, \code{cv_risks}, \code{note}.

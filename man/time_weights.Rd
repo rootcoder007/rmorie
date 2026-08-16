@@ -8,12 +8,12 @@
 time_weights(Y, treated, t_post)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{treated}{See Usage.}
-\item{t_post}{See Usage.}
+\item{Y}{Passed to \code{.causscd_grid}.}
+\item{treated}{Passed to \code{.causscd_grid}.}
+\item{t_post}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the causscd_native implementation; see the file header for the source it follows.
+A step of the causscd_native implementation. Called by \code{sdid}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{weights}, \code{intercept}.

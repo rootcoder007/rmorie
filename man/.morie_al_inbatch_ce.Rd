@@ -8,10 +8,10 @@
 .morie_al_inbatch_ce(S)
 }
 \arguments{
-\item{S}{See Usage.}
+\item{S}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the alammar_llm_native implementation; see the file header for the source it follows.
+A step of the alammar_llm_native implementation. Called by \code{morie_alammar_multiple_negatives_ranking}, \code{morie_alammar_openclip_contrastive}, \code{morie_alammar_simcse_dropout_aug}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

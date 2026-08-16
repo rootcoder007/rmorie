@@ -8,10 +8,10 @@
 .s4_colstd(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

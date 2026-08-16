@@ -8,8 +8,8 @@
 .morie_qrs_mavg(x, m)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{m}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{m}{Numeric; passed to \code{min}.}
 }
 \description{
 window The running sum is accumulated in the same order as the Python arm, so the rounding sequence matches term for term.

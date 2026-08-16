@@ -8,10 +8,10 @@
 .morie_bx_mean(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_kurt}, \code{.morie_bx_sd}, \code{EegBands} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -11,7 +11,7 @@ Testcond(prior_ball, log_entropy, sieve_mass, eps_bar, eps, n, Cconst)
 
 \item{log_entropy}{log N(xi eps_n, P_\{n,1\}, d), non-negative.}
 
-\item{sieve_mass}{Pi_n(P_\{n,2\}), in \link{0, 1}.}
+\item{sieve_mass}{Pi_n(P_\{n,2\}), in [0, 1].}
 
 \item{eps_bar}{ebar_n, positive.}
 

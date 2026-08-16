@@ -8,10 +8,10 @@
 smfd_bspline_one(x, k, degree, knots)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{k}{See Usage.}
-\item{degree}{See Usage.}
-\item{knots}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{k}{Numeric; combined arithmetically in the body.}
+\item{degree}{Numeric; combined arithmetically in the body.}
+\item{knots}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 (Python k-1 in 0-based). Mirrors Python .bspline(x, k, degree, knots) in smfd, including the half-open support, the special right-closed last interval, and the strict-positive denominators.

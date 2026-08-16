@@ -12,7 +12,7 @@
 \item{yy}{See Usage.}
 }
 \description{
-Part of the ghosal_native implementation; see the file header for the source it follows.
+A step of the ghosal_native implementation. Called by \code{.morie_gh_hellinger}, \code{Ghosalfrsdensity}, \code{morie_polya_tree_density} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

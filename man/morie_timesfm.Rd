@@ -10,12 +10,12 @@ morie_timesfm(history, predictor, horizon, input_patch_len, output_patch_len)
 \arguments{
 \item{history}{See Usage.}
 \item{predictor}{See Usage.}
-\item{horizon}{See Usage.}
+\item{horizon}{Passed to \code{morie_timesfm_rollout_steps}.}
 \item{input_patch_len}{See Usage.}
 \item{output_patch_len}{See Usage.}
 }
 \description{
-Part of the timesfm_native implementation; see the file header for the source it follows.
+A step of the timesfm_native implementation. Called by \code{morie_timesf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{forecast}, \code{steps}, \code{horizon}, \code{input_patch_len}, \code{output_patch_len}, \code{context_grew_to}, \code{method}.

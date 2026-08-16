@@ -8,12 +8,13 @@
 
 #' .hdb_core
 #'
-#' Part of the hdbsc_native implementation; see the file header for the
+#' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param n See Usage.
-#' @param mp See Usage.
+#' @param D A matrix; indexed by row and column.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param mp Numeric; passed to \code{min}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .hdb_core <- function(D, n, mp) {
@@ -22,12 +23,13 @@
 
 #' .hdb_mst
 #'
-#' Part of the hdbsc_native implementation; see the file header for the
+#' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param core See Usage.
-#' @param n See Usage.
+#' @param D A matrix; indexed by row and column.
+#' @param core A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{edges}, as built in the body.
 #' @export
 .hdb_mst <- function(D, core, n) {
@@ -58,11 +60,12 @@
 # single linkage (Prop. 1): 0-based node ids to mirror Python.
 #' Single linkage (Prop. 1): 0-based node ids to mirror Python
 #'
-#' Part of the hdbsc_native implementation; see the file header for the
+#' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param edges See Usage.
-#' @param n See Usage.
+#' @param edges A vector; its length is taken.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A list with \code{root}, \code{children}, \code{node_size}.
 #' @export
 .hdb_linkage <- function(edges, n) {
@@ -96,11 +99,12 @@
 
 #' .hdb_points_under
 #'
-#' Part of the hdbsc_native implementation; see the file header for the
+#' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param node See Usage.
-#' @param children See Usage.
+#' @param children A vector; indexed elementwise.
 #' @param n See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export

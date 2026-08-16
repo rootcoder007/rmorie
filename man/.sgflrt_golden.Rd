@@ -11,10 +11,10 @@
 \item{f}{See Usage.}
 \item{lo}{See Usage.}
 \item{hi}{See Usage.}
-\item{iters}{Defaults to \code{16L}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16L}.}
 }
 \description{
-Part of the sgflrt_native implementation; see the file header for the source it follows.
+A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,7 +8,7 @@
 .morie_exec_disabled()
 }
 \description{
-Part of the exec_guard implementation; see the file header for the source it follows.
+A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed}, \code{.morie_safe_readRDS}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_env_true}.

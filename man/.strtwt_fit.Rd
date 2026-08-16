@@ -8,11 +8,11 @@
 .strtwt_fit(Z, a)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{a}{See Usage.}
+\item{Z}{Passed to \code{.s03logit}.}
+\item{a}{Passed to \code{.s03logit}.}
 }
 \description{
-Part of the Strtwt implementation; see the file header for the source it follows.
+A step of the Strtwt implementation. Called by \code{Strtwt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pmin}.

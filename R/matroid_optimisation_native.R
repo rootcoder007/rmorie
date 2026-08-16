@@ -24,7 +24,7 @@
 #' Part of the matroid_optimisation_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param g See Usage.
+#' @param g A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_subsets <- function(g) {

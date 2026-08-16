@@ -10,13 +10,13 @@ morie_painn_equivariance_error(model, s, v, R, Q, tol = 1e-09)
 \arguments{
 \item{model}{See Usage.}
 \item{s}{See Usage.}
-\item{v}{See Usage.}
-\item{R}{See Usage.}
-\item{Q}{See Usage.}
+\item{v}{Passed to \code{.painn_mat}.}
+\item{R}{Passed to \code{.painn_mat}.}
+\item{Q}{Passed to \code{.painn_mat}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{
-Part of the painn_native implementation; see the file header for the source it follows.
+A step of the painn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{scalar_error}, \code{vector_error}, \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.

@@ -8,15 +8,15 @@
 .clpopt_run(T, basis, cols, rule, blocked, max_iter)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{basis}{See Usage.}
-\item{cols}{See Usage.}
-\item{rule}{See Usage.}
+\item{T}{A matrix; indexed by row and column.}
+\item{basis}{A vector; its length is taken and its elements indexed.}
+\item{cols}{A vector; indexed elementwise.}
+\item{rule}{Compared against \code{"bland"}.}
 \item{blocked}{See Usage.}
 \item{max_iter}{See Usage.}
 }
 \description{
-Part of the clpopt_native implementation; see the file header for the source it follows.
+A step of the clpopt_native implementation. Called by \code{simplex}. See the file header for the source the module follows.
 }
 \value{
 A character value.

@@ -8,8 +8,8 @@
 .normal_ll(resid, sigma2)
 }
 \arguments{
-\item{resid}{See Usage.}
-\item{sigma2}{See Usage.}
+\item{resid}{A vector; its length is taken.}
+\item{sigma2}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Internal helper mirroring _normal_ll.

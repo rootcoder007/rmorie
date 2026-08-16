@@ -8,11 +8,11 @@
 .bprMF_triples(pos, n_items)
 }
 \arguments{
-\item{pos}{See Usage.}
+\item{pos}{A vector; indexed elementwise.}
 \item{n_items}{See Usage.}
 }
 \description{
-Part of the bprMF_native implementation; see the file header for the source it follows.
+A step of the bprMF_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

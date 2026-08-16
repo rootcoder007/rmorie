@@ -8,13 +8,13 @@
 morie_spatial_emirt_theta_update_cpp(theta, a, d, votes)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{a}{See Usage.}
-\item{d}{See Usage.}
-\item{votes}{See Usage.}
+\item{theta}{Passed to \code{.Call}.}
+\item{a}{Passed to \code{.Call}.}
+\item{d}{Passed to \code{.Call}.}
+\item{votes}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_spatial_voting_em_irt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

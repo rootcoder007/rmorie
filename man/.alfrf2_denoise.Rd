@@ -10,14 +10,14 @@
 \arguments{
 \item{route}{See Usage.}
 \item{denoiser}{See Usage.}
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{nrow}.}
 \item{t}{See Usage.}
-\item{fixed}{See Usage.}
-\item{spacing}{See Usage.}
-\item{passes}{See Usage.}
+\item{fixed}{Passed to \code{morie_alfrf2_ideal}.}
+\item{spacing}{Passed to \code{morie_alfrf2_ideal}.}
+\item{passes}{Passed to \code{morie_alfrf2_ideal}.}
 }
 \description{
-Part of the alfrf2_native implementation; see the file header for the source it follows.
+A step of the alfrf2_native implementation. Called by \code{morie_alfrf2}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

@@ -8,13 +8,13 @@
 .schab_lcar_full_conditional(u, adjacency, rho, sigma2 = 1)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{adjacency}{See Usage.}
-\item{rho}{See Usage.}
+\item{u}{A matrix; passed to \code{\%*\%}.}
+\item{adjacency}{A matrix; passed to \code{as.matrix}.}
+\item{rho}{Numeric; combined arithmetically in the body.}
 \item{sigma2}{Defaults to \code{1}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{variance}, \code{n_neighbours}.

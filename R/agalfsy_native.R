@@ -15,10 +15,11 @@
 
 #' .agalfsy_coords
 #'
-#' Part of the agalfsy_native implementation; see the file header for
+#' A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_pose_search}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @param what See Usage.
 #' @return The value of \code{m}, as built in the body.
 #' @export
@@ -36,10 +37,11 @@
 
 #' .agalfsy_centroid
 #'
-#' Part of the agalfsy_native implementation; see the file header for
+#' A step of the agalfsy_native implementation. Called by \code{.agalfsy_rotate}, \code{morie_agalfsy_rl_pose_search}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param P See Usage.
+#' @param P A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
 .agalfsy_centroid <- function(P) colSums(P) / nrow(P)
@@ -52,8 +54,8 @@
 #' correspondence is fixed, and fitting it away would hide the very
 #' displacement the reward is scoring.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param B A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
 .agalfsy_rmsd <- function(A, B) {
@@ -68,12 +70,13 @@
 
 #' .agalfsy_rotate
 #'
-#' Part of the agalfsy_native implementation; see the file header for
+#' A step of the agalfsy_native implementation. Called by \code{.agalfsy_apply}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param P See Usage.
+#' @param P A matrix; indexed by row and column.
 #' @param axis See Usage.
-#' @param deg See Usage.
+#' @param deg Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .agalfsy_rotate <- function(P, axis, deg) {
@@ -97,12 +100,13 @@
 
 #' .agalfsy_translate
 #'
-#' Part of the agalfsy_native implementation; see the file header for
+#' A step of the agalfsy_native implementation. Called by \code{.agalfsy_apply}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param P See Usage.
-#' @param axis See Usage.
-#' @param step See Usage.
+#' @param P A matrix; indexed by row and column.
+#' @param axis Numeric; combined arithmetically in the body.
+#' @param step Numeric; combined arithmetically in the body.
 #' @return The value of \code{P}, as built in the body.
 #' @export
 .agalfsy_translate <- function(P, axis, step) {
@@ -118,8 +122,8 @@
 #' 0-based here to match the Python arm\'s action numbering, which is a
 #' REPORTED quantity (it appears in the trajectory).
 #'
-#' @param P See Usage.
-#' @param a See Usage.
+#' @param P Passed to \code{.agalfsy_translate}.
+#' @param a Numeric; combined arithmetically in the body.
 #' @return The value of \code{.agalfsy_rotate}.
 #' @export
 .agalfsy_apply <- function(P, a) {
@@ -134,12 +138,13 @@
 
 #' .agalfsy_reward
 #'
-#' Part of the agalfsy_native implementation; see the file header for
+#' A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_pose_search}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param site See Usage.
-#' @param before See Usage.
-#' @param after See Usage.
+#' @param site Passed to \code{.agalfsy_rmsd}.
+#' @param before Passed to \code{.agalfsy_rmsd}.
+#' @param after Passed to \code{.agalfsy_rmsd}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .agalfsy_reward <- function(site, before, after) {
@@ -150,19 +155,20 @@
 
 #' morie_agalfsy_rl_pose_search
 #'
-#' Part of the agalfsy_native implementation; see the file header for
+#' A step of the agalfsy_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param receptor See Usage.
-#' @param ligand See Usage.
-#' @param site Defaults to \code{NULL}.
+#' @param receptor Passed to \code{.agalfsy_coords}.
+#' @param ligand Passed to \code{.agalfsy_coords}.
+#' @param site Optional; may be \code{NULL}. Passed to \code{.agalfsy_coords}.
 #' @param policy Defaults to \code{NULL}.
 #' @param critic Defaults to \code{NULL}.
 #' @param max_steps Defaults to \code{600L}.
 #' @param min_steps Defaults to \code{300L}.
 #' @param window Defaults to \code{50L}.
 #' @param tol Defaults to \code{0.3}.
-#' @param box Defaults to \code{18}.
+#' @param box Numeric; combined arithmetically in the body. Defaults to \code{18}.
 #' @param seed Defaults to \code{2}.
 #' @return A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start}, \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason}, \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions}, \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method}, \code{note}.
 #' @export
@@ -277,7 +283,8 @@ morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
 
 #' .agalfsy_cheatsheet
 #'
-#' Part of the agalfsy_native implementation; see the file header for
+#' A step of the agalfsy_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

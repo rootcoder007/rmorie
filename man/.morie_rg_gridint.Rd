@@ -8,8 +8,8 @@
 .morie_rg_gridint(y, x = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{x}{Defaults to \code{NULL}.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{x}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{
 O(h^4)); trapezoid otherwise, which is what a non-uniform grid admits without interpolating.

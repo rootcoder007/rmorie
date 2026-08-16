@@ -11,7 +11,7 @@
 \item{txt}{See Usage.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_json}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

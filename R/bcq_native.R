@@ -12,19 +12,20 @@
 
 #' bcq
 #'
-#' Part of the bcq_native implementation; see the file header for the
+#' A step of the bcq_native implementation. Called by \code{morie_bcq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param dataset See Usage.
 #' @param states Defaults to \code{NULL}.
 #' @param actions Defaults to \code{NULL}.
 #' @param tau Defaults to \code{0.3}.
-#' @param gamma Defaults to \code{0.99}.
-#' @param lr Defaults to \code{0.5}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
+#' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param iters Defaults to \code{2000}.
-#' @param loss Defaults to \code{"huber"}.
-#' @param huber_c Defaults to \code{1}.
-#' @param behavior Defaults to \code{NULL}.
+#' @param loss One of \code{"huber"}, \code{"squared"}. Defaults to \code{"huber"}.
+#' @param huber_c Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param behavior Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{allowed}, \code{behavior}, \code{value}, \code{n_eliminated}, \code{bellman_error}, \code{tau}, \code{gamma}, \code{n_transitions}, \code{method}.
 #' @export
@@ -213,7 +214,8 @@ batch_constrained_q <- bcq
 
 #' morie_bcq
 #'
-#' Part of the bcq_native implementation; see the file header for the
+#' A step of the bcq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.

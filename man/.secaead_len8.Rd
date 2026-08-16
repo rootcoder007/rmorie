@@ -11,7 +11,7 @@
 \item{n}{See Usage.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{.secaead_mac_data}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

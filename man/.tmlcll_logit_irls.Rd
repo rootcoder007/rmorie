@@ -8,11 +8,11 @@
 .tmlcll_logit_irls(des, a)
 }
 \arguments{
-\item{des}{See Usage.}
-\item{a}{See Usage.}
+\item{des}{A matrix; passed to \code{nrow}.}
+\item{a}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{b}, as built in the body.

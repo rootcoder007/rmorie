@@ -9,7 +9,7 @@ SmPgram(y, span = 3L)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{span}{Defaults to \code{3L}.}
+\item{span}{Numeric; combined arithmetically in the body. Defaults to \code{3L}.}
 }
 \description{
 in Schabenberger & Gotway: "Daniell" and "smoothed periodogram" are absent from the book, whose Sec. 4.7.2 fits a parametric spectral density instead.  See Bloomfield (2000), Fourier Analysis of Time Series, 2nd edn, Ch. 8.  The window is CIRCULAR; a truncating window would bias both ends.

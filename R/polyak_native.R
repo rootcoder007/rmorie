@@ -60,7 +60,8 @@
 
 #' morie_polyak
 #'
-#' Part of the polyak_native implementation; see the file header for the
+#' A step of the polyak_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param iterates See Usage.
@@ -97,7 +98,8 @@ morie_polyak <- function(iterates, burn_in = 0) {
 
 #' .polyak_running_average
 #'
-#' Part of the polyak_native implementation; see the file header for the
+#' A step of the polyak_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param prev See Usage.
@@ -124,7 +126,8 @@ morie_polyak <- function(iterates, burn_in = 0) {
 
 #' .polyak_soft_update
 #'
-#' Part of the polyak_native implementation; see the file header for the
+#' A step of the polyak_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param target See Usage.
@@ -151,7 +154,8 @@ morie_polyak <- function(iterates, burn_in = 0) {
 
 #' Step %% C == 0 : a copy is taken at multiples of C
 #'
-#' Part of the polyak_native implementation; see the file header for the
+#' A step of the polyak_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param target See Usage.
@@ -177,7 +181,8 @@ morie_polyak <- function(iterates, burn_in = 0) {
 
 #' .polyak_lag_halflife
 #'
-#' Part of the polyak_native implementation; see the file header for the
+#' A step of the polyak_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tau See Usage.
@@ -199,7 +204,8 @@ morie_polyak <- function(iterates, burn_in = 0) {
 
 #' .polyak_cheatsheet
 #'
-#' Part of the polyak_native implementation; see the file header for the
+#' A step of the polyak_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

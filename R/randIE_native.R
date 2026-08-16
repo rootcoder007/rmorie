@@ -12,7 +12,8 @@
 
 #' .labels
 #'
-#' Part of the randIE_native implementation; see the file header for the
+#' A step of the randIE_native implementation. Called by \code{morie_randIE_interventional_mean}, \code{morie_randIE_mediator_distribution}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -27,13 +28,14 @@
 
 #' morie_randIE_mediator_distribution
 #'
-#' Part of the randIE_native implementation; see the file header for the
+#' A step of the randIE_native implementation. Called by \code{morie_randIE_interventional_mean}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param M See Usage.
-#' @param C Defaults to \code{NULL}.
-#' @param laplace Defaults to \code{0}.
+#' @param A Passed to \code{.labels}.
+#' @param M Passed to \code{.labels}.
+#' @param C Optional; may be \code{NULL}. Passed to \code{.labels}.
+#' @param laplace Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{p}, \code{levels}, \code{strata}, \code{arms}, \code{n}.
 #' @export
 morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
@@ -74,17 +76,18 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
 
 #' morie_randIE_interventional_mean
 #'
-#' Part of the randIE_native implementation; see the file header for the
+#' A step of the randIE_native implementation. Called by \code{morie_randIE_randomized_interventional_effect}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Y See Usage.
-#' @param A See Usage.
-#' @param M See Usage.
-#' @param C Defaults to \code{NULL}.
+#' @param A Passed to \code{.labels}.
+#' @param M Passed to \code{.labels}.
+#' @param C Optional; may be \code{NULL}. Passed to \code{.labels}.
 #' @param a Defaults to \code{"1"}.
 #' @param a.star Defaults to \code{"0"}.
-#' @param route Defaults to \code{"gformula"}.
-#' @param laplace Defaults to \code{0}.
+#' @param route Compared against \code{"weighting"}. Defaults to \code{"gformula"}.
+#' @param laplace Passed to \code{morie_randIE_mediator_distribution}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{a}, \code{a.star}, \code{route}, \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
 #' @export
 morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
@@ -173,17 +176,18 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
 
 #' morie_randIE_randomized_interventional_effect
 #'
-#' Part of the randIE_native implementation; see the file header for the
+#' A step of the randIE_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param M See Usage.
-#' @param C Defaults to \code{NULL}.
+#' @param Y Passed to \code{morie_randIE_interventional_mean}.
+#' @param A Passed to \code{morie_randIE_interventional_mean}.
+#' @param M Passed to \code{morie_randIE_interventional_mean}.
+#' @param C Passed to \code{morie_randIE_interventional_mean}.
 #' @param treated Defaults to \code{"1"}.
 #' @param control Defaults to \code{"0"}.
-#' @param route Defaults to \code{"gformula"}.
-#' @param laplace Defaults to \code{0}.
+#' @param route Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{"gformula"}.
+#' @param laplace Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{total}, \code{direct}, \code{indirect}, \code{direct.control.arm}, \code{psi}, \code{route}, \code{treated}, \code{control}, \code{identity}, \code{method}.
 #' @export
 morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
@@ -210,10 +214,11 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
 
 #' morie_randIE_decompose
 #'
-#' Part of the randIE_native implementation; see the file header for the
+#' A step of the randIE_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param result See Usage.
+#' @param result A list; the body reads \code{$direct}, \code{$indirect}, \code{$total} from it.
 #' @return A list with \code{total}, \code{direct}, \code{indirect}, \code{residual}, \code{proportion.mediated}.
 #' @export
 morie_randIE_decompose <- function(result) {

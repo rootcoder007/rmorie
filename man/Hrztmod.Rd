@@ -16,7 +16,7 @@ column carries the scale normalisation.}
 
 \item{y}{Numeric vector, the response.}
 
-\item{ny}{Integer, grid points on \link{y2, y1}; forced odd so that y0 is
+\item{ny}{Integer, grid points on [y2, y1]; forced odd so that y0 is
 a grid point.}
 
 \item{nz}{Integer, quadrature points on the weight support S_w.}
@@ -36,7 +36,7 @@ U independent of X with unknown CDF F.
 }
 \details{
 With Z = X'beta and G(. | z) the CDF of Y given Z = z, the model
-implies G(y | z) = F\link{T(y) - z}, hence G_y = T' F' and G_z = -F', so
+implies G(y | z) = F[T(y) - z], hence G_y = T' F' and G_z = -F', so
 T'(y) = -G_y(y | z) / G_z(y | z) and
 
 T(y) = - int_{y0}^{y} G_y(v|z) / G_z(v|z) dv               (6.57)
@@ -62,7 +62,7 @@ converges more slowly than n^(-1/2); integrating over z and v
 creates the averaging effect that restores the n^(-1/2) rate.  That
 is why the estimator is based on (6.59) and not on (6.57).
 
-T is estimated only on a compact interval \link{y2, y1} strictly inside
+T is estimated only on a compact interval [y2, y1] strictly inside
 the support of Y (p. 219): T may be unbounded at the boundary and
 G_z is likely to vanish there.  The default takes the 10th to 90th
 percentiles, and y0 is the central grid point, so Tn(y0) = 0 holds

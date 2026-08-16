@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.sgflrt_corr}, \code{Vbnpc}, \code{Vinfer}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lgamma}.

@@ -28,10 +28,10 @@
 #'
 #' Mirrors Python knot_sequence(xmin, xmax, nseg, degree) in smfd.
 #'
-#' @param xmin See Usage.
-#' @param xmax See Usage.
-#' @param nseg Defaults to \code{10L}.
-#' @param degree Defaults to \code{3L}.
+#' @param xmin Numeric; combined arithmetically in the body.
+#' @param xmax Numeric; combined arithmetically in the body.
+#' @param nseg Numeric; combined arithmetically in the body. Defaults to \code{10L}.
+#' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3L}.
 #' @return A numeric value.
 #' @export
 smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
@@ -54,10 +54,10 @@ smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
 #' in smfd, including the half-open support, the special right-closed
 #' last interval, and the strict-positive denominators.
 #'
-#' @param x See Usage.
-#' @param k See Usage.
-#' @param degree See Usage.
-#' @param knots See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param k Numeric; combined arithmetically in the body.
+#' @param degree Numeric; combined arithmetically in the body.
+#' @param knots A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 smfd_bspline_one <- function(x, k, degree, knots) {
@@ -85,9 +85,9 @@ smfd_bspline_one <- function(x, k, degree, knots) {
 #'
 #' bspline_basis(x, knots, degree) in smfd.
 #'
-#' @param x See Usage.
-#' @param knots See Usage.
-#' @param degree Defaults to \code{3L}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param knots A vector; its length is taken.
+#' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3L}.
 #' @return The value of \code{B}, as built in the body.
 #' @export
 smfd_bspline_basis <- function(x, knots, degree = 3L) {
@@ -112,8 +112,8 @@ smfd_bspline_basis <- function(x, knots, degree = 3L) {
 #' first differences starting from the identity. Mirrors Python
 #' difference_matrix(p, order) in smfd.
 #'
-#' @param p See Usage.
-#' @param order Defaults to \code{2L}.
+#' @param p A matrix; passed to \code{diag}.
+#' @param order A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.
 #' @return The value of \code{D}, as built in the body.
 #' @export
 smfd_difference_matrix <- function(p, order = 2L) {

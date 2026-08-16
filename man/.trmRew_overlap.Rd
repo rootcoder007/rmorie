@@ -3,14 +3,14 @@
 % the formals.
 \name{.trmRew_overlap}
 \alias{.trmRew_overlap}
-\title{Superpose rb\\\'s left-hand side on ra\\\'s, at every non-variable}
+\title{Superpose rb\\'s left-hand side on ra\\'s, at every non-variable}
 \usage{
 .trmRew_overlap(ra, rb, same)
 }
 \arguments{
-\item{ra}{See Usage.}
-\item{rb}{See Usage.}
-\item{same}{See Usage.}
+\item{ra}{A vector; indexed elementwise.}
+\item{rb}{A vector; indexed elementwise.}
+\item{same}{A flag; the body branches on it.}
 }
 \description{
 position, and rewrite the overlap both ways.
@@ -26,7 +26,7 @@ Abstract Algebra, Pergamon Press, 263-297,
 doi:10.1016/B978-0-08-012975-4.50028-X.
 
 Newman, M. H. A. (1942) "On theories with a combinatorial definition
-of \\'equivalence\\'", Annals of Mathematics 43(2), 223-243,
+of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
 doi:10.2307/1968867.
 
 Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,

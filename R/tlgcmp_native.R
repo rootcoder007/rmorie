@@ -27,7 +27,8 @@
 
 #' morie_tlgcmp
 #'
-#' Part of the tlgcmp_native implementation; see the file header for the
+#' A step of the tlgcmp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param strata Defaults to \code{NULL}.
@@ -43,7 +44,7 @@
 #' @param a_star Defaults to \code{NULL}.
 #' @param g Defaults to \code{NULL}.
 #' @param delta Defaults to \code{0.01}.
-#' @param mode Defaults to \code{c("point", "sequential", "counterfactual", "positivity")}.
+#' @param mode One of \code{"counterfactual"}, \code{"positivity"}, \code{"sequential"}.
 #' @return The value of \code{g_computation}.
 #' @export
 morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
@@ -67,7 +68,8 @@ morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
 
 #' positivity_check
 #'
-#' Part of the tlgcmp_native implementation; see the file header for the
+#' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param g See Usage.
@@ -88,7 +90,8 @@ positivity_check <- function(g, delta = 0.01) {
 
 #' g_computation
 #'
-#' Part of the tlgcmp_native implementation; see the file header for the
+#' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param strata See Usage.
@@ -108,12 +111,13 @@ g_computation <- function(strata, outcome_means, covariate_probs) {
 
 #' sequential_g_formula
 #'
-#' Part of the tlgcmp_native implementation; see the file header for the
+#' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q_functions See Usage.
-#' @param L_supports See Usage.
-#' @param L_probs See Usage.
+#' @param Q_functions A vector; indexed elementwise.
+#' @param L_supports A vector; its length is taken and its elements indexed.
+#' @param L_probs A vector; its length is taken and its elements indexed.
 #' @param rule See Usage.
 #' @return A list with \code{estimate}, \code{psi}, \code{horizon}, \code{method}, \code{note}, \code{assumptions}.
 #' @export
@@ -149,14 +153,15 @@ sequential_g_formula <- function(Q_functions, L_supports, L_probs,
 
 #' counterfactual_mean
 #'
-#' Part of the tlgcmp_native implementation; see the file header for the
+#' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Y See Usage.
 #' @param A See Usage.
 #' @param L See Usage.
 #' @param a_star See Usage.
-#' @param strata_probs Defaults to \code{NULL}.
+#' @param strata_probs Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
@@ -185,7 +190,8 @@ counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
 
 #' .tlgcmp_cheatsheet
 #'
-#' Part of the tlgcmp_native implementation; see the file header for the
+#' A step of the tlgcmp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

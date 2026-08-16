@@ -17,10 +17,11 @@
 
 #' morie_exp3
 #'
-#' Part of the exp3_native implementation; see the file header for the
+#' A step of the exp3_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; indexed by row and column.
 #' @param gamma_ See Usage.
 #' @param T Defaults to \code{NULL}.
 #' @param seed Defaults to \code{0}.
@@ -71,7 +72,8 @@ exp3 <- morie_exp3
 
 #' .exp3_cheatsheet
 #'
-#' Part of the exp3_native implementation; see the file header for the
+#' A step of the exp3_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

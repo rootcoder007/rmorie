@@ -9,7 +9,7 @@ LinDisc(x, weights, w0 = NULL)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{weights}{See Usage.}
+\item{weights}{A matrix; passed to \code{as.matrix}.}
 \item{w0}{Defaults to \code{NULL}.}
 }
 \description{

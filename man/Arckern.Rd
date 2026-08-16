@@ -17,7 +17,7 @@ Arckern(X, Z = NULL, depth = 1L)
 List with \code{K}, \code{depth}, \code{n}, \code{m}.
 }
 \description{
-Formula: K(x_i, x_j) = (1/pi) * ||x_i|| * ||x_j|| * \link{sin(theta) + (pi - theta) cos(theta)},  theta = angle(x_i, x_j)
+Formula: K(x_i, x_j) = (1/pi) * ||x_i|| * ||x_j|| * [sin(theta) + (pi - theta) cos(theta)],  theta = angle(x_i, x_j)
 }
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8, Sect. 8.2.2, the arc-cosine kernel named on p. 252 and developed later in the chapter; the implementation delegates to the chapter-8 arc-cosine kernel already verified against the book for this shelf.  Read from the chapter PDF, not recalled.

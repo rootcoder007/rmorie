@@ -8,11 +8,11 @@
 .alternating_masks(d, n_layers)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{n_layers}{See Usage.}
+\item{d}{A count; the body uses it as \code{seq_len(...)}.}
+\item{n_layers}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

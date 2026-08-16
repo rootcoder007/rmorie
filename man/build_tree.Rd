@@ -3,24 +3,24 @@
 % the formals.
 \name{build_tree}
 \alias{build_tree}
-\title{The recursion of Algorithm 3, returning the paper\\'s nine values:}
+\title{The recursion of Algorithm 3, returning the paper\'s nine values:}
 \usage{
 build_tree(theta, r, logu, v, j, eps, logp, grad, rnd, joint0)
 }
 \arguments{
 \item{theta}{See Usage.}
 \item{r}{See Usage.}
-\item{logu}{See Usage.}
-\item{v}{See Usage.}
-\item{j}{See Usage.}
-\item{eps}{See Usage.}
-\item{logp}{See Usage.}
+\item{logu}{Numeric; combined arithmetically in the body.}
+\item{v}{Numeric; combined arithmetically in the body.}
+\item{j}{Numeric; combined arithmetically in the body.}
+\item{eps}{Numeric; combined arithmetically in the body.}
+\item{logp}{Passed to \code{.joint}.}
 \item{grad}{See Usage.}
 \item{rnd}{See Usage.}
-\item{joint0}{See Usage.}
+\item{joint0}{Numeric; combined arithmetically in the body.}
 }
 \description{
-the new trajectory ends (theta_minus, r_minus, theta_plus, r_plus), the candidate sample t_p, and the tree\\'s bookkeeping (count, indicator, summed alpha, alpha normaliser).
+the new trajectory ends (theta_minus, r_minus, theta_plus, r_plus), the candidate sample t_p, and the tree\'s bookkeeping (count, indicator, summed alpha, alpha normaliser).
 }
 \value{
 A list, whose contents depend on the branch taken; across the branches its names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s}, \code{alpha}, \code{na}.

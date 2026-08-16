@@ -15,7 +15,7 @@ morie_clpopt(c, A_ub = NULL, b_ub = NULL, A_eq = NULL, b_eq = NULL, upper = NULL
 \item{b_eq}{Defaults to \code{NULL}.}
 \item{upper}{Defaults to \code{NULL}.}
 \item{rule}{Defaults to \code{"bland"}.}
-\item{maximise}{Defaults to \code{FALSE}.}
+\item{maximise}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{max_iter}{Defaults to \code{10000}.}
 }
 \description{

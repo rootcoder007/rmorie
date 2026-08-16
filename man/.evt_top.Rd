@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{k}{See Usage.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the evt_native implementation; see the file header for the source it follows.
+A step of the evt_native implementation. Called by \code{morie_evt_dedh}, \code{morie_evt_hill}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

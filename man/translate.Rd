@@ -9,10 +9,10 @@ translate(seq, to_stop = FALSE)
 }
 \arguments{
 \item{seq}{See Usage.}
-\item{to_stop}{Defaults to \code{FALSE}.}
+\item{to_stop}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the snpeff_native implementation; see the file header for the source it follows.
+A step of the snpeff_native implementation. Called by \code{.vepan_coding_terms}, \code{annotate_variant}, \code{snpeff}. See the file header for the source the module follows.
 }
 \value{
 A character value.

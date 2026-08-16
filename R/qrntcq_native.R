@@ -14,7 +14,8 @@
 
 #' morie_qrntcq_gamma_generation_time
 #'
-#' Part of the qrntcq_native implementation; see the file header for the
+#' A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration}, \code{morie_qrntcq_quarantine_efficacy} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param shape Defaults to \code{2.83}.
@@ -47,13 +48,14 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 
 #' .mass
 #'
-#' Part of the qrntcq_native implementation; see the file header for the
+#' A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_quarantine_efficacy}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ts See Usage.
-#' @param ys See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param ts A vector; its length is taken and its elements indexed.
+#' @param ys A vector; indexed elementwise.
+#' @param lo Numeric; passed to \code{max}.
+#' @param hi Numeric; passed to \code{min}.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 .mass <- function(ts, ys, lo, hi) {
@@ -74,7 +76,8 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 
 #' morie_qrntcq_quarantine_efficacy
 #'
-#' Part of the qrntcq_native implementation; see the file header for the
+#' A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration}, \code{morie_qrntcq_relative_utility}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t.Q See Usage.
@@ -108,12 +111,13 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 
 #' morie_qrntcq_efficacy_test_and_release
 #'
-#' Part of the qrntcq_native implementation; see the file header for the
+#' A step of the qrntcq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t.Q See Usage.
+#' @param t.Q Passed to \code{morie_qrntcq_quarantine_efficacy}.
 #' @param t.T See Usage.
-#' @param t.R See Usage.
+#' @param t.R Passed to \code{morie_qrntcq_quarantine_efficacy}.
 #' @param false.negative See Usage.
 #' @param generation.time Defaults to \code{NULL}.
 #' @param t.R.positive Defaults to \code{NULL}.
@@ -145,7 +149,8 @@ morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
 
 #' morie_qrntcq_utility
 #'
-#' Part of the qrntcq_native implementation; see the file header for the
+#' A step of the qrntcq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param efficacy See Usage.
@@ -160,12 +165,13 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 
 #' morie_qrntcq_relative_utility
 #'
-#' Part of the qrntcq_native implementation; see the file header for the
+#' A step of the qrntcq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t.R.a See Usage.
-#' @param t.R.b See Usage.
-#' @param t.Q Defaults to \code{3}.
+#' @param t.R.a Numeric; combined arithmetically in the body.
+#' @param t.R.b Numeric; combined arithmetically in the body.
+#' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param generation.time Defaults to \code{NULL}.
 #' @param infected.fraction Defaults to \code{NULL}.
 #' @return A list with \code{relative.utility}, \code{utility.a}, \code{utility.b}, \code{efficacy.a}, \code{efficacy.b}, \code{independent.of.infected.fraction}, \code{note}.
@@ -189,13 +195,14 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
 
 #' morie_qrntcq_optimal_duration
 #'
-#' Part of the qrntcq_native implementation; see the file header for the
+#' A step of the qrntcq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t.Q Defaults to \code{3}.
+#' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param generation.time Defaults to \code{NULL}.
-#' @param t.max Defaults to \code{20}.
-#' @param step Defaults to \code{0.25}.
+#' @param t.max Numeric; combined arithmetically in the body. Defaults to \code{20}.
+#' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.25}.
 #' @return A list with \code{estimate}, \code{optimal.t.R}, \code{efficacy.at.optimum}, \code{utility.at.optimum}, \code{curve}, \code{t.Q}, \code{method}.
 #' @export
 morie_qrntcq_optimal_duration <- function(t.Q = 3, generation.time = NULL,

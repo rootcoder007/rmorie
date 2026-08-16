@@ -96,8 +96,8 @@ Matern <- function(lambda_p, mu, r, t = NULL) {
 #' (1960) V_n(A, A; v) of eq. (3.4.4) p. 38, at n = 2.  Shared with
 #' Hcoreg.
 #'
-#' @param r See Usage.
-#' @param v See Usage.
+#' @param r Numeric; combined arithmetically in the body.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s03lens <- function(r, v) {
@@ -111,11 +111,12 @@ Matern <- function(lambda_p, mu, r, t = NULL) {
 # Integral of gamma over the disc of radius t; 1 for t >= 2r.
 #' Integral of gamma over the disc of radius t; 1 for t >= 2r
 #'
-#' Part of the matern implementation; see the file header for the source
+#' A step of the matern implementation. Called by \code{Matern}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param t See Usage.
-#' @param r See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s03lensH <- function(t, r) {

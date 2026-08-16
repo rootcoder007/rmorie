@@ -8,10 +8,10 @@
 .masrcn_mat(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the masrcn_native implementation; see the file header for the source it follows.
+A step of the masrcn_native implementation. Called by \code{mask_loss}, \code{roi_align}, \code{roi_pool}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,10 +8,10 @@
 .prsLL_ll1_table(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$rules} from it.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}, \code{.prsLL_parse}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{table}, \code{conflicts}, \code{first}, \code{follow}.

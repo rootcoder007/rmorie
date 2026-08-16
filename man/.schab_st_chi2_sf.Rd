@@ -8,7 +8,7 @@
 .schab_st_chi2_sf(x, df)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{log}.}
 \item{df}{See Usage.}
 }
 \description{

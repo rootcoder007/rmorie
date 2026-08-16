@@ -8,10 +8,10 @@
 .dqnv_replay_buffer_len(buf)
 }
 \arguments{
-\item{buf}{See Usage.}
+\item{buf}{A list; the body reads \code{$data} from it.}
 }
 \description{
-Part of the dqnv_native implementation; see the file header for the source it follows.
+A step of the dqnv_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{length}.

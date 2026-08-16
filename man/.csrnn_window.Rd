@@ -8,11 +8,11 @@
 .csrnn_window(window, P)
 }
 \arguments{
-\item{window}{See Usage.}
-\item{P}{See Usage.}
+\item{window}{Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.}
+\item{P}{A matrix; passed to \code{ncol}.}
 }
 \description{
-Part of the csrnn implementation; see the file header for the source it follows.
+A step of the csrnn implementation. Called by \code{morie_csr_nn_test}, \code{morie_ripley_csr_test}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{bounds}, as built in the body.

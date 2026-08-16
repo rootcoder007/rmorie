@@ -26,14 +26,15 @@
 
 #' .mor_rdk_subgraphs
 #'
-#' Part of the rdkfp_native implementation; see the file header for the
+#' A step of the rdkfp_native implementation. Called by \code{morie_rdkfp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param bd See Usage.
+#' @param a A count; the body uses it as \code{seq_len(...)}.
+#' @param bd A list; the body reads \code{$i}, \code{$j} from it.
 #' @param minpath See Usage.
-#' @param maxpath See Usage.
-#' @param branched See Usage.
+#' @param maxpath A count; the body uses it as \code{seq_len(...)}.
+#' @param branched A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .mor_rdk_subgraphs <- function(a, bd, minpath, maxpath, branched) {

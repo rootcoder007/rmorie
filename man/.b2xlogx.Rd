@@ -8,11 +8,11 @@
 .b2xlogx(p, base = 2)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{base}{Defaults to \code{2}.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{base}{Passed to \code{.b2logb}. Defaults to \code{2}.}
 }
 \description{
-Part of the b2info implementation; see the file header for the source it follows.
+A step of the b2info implementation. Called by \code{.b2ent}, \code{Difent}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

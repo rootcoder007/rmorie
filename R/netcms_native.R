@@ -9,26 +9,28 @@
 
 #' .netcms_soft
 #'
-#' Part of the netcms_native implementation; see the file header for the
+#' A step of the netcms_native implementation. Called by \code{.netcms_lasso}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param t See Usage.
+#' @param x Numeric; passed to \code{abs}.
+#' @param t Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .netcms_soft <- function(x, t) sign(x) * pmax(abs(x) - t, 0)
 
 #' .netcms_lasso
 #'
-#' Part of the netcms_native implementation; see the file header for the
+#' A step of the netcms_native implementation. Called by \code{morie_netcms}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param V See Usage.
-#' @param s12 See Usage.
-#' @param lam See Usage.
-#' @param beta See Usage.
+#' @param V A matrix; indexed by row and column.
+#' @param s12 A vector; its length is taken and its elements indexed.
+#' @param lam Passed to \code{.netcms_soft}.
+#' @param beta A vector; indexed elementwise.
 #' @param tol See Usage.
-#' @param maxit See Usage.
+#' @param maxit A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .netcms_lasso <- function(V, s12, lam, beta, tol, maxit) {

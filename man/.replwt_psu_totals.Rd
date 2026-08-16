@@ -8,11 +8,11 @@
 .replwt_psu_totals(d, values)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{values}{See Usage.}
+\item{d}{A list; the body reads \code{$psu_order}, \code{$psu_units}, \code{$weights} from it.}
+\item{values}{A vector; indexed elementwise.}
 }
 \description{
-Part of the replwt_native implementation; see the file header for the source it follows.
+A step of the replwt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.
@@ -22,7 +22,7 @@ The value of \code{out}, as built in the body.
 Wolter, K. M. (2007) Introduction to Variance Estimation, 2nd
 edition, Springer, ISBN 978-0-387-32917-8,
 doi:10.1007/978-0-387-35099-8. Ch. 2 (random groups), Ch. 3
-(balanced half-samples, the Hadamard construction, Fay\\'s
+(balanced half-samples, the Hadamard construction, Fay\'s
 modification), Ch. 4 (the jackknife, JK1 and JKn multipliers) and
 Ch. 5 (the bootstrap); the exact equivalence of full-orthogonal
 BRR to the stratified variance estimator for linear statistics.

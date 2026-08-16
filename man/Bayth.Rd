@@ -24,7 +24,7 @@ method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 171-208}, Chapter 6, Section 6.1 "Bayes Theorem and Bayesian
+volume [Pages 171-208], Chapter 6, Section 6.1 "Bayes Theorem and Bayesian
 Linear Regression", pp. 171-172, read as a rendered page.  The section
 gives, unnumbered, immediately before equation (6.1),
 }

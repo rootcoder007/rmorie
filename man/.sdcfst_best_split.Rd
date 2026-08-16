@@ -8,14 +8,14 @@
 .sdcfst_best_split(X, y, rows, feats, min_leaf)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{rows}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{rows}{A vector; its length is taken and its elements indexed.}
 \item{feats}{See Usage.}
-\item{min_leaf}{See Usage.}
+\item{min_leaf}{Numeric; combined arithmetically in the body.}
 }
 \description{
-cuts are midpoints between consecutive DISTINCT values -- the only set that can produce different partitions, and putting a cut exactly on a data point is where the two arms\\\' comparisons could part company.
+cuts are midpoints between consecutive DISTINCT values -- the only set that can produce different partitions, and putting a cut exactly on a data point is where the two arms\\' comparisons could part company.
 }
 \value{
 The value of \code{best}, as built in the body.

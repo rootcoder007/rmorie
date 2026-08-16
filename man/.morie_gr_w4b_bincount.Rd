@@ -8,12 +8,12 @@
 .morie_gr_w4b_bincount(x, w, minlength)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 \item{w}{See Usage.}
-\item{minlength}{See Usage.}
+\item{minlength}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{
-Part of the geron_w4b_native implementation; see the file header for the source it follows.
+A step of the geron_w4b_native implementation. Called by \code{.morie_gr_w4b_hgb_best_split}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

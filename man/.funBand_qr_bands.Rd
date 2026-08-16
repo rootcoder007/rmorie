@@ -8,16 +8,16 @@
 .funBand_qr_bands(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the funBand_native implementation; see the file header for the source it follows.
+A step of the funBand_native implementation. Called by \code{.funBand_roughness}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{Q}, \code{R}.
 }
 \references{
-Wahba, G. (1983) "Bayesian \\'confidence intervals\\' for the cross-validated
+Wahba, G. (1983) "Bayesian \'confidence intervals\' for the cross-validated
 smoothing spline", Journal of the Royal Statistical Society Series B
 (Methodological) 45(1), 133-150, doi:10.1111/j.2517-6161.1983.tb01239.x.
 Craven, P. and Wahba, G. (1979) "Smoothing noisy data with spline functions",

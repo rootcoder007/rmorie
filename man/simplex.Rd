@@ -9,14 +9,14 @@ simplex(c, A, b, rule = "bland", max_iter = 10000, initial_basis = NULL)
 }
 \arguments{
 \item{c}{See Usage.}
-\item{A}{See Usage.}
+\item{A}{Passed to \code{.clpopt_mat}.}
 \item{b}{See Usage.}
-\item{rule}{Defaults to \code{"bland"}.}
-\item{max_iter}{Defaults to \code{10000}.}
+\item{rule}{Passed to \code{.clpopt_run}. Defaults to \code{"bland"}.}
+\item{max_iter}{Passed to \code{.clpopt_run}. Defaults to \code{10000}.}
 \item{initial_basis}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the clpopt_native implementation; see the file header for the source it follows.
+A step of the clpopt_native implementation. Called by \code{morie_clpopt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.clpopt_report}.

@@ -7,14 +7,15 @@
 
 #' .krpkrg_gamma
 #'
-#' Part of the krpkrg_native implementation; see the file header for the
+#' A step of the krpkrg_native implementation. Called by \code{morie_krpkrg_ordinary_kriging}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h See Usage.
-#' @param model See Usage.
-#' @param nugget See Usage.
-#' @param sill See Usage.
-#' @param rng See Usage.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param model One of \code{"exponential"}, \code{"gaussian"}, \code{"spherical"}.
+#' @param nugget Numeric; combined arithmetically in the body.
+#' @param sill Numeric; combined arithmetically in the body.
+#' @param rng Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
 .krpkrg_gamma <- function(h, model, nugget, sill, rng) {
@@ -36,16 +37,17 @@
 
 #' morie_krpkrg_ordinary_kriging
 #'
-#' Part of the krpkrg_native implementation; see the file header for the
+#' A step of the krpkrg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param coords See Usage.
+#' @param coords A matrix; passed to \code{as.matrix}.
 #' @param values See Usage.
-#' @param targets See Usage.
-#' @param model Defaults to \code{"spherical"}.
-#' @param nugget Defaults to \code{0}.
-#' @param sill Defaults to \code{1}.
-#' @param rng Defaults to \code{1}.
+#' @param targets A matrix; passed to \code{as.matrix}.
+#' @param model Passed to \code{.krpkrg_gamma}. Defaults to \code{"spherical"}.
+#' @param nugget Passed to \code{.krpkrg_gamma}. Defaults to \code{0}.
+#' @param sill Passed to \code{.krpkrg_gamma}. Defaults to \code{1}.
+#' @param rng Passed to \code{.krpkrg_gamma}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{weights}, \code{n}, \code{n_targets}, \code{model}, \code{nugget}, \code{sill}, \code{range}, \code{method}, \code{note}.
 #' @export
 morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
@@ -103,7 +105,8 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
 
 #' .krpkrg_cheatsheet
 #'
-#' Part of the krpkrg_native implementation; see the file header for the
+#' A step of the krpkrg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

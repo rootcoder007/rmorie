@@ -8,13 +8,13 @@
 check_associativity(a, b, c, tol = 1e-12)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{c}{See Usage.}
+\item{a}{Passed to \code{.ssmpar_compose}.}
+\item{b}{Passed to \code{.ssmpar_compose}.}
+\item{c}{Passed to \code{.ssmpar_compose}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{
-Part of the ssmpar_native implementation; see the file header for the source it follows.
+A step of the ssmpar_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{left}, \code{right}, \code{deviation}, \code{associative}, \code{note}.

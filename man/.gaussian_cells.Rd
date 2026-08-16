@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{bounds}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
-\item{n_grid}{See Usage.}
+\item{lo}{Numeric; combined arithmetically in the body.}
+\item{hi}{Numeric; combined arithmetically in the body.}
+\item{n_grid}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tqlld_native implementation; see the file header for the source it follows.
+A step of the tqlld_native implementation. Called by \code{morie_tqlld}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mass}, \code{mom}.

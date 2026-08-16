@@ -8,11 +8,11 @@
 .abcgp.gp_predict(fit, theta)
 }
 \arguments{
-\item{fit}{See Usage.}
+\item{fit}{A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol}, \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel}, \code{$lengthscale}, \code{$n}, \code{$tau2} from it.}
 \item{theta}{See Usage.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.implausible}, \code{morie_abcgp}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

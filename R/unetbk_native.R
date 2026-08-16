@@ -62,10 +62,11 @@
 
 #' .unetbk_as_matrix
 #'
-#' Part of the unetbk_native implementation; see the file header for the
+#' A step of the unetbk_native implementation. Called by \code{mirror_pad}, \code{separation_weight_map}, \code{skip_concat}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
 .unetbk_as_matrix <- function(x) {
@@ -78,11 +79,12 @@
 
 #' valid_output_size
 #'
-#' Part of the unetbk_native implementation; see the file header for the
+#' A step of the unetbk_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param input_size See Usage.
-#' @param depth Defaults to \code{4L}.
+#' @param depth A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4L}.
 #' @param convs_per_block Defaults to \code{2L}.
 #' @param kernel Defaults to \code{3L}.
 #' @return A list with \code{output}, \code{input}, \code{border_lost}, \code{skip_sizes}, \code{note}.
@@ -129,10 +131,11 @@ valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kern
 
 #' mirror_pad
 #'
-#' Part of the unetbk_native implementation; see the file header for the
+#' A step of the unetbk_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param image See Usage.
+#' @param image Passed to \code{.unetbk_as_matrix}.
 #' @param pad See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -161,7 +164,8 @@ mirror_pad <- function(image, pad) {
 
 #' overlap_tiles
 #'
-#' Part of the unetbk_native implementation; see the file header for the
+#' A step of the unetbk_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param height See Usage.
@@ -205,11 +209,12 @@ overlap_tiles <- function(height, width, tile, border) {
 
 #' skip_concat
 #'
-#' Part of the unetbk_native implementation; see the file header for the
+#' A step of the unetbk_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param upsampled See Usage.
-#' @param contracting See Usage.
+#' @param upsampled Passed to \code{.unetbk_as_matrix}.
+#' @param contracting Passed to \code{.unetbk_as_matrix}.
 #' @return A list with \code{concatenated}, \code{crop_offset}, \code{channels}, \code{note}.
 #' @export
 skip_concat <- function(upsampled, contracting) {
@@ -241,12 +246,13 @@ skip_concat <- function(upsampled, contracting) {
 
 #' separation_weight_map
 #'
-#' Part of the unetbk_native implementation; see the file header for the
+#' A step of the unetbk_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param labels See Usage.
-#' @param w0 Defaults to \code{10}.
-#' @param sigma Defaults to \code{5}.
+#' @param labels Passed to \code{.unetbk_as_matrix}.
+#' @param w0 Numeric; combined arithmetically in the body. Defaults to \code{10}.
+#' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A list with \code{weights}, \code{n_instances}, \code{max_weight}, \code{note}.
 #' @export
 separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
@@ -290,7 +296,8 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
 
 #' .unetbk_cheatsheet
 #'
-#' Part of the unetbk_native implementation; see the file header for the
+#' A step of the unetbk_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

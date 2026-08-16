@@ -8,14 +8,14 @@
 .fit_q1(pseudo, L0, A0, idx, ridge)
 }
 \arguments{
-\item{pseudo}{See Usage.}
-\item{L0}{See Usage.}
-\item{A0}{See Usage.}
+\item{pseudo}{A vector; indexed elementwise.}
+\item{L0}{A matrix; indexed by row and column.}
+\item{A0}{A vector; indexed elementwise.}
 \item{idx}{See Usage.}
-\item{ridge}{See Usage.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmldyn_native implementation; see the file header for the source it follows.
+A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}, \code{rule_value_seq}, \code{sequential_blips}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{q1}, \code{b}.

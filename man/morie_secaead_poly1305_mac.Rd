@@ -8,8 +8,8 @@
 morie_secaead_poly1305_mac(message, key)
 }
 \arguments{
-\item{message}{See Usage.}
-\item{key}{See Usage.}
+\item{message}{Passed to \code{.secaead_as_bytes}.}
+\item{key}{Passed to \code{.secaead_as_bytes}.}
 }
 \description{
 low 16 become r (clamped) and the high 16 become s.

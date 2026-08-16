@@ -8,7 +8,7 @@
 .tqipb_pd()
 }
 \description{
-Part of the tqipb_native implementation; see the file header for the source it follows.
+A step of the tqipb_native implementation. Called by \code{morie_tqipb_constant}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

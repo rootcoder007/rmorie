@@ -8,8 +8,8 @@
 .morie_norm_inter(t, alpha)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{alpha}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{alpha}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 quantile scale (shared by percentile / basic / BCa).

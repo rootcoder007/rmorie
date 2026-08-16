@@ -10,7 +10,8 @@
 
 #' bartlett_kernel
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -23,7 +24,8 @@ bartlett_kernel <- function(x) {
 
 #' parzen_kernel
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -41,10 +43,11 @@ parzen_kernel <- function(x) {
 
 #' quadratic_spectral_kernel
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 quadratic_spectral_kernel <- function(x) {
@@ -56,7 +59,8 @@ quadratic_spectral_kernel <- function(x) {
 
 #' tukey_hanning_kernel
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -84,7 +88,8 @@ tukey_hanning_kernel <- function(x) {
 
 #' .check_kernel
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{automatic_bandwidth}, \code{kernel_hac}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param kernel See Usage.
@@ -105,11 +110,12 @@ tukey_hanning_kernel <- function(x) {
 
 #' moment_vectors
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param X See Usage.
+#' @param e A vector; its length is taken.
+#' @param X A matrix; passed to \code{nrow}.
 #' @return The value of \code{V}, as built in the body.
 #' @export
 moment_vectors <- function(e, X) {
@@ -132,10 +138,11 @@ moment_vectors <- function(e, X) {
 
 #' Returns U, s, V (V transposed, like np.linalg.svd with full matrices)
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{.singular_value_adjust}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{u}, \code{s}, \code{v}.
 #' @export
 .svd_r <- function(a) {
@@ -148,10 +155,11 @@ moment_vectors <- function(e, X) {
 
 #' .singular_value_adjust
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Passed to \code{.svd_r}.
 #' @param cap Defaults to \code{0.97}.
 #' @return The value of \code{%*%}.
 #' @export
@@ -172,11 +180,12 @@ moment_vectors <- function(e, X) {
 # solve a linear system
 #' Solve a linear system
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{prewhiten_var}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; passed to \code{solve}.
+#' @param b A matrix; passed to \code{solve}.
 #' @return A matrix, from \code{solve}.
 #' @export
 .solve_safe <- function(A, b) {
@@ -193,13 +202,14 @@ moment_vectors <- function(e, X) {
 
 #' prewhiten_var
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param order Defaults to \code{1}.
-#' @param cap Defaults to \code{0.97}.
-#' @param adjust Defaults to \code{TRUE}.
+#' @param v A matrix; passed to \code{as.matrix}.
+#' @param order A count; the body uses it as \code{vector(...)}. Defaults to \code{1}.
+#' @param cap Numeric; combined arithmetically in the body. Defaults to \code{0.97}.
+#' @param adjust A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{A}, \code{residuals}, \code{D}.
 #' @export
 prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
@@ -299,10 +309,11 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
 
 #' ar1_fit
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{alpha_ar1}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{c}.
 #' @export
 ar1_fit <- function(x) {
@@ -318,12 +329,13 @@ ar1_fit <- function(x) {
 
 #' alpha_ar1
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{automatic_bandwidth}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A matrix; passed to \code{as.matrix}.
 #' @param q Defaults to \code{2}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Compared against \code{"drop_first"}.
 #' @return A list with \code{alpha}, \code{fits}.
 #' @export
 alpha_ar1 <- function(v, q = 2, weights = NULL) {
@@ -371,11 +383,12 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
 
 #' automatic_bandwidth
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param kernel Defaults to \code{"qs"}.
+#' @param v A matrix; passed to \code{as.matrix}.
+#' @param kernel Passed to \code{.check_kernel}. Defaults to \code{"qs"}.
 #' @param weights Defaults to \code{NULL}.
 #' @param n Defaults to \code{NULL}.
 #' @return A list with \code{bandwidth}, \code{alpha}, \code{fits}.
@@ -397,13 +410,14 @@ automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
 
 #' kernel_hac
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A matrix; passed to \code{as.matrix}.
 #' @param bandwidth See Usage.
-#' @param kernel Defaults to \code{"qs"}.
-#' @param n_params Defaults to \code{0}.
+#' @param kernel Passed to \code{.check_kernel}. Defaults to \code{"qs"}.
+#' @param n_params Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param n Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -461,18 +475,19 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 
 #' andrews_monahan_hac
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e A matrix; passed to \code{as.matrix}.
 #' @param X Defaults to \code{NULL}.
-#' @param prewhiten Defaults to \code{TRUE}.
+#' @param prewhiten A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param var_order Defaults to \code{1}.
 #' @param kernel Defaults to \code{"qs"}.
 #' @param bandwidth Defaults to \code{NULL}.
 #' @param weights Defaults to \code{NULL}.
 #' @param n_params Defaults to \code{NULL}.
-#' @param cap Defaults to \code{0.97}.
+#' @param cap Numeric; combined arithmetically in the body. Defaults to \code{0.97}.
 #' @param adjust Defaults to \code{TRUE}.
 #' @return The value of \code{structure}.
 #' @export
@@ -547,10 +562,11 @@ andmnh <- andrews_monahan_hac
 
 #' print.andmnh
 #'
-#' Part of the andmnh_native implementation; see the file header for the
+#' A step of the andmnh_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A list; the body reads \code{$alpha}, \code{$bandwidth}, \code{$bandwidth_automatic}, \code{$J}, \code{$kernel}, \code{$n}, \code{$n_params}, \code{$p}, \code{$prewhitened}, \code{$var_order} from it.
 #' @param ... Passed through.
 #' @return Invisibly,the value of \code{x}, as built in the body.
 #' @export

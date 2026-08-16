@@ -69,7 +69,7 @@
 #'
 #' where indices are 0-based half-open into v (i < j), matching Python.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
 #' @return A list with \code{z}, \code{i}, \code{j}.
 #' @export
 .copynm_cbs_stat <- function(v) {
@@ -99,11 +99,12 @@
 # In-place Fisher-Yates shuffle with one .ghc_unif draw per swap.
 #' In-place Fisher-Yates shuffle with one .ghc_unif draw per swap
 #'
-#' Part of the copynm_native implementation; see the file header for the
+#' A step of the copynm_native implementation. Called by \code{.copynm_binary_supported}, \code{copynm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param w See Usage.
-#' @param e See Usage.
+#' @param w A vector; its length is taken and its elements indexed.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return Invisibly,the value of \code{w}, as built in the body.
 #' @export
 .copynm_shuffle <- function(w, e) {
@@ -121,14 +122,15 @@
 # Edge-effect undo: is `cut` a viable BINARY change-point for v?
 #' Edge-effect undo: is `cut` a viable BINARY change-point for v?
 #'
-#' Part of the copynm_native implementation; see the file header for the
+#' A step of the copynm_native implementation. Called by \code{copynm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param cut See Usage.
-#' @param alpha See Usage.
-#' @param perms See Usage.
-#' @param e See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
+#' @param cut A count; the body uses it as \code{seq_len(...)}.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param perms Numeric; combined arithmetically in the body.
+#' @param e Passed to \code{.copynm_shuffle}.
 #' @return A logical value.
 #' @export
 .copynm_binary_supported <- function(v, cut, alpha, perms, e) {

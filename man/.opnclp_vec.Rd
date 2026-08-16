@@ -11,7 +11,7 @@
 \item{v}{See Usage.}
 }
 \description{
-Part of the opnclp_native implementation; see the file header for the source it follows.
+A step of the opnclp_native implementation. Called by \code{fit_power_law}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

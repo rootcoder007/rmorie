@@ -8,12 +8,12 @@
 EchoImp(a, n_0, n)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
 \item{n_0}{See Usage.}
-\item{n}{See Usage.}
+\item{n}{Passed to \code{.tf_echo_idx}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{x}, \code{n}, \code{a}, \code{n_0}, \code{method}.

@@ -8,10 +8,10 @@
 .pq_zigzag(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.pq_varint}.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_scalar}, \code{.pq_struct}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

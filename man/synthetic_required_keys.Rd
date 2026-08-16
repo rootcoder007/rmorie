@@ -8,7 +8,7 @@
 synthetic_required_keys()
 }
 \description{
-Part of the synthetic implementation; see the file header for the source it follows.
+A step of the synthetic implementation. Called by \code{resolve_synthetic_name_map}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

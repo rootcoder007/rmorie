@@ -15,7 +15,7 @@ FetalEcg(abdominal, chest, order = 32, mu = 0.005, method = "lms")
 \item{method}{Defaults to \code{"lms"}.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{fetal}, \code{maternal_estimate}, \code{order}, \code{input_power}, \code{output_power}, \code{suppression_db}, \code{reference_leakage}, \code{single_reference}, \code{widrow_used_multiple_references}, \code{method}.

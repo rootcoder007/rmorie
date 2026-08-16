@@ -9,12 +9,12 @@ Pbeta(q, shape1, shape2, lower_tail = TRUE)
 }
 \arguments{
 \item{q}{See Usage.}
-\item{shape1}{See Usage.}
-\item{shape2}{See Usage.}
-\item{lower_tail}{Defaults to \code{TRUE}.}
+\item{shape1}{Passed to \code{.morie_betainc}.}
+\item{shape2}{Passed to \code{.morie_betainc}.}
+\item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. Called by \code{Qbeta}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

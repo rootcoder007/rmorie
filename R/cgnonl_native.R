@@ -12,22 +12,24 @@
 
 #' .cgnonl_dot
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves}, \code{beta_polak_ribiere} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .cgnonl_dot <- function(a, b) sum(a * b)
 
 #' beta_fletcher_reeves
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g_new See Usage.
-#' @param g_old See Usage.
+#' @param g_new Passed to \code{.cgnonl_dot}.
+#' @param g_old Passed to \code{.cgnonl_dot}.
 #' @return A numeric value.
 #' @export
 beta_fletcher_reeves <- function(g_new, g_old) {
@@ -38,12 +40,13 @@ beta_fletcher_reeves <- function(g_new, g_old) {
 
 #' beta_polak_ribiere
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g_new See Usage.
-#' @param g_old See Usage.
-#' @param plus Defaults to \code{FALSE}.
+#' @param g_new Numeric; combined arithmetically in the body.
+#' @param g_old Numeric; combined arithmetically in the body.
+#' @param plus A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
@@ -56,10 +59,11 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 
 #' .cgnonl_beta
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rule See Usage.
+#' @param rule One of \code{"fletcher-reeves"}, \code{"polak-ribiere"}, \code{"polak-ribiere-plus"}.
 #' @param g_new See Usage.
 #' @param g_old See Usage.
 #' @return Nothing; this branch always raises.
@@ -74,15 +78,16 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 
 #' cubic_interpolate
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{line_search_fr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ta See Usage.
-#' @param fa See Usage.
-#' @param da See Usage.
-#' @param tb See Usage.
-#' @param fb See Usage.
-#' @param db See Usage.
+#' @param ta Numeric; passed to \code{max}.
+#' @param fa Numeric; combined arithmetically in the body.
+#' @param da Numeric; combined arithmetically in the body.
+#' @param tb Numeric; passed to \code{max}.
+#' @param fb Numeric; combined arithmetically in the body.
+#' @param db Numeric; combined arithmetically in the body.
 #' @return The value of \code{t}, as built in the body.
 #' @export
 cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
@@ -101,19 +106,20 @@ cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 
 #' line_search_fr
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
 #' @param grad See Usage.
-#' @param x See Usage.
-#' @param p See Usage.
-#' @param f0 See Usage.
-#' @param g0 See Usage.
+#' @param x A vector; its length is taken.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param f0 Numeric; combined arithmetically in the body.
+#' @param g0 Passed to \code{.cgnonl_dot}.
 #' @param est Defaults to \code{NULL}.
-#' @param max_double Defaults to \code{60L}.
-#' @param max_cubic Defaults to \code{40L}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param max_double A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
+#' @param max_cubic A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @return A list with \code{t}, \code{x_new}, \code{f_new}, \code{g_new}, \code{n_eval}.
 #' @export
 line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
@@ -186,12 +192,13 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 
 #' .cgnonl_exact_quadratic_step
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param p See Usage.
-#' @param g See Usage.
+#' @param p Passed to \code{.cgnonl_dot}.
+#' @param g Passed to \code{.cgnonl_dot}.
 #' @param hess_vec See Usage.
 #' @return A numeric value.
 #' @export
@@ -205,20 +212,21 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 
 #' nonlinear_cg
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. Called by \code{morie_cgnonl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
 #' @param grad See Usage.
 #' @param x0 See Usage.
-#' @param beta Defaults to \code{"fletcher-reeves"}.
-#' @param restart Defaults to \code{NULL}.
+#' @param beta Passed to \code{.cgnonl_beta}. Defaults to \code{"fletcher-reeves"}.
+#' @param restart Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param max_iter Defaults to \code{NULL}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param est Defaults to \code{NULL}.
-#' @param line_search Defaults to \code{"fletcher-reeves"}.
-#' @param hess_vec Defaults to \code{NULL}.
-#' @param keep_path Defaults to \code{FALSE}.
+#' @param line_search Compared against \code{"exact-quadratic"}. Defaults to \code{"fletcher-reeves"}.
+#' @param hess_vec Optional; may be \code{NULL}. Passed to \code{.cgnonl_exact_quadratic_step}.
+#' @param keep_path A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{x}, \code{fun}, \code{grad}, \code{gnorm}, \code{n_iter}, \code{n_restart}, \code{n_feval}, \code{converged}, \code{betas}, \code{path}, \code{beta_rule}, \code{line_search}, \code{restart_every}, \code{method}, \code{note}.
 #' @export
 nonlinear_cg <- function(f, grad, x0, beta = "fletcher-reeves",
@@ -312,7 +320,8 @@ cgnonl <- nonlinear_cg
 
 #' morie_cgnonl
 #'
-#' Part of the cgnonl_native implementation; see the file header for the
+#' A step of the cgnonl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.

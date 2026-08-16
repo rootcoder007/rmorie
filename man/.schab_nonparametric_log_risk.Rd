@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{alpha}{See Usage.}
-\item{u}{See Usage.}
-\item{phi}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{phi}{A vector; its length is taken.}
 \item{gamma}{See Usage.}
-\item{delta}{Defaults to \code{NULL}.}
+\item{delta}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

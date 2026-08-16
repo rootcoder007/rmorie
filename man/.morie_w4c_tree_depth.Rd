@@ -8,10 +8,10 @@
 .morie_w4c_tree_depth(node)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_regression_tree}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

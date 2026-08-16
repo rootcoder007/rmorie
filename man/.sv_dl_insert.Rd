@@ -8,10 +8,10 @@
 .sv_dl_insert(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{A list; the body reads \code{$len2}, \code{$pos1}, \code{$pos2} from it.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. Called by \code{.sv_dl_size}, \code{morie_sv_dl_classify_pair}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

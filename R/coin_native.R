@@ -28,8 +28,8 @@
 #' statistic T (pq), its conditional mean mu and covariance Sigma,
 #' matching coin\'s `expectation()` / `covariance()`.
 #'
-#' @param g See Usage.
-#' @param h See Usage.
+#' @param g A matrix; passed to \code{nrow}.
+#' @param h A matrix; passed to \code{crossprod}.
 #' @return A list with \code{T}, \code{mu}, \code{Sigma}, \code{n}.
 #' @export
 .morie_sw_moments <- function(g, h) {
@@ -52,11 +52,12 @@
 # Quadratic-form statistic c = (T-mu)' Sigma^+ (T-mu) ~ chi-square(df).
 #' Quadratic-form statistic c = (T-mu)\' Sigma^+ (T-mu) ~ chi-square(df)
 #'
-#' Part of the coin_native implementation; see the file header for the
+#' A step of the coin_native implementation. Called by \code{morie_oneway_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
-#' @param tol Defaults to \code{1e-08}.
+#' @param m A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{statistic}, \code{df}, \code{p.value}.
 #' @export
 .morie_quad_stat <- function(m, tol = 1e-8) {
@@ -76,10 +77,11 @@
 # Standardized (scalar / maximum) statistic and asymptotic p-value.
 #' Standardized (scalar / maximum) statistic and asymptotic p-value
 #'
-#' Part of the coin_native implementation; see the file header for the
+#' A step of the coin_native implementation. Called by \code{morie_indep_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.
 #' @param alternative Defaults to \code{"two.sided"}.
 #' @return A list with \code{statistic}, \code{p.value}, \code{cor}, \code{z}.
 #' @export
@@ -113,7 +115,7 @@
 #'
 #' k==2 gives a single column (indicator of the second level).
 #'
-#' @param f See Usage.
+#' @param f Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_f_trafo <- function(f) {
@@ -137,7 +139,8 @@
 
 #' .morie_coin_parse
 #'
-#' Part of the coin_native implementation; see the file header for the
+#' A step of the coin_native implementation. Called by \code{morie_indep_test}, \code{morie_oneway_test}, \code{morie_wilcox_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param formula See Usage.

@@ -11,10 +11,11 @@
 
 #' .reinfc_logistic
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
 .reinfc_logistic <- function(s) {
@@ -27,10 +28,11 @@
 
 #' .reinfc_as_matrix
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @param name See Usage.
 #' @return The value of \code{x_mat}, as built in the body.
 #' @export
@@ -56,12 +58,13 @@
 
 #' .reinfc_baseline_series
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rewards See Usage.
-#' @param baseline See Usage.
-#' @param gamma See Usage.
+#' @param rewards A vector; its length is taken and its elements indexed.
+#' @param baseline One of \code{"comparison"}, \code{"none"}.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .reinfc_baseline_series <- function(rewards, baseline, gamma) {
@@ -88,11 +91,12 @@
 
 #' .reinfc_finish
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param param See Usage.
-#' @param rewards See Usage.
+#' @param rewards A vector; its length is taken and its elements indexed.
 #' @param bs See Usage.
 #' @param traj See Usage.
 #' @return A list with \code{estimate}, \code{rewards}, \code{baseline}, \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last}, \code{method}.
@@ -116,11 +120,12 @@
 
 #' .reinfc_running_baseline
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
-#' @param baseline See Usage.
+#' @param state A list; the body reads \code{$v1}, \code{$v2} from it.
+#' @param baseline One of \code{"comparison"}, \code{"none"}.
 #' @param gamma See Usage.
 #' @return A numeric value.
 #' @export
@@ -139,13 +144,14 @@
 
 #' .reinfc_advance_baseline
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
-#' @param baseline See Usage.
-#' @param gamma See Usage.
-#' @param r See Usage.
+#' @param state A list; the body reads \code{$v1}, \code{$v2} from it.
+#' @param baseline One of \code{"comparison"}, \code{"mean"}.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param r Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .reinfc_advance_baseline <- function(state, baseline, gamma, r) {
@@ -159,18 +165,19 @@
 
 #' .reinfc_run_bernoulli
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param reward_fn See Usage.
-#' @param pv See Usage.
-#' @param baseline See Usage.
-#' @param mode See Usage.
-#' @param rho See Usage.
-#' @param gamma See Usage.
-#' @param k See Usage.
-#' @param trials See Usage.
-#' @param rng See Usage.
+#' @param pv A vector; its length is taken.
+#' @param baseline Passed to \code{.reinfc_running_baseline}.
+#' @param mode Compared against \code{"episodic"}.
+#' @param rho Numeric; combined arithmetically in the body.
+#' @param gamma Passed to \code{.reinfc_running_baseline}.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param trials A count; the body uses it as \code{seq_len(...)}.
+#' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{.reinfc_finish}.
 #' @export
 .reinfc_run_bernoulli <- function(reward_fn, pv, baseline, mode, rho, gamma, k, trials, rng) {
@@ -213,20 +220,21 @@
 
 #' .reinfc_run_logistic
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param reward_fn See Usage.
-#' @param xs See Usage.
-#' @param wm See Usage.
-#' @param baseline See Usage.
-#' @param mode See Usage.
-#' @param alpha See Usage.
-#' @param gamma See Usage.
-#' @param k See Usage.
-#' @param trials See Usage.
-#' @param eligibility See Usage.
-#' @param rng See Usage.
+#' @param xs A matrix; indexed by row and column.
+#' @param wm A matrix; passed to \code{nrow}.
+#' @param baseline Passed to \code{.reinfc_running_baseline}.
+#' @param mode Compared against \code{"episodic"}.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param trials A count; the body uses it as \code{seq_len(...)}.
+#' @param eligibility Compared against \code{"ybar"}.
+#' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 .reinfc_run_logistic <- function(reward_fn, xs, wm, baseline, mode, alpha, gamma, k, trials,
@@ -287,20 +295,21 @@
 
 #' .reinfc_run_gaussian
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param reward_fn See Usage.
-#' @param mu See Usage.
-#' @param sigma See Usage.
-#' @param baseline See Usage.
-#' @param mode See Usage.
-#' @param alpha See Usage.
-#' @param gamma See Usage.
-#' @param k See Usage.
-#' @param trials See Usage.
-#' @param rate_scaling See Usage.
-#' @param rng See Usage.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param sigma Numeric; combined arithmetically in the body.
+#' @param baseline Passed to \code{.reinfc_running_baseline}.
+#' @param mode Compared against \code{"episodic"}.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param gamma Passed to \code{.reinfc_running_baseline}.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param trials A count; the body uses it as \code{seq_len(...)}.
+#' @param rate_scaling One of \code{"none"}, \code{"sigma2"}.
+#' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 .reinfc_run_gaussian <- function(reward_fn, mu, sigma, baseline, mode, alpha, gamma, k,
@@ -352,26 +361,27 @@
 
 #' morie_reinfc
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reward_fn See Usage.
-#' @param x Defaults to \code{NULL}.
-#' @param w Defaults to \code{NULL}.
+#' @param reward_fn Passed to \code{.reinfc_run_gaussian}.
+#' @param x Optional; may be \code{NULL}. Passed to \code{.reinfc_as_matrix}.
+#' @param w Optional; may be \code{NULL}. Passed to \code{.reinfc_as_matrix}.
 #' @param p Defaults to \code{NULL}.
 #' @param mu Defaults to \code{0}.
-#' @param sigma Defaults to \code{1}.
-#' @param unit Defaults to \code{"bernoulli-logistic"}.
-#' @param baseline Defaults to \code{"comparison"}.
-#' @param mode Defaults to \code{"immediate"}.
+#' @param sigma Passed to \code{.reinfc_run_gaussian}. Defaults to \code{1}.
+#' @param unit One of \code{"bernoulli"}, \code{"gaussian"}. Defaults to \code{"bernoulli-logistic"}.
+#' @param baseline Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"comparison"}.
+#' @param mode Compared against \code{"immediate"}. Defaults to \code{"immediate"}.
 #' @param alpha Defaults to \code{0.1}.
 #' @param gamma Defaults to \code{0.9}.
 #' @param rho Defaults to \code{0.1}.
 #' @param episode_length Defaults to \code{1}.
-#' @param trials Defaults to \code{100}.
-#' @param eligibility Defaults to \code{"p"}.
-#' @param rate_scaling Defaults to \code{"sigma2"}.
-#' @param seed Defaults to \code{0}.
+#' @param trials Passed to \code{.reinfc_run_gaussian}. Defaults to \code{100}.
+#' @param eligibility One of \code{"p"}, \code{"ybar"}. Defaults to \code{"p"}.
+#' @param rate_scaling Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"sigma2"}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{.reinfc_run_logistic}.
 #' @export
 morie_reinfc <- function(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0.0, sigma = 1.0,
@@ -454,14 +464,15 @@ morie_reinforce <- morie_reinfc
 
 #' morie_reinfc_expected_update
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param r0 See Usage.
-#' @param r1 See Usage.
-#' @param alpha Defaults to \code{1}.
-#' @param b Defaults to \code{0}.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param r0 Numeric; combined arithmetically in the body.
+#' @param r1 Numeric; combined arithmetically in the body.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param b Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{list}.
 #' @export
 morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
@@ -476,7 +487,8 @@ morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
 
 #' morie_reinfc_cheatsheet
 #'
-#' Part of the reinfc_native implementation; see the file header for the
+#' A step of the reinfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

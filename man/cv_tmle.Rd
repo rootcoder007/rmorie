@@ -13,7 +13,7 @@ cv_tmle(fold_estimates, fold_ics, n)
 \item{n}{See Usage.}
 }
 \description{
-Part of the tldapar_native implementation; see the file header for the source it follows.
+A step of the tldapar_native implementation. Called by \code{morie_tldapar}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{psi}, \code{se}, \code{ci}, \code{mean_ic}, \code{note}.

@@ -8,11 +8,11 @@
 .sech_hmac(key, msg)
 }
 \arguments{
-\item{key}{See Usage.}
+\item{key}{A vector; its length is taken.}
 \item{msg}{See Usage.}
 }
 \description{
-Part of the sechsh_native implementation; see the file header for the source it follows.
+A step of the sechsh_native implementation. Called by \code{morie_sechsh_chain_entry}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.sech_sha256}.

@@ -15,7 +15,8 @@
 
 #' .cnvlfc_embed
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{.cnvlfc_cross_map}, \code{cnvlfc_embed}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param series See Usage.
@@ -50,11 +51,12 @@
 
 #' .cnvlfc_corr
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_cross_map}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken.
+#' @param b Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 .cnvlfc_corr <- function(a, b) {
@@ -69,13 +71,14 @@
 
 #' .cnvlfc_euclid
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param target See Usage.
-#' @param candidates See Usage.
-#' @param exclude_idx See Usage.
-#' @param target_idx See Usage.
+#' @param target A matrix; indexed by row and column.
+#' @param candidates A matrix; indexed by row and column.
+#' @param exclude_idx A vector; indexed elementwise.
+#' @param target_idx Numeric; combined arithmetically in the body.
 #' @param exclude_window See Usage.
 #' @return A list with \code{d}, \code{ord}, \code{keep}.
 #' @export
@@ -100,13 +103,14 @@
 
 #' .cnvlfc_cross_map
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{cnvlfc_cross_map}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param driver See Usage.
 #' @param response See Usage.
-#' @param E Defaults to \code{2L}.
-#' @param tau Defaults to \code{1L}.
+#' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.
+#' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.
 #' @param library Defaults to \code{NULL}.
 #' @param seed Defaults to \code{1L}.
 #' @param exclude Defaults to \code{0L}.
@@ -186,16 +190,17 @@
 
 #' .cnvlfc_ccm
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. Called by \code{cnvlfc_ccm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
 #' @param y See Usage.
-#' @param E Defaults to \code{2L}.
-#' @param tau Defaults to \code{1L}.
+#' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.
+#' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.
 #' @param lib_sizes Defaults to \code{NULL}.
-#' @param seed Defaults to \code{1L}.
-#' @param exclude Defaults to \code{0L}.
+#' @param seed Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.
+#' @param exclude Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x}, \code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict}, \code{method}.
 #' @export
 .cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
@@ -258,14 +263,15 @@
 
 #' .cnvlfc_coupled_logistic
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. Called by \code{cnvlfc_coupled_logistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
-#' @param rx Defaults to \code{3.8}.
-#' @param ry Defaults to \code{3.5}.
-#' @param bxy Defaults to \code{0}.
-#' @param byx Defaults to \code{0.1}.
+#' @param rx Numeric; combined arithmetically in the body. Defaults to \code{3.8}.
+#' @param ry Numeric; combined arithmetically in the body. Defaults to \code{3.5}.
+#' @param bxy Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param byx Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param x0 Defaults to \code{0.4}.
 #' @param y0 Defaults to \code{0.2}.
 #' @param burn Defaults to \code{300L}.
@@ -296,12 +302,13 @@
 
 #' cnvlfc_embed
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param series See Usage.
-#' @param E Defaults to \code{2}.
-#' @param tau Defaults to \code{1}.
+#' @param series Passed to \code{.cnvlfc_embed}.
+#' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2}.
+#' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1}.
 #' @return A list with \code{points}, \code{index}, \code{E}, \code{tau}.
 #' @export
 cnvlfc_embed <- function(series, E = 2, tau = 1) {
@@ -314,16 +321,17 @@ cnvlfc_embed <- function(series, E = 2, tau = 1) {
 
 #' cnvlfc_cross_map
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param driver See Usage.
-#' @param response See Usage.
-#' @param E Defaults to \code{2L}.
-#' @param tau Defaults to \code{1L}.
-#' @param library Defaults to \code{NULL}.
-#' @param seed Defaults to \code{1L}.
-#' @param exclude Defaults to \code{0L}.
+#' @param driver Passed to \code{.cnvlfc_cross_map}.
+#' @param response Passed to \code{.cnvlfc_cross_map}.
+#' @param E Passed to \code{.cnvlfc_cross_map}. Defaults to \code{2L}.
+#' @param tau Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.
+#' @param library Passed to \code{.cnvlfc_cross_map}.
+#' @param seed Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.
+#' @param exclude Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.
 #' @return The value of \code{.cnvlfc_cross_map}.
 #' @export
 cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
@@ -333,16 +341,17 @@ cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
 
 #' cnvlfc_ccm
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param E Defaults to \code{2L}.
-#' @param tau Defaults to \code{1L}.
-#' @param lib_sizes Defaults to \code{NULL}.
-#' @param seed Defaults to \code{1L}.
-#' @param exclude Defaults to \code{0L}.
+#' @param x Passed to \code{.cnvlfc_ccm}.
+#' @param y Passed to \code{.cnvlfc_ccm}.
+#' @param E Passed to \code{.cnvlfc_ccm}. Defaults to \code{2L}.
+#' @param tau Passed to \code{.cnvlfc_ccm}. Defaults to \code{1L}.
+#' @param lib_sizes Passed to \code{.cnvlfc_ccm}.
+#' @param seed Passed to \code{.cnvlfc_ccm}. Defaults to \code{1L}.
+#' @param exclude Passed to \code{.cnvlfc_ccm}. Defaults to \code{0L}.
 #' @return The value of \code{.cnvlfc_ccm}.
 #' @export
 cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
@@ -352,17 +361,18 @@ cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
 
 #' cnvlfc_coupled_logistic
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param rx Defaults to \code{3.8}.
-#' @param ry Defaults to \code{3.5}.
-#' @param bxy Defaults to \code{0}.
-#' @param byx Defaults to \code{0.1}.
-#' @param x0 Defaults to \code{0.4}.
-#' @param y0 Defaults to \code{0.2}.
-#' @param burn Defaults to \code{300L}.
+#' @param n Passed to \code{.cnvlfc_coupled_logistic}.
+#' @param rx Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{3.8}.
+#' @param ry Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{3.5}.
+#' @param bxy Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0}.
+#' @param byx Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0.1}.
+#' @param x0 Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0.4}.
+#' @param y0 Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0.2}.
+#' @param burn Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{300L}.
 #' @return The value of \code{.cnvlfc_coupled_logistic}.
 #' @export
 cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
@@ -373,7 +383,8 @@ cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
 
 #' cnvlfc_convergent_cross_mapping
 #'
-#' Part of the cnvlfc_native implementation; see the file header for the
+#' A step of the cnvlfc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.

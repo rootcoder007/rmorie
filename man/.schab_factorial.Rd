@@ -11,7 +11,7 @@
 \item{p}{See Usage.}
 }
 \description{
-Part of the schab_hermite_shared implementation; see the file header for the source it follows.
+A step of the schab_hermite_shared implementation. Called by \code{.schab_indicator_coefficients}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{prod}.

@@ -8,7 +8,7 @@
 .morie_subsets(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A vector; its length is taken.}
 }
 \description{
 Part of the matroid_optimisation_native implementation; see the file header for the source it follows.

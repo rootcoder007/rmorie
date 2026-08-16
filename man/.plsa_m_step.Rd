@@ -8,12 +8,12 @@
 .plsa_m_step(n_dw, post, K)
 }
 \arguments{
-\item{n_dw}{See Usage.}
-\item{post}{See Usage.}
-\item{K}{See Usage.}
+\item{n_dw}{Passed to \code{.plsa_check}.}
+\item{post}{A matrix; indexed by row and column.}
+\item{K}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the plsa_native implementation; see the file header for the source it follows.
+A step of the plsa_native implementation. Called by \code{m_step}, \code{morie_plsa}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{Pz}, \code{Pd_z}, \code{Pw_z}.

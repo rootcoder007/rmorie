@@ -8,11 +8,11 @@
 .morie_wsm_need(ok, msg)
 }
 \arguments{
-\item{ok}{See Usage.}
+\item{ok}{A flag; the body branches on it.}
 \item{msg}{See Usage.}
 }
 \description{
-Part of the wasserman_native implementation; see the file header for the source it follows.
+A step of the wasserman_native implementation. Called by \code{morie_bayes_factor_savage_dickey}, \code{morie_density}, \code{morie_sgt_closeness_centrality} and 58 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

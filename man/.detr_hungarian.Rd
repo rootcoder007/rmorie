@@ -8,7 +8,7 @@
 .detr_hungarian(cost)
 }
 \arguments{
-\item{cost}{See Usage.}
+\item{cost}{A matrix; indexed by row and column.}
 }
 \description{
 rectangular cost with rows <= columns.  Returns the column per row.

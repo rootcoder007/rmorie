@@ -14,7 +14,7 @@ moment_check(replicates, target_mean, target_se, tol = 0.15)
 \item{tol}{Defaults to \code{0.15}.}
 }
 \description{
-Part of the tlboot_native implementation; see the file header for the source it follows.
+A step of the tlboot_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{se}, \code{mean_error}, \code{se_ratio}, \code{first_two_moments_ok}, \code{note}.

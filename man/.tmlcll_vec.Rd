@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}, \code{morie_tmle_cross_lagged}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

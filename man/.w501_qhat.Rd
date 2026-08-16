@@ -8,10 +8,10 @@
 .w501_qhat(P, a, tau, kappa)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{a}{See Usage.}
-\item{tau}{See Usage.}
-\item{kappa}{See Usage.}
+\item{P}{Passed to \code{.w501_block}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{tau}{Numeric; combined arithmetically in the body.}
+\item{kappa}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Part of the w501_changepoint_native implementation; see the file header for the source it follows.

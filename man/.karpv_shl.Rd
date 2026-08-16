@@ -8,11 +8,11 @@
 .karpv_shl(a, k)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{k}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{.karpv_u32}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,13 +8,13 @@
 morie_infmer(q, k, v, c = 5)
 }
 \arguments{
-\item{q}{See Usage.}
-\item{k}{See Usage.}
-\item{v}{See Usage.}
-\item{c}{Defaults to \code{5}.}
+\item{q}{A matrix; indexed by row and column.}
+\item{k}{A matrix; passed to \code{nrow}.}
+\item{v}{A matrix; passed to \code{ncol}.}
+\item{c}{Passed to \code{.infmer_complexity}. Defaults to \code{5}.}
 }
 \description{
-Informer\\'s ProbSparse self-attention (Zhou et al. 2021). q: numeric matrix [L_Q, d] (queries) k: numeric matrix [L_K, d] (keys) v: numeric matrix [L_K, d_v] (values) c: numeric sparsity constant (default 5) Returns named list: output : [L_Q, d_v] attended values selected_queries : 1-based integer vector of top-u query indices n_selected : integer length of that vector sparsity_scores : M(q_i, K) for every query complexity : full vs probsparse flop accounting
+Informer\'s ProbSparse self-attention (Zhou et al. 2021). q: numeric matrix [L_Q, d] (queries) k: numeric matrix [L_K, d] (keys) v: numeric matrix [L_K, d_v] (values) c: numeric sparsity constant (default 5) Returns named list: output : [L_Q, d_v] attended values selected_queries : 1-based integer vector of top-u query indices n_selected : integer length of that vector sparsity_scores : M(q_i, K) for every query complexity : full vs probsparse flop accounting
 }
 \value{
 A list with \code{output}, \code{selected_queries}, \code{n_selected}, \code{sparsity_scores}, \code{complexity}.

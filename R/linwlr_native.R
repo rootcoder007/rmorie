@@ -11,7 +11,8 @@
 
 #' .linwlr_vec
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}, \code{morie_linwlr_blip}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -24,10 +25,11 @@
 
 #' .linwlr_mat
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}, \code{morie_linwlr_blip}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
 .linwlr_mat <- function(x) {
@@ -37,11 +39,12 @@
 
 #' .linwlr_design
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Zsrc See Usage.
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{cbind}.
 #' @export
 .linwlr_design <- function(Zsrc, n) {
@@ -53,10 +56,11 @@
 
 #' .linwlr_sigmoid
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls}, \code{morie_linwlr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .linwlr_sigmoid <- function(v) {
@@ -65,13 +69,14 @@
 
 #' .linwlr_logit_irls
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param max_iter See Usage.
-#' @param ridge See Usage.
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .linwlr_logit_irls <- function(Z, y, max_iter, ridge) {
@@ -97,12 +102,13 @@
 
 #' .linwlr_lstsq
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param ridge See Usage.
+#' @param Z A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
 .linwlr_lstsq <- function(Z, y, ridge) {
@@ -114,12 +120,13 @@
 
 #' .linwlr_ridgesolve
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; passed to \code{nrow}.
 #' @param rhs See Usage.
-#' @param ridge See Usage.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
 .linwlr_ridgesolve <- function(M, rhs, ridge) {
@@ -130,12 +137,13 @@
 
 #' .linwlr_wls
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{resid}.
 #' @export
 .linwlr_wls <- function(X, y, w) {
@@ -154,13 +162,14 @@
 
 #' .linwlr_sandwich_se
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bread See Usage.
-#' @param meat See Usage.
-#' @param n See Usage.
-#' @param ridge See Usage.
+#' @param bread A matrix; passed to \code{nrow}.
+#' @param meat A matrix; passed to \code{\%*\%}.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{se}, as built in the body.
 #' @export
 .linwlr_sandwich_se <- function(bread, meat, n, ridge) {
@@ -179,12 +188,13 @@
 
 #' morie_linwlr_blip
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param w See Usage.
-#' @param psi See Usage.
+#' @param a Passed to \code{.linwlr_vec}.
+#' @param w Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
+#' @param psi A vector; indexed elementwise.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 morie_linwlr_blip <- function(a, w, psi) {
@@ -198,17 +208,18 @@ morie_linwlr_blip <- function(a, w, psi) {
 
 #' morie_linwlr
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param W Defaults to \code{NULL}.
+#' @param y Passed to \code{.linwlr_vec}.
+#' @param A Passed to \code{.linwlr_vec}.
+#' @param W Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
 #' @param propensity Defaults to \code{NULL}.
-#' @param method Defaults to \code{"gest"}.
-#' @param baseline Defaults to \code{NULL}.
-#' @param pi_covariates Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param method One of \code{"gest"}, \code{"wls"}. Defaults to \code{"gest"}.
+#' @param baseline Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
+#' @param pi_covariates Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
@@ -342,7 +353,8 @@ morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
 
 #' morie_linwlr_cheatsheet
 #'
-#' Part of the linwlr_native implementation; see the file header for the
+#' A step of the linwlr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

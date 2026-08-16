@@ -3,15 +3,15 @@
 % the formals.
 \name{.dnvtwo_norm_vec}
 \alias{.dnvtwo_norm_vec}
-\title{L2-normalise a single row vector.  Mirrors Python\\\'s _norm()}
+\title{L2-normalise a single row vector.  Mirrors Python\\'s _norm()}
 \usage{
 .dnvtwo_norm_vec(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dnvtwo_native implementation; see the file header for the source it follows.
+A step of the dnvtwo_native implementation. Called by \code{.dnvtwo_cos_raw}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

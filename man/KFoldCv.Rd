@@ -3,16 +3,16 @@
 % the formals.
 \name{KFoldCv}
 \alias{KFoldCv}
-\title{Section 10.10.3.  The book\\'s point is that the training and test}
+\title{Section 10.10.3.  The book\'s point is that the training and test}
 \usage{
 KFoldCv(X, y, k = 5, classifier = NULL, stratified = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{k}{Defaults to \code{5}.}
 \item{classifier}{Defaults to \code{NULL}.}
-\item{stratified}{Defaults to \code{TRUE}.}
+\item{stratified}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 steps must use SEPARATE data: an error rate measured on the samples that trained the classifier is optimistic, and with enough free parameters it reaches zero while the classifier generalizes not at all.  Folds are stratified by default; unstratified folds on unbalanced data can leave a class absent from a training fold, which measures luck rather than generalization.

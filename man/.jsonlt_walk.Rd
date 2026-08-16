@@ -13,7 +13,7 @@
 \item{close_pad}{See Usage.}
 \item{comma_pad}{See Usage.}
 \item{colon_txt}{See Usage.}
-\item{keep_ws}{See Usage.}
+\item{keep_ws}{A flag; the body branches on it.}
 }
 \description{
 this walks characters instead of running a regex over the text.

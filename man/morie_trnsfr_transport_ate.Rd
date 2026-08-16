@@ -8,17 +8,17 @@
 morie_trnsfr_transport_ate(Y, W, X, S, method = "dr", e = NULL, trim = 0.001, ridge = 1e-06)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{W}{See Usage.}
-\item{X}{See Usage.}
-\item{S}{See Usage.}
-\item{method}{Defaults to \code{"dr"}.}
-\item{e}{Defaults to \code{NULL}.}
-\item{trim}{Defaults to \code{0.001}.}
-\item{ridge}{Defaults to \code{1e-06}.}
+\item{Y}{Passed to \code{.s03vec}.}
+\item{W}{Passed to \code{.s03vec}.}
+\item{X}{Passed to \code{.s03mat}.}
+\item{S}{Passed to \code{.trnsfr_cohort}.}
+\item{method}{One of \code{"balance"}, \code{"ipw"}, \code{"outcome"}. Defaults to \code{"dr"}.}
+\item{e}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{trim}{Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{0.001}.}
+\item{ridge}{Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{1e-06}.}
 }
 \description{
-Part of the trnsfr_native implementation; see the file header for the source it follows.
+A step of the trnsfr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{source_ate}, \code{outcome_route}, \code{n_source}, \code{n_target}, \code{method}, \code{diagnostics}, \code{assumption}.

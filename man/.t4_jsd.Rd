@@ -8,12 +8,12 @@
 .t4_jsd(p, q, base)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{q}{See Usage.}
-\item{base}{See Usage.}
+\item{p}{A vector; its length is taken and its elements indexed.}
+\item{q}{A vector; indexed elementwise.}
+\item{base}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the jsdivg implementation; see the file header for the source it follows.
+A step of the jsdivg implementation. Called by \code{Jsdiv}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

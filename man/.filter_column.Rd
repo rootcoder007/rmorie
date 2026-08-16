@@ -8,12 +8,12 @@
 .filter_column(w, ar, ma)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{ar}{See Usage.}
-\item{ma}{See Usage.}
+\item{w}{A vector; its length is taken and its elements indexed.}
+\item{ar}{Passed to \code{.sarima_state_space}.}
+\item{ma}{Passed to \code{.sarima_state_space}.}
 }
 \description{
-Part of the sarimax_native implementation; see the file header for the source it follows.
+A step of the sarimax_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{v}, \code{f}.

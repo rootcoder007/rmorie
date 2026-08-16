@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the edgrn_native implementation; see the file header for the source it follows.
+A step of the edgrn_native implementation. Called by \code{.edgrn_betainc}, \code{.edgrn_chi2_sf}, \code{.edgrn_nb_logpmf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lgamma}.

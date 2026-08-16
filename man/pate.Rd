@@ -8,7 +8,7 @@
 pate(teacher_predicts, queries, gamma = 0.05, delta = 1e-05, n_classes = NULL, student_train_fn = NULL, student_features = NULL, seed = 0, lambdas = NULL)
 }
 \arguments{
-\item{teacher_predicts}{See Usage.}
+\item{teacher_predicts}{A vector; its length is taken.}
 \item{queries}{See Usage.}
 \item{gamma}{Defaults to \code{0.05}.}
 \item{delta}{Defaults to \code{1e-05}.}
@@ -19,7 +19,7 @@ pate(teacher_predicts, queries, gamma = 0.05, delta = 1e-05, n_classes = NULL, s
 \item{lambdas}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the pate_native implementation; see the file header for the source it follows.
+A step of the pate_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{labels}, \code{clean_labels}, \code{votes}, \code{agreement}, \code{epsilon}, \code{epsilon_accountant}, \code{epsilon_data_independent}, \code{accountant}, \code{delta}, \code{gamma}, \code{n_teachers}, \code{n_queries}, \code{student}, \code{note}, \code{method}.

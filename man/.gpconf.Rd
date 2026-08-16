@@ -8,8 +8,8 @@
 .gpconf(y_true, y_pred, n_classes = NULL)
 }
 \arguments{
-\item{y_true}{See Usage.}
-\item{y_pred}{See Usage.}
+\item{y_true}{Passed to \code{.gpflat}.}
+\item{y_pred}{Passed to \code{.gpflat}.}
 \item{n_classes}{Defaults to \code{NULL}.}
 }
 \description{

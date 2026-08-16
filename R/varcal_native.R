@@ -63,10 +63,11 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 # Private helpers
 #' Private helpers
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. Called by \code{varcal_encode_pileup}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param b See Usage.
+#' @param b One of \code{"A"}, \code{"C"}, \code{"G"}, \code{"T"}.
 #' @return A numeric value.
 #' @export
 .varcal_base_code <- function(b) {
@@ -80,7 +81,8 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 
 #' .varcal_phred
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. Called by \code{varcal_genotype_posterior}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -93,10 +95,11 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 
 #' .varcal_chars
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. Called by \code{.varcal_norm_reads}, \code{morie_varcal}, \code{varcal_encode_pileup} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .varcal_chars <- function(x) {
@@ -105,7 +108,8 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 
 #' .varcal_norm_reads
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. Called by \code{morie_varcal}, \code{varcal_encode_pileup}, \code{varcal_find_candidates} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param reads See Usage.
@@ -117,12 +121,13 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 
 #' varcal_pileup_column
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. Called by \code{varcal_find_candidates}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reads See Usage.
-#' @param position See Usage.
-#' @param reference See Usage.
+#' @param reads Passed to \code{.varcal_norm_reads}.
+#' @param position Numeric; combined arithmetically in the body.
+#' @param reference A vector; its length is taken and its elements indexed.
 #' @return A list with \code{observations}, \code{reference}, \code{depth}.
 #' @export
 varcal_pileup_column <- function(reads, position, reference) {
@@ -152,11 +157,12 @@ varcal_pileup_column <- function(reads, position, reference) {
 
 #' varcal_find_candidates
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reads See Usage.
-#' @param reference See Usage.
+#' @param reads Passed to \code{.varcal_norm_reads}.
+#' @param reference A vector; its length is taken.
 #' @param min_alt_count Defaults to \code{2}.
 #' @param min_alt_fraction Defaults to \code{0.05}.
 #' @param min_bq Defaults to \code{10}.
@@ -215,13 +221,14 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 
 #' varcal_encode_pileup
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. Called by \code{morie_varcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reads See Usage.
-#' @param reference See Usage.
-#' @param candidate See Usage.
-#' @param width Defaults to \code{21}.
+#' @param reads Passed to \code{.varcal_norm_reads}.
+#' @param reference A vector; its length is taken and its elements indexed.
+#' @param candidate A list; the body reads \code{$position} from it.
+#' @param width Numeric; combined arithmetically in the body. Defaults to \code{21}.
 #' @param height Defaults to \code{100}.
 #' @param channels Defaults to \code{"base_quality_strand"}.
 #' @return A list with \code{reference_row}, \code{read_rows}, \code{n_reads}, \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
@@ -294,12 +301,13 @@ varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
 
 #' varcal_genotype_posterior
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. Called by \code{morie_varcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param image See Usage.
+#' @param image A list; the body reads \code{$read_rows}, \code{$width} from it.
 #' @param scorer Defaults to \code{NULL}.
-#' @param prior Defaults to \code{NULL}.
+#' @param prior Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{posterior}, \code{call}, \code{quality}, \code{scores}, \code{source}.
 #' @export
 varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
@@ -356,11 +364,12 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
 
 #' morie_varcal
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reads See Usage.
-#' @param reference See Usage.
+#' @param reads Passed to \code{.varcal_norm_reads}.
+#' @param reference Passed to \code{.varcal_chars}.
 #' @param scorer Defaults to \code{NULL}.
 #' @param min_quality Defaults to \code{10}.
 #' @param ... Passed through.
@@ -397,7 +406,8 @@ morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
 
 #' varcal_evaluate
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param called See Usage.
@@ -452,7 +462,8 @@ varcal_evaluate <- function(called, truth, candidates = NULL) {
 
 #' varcal_cheatsheet
 #'
-#' Part of the varcal_native implementation; see the file header for the
+#' A step of the varcal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

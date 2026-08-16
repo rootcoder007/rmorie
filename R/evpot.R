@@ -3,12 +3,13 @@
 # Negative log-likelihood of the GPD at (sigma, xi) for excesses y.
 #' Negative log-likelihood of the GPD at (sigma, xi) for excesses y
 #'
-#' Part of the evpot implementation; see the file header for the source
+#' A step of the evpot implementation. Called by \code{Evpot}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param y See Usage.
-#' @param sigma See Usage.
-#' @param xi See Usage.
+#' @param y A vector; its length is taken.
+#' @param sigma Numeric; passed to \code{log}.
+#' @param xi Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
 .gpd_nll <- function(y, sigma, xi) {
@@ -28,11 +29,12 @@
 #' Grimshaw\'s reparametrisation: given t = xi/sigma, xi and sigma
 #' follow
 #'
-#' Part of the evpot implementation; see the file header for the source
+#' A step of the evpot implementation. Called by \code{Evpot}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param y See Usage.
-#' @param t See Usage.
+#' @param y A vector; its length is taken.
+#' @param t Numeric; passed to \code{abs}.
 #' @return A list with \code{xi}, \code{sigma}, \code{g}.
 #' @export
 .gpd_profile <- function(y, t) {

@@ -19,7 +19,7 @@ list: estimate, pooled, argmax, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 533-577}, Chapter 13, Section 13.4, pp. 542-543, read as a
+volume [Pages 533-577], Chapter 13, Section 13.4, pp. 542-543, read as a
 rendered page.  "The max pooling operation summarizes the input as the
 maximum within a rectangular neighborhood"; the window slides by the
 stride and the output size in the l-th layer is

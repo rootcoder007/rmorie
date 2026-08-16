@@ -8,11 +8,11 @@
 .morie_jo_ols(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A matrix; indexed by row and column.}
+\item{y}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_fitpred}, \code{morie_adfur}, \code{morie_quantreg}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_jo_solve}.

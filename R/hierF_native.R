@@ -15,11 +15,12 @@
 
 #' summing_matrix
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param groups See Usage.
-#' @param n_bottom See Usage.
+#' @param groups A vector; its length is taken and its elements indexed.
+#' @param n_bottom A matrix; passed to \code{diag}.
 #' @return The value of \code{rbind}.
 #' @export
 summing_matrix <- function(groups, n_bottom) {
@@ -39,11 +40,12 @@ summing_matrix <- function(groups, n_bottom) {
 
 #' is_coherent
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. Called by \code{mint_reconcile}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param S See Usage.
+#' @param y A vector; indexed elementwise.
+#' @param S A matrix; passed to \code{nrow}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A logical value.
 #' @export
@@ -56,11 +58,12 @@ is_coherent <- function(y, S, tol = 1e-9) {
 
 #' shrink_covariance
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. Called by \code{mint_P}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param residuals See Usage.
-#' @param lam Defaults to \code{NULL}.
+#' @param residuals A matrix; passed to \code{nrow}.
+#' @param lam Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{cov}, \code{lambda}.
 #' @export
 shrink_covariance <- function(residuals, lam = NULL) {
@@ -97,11 +100,12 @@ shrink_covariance <- function(residuals, lam = NULL) {
 
 #' ._cholsolve
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. Called by \code{mint_P}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; passed to \code{solve}.
+#' @param b A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 ._cholsolve <- function(A, b) {
@@ -119,14 +123,15 @@ shrink_covariance <- function(residuals, lam = NULL) {
 
 #' mint_P
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. Called by \code{mint_reconcile}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param S See Usage.
-#' @param W Defaults to \code{NULL}.
-#' @param method Defaults to \code{"shrink"}.
-#' @param residuals Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param S A matrix; indexed by row and column.
+#' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param method One of \code{"custom"}, \code{"ols"}, \code{"shrink"}, \code{"wls"}. Defaults to \code{"shrink"}.
+#' @param residuals Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
+#' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A list with \code{P}, \code{lambda}.
 #' @export
 mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
@@ -175,11 +180,12 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 
 #' mint_reconcile
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. Called by \code{morie_hierF}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param base See Usage.
-#' @param S See Usage.
+#' @param S A matrix; passed to \code{as.matrix}.
 #' @param method Defaults to \code{"shrink"}.
 #' @param residuals Defaults to \code{NULL}.
 #' @param W Defaults to \code{NULL}.
@@ -218,7 +224,8 @@ hierarchical_forecast <- mint_reconcile
 
 #' morie_hierF
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param base See Usage.
@@ -236,7 +243,8 @@ morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
 
 #' .hierF_cheatsheet
 #'
-#' Part of the hierF_native implementation; see the file header for the
+#' A step of the hierF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

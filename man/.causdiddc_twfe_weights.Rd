@@ -11,7 +11,7 @@
 \item{D}{See Usage.}
 \item{group}{See Usage.}
 \item{period}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
 fixed effects.  Alternating projections, iterated to convergence -- the within-transformation solver, not the matrix-form Frisch-Waugh.

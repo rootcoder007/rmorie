@@ -8,16 +8,16 @@
 .grow_one_tree(X, y, indices, min_leaf, alpha, max_depth, e)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{indices}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{indices}{A vector; its length is taken and its elements indexed.}
 \item{min_leaf}{See Usage.}
 \item{alpha}{See Usage.}
 \item{max_depth}{See Usage.}
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-chosen uniformly without replacement; honesty is enforced by splitting each tree\\\'s bag into a structure half and a leaf half.
+chosen uniformly without replacement; honesty is enforced by splitting each tree\\'s bag into a structure half and a leaf half.
 }
 \value{
 The value of \code{build}.

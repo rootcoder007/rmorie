@@ -8,12 +8,12 @@
 .icc_mean_squares(rows, n, k)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{n}{See Usage.}
-\item{k}{See Usage.}
+\item{rows}{A matrix; indexed by row and column.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the icc2 implementation; see the file header for the source it follows.
+A step of the icc2 implementation. Called by \code{Icc2}, \code{Icc3}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{bms}, \code{wms}, \code{jms}, \code{ems}.

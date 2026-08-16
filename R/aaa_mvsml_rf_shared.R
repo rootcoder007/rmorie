@@ -34,11 +34,12 @@
 
 #' .rfboot
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{.rfforest}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param b See Usage.
-#' @param n See Usage.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .rfboot <- function(b, n) {
@@ -53,13 +54,14 @@
 
 #' .rfcand
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{.rfgrow}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param b See Usage.
-#' @param s See Usage.
-#' @param p See Usage.
-#' @param mtry See Usage.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param s Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param mtry A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .rfcand <- function(b, s, p, mtry) {
@@ -69,10 +71,11 @@
 
 #' .rfmtry
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; passed to \code{sqrt}.
 #' @param kind Defaults to \code{"regression"}.
 #' @return A numeric value.
 #' @export
@@ -85,13 +88,14 @@
 #' The (15.6) objective, MAXIMISED -- see the erratum recorded in
 #' rfmlt.R
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{.rfbest}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param left See Usage.
-#' @param right See Usage.
-#' @param q See Usage.
+#' @param Y A matrix; indexed by row and column.
+#' @param left A vector; its length is taken.
+#' @param right A vector; its length is taken.
+#' @param q A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{g}, as built in the body.
 #' @export
 .rfgain <- function(Y, left, right, q) {
@@ -108,12 +112,13 @@
 # Within-node sum of squares, the least-square criterion of p. 643.
 #' Within-node sum of squares, the least-square criterion of p. 643
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{.rfgrow}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param rows See Usage.
-#' @param q See Usage.
+#' @param Y A matrix; indexed by row and column.
+#' @param rows A vector; its length is taken.
+#' @param q A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 .rfimp <- function(Y, rows, q) {
@@ -129,14 +134,15 @@
 
 #' .rfbest
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{.rfgrow}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
-#' @param rows See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param Y Passed to \code{.rfgain}.
+#' @param rows A vector; indexed elementwise.
 #' @param cand See Usage.
-#' @param q See Usage.
+#' @param q Passed to \code{.rfgain}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .rfbest <- function(X, Y, rows, cand, q) {
@@ -162,17 +168,18 @@
 #' A node is list(var, thr, li, ri, value, n, drop).  A leaf has var =
 #' -1L
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{.rfforest}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
-#' @param rows See Usage.
-#' @param b See Usage.
-#' @param nodesize See Usage.
-#' @param mtry See Usage.
-#' @param q See Usage.
-#' @param env See Usage.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param Y A matrix; indexed by row and column.
+#' @param rows A vector; its length is taken.
+#' @param b Passed to \code{.rfcand}.
+#' @param nodesize Numeric; combined arithmetically in the body.
+#' @param mtry Passed to \code{.rfcand}.
+#' @param q A count; the body uses it as \code{numeric(...)}.
+#' @param env A list; the body reads \code{$k}, \code{$nodes}, \code{$s} from it.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
 .rfgrow <- function(X, Y, rows, b, nodesize, mtry, q, env) {
@@ -205,12 +212,13 @@
 
 #' .rfpredtree
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{.rfperm}, \code{.rfpredict}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param nodes See Usage.
+#' @param nodes A vector; indexed elementwise.
 #' @param root See Usage.
-#' @param x See Usage.
+#' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
 .rfpredtree <- function(nodes, root, x) {
@@ -223,15 +231,16 @@
 
 #' .rfforest
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
-#' @param n_trees See Usage.
-#' @param nodesize See Usage.
-#' @param mtry See Usage.
-#' @param q See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param Y Passed to \code{.rfgrow}.
+#' @param n_trees A count; the body uses it as \code{seq_len(...)}.
+#' @param nodesize Passed to \code{.rfgrow}.
+#' @param mtry Passed to \code{.rfgrow}.
+#' @param q Passed to \code{.rfgrow}.
 #' @return A list with \code{trees}, \code{oob}.
 #' @export
 .rfforest <- function(X, Y, n_trees, nodesize, mtry, q) {
@@ -252,12 +261,13 @@
 # yhat_i = (1/B) sum_b T_b(x_i), the p. 640 aggregation.
 #' Yhat_i = (1/B) sum_b T_b(x_i), the p. 640 aggregation
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{Rfmlt}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param trees See Usage.
-#' @param Xnew See Usage.
-#' @param q See Usage.
+#' @param trees A vector; its length is taken.
+#' @param Xnew A matrix; indexed by row and column.
+#' @param q A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rfpredict <- function(trees, Xnew, q) {
@@ -273,11 +283,12 @@
 
 #' .rfcheck
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param Y A matrix; passed to \code{nrow}.
 #' @return A vector, from \code{c}.
 #' @export
 .rfcheck <- function(X, Y) {
@@ -294,12 +305,13 @@
 # The p. 656 requirement: responses standardized before splitting.
 #' The p. 656 requirement: responses standardized before splitting
 #'
-#' Part of the mvsml_rf_shared implementation; see the file header for
+#' A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param n See Usage.
-#' @param q See Usage.
+#' @param Y A matrix; indexed by row and column.
+#' @param n A count; the body uses it as \code{matrix(...)}.
+#' @param q A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rfstd <- function(Y, n, q) {
@@ -326,12 +338,12 @@
 #' differences."  The permutation is the deterministic reversal of the
 #' OOB row order.
 #'
-#' @param trees See Usage.
-#' @param oob See Usage.
-#' @param X See Usage.
-#' @param Y See Usage.
+#' @param trees A vector; its length is taken and its elements indexed.
+#' @param oob A vector; indexed elementwise.
+#' @param X A matrix; indexed by row and column.
+#' @param Y A matrix; indexed by row and column.
 #' @param q See Usage.
-#' @param normalise Defaults to \code{TRUE}.
+#' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{imp}, as built in the body.
 #' @export
 .rfperm <- function(trees, oob, X, Y, q, normalise = TRUE) {
@@ -381,8 +393,8 @@
 #' within-node sum of squares.  The stored drop is already in raw
 #' sum-of-squares units.
 #'
-#' @param trees See Usage.
-#' @param p See Usage.
+#' @param trees A vector; its length is taken.
+#' @param p A count; the body uses it as \code{numeric(...)}.
 #' @return A numeric value.
 #' @export
 .rfmdi_imp <- function(trees, p) {

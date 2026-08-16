@@ -8,11 +8,11 @@
 morie_unifAlg_apply_subst(t, subst)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{subst}{See Usage.}
+\item{t}{Passed to \code{.unifAlg_check}.}
+\item{subst}{Passed to \code{.unifAlg_apply_once}.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{.trmRew_overlap}, \code{morie_unifAlg_factor_through}, \code{morie_unifAlg_unify}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

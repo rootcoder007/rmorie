@@ -8,12 +8,12 @@
 beta_polak_ribiere(g_new, g_old, plus = FALSE)
 }
 \arguments{
-\item{g_new}{See Usage.}
-\item{g_old}{See Usage.}
-\item{plus}{Defaults to \code{FALSE}.}
+\item{g_new}{Numeric; combined arithmetically in the body.}
+\item{g_old}{Numeric; combined arithmetically in the body.}
+\item{plus}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the cgnonl_native implementation; see the file header for the source it follows.
+A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

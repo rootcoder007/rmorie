@@ -8,7 +8,7 @@
 QrsDeriv1(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 it "smoothed"; the absolute value makes an inverted QRS give the same response.

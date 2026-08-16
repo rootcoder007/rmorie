@@ -3,13 +3,13 @@
 % the formals.
 \name{Pcf}
 \alias{Pcf}
-\title{R(h) = K\\'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the}
+\title{R(h) = K\'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the}
 \usage{
 Pcf(points, region = NULL, r = NULL, correction = "border")
 }
 \arguments{
-\item{points}{See Usage.}
-\item{region}{Defaults to \code{NULL}.}
+\item{points}{A matrix; passed to \code{as.matrix}.}
+\item{region}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{r}{Defaults to \code{NULL}.}
 \item{correction}{Defaults to \code{"border"}.}
 }

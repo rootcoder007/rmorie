@@ -8,10 +8,10 @@
 .rn_ks_stat(cdf_vals)
 }
 \arguments{
-\item{cdf_vals}{See Usage.}
+\item{cdf_vals}{A vector; its length is taken.}
 }
 \description{
-Part of the reds_native implementation; see the file header for the source it follows.
+A step of the reds_native implementation. Called by \code{.rn_mc_p_fitted}, \code{morie_multi_horizon_ks}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

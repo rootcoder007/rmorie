@@ -8,12 +8,12 @@
 .regmlm_lambda_grid(p, n, n_ridge = 5)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; combined arithmetically in the body.}
 \item{n}{See Usage.}
 \item{n_ridge}{Defaults to \code{5}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{level0_predictors}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

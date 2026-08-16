@@ -8,12 +8,12 @@
 .dnnheadweights(Yc, nt, n)
 }
 \arguments{
-\item{Yc}{See Usage.}
-\item{nt}{See Usage.}
+\item{Yc}{A matrix; indexed by row and column.}
+\item{nt}{A count; the body uses it as \code{seq_len(...)}.}
 \item{n}{See Usage.}
 }
 \description{
-Part of the dnnmt implementation; see the file header for the source it follows.
+A step of the dnnmt implementation. Called by \code{Dnnmt}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

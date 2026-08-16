@@ -8,12 +8,12 @@
 .karpv_collect(node, path, out)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{A list; the body reads \code{$args} from it.}
 \item{path}{See Usage.}
-\item{out}{See Usage.}
+\item{out}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{.karpv_pick_point}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

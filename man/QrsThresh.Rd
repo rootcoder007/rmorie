@@ -8,9 +8,9 @@
 QrsThresh(peaki, spki, npki, issignal)
 }
 \arguments{
-\item{peaki}{See Usage.}
-\item{spki}{See Usage.}
-\item{npki}{See Usage.}
+\item{peaki}{Numeric; combined arithmetically in the body.}
+\item{spki}{Numeric; combined arithmetically in the body.}
+\item{npki}{Numeric; combined arithmetically in the body.}
 \item{issignal}{See Usage.}
 }
 \description{

@@ -19,7 +19,8 @@
 
 #' .tf_need
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{AtomTfd}, \code{BiorDwt}, \code{CDemod} and 28 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -45,7 +46,8 @@
 
 #' .tf_dft
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_analytic}, \code{CDemod}, \code{CprWt} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -70,7 +72,8 @@
 
 #' .tf_idft
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_analytic}, \code{CDemod}, \code{CprWt} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -97,11 +100,12 @@
 
 #' .tf_win
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{IStft}, \code{Spectrogram}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param name See Usage.
-#' @param m See Usage.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return Nothing; this branch always raises.
 #' @export
 .tf_win <- function(name, m) {
@@ -131,7 +135,8 @@
 
 #' .tf_analytic
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_wvd}, \code{AtomTfd}, \code{EmdSpec} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -218,7 +223,8 @@
 
 #' .tf_dbname
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_filters}, \code{WtVar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param wavelet See Usage.
@@ -249,10 +255,11 @@
 
 #' .tf_filters
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_idwt}, \code{.tf_swt} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param wavelet See Usage.
+#' @param wavelet Passed to \code{.tf_dbname}.
 #' @return A list with \code{h}, \code{g}, \code{rec_lo}, \code{rec_hi}.
 #' @export
 .tf_filters <- function(wavelet) {
@@ -280,12 +287,13 @@
 
 #' .tf_dwtstep
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{Wpt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param h See Usage.
-#' @param g See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param h A vector; its length is taken.
+#' @param g Numeric; combined arithmetically in the body.
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
 .tf_dwtstep <- function(a, h, g) {
@@ -309,13 +317,14 @@
 
 #' .tf_idwtstep
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_idwt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param h See Usage.
-#' @param g See Usage.
+#' @param lo A vector; its length is taken and its elements indexed.
+#' @param hi A vector; indexed elementwise.
+#' @param h A vector; its length is taken and its elements indexed.
+#' @param g A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tf_idwtstep <- function(lo, hi, h, g) {
@@ -334,12 +343,13 @@
 
 #' .tf_dwt
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{Dwt}, \code{Dwt2Tap}, \code{Mra} and 6 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet See Usage.
-#' @param levels See Usage.
+#' @param x A vector; its length is taken.
+#' @param wavelet Passed to \code{.tf_filters}.
+#' @param levels A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{approx}, \code{details}, \code{lengths}.
 #' @export
 .tf_dwt <- function(x, wavelet, levels) {
@@ -375,13 +385,14 @@
 
 #' .tf_idwt
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{Mra}, \code{SwtDen}, \code{WtThresh}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
-#' @param details See Usage.
-#' @param lengths See Usage.
-#' @param wavelet See Usage.
+#' @param details A vector; its length is taken and its elements indexed.
+#' @param lengths A vector; indexed elementwise.
+#' @param wavelet Passed to \code{.tf_filters}.
 #' @return The value of \code{cur}, as built in the body.
 #' @export
 .tf_idwt <- function(a, details, lengths, wavelet) {
@@ -398,12 +409,13 @@
 
 #' .tf_swt
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{Swt}, \code{WtVar}, \code{WtXcor}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet See Usage.
-#' @param levels See Usage.
+#' @param x A vector; its length is taken.
+#' @param wavelet Passed to \code{.tf_filters}.
+#' @param levels A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{approx}, \code{details}, \code{approxes}.
 #' @export
 .tf_swt <- function(x, wavelet, levels) {
@@ -434,12 +446,13 @@
 
 #' .tf_spline
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_sift}, \code{Imf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param xs See Usage.
-#' @param ys See Usage.
-#' @param xq See Usage.
+#' @param xs A vector; its length is taken and its elements indexed.
+#' @param ys A vector; indexed elementwise.
+#' @param xq Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tf_spline <- function(xs, ys, xq) {
@@ -486,10 +499,11 @@
 
 #' .tf_extrema
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_emd}, \code{.tf_sift}, \code{Imf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{mx}, \code{mn}.
 #' @export
 .tf_extrema <- function(x) {
@@ -519,10 +533,11 @@
 
 #' .tf_zerox
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{Imf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .tf_zerox <- function(x) {
@@ -539,11 +554,12 @@
 
 #' .tf_sift
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_emd}, \code{Imf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param maxiter Defaults to \code{50L}.
+#' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{0.05}.
 #' @return A list with \code{imf}, \code{iterations}, \code{converged}.
 #' @export
@@ -573,12 +589,13 @@
 
 #' .tf_emd
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{EmdEns}, \code{EmdSpec}, \code{Sift} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
 #' @param maxmodes Defaults to \code{10L}.
-#' @param tol Defaults to \code{0.05}.
+#' @param tol Passed to \code{.tf_sift}. Defaults to \code{0.05}.
 #' @return A list with \code{imfs}, \code{residual}.
 #' @export
 .tf_emd <- function(x, maxmodes = 10L, tol = 0.05) {
@@ -598,12 +615,13 @@
 
 #' .tf_mother
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_cwt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param name See Usage.
-#' @param t See Usage.
-#' @param w0 Defaults to \code{5}.
+#' @param t A vector; its length is taken.
+#' @param w0 Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return Nothing; this branch always raises.
 #' @export
 .tf_mother <- function(name, t, w0 = 5) {
@@ -626,7 +644,8 @@
 
 #' .tf_support
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_cwt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param name See Usage.
@@ -644,13 +663,14 @@
 
 #' .tf_cwt
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{CprWt}, \code{Cwt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param scales See Usage.
-#' @param wavelet Defaults to \code{"morlet"}.
-#' @param w0 Defaults to \code{5}.
+#' @param scales A vector; its length is taken and its elements indexed.
+#' @param wavelet Passed to \code{.tf_support}. Defaults to \code{"morlet"}.
+#' @param w0 Passed to \code{.tf_mother}. Defaults to \code{5}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tf_cwt <- function(x, scales, wavelet = "morlet", w0 = 5) {
@@ -678,11 +698,12 @@
 
 #' .tf_wvd
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{Gtfd}, \code{WvDist}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param fs See Usage.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @param nfreq Defaults to \code{NULL}.
 #' @return A list with \code{tfd}, \code{freqs}.
 #' @export
@@ -707,10 +728,11 @@
 
 #' .tf_smooth2d
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{Gtfd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tfd See Usage.
+#' @param tfd A matrix; indexed by row and column.
 #' @param tlen See Usage.
 #' @param flen See Usage.
 #' @return The value of \code{out}, as built in the body.
@@ -746,7 +768,8 @@
 
 #' .tf_energy
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{AtomTfd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -764,10 +787,11 @@
 
 #' .tf_lcg_step
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}, \code{EmdEns}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
+#' @param st A vector; indexed elementwise.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .tf_lcg_step <- function(st) {
@@ -790,10 +814,11 @@
 
 #' (state >> 11) is exact in a double: it is at most 2^53 - 1
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{EmdEns}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
+#' @param st A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .tf_lcg_unif <- function(st) {
@@ -804,17 +829,19 @@
 
 #' .tf_lcg_seed
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{EmdEns}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Passed to \code{.tf_seed_limbs}.
 #' @return The value of \code{.tf_lcg_step}.
 #' @export
 .tf_lcg_seed <- function(seed) .tf_lcg_step(c(0, 0, 0, 0) + .tf_seed_limbs(seed))
 
 #' .tf_seed_limbs
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed See Usage.
@@ -836,12 +863,13 @@
 # -- Complex demodulation, Sec 5.5.1 eqs (5.16)-(5.19).
 #' Complex demodulation, Sec 5.5.1 eqs (5.16)-(5.19)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param f0 Defaults to \code{NULL}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param f0 Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param bandwidth Defaults to \code{NULL}.
 #' @return A list with \code{amplitude}, \code{phase}, \code{demodulated}, \code{f0}, \code{bandwidth}, \code{mean_amplitude}, \code{method}.
 #' @export
@@ -908,10 +936,11 @@ CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
 # -- Biorthogonal 5/3 (CDF) transform via lifting.
 #' Biorthogonal 5/3 (CDF) transform via lifting
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.tf_need}.
 #' @param wavelet Defaults to \code{"bior2.2"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{reconstructed}, \code{max_reconstruction_error}, \code{symmetric}, \code{wavelet}, \code{method}.
@@ -986,12 +1015,13 @@ BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
 # -- Exponential-kernel (Choi-Williams) TFD.
 #' Exponential-kernel (Choi-Williams) TFD
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param sigma Defaults to \code{1}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param nfreq Defaults to \code{NULL}.
 #' @param maxlag Defaults to \code{NULL}.
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma}, \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
@@ -1059,14 +1089,15 @@ ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
 # -- Wavelet scale distribution width of a fibrillation waveform, Sec 8.15.
 #' Wavelet scale distribution width of a fibrillation waveform, Sec 8.15
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ecg See Usage.
-#' @param fs Defaults to \code{250}.
+#' @param ecg Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{250}.
 #' @param scales Defaults to \code{NULL}.
-#' @param w0 Defaults to \code{5}.
-#' @param band Defaults to \code{c(3, 21)}.
+#' @param w0 Numeric; combined arithmetically in the body. Defaults to \code{5}.
+#' @param band A vector; indexed elementwise. Defaults to \code{c(3, 21)}.
 #' @return A list with \code{sdw}, \code{scale_energy}, \code{scales}, \code{freqs}, \code{peak_scale}, \code{peak_freq}, \code{organised}, \code{band}, \code{method}.
 #' @export
 CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
@@ -1138,12 +1169,13 @@ CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
 # -- Continuous wavelet transform, eq (8.107).
 #' Continuous wavelet transform, eq (8.107)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{Scalogram}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param wavelet Defaults to \code{"morlet"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param wavelet Passed to \code{.tf_cwt}. Defaults to \code{"morlet"}.
 #' @param scales Defaults to \code{NULL}.
 #' @param w0 Defaults to \code{5}.
 #' @return A list with \code{coeffs}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{peak_scale}, \code{wavelet}, \code{method}.
@@ -1191,11 +1223,12 @@ Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
 # -- Cohen's class generalised TFD, eqs (8.124)-(8.127).
 #' Cohen\'s class generalised TFD, eqs (8.124)-(8.127)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param kernel Defaults to \code{"spwvd"}.
 #' @param nfreq Defaults to \code{NULL}.
 #' @param tsmooth Defaults to \code{NULL}.
@@ -1246,7 +1279,8 @@ Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
 # -- Daubechies filter bank taps and their orthonormality identities.
 #' Daubechies filter bank taps and their orthonormality identities
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param order Defaults to \code{4}.
@@ -1284,11 +1318,12 @@ OrthFilt <- function(order = 4) {
 # -- Matching-pursuit TFD, eq (9.15) over the Gabor dictionary.
 #' Matching-pursuit TFD, eq (9.15) over the Gabor dictionary
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param dictionary Defaults to \code{"gabor"}.
 #' @param max_atoms Defaults to \code{8}.
 #' @param nfreq Defaults to \code{NULL}.
@@ -1395,11 +1430,12 @@ AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
 # -- Dyadic DWT via the decimated filter bank, eqs (8.111)-(8.113).
 #' Dyadic DWT via the decimated filter bank, eqs (8.111)-(8.113)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{wavelet}, \code{energy}, \code{method}.
 #' @export
@@ -1426,14 +1462,15 @@ Dwt <- function(x, wavelet = "db4", levels = 3) {
 # -- Ensemble EMD, Sec 9.4.1 eq (9.13).
 #' Ensemble EMD, Sec 9.4.1 eq (9.13)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.tf_need}.
 #' @param n_ensembles Defaults to \code{20}.
 #' @param noise_std Defaults to \code{0.2}.
 #' @param max_imfs Defaults to \code{8}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.tf_lcg_seed}. Defaults to \code{0}.
 #' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{n_ensembles}, \code{noise_std}, \code{seed}, \code{reconstruction_error}, \code{energy_per_imf}, \code{method}.
 #' @export
 EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0) {
@@ -1500,10 +1537,11 @@ EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
 # -- Empirical mode decomposition by sifting, Sec 9.4 steps 1-6.
 #' Empirical mode decomposition by sifting, Sec 9.4 steps 1-6
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.tf_need}.
 #' @param max_imfs Defaults to \code{10}.
 #' @param tol Defaults to \code{0.05}.
 #' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{reconstruction_error}, \code{energy_per_imf}, \code{tol}, \code{method}.
@@ -1538,10 +1576,11 @@ Sift <- function(x, max_imfs = 10, tol = 0.05) {
 # -- One IMF plus its admissibility evidence, Sec 9.4 and eqs (9.8)-(9.11).
 #' One IMF plus its admissibility evidence, Sec 9.4 and eqs (9.8)-(9.11)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.tf_need}.
 #' @param max_iter Defaults to \code{50}.
 #' @param tol Defaults to \code{0.05}.
 #' @return A list with \code{imf}, \code{residual}, \code{n_extrema}, \code{n_zero_crossings}, \code{extrema_zerox_ok}, \code{mean_envelope}, \code{max_envelope_mean}, \code{envelope_mean_ok}, \code{is_imf}, \code{iterations}, \code{converged}, \code{amplitude}, \code{phase}, \code{method}.
@@ -1597,13 +1636,14 @@ Imf <- function(x, max_iter = 50, tol = 0.05) {
 # -- Odd/even T-wave alternans after EMD detrending, Sec 9.2.3 + Sec 9.4.
 #' Odd/even T-wave alternans after EMD detrending, Sec 9.2.3 + Sec 9.4
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ecg See Usage.
-#' @param fs Defaults to \code{250}.
+#' @param ecg Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{250}.
 #' @param r_peaks Defaults to \code{NULL}.
-#' @param twa_window Defaults to \code{c(0.15, 0.4)}.
+#' @param twa_window A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.
 #' @param max_imfs Defaults to \code{6}.
 #' @return A list with \code{twa_amplitude}, \code{twa_rms}, \code{odd_mean}, \code{even_mean}, \code{difference}, \code{n_beats}, \code{n_odd}, \code{n_even}, \code{r_peaks}, \code{rpeaks_supplied}, \code{method}.
 #' @export
@@ -1696,11 +1736,12 @@ TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
 # -- IMF-based characterisation of ventricular fibrillation, Sec 8.16.
 #' IMF-based characterisation of ventricular fibrillation, Sec 8.16
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ecg See Usage.
-#' @param fs Defaults to \code{250}.
+#' @param ecg Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{250}.
 #' @param n_imfs Defaults to \code{6}.
 #' @param tol Defaults to \code{0.05}.
 #' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{features}, \code{dominant_imf}, \code{dominant_freq}, \code{method}.
@@ -1759,7 +1800,8 @@ VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
 # -- Wavelet (relative-energy Shannon) entropy, Rosso et al. (2001).
 #' Wavelet (relative-energy Shannon) entropy, Rosso et al. (2001)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -1798,10 +1840,11 @@ WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
 # -- Two-tap (Haar / db1) orthogonal DWT.
 #' Two-tap (Haar / db1) orthogonal DWT
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.tf_need}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{energy}, \code{input_energy}, \code{method}.
 #' @export
@@ -1829,11 +1872,12 @@ Dwt2Tap <- function(x, levels = 3) {
 # -- EMD-based instantaneous-frequency spectrum, Sec 9.4 eqs (9.8)-(9.12).
 #' EMD-based instantaneous-frequency spectrum, Sec 9.4 eqs (9.8)-(9.12)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param max_imfs Defaults to \code{8}.
 #' @param nfreq Defaults to \code{32}.
 #' @param tol Defaults to \code{0.05}.
@@ -1899,10 +1943,11 @@ EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
 # -- Time-varying HRV band powers, Sec 8.12.
 #' Time-varying HRV band powers, Sec 8.12
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rr_intervals See Usage.
+#' @param rr_intervals Passed to \code{.tf_need}.
 #' @param fs_resamp Defaults to \code{4}.
 #' @param window_len Defaults to \code{64}.
 #' @param noverlap Defaults to \code{NULL}.
@@ -2002,11 +2047,12 @@ HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
 # -- Weighted overlap-add inverse STFT, Griffin & Lim (1984) eq (6).
 #' Weighted overlap-add inverse STFT, Griffin & Lim (1984) eq (6)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param stft See Usage.
-#' @param window Defaults to \code{"hann"}.
+#' @param stft A matrix; indexed by row and column.
+#' @param window Passed to \code{.tf_win}. Defaults to \code{"hann"}.
 #' @param hop Defaults to \code{NULL}.
 #' @return A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start}, \code{valid_end}, \code{n_frames}, \code{method}.
 #' @export
@@ -2072,11 +2118,12 @@ IStft <- function(stft, window = "hann", hop = NULL) {
 # -- Multiresolution analysis, eqs (8.111)-(8.114).
 #' Multiresolution analysis, eqs (8.111)-(8.114)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{approximation}, \code{details}, \code{bands}, \code{reconstruction_error}, \code{energy_per_band}, \code{levels}, \code{wavelet}, \code{method}.
 #' @export
@@ -2116,12 +2163,13 @@ Mra <- function(x, wavelet = "db4", levels = 3) {
 #' ECG-triggered synchronised averaging of PCG envelopes, Sec 3.5 +
 #' 5.5.3
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pcg See Usage.
-#' @param ecg See Usage.
-#' @param fs Defaults to \code{1000}.
+#' @param pcg Passed to \code{.tf_need}.
+#' @param ecg Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1000}.
 #' @param cycle_len Defaults to \code{NULL}.
 #' @param envelope_smoothing Defaults to \code{NULL}.
 #' @return A list with \code{average_envelope}, \code{n_cycles}, \code{cycle_len}, \code{triggers}, \code{s1_index}, \code{s1_time}, \code{s1_amplitude}, \code{s2_index}, \code{s2_time}, \code{s2_amplitude}, \code{s2_s1_ratio}, \code{snr_gain_db}, \code{method}.
@@ -2214,12 +2262,13 @@ PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
 # -- Wavelet-shrinkage denoising of PPG, Sec 8.14 with eqs (8.103)-(8.105).
 #' Wavelet-shrinkage denoising of PPG, Sec 8.14 with eqs (8.103)-(8.105)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ppg See Usage.
+#' @param ppg Passed to \code{.tf_need}.
 #' @param fs Defaults to \code{100}.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{4}.
 #' @param threshold_type Defaults to \code{"soft"}.
 #' @return A list with \code{denoised}, \code{artifact}, \code{threshold}, \code{sigma}, \code{artifact_energy}, \code{snr_improvement_db}, \code{approx_energy}, \code{levels}, \code{wavelet}, \code{fs}, \code{method}.
@@ -2255,7 +2304,8 @@ PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
 # -- Scalogram (|CWT|^2), eq (8.107) and Figure 8.29.
 #' Scalogram (|CWT|^2), eq (8.107) and Figure 8.29
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{CwtRidge}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -2292,12 +2342,13 @@ Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
 # -- Fluctuation intensity of DWT coefficients, Sec 8.17 eq (8.132).
 #' Fluctuation intensity of DWT coefficients, Sec 8.17 eq (8.132)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param eeg See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param eeg Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{5}.
 #' @param scales Defaults to \code{c(3, 4, 5)}.
 #' @param threshold Defaults to \code{NULL}.
@@ -2348,10 +2399,11 @@ SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
 # -- STFT window selection under the time-bandwidth limit, eq (8.10).
 #' STFT window selection under the time-bandwidth limit, eq (8.10)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fs See Usage.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @param desired_t_res See Usage.
 #' @param desired_f_res See Usage.
 #' @return A list with \code{nperseg_time}, \code{nperseg_freq}, \code{nperseg}, \code{achieved_t_res}, \code{achieved_f_res}, \code{tf_product}, \code{heisenberg_bound}, \code{feasible}, \code{method}.
@@ -2381,14 +2433,15 @@ StftParam <- function(fs, desired_t_res, desired_f_res) {
 # -- STFT spectrogram, eq (8.8); |STFT|^2 per the text after eq (8.9).
 #' STFT spectrogram, eq (8.8); |STFT|^2 per the text after eq (8.9)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{HrvTv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param nperseg Defaults to \code{64}.
 #' @param noverlap Defaults to \code{NULL}.
-#' @param window Defaults to \code{"hann"}.
+#' @param window Passed to \code{.tf_win}. Defaults to \code{"hann"}.
 #' @return A list with \code{spectrogram}, \code{stft}, \code{times}, \code{freqs}, \code{nperseg}, \code{hop}, \code{window}, \code{n_frames}, \code{total_energy}, \code{peak_freq}, \code{method}.
 #' @export
 Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
@@ -2439,11 +2492,12 @@ Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
 # -- Stationary (undecimated, a-trous) wavelet transform.
 #' Stationary (undecimated, a-trous) wavelet transform
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_swt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{approx}, \code{details}, \code{levels}, \code{wavelet}, \code{redundancy}, \code{energy_per_level}, \code{method}.
 #' @export
@@ -2478,11 +2532,12 @@ Swt <- function(x, wavelet = "db4", levels = 3) {
 #' SWT (cycle-spinning) denoising, eqs (8.103)-(8.104) + Coifman &
 #' Donoho
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @param threshold Defaults to \code{NULL}.
 #' @param threshold_type Defaults to \code{"soft"}.
@@ -2550,10 +2605,11 @@ SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
 # -- Variational mode decomposition, Dragomiretskiy & Zosso (2014).
 #' Variational mode decomposition, Dragomiretskiy & Zosso (2014)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.tf_need}.
 #' @param K Defaults to \code{3}.
 #' @param alpha Defaults to \code{2000}.
 #' @param tau Defaults to \code{0}.
@@ -2645,7 +2701,8 @@ VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
 # -- CWT ridge detection of transient structures, Sec 8.8.
 #' CWT ridge detection of transient structures, Sec 8.8
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -2701,12 +2758,13 @@ CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
 # -- Scale-by-scale wavelet cross-correlation, Whitcher et al. (2000).
 #' Scale-by-scale wavelet cross-correlation, Whitcher et al. (2000)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param y Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_swt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @param max_lag Defaults to \code{0}.
 #' @return A list with \code{correlations}, \code{best_lags}, \code{covariances}, \code{scales}, \code{overall_correlation}, \code{levels}, \code{max_lag}, \code{wavelet}, \code{method}.
@@ -2792,11 +2850,12 @@ WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
 # -- Wigner-Ville distribution, eq (8.123).
 #' Wigner-Ville distribution, eq (8.123)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param x Passed to \code{.tf_need}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param nfreq Defaults to \code{NULL}.
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{peak_freq}, \code{total_energy}, \code{method}.
 #' @export
@@ -2826,11 +2885,12 @@ WvDist <- function(x, fs = 1, nfreq = NULL) {
 # -- Wavelet subband energy, Sec 8.15.
 #' Wavelet subband energy, Sec 8.15
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{WtEntropy}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{energies}, \code{relative}, \code{labels}, \code{total_energy}, \code{input_energy}, \code{energy_balance}, \code{dominant_band}, \code{levels}, \code{wavelet}, \code{method}.
 #' @export
@@ -2860,11 +2920,12 @@ WtEnergy <- function(x, wavelet = "db4", levels = 3) {
 # -- Per-subband sample moments of the DWT coefficients.
 #' Per-subband sample moments of the DWT coefficients
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{moments}, \code{labels}, \code{levels}, \code{wavelet}, \code{method}.
 #' @export
@@ -2906,11 +2967,12 @@ WtMoment <- function(x, wavelet = "db4", levels = 3) {
 # -- Wavelet packet decomposition (full binary tree, natural order).
 #' Wavelet packet decomposition (full binary tree, natural order)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_filters}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{nodes}, \code{leaves}, \code{n_leaves}, \code{energy_per_leaf}, \code{dominant_leaf}, \code{entropy}, \code{levels}, \code{wavelet}, \code{method}.
 #' @export
@@ -2959,11 +3021,12 @@ Wpt <- function(x, wavelet = "db4", levels = 3) {
 # -- Wavelet shrinkage, eqs (8.103)-(8.105) with the universal threshold.
 #' Wavelet shrinkage, eqs (8.103)-(8.105) with the universal threshold
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{PpgWtDen}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db4"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Defaults to \code{3}.
 #' @param threshold_type Defaults to \code{"soft"}.
 #' @param threshold Defaults to \code{NULL}.
@@ -3013,11 +3076,12 @@ WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
 # -- Unbiased wavelet variance by scale, Percival (1995).
 #' Unbiased wavelet variance by scale, Percival (1995)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param wavelet Defaults to \code{"db1"}.
+#' @param x Passed to \code{.tf_need}.
+#' @param wavelet Passed to \code{.tf_filters}. Defaults to \code{"db1"}.
 #' @param levels Defaults to \code{3}.
 #' @return A list with \code{variances}, \code{scales}, \code{n_used}, \code{total_variance}, \code{sample_variance}, \code{dominant_scale}, \code{is_allan}, \code{wavelet}, \code{method}.
 #' @export
@@ -3071,10 +3135,11 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 
 #' .tf_echo_idx
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoImp}, \code{EchoSig}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param default Defaults to \code{NULL}.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
@@ -3095,12 +3160,13 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 # -- Two-impulse echo excitation, eq (4.74).
 #' Two-impulse echo excitation, eq (4.74)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 See Usage.
-#' @param n See Usage.
+#' @param n Passed to \code{.tf_echo_idx}.
 #' @return A list with \code{x}, \code{n}, \code{a}, \code{n_0}, \code{method}.
 #' @export
 EchoImp <- function(a, n_0, n) {
@@ -3126,13 +3192,14 @@ EchoImp <- function(a, n_0, n) {
 # -- Wavelet plus echo in the time domain, eq (4.75).
 #' Wavelet plus echo in the time domain, eq (4.75)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param h See Usage.
-#' @param a See Usage.
+#' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param n Passed to \code{.tf_echo_idx}.
 #' @return A list with \code{y}, \code{n}, \code{h}, \code{a}, \code{n_0}, \code{echo_visible}, \code{method}.
 #' @export
 EchoSig <- function(h, a, n_0, n = NULL) {
@@ -3162,13 +3229,14 @@ EchoSig <- function(h, a, n_0, n = NULL) {
 # -- z-transform of a wavelet with an echo, eq (4.76).
 #' Z-transform of a wavelet with an echo, eq (4.76)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 See Usage.
 #' @param z See Usage.
-#' @param H Defaults to \code{NULL}.
+#' @param H Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{Y}, \code{echo_factor}, \code{z}, \code{H}, \code{a}, \code{n_0}, \code{method}.
 #' @export
 EchoZ <- function(a, n_0, z, H = NULL) {
@@ -3208,13 +3276,14 @@ EchoZ <- function(a, n_0, z, H = NULL) {
 # -- Fourier spectrum of a wavelet with an echo, eq (4.77).
 #' Fourier spectrum of a wavelet with an echo, eq (4.77)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 See Usage.
 #' @param omega See Usage.
-#' @param H Defaults to \code{NULL}.
+#' @param H Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{Y}, \code{echo_factor}, \code{magnitude}, \code{phase}, \code{omega}, \code{ripple_period}, \code{a}, \code{n_0}, \code{method}.
 #' @export
 EchoSpec <- function(a, n_0, omega, H = NULL) {
@@ -3257,13 +3326,14 @@ EchoSpec <- function(a, n_0, omega, H = NULL) {
 # -- Complex log spectrum of a wavelet with an echo, eqs (4.78)-(4.79).
 #' Complex log spectrum of a wavelet with an echo, eqs (4.78)-(4.79)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Numeric; passed to \code{abs}.
 #' @param n_0 See Usage.
 #' @param omega See Usage.
-#' @param H_hat Defaults to \code{NULL}.
+#' @param H_hat Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param n_terms Defaults to \code{NULL}.
 #' @return A list with \code{Y_hat}, \code{echo_log}, \code{series}, \code{series_valid}, \code{series_error}, \code{omega}, \code{a}, \code{n_0}, \code{n_terms}, \code{method}.
 #' @export
@@ -3334,13 +3404,14 @@ EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
 # -- Complex cepstrum of a wavelet with an echo, eq (4.80).
 #' Complex cepstrum of a wavelet with an echo, eq (4.80)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param h_hat See Usage.
-#' @param a See Usage.
+#' @param a Numeric; passed to \code{abs}.
 #' @param n_0 See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param n Optional; may be \code{NULL}. Passed to \code{.tf_echo_idx}.
 #' @param n_terms Defaults to \code{NULL}.
 #' @return A list with \code{y_hat}, \code{n}, \code{impulses}, \code{n_impulses}, \code{echo_delay}, \code{a}, \code{method}.
 #' @export
@@ -3391,11 +3462,12 @@ EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
 # -- Power spectrum of a wavelet with an echo, eq (4.84).
 #' Power spectrum of a wavelet with an echo, eq (4.84)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param a See Usage.
+#' @param H A vector; its length is taken.
+#' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 See Usage.
 #' @param z See Usage.
 #' @return A list with \code{power}, \code{wavelet_power}, \code{echo_power}, \code{z}, \code{a}, \code{n_0}, \code{method}.
@@ -3433,11 +3505,12 @@ EchoPsd <- function(H, a, n_0, z) {
 # -- Log power spectrum of a wavelet with an echo, eq (4.85).
 #' Log power spectrum of a wavelet with an echo, eq (4.85)
 #'
-#' Part of the rangayyan_tf implementation; see the file header for the
+#' A step of the rangayyan_tf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param a See Usage.
+#' @param H A vector; its length is taken.
+#' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 See Usage.
 #' @param omega See Usage.
 #' @return A list with \code{log_power}, \code{wavelet_log_power}, \code{echo_log_power}, \code{dc_term}, \code{ripple}, \code{modulation_index}, \code{ripple_period}, \code{decomposition_error}, \code{omega}, \code{a}, \code{n_0}, \code{method}.

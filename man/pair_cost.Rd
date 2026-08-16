@@ -9,10 +9,10 @@ pair_cost(n, mode = "cross-encoder")
 }
 \arguments{
 \item{n}{See Usage.}
-\item{mode}{Defaults to \code{"cross-encoder"}.}
+\item{mode}{One of \code{"bi-encoder"}, \code{"cross-encoder"}. Defaults to \code{"cross-encoder"}.}
 }
 \description{
-Part of the sbert_native implementation; see the file header for the source it follows.
+A step of the sbert_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{forward_passes}, \code{cross_encoder}, \code{bi_encoder}, \code{speedup}, \code{n}, \code{note}.

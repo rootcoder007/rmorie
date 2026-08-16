@@ -12,11 +12,11 @@ truncated_dp(alpha, K, base_sampler = NULL, rng = NULL, seed = 0, renormalise = 
 \item{K}{See Usage.}
 \item{base_sampler}{Defaults to \code{NULL}.}
 \item{rng}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
-\item{renormalise}{Defaults to \code{TRUE}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{renormalise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the slowdp_native implementation; see the file header for the source it follows.
+A step of the slowdp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{weights}, \code{atoms}, \code{discarded_mass}, \code{expected_discarded}, \code{renormalised}, \code{K}, \code{alpha}, \code{method}, \code{note}.

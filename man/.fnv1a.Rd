@@ -8,10 +8,10 @@
 .fnv1a(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the fastxt_native implementation; see the file header for the source it follows.
+A step of the fastxt_native implementation. Called by \code{.gram_slot}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{as.integer}.

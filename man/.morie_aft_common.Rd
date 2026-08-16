@@ -8,16 +8,16 @@
 .morie_aft_common(time, event, X, family, title, method, ...)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{X}{See Usage.}
-\item{family}{See Usage.}
-\item{title}{See Usage.}
-\item{method}{See Usage.}
+\item{time}{Passed to \code{.morie_cox_prepare}.}
+\item{event}{Passed to \code{.morie_cox_prepare}.}
+\item{X}{Passed to \code{.morie_cox_prepare}.}
+\item{family}{Passed to \code{.morie_aft_fit}.}
+\item{title}{Passed to \code{.morie_aft_result}.}
+\item{method}{Passed to \code{.morie_aft_result}.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the aft_native implementation; see the file header for the source it follows.
+A step of the aft_native implementation. Called by \code{morie_aft_generalized_gamma}, \code{morie_aft_log_logistic}, \code{morie_aft_weibull}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_aft_result}.

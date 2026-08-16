@@ -8,15 +8,15 @@
 .schab_cstr_test(points, times, region, time_interval, n_space_bins = 3L, n_time_bins = 3L)
 }
 \arguments{
-\item{points}{See Usage.}
+\item{points}{A matrix; passed to \code{as.matrix}.}
 \item{times}{See Usage.}
-\item{region}{See Usage.}
-\item{time_interval}{See Usage.}
+\item{region}{Passed to \code{.schab_st_region_box}.}
+\item{time_interval}{A vector; indexed elementwise.}
 \item{n_space_bins}{Defaults to \code{3L}.}
 \item{n_time_bins}{Defaults to \code{3L}.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{spstp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{index_of_dispersion}, \code{df}, \code{p_value}, \code{counts}, \code{mean_count}, \code{var_count}.

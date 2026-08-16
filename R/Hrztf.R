@@ -12,9 +12,9 @@
 #' large positive number if y > y1".  Inside [y2, y1] the grid values
 #' are interpolated.
 #'
-#' @param yv See Usage.
-#' @param ygrid See Usage.
-#' @param T See Usage.
+#' @param yv Numeric; combined arithmetically in the body.
+#' @param ygrid A vector; its length is taken and its elements indexed.
+#' @param T A vector; indexed elementwise.
 #' @param y2 See Usage.
 #' @param y1 See Usage.
 #' @return The value of \code{[}.

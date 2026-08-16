@@ -8,15 +8,15 @@
 .rfforest(X, Y, n_trees, nodesize, mtry, q)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
-\item{n_trees}{See Usage.}
-\item{nodesize}{See Usage.}
-\item{mtry}{See Usage.}
-\item{q}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{Y}{Passed to \code{.rfgrow}.}
+\item{n_trees}{A count; the body uses it as \code{seq_len(...)}.}
+\item{nodesize}{Passed to \code{.rfgrow}.}
+\item{mtry}{Passed to \code{.rfgrow}.}
+\item{q}{Passed to \code{.rfgrow}.}
 }
 \description{
-Part of the mvsml_rf_shared implementation; see the file header for the source it follows.
+A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{trees}, \code{oob}.

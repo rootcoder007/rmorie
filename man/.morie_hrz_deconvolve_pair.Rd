@@ -12,12 +12,12 @@
 \item{eta}{See Usage.}
 \item{grid_u}{See Usage.}
 \item{grid_z}{See Usage.}
-\item{nu_U}{See Usage.}
-\item{nu_eps}{See Usage.}
+\item{nu_U}{Numeric; combined arithmetically in the body.}
+\item{nu_eps}{Numeric; combined arithmetically in the body.}
 \item{n_tau}{Defaults to \code{2001L}.}
 }
 \description{
-Part of the horowitz_native7 implementation; see the file header for the source it follows.
+A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{f_U}, \code{f_eps}.

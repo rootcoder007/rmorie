@@ -36,7 +36,8 @@
 
 #' .rmrl_key
 #'
-#' Part of the rmrl_native implementation; see the file header for the
+#' A step of the rmrl_native implementation. Called by \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
@@ -49,10 +50,11 @@
 
 #' .rmrl_compile
 #'
-#' Part of the rmrl_native implementation; see the file header for the
+#' A step of the rmrl_native implementation. Called by \code{morie_rmrl_reward_machine}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param phi See Usage.
+#' @param phi Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{function}.
 #' @export
 .rmrl_compile <- function(phi) {
@@ -114,10 +116,11 @@ morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
 
 #' (delta_u(u, sigma), delta_r(u, delta_u(u, sigma)))
 #'
-#' Part of the rmrl_native implementation; see the file header for the
+#' A step of the rmrl_native implementation. Called by \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}, \code{morie_rmrl_reward_machine_run}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param machine See Usage.
+#' @param machine A list; the body reads \code{$edges}, \code{$terminal} from it.
 #' @param u See Usage.
 #' @param sigma See Usage.
 #' @return A list with \code{u}, \code{reward}.
@@ -140,7 +143,7 @@ morie_rmrl_machine_step <- function(machine, u, sigma) {
 #' sigma_0, sigma_1, ..., i.e. L(s) for each visited state. Returns the
 #' machine-state trajectory and the rewards emitted.
 #'
-#' @param machine See Usage.
+#' @param machine A list; the body reads \code{$terminal}, \code{$u0} from it.
 #' @param labels See Usage.
 #' @return A list with \code{estimate}, \code{states}, \code{rewards}, \code{total_reward}, \code{final_state}, \code{accepted}, \code{method}.
 #' @export
@@ -175,10 +178,10 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
 #' .ghc_rng state: the Python arm draws rng.random() from
 #' np.random.default_rng(seed), bit-identical to .ghc_unif here.
 #'
-#' @param row See Usage.
-#' @param A See Usage.
+#' @param row A vector; indexed elementwise.
+#' @param A A vector; its length is taken and its elements indexed.
 #' @param epsilon See Usage.
-#' @param rng See Usage.
+#' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{[[}.
 #' @export
 .rmrl_eps_greedy <- function(row, A, epsilon, rng) {
@@ -209,23 +212,24 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
 
 #' morie_rmrl
 #'
-#' Part of the rmrl_native implementation; see the file header for the
+#' A step of the rmrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param machines See Usage.
+#' @param machines A vector; its length is taken and its elements indexed.
 #' @param states See Usage.
 #' @param actions See Usage.
 #' @param step See Usage.
 #' @param label See Usage.
-#' @param gamma Defaults to \code{0.9}.
-#' @param alpha Defaults to \code{0.5}.
-#' @param epsilon Defaults to \code{0.1}.
-#' @param episodes Defaults to \code{500}.
-#' @param horizon Defaults to \code{100}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param epsilon Passed to \code{.rmrl_eps_greedy}. Defaults to \code{0.1}.
+#' @param episodes A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.
+#' @param horizon A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
 #' @param start Defaults to \code{NULL}.
 #' @param dead_end Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
-#' @param task_order Defaults to \code{NULL}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param task_order Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{n_qfunctions}, \code{episodes}, \code{method}.
 #' @export
 morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
@@ -368,22 +372,23 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
 
 #' morie_rmrl_qlearn_flat
 #'
-#' Part of the rmrl_native implementation; see the file header for the
+#' A step of the rmrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param machine See Usage.
+#' @param machine A list; the body reads \code{$states}, \code{$terminal}, \code{$u0} from it.
 #' @param states See Usage.
 #' @param actions See Usage.
 #' @param step See Usage.
 #' @param label See Usage.
-#' @param gamma Defaults to \code{0.9}.
-#' @param alpha Defaults to \code{0.5}.
-#' @param epsilon Defaults to \code{0.1}.
-#' @param episodes Defaults to \code{500}.
-#' @param horizon Defaults to \code{100}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param epsilon Passed to \code{.rmrl_eps_greedy}. Defaults to \code{0.1}.
+#' @param episodes A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.
+#' @param horizon A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
 #' @param start Defaults to \code{NULL}.
 #' @param dead_end Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{q}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{method}.
 #' @export
 morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
@@ -466,7 +471,8 @@ morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
 
 #' morie_rmrl_cheatsheet
 #'
-#' Part of the rmrl_native implementation; see the file header for the
+#' A step of the rmrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

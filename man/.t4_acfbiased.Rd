@@ -8,8 +8,8 @@
 .t4_acfbiased(x, lag)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{lag}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{lag}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 denominator) normalisation, i.e. stats::acf.

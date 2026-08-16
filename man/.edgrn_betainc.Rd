@@ -8,13 +8,13 @@
 .edgrn_betainc(a, b, x, iters = 300)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{x}{See Usage.}
-\item{iters}{Defaults to \code{300}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
+\item{iters}{Numeric; combined arithmetically in the body. Defaults to \code{300}.}
 }
 \description{
-Part of the edgrn_native implementation; see the file header for the source it follows.
+A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

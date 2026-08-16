@@ -14,10 +14,11 @@
 
 #' tripartite_graph
 #'
-#' Part of the tagRC_native implementation; see the file header for the
+#' A step of the tagRC_native implementation. Called by \code{folkrank}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param triples See Usage.
+#' @param triples A vector; its length is taken.
 #' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples}, \code{note}.
 #' @export
 tripartite_graph <- function(triples) {
@@ -55,7 +56,8 @@ tripartite_graph <- function(triples) {
 
 #' preference_vector
 #'
-#' Part of the tagRC_native implementation; see the file header for the
+#' A step of the tagRC_native implementation. Called by \code{folkrank}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param nodes See Usage.
@@ -89,12 +91,13 @@ preference_vector <- function(nodes, focus, weight = 0.9) {
 
 #' adapted_pagerank
 #'
-#' Part of the tagRC_native implementation; see the file header for the
+#' A step of the tagRC_native implementation. Called by \code{folkrank}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adjacency See Usage.
+#' @param adjacency A vector; indexed elementwise.
 #' @param nodes See Usage.
-#' @param p Defaults to \code{NULL}.
+#' @param p Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param d Defaults to \code{0.7}.
 #' @param iters Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-12}.
@@ -165,7 +168,8 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
 
 #' folkrank
 #'
-#' Part of the tagRC_native implementation; see the file header for the
+#' A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param triples See Usage.
@@ -204,7 +208,8 @@ tagawarerec <- folkrank
 
 #' .tagRC_cheatsheet
 #'
-#' Part of the tagRC_native implementation; see the file header for the
+#' A step of the tagRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -224,7 +229,8 @@ tagawarerec <- folkrank
 
 #' morie_tagRC
 #'
-#' Part of the tagRC_native implementation; see the file header for the
+#' A step of the tagRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param triples See Usage.

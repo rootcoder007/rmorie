@@ -8,12 +8,12 @@
 .prsLR_first_seq(seq, first, nts)
 }
 \arguments{
-\item{seq}{See Usage.}
-\item{first}{See Usage.}
+\item{seq}{A vector; its length is taken.}
+\item{first}{A vector; indexed elementwise.}
 \item{nts}{See Usage.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. Called by \code{.prsLR_closure}, \code{.prsLR_first_sets}, \code{.prsLR_follow_sets}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{unique}.

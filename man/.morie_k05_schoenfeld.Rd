@@ -8,13 +8,13 @@
 .morie_k05_schoenfeld(t, e, X, beta)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{e}{See Usage.}
-\item{X}{See Usage.}
-\item{beta}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{e}{A vector; indexed elementwise.}
+\item{X}{A matrix; indexed by row and column.}
+\item{beta}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the k05_tranche2 implementation; see the file header for the source it follows.
+A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{times}, \code{res}, \code{var}.

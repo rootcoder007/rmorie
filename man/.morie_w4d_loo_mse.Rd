@@ -8,11 +8,11 @@
 .morie_w4d_loo_mse(D, t)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{t}{See Usage.}
+\item{D}{A matrix; passed to \code{t}.}
+\item{t}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_unsupervised_pretraining}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{theta}, \code{loo}, \code{train}.

@@ -99,12 +99,13 @@
 
 #' .wsm_boot_reps
 #'
-#' Part of the wsm_native implementation; see the file header for the
+#' A step of the wsm_native implementation. Called by \code{morie_wsm_bootstrap}, \code{morie_wsm_plug_in}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param data See Usage.
 #' @param statistic See Usage.
-#' @param B See Usage.
+#' @param B A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.
 #' @return A vector, from \code{vapply}.
 #' @export

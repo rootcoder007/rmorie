@@ -27,7 +27,7 @@ NULL
 #' mid-rank map is such a transformation and is exactly reproducible in
 #' both language arms, unlike a fitted CDF.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .hrz3_u01 <- function(v) {
@@ -40,10 +40,11 @@ NULL
 # Equispaced grid on [0, 1] with trapezoid quadrature weights.
 #' Equispaced grid on [0, 1] with trapezoid quadrature weights
 #'
-#' Part of the helpers_hrz3 implementation; see the file header for the
+#' A step of the helpers_hrz3 implementation. Called by \code{Hrznpiv}, \code{Hrztiku}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{z}, \code{w}.
 #' @export
 .hrz3_grid_w <- function(m) {
@@ -60,12 +61,13 @@ NULL
 # Gaussian kernel matrix K((a_i - b_j)/h).
 #' Gaussian kernel matrix K((a_i - b_j)/h)
 #'
-#' Part of the helpers_hrz3 implementation; see the file header for the
+#' A step of the helpers_hrz3 implementation. Called by \code{.hrz3_fxw_grid}, \code{Hrznpiv}, \code{Hrzplrq} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
 #' @param b See Usage.
-#' @param h See Usage.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .hrz3_kmat <- function(a, b, h) {
@@ -87,10 +89,10 @@ NULL
 #' makes an exact-recovery anchor possible for the additive fits built
 #' on it; Nadaraya-Watson does not.
 #'
-#' @param z See Usage.
-#' @param y See Usage.
+#' @param z A vector; its length is taken.
+#' @param y A vector; its length is taken.
 #' @param zq See Usage.
-#' @param h See Usage.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
 .hrz3_ll_smooth <- function(z, y, zq, h) {
@@ -129,9 +131,9 @@ NULL
 #' the usual empirical quantile, so it agrees with a plain sort on a
 #' degenerate kernel -- the anchor used by Hrzplrq.
 #'
-#' @param v See Usage.
-#' @param w See Usage.
-#' @param tau See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
+#' @param w A vector; its length is taken and its elements indexed.
+#' @param tau Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
 .hrz3_wquant <- function(v, w, tau) {
@@ -169,9 +171,9 @@ NULL
 #' own-observation term of a kernel density derivative is identically
 #' zero only in the limit, and keeping it biases delta toward zero.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param h See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{delta}, as built in the body.
 #' @export
 .hrz3_ade <- function(X, y, h) {
@@ -206,9 +208,9 @@ NULL
 #'
 #' (Horowitz assumption HT2(a), p. 219).
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param h See Usage.
+#' @param X Passed to \code{.hrz3_ade}.
+#' @param y Passed to \code{.hrz3_ade}.
+#' @param h Passed to \code{.hrz3_ade}.
 #' @return A numeric value.
 #' @export
 .hrz3_index_dir <- function(X, y, h) {
@@ -234,7 +236,7 @@ NULL
 #' wide: at n = 40 it puts two thirds of the kernel mass outside
 #' support.
 #'
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .hrz3_bw01 <- function(n) {
@@ -263,11 +265,11 @@ NULL
 #' such a correction, and it makes mass == 1 an exact identity that
 #' fails loudly if the 1/(n h^2) constant is mis-wired.
 #'
-#' @param u See Usage.
-#' @param v See Usage.
-#' @param z See Usage.
+#' @param u A vector; its length is taken.
+#' @param v A vector; its length is taken.
+#' @param z Passed to \code{.hrz3_kmat}.
 #' @param wq See Usage.
-#' @param h See Usage.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A list with \code{f}, \code{mass}.
 #' @export
 .hrz3_fxw_grid <- function(u, v, z, wq, h) {
@@ -297,9 +299,9 @@ NULL
 #' notes.  "poly" is the monomial basis, which spans the same spaces but
 #' is not orthonormal.
 #'
-#' @param z See Usage.
-#' @param J See Usage.
-#' @param kind Defaults to \code{"poly"}.
+#' @param z A vector; its length is taken.
+#' @param J A count; the body uses it as \code{seq_len(...)}.
+#' @param kind One of \code{"cos"}, \code{"poly"}. Defaults to \code{"poly"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .hrz3_sieve <- function(z, J, kind = "poly") {

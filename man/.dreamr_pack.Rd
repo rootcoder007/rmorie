@@ -8,11 +8,11 @@
 .dreamr_pack(vals, name)
 }
 \arguments{
-\item{vals}{See Usage.}
+\item{vals}{A vector; its length is taken.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the dreamr_native implementation; see the file header for the source it follows.
+A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{returns}, \code{n}, \code{method}.

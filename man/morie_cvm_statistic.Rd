@@ -8,14 +8,14 @@
 morie_cvm_statistic(m, instruments, form = "sum", n_equality = 0L, weights = NULL)
 }
 \arguments{
-\item{m}{See Usage.}
-\item{instruments}{See Usage.}
-\item{form}{Defaults to \code{"sum"}.}
-\item{n_equality}{Defaults to \code{0L}.}
+\item{m}{Passed to \code{morie_weighted_moments}.}
+\item{instruments}{A list; the body reads \code{$instruments} from it.}
+\item{form}{Passed to \code{morie_S_function}. Defaults to \code{"sum"}.}
+\item{n_equality}{Passed to \code{morie_S_function}. Defaults to \code{0L}.}
 \item{weights}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the bndsmw_native implementation; see the file header for the source it follows.
+A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.

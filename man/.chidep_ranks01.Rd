@@ -8,10 +8,10 @@
 .chidep_ranks01(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the ChiDep implementation; see the file header for the source it follows.
+A step of the ChiDep implementation. Called by \code{ChiDep}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

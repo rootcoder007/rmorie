@@ -8,13 +8,13 @@
 morie_infmax(global_features, feature_maps, critic, estimator = "jsd")
 }
 \arguments{
-\item{global_features}{See Usage.}
-\item{feature_maps}{See Usage.}
-\item{critic}{See Usage.}
-\item{estimator}{Defaults to \code{"jsd"}.}
+\item{global_features}{Passed to \code{.infmax_local_objective}.}
+\item{feature_maps}{Passed to \code{.infmax_local_objective}.}
+\item{critic}{Passed to \code{.infmax_local_objective}.}
+\item{estimator}{Passed to \code{.infmax_local_objective}. Defaults to \code{"jsd"}.}
 }
 \description{
-Part of the infmax_native implementation; see the file header for the source it follows.
+A step of the infmax_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.infmax_local_objective}.

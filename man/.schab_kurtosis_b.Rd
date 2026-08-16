@@ -11,7 +11,7 @@
 \item{z}{See Usage.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_moran_moments}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

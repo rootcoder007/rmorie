@@ -8,15 +8,15 @@
 .hibrid_reml_at(la, ls, Kg, Ks, y, X)
 }
 \arguments{
-\item{la}{See Usage.}
-\item{ls}{See Usage.}
-\item{Kg}{See Usage.}
-\item{Ks}{See Usage.}
-\item{y}{See Usage.}
-\item{X}{See Usage.}
+\item{la}{Numeric; combined arithmetically in the body.}
+\item{ls}{Numeric; combined arithmetically in the body.}
+\item{Kg}{Numeric; combined arithmetically in the body.}
+\item{Ks}{Numeric; combined arithmetically in the body.}
+\item{y}{A vector; its length is taken.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the hibrid_native implementation; see the file header for the source it follows.
+A step of the hibrid_native implementation. Called by \code{morie_hibrid_hibrid_prediction}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ll}, \code{beta}, \code{s2e}, \code{L}.

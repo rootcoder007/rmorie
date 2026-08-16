@@ -8,14 +8,14 @@
 .tmlcds_refit_on(info, steps, s, tr, fold, tuning, penalties, trim)
 }
 \arguments{
-\item{info}{See Usage.}
-\item{steps}{See Usage.}
+\item{info}{A list; the body reads \code{$columns}, \code{$q_covariates}, \code{$treatment}, \code{$y_scaled} from it.}
+\item{steps}{A vector; indexed elementwise.}
 \item{s}{See Usage.}
-\item{tr}{See Usage.}
-\item{fold}{See Usage.}
+\item{tr}{A vector; its length is taken.}
+\item{fold}{A vector; its length is taken and its elements indexed.}
 \item{tuning}{See Usage.}
 \item{penalties}{See Usage.}
-\item{trim}{See Usage.}
+\item{trim}{Numeric; combined arithmetically in the body.}
 }
 \description{
 rows tr and fold hold 1-based row indices.

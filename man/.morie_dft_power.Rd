@@ -8,10 +8,10 @@
 .morie_dft_power(seg)
 }
 \arguments{
-\item{seg}{See Usage.}
+\item{seg}{A vector; its length is taken.}
 }
 \description{
-Part of the rangayyan_sig implementation; see the file header for the source it follows.
+A step of the rangayyan_sig implementation. Called by \code{BartlettPSD}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

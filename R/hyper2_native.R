@@ -69,11 +69,12 @@
 
 #' .hyper2_dist
 #'
-#' Part of the hyper2_native implementation; see the file header for the
+#' A step of the hyper2_native implementation. Called by \code{morie_hyper2_kernel}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .hyper2_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
@@ -112,11 +113,12 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
 
 #' .hyper2_jit
 #'
-#' Part of the hyper2_native implementation; see the file header for the
+#' A step of the hyper2_native implementation. Called by \code{morie_hyper2}, \code{morie_hyper2_logml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param K See Usage.
-#' @param v See Usage.
+#' @param K A matrix; indexed by row and column.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return The value of \code{K}, as built in the body.
 #' @export
 .hyper2_jit <- function(K, v) {
@@ -162,7 +164,7 @@ morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
 #' long one, and a sampler will wander off into that region without ever
 #' saying so.
 #'
-#' @param theta See Usage.
+#' @param theta Numeric; combined arithmetically in the body.
 #' @return The value of \code{.w3_csum}.
 #' @export
 .hyper2_logprior <- function(theta)
@@ -208,9 +210,9 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
 #' the acceptance test. No rejection and no step size.
 #'
 #' @param logl See Usage.
-#' @param f See Usage.
-#' @param L See Usage.
-#' @param e See Usage.
+#' @param f A vector; its length is taken.
+#' @param L A matrix; indexed by row and column.
+#' @param e Passed to \code{.ghc_norm}.
 #' @return The value of \code{f}, as built in the body.
 #' @export
 .hyper2_elliptical <- function(logl, f, L, e) {

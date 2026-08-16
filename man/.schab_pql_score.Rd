@@ -8,18 +8,18 @@
 .schab_pql_score(z, X, beta, S, Sigma_S, family, link_kind, sigma2 = 1, R = NULL)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{X}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
+\item{X}{A matrix; passed to \code{t}.}
 \item{beta}{See Usage.}
-\item{S}{See Usage.}
-\item{Sigma_S}{See Usage.}
-\item{family}{See Usage.}
-\item{link_kind}{See Usage.}
-\item{sigma2}{Defaults to \code{1}.}
-\item{R}{Defaults to \code{NULL}.}
+\item{S}{A matrix; passed to \code{solve}.}
+\item{Sigma_S}{A matrix; passed to \code{as.matrix}.}
+\item{family}{Passed to \code{.schab_data_covariance}.}
+\item{link_kind}{Passed to \code{.schab_link}.}
+\item{sigma2}{Passed to \code{.schab_data_covariance}. Defaults to \code{1}.}
+\item{R}{Passed to \code{.schab_data_covariance}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{sppql}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{score_beta}, \code{score_S}.

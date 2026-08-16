@@ -8,13 +8,13 @@
 .morie_km2_weat_sums(A_1, A_2, W_1, W_2)
 }
 \arguments{
-\item{A_1}{See Usage.}
-\item{A_2}{See Usage.}
+\item{A_1}{A matrix; passed to \code{as.matrix}.}
+\item{A_2}{A matrix; passed to \code{as.matrix}.}
 \item{W_1}{See Usage.}
 \item{W_2}{See Usage.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_weat_effect_size}, \code{morie_kamath_ch6_weat_function}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

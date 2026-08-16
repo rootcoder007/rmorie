@@ -13,7 +13,7 @@ MfAcf(x, gain = 1, dt = 1)
 \item{dt}{Defaults to \code{1}.}
 }
 \description{
-CORRELATION, so y(t) = K phi_x(t - t0): the output is a delayed copy of the reference\\'s ACF and peaks at t0 with K times its energy.
+CORRELATION, so y(t) = K phi_x(t - t0): the output is a delayed copy of the reference\'s ACF and peaks at t0 with K times its energy.
 }
 \value{
 A list with \code{y}, \code{acf}, \code{lags}, \code{peak_index}, \code{peak_value}, \code{expected_peak}, \code{energy}, \code{max_difference}, \code{equals_acf}, \code{method}.

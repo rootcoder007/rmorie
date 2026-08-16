@@ -14,10 +14,11 @@
 
 #' .funCA_grid_weights
 #'
-#' Part of the funCA_native implementation; see the file header for the
+#' A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_t See Usage.
+#' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .funCA_grid_weights <- function(n_t) {
@@ -29,12 +30,13 @@
 
 #' .funCA_fpca
 #'
-#' Part of the funCA_native implementation; see the file header for the
+#' A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
-#' @param w See Usage.
-#' @param n_keep See Usage.
+#' @param C Numeric; combined arithmetically in the body.
+#' @param w A vector; its length is taken.
+#' @param n_keep A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{lam}, \code{phi}, \code{all}.
 #' @export
 .funCA_fpca <- function(C, w, n_keep) {
@@ -58,7 +60,8 @@
 
 #' .funCA_sym_inv_sqrt
 #'
-#' Part of the funCA_native implementation; see the file header for the
+#' A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param M See Usage.
@@ -74,11 +77,12 @@
 
 #' morie_funCA_functional_cca
 #'
-#' Part of the funCA_native implementation; see the file header for the
+#' A step of the funCA_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param Y A matrix; passed to \code{as.matrix}.
 #' @param p Defaults to \code{NULL}.
 #' @param q Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{correlations}, \code{weights_x}, \code{weights_y}, \code{variates_x}, \code{variates_y}, \code{p}, \code{q}, \code{explained_x}, \code{explained_y}, \code{eigenvalues_x}, \code{eigenvalues_y}, \code{n}, \code{method}, \code{note}.
@@ -188,7 +192,8 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
 
 #' .funCA_cheatsheet
 #'
-#' Part of the funCA_native implementation; see the file header for the
+#' A step of the funCA_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

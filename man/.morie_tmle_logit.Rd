@@ -8,10 +8,10 @@
 .morie_tmle_logit(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmle_native implementation; see the file header for the source it follows.
+A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code{morie_tmle_time_varying}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

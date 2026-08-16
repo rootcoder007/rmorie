@@ -40,7 +40,7 @@ A list with the private answer, the noise scale, the budget   in rho, how many r
 }
 \keyword{internal}
 \examples{
-Y <- vapply(0:29, function(i) round(((i * 13)%%41) - 20 + ((i * 
-    7)%%3) * 0.5, 4), numeric(1))
+Y <- vapply(0:29, function(i) round(((i * 13)\%\%41) - 20 + ((i * 
+    7)\%\%3) * 0.5, 4), numeric(1))
 morie_tcmech(Y, 12.5, 10, 1, 1e-05, NULL, 3)
 }

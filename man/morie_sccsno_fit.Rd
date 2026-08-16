@@ -9,14 +9,14 @@ morie_sccsno_fit(cases, risk_periods, age_breaks = c(), iters = 100, tol = 1e-10
 }
 \arguments{
 \item{cases}{See Usage.}
-\item{risk_periods}{See Usage.}
+\item{risk_periods}{Passed to \code{.sccsno_rp}.}
 \item{age_breaks}{Defaults to \code{c()}.}
 \item{iters}{Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-10}.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{ridge}{A matrix; passed to \code{diag}. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the sccsno_native implementation; see the file header for the source it follows.
+A step of the sccsno_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{se_log_ri}, \code{age_effects}, \code{se_age}, \code{coef}, \code{se}, \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations}, \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.

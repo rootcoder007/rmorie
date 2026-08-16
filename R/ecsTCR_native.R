@@ -63,7 +63,7 @@
 #' long double, CPython 3.12 and later compensate -- and they are not
 #' unfaithful in the same way.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .ecstcr_csum <- function(v) {
@@ -80,10 +80,11 @@
 
 #' .ecstcr_mean
 #'
-#' Part of the ecsTCR_native implementation; see the file header for the
+#' A step of the ecsTCR_native implementation. Called by \code{.ecstcr_ols}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ecstcr_mean <- function(v)
@@ -91,17 +92,18 @@
 
 #' .ecstcr_deriv
 #'
-#' Part of the ecsTCR_native implementation; see the file header for the
+#' A step of the ecsTCR_native implementation. Called by \code{.ecstcr_euler}, \code{.ecstcr_rk4}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param TD See Usage.
-#' @param F See Usage.
-#' @param lam See Usage.
-#' @param gam See Usage.
-#' @param eps See Usage.
-#' @param C See Usage.
-#' @param CD See Usage.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param TD Numeric; combined arithmetically in the body.
+#' @param F Numeric; combined arithmetically in the body.
+#' @param lam Numeric; combined arithmetically in the body.
+#' @param gam Numeric; combined arithmetically in the body.
+#' @param eps Numeric; combined arithmetically in the body.
+#' @param C Numeric; combined arithmetically in the body.
+#' @param CD Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .ecstcr_deriv <- function(T, TD, F, lam, gam, eps, C, CD)
@@ -109,18 +111,19 @@
 
 #' .ecstcr_rk4
 #'
-#' Part of the ecsTCR_native implementation; see the file header for the
+#' A step of the ecsTCR_native implementation. Called by \code{.ecstcr_analytic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param TD See Usage.
-#' @param F See Usage.
-#' @param lam See Usage.
-#' @param gam See Usage.
-#' @param eps See Usage.
-#' @param C See Usage.
-#' @param CD See Usage.
-#' @param h See Usage.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param TD Numeric; combined arithmetically in the body.
+#' @param F Passed to \code{.ecstcr_deriv}.
+#' @param lam Passed to \code{.ecstcr_deriv}.
+#' @param gam Passed to \code{.ecstcr_deriv}.
+#' @param eps Passed to \code{.ecstcr_deriv}.
+#' @param C Passed to \code{.ecstcr_deriv}.
+#' @param CD Passed to \code{.ecstcr_deriv}.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .ecstcr_rk4 <- function(T, TD, F, lam, gam, eps, C, CD, h) {
@@ -140,18 +143,19 @@
 
 #' .ecstcr_euler
 #'
-#' Part of the ecsTCR_native implementation; see the file header for the
+#' A step of the ecsTCR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param TD See Usage.
-#' @param F See Usage.
-#' @param lam See Usage.
-#' @param gam See Usage.
-#' @param eps See Usage.
-#' @param C See Usage.
-#' @param CD See Usage.
-#' @param h See Usage.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param TD Numeric; combined arithmetically in the body.
+#' @param F Passed to \code{.ecstcr_deriv}.
+#' @param lam Passed to \code{.ecstcr_deriv}.
+#' @param gam Passed to \code{.ecstcr_deriv}.
+#' @param eps Passed to \code{.ecstcr_deriv}.
+#' @param C Passed to \code{.ecstcr_deriv}.
+#' @param CD Passed to \code{.ecstcr_deriv}.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .ecstcr_euler <- function(T, TD, F, lam, gam, eps, C, CD, h) {
@@ -167,15 +171,15 @@
 #' step. The system is linear, so diagonalising the 2x2 matrix gives the
 #' answer outright: no tolerance, no step-size sensitivity.
 #'
-#' @param T See Usage.
-#' @param TD See Usage.
-#' @param F See Usage.
-#' @param lam See Usage.
-#' @param gam See Usage.
-#' @param eps See Usage.
-#' @param C See Usage.
-#' @param CD See Usage.
-#' @param h See Usage.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param TD Numeric; combined arithmetically in the body.
+#' @param F Numeric; combined arithmetically in the body.
+#' @param lam Numeric; combined arithmetically in the body.
+#' @param gam Numeric; combined arithmetically in the body.
+#' @param eps Numeric; combined arithmetically in the body.
+#' @param C Numeric; combined arithmetically in the body.
+#' @param CD Numeric; combined arithmetically in the body.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .ecstcr_analytic <- function(T, TD, F, lam, gam, eps, C, CD, h) {
@@ -285,11 +289,12 @@ morie_ecsTCR_co2_forcing <- function(ratio, f2x = .ECSTCR_F2X)
 
 #' .ecstcr_ols
 #'
-#' Part of the ecsTCR_native implementation; see the file header for the
+#' A step of the ecsTCR_native implementation. Called by \code{morie_ecsTCR}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param y Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .ecstcr_ols <- function(x, y) {

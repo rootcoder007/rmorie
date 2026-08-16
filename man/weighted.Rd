@@ -9,10 +9,10 @@ weighted(scores, weights = NULL)
 }
 \arguments{
 \item{scores}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Passed to \code{.hybRC_vec}.}
 }
 \description{
-Part of the hybRC_native implementation; see the file header for the source it follows.
+A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{scores}, \code{ranking}, \code{partially_scored}, \code{note}.

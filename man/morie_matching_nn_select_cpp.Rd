@@ -8,13 +8,13 @@
 morie_matching_nn_select_cpp(D, with_replacement, caliper, n_neighbors)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{with_replacement}{See Usage.}
-\item{caliper}{See Usage.}
-\item{n_neighbors}{See Usage.}
+\item{D}{Passed to \code{.Call}.}
+\item{with_replacement}{Passed to \code{.Call}.}
+\item{caliper}{Passed to \code{.Call}.}
+\item{n_neighbors}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

@@ -8,11 +8,11 @@
 .mafft_default_raw_matrix(seq_type, which = "jtt200")
 }
 \arguments{
-\item{seq_type}{See Usage.}
-\item{which}{Defaults to \code{"jtt200"}.}
+\item{seq_type}{Compared against \code{"nt"}.}
+\item{which}{Compared against \code{"grantham"}. Defaults to \code{"jtt200"}.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{normalized_similarity_matrix}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{M}, \code{freqs}.

@@ -8,12 +8,12 @@
 .morie_likemc_lnorm(x, mu, sigma)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{mu}{See Usage.}
-\item{sigma}{See Usage.}
+\item{x}{Numeric; passed to \code{log}.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{sigma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the likemc_native implementation; see the file header for the source it follows.
+A step of the likemc_native implementation. Called by \code{morie_likemc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

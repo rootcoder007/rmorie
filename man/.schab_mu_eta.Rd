@@ -3,13 +3,13 @@
 % the formals.
 \name{.schab_mu_eta}
 \alias{.schab_mu_eta}
-\title{D mu / d eta, the diagonal of Psi; the reciprocal of g\\\'(mu), as the}
+\title{D mu / d eta, the diagonal of Psi; the reciprocal of g\\'(mu), as the}
 \usage{
 .schab_mu_eta(mu, kind)
 }
 \arguments{
-\item{mu}{See Usage.}
-\item{kind}{See Usage.}
+\item{mu}{Passed to \code{.schab_link_derivative}.}
+\item{kind}{Passed to \code{.schab_link_derivative}.}
 }
 \description{
 text notes when deriving (6.89).

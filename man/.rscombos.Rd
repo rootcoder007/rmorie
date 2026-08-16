@@ -8,12 +8,12 @@
 .rscombos(n, k, cap = NULL)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{k}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 \item{cap}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the helpers_rouss implementation; see the file header for the source it follows.
+A step of the helpers_rouss implementation. Called by \code{.rscombosstride}, \code{Lmsreg}, \code{Ltsreg} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{repeat}.

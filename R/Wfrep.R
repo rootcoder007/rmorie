@@ -38,7 +38,8 @@ Wfrep <- function(y, weights = NULL, cells = NULL) {
 
 #' .wfrep_lab
 #'
-#' Part of the Wfrep implementation; see the file header for the source
+#' A step of the Wfrep implementation. Called by \code{Svytbl}, \code{Wfrep}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param v See Usage.

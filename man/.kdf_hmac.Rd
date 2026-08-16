@@ -8,7 +8,7 @@
 .kdf_hmac(key, msg)
 }
 \arguments{
-\item{key}{See Usage.}
+\item{key}{A vector; its length is taken.}
 \item{msg}{See Usage.}
 }
 \description{

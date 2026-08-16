@@ -71,13 +71,14 @@ Htprd <- function(param_grid, cv_data, fit_cv = NULL, k = 5L) {
 
 #' .htprd_ridge_cv
 #'
-#' Part of the htprd implementation; see the file header for the source
+#' A step of the htprd implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param K See Usage.
-#' @param params See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
+#' @param params A list; the body reads \code{$lam} from it.
 #' @return A numeric value.
 #' @export
 .htprd_ridge_cv <- function(X, y, K, params) {

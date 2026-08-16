@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{y}{See Usage.}
-\item{init}{Defaults to \code{"global"}.}
+\item{init}{One of \code{"global"}, \code{"known"}. Defaults to \code{"global"}.}
 \item{z0}{Defaults to \code{NULL}.}
 \item{x0}{Defaults to \code{NULL}.}
 \item{p0}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tsbF_native implementation; see the file header for the source it follows.
+A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{first}, \code{Z}, \code{X}, \code{P}.

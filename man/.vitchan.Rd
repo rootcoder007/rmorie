@@ -8,7 +8,7 @@
 .vitchan(image)
 }
 \arguments{
-\item{image}{See Usage.}
+\item{image}{Passed to \code{.s03mat}.}
 }
 \description{
 matrix is the single-channel case, C = 1.

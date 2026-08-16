@@ -20,16 +20,17 @@
 #'
 #' the arm stays base-R only, as the package requires.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .farmlmm_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .farmlmm_erfc
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .farmlmm_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
@@ -39,10 +40,11 @@
 # mirror _s03core.mat
 #' Mirror _s03core.mat
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{.confounding}, \code{.farmcpu}, \code{.farmlmm_wls} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{nrow}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .farmlmm_to_mat <- function(X) {
@@ -55,10 +57,11 @@
 # mirror _s03core.vec
 #' Mirror _s03core.vec
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{.farmcpu}, \code{.farmlmm_wls}, \code{.fixed_effect_scan} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
+#' @param y A matrix; passed to \code{dim}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .to_vec <- function(y) {
@@ -69,10 +72,11 @@
 
 #' .norm_cdf
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{.fixed_effect_scan}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .norm_cdf <- function(x) 0.5 * (1 + .farmlmm_erf(x / sqrt(2)))
@@ -80,12 +84,13 @@
 # mirror _s03core.wls
 #' Mirror _s03core.wls
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{.fixed_effect_scan}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A vector; its length is taken.
+#' @param w Numeric; passed to \code{sqrt}.
 #' @param rcond See Usage.
 #' @return A list with \code{coef}.
 #' @export
@@ -105,10 +110,11 @@
 
 #' .kinship_from_markers
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{.random_effect_step}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param G See Usage.
+#' @param G Passed to \code{.farmlmm_to_mat}.
 #' @param markers Defaults to \code{NULL}.
 #' @return A list with \code{K}, \code{markers_used}, \code{n_markers}, \code{all_markers}.
 #' @export
@@ -133,11 +139,12 @@
 
 #' .confounding
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param G See Usage.
-#' @param K See Usage.
+#' @param G Passed to \code{.farmlmm_to_mat}.
+#' @param K A matrix; passed to \code{\%*\%}.
 #' @param marker See Usage.
 #' @return A list with \code{correlation}, \code{marker}, \code{note}.
 #' @export
@@ -156,11 +163,12 @@
 
 #' .fixed_effect_scan
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{.farmcpu}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param G See Usage.
+#' @param y Passed to \code{.to_vec}.
+#' @param G Passed to \code{.farmlmm_to_mat}.
 #' @param covariates Defaults to \code{integer(0)}.
 #' @param K Defaults to \code{NULL}.
 #' @return A list with \code{p}, \code{beta}, \code{covariates}, \code{note}.
@@ -199,11 +207,12 @@
 
 #' .random_effect_step
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{.farmcpu}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param G See Usage.
+#' @param y Passed to \code{.to_vec}.
+#' @param G Passed to \code{.kinship_from_markers}.
 #' @param selected See Usage.
 #' @param bins Defaults to \code{NULL}.
 #' @return A list with \code{K}, \code{markers_used}, \code{blup}, \code{note}.
@@ -226,11 +235,12 @@
 
 #' .farmcpu
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. Called by \code{morie_farmlmm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param G See Usage.
+#' @param y Passed to \code{.to_vec}.
+#' @param G Passed to \code{.farmlmm_to_mat}.
 #' @param max_iter Defaults to \code{10L}.
 #' @param threshold Defaults to \code{NULL}.
 #' @param seed Defaults to \code{0L}.
@@ -270,14 +280,15 @@
 
 #' morie_farmlmm
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param G See Usage.
-#' @param max_iter Defaults to \code{10L}.
-#' @param threshold Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0L}.
+#' @param y Passed to \code{.farmcpu}.
+#' @param G Passed to \code{.farmcpu}.
+#' @param max_iter Passed to \code{.farmcpu}. Defaults to \code{10L}.
+#' @param threshold Passed to \code{.farmcpu}.
+#' @param seed Passed to \code{.farmcpu}. Defaults to \code{0L}.
 #' @return The value of \code{.farmcpu}.
 #' @export
 morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
@@ -286,7 +297,8 @@ morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
 
 #' erf
 #'
-#' Part of the farmlmm_native implementation; see the file header for
+#' A step of the farmlmm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.

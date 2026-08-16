@@ -15,14 +15,14 @@ gnnEx_explain_node(predict, adj, v, y, n_features, L = 2, iters = 300, lr = 0.1,
 \item{n_features}{See Usage.}
 \item{L}{Defaults to \code{2}.}
 \item{iters}{Defaults to \code{300}.}
-\item{lr}{Defaults to \code{0.1}.}
+\item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{size_coef}{Defaults to \code{0.005}.}
 \item{entropy_coef}{Defaults to \code{1}.}
-\item{seed}{Defaults to \code{0}.}
-\item{penalize}{Defaults to \code{TRUE}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{penalize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the gnnEx_native implementation; see the file header for the source it follows.
+A step of the gnnEx_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{edges_ranked}, \code{edge_mask}, \code{feature_mask}, \code{loss_history}, \code{final}, \code{computation_graph}, \code{penalized}, \code{method}, \code{note}.

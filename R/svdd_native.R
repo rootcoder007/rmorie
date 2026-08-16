@@ -4,10 +4,11 @@
 
 #' .morie_svdd_mat
 #'
-#' Part of the svdd_native implementation; see the file header for the
+#' A step of the svdd_native implementation. Called by \code{morie_svdd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{nrow}.
 #' @param name See Usage.
 #' @return The value of \code{X}, as built in the body.
 #' @export
@@ -22,15 +23,16 @@
 
 #' .morie_svdd_kernel_matrix
 #'
-#' Part of the svdd_native implementation; see the file header for the
+#' A step of the svdd_native implementation. Called by \code{morie_svdd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param Y Defaults to \code{NULL}.
-#' @param kernel Defaults to \code{"rbf"}.
-#' @param gamma Defaults to \code{NULL}.
-#' @param degree Defaults to \code{3}.
-#' @param coef0 Defaults to \code{1}.
+#' @param X A matrix; indexed by row and column.
+#' @param Y Optional; may be \code{NULL}. A matrix; indexed by row and column.
+#' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}. Defaults to \code{"rbf"}.
+#' @param gamma Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3}.
+#' @param coef0 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{K}, as built in the body.
 #' @export
 .morie_svdd_kernel_matrix <- function(X, Y = NULL, kernel = "rbf",
@@ -75,12 +77,13 @@
 
 #' .morie_svdd_solve_dual
 #'
-#' Part of the svdd_native implementation; see the file header for the
+#' A step of the svdd_native implementation. Called by \code{morie_svdd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param K See Usage.
-#' @param C See Usage.
-#' @param n See Usage.
+#' @param K A matrix; indexed by row and column.
+#' @param C Numeric; combined arithmetically in the body.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param tol See Usage.
 #' @param max_iter See Usage.
 #' @return The value of \code{alpha}, as built in the body.
@@ -155,18 +158,19 @@
 
 #' morie_svdd
 #'
-#' Part of the svdd_native implementation; see the file header for the
+#' A step of the svdd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param C Defaults to \code{NULL}.
-#' @param nu Defaults to \code{NULL}.
-#' @param kernel Defaults to \code{"rbf"}.
-#' @param gamma Defaults to \code{NULL}.
-#' @param degree Defaults to \code{3}.
-#' @param coef0 Defaults to \code{1}.
-#' @param tol Defaults to \code{1e-10}.
-#' @param max_iter Defaults to \code{20000}.
+#' @param X Passed to \code{.morie_svdd_mat}.
+#' @param C Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param nu Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}. Defaults to \code{"rbf"}.
+#' @param gamma Optional; may be \code{NULL}. Passed to \code{.morie_svdd_kernel_matrix}.
+#' @param degree Passed to \code{.morie_svdd_kernel_matrix}. Defaults to \code{3}.
+#' @param coef0 Passed to \code{.morie_svdd_kernel_matrix}. Defaults to \code{1}.
+#' @param tol Passed to \code{.morie_svdd_solve_dual}. Defaults to \code{1e-10}.
+#' @param max_iter Passed to \code{.morie_svdd_solve_dual}. Defaults to \code{20000}.
 #' @return A list with \code{estimate}, \code{alpha}, \code{R2}, \code{radius}, \code{center}, \code{support_}, \code{boundary_}, \code{bounded_}, \code{n_support}, \code{degenerate}, \code{distance2}, \code{outlier_fraction}, \code{outlier_bound}, \code{decision}, \code{predict}, \code{C}, \code{kernel}, \code{gamma}, \code{n}, \code{method}.
 #' @export
 morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
@@ -312,7 +316,8 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
 
 #' .morie_svdd_cheatsheet
 #'
-#' Part of the svdd_native implementation; see the file header for the
+#' A step of the svdd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

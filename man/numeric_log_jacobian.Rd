@@ -9,11 +9,11 @@ numeric_log_jacobian(mapfun, z, h = 1e-06)
 }
 \arguments{
 \item{mapfun}{See Usage.}
-\item{z}{See Usage.}
-\item{h}{Defaults to \code{1e-06}.}
+\item{z}{A vector; its length is taken and its elements indexed.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_mcmc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.logabsdet}.

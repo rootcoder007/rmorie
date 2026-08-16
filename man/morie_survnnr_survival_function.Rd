@@ -8,12 +8,12 @@
 morie_survnnr_survival_function(fit_result, x, times = NULL)
 }
 \arguments{
-\item{fit_result}{See Usage.}
+\item{fit_result}{Passed to \code{morie_survnnr_baseline_hazard}.}
 \item{x}{See Usage.}
 \item{times}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the survnnr_native implementation; see the file header for the source it follows.
+A step of the survnnr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{time}, \code{survival}.

@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{dm}{See Usage.}
-\item{ym}{See Usage.}
-\item{w}{See Usage.}
+\item{ym}{A matrix; passed to \code{\%*\%}.}
+\item{w}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
 the intercept (the boundary value that the RDD contrast uses)

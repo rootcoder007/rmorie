@@ -8,18 +8,18 @@
 morie_in_identified_set(freq, beta, gamma, x, alpha_grid, y0_values = c(0, 1), link = "logit", tol = 1e-04, iters = 4000L)
 }
 \arguments{
-\item{freq}{See Usage.}
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
-\item{x}{See Usage.}
+\item{freq}{A vector; indexed elementwise.}
+\item{beta}{Passed to \code{morie_sequence_probabilities}.}
+\item{gamma}{Passed to \code{morie_sequence_probabilities}.}
+\item{x}{Passed to \code{morie_sequence_probabilities}.}
 \item{alpha_grid}{See Usage.}
 \item{y0_values}{Defaults to \code{c(0, 1)}.}
-\item{link}{Defaults to \code{"logit"}.}
+\item{link}{Passed to \code{morie_sequence_probabilities}. Defaults to \code{"logit"}.}
 \item{tol}{Defaults to \code{1e-04}.}
 \item{iters}{Defaults to \code{4000L}.}
 }
 \description{
-Part of the bnshrt_native implementation; see the file header for the source it follows.
+A step of the bnshrt_native implementation. Called by \code{morie_identified_set}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{discrepancy}, \code{feasible}, \code{weights}, \code{fitted}, \code{target}.

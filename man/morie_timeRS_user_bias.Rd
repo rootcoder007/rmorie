@@ -8,15 +8,15 @@
 morie_timeRS_user_bias(b_u, alpha_u, t, t_user, per_day = NULL, beta = .timeRS_BETA)
 }
 \arguments{
-\item{b_u}{See Usage.}
-\item{alpha_u}{See Usage.}
-\item{t}{See Usage.}
-\item{t_user}{See Usage.}
-\item{per_day}{Defaults to \code{NULL}.}
-\item{beta}{Defaults to \code{.timeRS_BETA}.}
+\item{b_u}{Passed to \code{.timeRS_user_bias}.}
+\item{alpha_u}{Passed to \code{.timeRS_user_bias}.}
+\item{t}{Passed to \code{.timeRS_user_bias}.}
+\item{t_user}{Passed to \code{.timeRS_user_bias}.}
+\item{per_day}{Passed to \code{.timeRS_user_bias}.}
+\item{beta}{Passed to \code{.timeRS_user_bias}. Defaults to \code{.timeRS_BETA}.}
 }
 \description{
-Part of the timeRS_native implementation; see the file header for the source it follows.
+A step of the timeRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.timeRS_user_bias}.

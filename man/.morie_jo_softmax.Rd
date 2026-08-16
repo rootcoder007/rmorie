@@ -8,10 +8,10 @@
 .morie_jo_softmax(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{morie_autoform}, \code{morie_itrans}, \code{morie_tftnet}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

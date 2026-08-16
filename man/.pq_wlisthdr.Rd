@@ -8,12 +8,12 @@
 .pq_wlisthdr(e, size, etype)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{size}{See Usage.}
+\item{e}{Passed to \code{.pq_emit}.}
+\item{size}{Passed to \code{.pq_wvarint}.}
 \item{etype}{See Usage.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_wlistbin}, \code{.pq_wlisti32}, \code{.pq_wliststruct}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

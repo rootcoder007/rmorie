@@ -54,10 +54,11 @@
 
 #' .sse4r_personalise
 #'
-#' Part of the sse4r_native implementation; see the file header for the
+#' A step of the sse4r_native implementation. Called by \code{morie_sse4r}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param item_embeddings See Usage.
+#' @param item_embeddings A matrix; passed to \code{as.matrix}.
 #' @param user_embedding See Usage.
 #' @return A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width}, \code{length}, \code{note}.
 #' @export
@@ -81,13 +82,14 @@
 
 #' .sse4r_sse_replace
 #'
-#' Part of the sse4r_native implementation; see the file header for the
+#' A step of the sse4r_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param indices See Usage.
 #' @param table_size See Usage.
 #' @param p Defaults to \code{0}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{indices}, \code{replaced}, \code{p}, \code{rate}, \code{note}.
 #' @export
 .sse4r_sse_replace <- function(indices, table_size, p = 0.0, seed = 0) {
@@ -151,7 +153,8 @@
 
 #' .sse4r_expected_replacement
 #'
-#' Part of the sse4r_native implementation; see the file header for the
+#' A step of the sse4r_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -174,7 +177,8 @@
 
 #' .sse4r_parameter_count
 #'
-#' Part of the sse4r_native implementation; see the file header for the
+#' A step of the sse4r_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_users See Usage.
@@ -204,12 +208,13 @@
 
 #' morie_sse4r
 #'
-#' Part of the sse4r_native implementation; see the file header for the
+#' A step of the sse4r_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sequence See Usage.
-#' @param user_embedding See Usage.
-#' @param item_table See Usage.
+#' @param sequence Passed to \code{.sse4r_personalise}.
+#' @param user_embedding Passed to \code{.sse4r_personalise}.
+#' @param item_table A matrix; passed to \code{as.matrix}.
 #' @param attend Defaults to \code{NULL}.
 #' @param top_k Defaults to \code{3}.
 #' @return A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context}, \code{method}, \code{note}.
@@ -284,7 +289,8 @@ morie_sse4r <- function(sequence, user_embedding, item_table,
 
 #' sse4r_cheatsheet
 #'
-#' Part of the sse4r_native implementation; see the file header for the
+#' A step of the sse4r_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

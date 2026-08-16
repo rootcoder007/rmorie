@@ -8,12 +8,12 @@
 .robpca_c_steps(rows, idx, max_iter = 100L)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{idx}{See Usage.}
-\item{max_iter}{Defaults to \code{100L}.}
+\item{rows}{A matrix; indexed by row and column.}
+\item{idx}{A vector; its length is taken.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.}
 }
 \description{
-Part of the robpca_native implementation; see the file header for the source it follows.
+A step of the robpca_native implementation. Called by \code{.robpca_fast_mcd}, \code{morie_robpca}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{idx}, \code{mu}, \code{C}, \code{det}.

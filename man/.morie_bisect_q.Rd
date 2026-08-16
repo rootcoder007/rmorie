@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{cdf}{See Usage.}
-\item{p}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
-\item{tol}{Defaults to \code{1e-13}.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{lo}{Numeric; combined arithmetically in the body.}
+\item{hi}{Numeric; passed to \code{abs}.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-13}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. Called by \code{Qbeta}, \code{Qf}, \code{Qgamma} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{x}, as built in the body.

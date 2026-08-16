@@ -8,10 +8,10 @@
 .vidgen_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the vidgen_native implementation; see the file header for the source it follows.
+A step of the vidgen_native implementation. Called by \code{morie_vidgen_space_only_conv}, \code{morie_vidgen_spatial_attention}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{do.call}.

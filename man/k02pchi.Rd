@@ -12,7 +12,7 @@ k02pchi(q, df)
 \item{df}{See Usage.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{mafix}, \code{mai2}, \code{marndm} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{stats::pchisq}.

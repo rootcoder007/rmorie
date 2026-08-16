@@ -8,11 +8,11 @@
 .tmlphd_soft(z, t)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{t}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
+\item{t}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmlphd implementation; see the file header for the source it follows.
+A step of the tmlphd implementation. Called by \code{.tmlphd_lasso}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

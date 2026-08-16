@@ -55,7 +55,8 @@
 
 #' .tl1step_logit
 #'
-#' Part of the tl1step_native implementation; see the file header for
+#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param p See Usage.
@@ -68,10 +69,11 @@
 
 #' .tl1step_expit
 #'
-#' Part of the tl1step_native implementation; see the file header for
+#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tl1step_expit <- function(x) {
@@ -80,7 +82,8 @@
 
 #' .tl1step_as_numvec
 #'
-#' Part of the tl1step_native implementation; see the file header for
+#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -102,9 +105,9 @@
 #' rather than fixed at the start, which is what makes the submodel
 #' universal rather than local.
 #'
-#' @param Q See Usage.
+#' @param Q Passed to \code{.tl1step_as_numvec}.
 #' @param H_fn See Usage.
-#' @param Y See Usage.
+#' @param Y Passed to \code{.tl1step_as_numvec}.
 #' @param eps_max Defaults to \code{2}.
 #' @param steps Defaults to \code{400}.
 #' @return A list with \code{path}, \code{steps}, \code{d_epsilon}, \code{note}.
@@ -165,10 +168,10 @@
 #' submodel satisfies it too, so testing only there cannot distinguish
 #' the two.
 #'
-#' @param Q See Usage.
+#' @param Q Passed to \code{.tl1step_as_numvec}.
 #' @param H_fn See Usage.
-#' @param eps Defaults to \code{0.3}.
-#' @param h Defaults to \code{1e-05}.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{0.3}.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A list with \code{max_deviation}, \code{universal}, \code{epsilon}, \code{local_submodel_direction_drift}, \code{note}.
 #' @export
 .tl1step_is_universal <- function(Q, H_fn, eps = 0.3, h = 1e-5) {
@@ -217,14 +220,15 @@
 # Move once along the universal path to where the score vanishes.
 #' Move once along the universal path to where the score vanishes
 #'
-#' Part of the tl1step_native implementation; see the file header for
+#' A step of the tl1step_native implementation. Called by \code{morie_tl1step}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param H_fn See Usage.
-#' @param Y See Usage.
-#' @param eps_max Defaults to \code{3}.
-#' @param steps Defaults to \code{600}.
+#' @param Q Passed to \code{.tl1step_build_ulfm}.
+#' @param H_fn Passed to \code{.tl1step_build_ulfm}.
+#' @param Y Passed to \code{.tl1step_build_ulfm}.
+#' @param eps_max Passed to \code{.tl1step_build_ulfm}. Defaults to \code{3}.
+#' @param steps Passed to \code{.tl1step_build_ulfm}. Defaults to \code{600}.
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star}, \code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.
 #' @export
 .tl1step_one_step_tmle <- function(Q, H_fn, Y, eps_max = 3.0, steps = 600) {
@@ -272,9 +276,9 @@
 #' within each iteration and recomputed between them -- a sequence of
 #' jumps rather than a path.
 #'
-#' @param Q See Usage.
+#' @param Q Passed to \code{.tl1step_as_numvec}.
 #' @param H_fn See Usage.
-#' @param Y See Usage.
+#' @param Y Passed to \code{.tl1step_as_numvec}.
 #' @param max_iter Defaults to \code{25}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star}, \code{abs_score}, \code{method}.
@@ -319,7 +323,8 @@
 
 #' .tl1step_cheatsheet
 #'
-#' Part of the tl1step_native implementation; see the file header for
+#' A step of the tl1step_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.
@@ -344,14 +349,15 @@
 
 #' morie_tl1step
 #'
-#' Part of the tl1step_native implementation; see the file header for
+#' A step of the tl1step_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param H_fn See Usage.
-#' @param Y See Usage.
-#' @param eps_max Defaults to \code{3}.
-#' @param steps Defaults to \code{600}.
+#' @param Q Passed to \code{.tl1step_one_step_tmle}.
+#' @param H_fn Passed to \code{.tl1step_one_step_tmle}.
+#' @param Y Passed to \code{.tl1step_one_step_tmle}.
+#' @param eps_max Passed to \code{.tl1step_one_step_tmle}. Defaults to \code{3}.
+#' @param steps Passed to \code{.tl1step_one_step_tmle}. Defaults to \code{600}.
 #' @return The value of \code{.tl1step_one_step_tmle}.
 #' @export
 morie_tl1step <- function(Q, H_fn, Y, eps_max = 3.0, steps = 600) {

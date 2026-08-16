@@ -8,12 +8,12 @@
 .lyapun_distance(pts, a, b)
 }
 \arguments{
-\item{pts}{See Usage.}
+\item{pts}{A vector; indexed elementwise.}
 \item{a}{See Usage.}
 \item{b}{See Usage.}
 }
 \description{
-Part of the lyapun_native implementation; see the file header for the source it follows.
+A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{lyapunov_exponent}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

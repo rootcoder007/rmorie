@@ -12,7 +12,7 @@ instrument_penalty(g_small, g_large)
 \item{g_large}{See Usage.}
 }
 \description{
-Part of the tlctmle_native implementation; see the file header for the source it follows.
+A step of the tlctmle_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{small}, \code{large}, \code{ratio}, \code{note}.

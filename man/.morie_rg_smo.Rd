@@ -8,11 +8,11 @@
 .morie_rg_smo(K, ys, Cv, maxiter, tol)
 }
 \arguments{
-\item{K}{See Usage.}
-\item{ys}{See Usage.}
-\item{Cv}{See Usage.}
+\item{K}{A matrix; indexed by row and column.}
+\item{ys}{A vector; its length is taken and its elements indexed.}
+\item{Cv}{Numeric; passed to \code{min}.}
 \item{maxiter}{See Usage.}
-\item{tol}{See Usage.}
+\item{tol}{Numeric; combined arithmetically in the body.}
 }
 \description{
 equality constraint sum a_i y_i = 0 that single-coordinate updates cannot

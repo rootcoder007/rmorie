@@ -8,11 +8,11 @@
 .morie_ses_run(a, series)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{series}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{series}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the forecast_native implementation; see the file header for the source it follows.
+A step of the forecast_native implementation. Called by \code{morie_joseph_simple_exponential_smoothing}, \code{morie_theta_method}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{fitted}, \code{level}.

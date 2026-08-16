@@ -12,10 +12,11 @@
 
 #' .mor_hits_unit
 #'
-#' Part of the hits_native implementation; see the file header for the
+#' A step of the hits_native implementation. Called by \code{morie_hits}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_hits_unit <- function(v) {

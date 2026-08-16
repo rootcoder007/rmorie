@@ -8,15 +8,15 @@
 .mafft_nw(g1, g2, M, w1, w2, s_op)
 }
 \arguments{
-\item{g1}{See Usage.}
-\item{g2}{See Usage.}
-\item{M}{See Usage.}
-\item{w1}{See Usage.}
-\item{w2}{See Usage.}
-\item{s_op}{See Usage.}
+\item{g1}{A vector; its length is taken and its elements indexed.}
+\item{g2}{A vector; its length is taken and its elements indexed.}
+\item{M}{Passed to \code{.mafft_site_score}.}
+\item{w1}{Passed to \code{.mafft_gap_profiles}.}
+\item{w2}{Passed to \code{.mafft_gap_profiles}.}
+\item{s_op}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{group_align}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{out1}, \code{out2}.

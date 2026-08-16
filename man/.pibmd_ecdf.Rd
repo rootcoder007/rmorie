@@ -8,11 +8,11 @@
 .pibmd_ecdf(sorted_v, x)
 }
 \arguments{
-\item{sorted_v}{See Usage.}
+\item{sorted_v}{A vector; its length is taken.}
 \item{x}{See Usage.}
 }
 \description{
-Part of the pibmd_native implementation; see the file header for the source it follows.
+A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

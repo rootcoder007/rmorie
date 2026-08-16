@@ -8,9 +8,9 @@
 cooccurrence(corpus, window = 10, harmonic = TRUE, min_count = 1)
 }
 \arguments{
-\item{corpus}{See Usage.}
+\item{corpus}{Passed to \code{.glove_as_docs}.}
 \item{window}{Defaults to \code{10}.}
-\item{harmonic}{Defaults to \code{TRUE}.}
+\item{harmonic}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{min_count}{Defaults to \code{1}.}
 }
 \description{

@@ -8,10 +8,10 @@
 ._mean(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the hntfst_native implementation; see the file header for the source it follows.
+A step of the hntfst_native implementation. Called by \code{._best_split}, \code{honest_forest}, \code{honest_tree} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

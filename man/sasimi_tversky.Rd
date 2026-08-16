@@ -14,7 +14,7 @@ sasimi_tversky(fp_a, fp_b, alpha = 1, beta = 1)
 \item{beta}{Defaults to \code{1}.}
 }
 \description{
-Part of the sasimi_native implementation; see the file header for the source it follows.
+A step of the sasimi_native implementation. Called by \code{morie_sasimi}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

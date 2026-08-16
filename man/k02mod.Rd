@@ -8,11 +8,11 @@
 k02mod(A, comm)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{comm}{See Usage.}
+\item{A}{A matrix; passed to \code{as.matrix}.}
+\item{comm}{A vector; indexed elementwise.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{louv}, \code{sgtcoml}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

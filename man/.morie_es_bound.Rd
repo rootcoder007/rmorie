@@ -8,11 +8,11 @@
 .morie_es_bound(k, l)
 }
 \arguments{
-\item{k}{See Usage.}
-\item{l}{See Usage.}
+\item{k}{Numeric; combined arithmetically in the body.}
+\item{l}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ramsey_theory_native implementation; see the file header for the source it follows.
+A step of the ramsey_theory_native implementation. Called by \code{morie_ramsey_number}, \code{morie_ramsey_upper_bound}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{choose}.

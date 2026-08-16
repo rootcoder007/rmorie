@@ -8,12 +8,12 @@
 .survnnr_grad_wrt_risk(times, events, risk)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{risk}{See Usage.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; indexed elementwise.}
+\item{risk}{A vector; indexed elementwise.}
 }
 \description{
-Part of the survnnr_native implementation; see the file header for the source it follows.
+A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{g}, as built in the body.

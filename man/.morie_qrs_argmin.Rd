@@ -8,12 +8,12 @@
 .morie_qrs_argmin(v, lo, hi)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{lo}{See Usage.}
+\item{v}{A vector; indexed elementwise.}
+\item{lo}{Numeric; combined arithmetically in the body.}
 \item{hi}{See Usage.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat}, \code{PpgFeat}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

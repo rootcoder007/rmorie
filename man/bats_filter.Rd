@@ -8,14 +8,14 @@
 bats_filter(z, spec, theta, x0, long_run_b = 0)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{spec}{See Usage.}
-\item{theta}{See Usage.}
-\item{x0}{See Usage.}
-\item{long_run_b}{Defaults to \code{0}.}
+\item{z}{A vector; its length is taken and its elements indexed.}
+\item{spec}{A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_trend} from it.}
+\item{theta}{Passed to \code{.unpack}.}
+\item{x0}{A vector; indexed elementwise.}
+\item{long_run_b}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{.fit_spec}, \code{.forecast}, \code{fit_seed_state} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{resid}, \code{fitted}, \code{carry}.

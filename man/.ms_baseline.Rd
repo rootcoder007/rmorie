@@ -8,13 +8,13 @@
 .ms_baseline(time, event, X, beta)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{X}{See Usage.}
-\item{beta}{See Usage.}
+\item{time}{Passed to \code{.ms_check}.}
+\item{event}{Passed to \code{.ms_check}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{beta}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the survival_more implementation; see the file header for the source it follows.
+A step of the survival_more implementation. Called by \code{Coxsnell}, \code{Martingale}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{time}, \code{cumhaz}, \code{weight}.

@@ -8,11 +8,11 @@
 .morie_gr_sym_diff(e, var)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{var}{See Usage.}
+\item{e}{A vector; its length is taken and its elements indexed.}
+\item{var}{Passed to \code{.morie_gr_sym_diff}.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{morie_geron_symbolic_differentiation}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

@@ -8,12 +8,12 @@
 mask_loss(logits, target, decoupled = TRUE)
 }
 \arguments{
-\item{logits}{See Usage.}
-\item{target}{See Usage.}
-\item{decoupled}{Defaults to \code{TRUE}.}
+\item{logits}{Passed to \code{.masrcn_mat}.}
+\item{target}{Passed to \code{.masrcn_mat}.}
+\item{decoupled}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the masrcn_native implementation; see the file header for the source it follows.
+A step of the masrcn_native implementation. Called by \code{morie_masrcn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{kind}, \code{caveat}.

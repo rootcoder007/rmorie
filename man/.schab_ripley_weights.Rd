@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{points}{See Usage.}
-\item{region}{See Usage.}
+\item{region}{A vector; indexed elementwise.}
 \item{radii}{See Usage.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_cross_k}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

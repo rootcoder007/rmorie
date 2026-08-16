@@ -9,12 +9,12 @@ Pbinom(q, size, prob, lower_tail = TRUE)
 }
 \arguments{
 \item{q}{See Usage.}
-\item{size}{See Usage.}
-\item{prob}{See Usage.}
-\item{lower_tail}{Defaults to \code{TRUE}.}
+\item{size}{Numeric; combined arithmetically in the body.}
+\item{prob}{Numeric; combined arithmetically in the body.}
+\item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. Called by \code{Qbinom}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

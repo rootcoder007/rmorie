@@ -8,7 +8,7 @@
 DiracDelta(t, width = NULL)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{.morie_rg_aslist}.}
 \item{width}{Defaults to \code{NULL}.}
 }
 \description{

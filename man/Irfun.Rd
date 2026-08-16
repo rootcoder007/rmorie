@@ -8,7 +8,7 @@ Irfun(coef, sigma_u, horizon = 20, shock_var = 0)
 }
 \arguments{
 \item{coef}{m by (1 + m p) coefficient matrix, row = equation, columns
-= \link{intercept, A_1 row, ..., A_p row} -- the layout \code{Varest}
+= [intercept, A_1 row, ..., A_p row] -- the layout \code{Varest}
 returns.}
 
 \item{sigma_u}{m by m residual covariance.}

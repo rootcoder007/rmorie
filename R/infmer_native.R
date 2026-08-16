@@ -26,10 +26,11 @@
 
 #' .infmer_kl_from_uniform
 #'
-#' Part of the infmer_native implementation; see the file header for the
+#' A step of the infmer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p A vector; its length is taken.
 #' @return The value of \code{kl}, as built in the body.
 #' @export
 .infmer_kl_from_uniform <- function(p) {
@@ -45,11 +46,12 @@
 
 #' .infmer_sparsity_measure
 #'
-#' Part of the infmer_native implementation; see the file header for the
+#' A step of the infmer_native implementation. Called by \code{.infmer_select_queries}, \code{morie_infmer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
-#' @param k See Usage.
+#' @param q A matrix; passed to \code{ncol}.
+#' @param k A matrix; passed to \code{ncol}.
 #' @return The value of \code{m_scores}, as built in the body.
 #' @export
 .infmer_sparsity_measure <- function(q, k) {
@@ -65,12 +67,13 @@
 
 #' .infmer_select_queries
 #'
-#' Part of the infmer_native implementation; see the file header for the
+#' A step of the infmer_native implementation. Called by \code{morie_infmer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
-#' @param k See Usage.
-#' @param c Defaults to \code{5}.
+#' @param q A matrix; passed to \code{nrow}.
+#' @param k Passed to \code{.infmer_sparsity_measure}.
+#' @param c Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A vector, from \code{sort}.
 #' @export
 .infmer_select_queries <- function(q, k, c = 5) {
@@ -86,12 +89,13 @@
 
 #' .infmer_full_attention
 #'
-#' Part of the infmer_native implementation; see the file header for the
+#' A step of the infmer_native implementation. Called by \code{morie_infmer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
-#' @param k See Usage.
-#' @param v See Usage.
+#' @param q A matrix; passed to \code{ncol}.
+#' @param k A matrix; passed to \code{dim}.
+#' @param v A matrix; passed to \code{dim}.
 #' @return A list with \code{output}, \code{attention}, \code{scores}.
 #' @export
 .infmer_full_attention <- function(q, k, v) {
@@ -109,12 +113,13 @@
 
 #' .infmer_complexity
 #'
-#' Part of the infmer_native implementation; see the file header for the
+#' A step of the infmer_native implementation. Called by \code{morie_infmer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param L_Q See Usage.
 #' @param L_K See Usage.
-#' @param c Defaults to \code{5}.
+#' @param c Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A list with \code{full_attention_flops}, \code{probsparse_flops}, \code{ratio}, \code{u}.
 #' @export
 .infmer_complexity <- function(L_Q, L_K, c = 5) {
@@ -154,10 +159,10 @@
 #' n_selected : integer length of that vector sparsity_scores : M(q_i,
 #' K) for every query complexity : full vs probsparse flop accounting
 #'
-#' @param q See Usage.
-#' @param k See Usage.
-#' @param v See Usage.
-#' @param c Defaults to \code{5}.
+#' @param q A matrix; indexed by row and column.
+#' @param k A matrix; passed to \code{nrow}.
+#' @param v A matrix; passed to \code{ncol}.
+#' @param c Passed to \code{.infmer_complexity}. Defaults to \code{5}.
 #' @return A list with \code{output}, \code{selected_queries}, \code{n_selected}, \code{sparsity_scores}, \code{complexity}.
 #' @export
 morie_infmer <- function(q, k, v, c = 5) {
@@ -214,7 +219,8 @@ morie_infmer <- function(q, k, v, c = 5) {
 # Cheatsheet accessor
 #' Cheatsheet accessor
 #'
-#' Part of the infmer_native implementation; see the file header for the
+#' A step of the infmer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

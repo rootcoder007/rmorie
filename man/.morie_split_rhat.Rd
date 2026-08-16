@@ -8,11 +8,11 @@
 .morie_split_rhat(chains, rank_normalized = TRUE)
 }
 \arguments{
-\item{chains}{See Usage.}
-\item{rank_normalized}{Defaults to \code{TRUE}.}
+\item{chains}{A count; the body uses it as \code{matrix(...)}.}
+\item{rank_normalized}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the mcmc_native implementation; see the file header for the source it follows.
+A step of the mcmc_native implementation. Called by \code{morie_effective_sample_size_bayes}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

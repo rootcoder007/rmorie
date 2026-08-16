@@ -8,11 +8,11 @@
 .avalon_dist(adj, n)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{n}{See Usage.}
+\item{adj}{A vector; indexed elementwise.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
-Part of the avalon_native implementation; see the file header for the source it follows.
+A step of the avalon_native implementation. Called by \code{morie_avalon_features}, \code{morie_scfhop_cats}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{D}, as built in the body.

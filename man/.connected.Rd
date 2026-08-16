@@ -8,7 +8,7 @@
 .connected(edges, verts)
 }
 \arguments{
-\item{edges}{See Usage.}
+\item{edges}{A vector; indexed elementwise.}
 \item{verts}{See Usage.}
 }
 \description{

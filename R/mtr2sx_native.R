@@ -66,32 +66,34 @@
 #'
 #' the arm stays base-R only, as the package requires.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .mtr2sx_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .mtr2sx_erfc
 #'
-#' Part of the mtr2sx_native implementation; see the file header for the
+#' A step of the mtr2sx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .mtr2sx_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 #' morie_mtr2sx
 #'
-#' Part of the mtr2sx_native implementation; see the file header for the
+#' A step of the mtr2sx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta_x See Usage.
 #' @param se_x See Usage.
 #' @param beta_y See Usage.
 #' @param se_y See Usage.
-#' @param model Defaults to \code{"multiplicative"}.
-#' @param weights Defaults to \code{"first_order"}.
-#' @param theta Defaults to \code{0}.
+#' @param model One of \code{"fixed"}, \code{"multiplicative"}. Defaults to \code{"multiplicative"}.
+#' @param weights Compared against \code{"second_order"}. Defaults to \code{"first_order"}.
+#' @param theta Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{ci}, \code{ratio_estimates}, \code{variances}, \code{weights_used}, \code{model}, \code{phi_multiplicative}, \code{tau2}, \code{Q}, \code{df}, \code{I2}, \code{se_fixed}, \code{regression_estimate}, \code{regression_se_fixed}, \code{n_variants}, \code{method}.
 #' @export
 morie_mtr2sx <- function(beta_x, se_x, beta_y, se_y,

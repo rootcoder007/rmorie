@@ -8,11 +8,11 @@
 .karpv_apply(op, vals)
 }
 \arguments{
-\item{op}{See Usage.}
-\item{vals}{See Usage.}
+\item{op}{One of \code{"-"}, \code{"*"}, \code{"\\\%"}, \code{"+"}.}
+\item{vals}{A vector; indexed elementwise.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{morie_karpV_evaluate}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

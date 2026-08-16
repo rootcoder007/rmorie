@@ -8,14 +8,14 @@
 .pq_decode_plain(buf, pos, ptype, count, type_length = NULL)
 }
 \arguments{
-\item{buf}{See Usage.}
-\item{pos}{See Usage.}
+\item{buf}{A vector; indexed elementwise.}
+\item{pos}{Numeric; combined arithmetically in the body.}
 \item{ptype}{See Usage.}
-\item{count}{See Usage.}
-\item{type_length}{Defaults to \code{NULL}.}
+\item{count}{A count; the body uses it as \code{seq_len(...)}.}
+\item{type_length}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_column_values}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

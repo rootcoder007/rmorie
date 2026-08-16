@@ -8,18 +8,18 @@
 .propinf_train_set_meta(sets_list, labels, phi_hidden, repr_dim, rho_hidden, epochs, lr, seed, context = "paired")
 }
 \arguments{
-\item{sets_list}{See Usage.}
-\item{labels}{See Usage.}
-\item{phi_hidden}{See Usage.}
-\item{repr_dim}{See Usage.}
-\item{rho_hidden}{See Usage.}
+\item{sets_list}{A vector; its length is taken and its elements indexed.}
+\item{labels}{A vector; indexed elementwise.}
+\item{phi_hidden}{Passed to \code{.propinf_deepsets_init}.}
+\item{repr_dim}{Passed to \code{.propinf_deepsets_init}.}
+\item{rho_hidden}{Passed to \code{.propinf_deepsets_init}.}
 \item{epochs}{See Usage.}
-\item{lr}{See Usage.}
+\item{lr}{Passed to \code{.propinf_sgd_step}.}
 \item{seed}{See Usage.}
-\item{context}{Defaults to \code{"paired"}.}
+\item{context}{Passed to \code{.propinf_deepsets_init}. Defaults to \code{"paired"}.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{morie_propinf_property_inference}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{model}, as built in the body.

@@ -11,7 +11,7 @@
 \item{M}{See Usage.}
 }
 \description{
-Part of the gwasem_native implementation; see the file header for the source it follows.
+A step of the gwasem_native implementation. Called by \code{.gwasem_loglik}, \code{morie_gwasem_reml}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{sign}, \code{logdet}.

@@ -31,7 +31,8 @@
 
 #' .mehtad_mat
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{mehtad_residuals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -44,7 +45,8 @@
 
 #' .mehtad_vec
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{mehtad_residuals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -54,11 +56,12 @@
 
 #' .mehtad_cholsolve
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param rhs See Usage.
+#' @param M A matrix; passed to \code{chol}.
+#' @param rhs A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .mehtad_cholsolve <- function(M, rhs) {
@@ -68,15 +71,16 @@
 
 #' mehtad_residuals
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param s See Usage.
+#' @param A Passed to \code{.mehtad_mat}.
+#' @param b Passed to \code{.mehtad_vec}.
+#' @param c Passed to \code{.mehtad_vec}.
+#' @param x Passed to \code{.mehtad_vec}.
+#' @param y Passed to \code{.mehtad_vec}.
+#' @param s Passed to \code{.mehtad_vec}.
 #' @return A list with \code{primal}, \code{dual}, \code{mu}, \code{primal_norm}, \code{dual_norm}, \code{note}.
 #' @export
 mehtad_residuals <- function(A, b, c, x, y, s) {
@@ -95,11 +99,12 @@ mehtad_residuals <- function(A, b, c, x, y, s) {
 
 #' max_step
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param dv See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
+#' @param dv A vector; indexed elementwise.
 #' @param eta Defaults to \code{0.9995}.
 #' @return A numeric value.
 #' @export
@@ -116,7 +121,8 @@ max_step <- function(v, dv, eta = 0.9995) {
 
 #' centering_parameter
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param mu See Usage.
@@ -141,13 +147,14 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 
 #' .mehtad_solve_normal
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{newton_direction}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param d See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
+#' @param d A count; the body uses it as \code{rep(...)}.
 #' @param rhs See Usage.
-#' @param ridge Defaults to \code{1e-11}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.
 #' @return The value of \code{backsolve}.
 #' @export
 .mehtad_solve_normal <- function(A, d, rhs, ridge = 1e-11) {
@@ -163,10 +170,11 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 
 #' newton_direction
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{solve_lp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
 #' @param x See Usage.
 #' @param s See Usage.
 #' @param rp See Usage.
@@ -191,17 +199,18 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 
 #' solve_lp
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{morie_mehtad}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
 #' @param b See Usage.
 #' @param c See Usage.
 #' @param tol Defaults to \code{1e-09}.
 #' @param max_iter Defaults to \code{100L}.
 #' @param nu Defaults to \code{3}.
 #' @param eta Defaults to \code{0.9995}.
-#' @param corrector Defaults to \code{TRUE}.
+#' @param corrector A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{x}, \code{y}, \code{s}, \code{mu}, \code{objective}, \code{dual_objective}, \code{iterations}, \code{corrector}, \code{primal_residual}, \code{dual_residual}, \code{converged}, \code{method}, \code{note}.
 #' @export
 solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
@@ -256,7 +265,8 @@ mehrotras_predictor <- solve_lp
 
 #' .mehtad_cheatsheet
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. Called by \code{morie_mehtad}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -279,10 +289,11 @@ mehrotras_predictor <- solve_lp
 
 #' morie_mehtad
 #'
-#' Part of the mehtad_native implementation; see the file header for the
+#' A step of the mehtad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param op See Usage.
+#' @param op A vector; its length is taken.
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export

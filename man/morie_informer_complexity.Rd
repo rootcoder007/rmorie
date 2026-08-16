@@ -13,7 +13,7 @@ morie_informer_complexity(L_Q, L_K, factor = 5)
 \item{factor}{Defaults to \code{5}.}
 }
 \description{
-Part of the informer_native implementation; see the file header for the source it follows.
+A step of the informer_native implementation. Called by \code{morie_informer_probsparse_attention}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{full}, \code{probsparse}, \code{u}, \code{ratio}, \code{memory_full}, \code{memory_probsparse}.

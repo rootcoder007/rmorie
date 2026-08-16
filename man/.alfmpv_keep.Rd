@@ -3,18 +3,18 @@
 % the formals.
 \name{.alfmpv_keep}
 \alias{.alfmpv_keep}
-\title{Which hits survive the route\\\'s own filter, in order}
+\title{Which hits survive the route\\'s own filter, in order}
 \usage{
 .alfmpv_keep(tab, mode, min_coverage, max_gap)
 }
 \arguments{
-\item{tab}{See Usage.}
-\item{mode}{See Usage.}
+\item{tab}{A list; the body reads \code{$coverage}, \code{$gaps}, \code{$n} from it.}
+\item{mode}{One of \code{"colabfold"}, \code{"folddock"}.}
 \item{min_coverage}{See Usage.}
 \item{max_gap}{See Usage.}
 }
 \description{
-Part of the alfmpv_native implementation; see the file header for the source it follows.
+A step of the alfmpv_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{which}.

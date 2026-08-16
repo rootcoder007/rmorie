@@ -10,10 +10,10 @@ dual_objective(alpha, y, K)
 \arguments{
 \item{alpha}{See Usage.}
 \item{y}{See Usage.}
-\item{K}{See Usage.}
+\item{K}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the svmopt_native implementation; see the file header for the source it follows.
+A step of the svmopt_native implementation. Called by \code{smo}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

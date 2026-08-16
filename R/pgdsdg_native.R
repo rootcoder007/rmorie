@@ -52,10 +52,11 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 
 #' .pgdsdg_norm
 #'
-#' Part of the pgdsdg_native implementation; see the file header for the
+#' A step of the pgdsdg_native implementation. Called by \code{projected_gradient}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .pgdsdg_norm <- function(v) {
@@ -64,12 +65,13 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 
 #' project_box
 #'
-#' Part of the pgdsdg_native implementation; see the file header for the
+#' A step of the pgdsdg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param lower Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param lower Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{pmin}.
 #' @export
 project_box <- function(x, lower = NULL, upper = NULL) {
@@ -102,7 +104,8 @@ project_box <- function(x, lower = NULL, upper = NULL) {
 
 #' project_nonneg
 #'
-#' Part of the pgdsdg_native implementation; see the file header for the
+#' A step of the pgdsdg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -114,7 +117,8 @@ project_nonneg <- function(x) {
 
 #' project_ball
 #'
-#' Part of the pgdsdg_native implementation; see the file header for the
+#' A step of the pgdsdg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -143,7 +147,8 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 
 #' .pgdsdg_project_simplex
 #'
-#' Part of the pgdsdg_native implementation; see the file header for the
+#' A step of the pgdsdg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -177,7 +182,8 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 
 #' projected_gradient
 #'
-#' Part of the pgdsdg_native implementation; see the file header for the
+#' A step of the pgdsdg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
@@ -185,8 +191,8 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' @param x0 See Usage.
 #' @param project See Usage.
 #' @param step Defaults to \code{NULL}.
-#' @param rule Defaults to \code{"backtracking"}.
-#' @param max_iter Defaults to \code{2000}.
+#' @param rule One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{iterations}, \code{history}, \code{step}, \code{rule}, \code{n_backtracks}, \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.
 #' @export

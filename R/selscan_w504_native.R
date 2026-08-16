@@ -11,9 +11,9 @@
 #' trapezoid area outward from the core, INCLUDING the segment that ends
 #' at the first marker below min_ehh.
 #'
-#' @param pos See Usage.
-#' @param ehh See Usage.
-#' @param core See Usage.
+#' @param pos A vector; its length is taken and its elements indexed.
+#' @param ehh A vector; indexed elementwise.
+#' @param core Numeric; combined arithmetically in the body.
 #' @param side See Usage.
 #' @param min_ehh See Usage.
 #' @return A list with \code{area}, \code{truncated}.
@@ -152,12 +152,13 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
 
 #' PLINK Table 1 with finite-sample corrections (Purcell 2007 p 566)
 #'
-#' Part of the selscan_w504_native implementation; see the file header
+#' A step of the selscan_w504_native implementation. Called by \code{Ibdmtx}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
-#' @param T_ See Usage.
+#' @param X Numeric; combined arithmetically in the body.
+#' @param Y Numeric; combined arithmetically in the body.
+#' @param T_ Numeric; combined arithmetically in the body.
 #' @return The value of \code{rbind}.
 #' @export
 .morie_p_ibs_ibd <- function(X, Y, T_) {

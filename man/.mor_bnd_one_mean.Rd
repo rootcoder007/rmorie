@@ -8,13 +8,13 @@
 .mor_bnd_one_mean(yv, seen, k0, k1)
 }
 \arguments{
-\item{yv}{See Usage.}
-\item{seen}{See Usage.}
-\item{k0}{See Usage.}
-\item{k1}{See Usage.}
+\item{yv}{A vector; indexed elementwise.}
+\item{seen}{Numeric; passed to \code{mean}.}
+\item{k0}{Numeric; combined arithmetically in the body.}
+\item{k1}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bndest_native implementation; see the file header for the source it follows.
+A step of the bndest_native implementation. Called by \code{morie_bndest}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

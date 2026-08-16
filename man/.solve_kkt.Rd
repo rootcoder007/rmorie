@@ -8,12 +8,12 @@
 .solve_kkt(hmat, grad, aeq)
 }
 \arguments{
-\item{hmat}{See Usage.}
-\item{grad}{See Usage.}
-\item{aeq}{See Usage.}
+\item{hmat}{A matrix; passed to \code{solve}.}
+\item{grad}{A vector; its length is taken.}
+\item{aeq}{Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the barerp_native implementation; see the file header for the source it follows.
+A step of the barerp_native implementation. Called by \code{central_point}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

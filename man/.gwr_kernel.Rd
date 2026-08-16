@@ -8,12 +8,12 @@
 .gwr_kernel(d, h, kernel)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{h}{See Usage.}
-\item{kernel}{See Usage.}
+\item{d}{A vector; its length is taken.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{kernel}{One of \code{"bisquare"}, \code{"gaussian"}, \code{"tricube"}.}
 }
 \description{
-Part of the gwrcal_native implementation; see the file header for the source it follows.
+A step of the gwrcal_native implementation. Called by \code{.gwr_cv_score}, \code{.gwr_fit}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

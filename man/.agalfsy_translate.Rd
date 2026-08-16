@@ -8,12 +8,12 @@
 .agalfsy_translate(P, axis, step)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{axis}{See Usage.}
-\item{step}{See Usage.}
+\item{P}{A matrix; indexed by row and column.}
+\item{axis}{Numeric; combined arithmetically in the body.}
+\item{step}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the agalfsy_native implementation; see the file header for the source it follows.
+A step of the agalfsy_native implementation. Called by \code{.agalfsy_apply}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{P}, as built in the body.

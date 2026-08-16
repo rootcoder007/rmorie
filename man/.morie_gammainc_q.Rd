@@ -8,8 +8,8 @@
 .morie_gammainc_q(a, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
 }
 \description{
 far tail never passes through 1 - P and lose its digits.

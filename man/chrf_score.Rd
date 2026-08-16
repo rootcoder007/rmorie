@@ -9,14 +9,14 @@ chrf_score(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRU
 }
 \arguments{
 \item{hypothesis}{See Usage.}
-\item{reference}{See Usage.}
+\item{reference}{A vector; its length is taken.}
 \item{n_char}{Defaults to \code{6L}.}
-\item{beta}{Defaults to \code{2}.}
-\item{remove_whitespace}{Defaults to \code{TRUE}.}
+\item{beta}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
+\item{remove_whitespace}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{word_order}{Defaults to \code{0L}.}
 }
 \description{
-Part of the chrF_native implementation; see the file header for the source it follows.
+A step of the chrF_native implementation. Called by \code{morie_chrF}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

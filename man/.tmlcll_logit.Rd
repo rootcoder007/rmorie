@@ -8,10 +8,10 @@
 .tmlcll_logit(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

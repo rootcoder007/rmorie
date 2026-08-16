@@ -8,10 +8,10 @@
 .scalar(state)
 }
 \arguments{
-\item{state}{See Usage.}
+\item{state}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the prtcl_native implementation; see the file header for the source it follows.
+A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

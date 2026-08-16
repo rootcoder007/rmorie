@@ -25,7 +25,8 @@
 
 #' .tmldta_logit
 #'
-#' Part of the tmldta_native implementation; see the file header for the
+#' A step of the tmldta_native implementation. Called by \code{split_specific_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -38,17 +39,19 @@
 
 #' .tmldta_expit
 #'
-#' Part of the tmldta_native implementation; see the file header for the
+#' A step of the tmldta_native implementation. Called by \code{.fit_g}, \code{.fit_q}, \code{split_specific_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tmldta_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
 
 #' .levels
 #'
-#' Part of the tmldta_native implementation; see the file header for the
+#' A step of the tmldta_native implementation. Called by \code{morie_tmldta}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A See Usage.
@@ -68,13 +71,14 @@
 
 #' .fit_q
 #'
-#' Part of the tmldta_native implementation; see the file header for the
+#' A step of the tmldta_native implementation. Called by \code{discover_levels}, \code{split_specific_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param W See Usage.
-#' @param levels See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param A A vector; indexed elementwise.
+#' @param W A matrix; indexed by row and column.
+#' @param levels A vector; indexed elementwise.
 #' @param rows See Usage.
 #' @param ridge See Usage.
 #' @return A list with \code{q}, \code{b}.
@@ -106,16 +110,17 @@
 
 #' .fit_g
 #'
-#' Part of the tmldta_native implementation; see the file header for the
+#' A step of the tmldta_native implementation. Called by \code{split_specific_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param W See Usage.
+#' @param A A vector; its length is taken.
+#' @param W A matrix; passed to \code{ncol}.
 #' @param aL See Usage.
 #' @param aH See Usage.
 #' @param rows See Usage.
 #' @param ridge See Usage.
-#' @param trim See Usage.
+#' @param trim Numeric; passed to \code{max}.
 #' @return A list with \code{gH}, \code{gL}.
 #' @export
 .fit_g <- function(A, W, aL, aH, rows, ridge, trim) {
@@ -234,10 +239,11 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
 
 #' .tmldta_folds
 #'
-#' Part of the tmldta_native implementation; see the file header for the
+#' A step of the tmldta_native implementation. Called by \code{morie_tmldta}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param n_folds See Usage.
 #' @return The value of \code{lapply}.
 #' @export

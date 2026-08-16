@@ -8,9 +8,9 @@
 .hrztf_tn_at(yv, ygrid, T, y2, y1)
 }
 \arguments{
-\item{yv}{See Usage.}
-\item{ygrid}{See Usage.}
-\item{T}{See Usage.}
+\item{yv}{Numeric; combined arithmetically in the body.}
+\item{ygrid}{A vector; its length is taken and its elements indexed.}
+\item{T}{A vector; indexed elementwise.}
 \item{y2}{See Usage.}
 \item{y1}{See Usage.}
 }

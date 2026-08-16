@@ -49,11 +49,12 @@
 
 #' .plrgrf_folds
 #'
-#' Part of the plrgrf_native implementation; see the file header for the
+#' A step of the plrgrf_native implementation. Called by \code{local_centering}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param V See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
 .plrgrf_folds <- function(n, V) {
@@ -63,13 +64,14 @@
 
 #' .plrgrf_forest_predict
 #'
-#' Part of the plrgrf_native implementation; see the file header for the
+#' A step of the plrgrf_native implementation. Called by \code{local_centering}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
 #' @param train See Usage.
-#' @param at_rows See Usage.
+#' @param at_rows A vector; its length is taken and its elements indexed.
 #' @param n_trees See Usage.
 #' @param min_leaf See Usage.
 #' @param seed See Usage.
@@ -90,16 +92,17 @@
 
 #' local_centering
 #'
-#' Part of the plrgrf_native implementation; see the file header for the
+#' A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
-#' @param X See Usage.
-#' @param n_folds Defaults to \code{5}.
-#' @param n_trees Defaults to \code{100}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param seed Defaults to \code{0}.
+#' @param y A vector; its length is taken.
+#' @param W Passed to \code{.plrgrf_forest_predict}.
+#' @param X Passed to \code{.plrgrf_forest_predict}.
+#' @param n_folds Passed to \code{.plrgrf_folds}. Defaults to \code{5}.
+#' @param n_trees Passed to \code{.plrgrf_forest_predict}. Defaults to \code{100}.
+#' @param min_leaf Passed to \code{.plrgrf_forest_predict}. Defaults to \code{5}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{mh}, \code{eh}.
 #' @export
 local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
@@ -121,13 +124,14 @@ local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
 
 #' residual_forest
 #'
-#' Part of the plrgrf_native implementation; see the file header for the
+#' A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y_res See Usage.
-#' @param w_res See Usage.
+#' @param y_res A vector; its length is taken.
+#' @param w_res Numeric; combined arithmetically in the body.
 #' @param X See Usage.
-#' @param at Defaults to \code{NULL}.
+#' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n_trees Defaults to \code{200}.
 #' @param min_leaf Defaults to \code{5}.
 #' @param seed Defaults to \code{0}.
@@ -167,19 +171,20 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
 
 #' morie_plrgrf
 #'
-#' Part of the plrgrf_native implementation; see the file header for the
+#' A step of the plrgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param W See Usage.
-#' @param X See Usage.
-#' @param at Defaults to \code{NULL}.
-#' @param n_trees Defaults to \code{200}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param n_trees Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @param n_folds Defaults to \code{5}.
 #' @param min_leaf Defaults to \code{5}.
 #' @param seed Defaults to \code{0}.
-#' @param center Defaults to \code{TRUE}.
-#' @param level Defaults to \code{0.95}.
+#' @param center A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{tau}, \code{se}, \code{ci}, \code{m_hat}, \code{e_hat}, \code{y_residual}, \code{w_residual}, \code{centered}, \code{n}, \code{n_trees}, \code{ate}, \code{level}, \code{method}.
 #' @export
 morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
@@ -236,7 +241,8 @@ morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
 
 #' .plrgrf_cheatsheet
 #'
-#' Part of the plrgrf_native implementation; see the file header for the
+#' A step of the plrgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

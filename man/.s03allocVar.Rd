@@ -8,9 +8,9 @@
 .s03allocVar(M, S, m)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{S}{See Usage.}
-\item{m}{See Usage.}
+\item{M}{A vector; its length is taken and its elements indexed.}
+\item{S}{A vector; indexed elementwise.}
+\item{m}{A vector; indexed elementwise.}
 }
 \description{
 sigma^2 = sum_i M_i (M_i - m_i) S_i^2 / m_i.

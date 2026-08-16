@@ -8,16 +8,16 @@
 morie_mfovsm(y, feature, A, H, v_in_numerator = TRUE, contrast = "cumulative", trim = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{feature}{See Usage.}
-\item{A}{See Usage.}
-\item{H}{See Usage.}
-\item{v_in_numerator}{Defaults to \code{TRUE}.}
-\item{contrast}{Defaults to \code{"cumulative"}.}
+\item{y}{Passed to \code{.mfovsm_vec}.}
+\item{feature}{Passed to \code{.mfovsm_vec}.}
+\item{A}{Passed to \code{.mfovsm_hist}.}
+\item{H}{Passed to \code{.mfovsm_hist}.}
+\item{v_in_numerator}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{contrast}{One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.}
 \item{trim}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the mfovsm_native implementation; see the file header for the source it follows.
+A step of the mfovsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{main_effect}, \code{main_effect_se}, \code{feature_effect}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n}, \code{n_times}, \code{contrast}, \code{method}.

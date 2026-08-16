@@ -8,11 +8,11 @@
 .felsen_pij(t, pi)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{pi}{See Usage.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{pi}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the felsen_native implementation; see the file header for the source it follows.
+A step of the felsen_native implementation. Called by \code{.felsen_prune}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{P}, as built in the body.

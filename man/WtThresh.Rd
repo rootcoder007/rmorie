@@ -8,14 +8,14 @@
 WtThresh(x, wavelet = "db4", levels = 3, threshold_type = "soft", threshold = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{wavelet}{Defaults to \code{"db4"}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{wavelet}{Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.}
 \item{levels}{Defaults to \code{3}.}
 \item{threshold_type}{Defaults to \code{"soft"}.}
 \item{threshold}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{PpgWtDen}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed}, \code{n_coeffs}, \code{sparsity}, \code{noise_removed}, \code{threshold_type}, \code{wavelet}, \code{method}.

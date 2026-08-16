@@ -25,7 +25,8 @@
 
 #' clrgrf_cluster_index
 #'
-#' Part of the clrgrf_native implementation; see the file header for the
+#' A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param clusters See Usage.
@@ -50,13 +51,14 @@ clrgrf_cluster_index <- function(clusters) {
 
 #' clrgrf_cluster_jackknife
 #'
-#' Part of the clrgrf_native implementation; see the file header for the
+#' A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param preds See Usage.
-#' @param bags See Usage.
-#' @param groups See Usage.
-#' @param correction Defaults to \code{TRUE}.
+#' @param preds A vector; its length is taken.
+#' @param bags A vector; indexed elementwise.
+#' @param groups A vector; its length is taken.
+#' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{variance}, \code{info}.
 #' @export
 clrgrf_cluster_jackknife <- function(preds, bags, groups,
@@ -87,20 +89,21 @@ clrgrf_cluster_jackknife <- function(preds, bags, groups,
 
 #' morie_clrgrf
 #'
-#' Part of the clrgrf_native implementation; see the file header for the
+#' A step of the clrgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param X See Usage.
-#' @param clusters See Usage.
-#' @param at Defaults to \code{NULL}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param clusters A vector; its length is taken and its elements indexed.
+#' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n_trees Defaults to \code{200L}.
 #' @param min_leaf Defaults to \code{5L}.
 #' @param subsample_frac Defaults to \code{0.5}.
 #' @param seed Defaults to \code{0L}.
-#' @param unit Defaults to \code{"cluster"}.
+#' @param unit One of \code{"cluster"}, \code{"row"}. Defaults to \code{"cluster"}.
 #' @param level Defaults to \code{0.95}.
-#' @param cluster_sampling Defaults to \code{TRUE}.
+#' @param cluster_sampling A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{n_clusters}, \code{clusters_per_tree}, \code{clusters_subsampled}, \code{cluster_sizes}, \code{cluster_labels}, \code{unit}, \code{cluster_sampling}, \code{n_trees}, \code{level}, \code{method}.
 #' @export
 morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
@@ -188,7 +191,8 @@ morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
 
 #' clrgrf_cheatsheet
 #'
-#' Part of the clrgrf_native implementation; see the file header for the
+#' A step of the clrgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

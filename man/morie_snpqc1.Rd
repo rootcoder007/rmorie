@@ -8,9 +8,9 @@
 morie_snpqc1(genotypes, phenotype = NULL, trait = "binary", geno_relaxed = 0.2, mind_relaxed = 0.2, geno = 0.02, mind = 0.02, maf_threshold = 0.01, hwe_case = 1e-10, hwe_control = 1e-06, hwe_quantitative = 1e-06, het_sd = 3, pihat = 0.2, hwe_test = "exact", x_genotypes = NULL, reported_sex = NULL, relatedness = "pihat", ibd_correction = TRUE)
 }
 \arguments{
-\item{genotypes}{See Usage.}
+\item{genotypes}{Passed to \code{.snpqc1_check}.}
 \item{phenotype}{Defaults to \code{NULL}.}
-\item{trait}{Defaults to \code{"binary"}.}
+\item{trait}{One of \code{"binary"}, \code{"quantitative"}. Defaults to \code{"binary"}.}
 \item{geno_relaxed}{Defaults to \code{0.2}.}
 \item{mind_relaxed}{Defaults to \code{0.2}.}
 \item{geno}{Defaults to \code{0.02}.}
@@ -19,16 +19,16 @@ morie_snpqc1(genotypes, phenotype = NULL, trait = "binary", geno_relaxed = 0.2, 
 \item{hwe_case}{Defaults to \code{1e-10}.}
 \item{hwe_control}{Defaults to \code{1e-06}.}
 \item{hwe_quantitative}{Defaults to \code{1e-06}.}
-\item{het_sd}{Defaults to \code{3}.}
+\item{het_sd}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 \item{pihat}{Defaults to \code{0.2}.}
-\item{hwe_test}{Defaults to \code{"exact"}.}
-\item{x_genotypes}{Defaults to \code{NULL}.}
+\item{hwe_test}{Passed to \code{morie_snpqc1_hwe_pvalue}. Defaults to \code{"exact"}.}
+\item{x_genotypes}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{reported_sex}{Defaults to \code{NULL}.}
-\item{relatedness}{Defaults to \code{"pihat"}.}
-\item{ibd_correction}{Defaults to \code{TRUE}.}
+\item{relatedness}{One of \code{"kinship"}, \code{"pihat"}. Defaults to \code{"pihat"}.}
+\item{ibd_correction}{Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the snpqc1_native implementation; see the file header for the source it follows.
+A step of the snpqc1_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals}, \code{removed}, \code{n_snps_kept}, \code{n_individuals_kept}, \code{call_rate_snp}, \code{call_rate_ind}, \code{maf}, \code{hwe_p}, \code{heterozygosity}, \code{relatedness_matrix}, \code{kinship}, \code{ibd_states}, \code{relatedness}, \code{pruned_snps}, \code{thresholds}, \code{trait}, \code{hwe_test}, \code{note}, \code{method}.

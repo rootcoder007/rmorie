@@ -8,7 +8,8 @@
 
 #' .thrtmt_vec
 #'
-#' Part of the thrtmt_native implementation; see the file header for the
+#' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -21,10 +22,11 @@
 
 #' .thrtmt_mat
 #'
-#' Part of the thrtmt_native implementation; see the file header for the
+#' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
+#' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .thrtmt_mat <- function(W) {
@@ -36,11 +38,12 @@
 
 #' .thrtmt_design
 #'
-#' Part of the thrtmt_native implementation; see the file header for the
+#' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param n See Usage.
+#' @param rows A vector; its length is taken and its elements indexed.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{Z}, as built in the body.
 #' @export
 .thrtmt_design <- function(rows, n) {
@@ -62,9 +65,9 @@
 #'
 #' Returns b solving (Z\'Z + ridge I) b = Z\' y
 #'
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param ridge See Usage.
+#' @param Z A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param ridge A matrix; passed to \code{diag}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .thrtmt_lstsq <- function(Z, y, ridge) {
@@ -89,11 +92,12 @@
 
 #' .thrtmt_matvec
 #'
-#' Part of the thrtmt_native implementation; see the file header for the
+#' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param b See Usage.
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param b A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .thrtmt_matvec <- function(Z, b) {
@@ -105,14 +109,15 @@
 
 #' thrtmt_blip_function
 #'
-#' Part of the thrtmt_native implementation; see the file header for the
+#' A step of the thrtmt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param W See Usage.
-#' @param V Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param y Passed to \code{.thrtmt_vec}.
+#' @param A Passed to \code{.thrtmt_vec}.
+#' @param W Optional; may be \code{NULL}. Passed to \code{.thrtmt_mat}.
+#' @param V Optional; may be \code{NULL}. Passed to \code{.thrtmt_mat}.
+#' @param ridge Passed to \code{.thrtmt_lstsq}. Defaults to \code{1e-08}.
 #' @return A list with \code{blip}, \code{info}.
 #' @export
 thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {

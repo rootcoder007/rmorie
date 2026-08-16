@@ -12,7 +12,7 @@ crtT(residues, moduli)
 \item{moduli}{See Usage.}
 }
 \description{
-Part of the crtT_mixedcase_native implementation; see the file header for the source it follows.
+A step of the crtT_mixedcase_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{modulus}, \code{residues}, \code{moduli}, \code{method}.

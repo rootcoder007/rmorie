@@ -8,12 +8,12 @@
 .s4_rbf(X, Z, ell = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Z}{See Usage.}
-\item{ell}{Defaults to \code{1}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{Z}{A matrix; indexed by row and column.}
+\item{ell}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Gpmoe}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

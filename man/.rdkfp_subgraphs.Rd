@@ -8,13 +8,13 @@
 .rdkfp_subgraphs(B, minpath, maxpath, branched)
 }
 \arguments{
-\item{B}{See Usage.}
+\item{B}{A list; the body reads \code{$a}, \code{$i}, \code{$j} from it.}
 \item{minpath}{See Usage.}
 \item{maxpath}{See Usage.}
-\item{branched}{See Usage.}
+\item{branched}{A flag; the body branches on it.}
 }
 \description{
-Part of the rdkfp implementation; see the file header for the source it follows.
+A step of the rdkfp implementation. Called by \code{Rdkfp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

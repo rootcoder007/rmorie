@@ -48,12 +48,13 @@
 
 #' .tlseqsl_loss
 #'
-#' Part of the tlseqsl_native implementation; see the file header for
+#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_risk}, \code{morie_tlseqsl_ensemble_super_learner}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param kind See Usage.
-#' @param y See Usage.
-#' @param p See Usage.
+#' @param kind Compared against \code{"squared"}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param p Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .tlseqsl_loss <- function(kind, y, p) {
@@ -66,12 +67,13 @@
 
 #' morie_tlseqsl_cv_folds
 #'
-#' Part of the tlseqsl_native implementation; see the file header for
+#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_risk}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
-#' @param V Defaults to \code{10}.
-#' @param seed Defaults to \code{0}.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param V A count; the body uses it as \code{vector(...)}. Defaults to \code{10}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{folds}, as built in the body.
 #' @export
 morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
@@ -100,15 +102,16 @@ morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
 
 #' morie_tlseqsl_cv_risk
 #'
-#' Part of the tlseqsl_native implementation; see the file header for
+#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_discrete_super_learner}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param algorithm See Usage.
-#' @param V Defaults to \code{10}.
-#' @param loss Defaults to \code{"squared"}.
-#' @param seed Defaults to \code{0}.
+#' @param V Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{10}.
+#' @param loss Passed to \code{.tlseqsl_loss}. Defaults to \code{"squared"}.
+#' @param seed Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{0}.
 #' @return A list with \code{risk}, \code{cv_predictions}, \code{V}, \code{loss}.
 #' @export
 morie_tlseqsl_cv_risk <- function(X, y, algorithm, V=10, loss="squared", seed=0) {
@@ -141,15 +144,16 @@ morie_tlseqsl_cv_risk <- function(X, y, algorithm, V=10, loss="squared", seed=0)
 
 #' morie_tlseqsl_discrete_super_learner
 #'
-#' Part of the tlseqsl_native implementation; see the file header for
+#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_ensemble_super_learner}, \code{morie_tlseqsl_sequential_super_learner}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param library See Usage.
-#' @param V Defaults to \code{10}.
-#' @param loss Defaults to \code{"squared"}.
-#' @param seed Defaults to \code{0}.
+#' @param X Passed to \code{morie_tlseqsl_cv_risk}.
+#' @param y Passed to \code{morie_tlseqsl_cv_risk}.
+#' @param library A vector; its length is taken and its elements indexed.
+#' @param V Passed to \code{morie_tlseqsl_cv_risk}. Defaults to \code{10}.
+#' @param loss Passed to \code{morie_tlseqsl_cv_risk}. Defaults to \code{"squared"}.
+#' @param seed Passed to \code{morie_tlseqsl_cv_risk}. Defaults to \code{0}.
 #' @return A list with \code{selected}, \code{risks}, \code{cv_predictions}, \code{note}.
 #' @export
 morie_tlseqsl_discrete_super_learner <- function(X, y, library, V=10,
@@ -179,16 +183,17 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V=10,
 
 #' morie_tlseqsl_ensemble_super_learner
 #'
-#' Part of the tlseqsl_native implementation; see the file header for
+#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_sequential_super_learner}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param library See Usage.
-#' @param V Defaults to \code{10}.
-#' @param loss Defaults to \code{"squared"}.
-#' @param seed Defaults to \code{0}.
-#' @param grid Defaults to \code{21}.
+#' @param X Passed to \code{morie_tlseqsl_discrete_super_learner}.
+#' @param y Passed to \code{morie_tlseqsl_discrete_super_learner}.
+#' @param library Passed to \code{morie_tlseqsl_discrete_super_learner}.
+#' @param V Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{10}.
+#' @param loss Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{"squared"}.
+#' @param seed Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{0}.
+#' @param grid Numeric; combined arithmetically in the body. Defaults to \code{21}.
 #' @return A list with \code{estimate}, \code{weights}, \code{cv_risk}, \code{discrete_risks}, \code{discrete_choice}, \code{best_single}, \code{method}, \code{note}.
 #' @export
 morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
@@ -260,15 +265,16 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
 
 #' morie_tlseqsl_sequential_super_learner
 #'
-#' Part of the tlseqsl_native implementation; see the file header for
+#' A step of the tlseqsl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param histories See Usage.
+#' @param histories A vector; its length is taken and its elements indexed.
 #' @param outcomes See Usage.
-#' @param library See Usage.
-#' @param T See Usage.
-#' @param V Defaults to \code{5}.
-#' @param seed Defaults to \code{0}.
+#' @param library Passed to \code{morie_tlseqsl_ensemble_super_learner}.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param V Passed to \code{morie_tlseqsl_ensemble_super_learner}. Defaults to \code{5}.
+#' @param seed Passed to \code{morie_tlseqsl_ensemble_super_learner}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{mean}, \code{sequential_fits}, \code{T}, \code{method}.
 #' @export
 morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
@@ -323,7 +329,8 @@ morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
 
 #' morie_tlseqsl_cheatsheet
 #'
-#' Part of the tlseqsl_native implementation; see the file header for
+#' A step of the tlseqsl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

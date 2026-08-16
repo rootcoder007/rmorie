@@ -8,7 +8,7 @@
 .node2v_dist(adj, t, x)
 }
 \arguments{
-\item{adj}{See Usage.}
+\item{adj}{A vector; indexed elementwise.}
 \item{t}{See Usage.}
 \item{x}{See Usage.}
 }

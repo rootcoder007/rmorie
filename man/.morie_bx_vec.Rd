@@ -12,7 +12,7 @@
 \item{name}{Defaults to \code{"x"}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{Ahi}, \code{BPursuit}, \code{CadPipe} and 14 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

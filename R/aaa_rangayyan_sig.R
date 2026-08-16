@@ -10,7 +10,7 @@
 #'
 #' @param prediction_errors See Usage.
 #' @param n_samples See Usage.
-#' @param window Defaults to \code{"hamming"}.
+#' @param window Character; passed to \code{tolower}. Defaults to \code{"hamming"}.
 #' @return A list with \code{order}, \code{criterion}, \code{n_effective}, \code{method}.
 #' @export
 AICorder <- function(prediction_errors, n_samples, window = "hamming") {
@@ -44,10 +44,11 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 
 #' |DFT|^2 per bin by direct evaluation: exact at any M, no padding
 #'
-#' Part of the rangayyan_sig implementation; see the file header for the
+#' A step of the rangayyan_sig implementation. Called by \code{BartlettPSD}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seg See Usage.
+#' @param seg A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_dft_power <- function(seg) {
@@ -63,11 +64,12 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 
 #' BartlettPSD
 #'
-#' Part of the rangayyan_sig implementation; see the file header for the
+#' A step of the rangayyan_sig implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param n_segments Defaults to \code{NULL}.
 #' @param segment_length Defaults to \code{NULL}.
 #' @return A list with \code{psd}, \code{freqs}, \code{n_segments}, \code{segment_length}, \code{method}.

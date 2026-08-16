@@ -14,13 +14,13 @@ compute_threshold(i1, i2, a1_new, a2_new, alpha, y, E, K, b, C)
 \item{a2_new}{See Usage.}
 \item{alpha}{See Usage.}
 \item{y}{See Usage.}
-\item{E}{See Usage.}
-\item{K}{See Usage.}
+\item{E}{A vector; indexed elementwise.}
+\item{K}{A matrix; indexed by row and column.}
 \item{b}{See Usage.}
 \item{C}{See Usage.}
 }
 \description{
-Part of the smoopt_native implementation; see the file header for the source it follows.
+A step of the smoopt_native implementation. Called by \code{smo_platt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{b}, \code{from}, \code{b1}, \code{b2}, \code{note}.

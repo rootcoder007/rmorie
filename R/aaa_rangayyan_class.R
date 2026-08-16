@@ -17,11 +17,12 @@
 
 #' .morie_rg_gcd
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{.morie_rg_frac}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; passed to \code{abs}.
+#' @param b Numeric; passed to \code{abs}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .morie_rg_gcd <- function(a, b) {
@@ -37,11 +38,12 @@
 
 #' An exact rational as a list, so counts-based ratios are not rounded
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{.morie_rg_asfrac}, \code{.morie_rg_fadd}, \code{.morie_rg_fmul} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
-#' @param d See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param d Numeric; combined arithmetically in the body.
 #' @return The value of \code{structure}.
 #' @export
 .morie_rg_frac <- function(n, d) {
@@ -58,7 +60,8 @@
 
 #' .morie_rg_asfrac
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{Accuracy}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v See Usage.
@@ -85,11 +88,12 @@
 
 #' .morie_rg_fadd
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{Accuracy}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A list; the body reads \code{$d}, \code{$n} from it.
+#' @param b A list; the body reads \code{$d}, \code{$n} from it.
 #' @return The value of \code{.morie_rg_frac}.
 #' @export
 .morie_rg_fadd <- function(a, b) {
@@ -97,11 +101,12 @@
 }
 #' .morie_rg_fsub
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{Accuracy}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A list; the body reads \code{$d}, \code{$n} from it.
+#' @param b A list; the body reads \code{$d}, \code{$n} from it.
 #' @return The value of \code{.morie_rg_frac}.
 #' @export
 .morie_rg_fsub <- function(a, b) {
@@ -109,11 +114,12 @@
 }
 #' .morie_rg_fmul
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{Accuracy}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A list; the body reads \code{$d}, \code{$n} from it.
+#' @param b A list; the body reads \code{$d}, \code{$n} from it.
 #' @return The value of \code{.morie_rg_frac}.
 #' @export
 .morie_rg_fmul <- function(a, b) .morie_rg_frac(a$n * b$n, a$d * b$d)
@@ -121,37 +127,41 @@
 # as.numeric() dispatches to as.double methods, not as.numeric ones
 #' As.numeric() dispatches to as.double methods, not as.numeric ones
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A list; the body reads \code{$d}, \code{$n} from it.
 #' @param ... Passed through.
 #' @return A numeric value.
 #' @export
 as.double.morie_frac <- function(x, ...) x$n / x$d
 #' as.numeric.morie_frac
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A list; the body reads \code{$d}, \code{$n} from it.
 #' @param ... Passed through.
 #' @return A numeric value.
 #' @export
 as.numeric.morie_frac <- function(x, ...) x$n / x$d
 #' format.morie_frac
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A list; the body reads \code{$d}, \code{$n} from it.
 #' @param ... Passed through.
 #' @return A character value.
 #' @export
 format.morie_frac <- function(x, ...) paste0(x$n, "/", x$d)
 #' print.morie_frac
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -167,10 +177,11 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 
 #' Sum of (x - mu)(x - mu)^T: the SCATTER, not divided by n
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{SepIndex}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param mu See Usage.
 #' @return The value of \code{%*%}.
 #' @export
@@ -182,10 +193,11 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 
 #' Split rows by label, preserving first-seen order
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{Qda}, \code{SepIndex}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @param y See Usage.
 #' @return A list with \code{order}, \code{groups}.
 #' @export
@@ -204,7 +216,7 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' calling everyone positive scores 1, which is why the book always
 #' reports it beside the specificity.
 #'
-#' @param tp See Usage.
+#' @param tp A matrix; passed to \code{as.matrix}.
 #' @param fn Defaults to \code{NULL}.
 #' @return A list with \code{sensitivity}, \code{tpf}, \code{fnf}, \code{n_diseased}, \code{tp}, \code{fn}, \code{says_nothing_about_false_alarms}, \code{method}.
 #' @export
@@ -239,10 +251,11 @@ Sens <- function(tp, fn = NULL) {
 
 #' Eq (10.101): S- = TN / (subjects without the disease)
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param tn See Usage.
+#' @param tn A matrix; passed to \code{as.matrix}.
 #' @param fp Defaults to \code{NULL}.
 #' @return A list with \code{specificity}, \code{tnf}, \code{fpf}, \code{n_healthy}, \code{tn}, \code{fp}, \code{method}.
 #' @export
@@ -273,10 +286,11 @@ Spec <- function(tn, fp = NULL) {
 
 #' Ppv
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param tp See Usage.
+#' @param tp A matrix; passed to \code{as.matrix}.
 #' @param fp Defaults to \code{NULL}.
 #' @param prevalence Defaults to \code{NULL}.
 #' @param sensitivity Defaults to \code{NULL}.
@@ -329,17 +343,18 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
 
 #' Accuracy
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param table Defaults to \code{NULL}.
+#' @param table Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param tp Defaults to \code{NULL}.
 #' @param tn Defaults to \code{NULL}.
 #' @param fp Defaults to \code{NULL}.
 #' @param fn Defaults to \code{NULL}.
-#' @param prevalence Defaults to \code{NULL}.
+#' @param prevalence Optional; may be \code{NULL}. Passed to \code{.morie_rg_asfrac}.
 #' @param kind Defaults to \code{NULL}.
-#' @param exact Defaults to \code{FALSE}.
+#' @param exact A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{accuracy}, \code{kind}, \code{raw_accuracy}, \code{weighted_accuracy}, \code{balanced_accuracy}, \code{sensitivity}, \code{specificity}, \code{prevalence}, \code{test_set_prevalence}, \code{counts}, \code{n}, \code{exact}, \code{prior_weighted}, \code{balanced_is_eq_10_102_at_one_half}, \code{eq_10_103_is_eq_10_102_at_the_test_set_prevalence}, \code{method}.
 #' @export
 Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
@@ -470,7 +485,7 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
 #' class rather than a probability.
 #'
 #' @param scores See Usage.
-#' @param labels See Usage.
+#' @param labels A vector; its length is taken.
 #' @param positive Defaults to \code{1}.
 #' @return A list with \code{fpf}, \code{tpf}, \code{sensitivity}, \code{one_minus_specificity}, \code{thresholds}, \code{auc}, \code{az}, \code{mann_whitney}, \code{trapezoidal_equals_mann_whitney}, \code{n_positive}, \code{n_negative}, \code{best_index}, \code{best_operating_point}, \code{ties_counted_as_half}, \code{method}.
 #' @export
@@ -522,8 +537,8 @@ Roc <- function(scores, labels, positive = 1) {
 #' diagonal, usually most of the cases, contributes nothing, because the
 #' question is whether the disagreements are one-sided.
 #'
-#' @param table See Usage.
-#' @param correct Defaults to \code{NULL}.
+#' @param table A matrix; passed to \code{as.matrix}.
+#' @param correct Optional; may be \code{NULL}. A flag; the body branches on it.
 #' @return A list with \code{statistic}, \code{df}, \code{p_value}, \code{pairs}, \code{n}, \code{n_agree}, \code{continuity_correction}, \code{is_bowker}, \code{k}, \code{diagonal_contributes_nothing}, \code{method}.
 #' @export
 McNemar <- function(table, correct = NULL) {
@@ -627,8 +642,8 @@ NormDist <- function(m1, m2, s1, s2) {
 #'
 #' @param m1 See Usage.
 #' @param m2 See Usage.
-#' @param C1 See Usage.
-#' @param C2 See Usage.
+#' @param C1 A matrix; passed to \code{as.matrix}.
+#' @param C2 A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{divergence}, \code{covariance_term}, \code{mean_term}, \code{nonnegative}, \code{symmetric}, \code{zero_for_identical_pdfs}, \code{separates_equal_means_via_the_covariance_term}, \code{additive_over_independent_features}, \code{method}.
 #' @export
 Divergence <- function(m1, m2, C1, C2) {
@@ -671,8 +686,8 @@ Divergence <- function(m1, m2, C1, C2) {
 #' separated ones, so the minimum is returned too -- that is the pair
 #' that will actually be confused.
 #'
-#' @param means See Usage.
-#' @param covs See Usage.
+#' @param means A vector; its length is taken and its elements indexed.
+#' @param covs A vector; its length is taken and its elements indexed.
 #' @return A list with \code{average}, \code{pairwise}, \code{minimum}, \code{worst_pair}, \code{n_classes}, \code{n_pairs}, \code{average_hides_the_worst_pair}, \code{method}.
 #' @export
 DivAv <- function(means, covs) {
@@ -943,8 +958,8 @@ Hellinger <- function(p1, p2) {
 #'
 #' @param m1 See Usage.
 #' @param m2 See Usage.
-#' @param C1 See Usage.
-#' @param C2 See Usage.
+#' @param C1 A matrix; passed to \code{as.matrix}.
+#' @param C2 A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{bhattacharyya}, \code{mean_term}, \code{covariance_term}, \code{not_from_this_book}, \code{book_uses_divergence_eq_10_115}, \code{reference}, \code{method}.
 #' @export
 GaussOverlap <- function(m1, m2, C1, C2) {
@@ -1093,8 +1108,8 @@ FishCrit <- function(x1, x2) {
 #' jointly discriminating when neither is alone -- for that, the
 #' divergence, which uses the full covariance, is the measure to use.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param y A vector; its length is taken.
 #' @return A list with \code{j}, \code{trace_between}, \code{trace_within}, \code{s_within}, \code{s_between}, \code{classes}, \code{n_classes}, \code{n_features}, \code{ignores_off_diagonal_structure}, \code{method}.
 #' @export
 SepIndex <- function(X, y) {
@@ -1142,8 +1157,8 @@ SepIndex <- function(X, y) {
 #' separation, not reconstruction, so unlike a principal component it is
 #' not meant to represent the data.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param y A vector; its length is taken.
 #' @return A list with \code{w}, \code{threshold}, \code{classes}, \code{means}, \code{s_within}, \code{projected}, \code{projected_means}, \code{criterion}, \code{two_class_only}, \code{not_a_reconstruction_basis}, \code{method}.
 #' @export
 FishLda <- function(X, y) {
@@ -1199,7 +1214,7 @@ FishLda <- function(X, y) {
 #'
 #' @param x See Usage.
 #' @param mu See Usage.
-#' @param C See Usage.
+#' @param C A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{d2}, \code{distance}, \code{squared}, \code{euclidean}, \code{differs_from_euclidean}, \code{scale_free}, \code{method}.
 #' @export
 Mahal <- function(x, mu, C) {
@@ -1235,7 +1250,7 @@ Mahal <- function(x, mu, C) {
 #' added.
 #'
 #' @param x See Usage.
-#' @param weights See Usage.
+#' @param weights A matrix; passed to \code{as.matrix}.
 #' @param w0 Defaults to \code{NULL}.
 #' @return A list with \code{d}, \code{assigned}, \code{margin}, \code{n_classes}, \code{regions_are_convex}, \code{decision_surfaces_are_hyperplanes}, \code{method}.
 #' @export
@@ -1321,12 +1336,12 @@ LinDSep <- function(X, y) {
 #' different units, since Euclidean distance is otherwise dominated by
 #' whichever feature has the largest numbers.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param query See Usage.
 #' @param k Defaults to \code{1}.
-#' @param metric Defaults to \code{"euclidean"}.
-#' @param C Defaults to \code{NULL}.
+#' @param metric One of \code{"euclidean"}, \code{"mahalanobis"}. Defaults to \code{"euclidean"}.
+#' @param C Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{assigned}, \code{votes}, \code{k}, \code{metric}, \code{neighbours}, \code{tie}, \code{tied_classes}, \code{nearest_distance}, \code{nearest_label}, \code{single_neighbour_may_be_an_outlier}, \code{method}.
 #' @export
 Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
@@ -1437,10 +1452,10 @@ BayesCls <- function(likelihoods, priors = NULL) {
 #' and reduce to hyperplanes exactly when the covariances are equal.
 #'
 #' @param x See Usage.
-#' @param means See Usage.
-#' @param covs See Usage.
+#' @param means A vector; its length is taken and its elements indexed.
+#' @param covs A vector; its length is taken and its elements indexed.
 #' @param priors Defaults to \code{NULL}.
-#' @param full Defaults to \code{FALSE}.
+#' @param full A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{d}, \code{d_full}, \code{d_dropped_constant}, \code{assigned}, \code{priors}, \code{constant_term}, \code{surfaces_are_hyperquadrics}, \code{linear_when_covariances_are_equal}, \code{log_form_avoids_underflow}, \code{method}.
 #' @export
 BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
@@ -1501,8 +1516,8 @@ BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
 #' singular -- QDA estimates p(p+1)/2 covariance parameters PER CLASS,
 #' so it is the first thing to break on small samples.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param y A vector; its length is taken.
 #' @param query See Usage.
 #' @param priors Defaults to \code{NULL}.
 #' @return A list with \code{g}, \code{assigned}, \code{assigned_index}, \code{classes}, \code{means}, \code{covariances}, \code{priors}, \code{reduces_to_lda_when_covariances_are_equal}, \code{parameters_per_class}, \code{method}.
@@ -1566,7 +1581,7 @@ Qda <- function(X, y, query, priors = NULL) {
 #' -- without it the coefficients merely record where the optimizer
 #' stopped.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param maxiter Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-08}.
@@ -1631,11 +1646,11 @@ LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
 #' result is reproducible; random starts would return different
 #' clusterings from the same call.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param k See Usage.
 #' @param maxiter Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-10}.
-#' @param init Defaults to \code{NULL}.
+#' @param init Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{labels}, \code{centroids}, \code{wcss}, \code{k}, \code{sizes}, \code{iterations}, \code{converged}, \code{local_minimum_only}, \code{depends_on_the_starting_centroids}, \code{unsupervised_groups_need_not_be_the_classes}, \code{method}.
 #' @export
 KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
@@ -1709,7 +1724,7 @@ KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
 #' heuristic: on data with no cluster structure the curve is smooth and
 #' the knee is wherever the arithmetic puts it.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param kmax Defaults to \code{8}.
 #' @param kmin Defaults to \code{1}.
 #' @return A list with \code{k}, \code{wcss}, \code{knee}, \code{monotonic}, \code{wcss_cannot_be_minimized}, \code{heuristic_only}, \code{method}.
@@ -1760,8 +1775,8 @@ Elbow <- function(X, kmax = 8, kmin = 1) {
 #' different partitions, which is why the full merge history is returned
 #' rather than only a labelling.
 #'
-#' @param X See Usage.
-#' @param linkage Defaults to \code{"single"}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param linkage One of \code{"average"}, \code{"complete"}, \code{"single"}. Defaults to \code{"single"}.
 #' @param k Defaults to \code{NULL}.
 #' @return A list with \code{history}, \code{labels}, \code{linkage}, \code{n}, \code{k}, \code{merge_distances}, \code{monotonic_merges}, \code{single_linkage_chains}, \code{linkage_changes_the_partition}, \code{method}.
 #' @export
@@ -1847,11 +1862,11 @@ HClust <- function(X, linkage = "single", k = NULL) {
 #' unbalanced data can leave a class absent from a training fold, which
 #' measures luck rather than generalization.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param k Defaults to \code{5}.
 #' @param classifier Defaults to \code{NULL}.
-#' @param stratified Defaults to \code{TRUE}.
+#' @param stratified A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{n}, \code{k}, \code{per_fold}, \code{stratified}, \code{train_and_test_must_be_separate}, \code{method}.
 #' @export
 KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
@@ -1925,8 +1940,8 @@ KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
 #' time.  The cost is N fits and a high variance: the training sets
 #' differ by a single sample, so the errors are heavily correlated.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param classifier Defaults to \code{NULL}.
 #' @return A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{misclassified}, \code{n}, \code{n_fits}, \code{deterministic}, \code{nearly_unbiased}, \code{high_variance}, \code{method}.
 #' @export
@@ -1971,11 +1986,11 @@ LooCv <- function(X, y, classifier = NULL) {
 #' equality constraint sum a_i y_i = 0 that single-coordinate updates
 #' cannot
 #'
-#' @param K See Usage.
-#' @param ys See Usage.
-#' @param Cv See Usage.
+#' @param K A matrix; indexed by row and column.
+#' @param ys A vector; its length is taken and its elements indexed.
+#' @param Cv Numeric; passed to \code{min}.
 #' @param maxiter See Usage.
-#' @param tol See Usage.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @return A list with \code{a}, \code{b}, \code{it}.
 #' @export
 .morie_rg_smo <- function(K, ys, Cv, maxiter, tol) {
@@ -2035,11 +2050,11 @@ LooCv <- function(X, y, classifier = NULL) {
 #' violations, large C insists on separating and contorts around an
 #' outlier.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param C Defaults to \code{1}.
-#' @param maxiter Defaults to \code{2000}.
-#' @param tol Defaults to \code{1e-06}.
+#' @param maxiter Passed to \code{.morie_rg_smo}. Defaults to \code{2000}.
+#' @param tol Passed to \code{.morie_rg_smo}. Defaults to \code{1e-06}.
 #' @return A list with \code{w}, \code{b}, \code{alpha}, \code{support_vectors}, \code{n_support}, \code{margin}, \code{C}, \code{iterations}, \code{converged}, \code{training_accuracy}, \code{boundary_set_by_the_support_vectors_only}, \code{large_c_contorts_around_outliers}, \code{method}.
 #' @export
 Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
@@ -2080,19 +2095,20 @@ Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
 
 #' SvmKern
 #'
-#' Part of the rangayyan_class implementation; see the file header for
+#' A step of the rangayyan_class implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param query Defaults to \code{NULL}.
-#' @param kernel Defaults to \code{"rbf"}.
+#' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}. Defaults to \code{"rbf"}.
 #' @param gamma Defaults to \code{NULL}.
 #' @param degree Defaults to \code{3}.
 #' @param coef0 Defaults to \code{0}.
 #' @param C Defaults to \code{1}.
-#' @param maxiter Defaults to \code{2000}.
-#' @param tol Defaults to \code{1e-06}.
+#' @param maxiter Passed to \code{.morie_rg_smo}. Defaults to \code{2000}.
+#' @param tol Passed to \code{.morie_rg_smo}. Defaults to \code{1e-06}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 SvmKern <- function(X, y, query = NULL, kernel = "rbf", gamma = NULL,

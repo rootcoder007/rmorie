@@ -8,13 +8,13 @@
 .schab_local_weights(d_row, bandwidth, kernel, adaptive)
 }
 \arguments{
-\item{d_row}{See Usage.}
-\item{bandwidth}{See Usage.}
-\item{kernel}{See Usage.}
-\item{adaptive}{See Usage.}
+\item{d_row}{Passed to \code{.schab_adaptive_bandwidth}.}
+\item{bandwidth}{Passed to \code{.schab_adaptive_bandwidth}.}
+\item{kernel}{Passed to \code{.schab_kernel_weights}.}
+\item{adaptive}{A flag; the body branches on it.}
 }
 \description{
-Part of the schab_gwr_shared implementation; see the file header for the source it follows.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_cv_score}, \code{.schab_gwr_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.schab_kernel_weights}.

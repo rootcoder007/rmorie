@@ -8,10 +8,10 @@
 .b2as3d(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the b2info implementation; see the file header for the source it follows.
+A step of the b2info implementation. Called by \code{Cndmi}, \code{Dpineq}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

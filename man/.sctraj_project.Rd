@@ -8,12 +8,12 @@
 .sctraj_project(point, curve, s)
 }
 \arguments{
-\item{point}{See Usage.}
-\item{curve}{See Usage.}
-\item{s}{See Usage.}
+\item{point}{Numeric; combined arithmetically in the body.}
+\item{curve}{A matrix; indexed by row and column.}
+\item{s}{A vector; indexed elementwise.}
 }
 \description{
-Part of the sctraj_native implementation; see the file header for the source it follows.
+A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_principal_curve}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

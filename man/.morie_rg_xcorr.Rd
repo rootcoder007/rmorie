@@ -8,12 +8,12 @@
 .morie_rg_xcorr(x, y, maxlag = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{maxlag}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_corr implementation; see the file header for the source it follows.
+A step of the rangayyan_corr implementation. Called by \code{MfAcf}, \code{RefPattern}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lags}, \code{values}.

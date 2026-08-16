@@ -15,7 +15,7 @@
 #' WLS weights degenerate to 1/(2 gamma^2), the right limiting form
 #' rather than a silent failure.
 #'
-#' @param ev See Usage.
+#' @param ev A list; the body reads \code{$counts}, \code{$gamma}, \code{$lag}, \code{$lags}, \code{$n_pairs} from it.
 #' @return A list with \code{lags}, \code{gamma}, \code{counts}.
 #' @export
 .schab_as_empirical_variogram <- function(ev) {
@@ -59,8 +59,8 @@
 #' cannot reach sill = 0 cannot report "no spatial structure", and one
 #' that cannot reach nugget = 0 cannot report a continuous field.
 #'
-#' @param lags See Usage.
-#' @param ghat See Usage.
+#' @param lags A vector; indexed elementwise.
+#' @param ghat A vector; indexed elementwise.
 #' @return A list with \code{start}, \code{lo}, \code{hi}.
 #' @export
 .schab_start_and_bounds <- function(lags, ghat) {
@@ -82,14 +82,15 @@
 
 #' .schab_objective
 #'
-#' Part of the schab_fit_shared implementation; see the file header for
+#' A step of the schab_fit_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param kind See Usage.
-#' @param lags See Usage.
-#' @param ghat See Usage.
-#' @param counts See Usage.
-#' @param model See Usage.
+#' @param lags A vector; indexed elementwise.
+#' @param ghat A vector; indexed elementwise.
+#' @param counts A vector; indexed elementwise.
+#' @param model Passed to \code{.sp_semivariogram}.
 #' @return The value of \code{function}.
 #' @export
 .schab_objective <- function(kind, lags, ghat, counts, model) {
@@ -126,14 +127,15 @@
 
 #' .schab_fit_semivariogram
 #'
-#' Part of the schab_fit_shared implementation; see the file header for
+#' A step of the schab_fit_shared implementation. Called by \code{spols}, \code{spwls}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param lags See Usage.
-#' @param ghat See Usage.
-#' @param counts See Usage.
-#' @param model Defaults to \code{"exponential"}.
-#' @param kind Defaults to \code{"wls"}.
+#' @param lags A vector; indexed elementwise.
+#' @param ghat A vector; indexed elementwise.
+#' @param counts Passed to \code{.schab_gauss_newton}.
+#' @param model Passed to \code{.schab_gauss_newton}. Defaults to \code{"exponential"}.
+#' @param kind One of \code{"ols"}, \code{"wls"}. Defaults to \code{"wls"}.
 #' @return A list with \code{nugget}, \code{partial_sill}, \code{range}, \code{objective}, \code{converged}.
 #' @export
 .schab_fit_semivariogram <- function(lags, ghat, counts, model = "exponential",
@@ -167,11 +169,11 @@
 #' diagonal -- it is a discontinuity at the origin, not a term added
 #' everywhere.
 #'
-#' @param coords See Usage.
-#' @param nugget See Usage.
-#' @param sill See Usage.
-#' @param rng See Usage.
-#' @param model See Usage.
+#' @param coords A matrix; passed to \code{as.matrix}.
+#' @param nugget Numeric; combined arithmetically in the body.
+#' @param sill Numeric; combined arithmetically in the body.
+#' @param rng Passed to \code{.sp_correlogram}.
+#' @param model Passed to \code{.sp_correlogram}.
 #' @return The value of \code{sigma}, as built in the body.
 #' @export
 .schab_covariance_matrix <- function(coords, nugget, sill, rng, model) {
@@ -197,7 +199,7 @@
 #' the orthogonal complement of the column space of X gives one such K
 #' for any linear mean structure.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{t}.
 #' @export
 .schab_error_contrasts <- function(X) {

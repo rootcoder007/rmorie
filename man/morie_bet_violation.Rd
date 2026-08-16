@@ -8,15 +8,15 @@
 morie_bet_violation(theta, level = 0.95, lower_bound = 0, draws = 20000L, seed = 0, grid = NULL)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{level}{Defaults to \code{0.95}.}
-\item{lower_bound}{Defaults to \code{0}.}
-\item{draws}{Defaults to \code{20000L}.}
-\item{seed}{Defaults to \code{0}.}
+\item{theta}{Passed to \code{morie_coverage_by_region}.}
+\item{level}{Passed to \code{morie_coverage_by_region}. Defaults to \code{0.95}.}
+\item{lower_bound}{Passed to \code{morie_coverage_by_region}. Defaults to \code{0}.}
+\item{draws}{Passed to \code{morie_coverage_by_region}. Defaults to \code{20000L}.}
+\item{seed}{Passed to \code{morie_coverage_by_region}. Defaults to \code{0}.}
 \item{grid}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the bndpcb_native implementation; see the file header for the source it follows.
+A step of the bndpcb_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{max_shortfall}, \code{at_cut}, \code{subset_coverage}, \code{subset_share}, \code{bet_proof}, \code{level}, \code{note}.

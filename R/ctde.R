@@ -55,13 +55,14 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 # The two regressions of the regression-based mediation formulas.
 #' The two regressions of the regression-based mediation formulas
 #'
-#' Part of the ctde implementation; see the file header for the source
+#' A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tnie}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
-#' @param M See Usage.
-#' @param Y See Usage.
-#' @param C See Usage.
+#' @param X Passed to \code{.s03vec}.
+#' @param M Passed to \code{.s03vec}.
+#' @param Y Passed to \code{.s03vec}.
+#' @param C Optional; may be \code{NULL}. Passed to \code{.s03mat}.
 #' @param who See Usage.
 #' @return A list with \code{beta}, \code{theta}, \code{cbar}, \code{n}.
 #' @export
@@ -91,14 +92,15 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 # Valeri and VanderWeele (2013), eq. (0.3), and its two mirror images.
 #' Valeri and VanderWeele (2013), eq. (0.3), and its two mirror images
 #'
-#' Part of the ctde implementation; see the file header for the source
+#' A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tnie}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param beta See Usage.
-#' @param theta See Usage.
-#' @param cbar See Usage.
-#' @param a See Usage.
-#' @param astar See Usage.
+#' @param beta A vector; its length is taken and its elements indexed.
+#' @param theta A vector; indexed elementwise.
+#' @param cbar Numeric; combined arithmetically in the body.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param astar Numeric; combined arithmetically in the body.
 #' @return A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te}, \code{mediated_interaction}, \code{beta}, \code{theta}.
 #' @export
 .med_effects <- function(beta, theta, cbar, a, astar) {

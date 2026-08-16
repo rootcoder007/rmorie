@@ -4,11 +4,12 @@
 
 #' k02fe
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{k02dl}, \code{mafix}, \code{mai2} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param v See Usage.
+#' @param y A vector; its length is taken.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A list with \code{mu}, \code{var}, \code{sw}, \code{Q}, \code{df}.
 #' @export
 k02fe <- function(y, v) {
@@ -22,11 +23,12 @@ k02fe <- function(y, v) {
 
 #' k02dl
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{mabay}, \code{mac3}, \code{macum} and 7 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param v See Usage.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A list with \code{tau2}, \code{mu}, \code{var}, \code{Q}, \code{df}.
 #' @export
 k02dl <- function(y, v) {
@@ -42,12 +44,13 @@ k02dl <- function(y, v) {
 
 #' k02mm
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{matr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param v See Usage.
-#' @param tau0 See Usage.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param v Numeric; combined arithmetically in the body.
+#' @param tau0 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 k02mm <- function(y, v, tau0) {
@@ -62,7 +65,8 @@ k02mm <- function(y, v, tau0) {
 
 #' k02z
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{mabay}, \code{macum}, \code{mafix} and 9 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -71,7 +75,8 @@ k02mm <- function(y, v, tau0) {
 k02z <- function(p) stats::qnorm(p)
 #' k02tq
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{mahks}, \code{mahsj}, \code{matau2pi}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -81,26 +86,29 @@ k02z <- function(p) stats::qnorm(p)
 k02tq <- function(p, df) stats::qt(p, df)
 #' k02p2z
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{mafix}, \code{marndm}, \code{matr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
 k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
 #' k02p2t
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{mahks}, \code{mahsj}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tv See Usage.
+#' @param tv Numeric; passed to \code{abs}.
 #' @param df See Usage.
 #' @return A numeric value.
 #' @export
 k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
 #' k02pchi
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{mafix}, \code{mai2}, \code{marndm} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param q See Usage.
@@ -113,7 +121,8 @@ k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 
 #' k02gold
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{magpa}, \code{matrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
@@ -141,10 +150,11 @@ k02gold <- function(f, lo, hi, iters = 80L) {
 
 #' k02gh
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{magpa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{x}, \code{w}.
 #' @export
 k02gh <- function(n) {
@@ -185,11 +195,12 @@ k02gh <- function(n) {
 
 #' k02mod
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{louv}, \code{sgtcoml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param comm See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
+#' @param comm A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 k02mod <- function(A, comm) {
@@ -205,10 +216,11 @@ k02mod <- function(A, comm) {
 
 #' k02bfs
 #'
-#' Part of the k02util implementation; see the file header for the
+#' A step of the k02util implementation. Called by \code{smwgrp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 k02bfs <- function(A) {

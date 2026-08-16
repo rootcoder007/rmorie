@@ -8,12 +8,12 @@
 .mor_kc_gram(z, kernel, bandwidth)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{kernel}{See Usage.}
-\item{bandwidth}{See Usage.}
+\item{z}{A matrix; passed to \code{nrow}.}
+\item{kernel}{One of \code{"gaussian"}, \code{"linear"}.}
+\item{bandwidth}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the kcusum_native implementation; see the file header for the source it follows.
+A step of the kcusum_native implementation. Called by \code{morie_kcusum}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{K}, \code{bw}.

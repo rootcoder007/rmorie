@@ -8,12 +8,12 @@
 .rsconsistency(h, n, p)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{n}{See Usage.}
-\item{p}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-quantile Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045, "Definition". Pchisq and Qchisq are the package\\\'s own native mirrors, not stats::.
+quantile Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045, "Definition". Pchisq and Qchisq are the package\\'s own native mirrors, not stats::.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,12 +8,12 @@
 .morie_km2_pieces_by_end(text, vocab, maxlen)
 }
 \arguments{
-\item{text}{See Usage.}
-\item{vocab}{See Usage.}
-\item{maxlen}{See Usage.}
+\item{text}{A vector; its length is taken.}
+\item{vocab}{A vector; indexed elementwise.}
+\item{maxlen}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_forward}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ends}, as built in the body.

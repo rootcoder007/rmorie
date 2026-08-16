@@ -9,12 +9,12 @@ RespFeat(resp, fs, signal_type = "flow", min_breath_s = 1)
 }
 \arguments{
 \item{resp}{See Usage.}
-\item{fs}{See Usage.}
-\item{signal_type}{Defaults to \code{"flow"}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{signal_type}{One of \code{"flow"}, \code{"volume"}. Defaults to \code{"flow"}.}
 \item{min_breath_s}{Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rate_breaths_per_min}, \code{mean_period_s}, \code{sd_period_s}, \code{regularity_cv}, \code{depth}, \code{mean_ti_s}, \code{mean_te_s}, \code{ie_ratio}, \code{breaths}, \code{n_breaths}, \code{signal_type}, \code{fs_hz}, \code{units}, \code{method}.

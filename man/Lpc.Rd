@@ -10,7 +10,7 @@ Lpc(x, order, method = "autocorrelation")
 \arguments{
 \item{x}{See Usage.}
 \item{order}{See Usage.}
-\item{method}{Defaults to \code{"autocorrelation"}.}
+\item{method}{Compared against \code{"autocorrelation"}. Defaults to \code{"autocorrelation"}.}
 }
 \description{
 (divide by N): that is what makes the Toeplitz system positive-definite and hence the model stable; 1/(N-m) does not.

@@ -9,7 +9,7 @@
 #'
 #' # language arms produce bit-identical initial weights.
 #'
-#' @param state See Usage.
+#' @param state Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .k03_lcg <- function(state) (.k03_lcg_a * state) %% .k03_lcg_m

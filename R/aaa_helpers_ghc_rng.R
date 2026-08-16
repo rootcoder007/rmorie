@@ -17,11 +17,12 @@
 
 #' BitwXor is signed-32-bit; split into 16-bit halves to stay in range
 #'
-#' Part of the helpers_ghc_rng implementation; see the file header for
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_xor64}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .ghc_xor32 <- function(a, b) {
@@ -31,11 +32,12 @@
 
 #' .ghc_xor64
 #'
-#' Part of the helpers_ghc_rng implementation; see the file header for
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A list; the body reads \code{$hi}, \code{$lo} from it.
+#' @param b A list; the body reads \code{$hi}, \code{$lo} from it.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
 .ghc_xor64 <- function(a, b)
@@ -43,11 +45,12 @@
 
 #' .ghc_add64
 #'
-#' Part of the helpers_ghc_rng implementation; see the file header for
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}, \code{.survrsf_rng}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A list; the body reads \code{$hi}, \code{$lo} from it.
+#' @param b A list; the body reads \code{$hi}, \code{$lo} from it.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
 .ghc_add64 <- function(a, b) {
@@ -58,11 +61,12 @@
 
 #' Logical right shift, 0 < k < 32 (the only widths SplitMix64 uses)
 #'
-#' Part of the helpers_ghc_rng implementation; see the file header for
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param k See Usage.
+#' @param a A list; the body reads \code{$hi}, \code{$lo} from it.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
 .ghc_shr64 <- function(a, k) {
@@ -74,11 +78,12 @@
 
 #' Exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
 #'
-#' Part of the helpers_ghc_rng implementation; see the file header for
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_mul64}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
 .ghc_mul32 <- function(a, b) {
@@ -93,11 +98,12 @@
 
 #' (a * b) mod 2^64: only the low word of each cross term survives
 #'
-#' Part of the helpers_ghc_rng implementation; see the file header for
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}, \code{.survrsf_rng}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A list; the body reads \code{$hi}, \code{$lo} from it.
+#' @param b A vector; indexed elementwise.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
 .ghc_mul64 <- function(a, b) {
@@ -266,7 +272,7 @@
 #' partial product before recombining, so every intermediate stays below
 #' 2^53.
 #'
-#' @param st See Usage.
+#' @param st Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .ghc_lcg31 <- function(st) {
@@ -280,10 +286,11 @@
 # The uniform the Python arms take from it: st / 2^31 AFTER the step.
 #' The uniform the Python arms take from it: st / 2^31 AFTER the step
 #'
-#' Part of the helpers_ghc_rng implementation; see the file header for
+#' A step of the helpers_ghc_rng implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param env See Usage.
+#' @param env A list; the body reads \code{$st} from it.
 #' @return A numeric value.
 #' @export
 .ghc_lcg31_unif <- function(env) {

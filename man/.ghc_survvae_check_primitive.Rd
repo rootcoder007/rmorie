@@ -8,10 +8,10 @@
 .ghc_survvae_check_primitive(primitive)
 }
 \arguments{
-\item{primitive}{See Usage.}
+\item{primitive}{A vector; its length is taken.}
 }
 \description{
-message, mirroring the Python arm\\\'s .check().
+message, mirroring the Python arm\\'s .check().
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,12 +8,12 @@
 .ch_ols_se(y, X, j)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{X}{Passed to \code{.s03mat}.}
 \item{j}{See Usage.}
 }
 \description{
-Part of the chzlt implementation; see the file header for the source it follows.
+A step of the chzlt implementation. Called by \code{Chzlt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{se}, \code{df}.

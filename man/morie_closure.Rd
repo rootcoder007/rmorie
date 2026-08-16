@@ -8,14 +8,14 @@
 morie_closure(items, ag, first, nts, k = 1)
 }
 \arguments{
-\item{items}{See Usage.}
-\item{ag}{See Usage.}
-\item{first}{See Usage.}
-\item{nts}{See Usage.}
-\item{k}{Defaults to \code{1}.}
+\item{items}{Passed to \code{.prsLR_closure}.}
+\item{ag}{Passed to \code{.prsLR_closure}.}
+\item{first}{Passed to \code{.prsLR_closure}.}
+\item{nts}{Passed to \code{.prsLR_closure}.}
+\item{k}{Passed to \code{.prsLR_closure}. Defaults to \code{1}.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.prsLR_closure}.

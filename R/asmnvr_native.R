@@ -111,8 +111,8 @@ morie_asmnvr <- function(reads, k = NULL, multiplicity = "set") {
 #' paralleling the Python dict-of-lists + counter-dicts.
 #'
 #' @param reads See Usage.
-#' @param k See Usage.
-#' @param multiplicity Defaults to \code{"set"}.
+#' @param k Numeric; combined arithmetically in the body.
+#' @param multiplicity One of \code{"count"}, \code{"set"}. Defaults to \code{"set"}.
 #' @return A list with \code{edges}, \code{indeg}, \code{outdeg}.
 #' @export
 de_bruijn_graph <- function(reads, k, multiplicity = "set") {
@@ -168,7 +168,7 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 #' by eulerian_path to enforce the "connected on its non-isolated
 #' vertices" half of the Eulerian existence condition.
 #'
-#' @param edges See Usage.
+#' @param edges A vector; indexed elementwise.
 #' @param verts See Usage.
 #' @return A logical value.
 #' @export
@@ -221,9 +221,9 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 #' NULL when no Eulerian path exists -- ambiguous or disconnected graphs
 #' are reported, not guessed at.
 #'
-#' @param edges See Usage.
-#' @param indeg See Usage.
-#' @param outdeg See Usage.
+#' @param edges A vector; indexed elementwise.
+#' @param indeg A vector; indexed elementwise.
+#' @param outdeg A vector; indexed elementwise.
 #' @return The value of \code{path}, as built in the body.
 #' @export
 eulerian_path <- function(edges, indeg, outdeg) {
@@ -303,9 +303,9 @@ eulerian_path <- function(edges, indeg, outdeg) {
 #' vertex until a branch point; a graph that is one pure cycle
 #' contributes the cycle itself.
 #'
-#' @param edges See Usage.
-#' @param indeg See Usage.
-#' @param outdeg See Usage.
+#' @param edges A vector; indexed elementwise.
+#' @param indeg A vector; indexed elementwise.
+#' @param outdeg A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .unitigs <- function(edges, indeg, outdeg) {
@@ -366,7 +366,7 @@ eulerian_path <- function(edges, indeg, outdeg) {
 #'
 #' (k-1)-mer in full, then the last character of each subsequent one.
 #'
-#' @param path See Usage.
+#' @param path A vector; its length is taken and its elements indexed.
 #' @return A character value.
 #' @export
 .spell <- function(path) {

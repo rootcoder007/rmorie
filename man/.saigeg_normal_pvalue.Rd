@@ -10,10 +10,10 @@
 \arguments{
 \item{s}{See Usage.}
 \item{variance}{See Usage.}
-\item{two_sided}{Defaults to \code{TRUE}.}
+\item{two_sided}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the saigeg_native implementation; see the file header for the source it follows.
+A step of the saigeg_native implementation. Called by \code{morie_saigeg}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p_value}, \code{z}, \code{method}.

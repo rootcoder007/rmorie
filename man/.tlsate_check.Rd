@@ -15,7 +15,7 @@
 \item{g}{See Usage.}
 }
 \description{
-Part of the tlsate_native implementation; see the file header for the source it follows.
+A step of the tlsate_native implementation. Called by \code{.tlsate_pate_influence_curve}, \code{.tlsate_sate_influence_curve}, \code{.tlsate_sate_tmle} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{a}, \code{y}, \code{q1}, \code{q0}, \code{gg}, \code{n}.

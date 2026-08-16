@@ -10,10 +10,10 @@
 \arguments{
 \item{Q1}{See Usage.}
 \item{Q0}{See Usage.}
-\item{kappa}{See Usage.}
+\item{kappa}{Passed to \code{.tloilr_constrained_rule}.}
 }
 \description{
-Part of the tloilr_native implementation; see the file header for the source it follows.
+A step of the tloilr_native implementation. Called by \code{morie_tloilr}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{value}, \code{unconstrained_value}, \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa}, \code{binding}, \code{method}, \code{note}.

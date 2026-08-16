@@ -8,19 +8,19 @@
 hindsr(episodes, actions = NULL, goals = NULL, strategy = "future", k = 4L, tol = 1e-06, reward_fn = NULL, state_to_goal = NULL, seed = 0L, history = NULL)
 }
 \arguments{
-\item{episodes}{See Usage.}
+\item{episodes}{Passed to \code{._as_states}.}
 \item{actions}{Defaults to \code{NULL}.}
 \item{goals}{Defaults to \code{NULL}.}
-\item{strategy}{Defaults to \code{"future"}.}
-\item{k}{Defaults to \code{4L}.}
-\item{tol}{Defaults to \code{1e-06}.}
+\item{strategy}{Passed to \code{._sample_goals}. Defaults to \code{"future"}.}
+\item{k}{Passed to \code{._sample_goals}. Defaults to \code{4L}.}
+\item{tol}{Passed to \code{._sparse_reward}. Defaults to \code{1e-06}.}
 \item{reward_fn}{Defaults to \code{NULL}.}
 \item{state_to_goal}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0L}.}
-\item{history}{Defaults to \code{NULL}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
+\item{history}{Optional; may be \code{NULL}. Passed to \code{._as_states}.}
 }
 \description{
-Part of the hindsr_native implementation; see the file header for the source it follows.
+A step of the hindsr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{transitions}, \code{n_transitions}, \code{n_original}, \code{n_relabelled}, \code{rewards}, \code{success_rate}, \code{strategy}, \code{k}, \code{n_episodes}, \code{method}.

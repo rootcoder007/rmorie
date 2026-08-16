@@ -8,10 +8,10 @@
 .prsLL_nonterminals(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$rules} from it.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 8 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

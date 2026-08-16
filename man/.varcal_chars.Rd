@@ -8,10 +8,10 @@
 .varcal_chars(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the varcal_native implementation; see the file header for the source it follows.
+A step of the varcal_native implementation. Called by \code{.varcal_norm_reads}, \code{morie_varcal}, \code{varcal_encode_pileup} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

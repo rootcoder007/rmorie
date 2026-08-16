@@ -11,7 +11,7 @@
 \item{p}{See Usage.}
 }
 \description{
-Part of the genemt_native implementation; see the file header for the source it follows.
+A step of the genemt_native implementation. Called by \code{morie_genemt_gene_statistic}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{qnorm}.

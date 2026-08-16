@@ -15,7 +15,7 @@ density_kink_test(V, kink, bandwidth, n_bins = 20L, order = 1L)
 \item{order}{Defaults to \code{1L}.}
 }
 \description{
-Part of the bnskt2_native implementation; see the file header for the source it follows.
+A step of the bnskt2_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{slope_change}, \code{relative}, \code{slope_right}, \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth}, \code{interpretation}.

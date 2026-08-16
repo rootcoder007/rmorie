@@ -8,11 +8,11 @@
 .morie_make_ends(a, n)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{n}{See Usage.}
+\item{a}{A vector; indexed elementwise.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the boot_native implementation; see the file header for the source it follows.
+A step of the boot_native implementation. Called by \code{morie_tsboot}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

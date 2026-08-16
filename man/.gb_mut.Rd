@@ -8,7 +8,7 @@
 .gb_mut(v, a, b, c, d)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; indexed elementwise.}
 \item{a}{See Usage.}
 \item{b}{See Usage.}
 \item{c}{See Usage.}

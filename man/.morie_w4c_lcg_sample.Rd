@@ -8,8 +8,8 @@
 .morie_w4c_lcg_sample(n, k, seed)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{k}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{

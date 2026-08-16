@@ -3,17 +3,17 @@
 % the formals.
 \name{morie_trmRew_is_confluent}
 \alias{morie_trmRew_is_confluent}
-\title{Confluence via Newman\\'s lemma: terminating and locally confluent}
+\title{Confluence via Newman\'s lemma: terminating and locally confluent}
 \usage{
 morie_trmRew_is_confluent(rules, precedence, max_steps = 10000)
 }
 \arguments{
-\item{rules}{See Usage.}
-\item{precedence}{See Usage.}
-\item{max_steps}{Defaults to \code{10000}.}
+\item{rules}{Passed to \code{morie_trmRew_is_terminating}.}
+\item{precedence}{Passed to \code{morie_trmRew_is_terminating}.}
+\item{max_steps}{Passed to \code{morie_trmRew_is_locally_confluent}. Defaults to \code{10000}.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{confluent}, \code{terminating}, \code{locally_confluent}, \code{n_critical_pairs}, \code{unjoinable}, \code{method}.

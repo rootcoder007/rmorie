@@ -13,7 +13,7 @@
 \item{tau}{Defaults to \code{1}.}
 }
 \description{
-Part of the cnvlfc_native implementation; see the file header for the source it follows.
+A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{.cnvlfc_cross_map}, \code{cnvlfc_embed}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{points}, \code{index}, \code{E}, \code{tau}.

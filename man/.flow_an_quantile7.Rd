@@ -8,11 +8,11 @@
 .flow_an_quantile7(sorted_x, q)
 }
 \arguments{
-\item{sorted_x}{See Usage.}
-\item{q}{See Usage.}
+\item{sorted_x}{A vector; its length is taken and its elements indexed.}
+\item{q}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. Called by \code{.anomaly_score}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

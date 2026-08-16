@@ -8,7 +8,7 @@
 .dqnv_replay_buffer_add(buf, s, a, r, s2, done = FALSE)
 }
 \arguments{
-\item{buf}{See Usage.}
+\item{buf}{A list; the body reads \code{$capacity}, \code{$data} from it.}
 \item{s}{See Usage.}
 \item{a}{See Usage.}
 \item{r}{See Usage.}
@@ -16,7 +16,7 @@
 \item{done}{Defaults to \code{FALSE}.}
 }
 \description{
-Part of the dqnv_native implementation; see the file header for the source it follows.
+A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{buf}, as built in the body.

@@ -9,10 +9,10 @@ lemma4_bound(counts, gamma)
 }
 \arguments{
 \item{counts}{See Usage.}
-\item{gamma}{See Usage.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the pate_native implementation; see the file header for the source it follows.
+A step of the pate_native implementation. Called by \code{moments_accountant}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

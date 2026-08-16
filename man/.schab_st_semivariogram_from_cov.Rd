@@ -8,12 +8,12 @@
 .schab_st_semivariogram_from_cov(h, k, cov_fn)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{k}{See Usage.}
+\item{h}{Passed to \code{.schab_st_as_lags}.}
+\item{k}{Passed to \code{.schab_st_as_lags}.}
 \item{cov_fn}{See Usage.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

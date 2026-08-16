@@ -518,7 +518,7 @@ morie_ingest_forensics_namus_missing <- function(
 #' NamUs Search endpoint actually returns; verified live 2026-07).
 #' Height/weight are not projectable via Search -- NA by contract.
 #'
-#' @param rec See Usage.
+#' @param rec A vector; indexed elementwise.
 #' @return A list with \code{case_number}, \code{state}, \code{county}, \code{dlc_date}, \code{sex}, \code{race}, \code{age_min}, \code{age_max}, \code{height_cm_min}, \code{height_cm_max}, \code{weight_kg_min}, \code{weight_kg_max}, \code{first_name}, \code{last_name}, \code{city}, \code{circumstances}.
 #' @export
 .morie_forensics_flatten_namus_search <- function(rec) {

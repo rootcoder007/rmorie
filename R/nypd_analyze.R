@@ -9,7 +9,8 @@
 
 #' .morie_nypd_result
 #'
-#' Part of the nypd_analyze implementation; see the file header for the
+#' A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param title See Usage.
@@ -32,7 +33,8 @@
 
 #' .morie_nypd_load_sample
 #'
-#' Part of the nypd_analyze implementation; see the file header for the
+#' A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param which Defaults to \code{c("arrests", "complaint")}.

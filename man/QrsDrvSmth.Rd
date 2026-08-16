@@ -8,8 +8,8 @@
 QrsDrvSmth(g1, mwin = 8)
 }
 \arguments{
-\item{g1}{See Usage.}
-\item{mwin}{Defaults to \code{8}.}
+\item{g1}{A vector; its length is taken.}
+\item{mwin}{Passed to \code{.morie_qrs_mavg}. Defaults to \code{8}.}
 }
 \description{
 derivative peaks across the Q-R-S swings into one pulse per beat.

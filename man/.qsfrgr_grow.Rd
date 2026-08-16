@@ -8,20 +8,20 @@
 .qsfrgr_grow(X, time, event, struct_rows, leaf_rows, feats_n, min_leaf, max_depth, depth, e, rule)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{struct_rows}{See Usage.}
-\item{leaf_rows}{See Usage.}
-\item{feats_n}{See Usage.}
-\item{min_leaf}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{depth}{See Usage.}
-\item{e}{See Usage.}
-\item{rule}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{time}{Passed to \code{.qsfrgr_best_split}.}
+\item{event}{Passed to \code{.qsfrgr_events_in}.}
+\item{struct_rows}{A vector; its length is taken and its elements indexed.}
+\item{leaf_rows}{A vector; indexed elementwise.}
+\item{feats_n}{Numeric; passed to \code{min}.}
+\item{min_leaf}{Numeric; combined arithmetically in the body.}
+\item{max_depth}{Passed to \code{.qsfrgr_grow}.}
+\item{depth}{Numeric; combined arithmetically in the body.}
+\item{e}{Passed to \code{.ghc_unif}.}
+\item{rule}{Passed to \code{.qsfrgr_best_split}.}
 }
 \description{
-Part of the qsfrgr_native implementation; see the file header for the source it follows.
+A step of the qsfrgr_native implementation. Called by \code{morie_qsfrgr_forest}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{leaf}, \code{f}, \code{thr}, \code{l}, \code{r}.

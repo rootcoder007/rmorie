@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{freqs}{See Usage.}
-\item{power}{See Usage.}
+\item{power}{A vector; indexed elementwise.}
 \item{lo}{See Usage.}
 \item{hi}{See Usage.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{CadAcou}, \code{CadSpec} and 7 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_fsum}.

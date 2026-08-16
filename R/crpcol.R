@@ -2,12 +2,13 @@
 
 #' .crp_norm_logpdf
 #'
-#' Part of the crpcol implementation; see the file header for the source
+#' A step of the crpcol implementation. Called by \code{.crp_collapsed_sweep}, \code{Crpcol}, \code{Crpgib} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
-#' @param mu See Usage.
-#' @param var See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param var Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .crp_norm_logpdf <- function(x, mu, var) {
@@ -26,13 +27,13 @@
 #' and the uniform draws are fixed, so the two language arms visit
 #' identical states.
 #'
-#' @param y See Usage.
-#' @param alpha See Usage.
-#' @param n_iter See Usage.
-#' @param mu0 See Usage.
-#' @param tau2 See Usage.
-#' @param sigma2 See Usage.
-#' @param seed See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param n_iter A count; the body uses it as \code{seq_len(...)}.
+#' @param mu0 Numeric; combined arithmetically in the body.
+#' @param tau2 Numeric; combined arithmetically in the body.
+#' @param sigma2 Numeric; combined arithmetically in the body.
+#' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{z}, \code{counts}, \code{sums}.
 #' @export
 .crp_collapsed_sweep <- function(y, alpha, n_iter, mu0, tau2, sigma2, seed) {

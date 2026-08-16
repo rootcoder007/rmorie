@@ -8,8 +8,8 @@
 .gpsolve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{A}{A matrix; passed to \code{solve}.}
+\item{b}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
 pseudo-inverse solution, as the Python arm does.

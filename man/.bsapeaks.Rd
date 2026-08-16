@@ -8,13 +8,13 @@
 .bsapeaks(freqs, power, count = 3L, minsep = 0)
 }
 \arguments{
-\item{freqs}{See Usage.}
-\item{power}{See Usage.}
+\item{freqs}{A vector; indexed elementwise.}
+\item{power}{A vector; its length is taken and its elements indexed.}
 \item{count}{Defaults to \code{3L}.}
 \item{minsep}{Defaults to \code{0}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec}, \code{InfantCry} and 6 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{freqs}, \code{powers}.

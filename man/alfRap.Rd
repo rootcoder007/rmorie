@@ -8,11 +8,11 @@
 alfRap(Tf, x)
 }
 \arguments{
-\item{Tf}{See Usage.}
+\item{Tf}{A list; the body reads \code{$R}, \code{$t} from it.}
 \item{x}{See Usage.}
 }
 \description{
-Part of the alf_core implementation; see the file header for the source it follows.
+A step of the alf_core implementation. Called by \code{Alfipa}, \code{alfRcomp}, \code{Alfschn}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

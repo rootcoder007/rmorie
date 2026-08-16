@@ -8,13 +8,13 @@
 .sccsno_grad_hess(params, cells_by_person, n_risk, n_age)
 }
 \arguments{
-\item{params}{See Usage.}
+\item{params}{A vector; indexed elementwise.}
 \item{cells_by_person}{See Usage.}
-\item{n_risk}{See Usage.}
-\item{n_age}{See Usage.}
+\item{n_risk}{A count; the body uses it as \code{seq_len(...)}.}
+\item{n_age}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sccsno_native implementation; see the file header for the source it follows.
+A step of the sccsno_native implementation. Called by \code{morie_sccsno_fit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{g}, \code{H}.

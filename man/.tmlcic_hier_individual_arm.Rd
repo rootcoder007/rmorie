@@ -8,18 +8,18 @@
 .tmlcic_hier_individual_arm(y, Ai, Zi, alpha, groups, a, trim, ridge, known_g)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{Ai}{See Usage.}
-\item{Zi}{See Usage.}
-\item{alpha}{See Usage.}
-\item{groups}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{Ai}{A vector; indexed elementwise.}
+\item{Zi}{A matrix; passed to \code{as.matrix}.}
+\item{alpha}{A vector; indexed elementwise.}
+\item{groups}{A vector; its length is taken.}
 \item{a}{See Usage.}
-\item{trim}{See Usage.}
-\item{ridge}{See Usage.}
+\item{trim}{Numeric; combined arithmetically in the body.}
+\item{ridge}{Numeric; passed to \code{max}.}
 \item{known_g}{See Usage.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{psi}, \code{D}, \code{info}.

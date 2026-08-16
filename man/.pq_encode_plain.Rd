@@ -8,11 +8,11 @@
 .pq_encode_plain(values, ptype)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{A vector; its length is taken and its elements indexed.}
 \item{ptype}{See Usage.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{morie_write_parquet}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

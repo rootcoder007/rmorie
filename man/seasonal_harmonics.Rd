@@ -8,11 +8,11 @@
 seasonal_harmonics(m, k = NULL)
 }
 \arguments{
-\item{m}{See Usage.}
-\item{k}{Defaults to \code{NULL}.}
+\item{m}{Numeric; combined arithmetically in the body.}
+\item{k}{Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{bats_filter}, \code{BatsSpec}, \code{morie_bats}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

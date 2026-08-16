@@ -8,17 +8,17 @@
 morie_linwlr(y, A, W = NULL, propensity = NULL, method = "gest", baseline = NULL, pi_covariates = NULL, ridge = 1e-10)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{W}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.linwlr_vec}.}
+\item{A}{Passed to \code{.linwlr_vec}.}
+\item{W}{Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.}
 \item{propensity}{Defaults to \code{NULL}.}
-\item{method}{Defaults to \code{"gest"}.}
-\item{baseline}{Defaults to \code{NULL}.}
-\item{pi_covariates}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{method}{One of \code{"gest"}, \code{"wls"}. Defaults to \code{"gest"}.}
+\item{baseline}{Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.}
+\item{pi_covariates}{Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the linwlr_native implementation; see the file header for the source it follows.
+A step of the linwlr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

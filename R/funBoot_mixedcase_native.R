@@ -20,7 +20,7 @@
 #' Part of the funBoot_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param curves See Usage.
+#' @param curves A matrix; indexed by row and column.
 #' @param statistic Defaults to \code{NULL}.
 #' @param alpha Defaults to \code{0.05}.
 #' @param B Defaults to \code{500L}.

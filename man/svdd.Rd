@@ -8,15 +8,15 @@
 svdd(X, C = 1, kernel = "linear", gamma = 1, tol = 1e-10, max_sweeps = 500L)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{C}{Defaults to \code{1}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{C}{Numeric; passed to \code{min}. Defaults to \code{1}.}
 \item{kernel}{Defaults to \code{"linear"}.}
-\item{gamma}{Defaults to \code{1}.}
+\item{gamma}{Passed to \code{.deep_svdd_kernel}. Defaults to \code{1}.}
 \item{tol}{Defaults to \code{1e-10}.}
 \item{max_sweeps}{Defaults to \code{500L}.}
 }
 \description{
-Part of the deepSVDD_native implementation; see the file header for the source it follows.
+A step of the deepSVDD_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{alpha}, \code{center}, \code{radius2}, \code{support}, \code{outliers}, \code{kkt_violation}, \code{kernel}, \code{C}, \code{method}.

@@ -50,11 +50,11 @@ A list with the per-stratum effects and sizes, the overall   effect, the balance
 \examples{
 N <- 48L
 X <- matrix(0, N, 2)
-D <- vapply(0:(N - 1L), function(i) if ((((i * 7)%%11)/10) + 
-    (((i * 5)%%13)/12) + ((i * 3)%%5) * 0.1 > 1.1) 1L else 0L, 
+D <- vapply(0:(N - 1L), function(i) if ((((i * 7)\%\%11)/10) + 
+    (((i * 5)\%\%13)/12) + ((i * 3)\%\%5) * 0.1 > 1.1) 1L else 0L, 
     integer(1))
 Y <- vapply(0:(N - 1L), function(i) round(2 + 1.5 * D[i + 1L] + 
-    2 * (((i * 7)%%11)/10) - 1 * (((i * 5)%%13)/12) + ((i * 11)%%7) * 
+    2 * (((i * 7)\%\%11)/10) - 1 * (((i * 5)\%\%13)/12) + ((i * 11)\%\%7) * 
     0.1, 4), numeric(1))
 morie_qbcfgs(Y, D, X, 0.5, 4L, "ate", 6L, 3L, 3L, 6)
 }

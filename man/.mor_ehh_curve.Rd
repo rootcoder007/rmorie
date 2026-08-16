@@ -8,12 +8,12 @@
 .mor_ehh_curve(H, core, carriers)
 }
 \arguments{
-\item{H}{See Usage.}
-\item{core}{See Usage.}
-\item{carriers}{See Usage.}
+\item{H}{A matrix; indexed by row and column.}
+\item{core}{Numeric; passed to \code{max}.}
+\item{carriers}{A vector; its length is taken.}
 }
 \description{
-Part of the ehhdec_native implementation; see the file header for the source it follows.
+A step of the ehhdec_native implementation. Called by \code{morie_ehhdec}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

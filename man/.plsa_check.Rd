@@ -8,10 +8,10 @@
 .plsa_check(n_dw)
 }
 \arguments{
-\item{n_dw}{See Usage.}
+\item{n_dw}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the plsa_native implementation; see the file header for the source it follows.
+A step of the plsa_native implementation. Called by \code{.plsa_e_step}, \code{.plsa_log_likelihood}, \code{.plsa_m_step} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{N}, \code{D}, \code{V}.

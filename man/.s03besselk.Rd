@@ -8,12 +8,12 @@
 .s03besselk(nu, x, terms = 160L)
 }
 \arguments{
-\item{nu}{See Usage.}
-\item{x}{See Usage.}
+\item{nu}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; combined arithmetically in the body.}
 \item{terms}{Defaults to \code{160L}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.s03maternk}, \code{.sgflrt_corr}, \code{Maternvg}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,9 +8,9 @@
 .rob_s_reg(X, y, n_subsets, seed)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{n_subsets}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{n_subsets}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{

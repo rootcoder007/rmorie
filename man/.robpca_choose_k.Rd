@@ -8,13 +8,13 @@
 .robpca_choose_k(l0, k, kmax, r1)
 }
 \arguments{
-\item{l0}{See Usage.}
-\item{k}{See Usage.}
-\item{kmax}{See Usage.}
-\item{r1}{See Usage.}
+\item{l0}{A vector; indexed elementwise.}
+\item{k}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{kmax}{Numeric; passed to \code{min}.}
+\item{r1}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the robpca_native implementation; see the file header for the source it follows.
+A step of the robpca_native implementation. Called by \code{morie_robpca}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

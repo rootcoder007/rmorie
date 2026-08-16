@@ -8,10 +8,10 @@
 .funcal_hit(h)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{Optional; may be \code{NULL}. A list; the body reads \code{$evalue}, \code{$query}, \code{$query_cov}, \code{$score}, \code{$target}, \code{$target_cov} from it.}
 }
 \description{
-Part of the funcal_native implementation; see the file header for the source it follows.
+A step of the funcal_native implementation. Called by \code{morie_funcal}, \code{morie_funcal_seed_orthologs}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{query}, \code{target}, \code{evalue}, \code{score}, \code{query_cov}, \code{target_cov}.

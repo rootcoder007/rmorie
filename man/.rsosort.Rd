@@ -8,7 +8,7 @@
 .rsosort(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 Written out rather than delegated to order() because the C-step selects "the h smallest distances": which of two tied points is taken changes the subset.

@@ -8,12 +8,12 @@
 .prsLL_parse(g, tokens, route = "table")
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$start} from it.}
 \item{tokens}{See Usage.}
-\item{route}{Defaults to \code{"table"}.}
+\item{route}{Compared against \code{"table"}. Defaults to \code{"table"}.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{morie_prsLL}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tree}, as built in the body.

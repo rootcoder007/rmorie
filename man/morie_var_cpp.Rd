@@ -8,11 +8,11 @@
 morie_var_cpp(x, ddof = 1L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{ddof}{Defaults to \code{1L}.}
+\item{x}{Passed to \code{.Call}.}
+\item{ddof}{Passed to \code{.Call}. Defaults to \code{1L}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_var}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

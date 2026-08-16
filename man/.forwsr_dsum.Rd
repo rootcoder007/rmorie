@@ -3,15 +3,15 @@
 % the formals.
 \name{.forwsr_dsum}
 \alias{.forwsr_dsum}
-\title{CPython\\\'s builtin sum() switched to Neumaier compensated summation}
+\title{CPython\\'s builtin sum() switched to Neumaier compensated summation}
 \usage{
 .forwsr_dsum(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-for floats in 3.12. R\\\'s sum() accumulates in long double, and a plain loop accumulates in double; neither reproduces it. The forward search orders residuals that differ in their last digits, so the summation algorithm decides which row enters next and the two arms part company about a dozen steps in. Do what CPython does.
+for floats in 3.12. R\\'s sum() accumulates in long double, and a plain loop accumulates in double; neither reproduces it. The forward search orders residuals that differ in their last digits, so the summation algorithm decides which row enters next and the two arms part company about a dozen steps in. Do what CPython does.
 }
 \value{
 A numeric value.

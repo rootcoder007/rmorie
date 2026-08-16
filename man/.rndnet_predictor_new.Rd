@@ -8,11 +8,11 @@
 .rndnet_predictor_new(n_in, n_hidden, n_out, rng, scale = 1)
 }
 \arguments{
-\item{n_in}{See Usage.}
-\item{n_hidden}{See Usage.}
-\item{n_out}{See Usage.}
-\item{rng}{See Usage.}
-\item{scale}{Defaults to \code{1}.}
+\item{n_in}{Passed to \code{.rndnet_random_features_new}.}
+\item{n_hidden}{A count; the body uses it as \code{matrix(...)}.}
+\item{n_out}{A count; the body uses it as \code{matrix(...)}.}
+\item{rng}{Passed to \code{.rndnet_random_features_new}.}
+\item{scale}{Passed to \code{.rndnet_random_features_new}. Defaults to \code{1}.}
 }
 \description{
 output weight matrix W, updated by plain SGD on the MSE.

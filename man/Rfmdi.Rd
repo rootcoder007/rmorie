@@ -23,7 +23,7 @@ method.
 NOT IN THE BOOK.  Montesinos Lopez, Montesinos Lopez and Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, was searched in full -- all seventeen page-range volumes and the
-index, \link{Pages 683-691}.  Chapter 15, volume \link{Pages 633-681}, is the random
+index, [Pages 683-691].  Chapter 15, volume [Pages 633-681], is the random
 forest chapter, and the only variable importance it defines is the
 out-of-bag PERMUTATION measure of pp. 642-643, implemented separately as
 Rfpmi.  The words "mean decrease in impurity" do not occur; impurity appears

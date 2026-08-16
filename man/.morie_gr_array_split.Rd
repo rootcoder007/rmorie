@@ -8,11 +8,11 @@
 .morie_gr_array_split(idx, K)
 }
 \arguments{
-\item{idx}{See Usage.}
-\item{K}{See Usage.}
+\item{idx}{A vector; its length is taken and its elements indexed.}
+\item{K}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{morie_geron_cross_validation_score}, \code{morie_geron_kfold}, \code{morie_geron_kfold_cv} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

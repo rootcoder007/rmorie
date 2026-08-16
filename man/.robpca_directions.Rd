@@ -8,12 +8,12 @@
 .robpca_directions(rows, n_dirs, seed)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{n_dirs}{See Usage.}
-\item{seed}{See Usage.}
+\item{rows}{A matrix; indexed by row and column.}
+\item{n_dirs}{Numeric; combined arithmetically in the body.}
+\item{seed}{Passed to \code{.ghc_rng}.}
 }
 \description{
-Part of the robpca_native implementation; see the file header for the source it follows.
+A step of the robpca_native implementation. Called by \code{outlyingness}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{do.call}.

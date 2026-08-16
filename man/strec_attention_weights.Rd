@@ -8,15 +8,15 @@
 strec_attention_weights(embeddings, W1, W2, W3, W0, b_a = NULL)
 }
 \arguments{
-\item{embeddings}{See Usage.}
-\item{W1}{See Usage.}
-\item{W2}{See Usage.}
-\item{W3}{See Usage.}
-\item{W0}{See Usage.}
+\item{embeddings}{Passed to \code{.strec_as_rows}.}
+\item{W1}{A matrix; indexed by row and column.}
+\item{W2}{A matrix; indexed by row and column.}
+\item{W3}{A matrix; indexed by row and column.}
+\item{W0}{Numeric; combined arithmetically in the body.}
 \item{b_a}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the strec_native implementation; see the file header for the source it follows.
+A step of the strec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{alpha}, \code{m_a}, \code{sum_alpha}, \code{m_s}, \code{note}.

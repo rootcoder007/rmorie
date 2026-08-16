@@ -8,12 +8,12 @@
 .karpv_replace(node, path, new)
 }
 \arguments{
-\item{node}{See Usage.}
-\item{path}{See Usage.}
-\item{new}{See Usage.}
+\item{node}{A list; the body reads \code{$args}, \code{$op} from it.}
+\item{path}{A vector; its length is taken and its elements indexed.}
+\item{new}{Passed to \code{.karpv_copy}.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{morie_karpV}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

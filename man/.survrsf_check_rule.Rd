@@ -11,7 +11,7 @@
 \item{rule}{See Usage.}
 }
 \description{
-Part of the survrsf_native implementation; see the file header for the source it follows.
+A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}, \code{morie_survrsf_forest}, \code{morie_survrsf_grow_tree}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

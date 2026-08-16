@@ -27,7 +27,7 @@
 #' smallest distances": which of two tied points is taken changes the
 #' subset.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
 .rsosort <- function(v) {
@@ -65,7 +65,7 @@
 #'
 #' is judged RELATIVE to the largest entry of A, not against exact zero.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return A list with \code{M}, \code{piv}, \code{sign}, \code{singular}.
 #' @export
 .rslufactor <- function(A) {
@@ -116,7 +116,7 @@
 #' FIRST exactly-degenerate subset instead, which is both correct and
 #' identical in the two language arms.
 #'
-#' @param S See Usage.
+#' @param S Passed to \code{.rsludet}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .rscovdet <- function(S) {
@@ -126,10 +126,11 @@
 
 #' .rsludet
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{.rscovdet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{d}, as built in the body.
 #' @export
 .rsludet <- function(A) {
@@ -145,11 +146,12 @@
 # Solve A x = b; NULL when A is singular.
 #' Solve A x = b; NULL when A is singular
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{.rsltsfit}, \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .rslusolve <- function(A, b) {
@@ -175,11 +177,12 @@
 # Mean vector and covariance matrix (divisor |idx| - 1) of a subset.
 #' Mean vector and covariance matrix (divisor |idx| - 1) of a subset
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm}, \code{Mcdcv} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param idx See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param idx A vector; its length is taken.
 #' @return A list with \code{mu}, \code{S}.
 #' @export
 .rsmeancov <- function(X, idx) {
@@ -202,12 +205,13 @@
 #' Squared Mahalanobis distances of every row of X; NULL if S is
 #' singular
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm}, \code{Mvedet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param mu See Usage.
-#' @param S See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param mu A vector; its length is taken.
+#' @param S Passed to \code{.rslufactor}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rsmahal2 <- function(X, mu, S) {
@@ -239,11 +243,12 @@
 
 #' .rsnchoosek
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{.rscombosstride}, \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param k See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param k Numeric; passed to \code{min}.
 #' @return A numeric value.
 #' @export
 .rsnchoosek <- function(n, k) {
@@ -257,11 +262,12 @@
 # Lexicographic k-subsets of 1..n, at most cap of them.  Returns a list.
 #' Lexicographic k-subsets of 1..n, at most cap of them.  Returns a list
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{.rscombosstride}, \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param k See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @param cap Defaults to \code{NULL}.
 #' @return The value of \code{repeat}.
 #' @export
@@ -300,9 +306,9 @@
 #' singular, in which case the objective is already zero and the subset
 #' lies on a hyperplane.
 #'
-#' @param X See Usage.
-#' @param idx See Usage.
-#' @param h See Usage.
+#' @param X Passed to \code{.rsmeancov}.
+#' @param idx Passed to \code{.rsmeancov}.
+#' @param h A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{idx}, \code{det}.
 #' @export
 .rscstep <- function(X, idx, h) {
@@ -318,11 +324,12 @@
 #' The maximal-breakdown h of Rousseeuw (1984) Remark 1, [n/2] +
 #' [(p+1)/2]
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param p See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rstrimmedh <- function(n, p) n %/% 2L + (p + 1L) %/% 2L
@@ -330,11 +337,12 @@
 # The most robust MCD subset size, [(n + p + 1) / 2].
 #' The most robust MCD subset size, [(n + p + 1) / 2]
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{Fastm}, \code{Mcdcv}, \code{Mcdv} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param p See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rsmcdh <- function(n, p) (n + p + 1L) %/% 2L
@@ -353,8 +361,8 @@
 #' univariate MCD and MVE subsets.  Returns list(start, width, sorted)
 #' with a 1-based start.
 #'
-#' @param v See Usage.
-#' @param h See Usage.
+#' @param v Numeric; passed to \code{sort}.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A list with \code{start}, \code{width}, \code{sorted}.
 #' @export
 .rsshortesthalf <- function(v, h) {
@@ -379,9 +387,9 @@
 #' "Definition". Pchisq and Qchisq are the package\'s own native
 #' mirrors, not stats::.
 #'
-#' @param h See Usage.
-#' @param n See Usage.
-#' @param p See Usage.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .rsconsistency <- function(h, n, p) {
@@ -395,10 +403,11 @@
 # med_i r_i^2, the objective of Rousseeuw (1984) equation (1.8).
 #' Med_i r_i^2, the objective of Rousseeuw (1984) equation (1.8)
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{Lmsreg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
+#' @param r Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .rsmedsq <- function(r) {
@@ -410,12 +419,13 @@
 # Index of the first all-ones design column, or 0 when there is none.
 #' Index of the first all-ones design column, or 0 when there is none
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{Lmsreg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Xm See Usage.
-#' @param n See Usage.
-#' @param p See Usage.
+#' @param Xm A matrix; indexed by row and column.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .rsintercept <- function(Xm, n, p) {
@@ -430,13 +440,14 @@
 # Ordinary least squares on a subset, by the normal equations.
 #' Ordinary least squares on a subset, by the normal equations
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Xm See Usage.
-#' @param yy See Usage.
+#' @param Xm A matrix; indexed by row and column.
+#' @param yy A vector; indexed elementwise.
 #' @param idx See Usage.
-#' @param p See Usage.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{.rslusolve}.
 #' @export
 .rsltsfit <- function(Xm, yy, idx, p) {
@@ -454,15 +465,16 @@
 # The h smallest squared residuals, their sum, and their indices.
 #' The h smallest squared residuals, their sum, and their indices
 #'
-#' Part of the helpers_rouss implementation; see the file header for the
+#' A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Xm See Usage.
-#' @param yy See Usage.
-#' @param th See Usage.
-#' @param n See Usage.
-#' @param p See Usage.
-#' @param h See Usage.
+#' @param Xm A matrix; indexed by row and column.
+#' @param yy A vector; indexed elementwise.
+#' @param th A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
+#' @param h A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{tot}, \code{idx}, \code{sq}.
 #' @export
 .rsltsobj <- function(Xm, yy, th, n, p, h) {
@@ -501,9 +513,9 @@
 #' order -- while spreading the seeds over the whole index range the way
 #' random draws would.
 #'
-#' @param n See Usage.
-#' @param k See Usage.
-#' @param want See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param want Numeric; combined arithmetically in the body.
 #' @param max_walk Defaults to \code{5e+06}.
 #' @return The value of \code{repeat}.
 #' @export

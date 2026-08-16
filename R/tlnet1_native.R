@@ -62,7 +62,8 @@
 # Private helper: coerce to a flat numeric vector (equivalent of k.vec)
 #' Private helper: coerce to a flat numeric vector (equivalent of k.vec)
 #'
-#' Part of the tlnet1_native implementation; see the file header for the
+#' A step of the tlnet1_native implementation. Called by \code{friend_summary}, \code{network_influence_variance}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values See Usage.
@@ -82,10 +83,11 @@
 #' Private helper: coerce to a list of numeric row-vectors (equivalent
 #' of k.mat)
 #'
-#' Part of the tlnet1_native implementation; see the file header for the
+#' A step of the tlnet1_native implementation. Called by \code{decompose_effects}, \code{policy_mean}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
+#' @param W A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tlnet1_mat <- function(W) {
@@ -102,10 +104,11 @@
 # Private helper: friend set for unit i (1-based, excluding self)
 #' Private helper: friend set for unit i (1-based, excluding self)
 #'
-#' Part of the tlnet1_native implementation; see the file header for the
+#' A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges}, \code{check_network_assumption}, \code{friend_summary} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param friends See Usage.
+#' @param friends A vector; indexed elementwise.
 #' @param i See Usage.
 #' @return The value of \code{setdiff}.
 #' @export
@@ -116,10 +119,11 @@
 # Private helper: count total directed edges (i -> j for j in F_i)
 #' Private helper: count total directed edges (i -> j for j in F_i)
 #'
-#' Part of the tlnet1_native implementation; see the file header for the
+#' A step of the tlnet1_native implementation. Called by \code{network_influence_variance}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param friends See Usage.
+#' @param friends A vector; its length is taken.
 #' @return The value of \code{total}, as built in the body.
 #' @export
 .tlnet1_count_edges <- function(friends) {

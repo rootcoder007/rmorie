@@ -62,7 +62,7 @@
 #' sequence. Returns an integer vector of on-bit indices (sorted,
 #' deduped).
 #'
-#' @param bits See Usage.
+#' @param bits A matrix; indexed by row and column.
 #' @param n_bits Defaults to \code{NULL}.
 #' @return A vector, from \code{sort}.
 #' @export
@@ -114,8 +114,8 @@
 #'
 #' c / (a + b - c), guarding the all-zero case like sasimi._guard.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{.clusmd_fp}.
+#' @param b Passed to \code{.clusmd_fp}.
 #' @return A numeric value.
 #' @export
 .clusmd_tanimoto <- function(a, b) {
@@ -145,7 +145,7 @@
 #' the indices j != i with Tanimoto(fp_i, fp_j) >= threshold. Mirrors
 #' the Python neighbour_lists() function.
 #'
-#' @param fps See Usage.
+#' @param fps A vector; its length is taken.
 #' @param threshold Defaults to \code{0.8}.
 #' @return The value of \code{nb}, as built in the body.
 #' @export
@@ -200,9 +200,9 @@
 #' cluster and remove them. Ties broken by ascending index for
 #' determinism. Final list is sorted by (-size, centroid).
 #'
-#' @param fps See Usage.
-#' @param threshold Defaults to \code{0.8}.
-#' @param recount Defaults to \code{FALSE}.
+#' @param fps Passed to \code{.clusmd_neighbour_lists}.
+#' @param threshold Passed to \code{.clusmd_neighbour_lists}. Defaults to \code{0.8}.
+#' @param recount A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{clusters}, as built in the body.
 #' @export
 .clusmd_butina_clusters <- function(fps, threshold = 0.8, recount = FALSE) {
@@ -260,7 +260,7 @@
 #' Mirrors Python cluster_summary(). `assignment[m]` = k means compound
 #' m is in cluster k (0-indexed).
 #'
-#' @param clusters See Usage.
+#' @param clusters A vector; its length is taken and its elements indexed.
 #' @return A list with \code{n_clusters}, \code{n_compounds}, \code{sizes}, \code{n_singletons}, \code{assignment}, \code{centroids}.
 #' @export
 .clusmd_cluster_summary <- function(clusters) {
@@ -304,7 +304,7 @@
 #' @param tables Defaults to \code{list()}.
 #' @param interpretation Defaults to \code{""}.
 #' @param warnings Defaults to \code{character()}.
-#' @param payload Defaults to \code{list()}.
+#' @param payload A vector; its length is taken and its elements indexed. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .clusmd_rich <- function(title, summary_lines = list(), tables = list(),

@@ -12,7 +12,7 @@ default_learners(p, ridge_penalties = c(0, 1, 10))
 \item{ridge_penalties}{Defaults to \code{c(0, 1, 10)}.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{super_learner}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lib}, as built in the body.

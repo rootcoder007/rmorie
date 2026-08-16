@@ -8,12 +8,12 @@
 .morie_blake2b_impl(data, outlen, key = NULL)
 }
 \arguments{
-\item{data}{See Usage.}
-\item{outlen}{See Usage.}
-\item{key}{Defaults to \code{NULL}.}
+\item{data}{Passed to \code{.Call}.}
+\item{outlen}{Passed to \code{.Call}.}
+\item{key}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_secarg_prehash}, \code{morie_secarg_variable_hash}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

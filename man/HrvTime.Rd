@@ -8,10 +8,10 @@
 HrvTime(rr)
 }
 \arguments{
-\item{rr}{See Usage.}
+\item{rr}{Numeric; combined arithmetically in the body.}
 }
 \description{
-define them; the definitions are the Task Force ones, Circulation 93(5):1043- 1065, 1996, reference [84] of the book\\'s Chapter 8.
+define them; the definitions are the Task Force ones, Circulation 93(5):1043- 1065, 1996, reference [84] of the book\'s Chapter 8.
 }
 \value{
 A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50}, \code{meannn}, \code{meanhr}, \code{n}, \code{units}, \code{method}.

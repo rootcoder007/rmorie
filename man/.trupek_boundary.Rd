@@ -8,9 +8,9 @@
 .trupek_boundary(z, d, delta)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{d}{See Usage.}
-\item{delta}{See Usage.}
+\item{z}{Passed to \code{.trupek_dot}.}
+\item{d}{Passed to \code{.trupek_dot}.}
+\item{delta}{Numeric; combined arithmetically in the body.}
 }
 \description{
 and recovering the other from the product keeps precision when the two roots differ wildly.

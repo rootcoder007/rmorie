@@ -8,9 +8,9 @@
 .morie_cf_rmst_pseudo(time, event, horizon)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{horizon}{See Usage.}
+\item{time}{A vector; its length is taken and its elements indexed.}
+\item{event}{A vector; indexed elementwise.}
+\item{horizon}{Numeric; combined arithmetically in the body.}
 }
 \description{
 expectation is E[min(T, horizon)] under independent censoring.

@@ -11,7 +11,7 @@ BwHp(cutoff_hz, order = 4, fs = 1000, z = NULL)
 \item{cutoff_hz}{See Usage.}
 \item{order}{Defaults to \code{4}.}
 \item{fs}{Defaults to \code{1000}.}
-\item{z}{Defaults to \code{NULL}.}
+\item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{
 pole radius -- and the N zeros move from z = -1 to z = +1.  The gain is renormalized at NYQUIST, since a highpass has no DC gain to normalize against and dividing there would be division by zero.

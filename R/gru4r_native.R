@@ -19,10 +19,11 @@
 # Numerically stable sigmoid matching the Python helper.
 #' Numerically stable sigmoid matching the Python helper
 #'
-#' Part of the gru4r_native implementation; see the file header for the
+#' A step of the gru4r_native implementation. Called by \code{bpr_loss}, \code{gru_step}, \code{top1_loss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .gh_sig <- function(x) {

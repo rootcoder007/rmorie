@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{x0}{See Usage.}
-\item{maxit}{Defaults to \code{400}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{x0}{A vector; its length is taken.}
+\item{maxit}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400}.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
 shrink 0.5) -- enough for the small abduction problems this serves. ponytail: fold into a shared native optimizer when the stats::optim sweep reaches the 680 call sites.

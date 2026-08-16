@@ -11,8 +11,8 @@ FmSig(m, fc, fs, kf = 1, amplitude = 1)
 \item{m}{See Usage.}
 \item{fc}{See Usage.}
 \item{fs}{See Usage.}
-\item{kf}{Defaults to \code{1}.}
-\item{amplitude}{Defaults to \code{1}.}
+\item{kf}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{amplitude}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
 unlike AM in Section 5.5.1, so the standard definition is used and said so: y = A cos(2 pi fc t + 2 pi kf integral m), f_inst = fc + kf m. The phase integral is trapezoidal; a plain running sum biases it by half a sample of m at each end, which drifts over a long record.

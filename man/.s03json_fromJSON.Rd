@@ -8,11 +8,11 @@
 .s03json_fromJSON(txt, ...)
 }
 \arguments{
-\item{txt}{See Usage.}
+\item{txt}{Passed to \code{morie_jsonlt_from_json}.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.morie_datasette_get_json}, \code{.morie_from_json}, \code{.siu_panel_extract} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_jsonlt_from_json}.

@@ -8,8 +8,8 @@
 DeltaDecomp(x, t = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{.morie_rg_aslist}.}
+\item{t}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.}
 }
 \description{
 weight at alpha_i is x(alpha_i) times a trapezoidal spacing, so the weights sum to the integral of x rather than to the sum of samples.

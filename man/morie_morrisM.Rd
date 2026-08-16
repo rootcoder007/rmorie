@@ -9,11 +9,11 @@ morie_morrisM(fun, k, r = 10, p = 4, seed = 0, bounds = NULL)
 }
 \arguments{
 \item{fun}{See Usage.}
-\item{k}{See Usage.}
-\item{r}{Defaults to \code{10}.}
-\item{p}{Defaults to \code{4}.}
-\item{seed}{Defaults to \code{0}.}
-\item{bounds}{Defaults to \code{NULL}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
+\item{r}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10}.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{bounds}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
 Part of the morrisM_mixedcase_native implementation; see the file header for the source it follows.

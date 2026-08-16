@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the chronos_native implementation; see the file header for the source it follows.
+A step of the chronos_native implementation. Called by \code{forecast_summary}, \code{mean_scale}, \code{quantile_bins} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

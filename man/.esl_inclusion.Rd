@@ -8,7 +8,7 @@
 .esl_inclusion(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
 The exact finite-n value, not the limit; they differ by about 1\% at n = 20, which is the regime where anyone reaches for a bootstrap.

@@ -22,7 +22,8 @@
 
 #' .b2se
 #'
-#' Part of the b2gpts implementation; see the file header for the source
+#' A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \code{Gpresid} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param spec Defaults to \code{NULL}.
@@ -40,11 +41,12 @@
 
 #' .b2gram
 #'
-#' Part of the b2gpts implementation; see the file header for the source
+#' A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \code{Gpresid} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param B A matrix; indexed by row and column.
 #' @param kf See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export

@@ -8,15 +8,15 @@
 morie_hawkes_ll_gamma_const_cpp(t, T_horizon, a0, eta, alpha, beta)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{T_horizon}{See Usage.}
-\item{a0}{See Usage.}
-\item{eta}{See Usage.}
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
+\item{t}{Passed to \code{.Call}.}
+\item{T_horizon}{Passed to \code{.Call}.}
+\item{a0}{Passed to \code{.Call}.}
+\item{eta}{Passed to \code{.Call}.}
+\item{alpha}{Passed to \code{.Call}.}
+\item{beta}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

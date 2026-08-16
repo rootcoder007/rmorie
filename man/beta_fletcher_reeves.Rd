@@ -8,11 +8,11 @@
 beta_fletcher_reeves(g_new, g_old)
 }
 \arguments{
-\item{g_new}{See Usage.}
-\item{g_old}{See Usage.}
+\item{g_new}{Passed to \code{.cgnonl_dot}.}
+\item{g_old}{Passed to \code{.cgnonl_dot}.}
 }
 \description{
-Part of the cgnonl_native implementation; see the file header for the source it follows.
+A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

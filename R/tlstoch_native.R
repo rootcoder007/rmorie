@@ -62,7 +62,8 @@
 # Private helpers (shared environment: prefix avoids collisions)
 #' Private helpers (shared environment: prefix avoids collisions)
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. Called by \code{.tlstoch_density_ratio}, \code{.tlstoch_positivity_shift}, \code{.tlstoch_shift_regime} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -75,10 +76,11 @@
 
 #' .tlstoch_mat
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. Called by \code{.tlstoch_density_ratio}, \code{.tlstoch_shift_tmle}, \code{.tlstoch_stochastic_estimand}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .tlstoch_mat <- function(x) {
@@ -105,10 +107,11 @@
 
 #' .tlstoch_shift_regime
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. Called by \code{.tlstoch_shift_tmle}, \code{.tlstoch_stochastic_estimand}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{.tlstoch_vec}.
 #' @param delta See Usage.
 #' @param lower Defaults to \code{NULL}.
 #' @param upper Defaults to \code{NULL}.
@@ -138,12 +141,13 @@
 
 #' .tlstoch_positivity_shift
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{.tlstoch_vec}.
 #' @param delta See Usage.
-#' @param W Defaults to \code{NULL}.
+#' @param W Optional; may be \code{NULL}. Passed to \code{.tlstoch_vec}.
 #' @param bins Defaults to \code{5}.
 #' @return A list with \code{fraction_outside}, \code{delta}, \code{bins}, \code{satisfied}, \code{note}.
 #' @export
@@ -180,15 +184,16 @@
 
 #' .tlstoch_stochastic_estimand
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Q_fn See Usage.
-#' @param A See Usage.
-#' @param W See Usage.
-#' @param delta See Usage.
-#' @param lower Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param A Passed to \code{.tlstoch_vec}.
+#' @param W Passed to \code{.tlstoch_mat}.
+#' @param delta Passed to \code{.tlstoch_shift_regime}.
+#' @param lower Passed to \code{.tlstoch_shift_regime}.
+#' @param upper Passed to \code{.tlstoch_shift_regime}.
 #' @return A list with \code{psi}, \code{observed_mean}, \code{contrast}, \code{delta}.
 #' @export
 .tlstoch_stochastic_estimand <- function(Q_fn, A, W, delta,
@@ -213,11 +218,12 @@
 
 #' .tlstoch_density_ratio
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. Called by \code{.tlstoch_shift_tmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param W See Usage.
+#' @param A Passed to \code{.tlstoch_vec}.
+#' @param W Passed to \code{.tlstoch_mat}.
 #' @param delta See Usage.
 #' @param g_fn See Usage.
 #' @param lower Defaults to \code{NULL}.
@@ -246,17 +252,18 @@
 
 #' .tlstoch_shift_tmle
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param W See Usage.
+#' @param Y Passed to \code{.tlstoch_vec}.
+#' @param A Passed to \code{.tlstoch_vec}.
+#' @param W Passed to \code{.tlstoch_mat}.
 #' @param Q_fn See Usage.
-#' @param g_fn See Usage.
-#' @param delta See Usage.
-#' @param lower Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param g_fn Passed to \code{.tlstoch_density_ratio}.
+#' @param delta Passed to \code{.tlstoch_density_ratio}.
+#' @param lower Passed to \code{.tlstoch_density_ratio}.
+#' @param upper Passed to \code{.tlstoch_density_ratio}.
 #' @param iters Defaults to \code{60}.
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{delta}, \code{max_density_ratio}, \code{method}, \code{note}.
 #' @export
@@ -307,7 +314,8 @@
 
 #' .tlstoch_cheatsheet
 #'
-#' Part of the tlstoch_native implementation; see the file header for
+#' A step of the tlstoch_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

@@ -8,12 +8,12 @@
 morie_scumap_fuzzy_simplicial_set(X, n_neighbors = 15, symmetrize = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.scumap_matrix}.}
 \item{n_neighbors}{Defaults to \code{15}.}
-\item{symmetrize}{Defaults to \code{TRUE}.}
+\item{symmetrize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the scumap_native implementation; see the file header for the source it follows.
+A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{A}, \code{B}, \code{rho}, \code{sigma}, \code{neighbours}, \code{n}.

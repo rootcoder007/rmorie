@@ -8,10 +8,10 @@
 .esl_K(u)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the esl_native0 implementation; see the file header for the source it follows.
+A step of the esl_native0 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

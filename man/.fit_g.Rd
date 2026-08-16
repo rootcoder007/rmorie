@@ -8,16 +8,16 @@
 .fit_g(A, W, aL, aH, rows, ridge, trim)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{W}{See Usage.}
+\item{A}{A vector; its length is taken.}
+\item{W}{A matrix; passed to \code{ncol}.}
 \item{aL}{See Usage.}
 \item{aH}{See Usage.}
 \item{rows}{See Usage.}
 \item{ridge}{See Usage.}
-\item{trim}{See Usage.}
+\item{trim}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the tmldta_native implementation; see the file header for the source it follows.
+A step of the tmldta_native implementation. Called by \code{split_specific_tmle}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{gH}, \code{gL}.

@@ -8,10 +8,10 @@
 .tmlcen_uniform_density(ts)
 }
 \arguments{
-\item{ts}{See Usage.}
+\item{ts}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

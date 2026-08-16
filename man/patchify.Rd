@@ -8,12 +8,12 @@
 patchify(x, patch_len, stride = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.patcht_vec}.}
 \item{patch_len}{See Usage.}
 \item{stride}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the patchT_native implementation; see the file header for the source it follows.
+A step of the patchT_native implementation. Called by \code{channel_independent_tokens}, \code{channel_mixed_tokens}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{stride}, \code{L}, \code{covers}.

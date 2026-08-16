@@ -8,12 +8,12 @@
 .s03ridgesolve(A, b, ridge = 1e-10)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{b}{Passed to \code{.s03cholsolve}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.btres_xtxinv}, \code{.cfa_em}, \code{.htprd_ridge_cv} and 25 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.s03cholsolve}.

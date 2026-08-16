@@ -58,16 +58,17 @@
 #'
 #' the arm stays base-R only, as the package requires.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .survvae_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .survvae_erfc
 #'
-#' Part of the survvae_native implementation; see the file header for
+#' A step of the survvae_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .survvae_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
@@ -81,7 +82,7 @@
 #'
 #' message, mirroring the Python arm\'s .check().
 #'
-#' @param primitive See Usage.
+#' @param primitive A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ghc_survvae_check_primitive <- function(primitive) {
@@ -102,9 +103,9 @@
 #' .unpack(): W is a list of K length-d vectors, bias is length K,
 #' shapes and scales are length K (positives, recovered via exp()).
 #'
-#' @param v See Usage.
-#' @param K See Usage.
-#' @param d See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
+#' @param d Numeric; combined arithmetically in the body.
 #' @return A list with \code{W}, \code{bias}, \code{shapes}, \code{scales}.
 #' @export
 .ghc_survvae_unpack <- function(v, K, d) {
@@ -142,7 +143,7 @@
 #' mirroring the "for _ in range(6)" loop in fit().
 #'
 #' @param objective See Usage.
-#' @param x0 See Usage.
+#' @param x0 A vector; its length is taken.
 #' @param maxit Defaults to \code{NULL}.
 #' @return A list with \code{x}, \code{value}.
 #' @export
@@ -168,9 +169,9 @@
 #' the earlier observation is an event; non-events at the shorter time
 #' do not contribute because their true event time is unknown.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param risks See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
+#' @param risks A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .ghc_c_index <- function(times, events, risks) {

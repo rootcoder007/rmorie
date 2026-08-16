@@ -8,10 +8,10 @@
 .k02relabel(comm)
 }
 \arguments{
-\item{comm}{See Usage.}
+\item{comm}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the sgtcoml implementation; see the file header for the source it follows.
+A step of the sgtcoml implementation. Called by \code{louv}, \code{sgtcoml}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

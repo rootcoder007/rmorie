@@ -8,10 +8,10 @@
 .stahdo_prep(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}, \code{.stahdo_stahel_donoho}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{M}, \code{n}, \code{p}.

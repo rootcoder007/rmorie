@@ -8,13 +8,13 @@
 .morie_t2_coxterms(time, event, X, beta)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{X}{See Usage.}
-\item{beta}{See Usage.}
+\item{time}{A vector; its length is taken and its elements indexed.}
+\item{event}{A vector; indexed elementwise.}
+\item{X}{A matrix; indexed by row and column.}
+\item{beta}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the tail2_t03 implementation; see the file header for the source it follows.
+A step of the tail2_t03 implementation. Called by \code{CoxPL}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loglik}, \code{score}, \code{info}, \code{nevent}.

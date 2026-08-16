@@ -8,13 +8,13 @@
 morie_hawkes_pair_excitation_sum_cpp(t, eta, kind, psi)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{eta}{See Usage.}
-\item{kind}{See Usage.}
-\item{psi}{See Usage.}
+\item{t}{Passed to \code{.Call}.}
+\item{eta}{Passed to \code{.Call}.}
+\item{kind}{Passed to \code{.Call}.}
+\item{psi}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{.tps_hwka_neg_loglik_general}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

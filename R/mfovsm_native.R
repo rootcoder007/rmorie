@@ -44,7 +44,8 @@
 
 #' .mfovsm_vec
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -60,7 +61,8 @@
 
 #' .mfovsm_mat
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -77,11 +79,12 @@
 
 #' .mfovsm_hist
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param obj See Usage.
-#' @param allow_one Defaults to \code{FALSE}.
+#' @param allow_one A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{list}.
 #' @export
 .mfovsm_hist <- function(obj, allow_one = FALSE) {
@@ -95,11 +98,12 @@
 
 #' .mfovsm_quantile7
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param q See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param q Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .mfovsm_quantile7 <- function(x, q) {
@@ -117,12 +121,13 @@
 
 #' .mfovsm_logreg_fit
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. Called by \code{.mfovsm_ip_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param max_iter Defaults to \code{25}.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{coef}, \code{fitted}.
 #' @export
@@ -156,14 +161,15 @@
 
 #' .mfovsm_ip_weights
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ak See Usage.
+#' @param ak A vector; its length is taken.
 #' @param den See Usage.
 #' @param num See Usage.
 #' @param kind Defaults to \code{"binary"}.
-#' @param stabilize Defaults to \code{TRUE}.
+#' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{weights}, \code{fitted}.
 #' @export
 .mfovsm_ip_weights <- function(ak, den, num, kind = "binary", stabilize = TRUE) {
@@ -202,12 +208,13 @@
 
 #' .mfovsm_wls
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A vector; its length is taken.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}.
 #' @export
 .mfovsm_wls <- function(X, y, w) {
@@ -238,15 +245,16 @@
 
 #' morie_mfovsm
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param feature See Usage.
-#' @param A See Usage.
-#' @param H See Usage.
-#' @param v_in_numerator Defaults to \code{TRUE}.
-#' @param contrast Defaults to \code{"cumulative"}.
+#' @param y Passed to \code{.mfovsm_vec}.
+#' @param feature Passed to \code{.mfovsm_vec}.
+#' @param A Passed to \code{.mfovsm_hist}.
+#' @param H Passed to \code{.mfovsm_hist}.
+#' @param v_in_numerator A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
 #' @param trim Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{se}, \code{main_effect}, \code{main_effect_se}, \code{feature_effect}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n}, \code{n_times}, \code{contrast}, \code{method}.
 #' @export
@@ -376,7 +384,8 @@ mfovsm <- morie_mfovsm
 # Cheatsheet
 #' Cheatsheet
 #'
-#' Part of the mfovsm_native implementation; see the file header for the
+#' A step of the mfovsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

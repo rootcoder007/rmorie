@@ -14,10 +14,11 @@
 
 #' .morie_aft_log_dens_surv
 #'
-#' Part of the aft_native implementation; see the file header for the
+#' A step of the aft_native implementation. Called by \code{.morie_aft_fit}, \code{morie_aft_residuals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @param family See Usage.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -52,8 +53,8 @@
 #' path it walked, so it is not reproducible across solvers; this is.
 #'
 #' @param fn See Usage.
-#' @param theta See Usage.
-#' @param rel Defaults to \code{1e-05}.
+#' @param theta A vector; its length is taken.
+#' @param rel Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{tryCatch}.
 #' @export
 .morie_numeric_cov <- function(fn, theta, rel = 1e-5) {
@@ -83,16 +84,17 @@
 
 #' .morie_aft_fit
 #'
-#' Part of the aft_native implementation; see the file header for the
+#' A step of the aft_native implementation. Called by \code{.morie_aft_common}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t A vector; its length is taken.
 #' @param e See Usage.
-#' @param X See Usage.
-#' @param family Defaults to \code{"weibull"}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param family Passed to \code{.morie_aft_log_dens_surv}. Defaults to \code{"weibull"}.
 #' @param max_iter Defaults to \code{500L}.
 #' @param tol Defaults to \code{1e-06}.
-#' @param add_intercept Defaults to \code{TRUE}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
 #' @export
 .morie_aft_fit <- function(t, e, X, family = "weibull", max_iter = 500L,
@@ -131,13 +133,14 @@
 
 #' .morie_aft_result
 #'
-#' Part of the aft_native implementation; see the file header for the
+#' A step of the aft_native implementation. Called by \code{.morie_aft_common}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param e See Usage.
+#' @param t A vector; its length is taken.
+#' @param e Numeric; passed to \code{sum}.
 #' @param X See Usage.
-#' @param fit See Usage.
+#' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$cov}, \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.
 #' @param family See Usage.
 #' @param title See Usage.
 #' @param method See Usage.
@@ -162,15 +165,16 @@
 
 #' .morie_aft_common
 #'
-#' Part of the aft_native implementation; see the file header for the
+#' A step of the aft_native implementation. Called by \code{morie_aft_generalized_gamma}, \code{morie_aft_log_logistic}, \code{morie_aft_weibull}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X See Usage.
-#' @param family See Usage.
-#' @param title See Usage.
-#' @param method See Usage.
+#' @param time Passed to \code{.morie_cox_prepare}.
+#' @param event Passed to \code{.morie_cox_prepare}.
+#' @param X Passed to \code{.morie_cox_prepare}.
+#' @param family Passed to \code{.morie_aft_fit}.
+#' @param title Passed to \code{.morie_aft_result}.
+#' @param method Passed to \code{.morie_aft_result}.
 #' @param ... Passed through.
 #' @return The value of \code{.morie_aft_result}.
 #' @export

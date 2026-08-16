@@ -8,14 +8,14 @@
 morie_farmlmm(y, G, max_iter = 10L, threshold = NULL, seed = 0L)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{G}{See Usage.}
-\item{max_iter}{Defaults to \code{10L}.}
-\item{threshold}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{y}{Passed to \code{.farmcpu}.}
+\item{G}{Passed to \code{.farmcpu}.}
+\item{max_iter}{Passed to \code{.farmcpu}. Defaults to \code{10L}.}
+\item{threshold}{Passed to \code{.farmcpu}.}
+\item{seed}{Passed to \code{.farmcpu}. Defaults to \code{0L}.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.farmcpu}.

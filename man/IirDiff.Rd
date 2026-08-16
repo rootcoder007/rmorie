@@ -17,7 +17,7 @@ IirDiff(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL, n = NULL)
 \item{n}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_filt implementation; see the file header for the source it follows.
+A step of the rangayyan_filt implementation. Called by \code{IirDiffGen}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{value}, \code{index}, \code{N}, \code{M}, \code{recursive}, \code{feedback_is_subtracted}, \code{method}.

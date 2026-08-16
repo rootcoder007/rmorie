@@ -19,7 +19,7 @@ List with \code{estimate}, \code{club}, \code{positive},
 \code{mi_gauss}, \code{n}, \code{method}.
 }
 \description{
-Formula: I_CLUB = E\link{log q(y|x)} - E_marg\link{log q(y|x)}
+Formula: I_CLUB = E[log q(y|x)] - E_marg[log q(y|x)]
 }
 \details{
 The second term averages the SAME conditional density over

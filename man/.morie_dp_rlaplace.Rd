@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{n}{See Usage.}
-\item{scale}{See Usage.}
+\item{scale}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dp_native implementation; see the file header for the source it follows.
+A step of the dp_native implementation. Called by \code{morie_dp_count}, \code{morie_dp_histogram}, \code{morie_dp_kmeans} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

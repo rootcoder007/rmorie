@@ -8,10 +8,10 @@
 .alfbnp_centre(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the alfbnp_native implementation; see the file header for the source it follows.
+A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sample}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

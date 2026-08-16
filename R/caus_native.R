@@ -16,10 +16,11 @@
 
 #' .caus_intercept
 #'
-#' Part of the caus_native implementation; see the file header for the
+#' A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{cbind}.
 #' @export
 .caus_intercept <- function(X) {
@@ -40,8 +41,8 @@
 #' routinely near-singular when instruments are correlated, and
 #' inverting it explicitly turns a warning into a wrong answer.
 #'
-#' @param Z See Usage.
-#' @param M See Usage.
+#' @param Z A matrix; passed to \code{\%*\%}.
+#' @param M A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{%*%}.
 #' @export
 .caus_project <- function(Z, M) {
@@ -52,11 +53,12 @@
 
 #' .caus_annihilate
 #'
-#' Part of the caus_native implementation; see the file header for the
+#' A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param M See Usage.
+#' @param Z Passed to \code{.caus_project}.
+#' @param M A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
 .caus_annihilate <- function(Z, M) as.matrix(M) - .caus_project(Z, M)
@@ -69,10 +71,10 @@
 #' least squares, and k = the Anderson-Rubin ratio is LIML. Keeping them
 #' one function is what stops them drifting apart.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param Z See Usage.
-#' @param k See Usage.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param X A matrix; passed to \code{t}.
+#' @param Z Passed to \code{.caus_annihilate}.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .caus_k_class <- function(y, X, Z, k) {
@@ -87,11 +89,12 @@
 
 #' .caus_first_stage_f
 #'
-#' Part of the caus_native implementation; see the file header for the
+#' A step of the caus_native implementation. Called by \code{morie_caus_iv_2sls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param Z See Usage.
+#' @param D A vector; its length is taken.
+#' @param Z Passed to \code{.caus_intercept}.
 #' @return A numeric value.
 #' @export
 .caus_first_stage_f <- function(D, Z) {

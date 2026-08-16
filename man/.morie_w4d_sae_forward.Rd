@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{A}{See Usage.}
-\item{Ws}{See Usage.}
-\item{bs}{See Usage.}
-\item{cs}{See Usage.}
+\item{Ws}{A vector; its length is taken and its elements indexed.}
+\item{bs}{A vector; indexed elementwise.}
+\item{cs}{A vector; indexed elementwise.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_stacked_autoencoder_modules}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{hs}, \code{rs}.

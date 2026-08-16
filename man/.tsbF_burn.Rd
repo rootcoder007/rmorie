@@ -8,11 +8,11 @@
 .tsbF_burn(seq, burn_in)
 }
 \arguments{
-\item{seq}{See Usage.}
+\item{seq}{A vector; its length is taken and its elements indexed.}
 \item{burn_in}{See Usage.}
 }
 \description{
-Part of the tsbF_native implementation; see the file header for the source it follows.
+A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

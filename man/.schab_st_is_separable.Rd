@@ -8,10 +8,10 @@
 .schab_st_is_separable(form)
 }
 \arguments{
-\item{form}{See Usage.}
+\item{form}{One of \code{"product"}, \code{"sum"}.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{spstcv}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

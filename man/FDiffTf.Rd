@@ -8,11 +8,11 @@
 FDiffTf(z, T = 1)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Passed to \code{.morie_rg_polyz}.}
 \item{T}{Defaults to \code{1}.}
 }
 \description{
-the whole of the operator\\'s highpass character.
+the whole of the operator\'s highpass character.
 }
 \value{
 A list with \code{H}, \code{z}, \code{T}, \code{zeros}, \code{zero_at_dc}, \code{dc_gain}, \code{method}.

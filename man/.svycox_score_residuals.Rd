@@ -8,21 +8,21 @@
 .svycox_score_residuals(time, event, X, beta, weights = NULL)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{X}{See Usage.}
-\item{beta}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{time}{Passed to \code{.svycox_prep}.}
+\item{event}{Passed to \code{.svycox_prep}.}
+\item{X}{Passed to \code{.svycox_prep}.}
+\item{beta}{Passed to \code{.svycox_score_and_info}.}
+\item{weights}{Passed to \code{.svycox_prep}.}
 }
 \description{
-Part of the svycox_native implementation; see the file header for the source it follows.
+A step of the svycox_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.
 }
 \references{
 ----------
-Binder, D. A. (1992) "Fitting Cox\\'s proportional hazards models from
+Binder, D. A. (1992) "Fitting Cox\'s proportional hazards models from
 survey data", *Biometrika* 79(1), 139-147,
 doi:10.1093/biomet/79.1.139. The weighted estimating equation above,
 the interpretation of :math:`\hat\beta` as a finite-population census

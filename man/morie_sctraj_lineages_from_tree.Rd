@@ -8,11 +8,11 @@
 morie_sctraj_lineages_from_tree(tree, root)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{A list; the body reads \code{$adjacency} from it.}
 \item{root}{See Usage.}
 }
 \description{
-Part of the sctraj_native implementation; see the file header for the source it follows.
+A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

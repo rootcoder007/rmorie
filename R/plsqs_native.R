@@ -8,10 +8,11 @@
 
 #' morie_plsqs_pls_regression
 #'
-#' Part of the plsqs_native implementation; see the file header for the
+#' A step of the plsqs_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y See Usage.
 #' @param n_components Defaults to \code{2}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{intercept}, \code{fitted}, \code{residuals}, \code{scores}, \code{weights}, \code{loadings}, \code{y_loadings}, \code{explained_x}, \code{explained_y}, \code{n_components}, \code{r_squared}, \code{n}, \code{p}, \code{method}, \code{note}.
@@ -86,7 +87,8 @@ morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
 
 #' .plsqs_cheatsheet
 #'
-#' Part of the plsqs_native implementation; see the file header for the
+#' A step of the plsqs_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

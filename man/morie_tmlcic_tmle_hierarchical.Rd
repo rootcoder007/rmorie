@@ -8,20 +8,20 @@
 morie_tmlcic_tmle_hierarchical(y, A, E, W, cluster, arm = "both", weights = NULL, known_g = NULL, trim = 0.01, ridge = 1e-08, level = 0.95)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{E}{See Usage.}
-\item{W}{See Usage.}
-\item{cluster}{See Usage.}
-\item{arm}{Defaults to \code{"both"}.}
-\item{weights}{Defaults to \code{NULL}.}
-\item{known_g}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.s03vec}.}
+\item{A}{Passed to \code{.s03vec}.}
+\item{E}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
+\item{W}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
+\item{cluster}{Passed to \code{morie_tmlcic_cluster_weights}.}
+\item{arm}{One of \code{"both"}, \code{"cluster"}, \code{"individual"}. Defaults to \code{"both"}.}
+\item{weights}{Passed to \code{morie_tmlcic_cluster_weights}.}
+\item{known_g}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{trim}{Defaults to \code{0.01}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Passed to \code{.tmlcic_hier_cluster_arm}. Defaults to \code{1e-08}.}
 \item{level}{Defaults to \code{0.95}.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{payload}, as built in the body.

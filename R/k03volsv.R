@@ -10,13 +10,14 @@
 ## Gaussian quasi log-likelihood from the Kalman filter.
 #' # Gaussian quasi log-likelihood from the Kalman filter
 #'
-#' Part of the k03volsv implementation; see the file header for the
+#' A step of the k03volsv implementation. Called by \code{Volsv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param mu See Usage.
-#' @param phi See Usage.
-#' @param sig2 See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param phi Numeric; combined arithmetically in the body.
+#' @param sig2 Numeric; combined arithmetically in the body.
 #' @return The value of \code{ll}, as built in the body.
 #' @export
 .k03_kalman_qll <- function(y, mu, phi, sig2) {
@@ -43,13 +44,14 @@
 ## Deterministic golden-section maximisation on [lo, hi].
 #' # Deterministic golden-section maximisation on [lo, hi]
 #'
-#' Part of the k03volsv implementation; see the file header for the
+#' A step of the k03volsv implementation. Called by \code{Volsv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param iters Defaults to \code{80L}.
+#' @param lo Numeric; combined arithmetically in the body.
+#' @param hi Numeric; combined arithmetically in the body.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{80L}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .k03_golden <- function(f, lo, hi, iters = 80L) {

@@ -11,7 +11,7 @@ GcnII(A, H0, alpha = 0.1, beta = 0.5, K = 4)
 
 \item{H0}{Initial node representation, one row per node.}
 
-\item{alpha}{Initial-residual weight in \link{0, 1}.}
+\item{alpha}{Initial-residual weight in [0, 1].}
 
 \item{beta}{Identity-mapping weight, retained for the interface.}
 

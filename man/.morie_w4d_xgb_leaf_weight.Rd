@@ -8,12 +8,12 @@
 .morie_w4d_xgb_leaf_weight(G, H, lam)
 }
 \arguments{
-\item{G}{See Usage.}
-\item{H}{See Usage.}
-\item{lam}{See Usage.}
+\item{G}{Numeric; combined arithmetically in the body.}
+\item{H}{Numeric; combined arithmetically in the body.}
+\item{lam}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_xgb_build}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

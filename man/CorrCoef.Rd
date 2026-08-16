@@ -12,7 +12,7 @@ CorrCoef(x, y)
 \item{y}{See Usage.}
 }
 \description{
-Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+A step of the rangayyan_ccf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{r}, \code{r_squared}, \code{n}, \code{means}, \code{cosine_without_removing_means}, \code{means_are_removed}, \code{invariant_to_positive_affine_change}, \code{says_nothing_about_agreement}, \code{method}.

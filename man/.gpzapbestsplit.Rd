@@ -8,12 +8,12 @@
 .gpzapbestsplit(y, x, candidates = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{x}{See Usage.}
-\item{candidates}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.gpflat}.}
+\item{x}{Passed to \code{.gpflat}.}
+\item{candidates}{Optional; may be \code{NULL}. Passed to \code{.gpflat}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm325}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{threshold}, \code{loglik}.

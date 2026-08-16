@@ -8,12 +8,12 @@
 .masrcn_bilinear(F, y, x)
 }
 \arguments{
-\item{F}{See Usage.}
-\item{y}{See Usage.}
-\item{x}{See Usage.}
+\item{F}{A vector; its length is taken and its elements indexed.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the masrcn_native implementation; see the file header for the source it follows.
+A step of the masrcn_native implementation. Called by \code{roi_align}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

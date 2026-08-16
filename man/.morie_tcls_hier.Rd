@@ -8,13 +8,13 @@
 .morie_tcls_hier(p, q, hierarchy, domain)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{p}{A vector; indexed elementwise.}
+\item{q}{A vector; indexed elementwise.}
 \item{hierarchy}{See Usage.}
 \item{domain}{See Usage.}
 }
 \description{
-Part of the tcls_native implementation; see the file header for the source it follows.
+A step of the tcls_native implementation. Called by \code{morie_emd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cost}, as built in the body.

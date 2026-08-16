@@ -8,16 +8,16 @@
 .ripk_weight(x, y, rad, x0, x1, y0, y1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{rad}{See Usage.}
-\item{x0}{See Usage.}
-\item{x1}{See Usage.}
-\item{y0}{See Usage.}
-\item{y1}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{rad}{Numeric; combined arithmetically in the body.}
+\item{x0}{Numeric; combined arithmetically in the body.}
+\item{x1}{Numeric; combined arithmetically in the body.}
+\item{y0}{Numeric; combined arithmetically in the body.}
+\item{y1}{Numeric; combined arithmetically in the body.}
 }
 \description{
-that lies inside the rectangle [x0, x1] x [y0, y1] -- Ripley\\\'s edge correction weight w(s_i, s_j) (Schabenberger & Gotway 2005, p. 102). Two opposite sides can never both be crossed by the same angle, so the only overlaps between the four "outside" arcs are the four corners and there are no triple intersections; inclusion-exclusion is exact.
+that lies inside the rectangle [x0, x1] x [y0, y1] -- Ripley\\'s edge correction weight w(s_i, s_j) (Schabenberger & Gotway 2005, p. 102). Two opposite sides can never both be crossed by the same angle, so the only overlaps between the four "outside" arcs are the four corners and there are no triple intersections; inclusion-exclusion is exact.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,10 +8,10 @@
 .morie_gr_w4b_softplus(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{abs}.}
 }
 \description{
-Part of the geron_w4b_native implementation; see the file header for the source it follows.
+A step of the geron_w4b_native implementation. Called by \code{morie_geron_mish}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

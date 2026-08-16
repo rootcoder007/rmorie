@@ -8,16 +8,16 @@
 .mafft_site_score(M, ga, gb, wa, wb, i, j)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{ga}{See Usage.}
-\item{gb}{See Usage.}
-\item{wa}{See Usage.}
-\item{wb}{See Usage.}
-\item{i}{See Usage.}
-\item{j}{See Usage.}
+\item{M}{Passed to \code{.mafft_get}.}
+\item{ga}{A vector; indexed elementwise.}
+\item{gb}{A vector; indexed elementwise.}
+\item{wa}{A vector; its length is taken and its elements indexed.}
+\item{wb}{A vector; its length is taken and its elements indexed.}
+\item{i}{Character; passed to \code{substr}.}
+\item{j}{Character; passed to \code{substr}.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{.mafft_nw}, \code{find_homologous_segments}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tot}, as built in the body.

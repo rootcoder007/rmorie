@@ -8,11 +8,11 @@
 .s03swish(z, beta = 1)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{beta}{Defaults to \code{1}.}
+\item{z}{Numeric; combined arithmetically in the body.}
+\item{beta}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{Llamablock}, \code{Mbconv}, \code{Swiglu}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

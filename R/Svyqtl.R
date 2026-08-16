@@ -50,10 +50,11 @@ Svyqtl <- function(y, weights = NULL, quantile = 0.5) {
 
 #' .svyqtl_inv
 #'
-#' Part of the Svyqtl implementation; see the file header for the source
+#' A step of the Svyqtl implementation. Called by \code{Svyqtl}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param xs See Usage.
+#' @param xs A vector; its length is taken and its elements indexed.
 #' @param cum See Usage.
 #' @param p See Usage.
 #' @return One of two values, depending on the branch taken.

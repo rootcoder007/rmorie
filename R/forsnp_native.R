@@ -7,13 +7,14 @@
 
 #' .forsnp_locus
 #'
-#' Part of the forsnp_native implementation; see the file header for the
+#' A step of the forsnp_native implementation. Called by \code{morie_forsnp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a1 See Usage.
 #' @param a2 See Usage.
-#' @param fr See Usage.
-#' @param theta See Usage.
+#' @param fr A vector; indexed elementwise.
+#' @param theta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .forsnp_locus <- function(a1, a2, fr, theta) {

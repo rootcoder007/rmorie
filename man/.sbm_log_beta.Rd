@@ -8,11 +8,11 @@
 .sbm_log_beta(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dpsbm implementation; see the file header for the source it follows.
+A step of the dpsbm implementation. Called by \code{Dpsbm}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 .nashq_solve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
 \item{b}{See Usage.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{.nashq_indifference}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

@@ -8,12 +8,12 @@
 max_step(v, dv, eta = 0.9995)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{dv}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
+\item{dv}{A vector; indexed elementwise.}
 \item{eta}{Defaults to \code{0.9995}.}
 }
 \description{
-Part of the mehtad_native implementation; see the file header for the source it follows.
+A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -12,12 +12,12 @@
 #' the residual projections, `n` the sample size, `I`/`W` the identity
 #' and spatial-weights matrices.
 #'
-#' @param rho See Usage.
-#' @param e0 See Usage.
-#' @param e1 See Usage.
-#' @param n See Usage.
-#' @param I See Usage.
-#' @param W See Usage.
+#' @param rho Numeric; combined arithmetically in the body.
+#' @param e0 Numeric; combined arithmetically in the body.
+#' @param e1 Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param I Numeric; combined arithmetically in the body.
+#' @param W Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .sarla_negll <- function(rho, e0, e1, n, I, W) {

@@ -39,11 +39,12 @@
 
 #' .morie_es_bound
 #'
-#' Part of the ramsey_theory_native implementation; see the file header
+#' A step of the ramsey_theory_native implementation. Called by \code{morie_ramsey_number}, \code{morie_ramsey_upper_bound}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param k See Usage.
-#' @param l See Usage.
+#' @param k Numeric; combined arithmetically in the body.
+#' @param l Numeric; combined arithmetically in the body.
 #' @return The value of \code{choose}.
 #' @export
 .morie_es_bound <- function(k, l) choose(k + l - 2, k - 1)

@@ -8,15 +8,15 @@
 multi_head_attention(Q, K, V, n_heads, pad_mask = NULL, causal = FALSE)
 }
 \arguments{
-\item{Q}{See Usage.}
+\item{Q}{A matrix; passed to \code{nrow}.}
 \item{K}{See Usage.}
-\item{V}{See Usage.}
-\item{n_heads}{See Usage.}
+\item{V}{A matrix; indexed by row and column.}
+\item{n_heads}{Numeric; combined arithmetically in the body.}
 \item{pad_mask}{Defaults to \code{NULL}.}
 \item{causal}{Defaults to \code{FALSE}.}
 }
 \description{
-Part of the berte_native implementation; see the file header for the source it follows.
+A step of the berte_native implementation. Called by \code{encoder_block}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{out}, \code{weights}.

@@ -8,12 +8,12 @@
 .stahdo_random_dirs(p, n_dirs, seed)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{.ghc_unif}.}
 \item{n_dirs}{See Usage.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

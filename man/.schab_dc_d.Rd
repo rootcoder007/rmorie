@@ -8,13 +8,13 @@
 .schab_dc_d(p1, p2, region, r)
 }
 \arguments{
-\item{p1}{See Usage.}
-\item{p2}{See Usage.}
-\item{region}{See Usage.}
-\item{r}{See Usage.}
+\item{p1}{Passed to \code{.schab_k_border}.}
+\item{p2}{Passed to \code{.schab_k_border}.}
+\item{region}{Passed to \code{.schab_k_border}.}
+\item{r}{Passed to \code{.schab_k_border}.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{spkcrs}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{D}, \code{K_11}, \code{K_22}, \code{r}.

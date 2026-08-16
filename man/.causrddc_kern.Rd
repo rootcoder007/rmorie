@@ -8,11 +8,11 @@
 .causrddc_kern(u, kernel)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{kernel}{See Usage.}
+\item{u}{Numeric; passed to \code{abs}.}
+\item{kernel}{One of \code{"triangular"}, \code{"uniform"}.}
 }
 \description{
-Part of the causrddc_native implementation; see the file header for the source it follows.
+A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma2}, \code{.causrddc_kernel_constants}, \code{.causrddc_local_poly_weights}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

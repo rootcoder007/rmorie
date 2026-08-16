@@ -149,14 +149,15 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 
 #' .chemsc_B
 #'
-#' Part of the chemsc_native implementation; see the file header for the
+#' A step of the chemsc_native implementation. Called by \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic}, \code{morie_chemsc_metal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param d_ideal See Usage.
-#' @param d_max See Usage.
-#' @param sigma See Usage.
-#' @param smoothing See Usage.
+#' @param d Passed to \code{morie_chemsc_block}.
+#' @param d_ideal Passed to \code{morie_chemsc_block}.
+#' @param d_max Passed to \code{morie_chemsc_block}.
+#' @param sigma Passed to \code{morie_chemsc_smooth_block}.
+#' @param smoothing One of \code{"gaussian"}, \code{"none"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .chemsc_B <- function(d, d_ideal, d_max, sigma, smoothing) {
@@ -169,11 +170,12 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 
 #' .chemsc_par
 #'
-#' Part of the chemsc_native implementation; see the file header for the
+#' A step of the chemsc_native implementation. Called by \code{morie_chemsc_clash}, \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param base See Usage.
-#' @param over See Usage.
+#' @param base A vector; indexed elementwise.
+#' @param over Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{base}, as built in the body.
 #' @export
 .chemsc_par <- function(base, over) {
@@ -232,7 +234,7 @@ morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
 #' on the wrong side.
 #'
 #' @param r See Usage.
-#' @param r1 See Usage.
+#' @param r1 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .chemsc_over <- function(r, r1) {
@@ -410,11 +412,12 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 
 #' .chemsc_dist
 #'
-#' Part of the chemsc_native implementation; see the file header for the
+#' A step of the chemsc_native implementation. Called by \code{morie_chemsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .chemsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
@@ -422,12 +425,13 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 # The angle at b, in degrees, formed by a-b-c.
 #' The angle at b, in degrees, formed by a-b-c
 #'
-#' Part of the chemsc_native implementation; see the file header for the
+#' A step of the chemsc_native implementation. Called by \code{morie_chemsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param c Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .chemsc_angle <- function(a, b, c) {

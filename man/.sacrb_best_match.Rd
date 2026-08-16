@@ -8,11 +8,11 @@
 .sacrb_best_match(clen, rlens)
 }
 \arguments{
-\item{clen}{See Usage.}
-\item{rlens}{See Usage.}
+\item{clen}{Numeric; combined arithmetically in the body.}
+\item{rlens}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the sacrb_native implementation; see the file header for the source it follows.
+A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

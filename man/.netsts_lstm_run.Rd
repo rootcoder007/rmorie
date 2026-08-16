@@ -8,14 +8,14 @@
 .netsts_lstm_run(X, W, b, hidden, forget_bias = 0)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{W}{See Usage.}
-\item{b}{See Usage.}
+\item{X}{A vector; its length is taken and its elements indexed.}
+\item{W}{Passed to \code{.netsts_lstm_cell}.}
+\item{b}{Passed to \code{.netsts_lstm_cell}.}
 \item{hidden}{See Usage.}
-\item{forget_bias}{Defaults to \code{0}.}
+\item{forget_bias}{Passed to \code{.netsts_lstm_cell}. Defaults to \code{0}.}
 }
 \description{
-Part of the netsts_native implementation; see the file header for the source it follows.
+A step of the netsts_native implementation. Called by \code{morie_netsts}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{hs}, \code{cs}, \code{gates}.

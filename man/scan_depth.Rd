@@ -11,7 +11,7 @@ scan_depth(length)
 \item{length}{See Usage.}
 }
 \description{
-Part of the ssmpar_native implementation; see the file header for the source it follows.
+A step of the ssmpar_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth}, \code{work}, \code{speedup}, \code{method}, \code{note}.

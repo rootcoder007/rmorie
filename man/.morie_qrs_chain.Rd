@@ -8,11 +8,11 @@
 .morie_qrs_chain(x, fs)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
+\item{x}{Passed to \code{.morie_qrs_ptbp}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{QrsDetect}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{bp}, \code{dv}, \code{sq}, \code{ig}, \code{w}.

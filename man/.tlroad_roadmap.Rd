@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{data_description}{See Usage.}
-\item{model_assumptions}{See Usage.}
+\item{model_assumptions}{A vector; its length is taken.}
 \item{target_name}{See Usage.}
 \item{estimator}{Defaults to \code{"TMLE"}.}
 }
 \description{
-Part of the tlroad_native implementation; see the file header for the source it follows.
+A step of the tlroad_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{steps}, \code{data}, \code{model}, \code{target}, \code{estimator}, \code{note}.

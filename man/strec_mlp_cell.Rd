@@ -9,12 +9,12 @@ strec_mlp_cell(m, W, b = NULL, activation = "tanh")
 }
 \arguments{
 \item{m}{See Usage.}
-\item{W}{See Usage.}
+\item{W}{A matrix; passed to \code{nrow}.}
 \item{b}{Defaults to \code{NULL}.}
-\item{activation}{Defaults to \code{"tanh"}.}
+\item{activation}{One of \code{"identity"}, \code{"tanh"}. Defaults to \code{"tanh"}.}
 }
 \description{
-Part of the strec_native implementation; see the file header for the source it follows.
+A step of the strec_native implementation. Called by \code{strec_stamp_scores}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

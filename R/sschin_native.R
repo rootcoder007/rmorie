@@ -13,10 +13,11 @@
 
 #' .sschin_cholsolve
 #'
-#' Part of the sschin_native implementation; see the file header for the
+#' A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow}, \code{.sschin_ols}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{chol}.
 #' @param b See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -28,12 +29,13 @@
 # Least squares with a ridge scaled to the design, plus sigma.
 #' Least squares with a ridge scaled to the design, plus sigma
 #'
-#' Part of the sschin_native implementation; see the file header for the
+#' A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge_rel Defaults to \code{1e-08}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param ridge_rel Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{sigma}.
 #' @export
 .sschin_ols <- function(X, y, ridge_rel = 1e-8) {
@@ -51,12 +53,13 @@
 # Cox partial likelihood, Breslow ties, Newton-Raphson.
 #' Cox partial likelihood, Breslow ties, Newton-Raphson
 #'
-#' Part of the sschin_native implementation; see the file header for the
+#' A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param e See Usage.
-#' @param X See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param e A vector; indexed elementwise.
+#' @param X A matrix; indexed by row and column.
 #' @param max_iter Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.
@@ -116,11 +119,12 @@
 # Two-sided Student-t quantile by Cornish-Fisher on the normal.
 #' Two-sided Student-t quantile by Cornish-Fisher on the normal
 #'
-#' Part of the sschin_native implementation; see the file header for the
+#' A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pq See Usage.
-#' @param df See Usage.
+#' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .sschin_t_quantile <- function(pq, df) {
@@ -134,15 +138,16 @@
 
 #' morie_sschin_chained_imputation
 #'
-#' Part of the sschin_native implementation; see the file header for the
+#' A step of the sschin_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param time See Usage.
 #' @param event See Usage.
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param mi_iter Defaults to \code{5L}.
 #' @param cycles Defaults to \code{10L}.
-#' @param ties Defaults to \code{"breslow"}.
+#' @param ties Compared against \code{"breslow"}. Defaults to \code{"breslow"}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratio}, \code{std_error}, \code{total_variance}, \code{within_variance}, \code{between_variance}, \code{ci_lower}, \code{ci_upper}, \code{t_quantile}, \code{df}, \code{relative_increase_variance}, \code{fraction_missing_info}, \code{per_imputation}, \code{complete_case_coefficients}, \code{complete_case_se}, \code{n_complete_cases}, \code{n}, \code{p}, \code{m}, \code{cycles}, \code{n_missing}, \code{columns_imputed}, \code{n_events}, \code{df_complete}, \code{method}, \code{note}.
 #' @export
 morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
@@ -297,7 +302,8 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
 
 #' .sschin_cheatsheet
 #'
-#' Part of the sschin_native implementation; see the file header for the
+#' A step of the sschin_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

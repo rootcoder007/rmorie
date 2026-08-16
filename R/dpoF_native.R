@@ -19,10 +19,11 @@
 
 #' .dpoF_logsigmoid
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
 .dpoF_logsigmoid <- function(z) {
@@ -34,10 +35,11 @@
 
 #' .dpoF_sigmoid
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. Called by \code{morie_dpoF}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
 .dpoF_sigmoid <- function(z) {
@@ -50,10 +52,11 @@
 
 #' .dpoF_logsumexp
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. Called by \code{.dpoF_plackett_luce}, \code{optimal_policy}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vals See Usage.
+#' @param vals A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .dpoF_logsumexp <- function(vals) {
@@ -69,7 +72,8 @@
 
 #' .dpoF_vec
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. Called by \code{morie_dpoF}, \code{optimal_policy}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -86,17 +90,18 @@
 
 #' morie_dpoF
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param logp_w Defaults to \code{NULL}.
-#' @param logp_l Defaults to \code{NULL}.
-#' @param logp_ref_w Defaults to \code{NULL}.
-#' @param logp_ref_l Defaults to \code{NULL}.
-#' @param beta Defaults to \code{0.1}.
-#' @param model Defaults to \code{"bradley-terry"}.
-#' @param logp Defaults to \code{NULL}.
-#' @param logp_ref Defaults to \code{NULL}.
+#' @param logp_w Passed to \code{.dpoF_vec}.
+#' @param logp_l Passed to \code{.dpoF_vec}.
+#' @param logp_ref_w Passed to \code{.dpoF_vec}.
+#' @param logp_ref_l Passed to \code{.dpoF_vec}.
+#' @param beta Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param model Compared against \code{"plackett-luce"}. Defaults to \code{"bradley-terry"}.
+#' @param logp Passed to \code{.dpoF_plackett_luce}.
+#' @param logp_ref Passed to \code{.dpoF_plackett_luce}.
 #' @param label_smoothing Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{reward_w}, \code{reward_l}, \code{margin}, \code{grad_weight}, \code{accuracy}, \code{beta}, \code{n}, \code{model}, \code{method}.
 #' @export
@@ -169,12 +174,13 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
 
 #' .dpoF_plackett_luce
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. Called by \code{morie_dpoF}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param logp See Usage.
-#' @param logp_ref See Usage.
-#' @param beta See Usage.
+#' @param logp Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
+#' @param logp_ref Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
+#' @param beta Numeric; combined arithmetically in the body.
 #' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards}, \code{beta}, \code{n}, \code{model}, \code{method}.
 #' @export
 .dpoF_plackett_luce <- function(logp, logp_ref, beta) {
@@ -239,12 +245,13 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
 
 #' optimal_policy
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param logp_ref See Usage.
-#' @param reward See Usage.
-#' @param beta See Usage.
+#' @param logp_ref Passed to \code{.dpoF_vec}.
+#' @param reward Passed to \code{.dpoF_vec}.
+#' @param beta Numeric; combined arithmetically in the body.
 #' @return The value of \code{list}.
 #' @export
 optimal_policy <- function(logp_ref, reward, beta) {
@@ -264,7 +271,8 @@ optimal_policy <- function(logp_ref, reward, beta) {
 
 #' .dpoF_cheatsheet
 #'
-#' Part of the dpoF_native implementation; see the file header for the
+#' A step of the dpoF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,15 +8,15 @@
 transition_probabilities(adj, t, v, p, q, weights = NULL)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{t}{See Usage.}
+\item{adj}{A vector; indexed elementwise.}
+\item{t}{Optional; may be \code{NULL}. Passed to \code{.node2v_dist}.}
 \item{v}{See Usage.}
 \item{p}{See Usage.}
 \item{q}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the node2v_native implementation; see the file header for the source it follows.
+A step of the node2v_native implementation. Called by \code{walk}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.

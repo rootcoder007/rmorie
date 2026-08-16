@@ -8,10 +8,10 @@
 .as_fun(spec)
 }
 \arguments{
-\item{spec}{See Usage.}
+\item{spec}{A list; the body reads \code{$affine}, \code{$f}, \code{$grad}, \code{$hess} from it.}
 }
 \description{
-Part of the barerp_native implementation; see the file header for the source it follows.
+A step of the barerp_native implementation. Called by \code{barrier_method}, \code{central_point}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

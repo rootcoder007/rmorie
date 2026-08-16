@@ -8,13 +8,13 @@
 .morie_tau_numeric(family, theta = NULL, nu = NULL, n = 200L)
 }
 \arguments{
-\item{family}{See Usage.}
-\item{theta}{Defaults to \code{NULL}.}
-\item{nu}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{200L}.}
+\item{family}{Passed to \code{morie_copula_cdf}.}
+\item{theta}{Passed to \code{morie_copula_cdf}.}
+\item{nu}{Passed to \code{morie_copula_cdf}.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 }
 \description{
-form Czado\\\'s Table 3.2 does not give.
+form Czado\\'s Table 3.2 does not give.
 }
 \value{
 A numeric value.

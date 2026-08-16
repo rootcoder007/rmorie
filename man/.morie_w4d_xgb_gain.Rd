@@ -8,15 +8,15 @@
 .morie_w4d_xgb_gain(GL, HL, GR, HR, lam, gamma)
 }
 \arguments{
-\item{GL}{See Usage.}
-\item{HL}{See Usage.}
-\item{GR}{See Usage.}
-\item{HR}{See Usage.}
-\item{lam}{See Usage.}
-\item{gamma}{See Usage.}
+\item{GL}{Numeric; combined arithmetically in the body.}
+\item{HL}{Numeric; combined arithmetically in the body.}
+\item{GR}{Numeric; combined arithmetically in the body.}
+\item{HR}{Numeric; combined arithmetically in the body.}
+\item{lam}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_xgb_build}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

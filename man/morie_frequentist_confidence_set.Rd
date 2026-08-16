@@ -8,13 +8,13 @@
 morie_frequentist_confidence_set(theta_set, se_phi, level = 0.95, target = "parameter")
 }
 \arguments{
-\item{theta_set}{See Usage.}
+\item{theta_set}{A list; the body reads \code{$lower}, \code{$upper}, \code{$width} from it.}
 \item{se_phi}{See Usage.}
 \item{level}{Defaults to \code{0.95}.}
-\item{target}{Defaults to \code{"parameter"}.}
+\item{target}{One of \code{"parameter"}, \code{"set"}. Defaults to \code{"parameter"}.}
 }
 \description{
-Part of the bndbye_native implementation; see the file header for the source it follows.
+A step of the bndbye_native implementation. Called by \code{morie_compare_sets}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value}, \code{target}, \code{level}, \code{note}.

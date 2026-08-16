@@ -8,10 +8,10 @@
 .gnnEx_sig(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the gnnEx_native implementation; see the file header for the source it follows.
+A step of the gnnEx_native implementation. Called by \code{gnnEx_mask_objective}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -31,7 +31,8 @@
 
 #' .tlhoest_first_order_expansion
 #'
-#' Part of the tlhoest_native implementation; see the file header for
+#' A step of the tlhoest_native implementation. Called by \code{morie_tlhoest}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param D1 See Usage.
@@ -55,12 +56,13 @@
 
 #' .tlhoest_second_order_term
 #'
-#' Part of the tlhoest_native implementation; see the file header for
+#' A step of the tlhoest_native implementation. Called by \code{morie_tlhoest}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param D2_kernel See Usage.
 #' @param O See Usage.
-#' @param exclude_diagonal Defaults to \code{TRUE}.
+#' @param exclude_diagonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{value}, \code{n_pairs}, \code{cost}, \code{note}.
 #' @export
 .tlhoest_second_order_term <- function(D2_kernel, O, exclude_diagonal = TRUE) {
@@ -90,13 +92,14 @@
 
 #' morie_tlhoest
 #'
-#' Part of the tlhoest_native implementation; see the file header for
+#' A step of the tlhoest_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param psi_plugin See Usage.
-#' @param D1 See Usage.
-#' @param D2_kernel See Usage.
-#' @param O See Usage.
+#' @param psi_plugin Passed to \code{.tlhoest_first_order_expansion}.
+#' @param D1 Passed to \code{.tlhoest_first_order_expansion}.
+#' @param D2_kernel Passed to \code{.tlhoest_second_order_term}.
+#' @param O Passed to \code{.tlhoest_second_order_term}.
 #' @return A list with \code{estimate}, \code{psi}, \code{first_order}, \code{second_order_correction}, \code{n_pairs}, \code{method}, \code{note}.
 #' @export
 morie_tlhoest <- function(psi_plugin, D1, D2_kernel, O) {
@@ -119,7 +122,8 @@ morie_tlhoest_second_order_term <- .tlhoest_second_order_term
 
 #' morie_tlhoest_rate_requirement
 #'
-#' Part of the tlhoest_native implementation; see the file header for
+#' A step of the tlhoest_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param order See Usage.
@@ -143,7 +147,8 @@ morie_tlhoest_rate_requirement <- function(order, n = 1000L) {
 
 #' morie_tlhoest_remainder_order
 #'
-#' Part of the tlhoest_native implementation; see the file header for
+#' A step of the tlhoest_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param order See Usage.
@@ -161,7 +166,8 @@ morie_tlhoest_remainder_order <- function(order) {
 
 #' morie_tlhoest_cheatsheet
 #'
-#' Part of the tlhoest_native implementation; see the file header for
+#' A step of the tlhoest_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

@@ -8,12 +8,12 @@
 substitution_matrix(t, pi = NULL, u = 1)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{pi}{Defaults to \code{NULL}.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{pi}{Passed to \code{.phylml_pi}.}
 \item{u}{Defaults to \code{1}.}
 }
 \description{
-Part of the phylml_native implementation; see the file header for the source it follows.
+A step of the phylml_native implementation. Called by \code{.phylml_prune}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{M}, as built in the body.

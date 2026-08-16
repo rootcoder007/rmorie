@@ -8,12 +8,12 @@
 .frwil_free_wilson(compounds, activity, constraint = "reference")
 }
 \arguments{
-\item{compounds}{See Usage.}
-\item{activity}{See Usage.}
-\item{constraint}{Defaults to \code{"reference"}.}
+\item{compounds}{Passed to \code{.frwil_prep}.}
+\item{activity}{Passed to \code{.frwil_prep}.}
+\item{constraint}{Compared against \code{"sum_zero"}. Defaults to \code{"reference"}.}
 }
 \description{
-Part of the frwil_native implementation; see the file header for the source it follows.
+A step of the frwil_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{coefficients}, \code{names}, \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{tss}, \code{r_squared}, \code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences}, \code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.

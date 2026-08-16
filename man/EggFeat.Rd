@@ -9,11 +9,11 @@ EggFeat(egg, fs, normal_band = c(0.0333, 0.0667))
 }
 \arguments{
 \item{egg}{See Usage.}
-\item{fs}{See Usage.}
-\item{normal_band}{Defaults to \code{c(0.0333, 0.0667)}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{normal_band}{A vector; indexed elementwise. Defaults to \code{c(0.0333, 0.0667)}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

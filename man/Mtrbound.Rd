@@ -20,7 +20,7 @@ List with lower, upper, width, nfixed, n, d.
 }
 \description{
 L_i = y_i if z_i <= d else ymin; U_i = y_i if z_i >= d else ymax; and
-E\link{Y(d)} lies in \link{mean(L), mean(U)}.
+E\link{Y(d)} lies in [mean(L), mean(U)].
 }
 \references{
 Manski (1997), Econometrica 65(6), 1311-1334; Manski and

@@ -8,10 +8,10 @@
 CadPipe(features, labels, k = 5, standardize = TRUE)
 }
 \arguments{
-\item{features}{See Usage.}
-\item{labels}{See Usage.}
-\item{k}{Defaults to \code{5}.}
-\item{standardize}{Defaults to \code{TRUE}.}
+\item{features}{Passed to \code{.morie_bx_mat}.}
+\item{labels}{Passed to \code{.morie_bx_vec}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5}.}
+\item{standardize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 accuracy quoted for it means nothing unless the test patterns were unseen. Prototype discriminant of 10.4.1, partitioning of 10.10.3, scored by eqs (10.100)-(10.103).

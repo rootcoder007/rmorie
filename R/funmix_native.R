@@ -9,10 +9,11 @@
 
 #' .funmix_rows
 #'
-#' Part of the funmix_native implementation; see the file header for the
+#' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .funmix_rows <- function(x) {
@@ -32,13 +33,14 @@
 # Clamped uniform knot vector for n_basis B-splines.
 #' Clamped uniform knot vector for n_basis B-splines
 #'
-#' Part of the funmix_native implementation; see the file header for the
+#' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tmin See Usage.
-#' @param tmax See Usage.
-#' @param n_basis See Usage.
-#' @param degree See Usage.
+#' @param tmin A count; the body uses it as \code{rep(...)}.
+#' @param tmax A count; the body uses it as \code{rep(...)}.
+#' @param n_basis Numeric; combined arithmetically in the body.
+#' @param degree Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .funmix_knots <- function(tmin, tmax, n_basis, degree) {
@@ -52,13 +54,14 @@
 # One row of the B-spline design, by the Cox-de Boor recursion.
 #' One row of the B-spline design, by the Cox-de Boor recursion
 #'
-#' Part of the funmix_native implementation; see the file header for the
+#' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param kn See Usage.
-#' @param degree See Usage.
-#' @param n_basis See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param kn A vector; its length is taken and its elements indexed.
+#' @param degree A count; the body uses it as \code{seq_len(...)}.
+#' @param n_basis A count; the body uses it as \code{seq_len(...)}.
 #' @param tmax See Usage.
 #' @return The value of \code{[}.
 #' @export
@@ -87,11 +90,12 @@
 # First principal direction by power iteration -- deterministic start.
 #' First principal direction by power iteration -- deterministic start
 #'
-#' Part of the funmix_native implementation; see the file header for the
+#' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
-#' @param p See Usage.
+#' @param C A matrix; passed to \code{nrow}.
+#' @param p A count; the body uses it as \code{rep(...)}.
 #' @return A list with \code{score}, \code{pc}.
 #' @export
 .funmix_first_pc <- function(C, p) {
@@ -117,10 +121,11 @@
 
 #' .funmix_cholsolve
 #'
-#' Part of the funmix_native implementation; see the file header for the
+#' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{chol}.
 #' @param b See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -131,17 +136,18 @@
 
 #' morie_funmix_functional_mixture
 #'
-#' Part of the funmix_native implementation; see the file header for the
+#' A step of the funmix_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param K See Usage.
+#' @param Y Passed to \code{.funmix_rows}.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @param t Defaults to \code{NULL}.
 #' @param n_basis Defaults to \code{5L}.
-#' @param degree Defaults to \code{3L}.
+#' @param degree Passed to \code{.funmix_knots}. Defaults to \code{3L}.
 #' @param max_iter Defaults to \code{300L}.
-#' @param tol Defaults to \code{1e-10}.
-#' @param var_floor Defaults to \code{1e-08}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
+#' @param var_floor Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{labels}, \code{posterior}, \code{proportions}, \code{coefficients}, \code{variances}, \code{mean_curves}, \code{basis}, \code{knots}, \code{curve_coefficients}, \code{grid}, \code{loglik}, \code{loglik_path}, \code{bic}, \code{aic}, \code{entropy}, \code{n_parameters}, \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{n_basis}, \code{degree}, \code{method}, \code{note}.
 #' @export
 morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
@@ -288,7 +294,8 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
 
 #' .funmix_cheatsheet
 #'
-#' Part of the funmix_native implementation; see the file header for the
+#' A step of the funmix_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,10 +8,10 @@
 .samdec_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the samdec_native implementation; see the file header for the source it follows.
+A step of the samdec_native implementation. Called by \code{dynamic_mask_head}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

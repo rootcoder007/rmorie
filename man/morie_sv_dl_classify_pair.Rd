@@ -8,14 +8,14 @@
 morie_sv_dl_classify_pair(p, median, sd, orientation = c("+", "-"), n_sd = 3)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{median}{See Usage.}
-\item{sd}{See Usage.}
-\item{orientation}{Defaults to \code{c("+", "-")}.}
-\item{n_sd}{Defaults to \code{3}.}
+\item{p}{A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$strand1}, \code{$strand2} from it.}
+\item{median}{Numeric; combined arithmetically in the body.}
+\item{sd}{Numeric; combined arithmetically in the body.}
+\item{orientation}{A vector; indexed elementwise. Defaults to \code{c("+", "-")}.}
+\item{n_sd}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}. See the file header for the source the module follows.
 }
 \value{
 Nothing; the function is called for its effect.

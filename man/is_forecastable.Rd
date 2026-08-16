@@ -10,10 +10,10 @@ is_forecastable(spec, theta, tol = 1e-08)
 \arguments{
 \item{spec}{See Usage.}
 \item{theta}{See Usage.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{morie_bats}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

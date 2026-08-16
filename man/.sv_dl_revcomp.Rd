@@ -8,10 +8,10 @@
 .sv_dl_revcomp(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Character; passed to \code{toupper}.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_deletion_type_reference}. See the file header for the source the module follows.
 }
 \value{
 A character value.

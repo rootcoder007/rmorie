@@ -8,10 +8,10 @@
 .trupek_norm(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Passed to \code{.trupek_dot}.}
 }
 \description{
-Part of the trupek_native implementation; see the file header for the source it follows.
+A step of the trupek_native implementation. Called by \code{.trupek_cauchy}, \code{.trupek_dogleg}, \code{.trupek_exact} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

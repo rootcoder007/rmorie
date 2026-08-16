@@ -15,12 +15,13 @@ ROOT_TOL <- 1.001
 
 #' .filter_column
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param w See Usage.
-#' @param ar See Usage.
-#' @param ma See Usage.
+#' @param w A vector; its length is taken and its elements indexed.
+#' @param ar Passed to \code{.sarima_state_space}.
+#' @param ma Passed to \code{.sarima_state_space}.
 #' @return A list with \code{v}, \code{f}.
 #' @export
 .filter_column <- function(w, ar, ma) {
@@ -48,10 +49,11 @@ ROOT_TOL <- 1.001
 
 #' .residual_column
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param w See Usage.
+#' @param w A vector; its length is taken.
 #' @param ar See Usage.
 #' @param ma See Usage.
 #' @return A list with \code{v}, \code{f}.
@@ -63,14 +65,15 @@ ROOT_TOL <- 1.001
 
 #' profile_beta
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. Called by \code{.sarimax_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param wy See Usage.
-#' @param wX See Usage.
-#' @param ar Defaults to \code{numeric(0)}.
-#' @param ma Defaults to \code{numeric(0)}.
-#' @param filter Defaults to \code{"exact"}.
+#' @param wy A vector; its length is taken.
+#' @param wX A vector; its length is taken and its elements indexed.
+#' @param ar Passed to \code{.col}. Defaults to \code{numeric(0)}.
+#' @param ma Passed to \code{.col}. Defaults to \code{numeric(0)}.
+#' @param filter One of \code{"conditional"}, \code{"exact"}. Defaults to \code{"exact"}.
 #' @return A list with \code{beta}, \code{ssq}, \code{v}, \code{f}, \code{information}, \code{sum_log_f}.
 #' @export
 profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
@@ -121,10 +124,11 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 
 #' .columns
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. Called by \code{.sarimax_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n See Usage.
 #' @return The value of \code{cols}, as built in the body.
 #' @export
@@ -147,16 +151,17 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 
 #' .sarimax_fit
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. Called by \code{.try_fit}, \code{morie_sarimax}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param X Defaults to \code{NULL}.
-#' @param order Defaults to \code{c(0, 1, 1)}.
-#' @param seasonal_order Defaults to \code{c(0, 1, 1)}.
+#' @param y A vector; its length is taken.
+#' @param X Passed to \code{.columns}.
+#' @param order A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.
+#' @param seasonal_order A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.
 #' @param s Defaults to \code{12}.
-#' @param include_constant Defaults to \code{NULL}.
-#' @param method Defaults to \code{"ml"}.
+#' @param include_constant Optional; may be \code{NULL}. A flag; the body branches on it.
+#' @param method One of \code{"css"}, \code{"ml"}, \code{"uls"}. Defaults to \code{"ml"}.
 #' @return A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2}, \code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals}, \code{innovation_variance}, \code{include_constant}, \code{order}, \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
 #' @export
 .sarimax_fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
@@ -251,7 +256,8 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 
 #' aic
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. Called by \code{aicc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param loglik See Usage.
@@ -264,12 +270,13 @@ aic <- function(loglik, n_par) {
 
 #' aicc
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param loglik See Usage.
 #' @param n_par See Usage.
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 aicc <- function(loglik, n_par, n) {
@@ -280,7 +287,8 @@ aicc <- function(loglik, n_par, n) {
 
 #' starting_models
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. Called by \code{auto_order}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param d See Usage.
@@ -298,12 +306,13 @@ starting_models <- function(d, D, s) {
 
 #' neighbours
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. Called by \code{auto_order}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param order See Usage.
-#' @param seasonal_order See Usage.
-#' @param constant See Usage.
+#' @param order A vector; indexed elementwise.
+#' @param seasonal_order A vector; indexed elementwise.
+#' @param constant A flag; the body branches on it.
 #' @param s See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -332,16 +341,17 @@ neighbours <- function(order, seasonal_order, constant, s) {
 
 #' .try_fit
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. Called by \code{auto_order}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param order See Usage.
-#' @param seasonal_order See Usage.
-#' @param s See Usage.
-#' @param constant See Usage.
-#' @param method See Usage.
+#' @param y Passed to \code{.sarimax_fit}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.sarimax_fit}.
+#' @param order A vector; indexed elementwise.
+#' @param seasonal_order A vector; indexed elementwise.
+#' @param s Passed to \code{.sarimax_fit}.
+#' @param constant A flag; the body branches on it.
+#' @param method Passed to \code{.sarimax_fit}.
 #' @return The value of \code{tryCatch}.
 #' @export
 .try_fit <- function(y, X, order, seasonal_order, s, constant, method) {
@@ -355,15 +365,16 @@ neighbours <- function(order, seasonal_order, constant, s) {
 
 #' auto_order
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param X Defaults to \code{NULL}.
-#' @param d Defaults to \code{0}.
-#' @param D Defaults to \code{0}.
-#' @param s Defaults to \code{1}.
-#' @param method Defaults to \code{"css"}.
+#' @param y Passed to \code{.try_fit}.
+#' @param X Passed to \code{.try_fit}.
+#' @param d Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param D Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param s Passed to \code{.try_fit}. Defaults to \code{1}.
+#' @param method Passed to \code{.try_fit}. Defaults to \code{"css"}.
 #' @param max_steps Defaults to \code{20}.
 #' @return A list with \code{estimate}, \code{aic}, \code{fit}, \code{order}, \code{seasonal_order}, \code{constant}, \code{steps}, \code{n_models_tried}, \code{tried}, \code{s}, \code{search_method}, \code{differencing_note}, \code{method}.
 #' @export
@@ -432,7 +443,8 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 
 #' .sarimax_cheatsheet
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.
@@ -451,7 +463,8 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 
 #' morie_sarimax
 #'
-#' Part of the sarimax_native implementation; see the file header for
+#' A step of the sarimax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param ... Passed through.

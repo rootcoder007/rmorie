@@ -34,12 +34,13 @@
 
 #' morie_gsageemd_aggregate
 #'
-#' Part of the gsageemd_native implementation; see the file header for
+#' A step of the gsageemd_native implementation. Called by \code{sage_layer}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param vectors See Usage.
-#' @param how Defaults to \code{"mean"}.
-#' @param W Defaults to \code{NULL}.
+#' @param vectors Passed to \code{.gsageemd_mat}.
+#' @param how One of \code{"max_pool"}, \code{"mean"}. Defaults to \code{"mean"}.
+#' @param W Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
 morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {

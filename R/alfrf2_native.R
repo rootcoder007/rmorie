@@ -101,10 +101,11 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 
 #' .alfrf2_centre
 #'
-#' Part of the alfrf2_native implementation; see the file header for the
+#' A step of the alfrf2_native implementation. Called by \code{morie_alfrf2_kabsch}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P See Usage.
+#' @param P A matrix; indexed by row and column.
 #' @return A list with \code{P}, \code{c}.
 #' @export
 .alfrf2_centre <- function(P) {
@@ -115,10 +116,11 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 
 #' .alfrf2_det3
 #'
-#' Part of the alfrf2_native implementation; see the file header for the
+#' A step of the alfrf2_native implementation. Called by \code{morie_alfrf2_kabsch}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
 .alfrf2_det3 <- function(M)
@@ -235,16 +237,17 @@ morie_alfrf2_ideal <- function(x, fixed, spacing = .alfrf2_ca_spacing,
 
 #' .alfrf2_denoise
 #'
-#' Part of the alfrf2_native implementation; see the file header for the
+#' A step of the alfrf2_native implementation. Called by \code{morie_alfrf2}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param route See Usage.
 #' @param denoiser See Usage.
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{nrow}.
 #' @param t See Usage.
-#' @param fixed See Usage.
-#' @param spacing See Usage.
-#' @param passes See Usage.
+#' @param fixed Passed to \code{morie_alfrf2_ideal}.
+#' @param spacing Passed to \code{morie_alfrf2_ideal}.
+#' @param passes Passed to \code{morie_alfrf2_ideal}.
 #' @return Nothing; this branch always raises.
 #' @export
 .alfrf2_denoise <- function(route, denoiser, x, t, fixed, spacing,

@@ -8,11 +8,11 @@
 .morie_gr_combos(seq_, k)
 }
 \arguments{
-\item{seq_}{See Usage.}
-\item{k}{See Usage.}
+\item{seq_}{A vector; its length is taken and its elements indexed.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ml_geron implementation; see the file header for the source it follows.
+A step of the ml_geron implementation. Called by \code{morie_trkassign}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

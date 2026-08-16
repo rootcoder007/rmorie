@@ -3,10 +3,11 @@
 # Internal: closure operator -- rescale each row to unit sum.
 #' Internal: closure operator -- rescale each row to unit sum
 #'
-#' Part of the aitsbm implementation; see the file header for the source
+#' A step of the aitsbm implementation. Called by \code{morie_subcompositional_incoherence}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
+#' @param X Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .aitsbm_close <- function(X) X / rowSums(X)

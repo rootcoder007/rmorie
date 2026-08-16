@@ -12,7 +12,7 @@ morie_identified_set_interval(phi_hat, half_width)
 \item{half_width}{See Usage.}
 }
 \description{
-Part of the bndbye_native implementation; see the file header for the source it follows.
+A step of the bndbye_native implementation. Called by \code{morie_compare_sets}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{width}, \code{phi_hat}.

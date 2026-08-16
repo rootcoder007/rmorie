@@ -8,11 +8,11 @@
 .metsem_outdeg(g, v)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$out} from it.}
 \item{v}{See Usage.}
 }
 \description{
-Part of the metsem_native implementation; see the file header for the source it follows.
+A step of the metsem_native implementation. Called by \code{.metsem_walk}, \code{morie_metsem}, \code{morie_metsem_unitigs}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

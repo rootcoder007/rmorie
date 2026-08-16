@@ -8,11 +8,11 @@
 .remlfn_groups(y, group)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{group}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{group}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the remlfn_native implementation; see the file header for the source it follows.
+A step of the remlfn_native implementation. Called by \code{.remlfn_ranova}, \code{morie_remlfn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{keys}, \code{gs}.

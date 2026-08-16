@@ -8,15 +8,15 @@
 .netcms_lasso(V, s12, lam, beta, tol, maxit)
 }
 \arguments{
-\item{V}{See Usage.}
-\item{s12}{See Usage.}
-\item{lam}{See Usage.}
-\item{beta}{See Usage.}
+\item{V}{A matrix; indexed by row and column.}
+\item{s12}{A vector; its length is taken and its elements indexed.}
+\item{lam}{Passed to \code{.netcms_soft}.}
+\item{beta}{A vector; indexed elementwise.}
 \item{tol}{See Usage.}
-\item{maxit}{See Usage.}
+\item{maxit}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the netcms_native implementation; see the file header for the source it follows.
+A step of the netcms_native implementation. Called by \code{morie_netcms}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{beta}, as built in the body.

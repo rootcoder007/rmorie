@@ -8,10 +8,10 @@
 .s03digamma(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-agree term for term rather than relying on R\\\'s digamma matching a Python series.
+agree term for term rather than relying on R\\'s digamma matching a Python series.
 }
 \value{
 A numeric value.

@@ -8,14 +8,14 @@
 .schab_cross_k_combined(p1, p2, region, r, correction = "ripley")
 }
 \arguments{
-\item{p1}{See Usage.}
-\item{p2}{See Usage.}
-\item{region}{See Usage.}
-\item{r}{See Usage.}
-\item{correction}{Defaults to \code{"ripley"}.}
+\item{p1}{A matrix; passed to \code{nrow}.}
+\item{p2}{A matrix; passed to \code{nrow}.}
+\item{region}{A vector; indexed elementwise.}
+\item{r}{Numeric; combined arithmetically in the body.}
+\item{correction}{Passed to \code{.schab_cross_k}. Defaults to \code{"ripley"}.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{spkcrs}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star}, \code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.

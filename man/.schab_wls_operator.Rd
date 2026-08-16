@@ -3,13 +3,13 @@
 % the formals.
 \name{.schab_wls_operator}
 \alias{.schab_wls_operator}
-\title{The cutoff is numpy.linalg.pinv\\\'s default: max(dim) * eps * largest}
+\title{The cutoff is numpy.linalg.pinv\\'s default: max(dim) * eps * largest}
 \usage{
 .schab_wls_operator(X, w)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{w}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{w}{Numeric; passed to \code{sqrt}.}
 }
 \description{
 singular value. Written out rather than taken from MASS::ginv because MASS is only in Suggests.

@@ -45,8 +45,8 @@ A list with the final scan, the pseudo-QTNs and how they were   chosen, the crit
 N <- 60L
 M <- 25L
 G <- lapply(0:(M - 1L), function(j) vapply(0:(N - 1L), function(i) floor((((i + 
-    1) * (j + 1) * 2654435761)%%2147483648)/8192)%%3, numeric(1)))
+    1) * (j + 1) * 2654435761)\%\%2147483648)/8192)\%\%3, numeric(1)))
 Y <- vapply(0:(N - 1L), function(i) 2 * G[[6]][i + 1L] + 0.7 * 
-    G[[13]][i + 1L] + (((i * 17)%%11) - 5)/10, numeric(1))
+    G[[13]][i + 1L] + (((i * 17)\%\%11) - 5)/10, numeric(1))
 morie_blinkg(Y, G)
 }

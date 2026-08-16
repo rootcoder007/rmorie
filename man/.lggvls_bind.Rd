@@ -8,11 +8,11 @@
 .lggvls_bind(cols, n)
 }
 \arguments{
-\item{cols}{See Usage.}
+\item{cols}{A vector; its length is taken.}
 \item{n}{See Usage.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. Called by \code{morie_lggvls}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{do.call}.

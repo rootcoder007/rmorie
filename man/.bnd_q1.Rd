@@ -8,11 +8,11 @@
 .bnd_q1(v, p)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{p}{See Usage.}
+\item{v}{Numeric; passed to \code{sort}.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the helpers_bnd implementation; see the file header for the source it follows.
+A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndtfm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

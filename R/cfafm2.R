@@ -6,10 +6,11 @@
 # Item covariance from data, or pass a covariance matrix through.
 #' Item covariance from data, or pass a covariance matrix through
 #'
-#' Part of the cfafm2 implementation; see the file header for the source
+#' A step of the cfafm2 implementation. Called by \code{Cfafm2}, \code{Cfaftr}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.s03mat}.
 #' @return The value of \code{S}, as built in the body.
 #' @export
 .cfa_cov <- function(X) {
@@ -29,10 +30,11 @@
 
 #' .cfa_inv
 #'
-#' Part of the cfafm2 implementation; see the file header for the source
+#' A step of the cfafm2 implementation. Called by \code{.cfa_em}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .cfa_inv <- function(A) {
@@ -48,10 +50,11 @@
 
 #' .cfa_logdet
 #'
-#' Part of the cfafm2 implementation; see the file header for the source
+#' A step of the cfafm2 implementation. Called by \code{.cfa_em}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{.s03chol}.
 #' @return A numeric value.
 #' @export
 .cfa_logdet <- function(A) {
@@ -67,8 +70,8 @@
 #' mask[i, j] is 1 where item i may load on factor j.  Factors are
 #' standardised and orthogonal, so Sigma = Lambda Lambda\' + Psi.
 #'
-#' @param S See Usage.
-#' @param mask See Usage.
+#' @param S A matrix; indexed by row and column.
+#' @param mask A matrix; indexed by row and column.
 #' @return A list with \code{lam}, \code{psi}, \code{fml}, \code{resid}, \code{it}.
 #' @export
 .cfa_em <- function(S, mask) {

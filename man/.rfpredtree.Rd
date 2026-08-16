@@ -8,12 +8,12 @@
 .rfpredtree(nodes, root, x)
 }
 \arguments{
-\item{nodes}{See Usage.}
+\item{nodes}{A vector; indexed elementwise.}
 \item{root}{See Usage.}
-\item{x}{See Usage.}
+\item{x}{A vector; indexed elementwise.}
 }
 \description{
-Part of the mvsml_rf_shared implementation; see the file header for the source it follows.
+A step of the mvsml_rf_shared implementation. Called by \code{.rfperm}, \code{.rfpredict}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

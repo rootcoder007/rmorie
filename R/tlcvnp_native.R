@@ -29,7 +29,8 @@
 
 #' morie_tlcvnp
 #'
-#' Part of the tlcvnp_native implementation; see the file header for the
+#' A step of the tlcvnp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -50,11 +51,12 @@ morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
 
 #' kernel_smooth
 #'
-#' Part of the tlcvnp_native implementation; see the file header for the
+#' A step of the tlcvnp_native implementation. Called by \code{smoothed_parameter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param u See Usage.
-#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @param kernel One of \code{"epanechnikov"}, \code{"uniform"}. Defaults to \code{"epanechnikov"}.
 #' @return A numeric value.
 #' @export
 kernel_smooth <- function(u, kernel = "epanechnikov") {
@@ -71,7 +73,8 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 
 #' smoothed_parameter
 #'
-#' Part of the tlcvnp_native implementation; see the file header for the
+#' A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed}, \code{select_bandwidth}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -100,7 +103,8 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
 
 #' smoothing_bias
 #'
-#' Part of the tlcvnp_native implementation; see the file header for the
+#' A step of the tlcvnp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param true_density See Usage.
@@ -119,14 +123,15 @@ smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
 
 #' select_bandwidth
 #'
-#' Part of the tlcvnp_native implementation; see the file header for the
+#' A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
 #' @param x0 See Usage.
 #' @param bandwidths See Usage.
 #' @param kernel Defaults to \code{"epanechnikov"}.
-#' @param criterion Defaults to \code{"lepski"}.
+#' @param criterion One of \code{"lepski"}, \code{"smallest_se"}. Defaults to \code{"lepski"}.
 #' @param C Defaults to \code{1}.
 #' @return A list with \code{h}, \code{fit}, \code{criterion}, \code{all}, \code{note}.
 #' @export
@@ -170,7 +175,8 @@ select_bandwidth <- function(X, x0, bandwidths,
 
 #' cv_tmle_smoothed
 #'
-#' Part of the tlcvnp_native implementation; see the file header for the
+#' A step of the tlcvnp_native implementation. Called by \code{morie_tlcvnp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -219,7 +225,8 @@ cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
 
 #' .tlcvnp_cheatsheet
 #'
-#' Part of the tlcvnp_native implementation; see the file header for the
+#' A step of the tlcvnp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

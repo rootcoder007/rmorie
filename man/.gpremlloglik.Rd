@@ -8,14 +8,14 @@
 .gpremlloglik(X, Z, y, D, R = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Z}{See Usage.}
-\item{y}{See Usage.}
-\item{D}{See Usage.}
-\item{R}{Defaults to \code{NULL}.}
+\item{X}{Passed to \code{.gpmat}.}
+\item{Z}{Passed to \code{.gplmmV}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
+\item{D}{Passed to \code{.gplmmV}.}
+\item{R}{Passed to \code{.gplmmV}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm011}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{value}, \code{beta}.

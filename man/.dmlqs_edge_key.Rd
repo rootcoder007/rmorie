@@ -12,7 +12,7 @@
 \item{w}{See Usage.}
 }
 \description{
-Part of the dmlqs_native implementation; see the file header for the source it follows.
+A step of the dmlqs_native implementation. Called by \code{.dmlqs_atom_readout}, \code{.dmlqs_message_pass}. See the file header for the source the module follows.
 }
 \value{
 A character value.

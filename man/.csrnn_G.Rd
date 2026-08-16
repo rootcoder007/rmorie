@@ -8,11 +8,11 @@
 .csrnn_G(nn, grid)
 }
 \arguments{
-\item{nn}{See Usage.}
+\item{nn}{A vector; its length is taken.}
 \item{grid}{See Usage.}
 }
 \description{
-Part of the csrnn implementation; see the file header for the source it follows.
+A step of the csrnn implementation. Called by \code{morie_csr_nn_test}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

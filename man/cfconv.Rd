@@ -8,14 +8,14 @@
 cfconv(X, R, filter_net, cutoff = 5, ...)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{R}{See Usage.}
+\item{X}{Passed to \code{.schn_mat}.}
+\item{R}{Passed to \code{.schn_mat}.}
 \item{filter_net}{See Usage.}
 \item{cutoff}{Defaults to \code{5}.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the schN_native implementation; see the file header for the source it follows.
+A step of the schN_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

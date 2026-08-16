@@ -8,7 +8,7 @@
 morie_latent_time(fits)
 }
 \arguments{
-\item{fits}{See Usage.}
+\item{fits}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 gene has its own fit and its own rate, so without this aggregation the per-cell times are not comparable across genes.

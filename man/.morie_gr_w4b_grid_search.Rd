@@ -9,14 +9,14 @@
 }
 \arguments{
 \item{param_grid}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.morie_gr_mat}.}
 \item{y}{See Usage.}
 \item{estimator}{Defaults to \code{NULL}.}
-\item{K}{Defaults to \code{3}.}
-\item{score}{Defaults to \code{NULL}.}
+\item{K}{Passed to \code{morie_geron_cross_validation_score}. Defaults to \code{3}.}
+\item{score}{Passed to \code{morie_geron_cross_validation_score}.}
 }
 \description{
-Part of the geron_w4b_native implementation; see the file header for the source it follows.
+A step of the geron_w4b_native implementation. Called by \code{morie_geron_hyperparameter_tuning}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{best_params}, \code{best_score}, \code{results}, \code{n_candidates}, \code{n_fits}, \code{estimate}, \code{n}, \code{method}.

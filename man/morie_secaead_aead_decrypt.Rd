@@ -8,14 +8,14 @@
 morie_secaead_aead_decrypt(key, nonce, ciphertext, tag, aad = NULL)
 }
 \arguments{
-\item{key}{See Usage.}
-\item{nonce}{See Usage.}
-\item{ciphertext}{See Usage.}
-\item{tag}{See Usage.}
-\item{aad}{Defaults to \code{NULL}.}
+\item{key}{Passed to \code{morie_secaead_poly1305_key_gen}.}
+\item{nonce}{Passed to \code{morie_secaead_poly1305_key_gen}.}
+\item{ciphertext}{Passed to \code{.secaead_mac_data}.}
+\item{tag}{Passed to \code{.secaead_constant_time_equal}.}
+\item{aad}{Passed to \code{.secaead_mac_data}.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{morie_secrtt_open_record}, \code{morie_secrtt_unwrap_dek}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{valid}, \code{plaintext}, \code{expected_tag}.

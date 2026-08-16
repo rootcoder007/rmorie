@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{tree}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{d}{See Usage.}
+\item{max_depth}{A count; the body uses it as \code{seq_len(...)}.}
+\item{d}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{
 morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at that depth, so the caller indexes by depth directly.

@@ -8,11 +8,11 @@
 .morie_jo_ln(v, eps = 1e-05)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{eps}{Defaults to \code{1e-05}.}
+\item{v}{A vector; its length is taken.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock}, \code{morie_itrans}, \code{morie_tftnet} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

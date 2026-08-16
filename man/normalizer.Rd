@@ -8,9 +8,9 @@
 normalizer(protected, measure = "rND", step = 10)
 }
 \arguments{
-\item{protected}{See Usage.}
-\item{measure}{Defaults to \code{"rND"}.}
-\item{step}{Defaults to \code{10}.}
+\item{protected}{A vector; its length is taken.}
+\item{measure}{Passed to \code{.raw}. Defaults to \code{"rND"}.}
+\item{step}{Passed to \code{.raw}. Defaults to \code{10}.}
 }
 \description{
 entirely last maximises the deviation at every cut-off.

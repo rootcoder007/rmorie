@@ -8,10 +8,10 @@
 .dmlqs_directed_edges(adj)
 }
 \arguments{
-\item{adj}{See Usage.}
+\item{adj}{Passed to \code{.dmlqs_norm_adj}.}
 }
 \description{
-Part of the dmlqs_native implementation; see the file header for the source it follows.
+A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

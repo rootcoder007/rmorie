@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{name}{See Usage.}
-\item{m}{See Usage.}
+\item{m}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{IStft}, \code{Spectrogram}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

@@ -93,8 +93,8 @@ morie_phacf3_bin <- function(d, edges) {
 #' encoding, so the ordering is the ordering of the numbers and not of
 #' their spellings.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; indexed elementwise.
+#' @param b A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
 .phacf3_less <- function(a, b) {
@@ -148,7 +148,7 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 #' Only used to index the lookup table; the ORDERING of the bit space is
 #' done on the numbers themselves.
 #'
-#' @param k See Usage.
+#' @param k A vector; indexed elementwise.
 #' @return A character value.
 #' @export
 .phacf3_str <- function(k)
@@ -197,11 +197,12 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 
 #' .phacf3_dist
 #'
-#' Part of the phacf3_native implementation; see the file header for the
+#' A step of the phacf3_native implementation. Called by \code{morie_phacf3}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .phacf3_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))

@@ -8,11 +8,11 @@
 two_way_block(prompt_tokens, image_tokens)
 }
 \arguments{
-\item{prompt_tokens}{See Usage.}
-\item{image_tokens}{See Usage.}
+\item{prompt_tokens}{Passed to \code{.samdec_mat}.}
+\item{image_tokens}{Passed to \code{.samdec_mat}.}
 }
 \description{
-Part of the samdec_native implementation; see the file header for the source it follows.
+A step of the samdec_native implementation. Called by \code{decode_mask}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{prompt_tokens}, \code{image_tokens}, \code{prompt_to_image}, \code{image_to_prompt}, \code{note}.

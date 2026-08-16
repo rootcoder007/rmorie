@@ -8,9 +8,9 @@
 .groebn_ideal_member(f, F, order = "lex", basis = NULL)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{F}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
+\item{f}{Passed to \code{.groebn_normal_form}.}
+\item{F}{Passed to \code{.groebn_buchberger}.}
+\item{order}{Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.}
 \item{basis}{Defaults to \code{NULL}.}
 }
 \description{

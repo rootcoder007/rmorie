@@ -8,11 +8,11 @@
 morie_sccsno_relative_incidence(fit, level = 0.95)
 }
 \arguments{
-\item{fit}{See Usage.}
+\item{fit}{A list; the body reads \code{$log_ri}, \code{$se_log_ri} from it.}
 \item{level}{Defaults to \code{0.95}.}
 }
 \description{
-Part of the sccsno_native implementation; see the file header for the source it follows.
+A step of the sccsno_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{intervals}, \code{level}.

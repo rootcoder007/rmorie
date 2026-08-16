@@ -8,12 +8,12 @@
 .rkmeans_phi(t, penalty, c_val)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{penalty}{See Usage.}
-\item{c_val}{See Usage.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{penalty}{One of \code{"absolute"}, \code{"square"}.}
+\item{c_val}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rkmeans_native implementation; see the file header for the source it follows.
+A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

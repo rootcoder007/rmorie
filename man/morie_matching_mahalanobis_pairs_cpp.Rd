@@ -8,12 +8,12 @@
 morie_matching_mahalanobis_pairs_cpp(X_t, X_c, S_inv)
 }
 \arguments{
-\item{X_t}{See Usage.}
-\item{X_c}{See Usage.}
-\item{S_inv}{See Usage.}
+\item{X_t}{Passed to \code{.Call}.}
+\item{X_c}{Passed to \code{.Call}.}
+\item{S_inv}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

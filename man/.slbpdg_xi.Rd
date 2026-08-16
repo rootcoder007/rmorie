@@ -8,11 +8,11 @@
 .slbpdg_xi(kappa, k)
 }
 \arguments{
-\item{kappa}{See Usage.}
-\item{k}{See Usage.}
+\item{kappa}{Numeric; combined arithmetically in the body.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-repeated multiplication rather than kappa^(k-1): R\\\'s `^` on an integer exponent is repeated squaring and Python\\\'s `**` calls pow(), and the two part company in the last bit exactly where the comparison xi_k > u_i decides how many components to carry.
+repeated multiplication rather than kappa^(k-1): R\\'s `^` on an integer exponent is repeated squaring and Python\\'s `**` calls pow(), and the two part company in the last bit exactly where the comparison xi_k > u_i decides how many components to carry.
 }
 \value{
 A numeric value.

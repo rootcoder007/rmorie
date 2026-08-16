@@ -34,10 +34,11 @@
 
 #' .rouge_toks
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{.rouge_get_refs_complex}, \code{morie_rouge_l}, \code{morie_rouge_n} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A character value.
 #' @export
 .rouge_toks <- function(x) {
@@ -53,11 +54,12 @@
 
 #' .rouge_ngrams
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge_n}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param toks See Usage.
-#' @param n See Usage.
+#' @param toks A vector; its length is taken and its elements indexed.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
 .rouge_ngrams <- function(toks, n) {
@@ -69,10 +71,11 @@
 
 #' .rouge_counts
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge_n}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param keys See Usage.
+#' @param keys A vector; its length is taken.
 #' @return The value of \code{table}.
 #' @export
 .rouge_counts <- function(keys) {
@@ -84,13 +87,14 @@
 
 #' .rouge_prf
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge_l}, \code{morie_rouge_n}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param match See Usage.
-#' @param n_cand See Usage.
-#' @param n_ref See Usage.
-#' @param beta See Usage.
+#' @param n_cand Numeric; combined arithmetically in the body.
+#' @param n_ref Numeric; combined arithmetically in the body.
+#' @param beta Numeric; combined arithmetically in the body.
 #' @return A list with \code{precision}, \code{recall}, \code{f1}.
 #' @export
 .rouge_prf <- function(match, n_cand, n_ref, beta) {
@@ -107,10 +111,11 @@
 
 #' .rouge_get_refs_complex
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge_n}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reference See Usage.
+#' @param reference A vector; its length is taken and its elements indexed.
 #' @return The value of \code{list}.
 #' @export
 .rouge_get_refs_complex <- function(reference) {
@@ -144,10 +149,11 @@
 
 #' .rouge_get_refs_simple
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge_l}, \code{morie_rouge_w}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reference See Usage.
+#' @param reference A vector; its length is taken.
 #' @return The value of \code{list}.
 #' @export
 .rouge_get_refs_simple <- function(reference) {
@@ -165,11 +171,12 @@
 
 #' .rouge_lcs_length
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_lcs_length}, \code{morie_rouge_l}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
 .rouge_lcs_length <- function(a, b) {
@@ -194,12 +201,13 @@
 
 #' .rouge_wlcs
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge_w}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param alpha See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
+#' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
 .rouge_wlcs <- function(a, b, alpha) {
@@ -230,11 +238,12 @@
 
 #' morie_lcs_length
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{.rouge_lcs_length}.
+#' @param b Passed to \code{.rouge_lcs_length}.
 #' @return The value of \code{.rouge_lcs_length}.
 #' @export
 morie_lcs_length <- function(a, b) {
@@ -243,13 +252,14 @@ morie_lcs_length <- function(a, b) {
 
 #' morie_rouge_n
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param candidate See Usage.
-#' @param reference See Usage.
-#' @param n Defaults to \code{1}.
-#' @param beta Defaults to \code{1}.
+#' @param candidate Passed to \code{.rouge_toks}.
+#' @param reference Passed to \code{.rouge_get_refs_complex}.
+#' @param n Passed to \code{.rouge_ngrams}. Defaults to \code{1}.
+#' @param beta Passed to \code{.rouge_prf}. Defaults to \code{1}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 morie_rouge_n <- function(candidate, reference, n = 1, beta = 1.0) {
@@ -298,12 +308,13 @@ morie_rouge_n <- function(candidate, reference, n = 1, beta = 1.0) {
 
 #' morie_rouge_l
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param candidate See Usage.
-#' @param reference See Usage.
-#' @param beta Defaults to \code{1}.
+#' @param candidate Passed to \code{.rouge_toks}.
+#' @param reference Passed to \code{.rouge_get_refs_simple}.
+#' @param beta Passed to \code{.rouge_prf}. Defaults to \code{1}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 morie_rouge_l <- function(candidate, reference, beta = 1.0) {
@@ -334,13 +345,14 @@ morie_rouge_l <- function(candidate, reference, beta = 1.0) {
 
 #' morie_rouge_w
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. Called by \code{morie_rouge}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param candidate See Usage.
-#' @param reference See Usage.
-#' @param alpha Defaults to \code{1.2}.
-#' @param beta Defaults to \code{1}.
+#' @param candidate Passed to \code{.rouge_toks}.
+#' @param reference Passed to \code{.rouge_get_refs_simple}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1.2}.
+#' @param beta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
@@ -387,15 +399,16 @@ morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
 
 #' morie_rouge
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param candidate See Usage.
-#' @param reference See Usage.
+#' @param candidate Passed to \code{morie_rouge_l}.
+#' @param reference Passed to \code{morie_rouge_l}.
 #' @param variant Defaults to \code{"L"}.
-#' @param n Defaults to \code{1}.
-#' @param alpha Defaults to \code{1.2}.
-#' @param beta Defaults to \code{1}.
+#' @param n Passed to \code{morie_rouge_n}. Defaults to \code{1}.
+#' @param alpha Passed to \code{morie_rouge_w}. Defaults to \code{1.2}.
+#' @param beta Passed to \code{morie_rouge_l}. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
 morie_rouge <- function(candidate, reference, variant = "L",
@@ -415,7 +428,8 @@ morie_rouge <- function(candidate, reference, variant = "L",
 
 #' morie_rouge_cheatsheet
 #'
-#' Part of the rouge_native implementation; see the file header for the
+#' A step of the rouge_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

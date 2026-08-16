@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the rangayyan_ch3 implementation; see the file header for the source it follows.
+A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY}, \code{DeltaDecomp} and 10 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

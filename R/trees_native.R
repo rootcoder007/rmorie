@@ -37,11 +37,12 @@
 # Soft-thresholding operator for the optional L1 term on leaf weights.
 #' Soft-thresholding operator for the optional L1 term on leaf weights
 #'
-#' Part of the trees_native implementation; see the file header for the
+#' A step of the trees_native implementation. Called by \code{.tree_leaf_weight}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param alpha See Usage.
+#' @param g Numeric; combined arithmetically in the body.
+#' @param alpha Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tree_soft_threshold <- function(g, alpha) {

@@ -11,7 +11,7 @@
 \item{v}{See Usage.}
 }
 \description{
-Part of the painn_native implementation; see the file header for the source it follows.
+A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{scalar_vector_message}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

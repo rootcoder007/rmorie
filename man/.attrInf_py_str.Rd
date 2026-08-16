@@ -3,12 +3,12 @@
 % the formals.
 \name{.attrInf_py_str}
 \alias{.attrInf_py_str}
-\title{Match Python\\\'s str() for the tie-breaking sort. Python\\\'s str(1.0)}
+\title{Match Python\\'s str() for the tie-breaking sort. Python\\'s str(1.0)}
 \usage{
 .attrInf_py_str(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{
 is "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None"; reproducing those quirks keeps the sort identical to the Python arm.

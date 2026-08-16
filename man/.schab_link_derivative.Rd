@@ -8,11 +8,11 @@
 .schab_link_derivative(mu, kind)
 }
 \arguments{
-\item{mu}{See Usage.}
+\item{mu}{A vector; its length is taken.}
 \item{kind}{See Usage.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{.schab_mu_eta}, \code{.schab_predict_glm}, \code{.schab_pseudo_data} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

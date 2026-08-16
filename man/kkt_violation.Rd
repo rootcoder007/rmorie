@@ -10,11 +10,11 @@ kkt_violation(alpha, y, grad, C)
 \arguments{
 \item{alpha}{See Usage.}
 \item{y}{See Usage.}
-\item{grad}{See Usage.}
-\item{C}{See Usage.}
+\item{grad}{A vector; indexed elementwise.}
+\item{C}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the svmopt_native implementation; see the file header for the source it follows.
+A step of the svmopt_native implementation. Called by \code{recover_bias}, \code{smo}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{gap}, \code{i}, \code{j}, \code{n_up}, \code{n_low}.

@@ -8,8 +8,8 @@
 .morie_bx_jacobi(S, sweeps = 60L, tol = 1e-12)
 }
 \arguments{
-\item{S}{See Usage.}
-\item{sweeps}{Defaults to \code{60L}.}
+\item{S}{A matrix; passed to \code{nrow}.}
+\item{sweeps}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{

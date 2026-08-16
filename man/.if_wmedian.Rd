@@ -8,8 +8,8 @@
 .if_wmedian(v, w)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{w}{See Usage.}
+\item{v}{A vector; indexed elementwise.}
+\item{w}{A vector; indexed elementwise.}
 }
 \description{
 reaches half the total.

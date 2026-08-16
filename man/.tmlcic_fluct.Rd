@@ -8,9 +8,9 @@
 .tmlcic_fluct(y, off, H, rows = NULL, obs_weights = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{off}{See Usage.}
-\item{H}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{off}{A vector; indexed elementwise.}
+\item{H}{A vector; indexed elementwise.}
 \item{rows}{Defaults to \code{NULL}.}
 \item{obs_weights}{Defaults to \code{NULL}.}
 }

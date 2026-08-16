@@ -8,14 +8,14 @@
 .morie_svdd_solve_dual(K, C, n, tol, max_iter)
 }
 \arguments{
-\item{K}{See Usage.}
-\item{C}{See Usage.}
-\item{n}{See Usage.}
+\item{K}{A matrix; indexed by row and column.}
+\item{C}{Numeric; combined arithmetically in the body.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{tol}{See Usage.}
 \item{max_iter}{See Usage.}
 }
 \description{
-Part of the svdd_native implementation; see the file header for the source it follows.
+A step of the svdd_native implementation. Called by \code{morie_svdd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{alpha}, as built in the body.

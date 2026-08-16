@@ -8,13 +8,13 @@
 viterbi_decode(emissions, labels, transitions = NULL, transition_scores = NULL)
 }
 \arguments{
-\item{emissions}{See Usage.}
-\item{labels}{See Usage.}
+\item{emissions}{A matrix; passed to \code{as.matrix}.}
+\item{labels}{A vector; its length is taken and its elements indexed.}
 \item{transitions}{Defaults to \code{NULL}.}
 \item{transition_scores}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the benRea_native implementation; see the file header for the source it follows.
+A step of the benRea_native implementation. Called by \code{ner_decode}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{path}, \code{score}.

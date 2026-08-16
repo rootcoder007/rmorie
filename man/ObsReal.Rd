@@ -12,7 +12,7 @@ ObsReal(x, eta)
 \item{eta}{See Usage.}
 }
 \description{
-averaging assumes.  A single x is read as the same signal repeated, which is the book\\'s "identical and aligned" case.
+averaging assumes.  A single x is read as the same signal repeated, which is the book\'s "identical and aligned" case.
 }
 \value{
 A list with \code{y}, \code{m}, \code{n}, \code{identical_repetitions}, \code{method}.

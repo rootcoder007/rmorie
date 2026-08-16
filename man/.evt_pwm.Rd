@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{r}{See Usage.}
+\item{r}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 Hosking-Wallis-Wood 1985 Eq. 4) -- not the plotting-position approximation, whose small-sample bias is exactly what these methods exist to avoid.

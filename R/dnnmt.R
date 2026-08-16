@@ -233,11 +233,12 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 
 #' .dnnact
 #'
-#' Part of the dnnmt implementation; see the file header for the source
+#' A step of the dnnmt implementation. Called by \code{Dnnmt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param name See Usage.
-#' @param z See Usage.
+#' @param z Passed to \code{.s03sigmoid}.
 #' @return Nothing; this branch always raises.
 #' @export
 .dnnact <- function(name, z) {
@@ -251,12 +252,13 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 # Derivative of the activation at z, given its value g.
 #' Derivative of the activation at z, given its value g
 #'
-#' Part of the dnnmt implementation; see the file header for the source
+#' A step of the dnnmt implementation. Called by \code{Dnnmt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param name See Usage.
 #' @param z See Usage.
-#' @param g See Usage.
+#' @param g Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
 .dnndact <- function(name, z, g) {
@@ -270,11 +272,12 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 # The p.493 median/quantile recipe.
 #' The p.493 median/quantile recipe
 #'
-#' Part of the dnnmt implementation; see the file header for the source
+#' A step of the dnnmt implementation. Called by \code{Dnnmt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param Yc See Usage.
-#' @param nt See Usage.
+#' @param Yc A matrix; indexed by row and column.
+#' @param nt A count; the body uses it as \code{seq_len(...)}.
 #' @param n See Usage.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -302,7 +305,7 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #'
 #' intermediate product exceeds 2^53 and R doubles stay exact.
 #'
-#' @param s See Usage.
+#' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .dnnlcg <- function(s) {

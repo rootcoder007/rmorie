@@ -8,7 +8,7 @@
 morie_timesfm_cheatsheet()
 }
 \description{
-Part of the timesfm_native implementation; see the file header for the source it follows.
+A step of the timesfm_native implementation. Called by \code{.timesf_cheatsheet}. See the file header for the source the module follows.
 }
 \value{
 A character value.

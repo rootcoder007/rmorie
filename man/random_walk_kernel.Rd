@@ -8,11 +8,11 @@
 random_walk_kernel(scale = 1, n_moves = 1L)
 }
 \arguments{
-\item{scale}{Defaults to \code{1}.}
-\item{n_moves}{Defaults to \code{1L}.}
+\item{scale}{Passed to \code{.smcsam_rwk}. Defaults to \code{1}.}
+\item{n_moves}{Passed to \code{.smcsam_rwk}. Defaults to \code{1L}.}
 }
 \description{
-Part of the smcsam_native implementation; see the file header for the source it follows.
+A step of the smcsam_native implementation. Called by \code{smcsam}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.smcsam_rwk}.

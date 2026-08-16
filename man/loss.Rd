@@ -10,10 +10,10 @@ loss(y, y_hat, kind = "square")
 \arguments{
 \item{y}{See Usage.}
 \item{y_hat}{See Usage.}
-\item{kind}{Defaults to \code{"square"}.}
+\item{kind}{One of \code{"hinge"}, \code{"log"}, \code{"square"}. Defaults to \code{"square"}.}
 }
 \description{
-Part of the cdaeRC_native implementation; see the file header for the source it follows.
+A step of the cdaeRC_native implementation. Called by \code{.plcbsc_synthetic_control}, \code{.tlroad_score_spans_eic}, \code{fit_cdae} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,12 +8,12 @@
 .limmav_trigamma_inverse(x, tol = 1e-08, max_iter = 60)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{sqrt}.}
 \item{tol}{Defaults to \code{1e-08}.}
-\item{max_iter}{Defaults to \code{60}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{.limmav_ebayes}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{y}, as built in the body.

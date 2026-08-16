@@ -8,10 +8,10 @@
 .morie_gr_log_softmax_rows(Z)
 }
 \arguments{
-\item{Z}{See Usage.}
+\item{Z}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{morie_geron_bert_nsp_loss}, \code{morie_geron_blip_itm_itc}, \code{morie_geron_classification_localization} and 9 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

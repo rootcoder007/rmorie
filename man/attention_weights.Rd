@@ -8,14 +8,14 @@
 attention_weights(Q, K, n_heads, pad_mask = NULL, causal = FALSE)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{K}{See Usage.}
-\item{n_heads}{See Usage.}
-\item{pad_mask}{Defaults to \code{NULL}.}
-\item{causal}{Defaults to \code{FALSE}.}
+\item{Q}{A matrix; indexed by row and column.}
+\item{K}{A matrix; indexed by row and column.}
+\item{n_heads}{A count; the body uses it as \code{vector(...)}.}
+\item{pad_mask}{Optional; may be \code{NULL}. A flag; the body branches on it.}
+\item{causal}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the berte_native implementation; see the file header for the source it follows.
+A step of the berte_native implementation. Called by \code{multi_head_attention}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{heads}, as built in the body.

@@ -8,8 +8,8 @@
 .s03allocCheck(N_h, S_h, n)
 }
 \arguments{
-\item{N_h}{See Usage.}
-\item{S_h}{See Usage.}
+\item{N_h}{Passed to \code{.s03vec}.}
+\item{S_h}{Optional; may be \code{NULL}. Passed to \code{.s03vec}.}
 \item{n}{See Usage.}
 }
 \description{

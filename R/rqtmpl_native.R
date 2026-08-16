@@ -40,23 +40,25 @@ LOG10E <- log10(exp(1))
 #'
 #' the arm stays base-R only, as the package requires.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rqtmpl_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .rqtmpl_erfc
 #'
-#' Part of the rqtmpl_native implementation; see the file header for the
+#' A step of the rqtmpl_native implementation. Called by \code{morie_threshold}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rqtmpl_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 #' morie_haldane
 #'
-#' Part of the rqtmpl_native implementation; see the file header for the
+#' A step of the rqtmpl_native implementation. Called by \code{morie_scan_interval}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param distance See Usage.
@@ -118,8 +120,8 @@ morie_genotype_probabilities <- function(left, right, r_left, r_right) {
 #'
 #' Internal helper mirroring _normal_ll.
 #'
-#' @param resid See Usage.
-#' @param sigma2 See Usage.
+#' @param resid A vector; its length is taken.
+#' @param sigma2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .normal_ll <- function(resid, sigma2) {

@@ -8,7 +8,7 @@
 word_patch_alignment(text_boxes, masked_patches, width, height, patch_grid = 14, masked_text = list())
 }
 \arguments{
-\item{text_boxes}{See Usage.}
+\item{text_boxes}{A vector; its length is taken and its elements indexed.}
 \item{masked_patches}{See Usage.}
 \item{width}{See Usage.}
 \item{height}{See Usage.}
@@ -16,7 +16,7 @@ word_patch_alignment(text_boxes, masked_patches, width, height, patch_grid = 14,
 \item{masked_text}{Defaults to \code{list()}.}
 }
 \description{
-Part of the ocrwit_native implementation; see the file header for the source it follows.
+A step of the ocrwit_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples}, \code{positive_rate}, \code{method}, \code{note}.

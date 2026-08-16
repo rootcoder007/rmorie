@@ -8,13 +8,13 @@
 .anomaly_score(X, layers, threshold_quantile = 0.95, reference = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{layers}{See Usage.}
+\item{X}{Passed to \code{.flow_an_to_mat}.}
+\item{layers}{Passed to \code{.log_prob}.}
 \item{threshold_quantile}{Defaults to \code{0.95}.}
-\item{reference}{Defaults to \code{NULL}.}
+\item{reference}{Optional; may be \code{NULL}. Passed to \code{.flow_an_to_mat}.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. Called by \code{morie_flow_an}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag}, \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced}, \code{log_likelihood}, \code{method}.

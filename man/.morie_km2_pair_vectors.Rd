@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{A}{See Usage.}
-\item{E}{See Usage.}
+\item{E}{A vector; indexed elementwise.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_debias_regularizer}, \code{morie_kamath_ch6_gender_direction}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

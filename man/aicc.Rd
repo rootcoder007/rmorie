@@ -10,10 +10,10 @@ aicc(loglik, n_par, n)
 \arguments{
 \item{loglik}{See Usage.}
 \item{n_par}{See Usage.}
-\item{n}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sarimax_native implementation; see the file header for the source it follows.
+A step of the sarimax_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

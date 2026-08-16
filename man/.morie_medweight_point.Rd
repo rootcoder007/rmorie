@@ -8,10 +8,10 @@
 .morie_medweight_point(y, d, pm, px)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{d}{See Usage.}
-\item{pm}{See Usage.}
-\item{px}{See Usage.}
+\item{y}{Passed to \code{.morie_wmean}.}
+\item{d}{Numeric; combined arithmetically in the body.}
+\item{pm}{Numeric; combined arithmetically in the body.}
+\item{px}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Section 3. Reading the two subtracted terms of theta(1) and theta(0) as potential-outcome means gives, in order, E[Y(1,M(1))], E[Y(0,M(1))], E[Y(1,M(0))], E[Y(0,M(0))].

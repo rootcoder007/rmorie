@@ -9,7 +9,8 @@
 # Build a rich-result-shaped surface payload.
 #' Build a rich-result-shaped surface payload
 #'
-#' Part of the cpd_analyze implementation; see the file header for the
+#' A step of the cpd_analyze implementation. Called by \code{morie_cpd_all_analyses}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param title See Usage.
@@ -35,7 +36,8 @@
 # Load a bundled CPD fixture (offline). `which` is "crime" or "arrests".
 #' Load a bundled CPD fixture (offline). `which` is "crime" or "arrests"
 #'
-#' Part of the cpd_analyze implementation; see the file header for the
+#' A step of the cpd_analyze implementation. Called by \code{morie_cpd_all_analyses}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param which Defaults to \code{c("crime", "arrests")}.

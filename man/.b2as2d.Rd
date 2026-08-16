@@ -11,7 +11,7 @@
 \item{p}{See Usage.}
 }
 \description{
-Part of the b2info implementation; see the file header for the source it follows.
+A step of the b2info implementation. Called by \code{Cndent}, \code{Jntent}, \code{Klchain} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

@@ -8,7 +8,7 @@
 .morie_descendants(A, start)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
 \item{start}{See Usage.}
 }
 \description{

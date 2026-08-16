@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{grad}{See Usage.}
-\item{q}{See Usage.}
-\item{p}{See Usage.}
-\item{eps}{See Usage.}
+\item{q}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{eps}{Numeric; combined arithmetically in the body.}
 \item{steps}{See Usage.}
 }
 \description{
-Part of the baysmplr_native implementation; see the file header for the source it follows.
+A step of the baysmplr_native implementation. Called by \code{.baysmplr_build_tree}, \code{morie_baysmplr_hmc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{q}, \code{p}, \code{g}.

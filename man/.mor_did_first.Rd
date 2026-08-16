@@ -8,14 +8,14 @@
 .mor_did_first(D, unit, time, units = NULL, periods = NULL)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{unit}{See Usage.}
-\item{time}{See Usage.}
+\item{D}{Passed to \code{.mor_did_panel}.}
+\item{unit}{Passed to \code{.mor_did_panel}.}
+\item{time}{Passed to \code{.mor_did_panel}.}
 \item{units}{Defaults to \code{NULL}.}
 \item{periods}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the cssant_native implementation; see the file header for the source it follows.
+A step of the cssant_native implementation. Called by \code{morie_boryis}, \code{morie_cssant}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{g}, \code{Dm}, \code{units}, \code{periods}.

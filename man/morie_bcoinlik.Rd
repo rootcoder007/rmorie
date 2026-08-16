@@ -7,7 +7,7 @@
 morie_bcoinlik(pa, fa, fb)
 }
 \arguments{
-\item{pa}{probability of outcome a, in \link{0, 1}}
+\item{pa}{probability of outcome a, in [0, 1]}
 
 \item{fa, fb}{counts of outcomes a and b}
 }

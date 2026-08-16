@@ -8,7 +8,7 @@
 .w501_cost_tables(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
 Part of the w501_changepoint_native implementation; see the file header for the source it follows.

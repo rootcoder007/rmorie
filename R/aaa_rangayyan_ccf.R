@@ -5,11 +5,12 @@
 # ---------------------------------------------------------------- bsaadapt
 #' Bsaadapt
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. Called by \code{.morie_rg_H}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seg See Usage.
-#' @param p See Usage.
+#' @param seg A vector; its length is taken and its elements indexed.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .morie_rg_tse <- function(seg, p) {
@@ -43,11 +44,12 @@
 
 #' .morie_rg_H
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. Called by \code{Glr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seg See Usage.
-#' @param p See Usage.
+#' @param seg A vector; its length is taken.
+#' @param p Passed to \code{.morie_rg_tse}.
 #' @return A numeric value.
 #' @export
 .morie_rg_H <- function(seg, p) {
@@ -108,7 +110,8 @@ Glr <- function(x, m, n = NULL, order = 4) {
 
 #' EegAdapt
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -200,14 +203,15 @@ EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
 # ----------------------------------------------------------------- bsacorr
 #' Bsacorr
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. Called by \code{CorrConv}, \code{XCorrProc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
 #' @param y See Usage.
 #' @param maxlag Defaults to \code{NULL}.
-#' @param normalize Defaults to \code{FALSE}.
-#' @param biased Defaults to \code{TRUE}.
+#' @param normalize A flag; the body branches on it. Defaults to \code{FALSE}.
+#' @param biased A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{n}, \code{biased}, \code{normalized}, \code{positive_lag_means_y_trails_x}, \code{biased_keeps_nonnegative_definiteness}, \code{method}.
 #' @export
 XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
@@ -252,7 +256,7 @@ XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
 #'
 #' @param x See Usage.
 #' @param y See Usage.
-#' @param delays Defaults to \code{NULL}.
+#' @param delays Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{normalized}, \code{is_the_matched_filter_output}, \code{method}.
 #' @export
 XCorrDisc <- function(x, y, delays = NULL) {
@@ -346,7 +350,7 @@ XCorrCont <- function(x, y, t, delays) {
 #' @param x See Usage.
 #' @param y See Usage.
 #' @param lags Defaults to \code{NULL}.
-#' @param remove_mean Defaults to \code{TRUE}.
+#' @param remove_mean A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{ccf}, \code{lags}, \code{means}, \code{mean_product}, \code{mean_removed}, \code{is_cross_covariance_when_mean_removed}, \code{expectation_estimated_by_time_average}, \code{requires_joint_stationarity_and_ergodicity}, \code{method}.
 #' @export
 XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
@@ -374,7 +378,8 @@ XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
 
 #' Correlation IS convolution with one sequence reversed
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -456,7 +461,8 @@ NccfTpl <- function(x, template) {
 
 #' Eq (4.25).  Delegates to DotProd -- one copy of the arithmetic
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -579,7 +585,8 @@ AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
 # ------------------------------------------------------------------ bsasig
 #' Bsasig
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n Defaults to \code{NULL}.
@@ -666,7 +673,8 @@ CompSig <- function(g, shifts, scales = NULL, n = NULL) {
 # ----------------------------------------------------------------- bsastat
 #' Bsastat
 #'
-#' Part of the rangayyan_ccf implementation; see the file header for the
+#' A step of the rangayyan_ccf implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.

@@ -9,12 +9,12 @@ copying_model(study_hap, reference_haps, rho = 0.001, theta = 0.01)
 }
 \arguments{
 \item{study_hap}{See Usage.}
-\item{reference_haps}{See Usage.}
+\item{reference_haps}{Passed to \code{.impfun_as_int_list}.}
 \item{rho}{Defaults to \code{0.001}.}
 \item{theta}{Defaults to \code{0.01}.}
 }
 \description{
-Part of the impfun_native implementation; see the file header for the source it follows.
+A step of the impfun_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{posterior}, \code{n_templates}, \code{n_sites}, \code{log_likelihood}.
@@ -31,7 +31,7 @@ feasible; higher accuracy than other methods when HapMap provides the
 sole reference panel, with the panel size constraining the
 improvements possible; greatly enhanced accuracy from expanding the
 panel to thousands of chromosomes, outperforming other methods at both
-rare and common SNPs with error rates 15-20% lower than the closest
+rare and common SNPs with error rates 15-20\% lower than the closest
 competitor; and the practical advantages of this approach to
 integrating information across panels genotyped on different sets of
 SNPs.

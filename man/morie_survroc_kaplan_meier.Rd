@@ -8,12 +8,12 @@
 morie_survroc_kaplan_meier(times, events, at = NULL)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
+\item{times}{Passed to \code{.survroc_clean}.}
+\item{events}{Passed to \code{.survroc_clean}.}
 \item{at}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. Called by \code{.survroc_km_pair}, \code{morie_survroc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{val}, as built in the body.

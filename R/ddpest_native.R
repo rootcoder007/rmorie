@@ -42,9 +42,9 @@
 #' slowdp.stick_breaking is not held here; the inverse-CDF form is the
 #' standard implementation and matches the GHC stream one-for-one.
 #'
-#' @param alpha See Usage.
-#' @param K See Usage.
-#' @param e See Usage.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return A list with \code{weights}.
 #' @export
 .morie_ddpest_stick_breaking <- function(alpha, K, e) {

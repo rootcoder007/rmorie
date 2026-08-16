@@ -8,9 +8,9 @@
 .morie_vgm_wls_fit(coords, values, model = "exponential")
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{values}{See Usage.}
-\item{model}{Defaults to \code{"exponential"}.}
+\item{coords}{Passed to \code{morie_spatial_variogram}.}
+\item{values}{Passed to \code{morie_spatial_variogram}.}
+\item{model}{Passed to \code{.morie_vgm_gamma}. Defaults to \code{"exponential"}.}
 }
 \description{
 (Cressie 1985 weights n_h / h^2) -- the gstat::fit.variogram analogue. Milliseconds at any n; the full Gaussian-likelihood MLE stays available via morie_spatial_variogram_fit().

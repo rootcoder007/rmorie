@@ -8,7 +8,7 @@
 .clusmd_cluster_summary(clusters)
 }
 \arguments{
-\item{clusters}{See Usage.}
+\item{clusters}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 Cluster summary: sizes, singleton count, and the assignment. --------------------------------------------------------------------------- Mirrors Python cluster_summary(). `assignment[m]` = k means compound m is in cluster k (0-indexed).
@@ -19,7 +19,7 @@ A list with \code{n_clusters}, \code{n_compounds}, \code{sizes}, \code{n_singlet
 \references{
 ----------
 Butina, D. (1999) "Unsupervised data base clustering based on
-Daylight\\'s fingerprint and Tanimoto similarity: a fast and automated
+Daylight\'s fingerprint and Tanimoto similarity: a fast and automated
 way to cluster small and large data sets", *Journal of Chemical
 Information and Computer Sciences* 39(4), 747-750,
 doi:10.1021/ci9803381. The neighbour-count ordering, the exclusion

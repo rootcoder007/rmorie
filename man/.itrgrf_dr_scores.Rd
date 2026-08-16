@@ -8,15 +8,15 @@
 .itrgrf_dr_scores(y, W, mu1, mu0, e, d)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
-\item{mu1}{See Usage.}
-\item{mu0}{See Usage.}
-\item{e}{See Usage.}
-\item{d}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{W}{A vector; indexed elementwise.}
+\item{mu1}{A vector; indexed elementwise.}
+\item{mu0}{A vector; indexed elementwise.}
+\item{e}{A vector; indexed elementwise.}
+\item{d}{A vector; indexed elementwise.}
 }
 \description{
-Part of the itrgrf_native implementation; see the file header for the source it follows.
+A step of the itrgrf_native implementation. Called by \code{.itrgrf_rule_value}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

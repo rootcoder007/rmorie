@@ -8,11 +8,11 @@
 .gwasem_solve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{A}{A matrix; passed to \code{solve}.}
+\item{b}{A matrix; passed to \code{solve}.}
 }
 \description{
-Part of the gwasem_native implementation; see the file header for the source it follows.
+A step of the gwasem_native implementation. Called by \code{.gwasem_loglik}, \code{.gwasem_reml_delta}, \code{morie_gwasem} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

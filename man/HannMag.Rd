@@ -11,7 +11,7 @@ HannMag(omega)
 \item{omega}{See Usage.}
 }
 \description{
-between.  The book\\'s absolute value is redundant -- 1 + cos is never negative -- and is kept only because the book writes it.
+between.  The book\'s absolute value is redundant -- 1 + cos is never negative -- and is kept only because the book writes it.
 }
 \value{
 A list with \code{magnitude}, \code{omega}, \code{dc_gain}, \code{nyquist_gain}, \code{lowpass}, \code{absolute_value_is_redundant}, \code{method}.

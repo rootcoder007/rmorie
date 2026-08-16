@@ -19,6 +19,6 @@ the numeric value.
 }
 \keyword{internal}
 \examples{
-z <- .karpv_fnode("%", list(.karpv_tnode(1), .karpv_tnode(0)))
+z <- .karpv_fnode("\%", list(.karpv_tnode(1), .karpv_tnode(0)))
 morie_karpV_evaluate(z, list())
 }

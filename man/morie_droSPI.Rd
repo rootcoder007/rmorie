@@ -10,7 +10,7 @@ morie_droSPI(precip, scale = 3L, by_month = TRUE)
 \arguments{
 \item{precip}{See Usage.}
 \item{scale}{Defaults to \code{3L}.}
-\item{by_month}{Defaults to \code{TRUE}.}
+\item{by_month}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 Part of the droSPI_mixedcase_native implementation; see the file header for the source it follows.

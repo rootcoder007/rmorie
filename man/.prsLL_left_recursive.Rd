@@ -8,10 +8,10 @@
 .prsLL_left_recursive(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$rules} from it.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

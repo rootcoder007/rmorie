@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
-\item{iters}{Defaults to \code{80L}.}
+\item{lo}{Numeric; combined arithmetically in the body.}
+\item{hi}{Numeric; combined arithmetically in the body.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{80L}.}
 }
 \description{
-Part of the k03volsv implementation; see the file header for the source it follows.
+A step of the k03volsv implementation. Called by \code{Volsv}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

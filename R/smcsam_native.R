@@ -20,10 +20,11 @@
 
 #' ess
 #'
-#' Part of the smcsam_native implementation; see the file header for the
+#' A step of the smcsam_native implementation. Called by \code{Drvst}, \code{morie_att_weights}, \code{smcsam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
+#' @param weights Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 ess <- function(weights) {
@@ -44,7 +45,7 @@ ess <- function(weights) {
 #' leftmost interval, so we keep our own to mirror the Python arm\'s
 #' hand-written loop.
 #'
-#' @param cum See Usage.
+#' @param cum A vector; its length is taken and its elements indexed.
 #' @param u See Usage.
 #' @return The value of \code{lo}, as built in the body.
 #' @export
@@ -59,12 +60,13 @@ ess <- function(weights) {
 
 #' resample
 #'
-#' Part of the smcsam_native implementation; see the file header for the
+#' A step of the smcsam_native implementation. Called by \code{morie_btdbl}, \code{morie_btiseq}, \code{smcsam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
-#' @param rng See Usage.
-#' @param scheme Defaults to \code{"systematic"}.
+#' @param weights Numeric; passed to \code{sum}.
+#' @param rng Passed to \code{.ghc_unif}.
+#' @param scheme One of \code{"multinomial"}, \code{"residual"}, \code{"stratified"}, \code{"systematic"}. Defaults to \code{"systematic"}.
 #' @return Nothing; this branch always raises.
 #' @export
 resample <- function(weights, rng, scheme = "systematic") {
@@ -122,11 +124,12 @@ resample <- function(weights, rng, scheme = "systematic") {
 
 #' temperature_ladder
 #'
-#' Part of the smcsam_native implementation; see the file header for the
+#' A step of the smcsam_native implementation. Called by \code{smcsam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_steps See Usage.
-#' @param kind Defaults to \code{"geometric"}.
+#' @param kind One of \code{"geometric"}, \code{"power"}, \code{"prior"}. Defaults to \code{"geometric"}.
 #' @param power Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -180,11 +183,12 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 
 #' random_walk_kernel
 #'
-#' Part of the smcsam_native implementation; see the file header for the
+#' A step of the smcsam_native implementation. Called by \code{smcsam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scale Defaults to \code{1}.
-#' @param n_moves Defaults to \code{1L}.
+#' @param scale Passed to \code{.smcsam_rwk}. Defaults to \code{1}.
+#' @param n_moves Passed to \code{.smcsam_rwk}. Defaults to \code{1L}.
 #' @return The value of \code{.smcsam_rwk}.
 #' @export
 random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
@@ -193,7 +197,8 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 
 #' smcsam
 #'
-#' Part of the smcsam_native implementation; see the file header for the
+#' A step of the smcsam_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param log_gamma See Usage.
@@ -205,7 +210,7 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #' @param ess_threshold Defaults to \code{0.5}.
 #' @param scheme Defaults to \code{"systematic"}.
 #' @param seed Defaults to \code{0L}.
-#' @param weight_rule Defaults to \code{"mcmc"}.
+#' @param weight_rule One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.
 #' @param log_forward Defaults to \code{NULL}.
 #' @param log_backward Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{mean}, \code{variance}, \code{particles}, \code{weights}, \code{log_norm_const}, \code{ess}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule}, \code{method}.
@@ -316,7 +321,8 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
 
 #' .smcsam_cheatsheet
 #'
-#' Part of the smcsam_native implementation; see the file header for the
+#' A step of the smcsam_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

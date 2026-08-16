@@ -21,13 +21,14 @@
 
 #' .mor_bnd_one_mean
 #'
-#' Part of the bndest_native implementation; see the file header for the
+#' A step of the bndest_native implementation. Called by \code{morie_bndest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yv See Usage.
-#' @param seen See Usage.
-#' @param k0 See Usage.
-#' @param k1 See Usage.
+#' @param yv A vector; indexed elementwise.
+#' @param seen Numeric; passed to \code{mean}.
+#' @param k0 Numeric; combined arithmetically in the body.
+#' @param k1 Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .mor_bnd_one_mean <- function(yv, seen, k0, k1) {

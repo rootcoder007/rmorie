@@ -8,8 +8,8 @@
 poltrx_gamma(e, shape)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{shape}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
+\item{shape}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Strict: the SAME uniform draws in the SAME order as the Python implementation, so both arms agree on every variate.

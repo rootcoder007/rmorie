@@ -12,11 +12,12 @@
 
 #' metapath_neighbours
 #'
-#' Part of the hetgnn_native implementation; see the file header for the
+#' A step of the hetgnn_native implementation. Called by \code{han_forward}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param edges See Usage.
-#' @param types See Usage.
+#' @param edges A vector; indexed elementwise.
+#' @param types A vector; indexed elementwise.
 #' @param metapath See Usage.
 #' @return A list with \code{neighbours}, \code{metapath}, \code{note}.
 #' @export
@@ -52,15 +53,16 @@ metapath_neighbours <- function(edges, types, metapath) {
 
 #' node_attention
 #'
-#' Part of the hetgnn_native implementation; see the file header for the
+#' A step of the hetgnn_native implementation. Called by \code{han_forward}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param h_i See Usage.
-#' @param neighbours See Usage.
-#' @param H See Usage.
-#' @param a_vec See Usage.
-#' @param W See Usage.
-#' @param slope Defaults to \code{0.2}.
+#' @param neighbours A vector; its length is taken and its elements indexed.
+#' @param H A vector; indexed elementwise.
+#' @param a_vec Numeric; combined arithmetically in the body.
+#' @param W A matrix; passed to \code{\%*\%}.
+#' @param slope Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @return A list with \code{embedding}, \code{alpha}, \code{neighbours}.
 #' @export
 node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
@@ -95,13 +97,14 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
 
 #' semantic_attention
 #'
-#' Part of the hetgnn_native implementation; see the file header for the
+#' A step of the hetgnn_native implementation. Called by \code{han_forward}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z_per_metapath See Usage.
-#' @param W See Usage.
+#' @param Z_per_metapath A vector; indexed elementwise.
+#' @param W A matrix; passed to \code{\%*\%}.
 #' @param b See Usage.
-#' @param q See Usage.
+#' @param q Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{scores}, \code{metapaths}, \code{note}.
 #' @export
 semantic_attention <- function(Z_per_metapath, W, b, q) {
@@ -133,15 +136,16 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 
 #' han_forward
 #'
-#' Part of the hetgnn_native implementation; see the file header for the
+#' A step of the hetgnn_native implementation. Called by \code{morie_hetgnn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
+#' @param H A matrix; indexed by row and column.
 #' @param edges See Usage.
 #' @param types See Usage.
-#' @param metapaths See Usage.
+#' @param metapaths A vector; indexed elementwise.
 #' @param a_vec See Usage.
-#' @param W_node See Usage.
+#' @param W_node A matrix; passed to \code{nrow}.
 #' @param W_sem See Usage.
 #' @param b_sem See Usage.
 #' @param q_sem See Usage.
@@ -196,7 +200,8 @@ heterogeneous_gnn <- han_forward
 
 #' morie_hetgnn
 #'
-#' Part of the hetgnn_native implementation; see the file header for the
+#' A step of the hetgnn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param H See Usage.
@@ -219,7 +224,8 @@ morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
 
 #' .hetgnn_cheatsheet
 #'
-#' Part of the hetgnn_native implementation; see the file header for the
+#' A step of the hetgnn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

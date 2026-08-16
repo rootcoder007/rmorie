@@ -26,7 +26,8 @@
 
 #' .t4_lccrit
 #'
-#' Part of the nybhsn implementation; see the file header for the source
+#' A step of the nybhsn implementation. Called by \code{Lctest}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param df See Usage.

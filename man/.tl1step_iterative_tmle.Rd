@@ -8,9 +8,9 @@
 .tl1step_iterative_tmle(Q, H_fn, Y, max_iter = 25, tol = 1e-08)
 }
 \arguments{
-\item{Q}{See Usage.}
+\item{Q}{Passed to \code{.tl1step_as_numvec}.}
 \item{H_fn}{See Usage.}
-\item{Y}{See Usage.}
+\item{Y}{Passed to \code{.tl1step_as_numvec}.}
 \item{max_iter}{Defaults to \code{25}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }

@@ -8,10 +8,10 @@
 .ghc_deseq2_norm_cdf(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the deseq2_native implementation; see the file header for the source it follows.
+A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_norm_ppf}, \code{deseq2}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

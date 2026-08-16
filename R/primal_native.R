@@ -37,7 +37,8 @@
 
 #' morie_primal
 #'
-#' Part of the primal_native implementation; see the file header for the
+#' A step of the primal_native implementation. Called by \code{morie_tv_denoise_1d}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param K See Usage.
@@ -46,10 +47,10 @@
 #' @param prox_g See Usage.
 #' @param x0 See Usage.
 #' @param y0 See Usage.
-#' @param tau Defaults to \code{NULL}.
-#' @param sigma Defaults to \code{NULL}.
-#' @param theta Defaults to \code{1}.
-#' @param norm_K Defaults to \code{NULL}.
+#' @param tau Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param sigma Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param theta Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param norm_K Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param max_iter Defaults to \code{500}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return The value of \code{result}, as built in the body.
@@ -142,14 +143,15 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
 
 #' morie_tv_denoise_1d
 #'
-#' Part of the primal_native implementation; see the file header for the
+#' A step of the primal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param signal See Usage.
-#' @param lam Defaults to \code{1}.
-#' @param max_iter Defaults to \code{1000}.
-#' @param tol Defaults to \code{1e-12}.
-#' @param theta Defaults to \code{1}.
+#' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param max_iter Passed to \code{morie_primal}. Defaults to \code{1000}.
+#' @param tol Passed to \code{morie_primal}. Defaults to \code{1e-12}.
+#' @param theta Passed to \code{morie_primal}. Defaults to \code{1}.
 #' @return The value of \code{res}, as built in the body.
 #' @export
 morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
@@ -204,7 +206,8 @@ morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
 
 #' .primal_morie_cheatsheet
 #'
-#' Part of the primal_native implementation; see the file header for the
+#' A step of the primal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

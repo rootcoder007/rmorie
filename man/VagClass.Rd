@@ -8,13 +8,13 @@
 VagClass(segments, durations = NULL, segclass = NULL, arthro = NULL)
 }
 \arguments{
-\item{segments}{See Usage.}
-\item{durations}{Defaults to \code{NULL}.}
-\item{segclass}{Defaults to \code{NULL}.}
-\item{arthro}{Defaults to \code{NULL}.}
+\item{segments}{Passed to \code{.morie_bx_mat}.}
+\item{durations}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
+\item{segclass}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
+\item{arthro}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{varmeans}, \code{segmentmeans}, \code{abnormalfraction}, \code{normalfraction}, \code{decision}, \code{stage}, \code{abnormal}, \code{durations}, \code{method}.

@@ -8,8 +8,8 @@
 .psy_dl(yi, vi)
 }
 \arguments{
-\item{yi}{See Usage.}
-\item{vi}{See Usage.}
+\item{yi}{Passed to \code{.psy_fixed_pool}.}
+\item{vi}{Passed to \code{.psy_fixed_pool}.}
 }
 \description{
 at zero is not symmetric -- a biased tau^2 that hits the floor understates heterogeneity AND overstates precision together.

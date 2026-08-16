@@ -23,12 +23,13 @@
 
 #' .mor_bjs_check
 #'
-#' Part of the boryis_native implementation; see the file header for the
+#' A step of the boryis_native implementation. Called by \code{morie_impute_untreated}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param obs See Usage.
-#' @param n See Usage.
-#' @param T See Usage.
+#' @param obs Numeric; passed to \code{sum}.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param T Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_bjs_check <- function(obs, n, T) {
@@ -53,11 +54,11 @@
 #'
 #' restricted to `obs`, plus optional covariate coefficients.
 #'
-#' @param obs See Usage.
-#' @param u_a See Usage.
-#' @param u_l See Usage.
-#' @param u_b See Usage.
-#' @param Xc See Usage.
+#' @param obs A matrix; passed to \code{nrow}.
+#' @param u_a Numeric; combined arithmetically in the body.
+#' @param u_l Numeric; combined arithmetically in the body.
+#' @param u_b Numeric; combined arithmetically in the body.
+#' @param Xc Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param max_iter Defaults to \code{2000L}.
 #' @param tol Defaults to \code{1e-13}.
 #' @return A list with \code{a}, \code{lam}, \code{b}.
@@ -141,11 +142,11 @@ morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
 #'
 #' unit-clustered variance.
 #'
-#' @param W See Usage.
-#' @param treated See Usage.
-#' @param Xc See Usage.
-#' @param max_iter Defaults to \code{2000L}.
-#' @param tol Defaults to \code{1e-13}.
+#' @param W A matrix; passed to \code{nrow}.
+#' @param treated A flag; the body branches on it.
+#' @param Xc Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param max_iter Passed to \code{.mor_bjs_solve}. Defaults to \code{2000L}.
+#' @param tol Passed to \code{.mor_bjs_solve}. Defaults to \code{1e-13}.
 #' @return The value of \code{ifelse}.
 #' @export
 .mor_bjs_weights <- function(W, treated, Xc, max_iter = 2000L, tol = 1e-13) {

@@ -8,15 +8,15 @@
 .bnppvl_ab(level, c, schedule, centring, nullq, j)
 }
 \arguments{
-\item{level}{See Usage.}
-\item{c}{See Usage.}
-\item{schedule}{See Usage.}
-\item{centring}{See Usage.}
-\item{nullq}{See Usage.}
-\item{j}{See Usage.}
+\item{level}{Passed to \code{.bnppvl_conc}.}
+\item{c}{Passed to \code{.bnppvl_conc}.}
+\item{schedule}{Passed to \code{.bnppvl_conc}.}
+\item{centring}{Compared against \code{"uniform"}.}
+\item{nullq}{Passed to \code{.bnppvl_null_mean}.}
+\item{j}{Passed to \code{.bnppvl_null_mean}.}
 }
 \description{
-Part of the bnppvl_native implementation; see the file header for the source it follows.
+A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_draw}, \code{morie_bnppvl_log_prior}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

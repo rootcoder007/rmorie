@@ -8,10 +8,10 @@
 .w501_best_split(P, a, b, min_size)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{min_size}{See Usage.}
+\item{P}{Passed to \code{.w501_qhat}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{min_size}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Part of the w501_changepoint_native implementation; see the file header for the source it follows.

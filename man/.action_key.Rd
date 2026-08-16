@@ -8,10 +8,10 @@
 .action_key(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{A vector; its length is taken.}
 }
 \description{
-Part of the airl_native implementation; see the file header for the source it follows.
+A step of the airl_native implementation. Called by \code{morie_airl}. See the file header for the source the module follows.
 }
 \value{
 A character value.

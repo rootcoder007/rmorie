@@ -8,20 +8,20 @@
 morie_agalfsy_rl_pose_search(receptor, ligand, site = NULL, policy = NULL, critic = NULL, max_steps = 600L, min_steps = 300L, window = 50L, tol = 0.3, box = 18, seed = 2)
 }
 \arguments{
-\item{receptor}{See Usage.}
-\item{ligand}{See Usage.}
-\item{site}{Defaults to \code{NULL}.}
+\item{receptor}{Passed to \code{.agalfsy_coords}.}
+\item{ligand}{Passed to \code{.agalfsy_coords}.}
+\item{site}{Optional; may be \code{NULL}. Passed to \code{.agalfsy_coords}.}
 \item{policy}{Defaults to \code{NULL}.}
 \item{critic}{Defaults to \code{NULL}.}
 \item{max_steps}{Defaults to \code{600L}.}
 \item{min_steps}{Defaults to \code{300L}.}
 \item{window}{Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{0.3}.}
-\item{box}{Defaults to \code{18}.}
+\item{box}{Numeric; combined arithmetically in the body. Defaults to \code{18}.}
 \item{seed}{Defaults to \code{2}.}
 }
 \description{
-Part of the agalfsy_native implementation; see the file header for the source it follows.
+A step of the agalfsy_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start}, \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason}, \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions}, \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method}, \code{note}.

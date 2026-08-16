@@ -11,7 +11,7 @@
 \item{r}{See Usage.}
 }
 \description{
-Part of the prgrl_native implementation; see the file header for the source it follows.
+A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

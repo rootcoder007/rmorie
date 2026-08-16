@@ -8,7 +8,7 @@
 .alfbnp_clean_list(clean)
 }
 \arguments{
-\item{clean}{See Usage.}
+\item{clean}{A matrix; indexed by row and column.}
 }
 \description{
 (k x n x 3) -- which is what jsonlite hands back for a nested list, and what a caller who stacked their structures would naturally pass. lapply over a 3-D array walks the wrong dimension and silently produces garbage, so normalise before anything touches it.

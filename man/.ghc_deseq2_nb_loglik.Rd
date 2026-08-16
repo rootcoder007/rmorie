@@ -8,12 +8,12 @@
 .ghc_deseq2_nb_loglik(K, mu, alpha)
 }
 \arguments{
-\item{K}{See Usage.}
-\item{mu}{See Usage.}
-\item{alpha}{See Usage.}
+\item{K}{A vector; its length is taken and its elements indexed.}
+\item{mu}{A vector; indexed elementwise.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the deseq2_native implementation; see the file header for the source it follows.
+A step of the deseq2_native implementation. Called by \code{cox_reid_loglik}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tot}, as built in the body.

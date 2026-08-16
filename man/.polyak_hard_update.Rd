@@ -14,7 +14,7 @@
 \item{C}{Defaults to \code{10000}.}
 }
 \description{
-Part of the polyak_native implementation; see the file header for the source it follows.
+A step of the polyak_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list, whose contents depend on the branch taken; across the branches its names are \code{target}, \code{copied}.
@@ -37,8 +37,8 @@ Tassa, Y., Silver, D. & Wierstra, D. (2016) "Continuous control with
 deep reinforcement learning", International Conference on Learning
 Representations (ICLR 2016), arXiv:1509.02971. Sec. 3: the Q update
 is prone to divergence because the network being updated also computes
-the target; "soft" target updates theta\\' <- tau theta + (1 - tau)
-theta\\' with tau << 1 replace DQN\\'s periodic copy, constraining target
+the target; "soft" target updates theta\' <- tau theta + (1 - tau)
+theta\' with tau << 1 replace DQN\'s periodic copy, constraining target
 values to change slowly and moving the problem closer to supervised
 learning; the supplementary details give tau = 0.001.
 

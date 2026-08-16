@@ -8,13 +8,13 @@
 morie_survrsf_predict_tree(tree, x, random_variable = NULL, rng = NULL)
 }
 \arguments{
-\item{tree}{See Usage.}
-\item{x}{See Usage.}
+\item{tree}{A list; the body reads \code{$root} from it.}
+\item{x}{A vector; indexed elementwise.}
 \item{random_variable}{Defaults to \code{NULL}.}
 \item{rng}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the survrsf_native implementation; see the file header for the source it follows.
+A step of the survrsf_native implementation. Called by \code{morie_survrsf_ensemble_chf}, \code{morie_survrsf_mortality}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{node}, as built in the body.

@@ -8,11 +8,11 @@
 .cdae_act(name, x)
 }
 \arguments{
-\item{name}{See Usage.}
-\item{x}{See Usage.}
+\item{name}{One of \code{"identity"}, \code{"sigmoid"}, \code{"tanh"}.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the cdaeRC_native implementation; see the file header for the source it follows.
+A step of the cdaeRC_native implementation. Called by \code{decode}, \code{encode}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

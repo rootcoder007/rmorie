@@ -8,15 +8,15 @@
 .schab_st_scale_mixture(h, k, cov_spatial, cov_temporal, nodes, weights)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{k}{See Usage.}
+\item{h}{Passed to \code{.schab_st_as_lags}.}
+\item{k}{Passed to \code{.schab_st_as_lags}.}
 \item{cov_spatial}{See Usage.}
 \item{cov_temporal}{See Usage.}
 \item{nodes}{See Usage.}
 \item{weights}{See Usage.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{spstcn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

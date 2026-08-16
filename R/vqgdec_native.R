@@ -58,7 +58,7 @@
 #'
 #' to a 2-D numeric matrix with one row per entry.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{dim}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
 .vqgdec_to_matrix <- function(x) {
@@ -90,7 +90,7 @@
 #' vectors. Indices are 0-based, matching the Python implementation.
 #'
 #' @param indices See Usage.
-#' @param codebook See Usage.
+#' @param codebook Passed to \code{.vqgdec_to_matrix}.
 #' @return A list with \code{codes}, \code{n}, \code{note}.
 #' @export
 morie_vqgdec_decode_indices <- function(indices, codebook) {
@@ -153,7 +153,7 @@ morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
 #'
 #' dense signal about local texture.
 #'
-#' @param image See Usage.
+#' @param image Passed to \code{.vqgdec_to_matrix}.
 #' @param patch Defaults to \code{4}.
 #' @param scorer Defaults to \code{NULL}.
 #' @return A list with \code{scores}, \code{n_patches}, \code{mean}, \code{note}.
@@ -284,14 +284,15 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 # decode: indices to codes to image, with the adaptive GAN weight.
 #' Decode: indices to codes to image, with the adaptive GAN weight
 #'
-#' Part of the vqgdec_native implementation; see the file header for the
+#' A step of the vqgdec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param indices See Usage.
-#' @param codebook See Usage.
+#' @param indices Passed to \code{morie_vqgdec_decode_indices}.
+#' @param codebook Passed to \code{morie_vqgdec_decode_indices}.
 #' @param generator Defaults to \code{NULL}.
-#' @param grad_rec Defaults to \code{NULL}.
-#' @param grad_gan Defaults to \code{NULL}.
+#' @param grad_rec Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.
+#' @param grad_gan Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.
 #' @return A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens}, \code{adaptive_lambda}, \code{method}, \code{note}.
 #' @export
 morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
@@ -320,7 +321,8 @@ morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
 # cheatsheet
 #' Cheatsheet
 #'
-#' Part of the vqgdec_native implementation; see the file header for the
+#' A step of the vqgdec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

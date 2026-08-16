@@ -10,13 +10,13 @@ ngcf_message(e_i, e_u, W1, W2, p_ui, affinity = TRUE)
 \arguments{
 \item{e_i}{See Usage.}
 \item{e_u}{See Usage.}
-\item{W1}{See Usage.}
-\item{W2}{See Usage.}
-\item{p_ui}{See Usage.}
-\item{affinity}{Defaults to \code{TRUE}.}
+\item{W1}{A matrix; indexed by row and column.}
+\item{W2}{A matrix; indexed by row and column.}
+\item{p_ui}{Numeric; combined arithmetically in the body.}
+\item{affinity}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the ngcf_native implementation; see the file header for the source it follows.
+A step of the ngcf_native implementation. Called by \code{ngcf_propagate}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

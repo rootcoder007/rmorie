@@ -61,13 +61,14 @@
 
 #' .trclrn_check
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}, \code{trclrn_rule_value}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Y See Usage.
 #' @param A See Usage.
-#' @param X See Usage.
-#' @param propensity See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param propensity Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param min_propensity See Usage.
 #' @return A list with \code{y}, \code{a}, \code{Xm}, \code{p}, \code{n}, \code{arms}.
 #' @export
@@ -121,17 +122,18 @@
 
 #' trclrn_rule_value
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param X See Usage.
+#' @param Y Passed to \code{.trclrn_check}.
+#' @param A Passed to \code{.trclrn_check}.
+#' @param X Passed to \code{.trclrn_check}.
 #' @param rule See Usage.
-#' @param propensity Defaults to \code{NULL}.
-#' @param method Defaults to \code{"ipw"}.
+#' @param propensity Passed to \code{.trclrn_check}.
+#' @param method Compared against \code{"ipw"}. Defaults to \code{"ipw"}.
 #' @param outcome_model Defaults to \code{NULL}.
-#' @param min_propensity Defaults to \code{0.01}.
+#' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return A numeric value.
 #' @export
 trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
@@ -164,16 +166,17 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 
 #' .trclrn_best_treatment
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param a See Usage.
-#' @param p See Usage.
+#' @param y A vector; indexed elementwise.
+#' @param a A vector; indexed elementwise.
+#' @param p A vector; indexed elementwise.
 #' @param rows See Usage.
 #' @param arms See Usage.
-#' @param method See Usage.
-#' @param Xm See Usage.
+#' @param method Compared against \code{"ipw"}.
+#' @param Xm A matrix; indexed by row and column.
 #' @param outcome_model See Usage.
 #' @return A list with \code{best}, \code{bv}.
 #' @export
@@ -203,19 +206,20 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 
 #' trclrn_fit_tree
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param X See Usage.
-#' @param propensity Defaults to \code{NULL}.
-#' @param method Defaults to \code{"ipw"}.
-#' @param outcome_model Defaults to \code{NULL}.
+#' @param Y Passed to \code{.trclrn_check}.
+#' @param A Passed to \code{.trclrn_check}.
+#' @param X Passed to \code{.trclrn_check}.
+#' @param propensity Passed to \code{.trclrn_check}.
+#' @param method Compared against \code{"augmented"}. Defaults to \code{"ipw"}.
+#' @param outcome_model Optional; may be \code{NULL}. Passed to \code{.trclrn_best_treatment}.
 #' @param max_depth Defaults to \code{3}.
 #' @param min_leaf Defaults to \code{10}.
 #' @param n_thresholds Defaults to \code{20}.
-#' @param min_propensity Defaults to \code{0.01}.
+#' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
@@ -325,10 +329,11 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
 
 #' .trclrn_count_leaves
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nd See Usage.
+#' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.
 #' @return A numeric value.
 #' @export
 .trclrn_count_leaves <- function(nd) {
@@ -338,11 +343,12 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
 
 #' trclrn_predict_rule
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tree See Usage.
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 trclrn_predict_rule <- function(tree, X) {
@@ -371,12 +377,13 @@ trclrn_predict_rule <- function(tree, X) {
 
 #' trclrn_tree_rules
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
-#' @param names Defaults to \code{NULL}.
-#' @param indent Defaults to \code{0}.
+#' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$n}, \code{$right}, \code{$threshold}, \code{$treatment} from it.
+#' @param names Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param indent A count; the body uses it as \code{rep(...)}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
@@ -396,7 +403,8 @@ trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
 
 #' trclrn_cheatsheet
 #'
-#' Part of the trclrn_native implementation; see the file header for the
+#' A step of the trclrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

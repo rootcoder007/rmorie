@@ -2,10 +2,11 @@
 
 #' .clip_l2norm
 #'
-#' Part of the clipsi implementation; see the file header for the source
+#' A step of the clipsi implementation. Called by \code{Clipxi}, \code{Colbrt}, \code{Contse} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .clip_l2norm <- function(v) {

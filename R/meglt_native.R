@@ -22,10 +22,11 @@
 
 #' .meglt_mat
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{coherence}, \code{nuclear_norm}, \code{relative_error} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .meglt_mat <- function(X) {
@@ -40,10 +41,11 @@
 
 #' .meglt_svd
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{coherence}, \code{nuclear_norm}, \code{svt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; passed to \code{nrow}.
 #' @return A list with \code{U}, \code{s}, \code{Vt}.
 #' @export
 .meglt_svd <- function(M) {
@@ -53,10 +55,11 @@
 
 #' nuclear_norm
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{morie_meglt}, \code{svt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{.meglt_mat}.
 #' @return A numeric value.
 #' @export
 nuclear_norm <- function(A) {
@@ -67,10 +70,11 @@ nuclear_norm <- function(A) {
 
 #' coherence
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{morie_meglt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{.meglt_mat}.
 #' @param rank Defaults to \code{NULL}.
 #' @return A list with \code{mu_row}, \code{mu_col}, \code{mu}, \code{rank}, \code{note}.
 #' @export
@@ -102,7 +106,8 @@ coherence <- function(A, rank = NULL) {
 
 #' sample_bound
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{morie_meglt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
@@ -125,10 +130,11 @@ sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
 
 #' svt
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{morie_meglt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M Passed to \code{.meglt_mat}.
 #' @param observed See Usage.
 #' @param tau Defaults to \code{NULL}.
 #' @param step Defaults to \code{1.9}.
@@ -175,11 +181,12 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
 
 #' relative_error
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{morie_meglt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param M See Usage.
+#' @param X A vector; indexed elementwise.
+#' @param M Passed to \code{.meglt_mat}.
 #' @return A numeric value.
 #' @export
 relative_error <- function(X, M) {
@@ -201,7 +208,8 @@ matrix_completion_low_rank <- svt
 
 #' .meglt_cheatsheet
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. Called by \code{morie_meglt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -219,10 +227,11 @@ matrix_completion_low_rank <- svt
 
 #' morie_meglt
 #'
-#' Part of the meglt_native implementation; see the file header for the
+#' A step of the meglt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param op See Usage.
+#' @param op A vector; its length is taken.
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export

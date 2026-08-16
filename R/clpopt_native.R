@@ -29,7 +29,7 @@ clpopt_pivots <- c("bland", "dantzig")
 #'
 #' Mirrors clpopt._mat.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @param name See Usage.
 #' @param ncol Defaults to \code{NULL}.
 #' @return The value of \code{do.call}.
@@ -56,11 +56,11 @@ clpopt_pivots <- c("bland", "dantzig")
 #' Mirrors clpopt.standard_form.
 #'
 #' @param c See Usage.
-#' @param A_ub Defaults to \code{NULL}.
+#' @param A_ub Optional; may be \code{NULL}. Passed to \code{.clpopt_mat}.
 #' @param b_ub Defaults to \code{NULL}.
-#' @param A_eq Defaults to \code{NULL}.
+#' @param A_eq Optional; may be \code{NULL}. Passed to \code{.clpopt_mat}.
 #' @param b_eq Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{A}, \code{b}, \code{c}, \code{n_original}, \code{n_slack}, \code{row_kinds}.
 #' @export
 standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
@@ -134,10 +134,11 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 # Internal: pivot on T[row, col]. Mirrors clpopt._pivot.
 #' Internal: pivot on T[row, col]. Mirrors clpopt._pivot
 #'
-#' Part of the clpopt_native implementation; see the file header for the
+#' A step of the clpopt_native implementation. Called by \code{.clpopt_run}, \code{simplex}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
+#' @param T A matrix; indexed by row and column.
 #' @param row See Usage.
 #' @param col See Usage.
 #' @return The value of \code{T}, as built in the body.
@@ -158,13 +159,14 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 # Internal: pivot to optimality. Mirrors clpopt._run.
 #' Internal: pivot to optimality. Mirrors clpopt._run
 #'
-#' Part of the clpopt_native implementation; see the file header for the
+#' A step of the clpopt_native implementation. Called by \code{simplex}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param basis See Usage.
-#' @param cols See Usage.
-#' @param rule See Usage.
+#' @param T A matrix; indexed by row and column.
+#' @param basis A vector; its length is taken and its elements indexed.
+#' @param cols A vector; indexed elementwise.
+#' @param rule Compared against \code{"bland"}.
 #' @param blocked See Usage.
 #' @param max_iter See Usage.
 #' @return A character value.
@@ -202,16 +204,17 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 # Internal: report a successful solution. Mirrors clpopt._report.
 #' Internal: report a successful solution. Mirrors clpopt._report
 #'
-#' Part of the clpopt_native implementation; see the file header for the
+#' A step of the clpopt_native implementation. Called by \code{simplex}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param basis See Usage.
-#' @param cv See Usage.
-#' @param n See Usage.
-#' @param m See Usage.
+#' @param T A matrix; indexed by row and column.
+#' @param basis A vector; indexed elementwise.
+#' @param cv A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @param total See Usage.
-#' @param rule See Usage.
+#' @param rule Compared against \code{"bland"}.
 #' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate}, \code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
 #' @export
 .clpopt_report <- function(T, basis, cv, n, m, total, rule) {
@@ -246,11 +249,12 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 # Internal: report a failure. Mirrors clpopt._fail.
 #' Internal: report a failure. Mirrors clpopt._fail
 #'
-#' Part of the clpopt_native implementation; see the file header for the
+#' A step of the clpopt_native implementation. Called by \code{simplex}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
-#' @param rule See Usage.
+#' @param st Compared against \code{"cycling"}.
+#' @param rule Compared against \code{"dantzig"}.
 #' @param phase See Usage.
 #' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule}, \code{message}, \code{method}.
 #' @export
@@ -274,14 +278,15 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 # Two-phase primal simplex on Ax = b, x >= 0. Mirrors clpopt.simplex.
 #' Two-phase primal simplex on Ax = b, x >= 0. Mirrors clpopt.simplex
 #'
-#' Part of the clpopt_native implementation; see the file header for the
+#' A step of the clpopt_native implementation. Called by \code{morie_clpopt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param c See Usage.
-#' @param A See Usage.
+#' @param A Passed to \code{.clpopt_mat}.
 #' @param b See Usage.
-#' @param rule Defaults to \code{"bland"}.
-#' @param max_iter Defaults to \code{10000}.
+#' @param rule Passed to \code{.clpopt_run}. Defaults to \code{"bland"}.
+#' @param max_iter Passed to \code{.clpopt_run}. Defaults to \code{10000}.
 #' @param initial_basis Defaults to \code{NULL}.
 #' @return The value of \code{.clpopt_report}.
 #' @export
@@ -424,7 +429,7 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
 #' @param b_eq Defaults to \code{NULL}.
 #' @param upper Defaults to \code{NULL}.
 #' @param rule Defaults to \code{"bland"}.
-#' @param maximise Defaults to \code{FALSE}.
+#' @param maximise A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param max_iter Defaults to \code{10000}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

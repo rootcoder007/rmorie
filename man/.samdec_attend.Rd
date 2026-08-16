@@ -8,12 +8,12 @@
 .samdec_attend(Q, K, V)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{K}{See Usage.}
-\item{V}{See Usage.}
+\item{Q}{A matrix; indexed by row and column.}
+\item{K}{A matrix; passed to \code{nrow}.}
+\item{V}{A matrix; passed to \code{crossprod}.}
 }
 \description{
-Part of the samdec_native implementation; see the file header for the source it follows.
+A step of the samdec_native implementation. Called by \code{two_way_block}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{out}, \code{W}.

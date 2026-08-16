@@ -8,10 +8,10 @@
 k02gh(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{magpa}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{x}, \code{w}.

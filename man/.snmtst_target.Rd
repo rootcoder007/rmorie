@@ -8,11 +8,11 @@
 .snmtst_target(post, l_vec)
 }
 \arguments{
-\item{post}{See Usage.}
+\item{post}{A vector; its length is taken.}
 \item{l_vec}{See Usage.}
 }
 \description{
-Part of the snmtst_native implementation; see the file header for the source it follows.
+A step of the snmtst_native implementation. Called by \code{identified_set}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lv}, as built in the body.

@@ -8,10 +8,10 @@
 start_allowed(labels)
 }
 \arguments{
-\item{labels}{See Usage.}
+\item{labels}{Character; passed to \code{substr}.}
 }
 \description{
-Part of the benRea_native implementation; see the file header for the source it follows.
+A step of the benRea_native implementation. Called by \code{viterbi_decode}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{!=}.

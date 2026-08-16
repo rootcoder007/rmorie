@@ -102,7 +102,8 @@
 
 #' .avalon_sortkeys
 #'
-#' Part of the avalon_native implementation; see the file header for the
+#' A step of the avalon_native implementation. Called by \code{morie_avalon_features}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -278,11 +279,12 @@ morie_avalon_parse <- function(smiles) {
 
 #' .avalon_adj
 #'
-#' Part of the avalon_native implementation; see the file header for the
+#' A step of the avalon_native implementation. Called by \code{morie_avalon_features}, \code{morie_avalon_rings}, \code{morie_cypin_descriptors} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param bonds See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param bonds A vector; its length is taken and its elements indexed.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
 .avalon_adj <- function(n, bonds) {
@@ -332,12 +334,13 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 
 #' .avalon_shortest
 #'
-#' Part of the avalon_native implementation; see the file header for the
+#' A step of the avalon_native implementation. Called by \code{morie_avalon_rings}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
-#' @param src See Usage.
-#' @param dst See Usage.
+#' @param adj A vector; its length is taken and its elements indexed.
+#' @param src Numeric; combined arithmetically in the body.
+#' @param dst Numeric; combined arithmetically in the body.
 #' @param banned See Usage.
 #' @return A vector, from \code{rev}.
 #' @export
@@ -389,11 +392,12 @@ morie_avalon_rings <- function(n, bonds, closures) {
 
 #' .avalon_ty
 #'
-#' Part of the avalon_native implementation; see the file header for the
+#' A step of the avalon_native implementation. Called by \code{morie_avalon_features}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param el See Usage.
-#' @param arom See Usage.
+#' @param el A vector; indexed elementwise.
+#' @param arom A vector; indexed elementwise.
 #' @param i See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -407,10 +411,10 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #' The key is built here rather than by the caller so the two arms of
 #' this package cannot canonicalise it differently.
 #'
-#' @param adj See Usage.
-#' @param n See Usage.
+#' @param adj A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{rep(...)}.
 #' @param maxpath See Usage.
-#' @param ty See Usage.
+#' @param ty A vector; indexed elementwise.
 #' @return The value of \code{unique}.
 #' @export
 .avalon_paths <- function(adj, n, maxpath, ty) {
@@ -455,11 +459,12 @@ morie_avalon_rings <- function(n, bonds, closures) {
 
 #' .avalon_dist
 #'
-#' Part of the avalon_native implementation; see the file header for the
+#' A step of the avalon_native implementation. Called by \code{morie_avalon_features}, \code{morie_scfhop_cats}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
-#' @param n See Usage.
+#' @param adj A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{D}, as built in the body.
 #' @export
 .avalon_dist <- function(adj, n) {

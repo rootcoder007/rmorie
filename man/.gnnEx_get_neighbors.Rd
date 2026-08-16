@@ -8,7 +8,7 @@
 .gnnEx_get_neighbors(adj, u)
 }
 \arguments{
-\item{adj}{See Usage.}
+\item{adj}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{u}{See Usage.}
 }
 \description{

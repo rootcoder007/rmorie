@@ -8,10 +8,10 @@
 .baygsl_expo(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-drawing uniforms until we get one strictly positive, then take -log(u). R\\\'s qexp would consume the rng from somewhere else, so the loop matches the Python arm draw-for-draw.
+drawing uniforms until we get one strictly positive, then take -log(u). R\\'s qexp would consume the rng from somewhere else, so the loop matches the Python arm draw-for-draw.
 }
 \value{
 A numeric value.

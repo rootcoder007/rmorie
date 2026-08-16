@@ -37,14 +37,15 @@
 
 #' .sa_opt_temperature
 #'
-#' Part of the sa_opt_native implementation; see the file header for the
+#' A step of the sa_opt_native implementation. Called by \code{morie_sa_opt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param schedule See Usage.
-#' @param T0 See Usage.
-#' @param k See Usage.
+#' @param schedule One of \code{"geometric"}, \code{"linear"}.
+#' @param T0 Numeric; combined arithmetically in the body.
+#' @param k Numeric; combined arithmetically in the body.
 #' @param n_iter See Usage.
-#' @param alpha See Usage.
+#' @param alpha Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .sa_opt_temperature <- function(schedule, T0, k, n_iter, alpha) {
@@ -60,19 +61,20 @@
 
 #' morie_sa_opt
 #'
-#' Part of the sa_opt_native implementation; see the file header for the
+#' A step of the sa_opt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fun See Usage.
 #' @param x0 See Usage.
 #' @param step Defaults to \code{1}.
-#' @param T0 Defaults to \code{1}.
-#' @param n_iter Defaults to \code{1000}.
+#' @param T0 Passed to \code{.sa_opt_temperature}. Defaults to \code{1}.
+#' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
 #' @param schedule Defaults to \code{"geometric"}.
-#' @param alpha Defaults to \code{0.99}.
+#' @param alpha Passed to \code{.sa_opt_temperature}. Defaults to \code{0.99}.
 #' @param lower Defaults to \code{NULL}.
 #' @param upper Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_sa_opt <- function(fun, x0, step=1.0, T0=1.0, n_iter=1000,
@@ -179,7 +181,8 @@ morie_sa_opt <- function(fun, x0, step=1.0, T0=1.0, n_iter=1000,
 
 #' .sa_opt_cheatsheet
 #'
-#' Part of the sa_opt_native implementation; see the file header for the
+#' A step of the sa_opt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

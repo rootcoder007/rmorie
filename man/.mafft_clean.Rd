@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{seqs}{See Usage.}
-\item{seq_type}{Defaults to \code{NULL}.}
+\item{seq_type}{Optional; may be \code{NULL}. One of \code{"aa"}, \code{"nt"}.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{mafft_alignment}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{seqs}, \code{type}.

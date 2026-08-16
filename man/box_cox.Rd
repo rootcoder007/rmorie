@@ -8,11 +8,11 @@
 box_cox(y, omega)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{omega}{See Usage.}
+\item{y}{Numeric; passed to \code{log}.}
+\item{omega}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{.fit_spec}, \code{morie_bats}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

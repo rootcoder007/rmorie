@@ -8,11 +8,11 @@
 .morie_qrs_psd(x, fs)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl}, \code{EdrSignal}, \code{HrvFreq} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{freqs}, \code{power}.

@@ -8,16 +8,16 @@
 morie_krpkrg_ordinary_kriging(coords, values, targets, model = "spherical", nugget = 0, sill = 1, rng = 1)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
 \item{values}{See Usage.}
-\item{targets}{See Usage.}
-\item{model}{Defaults to \code{"spherical"}.}
-\item{nugget}{Defaults to \code{0}.}
-\item{sill}{Defaults to \code{1}.}
-\item{rng}{Defaults to \code{1}.}
+\item{targets}{A matrix; passed to \code{as.matrix}.}
+\item{model}{Passed to \code{.krpkrg_gamma}. Defaults to \code{"spherical"}.}
+\item{nugget}{Passed to \code{.krpkrg_gamma}. Defaults to \code{0}.}
+\item{sill}{Passed to \code{.krpkrg_gamma}. Defaults to \code{1}.}
+\item{rng}{Passed to \code{.krpkrg_gamma}. Defaults to \code{1}.}
 }
 \description{
-Part of the krpkrg_native implementation; see the file header for the source it follows.
+A step of the krpkrg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{weights}, \code{n}, \code{n_targets}, \code{model}, \code{nugget}, \code{sill}, \code{range}, \code{method}, \code{note}.

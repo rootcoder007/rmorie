@@ -23,7 +23,7 @@ simulate_outbreak(R0 = 2.5, dispersion = 0.16, n_initial = 20, trace_prob = 0.8,
 \item{allow_presymptomatic}{Defaults to \code{TRUE}.}
 }
 \description{
-Part of the ttrace_native implementation; see the file header for the source it follows.
+A step of the ttrace_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{controlled}, \code{total_cases}, \code{weekly}, \code{hit_cap}, \code{extinct}.

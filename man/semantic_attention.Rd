@@ -8,13 +8,13 @@
 semantic_attention(Z_per_metapath, W, b, q)
 }
 \arguments{
-\item{Z_per_metapath}{See Usage.}
-\item{W}{See Usage.}
+\item{Z_per_metapath}{A vector; indexed elementwise.}
+\item{W}{A matrix; passed to \code{\%*\%}.}
 \item{b}{See Usage.}
-\item{q}{See Usage.}
+\item{q}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hetgnn_native implementation; see the file header for the source it follows.
+A step of the hetgnn_native implementation. Called by \code{han_forward}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{scores}, \code{metapaths}, \code{note}.

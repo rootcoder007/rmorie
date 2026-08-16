@@ -8,14 +8,14 @@
 decode(z, Wp, bp, items = NULL, activation = "sigmoid")
 }
 \arguments{
-\item{z}{See Usage.}
-\item{Wp}{See Usage.}
-\item{bp}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
+\item{Wp}{A vector; indexed elementwise.}
+\item{bp}{A vector; its length is taken and its elements indexed.}
 \item{items}{Defaults to \code{NULL}.}
-\item{activation}{Defaults to \code{"sigmoid"}.}
+\item{activation}{Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.}
 }
 \description{
-Part of the cdaeRC_native implementation; see the file header for the source it follows.
+A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{sapply}.

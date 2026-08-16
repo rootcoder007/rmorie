@@ -11,8 +11,8 @@ morie_hbvMod(precip, temp, epot, params, init = NULL)
 \item{precip}{See Usage.}
 \item{temp}{See Usage.}
 \item{epot}{See Usage.}
-\item{params}{See Usage.}
-\item{init}{Defaults to \code{NULL}.}
+\item{params}{A list; the body reads \code{$beta}, \code{$cfmax}, \code{$cfr}, \code{$fc}, \code{$k0}, \code{$k1}, \code{$k2}, \code{$lp}, \code{$maxbas}, \code{$perc}, \code{$tt}, \code{$uzl} from it.}
+\item{init}{Optional; may be \code{NULL}. A list; the body reads \code{$slz}, \code{$snow}, \code{$soil}, \code{$suz}, \code{$swater} from it.}
 }
 \description{
 Part of the hbvMod_mixedcase_native implementation; see the file header for the source it follows.

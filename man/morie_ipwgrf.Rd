@@ -10,18 +10,18 @@ morie_ipwgrf(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5, trim = 0.02, see
 \arguments{
 \item{y}{See Usage.}
 \item{W}{See Usage.}
-\item{X}{See Usage.}
-\item{n_folds}{Defaults to \code{5}.}
-\item{n_trees}{Defaults to \code{120}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{trim}{Defaults to \code{0.02}.}
-\item{seed}{Defaults to \code{0}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{n_folds}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.}
+\item{n_trees}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{120}.}
+\item{min_leaf}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.}
+\item{trim}{Passed to \code{.ipwgrf_aipw_scores}. Defaults to \code{0.02}.}
+\item{seed}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{0}.}
 \item{level}{Defaults to \code{0.95}.}
-\item{break_outcome}{Defaults to \code{FALSE}.}
-\item{break_propensity}{Defaults to \code{FALSE}.}
+\item{break_outcome}{A flag; the body branches on it. Defaults to \code{FALSE}.}
+\item{break_propensity}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the ipwgrf_native implementation; see the file header for the source it follows.
+A step of the ipwgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{ate}, \code{se}, \code{ci}, \code{scores}, \code{mu1}, \code{mu0}, \code{propensity}, \code{plug_in}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{trim}, \code{n}, \code{level}, \code{broken_outcome}, \code{broken_propensity}, \code{method}.

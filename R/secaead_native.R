@@ -46,7 +46,8 @@
 
 #' Return an integer vector of byte values (0..255)
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{.secaead_constant_time_equal}, \code{.secaead_hexlify}, \code{.secaead_mac_data} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -68,10 +69,11 @@
 
 #' .secaead_hexlify
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_encrypt}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param bs See Usage.
+#' @param bs Passed to \code{.secaead_as_bytes}.
 #' @return A character value.
 #' @export
 .secaead_hexlify <- function(bs) {
@@ -80,11 +82,12 @@
 
 #' .secaead_constant_time_equal
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{.secaead_as_bytes}.
+#' @param b Passed to \code{.secaead_as_bytes}.
 #' @return A logical value.
 #' @export
 .secaead_constant_time_equal <- function(a, b) {
@@ -115,11 +118,12 @@
 
 #' .secaead_xor32
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{.secaead_qr}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .secaead_xor32 <- function(a, b) {
@@ -134,8 +138,8 @@
 #'
 #' below 2^48 for these n, well within double precision
 #'
-#' @param x See Usage.
-#' @param n See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .secaead_rotl <- function(x, n) {
@@ -146,10 +150,11 @@
 
 #' .secaead_qr
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_chacha20_block}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param s See Usage.
+#' @param s A vector; indexed elementwise.
 #' @param a See Usage.
 #' @param b See Usage.
 #' @param c See Usage.
@@ -170,10 +175,11 @@
 
 #' B is an integer byte vector whose length is a multiple of 4
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_chacha20_block}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param b See Usage.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .secaead_words_le <- function(b) {
@@ -190,10 +196,11 @@
 
 #' .secaead_le_bytes
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_chacha20_block}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param words See Usage.
+#' @param words A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .secaead_le_bytes <- function(words) {
@@ -213,9 +220,9 @@
 #'
 #' original, which is what stops the block function being invertible.
 #'
-#' @param key See Usage.
+#' @param key Passed to \code{.secaead_as_bytes}.
 #' @param counter See Usage.
-#' @param nonce See Usage.
+#' @param nonce Passed to \code{.secaead_as_bytes}.
 #' @param rounds Defaults to \code{20}.
 #' @return The value of \code{.secaead_le_bytes}.
 #' @export
@@ -249,13 +256,14 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
 
 #' XOR the data with the keystream from counter onward
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param key See Usage.
+#' @param key Passed to \code{morie_secaead_chacha20_block}.
 #' @param counter See Usage.
-#' @param nonce See Usage.
-#' @param data See Usage.
+#' @param nonce Passed to \code{morie_secaead_chacha20_block}.
+#' @param data Passed to \code{.secaead_as_bytes}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_secaead_chacha20 <- function(key, counter, nonce, data) {
@@ -282,7 +290,8 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 
 #' Bs: integer bytes LSB first -> base 2^26 limbs
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_poly1305_mac}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param bs See Usage.
@@ -310,11 +319,12 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 
 #' .secaead_bytes_from_limbs
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_poly1305_mac}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param limbs See Usage.
-#' @param nbytes See Usage.
+#' @param limbs A vector; its length is taken and its elements indexed.
+#' @param nbytes A count; the body uses it as \code{integer(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .secaead_bytes_from_limbs <- function(limbs, nbytes) {
@@ -371,11 +381,12 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 
 #' .secaead_p_add
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_poly1305_mac}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
 #' @return The value of \code{.secaead_p_carry}.
 #' @export
 .secaead_p_add <- function(a, b) {
@@ -389,7 +400,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #'
 #' since 2^130 == 5 (mod 2^130 - 5), then carry-normalize; repeat
 #'
-#' @param res See Usage.
+#' @param res A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
 .secaead_p_reduce <- function(res) {
@@ -416,7 +427,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #'
 #' subtraction of P suffices because acc < 2^130 < 2P
 #'
-#' @param acc See Usage.
+#' @param acc A vector; indexed elementwise.
 #' @return The value of \code{acc}, as built in the body.
 #' @export
 .secaead_p_final <- function(acc) {
@@ -442,11 +453,12 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 
 #' .secaead_p_mulmod
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_poly1305_mac}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.secaead_p_reduce}.
 #' @export
 .secaead_p_mulmod <- function(a, b) {
@@ -471,10 +483,11 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 
 #' K: 32 integer bytes; clamp the low 16 (r) per RFC 8439 Sec 2.5
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_poly1305_mac}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param k See Usage.
+#' @param k A vector; indexed elementwise.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .secaead_clamp_key <- function(k) {
@@ -494,8 +507,8 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #'
 #' low 16 become r (clamped) and the high 16 become s.
 #'
-#' @param message See Usage.
-#' @param key See Usage.
+#' @param message Passed to \code{.secaead_as_bytes}.
+#' @param key Passed to \code{.secaead_as_bytes}.
 #' @return The value of \code{.secaead_bytes_from_limbs}.
 #' @export
 morie_secaead_poly1305_mac <- function(message, key) {
@@ -528,11 +541,12 @@ morie_secaead_poly1305_mac <- function(message, key) {
 
 #' Block 0 gives the one-time key; the message starts at 1
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param key See Usage.
-#' @param nonce See Usage.
+#' @param key Passed to \code{morie_secaead_chacha20_block}.
+#' @param nonce Passed to \code{morie_secaead_chacha20_block}.
 #' @return The value of \code{[}.
 #' @export
 morie_secaead_poly1305_key_gen <- function(key, nonce) {
@@ -542,10 +556,11 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 
 #' .secaead_pad16
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{.secaead_mac_data}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param b See Usage.
+#' @param b A vector; its length is taken.
 #' @return The value of \code{rep}.
 #' @export
 .secaead_pad16 <- function(b) {
@@ -554,7 +569,8 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 
 #' .secaead_len8
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{.secaead_mac_data}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param n See Usage.
@@ -572,11 +588,12 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 
 #' .secaead_mac_data
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param aad See Usage.
-#' @param ciphertext See Usage.
+#' @param aad Passed to \code{.secaead_as_bytes}.
+#' @param ciphertext Passed to \code{.secaead_as_bytes}.
 #' @return A vector, from \code{c}.
 #' @export
 .secaead_mac_data <- function(aad, ciphertext) {
@@ -588,13 +605,14 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 
 #' Encrypt from counter 1, then authenticate AAD and ciphertext
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secrtt_seal_record}, \code{morie_secrtt_wrap_dek}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param key See Usage.
-#' @param nonce See Usage.
-#' @param plaintext See Usage.
-#' @param aad Defaults to \code{NULL}.
+#' @param key Passed to \code{morie_secaead_poly1305_key_gen}.
+#' @param nonce Passed to \code{morie_secaead_poly1305_key_gen}.
+#' @param plaintext Passed to \code{morie_secaead_chacha20}.
+#' @param aad Passed to \code{.secaead_mac_data}.
 #' @return A list with \code{estimate}, \code{ciphertext}, \code{ciphertext_hex}, \code{tag}, \code{tag_hex}, \code{onetime_key}, \code{aad_len}, \code{ct_len}, \code{method}, \code{note}.
 #' @export
 morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad=NULL) {
@@ -616,14 +634,15 @@ morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad=NULL) {
 
 #' morie_secaead_aead_decrypt
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. Called by \code{morie_secrtt_open_record}, \code{morie_secrtt_unwrap_dek}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param key See Usage.
-#' @param nonce See Usage.
-#' @param ciphertext See Usage.
-#' @param tag See Usage.
-#' @param aad Defaults to \code{NULL}.
+#' @param key Passed to \code{morie_secaead_poly1305_key_gen}.
+#' @param nonce Passed to \code{morie_secaead_poly1305_key_gen}.
+#' @param ciphertext Passed to \code{.secaead_mac_data}.
+#' @param tag Passed to \code{.secaead_constant_time_equal}.
+#' @param aad Passed to \code{.secaead_mac_data}.
 #' @return A list with \code{valid}, \code{plaintext}, \code{expected_tag}.
 #' @export
 morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
@@ -644,7 +663,8 @@ morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
 
 #' morie_secaead_cheatsheet
 #'
-#' Part of the secaead_native implementation; see the file header for
+#' A step of the secaead_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

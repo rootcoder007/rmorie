@@ -8,11 +8,11 @@
 .morie_garch_pack(spec, x)
 }
 \arguments{
-\item{spec}{See Usage.}
-\item{x}{See Usage.}
+\item{spec}{One of \code{"aparch"}, \code{"gjr"}, \code{"igarch"}.}
+\item{x}{A vector; indexed elementwise.}
 }
 \description{
-Part of the garch_coint_native implementation; see the file header for the source it follows.
+A step of the garch_coint_native implementation. Called by \code{morie_garch_spec_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{p}, as built in the body.

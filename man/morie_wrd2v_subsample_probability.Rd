@@ -8,11 +8,11 @@
 morie_wrd2v_subsample_probability(counts, t = 1e-05)
 }
 \arguments{
-\item{counts}{See Usage.}
-\item{t}{Defaults to \code{1e-05}.}
+\item{counts}{A vector; indexed elementwise.}
+\item{t}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
-Part of the wrd2v_native implementation; see the file header for the source it follows.
+A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

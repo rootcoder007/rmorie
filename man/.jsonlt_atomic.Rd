@@ -8,12 +8,12 @@
 .jsonlt_atomic(x, o, unbox_ok)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{o}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{o}{A list; the body reads \code{$auto_unbox}, \code{$complex}, \code{$digits} from it.}
 \item{unbox_ok}{See Usage.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}, \code{.jsonlt_ser}. See the file header for the source the module follows.
 }
 \value{
 A character value.

@@ -8,12 +8,12 @@
 optimal_policy(logp_ref, reward, beta)
 }
 \arguments{
-\item{logp_ref}{See Usage.}
-\item{reward}{See Usage.}
-\item{beta}{See Usage.}
+\item{logp_ref}{Passed to \code{.dpoF_vec}.}
+\item{reward}{Passed to \code{.dpoF_vec}.}
+\item{beta}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dpoF_native implementation; see the file header for the source it follows.
+A step of the dpoF_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

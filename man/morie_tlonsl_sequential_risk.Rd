@@ -10,12 +10,12 @@ morie_tlonsl_sequential_risk(y, algorithm, loss = "squared", burn_in = 5, lags =
 \arguments{
 \item{y}{See Usage.}
 \item{algorithm}{See Usage.}
-\item{loss}{Defaults to \code{"squared"}.}
+\item{loss}{Passed to \code{.tlonsl_loss}. Defaults to \code{"squared"}.}
 \item{burn_in}{Defaults to \code{5}.}
-\item{lags}{Defaults to \code{1}.}
+\item{lags}{Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.}
 }
 \description{
-Part of the tlonsl_native implementation; see the file header for the source it follows.
+A step of the tlonsl_native implementation. Called by \code{morie_tlonsl_online_super_learner}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \code{note}.

@@ -8,11 +8,11 @@
 morie_unifAlg_substitute(t, subst)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{subst}{See Usage.}
+\item{t}{Passed to \code{.unifAlg_check}.}
+\item{subst}{Passed to \code{.unifAlg_apply_once}.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{morie_trmRew_rewrite_step}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.unifAlg_apply_once}.

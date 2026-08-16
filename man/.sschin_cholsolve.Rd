@@ -8,11 +8,11 @@
 .sschin_cholsolve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{chol}.}
 \item{b}{See Usage.}
 }
 \description{
-Part of the sschin_native implementation; see the file header for the source it follows.
+A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow}, \code{.sschin_ols}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

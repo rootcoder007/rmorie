@@ -8,10 +8,10 @@
 .tlnet1_count_edges(friends)
 }
 \arguments{
-\item{friends}{See Usage.}
+\item{friends}{A vector; its length is taken.}
 }
 \description{
-Part of the tlnet1_native implementation; see the file header for the source it follows.
+A step of the tlnet1_native implementation. Called by \code{network_influence_variance}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{total}, as built in the body.

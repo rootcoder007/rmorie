@@ -10,11 +10,12 @@
 
 #' morie_prxgms_soft_threshold
 #'
-#' Part of the prxgms_native implementation; see the file header for the
+#' A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param tau See Usage.
+#' @param v A vector; indexed elementwise.
+#' @param tau Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_prxgms_soft_threshold <- function(v, tau) {
@@ -29,7 +30,8 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 
 #' morie_prxgms_prox_gradient
 #'
-#' Part of the prxgms_native implementation; see the file header for the
+#' A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fun See Usage.
@@ -39,9 +41,9 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #' @param L Defaults to \code{1}.
 #' @param max.iter Defaults to \code{500L}.
 #' @param tol Defaults to \code{1e-10}.
-#' @param accelerate Defaults to \code{TRUE}.
-#' @param backtrack Defaults to \code{FALSE}.
-#' @param eta Defaults to \code{2}.
+#' @param accelerate A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param backtrack A flag; the body branches on it. Defaults to \code{FALSE}.
+#' @param eta Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @param g.fun Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{objective}, \code{iterations}, \code{L}, \code{accelerated}, \code{converged}, \code{method}.
 #' @export
@@ -95,15 +97,16 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
 
 #' morie_prxgms_lasso_fista
 #'
-#' Part of the prxgms_native implementation; see the file header for the
+#' A step of the prxgms_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
 #' @param b See Usage.
-#' @param lam See Usage.
-#' @param max.iter Defaults to \code{500L}.
-#' @param tol Defaults to \code{1e-10}.
-#' @param accelerate Defaults to \code{TRUE}.
+#' @param lam Numeric; combined arithmetically in the body.
+#' @param max.iter Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{500L}.
+#' @param tol Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{1e-10}.
+#' @param accelerate Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{TRUE}.
 #' @return The value of \code{res}, as built in the body.
 #' @export
 morie_prxgms_lasso_fista <- function(A, b, lam, max.iter = 500L, tol = 1e-10,

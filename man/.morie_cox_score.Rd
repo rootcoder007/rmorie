@@ -8,11 +8,11 @@
 .morie_cox_score(ts, es, Xs, beta, offs, ties)
 }
 \arguments{
-\item{ts}{See Usage.}
+\item{ts}{A vector; indexed elementwise.}
 \item{es}{See Usage.}
-\item{Xs}{See Usage.}
-\item{beta}{See Usage.}
-\item{offs}{See Usage.}
+\item{Xs}{A matrix; indexed by row and column.}
+\item{beta}{A matrix; passed to \code{\%*\%}.}
+\item{offs}{Numeric; combined arithmetically in the body.}
 \item{ties}{See Usage.}
 }
 \description{

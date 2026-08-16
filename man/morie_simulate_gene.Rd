@@ -8,11 +8,11 @@
 morie_simulate_gene(alpha, beta, gamma, t_switch, times)
 }
 \arguments{
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
-\item{t_switch}{See Usage.}
-\item{times}{See Usage.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
+\item{beta}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{t_switch}{Numeric; combined arithmetically in the body.}
+\item{times}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 form. At the switch, (u, s) lands on the steady-on value scaled by the (1 - exp) factor; after the switch the gene decays freely toward zero.

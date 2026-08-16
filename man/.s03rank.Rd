@@ -8,10 +8,10 @@
 .s03rank(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.hrz3_u01}, \code{CnsRos}, \code{Evangia} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

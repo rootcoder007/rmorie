@@ -8,15 +8,15 @@
 .ipwgrf_aipw_scores(y, W, mu1, mu0, e, trim = 0.02)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
-\item{mu1}{See Usage.}
-\item{mu0}{See Usage.}
-\item{e}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{W}{A vector; indexed elementwise.}
+\item{mu1}{A vector; indexed elementwise.}
+\item{mu0}{A vector; indexed elementwise.}
+\item{e}{A vector; indexed elementwise.}
 \item{trim}{Defaults to \code{0.02}.}
 }
 \description{
-Part of the ipwgrf_native implementation; see the file header for the source it follows.
+A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{g}, \code{weights}.

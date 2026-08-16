@@ -40,13 +40,13 @@
 #' chosen uniformly without replacement; honesty is enforced by
 #' splitting each tree\'s bag into a structure half and a leaf half.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param indices See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param indices A vector; its length is taken and its elements indexed.
 #' @param min_leaf See Usage.
 #' @param alpha See Usage.
 #' @param max_depth See Usage.
-#' @param e See Usage.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{build}.
 #' @export
 .grow_one_tree <- function(X, y, indices, min_leaf, alpha,
@@ -95,11 +95,12 @@
 
 #' .orfgrf_grow_forest
 #'
-#' Part of the orfgrf_native implementation; see the file header for the
+#' A step of the orfgrf_native implementation. Called by \code{orthogonal_random_forest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X Passed to \code{.grow_one_tree}.
+#' @param y A vector; its length is taken.
 #' @param W Defaults to \code{NULL}.
 #' @param kind Defaults to \code{"double-sample"}.
 #' @param n_trees Defaults to \code{100}.
@@ -135,11 +136,12 @@
 # Recursive descent through one tree to the leaf containing x.
 #' Recursive descent through one tree to the leaf containing x
 #'
-#' Part of the orfgrf_native implementation; see the file header for the
+#' A step of the orfgrf_native implementation. Called by \code{.orfgrf_forest_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
-#' @param x See Usage.
+#' @param tree A list; the body reads \code{$cut}, \code{$j}, \code{$leaf}, \code{$left}, \code{$right}, \code{$value} from it.
+#' @param x A vector; indexed elementwise.
 #' @return The value of \code{.predict_tree}.
 #' @export
 .predict_tree <- function(tree, x) {
@@ -156,9 +158,9 @@
 #' Each unit that lands in the same leaf as x in tree t contributes 1 /
 #' (#units from tree t\'s leaf-sample in that leaf).
 #'
-#' @param trees See Usage.
-#' @param X See Usage.
-#' @param x See Usage.
+#' @param trees A list; the body reads \code{$trees} from it.
+#' @param X A matrix; indexed by row and column.
+#' @param x A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .orfgrf_forest_weights <- function(trees, X, x) {
@@ -197,11 +199,11 @@
 #' forest kernel weights alpha_i(x), so the fit is local by
 #' construction. exclude drops one index for the leave-one-out residual.
 #'
-#' @param target See Usage.
-#' @param W See Usage.
+#' @param target A matrix; passed to \code{crossprod}.
+#' @param W A matrix; passed to \code{as.matrix}.
 #' @param weights See Usage.
 #' @param exclude Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{fit}, \code{coef}.
 #' @export
 local_nuisance <- function(target, W, weights, exclude = NULL,
@@ -234,9 +236,9 @@ local_nuisance <- function(target, W, weights, exclude = NULL,
 #'
 #' residualized treatment has no weighted variation left.
 #'
-#' @param y_res See Usage.
-#' @param t_res See Usage.
-#' @param weights See Usage.
+#' @param y_res A vector; its length is taken.
+#' @param t_res A vector; its length is taken.
+#' @param weights A vector; its length is taken.
 #' @return A list with \code{theta}, \code{den}.
 #' @export
 orthogonal_moment <- function(y_res, t_res, weights) {
@@ -263,15 +265,15 @@ orthogonal_moment <- function(y_res, t_res, weights) {
 #' the ORF proposal. "global" fits them once on the whole sample, the
 #' "local centering" benchmark.
 #'
-#' @param Y See Usage.
-#' @param T See Usage.
-#' @param X See Usage.
+#' @param Y A vector; its length is taken and its elements indexed.
+#' @param T A vector; indexed elementwise.
+#' @param X Passed to \code{.orfgrf_forest_weights}.
 #' @param W See Usage.
-#' @param x See Usage.
-#' @param trees See Usage.
+#' @param x Passed to \code{.orfgrf_forest_weights}.
+#' @param trees Passed to \code{.orfgrf_forest_weights}.
 #' @param residualize Defaults to \code{"local"}.
 #' @param ridge Defaults to \code{1e-08}.
-#' @param leave_one_out Defaults to \code{TRUE}.
+#' @param leave_one_out A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{theta}, \code{den}, \code{w}.
 #' @export
 orf_estimate <- function(Y, T, X, W, x, trees,
@@ -310,14 +312,15 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 # ORF for the heterogeneous treatment effect theta_0(x).
 #' ORF for the heterogeneous treatment effect theta_0(x)
 #'
-#' Part of the orfgrf_native implementation; see the file header for the
+#' A step of the orfgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Y See Usage.
 #' @param T See Usage.
-#' @param X See Usage.
-#' @param W See Usage.
-#' @param x_eval Defaults to \code{NULL}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param W A matrix; passed to \code{as.matrix}.
+#' @param x_eval Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n_trees Defaults to \code{100}.
 #' @param min_leaf Defaults to \code{5}.
 #' @param alpha Defaults to \code{0.05}.
@@ -325,7 +328,7 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #' @param seed Defaults to \code{0}.
 #' @param residualize Defaults to \code{"local"}.
 #' @param ridge Defaults to \code{1e-08}.
-#' @param kind Defaults to \code{"double-sample"}.
+#' @param kind Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.
 #' @param leave_one_out Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n}, \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features}, \code{orthogonal}, \code{method}.
 #' @export
@@ -371,7 +374,8 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
 
 #' .orfgrf_cheatsheet
 #'
-#' Part of the orfgrf_native implementation; see the file header for the
+#' A step of the orfgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

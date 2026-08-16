@@ -11,7 +11,7 @@
 \item{v}{See Usage.}
 }
 \description{
-Part of the metabd_native implementation; see the file header for the source it follows.
+A step of the metabd_native implementation. Called by \code{abundance_correlation}, \code{bin_contigs}, \code{composite_distance}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

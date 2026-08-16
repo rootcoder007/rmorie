@@ -3,15 +3,15 @@
 % the formals.
 \name{.pibmd_bandwidth}
 \alias{.pibmd_bandwidth}
-\title{Silverman\\\'s rule of thumb, robustified by the interquartile range}
+\title{Silverman\\'s rule of thumb, robustified by the interquartile range}
 \usage{
 .pibmd_bandwidth(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the pibmd_native implementation; see the file header for the source it follows.
+A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

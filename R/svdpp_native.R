@@ -33,7 +33,8 @@
 
 #' .svdpp_baseline
 #'
-#' Part of the svdpp_native implementation; see the file header for the
+#' A step of the svdpp_native implementation. Called by \code{.svdpp_predict}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param mu See Usage.
@@ -47,11 +48,12 @@
 
 #' .svdpp_implicit_term
 #'
-#' Part of the svdpp_native implementation; see the file header for the
+#' A step of the svdpp_native implementation. Called by \code{.svdpp_predict}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param rated_items See Usage.
-#' @param y See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param exponent Defaults to \code{-0.5}.
 #' @return A list with \code{term}, \code{n_rated}, \code{scale}, \code{exponent}, \code{raw_sum}.
 #' @export
@@ -89,17 +91,18 @@
 
 #' .svdpp_predict
 #'
-#' Part of the svdpp_native implementation; see the file header for the
+#' A step of the svdpp_native implementation. Called by \code{.svdpp_sgd_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mu See Usage.
-#' @param b_user See Usage.
-#' @param b_item See Usage.
+#' @param mu Passed to \code{.svdpp_baseline}.
+#' @param b_user Passed to \code{.svdpp_baseline}.
+#' @param b_item Passed to \code{.svdpp_baseline}.
 #' @param p_u See Usage.
 #' @param q_i See Usage.
-#' @param rated_items Defaults to \code{NULL}.
-#' @param y Defaults to \code{NULL}.
-#' @param exponent Defaults to \code{-0.5}.
+#' @param rated_items Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param y Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param exponent Passed to \code{.svdpp_implicit_term}. Defaults to \code{-0.5}.
 #' @return A list with \code{prediction}, \code{effective_user_factor}, \code{implicit}, \code{n_rated}, \code{note}.
 #' @export
 .svdpp_predict <- function(mu, b_user, b_item, p_u, q_i,
@@ -134,20 +137,21 @@
 
 #' .svdpp_sgd_step
 #'
-#' Part of the svdpp_native implementation; see the file header for the
+#' A step of the svdpp_native implementation. Called by \code{.svdpp_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param rating See Usage.
-#' @param mu See Usage.
-#' @param b_user See Usage.
-#' @param b_item See Usage.
-#' @param p_u See Usage.
-#' @param q_i See Usage.
-#' @param rated_items See Usage.
-#' @param y See Usage.
+#' @param mu Passed to \code{.svdpp_predict}.
+#' @param b_user Passed to \code{.svdpp_predict}.
+#' @param b_item Passed to \code{.svdpp_predict}.
+#' @param p_u Passed to \code{.svdpp_predict}.
+#' @param q_i Passed to \code{.svdpp_predict}.
+#' @param rated_items A vector; its length is taken.
+#' @param y A vector; indexed elementwise.
 #' @param lr Defaults to \code{0.007}.
 #' @param reg Defaults to \code{0.015}.
-#' @param exponent Defaults to \code{-0.5}.
+#' @param exponent Passed to \code{.svdpp_predict}. Defaults to \code{-0.5}.
 #' @return A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u}, \code{q_i}, \code{y}, \code{note}.
 #' @export
 .svdpp_sgd_step <- function(rating, mu, b_user, b_item, p_u, q_i,
@@ -185,19 +189,20 @@
 
 #' .svdpp_fit
 #'
-#' Part of the svdpp_native implementation; see the file header for the
+#' A step of the svdpp_native implementation. Called by \code{morie_svdpp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ratings See Usage.
 #' @param n_users See Usage.
 #' @param n_items See Usage.
 #' @param factors Defaults to \code{4}.
-#' @param epochs Defaults to \code{30}.
-#' @param lr Defaults to \code{0.007}.
-#' @param reg Defaults to \code{0.015}.
-#' @param exponent Defaults to \code{-0.5}.
-#' @param seed Defaults to \code{0}.
-#' @param implicit Defaults to \code{TRUE}.
+#' @param epochs A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.
+#' @param lr Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.007}.
+#' @param reg Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.015}.
+#' @param exponent Passed to \code{.svdpp_sgd_step}. Defaults to \code{-0.5}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param implicit A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit}, \code{method}, \code{note}.
 #' @export
 .svdpp_fit <- function(ratings, n_users, n_items,
@@ -276,19 +281,20 @@
 
 #' morie_svdpp
 #'
-#' Part of the svdpp_native implementation; see the file header for the
+#' A step of the svdpp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ratings See Usage.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param factors Defaults to \code{4}.
-#' @param epochs Defaults to \code{30}.
-#' @param lr Defaults to \code{0.007}.
-#' @param reg Defaults to \code{0.015}.
-#' @param exponent Defaults to \code{-0.5}.
-#' @param seed Defaults to \code{0}.
-#' @param implicit Defaults to \code{TRUE}.
+#' @param ratings Passed to \code{.svdpp_fit}.
+#' @param n_users Passed to \code{.svdpp_fit}.
+#' @param n_items Passed to \code{.svdpp_fit}.
+#' @param factors Passed to \code{.svdpp_fit}. Defaults to \code{4}.
+#' @param epochs Passed to \code{.svdpp_fit}. Defaults to \code{30}.
+#' @param lr Passed to \code{.svdpp_fit}. Defaults to \code{0.007}.
+#' @param reg Passed to \code{.svdpp_fit}. Defaults to \code{0.015}.
+#' @param exponent Passed to \code{.svdpp_fit}. Defaults to \code{-0.5}.
+#' @param seed Passed to \code{.svdpp_fit}. Defaults to \code{0}.
+#' @param implicit Passed to \code{.svdpp_fit}. Defaults to \code{TRUE}.
 #' @return The value of \code{.svdpp_fit}.
 #' @export
 morie_svdpp <- function(ratings, n_users, n_items,
@@ -303,7 +309,8 @@ morie_svdpp <- function(ratings, n_users, n_items,
 
 #' .svdpp_cheatsheet
 #'
-#' Part of the svdpp_native implementation; see the file header for the
+#' A step of the svdpp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

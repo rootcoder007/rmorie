@@ -12,7 +12,7 @@ sasimi_counts(fp_a, fp_b)
 \item{fp_b}{See Usage.}
 }
 \description{
-Part of the sasimi_native implementation; see the file header for the source it follows.
+A step of the sasimi_native implementation. Called by \code{morie_sasimi}, \code{sasimi_cosine}, \code{sasimi_dice} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{a}, \code{b}, \code{c}, \code{union}.

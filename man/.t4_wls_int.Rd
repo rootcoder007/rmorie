@@ -8,9 +8,9 @@
 .t4_wls_int(xs, ys, ws)
 }
 \arguments{
-\item{xs}{See Usage.}
-\item{ys}{See Usage.}
-\item{ws}{See Usage.}
+\item{xs}{Numeric; combined arithmetically in the body.}
+\item{ys}{Numeric; combined arithmetically in the body.}
+\item{ws}{Numeric; passed to \code{sqrt}.}
 }
 \description{
 weighted least squares of y on (1, x); returns the intercept

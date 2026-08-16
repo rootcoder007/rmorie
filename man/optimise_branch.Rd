@@ -9,16 +9,16 @@ optimise_branch(make_tree, seqs, pi = NULL, u = 1, lo = 1e-06, hi = 10, tol = 1e
 }
 \arguments{
 \item{make_tree}{See Usage.}
-\item{seqs}{See Usage.}
-\item{pi}{Defaults to \code{NULL}.}
-\item{u}{Defaults to \code{1}.}
+\item{seqs}{Passed to \code{morie_phylml}.}
+\item{pi}{Passed to \code{morie_phylml}.}
+\item{u}{Passed to \code{morie_phylml}. Defaults to \code{1}.}
 \item{lo}{Defaults to \code{1e-06}.}
 \item{hi}{Defaults to \code{10}.}
 \item{tol}{Defaults to \code{1e-10}.}
 \item{max_iter}{Defaults to \code{200}.}
 }
 \description{
-Part of the phylml_native implementation; see the file header for the source it follows.
+A step of the phylml_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

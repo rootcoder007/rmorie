@@ -8,10 +8,10 @@
 .wrd2v_softmax(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the wrd2v_native implementation; see the file header for the source it follows.
+A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \code{.wrd2v_sg_step}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

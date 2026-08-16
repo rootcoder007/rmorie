@@ -8,7 +8,7 @@
 .morie_negbin_family(theta, link = "log")
 }
 \arguments{
-\item{theta}{See Usage.}
+\item{theta}{Numeric; passed to \code{log}.}
 \item{link}{Defaults to \code{"log"}.}
 }
 \description{

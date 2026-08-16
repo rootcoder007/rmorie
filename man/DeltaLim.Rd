@@ -8,7 +8,7 @@
 DeltaLim(t, a)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{.morie_rg_aslist}.}
 \item{a}{See Usage.}
 }
 \description{

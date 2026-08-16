@@ -8,12 +8,12 @@
 .morie_ml_adj(edges, a, b)
 }
 \arguments{
-\item{edges}{See Usage.}
+\item{edges}{A matrix; indexed by row and column.}
 \item{a}{See Usage.}
 \item{b}{See Usage.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{.morie_ml_colliders}, \code{morie_bowarc}, \code{morie_collider} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A logical value.

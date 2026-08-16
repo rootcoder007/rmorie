@@ -51,23 +51,25 @@ Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
 
 #' .k01_soft
 #'
-#' Part of the acclso implementation; see the file header for the source
+#' A step of the acclso implementation. Called by \code{Admmlasso}, \code{Fistalasso}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
-#' @param t See Usage.
+#' @param v Numeric; passed to \code{abs}.
+#' @param t Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .k01_soft <- function(v, t) sign(v) * pmax(abs(v) - t, 0)
 
 #' .k01_speclip
 #'
-#' Part of the acclso implementation; see the file header for the source
+#' A step of the acclso implementation. Called by \code{Agdproj}, \code{Fistalasso}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param Xm See Usage.
-#' @param p See Usage.
-#' @param iters Defaults to \code{50L}.
+#' @param Xm A matrix; passed to \code{t}.
+#' @param p A count; the body uses it as \code{rep(...)}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @return The value of \code{lam}, as built in the body.
 #' @export
 .k01_speclip <- function(Xm, p, iters = 50L) {

@@ -8,14 +8,14 @@
 .sxrhrt_reml(theta, y, X, Km, male)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{Km}{See Usage.}
-\item{male}{See Usage.}
+\item{theta}{A vector; indexed elementwise.}
+\item{y}{A vector; its length is taken.}
+\item{X}{A matrix; indexed by row and column.}
+\item{Km}{A matrix; indexed by row and column.}
+\item{male}{A vector; indexed elementwise.}
 }
 \description{
-Part of the sxrhrt_native implementation; see the file header for the source it follows.
+A step of the sxrhrt_native implementation. Called by \code{morie_sxrhrt_sex_specific_h2}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ll}, \code{beta}, \code{L}.

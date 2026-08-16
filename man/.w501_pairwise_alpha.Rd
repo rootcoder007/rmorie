@@ -8,8 +8,8 @@
 .w501_pairwise_alpha(Z, alpha)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{alpha}{See Usage.}
+\item{Z}{A matrix; indexed by row and column.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Part of the w501_changepoint_native implementation; see the file header for the source it follows.

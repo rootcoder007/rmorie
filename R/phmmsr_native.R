@@ -58,10 +58,11 @@
 
 #' .phmmsr_to_matrix
 #'
-#' Part of the phmmsr_native implementation; see the file header for the
+#' A step of the phmmsr_native implementation. Called by \code{phmmsr_msv_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param profile See Usage.
+#' @param profile A vector; its length is taken and its elements indexed.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .phmmsr_to_matrix <- function(profile) {
@@ -87,7 +88,8 @@
 
 #' phmmsr_striped_layout
 #'
-#' Part of the phmmsr_native implementation; see the file header for the
+#' A step of the phmmsr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param length See Usage.
@@ -119,11 +121,12 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
 
 #' phmmsr_msv_score
 #'
-#' Part of the phmmsr_native implementation; see the file header for the
+#' A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seq See Usage.
-#' @param profile See Usage.
+#' @param profile Passed to \code{.phmmsr_to_matrix}.
 #' @param tau Defaults to \code{0.02}.
 #' @param lam Defaults to \code{0.7}.
 #' @return A list with \code{score}, \code{note}.
@@ -173,7 +176,8 @@ phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
 
 #' phmmsr_gumbel_pvalue
 #'
-#' Part of the phmmsr_native implementation; see the file header for the
+#' A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param score See Usage.
@@ -196,7 +200,8 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
 
 #' phmmsr_sparse_rescale
 #'
-#' Part of the phmmsr_native implementation; see the file header for the
+#' A step of the phmmsr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values See Usage.
@@ -224,10 +229,11 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 
 #' phmmsr_search_pipeline
 #'
-#' Part of the phmmsr_native implementation; see the file header for the
+#' A step of the phmmsr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sequences See Usage.
+#' @param sequences A vector; its length is taken and its elements indexed.
 #' @param profile See Usage.
 #' @param msv_threshold Defaults to \code{0.02}.
 #' @param mu Defaults to \code{10}.
@@ -273,7 +279,8 @@ phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
 
 #' phmmsr_cheatsheet
 #'
-#' Part of the phmmsr_native implementation; see the file header for the
+#' A step of the phmmsr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

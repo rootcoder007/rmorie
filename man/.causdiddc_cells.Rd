@@ -8,13 +8,13 @@
 .causdiddc_cells(Y, D, g, t)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{D}{See Usage.}
+\item{Y}{A vector; indexed elementwise.}
+\item{D}{A vector; indexed elementwise.}
 \item{g}{See Usage.}
 \item{t}{See Usage.}
 }
 \description{
-Part of the causdiddc_native implementation; see the file header for the source it follows.
+A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

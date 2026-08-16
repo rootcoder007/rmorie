@@ -8,7 +8,7 @@
 QrsHPassIo(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 (1/32) x(n-32).  Eqs (4.9)-(4.12) folded into one recursion: four adds per sample and a single state variable.

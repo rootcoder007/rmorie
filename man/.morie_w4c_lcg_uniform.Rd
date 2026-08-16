@@ -8,13 +8,13 @@
 .morie_w4c_lcg_uniform(rows, cols, seed, scale)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{cols}{See Usage.}
-\item{seed}{See Usage.}
-\item{scale}{See Usage.}
+\item{rows}{A count; the body uses it as \code{matrix(...)}.}
+\item{cols}{A count; the body uses it as \code{matrix(...)}.}
+\item{seed}{Passed to \code{.morie_w4c_lcgvec}.}
+\item{scale}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_regression_mlp}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

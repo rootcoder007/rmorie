@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{z}{See Usage.}
-\item{upper}{Defaults to \code{40}.}
-\item{n_quad}{Defaults to \code{400L}.}
+\item{upper}{Numeric; combined arithmetically in the body. Defaults to \code{40}.}
+\item{n_quad}{Passed to \code{.schab_gauss_legendre}. Defaults to \code{400L}.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{.schab_whittle_covariance}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

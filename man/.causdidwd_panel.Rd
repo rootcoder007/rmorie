@@ -13,7 +13,7 @@
 \item{period}{See Usage.}
 }
 \description{
-Part of the causdidwd_native implementation; see the file header for the source it follows.
+A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{u}, \code{t}, \code{n}.

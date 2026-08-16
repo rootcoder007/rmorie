@@ -14,7 +14,7 @@ sample_bound(n, r, C = 1, exponent = 1.2)
 \item{exponent}{Defaults to \code{1.2}.}
 }
 \description{
-Part of the meglt_native implementation; see the file header for the source it follows.
+A step of the meglt_native implementation. Called by \code{morie_meglt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{m}, \code{fraction}, \code{n}, \code{r}, \code{exponent}, \code{note}.

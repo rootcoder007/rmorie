@@ -8,10 +8,10 @@
 .mor_hits_unit(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hits_native implementation; see the file header for the source it follows.
+A step of the hits_native implementation. Called by \code{morie_hits}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

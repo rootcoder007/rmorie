@@ -8,10 +8,10 @@
 .tf_lcg_step(st)
 }
 \arguments{
-\item{st}{See Usage.}
+\item{st}{A vector; indexed elementwise.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}, \code{EmdEns}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

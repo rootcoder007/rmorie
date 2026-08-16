@@ -8,13 +8,13 @@
 .morie_ml_blocked(path, dirs, z, children)
 }
 \arguments{
-\item{path}{See Usage.}
-\item{dirs}{See Usage.}
+\item{path}{A vector; its length is taken and its elements indexed.}
+\item{dirs}{A vector; indexed elementwise.}
 \item{z}{See Usage.}
-\item{children}{See Usage.}
+\item{children}{Passed to \code{.morie_ml_desc}.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

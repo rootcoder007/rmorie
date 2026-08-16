@@ -3,10 +3,11 @@
 
 #' .rmorie_sha256_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_wrapping_key}, \code{morie_crypto_lamport_sign}, \code{morie_crypto_lamport_verify}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
+#' @param data Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_sha256_impl <- function(data) {
@@ -15,10 +16,11 @@
 
 #' .rmorie_sha256_hex_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_sha256_hex}, \code{create_reproducibility_manifest}, \code{morie_crypto_lamport_keygen} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
+#' @param data Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_sha256_hex_impl <- function(data) {
@@ -27,11 +29,12 @@
 
 #' .rmorie_hmac_sha256_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_hkdf_sha256}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param key See Usage.
-#' @param msg See Usage.
+#' @param key Passed to \code{.Call}.
+#' @param msg Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_hmac_sha256_impl <- function(key, msg) {
@@ -40,13 +43,14 @@
 
 #' .rmorie_pbkdf2_sha256_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param password See Usage.
-#' @param salt See Usage.
-#' @param iterations See Usage.
-#' @param dklen See Usage.
+#' @param password Passed to \code{.Call}.
+#' @param salt Passed to \code{.Call}.
+#' @param iterations Passed to \code{.Call}.
+#' @param dklen Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_pbkdf2_sha256_impl <- function(password, salt, iterations, dklen) {
@@ -55,12 +59,13 @@
 
 #' .morie_blake2b_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_secarg_prehash}, \code{morie_secarg_variable_hash}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
-#' @param outlen See Usage.
-#' @param key Defaults to \code{NULL}.
+#' @param data Passed to \code{.Call}.
+#' @param outlen Passed to \code{.Call}.
+#' @param key Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_blake2b_impl <- function(data, outlen, key = NULL) {
@@ -69,18 +74,19 @@
 
 #' .morie_argon2_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_secarg_argon2}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param password See Usage.
-#' @param salt See Usage.
-#' @param memory See Usage.
-#' @param passes See Usage.
-#' @param parallelism See Usage.
-#' @param tag_length See Usage.
-#' @param variant See Usage.
-#' @param secret Defaults to \code{NULL}.
-#' @param associated Defaults to \code{NULL}.
+#' @param password Passed to \code{.Call}.
+#' @param salt Passed to \code{.Call}.
+#' @param memory Passed to \code{.Call}.
+#' @param passes Passed to \code{.Call}.
+#' @param parallelism Passed to \code{.Call}.
+#' @param tag_length Passed to \code{.Call}.
+#' @param variant Passed to \code{.Call}.
+#' @param secret Passed to \code{.Call}.
+#' @param associated Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_argon2_impl <- function(password, salt, memory, passes, parallelism, tag_length, variant, secret = NULL, associated = NULL) {
@@ -89,7 +95,8 @@
 
 #' .rmorie_liboqs_available_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -100,7 +107,8 @@
 
 #' .rmorie_liboqs_version_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -111,7 +119,8 @@
 
 #' .rmorie_mlkem768_keygen_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -122,10 +131,11 @@
 
 #' .rmorie_mlkem768_encaps_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pk_sxp See Usage.
+#' @param pk_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_mlkem768_encaps_impl <- function(pk_sxp) {
@@ -134,11 +144,12 @@
 
 #' .rmorie_mlkem768_decaps_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sk_sxp See Usage.
-#' @param ct_sxp See Usage.
+#' @param sk_sxp Passed to \code{.Call}.
+#' @param ct_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_mlkem768_decaps_impl <- function(sk_sxp, ct_sxp) {
@@ -147,7 +158,8 @@
 
 #' .rmorie_mldsa65_keygen_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -158,11 +170,12 @@
 
 #' .rmorie_mldsa65_sign_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sk_sxp See Usage.
-#' @param message_sxp See Usage.
+#' @param sk_sxp Passed to \code{.Call}.
+#' @param message_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_mldsa65_sign_impl <- function(sk_sxp, message_sxp) {
@@ -171,12 +184,13 @@
 
 #' .rmorie_mldsa65_verify_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pk_sxp See Usage.
-#' @param message_sxp See Usage.
-#' @param signature_sxp See Usage.
+#' @param pk_sxp Passed to \code{.Call}.
+#' @param message_sxp Passed to \code{.Call}.
+#' @param signature_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_mldsa65_verify_impl <- function(pk_sxp, message_sxp, signature_sxp) {
@@ -185,7 +199,8 @@
 
 #' .rmorie_slhdsa128s_keygen_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -196,11 +211,12 @@
 
 #' .rmorie_slhdsa128s_sign_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sk_sxp See Usage.
-#' @param message_sxp See Usage.
+#' @param sk_sxp Passed to \code{.Call}.
+#' @param message_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_slhdsa128s_sign_impl <- function(sk_sxp, message_sxp) {
@@ -209,12 +225,13 @@
 
 #' .rmorie_slhdsa128s_verify_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pk_sxp See Usage.
-#' @param message_sxp See Usage.
-#' @param signature_sxp See Usage.
+#' @param pk_sxp Passed to \code{.Call}.
+#' @param message_sxp Passed to \code{.Call}.
+#' @param signature_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_slhdsa128s_verify_impl <- function(pk_sxp, message_sxp, signature_sxp) {
@@ -223,7 +240,8 @@
 
 #' .rmorie_hqc128_keygen_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -234,10 +252,11 @@
 
 #' .rmorie_hqc128_encaps_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pk_sxp See Usage.
+#' @param pk_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_hqc128_encaps_impl <- function(pk_sxp) {
@@ -246,11 +265,12 @@
 
 #' .rmorie_hqc128_decaps_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sk_sxp See Usage.
-#' @param ct_sxp See Usage.
+#' @param sk_sxp Passed to \code{.Call}.
+#' @param ct_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_hqc128_decaps_impl <- function(sk_sxp, ct_sxp) {
@@ -259,7 +279,8 @@
 
 #' .rmorie_sodium_available_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -270,7 +291,8 @@
 
 #' .rmorie_sodium_version_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
@@ -281,13 +303,14 @@
 
 #' .rmorie_chacha20poly1305_encrypt_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param key_sxp See Usage.
-#' @param nonce_sxp See Usage.
-#' @param plaintext_sxp See Usage.
-#' @param aad_sxp See Usage.
+#' @param key_sxp Passed to \code{.Call}.
+#' @param nonce_sxp Passed to \code{.Call}.
+#' @param plaintext_sxp Passed to \code{.Call}.
+#' @param aad_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_chacha20poly1305_encrypt_impl <- function(key_sxp, nonce_sxp, plaintext_sxp, aad_sxp) {
@@ -296,13 +319,14 @@
 
 #' .rmorie_chacha20poly1305_decrypt_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param key_sxp See Usage.
-#' @param nonce_sxp See Usage.
-#' @param ct_with_tag_sxp See Usage.
-#' @param aad_sxp See Usage.
+#' @param key_sxp Passed to \code{.Call}.
+#' @param nonce_sxp Passed to \code{.Call}.
+#' @param ct_with_tag_sxp Passed to \code{.Call}.
+#' @param aad_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_chacha20poly1305_decrypt_impl <- function(key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp) {
@@ -311,13 +335,14 @@
 
 #' .rmorie_hkdf_sha256_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ikm_sxp See Usage.
-#' @param length_sxp See Usage.
-#' @param salt_sxp See Usage.
-#' @param info_sxp See Usage.
+#' @param ikm_sxp Passed to \code{.Call}.
+#' @param length_sxp Passed to \code{.Call}.
+#' @param salt_sxp Passed to \code{.Call}.
+#' @param info_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_hkdf_sha256_impl <- function(ikm_sxp, length_sxp, salt_sxp, info_sxp) {
@@ -326,10 +351,11 @@
 
 #' .rmorie_random_bytes_impl
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .rmorie_random_bytes_impl <- function(n) {
@@ -338,16 +364,17 @@
 
 #' .morie_twfe_demean_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_twfe_demean}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param g1 See Usage.
-#' @param g2 See Usage.
-#' @param K1 See Usage.
-#' @param K2 See Usage.
-#' @param tol Defaults to \code{1e-11}.
-#' @param max_iter Defaults to \code{500L}.
+#' @param M Passed to \code{.Call}.
+#' @param g1 Passed to \code{.Call}.
+#' @param g2 Passed to \code{.Call}.
+#' @param K1 Passed to \code{.Call}.
+#' @param K2 Passed to \code{.Call}.
+#' @param tol Passed to \code{.Call}. Defaults to \code{1e-11}.
+#' @param max_iter Passed to \code{.Call}. Defaults to \code{500L}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_twfe_demean_cpp <- function(M, g1, g2, K1, K2, tol = 1e-11, max_iter = 500L) {
@@ -356,13 +383,14 @@
 
 #' morie_dsp_lms_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_dsp_lms}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param d See Usage.
-#' @param order See Usage.
-#' @param mu See Usage.
+#' @param x Passed to \code{.Call}.
+#' @param d Passed to \code{.Call}.
+#' @param order Passed to \code{.Call}.
+#' @param mu Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_dsp_lms_cpp <- function(x, d, order, mu) {
@@ -371,14 +399,15 @@ morie_dsp_lms_cpp <- function(x, d, order, mu) {
 
 #' morie_dsp_nlms_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_dsp_nlms}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param d See Usage.
-#' @param order See Usage.
-#' @param mu See Usage.
-#' @param eps See Usage.
+#' @param x Passed to \code{.Call}.
+#' @param d Passed to \code{.Call}.
+#' @param order Passed to \code{.Call}.
+#' @param mu Passed to \code{.Call}.
+#' @param eps Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_dsp_nlms_cpp <- function(x, d, order, mu, eps) {
@@ -387,14 +416,15 @@ morie_dsp_nlms_cpp <- function(x, d, order, mu, eps) {
 
 #' morie_dsp_rls_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_dsp_rls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param d See Usage.
-#' @param order See Usage.
-#' @param lam See Usage.
-#' @param delta See Usage.
+#' @param x Passed to \code{.Call}.
+#' @param d Passed to \code{.Call}.
+#' @param order Passed to \code{.Call}.
+#' @param lam Passed to \code{.Call}.
+#' @param delta Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_dsp_rls_cpp <- function(x, d, order, lam, delta) {
@@ -403,12 +433,13 @@ morie_dsp_rls_cpp <- function(x, d, order, lam, delta) {
 
 #' morie_dsp_cross_correlation_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_dsp_cross_correlation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param max_lag See Usage.
+#' @param x Passed to \code{.Call}.
+#' @param y Passed to \code{.Call}.
+#' @param max_lag Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_dsp_cross_correlation_cpp <- function(x, y, max_lag) {
@@ -417,11 +448,12 @@ morie_dsp_cross_correlation_cpp <- function(x, y, max_lag) {
 
 #' morie_dsp_median_filter_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_dsp_median_filter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param kernel_size See Usage.
+#' @param x Passed to \code{.Call}.
+#' @param kernel_size Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_dsp_median_filter_cpp <- function(x, kernel_size) {
@@ -430,12 +462,13 @@ morie_dsp_median_filter_cpp <- function(x, kernel_size) {
 
 #' morie_normal_pdf_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_normal_pdf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param mean See Usage.
-#' @param sd See Usage.
+#' @param x Passed to \code{.Call}.
+#' @param mean Passed to \code{.Call}.
+#' @param sd Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_normal_pdf_cpp <- function(x, mean, sd) {
@@ -444,10 +477,11 @@ morie_normal_pdf_cpp <- function(x, mean, sd) {
 
 #' morie_mean_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_mean}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_mean_cpp <- function(x) {
@@ -456,11 +490,12 @@ morie_mean_cpp <- function(x) {
 
 #' morie_var_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_var}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param ddof Defaults to \code{1L}.
+#' @param x Passed to \code{.Call}.
+#' @param ddof Passed to \code{.Call}. Defaults to \code{1L}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_var_cpp <- function(x, ddof = 1L) {
@@ -469,11 +504,12 @@ morie_var_cpp <- function(x, ddof = 1L) {
 
 #' morie_cor_pearson_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_cor_pearson}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Passed to \code{.Call}.
+#' @param y Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_cor_pearson_cpp <- function(x, y) {
@@ -482,14 +518,15 @@ morie_cor_pearson_cpp <- function(x, y) {
 
 #' morie_hawkes_ll_exp_const_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param T_horizon See Usage.
-#' @param a0 See Usage.
-#' @param eta See Usage.
-#' @param beta See Usage.
+#' @param t Passed to \code{.Call}.
+#' @param T_horizon Passed to \code{.Call}.
+#' @param a0 Passed to \code{.Call}.
+#' @param eta Passed to \code{.Call}.
+#' @param beta Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_ll_exp_const_cpp <- function(t, T_horizon, a0, eta, beta) {
@@ -498,15 +535,16 @@ morie_hawkes_ll_exp_const_cpp <- function(t, T_horizon, a0, eta, beta) {
 
 #' morie_hawkes_ll_weibull_const_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param T_horizon See Usage.
-#' @param a0 See Usage.
-#' @param eta See Usage.
-#' @param alpha See Usage.
-#' @param lam See Usage.
+#' @param t Passed to \code{.Call}.
+#' @param T_horizon Passed to \code{.Call}.
+#' @param a0 Passed to \code{.Call}.
+#' @param eta Passed to \code{.Call}.
+#' @param alpha Passed to \code{.Call}.
+#' @param lam Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_ll_weibull_const_cpp <- function(t, T_horizon, a0, eta, alpha, lam) {
@@ -515,15 +553,16 @@ morie_hawkes_ll_weibull_const_cpp <- function(t, T_horizon, a0, eta, alpha, lam)
 
 #' morie_hawkes_ll_lomax_const_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param T_horizon See Usage.
-#' @param a0 See Usage.
-#' @param eta See Usage.
-#' @param alpha See Usage.
-#' @param c See Usage.
+#' @param t Passed to \code{.Call}.
+#' @param T_horizon Passed to \code{.Call}.
+#' @param a0 Passed to \code{.Call}.
+#' @param eta Passed to \code{.Call}.
+#' @param alpha Passed to \code{.Call}.
+#' @param c Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_ll_lomax_const_cpp <- function(t, T_horizon, a0, eta, alpha, c) {
@@ -532,15 +571,16 @@ morie_hawkes_ll_lomax_const_cpp <- function(t, T_horizon, a0, eta, alpha, c) {
 
 #' morie_hawkes_ll_gamma_const_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param T_horizon See Usage.
-#' @param a0 See Usage.
-#' @param eta See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
+#' @param t Passed to \code{.Call}.
+#' @param T_horizon Passed to \code{.Call}.
+#' @param a0 Passed to \code{.Call}.
+#' @param eta Passed to \code{.Call}.
+#' @param alpha Passed to \code{.Call}.
+#' @param beta Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_ll_gamma_const_cpp <- function(t, T_horizon, a0, eta, alpha, beta) {
@@ -549,12 +589,13 @@ morie_hawkes_ll_gamma_const_cpp <- function(t, T_horizon, a0, eta, alpha, beta) 
 
 #' morie_hawkes_kernel_density_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.tps_hwka_kernel_density}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param kind See Usage.
-#' @param psi See Usage.
+#' @param u Passed to \code{.Call}.
+#' @param kind Passed to \code{.Call}.
+#' @param psi Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_kernel_density_cpp <- function(u, kind, psi) {
@@ -563,12 +604,13 @@ morie_hawkes_kernel_density_cpp <- function(u, kind, psi) {
 
 #' morie_hawkes_kernel_cdf_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.tps_hwka_kernel_cdf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param kind See Usage.
-#' @param psi See Usage.
+#' @param u Passed to \code{.Call}.
+#' @param kind Passed to \code{.Call}.
+#' @param psi Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_kernel_cdf_cpp <- function(u, kind, psi) {
@@ -577,13 +619,14 @@ morie_hawkes_kernel_cdf_cpp <- function(u, kind, psi) {
 
 #' morie_hawkes_pair_excitation_sum_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.tps_hwka_neg_loglik_general}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param eta See Usage.
-#' @param kind See Usage.
-#' @param psi See Usage.
+#' @param t Passed to \code{.Call}.
+#' @param eta Passed to \code{.Call}.
+#' @param kind Passed to \code{.Call}.
+#' @param psi Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_pair_excitation_sum_cpp <- function(t, eta, kind, psi) {
@@ -592,12 +635,13 @@ morie_hawkes_pair_excitation_sum_cpp <- function(t, eta, kind, psi) {
 
 #' morie_hawkes_baseline_integral_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.tps_hwka_baseline_integral}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T_horizon See Usage.
-#' @param alpha See Usage.
-#' @param n_grid Defaults to \code{0L}.
+#' @param T_horizon Passed to \code{.Call}.
+#' @param alpha Passed to \code{.Call}.
+#' @param n_grid Passed to \code{.Call}. Defaults to \code{0L}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
@@ -693,12 +737,13 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
 
 #' morie_matching_mahalanobis_pairs_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X_t See Usage.
-#' @param X_c See Usage.
-#' @param S_inv See Usage.
+#' @param X_t Passed to \code{.Call}.
+#' @param X_c Passed to \code{.Call}.
+#' @param S_inv Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_matching_mahalanobis_pairs_cpp <- function(X_t, X_c, S_inv) {
@@ -707,11 +752,12 @@ morie_matching_mahalanobis_pairs_cpp <- function(X_t, X_c, S_inv) {
 
 #' morie_matching_euclidean_pairs_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X_t See Usage.
-#' @param X_c See Usage.
+#' @param X_t Passed to \code{.Call}.
+#' @param X_c Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_matching_euclidean_pairs_cpp <- function(X_t, X_c) {
@@ -720,13 +766,14 @@ morie_matching_euclidean_pairs_cpp <- function(X_t, X_c) {
 
 #' morie_matching_nn_select_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param with_replacement See Usage.
-#' @param caliper See Usage.
-#' @param n_neighbors See Usage.
+#' @param D Passed to \code{.Call}.
+#' @param with_replacement Passed to \code{.Call}.
+#' @param caliper Passed to \code{.Call}.
+#' @param n_neighbors Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_matching_nn_select_cpp <- function(D, with_replacement, caliper, n_neighbors) {
@@ -735,10 +782,11 @@ morie_matching_nn_select_cpp <- function(D, with_replacement, caliper, n_neighbo
 
 #' morie_matching_cem_strata_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X_binned See Usage.
+#' @param X_binned Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_matching_cem_strata_cpp <- function(X_binned) {
@@ -747,13 +795,14 @@ morie_matching_cem_strata_cpp <- function(X_binned) {
 
 #' morie_matching_abadie_imbens_kernel_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_matching_abadie_imbens_se}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param t See Usage.
-#' @param treated_pos See Usage.
-#' @param control_pos See Usage.
+#' @param y Passed to \code{.Call}.
+#' @param t Passed to \code{.Call}.
+#' @param treated_pos Passed to \code{.Call}.
+#' @param control_pos Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_pos) {
@@ -762,14 +811,15 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_match_greedy_kd_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_match_genetic_eval}, \code{.morie_match_genetic_native}, \code{.morie_match_mahalanobis_native}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param treated See Usage.
-#' @param control See Usage.
-#' @param ratio See Usage.
-#' @param caliper_dist See Usage.
-#' @param replace See Usage.
+#' @param treated Passed to \code{.Call}.
+#' @param control Passed to \code{.Call}.
+#' @param ratio Passed to \code{.Call}.
+#' @param caliper_dist Passed to \code{.Call}.
+#' @param replace Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_match_greedy_kd_cpp <- function(treated, control, ratio, caliper_dist, replace) {
@@ -778,14 +828,15 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_match_greedy_1d_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_match_greedy_1d}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param treated_val See Usage.
-#' @param control_val See Usage.
-#' @param ratio See Usage.
-#' @param caliper_width See Usage.
-#' @param replace See Usage.
+#' @param treated_val Passed to \code{.Call}.
+#' @param control_val Passed to \code{.Call}.
+#' @param ratio Passed to \code{.Call}.
+#' @param caliper_width Passed to \code{.Call}.
+#' @param replace Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_match_greedy_1d_cpp <- function(treated_val, control_val, ratio, caliper_width, replace) {
@@ -794,11 +845,12 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_match_optimal_1d_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_match_optimal_native}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param treated_val See Usage.
-#' @param control_val See Usage.
+#' @param treated_val Passed to \code{.Call}.
+#' @param control_val Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_match_optimal_1d_cpp <- function(treated_val, control_val) {
@@ -807,11 +859,12 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_match_optimal_assign_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_match_optimal_native}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param treated See Usage.
-#' @param control See Usage.
+#' @param treated Passed to \code{.Call}.
+#' @param control Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_match_optimal_assign_cpp <- function(treated, control) {
@@ -820,18 +873,19 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_rlearner_forest_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_cate_dr_learner}, \code{.morie_causal_forest_native}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param pseudo See Usage.
-#' @param weight See Usage.
-#' @param Xpred See Usage.
-#' @param n_trees See Usage.
-#' @param max_depth See Usage.
-#' @param min_node See Usage.
-#' @param subsample See Usage.
-#' @param seed See Usage.
+#' @param X Passed to \code{.Call}.
+#' @param pseudo Passed to \code{.Call}.
+#' @param weight Passed to \code{.Call}.
+#' @param Xpred Passed to \code{.Call}.
+#' @param n_trees Passed to \code{.Call}.
+#' @param max_depth Passed to \code{.Call}.
+#' @param min_node Passed to \code{.Call}.
+#' @param subsample Passed to \code{.Call}.
+#' @param seed Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_rlearner_forest_cpp <- function(X, pseudo, weight, Xpred, n_trees, max_depth, min_node, subsample, seed) {
@@ -840,14 +894,15 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_rlm_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_rlm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param k See Usage.
-#' @param maxit See Usage.
-#' @param acc See Usage.
+#' @param X Passed to \code{.Call}.
+#' @param y Passed to \code{.Call}.
+#' @param k Passed to \code{.Call}.
+#' @param maxit Passed to \code{.Call}.
+#' @param acc Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_rlm_cpp <- function(X, y, k, maxit, acc) {
@@ -856,11 +911,12 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_sobol_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_sobol}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param d See Usage.
+#' @param n Passed to \code{.Call}.
+#' @param d Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_sobol_cpp <- function(n, d) {
@@ -869,11 +925,12 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_knn_index_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_knn_index}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param coords See Usage.
-#' @param k See Usage.
+#' @param coords Passed to \code{.Call}.
+#' @param k Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_knn_index_cpp <- function(coords, k) {
@@ -882,16 +939,17 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_coord_descent_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_coord_descent}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Xs See Usage.
-#' @param yc See Usage.
-#' @param alpha See Usage.
-#' @param lambda See Usage.
-#' @param max_iter See Usage.
-#' @param tol See Usage.
-#' @param warm See Usage.
+#' @param Xs Passed to \code{.Call}.
+#' @param yc Passed to \code{.Call}.
+#' @param alpha Passed to \code{.Call}.
+#' @param lambda Passed to \code{.Call}.
+#' @param max_iter Passed to \code{.Call}.
+#' @param tol Passed to \code{.Call}.
+#' @param warm Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_coord_descent_cpp <- function(Xs, yc, alpha, lambda, max_iter, tol, warm) {
@@ -900,13 +958,14 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' .morie_tsne_descent_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{.morie_tsne}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P See Usage.
-#' @param Y See Usage.
-#' @param n_iter See Usage.
-#' @param eta See Usage.
+#' @param P Passed to \code{.Call}.
+#' @param Y Passed to \code{.Call}.
+#' @param n_iter Passed to \code{.Call}.
+#' @param eta Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 .morie_tsne_descent_cpp <- function(P, Y, n_iter, eta) {
@@ -915,16 +974,17 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 #' morie_spatial_nominate_iterate_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_dw_nominate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param votes See Usage.
-#' @param X See Usage.
-#' @param w See Usage.
-#' @param nv See Usage.
-#' @param mid See Usage.
-#' @param beta See Usage.
-#' @param max_iter See Usage.
+#' @param votes Passed to \code{.Call}.
+#' @param X Passed to \code{.Call}.
+#' @param w Passed to \code{.Call}.
+#' @param nv Passed to \code{.Call}.
+#' @param mid Passed to \code{.Call}.
+#' @param beta Passed to \code{.Call}.
+#' @param max_iter Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_spatial_nominate_iterate_cpp <- function(votes, X, w, nv, mid, beta, max_iter) {
@@ -933,13 +993,14 @@ morie_spatial_nominate_iterate_cpp <- function(votes, X, w, nv, mid, beta, max_i
 
 #' morie_spatial_emirt_theta_update_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_em_irt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param a See Usage.
-#' @param d See Usage.
-#' @param votes See Usage.
+#' @param theta Passed to \code{.Call}.
+#' @param a Passed to \code{.Call}.
+#' @param d Passed to \code{.Call}.
+#' @param votes Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_spatial_emirt_theta_update_cpp <- function(theta, a, d, votes) {
@@ -948,12 +1009,13 @@ morie_spatial_emirt_theta_update_cpp <- function(theta, a, d, votes) {
 
 #' morie_spatial_smacof_step_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_smacof}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param D See Usage.
-#' @param W See Usage.
+#' @param X Passed to \code{.Call}.
+#' @param D Passed to \code{.Call}.
+#' @param W Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_spatial_smacof_step_cpp <- function(X, D, W) {
@@ -962,11 +1024,12 @@ morie_spatial_smacof_step_cpp <- function(X, D, W) {
 
 #' morie_spatial_classical_mds_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_classical_mds}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param n_dims See Usage.
+#' @param D Passed to \code{.Call}.
+#' @param n_dims Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_spatial_classical_mds_cpp <- function(D, n_dims) {
@@ -975,14 +1038,15 @@ morie_spatial_classical_mds_cpp <- function(D, n_dims) {
 
 #' morie_spatial_wordfish_omega_update_cpp
 #'
-#' Part of the RcppExports implementation; see the file header for the
+#' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_wordfish}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dtm See Usage.
-#' @param psi See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param omega See Usage.
+#' @param dtm Passed to \code{.Call}.
+#' @param psi Passed to \code{.Call}.
+#' @param alpha Passed to \code{.Call}.
+#' @param beta Passed to \code{.Call}.
+#' @param omega Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
 #' @export
 morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega) {

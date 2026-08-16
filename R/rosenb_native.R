@@ -17,7 +17,8 @@
 # Wilcoxon signed-rank sensitivity bound at one Gamma (Python cnsRos).
 #' Wilcoxon signed-rank sensitivity bound at one Gamma (Python cnsRos)
 #'
-#' Part of the rosenb_native implementation; see the file header for the
+#' A step of the rosenb_native implementation. Called by \code{morie_rosenb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pairs See Usage.

@@ -8,10 +8,10 @@
 .morie_km2_counts(keys)
 }
 \arguments{
-\item{keys}{See Usage.}
+\item{keys}{A vector; its length is taken.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_bleu_score}, \code{morie_kamath_ch8_rouge_n}, \code{morie_kamath_rouge_n}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{stats::setNames}.

@@ -8,10 +8,10 @@
 .phylby_clade_credibility(samples)
 }
 \arguments{
-\item{samples}{See Usage.}
+\item{samples}{A vector; its length is taken.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{morie_phylby_clade_credibility}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

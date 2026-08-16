@@ -8,7 +8,7 @@
 .rslufactor(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
 }
 \description{
 Singularity is judged RELATIVE to the largest entry of A, not against exact zero.

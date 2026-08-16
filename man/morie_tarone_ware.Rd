@@ -23,7 +23,7 @@ variance, n_events, n_event_times, groups, weight, method.
 At each event time with n_j at risk, n_1j in group 1, d_j deaths of
 which d_1j in group 1, e_1j = d_j n_1j / n_j and
 V_j = d_j (n_j - d_j) n_1j (n_j - n_1j) / (n_j^2 (n_j - 1)). The
-family is chi2 = \link{sum w_j (d_1j - e_1j)}^2 / sum w_j^2 V_j on 1 df,
+family is chi2 = [sum w_j (d_1j - e_1j)]^2 / sum w_j^2 V_j on 1 df,
 with w_j = 1 (log-rank), n_j (Gehan), sqrt(n_j) (Tarone-Ware) or
 S(t_j) (Peto). Tarone-Ware's sqrt(n_j) sits deliberately between the
 log-rank, most powerful under proportional hazards, and Gehan, most

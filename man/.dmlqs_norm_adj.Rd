@@ -8,7 +8,7 @@
 .dmlqs_norm_adj(adj)
 }
 \arguments{
-\item{adj}{See Usage.}
+\item{adj}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
 }
 \description{
 each value a sorted unique integer vector of neighbours (with v itself excluded -- mirrors Python `set(adj[v]) - {v}`).

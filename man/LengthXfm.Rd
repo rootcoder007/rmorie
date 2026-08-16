@@ -8,9 +8,9 @@
 LengthXfm(chans, wwin, fs)
 }
 \arguments{
-\item{chans}{See Usage.}
-\item{wwin}{See Usage.}
-\item{fs}{See Usage.}
+\item{chans}{A vector; its length is taken.}
+\item{wwin}{Numeric; combined arithmetically in the body.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 }
 \description{
 the arc length of the MULTICHANNEL trajectory accumulated over a w-second window.  Summing the squared derivative across channels before integrating is the whole point: a wave well defined in only one lead still contributes.

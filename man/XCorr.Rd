@@ -11,11 +11,11 @@ XCorr(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE)
 \item{x}{See Usage.}
 \item{y}{See Usage.}
 \item{maxlag}{Defaults to \code{NULL}.}
-\item{normalize}{Defaults to \code{FALSE}.}
-\item{biased}{Defaults to \code{TRUE}.}
+\item{normalize}{A flag; the body branches on it. Defaults to \code{FALSE}.}
+\item{biased}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+A step of the rangayyan_ccf implementation. Called by \code{CorrConv}, \code{XCorrProc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{n}, \code{biased}, \code{normalized}, \code{positive_lag_means_y_trails_x}, \code{biased_keeps_nonnegative_definiteness}, \code{method}.

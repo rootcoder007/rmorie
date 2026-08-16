@@ -8,12 +8,12 @@
 .grclus_coarsen(adj, vw, mate)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{vw}{See Usage.}
-\item{mate}{See Usage.}
+\item{adj}{A vector; its length is taken and its elements indexed.}
+\item{vw}{A vector; indexed elementwise.}
+\item{mate}{A vector; indexed elementwise.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{.grclus_bisect}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{adj}, \code{vw}, \code{mapping}.

@@ -8,12 +8,12 @@
 .hdb_core(D, n, mp)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{n}{See Usage.}
-\item{mp}{See Usage.}
+\item{D}{A matrix; indexed by row and column.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{mp}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the hdbsc_native implementation; see the file header for the source it follows.
+A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

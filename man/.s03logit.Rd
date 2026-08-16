@@ -8,14 +8,14 @@
 .s03logit(X, y, iters = 60L, ridge = 1e-10, tol = 1e-13)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{iters}{Defaults to \code{60L}.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
+\item{ridge}{Passed to \code{.s03ridgesolve}. Defaults to \code{1e-10}.}
 \item{tol}{Defaults to \code{1e-13}.}
 }
 \description{
-which for the canonical link is exactly IRLS, beta <- beta + (X\\\' W X)^-1 X\\\' (y - p), W = diag(p (1 - p)).
+which for the canonical link is exactly IRLS, beta <- beta + (X\\' W X)^-1 X\\' (y - p), W = diag(p (1 - p)).
 }
 \value{
 The value of \code{beta}, as built in the body.

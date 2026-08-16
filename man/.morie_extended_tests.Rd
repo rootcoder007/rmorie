@@ -11,6 +11,6 @@
 Internal helper: Morie Extended Tests
 }
 \value{
-The value of \code{%in%}.
+The value of \code{\%in\%}.
 }
 \keyword{internal}

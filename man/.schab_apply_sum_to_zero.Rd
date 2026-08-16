@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{delta}{See Usage.}
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -3,14 +3,14 @@
 % the formals.
 \name{.ripley_k}
 \alias{.ripley_k}
-\title{Internal: Ripley\\\'s K without edge correction. The bias is shared}
+\title{Internal: Ripley\\'s K without edge correction. The bias is shared}
 \usage{
 .ripley_k(P, radii, area)
 }
 \arguments{
-\item{P}{See Usage.}
+\item{P}{A matrix; passed to \code{nrow}.}
 \item{radii}{See Usage.}
-\item{area}{See Usage.}
+\item{area}{Numeric; combined arithmetically in the body.}
 }
 \description{
 with the simulated patterns, drawn in the same window, so it cancels.

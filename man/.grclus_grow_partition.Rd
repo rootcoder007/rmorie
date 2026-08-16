@@ -8,15 +8,15 @@
 .grclus_grow_partition(adj, vw, target, seed, greedy, n_starts = NULL)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{vw}{See Usage.}
+\item{adj}{A vector; its length is taken and its elements indexed.}
+\item{vw}{A vector; indexed elementwise.}
 \item{target}{See Usage.}
-\item{seed}{See Usage.}
-\item{greedy}{See Usage.}
-\item{n_starts}{Defaults to \code{NULL}.}
+\item{seed}{Passed to \code{.ghc_rng}.}
+\item{greedy}{A flag; the body branches on it.}
+\item{n_starts}{Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{.grclus_bisect}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best_parts}, as built in the body.

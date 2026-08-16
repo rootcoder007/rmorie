@@ -10,10 +10,11 @@
 
 #' .lcwphr_rows
 #'
-#' Part of the lcwphr_native implementation; see the file header for the
+#' A step of the lcwphr_native implementation. Called by \code{morie_lcwphr_latent_class_weighted}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .lcwphr_rows <- function(x) {
@@ -32,10 +33,11 @@
 
 #' .lcwphr_cholsolve
 #'
-#' Part of the lcwphr_native implementation; see the file header for the
+#' A step of the lcwphr_native implementation. Called by \code{.lcwphr_logit_irls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{chol}.
 #' @param b See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -47,14 +49,15 @@
 # Logistic regression by IRLS; the ridge is scaled to the design.
 #' Logistic regression by IRLS; the ridge is scaled to the design
 #'
-#' Part of the lcwphr_native implementation; see the file header for the
+#' A step of the lcwphr_native implementation. Called by \code{morie_lcwphr_latent_class_weighted}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
 #' @param max_iter Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-11}.
-#' @param ridge_rel Defaults to \code{1e-08}.
+#' @param ridge_rel Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{fitted}.
 #' @export
 .lcwphr_logit_irls <- function(X, y, max_iter = 100L, tol = 1e-11,
@@ -81,17 +84,18 @@
 
 #' morie_lcwphr_latent_class_weighted
 #'
-#' Part of the lcwphr_native implementation; see the file header for the
+#' A step of the lcwphr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param A See Usage.
-#' @param H See Usage.
-#' @param K See Usage.
+#' @param H Passed to \code{.lcwphr_rows}.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @param trim Defaults to \code{0}.
-#' @param stabilize Defaults to \code{TRUE}.
+#' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param max_iter Defaults to \code{500L}.
-#' @param tol Defaults to \code{1e-11}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.
 #' @return A list with \code{estimate}, \code{class_ate}, \code{class_mean_treated}, \code{class_mean_control}, \code{naive_class_ate}, \code{naive_class_mean_treated}, \code{naive_class_mean_control}, \code{ate}, \code{naive_ate}, \code{marginal_ate}, \code{unweighted_ate}, \code{class_prevalence}, \code{item_probabilities}, \code{posterior}, \code{labels}, \code{propensity}, \code{propensity_coefficients}, \code{weights}, \code{effective_sample_size}, \code{weight_max}, \code{weight_mean}, \code{loglik}, \code{loglik_path}, \code{bic}, \code{entropy}, \code{n_parameters}, \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{Q}, \code{stabilized}, \code{trim}, \code{method}, \code{note}.
 #' @export
 morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
@@ -253,7 +257,8 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
 
 #' .lcwphr_cheatsheet
 #'
-#' Part of the lcwphr_native implementation; see the file header for the
+#' A step of the lcwphr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

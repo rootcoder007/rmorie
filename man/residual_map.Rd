@@ -8,12 +8,12 @@
 residual_map(x, g_z, shape = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{g_z}{See Usage.}
-\item{shape}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{.gan_an_as_num}.}
+\item{g_z}{Passed to \code{.gan_an_as_num}.}
+\item{shape}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{map}, \code{max}, \code{note}.

@@ -8,11 +8,11 @@
 .prsLL_follow_sets(g, first = NULL)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$rules}, \code{$start} from it.}
 \item{first}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_ll1_table}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{follow}, as built in the body.

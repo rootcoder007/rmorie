@@ -8,10 +8,10 @@
 .morie_al_softmax_rows(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{exp}.}
 }
 \description{
-Part of the alammar_llm_native implementation; see the file header for the source it follows.
+A step of the alammar_llm_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_encoder_block}, \code{.morie_gr_softmax_cols} and 13 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

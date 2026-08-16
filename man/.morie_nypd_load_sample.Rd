@@ -11,7 +11,7 @@
 \item{which}{Defaults to \code{c("arrests", "complaint")}.}
 }
 \description{
-Part of the nypd_analyze implementation; see the file header for the source it follows.
+A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{utils::read.csv}.

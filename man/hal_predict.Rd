@@ -8,11 +8,11 @@
 hal_predict(model, X)
 }
 \arguments{
-\item{model}{See Usage.}
-\item{X}{See Usage.}
+\item{model}{A list; the body reads \code{$beta}, \code{$columns}, \code{$intercept} from it.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the tlhal_native implementation; see the file header for the source it follows.
+A step of the tlhal_native implementation. Called by \code{cv_select_lambda}, \code{morie_tlhal}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

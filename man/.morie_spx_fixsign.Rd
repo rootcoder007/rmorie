@@ -8,10 +8,10 @@
 .morie_spx_fixsign(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; indexed elementwise.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{.morie_spx_topeigs}, \code{SpecRad}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

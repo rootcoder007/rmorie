@@ -10,10 +10,10 @@ morie_genemt_gene_set_regression(z_scores, membership, covariates = NULL)
 \arguments{
 \item{z_scores}{See Usage.}
 \item{membership}{See Usage.}
-\item{covariates}{Defaults to \code{NULL}.}
+\item{covariates}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the genemt_native implementation; see the file header for the source it follows.
+A step of the genemt_native implementation. Called by \code{morie_genemt_conditional_set_test}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p}, \code{n_genes}, \code{covariates_used}, \code{method}, \code{note}.

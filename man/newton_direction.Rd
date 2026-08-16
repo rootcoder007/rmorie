@@ -8,7 +8,7 @@
 newton_direction(A, x, s, rp, rd, rc)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{as.matrix}.}
 \item{x}{See Usage.}
 \item{s}{See Usage.}
 \item{rp}{See Usage.}
@@ -16,7 +16,7 @@ newton_direction(A, x, s, rp, rd, rc)
 \item{rc}{See Usage.}
 }
 \description{
-Part of the mehtad_native implementation; see the file header for the source it follows.
+A step of the mehtad_native implementation. Called by \code{solve_lp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dx}, \code{dy}, \code{ds}.

@@ -8,11 +8,11 @@
 .trmRew_rename(t, tag)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{tag}{See Usage.}
+\item{t}{A vector; indexed elementwise.}
+\item{tag}{Passed to \code{.trmRew_rename}.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{.trmRew_overlap}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.trmRew_app}.
@@ -25,7 +25,7 @@ Abstract Algebra, Pergamon Press, 263-297,
 doi:10.1016/B978-0-08-012975-4.50028-X.
 
 Newman, M. H. A. (1942) "On theories with a combinatorial definition
-of \\'equivalence\\'", Annals of Mathematics 43(2), 223-243,
+of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
 doi:10.2307/1968867.
 
 Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,

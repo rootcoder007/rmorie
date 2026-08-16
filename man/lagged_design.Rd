@@ -8,13 +8,13 @@
 lagged_design(L_hist, Y_hist = NULL, k_time = 0, lag = 1)
 }
 \arguments{
-\item{L_hist}{See Usage.}
-\item{Y_hist}{Defaults to \code{NULL}.}
-\item{k_time}{Defaults to \code{0}.}
-\item{lag}{Defaults to \code{1}.}
+\item{L_hist}{Passed to \code{.lggvls_lagged_design}.}
+\item{Y_hist}{Passed to \code{.lggvls_lagged_design}.}
+\item{k_time}{Passed to \code{.lggvls_lagged_design}. Defaults to \code{0}.}
+\item{lag}{Passed to \code{.lggvls_lagged_design}. Defaults to \code{1}.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.lggvls_lagged_design}.

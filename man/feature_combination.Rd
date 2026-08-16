@@ -8,11 +8,11 @@
 feature_combination(content_features, collaborative_features)
 }
 \arguments{
-\item{content_features}{See Usage.}
-\item{collaborative_features}{See Usage.}
+\item{content_features}{Passed to \code{.hybRC_mat}.}
+\item{collaborative_features}{Passed to \code{.hybRC_mat}.}
 }
 \description{
-Part of the hybRC_native implementation; see the file header for the source it follows.
+A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{features}, \code{content_dim}, \code{collaborative_dim}, \code{note}.

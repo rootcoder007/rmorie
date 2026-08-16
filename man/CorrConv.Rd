@@ -12,7 +12,7 @@ CorrConv(x, y)
 \item{y}{See Usage.}
 }
 \description{
-Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+A step of the rangayyan_ccf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ccf}, \code{via_convolution}, \code{lags}, \code{max_difference}, \code{identity_holds}, \code{correlation_is_convolution_with_one_reversed}, \code{method}.

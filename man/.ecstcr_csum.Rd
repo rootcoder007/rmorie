@@ -8,10 +8,10 @@
 .ecstcr_csum(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Neither language\\\'s sum() is a plain double loop -- R accumulates in long double, CPython 3.12 and later compensate -- and they are not unfaithful in the same way.
+Neither language\\'s sum() is a plain double loop -- R accumulates in long double, CPython 3.12 and later compensate -- and they are not unfaithful in the same way.
 }
 \value{
 A numeric value.
@@ -19,7 +19,7 @@ A numeric value.
 \references{
   Charney, J.G. et al. (1979) "Carbon Dioxide and Climate: A Scientific
     Assessment." National Academy of Sciences, Washington DC.
-  Forster, P. et al. (2021) "The Earth\\'s Energy Budget, Climate
+  Forster, P. et al. (2021) "The Earth\'s Energy Budget, Climate
     Feedbacks, and Climate Sensitivity", Chapter 7 of IPCC AR6 WG1,
     Cambridge University Press, 923-1054,
     doi:10.1017/9781009157896.009

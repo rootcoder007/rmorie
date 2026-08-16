@@ -8,11 +8,11 @@
 .morie_empinf_reg(boot_obj, t = boot_obj$t[, 1L])
 }
 \arguments{
-\item{boot_obj}{See Usage.}
-\item{t}{Defaults to \code{boot_obj$t[, 1L]}.}
+\item{boot_obj}{A list; the body reads \code{$data}, \code{$strata} from it.}
+\item{t}{A vector; its length is taken and its elements indexed. Defaults to \code{boot_obj$t[, 1L]}.}
 }
 \description{
-Part of the boot_native implementation; see the file header for the source it follows.
+A step of the boot_native implementation. Called by \code{.morie_ci_bca}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

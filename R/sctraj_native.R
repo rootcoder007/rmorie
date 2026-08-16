@@ -34,10 +34,11 @@
 
 #' .sctraj_matrix
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_cluster_distances}, \code{morie_sctraj_principal_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .sctraj_matrix <- function(X) {
@@ -57,10 +58,11 @@
 
 #' Solve A x = b; singular pooled covariance gets the paper\'s advice
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj_cluster_distances}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @param b See Usage.
 #' @return A numeric value.
 #' @export
@@ -91,13 +93,14 @@
 
 #' morie_sctraj_cluster_distances
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.sctraj_matrix}.
 #' @param labels See Usage.
-#' @param cov Defaults to \code{"full"}.
-#' @param weights Defaults to \code{NULL}.
+#' @param cov One of \code{"diagonal"}, \code{"euclidean"}. Defaults to \code{"full"}.
+#' @param weights Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{distances}, \code{clusters}, \code{centers}, \code{covariances}.
 #' @export
 morie_sctraj_cluster_distances <- function(X, labels, cov="full",
@@ -184,7 +187,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
 #' With ends given, the tree is built on the non-terminal clusters and
 #' each terminal is attached to its nearest non-terminal neighbour.
 #'
-#' @param D See Usage.
+#' @param D A matrix; indexed by row and column.
 #' @param clusters See Usage.
 #' @param ends Defaults to \code{NULL}.
 #' @return A list with \code{edges}, \code{adjacency}, \code{nodes}.
@@ -240,10 +243,11 @@ morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends=NULL) {
 
 #' Every path from root to a leaf, in order
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree A list; the body reads \code{$adjacency} from it.
 #' @param root See Usage.
 #' @return The value of \code{[}.
 #' @export
@@ -278,10 +282,11 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 
 #' .sctraj_arc_length
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_principal_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param curve See Usage.
+#' @param curve A matrix; indexed by row and column.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .sctraj_arc_length <- function(curve) {
@@ -297,12 +302,13 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 
 #' Nearest point on the polyline, and its arc length
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_principal_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param point See Usage.
-#' @param curve See Usage.
-#' @param s See Usage.
+#' @param point Numeric; combined arithmetically in the body.
+#' @param curve A matrix; indexed by row and column.
+#' @param s A vector; indexed elementwise.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .sctraj_project <- function(point, curve, s) {
@@ -333,10 +339,10 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #'
 #' kept simple and weight-aware.
 #'
-#' @param t See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
-#' @param span Defaults to \code{0.4}.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param y A vector; indexed elementwise.
+#' @param w A vector; indexed elementwise.
+#' @param span Numeric; combined arithmetically in the body. Defaults to \code{0.4}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .sctraj_smooth <- function(t, y, w, span=0.4) {
@@ -368,15 +374,16 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 
 #' morie_sctraj_principal_curve
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param init See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param X Passed to \code{.sctraj_matrix}.
+#' @param init A matrix; passed to \code{as.matrix}.
+#' @param weights Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param max_iter Defaults to \code{15}.
-#' @param tol Defaults to \code{0.001}.
-#' @param span Defaults to \code{0.4}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
+#' @param span Passed to \code{.sctraj_smooth}. Defaults to \code{0.4}.
 #' @param n_knots Defaults to \code{NULL}.
 #' @return A list with \code{pseudotime}, \code{curve}, \code{distance}, \code{sse}.
 #' @export
@@ -452,12 +459,13 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
 
 #' .sctraj_interp
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_average_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param curve See Usage.
-#' @param u See Usage.
+#' @param s A vector; its length is taken and its elements indexed.
+#' @param curve A matrix; indexed by row and column.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
 .sctraj_interp <- function(s, curve, u) {
@@ -480,12 +488,13 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
 
 #' morie_sctraj_average_curve
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param curves See Usage.
-#' @param n_points Defaults to \code{100}.
-#' @param return_grid Defaults to \code{FALSE}.
+#' @param curves A vector; its length is taken and its elements indexed.
+#' @param n_points A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
+#' @param return_grid A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_sctraj_average_curve <- function(curves, n_points=100,
@@ -524,7 +533,7 @@ morie_sctraj_average_curve <- function(curves, n_points=100,
 #'
 #' on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 morie_sctraj_cosine_cdf <- function(u) {
@@ -541,13 +550,14 @@ morie_sctraj_cosine_cdf <- function(u) {
 
 #' morie_sctraj_shrinkage_weight
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param t_min See Usage.
-#' @param t_max See Usage.
-#' @param arg Defaults to \code{"shifted"}.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param t_min Numeric; combined arithmetically in the body.
+#' @param t_max Numeric; combined arithmetically in the body.
+#' @param arg One of \code{"as_printed"}, \code{"shifted"}. Defaults to \code{"shifted"}.
 #' @return A numeric value.
 #' @export
 morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
@@ -573,7 +583,8 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
 
 #' Lowest and highest non-outlier values, by the 1.5 IQR rule
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param vals See Usage.
@@ -607,19 +618,20 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
 
 #' morie_sctraj
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.sctraj_matrix}.
 #' @param labels See Usage.
-#' @param root See Usage.
-#' @param ends Defaults to \code{NULL}.
-#' @param cov Defaults to \code{"full"}.
-#' @param max_iter Defaults to \code{15}.
-#' @param shrink Defaults to \code{TRUE}.
-#' @param weight_arg Defaults to \code{"shifted"}.
-#' @param span Defaults to \code{0.4}.
-#' @param n_points Defaults to \code{100}.
+#' @param root Passed to \code{morie_sctraj_lineages_from_tree}.
+#' @param ends Passed to \code{morie_sctraj_minimum_spanning_tree}.
+#' @param cov Passed to \code{morie_sctraj_cluster_distances}. Defaults to \code{"full"}.
+#' @param max_iter Passed to \code{morie_sctraj_principal_curve}. Defaults to \code{15}.
+#' @param shrink A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param weight_arg Passed to \code{morie_sctraj_shrinkage_weight}. Defaults to \code{"shifted"}.
+#' @param span Passed to \code{morie_sctraj_principal_curve}. Defaults to \code{0.4}.
+#' @param n_points Passed to \code{morie_sctraj_average_curve}. Defaults to \code{100}.
 #' @return A list with \code{estimate}, \code{pseudotime}, \code{weights}, \code{lineages}, \code{curves}, \code{tree}, \code{distance}, \code{clusters}, \code{centers}, \code{n_lineages}, \code{root}, \code{cov}, \code{shrink}, \code{method}, \code{note}.
 #' @export
 morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
@@ -755,7 +767,8 @@ morie_sctraj_pseudotime_trajectory <- morie_sctraj
 
 #' morie_sctraj_cheatsheet
 #'
-#' Part of the sctraj_native implementation; see the file header for the
+#' A step of the sctraj_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

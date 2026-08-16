@@ -8,10 +8,10 @@
 SpErrMod(x, y, w, n_grid = 201L, refine = 60L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
-\item{n_grid}{Defaults to \code{201L}.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
+\item{y}{Passed to \code{.morie_spx_chkv}.}
+\item{w}{Passed to \code{.morie_spx_chkw}.}
+\item{n_grid}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{201L}.}
 \item{refine}{Defaults to \code{60L}.}
 }
 \description{

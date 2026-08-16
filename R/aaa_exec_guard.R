@@ -19,7 +19,8 @@
 # TRUE when an environment variable is set to a truthy value.
 #' TRUE when an environment variable is set to a truthy value
 #'
-#' Part of the exec_guard implementation; see the file header for the
+#' A step of the exec_guard implementation. Called by \code{.morie_exec_disabled}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param name See Usage.
@@ -33,7 +34,8 @@
 # TRUE when dynamic execution is disabled via MORIE_NO_EXEC.
 #' TRUE when dynamic execution is disabled via MORIE_NO_EXEC
 #'
-#' Part of the exec_guard implementation; see the file header for the
+#' A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed}, \code{.morie_safe_readRDS}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.morie_env_true}.
@@ -105,7 +107,7 @@
 #' Rejects option-injection (leading \'-\', e.g. "--upload-pack=...")
 #' and any whitespace/metacharacters, while allowing normal ref names.
 #'
-#' @param ref See Usage.
+#' @param ref A vector; its length is taken.
 #' @return A logical value.
 #' @export
 .morie_valid_git_ref <- function(ref) {

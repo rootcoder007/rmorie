@@ -8,10 +8,10 @@
 .morie_gr_encoder_block(X, W, n_heads, keep_attn = FALSE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{W}{See Usage.}
-\item{n_heads}{See Usage.}
-\item{keep_attn}{Defaults to \code{FALSE}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{W}{A list; the body reads \code{$b1}, \code{$b2}, \code{$W1}, \code{$W2}, \code{$Wk}, \code{$Wo}, \code{$Wq}, \code{$Wv} from it.}
+\item{n_heads}{A count; the body uses it as \code{seq_len(...)}.}
+\item{keep_attn}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
 Wq/Wk/Wv/Wo/W1/b1/W2/b2 Part of the geron_ml_native implementation; see the file header for the source it follows.

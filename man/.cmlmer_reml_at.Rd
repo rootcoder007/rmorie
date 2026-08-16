@@ -8,13 +8,13 @@
 .cmlmer_reml_at(logdelta, Vk, y, X)
 }
 \arguments{
-\item{logdelta}{See Usage.}
+\item{logdelta}{Numeric; passed to \code{exp}.}
 \item{Vk}{See Usage.}
-\item{y}{See Usage.}
-\item{X}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the cmlmer_native implementation; see the file header for the source it follows.
+A step of the cmlmer_native implementation. Called by \code{morie_cmlmer_compressed_lmm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ll}, \code{delta}, \code{beta}, \code{s2g}, \code{L}.

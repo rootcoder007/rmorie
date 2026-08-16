@@ -8,16 +8,16 @@
 .propinf_mlp_backward(net, acts, pre, dout, grads, final = "relu", hidden_act = "relu")
 }
 \arguments{
-\item{net}{See Usage.}
-\item{acts}{See Usage.}
-\item{pre}{See Usage.}
+\item{net}{A vector; its length is taken and its elements indexed.}
+\item{acts}{A vector; indexed elementwise.}
+\item{pre}{A vector; indexed elementwise.}
 \item{dout}{See Usage.}
-\item{grads}{See Usage.}
-\item{final}{Defaults to \code{"relu"}.}
-\item{hidden_act}{Defaults to \code{"relu"}.}
+\item{grads}{A vector; indexed elementwise.}
+\item{final}{One of \code{"linear"}, \code{"sigmoid"}, \code{"tanh"}. Defaults to \code{"relu"}.}
+\item{hidden_act}{Compared against \code{"tanh"}. Defaults to \code{"relu"}.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_deepsets_backward}, \code{.propinf_train_vector_meta}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{delta}, as built in the body.

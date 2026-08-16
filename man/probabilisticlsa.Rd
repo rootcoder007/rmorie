@@ -8,14 +8,14 @@
 probabilisticlsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0)
 }
 \arguments{
-\item{n_dw}{See Usage.}
-\item{K}{See Usage.}
-\item{iters}{Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-08}.}
-\item{seed}{Defaults to \code{0}.}
+\item{n_dw}{Passed to \code{morie_plsa}.}
+\item{K}{Passed to \code{morie_plsa}.}
+\item{iters}{Passed to \code{morie_plsa}. Defaults to \code{100}.}
+\item{tol}{Passed to \code{morie_plsa}. Defaults to \code{1e-08}.}
+\item{seed}{Passed to \code{morie_plsa}. Defaults to \code{0}.}
 }
 \description{
-Part of the plsa_native implementation; see the file header for the source it follows.
+A step of the plsa_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_plsa}.

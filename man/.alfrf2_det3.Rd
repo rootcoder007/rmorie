@@ -8,10 +8,10 @@
 .alfrf2_det3(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the alfrf2_native implementation; see the file header for the source it follows.
+A step of the alfrf2_native implementation. Called by \code{morie_alfrf2_kabsch}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

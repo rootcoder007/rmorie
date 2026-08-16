@@ -147,8 +147,8 @@ morie_bnppct_quantile <- function(q, w, mu, s2, lo = NULL, hi = NULL) {
 #' weight reaches q. The inverse of the weighted ECDF, which is a step
 #' function, so nothing is interpolated between the steps.
 #'
-#' @param ys_sorted See Usage.
-#' @param weights See Usage.
+#' @param ys_sorted A vector; its length is taken and its elements indexed.
+#' @param weights A vector; indexed elementwise.
 #' @param q See Usage.
 #' @return The value of \code{[}.
 #' @export

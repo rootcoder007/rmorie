@@ -8,12 +8,12 @@
 .grclus_match_vertices(adj, scheme, seed)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{scheme}{See Usage.}
-\item{seed}{See Usage.}
+\item{adj}{A vector; its length is taken and its elements indexed.}
+\item{scheme}{One of \code{"hem"}, \code{"rm"}.}
+\item{seed}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{.grclus_bisect}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{mate}, as built in the body.

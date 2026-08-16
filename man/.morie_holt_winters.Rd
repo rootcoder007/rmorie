@@ -8,16 +8,16 @@
 .morie_holt_winters(y, period, alpha, beta, gamma, horizon, mult)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{period}{See Usage.}
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
-\item{horizon}{See Usage.}
-\item{mult}{See Usage.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
+\item{beta}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{horizon}{Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.}
+\item{mult}{A flag; the body branches on it.}
 }
 \description{
-Part of the forecast_native implementation; see the file header for the source it follows.
+A step of the forecast_native implementation. Called by \code{morie_holt_winters_additive}, \code{morie_holt_winters_mult}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{forecast}, \code{level}, \code{trend}, \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma}, \code{period}, \code{horizon}.

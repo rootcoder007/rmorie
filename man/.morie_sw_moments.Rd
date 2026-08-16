@@ -8,11 +8,11 @@
 .morie_sw_moments(g, h)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{h}{See Usage.}
+\item{g}{A matrix; passed to \code{nrow}.}
+\item{h}{A matrix; passed to \code{crossprod}.}
 }
 \description{
-g : n x p transformation of the covariate (e.g. group indicators) h : n x q influence (transformation) of the response Returns the vec\\\'d statistic T (pq), its conditional mean mu and covariance Sigma, matching coin\\\'s `expectation()` / `covariance()`.
+g : n x p transformation of the covariate (e.g. group indicators) h : n x q influence (transformation) of the response Returns the vec\\'d statistic T (pq), its conditional mean mu and covariance Sigma, matching coin\\'s `expectation()` / `covariance()`.
 }
 \value{
 A list with \code{T}, \code{mu}, \code{Sigma}, \code{n}.

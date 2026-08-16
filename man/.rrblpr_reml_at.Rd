@@ -8,13 +8,13 @@
 .rrblpr_reml_at(loglam, G, y, X)
 }
 \arguments{
-\item{loglam}{See Usage.}
-\item{G}{See Usage.}
-\item{y}{See Usage.}
-\item{X}{See Usage.}
+\item{loglam}{Numeric; passed to \code{exp}.}
+\item{G}{Numeric; combined arithmetically in the body.}
+\item{y}{A vector; its length is taken.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the rrblpr_native implementation; see the file header for the source it follows.
+A step of the rrblpr_native implementation. Called by \code{morie_rrblpr_rr_blup}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ll}, \code{lam}, \code{beta}, \code{s2e}, \code{L}.

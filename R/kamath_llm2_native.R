@@ -31,10 +31,11 @@
 
 #' .morie_km2_soft
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_top_p}, \code{morie_kamath_ch3_prompt_softmax_label}, \code{morie_kamath_ch6_affect_lm} and 7 others in the module.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .morie_km2_soft <- function(z) {
@@ -45,10 +46,11 @@
 
 #' .morie_km2_sig
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_bradley_terry_preference}, \code{morie_kamath_ch5_bradley_terry_pref}, \code{morie_kamath_image_text_matching}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{abs}.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_km2_sig <- function(z) {
@@ -57,10 +59,11 @@
 
 #' .morie_km2_lse_rows
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_rowce}, \code{morie_kamath_word2vec_skipgram}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param M See Usage.
+#' @param M Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_km2_lse_rows <- function(M) {
@@ -70,10 +73,11 @@
 
 #' .morie_km2_rowce
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch9_clip_image_to_text}, \code{morie_kamath_image_text_contrastive}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param logits See Usage.
+#' @param logits A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
 .morie_km2_rowce <- function(logits) {
@@ -82,10 +86,11 @@
 
 #' .morie_km2_dist
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_prompt_label_mapping}, \code{morie_kamath_ch3_top1_prompt_metric}, \code{morie_kamath_ch5_rlhf_objective} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param p See Usage.
+#' @param p A vector; its length is taken.
 #' @param name See Usage.
 #' @return The value of \code{p}, as built in the body.
 #' @export
@@ -103,10 +108,11 @@
 
 #' .morie_km2_ord
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{order}.
 #' @return The value of \code{order}.
 #' @export
 .morie_km2_ord <- function(v) order(v, decreasing = TRUE)
@@ -114,21 +120,23 @@
 # Stable descending order matching numpy argsort(-v, kind="stable").
 #' Stable descending order matching numpy argsort(-v, kind="stable")
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_adalora_rank_allocation}, \code{morie_kamath_cross_encoder_rerank}, \code{morie_kamath_dense_passage_retrieval} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return The value of \code{order}.
 #' @export
 .morie_km2_stable_desc <- function(v) order(-v, seq_along(v))
 
 #' .morie_km2_ngrams
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_bleu_score}, \code{morie_kamath_ch8_rouge_n}, \code{morie_kamath_rouge_n}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param tokens See Usage.
-#' @param n See Usage.
+#' @param tokens A vector; its length is taken and its elements indexed.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_km2_ngrams <- function(tokens, n) {
@@ -141,10 +149,11 @@
 
 #' .morie_km2_counts
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_bleu_score}, \code{morie_kamath_ch8_rouge_n}, \code{morie_kamath_rouge_n}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param keys See Usage.
+#' @param keys A vector; its length is taken.
 #' @return The value of \code{stats::setNames}.
 #' @export
 .morie_km2_counts <- function(keys) {
@@ -155,11 +164,12 @@
 
 #' .morie_km2_layer_norm
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_layer_norm_rows}, \code{morie_kamath_post_ln_transformer}, \code{morie_kamath_pre_ln_transformer}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x See Usage.
-#' @param eps Defaults to \code{1e-05}.
+#' @param x A matrix; passed to \code{as.matrix}.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A numeric value.
 #' @export
 .morie_km2_layer_norm <- function(x, eps = 1e-5) {
@@ -172,10 +182,11 @@
 # kmclm's core: causal-LM cross entropy over non-ignored positions.
 #' Kmclm\'s core: causal-LM cross entropy over non-ignored positions
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_instruction_tuning_loss}, \code{morie_kamath_llava_visual_instruction}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param logits See Usage.
+#' @param logits A matrix; indexed by row and column.
 #' @param targets See Usage.
 #' @param ignore_index Defaults to \code{-100L}.
 #' @return A list with \code{loss}, \code{perplexity}, \code{token_losses}, \code{n_tokens}, \code{vocab_size}.
@@ -204,12 +215,13 @@
 # rmsnr's core.
 #' Rmsnr\'s core
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_rms_norm}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param x See Usage.
 #' @param gamma Defaults to \code{NULL}.
-#' @param eps Defaults to \code{1e-06}.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return A list with \code{tensor}, \code{rms}.
 #' @export
 .morie_km2_rms <- function(x, gamma = NULL, eps = 1e-6) {
@@ -223,12 +235,13 @@
 # toppd's core: nucleus truncation of temperature-scaled logits.
 #' Toppd\'s core: nucleus truncation of temperature-scaled logits
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_nucleus_sampling}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param z See Usage.
-#' @param p See Usage.
-#' @param T Defaults to \code{1}.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param T Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{tensor}, \code{keep_mask}, \code{n_kept}.
 #' @export
 .morie_km2_top_p <- function(z, p, T = 1) {
@@ -251,9 +264,9 @@
 #' Bellman-Ford potentials); ports km122\'s _solve_transport, and
 #' km/kmmsc\'s WMD reads its objective off the same core.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param C See Usage.
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
+#' @param C A matrix; indexed by row and column.
 #' @return A list with \code{flow}, \code{u}, \code{v}.
 #' @export
 .morie_km2_transport <- function(a, b, C) {
@@ -462,12 +475,13 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 
 #' .morie_km2_fill_template
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_cloze_prompt_template}, \code{morie_kamath_ch3_prefix_prompt_template}, \code{morie_kamath_ch3_translate_prefix_prompt}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param template See Usage.
-#' @param x See Usage.
-#' @param z See Usage.
+#' @param template Character; passed to \code{grepl}.
+#' @param x Character; passed to \code{trimws}.
+#' @param z Optional; may be \code{NULL}. Character; passed to \code{gsub}.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_fill_template <- function(template, x, z) {
@@ -488,10 +502,11 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 
 #' .morie_km2_tmpl_result
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_cloze_prompt_template}, \code{morie_kamath_ch3_prefix_prompt_template}, \code{morie_kamath_ch3_translate_prefix_prompt}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param prompt See Usage.
+#' @param prompt Character; passed to \code{trimws}.
 #' @param filled See Usage.
 #' @param eq See Usage.
 #' @param template See Usage.
@@ -688,13 +703,14 @@ morie_kamath_ch3_prefix_tuning_obj <- function(phi, x, y, h, Y_idx = NULL) {
 
 #' .morie_km2_adapter_core
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_parallel_adapter}, \code{morie_kamath_ch4_series_adapter}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param H_o See Usage.
-#' @param H_in See Usage.
-#' @param W_down See Usage.
-#' @param W_up See Usage.
+#' @param H_o A matrix; passed to \code{nrow}.
+#' @param H_in A matrix; passed to \code{nrow}.
+#' @param W_down A matrix; passed to \code{as.matrix}.
+#' @param W_up A matrix; passed to \code{as.matrix}.
 #' @param f See Usage.
 #' @return The value of \code{list}.
 #' @export
@@ -747,7 +763,8 @@ morie_kamath_ch4_parallel_adapter <- function(H_o, H_i, W_down, W_up,
 
 #' .morie_km2_seq_obj
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_full_finetune_obj}, \code{morie_kamath_ch4_lora_obj}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param model See Usage.
@@ -881,13 +898,14 @@ morie_kamath_ch4_krona_efficient <- function(A, B, x) {
 
 #' .morie_km2_tuned
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_krona_output}, \code{morie_kamath_ch4_krona_tuned_weights}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param W See Usage.
-#' @param A_k See Usage.
-#' @param B_k See Usage.
-#' @param s See Usage.
+#' @param W A matrix; passed to \code{as.matrix}.
+#' @param A_k A matrix; passed to \code{as.matrix}.
+#' @param B_k A matrix; passed to \code{as.matrix}.
+#' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_tuned <- function(W, A_k, B_k, s) {
@@ -935,10 +953,11 @@ morie_kamath_ch4_krona_output <- function(X, W, A_k, B_k, s) {
 
 #' .morie_km2_diag
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_vera_forward}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param v See Usage.
+#' @param v A matrix; passed to \code{nrow}.
 #' @param name See Usage.
 #' @param size See Usage.
 #' @return The value of \code{v}, as built in the body.
@@ -1013,7 +1032,8 @@ morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
 
 #' .morie_km2_bt_loss
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch5_dpo_loss}, \code{morie_kamath_ch5_reward_loss_pairwise}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param margins See Usage.
@@ -1283,12 +1303,13 @@ morie_kamath_ch5_pref_sigmoid_form <- function(r_star) {
 
 #' .morie_km2_implicit_rewards
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch5_dpo_loss}, \code{morie_kamath_ch5_dpo_pref_simplified}, \code{morie_kamath_ch5_dpo_pref_substituted}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param pi_star See Usage.
 #' @param pi_ref See Usage.
-#' @param beta See Usage.
+#' @param beta Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .morie_km2_implicit_rewards <- function(pi_star, pi_ref, beta) {
@@ -1464,11 +1485,12 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 
 #' .morie_km2_cos_mean
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_weat_s}, \code{morie_kamath_ch6_weat_similarity}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param a See Usage.
-#' @param W See Usage.
+#' @param a A matrix; passed to \code{\%*\%}.
+#' @param W A matrix; passed to \code{as.matrix}.
 #' @param name See Usage.
 #' @return A numeric value.
 #' @export
@@ -1487,12 +1509,13 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 
 #' .morie_km2_weat_s
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param a See Usage.
-#' @param W_1 See Usage.
-#' @param W_2 See Usage.
+#' @param a Passed to \code{.morie_km2_cos_mean}.
+#' @param W_1 Passed to \code{.morie_km2_cos_mean}.
+#' @param W_2 Passed to \code{.morie_km2_cos_mean}.
 #' @return A numeric value.
 #' @export
 .morie_km2_weat_s <- function(a, W_1, W_2) {
@@ -1502,11 +1525,12 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 
 #' .morie_km2_weat_sums
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_weat_effect_size}, \code{morie_kamath_ch6_weat_function}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param A_1 See Usage.
-#' @param A_2 See Usage.
+#' @param A_1 A matrix; passed to \code{as.matrix}.
+#' @param A_2 A matrix; passed to \code{as.matrix}.
 #' @param W_1 See Usage.
 #' @param W_2 See Usage.
 #' @return The value of \code{list}.
@@ -1668,7 +1692,8 @@ morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
 
 #' .morie_km2_log_probs
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_cat_metric}, \code{morie_kamath_ch6_pll}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param items See Usage.
@@ -1814,10 +1839,11 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 
 #' .morie_km2_tokens
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_count_word}, \code{morie_kamath_ch6_demographic_representation}, \code{morie_kamath_ch6_stereotypical_assoc}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param Y See Usage.
+#' @param Y A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_km2_tokens <- function(Y) {
@@ -1827,7 +1853,8 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 
 #' .morie_km2_count_word
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param word See Usage.
@@ -1911,11 +1938,12 @@ morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
 
 #' .morie_km2_pair_vectors
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_debias_regularizer}, \code{morie_kamath_ch6_gender_direction}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param A See Usage.
-#' @param E See Usage.
+#' @param E A vector; indexed elementwise.
 #' @param name See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -2065,7 +2093,8 @@ morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
 
 #' .morie_km2_tox_scores
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_emt_metric}, \code{morie_kamath_ch6_toxic_fraction}, \code{morie_kamath_ch6_toxicity_probability}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param Yhat See Usage.
@@ -2161,7 +2190,8 @@ morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
 
 #' .morie_km2_hidden
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_affect_lm}, \code{morie_kamath_ch6_lstm_softmax_word}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param f See Usage.
@@ -2568,12 +2598,13 @@ morie_kamath_ch8_rouge_n <- function(S, gram_n, candidate = NULL) {
 
 #' .morie_km2_sim_matrix
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch8_bertscore_recall}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x See Usage.
-#' @param xhat See Usage.
-#' @param normalize See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
+#' @param xhat A matrix; passed to \code{as.matrix}.
+#' @param normalize A flag; the body branches on it.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_sim_matrix <- function(x, xhat, normalize) {
@@ -5964,12 +5995,13 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 
 #' .morie_km2_pieces_by_end
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_forward}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param text See Usage.
-#' @param vocab See Usage.
-#' @param maxlen See Usage.
+#' @param text A vector; its length is taken.
+#' @param vocab A vector; indexed elementwise.
+#' @param maxlen Numeric; passed to \code{min}.
 #' @return The value of \code{ends}, as built in the body.
 #' @export
 .morie_km2_pieces_by_end <- function(text, vocab, maxlen) {
@@ -5988,12 +6020,13 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 
 #' .morie_km2_forward
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_unigram_lm_tokenizer}, \code{morie_kamath_unigram_loglik}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param text See Usage.
-#' @param probs See Usage.
-#' @param maxlen See Usage.
+#' @param text A vector; its length is taken.
+#' @param probs A vector; indexed elementwise.
+#' @param maxlen Passed to \code{.morie_km2_pieces_by_end}.
 #' @return A list with \code{alpha}, \code{ends}.
 #' @export
 .morie_km2_forward <- function(text, probs, maxlen) {
@@ -6011,12 +6044,13 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 
 #' .morie_km2_backward
 #'
-#' Part of the kamath_llm2_native implementation; see the file header
+#' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_unigram_lm_tokenizer}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param text See Usage.
-#' @param probs See Usage.
-#' @param maxlen See Usage.
+#' @param text A vector; its length is taken.
+#' @param probs A vector; indexed elementwise.
+#' @param maxlen Numeric; passed to \code{min}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .morie_km2_backward <- function(text, probs, maxlen) {

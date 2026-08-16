@@ -8,11 +8,11 @@
 .morie_ml_gram(a, sigma = NULL)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{sigma}{Defaults to \code{NULL}.}
+\item{a}{A vector; its length is taken.}
+\item{sigma}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{morie_hsicstat}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

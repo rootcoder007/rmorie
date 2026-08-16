@@ -8,13 +8,13 @@
 .tmlcds_fluctuate(qa, q1, q0, y, d, g, clip = 1e-08)
 }
 \arguments{
-\item{qa}{See Usage.}
-\item{q1}{See Usage.}
-\item{q0}{See Usage.}
-\item{y}{See Usage.}
-\item{d}{See Usage.}
-\item{g}{See Usage.}
-\item{clip}{Defaults to \code{1e-08}.}
+\item{qa}{Numeric; combined arithmetically in the body.}
+\item{q1}{Numeric; combined arithmetically in the body.}
+\item{q0}{Numeric; combined arithmetically in the body.}
+\item{y}{A vector; its length is taken.}
+\item{d}{Numeric; combined arithmetically in the body.}
+\item{g}{Numeric; combined arithmetically in the body.}
+\item{clip}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
 clever covariate A/G - (1-A)/(1-G); returns updated fits and epsilon

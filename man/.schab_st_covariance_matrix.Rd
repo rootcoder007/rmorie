@@ -8,12 +8,12 @@
 .schab_st_covariance_matrix(coords, times, cov_fn)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{times}{See Usage.}
+\item{coords}{Passed to \code{.schab_st_lag_matrices}.}
+\item{times}{Passed to \code{.schab_st_lag_matrices}.}
 \item{cov_fn}{See Usage.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{.schab_st_is_valid_covariance}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

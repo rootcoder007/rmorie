@@ -9,7 +9,7 @@ QrsHPassTf(freq, fs = 200)
 }
 \arguments{
 \item{freq}{See Usage.}
-\item{fs}{Defaults to \code{200}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 }
 \description{
 16-sample delay) minus a scaled lowpass, so it shares the running sum already computed.  fc = 5 Hz and 80 ms delay hold at fs = 200 Hz.

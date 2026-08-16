@@ -8,11 +8,11 @@
 .morie_km_estimate(t, e)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{A vector; indexed elementwise.}
 \item{e}{See Usage.}
 }
 \description{
-Part of the cox_native implementation; see the file header for the source it follows.
+A step of the cox_native implementation. Called by \code{morie_censoring_at_risk_weight}, \code{morie_competing_risks_fg}, \code{morie_cox_schoenfeld_residuals}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{times}, \code{survival}.

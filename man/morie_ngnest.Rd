@@ -8,15 +8,15 @@
 morie_ngnest(y, horizon, lookback_multiples = c(2, 3, 4, 5, 6, 7), block_sets = NULL, how = "median", ridge = 1e-08)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{horizon}{See Usage.}
-\item{lookback_multiples}{Defaults to \code{c(2, 3, 4, 5, 6, 7)}.}
-\item{block_sets}{Defaults to \code{NULL}.}
-\item{how}{Defaults to \code{"median"}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{y}{Passed to \code{.ngnest_ensemble_members}.}
+\item{horizon}{Passed to \code{.ngnest_ensemble_members}.}
+\item{lookback_multiples}{Passed to \code{.ngnest_ensemble_members}. Defaults to \code{c(2, 3, 4, 5, 6, 7)}.}
+\item{block_sets}{Passed to \code{.ngnest_ensemble_members}.}
+\item{how}{Passed to \code{.ngnest_aggregate_forecasts}. Defaults to \code{"median"}.}
+\item{ridge}{Passed to \code{.ngnest_ensemble_members}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the ngnest_native implementation; see the file header for the source it follows.
+A step of the ngnest_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

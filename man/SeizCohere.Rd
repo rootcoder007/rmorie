@@ -12,11 +12,11 @@ SeizCohere(channels, fs, window, step = NULL, bands = NULL, nperseg = NULL)
 \item{fs}{See Usage.}
 \item{window}{See Usage.}
 \item{step}{Defaults to \code{NULL}.}
-\item{bands}{Defaults to \code{NULL}.}
+\item{bands}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{nperseg}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_corr implementation; see the file header for the source it follows.
+A step of the rangayyan_corr implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{times}, \code{coherence}, \code{bands}, \code{window}, \code{step}, \code{nperseg}, \code{n_windows}, \code{n_channels}, \code{sustained_criterion}, \code{method}.

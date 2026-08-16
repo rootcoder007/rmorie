@@ -11,7 +11,7 @@
 \item{payload}{See Usage.}
 }
 \description{
-Part of the tmlcds_native implementation; see the file header for the source it follows.
+A step of the tmlcds_native implementation. Called by \code{tmle_cdrs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{payload}, as built in the body.

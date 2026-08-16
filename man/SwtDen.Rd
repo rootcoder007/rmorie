@@ -8,8 +8,8 @@
 SwtDen(x, wavelet = "db4", levels = 3, threshold = NULL, threshold_type = "soft")
 }
 \arguments{
-\item{x}{See Usage.}
-\item{wavelet}{Defaults to \code{"db4"}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{wavelet}{Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.}
 \item{levels}{Defaults to \code{3}.}
 \item{threshold}{Defaults to \code{NULL}.}
 \item{threshold_type}{Defaults to \code{"soft"}.}

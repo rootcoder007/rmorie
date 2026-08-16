@@ -6,11 +6,12 @@
 
 #' .btarsv_yw
 #'
-#' Part of the btarsv_native implementation; see the file header for the
+#' A step of the btarsv_native implementation. Called by \code{morie_btarsv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param xc See Usage.
-#' @param p See Usage.
+#' @param xc A vector; its length is taken and its elements indexed.
+#' @param p A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{phi}, \code{v}.
 #' @export
 .btarsv_yw <- function(xc, p) {

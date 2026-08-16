@@ -12,10 +12,10 @@ efficiency_check(err_Q, err_g, delta, n, donsker = TRUE)
 \item{err_g}{See Usage.}
 \item{delta}{See Usage.}
 \item{n}{See Usage.}
-\item{donsker}{Defaults to \code{TRUE}.}
+\item{donsker}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the tlhaltm_native implementation; see the file header for the source it follows.
+A step of the tlhaltm_native implementation. Called by \code{morie_tlhaltm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{remainder_bound}, \code{root_n}, \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient}, \code{positivity_delta}, \code{method}, \code{note}.

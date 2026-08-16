@@ -8,8 +8,8 @@
 .schab_simple_kriging_variance(cov_all, n_obs)
 }
 \arguments{
-\item{cov_all}{See Usage.}
-\item{n_obs}{See Usage.}
+\item{cov_all}{A matrix; indexed by row and column.}
+\item{n_obs}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 identity that closes Sec. 7.2.2.

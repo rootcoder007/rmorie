@@ -11,7 +11,7 @@ morie_vepan_consequence_rank(term)
 \item{term}{See Usage.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{.vepan_pick_key}, \code{morie_vepan_annotate}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

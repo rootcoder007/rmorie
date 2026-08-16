@@ -14,7 +14,8 @@
 
 #' .ms_check
 #'
-#' Part of the survival_more implementation; see the file header for the
+#' A step of the survival_more implementation. Called by \code{.ms_baseline}, \code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param time See Usage.
@@ -33,11 +34,12 @@
 
 #' .ms_km
 #'
-#' Part of the survival_more implementation; see the file header for the
+#' A step of the survival_more implementation. Called by \code{Cif}, \code{Finegray}, \code{Landmark} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
+#' @param time Passed to \code{.ms_check}.
+#' @param event Passed to \code{.ms_check}.
 #' @return A list with \code{time}, \code{surv}, \code{n_risk}, \code{n_event}, \code{greenwood}.
 #' @export
 .ms_km <- function(time, event) {
@@ -57,13 +59,14 @@
 
 #' Breslow cumulative baseline hazard, what survival::basehaz returns
 #'
-#' Part of the survival_more implementation; see the file header for the
+#' A step of the survival_more implementation. Called by \code{Coxsnell}, \code{Martingale}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X See Usage.
-#' @param beta See Usage.
+#' @param time Passed to \code{.ms_check}.
+#' @param event Passed to \code{.ms_check}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param beta A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{time}, \code{cumhaz}, \code{weight}.
 #' @export
 .ms_baseline <- function(time, event, X, beta) {
@@ -88,11 +91,12 @@
 
 #' .ms_h0_at
 #'
-#' Part of the survival_more implementation; see the file header for the
+#' A step of the survival_more implementation. Called by \code{Coxsnell}, \code{Martingale}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ut See Usage.
-#' @param H See Usage.
+#' @param H A vector; indexed elementwise.
 #' @param t See Usage.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -737,13 +741,14 @@ Turnbull <- function(left, right, max_iter = 1000L,
 
 #' .ms_logsf_logpdf
 #'
-#' Part of the survival_more implementation; see the file header for the
+#' A step of the survival_more implementation. Called by \code{.ms_fit_lls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dist See Usage.
-#' @param y See Usage.
-#' @param mu See Usage.
-#' @param logsig See Usage.
+#' @param dist One of \code{"exponential"}, \code{"loglogistic"}, \code{"lognormal"}, \code{"weibull"}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param logsig Numeric; passed to \code{exp}.
 #' @return Nothing; this branch always raises.
 #' @export
 .ms_logsf_logpdf <- function(dist, y, mu, logsig) {
@@ -767,13 +772,14 @@ Turnbull <- function(left, right, max_iter = 1000L,
 
 #' .ms_fit_lls
 #'
-#' Part of the survival_more implementation; see the file header for the
+#' A step of the survival_more implementation. Called by \code{Aftfit}, \code{Parasurv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dist See Usage.
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X Defaults to \code{NULL}.
+#' @param dist Compared against \code{"exponential"}.
+#' @param time Passed to \code{.ms_check}.
+#' @param event Passed to \code{.ms_check}.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{dist}, \code{coef}, \code{log_scale}, \code{scale}, \code{loglik}, \code{n_par}, \code{n}, \code{n_events}, \code{aic}, \code{bic}, \code{fixed_scale}, \code{convergence}.
 #' @export
 .ms_fit_lls <- function(dist, time, event, X = NULL) {

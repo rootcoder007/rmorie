@@ -8,15 +8,15 @@
 BmiDec(y, C, a = NULL, procnoise = 1e-04, obsnoise = 0.01, p0 = 0.01)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{C}{See Usage.}
-\item{a}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.morie_bx_mat}.}
+\item{C}{Passed to \code{.morie_bx_mat}.}
+\item{a}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 \item{procnoise}{Defaults to \code{1e-04}.}
 \item{obsnoise}{Defaults to \code{0.01}.}
 \item{p0}{Defaults to \code{0.01}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{states}, \code{innovations}, \code{gain}, \code{predicted}, \code{method}.

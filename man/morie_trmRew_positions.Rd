@@ -8,7 +8,7 @@
 morie_trmRew_positions(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{A vector; indexed elementwise.}
 }
 \description{
 indices. The empty position is integer(0).

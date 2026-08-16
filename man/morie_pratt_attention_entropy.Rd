@@ -8,10 +8,10 @@
 morie_pratt_attention_entropy(alpha)
 }
 \arguments{
-\item{alpha}{See Usage.}
+\item{alpha}{Passed to \code{.pratt_vec}.}
 }
 \description{
-Part of the pratt_native implementation; see the file header for the source it follows.
+A step of the pratt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{entropy}, \code{max_entropy}, \code{concentration}.

@@ -8,16 +8,16 @@
 .morie_cf_grow(X, y, d, split_rows, est_rows, depth, max_depth, min_leaf, mtry, imbalance_penalty = 0)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{d}{See Usage.}
-\item{split_rows}{See Usage.}
-\item{est_rows}{See Usage.}
-\item{depth}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{min_leaf}{See Usage.}
-\item{mtry}{See Usage.}
-\item{imbalance_penalty}{Defaults to \code{0}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{d}{A vector; indexed elementwise.}
+\item{split_rows}{A vector; its length is taken and its elements indexed.}
+\item{est_rows}{A vector; its length is taken and its elements indexed.}
+\item{depth}{Numeric; combined arithmetically in the body.}
+\item{max_depth}{Passed to \code{.morie_cf_grow}.}
+\item{min_leaf}{Numeric; combined arithmetically in the body.}
+\item{mtry}{Numeric; passed to \code{min}.}
+\item{imbalance_penalty}{A flag; the body branches on it. Defaults to \code{0}.}
 }
 \description{
 (never seen by the splitter) fills the leaf values.

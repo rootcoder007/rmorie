@@ -8,7 +8,7 @@
 .locdp_flip_prob(epsilon)
 }
 \arguments{
-\item{epsilon}{See Usage.}
+\item{epsilon}{Numeric; passed to \code{exp}.}
 }
 \description{
 p = 1 / (1 + exp(epsilon)) -> achieves epsilon-local-DP.

@@ -8,13 +8,13 @@
 normalise_bbox(box, width, height, scale = 1000)
 }
 \arguments{
-\item{box}{See Usage.}
+\item{box}{A vector; its length is taken and its elements indexed.}
 \item{width}{See Usage.}
 \item{height}{See Usage.}
 \item{scale}{Defaults to \code{1000}.}
 }
 \description{
-Part of the ocrwit_native implementation; see the file header for the source it follows.
+A step of the ocrwit_native implementation. Called by \code{patch_of_box}, \code{segment_layout_boxes}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

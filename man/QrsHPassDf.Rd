@@ -8,7 +8,7 @@
 QrsHPassDf(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 the bracketed group is exactly y(n) of eq (4.10), so the running-sum state is reused directly.

@@ -8,12 +8,12 @@
 .infmer_full_attention(q, k, v)
 }
 \arguments{
-\item{q}{See Usage.}
-\item{k}{See Usage.}
-\item{v}{See Usage.}
+\item{q}{A matrix; passed to \code{ncol}.}
+\item{k}{A matrix; passed to \code{dim}.}
+\item{v}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the infmer_native implementation; see the file header for the source it follows.
+A step of the infmer_native implementation. Called by \code{morie_infmer}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{output}, \code{attention}, \code{scores}.

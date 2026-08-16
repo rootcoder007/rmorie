@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{doc}{See Usage.}
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
-\item{phi}{See Usage.}
+\item{alpha}{A vector; its length is taken.}
+\item{beta}{A matrix; passed to \code{as.matrix}.}
+\item{phi}{A matrix; indexed by row and column.}
 \item{gamma}{See Usage.}
 }
 \description{
-Part of the lda_native implementation; see the file header for the source it follows.
+A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{val}, as built in the body.

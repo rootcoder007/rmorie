@@ -8,15 +8,15 @@
 .tlroad_score_spans_eic(A, Y, Q1, Q0, g, h = 1e-06)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{Y}{See Usage.}
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
-\item{g}{See Usage.}
-\item{h}{Defaults to \code{1e-06}.}
+\item{A}{Passed to \code{.tlroad_vec}.}
+\item{Y}{Passed to \code{.tlroad_vec}.}
+\item{Q1}{Passed to \code{.tlroad_vec}.}
+\item{Q0}{Passed to \code{.tlroad_vec}.}
+\item{g}{Passed to \code{.tlroad_vec}.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }
 \description{
-Part of the tlroad_native implementation; see the file header for the source it follows.
+A step of the tlroad_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{score}, \code{eic_component}, \code{difference}, \code{spans}, \code{note}.

@@ -8,12 +8,12 @@
 .bsaqfactor(freqs, power, fpeak)
 }
 \arguments{
-\item{freqs}{See Usage.}
-\item{power}{See Usage.}
-\item{fpeak}{See Usage.}
+\item{freqs}{A vector; its length is taken and its elements indexed.}
+\item{power}{A vector; indexed elementwise.}
+\item{fpeak}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{CadSpec}, \code{SpeechFeat}, \code{ValvePcg}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{bandwidth_hz}, \code{q}.

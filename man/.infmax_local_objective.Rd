@@ -14,7 +14,7 @@
 \item{estimator}{Defaults to \code{"jsd"}.}
 }
 \description{
-Part of the infmax_native implementation; see the file header for the source it follows.
+A step of the infmax_native implementation. Called by \code{morie_infmax}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{objective}, \code{estimator}, \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.

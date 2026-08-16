@@ -8,16 +8,16 @@
 .morie_twfe_demean_cpp(M, g1, g2, K1, K2, tol = 1e-11, max_iter = 500L)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{g1}{See Usage.}
-\item{g2}{See Usage.}
-\item{K1}{See Usage.}
-\item{K2}{See Usage.}
-\item{tol}{Defaults to \code{1e-11}.}
-\item{max_iter}{Defaults to \code{500L}.}
+\item{M}{Passed to \code{.Call}.}
+\item{g1}{Passed to \code{.Call}.}
+\item{g2}{Passed to \code{.Call}.}
+\item{K1}{Passed to \code{.Call}.}
+\item{K2}{Passed to \code{.Call}.}
+\item{tol}{Passed to \code{.Call}. Defaults to \code{1e-11}.}
+\item{max_iter}{Passed to \code{.Call}. Defaults to \code{500L}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{.morie_twfe_demean}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

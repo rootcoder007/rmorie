@@ -60,21 +60,23 @@
 
 #' .tmlcen_sigmoid
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}, \code{morie_censoring_survival}, \code{morie_ipcw_interval} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tmlcen_sigmoid <- function(x) 1 / (1 + exp(-x))
 
 #' .tmlcen_design
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param n See Usage.
+#' @param rows Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{Z}, as built in the body.
 #' @export
 .tmlcen_design <- function(rows, n) {
@@ -95,12 +97,13 @@
 
 #' .tmlcen_ridgesolve
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
-#' @param ridge See Usage.
+#' @param A A matrix; passed to \code{ncol}.
+#' @param b A matrix; passed to \code{solve}.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
 .tmlcen_ridgesolve <- function(A, b, ridge) {
@@ -110,14 +113,15 @@
 
 #' .tmlcen_weighted_logit
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_logit_irls}, \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
-#' @param iters Defaults to \code{60L}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; combined arithmetically in the body.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
+#' @param ridge Passed to \code{.tmlcen_ridgesolve}. Defaults to \code{1e-10}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .tmlcen_weighted_logit <- function(Z, y, w, iters = 60L, ridge = 1e-10) {
@@ -140,13 +144,14 @@
 
 #' .tmlcen_logit_irls
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param max_iter Defaults to \code{60L}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param y Passed to \code{.tmlcen_weighted_logit}.
+#' @param max_iter Passed to \code{.tmlcen_weighted_logit}. Defaults to \code{60L}.
+#' @param ridge Passed to \code{.tmlcen_weighted_logit}. Defaults to \code{1e-08}.
 #' @return The value of \code{.tmlcen_weighted_logit}.
 #' @export
 .tmlcen_logit_irls <- function(Z, y, max_iter = 60L, ridge = 1e-8) {
@@ -155,21 +160,23 @@
 
 #' .tmlcen_matvec
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param b See Usage.
+#' @param Z A matrix; passed to \code{\%*\%}.
+#' @param b A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tmlcen_matvec <- function(Z, b) as.numeric(Z %*% b)
 
 #' .tmlcen_uniform_density
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ts See Usage.
+#' @param ts Numeric; passed to \code{max}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tmlcen_uniform_density <- function(ts) {
@@ -182,7 +189,8 @@
 
 #' .tmlcen_RichResult
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param payload See Usage.
@@ -195,11 +203,12 @@
 
 #' .tmlcen_W_mat
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param n See Usage.
+#' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{Wm}, as built in the body.
 #' @export
 .tmlcen_W_mat <- function(W, n) {
@@ -224,10 +233,11 @@
 
 #' .tmlcen_coerce_subject_list
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; indexed by row and column.
 #' @param n See Usage.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -283,16 +293,17 @@ morie_coarsen_interval <- function(times, deltas) {
 #' Censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j |
 #' A, W))
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param times See Usage.
 #' @param censored See Usage.
 #' @param A Defaults to \code{NULL}.
-#' @param W Defaults to \code{NULL}.
-#' @param grid Defaults to \code{NULL}.
+#' @param W Passed to \code{.tmlcen_W_mat}.
+#' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param by_covariate Defaults to \code{TRUE}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
 #' @return A list with \code{G}, \code{grid}, \code{b}.
 #' @export
 morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
@@ -358,18 +369,19 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 #' Ipcw_interval: Sec. 8.5\'s IPCW estimator of Psi_a = int r(t)
 #' Fbar_a(t) dt
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
+#' @param W Passed to \code{.tmlcen_W_mat}.
 #' @param A See Usage.
-#' @param times See Usage.
-#' @param deltas See Usage.
+#' @param times Passed to \code{.tmlcen_coerce_subject_list}.
+#' @param deltas Passed to \code{.tmlcen_coerce_subject_list}.
 #' @param a Defaults to \code{1}.
 #' @param r Defaults to \code{NULL}.
-#' @param g Defaults to \code{NULL}.
-#' @param gc Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param g Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param gc Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
 #' @return A numeric value.
 #' @export
 morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
@@ -430,21 +442,22 @@ morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
 # tmle_censoring: causal survival under censoring
 #' Tmle_censoring: causal survival under censoring
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
+#' @param time Passed to \code{morie_ipcw_interval}.
+#' @param event Passed to \code{morie_ipcw_interval}.
 #' @param censor See Usage.
-#' @param treatment See Usage.
-#' @param covariates See Usage.
-#' @param kind Defaults to \code{"right"}.
-#' @param grid Defaults to \code{NULL}.
-#' @param a Defaults to \code{1}.
-#' @param r Defaults to \code{NULL}.
-#' @param g Defaults to \code{NULL}.
-#' @param gc Defaults to \code{NULL}.
-#' @param trim Defaults to \code{0.001}.
+#' @param treatment Passed to \code{morie_ipcw_interval}.
+#' @param covariates Passed to \code{morie_ipcw_interval}.
+#' @param kind Compared against \code{"interval"}. Defaults to \code{"right"}.
+#' @param grid Passed to \code{morie_censoring_survival}.
+#' @param a Passed to \code{morie_ipcw_interval}. Defaults to \code{1}.
+#' @param r Passed to \code{morie_ipcw_interval}.
+#' @param g Passed to \code{morie_ipcw_interval}.
+#' @param gc Passed to \code{morie_ipcw_interval}.
+#' @param trim Numeric; passed to \code{max}. Defaults to \code{0.001}.
 #' @return The value of \code{.tmlcen_RichResult}.
 #' @export
 morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
@@ -576,7 +589,8 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
 
 #' .tmlcen_morie_cheatsheet
 #'
-#' Part of the tmlcen_native implementation; see the file header for the
+#' A step of the tmlcen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

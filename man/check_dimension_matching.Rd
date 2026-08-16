@@ -8,11 +8,11 @@
 check_dimension_matching(models, moves)
 }
 \arguments{
-\item{models}{See Usage.}
+\item{models}{A vector; its length is taken and its elements indexed.}
 \item{moves}{See Usage.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_mcmc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{by_pair}, as built in the body.

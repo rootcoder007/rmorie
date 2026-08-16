@@ -8,15 +8,15 @@
 morie_prxgms_lasso_fista(A, b, lam, max.iter = 500L, tol = 1e-10, accelerate = TRUE)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{as.matrix}.}
 \item{b}{See Usage.}
-\item{lam}{See Usage.}
-\item{max.iter}{Defaults to \code{500L}.}
-\item{tol}{Defaults to \code{1e-10}.}
-\item{accelerate}{Defaults to \code{TRUE}.}
+\item{lam}{Numeric; combined arithmetically in the body.}
+\item{max.iter}{Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{500L}.}
+\item{tol}{Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{1e-10}.}
+\item{accelerate}{Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the prxgms_native implementation; see the file header for the source it follows.
+A step of the prxgms_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{res}, as built in the body.

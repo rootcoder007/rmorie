@@ -8,9 +8,9 @@
 OmpFit(x, D, sparsity = NULL, tol = 1e-10)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{D}{See Usage.}
-\item{sparsity}{Defaults to \code{NULL}.}
+\item{x}{A vector; its length is taken.}
+\item{D}{Passed to \code{.morie_bx_mat}.}
+\item{sparsity}{Passed to \code{.morie_bx_omp}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{

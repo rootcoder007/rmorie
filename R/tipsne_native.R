@@ -95,11 +95,12 @@
 # Compensated dot product. Not sum(a * b), same reason.
 #' Compensated dot product. Not sum(a * b), same reason
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{.tipsne_chol}, \code{.tipsne_draw_beta}, \code{.tipsne_solve_chol} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .tipsne_dot <- function(a, b) {
@@ -122,7 +123,7 @@
 #'
 #' chol() so the Python arm can match it element by element.
 #'
-#' @param a See Usage.
+#' @param a A matrix; indexed by row and column.
 #' @return The value of \code{lo}, as built in the body.
 #' @export
 .tipsne_chol <- function(a) {
@@ -144,11 +145,12 @@
 # Solve L L' x = b by forward then back substitution.
 #' Solve L L\' x = b by forward then back substitution
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{.tipsne_inv_from_chol}, \code{morie_tipsne_ancova}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lo See Usage.
-#' @param b See Usage.
+#' @param lo A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .tipsne_solve_chol <- function(lo, b) {
@@ -170,10 +172,11 @@
 # (L L')^-1, formed column by column from the factor.
 #' (L L\')^-1, formed column by column from the factor
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{morie_tipsne_ancova}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lo See Usage.
+#' @param lo A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tipsne_inv_from_chol <- function(lo) {
@@ -216,12 +219,13 @@ morie_tipsne_ancova <- function(y, design) {
 # Intercept, arm indicator, then any covariates.
 #' Intercept, arm indicator, then any covariates
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{morie_tipsne}, \code{morie_tipsne_impute}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param arm See Usage.
-#' @param X See Usage.
-#' @param n See Usage.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param n A count; the body uses it as \code{rep(...)}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .tipsne_design <- function(arm, X, n) {
@@ -239,10 +243,10 @@ morie_tipsne_ancova <- function(y, design) {
 #' The draw is coordinate by coordinate so the stream position matches
 #' the Python arm term for term.
 #'
-#' @param e See Usage.
-#' @param beta See Usage.
-#' @param xtx_inv See Usage.
-#' @param sigma2_draw See Usage.
+#' @param e Passed to \code{.ghc_norm}.
+#' @param beta A vector; its length is taken and its elements indexed.
+#' @param xtx_inv Numeric; combined arithmetically in the body.
+#' @param sigma2_draw Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
 .tipsne_draw_beta <- function(e, beta, xtx_inv, sigma2_draw) {
@@ -297,10 +301,11 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 
 #' .tipsne_lgamma
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{.tipsne_betainc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tipsne_lgamma <- function(z) {
@@ -318,12 +323,13 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 # Lentz's algorithm for the beta continued fraction.
 #' Lentz\'s algorithm for the beta continued fraction
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{.tipsne_betainc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param x See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{h}, as built in the body.
 #' @export
 .tipsne_betacf <- function(a, b, x) {
@@ -362,12 +368,13 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 # Regularised incomplete beta I_x(a, b) by the continued fraction.
 #' Regularised incomplete beta I_x(a, b) by the continued fraction
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{.tipsne_t_sf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param x See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .tipsne_betainc <- function(a, b, x) {
@@ -388,8 +395,8 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' Written out because pt() and the Python arm are separate
 #' implementations and would disagree in the last digits.
 #'
-#' @param t See Usage.
-#' @param df See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tipsne_t_sf <- function(t, df) 0.5 * .tipsne_betainc(df / 2, 0.5, df / (df + t * t))
@@ -435,10 +442,11 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 
 #' .tipsne_sd
 #'
-#' Part of the tipsne_native implementation; see the file header for the
+#' A step of the tipsne_native implementation. Called by \code{morie_tipsne}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .tipsne_sd <- function(v) {

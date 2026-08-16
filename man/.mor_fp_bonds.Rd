@@ -8,7 +8,7 @@
 .mor_fp_bonds(adjacency)
 }
 \arguments{
-\item{adjacency}{See Usage.}
+\item{adjacency}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 order (i ascending, then j > i ascending)

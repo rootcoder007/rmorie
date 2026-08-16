@@ -8,11 +8,11 @@
 morie_dreamr_value_update(values, targets)
 }
 \arguments{
-\item{values}{See Usage.}
-\item{targets}{See Usage.}
+\item{values}{Passed to \code{.dreamr_vec}.}
+\item{targets}{Passed to \code{.dreamr_vec}.}
 }
 \description{
-Part of the dreamr_native implementation; see the file header for the source it follows.
+A step of the dreamr_native implementation. Called by \code{morie_dreamr}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{loss}, \code{residual}, \code{grad}, \code{method}.

@@ -8,11 +8,11 @@
 .comet_dist(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{.comet_vec}.}
+\item{b}{Passed to \code{.comet_vec}.}
 }
 \description{
-Part of the comet_native implementation; see the file header for the source it follows.
+A step of the comet_native implementation. Called by \code{triplet_loss}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,14 +8,14 @@
 morie_tlsurvy_adaptive_survey_tmle(V, influence_proxy, full_estimator, n, seed = 0)
 }
 \arguments{
-\item{V}{See Usage.}
-\item{influence_proxy}{See Usage.}
+\item{V}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
+\item{influence_proxy}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
 \item{full_estimator}{See Usage.}
-\item{n}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
+\item{n}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
+\item{seed}{Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.}
 }
 \description{
-estimator on the sample. Reports both error sources: the sampling variance from using n of N, and the estimator\\'s own standard error.
+estimator on the sample. Reports both error sources: the sampling variance from using n of N, and the estimator\'s own standard error.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{se_estimator}, \code{n_used}, \code{N}, \code{sampling_fraction}, \code{inclusion_probabilities}, \code{method}, \code{note}.

@@ -10,12 +10,12 @@ morie_sv_dl_kmer_diagonals(read, ref, k = 7, k_min = 3, require_half = TRUE)
 \arguments{
 \item{read}{See Usage.}
 \item{ref}{See Usage.}
-\item{k}{Defaults to \code{7}.}
+\item{k}{Numeric; combined arithmetically in the body. Defaults to \code{7}.}
 \item{k_min}{Defaults to \code{3}.}
-\item{require_half}{Defaults to \code{TRUE}.}
+\item{require_half}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_refine_breakpoint}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

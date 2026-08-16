@@ -8,10 +8,10 @@
 .morie_bx_sig(b)
 }
 \arguments{
-\item{b}{See Usage.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{Infomax}, \code{Lstm}, \code{MlpBp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

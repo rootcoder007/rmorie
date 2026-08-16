@@ -16,10 +16,10 @@ ctmle(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L, penalty = TRUE)
 \item{g_models}{See Usage.}
 \item{V}{Defaults to \code{5L}.}
 \item{seed}{Defaults to \code{0L}.}
-\item{penalty}{Defaults to \code{TRUE}.}
+\item{penalty}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the tlctmle_native implementation; see the file header for the source it follows.
+A step of the tlctmle_native implementation. Called by \code{morie_tlctmle}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{selected}, \code{selected_covariates}, \code{cv_risks}, \code{cv_losses}, \code{variance_penalties}, \code{penalized}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method}, \code{note}.

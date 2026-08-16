@@ -15,7 +15,7 @@ morie_smatch_sample_size(log_ri, r, p_exposed, alpha = 0.05, power = 0.8)
 \item{power}{Defaults to \code{0.8}.}
 }
 \description{
-Part of the smatch_native implementation; see the file header for the source it follows.
+A step of the smatch_native implementation. Called by \code{morie_smatch_power}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{n_events}, \code{n_events_ceiling}, \code{rho}, \code{A}, \code{B}, \code{C}, \code{z_alpha_2}, \code{z_power}, \code{log_ri}, \code{r}, \code{p_exposed}, \code{assumes}, \code{method}.

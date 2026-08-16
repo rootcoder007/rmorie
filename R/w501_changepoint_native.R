@@ -11,7 +11,7 @@
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A list with \code{cs}, \code{css}.
 #' @export
 .w501_cost_tables <- function(x) {
@@ -26,10 +26,10 @@
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param tb See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param cost See Usage.
+#' @param tb A list; the body reads \code{$cs}, \code{$css} from it.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param cost One of \code{"mean"}, \code{"meanvar"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .w501_seg_cost <- function(tb, a, b, cost) {
@@ -51,8 +51,8 @@
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param x See Usage.
-#' @param cost See Usage.
+#' @param x A vector; its length is taken.
+#' @param cost Passed to \code{.w501_seg_cost}.
 #' @param penalty See Usage.
 #' @param min_seglen Defaults to \code{1L}.
 #' @return A list with \code{taus}, \code{Fn}.
@@ -245,8 +245,8 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param Z See Usage.
-#' @param alpha See Usage.
+#' @param Z A matrix; indexed by row and column.
+#' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{D}, as built in the body.
 #' @export
 .w501_pairwise_alpha <- function(Z, alpha) {
@@ -270,7 +270,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param D See Usage.
+#' @param D A matrix; indexed by row and column.
 #' @return The value of \code{P}, as built in the body.
 #' @export
 .w501_prefix2d <- function(D) {
@@ -289,11 +289,11 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param P See Usage.
-#' @param a1 See Usage.
-#' @param b1 See Usage.
-#' @param a2 See Usage.
-#' @param b2 See Usage.
+#' @param P A matrix; indexed by row and column.
+#' @param a1 Numeric; combined arithmetically in the body.
+#' @param b1 Numeric; combined arithmetically in the body.
+#' @param a2 Numeric; combined arithmetically in the body.
+#' @param b2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .w501_block <- function(P, a1, b1, a2, b2) {
@@ -305,10 +305,10 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param P See Usage.
-#' @param a See Usage.
-#' @param tau See Usage.
-#' @param kappa See Usage.
+#' @param P Passed to \code{.w501_block}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param tau Numeric; combined arithmetically in the body.
+#' @param kappa Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .w501_qhat <- function(P, a, tau, kappa) {
@@ -328,10 +328,10 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' Part of the w501_changepoint_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param P See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param min_size See Usage.
+#' @param P Passed to \code{.w501_qhat}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param min_size Numeric; combined arithmetically in the body.
 #' @return A list with \code{q}, \code{tau}, \code{kappa}.
 #' @export
 .w501_best_split <- function(P, a, b, min_size) {
@@ -349,10 +349,10 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #'
 #' Python arm swap-for-swap.
 #'
-#' @param ord See Usage.
+#' @param ord A vector; indexed elementwise.
 #' @param clusters See Usage.
-#' @param us See Usage.
-#' @param pos See Usage.
+#' @param us A vector; indexed elementwise.
+#' @param pos Numeric; combined arithmetically in the body.
 #' @return A list with \code{ord}, \code{pos}.
 #' @export
 .w501_shuffle_within <- function(ord, clusters, us, pos) {

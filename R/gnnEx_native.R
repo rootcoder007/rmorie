@@ -33,10 +33,11 @@
 
 #' Vectorised sigmoid with overflow protection (matches Python _sig)
 #'
-#' Part of the gnnEx_native implementation; see the file header for the
+#' A step of the gnnEx_native implementation. Called by \code{gnnEx_mask_objective}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .gnnEx_sig <- function(x) {
@@ -53,7 +54,7 @@
 #' are integer vectors of neighbours. Falls back to 1-based integer
 #' indexing when the list has no names.
 #'
-#' @param adj See Usage.
+#' @param adj Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param u See Usage.
 #' @return A vector, from \code{integer}.
 #' @export
@@ -77,10 +78,11 @@
 
 #' The L-hop neighbourhood -- everything the prediction could depend on
 #'
-#' Part of the gnnEx_native implementation; see the file header for the
+#' A step of the gnnEx_native implementation. Called by \code{gnnEx_explain_node}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
+#' @param adj Passed to \code{.gnnEx_get_neighbors}.
 #' @param v See Usage.
 #' @param L See Usage.
 #' @return A list with \code{nodes}, \code{edges}, \code{hops}, \code{size}.
@@ -121,7 +123,8 @@ gnnEx_computation_graph <- function(adj, v, L) {
 
 #' H(Y | .) for a predicted distribution
 #'
-#' Part of the gnnEx_native implementation; see the file header for the
+#' A step of the gnnEx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param probs See Usage.
@@ -140,16 +143,17 @@ gnnEx_conditional_entropy <- function(probs) {
 
 #' gnnEx_mask_objective
 #'
-#' Part of the gnnEx_native implementation; see the file header for the
+#' A step of the gnnEx_native implementation. Called by \code{gnnEx_explain_node}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param predict See Usage.
 #' @param edges See Usage.
-#' @param edge_logits See Usage.
-#' @param feature_logits See Usage.
+#' @param edge_logits Passed to \code{.gnnEx_sig}.
+#' @param feature_logits Passed to \code{.gnnEx_sig}.
 #' @param y See Usage.
-#' @param size_coef Defaults to \code{0.005}.
-#' @param entropy_coef Defaults to \code{1}.
+#' @param size_coef Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
+#' @param entropy_coef Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{loss}, \code{fit}, \code{size}, \code{entropy}, \code{edge_mask}, \code{feature_mask}, \code{prediction}.
 #' @export
 gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
@@ -178,7 +182,8 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
 
 #' gnnEx_explain_node
 #'
-#' Part of the gnnEx_native implementation; see the file header for the
+#' A step of the gnnEx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param predict See Usage.
@@ -188,11 +193,11 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
 #' @param n_features See Usage.
 #' @param L Defaults to \code{2}.
 #' @param iters Defaults to \code{300}.
-#' @param lr Defaults to \code{0.1}.
+#' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param size_coef Defaults to \code{0.005}.
 #' @param entropy_coef Defaults to \code{1}.
-#' @param seed Defaults to \code{0}.
-#' @param penalize Defaults to \code{TRUE}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param penalize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{edges_ranked}, \code{edge_mask}, \code{feature_mask}, \code{loss_history}, \code{final}, \code{computation_graph}, \code{penalized}, \code{method}, \code{note}.
 #' @export
 gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
@@ -263,7 +268,8 @@ gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
 
 #' gnnEx_cheatsheet
 #'
-#' Part of the gnnEx_native implementation; see the file header for the
+#' A step of the gnnEx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

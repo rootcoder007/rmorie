@@ -40,11 +40,12 @@
 
 #' .morie_gh_minimax_rate
 #'
-#' Part of the ghosal_native implementation; see the file header for the
+#' A step of the ghosal_native implementation. Called by \code{Ghosalfrsdensity}, \code{Ghosalgpdenscrt}, \code{morie_gp_density_rate} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param s See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param s Numeric; combined arithmetically in the body.
 #' @param d Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
@@ -61,7 +62,8 @@
 
 #' .morie_gh_trapz
 #'
-#' Part of the ghosal_native implementation; see the file header for the
+#' A step of the ghosal_native implementation. Called by \code{.morie_gh_hellinger}, \code{Ghosalfrsdensity}, \code{morie_polya_tree_density} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param xx See Usage.
@@ -74,7 +76,8 @@
 
 #' .morie_gh_hellinger
 #'
-#' Part of the ghosal_native implementation; see the file header for the
+#' A step of the ghosal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -90,7 +93,8 @@
 
 #' .morie_gh_polya_tree
 #'
-#' Part of the ghosal_native implementation; see the file header for the
+#' A step of the ghosal_native implementation. Called by \code{morie_polya_tree_density}, \code{morie_polya_tree_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -146,7 +150,7 @@
 #' with the last stick closing so the weights sum to one exactly.
 #'
 #' @param alpha See Usage.
-#' @param K See Usage.
+#' @param K Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_gh_stick <- function(alpha, K) {

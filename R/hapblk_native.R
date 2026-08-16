@@ -7,11 +7,12 @@
 
 #' .hapblk_ci
 #'
-#' Part of the hapblk_native implementation; see the file header for the
+#' A step of the hapblk_native implementation. Called by \code{morie_hapblk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h See Usage.
-#' @param grid Defaults to \code{200}.
+#' @param h A vector; indexed elementwise.
+#' @param grid Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A vector, from \code{c}.
 #' @export
 .hapblk_ci <- function(h, grid = 200) {

@@ -46,7 +46,7 @@ mk <- function(nr, nc, f) {
 }
 W <- 4L
 SPAN <- 2L * W - 1L
-TABLE <- mk(SPAN, SPAN, function(a, b) (((a * 3 + b * 5)%%9) - 
+TABLE <- mk(SPAN, SPAN, function(a, b) (((a * 3 + b * 5)\%\%9) - 
     4)/6)
 COORDS <- matrix(0, 6L, 2L)
 morie_vit2lf_relative_bias(COORDS, TABLE, W, TRUE)

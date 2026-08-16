@@ -226,12 +226,13 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
 # phi_1..phi_L evaluated at s: the alternating basis of p.584.
 #' Phi_1..phi_L evaluated at s: the alternating basis of p.584
 #'
-#' Part of the htpfn implementation; see the file header for the source
+#' A step of the htpfn implementation. Called by \code{Htpfn}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param s See Usage.
-#' @param L See Usage.
-#' @param P See Usage.
+#' @param s Numeric; combined arithmetically in the body.
+#' @param L A count; the body uses it as \code{seq_len(...)}.
+#' @param P Numeric; passed to \code{sqrt}.
 #' @return The value of \code{[}.
 #' @export
 .htpfourier <- function(s, L, P) {
@@ -249,11 +250,12 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
 
 #' .htpinvspd
 #'
-#' Part of the htpfn implementation; see the file header for the source
+#' A step of the htpfn implementation. Called by \code{Htpfn}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param A See Usage.
-#' @param ridge See Usage.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .htpinvspd <- function(A, ridge) {

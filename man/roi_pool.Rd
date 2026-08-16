@@ -8,13 +8,13 @@
 roi_pool(features, box, out_size = 2L, stride = 1)
 }
 \arguments{
-\item{features}{See Usage.}
-\item{box}{See Usage.}
+\item{features}{Passed to \code{.masrcn_mat}.}
+\item{box}{A vector; indexed elementwise.}
 \item{out_size}{Defaults to \code{2L}.}
 \item{stride}{Defaults to \code{1}.}
 }
 \description{
-Part of the masrcn_native implementation; see the file header for the source it follows.
+A step of the masrcn_native implementation. Called by \code{alignment_error}, \code{morie_masrcn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift}, \code{caveat}.

@@ -8,11 +8,11 @@
 .w3_dot(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A vector; its length is taken and its elements indexed.}
+\item{b}{A vector; indexed elementwise.}
 }
 \description{
-Part of the helpers_w3num implementation; see the file header for the source it follows.
+A step of the helpers_w3num implementation. Called by \code{.baysmplr_build_tree}, \code{.chemsc_angle}, \code{.hyper2_elliptical} and 21 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

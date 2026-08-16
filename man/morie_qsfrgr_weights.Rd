@@ -43,8 +43,8 @@ A list with the weights and the number of trees used.
 N <- 24L
 X <- matrix(0, N, 2)
 T <- vapply(0:(N - 1L), function(i) round(2 + 9 * (1 - ((i * 
-    7)%%11)/10) + ((i * 3)%%5) * 0.4, 4), numeric(1))
-E <- vapply(0:(N - 1L), function(i) if (i%%3 == 0) 0L else 1L, 
+    7)\%\%11)/10) + ((i * 3)\%\%5) * 0.4, 4), numeric(1))
+E <- vapply(0:(N - 1L), function(i) if (i\%\%3 == 0) 0L else 1L, 
     integer(1))
 trees <- morie_qsfrgr_forest(X, T, E, 5L, NULL, 3L, 3L, TRUE, 
     4, "logrank")

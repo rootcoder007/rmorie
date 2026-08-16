@@ -16,7 +16,8 @@
 
 #' morie_unclr_dft_amp
 #'
-#' Part of the unclr implementation; see the file header for the source
+#' A step of the unclr implementation. Called by \code{Fftperiod}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param x See Usage.
@@ -26,17 +27,19 @@ morie_unclr_dft_amp <- function(x) Mod(stats::fft(as.numeric(x)))
 
 #' morie_unclr_phi
 #'
-#' Part of the unclr implementation; see the file header for the source
+#' A step of the unclr implementation. Called by \code{morie_unclr_lr_impute}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 morie_unclr_phi <- function(z) exp(-0.5 * z^2) / sqrt(2 * pi)
 
 #' morie_unclr_Phi
 #'
-#' Part of the unclr implementation; see the file header for the source
+#' A step of the unclr implementation. Called by \code{morie_unclr_lr_impute}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param z See Usage.
@@ -371,21 +374,23 @@ Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
 
 #' morie_unclr_alr
 #'
-#' Part of the unclr implementation; see the file header for the source
+#' A step of the unclr implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 morie_unclr_alr <- function(x) log(x[-length(x)] / x[length(x)])
 
 #' morie_unclr_alr_inv
 #'
-#' Part of the unclr implementation; see the file header for the source
+#' A step of the unclr implementation. Called by \code{morie_unclr_lr_impute}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param z See Usage.
-#' @param total See Usage.
+#' @param z Numeric; passed to \code{exp}.
+#' @param total Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 morie_unclr_alr_inv <- function(z, total) {
@@ -395,13 +400,14 @@ morie_unclr_alr_inv <- function(z, total) {
 
 #' morie_unclr_lr_impute
 #'
-#' Part of the unclr implementation; see the file header for the source
+#' A step of the unclr implementation. Called by \code{Lrda}, \code{Lrem}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param dl See Usage.
 #' @param n_iter See Usage.
-#' @param draw Defaults to \code{NULL}.
+#' @param draw Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.
 #' @export
 morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
@@ -765,11 +771,12 @@ Ginagg <- function(A, H, eps = 0) {
 
 #' morie_unclr_sym_norm
 #'
-#' Part of the unclr implementation; see the file header for the source
+#' A step of the unclr implementation. Called by \code{Lgcnprop}, \code{Sgcprop}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param A See Usage.
-#' @param self_loops See Usage.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param self_loops A flag; the body branches on it.
 #' @return A numeric value.
 #' @export
 morie_unclr_sym_norm <- function(A, self_loops) {

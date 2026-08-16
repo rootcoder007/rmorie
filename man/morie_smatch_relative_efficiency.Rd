@@ -12,7 +12,7 @@ morie_smatch_relative_efficiency(r, log_ri)
 \item{log_ri}{See Usage.}
 }
 \description{
-Part of the smatch_native implementation; see the file header for the source it follows.
+A step of the smatch_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri}, \code{interpretation}.

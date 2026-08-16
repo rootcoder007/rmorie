@@ -8,14 +8,14 @@
 .tmlcds_propensity(d, cols, n, penalty = 0, trim = 0.005)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{cols}{See Usage.}
-\item{n}{See Usage.}
+\item{d}{Passed to \code{.tmlcds_logit_irls}.}
+\item{cols}{Passed to \code{.tmlcds_design}.}
+\item{n}{Passed to \code{.tmlcds_design}.}
 \item{penalty}{Defaults to \code{0}.}
-\item{trim}{Defaults to \code{0.005}.}
+\item{trim}{Numeric; combined arithmetically in the body. Defaults to \code{0.005}.}
 }
 \description{
-Part of the tmlcds_native implementation; see the file header for the source it follows.
+A step of the tmlcds_native implementation. Called by \code{.tmlcds_refit_on}, \code{ctmle_sequence}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{g}, \code{b}.

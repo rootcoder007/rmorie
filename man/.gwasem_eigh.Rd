@@ -8,10 +8,10 @@
 .gwasem_eigh(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the gwasem_native implementation; see the file header for the source it follows.
+A step of the gwasem_native implementation. Called by \code{morie_gwasem_reml}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{values}, \code{vectors}.

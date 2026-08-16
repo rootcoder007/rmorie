@@ -24,8 +24,8 @@
 #' Exact rationals (Fraction-equivalent)
 #' ---------------------------------------------------------------------------
 #'
-#' @param num See Usage.
-#' @param den Defaults to \code{1L}.
+#' @param num Numeric; passed to \code{abs}.
+#' @param den Numeric; combined arithmetically in the body. Defaults to \code{1L}.
 #' @return A vector, from \code{c}.
 #' @export
 .groebn_fr <- function(num, den = 1L) {
@@ -40,11 +40,12 @@
 
 #' .groebn_gcd
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_fr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .groebn_gcd <- function(a, b) {
@@ -55,11 +56,12 @@
 
 #' .groebn_fr_add
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{.groebn_mul}, \code{.groebn_poly}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
 .groebn_fr_add <- function(p, q) {
@@ -68,11 +70,12 @@
 
 #' .groebn_fr_sub
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
 .groebn_fr_sub <- function(p, q) {
@@ -81,21 +84,23 @@
 
 #' .groebn_fr_neg
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
 .groebn_fr_neg <- function(p) c(-p[1L], p[2L])
 
 #' .groebn_fr_mul
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_mul}, \code{.groebn_scale}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
 .groebn_fr_mul <- function(p, q) {
@@ -104,11 +109,12 @@
 
 #' .groebn_fr_div
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_reduce_basis}, \code{.groebn_spoly}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
 .groebn_fr_div <- function(p, q) {
@@ -118,31 +124,34 @@
 
 #' .groebn_fr_is_zero
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
 .groebn_fr_is_zero <- function(p) p[1L] == 0L
 
 #' .groebn_fr_eq
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param q A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
 .groebn_fr_eq <- function(p, q) p[1L] == q[1L] && p[2L] == q[2L]
 
 #' .groebn_as_fr
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_poly}, \code{.groebn_scale}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return Nothing; this branch always raises.
 #' @export
 .groebn_as_fr <- function(x) {
@@ -172,10 +181,11 @@
 
 #' .groebn_key
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_monomials}, \code{.groebn_reduce_basis}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param order See Usage.
+#' @param order One of \code{"grevlex"}, \code{"grlex"}, \code{"lex"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .groebn_key <- function(order) {
@@ -200,7 +210,7 @@
 #' Exponent keys
 #' ---------------------------------------------------------------------------
 #'
-#' @param s See Usage.
+#' @param s Character; passed to \code{strsplit}.
 #' @return The value of \code{as.integer}.
 #' @export
 .groebn_parse_key <- function(s) {
@@ -209,7 +219,8 @@
 
 #' .groebn_format_key
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param e See Usage.
@@ -227,7 +238,7 @@
 #' Polynomial constructor
 #' ---------------------------------------------------------------------------
 #'
-#' @param terms See Usage.
+#' @param terms A vector; its length is taken and its elements indexed.
 #' @param nvars Defaults to \code{NULL}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -356,11 +367,12 @@
 
 #' .groebn_monomials
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_leading_monomial}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
 .groebn_monomials <- function(f, order = "lex") {
@@ -376,11 +388,12 @@
 
 #' .groebn_leading_monomial
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_divide}, \code{.groebn_leading_coeff} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param f Passed to \code{.groebn_monomials}.
+#' @param order Passed to \code{.groebn_monomials}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
 .groebn_leading_monomial <- function(f, order = "lex") {
@@ -391,11 +404,12 @@
 
 #' .groebn_leading_coeff
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_reduce_basis}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param f A vector; indexed elementwise.
+#' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{[[}.
 #' @export
 .groebn_leading_coeff <- function(f, order = "lex") {
@@ -406,11 +420,12 @@
 
 #' .groebn_leading_term
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param f A vector; indexed elementwise.
+#' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .groebn_leading_term <- function(f, order = "lex") {
@@ -430,7 +445,7 @@
 #' ---------------------------------------------------------------------------
 #'
 #' @param f See Usage.
-#' @param g See Usage.
+#' @param g A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .groebn_add <- function(f, g) {
@@ -450,10 +465,11 @@
 
 #' .groebn_sub
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_spoly}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Passed to \code{.groebn_add}.
 #' @param g See Usage.
 #' @return The value of \code{.groebn_add}.
 #' @export
@@ -464,11 +480,12 @@
 
 #' .groebn_mul
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_spoly}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param g See Usage.
+#' @param f A vector; its length is taken and its elements indexed.
+#' @param g A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .groebn_mul <- function(f, g) {
@@ -498,11 +515,12 @@
 
 #' .groebn_scale
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_reduce_basis}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param c See Usage.
+#' @param c Passed to \code{.groebn_as_fr}.
 #' @return The value of \code{lapply}.
 #' @export
 .groebn_scale <- function(f, c) {
@@ -513,7 +531,8 @@
 
 #' .groebn_divides
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_reduce_basis}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -526,7 +545,8 @@
 
 #' .groebn_lcm
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_spoly}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -545,9 +565,9 @@
 #' S-polynomial and division
 #' ---------------------------------------------------------------------------
 #'
-#' @param f See Usage.
-#' @param g See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param f A vector; its length is taken and its elements indexed.
+#' @param g A vector; its length is taken and its elements indexed.
+#' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{.groebn_sub}.
 #' @export
 .groebn_spoly <- function(f, g, order = "lex") {
@@ -569,12 +589,13 @@
 
 #' .groebn_divide
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_normal_form}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
 #' @param G See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return A list with \code{quotients}, \code{remainder}.
 #' @export
 .groebn_divide <- function(f, G, order = "lex") {
@@ -614,12 +635,13 @@
 
 #' .groebn_normal_form
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_ideal_member}, \code{.groebn_reduce_basis}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param G See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param f Passed to \code{.groebn_divide}.
+#' @param G Passed to \code{.groebn_divide}.
+#' @param order Passed to \code{.groebn_divide}. Defaults to \code{"lex"}.
 #' @return The value of \code{$}.
 #' @export
 .groebn_normal_form <- function(f, G, order = "lex") {
@@ -635,9 +657,9 @@
 #' ---------------------------------------------------------------------------
 #'
 #' @param F See Usage.
-#' @param order Defaults to \code{"lex"}.
-#' @param prune Defaults to \code{TRUE}.
-#' @param reduced Defaults to \code{TRUE}.
+#' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
+#' @param prune A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param reduced A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{basis}, \code{order}, \code{size}, \code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned}, \code{method}.
 #' @export
 .groebn_buchberger <- function(F, order = "lex", prune = TRUE, reduced = TRUE) {
@@ -707,11 +729,12 @@
 
 #' .groebn_reduce_basis
 #'
-#' Part of the groebn_native implementation; see the file header for the
+#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param G See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
 .groebn_reduce_basis <- function(G, order = "lex") {
@@ -765,9 +788,9 @@
 #' Ideal membership
 #' ---------------------------------------------------------------------------
 #'
-#' @param f See Usage.
-#' @param F See Usage.
-#' @param order Defaults to \code{"lex"}.
+#' @param f Passed to \code{.groebn_normal_form}.
+#' @param F Passed to \code{.groebn_buchberger}.
+#' @param order Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.
 #' @param basis Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{member}, \code{remainder}, \code{order}, \code{basis}, \code{method}.
 #' @export
@@ -795,9 +818,9 @@
 #' ---------------------------------------------------------------------------
 #'
 #' @param polys See Usage.
-#' @param order Defaults to \code{"lex"}.
-#' @param prune Defaults to \code{TRUE}.
-#' @param reduced Defaults to \code{TRUE}.
+#' @param order Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.
+#' @param prune Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.
+#' @param reduced Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.
 #' @return The value of \code{.groebn_buchberger}.
 #' @export
 morie_groebn <- function(polys, order = "lex", prune = TRUE, reduced = TRUE) {

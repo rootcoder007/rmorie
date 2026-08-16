@@ -11,7 +11,7 @@
 \item{seed}{See Usage.}
 }
 \description{
-below 2^53, so the double arithmetic here is exact and matches the Python arm\\\'s 32-bit masked integer step for step.
+below 2^53, so the double arithmetic here is exact and matches the Python arm\\'s 32-bit masked integer step for step.
 }
 \value{
 The value of \code{function}.

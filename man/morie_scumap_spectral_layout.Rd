@@ -8,12 +8,12 @@
 morie_scumap_spectral_layout(B, n_components = 2, laplacian = "normalised")
 }
 \arguments{
-\item{B}{See Usage.}
+\item{B}{A matrix; indexed by row and column.}
 \item{n_components}{Defaults to \code{2}.}
-\item{laplacian}{Defaults to \code{"normalised"}.}
+\item{laplacian}{One of \code{"as_printed"}, \code{"normalised"}. Defaults to \code{"normalised"}.}
 }
 \description{
-Part of the scumap_native implementation; see the file header for the source it follows.
+A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{Y}, as built in the body.

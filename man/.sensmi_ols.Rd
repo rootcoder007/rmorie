@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{y}{Numeric; combined arithmetically in the body.}
 }
 \description{
 coefficients and the residuals in one list so callers do not refit.

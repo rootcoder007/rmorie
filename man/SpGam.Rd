@@ -8,13 +8,13 @@
 SpGam(y, x, coords, lam = 0)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{x}{See Usage.}
-\item{coords}{See Usage.}
-\item{lam}{Defaults to \code{0}.}
+\item{y}{Passed to \code{.morie_spx_chkv}.}
+\item{x}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
+\item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-as the saddle-point system [K + n lam I, T; T\\', 0].  T = [1, s1, s2, X] spans the null space of the penalty and must NOT be shrunk; dropping the T\\'c = 0 block leaves the system singular.  Duchon (1977); Wood (2006) Ch. 4.  NOT in Schabenberger & Gotway, whose parametric analogue is Sec. 5.3.1.
+as the saddle-point system [K + n lam I, T; T\', 0].  T = [1, s1, s2, X] spans the null space of the penalty and must NOT be shrunk; dropping the T\'c = 0 block leaves the system singular.  Duchon (1977); Wood (2006) Ch. 4.  NOT in Schabenberger & Gotway, whose parametric analogue is Sec. 5.3.1.
 }
 \value{
 A list with \code{fitted}, \code{residuals}, \code{coef}, \code{spline_weights}, \code{rss}, \code{penalty}, \code{lam}, \code{null_space_is_unpenalised}, \code{n}, \code{method}.

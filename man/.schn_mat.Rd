@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the schN_native implementation; see the file header for the source it follows.
+A step of the schN_native implementation. Called by \code{cfconv}, \code{forces_from_energy}, \code{invariance_error}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

@@ -8,10 +8,10 @@
 .limmav_digamma(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{.limmav_ebayes}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

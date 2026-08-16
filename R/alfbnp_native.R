@@ -15,10 +15,11 @@
 
 #' .alfbnp_atoms
 #'
-#' Part of the alfbnp_native implementation; see the file header for the
+#' A step of the alfbnp_native implementation. Called by \code{.alfbnp_clean_list}, \code{morie_alfbnp_af3_sample}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @param what See Usage.
 #' @return The value of \code{m}, as built in the body.
 #' @export
@@ -35,14 +36,15 @@
 
 #' .alfbnp_schedule
 #'
-#' Part of the alfbnp_native implementation; see the file header for the
+#' A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sample}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param sigma_data See Usage.
-#' @param s_max See Usage.
-#' @param s_min See Usage.
-#' @param rho See Usage.
+#' @param T A count; the body uses it as \code{seq_len(...)}.
+#' @param sigma_data Numeric; combined arithmetically in the body.
+#' @param s_max Numeric; combined arithmetically in the body.
+#' @param s_min Numeric; combined arithmetically in the body.
+#' @param rho Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .alfbnp_schedule <- function(T, sigma_data, s_max, s_min, rho) {
@@ -59,10 +61,11 @@
 
 #' .alfbnp_centre
 #'
-#' Part of the alfbnp_native implementation; see the file header for the
+#' A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sample}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .alfbnp_centre <- function(X) {
@@ -80,10 +83,10 @@
 #' linear map is a ridge regression with a closed form; descending to it
 #' would only add a tolerance for the two arms to disagree about.
 #'
-#' @param clean See Usage.
-#' @param sigmas See Usage.
-#' @param draws See Usage.
-#' @param ridge See Usage.
+#' @param clean A vector; indexed elementwise.
+#' @param sigmas A vector; its length is taken and its elements indexed.
+#' @param draws A vector; its length is taken and its elements indexed.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{coefs}, as built in the body.
 #' @export
 .alfbnp_fit_linear <- function(clean, sigmas, draws, ridge) {
@@ -119,7 +122,7 @@
 #' lapply over a 3-D array walks the wrong dimension and silently
 #' produces garbage, so normalise before anything touches it.
 #'
-#' @param clean See Usage.
+#' @param clean A matrix; indexed by row and column.
 #' @return The value of \code{lapply}.
 #' @export
 .alfbnp_clean_list <- function(clean) {
@@ -134,14 +137,15 @@
 
 #' morie_alfbnp_af3_sample
 #'
-#' Part of the alfbnp_native implementation; see the file header for the
+#' A step of the alfbnp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_atoms Defaults to \code{NULL}.
 #' @param denoiser Defaults to \code{NULL}.
-#' @param clean Defaults to \code{NULL}.
+#' @param clean Optional; may be \code{NULL}. Passed to \code{.alfbnp_clean_list}.
 #' @param steps Defaults to \code{20L}.
-#' @param sigma_data Defaults to \code{16}.
+#' @param sigma_data Compared against \code{"fit"}. Defaults to \code{16}.
 #' @param s_max Defaults to \code{160}.
 #' @param s_min Defaults to \code{4e-04}.
 #' @param rho Defaults to \code{7}.
@@ -151,7 +155,7 @@
 #' @param step_scale Defaults to \code{1.5}.
 #' @param noise Defaults to \code{NULL}.
 #' @param seed Defaults to \code{2}.
-#' @param x_init Defaults to \code{NULL}.
+#' @param x_init Optional; may be \code{NULL}. Passed to \code{.alfbnp_atoms}.
 #' @param ridge Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{coords}, \code{sigmas}, \code{trace}, \code{denoiser_coefs}, \code{sigma_data}, \code{steps}, \code{rmsd_to_reference}, \code{n_atoms}, \code{route}, \code{method}, \code{note}.
 #' @export
@@ -300,7 +304,8 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
 
 #' .alfbnp_cheatsheet
 #'
-#' Part of the alfbnp_native implementation; see the file header for the
+#' A step of the alfbnp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,12 +8,12 @@
 .crp_norm_logpdf(x, mu, var)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{mu}{See Usage.}
-\item{var}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{var}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the crpcol implementation; see the file header for the source it follows.
+A step of the crpcol implementation. Called by \code{.crp_collapsed_sweep}, \code{Crpcol}, \code{Crpgib} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

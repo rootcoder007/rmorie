@@ -20,8 +20,8 @@ List with lower, upper, width, condmean, pbelow, pat, pabove,
 n, d.
 }
 \description{
-E\link{Y(d)} <= P(Z<=d) E\link{Y|Z=d} + P(Z>d) ymax and
-E\link{Y(d)} >= P(Z<d) ymin + P(Z>=d) E\link{Y|Z=d}.
+E\link{Y(d)} <= P(Z<=d) E[Y|Z=d] + P(Z>d) ymax and
+E\link{Y(d)} >= P(Z<d) ymin + P(Z>=d) E[Y|Z=d].
 }
 \references{
 Manski and Pepper (2000), Econometrica 68(4), 997-1010.

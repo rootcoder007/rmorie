@@ -8,14 +8,14 @@
 .ecfp_morgan(B, invariants, radius, nbits, use_bond_order = TRUE)
 }
 \arguments{
-\item{B}{See Usage.}
+\item{B}{A list; the body reads \code{$a}, \code{$i}, \code{$j}, \code{$o} from it.}
 \item{invariants}{See Usage.}
-\item{radius}{See Usage.}
-\item{nbits}{See Usage.}
-\item{use_bond_order}{Defaults to \code{TRUE}.}
+\item{radius}{A count; the body uses it as \code{seq_len(...)}.}
+\item{nbits}{A count; the body uses it as \code{integer(...)}.}
+\item{use_bond_order}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the ecfp4 implementation; see the file header for the source it follows.
+A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{bits}, \code{count}, \code{ident}.

@@ -8,11 +8,11 @@
 .morie_rg_periodogram(xs, fs)
 }
 \arguments{
-\item{xs}{See Usage.}
-\item{fs}{See Usage.}
+\item{xs}{A vector; its length is taken.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_stat implementation; see the file header for the source it follows.
+A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdVag}, \code{SigFeatures}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{psd}, \code{freqs}.

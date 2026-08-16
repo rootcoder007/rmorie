@@ -57,7 +57,7 @@ doi:10.1007/978-3-030-89010-0.
 }
 \details{
 The ARCHITECTURE is Chapter 12, Section 12.4.1, "DNN with Multivariate
-Continuous Outcomes", volume \link{Pages 477-532}, pp.490-493.  That section gives
+Continuous Outcomes", volume [Pages 477-532], pp.490-493.  That section gives
 the model as Keras code rather than as an equation: an input layer, a stack of
 shared hidden dense layers each followed by dropout, then ONE one-unit linear
 output head per trait, compiled with a per-head loss and a per-head
@@ -65,7 +65,7 @@ loss_weights entry.  That is exactly the model here -- shared hidden stack, T
 linear heads, joint loss sum_t w_t L_t.
 
 The TRAINING EQUATIONS are Chapter 10, Section 10.8.1, volume
-\link{Pages 379-425}, pp.412-413, read from rendered page images because the text
+[Pages 379-425], pp.412-413, read from rendered page images because the text
 layer of this chapter drops minus signs:
 
 Step 4  z_ik^(h) = sum_{p=0}^{P} w_kp^(h) x_ip

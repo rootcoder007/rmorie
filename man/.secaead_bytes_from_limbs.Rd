@@ -8,11 +8,11 @@
 .secaead_bytes_from_limbs(limbs, nbytes)
 }
 \arguments{
-\item{limbs}{See Usage.}
-\item{nbytes}{See Usage.}
+\item{limbs}{A vector; its length is taken and its elements indexed.}
+\item{nbytes}{A count; the body uses it as \code{integer(...)}.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{morie_secaead_poly1305_mac}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

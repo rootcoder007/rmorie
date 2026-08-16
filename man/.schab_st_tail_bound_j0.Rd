@@ -8,12 +8,12 @@
 .schab_st_tail_bound_j0(t, h, p)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{h}{See Usage.}
-\item{p}{See Usage.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{.schab_st_hankel_panels}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 cumulative_incidence(hazards, times)
 }
 \arguments{
-\item{hazards}{See Usage.}
-\item{times}{See Usage.}
+\item{hazards}{A vector; indexed elementwise.}
+\item{times}{A vector; its length is taken.}
 }
 \description{
-Part of the tmlcmp_native implementation; see the file header for the source it follows.
+A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{F}, \code{survival}, \code{types}, \code{closure}.

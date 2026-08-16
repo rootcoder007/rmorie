@@ -13,7 +13,7 @@ birth_log_jacobian(h_j, h_new_left, h_new_right)
 \item{h_new_right}{See Usage.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

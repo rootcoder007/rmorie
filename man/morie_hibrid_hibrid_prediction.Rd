@@ -9,17 +9,17 @@ morie_hibrid_hibrid_prediction(y, p1_geno, p2_geno, sigma2_sca = NULL, X = NULL,
 }
 \arguments{
 \item{y}{See Usage.}
-\item{p1_geno}{See Usage.}
-\item{p2_geno}{See Usage.}
+\item{p1_geno}{Passed to \code{.hibrid_rows}.}
+\item{p2_geno}{Passed to \code{.hibrid_rows}.}
 \item{sigma2_sca}{Defaults to \code{NULL}.}
-\item{X}{Defaults to \code{NULL}.}
-\item{p1_new}{Defaults to \code{NULL}.}
-\item{p2_new}{Defaults to \code{NULL}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
+\item{p1_new}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
+\item{p2_new}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
 \item{max_iter}{Defaults to \code{300L}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the hibrid_native implementation; see the file header for the source it follows.
+A step of the hibrid_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{fitted}, \code{gca_effect}, \code{sca_effect}, \code{coefficients}, \code{sigma2_gca}, \code{sigma2_sca}, \code{sigma2_e}, \code{sca_share}, \code{h2}, \code{gca_kernel}, \code{sca_kernel}, \code{reml_path}, \code{reml_loglik}, \code{iterations}, \code{converged}, \code{sca_fixed}, \code{prediction_new}, \code{residuals}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.

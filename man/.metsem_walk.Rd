@@ -8,11 +8,11 @@
 .metsem_walk(g, first)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{first}{See Usage.}
+\item{g}{A list; the body reads \code{$out} from it.}
+\item{first}{A vector; its length is taken.}
 }
 \description{
-Part of the metsem_native implementation; see the file header for the source it follows.
+A step of the metsem_native implementation. Called by \code{morie_metsem_unitigs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{path}, as built in the body.

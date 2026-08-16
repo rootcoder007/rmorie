@@ -8,14 +8,14 @@
 .schab_practical_range(theta1, theta2 = 0, theta3 = 0, ci = NULL, cj = NULL)
 }
 \arguments{
-\item{theta1}{See Usage.}
-\item{theta2}{Defaults to \code{0}.}
-\item{theta3}{Defaults to \code{0}.}
-\item{ci}{Defaults to \code{NULL}.}
-\item{cj}{Defaults to \code{NULL}.}
+\item{theta1}{Numeric; combined arithmetically in the body.}
+\item{theta2}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{theta3}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{ci}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{cj}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{spnst}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

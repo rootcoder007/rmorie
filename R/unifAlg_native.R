@@ -53,10 +53,11 @@
 
 #' .unifAlg_is_var
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once}, \code{.unifAlg_check}, \code{morie_unifAlg_disagreement} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
 #' @return A logical value.
 #' @export
 .unifAlg_is_var <- function(t) {
@@ -65,10 +66,11 @@
 
 #' .unifAlg_check
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once}, \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
 #' @return Nothing; this branch always raises.
 #' @export
 .unifAlg_check <- function(t) {
@@ -87,11 +89,12 @@
 
 #' .unifAlg_apply_once
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose}, \code{morie_unifAlg_substitute}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
-#' @param subst See Usage.
+#' @param t A vector; indexed elementwise.
+#' @param subst A vector; indexed elementwise.
 #' @return The value of \code{list}.
 #' @export
 .unifAlg_apply_once <- function(t, subst) {
@@ -108,7 +111,8 @@
 
 #' .unifAlg_fail
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_unify}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param sub See Usage.
@@ -133,7 +137,8 @@
 
 #' morie_unifAlg_var
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{.trmRew_rename}, \code{morie_unifAlg_factor_through}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param name See Usage.
@@ -145,7 +150,8 @@ morie_unifAlg_var <- function(name) {
 
 #' morie_unifAlg_app
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param symbol See Usage.
@@ -159,7 +165,8 @@ morie_unifAlg_app <- function(symbol, ...) {
 
 #' morie_unifAlg_const
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param symbol See Usage.
@@ -171,10 +178,11 @@ morie_unifAlg_const <- function(symbol) {
 
 #' morie_unifAlg_is_var
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_is_var}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{.unifAlg_is_var}.
 #' @return The value of \code{.unifAlg_is_var}.
 #' @export
 morie_unifAlg_is_var <- function(t) {
@@ -183,10 +191,11 @@ morie_unifAlg_is_var <- function(t) {
 
 #' morie_unifAlg_variables
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{morie_trmRew_lpo_greater}, \code{morie_trmRew_rule} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{.unifAlg_check}.
 #' @return The value of \code{$}.
 #' @export
 morie_unifAlg_variables <- function(t) {
@@ -215,11 +224,12 @@ morie_unifAlg_variables <- function(t) {
 
 #' morie_unifAlg_occurs
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_unify}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param name See Usage.
-#' @param t See Usage.
+#' @param t Passed to \code{morie_unifAlg_variables}.
 #' @return The value of \code{%in%}.
 #' @export
 morie_unifAlg_occurs <- function(name, t) {
@@ -228,11 +238,12 @@ morie_unifAlg_occurs <- function(name, t) {
 
 #' morie_unifAlg_apply_subst
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_overlap}, \code{morie_unifAlg_factor_through}, \code{morie_unifAlg_unify}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
-#' @param subst See Usage.
+#' @param t Passed to \code{.unifAlg_check}.
+#' @param subst Passed to \code{.unifAlg_apply_once}.
 #' @return Nothing; this branch always raises.
 #' @export
 morie_unifAlg_apply_subst <- function(t, subst) {
@@ -250,11 +261,12 @@ morie_unifAlg_apply_subst <- function(t, subst) {
 
 #' morie_unifAlg_substitute
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{morie_trmRew_rewrite_step}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
-#' @param subst See Usage.
+#' @param t Passed to \code{.unifAlg_check}.
+#' @param subst Passed to \code{.unifAlg_apply_once}.
 #' @return The value of \code{.unifAlg_apply_once}.
 #' @export
 morie_unifAlg_substitute <- function(t, subst) {
@@ -263,11 +275,12 @@ morie_unifAlg_substitute <- function(t, subst) {
 
 #' morie_unifAlg_compose
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_unify}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param outer See Usage.
-#' @param inner See Usage.
+#' @param outer A vector; indexed elementwise.
+#' @param inner A vector; indexed elementwise.
 #' @return The value of \code{[}.
 #' @export
 morie_unifAlg_compose <- function(outer, inner) {
@@ -290,11 +303,12 @@ morie_unifAlg_compose <- function(outer, inner) {
 
 #' morie_unifAlg_disagreement
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_unify}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t1 See Usage.
-#' @param t2 See Usage.
+#' @param t1 Passed to \code{.unifAlg_check}.
+#' @param t2 Passed to \code{.unifAlg_check}.
 #' @return Nothing; the function is called for its effect.
 #' @export
 morie_unifAlg_disagreement <- function(t1, t2) {
@@ -320,12 +334,13 @@ morie_unifAlg_disagreement <- function(t1, t2) {
 
 #' morie_unifAlg_unify
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_overlap}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t1 See Usage.
-#' @param t2 See Usage.
-#' @param occurs_check Defaults to \code{TRUE}.
+#' @param t1 Passed to \code{.unifAlg_check}.
+#' @param t2 Passed to \code{.unifAlg_check}.
+#' @param occurs_check A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return Nothing; this branch always raises.
 #' @export
 morie_unifAlg_unify <- function(t1, t2, occurs_check = TRUE) {
@@ -386,11 +401,12 @@ morie_unifAlg_unify <- function(t1, t2, occurs_check = TRUE) {
 
 #' morie_unifAlg_match
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. Called by \code{morie_trmRew_rewrite_step}, \code{morie_unifAlg_factor_through}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param pattern See Usage.
-#' @param subject See Usage.
+#' @param pattern Passed to \code{.unifAlg_check}.
+#' @param subject Passed to \code{.unifAlg_check}.
 #' @return The value of \code{sub}, as built in the body.
 #' @export
 morie_unifAlg_match <- function(pattern, subject) {
@@ -428,11 +444,12 @@ morie_unifAlg_match <- function(pattern, subject) {
 
 #' morie_unifAlg_factor_through
 #'
-#' Part of the unifAlg_native implementation; see the file header for
+#' A step of the unifAlg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param general See Usage.
-#' @param other See Usage.
+#' @param general Passed to \code{morie_unifAlg_apply_subst}.
+#' @param other Passed to \code{morie_unifAlg_apply_subst}.
 #' @param over See Usage.
 #' @return The value of \code{delta}, as built in the body.
 #' @export

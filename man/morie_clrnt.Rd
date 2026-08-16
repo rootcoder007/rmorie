@@ -25,7 +25,7 @@ morie_clrnt(clint_in_vitro, cl_h = NULL, fu_blood = NULL, log_pd = NULL, fu_incu
 \item{fold}{Defaults to \code{2}.}
 }
 \description{
-Part of the clrnt_native implementation; see the file header for the source it follows.
+A step of the clrnt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{clrnt}.

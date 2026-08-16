@@ -13,7 +13,7 @@ rate_condition(rate_Q, rate_g, n)
 \item{n}{See Usage.}
 }
 \description{
-Part of the tlhaltm_native implementation; see the file header for the source it follows.
+A step of the tlhaltm_native implementation. Called by \code{morie_tlhaltm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{sum}, \code{required}, \code{satisfied}, \code{product_order}, \code{root_n_order}, \code{note}.

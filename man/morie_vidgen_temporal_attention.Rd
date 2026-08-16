@@ -9,10 +9,10 @@ morie_vidgen_temporal_attention(video, identity = FALSE)
 }
 \arguments{
 \item{video}{See Usage.}
-\item{identity}{Defaults to \code{FALSE}.}
+\item{identity}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the vidgen_native implementation; see the file header for the source it follows.
+A step of the vidgen_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{video}, \code{identity}, \code{note}.

@@ -8,8 +8,8 @@
 .hadcrut_cell_lat(i, n_lat)
 }
 \arguments{
-\item{i}{See Usage.}
-\item{n_lat}{See Usage.}
+\item{i}{Numeric; combined arithmetically in the body.}
+\item{n_lat}{Numeric; combined arithmetically in the body.}
 }
 \description{
 north.

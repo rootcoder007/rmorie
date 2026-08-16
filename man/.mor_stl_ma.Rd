@@ -8,11 +8,11 @@
 .mor_stl_ma(v, k)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{k}{See Usage.}
+\item{v}{A vector; its length is taken.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the stlAn_native implementation; see the file header for the source it follows.
+A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

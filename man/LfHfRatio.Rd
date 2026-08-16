@@ -8,7 +8,7 @@
 LfHfRatio(rr, fsr = 4, bands = "taskforce")
 }
 \arguments{
-\item{rr}{See Usage.}
+\item{rr}{Passed to \code{.morie_qrs_check}.}
 \item{fsr}{Defaults to \code{4}.}
 \item{bands}{Defaults to \code{"taskforce"}.}
 }

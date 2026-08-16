@@ -146,10 +146,11 @@ MORIE_TPS_REGISTRY <- list(
 
 #' .morie_tps_canonical
 #'
-#' Part of the tps_datasets implementation; see the file header for the
+#' A step of the tps_datasets implementation. Called by \code{.morie_tps_io_category_dir}, \code{morie_tps_list_formats}, \code{morie_tps_load} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param name See Usage.
+#' @param name A vector; its length is taken.
 #' @return The value of \code{[[}.
 #' @export
 .morie_tps_canonical <- function(name) {

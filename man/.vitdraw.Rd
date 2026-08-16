@@ -8,13 +8,13 @@
 .vitdraw(nr, nc, skip = 0, scale = 1)
 }
 \arguments{
-\item{nr}{See Usage.}
-\item{nc}{See Usage.}
-\item{skip}{Defaults to \code{0}.}
+\item{nr}{A count; the body uses it as \code{matrix(...)}.}
+\item{nc}{A count; the body uses it as \code{matrix(...)}.}
+\item{skip}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{scale}{Defaults to \code{1}.}
 }
 \description{
-Part of the helpers_vit implementation; see the file header for the source it follows.
+A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber}, \code{Vaecf} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

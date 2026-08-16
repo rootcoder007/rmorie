@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{b}{A vector; its length is taken.}
 }
 \description{
-Part of the forwsr_native implementation; see the file header for the source it follows.
+A step of the forwsr_native implementation. Called by \code{morie_forwsr_ols_fit}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

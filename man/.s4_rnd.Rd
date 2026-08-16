@@ -8,7 +8,7 @@
 .s4_rnd(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{abs}.}
 }
 \description{
 # half to even but disagree about which values are exactly half.

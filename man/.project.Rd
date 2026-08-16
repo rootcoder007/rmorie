@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{values}{See Usage.}
-\item{basis}{See Usage.}
+\item{basis}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{n}{See Usage.}
-\item{ridge}{See Usage.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmldyn_native implementation; see the file header for the source it follows.
+A step of the tmldyn_native implementation. Called by \code{sequential_blips}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

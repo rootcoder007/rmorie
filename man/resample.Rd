@@ -8,12 +8,12 @@
 resample(weights, rng, scheme = "systematic")
 }
 \arguments{
-\item{weights}{See Usage.}
-\item{rng}{See Usage.}
-\item{scheme}{Defaults to \code{"systematic"}.}
+\item{weights}{Numeric; passed to \code{sum}.}
+\item{rng}{Passed to \code{.ghc_unif}.}
+\item{scheme}{One of \code{"multinomial"}, \code{"residual"}, \code{"stratified"}, \code{"systematic"}. Defaults to \code{"systematic"}.}
 }
 \description{
-Part of the smcsam_native implementation; see the file header for the source it follows.
+A step of the smcsam_native implementation. Called by \code{morie_btdbl}, \code{morie_btiseq}, \code{smcsam}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

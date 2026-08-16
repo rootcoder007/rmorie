@@ -8,11 +8,11 @@
 .morie_gr_w4b_searchsorted_left(e, x)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{x}{See Usage.}
+\item{e}{A vector; its length is taken.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the geron_w4b_native implementation; see the file header for the source it follows.
+A step of the geron_w4b_native implementation. Called by \code{morie_geron_histogram_gradient_boosting}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

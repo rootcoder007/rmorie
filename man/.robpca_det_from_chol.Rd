@@ -8,10 +8,10 @@
 .robpca_det_from_chol(C)
 }
 \arguments{
-\item{C}{See Usage.}
+\item{C}{A matrix; passed to \code{chol}.}
 }
 \description{
-Part of the robpca_native implementation; see the file header for the source it follows.
+A step of the robpca_native implementation. Called by \code{.robpca_c_steps}, \code{.robpca_fast_mcd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{prod}.

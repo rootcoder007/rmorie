@@ -14,10 +14,11 @@
 
 #' .fgam_grid_weights
 #'
-#' Part of the fgam_native implementation; see the file header for the
+#' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_t See Usage.
+#' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .fgam_grid_weights <- function(n_t) {
@@ -29,13 +30,14 @@
 
 #' .fgam_knots
 #'
-#' Part of the fgam_native implementation; see the file header for the
+#' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param n_basis See Usage.
-#' @param degree Defaults to \code{3L}.
+#' @param lo A count; the body uses it as \code{rep(...)}.
+#' @param hi A count; the body uses it as \code{rep(...)}.
+#' @param n_basis Numeric; combined arithmetically in the body.
+#' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3L}.
 #' @return A vector, from \code{c}.
 #' @export
 .fgam_knots <- function(lo, hi, n_basis, degree = 3L) {
@@ -52,13 +54,14 @@
 
 #' .fgam_bspline
 #'
-#' Part of the fgam_native implementation; see the file header for the
+#' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param kn See Usage.
-#' @param n_basis See Usage.
-#' @param degree Defaults to \code{3L}.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param kn A vector; its length is taken and its elements indexed.
+#' @param n_basis A count; the body uses it as \code{seq_len(...)}.
+#' @param degree A count; the body uses it as \code{seq_len(...)}. Defaults to \code{3L}.
 #' @return The value of \code{[}.
 #' @export
 .fgam_bspline <- function(x, kn, n_basis, degree = 3L) {
@@ -84,11 +87,12 @@
 
 #' .fgam_diff_penalty
 #'
-#' Part of the fgam_native implementation; see the file header for the
+#' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param order Defaults to \code{2L}.
+#' @param n A count; the body uses it as \code{matrix(...)}.
+#' @param order Numeric; combined arithmetically in the body. Defaults to \code{2L}.
 #' @return A matrix, from \code{crossprod}.
 #' @export
 .fgam_diff_penalty <- function(n, order = 2L) {
@@ -106,16 +110,17 @@
 
 #' morie_fgam_functional_gam
 #'
-#' Part of the fgam_native implementation; see the file header for the
+#' A step of the fgam_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y See Usage.
 #' @param basis Defaults to \code{NULL}.
-#' @param n_x Defaults to \code{6}.
-#' @param n_t Defaults to \code{6}.
-#' @param lam_x Defaults to \code{1}.
-#' @param lam_t Defaults to \code{1}.
+#' @param n_x A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.
+#' @param n_t A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.
+#' @param lam_x Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param lam_t Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{residuals}, \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf}, \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t}, \code{linear_deviation}, \code{n}, \code{method}, \code{note}.
 #' @export
 morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
@@ -235,7 +240,8 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
 
 #' .fgam_cheatsheet
 #'
-#' Part of the fgam_native implementation; see the file header for the
+#' A step of the fgam_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

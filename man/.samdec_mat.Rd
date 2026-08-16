@@ -8,10 +8,10 @@
 .samdec_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the samdec_native implementation; see the file header for the source it follows.
+A step of the samdec_native implementation. Called by \code{decode_mask}, \code{two_way_block}, \code{upsample}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

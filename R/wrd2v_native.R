@@ -42,7 +42,7 @@
 #'
 #' (_array_core _SplitMix64), so the draws here are bit-identical to it
 #'
-#' @param seed See Usage.
+#' @param seed Passed to \code{.ghc_rng}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .wrd2v_rng <- function(seed) {
@@ -58,10 +58,11 @@
 
 #' .wrd2v_softmax
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \code{.wrd2v_sg_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .wrd2v_softmax <- function(v) {
@@ -72,10 +73,11 @@
 
 #' .wrd2v_sigmoid
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{.wrd2v_neg_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{exp}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .wrd2v_sigmoid <- function(z) {
@@ -89,11 +91,12 @@
 
 #' .wrd2v_cos
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy}, \code{morie_wrd2v_wrd2v}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .wrd2v_cos <- function(a, b) {
@@ -107,15 +110,16 @@
 
 #' morie_wrd2v_training_complexity
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param architecture See Usage.
-#' @param D See Usage.
+#' @param architecture Compared against \code{"cbow"}.
+#' @param D Numeric; combined arithmetically in the body.
 #' @param V See Usage.
 #' @param N Defaults to \code{NULL}.
 #' @param C Defaults to \code{NULL}.
-#' @param hierarchical Defaults to \code{TRUE}.
+#' @param hierarchical A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
 morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
@@ -140,10 +144,11 @@ morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
 
 #' Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
+#' @param counts A vector; indexed elementwise.
 #' @param power Defaults to \code{0.75}.
 #' @return The value of \code{stats::setNames}.
 #' @export
@@ -161,11 +166,12 @@ morie_wrd2v_noise_distribution <- function(counts, power=0.75) {
 
 #' Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param t Defaults to \code{1e-05}.
+#' @param counts A vector; indexed elementwise.
+#' @param t Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
@@ -188,11 +194,12 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 
 #' .wrd2v_scores
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \code{.wrd2v_sg_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param O See Usage.
-#' @param h See Usage.
+#' @param O A matrix; passed to \code{\%*\%}.
+#' @param h A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .wrd2v_scores <- function(O, h) {
@@ -201,15 +208,16 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 
 #' Skip-gram: input is the centre word, target a context word
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
+#' @param st A list; the body reads \code{$O}, \code{$W} from it.
 #' @param c See Usage.
 #' @param j See Usage.
 #' @param size See Usage.
 #' @param V See Usage.
-#' @param lr See Usage.
+#' @param lr Numeric; combined arithmetically in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
 .wrd2v_sg_step <- function(st, c, j, size, V, lr) {
@@ -227,15 +235,16 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 
 #' Mikolov et al. (2013b) eq. 4, one positive and k noise draws
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
+#' @param st A list; the body reads \code{$O}, \code{$W} from it.
 #' @param c See Usage.
 #' @param j See Usage.
-#' @param size See Usage.
-#' @param lr See Usage.
-#' @param k See Usage.
+#' @param size A count; the body uses it as \code{numeric(...)}.
+#' @param lr Numeric; combined arithmetically in the body.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @param draw_noise See Usage.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
@@ -263,15 +272,16 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 
 #' CBOW: the projection is the MEAN of the context vectors
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
-#' @param ctx See Usage.
+#' @param st A list; the body reads \code{$O}, \code{$W} from it.
+#' @param ctx A vector; its length is taken.
 #' @param c See Usage.
-#' @param size See Usage.
+#' @param size A count; the body uses it as \code{matrix(...)}.
 #' @param V See Usage.
-#' @param lr See Usage.
+#' @param lr Numeric; combined arithmetically in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
 .wrd2v_cbow_step <- function(st, ctx, c, size, V, lr) {
@@ -292,22 +302,23 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 
 #' morie_wrd2v_wrd2v
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param corpus See Usage.
-#' @param size Defaults to \code{16}.
-#' @param window Defaults to \code{5}.
-#' @param architecture Defaults to \code{"skip-gram"}.
-#' @param lr Defaults to \code{0.05}.
+#' @param size A count; the body uses it as \code{matrix(...)}. Defaults to \code{16}.
+#' @param window Numeric; combined arithmetically in the body. Defaults to \code{5}.
+#' @param architecture One of \code{"cbow"}, \code{"skip-gram"}. Defaults to \code{"skip-gram"}.
+#' @param lr Passed to \code{.wrd2v_cbow_step}. Defaults to \code{0.05}.
 #' @param epochs Defaults to \code{20}.
 #' @param min_count Defaults to \code{1}.
-#' @param dynamic_window Defaults to \code{TRUE}.
-#' @param loss Defaults to \code{"softmax"}.
-#' @param negative Defaults to \code{5}.
-#' @param noise_power Defaults to \code{0.75}.
-#' @param subsample Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param dynamic_window A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param loss One of \code{"neg"}, \code{"softmax"}. Defaults to \code{"softmax"}.
+#' @param negative Passed to \code{.wrd2v_neg_step}. Defaults to \code{5}.
+#' @param noise_power Passed to \code{morie_wrd2v_noise_distribution}. Defaults to \code{0.75}.
+#' @param subsample Optional; may be \code{NULL}. Passed to \code{morie_wrd2v_subsample_probability}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{vectors}, \code{output_vectors}, \code{vocab}, \code{loss_curve}, \code{final_loss}, \code{similarity}, \code{most_similar}, \code{size}, \code{window}, \code{architecture}, \code{loss}, \code{negative}, \code{noise}, \code{method}.
 #' @export
 morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
@@ -468,11 +479,11 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
 #'
 #' excluded from the answer.
 #'
-#' @param vectors See Usage.
+#' @param vectors A vector; indexed elementwise.
 #' @param a See Usage.
 #' @param b See Usage.
 #' @param c See Usage.
-#' @param topn Defaults to \code{1}.
+#' @param topn Numeric; passed to \code{min}. Defaults to \code{1}.
 #' @return The value of \code{lapply}.
 #' @export
 morie_wrd2v_analogy <- function(vectors, a, b, c, topn=1) {
@@ -494,7 +505,8 @@ morie_wrd2v_analogy <- function(vectors, a, b, c, topn=1) {
 
 #' morie_wrd2v_cheatsheet
 #'
-#' Part of the wrd2v_native implementation; see the file header for the
+#' A step of the wrd2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

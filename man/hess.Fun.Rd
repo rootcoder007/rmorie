@@ -8,11 +8,11 @@
 hess.Fun(self, x)
 }
 \arguments{
-\item{self}{See Usage.}
-\item{x}{See Usage.}
+\item{self}{A list; the body reads \code{$.h}, \code{$affine}, \code{$f} from it.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the barerp_native implementation; see the file header for the source it follows.
+A step of the barerp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.num_hess}.

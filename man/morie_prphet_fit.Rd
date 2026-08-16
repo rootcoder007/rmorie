@@ -10,17 +10,17 @@ morie_prphet_fit(t, y, n_changepoints = 10L, changepoint_range = 0.8, changepoin
 \arguments{
 \item{t}{See Usage.}
 \item{y}{See Usage.}
-\item{n_changepoints}{Defaults to \code{10L}.}
-\item{changepoint_range}{Defaults to \code{0.8}.}
-\item{changepoints}{Defaults to \code{NULL}.}
-\item{seasonalities}{Defaults to \code{NULL}.}
-\item{holidays}{Defaults to \code{NULL}.}
-\item{holiday_window}{Defaults to \code{c(0, 0)}.}
+\item{n_changepoints}{Passed to \code{.changepoints}. Defaults to \code{10L}.}
+\item{changepoint_range}{Passed to \code{.changepoints}. Defaults to \code{0.8}.}
+\item{changepoints}{Passed to \code{.changepoints}.}
+\item{seasonalities}{Optional; may be \code{NULL}. Passed to \code{morie_prphet_design}.}
+\item{holidays}{Passed to \code{morie_prphet_design}.}
+\item{holiday_window}{Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.}
 \item{changepoint_prior}{Defaults to \code{0.05}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the prphet_native implementation; see the file header for the source it follows.
+A step of the prphet_native implementation. Called by \code{.prnFil_changepoint_path}, \code{.prnFil_select_changepoints}, \code{prophe_additive_components}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{fitted}, \code{residual}, \code{coef}, \code{beta}, \code{columns}, \code{changepoints}, \code{deltas}, \code{k}, \code{m}, \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior}, \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.

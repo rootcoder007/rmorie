@@ -8,11 +8,11 @@
 .remlfn_ranova(y, group)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{group}{See Usage.}
+\item{y}{Numeric; passed to \code{mean}.}
+\item{group}{Passed to \code{.remlfn_groups}.}
 }
 \description{
-Part of the remlfn_native implementation; see the file header for the source it follows.
+A step of the remlfn_native implementation. Called by \code{morie_remlfn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{msa}, \code{mse}, \code{sigma2_a_raw}, \code{sigma2_a}, \code{balanced}, \code{dfa}, \code{dfe}, \code{ssa}, \code{sse}.

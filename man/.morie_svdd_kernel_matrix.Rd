@@ -8,15 +8,15 @@
 .morie_svdd_kernel_matrix(X, Y = NULL, kernel = "rbf", gamma = NULL, degree = 3, coef0 = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{Defaults to \code{NULL}.}
-\item{kernel}{Defaults to \code{"rbf"}.}
-\item{gamma}{Defaults to \code{NULL}.}
-\item{degree}{Defaults to \code{3}.}
-\item{coef0}{Defaults to \code{1}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{Y}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
+\item{kernel}{One of \code{"linear"}, \code{"poly"}, \code{"rbf"}. Defaults to \code{"rbf"}.}
+\item{gamma}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{degree}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
+\item{coef0}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the svdd_native implementation; see the file header for the source it follows.
+A step of the svdd_native implementation. Called by \code{morie_svdd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{K}, as built in the body.

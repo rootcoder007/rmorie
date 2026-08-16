@@ -8,11 +8,11 @@
 inv_box_cox(z, omega)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{omega}{See Usage.}
+\item{z}{Numeric; passed to \code{exp}.}
+\item{omega}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{morie_bats}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,13 +8,13 @@
 .morie_w4c_pca_svd(X, k, center = TRUE, scale = FALSE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{k}{See Usage.}
-\item{center}{Defaults to \code{TRUE}.}
-\item{scale}{Defaults to \code{FALSE}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
+\item{center}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{scale}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_principal_components}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{components}, \code{scores}, \code{explained_variance}, \code{explained_variance_ratio}, \code{singular_values}, \code{Xc}.

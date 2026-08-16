@@ -7,7 +7,7 @@
 morie_sexdfdt(f, g, eta = NULL)
 }
 \arguments{
-\item{f}{normalized fitness, in \link{0, 1}}
+\item{f}{normalized fitness, in [0, 1]}
 
 \item{g}{genome size}
 

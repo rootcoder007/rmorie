@@ -8,7 +8,8 @@
 
 #' morie_blipqf
 #'
-#' Part of the blipqf_native implementation; see the file header for the
+#' A step of the blipqf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.

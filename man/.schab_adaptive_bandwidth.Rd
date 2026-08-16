@@ -10,10 +10,10 @@
 \arguments{
 \item{distance_row}{See Usage.}
 \item{n_neighbours}{See Usage.}
-\item{eps}{Defaults to \code{1.0000001}.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1.0000001}.}
 }
 \description{
-so the neighbour itself falls strictly inside a truncated kernel\\\'s support. The regression point counts as its own first neighbour.
+so the neighbour itself falls strictly inside a truncated kernel\\'s support. The regression point counts as its own first neighbour.
 }
 \value{
 A vector, from \code{as.numeric}.

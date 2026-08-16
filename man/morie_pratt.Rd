@@ -9,17 +9,17 @@ morie_pratt(word_states, Ww, bw, u_w, Ws, bs, u_s, Wc, bc)
 }
 \arguments{
 \item{word_states}{See Usage.}
-\item{Ww}{See Usage.}
-\item{bw}{See Usage.}
-\item{u_w}{See Usage.}
-\item{Ws}{See Usage.}
-\item{bs}{See Usage.}
-\item{u_s}{See Usage.}
-\item{Wc}{See Usage.}
-\item{bc}{See Usage.}
+\item{Ww}{Passed to \code{.pratt_sentence_vector}.}
+\item{bw}{Passed to \code{.pratt_sentence_vector}.}
+\item{u_w}{Passed to \code{.pratt_sentence_vector}.}
+\item{Ws}{Passed to \code{.pratt_document_vector}.}
+\item{bs}{Passed to \code{.pratt_document_vector}.}
+\item{u_s}{Passed to \code{.pratt_document_vector}.}
+\item{Wc}{A matrix; passed to \code{\%*\%}.}
+\item{bc}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the pratt_native implementation; see the file header for the source it follows.
+A step of the pratt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{probabilities}, \code{document_vector}, \code{sentence_attention}, \code{word_attention}, \code{n_sentences}, \code{method}, \code{note}.

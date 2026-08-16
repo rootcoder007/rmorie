@@ -6,12 +6,13 @@
 
 #' .morie_esl_logmvn
 #'
-#' Part of the esl_native implementation; see the file header for the
+#' A step of the esl_native implementation. Called by \code{morie_esl_em_gmm}, \code{morie_esl_gaussian_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{ncol}.
 #' @param mu See Usage.
-#' @param S See Usage.
+#' @param S A matrix; passed to \code{chol}.
 #' @return A numeric value.
 #' @export
 .morie_esl_logmvn <- function(X, mu, S) {

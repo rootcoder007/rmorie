@@ -21,10 +21,11 @@
 
 #' .forwsr_prep
 #'
-#' Part of the forwsr_native implementation; see the file header for the
+#' A step of the forwsr_native implementation. Called by \code{morie_forwsr}, \code{morie_forwsr_forward_search}, \code{morie_forwsr_lms_start} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @return A list with \code{M}, \code{y}, \code{n}, \code{p}.
 #' @export
@@ -51,7 +52,7 @@
 #' summation algorithm decides which row enters next and the two arms
 #' part company about a dozen steps in. Do what CPython does.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .forwsr_dsum <- function(v) {
@@ -75,11 +76,12 @@
 
 #' .forwsr_solve
 #'
-#' Part of the forwsr_native implementation; see the file header for the
+#' A step of the forwsr_native implementation. Called by \code{morie_forwsr_ols_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A See Usage.
-#' @param b See Usage.
+#' @param b A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
 .forwsr_solve <- function(A, b) {

@@ -8,11 +8,11 @@
 .morie_gr_layernorm(X, eps = 1e-05)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{eps}{Defaults to \code{1e-05}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_encoder_block}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

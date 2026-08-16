@@ -10,11 +10,11 @@ serial_interval_draw(mean, sd, e, allow_presymptomatic = TRUE)
 \arguments{
 \item{mean}{See Usage.}
 \item{sd}{See Usage.}
-\item{e}{See Usage.}
-\item{allow_presymptomatic}{Defaults to \code{TRUE}.}
+\item{e}{Passed to \code{.ghc_norm}.}
+\item{allow_presymptomatic}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the ttrace_native implementation; see the file header for the source it follows.
+A step of the ttrace_native implementation. Called by \code{simulate_outbreak}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

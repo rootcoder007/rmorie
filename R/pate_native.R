@@ -22,11 +22,12 @@
 
 #' .pate_lap_draw
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. Called by \code{noisy_argmax}, \code{pate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param gamma See Usage.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .pate_lap_draw <- function(e, gamma) {
@@ -36,7 +37,8 @@
 
 #' teacher_votes
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. Called by \code{pate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param teacher_predicts See Usage.
@@ -81,11 +83,12 @@ teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
 
 #' noisy_argmax
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param gamma See Usage.
+#' @param counts A vector; its length is taken and its elements indexed.
+#' @param gamma Passed to \code{.pate_lap_draw}.
 #' @param seed Defaults to \code{0}.
 #' @return The value of \code{arg}, as built in the body.
 #' @export
@@ -109,12 +112,13 @@ noisy_argmax <- function(counts, gamma, seed = 0) {
 
 #' epsilon_data_independent
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. Called by \code{pate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param gamma See Usage.
-#' @param delta See Usage.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 epsilon_data_independent <- function(T, gamma, delta) {
@@ -131,11 +135,12 @@ epsilon_data_independent <- function(T, gamma, delta) {
 
 #' lemma4_bound
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. Called by \code{moments_accountant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param counts See Usage.
-#' @param gamma See Usage.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 lemma4_bound <- function(counts, gamma) {
@@ -157,12 +162,13 @@ lemma4_bound <- function(counts, gamma) {
 
 #' theorem3_moment
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. Called by \code{moments_accountant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
-#' @param gamma See Usage.
-#' @param l See Usage.
+#' @param q Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param l Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 theorem3_moment <- function(q, gamma, l) {
@@ -182,14 +188,15 @@ theorem3_moment <- function(q, gamma, l) {
 
 #' moments_accountant
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. Called by \code{pate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vote_counts See Usage.
-#' @param gamma See Usage.
-#' @param delta See Usage.
+#' @param vote_counts A vector; its length is taken.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param delta Numeric; combined arithmetically in the body.
 #' @param lambdas Defaults to \code{NULL}.
-#' @param data_dependent Defaults to \code{TRUE}.
+#' @param data_dependent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{epsilon}, \code{lambda}, \code{alpha}, \code{delta}, \code{queries}, \code{used}.
 #' @export
 moments_accountant <- function(vote_counts, gamma, delta,
@@ -243,10 +250,11 @@ moments_accountant <- function(vote_counts, gamma, delta,
 
 #' pate
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param teacher_predicts See Usage.
+#' @param teacher_predicts A vector; its length is taken.
 #' @param queries See Usage.
 #' @param gamma Defaults to \code{0.05}.
 #' @param delta Defaults to \code{1e-05}.
@@ -318,7 +326,8 @@ pate <- function(teacher_predicts, queries, gamma = 0.05,
 
 #' .pate_cheatsheet
 #'
-#' Part of the pate_native implementation; see the file header for the
+#' A step of the pate_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -12,7 +12,7 @@ PnaAgg(
 )
 }
 \arguments{
-\item{A}{square adjacency matrix; a non-zero A\link{i, j} makes j a
+\item{A}{square adjacency matrix; a non-zero A[i, j] makes j a
 neighbour of i}
 
 \item{X}{node features (n x f)}

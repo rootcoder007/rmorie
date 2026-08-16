@@ -8,11 +8,11 @@
 bartlett_se(rho, n)
 }
 \arguments{
-\item{rho}{See Usage.}
-\item{n}{See Usage.}
+\item{rho}{A list; the body reads \code{$1} from it.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{variance}, \code{se}, \code{white_noise_se}.

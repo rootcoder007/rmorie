@@ -8,14 +8,14 @@
 anomaly_score(x, g_z, f_x, f_gz, lam = 0.1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{g_z}{See Usage.}
-\item{f_x}{See Usage.}
-\item{f_gz}{See Usage.}
-\item{lam}{Defaults to \code{0.1}.}
+\item{x}{Passed to \code{.gan_an_anomaly_score_impl}.}
+\item{g_z}{Passed to \code{.gan_an_anomaly_score_impl}.}
+\item{f_x}{Passed to \code{.gan_an_anomaly_score_impl}.}
+\item{f_gz}{Passed to \code{.gan_an_anomaly_score_impl}.}
+\item{lam}{Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.gan_an_anomaly_score_impl}.

@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the dnvtwo_native implementation; see the file header for the source it follows.
+A step of the dnvtwo_native implementation. Called by \code{self_distillation_loss}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

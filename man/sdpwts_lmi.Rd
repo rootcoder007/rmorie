@@ -9,11 +9,11 @@ sdpwts_lmi(x, F0, Fs)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{F0}{See Usage.}
-\item{Fs}{See Usage.}
+\item{F0}{A matrix; passed to \code{as.matrix}.}
+\item{Fs}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the sdpwts_native implementation; see the file header for the source it follows.
+A step of the sdpwts_native implementation. Called by \code{sdpwts_barrier}, \code{sdpwts_solve_sdp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

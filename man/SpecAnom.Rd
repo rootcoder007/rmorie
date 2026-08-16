@@ -8,8 +8,8 @@
 SpecAnom(x, q = 3L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{q}{Defaults to \code{3L}.}
+\item{x}{Passed to \code{.morie_spx_chkv}.}
+\item{q}{Numeric; combined arithmetically in the body. Defaults to \code{3L}.}
 }
 \description{
 & Gotway.  THE PHASE IS KEPT: rebuilding from the residual amplitude with the ORIGINAL phase is the whole mechanism.  The moving average is circular, matching the periodicity of the DFT.

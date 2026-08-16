@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{row}{See Usage.}
-\item{W}{See Usage.}
+\item{W}{A matrix; passed to \code{as.matrix}.}
 \item{b}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the berte_native implementation; see the file header for the source it follows.
+A step of the berte_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

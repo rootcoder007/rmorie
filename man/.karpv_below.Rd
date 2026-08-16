@@ -8,8 +8,8 @@
 .karpv_below(e, n)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{n}{See Usage.}
+\item{e}{Passed to \code{.karpv_u32}.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
 remainder would bias the low end, and the bias changes with n -- the kind of thing that never shows up in one language alone.

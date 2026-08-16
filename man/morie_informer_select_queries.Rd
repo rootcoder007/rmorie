@@ -8,15 +8,15 @@
 morie_informer_select_queries(Q, K, factor = 5, measure = "maxmean", n_sample = NULL, seed = 0)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{K}{See Usage.}
+\item{Q}{Passed to \code{.informer_to_rows}.}
+\item{K}{Passed to \code{.informer_to_rows}.}
 \item{factor}{Defaults to \code{5}.}
-\item{measure}{Defaults to \code{"maxmean"}.}
+\item{measure}{Passed to \code{morie_informer_sparsity_measure}. Defaults to \code{"maxmean"}.}
 \item{n_sample}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{
-Part of the informer_native implementation; see the file header for the source it follows.
+A step of the informer_native implementation. Called by \code{morie_informer_probsparse_attention}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{top}, \code{u}, \code{scores}, \code{L_Q}, \code{L_K}, \code{n_sample}, \code{measure}.

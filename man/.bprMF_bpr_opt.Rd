@@ -8,10 +8,10 @@
 .bprMF_bpr_opt(W, H, pos, n_items, lam = 0.01)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{H}{See Usage.}
-\item{pos}{See Usage.}
-\item{n_items}{See Usage.}
+\item{W}{Passed to \code{.bprMF_predict}.}
+\item{H}{Passed to \code{.bprMF_predict}.}
+\item{pos}{A vector; indexed elementwise.}
+\item{n_items}{A count; the body uses it as \code{seq_len(...)}.}
 \item{lam}{Defaults to \code{0.01}.}
 }
 \description{

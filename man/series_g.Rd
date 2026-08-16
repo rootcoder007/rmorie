@@ -8,10 +8,10 @@
 series_g(log = FALSE)
 }
 \arguments{
-\item{log}{Defaults to \code{FALSE}.}
+\item{log}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

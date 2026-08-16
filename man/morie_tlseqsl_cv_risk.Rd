@@ -8,15 +8,15 @@
 morie_tlseqsl_cv_risk(X, y, algorithm, V = 10, loss = "squared", seed = 0)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 \item{algorithm}{See Usage.}
-\item{V}{Defaults to \code{10}.}
-\item{loss}{Defaults to \code{"squared"}.}
-\item{seed}{Defaults to \code{0}.}
+\item{V}{Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{10}.}
+\item{loss}{Passed to \code{.tlseqsl_loss}. Defaults to \code{"squared"}.}
+\item{seed}{Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{0}.}
 }
 \description{
-Part of the tlseqsl_native implementation; see the file header for the source it follows.
+A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_discrete_super_learner}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{risk}, \code{cv_predictions}, \code{V}, \code{loss}.

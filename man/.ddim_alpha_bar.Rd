@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{t}{See Usage.}
-\item{T}{See Usage.}
+\item{T}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ddimst implementation; see the file header for the source it follows.
+A step of the ddimst implementation. Called by \code{Ddimst}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

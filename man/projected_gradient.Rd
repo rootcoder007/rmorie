@@ -13,12 +13,12 @@ projected_gradient(f, grad, x0, project, step = NULL, rule = "backtracking", max
 \item{x0}{See Usage.}
 \item{project}{See Usage.}
 \item{step}{Defaults to \code{NULL}.}
-\item{rule}{Defaults to \code{"backtracking"}.}
-\item{max_iter}{Defaults to \code{2000}.}
+\item{rule}{One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the pgdsdg_native implementation; see the file header for the source it follows.
+A step of the pgdsdg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{x}, \code{fun}, \code{iterations}, \code{history}, \code{step}, \code{rule}, \code{n_backtracks}, \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.

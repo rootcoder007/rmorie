@@ -8,12 +8,12 @@
 metapath_neighbours(edges, types, metapath)
 }
 \arguments{
-\item{edges}{See Usage.}
-\item{types}{See Usage.}
+\item{edges}{A vector; indexed elementwise.}
+\item{types}{A vector; indexed elementwise.}
 \item{metapath}{See Usage.}
 }
 \description{
-Part of the hetgnn_native implementation; see the file header for the source it follows.
+A step of the hetgnn_native implementation. Called by \code{han_forward}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{neighbours}, \code{metapath}, \code{note}.

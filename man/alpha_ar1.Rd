@@ -8,12 +8,12 @@
 alpha_ar1(v, q = 2, weights = NULL)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A matrix; passed to \code{as.matrix}.}
 \item{q}{Defaults to \code{2}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Compared against \code{"drop_first"}.}
 }
 \description{
-Part of the andmnh_native implementation; see the file header for the source it follows.
+A step of the andmnh_native implementation. Called by \code{automatic_bandwidth}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{alpha}, \code{fits}.

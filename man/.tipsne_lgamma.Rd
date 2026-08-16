@@ -8,10 +8,10 @@
 .tipsne_lgamma(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tipsne_native implementation; see the file header for the source it follows.
+A step of the tipsne_native implementation. Called by \code{.tipsne_betainc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

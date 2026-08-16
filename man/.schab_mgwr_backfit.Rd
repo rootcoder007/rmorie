@@ -8,18 +8,18 @@
 .schab_mgwr_backfit(y, X, coords, kernel = "gaussian", criterion = "aicc", adaptive = FALSE, tol = 1e-05, max_iter = 200L, rss_score = FALSE, bws_same_times = 5L, init_bandwidth = NULL, standardize = TRUE)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{coords}{See Usage.}
-\item{kernel}{Defaults to \code{"gaussian"}.}
-\item{criterion}{Defaults to \code{"aicc"}.}
-\item{adaptive}{Defaults to \code{FALSE}.}
+\item{y}{A matrix; passed to \code{nrow}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{coords}{Passed to \code{.schab_pairwise_distances}.}
+\item{kernel}{Passed to \code{.schab_gwr_fit}. Defaults to \code{"gaussian"}.}
+\item{criterion}{Passed to \code{.schab_select_bandwidth}. Defaults to \code{"aicc"}.}
+\item{adaptive}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{tol}{Defaults to \code{1e-05}.}
-\item{max_iter}{Defaults to \code{200L}.}
-\item{rss_score}{Defaults to \code{FALSE}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
+\item{rss_score}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{bws_same_times}{Defaults to \code{5L}.}
 \item{init_bandwidth}{Defaults to \code{NULL}.}
-\item{standardize}{Defaults to \code{TRUE}.}
+\item{standardize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 fit MOVED, not how good it is. When the initial single-bandwidth GWR already sits at the wide end of the interval, the first sweep can leave every covariate there, the score is tiny, and the loop stops after two or three sweeps having found no scale separation at all. Measured over eight seeds of a fixture with two genuinely different scales this happened twice. It is a property of the criterion, not of this port -- the reference uses the same score and the same default tolerance. `at_search_boundary` flags it.

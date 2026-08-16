@@ -85,7 +85,8 @@
 
 #' .bprMF_sigmoid
 #'
-#' Part of the bprMF_native implementation; see the file header for the
+#' A step of the bprMF_native implementation. Called by \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr}, \code{bpr_sigmoid}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -100,13 +101,14 @@
 
 #' .bprMF_predict
 #'
-#' Part of the bprMF_native implementation; see the file header for the
+#' A step of the bprMF_native implementation. Called by \code{.bprMF_auc}, \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param H See Usage.
-#' @param u See Usage.
-#' @param i See Usage.
+#' @param W A vector; indexed elementwise.
+#' @param H A vector; indexed elementwise.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param i Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .bprMF_predict <- function(W, H, u, i) {
@@ -115,10 +117,11 @@
 
 #' .bprMF_triples
 #'
-#' Part of the bprMF_native implementation; see the file header for the
+#' A step of the bprMF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pos See Usage.
+#' @param pos A vector; indexed elementwise.
 #' @param n_items See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -150,10 +153,10 @@
 #' pieces are returned so callers that want just the data loglik or just
 #' the penalty term can pull them out.
 #'
-#' @param W See Usage.
-#' @param H See Usage.
-#' @param pos See Usage.
-#' @param n_items See Usage.
+#' @param W Passed to \code{.bprMF_predict}.
+#' @param H Passed to \code{.bprMF_predict}.
+#' @param pos A vector; indexed elementwise.
+#' @param n_items A count; the body uses it as \code{seq_len(...)}.
 #' @param lam Defaults to \code{0.01}.
 #' @return A list with \code{bpr_opt}, \code{loglik}, \code{penalty}, \code{n_triples}.
 #' @export
@@ -189,13 +192,14 @@
 
 #' .bprMF_auc
 #'
-#' Part of the bprMF_native implementation; see the file header for the
+#' A step of the bprMF_native implementation. Called by \code{.bprMF_learn_bpr}, \code{bpr_auc_R}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param H See Usage.
-#' @param pos See Usage.
-#' @param n_items See Usage.
+#' @param W Passed to \code{.bprMF_predict}.
+#' @param H Passed to \code{.bprMF_predict}.
+#' @param pos A vector; indexed elementwise.
+#' @param n_items A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{auc}, \code{per_user}, \code{note}.
 #' @export
 .bprMF_auc <- function(W, H, pos, n_items) {
@@ -246,7 +250,7 @@
 #' printed Figure 4 update whose +lambda*Theta term diverges; the
 #' default is the sign that actually ascends BPR-Opt.
 #'
-#' @param pos See Usage.
+#' @param pos A vector; indexed elementwise.
 #' @param n_users See Usage.
 #' @param n_items See Usage.
 #' @param k_dim Defaults to \code{8L}.
@@ -342,14 +346,15 @@
 # Rank items for one user by x_hat_ui.
 #' Rank items for one user by x_hat_ui
 #'
-#' Part of the bprMF_native implementation; see the file header for the
+#' A step of the bprMF_native implementation. Called by \code{bpr_recommend_R}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param H See Usage.
+#' @param W Passed to \code{.bprMF_predict}.
+#' @param H Passed to \code{.bprMF_predict}.
 #' @param u See Usage.
-#' @param n_items See Usage.
-#' @param top_k Defaults to \code{5L}.
+#' @param n_items A count; the body uses it as \code{seq_len(...)}.
+#' @param top_k Numeric; passed to \code{min}. Defaults to \code{5L}.
 #' @param exclude Defaults to \code{integer(0)}.
 #' @return A list with \code{ranking}, \code{n_scored}.
 #' @export
@@ -479,7 +484,8 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
 
 #' .bprMF_cheatsheet
 #'
-#' Part of the bprMF_native implementation; see the file header for the
+#' A step of the bprMF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

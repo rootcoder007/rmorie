@@ -8,15 +8,15 @@
 morie_surxgb_split_gain(GL, HL, GR, HR, lam = 1, gamma = 0)
 }
 \arguments{
-\item{GL}{See Usage.}
-\item{HL}{See Usage.}
-\item{GR}{See Usage.}
-\item{HR}{See Usage.}
-\item{lam}{Defaults to \code{1}.}
-\item{gamma}{Defaults to \code{0}.}
+\item{GL}{Numeric; combined arithmetically in the body.}
+\item{HL}{Numeric; combined arithmetically in the body.}
+\item{GR}{Numeric; combined arithmetically in the body.}
+\item{HR}{Numeric; combined arithmetically in the body.}
+\item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{.surxgb_build}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

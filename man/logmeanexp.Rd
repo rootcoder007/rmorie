@@ -11,7 +11,7 @@ logmeanexp(values)
 \item{values}{See Usage.}
 }
 \description{
-Part of the pftrep_native implementation; see the file header for the source it follows.
+A step of the pftrep_native implementation. Called by \code{replicated_pfilter}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

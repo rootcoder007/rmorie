@@ -8,11 +8,11 @@
 .t4_poly4(mp, val)
 }
 \arguments{
-\item{mp}{See Usage.}
-\item{val}{See Usage.}
+\item{mp}{A vector; its length is taken.}
+\item{val}{Passed to \code{.t4_olsfit}.}
 }
 \description{
-Part of the causrddm implementation; see the file header for the source it follows.
+A step of the causrddm implementation. Called by \code{Rddmanip}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{mse}.

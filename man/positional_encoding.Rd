@@ -8,12 +8,12 @@
 positional_encoding(p, L = 10, include_input = TRUE)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{.nrfrad_vec}.}
 \item{L}{Defaults to \code{10}.}
-\item{include_input}{Defaults to \code{TRUE}.}
+\item{include_input}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the nrfrad_native implementation; see the file header for the source it follows.
+A step of the nrfrad_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

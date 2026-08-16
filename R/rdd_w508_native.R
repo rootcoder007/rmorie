@@ -95,12 +95,13 @@ Causrddh <- function(x, y, cutoff = 0) {
 
 #' .morie_w508_llr_side
 #'
-#' Part of the rdd_w508_native implementation; see the file header for
+#' A step of the rdd_w508_native implementation. Called by \code{Causrdd}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param dm See Usage.
-#' @param ym See Usage.
-#' @param w See Usage.
+#' @param dm A vector; its length is taken.
+#' @param ym A matrix; passed to \code{\%*\%}.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{a}, \code{b}, \code{v}.
 #' @export
 .morie_w508_llr_side <- function(dm, ym, w) {

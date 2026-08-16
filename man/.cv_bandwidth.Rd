@@ -8,13 +8,13 @@
 .cv_bandwidth(xv, av, fit, n_folds)
 }
 \arguments{
-\item{xv}{See Usage.}
-\item{av}{See Usage.}
-\item{fit}{See Usage.}
+\item{xv}{A vector; its length is taken and its elements indexed.}
+\item{av}{A vector; indexed elementwise.}
+\item{fit}{Passed to \code{.smooth_at}.}
 \item{n_folds}{See Usage.}
 }
 \description{
-Part of the tmlcps_native implementation; see the file header for the source it follows.
+A step of the tmlcps_native implementation. Called by \code{effect_curve}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best_h}, as built in the body.

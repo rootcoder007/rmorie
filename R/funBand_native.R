@@ -24,10 +24,11 @@
 # banded Q (n x n-2) and R (n-2 x n-2) of the natural cubic spline
 #' Banded Q (n x n-2) and R (n-2 x n-2) of the natural cubic spline
 #'
-#' Part of the funBand_native implementation; see the file header for
+#' A step of the funBand_native implementation. Called by \code{.funBand_roughness}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A list with \code{Q}, \code{R}.
 #' @export
 .funBand_qr_bands <- function(x) {
@@ -59,10 +60,11 @@
 # K = Q R^-1 Q', symmetric PSD with a two-dimensional null space
 #' K = Q R^-1 Q\', symmetric PSD with a two-dimensional null space
 #'
-#' Part of the funBand_native implementation; see the file header for
+#' A step of the funBand_native implementation. Called by \code{morie_funBand_influence_matrix}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.funBand_qr_bands}.
 #' @return A numeric value.
 #' @export
 .funBand_roughness <- function(x) {
@@ -223,7 +225,8 @@ morie_functional_band <- morie_funBand
 
 #' morie_funBand_cheatsheet
 #'
-#' Part of the funBand_native implementation; see the file header for
+#' A step of the funBand_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

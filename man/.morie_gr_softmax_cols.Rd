@@ -8,10 +8,10 @@
 .morie_gr_softmax_cols(Z)
 }
 \arguments{
-\item{Z}{See Usage.}
+\item{Z}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{morie_geron_blip}, \code{morie_geron_softmax_function}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{t}.

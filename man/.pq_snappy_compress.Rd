@@ -8,7 +8,7 @@
 .pq_snappy_compress(data)
 }
 \arguments{
-\item{data}{See Usage.}
+\item{data}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 ponytail: no match-finder; add one if written size ever matters.

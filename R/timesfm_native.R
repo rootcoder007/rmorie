@@ -32,7 +32,8 @@
 
 #' morie_timesfm_input_patches
 #'
-#' Part of the timesfm_native implementation; see the file header for
+#' A step of the timesfm_native implementation. Called by \code{morie_timesfm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -60,7 +61,8 @@ morie_timesfm_input_patches <- function(x, patch_len, pad_value = 0) {
 
 #' morie_timesfm_causal_mask
 #'
-#' Part of the timesfm_native implementation; see the file header for
+#' A step of the timesfm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param n_patches See Usage.
@@ -80,7 +82,8 @@ morie_timesfm_causal_mask <- function(n_patches) {
 
 #' morie_timesfm_rollout_steps
 #'
-#' Part of the timesfm_native implementation; see the file header for
+#' A step of the timesfm_native implementation. Called by \code{morie_timesfm}, \code{morie_timesfm_horizon_plan}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param horizon See Usage.
@@ -98,7 +101,8 @@ morie_timesfm_rollout_steps <- function(horizon, output_patch_len) {
 
 #' morie_timesfm_horizon_plan
 #'
-#' Part of the timesfm_native implementation; see the file header for
+#' A step of the timesfm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param horizon See Usage.
@@ -123,12 +127,13 @@ morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
 
 #' morie_timesfm
 #'
-#' Part of the timesfm_native implementation; see the file header for
+#' A step of the timesfm_native implementation. Called by \code{morie_timesf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param history See Usage.
 #' @param predictor See Usage.
-#' @param horizon See Usage.
+#' @param horizon Passed to \code{morie_timesfm_rollout_steps}.
 #' @param input_patch_len See Usage.
 #' @param output_patch_len See Usage.
 #' @return A list with \code{estimate}, \code{forecast}, \code{steps}, \code{horizon}, \code{input_patch_len}, \code{output_patch_len}, \code{context_grew_to}, \code{method}.
@@ -163,7 +168,8 @@ morie_timesfm <- function(history, predictor, horizon, input_patch_len,
 
 #' morie_timesfm_cheatsheet
 #'
-#' Part of the timesfm_native implementation; see the file header for
+#' A step of the timesfm_native implementation. Called by \code{.timesf_cheatsheet}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

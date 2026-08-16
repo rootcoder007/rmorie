@@ -8,7 +8,7 @@
 variable_importance(X, Y, screen, effect, V = 5L, seed = 0L)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{Y}{See Usage.}
 \item{screen}{See Usage.}
 \item{effect}{See Usage.}
@@ -16,7 +16,7 @@ variable_importance(X, Y, screen, effect, V = 5L, seed = 0L)
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{
-Part of the tldapar_native implementation; see the file header for the source it follows.
+A step of the tldapar_native implementation. Called by \code{morie_tldapar}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{importance}, \code{V}, \code{method}.

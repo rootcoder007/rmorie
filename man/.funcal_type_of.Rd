@@ -12,7 +12,7 @@
 \item{n_target_side}{See Usage.}
 }
 \description{
-Part of the funcal_native implementation; see the file header for the source it follows.
+A step of the funcal_native implementation. Called by \code{morie_funcal_assign_orthologs}. See the file header for the source the module follows.
 }
 \value{
 A character value.

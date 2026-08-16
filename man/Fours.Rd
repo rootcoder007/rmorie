@@ -19,7 +19,7 @@ list: estimate, F, omega, period, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 579-631}, Chapter 14, Section 14.2.1, p. 584, read as a
+volume [Pages 579-631], Chapter 14, Section 14.2.1, p. 584, read as a
 rendered page image rather than from an extracted text layer.
 }
 \details{

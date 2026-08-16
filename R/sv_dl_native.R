@@ -50,10 +50,11 @@
 
 #' Normalise one read pair; mate 1 is the left-most alignment
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_classify_pair}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$id}, \code{$len1}, \code{$len2}, \code{$pos1}, \code{$pos2}, \code{$read_length}, \code{$seq}, \code{$strand1}, \code{$strand2} from it.
 #' @return A list with \code{chrom1}, \code{pos1}, \code{strand1}, \code{len1}, \code{chrom2}, \code{pos2}, \code{strand2}, \code{len2}, \code{seq}, \code{id}.
 #' @export
 .sv_dl_pair <- function(p) {
@@ -92,10 +93,11 @@
 
 #' .sv_dl_median
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_insert_size_stats}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .sv_dl_median <- function(v) {
@@ -113,10 +115,11 @@
 
 #' Outer distance: left-most start to right-most end
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{.sv_dl_size}, \code{morie_sv_dl_classify_pair}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p A list; the body reads \code{$len2}, \code{$pos1}, \code{$pos2} from it.
 #' @return A numeric value.
 #' @export
 .sv_dl_insert <- function(p) {
@@ -126,12 +129,13 @@
 
 #' morie_sv_dl_insert_size_stats
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}, \code{morie_sv_dl_structural_variant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pairs See Usage.
-#' @param orientation Defaults to \code{NULL}.
-#' @param spread Defaults to \code{"mad"}.
+#' @param orientation Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param spread One of \code{"mad"}, \code{"sd"}. Defaults to \code{"mad"}.
 #' @return A list with \code{median}, \code{sd}, \code{spread}, \code{orientation}, \code{n}.
 #' @export
 morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
@@ -185,14 +189,15 @@ morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
 
 #' morie_sv_dl_classify_pair
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param median See Usage.
-#' @param sd See Usage.
-#' @param orientation Defaults to \code{c("+", "-")}.
-#' @param n_sd Defaults to \code{3}.
+#' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$strand1}, \code{$strand2} from it.
+#' @param median Numeric; combined arithmetically in the body.
+#' @param sd Numeric; combined arithmetically in the body.
+#' @param orientation A vector; indexed elementwise. Defaults to \code{c("+", "-")}.
+#' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @return Nothing; the function is called for its effect.
 #' @export
 morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
@@ -232,12 +237,13 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
 
 #' The SV size this pair implies, used as the clustering weight
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_build_sv_graph}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param label See Usage.
-#' @param median See Usage.
+#' @param p Passed to \code{.sv_dl_insert}.
+#' @param label A vector; indexed elementwise.
+#' @param median Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .sv_dl_size <- function(p, label, median) {
@@ -250,15 +256,16 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
 
 #' morie_sv_dl_build_sv_graph
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pairs See Usage.
-#' @param median See Usage.
-#' @param sd See Usage.
-#' @param label See Usage.
+#' @param median Numeric; combined arithmetically in the body.
+#' @param sd Numeric; combined arithmetically in the body.
+#' @param label A vector; indexed elementwise.
 #' @param orientation Defaults to \code{c("+", "-")}.
-#' @param n_sd Defaults to \code{3}.
+#' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param window Defaults to \code{NULL}.
 #' @return A list with \code{nodes}, \code{edges}, \code{sizes}, \code{label}.
 #' @export
@@ -302,11 +309,12 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
 
 #' Connected components (union-find); singletons dropped
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param edges See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param edges A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .sv_dl_components <- function(n, edges) {
@@ -343,7 +351,7 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
 #' endpoint inside, whose other endpoint is adjacent to every member.
 #'
 #' @param members See Usage.
-#' @param edges See Usage.
+#' @param edges A matrix; indexed by row and column.
 #' @return A vector, from \code{sort}.
 #' @export
 morie_sv_dl_maximal_clique <- function(members, edges) {
@@ -394,17 +402,18 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
 
 #' morie_sv_dl_paired_end_calls
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_structural_variant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pairs See Usage.
-#' @param median Defaults to \code{NULL}.
-#' @param sd Defaults to \code{NULL}.
-#' @param orientation Defaults to \code{NULL}.
-#' @param n_sd Defaults to \code{3}.
+#' @param median Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.
+#' @param sd Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.
+#' @param orientation Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_insert_size_stats}.
+#' @param n_sd Passed to \code{morie_sv_dl_classify_pair}. Defaults to \code{3}.
 #' @param min_support Defaults to \code{2}.
-#' @param window Defaults to \code{NULL}.
-#' @param spread Defaults to \code{"mad"}.
+#' @param window Passed to \code{morie_sv_dl_build_sv_graph}.
+#' @param spread Passed to \code{morie_sv_dl_insert_size_stats}. Defaults to \code{"mad"}.
 #' @return The value of \code{calls}, as built in the body.
 #' @export
 morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
@@ -480,10 +489,11 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
 
 #' .sv_dl_revcomp
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_deletion_type_reference}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Character; passed to \code{toupper}.
 #' @return A character value.
 #' @export
 .sv_dl_revcomp <- function(s) {
@@ -499,7 +509,7 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
 #' second half reverse complemented, a translocation gets both.
 #'
 #' @param ref See Usage.
-#' @param sv_type See Usage.
+#' @param sv_type One of \code{"DEL"}, \code{"DUP"}, \code{"INV"}.
 #' @return A character value.
 #' @export
 morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
@@ -528,14 +538,15 @@ morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
 
 #' morie_sv_dl_kmer_diagonals
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_refine_breakpoint}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param read See Usage.
 #' @param ref See Usage.
-#' @param k Defaults to \code{7}.
+#' @param k Numeric; combined arithmetically in the body. Defaults to \code{7}.
 #' @param k_min Defaults to \code{3}.
-#' @param require_half Defaults to \code{TRUE}.
+#' @param require_half A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
 morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
@@ -652,15 +663,16 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
 
 #' .sv_dl_gotoh
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_gotoh_score_vectors}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
-#' @param ref See Usage.
+#' @param query Character; passed to \code{strsplit}.
+#' @param ref Character; passed to \code{strsplit}.
 #' @param match Defaults to \code{1}.
 #' @param mismatch Defaults to \code{-2}.
-#' @param gap_open Defaults to \code{-4}.
-#' @param gap_extend Defaults to \code{-1}.
+#' @param gap_open Numeric; combined arithmetically in the body. Defaults to \code{-4}.
+#' @param gap_extend Numeric; combined arithmetically in the body. Defaults to \code{-1}.
 #' @return A list with \code{best}, \code{best_at}.
 #' @export
 .sv_dl_gotoh <- function(query, ref, match=1.0, mismatch=-2.0,
@@ -704,15 +716,16 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
 
 #' morie_sv_dl_gotoh_score_vectors
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_refine_breakpoint}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param consensus See Usage.
 #' @param ref See Usage.
-#' @param match Defaults to \code{1}.
-#' @param mismatch Defaults to \code{-2}.
-#' @param gap_open Defaults to \code{-4}.
-#' @param gap_extend Defaults to \code{-1}.
+#' @param match Passed to \code{.sv_dl_gotoh}. Defaults to \code{1}.
+#' @param mismatch Passed to \code{.sv_dl_gotoh}. Defaults to \code{-2}.
+#' @param gap_open Passed to \code{.sv_dl_gotoh}. Defaults to \code{-4}.
+#' @param gap_extend Passed to \code{.sv_dl_gotoh}. Defaults to \code{-1}.
 #' @return A list with \code{f}, \code{f_at}, \code{r}, \code{r_at}.
 #' @export
 morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
@@ -746,8 +759,8 @@ morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
 #'
 #' Indices are 1-based over the consensus, as in the paper.
 #'
-#' @param f See Usage.
-#' @param r See Usage.
+#' @param f A vector; its length is taken and its elements indexed.
+#' @param r A vector; its length is taken and its elements indexed.
 #' @return A list with \code{i}, \code{j}, \code{score}.
 #' @export
 morie_sv_dl_optimal_split <- function(f, r) {
@@ -774,20 +787,21 @@ morie_sv_dl_optimal_split <- function(f, r) {
 
 #' morie_sv_dl_refine_breakpoint
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_structural_variant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param call See Usage.
-#' @param reference See Usage.
-#' @param reads See Usage.
-#' @param k Defaults to \code{7}.
-#' @param k_min Defaults to \code{3}.
+#' @param call A list; the body reads \code{$size}, \code{$type} from it.
+#' @param reference Passed to \code{morie_sv_dl_deletion_type_reference}.
+#' @param reads A vector; its length is taken and its elements indexed.
+#' @param k Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{7}.
+#' @param k_min Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{3}.
 #' @param min_split_support Defaults to \code{2}.
-#' @param max_length_diff Defaults to \code{0.1}.
-#' @param match Defaults to \code{1}.
-#' @param mismatch Defaults to \code{-2}.
-#' @param gap_open Defaults to \code{-4}.
-#' @param gap_extend Defaults to \code{-1}.
+#' @param max_length_diff Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param match Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{1}.
+#' @param mismatch Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-2}.
+#' @param gap_open Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-4}.
+#' @param gap_extend Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-1}.
 #' @return A list with \code{start}, \code{end}, \code{size}, \code{split_support}, \code{consensus}, \code{score}, \code{microinsertion}, \code{microhomology}, \code{kmer_offset}.
 #' @export
 morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
@@ -869,23 +883,24 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
 
 #' morie_sv_dl_structural_variant
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pairs See Usage.
-#' @param reference Defaults to \code{NULL}.
-#' @param split_reads Defaults to \code{NULL}.
-#' @param orientation Defaults to \code{NULL}.
-#' @param median Defaults to \code{NULL}.
-#' @param sd Defaults to \code{NULL}.
-#' @param n_sd Defaults to \code{3}.
-#' @param min_support Defaults to \code{2}.
-#' @param k Defaults to \code{7}.
-#' @param k_min Defaults to \code{3}.
-#' @param min_split_support Defaults to \code{2}.
-#' @param max_length_diff Defaults to \code{0.1}.
-#' @param window Defaults to \code{NULL}.
-#' @param spread Defaults to \code{"mad"}.
+#' @param pairs Passed to \code{morie_sv_dl_paired_end_calls}.
+#' @param reference Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param split_reads Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param orientation Passed to \code{morie_sv_dl_paired_end_calls}.
+#' @param median Passed to \code{morie_sv_dl_paired_end_calls}.
+#' @param sd Passed to \code{morie_sv_dl_paired_end_calls}.
+#' @param n_sd Passed to \code{morie_sv_dl_paired_end_calls}. Defaults to \code{3}.
+#' @param min_support Passed to \code{morie_sv_dl_paired_end_calls}. Defaults to \code{2}.
+#' @param k Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{7}.
+#' @param k_min Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{3}.
+#' @param min_split_support Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{2}.
+#' @param max_length_diff Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{0.1}.
+#' @param window Passed to \code{morie_sv_dl_paired_end_calls}.
+#' @param spread Passed to \code{morie_sv_dl_paired_end_calls}. Defaults to \code{"mad"}.
 #' @return A list with \code{estimate}, \code{calls}, \code{n_calls}, \code{n_precise}, \code{insert_median}, \code{insert_sd}, \code{spread}, \code{orientation}, \code{n_sd}, \code{min_support}, \code{method}, \code{note}.
 #' @export
 morie_sv_dl_structural_variant <- function(pairs, reference=NULL,
@@ -949,7 +964,8 @@ morie_sv_dl_structural_variant <- function(pairs, reference=NULL,
 
 #' morie_sv_dl_cheatsheet
 #'
-#' Part of the sv_dl_native implementation; see the file header for the
+#' A step of the sv_dl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

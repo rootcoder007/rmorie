@@ -8,10 +8,10 @@
 .lcfsdq_window(coords)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the lcfsdq_native implementation; see the file header for the source it follows.
+A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{area}, \code{perimeter}, \code{bb}.

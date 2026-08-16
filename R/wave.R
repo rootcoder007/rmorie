@@ -98,7 +98,8 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 # Scaling filter from the exact radical closed form.
 #' Scaling filter from the exact radical closed form
 #'
-#' Part of the wave implementation; see the file header for the source
+#' A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param name See Usage.
@@ -125,10 +126,11 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 
 #' .dbmirror
 #'
-#' Part of the wave implementation; see the file header for the source
+#' A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param h See Usage.
+#' @param h A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .dbmirror <- function(h) {
@@ -140,12 +142,13 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 
 #' .dbstep
 #'
-#' Part of the wave implementation; see the file header for the source
+#' A step of the wave implementation. Called by \code{.dbforward}, \code{Wvltdb}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param a See Usage.
-#' @param h See Usage.
-#' @param g See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param h A vector; its length is taken and its elements indexed.
+#' @param g A vector; indexed elementwise.
 #' @return A list with \code{a}, \code{d}.
 #' @export
 .dbstep <- function(a, h, g) {
@@ -170,13 +173,14 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 
 #' .dbforward
 #'
-#' Part of the wave implementation; see the file header for the source
+#' A step of the wave implementation. Called by \code{Wave}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param x See Usage.
-#' @param h See Usage.
-#' @param g See Usage.
-#' @param level See Usage.
+#' @param h Passed to \code{.dbstep}.
+#' @param g Passed to \code{.dbstep}.
+#' @param level A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .dbforward <- function(x, h, g, level) {
@@ -194,7 +198,8 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 
 #' .dbpow2
 #'
-#' Part of the wave implementation; see the file header for the source
+#' A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param n See Usage.

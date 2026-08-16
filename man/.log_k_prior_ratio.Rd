@@ -8,11 +8,11 @@
 .log_k_prior_ratio(lam, k)
 }
 \arguments{
-\item{lam}{See Usage.}
-\item{k}{See Usage.}
+\item{lam}{Numeric; passed to \code{log}.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

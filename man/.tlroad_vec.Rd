@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the tlroad_native implementation; see the file header for the source it follows.
+A step of the tlroad_native implementation. Called by \code{.tlroad_eic_ate}, \code{.tlroad_plugin}, \code{.tlroad_score_spans_eic}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -8,12 +8,12 @@
 StftParam(fs, desired_t_res, desired_f_res)
 }
 \arguments{
-\item{fs}{See Usage.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{desired_t_res}{See Usage.}
 \item{desired_f_res}{See Usage.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{nperseg_time}, \code{nperseg_freq}, \code{nperseg}, \code{achieved_t_res}, \code{achieved_f_res}, \code{tf_product}, \code{heisenberg_bound}, \code{feasible}, \code{method}.

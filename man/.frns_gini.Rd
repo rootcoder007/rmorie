@@ -8,7 +8,7 @@
 .frns_gini(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
 (2 n sum x). Returns 0 for all-zero or single-element input.

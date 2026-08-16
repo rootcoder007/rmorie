@@ -8,10 +8,10 @@
 .w501_seg_cost(tb, a, b, cost)
 }
 \arguments{
-\item{tb}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{cost}{See Usage.}
+\item{tb}{A list; the body reads \code{$cs}, \code{$css} from it.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{cost}{One of \code{"mean"}, \code{"meanvar"}.}
 }
 \description{
 Part of the w501_changepoint_native implementation; see the file header for the source it follows.

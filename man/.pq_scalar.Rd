@@ -8,11 +8,11 @@
 .pq_scalar(e, ttype)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{A list; the body reads \code{$pos} from it.}
 \item{ttype}{See Usage.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map}, \code{.pq_struct}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

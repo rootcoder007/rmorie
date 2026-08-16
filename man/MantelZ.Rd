@@ -9,9 +9,9 @@ MantelZ(coords, x, w, u = NULL)
 }
 \arguments{
 \item{coords}{See Usage.}
-\item{x}{See Usage.}
-\item{w}{See Usage.}
-\item{u}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{.morie_spx_chkv}.}
+\item{w}{Passed to \code{.morie_spx_chkw}.}
+\item{u}{Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkw}.}
 }
 \description{
 the approach but does not print Eg[M2] or Varg[M2]; both are derived from the quadratic-form moments and are stated in the Python docstring.  Only the SYMMETRIC part of W contributes.

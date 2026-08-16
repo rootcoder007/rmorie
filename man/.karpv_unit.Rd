@@ -8,7 +8,7 @@
 .karpv_unit(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.karpv_u32}.}
 }
 \description{
 and the same bits in both arms.

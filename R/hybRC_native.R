@@ -72,7 +72,8 @@
 # Private helpers (prefixed to avoid R/ environment collisions)
 #' Private helpers (prefixed to avoid R/ environment collisions)
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. Called by \code{weighted}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -85,10 +86,11 @@
 
 #' .hybRC_mat
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. Called by \code{feature_combination}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .hybRC_mat <- function(x) {
@@ -105,7 +107,8 @@
 
 #' is_order_sensitive
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param method See Usage.
@@ -127,11 +130,12 @@ is_order_sensitive <- function(method) {
 
 #' weighted
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param scores See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Passed to \code{.hybRC_vec}.
 #' @return A list with \code{scores}, \code{ranking}, \code{partially_scored}, \code{note}.
 #' @export
 weighted <- function(scores, weights = NULL) {
@@ -179,7 +183,8 @@ weighted <- function(scores, weights = NULL) {
 
 #' switching
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param scores See Usage.
@@ -210,7 +215,8 @@ switching <- function(scores, criterion, context = NULL) {
 
 #' mixed
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param recommendations See Usage.
@@ -252,11 +258,12 @@ mixed <- function(recommendations, top_k = NULL) {
 
 #' feature_combination
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param content_features See Usage.
-#' @param collaborative_features See Usage.
+#' @param content_features Passed to \code{.hybRC_mat}.
+#' @param collaborative_features Passed to \code{.hybRC_mat}.
 #' @return A list with \code{features}, \code{content_dim}, \code{collaborative_dim}, \code{note}.
 #' @export
 feature_combination <- function(content_features, collaborative_features) {
@@ -288,12 +295,13 @@ feature_combination <- function(content_features, collaborative_features) {
 
 #' cascade
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param primary See Usage.
 #' @param secondary See Usage.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Numeric; passed to \code{max}. Defaults to \code{1e-09}.
 #' @return A list with \code{ranking}, \code{tie_groups_broken}, \code{primary_respected}, \code{note}.
 #' @export
 cascade <- function(primary, secondary, tol = 1e-9) {
@@ -326,7 +334,8 @@ cascade <- function(primary, secondary, tol = 1e-9) {
 
 #' feature_augmentation
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param base_output See Usage.
@@ -342,7 +351,8 @@ feature_augmentation <- function(base_output, consumer) {
 
 #' meta_level
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param model_builder See Usage.
@@ -364,7 +374,8 @@ meta_level <- function(model_builder, consumer, data) {
 
 #' .hybRC_cheatsheet
 #'
-#' Part of the hybRC_native implementation; see the file header for the
+#' A step of the hybRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

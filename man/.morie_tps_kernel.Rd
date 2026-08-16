@@ -8,11 +8,11 @@
 .morie_tps_kernel(A, B)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{A matrix; passed to \code{tcrossprod}.}
+\item{B}{A matrix; passed to \code{tcrossprod}.}
 }
 \description{
-Part of the esl_native2 implementation; see the file header for the source it follows.
+A step of the esl_native2 implementation. Called by \code{morie_esl_thin_plate_spline}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

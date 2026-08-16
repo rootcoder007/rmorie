@@ -8,13 +8,13 @@
 .lggvls_logistic_fit(X, y, max_iter = 25L, tol = 1e-08)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{max_iter}{Defaults to \code{25L}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. Called by \code{.lggvls_ip_weights}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{p_hat}, \code{converged}.

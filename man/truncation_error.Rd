@@ -12,7 +12,7 @@ truncation_error(alpha, K)
 \item{K}{See Usage.}
 }
 \description{
-Part of the slowdp_native implementation; see the file header for the source it follows.
+A step of the slowdp_native implementation. Called by \code{decay_diagnostics}, \code{sticks_for_tolerance}, \code{truncated_dp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{expected_tail}, \code{kept}, \code{alpha}, \code{K}, \code{per_stick_factor}, \code{note}.

@@ -8,12 +8,12 @@
 .dino_softmax(v, tau, center = NULL)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{tau}{See Usage.}
+\item{v}{A vector; its length is taken.}
+\item{tau}{Numeric; combined arithmetically in the body.}
 \item{center}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the dinmlt implementation; see the file header for the source it follows.
+A step of the dinmlt implementation. Called by \code{Dinmlt}, \code{Dinov2}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

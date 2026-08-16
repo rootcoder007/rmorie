@@ -8,10 +8,10 @@
 .cmlmer_chol(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the cmlmer_native implementation; see the file header for the source it follows.
+A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}, \code{morie_cmlmer_compressed_lmm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{L}, as built in the body.

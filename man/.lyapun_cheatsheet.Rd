@@ -8,7 +8,7 @@
 .lyapun_cheatsheet()
 }
 \description{
-Part of the lyapun_native implementation; see the file header for the source it follows.
+A step of the lyapun_native implementation. Called by \code{morie_lyapun}. See the file header for the source the module follows.
 }
 \value{
 A character value.

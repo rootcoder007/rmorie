@@ -8,23 +8,23 @@
 honest_forest(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, at = NULL, level = 0.95, correction = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 \item{W}{Defaults to \code{NULL}.}
-\item{kind}{Defaults to \code{"double-sample"}.}
+\item{kind}{Compared against \code{"adaptive"}. Defaults to \code{"double-sample"}.}
 \item{n_trees}{Defaults to \code{200L}.}
-\item{subsample_frac}{Defaults to \code{0.5}.}
-\item{min_leaf}{Defaults to \code{5L}.}
+\item{subsample_frac}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
+\item{min_leaf}{Numeric; combined arithmetically in the body. Defaults to \code{5L}.}
 \item{alpha}{Defaults to \code{0.05}.}
 \item{pi}{Defaults to \code{0.5}.}
 \item{max_depth}{Defaults to \code{12L}.}
-\item{seed}{Defaults to \code{0L}.}
-\item{at}{Defaults to \code{NULL}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
+\item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{level}{Defaults to \code{0.95}.}
-\item{correction}{Defaults to \code{TRUE}.}
+\item{correction}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the hntfst_native implementation; see the file header for the source it follows.
+A step of the hntfst_native implementation. Called by \code{morie_hntfst}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{s}, \code{n_trees}, \code{split_counts}, \code{split_share}, \code{mean_depth}, \code{kind}, \code{honest}, \code{correction}, \code{level}, \code{method}.

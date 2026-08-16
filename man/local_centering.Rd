@@ -8,16 +8,16 @@
 local_centering(y, W, X, n_folds = 5, n_trees = 100, min_leaf = 5, seed = 0)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
-\item{X}{See Usage.}
-\item{n_folds}{Defaults to \code{5}.}
-\item{n_trees}{Defaults to \code{100}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{seed}{Defaults to \code{0}.}
+\item{y}{A vector; its length is taken.}
+\item{W}{Passed to \code{.plrgrf_forest_predict}.}
+\item{X}{Passed to \code{.plrgrf_forest_predict}.}
+\item{n_folds}{Passed to \code{.plrgrf_folds}. Defaults to \code{5}.}
+\item{n_trees}{Passed to \code{.plrgrf_forest_predict}. Defaults to \code{100}.}
+\item{min_leaf}{Passed to \code{.plrgrf_forest_predict}. Defaults to \code{5}.}
+\item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the plrgrf_native implementation; see the file header for the source it follows.
+A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mh}, \code{eh}.

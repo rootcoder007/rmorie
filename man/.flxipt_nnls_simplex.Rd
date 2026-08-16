@@ -8,9 +8,9 @@
 .flxipt_nnls_simplex(Z, y, iters = 8000, tol = 1e-14)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{y}{See Usage.}
-\item{iters}{Defaults to \code{8000}.}
+\item{Z}{A matrix; passed to \code{nrow}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{8000}.}
 \item{tol}{Defaults to \code{1e-14}.}
 }
 \description{

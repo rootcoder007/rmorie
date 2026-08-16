@@ -8,10 +8,10 @@
 .unifAlg_check(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once}, \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

@@ -8,11 +8,11 @@
 .glm_score_poisson(p0, p1)
 }
 \arguments{
-\item{p0}{See Usage.}
-\item{p1}{See Usage.}
+\item{p0}{A vector; its length is taken.}
+\item{p1}{A vector; its length is taken.}
 }
 \description{
-Part of the glm_native implementation; see the file header for the source it follows.
+A step of the glm_native implementation. Called by \code{morie_glr_test}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{z}, \code{kl}.

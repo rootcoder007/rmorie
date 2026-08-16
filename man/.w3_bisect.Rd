@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
-\item{iters}{Defaults to \code{200L}.}
+\item{lo}{Numeric; combined arithmetically in the body.}
+\item{hi}{Numeric; combined arithmetically in the body.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 }
 \description{
 iteration count rather than a tolerance loop: the two arms then take exactly the same number of steps and end at exactly the same point, which a tolerance test cannot guarantee.

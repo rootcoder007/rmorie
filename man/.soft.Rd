@@ -8,11 +8,11 @@
 .soft(x, t)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t}{See Usage.}
+\item{x}{Numeric; passed to \code{abs}.}
+\item{t}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmldgp_native implementation; see the file header for the source it follows.
+A step of the tmldgp_native implementation. Called by \code{lasso_path}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

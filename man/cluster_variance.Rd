@@ -12,7 +12,7 @@ cluster_variance(ic, cluster)
 \item{cluster}{See Usage.}
 }
 \description{
-Part of the tlclust_native implementation; see the file header for the source it follows.
+A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{se}, \code{n_clusters}, \code{cluster_sums}, \code{note}.

@@ -14,7 +14,7 @@ Named list with \code{estimate}, \code{terms}, \code{convergents},
 \code{numerator}, \code{denominator}, \code{error}, \code{n}, \code{method}.
 }
 \description{
-The leading partial quotients \link{3; 7, 15, 1, 292, ...} are tabulated
+The leading partial quotients [3; 7, 15, 1, 292, ...] are tabulated
 rather than derived: a double cannot supply them past the tenth, so
 asking for more than fifteen is refused instead of answered with
 noise.  The early convergents are the classical 22/7, 333/106 and

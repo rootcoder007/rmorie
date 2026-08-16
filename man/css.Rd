@@ -8,13 +8,13 @@
 css(w, ar = numeric(0), ma = numeric(0), full = FALSE)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{ar}{Defaults to \code{numeric(0)}.}
-\item{ma}{Defaults to \code{numeric(0)}.}
-\item{full}{Defaults to \code{FALSE}.}
+\item{w}{A vector; its length is taken and its elements indexed.}
+\item{ar}{A vector; its length is taken and its elements indexed. Defaults to \code{numeric(0)}.}
+\item{ma}{A vector; its length is taken and its elements indexed. Defaults to \code{numeric(0)}.}
+\item{full}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. Called by \code{.residual_column}, \code{.sarima_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ssq}, as built in the body.

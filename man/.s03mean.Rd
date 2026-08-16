@@ -8,10 +8,10 @@
 .s03mean(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.btsieve_arfit}, \code{.s03corr}, \code{.s03var} and 42 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

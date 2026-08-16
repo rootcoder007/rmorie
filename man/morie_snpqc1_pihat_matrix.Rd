@@ -8,11 +8,11 @@
 morie_snpqc1_pihat_matrix(genotypes, correction = TRUE)
 }
 \arguments{
-\item{genotypes}{See Usage.}
-\item{correction}{Defaults to \code{TRUE}.}
+\item{genotypes}{Passed to \code{morie_snpqc1_ibd_moments}.}
+\item{correction}{Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the snpqc1_native implementation; see the file header for the source it follows.
+A step of the snpqc1_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

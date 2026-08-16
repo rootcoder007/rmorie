@@ -22,20 +22,22 @@
 
 #' .log
 #'
-#' Part of the airl_native implementation; see the file header for the
+#' A step of the airl_native implementation. Called by \code{morie_airl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .log <- function(x) log(max(x, 1e-300))
 
 #' .state_key
 #'
-#' Part of the airl_native implementation; see the file header for the
+#' A step of the airl_native implementation. Called by \code{morie_soft_value_iteration}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s A vector; its length is taken.
 #' @return A character value.
 #' @export
 .state_key <- function(s) {
@@ -48,10 +50,11 @@
 
 #' .action_key
 #'
-#' Part of the airl_native implementation; see the file header for the
+#' A step of the airl_native implementation. Called by \code{morie_airl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a A vector; its length is taken.
 #' @return A character value.
 #' @export
 .action_key <- function(a) {

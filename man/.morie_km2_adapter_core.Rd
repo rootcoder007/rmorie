@@ -8,14 +8,14 @@
 .morie_km2_adapter_core(H_o, H_in, W_down, W_up, f)
 }
 \arguments{
-\item{H_o}{See Usage.}
-\item{H_in}{See Usage.}
-\item{W_down}{See Usage.}
-\item{W_up}{See Usage.}
+\item{H_o}{A matrix; passed to \code{nrow}.}
+\item{H_in}{A matrix; passed to \code{nrow}.}
+\item{W_down}{A matrix; passed to \code{as.matrix}.}
+\item{W_up}{A matrix; passed to \code{as.matrix}.}
 \item{f}{See Usage.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_parallel_adapter}, \code{morie_kamath_ch4_series_adapter}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

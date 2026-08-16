@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{n}{Defaults to \code{200L}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{n}{Numeric; combined arithmetically in the body. Defaults to \code{200L}.}
 }
 \description{
 panels, not adaptive: an adaptive rule branches on a tolerance test and the two arms would take different numbers of subdivisions on the very integrals where it matters.

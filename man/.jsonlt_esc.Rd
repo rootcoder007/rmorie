@@ -8,10 +8,10 @@
 .jsonlt_esc(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Character; passed to \code{grepl}.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_df_columns}, \code{.jsonlt_df_rows}, \code{.jsonlt_encode} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 A character value.

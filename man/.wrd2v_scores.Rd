@@ -8,11 +8,11 @@
 .wrd2v_scores(O, h)
 }
 \arguments{
-\item{O}{See Usage.}
-\item{h}{See Usage.}
+\item{O}{A matrix; passed to \code{\%*\%}.}
+\item{h}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the wrd2v_native implementation; see the file header for the source it follows.
+A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \code{.wrd2v_sg_step}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

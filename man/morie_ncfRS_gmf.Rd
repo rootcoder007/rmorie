@@ -14,7 +14,7 @@ morie_ncfRS_gmf(p_u, q_i, h = NULL, activation = "sigmoid")
 \item{activation}{Defaults to \code{"sigmoid"}.}
 }
 \description{
-Part of the ncfRS_native implementation; see the file header for the source it follows.
+A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

@@ -3,14 +3,14 @@
 % the formals.
 \name{.bkw_influence}
 \alias{.bkw_influence}
-\title{Hat values, residuals and (X\\\'X)^-1 for the OLS fit of y on X.}
+\title{Hat values, residuals and (X\\'X)^-1 for the OLS fit of y on X.}
 \usage{
 .bkw_influence(y, X, intercept = TRUE)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{intercept}{Defaults to \code{TRUE}.}
+\item{y}{A vector; its length is taken.}
+\item{X}{Passed to \code{.s03mat}.}
+\item{intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 Returns a list with n, p, e, h, sse and inv (inv[[k]] is COLUMN k of the inverse), shared by the DFFITS, DFBETAS and COVRATIO diagnostics.

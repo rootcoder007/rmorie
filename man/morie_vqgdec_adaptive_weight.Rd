@@ -14,7 +14,7 @@ morie_vqgdec_adaptive_weight(grad_rec, grad_gan, delta = 1e-06, clip = 10000)
 \item{clip}{Defaults to \code{10000}.}
 }
 \description{
-Balances the two losses at the decoder\\'s last layer.
+Balances the two losses at the decoder\'s last layer.
 }
 \value{
 A list with \code{lambda}, \code{raw}, \code{clipped}, \code{note}.

@@ -8,14 +8,14 @@
 .mor_om_fit_predict(X, y, rows, Xpred, outcome_model)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
 \item{rows}{See Usage.}
-\item{Xpred}{See Usage.}
-\item{outcome_model}{See Usage.}
+\item{Xpred}{A matrix; passed to \code{\%*\%}.}
+\item{outcome_model}{Compared against \code{"logistic"}.}
 }
 \description{
-Part of the causal implementation; see the file header for the source it follows.
+A step of the causal implementation. Called by \code{morie_estimate_aipw}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -8,10 +8,10 @@
 .morie_tps_canonical(name)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{A vector; its length is taken.}
 }
 \description{
-Part of the tps_datasets implementation; see the file header for the source it follows.
+A step of the tps_datasets implementation. Called by \code{.morie_tps_io_category_dir}, \code{morie_tps_list_formats}, \code{morie_tps_load} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[[}.

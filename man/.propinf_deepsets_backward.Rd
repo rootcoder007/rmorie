@@ -8,14 +8,14 @@
 .propinf_deepsets_backward(model, sets, cache, dout, grads)
 }
 \arguments{
-\item{model}{See Usage.}
-\item{sets}{See Usage.}
-\item{cache}{See Usage.}
-\item{dout}{See Usage.}
-\item{grads}{See Usage.}
+\item{model}{A list; the body reads \code{$context}, \code{$phis}, \code{$psis}, \code{$repr_dim}, \code{$rho} from it.}
+\item{sets}{A vector; its length is taken.}
+\item{cache}{A list; the body reads \code{$caches}, \code{$racts}, \code{$rpre} from it.}
+\item{dout}{Passed to \code{.propinf_mlp_backward}.}
+\item{grads}{A list; the body reads \code{$phis}, \code{$psis}, \code{$rho} from it.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{for}.

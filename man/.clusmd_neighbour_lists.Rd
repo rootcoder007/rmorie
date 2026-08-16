@@ -8,7 +8,7 @@
 .clusmd_neighbour_lists(fps, threshold = 0.8)
 }
 \arguments{
-\item{fps}{See Usage.}
+\item{fps}{A vector; its length is taken.}
 \item{threshold}{Defaults to \code{0.8}.}
 }
 \description{
@@ -20,7 +20,7 @@ The value of \code{nb}, as built in the body.
 \references{
 ----------
 Butina, D. (1999) "Unsupervised data base clustering based on
-Daylight\\'s fingerprint and Tanimoto similarity: a fast and automated
+Daylight\'s fingerprint and Tanimoto similarity: a fast and automated
 way to cluster small and large data sets", *Journal of Chemical
 Information and Computer Sciences* 39(4), 747-750,
 doi:10.1021/ci9803381. The neighbour-count ordering, the exclusion

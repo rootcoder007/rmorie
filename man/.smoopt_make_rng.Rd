@@ -8,10 +8,10 @@
 .smoopt_make_rng(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Passed to \code{.ghc_rng}.}
 }
 \description{
-Part of the smoopt_native implementation; see the file header for the source it follows.
+A step of the smoopt_native implementation. Called by \code{smo_platt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{uniform}.

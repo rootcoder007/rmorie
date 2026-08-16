@@ -55,12 +55,13 @@
 
 #' .frfgrf_beta_min
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param d See Usage.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
+#' @param pi Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A numeric value.
 #' @export
 .frfgrf_beta_min <- function(d, alpha = 0.05, pi = 0.5) {
@@ -80,10 +81,11 @@
 
 #' .frfgrf_structure
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_honesty_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right}, \code{$threshold} from it.
 #' @return A vector, from \code{c}.
 #' @export
 .frfgrf_structure <- function(tree) {
@@ -99,14 +101,15 @@
 
 #' .frfgrf_honesty_test
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
-#' @param y See Usage.
-#' @param kind Defaults to \code{"double-sample"}.
+#' @param y A vector; indexed elementwise.
+#' @param kind Compared against \code{"propensity"}. Defaults to \code{"double-sample"}.
 #' @param min_leaf Defaults to \code{5}.
-#' @param seed Defaults to \code{11}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{11}.
 #' @param n_permutations Defaults to \code{3}.
 #' @return A list with \code{honest}, \code{splits_stable_under_I_permutation}, \code{splits_move_under_J_permutation}, \code{n_splits}.
 #' @export
@@ -179,11 +182,12 @@
 
 #' .frfgrf_split_share_walk
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_split_share}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nd See Usage.
-#' @param counts See Usage.
+#' @param nd A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right} from it.
+#' @param counts A vector; indexed elementwise.
 #' @return The value of \code{counts}, as built in the body.
 #' @export
 .frfgrf_split_share_walk <- function(nd, counts) {
@@ -197,11 +201,12 @@
 
 #' .frfgrf_split_share
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param trees See Usage.
-#' @param d See Usage.
+#' @param d A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{list}.
 #' @export
 .frfgrf_split_share <- function(trees, d) {
@@ -216,10 +221,11 @@
 
 #' .frfgrf_leaf_count
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_regularity_walk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nd See Usage.
+#' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$n_I}, \code{$right} from it.
 #' @return A numeric value.
 #' @export
 .frfgrf_leaf_count <- function(nd) {
@@ -231,11 +237,12 @@
 
 #' .frfgrf_regularity_walk
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_regularity}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nd See Usage.
-#' @param worst See Usage.
+#' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.
+#' @param worst Numeric; passed to \code{min}.
 #' @return The value of \code{worst}, as built in the body.
 #' @export
 .frfgrf_regularity_walk <- function(nd, worst) {
@@ -255,7 +262,8 @@
 
 #' .frfgrf_regularity
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param trees See Usage.
@@ -271,18 +279,19 @@
 
 #' .frfgrf_forest_fit_check
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. Called by \code{morie_frfgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param n_trees Defaults to \code{100}.
-#' @param min_leaf Defaults to \code{5}.
+#' @param min_leaf Passed to \code{.frfgrf_honesty_test}. Defaults to \code{5}.
 #' @param subsample_frac Defaults to \code{0.5}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
-#' @param seed Defaults to \code{0}.
-#' @param kind Defaults to \code{"double-sample"}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
+#' @param pi Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param kind Passed to \code{.frfgrf_honesty_test}. Defaults to \code{"double-sample"}.
 #' @param sizes Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty}, \code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share}, \code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity}, \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d}, \code{n_trees}, \code{kind}, \code{failed}, \code{method}.
 #' @export
@@ -373,7 +382,8 @@
 
 #' .frfgrf_cheatsheet
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -397,19 +407,20 @@
 #' Main entry point: same argument names and defaults as
 #' forest_fit_check
 #'
-#' Part of the frfgrf_native implementation; see the file header for the
+#' A step of the frfgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param n_trees Defaults to \code{100}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param subsample_frac Defaults to \code{0.5}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
-#' @param seed Defaults to \code{0}.
-#' @param kind Defaults to \code{"double-sample"}.
-#' @param sizes Defaults to \code{NULL}.
+#' @param y Passed to \code{.frfgrf_forest_fit_check}.
+#' @param X Passed to \code{.frfgrf_forest_fit_check}.
+#' @param n_trees Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{100}.
+#' @param min_leaf Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{5}.
+#' @param subsample_frac Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0.5}.
+#' @param alpha Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0.05}.
+#' @param pi Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0.5}.
+#' @param seed Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0}.
+#' @param kind Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{"double-sample"}.
+#' @param sizes Passed to \code{.frfgrf_forest_fit_check}.
 #' @return The value of \code{.frfgrf_forest_fit_check}.
 #' @export
 morie_frfgrf <- function(y, X, n_trees = 100, min_leaf = 5,

@@ -8,16 +8,16 @@
 morie_warpL_warp_step(positive, negatives, embed_user, rng, alphas, lr = 0.05, margin = 1)
 }
 \arguments{
-\item{positive}{See Usage.}
-\item{negatives}{See Usage.}
-\item{embed_user}{See Usage.}
-\item{rng}{See Usage.}
-\item{alphas}{See Usage.}
+\item{positive}{Passed to \code{.warpL_vec}.}
+\item{negatives}{A vector; its length is taken and its elements indexed.}
+\item{embed_user}{Passed to \code{.warpL_vec}.}
+\item{rng}{Passed to \code{.warpL_sample_violation}.}
+\item{alphas}{Passed to \code{.warpL_warp_loss}.}
 \item{lr}{Defaults to \code{0.05}.}
-\item{margin}{Defaults to \code{1}.}
+\item{margin}{Passed to \code{.warpL_sample_violation}. Defaults to \code{1}.}
 }
 \description{
-Part of the warpL_native implementation; see the file header for the source it follows.
+A step of the warpL_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{updated}, \code{loss}, \code{user}, \code{draws}, \code{estimated_rank}, \code{rank_weight}, \code{negative}, \code{method}, \code{note}.

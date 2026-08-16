@@ -8,14 +8,14 @@
 .resnxt_block_equivalence(x, Wins, Wmids, Wouts, tol = 1e-09)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{Wins}{See Usage.}
-\item{Wmids}{See Usage.}
-\item{Wouts}{See Usage.}
+\item{x}{Passed to \code{.resnxt_aggregated_block}.}
+\item{Wins}{Passed to \code{.resnxt_aggregated_block}.}
+\item{Wmids}{Passed to \code{.resnxt_aggregated_block}.}
+\item{Wouts}{A vector; indexed elementwise.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{
-Part of the resnxt_native implementation; see the file header for the source it follows.
+A step of the resnxt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{equivalent}, \code{max_deviation}, \code{aggregated}, \code{grouped}, \code{note}.

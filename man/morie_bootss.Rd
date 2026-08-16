@@ -42,7 +42,7 @@ A list with elements \code{estimate}, \code{variance},
 \description{
 Within each stratum draw m_h of the n_h clusters with replacement
 and rescale the survey weights by Eq. 3.4:
-w* = \link{(1 - r) + r (n_h/m_h) m*} w with r = sqrt(m_h/(n_h - 1));
+w* = [(1 - r) + r (n_h/m_h) m*] w with r = sqrt(m_h/(n_h - 1));
 the bootstrap variance is (1/B) sum_b (theta*_b - theta_hat)^2
 (Eq. 3.5).  m_h = n_h - 1 (default) keeps all weights
 non-negative; for n_h = 2 a selected cluster doubles and the other

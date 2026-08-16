@@ -11,7 +11,7 @@ clrgrf_cluster_index(clusters)
 \item{clusters}{See Usage.}
 }
 \description{
-Part of the clrgrf_native implementation; see the file header for the source it follows.
+A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{groups}, \code{labels}.

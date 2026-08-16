@@ -10,10 +10,10 @@ sample_ibp(n, alpha, seed = 0L)
 \arguments{
 \item{n}{See Usage.}
 \item{alpha}{See Usage.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
 }
 \description{
-Part of the ibpfa_native implementation; see the file header for the source it follows.
+A step of the ibpfa_native implementation. Called by \code{morie_ibpfa}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n}, \code{features_per_object}, \code{note}.

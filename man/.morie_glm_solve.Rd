@@ -8,11 +8,11 @@
 .morie_glm_solve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{A}{A matrix; passed to \code{solve}.}
+\item{b}{A matrix; passed to \code{solve}.}
 }
 \description{
-Part of the glm implementation; see the file header for the source it follows.
+A step of the glm implementation. Called by \code{morie_glm}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -7,15 +7,15 @@
 Tmlecde(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1, gbound = 0.025, level = 0.95)
 }
 \arguments{
-\item{Y}{Outcome in \link{0, 1}.}
+\item{Y}{Outcome in [0, 1].}
 
 \item{A}{Binary treatment.}
 
 \item{M}{Mediator level of each observation.}
 
-\item{QAM}{Initial E\link{Y | A, M, W} at the observed (A, M).}
+\item{QAM}{Initial E[Y | A, M, W] at the observed (A, M).}
 
-\item{Q1m, Q0m}{Initial E\link{Y | A = 1/0, M = m, W}.}
+\item{Q1m, Q0m}{Initial E[Y | A = 1/0, M = m, W].}
 
 \item{g1W}{Initial P(A = 1 | W).}
 
@@ -39,7 +39,7 @@ effect; \code{min_denominator} exists for that reason.
 }
 \details{
 Formula: H_a = 1\{A = a, M = m\} / (g_a(W) h_m(A, W));
-psi = E\link{Q*(1, m, W)} - E\link{Q*(0, m, W)}
+psi = E[Q*(1, m, W)] - E[Q*(0, m, W)]
 }
 \references{
 van der Laan & Petersen (2008), International Journal of

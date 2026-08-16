@@ -8,10 +8,10 @@
 .rgisint_runs(f)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the rgisint implementation; see the file header for the source it follows.
+A step of the rgisint implementation. Called by \code{rgemgfd}, \code{rgisint}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

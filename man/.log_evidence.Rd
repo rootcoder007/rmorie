@@ -8,17 +8,17 @@
 .log_evidence(D, Tn, Vn, z, mm, nn, a, b)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{Tn}{See Usage.}
-\item{Vn}{See Usage.}
-\item{z}{See Usage.}
-\item{mm}{See Usage.}
-\item{nn}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{D}{A vector; its length is taken.}
+\item{Tn}{Passed to \code{.counts}.}
+\item{Vn}{Passed to \code{.counts}.}
+\item{z}{Passed to \code{.counts}.}
+\item{mm}{A vector; indexed elementwise.}
+\item{nn}{A vector; indexed elementwise.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bigtm_native implementation; see the file header for the source it follows.
+A step of the bigtm_native implementation. Called by \code{log_evidence}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tot}, as built in the body.

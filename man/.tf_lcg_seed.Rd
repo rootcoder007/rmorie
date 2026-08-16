@@ -8,10 +8,10 @@
 .tf_lcg_seed(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Passed to \code{.tf_seed_limbs}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{EmdEns}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.tf_lcg_step}.

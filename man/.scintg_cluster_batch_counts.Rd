@@ -8,12 +8,12 @@
 .scintg_cluster_batch_counts(R, batches, names = NULL)
 }
 \arguments{
-\item{R}{See Usage.}
-\item{batches}{See Usage.}
-\item{names}{Defaults to \code{NULL}.}
+\item{R}{A matrix; indexed by row and column.}
+\item{batches}{A vector; its length is taken.}
+\item{names}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{.scintg_harmony_objective}, \code{.scintg_maximum_diversity_clustering}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{O}, \code{E}, \code{batches}.

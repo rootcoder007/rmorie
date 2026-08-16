@@ -8,10 +8,10 @@
 .schab_lattice_check(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram}, \code{.schab_periodogram_from_cov}, \code{.schab_sample_cov2d}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{z}, as built in the body.

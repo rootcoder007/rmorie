@@ -11,11 +11,11 @@
 \item{score_positive}{See Usage.}
 \item{score_negative}{See Usage.}
 \item{estimated_rank}{See Usage.}
-\item{alphas}{See Usage.}
+\item{alphas}{Passed to \code{.warpL_rank_weight}.}
 \item{margin}{Defaults to \code{1}.}
 }
 \description{
-Part of the warpL_native implementation; see the file header for the source it follows.
+A step of the warpL_native implementation. Called by \code{morie_warpL_warp_loss}, \code{morie_warpL_warp_step}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{hinge}, \code{rank_weight}, \code{estimated_rank}.

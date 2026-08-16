@@ -9,8 +9,8 @@
 #' line. On R the p = 1 transport cost is integral |F - G|, so sorting
 #' solves the problem and no linear program is needed.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; passed to \code{sort}.
+#' @param b Numeric; passed to \code{sort}.
 #' @return A numeric value.
 #' @export
 .w1_distance <- function(a, b) {
@@ -106,12 +106,13 @@ morie_wasserstein_test <- function(x, y, B = 999L, cdf = NULL) {
 # Internal: Gram matrix for the three supported kernels.
 #' Internal: Gram matrix for the three supported kernels
 #'
-#' Part of the twosample implementation; see the file header for the
+#' A step of the twosample implementation. Called by \code{morie_mmd_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z A matrix; passed to \code{tcrossprod}.
 #' @param kernel See Usage.
-#' @param gamma See Usage.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mmd_gram <- function(Z, kernel, gamma) {

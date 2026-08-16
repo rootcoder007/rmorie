@@ -8,11 +8,11 @@
 .schab_st_lag_matrices(coords, times)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{times}{See Usage.}
+\item{coords}{A matrix; passed to \code{nrow}.}
+\item{times}{A vector; its length is taken.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{.schab_st_covariance_matrix}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{d}, \code{k}.

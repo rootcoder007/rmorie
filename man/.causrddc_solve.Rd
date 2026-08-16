@@ -8,11 +8,11 @@
 .causrddc_solve(M, b)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{b}{See Usage.}
+\item{M}{A matrix; passed to \code{solve}.}
+\item{b}{A matrix; passed to \code{solve}.}
 }
 \description{
-Part of the causrddc_native implementation; see the file header for the source it follows.
+A step of the causrddc_native implementation. Called by \code{.causrddc_global_derivative}, \code{.causrddc_hc_sigma2}, \code{.causrddc_local_poly_weights} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

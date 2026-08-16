@@ -11,7 +11,7 @@
 \item{C}{See Usage.}
 }
 \description{
-Part of the robpca_native implementation; see the file header for the source it follows.
+A step of the robpca_native implementation. Called by \code{morie_robpca}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{values}, \code{vectors}.

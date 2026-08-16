@@ -127,7 +127,7 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 #'
 #' matrix or data frame, or a flat vector of even length in x, y order.
 #'
-#' @param coords See Usage.
+#' @param coords A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .s03pairs <- function(coords) {
@@ -152,11 +152,12 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 # Matern eq. (3.4.7) p. 38 at n = 2: area of the union of two discs.
 #' Matern eq. (3.4.7) p. 38 at n = 2: area of the union of two discs
 #'
-#' Part of the hcoreg implementation; see the file header for the source
+#' A step of the hcoreg implementation. Called by \code{.s03hcK1}, \code{.s03hcK2}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param r See Usage.
-#' @param v See Usage.
+#' @param r Numeric; combined arithmetically in the body.
+#' @param v Passed to \code{.s03lens}.
 #' @return A numeric value.
 #' @export
 .s03hcU <- function(r, v) 2 * pi * r * r - .s03lens(r, v)
@@ -164,12 +165,13 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 # Equation (3.6.4) p. 47.
 #' Equation (3.6.4) p. 47
 #'
-#' Part of the hcoreg implementation; see the file header for the source
+#' A step of the hcoreg implementation. Called by \code{Hcoreg}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param r See Usage.
-#' @param v See Usage.
-#' @param lam See Usage.
+#' @param r Passed to \code{.s03hcU}.
+#' @param v Passed to \code{.s03hcU}.
+#' @param lam Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s03hcK1 <- function(r, v, lam) {
@@ -180,12 +182,13 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 # Equation (3.6.9) p. 48.
 #' Equation (3.6.9) p. 48
 #'
-#' Part of the hcoreg implementation; see the file header for the source
+#' A step of the hcoreg implementation. Called by \code{Hcoreg}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param r See Usage.
-#' @param v See Usage.
-#' @param lam See Usage.
+#' @param r Numeric; combined arithmetically in the body.
+#' @param v Passed to \code{.s03hcU}.
+#' @param lam Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s03hcK2 <- function(r, v, lam) {

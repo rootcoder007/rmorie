@@ -10,14 +10,15 @@
 
 #' .miord2_norm_draw
 #'
-#' Part of the miord2_native implementation; see the file header for the
+#' A step of the miord2_native implementation. Called by \code{morie_miord2}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param X_obs See Usage.
-#' @param y_obs See Usage.
-#' @param X_mis See Usage.
-#' @param kappa See Usage.
+#' @param e Passed to \code{.ghc_gamma1}.
+#' @param X_obs A matrix; passed to \code{ncol}.
+#' @param y_obs A matrix; passed to \code{\%*\%}.
+#' @param X_mis A matrix; indexed by row and column.
+#' @param kappa Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .miord2_norm_draw <- function(e, X_obs, y_obs, X_mis, kappa) {

@@ -8,11 +8,11 @@
 .s03json_pretty(txt, indent = 2L)
 }
 \arguments{
-\item{txt}{See Usage.}
-\item{indent}{Defaults to \code{2L}.}
+\item{txt}{Passed to \code{morie_jsonlt_prettify}.}
+\item{indent}{Passed to \code{morie_jsonlt_prettify}. Defaults to \code{2L}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_jsonlt_prettify}.

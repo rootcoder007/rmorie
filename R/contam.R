@@ -3,10 +3,11 @@
 # Solve 2 phi(k)/k - 2 Phi(-k) = eps/(1-eps) for k, by bisection.
 #' Solve 2 phi(k)/k - 2 Phi(-k) = eps/(1-eps) for k, by bisection
 #'
-#' Part of the contam implementation; see the file header for the source
+#' A step of the contam implementation. Called by \code{Contam}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param eps See Usage.
+#' @param eps Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .huber_k <- function(eps) {

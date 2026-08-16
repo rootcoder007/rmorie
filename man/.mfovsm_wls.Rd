@@ -8,12 +8,12 @@
 .mfovsm_wls(X, y, w)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{y}{A vector; its length is taken.}
+\item{w}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the mfovsm_native implementation; see the file header for the source it follows.
+A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}, \code{se}, \code{vcov}.

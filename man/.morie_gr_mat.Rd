@@ -8,11 +8,11 @@
 .morie_gr_mat(x, name)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_lsa}, \code{.morie_gr_w4b_grid_search}, \code{.morie_w4c_centroid_pair} and 82 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

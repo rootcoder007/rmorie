@@ -8,12 +8,12 @@
 min_loss_over_masks(predictions, target, loss_fn)
 }
 \arguments{
-\item{predictions}{See Usage.}
+\item{predictions}{A vector; its length is taken.}
 \item{target}{See Usage.}
 \item{loss_fn}{See Usage.}
 }
 \description{
-Part of the sammkr_native implementation; see the file header for the source it follows.
+A step of the sammkr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{index}, \code{losses}, \code{mean_loss}, \code{gap}, \code{note}.

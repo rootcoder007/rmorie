@@ -8,10 +8,10 @@
 .rmorie_sha256_hex_impl(data)
 }
 \arguments{
-\item{data}{See Usage.}
+\item{data}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{.morie_sha256_hex}, \code{create_reproducibility_manifest}, \code{morie_crypto_lamport_keygen} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

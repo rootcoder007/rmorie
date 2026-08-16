@@ -13,10 +13,10 @@
 #' unit-testable. `Q_bar` is the unconditional correlation, `n` the
 #' sample size, `Z` the standardised residuals.
 #'
-#' @param p See Usage.
-#' @param Q_bar See Usage.
-#' @param n See Usage.
-#' @param Z See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param Q_bar Numeric; combined arithmetically in the body.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param Z A matrix; indexed by row and column.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .dccmd_negll <- function(p, Q_bar, n, Z) {

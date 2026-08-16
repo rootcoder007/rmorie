@@ -8,11 +8,11 @@
 .caus_first_stage_f(D, Z)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{Z}{See Usage.}
+\item{D}{A vector; its length is taken.}
+\item{Z}{Passed to \code{.caus_intercept}.}
 }
 \description{
-Part of the caus_native implementation; see the file header for the source it follows.
+A step of the caus_native implementation. Called by \code{morie_caus_iv_2sls}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

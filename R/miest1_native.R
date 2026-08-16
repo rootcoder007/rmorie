@@ -6,11 +6,12 @@
 
 #' .mi_maxnorm
 #'
-#' Part of the miest1_native implementation; see the file header for the
+#' A step of the miest1_native implementation. Called by \code{morie_miest1}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .mi_maxnorm <- function(a, b) max(abs(a - b))

@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{nullq}{See Usage.}
-\item{j}{See Usage.}
+\item{j}{Numeric; combined arithmetically in the body.}
 \item{level}{See Usage.}
 }
 \description{
-of the parent interval that the guess assigns to the left child, which is the paper\\\'s equation (6). A guess that is flat over the parent gives exactly a half, the symmetric case.
+of the parent interval that the guess assigns to the left child, which is the paper\\'s equation (6). A guess that is flat over the parent gives exactly a half, the symmetric case.
 }
 \value{
 A numeric value.

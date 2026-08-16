@@ -29,7 +29,8 @@
 
 #' morie_tlhal
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -43,7 +44,7 @@
 #' @param max_order Defaults to \code{2L}.
 #' @param knots Defaults to \code{NULL}.
 #' @param intercept Defaults to \code{TRUE}.
-#' @param mode Defaults to \code{c("fit", "predict", "cv", "norm")}.
+#' @param mode One of \code{"cv"}, \code{"norm"}, \code{"predict"}.
 #' @return The value of \code{hal_fit}.
 #' @export
 morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
@@ -68,11 +69,12 @@ morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
 
 #' indicator_basis
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. Called by \code{hal_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param knots Defaults to \code{NULL}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param knots Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param max_order Defaults to \code{2L}.
 #' @return A list with \code{design}, \code{columns}, \code{n_basis}, \code{max_order}.
 #' @export
@@ -121,7 +123,8 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
 
 #' variation_norm
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. Called by \code{hal_fit}, \code{morie_tlhal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
@@ -134,7 +137,8 @@ variation_norm <- function(beta) {
 
 #' hal_fit
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. Called by \code{cv_select_lambda}, \code{morie_tlhal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -144,7 +148,7 @@ variation_norm <- function(beta) {
 #' @param step Defaults to \code{0.05}.
 #' @param max_order Defaults to \code{2L}.
 #' @param knots Defaults to \code{NULL}.
-#' @param intercept Defaults to \code{TRUE}.
+#' @param intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns}, \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history}, \code{max_order}, \code{method}, \code{note}.
 #' @export
 hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
@@ -192,11 +196,12 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 
 #' .tlhal_project_l1
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. Called by \code{hal_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param lam See Usage.
+#' @param v Numeric; passed to \code{abs}.
+#' @param lam Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tlhal_project_l1 <- function(v, lam) {
@@ -215,11 +220,12 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 
 #' hal_predict
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. Called by \code{cv_select_lambda}, \code{morie_tlhal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model See Usage.
-#' @param X See Usage.
+#' @param model A list; the body reads \code{$beta}, \code{$columns}, \code{$intercept} from it.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 hal_predict <- function(model, X) {
@@ -244,10 +250,11 @@ hal_predict <- function(model, X) {
 
 #' cv_select_lambda
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. Called by \code{morie_tlhal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param lambdas See Usage.
 #' @param V Defaults to \code{5L}.
@@ -292,7 +299,8 @@ cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
 
 #' .tlhal_cheatsheet
 #'
-#' Part of the tlhal_native implementation; see the file header for the
+#' A step of the tlhal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -14,7 +14,7 @@ SincKern(fc, fs = 1000, M = 64, window = NULL)
 \item{window}{Defaults to \code{NULL}.}
 }
 \description{
-taps and delayed by M/2 to make it causal.  Truncation is multiplying by a rectangle, whose sidelobes decay slowly, so the realized stopband ripples: Gibbs\\' phenomenon, and it does not improve with M -- only the ripples narrow, they do not shrink.  A window fixes it.
+taps and delayed by M/2 to make it causal.  Truncation is multiplying by a rectangle, whose sidelobes decay slowly, so the realized stopband ripples: Gibbs\' phenomenon, and it does not improve with M -- only the ripples narrow, they do not shrink.  A window fixes it.
 }
 \value{
 A list with \code{h}, \code{n_taps}, \code{fc}, \code{fs}, \code{M}, \code{window}, \code{window_values}, \code{delay_samples}, \code{dc_gain}, \code{truncation_causes_gibbs_ripple}, \code{ripple_height_does_not_shrink_with_M}, \code{method}.

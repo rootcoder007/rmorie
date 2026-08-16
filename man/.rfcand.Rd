@@ -8,13 +8,13 @@
 .rfcand(b, s, p, mtry)
 }
 \arguments{
-\item{b}{See Usage.}
-\item{s}{See Usage.}
-\item{p}{See Usage.}
-\item{mtry}{See Usage.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{s}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{mtry}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the mvsml_rf_shared implementation; see the file header for the source it follows.
+A step of the mvsml_rf_shared implementation. Called by \code{.rfgrow}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

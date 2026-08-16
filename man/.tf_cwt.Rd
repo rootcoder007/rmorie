@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{scales}{See Usage.}
-\item{wavelet}{Defaults to \code{"morlet"}.}
-\item{w0}{Defaults to \code{5}.}
+\item{scales}{A vector; its length is taken and its elements indexed.}
+\item{wavelet}{Passed to \code{.tf_support}. Defaults to \code{"morlet"}.}
+\item{w0}{Passed to \code{.tf_mother}. Defaults to \code{5}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{CprWt}, \code{Cwt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

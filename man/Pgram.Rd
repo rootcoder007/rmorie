@@ -8,7 +8,7 @@
 Pgram(y)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{.morie_spx_chkv}.}
 }
 \description{
 covariance form of eq (4.58).  THE ZERO FREQUENCY IS EXCLUDED: the derivation of (4.58) turns on sum_u cos(w_j u) = 0, true at every Fourier frequency EXCEPT w = 0.

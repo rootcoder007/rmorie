@@ -5,11 +5,12 @@
 
 #' .chrf_char_ngrams
 #'
-#' Part of the chrF_native implementation; see the file header for the
+#' A step of the chrF_native implementation. Called by \code{chrf_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param n See Usage.
+#' @param s A vector; its length is taken.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .chrf_char_ngrams <- function(s, n) {
@@ -22,11 +23,12 @@
 
 #' .chrf_word_ngrams
 #'
-#' Part of the chrF_native implementation; see the file header for the
+#' A step of the chrF_native implementation. Called by \code{chrf_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ws See Usage.
-#' @param n See Usage.
+#' @param ws A vector; its length is taken and its elements indexed.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .chrf_word_ngrams <- function(ws, n) {
@@ -39,7 +41,8 @@
 
 #' .chrf_counts
 #'
-#' Part of the chrF_native implementation; see the file header for the
+#' A step of the chrF_native implementation. Called by \code{.chrf_pr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seq See Usage.
@@ -56,11 +59,12 @@
 
 #' .chrf_pr
 #'
-#' Part of the chrF_native implementation; see the file header for the
+#' A step of the chrF_native implementation. Called by \code{chrf_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hyp_grams See Usage.
-#' @param ref_grams See Usage.
+#' @param hyp_grams A vector; its length is taken.
+#' @param ref_grams A vector; its length is taken.
 #' @return A vector, from \code{c}.
 #' @export
 .chrf_pr <- function(hyp_grams, ref_grams) {
@@ -78,14 +82,15 @@
 
 #' chrf_score
 #'
-#' Part of the chrF_native implementation; see the file header for the
+#' A step of the chrF_native implementation. Called by \code{morie_chrF}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param hypothesis See Usage.
-#' @param reference See Usage.
+#' @param reference A vector; its length is taken.
 #' @param n_char Defaults to \code{6L}.
-#' @param beta Defaults to \code{2}.
-#' @param remove_whitespace Defaults to \code{TRUE}.
+#' @param beta Numeric; combined arithmetically in the body. Defaults to \code{2}.
+#' @param remove_whitespace A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param word_order Defaults to \code{0L}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
@@ -157,7 +162,8 @@ chrF <- chrf_score
 
 #' morie_chrF
 #'
-#' Part of the chrF_native implementation; see the file header for the
+#' A step of the chrF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param hypothesis See Usage.

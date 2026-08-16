@@ -24,7 +24,7 @@
 #' exist to avoid.
 #'
 #' @param x See Usage.
-#' @param r See Usage.
+#' @param r A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .evt_pwm <- function(x, r) {
@@ -43,10 +43,11 @@
 
 #' .evt_lmom
 #'
-#' Part of the evt_native implementation; see the file header for the
+#' A step of the evt_native implementation. Called by \code{morie_evt_gev_lmoments}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.evt_pwm}.
 #' @return A list with \code{l1}, \code{l2}, \code{l3}, \code{t3}.
 #' @export
 .evt_lmom <- function(x) {
@@ -65,11 +66,12 @@
 
 #' .evt_top
 #'
-#' Part of the evt_native implementation; see the file header for the
+#' A step of the evt_native implementation. Called by \code{morie_evt_dedh}, \code{morie_evt_hill}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param k See Usage.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
 .evt_top <- function(x, k) {

@@ -10,11 +10,11 @@ morie_ncfRS_mlp_layers(p_u, q_i, Ws, bs)
 \arguments{
 \item{p_u}{See Usage.}
 \item{q_i}{See Usage.}
-\item{Ws}{See Usage.}
-\item{bs}{See Usage.}
+\item{Ws}{A vector; its length is taken and its elements indexed.}
+\item{bs}{A vector; indexed elementwise.}
 }
 \description{
-Part of the ncfRS_native implementation; see the file header for the source it follows.
+A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_neumf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{z}, as built in the body.

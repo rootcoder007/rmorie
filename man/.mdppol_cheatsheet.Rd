@@ -8,7 +8,7 @@
 .mdppol_cheatsheet()
 }
 \description{
-Part of the mdppol_native implementation; see the file header for the source it follows.
+A step of the mdppol_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A character value.

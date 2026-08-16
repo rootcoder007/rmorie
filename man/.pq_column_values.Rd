@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{con}{See Usage.}
-\item{cm}{See Usage.}
-\item{num_rows}{See Usage.}
-\item{maxdef}{See Usage.}
-\item{typelen}{See Usage.}
+\item{cm}{Passed to \code{.pq_f}.}
+\item{num_rows}{A count; the body uses it as \code{seq_len(...)}.}
+\item{maxdef}{Passed to \code{.pq_bit_width}.}
+\item{typelen}{Passed to \code{.pq_decode_plain}.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{morie_read_parquet}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

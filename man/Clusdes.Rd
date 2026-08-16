@@ -28,7 +28,7 @@ than on the rounding.
 }
 \details{
 Formula: k_opt = sqrt( c1 (1 - rho) / (c2 rho) );
-m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) \link{1 + (k - 1) rho}
+m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) [1 + (k - 1) rho]
 }
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter

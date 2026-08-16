@@ -8,16 +8,16 @@
 .schab_point_source_corr(coords, source, theta1, theta2 = 0, theta3 = 0, anisotropy = NULL, source_anisotropy = NULL)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
 \item{source}{See Usage.}
-\item{theta1}{See Usage.}
-\item{theta2}{Defaults to \code{0}.}
-\item{theta3}{Defaults to \code{0}.}
-\item{anisotropy}{Defaults to \code{NULL}.}
-\item{source_anisotropy}{Defaults to \code{NULL}.}
+\item{theta1}{Numeric; combined arithmetically in the body.}
+\item{theta2}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{theta3}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{anisotropy}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{source_anisotropy}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{spnst}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

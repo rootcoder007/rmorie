@@ -8,13 +8,13 @@
 .reinfc_advance_baseline(state, baseline, gamma, r)
 }
 \arguments{
-\item{state}{See Usage.}
-\item{baseline}{See Usage.}
-\item{gamma}{See Usage.}
-\item{r}{See Usage.}
+\item{state}{A list; the body reads \code{$v1}, \code{$v2} from it.}
+\item{baseline}{One of \code{"comparison"}, \code{"mean"}.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{r}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the reinfc_native implementation; see the file header for the source it follows.
+A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

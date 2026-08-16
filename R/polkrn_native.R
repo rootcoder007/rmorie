@@ -52,7 +52,8 @@
 
 #' .polkrn_vec
 #'
-#' Part of the polkrn_native implementation; see the file header for the
+#' A step of the polkrn_native implementation. Called by \code{.polkrn_ip_weights_history}, \code{morie_polkrn}, \code{rbf_basis}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -64,7 +65,8 @@
 
 #' Type 7 quantile: linear interpolation, the R default
 #'
-#' Part of the polkrn_native implementation; see the file header for the
+#' A step of the polkrn_native implementation. Called by \code{rbf_basis}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -80,9 +82,9 @@
 #'
 #' Returns a list with coef, se, vcov.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}.
 #' @export
 .polkrn_wls <- function(X, y, w) {
@@ -109,8 +111,8 @@
 #'
 #' X: design matrix (with intercept), y: 0/1 vector.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{mu}.
 #' @export
 .polkrn_logistic <- function(X, y) {
@@ -143,13 +145,14 @@
 
 #' Compute inverse-probability weights for a treatment history
 #'
-#' Part of the polkrn_native implementation; see the file header for the
+#' A step of the polkrn_native implementation. Called by \code{morie_polkrn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A_hist See Usage.
-#' @param L_hist See Usage.
+#' @param A_hist A vector; its length is taken and its elements indexed.
+#' @param L_hist A vector; indexed elementwise.
 #' @param kind See Usage.
-#' @param stabilize See Usage.
+#' @param stabilize A flag; the body branches on it.
 #' @param trim See Usage.
 #' @return A list with \code{w}, \code{per_time}.
 #' @export
@@ -206,11 +209,12 @@
 
 #' exposure_summary
 #'
-#' Part of the polkrn_native implementation; see the file header for the
+#' A step of the polkrn_native implementation. Called by \code{morie_polkrn}, \code{Tmlspl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A_history See Usage.
-#' @param how Defaults to \code{"cumulative"}.
+#' @param how One of \code{"cumulative"}, \code{"duration"}, \code{"final"}. Defaults to \code{"cumulative"}.
 #' @return The value of \code{rowSums}.
 #' @export
 exposure_summary <- function(A_history, how="cumulative") {
@@ -239,10 +243,11 @@ exposure_summary <- function(A_history, how="cumulative") {
 
 #' rbf_basis
 #'
-#' Part of the polkrn_native implementation; see the file header for the
+#' A step of the polkrn_native implementation. Called by \code{morie_polkrn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.polkrn_vec}.
 #' @param n_centres Defaults to \code{5}.
 #' @param width Defaults to \code{NULL}.
 #' @return A list with \code{X}, \code{centres}, \code{width}.
@@ -280,21 +285,22 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
 
 #' morie_polkrn
 #'
-#' Part of the polkrn_native implementation; see the file header for the
+#' A step of the polkrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{.polkrn_vec}.
 #' @param A_history See Usage.
 #' @param H_history See Usage.
 #' @param degree Defaults to \code{2}.
-#' @param basis Defaults to \code{"both"}.
+#' @param basis One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.
 #' @param summary Defaults to \code{"cumulative"}.
 #' @param n_centres Defaults to \code{5}.
 #' @param width Defaults to \code{NULL}.
-#' @param kind Defaults to \code{"binary"}.
-#' @param stabilize Defaults to \code{TRUE}.
-#' @param trim Defaults to \code{NULL}.
-#' @param grid Defaults to \code{NULL}.
+#' @param kind Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{"binary"}.
+#' @param stabilize Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{TRUE}.
+#' @param trim Passed to \code{.polkrn_ip_weights_history}.
+#' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_polkrn <- function(y, A_history, H_history, degree=2,
@@ -415,7 +421,8 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
 
 #' .polkrn_cheatsheet
 #'
-#' Part of the polkrn_native implementation; see the file header for the
+#' A step of the polkrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

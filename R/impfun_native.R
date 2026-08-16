@@ -61,10 +61,11 @@
 
 #' .impfun_as_double_matrix
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. Called by \code{impute_dosage}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .impfun_as_double_matrix <- function(x) {
@@ -81,7 +82,8 @@
 
 #' .impfun_as_double_vec
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. Called by \code{concordance}, \code{info_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -94,10 +96,11 @@
 
 #' .impfun_as_int_list
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. Called by \code{copying_model}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; indexed by row and column.
 #' @return The value of \code{list}.
 #' @export
 .impfun_as_int_list <- function(x) {
@@ -110,10 +113,11 @@
 
 #' merge_panels
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param panels See Usage.
+#' @param panels A vector; its length is taken and its elements indexed.
 #' @param study_snps See Usage.
 #' @return A list with \code{scaffold}, \code{targets}, \code{union}, \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain}, \code{note}.
 #' @export
@@ -157,11 +161,12 @@ merge_panels <- function(panels, study_snps) {
 
 #' copying_model
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param study_hap See Usage.
-#' @param reference_haps See Usage.
+#' @param reference_haps Passed to \code{.impfun_as_int_list}.
 #' @param rho Defaults to \code{0.001}.
 #' @param theta Defaults to \code{0.01}.
 #' @return A list with \code{posterior}, \code{n_templates}, \code{n_sites}, \code{log_likelihood}.
@@ -220,11 +225,12 @@ copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
 
 #' impute_dosage
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param posterior See Usage.
-#' @param reference_haps See Usage.
+#' @param posterior Passed to \code{.impfun_as_double_matrix}.
+#' @param reference_haps Passed to \code{.impfun_as_double_matrix}.
 #' @param site See Usage.
 #' @return A list with \code{dosage}, \code{allele_freq}, \code{certainty}, \code{note}.
 #' @export
@@ -249,10 +255,11 @@ impute_dosage <- function(posterior, reference_haps, site) {
 
 #' info_score
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dosages See Usage.
+#' @param dosages Passed to \code{.impfun_as_double_vec}.
 #' @return A list with \code{info}, \code{theta}, \code{note}.
 #' @export
 info_score <- function(dosages) {
@@ -282,11 +289,12 @@ info_score <- function(dosages) {
 
 #' concordance
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param imputed See Usage.
-#' @param truth See Usage.
+#' @param imputed Passed to \code{.impfun_as_double_vec}.
+#' @param truth Passed to \code{.impfun_as_double_vec}.
 #' @return A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error}, \code{n}, \code{method}.
 #' @export
 concordance <- function(imputed, truth) {
@@ -307,7 +315,8 @@ concordance <- function(imputed, truth) {
 
 #' .impfun_cheatsheet
 #'
-#' Part of the impfun_native implementation; see the file header for the
+#' A step of the impfun_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

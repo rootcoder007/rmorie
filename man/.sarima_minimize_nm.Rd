@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{fn}{See Usage.}
-\item{x0}{See Usage.}
-\item{maxit}{Defaults to \code{200L}.}
+\item{x0}{A vector; its length is taken and its elements indexed.}
+\item{maxit}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 }
 \description{
-restart-until-stuck shape as the Python arm\\\'s call to _sci_core.minimize(method="Nelder-Mead").
+restart-until-stuck shape as the Python arm\\'s call to _sci_core.minimize(method="Nelder-Mead").
 }
 \value{
 A list with \code{x}, \code{fun}, \code{success}.

@@ -12,15 +12,15 @@
 \item{n_users}{See Usage.}
 \item{n_items}{See Usage.}
 \item{factors}{Defaults to \code{4}.}
-\item{epochs}{Defaults to \code{30}.}
-\item{lr}{Defaults to \code{0.007}.}
-\item{reg}{Defaults to \code{0.015}.}
-\item{exponent}{Defaults to \code{-0.5}.}
-\item{seed}{Defaults to \code{0}.}
-\item{implicit}{Defaults to \code{TRUE}.}
+\item{epochs}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.}
+\item{lr}{Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.007}.}
+\item{reg}{Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.015}.}
+\item{exponent}{Passed to \code{.svdpp_sgd_step}. Defaults to \code{-0.5}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{implicit}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the svdpp_native implementation; see the file header for the source it follows.
+A step of the svdpp_native implementation. Called by \code{morie_svdpp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit}, \code{method}, \code{note}.
@@ -28,7 +28,7 @@ A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{
 \references{
 ----------
 Koren, Y. (2008) "Factorization Meets the Neighborhood: a
-Multifaceted Collaborative Filtering Model", KDD \\'08, 426-434,
+Multifaceted Collaborative Filtering Model", KDD \'08, 426-434,
 doi:10.1145/1401890.1401944. Sec. 1 and 4, eq. (15).
 
 Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization

@@ -9,11 +9,11 @@ phi(x, fields, W)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{fields}{See Usage.}
-\item{W}{See Usage.}
+\item{fields}{A vector; indexed elementwise.}
+\item{W}{A vector; indexed elementwise.}
 }
 \description{
-Part of the ffmFM_native implementation; see the file header for the source it follows.
+A step of the ffmFM_native implementation. Called by \code{explor}, \code{fit_ffm}, \code{gated_update} and 15 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tot}, as built in the body.

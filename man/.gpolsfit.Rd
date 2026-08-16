@@ -8,9 +8,9 @@
 .gpolsfit(X, y, add_intercept = FALSE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{add_intercept}{Defaults to \code{FALSE}.}
+\item{X}{Passed to \code{.gpmat}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
+\item{add_intercept}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
 ----------------------------------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

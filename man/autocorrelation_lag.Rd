@@ -8,11 +8,11 @@
 autocorrelation_lag(y, threshold = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{threshold}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the lyapun_native implementation; see the file header for the source it follows.
+A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{morie_lyapun}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

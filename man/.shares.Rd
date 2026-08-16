@@ -8,11 +8,11 @@
 .shares(protected, i)
 }
 \arguments{
-\item{protected}{See Usage.}
-\item{i}{See Usage.}
+\item{protected}{A vector; indexed elementwise.}
+\item{i}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the fairRC_native implementation; see the file header for the source it follows.
+A step of the fairRC_native implementation. Called by \code{.raw}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

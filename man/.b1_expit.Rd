@@ -8,10 +8,10 @@
 .b1_expit(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{exp}.}
 }
 \description{
-Part of the b1_tmle implementation; see the file header for the source it follows.
+A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat}, \code{Tmlecde}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

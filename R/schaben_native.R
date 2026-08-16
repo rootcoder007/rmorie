@@ -12,10 +12,11 @@
 
 #' .morie_sb_pairs
 #'
-#' Part of the schaben_native implementation; see the file header for
+#' A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins}, \code{morie_matheron_estimator}, \code{morie_variogram_composite_likelihood}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
+#' @param coords A matrix; passed to \code{as.matrix}.
 #' @param z See Usage.
 #' @return A list with \code{h}, \code{d}.
 #' @export
@@ -38,13 +39,14 @@
 
 #' .morie_sb_groups
 #'
-#' Part of the schaben_native implementation; see the file header for
+#' A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins}, \code{morie_matheron_estimator}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param bins See Usage.
+#' @param h A vector; indexed elementwise.
+#' @param bins Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param cutoff See Usage.
-#' @param exact See Usage.
+#' @param exact A flag; the body branches on it.
 #' @return A list with \code{centres}, \code{idx}.
 #' @export
 .morie_sb_groups <- function(h, bins, cutoff, exact) {
@@ -151,14 +153,15 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
 
 #' .morie_sb_vgm
 #'
-#' Part of the schaben_native implementation; see the file header for
+#' A step of the schaben_native implementation. Called by \code{morie_kriging_pred_error}, \code{morie_variogram_composite_likelihood}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
+#' @param h Numeric; combined arithmetically in the body.
 #' @param model See Usage.
-#' @param nugget See Usage.
-#' @param psill See Usage.
-#' @param rng See Usage.
+#' @param nugget Numeric; combined arithmetically in the body.
+#' @param psill Numeric; combined arithmetically in the body.
+#' @param rng Numeric; passed to \code{max}.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_sb_vgm <- function(h, model, nugget, psill, rng) {

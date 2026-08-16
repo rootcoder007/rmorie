@@ -8,11 +8,11 @@
 morie_weighted_moments(m, g)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{A matrix; passed to \code{as.matrix}.}
 \item{g}{See Usage.}
 }
 \description{
-Part of the bndsmw_native implementation; see the file header for the source it follows.
+A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic}, \code{morie_gms_critical_value}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{sd}, \code{n}.

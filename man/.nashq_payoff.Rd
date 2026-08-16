@@ -8,12 +8,12 @@
 .nashq_payoff(M, p, q)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{M}{A matrix; indexed by row and column.}
+\item{p}{A vector; its length is taken and its elements indexed.}
+\item{q}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{.nashq_is_equilibrium}, \code{.nashq_is_saddle}, \code{.nashq_select} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tot}, as built in the body.

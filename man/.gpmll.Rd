@@ -8,12 +8,12 @@
 .gpmll(probs, y_true, n_classes = NULL)
 }
 \arguments{
-\item{probs}{See Usage.}
-\item{y_true}{See Usage.}
+\item{probs}{Passed to \code{.gpmat}.}
+\item{y_true}{Passed to \code{.gpflat}.}
 \item{n_classes}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm009}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

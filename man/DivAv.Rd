@@ -8,8 +8,8 @@
 DivAv(means, covs)
 }
 \arguments{
-\item{means}{See Usage.}
-\item{covs}{See Usage.}
+\item{means}{A vector; its length is taken and its elements indexed.}
+\item{covs}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 m classes.  Averaging hides a badly separated PAIR behind well separated ones, so the minimum is returned too -- that is the pair that will actually be confused.

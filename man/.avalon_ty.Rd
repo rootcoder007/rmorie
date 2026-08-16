@@ -8,12 +8,12 @@
 .avalon_ty(el, arom, i)
 }
 \arguments{
-\item{el}{See Usage.}
-\item{arom}{See Usage.}
+\item{el}{A vector; indexed elementwise.}
+\item{arom}{A vector; indexed elementwise.}
 \item{i}{See Usage.}
 }
 \description{
-Part of the avalon_native implementation; see the file header for the source it follows.
+A step of the avalon_native implementation. Called by \code{morie_avalon_features}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

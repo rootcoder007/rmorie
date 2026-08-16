@@ -8,11 +8,11 @@
 narm_local_encoder(H, alpha)
 }
 \arguments{
-\item{H}{See Usage.}
+\item{H}{A matrix; passed to \code{as.matrix}.}
 \item{alpha}{See Usage.}
 }
 \description{
-Part of the narm_native implementation; see the file header for the source it follows.
+A step of the narm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

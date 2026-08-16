@@ -11,7 +11,7 @@ Evpdfn(x, y, t_grid = NULL, u = NULL)
 
 \item{y}{Second variable.}
 
-\item{t_grid}{Points in \link{0, 1}, or NULL for eleven equally spaced.}
+\item{t_grid}{Points in [0, 1], or NULL for eleven equally spaced.}
 
 \item{u}{Copula level in (0, 1), or NULL for exp(-1).}
 }

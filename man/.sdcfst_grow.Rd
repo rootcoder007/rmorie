@@ -8,18 +8,18 @@
 .sdcfst_grow(X, y, struct_rows, leaf_rows, feats_n, min_leaf, max_depth, e, depth = 0L)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{struct_rows}{See Usage.}
-\item{leaf_rows}{See Usage.}
-\item{feats_n}{See Usage.}
-\item{min_leaf}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{e}{See Usage.}
-\item{depth}{Defaults to \code{0L}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{struct_rows}{A vector; its length is taken and its elements indexed.}
+\item{leaf_rows}{A vector; its length is taken and its elements indexed.}
+\item{feats_n}{Numeric; passed to \code{min}.}
+\item{min_leaf}{Numeric; combined arithmetically in the body.}
+\item{max_depth}{Passed to \code{.sdcfst_grow}.}
+\item{e}{Passed to \code{.ghc_unif}.}
+\item{depth}{Numeric; combined arithmetically in the body. Defaults to \code{0L}.}
 }
 \description{
-Part of the sdcfst_native implementation; see the file header for the source it follows.
+A step of the sdcfst_native implementation. Called by \code{morie_sdcfst_forest}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{leaf}, \code{feature}, \code{cut}, \code{left}, \code{right}.

@@ -8,8 +8,8 @@
 QrsSpkiUpd(peaki, spki)
 }
 \arguments{
-\item{peaki}{See Usage.}
-\item{spki}{See Usage.}
+\item{peaki}{Numeric; combined arithmetically in the body.}
+\item{spki}{Numeric; combined arithmetically in the body.}
 }
 \description{
 rule A beat found only by search-back was missed by the primary threshold, so the running estimate is too high and the heavier weight pulls it down.

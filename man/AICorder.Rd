@@ -10,7 +10,7 @@ AICorder(prediction_errors, n_samples, window = "hamming")
 \arguments{
 \item{prediction_errors}{See Usage.}
 \item{n_samples}{See Usage.}
-\item{window}{Defaults to \code{"hamming"}.}
+\item{window}{Character; passed to \code{tolower}. Defaults to \code{"hamming"}.}
 }
 \description{
 Hamming window -- the EFFECTIVE sample count after windowing, which is what distinguishes this from the textbook N log(sigma^2) + 2p.

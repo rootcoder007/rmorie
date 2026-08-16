@@ -35,10 +35,10 @@
 #' sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in
 #' [0, 1] -- the reparameterisation Sec. 5.5.2 calls for.
 #'
-#' @param coords See Usage.
-#' @param nugget_ratio See Usage.
-#' @param rng See Usage.
-#' @param model See Usage.
+#' @param coords A matrix; passed to \code{as.matrix}.
+#' @param nugget_ratio Numeric; combined arithmetically in the body.
+#' @param rng Passed to \code{.sp_correlogram}.
+#' @param model Passed to \code{.sp_correlogram}.
 #' @return A list with \code{sigma}, \code{d}, \code{r}.
 #' @export
 .schab_correlation_matrix <- function(coords, nugget_ratio, rng, model) {
@@ -59,11 +59,11 @@
 #' the same expression the Gauss-Newton Jacobian uses, so both fitters
 #' share one derivation.
 #'
-#' @param d See Usage.
-#' @param r See Usage.
-#' @param nugget_ratio See Usage.
-#' @param rng See Usage.
-#' @param model See Usage.
+#' @param d A matrix; passed to \code{nrow}.
+#' @param r Numeric; combined arithmetically in the body.
+#' @param nugget_ratio Numeric; combined arithmetically in the body.
+#' @param rng Passed to \code{.schab_semivariogram_jacobian}.
+#' @param model Passed to \code{.schab_semivariogram_jacobian}.
 #' @return The value of \code{list}.
 #' @export
 .schab_dsigma <- function(d, r, nugget_ratio, rng, model) {
@@ -82,15 +82,16 @@
 
 #' .schab_profiled_reml
 #'
-#' Part of the schab_reml_shared implementation; see the file header for
+#' A step of the schab_reml_shared implementation. Called by \code{.schab_fit_reml}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
-#' @param z See Usage.
-#' @param X See Usage.
-#' @param nugget_ratio See Usage.
-#' @param rng See Usage.
-#' @param model See Usage.
+#' @param coords Passed to \code{.schab_correlation_matrix}.
+#' @param z A matrix; passed to \code{crossprod}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param nugget_ratio Passed to \code{.schab_correlation_matrix}.
+#' @param rng Passed to \code{.schab_correlation_matrix}.
+#' @param model Passed to \code{.schab_correlation_matrix}.
 #' @return A list with \code{value}, \code{gradient}, \code{sigma2}, \code{beta}.
 #' @export
 .schab_profiled_reml <- function(coords, z, X, nugget_ratio, rng, model) {
@@ -150,19 +151,21 @@
 
 #' .schab_logistic
 #'
-#' Part of the schab_reml_shared implementation; see the file header for
+#' A step of the schab_reml_shared implementation. Called by \code{.schab_fit_reml}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .schab_logistic <- function(u) 1 / (1 + exp(-u))
 #' .schab_logit
 #'
-#' Part of the schab_reml_shared implementation; see the file header for
+#' A step of the schab_reml_shared implementation. Called by \code{.schab_fit_reml}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .schab_logit <- function(p) {
@@ -172,16 +175,17 @@
 
 #' .schab_fit_reml
 #'
-#' Part of the schab_reml_shared implementation; see the file header for
+#' A step of the schab_reml_shared implementation. Called by \code{spreml}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
-#' @param z See Usage.
-#' @param X See Usage.
-#' @param model Defaults to \code{"exponential"}.
-#' @param start_ratio Defaults to \code{0.1}.
-#' @param start_range Defaults to \code{NULL}.
-#' @param max_iter Defaults to \code{200L}.
+#' @param coords A matrix; passed to \code{nrow}.
+#' @param z A vector; its length is taken.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param model Passed to \code{.schab_profiled_reml}. Defaults to \code{"exponential"}.
+#' @param start_ratio Passed to \code{.schab_logit}. Defaults to \code{0.1}.
+#' @param start_range Optional; may be \code{NULL}. Numeric; passed to \code{log}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget}, \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
 #' @export

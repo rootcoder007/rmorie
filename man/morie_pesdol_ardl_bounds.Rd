@@ -9,12 +9,12 @@ morie_pesdol_ardl_bounds(y, x, p = 1, q = 1)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{x}{See Usage.}
-\item{p}{Defaults to \code{1}.}
-\item{q}{Defaults to \code{1}.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
+\item{p}{Numeric; passed to \code{max}. Defaults to \code{1}.}
+\item{q}{Numeric; passed to \code{max}. Defaults to \code{1}.}
 }
 \description{
-Part of the pesdol_native implementation; see the file header for the source it follows.
+A step of the pesdol_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{long_run}, \code{coefficients}, \code{residuals}, \code{fitted}, \code{speed_of_adjustment}, \code{f_statistic}, \code{bound_lower}, \code{bound_upper}, \code{verdict}, \code{n_used}, \code{n_params}, \code{rss_unrestricted}, \code{rss_restricted}, \code{p}, \code{q}, \code{n_regressors}, \code{method}, \code{note}.

@@ -21,10 +21,10 @@ morie_tlgcmp(strata = NULL, outcome_means = NULL, covariate_probs = NULL, Q_func
 \item{a_star}{Defaults to \code{NULL}.}
 \item{g}{Defaults to \code{NULL}.}
 \item{delta}{Defaults to \code{0.01}.}
-\item{mode}{Defaults to \code{c("point", "sequential", "counterfactual", "positivity")}.}
+\item{mode}{One of \code{"counterfactual"}, \code{"positivity"}, \code{"sequential"}.}
 }
 \description{
-Part of the tlgcmp_native implementation; see the file header for the source it follows.
+A step of the tlgcmp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{g_computation}.

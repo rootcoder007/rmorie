@@ -8,10 +8,10 @@
 MotionArt(x, fs, win = 1, factor = 4)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{win}{Defaults to \code{1}.}
-\item{factor}{Defaults to \code{4}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{win}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{factor}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
 }
 \description{
 equation, so none is attributed to the book.  Window range and window activity are both compared against their MEDIANS, because the mean is dragged upward by the very segments being detected.

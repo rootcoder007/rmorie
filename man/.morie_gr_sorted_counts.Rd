@@ -12,7 +12,7 @@
 \item{y_scores}{See Usage.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{morie_geron_precision_recall_curve}, \code{morie_geron_roc_curve}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{s}, \code{P}, \code{N}.

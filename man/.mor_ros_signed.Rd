@@ -12,7 +12,7 @@
 \item{Gamma}{Defaults to \code{1}.}
 }
 \description{
-Part of the rosenb_native implementation; see the file header for the source it follows.
+A step of the rosenb_native implementation. Called by \code{morie_rosenb}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p_upper}, \code{p_lower}, \code{W}, \code{mu_plus}, \code{sigma_plus}, \code{z_upper}, \code{n_pairs}, \code{Gamma}.

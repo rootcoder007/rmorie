@@ -8,11 +8,11 @@
 local_nuisance(target, W, weights, exclude = NULL, ridge = 1e-08)
 }
 \arguments{
-\item{target}{See Usage.}
-\item{W}{See Usage.}
+\item{target}{A matrix; passed to \code{crossprod}.}
+\item{W}{A matrix; passed to \code{as.matrix}.}
 \item{weights}{See Usage.}
 \item{exclude}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
 forest kernel weights alpha_i(x), so the fit is local by construction. exclude drops one index for the leave-one-out residual.

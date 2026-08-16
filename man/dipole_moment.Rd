@@ -8,12 +8,12 @@
 dipole_moment(charges, R, centre = NULL)
 }
 \arguments{
-\item{charges}{See Usage.}
-\item{R}{See Usage.}
-\item{centre}{Defaults to \code{NULL}.}
+\item{charges}{Passed to \code{.painn_vec}.}
+\item{R}{Passed to \code{.painn_mat}.}
+\item{centre}{Optional; may be \code{NULL}. Passed to \code{.painn_vec}.}
 }
 \description{
-Part of the painn_native implementation; see the file header for the source it follows.
+A step of the painn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dipole}, \code{magnitude}, \code{note}.

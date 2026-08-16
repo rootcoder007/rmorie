@@ -9,12 +9,12 @@ ValvePcg(pcg, fs, n_peaks = 3, order = NULL)
 }
 \arguments{
 \item{pcg}{See Usage.}
-\item{fs}{See Usage.}
-\item{n_peaks}{Defaults to \code{3}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{n_peaks}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 \item{order}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

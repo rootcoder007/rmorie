@@ -8,11 +8,11 @@
 morie_trmRew_is_locally_confluent(rules, max_steps = 10000)
 }
 \arguments{
-\item{rules}{See Usage.}
-\item{max_steps}{Defaults to \code{10000}.}
+\item{rules}{Passed to \code{morie_trmRew_critical_pairs}.}
+\item{max_steps}{Passed to \code{morie_trmRew_joinable}. Defaults to \code{10000}.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{morie_trmRew_is_confluent}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{locally_confluent}, \code{n_critical_pairs}, \code{unjoinable}, \code{method}.

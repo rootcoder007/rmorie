@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_wvd}, \code{AtomTfd}, \code{EmdSpec} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.tf_idft}.

@@ -58,10 +58,11 @@
 
 #' .netsts_sigmoid
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{.netsts_lstm_cell}, \code{morie_netsts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .netsts_sigmoid <- function(x) {
@@ -70,10 +71,11 @@
 
 #' .netsts_sd
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{.netsts_standardize}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .netsts_sd <- function(y) {
@@ -85,7 +87,8 @@
 
 #' .netsts_vec
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{morie_netsts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -97,12 +100,13 @@
 
 #' .netsts_lstsq
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{morie_netsts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge See Usage.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .netsts_lstsq <- function(X, y, ridge) {
@@ -118,15 +122,16 @@
 
 #' .netsts_lstm_cell
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{.netsts_lstm_run}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param h See Usage.
-#' @param c See Usage.
-#' @param W See Usage.
-#' @param b See Usage.
-#' @param forget_bias Defaults to \code{0}.
+#' @param h A vector; its length is taken.
+#' @param c A vector; its length is taken.
+#' @param W A matrix; indexed by row and column.
+#' @param b A vector; its length is taken and its elements indexed.
+#' @param forget_bias Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{h}, \code{c}, \code{gates}.
 #' @export
 .netsts_lstm_cell <- function(x, h, c, W, b, forget_bias = 0.0) {
@@ -153,14 +158,15 @@
 
 #' .netsts_lstm_run
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{morie_netsts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param W See Usage.
-#' @param b See Usage.
+#' @param X A vector; its length is taken and its elements indexed.
+#' @param W Passed to \code{.netsts_lstm_cell}.
+#' @param b Passed to \code{.netsts_lstm_cell}.
 #' @param hidden See Usage.
-#' @param forget_bias Defaults to \code{0}.
+#' @param forget_bias Passed to \code{.netsts_lstm_cell}. Defaults to \code{0}.
 #' @return A list with \code{hs}, \code{cs}, \code{gates}.
 #' @export
 .netsts_lstm_run <- function(X, W, b, hidden, forget_bias = 0.0) {
@@ -184,7 +190,8 @@
 
 #' .netsts_gradient_retention
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{morie_netsts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param forget_value See Usage.
@@ -200,7 +207,8 @@
 
 #' .netsts_standardize
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. Called by \code{morie_netsts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -218,8 +226,8 @@
 #'
 #' glibc LCG-backed helper. Two uniforms per sample.
 #'
-#' @param rng See Usage.
-#' @param n See Usage.
+#' @param rng Passed to \code{.ghc_unif}.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .netsts_standard_normal <- function(rng, n) {
@@ -239,17 +247,18 @@
 
 #' morie_netsts
 #'
-#' Part of the netsts_native implementation; see the file header for the
+#' A step of the netsts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{.netsts_vec}.
 #' @param horizon See Usage.
 #' @param hidden Defaults to \code{8}.
 #' @param n_lags Defaults to \code{4}.
-#' @param strategy Defaults to \code{"recursive"}.
-#' @param forget_bias Defaults to \code{1}.
-#' @param seed Defaults to \code{0}.
-#' @param ridge Defaults to \code{1e-06}.
+#' @param strategy One of \code{"direct"}, \code{"recursive"}. Defaults to \code{"recursive"}.
+#' @param forget_bias Passed to \code{.netsts_lstm_run}. Defaults to \code{1}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param ridge Passed to \code{.netsts_lstsq}. Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{forecast}, \code{strategy}, \code{hidden}, \code{n_lags}, \code{forget_bias}, \code{mean}, \code{sd}, \code{n_models}, \code{retention_10}, \code{method}.
 #' @export
 morie_netsts <- function(y, horizon, hidden = 8, n_lags = 4,

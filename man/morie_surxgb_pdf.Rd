@@ -8,11 +8,11 @@
 morie_surxgb_pdf(z, dist = "normal")
 }
 \arguments{
-\item{z}{See Usage.}
-\item{dist}{Defaults to \code{"normal"}.}
+\item{z}{Numeric; passed to \code{abs}.}
+\item{dist}{One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss}, \code{morie_surxgb_ddpdf} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

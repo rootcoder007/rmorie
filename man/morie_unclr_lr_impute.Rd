@@ -8,13 +8,13 @@
 morie_unclr_lr_impute(X, dl, n_iter, draw = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{dl}{See Usage.}
 \item{n_iter}{See Usage.}
-\item{draw}{Defaults to \code{NULL}.}
+\item{draw}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the unclr implementation; see the file header for the source it follows.
+A step of the unclr implementation. Called by \code{Lrda}, \code{Lrem}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.

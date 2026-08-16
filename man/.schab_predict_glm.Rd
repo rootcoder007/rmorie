@@ -11,7 +11,7 @@
 \item{nu0_hat}{See Usage.}
 \item{sigma2_nu0}{See Usage.}
 \item{mu0_hat}{See Usage.}
-\item{link_kind}{See Usage.}
+\item{link_kind}{Passed to \code{.schab_link_derivative}.}
 }
 \description{
 predictor (6.87), whose delta-method variance (6.88) the text says belongs to a different predictor.

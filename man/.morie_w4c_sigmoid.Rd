@@ -8,10 +8,10 @@
 .morie_w4c_sigmoid(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_peephole_lstm}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

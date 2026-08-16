@@ -8,10 +8,10 @@
 .morie_gr_w4b_popsd(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{mean}.}
 }
 \description{
-Part of the geron_w4b_native implementation; see the file header for the source it follows.
+A step of the geron_w4b_native implementation. Called by \code{morie_geron_he_init_hmhei}, \code{morie_geron_learning_curves_hmlcv}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

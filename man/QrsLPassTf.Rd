@@ -9,7 +9,7 @@ QrsLPassTf(freq, fs = 200)
 }
 \arguments{
 \item{freq}{See Usage.}
-\item{fs}{Defaults to \code{200}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 }
 \description{
 equivalent finite form (sum_{k=0}^{5} z^-k)^2 / 32 so the apparent pole at z = 1 is removed exactly rather than numerically.  fc = 11 Hz, 5-sample delay, >35 dB at 60 Hz -- all tied to fs = 200 Hz.

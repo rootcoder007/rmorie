@@ -8,10 +8,10 @@
 k02bfs(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{smwgrp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

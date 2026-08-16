@@ -8,10 +8,10 @@
 .morie_valid_git_ref(ref)
 }
 \arguments{
-\item{ref}{See Usage.}
+\item{ref}{A vector; its length is taken.}
 }
 \description{
-Rejects option-injection (leading \\\'-\\\', e.g. "--upload-pack=...") and any whitespace/metacharacters, while allowing normal ref names.
+Rejects option-injection (leading \\'-\\', e.g. "--upload-pack=...") and any whitespace/metacharacters, while allowing normal ref names.
 }
 \value{
 A logical value.

@@ -8,7 +8,7 @@
 .cmlmer_snap12(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
 closest pair, and a tie broken differently in the two languages would give different groups and therefore a different model. The grid is far finer than any distance the caller can distinguish and far coarser than the last-bit noise that would otherwise decide a tie.

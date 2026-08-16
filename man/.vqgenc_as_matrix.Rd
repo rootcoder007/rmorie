@@ -8,10 +8,10 @@
 .vqgenc_as_matrix(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the vqgenc_native implementation; see the file header for the source it follows.
+A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}, \code{.vqgenc_quantize}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

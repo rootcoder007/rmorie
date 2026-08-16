@@ -8,7 +8,7 @@
 .ca_rms(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{A vector; its length is taken.}
 \item{b}{See Usage.}
 }
 \description{

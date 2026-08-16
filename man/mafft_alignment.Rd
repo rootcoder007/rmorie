@@ -8,9 +8,9 @@
 mafft_alignment(sequences, method = "FFT-NS-2", seq_type = NULL, raw_matrix = NULL, freqs = NULL, s_a = 0.06, s_op = 2.4, matrix = "normalized", window = 30L, n_peaks = 20L, threshold = 0.7, max_len = 150L, max_iterate = 16L)
 }
 \arguments{
-\item{sequences}{See Usage.}
-\item{method}{Defaults to \code{"FFT-NS-2"}.}
-\item{seq_type}{Defaults to \code{NULL}.}
+\item{sequences}{Passed to \code{.mafft_clean}.}
+\item{method}{One of \code{"FFT-NS-2"}, \code{"FFT-NS-i"}, \code{"NW-NS-2"}. Defaults to \code{"FFT-NS-2"}.}
+\item{seq_type}{Passed to \code{.mafft_clean}.}
 \item{raw_matrix}{Defaults to \code{NULL}.}
 \item{freqs}{Defaults to \code{NULL}.}
 \item{s_a}{Defaults to \code{0.06}.}
@@ -23,7 +23,7 @@ mafft_alignment(sequences, method = "FFT-NS-2", seq_type = NULL, raw_matrix = NU
 \item{max_iterate}{Defaults to \code{16L}.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{morie_mafft}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{alignment}, \code{score}, \code{method}, \code{seq_type}, \code{length}, \code{n}, \code{s_a}, \code{s_op}, \code{matrix_mode}, \code{tree}, \code{refine_rounds}, \code{note}.

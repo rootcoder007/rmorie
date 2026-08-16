@@ -8,13 +8,13 @@
 q_values(T, R, gamma, V)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{R}{See Usage.}
-\item{gamma}{See Usage.}
-\item{V}{See Usage.}
+\item{T}{A vector; indexed elementwise.}
+\item{R}{A vector; indexed elementwise.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{V}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the birl_native implementation; see the file header for the source it follows.
+A step of the birl_native implementation. Called by \code{policy_iteration}, \code{policy_walk}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{Q}, as built in the body.

@@ -8,7 +8,7 @@
 .schab_gauss_legendre(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
 Schabenberger & Gotway result. Nodes are the eigenvalues of the Jacobi matrix; weights are mu_0 times the squared first eigenvector components, with mu_0 the ZEROTH MOMENT of the weight function -- 2 for Legendre on [-1, 1]. The Hermite rule elsewhere carries no such factor because there the Gaussian weight integrates to 1.

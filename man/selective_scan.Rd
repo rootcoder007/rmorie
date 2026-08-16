@@ -8,11 +8,11 @@
 selective_scan(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NULL, b_delta = 0, rule = "zoh", D_skip = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{A}{See Usage.}
-\item{W_B}{See Usage.}
-\item{W_C}{See Usage.}
-\item{W_delta}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{A}{A matrix; passed to \code{as.matrix}.}
+\item{W_B}{A matrix; passed to \code{as.matrix}.}
+\item{W_C}{A matrix; passed to \code{as.matrix}.}
+\item{W_delta}{A matrix; passed to \code{as.matrix}.}
 \item{delta_bias}{Defaults to \code{NULL}.}
 \item{b_B}{Defaults to \code{NULL}.}
 \item{b_C}{Defaults to \code{NULL}.}
@@ -21,7 +21,7 @@ selective_scan(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NUL
 \item{D_skip}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the mambss_native implementation; see the file header for the source it follows.
+A step of the mambss_native implementation. Called by \code{morie_mambss}, \code{s6_layer}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L}, \code{D}, \code{N}, \code{rule}, \code{time_invariant}, \code{method}.

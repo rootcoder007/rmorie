@@ -8,12 +8,12 @@
 morie_drop_edges(edges, p, rng)
 }
 \arguments{
-\item{edges}{See Usage.}
-\item{p}{See Usage.}
-\item{rng}{See Usage.}
+\item{edges}{Passed to \code{.grace_drop_edges}.}
+\item{p}{Passed to \code{.grace_drop_edges}.}
+\item{rng}{Passed to \code{.grace_drop_edges}.}
 }
 \description{
-Part of the grace_native implementation; see the file header for the source it follows.
+A step of the grace_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.grace_drop_edges}.

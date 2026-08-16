@@ -8,13 +8,13 @@
 .btv_boot_reps(x, stat, B, seed)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; indexed by row and column.}
 \item{stat}{See Usage.}
-\item{B}{See Usage.}
+\item{B}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the btvol_native implementation; see the file header for the source it follows.
+A step of the btvol_native implementation. Called by \code{morie_bt_iid}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

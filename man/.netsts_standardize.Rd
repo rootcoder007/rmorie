@@ -11,7 +11,7 @@
 \item{y}{See Usage.}
 }
 \description{
-Part of the netsts_native implementation; see the file header for the source it follows.
+A step of the netsts_native implementation. Called by \code{morie_netsts}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{z}, \code{mu}, \code{sd}.

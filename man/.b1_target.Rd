@@ -8,18 +8,18 @@
 .b1_target(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, iters = 100, tol = 1e-12)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{A}{See Usage.}
-\item{QAW}{See Usage.}
-\item{Q1W}{See Usage.}
-\item{Q0W}{See Usage.}
-\item{g1W}{See Usage.}
-\item{gbound}{Defaults to \code{0.025}.}
+\item{Y}{A vector; its length is taken.}
+\item{A}{Numeric; combined arithmetically in the body.}
+\item{QAW}{Passed to \code{.b1_logit}.}
+\item{Q1W}{Passed to \code{.b1_logit}.}
+\item{Q0W}{Passed to \code{.b1_logit}.}
+\item{g1W}{Passed to \code{.b1_bound}.}
+\item{gbound}{Numeric; combined arithmetically in the body. Defaults to \code{0.025}.}
 \item{iters}{Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{
-Part of the b1_tmle implementation; see the file header for the source it follows.
+A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot}, \code{Tmleor} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star}, \code{g1}, \code{g0}, \code{H1}, \code{H0}.

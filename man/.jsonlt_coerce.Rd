@@ -8,11 +8,11 @@
 .jsonlt_coerce(v, t)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{t}{See Usage.}
+\item{v}{Optional; may be \code{NULL}. One of \code{"-Inf"}, \code{"Inf"}, \code{"NaN"}.}
+\item{t}{One of \code{"complex"}, \code{"double"}, \code{"integer"}, \code{"logical"}.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A character value.

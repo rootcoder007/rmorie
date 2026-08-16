@@ -8,8 +8,8 @@
 NoiseModel(x, eta)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{eta}{See Usage.}
+\item{x}{Passed to \code{.morie_rg_aslist}.}
+\item{eta}{Passed to \code{.morie_rg_aslist}.}
 }
 \description{
 uncorrelated, so the sample correlation is measured and both the observed and the additive variance are returned side by side.

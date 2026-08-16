@@ -3,14 +3,14 @@
 % the formals.
 \name{MoranRes}
 \alias{MoranRes}
-\title{Eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book\\'s own}
+\title{Eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book\'s own}
 \usage{
 MoranRes(residuals, w, x = NULL)
 }
 \arguments{
-\item{residuals}{See Usage.}
-\item{w}{See Usage.}
-\item{x}{Defaults to \code{NULL}.}
+\item{residuals}{Passed to \code{.morie_spx_chkv}.}
+\item{w}{Passed to \code{.morie_spx_chkw}.}
+\item{x}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
 formula, Sec. 1.3.2, and is reproduced term for term.  The variance is derived from the exact moments of a ratio of quadratic forms in the same Gaussian projection.

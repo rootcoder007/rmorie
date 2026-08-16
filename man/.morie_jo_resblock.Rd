@@ -8,15 +8,15 @@
 .morie_jo_resblock(x, w1, b1, w2, b2, wskip)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{w1}{See Usage.}
-\item{b1}{See Usage.}
-\item{w2}{See Usage.}
-\item{b2}{See Usage.}
-\item{wskip}{See Usage.}
+\item{x}{Passed to \code{.morie_jo_matvec}.}
+\item{w1}{Passed to \code{.morie_jo_matvec}.}
+\item{b1}{Numeric; combined arithmetically in the body.}
+\item{w2}{Passed to \code{.morie_jo_matvec}.}
+\item{b2}{Numeric; combined arithmetically in the body.}
+\item{wskip}{Passed to \code{.morie_jo_matvec}.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_jo_ln}.

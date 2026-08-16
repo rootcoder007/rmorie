@@ -8,19 +8,19 @@
 trclrn_fit_tree(Y, A, X, propensity = NULL, method = "ipw", outcome_model = NULL, max_depth = 3, min_leaf = 10, n_thresholds = 20, min_propensity = 0.01)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{A}{See Usage.}
-\item{X}{See Usage.}
-\item{propensity}{Defaults to \code{NULL}.}
-\item{method}{Defaults to \code{"ipw"}.}
-\item{outcome_model}{Defaults to \code{NULL}.}
+\item{Y}{Passed to \code{.trclrn_check}.}
+\item{A}{Passed to \code{.trclrn_check}.}
+\item{X}{Passed to \code{.trclrn_check}.}
+\item{propensity}{Passed to \code{.trclrn_check}.}
+\item{method}{Compared against \code{"augmented"}. Defaults to \code{"ipw"}.}
+\item{outcome_model}{Optional; may be \code{NULL}. Passed to \code{.trclrn_best_treatment}.}
 \item{max_depth}{Defaults to \code{3}.}
 \item{min_leaf}{Defaults to \code{10}.}
 \item{n_thresholds}{Defaults to \code{20}.}
-\item{min_propensity}{Defaults to \code{0.01}.}
+\item{min_propensity}{Passed to \code{.trclrn_check}. Defaults to \code{0.01}.}
 }
 \description{
-Part of the trclrn_native implementation; see the file header for the source it follows.
+A step of the trclrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

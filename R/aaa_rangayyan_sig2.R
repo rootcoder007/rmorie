@@ -15,7 +15,7 @@
 #'
 #' @param x See Usage.
 #' @param h See Usage.
-#' @param causal Defaults to \code{TRUE}.
+#' @param causal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{contributions}, \code{commutes}, \code{causal}, \code{method}.
 #' @export
 LinConv <- function(x, h, causal = TRUE) {
@@ -253,8 +253,8 @@ PerConv <- function(x, h, npoints = NULL) {
 #' @param x See Usage.
 #' @param fc See Usage.
 #' @param fs See Usage.
-#' @param conventional Defaults to \code{FALSE}.
-#' @param depth Defaults to \code{1}.
+#' @param conventional A flag; the body branches on it. Defaults to \code{FALSE}.
+#' @param depth Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{carrier}, \code{demodulated}, \code{fc}, \code{fs}, \code{suppressed_carrier}, \code{baseband_gain}, \code{image_frequency}, \code{method}.
 #' @export
 AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
@@ -295,8 +295,8 @@ AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
 #' @param m See Usage.
 #' @param fc See Usage.
 #' @param fs See Usage.
-#' @param kf Defaults to \code{1}.
-#' @param amplitude Defaults to \code{1}.
+#' @param kf Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param amplitude Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{phase}, \code{instantaneous_frequency}, \code{fc}, \code{fs}, \code{kf}, \code{max_instantaneous_frequency}, \code{min_instantaneous_frequency}, \code{aliases}, \code{method}.
 #' @export
 FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {

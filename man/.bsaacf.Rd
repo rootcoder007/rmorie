@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{maxlag}{See Usage.}
+\item{maxlag}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{.bsalpc}, \code{InfantCry}, \code{PdMonitor} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

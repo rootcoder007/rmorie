@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the vidgen_native implementation; see the file header for the source it follows.
+A step of the vidgen_native implementation. Called by \code{morie_vidgen_reconstruction_guidance}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

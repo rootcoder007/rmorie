@@ -11,7 +11,7 @@
 \item{A}{See Usage.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{.grclus_as_graph}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

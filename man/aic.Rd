@@ -12,7 +12,7 @@ aic(loglik, n_par)
 \item{n_par}{See Usage.}
 }
 \description{
-Part of the sarimax_native implementation; see the file header for the source it follows.
+A step of the sarimax_native implementation. Called by \code{aicc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

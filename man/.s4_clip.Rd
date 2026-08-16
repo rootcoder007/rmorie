@@ -13,7 +13,7 @@
 \item{hi}{See Usage.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlmpi_cdf_bank} and 25 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pmin}.

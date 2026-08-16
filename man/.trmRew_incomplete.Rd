@@ -8,12 +8,12 @@
 .trmRew_incomplete(rules, why, pair)
 }
 \arguments{
-\item{rules}{See Usage.}
+\item{rules}{A vector; its length is taken.}
 \item{why}{See Usage.}
 \item{pair}{See Usage.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{rules}, \code{complete}, \code{reason}, \code{pair}, \code{n_rules}, \code{method}.
@@ -26,7 +26,7 @@ Abstract Algebra, Pergamon Press, 263-297,
 doi:10.1016/B978-0-08-012975-4.50028-X.
 
 Newman, M. H. A. (1942) "On theories with a combinatorial definition
-of \\'equivalence\\'", Annals of Mathematics 43(2), 223-243,
+of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
 doi:10.2307/1968867.
 
 Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,

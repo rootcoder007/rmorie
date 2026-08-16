@@ -12,7 +12,7 @@
 \item{name}{Defaults to \code{"x"}.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_pair}, \code{morie_adfur}, \code{morie_autocorf} and 23 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

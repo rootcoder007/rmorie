@@ -8,17 +8,17 @@
 .svycox_inverse(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the svycox_native implementation; see the file header for the source it follows.
+A step of the svycox_native implementation. Called by \code{.svycox_svycoxph}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.
 }
 \references{
 ----------
-Binder, D. A. (1992) "Fitting Cox\\'s proportional hazards models from
+Binder, D. A. (1992) "Fitting Cox\'s proportional hazards models from
 survey data", *Biometrika* 79(1), 139-147,
 doi:10.1093/biomet/79.1.139. The weighted estimating equation above,
 the interpretation of :math:`\hat\beta` as a finite-population census

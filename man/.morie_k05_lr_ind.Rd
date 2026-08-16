@@ -8,10 +8,10 @@
 .morie_k05_lr_ind(h)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the k05_tranche1 implementation; see the file header for the source it follows.
+A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11}, \code{pi01}, \code{pi11}, \code{pi}.

@@ -3,15 +3,15 @@
 % the formals.
 \name{morie_surxgb_concordance}
 \alias{morie_surxgb_concordance}
-\title{Harrell\\'s C for the fit; a larger prediction is a longer life, so}
+\title{Harrell\'s C for the fit; a larger prediction is a longer life, so}
 \usage{
 morie_surxgb_concordance(fit, X, times, events)
 }
 \arguments{
-\item{fit}{See Usage.}
-\item{X}{See Usage.}
-\item{times}{See Usage.}
-\item{events}{See Usage.}
+\item{fit}{Passed to \code{morie_surxgb_predict}.}
+\item{X}{Passed to \code{morie_surxgb_predict}.}
+\item{times}{Passed to \code{morie_survrsf_c_index}.}
+\item{events}{Passed to \code{morie_survrsf_c_index}.}
 }
 \description{
 the score is negated before it is ranked.

@@ -52,7 +52,8 @@
 
 #' .xdeep_to_vec
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. Called by \code{xdeep_hadamard}, \code{xdeep_xdeepfm_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -64,10 +65,11 @@
 
 #' .xdeep_to_mat
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. Called by \code{xdeep_cin}, \code{xdeep_cin_layer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .xdeep_to_mat <- function(M) {
@@ -78,11 +80,12 @@
 
 #' xdeep_hadamard
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{.xdeep_to_vec}.
+#' @param b Passed to \code{.xdeep_to_vec}.
 #' @return A numeric value.
 #' @export
 xdeep_hadamard <- function(a, b) {
@@ -97,12 +100,13 @@ xdeep_hadamard <- function(a, b) {
 
 #' xdeep_cin_layer
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. Called by \code{xdeep_cin}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X_prev See Usage.
-#' @param X0 See Usage.
-#' @param W See Usage.
+#' @param X_prev Passed to \code{.xdeep_to_mat}.
+#' @param X0 Passed to \code{.xdeep_to_mat}.
+#' @param W A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 xdeep_cin_layer <- function(X_prev, X0, W) {
@@ -133,11 +137,12 @@ xdeep_cin_layer <- function(X_prev, X0, W) {
 
 #' xdeep_cin
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. Called by \code{xdeep_xdeepfm_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X0 See Usage.
-#' @param Ws See Usage.
+#' @param X0 Passed to \code{.xdeep_to_mat}.
+#' @param Ws A vector; its length is taken.
 #' @return A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees}, \code{n_layers}, \code{method}, \code{note}.
 #' @export
 xdeep_cin <- function(X0, Ws) {
@@ -166,7 +171,8 @@ xdeep_cin <- function(X0, Ws) {
 
 #' xdeep_interaction_degree
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param layer_index See Usage.
@@ -187,14 +193,15 @@ xdeep_interaction_degree <- function(layer_index) {
 
 #' xdeep_xdeepfm_score
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x_linear See Usage.
-#' @param w_linear See Usage.
+#' @param x_linear Passed to \code{.xdeep_to_vec}.
+#' @param w_linear Passed to \code{.xdeep_to_vec}.
 #' @param X0 See Usage.
 #' @param Ws See Usage.
-#' @param w_cin See Usage.
+#' @param w_cin Passed to \code{.xdeep_to_vec}.
 #' @param dnn_output Defaults to \code{0}.
 #' @param w_dnn Defaults to \code{1}.
 #' @param bias Defaults to \code{0}.
@@ -232,7 +239,8 @@ xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
 
 #' xdeep_cheatsheet
 #'
-#' Part of the xdeep_native implementation; see the file header for the
+#' A step of the xdeep_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

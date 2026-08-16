@@ -10,11 +10,11 @@
 \arguments{
 \item{text}{See Usage.}
 \item{pos}{See Usage.}
-\item{ctx}{See Usage.}
+\item{ctx}{A list; the body reads \code{$steps} from it.}
 \item{fn}{See Usage.}
 }
 \description{
-Part of the prsPEG_native implementation; see the file header for the source it follows.
+A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_and_}, \code{morie_prsPEG_choice}, \code{morie_prsPEG_not_} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{fn}.

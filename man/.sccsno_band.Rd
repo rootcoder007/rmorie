@@ -12,7 +12,7 @@
 \item{age_breaks}{See Usage.}
 }
 \description{
-Part of the sccsno_native implementation; see the file header for the source it follows.
+A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{j}, as built in the body.

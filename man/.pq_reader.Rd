@@ -12,7 +12,7 @@
 \item{pos}{Defaults to \code{1L}.}
 }
 \description{
-reference the way the Python reader\\\'s self.pos does; passing it around by value would need every helper to return (value, pos) pairs.
+reference the way the Python reader\\'s self.pos does; passing it around by value would need every helper to return (value, pos) pairs.
 }
 \value{
 The value of \code{e}, as built in the body.

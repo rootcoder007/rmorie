@@ -8,7 +8,7 @@
 QrsLPassDf(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 x(n-12)] Adds and one shift by 32 -- which is why it was chosen for real time.

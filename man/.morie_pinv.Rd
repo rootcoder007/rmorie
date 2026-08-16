@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{M}{See Usage.}
-\item{rcond}{Defaults to \code{1e-15}.}
+\item{rcond}{Numeric; combined arithmetically in the body. Defaults to \code{1e-15}.}
 }
 \description{
-Part of the tail1_core implementation; see the file header for the source it follows.
+A step of the tail1_core implementation. Called by \code{.schab_disjunctive_kriging}, \code{t3ols}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{\%*\%}.

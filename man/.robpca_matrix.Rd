@@ -8,11 +8,11 @@
 .robpca_matrix(X, name = "X")
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{dim}.}
 \item{name}{Defaults to \code{"X"}.}
 }
 \description{
-Part of the robpca_native implementation; see the file header for the source it follows.
+A step of the robpca_native implementation. Called by \code{morie_robpca}, \code{outlyingness}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

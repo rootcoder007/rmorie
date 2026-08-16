@@ -19,7 +19,8 @@
 
 #' .ocrwit_clip_int
 #'
-#' Part of the ocrwit_native implementation; see the file header for the
+#' A step of the ocrwit_native implementation. Called by \code{normalise_bbox}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -36,10 +37,11 @@
 
 #' normalise_bbox
 #'
-#' Part of the ocrwit_native implementation; see the file header for the
+#' A step of the ocrwit_native implementation. Called by \code{patch_of_box}, \code{segment_layout_boxes}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param box See Usage.
+#' @param box A vector; its length is taken and its elements indexed.
 #' @param width See Usage.
 #' @param height See Usage.
 #' @param scale Defaults to \code{1000}.
@@ -67,10 +69,11 @@ normalise_bbox <- function(box, width, height, scale = 1000) {
 
 #' segment_layout_boxes
 #'
-#' Part of the ocrwit_native implementation; see the file header for the
+#' A step of the ocrwit_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param boxes See Usage.
+#' @param boxes A matrix; indexed by row and column.
 #' @param segment_ids See Usage.
 #' @param width See Usage.
 #' @param height See Usage.
@@ -112,7 +115,8 @@ segment_layout_boxes <- function(boxes, segment_ids, width, height,
 
 #' mask_units
 #'
-#' Part of the ocrwit_native implementation; see the file header for the
+#' A step of the ocrwit_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_units See Usage.
@@ -155,7 +159,8 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 
 #' patch_of_box
 #'
-#' Part of the ocrwit_native implementation; see the file header for the
+#' A step of the ocrwit_native implementation. Called by \code{word_patch_alignment}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param box See Usage.
@@ -177,10 +182,11 @@ patch_of_box <- function(box, width, height, patch_grid = 14) {
 
 #' word_patch_alignment
 #'
-#' Part of the ocrwit_native implementation; see the file header for the
+#' A step of the ocrwit_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param text_boxes See Usage.
+#' @param text_boxes A vector; its length is taken and its elements indexed.
 #' @param masked_patches See Usage.
 #' @param width See Usage.
 #' @param height See Usage.
@@ -220,7 +226,8 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
 
 #' .ocrwit_cheatsheet
 #'
-#' Part of the ocrwit_native implementation; see the file header for the
+#' A step of the ocrwit_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

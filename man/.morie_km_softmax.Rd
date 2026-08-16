@@ -8,10 +8,10 @@
 .morie_km_softmax(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the kamath_ch2_native implementation; see the file header for the source it follows.
+A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_attention_softmax}, \code{morie_kamath_decoder_token_distribution}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

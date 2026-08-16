@@ -8,11 +8,11 @@
 k02p2t(tv, df)
 }
 \arguments{
-\item{tv}{See Usage.}
+\item{tv}{Numeric; passed to \code{abs}.}
 \item{df}{See Usage.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{mahks}, \code{mahsj}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

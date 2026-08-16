@@ -150,12 +150,13 @@ centering_steps <- function(m, eps, t0, mu) {
 
 #' .barerp_num_grad
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. Called by \code{grad.Fun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param x See Usage.
-#' @param h Defaults to \code{1e-06}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .barerp_num_grad <- function(f, x, h = 1e-6) {
@@ -173,12 +174,13 @@ centering_steps <- function(m, eps, t0, mu) {
 
 #' .num_hess
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. Called by \code{hess.Fun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param x See Usage.
-#' @param h Defaults to \code{1e-04}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .num_hess <- function(f, x, h = 1e-4) {
@@ -216,7 +218,7 @@ centering_steps <- function(m, eps, t0, mu) {
 #' @param f See Usage.
 #' @param grad Defaults to \code{NULL}.
 #' @param hess Defaults to \code{NULL}.
-#' @param affine Defaults to \code{FALSE}.
+#' @param affine A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{self}, as built in the body.
 #' @export
 .Fun <- function(f, grad = NULL, hess = NULL, affine = FALSE) {
@@ -227,21 +229,23 @@ centering_steps <- function(m, eps, t0, mu) {
 
 #' val.Fun
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param self See Usage.
+#' @param self A list; the body reads \code{$f} from it.
 #' @param x See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 val.Fun <- function(self, x) as.numeric(self$f(x))
 #' grad.Fun
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param self See Usage.
-#' @param x See Usage.
+#' @param self A list; the body reads \code{$.g}, \code{$f} from it.
+#' @param x Passed to \code{.barerp_num_grad}.
 #' @return The value of \code{.barerp_num_grad}.
 #' @export
 grad.Fun <- function(self, x) {
@@ -253,11 +257,12 @@ grad.Fun <- function(self, x) {
 }
 #' hess.Fun
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param self See Usage.
-#' @param x See Usage.
+#' @param self A list; the body reads \code{$.h}, \code{$affine}, \code{$f} from it.
+#' @param x A vector; its length is taken.
 #' @return The value of \code{.num_hess}.
 #' @export
 hess.Fun <- function(self, x) {
@@ -271,10 +276,11 @@ hess.Fun <- function(self, x) {
 
 #' .as_fun
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. Called by \code{barrier_method}, \code{central_point}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param spec See Usage.
+#' @param spec A list; the body reads \code{$affine}, \code{$f}, \code{$grad}, \code{$hess} from it.
 #' @return Nothing; this branch always raises.
 #' @export
 .as_fun <- function(spec) {
@@ -293,12 +299,13 @@ hess.Fun <- function(self, x) {
 
 #' .solve_kkt
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. Called by \code{central_point}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hmat See Usage.
-#' @param grad See Usage.
-#' @param aeq See Usage.
+#' @param hmat A matrix; passed to \code{solve}.
+#' @param grad A vector; its length is taken.
+#' @param aeq Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
 #' @return The value of \code{[}.
 #' @export
 .solve_kkt <- function(hmat, grad, aeq) {
@@ -324,11 +331,12 @@ hess.Fun <- function(self, x) {
 
 #' .project_null
 #'
-#' Part of the barerp_native implementation; see the file header for the
+#' A step of the barerp_native implementation. Called by \code{central_point}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param aeq See Usage.
+#' @param v A matrix; passed to \code{\%*\%}.
+#' @param aeq A matrix; passed to \code{t}.
 #' @return A numeric value.
 #' @export
 .project_null <- function(v, aeq) {

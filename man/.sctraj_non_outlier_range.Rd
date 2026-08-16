@@ -11,7 +11,7 @@
 \item{vals}{See Usage.}
 }
 \description{
-Part of the sctraj_native implementation; see the file header for the source it follows.
+A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

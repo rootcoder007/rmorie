@@ -12,10 +12,10 @@ counterfactual_mean(Y, A, L, a_star, strata_probs = NULL)
 \item{A}{See Usage.}
 \item{L}{See Usage.}
 \item{a_star}{See Usage.}
-\item{strata_probs}{Defaults to \code{NULL}.}
+\item{strata_probs}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the tlgcmp_native implementation; see the file header for the source it follows.
+A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tot}, as built in the body.

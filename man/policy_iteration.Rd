@@ -8,14 +8,14 @@
 policy_iteration(T, R, gamma, policy = NULL, max_iter = 200)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{R}{See Usage.}
-\item{gamma}{See Usage.}
+\item{T}{Passed to \code{.mdp}.}
+\item{R}{A vector; its length is taken.}
+\item{gamma}{Passed to \code{.mdp}.}
 \item{policy}{Defaults to \code{NULL}.}
-\item{max_iter}{Defaults to \code{200}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 }
 \description{
-Part of the birl_native implementation; see the file header for the source it follows.
+A step of the birl_native implementation. Called by \code{birl}, \code{policy_walk}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.

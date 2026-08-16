@@ -8,14 +8,14 @@
 EmdEns(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.tf_need}.}
 \item{n_ensembles}{Defaults to \code{20}.}
 \item{noise_std}{Defaults to \code{0.2}.}
 \item{max_imfs}{Defaults to \code{8}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.tf_lcg_seed}. Defaults to \code{0}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{n_ensembles}, \code{noise_std}, \code{seed}, \code{reconstruction_error}, \code{energy_per_imf}, \code{method}.

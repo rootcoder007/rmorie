@@ -12,7 +12,7 @@
 \item{b}{See Usage.}
 }
 \description{
-Part of the crtT_mixedcase_native implementation; see the file header for the source it follows.
+A step of the crtT_mixedcase_native implementation. Called by \code{crtT}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{g}, \code{c}, \code{d}.

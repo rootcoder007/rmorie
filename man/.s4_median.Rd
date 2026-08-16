@@ -8,10 +8,10 @@
 .s4_median(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Tukeyw}, \code{Tukrr}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

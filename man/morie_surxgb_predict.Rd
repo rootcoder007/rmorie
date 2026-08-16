@@ -8,11 +8,11 @@
 morie_surxgb_predict(fit, X)
 }
 \arguments{
-\item{fit}{See Usage.}
-\item{X}{See Usage.}
+\item{fit}{A list; the body reads \code{$base_score}, \code{$eta}, \code{$trees} from it.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_concordance}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,15 +8,15 @@
 .dmlqs_message_pass(h0, adj, T = 3L, W = NULL, activation = "relu", exclude_reverse = TRUE)
 }
 \arguments{
-\item{h0}{See Usage.}
-\item{adj}{See Usage.}
+\item{h0}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{adj}{Passed to \code{.dmlqs_norm_adj}.}
 \item{T}{Defaults to \code{3L}.}
 \item{W}{Defaults to \code{NULL}.}
 \item{activation}{Defaults to \code{"relu"}.}
 \item{exclude_reverse}{Defaults to \code{TRUE}.}
 }
 \description{
-Part of the dmlqs_native implementation; see the file header for the source it follows.
+A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{edge_states}, \code{T}, \code{excluded_reverse}, \code{note}.

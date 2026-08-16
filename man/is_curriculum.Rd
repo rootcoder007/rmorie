@@ -8,12 +8,12 @@
 is_curriculum(weights, p = NULL, tol = 1e-12)
 }
 \arguments{
-\item{weights}{See Usage.}
-\item{p}{Defaults to \code{NULL}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{weights}{A vector; its length is taken and its elements indexed.}
+\item{p}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.}
 }
 \description{
-Part of the prgrl_native implementation; see the file header for the source it follows.
+A step of the prgrl_native implementation. Called by \code{prgrl}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{is_curriculum}, \code{entropy_increasing}, \code{strictly_increasing}, \code{weights_monotone}, \code{final_step_is_p}, \code{entropies}.

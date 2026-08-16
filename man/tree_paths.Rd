@@ -11,7 +11,7 @@ tree_paths(tree)
 \item{tree}{See Usage.}
 }
 \description{
-Part of the attrInf_native implementation; see the file header for the source it follows.
+A step of the attrInf_native implementation. Called by \code{morie_attrInf}, \code{wbwc_invert}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

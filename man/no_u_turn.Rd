@@ -8,10 +8,10 @@
 no_u_turn(theta_minus, theta_plus, r_minus, r_plus)
 }
 \arguments{
-\item{theta_minus}{See Usage.}
-\item{theta_plus}{See Usage.}
-\item{r_minus}{See Usage.}
-\item{r_plus}{See Usage.}
+\item{theta_minus}{Numeric; combined arithmetically in the body.}
+\item{theta_plus}{Numeric; combined arithmetically in the body.}
+\item{r_minus}{Numeric; combined arithmetically in the body.}
+\item{r_plus}{Numeric; combined arithmetically in the body.}
 }
 \description{
 True (no U-turn) while (theta+ - theta-).r is non-negative at both ends.

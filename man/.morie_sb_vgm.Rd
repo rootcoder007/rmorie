@@ -8,14 +8,14 @@
 .morie_sb_vgm(h, model, nugget, psill, rng)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
 \item{model}{See Usage.}
-\item{nugget}{See Usage.}
-\item{psill}{See Usage.}
-\item{rng}{See Usage.}
+\item{nugget}{Numeric; combined arithmetically in the body.}
+\item{psill}{Numeric; combined arithmetically in the body.}
+\item{rng}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the schaben_native implementation; see the file header for the source it follows.
+A step of the schaben_native implementation. Called by \code{morie_kriging_pred_error}, \code{morie_variogram_composite_likelihood}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

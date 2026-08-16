@@ -8,12 +8,12 @@
 .plcbsc_gaps(y_treated, y_donors, weights)
 }
 \arguments{
-\item{y_treated}{See Usage.}
+\item{y_treated}{Numeric; combined arithmetically in the body.}
 \item{y_donors}{See Usage.}
-\item{weights}{See Usage.}
+\item{weights}{A matrix; passed to \code{crossprod}.}
 }
 \description{
-Part of the plcbsc_native implementation; see the file header for the source it follows.
+A step of the plcbsc_native implementation. Called by \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

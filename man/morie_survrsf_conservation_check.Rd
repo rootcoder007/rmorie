@@ -8,8 +8,8 @@
 morie_survrsf_conservation_check(times, events)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
+\item{times}{Passed to \code{morie_survrsf_nelson_aalen}.}
+\item{events}{Passed to \code{morie_survrsf_nelson_aalen}.}
 }
 \description{
 Censored times count too.

@@ -8,15 +8,15 @@
 .bprMF_recommend(W, H, u, n_items, top_k = 5L, exclude = integer(0))
 }
 \arguments{
-\item{W}{See Usage.}
-\item{H}{See Usage.}
+\item{W}{Passed to \code{.bprMF_predict}.}
+\item{H}{Passed to \code{.bprMF_predict}.}
 \item{u}{See Usage.}
-\item{n_items}{See Usage.}
-\item{top_k}{Defaults to \code{5L}.}
+\item{n_items}{A count; the body uses it as \code{seq_len(...)}.}
+\item{top_k}{Numeric; passed to \code{min}. Defaults to \code{5L}.}
 \item{exclude}{Defaults to \code{integer(0)}.}
 }
 \description{
-Part of the bprMF_native implementation; see the file header for the source it follows.
+A step of the bprMF_native implementation. Called by \code{bpr_recommend_R}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ranking}, \code{n_scored}.

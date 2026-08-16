@@ -11,7 +11,7 @@ Mvecv(y, X, h = NULL, n_starts = 100000L)
 
 \item{X}{n-by-q predictor matrix without an intercept column.}
 
-\item{h}{coverage; defaults to \link{(n + p + 1)/2} with p = q + 1.}
+\item{h}{coverage; defaults to [(n + p + 1)/2] with p = q + 1.}
 
 \item{n_starts}{cap on the number of (p+1)-subsets enumerated.}
 }
@@ -24,7 +24,7 @@ Rousseeuw, P. J. (1985), "Multivariate estimation with high breakdown
 point", in Mathematical Statistics and Applications, Vol. B, Reidel,
 283-297.  The MVE criterion is the one stated in the stub docstring, the
 smallest-volume ellipsoid covering h points, and it is applied here to the
-JOINT matrix Z = \link{X | y}, exactly as Mcdcv applies the MCD, so that a
+JOINT matrix Z = [X | y], exactly as Mcdcv applies the MCD, so that a
 scatter estimator becomes a regression estimator:
 beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X.  The inflation factor
 m2 multiplies Sigma_XX and Sigma_Xy alike, so it cancels out of beta; the

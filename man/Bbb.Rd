@@ -8,8 +8,8 @@
 Bbb(qrsdur, criteria = NULL)
 }
 \arguments{
-\item{qrsdur}{See Usage.}
-\item{criteria}{Defaults to \code{NULL}.}
+\item{qrsdur}{A vector; its length is taken.}
+\item{criteria}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
 contraction and shows as a wider-than-normal QRS; the published logic is a conjunction of duration and amplitude measurements on named leads, so a program applies it once those measurements exist.

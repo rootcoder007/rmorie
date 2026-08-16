@@ -16,11 +16,12 @@
 
 #' .mor_rdd_kernel
 #'
-#' Part of the causrdd_native implementation; see the file header for
+#' A step of the causrdd_native implementation. Called by \code{morie_causrdd}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param name See Usage.
-#' @param u See Usage.
+#' @param name One of \code{"triangular"}, \code{"uniform"}.
+#' @param u Numeric; passed to \code{abs}.
 #' @return Nothing; this branch always raises.
 #' @export
 .mor_rdd_kernel <- function(name, u) {
@@ -36,8 +37,8 @@
 #' the intercept (the boundary value that the RDD contrast uses)
 #'
 #' @param dm See Usage.
-#' @param ym See Usage.
-#' @param w See Usage.
+#' @param ym A matrix; passed to \code{\%*\%}.
+#' @param w A count; the body uses it as \code{rep(...)}.
 #' @return A list with \code{a}, \code{b}, \code{v}.
 #' @export
 .mor_rdd_side <- function(dm, ym, w) {

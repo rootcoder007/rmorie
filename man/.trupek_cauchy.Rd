@@ -8,12 +8,12 @@
 .trupek_cauchy(g, H, delta)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{H}{See Usage.}
-\item{delta}{See Usage.}
+\item{g}{A vector; its length is taken.}
+\item{H}{Passed to \code{.trupek_matvec}.}
+\item{delta}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the trupek_native implementation; see the file header for the source it follows.
+A step of the trupek_native implementation. Called by \code{.trupek_dogleg}, \code{.trupek_sub}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

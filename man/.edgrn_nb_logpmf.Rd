@@ -8,12 +8,12 @@
 .edgrn_nb_logpmf(y, mu, phi)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{mu}{See Usage.}
-\item{phi}{See Usage.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{mu}{Numeric; passed to \code{max}.}
+\item{phi}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the edgrn_native implementation; see the file header for the source it follows.
+A step of the edgrn_native implementation. Called by \code{edgrn_exact_test}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{(}.

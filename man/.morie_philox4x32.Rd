@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{counter}{See Usage.}
-\item{key}{See Usage.}
-\item{rounds}{Defaults to \code{.MORIE_PHILOX_ROUNDS}.}
+\item{key}{A vector; indexed elementwise.}
+\item{rounds}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{.MORIE_PHILOX_ROUNDS}.}
 }
 \description{
 numeric Part of the rng_native implementation; see the file header for the source it follows.

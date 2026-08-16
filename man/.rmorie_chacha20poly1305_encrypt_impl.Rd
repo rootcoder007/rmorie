@@ -8,13 +8,13 @@
 .rmorie_chacha20poly1305_encrypt_impl(key_sxp, nonce_sxp, plaintext_sxp, aad_sxp)
 }
 \arguments{
-\item{key_sxp}{See Usage.}
-\item{nonce_sxp}{See Usage.}
-\item{plaintext_sxp}{See Usage.}
-\item{aad_sxp}{See Usage.}
+\item{key_sxp}{Passed to \code{.Call}.}
+\item{nonce_sxp}{Passed to \code{.Call}.}
+\item{plaintext_sxp}{Passed to \code{.Call}.}
+\item{aad_sxp}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

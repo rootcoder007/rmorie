@@ -12,7 +12,7 @@ morie_ncfRS_log_loss(y, y_hat)
 \item{y_hat}{See Usage.}
 }
 \description{
-Part of the ncfRS_native implementation; see the file header for the source it follows.
+A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

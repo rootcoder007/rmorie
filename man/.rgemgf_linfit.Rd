@@ -8,11 +8,11 @@
 .rgemgf_linfit(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{y}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the rgemgf implementation; see the file header for the source it follows.
+A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgemgf}, \code{rgemgfd} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

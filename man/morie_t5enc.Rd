@@ -12,7 +12,7 @@ morie_t5enc(method = c("task_prefix", "span_corruption", "relative_bucket", "for
 \item{...}{Passed through.}
 }
 \description{
-Part of the t5enc_native implementation; see the file header for the source it follows.
+A step of the t5enc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{switch}.
@@ -28,7 +28,7 @@ prefixes; the treatment of classification by emitting the label text
 and of regression by emitting a rounded number as a string, with
 outputs that do not match any label counted as wrong; the span
 corruption pre-training objective with sentinels and the ablations
-selecting 15% corruption and mean span length 3; and the simplified
+selecting 15\% corruption and mean span length 3; and the simplified
 relative position embeddings shared across layers, bucketed by
 relative offset with logarithmically growing buckets.
 

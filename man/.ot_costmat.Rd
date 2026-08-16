@@ -8,12 +8,12 @@
 .ot_costmat(X, Y, p = 2)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
-\item{p}{Defaults to \code{2}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{Y}{A matrix; passed to \code{as.matrix}.}
+\item{p}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otbarfree}, \code{Otker}, \code{Otmcluster} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,14 +8,14 @@
 .sa_opt_temperature(schedule, T0, k, n_iter, alpha)
 }
 \arguments{
-\item{schedule}{See Usage.}
-\item{T0}{See Usage.}
-\item{k}{See Usage.}
+\item{schedule}{One of \code{"geometric"}, \code{"linear"}.}
+\item{T0}{Numeric; combined arithmetically in the body.}
+\item{k}{Numeric; combined arithmetically in the body.}
 \item{n_iter}{See Usage.}
-\item{alpha}{See Usage.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sa_opt_native implementation; see the file header for the source it follows.
+A step of the sa_opt_native implementation. Called by \code{morie_sa_opt}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

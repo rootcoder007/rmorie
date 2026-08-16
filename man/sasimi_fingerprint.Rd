@@ -8,11 +8,11 @@
 sasimi_fingerprint(bits, n_bits = NULL)
 }
 \arguments{
-\item{bits}{See Usage.}
+\item{bits}{A vector; its length is taken.}
 \item{n_bits}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the sasimi_native implementation; see the file header for the source it follows.
+A step of the sasimi_native implementation. Called by \code{sasimi_counts}, \code{sasimi_nearest_neighbours}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{sort}.

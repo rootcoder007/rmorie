@@ -27,10 +27,11 @@
 
 #' .smoopt_kvec
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{dim}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .smoopt_kvec <- function(x) if (is.null(dim(x))) as.numeric(x) else
@@ -38,10 +39,11 @@
 
 #' .smoopt_make_rng
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. Called by \code{smo_platt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{uniform}.
 #' @export
 .smoopt_make_rng <- function(seed) {
@@ -51,12 +53,13 @@
 
 #' error_cache
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. Called by \code{smo_platt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
 #' @param y See Usage.
-#' @param K See Usage.
+#' @param K A matrix; indexed by row and column.
 #' @param b See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -73,13 +76,14 @@ error_cache <- function(alpha, y, K, b) {
 
 #' violates_kkt
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. Called by \code{smo_platt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param i See Usage.
-#' @param alpha See Usage.
-#' @param y See Usage.
-#' @param E See Usage.
+#' @param alpha A vector; indexed elementwise.
+#' @param y A vector; indexed elementwise.
+#' @param E A vector; indexed elementwise.
 #' @param C See Usage.
 #' @param tol Defaults to \code{0.001}.
 #' @return A logical value.
@@ -93,12 +97,13 @@ violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
 
 #' outer_loop_schedule
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. Called by \code{smo_platt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
 #' @param C See Usage.
-#' @param examine_all See Usage.
+#' @param examine_all A flag; the body branches on it.
 #' @return A list with \code{indices}, \code{kind}, \code{n_non_bound}, \code{note}.
 #' @export
 outer_loop_schedule <- function(alpha, C, examine_all) {
@@ -115,15 +120,16 @@ outer_loop_schedule <- function(alpha, C, examine_all) {
 
 #' second_choice
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. Called by \code{smo_platt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param i1 See Usage.
 #' @param alpha See Usage.
 #' @param y See Usage.
-#' @param E See Usage.
+#' @param E A vector; indexed elementwise.
 #' @param C See Usage.
-#' @param rng See Usage.
+#' @param rng A list; the body reads \code{$uniform} from it.
 #' @param tol Defaults to \code{0.001}.
 #' @return A list with \code{index}, \code{level}, \code{note}.
 #' @export
@@ -158,7 +164,8 @@ second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
 
 #' compute_threshold
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. Called by \code{smo_platt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param i1 See Usage.
@@ -167,8 +174,8 @@ second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
 #' @param a2_new See Usage.
 #' @param alpha See Usage.
 #' @param y See Usage.
-#' @param E See Usage.
-#' @param K See Usage.
+#' @param E A vector; indexed elementwise.
+#' @param K A matrix; indexed by row and column.
 #' @param b See Usage.
 #' @param C See Usage.
 #' @return A list with \code{b}, \code{from}, \code{b1}, \code{b2}, \code{note}.
@@ -197,16 +204,17 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
 
 #' smo_platt
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param K See Usage.
+#' @param K A matrix; indexed by row and column.
 #' @param C Defaults to \code{1}.
 #' @param tol Defaults to \code{0.001}.
 #' @param eps Defaults to \code{1e-05}.
 #' @param max_passes Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.smoopt_make_rng}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{passes}, \code{full_passes}, \code{non_bound_passes}, \code{steps}, \code{support_vectors}, \code{n_sv}, \code{equality_residual}, \code{kkt_violations}, \code{objective}, \code{method}, \code{note}.
 #' @export
 smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
@@ -284,7 +292,8 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
 
 #' .smoopt_cheatsheet
 #'
-#' Part of the smoopt_native implementation; see the file header for the
+#' A step of the smoopt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

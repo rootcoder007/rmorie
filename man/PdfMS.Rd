@@ -8,10 +8,10 @@
 PdfMS(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
 }
 \arguments{
-\item{pdf}{Defaults to \code{NULL}.}
-\item{x}{Defaults to \code{NULL}.}
-\item{lower}{Defaults to \code{-Inf}.}
-\item{upper}{Defaults to \code{Inf}.}
+\item{pdf}{Passed to \code{.morie_rg_pdfint}.}
+\item{x}{Passed to \code{.morie_rg_pdfint}.}
+\item{lower}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.}
+\item{upper}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.}
 }
 \description{
 are returned rather than one being assumed for the other.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{A}{See Usage.}
-\item{rank_deficit}{Defaults to \code{0L}.}
+\item{rank_deficit}{Numeric; combined arithmetically in the body. Defaults to \code{0L}.}
 }
 \description{
 |eigenvalues| Part of the poissp_native implementation; see the file header for the source it follows.

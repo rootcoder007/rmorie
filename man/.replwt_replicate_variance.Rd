@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{estimator}{See Usage.}
-\item{d}{See Usage.}
-\item{rep}{See Usage.}
+\item{d}{A list; the body reads \code{$weights} from it.}
+\item{rep}{A list; the body reads \code{$method}, \code{$scale}, \code{$weights} from it.}
 \item{values}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the replwt_native implementation; see the file header for the source it follows.
+A step of the replwt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error}, \code{replicates}, \code{n_replicates}, \code{method}.
@@ -24,7 +24,7 @@ A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error}, \c
 Wolter, K. M. (2007) Introduction to Variance Estimation, 2nd
 edition, Springer, ISBN 978-0-387-32917-8,
 doi:10.1007/978-0-387-35099-8. Ch. 2 (random groups), Ch. 3
-(balanced half-samples, the Hadamard construction, Fay\\'s
+(balanced half-samples, the Hadamard construction, Fay\'s
 modification), Ch. 4 (the jackknife, JK1 and JKn multipliers) and
 Ch. 5 (the bootstrap); the exact equivalence of full-orthogonal
 BRR to the stratified variance estimator for linear statistics.

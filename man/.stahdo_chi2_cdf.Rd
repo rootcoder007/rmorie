@@ -8,11 +8,11 @@
 .stahdo_chi2_cdf(x, k)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{k}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{.stahdo_chi2_median}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

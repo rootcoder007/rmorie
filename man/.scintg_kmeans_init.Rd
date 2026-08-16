@@ -8,12 +8,12 @@
 .scintg_kmeans_init(Zn, K, seed)
 }
 \arguments{
-\item{Zn}{See Usage.}
-\item{K}{See Usage.}
+\item{Zn}{A matrix; indexed by row and column.}
+\item{K}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{.scintg_maximum_diversity_clustering}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{centres}, as built in the body.

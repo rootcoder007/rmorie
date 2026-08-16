@@ -8,13 +8,13 @@
 morie_snpqc1_sex_check(x_genotypes, reported_sex = NULL, male_min = 0.8, female_max = 0.2)
 }
 \arguments{
-\item{x_genotypes}{See Usage.}
+\item{x_genotypes}{Passed to \code{.snpqc1_check}.}
 \item{reported_sex}{Defaults to \code{NULL}.}
 \item{male_min}{Defaults to \code{0.8}.}
 \item{female_max}{Defaults to \code{0.2}.}
 }
 \description{
-Part of the snpqc1_native implementation; see the file header for the source it follows.
+A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{res}, as built in the body.

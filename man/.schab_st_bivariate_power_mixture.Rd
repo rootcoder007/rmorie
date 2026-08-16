@@ -8,12 +8,12 @@
 .schab_st_bivariate_power_mixture(rs, rt, pmf)
 }
 \arguments{
-\item{rs}{See Usage.}
-\item{rt}{See Usage.}
-\item{pmf}{See Usage.}
+\item{rs}{A vector; its length is taken.}
+\item{rt}{A vector; its length is taken.}
+\item{pmf}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{spstcn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,13 +8,13 @@
 morie_phylby_swap_acceptance(beta_j, beta_k, logp_j, logp_k)
 }
 \arguments{
-\item{beta_j}{See Usage.}
-\item{beta_k}{See Usage.}
-\item{logp_j}{See Usage.}
-\item{logp_k}{See Usage.}
+\item{beta_j}{Numeric; combined arithmetically in the body.}
+\item{beta_k}{Numeric; combined arithmetically in the body.}
+\item{logp_j}{Numeric; combined arithmetically in the body.}
+\item{logp_k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{morie_phylby}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

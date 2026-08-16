@@ -8,12 +8,12 @@
 .shdsmw_wls(X, y, w)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{w}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the shdsmw_native implementation; see the file header for the source it follows.
+A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}, \code{se}.

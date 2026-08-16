@@ -8,8 +8,8 @@
 smfd_difference_matrix(p, order = 2L)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{order}{Defaults to \code{2L}.}
+\item{p}{A matrix; passed to \code{diag}.}
+\item{order}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.}
 }
 \description{
 first differences starting from the identity. Mirrors Python difference_matrix(p, order) in smfd.

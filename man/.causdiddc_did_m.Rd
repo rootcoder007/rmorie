@@ -3,18 +3,18 @@
 % the formals.
 \name{.causdiddc_did_m}
 \alias{.causdiddc_did_m}
-\title{The paper\\\'s DID_M estimator: switchers vs stayers, period by period}
+\title{The paper\\'s DID_M estimator: switchers vs stayers, period by period}
 \usage{
 .causdiddc_did_m(Y, D, group, period)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{D}{See Usage.}
-\item{group}{See Usage.}
-\item{period}{See Usage.}
+\item{Y}{Passed to \code{.causdiddc_panel}.}
+\item{D}{Passed to \code{.causdiddc_panel}.}
+\item{group}{Passed to \code{.causdiddc_panel}.}
+\item{period}{Passed to \code{.causdiddc_panel}.}
 }
 \description{
-Part of the causdiddc_native implementation; see the file header for the source it follows.
+A step of the causdiddc_native implementation. Called by \code{morie_causdiddc}, \code{morie_causdiddc_did_m}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{did_m}, \code{switches}, \code{n_switches}, \code{n_switching_obs}, \code{n}, \code{method}, \code{note}.

@@ -9,11 +9,11 @@ basic_reproduction_numbers(beta, nu, mu)
 }
 \arguments{
 \item{beta}{See Usage.}
-\item{nu}{See Usage.}
+\item{nu}{A vector; its length is taken.}
 \item{mu}{See Usage.}
 }
 \description{
-Part of the hiatus_native implementation; see the file header for the source it follows.
+A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \code{endemic_equilibrium}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

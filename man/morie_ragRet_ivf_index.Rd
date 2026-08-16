@@ -14,7 +14,7 @@ morie_ragRet_ivf_index(corpus, n.cells = 4L, iters = 25L, seed = 0L)
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{
-Part of the ragRet_native implementation; see the file header for the source it follows.
+A step of the ragRet_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{centroids}, \code{lists}, \code{assign}, \code{n.cells}, \code{n}, \code{note}.

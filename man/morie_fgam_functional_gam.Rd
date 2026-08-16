@@ -8,16 +8,16 @@
 morie_fgam_functional_gam(X, Y, basis = NULL, n_x = 6, n_t = 6, lam_x = 1, lam_t = 1)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{Y}{See Usage.}
 \item{basis}{Defaults to \code{NULL}.}
-\item{n_x}{Defaults to \code{6}.}
-\item{n_t}{Defaults to \code{6}.}
-\item{lam_x}{Defaults to \code{1}.}
-\item{lam_t}{Defaults to \code{1}.}
+\item{n_x}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.}
+\item{n_t}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.}
+\item{lam_x}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{lam_t}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the fgam_native implementation; see the file header for the source it follows.
+A step of the fgam_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{fitted}, \code{residuals}, \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf}, \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t}, \code{linear_deviation}, \code{n}, \code{method}, \code{note}.

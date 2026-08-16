@@ -8,18 +8,18 @@
 .grclus_bisect(adj, vw, target, matching, initial, refinement, tolerance, coarsest, seed)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{vw}{See Usage.}
-\item{target}{See Usage.}
-\item{matching}{See Usage.}
-\item{initial}{See Usage.}
-\item{refinement}{See Usage.}
-\item{tolerance}{See Usage.}
+\item{adj}{Passed to \code{.grclus_balance_bisection}.}
+\item{vw}{Numeric; passed to \code{sum}.}
+\item{target}{Numeric; combined arithmetically in the body.}
+\item{matching}{Passed to \code{.grclus_match_vertices}.}
+\item{initial}{Compared against \code{"gggp"}.}
+\item{refinement}{Compared against \code{"bkl"}.}
+\item{tolerance}{Passed to \code{.grclus_kl}.}
 \item{coarsest}{See Usage.}
-\item{seed}{See Usage.}
+\item{seed}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{morie_grclus}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.grclus_balance_bisection}.

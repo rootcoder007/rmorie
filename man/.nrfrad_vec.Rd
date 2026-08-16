@@ -11,7 +11,7 @@
 \item{p}{See Usage.}
 }
 \description{
-Part of the nrfrad_native implementation; see the file header for the source it follows.
+A step of the nrfrad_native implementation. Called by \code{density_is_view_independent}, \code{positional_encoding}, \code{ray_points} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

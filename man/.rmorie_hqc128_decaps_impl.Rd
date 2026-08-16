@@ -8,11 +8,11 @@
 .rmorie_hqc128_decaps_impl(sk_sxp, ct_sxp)
 }
 \arguments{
-\item{sk_sxp}{See Usage.}
-\item{ct_sxp}{See Usage.}
+\item{sk_sxp}{Passed to \code{.Call}.}
+\item{ct_sxp}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

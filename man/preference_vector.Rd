@@ -13,7 +13,7 @@ preference_vector(nodes, focus, weight = 0.9)
 \item{weight}{Defaults to \code{0.9}.}
 }
 \description{
-Part of the tagRC_native implementation; see the file header for the source it follows.
+A step of the tagRC_native implementation. Called by \code{folkrank}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p}, \code{focus}, \code{mass}.

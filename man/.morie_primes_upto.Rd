@@ -8,7 +8,7 @@
 .morie_primes_upto(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
 Part of the algebraic_combinatorics_native implementation; see the file header for the source it follows.

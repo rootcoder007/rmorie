@@ -12,7 +12,7 @@
 \item{expected}{See Usage.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spbayr}, \code{spbym}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

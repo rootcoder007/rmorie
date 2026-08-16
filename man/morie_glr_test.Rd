@@ -8,15 +8,15 @@
 morie_glr_test(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p0}{See Usage.}
-\item{p1}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{p0}{A vector; its length is taken.}
+\item{p1}{A vector; its length is taken.}
 \item{threshold}{Defaults to \code{NULL}.}
 \item{family}{Defaults to \code{"bernoulli"}.}
 \item{sd}{Defaults to \code{1}.}
 }
 \description{
-Part of the glm_native implementation; see the file header for the source it follows.
+A step of the glm_native implementation. Called by \code{glrtest}, \code{page_cusum}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{payload}, as built in the body.

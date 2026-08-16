@@ -8,13 +8,13 @@
 edgrn_moderate_dispersion(gene_dispersions, common = NULL, prior_df = 10, df_residual = 1)
 }
 \arguments{
-\item{gene_dispersions}{See Usage.}
+\item{gene_dispersions}{Passed to \code{.edgrn_vec}.}
 \item{common}{Defaults to \code{NULL}.}
 \item{prior_df}{Defaults to \code{10}.}
 \item{df_residual}{Defaults to \code{1}.}
 }
 \description{
-Part of the edgrn_native implementation; see the file header for the source it follows.
+A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dispersion}, \code{common}, \code{shrinkage}, \code{prior_df}, \code{df_residual}, \code{note}.

@@ -8,17 +8,17 @@
 .grclus_kl(adj, vw, parts, target, tolerance, boundary, max_passes, patience)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{vw}{See Usage.}
-\item{parts}{See Usage.}
-\item{target}{See Usage.}
-\item{tolerance}{See Usage.}
-\item{boundary}{See Usage.}
+\item{adj}{A vector; its length is taken and its elements indexed.}
+\item{vw}{A vector; indexed elementwise.}
+\item{parts}{A vector; indexed elementwise.}
+\item{target}{Numeric; combined arithmetically in the body.}
+\item{tolerance}{Numeric; combined arithmetically in the body.}
+\item{boundary}{A flag; the body branches on it.}
 \item{max_passes}{See Usage.}
 \item{patience}{See Usage.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{.grclus_bisect}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{parts}, \code{cut}.

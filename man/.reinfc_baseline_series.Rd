@@ -8,12 +8,12 @@
 .reinfc_baseline_series(rewards, baseline, gamma)
 }
 \arguments{
-\item{rewards}{See Usage.}
-\item{baseline}{See Usage.}
-\item{gamma}{See Usage.}
+\item{rewards}{A vector; its length is taken and its elements indexed.}
+\item{baseline}{One of \code{"comparison"}, \code{"none"}.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the reinfc_native implementation; see the file header for the source it follows.
+A step of the reinfc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,11 +8,11 @@
 .morie_w4c_leaf_value(y, criterion)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{criterion}{See Usage.}
+\item{y}{Numeric; passed to \code{mean}.}
+\item{criterion}{Compared against \code{"mse"}.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{.morie_w4c_grow}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

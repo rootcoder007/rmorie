@@ -8,12 +8,12 @@
 .slbpdg_interp(xs, ys, x)
 }
 \arguments{
-\item{xs}{See Usage.}
-\item{ys}{See Usage.}
-\item{x}{See Usage.}
+\item{xs}{A vector; its length is taken and its elements indexed.}
+\item{ys}{A vector; indexed elementwise.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the slbpdg_native implementation; see the file header for the source it follows.
+A step of the slbpdg_native implementation. Called by \code{morie_slbpdg}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -7,7 +7,7 @@
 Chernbnd(mgf, a, s_grid = NULL)
 }
 \arguments{
-\item{mgf}{The moment generating function s -> E\link{exp(s X)}.}
+\item{mgf}{The moment generating function s -> E[exp(s X)].}
 
 \item{a}{Tail threshold.}
 
@@ -17,7 +17,7 @@ Chernbnd(mgf, a, s_grid = NULL)
 List with \code{bound}, \code{s}, \code{log_bound}, \code{at_boundary}.
 }
 \description{
-Formula: P(X >= a) <= min_{s>0} exp(-s a) E\link{exp(s X)}
+Formula: P(X >= a) <= min_{s>0} exp(-s a) E[exp(s X)]
 }
 \references{
 Chernoff (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations, Annals of Mathematical Statistics 23:493-507. Not held locally; the exponential Markov bound is stated in this exact form in every standard reference.

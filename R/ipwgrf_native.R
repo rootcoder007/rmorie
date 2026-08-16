@@ -34,11 +34,12 @@
 
 #' .ipwgrf_folds
 #'
-#' Part of the ipwgrf_native implementation; see the file header for the
+#' A step of the ipwgrf_native implementation. Called by \code{.ipwgrf_forest_nuisances}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param V See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
 .ipwgrf_folds <- function(n, V) {
@@ -48,16 +49,17 @@
 
 #' .ipwgrf_forest_nuisances
 #'
-#' Part of the ipwgrf_native implementation; see the file header for the
+#' A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
-#' @param X See Usage.
-#' @param n_folds Defaults to \code{5}.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param W A vector; indexed elementwise.
+#' @param X A matrix; indexed by row and column.
+#' @param n_folds Passed to \code{.ipwgrf_folds}. Defaults to \code{5}.
 #' @param n_trees Defaults to \code{120}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param seed Defaults to \code{0}.
+#' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{mu1}, \code{mu0}, \code{e}.
 #' @export
 .ipwgrf_forest_nuisances <- function(y, W, X, n_folds = 5, n_trees = 120,
@@ -113,14 +115,15 @@
 
 #' .ipwgrf_aipw_scores
 #'
-#' Part of the ipwgrf_native implementation; see the file header for the
+#' A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
-#' @param mu1 See Usage.
-#' @param mu0 See Usage.
-#' @param e See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param W A vector; indexed elementwise.
+#' @param mu1 A vector; indexed elementwise.
+#' @param mu0 A vector; indexed elementwise.
+#' @param e A vector; indexed elementwise.
 #' @param trim Defaults to \code{0.02}.
 #' @return A list with \code{g}, \code{weights}.
 #' @export
@@ -149,20 +152,21 @@
 
 #' morie_ipwgrf
 #'
-#' Part of the ipwgrf_native implementation; see the file header for the
+#' A step of the ipwgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param W See Usage.
-#' @param X See Usage.
-#' @param n_folds Defaults to \code{5}.
-#' @param n_trees Defaults to \code{120}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param trim Defaults to \code{0.02}.
-#' @param seed Defaults to \code{0}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param n_folds Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.
+#' @param n_trees Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{120}.
+#' @param min_leaf Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.
+#' @param trim Passed to \code{.ipwgrf_aipw_scores}. Defaults to \code{0.02}.
+#' @param seed Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{0}.
 #' @param level Defaults to \code{0.95}.
-#' @param break_outcome Defaults to \code{FALSE}.
-#' @param break_propensity Defaults to \code{FALSE}.
+#' @param break_outcome A flag; the body branches on it. Defaults to \code{FALSE}.
+#' @param break_propensity A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{ate}, \code{se}, \code{ci}, \code{scores}, \code{mu1}, \code{mu0}, \code{propensity}, \code{plug_in}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{trim}, \code{n}, \code{level}, \code{broken_outcome}, \code{broken_propensity}, \code{method}.
 #' @export
 morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
@@ -243,7 +247,8 @@ morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
 
 #' .ipwgrf_cheatsheet
 #'
-#' Part of the ipwgrf_native implementation; see the file header for the
+#' A step of the ipwgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

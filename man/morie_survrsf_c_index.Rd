@@ -3,14 +3,14 @@
 % the formals.
 \name{morie_survrsf_c_index}
 \alias{morie_survrsf_c_index}
-\title{Harrell\\'s C by the paper\\'s four steps. predicted is a}
+\title{Harrell\'s C by the paper\'s four steps. predicted is a}
 \usage{
 morie_survrsf_c_index(times, events, predicted)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{predicted}{See Usage.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; its length is taken and its elements indexed.}
+\item{predicted}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 worse-outcome score: larger means the case is expected to fail sooner.

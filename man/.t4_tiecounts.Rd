@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the tail4_core implementation; see the file header for the source it follows.
+A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}, \code{Mktest}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

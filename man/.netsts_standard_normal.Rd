@@ -8,8 +8,8 @@
 .netsts_standard_normal(rng, n)
 }
 \arguments{
-\item{rng}{See Usage.}
-\item{n}{See Usage.}
+\item{rng}{Passed to \code{.ghc_unif}.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 glibc LCG-backed helper. Two uniforms per sample.

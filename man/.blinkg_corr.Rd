@@ -8,11 +8,11 @@
 .blinkg_corr(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A vector; its length is taken.}
+\item{b}{Numeric; passed to \code{.w3_csum}.}
 }
 \description{
-Part of the blinkg_native implementation; see the file header for the source it follows.
+A step of the blinkg_native implementation. Called by \code{morie_blinkg_ld_filter}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

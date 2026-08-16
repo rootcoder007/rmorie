@@ -12,7 +12,7 @@ morie_trmRew_subterm_at(t, pos)
 \item{pos}{See Usage.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{.trmRew_overlap}, \code{morie_trmRew_rewrite_step}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cur}, as built in the body.

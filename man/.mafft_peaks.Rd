@@ -8,12 +8,12 @@
 .mafft_peaks(lags, c, n_peaks)
 }
 \arguments{
-\item{lags}{See Usage.}
-\item{c}{See Usage.}
+\item{lags}{A vector; its length is taken and its elements indexed.}
+\item{c}{A vector; its length is taken.}
 \item{n_peaks}{See Usage.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{find_homologous_segments}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

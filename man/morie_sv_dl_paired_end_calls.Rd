@@ -9,16 +9,16 @@ morie_sv_dl_paired_end_calls(pairs, median = NULL, sd = NULL, orientation = NULL
 }
 \arguments{
 \item{pairs}{See Usage.}
-\item{median}{Defaults to \code{NULL}.}
-\item{sd}{Defaults to \code{NULL}.}
-\item{orientation}{Defaults to \code{NULL}.}
-\item{n_sd}{Defaults to \code{3}.}
+\item{median}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.}
+\item{sd}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.}
+\item{orientation}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_insert_size_stats}.}
+\item{n_sd}{Passed to \code{morie_sv_dl_classify_pair}. Defaults to \code{3}.}
 \item{min_support}{Defaults to \code{2}.}
-\item{window}{Defaults to \code{NULL}.}
-\item{spread}{Defaults to \code{"mad"}.}
+\item{window}{Passed to \code{morie_sv_dl_build_sv_graph}.}
+\item{spread}{Passed to \code{morie_sv_dl_insert_size_stats}. Defaults to \code{"mad"}.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_structural_variant}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{calls}, as built in the body.

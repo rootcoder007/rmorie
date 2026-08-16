@@ -8,9 +8,9 @@
 orthogonal_moment(y_res, t_res, weights)
 }
 \arguments{
-\item{y_res}{See Usage.}
-\item{t_res}{See Usage.}
-\item{weights}{See Usage.}
+\item{y_res}{A vector; its length is taken.}
+\item{t_res}{A vector; its length is taken.}
+\item{weights}{A vector; its length is taken.}
 }
 \description{
 residualized treatment has no weighted variation left.

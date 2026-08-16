@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{B}{See Usage.}
-\item{kappa}{See Usage.}
+\item{kappa}{Passed to \code{.tloilr_resource_threshold}.}
 }
 \description{
-Part of the tloilr_native implementation; see the file header for the source it follows.
+A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_value}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rule}, \code{tau}, \code{treated_fraction}, \code{binding}.

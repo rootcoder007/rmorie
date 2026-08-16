@@ -8,9 +8,9 @@
 .morie_bvn_cdf(x, y, rho)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{rho}{See Usage.}
+\item{x}{Numeric; passed to \code{max}.}
+\item{y}{Numeric; passed to \code{max}.}
+\item{rho}{Numeric; combined arithmetically in the body.}
 }
 \description{
 conditional normal -- avoids a mvtnorm dependency.

@@ -9,8 +9,8 @@ de_bruijn_graph(reads, k, multiplicity = "set")
 }
 \arguments{
 \item{reads}{See Usage.}
-\item{k}{See Usage.}
-\item{multiplicity}{Defaults to \code{"set"}.}
+\item{k}{Numeric; combined arithmetically in the body.}
+\item{multiplicity}{One of \code{"count"}, \code{"set"}. Defaults to \code{"set"}.}
 }
 \description{
 an edge from its prefix to its suffix. multiplicity="set" gives one edge per distinct k-mer (the Idury-Waterman construction); "count" gives one per occurrence for callers who already know their multiplicities. Returns a list (edges, indeg, outdeg); edges/indeg/outdeg are environments keyed by vertex (string), paralleling the Python dict-of-lists + counter-dicts.

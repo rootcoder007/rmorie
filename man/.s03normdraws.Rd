@@ -8,11 +8,11 @@
 .s03normdraws(n, base = 2L)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{base}{Defaults to \code{2L}.}
+\item{n}{Passed to \code{.s03unif}.}
+\item{base}{Passed to \code{.s03unif}. Defaults to \code{2L}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.ot_directions}, \code{.vitdraw}, \code{MedCI} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{qnorm}.

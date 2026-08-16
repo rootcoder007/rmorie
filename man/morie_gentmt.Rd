@@ -8,17 +8,17 @@
 morie_gentmt(y, A, H, method = "weight", degree = 1, n_strata = 5, doses = NULL, trim = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{H}{See Usage.}
-\item{method}{Defaults to \code{"weight"}.}
+\item{y}{Passed to \code{.gentmt_vec}.}
+\item{A}{Passed to \code{.gentmt_vec}.}
+\item{H}{Passed to \code{.gentmt_ip_weights}.}
+\item{method}{One of \code{"subclassify"}, \code{"weight"}. Defaults to \code{"weight"}.}
 \item{degree}{Defaults to \code{1}.}
-\item{n_strata}{Defaults to \code{5}.}
-\item{doses}{Defaults to \code{NULL}.}
-\item{trim}{Defaults to \code{NULL}.}
+\item{n_strata}{Passed to \code{.gentmt_gps_subclassify}. Defaults to \code{5}.}
+\item{doses}{Passed to \code{.gentmt_dose_response_curve}.}
+\item{trim}{Passed to \code{.gentmt_ip_weights}.}
 }
 \description{
-Part of the gentmt_native implementation; see the file header for the source it follows.
+A step of the gentmt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

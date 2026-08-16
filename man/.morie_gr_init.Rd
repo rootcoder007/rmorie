@@ -8,10 +8,10 @@
 .morie_gr_init(nrow, ncol, seed, scale = 0.1)
 }
 \arguments{
-\item{nrow}{See Usage.}
-\item{ncol}{See Usage.}
-\item{seed}{See Usage.}
-\item{scale}{Defaults to \code{0.1}.}
+\item{nrow}{A count; the body uses it as \code{matrix(...)}.}
+\item{ncol}{A count; the body uses it as \code{matrix(...)}.}
+\item{seed}{Passed to \code{.morie_gr_lcg_w}.}
+\item{scale}{Passed to \code{.morie_gr_lcg_w}. Defaults to \code{0.1}.}
 }
 \description{
 stream, so byrow = TRUE.

@@ -8,12 +8,12 @@
 HhGate(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L)
 }
 \arguments{
-\item{V}{See Usage.}
-\item{dt}{Defaults to \code{0.01}.}
+\item{V}{Passed to \code{.bsahhrates}.}
+\item{dt}{Numeric; combined arithmetically in the body. Defaults to \code{0.01}.}
 \item{m}{Defaults to \code{NULL}.}
 \item{h}{Defaults to \code{NULL}.}
 \item{n}{Defaults to \code{NULL}.}
-\item{steps}{Defaults to \code{1L}.}
+\item{steps}{Numeric; combined arithmetically in the body. Defaults to \code{1L}.}
 }
 \description{
 potential Part of the rangayyan_phys implementation; see the file header for the source it follows.

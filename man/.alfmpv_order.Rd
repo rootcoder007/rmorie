@@ -3,15 +3,15 @@
 % the formals.
 \name{.alfmpv_order}
 \alias{.alfmpv_order}
-\title{Lower sorts first. Ties break on the hit\\\'s position in the}
+\title{Lower sorts first. Ties break on the hit\\'s position in the}
 \usage{
 .alfmpv_order(tab, mode, idx, pos)
 }
 \arguments{
-\item{tab}{See Usage.}
-\item{mode}{See Usage.}
+\item{tab}{A list; the body reads \code{$evalue}, \code{$identity} from it.}
+\item{mode}{One of \code{"colabfold"}, \code{"multimer"}.}
 \item{idx}{See Usage.}
-\item{pos}{See Usage.}
+\item{pos}{Numeric; passed to \code{order}.}
 }
 \description{
 alignment, so the order is total and neither arm can wander off on a tie.

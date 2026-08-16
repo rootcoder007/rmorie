@@ -11,7 +11,7 @@
 \item{seed}{See Usage.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}, \code{.propinf_train_vector_meta}, \code{morie_propinf_train_fcnn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{e}, as built in the body.

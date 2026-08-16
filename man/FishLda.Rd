@@ -8,8 +8,8 @@
 FishLda(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A vector; its length is taken.}
 }
 \description{
 ratio of between- to within-class scatter of the PROJECTED data.  Two classes only.  It reduces the data to ONE number chosen for separation, not reconstruction, so unlike a principal component it is not meant to represent the data.

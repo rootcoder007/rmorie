@@ -29,10 +29,11 @@
 
 #' .abcgp.lse
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likelihood}, \code{morie_abcgp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
+#' @param values A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .abcgp.lse <- function(values) {
@@ -45,11 +46,12 @@
 
 #' .abcgp.sobol_dir
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.sobol_sequence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dim See Usage.
-#' @param bits See Usage.
+#' @param dim A count; the body uses it as \code{seq_len(...)}.
+#' @param bits A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .abcgp.sobol_dir <- function(dim, bits) {
@@ -78,11 +80,12 @@
 
 #' .abcgp.sobol_sequence
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.design_from_prior}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param dim See Usage.
+#' @param n A count; the body uses it as \code{matrix(...)}.
+#' @param dim A count; the body uses it as \code{seq_len(...)}.
 #' @param skip Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -107,7 +110,8 @@
 
 #' .abcgp.summarise
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler}, \code{.abcgp.synthetic_log_likelihood}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -121,10 +125,11 @@
 
 #' .abcgp.chol
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.draw_mean}, \code{.abcgp.gp_fit}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a A matrix; indexed by row and column.
 #' @param jitter Defaults to \code{1e-12}.
 #' @return The value of \code{L}, as built in the body.
 #' @export
@@ -143,11 +148,12 @@
 
 #' .abcgp.chol_solve
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.gp_predict}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param b See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .abcgp.chol_solve <- function(L, b) {
@@ -162,12 +168,13 @@
 
 #' .abcgp.mvn_logpdf
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}, \code{.abcgp.synthetic_log_likelihood}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param mu See Usage.
-#' @param cov See Usage.
+#' @param y A vector; its length is taken.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param cov Passed to \code{.abcgp.chol}.
 #' @return A numeric value.
 #' @export
 .abcgp.mvn_logpdf <- function(y, mu, cov) {
@@ -182,13 +189,14 @@
 
 #' .abcgp.corr
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.gp_predict}, \code{.abcgp.profile_nll}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param lengthscale See Usage.
-#' @param kernel See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param lengthscale Numeric; combined arithmetically in the body.
+#' @param kernel One of \code{"matern32"}, \code{"sqexp"}.
 #' @return A numeric value.
 #' @export
 .abcgp.corr <- function(a, b, lengthscale, kernel) {
@@ -201,7 +209,8 @@
 
 #' .abcgp.basis
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_predict}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param theta See Usage.
@@ -212,11 +221,12 @@
 
 #' .abcgp.as_nugget
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.mle_lengthscale}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param nugget See Usage.
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{pmax}.
 #' @export
 .abcgp.as_nugget <- function(nugget, n) {
@@ -229,14 +239,15 @@
 
 #' .abcgp.profile_nll
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mle_lengthscale}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ls See Usage.
-#' @param nug See Usage.
-#' @param kernel See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param ls Passed to \code{.abcgp.corr}.
+#' @param nug A vector; indexed elementwise.
+#' @param kernel Passed to \code{.abcgp.corr}.
 #' @return A numeric value.
 #' @export
 .abcgp.profile_nll <- function(X, y, ls, nug, kernel) {
@@ -267,13 +278,14 @@
 
 #' .abcgp.mle_lengthscale
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param nugget See Usage.
-#' @param kernel See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Passed to \code{.abcgp.profile_nll}.
+#' @param nugget Passed to \code{.abcgp.as_nugget}.
+#' @param kernel Passed to \code{.abcgp.profile_nll}.
 #' @return The value of \code{ls}, as built in the body.
 #' @export
 .abcgp.mle_lengthscale <- function(X, y, nugget, kernel) {
@@ -297,14 +309,15 @@
 
 #' .abcgp.gp_fit
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param design See Usage.
+#' @param design A matrix; passed to \code{as.matrix}.
 #' @param values See Usage.
-#' @param nugget Defaults to \code{NULL}.
+#' @param nugget Passed to \code{.abcgp.mle_lengthscale}.
 #' @param lengthscale Defaults to \code{NULL}.
-#' @param kernel Defaults to \code{"sqexp"}.
+#' @param kernel Passed to \code{.abcgp.mle_lengthscale}. Defaults to \code{"sqexp"}.
 #' @param tau2 Defaults to \code{NULL}.
 #' @return A list with \code{design}, \code{values}, \code{beta}, \code{tau2}, \code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r}, \code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
 #' @export
@@ -349,10 +362,11 @@
 
 #' .abcgp.gp_predict
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.implausible}, \code{morie_abcgp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
+#' @param fit A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol}, \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel}, \code{$lengthscale}, \code{$n}, \code{$tau2} from it.
 #' @param theta See Usage.
 #' @return A vector, from \code{c}.
 #' @export
@@ -376,13 +390,14 @@
 
 #' .abcgp.implausible
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
-#' @param theta See Usage.
-#' @param threshold Defaults to \code{10}.
-#' @param n_sd Defaults to \code{3}.
+#' @param fit A list; the body reads \code{$values} from it.
+#' @param theta Passed to \code{.abcgp.gp_predict}.
+#' @param threshold Numeric; combined arithmetically in the body. Defaults to \code{10}.
+#' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @return A logical value.
 #' @export
 .abcgp.implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
@@ -392,13 +407,14 @@
 
 #' .abcgp.design_from_prior
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param prior_ppf See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param prior_ppf A vector; its length is taken and its elements indexed.
 #' @param dim Defaults to \code{NULL}.
-#' @param skip Defaults to \code{1}.
+#' @param skip Passed to \code{.abcgp.sobol_sequence}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .abcgp.design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1) {
@@ -426,17 +442,18 @@
 
 #' .abcgp.gabc_log_likelihood
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sim See Usage.
-#' @param obs See Usage.
+#' @param obs Passed to \code{.abcgp.summarise}.
 #' @param theta See Usage.
-#' @param n_sim Defaults to \code{50}.
-#' @param epsilon Defaults to \code{1}.
-#' @param summary Defaults to \code{NULL}.
-#' @param kernel Defaults to \code{"gaussian"}.
-#' @param seed Defaults to \code{0}.
+#' @param n_sim A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50}.
+#' @param epsilon Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param summary Passed to \code{.abcgp.summarise}.
+#' @param kernel One of \code{"gaussian"}, \code{"uniform"}. Defaults to \code{"gaussian"}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param bootstrap Defaults to \code{25}.
 #' @return A vector, from \code{c}.
 #' @export
@@ -477,13 +494,14 @@
 
 #' .abcgp.synthetic_log_likelihood
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param draws See Usage.
-#' @param obs See Usage.
-#' @param epsilon Defaults to \code{0}.
-#' @param summary Defaults to \code{NULL}.
+#' @param obs Passed to \code{.abcgp.summarise}.
+#' @param epsilon Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param summary Passed to \code{.abcgp.summarise}.
 #' @return A list with \code{log_lik}, \code{mu}, \code{cov}.
 #' @export
 .abcgp.synthetic_log_likelihood <- function(draws, obs, epsilon = 0,
@@ -505,21 +523,22 @@
 
 #' .abcgp.history_match
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sim See Usage.
-#' @param obs See Usage.
-#' @param prior_ppf See Usage.
+#' @param sim Passed to \code{.abcgp.gabc_log_likelihood}.
+#' @param obs Passed to \code{.abcgp.gabc_log_likelihood}.
+#' @param prior_ppf Passed to \code{.abcgp.design_from_prior}.
 #' @param n_waves Defaults to \code{3}.
 #' @param n_design Defaults to \code{32}.
-#' @param n_sim Defaults to \code{50}.
-#' @param epsilon Defaults to \code{1}.
-#' @param summary Defaults to \code{NULL}.
-#' @param threshold Defaults to \code{10}.
-#' @param n_sd Defaults to \code{3}.
-#' @param kernel Defaults to \code{"sqexp"}.
-#' @param accept_kernel Defaults to \code{"gaussian"}.
+#' @param n_sim Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{50}.
+#' @param epsilon Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{1}.
+#' @param summary Passed to \code{.abcgp.gabc_log_likelihood}.
+#' @param threshold Passed to \code{.abcgp.implausible}. Defaults to \code{10}.
+#' @param n_sd Passed to \code{.abcgp.implausible}. Defaults to \code{3}.
+#' @param kernel Passed to \code{.abcgp.gp_fit}. Defaults to \code{"sqexp"}.
+#' @param accept_kernel Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{"gaussian"}.
 #' @param seed Defaults to \code{0}.
 #' @return A list with \code{fit}, \code{waves}.
 #' @export
@@ -565,16 +584,17 @@
 
 #' .abcgp.alpha_terms
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param log_prior See Usage.
 #' @param theta See Usage.
 #' @param theta_p See Usage.
-#' @param ll See Usage.
-#' @param ll_p See Usage.
-#' @param log_q See Usage.
-#' @param log_q_p See Usage.
+#' @param ll Numeric; combined arithmetically in the body.
+#' @param ll_p Numeric; combined arithmetically in the body.
+#' @param log_q Numeric; combined arithmetically in the body.
+#' @param log_q_p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .abcgp.alpha_terms <- function(log_prior, theta, theta_p, ll, ll_p,
@@ -583,12 +603,13 @@
 
 #' .abcgp.expected_error
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alphas See Usage.
+#' @param alphas A vector; its length is taken.
 #' @param tau See Usage.
-#' @param n_grid Defaults to \code{101}.
+#' @param n_grid A count; the body uses it as \code{seq_len(...)}. Defaults to \code{101}.
 #' @return A numeric value.
 #' @export
 .abcgp.expected_error <- function(alphas, tau, n_grid = 101) {
@@ -604,10 +625,11 @@
 
 #' .abcgp.median
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .abcgp.median <- function(v) {
@@ -617,13 +639,14 @@
 
 #' .abcgp.draw_mean
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mu See Usage.
-#' @param cov See Usage.
-#' @param S See Usage.
-#' @param e See Usage.
+#' @param mu A vector; its length is taken.
+#' @param cov Numeric; combined arithmetically in the body.
+#' @param S Numeric; combined arithmetically in the body.
+#' @param e Passed to \code{.ghc_norm}.
 #' @return A numeric value.
 #' @export
 .abcgp.draw_mean <- function(mu, cov, S, e) {
@@ -636,19 +659,20 @@
 
 #' .abcgp.synthetic_abc
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sim See Usage.
-#' @param obs See Usage.
-#' @param log_prior See Usage.
-#' @param theta0 See Usage.
-#' @param n_iter Defaults to \code{200}.
-#' @param n_sim Defaults to \code{20}.
-#' @param epsilon Defaults to \code{0}.
-#' @param proposal_sd Defaults to \code{0.5}.
-#' @param summary Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param sim Passed to \code{.abcgp.mw_sampler}.
+#' @param obs Passed to \code{.abcgp.mw_sampler}.
+#' @param log_prior Passed to \code{.abcgp.mw_sampler}.
+#' @param theta0 Passed to \code{.abcgp.mw_sampler}.
+#' @param n_iter Passed to \code{.abcgp.mw_sampler}. Defaults to \code{200}.
+#' @param n_sim Passed to \code{.abcgp.mw_sampler}. Defaults to \code{20}.
+#' @param epsilon Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0}.
+#' @param proposal_sd Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0.5}.
+#' @param summary Passed to \code{.abcgp.mw_sampler}.
+#' @param seed Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0}.
 #' @return The value of \code{.abcgp.mw_sampler}.
 #' @export
 .abcgp.synthetic_abc <- function(sim, obs, log_prior, theta0, n_iter = 200,
@@ -659,23 +683,24 @@
 
 #' .abcgp.gps_abc
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sim See Usage.
-#' @param obs See Usage.
-#' @param log_prior See Usage.
-#' @param theta0 See Usage.
-#' @param n_iter Defaults to \code{200}.
-#' @param n_sim Defaults to \code{10}.
-#' @param epsilon Defaults to \code{0}.
-#' @param proposal_sd Defaults to \code{0.5}.
-#' @param summary Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
-#' @param xi Defaults to \code{0.05}.
-#' @param delta_s Defaults to \code{10}.
-#' @param n_alpha Defaults to \code{64}.
-#' @param max_sim Defaults to \code{400}.
+#' @param sim Passed to \code{.abcgp.mw_sampler}.
+#' @param obs Passed to \code{.abcgp.mw_sampler}.
+#' @param log_prior Passed to \code{.abcgp.mw_sampler}.
+#' @param theta0 Passed to \code{.abcgp.mw_sampler}.
+#' @param n_iter Passed to \code{.abcgp.mw_sampler}. Defaults to \code{200}.
+#' @param n_sim Passed to \code{.abcgp.mw_sampler}. Defaults to \code{10}.
+#' @param epsilon Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0}.
+#' @param proposal_sd Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0.5}.
+#' @param summary Passed to \code{.abcgp.mw_sampler}.
+#' @param seed Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0}.
+#' @param xi Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0.05}.
+#' @param delta_s Passed to \code{.abcgp.mw_sampler}. Defaults to \code{10}.
+#' @param n_alpha Passed to \code{.abcgp.mw_sampler}. Defaults to \code{64}.
+#' @param max_sim Passed to \code{.abcgp.mw_sampler}. Defaults to \code{400}.
 #' @return The value of \code{.abcgp.mw_sampler}.
 #' @export
 .abcgp.gps_abc <- function(sim, obs, log_prior, theta0, n_iter = 200,
@@ -688,20 +713,21 @@
 
 #' .abcgp.mw_sampler
 #'
-#' Part of the abcgp_native implementation; see the file header for the
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc}, \code{.abcgp.synthetic_abc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sim See Usage.
-#' @param obs See Usage.
-#' @param log_prior See Usage.
+#' @param obs Passed to \code{.abcgp.synthetic_log_likelihood}.
+#' @param log_prior Passed to \code{.abcgp.alpha_terms}.
 #' @param theta0 See Usage.
-#' @param n_iter See Usage.
+#' @param n_iter Numeric; combined arithmetically in the body.
 #' @param n_sim See Usage.
-#' @param epsilon See Usage.
+#' @param epsilon Passed to \code{.abcgp.synthetic_log_likelihood}.
 #' @param proposal_sd See Usage.
-#' @param summary See Usage.
-#' @param seed See Usage.
-#' @param adaptive See Usage.
+#' @param summary Passed to \code{.abcgp.synthetic_log_likelihood}.
+#' @param seed Passed to \code{.ghc_rng}.
+#' @param adaptive A flag; the body branches on it.
 #' @param xi See Usage.
 #' @param delta_s See Usage.
 #' @param n_alpha See Usage.

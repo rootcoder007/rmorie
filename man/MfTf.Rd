@@ -14,7 +14,7 @@ MfTf(X, freqs, t0, gain = 1)
 \item{gain}{Defaults to \code{1}.}
 }
 \description{
-cancels the signal\\'s phase so every component arrives in step at t0 -- that coherent addition is the whole gain of the method.
+cancels the signal\'s phase so every component arrives in step at t0 -- that coherent addition is the whole gain of the method.
 }
 \value{
 A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude}, \code{conjugate_of_signal}, \code{method}.

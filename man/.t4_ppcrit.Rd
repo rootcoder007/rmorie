@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{n}{See Usage.}
-\item{kind}{Defaults to \code{"Z(t_alpha)"}.}
+\item{kind}{Compared against \code{"Z(alpha)"}. Defaults to \code{"Z(t_alpha)"}.}
 }
 \description{
-Part of the pptest implementation; see the file header for the source it follows.
+A step of the pptest implementation. Called by \code{Pptest}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

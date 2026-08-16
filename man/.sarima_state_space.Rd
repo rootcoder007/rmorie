@@ -8,11 +8,11 @@
 .sarima_state_space(ar, ma)
 }
 \arguments{
-\item{ar}{See Usage.}
-\item{ma}{See Usage.}
+\item{ar}{A vector; its length is taken and its elements indexed.}
+\item{ma}{A vector; its length is taken.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. Called by \code{.filter_column}, \code{loglik}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{T}, \code{R}, \code{r}.

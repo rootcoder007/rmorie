@@ -8,11 +8,11 @@
 .vqgenc_quantize(vectors, codebook)
 }
 \arguments{
-\item{vectors}{See Usage.}
-\item{codebook}{See Usage.}
+\item{vectors}{Passed to \code{.vqgenc_as_matrix}.}
+\item{codebook}{Passed to \code{.vqgenc_as_matrix}.}
 }
 \description{
-Part of the vqgenc_native implementation; see the file header for the source it follows.
+A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{indices}, \code{codes}, \code{distance}, \code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.

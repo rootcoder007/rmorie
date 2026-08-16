@@ -8,7 +8,7 @@
 .ngnest_nbeats_stack(window, H, blocks, ridge = 1e-08)
 }
 \arguments{
-\item{window}{See Usage.}
+\item{window}{A vector; its length is taken.}
 \item{H}{See Usage.}
 \item{blocks}{See Usage.}
 \item{ridge}{Defaults to \code{1e-08}.}

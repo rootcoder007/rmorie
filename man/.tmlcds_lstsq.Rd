@@ -8,8 +8,8 @@
 .tmlcds_lstsq(Z, y)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{y}{See Usage.}
+\item{Z}{A matrix; passed to \code{ncol}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
 }
 \description{
 1e-10 ridge, so the R arm must too or near-singular designs drift

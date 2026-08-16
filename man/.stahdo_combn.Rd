@@ -8,11 +8,11 @@
 .stahdo_combn(n, p)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{p}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{.stahdo_subsample_dirs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

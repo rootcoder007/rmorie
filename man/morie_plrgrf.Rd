@@ -10,17 +10,17 @@ morie_plrgrf(y, W, X, at = NULL, n_trees = 200, n_folds = 5, min_leaf = 5, seed 
 \arguments{
 \item{y}{See Usage.}
 \item{W}{See Usage.}
-\item{X}{See Usage.}
-\item{at}{Defaults to \code{NULL}.}
-\item{n_trees}{Defaults to \code{200}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{n_trees}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 \item{n_folds}{Defaults to \code{5}.}
 \item{min_leaf}{Defaults to \code{5}.}
 \item{seed}{Defaults to \code{0}.}
-\item{center}{Defaults to \code{TRUE}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{center}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{level}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
 }
 \description{
-Part of the plrgrf_native implementation; see the file header for the source it follows.
+A step of the plrgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{tau}, \code{se}, \code{ci}, \code{m_hat}, \code{e_hat}, \code{y_residual}, \code{w_residual}, \code{centered}, \code{n}, \code{n_trees}, \code{ate}, \code{level}, \code{method}.

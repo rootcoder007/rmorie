@@ -13,7 +13,7 @@ morie_truncated_normal_interval(x, level = 0.95, lower_bound = 0)
 \item{lower_bound}{Defaults to \code{0}.}
 }
 \description{
-Part of the bndpcb_native implementation; see the file header for the source it follows.
+A step of the bndpcb_native implementation. Called by \code{morie_bet_proof_interval}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{width}, \code{empty}, \code{z}, \code{level}, \code{note}.

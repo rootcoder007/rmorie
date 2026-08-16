@@ -8,10 +8,10 @@
 tripartite_graph(triples)
 }
 \arguments{
-\item{triples}{See Usage.}
+\item{triples}{A vector; its length is taken.}
 }
 \description{
-Part of the tagRC_native implementation; see the file header for the source it follows.
+A step of the tagRC_native implementation. Called by \code{folkrank}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples}, \code{note}.

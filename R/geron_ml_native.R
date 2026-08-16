@@ -27,10 +27,11 @@
 
 #' .morie_gr_pvar
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gr_psd}, \code{.morie_w4c_pca_svd}, \code{morie_geron_glorot_xavier_init} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .morie_gr_pvar <- function(x) {
@@ -43,20 +44,22 @@
 
 #' .morie_gr_psd
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_credit_assignment}, \code{morie_geron_dcgan_generator}, \code{morie_geron_randomized_search_cv}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.morie_gr_pvar}.
 #' @return A numeric value.
 #' @export
 .morie_gr_psd <- function(x) sqrt(.morie_gr_pvar(x))
 
 #' .morie_gr_softmax
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_a2c}, \code{morie_geron_a3c}, \code{morie_geron_bahdanau_attention} and 10 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .morie_gr_softmax <- function(z) {
@@ -67,10 +70,11 @@
 # log-softmax of a vector, overflow safe.
 #' Log-softmax of a vector, overflow safe
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_dalle_autoregressive_token}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .morie_gr_log_softmax <- function(z) {
@@ -81,10 +85,11 @@
 
 #' .morie_gr_log_softmax_rows
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_bert_nsp_loss}, \code{morie_geron_blip_itm_itc}, \code{morie_geron_classification_localization} and 9 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
 .morie_gr_log_softmax_rows <- function(Z) {
@@ -97,10 +102,11 @@
 # Column-wise softmax (numpy softmax(axis = 0)).
 #' Column-wise softmax (numpy softmax(axis = 0))
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_blip}, \code{morie_geron_softmax_function}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{t}.
 #' @export
 .morie_gr_softmax_cols <- function(Z) {
@@ -109,11 +115,12 @@
 
 #' .morie_gr_layernorm
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gr_encoder_block}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param eps Defaults to \code{1e-05}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A numeric value.
 #' @export
 .morie_gr_layernorm <- function(X, eps = 1e-5) {
@@ -133,7 +140,7 @@
 #' (s + 0.5)/2^32 uniform stream, `.morie_gr_lcg_w` the symmetric weight
 #' stream 2u - 1 scaled.
 #'
-#' @param count See Usage.
+#' @param count A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -152,12 +159,13 @@
 
 #' .morie_gr_lcg_w
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gr_init}, \code{morie_geron_bert}, \code{morie_geron_roberta}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param count See Usage.
-#' @param seed See Usage.
-#' @param scale Defaults to \code{0.1}.
+#' @param count Passed to \code{.morie_gr_lcg_u}.
+#' @param seed Passed to \code{.morie_gr_lcg_u}.
+#' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @return A numeric value.
 #' @export
 .morie_gr_lcg_w <- function(count, seed, scale = 0.1) {
@@ -170,10 +178,10 @@
 #'
 #' stream, so byrow = TRUE.
 #'
-#' @param nrow See Usage.
-#' @param ncol See Usage.
-#' @param seed See Usage.
-#' @param scale Defaults to \code{0.1}.
+#' @param nrow A count; the body uses it as \code{matrix(...)}.
+#' @param ncol A count; the body uses it as \code{matrix(...)}.
+#' @param seed Passed to \code{.morie_gr_lcg_w}.
+#' @param scale Passed to \code{.morie_gr_lcg_w}. Defaults to \code{0.1}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .morie_gr_init <- function(nrow, ncol, seed, scale = 0.1) {
@@ -189,7 +197,7 @@
 #'
 #' which differs from qr.solve on rank-deficient designs.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{ncol}.
 #' @param b See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -206,10 +214,11 @@
 
 #' .morie_gr_need
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_check_mdp}, \code{.morie_gr_conv2d_valid} and 396 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param cond See Usage.
+#' @param cond A flag; the body branches on it.
 #' @param msg See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -217,10 +226,11 @@
 
 #' .morie_gr_mat
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gr_lsa}, \code{.morie_gr_w4b_grid_search}, \code{.morie_w4c_centroid_pair} and 82 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @param name See Usage.
 #' @return The value of \code{m}, as built in the body.
 #' @export
@@ -234,11 +244,12 @@
 # numpy array_split(seq_len(m), K): first m %% K parts get one extra.
 #' Numpy array_split(seq_len(m), K): first m %% K parts get one extra
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_cross_validation_score}, \code{morie_geron_kfold}, \code{morie_geron_kfold_cv} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param idx See Usage.
-#' @param K See Usage.
+#' @param idx A vector; its length is taken and its elements indexed.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_array_split <- function(idx, K) {
@@ -2789,7 +2800,7 @@ morie_geron_detr_hungarian_matching <- function(pred_boxes, pred_classes,
 #'
 #' grdetr._linear_sum_assignment. Returns 0-based rows/cols.
 #'
-#' @param cost See Usage.
+#' @param cost Passed to \code{.morie_gr_mat}.
 #' @return A list with \code{rows}, \code{cols}.
 #' @export
 .morie_gr_lsa <- function(cost) {
@@ -4203,12 +4214,13 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
 
 #' .morie_gr_conv2d_valid
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_convolutional_autoencoder}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Z See Usage.
-#' @param K See Usage.
-#' @param s See Usage.
+#' @param Z A matrix; indexed by row and column.
+#' @param K A matrix; passed to \code{nrow}.
+#' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_conv2d_valid <- function(Z, K, s) {
@@ -4235,12 +4247,13 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
 
 #' .morie_gr_conv_transpose2d
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_convolutional_autoencoder}, \code{morie_geron_dcgan_generator}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Z See Usage.
-#' @param K See Usage.
-#' @param s See Usage.
+#' @param Z A matrix; indexed by row and column.
+#' @param K A matrix; passed to \code{nrow}.
+#' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_conv_transpose2d <- function(Z, K, s) {
@@ -4646,10 +4659,11 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 
 #' .morie_gr_f32_bits
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gr_f32}, \code{morie_geron_bf16}, \code{morie_geron_bf16_range}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_gr_f32_bits <- function(x) {
@@ -4661,10 +4675,11 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 
 #' .morie_gr_bits_f32
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gr_f32}, \code{morie_geron_bf16}, \code{morie_geron_bf16_range}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param u See Usage.
+#' @param u A vector; its length is taken.
 #' @return The value of \code{readBin}.
 #' @export
 .morie_gr_bits_f32 <- function(u) {
@@ -4675,10 +4690,11 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 
 #' .morie_gr_f32
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_bf16}, \code{morie_geron_bf16_range}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.morie_gr_f32_bits}.
 #' @return The value of \code{.morie_gr_bits_f32}.
 #' @export
 .morie_gr_f32 <- function(x) .morie_gr_bits_f32(.morie_gr_f32_bits(x))
@@ -4692,8 +4708,8 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 #' folded back mod 2^32, exactly reproducing numpy\'s uint32/uint64
 #' masking.
 #'
-#' @param u See Usage.
-#' @param mode Defaults to \code{"nearest_even"}.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param mode Compared against \code{"nearest_even"}. Defaults to \code{"nearest_even"}.
 #' @return A numeric value.
 #' @export
 .morie_gr_bf16_bits <- function(u, mode = "nearest_even") {
@@ -4793,7 +4809,8 @@ morie_geron_bf16_range <- function(x) {
 
 #' .morie_gvar
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{.morie_gvar_wrap}, \code{Math.morie_gvar}, \code{morie_gvar_relu} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param value See Usage.
@@ -4815,10 +4832,11 @@ morie_geron_bf16_range <- function(x) {
 
 #' .morie_gvar_wrap
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{Ops.morie_gvar}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.morie_gvar}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_gvar_wrap <- function(x) if (inherits(x, "morie_gvar")) x else .morie_gvar(x)
@@ -5559,13 +5577,14 @@ morie_geron_bpe_merge <- function(corpus, n_merges) {
 #' Shared post-layernorm encoder block. `W` is a list of
 #' Wq/Wk/Wv/Wo/W1/b1/W2/b2
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_albert}, \code{morie_geron_bert}, \code{morie_geron_roberta}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param W See Usage.
-#' @param n_heads See Usage.
-#' @param keep_attn Defaults to \code{FALSE}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param W A list; the body reads \code{$b1}, \code{$b2}, \code{$W1}, \code{$W2}, \code{$Wk}, \code{$Wo}, \code{$Wq}, \code{$Wv} from it.
+#' @param n_heads A count; the body uses it as \code{seq_len(...)}.
+#' @param keep_attn A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_gr_encoder_block <- function(X, W, n_heads, keep_attn = FALSE) {
@@ -5593,12 +5612,13 @@ morie_geron_bpe_merge <- function(corpus, n_merges) {
 
 #' .morie_gr_block_weights
 #'
-#' Part of the geron_ml_native implementation; see the file header for
+#' A step of the geron_ml_native implementation. Called by \code{morie_geron_albert}, \code{morie_geron_bert}, \code{morie_geron_roberta}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param d_model See Usage.
-#' @param d_ff See Usage.
-#' @param seed See Usage.
+#' @param d_model A count; the body uses it as \code{numeric(...)}.
+#' @param d_ff A count; the body uses it as \code{numeric(...)}.
+#' @param seed Numeric; combined arithmetically in the body.
 #' @return A list with \code{Wq}, \code{Wk}, \code{Wv}, \code{Wo}, \code{W1}, \code{b1}, \code{W2}, \code{b2}.
 #' @export
 .morie_gr_block_weights <- function(d_model, d_ff, seed) {

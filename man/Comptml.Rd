@@ -11,7 +11,7 @@ Comptml(Yc, A, Q1, Q0, g1W, gbound = 0.025, level = 0.95)
 
 \item{A}{Binary treatment.}
 
-\item{Q1, Q0}{Initial E\link{clr(Y)_j | A = 1/0, W}.}
+\item{Q1, Q0}{Initial E[clr(Y)_j | A = 1/0, W].}
 
 \item{g1W}{Initial propensity.}
 

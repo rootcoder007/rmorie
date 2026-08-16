@@ -10,11 +10,11 @@
 \arguments{
 \item{x}{See Usage.}
 \item{y}{See Usage.}
-\item{children}{See Usage.}
-\item{parents}{See Usage.}
+\item{children}{A vector; indexed elementwise.}
+\item{parents}{A vector; indexed elementwise.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}, \code{morie_dseptest}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

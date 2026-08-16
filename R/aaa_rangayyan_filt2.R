@@ -10,7 +10,8 @@
 
 #' Expand prod (z - r_k) into ascending-power coefficients
 #'
-#' Part of the rangayyan_filt2 implementation; see the file header for
+#' A step of the rangayyan_filt2 implementation. Called by \code{BwAnalog}, \code{BwDigital}, \code{BwHp}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param roots See Usage.
@@ -62,7 +63,7 @@ Ma8Imp <- function(n = NULL) {
 #' multiple of fs/8 except DC.  For fs = 1000 Hz the book puts them at
 #' 125, 250, 375 and 500 Hz.
 #'
-#' @param z See Usage.
+#' @param z Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{H}, \code{z}, \code{n_taps}, \code{n_zeros}, \code{zeros_at_multiples_of_fs_over_8}, \code{dc_gain}, \code{always_stable}, \code{method}.
 #' @export
 Ma8Tf <- function(z) {
@@ -496,7 +497,7 @@ FDiff <- function(x, T = 1, n = NULL) {
 #'
 #' the whole of the operator\'s highpass character.
 #'
-#' @param z See Usage.
+#' @param z Passed to \code{.morie_rg_polyz}.
 #' @param T Defaults to \code{1}.
 #' @return A list with \code{H}, \code{z}, \code{T}, \code{zeros}, \code{zero_at_dc}, \code{dc_gain}, \code{method}.
 #' @export
@@ -1221,7 +1222,8 @@ BilinUnwarp <- function(Omega, T = 1) {
 
 #' BwDigital
 #'
-#' Part of the rangayyan_filt2 implementation; see the file header for
+#' A step of the rangayyan_filt2 implementation. Called by \code{BwHp}, \code{BwLp}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Omega_c Defaults to \code{NULL}.
@@ -1229,7 +1231,7 @@ BilinUnwarp <- function(Omega, T = 1) {
 #' @param T Defaults to \code{1}.
 #' @param fc Defaults to \code{NULL}.
 #' @param fs Defaults to \code{NULL}.
-#' @param z Defaults to \code{NULL}.
+#' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{poles_z}, \code{H}, \code{N}, \code{Omega_c}, \code{T}, \code{prewarped_here}, \code{zeros_at_minus_one}, \code{zeros_are_forced_by_the_bilinear_transform}, \code{dc_gain}, \code{leading_a_is_one}, \code{method}.
 #' @export
 BwDigital <- function(Omega_c = NULL, N = NULL, T = 1, fc = NULL,
@@ -1460,7 +1462,7 @@ BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #'
 #' @param fs See Usage.
 #' @param f0 Defaults to \code{60}.
-#' @param z Defaults to \code{NULL}.
+#' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{zeros}, \code{H}, \code{f0}, \code{fs}, \code{omega_0}, \code{gain_at_the_notch}, \code{dc_gain}, \code{fir}, \code{linear_phase}, \code{notch_is_wide_without_poles}, \code{method}.
 #' @export
 Notch60 <- function(fs, f0 = 60, z = NULL) {
@@ -1502,14 +1504,15 @@ Notch60 <- function(fs, f0 = 60, z = NULL) {
 
 #' Notch
 #'
-#' Part of the rangayyan_filt2 implementation; see the file header for
+#' A step of the rangayyan_filt2 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param notch_freq See Usage.
 #' @param bandwidth Defaults to \code{NULL}.
 #' @param fs Defaults to \code{1000}.
 #' @param r Defaults to \code{NULL}.
-#' @param z Defaults to \code{NULL}.
+#' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{H}, \code{f0}, \code{fs}, \code{r}, \code{bandwidth_hz}, \code{omega_0}, \code{zeros}, \code{poles}, \code{gain_at_the_notch}, \code{dc_gain}, \code{iir}, \code{poles_narrow_the_notch}, \code{method}.
 #' @export
 Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
@@ -1585,7 +1588,7 @@ Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
 #'
 #' @param period_samples See Usage.
 #' @param fs Defaults to \code{1000}.
-#' @param z Defaults to \code{NULL}.
+#' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{H}, \code{period_samples}, \code{fs}, \code{notch_frequencies_hz}, \code{n_zeros}, \code{notch_spacing_hz}, \code{dc_gain}, \code{removes_dc_as_well}, \code{fir}, \code{linear_phase}, \code{method}.
 #' @export
 Comb <- function(period_samples, fs = 1000, z = NULL) {
@@ -1679,14 +1682,15 @@ FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 
 #' PhaseResp
 #'
-#' Part of the rangayyan_filt2 implementation; see the file header for
+#' A step of the rangayyan_filt2 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param b See Usage.
 #' @param a Defaults to \code{NULL}.
 #' @param fs Defaults to \code{1000}.
 #' @param n_freqs Defaults to \code{512}.
-#' @param unwrap Defaults to \code{TRUE}.
+#' @param unwrap A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{f}, \code{phase}, \code{wrapped}, \code{unwrapped}, \code{unwrap}, \code{fs}, \code{defined}, \code{n_undefined}, \code{phase_undefined_where_the_response_vanishes}, \code{wrapping_is_an_arctangent_artifact}, \code{method}.
 #' @export
 PhaseResp <- function(b, a = NULL, fs = 1000, n_freqs = 512,
@@ -1845,7 +1849,7 @@ BwLp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' @param cutoff_hz See Usage.
 #' @param order Defaults to \code{4}.
 #' @param fs Defaults to \code{1000}.
-#' @param z Defaults to \code{NULL}.
+#' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{H}, \code{N}, \code{cutoff_hz}, \code{fs}, \code{order}, \code{kind}, \code{zeros_at_plus_one}, \code{dc_gain}, \code{nyquist_gain}, \code{prewarped}, \code{normalized_at_nyquist}, \code{method}.
 #' @export
 BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
@@ -2102,7 +2106,7 @@ SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {
 #' correlates with a mirrored pattern and peaks in the wrong place.
 #'
 #' @param g See Usage.
-#' @param normalize Defaults to \code{FALSE}.
+#' @param normalize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{h}, \code{template}, \code{n}, \code{energy}, \code{normalized}, \code{peak_index}, \code{time_reversed}, \code{output_is_the_cross_correlation}, \code{method}.
 #' @export
 MfiltH <- function(g, normalize = FALSE) {

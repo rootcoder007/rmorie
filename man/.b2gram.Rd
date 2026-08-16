@@ -8,12 +8,12 @@
 .b2gram(A, B, kf)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
+\item{B}{A matrix; indexed by row and column.}
 \item{kf}{See Usage.}
 }
 \description{
-Part of the b2gpts implementation; see the file header for the source it follows.
+A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \code{Gpresid} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

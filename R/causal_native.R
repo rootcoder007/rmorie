@@ -153,10 +153,11 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 # Internal graph helpers for the back-door criterion.
 #' Internal graph helpers for the back-door criterion
 #'
-#' Part of the causal_native implementation; see the file header for the
+#' A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dag See Usage.
+#' @param dag A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{children}, \code{parents}, \code{nodes}.
 #' @export
 .bd_parse <- function(dag) {
@@ -175,11 +176,12 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 
 #' .bd_desc
 #'
-#' Part of the causal_native implementation; see the file header for the
+#' A step of the causal_native implementation. Called by \code{.bd_blocked}, \code{morie_backdoor_criterion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param node See Usage.
-#' @param ch See Usage.
+#' @param ch A vector; indexed elementwise.
 #' @return The value of \code{seen}, as built in the body.
 #' @export
 .bd_desc <- function(node, ch) {
@@ -200,13 +202,14 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 
 #' .bd_paths
 #'
-#' Part of the causal_native implementation; see the file header for the
+#' A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
 #' @param y See Usage.
-#' @param ch See Usage.
-#' @param pa See Usage.
+#' @param ch A vector; indexed elementwise.
+#' @param pa A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .bd_paths <- function(x, y, ch, pa) {
@@ -235,13 +238,14 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 
 #' .bd_blocked
 #'
-#' Part of the causal_native implementation; see the file header for the
+#' A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param d See Usage.
+#' @param p A vector; its length is taken and its elements indexed.
+#' @param d A vector; indexed elementwise.
 #' @param Z See Usage.
-#' @param ch See Usage.
+#' @param ch Passed to \code{.bd_desc}.
 #' @return A logical value.
 #' @export
 .bd_blocked <- function(p, d, Z, ch) {
@@ -689,11 +693,12 @@ morie_hsic <- function(a, b) {
 # Internal: leave-one-out Nadaraya-Watson residuals.
 #' Internal: leave-one-out Nadaraya-Watson residuals
 #'
-#' Part of the causal_native implementation; see the file header for the
+#' A step of the causal_native implementation. Called by \code{morie_anm_direction}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param y See Usage.
+#' @param y A matrix; passed to \code{\%*\%}.
 #' @return A numeric value.
 #' @export
 .anm_resid <- function(x, y) {

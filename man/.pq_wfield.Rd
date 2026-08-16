@@ -8,13 +8,13 @@
 .pq_wfield(e, fid, ttype, last)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{fid}{See Usage.}
+\item{e}{Passed to \code{.pq_emit}.}
+\item{fid}{Numeric; combined arithmetically in the body.}
 \item{ttype}{See Usage.}
-\item{last}{See Usage.}
+\item{last}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wi32}, \code{.pq_wi64} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{fid}, as built in the body.

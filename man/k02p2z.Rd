@@ -8,10 +8,10 @@
 k02p2z(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{abs}.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{mafix}, \code{marndm}, \code{matr}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -9,16 +9,16 @@ ApWave(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1, t_onset = 0, v_un
 }
 \arguments{
 \item{t}{See Usage.}
-\item{v_rest}{Defaults to \code{-70}.}
-\item{v_peak}{Defaults to \code{30}.}
-\item{t_rise}{Defaults to \code{0.5}.}
-\item{t_fall}{Defaults to \code{1}.}
-\item{t_onset}{Defaults to \code{0}.}
+\item{v_rest}{Numeric; combined arithmetically in the body. Defaults to \code{-70}.}
+\item{v_peak}{Numeric; combined arithmetically in the body. Defaults to \code{30}.}
+\item{t_rise}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
+\item{t_fall}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{t_onset}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{v_undershoot}{Defaults to \code{NULL}.}
 \item{t_recover}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{t_ms}, \code{V_mV}, \code{amplitude_mV}, \code{peak_time_ms}, \code{v_rest_mV}, \code{v_peak_mV}, \code{t_rise_ms}, \code{t_fall_ms}, \code{width_half_ms}, \code{units}, \code{method}.

@@ -8,14 +8,14 @@
 .copynm_binary_supported(v, cut, alpha, perms, e)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{cut}{See Usage.}
-\item{alpha}{See Usage.}
-\item{perms}{See Usage.}
-\item{e}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
+\item{cut}{A count; the body uses it as \code{seq_len(...)}.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
+\item{perms}{Numeric; combined arithmetically in the body.}
+\item{e}{Passed to \code{.copynm_shuffle}.}
 }
 \description{
-Part of the copynm_native implementation; see the file header for the source it follows.
+A step of the copynm_native implementation. Called by \code{copynm}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

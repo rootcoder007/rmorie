@@ -8,12 +8,12 @@
 .bnppvl_log_beta(v, a, b)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{v}{Numeric; passed to \code{log}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bnppvl_native implementation; see the file header for the source it follows.
+A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_log_prior}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

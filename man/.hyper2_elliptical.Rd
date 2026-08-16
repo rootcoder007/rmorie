@@ -3,15 +3,15 @@
 % the formals.
 \name{.hyper2_elliptical}
 \alias{.hyper2_elliptical}
-\title{Elliptical slice sampling for a latent with prior N(0, L L\\\'). The}
+\title{Elliptical slice sampling for a latent with prior N(0, L L\\'). The}
 \usage{
 .hyper2_elliptical(logl, f, L, e)
 }
 \arguments{
 \item{logl}{See Usage.}
-\item{f}{See Usage.}
-\item{L}{See Usage.}
-\item{e}{See Usage.}
+\item{f}{A vector; its length is taken.}
+\item{L}{A matrix; indexed by row and column.}
+\item{e}{Passed to \code{.ghc_norm}.}
 }
 \description{
 proposal is an exact ellipse through the current point and a fresh prior draw, so the prior term cancels and only the likelihood enters the acceptance test. No rejection and no step size.

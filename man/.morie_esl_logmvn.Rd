@@ -8,12 +8,12 @@
 .morie_esl_logmvn(X, mu, S)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
 \item{mu}{See Usage.}
-\item{S}{See Usage.}
+\item{S}{A matrix; passed to \code{chol}.}
 }
 \description{
-Part of the esl_native implementation; see the file header for the source it follows.
+A step of the esl_native implementation. Called by \code{morie_esl_em_gmm}, \code{morie_esl_gaussian_mixture}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

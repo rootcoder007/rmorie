@@ -24,7 +24,8 @@
 
 #' causal_mask
 #'
-#' Part of the sasRec_native implementation; see the file header for the
+#' A step of the sasRec_native implementation. Called by \code{self_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
@@ -40,7 +41,8 @@ causal_mask <- function(n) {
 
 #' self_attention
 #'
-#' Part of the sasRec_native implementation; see the file header for the
+#' A step of the sasRec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param E See Usage.
@@ -79,7 +81,8 @@ self_attention <- function(E, WQ, WK, WV, mask = NULL) {
 
 #' attention_span
 #'
-#' Part of the sasRec_native implementation; see the file header for the
+#' A step of the sasRec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param weights See Usage.
@@ -103,12 +106,13 @@ attention_span <- function(weights, position = NULL) {
 
 #' predict_next
 #'
-#' Part of the sasRec_native implementation; see the file header for the
+#' A step of the sasRec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param state See Usage.
 #' @param item_embeddings See Usage.
-#' @param top_k Defaults to \code{5}.
+#' @param top_k Numeric; passed to \code{min}. Defaults to \code{5}.
 #' @param exclude Defaults to \code{numeric(0)}.
 #' @return A list with \code{estimate}, \code{ranking}, \code{n_scored}, \code{method}.
 #' @export
@@ -131,7 +135,8 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
 
 #' complexity
 #'
-#' Part of the sasRec_native implementation; see the file header for the
+#' A step of the sasRec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
@@ -148,7 +153,8 @@ complexity <- function(n, d) {
 
 #' .sasRec_cheatsheet
 #'
-#' Part of the sasRec_native implementation; see the file header for the
+#' A step of the sasRec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,11 +8,11 @@
 .sse4r_personalise(item_embeddings, user_embedding)
 }
 \arguments{
-\item{item_embeddings}{See Usage.}
+\item{item_embeddings}{A matrix; passed to \code{as.matrix}.}
 \item{user_embedding}{See Usage.}
 }
 \description{
-Part of the sse4r_native implementation; see the file header for the source it follows.
+A step of the sse4r_native implementation. Called by \code{morie_sse4r}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width}, \code{length}, \code{note}.
@@ -21,11 +21,11 @@ A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width}, \co
 ----------
 Wu, L., Li, S., Hsieh, C.-J. & Sharpnack, J. (2020) "SSE-PT:
 Sequential Recommendation Via Personalized Transformer", *Proceedings
-of the 14th ACM Conference on Recommender Systems (RecSys \\'20)*,
+of the 14th ACM Conference on Recommender Systems (RecSys \'20)*,
 328-337, doi:10.1145/3383313.3412258; earlier circulated as "Temporal
 Collaborative Ranking Via Personalized Transformer",
 arXiv:1908.05435. The observation that existing self-attentive
-sequential models are not personalised and that different users\\' rating
+sequential models are not personalised and that different users\' rating
 patterns are treated alike; the personalised Transformer concatenating
 a user embedding with each item embedding in the input sequence; and
 the use of Stochastic Shared Embeddings regularisation, replacing an

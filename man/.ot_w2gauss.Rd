@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{m1}{See Usage.}
-\item{S1}{See Usage.}
+\item{S1}{A matrix; passed to \code{as.matrix}.}
 \item{m2}{See Usage.}
-\item{S2}{See Usage.}
+\item{S2}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otmxh}, \code{Otwsg}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

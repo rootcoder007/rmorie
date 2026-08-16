@@ -8,12 +8,12 @@
 morie_timeRS_time_bin(t, bin_days = 70, n_bins = 30)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{bin_days}{Defaults to \code{70}.}
-\item{n_bins}{Defaults to \code{30}.}
+\item{t}{Passed to \code{.timeRS_time_bin}.}
+\item{bin_days}{Passed to \code{.timeRS_time_bin}. Defaults to \code{70}.}
+\item{n_bins}{Passed to \code{.timeRS_time_bin}. Defaults to \code{30}.}
 }
 \description{
-Part of the timeRS_native implementation; see the file header for the source it follows.
+A step of the timeRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.timeRS_time_bin}.

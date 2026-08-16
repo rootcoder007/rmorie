@@ -226,8 +226,8 @@ DELTA_MAX <- 1000.0
 #' not supply one. Same step h = 1e-5 as the Python arm.
 #'
 #' @param logp See Usage.
-#' @param theta See Usage.
-#' @param h Defaults to \code{1e-05}.
+#' @param theta A vector; its length is taken.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .bayhmc_num_grad <- function(logp, theta, h = 1e-5) {
@@ -251,7 +251,7 @@ DELTA_MAX <- 1000.0
 #'
 #' @param logp See Usage.
 #' @param theta See Usage.
-#' @param r See Usage.
+#' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .joint <- function(logp, theta, r) {
@@ -266,9 +266,9 @@ DELTA_MAX <- 1000.0
 #' volume-preserving, which lets a single Metropolis test on the energy
 #' correct the discretisation error exactly.
 #'
-#' @param theta See Usage.
-#' @param r See Usage.
-#' @param eps See Usage.
+#' @param theta Numeric; combined arithmetically in the body.
+#' @param r Numeric; combined arithmetically in the body.
+#' @param eps Numeric; combined arithmetically in the body.
 #' @param grad See Usage.
 #' @return A list with \code{theta}, \code{r}.
 #' @export
@@ -290,11 +290,11 @@ leapfrog <- function(theta, r, eps, grad) {
 #' acceptance probability crosses one half. The argument `rnd` is the
 #' single-value normal generator (the closure around the shared RNG).
 #'
-#' @param theta See Usage.
-#' @param logp See Usage.
+#' @param theta A vector; its length is taken.
+#' @param logp Passed to \code{.joint}.
 #' @param grad See Usage.
 #' @param rnd See Usage.
-#' @param eps Defaults to \code{1}.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param max_doublings Defaults to \code{100}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
@@ -326,14 +326,14 @@ find_reasonable_epsilon <- function(theta, logp, grad, rnd,
 #' for the log step size. Returns the new step size and the running
 #' averages carried between calls.
 #'
-#' @param t See Usage.
-#' @param h_bar See Usage.
-#' @param log_eps_bar See Usage.
-#' @param h_new See Usage.
-#' @param mu See Usage.
-#' @param gamma Defaults to \code{0.05}.
-#' @param t0 Defaults to \code{10}.
-#' @param kappa Defaults to \code{0.75}.
+#' @param t Numeric; passed to \code{sqrt}.
+#' @param h_bar Numeric; combined arithmetically in the body.
+#' @param log_eps_bar Numeric; combined arithmetically in the body.
+#' @param h_new Numeric; combined arithmetically in the body.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
+#' @param t0 Numeric; combined arithmetically in the body. Defaults to \code{10}.
+#' @param kappa Numeric; combined arithmetically in the body. Defaults to \code{0.75}.
 #' @return A list with \code{eps}, \code{h_bar}, \code{log_eps_bar}.
 #' @export
 dual_averaging_update <- function(t, h_bar, log_eps_bar, h_new, mu,
@@ -360,10 +360,10 @@ dual_averaging_update <- function(t, h_bar, log_eps_bar, h_new, mu,
 #' True (no U-turn) while (theta+ - theta-).r is non-negative at both
 #' ends.
 #'
-#' @param theta_minus See Usage.
-#' @param theta_plus See Usage.
-#' @param r_minus See Usage.
-#' @param r_plus See Usage.
+#' @param theta_minus Numeric; combined arithmetically in the body.
+#' @param theta_plus Numeric; combined arithmetically in the body.
+#' @param r_minus Numeric; combined arithmetically in the body.
+#' @param r_plus Numeric; combined arithmetically in the body.
 #' @return A logical value.
 #' @export
 no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
@@ -383,14 +383,14 @@ no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
 #'
 #' @param theta See Usage.
 #' @param r See Usage.
-#' @param logu See Usage.
-#' @param v See Usage.
-#' @param j See Usage.
-#' @param eps See Usage.
-#' @param logp See Usage.
+#' @param logu Numeric; combined arithmetically in the body.
+#' @param v Numeric; combined arithmetically in the body.
+#' @param j Numeric; combined arithmetically in the body.
+#' @param eps Numeric; combined arithmetically in the body.
+#' @param logp Passed to \code{.joint}.
 #' @param grad See Usage.
 #' @param rnd See Usage.
-#' @param joint0 See Usage.
+#' @param joint0 Numeric; combined arithmetically in the body.
 #' @return A list, whose contents depend on the branch taken; across the branches its names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s}, \code{alpha}, \code{na}.
 #' @export
 build_tree <- function(theta, r, logu, v, j, eps, logp, grad, rnd,

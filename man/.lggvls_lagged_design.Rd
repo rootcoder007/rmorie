@@ -8,13 +8,13 @@
 .lggvls_lagged_design(L_hist, Y_hist = NULL, k_time = 0, lag = 1)
 }
 \arguments{
-\item{L_hist}{See Usage.}
-\item{Y_hist}{Defaults to \code{NULL}.}
-\item{k_time}{Defaults to \code{0}.}
-\item{lag}{Defaults to \code{1}.}
+\item{L_hist}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{Y_hist}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{k_time}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{lag}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. Called by \code{lagged_design}, \code{morie_lggvls}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cols}, as built in the body.

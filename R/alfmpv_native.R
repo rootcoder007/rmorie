@@ -51,10 +51,10 @@
 #' caller with no E-values should still be able to run the multimer
 #' route, which never looks at them.
 #'
-#' @param chain See Usage.
+#' @param chain A vector; indexed elementwise.
 #' @param name See Usage.
-#' @param n See Usage.
-#' @param default See Usage.
+#' @param n A count; the body uses it as \code{rep(...)}.
+#' @param default A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .alfmpv_field <- function(chain, name, n, default) {
@@ -69,10 +69,11 @@
 
 #' .alfmpv_chain_table
 #'
-#' Part of the alfmpv_native implementation; see the file header for the
+#' A step of the alfmpv_native implementation. Called by \code{morie_alfmpv_msa_pairing}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param chain See Usage.
+#' @param chain A list; the body reads \code{$species} from it.
 #' @param idx See Usage.
 #' @return A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps}, \code{coverage}, \code{n}.
 #' @export
@@ -98,11 +99,12 @@
 # Which hits survive the route's own filter, in order.
 #' Which hits survive the route\'s own filter, in order
 #'
-#' Part of the alfmpv_native implementation; see the file header for the
+#' A step of the alfmpv_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tab See Usage.
-#' @param mode See Usage.
+#' @param tab A list; the body reads \code{$coverage}, \code{$gaps}, \code{$n} from it.
+#' @param mode One of \code{"colabfold"}, \code{"folddock"}.
 #' @param min_coverage See Usage.
 #' @param max_gap See Usage.
 #' @return The value of \code{which}.
@@ -122,10 +124,10 @@
 #'
 #' so the order is total and neither arm can wander off on a tie.
 #'
-#' @param tab See Usage.
-#' @param mode See Usage.
+#' @param tab A list; the body reads \code{$evalue}, \code{$identity} from it.
+#' @param mode One of \code{"colabfold"}, \code{"multimer"}.
 #' @param idx See Usage.
-#' @param pos See Usage.
+#' @param pos Numeric; passed to \code{order}.
 #' @return The value of \code{order}.
 #' @export
 .alfmpv_order <- function(tab, mode, idx, pos) {

@@ -8,11 +8,11 @@
 .mor_ik_ols(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.ghc_pinv}.}
 \item{y}{See Usage.}
 }
 \description{
-Part of the causrddh_native implementation; see the file header for the source it follows.
+A step of the causrddh_native implementation. Called by \code{morie_causrddh}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

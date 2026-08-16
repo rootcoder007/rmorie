@@ -8,10 +8,10 @@
 morie_unclr_alr(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the unclr implementation; see the file header for the source it follows.
+A step of the unclr implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

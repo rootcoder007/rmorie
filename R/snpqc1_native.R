@@ -37,10 +37,11 @@
 
 #' .snpqc1_check
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}, \code{morie_snpqc1_call_rates}, \code{morie_snpqc1_heterozygosity} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param genotypes See Usage.
+#' @param genotypes A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{G}, \code{n}, \code{m}.
 #' @export
 .snpqc1_check <- function(genotypes) {
@@ -59,10 +60,11 @@
 
 #' Per-SNP and per-individual call rates
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param genotypes See Usage.
+#' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return A list with \code{per_snp}, \code{per_ind}.
 #' @export
 morie_snpqc1_call_rates <- function(genotypes) {
@@ -76,10 +78,11 @@ morie_snpqc1_call_rates <- function(genotypes) {
 
 #' Minor allele frequency per SNP, over non-missing calls
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}, \code{morie_snpqc1_sex_check}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param genotypes See Usage.
+#' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_snpqc1_maf <- function(genotypes) {
@@ -101,10 +104,11 @@ morie_snpqc1_maf <- function(genotypes) {
 
 #' .snpqc1_log_fact
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pvalue}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{lgamma}.
 #' @export
 .snpqc1_log_fact <- function(n) {
@@ -113,13 +117,14 @@ morie_snpqc1_maf <- function(genotypes) {
 
 #' morie_snpqc1_hwe_pvalue
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_hom_minor See Usage.
 #' @param n_het See Usage.
 #' @param n_hom_major See Usage.
-#' @param test Defaults to \code{"exact"}.
+#' @param test One of \code{"chisq"}, \code{"exact"}. Defaults to \code{"exact"}.
 #' @return A numeric value.
 #' @export
 morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
@@ -178,10 +183,11 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 
 #' Complementary error function via pnorm: erfc(x) = 2*pnorm(-x*sqrt2)
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pvalue}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .snpqc1_erfc <- function(x) {
@@ -191,10 +197,11 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 
 #' Per-individual heterozygosity rate over non-missing calls
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param genotypes See Usage.
+#' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_snpqc1_heterozygosity <- function(genotypes) {
@@ -215,10 +222,11 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 
 #' morie_snpqc1_sex_check
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x_genotypes See Usage.
+#' @param x_genotypes Passed to \code{.snpqc1_check}.
 #' @param reported_sex Defaults to \code{NULL}.
 #' @param male_min Defaults to \code{0.8}.
 #' @param female_max Defaults to \code{0.2}.
@@ -271,7 +279,7 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
 #'
 #' @param x_count See Usage.
 #' @param y_count See Usage.
-#' @param correction Defaults to \code{TRUE}.
+#' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{rbind}.
 #' @export
 morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
@@ -320,8 +328,8 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
 #' list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2)) after
 #' the paper\'s bounding rules and pihat[i, k] = P(Z=2) + P(Z=1)/2.
 #'
-#' @param genotypes See Usage.
-#' @param correction Defaults to \code{TRUE}.
+#' @param genotypes Passed to \code{.snpqc1_check}.
+#' @param correction Passed to \code{morie_snpqc1_ibs_given_ibd}. Defaults to \code{TRUE}.
 #' @return A list with \code{Z}, \code{pihat}.
 #' @export
 morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
@@ -416,11 +424,12 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
 
 #' Just the pi-hat = P(Z=2) + P(Z=1)/2 matrix
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param genotypes See Usage.
-#' @param correction Defaults to \code{TRUE}.
+#' @param genotypes Passed to \code{morie_snpqc1_ibd_moments}.
+#' @param correction Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.
 #' @return The value of \code{$}.
 #' @export
 morie_snpqc1_pihat_matrix <- function(genotypes, correction=TRUE) {
@@ -433,7 +442,7 @@ morie_snpqc1_pihat_matrix <- function(genotypes, correction=TRUE) {
 #' K_ik = (1/M) sum_j (g_ij - 2p_j)(g_kj - 2p_j) / (2 p_j (1 - p_j)). On
 #' the same scale as pi-hat but NOT PLINK\'s pi-hat.
 #'
-#' @param genotypes See Usage.
+#' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{K}, as built in the body.
 #' @export
 morie_snpqc1_kinship_matrix <- function(genotypes) {
@@ -484,9 +493,9 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
 #'
 #' threshold. Returns kept SNP indices (1-based).
 #'
-#' @param genotypes See Usage.
-#' @param window Defaults to \code{50}.
-#' @param step Defaults to \code{5}.
+#' @param genotypes Passed to \code{.snpqc1_check}.
+#' @param window Numeric; combined arithmetically in the body. Defaults to \code{50}.
+#' @param step Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @param r2 Defaults to \code{0.2}.
 #' @return The value of \code{keep}, as built in the body.
 #' @export
@@ -540,12 +549,13 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
 
 #' morie_snpqc1
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param genotypes See Usage.
+#' @param genotypes Passed to \code{.snpqc1_check}.
 #' @param phenotype Defaults to \code{NULL}.
-#' @param trait Defaults to \code{"binary"}.
+#' @param trait One of \code{"binary"}, \code{"quantitative"}. Defaults to \code{"binary"}.
 #' @param geno_relaxed Defaults to \code{0.2}.
 #' @param mind_relaxed Defaults to \code{0.2}.
 #' @param geno Defaults to \code{0.02}.
@@ -554,13 +564,13 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
 #' @param hwe_case Defaults to \code{1e-10}.
 #' @param hwe_control Defaults to \code{1e-06}.
 #' @param hwe_quantitative Defaults to \code{1e-06}.
-#' @param het_sd Defaults to \code{3}.
+#' @param het_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param pihat Defaults to \code{0.2}.
-#' @param hwe_test Defaults to \code{"exact"}.
-#' @param x_genotypes Defaults to \code{NULL}.
+#' @param hwe_test Passed to \code{morie_snpqc1_hwe_pvalue}. Defaults to \code{"exact"}.
+#' @param x_genotypes Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param reported_sex Defaults to \code{NULL}.
-#' @param relatedness Defaults to \code{"pihat"}.
-#' @param ibd_correction Defaults to \code{TRUE}.
+#' @param relatedness One of \code{"kinship"}, \code{"pihat"}. Defaults to \code{"pihat"}.
+#' @param ibd_correction Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals}, \code{removed}, \code{n_snps_kept}, \code{n_individuals_kept}, \code{call_rate_snp}, \code{call_rate_ind}, \code{maf}, \code{hwe_p}, \code{heterozygosity}, \code{relatedness_matrix}, \code{kinship}, \code{ibd_states}, \code{relatedness}, \code{pruned_snps}, \code{thresholds}, \code{trait}, \code{hwe_test}, \code{note}, \code{method}.
 #' @export
 morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
@@ -780,7 +790,8 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
 
 #' morie_snpqc1_cheatsheet
 #'
-#' Part of the snpqc1_native implementation; see the file header for the
+#' A step of the snpqc1_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

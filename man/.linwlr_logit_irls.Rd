@@ -8,13 +8,13 @@
 .linwlr_logit_irls(Z, y, max_iter, ridge)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{y}{See Usage.}
-\item{max_iter}{See Usage.}
-\item{ridge}{See Usage.}
+\item{Z}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the linwlr_native implementation; see the file header for the source it follows.
+A step of the linwlr_native implementation. Called by \code{morie_linwlr}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{beta}, as built in the body.

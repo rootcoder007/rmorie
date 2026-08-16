@@ -10,7 +10,7 @@ XCorrDisc(x, y, delays = NULL)
 \arguments{
 \item{x}{See Usage.}
 \item{y}{See Usage.}
-\item{delays}{Defaults to \code{NULL}.}
+\item{delays}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{
 instant IS this sum, so its peak locates the pattern.  Neither XCorr mode gives it (biased divides by n, unbiased by the overlap count), so it is computed here rather than delegated.

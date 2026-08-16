@@ -8,7 +8,7 @@
 Ustep(t, shift = 0)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{.morie_rg_aslist}.}
 \item{shift}{Defaults to \code{0}.}
 }
 \description{

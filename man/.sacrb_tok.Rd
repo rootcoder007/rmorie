@@ -8,12 +8,12 @@
 .sacrb_tok(text, scheme, lowercase)
 }
 \arguments{
-\item{text}{See Usage.}
-\item{scheme}{See Usage.}
-\item{lowercase}{See Usage.}
+\item{text}{Passed to \code{.sacrb_tokenize_13a}.}
+\item{scheme}{One of \code{"13a"}, \code{"intl"}, \code{"none"}.}
+\item{lowercase}{A flag; the body branches on it.}
 }
 \description{
-Part of the sacrb_native implementation; see the file header for the source it follows.
+A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

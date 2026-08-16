@@ -8,14 +8,14 @@
 morie_stahdo(X, directions = "subsample", n_directions = 500, seed = 1, cutoff = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{directions}{Defaults to \code{"subsample"}.}
-\item{n_directions}{Defaults to \code{500}.}
-\item{seed}{Defaults to \code{1}.}
-\item{cutoff}{Defaults to \code{NULL}.}
+\item{X}{Passed to \code{.stahdo_stahel_donoho}.}
+\item{directions}{Passed to \code{.stahdo_stahel_donoho}. Defaults to \code{"subsample"}.}
+\item{n_directions}{Passed to \code{.stahdo_stahel_donoho}. Defaults to \code{500}.}
+\item{seed}{Passed to \code{.stahdo_stahel_donoho}. Defaults to \code{1}.}
+\item{cutoff}{Passed to \code{.stahdo_stahel_donoho}.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.stahdo_stahel_donoho}.

@@ -8,9 +8,9 @@
 morie_fda_env_interaction(X, env, reference = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{env}{See Usage.}
-\item{reference}{Defaults to \code{TRUE}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{env}{A vector; indexed elementwise.}
+\item{reference}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 X exactly, so the joint design carrying both X and X_EF is rank deficient and beta and beta_EF are not separately identified by least squares; the book fits (14.14) in BGLR, where the prior on each block resolves that.  The default reference = TRUE drops the first environment block, the same reference coding the book applies to the environment design itself on p.607, where its code reads X_E = model.matrix(~0+Env, data = dat_F)[, -1].  Pass reference = FALSE for the redundant parameterization as printed.

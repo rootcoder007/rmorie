@@ -8,7 +8,7 @@
 .copynm_cbs_stat(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 where indices are 0-based half-open into v (i < j), matching Python.

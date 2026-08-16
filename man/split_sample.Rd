@@ -8,12 +8,12 @@
 split_sample(n, V = 10L, seed = 0L)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{V}{Defaults to \code{10L}.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{V}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.}
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{
-Part of the tldapar_native implementation; see the file header for the source it follows.
+A step of the tldapar_native implementation. Called by \code{data_adaptive_parameter}, \code{morie_tldapar}, \code{variable_importance}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimation}, \code{training}, \code{V}.

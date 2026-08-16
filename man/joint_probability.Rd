@@ -8,12 +8,12 @@
 joint_probability(Pz, Pd_z, Pw_z)
 }
 \arguments{
-\item{Pz}{See Usage.}
-\item{Pd_z}{See Usage.}
-\item{Pw_z}{See Usage.}
+\item{Pz}{Passed to \code{.plsa_joint_probability}.}
+\item{Pd_z}{Passed to \code{.plsa_joint_probability}.}
+\item{Pw_z}{Passed to \code{.plsa_joint_probability}.}
 }
 \description{
-Part of the plsa_native implementation; see the file header for the source it follows.
+A step of the plsa_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.plsa_joint_probability}.

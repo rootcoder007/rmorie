@@ -8,11 +8,11 @@
 morie_spatial_classical_mds_cpp(D, n_dims)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{n_dims}{See Usage.}
+\item{D}{Passed to \code{.Call}.}
+\item{n_dims}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_spatial_voting_classical_mds}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

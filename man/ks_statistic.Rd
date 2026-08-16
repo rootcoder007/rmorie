@@ -9,12 +9,12 @@ ks_statistic(m, instruments, form = "sum", n_equality = 0L)
 }
 \arguments{
 \item{m}{See Usage.}
-\item{instruments}{See Usage.}
+\item{instruments}{A list; the body reads \code{$instruments} from it.}
 \item{form}{Defaults to \code{"sum"}.}
 \item{n_equality}{Defaults to \code{0L}.}
 }
 \description{
-Part of the bnskmt_native implementation; see the file header for the source it follows.
+A step of the bnskmt_native implementation. Called by \code{compare_forms}, \code{ks_confidence_set}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{statistic}, \code{argmax}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.

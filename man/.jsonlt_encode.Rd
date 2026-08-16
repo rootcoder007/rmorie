@@ -8,12 +8,12 @@
 .jsonlt_encode(x, o, unbox_ok)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{o}{See Usage.}
-\item{unbox_ok}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
+\item{o}{A list; the body reads \code{$dataframe}, \code{$factor}, \code{$force}, \code{$matrix}, \code{$null} from it.}
+\item{unbox_ok}{Passed to \code{.jsonlt_atomic}.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_df_columns}, \code{morie_jsonlt_to_json}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

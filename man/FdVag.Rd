@@ -3,7 +3,7 @@
 % the formals.
 \name{FdVag}
 \alias{FdVag}
-\title{Sections 6.6.2-6.6.3: PSA is the book\\'s preferred FD estimator for a}
+\title{Sections 6.6.2-6.6.3: PSA is the book\'s preferred FD estimator for a}
 \usage{
 FdVag(x, fs, fmin = 100, fmax = 500, nperseg = NULL)
 }
@@ -15,7 +15,7 @@ FdVag(x, fs, fmin = 100, fmax = 500, nperseg = NULL)
 \item{nperseg}{Defaults to \code{NULL}.}
 }
 \description{
-self-affine signal, applied to knee-joint VAG signals.  The band is an argument because it decides the answer -- a band that reaches down into baseline drift fits the drift\\'s slope, not the signal\\'s.
+self-affine signal, applied to knee-joint VAG signals.  The band is an argument because it decides the answer -- a band that reaches down into baseline drift fits the drift\'s slope, not the signal\'s.
 }
 \value{
 The value of \code{r}, as built in the body.
