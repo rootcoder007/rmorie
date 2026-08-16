@@ -20,3 +20,10 @@ A step of the bnskmt_native implementation. Called by \code{compare_forms}, \cod
 A list with \code{statistic}, \code{argmax}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(runif(60), 30, 2)
+inst <- hypercube_instruments(X, n_levels = 2L)
+r <- ks_statistic(X[, 1] - 0.4, inst)
+str(r, max.level = 1)
+}

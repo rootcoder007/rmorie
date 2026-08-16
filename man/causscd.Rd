@@ -20,3 +20,11 @@ A step of the causscd_native implementation. Called by \code{morie_causscd}. See
 The value of \code{p}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+Y <- lapply(1:8, function(i) rnorm(10, 10))
+for (i in 7:8) Y[[i]][7:10] <- Y[[i]][7:10] + 3
+treated <- c(rep(0L, 6), 1L, 1L)
+r <- causscd(Y, treated, t_post = 6)
+str(r, max.level = 1)
+}

@@ -32,3 +32,11 @@ Distributional Reinforcement Learning", AISTATS 2018
 (arXiv:1802.08163) contraction in Cramer distance.
 }
 \keyword{internal}
+\examples{
+r <- c51_update(reward = 1, gamma = 0.9,
+                next_probs_by_action = list(rep(0.2, 5),
+                                            c(0.1, 0.1, 0.2, 0.3, 0.3)),
+                current_probs = rep(0.2, 5),
+                v_min = -10, v_max = 10)
+str(r, max.level = 1)
+}

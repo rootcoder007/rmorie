@@ -25,3 +25,10 @@ A step of the bnskmt_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds}, \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+X <- matrix(runif(40), 20, 2)
+mfn <- function(theta) X[, 1] - theta
+r <- ks_confidence_set(mfn, theta_grid = seq(0.2, 0.8, by = 0.1), X)
+str(r, max.level = 1)
+}

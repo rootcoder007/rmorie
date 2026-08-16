@@ -25,3 +25,12 @@ The propensity score is truncated at \code{g_min} -- which bounds the sensitivit
 A list with \code{estimate}, \code{psi},   \code{non_private_psi}, \code{sensitivity}, \code{epsilon},   \code{g_min}, \code{se_private}, \code{se_sampling}, \code{ci},   \code{width_ratio}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+n <- 60
+X <- matrix(rnorm(n * 2), n, 2)
+D <- rbinom(n, 1, 0.5)
+y <- plogis(-0.3 + 0.8 * D + 0.5 * X[, 1] + rnorm(n, 0, 0.5))
+r <- morie_tmldyk(y, D, X, epsilon = 1)
+str(r, max.level = 1)
+}

@@ -21,3 +21,9 @@ A step of the hierF_native implementation. Called by \code{mint_reconcile}. See 
 A list with \code{P}, \code{lambda}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+S <- summing_matrix(list(c(0L, 1L)), 2L)
+res <- matrix(rnorm(30), 10, 3)
+str(mint_P(S, method = "shrink", residuals = res), max.level = 1)
+}

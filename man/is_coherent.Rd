@@ -19,3 +19,8 @@ A step of the hierF_native implementation. Called by \code{mint_reconcile}. See 
 A logical value.
 }
 \keyword{internal}
+\examples{
+S <- summing_matrix(list(c(0L, 1L)), 2L)
+b <- c(1, 2)
+is_coherent(c(sum(b), b), S)
+}

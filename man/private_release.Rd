@@ -20,3 +20,7 @@ Release f(D) + Lap(Delta f / epsilon)
 A list with \code{released}, \code{noise}, \code{scale},   \code{epsilon}, \code{noise_variance}, \code{note}.
 }
 \keyword{internal}
+\examples{
+r <- private_release(value = 0.4, sensitivity = 0.02, epsilon = 1)
+str(r, max.level = 1)
+}
