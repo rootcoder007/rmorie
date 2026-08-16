@@ -8,7 +8,10 @@
 #' @param N integer; default 128.
 #' @param d integer; default 1.
 #' @param f optional integrand; returns scalar.
-#' @param scramble logical; Owen scrambling (default TRUE).
+#' @param scramble logical; ignored by this arm, which has no Owen
+#'   scrambling. Asking for it warns; the sequence returned is
+#'   always the unscrambled one, and \code{scrambled} in the
+#'   result says so.
 #' @param seed integer.
 #' @return list: sample, estimate (if f given), se, N, d, method.
 #' @importFrom utils getFromNamespace
@@ -21,10 +24,18 @@ sobls <- function(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L) {
   # matches randtoolbox's unscrambled sequence (cross-validated in
   # tests). randtoolbox's Owen scrambling is disabled upstream anyway,
   # so the unscrambled sequence is what callers always received.
+  if (isTRUE(scramble)) {
+    warning("sobls(): Owen scrambling is not implemented in the R arm; ",
+            "returning the unscrambled Sobol sequence. The Python arm ",
+            "scrambles through scipy.stats.qmc, so the two point sets ",
+            "differ. Pass scramble = FALSE to ask for this explicitly.",
+            call. = FALSE)
+  }
   sample <- .morie_sobol(as.integer(N), as.integer(d))
   out <- list(
     sample = sample, N = as.integer(N), d = as.integer(d),
-    method = "Sobol QMC (Sobol 1967)"
+    scrambled = FALSE,
+    method = "Sobol QMC (Sobol 1967), unscrambled"
   )
   if (!is.null(f)) {
     fv <- apply(sample, 1, f)
