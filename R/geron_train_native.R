@@ -1596,6 +1596,10 @@ morie_geron_gan_minimax <- function(real, fake, D_real, D_fake, eps = 1e-12) {
     g_loss_saturating = mean(log(1 - dfc)),
     d_accuracy = (mean(dr >= 0.5) + mean(df < 0.5)) / 2,
     at_equilibrium = abs(value + 2 * log(2)) < 1e-06,
+    # The sample counts are the only use the Python arm makes of `real`
+    # and `fake`; without them the two payloads differ by two keys.
+    n_real = if (is.null(dim(real))) length(real) else nrow(real),
+    n_fake = if (is.null(dim(fake))) length(fake) else nrow(fake),
     estimate = value, n = length(dr) + length(df)
   )
 }
