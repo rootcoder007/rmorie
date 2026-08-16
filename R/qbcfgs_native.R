@@ -212,7 +212,14 @@ morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
        smd_after = after, mean_abs_smd_before = fb,
        mean_abs_smd_after = fa, balance_improved = fa < fb,
        estimate = overall, se = NaN, focal_stratum = focal,
-       focal_effect = eff[focal + 1L], n_clipped = n_clipped,
+       focal_effect = eff[focal + 1L],
+       # A stratum can hold only one arm, in which case it has no effect
+       # to report and its entry is NaN. Returning that bare would make
+       # "the focal stratum is empty of controls" look exactly like a
+       # numerical accident, so the deadness is a flag the caller can
+       # branch on rather than a value they have to test for NaN-ness to
+       # discover.
+       focal_live = !is.nan(eff[focal + 1L]), n_clipped = n_clipped,
        n_live_strata = length(live), n = n, n_treated = sum(d),
        n_strata = q, quantile = quantile, clip = clip,
        weighting = weight, method = "quantile-balanced score for forests")
