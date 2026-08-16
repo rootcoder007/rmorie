@@ -2,20 +2,20 @@
 % Please edit documentation in R/inference.R
 \name{morie_odds_ratio_ci}
 \alias{morie_odds_ratio_ci}
-\title{Odds ratio and 95\% CI from a 2x2 contingency table}
+\title{Odds ratio and confidence interval from a 2x2 contingency table}
 \usage{
 morie_odds_ratio_ci(table_2x2, alpha = 0.05)
 }
 \arguments{
 \item{table_2x2}{A 2x2 matrix: rows are treatment, columns are outcome.}
 
-\item{alpha}{Significance level.}
+\item{alpha}{Significance level; sets the width of the interval, which is Woolf's on the log scale (Haldane-Anscombe corrected when a cell is empty).}
 }
 \value{
-Named list: \code{or}, \code{ci_lower}, \code{ci_upper}, \code{p_value}.
+Named list: `odds_ratio` (the sample odds ratio), `ci_lower`, `ci_upper` at the requested level, and the exact `p_value`.
 }
 \description{
-Odds ratio and 95\% CI from a 2x2 contingency table
+Odds ratio and confidence interval from a 2x2 contingency table
 }
 \examples{
 # See the package vignettes for usage examples:

@@ -1,37 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' DBSCAN density-based clustering (R parity)
-#'
-#' Native implementation; the metric is honoured and the reported core points are the points meeting the min_samples rule.
-#'
-#' @param x Numeric matrix.
-#' @param eps Neighbourhood radius.
-#' @param min_samples Minimum points in eps-neighbourhood for a core point.
-#' @param metric Distance metric (passed to dbscan).
-#' @return Named list: estimate, labels, n_clusters, n_noise,
-#'   core_sample_indices, eps, min_samples, n, method.
-#' @examplesIf requireNamespace("dbscan", quietly = TRUE)
-#' morie_dbscan_clustering(x = rnorm(50))
-#' @export
-#' Internal: native DBSCAN
-#'
-#' Density-based clustering, written out rather than delegated, so the
-#' metric the caller asks for is the metric used and the core points
-#' reported are the points that satisfy the min_samples rule. The
-#' expansion order matches the Python arm exactly -- clusters are
-#' seeded from core points in index order and the seed list is used as
-#' a stack -- so the two arms agree on the cluster NUMBERING as well as
-#' the partition.
-#'
-#' @param x A numeric matrix, one row per point.
-#' @param eps Neighbourhood radius.
-#' @param min_samples Points within eps needed to make a point a core
-#'   point, counting the point itself.
-#' @param metric One of \code{"euclidean"}, \code{"manhattan"},
-#'   \code{"chebyshev"}.
-#' @return A list with \code{labels} (0-based cluster ids, -1 for
-#'   noise) and \code{core} (logical, one per point).
-#' @keywords internal
 .morie_dbscan_native <- function(x, eps = 0.5, min_samples = 5L,
                                  metric = "euclidean") {
   metrics <- c("euclidean", "manhattan", "chebyshev")
@@ -79,6 +47,31 @@
   list(labels = as.integer(labels), core = core)
 }
 
+#' DBSCAN density-based clustering (R parity)
+#'
+#' Native implementation: the metric the caller asks for is the metric
+#' used, and the core points reported are the points that meet the
+#' min_samples rule -- not every clustered point, which is what the
+#' previous wrapper reported.
+#'
+#' @param x Numeric matrix, one row per point (a vector is treated as
+#'   one column).
+#' @param eps Neighbourhood radius.
+#' @param min_samples Points within \code{eps} needed to make a point a
+#'   core point, counting the point itself.
+#' @param metric One of \code{"euclidean"} (default),
+#'   \code{"manhattan"} or \code{"chebyshev"}. Anything else is
+#'   refused.
+#' @return Named list: \code{estimate} (the cluster count),
+#'   \code{labels} (0-based, \code{-1} for noise), \code{n_clusters},
+#'   \code{n_noise}, \code{core_sample_indices} (0-based, the core
+#'   points only), \code{eps}, \code{min_samples}, \code{metric},
+#'   \code{n} and \code{method}.
+#' @examples
+#' morie_dbscan_clustering(matrix(c(0, 0, 0.1, 0.1, 5, 5), ncol = 2,
+#'                                byrow = TRUE),
+#'                         eps = 1, min_samples = 2L)
+#' @export
 morie_dbscan_clustering <- function(x, eps = 0.5, min_samples = 5L,
                                     metric = "euclidean") {
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)

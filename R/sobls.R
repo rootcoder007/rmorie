@@ -12,8 +12,10 @@
 #'   scrambling. Asking for it warns; the sequence returned is
 #'   always the unscrambled one, and \code{scrambled} in the
 #'   result says so.
-#' @param seed integer.
-#' @return list: sample, estimate (if f given), se, N, d, method.
+#' @param seed integer; seeds nothing in this arm, since the
+#'   sequence returned is deterministic and unscrambled.
+#' @return list: sample, estimate (if f given), se, N, d,
+#'   \code{scrambled} (always \code{FALSE} in this arm) and method.
 #' @importFrom utils getFromNamespace
 #' @examples
 #' morie_sobol_sequence(N = 128L, d = 2L)

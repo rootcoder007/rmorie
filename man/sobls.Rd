@@ -16,12 +16,12 @@ morie_sobol_sequence(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L)
 
 \item{f}{optional integrand; returns scalar.}
 
-\item{scramble}{logical; Owen scrambling (default TRUE).}
+\item{scramble}{logical; ignored by this arm, which has no Owen scrambling. Asking for it warns; the sequence returned is always the unscrambled one, and \code{scrambled} in the result says so.}
 
-\item{seed}{integer.}
+\item{seed}{integer; seeds nothing in this arm, since the sequence returned is deterministic and unscrambled.}
 }
 \value{
-list: sample, estimate (if f given), se, N, d, method.
+list: sample, estimate (if f given), se, N, d, \code{scrambled} (always \code{FALSE} in this arm) and method.
 }
 \description{
 Native gray-code Sobol sequence with Joe-Kuo direction numbers
