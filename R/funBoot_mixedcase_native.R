@@ -83,3 +83,9 @@ functional_bootstrap <- morie_funBoot
 .funBoot_cheatsheet <- function() {
   "funBoot: D = q_{1-a}(dist(T*_b, mean T*)); band = ball(center, D)"
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_funboot <- morie_funBoot

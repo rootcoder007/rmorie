@@ -142,3 +142,9 @@ peaks_over_threshold <- morie_potM
 morie_potM_cheatsheet <- function() {
   "potM: GPD MLE on y-u | y>u; x_m = u + sigma/xi ((m zeta)^xi - 1)"
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_potm <- morie_potM

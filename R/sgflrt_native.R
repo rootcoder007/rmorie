@@ -224,8 +224,17 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
   if (family == "poisson" && any(yv < 0.0 | yv != floor(yv)))
     stop("sgflrt: the Poisson family takes non-negative counts")
 
-  D <- as.matrix(dist(C))
-  dimnames(D) <- NULL
+  # Euclidean distances computed here rather than via stats::dist: this
+  # package implements its own numerics, and this mirrors the Python arm
+  # term for term so the summation order matches in both languages.
+  D <- matrix(0.0, n, n)
+  for (i in seq_len(n)) {
+    for (j in seq_len(n)) {
+      s <- 0.0
+      for (a in seq_len(ncol(C))) s <- s + (C[i, a] - C[j, a])^2
+      D[i, j] <- sqrt(s)
+    }
+  }
   dmax <- max(D)
   if (dmax <= .sgflrt_EPS)
     stop(paste0("sgflrt: every location is the same point, so there is no ",
