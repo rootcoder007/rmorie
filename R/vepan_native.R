@@ -435,7 +435,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' source it follows.
 #'
 #' @param t A list; the body reads \code{$end}, \code{$exons}, \code{$start}, \code{$strand} from it.
-#' @param v See Usage.
+#' @param v Accepted by the signature and not used anywhere in the body.
 #' @param lo Passed to \code{.vepan_seqrange}.
 #' @param hi Passed to \code{.vepan_seqrange}.
 #' @return The value of \code{unique}.

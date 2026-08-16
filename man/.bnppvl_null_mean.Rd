@@ -8,7 +8,7 @@
 .bnppvl_null_mean(nullq, j, level)
 }
 \arguments{
-\item{nullq}{See Usage.}
+\item{nullq}{Accepted by the signature and not used anywhere in the body.}
 \item{j}{Numeric; combined arithmetically in the body.}
 \item{level}{See Usage.}
 }

@@ -10,7 +10,7 @@
 \arguments{
 \item{coords}{Passed to \code{.schab_st_lag_matrices}.}
 \item{times}{Passed to \code{.schab_st_lag_matrices}.}
-\item{cov_fn}{See Usage.}
+\item{cov_fn}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{.schab_st_is_valid_covariance}. See the file header for the source the module follows.

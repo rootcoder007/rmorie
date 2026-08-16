@@ -8,7 +8,7 @@
 .sgflrt_golden(f, lo, hi, iters = 16L)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{lo}{See Usage.}
 \item{hi}{See Usage.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16L}.}

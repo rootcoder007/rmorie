@@ -9,7 +9,7 @@ whole_part_subpart(masks, target_hierarchy = NULL)
 }
 \arguments{
 \item{masks}{A vector; its length is taken and its elements indexed.}
-\item{target_hierarchy}{Defaults to \code{NULL}.}
+\item{target_hierarchy}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the sammkr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{txt}{See Usage.}
-\item{open_pad}{See Usage.}
-\item{close_pad}{See Usage.}
-\item{comma_pad}{See Usage.}
+\item{open_pad}{Accepted by the signature and not used anywhere in the body.}
+\item{close_pad}{Accepted by the signature and not used anywhere in the body.}
+\item{comma_pad}{Accepted by the signature and not used anywhere in the body.}
 \item{colon_txt}{See Usage.}
 \item{keep_ws}{A flag; the body branches on it.}
 }

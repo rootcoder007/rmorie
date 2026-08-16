@@ -108,7 +108,7 @@ morie_evt_gev_mle <- function(x) {
 #'
 #' route Coles p. 56 prescribes)
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param theta A vector; its length is taken and its elements indexed.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @return The value of \code{H}, as built in the body.

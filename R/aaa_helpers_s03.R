@@ -635,7 +635,7 @@
 #'
 #' @param nu Numeric; combined arithmetically in the body.
 #' @param x Numeric; combined arithmetically in the body.
-#' @param terms Defaults to \code{160L}.
+#' @param terms Accepted by the signature and not used anywhere in the body. Defaults to \code{160L}.
 #' @return A numeric value.
 #' @export
 .s03besselk <- function(nu, x, terms = 160L) {
@@ -802,7 +802,7 @@
 #' @param D Passed to \code{.s03vec}.
 #' @param X Passed to \code{.s03design}.
 #' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param link Defaults to \code{"logit"}.
+#' @param link Accepted by the signature and not used anywhere in the body. Defaults to \code{"logit"}.
 #' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0}, \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
 #' @export
 .s03tmle <- function(y, D, X = NULL, trim = 0, link = "logit") {

@@ -292,7 +292,7 @@
 #' @param pi Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param kind Passed to \code{.frfgrf_honesty_test}. Defaults to \code{"double-sample"}.
-#' @param sizes Defaults to \code{NULL}.
+#' @param sizes Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty}, \code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share}, \code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity}, \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d}, \code{n_trees}, \code{kind}, \code{failed}, \code{method}.
 #' @export
 .frfgrf_forest_fit_check <- function(y, X, n_trees = 100, min_leaf = 5,

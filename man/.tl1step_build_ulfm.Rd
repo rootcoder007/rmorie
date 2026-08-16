@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{Q}{Passed to \code{.tl1step_as_numvec}.}
-\item{H_fn}{See Usage.}
+\item{H_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{Y}{Passed to \code{.tl1step_as_numvec}.}
 \item{eps_max}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
 \item{steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.}

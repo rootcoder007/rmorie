@@ -169,7 +169,7 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 #' vertices" half of the Eulerian existence condition.
 #'
 #' @param edges A vector; indexed elementwise.
-#' @param verts See Usage.
+#' @param verts Accepted by the signature and not used anywhere in the body.
 #' @return A logical value.
 #' @export
 .connected <- function(edges, verts) {

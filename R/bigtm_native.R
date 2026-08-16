@@ -97,7 +97,7 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #'
 #' @param D A vector; its length is taken and its elements indexed.
 #' @param Tn A count; the body uses it as \code{numeric(...)}.
-#' @param Vn See Usage.
+#' @param Vn Accepted by the signature and not used anywhere in the body.
 #' @param z A vector; indexed elementwise.
 #' @return A list with \code{N_ijk}, \code{N_jk}, \code{N_kd}, \code{N_d}.
 #' @export

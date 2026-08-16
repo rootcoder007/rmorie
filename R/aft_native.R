@@ -52,7 +52,7 @@
 #' inverse-Hessian is a secant approximation accumulated along whatever
 #' path it walked, so it is not reproducible across solvers; this is.
 #'
-#' @param fn See Usage.
+#' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param theta A vector; its length is taken.
 #' @param rel Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{tryCatch}.
@@ -93,7 +93,7 @@
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param family Passed to \code{.morie_aft_log_dens_surv}. Defaults to \code{"weibull"}.
 #' @param max_iter Carried through into a list the body builds. Defaults to \code{500L}.
-#' @param tol Defaults to \code{1e-06}.
+#' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-06}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
 #' @export
@@ -142,7 +142,7 @@
 #' @param X Carried through into a list the body builds.
 #' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$cov}, \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.
 #' @param family Carried through into a list the body builds.
-#' @param title See Usage.
+#' @param title Accepted by the signature and not used anywhere in the body.
 #' @param method Carried through into a list the body builds.
 #' @return A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma}, \code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events}, \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X}, \code{method}.
 #' @export

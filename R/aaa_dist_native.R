@@ -238,7 +238,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cdf See Usage.
+#' @param cdf Accepted by the signature and not used anywhere in the body.
 #' @param p Numeric; combined arithmetically in the body.
 #' @param lo Numeric; combined arithmetically in the body.
 #' @param hi Numeric; passed to \code{abs}.

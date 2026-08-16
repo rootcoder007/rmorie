@@ -186,10 +186,10 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param grad See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
+#' @param grad Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
-#' @param project See Usage.
+#' @param project Accepted by the signature and not used anywhere in the body.
 #' @param step Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rule One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.

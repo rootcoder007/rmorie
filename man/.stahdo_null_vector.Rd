@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{rows}{A matrix; passed to \code{nrow}.}
-\item{p}{See Usage.}
+\item{p}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the stahdo_native implementation. Called by \code{.stahdo_subsample_dirs}. See the file header for the source the module follows.

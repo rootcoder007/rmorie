@@ -12,7 +12,7 @@ egcl(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL, V = NULL, mode = "position",
 \item{X}{A vector; indexed elementwise.}
 \item{phi_e}{See Usage.}
 \item{phi_x}{See Usage.}
-\item{phi_h}{See Usage.}
+\item{phi_h}{Accepted by the signature and not used anywhere in the body.}
 \item{A}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{V}{Optional; may be \code{NULL}. A vector; indexed elementwise.}

@@ -12,7 +12,7 @@ morie_sv_dl_build_sv_graph(pairs, median, sd, label, orientation = c("+", "-"), 
 \item{median}{Numeric; combined arithmetically in the body.}
 \item{sd}{Numeric; combined arithmetically in the body.}
 \item{label}{A vector; indexed elementwise.}
-\item{orientation}{Defaults to \code{c("+", "-")}.}
+\item{orientation}{Accepted by the signature and not used anywhere in the body. Defaults to \code{c("+", "-")}.}
 \item{n_sd}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 \item{window}{Defaults to \code{NULL}.}
 }

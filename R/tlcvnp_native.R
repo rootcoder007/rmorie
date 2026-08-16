@@ -107,8 +107,8 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param true_density See Usage.
-#' @param x0 See Usage.
+#' @param true_density Accepted by the signature and not used anywhere in the body.
+#' @param x0 Accepted by the signature and not used anywhere in the body.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param smoothness Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @return A list with \code{bias_order}, \code{h}, \code{smoothness}, \code{note}.

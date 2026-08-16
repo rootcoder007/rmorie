@@ -10,7 +10,7 @@
 \arguments{
 \item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{basis}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{n}{See Usage.}
+\item{n}{Accepted by the signature and not used anywhere in the body.}
 \item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{

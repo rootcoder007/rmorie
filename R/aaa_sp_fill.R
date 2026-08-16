@@ -514,7 +514,7 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
 #' from the quadratic-form moments and are stated in the Python
 #' docstring.  Only the SYMMETRIC part of W contributes.
 #'
-#' @param coords See Usage.
+#' @param coords Accepted by the signature and not used anywhere in the body.
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param w Passed to \code{.morie_spx_chkw}.
 #' @param u Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkw}.

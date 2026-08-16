@@ -351,7 +351,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param constraints Passed to \code{.morie_t2_viol}.
 #' @param x Passed to \code{.morie_t2_viol}.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -368,7 +368,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fun See Usage.
+#' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param x A vector; its length is taken.
 #' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{g}, as built in the body.
@@ -499,7 +499,7 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #' relaxation the survey\'s lambda_n, in ]0, 3/2[ \' @return list(x,
 #' objective, n_iter, lr, relaxation, step_norm, method) \' @export
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param grad_f The body requires: grad_f returned the wrong length.
 #' @param prox_g The body requires: prox_g returned the wrong length.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.

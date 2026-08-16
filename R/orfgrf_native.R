@@ -44,7 +44,7 @@
 #' @param y A vector; indexed elementwise.
 #' @param indices A vector; its length is taken and its elements indexed.
 #' @param min_leaf See Usage.
-#' @param alpha See Usage.
+#' @param alpha Accepted by the signature and not used anywhere in the body.
 #' @param max_depth See Usage.
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{build}.
@@ -101,7 +101,7 @@
 #'
 #' @param X Passed to \code{.grow_one_tree}.
 #' @param y A vector; its length is taken.
-#' @param W Defaults to \code{NULL}.
+#' @param W Accepted by the signature and not used anywhere in the body.
 #' @param kind Defaults to \code{"double-sample"}.
 #' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param min_leaf Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.

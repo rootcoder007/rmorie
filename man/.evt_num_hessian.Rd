@@ -8,7 +8,7 @@
 .evt_num_hessian(f, theta, h = 1e-04)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{theta}{A vector; its length is taken and its elements indexed.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.}
 }

@@ -11,7 +11,7 @@
 \item{text}{See Usage.}
 \item{pos}{See Usage.}
 \item{ctx}{A list; the body reads \code{$steps} from it.}
-\item{fn}{See Usage.}
+\item{fn}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_and_}, \code{morie_prsPEG_choice}, \code{morie_prsPEG_not_} and 2 others in the module. See the file header for the source the module follows.

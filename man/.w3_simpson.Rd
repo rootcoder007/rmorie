@@ -8,7 +8,7 @@
 .w3_simpson(f, a, b, n = 200L)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{a}{Numeric; combined arithmetically in the body.}
 \item{b}{Numeric; combined arithmetically in the body.}
 \item{n}{Numeric; combined arithmetically in the body. Defaults to \code{200L}.}

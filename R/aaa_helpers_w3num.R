@@ -427,7 +427,7 @@
 #' exactly the same number of steps and end at exactly the same point,
 #' which a tolerance test cannot guarantee.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Numeric; combined arithmetically in the body.
 #' @param hi Numeric; combined arithmetically in the body.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
@@ -458,7 +458,7 @@
 #' and the two arms would take different numbers of subdivisions on the
 #' very integrals where it matters.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
 #' @param n Numeric; combined arithmetically in the body. Defaults to \code{200L}.

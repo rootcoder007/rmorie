@@ -9,7 +9,7 @@ feature_augmentation(base_output, consumer)
 }
 \arguments{
 \item{base_output}{See Usage.}
-\item{consumer}{See Usage.}
+\item{consumer}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

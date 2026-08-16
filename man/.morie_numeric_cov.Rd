@@ -8,7 +8,7 @@
 .morie_numeric_cov(fn, theta, rel = 1e-05)
 }
 \arguments{
-\item{fn}{See Usage.}
+\item{fn}{Accepted by the signature and not used anywhere in the body.}
 \item{theta}{A vector; its length is taken.}
 \item{rel}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }

@@ -178,7 +178,7 @@ rank_by_similarity <- function(query, corpus_embeddings, top_k = 5) {
 #' source it follows.
 #'
 #' @param pairs A vector; its length is taken and its elements indexed.
-#' @param embed See Usage.
+#' @param embed Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{estimate}, \code{scores}, \code{embed_calls}, \code{n_pairs}, \code{cross_encoder_calls}, \code{method}.
 #' @export
 sts_score <- function(pairs, embed) {

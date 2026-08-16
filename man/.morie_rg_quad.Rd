@@ -8,7 +8,7 @@
 .morie_rg_quad(f, a, b, tol = 1.49e-08, maxdepth = 50L)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{a}{Numeric; combined arithmetically in the body.}
 \item{b}{Numeric; combined arithmetically in the body.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1.49e-08}.}

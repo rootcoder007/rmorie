@@ -228,8 +228,8 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
 #' @param b_k Coerced to numeric by the body, with \code{as.numeric}.
 #' @param a_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param N Defaults to \code{NULL}.
-#' @param M Defaults to \code{NULL}.
+#' @param N Accepted by the signature and not used anywhere in the body.
+#' @param M Accepted by the signature and not used anywhere in the body.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{N}, \code{M}, \code{recursive}, \code{feedback_is_subtracted}, \code{method}.
 #' @export

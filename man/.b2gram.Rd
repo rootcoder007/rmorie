@@ -10,7 +10,7 @@
 \arguments{
 \item{A}{A matrix; indexed by row and column.}
 \item{B}{A matrix; indexed by row and column.}
-\item{kf}{See Usage.}
+\item{kf}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \code{Gpresid} and 1 others in the module. See the file header for the source the module follows.

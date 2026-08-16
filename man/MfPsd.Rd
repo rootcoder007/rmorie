@@ -9,7 +9,7 @@ MfPsd(x, dt = 1)
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{dt}{Defaults to \code{1}.}
+\item{dt}{Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.}
 }
 \description{
 nonnegative -- the phase has been cancelled exactly, the frequency-domain statement of the coherent addition at t0.

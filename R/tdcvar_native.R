@@ -168,7 +168,7 @@
 #'
 #' @param A_hist A vector; its length is taken and its elements indexed.
 #' @param L_hist A vector; indexed elementwise.
-#' @param kind Defaults to \code{"binary"}.
+#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to \code{"binary"}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param trim Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{weights}, \code{per_time}.

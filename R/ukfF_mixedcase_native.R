@@ -118,7 +118,7 @@
 #'
 #' @param pts A matrix; indexed by row and column.
 #' @param w A matrix; passed to \code{crossprod}.
-#' @param fun See Usage.
+#' @param fun Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{ys}, \code{mean}, \code{cov}.
 #' @export
 .ukfF_ut <- function(pts, w, fun) {

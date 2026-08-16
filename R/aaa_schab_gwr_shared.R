@@ -408,7 +408,7 @@
 #' parabolic-interpolation step whose tie-breaking the Python arm would
 #' have to match bit for bit.
 #'
-#' @param func See Usage.
+#' @param func Accepted by the signature and not used anywhere in the body.
 #' @param lower Coerced to numeric by the body, with \code{as.numeric}.
 #' @param upper Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Defaults to \code{1e-04}.

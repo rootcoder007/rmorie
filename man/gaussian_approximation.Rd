@@ -8,9 +8,9 @@
 gaussian_approximation(log_lik, log_lik_d1, log_lik_d2, prior_mean, prior_precision, x0 = 0, iters = 60, tol = 1e-12)
 }
 \arguments{
-\item{log_lik}{See Usage.}
-\item{log_lik_d1}{See Usage.}
-\item{log_lik_d2}{See Usage.}
+\item{log_lik}{Accepted by the signature and not used anywhere in the body.}
+\item{log_lik_d1}{Accepted by the signature and not used anywhere in the body.}
+\item{log_lik_d2}{Accepted by the signature and not used anywhere in the body.}
 \item{prior_mean}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{prior_precision}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}

@@ -11,7 +11,7 @@ find_reasonable_epsilon(theta, logp, grad, rnd, eps = 1, max_doublings = 100)
 \item{theta}{A vector; its length is taken.}
 \item{logp}{Passed to \code{.joint}.}
 \item{grad}{See Usage.}
-\item{rnd}{See Usage.}
+\item{rnd}{Accepted by the signature and not used anywhere in the body.}
 \item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{max_doublings}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 }

@@ -60,7 +60,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param D2_kernel See Usage.
+#' @param D2_kernel Accepted by the signature and not used anywhere in the body.
 #' @param O Coerced to list by the body, with \code{as.list}.
 #' @param exclude_diagonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{value}, \code{n_pairs}, \code{cost}, \code{note}.

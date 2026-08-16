@@ -100,7 +100,7 @@
 #' which is the paper\'s equation (6). A guess that is flat over the
 #' parent gives exactly a half, the symmetric case.
 #'
-#' @param nullq See Usage.
+#' @param nullq Accepted by the signature and not used anywhere in the body.
 #' @param j Numeric; combined arithmetically in the body.
 #' @param level See Usage.
 #' @return A numeric value.

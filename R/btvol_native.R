@@ -20,7 +20,7 @@
 #' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
-#' @param stat See Usage.
+#' @param stat Accepted by the signature and not used anywhere in the body.
 #' @param B A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.
 #' @return A vector, from \code{vapply}.

@@ -256,7 +256,7 @@ morie_tlsurvy_design_efficiency <- function(values, influence, n, seed=0) {
 #'
 #' @param V Passed to \code{morie_tlsurvy_inclusion_probabilities}.
 #' @param influence_proxy Passed to \code{morie_tlsurvy_inclusion_probabilities}.
-#' @param full_estimator See Usage.
+#' @param full_estimator Accepted by the signature and not used anywhere in the body.
 #' @param n Passed to \code{morie_tlsurvy_inclusion_probabilities}.
 #' @param seed Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{psi}, \code{se_estimator}, \code{n_used}, \code{N}, \code{sampling_fraction}, \code{inclusion_probabilities}, \code{method}, \code{note}.

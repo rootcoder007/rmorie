@@ -65,7 +65,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fun See Usage.
+#' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param T0 Passed to \code{.sa_opt_temperature}. Defaults to \code{1}.

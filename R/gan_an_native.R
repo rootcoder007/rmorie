@@ -147,8 +147,8 @@
 #' source it follows.
 #'
 #' @param x Passed to \code{.gan_an_anomaly_score_impl}.
-#' @param generator See Usage.
-#' @param feature_fn See Usage.
+#' @param generator Accepted by the signature and not used anywhere in the body.
+#' @param feature_fn Accepted by the signature and not used anywhere in the body.
 #' @param z_dim Coerced to integer by the body, with \code{as.integer}.
 #' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.

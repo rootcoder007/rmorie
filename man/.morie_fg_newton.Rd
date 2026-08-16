@@ -12,7 +12,7 @@
 \item{e}{See Usage.}
 \item{X}{A matrix; indexed by row and column.}
 \item{competing}{See Usage.}
-\item{Gfun}{See Usage.}
+\item{Gfun}{Accepted by the signature and not used anywhere in the body.}
 \item{Gi}{Numeric; combined arithmetically in the body.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{1e-09}.}

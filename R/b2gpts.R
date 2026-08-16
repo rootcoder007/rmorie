@@ -47,7 +47,7 @@
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param B A matrix; indexed by row and column.
-#' @param kf See Usage.
+#' @param kf Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .b2gram <- function(A, B, kf) {

@@ -11,7 +11,7 @@ morie_tlbandt(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0, greedy = FALSE, burn_in
 \item{W}{A matrix; passed to \code{as.matrix}.}
 \item{Y1}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{Y0}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{blip_fn}{See Usage.}
+\item{blip_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{delta}{Passed to \code{.tlbandt_design_probability}. Defaults to \code{0.1}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{greedy}{A flag; the body branches on it. Defaults to \code{FALSE}.}

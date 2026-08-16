@@ -35,7 +35,7 @@
 #' definition whatever the nugget (Sec. 4.3.6).
 #'
 #' @param h A vector; its length is taken and its elements indexed.
-#' @param nugget See Usage.
+#' @param nugget Accepted by the signature and not used anywhere in the body.
 #' @param sill Numeric; combined arithmetically in the body.
 #' @param rng Numeric; combined arithmetically in the body.
 #' @param model Passed to \code{.sp_correlogram}.

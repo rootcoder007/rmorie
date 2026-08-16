@@ -10,7 +10,7 @@ morie_tlseqsl_cv_risk(X, y, algorithm, V = 10, loss = "squared", seed = 0)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{algorithm}{See Usage.}
+\item{algorithm}{Accepted by the signature and not used anywhere in the body.}
 \item{V}{Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{10}.}
 \item{loss}{Passed to \code{.tlseqsl_loss}. Defaults to \code{"squared"}.}
 \item{seed}{Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{0}.}

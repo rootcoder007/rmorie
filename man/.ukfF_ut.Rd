@@ -10,7 +10,7 @@
 \arguments{
 \item{pts}{A matrix; indexed by row and column.}
 \item{w}{A matrix; passed to \code{crossprod}.}
-\item{fun}{See Usage.}
+\item{fun}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the ukfF_mixedcase_native implementation. Called by \code{morie_ukfF}. See the file header for the source the module follows.

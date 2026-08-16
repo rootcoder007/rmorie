@@ -292,7 +292,7 @@ aicc <- function(loglik, n_par, n) {
 #' the source it follows.
 #'
 #' @param d See Usage.
-#' @param D See Usage.
+#' @param D Accepted by the signature and not used anywhere in the body.
 #' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export

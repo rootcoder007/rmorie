@@ -12,7 +12,7 @@
 \item{oob}{A vector; indexed elementwise.}
 \item{X}{A matrix; indexed by row and column.}
 \item{Y}{A matrix; indexed by row and column.}
-\item{q}{See Usage.}
+\item{q}{Accepted by the signature and not used anywhere in the body.}
 \item{normalise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

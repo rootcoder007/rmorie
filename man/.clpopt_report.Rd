@@ -13,7 +13,7 @@
 \item{cv}{A vector; indexed elementwise.}
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{m}{A count; the body uses it as \code{seq_len(...)}.}
-\item{total}{See Usage.}
+\item{total}{Accepted by the signature and not used anywhere in the body.}
 \item{rule}{Compared against \code{"bland"}.}
 }
 \description{

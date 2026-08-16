@@ -13,7 +13,7 @@
 \item{pi}{Passed to \code{.phylby_log_posterior}.}
 \item{prior_mean}{Passed to \code{.phylby_log_posterior}.}
 \item{partitions}{Passed to \code{.phylby_log_posterior}.}
-\item{rnd}{See Usage.}
+\item{rnd}{Accepted by the signature and not used anywhere in the body.}
 \item{beta}{Numeric; combined arithmetically in the body.}
 \item{tune}{Numeric; combined arithmetically in the body.}
 }

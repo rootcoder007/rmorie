@@ -11,8 +11,8 @@ online_tmle_series(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10)
 \item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{Z}{A matrix; indexed by row and column.}
-\item{Q_fn}{See Usage.}
-\item{g_fn}{See Usage.}
+\item{Q_fn}{Accepted by the signature and not used anywhere in the body.}
+\item{g_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{target_prob}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{burn_in}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 }

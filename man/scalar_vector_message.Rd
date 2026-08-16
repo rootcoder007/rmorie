@@ -11,9 +11,9 @@ scalar_vector_message(s_j, v_j, r_ij, phi_s, phi_v, W_rbf)
 \item{s_j}{Passed to \code{.painn_vec}.}
 \item{v_j}{Passed to \code{.painn_mat}.}
 \item{r_ij}{Passed to \code{.painn_vec}.}
-\item{phi_s}{See Usage.}
-\item{phi_v}{See Usage.}
-\item{W_rbf}{See Usage.}
+\item{phi_s}{Accepted by the signature and not used anywhere in the body.}
+\item{phi_v}{Accepted by the signature and not used anywhere in the body.}
+\item{W_rbf}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the painn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

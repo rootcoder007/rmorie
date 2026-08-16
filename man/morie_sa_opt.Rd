@@ -8,7 +8,7 @@
 morie_sa_opt(fun, x0, step = 1, T0 = 1, n_iter = 1000, schedule = "geometric", alpha = 0.99, lower = NULL, upper = NULL, seed = 0)
 }
 \arguments{
-\item{fun}{See Usage.}
+\item{fun}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{step}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{T0}{Passed to \code{.sa_opt_temperature}. Defaults to \code{1}.}

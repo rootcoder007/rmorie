@@ -8,7 +8,7 @@
 .ghc_deseq2_maximise_log_alpha(obj, lo = -15, hi = 5, n_grid = 60L, refine = 60L)
 }
 \arguments{
-\item{obj}{See Usage.}
+\item{obj}{Accepted by the signature and not used anywhere in the body.}
 \item{lo}{Numeric; passed to \code{exp}. Defaults to \code{-15}.}
 \item{hi}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 \item{n_grid}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}

@@ -292,7 +292,7 @@ one_minus_km <- function(hazards, times, cause) {
 #' @param cause Coerced to character by the body, with \code{as.character}. Defaults to \code{1}.
 #' @param horizon Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param iters Defaults to \code{50}.
+#' @param iters Accepted by the signature and not used anywhere in the body. Defaults to \code{50}.
 #' @return A list with \code{estimate}, \code{psi}, \code{F_treated}, \code{F_control}, \code{curve_treated}, \code{curve_control}, \code{se}, \code{ci}, \code{horizon}, \code{cause}, \code{times}, \code{closure_treated}, \code{method}, \code{note}.
 #' @export
 morie_tmlcmp <- function(time, event_type, D, X, times=NULL,

@@ -366,7 +366,7 @@
 #' @param pi Passed to \code{.phylby_log_posterior}.
 #' @param prior_mean Passed to \code{.phylby_log_posterior}.
 #' @param partitions Passed to \code{.phylby_log_posterior}.
-#' @param rnd See Usage.
+#' @param rnd Accepted by the signature and not used anywhere in the body.
 #' @param beta Numeric; combined arithmetically in the body.
 #' @param tune Numeric; combined arithmetically in the body.
 #' @return A list with \code{state}, \code{accepted}.

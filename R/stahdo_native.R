@@ -143,7 +143,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' source it follows.
 #'
 #' @param rows A matrix; passed to \code{nrow}.
-#' @param p See Usage.
+#' @param p Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .stahdo_null_vector <- function(rows, p) {

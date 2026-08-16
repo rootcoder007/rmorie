@@ -231,7 +231,7 @@
 #' source it follows.
 #'
 #' @param cols A vector; its length is taken.
-#' @param n See Usage.
+#' @param n Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{do.call}.
 #' @export
 .lggvls_bind <- function(cols, n) {

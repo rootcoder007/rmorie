@@ -8,7 +8,7 @@
 .gwr_golden(fn, lo, hi, tol)
 }
 \arguments{
-\item{fn}{See Usage.}
+\item{fn}{Accepted by the signature and not used anywhere in the body.}
 \item{lo}{See Usage.}
 \item{hi}{See Usage.}
 \item{tol}{Numeric; combined arithmetically in the body.}

@@ -48,7 +48,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Numeric; combined arithmetically in the body.
 #' @param hi Numeric; combined arithmetically in the body.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{80L}.

@@ -8,7 +8,7 @@
 numeric_log_jacobian(mapfun, z, h = 1e-06)
 }
 \arguments{
-\item{mapfun}{See Usage.}
+\item{mapfun}{Accepted by the signature and not used anywhere in the body.}
 \item{z}{A vector; its length is taken and its elements indexed.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }

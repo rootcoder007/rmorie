@@ -91,7 +91,7 @@ iou <- function(a, b, threshold = 0.5) {
 #'
 #' @param predictions A vector; its length is taken.
 #' @param target See Usage.
-#' @param loss_fn See Usage.
+#' @param loss_fn Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{loss}, \code{index}, \code{losses}, \code{mean_loss}, \code{gap}, \code{note}.
 #' @export
 min_loss_over_masks <- function(predictions, target, loss_fn) {
@@ -113,7 +113,7 @@ min_loss_over_masks <- function(predictions, target, loss_fn) {
 #' source it follows.
 #'
 #' @param masks A vector; its length is taken and its elements indexed.
-#' @param target_hierarchy Defaults to \code{NULL}.
+#' @param target_hierarchy Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{assignment}, \code{sizes}, \code{nested}, \code{note}.
 #' @export
 whole_part_subpart <- function(masks, target_hierarchy = NULL) {

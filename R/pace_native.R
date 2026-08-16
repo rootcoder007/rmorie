@@ -5,8 +5,8 @@
 #' source it follows.
 #'
 #' @param Y A vector; its length is taken.
-#' @param argvals See Usage.
-#' @param K See Usage.
+#' @param argvals Accepted by the signature and not used anywhere in the body.
+#' @param K Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{estimate}, \code{se}, \code{n}, \code{method}.
 #' @export
 morie_pace <- function(Y, argvals, K) {

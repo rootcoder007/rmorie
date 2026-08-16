@@ -16,7 +16,7 @@ morie_cmlmer_compressed_lmm(y, M, K, clusters = NULL, X = NULL, compare_levels =
 \item{compare_levels}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{log_delta_lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-10}.}
 \item{log_delta_hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
-\item{max_iter}{Defaults to \code{200L}.}
+\item{max_iter}{Accepted by the signature and not used anywhere in the body. Defaults to \code{200L}.}
 }
 \description{
 A step of the cmlmer_native implementation. No other function in the package calls it. See the file header for the source the module follows.

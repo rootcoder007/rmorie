@@ -9,9 +9,9 @@ variable_importance(X, Y, screen, effect, V = 5L, seed = 0L)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{Y}{See Usage.}
-\item{screen}{See Usage.}
-\item{effect}{See Usage.}
+\item{Y}{Accepted by the signature and not used anywhere in the body.}
+\item{screen}{Accepted by the signature and not used anywhere in the body.}
+\item{effect}{Accepted by the signature and not used anywhere in the body.}
 \item{V}{Defaults to \code{5L}.}
 \item{seed}{Defaults to \code{0L}.}
 }

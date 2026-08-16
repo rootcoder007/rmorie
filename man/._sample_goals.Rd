@@ -13,7 +13,7 @@
 \item{t}{Numeric; combined arithmetically in the body.}
 \item{T}{Numeric; combined arithmetically in the body.}
 \item{k}{Passed to \code{.ghc_unif}.}
-\item{m}{See Usage.}
+\item{m}{Accepted by the signature and not used anywhere in the body.}
 \item{pool}{A vector; its length is taken and its elements indexed.}
 \item{e}{Passed to \code{.ghc_unif}.}
 }

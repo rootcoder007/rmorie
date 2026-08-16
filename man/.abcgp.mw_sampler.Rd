@@ -8,7 +8,7 @@
 .abcgp.mw_sampler(sim, obs, log_prior, theta0, n_iter, n_sim, epsilon, proposal_sd, summary, seed, adaptive, xi, delta_s, n_alpha, max_sim = NULL)
 }
 \arguments{
-\item{sim}{See Usage.}
+\item{sim}{Accepted by the signature and not used anywhere in the body.}
 \item{obs}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
 \item{log_prior}{Passed to \code{.abcgp.alpha_terms}.}
 \item{theta0}{Coerced to numeric by the body, with \code{as.numeric}.}

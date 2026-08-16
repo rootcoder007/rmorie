@@ -17,7 +17,7 @@
 \item{pi}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{kind}{Passed to \code{.frfgrf_honesty_test}. Defaults to \code{"double-sample"}.}
-\item{sizes}{Defaults to \code{NULL}.}
+\item{sizes}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the frfgrf_native implementation. Called by \code{morie_frfgrf}. See the file header for the source the module follows.

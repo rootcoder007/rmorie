@@ -11,7 +11,7 @@ ArmaFit(x, p, q, fs = 1)
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{p}{Coerced to integer by the body, with \code{as.integer}.}
 \item{q}{Coerced to integer by the body, with \code{as.integer}.}
-\item{fs}{Defaults to \code{1}.}
+\item{fs}{Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.}
 }
 \description{
 nulls as well as resonances -- an all-pole model can only make peaks. Fitted in two stages (AR from the ACF, MA from the residual ACF), which is NOT joint maximum likelihood and is biased when the zeros sit close to the poles.  The stage structure is stated, not presented as an optimal fit.

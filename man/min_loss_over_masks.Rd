@@ -10,7 +10,7 @@ min_loss_over_masks(predictions, target, loss_fn)
 \arguments{
 \item{predictions}{A vector; its length is taken.}
 \item{target}{See Usage.}
-\item{loss_fn}{See Usage.}
+\item{loss_fn}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the sammkr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

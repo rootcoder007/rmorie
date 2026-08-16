@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{inf}{See Usage.}
+\item{inf}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the parquet implementation. Called by \code{morie_write_parquet}. See the file header for the source the module follows.

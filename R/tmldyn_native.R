@@ -82,7 +82,7 @@
 #'
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param basis Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param n See Usage.
+#' @param n Accepted by the signature and not used anywhere in the body.
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{as.numeric}.
 #' @export

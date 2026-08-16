@@ -87,7 +87,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param mapfun See Usage.
+#' @param mapfun Accepted by the signature and not used anywhere in the body.
 #' @param z A vector; its length is taken and its elements indexed.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{.logabsdet}.
@@ -214,7 +214,7 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #' the source it follows.
 #'
 #' @param theta A vector; its length is taken and its elements indexed.
-#' @param uni See Usage.
+#' @param uni Accepted by the signature and not used anywhere in the body.
 #' @param scale Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export

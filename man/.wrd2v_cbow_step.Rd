@@ -12,7 +12,7 @@
 \item{ctx}{A vector; its length is taken.}
 \item{c}{See Usage.}
 \item{size}{A count; the body uses it as \code{matrix(...)}.}
-\item{V}{See Usage.}
+\item{V}{Accepted by the signature and not used anywhere in the body.}
 \item{lr}{Numeric; combined arithmetically in the body.}
 }
 \description{

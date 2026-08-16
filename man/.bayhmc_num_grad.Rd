@@ -8,7 +8,7 @@
 .bayhmc_num_grad(logp, theta, h = 1e-05)
 }
 \arguments{
-\item{logp}{See Usage.}
+\item{logp}{Accepted by the signature and not used anywhere in the body.}
 \item{theta}{A vector; its length is taken.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }

@@ -8,7 +8,7 @@
 .tlhoest_second_order_term(D2_kernel, O, exclude_diagonal = TRUE)
 }
 \arguments{
-\item{D2_kernel}{See Usage.}
+\item{D2_kernel}{Accepted by the signature and not used anywhere in the body.}
 \item{O}{Coerced to list by the body, with \code{as.list}.}
 \item{exclude_diagonal}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

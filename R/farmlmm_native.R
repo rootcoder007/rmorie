@@ -170,7 +170,7 @@
 #' @param y Passed to \code{.to_vec}.
 #' @param G Passed to \code{.farmlmm_to_mat}.
 #' @param covariates Coerced to integer by the body, with \code{as.integer}. Defaults to \code{integer(0)}.
-#' @param K Defaults to \code{NULL}.
+#' @param K Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{p}, \code{beta}, \code{covariates}, \code{note}.
 #' @export
 .fixed_effect_scan <- function(y, G, covariates = integer(0), K = NULL) {
@@ -214,7 +214,7 @@
 #' @param y Passed to \code{.to_vec}.
 #' @param G Passed to \code{.kinship_from_markers}.
 #' @param selected Coerced to integer by the body, with \code{as.integer}.
-#' @param bins Defaults to \code{NULL}.
+#' @param bins Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{K}, \code{markers_used}, \code{blup}, \code{note}.
 #' @export
 .random_effect_step <- function(y, G, selected, bins = NULL) {
@@ -243,7 +243,7 @@
 #' @param G Passed to \code{.farmlmm_to_mat}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations}, \code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method}, \code{note}.
 #' @export
 .farmcpu <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {

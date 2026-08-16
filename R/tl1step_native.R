@@ -106,7 +106,7 @@
 #' universal rather than local.
 #'
 #' @param Q Passed to \code{.tl1step_as_numvec}.
-#' @param H_fn See Usage.
+#' @param H_fn Accepted by the signature and not used anywhere in the body.
 #' @param Y Passed to \code{.tl1step_as_numvec}.
 #' @param eps_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.
@@ -169,7 +169,7 @@
 #' the two.
 #'
 #' @param Q Passed to \code{.tl1step_as_numvec}.
-#' @param H_fn See Usage.
+#' @param H_fn Accepted by the signature and not used anywhere in the body.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{0.3}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A list with \code{max_deviation}, \code{universal}, \code{epsilon}, \code{local_submodel_direction_drift}, \code{note}.
@@ -277,7 +277,7 @@
 #' jumps rather than a path.
 #'
 #' @param Q Passed to \code{.tl1step_as_numvec}.
-#' @param H_fn See Usage.
+#' @param H_fn Accepted by the signature and not used anywhere in the body.
 #' @param Y Passed to \code{.tl1step_as_numvec}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @param tol Defaults to \code{1e-08}.

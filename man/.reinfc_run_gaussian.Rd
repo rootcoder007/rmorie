@@ -8,7 +8,7 @@
 .reinfc_run_gaussian(reward_fn, mu, sigma, baseline, mode, alpha, gamma, k, trials, rate_scaling, rng)
 }
 \arguments{
-\item{reward_fn}{See Usage.}
+\item{reward_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{mu}{Numeric; combined arithmetically in the body.}
 \item{sigma}{Numeric; combined arithmetically in the body.}
 \item{baseline}{Passed to \code{.reinfc_running_baseline}.}

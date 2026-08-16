@@ -126,11 +126,11 @@ outer_loop_schedule <- function(alpha, C, examine_all) {
 #'
 #' @param i1 Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
-#' @param y See Usage.
+#' @param y Accepted by the signature and not used anywhere in the body.
 #' @param E A vector; indexed elementwise.
 #' @param C Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rng A list; the body reads \code{$uniform} from it.
-#' @param tol Defaults to \code{0.001}.
+#' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{0.001}.
 #' @return A list with \code{index}, \code{level}, \code{note}.
 #' @export
 second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {

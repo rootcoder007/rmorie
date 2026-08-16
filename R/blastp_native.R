@@ -12,7 +12,7 @@
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; its length is taken and its elements indexed.
-#' @param score See Usage.
+#' @param score Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{score}, \code{qi}, \code{sj}, \code{ln}.
 #' @export
 .blast_best <- function(a, b, score) {

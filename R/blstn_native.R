@@ -131,7 +131,7 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
 #' @param qi Numeric; combined arithmetically in the body.
 #' @param si Numeric; combined arithmetically in the body.
 #' @param w A count; the body uses it as \code{seq_len(...)}.
-#' @param sc See Usage.
+#' @param sc Accepted by the signature and not used anywhere in the body.
 #' @param X See Usage.
 #' @return A list with \code{score}, \code{qs}, \code{ss}, \code{length}.
 #' @export

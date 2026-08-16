@@ -8,10 +8,10 @@
 projected_gradient(f, grad, x0, project, step = NULL, rule = "backtracking", max_iter = 2000, tol = 1e-10)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{grad}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
+\item{grad}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{project}{See Usage.}
+\item{project}{Accepted by the signature and not used anywhere in the body.}
 \item{step}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rule}{One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.}
