@@ -14,7 +14,7 @@ morie_sctraj_principal_curve(X, init, weights = NULL, max_iter = 15, tol = 0.001
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{0.001}.}
 \item{span}{Passed to \code{.sctraj_smooth}. Defaults to \code{0.4}.}
-\item{n_knots}{Defaults to \code{NULL}.}
+\item{n_knots}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.

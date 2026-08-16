@@ -8,7 +8,7 @@
 density_is_view_independent(model, point, directions, tol = 1e-09)
 }
 \arguments{
-\item{model}{See Usage.}
+\item{model}{Accepted by the signature and not used anywhere in the body.}
 \item{point}{Passed to \code{.nrfrad_vec}.}
 \item{directions}{Iterated over elementwise, with \code{vapply}.}
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.}

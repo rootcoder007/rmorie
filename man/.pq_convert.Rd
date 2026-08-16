@@ -10,7 +10,7 @@
 \arguments{
 \item{vals}{Iterated over elementwise, with \code{vapply}.}
 \item{ptype}{See Usage.}
-\item{converted}{See Usage.}
+\item{converted}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the parquet implementation. Called by \code{morie_read_parquet}. See the file header for the source the module follows.

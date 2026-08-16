@@ -8,7 +8,7 @@
 .karpv_apply(op, vals)
 }
 \arguments{
-\item{op}{One of \code{"-"}, \code{"*"}, \code{"\\\\\\\\\\\\\\\%"}, \code{"+"}.}
+\item{op}{One of \code{"-"}, \code{"*"}, \code{"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\%"}, \code{"+"}.}
 \item{vals}{A vector; indexed elementwise.}
 }
 \description{

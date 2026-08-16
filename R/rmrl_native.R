@@ -379,8 +379,8 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
 #' @param machine A list; the body reads \code{$states}, \code{$terminal}, \code{$u0} from it.
 #' @param states Coerced to list by the body, with \code{as.list}.
 #' @param actions Coerced to list by the body, with \code{as.list}.
-#' @param step See Usage.
-#' @param label See Usage.
+#' @param step Accepted by the signature and not used anywhere in the body.
+#' @param label Accepted by the signature and not used anywhere in the body.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param epsilon Passed to \code{.rmrl_eps_greedy}. Defaults to \code{0.1}.

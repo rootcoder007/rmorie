@@ -781,9 +781,9 @@ morie_jsonlt_from_json <- function(txt, simplifyVector = TRUE,
 #' walks characters instead of running a regex over the text.
 #'
 #' @param txt See Usage.
-#' @param open_pad See Usage.
-#' @param close_pad See Usage.
-#' @param comma_pad See Usage.
+#' @param open_pad Accepted by the signature and not used anywhere in the body.
+#' @param close_pad Accepted by the signature and not used anywhere in the body.
+#' @param comma_pad Accepted by the signature and not used anywhere in the body.
 #' @param colon_txt See Usage.
 #' @param keep_ws A flag; the body branches on it.
 #' @return A character value.

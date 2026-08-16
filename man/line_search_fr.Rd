@@ -8,8 +8,8 @@
 line_search_fr(f, grad, x, p, f0, g0, est = NULL, max_double = 60L, max_cubic = 40L, tol = 1e-12)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{grad}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
+\item{grad}{Accepted by the signature and not used anywhere in the body.}
 \item{x}{A vector; its length is taken.}
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{f0}{Numeric; combined arithmetically in the body.}

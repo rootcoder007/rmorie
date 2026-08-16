@@ -36,7 +36,7 @@
 #' below the noise floor and reintroduce exactly the disagreement this
 #' exists to remove.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}.
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.
@@ -200,8 +200,8 @@
 #' @param M_new Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.
 #' @param log_lam_lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-12}.
 #' @param log_lam_hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.
-#' @param max_iter Defaults to \code{200L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param max_iter Accepted by the signature and not used anywhere in the body. Defaults to \code{200L}.
+#' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{marker_effects}, \code{coefficients}, \code{breeding_values}, \code{breeding_values_kernel}, \code{kernel_identity_gap}, \code{fitted}, \code{residuals}, \code{lambda}, \code{lambda_estimated}, \code{sigma2_e}, \code{sigma2_u}, \code{sigma2_g}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{prediction_new}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.
 #' @export
 morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,

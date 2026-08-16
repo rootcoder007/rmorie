@@ -86,7 +86,7 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
 #' @param e See Usage.
 #' @param X A matrix; indexed by row and column.
 #' @param competing See Usage.
-#' @param Gfun See Usage.
+#' @param Gfun Accepted by the signature and not used anywhere in the body.
 #' @param Gi Numeric; combined arithmetically in the body.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-09}.

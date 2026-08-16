@@ -10,7 +10,7 @@
 \arguments{
 \item{h}{Passed to \code{.schab_st_as_lags}.}
 \item{k}{Passed to \code{.schab_st_as_lags}.}
-\item{cov_fn}{See Usage.}
+\item{cov_fn}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the schab_st_shared implementation. No other function in the package calls it. See the file header for the source the module follows.

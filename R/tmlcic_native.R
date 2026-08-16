@@ -245,7 +245,7 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 #' @param A A vector; indexed elementwise.
 #' @param W Passed to \code{.tmlcic_fit_working_model}.
 #' @param cand Passed to \code{.tmlcic_fit_working_model}.
-#' @param g1 See Usage.
+#' @param g1 Accepted by the signature and not used anywhere in the body.
 #' @param rows Optional; may be \code{NULL}. Passed to \code{.tmlcic_fit_working_model}.
 #' @param eval_rows Defaults to \code{NULL}.
 #' @param ridge Passed to \code{.tmlcic_fit_working_model}. Defaults to \code{1e-08}.

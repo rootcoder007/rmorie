@@ -129,7 +129,7 @@
 #' @param Y Passed to \code{.trclrn_check}.
 #' @param A Passed to \code{.trclrn_check}.
 #' @param X Passed to \code{.trclrn_check}.
-#' @param rule See Usage.
+#' @param rule Accepted by the signature and not used anywhere in the body.
 #' @param propensity Passed to \code{.trclrn_check}.
 #' @param method Compared against \code{"ipw"}. Defaults to \code{"ipw"}.
 #' @param outcome_model Defaults to \code{NULL}.
@@ -177,7 +177,7 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #' @param arms See Usage.
 #' @param method Compared against \code{"ipw"}.
 #' @param Xm A matrix; indexed by row and column.
-#' @param outcome_model See Usage.
+#' @param outcome_model Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{best}, \code{bv}.
 #' @export
 .trclrn_best_treatment <- function(y, a, p, rows, arms, method, Xm,

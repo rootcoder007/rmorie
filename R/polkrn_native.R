@@ -151,7 +151,7 @@
 #'
 #' @param A_hist A vector; its length is taken and its elements indexed.
 #' @param L_hist A vector; indexed elementwise.
-#' @param kind See Usage.
+#' @param kind Accepted by the signature and not used anywhere in the body.
 #' @param stabilize A flag; the body branches on it.
 #' @param trim See Usage.
 #' @return A list with \code{w}, \code{per_time}.

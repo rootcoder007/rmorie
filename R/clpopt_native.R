@@ -213,7 +213,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param cv A vector; indexed elementwise.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param m A count; the body uses it as \code{seq_len(...)}.
-#' @param total See Usage.
+#' @param total Accepted by the signature and not used anywhere in the body.
 #' @param rule Compared against \code{"bland"}.
 #' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate}, \code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
 #' @export

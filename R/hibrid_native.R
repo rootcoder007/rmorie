@@ -39,7 +39,7 @@
 #' below the noise floor and reintroduce exactly the disagreement this
 #' exists to remove.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}.
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.
@@ -202,7 +202,7 @@
 #' @param p1_new Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
 #' @param p2_new Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{gca_effect}, \code{sca_effect}, \code{coefficients}, \code{sigma2_gca}, \code{sigma2_sca}, \code{sigma2_e}, \code{sca_share}, \code{h2}, \code{gca_kernel}, \code{sca_kernel}, \code{reml_path}, \code{reml_loglik}, \code{iterations}, \code{converged}, \code{sca_fixed}, \code{prediction_new}, \code{residuals}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.
 #' @export
 morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,

@@ -264,7 +264,7 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
 #' @param median Numeric; combined arithmetically in the body.
 #' @param sd Numeric; combined arithmetically in the body.
 #' @param label A vector; indexed elementwise.
-#' @param orientation Defaults to \code{c("+", "-")}.
+#' @param orientation Accepted by the signature and not used anywhere in the body. Defaults to \code{c("+", "-")}.
 #' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param window Defaults to \code{NULL}.
 #' @return A list with \code{nodes}, \code{edges}, \code{sizes}, \code{label}.

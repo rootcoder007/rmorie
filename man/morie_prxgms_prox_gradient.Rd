@@ -8,9 +8,9 @@
 morie_prxgms_prox_gradient(fun, grad, prox, x0, L = 1, max.iter = 500L, tol = 1e-10, accelerate = TRUE, backtrack = FALSE, eta = 2, g.fun = NULL)
 }
 \arguments{
-\item{fun}{See Usage.}
-\item{grad}{See Usage.}
-\item{prox}{See Usage.}
+\item{fun}{Accepted by the signature and not used anywhere in the body.}
+\item{grad}{Accepted by the signature and not used anywhere in the body.}
+\item{prox}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{L}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{max.iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}

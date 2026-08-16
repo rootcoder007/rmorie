@@ -36,7 +36,7 @@
 #' below the noise floor and reintroduce exactly the disagreement this
 #' exists to remove.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}.
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.
@@ -204,7 +204,7 @@
 #' @param K Passed to \code{.sxrhrt_rows}.
 #' @param X Optional; may be \code{NULL}. Passed to \code{.sxrhrt_rows}.
 #' @param max_cycles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-09}.
 #' @param male_label Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{h2_male}, \code{h2_female}, \code{rg}, \code{sigma2_g_male}, \code{sigma2_g_female}, \code{sigma2_g_cross}, \code{sigma2_e_male}, \code{sigma2_e_female}, \code{coefficients}, \code{reml_loglik}, \code{reml_path}, \code{lrt_rg_equals_one}, \code{p_rg_equals_one}, \code{lrt_equal_h2}, \code{p_equal_h2}, \code{n}, \code{n_male}, \code{n_female}, \code{p}, \code{max_cross_sex_relatedness}, \code{cycles}, \code{converged}, \code{method}, \code{note}.
 #' @export

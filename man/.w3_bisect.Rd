@@ -8,7 +8,7 @@
 .w3_bisect(f, lo, hi, iters = 200L)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{lo}{Numeric; combined arithmetically in the body.}
 \item{hi}{Numeric; combined arithmetically in the body.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}

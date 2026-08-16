@@ -75,9 +75,9 @@ vector_norm <- function(v) {
 #' @param s_j Passed to \code{.painn_vec}.
 #' @param v_j Passed to \code{.painn_mat}.
 #' @param r_ij Passed to \code{.painn_vec}.
-#' @param phi_s See Usage.
-#' @param phi_v See Usage.
-#' @param W_rbf See Usage.
+#' @param phi_s Accepted by the signature and not used anywhere in the body.
+#' @param phi_v Accepted by the signature and not used anywhere in the body.
+#' @param W_rbf Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{ds}, \code{dv}, \code{note}.
 #' @export
 scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
@@ -119,7 +119,7 @@ scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
 #' @param v Passed to \code{.painn_mat}.
 #' @param U A matrix; passed to \code{t}.
 #' @param V A matrix; passed to \code{t}.
-#' @param phi See Usage.
+#' @param phi Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{ds}, \code{dv}, \code{scalar_from_vectors}, \code{note}.
 #' @export
 gated_update <- function(s, v, U, V, phi) {
@@ -200,7 +200,7 @@ dipole_moment <- function(charges, R, centre = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model See Usage.
+#' @param model Accepted by the signature and not used anywhere in the body.
 #' @param s See Usage.
 #' @param v Passed to \code{.painn_mat}.
 #' @param R Passed to \code{.painn_mat}.

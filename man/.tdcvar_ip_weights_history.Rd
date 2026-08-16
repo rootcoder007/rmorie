@@ -10,7 +10,7 @@
 \arguments{
 \item{A_hist}{A vector; its length is taken and its elements indexed.}
 \item{L_hist}{A vector; indexed elementwise.}
-\item{kind}{Defaults to \code{"binary"}.}
+\item{kind}{Accepted by the signature and not used anywhere in the body. Defaults to \code{"binary"}.}
 \item{stabilize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{trim}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }

@@ -12,7 +12,7 @@ morie_tmlcic_candidate_tmle(y, A, W, cand, g1, rows = NULL, eval_rows = NULL, ri
 \item{A}{A vector; indexed elementwise.}
 \item{W}{Passed to \code{.tmlcic_fit_working_model}.}
 \item{cand}{Passed to \code{.tmlcic_fit_working_model}.}
-\item{g1}{See Usage.}
+\item{g1}{Accepted by the signature and not used anywhere in the body.}
 \item{rows}{Optional; may be \code{NULL}. Passed to \code{.tmlcic_fit_working_model}.}
 \item{eval_rows}{Defaults to \code{NULL}.}
 \item{ridge}{Passed to \code{.tmlcic_fit_working_model}. Defaults to \code{1e-08}.}

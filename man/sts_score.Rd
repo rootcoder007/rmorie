@@ -9,7 +9,7 @@ sts_score(pairs, embed)
 }
 \arguments{
 \item{pairs}{A vector; its length is taken and its elements indexed.}
-\item{embed}{See Usage.}
+\item{embed}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the sbert_native implementation. No other function in the package calls it. See the file header for the source the module follows.

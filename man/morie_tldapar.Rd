@@ -11,8 +11,8 @@ morie_tldapar(n, V = 10L, seed = 0L, define_on_training = NULL, estimate_on_hold
 \item{n}{See Usage.}
 \item{V}{Defaults to \code{10L}.}
 \item{seed}{Defaults to \code{0L}.}
-\item{define_on_training}{Defaults to \code{NULL}.}
-\item{estimate_on_holdout}{Defaults to \code{NULL}.}
+\item{define_on_training}{Accepted by the signature and not used anywhere in the body.}
+\item{estimate_on_holdout}{Accepted by the signature and not used anywhere in the body.}
 \item{fold_estimates}{Defaults to \code{NULL}.}
 \item{fold_ics}{Defaults to \code{NULL}.}
 \item{effect}{Defaults to \code{NULL}.}

@@ -10,7 +10,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}.
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80L}.

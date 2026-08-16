@@ -13,7 +13,7 @@ extend_one(qchars, schars, qi, si, w, sc, X)
 \item{qi}{Numeric; combined arithmetically in the body.}
 \item{si}{Numeric; combined arithmetically in the body.}
 \item{w}{A count; the body uses it as \code{seq_len(...)}.}
-\item{sc}{See Usage.}
+\item{sc}{Accepted by the signature and not used anywhere in the body.}
 \item{X}{See Usage.}
 }
 \description{

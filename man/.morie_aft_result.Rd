@@ -13,7 +13,7 @@
 \item{X}{Carried through into a list the body builds.}
 \item{fit}{A list; the body reads \code{$beta}, \code{$converged}, \code{$cov}, \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.}
 \item{family}{Carried through into a list the body builds.}
-\item{title}{See Usage.}
+\item{title}{Accepted by the signature and not used anywhere in the body.}
 \item{method}{Carried through into a list the body builds.}
 }
 \description{

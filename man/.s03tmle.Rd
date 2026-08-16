@@ -12,7 +12,7 @@
 \item{D}{Passed to \code{.s03vec}.}
 \item{X}{Passed to \code{.s03design}.}
 \item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
-\item{link}{Defaults to \code{"logit"}.}
+\item{link}{Accepted by the signature and not used anywhere in the body. Defaults to \code{"logit"}.}
 }
 \description{
 Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated along the logistic submodel whose score is the clever covariate H = D/g - (1-D)/(1-g); eps solves the score equation by Newton, then psi = mean(Q*(1,X) - Q*(0,X)).  y is scaled to [0, 1] so the logistic fluctuation is valid for continuous outcomes (Gruber and van der Laan 2010).

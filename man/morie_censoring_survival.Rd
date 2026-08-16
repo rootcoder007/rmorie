@@ -13,7 +13,7 @@ morie_censoring_survival(times, censored, A = NULL, W = NULL, grid = NULL, by_co
 \item{A}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W}{Passed to \code{.tmlcen_W_mat}.}
 \item{grid}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
-\item{by_covariate}{Defaults to \code{TRUE}.}
+\item{by_covariate}{Accepted by the signature and not used anywhere in the body. Defaults to \code{TRUE}.}
 \item{ridge}{Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.}
 }
 \description{

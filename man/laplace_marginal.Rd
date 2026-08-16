@@ -8,7 +8,7 @@
 laplace_marginal(log_joint, x_grid, theta)
 }
 \arguments{
-\item{log_joint}{See Usage.}
+\item{log_joint}{Accepted by the signature and not used anywhere in the body.}
 \item{x_grid}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{theta}{See Usage.}
 }

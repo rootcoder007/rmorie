@@ -132,7 +132,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
+#' @param r Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .prgrl_gauss <- function(r) {

@@ -10,11 +10,11 @@ second_choice(i1, alpha, y, E, C, rng, tol = 0.001)
 \arguments{
 \item{i1}{Coerced to integer by the body, with \code{as.integer}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{y}{See Usage.}
+\item{y}{Accepted by the signature and not used anywhere in the body.}
 \item{E}{A vector; indexed elementwise.}
 \item{C}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rng}{A list; the body reads \code{$uniform} from it.}
-\item{tol}{Defaults to \code{0.001}.}
+\item{tol}{Accepted by the signature and not used anywhere in the body. Defaults to \code{0.001}.}
 }
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}. See the file header for the source the module follows.

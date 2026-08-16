@@ -11,7 +11,7 @@
 \item{y}{Passed to \code{.to_vec}.}
 \item{G}{Passed to \code{.farmlmm_to_mat}.}
 \item{covariates}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{integer(0)}.}
-\item{K}{Defaults to \code{NULL}.}
+\item{K}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the farmlmm_native implementation. Called by \code{.farmcpu}. See the file header for the source the module follows.

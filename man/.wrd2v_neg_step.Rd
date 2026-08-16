@@ -14,7 +14,7 @@
 \item{size}{A count; the body uses it as \code{numeric(...)}.}
 \item{lr}{Numeric; combined arithmetically in the body.}
 \item{k}{A count; the body uses it as \code{seq_len(...)}.}
-\item{draw_noise}{See Usage.}
+\item{draw_noise}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}. See the file header for the source the module follows.

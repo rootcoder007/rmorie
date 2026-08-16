@@ -12,7 +12,7 @@
 \item{y}{A vector; indexed elementwise.}
 \item{indices}{A vector; its length is taken and its elements indexed.}
 \item{min_leaf}{See Usage.}
-\item{alpha}{See Usage.}
+\item{alpha}{Accepted by the signature and not used anywhere in the body.}
 \item{max_depth}{See Usage.}
 \item{e}{Passed to \code{.ghc_unif}.}
 }

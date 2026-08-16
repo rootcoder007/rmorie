@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{A matrix; indexed by row and column.}
-\item{n}{See Usage.}
+\item{n}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}. See the file header for the source the module follows.

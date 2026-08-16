@@ -8,7 +8,7 @@
 MantelZ(coords, x, w, u = NULL)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{Accepted by the signature and not used anywhere in the body.}
 \item{x}{Passed to \code{.morie_spx_chkv}.}
 \item{w}{Passed to \code{.morie_spx_chkw}.}
 \item{u}{Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkw}.}

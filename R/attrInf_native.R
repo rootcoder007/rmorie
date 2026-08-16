@@ -382,11 +382,11 @@ confusion_error <- function(C, labels = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param model See Usage.
+#' @param model Accepted by the signature and not used anywhere in the body.
 #' @param y See Usage.
 #' @param known See Usage.
 #' @param candidates A vector; its length is taken.
-#' @param err See Usage.
+#' @param err Accepted by the signature and not used anywhere in the body.
 #' @param priors A vector; indexed elementwise.
 #' @param sensitive Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{scores}.

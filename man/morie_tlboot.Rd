@@ -9,7 +9,7 @@ morie_tlboot(data, estimator, B = 200L, seed = 0L, method = c("naive", "targeted
 }
 \arguments{
 \item{data}{Coerced to list by the body, with \code{as.list}.}
-\item{estimator}{See Usage.}
+\item{estimator}{Accepted by the signature and not used anywhere in the body.}
 \item{B}{A vector; its length is taken. Defaults to \code{200L}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{method}{One of \code{"naive"}, \code{"targeted"}.}

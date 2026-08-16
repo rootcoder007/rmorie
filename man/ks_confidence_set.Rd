@@ -8,7 +8,7 @@
 ks_confidence_set(moment_fn, theta_grid, X, form = "sum", n_equality = 0L, level = 0.95, n_levels = 2L, reps = 100L, seed = 0L)
 }
 \arguments{
-\item{moment_fn}{See Usage.}
+\item{moment_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{theta_grid}{See Usage.}
 \item{X}{See Usage.}
 \item{form}{Carried through into a list the body builds. Defaults to \code{"sum"}.}

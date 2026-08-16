@@ -37,7 +37,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fn See Usage.
+#' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param d Numeric; combined arithmetically in the body.
 #' @param n_restarts Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.
 #' @param seed Defaults to \code{0L}.

@@ -11,7 +11,7 @@ phmmsr_msv_score(seq, profile, tau = 0.02, lam = 0.7)
 \item{seq}{Coerced to list by the body, with \code{as.list}.}
 \item{profile}{Passed to \code{.phmmsr_to_matrix}.}
 \item{tau}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
-\item{lam}{Defaults to \code{0.7}.}
+\item{lam}{Accepted by the signature and not used anywhere in the body. Defaults to \code{0.7}.}
 }
 \description{
 A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}. See the file header for the source the module follows.

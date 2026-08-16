@@ -13,8 +13,8 @@
 \item{s}{See Usage.}
 \item{tr}{A vector; its length is taken.}
 \item{fold}{A vector; its length is taken and its elements indexed.}
-\item{tuning}{See Usage.}
-\item{penalties}{See Usage.}
+\item{tuning}{Accepted by the signature and not used anywhere in the body.}
+\item{penalties}{Accepted by the signature and not used anywhere in the body.}
 \item{trim}{Numeric; combined arithmetically in the body.}
 }
 \description{

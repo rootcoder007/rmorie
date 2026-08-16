@@ -110,8 +110,8 @@ cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param grad See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
+#' @param grad Accepted by the signature and not used anywhere in the body.
 #' @param x A vector; its length is taken.
 #' @param p Numeric; combined arithmetically in the body.
 #' @param f0 Numeric; combined arithmetically in the body.
@@ -196,10 +196,10 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Accepted by the signature and not used anywhere in the body.
 #' @param p Passed to \code{.cgnonl_dot}.
 #' @param g Passed to \code{.cgnonl_dot}.
-#' @param hess_vec See Usage.
+#' @param hess_vec Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .cgnonl_exact_quadratic_step <- function(x, p, g, hess_vec) {

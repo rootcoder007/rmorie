@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{emp}{A list; the body reads \code{$counts}, \code{$gamma}, \code{$space_lags}, \code{$time_lags} from it.}
-\item{model_fn}{See Usage.}
+\item{model_fn}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstvg}. See the file header for the source the module follows.

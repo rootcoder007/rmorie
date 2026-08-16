@@ -10,7 +10,7 @@
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{natoms}{Coerced to integer by the body, with \code{as.integer}.}
-\item{seed}{Defaults to \code{1}.}
+\item{seed}{Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.}
 }
 \description{
 dictionary is reproducible without an RNG

@@ -15,8 +15,8 @@ morie_rrblpr_rr_blup(y, M, lam = NULL, X = NULL, M_new = NULL, log_lam_lo = -12,
 \item{M_new}{Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.}
 \item{log_lam_lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-12}.}
 \item{log_lam_hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.}
-\item{max_iter}{Defaults to \code{200L}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{max_iter}{Accepted by the signature and not used anywhere in the body. Defaults to \code{200L}.}
+\item{tol}{Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-09}.}
 }
 \description{
 A step of the rrblpr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

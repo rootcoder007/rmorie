@@ -108,7 +108,7 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
 #' source it follows.
 #'
 #' @param features A matrix; the body checks with \code{is.matrix}.
-#' @param adj See Usage.
+#' @param adj Accepted by the signature and not used anywhere in the body.
 #' @param perm A vector; indexed elementwise.
 #' @param k_keep See Usage.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.

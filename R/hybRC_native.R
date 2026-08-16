@@ -188,7 +188,7 @@ weighted <- function(scores, weights = NULL) {
 #' source it follows.
 #'
 #' @param scores Iterated over elementwise, with \code{lapply}.
-#' @param criterion See Usage.
+#' @param criterion Accepted by the signature and not used anywhere in the body.
 #' @param context Defaults to \code{NULL}.
 #' @return A list with \code{scores}, \code{chosen}, \code{ranking}, \code{note}.
 #' @export
@@ -339,7 +339,7 @@ cascade <- function(primary, secondary, tol = 1e-9) {
 #' source it follows.
 #'
 #' @param base_output See Usage.
-#' @param consumer See Usage.
+#' @param consumer Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{result}, \code{note}.
 #' @export
 feature_augmentation <- function(base_output, consumer) {
@@ -355,8 +355,8 @@ feature_augmentation <- function(base_output, consumer) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model_builder See Usage.
-#' @param consumer See Usage.
+#' @param model_builder Accepted by the signature and not used anywhere in the body.
+#' @param consumer Accepted by the signature and not used anywhere in the body.
 #' @param data See Usage.
 #' @return A list with \code{estimate}, \code{result}, \code{model}, \code{method}, \code{note}.
 #' @export

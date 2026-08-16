@@ -8,8 +8,8 @@
 smoothing_bias(true_density, x0, h, smoothness = 2)
 }
 \arguments{
-\item{true_density}{See Usage.}
-\item{x0}{See Usage.}
+\item{true_density}{Accepted by the signature and not used anywhere in the body.}
+\item{x0}{Accepted by the signature and not used anywhere in the body.}
 \item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{smoothness}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
 }

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{data}{A matrix; the body checks with \code{is.matrix}.}
-\item{statistic}{See Usage.}
+\item{statistic}{Accepted by the signature and not used anywhere in the body.}
 \item{B}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }

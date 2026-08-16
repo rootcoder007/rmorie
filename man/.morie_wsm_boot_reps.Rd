@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{data}{A vector; its length is taken and its elements indexed.}
-\item{T}{See Usage.}
+\item{T}{Accepted by the signature and not used anywhere in the body.}
 \item{B}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{Passed to \code{.morie_wsm_lcg_u}.}
 }

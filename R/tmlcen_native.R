@@ -238,7 +238,7 @@
 #' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
-#' @param n See Usage.
+#' @param n Accepted by the signature and not used anywhere in the body.
 #' @return Nothing; this branch always raises.
 #' @export
 .tmlcen_coerce_subject_list <- function(x, n) {
@@ -302,7 +302,7 @@ morie_coarsen_interval <- function(times, deltas) {
 #' @param A Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Passed to \code{.tmlcen_W_mat}.
 #' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param by_covariate Defaults to \code{TRUE}.
+#' @param by_covariate Accepted by the signature and not used anywhere in the body. Defaults to \code{TRUE}.
 #' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
 #' @return A list with \code{G}, \code{grid}, \code{b}.
 #' @export

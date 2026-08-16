@@ -8,10 +8,10 @@
 morie_primal(K, Kt, prox_f_star, prox_g, x0, y0, tau = NULL, sigma = NULL, theta = 1, norm_K = NULL, max_iter = 500, tol = 1e-10)
 }
 \arguments{
-\item{K}{See Usage.}
-\item{Kt}{See Usage.}
-\item{prox_f_star}{See Usage.}
-\item{prox_g}{See Usage.}
+\item{K}{Accepted by the signature and not used anywhere in the body.}
+\item{Kt}{Accepted by the signature and not used anywhere in the body.}
+\item{prox_f_star}{Accepted by the signature and not used anywhere in the body.}
+\item{prox_g}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{y0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{tau}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}

@@ -8,7 +8,7 @@
 .morie_optimize_scale_normalized(fn, d, n_restarts = 8L, seed = 0L, x0 = NULL)
 }
 \arguments{
-\item{fn}{See Usage.}
+\item{fn}{Accepted by the signature and not used anywhere in the body.}
 \item{d}{Numeric; combined arithmetically in the body.}
 \item{n_restarts}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.}
 \item{seed}{Defaults to \code{0L}.}

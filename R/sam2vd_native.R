@@ -275,8 +275,8 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
 #' source it follows.
 #'
 #' @param frames A vector; its length is taken and its elements indexed.
-#' @param encoder See Usage.
-#' @param decoder See Usage.
+#' @param encoder Accepted by the signature and not used anywhere in the body.
+#' @param decoder Accepted by the signature and not used anywhere in the body.
 #' @param prompts Defaults to \code{NULL}.
 #' @param n_recent Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{7}.
 #' @param m_prompted Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{1}.

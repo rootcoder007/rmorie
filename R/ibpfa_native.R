@@ -156,8 +156,8 @@ ibp_log_probability <- function(Z, alpha) {
 #' @param Z A matrix; passed to \code{as.matrix}.
 #' @param i Numeric; combined arithmetically in the body.
 #' @param kk See Usage.
-#' @param likelihood See Usage.
-#' @param alpha See Usage.
+#' @param likelihood Accepted by the signature and not used anywhere in the body.
+#' @param alpha Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{p_on}, \code{prior}, \code{z}, \code{note}.
 #' @export
 gibbs_feature_update <- function(Z, i, kk, likelihood, alpha) {

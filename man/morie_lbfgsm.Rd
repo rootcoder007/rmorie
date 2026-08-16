@@ -8,9 +8,9 @@
 morie_lbfgsm(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-08, c1 = 1e-04, c2 = 0.9, max_ls = 60)
 }
 \arguments{
-\item{fun}{See Usage.}
+\item{fun}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{grad}{See Usage.}
+\item{grad}{Accepted by the signature and not used anywhere in the body.}
 \item{m}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{tol}{Defaults to \code{1e-08}.}

@@ -11,7 +11,7 @@ leapfrog(theta, r, eps, grad)
 \item{theta}{Numeric; combined arithmetically in the body.}
 \item{r}{Numeric; combined arithmetically in the body.}
 \item{eps}{Numeric; combined arithmetically in the body.}
-\item{grad}{See Usage.}
+\item{grad}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 volume-preserving, which lets a single Metropolis test on the energy correct the discretisation error exactly.

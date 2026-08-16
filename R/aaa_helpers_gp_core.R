@@ -204,7 +204,7 @@
 #'
 #' @param probs Passed to \code{.gpmat}.
 #' @param y_true Passed to \code{.gpflat}.
-#' @param n_classes Defaults to \code{NULL}.
+#' @param n_classes Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .gpmll <- function(probs, y_true, n_classes = NULL) {

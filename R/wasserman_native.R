@@ -336,7 +336,7 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 #' the source it follows.
 #'
 #' @param data A vector; its length is taken and its elements indexed.
-#' @param T See Usage.
+#' @param T Accepted by the signature and not used anywhere in the body.
 #' @param B A count; the body uses it as \code{seq_len(...)}.
 #' @param seed Passed to \code{.morie_wsm_lcg_u}.
 #' @return A vector, from \code{vapply}.

@@ -8,7 +8,7 @@
 gnnEx_mask_objective(predict, edges, edge_logits, feature_logits, y, size_coef = 0.005, entropy_coef = 1)
 }
 \arguments{
-\item{predict}{See Usage.}
+\item{predict}{Accepted by the signature and not used anywhere in the body.}
 \item{edges}{See Usage.}
 \item{edge_logits}{Passed to \code{.gnnEx_sig}.}
 \item{feature_logits}{Passed to \code{.gnnEx_sig}.}

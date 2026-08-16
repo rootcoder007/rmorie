@@ -914,7 +914,7 @@
 #'
 #' @param vals Iterated over elementwise, with \code{vapply}.
 #' @param ptype See Usage.
-#' @param converted See Usage.
+#' @param converted Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{vals}, as built in the body.
 #' @export
 .pq_convert <- function(vals, ptype, converted) {
@@ -1265,7 +1265,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
-#' @param inf See Usage.
+#' @param inf Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .pq_prep_write <- function(v, inf) {

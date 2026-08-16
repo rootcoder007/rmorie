@@ -278,7 +278,7 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #'
 #' @param Yc A matrix; indexed by row and column.
 #' @param nt A count; the body uses it as \code{seq_len(...)}.
-#' @param n See Usage.
+#' @param n Accepted by the signature and not used anywhere in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
 .dnnheadweights <- function(Yc, nt, n) {

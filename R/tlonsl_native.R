@@ -93,7 +93,7 @@ morie_tlonsl_summary_measure <- function(history, lags=1) {
 #' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param algorithm See Usage.
+#' @param algorithm Accepted by the signature and not used anywhere in the body.
 #' @param loss Passed to \code{.tlonsl_loss}. Defaults to \code{"squared"}.
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param lags Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.

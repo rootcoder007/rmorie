@@ -31,8 +31,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param a See Usage.
+#' @param s Accepted by the signature and not used anywhere in the body.
+#' @param a Accepted by the signature and not used anywhere in the body.
 #' @param s_next A vector; its length is taken and its elements indexed.
 #' @param g A vector; its length is taken and its elements indexed.
 #' @param tol See Usage.
@@ -59,7 +59,7 @@
 #' @param t Numeric; combined arithmetically in the body.
 #' @param T Numeric; combined arithmetically in the body.
 #' @param k Passed to \code{.ghc_unif}.
-#' @param m See Usage.
+#' @param m Accepted by the signature and not used anywhere in the body.
 #' @param pool A vector; its length is taken and its elements indexed.
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{lapply}.

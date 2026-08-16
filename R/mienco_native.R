@@ -117,7 +117,7 @@
 #' @param summary See Usage.
 #' @param patches A vector; its length is taken.
 #' @param other_patches A vector; its length is taken.
-#' @param critic See Usage.
+#' @param critic Accepted by the signature and not used anywhere in the body.
 #' @param estimator Compared against \code{"jsd"}. Defaults to \code{"jsd"}.
 #' @return A list with \code{estimate}, \code{mi_lower_bound}, \code{estimator}, \code{n_patches}, \code{n_negative_patches}, \code{method}, \code{note}.
 #' @export
@@ -171,7 +171,7 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #'
 #' @param samples Iterated over elementwise, with \code{sapply}.
 #' @param prior_samples Iterated over elementwise, with \code{sapply}.
-#' @param discriminator See Usage.
+#' @param discriminator Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .mienco_prior_matching_loss <- function(samples, prior_samples, discriminator) {

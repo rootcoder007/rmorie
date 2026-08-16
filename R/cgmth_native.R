@@ -20,8 +20,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param grad_f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
+#' @param grad_f Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Defaults to \code{1e-06}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.

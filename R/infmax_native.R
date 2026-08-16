@@ -142,7 +142,7 @@
 #'
 #' @param global_features Iterated over elementwise, with \code{lapply}.
 #' @param feature_maps Iterated over elementwise, with \code{lapply}.
-#' @param critic See Usage.
+#' @param critic Accepted by the signature and not used anywhere in the body.
 #' @param estimator Carried through into a list the body builds. Defaults to \code{"jsd"}.
 #' @return A list with \code{objective}, \code{estimator}, \code{n_positive}, \code{n_negative}, \code{note}.
 #' @export
@@ -191,7 +191,7 @@
 #'
 #' @param global_features Iterated over elementwise, with \code{lapply}.
 #' @param feature_maps Iterated over elementwise, with \code{lapply}.
-#' @param critic See Usage.
+#' @param critic Accepted by the signature and not used anywhere in the body.
 #' @param estimator Carried through into a list the body builds. Defaults to \code{"jsd"}.
 #' @return A list with \code{estimate}, \code{objective}, \code{estimator}, \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.
 #' @export

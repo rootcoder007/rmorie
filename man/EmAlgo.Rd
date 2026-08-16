@@ -9,8 +9,8 @@ EmAlgo(log_lik, Q, x0, steps)
 }
 \arguments{
 \item{steps}{A count; the body uses it as \code{seq_len(...)}.}
-\item{log_lik}{See Usage.}
-\item{Q}{See Usage.}
+\item{log_lik}{Accepted by the signature and not used anywhere in the body.}
+\item{Q}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

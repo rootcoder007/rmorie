@@ -8,7 +8,7 @@
 attack_dataset(model_predict, in_X, in_y, out_X, out_y)
 }
 \arguments{
-\item{model_predict}{See Usage.}
+\item{model_predict}{Accepted by the signature and not used anywhere in the body.}
 \item{in_X}{A vector; its length is taken.}
 \item{in_y}{A vector; indexed elementwise.}
 \item{out_X}{A vector; its length is taken.}

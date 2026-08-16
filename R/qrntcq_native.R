@@ -173,7 +173,7 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 #' @param t.R.b Numeric; combined arithmetically in the body.
 #' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param generation.time Defaults to \code{NULL}.
-#' @param infected.fraction Defaults to \code{NULL}.
+#' @param infected.fraction Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{relative.utility}, \code{utility.a}, \code{utility.b}, \code{efficacy.a}, \code{efficacy.b}, \code{independent.of.infected.fraction}, \code{note}.
 #' @export
 morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,

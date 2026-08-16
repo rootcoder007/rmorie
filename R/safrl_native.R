@@ -465,10 +465,10 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param policy See Usage.
+#' @param policy Accepted by the signature and not used anywhere in the body.
 #' @param states Coerced to list by the body, with \code{as.list}.
 #' @param actions Coerced to list by the body, with \code{as.list}.
-#' @param step See Usage.
+#' @param step Accepted by the signature and not used anywhere in the body.
 #' @param reward Carried through into a list the body builds.
 #' @param costs Coerced to list by the body, with \code{as.list}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.

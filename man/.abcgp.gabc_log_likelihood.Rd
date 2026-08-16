@@ -8,7 +8,7 @@
 .abcgp.gabc_log_likelihood(sim, obs, theta, n_sim = 50, epsilon = 1, summary = NULL, kernel = "gaussian", seed = 0, bootstrap = 25)
 }
 \arguments{
-\item{sim}{See Usage.}
+\item{sim}{Accepted by the signature and not used anywhere in the body.}
 \item{obs}{Passed to \code{.abcgp.summarise}.}
 \item{theta}{See Usage.}
 \item{n_sim}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50}.}

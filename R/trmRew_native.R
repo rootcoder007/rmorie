@@ -534,7 +534,7 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
 #' source it follows.
 #'
 #' @param rules See Usage.
-#' @param precedence See Usage.
+#' @param precedence Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{.trmRew_canonical}.
 #' @export
 .trmRew_interreduce <- function(rules, precedence) {

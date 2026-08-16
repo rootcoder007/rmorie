@@ -36,7 +36,7 @@
 #' below the noise floor and reintroduce exactly the disagreement this
 #' exists to remove.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}.
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.
@@ -264,7 +264,7 @@
 #' @param compare_levels Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param log_delta_lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-10}.
 #' @param log_delta_hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
-#' @param max_iter Defaults to \code{200L}.
+#' @param max_iter Accepted by the signature and not used anywhere in the body. Defaults to \code{200L}.
 #' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value}, \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship}, \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n}, \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.
 #' @export
 morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,

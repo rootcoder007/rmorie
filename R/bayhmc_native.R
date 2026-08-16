@@ -225,7 +225,7 @@ DELTA_MAX <- 1000.0
 #'
 #' not supply one. Same step h = 1e-5 as the Python arm.
 #'
-#' @param logp See Usage.
+#' @param logp Accepted by the signature and not used anywhere in the body.
 #' @param theta A vector; its length is taken.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{out}, as built in the body.
@@ -249,7 +249,7 @@ DELTA_MAX <- 1000.0
 #'
 #' log p(r), with p(r) the standard normal so log p(r) = -r.r/2.
 #'
-#' @param logp See Usage.
+#' @param logp Accepted by the signature and not used anywhere in the body.
 #' @param theta See Usage.
 #' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -269,7 +269,7 @@ DELTA_MAX <- 1000.0
 #' @param theta Numeric; combined arithmetically in the body.
 #' @param r Numeric; combined arithmetically in the body.
 #' @param eps Numeric; combined arithmetically in the body.
-#' @param grad See Usage.
+#' @param grad Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{theta}, \code{r}.
 #' @export
 leapfrog <- function(theta, r, eps, grad) {
@@ -293,7 +293,7 @@ leapfrog <- function(theta, r, eps, grad) {
 #' @param theta A vector; its length is taken.
 #' @param logp Passed to \code{.joint}.
 #' @param grad See Usage.
-#' @param rnd See Usage.
+#' @param rnd Accepted by the signature and not used anywhere in the body.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param max_doublings Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @return The value of \code{eps}, as built in the body.

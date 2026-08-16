@@ -8,7 +8,7 @@
 forces_from_energy(energy_fn, R, h = 1e-05)
 }
 \arguments{
-\item{energy_fn}{See Usage.}
+\item{energy_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{R}{Passed to \code{.schn_mat}.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }

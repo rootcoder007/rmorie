@@ -10,7 +10,7 @@ loglik_profile(y, grid, make_model, n_particles = 200L, n_reps = 5L, seed = 0L)
 \arguments{
 \item{y}{See Usage.}
 \item{grid}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{make_model}{See Usage.}
+\item{make_model}{Accepted by the signature and not used anywhere in the body.}
 \item{n_particles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{n_reps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0L}.}

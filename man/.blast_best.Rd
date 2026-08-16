@@ -10,7 +10,7 @@
 \arguments{
 \item{a}{A vector; its length is taken and its elements indexed.}
 \item{b}{A vector; its length is taken and its elements indexed.}
-\item{score}{See Usage.}
+\item{score}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the blastp_native implementation. Called by \code{morie_blastp}. See the file header for the source the module follows.

@@ -11,8 +11,8 @@ gibbs_feature_update(Z, i, kk, likelihood, alpha)
 \item{Z}{A matrix; passed to \code{as.matrix}.}
 \item{i}{Numeric; combined arithmetically in the body.}
 \item{kk}{See Usage.}
-\item{likelihood}{See Usage.}
-\item{alpha}{See Usage.}
+\item{likelihood}{Accepted by the signature and not used anywhere in the body.}
+\item{alpha}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it. See the file header for the source the module follows.

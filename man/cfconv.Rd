@@ -10,7 +10,7 @@ cfconv(X, R, filter_net, cutoff = 5, ...)
 \arguments{
 \item{X}{Passed to \code{.schn_mat}.}
 \item{R}{Passed to \code{.schn_mat}.}
-\item{filter_net}{See Usage.}
+\item{filter_net}{Accepted by the signature and not used anywhere in the body.}
 \item{cutoff}{Defaults to \code{5}.}
 \item{...}{Passed through.}
 }

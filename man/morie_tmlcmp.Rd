@@ -16,7 +16,7 @@ morie_tmlcmp(time, event_type, D, X, times = NULL, cause = 1, horizon = NULL, g 
 \item{cause}{Coerced to character by the body, with \code{as.character}. Defaults to \code{1}.}
 \item{horizon}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{g}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{iters}{Defaults to \code{50}.}
+\item{iters}{Accepted by the signature and not used anywhere in the body. Defaults to \code{50}.}
 }
 \description{
 A step of the tmlcmp_native implementation. No other function in the package calls it. See the file header for the source the module follows.

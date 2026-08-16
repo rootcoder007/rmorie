@@ -355,7 +355,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param estimator See Usage.
+#' @param estimator Accepted by the signature and not used anywhere in the body.
 #' @param d A list; the body reads \code{$weights} from it.
 #' @param rep A list; the body reads \code{$method}, \code{$scale}, \code{$weights} from it.
 #' @param values Defaults to \code{NULL}.

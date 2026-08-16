@@ -10,8 +10,8 @@
 \arguments{
 \item{h}{Passed to \code{.schab_st_as_lags}.}
 \item{k}{Passed to \code{.schab_st_as_lags}.}
-\item{cov_spatial}{See Usage.}
-\item{cov_temporal}{See Usage.}
+\item{cov_spatial}{Accepted by the signature and not used anywhere in the body.}
+\item{cov_temporal}{Accepted by the signature and not used anywhere in the body.}
 \item{nodes}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
 }

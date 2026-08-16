@@ -28,7 +28,7 @@
 #' source it follows.
 #'
 #' @param data Coerced to list by the body, with \code{as.list}.
-#' @param estimator See Usage.
+#' @param estimator Accepted by the signature and not used anywhere in the body.
 #' @param B A vector; its length is taken. Defaults to \code{200L}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param method One of \code{"naive"}, \code{"targeted"}.
@@ -139,7 +139,7 @@ naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P_star_sampler See Usage.
+#' @param P_star_sampler Accepted by the signature and not used anywhere in the body.
 #' @param estimator Passed to \code{morie_tlboot}.
 #' @param B Passed to \code{morie_tlboot}. Defaults to \code{200L}.
 #' @param seed Passed to \code{morie_tlboot}. Defaults to \code{0L}.

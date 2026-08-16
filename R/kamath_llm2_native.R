@@ -1944,7 +1944,7 @@ morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
 #'
 #' @param A Coerced to list by the body, with \code{as.list}.
 #' @param E A vector; indexed elementwise.
-#' @param name See Usage.
+#' @param name Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_km2_pair_vectors <- function(A, E, name) {

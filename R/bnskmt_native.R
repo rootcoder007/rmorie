@@ -184,7 +184,7 @@ ks_critical_value <- function(m, instruments, form = "sum",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param moment_fn See Usage.
+#' @param moment_fn Accepted by the signature and not used anywhere in the body.
 #' @param theta_grid See Usage.
 #' @param X See Usage.
 #' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.

@@ -8,7 +8,7 @@
 synthesize(target_predict, c, n_features, feature_values = NULL, k_max = NULL, k_min = 1L, conf_min = 0.8, iter_max = 1000L, rej_max = 10L, seed = 0)
 }
 \arguments{
-\item{target_predict}{See Usage.}
+\item{target_predict}{Accepted by the signature and not used anywhere in the body.}
 \item{c}{Numeric; combined arithmetically in the body.}
 \item{n_features}{A count; the body uses it as \code{seq_len(...)}.}
 \item{feature_values}{The body requires: memb: feature_values must have one entry per feature.}

@@ -8,7 +8,7 @@
 .replwt_replicate_variance(estimator, d, rep, values = NULL)
 }
 \arguments{
-\item{estimator}{See Usage.}
+\item{estimator}{Accepted by the signature and not used anywhere in the body.}
 \item{d}{A list; the body reads \code{$weights} from it.}
 \item{rep}{A list; the body reads \code{$method}, \code{$scale}, \code{$weights} from it.}
 \item{values}{Defaults to \code{NULL}.}

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{Q}{Passed to \code{.tl1step_as_numvec}.}
-\item{H_fn}{See Usage.}
+\item{H_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{0.3}.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }

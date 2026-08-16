@@ -154,7 +154,7 @@ centering_steps <- function(m, eps, t0, mu) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{out}, as built in the body.
@@ -178,7 +178,7 @@ centering_steps <- function(m, eps, t0, mu) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @return The value of \code{out}, as built in the body.

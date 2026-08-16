@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{score_positive}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{negative_scorer}{See Usage.}
+\item{negative_scorer}{Accepted by the signature and not used anywhere in the body.}
 \item{n_labels}{Coerced to integer by the body, with \code{as.integer}.}
 \item{rng}{Passed to \code{.ghc_unif}.}
 \item{margin}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}

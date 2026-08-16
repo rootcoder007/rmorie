@@ -113,7 +113,7 @@
 #' quadrature -- exact for polynomial g, so the Example 5.12 identities
 #' come out exactly.
 #'
-#' @param g See Usage.
+#' @param g Accepted by the signature and not used anywhere in the body.
 #' @param degree Numeric; combined arithmetically in the body.
 #' @param n_quad Optional; may be \code{NULL}. Passed to \code{.schab_gauss_hermite}.
 #' @return A vector, from \code{as.numeric}.
@@ -167,7 +167,7 @@
 #' @param coords A matrix; passed to \code{nrow}.
 #' @param y A vector; its length is taken.
 #' @param target A count; the body uses it as \code{matrix(...)}.
-#' @param correlation_fn See Usage.
+#' @param correlation_fn Accepted by the signature and not used anywhere in the body.
 #' @param b A vector; indexed elementwise.
 #' @param degree A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{prediction}, \code{variance}, \code{coefficients}, \code{component_variances}.

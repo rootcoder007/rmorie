@@ -10,7 +10,7 @@
 \arguments{
 \item{A_hist}{A vector; its length is taken and its elements indexed.}
 \item{L_hist}{A vector; indexed elementwise.}
-\item{kind}{See Usage.}
+\item{kind}{Accepted by the signature and not used anywhere in the body.}
 \item{stabilize}{A flag; the body branches on it.}
 \item{trim}{See Usage.}
 }

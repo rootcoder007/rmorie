@@ -8,8 +8,8 @@
 smcsam(log_gamma, initial, n_particles = 500L, ladder = NULL, n_steps = 20L, kernel = NULL, ess_threshold = 0.5, scheme = "systematic", seed = 0L, weight_rule = "mcmc", log_forward = NULL, log_backward = NULL)
 }
 \arguments{
-\item{log_gamma}{See Usage.}
-\item{initial}{See Usage.}
+\item{log_gamma}{Accepted by the signature and not used anywhere in the body.}
+\item{initial}{Accepted by the signature and not used anywhere in the body.}
 \item{n_particles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
 \item{ladder}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_steps}{Defaults to \code{20L}.}

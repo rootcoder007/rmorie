@@ -87,7 +87,7 @@ t5enc_task_prefix <- function(task, text) {
 #' @param rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
 #' @param mean_span Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param sentinel Defaults to \code{"<extra_id_\\\\\\\%d>"}.
+#' @param sentinel Defaults to \code{"<extra_id_\\\\\\\\\\\\\\\%d>"}.
 #' @return A list with \code{input}, \code{target}, \code{n_spans}, \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by}, \code{note}.
 #' @export
 t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,

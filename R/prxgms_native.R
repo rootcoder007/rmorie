@@ -34,9 +34,9 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fun See Usage.
-#' @param grad See Usage.
-#' @param prox See Usage.
+#' @param fun Accepted by the signature and not used anywhere in the body.
+#' @param grad Accepted by the signature and not used anywhere in the body.
+#' @param prox Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param L Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param max.iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.

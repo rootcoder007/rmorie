@@ -16,7 +16,7 @@ morie_hibrid_hibrid_prediction(y, p1_geno, p2_geno, sigma2_sca = NULL, X = NULL,
 \item{p1_new}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
 \item{p2_new}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the hibrid_native implementation. No other function in the package calls it. See the file header for the source the module follows.

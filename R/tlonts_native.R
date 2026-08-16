@@ -199,8 +199,8 @@ martingale_check <- function(D, past, tol = 0.2) {
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Z A matrix; indexed by row and column.
-#' @param Q_fn See Usage.
-#' @param g_fn See Usage.
+#' @param Q_fn Accepted by the signature and not used anywhere in the body.
+#' @param g_fn Accepted by the signature and not used anywhere in the body.
 #' @param target_prob Coerced to numeric by the body, with \code{as.numeric}.
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci}, \code{T_scored}, \code{method}, \code{note}.

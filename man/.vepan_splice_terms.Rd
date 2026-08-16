@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{t}{A list; the body reads \code{$end}, \code{$exons}, \code{$start}, \code{$strand} from it.}
-\item{v}{See Usage.}
+\item{v}{Accepted by the signature and not used anywhere in the body.}
 \item{lo}{Passed to \code{.vepan_seqrange}.}
 \item{hi}{Passed to \code{.vepan_seqrange}.}
 }

@@ -8,7 +8,7 @@
 .remlfn_nelder_mead(fn, x0, xatol = 1e-10, fatol = 1e-10, maxiter = 5000)
 }
 \arguments{
-\item{fn}{See Usage.}
+\item{fn}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{A vector; its length is taken and its elements indexed.}
 \item{xatol}{Defaults to \code{1e-10}.}
 \item{fatol}{Defaults to \code{1e-10}.}

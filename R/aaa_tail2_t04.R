@@ -351,8 +351,8 @@ Dpll <- function(cnf) {
 #' trace, increments, min_increment, monotone, \' steps, method) \'
 #' @export
 #'
-#' @param log_lik See Usage.
-#' @param Q See Usage.
+#' @param log_lik Accepted by the signature and not used anywhere in the body.
+#' @param Q Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param steps A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{theta}, \code{loglik}, \code{trace}, \code{increments}, \code{min_increment}, \code{monotone}, \code{steps}, \code{method}.

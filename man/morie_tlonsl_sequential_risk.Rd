@@ -9,7 +9,7 @@ morie_tlonsl_sequential_risk(y, algorithm, loss = "squared", burn_in = 5, lags =
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{algorithm}{See Usage.}
+\item{algorithm}{Accepted by the signature and not used anywhere in the body.}
 \item{loss}{Passed to \code{.tlonsl_loss}. Defaults to \code{"squared"}.}
 \item{burn_in}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{lags}{Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.}

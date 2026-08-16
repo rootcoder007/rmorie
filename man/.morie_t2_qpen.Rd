@@ -8,7 +8,7 @@
 .morie_t2_qpen(f, constraints, x, mu)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{constraints}{Passed to \code{.morie_t2_viol}.}
 \item{x}{Passed to \code{.morie_t2_viol}.}
 \item{mu}{Numeric; combined arithmetically in the body.}

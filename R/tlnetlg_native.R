@@ -188,10 +188,10 @@ morie_tlnetlg_exposure_summary <- function(A, friends, kind = "fraction") {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q_fn See Usage.
+#' @param Q_fn Accepted by the signature and not used anywhere in the body.
 #' @param friends A vector; its length is taken.
 #' @param W Passed to \code{.tlnetlg_mat}.
-#' @param policy See Usage.
+#' @param policy Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{psi}, \code{assigned}, \code{individual}, \code{N}.
 #' @export
 morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {

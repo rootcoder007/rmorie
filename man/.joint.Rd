@@ -8,7 +8,7 @@
 .joint(logp, theta, r)
 }
 \arguments{
-\item{logp}{See Usage.}
+\item{logp}{Accepted by the signature and not used anywhere in the body.}
 \item{theta}{See Usage.}
 \item{r}{Numeric; combined arithmetically in the body.}
 }

@@ -63,9 +63,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_lik See Usage.
-#' @param log_lik_d1 See Usage.
-#' @param log_lik_d2 See Usage.
+#' @param log_lik Accepted by the signature and not used anywhere in the body.
+#' @param log_lik_d1 Accepted by the signature and not used anywhere in the body.
+#' @param log_lik_d2 Accepted by the signature and not used anywhere in the body.
 #' @param prior_mean Coerced to numeric by the body, with \code{as.numeric}.
 #' @param prior_precision Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
@@ -135,7 +135,7 @@ skewness_correction <- function(third_derivative, precision) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_joint See Usage.
+#' @param log_joint Accepted by the signature and not used anywhere in the body.
 #' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @param theta See Usage.
 #' @return A list with \code{x}, \code{density}, \code{mean}, \code{sd}, \code{log_scale}.

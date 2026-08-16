@@ -253,7 +253,7 @@ nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param obj See Usage.
+#' @param obj Accepted by the signature and not used anywhere in the body.
 #' @param lo Numeric; passed to \code{exp}. Defaults to \code{-15}.
 #' @param hi Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @param n_grid A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.

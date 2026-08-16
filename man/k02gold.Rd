@@ -8,7 +8,7 @@
 k02gold(f, lo, hi, iters = 80L)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{lo}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{hi}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80L}.}

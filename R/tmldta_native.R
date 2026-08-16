@@ -80,7 +80,7 @@
 #' @param W A matrix; indexed by row and column.
 #' @param levels A vector; indexed elementwise.
 #' @param rows Iterated over elementwise, with \code{lapply}.
-#' @param ridge See Usage.
+#' @param ridge Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{q}, \code{b}.
 #' @export
 .fit_q <- function(y, A, W, levels, rows, ridge) {
@@ -119,7 +119,7 @@
 #' @param aL See Usage.
 #' @param aH See Usage.
 #' @param rows See Usage.
-#' @param ridge See Usage.
+#' @param ridge Accepted by the signature and not used anywhere in the body.
 #' @param trim Numeric; passed to \code{max}.
 #' @return A list with \code{gH}, \code{gL}.
 #' @export

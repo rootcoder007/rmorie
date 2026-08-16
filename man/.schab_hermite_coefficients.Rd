@@ -8,7 +8,7 @@
 .schab_hermite_coefficients(g, degree, n_quad = NULL)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{Accepted by the signature and not used anywhere in the body.}
 \item{degree}{Numeric; combined arithmetically in the body.}
 \item{n_quad}{Optional; may be \code{NULL}. Passed to \code{.schab_gauss_hermite}.}
 }

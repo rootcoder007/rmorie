@@ -329,7 +329,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fn See Usage.
+#' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param lo See Usage.
 #' @param hi See Usage.
 #' @param tol Numeric; combined arithmetically in the body.

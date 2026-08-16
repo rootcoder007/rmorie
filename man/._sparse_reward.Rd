@@ -8,8 +8,8 @@
 ._sparse_reward(s, a, s_next, g, tol)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{a}{See Usage.}
+\item{s}{Accepted by the signature and not used anywhere in the body.}
+\item{a}{Accepted by the signature and not used anywhere in the body.}
 \item{s_next}{A vector; its length is taken and its elements indexed.}
 \item{g}{A vector; its length is taken and its elements indexed.}
 \item{tol}{See Usage.}
