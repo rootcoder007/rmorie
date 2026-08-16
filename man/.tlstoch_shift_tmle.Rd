@@ -11,7 +11,7 @@
 \item{Y}{Passed to \code{.tlstoch_vec}.}
 \item{A}{Passed to \code{.tlstoch_vec}.}
 \item{W}{Passed to \code{.tlstoch_mat}.}
-\item{Q_fn}{See Usage.}
+\item{Q_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{g_fn}{Passed to \code{.tlstoch_density_ratio}.}
 \item{delta}{Passed to \code{.tlstoch_density_ratio}.}
 \item{lower}{Passed to \code{.tlstoch_density_ratio}.}

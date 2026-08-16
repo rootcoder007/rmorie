@@ -8,10 +8,10 @@
 morie_tlnetlg_community_estimand(Q_fn, friends, W, policy)
 }
 \arguments{
-\item{Q_fn}{See Usage.}
+\item{Q_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{friends}{A vector; its length is taken.}
 \item{W}{Passed to \code{.tlnetlg_mat}.}
-\item{policy}{See Usage.}
+\item{policy}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_longitudinal_network_gcomp}. See the file header for the source the module follows.

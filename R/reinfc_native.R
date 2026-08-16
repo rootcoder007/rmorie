@@ -126,7 +126,7 @@
 #'
 #' @param state A list; the body reads \code{$v1}, \code{$v2} from it.
 #' @param baseline One of \code{"comparison"}, \code{"none"}.
-#' @param gamma See Usage.
+#' @param gamma Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .reinfc_running_baseline <- function(state, baseline, gamma) {
@@ -169,7 +169,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reward_fn See Usage.
+#' @param reward_fn Accepted by the signature and not used anywhere in the body.
 #' @param pv A vector; its length is taken.
 #' @param baseline Passed to \code{.reinfc_running_baseline}.
 #' @param mode Compared against \code{"episodic"}.
@@ -224,7 +224,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reward_fn See Usage.
+#' @param reward_fn Accepted by the signature and not used anywhere in the body.
 #' @param xs A matrix; indexed by row and column.
 #' @param wm A matrix; passed to \code{nrow}.
 #' @param baseline Passed to \code{.reinfc_running_baseline}.
@@ -299,7 +299,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reward_fn See Usage.
+#' @param reward_fn Accepted by the signature and not used anywhere in the body.
 #' @param mu Numeric; combined arithmetically in the body.
 #' @param sigma Numeric; combined arithmetically in the body.
 #' @param baseline Passed to \code{.reinfc_running_baseline}.

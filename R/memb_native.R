@@ -67,7 +67,7 @@
 #' @param l2 Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{0}.
 #' @return The value of \code{train}, as built in the body.
 #' @export
 logistic_trainer <- function(l2 = 1e-3, epochs = 300L, lr = 0.5, seed = 0) {
@@ -158,7 +158,7 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model_predict See Usage.
+#' @param model_predict Accepted by the signature and not used anywhere in the body.
 #' @param in_X A vector; its length is taken.
 #' @param in_y A vector; indexed elementwise.
 #' @param out_X A vector; its length is taken.
@@ -192,7 +192,7 @@ attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param target_predict See Usage.
+#' @param target_predict Accepted by the signature and not used anywhere in the body.
 #' @param c Numeric; combined arithmetically in the body.
 #' @param n_features A count; the body uses it as \code{seq_len(...)}.
 #' @param feature_values The body requires: memb: feature_values must have one entry per feature.
@@ -381,7 +381,7 @@ precision_recall <- function(pred, truth) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param target_predict See Usage.
+#' @param target_predict Accepted by the signature and not used anywhere in the body.
 #' @param shadow_data See Usage.
 #' @param eval_in A vector; indexed elementwise.
 #' @param eval_out A vector; indexed elementwise.

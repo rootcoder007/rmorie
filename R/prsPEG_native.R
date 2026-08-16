@@ -19,7 +19,7 @@ FAIL <- NA_integer_
 #' @param text See Usage.
 #' @param pos See Usage.
 #' @param ctx A list; the body reads \code{$steps} from it.
-#' @param fn See Usage.
+#' @param fn Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{fn}.
 #' @export
 .probe <- function(text, pos, ctx, fn) {
@@ -179,7 +179,7 @@ morie_prsPEG_not_ <- function(e) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param expr See Usage.
+#' @param expr Accepted by the signature and not used anywhere in the body.
 #' @param text A vector; its length is taken.
 #' @param full A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{consumed}, \code{steps}, \code{memoised}, \code{method}, \code{note}.

@@ -8,7 +8,7 @@
 .sarmix_refine(negll, lo1, hi1, lo2, hi2)
 }
 \arguments{
-\item{negll}{See Usage.}
+\item{negll}{Accepted by the signature and not used anywhere in the body.}
 \item{lo1}{Numeric; passed to \code{max}.}
 \item{hi1}{Numeric; passed to \code{min}.}
 \item{lo2}{Numeric; passed to \code{max}.}

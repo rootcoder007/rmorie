@@ -8,7 +8,7 @@
 .schab_golden_section(func, lower, upper, tol = 1e-04, max_iter = 200L)
 }
 \arguments{
-\item{func}{See Usage.}
+\item{func}{Accepted by the signature and not used anywhere in the body.}
 \item{lower}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{upper}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{tol}{Defaults to \code{1e-04}.}

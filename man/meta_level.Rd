@@ -8,8 +8,8 @@
 meta_level(model_builder, consumer, data)
 }
 \arguments{
-\item{model_builder}{See Usage.}
-\item{consumer}{See Usage.}
+\item{model_builder}{Accepted by the signature and not used anywhere in the body.}
+\item{consumer}{Accepted by the signature and not used anywhere in the body.}
 \item{data}{See Usage.}
 }
 \description{

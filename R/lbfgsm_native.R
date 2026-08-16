@@ -48,9 +48,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fun See Usage.
+#' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
-#' @param grad See Usage.
+#' @param grad Accepted by the signature and not used anywhere in the body.
 #' @param m Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-08}.

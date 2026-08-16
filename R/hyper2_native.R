@@ -209,7 +209,7 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
 #' prior draw, so the prior term cancels and only the likelihood enters
 #' the acceptance test. No rejection and no step size.
 #'
-#' @param logl See Usage.
+#' @param logl Accepted by the signature and not used anywhere in the body.
 #' @param f A vector; its length is taken.
 #' @param L A matrix; indexed by row and column.
 #' @param e Passed to \code{.ghc_norm}.

@@ -10,7 +10,7 @@ coord_update(X, M, phi_x, C = NULL)
 \arguments{
 \item{X}{A vector; its length is taken and its elements indexed.}
 \item{M}{A vector; indexed elementwise.}
-\item{phi_x}{See Usage.}
+\item{phi_x}{Accepted by the signature and not used anywhere in the body.}
 \item{C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

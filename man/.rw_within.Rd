@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{theta}{A vector; its length is taken and its elements indexed.}
-\item{uni}{See Usage.}
+\item{uni}{Accepted by the signature and not used anywhere in the body.}
 \item{scale}{Numeric; combined arithmetically in the body.}
 }
 \description{

@@ -8,7 +8,7 @@
 .reinfc_run_bernoulli(reward_fn, pv, baseline, mode, rho, gamma, k, trials, rng)
 }
 \arguments{
-\item{reward_fn}{See Usage.}
+\item{reward_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{pv}{A vector; its length is taken.}
 \item{baseline}{Passed to \code{.reinfc_running_baseline}.}
 \item{mode}{Compared against \code{"episodic"}.}

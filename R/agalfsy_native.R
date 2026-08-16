@@ -169,7 +169,7 @@
 #' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
 #' @param box Numeric; combined arithmetically in the body. Defaults to \code{18}.
-#' @param seed Defaults to \code{2}.
+#' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{2}.
 #' @return A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start}, \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason}, \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions}, \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method}, \code{note}.
 #' @export
 morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,

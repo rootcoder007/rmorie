@@ -10,7 +10,7 @@
 #' then 7 zooms each shrinking the box by ten -- so they land on the
 #' same numbers rather than on two different optimiser trajectories.
 #'
-#' @param negll See Usage.
+#' @param negll Accepted by the signature and not used anywhere in the body.
 #' @param lo1 Numeric; passed to \code{max}.
 #' @param hi1 Numeric; passed to \code{min}.
 #' @param lo2 Numeric; passed to \code{max}.

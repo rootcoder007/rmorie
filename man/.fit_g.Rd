@@ -13,7 +13,7 @@
 \item{aL}{See Usage.}
 \item{aH}{See Usage.}
 \item{rows}{See Usage.}
-\item{ridge}{See Usage.}
+\item{ridge}{Accepted by the signature and not used anywhere in the body.}
 \item{trim}{Numeric; passed to \code{max}.}
 }
 \description{

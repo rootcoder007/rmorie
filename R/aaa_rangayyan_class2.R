@@ -310,8 +310,8 @@
 #'
 #' @param nr A count; the body uses it as \code{seq_len(...)}.
 #' @param nc A count; the body uses it as \code{seq_len(...)}.
-#' @param u See Usage.
-#' @param f See Usage.
+#' @param u Accepted by the signature and not used anywhere in the body.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .morie_bx_fill <- function(nr, nc, u, f) {
@@ -488,7 +488,7 @@
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param natoms Coerced to integer by the body, with \code{as.integer}.
-#' @param seed Defaults to \code{1}.
+#' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.
 #' @return A list with \code{atoms}, \code{params}.
 #' @export
 .morie_bx_gabor <- function(n, natoms, seed = 1) {

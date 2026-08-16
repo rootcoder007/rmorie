@@ -10,7 +10,7 @@
 \arguments{
 \item{D}{A vector; its length is taken and its elements indexed.}
 \item{Tn}{A count; the body uses it as \code{numeric(...)}.}
-\item{Vn}{See Usage.}
+\item{Vn}{Accepted by the signature and not used anywhere in the body.}
 \item{z}{A vector; indexed elementwise.}
 }
 \description{

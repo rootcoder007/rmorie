@@ -10,7 +10,7 @@
 \arguments{
 \item{global_features}{Iterated over elementwise, with \code{lapply}.}
 \item{feature_maps}{Iterated over elementwise, with \code{lapply}.}
-\item{critic}{See Usage.}
+\item{critic}{Accepted by the signature and not used anywhere in the body.}
 \item{estimator}{Carried through into a list the body builds. Defaults to \code{"jsd"}.}
 }
 \description{

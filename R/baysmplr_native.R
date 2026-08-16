@@ -200,7 +200,7 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param grad See Usage.
+#' @param grad Accepted by the signature and not used anywhere in the body.
 #' @param q Numeric; combined arithmetically in the body.
 #' @param p Numeric; combined arithmetically in the body.
 #' @param eps Numeric; combined arithmetically in the body.

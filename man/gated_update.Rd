@@ -12,7 +12,7 @@ gated_update(s, v, U, V, phi)
 \item{v}{Passed to \code{.painn_mat}.}
 \item{U}{A matrix; passed to \code{t}.}
 \item{V}{A matrix; passed to \code{t}.}
-\item{phi}{See Usage.}
+\item{phi}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the painn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

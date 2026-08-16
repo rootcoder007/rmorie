@@ -9,7 +9,7 @@ order_is_graph_determined(features, adj, perm, k_keep, tol = 1e-09)
 }
 \arguments{
 \item{features}{A matrix; the body checks with \code{is.matrix}.}
-\item{adj}{See Usage.}
+\item{adj}{Accepted by the signature and not used anywhere in the body.}
 \item{perm}{A vector; indexed elementwise.}
 \item{k_keep}{See Usage.}
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.}

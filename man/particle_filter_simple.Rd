@@ -10,9 +10,9 @@ particle_filter_simple(y, n_particles, init, step, loglik, seed = 0L)
 \arguments{
 \item{y}{See Usage.}
 \item{n_particles}{A count; the body uses it as \code{rep(...)}.}
-\item{init}{See Usage.}
-\item{step}{See Usage.}
-\item{loglik}{See Usage.}
+\item{init}{Accepted by the signature and not used anywhere in the body.}
+\item{step}{Accepted by the signature and not used anywhere in the body.}
+\item{loglik}{Accepted by the signature and not used anywhere in the body.}
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{

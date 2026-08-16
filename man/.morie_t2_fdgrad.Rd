@@ -8,7 +8,7 @@
 .morie_t2_fdgrad(fun, x, h)
 }
 \arguments{
-\item{fun}{See Usage.}
+\item{fun}{Accepted by the signature and not used anywhere in the body.}
 \item{x}{A vector; its length is taken.}
 \item{h}{Numeric; combined arithmetically in the body.}
 }

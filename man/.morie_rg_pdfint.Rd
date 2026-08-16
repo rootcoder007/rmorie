@@ -8,7 +8,7 @@
 .morie_rg_pdfint(f, pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{pdf}{A function; the body checks with \code{is.function}.}
 \item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lower}{Defaults to \code{-Inf}.}

@@ -8,7 +8,7 @@
 .barerp_num_grad(f, x, h = 1e-06)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{x}{A vector; its length is taken and its elements indexed.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }

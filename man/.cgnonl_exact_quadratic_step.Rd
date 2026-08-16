@@ -8,10 +8,10 @@
 .cgnonl_exact_quadratic_step(x, p, g, hess_vec)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Accepted by the signature and not used anywhere in the body.}
 \item{p}{Passed to \code{.cgnonl_dot}.}
 \item{g}{Passed to \code{.cgnonl_dot}.}
-\item{hess_vec}{See Usage.}
+\item{hess_vec}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}. See the file header for the source the module follows.

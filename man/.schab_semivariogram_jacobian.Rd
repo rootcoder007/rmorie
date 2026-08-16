@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{h}{A vector; its length is taken and its elements indexed.}
-\item{nugget}{See Usage.}
+\item{nugget}{Accepted by the signature and not used anywhere in the body.}
 \item{sill}{Numeric; combined arithmetically in the body.}
 \item{rng}{Numeric; combined arithmetically in the body.}
 \item{model}{Passed to \code{.sp_correlogram}.}

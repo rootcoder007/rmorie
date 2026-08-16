@@ -22,7 +22,7 @@
 #' Part of the morrisM_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param fun See Usage.
+#' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @param r A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10}.
 #' @param p A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4}.

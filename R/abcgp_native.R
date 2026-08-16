@@ -446,7 +446,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sim See Usage.
+#' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.abcgp.summarise}.
 #' @param theta See Usage.
 #' @param n_sim A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50}.
@@ -588,7 +588,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_prior See Usage.
+#' @param log_prior Accepted by the signature and not used anywhere in the body.
 #' @param theta See Usage.
 #' @param theta_p See Usage.
 #' @param ll Numeric; combined arithmetically in the body.
@@ -717,7 +717,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sim See Usage.
+#' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.abcgp.synthetic_log_likelihood}.
 #' @param log_prior Passed to \code{.abcgp.alpha_terms}.
 #' @param theta0 Coerced to numeric by the body, with \code{as.numeric}.

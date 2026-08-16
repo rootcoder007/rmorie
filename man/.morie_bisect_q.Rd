@@ -8,7 +8,7 @@
 .morie_bisect_q(cdf, p, lo, hi, tol = 1e-13)
 }
 \arguments{
-\item{cdf}{See Usage.}
+\item{cdf}{Accepted by the signature and not used anywhere in the body.}
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{lo}{Numeric; combined arithmetically in the body.}
 \item{hi}{Numeric; passed to \code{abs}.}

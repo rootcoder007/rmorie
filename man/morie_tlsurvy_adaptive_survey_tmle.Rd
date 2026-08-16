@@ -10,7 +10,7 @@ morie_tlsurvy_adaptive_survey_tmle(V, influence_proxy, full_estimator, n, seed =
 \arguments{
 \item{V}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
 \item{influence_proxy}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
-\item{full_estimator}{See Usage.}
+\item{full_estimator}{Accepted by the signature and not used anywhere in the body.}
 \item{n}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
 \item{seed}{Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.}
 }

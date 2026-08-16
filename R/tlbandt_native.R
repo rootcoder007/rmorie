@@ -87,7 +87,7 @@
 #' @param W A matrix; passed to \code{as.matrix}.
 #' @param Y1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Y0 Coerced to numeric by the body, with \code{as.numeric}.
-#' @param blip_fn See Usage.
+#' @param blip_fn Accepted by the signature and not used anywhere in the body.
 #' @param delta Passed to \code{.tlbandt_design_probability}. Defaults to \code{0.1}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param greedy A flag; the body branches on it. Defaults to \code{FALSE}.

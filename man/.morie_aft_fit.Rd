@@ -13,7 +13,7 @@
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{family}{Passed to \code{.morie_aft_log_dens_surv}. Defaults to \code{"weibull"}.}
 \item{max_iter}{Carried through into a list the body builds. Defaults to \code{500L}.}
-\item{tol}{Defaults to \code{1e-06}.}
+\item{tol}{Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-06}.}
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

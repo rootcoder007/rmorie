@@ -10,7 +10,7 @@
 \arguments{
 \item{Yc}{A matrix; indexed by row and column.}
 \item{nt}{A count; the body uses it as \code{seq_len(...)}.}
-\item{n}{See Usage.}
+\item{n}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the dnnmt implementation. Called by \code{Dnnmt}. See the file header for the source the module follows.

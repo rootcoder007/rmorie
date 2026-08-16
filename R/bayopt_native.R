@@ -540,7 +540,7 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param bounds Iterated over elementwise, with \code{lapply}.
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @param n_init Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.

@@ -269,7 +269,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo See Usage.
 #' @param hi See Usage.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16L}.

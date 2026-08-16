@@ -252,7 +252,7 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
 #' source it follows.
 #'
 #' @param video Iterated over elementwise, with \code{lapply}.
-#' @param block See Usage.
+#' @param block Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{video}, \code{note}.
 #' @export
 morie_vidgen_as_image_model <- function(video, block) {

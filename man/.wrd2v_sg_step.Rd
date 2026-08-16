@@ -11,8 +11,8 @@
 \item{st}{A list; the body reads \code{$O}, \code{$W} from it.}
 \item{c}{See Usage.}
 \item{j}{See Usage.}
-\item{size}{See Usage.}
-\item{V}{See Usage.}
+\item{size}{Accepted by the signature and not used anywhere in the body.}
+\item{V}{Accepted by the signature and not used anywhere in the body.}
 \item{lr}{Numeric; combined arithmetically in the body.}
 }
 \description{

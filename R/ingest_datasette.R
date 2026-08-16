@@ -40,7 +40,7 @@
 #' the source it follows.
 #'
 #' @param url See Usage.
-#' @param timeout Defaults to \code{60}.
+#' @param timeout Accepted by the signature and not used anywhere in the body. Defaults to \code{60}.
 #' @return The value of \code{.s03json_fromJSON}.
 #' @export
 .morie_datasette_get_json <- function(url, timeout = 60) {

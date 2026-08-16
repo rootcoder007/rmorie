@@ -9,7 +9,7 @@ morie_vidgen_as_image_model(video, block)
 }
 \arguments{
 \item{video}{Iterated over elementwise, with \code{lapply}.}
-\item{block}{See Usage.}
+\item{block}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the vidgen_native implementation. No other function in the package calls it. See the file header for the source the module follows.

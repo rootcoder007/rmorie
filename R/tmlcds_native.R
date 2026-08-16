@@ -392,8 +392,8 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @param s See Usage.
 #' @param tr A vector; its length is taken.
 #' @param fold A vector; its length is taken and its elements indexed.
-#' @param tuning See Usage.
-#' @param penalties See Usage.
+#' @param tuning Accepted by the signature and not used anywhere in the body.
+#' @param penalties Accepted by the signature and not used anywhere in the body.
 #' @param trim Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export

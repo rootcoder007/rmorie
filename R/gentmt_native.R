@@ -88,7 +88,7 @@
 #'
 #' @param A Passed to \code{.gentmt_vec}.
 #' @param H A matrix; passed to \code{as.matrix}.
-#' @param kind Defaults to \code{"normal"}.
+#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to \code{"normal"}.
 #' @return A list with \code{dens}, \code{info}.
 #' @export
 .gentmt_treatment_density <- function(A, H, kind = "normal") {

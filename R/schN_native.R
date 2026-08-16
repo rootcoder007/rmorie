@@ -99,7 +99,7 @@ cosine_cutoff <- function(r, cutoff = 5.0) {
 #'
 #' @param X Passed to \code{.schn_mat}.
 #' @param R Passed to \code{.schn_mat}.
-#' @param filter_net See Usage.
+#' @param filter_net Accepted by the signature and not used anywhere in the body.
 #' @param cutoff Defaults to \code{5}.
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.
@@ -132,7 +132,7 @@ cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param energy_fn See Usage.
+#' @param energy_fn Accepted by the signature and not used anywhere in the body.
 #' @param R Passed to \code{.schn_mat}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A list with \code{estimate}, \code{forces}, \code{net_force}, \code{method}, \code{note}.

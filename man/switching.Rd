@@ -9,7 +9,7 @@ switching(scores, criterion, context = NULL)
 }
 \arguments{
 \item{scores}{Iterated over elementwise, with \code{lapply}.}
-\item{criterion}{See Usage.}
+\item{criterion}{Accepted by the signature and not used anywhere in the body.}
 \item{context}{Defaults to \code{NULL}.}
 }
 \description{

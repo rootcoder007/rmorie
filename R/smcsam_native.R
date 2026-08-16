@@ -201,8 +201,8 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_gamma See Usage.
-#' @param initial See Usage.
+#' @param log_gamma Accepted by the signature and not used anywhere in the body.
+#' @param initial Accepted by the signature and not used anywhere in the body.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
 #' @param ladder Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_steps Defaults to \code{20L}.

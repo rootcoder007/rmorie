@@ -342,7 +342,7 @@
 #' @param oob A vector; indexed elementwise.
 #' @param X A matrix; indexed by row and column.
 #' @param Y A matrix; indexed by row and column.
-#' @param q See Usage.
+#' @param q Accepted by the signature and not used anywhere in the body.
 #' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{imp}, as built in the body.
 #' @export

@@ -64,7 +64,7 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param psi_of_P See Usage.
+#' @param psi_of_P Accepted by the signature and not used anywhere in the body.
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @param score Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.

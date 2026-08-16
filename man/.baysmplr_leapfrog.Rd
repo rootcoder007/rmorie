@@ -8,7 +8,7 @@
 .baysmplr_leapfrog(grad, q, p, eps, steps)
 }
 \arguments{
-\item{grad}{See Usage.}
+\item{grad}{Accepted by the signature and not used anywhere in the body.}
 \item{q}{Numeric; combined arithmetically in the body.}
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{eps}{Numeric; combined arithmetically in the body.}

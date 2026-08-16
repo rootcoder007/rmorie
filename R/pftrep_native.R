@@ -27,9 +27,9 @@ logmeanexp <- function(values) {
 #'
 #' @param y See Usage.
 #' @param n_particles A count; the body uses it as \code{rep(...)}.
-#' @param init See Usage.
-#' @param step See Usage.
-#' @param loglik See Usage.
+#' @param init Accepted by the signature and not used anywhere in the body.
+#' @param step Accepted by the signature and not used anywhere in the body.
+#' @param loglik Accepted by the signature and not used anywhere in the body.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A list with \code{loglik}, \code{min_ess}.
 #' @export
@@ -103,7 +103,7 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #'
 #' @param y See Usage.
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.
-#' @param make_model See Usage.
+#' @param make_model Accepted by the signature and not used anywhere in the body.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param n_reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.

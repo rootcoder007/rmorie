@@ -8,11 +8,11 @@
 map_invert(model, y, known, candidates, err, priors, sensitive = 0L)
 }
 \arguments{
-\item{model}{See Usage.}
+\item{model}{Accepted by the signature and not used anywhere in the body.}
 \item{y}{See Usage.}
 \item{known}{See Usage.}
 \item{candidates}{A vector; its length is taken.}
-\item{err}{See Usage.}
+\item{err}{Accepted by the signature and not used anywhere in the body.}
 \item{priors}{A vector; indexed elementwise.}
 \item{sensitive}{Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.}
 }

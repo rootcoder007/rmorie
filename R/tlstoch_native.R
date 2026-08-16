@@ -188,7 +188,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q_fn See Usage.
+#' @param Q_fn Accepted by the signature and not used anywhere in the body.
 #' @param A Passed to \code{.tlstoch_vec}.
 #' @param W Passed to \code{.tlstoch_mat}.
 #' @param delta Passed to \code{.tlstoch_shift_regime}.
@@ -225,9 +225,9 @@
 #' @param A Passed to \code{.tlstoch_vec}.
 #' @param W Passed to \code{.tlstoch_mat}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}.
-#' @param g_fn See Usage.
-#' @param lower Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param g_fn Accepted by the signature and not used anywhere in the body.
+#' @param lower Accepted by the signature and not used anywhere in the body.
+#' @param upper Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{H}, \code{max}, \code{mean}.
 #' @export
 .tlstoch_density_ratio <- function(A, W, delta, g_fn,
@@ -259,7 +259,7 @@
 #' @param Y Passed to \code{.tlstoch_vec}.
 #' @param A Passed to \code{.tlstoch_vec}.
 #' @param W Passed to \code{.tlstoch_mat}.
-#' @param Q_fn See Usage.
+#' @param Q_fn Accepted by the signature and not used anywhere in the body.
 #' @param g_fn Passed to \code{.tlstoch_density_ratio}.
 #' @param delta Passed to \code{.tlstoch_density_ratio}.
 #' @param lower Passed to \code{.tlstoch_density_ratio}.

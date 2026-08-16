@@ -8,7 +8,7 @@
 .abcgp.alpha_terms(log_prior, theta, theta_p, ll, ll_p, log_q, log_q_p)
 }
 \arguments{
-\item{log_prior}{See Usage.}
+\item{log_prior}{Accepted by the signature and not used anywhere in the body.}
 \item{theta}{See Usage.}
 \item{theta_p}{See Usage.}
 \item{ll}{Numeric; combined arithmetically in the body.}

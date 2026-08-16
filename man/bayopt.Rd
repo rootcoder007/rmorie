@@ -8,7 +8,7 @@
 bayopt(f, bounds, n_iter = 20, n_init = 5, acq = "ei", kernel = "matern52", amplitude = 1, length_scale = 1, noise = 1e-08, kappa = 2, xi = 0, n_candidates = 200, seed = 0, X0 = NULL, y0 = NULL, inner = "gradient", n_starts = 8)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{bounds}{Iterated over elementwise, with \code{lapply}.}
 \item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
 \item{n_init}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}

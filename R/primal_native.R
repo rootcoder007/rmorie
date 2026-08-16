@@ -41,10 +41,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param K See Usage.
-#' @param Kt See Usage.
-#' @param prox_f_star See Usage.
-#' @param prox_g See Usage.
+#' @param K Accepted by the signature and not used anywhere in the body.
+#' @param Kt Accepted by the signature and not used anywhere in the body.
+#' @param prox_f_star Accepted by the signature and not used anywhere in the body.
+#' @param prox_g Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tau Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.

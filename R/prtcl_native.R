@@ -104,9 +104,9 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n.particles Coerced to integer by the body, with \code{as.integer}.
-#' @param init See Usage.
-#' @param step See Usage.
-#' @param loglik See Usage.
+#' @param init Accepted by the signature and not used anywhere in the body.
+#' @param step Accepted by the signature and not used anywhere in the body.
+#' @param loglik Accepted by the signature and not used anywhere in the body.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @param resample.threshold Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param systematic A flag; the body branches on it. Defaults to \code{TRUE}.

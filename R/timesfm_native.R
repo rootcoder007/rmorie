@@ -132,7 +132,7 @@ morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
 #' the source it follows.
 #'
 #' @param history See Usage.
-#' @param predictor See Usage.
+#' @param predictor Accepted by the signature and not used anywhere in the body.
 #' @param horizon Passed to \code{morie_timesfm_rollout_steps}.
 #' @param input_patch_len Coerced to integer by the body, with \code{as.integer}.
 #' @param output_patch_len Coerced to integer by the body, with \code{as.integer}.

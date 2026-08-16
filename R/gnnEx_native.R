@@ -147,7 +147,7 @@ gnnEx_conditional_entropy <- function(probs) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param predict See Usage.
+#' @param predict Accepted by the signature and not used anywhere in the body.
 #' @param edges See Usage.
 #' @param edge_logits Passed to \code{.gnnEx_sig}.
 #' @param feature_logits Passed to \code{.gnnEx_sig}.

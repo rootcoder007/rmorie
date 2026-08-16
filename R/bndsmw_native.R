@@ -206,7 +206,7 @@ morie_gms_critical_value <- function(m, instruments, form = "sum",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param moment_fn See Usage.
+#' @param moment_fn Accepted by the signature and not used anywhere in the body.
 #' @param theta_grid See Usage.
 #' @param X Passed to \code{morie_hypercube_instruments}.
 #' @param form Passed to \code{morie_cvm_statistic}. Defaults to \code{"sum"}.

@@ -10,8 +10,8 @@
 \arguments{
 \item{nr}{A count; the body uses it as \code{seq_len(...)}.}
 \item{nc}{A count; the body uses it as \code{seq_len(...)}.}
-\item{u}{See Usage.}
-\item{f}{See Usage.}
+\item{u}{Accepted by the signature and not used anywhere in the body.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_nmfmu}, \code{Infomax}, \code{Lstm} and 1 others in the module. See the file header for the source the module follows.

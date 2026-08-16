@@ -118,7 +118,7 @@ g_computation <- function(strata, outcome_means, covariate_probs) {
 #' @param Q_functions A vector; indexed elementwise.
 #' @param L_supports A vector; its length is taken and its elements indexed.
 #' @param L_probs A vector; its length is taken and its elements indexed.
-#' @param rule See Usage.
+#' @param rule Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{estimate}, \code{psi}, \code{horizon}, \code{method}, \code{note}, \code{assumptions}.
 #' @export
 sequential_g_formula <- function(Q_functions, L_supports, L_probs,

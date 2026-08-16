@@ -11,8 +11,8 @@ morie_rmrl_qlearn_flat(machine, states, actions, step, label, gamma = 0.9, alpha
 \item{machine}{A list; the body reads \code{$states}, \code{$terminal}, \code{$u0} from it.}
 \item{states}{Coerced to list by the body, with \code{as.list}.}
 \item{actions}{Coerced to list by the body, with \code{as.list}.}
-\item{step}{See Usage.}
-\item{label}{See Usage.}
+\item{step}{Accepted by the signature and not used anywhere in the body.}
+\item{label}{Accepted by the signature and not used anywhere in the body.}
 \item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{epsilon}{Passed to \code{.rmrl_eps_greedy}. Defaults to \code{0.1}.}

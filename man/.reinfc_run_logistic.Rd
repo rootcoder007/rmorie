@@ -8,7 +8,7 @@
 .reinfc_run_logistic(reward_fn, xs, wm, baseline, mode, alpha, gamma, k, trials, eligibility, rng)
 }
 \arguments{
-\item{reward_fn}{See Usage.}
+\item{reward_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{xs}{A matrix; indexed by row and column.}
 \item{wm}{A matrix; passed to \code{nrow}.}
 \item{baseline}{Passed to \code{.reinfc_running_baseline}.}

@@ -58,7 +58,7 @@
 #' two languages agree to their shared tolerance rather than to whatever
 #' a black-box integrator happens to do.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1.49e-08}.
@@ -97,7 +97,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Accepted by the signature and not used anywhere in the body.
 #' @param pdf A function; the body checks with \code{is.function}.
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Defaults to \code{-Inf}.

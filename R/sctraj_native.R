@@ -384,7 +384,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @param span Passed to \code{.sctraj_smooth}. Defaults to \code{0.4}.
-#' @param n_knots Defaults to \code{NULL}.
+#' @param n_knots Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{pseudotime}, \code{curve}, \code{distance}, \code{sse}.
 #' @export
 morie_sctraj_principal_curve <- function(X, init, weights=NULL,

@@ -948,7 +948,7 @@ MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' frequency-domain statement of the coherent addition at t0.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param dt Defaults to \code{1}.
+#' @param dt Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.
 #' @return A list with \code{Y}, \code{psd}, \code{max_imaginary}, \code{max_difference}, \code{is_psd}, \code{n}, \code{method}.
 #' @export
 MfPsd <- function(x, dt = 1) {

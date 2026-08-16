@@ -470,7 +470,7 @@ PoleZero <- function(b, a = NULL) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p Coerced to integer by the body, with \code{as.integer}.
 #' @param q Coerced to integer by the body, with \code{as.integer}.
-#' @param fs Defaults to \code{1}.
+#' @param fs Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.
 #' @return A list with \code{a}, \code{b}, \code{p}, \code{q}, \code{gain}, \code{poles}, \code{zeros}, \code{stable}, \code{ar_error}, \code{two_stage}, \code{method}.
 #' @export
 ArmaFit <- function(x, p, q, fs = 1) {

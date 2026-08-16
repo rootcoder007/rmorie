@@ -215,8 +215,8 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 #' @param st A list; the body reads \code{$O}, \code{$W} from it.
 #' @param c See Usage.
 #' @param j See Usage.
-#' @param size See Usage.
-#' @param V See Usage.
+#' @param size Accepted by the signature and not used anywhere in the body.
+#' @param V Accepted by the signature and not used anywhere in the body.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
@@ -245,7 +245,7 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 #' @param size A count; the body uses it as \code{numeric(...)}.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
-#' @param draw_noise See Usage.
+#' @param draw_noise Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
 .wrd2v_neg_step <- function(st, c, j, size, lr, k, draw_noise) {
@@ -280,7 +280,7 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 #' @param ctx A vector; its length is taken.
 #' @param c See Usage.
 #' @param size A count; the body uses it as \code{matrix(...)}.
-#' @param V See Usage.
+#' @param V Accepted by the signature and not used anywhere in the body.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export

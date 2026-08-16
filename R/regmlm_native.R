@@ -44,7 +44,7 @@ CV_SCHEMES <- c("kfold", "loo")
 #' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
-#' @param n See Usage.
+#' @param n Accepted by the signature and not used anywhere in the body.
 #' @param n_ridge Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @return A numeric value.
 #' @export

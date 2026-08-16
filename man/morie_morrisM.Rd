@@ -8,7 +8,7 @@
 morie_morrisM(fun, k, r = 10, p = 4, seed = 0, bounds = NULL)
 }
 \arguments{
-\item{fun}{See Usage.}
+\item{fun}{Accepted by the signature and not used anywhere in the body.}
 \item{k}{A count; the body uses it as \code{seq_len(...)}.}
 \item{r}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10}.}
 \item{p}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4}.}

@@ -12,7 +12,7 @@ morie_qrntcq_relative_utility(t.R.a, t.R.b, t.Q = 3, generation.time = NULL, inf
 \item{t.R.b}{Numeric; combined arithmetically in the body.}
 \item{t.Q}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 \item{generation.time}{Defaults to \code{NULL}.}
-\item{infected.fraction}{Defaults to \code{NULL}.}
+\item{infected.fraction}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the qrntcq_native implementation. No other function in the package calls it. See the file header for the source the module follows.

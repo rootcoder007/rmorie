@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{p}{Numeric; combined arithmetically in the body.}
-\item{n}{See Usage.}
+\item{n}{Accepted by the signature and not used anywhere in the body.}
 \item{n_ridge}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 }
 \description{

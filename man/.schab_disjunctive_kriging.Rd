@@ -11,7 +11,7 @@
 \item{coords}{A matrix; passed to \code{nrow}.}
 \item{y}{A vector; its length is taken.}
 \item{target}{A count; the body uses it as \code{matrix(...)}.}
-\item{correlation_fn}{See Usage.}
+\item{correlation_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{b}{A vector; indexed elementwise.}
 \item{degree}{A count; the body uses it as \code{seq_len(...)}.}
 }

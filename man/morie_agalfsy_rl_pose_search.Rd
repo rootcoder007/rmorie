@@ -18,7 +18,7 @@ morie_agalfsy_rl_pose_search(receptor, ligand, site = NULL, policy = NULL, criti
 \item{window}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.}
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.}
 \item{box}{Numeric; combined arithmetically in the body. Defaults to \code{18}.}
-\item{seed}{Defaults to \code{2}.}
+\item{seed}{Accepted by the signature and not used anywhere in the body. Defaults to \code{2}.}
 }
 \description{
 A step of the agalfsy_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -128,7 +128,7 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
 #' @param seq Coerced to list by the body, with \code{as.list}.
 #' @param profile Passed to \code{.phmmsr_to_matrix}.
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
-#' @param lam Defaults to \code{0.7}.
+#' @param lam Accepted by the signature and not used anywhere in the body. Defaults to \code{0.7}.
 #' @return A list with \code{score}, \code{note}.
 #' @export
 phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {

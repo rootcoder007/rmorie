@@ -70,8 +70,8 @@
 #'
 #' @param h Passed to \code{.schab_st_as_lags}.
 #' @param k Passed to \code{.schab_st_as_lags}.
-#' @param cov_spatial See Usage.
-#' @param cov_temporal See Usage.
+#' @param cov_spatial Accepted by the signature and not used anywhere in the body.
+#' @param cov_temporal Accepted by the signature and not used anywhere in the body.
 #' @param form The body requires: `form` must be 'product', 'sum' or 'product_sum'. Defaults to \code{"product"}.
 #' @return The value of \code{switch}.
 #' @export
@@ -119,7 +119,7 @@
 #' @param k Passed to \code{.schab_st_as_lags}.
 #' @param theta_s Numeric; combined arithmetically in the body.
 #' @param theta_t Numeric; combined arithmetically in the body.
-#' @param corr_fn See Usage.
+#' @param corr_fn Accepted by the signature and not used anywhere in the body.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .schab_st_anisotropic_correlation <- function(h, k, theta_s, theta_t, corr_fn) {
@@ -316,8 +316,8 @@
 #'
 #' @param h Passed to \code{.schab_st_as_lags}.
 #' @param k Passed to \code{.schab_st_as_lags}.
-#' @param cov_spatial See Usage.
-#' @param cov_temporal See Usage.
+#' @param cov_spatial Accepted by the signature and not used anywhere in the body.
+#' @param cov_temporal Accepted by the signature and not used anywhere in the body.
 #' @param nodes Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
@@ -581,7 +581,7 @@
 #'
 #' @param coords Passed to \code{.schab_st_lag_matrices}.
 #' @param times Passed to \code{.schab_st_lag_matrices}.
-#' @param cov_fn See Usage.
+#' @param cov_fn Accepted by the signature and not used anywhere in the body.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .schab_st_covariance_matrix <- function(coords, times, cov_fn) {
@@ -639,7 +639,7 @@
 #'
 #' @param h Passed to \code{.schab_st_as_lags}.
 #' @param k Passed to \code{.schab_st_as_lags}.
-#' @param cov_fn See Usage.
+#' @param cov_fn Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .schab_st_semivariogram_from_cov <- function(h, k, cov_fn) {
@@ -776,7 +776,7 @@
 #' the source it follows.
 #'
 #' @param emp A list; the body reads \code{$counts}, \code{$gamma}, \code{$space_lags}, \code{$time_lags} from it.
-#' @param model_fn See Usage.
+#' @param model_fn Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
 .schab_st_wls_objective <- function(emp, model_fn) {

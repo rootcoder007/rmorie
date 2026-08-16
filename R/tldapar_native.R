@@ -31,8 +31,8 @@
 #' @param n See Usage.
 #' @param V Defaults to \code{10L}.
 #' @param seed Defaults to \code{0L}.
-#' @param define_on_training Defaults to \code{NULL}.
-#' @param estimate_on_holdout Defaults to \code{NULL}.
+#' @param define_on_training Accepted by the signature and not used anywhere in the body.
+#' @param estimate_on_holdout Accepted by the signature and not used anywhere in the body.
 #' @param fold_estimates Defaults to \code{NULL}.
 #' @param fold_ics Defaults to \code{NULL}.
 #' @param effect Defaults to \code{NULL}.
@@ -97,8 +97,8 @@ split_sample <- function(n, V = 10L, seed = 0L) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param define_on_training See Usage.
-#' @param estimate_on_holdout See Usage.
+#' @param define_on_training Accepted by the signature and not used anywhere in the body.
+#' @param estimate_on_holdout Accepted by the signature and not used anywhere in the body.
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @param V A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
 #' @param seed Defaults to \code{0L}.
@@ -166,9 +166,9 @@ cv_tmle <- function(fold_estimates, fold_ics, n) {
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param Y See Usage.
-#' @param screen See Usage.
-#' @param effect See Usage.
+#' @param Y Accepted by the signature and not used anywhere in the body.
+#' @param screen Accepted by the signature and not used anywhere in the body.
+#' @param effect Accepted by the signature and not used anywhere in the body.
 #' @param V Defaults to \code{5L}.
 #' @param seed Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{importance}, \code{V}, \code{method}.
@@ -212,9 +212,9 @@ variable_importance <- function(X, Y, screen, effect, V = 5L,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param define_and_estimate See Usage.
+#' @param define_and_estimate Accepted by the signature and not used anywhere in the body.
 #' @param n Coerced to integer by the body, with \code{as.integer}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{warning}.
 #' @export
 naive_reuse <- function(define_and_estimate, n, seed = 0L) {

@@ -10,7 +10,7 @@
 \arguments{
 \item{probs}{Passed to \code{.gpmat}.}
 \item{y_true}{Passed to \code{.gpflat}.}
-\item{n_classes}{Defaults to \code{NULL}.}
+\item{n_classes}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{Msm009}. See the file header for the source the module follows.

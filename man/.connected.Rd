@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{edges}{A vector; indexed elementwise.}
-\item{verts}{See Usage.}
+\item{verts}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 by eulerian_path to enforce the "connected on its non-isolated vertices" half of the Eulerian existence condition.

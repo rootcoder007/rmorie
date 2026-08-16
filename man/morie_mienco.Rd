@@ -11,7 +11,7 @@ morie_mienco(summary, patches, other_patches, critic, estimator = "jsd")
 \item{summary}{See Usage.}
 \item{patches}{A vector; its length is taken.}
 \item{other_patches}{A vector; its length is taken.}
-\item{critic}{See Usage.}
+\item{critic}{Accepted by the signature and not used anywhere in the body.}
 \item{estimator}{Compared against \code{"jsd"}. Defaults to \code{"jsd"}.}
 }
 \description{

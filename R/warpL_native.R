@@ -144,7 +144,7 @@
 #' source it follows.
 #'
 #' @param score_positive Coerced to numeric by the body, with \code{as.numeric}.
-#' @param negative_scorer See Usage.
+#' @param negative_scorer Accepted by the signature and not used anywhere in the body.
 #' @param n_labels Coerced to integer by the body, with \code{as.integer}.
 #' @param rng Passed to \code{.ghc_unif}.
 #' @param margin Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.

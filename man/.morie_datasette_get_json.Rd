@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{url}{See Usage.}
-\item{timeout}{Defaults to \code{60}.}
+\item{timeout}{Accepted by the signature and not used anywhere in the body. Defaults to \code{60}.}
 }
 \description{
 A step of the ingest_datasette implementation. Called by \code{morie_datasette_databases}, \code{morie_datasette_read}. See the file header for the source the module follows.

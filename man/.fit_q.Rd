@@ -13,7 +13,7 @@
 \item{W}{A matrix; indexed by row and column.}
 \item{levels}{A vector; indexed elementwise.}
 \item{rows}{Iterated over elementwise, with \code{lapply}.}
-\item{ridge}{See Usage.}
+\item{ridge}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the tmldta_native implementation. Called by \code{discover_levels}, \code{split_specific_tmle}. See the file header for the source the module follows.

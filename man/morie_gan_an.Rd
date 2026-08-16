@@ -9,8 +9,8 @@ morie_gan_an(x, generator, feature_fn, z_dim, steps = 200, lr = 0.05, lam = 0.1,
 }
 \arguments{
 \item{x}{Passed to \code{.gan_an_anomaly_score_impl}.}
-\item{generator}{See Usage.}
-\item{feature_fn}{See Usage.}
+\item{generator}{Accepted by the signature and not used anywhere in the body.}
+\item{feature_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{z_dim}{Coerced to integer by the body, with \code{as.integer}.}
 \item{steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{lr}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}

@@ -10,8 +10,8 @@
 \arguments{
 \item{h}{Passed to \code{.schab_st_as_lags}.}
 \item{k}{Passed to \code{.schab_st_as_lags}.}
-\item{cov_spatial}{See Usage.}
-\item{cov_temporal}{See Usage.}
+\item{cov_spatial}{Accepted by the signature and not used anywhere in the body.}
+\item{cov_temporal}{Accepted by the signature and not used anywhere in the body.}
 \item{form}{The body requires: `form` must be 'product', 'sum' or 'product_sum'. Defaults to \code{"product"}.}
 }
 \description{

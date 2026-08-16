@@ -125,7 +125,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fn See Usage.
+#' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param x0 A vector; its length is taken and its elements indexed.
 #' @param xatol Defaults to \code{1e-10}.
 #' @param fatol Defaults to \code{1e-10}.

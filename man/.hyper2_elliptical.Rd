@@ -8,7 +8,7 @@
 .hyper2_elliptical(logl, f, L, e)
 }
 \arguments{
-\item{logl}{See Usage.}
+\item{logl}{Accepted by the signature and not used anywhere in the body.}
 \item{f}{A vector; its length is taken.}
 \item{L}{A matrix; indexed by row and column.}
 \item{e}{Passed to \code{.ghc_norm}.}

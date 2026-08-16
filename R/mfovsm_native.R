@@ -168,7 +168,7 @@
 #' @param ak A vector; its length is taken.
 #' @param den See Usage.
 #' @param num See Usage.
-#' @param kind Defaults to \code{"binary"}.
+#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to \code{"binary"}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{weights}, \code{fitted}.
 #' @export

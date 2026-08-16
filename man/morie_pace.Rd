@@ -9,8 +9,8 @@ morie_pace(Y, argvals, K)
 }
 \arguments{
 \item{Y}{A vector; its length is taken.}
-\item{argvals}{See Usage.}
-\item{K}{See Usage.}
+\item{argvals}{Accepted by the signature and not used anywhere in the body.}
+\item{K}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{
 A step of the pace_native implementation. No other function in the package calls it. See the file header for the source the module follows.

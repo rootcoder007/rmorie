@@ -108,7 +108,7 @@ morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param algorithm See Usage.
+#' @param algorithm Accepted by the signature and not used anywhere in the body.
 #' @param V Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{10}.
 #' @param loss Passed to \code{.tlseqsl_loss}. Defaults to \code{"squared"}.
 #' @param seed Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{0}.

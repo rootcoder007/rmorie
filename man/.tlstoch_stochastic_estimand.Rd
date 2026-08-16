@@ -8,7 +8,7 @@
 .tlstoch_stochastic_estimand(Q_fn, A, W, delta, lower = NULL, upper = NULL)
 }
 \arguments{
-\item{Q_fn}{See Usage.}
+\item{Q_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{A}{Passed to \code{.tlstoch_vec}.}
 \item{W}{Passed to \code{.tlstoch_mat}.}
 \item{delta}{Passed to \code{.tlstoch_shift_regime}.}

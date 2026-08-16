@@ -12,8 +12,8 @@ IirDiff(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL, n = NULL)
 \item{b_k}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{a_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{y}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{N}{Defaults to \code{NULL}.}
-\item{M}{Defaults to \code{NULL}.}
+\item{N}{Accepted by the signature and not used anywhere in the body.}
+\item{M}{Accepted by the signature and not used anywhere in the body.}
 \item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

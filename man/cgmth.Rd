@@ -8,8 +8,8 @@
 cgmth(f, grad_f, x0, tol = 1e-06, max_iter = 1000L, full_output = FALSE)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{grad_f}{See Usage.}
+\item{f}{Accepted by the signature and not used anywhere in the body.}
+\item{grad_f}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{tol}{Defaults to \code{1e-06}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.}
