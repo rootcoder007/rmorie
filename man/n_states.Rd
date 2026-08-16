@@ -17,3 +17,7 @@ A step of the bats_native implementation. Called by \code{.fit_spec}, \code{fit_
 A numeric value.
 }
 \keyword{internal}
+\examples{
+spec <- BatsSpec(periods = c(4), use_trend = TRUE)
+n_states(spec)
+}

@@ -18,3 +18,7 @@ A step of the barerp_native implementation. No other function in the package cal
 The value of \code{.barerp_num_grad}.
 }
 \keyword{internal}
+\examples{
+f <- .Fun(function(x) sum(x^2))
+grad.Fun(f, c(1, 2))
+}

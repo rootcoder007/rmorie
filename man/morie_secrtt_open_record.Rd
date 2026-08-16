@@ -18,3 +18,10 @@ Decrypt a record; fails closed
 Raw plaintext.
 }
 \keyword{internal}
+\examples{
+seed <- as.raw(1:32)
+dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+s <- morie_secrtt_seal_record(charToRaw("hello"), dek,
+                              nonce = as.raw(13:24))
+rawToChar(morie_secrtt_open_record(s, dek))
+}

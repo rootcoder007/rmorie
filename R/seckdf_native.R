@@ -135,8 +135,9 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
   key <- as.raw(key)
   if (length(key) > 64L) key <- .sech_sha256(key)
   if (length(key) < 64L) key <- c(key, rep(as.raw(0x00), 64L - length(key)))
-  opad <- bitwXor(key, rep(as.raw(0x5c), 64L))
-  ipad <- bitwXor(key, rep(as.raw(0x36), 64L))
+  # bitwXor() rejects raw vectors; XOR the byte VALUES and re-pack
+  opad <- as.raw(bitwXor(as.integer(key), 0x5cL))
+  ipad <- as.raw(bitwXor(as.integer(key), 0x36L))
   .sech_sha256(c(opad, .sech_sha256(c(ipad, as.raw(msg)))))
 }
 

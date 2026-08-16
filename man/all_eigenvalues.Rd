@@ -18,3 +18,8 @@ A step of the bats_native implementation. No other function in the package calls
 A vector, from \code{sort}.
 }
 \keyword{internal}
+\examples{
+spec <- BatsSpec()
+theta <- rep(0.1, n_free(spec))
+all_eigenvalues(spec, theta)
+}

@@ -27,3 +27,9 @@ Compute \eqn{x*(t) = argmin t f0 + phi}. \code{centering="newton"} uses Newton\'
 List with \code{x}, \code{iters}, \code{decrement}.
 }
 \keyword{internal}
+\examples{
+f0 <- function(x) sum(x^2)
+cons <- list(function(x) 1 - x[1], function(x) x[1] - 5)
+r <- central_point(f0, cons, x = c(2, 0), t = 10)
+str(r, max.level = 1)
+}

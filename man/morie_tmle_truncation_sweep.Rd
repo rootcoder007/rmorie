@@ -33,3 +33,12 @@ Petersen ML, Porter KE, Gruber S, Wang Y, van der Laan MJ
 assumption. \emph{Statistical Methods in Medical Research} 21(1),
 31-54.
 }
+\examples{
+set.seed(2)
+n <- 120
+X <- matrix(rnorm(n * 2), n, 2)
+d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
+r <- morie_tmle_truncation_sweep(y, d, X)
+str(r, max.level = 1)
+}

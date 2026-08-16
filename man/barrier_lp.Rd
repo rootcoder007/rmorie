@@ -23,3 +23,8 @@ Minimise \eqn{c^T x} subject to \eqn{A_ub x <= b_ub} and optionally \eqn{A_eq x 
 A list, see \code{barrier_method}.
 }
 \keyword{internal}
+\examples{
+r <- barrier_lp(c = c(1, 1), A_ub = rbind(c(-1, 0), c(0, -1)),
+                b_ub = c(-1, -1))
+r$x
+}

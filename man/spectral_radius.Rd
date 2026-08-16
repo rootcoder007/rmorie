@@ -19,3 +19,8 @@ A step of the bats_native implementation. Called by \code{.fit_spec}, \code{is_f
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+spec <- BatsSpec()
+theta <- rep(0.1, n_free(spec))
+spectral_radius(spec, theta)
+}
