@@ -250,7 +250,7 @@
 #' Synchronous POST + parse JSON. 3YY: routes through morie's C++
 #' libcurl .morie_http_post when available; falls back to httr2's
 #' req_body_json + req_perform + resp_body_json otherwise. Body
-#' (R list) is serialised via jsonlite::toJSON.
+#' (R list) is serialised via .s03json_toJSON.
 #' @keywords internal
 #' @noRd
 .morie_dataset_http_post_json <- function(url, body, query = NULL,

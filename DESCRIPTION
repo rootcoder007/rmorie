@@ -120,7 +120,6 @@ Suggests:
   iml,
   ipred,
   ivreg,
-  jsonlite,
   kernlab,
   knitr,
   konfound,

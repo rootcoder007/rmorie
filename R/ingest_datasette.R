@@ -31,7 +31,7 @@
   }
   con <- url(url, open = "rb")
   on.exit(close(con), add = TRUE)
-  jsonlite::fromJSON(rawToChar(readBin(con, "raw", n = 64L * 1024L^2)),
+  .s03json_fromJSON(rawToChar(readBin(con, "raw", n = 64L * 1024L^2)),
                      simplifyVector = TRUE)
 }
 
