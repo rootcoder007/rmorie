@@ -331,11 +331,38 @@ morie_proportion_ci <- function(successes, n, alpha = 0.05,
 #' @export
 morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05) {
   m <- as.matrix(table_2x2)
-  result <- stats::fisher.test(m)
+  if (!identical(dim(m), c(2L, 2L))) {
+    stop("table_2x2 must be 2 by 2; got ",
+         paste(dim(m), collapse = " by "), ".", call. = FALSE)
+  }
+  if (any(m < 0)) {
+    stop("table entries must be non-negative.", call. = FALSE)
+  }
+  if (!(alpha > 0 && alpha < 1)) {
+    stop("alpha must be in (0, 1); got ", alpha, ".", call. = FALSE)
+  }
+  a <- m[1, 1]; b <- m[1, 2]; cc <- m[2, 1]; d <- m[2, 2]
+  # The point estimate is the sample odds ratio, which is what
+  # scipy.stats.fisher_exact reports. fisher.test's estimate is the
+  # conditional maximum likelihood odds ratio -- a different estimator,
+  # and the reason the two arms disagreed on every table.
+  or_point <- (a * d) / (b * cc)
+  # Woolf's interval on the log scale, at the level the caller asked
+  # for. An empty cell makes the log undefined, so the
+  # Haldane-Anscombe correction adds a half to every cell first.
+  if (all(c(a, b, cc, d) > 0)) {
+    aa <- a; bb <- b; ccc <- cc; dd <- d
+  } else {
+    aa <- a + 0.5; bb <- b + 0.5; ccc <- cc + 0.5; dd <- d + 0.5
+  }
+  log_or <- log(aa * dd / (bb * ccc))
+  se_log_or <- sqrt(1 / aa + 1 / bb + 1 / ccc + 1 / dd)
+  z <- stats::qnorm(1 - alpha / 2)
+  result <- stats::fisher.test(round(m))
   list(
-    or = as.numeric(result$estimate),
-    ci_lower = result$conf.int[1],
-    ci_upper = result$conf.int[2],
+    odds_ratio = as.numeric(or_point),
+    ci_lower = exp(log_or - z * se_log_or),
+    ci_upper = exp(log_or + z * se_log_or),
     p_value = result$p.value
   )
 }

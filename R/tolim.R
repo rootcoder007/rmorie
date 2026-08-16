@@ -32,6 +32,16 @@ morie_tolerance_limits <- function(x, coverage = 0.90, confidence = 0.95) {
   beta <- coverage
   conf_ach <- 1 - n * beta^(n - 1) + (n - 1) * beta^n
   conf_ach <- max(0, min(1, conf_ach))
+  # Wilks' limits are the sample extremes whatever confidence is asked
+  # for, so the requested level is a claim to be checked, not a knob.
+  # Saying nothing when n cannot support it hands back an interval that
+  # does not have the coverage the caller specified.
+  if (conf_ach < confidence) {
+    warning(sprintf(
+      paste("Sample size n=%d too small: achieved confidence %.4f <",
+            "requested %.4f for coverage %.2f."),
+      n, conf_ach, confidence, beta), call. = FALSE)
+  }
   list(
     lower = min(x),
     upper = max(x),
