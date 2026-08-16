@@ -247,6 +247,22 @@
 # Public API ----------------------------------------------------------------
 
 # Main entry point: fit the time-dependent biases via SGD.
+#' Main entry point: fit the time-dependent biases via SGD
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @param epochs Defaults to \code{40}.
+#' @param lr Defaults to \code{0.005}.
+#' @param reg Defaults to \code{0.02}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return The value of \code{.timeRS_fit_time_bias}.
+#' @export
 morie_timeRS <- function(ratings, n_users, n_items, bin_days = 70,
                          n_bins = 30, epochs = 40, lr = 0.005, reg = 0.02,
                          beta = .timeRS_BETA) {
@@ -255,23 +271,87 @@ morie_timeRS <- function(ratings, n_users, n_items, bin_days = 70,
 }
 
 # Exported helpers
+#' Exported helpers
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param t_user See Usage.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return The value of \code{.timeRS_deviation}.
+#' @export
 morie_timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
   .timeRS_deviation(t, t_user, beta)
 }
 
+#' morie_timeRS_time_bin
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @return The value of \code{.timeRS_time_bin}.
+#' @export
 morie_timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
   .timeRS_time_bin(t, bin_days, n_bins)
 }
 
+#' morie_timeRS_user_bias
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param b_u See Usage.
+#' @param alpha_u See Usage.
+#' @param t See Usage.
+#' @param t_user See Usage.
+#' @param per_day Defaults to \code{NULL}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return The value of \code{.timeRS_user_bias}.
+#' @export
 morie_timeRS_user_bias <- function(b_u, alpha_u, t, t_user, per_day = NULL,
                                    beta = .timeRS_BETA) {
   .timeRS_user_bias(b_u, alpha_u, t, t_user, per_day, beta)
 }
 
+#' morie_timeRS_item_bias
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param b_i See Usage.
+#' @param bins See Usage.
+#' @param t See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @return The value of \code{.timeRS_item_bias}.
+#' @export
 morie_timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
   .timeRS_item_bias(b_i, bins, t, bin_days, n_bins)
 }
 
+#' morie_timeRS_predict_time
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param b_u See Usage.
+#' @param alpha_u See Usage.
+#' @param t_user See Usage.
+#' @param b_i See Usage.
+#' @param item_bins See Usage.
+#' @param t See Usage.
+#' @param p_u Defaults to \code{NULL}.
+#' @param q_i Defaults to \code{NULL}.
+#' @param per_day Defaults to \code{NULL}.
+#' @param bin_days Defaults to \code{70}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return The value of \code{.timeRS_predict_time}.
+#' @export
 morie_timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins,
                                       t, p_u = NULL, q_i = NULL,
                                       per_day = NULL, bin_days = 70,
@@ -280,6 +360,22 @@ morie_timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins,
                        p_u, q_i, per_day, bin_days, beta)
 }
 
+#' morie_timeRS_fit_time_bias
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @param epochs Defaults to \code{40}.
+#' @param lr Defaults to \code{0.005}.
+#' @param reg Defaults to \code{0.02}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return The value of \code{.timeRS_fit_time_bias}.
+#' @export
 morie_timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
                                        n_bins = 30, epochs = 40, lr = 0.005,
                                        reg = 0.02, beta = .timeRS_BETA) {
@@ -288,6 +384,22 @@ morie_timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
 }
 
 # Compact aliases per ledger/NAMING.md
+#' Compact aliases per ledger/NAMING.md
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @param epochs Defaults to \code{40}.
+#' @param lr Defaults to \code{0.005}.
+#' @param reg Defaults to \code{0.02}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return The value of \code{.timeRS_fit_time_bias}.
+#' @export
 morie_timeRS_timesvdpp <- function(ratings, n_users, n_items, bin_days = 70,
                                    n_bins = 30, epochs = 40, lr = 0.005,
                                    reg = 0.02, beta = .timeRS_BETA) {
@@ -295,6 +407,22 @@ morie_timeRS_timesvdpp <- function(ratings, n_users, n_items, bin_days = 70,
                         epochs, lr, reg, beta)
 }
 
+#' morie_timeRS_timesvd
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @param epochs Defaults to \code{40}.
+#' @param lr Defaults to \code{0.005}.
+#' @param reg Defaults to \code{0.02}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return The value of \code{.timeRS_fit_time_bias}.
+#' @export
 morie_timeRS_timesvd <- function(ratings, n_users, n_items, bin_days = 70,
                                  n_bins = 30, epochs = 40, lr = 0.005,
                                  reg = 0.02, beta = .timeRS_BETA) {
@@ -302,6 +430,13 @@ morie_timeRS_timesvd <- function(ratings, n_users, n_items, bin_days = 70,
                         epochs, lr, reg, beta)
 }
 
+#' morie_timeRS_cheatsheet
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_timeRS_cheatsheet <- function() {
   paste0(
     "timeRS: preferences DRIFT -- the Netflix mean rating ",

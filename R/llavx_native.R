@@ -22,6 +22,15 @@
 
 .LLAVX_KINDS <- c("conversation", "detailed_description", "complex_reasoning")
 
+#' symbolic_representation
+#'
+#' Part of the llavx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param captions See Usage.
+#' @param boxes See Usage.
+#' @return A list with \code{text}, \code{n_captions}, \code{n_boxes}, \code{note}.
+#' @export
 symbolic_representation <- function(captions, boxes) {
   caps <- vapply(as.list(captions), as.character, character(1))
   bx <- as.list(boxes)
@@ -43,6 +52,15 @@ symbolic_representation <- function(captions, boxes) {
        note = "the generator is LANGUAGE-ONLY; the image itself never reaches it")
 }
 
+#' instruction_prompt
+#'
+#' Part of the llavx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param symbolic See Usage.
+#' @param kind Defaults to \code{"conversation"}.
+#' @return A list with \code{prompt}, \code{kind}.
+#' @export
 instruction_prompt <- function(symbolic, kind = "conversation") {
   if (!(kind %in% .LLAVX_KINDS))
     stop("llavx: kind must be one of ",
@@ -57,6 +75,16 @@ instruction_prompt <- function(symbolic, kind = "conversation") {
   list(prompt = paste0(symbolic[["text"]], "\n\n", ask), kind = kind)
 }
 
+#' project_patches
+#'
+#' Part of the llavx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param patch_features See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @return The value of \code{lapply}.
+#' @export
 project_patches <- function(patch_features, W, b = NULL) {
   Fmat <- lapply(patch_features, function(r) as.numeric(r))
   d_in <- length(Fmat[[1L]])
@@ -75,6 +103,15 @@ project_patches <- function(patch_features, W, b = NULL) {
   lapply(seq_len(nrow(out)), function(i) out[i, ])
 }
 
+#' build_sequence
+#'
+#' Part of the llavx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param visual_tokens See Usage.
+#' @param text_embeddings See Usage.
+#' @return A list with \code{estimate}, \code{sequence}, \code{n_visual}, \code{n_text}, \code{method}, \code{note}.
+#' @export
 build_sequence <- function(visual_tokens, text_embeddings) {
   V <- lapply(visual_tokens, function(r) as.numeric(r))
   T <- lapply(text_embeddings, function(r) as.numeric(r))
@@ -92,6 +129,14 @@ build_sequence <- function(visual_tokens, text_embeddings) {
 visualinstruction <- build_sequence
 llava_visual_chat <- build_sequence
 
+#' training_stage
+#'
+#' Part of the llavx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param stage See Usage.
+#' @return A list with \code{stage}, \code{trainable}, \code{frozen}, \code{data}, \code{note}.
+#' @export
 training_stage <- function(stage) {
   s <- as.integer(stage)
   if (!(s %in% c(1L, 2L)))
@@ -120,6 +165,15 @@ training_stage <- function(stage) {
         "stage 2 adds the language model.", sep = "")
 }
 
+#' morie_llavx
+#'
+#' Part of the llavx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_llavx <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("llavx: op must be one of symbolic_representation, instruction_prompt, project_patches, build_sequence, training_stage, cheatsheet")

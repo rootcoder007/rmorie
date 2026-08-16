@@ -6,6 +6,15 @@
 
 .bndbye_GHC_EPS <- 1e-12
 
+#' morie_identified_set_interval
+#'
+#' Part of the bndbye_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param phi_hat See Usage.
+#' @param half_width See Usage.
+#' @return A list with \code{lower}, \code{upper}, \code{width}, \code{phi_hat}.
+#' @export
 morie_identified_set_interval <- function(phi_hat, half_width) {
   h <- as.numeric(half_width)
   if (h < 0) stop("bndbye: the half-width must be non-negative")
@@ -13,6 +22,15 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
        width = 2 * h, phi_hat = as.numeric(phi_hat))
 }
 
+#' morie_conditional_prior_uniform
+#'
+#' Part of the bndbye_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta_set See Usage.
+#' @param n_grid Defaults to \code{401L}.
+#' @return A list with \code{grid}, \code{density}.
+#' @export
 morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
   lo <- as.numeric(theta_set$lower); hi <- as.numeric(theta_set$upper)
   if (hi < lo) stop("bndbye: the identified set is empty")
@@ -22,6 +40,17 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
   list(grid = g, density = rep(1 / (hi - lo), length(g)))
 }
 
+#' morie_posterior_hpd
+#'
+#' Part of the bndbye_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta_set See Usage.
+#' @param level Defaults to \code{0.95}.
+#' @param conditional_prior Defaults to \code{NULL}.
+#' @param n_grid Defaults to \code{401L}.
+#' @return A list with \code{lower}, \code{upper}, \code{width}, \code{level}, \code{covered}, \code{n_grid_points}, \code{method}.
+#' @export
 morie_posterior_hpd <- function(theta_set, level = 0.95,
                                conditional_prior = NULL, n_grid = 401L) {
   if (level <= 0 || level >= 1) stop("bndbye: level must lie in (0, 1)")
@@ -50,6 +79,17 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
        method = "HPD of the conditional prior at phi_hat -- the large-sample limit of the posterior (Moon & Schorfheide 2012)")
 }
 
+#' morie_frequentist_confidence_set
+#'
+#' Part of the bndbye_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta_set See Usage.
+#' @param se_phi See Usage.
+#' @param level Defaults to \code{0.95}.
+#' @param target Defaults to \code{"parameter"}.
+#' @return A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value}, \code{target}, \code{level}, \code{note}.
+#' @export
 morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
                                             target = "parameter") {
   if (!(target %in% c("parameter", "set")))
@@ -65,6 +105,19 @@ morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
        note = "extends beyond Theta(phi_hat) by c * se on each side, because phi_hat is estimated")
 }
 
+#' morie_compare_sets
+#'
+#' Part of the bndbye_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param phi_hat See Usage.
+#' @param half_width See Usage.
+#' @param se_phi See Usage.
+#' @param level Defaults to \code{0.95}.
+#' @param conditional_prior Defaults to \code{NULL}.
+#' @param n_grid Defaults to \code{401L}.
+#' @return A list with \code{estimate}, \code{identified_set}, \code{credible_hpd}, \code{confidence_set}, \code{hpd_inside_identified_set}, \code{cs_contains_identified_set}, \code{width_ratio_hpd_over_cs}, \code{conditional_prior_reported}, \code{method}, \code{recommendation}.
+#' @export
 morie_compare_sets <- function(phi_hat, half_width, se_phi, level = 0.95,
                                conditional_prior = NULL, n_grid = 401L) {
   ts <- morie_identified_set_interval(phi_hat, half_width)

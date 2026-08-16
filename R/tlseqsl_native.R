@@ -54,6 +54,16 @@
   return(-(y * log(q) + (1.0 - y) * log(1.0 - q)))
 }
 
+#' morie_tlseqsl_cv_folds
+#'
+#' Part of the tlseqsl_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param V Defaults to \code{10}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{folds}, as built in the body.
+#' @export
 morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
   if (V < 2 || V > n) {
     stop(sprintf("tlseqsl: V must lie in 2..%d, got %d", n, V))
@@ -78,6 +88,19 @@ morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
   folds
 }
 
+#' morie_tlseqsl_cv_risk
+#'
+#' Part of the tlseqsl_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param algorithm See Usage.
+#' @param V Defaults to \code{10}.
+#' @param loss Defaults to \code{"squared"}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{risk}, \code{cv_predictions}, \code{V}, \code{loss}.
+#' @export
 morie_tlseqsl_cv_risk <- function(X, y, algorithm, V=10, loss="squared", seed=0) {
   if (!(loss %in% .tlseqsl_LOSSES)) {
     stop(sprintf("tlseqsl: loss must be one of %s, got %r",
@@ -106,6 +129,19 @@ morie_tlseqsl_cv_risk <- function(X, y, algorithm, V=10, loss="squared", seed=0)
        V = as.integer(V), loss = loss)
 }
 
+#' morie_tlseqsl_discrete_super_learner
+#'
+#' Part of the tlseqsl_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param library See Usage.
+#' @param V Defaults to \code{10}.
+#' @param loss Defaults to \code{"squared"}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{selected}, \code{risks}, \code{cv_predictions}, \code{note}.
+#' @export
 morie_tlseqsl_discrete_super_learner <- function(X, y, library, V=10,
                                                  loss="squared", seed=0) {
   if (length(library) == 0) {
@@ -131,6 +167,20 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V=10,
        note = "asymptotically as good as the oracle that knows which candidate is best")
 }
 
+#' morie_tlseqsl_ensemble_super_learner
+#'
+#' Part of the tlseqsl_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param library See Usage.
+#' @param V Defaults to \code{10}.
+#' @param loss Defaults to \code{"squared"}.
+#' @param seed Defaults to \code{0}.
+#' @param grid Defaults to \code{21}.
+#' @return A list with \code{estimate}, \code{weights}, \code{cv_risk}, \code{discrete_risks}, \code{discrete_choice}, \code{best_single}, \code{method}, \code{note}.
+#' @export
 morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
                                                  loss="squared", seed=0,
                                                  grid=21) {
@@ -198,6 +248,19 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
   )
 }
 
+#' morie_tlseqsl_sequential_super_learner
+#'
+#' Part of the tlseqsl_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param histories See Usage.
+#' @param outcomes See Usage.
+#' @param library See Usage.
+#' @param T See Usage.
+#' @param V Defaults to \code{5}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{mean}, \code{sequential_fits}, \code{T}, \code{method}.
+#' @export
 morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
                                                     T, V=5, seed=0) {
   if (T < 1) {
@@ -248,6 +311,13 @@ morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
   )
 }
 
+#' morie_tlseqsl_cheatsheet
+#'
+#' Part of the tlseqsl_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_tlseqsl_cheatsheet <- function() {
   paste0(
     "tlseqsl: no algorithm is best everywhere, so choose by ",

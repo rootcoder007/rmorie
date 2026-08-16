@@ -204,6 +204,23 @@
   ))
 }
 
+#' morie_svdpp
+#'
+#' Part of the svdpp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param factors Defaults to \code{4}.
+#' @param epochs Defaults to \code{30}.
+#' @param lr Defaults to \code{0.007}.
+#' @param reg Defaults to \code{0.015}.
+#' @param exponent Defaults to \code{-0.5}.
+#' @param seed Defaults to \code{0}.
+#' @param implicit Defaults to \code{TRUE}.
+#' @return The value of \code{.svdpp_fit}.
+#' @export
 morie_svdpp <- function(ratings, n_users, n_items,
                         factors = 4, epochs = 30,
                         lr = 0.007, reg = 0.015,

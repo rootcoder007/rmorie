@@ -195,7 +195,25 @@ centering_steps <- function(m, eps, t0, mu) {
   self
 }
 
+#' val.Fun
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param self See Usage.
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 val.Fun <- function(self, x) as.numeric(self$f(x))
+#' grad.Fun
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param self See Usage.
+#' @param x See Usage.
+#' @return The value of \code{.barerp_num_grad}.
+#' @export
 grad.Fun <- function(self, x) {
   if (!is.null(self$.g)) {
     v <- self$.g(x)
@@ -203,6 +221,15 @@ grad.Fun <- function(self, x) {
   }
   .barerp_num_grad(self$f, x)
 }
+#' hess.Fun
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param self See Usage.
+#' @param x See Usage.
+#' @return The value of \code{.num_hess}.
+#' @export
 hess.Fun <- function(self, x) {
   if (!is.null(self$.h)) {
     M <- self$.h(x)

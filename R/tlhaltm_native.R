@@ -24,6 +24,21 @@
 # rate and the Donsker condition separate, and the same
 # CV-TMLE split.
 
+#' morie_tlhaltm
+#'
+#' Part of the tlhaltm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rate_Q Defaults to \code{NULL}.
+#' @param rate_g Defaults to \code{NULL}.
+#' @param n Defaults to \code{NULL}.
+#' @param err_Q Defaults to \code{NULL}.
+#' @param err_g Defaults to \code{NULL}.
+#' @param delta Defaults to \code{NULL}.
+#' @param donsker Defaults to \code{TRUE}.
+#' @param mode Defaults to \code{c("rate", "remainder", "efficiency", "split")}.
+#' @return The value of \code{efficiency_check}.
+#' @export
 morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
                           err_Q = NULL, err_g = NULL, delta = NULL,
                           donsker = TRUE,
@@ -37,6 +52,16 @@ morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
   efficiency_check(err_Q, err_g, delta, n, donsker = donsker)
 }
 
+#' rate_condition
+#'
+#' Part of the tlhaltm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rate_Q See Usage.
+#' @param rate_g See Usage.
+#' @param n See Usage.
+#' @return A list with \code{sum}, \code{required}, \code{satisfied}, \code{product_order}, \code{root_n_order}, \code{note}.
+#' @export
 rate_condition <- function(rate_Q, rate_g, n) {
   a <- as.numeric(rate_Q); b <- as.numeric(rate_g)
   if (a <= 0 || b <= 0)
@@ -47,6 +72,16 @@ rate_condition <- function(rate_Q, rate_g, n) {
        note = "two estimators at exactly n^{-1/4} sit ON the boundary; HAL's n^{-1/3} clears it")
 }
 
+#' remainder_bound
+#'
+#' Part of the tlhaltm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param err_Q See Usage.
+#' @param err_g See Usage.
+#' @param delta See Usage.
+#' @return A list with \code{bound}, \code{delta}, \code{err_Q}, \code{err_g}, \code{note}.
+#' @export
 remainder_bound <- function(err_Q, err_g, delta) {
   d <- as.numeric(delta)
   if (!(0 < d && d <= 1))
@@ -58,6 +93,18 @@ remainder_bound <- function(err_Q, err_g, delta) {
        note = "the bound diverges as delta -> 0 however small the nuisance errors are")
 }
 
+#' efficiency_check
+#'
+#' Part of the tlhaltm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param err_Q See Usage.
+#' @param err_g See Usage.
+#' @param delta See Usage.
+#' @param n See Usage.
+#' @param donsker Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{remainder_bound}, \code{root_n}, \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient}, \code{positivity_delta}, \code{method}, \code{note}.
+#' @export
 efficiency_check <- function(err_Q, err_g, delta, n, donsker = TRUE) {
   r <- remainder_bound(err_Q, err_g, delta)
   root_n <- 1 / sqrt(as.integer(n))
@@ -71,6 +118,16 @@ efficiency_check <- function(err_Q, err_g, delta, n, donsker = TRUE) {
        note = "HAL supplies BOTH -- the rate, and a bounded variation-norm class that is Donsker; CV-TMLE removes the second requirement entirely")
 }
 
+#' cv_tmle_split
+#'
+#' Part of the tlhaltm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param V Defaults to \code{10L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{folds}, \code{training}, \code{V}, \code{note}.
+#' @export
 cv_tmle_split <- function(n, V = 10L, seed = 0L) {
   n <- as.integer(n); V <- as.integer(V)
   if (V < 2L || V > n)

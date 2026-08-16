@@ -8,6 +8,14 @@
 
 .mambss_EPS <- 1e-12
 
+#' softplus
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{log1p}.
+#' @export
 softplus <- function(z) {
   x <- as.numeric(z)
   if (x > 30.0) return(x)
@@ -15,6 +23,17 @@ softplus <- function(z) {
   log1p(exp(x))
 }
 
+#' discretize_zoh
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param delta See Usage.
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param rule Defaults to \code{"zoh"}.
+#' @return A list with \code{Abar}, \code{Bbar}.
+#' @export
 discretize_zoh <- function(delta, A, B, rule = "zoh") {
   if (!(rule %in% c("zoh", "euler")))
     stop(sprintf("mambss: rule must be zoh or euler, got %r", rule))
@@ -39,6 +58,20 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
   list(Abar = Abar, Bbar = Bbar)
 }
 
+#' selective_ssm_step
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param C See Usage.
+#' @param delta See Usage.
+#' @param rule Defaults to \code{"zoh"}.
+#' @return A list with \code{h}, \code{y}.
+#' @export
 selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
   N <- length(A)
   if (length(h) != N)
@@ -65,6 +98,24 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 
 .sigmoid <- function(z) 1.0 / (1.0 + exp(-as.numeric(z)))
 
+#' selective_scan
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param A See Usage.
+#' @param W_B See Usage.
+#' @param W_C See Usage.
+#' @param W_delta See Usage.
+#' @param delta_bias Defaults to \code{NULL}.
+#' @param b_B Defaults to \code{NULL}.
+#' @param b_C Defaults to \code{NULL}.
+#' @param b_delta Defaults to \code{0}.
+#' @param rule Defaults to \code{"zoh"}.
+#' @param D_skip Defaults to \code{NULL}.
+#' @return A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L}, \code{D}, \code{N}, \code{rule}, \code{time_invariant}, \code{method}.
+#' @export
 selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
                            b_B = NULL, b_C = NULL, b_delta = 0.0,
                            rule = "zoh", D_skip = NULL) {
@@ -113,6 +164,16 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
        method = "selective state space scan (S6), Gu & Dao (2023) Algorithm 2")
 }
 
+#' gated_rnn_equivalent
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param w See Usage.
+#' @param b Defaults to \code{0}.
+#' @return A list with \code{h}, \code{g}.
+#' @export
 gated_rnn_equivalent <- function(x, w, b = 0.0) {
   h <- 0.0
   hs <- numeric(length(x)); gs <- numeric(length(x))
@@ -124,6 +185,19 @@ gated_rnn_equivalent <- function(x, w, b = 0.0) {
   list(h = hs, g = gs)
 }
 
+#' s6_layer
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param A See Usage.
+#' @param W_B See Usage.
+#' @param W_C See Usage.
+#' @param W_delta See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{$}.
+#' @export
 s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
   selective_scan(X, A, W_B, W_C, W_delta, ...)$y
 }
@@ -136,6 +210,24 @@ selectivessmstep <- selective_ssm_step
 mamba_ssm_step <- selective_ssm_step
 mambassmstep <- selective_ssm_step
 
+#' morie_mambss
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param A See Usage.
+#' @param W_B See Usage.
+#' @param W_C See Usage.
+#' @param W_delta See Usage.
+#' @param delta_bias Defaults to \code{NULL}.
+#' @param b_B Defaults to \code{NULL}.
+#' @param b_C Defaults to \code{NULL}.
+#' @param b_delta Defaults to \code{0}.
+#' @param rule Defaults to \code{"zoh"}.
+#' @param D_skip Defaults to \code{NULL}.
+#' @return The value of \code{selective_scan}.
+#' @export
 morie_mambss <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
                         b_B = NULL, b_C = NULL, b_delta = 0.0,
                         rule = "zoh", D_skip = NULL) {

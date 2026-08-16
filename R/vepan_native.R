@@ -102,18 +102,42 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
   substr(s, k + 1L, k + 1L)
 }
 
+#' Severity rank of an SO term; 1 is worst. Unknown terms sort last
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param term See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 morie_vepan_consequence_rank <- function(term) {
   # Severity rank of an SO term; 1 is worst. Unknown terms sort last.
   r <- morie_vepan_CONSEQUENCE_RANK[[term]]
   if (is.null(r)) length(.vepan_TERMS) + 1L else r
 }
 
+#' HIGH/MODERATE/LOW/MODIFIER for an SO term
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param term See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 morie_vepan_consequence_impact <- function(term) {
   # HIGH/MODERATE/LOW/MODIFIER for an SO term.
   i <- morie_vepan_CONSEQUENCE_IMPACT[[term]]
   if (is.null(i)) "MODIFIER" else i
 }
 
+#' The lowest-ranked (worst) term
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param terms See Usage.
+#' @return The value of \code{[}.
+#' @export
 morie_vepan_most_severe_consequence <- function(terms) {
   # The lowest-ranked (worst) term.
   ts <- as.character(terms)
@@ -195,6 +219,14 @@ morie_vepan_most_severe_consequence <- function(terms) {
        start=exons[1L, 1L], end=exons[nrow(exons), 2L])
 }
 
+#' The spliced transcript, 5\' to 3\', and the genomic position of each
+#'
+#' of its bases (returns list(seq, gpos)).
+#'
+#' @param tr See Usage.
+#' @param genome See Usage.
+#' @return A list with \code{seq}, \code{gpos}.
+#' @export
 morie_vepan_transcript_sequence <- function(tr, genome) {
   # The spliced transcript, 5' to 3', and the genomic position of each
   # of its bases (returns list(seq, gpos)).
@@ -550,6 +582,18 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 # ------------------------------------------------------------- annotate
 
+#' morie_vepan_annotate
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param variant See Usage.
+#' @param transcripts See Usage.
+#' @param genome See Usage.
+#' @param upstream Defaults to \code{5000}.
+#' @param downstream Defaults to \code{5000}.
+#' @return The value of \code{[}.
+#' @export
 morie_vepan_annotate <- function(variant, transcripts, genome,
                                  upstream=5000, downstream=5000) {
   # One record per (variant, transcript) overlap, as the VEP emits. A
@@ -717,6 +761,15 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
   FALSE
 }
 
+#' Pick (one record) or --per_gene (one per gene)
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param records See Usage.
+#' @param per_gene Defaults to \code{FALSE}.
+#' @return The value of \code{unname}.
+#' @export
 morie_vepan_pick <- function(records, per_gene=FALSE) {
   # --pick (one record) or --per_gene (one per gene).
   rs <- records
@@ -749,6 +802,20 @@ morie_vepan_pick <- function(records, per_gene=FALSE) {
   unname(best[ord])
 }
 
+#' morie_vepan_vep_annotation
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param variants See Usage.
+#' @param transcripts See Usage.
+#' @param genome See Usage.
+#' @param upstream Defaults to \code{5000}.
+#' @param downstream Defaults to \code{5000}.
+#' @param mode Defaults to \code{"all"}.
+#' @param no_intergenic Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{annotations}, \code{n_variants}, \code{n_annotations}, \code{consequence_counts}, \code{mode}, \code{method}, \code{note}.
+#' @export
 morie_vepan_vep_annotation <- function(variants, transcripts, genome,
                                        upstream=5000, downstream=5000,
                                        mode="all", no_intergenic=FALSE) {
@@ -799,6 +866,13 @@ morie_vepan_vep_annotation <- function(variants, transcripts, genome,
                 "does not carry"))
 }
 
+#' morie_vepan_cheatsheet
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_vepan_cheatsheet <- function() {
   paste0(
     "vepan: Ensembl VEP (McLaren et al. 2016). One record per ",

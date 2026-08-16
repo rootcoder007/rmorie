@@ -109,70 +109,252 @@
     .Call(`_rmorie_morie_twfe_demean_cpp`, M, g1, g2, K1, K2, tol, max_iter)
 }
 
+#' morie_dsp_lms_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param d See Usage.
+#' @param order See Usage.
+#' @param mu See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_dsp_lms_cpp <- function(x, d, order, mu) {
     .Call(`_rmorie_morie_dsp_lms_cpp`, x, d, order, mu)
 }
 
+#' morie_dsp_nlms_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param d See Usage.
+#' @param order See Usage.
+#' @param mu See Usage.
+#' @param eps See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_dsp_nlms_cpp <- function(x, d, order, mu, eps) {
     .Call(`_rmorie_morie_dsp_nlms_cpp`, x, d, order, mu, eps)
 }
 
+#' morie_dsp_rls_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param d See Usage.
+#' @param order See Usage.
+#' @param lam See Usage.
+#' @param delta See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_dsp_rls_cpp <- function(x, d, order, lam, delta) {
     .Call(`_rmorie_morie_dsp_rls_cpp`, x, d, order, lam, delta)
 }
 
+#' morie_dsp_cross_correlation_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param max_lag See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_dsp_cross_correlation_cpp <- function(x, y, max_lag) {
     .Call(`_rmorie_morie_dsp_cross_correlation_cpp`, x, y, max_lag)
 }
 
+#' morie_dsp_median_filter_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param kernel_size See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_dsp_median_filter_cpp <- function(x, kernel_size) {
     .Call(`_rmorie_morie_dsp_median_filter_cpp`, x, kernel_size)
 }
 
+#' morie_normal_pdf_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param mean See Usage.
+#' @param sd See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_normal_pdf_cpp <- function(x, mean, sd) {
     .Call(`_rmorie_morie_normal_pdf_cpp`, x, mean, sd)
 }
 
+#' morie_mean_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_mean_cpp <- function(x) {
     .Call(`_rmorie_morie_mean_cpp`, x)
 }
 
+#' morie_var_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param ddof Defaults to \code{1L}.
+#' @return The value of \code{.Call}.
+#' @export
 morie_var_cpp <- function(x, ddof = 1L) {
     .Call(`_rmorie_morie_var_cpp`, x, ddof)
 }
 
+#' morie_cor_pearson_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_cor_pearson_cpp <- function(x, y) {
     .Call(`_rmorie_morie_cor_pearson_cpp`, x, y)
 }
 
+#' morie_hawkes_ll_exp_const_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param T_horizon See Usage.
+#' @param a0 See Usage.
+#' @param eta See Usage.
+#' @param beta See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_ll_exp_const_cpp <- function(t, T_horizon, a0, eta, beta) {
     .Call(`_rmorie_morie_hawkes_ll_exp_const_cpp`, t, T_horizon, a0, eta, beta)
 }
 
+#' morie_hawkes_ll_weibull_const_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param T_horizon See Usage.
+#' @param a0 See Usage.
+#' @param eta See Usage.
+#' @param alpha See Usage.
+#' @param lam See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_ll_weibull_const_cpp <- function(t, T_horizon, a0, eta, alpha, lam) {
     .Call(`_rmorie_morie_hawkes_ll_weibull_const_cpp`, t, T_horizon, a0, eta, alpha, lam)
 }
 
+#' morie_hawkes_ll_lomax_const_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param T_horizon See Usage.
+#' @param a0 See Usage.
+#' @param eta See Usage.
+#' @param alpha See Usage.
+#' @param c See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_ll_lomax_const_cpp <- function(t, T_horizon, a0, eta, alpha, c) {
     .Call(`_rmorie_morie_hawkes_ll_lomax_const_cpp`, t, T_horizon, a0, eta, alpha, c)
 }
 
+#' morie_hawkes_ll_gamma_const_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param T_horizon See Usage.
+#' @param a0 See Usage.
+#' @param eta See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_ll_gamma_const_cpp <- function(t, T_horizon, a0, eta, alpha, beta) {
     .Call(`_rmorie_morie_hawkes_ll_gamma_const_cpp`, t, T_horizon, a0, eta, alpha, beta)
 }
 
+#' morie_hawkes_kernel_density_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param kind See Usage.
+#' @param psi See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_kernel_density_cpp <- function(u, kind, psi) {
     .Call(`_rmorie_morie_hawkes_kernel_density_cpp`, u, kind, psi)
 }
 
+#' morie_hawkes_kernel_cdf_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param kind See Usage.
+#' @param psi See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_kernel_cdf_cpp <- function(u, kind, psi) {
     .Call(`_rmorie_morie_hawkes_kernel_cdf_cpp`, u, kind, psi)
 }
 
+#' morie_hawkes_pair_excitation_sum_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param eta See Usage.
+#' @param kind See Usage.
+#' @param psi See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_pair_excitation_sum_cpp <- function(t, eta, kind, psi) {
     .Call(`_rmorie_morie_hawkes_pair_excitation_sum_cpp`, t, eta, kind, psi)
 }
 
+#' morie_hawkes_baseline_integral_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T_horizon See Usage.
+#' @param alpha See Usage.
+#' @param n_grid Defaults to \code{0L}.
+#' @return The value of \code{.Call}.
+#' @export
 morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_hawkes_baseline_integral_cpp`, T_horizon, alpha, n_grid)
 }
@@ -264,22 +446,71 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_curl_version_`)
 }
 
+#' morie_matching_mahalanobis_pairs_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X_t See Usage.
+#' @param X_c See Usage.
+#' @param S_inv See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_matching_mahalanobis_pairs_cpp <- function(X_t, X_c, S_inv) {
     .Call(`_rmorie_morie_matching_mahalanobis_pairs_cpp`, X_t, X_c, S_inv)
 }
 
+#' morie_matching_euclidean_pairs_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X_t See Usage.
+#' @param X_c See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_matching_euclidean_pairs_cpp <- function(X_t, X_c) {
     .Call(`_rmorie_morie_matching_euclidean_pairs_cpp`, X_t, X_c)
 }
 
+#' morie_matching_nn_select_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param with_replacement See Usage.
+#' @param caliper See Usage.
+#' @param n_neighbors See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_matching_nn_select_cpp <- function(D, with_replacement, caliper, n_neighbors) {
     .Call(`_rmorie_morie_matching_nn_select_cpp`, D, with_replacement, caliper, n_neighbors)
 }
 
+#' morie_matching_cem_strata_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X_binned See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_matching_cem_strata_cpp <- function(X_binned) {
     .Call(`_rmorie_morie_matching_cem_strata_cpp`, X_binned)
 }
 
+#' morie_matching_abadie_imbens_kernel_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param t See Usage.
+#' @param treated_pos See Usage.
+#' @param control_pos See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_pos) {
     .Call(`_rmorie_morie_matching_abadie_imbens_kernel_cpp`, y, t, treated_pos, control_pos)
 }
@@ -324,22 +555,78 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
     .Call(`_rmorie_morie_tsne_descent_cpp`, P, Y, n_iter, eta)
 }
 
+#' morie_spatial_nominate_iterate_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param votes See Usage.
+#' @param X See Usage.
+#' @param w See Usage.
+#' @param nv See Usage.
+#' @param mid See Usage.
+#' @param beta See Usage.
+#' @param max_iter See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_spatial_nominate_iterate_cpp <- function(votes, X, w, nv, mid, beta, max_iter) {
     .Call(`_rmorie_morie_spatial_nominate_iterate_cpp`, votes, X, w, nv, mid, beta, max_iter)
 }
 
+#' morie_spatial_emirt_theta_update_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param a See Usage.
+#' @param d See Usage.
+#' @param votes See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_spatial_emirt_theta_update_cpp <- function(theta, a, d, votes) {
     .Call(`_rmorie_morie_spatial_emirt_theta_update_cpp`, theta, a, d, votes)
 }
 
+#' morie_spatial_smacof_step_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param D See Usage.
+#' @param W See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_spatial_smacof_step_cpp <- function(X, D, W) {
     .Call(`_rmorie_morie_spatial_smacof_step_cpp`, X, D, W)
 }
 
+#' morie_spatial_classical_mds_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param n_dims See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_spatial_classical_mds_cpp <- function(D, n_dims) {
     .Call(`_rmorie_morie_spatial_classical_mds_cpp`, D, n_dims)
 }
 
+#' morie_spatial_wordfish_omega_update_cpp
+#'
+#' Part of the RcppExports implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dtm See Usage.
+#' @param psi See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param omega See Usage.
+#' @return The value of \code{.Call}.
+#' @export
 morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega) {
     .Call(`_rmorie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
 }

@@ -15,6 +15,20 @@
 # metrics with the same /m normalisation for L2, and the same
 # payload keys.
 
+#' morie_funBoot
+#'
+#' Part of the funBoot_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param curves See Usage.
+#' @param statistic Defaults to \code{NULL}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param B Defaults to \code{500L}.
+#' @param metric Defaults to \code{"l2"}.
+#' @param smooth Defaults to \code{0}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{center}, \code{radius}, \code{estimate}, \code{distances}, \code{n_within}, \code{metric}, \code{alpha}, \code{B}, \code{seed}, \code{method}.
+#' @export
 morie_funBoot <- function(curves, statistic = NULL, alpha = 0.05, B = 500L,
                           metric = "l2", smooth = 0.0, seed = 0) {
   X <- lapply(seq_len(nrow(curves)),

@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{CnnSig}
+\alias{CnnSig}
+\title{Section 10.8.2 names CNNs as the common deep model but gives no layer}
+\usage{
+CnnSig(x, kernels, bias = NULL, pool = 2, dense = NULL)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{kernels}{See Usage.}
+\item{bias}{Defaults to \code{NULL}.}
+\item{pool}{Defaults to \code{2}.}
+\item{dense}{Defaults to \code{NULL}.}
+}
+\description{
+equations; the convolution, rectifier and pooling used here are those of LeCun, Bengio and Hinton, Nature 521(7553):436-444, 2015, which is reference [35] of that section.
+}
+\value{
+A list with \code{maps}, \code{pooled}, \code{features}, \code{scores}, \code{predicted}, \code{method}.
+}
+\keyword{internal}

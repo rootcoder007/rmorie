@@ -109,6 +109,20 @@
   return(tot + as.numeric(lam) * reg)
 }
 
+#' morie_impFB
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R See Usage.
+#' @param f Defaults to \code{8}.
+#' @param alpha Defaults to \code{40}.
+#' @param lam Defaults to \code{0.1}.
+#' @param iters Defaults to \code{15}.
+#' @param seed Defaults to \code{0}.
+#' @param fast Defaults to \code{TRUE}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
                        seed = 0, fast = TRUE) {
   M <- as.matrix(R)

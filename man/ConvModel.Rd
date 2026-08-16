@@ -1,0 +1,20 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{ConvModel}
+\alias{ConvModel}
+\title{Eq (4.61): y(t) = x(t) * h(t), the model homomorphic DEconvolution}
+\usage{
+ConvModel(x, h)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{h}{See Usage.}
+}
+\description{
+addresses.
+}
+\value{
+A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{method}.
+}
+\keyword{internal}

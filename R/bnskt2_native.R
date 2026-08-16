@@ -37,6 +37,20 @@
   list(slope = fit$coef[1L], coef = fit$coef, n = length(rows))
 }
 
+#' local_polynomial_slope
+#'
+#' Part of the bnskt2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param y See Usage.
+#' @param kink See Usage.
+#' @param bandwidth See Usage.
+#' @param order Defaults to \code{2L}.
+#' @param side Defaults to \code{"right"}.
+#' @param kernel Defaults to \code{"triangular"}.
+#' @return The value of \code{.side_fit}.
+#' @export
 local_polynomial_slope <- function(v, y, kink, bandwidth, order = 2L,
                                    side = "right", kernel = "triangular") {
   if (!(side %in% c("left", "right")))
@@ -50,6 +64,22 @@ local_polynomial_slope <- function(v, y, kink, bandwidth, order = 2L,
   .side_fit(v, y, kink, bandwidth, as.integer(order), side, kernel)
 }
 
+#' rkd_estimate
+#'
+#' Part of the bnskt2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param V See Usage.
+#' @param Y See Usage.
+#' @param kink See Usage.
+#' @param bandwidth See Usage.
+#' @param order Defaults to \code{2L}.
+#' @param kernel Defaults to \code{"triangular"}.
+#' @param policy_slope_change Defaults to \code{NULL}.
+#' @param B Defaults to \code{NULL}.
+#' @param fuzzy Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{tau}, \code{outcome_kink}, \code{policy_kink}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{bandwidth}, \code{order}, \code{kernel}, \code{fuzzy}, \code{denominator_source}, \code{method}, \code{requires}.
+#' @export
 rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
                          kernel = "triangular",
                          policy_slope_change = NULL, B = NULL,
@@ -88,6 +118,18 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
        requires = "the density of V must be smooth at the kink -- test it")
 }
 
+#' density_kink_test
+#'
+#' Part of the bnskt2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param V See Usage.
+#' @param kink See Usage.
+#' @param bandwidth See Usage.
+#' @param n_bins Defaults to \code{20L}.
+#' @param order Defaults to \code{1L}.
+#' @return A list with \code{slope_change}, \code{relative}, \code{slope_right}, \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth}, \code{interpretation}.
+#' @export
 density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
   v <- as.numeric(V); kp <- as.numeric(kink); bw <- as.numeric(bandwidth)
   inside <- v[abs(v - kp) <= bw]
@@ -110,6 +152,19 @@ density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
        interpretation = "a kink in the DENSITY suggests precise manipulation of the assignment variable, which invalidates the design")
 }
 
+#' covariate_kink_test
+#'
+#' Part of the bnskt2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param V See Usage.
+#' @param Z See Usage.
+#' @param kink See Usage.
+#' @param bandwidth See Usage.
+#' @param order Defaults to \code{2L}.
+#' @param kernel Defaults to \code{"triangular"}.
+#' @return A list with \code{slope_change}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{interpretation}.
+#' @export
 covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
                                 kernel = "triangular") {
   r <- .side_fit(V, Z, kink, bandwidth, as.integer(order), "right", kernel)

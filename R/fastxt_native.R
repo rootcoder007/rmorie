@@ -19,6 +19,18 @@
 # is drawn from .ghc_rng / .ghc_unif so both arms produce the same
 # stream.
 
+#' subwords
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param word See Usage.
+#' @param n_min Defaults to \code{3}.
+#' @param n_max Defaults to \code{6}.
+#' @param boundary Defaults to \code{TRUE}.
+#' @param whole_word Defaults to \code{TRUE}.
+#' @return The value of \code{grams}, as built in the body.
+#' @export
 subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
                      whole_word = TRUE) {
   lo <- as.integer(n_min)
@@ -50,6 +62,21 @@ subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
   grams
 }
 
+#' word_vector
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param word See Usage.
+#' @param Z See Usage.
+#' @param gram_index See Usage.
+#' @param n_min Defaults to \code{3}.
+#' @param n_max Defaults to \code{6}.
+#' @param boundary Defaults to \code{TRUE}.
+#' @param whole_word Defaults to \code{TRUE}.
+#' @param hash_buckets Defaults to \code{NULL}.
+#' @return A list with \code{v}, \code{hit}.
+#' @export
 word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
                         boundary = TRUE, whole_word = TRUE,
                         hash_buckets = NULL) {
@@ -99,6 +126,26 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
   docs
 }
 
+#' fasttext
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param corpus See Usage.
+#' @param dim Defaults to \code{50}.
+#' @param n_min Defaults to \code{3}.
+#' @param n_max Defaults to \code{6}.
+#' @param window Defaults to \code{5}.
+#' @param epochs Defaults to \code{5}.
+#' @param lr Defaults to \code{0.05}.
+#' @param negative Defaults to \code{5}.
+#' @param min_count Defaults to \code{1}.
+#' @param boundary Defaults to \code{TRUE}.
+#' @param whole_word Defaults to \code{TRUE}.
+#' @param hash_buckets Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{ngrams}, \code{ngram_index}, \code{Z}, \code{context}, \code{loss_history}, \code{final_loss}, \code{oov}, \code{n_vocab}, \code{n_ngrams}, \code{dim}, \code{n_min}, \code{n_max}, \code{hash_buckets}, \code{method}.
+#' @export
 fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
                      window = 5, epochs = 5, lr = 0.05, negative = 5,
                      min_count = 1, boundary = TRUE,
@@ -243,6 +290,26 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
         sep = " ")
 }
 
+#' morie_fastxt
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param corpus See Usage.
+#' @param dim Defaults to \code{50}.
+#' @param n_min Defaults to \code{3}.
+#' @param n_max Defaults to \code{6}.
+#' @param window Defaults to \code{5}.
+#' @param epochs Defaults to \code{5}.
+#' @param lr Defaults to \code{0.05}.
+#' @param negative Defaults to \code{5}.
+#' @param min_count Defaults to \code{1}.
+#' @param boundary Defaults to \code{TRUE}.
+#' @param whole_word Defaults to \code{TRUE}.
+#' @param hash_buckets Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{fasttext}.
+#' @export
 morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,
                          window = 5, epochs = 5, lr = 0.05,
                          negative = 5, min_count = 1, boundary = TRUE,

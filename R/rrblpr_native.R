@@ -124,6 +124,22 @@
   list(ll = ll, lam = lam, beta = beta, s2e = s2e, L = L)
 }
 
+#' morie_rrblpr_rr_blup
+#'
+#' Part of the rrblpr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param M See Usage.
+#' @param lam Defaults to \code{NULL}.
+#' @param X Defaults to \code{NULL}.
+#' @param M_new Defaults to \code{NULL}.
+#' @param log_lam_lo Defaults to \code{-12}.
+#' @param log_lam_hi Defaults to \code{12}.
+#' @param max_iter Defaults to \code{200L}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{estimate}, \code{marker_effects}, \code{coefficients}, \code{breeding_values}, \code{breeding_values_kernel}, \code{kernel_identity_gap}, \code{fitted}, \code{residuals}, \code{lambda}, \code{lambda_estimated}, \code{sigma2_e}, \code{sigma2_u}, \code{sigma2_g}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{prediction_new}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.
+#' @export
 morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
                                  log_lam_lo = -12.0, log_lam_hi = 12.0,
                                  max_iter = 200L, tol = 1e-9) {

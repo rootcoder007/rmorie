@@ -100,6 +100,15 @@
   list(out = out, W = W)
 }
 
+#' morie_vidgen_space_only_conv
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param video See Usage.
+#' @param kernel See Usage.
+#' @return A list with \code{video}, \code{frames}, \code{note}.
+#' @export
 morie_vidgen_space_only_conv <- function(video, kernel) {
   V <- lapply(video, .vidgen_mat)
   K <- .vidgen_mat(kernel)
@@ -134,6 +143,14 @@ morie_vidgen_space_only_conv <- function(video, kernel) {
   )
 }
 
+#' morie_vidgen_spatial_attention
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param video See Usage.
+#' @return A list with \code{video}, \code{weights}, \code{note}.
+#' @export
 morie_vidgen_spatial_attention <- function(video) {
   out <- list()
   weights <- list()
@@ -150,6 +167,15 @@ morie_vidgen_spatial_attention <- function(video) {
   )
 }
 
+#' morie_vidgen_temporal_attention
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param video See Usage.
+#' @param identity Defaults to \code{FALSE}.
+#' @return A list with \code{video}, \code{identity}, \code{note}.
+#' @export
 morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
   V <- lapply(video, .vidgen_mat)
   F <- length(V)
@@ -188,6 +214,15 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
   )
 }
 
+#' morie_vidgen_as_image_model
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param video See Usage.
+#' @param block See Usage.
+#' @return A list with \code{video}, \code{note}.
+#' @export
 morie_vidgen_as_image_model <- function(video, block) {
   list(
     video = lapply(video, function(fr) block(list(fr))$video[[1]]),
@@ -195,6 +230,15 @@ morie_vidgen_as_image_model <- function(video, block) {
   )
 }
 
+#' morie_vidgen_attention_cost
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param frames See Usage.
+#' @param spatial_positions See Usage.
+#' @return A list with \code{joint}, \code{factorised}, \code{ratio}, \code{note}.
+#' @export
 morie_vidgen_attention_cost <- function(frames, spatial_positions) {
   F <- as.integer(frames)
   S <- as.integer(spatial_positions)
@@ -211,6 +255,18 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
   )
 }
 
+#' morie_vidgen_reconstruction_guidance
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x_hat See Usage.
+#' @param observed See Usage.
+#' @param index See Usage.
+#' @param weight Defaults to \code{2}.
+#' @param downsample Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight}, \code{guided_frames}, \code{method}, \code{note}.
+#' @export
 morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
                                                   weight = 2.0,
                                                   downsample = NULL) {
@@ -263,6 +319,13 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
   )
 }
 
+#' morie_vidgen_cheatsheet
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_vidgen_cheatsheet <- function() {
   "vidgen: a 3D U-Net FACTORISED over space and time -- each 3x3 convolution becomes 1x3x3 (space only), spatial attention keeps the frame axis as a BATCH axis, and a temporal attention block is inserted after it with the spatial axes as batch. Cost drops from (FS)^2 to F S^2 + S F^2. The unique payoff: fixing the temporal attention to the IDENTITY makes the model run on independent images exactly, so video and image objectives can be trained JOINTLY -- which matters for sample quality. RECONSTRUCTION GUIDANCE conditions on given frames at sampling time, and with a downsampler inside the loss gives super-resolution."
 }

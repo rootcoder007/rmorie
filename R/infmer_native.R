@@ -97,6 +97,22 @@
 #   n_selected       : integer length of that vector
 #   sparsity_scores  : M(q_i, K) for every query
 #   complexity       : full vs probsparse flop accounting
+#' Main entry point: morie_infmer
+#'
+#' Informer\'s ProbSparse self-attention (Zhou et al. 2021). q: numeric
+#' matrix [L_Q, d] (queries) k: numeric matrix [L_K, d] (keys) v:
+#' numeric matrix [L_K, d_v] (values) c: numeric sparsity constant
+#' (default 5) Returns named list: output : [L_Q, d_v] attended values
+#' selected_queries : 1-based integer vector of top-u query indices
+#' n_selected : integer length of that vector sparsity_scores : M(q_i,
+#' K) for every query complexity : full vs probsparse flop accounting
+#'
+#' @param q See Usage.
+#' @param k See Usage.
+#' @param v See Usage.
+#' @param c Defaults to \code{5}.
+#' @return A list with \code{output}, \code{selected_queries}, \code{n_selected}, \code{sparsity_scores}, \code{complexity}.
+#' @export
 morie_infmer <- function(q, k, v, c = 5) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   if (is.null(dim(k))) k <- matrix(k, nrow = 1L)
@@ -149,6 +165,13 @@ morie_infmer <- function(q, k, v, c = 5) {
 }
 
 # Cheatsheet accessor
+#' Cheatsheet accessor
+#'
+#' Part of the infmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_infmer_cheatsheet <- function() {
   paste("infmer: the same ledger method as `informer` -- one paper,",
         "one implementation, re-exported so the two entries cannot drift.",

@@ -58,6 +58,15 @@
 # doi:10.1038/nature14236. The periodic-copy target network;
 # implemented in dqnv.
 
+#' morie_polyak
+#'
+#' Part of the polyak_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param iterates See Usage.
+#' @param burn_in Defaults to \code{0}.
+#' @return A list with \code{average}, \code{n_averaged}, \code{burn_in}.
+#' @export
 morie_polyak <- function(iterates, burn_in = 0) {
   X <- lapply(iterates, function(t) as.numeric(t))
 

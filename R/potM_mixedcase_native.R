@@ -92,6 +92,16 @@
   )
 }
 
+#' morie_potM
+#'
+#' Part of the potM_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param y See Usage.
+#' @param u See Usage.
+#' @param return_periods Defaults to \code{c(10, 100)}.
+#' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov}, \code{n_exceedances}, \code{n}, \code{rate}, \code{return_levels}, \code{threshold}, \code{converged}, \code{method}.
+#' @export
 morie_potM <- function(y, u, return_periods = c(10.0, 100.0)) {
   yv <- as.numeric(y)
   u <- as.numeric(u)
@@ -139,6 +149,13 @@ morie_potM <- function(y, u, return_periods = c(10.0, 100.0)) {
 # Long descriptive alias (stub-era name)
 peaks_over_threshold <- morie_potM
 
+#' morie_potM_cheatsheet
+#'
+#' Part of the potM_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_potM_cheatsheet <- function() {
   "potM: GPD MLE on y-u | y>u; x_m = u + sigma/xi ((m zeta)^xi - 1)"
 }

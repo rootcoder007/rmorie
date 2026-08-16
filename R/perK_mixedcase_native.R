@@ -11,6 +11,18 @@
 # MacKay, D. J. C. (1998) Introduction to Gaussian processes;
 # Rasmussen & Williams (2006) GPML Sec. 4.2.3.
 
+#' morie_perK
+#'
+#' Part of the perK_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param x1 See Usage.
+#' @param x2 Defaults to \code{NULL}.
+#' @param period Defaults to \code{1}.
+#' @param lengthscale Defaults to \code{1}.
+#' @param variance Defaults to \code{1}.
+#' @return A list with \code{K}, \code{shape}, \code{period}, \code{lengthscale}, \code{variance}, \code{diag_is_variance}, \code{method}.
+#' @export
 morie_perK <- function(x1, x2 = NULL, period = 1, lengthscale = 1,
                        variance = 1) {
   a <- as.numeric(x1)

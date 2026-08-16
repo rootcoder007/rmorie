@@ -261,6 +261,15 @@
 # The entry point: dispatch on a `what` argument to mirror the Python
 # module-level functions. Defaults to the message pass to match the
 # "deepml_qsar" / "directedmpnn" aliases.
+#' The entry point: dispatch on a `what` argument to mirror the Python
+#'
+#' module-level functions. Defaults to the message pass to match the
+#' "deepml_qsar" / "directedmpnn" aliases.
+#'
+#' @param what Defaults to \code{"dmpnn_message_pass"}.
+#' @param ... Passed through.
+#' @return Nothing; this branch always raises.
+#' @export
 morie_dmlqs <- function(what = "dmpnn_message_pass", ...) {
   w <- as.character(what)
   if (w == "directed_edges" || w == "directededges") {

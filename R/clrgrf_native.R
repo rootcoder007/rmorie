@@ -23,6 +23,14 @@
 
 .CLRGRF_EPS <- 1e-12
 
+#' clrgrf_cluster_index
+#'
+#' Part of the clrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param clusters See Usage.
+#' @return A list with \code{groups}, \code{labels}.
+#' @export
 clrgrf_cluster_index <- function(clusters) {
   lab <- as.character(clusters)
   order <- character(0)
@@ -40,6 +48,17 @@ clrgrf_cluster_index <- function(clusters) {
        labels = order)
 }
 
+#' clrgrf_cluster_jackknife
+#'
+#' Part of the clrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param preds See Usage.
+#' @param bags See Usage.
+#' @param groups See Usage.
+#' @param correction Defaults to \code{TRUE}.
+#' @return A list with \code{variance}, \code{info}.
+#' @export
 clrgrf_cluster_jackknife <- function(preds, bags, groups,
                                       correction = TRUE) {
   B <- length(preds)
@@ -66,6 +85,24 @@ clrgrf_cluster_jackknife <- function(preds, bags, groups,
        info = list(clusters_per_tree = sc, subsampled = subsampled, m = m))
 }
 
+#' morie_clrgrf
+#'
+#' Part of the clrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param clusters See Usage.
+#' @param at Defaults to \code{NULL}.
+#' @param n_trees Defaults to \code{200L}.
+#' @param min_leaf Defaults to \code{5L}.
+#' @param subsample_frac Defaults to \code{0.5}.
+#' @param seed Defaults to \code{0L}.
+#' @param unit Defaults to \code{"cluster"}.
+#' @param level Defaults to \code{0.95}.
+#' @param cluster_sampling Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{n_clusters}, \code{clusters_per_tree}, \code{clusters_subsampled}, \code{cluster_sizes}, \code{cluster_labels}, \code{unit}, \code{cluster_sampling}, \code{n_trees}, \code{level}, \code{method}.
+#' @export
 morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
                           min_leaf = 5L, subsample_frac = 0.5, seed = 0L,
                           unit = "cluster", level = 0.95,
@@ -149,6 +186,13 @@ morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
                        "aggregated to the cluster"))
 }
 
+#' clrgrf_cheatsheet
+#'
+#' Part of the clrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 clrgrf_cheatsheet <- function() {
   paste0("clrgrf: draw whole CLUSTERS into the subsample -- row-wise ",
          "draws split clusters across the split and estimate halves, ",

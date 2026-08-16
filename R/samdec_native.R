@@ -56,6 +56,15 @@
   list(out = out, W = W)
 }
 
+#' two_way_block
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param prompt_tokens See Usage.
+#' @param image_tokens See Usage.
+#' @return A list with \code{prompt_tokens}, \code{image_tokens}, \code{prompt_to_image}, \code{image_to_prompt}, \code{note}.
+#' @export
 two_way_block <- function(prompt_tokens, image_tokens) {
   P <- .samdec_mat(prompt_tokens)
   I <- .samdec_mat(image_tokens)
@@ -75,6 +84,15 @@ two_way_block <- function(prompt_tokens, image_tokens) {
        note = "both directions, so both embeddings move")
 }
 
+#' upsample
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param grid See Usage.
+#' @param factor Defaults to \code{2}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 upsample <- function(grid, factor = 2) {
   G <- .samdec_mat(grid)
   f <- as.integer(factor)
@@ -105,6 +123,16 @@ upsample <- function(grid, factor = 2) {
   }
 }
 
+#' dynamic_mask_head
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param output_token See Usage.
+#' @param image_grid_vectors See Usage.
+#' @param mlp Defaults to \code{NULL}.
+#' @return A list with \code{logits}, \code{probability}, \code{weights}, \code{note}.
+#' @export
 dynamic_mask_head <- function(output_token, image_grid_vectors,
                               mlp = NULL) {
   w <- .samdec_vec(output_token)
@@ -143,6 +171,17 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
        note = "the classifier weights come from the PROMPT")
 }
 
+#' focal_loss
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param prob See Usage.
+#' @param target See Usage.
+#' @param gamma Defaults to \code{2}.
+#' @param alpha Defaults to \code{0.25}.
+#' @return A list with \code{loss}, \code{modulating}, \code{gamma}, \code{note}.
+#' @export
 focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
   p <- as.numeric(prob)
   t <- as.numeric(target)
@@ -163,6 +202,15 @@ focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
        note = "an easy pixel with p_t = 0.9 keeps only (1-0.9)^gamma of its weight")
 }
 
+#' dice_loss
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param prob See Usage.
+#' @param target See Usage.
+#' @return A list with \code{loss}, \code{dice}.
+#' @export
 dice_loss <- function(prob, target) {
   p <- as.numeric(prob)
   t <- as.numeric(target)
@@ -177,6 +225,19 @@ dice_loss <- function(prob, target) {
   list(loss = 1.0 - d, dice = d)
 }
 
+#' decode_mask
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param prompt_tokens See Usage.
+#' @param image_tokens See Usage.
+#' @param grid_shape See Usage.
+#' @param n_blocks Defaults to \code{2}.
+#' @param upsample_factor Defaults to \code{2}.
+#' @param output_index Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{mask}, \code{logits}, \code{shape}, \code{n_blocks}, \code{method}, \code{note}.
+#' @export
 decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
                         n_blocks = 2, upsample_factor = 2,
                         output_index = 0) {
@@ -217,6 +278,19 @@ decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
                     "token scores every location"))
 }
 
+#' morie_samdec
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param prompt_tokens See Usage.
+#' @param image_tokens See Usage.
+#' @param grid_shape See Usage.
+#' @param n_blocks Defaults to \code{2}.
+#' @param upsample_factor Defaults to \code{2}.
+#' @param output_index Defaults to \code{0}.
+#' @return The value of \code{decode_mask}.
+#' @export
 morie_samdec <- function(prompt_tokens, image_tokens, grid_shape,
                          n_blocks = 2, upsample_factor = 2,
                          output_index = 0) {

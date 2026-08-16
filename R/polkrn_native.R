@@ -158,6 +158,15 @@
 
 # ---- public API ----
 
+#' exposure_summary
+#'
+#' Part of the polkrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A_history See Usage.
+#' @param how Defaults to \code{"cumulative"}.
+#' @return The value of \code{rowSums}.
+#' @export
 exposure_summary <- function(A_history, how="cumulative") {
   if (!how %in% c("cumulative", "final", "duration")) {
     stop(sprintf("exposure_summary: how must be one of %s, got %s",
@@ -182,6 +191,16 @@ exposure_summary <- function(A_history, how="cumulative") {
   return(rowSums(mat != 0))
 }
 
+#' rbf_basis
+#'
+#' Part of the polkrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param n_centres Defaults to \code{5}.
+#' @param width Defaults to \code{NULL}.
+#' @return A list with \code{X}, \code{centres}, \code{width}.
+#' @export
 rbf_basis <- function(x, n_centres=5, width=NULL) {
   xs <- .polkrn_vec(x)
   m <- as.integer(n_centres)
@@ -213,6 +232,25 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
   list(X=X, centres=centres, width=h)
 }
 
+#' morie_polkrn
+#'
+#' Part of the polkrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A_history See Usage.
+#' @param H_history See Usage.
+#' @param degree Defaults to \code{2}.
+#' @param basis Defaults to \code{"both"}.
+#' @param summary Defaults to \code{"cumulative"}.
+#' @param n_centres Defaults to \code{5}.
+#' @param width Defaults to \code{NULL}.
+#' @param kind Defaults to \code{"binary"}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @param trim Defaults to \code{NULL}.
+#' @param grid Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_polkrn <- function(y, A_history, H_history, degree=2,
                           basis="both", summary="cumulative",
                           n_centres=5, width=NULL, kind="binary",

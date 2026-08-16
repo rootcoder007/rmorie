@@ -13,6 +13,15 @@
 #   Penrose, R. (1956) "On best approximate solutions of linear matrix
 #   equations", Math. Proc. Cambridge Phil. Soc. 52(1), 17-19.
 
+#' summing_matrix
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param groups See Usage.
+#' @param n_bottom See Usage.
+#' @return The value of \code{rbind}.
+#' @export
 summing_matrix <- function(groups, n_bottom) {
   if (n_bottom < 1L) stop("hierF: need at least one bottom series")
   S <- matrix(0.0, length(groups), n_bottom)
@@ -28,6 +37,16 @@ summing_matrix <- function(groups, n_bottom) {
   rbind(S, bot)
 }
 
+#' is_coherent
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param S See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A logical value.
+#' @export
 is_coherent <- function(y, S, tol = 1e-9) {
   m <- nrow(S)
   n <- ncol(S)
@@ -35,6 +54,15 @@ is_coherent <- function(y, S, tol = 1e-9) {
   all(abs(y[1:m] - as.numeric(S %*% b)) <= tol)
 }
 
+#' shrink_covariance
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param residuals See Usage.
+#' @param lam Defaults to \code{NULL}.
+#' @return A list with \code{cov}, \code{lambda}.
+#' @export
 shrink_covariance <- function(residuals, lam = NULL) {
   T <- nrow(residuals)
   if (T < 2L) {
@@ -80,6 +108,18 @@ shrink_covariance <- function(residuals, lam = NULL) {
   as.numeric(solve(A, b))
 }
 
+#' mint_P
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param S See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param method Defaults to \code{"shrink"}.
+#' @param residuals Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return A list with \code{P}, \code{lambda}.
+#' @export
 mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
                    ridge = 1e-10) {
   if (!(method %in% c("ols", "wls", "shrink", "custom"))) {
@@ -124,6 +164,19 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
   list(P = P, lambda = lam)
 }
 
+#' mint_reconcile
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param base See Usage.
+#' @param S See Usage.
+#' @param method Defaults to \code{"shrink"}.
+#' @param residuals Defaults to \code{NULL}.
+#' @param W Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return A list with \code{estimate}, \code{reconciled}, \code{bottom}, \code{base}, \code{P}, \code{S}, \code{method}, \code{shrinkage}, \code{n_series}, \code{n_bottom}, \code{coherent}, \code{ps_identity_error}, \code{adjustment}, \code{cite}, \code{method_detail}.
+#' @export
 mint_reconcile <- function(base, S, method = "shrink", residuals = NULL,
                            W = NULL, ridge = 1e-10) {
   Sm <- as.matrix(S)
@@ -154,6 +207,19 @@ mint_reconcile <- function(base, S, method = "shrink", residuals = NULL,
 mintreconcile <- mint_reconcile
 hierarchical_forecast <- mint_reconcile
 
+#' morie_hierF
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param base See Usage.
+#' @param S See Usage.
+#' @param method Defaults to \code{"shrink"}.
+#' @param residuals Defaults to \code{NULL}.
+#' @param W Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return The value of \code{mint_reconcile}.
+#' @export
 morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
                         W = NULL, ridge = 1e-10) {
   mint_reconcile(base, S, method, residuals, W, ridge)

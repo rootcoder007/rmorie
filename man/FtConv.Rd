@@ -1,0 +1,22 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{FtConv}
+\alias{FtConv}
+\title{Eqs (4.61)-(4.62): the Fourier transform turns the convolution into a}
+\usage{
+FtConv(x, h, omega, dt = 1)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{h}{See Usage.}
+\item{omega}{See Usage.}
+\item{dt}{Defaults to \code{1}.}
+}
+\description{
+product, which eq (4.63) then turns into a sum.  The convolution is scaled by dt as in eq (3.30), so the identity holds in the continuous-time sense rather than up to a sampling-interval factor.
+}
+\value{
+A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{max_difference}, \code{holds}, \code{method}.
+}
+\keyword{internal}

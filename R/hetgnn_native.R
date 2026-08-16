@@ -10,6 +10,16 @@
 #   Representation Learning for Heterogeneous Networks", KDD '17,
 #   135-144.
 
+#' metapath_neighbours
+#'
+#' Part of the hetgnn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param types See Usage.
+#' @param metapath See Usage.
+#' @return A list with \code{neighbours}, \code{metapath}, \code{note}.
+#' @export
 metapath_neighbours <- function(edges, types, metapath) {
   mp <- as.character(metapath)
   if (length(mp) < 2L) {
@@ -40,6 +50,19 @@ metapath_neighbours <- function(edges, types, metapath) {
        note = paste("the relation between two nodes DEPENDS on the meta-path followed"))
 }
 
+#' node_attention
+#'
+#' Part of the hetgnn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h_i See Usage.
+#' @param neighbours See Usage.
+#' @param H See Usage.
+#' @param a_vec See Usage.
+#' @param W See Usage.
+#' @param slope Defaults to \code{0.2}.
+#' @return A list with \code{embedding}, \code{alpha}, \code{neighbours}.
+#' @export
 node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
   proj <- function(x) as.numeric(W %*% as.numeric(x))
   hi <- proj(h_i)
@@ -70,6 +93,17 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
   list(embedding = z, alpha = al, neighbours = neighbours)
 }
 
+#' semantic_attention
+#'
+#' Part of the hetgnn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z_per_metapath See Usage.
+#' @param W See Usage.
+#' @param b See Usage.
+#' @param q See Usage.
+#' @return A list with \code{beta}, \code{scores}, \code{metapaths}, \code{note}.
+#' @export
 semantic_attention <- function(Z_per_metapath, W, b, q) {
   names_v <- sort(names(Z_per_metapath))
   if (length(names_v) == 0L) {
@@ -97,6 +131,23 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
        note = paste("averaged over nodes, so the weight describes the META-PATH, not a node"))
 }
 
+#' han_forward
+#'
+#' Part of the hetgnn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param edges See Usage.
+#' @param types See Usage.
+#' @param metapaths See Usage.
+#' @param a_vec See Usage.
+#' @param W_node See Usage.
+#' @param W_sem See Usage.
+#' @param b_sem See Usage.
+#' @param q_sem See Usage.
+#' @param slope Defaults to \code{0.2}.
+#' @return A list with \code{estimate}, \code{embeddings}, \code{semantic_weights}, \code{per_metapath}, \code{method}, \code{note}.
+#' @export
 han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
                         W_sem, b_sem, q_sem, slope = 0.2) {
   if (is.matrix(H)) {
@@ -143,6 +194,23 @@ han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
 heterogeneousattention <- han_forward
 heterogeneous_gnn <- han_forward
 
+#' morie_hetgnn
+#'
+#' Part of the hetgnn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param edges See Usage.
+#' @param types See Usage.
+#' @param metapaths See Usage.
+#' @param a_vec See Usage.
+#' @param W_node See Usage.
+#' @param W_sem See Usage.
+#' @param b_sem See Usage.
+#' @param q_sem See Usage.
+#' @param slope Defaults to \code{0.2}.
+#' @return The value of \code{han_forward}.
+#' @export
 morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
                          W_sem, b_sem, q_sem, slope = 0.2) {
   han_forward(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem,

@@ -92,6 +92,19 @@
   z + g1 / df + g2 / df ^ 2 + g3 / df ^ 3
 }
 
+#' morie_sschin_chained_imputation
+#'
+#' Part of the sschin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param mi_iter Defaults to \code{5L}.
+#' @param cycles Defaults to \code{10L}.
+#' @param ties Defaults to \code{"breslow"}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratio}, \code{std_error}, \code{total_variance}, \code{within_variance}, \code{between_variance}, \code{ci_lower}, \code{ci_upper}, \code{t_quantile}, \code{df}, \code{relative_increase_variance}, \code{fraction_missing_info}, \code{per_imputation}, \code{complete_case_coefficients}, \code{complete_case_se}, \code{n_complete_cases}, \code{n}, \code{p}, \code{m}, \code{cycles}, \code{n_missing}, \code{columns_imputed}, \code{n_events}, \code{df_complete}, \code{method}, \code{note}.
+#' @export
 morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
                                             cycles = 10L, ties = "breslow") {
   tv <- as.numeric(time)

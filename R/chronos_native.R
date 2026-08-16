@@ -16,6 +16,15 @@
 
 .chronos_vec <- function(x) as.numeric(x)
 
+#' mean_scale
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param context Defaults to \code{NULL}.
+#' @return A list with \code{scaled}, \code{scale}, \code{degenerate}, \code{context}, \code{preserves_zero}.
+#' @export
 mean_scale <- function(x, context = NULL) {
   v <- .chronos_vec(x)
   if (length(v) == 0L) stop("chronos: the series is empty")
@@ -41,6 +50,16 @@ mean_scale <- function(x, context = NULL) {
   )
 }
 
+#' uniform_bins
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param lo Defaults to \code{-15}.
+#' @param hi Defaults to \code{15}.
+#' @param n_bins Defaults to \code{4096L}.
+#' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}.
+#' @export
 uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
   B <- as.integer(n_bins)
   if (B < 2L) stop(sprintf("chronos: need at least 2 bins, got %d", B))
@@ -52,6 +71,15 @@ uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
        range = c(centers[1L], centers[B]))
 }
 
+#' quantile_bins
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param samples See Usage.
+#' @param n_bins Defaults to \code{4096L}.
+#' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}, \code{caveat}.
+#' @export
 quantile_bins <- function(samples, n_bins = 4096L) {
   v <- sort(.chronos_vec(samples))
   B <- as.integer(n_bins)
@@ -70,6 +98,15 @@ quantile_bins <- function(samples, n_bins = 4096L) {
        caveat = "fitted to the TRAINING distribution; an unseen dataset may fall where there are no bins")
 }
 
+#' quantize
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param bins See Usage.
+#' @return A list with \code{tokens}, \code{n_clipped}, \code{clipped_fraction}, \code{in_range}, \code{note}.
+#' @export
 quantize <- function(x, bins) {
   v <- .chronos_vec(x)
   c <- bins$centers
@@ -97,6 +134,15 @@ quantize <- function(x, bins) {
   )
 }
 
+#' dequantize
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tokens See Usage.
+#' @param bins See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 dequantize <- function(tokens, bins) {
   c <- bins$centers
   out <- numeric(0)
@@ -110,6 +156,18 @@ dequantize <- function(tokens, bins) {
   out
 }
 
+#' tokenize
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param bins See Usage.
+#' @param context Defaults to \code{NULL}.
+#' @param add_eos Defaults to \code{TRUE}.
+#' @param pad_to Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped}, \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
+#' @export
 tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
   sc <- mean_scale(x, context = context)
   qz <- quantize(sc$scaled, bins)
@@ -126,11 +184,31 @@ tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
   )
 }
 
+#' detokenize
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tokens See Usage.
+#' @param bins See Usage.
+#' @param scale See Usage.
+#' @return A numeric value.
+#' @export
 detokenize <- function(tokens, bins, scale) {
   q <- dequantize(tokens, bins)
   q * as.numeric(scale)
 }
 
+#' forecast_summary
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param token_probs See Usage.
+#' @param bins See Usage.
+#' @param quantiles Defaults to \code{c(0.1, 0.5, 0.9)}.
+#' @return A list with \code{mean}, \code{quantiles}, \code{mode}, \code{note}.
+#' @export
 forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
   p <- .chronos_vec(token_probs)
   c <- bins$centers
@@ -160,6 +238,18 @@ forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
   )
 }
 
+#' morie_chronos
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param bins See Usage.
+#' @param context Defaults to \code{NULL}.
+#' @param add_eos Defaults to \code{TRUE}.
+#' @param pad_to Defaults to \code{NULL}.
+#' @return The value of \code{tokenize}.
+#' @export
 morie_chronos <- function(x, bins, context = NULL, add_eos = TRUE,
                           pad_to = NULL) {
   tokenize(x, bins, context, add_eos, pad_to)

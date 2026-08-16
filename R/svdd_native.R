@@ -119,6 +119,22 @@
   alpha
 }
 
+#' morie_svdd
+#'
+#' Part of the svdd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param C Defaults to \code{NULL}.
+#' @param nu Defaults to \code{NULL}.
+#' @param kernel Defaults to \code{"rbf"}.
+#' @param gamma Defaults to \code{NULL}.
+#' @param degree Defaults to \code{3}.
+#' @param coef0 Defaults to \code{1}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_iter Defaults to \code{20000}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{R2}, \code{radius}, \code{center}, \code{support_}, \code{boundary_}, \code{bounded_}, \code{n_support}, \code{degenerate}, \code{distance2}, \code{outlier_fraction}, \code{outlier_bound}, \code{decision}, \code{predict}, \code{C}, \code{kernel}, \code{gamma}, \code{n}, \code{method}.
+#' @export
 morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
                         gamma = NULL, degree = 3, coef0 = 1.0,
                         tol = 1e-10, max_iter = 20000) {

@@ -144,6 +144,21 @@
 }
 
 
+#' morie_fwxF
+#'
+#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param temp See Usage.
+#' @param rh See Usage.
+#' @param wind See Usage.
+#' @param rain See Usage.
+#' @param month See Usage.
+#' @param ffmc_init Defaults to \code{85}.
+#' @param dmc_init Defaults to \code{6}.
+#' @param dc_init Defaults to \code{15}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_fwxF <- function(temp, rh, wind, rain, month,
                        ffmc_init = 85.0, dmc_init = 6.0, dc_init = 15.0) {
   # Canadian Forest Fire Weather Index (FWI) System, daily codes.

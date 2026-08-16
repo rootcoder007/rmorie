@@ -62,6 +62,16 @@ CV_SCHEMES <- c("kfold", "loo")
   v - as.numeric(cols %*% coef)
 }
 
+#' make_blocks
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_markers See Usage.
+#' @param chromosomes Defaults to \code{NULL}.
+#' @param block_size Defaults to \code{1000}.
+#' @return The value of \code{blocks}, as built in the body.
+#' @export
 make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
   n <- as.integer(n_markers)
   b <- as.integer(block_size)
@@ -96,6 +106,16 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
   blocks
 }
 
+#' ridge_fit
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lam See Usage.
+#' @return A list with \code{beta}, \code{fitted}, \code{lam}.
+#' @export
 ridge_fit <- function(X, y, lam) {
   n <- length(y)
   if (!is.matrix(X)) {
@@ -117,6 +137,17 @@ ridge_fit <- function(X, y, lam) {
   list(beta = as.numeric(beta), fitted = fitted, lam = as.numeric(lam))
 }
 
+#' level0_predictors
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param G See Usage.
+#' @param y See Usage.
+#' @param blocks See Usage.
+#' @param n_ridge Defaults to \code{5}.
+#' @return A list with \code{predictors}, \code{meta}, \code{n_predictors}, \code{reduction}.
+#' @export
 level0_predictors <- function(G, y, blocks, n_ridge = 5) {
   n <- length(y)
   if (!is.matrix(G)) G <- do.call(rbind, G)
@@ -151,6 +182,18 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
   )
 }
 
+#' level1_stack
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param preds See Usage.
+#' @param y See Usage.
+#' @param cv Defaults to \code{"kfold"}.
+#' @param k Defaults to \code{5}.
+#' @param lam Defaults to \code{NULL}.
+#' @return A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv}, \code{lam}, \code{n_predictors}.
+#' @export
 level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
   if (!cv %in% CV_SCHEMES) {
     stop(sprintf("regmlm: cv must be one of %s, got %s",
@@ -187,6 +230,17 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
   )
 }
 
+#' loco_predictions
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param preds See Usage.
+#' @param meta See Usage.
+#' @param weights See Usage.
+#' @param chromosomes Defaults to \code{NULL}.
+#' @return A list with \code{loco}, \code{chromosomes}, \code{note}.
+#' @export
 loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
   n <- length(preds[[1]])
 
@@ -213,6 +267,17 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
   )
 }
 
+#' test_variant
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param y See Usage.
+#' @param offset Defaults to \code{NULL}.
+#' @param covariates Defaults to \code{list()}.
+#' @return A list with \code{beta}, \code{se}, \code{chisq}, \code{p_value}, \code{n}.
+#' @export
 test_variant <- function(g, y, offset = NULL, covariates = list()) {
   n <- length(y)
   if (n != length(g)) stop("regmlm: genotype and phenotype lengths differ")
@@ -253,6 +318,20 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
   list(beta = beta, se = se, chisq = chisq, p_value = p_value, n = n)
 }
 
+#' morie_regmlm
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param G See Usage.
+#' @param y See Usage.
+#' @param chromosomes Defaults to \code{NULL}.
+#' @param block_size Defaults to \code{1000}.
+#' @param n_ridge Defaults to \code{5}.
+#' @param cv Defaults to \code{"kfold"}.
+#' @param k Defaults to \code{5}.
+#' @return A list with \code{estimate}, \code{blocks}, \code{n_blocks}, \code{level0}, \code{level1}, \code{loco}, \code{chromosomes}, \code{n_predictors}, \code{reduction}, \code{method}.
+#' @export
 morie_regmlm <- function(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5,
                         cv = "kfold", k = 5) {
   if (!is.matrix(G)) G <- do.call(rbind, G)

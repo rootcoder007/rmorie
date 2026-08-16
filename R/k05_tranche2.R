@@ -215,6 +215,19 @@ morie_lord_chisq <- function(b_R, b_F, V_R, V_F = NULL) {
 # method string are identical to what this file would have defined, so
 # rather than ship a second copy that can silently drift, morie_cochran_q
 # is an alias of it. See aaa_macn.R for the references and the derivation.
+#' Cochran\'s Q: the R arm already lives in aaa_macn.R as
+#'
+#' morie_ma_cochran_q, written by another agent against this same Python
+#' module while this slice was in flight. Its arithmetic, field names
+#' and method string are identical to what this file would have defined,
+#' so rather than ship a second copy that can silently drift,
+#' morie_cochran_q is an alias of it. See aaa_macn.R for the references
+#' and the derivation.
+#'
+#' @param yi See Usage.
+#' @param vi See Usage.
+#' @return The value of \code{morie_ma_cochran_q}.
+#' @export
 morie_cochran_q <- function(yi, vi) morie_ma_cochran_q(yi, vi)
 
 #' Tarone-Ware and the weighted log-rank family

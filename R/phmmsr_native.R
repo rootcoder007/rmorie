@@ -77,6 +77,15 @@
   return(m)
 }
 
+#' phmmsr_striped_layout
+#'
+#' Part of the phmmsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param length See Usage.
+#' @param vector_width Defaults to \code{4}.
+#' @return A list with \code{order}, \code{segments}, \code{width}, \code{note}.
+#' @export
 phmmsr_striped_layout <- function(length, vector_width = 4) {
   L <- as.integer(length)
   w <- as.integer(vector_width)
@@ -100,6 +109,17 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
        note = "lanes are independent within a vector, which is what permits the parallel update")
 }
 
+#' phmmsr_msv_score
+#'
+#' Part of the phmmsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param profile See Usage.
+#' @param tau Defaults to \code{0.02}.
+#' @param lam Defaults to \code{0.7}.
+#' @return A list with \code{score}, \code{note}.
+#' @export
 phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
   s <- as.list(seq)
   P <- .phmmsr_to_matrix(profile)
@@ -143,6 +163,16 @@ phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
        note = "ungapped segments only, summed -- the gap recursion is what could not be vectorised")
 }
 
+#' phmmsr_gumbel_pvalue
+#'
+#' Part of the phmmsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param score See Usage.
+#' @param mu See Usage.
+#' @param lam See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 phmmsr_gumbel_pvalue <- function(score, mu, lam) {
   l <- as.numeric(lam)
   if (l <= 0) {
@@ -156,6 +186,16 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
   }
 }
 
+#' phmmsr_sparse_rescale
+#'
+#' Part of the phmmsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @param floor Defaults to \code{1e-30}.
+#' @param target Defaults to \code{1}.
+#' @return A list with \code{values}, \code{rescaled}, \code{factor}, \code{log_offset}, \code{note}.
+#' @export
 phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
   v <- as.numeric(values)
   if (length(v) == 0L) {
@@ -174,6 +214,19 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
        note = "the log offset must be accumulated or the final score is wrong by exactly this much")
 }
 
+#' phmmsr_search_pipeline
+#'
+#' Part of the phmmsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sequences See Usage.
+#' @param profile See Usage.
+#' @param msv_threshold Defaults to \code{0.02}.
+#' @param mu Defaults to \code{10}.
+#' @param lam Defaults to \code{0.7}.
+#' @param full_score Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{passed}, \code{msv_scores}, \code{discarded}, \code{survivor_fraction}, \code{full_scores}, \code{method}, \code{note}.
+#' @export
 phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
                                   mu = 10.0, lam = 0.7, full_score = NULL) {
   passed <- integer(0)
@@ -210,6 +263,13 @@ phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
   )
 }
 
+#' phmmsr_cheatsheet
+#'
+#' Part of the phmmsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 phmmsr_cheatsheet <- function() {
   "phmmsr: profile HMMs are more sensitive and were far slower, so accelerate with a PIPELINE. The MSV filter sums multiple UNGAPPED local segments in a striped vector layout -- dropping gaps is what makes it vectorisable -- and its scores follow the SAME Gumbel distribution as gapped local alignment scores, so the filter threshold is a P-VALUE rather than an arbitrary cutoff. SPARSE RESCALING fires only near underflow instead of at every cell, for 20x on Forward/Backward. Survivors get the full model; a filter that loses true positives is a worse method, not a faster one."
 }

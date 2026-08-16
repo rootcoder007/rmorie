@@ -41,6 +41,19 @@
   as.numeric(solve(t(L), solve(L, rhs)))
 }
 
+#' mehtad_residuals
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param s See Usage.
+#' @return A list with \code{primal}, \code{dual}, \code{mu}, \code{primal_norm}, \code{dual_norm}, \code{note}.
+#' @export
 mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)
   m <- nrow(M); n <- ncol(M)
@@ -55,6 +68,16 @@ mehtad_residuals <- function(A, b, c, x, y, s) {
        note = "an infeasible start is allowed; the residuals are driven to zero alongside mu")
 }
 
+#' max_step
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param dv See Usage.
+#' @param eta Defaults to \code{0.9995}.
+#' @return A numeric value.
+#' @export
 max_step <- function(v, dv, eta = 0.9995) {
   a <- 1.0
   for (i in seq_along(v)) {
@@ -66,6 +89,16 @@ max_step <- function(v, dv, eta = 0.9995) {
   min(1.0, as.numeric(eta) * a)
 }
 
+#' centering_parameter
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param mu_affine See Usage.
+#' @param nu Defaults to \code{3}.
+#' @return A list with \code{sigma}, \code{ratio}, \code{nu}, \code{approximation}, \code{note}.
+#' @export
 centering_parameter <- function(mu, mu_affine, nu = 3.0) {
   m <- as.numeric(mu); ma <- as.numeric(mu_affine)
   if (m <= 0)
@@ -92,6 +125,19 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
   backsolve(L, y_forw)
 }
 
+#' newton_direction
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param x See Usage.
+#' @param s See Usage.
+#' @param rp See Usage.
+#' @param rd See Usage.
+#' @param rc See Usage.
+#' @return A list with \code{dx}, \code{dy}, \code{ds}.
+#' @export
 newton_direction <- function(A, x, s, rp, rd, rc) {
   M <- as.matrix(A); storage.mode(M) <- "double"
   m <- nrow(M); n <- ncol(M)
@@ -107,6 +153,21 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 
 .mehtad_newton <- newton_direction
 
+#' solve_lp
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @param max_iter Defaults to \code{100L}.
+#' @param nu Defaults to \code{3}.
+#' @param eta Defaults to \code{0.9995}.
+#' @param corrector Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{x}, \code{y}, \code{s}, \code{mu}, \code{objective}, \code{dual_objective}, \code{iterations}, \code{corrector}, \code{primal_residual}, \code{dual_residual}, \code{converged}, \code{method}, \code{note}.
+#' @export
 solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
                      eta = 0.9995, corrector = TRUE) {
   M <- as.matrix(A); storage.mode(M) <- "double"
@@ -173,6 +234,15 @@ mehrotras_predictor <- solve_lp
         "second derivative.", sep = "")
 }
 
+#' morie_mehtad
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_mehtad <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("mehtad: op must be one of residuals, max_step, centering_parameter, newton_direction, solve_lp, cheatsheet")

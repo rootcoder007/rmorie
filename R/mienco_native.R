@@ -79,6 +79,18 @@
   mean(p) - lse
 }
 
+#' morie_mienco
+#'
+#' Part of the mienco_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param summary See Usage.
+#' @param patches See Usage.
+#' @param other_patches See Usage.
+#' @param critic See Usage.
+#' @param estimator Defaults to \code{"jsd"}.
+#' @return A list with \code{estimate}, \code{mi_lower_bound}, \code{estimator}, \code{n_patches}, \code{n_negative_patches}, \code{method}, \code{note}.
+#' @export
 morie_mienco <- function(summary, patches, other_patches, critic, estimator = "jsd") {
   estimators <- c("jsd", "dv")
   if (!(estimator %in% estimators)) {

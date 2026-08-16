@@ -239,6 +239,30 @@
   result
 }
 
+#' morie_reinfc
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reward_fn See Usage.
+#' @param x Defaults to \code{NULL}.
+#' @param w Defaults to \code{NULL}.
+#' @param p Defaults to \code{NULL}.
+#' @param mu Defaults to \code{0}.
+#' @param sigma Defaults to \code{1}.
+#' @param unit Defaults to \code{"bernoulli-logistic"}.
+#' @param baseline Defaults to \code{"comparison"}.
+#' @param mode Defaults to \code{"immediate"}.
+#' @param alpha Defaults to \code{0.1}.
+#' @param gamma Defaults to \code{0.9}.
+#' @param rho Defaults to \code{0.1}.
+#' @param episode_length Defaults to \code{1}.
+#' @param trials Defaults to \code{100}.
+#' @param eligibility Defaults to \code{"p"}.
+#' @param rate_scaling Defaults to \code{"sigma2"}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{.reinfc_run_logistic}.
+#' @export
 morie_reinfc <- function(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0.0, sigma = 1.0,
                          unit = "bernoulli-logistic", baseline = "comparison", mode = "immediate",
                          alpha = 0.1, gamma = 0.9, rho = 0.1, episode_length = 1, trials = 100,
@@ -317,6 +341,18 @@ morie_reinfc <- function(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0.0, sigm
 
 morie_reinforce <- morie_reinfc
 
+#' morie_reinfc_expected_update
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param r0 See Usage.
+#' @param r1 See Usage.
+#' @param alpha Defaults to \code{1}.
+#' @param b Defaults to \code{0}.
+#' @return The value of \code{list}.
+#' @export
 morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
   p <- as.numeric(p)
   if (p <= 0 || p >= 1) {
@@ -327,6 +363,13 @@ morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
   list(as.numeric(upd), as.numeric(grad))
 }
 
+#' morie_reinfc_cheatsheet
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_reinfc_cheatsheet <- function() {
   paste("reinfc: REINFORCE, Delta w = alpha (r - b) dln g/dw ",
         "(Williams 1992 eq. 2). Units bernoulli (eq. 5, L_R-I), ",

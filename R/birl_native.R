@@ -48,6 +48,17 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
   M[, n + 1] / diag(M)
 }
 
+#' policy_values
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param R See Usage.
+#' @param gamma See Usage.
+#' @param policy See Usage.
+#' @return The value of \code{.solve}.
+#' @export
 policy_values <- function(T, R, gamma, policy) {
   m <- .mdp(T, gamma)
   nS <- m$nS
@@ -59,6 +70,17 @@ policy_values <- function(T, R, gamma, policy) {
   .solve(A, as.numeric(R))
 }
 
+#' q_values
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param R See Usage.
+#' @param gamma See Usage.
+#' @param V See Usage.
+#' @return The value of \code{Q}, as built in the body.
+#' @export
 q_values <- function(T, R, gamma, V) {
   m <- .mdp(T, gamma); nS <- m$nS; nA <- m$nA
   Q <- matrix(0, nS, nA)
@@ -68,6 +90,18 @@ q_values <- function(T, R, gamma, V) {
   Q
 }
 
+#' policy_iteration
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param R See Usage.
+#' @param gamma See Usage.
+#' @param policy Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{200}.
+#' @return A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
+#' @export
 policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   m <- .mdp(T, gamma); nS <- m$nS; nA <- m$nA
   if (length(R) != nS) stop("birl: one reward per state is required")
@@ -103,6 +137,20 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   total
 }
 
+#' log_prior
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R See Usage.
+#' @param prior Defaults to \code{"uniform"}.
+#' @param scale Defaults to \code{1}.
+#' @param r_max Defaults to \code{NULL}.
+#' @param J Defaults to \code{0.1}.
+#' @param H Defaults to \code{0}.
+#' @param neighbours Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
                       J = 0.1, H = 0, neighbours = NULL) {
   if (!(prior %in% PRIORS))
@@ -129,6 +177,27 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
   f
 }
 
+#' policy_walk
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param observations See Usage.
+#' @param gamma See Usage.
+#' @param n_iter Defaults to \code{1000}.
+#' @param delta Defaults to \code{0.25}.
+#' @param alpha Defaults to \code{1}.
+#' @param prior Defaults to \code{"uniform"}.
+#' @param scale Defaults to \code{1}.
+#' @param r_max Defaults to \code{1}.
+#' @param J Defaults to \code{0.1}.
+#' @param H Defaults to \code{0}.
+#' @param burn Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param R0 Defaults to \code{NULL}.
+#' @return A list with \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{final_policy}.
+#' @export
 policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
                         alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                         J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
@@ -190,6 +259,27 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
        final_policy = pi)
 }
 
+#' birl
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param observations See Usage.
+#' @param gamma Defaults to \code{0.9}.
+#' @param n_iter Defaults to \code{1000}.
+#' @param delta Defaults to \code{0.25}.
+#' @param alpha Defaults to \code{1}.
+#' @param prior Defaults to \code{"uniform"}.
+#' @param scale Defaults to \code{1}.
+#' @param r_max Defaults to \code{1}.
+#' @param J Defaults to \code{0.1}.
+#' @param H Defaults to \code{0}.
+#' @param burn Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param R0 Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{reward_mean}, \code{reward_sd}, \code{policy}, \code{V}, \code{Q}, \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{n_samples}, \code{prior}, \code{alpha}, \code{delta}, \code{method}, \code{note}.
+#' @export
 birl <- function(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25,
                  alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                  J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {

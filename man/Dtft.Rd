@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{Dtft}
+\alias{Dtft}
+\title{Eq (3.78): discrete signal, CONTINUOUS frequency -- that is the whole}
+\usage{
+Dtft(x, omega, n0 = 0)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{omega}{See Usage.}
+\item{n0}{Defaults to \code{0}.}
+}
+\description{
+distinction from the DFT of eq (3.80), which samples this at N points.
+}
+\value{
+A list with \code{X}, \code{omega}, \code{n0}, \code{n}, \code{method}.
+}
+\keyword{internal}

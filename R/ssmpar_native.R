@@ -37,6 +37,15 @@
 }
 
 
+#' The recurrence as written: L steps, no parallelism
+#'
+#' Part of the ssmpar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pairs See Usage.
+#' @param x0 Defaults to \code{0}.
+#' @return A list with \code{states}, \code{steps}, \code{depth}, \code{note}.
+#' @export
 sequential_scan <- function(pairs, x0 = 0.0) {
   # The recurrence as written: L steps, no parallelism.
   n <- length(pairs)
@@ -81,6 +90,14 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 }
 
 
+#' Blelloch scan over the affine composition
+#'
+#' Same states as sequential_scan, O(log L) depth.
+#'
+#' @param pairs See Usage.
+#' @param x0 Defaults to \code{0}.
+#' @return A list with \code{states}, \code{prefix}, \code{depth}, \code{work}, \code{note}.
+#' @export
 parallel_scan <- function(pairs, x0 = 0.0) {
   # Blelloch scan over the affine composition.
   # Same states as sequential_scan, O(log L) depth.
@@ -131,6 +148,17 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 }
 
 
+#' Test (a o b) o c == a o (b o c) directly
+#'
+#' Part of the ssmpar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{left}, \code{right}, \code{deviation}, \code{associative}, \code{note}.
+#' @export
 check_associativity <- function(a, b, c, tol = 1e-12) {
   # Test (a o b) o c == a o (b o c) directly.
   left <- .ssmpar_compose(.ssmpar_compose(a, b), c)
@@ -142,6 +170,14 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 }
 
 
+#' Sequential against parallel depth
+#'
+#' Part of the ssmpar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param length See Usage.
+#' @return A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth}, \code{work}, \code{speedup}, \code{method}, \code{note}.
+#' @export
 scan_depth <- function(length) {
   # Sequential against parallel depth.
   n <- as.integer(length)

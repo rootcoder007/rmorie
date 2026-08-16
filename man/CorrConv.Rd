@@ -1,0 +1,20 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{CorrConv}
+\alias{CorrConv}
+\title{Correlation IS convolution with one sequence reversed}
+\usage{
+CorrConv(x, y)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{y}{See Usage.}
+}
+\description{
+Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{ccf}, \code{via_convolution}, \code{lags}, \code{max_difference}, \code{identity_holds}, \code{correlation_is_convolution_with_one_reversed}, \code{method}.
+}
+\keyword{internal}

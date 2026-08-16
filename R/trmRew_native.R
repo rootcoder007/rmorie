@@ -50,6 +50,15 @@
   do.call(morie_unifAlg_app, c(list(symbol), args))
 }
 
+#' A rewrite rule, checked for the two conditions rules need
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lhs See Usage.
+#' @param rhs See Usage.
+#' @return The value of \code{list}.
+#' @export
 morie_trmRew_rule <- function(lhs, rhs) {
   # A rewrite rule, checked for the two conditions rules need.
   if (.trmRew_is_var(lhs)) {
@@ -66,6 +75,13 @@ morie_trmRew_rule <- function(lhs, rhs) {
   list(lhs, rhs)
 }
 
+#' Every position in a term, as a 0-based integer vector of argument
+#'
+#' indices. The empty position is integer(0).
+#'
+#' @param t See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_trmRew_positions <- function(t) {
   # Every position in a term, as a 0-based integer vector of argument
   # indices. The empty position is integer(0).
@@ -81,6 +97,15 @@ morie_trmRew_positions <- function(t) {
   out
 }
 
+#' The subterm at a position
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param pos See Usage.
+#' @return The value of \code{cur}, as built in the body.
+#' @export
 morie_trmRew_subterm_at <- function(t, pos) {
   # The subterm at a position.
   cur <- t
@@ -93,6 +118,16 @@ morie_trmRew_subterm_at <- function(t, pos) {
   cur
 }
 
+#' The term with the subterm at pos replaced
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param pos See Usage.
+#' @param new See Usage.
+#' @return The value of \code{.trmRew_app}.
+#' @export
 morie_trmRew_replace_at <- function(t, pos, new) {
   # The term with the subterm at pos replaced.
   if (length(pos) == 0L) {
@@ -107,6 +142,16 @@ morie_trmRew_replace_at <- function(t, pos, new) {
   .trmRew_app(t[[2]], args)
 }
 
+#' One rewrite, or NULL when the term is in normal form. Innermost
+#'
+#' reduces arguments before the term above them; outermost the other way
+#' round.
+#'
+#' @param t See Usage.
+#' @param rules See Usage.
+#' @param strategy Defaults to \code{"innermost"}.
+#' @return Nothing; the function is called for its effect.
+#' @export
 morie_trmRew_rewrite_step <- function(t, rules, strategy="innermost") {
   # One rewrite, or NULL when the term is in normal form. Innermost
   # reduces arguments before the term above them; outermost the other
@@ -142,6 +187,17 @@ morie_trmRew_rewrite_step <- function(t, rules, strategy="innermost") {
   NULL
 }
 
+#' morie_trmRew_normal_form
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param rules See Usage.
+#' @param strategy Defaults to \code{"innermost"}.
+#' @param max_steps Defaults to \code{10000}.
+#' @return Nothing; this branch always raises.
+#' @export
 morie_trmRew_normal_form <- function(t, rules, strategy="innermost",
                                      max_steps=10000) {
   # Rewrite to exhaustion. Raises if the step budget runs out.
@@ -168,6 +224,16 @@ morie_trmRew_normal_form <- function(t, rules, strategy="innermost",
   }
 }
 
+#' The lexicographic path order, s >_lpo t
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param t See Usage.
+#' @param precedence See Usage.
+#' @return A logical value.
+#' @export
 morie_trmRew_lpo_greater <- function(s, t, precedence) {
   # The lexicographic path order, s >_lpo t.
   if (identical(s, t)) {
@@ -213,6 +279,14 @@ morie_trmRew_lpo_greater <- function(s, t, precedence) {
   FALSE
 }
 
+#' Whether every rule strictly decreases in the LPO. Sufficient, not
+#'
+#' necessary. Returns 0-based indices of unoriented rules.
+#'
+#' @param rules See Usage.
+#' @param precedence See Usage.
+#' @return A list with \code{terminating}, \code{unoriented}, \code{method}.
+#' @export
 morie_trmRew_is_terminating <- function(rules, precedence) {
   # Whether every rule strictly decreases in the LPO. Sufficient, not
   # necessary. Returns 0-based indices of unoriented rules.
@@ -265,6 +339,14 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
   out
 }
 
+#' Every overlap between two left-hand sides
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rules See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_trmRew_critical_pairs <- function(rules) {
   # Every overlap between two left-hand sides.
   out <- list()
@@ -279,6 +361,17 @@ morie_trmRew_critical_pairs <- function(rules) {
   out
 }
 
+#' Whether two terms reach a common normal form
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param rules See Usage.
+#' @param max_steps Defaults to \code{10000}.
+#' @return The value of \code{res}, as built in the body.
+#' @export
 morie_trmRew_joinable <- function(a, b, rules, max_steps=10000) {
   # Whether two terms reach a common normal form.
   res <- tryCatch({
@@ -289,6 +382,15 @@ morie_trmRew_joinable <- function(a, b, rules, max_steps=10000) {
   res
 }
 
+#' The Critical Pair Lemma, applied
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rules See Usage.
+#' @param max_steps Defaults to \code{10000}.
+#' @return A list with \code{estimate}, \code{locally_confluent}, \code{n_critical_pairs}, \code{unjoinable}, \code{method}.
+#' @export
 morie_trmRew_is_locally_confluent <- function(rules, max_steps=10000) {
   # The Critical Pair Lemma, applied.
   cps <- morie_trmRew_critical_pairs(rules)
@@ -303,6 +405,16 @@ morie_trmRew_is_locally_confluent <- function(rules, max_steps=10000) {
        method="Knuth & Bendix (1970) Critical Pair Lemma")
 }
 
+#' Confluence via Newman\'s lemma: terminating and locally confluent
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rules See Usage.
+#' @param precedence See Usage.
+#' @param max_steps Defaults to \code{10000}.
+#' @return A list with \code{estimate}, \code{confluent}, \code{terminating}, \code{locally_confluent}, \code{n_critical_pairs}, \code{unjoinable}, \code{method}.
+#' @export
 morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
   # Confluence via Newman's lemma: terminating and locally confluent.
   term <- morie_trmRew_is_terminating(rules, precedence)
@@ -370,6 +482,18 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
   .trmRew_canonical(out)
 }
 
+#' morie_trmRew_complete
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param equations See Usage.
+#' @param precedence See Usage.
+#' @param max_rules Defaults to \code{60}.
+#' @param max_steps Defaults to \code{10000}.
+#' @param max_iter Defaults to \code{4000}.
+#' @return The value of \code{.trmRew_incomplete}.
+#' @export
 morie_trmRew_complete <- function(equations, precedence, max_rules=60,
                                   max_steps=10000, max_iter=4000) {
   # Knuth-Bendix completion of a set of equations (Huet's form: rules
@@ -442,6 +566,16 @@ morie_trmRew_complete <- function(equations, precedence, max_rules=60,
   .trmRew_incomplete(rules, "iteration budget exhausted", NULL)
 }
 
+#' Whether two terms are equal in the theory the rules present. Sound
+#'
+#' only for a convergent system.
+#'
+#' @param s See Usage.
+#' @param t See Usage.
+#' @param rules See Usage.
+#' @param max_steps Defaults to \code{10000}.
+#' @return A list with \code{equal}, \code{left}, \code{right}.
+#' @export
 morie_trmRew_decides <- function(s, t, rules, max_steps=10000) {
   # Whether two terms are equal in the theory the rules present. Sound
   # only for a convergent system.
@@ -450,6 +584,17 @@ morie_trmRew_decides <- function(s, t, rules, max_steps=10000) {
   list(equal=identical(a, b), left=a, right=b)
 }
 
+#' morie_trmRew_term_rewriting
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param term See Usage.
+#' @param rules See Usage.
+#' @param strategy Defaults to \code{"innermost"}.
+#' @param max_steps Defaults to \code{10000}.
+#' @return A list with \code{estimate}, \code{normal_form}, \code{steps}, \code{trace}, \code{strategy}, \code{method}.
+#' @export
 morie_trmRew_term_rewriting <- function(term, rules, strategy="innermost",
                                         max_steps=10000) {
   # Entry point: reduce term under rules.
@@ -459,6 +604,13 @@ morie_trmRew_term_rewriting <- function(term, rules, strategy="innermost",
        method=sprintf("leftmost-%s rewriting to normal form", strategy))
 }
 
+#' morie_trmRew_cheatsheet
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_trmRew_cheatsheet <- function() {
   paste0(
     "trmRew: a rule l -> r rewrites a subterm that MATCHES l (rule ",

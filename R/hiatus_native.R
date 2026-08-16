@@ -41,6 +41,16 @@
   list(b = b, nv = nv, m = as.numeric(mu), sg = Sm, n = n)
 }
 
+#' basic_reproduction_numbers
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param nu See Usage.
+#' @param mu See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 basic_reproduction_numbers <- function(beta, nu, mu) {
   b <- as.numeric(beta)
   n <- length(b)
@@ -57,6 +67,17 @@ basic_reproduction_numbers <- function(beta, nu, mu) {
   out
 }
 
+#' endemic_equilibrium
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param nu See Usage.
+#' @param mu See Usage.
+#' @param strain Defaults to \code{0L}.
+#' @return A list with \code{R0}, \code{S}, \code{I}.
+#' @export
 endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
   R0 <- basic_reproduction_numbers(beta, nu, mu)[as.integer(strain) + 1L]
   if (R0 <= 1.0) {
@@ -71,6 +92,19 @@ endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
        I = as.numeric(mu) * (1.0 - 1.0 / R0) / d)
 }
 
+#' derivatives
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param S See Usage.
+#' @param I See Usage.
+#' @param beta See Usage.
+#' @param nu See Usage.
+#' @param mu See Usage.
+#' @param sigma See Usage.
+#' @return A list with \code{dS}, \code{dI}.
+#' @export
 derivatives <- function(S, I, beta, nu, mu, sigma) {
   chk <- ._check(beta, nu, mu, sigma)
   b <- chk$b
@@ -187,6 +221,16 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
        method = paste("status-based many-strain model, Gog & Grenfell (2002), integrated by RK4"))
 }
 
+#' linear_strain_space
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param width Defaults to \code{2}.
+#' @param floor Defaults to \code{0}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 linear_strain_space <- function(n, width = 2.0, floor = 0.0) {
   if (as.integer(n) < 1L) stop("hiatus: n must be at least 1")
   if (as.numeric(width) <= 0.0) stop("hiatus: width must be positive")
@@ -206,6 +250,23 @@ twostrainhiatus <- .hiatus_simulate
 hiatus_model <- .hiatus_simulate
 hiatusmodel <- .hiatus_simulate
 
+#' morie_hiatus
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param nu See Usage.
+#' @param mu See Usage.
+#' @param sigma See Usage.
+#' @param S0 Defaults to \code{NULL}.
+#' @param I0 Defaults to \code{NULL}.
+#' @param t_end Defaults to \code{2000}.
+#' @param dt Defaults to \code{0.05}.
+#' @param mutation Defaults to \code{0}.
+#' @param record_every Defaults to \code{100L}.
+#' @return The value of \code{.hiatus_simulate}.
+#' @export
 morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
                          t_end = 2000.0, dt = 0.05, mutation = 0.0,
                          record_every = 100L) {

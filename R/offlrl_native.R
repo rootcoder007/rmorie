@@ -57,6 +57,25 @@
 
 .offlrl_key <- function(s, a) paste0(s, "\r", a)
 
+#' offlrl
+#'
+#' Part of the offlrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dataset See Usage.
+#' @param states Defaults to \code{NULL}.
+#' @param actions Defaults to \code{NULL}.
+#' @param alpha Defaults to \code{1}.
+#' @param gamma Defaults to \code{0.99}.
+#' @param variant Defaults to \code{"H"}.
+#' @param backup Defaults to \code{"max"}.
+#' @param policy Defaults to \code{NULL}.
+#' @param mu Defaults to \code{NULL}.
+#' @param lr Defaults to \code{0.5}.
+#' @param iters Defaults to \code{2000}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{estimate}, \code{q}, \code{value}, \code{greedy}, \code{behavior}, \code{counts}, \code{penalty}, \code{bellman_error}, \code{objective}, \code{alpha}, \code{variant}, \code{backup}, \code{n_transitions}, \code{method}.
+#' @export
 offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,
                    gamma = 0.99, variant = "H", backup = "max",
                    policy = NULL, mu = NULL, lr = 0.5, iters = 2000,

@@ -1,0 +1,22 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{MfMaxSnr}
+\alias{MfMaxSnr}
+\title{Eq (4.46) rearranged: M_y^2 / P_eta_o = 2 E_x / P_eta_i, the familiar}
+\usage{
+MfMaxSnr(x, noise_power, t = NULL, dt = 1)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{noise_power}{See Usage.}
+\item{t}{Defaults to \code{NULL}.}
+\item{dt}{Defaults to \code{1}.}
+}
+\description{
+2E/N0.  It depends on the signal ONLY through its energy -- the same detectability from a short loud transient as from a long quiet one of equal energy.  That is the substantive content of the theorem.
+}
+\value{
+A list with \code{snr}, \code{snr_db}, \code{energy}, \code{noise_power}, \code{n0}, \code{depends_only_on_energy}, \code{method}.
+}
+\keyword{internal}

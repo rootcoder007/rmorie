@@ -25,6 +25,15 @@
 .FAIRRC_EPS <- 1e-12
 .FAIRRC_MEASURES <- c("rND", "rKL", "rRD")
 
+#' cutoffs
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param N See Usage.
+#' @param step Defaults to \code{10}.
+#' @return The value of \code{seq}.
+#' @export
 cutoffs <- function(N, step = 10) {
   n <- as.integer(N); s <- as.integer(step)
   if (n < s)
@@ -63,6 +72,15 @@ cutoffs <- function(N, step = 10) {
   tot
 }
 
+#' Z: the value of the worst arrangement. The protected group placed
+#'
+#' entirely last maximises the deviation at every cut-off.
+#'
+#' @param protected See Usage.
+#' @param measure Defaults to \code{"rND"}.
+#' @param step Defaults to \code{10}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 normalizer <- function(protected, measure = "rND", step = 10) {
   # Z: the value of the worst arrangement. The protected group placed
   # entirely last maximises the deviation at every cut-off.
@@ -105,16 +123,46 @@ normalizer <- function(protected, measure = "rND", step = 10) {
   pay
 }
 
+#' Normalised discounted difference
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param protected See Usage.
+#' @param step Defaults to \code{10}.
+#' @param normalize Defaults to \code{TRUE}.
+#' @return The value of \code{.measure}.
+#' @export
 rND <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted difference.
   .measure(protected, "rND", step, normalize)
 }
 
+#' Normalised discounted KL divergence
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param protected See Usage.
+#' @param step Defaults to \code{10}.
+#' @param normalize Defaults to \code{TRUE}.
+#' @return The value of \code{.measure}.
+#' @export
 rKL <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted KL divergence.
   .measure(protected, "rKL", step, normalize)
 }
 
+#' Normalised discounted ratio. Only meaningful when the protected
+#'
+#' group is the minority -- it does not treat the two groups
+#' symmetrically.
+#'
+#' @param protected See Usage.
+#' @param step Defaults to \code{10}.
+#' @param normalize Defaults to \code{TRUE}.
+#' @return The value of \code{.measure}.
+#' @export
 rRD <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted ratio. Only meaningful when the protected
   # group is the minority -- it does not treat the two groups
@@ -149,6 +197,17 @@ fairness_rec <- rND
 fairnessrec <- rND
 
 # morie entry point
+#' Morie entry point
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param protected See Usage.
+#' @param measure Defaults to \code{"rND"}.
+#' @param step Defaults to \code{10}.
+#' @param normalize Defaults to \code{TRUE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 morie_fairRC <- function(protected, measure = "rND", step = 10,
                          normalize = TRUE) {
   if (!(measure %in% .FAIRRC_MEASURES))

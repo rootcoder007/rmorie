@@ -24,6 +24,22 @@
 # direction system (with a small ridge to keep it well posed),
 # the same mean-centring, and the same held-out verification.
 
+#' morie_tlheic
+#'
+#' Part of the tlheic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param psi_of_P Defaults to \code{NULL}.
+#' @param basis Defaults to \code{NULL}.
+#' @param D Defaults to \code{NULL}.
+#' @param score Defaults to \code{NULL}.
+#' @param weights Defaults to \code{NULL}.
+#' @param h Defaults to \code{1e-05}.
+#' @param tol Defaults to \code{1e-04}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param mode Defaults to \code{c("estimate", "verify", "grad", "deriv")}.
+#' @return The value of \code{estimate_eic}.
+#' @export
 morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
                          score = NULL, weights = NULL,
                          h = 1e-5, tol = 1e-4, ridge = 1e-8,
@@ -41,6 +57,17 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
                ridge = ridge)
 }
 
+#' numerical_derivative
+#'
+#' Part of the tlheic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param psi_of_P See Usage.
+#' @param weights See Usage.
+#' @param score See Usage.
+#' @param h Defaults to \code{1e-05}.
+#' @return A numeric value.
+#' @export
 numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
   w <- as.numeric(weights); s <- as.numeric(score)
   if (length(w) != length(s))
@@ -56,6 +83,16 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
   (psi_of_P(tilt(h)) - psi_of_P(tilt(-h))) / (2 * h)
 }
 
+#' gradient_inner_product
+#'
+#' Part of the tlheic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param score See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 gradient_inner_product <- function(D, score, weights = NULL) {
   d <- as.numeric(D); s <- as.numeric(score)
   if (length(d) != length(s))
@@ -67,6 +104,18 @@ gradient_inner_product <- function(D, score, weights = NULL) {
   sum(w * d * s) / t
 }
 
+#' estimate_eic
+#'
+#' Part of the tlheic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param psi_of_P See Usage.
+#' @param basis See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param h Defaults to \code{1e-05}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{estimate}, \code{D}, \code{coefficients}, \code{n_directions}, \code{mean}, \code{method}, \code{note}.
+#' @export
 estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
                          ridge = 1e-8) {
   B <- as.matrix(basis)
@@ -93,6 +142,19 @@ estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
        note = "no analytic derivation: the gradient is identified by how the parameter MOVES under perturbation")
 }
 
+#' verify_gradient
+#'
+#' Part of the tlheic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param psi_of_P See Usage.
+#' @param D See Usage.
+#' @param score See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param h Defaults to \code{1e-05}.
+#' @param tol Defaults to \code{1e-04}.
+#' @return A list with \code{derivative}, \code{inner_product}, \code{difference}, \code{verified}, \code{note}.
+#' @export
 verify_gradient <- function(psi_of_P, D, score, weights = NULL,
                             h = 1e-5, tol = 1e-4) {
   D <- as.numeric(D)

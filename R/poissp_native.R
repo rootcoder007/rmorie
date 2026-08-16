@@ -275,6 +275,13 @@ morie_poissp <- function(counts, X = NULL, offset = NULL, W = NULL,
 #' @export
 morie_poisson_spatial_glm <- morie_poissp
 
+#' morie_poissp_cheatsheet
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_poissp_cheatsheet <- function() {
   paste0("poissp: Poisson areal regression, log mu = X beta + u with a ",
          "known offset E entering at coefficient one, and u ~ CAR with ",

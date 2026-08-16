@@ -46,6 +46,17 @@
   V %*% diag(inv, nrow = length(inv)) %*% t(V)
 }
 
+#' morie_funCA_functional_cca
+#'
+#' Part of the funCA_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param p Defaults to \code{NULL}.
+#' @param q Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{correlations}, \code{weights_x}, \code{weights_y}, \code{variates_x}, \code{variates_y}, \code{p}, \code{q}, \code{explained_x}, \code{explained_y}, \code{eigenvalues_x}, \code{eigenvalues_y}, \code{n}, \code{method}, \code{note}.
+#' @export
 morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"
   Ym <- as.matrix(Y); storage.mode(Ym) <- "double"

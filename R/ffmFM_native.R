@@ -22,6 +22,17 @@
 
 .FFMFM_EPS <- 1e-12
 
+#' n_parameters
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_features See Usage.
+#' @param n_fields See Usage.
+#' @param k_dim See Usage.
+#' @param model Defaults to \code{"ffm"}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 n_parameters <- function(n_features, n_fields, k_dim,
                          model = "ffm") {
   n <- as.integer(n_features)
@@ -32,6 +43,16 @@ n_parameters <- function(n_features, n_fields, k_dim,
   if (model == "ffm") n * F * kk else n * kk
 }
 
+#' phi
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fields See Usage.
+#' @param W See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 phi <- function(x, fields, W) {
   nz <- list()
   for (pair in x) {
@@ -56,6 +77,15 @@ phi <- function(x, fields, W) {
   tot
 }
 
+#' logistic_loss
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param phi_val See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 logistic_loss <- function(y, phi_val) {
   yv <- as.numeric(y)
   if (!(yv == -1 || yv == 1))
@@ -64,6 +94,23 @@ logistic_loss <- function(y, phi_val) {
   if (z < 700) log(1 + exp(z)) else z
 }
 
+#' fit_ffm
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param labels See Usage.
+#' @param fields See Usage.
+#' @param n_features See Usage.
+#' @param n_fields See Usage.
+#' @param k_dim Defaults to \code{4}.
+#' @param eta Defaults to \code{0.1}.
+#' @param lam Defaults to \code{2e-05}.
+#' @param epochs Defaults to \code{10}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss}, \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
+#' @export
 fit_ffm <- function(rows, labels, fields, n_features, n_fields,
                     k_dim = 4, eta = 0.1, lam = 2e-5, epochs = 10,
                     seed = 0) {
@@ -153,6 +200,23 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
         sep = " ")
 }
 
+#' morie_ffmFM
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param labels See Usage.
+#' @param fields See Usage.
+#' @param n_features See Usage.
+#' @param n_fields See Usage.
+#' @param k_dim Defaults to \code{4}.
+#' @param eta Defaults to \code{0.1}.
+#' @param lam Defaults to \code{2e-05}.
+#' @param epochs Defaults to \code{10}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{fit_ffm}.
+#' @export
 morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
                         k_dim = 4, eta = 0.1, lam = 2e-5,
                         epochs = 10, seed = 0) {
@@ -160,6 +224,23 @@ morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
           lam, epochs, seed)
 }
 
+#' fieldawarefm
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param labels See Usage.
+#' @param fields See Usage.
+#' @param n_features See Usage.
+#' @param n_fields See Usage.
+#' @param k_dim Defaults to \code{4}.
+#' @param eta Defaults to \code{0.1}.
+#' @param lam Defaults to \code{2e-05}.
+#' @param epochs Defaults to \code{10}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{fit_ffm}.
+#' @export
 fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
                          k_dim = 4, eta = 0.1, lam = 2e-5,
                          epochs = 10, seed = 0) {
@@ -167,6 +248,23 @@ fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
           lam, epochs, seed)
 }
 
+#' field_aware_fm
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param labels See Usage.
+#' @param fields See Usage.
+#' @param n_features See Usage.
+#' @param n_fields See Usage.
+#' @param k_dim Defaults to \code{4}.
+#' @param eta Defaults to \code{0.1}.
+#' @param lam Defaults to \code{2e-05}.
+#' @param epochs Defaults to \code{10}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{fit_ffm}.
+#' @export
 field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
                            k_dim = 4, eta = 0.1, lam = 2e-5,
                            epochs = 10, seed = 0) {

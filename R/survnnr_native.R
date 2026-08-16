@@ -75,6 +75,17 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
   list(W = W, b = b)
 }
 
+#' morie_survnnr_forward
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param W See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @param activation Defaults to \code{"tanh"}.
+#' @return A list with \code{output}, \code{pre}, \code{acts}.
+#' @export
 morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
   a <- as.numeric(x)
   pre <- list()
@@ -92,6 +103,16 @@ morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
   list(output = a[1], pre = pre, acts = acts)
 }
 
+#' morie_survnnr_partial_loglik
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param risk See Usage.
+#' @return A list with \code{loglik}, \code{average}, \code{n_events}, \code{ties}.
+#' @export
 morie_survnnr_partial_loglik <- function(times, events, risk) {
   n <- length(times)
   if (!(n == length(events) && n == length(risk))) {
@@ -130,6 +151,23 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
   g
 }
 
+#' morie_survnnr_fit
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param hidden Defaults to \code{c()}.
+#' @param activation Defaults to \code{"tanh"}.
+#' @param l2 Defaults to \code{0}.
+#' @param lr Defaults to \code{0.1}.
+#' @param n_epochs Defaults to \code{400}.
+#' @param seed Defaults to \code{0}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{estimate}, \code{W}, \code{b}, \code{activation}, \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk}, \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties}, \code{scale_note}, \code{method}.
+#' @export
 morie_survnnr_fit <- function(X, times, events, hidden = c(),
                               activation = "tanh", l2 = 0.0, lr = 0.1,
                               n_epochs = 400, seed = 0, tol = 1e-10) {
@@ -202,11 +240,28 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
   )
 }
 
+#' morie_survnnr_risk_score
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fit_result See Usage.
+#' @param X See Usage.
+#' @return A vector, from \code{sapply}.
+#' @export
 morie_survnnr_risk_score <- function(fit_result, X) {
   sapply(X, function(x) morie_survnnr_forward(fit_result$W, fit_result$b, x,
                                               fit_result$activation)$output)
 }
 
+#' morie_survnnr_baseline_hazard
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fit_result See Usage.
+#' @return A list with \code{time}, \code{cumulative_hazard}.
+#' @export
 morie_survnnr_baseline_hazard <- function(fit_result) {
   t <- fit_result$times
   e <- fit_result$events
@@ -228,6 +283,16 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
   list(time = out_t, cumulative_hazard = out_h)
 }
 
+#' morie_survnnr_survival_function
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fit_result See Usage.
+#' @param x See Usage.
+#' @param times Defaults to \code{NULL}.
+#' @return A list with \code{time}, \code{survival}.
+#' @export
 morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
   base <- morie_survnnr_baseline_hazard(fit_result)
   r <- exp(morie_survnnr_risk_score(fit_result, list(x))[[1]])
@@ -270,10 +335,28 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
   num / den
 }
 
+#' morie_survnnr_concordance
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fit_result See Usage.
+#' @param X See Usage.
+#' @param times See Usage.
+#' @param events See Usage.
+#' @return The value of \code{.survnnr_c_index}.
+#' @export
 morie_survnnr_concordance <- function(fit_result, X, times, events) {
   .survnnr_c_index(times, events, morie_survnnr_risk_score(fit_result, X))
 }
 
+#' morie_survnnr_cheatsheet
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_survnnr_cheatsheet <- function() {
   paste("survnnr: DeepSurv = Cox's partial likelihood with the linear",
         "predictor replaced by an MLP output. Loss is the AVERAGE negative",

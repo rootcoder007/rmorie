@@ -61,6 +61,20 @@
 # which minimises the variance for a fixed n. A floor keeps every unit
 # reachable -- a zero inclusion probability makes the estimand
 # unidentifiable for that stratum.
+#' Inclusion_probabilities: Choose pi_i, summing to n
+#'
+#' adaptive sets pi_i proportional to the expected influence given V_i,
+#' which minimises the variance for a fixed n. A floor keeps every unit
+#' reachable -- a zero inclusion probability makes the estimand
+#' unidentifiable for that stratum.
+#'
+#' @param V See Usage.
+#' @param n See Usage.
+#' @param design Defaults to \code{"adaptive"}.
+#' @param influence Defaults to \code{NULL}.
+#' @param floor Defaults to \code{0.01}.
+#' @return A list with \code{pi}, \code{design}, \code{n_expected}, \code{N}, \code{min_pi}, \code{note}.
+#' @export
 morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
                                                   influence=NULL,
                                                   floor=0.01) {
@@ -133,6 +147,15 @@ morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
 }
 
 # draw_sample: Poisson sampling: include unit i with probability pi_i.
+#' Draw_sample: Poisson sampling: include unit i with probability pi_i
+#'
+#' Part of the tlsurvy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pi See Usage.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{selected}, \code{n}, \code{fraction}.
+#' @export
 morie_tlsurvy_draw_sample <- function(pi, seed=0) {
   p <- as.numeric(pi)
   e <- .ghc_rng(seed)
@@ -151,6 +174,18 @@ morie_tlsurvy_draw_sample <- function(pi, seed=0) {
 # horvitz_thompson: The design-unbiased mean: (1/N) sum_{i in S} y_i/pi_i.
 # Unbiased for the FULL-data mean, which is the quantity of interest
 # -- the sample is a computational device, not the population.
+#' Horvitz_thompson: The design-unbiased mean: (1/N) sum_{i in S}
+#' y_i/pi_i
+#'
+#' Unbiased for the FULL-data mean, which is the quantity of interest --
+#' the sample is a computational device, not the population.
+#'
+#' @param values See Usage.
+#' @param pi See Usage.
+#' @param selected See Usage.
+#' @param N Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{se}, \code{n_used}, \code{N}.
+#' @export
 morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N=NULL) {
   y <- as.numeric(values)
   p <- as.numeric(pi)
@@ -173,6 +208,18 @@ morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N=NULL) {
 # Adaptation can only help when the influence is unevenly spread;
 # where it is flat the two coincide, and claiming otherwise would be
 # claiming something for nothing.
+#' Design_efficiency: Adaptive against uniform sampling at the same n
+#'
+#' Adaptation can only help when the influence is unevenly spread; where
+#' it is flat the two coincide, and claiming otherwise would be claiming
+#' something for nothing.
+#'
+#' @param values See Usage.
+#' @param influence See Usage.
+#' @param n See Usage.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{uniform_se}, \code{adaptive_se}, \code{ratio}, \code{note}.
+#' @export
 morie_tlsurvy_design_efficiency <- function(values, influence, n, seed=0) {
   y <- as.numeric(values)
   out <- list()
@@ -201,6 +248,18 @@ morie_tlsurvy_design_efficiency <- function(values, influence, n, seed=0) {
 # adaptive_survey_tmle: Sample by the adaptive design, then run the
 # estimator on the sample. Reports both error sources: the sampling
 # variance from using n of N, and the estimator's own standard error.
+#' Adaptive_survey_tmle: Sample by the adaptive design, then run the
+#'
+#' estimator on the sample. Reports both error sources: the sampling
+#' variance from using n of N, and the estimator\'s own standard error.
+#'
+#' @param V See Usage.
+#' @param influence_proxy See Usage.
+#' @param full_estimator See Usage.
+#' @param n See Usage.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{psi}, \code{se_estimator}, \code{n_used}, \code{N}, \code{sampling_fraction}, \code{inclusion_probabilities}, \code{method}, \code{note}.
+#' @export
 morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
                                                 full_estimator, n,
                                                 seed=0) {
@@ -223,6 +282,13 @@ morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
 }
 
 # cheatsheet: Brief description of the module.
+#' Cheatsheet: Brief description of the module
+#'
+#' Part of the tlsurvy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_tlsurvy_cheatsheet <- function() {
   return("tlsurvy: N too large to use, so SAMPLE the data rather than approximate the estimator -- select n of N with UNEQUAL inclusion probabilities and run TMLE on the sample, with n/N -> 0 so the saving persists. A cheap low-dimensional V is observed for ALL N, which is what makes the design adaptive: set pi_i proportional to the expected INFLUENCE given V and the variance is minimised for that n. Weight by 1/pi (Horvitz-Thompson) to stay unbiased for the FULL-data parameter. Where the influence is flat, adaptation buys nothing.")
 }

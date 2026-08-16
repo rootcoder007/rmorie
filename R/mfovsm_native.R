@@ -169,6 +169,20 @@
 
 # Main entry point
 
+#' morie_mfovsm
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param feature See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param v_in_numerator Defaults to \code{TRUE}.
+#' @param contrast Defaults to \code{"cumulative"}.
+#' @param trim Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{se}, \code{main_effect}, \code{main_effect_se}, \code{feature_effect}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n}, \code{n_times}, \code{contrast}, \code{method}.
+#' @export
 morie_mfovsm <- function(y, feature, A, H, v_in_numerator = TRUE,
                           contrast = "cumulative", trim = NULL) {
   A_hist <- .mfovsm_hist(A)
@@ -293,6 +307,13 @@ mfovsm_ <- morie_mfovsm
 mfovsm <- morie_mfovsm
 
 # Cheatsheet
+#' Cheatsheet
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_mfovsm_cheatsheet <- function() {
   paste0("mfovsm: V-conditional MSM E[Y^abar|V] = b0 + b1 abar + ",
          "b2 V + b3 abar V (Robins-Hernan 2009; H&R Sec.12.5). ",

@@ -5,6 +5,21 @@
 
 .svyrcq_EPS <- 1e-12
 
+#' morie_svyrcq_survey_quantile_regression
+#'
+#' Part of the svyrcq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param tau Defaults to \code{0.5}.
+#' @param weights Defaults to \code{NULL}.
+#' @param add_intercept Defaults to \code{TRUE}.
+#' @param max_iter Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param eps Defaults to \code{1e-06}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{residuals}, \code{fitted}, \code{objective}, \code{objective_path}, \code{weighted_fraction_below}, \code{tau}, \code{iterations}, \code{converged}, \code{n}, \code{p}, \code{sum_weights}, \code{method}, \code{note}.
+#' @export
 morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
                                                     weights = NULL,
                                                     add_intercept = TRUE,

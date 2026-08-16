@@ -72,6 +72,19 @@
   sum(a * b) / (na * nb)
 }
 
+#' morie_wrd2v_training_complexity
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param architecture See Usage.
+#' @param D See Usage.
+#' @param V See Usage.
+#' @param N Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @param hierarchical Defaults to \code{TRUE}.
+#' @return A numeric value.
+#' @export
 morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
                                             C=NULL, hierarchical=TRUE) {
   # The paper's Q for one training example (eqs. 4-5).
@@ -92,6 +105,15 @@ morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
   as.numeric(C) * (D + D * out)
 }
 
+#' Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param power Defaults to \code{0.75}.
+#' @return The value of \code{stats::setNames}.
+#' @export
 morie_wrd2v_noise_distribution <- function(counts, power=0.75) {
   # Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2.
   ws <- sort(names(counts))
@@ -104,6 +126,15 @@ morie_wrd2v_noise_distribution <- function(counts, power=0.75) {
   stats::setNames(as.list(raw / z), ws)
 }
 
+#' Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param t Defaults to \code{1e-05}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
   # Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0.
   total <- sum(unlist(counts))
@@ -177,6 +208,26 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
   loss
 }
 
+#' morie_wrd2v_wrd2v
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param corpus See Usage.
+#' @param size Defaults to \code{16}.
+#' @param window Defaults to \code{5}.
+#' @param architecture Defaults to \code{"skip-gram"}.
+#' @param lr Defaults to \code{0.05}.
+#' @param epochs Defaults to \code{20}.
+#' @param min_count Defaults to \code{1}.
+#' @param dynamic_window Defaults to \code{TRUE}.
+#' @param loss Defaults to \code{"softmax"}.
+#' @param negative Defaults to \code{5}.
+#' @param noise_power Defaults to \code{0.75}.
+#' @param subsample Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{vectors}, \code{output_vectors}, \code{vocab}, \code{loss_curve}, \code{final_loss}, \code{similarity}, \code{most_similar}, \code{size}, \code{window}, \code{architecture}, \code{loss}, \code{negative}, \code{noise}, \code{method}.
+#' @export
 morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
                               architecture="skip-gram", lr=0.05, epochs=20,
                               min_count=1, dynamic_window=TRUE,
@@ -331,6 +382,17 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
                   else ")"))
 }
 
+#' Section 4\'s offset query: b - a + c. The three question words are
+#'
+#' excluded from the answer.
+#'
+#' @param vectors See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param topn Defaults to \code{1}.
+#' @return The value of \code{lapply}.
+#' @export
 morie_wrd2v_analogy <- function(vectors, a, b, c, topn=1) {
   # Section 4's offset query: b - a + c. The three question words are
   # excluded from the answer.
@@ -348,6 +410,13 @@ morie_wrd2v_analogy <- function(vectors, a, b, c, topn=1) {
          function(i) list(words[i], sims[i]))
 }
 
+#' morie_wrd2v_cheatsheet
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_wrd2v_cheatsheet <- function() {
   paste0(
     "wrd2v: log-linear word vectors (Mikolov 2013a). CBOW ",

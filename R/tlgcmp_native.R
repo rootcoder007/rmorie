@@ -25,6 +25,27 @@
 # for the longitudinal case, the same stratified counterfactual
 # mean, and the same assumption-reporting.
 
+#' morie_tlgcmp
+#'
+#' Part of the tlgcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param strata Defaults to \code{NULL}.
+#' @param outcome_means Defaults to \code{NULL}.
+#' @param covariate_probs Defaults to \code{NULL}.
+#' @param Q_functions Defaults to \code{NULL}.
+#' @param L_supports Defaults to \code{NULL}.
+#' @param L_probs Defaults to \code{NULL}.
+#' @param rule Defaults to \code{NULL}.
+#' @param Y Defaults to \code{NULL}.
+#' @param A Defaults to \code{NULL}.
+#' @param L Defaults to \code{NULL}.
+#' @param a_star Defaults to \code{NULL}.
+#' @param g Defaults to \code{NULL}.
+#' @param delta Defaults to \code{0.01}.
+#' @param mode Defaults to \code{c("point", "sequential", "counterfactual", "positivity")}.
+#' @return The value of \code{g_computation}.
+#' @export
 morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
                          covariate_probs = NULL,
                          Q_functions = NULL, L_supports = NULL,
@@ -44,6 +65,15 @@ morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
   g_computation(strata, outcome_means, covariate_probs)
 }
 
+#' positivity_check
+#'
+#' Part of the tlgcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param delta Defaults to \code{0.01}.
+#' @return A list with \code{min_g}, \code{max_g}, \code{worst}, \code{satisfied}, \code{delta}, \code{note}.
+#' @export
 positivity_check <- function(g, delta = 0.01) {
   gg <- as.numeric(g)
   if (length(gg) == 0L)
@@ -56,6 +86,16 @@ positivity_check <- function(g, delta = 0.01) {
        note = "without positivity the outcome regression is asked to extrapolate into cells with no data")
 }
 
+#' g_computation
+#'
+#' Part of the tlgcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param strata See Usage.
+#' @param outcome_means See Usage.
+#' @param covariate_probs See Usage.
+#' @return A numeric value.
+#' @export
 g_computation <- function(strata, outcome_means, covariate_probs) {
   s <- as.list(strata)
   p <- as.numeric(covariate_probs)
@@ -66,6 +106,17 @@ g_computation <- function(strata, outcome_means, covariate_probs) {
   sum(p * q)
 }
 
+#' sequential_g_formula
+#'
+#' Part of the tlgcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q_functions See Usage.
+#' @param L_supports See Usage.
+#' @param L_probs See Usage.
+#' @param rule See Usage.
+#' @return A list with \code{estimate}, \code{psi}, \code{horizon}, \code{method}, \code{note}, \code{assumptions}.
+#' @export
 sequential_g_formula <- function(Q_functions, L_supports, L_probs,
                                  rule) {
   T <- length(L_supports)
@@ -96,6 +147,18 @@ sequential_g_formula <- function(Q_functions, L_supports, L_probs,
        assumptions = c("sequential randomization (no unmeasured confounding) and positivity"))
 }
 
+#' counterfactual_mean
+#'
+#' Part of the tlgcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param L See Usage.
+#' @param a_star See Usage.
+#' @param strata_probs Defaults to \code{NULL}.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
   y <- as.numeric(Y); a <- as.numeric(A); l <- as.character(L)
   if (!(length(y) == length(a) && length(a) == length(l)))

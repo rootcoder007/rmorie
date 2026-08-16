@@ -14,6 +14,19 @@
 # Numerical Optimization, 2nd ed., Springer, section 3.1 (for the
 # Armijo sufficient-decrease backtracking line search, c = 1e-4).
 
+#' cgmth
+#'
+#' Part of the cgmth_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param grad_f See Usage.
+#' @param x0 See Usage.
+#' @param tol Defaults to \code{1e-06}.
+#' @param max_iter Defaults to \code{1000L}.
+#' @param full_output Defaults to \code{FALSE}.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 cgmth <- function(f, grad_f, x0, tol = 1e-6, max_iter = 1000L,
                   full_output = FALSE) {
   x <- as.numeric(x0)

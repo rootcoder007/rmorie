@@ -29,6 +29,15 @@
   }
 }
 
+#' total_compute
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param samples_seen See Usage.
+#' @param model_params See Usage.
+#' @return A list with \code{compute}, \code{samples_seen}, \code{params}, \code{gmac_scale}.
+#' @export
 total_compute <- function(samples_seen, model_params) {
   s <- as.numeric(samples_seen)
   p <- as.numeric(model_params)
@@ -42,6 +51,15 @@ total_compute <- function(samples_seen, model_params) {
   )
 }
 
+#' fit_power_law
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared}, \code{range}, \code{n}.
+#' @export
 fit_power_law <- function(x, y) {
   X <- .opnclp_vec(x)
   Y <- .opnclp_vec(y)
@@ -98,6 +116,19 @@ fit_power_law <- function(x, y) {
   )
 }
 
+#' compare_scaling
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x_a See Usage.
+#' @param y_a See Usage.
+#' @param x_b See Usage.
+#' @param y_b See Usage.
+#' @param label_a Defaults to \code{"A"}.
+#' @param label_b Defaults to \code{"B"}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 compare_scaling <- function(x_a, y_a, x_b, y_b,
                             label_a = "A", label_b = "B") {
   fa <- fit_power_law(x_a, y_a)
@@ -115,6 +146,16 @@ compare_scaling <- function(x_a, y_a, x_b, y_b,
   out
 }
 
+#' infonce
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param image_embeddings See Usage.
+#' @param text_embeddings See Usage.
+#' @param temperature Defaults to \code{0.07}.
+#' @return A list with \code{loss}, \code{image_to_text}, \code{text_to_image}, \code{logits}, \code{note}.
+#' @export
 infonce <- function(image_embeddings, text_embeddings,
                     temperature = 0.07) {
   I <- .opnclp_mat(image_embeddings)

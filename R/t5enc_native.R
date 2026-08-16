@@ -59,6 +59,15 @@
 # doi:10.18653/v1/N19-1423. The single-token masking objective span
 # corruption replaces.
 
+#' t5enc_task_prefix
+#'
+#' Part of the t5enc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param task See Usage.
+#' @param text See Usage.
+#' @return A character value.
+#' @export
 t5enc_task_prefix <- function(task, text) {
   t <- trimws(as.character(task))
   if (nchar(t) == 0L) {
@@ -67,6 +76,18 @@ t5enc_task_prefix <- function(task, text) {
   sprintf("%s: %s", t, as.character(text))
 }
 
+#' t5enc_span_corruption
+#'
+#' Part of the t5enc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tokens See Usage.
+#' @param rate Defaults to \code{0.15}.
+#' @param mean_span Defaults to \code{3}.
+#' @param seed Defaults to \code{0}.
+#' @param sentinel Defaults to \code{"<extra_id_%d>"}.
+#' @return A list with \code{input}, \code{target}, \code{n_spans}, \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by}, \code{note}.
+#' @export
 t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
                                    seed = 0,
                                    sentinel = "<extra_id_%d>") {
@@ -143,6 +164,17 @@ t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
   )
 }
 
+#' t5enc_relative_bucket
+#'
+#' Part of the t5enc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param relative_position See Usage.
+#' @param bidirectional Defaults to \code{TRUE}.
+#' @param num_buckets Defaults to \code{32L}.
+#' @param max_distance Defaults to \code{128}.
+#' @return A numeric value.
+#' @export
 t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
                                    num_buckets = 32L, max_distance = 128) {
   nb <- as.integer(num_buckets)
@@ -168,6 +200,17 @@ t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
   ret + min(v, nb - 1L)
 }
 
+#' t5enc_format_regression
+#'
+#' Part of the t5enc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param value See Usage.
+#' @param increment Defaults to \code{0.2}.
+#' @param lo Defaults to \code{1}.
+#' @param hi Defaults to \code{5}.
+#' @return A character value.
+#' @export
 t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) {
   v <- min(max(as.numeric(value), as.numeric(lo)), as.numeric(hi))
   inc <- as.numeric(increment)
@@ -177,6 +220,15 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
   sprintf("%.1f", round(v / inc) * inc)
 }
 
+#' t5enc_parse_prediction
+#'
+#' Part of the t5enc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param text See Usage.
+#' @param labels Defaults to \code{NULL}.
+#' @return A list with \code{label}, \code{valid}, \code{note}.
+#' @export
 t5enc_parse_prediction <- function(text, labels = NULL) {
   s <- trimws(as.character(text))
   if (is.null(labels)) {
@@ -196,6 +248,13 @@ t5enc_parse_prediction <- function(text, labels = NULL) {
   )
 }
 
+#' t5enc_cheatsheet
+#'
+#' Part of the t5enc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 t5enc_cheatsheet <- function() {
   paste(
     "t5enc: EVERY task as text-to-text -- classification emits ",
@@ -220,6 +279,15 @@ t5encoder <- t5enc_span_corruption
 t5 <- t5enc_span_corruption
 
 # entry point
+#' Entry point
+#'
+#' Part of the t5enc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param method Defaults to \code{c("task_prefix", "span_corruption", "relative_bucket", "format_regression",     "parse_prediction", "cheatsheet")}.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_t5enc <- function(method = c("task_prefix", "span_corruption",
                                     "relative_bucket", "format_regression",
                                     "parse_prediction", "cheatsheet"), ...) {

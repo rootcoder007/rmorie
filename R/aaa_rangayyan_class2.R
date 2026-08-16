@@ -453,6 +453,21 @@
 
 # ------------------------------------------------------------- functions
 
+#' MlpBp
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param hidden Defaults to \code{4}.
+#' @param eta Defaults to \code{0.5}.
+#' @param alpha Defaults to \code{0.9}.
+#' @param maxiter Defaults to \code{500}.
+#' @param tol Defaults to \code{1e-04}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{weights}, \code{offsets}, \code{predictions}, \code{outputs}, \code{classes}, \code{accuracy}, \code{mse}, \code{iterations}, \code{method}.
+#' @export
 MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
                   tol = 1e-4, seed = 1) {
   # Section 10.8, Figure 10.5.  Forward pass eqs (10.79)-(10.81), weight
@@ -565,6 +580,16 @@ MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
   )
 }
 
+#' Section 10.2.1.  Bundle-branch block desynchronises ventricular
+#'
+#' contraction and shows as a wider-than-normal QRS; the published logic
+#' is a conjunction of duration and amplitude measurements on named
+#' leads, so a program applies it once those measurements exist.
+#'
+#' @param qrsdur See Usage.
+#' @param criteria Defaults to \code{NULL}.
+#' @return A list with \code{blocktype}, \code{qrsdur}, \code{wide}, \code{left}, \code{right}, \code{satisfied}, \code{method}.
+#' @export
 Bbb <- function(qrsdur, criteria = NULL) {
   # Section 10.2.1.  Bundle-branch block desynchronises ventricular
   # contraction and shows as a wider-than-normal QRS; the published logic
@@ -628,6 +653,18 @@ Bbb <- function(qrsdur, criteria = NULL) {
   )
 }
 
+#' Section 10.11.2 with the normal-pattern Bayes classifier of 10.6.2
+#'
+#' The linear rule of 10.11.1 commits to a hard boundary; the Bayes rule
+#' states the posterior odds and lets the prevalence of ectopy enter,
+#' which matters because a PVC prior is far below one half.
+#'
+#' @param features See Usage.
+#' @param labels See Usage.
+#' @param priors Defaults to \code{NULL}.
+#' @param query Defaults to \code{NULL}.
+#' @return A list with \code{predictions}, \code{queryclass}, \code{posterior}, \code{means}, \code{covariances}, \code{scale}, \code{confusion}, \code{accuracy}, \code{sensitivity}, \code{specificity}, \code{priors}, \code{classes}, \code{method}.
+#' @export
 PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
   # Section 10.11.2 with the normal-pattern Bayes classifier of 10.6.2.
   # The linear rule of 10.11.1 commits to a hard boundary; the Bayes rule
@@ -781,6 +818,19 @@ PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
   )
 }
 
+#' BciChSel
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param trials See Usage.
+#' @param nselect See Usage.
+#' @param rank Defaults to \code{4}.
+#' @param maxiter Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{selected}, \code{weights}, \code{rmsd}, \code{normalized}, \code{weighted}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
+#' @export
 BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
   # Section 9.12.1 in full: a BCI runs under hardware complexity limits and
@@ -803,6 +853,21 @@ BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
   )
 }
 
+#' NOT from Rangayyan: the book covers matching pursuit (9.3) and EMD
+#'
+#' dictionary learning (9.5), not basis pursuit.  Chen, Donoho and
+#' Saunders, SIAM J. Sci. Comput. 20(1):33-61, 1998 for the L1
+#' formulation; Daubechies, Defrise and De Mol, CPAM 57(11):1413-1457,
+#' 2004 for the thresholded-Landweber solver.  Greedy pursuit fixes an
+#' atom the moment it is chosen; here every coefficient stays free.
+#'
+#' @param x See Usage.
+#' @param D See Usage.
+#' @param lam Defaults to \code{0.01}.
+#' @param maxiter Defaults to \code{2000}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{l1norm}, \code{objective}, \code{iterations}, \code{method}.
+#' @export
 BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
   # NOT from Rangayyan: the book covers matching pursuit (9.3) and EMD
   # dictionary learning (9.5), not basis pursuit.  Chen, Donoho and
@@ -869,6 +934,19 @@ BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
   )
 }
 
+#' Chapter 10: a CAD system is a chain, not a classifier, and the
+#' accuracy
+#'
+#' quoted for it means nothing unless the test patterns were unseen.
+#' Prototype discriminant of 10.4.1, partitioning of 10.10.3, scored by
+#' eqs (10.100)-(10.103).
+#'
+#' @param features See Usage.
+#' @param labels See Usage.
+#' @param k Defaults to \code{5}.
+#' @param standardize Defaults to \code{TRUE}.
+#' @return A list with \code{accuracy}, \code{sensitivity}, \code{specificity}, \code{weightedaccuracy}, \code{confusion}, \code{predictions}, \code{folds}, \code{prevalence}, \code{method}.
+#' @export
 CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
   # Chapter 10: a CAD system is a chain, not a classifier, and the accuracy
   # quoted for it means nothing unless the test patterns were unseen.
@@ -949,6 +1027,19 @@ CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
   )
 }
 
+#' Section 10.8.2 names CNNs as the common deep model but gives no layer
+#'
+#' equations; the convolution, rectifier and pooling used here are those
+#' of LeCun, Bengio and Hinton, Nature 521(7553):436-444, 2015, which is
+#' reference [35] of that section.
+#'
+#' @param x See Usage.
+#' @param kernels See Usage.
+#' @param bias Defaults to \code{NULL}.
+#' @param pool Defaults to \code{2}.
+#' @param dense Defaults to \code{NULL}.
+#' @return A list with \code{maps}, \code{pooled}, \code{features}, \code{scores}, \code{predicted}, \code{method}.
+#' @export
 CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
   # Section 10.8.2 names CNNs as the common deep model but gives no layer
   # equations; the convolution, rectifier and pooling used here are those
@@ -1021,6 +1112,23 @@ CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
   )
 }
 
+#' FecgNmf
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param nwin Defaults to \code{64}.
+#' @param hop Defaults to \code{NULL}.
+#' @param rank Defaults to \code{4}.
+#' @param lam Defaults to \code{0}.
+#' @param maxiter Defaults to \code{150}.
+#' @param taum Defaults to \code{0.6}.
+#' @param tauf Defaults to \code{0.45}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{fetal}, \code{maternal}, \code{fetalrow}, \code{maternalrow}, \code{peaks}, \code{W}, \code{H}, \code{error}, \code{method}.
+#' @export
 FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
                     maxiter = 150, taum = 0.6, tauf = 0.45, seed = 1) {
   # Section 9.11.  The fetal and maternal ECG overlap in the spectrum so no
@@ -1113,6 +1221,16 @@ FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
   )
 }
 
+#' Section 10.11.1, eq (10.131).  A PVC has both a shorter preceding RR
+#'
+#' interval and a more complex waveshape, and the form factor of eq
+#' (5.26) turns the qualitative half of the clinical rule into a number.
+#'
+#' @param rr See Usage.
+#' @param ff See Usage.
+#' @param train Defaults to \code{NULL}.
+#' @return A list with \code{labels}, \code{discriminant}, \code{coefficients}, \code{prototypes}, \code{source}, \code{method}.
+#' @export
 PvcLinDf <- function(rr, ff, train = NULL) {
   # Section 10.11.1, eq (10.131).  A PVC has both a shorter preceding RR
   # interval and a more complex waveshape, and the form factor of eq (5.26)
@@ -1170,6 +1288,17 @@ PvcLinDf <- function(rr, ff, train = NULL) {
   )
 }
 
+#' Band limits from Section 1.2.6, fractional power by eq (6.44) as used
+#'
+#' in Section 10.2.3.  The clinical question -- is there an alpha rhythm
+#' -- is answered by the fraction of power in that band, not by the
+#' power.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param bands Defaults to \code{NULL}.
+#' @return A list with \code{power}, \code{fraction}, \code{dominant}, \code{totalpower}, \code{frequencies}, \code{bands}, \code{method}.
+#' @export
 EegBands <- function(x, fs, bands = NULL) {
   # Band limits from Section 1.2.6, fractional power by eq (6.44) as used
   # in Section 10.2.3.  The clinical question -- is there an alpha rhythm
@@ -1233,6 +1362,18 @@ EegBands <- function(x, fs, bands = NULL) {
   )
 }
 
+#' SeizDict
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param signals See Usage.
+#' @param labels See Usage.
+#' @param iterations Defaults to \code{7}.
+#' @param atoms Defaults to \code{NULL}.
+#' @param test Defaults to \code{NULL}.
+#' @return A list with \code{dictionary}, \code{coefficients}, \code{error}, \code{predictions}, \code{isseizure}, \code{testclass}, \code{accuracy}, \code{method}.
+#' @export
 SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
                      test = NULL) {
   # Section 9.8 with the framework of 9.5, Algorithm 9.2 verbatim.  The EEG
@@ -1362,6 +1503,22 @@ SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
   )
 }
 
+#' Section 9.7.2: model eq (9.43), unmixing eq (9.44).  PCA can only
+#' make
+#'
+#' components uncorrelated, which is independence only for Gaussians,
+#' and a linear mixture tends TOWARDS a Gaussian -- so driving the
+#' estimates away from Gaussianity is what unmixes them.  Fixed-point
+#' update from Hyvarinen and Oja, Neural Networks 13, 2000, ref [50] of
+#' that section.
+#'
+#' @param X See Usage.
+#' @param ncomp Defaults to \code{NULL}.
+#' @param maxiter Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{sources}, \code{unmixing}, \code{mixing}, \code{whitening}, \code{mean}, \code{iterations}, \code{method}.
+#' @export
 IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
   # Section 9.7.2: model eq (9.43), unmixing eq (9.44).  PCA can only make
   # components uncorrelated, which is independence only for Gaussians, and
@@ -1462,6 +1619,19 @@ IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
   )
 }
 
+#' IcaClean
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param ncomp Defaults to \code{NULL}.
+#' @param kurtosis Defaults to \code{3}.
+#' @param drop Defaults to \code{NULL}.
+#' @param maxiter Defaults to \code{200}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{clean}, \code{components}, \code{kurtosis}, \code{artifacts}, \code{mixing}, \code{removedpower}, \code{method}.
+#' @export
 IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
                      maxiter = 200, seed = 1) {
   # Section 9.7.2 with the kurtosis excess of eq (3.5).  Blinks, muscle and
@@ -1513,6 +1683,19 @@ IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
   )
 }
 
+#' Infomax
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param ncomp Defaults to \code{NULL}.
+#' @param eta Defaults to \code{0.05}.
+#' @param maxiter Defaults to \code{300}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{sources}, \code{unmixing}, \code{whitening}, \code{mean}, \code{iterations}, \code{change}, \code{method}.
+#' @export
 Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
                     seed = 1) {
   # NOT from Rangayyan: Section 9.7.2 gives only the generic gradient rule
@@ -1588,6 +1771,17 @@ Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
   )
 }
 
+#' VagClass
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param segments See Usage.
+#' @param durations Defaults to \code{NULL}.
+#' @param segclass Defaults to \code{NULL}.
+#' @param arthro Defaults to \code{NULL}.
+#' @return A list with \code{varmeans}, \code{segmentmeans}, \code{abnormalfraction}, \code{normalfraction}, \code{decision}, \code{stage}, \code{abnormal}, \code{durations}, \code{method}.
+#' @export
 VagClass <- function(segments, durations = NULL, segclass = NULL,
                      arthro = NULL) {
   # Section 10.12.  VAG signals are nonstationary so each locally
@@ -1672,6 +1866,19 @@ VagClass <- function(segments, durations = NULL, segclass = NULL,
   )
 }
 
+#' KsvdFit
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param natoms See Usage.
+#' @param sparsity See Usage.
+#' @param maxiter Defaults to \code{15}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{dictionary}, \code{coefficients}, \code{error}, \code{iterations}, \code{method}.
+#' @export
 KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
                     seed = 1) {
   # NOT from Rangayyan: Section 9.5 gives EMD-based dictionary learning
@@ -1775,6 +1982,20 @@ KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
   )
 }
 
+#' Section 9.5 for the greedy stage and 9.8 for the use of the resulting
+#'
+#' coefficients and reconstruction error as features; the least-squares
+#' reprojection is Pati, Rezaiifar and Krishnaprasad, Asilomar 1993,
+#' which Rangayyan does not cover.  Learning a dictionary and using one
+#' are separate steps: here the coefficients, not the signals, are the
+#' feature vectors.
+#'
+#' @param Y See Usage.
+#' @param D See Usage.
+#' @param sparsity See Usage.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{coefficients}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{method}.
+#' @export
 DictCode <- function(Y, D, sparsity, tol = 1e-12) {
   # Section 9.5 for the greedy stage and 9.8 for the use of the resulting
   # coefficients and reconstruction error as features; the least-squares
@@ -1820,6 +2041,19 @@ DictCode <- function(Y, D, sparsity, tol = 1e-12) {
   )
 }
 
+#' Lstm
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sequences See Usage.
+#' @param labels Defaults to \code{NULL}.
+#' @param hidden Defaults to \code{8}.
+#' @param ridge Defaults to \code{1e-06}.
+#' @param seed Defaults to \code{1}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{hidden}, \code{cell}, \code{predictions}, \code{accuracy}, \code{readout}, \code{classes}, \code{method}.
+#' @export
 Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
                  seed = 1, weights = NULL) {
   # NOT from Rangayyan: Section 10.8.2 discusses deep learning in prose and
@@ -1933,6 +2167,18 @@ Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
   )
 }
 
+#' MPursuit
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param dictionary Defaults to \code{NULL}.
+#' @param natoms Defaults to \code{20}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param decaystop Defaults to \code{NULL}.
+#' @return A list with \code{coefficients}, \code{atoms}, \code{indices}, \code{residual}, \code{reconstruction}, \code{decay}, \code{energyratio}, \code{parameters}, \code{method}.
+#' @export
 MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
                      decaystop = NULL) {
   # Section 9.3, eqs (9.1)-(9.7) with the Gabor dictionary of (9.2)-(9.3).
@@ -2010,6 +2256,19 @@ MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
   )
 }
 
+#' BmiDec
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param C See Usage.
+#' @param a Defaults to \code{NULL}.
+#' @param procnoise Defaults to \code{1e-04}.
+#' @param obsnoise Defaults to \code{0.01}.
+#' @param p0 Defaults to \code{0.01}.
+#' @return A list with \code{states}, \code{innovations}, \code{gain}, \code{predicted}, \code{method}.
+#' @export
 BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
                    p0 = 1e-2) {
   # Section 8.18 with the filter of 8.7: a BMI has no ground truth about
@@ -2099,6 +2358,21 @@ BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
   )
 }
 
+#' Section 9.7.3, eqs (9.46), (9.49)-(9.50) and (9.53)-(9.55).  PCA and
+#'
+#' ICA are free to use negative coefficients so their components cancel;
+#' nonnegativity makes the columns of W basis vectors and the rows of H
+#' the activations that switch them on.  The book warns the divergence
+#' form is undefined where V or WH has a zero.
+#'
+#' @param V See Usage.
+#' @param r See Usage.
+#' @param maxiter Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param cost Defaults to \code{"ls"}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{W}, \code{H}, \code{submatrices}, \code{error}, \code{iterations}, \code{cost}, \code{method}.
+#' @export
 NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
   # Section 9.7.3, eqs (9.46), (9.49)-(9.50) and (9.53)-(9.55).  PCA and
   # ICA are free to use negative coefficients so their components cancel;
@@ -2135,6 +2409,19 @@ NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
   )
 }
 
+#' NmfChSel
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param trials See Usage.
+#' @param nselect See Usage.
+#' @param rank Defaults to \code{4}.
+#' @param maxiter Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{selected}, \code{rmsd}, \code{ranking}, \code{normalized}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
+#' @export
 NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
   # Section 9.12.1, eqs (9.94)-(9.96).  Channel relevance varies strongly
@@ -2157,6 +2444,20 @@ NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
   )
 }
 
+#' NOT from Rangayyan: Section 9.3 gives plain matching pursuit, not the
+#'
+#' orthogonalised variant.  Pati, Rezaiifar and Krishnaprasad, Proc.
+#' 27th Asilomar Conf., pp. 40-44, 1993.  Re-solving the whole active
+#' set after every pick keeps the residue orthogonal to it, so each atom
+#' is chosen at most once and k atoms give the best k-term fit on that
+#' support.
+#'
+#' @param x See Usage.
+#' @param D See Usage.
+#' @param sparsity Defaults to \code{NULL}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{coefficients}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{energyratio}, \code{method}.
+#' @export
 OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
   # NOT from Rangayyan: Section 9.3 gives plain matching pursuit, not the
   # orthogonalised variant.  Pati, Rezaiifar and Krishnaprasad, Proc. 27th
@@ -2189,6 +2490,18 @@ OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
   )
 }
 
+#' Section 9.7.1, eqs (9.37)-(9.41).  Multichannel recordings pick up
+#' the
+#'
+#' same sources through different paths, so the channels are redundant;
+#' rotating onto the covariance eigenvectors puts most power in a few
+#' components and makes the truncation error the sum of the DISCARDED
+#' eigenvalues, which is why decreasing order minimises the MSE.
+#'
+#' @param X See Usage.
+#' @param ncomp Defaults to \code{NULL}.
+#' @return A list with \code{components}, \code{eigenvalues}, \code{eigenvectors}, \code{mean}, \code{covariance}, \code{varexplained}, \code{mse}, \code{method}.
+#' @export
 PcaSig <- function(X, ncomp = NULL) {
   # Section 9.7.1, eqs (9.37)-(9.41).  Multichannel recordings pick up the
   # same sources through different paths, so the channels are redundant;
@@ -2234,6 +2547,19 @@ PcaSig <- function(X, ncomp = NULL) {
   )
 }
 
+#' Section 9.7.4.  The three decompositions answer different questions
+#' of
+#'
+#' the same data -- uncorrelated, independent, nonnegative-parts -- and
+#' which to use is empirical, so reconstruct with each and measure.  NMF
+#' runs on the nonnegatively shifted mixture, as eq (9.46) requires.
+#'
+#' @param X See Usage.
+#' @param ncomp Defaults to \code{NULL}.
+#' @param maxiter Defaults to \code{200}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{error}, \code{best}, \code{components}, \code{rank}, \code{method}.
+#' @export
 MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
   # Section 9.7.4.  The three decompositions answer different questions of
   # the same data -- uncorrelated, independent, nonnegative-parts -- and
@@ -2280,6 +2606,20 @@ MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
   )
 }
 
+#' Rbfn
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ncenters Defaults to \code{NULL}.
+#' @param spread Defaults to \code{1}.
+#' @param centers Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param query Defaults to \code{NULL}.
+#' @return A list with \code{centers}, \code{weights}, \code{bias}, \code{predictions}, \code{queryvalues}, \code{mse}, \code{spread}, \code{method}.
+#' @export
 Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
                  ridge = 1e-8, query = NULL) {
   # Section 10.8.1, eqs (10.86)-(10.87).  Cover's theorem: a set that is
@@ -2386,6 +2726,22 @@ Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
   )
 }
 
+#' Ahi
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param airflow See Usage.
+#' @param fs See Usage.
+#' @param spo2 Defaults to \code{NULL}.
+#' @param hours Defaults to \code{NULL}.
+#' @param apneafrac Defaults to \code{0.1}.
+#' @param hypofrac Defaults to \code{0.5}.
+#' @param minsec Defaults to \code{10}.
+#' @param desat Defaults to \code{0}.
+#' @param envsec Defaults to \code{1}.
+#' @return A list with \code{ahi}, \code{severity}, \code{apnea}, \code{hypopnea}, \code{events}, \code{hours}, \code{baseline}, \code{envsec}, \code{oxygenchecked}, \code{method}.
+#' @export
 Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
                 hypofrac = 0.50, minsec = 10, desat = 0, envsec = 1) {
   # Section 10.13.  Severity is reported as one number, so the whole
@@ -2479,6 +2835,19 @@ Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
   )
 }
 
+#' SparseCode
+#'
+#' Part of the rangayyan_class2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param D See Usage.
+#' @param sparsity Defaults to \code{NULL}.
+#' @param lam Defaults to \code{NULL}.
+#' @param maxiter Defaults to \code{2000}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{energyratio}, \code{mode}, \code{method}.
+#' @export
 SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
                        tol = 1e-10) {
   # Section 9.5 for the greedy framing -- the book calls it a greedy
@@ -2533,6 +2902,21 @@ SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
   )
 }
 
+#' Section 9.6 applied to VAG in Section 9.9.  Bilinear TFDs buy
+#'
+#' resolution with cross-terms; decompose first and the interaction is
+#' known, so the cross-term double sum of eq (9.15) is simply left out
+#' -- that omission is what makes the TFD adaptive rather than smoothed.
+#' Features EP (9.79), ESP (9.80), FP (9.81), FSP (9.82).
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param natoms Defaults to \code{12}.
+#' @param nfreq Defaults to \code{32}.
+#' @param ntime Defaults to \code{NULL}.
+#' @param lag Defaults to \code{12}.
+#' @return A list with \code{tfd}, \code{times}, \code{frequencies}, \code{ep}, \code{esp}, \code{fp}, \code{fsp}, \code{coefficients}, \code{method}.
+#' @export
 VagTfd <- function(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12) {
   # Section 9.6 applied to VAG in Section 9.9.  Bilinear TFDs buy
   # resolution with cross-terms; decompose first and the interaction is

@@ -81,6 +81,19 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
        score = score, query_cov = query_cov, target_cov = target_cov)
 }
 
+#' morie_funcal_seed_orthologs
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hits See Usage.
+#' @param evalue Defaults to \code{0.001}.
+#' @param score Defaults to \code{60}.
+#' @param query_cov Defaults to \code{0.2}.
+#' @param target_cov Defaults to \code{0.2}.
+#' @param searcher Defaults to \code{"diamond"}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
                                        query_cov = 0.2, target_cov = 0.2,
                                        searcher = "diamond") {
@@ -130,6 +143,18 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
   paste0(left, "2", right)
 }
 
+#' morie_funcal_assign_orthologs
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seeds See Usage.
+#' @param groups See Usage.
+#' @param taxa Defaults to \code{NULL}.
+#' @param target_taxa Defaults to \code{NULL}.
+#' @param target_types Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
                                          target_taxa = NULL,
                                          target_types = NULL) {
@@ -203,6 +228,17 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
   return(out)
 }
 
+#' morie_funcal_transfer_terms
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param assignments See Usage.
+#' @param annotations See Usage.
+#' @param sources Defaults to \code{NULL}.
+#' @param min_support Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL,
                                        min_support = 1) {
   if (min_support < 1) {
@@ -255,6 +291,26 @@ morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL
   return(out)
 }
 
+#' morie_funcal
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hits See Usage.
+#' @param groups See Usage.
+#' @param annotations See Usage.
+#' @param taxa Defaults to \code{NULL}.
+#' @param target_taxa Defaults to \code{NULL}.
+#' @param target_types Defaults to \code{NULL}.
+#' @param sources Defaults to \code{NULL}.
+#' @param evalue Defaults to \code{0.001}.
+#' @param score Defaults to \code{60}.
+#' @param query_cov Defaults to \code{0.2}.
+#' @param target_cov Defaults to \code{0.2}.
+#' @param min_support Defaults to \code{1}.
+#' @param searcher Defaults to \code{"diamond"}.
+#' @return A list with \code{estimate}, \code{annotations}, \code{seeds}, \code{orthologs}, \code{n_queries}, \code{n_with_seed}, \code{n_annotated}, \code{searcher}, \code{target_taxa}, \code{target_types}, \code{min_support}, \code{method}, \code{note}.
+#' @export
 morie_funcal <- function(hits, groups, annotations, taxa = NULL,
                         target_taxa = NULL, target_types = NULL,
                         sources = NULL, evalue = 1e-3, score = 60.0,
@@ -311,6 +367,13 @@ morie_funcal <- function(hits, groups, annotations, taxa = NULL,
 
 morie_funcal_functional_annotation <- morie_funcal
 
+#' morie_funcal_cheatsheet
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_funcal_cheatsheet <- function() {
   paste("funcal: eggNOG-mapper v2 (Cantalapiedra et al. 2021).",
         "Function is transferred from ORTHOLOGS, not from the best",

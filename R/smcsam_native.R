@@ -18,6 +18,14 @@
 # schemes, the same temperature ladder builders, and the same
 # random-walk kernel.
 
+#' ess
+#'
+#' Part of the smcsam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @return A numeric value.
+#' @export
 ess <- function(weights) {
   tot <- sum(weights)
   if (tot <= 0)
@@ -39,6 +47,16 @@ ess <- function(weights) {
   lo
 }
 
+#' resample
+#'
+#' Part of the smcsam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @param rng See Usage.
+#' @param scheme Defaults to \code{"systematic"}.
+#' @return Nothing; this branch always raises.
+#' @export
 resample <- function(weights, rng, scheme = "systematic") {
   tot <- sum(weights)
   if (tot <= 0)
@@ -92,6 +110,16 @@ resample <- function(weights, rng, scheme = "systematic") {
        "or residual, got ", deparse(scheme))
 }
 
+#' temperature_ladder
+#'
+#' Part of the smcsam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_steps See Usage.
+#' @param kind Defaults to \code{"geometric"}.
+#' @param power Defaults to \code{1}.
+#' @return Nothing; this branch always raises.
+#' @export
 temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
   n <- as.integer(n_steps)
   if (n < 2L)
@@ -130,10 +158,38 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
   }
 }
 
+#' random_walk_kernel
+#'
+#' Part of the smcsam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scale Defaults to \code{1}.
+#' @param n_moves Defaults to \code{1L}.
+#' @return The value of \code{.smcsam_rwk}.
+#' @export
 random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
   .smcsam_rwk(scale, n_moves)
 }
 
+#' smcsam
+#'
+#' Part of the smcsam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param log_gamma See Usage.
+#' @param initial See Usage.
+#' @param n_particles Defaults to \code{500L}.
+#' @param ladder Defaults to \code{NULL}.
+#' @param n_steps Defaults to \code{20L}.
+#' @param kernel Defaults to \code{NULL}.
+#' @param ess_threshold Defaults to \code{0.5}.
+#' @param scheme Defaults to \code{"systematic"}.
+#' @param seed Defaults to \code{0L}.
+#' @param weight_rule Defaults to \code{"mcmc"}.
+#' @param log_forward Defaults to \code{NULL}.
+#' @param log_backward Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{mean}, \code{variance}, \code{particles}, \code{weights}, \code{log_norm_const}, \code{ess}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule}, \code{method}.
+#' @export
 smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
                    n_steps = 20L, kernel = NULL, ess_threshold = 0.5,
                    scheme = "systematic", seed = 0L, weight_rule = "mcmc",

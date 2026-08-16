@@ -1,0 +1,24 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{find_reasonable_epsilon}
+\alias{find_reasonable_epsilon}
+\title{Algorithm 4: double or halve the step size until the Metropolis}
+\usage{
+find_reasonable_epsilon(theta, logp, grad, rnd, eps = 1, max_doublings = 100)
+}
+\arguments{
+\item{theta}{See Usage.}
+\item{logp}{See Usage.}
+\item{grad}{See Usage.}
+\item{rnd}{See Usage.}
+\item{eps}{Defaults to \code{1}.}
+\item{max_doublings}{Defaults to \code{100}.}
+}
+\description{
+acceptance probability crosses one half. The argument `rnd` is the single-value normal generator (the closure around the shared RNG).
+}
+\value{
+The value of \code{eps}, as built in the body.
+}
+\keyword{internal}

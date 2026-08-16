@@ -321,6 +321,19 @@
 
 # ---- main entry point ----
 
+#' morie_saigeg
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param G See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @param mu Defaults to \code{NULL}.
+#' @param ratio Defaults to \code{1}.
+#' @param two_sided Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{p_value}, \code{p_normal}, \code{score}, \code{variance}, \code{z}, \code{case_control_ratio}, \code{n_cases}, \code{n_controls}, \code{variance_ratio}, \code{saddlepoint}, \code{method}, \code{why}.
+#' @export
 morie_saigeg <- function(y, G, X=NULL, mu=NULL, ratio=1.0, two_sided=TRUE) {
   yv <- as.numeric(y)
   bad <- which(yv != 0 & yv != 1)

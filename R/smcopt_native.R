@@ -10,6 +10,17 @@
 #   incremental weights of equation 31, the ESS criterion and the
 #   resampling schemes all live in smcsam.
 
+#' annealing_ladder
+#'
+#' Part of the smcopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_steps See Usage.
+#' @param phi_max Defaults to \code{50}.
+#' @param phi_min Defaults to \code{0.1}.
+#' @param kind Defaults to \code{"geometric"}.
+#' @return Nothing; this branch always raises.
+#' @export
 annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
                              kind = "geometric") {
   n_steps <- as.integer(n_steps)
@@ -31,6 +42,25 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
   stop("smcopt: kind must be 'geometric' or 'linear'")
 }
 
+#' smcopt
+#'
+#' Part of the smcopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param objective See Usage.
+#' @param initial See Usage.
+#' @param n_particles Defaults to \code{200}.
+#' @param n_steps Defaults to \code{30}.
+#' @param phi_max Defaults to \code{50}.
+#' @param phi_min Defaults to \code{0.1}.
+#' @param kind Defaults to \code{"geometric"}.
+#' @param kernel Defaults to \code{NULL}.
+#' @param ess_threshold Defaults to \code{0.5}.
+#' @param scheme Defaults to \code{"systematic"}.
+#' @param seed Defaults to \code{0}.
+#' @param maximise Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{best_x}, \code{best_value}, \code{particles}, \code{weights}, \code{particle_mean}, \code{ladder}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{n_particles}, \code{maximise}, \code{note}, \code{method}.
+#' @export
 smcopt <- function(objective, initial, n_particles = 200, n_steps = 30,
                    phi_max = 50.0, phi_min = 0.1, kind = "geometric",
                    kernel = NULL, ess_threshold = 0.5,

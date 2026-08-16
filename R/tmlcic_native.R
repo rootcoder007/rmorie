@@ -100,6 +100,15 @@
   eps
 }
 
+#' The chapter\'s example library: the unadjusted model, one main term
+#'
+#' per covariate, and optionally one treatment interaction each. cols
+#' are 0-based covariate indices.
+#'
+#' @param p See Usage.
+#' @param interactions Defaults to \code{TRUE}.
+#' @return The value of \code{lib}, as built in the body.
+#' @export
 morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   # The chapter's example library: the unadjusted model, one main term
   # per covariate, and optionally one treatment interaction each. cols
@@ -148,6 +157,22 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   list(g1=g1, b=b)
 }
 
+#' morie_tmlcic_candidate_tmle
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param cand See Usage.
+#' @param g1 See Usage.
+#' @param rows Defaults to \code{NULL}.
+#' @param eval_rows Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param target_step Defaults to \code{TRUE}.
+#' @return A list with \code{q1}, \code{q0}, \code{qa}, \code{info}.
+#' @export
 morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows=NULL,
                                         eval_rows=NULL, ridge=1e-8,
                                         target_step=TRUE) {
@@ -184,6 +209,22 @@ morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows=NULL,
   list(q1=q1, q0=q0, qa=qa, info=list(eps=eps, gA=gA, H=H))
 }
 
+#' morie_tmlcic_influence_curve
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param q1 See Usage.
+#' @param q0 See Usage.
+#' @param qa See Usage.
+#' @param gA See Usage.
+#' @param rows See Usage.
+#' @param psi See Usage.
+#' @param target See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
                                          target) {
   # Eq. (13.3) for the PATE and eq. (13.4) for the SATE.
@@ -225,6 +266,20 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
   lapply(order_, function(c) groups[[c]])
 }
 
+#' morie_tmlcic_variance_estimate
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param y See Usage.
+#' @param qa See Usage.
+#' @param groups See Usage.
+#' @param n See Usage.
+#' @param design See Usage.
+#' @param target See Usage.
+#' @return A list with \code{var}, \code{info}.
+#' @export
 morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
                                            target) {
   # The design's variance estimator. Returns list(var, info).
@@ -307,6 +362,23 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
   Filter(function(f) length(f) > 0L, folds)
 }
 
+#' morie_tmlcic_adaptive_prespecification
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param groups See Usage.
+#' @param design See Usage.
+#' @param target See Usage.
+#' @param library Defaults to \code{NULL}.
+#' @param g_library Defaults to \code{NULL}.
+#' @param n_folds Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{q_candidate}, \code{q_risks}, \code{q_names}, \code{g_candidate}, \code{g_risks}, \code{g_names}, \code{gfit}, \code{n_folds}.
+#' @export
 morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
                                                    target, library=NULL,
                                                    g_library=NULL,
@@ -365,6 +437,25 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
        gfit=gfit_for(glib[[best_g]]), n_folds=length(folds))
 }
 
+#' morie_tmlcic_tmle_cluster_ic
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param X See Usage.
+#' @param cluster Defaults to \code{NULL}.
+#' @param target Defaults to \code{"SATE"}.
+#' @param design Defaults to \code{NULL}.
+#' @param library Defaults to \code{NULL}.
+#' @param g_library Defaults to \code{NULL}.
+#' @param n_folds Defaults to \code{NULL}.
+#' @param adapt Defaults to \code{TRUE}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param level Defaults to \code{0.95}.
+#' @return A list with \code{estimate}, \code{se}, \code{n}, \code{ci}, \code{level}, \code{unadjusted}, \code{se_unadjusted}, \code{variance_ratio}, \code{q_selected}, \code{q_risks}, \code{g_selected}, \code{g_risks}, \code{epsilon}, \code{influence_curve}, \code{eic_mean}, \code{rho}, \code{independent_units}, \code{unit}, \code{design}, \code{target}, \code{n_folds}, \code{adapt}, \code{method}.
+#' @export
 morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
                                          target="SATE", design=NULL,
                                          library=NULL, g_library=NULL,
@@ -479,6 +570,15 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
 # Hierarchical data: the cluster-level and individual-level TMLEs
 # ---------------------------------------------------------------------
 
+#' The per-individual weights alpha_ij and the cluster groups. Balzer
+#'
+#' et al. (2019) require sum_i alpha_ij = 1 within each cluster. The
+#' default alpha_ij = 1/N_j is their stated choice.
+#'
+#' @param cluster See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{alpha}, \code{groups}.
+#' @export
 morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
   # The per-individual weights alpha_ij and the cluster groups. Balzer
   # et al. (2019) require sum_i alpha_ij = 1 within each cluster. The
@@ -604,6 +704,24 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
                                min_g=min(ga), qc=qc_a))
 }
 
+#' morie_tmlcic_tmle_hierarchical
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param E See Usage.
+#' @param W See Usage.
+#' @param cluster See Usage.
+#' @param arm Defaults to \code{"both"}.
+#' @param weights Defaults to \code{NULL}.
+#' @param known_g Defaults to \code{NULL}.
+#' @param trim Defaults to \code{0.01}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param level Defaults to \code{0.95}.
+#' @return The value of \code{payload}, as built in the body.
+#' @export
 morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
                                            weights=NULL, known_g=NULL,
                                            trim=0.01, ridge=1e-8,
@@ -719,6 +837,13 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
   payload
 }
 
+#' morie_tmlcic_cheatsheet
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_tmlcic_cheatsheet <- function() {
   paste0(
     "tmlcic: cluster randomized trial. Pre-specify a LIBRARY of ",

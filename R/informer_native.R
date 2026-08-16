@@ -52,6 +52,17 @@
   sapply(K, function(kj) scale * sum(q * kj))
 }
 
+#' morie_informer_sparsity_measure
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param q See Usage.
+#' @param K See Usage.
+#' @param measure Defaults to \code{"exact"}.
+#' @param scale Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NULL) {
   if (!(measure %in% .informer_MEASURES)) {
     stop(sprintf("informer: measure must be exact or maxmean, got '%s'", measure))
@@ -75,12 +86,35 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
   return(k.logsumexp(z) - mean_z)
 }
 
+#' morie_informer_kl_from_uniform
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param q See Usage.
+#' @param K See Usage.
+#' @param scale Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
   Km <- k.mat(K)
   return(morie_informer_sparsity_measure(q, K, measure = "exact",
                                          scale = scale) - log(length(Km)))
 }
 
+#' morie_informer_select_queries
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param factor Defaults to \code{5}.
+#' @param measure Defaults to \code{"maxmean"}.
+#' @param n_sample Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{top}, \code{u}, \code{scores}, \code{L_Q}, \code{L_K}, \code{n_sample}, \code{measure}.
+#' @export
 morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
                                           n_sample = NULL, seed = 0) {
   Qm <- .informer_to_rows(Q)
@@ -115,6 +149,17 @@ morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
   )
 }
 
+#' morie_informer_full_attention
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @param scale Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
   Qm <- .informer_to_rows(Q)
   Km <- .informer_to_rows(K)
@@ -136,6 +181,21 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
   return(out)
 }
 
+#' morie_informer_probsparse_attention
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @param factor Defaults to \code{5}.
+#' @param measure Defaults to \code{"maxmean"}.
+#' @param n_sample Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param scale Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{output}, \code{selected}, \code{u}, \code{L_Q}, \code{L_K}, \code{measure}, \code{complexity}, \code{method}, \code{note}.
+#' @export
 morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
                                                 measure = "maxmean",
                                                 n_sample = NULL, seed = 0,
@@ -177,6 +237,16 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
   )
 }
 
+#' morie_informer_complexity
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param L_Q See Usage.
+#' @param L_K See Usage.
+#' @param factor Defaults to \code{5}.
+#' @return A list with \code{full}, \code{probsparse}, \code{u}, \code{ratio}, \code{memory_full}, \code{memory_probsparse}.
+#' @export
 morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
   lq <- as.integer(L_Q)
   lk <- as.integer(L_K)
@@ -191,6 +261,13 @@ morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
   )
 }
 
+#' morie_informer_cheatsheet
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_informer_cheatsheet <- function() {
   "informer: ProbSparse. A query whose attention is UNIFORM just averages V and is redundant with the residual. M(q,K) = logsumexp(z) - mean(z) measures the distance from uniform; it is MINIMISED at ln L_K, attained exactly when the logits are equal, so M - ln L_K is the KL and that is what is zero there. Keep only the top u = c ln L_Q queries: O(L ln L) time, O(L_K ln L_Q) memory. Computing M exactly would cost the O(L^2) being saved, so Lemma 1's max-mean bound on sampled keys is used instead. u = L_Q recovers full attention exactly."
 }

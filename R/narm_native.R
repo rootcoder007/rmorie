@@ -2,6 +2,14 @@
 # Reference: Li et al. (2017) "NARM" CIKM 2017, arXiv:1711.04725
 # Base R only.
 
+#' narm_softmax
+#'
+#' Part of the narm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 narm_softmax <- function(z) {
   v <- as.numeric(z)
   m <- max(v)
@@ -9,6 +17,18 @@ narm_softmax <- function(z) {
   e / sum(e)
 }
 
+#' narm_attention_weights
+#'
+#' Part of the narm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h_t See Usage.
+#' @param H See Usage.
+#' @param A1 See Usage.
+#' @param A2 See Usage.
+#' @param v See Usage.
+#' @return The value of \code{narm_softmax}.
+#' @export
 narm_attention_weights <- function(h_t, H, A1, A2, v) {
   ht <- as.numeric(h_t)
   Hm <- as.matrix(H)
@@ -24,6 +44,15 @@ narm_attention_weights <- function(h_t, H, A1, A2, v) {
   narm_softmax(sc)
 }
 
+#' narm_local_encoder
+#'
+#' Part of the narm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param alpha See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 narm_local_encoder <- function(H, alpha) {
   Hm <- as.matrix(H)
   a <- as.numeric(alpha)
@@ -33,10 +62,29 @@ narm_local_encoder <- function(H, alpha) {
   as.numeric(crossprod(a, Hm))
 }
 
+#' narm_session_repr
+#'
+#' Part of the narm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h_t_global See Usage.
+#' @param c_local See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 narm_session_repr <- function(h_t_global, c_local) {
   c(as.numeric(h_t_global), as.numeric(c_local))
 }
 
+#' narm_bilinear_scores
+#'
+#' Part of the narm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param embeddings See Usage.
+#' @param B See Usage.
+#' @param c_t See Usage.
+#' @return A list with \code{estimate}, \code{scores}, \code{probabilities}, \code{method}, \code{note}.
+#' @export
 narm_bilinear_scores <- function(embeddings, B, c_t) {
   E <- as.matrix(embeddings)
   B <- as.matrix(B)
@@ -56,6 +104,16 @@ narm_bilinear_scores <- function(embeddings, B, c_t) {
        note = "|D||H| parameters instead of |N||H|, and the paper reports better accuracy too")
 }
 
+#' narm_decoder_parameters
+#'
+#' Part of the narm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_items See Usage.
+#' @param hidden See Usage.
+#' @param emb_dim See Usage.
+#' @return A list with \code{fully_connected}, \code{bilinear}, \code{ratio}, \code{note}.
+#' @export
 narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
   N <- as.integer(n_items); H <- as.integer(hidden); D <- as.integer(emb_dim)
   if (min(N, H, D) < 1L) stop("narm: all three sizes must be at least 1")
@@ -64,6 +122,13 @@ narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
        note = "|D| is usually far smaller than |N|")
 }
 
+#' narm_cheatsheet
+#'
+#' Part of the narm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 narm_cheatsheet <- function() {
   paste("narm: a purely sequential session model recommends trousers because the shopper clicked a pair by accident. Two encoders over the SAME GRU states: the global one takes h_t as the whole-behaviour summary, the local one attends over previous states to capture the session's MAIN PURPOSE. h_t^g and h_t^l have identical values and different roles. Concatenate, then score with a BILINEAR decoder emb_i' B c_t -- |D||H| parameters instead of |N||H|, and more accurate.")
 }

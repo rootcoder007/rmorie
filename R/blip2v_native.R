@@ -6,6 +6,17 @@
 .blip2v_EPS <- 1e-12
 .STAGES <- c(1, 2)
 
+#' query_tokens
+#'
+#' Part of the blip2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_queries See Usage.
+#' @param dim See Usage.
+#' @param seed Defaults to \code{0}.
+#' @param scale Defaults to \code{0.02}.
+#' @return A matrix, from \code{matrix}.
+#' @export
 query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
   n <- as.integer(n_queries); d <- as.integer(dim)
   if (n < 1 || d < 1)
@@ -14,6 +25,18 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
   matrix((runif(n * d) - 0.5) * 2 * scale, nrow = n, ncol = d)
 }
 
+#' qformer_attend
+#'
+#' Part of the blip2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param queries See Usage.
+#' @param image_features See Usage.
+#' @param WQ See Usage.
+#' @param WK See Usage.
+#' @param WV See Usage.
+#' @return A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches}, \code{compression}, \code{note}.
+#' @export
 qformer_attend <- function(queries, image_features, WQ, WK, WV) {
   Q <- as.matrix(queries); storage.mode(Q) <- "double"
   F <- as.matrix(image_features); storage.mode(F) <- "double"
@@ -43,6 +66,16 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
        note = "the output width is the QUERY count, whatever the image resolution")
 }
 
+#' trainable_fraction
+#'
+#' Part of the blip2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param qformer_params See Usage.
+#' @param frozen_vision_params See Usage.
+#' @param frozen_llm_params See Usage.
+#' @return A list with \code{trainable}, \code{total}, \code{fraction}, \code{frozen_fraction}, \code{note}.
+#' @export
 trainable_fraction <- function(qformer_params, frozen_vision_params,
                                frozen_llm_params) {
   q <- as.numeric(qformer_params)
@@ -54,6 +87,16 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
        note = "vision encoder and language model both frozen")
 }
 
+#' stage_one_objectives
+#'
+#' Part of the blip2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query_out See Usage.
+#' @param text_out See Usage.
+#' @param temperature Defaults to \code{0.07}.
+#' @return A list with \code{per_query_similarity}, \code{image_text_similarity}, \code{best_query}, \code{logit}, \code{note}.
+#' @export
 stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
   Q <- as.matrix(query_out); storage.mode(Q) <- "double"
   T_ <- as.numeric(text_out)
@@ -74,6 +117,16 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
        note = "the image-text score is the MAXIMUM over queries, not the mean")
 }
 
+#' project_to_llm
+#'
+#' Part of the blip2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query_out See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.
+#' @export
 project_to_llm <- function(query_out, W, b = NULL) {
   Q <- as.matrix(query_out); storage.mode(Q) <- "double"
   W <- as.matrix(W); storage.mode(W) <- "double"

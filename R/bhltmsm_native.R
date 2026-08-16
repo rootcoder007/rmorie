@@ -5,6 +5,15 @@
 .bhltmsm_EPS <- 1e-12
 .STATES <- c("none", "outpatient", "residential", "screening")
 
+#' cumulative_episodes
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param histories See Usage.
+#' @param states Defaults to \code{.STATES}.
+#' @return A list with \code{cumulative}, \code{states}, \code{periods}, \code{note}.
+#' @export
 cumulative_episodes <- function(histories, states = .STATES) {
   S <- as.character(states)
   idx <- setNames(seq_along(S), S)
@@ -35,6 +44,18 @@ cumulative_episodes <- function(histories, states = .STATES) {
   x[lo + 1L] + (h - lo) * (x[hi + 1L] - x[lo + 1L])
 }
 
+#' treatment_weights
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param histories See Usage.
+#' @param propensities See Usage.
+#' @param stabilise Defaults to \code{TRUE}.
+#' @param marginal Defaults to \code{NULL}.
+#' @param truncate Defaults to \code{NULL}.
+#' @return A list with \code{weights}, \code{raw}, \code{stabilised}, \code{truncated}, \code{n_truncated}, \code{note}.
+#' @export
 treatment_weights <- function(histories, propensities, stabilise = TRUE,
                               marginal = NULL, truncate = NULL) {
   W <- numeric(length(histories))
@@ -78,6 +99,14 @@ treatment_weights <- function(histories, propensities, stabilise = TRUE,
                     "changed is reported"))
 }
 
+#' weight_diagnostics
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param weights See Usage.
+#' @return A list with \code{mean}, \code{max}, \code{min}, \code{effective_n}, \code{n}, \code{efficiency}, \code{mean_near_one}, \code{note}.
+#' @export
 weight_diagnostics <- function(weights) {
   w <- as.numeric(weights)
   n <- length(w)
@@ -102,6 +131,16 @@ weight_diagnostics <- function(weights) {
   num / den
 }
 
+#' confounding_check
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param covariate_history See Usage.
+#' @param treatment_history See Usage.
+#' @param outcome Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 confounding_check <- function(covariate_history, treatment_history,
                               outcome = NULL) {
   L <- as.matrix(covariate_history); storage.mode(L) <- "double"
@@ -138,6 +177,17 @@ confounding_check <- function(covariate_history, treatment_history,
   solve(xtwx, xtwy)
 }
 
+#' fit_msm
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param outcome See Usage.
+#' @param cumulative See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param states Defaults to \code{.STATES}.
+#' @return A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se}, \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.
+#' @export
 fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   y <- as.numeric(outcome)
   X <- as.matrix(cumulative); storage.mode(X) <- "double"

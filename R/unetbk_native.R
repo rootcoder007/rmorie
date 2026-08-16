@@ -68,6 +68,17 @@
   as.matrix(x)
 }
 
+#' valid_output_size
+#'
+#' Part of the unetbk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param input_size See Usage.
+#' @param depth Defaults to \code{4L}.
+#' @param convs_per_block Defaults to \code{2L}.
+#' @param kernel Defaults to \code{3L}.
+#' @return A list with \code{output}, \code{input}, \code{border_lost}, \code{skip_sizes}, \code{note}.
+#' @export
 valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L) {
   s <- as.integer(input_size)
   kk <- as.integer(kernel) - 1L
@@ -108,6 +119,15 @@ valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kern
   )
 }
 
+#' mirror_pad
+#'
+#' Part of the unetbk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param image See Usage.
+#' @param pad See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 mirror_pad <- function(image, pad) {
   img <- .unetbk_as_matrix(image)
   p <- as.integer(pad)
@@ -131,6 +151,17 @@ mirror_pad <- function(image, pad) {
   out
 }
 
+#' overlap_tiles
+#'
+#' Part of the unetbk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param height See Usage.
+#' @param width See Usage.
+#' @param tile See Usage.
+#' @param border See Usage.
+#' @return A list with \code{tiles}, \code{n_tiles}, \code{output_size}, \code{note}.
+#' @export
 overlap_tiles <- function(height, width, tile, border) {
   t <- as.integer(tile)
   b <- as.integer(border)
@@ -164,6 +195,15 @@ overlap_tiles <- function(height, width, tile, border) {
   )
 }
 
+#' skip_concat
+#'
+#' Part of the unetbk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param upsampled See Usage.
+#' @param contracting See Usage.
+#' @return A list with \code{concatenated}, \code{crop_offset}, \code{channels}, \code{note}.
+#' @export
 skip_concat <- function(upsampled, contracting) {
   up <- .unetbk_as_matrix(upsampled)
   co <- .unetbk_as_matrix(contracting)
@@ -191,6 +231,16 @@ skip_concat <- function(upsampled, contracting) {
   )
 }
 
+#' separation_weight_map
+#'
+#' Part of the unetbk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param labels See Usage.
+#' @param w0 Defaults to \code{10}.
+#' @param sigma Defaults to \code{5}.
+#' @return A list with \code{weights}, \code{n_instances}, \code{max_weight}, \code{note}.
+#' @export
 separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
   lab <- .unetbk_as_matrix(labels)
   h <- nrow(lab)

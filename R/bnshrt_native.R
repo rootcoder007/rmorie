@@ -9,6 +9,19 @@
 
 .bnshrt_logistic <- function(z) 1 / (1 + exp(-max(-500, min(500, z))))
 
+#' morie_sequence_probabilities
+#'
+#' Part of the bnshrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param x See Usage.
+#' @param alpha See Usage.
+#' @param y0 See Usage.
+#' @param link Defaults to \code{"logit"}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
                                          link = "logit") {
   xs <- as.matrix(x); storage.mode(xs) <- "double"
@@ -37,6 +50,14 @@ morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
   out
 }
 
+#' morie_sequence_frequencies
+#'
+#' Part of the bnshrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_sequence_frequencies <- function(Y) {
   Ym <- as.matrix(Y)
   if (nrow(Ym) == 0L) stop("bnshrt: no observations")
@@ -72,6 +93,22 @@ morie_sequence_frequencies <- function(Y) {
   pmax(v - theta, 0)
 }
 
+#' morie_in_identified_set
+#'
+#' Part of the bnshrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param freq See Usage.
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param x See Usage.
+#' @param alpha_grid See Usage.
+#' @param y0_values Defaults to \code{c(0, 1)}.
+#' @param link Defaults to \code{"logit"}.
+#' @param tol Defaults to \code{1e-04}.
+#' @param iters Defaults to \code{4000L}.
+#' @return A list with \code{discrepancy}, \code{feasible}, \code{weights}, \code{fitted}, \code{target}.
+#' @export
 morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
                                     y0_values = c(0, 1),
                                     link = "logit", tol = 1e-4,
@@ -114,6 +151,21 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
        weights = w, fitted = pred, target = target)
 }
 
+#' morie_identified_set
+#'
+#' Part of the bnshrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param x See Usage.
+#' @param beta_grid See Usage.
+#' @param gamma_grid See Usage.
+#' @param alpha_grid See Usage.
+#' @param beta_fixed Defaults to \code{NULL}.
+#' @param link Defaults to \code{"logit"}.
+#' @param tol Defaults to \code{0.001}.
+#' @return A list with \code{estimate}, \code{set}, \code{n_feasible}, \code{beta_bounds}, \code{gamma_bounds}, \code{beta_width}, \code{gamma_width}, \code{point_identified}, \code{discrepancy}, \code{method}, \code{assumes}.
+#' @export
 morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
                                  beta_fixed = NULL, link = "logit",
                                  tol = 1e-3) {

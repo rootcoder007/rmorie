@@ -12,6 +12,18 @@
 # the same action sequence, not merely the same asymptotics. Argmax
 # ties break to the lowest arm on both sides.
 
+#' morie_thomp
+#'
+#' Part of the thomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param T See Usage.
+#' @param alpha0 Defaults to \code{NULL}.
+#' @param beta0 Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{alpha}, \code{beta}, \code{post_mean}, \code{counts}, \code{total_reward}, \code{method}.
+#' @export
 morie_thomp <- function(p, T, alpha0 = NULL, beta0 = NULL, seed = 0) {
   p <- as.numeric(p)
   K <- length(p)

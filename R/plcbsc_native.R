@@ -115,6 +115,21 @@
   .plcbsc_rmspe(post) / denom
 }
 
+#' morie_plcbsc
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y_treated See Usage.
+#' @param y_donors See Usage.
+#' @param t0 See Usage.
+#' @param x_treated Defaults to \code{NULL}.
+#' @param x_donors Defaults to \code{NULL}.
+#' @param v Defaults to \code{NULL}.
+#' @param statistic Defaults to \code{"effect"}.
+#' @param ... Passed through.
+#' @return A list with \code{estimate}, \code{gaps}, \code{weights}, \code{fit_loss}, \code{placebo}, \code{pvalue}, \code{rank}, \code{n_donors}, \code{t0}, \code{statistic}, \code{rmspe_pre}, \code{rmspe_post}, \code{note}, \code{method}.
+#' @export
 morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
                          x_donors = NULL, v = NULL,
                          statistic = "effect", ...) {

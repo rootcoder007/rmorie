@@ -12,6 +12,14 @@
 
 .tagRC_EPS <- 1e-12
 
+#' tripartite_graph
+#'
+#' Part of the tagRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param triples See Usage.
+#' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples}, \code{note}.
+#' @export
 tripartite_graph <- function(triples) {
   nodes <- character(0)
   edges <- list()
@@ -45,6 +53,16 @@ tripartite_graph <- function(triples) {
                     "undirected edges, so weight flows both ways"))
 }
 
+#' preference_vector
+#'
+#' Part of the tagRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nodes See Usage.
+#' @param focus See Usage.
+#' @param weight Defaults to \code{0.9}.
+#' @return A list with \code{p}, \code{focus}, \code{mass}.
+#' @export
 preference_vector <- function(nodes, focus, weight = 0.9) {
   N <- as.list(nodes)
   F <- intersect(focus, N)
@@ -69,6 +87,19 @@ preference_vector <- function(nodes, focus, weight = 0.9) {
   list(p = p, focus = F, mass = mass)
 }
 
+#' adapted_pagerank
+#'
+#' Part of the tagRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adjacency See Usage.
+#' @param nodes See Usage.
+#' @param p Defaults to \code{NULL}.
+#' @param d Defaults to \code{0.7}.
+#' @param iters Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{w}, \code{ranking}.
+#' @export
 adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
                              iters = 200, tol = 1e-12) {
   N <- as.list(nodes)
@@ -132,6 +163,18 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
   list(w = w, ranking = ranking)
 }
 
+#' folkrank
+#'
+#' Part of the tagRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param triples See Usage.
+#' @param focus See Usage.
+#' @param d Defaults to \code{0.7}.
+#' @param weight Defaults to \code{0.9}.
+#' @param iters Defaults to \code{200}.
+#' @return A list with \code{estimate}, \code{ranking}, \code{difference}, \code{with_preference}, \code{without_preference}, \code{undifferenced_ranking}, \code{baseline_ranking}, \code{focus}, \code{n_nodes}, \code{method}, \code{note}.
+#' @export
 folkrank <- function(triples, focus, d = 0.7, weight = 0.9, iters = 200) {
   g <- tripartite_graph(triples)
   N <- g$nodes
@@ -172,6 +215,18 @@ tagawarerec <- folkrank
         "actually pulled up survives. Keep ||p||_1 = ||w||_1.")
 }
 
+#' morie_tagRC
+#'
+#' Part of the tagRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param triples See Usage.
+#' @param focus See Usage.
+#' @param d Defaults to \code{0.7}.
+#' @param weight Defaults to \code{0.9}.
+#' @param iters Defaults to \code{200}.
+#' @return The value of \code{folkrank}.
+#' @export
 morie_tagRC <- function(triples, focus, d = 0.7, weight = 0.9,
                         iters = 200) {
   folkrank(triples, focus, d = d, weight = weight, iters = iters)

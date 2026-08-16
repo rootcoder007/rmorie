@@ -41,6 +41,16 @@
   out
 }
 
+#' morie_lyapun_embed
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param m See Usage.
+#' @param tau See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_lyapun_embed <- function(y, m, tau) {
   y <- .lyapun_as_series(y)
   m <- as.integer(m); tau <- as.integer(tau)
@@ -61,6 +71,15 @@ morie_lyapun_embed <- function(y, m, tau) {
   out
 }
 
+#' autocorrelation_lag
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param threshold Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 autocorrelation_lag <- function(y, threshold = NULL) {
   y <- .lyapun_as_series(y)
   n <- length(y)
@@ -78,6 +97,15 @@ autocorrelation_lag <- function(y, threshold = NULL) {
   1L
 }
 
+#' mean_period
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param dt Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 mean_period <- function(y, dt = 1.0) {
   y <- .lyapun_as_series(y)
   n <- length(y)
@@ -132,6 +160,19 @@ mean_period <- function(y, dt = 1.0) {
   sqrt(s)
 }
 
+#' divergence_curve
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param m Defaults to \code{NULL}.
+#' @param tau Defaults to \code{NULL}.
+#' @param dt Defaults to \code{1}.
+#' @param min_sep Defaults to \code{NULL}.
+#' @param max_steps Defaults to \code{NULL}.
+#' @return A list with \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{neighbour}, \code{d0}, \code{points}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n_obs}.
+#' @export
 divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
                              min_sep = NULL, max_steps = NULL) {
   y <- .lyapun_as_series(y)
@@ -221,6 +262,22 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
   list(slope = slope, intercept = intercept, se = se, r2 = r2)
 }
 
+#' lyapunov_exponent
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param embedding Defaults to \code{NULL}.
+#' @param tau Defaults to \code{NULL}.
+#' @param dt Defaults to \code{1}.
+#' @param fit Defaults to \code{NULL}.
+#' @param min_sep Defaults to \code{NULL}.
+#' @param max_steps Defaults to \code{NULL}.
+#' @param method Defaults to \code{"rosenstein"}.
+#' @param k Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{lambda1}, \code{rosenstein}, \code{sato}, \code{sato_k}, \code{sato_k_curve}, \code{se}, \code{r_squared}, \code{intercept}, \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{fit_range}, \code{k}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n}, \code{dt}, \code{method}, \code{note}.
+#' @export
 lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
                               fit = NULL, min_sep = NULL,
                               max_steps = NULL, method = "rosenstein",
@@ -317,6 +374,15 @@ largest_lyapunov <- lyapunov_exponent
         "plateau the paper itself calls unreliable).", sep = "")
 }
 
+#' morie_lyapun
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_lyapun <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("lyapun: op must be one of lyapunov_exponent, morie_lyapun_embed, autocorrelation_lag, mean_period, divergence_curve, cheatsheet")

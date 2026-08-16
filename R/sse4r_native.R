@@ -162,6 +162,18 @@
   )
 }
 
+#' morie_sse4r
+#'
+#' Part of the sse4r_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sequence See Usage.
+#' @param user_embedding See Usage.
+#' @param item_table See Usage.
+#' @param attend Defaults to \code{NULL}.
+#' @param top_k Defaults to \code{3}.
+#' @return A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context}, \code{method}, \code{note}.
+#' @export
 morie_sse4r <- function(sequence, user_embedding, item_table,
                        attend = NULL, top_k = 3) {
   pers <- .sse4r_personalise(sequence, user_embedding)
@@ -230,6 +242,13 @@ morie_sse4r <- function(sequence, user_embedding, item_table,
   )
 }
 
+#' sse4r_cheatsheet
+#'
+#' Part of the sse4r_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 sse4r_cheatsheet <- function() {
   paste0("sse4r: a self-attentive sequential recommender models WHAT ",
          "was clicked and ignores WHO clicked, so two users with the ",

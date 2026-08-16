@@ -49,6 +49,16 @@
   sqrt(d2)
 }
 
+#' univariate_mcd
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @param h Defaults to \code{NULL}.
+#' @param consistent Defaults to \code{TRUE}.
+#' @return A vector, from \code{c}.
+#' @export
 univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
   v <- sort(as.numeric(values))
   n <- length(v)
@@ -114,6 +124,17 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
   do.call(rbind, dirs)
 }
 
+#' outlyingness
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param h Defaults to \code{NULL}.
+#' @param n_dirs Defaults to \code{250L}.
+#' @param seed Defaults to \code{17L}.
+#' @return A list with \code{outl}, \code{exact_fit_direction}.
+#' @export
 outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
   rows <- .robpca_matrix(X)
   n <- nrow(rows)
@@ -229,6 +250,17 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
   best
 }
 
+#' classify_outliers
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sd See Usage.
+#' @param od See Usage.
+#' @param sd_cut See Usage.
+#' @param od_cut See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 classify_outliers <- function(sd, od, sd_cut, od_cut) {
   n <- length(sd)
   out <- character(n)
@@ -316,6 +348,21 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
   cut ^ 1.5
 }
 
+#' morie_robpca
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param k Defaults to \code{NULL}.
+#' @param alpha Defaults to \code{0.75}.
+#' @param kmax Defaults to \code{10L}.
+#' @param n_dirs Defaults to \code{250L}.
+#' @param n_start Defaults to \code{250L}.
+#' @param seed Defaults to \code{17L}.
+#' @param reweight Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{loadings}, \code{eigenvalues}, \code{center}, \code{scores}, \code{k}, \code{k0}, \code{h}, \code{alpha}, \code{rank}, \code{subspace_rank}, \code{outlyingness}, \code{h_subset}, \code{reweighted_kept}, \code{consistency_factor}, \code{score_distance}, \code{orthogonal_distance}, \code{sd_cutoff}, \code{od_cutoff}, \code{classification}, \code{n_outliers}, \code{n}, \code{p}, \code{reweighted}, \code{method}, \code{note}.
+#' @export
 morie_robpca <- function(X, k = NULL, alpha = 0.75, kmax = 10L,
                          n_dirs = 250L, n_start = 250L,
                          seed = 17L, reweight = TRUE) {

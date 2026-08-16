@@ -77,6 +77,22 @@
   )
 }
 
+#' morie_pratt
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param word_states See Usage.
+#' @param Ww See Usage.
+#' @param bw See Usage.
+#' @param u_w See Usage.
+#' @param Ws See Usage.
+#' @param bs See Usage.
+#' @param u_s See Usage.
+#' @param Wc See Usage.
+#' @param bc See Usage.
+#' @return A list with \code{estimate}, \code{probabilities}, \code{document_vector}, \code{sentence_attention}, \code{word_attention}, \code{n_sentences}, \code{method}, \code{note}.
+#' @export
 morie_pratt <- function(word_states, Ww, bw, u_w, Ws, bs, u_s, Wc, bc) {
   S <- list()
   wa <- list()
@@ -114,6 +130,14 @@ morie_pratt_sentence_vector <- .pratt_sentence_vector
 morie_pratt_document_vector <- .pratt_document_vector
 morie_pratt_classify <- morie_pratt
 
+#' morie_pratt_attention_entropy
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @return A list with \code{entropy}, \code{max_entropy}, \code{concentration}.
+#' @export
 morie_pratt_attention_entropy <- function(alpha) {
   a <- .pratt_vec(alpha)
   s <- sum(a)
@@ -129,6 +153,13 @@ morie_pratt_attention_entropy <- function(alpha) {
   )
 }
 
+#' morie_pratt_cheatsheet
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_pratt_cheatsheet <- function() {
   paste("pratt: mirror the document's own structure -- words to sentences",
         "to document -- with attention at BOTH levels, because which word",

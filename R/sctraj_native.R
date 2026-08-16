@@ -72,6 +72,17 @@
   M[, n + 1L] / diag(M)[seq_len(n)]
 }
 
+#' morie_sctraj_cluster_distances
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param labels See Usage.
+#' @param cov Defaults to \code{"full"}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{distances}, \code{clusters}, \code{centers}, \code{covariances}.
+#' @export
 morie_sctraj_cluster_distances <- function(X, labels, cov="full",
                                            weights=NULL) {
   # Equation 1: the covariance-scaled distance between clusters.
@@ -151,6 +162,16 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
   list(distances=D, clusters=nms, centers=centers, covariances=covs)
 }
 
+#' Prim\'s MST, with the paper\'s optional terminal-state constraint
+#'
+#' With ends given, the tree is built on the non-terminal clusters and
+#' each terminal is attached to its nearest non-terminal neighbour.
+#'
+#' @param D See Usage.
+#' @param clusters See Usage.
+#' @param ends Defaults to \code{NULL}.
+#' @return A list with \code{edges}, \code{adjacency}, \code{nodes}.
+#' @export
 morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends=NULL) {
   # Prim's MST, with the paper's optional terminal-state constraint.
   # With ends given, the tree is built on the non-terminal clusters
@@ -200,6 +221,15 @@ morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends=NULL) {
   list(edges=edges, adjacency=adj, nodes=nodes)
 }
 
+#' Every path from root to a leaf, in order
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param root See Usage.
+#' @return The value of \code{[}.
+#' @export
 morie_sctraj_lineages_from_tree <- function(tree, root) {
   # Every path from root to a leaf, in order.
   adj <- tree$adjacency
@@ -291,6 +321,20 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
   out
 }
 
+#' morie_sctraj_principal_curve
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param init See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{15}.
+#' @param tol Defaults to \code{0.001}.
+#' @param span Defaults to \code{0.4}.
+#' @param n_knots Defaults to \code{NULL}.
+#' @return A list with \code{pseudotime}, \code{curve}, \code{distance}, \code{sse}.
+#' @export
 morie_sctraj_principal_curve <- function(X, init, weights=NULL,
                                          max_iter=15, tol=1e-3, span=0.4,
                                          n_knots=NULL) {
@@ -379,6 +423,16 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
   curve[m, ]
 }
 
+#' morie_sctraj_average_curve
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param curves See Usage.
+#' @param n_points Defaults to \code{100}.
+#' @param return_grid Defaults to \code{FALSE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_sctraj_average_curve <- function(curves, n_points=100,
                                        return_grid=FALSE) {
   # Equation 2: c_avg(t) = (1/M) sum_m c_m(t). The common domain is
@@ -411,6 +465,13 @@ morie_sctraj_average_curve <- function(curves, n_points=100,
   out
 }
 
+#' CDF of a cosine kernel of bandwidth 1/2: density 1 + cos(2 pi u)
+#'
+#' on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 morie_sctraj_cosine_cdf <- function(u) {
   # CDF of a cosine kernel of bandwidth 1/2: density 1 + cos(2 pi u)
   # on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
@@ -423,6 +484,17 @@ morie_sctraj_cosine_cdf <- function(u) {
   u + 0.5 + sin(2 * pi * u) / (2 * pi)
 }
 
+#' morie_sctraj_shrinkage_weight
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param t_min See Usage.
+#' @param t_max See Usage.
+#' @param arg Defaults to \code{"shifted"}.
+#' @return A numeric value.
+#' @export
 morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
                                           arg="shifted") {
   # Equation 4's weighting function. arg="shifted" (default) puts
@@ -470,6 +542,23 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
 
 # --------------------------------------------------------------- driver
 
+#' morie_sctraj
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param labels See Usage.
+#' @param root See Usage.
+#' @param ends Defaults to \code{NULL}.
+#' @param cov Defaults to \code{"full"}.
+#' @param max_iter Defaults to \code{15}.
+#' @param shrink Defaults to \code{TRUE}.
+#' @param weight_arg Defaults to \code{"shifted"}.
+#' @param span Defaults to \code{0.4}.
+#' @param n_points Defaults to \code{100}.
+#' @return A list with \code{estimate}, \code{pseudotime}, \code{weights}, \code{lineages}, \code{curves}, \code{tree}, \code{distance}, \code{clusters}, \code{centers}, \code{n_lineages}, \code{root}, \code{cov}, \code{shrink}, \code{method}, \code{note}.
+#' @export
 morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
                          max_iter=15, shrink=TRUE, weight_arg="shifted",
                          span=0.4, n_points=100) {
@@ -601,6 +690,13 @@ morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
 
 morie_sctraj_pseudotime_trajectory <- morie_sctraj
 
+#' morie_sctraj_cheatsheet
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_sctraj_cheatsheet <- function() {
   paste0(
     "sctraj: Slingshot (Street et al. 2018). Stage 1 draws an ",

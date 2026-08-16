@@ -271,28 +271,87 @@
 
 # Public API
 
+#' morie_phylby_chain_temperature
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param j See Usage.
+#' @param lam Defaults to \code{0.2}.
+#' @return A numeric value.
+#' @export
 morie_phylby_chain_temperature <- function(j, lam = 0.2) {
   if (lam < 0) stop("phylby: the heating parameter must be >= 0")
   if (j < 0) stop("phylby: the chain index must be >= 0")
   1.0 / (1.0 + lam * as.numeric(j))
 }
 
+#' morie_phylby_swap_acceptance
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta_j See Usage.
+#' @param beta_k See Usage.
+#' @param logp_j See Usage.
+#' @param logp_k See Usage.
+#' @return A numeric value.
+#' @export
 morie_phylby_swap_acceptance <- function(beta_j, beta_k, logp_j, logp_k) {
   min(1.0, exp(min((beta_j - beta_k) * (logp_k - logp_j), 700.0)))
 }
 
+#' morie_phylby_splits_of
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{.phylby_splits_of}.
+#' @export
 morie_phylby_splits_of <- function(tree) {
   .phylby_splits_of(tree)
 }
 
+#' morie_phylby_topology_key
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{.phylby_topology_key}.
+#' @export
 morie_phylby_topology_key <- function(tree) {
   .phylby_topology_key(tree)
 }
 
+#' morie_phylby_nni_neighbours
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{.phylby_nni_neighbours}.
+#' @export
 morie_phylby_nni_neighbours <- function(tree) {
   .phylby_nni_neighbours(tree)
 }
 
+#' morie_phylby_log_posterior
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param seqs See Usage.
+#' @param pi Defaults to \code{NULL}.
+#' @param rate Defaults to \code{1}.
+#' @param branch_prior_mean Defaults to \code{0.1}.
+#' @param partitions Defaults to \code{NULL}.
+#' @param rates Defaults to \code{NULL}.
+#' @param temperature Defaults to \code{1}.
+#' @return The value of \code{.phylby_log_posterior}.
+#' @export
 morie_phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
                                        branch_prior_mean = 0.1,
                                        partitions = NULL, rates = NULL,
@@ -300,10 +359,40 @@ morie_phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
   .phylby_log_posterior(tree, seqs, pi, rate, branch_prior_mean, partitions, rates, temperature)
 }
 
+#' morie_phylby_clade_credibility
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param samples See Usage.
+#' @return The value of \code{.phylby_clade_credibility}.
+#' @export
 morie_phylby_clade_credibility <- function(samples) {
   .phylby_clade_credibility(samples)
 }
 
+#' morie_phylby
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alignment See Usage.
+#' @param n_iter Defaults to \code{2000}.
+#' @param burnin Defaults to \code{NULL}.
+#' @param n_chains Defaults to \code{4}.
+#' @param lam Defaults to \code{0.2}.
+#' @param swap_every Defaults to \code{10}.
+#' @param sample_every Defaults to \code{10}.
+#' @param pi Defaults to \code{NULL}.
+#' @param rate Defaults to \code{1}.
+#' @param branch_prior_mean Defaults to \code{0.1}.
+#' @param partitions Defaults to \code{NULL}.
+#' @param tree Defaults to \code{NULL}.
+#' @param n_runs Defaults to \code{2}.
+#' @param tune Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
                           lam = 0.2, swap_every = 10, sample_every = 10,
                           pi = NULL, rate = 1.0, branch_prior_mean = 0.1,
@@ -445,6 +534,13 @@ morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
 
 morie_bayesian_phylogeny <- morie_phylby
 
+#' morie_phylby_cheatsheet
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_phylby_cheatsheet <- function() {
   "phylby: MrBayes 3 (Ronquist & Huelsenbeck 2003). MCMC over (topology, branch lengths, rate) with a uniform topology prior and exponential branch lengths, the likelihood coming from Felsenstein pruning. Metropolis coupling runs n chains at beta_j = 1/(1 + lambda j) and swaps them with min(1, exp[(beta_j - beta_k)(l_k - l_j)]); only the cold chain is sampled. Partitions give each subset of sites its own rate. Convergence is judged by the average standard deviation of split frequencies between independent runs."
 }

@@ -1,3 +1,15 @@
+#' morie_linprm
+#'
+#' Part of the linprm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param c See Usage.
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_iter Defaults to \code{200}.
+#' @return A list with \code{x}, \code{y}, \code{s}, \code{iterations}, \code{gap}, \code{converged}, \code{mu_history}, \code{primal_residual}, \code{dual_residual}.
+#' @export
 morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
   cv <- as.numeric(c)
   M <- lapply(A, function(row) as.numeric(row))

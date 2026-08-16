@@ -96,23 +96,64 @@
 
 # ---- public API ----
 
+#' morie_unifAlg_var
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param name See Usage.
+#' @return The value of \code{list}.
+#' @export
 morie_unifAlg_var <- function(name) {
   list(.VAR, as.character(name))
 }
 
+#' morie_unifAlg_app
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param symbol See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{list}.
+#' @export
 morie_unifAlg_app <- function(symbol, ...) {
   args <- list(...)
   list(.APP, as.character(symbol), args)
 }
 
+#' morie_unifAlg_const
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param symbol See Usage.
+#' @return The value of \code{list}.
+#' @export
 morie_unifAlg_const <- function(symbol) {
   list(.APP, as.character(symbol), list())
 }
 
+#' morie_unifAlg_is_var
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @return The value of \code{.unifAlg_is_var}.
+#' @export
 morie_unifAlg_is_var <- function(t) {
   .unifAlg_is_var(t)
 }
 
+#' morie_unifAlg_variables
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @return The value of \code{$}.
+#' @export
 morie_unifAlg_variables <- function(t) {
   t <- .unifAlg_check(t)
   env <- new.env()
@@ -137,10 +178,28 @@ morie_unifAlg_variables <- function(t) {
   env$out
 }
 
+#' morie_unifAlg_occurs
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param name See Usage.
+#' @param t See Usage.
+#' @return The value of \code{%in%}.
+#' @export
 morie_unifAlg_occurs <- function(name, t) {
   as.character(name) %in% morie_unifAlg_variables(t)
 }
 
+#' morie_unifAlg_apply_subst
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param subst See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 morie_unifAlg_apply_subst <- function(t, subst) {
   cur <- .unifAlg_check(t)
   for (i in seq_len(64L)) {
@@ -154,10 +213,28 @@ morie_unifAlg_apply_subst <- function(t, subst) {
                deparse(subst)))
 }
 
+#' morie_unifAlg_substitute
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param subst See Usage.
+#' @return The value of \code{.unifAlg_apply_once}.
+#' @export
 morie_unifAlg_substitute <- function(t, subst) {
   .unifAlg_apply_once(.unifAlg_check(t), subst)
 }
 
+#' morie_unifAlg_compose
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param outer See Usage.
+#' @param inner See Usage.
+#' @return The value of \code{[}.
+#' @export
 morie_unifAlg_compose <- function(outer, inner) {
   out <- list()
   for (nm in names(inner)) {
@@ -176,6 +253,15 @@ morie_unifAlg_compose <- function(outer, inner) {
   out[keep]
 }
 
+#' morie_unifAlg_disagreement
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t1 See Usage.
+#' @param t2 See Usage.
+#' @return Nothing; the function is called for its effect.
+#' @export
 morie_unifAlg_disagreement <- function(t1, t2) {
   a <- .unifAlg_check(t1)
   b <- .unifAlg_check(t2)
@@ -197,6 +283,16 @@ morie_unifAlg_disagreement <- function(t1, t2) {
   NULL
 }
 
+#' morie_unifAlg_unify
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t1 See Usage.
+#' @param t2 See Usage.
+#' @param occurs_check Defaults to \code{TRUE}.
+#' @return Nothing; this branch always raises.
+#' @export
 morie_unifAlg_unify <- function(t1, t2, occurs_check = TRUE) {
   a <- .unifAlg_check(t1)
   b <- .unifAlg_check(t2)
@@ -253,6 +349,15 @@ morie_unifAlg_unify <- function(t1, t2, occurs_check = TRUE) {
   stop("unifAlg: unification did not terminate")
 }
 
+#' morie_unifAlg_match
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pattern See Usage.
+#' @param subject See Usage.
+#' @return The value of \code{sub}, as built in the body.
+#' @export
 morie_unifAlg_match <- function(pattern, subject) {
   p <- .unifAlg_check(pattern)
   s <- .unifAlg_check(subject)
@@ -286,6 +391,16 @@ morie_unifAlg_match <- function(pattern, subject) {
   sub
 }
 
+#' morie_unifAlg_factor_through
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param general See Usage.
+#' @param other See Usage.
+#' @param over See Usage.
+#' @return The value of \code{delta}, as built in the body.
+#' @export
 morie_unifAlg_factor_through <- function(general, other, over) {
   delta <- list()
   for (name in over) {

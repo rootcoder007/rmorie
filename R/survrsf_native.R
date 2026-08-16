@@ -50,6 +50,14 @@ morie_survrsf_SPLIT_RULES <- c("logrank", "logrankrandom", "conserve",
                         "conserve")
 .survrsf_UNSOURCED <- list()
 
+#' Which of the paper\'s four splitting rules are implemented
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rule Defaults to \code{NULL}.
+#' @return A list with \code{rule}, \code{available}, \code{reason}.
+#' @export
 morie_survrsf_rule_status <- function(rule=NULL) {
   # Which of the paper's four splitting rules are implemented.
   if (is.null(rule)) {
@@ -116,6 +124,15 @@ morie_survrsf_rule_status <- function(rule=NULL) {
   e
 }
 
+#' The terminal-node estimator of equation (3.1)
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @return A list with \code{time}, \code{chf}, \code{n}, \code{deaths}.
+#' @export
 morie_survrsf_nelson_aalen <- function(times, events) {
   # The terminal-node estimator of equation (3.1).
   n <- length(times)
@@ -165,6 +182,14 @@ morie_survrsf_nelson_aalen <- function(times, events) {
   out
 }
 
+#' Lemma 1: the hazard summed over observed times is the deaths
+#'
+#' Censored times count too.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @return A list with \code{sum_chf}, \code{deaths}, \code{difference}, \code{conserved}.
+#' @export
 morie_survrsf_conservation_check <- function(times, events) {
   # Lemma 1: the hazard summed over observed times is the deaths.
   # Censored times count too.
@@ -176,6 +201,16 @@ morie_survrsf_conservation_check <- function(times, events) {
        conserved=abs(total - deaths) < 1e-9)
 }
 
+#' The two-sample log-rank statistic used for splitting
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param group See Usage.
+#' @return A numeric value.
+#' @export
 morie_survrsf_logrank_statistic <- function(times, events, group) {
   # The two-sample log-rank statistic used for splitting.
   n <- length(times)
@@ -220,6 +255,15 @@ morie_survrsf_logrank_statistic <- function(times, events, group) {
   abs(num) / sqrt(var_)
 }
 
+#' Lausen\'s log-rank scores, Hothorn & Lausen (2003) eq. (13)
+#'
+#' Without censoring or ties these are the Savage scores and sum to
+#' zero.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_survrsf_logrank_scores <- function(times, events) {
   # Lausen's log-rank scores, Hothorn & Lausen (2003) eq. (13).
   # Without censoring or ties these are the Savage scores and sum to
@@ -246,6 +290,17 @@ morie_survrsf_logrank_scores <- function(times, events) {
   out
 }
 
+#' morie_survrsf_logrank_score_statistic
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param group See Usage.
+#' @param scores Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 morie_survrsf_logrank_score_statistic <- function(times, events, group,
                                                   scores=NULL) {
   # The standardised statistic of Hothorn & Lausen (2003) eqs (1)-(4),
@@ -275,6 +330,14 @@ morie_survrsf_logrank_score_statistic <- function(times, events, group,
   abs(T - ET) / sqrt(VT)
 }
 
+#' The partial sums M_k of Ishwaran & Kogalur (2007) over the ordered
+#'
+#' times of a node. Lemma 1 forces M_n = 0.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_survrsf_conservation_residuals <- function(times, events) {
   # The partial sums M_k of Ishwaran & Kogalur (2007) over the ordered
   # times of a node. Lemma 1 forces M_n = 0.
@@ -300,6 +363,15 @@ morie_survrsf_conservation_residuals <- function(times, events) {
   out
 }
 
+#' Conservation-of-events splitting, Ishwaran & Kogalur (2007)
+#'
+#' Returns the transform 1/(1 + Conserve).
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param group See Usage.
+#' @return A numeric value.
+#' @export
 morie_survrsf_conserve_statistic <- function(times, events, group) {
   # Conservation-of-events splitting, Ishwaran & Kogalur (2007).
   # Returns the transform 1/(1 + Conserve).
@@ -323,6 +395,20 @@ morie_survrsf_conserve_statistic <- function(times, events, group) {
   1.0 / (1.0 + conserve)
 }
 
+#' morie_survrsf_best_split
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param features See Usage.
+#' @param min_deaths Defaults to \code{3}.
+#' @param rule Defaults to \code{"logrank"}.
+#' @param rng Defaults to \code{NULL}.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 morie_survrsf_best_split <- function(X, times, events, features,
                                      min_deaths=3, rule="logrank",
                                      rng=NULL) {
@@ -374,6 +460,21 @@ morie_survrsf_best_split <- function(X, times, events, features,
   best
 }
 
+#' morie_survrsf_grow_tree
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param mtry Defaults to \code{NULL}.
+#' @param min_deaths Defaults to \code{3}.
+#' @param rule Defaults to \code{"logrank"}.
+#' @param seed Defaults to \code{0}.
+#' @param rng Defaults to \code{NULL}.
+#' @return A list with \code{root}, \code{rule}, \code{mtry}, \code{min_deaths}, \code{n}.
+#' @export
 morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
                                     min_deaths=3, rule="logrank",
                                     seed=0, rng=NULL) {
@@ -420,6 +521,17 @@ morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
        min_deaths=as.integer(min_deaths), n=n)
 }
 
+#' morie_survrsf_predict_tree
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tree See Usage.
+#' @param x See Usage.
+#' @param random_variable Defaults to \code{NULL}.
+#' @param rng Defaults to \code{NULL}.
+#' @return The value of \code{node}, as built in the body.
+#' @export
 morie_survrsf_predict_tree <- function(tree, x, random_variable=NULL,
                                        rng=NULL) {
   # Drop a case down the tree and return its terminal node.
@@ -438,6 +550,21 @@ morie_survrsf_predict_tree <- function(tree, x, random_variable=NULL,
   node
 }
 
+#' morie_survrsf_forest
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param n_trees Defaults to \code{50}.
+#' @param mtry Defaults to \code{NULL}.
+#' @param min_deaths Defaults to \code{3}.
+#' @param rule Defaults to \code{"logrank"}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{trees}, \code{inbag}, \code{n}, \code{rule}, \code{n_trees}, \code{oob_fraction}, \code{times}, \code{events}.
+#' @export
 morie_survrsf_forest <- function(X, times, events, n_trees=50, mtry=NULL,
                                  min_deaths=3, rule="logrank", seed=0) {
   # Grow the forest, keeping the out-of-bag membership.
@@ -472,6 +599,19 @@ morie_survrsf_forest <- function(X, times, events, n_trees=50, mtry=NULL,
        oob_fraction=oob_fraction, times=times, events=events)
 }
 
+#' morie_survrsf_ensemble_chf
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fit See Usage.
+#' @param X See Usage.
+#' @param t See Usage.
+#' @param oob Defaults to \code{TRUE}.
+#' @param random_variable Defaults to \code{NULL}.
+#' @param seed Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_survrsf_ensemble_chf <- function(fit, X, t, oob=TRUE,
                                        random_variable=NULL, seed=1) {
   # Equations (3.2) and (3.3): the out-of-bag or bootstrap ensemble.
@@ -496,6 +636,18 @@ morie_survrsf_ensemble_chf <- function(fit, X, t, oob=TRUE,
   out
 }
 
+#' morie_survrsf_mortality
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fit See Usage.
+#' @param X See Usage.
+#' @param oob Defaults to \code{TRUE}.
+#' @param random_variable Defaults to \code{NULL}.
+#' @param seed Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_survrsf_mortality <- function(fit, X, oob=TRUE,
                                     random_variable=NULL, seed=1) {
   # Sec. 4.1: the hazard summed over every observed time.
@@ -523,6 +675,16 @@ morie_survrsf_mortality <- function(fit, X, oob=TRUE,
   out
 }
 
+#' Harrell\'s C by the paper\'s four steps. predicted is a
+#'
+#' worse-outcome score: larger means the case is expected to fail
+#' sooner.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param predicted See Usage.
+#' @return A list with \code{c_index}, \code{concordance}, \code{permissible}, \code{prediction_error}.
+#' @export
 morie_survrsf_c_index <- function(times, events, predicted) {
   # Harrell's C by the paper's four steps. predicted is a
   # worse-outcome score: larger means the case is expected to fail
@@ -587,6 +749,16 @@ morie_survrsf_c_index <- function(times, events, predicted) {
        prediction_error=1.0 - concordance / permissible)
 }
 
+#' Sec. 7: random daughter assignment at splits on x. Keys are
+#'
+#' 0-based variable indices to match the Python.
+#'
+#' @param fit See Usage.
+#' @param X See Usage.
+#' @param variables Defaults to \code{NULL}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{vimp}, \code{baseline_error}, \code{note}, \code{method}.
+#' @export
 morie_survrsf_vimp <- function(fit, X, variables=NULL, seed=1) {
   # Sec. 7: random daughter assignment at splits on x. Keys are
   # 0-based variable indices to match the Python.
@@ -619,6 +791,13 @@ morie_survrsf_vimp <- function(fit, X, variables=NULL, seed=1) {
   )
 }
 
+#' morie_survrsf_cheatsheet
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_survrsf_cheatsheet <- function() {
   paste0(
     "survrsf: bootstrap survival trees split on the log-rank ",

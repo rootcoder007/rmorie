@@ -43,6 +43,16 @@
   }
 }
 
+#' positional_encoding
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param L Defaults to \code{10}.
+#' @param include_input Defaults to \code{TRUE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 positional_encoding <- function(p, L = 10, include_input = TRUE) {
   v <- .nrfrad_vec(p)
   Li <- as.integer(L)
@@ -58,6 +68,20 @@ positional_encoding <- function(p, L = 10, include_input = TRUE) {
   out
 }
 
+#' ray_points
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param origin See Usage.
+#' @param direction See Usage.
+#' @param t_near See Usage.
+#' @param t_far See Usage.
+#' @param n_samples See Usage.
+#' @param seed Defaults to \code{0}.
+#' @param stratified Defaults to \code{TRUE}.
+#' @return A list with \code{t}, \code{points}, \code{direction}.
+#' @export
 ray_points <- function(origin, direction, t_near, t_far, n_samples,
                        seed = 0, stratified = TRUE) {
   o <- .nrfrad_vec(origin)
@@ -84,6 +108,16 @@ ray_points <- function(origin, direction, t_near, t_far, n_samples,
   list(t = ts, points = pts, direction = as.numeric(d))
 }
 
+#' volume_render
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sigma See Usage.
+#' @param colour See Usage.
+#' @param t See Usage.
+#' @return A list with \code{colour}, \code{weights}, \code{accumulated_alpha}, \code{transmittance_final}, \code{note}.
+#' @export
 volume_render <- function(sigma, colour, t) {
   s <- .nrfrad_vec(sigma)
   C <- .nrfrad_mat(colour)
@@ -120,6 +154,18 @@ volume_render <- function(sigma, colour, t) {
   )
 }
 
+#' sample_pdf
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bins See Usage.
+#' @param weights See Usage.
+#' @param n_samples See Usage.
+#' @param seed Defaults to \code{0}.
+#' @param eps Defaults to \code{1e-05}.
+#' @return A vector, from \code{sort}.
+#' @export
 sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
   b <- .nrfrad_vec(bins)
   w <- .nrfrad_vec(weights) + as.numeric(eps)
@@ -144,6 +190,17 @@ sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
   sort(out)
 }
 
+#' density_is_view_independent
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model See Usage.
+#' @param point See Usage.
+#' @param directions See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{sigmas}, \code{max_deviation}, \code{view_independent}, \code{note}.
+#' @export
 density_is_view_independent <- function(model, point, directions,
                                         tol = 1e-9) {
   p <- .nrfrad_vec(point)

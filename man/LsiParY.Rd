@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{LsiParY}
+\alias{LsiParY}
+\title{Eqs (3.48)-(3.49): the parallel counterpart of eq (3.44) -- here the}
+\usage{
+LsiParY(x, h1, h2)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{h1}{See Usage.}
+\item{h2}{See Usage.}
+}
+\description{
+impulse responses ADD where a cascade convolves them.
+}
+\value{
+A list with \code{y}, \code{h}, \code{s1}, \code{s2}, \code{equivalent}, \code{max_difference}, \code{method}.
+}
+\keyword{internal}

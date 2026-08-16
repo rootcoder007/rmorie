@@ -22,6 +22,20 @@
                       "gaussian, got '%s'"), model))
 }
 
+#' morie_krpkrg_ordinary_kriging
+#'
+#' Part of the krpkrg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param coords See Usage.
+#' @param values See Usage.
+#' @param targets See Usage.
+#' @param model Defaults to \code{"spherical"}.
+#' @param nugget Defaults to \code{0}.
+#' @param sill Defaults to \code{1}.
+#' @param rng Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{weights}, \code{n}, \code{n_targets}, \code{model}, \code{nugget}, \code{sill}, \code{range}, \code{method}, \code{note}.
+#' @export
 morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
                                           model = "spherical", nugget = 0.0,
                                           sill = 1.0, rng = 1.0) {

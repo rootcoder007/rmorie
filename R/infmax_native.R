@@ -211,6 +211,17 @@
 .infmax_infomax_objective <- .infmax_local_objective
 
 # entry point -- the headline Deep InfoMax local objective
+#' Entry point -- the headline Deep InfoMax local objective
+#'
+#' Part of the infmax_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param global_features See Usage.
+#' @param feature_maps See Usage.
+#' @param critic See Usage.
+#' @param estimator Defaults to \code{"jsd"}.
+#' @return The value of \code{.infmax_local_objective}.
+#' @export
 morie_infmax <- function(global_features, feature_maps, critic,
                          estimator = "jsd") {
   .infmax_local_objective(global_features, feature_maps, critic, estimator)

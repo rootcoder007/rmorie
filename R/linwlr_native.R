@@ -92,6 +92,16 @@
 
 # ---- public API ----
 
+#' morie_linwlr_blip
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param w See Usage.
+#' @param psi See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 morie_linwlr_blip <- function(a, w, psi) {
   av <- .linwlr_vec(a)
   if (is.null(w)) return(av * psi[1])
@@ -101,6 +111,21 @@ morie_linwlr_blip <- function(a, w, psi) {
   as.numeric(av * (psi[1] + as.numeric(Wm %*% psi[2:(1 + p)])))
 }
 
+#' morie_linwlr
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param propensity Defaults to \code{NULL}.
+#' @param method Defaults to \code{"gest"}.
+#' @param baseline Defaults to \code{NULL}.
+#' @param pi_covariates Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
                           baseline = NULL, pi_covariates = NULL,
                           ridge = 1e-10) {
@@ -230,6 +255,13 @@ morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
   result
 }
 
+#' morie_linwlr_cheatsheet
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_linwlr_cheatsheet <- function() {
   paste0("linwlr: linear blip gamma(a,w) = a(psi0 + psi1'w) by ",
          "g-estimation on A - E[A|W] (Robins 2004), or by IP-weighted ",

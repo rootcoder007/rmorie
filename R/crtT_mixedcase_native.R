@@ -26,6 +26,15 @@
   list(g = old_r, c = old_s, d = old_t)
 }
 
+#' crtT
+#'
+#' Part of the crtT_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param residues See Usage.
+#' @param moduli See Usage.
+#' @return A list with \code{estimate}, \code{modulus}, \code{residues}, \code{moduli}, \code{method}.
+#' @export
 crtT <- function(residues, moduli) {
   a <- as.integer(residues)
   m <- as.integer(moduli)
@@ -60,6 +69,13 @@ chinese_remainder <- crtT
 
 morie_crtT <- crtT
 
+#' crtT_cheatsheet
+#'
+#' Part of the crtT_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @return A character value.
+#' @export
 crtT_cheatsheet <- function() {
   "crtT: fold pairs via x + (b-x)*c*m with cm+dn=1 (ext. Euclid)"
 }

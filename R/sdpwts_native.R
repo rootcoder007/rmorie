@@ -61,6 +61,16 @@
 .sdpwts_EPS <- 1e-12
 
 # F(x) = F0 + sum x_i F_i (the LMI)
+#' F(x) = F0 + sum x_i F_i (the LMI)
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param F0 See Usage.
+#' @param Fs See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 sdpwts_lmi <- function(x, F0, Fs) {
   v <- as.numeric(x)
   A <- as.matrix(F0)
@@ -81,6 +91,15 @@ sdpwts_lmi <- function(x, F0, Fs) {
 }
 
 # Eigenvalue test on the constraint matrix
+#' Eigenvalue test on the constraint matrix
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param tol Defaults to \code{-1e-10}.
+#' @return A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd}, \code{strictly_feasible}.
+#' @export
 sdpwts_is_psd <- function(M, tol = -1e-10) {
   A <- as.matrix(M)
   ev <- eigen(A, symmetric = TRUE, only.values = TRUE)$values
@@ -92,6 +111,16 @@ sdpwts_is_psd <- function(M, tol = -1e-10) {
 }
 
 # -log det F(x), INFINITE outside the cone
+#' Log det F(x), INFINITE outside the cone
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param F0 See Usage.
+#' @param Fs See Usage.
+#' @return A list with \code{value}, \code{feasible}, \code{min_eigenvalue}, \code{eigenvalues}.
+#' @export
 sdpwts_barrier <- function(x, F0, Fs) {
   M <- sdpwts_lmi(x, F0, Fs)
   ev <- eigen(M, symmetric = TRUE, only.values = TRUE)$values
@@ -109,6 +138,15 @@ sdpwts_barrier <- function(x, F0, Fs) {
 }
 
 # The duality gap at a central point is exactly m/t
+#' The duality gap at a central point is exactly m/t
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param m See Usage.
+#' @return A list with \code{gap}, \code{t}, \code{m}, \code{note}.
+#' @export
 sdpwts_central_path_gap <- function(t, m) {
   tt <- as.numeric(t)
   mm <- as.integer(m)
@@ -172,6 +210,21 @@ sdpwts_central_path_gap <- function(t, m) {
 }
 
 # The barrier method: centre, increase t, repeat
+#' The barrier method: centre, increase t, repeat
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param c See Usage.
+#' @param F0 See Usage.
+#' @param Fs See Usage.
+#' @param x0 See Usage.
+#' @param t0 Defaults to \code{1}.
+#' @param mu Defaults to \code{10}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param max_outer Defaults to \code{60}.
+#' @return A list with \code{estimate}, \code{x}, \code{objective}, \code{gap}, \code{outer_iterations}, \code{path}, \code{m}, \code{min_eigenvalue}, \code{method}, \code{note}.
+#' @export
 sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
                              tol = 1e-8, max_outer = 60) {
   cc <- as.numeric(c)
@@ -212,6 +265,17 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 }
 
 # Maximise t s.t. A - tI >= 0  (exact answer = lambda_min(A))
+#' Maximise t s.t. A - tI >= 0 (exact answer = lambda_min(A))
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param t0 Defaults to \code{1}.
+#' @param mu Defaults to \code{10}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{estimate}, \code{t}, \code{lambda_min}, \code{error}, \code{outer_iterations}, \code{gap}, \code{method}, \code{note}.
+#' @export
 sdpwts_min_eigenvalue_sdp <- function(A, t0 = 1.0, mu = 10.0,
                                       tol = 1e-9) {
   M <- as.matrix(A)
@@ -236,6 +300,13 @@ sdpwts_min_eigenvalue_sdp <- function(A, t0 = 1.0, mu = 10.0,
 # Compact alias per ledger/NAMING.md (entry point)
 morie_sdpwts <- sdpwts_solve_sdp
 
+#' sdpwts_cheatsheet
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 sdpwts_cheatsheet <- function() {
   paste0("sdpwts: minimise c'x subject to a LINEAR MATRIX ",
          "INEQUALITY F0 + sum x_i F_i >= 0. The feasible set is the ",

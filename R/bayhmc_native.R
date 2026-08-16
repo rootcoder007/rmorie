@@ -243,6 +243,17 @@ DELTA_MAX <- 1000.0
 # One leapfrog step: half-kick, drift, half-kick. Reversible and
 # volume-preserving, which lets a single Metropolis test on the
 # energy correct the discretisation error exactly.
+#' One leapfrog step: half-kick, drift, half-kick. Reversible and
+#'
+#' volume-preserving, which lets a single Metropolis test on the energy
+#' correct the discretisation error exactly.
+#'
+#' @param theta See Usage.
+#' @param r See Usage.
+#' @param eps See Usage.
+#' @param grad See Usage.
+#' @return A list with \code{theta}, \code{r}.
+#' @export
 leapfrog <- function(theta, r, eps, grad) {
   g <- grad(theta)
   r_half <- r + 0.5 * eps * g
@@ -256,6 +267,19 @@ leapfrog <- function(theta, r, eps, grad) {
 # acceptance probability crosses one half. The argument `rnd` is
 # the single-value normal generator (the closure around the
 # shared RNG).
+#' Algorithm 4: double or halve the step size until the Metropolis
+#'
+#' acceptance probability crosses one half. The argument `rnd` is the
+#' single-value normal generator (the closure around the shared RNG).
+#'
+#' @param theta See Usage.
+#' @param logp See Usage.
+#' @param grad See Usage.
+#' @param rnd See Usage.
+#' @param eps Defaults to \code{1}.
+#' @param max_doublings Defaults to \code{100}.
+#' @return The value of \code{eps}, as built in the body.
+#' @export
 find_reasonable_epsilon <- function(theta, logp, grad, rnd,
                                      eps = 1.0,
                                      max_doublings = 100) {
@@ -279,6 +303,21 @@ find_reasonable_epsilon <- function(theta, logp, grad, rnd,
 # Equation 6, one iteration of the Nesterov dual-averaging scheme
 # for the log step size. Returns the new step size and the running
 # averages carried between calls.
+#' Equation 6, one iteration of the Nesterov dual-averaging scheme
+#'
+#' for the log step size. Returns the new step size and the running
+#' averages carried between calls.
+#'
+#' @param t See Usage.
+#' @param h_bar See Usage.
+#' @param log_eps_bar See Usage.
+#' @param h_new See Usage.
+#' @param mu See Usage.
+#' @param gamma Defaults to \code{0.05}.
+#' @param t0 Defaults to \code{10}.
+#' @param kappa Defaults to \code{0.75}.
+#' @return A list with \code{eps}, \code{h_bar}, \code{log_eps_bar}.
+#' @export
 dual_averaging_update <- function(t, h_bar, log_eps_bar, h_new, mu,
                                   gamma = 0.05, t0 = 10.0,
                                   kappa = 0.75) {
@@ -298,6 +337,17 @@ dual_averaging_update <- function(t, h_bar, log_eps_bar, h_new, mu,
 # The NUTS stopping rule: has the trajectory begun to double back?
 # True (no U-turn) while (theta+ - theta-).r is non-negative at
 # both ends.
+#' The NUTS stopping rule: has the trajectory begun to double back?
+#'
+#' True (no U-turn) while (theta+ - theta-).r is non-negative at both
+#' ends.
+#'
+#' @param theta_minus See Usage.
+#' @param theta_plus See Usage.
+#' @param r_minus See Usage.
+#' @param r_plus See Usage.
+#' @return A logical value.
+#' @export
 no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
   d <- theta_plus - theta_minus
   sum(d * r_minus) >= 0 && sum(d * r_plus) >= 0
@@ -307,6 +357,24 @@ no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
 # the new trajectory ends (theta_minus, r_minus, theta_plus,
 # r_plus), the candidate sample t_p, and the tree's bookkeeping
 # (count, indicator, summed alpha, alpha normaliser).
+#' The recursion of Algorithm 3, returning the paper\'s nine values:
+#'
+#' the new trajectory ends (theta_minus, r_minus, theta_plus, r_plus),
+#' the candidate sample t_p, and the tree\'s bookkeeping (count,
+#' indicator, summed alpha, alpha normaliser).
+#'
+#' @param theta See Usage.
+#' @param r See Usage.
+#' @param logu See Usage.
+#' @param v See Usage.
+#' @param j See Usage.
+#' @param eps See Usage.
+#' @param logp See Usage.
+#' @param grad See Usage.
+#' @param rnd See Usage.
+#' @param joint0 See Usage.
+#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s}, \code{alpha}, \code{na}.
+#' @export
 build_tree <- function(theta, r, logu, v, j, eps, logp, grad, rnd,
                        joint0) {
   if (j == 0L) {

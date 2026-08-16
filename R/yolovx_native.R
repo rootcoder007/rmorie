@@ -41,6 +41,16 @@
 
 .yolovx_EPS <- 1e-12
 
+#' morie_yolovx_decoupled_head
+#'
+#' Part of the yolovx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param channels See Usage.
+#' @param reduced Defaults to \code{256}.
+#' @param n_classes Defaults to \code{80}.
+#' @return A list with \code{reduce_params}, \code{cls_params}, \code{reg_params}, \code{total}, \code{coupled_total}, \code{branches}, \code{extra_latency_ms}, \code{note}.
+#' @export
 morie_yolovx_decoupled_head <- function(channels, reduced=256,
                                         n_classes=80) {
   # 1x1 to reduce, then TWO parallel 3x3 branches.
@@ -62,6 +72,17 @@ morie_yolovx_decoupled_head <- function(channels, reduced=256,
                    "for a stated AP gain"))
 }
 
+#' Four distances from a location to the box sides
+#'
+#' Part of the yolovx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param box See Usage.
+#' @param cx See Usage.
+#' @param cy See Usage.
+#' @param stride Defaults to \code{1}.
+#' @return A list with \code{ltrb}, \code{center}, \code{stride}.
+#' @export
 morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
   # Four distances from a location to the box sides.
   b <- as.numeric(box)
@@ -80,6 +101,17 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
        center=c(px, py), stride=s)
 }
 
+#' Back to corners. Inverts encode_box exactly
+#'
+#' Part of the yolovx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ltrb See Usage.
+#' @param cx See Usage.
+#' @param cy See Usage.
+#' @param stride Defaults to \code{1}.
+#' @return A vector, from \code{c}.
+#' @export
 morie_yolovx_decode_box <- function(ltrb, cx, cy, stride=1.0) {
   # Back to corners. Inverts encode_box exactly.
   v <- .s03vec(ltrb)
@@ -93,6 +125,15 @@ morie_yolovx_decode_box <- function(ltrb, cx, cy, stride=1.0) {
   c(px - l * s, py - t * s, px + r * s, py + b * s)
 }
 
+#' Intersection over union of two corner boxes
+#'
+#' Part of the yolovx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 morie_yolovx_box_iou <- function(a, b) {
   # Intersection over union of two corner boxes.
   a <- as.numeric(a)
@@ -105,6 +146,18 @@ morie_yolovx_box_iou <- function(a, b) {
   if (ua > .yolovx_EPS) inter / ua else 0.0
 }
 
+#' morie_yolovx_center_sampling
+#'
+#' Part of the yolovx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param box See Usage.
+#' @param grid_w See Usage.
+#' @param grid_h See Usage.
+#' @param stride Defaults to \code{1}.
+#' @param radius Defaults to \code{1.5}.
+#' @return A list with \code{in_box}, \code{in_center}, \code{candidates}, \code{n_candidates}, \code{single_center}, \code{note}.
+#' @export
 morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride=1.0,
                                          radius=1.5) {
   # The center 3x3 area is positive, not only the center cell. Grid
@@ -153,6 +206,17 @@ morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride=1.0,
                    "useful gradients"))
 }
 
+#' Dynamic top-k, an approximation to optimal transport. k_g is the
+#'
+#' rounded sum of the q largest IoUs for that ground truth. Returns the
+#' assignment keyed by 0-based ground-truth index.
+#'
+#' @param costs See Usage.
+#' @param ious See Usage.
+#' @param top_q Defaults to \code{10}.
+#' @param max_k Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{assignment}, \code{dynamic_k}, \code{n_positives}, \code{contested}, \code{method}, \code{note}.
+#' @export
 morie_yolovx_simota_assign <- function(costs, ious, top_q=10, max_k=NULL) {
   # Dynamic top-k, an approximation to optimal transport. k_g is the
   # rounded sum of the q largest IoUs for that ground truth. Returns
@@ -208,6 +272,13 @@ morie_yolovx_simota_assign <- function(costs, ious, top_q=10, max_k=NULL) {
                    "top IoUs -- no Sinkhorn, no extra hyperparameter"))
 }
 
+#' morie_yolovx_cheatsheet
+#'
+#' Part of the yolovx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_yolovx_cheatsheet <- function() {
   paste0(
     "yolovx: fold three advances into YOLO. DECOUPLED HEAD -- ",

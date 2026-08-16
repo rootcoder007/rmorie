@@ -53,6 +53,15 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
   }
 }
 
+#' Table 2: the density of Z
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param dist Defaults to \code{"normal"}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 morie_surxgb_pdf <- function(z, dist="normal") {
   # Table 2: the density of Z.
   .surxgb_check_dist(dist)
@@ -67,6 +76,15 @@ morie_surxgb_pdf <- function(z, dist="normal") {
   if (z < .surxgb_CLAMP) exp(z - exp(z)) else 0.0
 }
 
+#' Table 2: the distribution function of Z
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param dist Defaults to \code{"normal"}.
+#' @return A numeric value.
+#' @export
 morie_surxgb_cdf <- function(z, dist="normal") {
   # Table 2: the distribution function of Z.
   .surxgb_check_dist(dist)
@@ -87,6 +105,15 @@ morie_surxgb_cdf <- function(z, dist="normal") {
   1.0 - exp(-exp(z))
 }
 
+#' Table 2: f_Z\'(z)
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param dist Defaults to \code{"normal"}.
+#' @return A numeric value.
+#' @export
 morie_surxgb_dpdf <- function(z, dist="normal") {
   # Table 2: f_Z'(z).
   .surxgb_check_dist(dist)
@@ -101,6 +128,15 @@ morie_surxgb_dpdf <- function(z, dist="normal") {
   f * (1.0 - exp(zc))
 }
 
+#' Table 2: f_Z\'\'(z)
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param dist Defaults to \code{"normal"}.
+#' @return A numeric value.
+#' @export
 morie_surxgb_ddpdf <- function(z, dist="normal") {
   # Table 2: f_Z''(z).
   .surxgb_check_dist(dist)
@@ -127,6 +163,18 @@ morie_surxgb_ddpdf <- function(z, dist="normal") {
   (log(y) - u) / sigma
 }
 
+#' morie_surxgb_aft_loss
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y_lower See Usage.
+#' @param y_upper See Usage.
+#' @param u See Usage.
+#' @param sigma Defaults to \code{1}.
+#' @param dist Defaults to \code{"normal"}.
+#' @return A numeric value.
+#' @export
 morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma=1.0,
                                   dist="normal") {
   # Definition 2, covering all four label types of Table 1.
@@ -157,6 +205,20 @@ morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma=1.0,
   -log(max(p, .surxgb_FLOOR))
 }
 
+#' morie_surxgb_aft_gradient_hessian
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y_lower See Usage.
+#' @param y_upper See Usage.
+#' @param u See Usage.
+#' @param sigma Defaults to \code{1}.
+#' @param dist Defaults to \code{"normal"}.
+#' @param method Defaults to \code{"analytic"}.
+#' @param eps Defaults to \code{1e-05}.
+#' @return A list with \code{gradient}, \code{hessian}, \code{loss}, \code{hessian_floored}, \code{derivative_method}.
+#' @export
 morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
                                               sigma=1.0, dist="normal",
                                               method="analytic",
@@ -202,6 +264,16 @@ morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
        hessian_floored=(h <= 1e-8), derivative_method=method)
 }
 
+#' Equation (5): w* = -G/(H+lambda)
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param G See Usage.
+#' @param H See Usage.
+#' @param lam Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 morie_surxgb_leaf_weight <- function(G, H, lam=1.0) {
   # Equation (5): w* = -G/(H+lambda).
   if (H + lam <= 0.0) {
@@ -210,6 +282,19 @@ morie_surxgb_leaf_weight <- function(G, H, lam=1.0) {
   -as.numeric(G) / (as.numeric(H) + as.numeric(lam))
 }
 
+#' Equation (7): the loss reduction, net of the leaf price
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param GL See Usage.
+#' @param HL See Usage.
+#' @param GR See Usage.
+#' @param HR See Usage.
+#' @param lam Defaults to \code{1}.
+#' @param gamma Defaults to \code{0}.
+#' @return A numeric value.
+#' @export
 morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
   # Equation (7): the loss reduction, net of the leaf price.
   term <- function(g, h) g * g / (h + lam)
@@ -267,6 +352,26 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
   node$weight
 }
 
+#' morie_surxgb_boost
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y_lower See Usage.
+#' @param y_upper See Usage.
+#' @param n_rounds Defaults to \code{50}.
+#' @param eta Defaults to \code{0.1}.
+#' @param max_depth Defaults to \code{3}.
+#' @param lam Defaults to \code{1}.
+#' @param gamma Defaults to \code{0}.
+#' @param min_child Defaults to \code{5}.
+#' @param sigma Defaults to \code{1}.
+#' @param dist Defaults to \code{"normal"}.
+#' @param base_score Defaults to \code{NULL}.
+#' @param derivatives Defaults to \code{"analytic"}.
+#' @return A list with \code{estimate}, \code{trees}, \code{eta}, \code{lam}, \code{gamma}, \code{sigma}, \code{dist}, \code{base_score}, \code{derivatives}, \code{loss_history}, \code{prediction}, \code{n_rounds}, \code{max_depth}, \code{method}.
+#' @export
 morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds=50, eta=0.1,
                                max_depth=3, lam=1.0, gamma=0.0,
                                min_child=5, sigma=1.0, dist="normal",
@@ -328,6 +433,15 @@ morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds=50, eta=0.1,
   )
 }
 
+#' Predicted ln y for new cases
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param X See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_surxgb_predict <- function(fit, X) {
   # Predicted ln y for new cases.
   X <- as.matrix(X)
@@ -343,6 +457,16 @@ morie_surxgb_predict <- function(fit, X) {
   out
 }
 
+#' Harrell\'s C for the fit; a larger prediction is a longer life, so
+#'
+#' the score is negated before it is ranked.
+#'
+#' @param fit See Usage.
+#' @param X See Usage.
+#' @param times See Usage.
+#' @param events See Usage.
+#' @return The value of \code{morie_survrsf_c_index}.
+#' @export
 morie_surxgb_concordance <- function(fit, X, times, events) {
   # Harrell's C for the fit; a larger prediction is a longer life, so
   # the score is negated before it is ranked.
@@ -350,6 +474,13 @@ morie_surxgb_concordance <- function(fit, X, times, events) {
   morie_survrsf_c_index(times, events, -p)
 }
 
+#' morie_surxgb_cheatsheet
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_surxgb_cheatsheet <- function() {
   paste0(
     "surxgb: AFT loss (Barnwal et al. Definition 2) driven by ",

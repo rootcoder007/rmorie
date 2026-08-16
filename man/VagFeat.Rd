@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{VagFeat}
+\alias{VagFeat}
+\title{VagFeat: statistical vibroarthrogram characterisation}
+\usage{
+VagFeat(vag, fs, n_segments = 8)
+}
+\arguments{
+\item{vag}{See Usage.}
+\item{fs}{See Usage.}
+\item{n_segments}{Defaults to \code{8}.}
+}
+\description{
+Part of the rangayyan_phys implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{mean}, \code{variance}, \code{skewness}, \code{kurtosis}, \code{kurtosis_excess}, \code{form_factor}, \code{mobility}, \code{activity}, \code{turns_count}, \code{turns_per_second}, \code{var_of_segment_means}, \code{var_of_segment_ms}, \code{segment_means}, \code{segment_ms}, \code{entropy_bits}, \code{rms}, \code{duration_s}, \code{fs_hz}, \code{n_segments}, \code{units}, \code{method}.
+}
+\keyword{internal}

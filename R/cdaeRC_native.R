@@ -30,6 +30,16 @@
   return(1.0 - y * y)
 }
 
+#' corrupt
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param q See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 corrupt <- function(y, q, rng) {
   qq <- as.numeric(q)
   if (!(qq >= 0.0 && qq < 1.0))
@@ -39,6 +49,18 @@ corrupt <- function(y, q, rng) {
   ifelse(u < qq, 0.0, d * as.numeric(y))
 }
 
+#' encode
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y_tilde See Usage.
+#' @param W See Usage.
+#' @param V_u See Usage.
+#' @param b See Usage.
+#' @param activation Defaults to \code{"sigmoid"}.
+#' @return The value of \code{z}, as built in the body.
+#' @export
 encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
   K <- length(b)
   z <- numeric(K)
@@ -53,6 +75,18 @@ encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
   z
 }
 
+#' decode
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param Wp See Usage.
+#' @param bp See Usage.
+#' @param items Defaults to \code{NULL}.
+#' @param activation Defaults to \code{"sigmoid"}.
+#' @return A vector, from \code{sapply}.
+#' @export
 decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
   if (is.null(items)) idx <- seq_along(bp) else idx <- as.integer(items)
   sapply(idx, function(i) {
@@ -60,6 +94,16 @@ decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
   })
 }
 
+#' loss
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param y_hat See Usage.
+#' @param kind Defaults to \code{"square"}.
+#' @return A numeric value.
+#' @export
 loss <- function(y, y_hat, kind = "square") {
   if (!(kind %in% .cdae_losses))
     stop(sprintf("cdaeRC: loss must be one of %s, got %r",
@@ -78,6 +122,25 @@ loss <- function(y, y_hat, kind = "square") {
   -yv * log(p) - (1.0 - yv) * log(1.0 - p)
 }
 
+#' fit_cdae
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pos See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param k_dim Defaults to \code{8L}.
+#' @param q Defaults to \code{0.2}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param lam Defaults to \code{0.01}.
+#' @param iters Defaults to \code{30L}.
+#' @param n_neg Defaults to \code{5L}.
+#' @param seed Defaults to \code{0}.
+#' @param activation Defaults to \code{"sigmoid"}.
+#' @param init_scale Defaults to \code{0.1}.
+#' @return A list with \code{estimate}, \code{W}, \code{W_prime}, \code{V}, \code{b}, \code{b_prime}, \code{loss_history}, \code{final_loss}, \code{k}, \code{q}, \code{n_neg}, \code{activation}, \code{method}, \code{note}.
+#' @export
 fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                      alpha = 0.05, lam = 0.01, iters = 30L,
                      n_neg = 5L, seed = 0, activation = "sigmoid",
@@ -153,6 +216,19 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
   )
 }
 
+#' recommend
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model See Usage.
+#' @param pos See Usage.
+#' @param u See Usage.
+#' @param n_items See Usage.
+#' @param top_k Defaults to \code{5L}.
+#' @param activation Defaults to \code{"sigmoid"}.
+#' @return A list with \code{ranking}, \code{n_scored}.
+#' @export
 recommend <- function(model, pos, u, n_items, top_k = 5L,
                       activation = "sigmoid") {
   W <- model$W; Wp <- model$W_prime; V <- model$V
@@ -172,6 +248,25 @@ recommend <- function(model, pos, u, n_items, top_k = 5L,
   list(ranking = ranking, n_scored = nrow(s))
 }
 
+#' morie_cdaeRC
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pos See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param k_dim Defaults to \code{8L}.
+#' @param q Defaults to \code{0.2}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param lam Defaults to \code{0.01}.
+#' @param iters Defaults to \code{30L}.
+#' @param n_neg Defaults to \code{5L}.
+#' @param seed Defaults to \code{0}.
+#' @param activation Defaults to \code{"sigmoid"}.
+#' @param init_scale Defaults to \code{0.1}.
+#' @return The value of \code{fit_cdae}.
+#' @export
 morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                          alpha = 0.05, lam = 0.01, iters = 30L,
                          n_neg = 5L, seed = 0, activation = "sigmoid",

@@ -53,6 +53,16 @@
   }
 }
 
+#' negbinom_offspring
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R0 See Usage.
+#' @param dispersion See Usage.
+#' @param e See Usage.
+#' @return The value of \code{.poisson_draw}.
+#' @export
 negbinom_offspring <- function(R0, dispersion, e) {
   r0 <- as.numeric(R0)
   kk <- as.numeric(dispersion)
@@ -70,6 +80,17 @@ negbinom_offspring <- function(R0, dispersion, e) {
   .poisson_draw(lam, e)
 }
 
+#' serial_interval_draw
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mean See Usage.
+#' @param sd See Usage.
+#' @param e See Usage.
+#' @param allow_presymptomatic Defaults to \code{TRUE}.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
   m <- as.numeric(mean)
   s <- as.numeric(sd)
@@ -81,6 +102,26 @@ serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
   v
 }
 
+#' simulate_outbreak
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R0 Defaults to \code{2.5}.
+#' @param dispersion Defaults to \code{0.16}.
+#' @param n_initial Defaults to \code{20}.
+#' @param trace_prob Defaults to \code{0.8}.
+#' @param delay_mean Defaults to \code{3.83}.
+#' @param delay_sd Defaults to \code{2.4}.
+#' @param si_mean Defaults to \code{4.7}.
+#' @param si_sd Defaults to \code{2.9}.
+#' @param subclinical Defaults to \code{0}.
+#' @param max_cases Defaults to \code{5000}.
+#' @param max_weeks Defaults to \code{12}.
+#' @param seed Defaults to \code{0}.
+#' @param allow_presymptomatic Defaults to \code{TRUE}.
+#' @return A list with \code{controlled}, \code{total_cases}, \code{weekly}, \code{hit_cap}, \code{extinct}.
+#' @export
 simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
                               n_initial = 20, trace_prob = 0.8,
                               delay_mean = 3.83, delay_sd = 2.4,
@@ -159,6 +200,16 @@ simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
        extinct = length(active) == 0L)
 }
 
+#' probability_of_control
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reps Defaults to \code{200}.
+#' @param seed Defaults to \code{0}.
+#' @param ... Passed through.
+#' @return A list with \code{estimate}, \code{probability_of_control}, \code{se}, \code{reps}, \code{median_size}, \code{max_size}, \code{max_cases}, \code{max_weeks}, \code{definition}, \code{method}.
+#' @export
 probability_of_control <- function(reps = 200, seed = 0, ...) {
   ok <- 0L
   sizes <- integer(as.integer(reps))
@@ -186,6 +237,22 @@ probability_of_control <- function(reps = 200, seed = 0, ...) {
                        "et al. (2020) Methods"))
 }
 
+#' effective_reproduction_number
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R0 See Usage.
+#' @param si_mean See Usage.
+#' @param si_sd See Usage.
+#' @param delay_mean See Usage.
+#' @param delay_sd See Usage.
+#' @param trace_prob See Usage.
+#' @param subclinical Defaults to \code{0}.
+#' @param draws Defaults to \code{20000}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{R_eff}, \code{R0}, \code{fraction_before_isolation}, \code{controlled_in_expectation}, \code{note}.
+#' @export
 effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
                                           delay_sd, trace_prob,
                                           subclinical = 0.0, draws = 20000,
@@ -228,6 +295,16 @@ effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
 contacttracingyield <- probability_of_control
 contact_tracing_yield <- probability_of_control
 
+#' morie_ttrace
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reps Defaults to \code{200}.
+#' @param seed Defaults to \code{0}.
+#' @param ... Passed through.
+#' @return The value of \code{probability_of_control}.
+#' @export
 morie_ttrace <- function(reps = 200, seed = 0, ...) {
   probability_of_control(reps = reps, seed = seed, ...)
 }

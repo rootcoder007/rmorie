@@ -17,6 +17,15 @@
   list(T = s$u, S = s$d, Dt = t(s$v))
 }
 
+#' term_weighting
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param how Defaults to \code{"log_entropy"}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 term_weighting <- function(X, how = "log_entropy") {
   if (!(how %in% .WEIGHTS))
     stop(sprintf("lsa: weighting must be one of %s, got %r",
@@ -48,6 +57,16 @@ term_weighting <- function(X, how = "log_entropy") {
   out
 }
 
+#' lsa_decompose
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param k_dim Defaults to \code{NULL}.
+#' @param how Defaults to \code{"log_entropy"}.
+#' @return A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k}, \code{full_rank}, \code{weighting}, \code{method}, \code{note}.
+#' @export
 lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
   A <- term_weighting(X, how = how)
   sv <- .ghc_svd(A)
@@ -65,6 +84,14 @@ lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
        note = "k = full rank reproduces X exactly, which is plain term matching -- the TRUNCATION is what generalises")
 }
 
+#' reconstruct
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 reconstruct <- function(model) {
   T <- model$T; S <- model$S; D <- model$D
   nT <- nrow(T); nD <- nrow(D); k <- length(S)
@@ -79,6 +106,15 @@ reconstruct <- function(model) {
   out
 }
 
+#' fold_in
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query See Usage.
+#' @param model See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 fold_in <- function(query, model) {
   q <- as.numeric(query)
   T <- model$T; S <- model$S
@@ -95,6 +131,16 @@ fold_in <- function(query, model) {
   out
 }
 
+#' cosine_ranking
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q_hat See Usage.
+#' @param model See Usage.
+#' @param top_k Defaults to \code{5}.
+#' @return A list with \code{ranking}, \code{scores}, \code{n_documents}.
+#' @export
 cosine_ranking <- function(q_hat, model, top_k = 5) {
   D <- model$D; S <- model$S
   nD <- nrow(D); k <- length(S)
@@ -127,6 +173,18 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
 latentsemantic <- lsa_decompose
 lsa <- lsa_decompose
 
+#' morie_lsa
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param k_dim Defaults to \code{NULL}.
+#' @param how Defaults to \code{"log_entropy"}.
+#' @param query Defaults to \code{NULL}.
+#' @param top_k Defaults to \code{5L}.
+#' @return The value of \code{lsa_decompose}.
+#' @export
 morie_lsa <- function(X, k_dim = NULL, how = "log_entropy", query = NULL,
                       top_k = 5L) {
   if (!is.null(query)) {

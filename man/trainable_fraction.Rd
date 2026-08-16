@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{trainable_fraction}
+\alias{trainable_fraction}
+\title{trainable_fraction}
+\usage{
+trainable_fraction(qformer_params, frozen_vision_params, frozen_llm_params)
+}
+\arguments{
+\item{qformer_params}{See Usage.}
+\item{frozen_vision_params}{See Usage.}
+\item{frozen_llm_params}{See Usage.}
+}
+\description{
+Part of the blip2v_native implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{trainable}, \code{total}, \code{fraction}, \code{frozen_fraction}, \code{note}.
+}
+\keyword{internal}

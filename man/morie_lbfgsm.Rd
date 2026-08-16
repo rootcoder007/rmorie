@@ -1,0 +1,27 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_lbfgsm}
+\alias{morie_lbfgsm}
+\title{morie_lbfgsm}
+\usage{
+morie_lbfgsm(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-08, c1 = 1e-04, c2 = 0.9, max_ls = 60)
+}
+\arguments{
+\item{fun}{See Usage.}
+\item{x0}{See Usage.}
+\item{grad}{See Usage.}
+\item{m}{Defaults to \code{10}.}
+\item{max_iter}{Defaults to \code{200}.}
+\item{tol}{Defaults to \code{1e-08}.}
+\item{c1}{Defaults to \code{1e-04}.}
+\item{c2}{Defaults to \code{0.9}.}
+\item{max_ls}{Defaults to \code{60}.}
+}
+\description{
+Part of the lbfgsm_native implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{estimate}, \code{x}, \code{fun}, \code{grad}, \code{grad_norm}, \code{iterations}, \code{n_fun}, \code{memory}, \code{converged}, \code{history}, \code{method}.
+}
+\keyword{internal}

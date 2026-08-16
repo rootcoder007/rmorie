@@ -17,6 +17,17 @@
 # de Haan, L. (1984) Annals of Probability 12(4), 1194-1204, Sec. 1
 # example and Theorem 3.
 
+#' morie_mxetA
+#'
+#' Part of the mxetA_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param F See Usage.
+#' @param n_sim Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @param max_points Defaults to \code{100000L}.
+#' @return A list with \code{fields}, \code{scales}, \code{n_points}, \code{frechet_uniform}, \code{seed}, \code{method}.
+#' @export
 morie_mxetA <- function(F, n_sim = 1, seed = 0, max_points = 100000L) {
   Fm <- as.matrix(F)
   nt <- nrow(Fm); m <- ncol(Fm)

@@ -97,6 +97,21 @@
   list(ys = ys, mean = mean_y, cov = cov_y)
 }
 
+#' morie_ukfF
+#'
+#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param f See Usage.
+#' @param h See Usage.
+#' @param Q See Usage.
+#' @param R See Usage.
+#' @param x0 See Usage.
+#' @param P0 See Usage.
+#' @param measurements See Usage.
+#' @param kappa Defaults to \code{NULL}.
+#' @return A list with \code{states}, \code{covariances}, \code{innovations}, \code{kappa}, \code{method}.
+#' @export
 morie_ukfF <- function(f, h, Q, R, x0, P0, measurements, kappa = NULL) {
   x <- as.numeric(x0)
   n <- length(x)
@@ -178,6 +193,13 @@ morie_ukfF <- function(f, h, Q, R, x0, P0, measurements, kappa = NULL) {
 morie_unscented_kalman_filter <- morie_ukfF
 morie_unscented_kalman <- morie_ukfF
 
+#' morie_ukfF_cheatsheet
+#'
+#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_ukfF_cheatsheet <- function() {
   "ukfF: 2n+1 sigma points, UT predict + Kalman gain update"
 }

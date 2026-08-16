@@ -20,6 +20,18 @@
   t[1] + step * seq_len(m)
 }
 
+#' morie_prphet_piecewise_trend
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param k.rate See Usage.
+#' @param m.off See Usage.
+#' @param deltas See Usage.
+#' @param cps See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
   out <- numeric(length(t))
   for (i in seq_along(t)) {
@@ -31,6 +43,15 @@ morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
   out
 }
 
+#' morie_prphet_trend_matrix
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param cps See Usage.
+#' @return The value of \code{rows}, as built in the body.
+#' @export
 morie_prphet_trend_matrix <- function(t, cps) {
   rows <- matrix(0, nrow = length(t), ncol = 2L + length(cps))
   rows[, 1] <- t; rows[, 2] <- 1
@@ -42,6 +63,16 @@ morie_prphet_trend_matrix <- function(t, cps) {
   rows
 }
 
+#' morie_prphet_fourier_terms
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param period See Usage.
+#' @param order See Usage.
+#' @return The value of \code{rows}, as built in the body.
+#' @export
 morie_prphet_fourier_terms <- function(t, period, order) {
   if (period <= 0) stop("prphet: period must be positive")
   if (order < 1L) stop("prphet: order must be at least 1")
@@ -57,6 +88,17 @@ morie_prphet_fourier_terms <- function(t, period, order) {
   rows
 }
 
+#' morie_prphet_holiday_matrix
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param holidays See Usage.
+#' @param lower Defaults to \code{0}.
+#' @param upper Defaults to \code{0}.
+#' @return A list with \code{rows}, \code{names}.
+#' @export
 morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
   names.v <- sort(names(holidays))
   rows <- matrix(0, nrow = length(t), ncol = length(names.v))
@@ -71,6 +113,18 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
   list(rows = rows, names = names.v)
 }
 
+#' morie_prphet_design
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param cps See Usage.
+#' @param seasonalities Defaults to \code{NULL}.
+#' @param holidays Defaults to \code{NULL}.
+#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @return A list with \code{X}, \code{cols}, \code{holiday.names}.
+#' @export
 morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
                                 holiday_window = c(0, 0)) {
   tm <- morie_prphet_trend_matrix(t, cps)
@@ -96,6 +150,23 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
   list(X = X, cols = cols, holiday.names = hn)
 }
 
+#' morie_prphet_fit
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param y See Usage.
+#' @param n_changepoints Defaults to \code{10L}.
+#' @param changepoint_range Defaults to \code{0.8}.
+#' @param changepoints Defaults to \code{NULL}.
+#' @param seasonalities Defaults to \code{NULL}.
+#' @param holidays Defaults to \code{NULL}.
+#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param changepoint_prior Defaults to \code{0.05}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{residual}, \code{coef}, \code{beta}, \code{columns}, \code{changepoints}, \code{deltas}, \code{k}, \code{m}, \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior}, \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.
+#' @export
 morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8,
                              changepoints = NULL, seasonalities = NULL,
                              holidays = NULL, holiday_window = c(0, 0),
@@ -156,6 +227,18 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
        method = "Prophet decomposable model, Taylor & Letham (2018) eq. (1) and (4)")
 }
 
+#' morie_prphet_predict
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param t.new See Usage.
+#' @param seasonalities Defaults to \code{NULL}.
+#' @param holidays Defaults to \code{NULL}.
+#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 morie_prphet_predict <- function(fit, t.new, seasonalities = NULL,
                                  holidays = NULL, holiday_window = c(0, 0)) {
   tn <- as.numeric(t.new)

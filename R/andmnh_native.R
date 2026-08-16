@@ -8,11 +8,27 @@
 # Kernels
 # --------------------------------------------------------------------------
 
+#' bartlett_kernel
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 bartlett_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 1) 1 - ax else 0
 }
 
+#' parzen_kernel
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 parzen_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 0.5) {
@@ -23,6 +39,14 @@ parzen_kernel <- function(x) {
   0
 }
 
+#' quadratic_spectral_kernel
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 quadratic_spectral_kernel <- function(x) {
   x <- as.numeric(x)
   if (x == 0) return(1)
@@ -30,6 +54,14 @@ quadratic_spectral_kernel <- function(x) {
   (25 / (12 * pi^2 * x^2)) * (sin(z)/z - cos(z))
 }
 
+#' tukey_hanning_kernel
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 tukey_hanning_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 1) 0.5 * (1 + cos(pi * ax)) else 0
@@ -63,6 +95,15 @@ tukey_hanning_kernel <- function(x) {
 # moment vectors
 # --------------------------------------------------------------------------
 
+#' moment_vectors
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param X See Usage.
+#' @return The value of \code{V}, as built in the body.
+#' @export
 moment_vectors <- function(e, X) {
   e <- as.numeric(e)
   X <- as.matrix(X)
@@ -116,6 +157,17 @@ moment_vectors <- function(e, X) {
 # prewhitening VAR
 # --------------------------------------------------------------------------
 
+#' prewhiten_var
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param order Defaults to \code{1}.
+#' @param cap Defaults to \code{0.97}.
+#' @param adjust Defaults to \code{TRUE}.
+#' @return A list with \code{A}, \code{residuals}, \code{D}.
+#' @export
 prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
   rows <- as.matrix(v)
   storage.mode(rows) <- "double"
@@ -211,6 +263,14 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
 # AR(1) and the alpha(q) plug-in
 # --------------------------------------------------------------------------
 
+#' ar1_fit
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 ar1_fit <- function(x) {
   x <- as.numeric(x)
   n <- length(x)
@@ -222,6 +282,16 @@ ar1_fit <- function(x) {
   c(rho = rho, sigma2 = s2)
 }
 
+#' alpha_ar1
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param q Defaults to \code{2}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{alpha}, \code{fits}.
+#' @export
 alpha_ar1 <- function(v, q = 2, weights = NULL) {
   rows <- as.matrix(v)
   storage.mode(rows) <- "double"
@@ -265,6 +335,17 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
   list(alpha = num/den, fits = fits)
 }
 
+#' automatic_bandwidth
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param kernel Defaults to \code{"qs"}.
+#' @param weights Defaults to \code{NULL}.
+#' @param n Defaults to \code{NULL}.
+#' @return A list with \code{bandwidth}, \code{alpha}, \code{fits}.
+#' @export
 automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
   ck <- .check_kernel(kernel)
   q <- ck$const[1]; kq <- ck$const[2]; ik2 <- ck$const[3]
@@ -280,6 +361,18 @@ automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
 # kernel HAC
 # --------------------------------------------------------------------------
 
+#' kernel_hac
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param bandwidth See Usage.
+#' @param kernel Defaults to \code{"qs"}.
+#' @param n_params Defaults to \code{0}.
+#' @param n Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
   ck <- .check_kernel(kernel)
   kfun <- ck$fun
@@ -332,6 +425,23 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 # top-level estimator
 # --------------------------------------------------------------------------
 
+#' andrews_monahan_hac
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @param prewhiten Defaults to \code{TRUE}.
+#' @param var_order Defaults to \code{1}.
+#' @param kernel Defaults to \code{"qs"}.
+#' @param bandwidth Defaults to \code{NULL}.
+#' @param weights Defaults to \code{NULL}.
+#' @param n_params Defaults to \code{NULL}.
+#' @param cap Defaults to \code{0.97}.
+#' @param adjust Defaults to \code{TRUE}.
+#' @return The value of \code{structure}.
+#' @export
 andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,
                                 var_order = 1, kernel = "qs",
                                 bandwidth = NULL, weights = NULL,
@@ -401,6 +511,15 @@ andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,
 
 andmnh <- andrews_monahan_hac
 
+#' print.andmnh
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param ... Passed through.
+#' @return Invisibly,the value of \code{x}, as built in the body.
+#' @export
 print.andmnh <- function(x, ...) {
   cat(sprintf("Andrews-Monahan VAR prewhitened kernel HAC\n"))
   cat(sprintf("  kernel        : %s\n", x$kernel))

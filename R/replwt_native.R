@@ -312,6 +312,18 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   )
 }
 
+#' morie_replwt
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param method Defaults to \code{"jkn"}.
+#' @param R Defaults to \code{200}.
+#' @param fay Defaults to \code{0}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{weights}, \code{scale}, \code{n_replicates}, \code{method}, \code{dropped}, \code{hadamard_order}, \code{fay}, \code{seed}.
+#' @export
 morie_replwt <- function(d, method = "jkn", R = 200, fay = 0.0, seed = 1) {
   if (!method %in% METHODS) {
     stop(sprintf("replwt: method must be one of %s, got %s",

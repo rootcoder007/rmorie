@@ -13,6 +13,15 @@
 
 # --- eq. (8.13) p.296 ------------------------------------------------
 
+#' morie_khatri_rao_rows
+#'
+#' Part of the gp_mvsml_ch9_14 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_khatri_rao_rows <- function(A, B) {
   A <- as.matrix(A)
   B <- as.matrix(B)
@@ -370,6 +379,21 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 # times a quarter-period phase shift.  Mirrors the Python
 # _gp_core.fda_basis_derivative, including its polynomial convention
 # u = (t - lo) / span, which differs from morie_fda_basis above.
+#' P-th derivative of the basis functions of (14.2).  For the Fourier
+#'
+#' basis phi_0 = 1, phi_{2k-1} = sin(2 pi k t / P) and phi_{2k} = cos(2
+#' pi k t / P), so the p-th derivative is (2 pi k / P)^p times a
+#' quarter-period phase shift.  Mirrors the Python
+#' _gp_core.fda_basis_derivative, including its polynomial convention u
+#' = (t - lo) / span, which differs from morie_fda_basis above.
+#'
+#' @param t See Usage.
+#' @param n_basis See Usage.
+#' @param p Defaults to \code{1L}.
+#' @param kind Defaults to \code{"fourier"}.
+#' @param period Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
                                   period = NULL) {
   tt <- as.numeric(t)
@@ -516,6 +540,22 @@ Penfreg <- function(y, X, P, lam, mu = NULL, tol = 1e-10) {
 # environment design itself on p.607, where its code reads
 # X_E = model.matrix(~0+Env, data = dat_F)[, -1].  Pass
 # reference = FALSE for the redundant parameterization as printed.
+#' Written out for all I environments the blocks sum column by column to
+#'
+#' X exactly, so the joint design carrying both X and X_EF is rank
+#' deficient and beta and beta_EF are not separately identified by least
+#' squares; the book fits (14.14) in BGLR, where the prior on each block
+#' resolves that.  The default reference = TRUE drops the first
+#' environment block, the same reference coding the book applies to the
+#' environment design itself on p.607, where its code reads X_E =
+#' model.matrix(~0+Env, data = dat_F)[, -1].  Pass reference = FALSE for
+#' the redundant parameterization as printed.
+#'
+#' @param X See Usage.
+#' @param env See Usage.
+#' @param reference Defaults to \code{TRUE}.
+#' @return A list with \code{X_EF}, \code{levels}, \code{kept_levels}, \code{reference}, \code{n_columns}.
+#' @export
 morie_fda_env_interaction <- function(X, env, reference = TRUE) {
   X <- as.matrix(X)
   levels_ <- sort(unique(env))

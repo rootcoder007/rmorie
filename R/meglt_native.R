@@ -35,12 +35,29 @@
   list(U = s$u, s = s$d, Vt = s$v)
 }
 
+#' nuclear_norm
+#'
+#' Part of the meglt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return A numeric value.
+#' @export
 nuclear_norm <- function(A) {
   M <- .meglt_mat(A)
   s <- .meglt_svd(M)
   sum(s$s)
 }
 
+#' coherence
+#'
+#' Part of the meglt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param rank Defaults to \code{NULL}.
+#' @return A list with \code{mu_row}, \code{mu_col}, \code{mu}, \code{rank}, \code{note}.
+#' @export
 coherence <- function(A, rank = NULL) {
   M <- .meglt_mat(A)
   sv <- .meglt_svd(M)
@@ -67,6 +84,17 @@ coherence <- function(A, rank = NULL) {
        note = "large mu means concentrated singular vectors, and then sampling reveals nothing")
 }
 
+#' sample_bound
+#'
+#' Part of the meglt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param r See Usage.
+#' @param C Defaults to \code{1}.
+#' @param exponent Defaults to \code{1.2}.
+#' @return A list with \code{m}, \code{fraction}, \code{n}, \code{r}, \code{exponent}, \code{note}.
+#' @export
 sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
   if (!(exponent %in% c(1.2, 1.25)))
     stop("meglt: the exponent must be 1.2 (moderate rank) or 1.25 (all ranks), got ", format(exponent))
@@ -79,6 +107,19 @@ sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
        note = "the 1.25 exponent holds for ALL ranks; 1.2 assumes the rank is not too large")
 }
 
+#' svt
+#'
+#' Part of the meglt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param observed See Usage.
+#' @param tau Defaults to \code{NULL}.
+#' @param step Defaults to \code{1.9}.
+#' @param iters Defaults to \code{200L}.
+#' @param tol Defaults to \code{1e-06}.
+#' @return A list with \code{estimate}, \code{X}, \code{residual_history}, \code{final_residual}, \code{tau}, \code{n_observed}, \code{fraction_observed}, \code{nuclear_norm}, \code{method}.
+#' @export
 svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
                 tol = 1e-6) {
   A <- .meglt_mat(M)
@@ -116,6 +157,15 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
        method = "singular value thresholding for the nuclear-norm program; Candes & Recht (2009), Cai, Candes & Shen (2010)")
 }
 
+#' relative_error
+#'
+#' Part of the meglt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param M See Usage.
+#' @return A numeric value.
+#' @export
 relative_error <- function(X, M) {
   A <- .meglt_mat(M)
   num <- 0; den <- 0
@@ -144,6 +194,15 @@ matrix_completion_low_rank <- svt
         "singular value thresholding.", sep = "")
 }
 
+#' morie_meglt
+#'
+#' Part of the meglt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_meglt <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("meglt: op must be one of nuclear_norm, coherence, sample_bound, svt, relative_error, cheatsheet")

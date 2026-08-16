@@ -444,26 +444,86 @@
 
 # ---- Public API --------------------------------------------------------
 
+#' morie_augment
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{.prsLR_augment}.
+#' @export
 morie_augment <- function(g) {
   .prsLR_augment(g)
 }
 
+#' morie_closure
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param items See Usage.
+#' @param ag See Usage.
+#' @param first See Usage.
+#' @param nts See Usage.
+#' @param k Defaults to \code{1}.
+#' @return The value of \code{.prsLR_closure}.
+#' @export
 morie_closure <- function(items, ag, first, nts, k = 1) {
   .prsLR_closure(items, ag, first, nts, k)
 }
 
+#' morie_goto
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param sym See Usage.
+#' @param ag See Usage.
+#' @param first See Usage.
+#' @param nts See Usage.
+#' @param k Defaults to \code{1}.
+#' @return The value of \code{.prsLR_goto}.
+#' @export
 morie_goto <- function(state, sym, ag, first, nts, k = 1) {
   .prsLR_goto(state, sym, ag, first, nts, k)
 }
 
+#' morie_canonical_collection
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ag See Usage.
+#' @param k Defaults to \code{1}.
+#' @return The value of \code{.prsLR_canonical_collection}.
+#' @export
 morie_canonical_collection <- function(ag, k = 1) {
   .prsLR_canonical_collection(ag, k)
 }
 
+#' morie_build_tables
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param method Defaults to \code{"lr1"}.
+#' @return The value of \code{.prsLR_build_tables}.
+#' @export
 morie_build_tables <- function(g, method = "lr1") {
   .prsLR_build_tables(g, method)
 }
 
+#' morie_conflicts
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param method Defaults to \code{"lr1"}.
+#' @return A list with \code{estimate}, \code{conflicts}, \code{n_conflicts}, \code{method}, \code{n_states}, \code{ok}.
+#' @export
 morie_conflicts <- function(g, method = "lr1") {
   t <- .prsLR_build_tables(g, method)
   list(
@@ -476,10 +536,31 @@ morie_conflicts <- function(g, method = "lr1") {
   )
 }
 
+#' morie_parse
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param tokens See Usage.
+#' @param method Defaults to \code{"lr1"}.
+#' @param tables Defaults to \code{NULL}.
+#' @return The value of \code{.prsLR_parse}.
+#' @export
 morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
   .prsLR_parse(g, tokens, method, tables)
 }
 
+#' morie_prsLR
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param grammar_ See Usage.
+#' @param tokens See Usage.
+#' @param method Defaults to \code{"lr1"}.
+#' @return A list with \code{estimate}, \code{tree}, \code{method}, \code{n_states}, \code{conflicts}, \code{tokens}, \code{yield}.
+#' @export
 morie_prsLR <- function(grammar_, tokens, method = "lr1") {
   g <- .prsLR_grammar(grammar_)
   t <- .prsLR_build_tables(g, method)

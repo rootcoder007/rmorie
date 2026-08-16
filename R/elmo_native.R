@@ -19,6 +19,14 @@
 # same per-layer width check that fails loudly if the mixture is over
 # differently shaped vectors.
 
+#' Softmax-normalised s^{task}. A simplex, not free weights: these
+#'
+#' choose WHICH layers to read and cannot alter the magnitude, which is
+#' gamma\'s job alone.
+#'
+#' @param raw See Usage.
+#' @return A numeric value.
+#' @export
 layer_weights <- function(raw) {
   # Softmax-normalised s^{task}. A simplex, not free weights: these
   # choose WHICH layers to read and cannot alter the magnitude, which
@@ -31,6 +39,19 @@ layer_weights <- function(raw) {
   e / sum(e)
 }
 
+#' One LSTM cell step, gates in the order i, f, g, o
+#'
+#' Part of the elmo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param c See Usage.
+#' @param Wx See Usage.
+#' @param Wh See Usage.
+#' @param b See Usage.
+#' @return A list with \code{h}, \code{c}.
+#' @export
 lstm_step <- function(x, h, c, Wx, Wh, b) {
   # One LSTM cell step, gates in the order i, f, g, o.
   d <- length(h)
@@ -51,6 +72,19 @@ lstm_step <- function(x, h, c, Wx, Wh, b) {
   list(h = hn, c = cn)
 }
 
+#' Run the biLM and return every layer\'s representation
+#'
+#' layers is a list of (Wxf, Whf, bf, Wxb, Whb, bb). The token dimension
+#' must equal the hidden dimension, because layer 0 is the token vector
+#' duplicated and every layer has to be the same width for eq. (1) to
+#' add them. The backward pass reads the sequence in reverse and its
+#' output is re-reversed before concatenation, so position k always
+#' aligns with token k.
+#'
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @return The value of \code{reps}, as built in the body.
+#' @export
 bilm_forward <- function(X, layers) {
   # Run the biLM and return every layer's representation.
   # layers is a list of (Wxf, Whf, bf, Wxb, Whb, bb). The token
@@ -102,6 +136,17 @@ bilm_forward <- function(X, layers) {
   reps
 }
 
+#' Eq. (1): gamma * sum_j s_j h_{k,j}
+#'
+#' Part of the elmo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reps See Usage.
+#' @param raw_weights See Usage.
+#' @param gamma Defaults to \code{1}.
+#' @param position Defaults to \code{NULL}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
   # Eq. (1): gamma * sum_j s_j h_{k,j}.
   n_layers <- length(reps)
@@ -123,6 +168,17 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
   if (is.null(position)) out else out[[1]]
 }
 
+#' elmo_representation
+#'
+#' Part of the elmo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param raw_weights Defaults to \code{NULL}.
+#' @param gamma Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights}, \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
+#' @export
 elmo_representation <- function(X, layers, raw_weights = NULL,
                                 gamma = 1) {
   # The biLM plus the task-specific mix, end to end.
@@ -149,17 +205,50 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 }
 
 # compact alias per ledger/NAMING.md
+#' Compact alias per ledger/NAMING.md
+#'
+#' Part of the elmo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param raw_weights Defaults to \code{NULL}.
+#' @param gamma Defaults to \code{1}.
+#' @return The value of \code{elmo_representation}.
+#' @export
 elmorepresentation <- function(X, layers, raw_weights = NULL,
                                gamma = 1) {
   elmo_representation(X, layers, raw_weights, gamma)
 }
 
 # public name resolved by fn/_lazy_map.json
+#' Public name resolved by fn/_lazy_map.json
+#'
+#' Part of the elmo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param raw_weights Defaults to \code{NULL}.
+#' @param gamma Defaults to \code{1}.
+#' @return The value of \code{elmo_representation}.
+#' @export
 elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
   elmo_representation(X, layers, raw_weights, gamma)
 }
 
 # morie entry point: matches the Python payload keys
+#' Morie entry point: matches the Python payload keys
+#'
+#' Part of the elmo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param raw_weights Defaults to \code{NULL}.
+#' @param gamma Defaults to \code{1}.
+#' @return The value of \code{elmo_representation}.
+#' @export
 morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
   elmo_representation(X, layers, raw_weights, gamma)
 }

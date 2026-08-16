@@ -74,6 +74,19 @@
   x
 }
 
+#' morie_crkbsg_cokriging
+#'
+#' Part of the crkbsg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param coords See Usage.
+#' @param y See Usage.
+#' @param z See Usage.
+#' @param s_predict See Usage.
+#' @param cross_variogram Defaults to \code{NULL}.
+#' @param coords_z Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{kriging_prediction}, \code{kriging_variance}, \code{variance_reduction}, \code{weights_primary}, \code{weights_secondary}, \code{lagrange}, \code{targets}, \code{coregionalisation}, \code{nugget_matrix}, \code{model}, \code{range}, \code{n_primary}, \code{n_secondary}, \code{method}, \code{note}.
+#' @export
 morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
                                    cross_variogram = NULL, coords_z = NULL) {
   C1 <- .crkbsg_rows(coords)

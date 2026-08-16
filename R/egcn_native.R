@@ -18,18 +18,63 @@
 # forwards to it.
 
 # compact alias per ledger/NAMING.md
+#' Compact alias per ledger/NAMING.md
+#'
+#' Part of the egcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return The value of \code{run_egnn}.
+#' @export
 equivariantgraphconv <- function(H, X, layers, phi_e, phi_x, phi_h,
                                 A = NULL, C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
 }
 
 # public name resolved by fn/_lazy_map.json
+#' Public name resolved by fn/_lazy_map.json
+#'
+#' Part of the egcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return The value of \code{run_egnn}.
+#' @export
 e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                   C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
 }
 
 # morie entry point: matches the Python payload keys
+#' Morie entry point: matches the Python payload keys
+#'
+#' Part of the egcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param phi_e See Usage.
+#' @param phi_x See Usage.
+#' @param phi_h See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param C Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method}, \code{note}.
+#' @export
 morie_egcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                        C = NULL) {
   list(estimate = run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C),

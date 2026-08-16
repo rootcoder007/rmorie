@@ -168,6 +168,22 @@
   list(ll = ll, delta = delta, beta = beta, s2g = s2g, L = L)
 }
 
+#' morie_cmlmer_compressed_lmm
+#'
+#' Part of the cmlmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param M See Usage.
+#' @param K See Usage.
+#' @param clusters Defaults to \code{NULL}.
+#' @param X Defaults to \code{NULL}.
+#' @param compare_levels Defaults to \code{NULL}.
+#' @param log_delta_lo Defaults to \code{-10}.
+#' @param log_delta_hi Defaults to \code{10}.
+#' @param max_iter Defaults to \code{200L}.
+#' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value}, \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship}, \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n}, \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.
+#' @export
 morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
                                         compare_levels = NULL,
                                         log_delta_lo = -10.0,

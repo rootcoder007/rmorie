@@ -69,6 +69,15 @@
 
 # ---- public API --------------------------------------------------------
 
+#' morie_sam2vd_memory_bank
+#'
+#' Part of the sam2vd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_recent Defaults to \code{7}.
+#' @param m_prompted Defaults to \code{1}.
+#' @return A list with \code{recent}, \code{prompted}, \code{pointers}, \code{n_recent}, \code{m_prompted}, \code{note}.
+#' @export
 morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
   N <- as.integer(n_recent)
   M <- as.integer(m_prompted)
@@ -85,6 +94,18 @@ morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
   )
 }
 
+#' morie_sam2vd_push_memory
+#'
+#' Part of the sam2vd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bank See Usage.
+#' @param frame_index See Usage.
+#' @param features See Usage.
+#' @param prompted Defaults to \code{FALSE}.
+#' @param object_pointer Defaults to \code{NULL}.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 morie_sam2vd_push_memory <- function(bank, frame_index, features,
                                     prompted = FALSE, object_pointer = NULL) {
   b <- bank
@@ -125,6 +146,17 @@ morie_sam2vd_push_memory <- function(bank, frame_index, features,
   b
 }
 
+#' morie_sam2vd_temporal_embedding
+#'
+#' Part of the sam2vd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param entry See Usage.
+#' @param current_frame See Usage.
+#' @param dim Defaults to \code{NULL}.
+#' @param scale Defaults to \code{0.1}.
+#' @return A list with \code{features}, \code{embedded}, \code{distance}.
+#' @export
 morie_sam2vd_temporal_embedding <- function(entry, current_frame,
                                             dim = NULL, scale = 0.1) {
   v <- entry$features
@@ -152,6 +184,18 @@ morie_sam2vd_temporal_embedding <- function(entry, current_frame,
   list(features = out, embedded = TRUE, distance = d)
 }
 
+#' morie_sam2vd_memory_attention
+#'
+#' Part of the sam2vd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param frame_features See Usage.
+#' @param bank See Usage.
+#' @param current_frame See Usage.
+#' @param n_blocks Defaults to \code{1}.
+#' @param include_pointers Defaults to \code{TRUE}.
+#' @return A list with \code{features}, \code{attended}, \code{n_memories}, \code{weights}, \code{note}.
+#' @export
 morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
                                           n_blocks = 1, include_pointers = TRUE) {
   x <- .sam2vd_to_num(frame_features)
@@ -211,6 +255,19 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
   )
 }
 
+#' morie_sam2vd_propagate
+#'
+#' Part of the sam2vd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param frames See Usage.
+#' @param encoder See Usage.
+#' @param decoder See Usage.
+#' @param prompts Defaults to \code{NULL}.
+#' @param n_recent Defaults to \code{7}.
+#' @param m_prompted Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{masks}, \code{conditioned}, \code{n_frames}, \code{first_frame_is_sam}, \code{method}, \code{note}.
+#' @export
 morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
                                    n_recent = 7, m_prompted = 1) {
   P <- if (is.null(prompts)) list() else prompts
@@ -251,6 +308,13 @@ morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
   )
 }
 
+#' morie_sam2vd_cheatsheet
+#'
+#' Part of the sam2vd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_sam2vd_cheatsheet <- function() {
   paste0(
     "sam2vd: video is the same objects deforming, occluding ",

@@ -1,0 +1,19 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{QrsDeriv1}
+\alias{QrsDeriv1}
+\title{Eq (4.1): y0(n) = |x(n) - x(n-2)|.  The two-sample span is what makes}
+\usage{
+QrsDeriv1(x)
+}
+\arguments{
+\item{x}{See Usage.}
+}
+\description{
+it "smoothed"; the absolute value makes an inverted QRS give the same response.
+}
+\value{
+A list with \code{y0}, \code{n}, \code{method}.
+}
+\keyword{internal}

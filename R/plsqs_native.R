@@ -6,6 +6,16 @@
 
 .plsqs_EPS <- 1e-12
 
+#' morie_plsqs_pls_regression
+#'
+#' Part of the plsqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param n_components Defaults to \code{2}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{intercept}, \code{fitted}, \code{residuals}, \code{scores}, \code{weights}, \code{loadings}, \code{y_loadings}, \code{explained_x}, \code{explained_y}, \code{n_components}, \code{r_squared}, \code{n}, \code{p}, \code{method}, \code{note}.
+#' @export
 morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"
   y <- as.numeric(Y)

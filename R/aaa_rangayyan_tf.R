@@ -588,6 +588,17 @@
 # ===========================================================================
 
 # -- Complex demodulation, Sec 5.5.1 eqs (5.16)-(5.19).
+#' Complex demodulation, Sec 5.5.1 eqs (5.16)-(5.19)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param f0 Defaults to \code{NULL}.
+#' @param bandwidth Defaults to \code{NULL}.
+#' @return A list with \code{amplitude}, \code{phase}, \code{demodulated}, \code{f0}, \code{bandwidth}, \code{mean_amplitude}, \code{method}.
+#' @export
 CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -649,6 +660,16 @@ CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
 }
 
 # -- Biorthogonal 5/3 (CDF) transform via lifting.
+#' Biorthogonal 5/3 (CDF) transform via lifting
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"bior2.2"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{reconstructed}, \code{max_reconstruction_error}, \code{symmetric}, \code{wavelet}, \code{method}.
+#' @export
 BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   w <- gsub("[-_]", "", tolower(trimws(as.character(wavelet))))
@@ -717,6 +738,18 @@ BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
 }
 
 # -- Exponential-kernel (Choi-Williams) TFD.
+#' Exponential-kernel (Choi-Williams) TFD
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param sigma Defaults to \code{1}.
+#' @param nfreq Defaults to \code{NULL}.
+#' @param maxlag Defaults to \code{NULL}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma}, \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
+#' @export
 ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
   v <- .tf_need(x, "x", 8L)
   fs <- as.numeric(fs)
@@ -778,6 +811,18 @@ ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
 }
 
 # -- Wavelet scale distribution width of a fibrillation waveform, Sec 8.15.
+#' Wavelet scale distribution width of a fibrillation waveform, Sec 8.15
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ecg See Usage.
+#' @param fs Defaults to \code{250}.
+#' @param scales Defaults to \code{NULL}.
+#' @param w0 Defaults to \code{5}.
+#' @param band Defaults to \code{c(3, 21)}.
+#' @return A list with \code{sdw}, \code{scale_energy}, \code{scales}, \code{freqs}, \code{peak_scale}, \code{peak_freq}, \code{organised}, \code{band}, \code{method}.
+#' @export
 CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
   v <- .tf_need(ecg, "ecg", 16L)
   fs <- as.numeric(fs)
@@ -845,6 +890,18 @@ CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
 }
 
 # -- Continuous wavelet transform, eq (8.107).
+#' Continuous wavelet transform, eq (8.107)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param wavelet Defaults to \code{"morlet"}.
+#' @param scales Defaults to \code{NULL}.
+#' @param w0 Defaults to \code{5}.
+#' @return A list with \code{coeffs}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{peak_scale}, \code{wavelet}, \code{method}.
+#' @export
 Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -886,6 +943,19 @@ Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
 }
 
 # -- Cohen's class generalised TFD, eqs (8.124)-(8.127).
+#' Cohen\'s class generalised TFD, eqs (8.124)-(8.127)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param kernel Defaults to \code{"spwvd"}.
+#' @param nfreq Defaults to \code{NULL}.
+#' @param tsmooth Defaults to \code{NULL}.
+#' @param fsmooth Defaults to \code{NULL}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{kernel}, \code{tsmooth}, \code{fsmooth}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
+#' @export
 Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
                  tsmooth = NULL, fsmooth = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -928,6 +998,14 @@ Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
 }
 
 # -- Daubechies filter bank taps and their orthonormality identities.
+#' Daubechies filter bank taps and their orthonormality identities
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param order Defaults to \code{4}.
+#' @return A list with \code{dec_lo}, \code{dec_hi}, \code{rec_lo}, \code{rec_hi}, \code{order}, \code{length}, \code{vanishing_moments}, \code{sum_lo}, \code{norm_lo}, \code{max_shift_inner_product}, \code{method}.
+#' @export
 OrthFilt <- function(order = 4) {
   k <- as.integer(order)
   if (is.null(.TF_DBTAPS[[as.character(k)]])) {
@@ -958,6 +1036,19 @@ OrthFilt <- function(order = 4) {
 }
 
 # -- Matching-pursuit TFD, eq (9.15) over the Gabor dictionary.
+#' Matching-pursuit TFD, eq (9.15) over the Gabor dictionary
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param dictionary Defaults to \code{"gabor"}.
+#' @param max_atoms Defaults to \code{8}.
+#' @param nfreq Defaults to \code{NULL}.
+#' @param min_decay Defaults to \code{0.001}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{atoms}, \code{n_atoms}, \code{decay}, \code{residual_energy}, \code{explained}, \code{peak_freq}, \code{method}.
+#' @export
 AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
                     nfreq = NULL, min_decay = 1e-3) {
   v <- .tf_need(x, "x", 8L)
@@ -1056,6 +1147,16 @@ AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
 }
 
 # -- Dyadic DWT via the decimated filter bank, eqs (8.111)-(8.113).
+#' Dyadic DWT via the decimated filter bank, eqs (8.111)-(8.113)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{wavelet}, \code{energy}, \code{method}.
+#' @export
 Dwt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -1077,6 +1178,18 @@ Dwt <- function(x, wavelet = "db4", levels = 3) {
 }
 
 # -- Ensemble EMD, Sec 9.4.1 eq (9.13).
+#' Ensemble EMD, Sec 9.4.1 eq (9.13)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param n_ensembles Defaults to \code{20}.
+#' @param noise_std Defaults to \code{0.2}.
+#' @param max_imfs Defaults to \code{8}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{n_ensembles}, \code{noise_std}, \code{seed}, \code{reconstruction_error}, \code{energy_per_imf}, \code{method}.
+#' @export
 EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0) {
   v <- .tf_need(x, "x", 8L)
   ne <- as.integer(n_ensembles)
@@ -1139,6 +1252,16 @@ EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
 }
 
 # -- Empirical mode decomposition by sifting, Sec 9.4 steps 1-6.
+#' Empirical mode decomposition by sifting, Sec 9.4 steps 1-6
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param max_imfs Defaults to \code{10}.
+#' @param tol Defaults to \code{0.05}.
+#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{reconstruction_error}, \code{energy_per_imf}, \code{tol}, \code{method}.
+#' @export
 Sift <- function(x, max_imfs = 10, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   mi <- as.integer(max_imfs)
@@ -1167,6 +1290,16 @@ Sift <- function(x, max_imfs = 10, tol = 0.05) {
 }
 
 # -- One IMF plus its admissibility evidence, Sec 9.4 and eqs (9.8)-(9.11).
+#' One IMF plus its admissibility evidence, Sec 9.4 and eqs (9.8)-(9.11)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param max_iter Defaults to \code{50}.
+#' @param tol Defaults to \code{0.05}.
+#' @return A list with \code{imf}, \code{residual}, \code{n_extrema}, \code{n_zero_crossings}, \code{extrema_zerox_ok}, \code{mean_envelope}, \code{max_envelope_mean}, \code{envelope_mean_ok}, \code{is_imf}, \code{iterations}, \code{converged}, \code{amplitude}, \code{phase}, \code{method}.
+#' @export
 Imf <- function(x, max_iter = 50, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   mi <- as.integer(max_iter)
@@ -1216,6 +1349,18 @@ Imf <- function(x, max_iter = 50, tol = 0.05) {
 }
 
 # -- Odd/even T-wave alternans after EMD detrending, Sec 9.2.3 + Sec 9.4.
+#' Odd/even T-wave alternans after EMD detrending, Sec 9.2.3 + Sec 9.4
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ecg See Usage.
+#' @param fs Defaults to \code{250}.
+#' @param r_peaks Defaults to \code{NULL}.
+#' @param twa_window Defaults to \code{c(0.15, 0.4)}.
+#' @param max_imfs Defaults to \code{6}.
+#' @return A list with \code{twa_amplitude}, \code{twa_rms}, \code{odd_mean}, \code{even_mean}, \code{difference}, \code{n_beats}, \code{n_odd}, \code{n_even}, \code{r_peaks}, \code{rpeaks_supplied}, \code{method}.
+#' @export
 TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
                    max_imfs = 6) {
   v <- .tf_need(ecg, "ecg", 32L)
@@ -1303,6 +1448,17 @@ TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
 }
 
 # -- IMF-based characterisation of ventricular fibrillation, Sec 8.16.
+#' IMF-based characterisation of ventricular fibrillation, Sec 8.16
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ecg See Usage.
+#' @param fs Defaults to \code{250}.
+#' @param n_imfs Defaults to \code{6}.
+#' @param tol Defaults to \code{0.05}.
+#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{features}, \code{dominant_imf}, \code{dominant_freq}, \code{method}.
+#' @export
 VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
   v <- .tf_need(ecg, "ecg", 16L)
   fs <- as.numeric(fs)
@@ -1355,6 +1511,17 @@ VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
 }
 
 # -- Wavelet (relative-energy Shannon) entropy, Rosso et al. (2001).
+#' Wavelet (relative-energy Shannon) entropy, Rosso et al. (2001)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @param base Defaults to \code{"e"}.
+#' @return A list with \code{entropy}, \code{max_entropy}, \code{normalized_entropy}, \code{relative_energy}, \code{labels}, \code{levels}, \code{base}, \code{wavelet}, \code{method}.
+#' @export
 WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
   b <- tolower(trimws(as.character(base)))
   if (!(b %in% c("e", "2"))) stop("base must be 'e' or '2'")
@@ -1383,6 +1550,15 @@ WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
 }
 
 # -- Two-tap (Haar / db1) orthogonal DWT.
+#' Two-tap (Haar / db1) orthogonal DWT
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{energy}, \code{input_energy}, \code{method}.
+#' @export
 Dwt2Tap <- function(x, levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -1405,6 +1581,18 @@ Dwt2Tap <- function(x, levels = 3) {
 }
 
 # -- EMD-based instantaneous-frequency spectrum, Sec 9.4 eqs (9.8)-(9.12).
+#' EMD-based instantaneous-frequency spectrum, Sec 9.4 eqs (9.8)-(9.12)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param max_imfs Defaults to \code{8}.
+#' @param nfreq Defaults to \code{32}.
+#' @param tol Defaults to \code{0.05}.
+#' @return A list with \code{spectrum}, \code{times}, \code{freqs}, \code{imfs}, \code{amplitude}, \code{inst_freq}, \code{marginal}, \code{n_imfs}, \code{peak_freq}, \code{method}.
+#' @export
 EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   fs <- as.numeric(fs)
@@ -1463,6 +1651,18 @@ EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
 }
 
 # -- Time-varying HRV band powers, Sec 8.12.
+#' Time-varying HRV band powers, Sec 8.12
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rr_intervals See Usage.
+#' @param fs_resamp Defaults to \code{4}.
+#' @param window_len Defaults to \code{64}.
+#' @param noverlap Defaults to \code{NULL}.
+#' @param standard Defaults to \code{"taskforce"}.
+#' @return A list with \code{times}, \code{vlf}, \code{lf}, \code{hf}, \code{total_power}, \code{lf_hf_ratio}, \code{lf_percent}, \code{hf_percent}, \code{bands}, \code{standard}, \code{mean_rr}, \code{mean_hr}, \code{resampled}, \code{fs_resamp}, \code{method}.
+#' @export
 HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
                   noverlap = NULL, standard = "taskforce") {
   rr <- .tf_need(rr_intervals, "rr_intervals", 4L)
@@ -1554,6 +1754,16 @@ HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
 }
 
 # -- Weighted overlap-add inverse STFT, Griffin & Lim (1984) eq (6).
+#' Weighted overlap-add inverse STFT, Griffin & Lim (1984) eq (6)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param stft See Usage.
+#' @param window Defaults to \code{"hann"}.
+#' @param hop Defaults to \code{NULL}.
+#' @return A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start}, \code{valid_end}, \code{n_frames}, \code{method}.
+#' @export
 IStft <- function(stft, window = "hann", hop = NULL) {
   frames <- if (is.matrix(stft)) {
     lapply(seq_len(nrow(stft)), function(i) stft[i, ])
@@ -1614,6 +1824,16 @@ IStft <- function(stft, window = "hann", hop = NULL) {
 }
 
 # -- Multiresolution analysis, eqs (8.111)-(8.114).
+#' Multiresolution analysis, eqs (8.111)-(8.114)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{approximation}, \code{details}, \code{bands}, \code{reconstruction_error}, \code{energy_per_band}, \code{levels}, \code{wavelet}, \code{method}.
+#' @export
 Mra <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -1647,6 +1867,19 @@ Mra <- function(x, wavelet = "db4", levels = 3) {
 }
 
 # -- ECG-triggered synchronised averaging of PCG envelopes, Sec 3.5 + 5.5.3.
+#' ECG-triggered synchronised averaging of PCG envelopes, Sec 3.5 +
+#' 5.5.3
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pcg See Usage.
+#' @param ecg See Usage.
+#' @param fs Defaults to \code{1000}.
+#' @param cycle_len Defaults to \code{NULL}.
+#' @param envelope_smoothing Defaults to \code{NULL}.
+#' @return A list with \code{average_envelope}, \code{n_cycles}, \code{cycle_len}, \code{triggers}, \code{s1_index}, \code{s1_time}, \code{s1_amplitude}, \code{s2_index}, \code{s2_time}, \code{s2_amplitude}, \code{s2_s1_ratio}, \code{snr_gain_db}, \code{method}.
+#' @export
 PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
                       envelope_smoothing = NULL) {
   p <- .tf_need(pcg, "pcg", 16L)
@@ -1733,6 +1966,18 @@ PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
 }
 
 # -- Wavelet-shrinkage denoising of PPG, Sec 8.14 with eqs (8.103)-(8.105).
+#' Wavelet-shrinkage denoising of PPG, Sec 8.14 with eqs (8.103)-(8.105)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ppg See Usage.
+#' @param fs Defaults to \code{100}.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{4}.
+#' @param threshold_type Defaults to \code{"soft"}.
+#' @return A list with \code{denoised}, \code{artifact}, \code{threshold}, \code{sigma}, \code{artifact_energy}, \code{snr_improvement_db}, \code{approx_energy}, \code{levels}, \code{wavelet}, \code{fs}, \code{method}.
+#' @export
 PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
                      threshold_type = "soft") {
   v <- .tf_need(ppg, "ppg", 8L)
@@ -1762,6 +2007,18 @@ PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
 }
 
 # -- Scalogram (|CWT|^2), eq (8.107) and Figure 8.29.
+#' Scalogram (|CWT|^2), eq (8.107) and Figure 8.29
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param scales Defaults to \code{NULL}.
+#' @param wavelet Defaults to \code{"morlet"}.
+#' @param w0 Defaults to \code{5}.
+#' @return A list with \code{scalogram}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{total_energy}, \code{ridge}, \code{method}.
+#' @export
 Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
   r <- Cwt(x, fs = fs, wavelet = wavelet, scales = scales, w0 = w0)
   sg <- do.call(rbind, lapply(r$coeffs, function(row) Mod(row)^2))
@@ -1787,6 +2044,19 @@ Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
 }
 
 # -- Fluctuation intensity of DWT coefficients, Sec 8.17 eq (8.132).
+#' Fluctuation intensity of DWT coefficients, Sec 8.17 eq (8.132)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param eeg See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{5}.
+#' @param scales Defaults to \code{c(3, 4, 5)}.
+#' @param threshold Defaults to \code{NULL}.
+#' @return A list with \code{fi}, \code{fi_total}, \code{scales}, \code{bands}, \code{energies}, \code{seizure_detected}, \code{threshold}, \code{wavelet}, \code{levels}, \code{method}.
+#' @export
 SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
                    scales = c(3, 4, 5), threshold = NULL) {
   v <- .tf_need(eeg, "eeg", 8L)
@@ -1830,6 +2100,16 @@ SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
 }
 
 # -- STFT window selection under the time-bandwidth limit, eq (8.10).
+#' STFT window selection under the time-bandwidth limit, eq (8.10)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fs See Usage.
+#' @param desired_t_res See Usage.
+#' @param desired_f_res See Usage.
+#' @return A list with \code{nperseg_time}, \code{nperseg_freq}, \code{nperseg}, \code{achieved_t_res}, \code{achieved_f_res}, \code{tf_product}, \code{heisenberg_bound}, \code{feasible}, \code{method}.
+#' @export
 StftParam <- function(fs, desired_t_res, desired_f_res) {
   fs <- as.numeric(fs)
   dt <- as.numeric(desired_t_res)
@@ -1853,6 +2133,18 @@ StftParam <- function(fs, desired_t_res, desired_f_res) {
 }
 
 # -- STFT spectrogram, eq (8.8); |STFT|^2 per the text after eq (8.9).
+#' STFT spectrogram, eq (8.8); |STFT|^2 per the text after eq (8.9)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param nperseg Defaults to \code{64}.
+#' @param noverlap Defaults to \code{NULL}.
+#' @param window Defaults to \code{"hann"}.
+#' @return A list with \code{spectrogram}, \code{stft}, \code{times}, \code{freqs}, \code{nperseg}, \code{hop}, \code{window}, \code{n_frames}, \code{total_energy}, \code{peak_freq}, \code{method}.
+#' @export
 Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
                         window = "hann") {
   v <- .tf_need(x, "x", 2L)
@@ -1899,6 +2191,16 @@ Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
 }
 
 # -- Stationary (undecimated, a-trous) wavelet transform.
+#' Stationary (undecimated, a-trous) wavelet transform
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{approx}, \code{details}, \code{levels}, \code{wavelet}, \code{redundancy}, \code{energy_per_level}, \code{method}.
+#' @export
 Swt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -1927,6 +2229,19 @@ Swt <- function(x, wavelet = "db4", levels = 3) {
 }
 
 # -- SWT (cycle-spinning) denoising, eqs (8.103)-(8.104) + Coifman & Donoho.
+#' SWT (cycle-spinning) denoising, eqs (8.103)-(8.104) + Coifman &
+#' Donoho
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @param threshold Defaults to \code{NULL}.
+#' @param threshold_type Defaults to \code{"soft"}.
+#' @return A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed}, \code{n_coeffs}, \code{n_shifts}, \code{residual_energy}, \code{levels}, \code{wavelet}, \code{threshold_type}, \code{method}.
+#' @export
 SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
                    threshold_type = "soft") {
   v <- .tf_need(x, "x", 4L)
@@ -1987,6 +2302,20 @@ SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
 }
 
 # -- Variational mode decomposition, Dragomiretskiy & Zosso (2014).
+#' Variational mode decomposition, Dragomiretskiy & Zosso (2014)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param K Defaults to \code{3}.
+#' @param alpha Defaults to \code{2000}.
+#' @param tau Defaults to \code{0}.
+#' @param init Defaults to \code{"uniform"}.
+#' @param tol Defaults to \code{1e-07}.
+#' @param max_iter Defaults to \code{300}.
+#' @return A list with \code{modes}, \code{center_freqs}, \code{K}, \code{alpha}, \code{tau}, \code{iterations}, \code{converged}, \code{reconstruction_error}, \code{residual_energy}, \code{method}.
+#' @export
 VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
                    tol = 1e-7, max_iter = 300) {
   v <- .tf_need(x, "x", 8L)
@@ -2068,6 +2397,19 @@ VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
 }
 
 # -- CWT ridge detection of transient structures, Sec 8.8.
+#' CWT ridge detection of transient structures, Sec 8.8
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param scales Defaults to \code{NULL}.
+#' @param wavelet Defaults to \code{"mexh"}.
+#' @param w0 Defaults to \code{5}.
+#' @param min_prominence Defaults to \code{0.1}.
+#' @return A list with \code{structures}, \code{n_structures}, \code{scalogram}, \code{scales}, \code{times}, \code{min_prominence}, \code{method}.
+#' @export
 CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
                      min_prominence = 0.1) {
   p <- as.numeric(min_prominence)
@@ -2111,6 +2453,18 @@ CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
 }
 
 # -- Scale-by-scale wavelet cross-correlation, Whitcher et al. (2000).
+#' Scale-by-scale wavelet cross-correlation, Whitcher et al. (2000)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @param max_lag Defaults to \code{0}.
+#' @return A list with \code{correlations}, \code{best_lags}, \code{covariances}, \code{scales}, \code{overall_correlation}, \code{levels}, \code{max_lag}, \code{wavelet}, \code{method}.
+#' @export
 WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
   a <- .tf_need(x, "x", 4L)
   b <- .tf_need(y, "y", 4L)
@@ -2190,6 +2544,16 @@ WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
 }
 
 # -- Wigner-Ville distribution, eq (8.123).
+#' Wigner-Ville distribution, eq (8.123)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs Defaults to \code{1}.
+#' @param nfreq Defaults to \code{NULL}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{peak_freq}, \code{total_energy}, \code{method}.
+#' @export
 WvDist <- function(x, fs = 1, nfreq = NULL) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -2214,6 +2578,16 @@ WvDist <- function(x, fs = 1, nfreq = NULL) {
 }
 
 # -- Wavelet subband energy, Sec 8.15.
+#' Wavelet subband energy, Sec 8.15
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{energies}, \code{relative}, \code{labels}, \code{total_energy}, \code{input_energy}, \code{energy_balance}, \code{dominant_band}, \code{levels}, \code{wavelet}, \code{method}.
+#' @export
 WtEnergy <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -2238,6 +2612,16 @@ WtEnergy <- function(x, wavelet = "db4", levels = 3) {
 }
 
 # -- Per-subband sample moments of the DWT coefficients.
+#' Per-subband sample moments of the DWT coefficients
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{moments}, \code{labels}, \code{levels}, \code{wavelet}, \code{method}.
+#' @export
 WtMoment <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -2274,6 +2658,16 @@ WtMoment <- function(x, wavelet = "db4", levels = 3) {
 }
 
 # -- Wavelet packet decomposition (full binary tree, natural order).
+#' Wavelet packet decomposition (full binary tree, natural order)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{nodes}, \code{leaves}, \code{n_leaves}, \code{energy_per_leaf}, \code{dominant_leaf}, \code{entropy}, \code{levels}, \code{wavelet}, \code{method}.
+#' @export
 Wpt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -2317,6 +2711,18 @@ Wpt <- function(x, wavelet = "db4", levels = 3) {
 }
 
 # -- Wavelet shrinkage, eqs (8.103)-(8.105) with the universal threshold.
+#' Wavelet shrinkage, eqs (8.103)-(8.105) with the universal threshold
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db4"}.
+#' @param levels Defaults to \code{3}.
+#' @param threshold_type Defaults to \code{"soft"}.
+#' @param threshold Defaults to \code{NULL}.
+#' @return A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed}, \code{n_coeffs}, \code{sparsity}, \code{noise_removed}, \code{threshold_type}, \code{wavelet}, \code{method}.
+#' @export
 WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
                      threshold = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -2359,6 +2765,16 @@ WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
 }
 
 # -- Unbiased wavelet variance by scale, Percival (1995).
+#' Unbiased wavelet variance by scale, Percival (1995)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet Defaults to \code{"db1"}.
+#' @param levels Defaults to \code{3}.
+#' @return A list with \code{variances}, \code{scales}, \code{n_used}, \code{total_variance}, \code{sample_variance}, \code{dominant_scale}, \code{is_allan}, \code{wavelet}, \code{method}.
+#' @export
 WtVar <- function(x, wavelet = "db1", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -2422,6 +2838,16 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 }
 
 # -- Two-impulse echo excitation, eq (4.74).
+#' Two-impulse echo excitation, eq (4.74)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param n See Usage.
+#' @return A list with \code{x}, \code{n}, \code{a}, \code{n_0}, \code{method}.
+#' @export
 EchoImp <- function(a, n_0, n) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -2443,6 +2869,17 @@ EchoImp <- function(a, n_0, n) {
 }
 
 # -- Wavelet plus echo in the time domain, eq (4.75).
+#' Wavelet plus echo in the time domain, eq (4.75)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param n Defaults to \code{NULL}.
+#' @return A list with \code{y}, \code{n}, \code{h}, \code{a}, \code{n_0}, \code{echo_visible}, \code{method}.
+#' @export
 EchoSig <- function(h, a, n_0, n = NULL) {
   hh <- as.numeric(h)
   if (!length(hh)) stop("h must contain at least one sample")
@@ -2468,6 +2905,17 @@ EchoSig <- function(h, a, n_0, n = NULL) {
 }
 
 # -- z-transform of a wavelet with an echo, eq (4.76).
+#' Z-transform of a wavelet with an echo, eq (4.76)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param z See Usage.
+#' @param H Defaults to \code{NULL}.
+#' @return A list with \code{Y}, \code{echo_factor}, \code{z}, \code{H}, \code{a}, \code{n_0}, \code{method}.
+#' @export
 EchoZ <- function(a, n_0, z, H = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -2503,6 +2951,17 @@ EchoZ <- function(a, n_0, z, H = NULL) {
 }
 
 # -- Fourier spectrum of a wavelet with an echo, eq (4.77).
+#' Fourier spectrum of a wavelet with an echo, eq (4.77)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param omega See Usage.
+#' @param H Defaults to \code{NULL}.
+#' @return A list with \code{Y}, \code{echo_factor}, \code{magnitude}, \code{phase}, \code{omega}, \code{ripple_period}, \code{a}, \code{n_0}, \code{method}.
+#' @export
 EchoSpec <- function(a, n_0, omega, H = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -2541,6 +3000,18 @@ EchoSpec <- function(a, n_0, omega, H = NULL) {
 }
 
 # -- Complex log spectrum of a wavelet with an echo, eqs (4.78)-(4.79).
+#' Complex log spectrum of a wavelet with an echo, eqs (4.78)-(4.79)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param omega See Usage.
+#' @param H_hat Defaults to \code{NULL}.
+#' @param n_terms Defaults to \code{NULL}.
+#' @return A list with \code{Y_hat}, \code{echo_log}, \code{series}, \code{series_valid}, \code{series_error}, \code{omega}, \code{a}, \code{n_0}, \code{n_terms}, \code{method}.
+#' @export
 EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -2606,6 +3077,18 @@ EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
 }
 
 # -- Complex cepstrum of a wavelet with an echo, eq (4.80).
+#' Complex cepstrum of a wavelet with an echo, eq (4.80)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h_hat See Usage.
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param n Defaults to \code{NULL}.
+#' @param n_terms Defaults to \code{NULL}.
+#' @return A list with \code{y_hat}, \code{n}, \code{impulses}, \code{n_impulses}, \code{echo_delay}, \code{a}, \code{method}.
+#' @export
 EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
   hh <- as.numeric(h_hat)
   a <- as.numeric(a)
@@ -2651,6 +3134,17 @@ EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
 }
 
 # -- Power spectrum of a wavelet with an echo, eq (4.84).
+#' Power spectrum of a wavelet with an echo, eq (4.84)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param z See Usage.
+#' @return A list with \code{power}, \code{wavelet_power}, \code{echo_power}, \code{z}, \code{a}, \code{n_0}, \code{method}.
+#' @export
 EchoPsd <- function(H, a, n_0, z) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -2682,6 +3176,17 @@ EchoPsd <- function(H, a, n_0, z) {
 }
 
 # -- Log power spectrum of a wavelet with an echo, eq (4.85).
+#' Log power spectrum of a wavelet with an echo, eq (4.85)
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param a See Usage.
+#' @param n_0 See Usage.
+#' @param omega See Usage.
+#' @return A list with \code{log_power}, \code{wavelet_log_power}, \code{echo_log_power}, \code{dc_term}, \code{ripple}, \code{modulation_index}, \code{ripple_period}, \code{decomposition_error}, \code{omega}, \code{a}, \code{n_0}, \code{method}.
+#' @export
 EchoLogPsd <- function(H, a, n_0, omega) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)

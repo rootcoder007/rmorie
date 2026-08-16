@@ -2,6 +2,14 @@
 # Reference: King, Nguyen & Ionides (2016) "Statistical Inference for
 # Partially Observed Markov Processes: The R Package pomp", JSS 69(12).
 
+#' logmeanexp
+#'
+#' Part of the pftrep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @return A numeric value.
+#' @export
 logmeanexp <- function(values) {
   v <- as.numeric(values)
   if (length(v) == 0L) stop("pftrep: nothing to average")
@@ -10,6 +18,19 @@ logmeanexp <- function(values) {
   mx + log(sum(exp(v - mx)) / length(v))
 }
 
+#' particle_filter_simple
+#'
+#' Part of the pftrep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param n_particles See Usage.
+#' @param init See Usage.
+#' @param step See Usage.
+#' @param loglik See Usage.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{loglik}, \code{min_ess}.
+#' @export
 particle_filter_simple <- function(y, n_particles, init, step, loglik,
                                    seed = 0L) {
   set.seed(as.integer(seed))
@@ -36,6 +57,20 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
   list(loglik = ll, min_ess = min_ess)
 }
 
+#' replicated_pfilter
+#'
+#' Part of the pftrep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param n_particles See Usage.
+#' @param init See Usage.
+#' @param step See Usage.
+#' @param loglik See Usage.
+#' @param n_reps Defaults to \code{10L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{loglik}, \code{logmeanexp}, \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps}, \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
+#' @export
 replicated_pfilter <- function(y, n_particles, init, step, loglik,
                                n_reps = 10L, seed = 0L) {
   R <- as.integer(n_reps)
@@ -57,6 +92,19 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
        method = "replicated particle filtering, King, Nguyen & Ionides (2016)")
 }
 
+#' loglik_profile
+#'
+#' Part of the pftrep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param grid See Usage.
+#' @param make_model See Usage.
+#' @param n_particles Defaults to \code{200L}.
+#' @param n_reps Defaults to \code{5L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik}, \code{se}, \code{max_loglik}, \code{n_particles}, \code{n_reps}, \code{method}.
+#' @export
 loglik_profile <- function(y, grid, make_model, n_particles = 200L,
                            n_reps = 5L, seed = 0L) {
   g <- as.numeric(grid)

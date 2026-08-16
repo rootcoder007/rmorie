@@ -187,6 +187,18 @@
   )
 }
 
+#' morie_remlfn
+#'
+#' Part of the remlfn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param group See Usage.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_iter Defaults to \code{5000}.
+#' @param solver Defaults to \code{"auto"}.
+#' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik}, \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form}, \code{solver}, \code{method}.
+#' @export
 morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto") {
   y <- as.numeric(y)
 

@@ -33,6 +33,17 @@
   list(uniform = function() .ghc_unif(e, 1L))
 }
 
+#' error_cache
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param K See Usage.
+#' @param b See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 error_cache <- function(alpha, y, K, b) {
   a <- as.numeric(alpha); yy <- as.numeric(y)
   n <- length(a)
@@ -44,6 +55,19 @@ error_cache <- function(alpha, y, K, b) {
   out
 }
 
+#' violates_kkt
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param i See Usage.
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param E See Usage.
+#' @param C See Usage.
+#' @param tol Defaults to \code{0.001}.
+#' @return A logical value.
+#' @export
 violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
   a <- as.numeric(alpha[i])
   r <- as.numeric(y[i]) * as.numeric(E[i])
@@ -51,6 +75,16 @@ violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
     (r > as.numeric(tol) && a > .SMOOPT_EPS)
 }
 
+#' outer_loop_schedule
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param C See Usage.
+#' @param examine_all See Usage.
+#' @return A list with \code{indices}, \code{kind}, \code{n_non_bound}, \code{note}.
+#' @export
 outer_loop_schedule <- function(alpha, C, examine_all) {
   a <- as.numeric(alpha)
   if (isTRUE(examine_all)) {
@@ -63,6 +97,20 @@ outer_loop_schedule <- function(alpha, C, examine_all) {
        note = "the non-bound set is where the action is")
 }
 
+#' second_choice
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param i1 See Usage.
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param E See Usage.
+#' @param C See Usage.
+#' @param rng See Usage.
+#' @param tol Defaults to \code{0.001}.
+#' @return A list with \code{index}, \code{level}, \code{note}.
+#' @export
 second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
   a <- as.numeric(alpha)
   n <- length(a)
@@ -92,6 +140,23 @@ second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
        note = "no second index available; abandon this i1")
 }
 
+#' compute_threshold
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param i1 See Usage.
+#' @param i2 See Usage.
+#' @param a1_new See Usage.
+#' @param a2_new See Usage.
+#' @param alpha See Usage.
+#' @param y See Usage.
+#' @param E See Usage.
+#' @param K See Usage.
+#' @param b See Usage.
+#' @param C See Usage.
+#' @return A list with \code{b}, \code{from}, \code{b1}, \code{b2}, \code{note}.
+#' @export
 compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
                               C) {
   yy <- as.numeric(y)
@@ -114,6 +179,20 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
                      "satisfies KKT"))
 }
 
+#' smo_platt
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param K See Usage.
+#' @param C Defaults to \code{1}.
+#' @param tol Defaults to \code{0.001}.
+#' @param eps Defaults to \code{1e-05}.
+#' @param max_passes Defaults to \code{200}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{passes}, \code{full_passes}, \code{non_bound_passes}, \code{steps}, \code{support_vectors}, \code{n_sv}, \code{equality_residual}, \code{kkt_violations}, \code{objective}, \code{method}, \code{note}.
+#' @export
 smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
                       max_passes = 200, seed = 0) {
   yy <- as.numeric(y)

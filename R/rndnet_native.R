@@ -127,6 +127,25 @@
 
 # Public entry point: compute the RND exploration bonus along an
 # observation stream.
+#' Public entry point: compute the RND exploration bonus along an
+#'
+#' observation stream.
+#'
+#' @param observations See Usage.
+#' @param n_hidden Defaults to \code{64}.
+#' @param n_out Defaults to \code{8}.
+#' @param lr Defaults to \code{0.05}.
+#' @param clip Defaults to \code{5}.
+#' @param normalize_obs Defaults to \code{TRUE}.
+#' @param normalize_reward Defaults to \code{TRUE}.
+#' @param init_steps Defaults to \code{0}.
+#' @param gamma_int Defaults to \code{0.99}.
+#' @param seed Defaults to \code{0}.
+#' @param target Defaults to \code{NULL}.
+#' @param predictor Defaults to \code{NULL}.
+#' @param update Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{intrinsic_reward}, \code{raw_error}, \code{returns}, \code{mse}, \code{mean_first}, \code{mean_last}, \code{n}, \code{target}, \code{predictor}, \code{method}.
+#' @export
 morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
                          normalize_obs=TRUE, normalize_reward=TRUE,
                          init_steps=0, gamma_int=0.99, seed=0,
@@ -251,6 +270,18 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
 # Public: section 2.3, R = R_E + R_I as two value heads. The extrinsic
 # stream is episodic (truncated at each `done`), the intrinsic stream is
 # non-episodic.
+#' Public: section 2.3, R = R_E + R_I as two value heads. The extrinsic
+#'
+#' stream is episodic (truncated at each `done`), the intrinsic stream
+#' is non-episodic.
+#'
+#' @param reward_ext See Usage.
+#' @param reward_int See Usage.
+#' @param gamma_ext Defaults to \code{0.999}.
+#' @param gamma_int Defaults to \code{0.99}.
+#' @param done Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{return_ext}, \code{return_int}, \code{return_total}, \code{gamma_ext}, \code{gamma_int}, \code{method}.
+#' @export
 morie_rndnet_combine_returns <- function(reward_ext, reward_int,
                                          gamma_ext=0.999, gamma_int=0.99,
                                          done=NULL) {

@@ -85,6 +85,15 @@
   max(0, min(1, upper))
 }
 
+#' edgrn_nb_variance
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param dispersion See Usage.
+#' @return A list with \code{variance}, \code{poisson}, \code{biological}, \code{bcv}, \code{note}.
+#' @export
 edgrn_nb_variance <- function(mu, dispersion) {
   m <- as.numeric(mu); p <- as.numeric(dispersion)
   if (m < 0 || p < 0)
@@ -94,6 +103,19 @@ edgrn_nb_variance <- function(mu, dispersion) {
        note = "phi = 0 leaves the Poisson variance exactly; sqrt(phi) is the biological coefficient of variation")
 }
 
+#' edgrn_tmm_factor
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts_sample See Usage.
+#' @param counts_reference See Usage.
+#' @param trim_m Defaults to \code{0.3}.
+#' @param trim_a Defaults to \code{0.05}.
+#' @param lib_sample Defaults to \code{NULL}.
+#' @param lib_reference Defaults to \code{NULL}.
+#' @return A list with \code{factor}, \code{log2_factor}, \code{n_used}, \code{n_genes}, \code{trimmed_m}, \code{trimmed_a}, \code{note}.
+#' @export
 edgrn_tmm_factor <- function(counts_sample, counts_reference,
                             trim_m = 0.3, trim_a = 0.05,
                             lib_sample = NULL, lib_reference = NULL) {
@@ -136,6 +158,15 @@ edgrn_tmm_factor <- function(counts_sample, counts_reference,
        note = "the counts are NOT modified; this factor enters the model as an offset")
 }
 
+#' edgrn_effective_library_size
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param library_size See Usage.
+#' @param factor See Usage.
+#' @return A list with \code{effective}, \code{offset}, \code{note}.
+#' @export
 edgrn_effective_library_size <- function(library_size, factor) {
   N <- as.numeric(library_size); f <- as.numeric(factor)
   if (N <= 0 || f <= 0)
@@ -144,6 +175,17 @@ edgrn_effective_library_size <- function(library_size, factor) {
        note = "an offset in the GLM, so the sampling properties of the counts survive")
 }
 
+#' edgrn_moderate_dispersion
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gene_dispersions See Usage.
+#' @param common Defaults to \code{NULL}.
+#' @param prior_df Defaults to \code{10}.
+#' @param df_residual Defaults to \code{1}.
+#' @return A list with \code{dispersion}, \code{common}, \code{shrinkage}, \code{prior_df}, \code{df_residual}, \code{note}.
+#' @export
 edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
                                       prior_df = 10.0, df_residual = 1.0) {
   p <- .edgrn_vec(gene_dispersions)
@@ -173,6 +215,18 @@ edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
        note = "with few libraries per gene there are almost no degrees of freedom, so d0 dominates")
 }
 
+#' edgrn_exact_test
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param count_a See Usage.
+#' @param count_b See Usage.
+#' @param lib_a See Usage.
+#' @param lib_b See Usage.
+#' @param dispersion See Usage.
+#' @return A list with \code{p_value}, \code{logFC}, \code{dispersion}, \code{note}.
+#' @export
 edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
   ya <- as.numeric(count_a); yb <- as.numeric(count_b)
   Na <- as.numeric(lib_a); Nb <- as.numeric(lib_b)
@@ -197,6 +251,18 @@ edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
        note = "conditional on the total count, as in Fisher's exact test")
 }
 
+#' edgrn_ql_f_test
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lrt See Usage.
+#' @param q See Usage.
+#' @param quasi_dispersion See Usage.
+#' @param df_residual See Usage.
+#' @param df_prior Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{F}, \code{df1}, \code{df2}, \code{p_value}, \code{lrt_p_value}, \code{method}, \code{note}.
+#' @export
 edgrn_ql_f_test <- function(lrt, q, quasi_dispersion, df_residual,
                             df_prior = NULL) {
   L <- as.numeric(lrt); Q <- as.integer(q); P <- as.numeric(quasi_dispersion)

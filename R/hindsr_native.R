@@ -45,6 +45,23 @@
   lapply(idx, function(i) m(pool[[i]]))
 }
 
+#' hindsr
+#'
+#' Part of the hindsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param episodes See Usage.
+#' @param actions Defaults to \code{NULL}.
+#' @param goals Defaults to \code{NULL}.
+#' @param strategy Defaults to \code{"future"}.
+#' @param k Defaults to \code{4L}.
+#' @param tol Defaults to \code{1e-06}.
+#' @param reward_fn Defaults to \code{NULL}.
+#' @param state_to_goal Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0L}.
+#' @param history Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{transitions}, \code{n_transitions}, \code{n_original}, \code{n_relabelled}, \code{rewards}, \code{success_rate}, \code{strategy}, \code{k}, \code{n_episodes}, \code{method}.
+#' @export
 hindsr <- function(episodes, actions = NULL, goals = NULL,
                    strategy = "future", k = 4L, tol = 1e-6,
                    reward_fn = NULL, state_to_goal = NULL, seed = 0L,

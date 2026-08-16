@@ -23,6 +23,17 @@
   1.0 - u ^ (1.0 / as.numeric(alpha))
 }
 
+#' stick_breaking
+#'
+#' Part of the slowdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param K See Usage.
+#' @param rng Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass}, \code{K}, \code{alpha}, \code{note}.
+#' @export
 stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
   a <- as.numeric(alpha)
   n <- as.integer(K)
@@ -47,6 +58,15 @@ stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
        note = "the remaining stick is the mass truncation throws away")
 }
 
+#' truncation_error
+#'
+#' Part of the slowdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param K See Usage.
+#' @return A list with \code{expected_tail}, \code{kept}, \code{alpha}, \code{K}, \code{per_stick_factor}, \code{note}.
+#' @export
 truncation_error <- function(alpha, K) {
   a <- as.numeric(alpha)
   n <- as.integer(K)
@@ -58,6 +78,15 @@ truncation_error <- function(alpha, K) {
        note = "a more diffuse process needs more sticks for the same fidelity")
 }
 
+#' sticks_for_tolerance
+#'
+#' Part of the slowdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param tol Defaults to \code{0.001}.
+#' @return A list with \code{K}, \code{expected_tail}, \code{tolerance}, \code{note}.
+#' @export
 sticks_for_tolerance <- function(alpha, tol = 1e-3) {
   a <- as.numeric(alpha)
   t <- as.numeric(tol)
@@ -73,6 +102,15 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
        note = "chosen from the closed form, not guessed")
 }
 
+#' decay_diagnostics
+#'
+#' Part of the slowdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @param alpha See Usage.
+#' @return A list with \code{realised_tail}, \code{expected_tail}, \code{ratio}, \code{largest_index}, \code{monotone}, \code{note}.
+#' @export
 decay_diagnostics <- function(weights, alpha) {
   p <- as.numeric(weights)
   K <- length(p)
@@ -94,6 +132,19 @@ decay_diagnostics <- function(weights, alpha) {
                      "is exactly what a mean-based truncation misses"))
 }
 
+#' truncated_dp
+#'
+#' Part of the slowdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alpha See Usage.
+#' @param K See Usage.
+#' @param base_sampler Defaults to \code{NULL}.
+#' @param rng Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param renormalise Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{weights}, \code{atoms}, \code{discarded_mass}, \code{expected_discarded}, \code{renormalised}, \code{K}, \code{alpha}, \code{method}, \code{note}.
+#' @export
 truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
                          seed = 0, renormalise = TRUE) {
   if (!is.null(rng)) e <- rng else e <- .ghc_rng(seed)

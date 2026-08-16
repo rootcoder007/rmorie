@@ -40,6 +40,17 @@
   ez / sum(ez)
 }
 
+#' logistic_trainer
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param l2 Defaults to \code{0.001}.
+#' @param epochs Defaults to \code{300L}.
+#' @param lr Defaults to \code{0.5}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{train}, as built in the body.
+#' @export
 logistic_trainer <- function(l2 = 1e-3, epochs = 300L, lr = 0.5, seed = 0) {
   train <- function(X, y) {
     n <- length(X)
@@ -81,6 +92,15 @@ logistic_trainer <- function(l2 = 1e-3, epochs = 300L, lr = 0.5, seed = 0) {
   train
 }
 
+#' knn_trainer
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param k Defaults to \code{1L}.
+#' @param smoothing Defaults to \code{0.001}.
+#' @return The value of \code{train}, as built in the body.
+#' @export
 knn_trainer <- function(k = 1L, smoothing = 1e-3) {
   k <- as.integer(k)
   if (k < 1L) stop("memb: k must be >= 1")
@@ -112,6 +132,18 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
   train
 }
 
+#' attack_dataset
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model_predict See Usage.
+#' @param in_X See Usage.
+#' @param in_y See Usage.
+#' @param out_X See Usage.
+#' @param out_y See Usage.
+#' @return A list with \code{rows}, \code{labels}, \code{classes}.
+#' @export
 attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
   rows <- list(); lab <- c(); cls <- c()
   if (length(in_X) > 0L) {
@@ -133,6 +165,23 @@ attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
   list(rows = rows, labels = lab, classes = cls)
 }
 
+#' synthesize
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param target_predict See Usage.
+#' @param c See Usage.
+#' @param n_features See Usage.
+#' @param feature_values Defaults to \code{NULL}.
+#' @param k_max Defaults to \code{NULL}.
+#' @param k_min Defaults to \code{1L}.
+#' @param conf_min Defaults to \code{0.8}.
+#' @param iter_max Defaults to \code{1000L}.
+#' @param rej_max Defaults to \code{10L}.
+#' @param seed Defaults to \code{0}.
+#' @return Nothing; the function is called for its effect.
+#' @export
 synthesize <- function(target_predict, c, n_features, feature_values = NULL,
                        k_max = NULL, k_min = 1L, conf_min = 0.8,
                        iter_max = 1000L, rej_max = 10L, seed = 0) {
@@ -201,6 +250,16 @@ synthesize <- function(target_predict, c, n_features, feature_values = NULL,
   NULL
 }
 
+#' synthesize_marginals
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param n See Usage.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 synthesize_marginals <- function(X, n, seed = 0) {
   if (length(X) == 0L)
     stop("memb: no data to take marginals from")
@@ -218,6 +277,17 @@ synthesize_marginals <- function(X, n, seed = 0) {
   out
 }
 
+#' synthesize_noisy
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param fraction Defaults to \code{0.1}.
+#' @param feature_values Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
                               seed = 0) {
   if (!(fraction >= 0 && fraction <= 1))
@@ -243,6 +313,15 @@ synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
   out
 }
 
+#' precision_recall
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pred See Usage.
+#' @param truth See Usage.
+#' @return A list with \code{precision}, \code{recall}, \code{accuracy}, \code{tp}, \code{fp}, \code{fn}, \code{tn}.
+#' @export
 precision_recall <- function(pred, truth) {
   pred <- as.integer(pred); truth <- as.integer(truth)
   tp <- sum(pred == 1 & truth == 1)
@@ -261,6 +340,22 @@ precision_recall <- function(pred, truth) {
   if (is.null(top)) s else s[seq_len(min(top, length(s)))]
 }
 
+#' memb
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param target_predict See Usage.
+#' @param shadow_data See Usage.
+#' @param eval_in See Usage.
+#' @param eval_out See Usage.
+#' @param train_fn Defaults to \code{NULL}.
+#' @param attack_train_fn Defaults to \code{NULL}.
+#' @param n_shadow Defaults to \code{NULL}.
+#' @param sort_features Defaults to \code{FALSE}.
+#' @param threshold Defaults to \code{0.5}.
+#' @return A list with \code{estimate}, \code{metrics}, \code{per_class}, \code{predictions}, \code{scores}, \code{truth}, \code{n_shadow}, \code{attack_train_size}, \code{attack_classes}, \code{threshold}, \code{note}, \code{method}.
+#' @export
 memb <- function(target_predict, shadow_data, eval_in, eval_out,
                  train_fn = NULL, attack_train_fn = NULL, n_shadow = NULL,
                  sort_features = FALSE, threshold = 0.5) {
@@ -348,6 +443,15 @@ membership_inference <- memb
         "overfitting, no attack.", sep = "")
 }
 
+#' morie_memb
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_memb <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("memb: op must be one of memb, attack_dataset, synthesize, synthesize_marginals, synthesize_noisy, precision_recall, logistic_trainer, knn_trainer, cheatsheet")

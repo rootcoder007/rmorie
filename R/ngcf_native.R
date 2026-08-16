@@ -71,6 +71,15 @@
   if (x >= 0.0) x else slope * x
 }
 
+#' ngcf_laplacian_coefficient
+#'
+#' Part of the ngcf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_u See Usage.
+#' @param n_i See Usage.
+#' @return A numeric value.
+#' @export
 ngcf_laplacian_coefficient <- function(n_u, n_i) {
   a <- as.integer(n_u)
   b <- as.integer(n_i)
@@ -80,6 +89,19 @@ ngcf_laplacian_coefficient <- function(n_u, n_i) {
   1.0 / sqrt(as.numeric(a * b))
 }
 
+#' ngcf_message
+#'
+#' Part of the ngcf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e_i See Usage.
+#' @param e_u See Usage.
+#' @param W1 See Usage.
+#' @param W2 See Usage.
+#' @param p_ui See Usage.
+#' @param affinity Defaults to \code{TRUE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity=TRUE) {
   ei <- as.numeric(e_i)
   eu <- as.numeric(e_u)
@@ -95,6 +117,19 @@ ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity=TRUE) {
   out
 }
 
+#' ngcf_propagate
+#'
+#' Part of the ngcf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param E See Usage.
+#' @param adjacency See Usage.
+#' @param W1 See Usage.
+#' @param W2 See Usage.
+#' @param affinity Defaults to \code{TRUE}.
+#' @param slope Defaults to \code{0.2}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
   n <- nrow(E)
   d <- ncol(E)
@@ -119,6 +154,18 @@ ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
   out
 }
 
+#' ngcf_stack_layers
+#'
+#' Part of the ngcf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param E0 See Usage.
+#' @param adjacency See Usage.
+#' @param Ws See Usage.
+#' @param affinity Defaults to \code{TRUE}.
+#' @param slope Defaults to \code{0.2}.
+#' @return A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers}, \code{affinity}, \code{method}, \code{note}.
+#' @export
 ngcf_stack_layers <- function(E0, adjacency, Ws, affinity=TRUE, slope=0.2) {
   E <- as.matrix(E0)
   storage.mode(E) <- "double"
@@ -147,6 +194,16 @@ ngcf_stack_layers <- function(E0, adjacency, Ws, affinity=TRUE, slope=0.2) {
   )
 }
 
+#' ngcf_score
+#'
+#' Part of the ngcf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param final See Usage.
+#' @param u See Usage.
+#' @param i See Usage.
+#' @return A numeric value.
+#' @export
 ngcf_score <- function(final, u, i) {
   a <- final[as.integer(u), ]
   b <- final[as.integer(i), ]
@@ -156,6 +213,13 @@ ngcf_score <- function(final, u, i) {
   sum(a * b)
 }
 
+#' ngcf_cheatsheet
+#'
+#' Part of the ngcf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 ngcf_cheatsheet <- function() {
   paste0("ngcf: conventional CF never puts the COLLABORATIVE ",
          "SIGNAL into the embedding -- only into the objective. ",

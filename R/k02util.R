@@ -2,6 +2,15 @@
 # k02 batch shared helpers -- internal, not exported.
 # Mirrors src/morie/fn/k02util.py arithmetic exactly.
 
+#' k02fe
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param v See Usage.
+#' @return A list with \code{mu}, \code{var}, \code{sw}, \code{Q}, \code{df}.
+#' @export
 k02fe <- function(y, v) {
   y <- as.numeric(y); v <- as.numeric(v)
   w <- 1 / v
@@ -11,6 +20,15 @@ k02fe <- function(y, v) {
   list(mu = mu, var = 1 / sw, sw = sw, Q = q, df = length(y) - 1L)
 }
 
+#' k02dl
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param v See Usage.
+#' @return A list with \code{tau2}, \code{mu}, \code{var}, \code{Q}, \code{df}.
+#' @export
 k02dl <- function(y, v) {
   y <- as.numeric(y); v <- as.numeric(v)
   fe <- k02fe(y, v)
@@ -22,6 +40,16 @@ k02dl <- function(y, v) {
   list(tau2 = tau2, mu = sum(ws * y) / sws, var = 1 / sws, Q = fe$Q, df = fe$df)
 }
 
+#' k02mm
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param v See Usage.
+#' @param tau0 See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 k02mm <- function(y, v, tau0) {
   y <- as.numeric(y); v <- as.numeric(v)
   a <- 1 / (v + tau0)
@@ -32,14 +60,68 @@ k02mm <- function(y, v, tau0) {
   if (den > 0) max(0, num / den) else 0
 }
 
+#' k02z
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{stats::qnorm}.
+#' @export
 k02z <- function(p) stats::qnorm(p)
+#' k02tq
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param df See Usage.
+#' @return The value of \code{stats::qt}.
+#' @export
 k02tq <- function(p, df) stats::qt(p, df)
+#' k02p2z
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
+#' k02p2t
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tv See Usage.
+#' @param df See Usage.
+#' @return A numeric value.
+#' @export
 k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
+#' k02pchi
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param df See Usage.
+#' @return The value of \code{stats::pchisq}.
+#' @export
 k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 
 .k02invphi <- 0.6180339887498949
 
+#' k02gold
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param iters Defaults to \code{80L}.
+#' @return A numeric value.
+#' @export
 k02gold <- function(f, lo, hi, iters = 80L) {
   a <- as.numeric(lo); b <- as.numeric(hi)
   cc <- b - .k02invphi * (b - a)
@@ -57,6 +139,14 @@ k02gold <- function(f, lo, hi, iters = 80L) {
   0.5 * (a + b)
 }
 
+#' k02gh
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @return A list with \code{x}, \code{w}.
+#' @export
 k02gh <- function(n) {
   n <- as.integer(n)
   pim4 <- 0.7511255444649425
@@ -93,6 +183,15 @@ k02gh <- function(n) {
   list(x = x, w = w)
 }
 
+#' k02mod
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param comm See Usage.
+#' @return A numeric value.
+#' @export
 k02mod <- function(A, comm) {
   a <- as.matrix(A); n <- nrow(a)
   k <- rowSums(a); m2 <- sum(a)
@@ -104,6 +203,14 @@ k02mod <- function(A, comm) {
   q / m2
 }
 
+#' k02bfs
+#'
+#' Part of the k02util implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 k02bfs <- function(A) {
   a <- as.matrix(A); n <- nrow(a)
   nbr <- lapply(seq_len(n), function(i) which(a[i, ] != 0 & seq_len(n) != i))

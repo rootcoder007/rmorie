@@ -1,0 +1,20 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_sv_dl_split_read_consensus}
+\alias{morie_sv_dl_split_read_consensus}
+\title{Gapless majority-vote consensus over the aligned reads. starts}
+\usage{
+morie_sv_dl_split_read_consensus(reads, starts = NULL)
+}
+\arguments{
+\item{reads}{See Usage.}
+\item{starts}{Defaults to \code{NULL}.}
+}
+\description{
+places each read in a common frame. Returns list(consensus, start).
+}
+\value{
+A list with \code{consensus}, \code{start}.
+}
+\keyword{internal}

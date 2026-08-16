@@ -131,6 +131,20 @@
 
 # build the nested sequence of (G, targeted Q) and score each step.
 # q_covariates uses 0-based indices, matching the Python arm exactly.
+#' Build the nested sequence of (G, targeted Q) and score each step
+#'
+#' q_covariates uses 0-based indices, matching the Python arm exactly.
+#'
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param X See Usage.
+#' @param tuning Defaults to \code{"discrete"}.
+#' @param penalties Defaults to \code{NULL}.
+#' @param trim Defaults to \code{0.005}.
+#' @param scale Defaults to \code{NULL}.
+#' @param q_covariates Defaults to \code{NULL}.
+#' @return A list with \code{steps}, \code{info}.
+#' @export
 ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
                            trim = 0.005, scale = NULL,
                            q_covariates = NULL) {
