@@ -22,3 +22,10 @@ Queries at full resolution, keys and values from an R x R
 average-pooled map. The (H, W, d) array is flattened ROW-MAJOR into
 H*W tokens, which in R means indexing [i, j, ] in that order.
 }
+\examples{
+set.seed(4)
+X <- array(rnorm(4 * 4 * 3), dim = c(4, 4, 3))
+W <- diag(3)
+morie_geron_pyramid_vit_stage(X, WQ = W, WK = W, WV = W,
+                              reduction_ratio = 2)
+}

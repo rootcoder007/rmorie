@@ -36,3 +36,15 @@ Cartesian product of \code{param_grid} (first name varies slowest, matching
 itertools.product) crossed with \code{\link[=morie_geron_kfold_cv]{morie_geron_kfold_cv()}} splits.
 \code{best_index} is 0-based; \code{std_scores} uses ddof = 1.
 }
+\examples{
+set.seed(5)
+X <- matrix(rnorm(60), 30, 2)
+y <- as.numeric(X[, 1] > 0)
+fs <- function(Xtr, ytr, Xte, yte, params) {
+  b <- qr.solve(cbind(1, as.matrix(Xtr)), as.numeric(ytr))
+  pred <- as.numeric(cbind(1, as.matrix(Xte)) \%*\% b)
+  -mean((pred - yte)^2) * params$w
+}
+morie_geron_grid_search_cv(X, y, param_grid = list(w = c(1, 2)),
+                           K = 3, fit_score = fs)
+}

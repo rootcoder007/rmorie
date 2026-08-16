@@ -20,3 +20,9 @@ equation, so none is attributed to the book.  Window range and window activity a
 A list with \code{clean}, \code{artifact}, \code{nsegments}, \code{fraction}, \code{win}, \code{factor}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+fs <- 100
+x <- c(rnorm(fs * 2, 0, 0.5), rnorm(fs, 0, 4), rnorm(fs * 2, 0, 0.5))
+MotionArt(x, fs = fs)
+}
