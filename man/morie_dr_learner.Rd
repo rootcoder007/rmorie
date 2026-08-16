@@ -35,3 +35,12 @@ Kennedy EH (2023). Towards optimal doubly robust
 estimation of heterogeneous causal effects. \emph{Electronic Journal
 of Statistics} 17(2), 3008-3049.
 }
+\examples{
+set.seed(5)
+n <- 120
+X <- matrix(rnorm(n * 2), n, 2)
+t <- rbinom(n, 1, 0.5)
+y <- 1 + X[, 1] + t * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
+r <- morie_dr_learner(y, t, X, n_folds = 4L)
+str(r, max.level = 1)
+}

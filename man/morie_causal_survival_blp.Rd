@@ -45,3 +45,14 @@ Fisher-Schultz Lecture: generic machine learning inference on
 heterogeneous treatment effects in randomized experiments, with an
 application to immunization in India. arXiv:1712.04802.
 }
+\examples{
+set.seed(3)
+n <- 150
+X <- matrix(rnorm(n * 2), n, 2)
+d <- rbinom(n, 1, 0.5)
+tt <- rexp(n, rate = exp(-0.5 * d - 0.3 * X[, 1]))
+ev <- as.numeric(tt < quantile(tt, 0.8))
+tt <- pmin(tt, quantile(tt, 0.8))
+r <- morie_causal_survival_blp(tt, ev, d, X, n_trees = 20L)
+str(r, max.level = 1)
+}

@@ -14,3 +14,8 @@ Graph isomorphism network aggregation (Xu et al. 2019)
 A list with \code{H}, \code{eps}, \code{n_nodes}, \code{dim}.
 }
 \keyword{internal}
+\examples{
+A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
+H <- matrix(1:6, 3, 2)
+Ginagg(A, H, eps = 0.1)
+}

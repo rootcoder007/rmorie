@@ -44,3 +44,14 @@ Cui Y, Kosorok MR, Sverdrup E, Wager S, Zhu R (2023).
 Estimating heterogeneous treatment effects with right-censored data
 via causal survival forests. \emph{JRSS-B} 85(2), 179-211.
 }
+\examples{
+set.seed(3)
+n <- 150
+X <- matrix(rnorm(n * 2), n, 2)
+d <- rbinom(n, 1, 0.5)
+tt <- rexp(n, rate = exp(-0.5 * d - 0.3 * X[, 1]))
+ev <- as.numeric(tt < quantile(tt, 0.8))
+tt <- pmin(tt, quantile(tt, 0.8))
+r <- morie_causal_survival_forest(tt, ev, d, X, n_trees = 20L)
+str(r, max.level = 1)
+}
