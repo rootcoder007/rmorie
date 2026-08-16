@@ -23,3 +23,11 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{cleaned}, \code{artifact_estimate}, \code{weights}, \code{rms_before}, \code{rms_after}, \code{artifact_reduction_db}, \code{mu_trace}, \code{n_taps}, \code{alpha}, \code{adaptive_mu}, \code{fs_hz}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(9)
+fs <- 500
+n <- fs
+emg <- rnorm(n)
+vag <- 0.5 * emg + rnorm(n, 0, 0.3)
+VagClean(vag, emg, fs = fs)
+}

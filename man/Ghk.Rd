@@ -21,3 +21,7 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{potential_mV}, \code{potential_V}, \code{numerator_mM}, \code{denominator_mM}, \code{slope_mV}, \code{permeabilities}, \code{T_K}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Ghk(ion_concs = list(K_in = 140, K_out = 5, Na_in = 12, Na_out = 145,
+                     Cl_in = 4, Cl_out = 110))
+}

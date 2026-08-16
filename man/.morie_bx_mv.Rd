@@ -18,3 +18,6 @@ A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_lstsq},
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.morie_bx_mv(matrix(c(1, 2, 3, 4), 2, 2), c(1, 1))
+}

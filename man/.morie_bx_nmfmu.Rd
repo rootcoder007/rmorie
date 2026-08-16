@@ -22,3 +22,9 @@ eqs (9.54)-(9.55)
 A list with \code{W}, \code{H}, \code{error}, \code{iterations}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+V <- matrix(runif(24, 0.1, 1), 6, 4)
+.morie_bx_nmfmu(V, r = 2L, maxiter = 30L, tol = 1e-6, seed = 1L,
+                cost = "euclidean")
+}

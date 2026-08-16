@@ -18,3 +18,6 @@ returning garbage on a singular system
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.morie_bx_solve(matrix(c(4, 1, 1, 3), 2, 2), c(1, 2))
+}

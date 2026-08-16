@@ -21,3 +21,9 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{erd_percent}, \code{ref_power}, \code{active_power}, \code{power_ratio}, \code{event}, \code{band_hz}, \code{ref_window_s}, \code{active_window_s}, \code{ref_samples}, \code{active_samples}, \code{fs_hz}, \code{sign_convention}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(8)
+fs <- 100
+eeg <- rnorm(fs * 6)
+ErdErs(eeg, fs = fs, ref_window = c(0, 2), active_window = c(3, 5))
+}

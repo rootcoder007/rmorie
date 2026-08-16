@@ -21,3 +21,9 @@ MurmSpec(pcg, fs, f1 = 25, f2 = 75, f3 = 150)
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+set.seed(9)
+fs <- 1000
+pcg <- sin(2 * pi * 60 * seq(0, 1, by = 1 / fs)) + 0.2 * rnorm(1001)
+MurmSpec(pcg, fs = fs)
+}
