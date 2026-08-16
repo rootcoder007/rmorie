@@ -22,3 +22,6 @@ list(rows, nrows, ncols, k, period, mean, sumsq)
 Column pair j is sin(2 pi j t / m), cos(2 pi j t / m) for j = 1..k.
 The book calls these trigonometric seasonality.
 }
+\examples{
+morie_fourfeat(n = 24, period = 12, k = 2)
+}

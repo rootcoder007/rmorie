@@ -17,3 +17,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_i
 A list with \code{h}, \code{g}, \code{rec_lo}, \code{rec_hi}.
 }
 \keyword{internal}
+\examples{
+.tf_filters("db4")
+}

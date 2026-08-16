@@ -14,3 +14,7 @@ Case-control logistic likelihood (Lawson eq. 6.6)
 A list with \code{loglik}, \code{p}, \code{n_cases}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+Cclogl(eta = rnorm(8), y = rbinom(8, 1, 0.5))
+}

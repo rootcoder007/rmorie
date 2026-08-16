@@ -30,3 +30,7 @@ between implementations, and a decomposition whose numbers depend on
 which library you call cannot be checked across two languages.
 robust switches the seasonal aggregate from the mean to the median.
 }
+\examples{
+x <- as.numeric(log(AirPassengers))
+morie_stldecomp(x, period = 12)
+}

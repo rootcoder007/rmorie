@@ -18,3 +18,6 @@ A step of the rangayyan_tf implementation. Called by \code{IStft}, \code{Spectro
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.tf_win("hamming", 16L)
+}

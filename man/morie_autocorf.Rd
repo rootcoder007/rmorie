@@ -18,3 +18,7 @@ list(acf, ci, maxlag, n, r1, nsignif)
 The biased (divide-by-n) estimator the book's ACF plots use;
 ci is the +/- 1.96/sqrt(n) band drawn on them.
 }
+\examples{
+set.seed(2)
+morie_autocorf(as.numeric(arima.sim(list(ar = 0.6), 100)), maxlag = 10L)
+}

@@ -20,3 +20,7 @@ list(forecast, season, horizon, first, last, mean)
 Each forecast repeats the observation from the same point in the
 previous season -- the benchmark the scaled metrics divide by.
 }
+\examples{
+x <- as.numeric(AirPassengers)
+morie_seasnaive(x, season = 12, horizon = 6)
+}

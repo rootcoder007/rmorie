@@ -20,3 +20,10 @@ A step of the rangayyan_tf implementation. Called by \code{Mra}, \code{SwtDen}, 
 The value of \code{cur}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- sin(2 * pi * (1:64) / 16) + rnorm(64, 0, 0.1)
+d <- .tf_dwt(x, wavelet = "db4", levels = 3L)
+rec <- .tf_idwt(d$a, d$details, d$lengths, wavelet = "db4")
+max(abs(rec - x))
+}

@@ -15,3 +15,6 @@ Character scalar.
 \description{
 Render a parsed tree back to infix source
 }
+\examples{
+morie_geron_symd_to_string(list("add", list("var", "x"), list("num", 2)))
+}

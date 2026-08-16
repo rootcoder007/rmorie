@@ -18,3 +18,7 @@ list(pacf, ci, maxlag, n, p1, nsignif)
 Fixed recursion depth, no tolerance test, so both arms take
 identical steps.
 }
+\examples{
+set.seed(2)
+morie_pacfts(as.numeric(arima.sim(list(ar = 0.6), 100)), maxlag = 10L)
+}
