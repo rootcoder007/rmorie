@@ -21,3 +21,12 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{freq_hz}, \code{coherence}, \code{coherence_sq}, \code{phase_rad}, \code{peak_coherence}, \code{peak_freq_hz}, \code{mean_coherence}, \code{delay_ms_at_peak}, \code{significance_level}, \code{n_segments}, \code{segment_samples}, \code{band_hz}, \code{fs_hz}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+fs <- 200
+n <- 1024
+pcg <- sin(2 * pi * 60 * (1:n) / fs) + 0.2 * rnorm(n)
+eeg <- 0.4 * pcg + rnorm(n)
+r <- PcgEeg(pcg, eeg, fs = fs)
+str(r, max.level = 1)
+}

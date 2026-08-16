@@ -20,3 +20,10 @@ the approach but does not print Eg[M2] or Varg[M2]; both are derived from the qu
 A list with \code{m2}, \code{expectation}, \code{variance}, \code{z}, \code{p_value}, \code{sigma2}, \code{n}, \code{gaussian_moments_apply}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+coords <- matrix(runif(10), 5, 2)
+W <- matrix(0, 5, 5)
+W[abs(row(W) - col(W)) == 1] <- 1
+MantelZ(coords, rnorm(5), W)
+}

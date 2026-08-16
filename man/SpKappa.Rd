@@ -19,3 +19,9 @@ same-site pairs; the pairing is Mantel\'s M2, eq (1.5), with U_ij = I{x_i = y_j}
 A list with \code{kappa}, \code{p_observed}, \code{p_expected}, \code{categories}, \code{s0}, \code{compares_neighbours_not_same_site}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+W <- matrix(0, 8, 8)
+W[abs(row(W) - col(W)) == 1] <- 1
+SpKappa(rbinom(8, 1, 0.5), rbinom(8, 1, 0.5), W)
+}

@@ -19,3 +19,6 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{nperseg_time}, \code{nperseg_freq}, \code{nperseg}, \code{achieved_t_res}, \code{achieved_f_res}, \code{tf_product}, \code{heisenberg_bound}, \code{feasible}, \code{method}.
 }
 \keyword{internal}
+\examples{
+StftParam(fs = 250, desired_t_res = 0.2, desired_f_res = 2)
+}

@@ -22,3 +22,9 @@ ICA are free to use negative coefficients so their components cancel; nonnegativ
 A list with \code{W}, \code{H}, \code{submatrices}, \code{error}, \code{iterations}, \code{cost}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(6)
+V <- matrix(runif(48, 0.1, 1), 8, 6)
+r <- NmfMu(V, r = 3, maxiter = 50)
+str(r, max.level = 1)
+}

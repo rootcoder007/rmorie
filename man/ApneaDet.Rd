@@ -22,3 +22,19 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{epochs}, \code{n_flagged}, \code{apnea_suspected}, \code{events_per_hour}, \code{severity}, \code{n_epochs}, \code{epoch_s}, \code{fs_hz}, \code{desat_criterion_pct}, \code{heuristic}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+fs <- 100
+n <- fs * 180
+ecg <- rep(0, n)
+for (b in seq(0.4, 179, by = 0.8)) {
+  i <- round(b * fs)
+  ecg[i:(i + 4)] <- c(0.3, 1.2, -0.4, 0.1, 0)
+}
+ecg <- ecg + 0.01 * rnorm(n)
+spo2 <- rep(97, n)
+spo2[(60 * fs):(75 * fs)] <- 91
+snore <- rnorm(n, 0, 0.2)
+r <- ApneaDet(ecg, spo2, snore, fs = fs, epoch_s = 60)
+str(r, max.level = 1)
+}

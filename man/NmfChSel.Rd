@@ -22,3 +22,10 @@ A step of the rangayyan_class2 implementation. No other function in the package 
 A list with \code{selected}, \code{rmsd}, \code{ranking}, \code{normalized}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+trials <- matrix(rnorm(6 * 200), 6, 200)
+trials[2, ] <- trials[2, ] + sin(2 * pi * (1:200) / 20)
+r <- NmfChSel(trials, nselect = 3, rank = 3)
+r$selected
+}

@@ -22,3 +22,9 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{fi}, \code{fi_total}, \code{scales}, \code{bands}, \code{energies}, \code{seizure_detected}, \code{threshold}, \code{wavelet}, \code{levels}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+fs <- 100
+eeg <- c(rnorm(fs * 4, 0, 1), rnorm(fs * 2, 0, 4), rnorm(fs * 2, 0, 1))
+str(SeizWt(eeg, fs = fs), max.level = 1)
+}

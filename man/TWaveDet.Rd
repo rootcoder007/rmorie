@@ -20,3 +20,18 @@ to the isoelectric baseline, and the length transform of eq (4.21) re-run with t
 A list with \code{t}, \code{onset}, \code{offset}, \code{length}, \code{tdur}, \code{nchan}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+fs <- 250
+n <- fs * 3
+x <- rep(0, n)
+qrs <- round(seq(0.5, 2.7, by = 0.75) * fs)
+for (i in qrs) {
+  x[i:(i + 5)] <- c(0.2, 1.2, -0.5, 0.1, 0.05, 0)
+  j <- i + round(0.25 * fs)
+  x[j:(j + 12)] <- 0.3 * exp(-((0:12 - 6) / 3)^2)
+}
+x <- x + 0.005 * rnorm(n)
+r <- TWaveDet(list(x), qrs = qrs, fs = fs)
+str(r, max.level = 1)
+}

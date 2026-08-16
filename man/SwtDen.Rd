@@ -21,3 +21,8 @@ Donoho Part of the rangayyan_tf implementation; see the file header for the sour
 A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed}, \code{n_coeffs}, \code{n_shifts}, \code{residual_energy}, \code{levels}, \code{wavelet}, \code{threshold_type}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.3)
+str(SwtDen(x, wavelet = "db4", levels = 3), max.level = 1)
+}
