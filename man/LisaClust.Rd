@@ -19,3 +19,9 @@ LisaClust(x, w, alpha = 0.05)
 A list with \code{labels}, \code{local}, \code{z}, \code{p_value}, \code{lagged_mean}, \code{counts}, \code{alpha}, \code{conditional_randomization}, \code{hl_and_lh_are_outliers_not_clusters}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+W <- matrix(0, 8, 8)
+W[abs(row(W) - col(W)) == 1] <- 1
+str(LisaClust(rnorm(8), W), max.level = 1)
+}

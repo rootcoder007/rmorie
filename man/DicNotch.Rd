@@ -20,3 +20,13 @@ second derivative of eq (4.22), squared and smoothed by eq (4.23).  The second d
 A list with \code{notch}, \code{upstroke}, \code{s}, \code{p}, \code{mwin}, \code{fs}, \code{tolerancems}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+fs <- 250
+tv <- seq(0, 2, by = 1 / fs)
+ph <- (tv \%\% 0.8) / 0.8
+cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
+cp <- cp + 0.01 * rnorm(length(cp))
+r <- DicNotch(cp, fs = fs)
+r$notch
+}

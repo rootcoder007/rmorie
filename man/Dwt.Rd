@@ -19,3 +19,8 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{wavelet}, \code{energy}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+str(Dwt(x, wavelet = "db4", levels = 3), max.level = 1)
+}

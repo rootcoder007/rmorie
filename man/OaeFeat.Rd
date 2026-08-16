@@ -20,3 +20,11 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+fs <- 16000
+tv <- seq(0, 0.3, by = 1 / fs)
+oae <- sin(2 * pi * 2000 * tv) * exp(-5 * tv) + 0.02 * rnorm(length(tv))
+r <- OaeFeat(oae, fs = fs)
+str(r, max.level = 1)
+}

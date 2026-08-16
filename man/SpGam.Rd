@@ -20,3 +20,10 @@ as the saddle-point system [K + n lam I, T; T\', 0].  T = [1, s1, s2, X] spans t
 A list with \code{fitted}, \code{residuals}, \code{coef}, \code{spline_weights}, \code{rss}, \code{penalty}, \code{lam}, \code{null_space_is_unpenalised}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(6)
+coords <- matrix(runif(24), 12, 2)
+x <- rnorm(12)
+y <- 1 + sin(x) + rnorm(12, 0, 0.2)
+str(SpGam(y, x, coords, lam = 0.1), max.level = 1)
+}

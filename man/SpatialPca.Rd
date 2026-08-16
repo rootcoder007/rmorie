@@ -19,3 +19,10 @@ unit-variance X, so an axis is scored by SPATIAL covariance, not variance.  Eige
 A list with \code{eigenvalues}, \code{loadings}, \code{scores}, \code{lagged_scores}, \code{total_variance}, \code{eigenvalues_may_be_negative}, \code{weights_symmetrised}, \code{naxes}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(6)
+W <- matrix(0, 10, 10)
+W[abs(row(W) - col(W)) == 1] <- 1
+X <- matrix(rnorm(30), 10, 3)
+str(SpatialPca(X, W), max.level = 1)
+}

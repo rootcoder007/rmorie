@@ -18,3 +18,8 @@ condition in the PROSE of Sec. 6.2.2.1, p. 336 (1/theta_min < rho < 1/theta_max,
 A list with \code{rho}, \code{dominant_eigenvalue}, \code{eigenvector}, \code{sar_rho_bound}, \code{symmetric}, \code{iterations}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+W <- matrix(0, 5, 5)
+W[abs(row(W) - col(W)) == 1] <- 1
+SpecRad(W)
+}

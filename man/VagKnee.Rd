@@ -21,3 +21,10 @@ cartilage pathology.
 The value of \code{base}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(6)
+fs <- 2000
+vag <- rnorm(fs, 0, seq(0.5, 2, length.out = fs))
+r <- VagKnee(vag, fs = fs)
+str(r, max.level = 1)
+}

@@ -21,3 +21,14 @@ slope of the segment that follows (Section 1.2.4).  The 0.1 mV threshold is the 
 A list with \code{stdev}, \code{stslope}, \code{pattern}, \code{stdevmean}, \code{stslopemean}, \code{flagged}, \code{thresh}, \code{threshnote}, \code{jofs}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+fs <- 250
+n <- fs * 3
+x <- rep(0, n)
+qrs <- round(seq(0.5, 2.7, by = 0.75) * fs)
+for (i in qrs) x[i:(i + 5)] <- c(0.2, 1.1, -0.5, 0.05, 0.02, 0)
+x <- x + 0.01 * rnorm(n)
+r <- ExerEcgSt(x, qrs = qrs, fs = fs)
+str(r, max.level = 1)
+}

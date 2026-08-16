@@ -21,3 +21,18 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{twa_amplitude}, \code{twa_rms}, \code{odd_mean}, \code{even_mean}, \code{difference}, \code{n_beats}, \code{n_odd}, \code{n_even}, \code{r_peaks}, \code{rpeaks_supplied}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+fs <- 250
+tv <- seq(0, 4, by = 1 / fs)
+ecg <- rep(0, length(tv))
+beats <- seq(0.4, 3.8, by = 0.8)
+amp <- rep(c(1, 1.1), length.out = length(beats))
+for (k in seq_along(beats)) {
+  i <- round(beats[k] * fs)
+  ecg[i:(i + 6)] <- amp[k] * c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+}
+ecg <- ecg + rnorm(length(tv), 0, 0.02)
+r <- TwaEmd(ecg, fs = fs)
+str(r, max.level = 1)
+}

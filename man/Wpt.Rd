@@ -19,3 +19,8 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{nodes}, \code{leaves}, \code{n_leaves}, \code{energy_per_leaf}, \code{dominant_leaf}, \code{entropy}, \code{levels}, \code{wavelet}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+str(Wpt(x, wavelet = "db4", levels = 3), max.level = 1)
+}

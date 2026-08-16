@@ -19,3 +19,8 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{approximation}, \code{details}, \code{bands}, \code{reconstruction_error}, \code{energy_per_band}, \code{levels}, \code{wavelet}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+str(Mra(x, wavelet = "db4", levels = 3), max.level = 1)
+}

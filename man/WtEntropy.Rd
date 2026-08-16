@@ -20,3 +20,8 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{entropy}, \code{max_entropy}, \code{normalized_entropy}, \code{relative_energy}, \code{labels}, \code{levels}, \code{base}, \code{wavelet}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+WtEntropy(x, wavelet = "db4", levels = 3)
+}

@@ -21,3 +21,9 @@ A step of the rangayyan_tf implementation. Called by \code{HrvTv}. See the file 
 A list with \code{spectrogram}, \code{stft}, \code{times}, \code{freqs}, \code{nperseg}, \code{hop}, \code{window}, \code{n_frames}, \code{total_energy}, \code{peak_freq}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+fs <- 200
+x <- sin(2 * pi * 20 * seq(0, 2, by = 1 / fs)) + 0.1 * rnorm(401)
+str(Spectrogram(x, fs = fs, nperseg = 64), max.level = 1)
+}

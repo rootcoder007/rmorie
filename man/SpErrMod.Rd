@@ -21,3 +21,11 @@ spatially lagged model of eq (6.38).  Whitening by A = I - rho W profiles beta a
 A list with \code{rho}, \code{beta}, \code{sigma2}, \code{neg2loglik}, \code{rho_bounds}, \code{ols_beta}, \code{spectral_radius}, \code{is_error_model_not_lag_model}, \code{k}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+W <- matrix(0, 12, 12)
+W[abs(row(W) - col(W)) == 1] <- 1
+x <- rnorm(12)
+y <- 1 + 2 * x + rnorm(12, 0, 0.3)
+str(SpErrMod(x, y, W), max.level = 1)
+}

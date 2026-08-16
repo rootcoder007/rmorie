@@ -20,3 +20,11 @@ MsCoh(x, y, nperseg = NULL, overlap = 0.5)
 A list with \code{omega}, \code{coherence}, \code{sxx}, \code{syy}, \code{n_segments}, \code{nperseg}, \code{step}, \code{single_segment_coherence_is_identically_one}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+n <- 512
+s <- sin(2 * pi * 0.1 * (1:n))
+x <- s + 0.3 * rnorm(n)
+y <- s + 0.3 * rnorm(n)
+str(MsCoh(x, y, nperseg = 128), max.level = 1)
+}

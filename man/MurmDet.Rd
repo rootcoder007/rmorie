@@ -20,3 +20,12 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+fs <- 2000
+tv <- seq(0, 2, by = 1 / fs)
+pcg <- sin(2 * pi * 60 * tv) + 0.6 * sin(2 * pi * 300 * tv) +
+  0.05 * rnorm(length(tv))
+r <- MurmDet(pcg, fs = fs)
+str(r, max.level = 1)
+}
