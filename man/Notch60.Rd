@@ -19,3 +19,6 @@ there is exactly nought.  With zeros alone the notch is wide, which is why the b
 A list with \code{b}, \code{a}, \code{gain}, \code{zeros}, \code{H}, \code{f0}, \code{fs}, \code{omega_0}, \code{gain_at_the_notch}, \code{dc_gain}, \code{fir}, \code{linear_phase}, \code{notch_is_wide_without_poles}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Notch60(1000, 60)
+}

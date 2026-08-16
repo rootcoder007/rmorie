@@ -20,3 +20,10 @@ Entropy balancing (Hainmueller 2012), ATT flavour: reweight controls so their co
 A list with \code{w}, \code{converged}, \code{max_imbalance}.
 }
 \keyword{internal}
+\examples{
+n <- 40
+X <- cbind(rnorm(n), rexp(n), rbinom(n, 1, 0.4))
+ps <- plogis(0.5 * X[, 1] - 0.3 * X[, 2])
+t_mask <- runif(n) < ps
+.morie_entropy_balance(t_mask, X)
+}

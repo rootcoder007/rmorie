@@ -26,3 +26,6 @@ km136: km136 -> \code{morie_kamath_ch9_mml_vlm_loss}, km137 ->
 \code{morie_kamath_ch9_itm_hard_negative} (the same sum with a hard-negative
 set).
 }
+\examples{
+morie_kamath_ch9_mml_vlm_loss(c(0.5, 0.25), c(0.5))
+}

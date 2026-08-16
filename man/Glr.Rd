@@ -20,3 +20,9 @@ GROWS from the start of the segment -- that is what separates GLR from the SEM a
 A list with \code{d}, \code{h_pooled}, \code{h_reference}, \code{h_test}, \code{m}, \code{n}, \code{order}, \code{n_reference}, \code{n_test}, \code{reference_window_grows}, \code{near_zero_when_one_model_explains_both}, \code{method}.
 }
 \keyword{internal}
+\examples{
+sine <- function(n, cycles_hz, fs = 100, amp = 1, phase = 0) {
+    amp * sin(2 * pi * cycles_hz * (seq_len(n) - 1L)/fs + phase)
+}
+Glr(sine(400, 5), 201, order = 4)
+}

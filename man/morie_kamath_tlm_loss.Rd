@@ -18,3 +18,6 @@ morie_kamath_tlm_loss
 A list with \code{estimate}, \code{source_loss}, \code{target_loss}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_tlm_loss(c(0.5, 1), 0.25, 0, 0)
+}

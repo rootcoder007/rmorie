@@ -30,3 +30,7 @@ Off-policy TD control: the max over next actions is what biases the
 estimate upward. \code{s}, \code{a} and \code{s_next} are 0-based; \code{max_next} is
 NaN on a terminal transition, matching Python.
 }
+\examples{
+Q <- matrix(c(0, 1, 2, -1), nrow = 2, byrow = TRUE)
+morie_geron_q_learning(Q, 0, 1, 0.5, 1, 0.5, 0.9)
+}

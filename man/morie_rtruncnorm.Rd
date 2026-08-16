@@ -14,3 +14,6 @@ morie_rtruncnorm
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_rtruncnorm(0, 1, 0.5, 1.5)
+}

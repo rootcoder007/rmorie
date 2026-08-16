@@ -44,3 +44,10 @@ shared parameters, rolls out one episode, and pushes its gradient into
 parameters other workers may have already moved -- the staleness that
 makes A3C asynchronous. Worker w uses LCG seed + 7919 w.
 }
+\examples{
+a <- morie_geron_adagrad(2, s = 4, eta = 0.1, eps = 0)
+env <- list(reset = function() 1, step = function(a) list(1, 
+    if (a == 0) 1 else 0, TRUE))
+morie_geron_a3c(env, matrix(c(0, 0), 2, 1), 0, n_workers = 3, 
+    epochs = 10, lr = 0.5, seed = 3)
+}

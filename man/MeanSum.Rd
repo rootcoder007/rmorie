@@ -17,3 +17,6 @@ independence -- that is what separates it from eq (3.14).
 A list with \code{mean}, \code{component_means}, \code{n_processes}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MeanSum(c(1, 3), c(10, 20), 0.5)
+}

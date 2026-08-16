@@ -15,3 +15,6 @@ Integer digit count; 1 for zero.
 \description{
 Number of decimal digits
 }
+\examples{
+morie_big_ndigits(morie_big_factorial(100))
+}

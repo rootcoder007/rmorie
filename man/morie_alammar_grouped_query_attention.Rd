@@ -19,3 +19,10 @@ Shazeer 2019) head_i = Attn(Q_i, `K_{g(i)}, V_{g(i)}`) with g(i) = i mod G. G = 
 A list with \code{output}, \code{group_assignment}, \code{kv_cache_ratio}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
+Ks <- matrix(stats::rnorm(6), 3, 2)
+Vs <- matrix(stats::rnorm(6), 3, 2)
+morie_alammar_grouped_query_attention(Qh, list(Ks), list(Vs), 
+    4, 1)
+}

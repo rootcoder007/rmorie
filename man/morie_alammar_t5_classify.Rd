@@ -20,3 +20,13 @@ morie_alammar_t5_classify
 A list with \code{predicted_label}, \code{probabilities}, \code{log_scores}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+i <- morie_alammar_infonce_loss(c(1, 0), c(1, 0), rbind(c(0, 
+    1), c(-1, 0)), 0.1)
+morie_alammar_t5_classify("good film", c("positive", "negative"), 
+    function(i, l) {
+        if (l == "positive" && grepl("good", i)) 
+            0
+        else -3
+    })
+}

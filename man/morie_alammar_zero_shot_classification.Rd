@@ -20,3 +20,11 @@ Zero-shot, T5 and judge orchestration around caller functions
 A list with \code{probabilities}, \code{predicted_label}, \code{entailment_scores}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+h <- morie_alammar_classification_head(c(1, 2), rbind(c(1, 0), 
+    c(0, 1)), c(0, 0))
+nli <- function(p, h) if (grepl("sport", h) && grepl("goal", 
+    p)) 5 else 0
+morie_alammar_zero_shot_classification("a late goal won it", 
+    c("sport", "finance"), nli)
+}

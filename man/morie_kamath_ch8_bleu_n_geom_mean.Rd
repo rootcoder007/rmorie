@@ -28,3 +28,6 @@ calls km115: km115 -> \code{morie_kamath_ch8_bleu_n_geom_mean}, km117 ->
 \code{morie_kamath_ch8_bleu_final} (BP times that mean). Any zero precision
 collapses the mean to 0 and the log mean to -Inf.
 }
+\examples{
+morie_kamath_ch8_bleu_n_geom_mean(c(0.5, 0.25))
+}

@@ -18,3 +18,6 @@ Binary cross-entropy for one example (Burkov Eq 1.9)
 A list with \code{losses}, \code{estimate}, \code{mean_loss}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_binary_cross_entropy(0.5, 1)
+}

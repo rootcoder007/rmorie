@@ -22,3 +22,7 @@ List with \code{estimate}, \code{scores}, \code{ranking}, \code{reranked}.
 Joint (q, d) scoring with a STABLE descending re-order; \code{ranking} is
 0-BASED.
 }
+\examples{
+morie_kamath_cross_encoder_rerank("q", list("a", "b", "c"), function(q, 
+    d) c(a = 0.1, b = 0.9, c = 0.9)[[d]])
+}

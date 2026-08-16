@@ -20,3 +20,9 @@ Concat(head_1..head_h) W_O; Wq, Wk, Wv are LISTS of per-head projections -- one 
 A list with \code{output}, \code{heads}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+X <- matrix(stats::rnorm(6), 3, 2)
+I2 <- diag(2)
+morie_alammar_multi_head_attention(X, X, X, list(I2), list(I2), 
+    list(I2), I2, 1)
+}

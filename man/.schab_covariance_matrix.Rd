@@ -21,3 +21,12 @@ C(h) = sigma0^2 R(h) for h > 0, so the nugget enters only on the diagonal -- it 
 The value of \code{sigma}, as built in the body.
 }
 \keyword{internal}
+\examples{
+reml_sites <- function() {
+    g <- (0:8)/1.2
+    as.matrix(expand.grid(x = g, y = g))
+}
+g <- (0:8)/1.2
+C <- reml_sites()
+.schab_covariance_matrix(C, 0.3, 2, 3, "exponential")
+}

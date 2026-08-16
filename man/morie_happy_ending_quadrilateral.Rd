@@ -25,3 +25,7 @@ sample of it.
 Erdos P, Szekeres G (1935). A combinatorial problem in
 geometry. \emph{Compositio Mathematica}, 2, 463-470.
 }
+\examples{
+morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2, 
+    1), c(1, 4), c(3, 5)))
+}

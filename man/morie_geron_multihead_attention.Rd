@@ -21,3 +21,9 @@ List with output, head_outputs, attention_weights, d_head, estimate, n, method.
 \description{
 Multi-head attention: split, attend, concat, project (Geron Ch 15, morie.fn hmmha)
 }
+\examples{
+Q <- matrix(c(1, 0), nrow = 1)
+K <- matrix(c(1, 0, 0, 1), nrow = 2, byrow = TRUE)
+V <- K
+morie_geron_multihead_attention(Q, K, V, n_heads = 2)
+}

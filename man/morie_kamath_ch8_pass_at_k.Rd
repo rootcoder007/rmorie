@@ -28,3 +28,6 @@ km128 -> \code{morie_kamath_ch8_pass_at_k} (reports \code{fail_probability}),
 kmpask -> \code{morie_kamath_pass_at_k} (reports \code{empirical_rate}). Both are
 exported so their payloads stay distinguishable.
 }
+\examples{
+morie_kamath_ch8_pass_at_k(10, 3, 2)
+}

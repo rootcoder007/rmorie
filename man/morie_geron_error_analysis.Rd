@@ -17,3 +17,6 @@ List with \code{normalized}, \code{error_matrix}, \code{top_confusions}, \code{w
 \description{
 Counting delegated to \code{morie_geron_confusion_matrix}.
 }
+\examples{
+morie_geron_error_analysis(c(0, 0, 1, 1), c(0, 1, 1, 1))
+}

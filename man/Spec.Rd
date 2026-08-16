@@ -18,3 +18,6 @@ A step of the rangayyan_class implementation. No other function in the package c
 A list with \code{specificity}, \code{tnf}, \code{fpf}, \code{n_healthy}, \code{tn}, \code{fp}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Spec(40, 10)
+}

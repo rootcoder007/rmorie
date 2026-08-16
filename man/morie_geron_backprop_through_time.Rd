@@ -30,3 +30,10 @@ delta_t = (dL/dh_t + W_h \verb{delta_\{t+1\}}) * (1 - h_t^2); the shared weight
 picks up a term at every step, which is where the vanishing gradient
 shows up in \code{per_step_delta_norm}.
 }
+\examples{
+morie_geron_backprop_through_time(matrix(c(1, 0.5, 0.5, 1), 2, 
+    2, byrow = TRUE), matrix(c(0.2, -0.1, 0.4, 0.3), 2, 2, byrow = TRUE), 
+    matrix(c(1, 0, 0, 2), 2, 2, byrow = TRUE), W_h = matrix(c(0.5, 
+        0.1, -0.2, 0.3), 2, 2, byrow = TRUE), h_init = c(0.1, 
+        0.2))
+}

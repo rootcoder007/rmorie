@@ -22,3 +22,13 @@ A step of the schab_hermite_shared implementation. No other function in the pack
 A list with \code{prediction}, \code{variance}, \code{coefficients}, \code{component_variances}.
 }
 \keyword{internal}
+\examples{
+dj_x <- c(0, 0.5, 1, -1.3, 2.7)
+h <- .schab_hermite_e(dj_x, 4)
+b <- .schab_hermite_coefficients(function(v) v, 6)
+g <- 0:4
+C <- as.matrix(expand.grid(x = g, y = g))
+y <- sin(C[, 1] * 0.6) + cos(C[, 2] * 0.4)
+.schab_disjunctive_kriging(C, y, c(2.3, 1.7), function(h) exp(-h/3), 
+    b, 6)
+}

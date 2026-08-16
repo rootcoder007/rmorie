@@ -23,3 +23,7 @@ list with H, h_T, grads, jacobian_gain, n_units, estimate, n, method.
 \description{
 h_t = tanh(W_x x_t + W_h \verb{h_\{t-1\}} + b), unrolled step by step.
 }
+\examples{
+morie_geron_simple_rnn(matrix(c(1, 0), 2, 1), matrix(1, 1, 1), 
+    matrix(1, 1, 1))
+}

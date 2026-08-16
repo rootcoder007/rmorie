@@ -20,3 +20,6 @@ List with \code{theta_new}, \code{s_new}, \code{effective_lr}, \code{step}, \cod
 Same kernel as \code{\link[=morie_geron_adagrad]{morie_geron_adagrad()}}, with grada2's positive-step
 convention: theta_new = theta - step, step = effective_lr * g.
 }
+\examples{
+morie_geron_adagrad_update(c(1, 2), c(2, -1), c(0, 3), 0.1, eps = 1e-10)
+}

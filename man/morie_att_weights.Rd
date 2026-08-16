@@ -24,3 +24,6 @@ distribution. Mirrors \code{morie.fn.causipsw}.
 Hernan MA, Robins JM (2020). \emph{Causal Inference: What
 If}. Chapman & Hall/CRC, Ch. 15.
 }
+\examples{
+morie_att_weights(c(1, 0, 0), c(0.5, 0.25, 0.5))
+}

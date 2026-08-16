@@ -18,3 +18,9 @@ ratio of between- to within-class scatter of the PROJECTED data.  Two classes on
 A list with \code{w}, \code{threshold}, \code{classes}, \code{means}, \code{s_within}, \code{projected}, \code{projected_means}, \code{criterion}, \code{two_class_only}, \code{not_a_reconstruction_basis}, \code{method}.
 }
 \keyword{internal}
+\examples{
+XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3, 
+    2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
+YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
+FishLda(XC, YC)
+}

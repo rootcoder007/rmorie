@@ -24,3 +24,6 @@ A step of the rangayyan_class implementation. No other function in the package c
 A list with \code{accuracy}, \code{kind}, \code{raw_accuracy}, \code{weighted_accuracy}, \code{balanced_accuracy}, \code{sensitivity}, \code{specificity}, \code{prevalence}, \code{test_set_prevalence}, \code{counts}, \code{n}, \code{exact}, \code{prior_weighted}, \code{balanced_is_eq_10_102_at_one_half}, \code{eq_10_103_is_eq_10_102_at_the_test_set_prevalence}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Accuracy(tp = 45, tn = 40, fp = 10, fn = 5)
+}

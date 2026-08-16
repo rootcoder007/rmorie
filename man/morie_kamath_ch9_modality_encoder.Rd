@@ -17,3 +17,7 @@ List with \code{estimate} (Frobenius norm), \code{features}, \code{shape}.
 \description{
 F_X = ME_X(I_X): runs the caller's encoder and checks its output.
 }
+\examples{
+morie_kamath_ch9_modality_encoder("img", function(i) matrix(c(3, 
+    4), 1))
+}

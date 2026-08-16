@@ -20,3 +20,8 @@ sigma/mu is left NULL once mu is negligible against sigma; the book warns it div
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+unif01 <- function(v) if (v >= 0 && v <= 1) 1 else 0
+UGRID <- seq(0, 1, length.out = 4001)
+PdfVar(unif01, x = UGRID)
+}

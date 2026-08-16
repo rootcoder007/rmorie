@@ -24,3 +24,13 @@ A step of the glm implementation. No other function in the package calls it. See
 A list with \code{coef}, \code{se}, \code{statistic}, \code{statistic_name}, \code{p_value}, \code{fitted}, \code{linear_predictor}, \code{residuals}, \code{deviance}, \code{null_deviance}, \code{df_residual}, \code{df_null}, \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged}, \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.
 }
 \keyword{internal}
+\examples{
+n <- 40
+x1 <- sapply(0:(n - 1), function(i) ((i * 7)\%\%11)/5 - 1)
+x2 <- sapply(0:(n - 1), function(i) ((i * 5)\%\%7)/3 - 1)
+X <- cbind(x1, x2)
+yb <- c(0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 
+    0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 
+    0, 1, 1)
+morie_glm(yb, X, "binomial")
+}

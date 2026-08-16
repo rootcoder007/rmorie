@@ -18,3 +18,6 @@ morie_kamath_rtd_loss
 A list with \code{estimate}, \code{per_token}, \code{accuracy}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_rtd_loss(c(0.9, 0.9), c(1, 0))
+}

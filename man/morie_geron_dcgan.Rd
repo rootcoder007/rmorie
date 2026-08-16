@@ -35,3 +35,6 @@ for a square image reached from \code{seed_shape} by stride-2 transposed
 convs. One generator forward pass on unit kernels is delegated to
 \code{morie_geron_dcgan_generator} to demonstrate the resolved shapes.
 }
+\examples{
+morie_geron_dcgan(array(0, dim = c(3, 16, 16)), z_dim = 8, filters = 4)
+}

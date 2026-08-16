@@ -22,3 +22,10 @@ the gain is constant and the filter is a fixed linear filter -- which is the Wie
 A list with \code{P}, \code{K}, \code{iterations}, \code{change}, \code{converged}, \code{n}, \code{steady_state_is_the_wiener_solution}, \code{method}.
 }
 \keyword{internal}
+\examples{
+F <- matrix(0.9)
+H <- matrix(1)
+Q <- matrix(0.1)
+R <- matrix(1)
+Riccati(F, H, Q, R)
+}

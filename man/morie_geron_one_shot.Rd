@@ -20,3 +20,7 @@ One-shot in-context prompting: assemble prompt, call model (Geron Ch 15, hmosf)
 A list with \code{prediction}, \code{prompt}, \code{prompt_text}, \code{shots}, \code{demo_label}, \code{query}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+copy <- function(prompt) prompt[[1]][[2]]
+morie_geron_one_shot(copy, list("hello", "greeting"), "goodbye")
+}

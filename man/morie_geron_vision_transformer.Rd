@@ -30,3 +30,8 @@ Patchify image, linear-embed patches, prepend [CLS], add sinusoidal
 position encodings, run \code{morie_geron_transformer}, linear head
 on the [CLS] row.
 }
+\examples{
+img <- matrix(0:15, 4, 4, byrow = TRUE)
+morie_geron_vision_transformer(img, patch_size = 2, n_layers = 1, 
+    d_model = 4, n_heads = 2, n_classes = 3)
+}

@@ -21,3 +21,8 @@ omega = 2 pi f.  Integrated over the supplied samples, so the limits are the dur
 A list with \code{X}, \code{omega}, \code{f}, \code{variable}, \code{duration}, \code{method}.
 }
 \keyword{internal}
+\examples{
+x <- rep(1, 201)
+t <- seq(0, 2, length.out = 201)
+Ctft(x, t = t, omega = 0)
+}

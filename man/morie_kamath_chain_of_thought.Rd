@@ -29,3 +29,6 @@ List with \code{estimate}, \code{answer}, \code{reasoning}, \code{generation}.
 \description{
 Appends the trigger, then splits reasoning from the answer.
 }
+\examples{
+morie_kamath_chain_of_thought("Q", function(p) "step one. Answer: 42")
+}

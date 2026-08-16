@@ -17,3 +17,8 @@ scalar log-likelihood
 \description{
 GEV log-likelihood (Coles 2001 eq. 3.7-3.9)
 }
+\examples{
+x20 <- c(4.1, 5.3, 3.9, 6.8, 5, 4.4, 7.2, 5.9, 4.7, 6.1, 5.5, 
+    4, 8.3, 5.2, 4.9, 6.5, 5.7, 4.3, 7, 5.1)
+morie_evt_gev_loglik(x20, 5, 1.5, 0.1)
+}

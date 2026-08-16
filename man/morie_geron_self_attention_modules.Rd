@@ -22,3 +22,8 @@ list with Y, attention, Q, K, V, estimate, n, method.
 Projects X into Q, K, V with W_Q/W_K/W_V and delegates the kernel to
 \code{morie_geron_scaled_dot_product}.
 }
+\examples{
+X <- matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE)
+I2 <- diag(2)
+morie_geron_self_attention_modules(X, I2, I2, I2)
+}

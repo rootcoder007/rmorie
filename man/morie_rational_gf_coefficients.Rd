@@ -23,3 +23,6 @@ arbitrary precision, exact at every index -- Fibonacci leaves the
 double-exact range at \eqn{n = 79} and keeps going. Otherwise the
 expansion runs in doubles and says so.
 }
+\examples{
+morie_rational_gf_coefficients(c(0, 1), c(1, -1, -1), 300)
+}

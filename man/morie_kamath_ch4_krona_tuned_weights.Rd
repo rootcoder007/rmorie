@@ -30,3 +30,7 @@ km062's \verb{_tuned}: km062 -> \code{morie_kamath_ch4_krona_tuned_weights}
 (W + s [A_k (x) B_k]), km061 -> \code{morie_kamath_ch4_krona_output}
 (that merged weight applied to X). s = 0 returns W unchanged.
 }
+\examples{
+morie_kamath_ch4_krona_tuned_weights(matrix(1, 2, 2), diag(2), 
+    matrix(1, 1, 1), 2)
+}

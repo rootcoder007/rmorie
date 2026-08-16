@@ -33,3 +33,7 @@ List with \code{output}, \code{h_fwd}, \code{h_bwd}, \code{final}, \code{hidden_
 Backward states are re-aligned to the original time index before the
 concatenation, so \verb{output\[t, \]} mixes prefix and suffix at t.
 }
+\examples{
+morie_geron_bidirectional_rnn(matrix(c(1, 1, 0.5), ncol = 1), 
+    matrix(1), matrix(0.5), matrix(1), matrix(-0.5))
+}

@@ -33,3 +33,9 @@ y = r + gamma Q_target(s', argmax_a Q_online(s', a)); the vanilla max
 target and the removed overestimation are returned alongside.
 \code{selected_action} is 0-based.
 }
+\examples{
+morie_geron_double_dqn_target(matrix(c(0, 1, 2, 0), 2, 2, byrow = TRUE), 
+    matrix(c(10, -10, 1, 3), 2, 2, byrow = TRUE), s_next = c(0, 
+        1, 0), r = c(0, 1, 2), gamma = 0.9, done = c(FALSE, FALSE, 
+        TRUE))
+}

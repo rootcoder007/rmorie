@@ -21,3 +21,6 @@ List with kernel, bias, shape, n_parameters, fan_in, std, estimate, n, method.
 \description{
 Convolutional filter tensor, He-initialised (Geron Ch 12, morie.fn hmkrn)
 }
+\examples{
+morie_geron_filter_kernel(3, 3, 64, 64, seed = 0)
+}

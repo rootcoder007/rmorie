@@ -18,3 +18,7 @@ general contingency table -- its worked example, Table 10.4, is 3x3 with normal 
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{pairs}, \code{n}, \code{n_agree}, \code{continuity_correction}, \code{is_bowker}, \code{k}, \code{diagonal_contributes_nothing}, \code{method}.
 }
 \keyword{internal}
+\examples{
+TAB104 <- matrix(c(2, 0, 10, 1, 0, 1, 0, 0, 4), nrow = 3, byrow = TRUE)
+McNemar(TAB104)
+}

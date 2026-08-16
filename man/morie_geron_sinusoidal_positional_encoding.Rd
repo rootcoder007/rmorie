@@ -19,3 +19,6 @@ List with \code{encoding} and \code{wavelengths}.
 \description{
 PE(pos, 2i) = sin(pos / base^(2i/d)), PE(pos, 2i+1) = cos(...).
 }
+\examples{
+morie_geron_sinusoidal_positional_encoding(5, 6)
+}

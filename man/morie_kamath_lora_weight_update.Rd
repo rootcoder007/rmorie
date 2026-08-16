@@ -26,3 +26,7 @@ List with \code{h}, \code{base}, \code{delta}, \code{scaling}, \code{n_trainable
 h = W0 x + (alpha/r) B A x. km058's Eq 4.5 has no scaling; this named
 module carries the implementation's alpha/r, so the two stay separate.
 }
+\examples{
+morie_kamath_lora_weight_update(diag(2), matrix(c(1, 1), 1), 
+    matrix(c(2, 0), 2), 4, 1, c(1, 3))
+}

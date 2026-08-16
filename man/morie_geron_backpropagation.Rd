@@ -25,3 +25,9 @@ delta_L = grad_a L * phi'(z_L); delta_l = \verb{(W_\{l+1\} delta_\{l+1\})} phi'(
 \code{weights} entries are either a matrix W or a list(W, b). Class labels
 for loss = "ce" are 0-based, as in Python.
 }
+\examples{
+W1 <- matrix(c(1, -1), 1, 2)
+W2 <- matrix(c(2, 3), 2, 1)
+morie_geron_backpropagation(matrix(c(1, 2), ncol = 1), matrix(c(0, 
+    1), ncol = 1), list(W1, W2), c("relu", "identity"))
+}

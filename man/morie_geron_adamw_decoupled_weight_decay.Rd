@@ -37,3 +37,7 @@ theta -= eta (m_hat/(sqrt(s_hat)+eps) + lam theta); the decay sits
 OUTSIDE the adaptive normalisation. The Adam part comes from
 \code{\link[=morie_geron_adam_update]{morie_geron_adam_update()}}.
 }
+\examples{
+morie_geron_adamw_decoupled_weight_decay(c(1, -2), c(0.5, 0.25), 
+    c(0, 0), c(0, 0), 3, 0.01, lam = 0.05)
+}

@@ -20,3 +20,9 @@ List with \code{output}, \code{attention_weights}, \code{logits}, \code{scale}, 
 softmax(X_dec WQ (X_enc WK)^T / sqrt(d_k)) X_enc WV. \code{mask} marks
 DISALLOWED pairs with TRUE, matching Python.
 }
+\examples{
+morie_geron_cross_attention(matrix(c(1, 2, 0, 1), 2, 2, byrow = TRUE), 
+    matrix(c(1, 0, 0, 2, 1, 1), 3, 2, byrow = TRUE), WQ = diag(2), 
+    WK = matrix(c(0.5, 0, 0, 1), 2, 2, byrow = TRUE), WV = matrix(c(1, 
+        2), ncol = 1))
+}

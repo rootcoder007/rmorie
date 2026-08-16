@@ -28,3 +28,7 @@ inside each window via \code{morie_geron_scaled_dot_product}. Odd
 layers (0-based) cyclically shift the grid by window_size \%/\% 2
 before partitioning and undo it after.
 }
+\examples{
+img <- matrix(0:15, 4, 4, byrow = TRUE)
+morie_geron_swin(img, window_size = 2, n_layers = 1, d_model = 4)
+}

@@ -19,3 +19,7 @@ List with \code{estimate}, \code{mean_reward}, \code{kl_estimate}, \code{per_sam
 \description{
 mean(r - beta (log pi_theta - log pi_ref)).
 }
+\examples{
+morie_kamath_ppo_rlhf_objective(c(1, 2), c(-1, -2), c(-1.5, -1.5), 
+    0.5)
+}

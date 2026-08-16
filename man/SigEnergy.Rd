@@ -21,3 +21,6 @@ for the role it plays here -- E_x is constant for a given signal, so maximizing 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+SigEnergy(c(4, 0, 0, 0), dt = 1)
+}

@@ -29,3 +29,7 @@ Column-parallel: shard W by columns, y_i = x W_i, concatenate (no
 communication). Row-parallel: shard W by rows and x by columns to
 match, y = sum_i x_i W_i (all-reduce).
 }
+\examples{
+W <- diag(2)
+morie_geron_tensor_parallelism(W, 2, x = matrix(c(1, 1), 1, 2))
+}

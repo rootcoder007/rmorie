@@ -18,3 +18,8 @@ Profile-likelihood CI for the shape xi (Coles 2001 sec. 2.6.5)
 A list with \code{ci_lo}, \code{ci_hi}, \code{xi_hat}.
 }
 \keyword{internal}
+\examples{
+u <- runif(600)
+x <- morie_evt_gev_quantile(u, 10, 2, 0.1)
+morie_evt_xi_ci_profile(x)
+}

@@ -19,3 +19,6 @@ A step of the dist_native implementation. No other function in the package calls
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+Dt(0, 5)
+}

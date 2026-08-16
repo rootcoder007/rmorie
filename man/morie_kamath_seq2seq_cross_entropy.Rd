@@ -18,3 +18,7 @@ morie_kamath_seq2seq_cross_entropy
 A list with \code{estimate}, \code{per_step}, \code{mean_loss}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_seq2seq_cross_entropy(c(0, 1), rbind(c(0.5, 0.5), 
+    c(0.25, 0.75)))
+}

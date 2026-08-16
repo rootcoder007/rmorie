@@ -19,3 +19,9 @@ Reinforcement learning: Monte-Carlo policy evaluation by rollout (Geron Ch 1, hm
 A list with \code{mean_return}, \code{returns}, \code{lengths}, \code{se}, \code{effective_horizon}, \code{truncated}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+reset <- function() 0
+step <- function(a) list(0, as.numeric(a), TRUE)
+morie_geron_reinforcement_learning(list(reset = reset, step = step), 
+    function(s) 0, gamma = 0.5)
+}

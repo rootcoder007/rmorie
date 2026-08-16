@@ -14,3 +14,9 @@ morie_chol_lower
 A matrix, from \code{t}.
 }
 \keyword{internal}
+\examples{
+n <- 12
+A <- matrix(rnorm(n * 6), nrow = n)
+G <- morie_grm(A) + diag(0.3, n)
+morie_chol_lower(G)
+}

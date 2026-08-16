@@ -19,3 +19,9 @@ PPO clipped-surrogate policy optimisation over a tabular softmax policy (Geron C
 A list with \code{theta}, \code{probabilities}, \code{return_history}, \code{surrogate_history}, \code{clip_fraction}, \code{clip_eps}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+reset <- function() 0
+step <- function(a) list(0, as.numeric(a), TRUE)
+morie_geron_ppo(list(reset = reset, step = step), matrix(c(0, 
+    0), nrow = 1), epochs = 30, lr = 0.5, seed = 1)
+}

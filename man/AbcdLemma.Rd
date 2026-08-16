@@ -20,3 +20,7 @@ AbcdLemma(A, B, C, D)
 A list with \code{direct}, \code{lemma}, \code{max_difference}, \code{holds}, \code{n}, \code{k}, \code{scalar_when_k_is_one}, \code{method}.
 }
 \keyword{internal}
+\examples{
+AbcdLemma(matrix(c(4, 1, 1, 3), 2, 2), matrix(c(1, 2), 2, 1), 
+    matrix(1, 1, 1), matrix(c(1, 2), 1, 2))
+}

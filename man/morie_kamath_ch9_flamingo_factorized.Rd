@@ -35,3 +35,6 @@ km150 calls km149: km149 -> \code{morie_kamath_ch9_flamingo_factorized}
 \code{morie_kamath_ch9_flamingo_dataset_mix} (sum_m lambda_m times the mean
 per-sequence NLL of dataset m).
 }
+\examples{
+morie_kamath_ch9_flamingo_factorized(c(0.5, 0.25))
+}

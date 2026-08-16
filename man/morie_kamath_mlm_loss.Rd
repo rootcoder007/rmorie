@@ -17,3 +17,7 @@ morie_kamath_mlm_loss
 A list with \code{estimate}, \code{per_position}, \code{positions_scored}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+p <- c(0.5, 1, 0.25, 1)
+morie_kamath_mlm_loss(p, c(0, 2))
+}

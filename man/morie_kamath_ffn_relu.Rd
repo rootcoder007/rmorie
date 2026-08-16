@@ -18,3 +18,7 @@ morie_kamath_ffn_relu
 A list with \code{output}, \code{hidden}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_ffn_relu(rbind(c(1, -1)), rbind(c(1, 0), c(0, 1)), 
+    rbind(1, 1), c(0, 0), 0.5)
+}

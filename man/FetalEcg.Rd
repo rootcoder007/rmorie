@@ -21,3 +21,11 @@ A step of the rangayyan_adapt implementation. No other function in the package c
 A list with \code{fetal}, \code{maternal_estimate}, \code{order}, \code{input_power}, \code{output_power}, \code{suppression_db}, \code{reference_leakage}, \code{single_reference}, \code{widrow_used_multiple_references}, \code{method}.
 }
 \keyword{internal}
+\examples{
+sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 * 
+    pi * cycles * (0:(n - 1))/n + phase)
+n <- 400
+v <- sine_a(256, 3)
+ref <- sine_a(n, 61)
+FetalEcg(v + 0.8 * ref, ref, order = 4, mu = 0.005)
+}

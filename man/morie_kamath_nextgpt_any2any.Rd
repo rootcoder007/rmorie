@@ -30,3 +30,10 @@ List with \code{outputs}, \code{features}, \code{llm_state}.
 encoders -> llm -> decoders, with every contract checked. No input may be
 silently dropped.
 }
+\examples{
+f <- morie_kamath_ragas_faithfulness(c("the sky is blue", "the sky is green", 
+    "grass grows"), "the sky is blue today and grass grows")
+morie_kamath_nextgpt_any2any(list(img = 1, txt = 2), list(img = function(v) v * 
+    10, txt = function(v) v * 100), function(f) sum(unlist(f)), 
+    list(aud = function(s) s + 1))
+}

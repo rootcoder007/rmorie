@@ -21,3 +21,7 @@ Minimises <C, F> subject to the marginals. When \code{F} is supplied its cost
 is reported and \code{optimal} is FALSE; otherwise the exact optimum is solved
 and CERTIFIED against its dual before anything is returned.
 }
+\examples{
+C <- matrix(c(0, 3, 2, 1, 1, 4), 2, 3)
+morie_kamath_ch8_wmd(c(0.5, 0.5), c(0.2, 0.5, 0.3), C)
+}

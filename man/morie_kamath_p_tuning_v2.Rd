@@ -17,3 +17,7 @@ List with \code{K}, \code{V}, \code{prefix_len}, \code{n_trainable}.
 \description{
 [P_K_l; K_l] and [P_V_l; V_l] at every layer.
 }
+\examples{
+morie_kamath_p_tuning_v2(list(list(matrix(c(1, 1), 1), matrix(c(2, 
+    2), 1))), list(list(matrix(c(3, 3), 1), matrix(c(4, 4), 1))))
+}

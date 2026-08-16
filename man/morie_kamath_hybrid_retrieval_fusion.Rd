@@ -19,3 +19,7 @@ List with \code{scores}, \code{ranking}, \code{estimate}.
 \description{
 lam * dense + (1 - lam) * sparse, ranked; \code{ranking} is 0-BASED.
 }
+\examples{
+morie_kamath_hybrid_retrieval_fusion(c(0.1, 0.9), c(0.8, 0.2), 
+    0.25)
+}

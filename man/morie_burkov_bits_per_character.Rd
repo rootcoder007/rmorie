@@ -18,3 +18,6 @@ Bits per character from cross-entropy (Burkov Ch 2)
 A list with \code{estimate}, \code{bits_per_token}, \code{chars_per_token}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_bits_per_character(2, 100, 400)
+}

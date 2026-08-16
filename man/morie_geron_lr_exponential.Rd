@@ -21,3 +21,6 @@ List with \code{eta}, \code{steps_per_decade}, \code{eta0}, \code{decay},
 eta_t = eta0 * decay^t, plus the number of steps per tenfold drop
 (Inf when decay = 1).
 }
+\examples{
+morie_geron_lr_exponential(0.1, 0.9, c(0, 1, 5, 10))
+}

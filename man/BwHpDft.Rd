@@ -21,3 +21,6 @@ is unbounded and the response is exactly nought -- the filter the book uses to s
 A list with \code{squared_magnitude}, \code{magnitude}, \code{half_spectrum}, \code{K}, \code{kc}, \code{N}, \code{dc_gain}, \code{reflected}, \code{leaves_high_frequency_noise_untouched}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwHpDft(16, kc = 4, N = 2)
+}

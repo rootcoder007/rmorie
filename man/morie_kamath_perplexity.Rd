@@ -18,3 +18,6 @@ List with \code{estimate}, \code{mean_nll}, \code{bits_per_token}.
 exp(-mean log p); positive log-probabilities are refused because they are
 probabilities or logits, not natural logs.
 }
+\examples{
+morie_kamath_perplexity(c(-1, -2))
+}

@@ -24,3 +24,6 @@ coefficients put a singularity there. If \code{coefficients} are
 supplied, the measured ratio of the last two is reported against
 the predicted \eqn{1/\rho}.
 }
+\examples{
+morie_dominant_singularity_growth(c(1, -1, -1))
+}

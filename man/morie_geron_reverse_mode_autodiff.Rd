@@ -21,3 +21,8 @@ dL/dx = sum over children of (dL/dy)(dy/dx) in one reverse sweep;
 fan-out ACCUMULATES. The graph is a named list node ->
 named list parent -> local partial.
 }
+\examples{
+g <- list(L = list(a = 2, b = -1), a = list(x = 3), b = list(x = 0.5, 
+    y = 1))
+morie_geron_reverse_mode_autodiff(g, 1)
+}

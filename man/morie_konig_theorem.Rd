@@ -24,3 +24,7 @@ size while missing an edge would otherwise pass.
 Konig D (1931). Grafok es matrixok. \emph{Matematikai es
 Fizikai Lapok}, 38, 116-119.
 }
+\examples{
+E <- list(c(1, 1), c(1, 2), c(2, 2), c(3, 1), c(3, 3))
+morie_konig_theorem(3, 3, E)
+}

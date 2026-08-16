@@ -27,3 +27,9 @@ The only change from the ordinary estimator is the risk set: a subject enters at
 \references{
 Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, Section 3.4.
 }
+\examples{
+ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
+SE <- c(1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1)
+en <- c(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2)
+Ltkm(en, ST, SE)
+}

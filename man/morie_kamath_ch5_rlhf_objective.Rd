@@ -35,3 +35,7 @@ One core serves both Python modules exactly as km068 calls
 km069 per prompt and negates the mean: km069 ->
 \code{morie_kamath_ch5_rlhf_objective}, km068 -> \code{morie_kamath_ch5_ppo_loss}.
 }
+\examples{
+morie_kamath_ch5_rlhf_objective(c(y1 = 0.6, y2 = 0.4), c(y1 = 0.5, 
+    y2 = 0.5), c(1, 0), 0.1)
+}

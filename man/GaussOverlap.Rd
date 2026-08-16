@@ -20,3 +20,8 @@ Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor of Chernof
 A list with \code{bhattacharyya}, \code{mean_term}, \code{covariance_term}, \code{not_from_this_book}, \code{book_uses_divergence_eq_10_115}, \code{reference}, \code{method}.
 }
 \keyword{internal}
+\examples{
+CC1 <- matrix(c(2, 0.3, 0.3, 1), 2, 2)
+CC2 <- matrix(c(1, -0.2, -0.2, 3), 2, 2)
+GaussOverlap(c(0, 1), c(2, -1), CC1, CC2)
+}

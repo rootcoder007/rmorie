@@ -20,3 +20,6 @@ List with \code{tokens}, \code{by_group}, \code{retrieve}, \code{utility}.
 A CLOSED reflection vocabulary; an unknown or contradictory token is
 refused rather than ignored.
 }
+\examples{
+morie_kamath_self_rag("ctx", function(c, q) "[Retrieve] [Relevant] [Utility:4]")
+}

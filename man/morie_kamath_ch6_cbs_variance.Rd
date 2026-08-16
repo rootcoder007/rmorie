@@ -22,3 +22,7 @@ List with \code{estimate}, \code{per_word}, \code{log_ratios}.
 Mean over template words of the variance over groups of log(p / prior).
 \code{ddof = 0} is numpy's POPULATION variance.
 }
+\examples{
+morie_kamath_ch6_cbs_variance(c("w1", "w2"), c("g1", "g2"), matrix(c(0.6, 
+    0.3, 0.4, 0.7), 2), matrix(0.5, 2, 2))
+}

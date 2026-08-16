@@ -22,3 +22,8 @@ List with \code{step_back_query}, \code{context}, \code{stepped_back}.
 The LLM abstracts the query; contexts from both queries are unioned with
 the abstract query's documents FIRST and duplicates dropped.
 }
+\examples{
+morie_kamath_step_back_prompting("what year did X happen", function(q) "history of X", 
+    retrieve = function(q) if (q == "history of X") list("d1", 
+        "d2") else list("d2", "d3"))
+}

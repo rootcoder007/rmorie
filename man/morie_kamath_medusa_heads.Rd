@@ -22,3 +22,7 @@ List with \code{tokens}, \code{probabilities}, \code{accepted}.
 k heads produce k future tokens (0-BASED ids); with \code{verify} the run of
 accepted tokens is counted and reported as the estimate.
 }
+\examples{
+morie_kamath_medusa_heads(c(1, 2), list(diag(2), matrix(c(0, 
+    1, 1, 0), 2)), 2)
+}

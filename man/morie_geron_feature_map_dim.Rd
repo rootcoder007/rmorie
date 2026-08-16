@@ -26,3 +26,7 @@ List with \code{dim}, \code{bytes}, \code{megabytes}, \code{batch_bytes},
 \description{
 Convolutional feature-map size (Geron Ch 14, morie.fn grfmp)
 }
+\examples{
+morie_geron_feature_map_dim(28, 28, 64, bytes_per_value = 4, 
+    batch_size = 32)
+}

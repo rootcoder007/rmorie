@@ -17,3 +17,7 @@ List with \code{y_hat}, \code{positive_rate}, \code{margin}.
 \description{
 y_hat = 1 iff p_hat >= threshold; the boundary goes positive.
 }
+\examples{
+morie_geron_ch4_logistic_regression_prediction(c(0.2, 0.5, 0.9), 
+    0.5)
+}

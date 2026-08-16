@@ -19,3 +19,6 @@ If the expected number of bad events is below 1, some outcome has
 none. This proves existence without exhibiting anything, which is
 both the point and the limitation.
 }
+\examples{
+morie_union_bound_exists(1e+05, 0.01)
+}

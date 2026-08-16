@@ -21,3 +21,7 @@ List with \code{h}, \code{delta_h}, \code{r}, \code{n_trainable}.
 \description{
 h = W_0 x + Lambda_b B Lambda_d A x; only the two diagonals train.
 }
+\examples{
+morie_kamath_ch4_vera_forward(diag(2), c(2, 3), c(5), matrix(c(1, 
+    1), 1), matrix(c(1, 2), 2), c(1, 2))
+}

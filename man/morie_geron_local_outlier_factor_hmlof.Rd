@@ -23,3 +23,7 @@ List with lof, lrd, k_distance, neighbors, is_outlier, estimate, n, method.
 \description{
 Local outlier factor (Geron Ch 8, morie.fn hmlof)
 }
+\examples{
+X <- matrix(c(1, 2, 3, 4), ncol = 1)
+morie_geron_local_outlier_factor_hmlof(X, n_neighbors = 2)
+}

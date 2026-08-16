@@ -31,3 +31,7 @@ km054's \verb{_adapter_core}: km054 -> \code{morie_kamath_ch4_series_adapter}
 (fed by the layer input H_i). Passing H_i = H_o reproduces the series
 adapter exactly.
 }
+\examples{
+morie_kamath_ch4_series_adapter(matrix(c(1, 2), 1), matrix(c(1, 
+    0), 2), matrix(c(1, 1), 1))
+}

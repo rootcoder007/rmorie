@@ -46,3 +46,10 @@ Monte-Carlo advantage. \code{env} is a list with \code{reset()} and
 list(state, reward, done). Actions are sampled from the same integer
 LCG stream as Python, so runs match token for token.
 }
+\examples{
+a <- morie_geron_adagrad(2, s = 4, eta = 0.1, eps = 0)
+env <- list(reset = function() 1, step = function(a) list(1, 
+    if (a == 0) 1 else 0, TRUE))
+morie_geron_a2c(env, matrix(c(0, 0), 2, 1), 0, epochs = 25, lr = 0.5, 
+    seed = 1)
+}

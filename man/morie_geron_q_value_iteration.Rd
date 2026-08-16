@@ -32,3 +32,8 @@ Q*(s,a) = sum_s' T(s,a,s')[R(s,a,s') + gamma max_a' Q*(s',a')]. Rows
 of \code{transitions} may sum to 1 (available) or 0 (unavailable).
 \code{policy} is 0-based.
 }
+\examples{
+P <- array(0, dim = c(2, 2, 2))
+R <- matrix(c(1, 0, 0, 2), 2, 2, byrow = TRUE)
+morie_geron_q_value_iteration(matrix(0, 2, 2), P, R, 0.9)
+}
