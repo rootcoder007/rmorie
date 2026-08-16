@@ -14,3 +14,6 @@ Precedence/median-test power -- eqs. (6.4.9)-(6.4.10), p. 254
 A list with \code{power}, \code{pmf}, \code{m}, \code{n}, \code{r}, \code{wcrit}.
 }
 \keyword{internal}
+\examples{
+Medtestpow(m = 9, n = 8, r = 5, wcrit = 2, g = function(u) u^2)
+}

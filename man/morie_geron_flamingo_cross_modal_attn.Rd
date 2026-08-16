@@ -31,3 +31,13 @@ List with \code{h_new}, \code{gate}, \code{attention_output},
 h_new = h + tanh(alpha) * crossattn(h, visual), the cross-attention
 coming from \code{\link[=morie_geron_cross_attention]{morie_geron_cross_attention()}}.
 }
+\examples{
+set.seed(1)
+h <- matrix(rnorm(12), 3, 4)
+vf <- matrix(rnorm(8), 2, 4)
+W <- diag(4)
+r <- morie_geron_flamingo_cross_modal_attn(h, vf, alpha = 0.5,
+                                           weights = list(WQ = W, WK = W,
+                                                          WV = W))
+str(r, max.level = 1)
+}

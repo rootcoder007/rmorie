@@ -24,3 +24,12 @@ List with \code{value}, \code{values}, \code{state}.
 Solves (I - gamma P_pi) V = r_pi exactly; no iteration, no
 convergence error. \code{state} is 0-based.
 }
+\examples{
+P <- array(0, c(2, 2, 2))
+P[1, , ] <- rbind(c(0.9, 0.1), c(0.2, 0.8))
+P[2, , ] <- rbind(c(0.5, 0.5), c(0.1, 0.9))
+R <- array(1, c(2, 2, 2))
+R[2, , ] <- 0.2
+pi <- rbind(c(0.5, 0.5), c(0.5, 0.5))
+morie_geron_state_value_function(0L, pi, P, R, gamma = 0.9)
+}

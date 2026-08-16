@@ -14,3 +14,6 @@ Odds ratio by Woolf\'s logit method (Woolf 1955) -- NOT from Gibbons
 A list with \code{estimate}, \code{log_or}, \code{se}, \code{lower}, \code{upper}, \code{statistic}, \code{df}, \code{p_value}.
 }
 \keyword{internal}
+\examples{
+Oddsrat(rbind(c(30, 10), c(15, 25)))
+}

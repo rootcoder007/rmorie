@@ -42,3 +42,7 @@ Wilcox, R. R. (2017) \emph{Modern Statistics for the Social and
 Behavioral Sciences: A Practical Introduction}, 2nd ed. CRC Press.
 }
 \keyword{robust}
+\examples{
+set.seed(3)
+morie_pbos(c(rnorm(20), 10), beta = 0.2)
+}

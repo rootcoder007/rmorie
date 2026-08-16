@@ -14,3 +14,6 @@ McNemar CI -- Sec. 14.5, eq. (14.5.2), p. 523
 A list with \code{estimate}, \code{lower}, \code{upper}, \code{se}, \code{se_null}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Mcnemarci(rbind(c(20, 5), c(12, 13)))
+}

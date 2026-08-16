@@ -43,3 +43,8 @@ Wilcox, R. R. (2017) \emph{Modern Statistics for the Social and
 Behavioral Sciences: A Practical Introduction}, 2nd ed. CRC Press.
 }
 \keyword{robust}
+\examples{
+set.seed(4)
+x <- rnorm(30)
+morie_winsorized_correlation(x, x + rnorm(30, 0, 0.8), tr = 0.2)
+}

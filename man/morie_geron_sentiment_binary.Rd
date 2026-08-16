@@ -34,3 +34,9 @@ List with \code{probability}, \code{label}, \code{logit}, \code{pooled},
 p = sigmoid(w . pool(E[ids]) + b); mean pooling loses order, max acts
 as a keyword detector. Token ids are 0-based.
 }
+\examples{
+set.seed(6)
+E <- matrix(rnorm(20), 5, 4)
+morie_geron_sentiment_binary(c(0L, 3L, 2L), E, w = c(0.5, -0.2, 0.1, 0.3),
+                             b = 0.1)
+}

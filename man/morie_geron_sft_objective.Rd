@@ -21,3 +21,9 @@ List with \code{loss}, \code{per_token}, \code{perplexity},
 -mean log p over the MASKED response tokens only; prompt tokens are
 excluded from the average.
 }
+\examples{
+set.seed(5)
+logits <- matrix(rnorm(20), 4, 5)
+morie_geron_sft_objective(logits, response_mask = c(FALSE, TRUE, TRUE, TRUE),
+                          targets = c(0L, 2L, 4L, 1L))
+}

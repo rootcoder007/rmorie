@@ -14,3 +14,6 @@ McNemar test -- eq. (14.5.1), p. 523
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{p_exact}, \code{x12}, \code{x21}, \code{ndisc}.
 }
 \keyword{internal}
+\examples{
+Mcnemarq(rbind(c(20, 5), c(12, 13)))
+}

@@ -14,3 +14,6 @@ One-sided Fisher exact test -- Sec. 14.4, p. 517
 A list with \code{p_value}, \code{p_greater}, \code{p_less}, \code{prob}, \code{statistic}, \code{mean}.
 }
 \keyword{internal}
+\examples{
+Fisherex1(rbind(c(8, 2), c(1, 5)))
+}
