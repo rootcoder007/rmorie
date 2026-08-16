@@ -1,6 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Solve 2 phi(k)/k - 2 Phi(-k) = eps/(1-eps) for k, by bisection.
+#' Solve 2 phi(k)/k - 2 Phi(-k) = eps/(1-eps) for k, by bisection
+#'
+#' Part of the contam implementation; see the file header for the source
+#' it follows.
+#'
+#' @param eps See Usage.
+#' @return A numeric value.
+#' @export
 .huber_k <- function(eps) {
   if (eps <= 0) return(Inf)
   if (eps >= 1) return(0)

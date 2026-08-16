@@ -15,8 +15,24 @@
 
 .PATCHT_EPS <- 1e-12
 
+#' .patcht_vec
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .patcht_vec <- function(v) as.numeric(unlist(v))
 
+#' .patcht_mat
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .patcht_mat <- function(M) {
   if (is.matrix(M)) {
     storage.mode(M) <- "double"
@@ -226,6 +242,13 @@ patchtst_encode <- function(X, patch_len, stride = NULL,
   )
 }
 
+#' .patchT_cheatsheet
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .patchT_cheatsheet <- function() {
   paste("patchT: PatchTST. A single time step is not a word, so ",
         "tokenise SUBSERIES: patches of length P, stride S, giving ",

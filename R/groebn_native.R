@@ -19,6 +19,15 @@
 # ---------------------------------------------------------------------------
 # Exact rationals (Fraction-equivalent)
 # ---------------------------------------------------------------------------
+#' .groebn_fr
+#'
+#' Exact rationals (Fraction-equivalent)
+#' ---------------------------------------------------------------------------
+#'
+#' @param num See Usage.
+#' @param den Defaults to \code{1L}.
+#' @return A vector, from \code{c}.
+#' @export
 .groebn_fr <- function(num, den = 1L) {
   num <- as.integer(num)
   den <- as.integer(den)
@@ -29,35 +38,113 @@
   c(num %/% g, den %/% g)
 }
 
+#' .groebn_gcd
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .groebn_gcd <- function(a, b) {
   a <- as.integer(a); b <- as.integer(b)
   while (b != 0L) { t <- b; b <- a %% b; a <- t }
   if (a < 0L) -a else a
 }
 
+#' .groebn_fr_add
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return The value of \code{.groebn_fr}.
+#' @export
 .groebn_fr_add <- function(p, q) {
   .groebn_fr(p[1L] * q[2L] + q[1L] * p[2L], p[2L] * q[2L])
 }
 
+#' .groebn_fr_sub
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return The value of \code{.groebn_fr}.
+#' @export
 .groebn_fr_sub <- function(p, q) {
   .groebn_fr(p[1L] * q[2L] - q[1L] * p[2L], p[2L] * q[2L])
 }
 
+#' .groebn_fr_neg
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .groebn_fr_neg <- function(p) c(-p[1L], p[2L])
 
+#' .groebn_fr_mul
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return The value of \code{.groebn_fr}.
+#' @export
 .groebn_fr_mul <- function(p, q) {
   .groebn_fr(p[1L] * q[1L], p[2L] * q[2L])
 }
 
+#' .groebn_fr_div
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return The value of \code{.groebn_fr}.
+#' @export
 .groebn_fr_div <- function(p, q) {
   if (q[1L] == 0L) stop("groebn: division by zero rational")
   .groebn_fr(p[1L] * q[2L], p[2L] * q[1L])
 }
 
+#' .groebn_fr_is_zero
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A logical value.
+#' @export
 .groebn_fr_is_zero <- function(p) p[1L] == 0L
 
+#' .groebn_fr_eq
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return A logical value.
+#' @export
 .groebn_fr_eq <- function(p, q) p[1L] == q[1L] && p[2L] == q[2L]
 
+#' .groebn_as_fr
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .groebn_as_fr <- function(x) {
   if (is.null(x)) return(.groebn_fr(0L))
   if (is.character(x) && length(x) == 1L) {
@@ -83,6 +170,14 @@
 # ---------------------------------------------------------------------------
 .groebn_orders <- c("lex", "grlex", "grevlex")
 
+#' .groebn_key
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param order See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .groebn_key <- function(order) {
   if (order == "lex") {
     function(e) as.integer(e)
@@ -100,10 +195,26 @@
 # ---------------------------------------------------------------------------
 # Exponent keys
 # ---------------------------------------------------------------------------
+#' .groebn_parse_key
+#'
+#' Exponent keys
+#' ---------------------------------------------------------------------------
+#'
+#' @param s See Usage.
+#' @return The value of \code{as.integer}.
+#' @export
 .groebn_parse_key <- function(s) {
   as.integer(strsplit(s, "_", fixed = TRUE)[[1L]])
 }
 
+#' .groebn_format_key
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return A character value.
+#' @export
 .groebn_format_key <- function(e) {
   paste(as.integer(e), collapse = "_")
 }
@@ -111,6 +222,15 @@
 # ---------------------------------------------------------------------------
 # Polynomial constructor
 # ---------------------------------------------------------------------------
+#' .groebn_poly
+#'
+#' Polynomial constructor
+#' ---------------------------------------------------------------------------
+#'
+#' @param terms See Usage.
+#' @param nvars Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .groebn_poly <- function(terms, nvars = NULL) {
   out <- list()
   n <- NULL
@@ -215,6 +335,14 @@
 # ---------------------------------------------------------------------------
 # Polynomial queries
 # ---------------------------------------------------------------------------
+#' .groebn_nvars
+#'
+#' Polynomial queries
+#' ---------------------------------------------------------------------------
+#'
+#' @param F See Usage.
+#' @return A numeric value.
+#' @export
 .groebn_nvars <- function(F) {
   for (f in F) {
     if (length(f) > 0L) {
@@ -226,6 +354,15 @@
   0L
 }
 
+#' .groebn_monomials
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return The value of \code{[}.
+#' @export
 .groebn_monomials <- function(f, order = "lex") {
   nms <- names(f)
   if (length(nms) == 0L) return(character(0L))
@@ -237,18 +374,45 @@
   nms[ord]
 }
 
+#' .groebn_leading_monomial
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return The value of \code{[}.
+#' @export
 .groebn_leading_monomial <- function(f, order = "lex") {
   ms <- .groebn_monomials(f, order)
   if (length(ms) == 0L) return(NULL)
   ms[1L]
 }
 
+#' .groebn_leading_coeff
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return The value of \code{[[}.
+#' @export
 .groebn_leading_coeff <- function(f, order = "lex") {
   lm <- .groebn_leading_monomial(f, order)
   if (is.null(lm)) return(.groebn_fr(0L))
   f[[lm]]
 }
 
+#' .groebn_leading_term
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .groebn_leading_term <- function(f, order = "lex") {
   lm <- .groebn_leading_monomial(f, order)
   if (is.null(lm)) return(list())
@@ -260,6 +424,15 @@
 # ---------------------------------------------------------------------------
 # Polynomial arithmetic
 # ---------------------------------------------------------------------------
+#' .groebn_add
+#'
+#' Polynomial arithmetic
+#' ---------------------------------------------------------------------------
+#'
+#' @param f See Usage.
+#' @param g See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .groebn_add <- function(f, g) {
   out <- f
   for (k in names(g)) {
@@ -275,11 +448,29 @@
   out
 }
 
+#' .groebn_sub
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param g See Usage.
+#' @return The value of \code{.groebn_add}.
+#' @export
 .groebn_sub <- function(f, g) {
   neg_g <- lapply(g, .groebn_fr_neg)
   .groebn_add(f, neg_g)
 }
 
+#' .groebn_mul
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param g See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .groebn_mul <- function(f, g) {
   if (length(f) == 0L || length(g) == 0L) return(list())
   out <- list()
@@ -305,16 +496,43 @@
   out
 }
 
+#' .groebn_scale
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param c See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .groebn_scale <- function(f, c) {
   q <- .groebn_as_fr(c)
   if (.groebn_fr_is_zero(q)) return(list())
   lapply(f, function(v) .groebn_fr_mul(v, q))
 }
 
+#' .groebn_divides
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .groebn_divides <- function(a, b) {
   all(a <= b)
 }
 
+#' .groebn_lcm
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 .groebn_lcm <- function(a, b) {
   pmax(a, b)
 }
@@ -322,6 +540,16 @@
 # ---------------------------------------------------------------------------
 # S-polynomial and division
 # ---------------------------------------------------------------------------
+#' .groebn_spoly
+#'
+#' S-polynomial and division
+#' ---------------------------------------------------------------------------
+#'
+#' @param f See Usage.
+#' @param g See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return The value of \code{.groebn_sub}.
+#' @export
 .groebn_spoly <- function(f, g, order = "lex") {
   if (length(f) == 0L || length(g) == 0L)
     stop("groebn: the S-polynomial of the zero polynomial is not defined")
@@ -339,6 +567,16 @@
   .groebn_sub(.groebn_mul(a, f), .groebn_mul(b, g))
 }
 
+#' .groebn_divide
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param G See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return A list with \code{quotients}, \code{remainder}.
+#' @export
 .groebn_divide <- function(f, G, order = "lex") {
   Gs <- Filter(function(g) length(g) > 0L, G)
   if (length(Gs) == 0L)
@@ -374,6 +612,16 @@
   list(quotients = q, remainder = r)
 }
 
+#' .groebn_normal_form
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param G See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return The value of \code{$}.
+#' @export
 .groebn_normal_form <- function(f, G, order = "lex") {
   .groebn_divide(f, G, order)$remainder
 }
@@ -381,6 +629,17 @@
 # ---------------------------------------------------------------------------
 # Buchberger completion and reduce_basis
 # ---------------------------------------------------------------------------
+#' .groebn_buchberger
+#'
+#' Buchberger completion and reduce_basis
+#' ---------------------------------------------------------------------------
+#'
+#' @param F See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @param prune Defaults to \code{TRUE}.
+#' @param reduced Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{basis}, \code{order}, \code{size}, \code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned}, \code{method}.
+#' @export
 .groebn_buchberger <- function(F, order = "lex", prune = TRUE, reduced = TRUE) {
   .groebn_key(order)  # validate
   G <- lapply(F, function(f) if (is.null(f) || length(f) == 0L) NULL else f)
@@ -446,6 +705,15 @@
   )
 }
 
+#' .groebn_reduce_basis
+#'
+#' Part of the groebn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param G See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @return The value of \code{[}.
+#' @export
 .groebn_reduce_basis <- function(G, order = "lex") {
   H <- Filter(function(g) length(g) > 0L, G)
   keep <- list()
@@ -492,6 +760,17 @@
 # ---------------------------------------------------------------------------
 # Ideal membership
 # ---------------------------------------------------------------------------
+#' .groebn_ideal_member
+#'
+#' Ideal membership
+#' ---------------------------------------------------------------------------
+#'
+#' @param f See Usage.
+#' @param F See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @param basis Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{member}, \code{remainder}, \code{order}, \code{basis}, \code{method}.
+#' @export
 .groebn_ideal_member <- function(f, F, order = "lex", basis = NULL) {
   G <- if (!is.null(basis)) basis
        else .groebn_buchberger(F, order)$basis

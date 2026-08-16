@@ -19,6 +19,16 @@
 
 .MASRCN_EPS <- 1e-12
 
+#' .masrcn_bilinear
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param F See Usage.
+#' @param y See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .masrcn_bilinear <- function(F, y, x) {
   h <- length(F); w <- length(F[[1L]])
   y <- min(max(as.numeric(y), 0), h - 1)
@@ -32,6 +42,14 @@
     F[[y1 + 1L]][[x1 + 1L]] * dy * dx
 }
 
+#' .masrcn_mat
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .masrcn_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -219,6 +237,13 @@ multitask_loss <- function(l_cls, l_box, l_mask) {
 maskrcnn <- roi_align
 mask_rcnn_segmentation <- roi_align
 
+#' .masrcn_cheatsheet
+#'
+#' Part of the masrcn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .masrcn_cheatsheet <- function() {
   paste("masrcn: Faster R-CNN plus a THIRD branch predicting a ",
         "binary mask per RoI. Two details carry it. RoIPool ",

@@ -39,6 +39,14 @@
 
 # Normalise a vector to a probability distribution, raising on non-positive
 # mass -- mirrors _norm in the Python arm.
+#' Normalise a vector to a probability distribution, raising on
+#' non-positive
+#'
+#' mass -- mirrors _norm in the Python arm.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .caltbR_norm <- function(v) {
   vv <- as.numeric(v)
   s  <- sum(vv)
@@ -50,6 +58,13 @@
 
 # Coerce p_g_given_i to a numeric matrix with one row per item and G
 # columns, the G determined from the first non-empty row.
+#' Coerce p_g_given_i to a numeric matrix with one row per item and G
+#'
+#' columns, the G determined from the first non-empty row.
+#'
+#' @param p_g_given_i See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .caltbR_to_pgi <- function(p_g_given_i) {
   if (is.matrix(p_g_given_i)) {
     storage.mode(p_g_given_i) <- "double"
@@ -327,6 +342,13 @@ calibrated_rec <- calibrated_rerank
 calibratedrec <- calibrated_rerank
 
 
+#' .caltbR_cheatsheet
+#'
+#' Part of the caltbR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .caltbR_cheatsheet <- function() {
   paste0(
     "caltbR: ranking by accuracy CROWDS OUT the user's minority ",

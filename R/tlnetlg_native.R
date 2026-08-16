@@ -63,6 +63,14 @@
 .tlnetlg_EPS <- 1e-12
 
 # Private helpers (prefixed with .tlnetlg_ to avoid name collisions)
+#' Private helpers (prefixed with .tlnetlg_ to avoid name collisions)
+#'
+#' Part of the tlnetlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tlnetlg_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x) && !is.data.frame(x)) {
@@ -72,6 +80,14 @@
   }
 }
 
+#' .tlnetlg_mat
+#'
+#' Part of the tlnetlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param W See Usage.
+#' @return The value of \code{do.call}.
+#' @export
 .tlnetlg_mat <- function(W) {
   if (is.matrix(W)) {
     storage.mode(W) <- "double"

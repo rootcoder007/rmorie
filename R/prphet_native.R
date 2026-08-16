@@ -10,6 +10,17 @@
 
 .prphet_EPS <- 1e-12
 
+#' .changepoints
+#'
+#' Part of the prphet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param n.cp See Usage.
+#' @param range Defaults to \code{0.8}.
+#' @param cps Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .changepoints <- function(t, n.cp, range = 0.8, cps = NULL) {
   if (!is.null(cps)) return(as.numeric(cps))
   n <- length(t)

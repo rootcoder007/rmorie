@@ -22,6 +22,14 @@
 
 .SAMDEC_EPS <- 1e-12
 
+#' .samdec_mat
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .samdec_mat <- function(x) {
   if (is.matrix(x)) return(x)
   if (is.numeric(x) && is.null(dim(x))) {
@@ -31,6 +39,14 @@
   stop("samdec: expected a matrix-like input")
 }
 
+#' .samdec_vec
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .samdec_vec <- function(x) {
   if (is.matrix(x)) {
     if (nrow(x) == 1L) return(as.numeric(x[1, ]))
@@ -39,6 +55,16 @@
   as.numeric(x)
 }
 
+#' .samdec_attend
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @return A list with \code{out}, \code{W}.
+#' @export
 .samdec_attend <- function(Q, K, V) {
   d <- ncol(Q)
   out <- matrix(0, nrow = nrow(Q), ncol = d)
@@ -302,6 +328,13 @@ morie_samdec <- function(prompt_tokens, image_tokens, grid_shape,
 sam_mask_decoder <- decode_mask
 sammaskdecoder <- decode_mask
 
+#' .samdec_cheatsheet
+#'
+#' Part of the samdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .samdec_cheatsheet <- function() {
   paste("samdec: image embedding + prompt embeddings + a learned",
         "OUTPUT TOKEN -> mask. The decoder block does prompt",

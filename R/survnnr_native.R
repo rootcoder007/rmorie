@@ -35,12 +35,30 @@
 
 ACTIVATIONS <- c("tanh", "relu", "identity")
 
+#' .survnnr_act
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param v See Usage.
+#' @param kind See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .survnnr_act <- function(v, kind) {
   if (kind == "tanh") return(tanh(v))
   if (kind == "relu") return(if (v > 0) v else 0)
   v
 }
 
+#' .survnnr_dact
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param v See Usage.
+#' @param kind See Usage.
+#' @return A numeric value.
+#' @export
 .survnnr_dact <- function(v, kind) {
   if (kind == "tanh") {
     t <- tanh(v)
@@ -50,6 +68,16 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
   1.0
 }
 
+#' .survnnr_init
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param d See Usage.
+#' @param hidden See Usage.
+#' @param seed See Usage.
+#' @return A list with \code{W}, \code{b}.
+#' @export
 .survnnr_init <- function(d, hidden, seed) {
   sizes <- c(d, as.integer(hidden), 1L)
   L <- length(sizes) - 1
@@ -135,6 +163,16 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
        n_events = n_events, ties = "Breslow")
 }
 
+#' .survnnr_grad_wrt_risk
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param risk See Usage.
+#' @return The value of \code{g}, as built in the body.
+#' @export
 .survnnr_grad_wrt_risk <- function(times, events, risk) {
   n <- length(times)
   n_events <- as.numeric(sum(events))
@@ -313,6 +351,16 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
   list(time = ts, survival = out)
 }
 
+#' .survnnr_c_index
+#'
+#' Part of the survnnr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param risk See Usage.
+#' @return A numeric value.
+#' @export
 .survnnr_c_index <- function(times, events, risk) {
   n <- length(times)
   num <- 0

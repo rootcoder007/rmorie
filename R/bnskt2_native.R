@@ -7,6 +7,16 @@
 .bnskt2_EPS <- 1e-12
 
 # Weighted least squares (no intercept; rows are powers of d from 1).
+#' Weighted least squares (no intercept; rows are powers of d from 1)
+#'
+#' Part of the bnskt2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param ys See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}.
+#' @export
 .bnskt2_wls <- function(rows, ys, w) {
   X <- do.call(rbind, rows)
   y <- as.numeric(ys); w <- sqrt(pmax(as.numeric(w), 0.0))
@@ -15,6 +25,20 @@
   list(coef = coef)
 }
 
+#' .side_fit
+#'
+#' Part of the bnskt2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param y See Usage.
+#' @param k_pt See Usage.
+#' @param bandwidth See Usage.
+#' @param order See Usage.
+#' @param side See Usage.
+#' @param kernel See Usage.
+#' @return A list with \code{slope}, \code{coef}, \code{n}.
+#' @export
 .side_fit <- function(v, y, k_pt, bandwidth, order, side, kernel) {
   rows <- list(); ys <- c(); ws <- c()
   for (i in seq_along(v)) {
@@ -175,6 +199,13 @@ covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
        interpretation = "a kink here is evidence the design is picking up composition rather than the policy")
 }
 
+#' .bnskt2_cheatsheet
+#'
+#' Part of the bnskt2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .bnskt2_cheatsheet <- function() {
   paste0(
     "bnskt2: regression KINK design. RD uses a JUMP in treatment; ",

@@ -7,6 +7,17 @@
 #   multiple strain dynamics", Journal of Mathematical Biology 44(2),
 #   169-184.
 
+#' ._check
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param nu See Usage.
+#' @param mu See Usage.
+#' @param sigma See Usage.
+#' @return A list with \code{b}, \code{nv}, \code{m}, \code{sg}, \code{n}.
+#' @export
 ._check <- function(beta, nu, mu, sigma) {
   b <- as.numeric(beta)
   n <- length(b)
@@ -132,6 +143,23 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
   list(dS = dS, dI = dI)
 }
 
+#' .hiatus_simulate
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param nu See Usage.
+#' @param mu See Usage.
+#' @param sigma See Usage.
+#' @param S0 Defaults to \code{NULL}.
+#' @param I0 Defaults to \code{NULL}.
+#' @param t_end Defaults to \code{2000}.
+#' @param dt Defaults to \code{0.05}.
+#' @param mutation Defaults to \code{0}.
+#' @param record_every Defaults to \code{100L}.
+#' @return A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj}, \code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables}, \code{n_variables_history_based}, \code{surviving}, \code{method}.
+#' @export
 .hiatus_simulate <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
                      t_end = 2000.0, dt = 0.05, mutation = 0.0,
                      record_every = 100L) {
@@ -274,6 +302,13 @@ morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
            record_every)
 }
 
+#' .hiatus_cheatsheet
+#'
+#' Part of the hiatus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .hiatus_cheatsheet <- function() {
   paste("hiatus: many-strain dynamics in 2n variables, not 2^n. Status-based + reduced transmission + POLARIZED immunity (some hosts fully immune, not all partly) means one variable per host per strain. dI_i = b_i S_i I_i - (v_i + mu) I_i; dS_i = mu - sum_j b_j S_i sigma_ij I_j - mu S_i. sigma_ij = P(infection by j immunises against i). Off-diagonal sigma = 0 decouples the strains exactly; sigma = 1 everywhere gives competitive exclusion.")
 }

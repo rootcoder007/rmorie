@@ -3,6 +3,15 @@
 #   evaluation", Proc. 10th Workshop on Statistical Machine Translation
 #   (WMT15), 392-395.
 
+#' .chrf_char_ngrams
+#'
+#' Part of the chrF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param n See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .chrf_char_ngrams <- function(s, n) {
   L <- nchar(s)
   if (L < n) return(list())
@@ -11,6 +20,15 @@
   out
 }
 
+#' .chrf_word_ngrams
+#'
+#' Part of the chrF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ws See Usage.
+#' @param n See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .chrf_word_ngrams <- function(ws, n) {
   L <- length(ws)
   if (L < n) return(list())
@@ -19,6 +37,14 @@
   out
 }
 
+#' .chrf_counts
+#'
+#' Part of the chrF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @return The value of \code{d}, as built in the body.
+#' @export
 .chrf_counts <- function(seq) {
   d <- list()
   for (g in seq) {
@@ -28,6 +54,15 @@
   d
 }
 
+#' .chrf_pr
+#'
+#' Part of the chrF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hyp_grams See Usage.
+#' @param ref_grams See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .chrf_pr <- function(hyp_grams, ref_grams) {
   if (length(hyp_grams) == 0L || length(ref_grams) == 0L) return(NULL)
   hc <- .chrf_counts(hyp_grams)

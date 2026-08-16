@@ -48,10 +48,32 @@
 #   doi:10.1111/j.1468-0262.2004.00530.x. Treatment rules as the
 #   object of inference.
 
+#' .itrgrf_policy_from_tau
+#'
+#' Part of the itrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tau See Usage.
+#' @param cost Defaults to \code{0}.
+#' @return The value of \code{ifelse}.
+#' @export
 .itrgrf_policy_from_tau <- function(tau, cost = 0.0) {
   ifelse(as.numeric(tau) > as.numeric(cost), 1.0, 0.0)
 }
 
+#' .itrgrf_dr_scores
+#'
+#' Part of the itrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param mu1 See Usage.
+#' @param mu0 See Usage.
+#' @param e See Usage.
+#' @param d See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .itrgrf_dr_scores <- function(y, W, mu1, mu0, e, d) {
   n <- length(y)
   eps <- 1e-12
@@ -73,6 +95,19 @@
   out
 }
 
+#' .itrgrf_rule_value
+#'
+#' Part of the itrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param mu1 See Usage.
+#' @param mu0 See Usage.
+#' @param e See Usage.
+#' @param d See Usage.
+#' @return A list with \code{value}, \code{se}, \code{scores}.
+#' @export
 .itrgrf_rule_value <- function(y, W, mu1, mu0, e, d) {
   g <- .itrgrf_dr_scores(y, W, mu1, mu0, e, d)
   n <- length(g)
@@ -81,6 +116,22 @@
   list(value = v, se = se, scores = g)
 }
 
+#' .itrgrf_fit_arm
+#'
+#' Part of the itrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param arm See Usage.
+#' @param rows See Usage.
+#' @param at_rows See Usage.
+#' @param n_trees See Usage.
+#' @param min_leaf See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .itrgrf_fit_arm <- function(X, y, W, arm, rows, at_rows, n_trees,
                             min_leaf, seed) {
   idx <- rows[W[rows] == arm]
@@ -217,6 +268,13 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
   )
 }
 
+#' .itrgrf_cheatsheet
+#'
+#' Part of the itrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .itrgrf_cheatsheet <- function() {
   "itrgrf: d(x) = 1{tau(x) > cost}; value it with the doubly robust score mu_d(X) + 1{W=d}/e_W (Y - mu_W). Learn the rule and score it on DIFFERENT halves -- the rule is an argmax, so scoring it in sample inherits the winner's curse and a rule fitted to noise looks profitable."
 }

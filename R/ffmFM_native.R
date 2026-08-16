@@ -187,6 +187,13 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
        caveat = "FFM overfits readily -- the paper stops early on a validation set")
 }
 
+#' .ffmFM_cheatsheet
+#'
+#' Part of the ffmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .ffmFM_cheatsheet <- function() {
   paste("ffmFM: one latent vector per feature PER FIELD, because a",
         "feature interacts differently with an advertiser than",

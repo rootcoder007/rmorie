@@ -56,10 +56,27 @@
 # Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 
 # Private helpers for the gan_an module
+#' Private helpers for the gan_an module
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .gan_an_as_num <- function(x) {
   as.numeric(x)
 }
 
+#' .gan_an_residual_loss_impl
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param g_z See Usage.
+#' @return A numeric value.
+#' @export
 .gan_an_residual_loss_impl <- function(x, g_z) {
   a <- .gan_an_as_num(x)
   b <- .gan_an_as_num(g_z)
@@ -70,6 +87,15 @@
   sum(abs(a - b))
 }
 
+#' .gan_an_discrimination_loss_impl
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f_x See Usage.
+#' @param f_gz See Usage.
+#' @return A numeric value.
+#' @export
 .gan_an_discrimination_loss_impl <- function(f_x, f_gz) {
   a <- .gan_an_as_num(f_x)
   b <- .gan_an_as_num(f_gz)
@@ -83,6 +109,18 @@
   sum(abs(a - b))
 }
 
+#' .gan_an_anomaly_score_impl
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param g_z See Usage.
+#' @param f_x See Usage.
+#' @param f_gz See Usage.
+#' @param lam Defaults to \code{0.1}.
+#' @return A list with \code{score}, \code{residual}, \code{discrimination}, \code{lambda}.
+#' @export
 .gan_an_anomaly_score_impl <- function(x, g_z, f_x, f_gz, lam = 0.1) {
   l <- as.numeric(lam)
   if (l < 0.0 || l > 1.0) {
@@ -283,6 +321,13 @@ score_separation <- function(normal_scores, anomalous_scores) {
   )
 }
 
+#' .gan_an_cheatsheet
+#'
+#' Part of the gan_an_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .gan_an_cheatsheet <- function() {
   "gan_an: train a GAN on NORMAL data only, then score a query by how well it can be reproduced from that manifold. A GAN has no inverse, so find z by OPTIMISATION with the generator FIXED -- nothing adapts, so an off-manifold image stays badly reconstructed. Two losses: pixel residual, and a discrimination loss on INTERMEDIATE discriminator features (the scalar verdict would give no gradient). The residual map LOCALISES the anomaly. A generator that can reproduce anything scores everything zero -- limited capacity is load-bearing."
 }

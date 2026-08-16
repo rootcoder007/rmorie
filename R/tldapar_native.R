@@ -217,6 +217,13 @@ naive_reuse <- function(define_and_estimate, n, seed = 0L) {
        warning = "the parameter was selected and estimated on the same sample; the reported inference is not valid for the selected parameter")
 }
 
+#' .tldapar_cheatsheet
+#'
+#' Part of the tldapar_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tldapar_cheatsheet <- function() {
   paste("tldapar: when the QUESTION depends on the data -- which ",
         "levels to contrast, which variable to report -- defining ",

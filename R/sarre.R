@@ -4,6 +4,20 @@
 # Extracted from the sarre() optimiser closure so the singular-GLS,
 # non-positive-variance and non-positive-determinant guards are all
 # directly unit-testable.
+#' Internal: SAR-error concentrated negative log-likelihood in lambda
+#'
+#' Extracted from the sarre() optimiser closure so the singular-GLS,
+#' non-positive-variance and non-positive-determinant guards are all
+#' directly unit-testable.
+#'
+#' @param lam See Usage.
+#' @param I See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .sarre_negll <- function(lam, I, W, X, y, n) {
   A <- I - lam * W
   AX <- A %*% X

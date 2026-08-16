@@ -46,6 +46,17 @@
 # One hit attribute as a vector of length n, defaulted when absent: a
 # caller with no E-values should still be able to run the multimer route,
 # which never looks at them.
+#' One hit attribute as a vector of length n, defaulted when absent: a
+#'
+#' caller with no E-values should still be able to run the multimer
+#' route, which never looks at them.
+#'
+#' @param chain See Usage.
+#' @param name See Usage.
+#' @param n See Usage.
+#' @param default See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .alfmpv_field <- function(chain, name, n, default) {
   v <- if (is.list(chain)) chain[[name]] else NULL
   if (is.null(v)) return(rep(default, n))
@@ -56,6 +67,15 @@
   v
 }
 
+#' .alfmpv_chain_table
+#'
+#' Part of the alfmpv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param chain See Usage.
+#' @param idx See Usage.
+#' @return A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps}, \code{coverage}, \code{n}.
+#' @export
 .alfmpv_chain_table <- function(chain, idx) {
   if (is.list(chain) && !is.null(chain$species)) {
     species <- as.character(chain$species)
@@ -76,6 +96,17 @@
 }
 
 # Which hits survive the route's own filter, in order.
+#' Which hits survive the route\'s own filter, in order
+#'
+#' Part of the alfmpv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tab See Usage.
+#' @param mode See Usage.
+#' @param min_coverage See Usage.
+#' @param max_gap See Usage.
+#' @return The value of \code{which}.
+#' @export
 .alfmpv_keep <- function(tab, mode, min_coverage, max_gap) {
   if (!tab$n) return(integer(0))
   ok <- rep(TRUE, tab$n)
@@ -86,6 +117,17 @@
 
 # Lower sorts first. Ties break on the hit's position in the alignment,
 # so the order is total and neither arm can wander off on a tie.
+#' Lower sorts first. Ties break on the hit\'s position in the
+#' alignment,
+#'
+#' so the order is total and neither arm can wander off on a tie.
+#'
+#' @param tab See Usage.
+#' @param mode See Usage.
+#' @param idx See Usage.
+#' @param pos See Usage.
+#' @return The value of \code{order}.
+#' @export
 .alfmpv_order <- function(tab, mode, idx, pos) {
   if (mode == "multimer") return(order(-tab$identity[idx], pos))
   if (mode == "colabfold") return(order(tab$evalue[idx], pos))

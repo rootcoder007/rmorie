@@ -37,6 +37,14 @@
 
 .wrd2v_ARCH <- c("skip-gram", "cbow")
 
+#' SplitMix64 via .ghc_rng: the Python arm is
+#' np.random.default_rng(seed)
+#'
+#' (_array_core _SplitMix64), so the draws here are bit-identical to it
+#'
+#' @param seed See Usage.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .wrd2v_rng <- function(seed) {
   # SplitMix64 via .ghc_rng: the Python arm is np.random.default_rng(seed)
   # (_array_core _SplitMix64), so the draws here are bit-identical to it
@@ -48,12 +56,28 @@
   e
 }
 
+#' .wrd2v_softmax
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .wrd2v_softmax <- function(v) {
   m <- max(v)
   ex <- exp(v - m)
   ex / sum(ex)
 }
 
+#' .wrd2v_sigmoid
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .wrd2v_sigmoid <- function(z) {
   if (z >= 0.0) {
     1.0 / (1.0 + exp(-z))
@@ -63,6 +87,15 @@
   }
 }
 
+#' .wrd2v_cos
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .wrd2v_cos <- function(a, b) {
   na <- sqrt(sum(a * a))
   nb <- sqrt(sum(b * b))
@@ -153,10 +186,32 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
   out
 }
 
+#' .wrd2v_scores
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param O See Usage.
+#' @param h See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .wrd2v_scores <- function(O, h) {
   as.numeric(O %*% h)
 }
 
+#' Skip-gram: input is the centre word, target a context word
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @param c See Usage.
+#' @param j See Usage.
+#' @param size See Usage.
+#' @param V See Usage.
+#' @param lr See Usage.
+#' @return The value of \code{loss}, as built in the body.
+#' @export
 .wrd2v_sg_step <- function(st, c, j, size, V, lr) {
   # Skip-gram: input is the centre word, target a context word.
   h <- st$W[c, ]
@@ -170,6 +225,20 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
   loss
 }
 
+#' Mikolov et al. (2013b) eq. 4, one positive and k noise draws
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @param c See Usage.
+#' @param j See Usage.
+#' @param size See Usage.
+#' @param lr See Usage.
+#' @param k See Usage.
+#' @param draw_noise See Usage.
+#' @return The value of \code{loss}, as built in the body.
+#' @export
 .wrd2v_neg_step <- function(st, c, j, size, lr, k, draw_noise) {
   # Mikolov et al. (2013b) eq. 4, one positive and k noise draws.
   h <- st$W[c, ]
@@ -192,6 +261,19 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
   loss
 }
 
+#' CBOW: the projection is the MEAN of the context vectors
+#'
+#' Part of the wrd2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @param ctx See Usage.
+#' @param c See Usage.
+#' @param size See Usage.
+#' @param V See Usage.
+#' @param lr See Usage.
+#' @return The value of \code{loss}, as built in the body.
+#' @export
 .wrd2v_cbow_step <- function(st, ctx, c, size, V, lr) {
   # CBOW: the projection is the MEAN of the context vectors.
   n <- length(ctx)

@@ -5,6 +5,13 @@
 
 ## One MINSTD step. Exact in double precision (a * m < 2^53), so both
 ## language arms produce bit-identical initial weights.
+#' # One MINSTD step. Exact in double precision (a * m < 2^53), so both
+#'
+#' # language arms produce bit-identical initial weights.
+#'
+#' @param state See Usage.
+#' @return A numeric value.
+#' @export
 .k03_lcg <- function(state) (.k03_lcg_a * state) %% .k03_lcg_m
 
 #' Wide & Deep jointly trained classifier

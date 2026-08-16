@@ -58,8 +58,25 @@
 
 # --- Private helpers (prefix .tmlcen_) ---------------------------------
 
+#' .tmlcen_sigmoid
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .tmlcen_sigmoid <- function(x) 1 / (1 + exp(-x))
 
+#' .tmlcen_design
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param n See Usage.
+#' @return The value of \code{Z}, as built in the body.
+#' @export
 .tmlcen_design <- function(rows, n) {
   if (n == 0L) return(matrix(0, nrow = 0L, ncol = 0L))
   if (is.null(rows) || length(rows) == 0L) {
@@ -76,11 +93,33 @@
   Z
 }
 
+#' .tmlcen_ridgesolve
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param ridge See Usage.
+#' @return A matrix, from \code{solve}.
+#' @export
 .tmlcen_ridgesolve <- function(A, b, ridge) {
   p <- ncol(A)
   solve(A + ridge * diag(p), b)
 }
 
+#' .tmlcen_weighted_logit
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param iters Defaults to \code{60L}.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 .tmlcen_weighted_logit <- function(Z, y, w, iters = 60L, ridge = 1e-10) {
   n <- nrow(Z)
   p <- ncol(Z)
@@ -99,12 +138,40 @@
   b
 }
 
+#' .tmlcen_logit_irls
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param max_iter Defaults to \code{60L}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return The value of \code{.tmlcen_weighted_logit}.
+#' @export
 .tmlcen_logit_irls <- function(Z, y, max_iter = 60L, ridge = 1e-8) {
   .tmlcen_weighted_logit(Z, y, rep(1, nrow(Z)), max_iter, ridge)
 }
 
+#' .tmlcen_matvec
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tmlcen_matvec <- function(Z, b) as.numeric(Z %*% b)
 
+#' .tmlcen_uniform_density
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ts See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmlcen_uniform_density <- function(ts) {
   lo <- min(ts)
   hi <- max(ts)
@@ -113,11 +180,28 @@
 
 .tmlcen_KINDS <- c("right", "interval")
 
+#' .tmlcen_RichResult
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param payload See Usage.
+#' @return The value of \code{payload}, as built in the body.
+#' @export
 .tmlcen_RichResult <- function(payload) {
   class(payload) <- "RichResult"
   payload
 }
 
+#' .tmlcen_W_mat
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param n See Usage.
+#' @return The value of \code{Wm}, as built in the body.
+#' @export
 .tmlcen_W_mat <- function(W, n) {
   if (is.null(W) || length(W) == 0L) {
     return(matrix(0, nrow = n, ncol = 0L))
@@ -138,6 +222,15 @@
   Wm
 }
 
+#' .tmlcen_coerce_subject_list
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param n See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .tmlcen_coerce_subject_list <- function(x, n) {
   if (is.data.frame(x)) {
     x <- as.matrix(x)
@@ -481,6 +574,13 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
   ))
 }
 
+#' .tmlcen_morie_cheatsheet
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tmlcen_morie_cheatsheet <- function() {
   paste0("tmlcen: censoring by IPCW. right = Gbar_c(k|A,W) = ",
          "prod(1-lambda_C), weight person-time by 1/Gbar_c, hazard ",

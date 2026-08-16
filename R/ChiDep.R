@@ -31,6 +31,14 @@ ChiDep <- function(x, y, u = 0.95) {
        method = "empirical chi(u) (Coles 2001 sec. 8.4)")
 }
 
+#' .chidep_ranks01
+#'
+#' Part of the ChiDep implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .chidep_ranks01 <- function(v) {
   ord <- order(v)
   r <- numeric(length(v))

@@ -71,6 +71,18 @@
 # Statistics* 86(1), 4-29, doi:10.1162/003465304323023651. The
 # sample/population distinction.
 
+#' .tlsate_check
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @return A list with \code{a}, \code{y}, \code{q1}, \code{q0}, \code{gg}, \code{n}.
+#' @export
 .tlsate_check <- function(A, Y, Q1, Q0, g) {
   a <- as.numeric(A)
   y <- as.numeric(Y)
@@ -88,25 +100,70 @@
   list(a=a, y=y, q1=q1, q0=q0, gg=gg, n=n)
 }
 
+#' .tlsate_logit
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tlsate_logit <- function(p) {
   q <- pmin(pmax(p, 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
+#' .tlsate_expit
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .tlsate_expit <- function(x) {
   ifelse(x > -700, 1.0 / (1.0 + exp(-x)), 0.0)
 }
 
+#' .tlsate_var
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .tlsate_var <- function(v) {
   m <- sum(v) / length(v)
   sum((v - m)^2) / (length(v) - 1)
 }
 
+#' .tlsate_se
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .tlsate_se <- function(v) {
   m <- sum(v) / length(v)
   sqrt(sum((v - m)^2) / (length(v) - 1) / length(v))
 }
 
+#' .tlsate_pate_influence_curve
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @param psi See Usage.
+#' @return A numeric value.
+#' @export
 .tlsate_pate_influence_curve <- function(A, Y, Q1, Q0, g, psi) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   a <- d$a; y <- d$y; q1 <- d$q1; q0 <- d$q0; gg <- d$gg; n <- d$n
@@ -116,6 +173,18 @@
   h * (y - qa) + q1 - q0 - psi
 }
 
+#' .tlsate_sate_influence_curve
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @return A numeric value.
+#' @export
 .tlsate_sate_influence_curve <- function(A, Y, Q1, Q0, g) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   a <- d$a; y <- d$y; q1 <- d$q1; q0 <- d$q0; gg <- d$gg; n <- d$n
@@ -124,6 +193,19 @@
   h * (y - qa)
 }
 
+#' .tlsate_variance_gap
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @param psi See Usage.
+#' @return A list with \code{var_pate}, \code{var_sate}, \code{gap}, \code{var_conditional_effect}, \code{note}.
+#' @export
 .tlsate_variance_gap <- function(A, Y, Q1, Q0, g, psi) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   n <- d$n
@@ -139,6 +221,18 @@
   )
 }
 
+#' .tlsate_sate_tmle
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @return A list with \code{estimate}, \code{psi}, \code{se_population}, \code{se_sample}, \code{ci_population}, \code{ci_sample}, \code{width_ratio}, \code{method}, \code{note}.
+#' @export
 .tlsate_sate_tmle <- function(A, Y, Q1, Q0, g) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   a <- d$a; y <- d$y; q1 <- d$q1; q0 <- d$q0; gg <- d$gg; n <- d$n
@@ -179,6 +273,15 @@
   )
 }
 
+#' .tlsate_paired_variance
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pair_ids See Usage.
+#' @param ic See Usage.
+#' @return A list with \code{se}, \code{n_pairs}, \code{note}.
+#' @export
 .tlsate_paired_variance <- function(pair_ids, ic) {
   p <- as.character(pair_ids)
   v <- as.numeric(ic)
@@ -204,6 +307,13 @@
   )
 }
 
+#' .tlsate_cheatsheet
+#'
+#' Part of the tlsate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlsate_cheatsheet <- function() {
   "tlsate: in a cluster randomized trial the units are not sampled from any defined population, so the PATE is a parameter of a superpopulation nobody drew from. The SATE -- the mean counterfactual difference for THESE units -- is interpretable without inventing one. It is not identifiable in finite samples, but the SAME TMLE is consistent and asymptotically linear for it; only the influence curve changes, dropping Q1 - Q0 - psi. The variance falls by EXACTLY the variance of the conditional effect, so effect modification is where the power gain comes from."
 }

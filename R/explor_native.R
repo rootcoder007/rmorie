@@ -20,6 +20,15 @@
 
 .EXPLOR_FEATURES <- c("inverse", "identity")
 
+#' .mat
+#'
+#' Part of the explor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param name See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .mat <- function(x, name) {
   X <- as.matrix(x)
   if (nrow(X) == 0L || ncol(X) == 0L)
@@ -27,11 +36,28 @@
   lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
 }
 
+#' .matvec
+#'
+#' Part of the explor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .matvec <- function(W, x) {
   W <- as.matrix(W)
   as.numeric(as.vector(x) %*% W)
 }
 
+#' .explor_softmax
+#'
+#' Part of the explor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .explor_softmax <- function(z) {
   m <- max(z)
   e <- exp(z - m)
@@ -235,6 +261,13 @@ explor <- function(states, actions, next_states, n_actions = NULL,
   payload
 }
 
+#' .explor_cheatsheet
+#'
+#' Part of the explor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .explor_cheatsheet <- function() {
   paste0("explor: ICM (Pathak 2017). phi learned via the INVERSE model ",
          "(eqs. 2-3) so it encodes only what the agent can affect; ",

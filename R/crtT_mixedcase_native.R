@@ -6,6 +6,15 @@
 # Programming, Vol. 2, Sec. 4.3.2 (CRT in computer arithmetic, as
 # cited by the stub).
 
+#' Extended Euclid: returns (g, c, d) with c*a + d*b = g
+#'
+#' Part of the crtT_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{g}, \code{c}, \code{d}.
+#' @export
 .crt_egcd <- function(a, b) {
   # extended Euclid: returns (g, c, d) with c*a + d*b = g
   old_r <- a; r <- b

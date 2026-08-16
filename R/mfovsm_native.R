@@ -42,6 +42,14 @@
 
 # Private helpers (prefixed .mfovsm_)
 
+#' .mfovsm_vec
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .mfovsm_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x)) {
@@ -50,6 +58,14 @@
   as.numeric(x)
 }
 
+#' .mfovsm_mat
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .mfovsm_mat <- function(x) {
   if (is.null(x)) return(NULL)
   if (is.matrix(x)) return(x)
@@ -59,6 +75,15 @@
   matrix(as.numeric(x), ncol = 1)
 }
 
+#' .mfovsm_hist
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param obj See Usage.
+#' @param allow_one Defaults to \code{FALSE}.
+#' @return The value of \code{list}.
+#' @export
 .mfovsm_hist <- function(obj, allow_one = FALSE) {
   if (is.null(obj)) {
     if (allow_one) return(list(NULL))
@@ -68,6 +93,15 @@
   return(list(obj))
 }
 
+#' .mfovsm_quantile7
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param q See Usage.
+#' @return A numeric value.
+#' @export
 .mfovsm_quantile7 <- function(x, q) {
   x <- sort(as.numeric(x))
   n <- length(x)
@@ -81,6 +115,17 @@
   x[lo] + frac * (x[hi] - x[lo])
 }
 
+#' .mfovsm_logreg_fit
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param max_iter Defaults to \code{25}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{coef}, \code{fitted}.
+#' @export
 .mfovsm_logreg_fit <- function(y, X, max_iter = 25, tol = 1e-8) {
   n <- length(y)
   p <- ncol(X)
@@ -109,6 +154,18 @@
   list(coef = as.numeric(beta), fitted = mu)
 }
 
+#' .mfovsm_ip_weights
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ak See Usage.
+#' @param den See Usage.
+#' @param num See Usage.
+#' @param kind Defaults to \code{"binary"}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @return A list with \code{weights}, \code{fitted}.
+#' @export
 .mfovsm_ip_weights <- function(ak, den, num, kind = "binary", stabilize = TRUE) {
   n <- length(ak)
 
@@ -143,6 +200,16 @@
   list(weights = w, fitted = pden)
 }
 
+#' .mfovsm_wls
+#'
+#' Part of the mfovsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}.
+#' @export
 .mfovsm_wls <- function(X, y, w) {
   X <- cbind(1, X)
   n <- length(y)

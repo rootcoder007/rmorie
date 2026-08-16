@@ -17,6 +17,16 @@
 # Hosking-Wallis-Wood 1985 Eq. 4) -- not the plotting-position
 # approximation, whose small-sample bias is exactly what these
 # methods exist to avoid.
+#' Unbiased probability-weighted moment b_r (Greenwood et al. 1979;
+#'
+#' Hosking-Wallis-Wood 1985 Eq. 4) -- not the plotting-position
+#' approximation, whose small-sample bias is exactly what these methods
+#' exist to avoid.
+#'
+#' @param x See Usage.
+#' @param r See Usage.
+#' @return A numeric value.
+#' @export
 .evt_pwm <- function(x, r) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -31,6 +41,14 @@
   mean(w * xs)
 }
 
+#' .evt_lmom
+#'
+#' Part of the evt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{l1}, \code{l2}, \code{l3}, \code{t3}.
+#' @export
 .evt_lmom <- function(x) {
   b0 <- .evt_pwm(x, 0L)
   b1 <- .evt_pwm(x, 1L)
@@ -45,6 +63,15 @@
   list(l1 = b0, l2 = l2, l3 = l3, t3 = l3 / l2)
 }
 
+#' .evt_top
+#'
+#' Part of the evt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param k See Usage.
+#' @return The value of \code{[}.
+#' @export
 .evt_top <- function(x, k) {
   xs <- sort(as.numeric(x), decreasing = TRUE)
   k <- as.integer(k)

@@ -31,10 +31,30 @@
 
 .svdpp_eps <- 1e-12
 
+#' .svdpp_baseline
+#'
+#' Part of the svdpp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param b_user See Usage.
+#' @param b_item See Usage.
+#' @return A numeric value.
+#' @export
 .svdpp_baseline <- function(mu, b_user, b_item) {
   return(as.numeric(mu) + as.numeric(b_user) + as.numeric(b_item))
 }
 
+#' .svdpp_implicit_term
+#'
+#' Part of the svdpp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rated_items See Usage.
+#' @param y See Usage.
+#' @param exponent Defaults to \code{-0.5}.
+#' @return A list with \code{term}, \code{n_rated}, \code{scale}, \code{exponent}, \code{raw_sum}.
+#' @export
 .svdpp_implicit_term <- function(rated_items, y, exponent = -0.5) {
   N <- as.list(rated_items)
   if (length(N) == 0) {
@@ -67,6 +87,21 @@
   ))
 }
 
+#' .svdpp_predict
+#'
+#' Part of the svdpp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param b_user See Usage.
+#' @param b_item See Usage.
+#' @param p_u See Usage.
+#' @param q_i See Usage.
+#' @param rated_items Defaults to \code{NULL}.
+#' @param y Defaults to \code{NULL}.
+#' @param exponent Defaults to \code{-0.5}.
+#' @return A list with \code{prediction}, \code{effective_user_factor}, \code{implicit}, \code{n_rated}, \code{note}.
+#' @export
 .svdpp_predict <- function(mu, b_user, b_item, p_u, q_i,
                           rated_items = NULL, y = NULL,
                           exponent = -0.5) {
@@ -97,6 +132,24 @@
   ))
 }
 
+#' .svdpp_sgd_step
+#'
+#' Part of the svdpp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rating See Usage.
+#' @param mu See Usage.
+#' @param b_user See Usage.
+#' @param b_item See Usage.
+#' @param p_u See Usage.
+#' @param q_i See Usage.
+#' @param rated_items See Usage.
+#' @param y See Usage.
+#' @param lr Defaults to \code{0.007}.
+#' @param reg Defaults to \code{0.015}.
+#' @param exponent Defaults to \code{-0.5}.
+#' @return A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u}, \code{q_i}, \code{y}, \code{note}.
+#' @export
 .svdpp_sgd_step <- function(rating, mu, b_user, b_item, p_u, q_i,
                            rated_items, y,
                            lr = 0.007, reg = 0.015, exponent = -0.5) {
@@ -130,6 +183,23 @@
   ))
 }
 
+#' .svdpp_fit
+#'
+#' Part of the svdpp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param factors Defaults to \code{4}.
+#' @param epochs Defaults to \code{30}.
+#' @param lr Defaults to \code{0.007}.
+#' @param reg Defaults to \code{0.015}.
+#' @param exponent Defaults to \code{-0.5}.
+#' @param seed Defaults to \code{0}.
+#' @param implicit Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit}, \code{method}, \code{note}.
+#' @export
 .svdpp_fit <- function(ratings, n_users, n_items,
                       factors = 4, epochs = 30,
                       lr = 0.007, reg = 0.015,
@@ -231,6 +301,13 @@ morie_svdpp <- function(ratings, n_users, n_items,
                     exponent, seed, implicit))
 }
 
+#' .svdpp_cheatsheet
+#'
+#' Part of the svdpp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .svdpp_cheatsheet <- function() {
   return(paste0(
     "svdpp: a rating dataset carries a SECOND signal for free -- ",

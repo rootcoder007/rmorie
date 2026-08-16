@@ -38,6 +38,16 @@ ess <- function(weights) {
 # findInterval has the same effect but is documented to return the
 # leftmost interval, so we keep our own to mirror the Python
 # arm's hand-written loop.
+#' Binary search over a precomputed cumulative distribution.  R\'s
+#'
+#' findInterval has the same effect but is documented to return the
+#' leftmost interval, so we keep our own to mirror the Python arm\'s
+#' hand-written loop.
+#'
+#' @param cum See Usage.
+#' @param u See Usage.
+#' @return The value of \code{lo}, as built in the body.
+#' @export
 .smcsam_pick <- function(cum, u) {
   lo <- 1L; hi <- length(cum)
   while (lo < hi) {
@@ -141,6 +151,16 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 # random_walk_kernel(scale, n_moves), performs n_moves of
 # x' = x + Normal(0, scale^2) and returns the average accept
 # rate over the inner moves.
+#' A Metropolis random walk that, just like the Python arm\'s
+#'
+#' random_walk_kernel(scale, n_moves), performs n_moves of x\' = x +
+#' Normal(0, scale^2) and returns the average accept rate over the inner
+#' moves.
+#'
+#' @param scale See Usage.
+#' @param n_moves See Usage.
+#' @return The value of \code{function}.
+#' @export
 .smcsam_rwk <- function(scale, n_moves) {
   force(scale); force(n_moves)
   function(x, log_target, rng) {
@@ -294,6 +314,13 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
        method = "SMC sampler (Del Moral, Doucet & Jasra 2006)")
 }
 
+#' .smcsam_cheatsheet
+#'
+#' Part of the smcsam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .smcsam_cheatsheet <- function() {
   paste("smcsam: SMC samplers (Del Moral, Doucet & Jasra 2006). A ",
         "sequence pi_n on a FIXED space is made sequential by an ",

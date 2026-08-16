@@ -56,6 +56,14 @@
 
 .phmmsr_eps <- 1e-12
 
+#' .phmmsr_to_matrix
+#'
+#' Part of the phmmsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param profile See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .phmmsr_to_matrix <- function(profile) {
   if (is.matrix(profile)) {
     storage.mode(profile) <- "numeric"

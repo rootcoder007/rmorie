@@ -144,6 +144,14 @@ MORIE_TPS_REGISTRY <- list(
   .morie_tps_apply_nrows(df, nrows)
 }
 
+#' .morie_tps_canonical
+#'
+#' Part of the tps_datasets implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @return The value of \code{[[}.
+#' @export
 .morie_tps_canonical <- function(name) {
   stopifnot(is.character(name), length(name) == 1L)
   keys <- names(MORIE_TPS_REGISTRY)

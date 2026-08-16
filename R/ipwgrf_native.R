@@ -32,11 +32,34 @@
 
 .ipwgrf_EPS <- 1e-12
 
+#' .ipwgrf_folds
+#'
+#' Part of the ipwgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param V See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .ipwgrf_folds <- function(n, V) {
   V <- as.integer(max(2, min(as.integer(V), n)))
   lapply(0:(V - 1), function(v) which(((seq_len(n) - 1) %% V) == v))
 }
 
+#' .ipwgrf_forest_nuisances
+#'
+#' Part of the ipwgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param n_folds Defaults to \code{5}.
+#' @param n_trees Defaults to \code{120}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{mu1}, \code{mu0}, \code{e}.
+#' @export
 .ipwgrf_forest_nuisances <- function(y, W, X, n_folds = 5, n_trees = 120,
                                     min_leaf = 5, seed = 0) {
   n <- length(y)
@@ -88,6 +111,19 @@
   list(mu1 = mu1, mu0 = mu0, e = e)
 }
 
+#' .ipwgrf_aipw_scores
+#'
+#' Part of the ipwgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param mu1 See Usage.
+#' @param mu0 See Usage.
+#' @param e See Usage.
+#' @param trim Defaults to \code{0.02}.
+#' @return A list with \code{g}, \code{weights}.
+#' @export
 .ipwgrf_aipw_scores <- function(y, W, mu1, mu0, e, trim = 0.02) {
   n <- length(y)
   t <- as.numeric(trim)
@@ -205,6 +241,13 @@ morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
   )
 }
 
+#' .ipwgrf_cheatsheet
+#'
+#' Part of the ipwgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .ipwgrf_cheatsheet <- function() {
   paste("ipwgrf: Gamma = mu1 - mu0 + W(Y-mu1)/e - (1-W)(Y-mu0)/(1-e),",
         "mean is the ATE. Right outcome model OR right propensity",

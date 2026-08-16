@@ -25,6 +25,14 @@
 # round-trip reporting the inflation rather than hiding it, and the
 # same rejection conditions so both arms refuse the same inputs.
 
+#' .zfmech_check_rho
+#'
+#' Part of the zfmech_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rho See Usage.
+#' @return The value of \code{rho}, as built in the body.
+#' @export
 .zfmech_check_rho <- function(rho) {
   rho <- as.numeric(rho)
   if (rho <= 0)

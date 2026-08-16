@@ -93,6 +93,16 @@ Causrddh <- function(x, y, cutoff = 0) {
        method = "Imbens-Kalyanaraman (2009/2012) plug-in bandwidth, edge kernel, NBER w14726 algorithm")
 }
 
+#' .morie_w508_llr_side
+#'
+#' Part of the rdd_w508_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param dm See Usage.
+#' @param ym See Usage.
+#' @param w See Usage.
+#' @return A list with \code{a}, \code{b}, \code{v}.
+#' @export
 .morie_w508_llr_side <- function(dm, ym, w) {
   n <- length(dm)
   X <- cbind(1, dm)

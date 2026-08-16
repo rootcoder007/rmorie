@@ -8,6 +8,18 @@
 # (.ghc_rng/.ghc_unif/.ghc_norm/.ghc_gamma1) is consumed draw for
 # draw in the same order.
 
+#' .miord2_norm_draw
+#'
+#' Part of the miord2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param X_obs See Usage.
+#' @param y_obs See Usage.
+#' @param X_mis See Usage.
+#' @param kappa See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .miord2_norm_draw <- function(e, X_obs, y_obs, X_mis, kappa) {
   n1 <- length(y_obs)
   q <- ncol(X_obs)

@@ -99,8 +99,31 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
   s * s / v
 }
 
+#' .qsfrgr_events_in
+#'
+#' Part of the qsfrgr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param event See Usage.
+#' @param rows See Usage.
+#' @return A numeric value.
+#' @export
 .qsfrgr_events_in <- function(event, rows) sum(event[rows] == 1L)
 
+#' .qsfrgr_best_split
+#'
+#' Part of the qsfrgr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param rows See Usage.
+#' @param feats See Usage.
+#' @param min_leaf See Usage.
+#' @param rule See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .qsfrgr_best_split <- function(X, time, event, rows, feats, min_leaf,
                                rule) {
   best <- NULL
@@ -131,6 +154,24 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
   best
 }
 
+#' .qsfrgr_grow
+#'
+#' Part of the qsfrgr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param struct_rows See Usage.
+#' @param leaf_rows See Usage.
+#' @param feats_n See Usage.
+#' @param min_leaf See Usage.
+#' @param max_depth See Usage.
+#' @param depth See Usage.
+#' @param e See Usage.
+#' @param rule See Usage.
+#' @return A list with \code{leaf}, \code{f}, \code{thr}, \code{l}, \code{r}.
+#' @export
 .qsfrgr_grow <- function(X, time, event, struct_rows, leaf_rows, feats_n,
                          min_leaf, max_depth, depth, e, rule) {
   node <- list(leaf = TRUE, rows = leaf_rows)
@@ -166,6 +207,15 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
                         max_depth, depth + 1L, e, rule))
 }
 
+#' .qsfrgr_leaf_of
+#'
+#' Part of the qsfrgr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param x See Usage.
+#' @return The value of \code{$}.
+#' @export
 .qsfrgr_leaf_of <- function(node, x) {
   while (!node$leaf)
     node <- if (x[node$f] <= node$thr) node$l else node$r

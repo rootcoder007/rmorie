@@ -13,6 +13,15 @@
 .alfbnp_S_MIN <- 4e-4
 .alfbnp_RHO <- 7.0
 
+#' .alfbnp_atoms
+#'
+#' Part of the alfbnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param what See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .alfbnp_atoms <- function(x, what) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -24,6 +33,18 @@
   m
 }
 
+#' .alfbnp_schedule
+#'
+#' Part of the alfbnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param sigma_data See Usage.
+#' @param s_max See Usage.
+#' @param s_min See Usage.
+#' @param rho See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .alfbnp_schedule <- function(T, sigma_data, s_max, s_min, rho) {
   a <- s_max^(1.0 / rho)
   b <- s_min^(1.0 / rho)
@@ -36,6 +57,14 @@
   out
 }
 
+#' .alfbnp_centre
+#'
+#' Part of the alfbnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .alfbnp_centre <- function(X) {
   cen <- colSums(X) / nrow(X)
   for (a in 1:3) X[, a] <- X[, a] - cen[a]
@@ -45,6 +74,18 @@
 # Denoising score matching, solved exactly. At each noise level the optimal
 # linear map is a ridge regression with a closed form; descending to it
 # would only add a tolerance for the two arms to disagree about.
+#' Denoising score matching, solved exactly. At each noise level the
+#' optimal
+#'
+#' linear map is a ridge regression with a closed form; descending to it
+#' would only add a tolerance for the two arms to disagree about.
+#'
+#' @param clean See Usage.
+#' @param sigmas See Usage.
+#' @param draws See Usage.
+#' @param ridge See Usage.
+#' @return The value of \code{coefs}, as built in the body.
+#' @export
 .alfbnp_fit_linear <- function(clean, sigmas, draws, ridge) {
   n <- nrow(clean[[1]])
   coefs <- numeric(length(sigmas))
@@ -71,6 +112,16 @@
 # what a caller who stacked their structures would naturally pass. lapply
 # over a 3-D array walks the wrong dimension and silently produces garbage,
 # so normalise before anything touches it.
+#' May arrive as a list of n x 3 matrices, or as a single 3-D array
+#'
+#' (k x n x 3) -- which is what jsonlite hands back for a nested list,
+#' and what a caller who stacked their structures would naturally pass.
+#' lapply over a 3-D array walks the wrong dimension and silently
+#' produces garbage, so normalise before anything touches it.
+#'
+#' @param clean See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .alfbnp_clean_list <- function(clean) {
   if (is.array(clean) && length(dim(clean)) == 3L) {
     d <- dim(clean)
@@ -247,6 +298,13 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
                      "`noise` to recover genuinely stochastic sampling."))
 }
 
+#' .alfbnp_cheatsheet
+#'
+#' Part of the alfbnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .alfbnp_cheatsheet <- function() {
   paste0("alfbnp: morie_alfbnp_af3_sample(n_atoms, denoiser=) or (clean=) ",
          "-> AlphaFold-3 diffusion sampling (Abramson et al. 2024 Nature ",

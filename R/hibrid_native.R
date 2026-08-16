@@ -32,6 +32,20 @@
 # Refinement stops while adjacent grid values still differ by far more than
 # floating-point noise. Going finer would push the comparison back below the
 # noise floor and reintroduce exactly the disagreement this exists to remove.
+#' Refinement stops while adjacent grid values still differ by far more
+#' than
+#'
+#' floating-point noise. Going finer would push the comparison back
+#' below the noise floor and reintroduce exactly the disagreement this
+#' exists to remove.
+#'
+#' @param f See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param points Defaults to \code{201L}.
+#' @param stages Defaults to \code{4L}.
+#' @return The value of \code{a}, as built in the body.
+#' @export
 .hibrid_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
   a <- as.numeric(lo); b <- as.numeric(hi)
   npt <- as.integer(points)
@@ -53,6 +67,14 @@
   a
 }
 
+#' .hibrid_rows
+#'
+#' Part of the hibrid_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .hibrid_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -62,6 +84,14 @@
   m
 }
 
+#' .hibrid_chol
+#'
+#' Part of the hibrid_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .hibrid_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -83,6 +113,15 @@
   L
 }
 
+#' .hibrid_solve
+#'
+#' Part of the hibrid_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .hibrid_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -100,9 +139,30 @@
   x
 }
 
+#' .hibrid_logdet
+#'
+#' Part of the hibrid_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @return A numeric value.
+#' @export
 .hibrid_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 # Restricted log likelihood at the two ratios, sigma_e^2 profiled out.
+#' Restricted log likelihood at the two ratios, sigma_e^2 profiled out
+#'
+#' Part of the hibrid_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param la See Usage.
+#' @param ls See Usage.
+#' @param Kg See Usage.
+#' @param Ks See Usage.
+#' @param y See Usage.
+#' @param X See Usage.
+#' @return A list with \code{ll}, \code{beta}, \code{s2e}, \code{L}.
+#' @export
 .hibrid_reml_at <- function(la, ls, Kg, Ks, y, X) {
   n <- length(y); p <- ncol(X)
   V <- Kg / la + Ks / ls
@@ -271,6 +331,13 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
                      "reporting an SCA variance."))
 }
 
+#' .hibrid_cheatsheet
+#'
+#' Part of the hibrid_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .hibrid_cheatsheet <- function() {
   paste0("hibrid: morie_hibrid_hibrid_prediction(y, p1_geno, p2_geno) -> ",
          "GCA and SCA variance components and hybrid predictions from ",

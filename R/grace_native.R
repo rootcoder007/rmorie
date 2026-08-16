@@ -64,6 +64,16 @@
 
 .grace_eps <- 1e-12
 
+#' .grace_drop_edges
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param p See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{[}.
+#' @export
 .grace_drop_edges <- function(edges, p, rng) {
   pp <- as.numeric(p)
   if (pp < 0 || pp >= 1) {
@@ -75,6 +85,16 @@
   edges[u >= pp]
 }
 
+#' .grace_mask_features
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param p See Usage.
+#' @param rng See Usage.
+#' @return A list with \code{X}, \code{kept}, \code{n_masked}.
+#' @export
 .grace_mask_features <- function(X, p, rng) {
   pp <- as.numeric(p)
   if (pp < 0 || pp >= 1) {
@@ -97,12 +117,33 @@
   list(X = masked, kept = keep, n_masked = as.integer(d - sum(keep)))
 }
 
+#' .grace_generate_view
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param edges See Usage.
+#' @param p_edge See Usage.
+#' @param p_feature See Usage.
+#' @param rng See Usage.
+#' @return A list with \code{X}, \code{edges}, \code{n_masked_features}.
+#' @export
 .grace_generate_view <- function(X, edges, p_edge, p_feature, rng) {
   m <- .grace_mask_features(X, p_feature, rng)
   list(X = m$X, edges = .grace_drop_edges(edges, p_edge, rng),
        n_masked_features = m$n_masked)
 }
 
+#' .grace_cos
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .grace_cos <- function(a, b) {
   na <- sqrt(sum(a * a))
   nb <- sqrt(sum(b * b))
@@ -112,6 +153,18 @@
   sum(a * b) / (na * nb)
 }
 
+#' .grace_pair_loss
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param U See Usage.
+#' @param V See Usage.
+#' @param i See Usage.
+#' @param tau Defaults to \code{0.5}.
+#' @param intra Defaults to \code{TRUE}.
+#' @return A numeric value.
+#' @export
 .grace_pair_loss <- function(U, V, i, tau = 0.5, intra = TRUE) {
   t <- as.numeric(tau)
   if (t <= 0) {
@@ -133,6 +186,17 @@
   -log(pos / (pos + inter + same))
 }
 
+#' .grace_objective
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param U See Usage.
+#' @param V See Usage.
+#' @param tau Defaults to \code{0.5}.
+#' @param intra Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{loss}, \code{tau}, \code{intra_view_negatives}, \code{n_nodes}, \code{method}, \code{note}.
+#' @export
 .grace_objective <- function(U, V, tau = 0.5, intra = TRUE) {
   U <- as.matrix(U)
   V <- as.matrix(V)
@@ -159,6 +223,13 @@
   )
 }
 
+#' .grace_cheatsheet
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .grace_cheatsheet <- function() {
   paste("grace: contrast NODE AGAINST NODE, not node against a ",
         "global summary -- DGI's local-global objective leans on ",
@@ -263,6 +334,13 @@ morie_graphcontrastive <- function(U, V, tau = 0.5, intra = TRUE) {
   .grace_objective(U, V, tau, intra)
 }
 
+#' .grace_morie_cheatsheet
+#'
+#' Part of the grace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return The value of \code{.grace_cheatsheet}.
+#' @export
 .grace_morie_cheatsheet <- function() {
   .grace_cheatsheet()
 }

@@ -15,20 +15,56 @@
 
 .ghc_M32 <- 4294967296
 
+#' BitwXor is signed-32-bit; split into 16-bit halves to stay in range
+#'
+#' Part of the helpers_ghc_rng implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .ghc_xor32 <- function(a, b) {
   # bitwXor is signed-32-bit; split into 16-bit halves to stay in range.
   bitwXor(a %/% 65536, b %/% 65536) * 65536 + bitwXor(a %% 65536, b %% 65536)
 }
 
+#' .ghc_xor64
+#'
+#' Part of the helpers_ghc_rng implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{hi}, \code{lo}.
+#' @export
 .ghc_xor64 <- function(a, b)
   list(hi = .ghc_xor32(a$hi, b$hi), lo = .ghc_xor32(a$lo, b$lo))
 
+#' .ghc_add64
+#'
+#' Part of the helpers_ghc_rng implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{hi}, \code{lo}.
+#' @export
 .ghc_add64 <- function(a, b) {
   lo <- a$lo + b$lo
   carry <- lo %/% .ghc_M32
   list(hi = (a$hi + b$hi + carry) %% .ghc_M32, lo = lo %% .ghc_M32)
 }
 
+#' Logical right shift, 0 < k < 32 (the only widths SplitMix64 uses)
+#'
+#' Part of the helpers_ghc_rng implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param k See Usage.
+#' @return A list with \code{hi}, \code{lo}.
+#' @export
 .ghc_shr64 <- function(a, k) {
   # logical right shift, 0 < k < 32 (the only widths SplitMix64 uses)
   p <- 2^k
@@ -36,6 +72,15 @@
        lo = floor(a$lo / p) + (a$hi %% p) * 2^(32 - k))
 }
 
+#' Exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
+#'
+#' Part of the helpers_ghc_rng implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{hi}, \code{lo}.
+#' @export
 .ghc_mul32 <- function(a, b) {
   # exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
   a0 <- a %% 65536; a1 <- a %/% 65536
@@ -46,6 +91,15 @@
        lo = lo %% .ghc_M32)
 }
 
+#' (a * b) mod 2^64: only the low word of each cross term survives
+#'
+#' Part of the helpers_ghc_rng implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{hi}, \code{lo}.
+#' @export
 .ghc_mul64 <- function(a, b) {
   # (a * b) mod 2^64: only the low word of each cross term survives
   r <- .ghc_mul32(a$lo, b[2])
@@ -203,6 +257,18 @@
 # double stops being exact -- and with integer literals it overflows to
 # NA outright. Split the state into 16-bit limbs and reduce each partial
 # product before recombining, so every intermediate stays below 2^53.
+#' Glibc\'s LCG, exactly. Several modules mirror a Python arm that does
+#'
+#' (1103515245 * st + 12345) % (1 << 31) in big integers. Written
+#' directly in R that product reaches 2.4e18, far past the 2^53 where a
+#' double stops being exact -- and with integer literals it overflows to
+#' NA outright. Split the state into 16-bit limbs and reduce each
+#' partial product before recombining, so every intermediate stays below
+#' 2^53.
+#'
+#' @param st See Usage.
+#' @return A numeric value.
+#' @export
 .ghc_lcg31 <- function(st) {
   hi <- st %/% 65536
   lo <- st %% 65536
@@ -212,6 +278,14 @@
 }
 
 # The uniform the Python arms take from it: st / 2^31 AFTER the step.
+#' The uniform the Python arms take from it: st / 2^31 AFTER the step
+#'
+#' Part of the helpers_ghc_rng implementation; see the file header for
+#' the source it follows.
+#'
+#' @param env See Usage.
+#' @return A numeric value.
+#' @export
 .ghc_lcg31_unif <- function(env) {
   env$st <- .ghc_lcg31(env$st)
   env$st / 2147483648

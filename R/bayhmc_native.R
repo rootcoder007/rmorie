@@ -221,6 +221,15 @@ DELTA_MAX <- 1000.0
 
 # Central-difference numerical gradient, used when the caller does
 # not supply one. Same step h = 1e-5 as the Python arm.
+#' Central-difference numerical gradient, used when the caller does
+#'
+#' not supply one. Same step h = 1e-5 as the Python arm.
+#'
+#' @param logp See Usage.
+#' @param theta See Usage.
+#' @param h Defaults to \code{1e-05}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .bayhmc_num_grad <- function(logp, theta, h = 1e-5) {
   d <- length(theta)
   out <- numeric(d)
@@ -236,6 +245,15 @@ DELTA_MAX <- 1000.0
 
 # The joint density in (theta, r) up to a constant: log p(theta) +
 # log p(r), with p(r) the standard normal so log p(r) = -r.r/2.
+#' The joint density in (theta, r) up to a constant: log p(theta) +
+#'
+#' log p(r), with p(r) the standard normal so log p(r) = -r.r/2.
+#'
+#' @param logp See Usage.
+#' @param theta See Usage.
+#' @param r See Usage.
+#' @return A numeric value.
+#' @export
 .joint <- function(logp, theta, r) {
   logp(theta) - 0.5 * sum(r * r)
 }

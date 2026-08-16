@@ -82,6 +82,14 @@ tukey_hanning_kernel <- function(x) {
   `tukey-hanning` = tukey_hanning_kernel
 )
 
+#' .check_kernel
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param kernel See Usage.
+#' @return A list with \code{fun}, \code{const}, \code{name}.
+#' @export
 .check_kernel <- function(kernel) {
   if (!(kernel %in% names(.KERNELS))) {
     stop(sprintf("andmnh: kernel must be one of %s, got %s",
@@ -122,6 +130,14 @@ moment_vectors <- function(e, X) {
 # matrix utilities (base R)
 # --------------------------------------------------------------------------
 
+#' Returns U, s, V (V transposed, like np.linalg.svd with full matrices)
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return A list with \code{u}, \code{s}, \code{v}.
+#' @export
 .svd_r <- function(a) {
   # returns U, s, V (V transposed, like np.linalg.svd with full matrices)
   a <- as.matrix(a)
@@ -130,6 +146,15 @@ moment_vectors <- function(e, X) {
   list(u = s$u, s = s$d, v = s$v)
 }
 
+#' .singular_value_adjust
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param cap Defaults to \code{0.97}.
+#' @return The value of \code{%*%}.
+#' @export
 .singular_value_adjust <- function(a, cap = 0.97) {
   cap <- as.numeric(cap)
   if (!(cap > 0 && cap < 1)) {
@@ -145,6 +170,15 @@ moment_vectors <- function(e, X) {
 }
 
 # solve a linear system
+#' Solve a linear system
+#'
+#' Part of the andmnh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A matrix, from \code{solve}.
+#' @export
 .solve_safe <- function(A, b) {
   A <- as.matrix(A)
   storage.mode(A) <- "double"

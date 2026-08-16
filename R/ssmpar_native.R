@@ -25,6 +25,15 @@
 .ssmpar_EPS <- 1e-12
 
 
+#' (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
+#'
+#' Part of the ssmpar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param left See Usage.
+#' @param right See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .ssmpar_compose <- function(left, right) {
   # (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
   left <- as.numeric(left)
@@ -69,6 +78,14 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 }
 
 
+#' Build the tree of partial compositions (private helper)
+#'
+#' Part of the ssmpar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @return The value of \code{tree}, as built in the body.
+#' @export
 .ssmpar_upsweep <- function(P) {
   # Build the tree of partial compositions (private helper).
   tree <- list()
@@ -195,6 +212,13 @@ scan_depth <- function(length) {
 }
 
 
+#' .ssmpar_cheatsheet
+#'
+#' Part of the ssmpar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .ssmpar_cheatsheet <- function() {
   paste0(
     "ssmpar: x_t = A_t x_{t-1} + b_t looks sequential, but each step is ",

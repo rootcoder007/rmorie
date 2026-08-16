@@ -95,6 +95,15 @@ shrink_covariance <- function(residuals, lam = NULL) {
   list(cov = Sig_shr, lambda = lam)
 }
 
+#' ._cholsolve
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 ._cholsolve <- function(A, b) {
   A <- as.matrix(A)
   # chol() returns the UPPER factor U with A = t(U) %*% U, so the
@@ -225,6 +234,13 @@ morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
   mint_reconcile(base, S, method, residuals, W, ridge)
 }
 
+#' .hierF_cheatsheet
+#'
+#' Part of the hierF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .hierF_cheatsheet <- function() {
   paste("hierF: y = S b, reconcile with ytilde = S P yhat where P = (S'W^-1 S)^-1 S'W^-1 minimises tr(P W P') subject to PS = I (MinT). PS = I makes SP a PROJECTION -- an already coherent forecast is left alone. Wrong P still adds up, because S forces that; it is just the wrong coherent point. W: ols=I, wls=diag, shrink=the paper's default because the full covariance is singular when m > T.")
 }

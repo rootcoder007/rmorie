@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Bilinear sample of a feature map at a real-valued location.
+#' Bilinear sample of a feature map at a real-valued location
+#'
+#' Part of the defdtr implementation; see the file header for the source
+#' it follows.
+#'
+#' @param F See Usage.
+#' @param y See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .defdtr_bilinear <- function(F, y, x) {
   H <- nrow(F); W <- ncol(F)
   y <- min(max(y, 0), H - 1)

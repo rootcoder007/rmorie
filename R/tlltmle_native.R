@@ -63,11 +63,27 @@
 #' data and causal inference models", *Biometrics* 61(4), 962-973,
 #' doi:10.1111/j.1541-0420.2005.00377.x.
 
+#' .tlltmle_logit
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tlltmle_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   return(log(q / (1.0 - q)))
 }
 
+#' .tlltmle_expit
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .tlltmle_expit <- function(x) {
   ifelse(x > -700, 1.0 / (1.0 + exp(-x)), 0.0)
 }

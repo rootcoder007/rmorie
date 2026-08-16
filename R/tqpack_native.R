@@ -16,6 +16,15 @@
 #' length, and that is the property the anchors check exhaustively rather
 #' than on a sample.
 
+#' .tqpack_pack_indices
+#'
+#' Part of the tqpack_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param indices See Usage.
+#' @param bits See Usage.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 .tqpack_pack_indices <- function(indices, bits) {
   b <- as.integer(bits)
   if (is.na(b) || b < 1L || b > 32L) {
@@ -92,6 +101,16 @@
   return(result)
 }
 
+#' .tqpack_unpack_indices
+#'
+#' Part of the tqpack_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data See Usage.
+#' @param bits See Usage.
+#' @param count See Usage.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 .tqpack_unpack_indices <- function(data, bits, count) {
   b <- as.integer(bits)
   if (is.na(b) || b < 1L || b > 32L) {
@@ -156,6 +175,13 @@
   return(result)
 }
 
+#' .tqpack_cheatsheet
+#'
+#' Part of the tqpack_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tqpack_cheatsheet <- function() {
   return("tqpack: pack b-bit indices big-endian, index 0 in the top b bits of byte 0, crossing byte boundaries; tail padded on the right; n_bytes = ceil(n*b/8); round-trip is exact.")
 }

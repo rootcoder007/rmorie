@@ -16,6 +16,14 @@
 .flow_an_EPS <- 1e-12
 .LOG2PI <- log(2 * pi)
 
+#' .flow_an_to_mat
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .flow_an_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   X <- as.matrix(X)
@@ -23,6 +31,15 @@
   X
 }
 
+#' .flow_an_quantile7
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sorted_x See Usage.
+#' @param q See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .flow_an_quantile7 <- function(sorted_x, q) {
   n <- length(sorted_x)
   pos <- q * (n + 1L)
@@ -34,6 +51,15 @@
     sorted_x[lo] + (pos - lo) * (sorted_x[hi] - sorted_x[lo])
 }
 
+#' .alternating_masks
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param d See Usage.
+#' @param n_layers See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .alternating_masks <- function(d, n_layers) {
   if (d < 2L) stop(sprintf("flow_an: need at least 2 dimensions, got %d", d))
   out <- vector("list", n_layers)
@@ -44,6 +70,20 @@
   out
 }
 
+#' .st
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param mask See Usage.
+#' @param Ws See Usage.
+#' @param bs See Usage.
+#' @param Wt See Usage.
+#' @param bt See Usage.
+#' @param scale_cap Defaults to \code{5}.
+#' @return A list with \code{s}, \code{t}.
+#' @export
 .st <- function(x, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
   xin <- x * mask
   hs <- as.numeric(as.matrix(Ws) %*% xin + bs)
@@ -53,18 +93,55 @@
   list(s = s, t = t)
 }
 
+#' .coupling_forward
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param mask See Usage.
+#' @param Ws See Usage.
+#' @param bs See Usage.
+#' @param Wt See Usage.
+#' @param bt See Usage.
+#' @param scale_cap Defaults to \code{5}.
+#' @return A list with \code{y}, \code{logdet}.
+#' @export
 .coupling_forward <- function(x, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
   r <- .st(x, mask, Ws, bs, Wt, bt, scale_cap)
   y <- x * mask + (1 - mask) * (x * exp(r$s) + r$t)
   list(y = y, logdet = sum(r$s))
 }
 
+#' .coupling_inverse
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param mask See Usage.
+#' @param Ws See Usage.
+#' @param bs See Usage.
+#' @param Wt See Usage.
+#' @param bt See Usage.
+#' @param scale_cap Defaults to \code{5}.
+#' @return A list with \code{x}, \code{logdet}.
+#' @export
 .coupling_inverse <- function(y, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
   r <- .st(y, mask, Ws, bs, Wt, bt, scale_cap)
   x <- y * mask + (1 - mask) * ((y - r$t) * exp(-r$s))
   list(x = x, logdet = -sum(r$s))
 }
 
+#' .flow_forward
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param layers See Usage.
+#' @return A list with \code{z}, \code{logdet}.
+#' @export
 .flow_forward <- function(x, layers) {
   z <- as.numeric(x)
   logdet <- 0
@@ -76,6 +153,15 @@
   list(z = z, logdet = logdet)
 }
 
+#' .flow_inverse
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param layers See Usage.
+#' @return A list with \code{x}, \code{logdet}.
+#' @export
 .flow_inverse <- function(z, layers) {
   x <- as.numeric(z)
   logdet <- 0
@@ -87,12 +173,32 @@
   list(x = x, logdet = logdet)
 }
 
+#' .log_prob
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param layers See Usage.
+#' @return A list with \code{lp}, \code{z}, \code{logdet}.
+#' @export
 .log_prob <- function(x, layers) {
   r <- .flow_forward(x, layers)
   base <- -0.5 * sum(r$z * r$z) - 0.5 * length(r$z) * .LOG2PI
   list(lp = base + r$logdet, z = r$z, logdet = r$logdet)
 }
 
+#' .anomaly_score
+#'
+#' Part of the flow_an_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param layers See Usage.
+#' @param threshold_quantile Defaults to \code{0.95}.
+#' @param reference Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag}, \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced}, \code{log_likelihood}, \code{method}.
+#' @export
 .anomaly_score <- function(X, layers, threshold_quantile = 0.95, reference = NULL) {
   Xm <- .flow_an_to_mat(X)
   scores <- apply(Xm, 1, function(row) -.log_prob(row, layers)$lp)

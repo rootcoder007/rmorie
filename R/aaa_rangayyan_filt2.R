@@ -8,6 +8,14 @@
 # docstrings disagreed with the book, the book won -- see eq (3.111),
 # whose bracket sits INSIDE the exponential product.
 
+#' Expand prod (z - r_k) into ascending-power coefficients
+#'
+#' Part of the rangayyan_filt2 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param roots See Usage.
+#' @return The value of \code{coefs}, as built in the body.
+#' @export
 .morie_rg_polyroots <- function(roots) {
   # expand prod (z - r_k) into ascending-power coefficients
   coefs <- complex(real = 1, imaginary = 0)

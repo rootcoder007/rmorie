@@ -15,6 +15,16 @@
 
 # Exact P(D < d) for the two-sample statistic, no ties: the lattice
 # path recursion of R's psmirnov2x.
+#' Exact P(D < d) for the two-sample statistic, no ties: the lattice
+#'
+#' path recursion of R\'s psmirnov2x.
+#'
+#' @param d See Usage.
+#' @param n1 See Usage.
+#' @param n2 See Usage.
+#' @param two_sided Defaults to \code{TRUE}.
+#' @return The value of \code{[}.
+#' @export
 .mor_ks_psmirnov <- function(d, n1, n2, two_sided = TRUE) {
   md <- n1; nd <- n2
   q <- (0.5 + floor(d * md * nd - 1e-7)) / (md * nd)
@@ -34,6 +44,15 @@
 }
 
 # Two-sided asymptotic Kolmogorov series with Stephens' correction.
+#' Two-sided asymptotic Kolmogorov series with Stephens\' correction
+#'
+#' Part of the over_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .mor_ks_sf <- function(d, n) {
   lam <- d * (sqrt(n) + 0.12 + 0.11 / sqrt(n))
   if (lam < 0.04) {
@@ -54,6 +73,15 @@
 }
 
 # Two-sample Kolmogorov-Smirnov statistic and p-value.
+#' Two-sample Kolmogorov-Smirnov statistic and p-value
+#'
+#' Part of the over_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus}, \code{d_minus}, \code{n_ties}.
+#' @export
 .mor_ks_2samp <- function(a, b) {
   x <- sort(as.numeric(a)); y <- sort(as.numeric(b))
   n1 <- length(x); n2 <- length(y)

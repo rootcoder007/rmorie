@@ -24,6 +24,14 @@
   c(4.92, 4.60, 4.33, 4.16, 4.03, 3.69),
   c(5.13, 4.79, 4.52, 4.36, 4.22, 3.86))
 
+#' .t4_lccrit
+#'
+#' Part of the nybhsn implementation; see the file header for the source
+#' it follows.
+#'
+#' @param df See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .t4_lccrit <- function(df) {
   df <- as.integer(df)
   if (df < 1L || df > nrow(.t4_LC_TABLE))

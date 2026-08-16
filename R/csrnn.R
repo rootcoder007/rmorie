@@ -1,6 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Internal: nearest-neighbour distance for each row of an (n x d) pattern.
+#' Internal: nearest-neighbour distance for each row of an (n x d)
+#' pattern
+#'
+#' Part of the csrnn implementation; see the file header for the source
+#' it follows.
+#'
+#' @param P See Usage.
+#' @return The value of \code{apply}.
+#' @export
 .csrnn_distances <- function(P) {
   d <- as.matrix(stats::dist(P))
   diag(d) <- Inf
@@ -8,11 +17,29 @@
 }
 
 # Internal: G-hat(y) = #(y_i <= y) / n, evaluated on `grid`.
+#' Internal: G-hat(y) = #(y_i <= y) / n, evaluated on `grid`
+#'
+#' Part of the csrnn implementation; see the file header for the source
+#' it follows.
+#'
+#' @param nn See Usage.
+#' @param grid See Usage.
+#' @return A numeric value.
+#' @export
 .csrnn_G <- function(nn, grid) {
   findInterval(grid, sort(nn)) / length(nn)
 }
 
 # Internal: normalise `window` to a d x 2 matrix of (min, max) rows.
+#' Internal: normalise `window` to a d x 2 matrix of (min, max) rows
+#'
+#' Part of the csrnn implementation; see the file header for the source
+#' it follows.
+#'
+#' @param window See Usage.
+#' @param P See Usage.
+#' @return The value of \code{bounds}, as built in the body.
+#' @export
 .csrnn_window <- function(window, P) {
   d <- ncol(P)
   if (is.null(window)) {

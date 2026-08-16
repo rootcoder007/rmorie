@@ -89,6 +89,14 @@
 
 # ---- core helpers (would live in _s03core in Python) ----
 
+#' .saigeg_sigmoid
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .saigeg_sigmoid <- function(x) {
   x <- as.numeric(x)
   out <- numeric(length(x))
@@ -99,10 +107,26 @@
   out
 }
 
+#' .saigeg_pnorm
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{pnorm}.
+#' @export
 .saigeg_pnorm <- function(x) {
   pnorm(x)
 }
 
+#' .saigeg_variance
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .saigeg_variance <- function(x) {
   x <- as.numeric(x)
   n <- length(x)
@@ -111,6 +135,15 @@
   sum((x - m)^2) / (n - 1)
 }
 
+#' .saigeg_design
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param n See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .saigeg_design <- function(X, n) {
   if (is.null(X)) {
     return(matrix(1, nrow=n, ncol=1))
@@ -143,6 +176,16 @@
   stop("saigeg: invalid X for design matrix")
 }
 
+#' .saigeg_logit_irls
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .saigeg_logit_irls <- function(D, y, ridge=1e-8) {
   n <- nrow(D)
   p <- ncol(D)
@@ -166,6 +209,16 @@
   beta
 }
 
+#' .saigeg_fit_null
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{mu}, \code{beta}.
+#' @export
 .saigeg_fit_null <- function(y, X, ridge=1e-8) {
   D <- .saigeg_design(X, length(y))
   beta <- .saigeg_logit_irls(D, y, ridge=ridge)
@@ -174,6 +227,16 @@
   list(mu=mu, beta=beta)
 }
 
+#' .saigeg_score_statistic
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param G See Usage.
+#' @param mu See Usage.
+#' @return A list with \code{score}, \code{variance}, \code{n}.
+#' @export
 .saigeg_score_statistic <- function(y, G, mu) {
   yv <- as.numeric(y)
   gv <- as.numeric(G)
@@ -194,6 +257,17 @@
   list(score=s, variance=v, n=n)
 }
 
+#' .saigeg_cgf
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param G See Usage.
+#' @param mu See Usage.
+#' @param order Defaults to \code{0}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .saigeg_cgf <- function(t, G, mu, order=0) {
   gv <- as.numeric(G)
   mv <- as.numeric(mu)
@@ -216,6 +290,20 @@
   }
 }
 
+#' .saigeg_solve_saddle
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param G See Usage.
+#' @param mu See Usage.
+#' @param lo Defaults to \code{-50}.
+#' @param hi Defaults to \code{50}.
+#' @param tol Defaults to \code{1e-11}.
+#' @param iters Defaults to \code{200}.
+#' @return A numeric value.
+#' @export
 .saigeg_solve_saddle <- function(s, G, mu, lo=-50, hi=50, tol=1e-11, iters=200) {
   fl <- .saigeg_cgf(lo, G, mu, 1) - s
   fh <- .saigeg_cgf(hi, G, mu, 1) - s
@@ -237,6 +325,17 @@
   0.5 * (lo + hi)
 }
 
+#' .saigeg_saddlepoint_pvalue
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param G See Usage.
+#' @param mu See Usage.
+#' @param two_sided Defaults to \code{TRUE}.
+#' @return A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K}, \code{K2}, \code{method}.
+#' @export
 .saigeg_saddlepoint_pvalue <- function(s, G, mu, two_sided=TRUE) {
   sv <- as.numeric(s)
   var0 <- .saigeg_cgf(0, G, mu, 2)
@@ -279,6 +378,16 @@
   )
 }
 
+#' .saigeg_normal_pvalue
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param variance See Usage.
+#' @param two_sided Defaults to \code{TRUE}.
+#' @return A list with \code{p_value}, \code{z}, \code{method}.
+#' @export
 .saigeg_normal_pvalue <- function(s, variance, two_sided=TRUE) {
   if (as.numeric(variance) <= 0) {
     stop("saigeg: the variance must be positive")
@@ -296,6 +405,15 @@
   )
 }
 
+#' .saigeg_variance_ratio
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores_full See Usage.
+#' @param scores_naive See Usage.
+#' @return A list with \code{ratio}, \code{var_full}, \code{var_naive}, \code{n_variants}.
+#' @export
 .saigeg_variance_ratio <- function(scores_full, scores_naive) {
   a <- as.numeric(scores_full)
   b <- as.numeric(scores_naive)
@@ -315,6 +433,13 @@
   )
 }
 
+#' .saigeg_cheatsheet
+#'
+#' Part of the saigeg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .saigeg_cheatsheet <- function() {
   "saigeg: SAIGE. Score S = sum G_i (Y_i - mu_i) from a logistic mixed model. Under 1:100 case-control imbalance S is right-skewed and the GAUSSIAN tail is far too thin, so p-values come out much too small. The saddlepoint approximation uses the whole CGF -- all cumulants -- via Lugannani-Rice, and stays calibrated in the tail. The variance ratio is estimated once and reused so the cost is not O(MN^2)."
 }

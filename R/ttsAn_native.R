@@ -24,6 +24,15 @@
 # bisection for the quantile, same first-maximum tie-break in the ESD
 # loop, and the same "last i with C_i > lambda_i" anomaly count.
 
+#' .mor_tts_t_cdf
+#'
+#' Part of the ttsAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_tts_t_cdf <- function(t, v) {
   x <- v / (v + t * t)
   p <- 0.5 * pbeta(x, v / 2, 0.5)
@@ -59,11 +68,30 @@ morie_t_quantile <- function(p, v) {
   if (neg) -q else q
 }
 
+#' .mor_tts_median
+#'
+#' Part of the ttsAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_tts_median <- function(v) {
   s <- sort(v); n <- length(s); mid <- n %/% 2L
   if (n %% 2L == 1L) s[mid + 1L] else 0.5 * (s[mid] + s[mid + 1L])
 }
 
+#' .mor_tts_esd
+#'
+#' Part of the ttsAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param res See Usage.
+#' @param k See Usage.
+#' @param alpha See Usage.
+#' @param hybrid Defaults to \code{TRUE}.
+#' @return A list with \code{anoms}, \code{stats}, \code{lams}.
+#' @export
 .mor_tts_esd <- function(res, k, alpha, hybrid = TRUE) {
   n <- length(res)
   idx <- seq_len(n) - 1L

@@ -29,13 +29,38 @@
 
 .MEHTAD_EPS <- 1e-12
 
+#' .mehtad_mat
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mehtad_mat <- function(X) {
   if (is.matrix(X)) X
   else do.call(rbind, lapply(X, function(r) as.numeric(unlist(r))))
 }
 
+#' .mehtad_vec
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .mehtad_vec <- function(v) as.numeric(unlist(v))
 
+#' .mehtad_cholsolve
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param rhs See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .mehtad_cholsolve <- function(M, rhs) {
   L <- chol(M)
   as.numeric(solve(t(L), solve(L, rhs)))
@@ -114,6 +139,17 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
        note = "ratio near 1 means the affine trajectory is badly approximated locally, so centre more")
 }
 
+#' .mehtad_solve_normal
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param d See Usage.
+#' @param rhs See Usage.
+#' @param ridge Defaults to \code{1e-11}.
+#' @return The value of \code{backsolve}.
+#' @export
 .mehtad_solve_normal <- function(A, d, rhs, ridge = 1e-11) {
   M <- as.matrix(A); storage.mode(M) <- "double"
   m <- nrow(M); n <- ncol(M)
@@ -218,6 +254,13 @@ solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
 predictor_corrector <- solve_lp
 mehrotras_predictor <- solve_lp
 
+#' .mehtad_cheatsheet
+#'
+#' Part of the mehtad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .mehtad_cheatsheet <- function() {
   paste("mehtad: the expensive part of an interior-point iteration ",
         "is ONE factorisation of A D A'; a second right-hand side ",

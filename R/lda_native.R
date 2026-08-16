@@ -69,6 +69,14 @@
 
 .morie_lda_eps <- 1e-12
 
+#' .morie_lda_e_log_theta
+#'
+#' Part of the lda_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gamma See Usage.
+#' @return A numeric value.
+#' @export
 .morie_lda_e_log_theta <- function(gamma) {
   g <- as.numeric(gamma)
   if (any(g <= 0.0)) {
@@ -78,6 +86,18 @@
   return(.s03digamma(g) - s)
 }
 
+#' .morie_lda_variational_inference
+#'
+#' Part of the lda_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param doc See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param iters Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged}, \code{K}, \code{N}, \code{topic_proportions}.
+#' @export
 .morie_lda_variational_inference <- function(doc, alpha, beta, iters=100, tol=1e-8) {
   w <- as.integer(doc)
   B <- as.matrix(beta)
@@ -128,6 +148,18 @@
        topic_proportions=gam/sum(gam))
 }
 
+#' .morie_lda_elbo
+#'
+#' Part of the lda_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param doc See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param phi See Usage.
+#' @param gamma See Usage.
+#' @return The value of \code{val}, as built in the body.
+#' @export
 .morie_lda_elbo <- function(doc, alpha, beta, phi, gamma) {
   w <- as.integer(doc)
   B <- as.matrix(beta)
@@ -157,6 +189,21 @@
   return(val)
 }
 
+#' .morie_lda_variational_em
+#'
+#' Part of the lda_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param docs See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @param alpha Defaults to \code{0.1}.
+#' @param iters Defaults to \code{30}.
+#' @param inner Defaults to \code{50}.
+#' @param seed Defaults to \code{0}.
+#' @param tol Defaults to \code{1e-06}.
+#' @return A list with \code{estimate}, \code{beta}, \code{elbo_history}, \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations}, \code{method}.
+#' @export
 .morie_lda_variational_em <- function(docs, K, V, alpha=0.1, iters=30, inner=50,
                                       seed=0, tol=1e-6) {
   D <- lapply(docs, as.integer)
@@ -205,6 +252,16 @@
   )
 }
 
+#' .morie_lda_topic_words
+#'
+#' Part of the lda_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param n_top Defaults to \code{5}.
+#' @param vocab Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_lda_topic_words <- function(beta, n_top=5, vocab=NULL) {
   B <- as.matrix(beta)
   storage.mode(B) <- "double"
@@ -219,6 +276,13 @@
   return(out)
 }
 
+#' .morie_lda_cheatsheet
+#'
+#' Part of the lda_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .morie_lda_cheatsheet <- function() {
   paste(c(
     "lda: theta ~ Dir(alpha), z_n ~ Mult(theta), w_n ~ ",

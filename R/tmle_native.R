@@ -4,10 +4,36 @@
 # tmlmed, tmlivc, tmltvc, tmllng, npstm) and its shared targeting core
 # (_tmle.py).
 
+#' .morie_tmle_logit
+#'
+#' Part of the tmle_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .morie_tmle_logit <- function(p) log(p / (1 - p))
+#' .morie_tmle_expit
+#'
+#' Part of the tmle_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .morie_tmle_expit <- function(x) 1 / (1 + exp(-pmin(pmax(x, -35), 35)))
 
 # OLS fitted on `fit_rows` only, predicted for everyone.
+#' OLS fitted on `fit_rows` only, predicted for everyone
+#'
+#' Part of the tmle_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param fit_rows See Usage.
+#' @return The value of \code{as.vector}.
+#' @export
 .morie_tmle_ols_predict <- function(X, y, fit_rows) {
   D <- cbind(1, X)
   b <- qr.coef(qr(D[fit_rows, , drop = FALSE]), y[fit_rows])

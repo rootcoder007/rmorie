@@ -53,6 +53,15 @@
 
 CONSTRAINTS <- c("reference", "sum_zero")
 
+#' .frwil_prep
+#'
+#' Part of the frwil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param compounds See Usage.
+#' @param activity See Usage.
+#' @return A list with \code{C}, \code{y}, \code{k}.
+#' @export
 .frwil_prep <- function(compounds, activity) {
   C <- lapply(compounds, function(row) as.character(unlist(row)))
   y <- as.numeric(unlist(activity))
@@ -70,6 +79,15 @@ CONSTRAINTS <- c("reference", "sum_zero")
   list(C = C, y = y, k = k)
 }
 
+#' .frwil_design_matrix
+#'
+#' Part of the frwil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param compounds See Usage.
+#' @param constraint Defaults to \code{"reference"}.
+#' @return A list with \code{matrix}, \code{names}, \code{groups}, \code{columns}, \code{constraint}, \code{n_positions}, \code{reference}.
+#' @export
 .frwil_design_matrix <- function(compounds, constraint = "reference") {
   if (!(constraint %in% CONSTRAINTS)) {
     stop(sprintf("frwil: constraint must be one of %s, got %s",
@@ -125,6 +143,16 @@ CONSTRAINTS <- c("reference", "sum_zero")
   )
 }
 
+#' .frwil_lstsq
+#'
+#' Part of the frwil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{0}.
+#' @return A vector, from \code{vapply}.
+#' @export
 .frwil_lstsq <- function(M, y, ridge = 0.0) {
   n <- nrow(M)
   p <- ncol(M)
@@ -178,6 +206,16 @@ CONSTRAINTS <- c("reference", "sum_zero")
   vapply(seq_len(p), function(i) Ab[i, p + 1L] / Ab[i, i], numeric(1))
 }
 
+#' .frwil_free_wilson
+#'
+#' Part of the frwil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param compounds See Usage.
+#' @param activity See Usage.
+#' @param constraint Defaults to \code{"reference"}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{names}, \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{tss}, \code{r_squared}, \code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences}, \code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.
+#' @export
 .frwil_free_wilson <- function(compounds, activity, constraint = "reference") {
   prep <- .frwil_prep(compounds, activity)
   C <- prep$C
@@ -240,6 +278,15 @@ CONSTRAINTS <- c("reference", "sum_zero")
   )
 }
 
+#' .frwil_predict_activity
+#'
+#' Part of the frwil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param compound See Usage.
+#' @return The value of \code{total}, as built in the body.
+#' @export
 .frwil_predict_activity <- function(fit, compound) {
   row <- as.character(unlist(compound))
   if (length(row) != fit$n_positions) {

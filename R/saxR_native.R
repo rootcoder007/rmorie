@@ -31,6 +31,15 @@ morie_sax_breakpoints <- function(alphabet) {
          numeric(1))
 }
 
+#' .mor_sax_paa
+#'
+#' Part of the saxR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param w See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .mor_sax_paa <- function(z, w) {
   n <- length(z)
   if (n %% w != 0L)

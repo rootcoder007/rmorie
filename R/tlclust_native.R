@@ -168,6 +168,13 @@ g_formula_sequential <- function(Q_seq) {
        note = "identifies the same estimand; fails differently under misspecification")
 }
 
+#' .tlclust_cheatsheet
+#'
+#' Part of the tlclust_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlclust_cheatsheet <- function() {
   paste("tlclust: PROBIT randomised HOSPITALS because breastfeeding ",
         "cannot be allocated. Hospitalisation is both part of the ",

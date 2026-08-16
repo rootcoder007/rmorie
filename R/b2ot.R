@@ -20,6 +20,14 @@
 # Collision scan: b2ot.R and all thirteen exported names were free in
 # both R trees and in _lazy_map.json at the time of writing.
 
+#' .b2mat
+#'
+#' Part of the b2ot implementation; see the file header for the source
+#' it follows.
+#'
+#' @param a See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .b2mat <- function(a) {
   m <- if (is.matrix(a)) a else do.call(rbind, lapply(a, as.numeric))
   storage.mode(m) <- "double"
@@ -27,6 +35,14 @@
   m
 }
 
+#' .b2close
+#'
+#' Part of the b2ot implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .b2close <- function(p) {
   p <- as.numeric(p)
   if (any(p < 0)) stop("probabilities must be non-negative", call. = FALSE)
@@ -35,6 +51,16 @@
   p / tot
 }
 
+#' .b2margerr
+#'
+#' Part of the b2ot implementation; see the file header for the source
+#' it follows.
+#'
+#' @param T See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .b2margerr <- function(T, a, b) {
   max(max(abs(rowSums(T) - a)), max(abs(colSums(T) - b)))
 }
@@ -42,6 +68,19 @@
 # Sinkhorn scaling, FIXED iteration count.  K = exp(-C/eps), i.e.
 # Cuturi's exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v) then
 # v <- b/(K' u), started from v = 1.
+#' Sinkhorn scaling, FIXED iteration count.  K = exp(-C/eps), i.e
+#'
+#' Cuturi\'s exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v)
+#' then v <- b/(K\' u), started from v = 1.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param C See Usage.
+#' @param epsilon See Usage.
+#' @param max_iter Defaults to \code{200L}.
+#' @param trace Defaults to \code{FALSE}.
+#' @return A list with \code{T}, \code{u}, \code{v}, \code{a}, \code{b}, \code{trace}.
+#' @export
 .b2sinkhorn <- function(a, b, C, epsilon, max_iter = 200L, trace = FALSE) {
   eps <- as.numeric(epsilon)
   if (!(eps > 0)) stop("epsilon must be positive", call. = FALSE)

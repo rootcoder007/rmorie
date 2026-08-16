@@ -274,6 +274,13 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
   )
 }
 
+#' .inlasm_cheatsheet
+#'
+#' Part of the inlasm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .inlasm_cheatsheet <- function() {
   "inlasm: latent GAUSSIAN field x, a FEW hyperparameters theta, non-Gaussian response -- so the posterior marginals have no closed form. MCMC works in principle but has convergence AND time problems, sometimes badly enough that it is not appropriate for routine analysis. INLA is deterministic: p(x_i|y) = INTEGRAL p(x_i|theta,y) p(theta|y) dtheta, where the inner term is a LAPLACE approximation and the outer integral is a finite weighted SUM over a small design of theta -- which is exactly why dim(theta) must stay low. The Gaussian inner step is EXACT for a Gaussian likelihood; the simplified Laplace adds the skewness it cannot represent. Seconds or minutes against hours or days."
 }

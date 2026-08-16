@@ -194,6 +194,18 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
   list(draws = draws, accept = 1, info = list())
 }
 
+#' .baysmplr_leapfrog
+#'
+#' Part of the baysmplr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param grad See Usage.
+#' @param q See Usage.
+#' @param p See Usage.
+#' @param eps See Usage.
+#' @param steps See Usage.
+#' @return A list with \code{q}, \code{p}, \code{g}.
+#' @export
 .baysmplr_leapfrog <- function(grad, q, p, eps, steps) {
   g <- grad(q)
   for (t in seq_len(as.integer(steps))) {
@@ -247,6 +259,24 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 }
 
 # Hoffman and Gelman's recursive doubling, Algorithm 3.
+#' Hoffman and Gelman\'s recursive doubling, Algorithm 3
+#'
+#' Part of the baysmplr_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param log_p See Usage.
+#' @param grad See Usage.
+#' @param q See Usage.
+#' @param p See Usage.
+#' @param u See Usage.
+#' @param v See Usage.
+#' @param j See Usage.
+#' @param eps See Usage.
+#' @param e See Usage.
+#' @param h0 See Usage.
+#' @param dmax Defaults to \code{1000}.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .baysmplr_build_tree <- function(log_p, grad, q, p, u, v, j, eps, e, h0,
                                  dmax = 1000) {
   if (j == 0L) {

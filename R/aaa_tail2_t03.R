@@ -20,6 +20,14 @@
 # Local on purpose: the Python arms each carry their own copy too, so
 # the two languages run the identical arithmetic in the identical order.
 
+#' .morie_t2_inv
+#'
+#' Part of the tail2_t03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_t2_inv <- function(A) {
   k <- nrow(A)
   M <- cbind(A, diag(1, k))
@@ -176,6 +184,17 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 
 # ---- Cox (1972, 1975) partial likelihood, Breslow ties ---------------
 
+#' .morie_t2_coxterms
+#'
+#' Part of the tail2_t03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @return A list with \code{loglik}, \code{score}, \code{info}, \code{nevent}.
+#' @export
 .morie_t2_coxterms <- function(time, event, X, beta) {
   n <- length(time)
   p <- length(beta)
@@ -311,14 +330,44 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 
 # ---- Courant (1943) quadratic penalty method ------------------------
 
+#' .morie_t2_viol
+#'
+#' Part of the tail2_t03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param constraints See Usage.
+#' @param x See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_t2_viol <- function(constraints, x)
   vapply(constraints, function(g) max(0, as.numeric(g(x))), numeric(1))
 
+#' .morie_t2_qpen
+#'
+#' Part of the tail2_t03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param constraints See Usage.
+#' @param x See Usage.
+#' @param mu See Usage.
+#' @return A numeric value.
+#' @export
 .morie_t2_qpen <- function(f, constraints, x, mu) {
   v <- .morie_t2_viol(constraints, x)
   as.numeric(f(x)) + mu * sum(v * v)
 }
 
+#' .morie_t2_fdgrad
+#'
+#' Part of the tail2_t03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fun See Usage.
+#' @param x See Usage.
+#' @param h See Usage.
+#' @return The value of \code{g}, as built in the body.
+#' @export
 .morie_t2_fdgrad <- function(fun, x, h) {
   g <- numeric(length(x))
   for (k in seq_along(x)) {

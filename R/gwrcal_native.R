@@ -18,6 +18,16 @@
 .GWR_KERNELS <- c("gaussian", "bisquare", "tricube", "boxcar")
 .GWR_CRITERIA <- c("aicc", "cv", "aic")
 
+#' .gwr_kernel
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param h See Usage.
+#' @param kernel See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gwr_kernel <- function(d, h, kernel) {
   if (kernel == "gaussian") exp(-0.5 * (d / h)^2)
   else if (kernel == "bisquare") {
@@ -29,6 +39,14 @@
   }
 }
 
+#' .gwr_default_bounds
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param C See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .gwr_default_bounds <- function(C) {
   dmin <- dmax <- 0
   for (i in seq_len(nrow(C) - 1L)) {
@@ -41,6 +59,14 @@
   c(dmax / 1000, dmax)
 }
 
+#' .gwr_pairwise
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param C See Usage.
+#' @return The value of \code{D}, as built in the body.
+#' @export
 .gwr_pairwise <- function(C) {
   n <- nrow(C)
   D <- matrix(0, n, n)
@@ -51,6 +77,14 @@
   D
 }
 
+#' Pivoted Cholesky with a small ridge when the smallest pivot is
+#'
+#' essentially zero; returns a list with the cholesky factor, the
+#' rank-deficient count, and the effective rank threshold.
+#'
+#' @param M See Usage.
+#' @return A list with \code{L}, \code{rdef}, \code{piv}.
+#' @export
 .gwr_pivot_chol_rcond <- function(M) {
   # pivoted Cholesky with a small ridge when the smallest pivot is
   # essentially zero; returns a list with the cholesky factor, the
@@ -79,6 +113,19 @@
   list(L = L, rdef = rdef, piv = piv)
 }
 
+#' .gwr_fit
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param D See Usage.
+#' @param bw See Usage.
+#' @param kernel See Usage.
+#' @param adaptive See Usage.
+#' @return A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid}, \code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
+#' @export
 .gwr_fit <- function(y, X, D, bw, kernel, adaptive) {
   n <- length(y); p <- ncol(X)
   d_sorted <- apply(D, 1, sort)
@@ -159,6 +206,16 @@
        n_rank_deficient = rdef_total)
 }
 
+#' .gwr_aicc
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param sigma2 See Usage.
+#' @param tr_S See Usage.
+#' @return A numeric value.
+#' @export
 .gwr_aicc <- function(n, sigma2, tr_S) {
   if (sigma2 <= 0) return(-Inf)
   if (n - 2 - tr_S <= 0) return(Inf)
@@ -166,11 +223,34 @@
     n * (n + tr_S) / (n - 2 - tr_S)
 }
 
+#' .gwr_aic
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param sigma2 See Usage.
+#' @param tr_S See Usage.
+#' @return A numeric value.
+#' @export
 .gwr_aic <- function(n, sigma2, tr_S) {
   if (sigma2 <= 0) return(-Inf)
   2 * n * log(sigma2) + n * log(2 * pi) + n + tr_S
 }
 
+#' .gwr_cv_score
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param D See Usage.
+#' @param bw See Usage.
+#' @param kernel See Usage.
+#' @param adaptive See Usage.
+#' @return The value of \code{acc}, as built in the body.
+#' @export
 .gwr_cv_score <- function(y, X, D, bw, kernel, adaptive) {
   n <- length(y); p <- ncol(X); acc <- 0
   if (adaptive) {
@@ -213,6 +293,20 @@
   acc
 }
 
+#' .gwr_criterion
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param D See Usage.
+#' @param bw See Usage.
+#' @param kernel See Usage.
+#' @param adaptive See Usage.
+#' @param criterion See Usage.
+#' @return The value of \code{.gwr_aicc}.
+#' @export
 .gwr_criterion <- function(y, X, D, bw, kernel, adaptive, criterion) {
   if (criterion == "cv") return(.gwr_cv_score(y, X, D, bw, kernel, adaptive))
   fit <- .gwr_fit(y, X, D, bw, kernel, adaptive)
@@ -221,6 +315,17 @@
   .gwr_aicc(n, fit$sigma2, fit$tr_S)
 }
 
+#' .gwr_golden
+#'
+#' Part of the gwrcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fn See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param tol See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .gwr_golden <- function(fn, lo, hi, tol) {
   phi <- (sqrt(5) - 1) / 2
   a <- lo; b <- hi

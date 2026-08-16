@@ -73,6 +73,15 @@
 # CPython 3.12+ compensates a run of floats and R's sum() accumulates in
 # long double, so the two built-ins are different functions and a
 # comparison at the twelfth digit finds the difference.
+#' Neumaier-compensated sum. Written out rather than left to sum():
+#'
+#' CPython 3.12+ compensates a run of floats and R\'s sum() accumulates
+#' in long double, so the two built-ins are different functions and a
+#' comparison at the twelfth digit finds the difference.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .tipsne_csum <- function(v) {
   s <- 0; cc <- 0
   for (t in v) {
@@ -84,6 +93,15 @@
 }
 
 # Compensated dot product. Not sum(a * b), same reason.
+#' Compensated dot product. Not sum(a * b), same reason
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .tipsne_dot <- function(a, b) {
   s <- 0; cc <- 0
   n <- length(a)
@@ -99,6 +117,14 @@
 
 # Cholesky factor L with A = L L', lower triangular. Explicit rather than
 # chol() so the Python arm can match it element by element.
+#' Cholesky factor L with A = L L\', lower triangular. Explicit rather
+#' than
+#'
+#' chol() so the Python arm can match it element by element.
+#'
+#' @param a See Usage.
+#' @return The value of \code{lo}, as built in the body.
+#' @export
 .tipsne_chol <- function(a) {
   p <- nrow(a)
   lo <- matrix(0, p, p)
@@ -116,6 +142,15 @@
 }
 
 # Solve L L' x = b by forward then back substitution.
+#' Solve L L\' x = b by forward then back substitution
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lo See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .tipsne_solve_chol <- function(lo, b) {
   p <- nrow(lo)
   z <- numeric(p)
@@ -133,6 +168,14 @@
 }
 
 # (L L')^-1, formed column by column from the factor.
+#' (L L\')^-1, formed column by column from the factor
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lo See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tipsne_inv_from_chol <- function(lo) {
   p <- nrow(lo)
   cols <- lapply(seq_len(p), function(j) {
@@ -171,6 +214,16 @@ morie_tipsne_ancova <- function(y, design) {
 }
 
 # Intercept, arm indicator, then any covariates.
+#' Intercept, arm indicator, then any covariates
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param arm See Usage.
+#' @param X See Usage.
+#' @param n See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .tipsne_design <- function(arm, X, n) {
   m <- cbind(rep(1, n), as.numeric(arm))
   if (!is.null(X)) m <- cbind(m, as.matrix(X))
@@ -180,6 +233,18 @@ morie_tipsne_ancova <- function(y, design) {
 # beta* ~ N(betahat, sigma2 (X'X)^-1) via the Cholesky of the covariance.
 # The draw is coordinate by coordinate so the stream position matches the
 # Python arm term for term.
+#' Beta* ~ N(betahat, sigma2 (X\'X)^-1) via the Cholesky of the
+#' covariance
+#'
+#' The draw is coordinate by coordinate so the stream position matches
+#' the Python arm term for term.
+#'
+#' @param e See Usage.
+#' @param beta See Usage.
+#' @param xtx_inv See Usage.
+#' @param sigma2_draw See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .tipsne_draw_beta <- function(e, beta, xtx_inv, sigma2_draw) {
   p <- length(beta)
   cov <- sigma2_draw * xtx_inv
@@ -230,6 +295,14 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 .TIPSNE_LG <- c(76.18009172947146, -86.50532032941677, 24.01409824083091,
                 -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5)
 
+#' .tipsne_lgamma
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .tipsne_lgamma <- function(z) {
   x <- z
   tmp <- x + 5.5
@@ -243,6 +316,16 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 }
 
 # Lentz's algorithm for the beta continued fraction.
+#' Lentz\'s algorithm for the beta continued fraction
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @return The value of \code{h}, as built in the body.
+#' @export
 .tipsne_betacf <- function(a, b, x) {
   tiny <- 1e-30
   qab <- a + b; qap <- a + 1; qam <- a - 1
@@ -277,6 +360,16 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 }
 
 # Regularised incomplete beta I_x(a, b) by the continued fraction.
+#' Regularised incomplete beta I_x(a, b) by the continued fraction
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .tipsne_betainc <- function(a, b, x) {
   if (x <= 0) return(0)
   if (x >= 1) return(1)
@@ -290,6 +383,15 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 # Upper tail of Student's t, from the regularised incomplete beta.
 # Written out because pt() and the Python arm are separate
 # implementations and would disagree in the last digits.
+#' Upper tail of Student\'s t, from the regularised incomplete beta
+#'
+#' Written out because pt() and the Python arm are separate
+#' implementations and would disagree in the last digits.
+#'
+#' @param t See Usage.
+#' @param df See Usage.
+#' @return A numeric value.
+#' @export
 .tipsne_t_sf <- function(t, df) 0.5 * .tipsne_betainc(df / 2, 0.5, df / (df + t * t))
 
 #' Combine per-imputation estimates and variances by Rubin's rules
@@ -331,6 +433,14 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
        total = total, fmi = if (total > 0) (1 + 1 / m) * b / total else 0)
 }
 
+#' .tipsne_sd
+#'
+#' Part of the tipsne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .tipsne_sd <- function(v) {
   n <- length(v)
   mu <- .tipsne_csum(v) / n

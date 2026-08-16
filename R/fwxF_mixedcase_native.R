@@ -11,6 +11,18 @@
 .fwxF_FL <- c(-1.6, -1.6, -1.6, 0.9, 3.8, 5.8, 6.4, 5.0, 2.4, 0.4, -1.6, -1.6)
 
 
+#' Fine Fuel Moisture Code, statements 110-165 of the FTR-33 program
+#'
+#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param f0 See Usage.
+#' @param t See Usage.
+#' @param h See Usage.
+#' @param w See Usage.
+#' @param r See Usage.
+#' @return The value of \code{ffm}, as built in the body.
+#' @export
 .fwxF_ffmc_day <- function(f0, t, h, w, r) {
   # Fine Fuel Moisture Code, statements 110-165 of the FTR-33 program.
   wmo <- 147.2 * (101.0 - f0) / (59.5 + f0)
@@ -59,6 +71,18 @@
 }
 
 
+#' Duff Moisture Code, statements 165-210
+#'
+#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param p0 See Usage.
+#' @param t See Usage.
+#' @param h See Usage.
+#' @param r See Usage.
+#' @param month See Usage.
+#' @return A numeric value.
+#' @export
 .fwxF_dmc_day <- function(p0, t, h, r, month) {
   # Duff Moisture Code, statements 165-210.
   if (t < -1.1) {
@@ -87,6 +111,17 @@
 }
 
 
+#' Drought Code, statements 215-235
+#'
+#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param d0 See Usage.
+#' @param t See Usage.
+#' @param r See Usage.
+#' @param month See Usage.
+#' @return The value of \code{dc}, as built in the body.
+#' @export
 .fwxF_dc_day <- function(d0, t, r, month) {
   # Drought Code, statements 215-235.
   if (t < -2.8) {
@@ -111,6 +146,17 @@
 }
 
 
+#' ISI, BUI, FWI, DSR, statements 235-280
+#'
+#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param ffm See Usage.
+#' @param dmc See Usage.
+#' @param dc See Usage.
+#' @param w See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .fwxF_isi_bui_fwi <- function(ffm, dmc, dc, w) {
   # ISI, BUI, FWI, DSR, statements 235-280.
   fm <- 147.2 * (101.0 - ffm) / (59.5 + ffm)
@@ -215,6 +261,13 @@ morie_fwxF <- function(temp, rh, wind, rain, month,
 
 fire_weather_index <- morie_fwxF
 
+#' .fwxF_cheatsheet
+#'
+#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @return A character value.
+#' @export
 .fwxF_cheatsheet <- function() {
   "fwxF: Canadian FWI System daily FFMC/DMC/DC/ISI/BUI/FWI/DSR (FTR-33)"
 }

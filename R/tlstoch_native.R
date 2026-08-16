@@ -60,11 +60,27 @@
 # policies.
 
 # Private helpers (shared environment: prefix avoids collisions)
+#' Private helpers (shared environment: prefix avoids collisions)
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tlstoch_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
 }
 
+#' .tlstoch_mat
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .tlstoch_mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), nrow=0, ncol=0))
   if (is.matrix(x)) {
@@ -87,6 +103,17 @@
 
 .tlstoch_eps <- 1e-12
 
+#' .tlstoch_shift_regime
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param delta See Usage.
+#' @param lower Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @return A list with \code{shifted}, \code{delta}, \code{n_clipped}, \code{fraction_clipped}.
+#' @export
 .tlstoch_shift_regime <- function(A, delta, lower=NULL, upper=NULL) {
   a <- .tlstoch_vec(A)
   d <- as.numeric(delta)
@@ -109,6 +136,17 @@
        fraction_clipped=clipped / n)
 }
 
+#' .tlstoch_positivity_shift
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param delta See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param bins Defaults to \code{5}.
+#' @return A list with \code{fraction_outside}, \code{delta}, \code{bins}, \code{satisfied}, \code{note}.
+#' @export
 .tlstoch_positivity_shift <- function(A, delta, W=NULL, bins=5) {
   a <- .tlstoch_vec(A)
   d <- as.numeric(delta)
@@ -140,6 +178,19 @@
                   "only has to stay inside the CONDITIONAL support"))
 }
 
+#' .tlstoch_stochastic_estimand
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q_fn See Usage.
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param delta See Usage.
+#' @param lower Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @return A list with \code{psi}, \code{observed_mean}, \code{contrast}, \code{delta}.
+#' @export
 .tlstoch_stochastic_estimand <- function(Q_fn, A, W, delta,
                                         lower=NULL, upper=NULL) {
   a <- .tlstoch_vec(A)
@@ -160,6 +211,19 @@
        contrast=mean(vals) - mean(obs), delta=as.numeric(delta))
 }
 
+#' .tlstoch_density_ratio
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param delta See Usage.
+#' @param g_fn See Usage.
+#' @param lower Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @return A list with \code{H}, \code{max}, \code{mean}.
+#' @export
 .tlstoch_density_ratio <- function(A, W, delta, g_fn,
                                    lower=NULL, upper=NULL) {
   a <- .tlstoch_vec(A)
@@ -180,6 +244,22 @@
   list(H=out, max=max(out), mean=mean(out))
 }
 
+#' .tlstoch_shift_tmle
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param Q_fn See Usage.
+#' @param g_fn See Usage.
+#' @param delta See Usage.
+#' @param lower Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @param iters Defaults to \code{60}.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{delta}, \code{max_density_ratio}, \code{method}, \code{note}.
+#' @export
 .tlstoch_shift_tmle <- function(Y, A, W, Q_fn, g_fn, delta,
                                 lower=NULL, upper=NULL, iters=60) {
   y <- .tlstoch_vec(Y)
@@ -225,6 +305,13 @@
   )
 }
 
+#' .tlstoch_cheatsheet
+#'
+#' Part of the tlstoch_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlstoch_cheatsheet <- function() {
   paste("tlstoch: static and dynamic regimes are both DETERMINISTIC,",
         "and that is the wrong frame twice over -- you cannot set",

@@ -22,6 +22,16 @@
 .SNMTST_EPS <- 1e-12
 .SNMTST_FAMILIES <- c("SD", "RM")
 
+#' .snmtst_split
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param n_pre See Usage.
+#' @param n_post See Usage.
+#' @return A list with \code{pre}, \code{post}.
+#' @export
 .snmtst_split <- function(beta, n_pre, n_post) {
   b <- as.numeric(beta)
   if (length(b) != as.integer(n_pre) + as.integer(n_post))
@@ -33,6 +43,15 @@
   list(pre = b[seq_len(n_pre)], post = b[n_pre + seq_len(n_post)])
 }
 
+#' .snmtst_target
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param post See Usage.
+#' @param l_vec See Usage.
+#' @return The value of \code{lv}, as built in the body.
+#' @export
 .snmtst_target <- function(post, l_vec) {
   Tp <- length(post)
   if (is.null(l_vec))
@@ -112,6 +131,20 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
        note = "M = 1 says the post violation is no larger than the largest observed pre-period change")
 }
 
+#' .snmtst_brute
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param point See Usage.
+#' @param c See Usage.
+#' @param M See Usage.
+#' @param grid See Usage.
+#' @param post Defaults to \code{NULL}.
+#' @param lin Defaults to \code{NULL}.
+#' @param lv Defaults to \code{NULL}.
+#' @return A list with \code{lo}, \code{hi}.
+#' @export
 .snmtst_brute <- function(point, c, M, grid, post = NULL, lin = NULL,
                           lv = NULL) {
   if (grid < 2L)
@@ -256,6 +289,13 @@ fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
                        "tighter"))
 }
 
+#' .snmtst_cheatsheet
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .snmtst_cheatsheet <- function() {
   paste0("snmtst: honest DiD. beta = tau + delta with tau_pre = 0, ",
          "so the PRE coefficients estimate the violation. Instead ",

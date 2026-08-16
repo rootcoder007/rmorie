@@ -116,6 +116,16 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 }
 
 # Indices of the resampled particles; weights assumed normalised.
+#' Indices of the resampled particles; weights assumed normalised
+#'
+#' Part of the snpest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param weights See Usage.
+#' @param scheme See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .snpest_resample <- function(e, weights, scheme) {
   n <- length(weights)
   if (scheme == "multinomial")
@@ -144,6 +154,14 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 }
 
 # Effective sample size, 1 / sum w^2 for normalised weights.
+#' Effective sample size, 1 / sum w^2 for normalised weights
+#'
+#' Part of the snpest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .snpest_ess <- function(w) 1 / .w3_csum(w * w)
 
 #' On-line DP-mixture filter over a stream of observations

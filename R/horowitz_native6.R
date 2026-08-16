@@ -20,6 +20,14 @@
 
 .MORIE_HRZ_SCALE_NOTE <- "|beta_1| = 1 (scale) and T(y0) = 0 (location); no intercept in X"
 
+#' .morie_hrz_normalize_scale
+#'
+#' Part of the horowitz_native6 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param beta See Usage.
+#' @return A numeric value.
+#' @export
 .morie_hrz_normalize_scale <- function(beta) {
   b <- as.numeric(beta)
   if (length(b) == 0L) stop("beta must be non-empty.", call. = FALSE)
@@ -38,10 +46,26 @@
 # second-order kernel will NOT do: G_nz is a functional of DERIVATIVES
 # of K_Z, those converge relatively slowly, and the higher-order
 # kernel is what restores fast enough convergence (printed p. 220-221).
+#' Sixth-order kernel for K_Z, required by assumption HT8. A
+#'
+#' second-order kernel will NOT do: G_nz is a functional of DERIVATIVES
+#' of K_Z, those converge relatively slowly, and the higher-order kernel
+#' is what restores fast enough convergence (printed p. 220-221).
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .morie_hrz_kz6 <- function(u) (15 - 10 * u^2 + u^4) / 16 * stats::dnorm(u)
 
 # K'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above
 # and using phi'(u) = -u phi(u).
+#' K\'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above
+#'
+#' and using phi\'(u) = -u phi(u).
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .morie_hrz_kz6_deriv <- function(u) {
   stats::dnorm(u) * (-35 * u + 14 * u^3 - u^5) / 16
 }

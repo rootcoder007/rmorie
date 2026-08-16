@@ -1,5 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+#' .sbm_log_beta
+#'
+#' Part of the dpsbm implementation; see the file header for the source
+#' it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .sbm_log_beta <- function(a, b) lgamma(a) + lgamma(b) - lgamma(a + b)
 
 #' Dirichlet-process stochastic block model

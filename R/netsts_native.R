@@ -56,10 +56,26 @@
 # doi:10.1016/j.ijforecast.2020.06.008. Recursive versus direct
 # strategies, and preprocessing.
 
+#' .netsts_sigmoid
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .netsts_sigmoid <- function(x) {
   1 / (1 + exp(-x))
 }
 
+#' .netsts_sd
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .netsts_sd <- function(y) {
   n <- length(y)
   if (n < 2) return(0)
@@ -67,10 +83,28 @@
   sqrt(sum((y - m)^2) / (n - 1))
 }
 
+#' .netsts_vec
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .netsts_vec <- function(y) {
   as.numeric(y)
 }
 
+#' .netsts_lstsq
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge See Usage.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .netsts_lstsq <- function(X, y, ridge) {
   X <- if (is.list(X)) do.call(rbind, X) else as.matrix(X)
   y <- as.numeric(y)
@@ -82,6 +116,19 @@
   beta
 }
 
+#' .netsts_lstm_cell
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param c See Usage.
+#' @param W See Usage.
+#' @param b See Usage.
+#' @param forget_bias Defaults to \code{0}.
+#' @return A list with \code{h}, \code{c}, \code{gates}.
+#' @export
 .netsts_lstm_cell <- function(x, h, c, W, b, forget_bias = 0.0) {
   d <- length(h)
   if (length(c) != d) stop("netsts: hidden and cell sizes differ")
@@ -104,6 +151,18 @@
   list(h = hn, c = cn, gates = list(i = i_g, f = f_g, g = g_g, o = o_g))
 }
 
+#' .netsts_lstm_run
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param W See Usage.
+#' @param b See Usage.
+#' @param hidden See Usage.
+#' @param forget_bias Defaults to \code{0}.
+#' @return A list with \code{hs}, \code{cs}, \code{gates}.
+#' @export
 .netsts_lstm_run <- function(X, W, b, hidden, forget_bias = 0.0) {
   d <- as.integer(hidden)
   h <- rep(0.0, d)
@@ -123,6 +182,15 @@
   list(hs = hs, cs = cs, gates = gates)
 }
 
+#' .netsts_gradient_retention
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param forget_value See Usage.
+#' @param steps See Usage.
+#' @return A numeric value.
+#' @export
 .netsts_gradient_retention <- function(forget_value, steps) {
   f <- as.numeric(forget_value)
   if (f < 0 || f > 1)
@@ -130,6 +198,14 @@
   f ^ as.integer(steps)
 }
 
+#' .netsts_standardize
+#'
+#' Part of the netsts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @return A list with \code{z}, \code{mu}, \code{sd}.
+#' @export
 .netsts_standardize <- function(y) {
   yv <- as.numeric(y)
   mu <- mean(yv)
@@ -138,6 +214,14 @@
   list(z = (yv - mu) / sd, mu = mu, sd = sd)
 }
 
+#' Standard normals via Box-Muller on pairs of uniforms from the
+#'
+#' glibc LCG-backed helper. Two uniforms per sample.
+#'
+#' @param rng See Usage.
+#' @param n See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .netsts_standard_normal <- function(rng, n) {
   # Standard normals via Box-Muller on pairs of uniforms from the
   # glibc LCG-backed helper. Two uniforms per sample.

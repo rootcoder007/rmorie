@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.clpopt_mat}
+\alias{.clpopt_mat}
+\title{Internal: build a numeric matrix from a list-of-lists / matrix}
+\usage{
+.clpopt_mat(A, name, ncol = NULL)
+}
+\arguments{
+\item{A}{See Usage.}
+\item{name}{See Usage.}
+\item{ncol}{Defaults to \code{NULL}.}
+}
+\description{
+Mirrors clpopt._mat.
+}
+\value{
+The value of \code{do.call}.
+}
+\keyword{internal}

@@ -15,11 +15,27 @@
 #
 # Nothing here is exported.
 
+#' .s03vec
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .s03vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(unlist(x, use.names = FALSE))
 }
 
+#' .s03mat
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .s03mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), 0, 0))
   if (is.matrix(x)) {
@@ -32,6 +48,15 @@
   matrix(as.numeric(x), ncol = 1L)
 }
 
+#' .s03matmul
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .s03matmul <- function(A, B) {
   n <- nrow(A); k <- nrow(B); m <- ncol(B)
   out <- matrix(0, n, m)
@@ -45,6 +70,15 @@
   out
 }
 
+#' .s03matvec
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param v See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .s03matvec <- function(A, v) {
   n <- nrow(A); out <- numeric(n)
   for (i in seq_len(n)) {
@@ -55,8 +89,24 @@
   out
 }
 
+#' .s03crossprod
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{.s03matmul}.
+#' @export
 .s03crossprod <- function(A) .s03matmul(t(A), A)
 
+#' .s03chol
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .s03chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0, n, n)
@@ -89,6 +139,15 @@
   L
 }
 
+#' .s03cholsolve
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .s03cholsolve <- function(A, b) {
   n <- nrow(A)
   L <- .s03chol(A)
@@ -107,6 +166,16 @@
   x
 }
 
+#' .s03ridgesolve
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return The value of \code{.s03cholsolve}.
+#' @export
 .s03ridgesolve <- function(A, b, ridge = 1e-10) {
   n <- nrow(A)
   M <- A
@@ -114,6 +183,16 @@
   .s03cholsolve(M, b)
 }
 
+#' .s03lstsq
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return The value of \code{.s03ridgesolve}.
+#' @export
 .s03lstsq <- function(X, y, ridge = 1e-10) {
   XtX <- .s03crossprod(X)
   Xty <- .s03matvec(t(X), y)
@@ -123,6 +202,16 @@
 # Symmetric eigenproblem by cyclic Jacobi.  Values ascending; each vector
 # sign-fixed so its largest-magnitude entry is positive, because the
 # eigenproblem does not determine the sign and the arms must agree.
+#' Symmetric eigenproblem by cyclic Jacobi.  Values ascending; each
+#' vector
+#'
+#' sign-fixed so its largest-magnitude entry is positive, because the
+#' eigenproblem does not determine the sign and the arms must agree.
+#'
+#' @param A See Usage.
+#' @param sweeps Defaults to \code{60L}.
+#' @return A list with \code{values}, \code{vectors}.
+#' @export
 .s03jacobi <- function(A, sweeps = 60L) {
   n <- nrow(A)
   M <- matrix(as.numeric(A), n, n)
@@ -170,19 +259,60 @@
   list(values = ev, vectors = vecs)
 }
 
+#' .s03sigmoid
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .s03sigmoid <- function(z) {
   if (z >= 0) 1 / (1 + exp(-z)) else { e <- exp(z); e / (1 + e) }
 }
 
 # Exact GELU, x * Phi(x) (Hendrycks and Gimpel 2016).
 # erf(z/sqrt(2)) = 2 pnorm(z) - 1, so 0.5 z (1 + erf(z/sqrt 2)) = z Phi(z).
+#' Exact GELU, x * Phi(x) (Hendrycks and Gimpel 2016)
+#'
+#' erf(z/sqrt(2)) = 2 pnorm(z) - 1, so 0.5 z (1 + erf(z/sqrt 2)) = z
+#' Phi(z).
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .s03gelu <- function(z) z * pnorm(z)
 
 # Swish_beta(x) = x sigma(beta x) (Ramachandran et al. 2017).
+#' Swish_beta(x) = x sigma(beta x) (Ramachandran et al. 2017)
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param beta Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .s03swish <- function(z, beta = 1) z * .s03sigmoid(beta * z)
 
+#' .s03relu
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .s03relu <- function(z) if (z > 0) z else 0
 
+#' .s03softmax
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .s03softmax <- function(v) {
   if (length(v) == 0L) return(numeric(0))
   m <- max(v)
@@ -192,6 +322,14 @@
   e / s
 }
 
+#' .s03logsumexp
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .s03logsumexp <- function(v) {
   if (length(v) == 0L) return(-Inf)
   m <- max(v)
@@ -201,6 +339,14 @@
   m + log(s)
 }
 
+#' .s03mean
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .s03mean <- function(v) {
   n <- length(v)
   if (n == 0L) return(NaN)
@@ -209,6 +355,15 @@
   s / n
 }
 
+#' .s03var
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param ddof Defaults to \code{1L}.
+#' @return A numeric value.
+#' @export
 .s03var <- function(v, ddof = 1L) {
   n <- length(v)
   if (n - ddof <= 0L) return(NaN)
@@ -218,8 +373,25 @@
   s / (n - ddof)
 }
 
+#' .s03sd
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param ddof Defaults to \code{1L}.
+#' @return A numeric value.
+#' @export
 .s03sd <- function(v, ddof = 1L) sqrt(.s03var(v, ddof))
 
+#' .s03median
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .s03median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -228,12 +400,30 @@
   if (n %% 2L == 1L) s[h + 1L] else 0.5 * (s[h] + s[h + 1L])
 }
 
+#' .s03mad
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param constant Defaults to \code{1.4826}.
+#' @return A numeric value.
+#' @export
 .s03mad <- function(v, constant = 1.4826) {
   m <- .s03median(v)
   constant * .s03median(abs(v - m))
 }
 
 # Type-7 quantile, the default of R's quantile().
+#' Type-7 quantile, the default of R\'s quantile()
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .s03quantile7 <- function(v, p) {
   s <- sort(v)
   n <- length(s)
@@ -245,6 +435,14 @@
   s[lo + 1L] + (h - lo) * (s[hi + 1L] - s[lo + 1L])
 }
 
+#' .s03rank
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .s03rank <- function(v) {
   n <- length(v)
   ord <- order(v, seq_len(n))
@@ -260,6 +458,15 @@
   r
 }
 
+#' .s03corr
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .s03corr <- function(x, y) {
   n <- length(x)
   if (n < 2L) return(NaN)
@@ -274,6 +481,15 @@
 }
 
 # Van der Corput point -- the deterministic stand-in for a uniform draw.
+#' Van der Corput point -- the deterministic stand-in for a uniform draw
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param i See Usage.
+#' @param base Defaults to \code{2L}.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .s03vdc <- function(i, base = 2L) {
   f <- 1; r <- 0
   k <- as.integer(i) + 1L
@@ -285,19 +501,70 @@
   r
 }
 
+#' .s03unif
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param base Defaults to \code{2L}.
+#' @return A vector, from \code{vapply}.
+#' @export
 .s03unif <- function(n, base = 2L) vapply(seq_len(n) - 1L, .s03vdc, 0, base = base)
 
 # R's qnorm IS Wichura AS 241, the same algorithm the Python arm codes.
+#' R\'s qnorm IS Wichura AS 241, the same algorithm the Python arm codes
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{qnorm}.
+#' @export
 .s03qnorm <- function(p) qnorm(p)
 
+#' .s03pnorm
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{pnorm}.
+#' @export
 .s03pnorm <- function(z) pnorm(z)
 
+#' .s03normdraws
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param base Defaults to \code{2L}.
+#' @return The value of \code{qnorm}.
+#' @export
 .s03normdraws <- function(n, base = 2L) qnorm(.s03unif(n, base))
 
+#' .s03lgamma
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{lgamma}.
+#' @export
 .s03lgamma <- function(x) lgamma(x)
 
 # Same recurrence + asymptotic series as the Python arm, so the two agree
 # term for term rather than relying on R's digamma matching a Python series.
+#' Same recurrence + asymptotic series as the Python arm, so the two
+#' agree
+#'
+#' term for term rather than relying on R\'s digamma matching a Python
+#' series.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .s03digamma <- function(x) {
   # Vectorised: the recurrence below is scalar (while (x < 6) on a vector
   # is an error in modern R), and this helper is SHARED, so every caller
@@ -332,6 +599,16 @@
 # 14 significant figures throughout.
 #
 # terms is retained for backward compatibility and is not used.
+#' Terms is retained for backward compatibility and is not used
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nu See Usage.
+#' @param x See Usage.
+#' @param terms Defaults to \code{160L}.
+#' @return A numeric value.
+#' @export
 .s03besselk <- function(nu, x, terms = 160L) {
   if (x <= 0) return(Inf)
   h <- 0.01
@@ -356,6 +633,18 @@
 # Logistic regression by IRLS: Newton-Raphson on the log-likelihood,
 # which for the canonical link is exactly IRLS,
 # beta <- beta + (X' W X)^-1 X' (y - p), W = diag(p (1 - p)).
+#' Logistic regression by IRLS: Newton-Raphson on the log-likelihood,
+#'
+#' which for the canonical link is exactly IRLS, beta <- beta + (X\' W
+#' X)^-1 X\' (y - p), W = diag(p (1 - p)).
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param iters Defaults to \code{60L}.
+#' @param ridge Defaults to \code{1e-10}.
+#' @param tol Defaults to \code{1e-13}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .s03logit <- function(X, y, iters = 60L, ridge = 1e-10, tol = 1e-13) {
   n <- nrow(X); p <- ncol(X)
   beta <- numeric(p)
@@ -382,6 +671,15 @@
   beta
 }
 
+#' .s03design
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param n See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .s03design <- function(X, n) {
   if (is.null(X)) return(matrix(1, n, 1))
   rows <- .s03mat(X)
@@ -393,6 +691,18 @@
 #   tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))]
 #   w1  = D / E[D]
 #   w0  = [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
+#' Doubly robust DiD for panel data, Sant\'Anna and Zhao (2020) eq.
+#' (2.6):
+#'
+#' tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] w1 = D / E[D] w0 =
+#' [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
+#'
+#' @param dy See Usage.
+#' @param D See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{tau}, \code{inf}, \code{se}, \code{pi}, \code{mu0}, \code{w1}, \code{w0}, \code{gamma}, \code{beta0}.
+#' @export
 .s03drdid <- function(dy, D, X = NULL, weights = NULL) {
   dyv <- .s03vec(dy); d <- .s03vec(D); n <- length(dyv)
   Z <- .s03design(X, n)
@@ -429,6 +739,13 @@
 
 # Mammen's two-point multiplier at a van der Corput point: mean 1,
 # variance 1, third moment 1, and deterministic, so both arms agree.
+#' Mammen\'s two-point multiplier at a van der Corput point: mean 1,
+#'
+#' variance 1, third moment 1, and deterministic, so both arms agree.
+#'
+#' @param i See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .s03mammen <- function(i) {
   r5 <- sqrt(5)
   p <- (r5 + 1) / (2 * r5)
@@ -442,6 +759,22 @@
 # psi = mean(Q*(1,X) - Q*(0,X)).  y is scaled to [0, 1] so the logistic
 # fluctuation is valid for continuous outcomes (Gruber and van der Laan
 # 2010).
+#' Targeted maximum likelihood for the ATE (van der Laan and Rubin 2006,
+#'
+#' Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated
+#' along the logistic submodel whose score is the clever covariate H =
+#' D/g - (1-D)/(1-g); eps solves the score equation by Newton, then psi
+#' = mean(Q*(1,X) - Q*(0,X)).  y is scaled to [0, 1] so the logistic
+#' fluctuation is valid for continuous outcomes (Gruber and van der Laan
+#' 2010).
+#'
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @param trim Defaults to \code{0}.
+#' @param link Defaults to \code{"logit"}.
+#' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0}, \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
+#' @export
 .s03tmle <- function(y, D, X = NULL, trim = 0, link = "logit") {
   yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
   Z <- .s03design(X, n)
@@ -514,18 +847,61 @@
 # that round-trips a double. A number rounds to that many DECIMAL places,
 # reproducing jsonlite::toJSON exactly -- pass digits = 4 for its default.
 
+#' .s03json_toJSON
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param auto_unbox Defaults to \code{TRUE}.
+#' @param digits Defaults to \code{NULL}.
+#' @param pretty Defaults to \code{FALSE}.
+#' @param ... Passed through.
+#' @return The value of \code{morie_jsonlt_to_json}.
+#' @export
 .s03json_toJSON <- function(x, auto_unbox = TRUE, digits = NULL,
                             pretty = FALSE, ...)
   morie_jsonlt_to_json(x, pretty = pretty, auto_unbox = auto_unbox,
                        digits = digits, na = "null", null = "null", ...)
 
+#' .s03json_pretty
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param txt See Usage.
+#' @param indent Defaults to \code{2L}.
+#' @return The value of \code{morie_jsonlt_prettify}.
+#' @export
 .s03json_pretty <- function(txt, indent = 2L)
   morie_jsonlt_prettify(txt, indent)
 
+#' .s03json_fromJSON
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param txt See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{morie_jsonlt_from_json}.
+#' @export
 .s03json_fromJSON <- function(txt, ...)
   morie_jsonlt_from_json(txt, simplifyDataFrame = FALSE,
                          simplifyMatrix = FALSE)
 
+#' .s03json_write
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param path See Usage.
+#' @param auto_unbox Defaults to \code{TRUE}.
+#' @param digits Defaults to \code{NULL}.
+#' @param pretty Defaults to \code{FALSE}.
+#' @param ... Passed through.
+#' @return Invisibly,the value of \code{path}, as built in the body.
+#' @export
 .s03json_write <- function(x, path, auto_unbox = TRUE, digits = NULL,
                            pretty = FALSE, ...) {
   writeLines(.s03json_toJSON(x, auto_unbox, digits, pretty), path)
@@ -533,6 +909,15 @@
 }
 
 # newline-delimited JSON: one object per line
+#' Newline-delimited JSON: one object per line
+#'
+#' Part of the helpers_s03 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param con See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{lapply}.
+#' @export
 .s03json_stream_in <- function(con, ...) {
   lines <- readLines(con, warn = FALSE)
   lines <- lines[nzchar(trimws(lines))]

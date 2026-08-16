@@ -14,6 +14,14 @@
 # the bias it exists to remove; and a two-way fixed-effects event
 # study under heterogeneity can return the wrong sign.
 
+#' .caus_intercept
+#'
+#' Part of the caus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .caus_intercept <- function(X) {
   A <- as.matrix(X)
   storage.mode(A) <- "double"
@@ -27,17 +35,46 @@
 # P_Z M by least squares rather than a formed inverse: Z'Z is
 # routinely near-singular when instruments are correlated, and
 # inverting it explicitly turns a warning into a wrong answer.
+#' P_Z M by least squares rather than a formed inverse: Z\'Z is
+#'
+#' routinely near-singular when instruments are correlated, and
+#' inverting it explicitly turns a warning into a wrong answer.
+#'
+#' @param Z See Usage.
+#' @param M See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 .caus_project <- function(Z, M) {
   Z <- as.matrix(Z)
   M <- as.matrix(M)
   Z %*% qr.coef(qr(Z), M)
 }
 
+#' .caus_annihilate
+#'
+#' Part of the caus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param M See Usage.
+#' @return A numeric value.
+#' @export
 .caus_annihilate <- function(Z, M) as.matrix(M) - .caus_project(Z, M)
 
 # The k-class family. k = 0 is least squares, k = 1 is two-stage
 # least squares, and k = the Anderson-Rubin ratio is LIML. Keeping
 # them one function is what stops them drifting apart.
+#' The k-class family. k = 0 is least squares, k = 1 is two-stage
+#'
+#' least squares, and k = the Anderson-Rubin ratio is LIML. Keeping them
+#' one function is what stops them drifting apart.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param Z See Usage.
+#' @param k See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .caus_k_class <- function(y, X, Z, k) {
   y <- as.numeric(y)
   X <- as.matrix(X)
@@ -48,6 +85,15 @@
   as.numeric(qr.coef(qr(A), b))
 }
 
+#' .caus_first_stage_f
+#'
+#' Part of the caus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param Z See Usage.
+#' @return A numeric value.
+#' @export
 .caus_first_stage_f <- function(D, Z) {
   D <- as.numeric(D)
   Zf <- .caus_intercept(Z)

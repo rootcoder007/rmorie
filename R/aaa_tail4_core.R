@@ -14,20 +14,60 @@
 #' @keywords internal
 NULL
 
+#' .t4_vec
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .t4_vec <- function(x) as.numeric(unlist(x))
 
+#' .t4_mat
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .t4_mat <- function(X) {
   if (is.matrix(X)) return(matrix(as.numeric(X), nrow = nrow(X)))
   if (is.data.frame(X)) return(as.matrix(X))
   matrix(as.numeric(X), ncol = 1L)
 }
 
+#' .t4_ranks
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{rank}.
+#' @export
 .t4_ranks <- function(x) rank(x, ties.method = "average")
 
+#' .t4_tiecounts
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .t4_tiecounts <- function(x) as.numeric(table(x))
 
 # Sample autocorrelations with the biased (n in both numerator and
 # denominator) normalisation, i.e. stats::acf.
+#' Sample autocorrelations with the biased (n in both numerator and
+#'
+#' denominator) normalisation, i.e. stats::acf.
+#'
+#' @param x See Usage.
+#' @param lag See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .t4_acfbiased <- function(x, lag) {
   n <- length(x)
   d <- x - mean(x)
@@ -36,6 +76,16 @@ NULL
 }
 
 # Newey-West long-run variance with Bartlett weights -- tseries' pp_sum.
+#' Newey-West long-run variance with Bartlett weights -- tseries\'
+#' pp_sum
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param lag See Usage.
+#' @return A numeric value.
+#' @export
 .t4_lrvnw <- function(u, lag) {
   n <- length(u)
   s <- sum(u * u) / n
@@ -47,6 +97,15 @@ NULL
   s + 2 * tot / n
 }
 
+#' .t4_olsfit
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
+#' @export
 .t4_olsfit <- function(X, y) {
   X <- as.matrix(X); y <- as.numeric(y)
   xtx <- crossprod(X)
@@ -56,6 +115,15 @@ NULL
   list(beta = beta, fitted = fitted, resid = y - fitted, xtxinv = xtxinv)
 }
 
+#' .t4_kendallS
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return The value of \code{S}, as built in the body.
+#' @export
 .t4_kendallS <- function(x, y) {
   n <- length(x)
   S <- 0
@@ -66,6 +134,14 @@ NULL
 
 # Kendall tau-b and the normal-approximation z, matching
 # stats::cor.test(method = "kendall", exact = FALSE).
+#' Kendall tau-b and the normal-approximation z, matching
+#'
+#' stats::cor.test(method = "kendall", exact = FALSE).
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A list with \code{tau}, \code{z}.
+#' @export
 .t4_kendalltaub <- function(x, y) {
   n <- length(x)
   S <- .t4_kendallS(x, y)
@@ -85,6 +161,14 @@ NULL
   list(tau = tau, z = if (v > 0) S / sqrt(v) else NaN)
 }
 
+#' .t4_result
+#'
+#' Part of the tail4_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .t4_result <- function(...) {
   out <- list(...)
   class(out) <- c("morie_rich_result", "list")

@@ -70,6 +70,14 @@
 # intravascular albumin ratio. Waters and Lombardo (2010).
 .VDCAL_HUMAN <- list(Vp = 0.0436, Ve = 0.151, Vr = 0.380, Re_i = 1.4)
 
+#' .vdcal_phys
+#'
+#' Part of the vdcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param par See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .vdcal_phys <- function(par) {
   p <- .VDCAL_HUMAN
   if (!is.null(par)) for (nm in names(par)) p[[nm]] <- par[[nm]]
@@ -139,6 +147,18 @@ morie_vdcal_fut <- function(vss, fu, par = NULL) {
 #   log(1/fut) = a + b ElogD(7.4) + c fi(7.4) + d log(1/fu)
 # The four coefficients are fitted quantities that belong to the papers.
 # This module will not guess them: pass them, or use the measured route.
+#' The Lombardo descriptor route, on caller-supplied coefficients:
+#'
+#' log(1/fut) = a + b ElogD(7.4) + c fi(7.4) + d log(1/fu) The four
+#' coefficients are fitted quantities that belong to the papers. This
+#' module will not guess them: pass them, or use the measured route.
+#'
+#' @param elogd See Usage.
+#' @param fi See Usage.
+#' @param fu See Usage.
+#' @param coefficients See Usage.
+#' @return The value of \code{fut}, as built in the body.
+#' @export
 .vdcal_fut_descriptors <- function(elogd, fi, fu, coefficients) {
   if (is.null(coefficients) || !length(coefficients))
     stop("the descriptor route needs the regression coefficients; they ",

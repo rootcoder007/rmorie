@@ -9,16 +9,58 @@
 #' @keywords internal
 NULL
 
+#' .b1_bound
+#'
+#' Part of the b1_tmle implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return The value of \code{pmin}.
+#' @export
 .b1_bound <- function(v, lo, hi) pmin(hi, pmax(lo, v))
 
+#' .b1_logit
+#'
+#' Part of the b1_tmle implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .b1_logit <- function(p) {
   p <- .b1_bound(p, 1e-12, 1 - 1e-12)
   log(p / (1 - p))
 }
 
+#' .b1_expit
+#'
+#' Part of the b1_tmle implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .b1_expit <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)),
                                 exp(x) / (1 + exp(x)))
 
+#' .b1_target
+#'
+#' Part of the b1_tmle implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param QAW See Usage.
+#' @param Q1W See Usage.
+#' @param Q0W See Usage.
+#' @param g1W See Usage.
+#' @param gbound Defaults to \code{0.025}.
+#' @param iters Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star}, \code{g1}, \code{g0}, \code{H1}, \code{H0}.
+#' @export
 .b1_target <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025,
                        iters = 100, tol = 1e-12) {
   n <- length(Y)
@@ -47,6 +89,16 @@ NULL
        g1 = g1, g0 = g0, H1 = H1, H0 = H0)
 }
 
+#' .b1_curves
+#'
+#' Part of the b1_tmle implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param fit See Usage.
+#' @return A list with \code{mu1}, \code{mu0}, \code{ic1}, \code{ic0}.
+#' @export
 .b1_curves <- function(Y, A, fit) {
   n <- length(Y)
   mu1 <- mean(fit$Q1star); mu0 <- mean(fit$Q0star)

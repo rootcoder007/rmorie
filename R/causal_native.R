@@ -151,6 +151,14 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 }
 
 # Internal graph helpers for the back-door criterion.
+#' Internal graph helpers for the back-door criterion
+#'
+#' Part of the causal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dag See Usage.
+#' @return A list with \code{children}, \code{parents}, \code{nodes}.
+#' @export
 .bd_parse <- function(dag) {
   if (is.list(dag) && !is.null(names(dag))) {
     edges <- do.call(rbind, lapply(names(dag), function(u) {
@@ -165,6 +173,15 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
   list(children = ch, parents = pa, nodes = nodes)
 }
 
+#' .bd_desc
+#'
+#' Part of the causal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param ch See Usage.
+#' @return The value of \code{seen}, as built in the body.
+#' @export
 .bd_desc <- function(node, ch) {
   seen <- character(0)
   stack <- node
@@ -181,6 +198,17 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
   seen
 }
 
+#' .bd_paths
+#'
+#' Part of the causal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param ch See Usage.
+#' @param pa See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .bd_paths <- function(x, y, ch, pa) {
   out <- list()
   stack <- list(list(cur = x, path = x, dirs = character(0)))
@@ -205,6 +233,17 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
   out
 }
 
+#' .bd_blocked
+#'
+#' Part of the causal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param d See Usage.
+#' @param Z See Usage.
+#' @param ch See Usage.
+#' @return A logical value.
+#' @export
 .bd_blocked <- function(p, d, Z, ch) {
   if (length(p) < 3L) {
     return(FALSE)
@@ -648,6 +687,15 @@ morie_hsic <- function(a, b) {
 }
 
 # Internal: leave-one-out Nadaraya-Watson residuals.
+#' Internal: leave-one-out Nadaraya-Watson residuals
+#'
+#' Part of the causal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .anm_resid <- function(x, y) {
   d2 <- outer(x, x, "-")^2
   h <- sqrt(max(stats::median(d2[upper.tri(d2)]), 1e-12)) * 0.5

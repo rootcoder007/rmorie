@@ -7,11 +7,28 @@
 # Eq 2.12/2.15 delegate to morie_alammar_sdp_attention -- one formula,
 # one implementation.
 
+#' .morie_km_softmax
+#'
+#' Part of the kamath_ch2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @return A numeric value.
+#' @export
 .morie_km_softmax <- function(a) {
   z <- a - max(a)
   exp(z) / sum(exp(z))
 }
 
+#' .morie_km_probs
+#'
+#' Part of the kamath_ch2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p See Usage.
+#' @param name See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .morie_km_probs <- function(p, name) {
   p <- as.numeric(p)
   if (length(p) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)

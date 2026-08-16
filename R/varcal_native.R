@@ -61,6 +61,14 @@ varcal_GENOTYPES <- c("hom_ref", "het", "hom_alt")
 varcal_CHANNEL_SETS <- c("base_quality_strand")
 
 # Private helpers
+#' Private helpers
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .varcal_base_code <- function(b) {
   b <- toupper(as.character(b))
   if (b == "A") return(0.25)
@@ -70,15 +78,39 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
   return(0.0)
 }
 
+#' .varcal_phred
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .varcal_phred <- function(p) {
   p <- max(min(as.numeric(p), 1.0), 1e-12)
   return(-10.0 * log10(p))
 }
 
+#' .varcal_chars
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .varcal_chars <- function(x) {
   if (is.character(x) && length(x) == 1L) strsplit(x, "")[[1]] else x
 }
 
+#' .varcal_norm_reads
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reads See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .varcal_norm_reads <- function(reads) {
   lapply(reads, function(r) { r$seq <- .varcal_chars(r$seq); r })
 }

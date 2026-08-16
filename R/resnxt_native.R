@@ -29,18 +29,54 @@
 # Szegedy, C. et al. (2015) "Going deeper with convolutions", CVPR 2015,
 # 1-9.
 
+#' .resnxt_vec
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .resnxt_vec <- function(x) {
   as.numeric(x)
 }
 
+#' .resnxt_lin
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param x See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .resnxt_lin <- function(W, x) {
   vapply(seq_along(W), function(o) sum(W[[o]] * x), numeric(1))
 }
 
+#' .resnxt_relu
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 .resnxt_relu <- function(v) {
   pmax(0, v)
 }
 
+#' .resnxt_aggregated_block
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param Wins See Usage.
+#' @param Wmids See Usage.
+#' @param Wouts See Usage.
+#' @return A numeric value.
+#' @export
 .resnxt_aggregated_block <- function(x, Wins, Wmids, Wouts) {
   xv <- .resnxt_vec(x)
   acc <- rep(0, length(xv))
@@ -53,6 +89,17 @@
   xv + acc
 }
 
+#' .resnxt_grouped_block
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param Wins See Usage.
+#' @param Wmids See Usage.
+#' @param Wout_concat See Usage.
+#' @return A numeric value.
+#' @export
 .resnxt_grouped_block <- function(x, Wins, Wmids, Wout_concat) {
   xv <- .resnxt_vec(x)
   cat <- numeric(0)
@@ -65,6 +112,18 @@
   xv + o
 }
 
+#' .resnxt_block_equivalence
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param Wins See Usage.
+#' @param Wmids See Usage.
+#' @param Wouts See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{equivalent}, \code{max_deviation}, \code{aggregated}, \code{grouped}, \code{note}.
+#' @export
 .resnxt_block_equivalence <- function(x, Wins, Wmids, Wouts, tol = 1e-9) {
   a <- .resnxt_aggregated_block(x, Wins, Wmids, Wouts)
   n_outs <- length(Wouts[[1]])
@@ -81,6 +140,16 @@
        note = "same function; the grouped form is what runs fast")
 }
 
+#' .resnxt_block_parameters
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param width See Usage.
+#' @param cardinality See Usage.
+#' @param bottleneck See Usage.
+#' @return A list with \code{parameters}, \code{cardinality}, \code{bottleneck}, \code{width}.
+#' @export
 .resnxt_block_parameters <- function(width, cardinality, bottleneck) {
   W <- as.integer(width)
   C <- as.integer(cardinality)
@@ -94,6 +163,16 @@
        width = W)
 }
 
+#' .resnxt_match_complexity
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param width See Usage.
+#' @param cardinality See Usage.
+#' @param target_parameters See Usage.
+#' @return A list with \code{bottleneck}, \code{rounded}, \code{parameters}, \code{target}, \code{cardinality}.
+#' @export
 .resnxt_match_complexity <- function(width, cardinality, target_parameters) {
   W <- as.integer(width)
   C <- as.integer(cardinality)
@@ -110,6 +189,13 @@
        cardinality = C)
 }
 
+#' .resnxt_cheatsheet
+#'
+#' Part of the resnxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .resnxt_cheatsheet <- function() {
   "resnxt: y = x + sum_{i=1..C} T_i(x), every T_i with the SAME TOPOLOGY -- Inception's split-transform-merge without its per-stage hand design. C is CARDINALITY, a design dimension beside depth and width, and raising it beats going deeper or wider AT FIXED COMPLEXITY. Three equivalent block forms: C separate paths, concatenate-then-project, or one GROUPED CONVOLUTION -- same function, and the third is what runs fast."
 }

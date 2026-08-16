@@ -1,5 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+#' .clip_l2norm
+#'
+#' Part of the clipsi implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .clip_l2norm <- function(v) {
   n <- sqrt(sum(v * v))
   if (n <= 0) stop("cannot normalise a zero-norm embedding")

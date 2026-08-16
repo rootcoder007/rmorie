@@ -4,7 +4,24 @@
 
 .perfat_EPS <- 1e-9
 
+#' .dot
+#'
+#' Part of the perfat_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .dot <- function(a, b) sum(a * b)
+#' .norm2
+#'
+#' Part of the perfat_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return A numeric value.
+#' @export
 .norm2 <- function(a) sum(a * a)
 
 #' draw_projections

@@ -7,6 +7,15 @@
 
 ._STRATEGIES <- c("future", "final", "episode", "random")
 
+#' ._as_states
+#'
+#' Part of the hindsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param name See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 ._as_states <- function(seq, name) {
   out <- lapply(seq, function(s) as.numeric(s))
   if (length(out) == 0L) {
@@ -15,6 +24,18 @@
   out
 }
 
+#' ._sparse_reward
+#'
+#' Part of the hindsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param a See Usage.
+#' @param s_next See Usage.
+#' @param g See Usage.
+#' @param tol See Usage.
+#' @return A numeric value.
+#' @export
 ._sparse_reward <- function(s, a, s_next, g, tol) {
   if (length(s_next) != length(g)) {
     stop(sprintf("hindsr: goal has length %d but state has %d; pass a state_to_goal mapping", length(g), length(s_next)))
@@ -25,6 +46,21 @@
   0.0
 }
 
+#' ._sample_goals
+#'
+#' Part of the hindsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param strategy See Usage.
+#' @param episode See Usage.
+#' @param t See Usage.
+#' @param T See Usage.
+#' @param k See Usage.
+#' @param m See Usage.
+#' @param pool See Usage.
+#' @param e See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 ._sample_goals <- function(strategy, episode, t, T, k, m, pool, e) {
   if (strategy == "final") {
     return(list(m(episode[[T + 1L]])))
@@ -164,6 +200,13 @@ her <- hindsr
 
 morie_hindsr <- hindsr
 
+#' .hindsr_cheatsheet
+#'
+#' Part of the hindsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .hindsr_cheatsheet <- function() {
   paste("hindsr: HER (Andrychowicz 2017 Alg. 1). Store each transition with the original goal, then again for each g' in S(episode) with the reward RECOMPUTED under g'. S in {final, future (k, best), episode, random}; r(s,a,g) = -[f_g(s') = 0].")
 }

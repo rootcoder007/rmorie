@@ -14,6 +14,15 @@
 # the identity and a pure shift is recovered exactly.
 
 # piecewise-linear CDF through (x_(j), j/(n-1)), clamped to [0, 1]
+#' Piecewise-linear CDF through (x_(j), j/(n-1)), clamped to [0, 1]
+#'
+#' Part of the qmDS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sorted_x See Usage.
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .mor_qm_ecdf <- function(sorted_x, v) {
   n <- length(sorted_x)
   if (n == 1L) return(0.5)
@@ -30,6 +39,15 @@
 }
 
 # inverse empirical CDF, type-7 convention h = (n - 1) p
+#' Inverse empirical CDF, type-7 convention h = (n - 1) p
+#'
+#' Part of the qmDS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sorted_x See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .mor_qm_quantile <- function(sorted_x, p) {
   n <- length(sorted_x)
   if (n == 1L) return(sorted_x[1L])

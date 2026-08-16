@@ -96,6 +96,13 @@ morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
                      "asserted"))
 }
 
+#' .svyrcq_cheatsheet
+#'
+#' Part of the svyrcq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .svyrcq_cheatsheet <- function() {
   paste0("svyrcq: morie_svyrcq_survey_quantile_regression(X, y, tau, ",
          "weights) -> design-weighted quantile regression by MM ",

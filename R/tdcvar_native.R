@@ -42,10 +42,26 @@
 # 7(9-12), 1393-1512, doi:10.1016/0270-0255(86)90088-6 -- where the
 # problem and the weighted solution were first set out.
 
+#' .tdcvar_vec
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tdcvar_vec <- function(x) {
   as.numeric(x)
 }
 
+#' .tdcvar_mat
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 .tdcvar_mat <- function(X) {
   if (is.null(X)) return(matrix(0, nrow=0, ncol=0))
   if (is.matrix(X)) {
@@ -65,6 +81,16 @@
   M
 }
 
+#' .tdcvar_wls
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}.
+#' @export
 .tdcvar_wls <- function(X, y, w) {
   n <- nrow(X)
   p <- ncol(X)
@@ -79,6 +105,17 @@
   list(coef=as.numeric(beta), se=as.numeric(se), vcov=vcov)
 }
 
+#' .tdcvar_logreg
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param max_iter Defaults to \code{25L}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .tdcvar_logreg <- function(X, y, max_iter=25L, tol=1e-8) {
   n <- nrow(X)
   p <- ncol(X)
@@ -102,6 +139,15 @@
   beta
 }
 
+#' .tdcvar_logreg_pred
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @return The value of \code{pmin}.
+#' @export
 .tdcvar_logreg_pred <- function(X, beta) {
   eta <- as.numeric(X %*% beta)
   eta <- pmin(pmax(eta, -30), 30)
@@ -109,6 +155,18 @@
   pmin(pmax(p, 1e-10), 1 - 1e-10)
 }
 
+#' .tdcvar_ip_weights_history
+#'
+#' Part of the tdcvar_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A_hist See Usage.
+#' @param L_hist See Usage.
+#' @param kind Defaults to \code{"binary"}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @param trim Defaults to \code{NULL}.
+#' @return A list with \code{weights}, \code{per_time}.
+#' @export
 .tdcvar_ip_weights_history <- function(A_hist, L_hist, kind="binary",
                                         stabilize=TRUE, trim=NULL) {
   K <- length(A_hist)

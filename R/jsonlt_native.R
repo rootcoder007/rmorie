@@ -20,6 +20,25 @@
 
 # ---------------------------------------------------------------- options
 
+#' .jsonlt_opts
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dataframe Defaults to \code{"rows"}.
+#' @param matrix Defaults to \code{"rowmajor"}.
+#' @param Date Defaults to \code{"ISO8601"}.
+#' @param POSIXt Defaults to \code{"string"}.
+#' @param factor Defaults to \code{"string"}.
+#' @param complex Defaults to \code{"string"}.
+#' @param raw Defaults to \code{"base64"}.
+#' @param null Defaults to \code{"list"}.
+#' @param na Defaults to \code{NULL}.
+#' @param auto_unbox Defaults to \code{FALSE}.
+#' @param digits Defaults to \code{4}.
+#' @param force Defaults to \code{FALSE}.
+#' @return The value of \code{o}, as built in the body.
+#' @export
 .jsonlt_opts <- function(dataframe = "rows", matrix = "rowmajor",
                          Date = "ISO8601", POSIXt = "string",
                          factor = "string", complex = "string",
@@ -52,6 +71,13 @@
 
 # I(n) as a digits argument means n SIGNIFICANT digits, matching
 # jsonlite's digits = I(n). Anything else is decimal places.
+#' I(n) as a digits argument means n SIGNIFICANT digits, matching
+#'
+#' jsonlite\'s digits = I(n). Anything else is decimal places.
+#'
+#' @param digits See Usage.
+#' @return The value of \code{inherits}.
+#' @export
 .jsonlt_sig <- function(digits) inherits(digits, "AsIs")
 
 # ---------------------------------------------------------------- numbers
@@ -59,6 +85,15 @@
 # The one place a double becomes text. Both arms go through C's printf
 # with the same format string, so the bytes match; each language's own
 # float-to-string would put them one ulp apart and call it a failure.
+#' The one place a double becomes text. Both arms go through C\'s printf
+#'
+#' with the same format string, so the bytes match; each language\'s own
+#' float-to-string would put them one ulp apart and call it a failure.
+#'
+#' @param x See Usage.
+#' @param digits See Usage.
+#' @return The value of \code{.jsonlt_tidy}.
+#' @export
 .jsonlt_num <- function(x, digits) {
   if (is.nan(x)) return("\"NaN\"")
   if (is.infinite(x)) return(if (x > 0) "\"Inf\"" else "\"-Inf\"")
@@ -68,6 +103,14 @@
   .jsonlt_tidy(s)
 }
 
+#' .jsonlt_tidy
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .jsonlt_tidy <- function(s) {
   if (grepl("[eE]", s)) {
     parts <- strsplit(s, "[eE]")[[1]]
@@ -92,6 +135,14 @@
 
 # ---------------------------------------------------------------- strings
 
+#' .jsonlt_esc
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_esc <- function(s) {
   s <- gsub("\\", "\\\\", s, fixed = TRUE)
   s <- gsub("\"", "\\\"", s, fixed = TRUE)
@@ -116,6 +167,14 @@
                                "0123456789+/"), "")[[1]]
 
 # Base64 without a library, so both arms produce the same string.
+#' Base64 without a library, so both arms produce the same string
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_b64 <- function(data) {
   b <- as.integer(data)
   n <- length(b)
@@ -143,6 +202,14 @@
   paste(out, collapse = "")
 }
 
+#' .jsonlt_unb64
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return The value of \code{as.raw}.
+#' @export
 .jsonlt_unb64 <- function(s) {
   ch <- strsplit(gsub("[[:space:]=]", "", s), "")[[1]]
   acc <- 0
@@ -163,6 +230,15 @@
 # as.data.frame() flattens a nested data.frame column into outer.inner
 # columns. That is morie_jsonlt_flatten's job, opt-in, and doing it here
 # would make a nested structure impossible to represent at all.
+#' As.data.frame() flattens a nested data.frame column into outer.inner
+#'
+#' columns. That is morie_jsonlt_flatten\'s job, opt-in, and doing it
+#' here would make a nested structure impossible to represent at all.
+#'
+#' @param cols See Usage.
+#' @param nms See Usage.
+#' @return The value of \code{structure}.
+#' @export
 .jsonlt_df <- function(cols, nms) {
   names(cols) <- nms
   n <- if (length(cols)) NROW(cols[[1]]) else 0L
@@ -171,10 +247,27 @@
 
 # ---------------------------------------------------------------- encoder
 
+#' .jsonlt_na_token
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param o See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .jsonlt_na_token <- function(o) if (identical(o$na, "string")) "\"NA\"" else "null"
 
 .JSONLT_EPOCH <- as.Date("1970-01-01")
 
+#' .jsonlt_posix
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param o See Usage.
+#' @return The value of \code{.jsonlt_esc}.
+#' @export
 .jsonlt_posix <- function(v, o) {
   ms <- as.numeric(v) * 1000
   if (identical(o$POSIXt, "epoch")) return(.jsonlt_num(ms, o$digits))
@@ -186,6 +279,15 @@
 }
 
 # One element of an atomic vector, already known to be non-NA.
+#' One element of an atomic vector, already known to be non-NA
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param o See Usage.
+#' @return The value of \code{.jsonlt_esc}.
+#' @export
 .jsonlt_scalar <- function(v, o) {
   if (inherits(v, "POSIXt")) return(.jsonlt_posix(v, o))
   if (inherits(v, "Date")) {
@@ -204,6 +306,16 @@
   .jsonlt_esc(as.character(v))
 }
 
+#' .jsonlt_atomic
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param o See Usage.
+#' @param unbox_ok See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_atomic <- function(x, o, unbox_ok) {
   if (is.complex(x) && identical(o$complex, "list"))
     return(paste0("{\"r\":", .jsonlt_atomic(Re(x), o, FALSE),
@@ -223,6 +335,15 @@
   paste0("[", paste(parts, collapse = ","), "]")
 }
 
+#' .jsonlt_raw_enc
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rv See Usage.
+#' @param o See Usage.
+#' @return The value of \code{.jsonlt_esc}.
+#' @export
 .jsonlt_raw_enc <- function(rv, o) {
   if (identical(o$raw, "int"))
     return(paste0("[", paste(sprintf("%d", as.integer(rv)), collapse = ","), "]"))
@@ -236,6 +357,15 @@
 
 # One data.frame cell. NULL means "leave this field out", which is what
 # jsonlite does for NA inside rows when na is unset.
+#' One data.frame cell. NULL means "leave this field out", which is what
+#'
+#' jsonlite does for NA inside rows when na is unset.
+#'
+#' @param col See Usage.
+#' @param i See Usage.
+#' @param o See Usage.
+#' @return The value of \code{.jsonlt_scalar}.
+#' @export
 .jsonlt_cell <- function(col, i, o) {
   if (is.data.frame(col)) return(.jsonlt_df_rows(col[i, , drop = FALSE], o))
   if (is.matrix(col)) return(.jsonlt_atomic(as.vector(col[i, ]), o, FALSE))
@@ -253,6 +383,15 @@
   .jsonlt_scalar(v, o)
 }
 
+#' .jsonlt_df_rows
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param df See Usage.
+#' @param o See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_df_rows <- function(df, o) {
   nm <- names(df)
   rows <- character(nrow(df))
@@ -268,6 +407,15 @@
   paste0("[", paste(rows, collapse = ","), "]")
 }
 
+#' .jsonlt_df_columns
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param df See Usage.
+#' @param o See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_df_columns <- function(df, o) {
   nm <- names(df)
   parts <- vapply(seq_along(nm), function(j)
@@ -276,6 +424,15 @@
   paste0("{", paste(parts, collapse = ","), "}")
 }
 
+#' .jsonlt_df_values
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param df See Usage.
+#' @param o See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_df_values <- function(df, o) {
   rows <- character(nrow(df))
   for (i in seq_len(nrow(df))) {
@@ -288,6 +445,16 @@
   paste0("[", paste(rows, collapse = ","), "]")
 }
 
+#' .jsonlt_encode
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param o See Usage.
+#' @param unbox_ok See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .jsonlt_encode <- function(x, o, unbox_ok) {
   if (is.null(x)) return(if (identical(o$null, "list")) "{}" else "null")
   if (inherits(x, "jsonlt_scalar")) {
@@ -370,6 +537,14 @@ morie_jsonlt_unbox <- function(x) {
 
 # ---------------------------------------------------------------- parser
 
+#' .jsonlt_parse
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param txt See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .jsonlt_parse <- function(txt) {
   s <- paste(txt, collapse = "\n")
   ch <- strsplit(s, "", fixed = TRUE)[[1]]
@@ -492,9 +667,29 @@ morie_jsonlt_unbox <- function(x) {
   v
 }
 
+#' .jsonlt_is_scalar
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A logical value.
+#' @export
 .jsonlt_is_scalar <- function(x)
   is.null(x) || (is.atomic(x) && length(x) == 1L && !is.list(x))
 
+#' .jsonlt_simplify
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param sv See Usage.
+#' @param sdf See Usage.
+#' @param sm See Usage.
+#' @param flat See Usage.
+#' @return The value of \code{kids}, as built in the body.
+#' @export
 .jsonlt_simplify <- function(x, sv, sdf, sm, flat) {
   if (!is.list(x)) return(x)
   if (!is.null(names(x)))
@@ -563,6 +758,19 @@ morie_jsonlt_from_json <- function(txt, simplifyVector = TRUE,
 
 # Structure only: a comma inside a string stays a comma, which is why this
 # walks characters instead of running a regex over the text.
+#' Structure only: a comma inside a string stays a comma, which is why
+#' this
+#'
+#' walks characters instead of running a regex over the text.
+#'
+#' @param txt See Usage.
+#' @param open_pad See Usage.
+#' @param close_pad See Usage.
+#' @param comma_pad See Usage.
+#' @param colon_txt See Usage.
+#' @param keep_ws See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_walk <- function(txt, open_pad, close_pad, comma_pad, colon_txt,
                          keep_ws) {
   ch <- strsplit(paste(txt, collapse = ""), "", fixed = TRUE)[[1]]
@@ -645,9 +853,24 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
 
 # ---------------------------------------------------- serialize/unserialize
 
+#' .jsonlt_ser_opts
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return The value of \code{.jsonlt_opts}.
+#' @export
 .jsonlt_ser_opts <- function()
   .jsonlt_opts(digits = NULL, na = "null", auto_unbox = FALSE)
 
+#' .jsonlt_ser_attr
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pairs See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_ser_attr <- function(pairs) {
   if (!length(pairs)) return("{}")
   paste0("{", paste(vapply(names(pairs), function(k)
@@ -655,6 +878,14 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
     collapse = ","), "}")
 }
 
+#' .jsonlt_rtype
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_rtype <- function(x) {
   if (is.logical(x)) return("logical")
   if (is.integer(x)) return("integer")
@@ -663,6 +894,14 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
   "character"
 }
 
+#' .jsonlt_ser
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_ser <- function(x) {
   o <- .jsonlt_ser_opts()
   if (is.null(x)) return("{\"type\":\"NULL\",\"attributes\":{},\"value\":{}}")
@@ -714,6 +953,15 @@ morie_jsonlt_serialize <- function(x, pretty = FALSE) {
   if (isTRUE(pretty)) morie_jsonlt_prettify(s, 4L) else s
 }
 
+#' .jsonlt_coerce
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param t See Usage.
+#' @return A character value.
+#' @export
 .jsonlt_coerce <- function(v, t) {
   if (is.null(v)) return(switch(t, logical = NA, integer = NA_integer_,
                                 double = NA_real_, complex = NA_complex_,
@@ -733,6 +981,14 @@ morie_jsonlt_serialize <- function(x, pretty = FALSE) {
   as.character(v)
 }
 
+#' .jsonlt_unser
+#'
+#' Part of the jsonlt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @return The value of \code{vec}, as built in the body.
+#' @export
 .jsonlt_unser <- function(node) {
   if (!is.list(node) || is.null(node$type))
     stop("jsonlt: not a serialize document", call. = FALSE)

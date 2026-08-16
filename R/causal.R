@@ -126,6 +126,15 @@ NULL
 # Python arm always used the ridge route, which is why their AIPW
 # estimates disagreed at ~2e-04.
 
+#' .mor_ps_design
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param data See Usage.
+#' @param covariates See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .mor_ps_design <- function(data, covariates) {
   cols <- lapply(covariates, function(cn) {
     v <- data[[cn]]
@@ -136,6 +145,14 @@ NULL
   cbind(1, do.call(cbind, cols))
 }
 
+#' .mor_ps_standardize
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .mor_ps_standardize <- function(X) {
   n <- nrow(X)
   for (j in seq.int(2L, ncol(X))) {
@@ -147,12 +164,36 @@ NULL
   X
 }
 
+#' .mor_ps_irls
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lam Defaults to \code{0}.
+#' @param max_iter Defaults to \code{200L}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A numeric value.
+#' @export
 .mor_ps_irls <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
   beta <- .mor_ps_irls_beta(X, y, lam = lam, max_iter = max_iter, tol = tol)
   eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
   1 / (1 + exp(-eta))
 }
 
+#' .mor_ps_irls_beta
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lam Defaults to \code{0}.
+#' @param max_iter Defaults to \code{200L}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .mor_ps_irls_beta <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
   n <- nrow(X); p <- ncol(X)
   beta <- numeric(p)
@@ -173,6 +214,18 @@ NULL
 }
 
 
+#' .fit_propensity
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param data See Usage.
+#' @param treatment See Usage.
+#' @param covariates See Usage.
+#' @param ps_model Defaults to \code{"mle"}.
+#' @param ridge_lambda Defaults to \code{1}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .fit_propensity <- function(data, treatment, covariates,
                             ps_model = "mle", ridge_lambda = 1) {
   if (!(ps_model %in% c("mle", "ridge")))
@@ -295,6 +348,23 @@ NULL
 # default here.  Contrast .mor_trim_ps, which caps the SCORES.
 # See also Cole, S. R. and Hernan, M. A. (2008), American Journal of
 # Epidemiology 168(6), 656-664.
+#' Cap the IPW WEIGHTS at percentile cutpoints -- the operation Lee,
+#'
+#' B. K., Lessler, J. and Stuart, E. A. (2011), "Weight Trimming and
+#' Propensity Score Weighting", PLoS ONE 6(3), e18174, actually perform:
+#' "we trimmed high weights downwards, with cutpoints ranging from the
+#' 99th to the 50th percentiles ... all weights with value above the
+#' [cutpoint] were set equal to the [cutpoint]".  Note that they cap the
+#' HIGH side only, which is why side = "upper" is the default here.
+#' Contrast .mor_trim_ps, which caps the SCORES. See also Cole, S. R.
+#' and Hernan, M. A. (2008), American Journal of Epidemiology 168(6),
+#' 656-664.
+#'
+#' @param w See Usage.
+#' @param weight_trim Defaults to \code{NULL}.
+#' @param side Defaults to \code{"upper"}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_trim_weights <- function(w, weight_trim = NULL, side = "upper") {
   if (is.null(weight_trim)) return(w)
   if (!(side %in% c("upper", "both")))
@@ -324,6 +394,19 @@ NULL
 # entire point of their Sec. 5, since that subpopulation is the one the
 # data can actually identify.  The estimators report n_discarded and an
 # estimand note whenever this route is taken.
+#' LOUD WARNING, because this is not a numerical detail: discarding
+#'
+#' CHANGES THE ESTIMAND.  The result is no longer the ATE on the whole
+#' sample but the ATE on the retained subpopulation -- which is the
+#' entire point of their Sec. 5, since that subpopulation is the one the
+#' data can actually identify.  The estimators report n_discarded and an
+#' estimand note whenever this route is taken.
+#'
+#' @param ps See Usage.
+#' @param trim Defaults to \code{c(0.1, 0.9)}.
+#' @param trim_type Defaults to \code{"value"}.
+#' @return A logical value.
+#' @export
 .mor_ps_keep <- function(ps, trim = c(0.1, 0.9), trim_type = "value") {
   if (!identical(trim_type, "discard") || is.null(trim))
     return(rep(TRUE, length(ps)))
@@ -333,6 +416,16 @@ NULL
   ps >= lo & ps <= hi
 }
 
+#' .mor_trim_ps
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param ps See Usage.
+#' @param trim Defaults to \code{c(0.01, 0.99)}.
+#' @param trim_type Defaults to \code{"value"}.
+#' @return The value of \code{pmin}.
+#' @export
 .mor_trim_ps <- function(ps, trim = c(0.01, 0.99), trim_type = "value") {
   ps <- as.numeric(ps)
   if (!(trim_type %in% c("value", "quantile", "discard")))
@@ -614,6 +707,18 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 # separate, silently, which is the last of the three differences that
 # made their AIPW estimates disagree.
 
+#' .mor_om_fit_predict
+#'
+#' Part of the causal implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param rows See Usage.
+#' @param Xpred See Usage.
+#' @param outcome_model See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .mor_om_fit_predict <- function(X, y, rows, Xpred, outcome_model) {
   Xs <- X[rows, , drop = FALSE]
   ys <- y[rows]

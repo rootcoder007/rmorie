@@ -61,6 +61,16 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
   out
 }
 
+#' .proj
+#'
+#' Part of the berte_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param row See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .proj <- function(row, W, b = NULL) {
   W <- as.matrix(W); storage.mode(W) <- "double"
   v <- as.numeric(W) %*% as.numeric(row)

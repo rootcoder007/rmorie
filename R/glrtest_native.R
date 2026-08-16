@@ -7,6 +7,18 @@
 # I(f1, f0) = E_f1[ log( f1(X_1) / f0(X_1) ) ].
 # Native implementation mirroring Python morie.fn.glm, loop for loop.
 
+#' .morie_glrtest_scores
+#'
+#' Part of the glrtest_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param p0 See Usage.
+#' @param p1 See Usage.
+#' @param family See Usage.
+#' @param sd See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_glrtest_scores <- function(x, p0, p1, family, sd) {
   if (family == "bernoulli") {
     if (!(p0 > 0 && p0 < 1) || !(p1 > 0 && p1 < 1))

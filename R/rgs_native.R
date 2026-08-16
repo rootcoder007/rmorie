@@ -12,6 +12,14 @@
 
 .rgs_EPS <- 1e-12
 
+#' .rgs_grid_weights
+#'
+#' Part of the rgs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_t See Usage.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 .rgs_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
@@ -129,6 +137,13 @@ morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
   )
 }
 
+#' .rgs_cheatsheet
+#'
+#' Part of the rgs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .rgs_cheatsheet <- function() {
   paste0("rgs: morie_rgs_functional_regression(X, Y, basis) -> the ",
          "functional linear model Y = int beta(t) X(t) dt by FPC ",

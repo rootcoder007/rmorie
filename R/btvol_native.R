@@ -13,6 +13,17 @@
 # decomposition E[RV] = IV + 2n eps^2 is what the noise estimator
 # reads off.
 
+#' .btv_boot_reps
+#'
+#' Part of the btvol_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param stat See Usage.
+#' @param B See Usage.
+#' @param seed See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .btv_boot_reps <- function(x, stat, B, seed) {
   n <- if (is.matrix(x)) nrow(x) else length(x)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)

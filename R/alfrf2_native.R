@@ -99,12 +99,28 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
   a * x0 + b * eps
 }
 
+#' .alfrf2_centre
+#'
+#' Part of the alfrf2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @return A list with \code{P}, \code{c}.
+#' @export
 .alfrf2_centre <- function(P) {
   n <- nrow(P)
   cc <- vapply(1:3, function(d) .w3_csum(P[, d]) / n, numeric(1))
   list(P = sweep(P, 2, cc, "-"), c = cc)
 }
 
+#' .alfrf2_det3
+#'
+#' Part of the alfrf2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @return A numeric value.
+#' @export
 .alfrf2_det3 <- function(M)
   M[1, 1] * (M[2, 2] * M[3, 3] - M[2, 3] * M[3, 2]) -
   M[1, 2] * (M[2, 1] * M[3, 3] - M[2, 3] * M[3, 1]) +
@@ -217,6 +233,20 @@ morie_alfrf2_ideal <- function(x, fixed, spacing = .alfrf2_ca_spacing,
   y
 }
 
+#' .alfrf2_denoise
+#'
+#' Part of the alfrf2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param route See Usage.
+#' @param denoiser See Usage.
+#' @param x See Usage.
+#' @param t See Usage.
+#' @param fixed See Usage.
+#' @param spacing See Usage.
+#' @param passes See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .alfrf2_denoise <- function(route, denoiser, x, t, fixed, spacing,
                             passes) {
   if (!is.null(denoiser)) return(as.matrix(denoiser(x, t)))

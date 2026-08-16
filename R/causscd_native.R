@@ -3,6 +3,16 @@
 #   (2021) "Synthetic Difference-in-Differences", American Economic Review
 #   111(12), 4088-4118.
 
+#' .causscd_grid
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param treated See Usage.
+#' @param t_post See Usage.
+#' @return A list with \code{rows}, \code{n}, \code{T}, \code{tr}, \code{t_post}.
+#' @export
 .causscd_grid <- function(Y, treated, t_post) {
   rows <- lapply(Y, function(r) as.numeric(r))
   n <- length(rows)
@@ -22,6 +32,14 @@
   list(rows = rows, n = n, T = T, tr = tr, t_post = t_post)
 }
 
+#' .causscd_project_simplex
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 .causscd_project_simplex <- function(v) {
   m <- length(v)
   u <- sort(v, decreasing = TRUE)
@@ -39,6 +57,18 @@
   pmax(0.0, v - theta)
 }
 
+#' .causscd_simplex_fit
+#'
+#' Part of the causscd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param cols See Usage.
+#' @param target See Usage.
+#' @param penalty See Usage.
+#' @param iters Defaults to \code{2000L}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{w}, \code{intercept}.
+#' @export
 .causscd_simplex_fit <- function(cols, target, penalty, iters = 2000L, tol = 1e-12) {
   m <- length(cols)
   L <- length(target)

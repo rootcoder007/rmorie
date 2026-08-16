@@ -68,6 +68,14 @@
 
 .plsa_EPS <- 1e-300
 
+#' .plsa_check
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @return A list with \code{N}, \code{D}, \code{V}.
+#' @export
 .plsa_check <- function(n_dw) {
   if (is.list(n_dw) && !is.data.frame(n_dw) && !is.matrix(n_dw)) {
     N <- do.call(rbind, lapply(n_dw, as.numeric))
@@ -81,6 +89,17 @@
   list(N = N, D = nrow(N), V = ncol(N))
 }
 
+#' .plsa_e_step
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param Pz See Usage.
+#' @param Pd_z See Usage.
+#' @param Pw_z See Usage.
+#' @return The value of \code{post}, as built in the body.
+#' @export
 .plsa_e_step <- function(n_dw, Pz, Pd_z, Pw_z) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -103,6 +122,16 @@
   post
 }
 
+#' .plsa_m_step
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param post See Usage.
+#' @param K See Usage.
+#' @return A list with \code{Pz}, \code{Pd_z}, \code{Pw_z}.
+#' @export
 .plsa_m_step <- function(n_dw, post, K) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -130,6 +159,16 @@
   list(Pz = Pz, Pd_z = Pd_z, Pw_z = Pw_z)
 }
 
+#' .plsa_joint_probability
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Pz See Usage.
+#' @param Pd_z See Usage.
+#' @param Pw_z See Usage.
+#' @return The value of \code{P}, as built in the body.
+#' @export
 .plsa_joint_probability <- function(Pz, Pd_z, Pw_z) {
   K <- length(Pz)
   D <- ncol(Pd_z)
@@ -143,6 +182,17 @@
   P
 }
 
+#' .plsa_log_likelihood
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param Pz See Usage.
+#' @param Pd_z See Usage.
+#' @param Pw_z See Usage.
+#' @return The value of \code{.plsa_log_likelihood}.
+#' @export
 .plsa_log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -229,6 +279,17 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
   )
 }
 
+#' .plsa_perplexity
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param Pz See Usage.
+#' @param Pd_z See Usage.
+#' @param Pw_z See Usage.
+#' @return A numeric value.
+#' @export
 .plsa_perplexity <- function(n_dw, Pz, Pd_z, Pw_z) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -236,6 +297,13 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
   exp(-.plsa_log_likelihood(N, Pz, Pd_z, Pw_z) / tot)
 }
 
+#' .plsa_cheatsheet
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .plsa_cheatsheet <- function() {
   paste("plsa: the ASPECT model. P(d,w) = sum_z P(z)P(d|z)P(w|z)",
         "-- d and w independent GIVEN z, with |z| small so z is a",

@@ -59,6 +59,18 @@
 .trclrn_EPS <- 1e-12
 .trclrn_METHODS <- c("ipw", "augmented")
 
+#' .trclrn_check
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param X See Usage.
+#' @param propensity See Usage.
+#' @param min_propensity See Usage.
+#' @return A list with \code{y}, \code{a}, \code{Xm}, \code{p}, \code{n}, \code{arms}.
+#' @export
 .trclrn_check <- function(Y, A, X, propensity, min_propensity) {
   y <- as.numeric(unlist(Y))
   a <- as.integer(unlist(A))
@@ -150,6 +162,21 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
   return(tot / n)
 }
 
+#' .trclrn_best_treatment
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param a See Usage.
+#' @param p See Usage.
+#' @param rows See Usage.
+#' @param arms See Usage.
+#' @param method See Usage.
+#' @param Xm See Usage.
+#' @param outcome_model See Usage.
+#' @return A list with \code{best}, \code{bv}.
+#' @export
 .trclrn_best_treatment <- function(y, a, p, rows, arms, method, Xm,
                                   outcome_model) {
   best <- NULL
@@ -296,6 +323,14 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
   return(result)
 }
 
+#' .trclrn_count_leaves
+#'
+#' Part of the trclrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nd See Usage.
+#' @return A numeric value.
+#' @export
 .trclrn_count_leaves <- function(nd) {
   if (nd$leaf) return(1L)
   return(.trclrn_count_leaves(nd$left) + .trclrn_count_leaves(nd$right))

@@ -16,6 +16,14 @@
 # same pair order, same bin index floor(t K / W) clamped to [0, K-1],
 # same midpoint dequantization, same bit accounting.
 
+#' .mor_pq_decompose
+#'
+#' Part of the polqnt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{levels}, \code{radius}.
+#' @export
 .mor_pq_decompose <- function(x) {
   levels <- list()
   r <- x
@@ -32,6 +40,15 @@
   list(levels = levels, radius = r[1L])
 }
 
+#' .mor_pq_reconstruct
+#'
+#' Part of the polqnt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param levels See Usage.
+#' @param radius See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .mor_pq_reconstruct <- function(levels, radius) {
   r <- radius
   for (ell in seq(length(levels), 1L)) {

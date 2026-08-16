@@ -39,6 +39,15 @@
 #                 the classical two-sided-chart score.
 #   "poisson"   : p0/p1 are rates and x counts.
 
+#' .glm_score_bernoulli
+#'
+#' Part of the glm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p0 See Usage.
+#' @param p1 See Usage.
+#' @return A list with \code{z}, \code{kl}.
+#' @export
 .glm_score_bernoulli <- function(p0, p1) {
   if (!is.numeric(p0) || length(p0) != 1L || p0 <= 0 || p0 >= 1)
     stop("glr_test: bernoulli p0 must lie strictly in (0, 1)")
@@ -55,6 +64,16 @@
   list(z = z, kl = kl)
 }
 
+#' .glm_score_normal
+#'
+#' Part of the glm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p0 See Usage.
+#' @param p1 See Usage.
+#' @param sd See Usage.
+#' @return A list with \code{z}, \code{kl}.
+#' @export
 .glm_score_normal <- function(p0, p1, sd) {
   if (!is.numeric(sd) || length(sd) != 1L || sd <= 0)
     stop("glr_test: sd must be positive")
@@ -66,6 +85,15 @@
   list(z = z, kl = kl)
 }
 
+#' .glm_score_poisson
+#'
+#' Part of the glm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p0 See Usage.
+#' @param p1 See Usage.
+#' @return A list with \code{z}, \code{kl}.
+#' @export
 .glm_score_poisson <- function(p0, p1) {
   if (!is.numeric(p0) || length(p0) != 1L || p0 <= 0)
     stop("glr_test: poisson rate p0 must be positive")
@@ -213,6 +241,13 @@ glrtest <- function(x, p0, p1, threshold = NULL,
             family = family, sd = sd)
 }
 
+#' .glm_cheatsheet
+#'
+#' Part of the glm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .glm_cheatsheet <- function() {
   paste0("glm: Page likelihood-ratio CUSUM, max_k sum_{i=k}^{n} ",
          "log(f1/f0) (Lai 1995 eq. 2.3); families bernoulli/normal/",

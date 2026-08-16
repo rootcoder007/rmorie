@@ -59,6 +59,14 @@
 
 .tmlcll_EPS <- 1e-12
 
+#' .tmlcll_mat
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .tmlcll_mat <- function(X) {
   if (is.matrix(X)) return(X)
   if (is.null(X) || (is.numeric(X) && length(X) == 0)) {
@@ -92,6 +100,14 @@
   stop("Cannot convert to matrix")
 }
 
+#' .tmlcll_vec
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .tmlcll_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.numeric(x)) return(as.numeric(x))
@@ -99,6 +115,17 @@
   stop("Cannot convert to vector")
 }
 
+#' .tmlcll_wls
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{coef}.
+#' @export
 .tmlcll_wls <- function(X, y, w, ridge) {
   n <- length(y)
   p <- ncol(X)
@@ -112,6 +139,15 @@
   list(coef = as.numeric(co))
 }
 
+#' .tmlcll_design
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param n See Usage.
+#' @return The value of \code{des}, as built in the body.
+#' @export
 .tmlcll_design <- function(W, n) {
   p <- ncol(W)
   des <- matrix(0, nrow = n, ncol = p + 1)
@@ -120,6 +156,15 @@
   des
 }
 
+#' .tmlcll_logit_irls
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param des See Usage.
+#' @param a See Usage.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 .tmlcll_logit_irls <- function(des, a) {
   n <- nrow(des)
   p <- ncol(des)
@@ -144,6 +189,15 @@
   b
 }
 
+#' .tmlcll_ols
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return The value of \code{$}.
+#' @export
 .tmlcll_ols <- function(X, y) {
   Xm <- .tmlcll_mat(X)
   yv <- .tmlcll_vec(y)
@@ -152,10 +206,26 @@
   result$coef
 }
 
+#' .tmlcll_logit
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tmlcll_logit <- function(p) {
   log(p / (1 - p))
 }
 
+#' .tmlcll_expit
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .tmlcll_expit <- function(x) {
   ifelse(x > -700, 1 / (1 + exp(-x)), 0)
 }
@@ -361,6 +431,13 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
   )
 }
 
+#' .tmlcll_morie_cheatsheet
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tmlcll_morie_cheatsheet <- function() {
   "tmlcll: the traditional CLPM's cross-lags MIX within-person change with stable between-person differences, so a random intercept is needed before 'X leads to Y' means anything -- with a strong between-person confounder and no within-person effect, the plain CLPM still reports a cross-lag. And a regression coefficient is not a causal effect under TIME-VARYING confounding: the g-formula identifies the intervention contrast and the sequential TMLE estimates it doubly robustly. Both are provided, and each is named for what it is."
 }

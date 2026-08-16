@@ -147,6 +147,18 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
   v
 }
 
+#' .chemsc_B
+#'
+#' Part of the chemsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param d_ideal See Usage.
+#' @param d_max See Usage.
+#' @param sigma See Usage.
+#' @param smoothing See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .chemsc_B <- function(d, d_ideal, d_max, sigma, smoothing) {
   if (smoothing == "none") return(morie_chemsc_block(d, d_ideal, d_max))
   if (smoothing == "gaussian")
@@ -155,6 +167,15 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
        paste(.CHEMSC_SMOOTHINGS, collapse = ", "))
 }
 
+#' .chemsc_par
+#'
+#' Part of the chemsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param base See Usage.
+#' @param over See Usage.
+#' @return The value of \code{base}, as built in the body.
+#' @export
 .chemsc_par <- function(base, over) {
   if (is.null(over)) return(base)
   for (nm in names(over)) base[[nm]] <- over[[nm]]
@@ -198,6 +219,22 @@ morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
 # would also make a contact sitting exactly on R1 score a hair under one
 # whenever the coordinate arithmetic put it a single bit on the wrong
 # side.
+#' How far past the ideal separation a contact is, never negative. The
+#'
+#' metal and lipophilic terms are RANGES, not windows: the guide calls
+#' R1 the ideal separation and R2 "the maximum distance to be considered
+#' a binding interaction", so anything at or inside R1 is fully ideal
+#' and only the far side ramps down. Folding this about zero the way the
+#' hydrogen-bond deviations are folded would penalise a contact for
+#' being too close, which is the clash term\'s job and not this one\'s
+#' -- and it would also make a contact sitting exactly on R1 score a
+#' hair under one whenever the coordinate arithmetic put it a single bit
+#' on the wrong side.
+#'
+#' @param r See Usage.
+#' @param r1 See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .chemsc_over <- function(r, r1) {
   d <- as.numeric(r) - r1
   if (d > 0) d else 0
@@ -371,9 +408,28 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
        smoothing = smoothing, method = "ChemScore empirical docking")
 }
 
+#' .chemsc_dist
+#'
+#' Part of the chemsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .chemsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 # The angle at b, in degrees, formed by a-b-c.
+#' The angle at b, in degrees, formed by a-b-c
+#'
+#' Part of the chemsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @return A numeric value.
+#' @export
 .chemsc_angle <- function(a, b, c) {
   u <- a - b
   v <- c - b

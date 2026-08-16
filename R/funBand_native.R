@@ -22,6 +22,14 @@
 # Generalized Linear Models, Chapman and Hall, ISBN 978-0-412-30040-0, Sec 2.1.2.
 
 # banded Q (n x n-2) and R (n-2 x n-2) of the natural cubic spline
+#' Banded Q (n x n-2) and R (n-2 x n-2) of the natural cubic spline
+#'
+#' Part of the funBand_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{Q}, \code{R}.
+#' @export
 .funBand_qr_bands <- function(x) {
   n <- length(x)
   if (n < 4L) {
@@ -49,6 +57,14 @@
 }
 
 # K = Q R^-1 Q', symmetric PSD with a two-dimensional null space
+#' K = Q R^-1 Q\', symmetric PSD with a two-dimensional null space
+#'
+#' Part of the funBand_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .funBand_roughness <- function(x) {
   qr <- .funBand_qr_bands(x)
   Z <- t(solve(qr$R, t(qr$Q)))          # Z = Q R^-1

@@ -95,6 +95,16 @@ morie_polyak <- function(iterates, burn_in = 0) {
   )
 }
 
+#' .polyak_running_average
+#'
+#' Part of the polyak_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param prev See Usage.
+#' @param new See Usage.
+#' @param decay Defaults to \code{0.999}.
+#' @return A numeric value.
+#' @export
 .polyak_running_average <- function(prev, new, decay = 0.999) {
   a <- as.numeric(decay)
   if (a <= 0 || a >= 1) {
@@ -112,6 +122,16 @@ morie_polyak <- function(iterates, burn_in = 0) {
   a * p + (1 - a) * n
 }
 
+#' .polyak_soft_update
+#'
+#' Part of the polyak_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param target See Usage.
+#' @param online See Usage.
+#' @param tau Defaults to \code{0.001}.
+#' @return A numeric value.
+#' @export
 .polyak_soft_update <- function(target, online, tau = 0.001) {
   t <- as.numeric(tau)
   if (t <= 0 || t > 1) {
@@ -129,6 +149,17 @@ morie_polyak <- function(iterates, burn_in = 0) {
   t * b + (1 - t) * a
 }
 
+#' Step %% C == 0 : a copy is taken at multiples of C
+#'
+#' Part of the polyak_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param target See Usage.
+#' @param online See Usage.
+#' @param step See Usage.
+#' @param C Defaults to \code{10000}.
+#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{target}, \code{copied}.
+#' @export
 .polyak_hard_update <- function(target, online, step, C = 10000) {
   # step %% C == 0 : a copy is taken at multiples of C
   if (as.integer(step) %% as.integer(C) == 0L) {
@@ -144,6 +175,14 @@ morie_polyak <- function(iterates, burn_in = 0) {
   }
 }
 
+#' .polyak_lag_halflife
+#'
+#' Part of the polyak_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tau See Usage.
+#' @return A list with \code{halflife}, \code{approx}, \code{tau}, \code{note}.
+#' @export
 .polyak_lag_halflife <- function(tau) {
   t <- as.numeric(tau)
   if (t <= 0 || t >= 1) {
@@ -158,6 +197,13 @@ morie_polyak <- function(iterates, burn_in = 0) {
   )
 }
 
+#' .polyak_cheatsheet
+#'
+#' Part of the polyak_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .polyak_cheatsheet <- function() {
   "polyak: (1) averaging the iterates of a SLOWLY decaying stochastic approximation is asymptotically optimal -- the second-order rate without second derivatives, provided the step decays slower than 1/t. (2) Q-learning diverges because the network computes its own target; DQN copies the weights every C steps, DDPG instead TRACKS them, theta' <- tau theta + (1-tau) theta' with tau = 1e-3, so targets move slowly and the problem resembles supervised learning. The lag, about 0.69/tau steps, is the price."
 }

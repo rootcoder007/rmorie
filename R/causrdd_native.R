@@ -14,6 +14,15 @@
 # per-side HC0 sandwich variance treated as independent across sides
 # (the rdrobust vce = "hc0" convention).
 
+#' .mor_rdd_kernel
+#'
+#' Part of the causrdd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param name See Usage.
+#' @param u See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .mor_rdd_kernel <- function(name, u) {
   if (name == "triangular") return(pmax(1 - abs(u), 0))
   if (name == "uniform") return(ifelse(abs(u) <= 1, 0.5, 0))
@@ -22,6 +31,15 @@
 
 # weighted linear fit on one side, with the HC0 sandwich variance of
 # the intercept (the boundary value that the RDD contrast uses)
+#' Weighted linear fit on one side, with the HC0 sandwich variance of
+#'
+#' the intercept (the boundary value that the RDD contrast uses)
+#'
+#' @param dm See Usage.
+#' @param ym See Usage.
+#' @param w See Usage.
+#' @return A list with \code{a}, \code{b}, \code{v}.
+#' @export
 .mor_rdd_side <- function(dm, ym, w) {
   X <- cbind(1, dm)
   XtW <- t(X) * rep(w, each = 2L)

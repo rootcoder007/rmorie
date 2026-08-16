@@ -24,6 +24,14 @@
 
 # Private helpers (prefixed .infmer_ to share one R/ namespace safely)
 
+#' .infmer_kl_from_uniform
+#'
+#' Part of the infmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{kl}, as built in the body.
+#' @export
 .infmer_kl_from_uniform <- function(p) {
   n <- length(p)
   if (n == 0L) return(0)
@@ -35,6 +43,15 @@
   return(kl)
 }
 
+#' .infmer_sparsity_measure
+#'
+#' Part of the infmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param k See Usage.
+#' @return The value of \code{m_scores}, as built in the body.
+#' @export
 .infmer_sparsity_measure <- function(q, k) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   if (is.null(dim(k))) k <- matrix(k, nrow = 1L)
@@ -46,6 +63,16 @@
   return(m_scores)
 }
 
+#' .infmer_select_queries
+#'
+#' Part of the infmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param k See Usage.
+#' @param c Defaults to \code{5}.
+#' @return A vector, from \code{sort}.
+#' @export
 .infmer_select_queries <- function(q, k, c = 5) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   L_Q <- nrow(q)
@@ -57,6 +84,16 @@
   return(sort(top_idx))
 }
 
+#' .infmer_full_attention
+#'
+#' Part of the infmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param k See Usage.
+#' @param v See Usage.
+#' @return A list with \code{output}, \code{attention}, \code{scores}.
+#' @export
 .infmer_full_attention <- function(q, k, v) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   if (is.null(dim(k))) k <- matrix(k, nrow = 1L)
@@ -70,6 +107,16 @@
   return(list(output = output, attention = attn, scores = scores))
 }
 
+#' .infmer_complexity
+#'
+#' Part of the infmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L_Q See Usage.
+#' @param L_K See Usage.
+#' @param c Defaults to \code{5}.
+#' @return A list with \code{full_attention_flops}, \code{probsparse_flops}, \code{ratio}, \code{u}.
+#' @export
 .infmer_complexity <- function(L_Q, L_K, c = 5) {
   LQn <- as.numeric(L_Q)
   LKn <- as.numeric(L_K)

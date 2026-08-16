@@ -48,6 +48,15 @@
 
 .alfqud_ops <- c("mov", "cmp", "cmovl", "cmovg")
 
+#' .alfqud_read
+#'
+#' Part of the alfqud_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @param loc See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .alfqud_read <- function(st, loc) {
   bank <- loc[[1]]; idx <- as.integer(loc[[2]])
   if (identical(bank, "M")) {
@@ -63,6 +72,16 @@
   stop("a location is in memory or in a register, nothing else")
 }
 
+#' .alfqud_write
+#'
+#' Part of the alfqud_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @param loc See Usage.
+#' @param v See Usage.
+#' @return The value of \code{st}, as built in the body.
+#' @export
 .alfqud_write <- function(st, loc, v) {
   bank <- loc[[1]]; idx <- as.integer(loc[[2]])
   if (identical(bank, "M")) {
@@ -193,6 +212,19 @@ morie_alfqud_text <- function(program) {
     collapse = "\n")
 }
 
+#' .alfqud_score
+#'
+#' Part of the alfqud_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param program See Usage.
+#' @param inputs See Usage.
+#' @param targets See Usage.
+#' @param n_reg See Usage.
+#' @param lw See Usage.
+#' @param rf See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .alfqud_score <- function(program, inputs, targets, n_reg, lw, rf) {
   cc <- if (is.null(rf)) morie_alfqud_correctness(program, inputs,
                                                  targets, n_reg)
@@ -200,6 +232,20 @@ morie_alfqud_text <- function(program) {
   c(as.numeric(cc) - as.numeric(lw) * length(program), as.numeric(cc))
 }
 
+#' .alfqud_bfs
+#'
+#' Part of the alfqud_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param inputs See Usage.
+#' @param targets See Usage.
+#' @param acts See Usage.
+#' @param n_reg See Usage.
+#' @param max_len See Usage.
+#' @param lw See Usage.
+#' @param rf See Usage.
+#' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
+#' @export
 .alfqud_bfs <- function(inputs, targets, acts, n_reg, max_len, lw, rf) {
   best <- list()
   z <- .alfqud_score(list(), inputs, targets, n_reg, lw, rf)
@@ -220,6 +266,22 @@ morie_alfqud_text <- function(program) {
   list(prog = best, s = best_s, c = best_c, seen = seen)
 }
 
+#' .alfqud_mcts
+#'
+#' Part of the alfqud_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param inputs See Usage.
+#' @param targets See Usage.
+#' @param acts See Usage.
+#' @param n_reg See Usage.
+#' @param max_len See Usage.
+#' @param lw See Usage.
+#' @param rf See Usage.
+#' @param n_sim See Usage.
+#' @param c_puct See Usage.
+#' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
+#' @export
 .alfqud_mcts <- function(inputs, targets, acts, n_reg, max_len, lw, rf,
                          n_sim, c_puct) {
   # Nodes are keyed by the program that reaches them, so the tree is a

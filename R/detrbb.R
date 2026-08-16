@@ -2,6 +2,13 @@
 
 # Exact minimum-cost assignment (Jonker-Volgenant shortest paths) on a
 # rectangular cost with rows <= columns.  Returns the column per row.
+#' Exact minimum-cost assignment (Jonker-Volgenant shortest paths) on a
+#'
+#' rectangular cost with rows <= columns.  Returns the column per row.
+#'
+#' @param cost See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .detr_hungarian <- function(cost) {
   n <- nrow(cost); m <- ncol(cost)
   if (n > m) stop("hungarian: need at least as many columns as rows")

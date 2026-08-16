@@ -41,6 +41,14 @@
 
 OBJECTIVES <- c("maxmin", "maxsum")
 
+#' .tncomp_fingerprint
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tncomp_fingerprint <- function(x) {
   if (is.character(x)) {
     chars <- strsplit(x, "")[[1]]
@@ -58,6 +66,15 @@ OBJECTIVES <- c("maxmin", "maxsum")
   }
 }
 
+#' .tncomp_tanimoto
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f1 See Usage.
+#' @param f2 See Usage.
+#' @return A numeric value.
+#' @export
 .tncomp_tanimoto <- function(f1, f2) {
   s1 <- length(f1)
   s2 <- length(f2)
@@ -91,6 +108,15 @@ distance_matrix <- function(fps) {
   D
 }
 
+#' .tncomp_seed
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{which.max}.
+#' @export
 .tncomp_seed <- function(D, seed) {
   n <- nrow(D)
   if (!is.null(seed)) {
@@ -104,6 +130,18 @@ distance_matrix <- function(fps) {
   which.max(tot)
 }
 
+#' .tncomp_select
+#'
+#' Part of the tncomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fps See Usage.
+#' @param k See Usage.
+#' @param objective See Usage.
+#' @param seed Defaults to \code{NULL}.
+#' @param D Defaults to \code{NULL}.
+#' @return A list with \code{chosen}, \code{M}.
+#' @export
 .tncomp_select <- function(fps, k, objective, seed = NULL, D = NULL) {
   if (!(objective %in% OBJECTIVES)) {
     stop(sprintf("tncomp: objective must be one of %s, got %s",

@@ -69,6 +69,17 @@ Htprd <- function(param_grid, cv_data, fit_cv = NULL, k = 5L) {
                        "Chapter 11 Sect. 11.4 with CV_K of eq. (4.1)"))
 }
 
+#' .htprd_ridge_cv
+#'
+#' Part of the htprd implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param K See Usage.
+#' @param params See Usage.
+#' @return A numeric value.
+#' @export
 .htprd_ridge_cv <- function(X, y, K, params) {
   n <- length(y)
   lam <- if (is.null(params$lam)) 1 else as.numeric(params$lam)

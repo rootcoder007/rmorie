@@ -5,6 +5,21 @@
 # non-positive-variance guard is directly unit-testable. `e0`, `e1` are
 # the residual projections, `n` the sample size, `I`/`W` the identity
 # and spatial-weights matrices.
+#' Internal: SAR-lag concentrated negative log-likelihood in rho
+#'
+#' Extracted from the sarla() optimiser closure so the singular-system /
+#' non-positive-variance guard is directly unit-testable. `e0`, `e1` are
+#' the residual projections, `n` the sample size, `I`/`W` the identity
+#' and spatial-weights matrices.
+#'
+#' @param rho See Usage.
+#' @param e0 See Usage.
+#' @param e1 See Usage.
+#' @param n See Usage.
+#' @param I See Usage.
+#' @param W See Usage.
+#' @return A numeric value.
+#' @export
 .sarla_negll <- function(rho, e0, e1, n, I, W) {
   e <- e0 - rho * e1
   sigma2 <- as.numeric(sum(e^2)) / n

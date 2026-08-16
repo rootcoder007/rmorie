@@ -51,10 +51,26 @@
 
 # ---- private helpers (prefixed .unifAlg_ to avoid env collisions) ----
 
+#' .unifAlg_is_var
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @return A logical value.
+#' @export
 .unifAlg_is_var <- function(t) {
   is.list(t) && length(t) == 2L && identical(t[[1]], .VAR)
 }
 
+#' .unifAlg_check
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .unifAlg_check <- function(t) {
   if (.unifAlg_is_var(t)) {
     return(t)
@@ -69,6 +85,15 @@
                deparse(t)))
 }
 
+#' .unifAlg_apply_once
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param subst See Usage.
+#' @return The value of \code{list}.
+#' @export
 .unifAlg_apply_once <- function(t, subst) {
   if (.unifAlg_is_var(t)) {
     nm <- t[[2]]
@@ -81,6 +106,16 @@
   list(.APP, t[[2]], new_args)
 }
 
+#' .unifAlg_fail
+#'
+#' Part of the unifAlg_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sub See Usage.
+#' @param why See Usage.
+#' @param oc See Usage.
+#' @return A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason}, \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
+#' @export
 .unifAlg_fail <- function(sub, why, oc) {
   list(
     estimate = FALSE,

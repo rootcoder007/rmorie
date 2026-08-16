@@ -48,6 +48,16 @@ Svyqtl <- function(y, weights = NULL, quantile = 0.5) {
        method = "weighted CDF inversion with Woodruff interval [Francisco & Fuller 1991]")
 }
 
+#' .svyqtl_inv
+#'
+#' Part of the Svyqtl implementation; see the file header for the source
+#' it follows.
+#'
+#' @param xs See Usage.
+#' @param cum See Usage.
+#' @param p See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .svyqtl_inv <- function(xs, cum, p) {
   i <- which(cum >= p)
   if (length(i)) xs[i[1L]] else xs[length(xs)]

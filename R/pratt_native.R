@@ -22,6 +22,14 @@
 
 .pratt_EPS <- 1e-12
 
+#' .pratt_mat
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .pratt_mat <- function(H) {
   if (is.list(H) && !is.matrix(H)) {
     if (length(H) == 0L) {
@@ -34,10 +42,29 @@
   }
 }
 
+#' .pratt_vec
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .pratt_vec <- function(v) {
   as.numeric(v)
 }
 
+#' .pratt_attention
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param W See Usage.
+#' @param b See Usage.
+#' @param u_context See Usage.
+#' @return A numeric value.
+#' @export
 .pratt_attention <- function(H, W, b, u_context) {
   rows <- .pratt_mat(H)
   if (nrow(rows) == 0L) {
@@ -59,6 +86,17 @@
   e / z
 }
 
+#' .pratt_sentence_vector
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H_words See Usage.
+#' @param W See Usage.
+#' @param b See Usage.
+#' @param u_w See Usage.
+#' @return A list with \code{vector}, \code{alpha}.
+#' @export
 .pratt_sentence_vector <- function(H_words, W, b, u_w) {
   a <- .pratt_attention(H_words, W, b, u_w)
   rows <- .pratt_mat(H_words)
@@ -68,6 +106,17 @@
   )
 }
 
+#' .pratt_document_vector
+#'
+#' Part of the pratt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H_sentences See Usage.
+#' @param W See Usage.
+#' @param b See Usage.
+#' @param u_s See Usage.
+#' @return A list with \code{vector}, \code{alpha}.
+#' @export
 .pratt_document_vector <- function(H_sentences, W, b, u_s) {
   a <- .pratt_attention(H_sentences, W, b, u_s)
   rows <- .pratt_mat(H_sentences)

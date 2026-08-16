@@ -115,9 +115,26 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 
 # Centre latitude of row i (one-based) of an n_lat band grid, south to
 # north.
+#' Centre latitude of row i (one-based) of an n_lat band grid, south to
+#'
+#' north.
+#'
+#' @param i See Usage.
+#' @param n_lat See Usage.
+#' @return A numeric value.
+#' @export
 .hadcrut_cell_lat <- function(i, n_lat) -90 + (i - 0.5) * (180 / n_lat)
 
 # Area weight of a latitude band: the cosine of its centre.
+#' Area weight of a latitude band: the cosine of its centre
+#'
+#' Part of the hadcrut_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param i See Usage.
+#' @param n_lat See Usage.
+#' @return The value of \code{cos}.
+#' @export
 .hadcrut_band_weight <- function(i, n_lat)
   cos(.hadcrut_cell_lat(i, n_lat) * pi / 180)
 
@@ -173,6 +190,16 @@ morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
 # Cosine-weighted mean over the given rows, and its variance. The mean
 # is NA when the region holds no observation, which is a real state in
 # 1850 and must not silently become zero.
+#' Cosine-weighted mean over the given rows, and its variance. The mean
+#'
+#' is NA when the region holds no observation, which is a real state in
+#' 1850 and must not silently become zero.
+#'
+#' @param grid See Usage.
+#' @param rows See Usage.
+#' @param var Defaults to \code{NULL}.
+#' @return A list with \code{mean}, \code{var}, \code{weight}, \code{n}.
+#' @export
 .hadcrut_region_mean <- function(grid, rows, var = NULL) {
   n_lat <- nrow(grid)
   num <- numeric(0); den <- numeric(0); qnum <- numeric(0); n <- 0L

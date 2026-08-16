@@ -18,6 +18,16 @@
 # the same eigenvalue tolerance, and the same strict ">" scan so the
 # EARLIEST maximising k wins ties.
 
+#' .mor_kc_gram
+#'
+#' Part of the kcusum_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param kernel See Usage.
+#' @param bandwidth See Usage.
+#' @return A list with \code{K}, \code{bw}.
+#' @export
 .mor_kc_gram <- function(z, kernel, bandwidth) {
   n <- nrow(z)
   if (kernel == "linear") return(list(K = z %*% t(z), bw = NULL))

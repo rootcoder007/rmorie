@@ -6,6 +6,15 @@
 
 .Z975 <- 1.959963984540054
 
+#' .robpca_matrix
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param name Defaults to \code{"X"}.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .robpca_matrix <- function(X, name = "X") {
   if (is.data.frame(X)) X <- as.matrix(X)
   if (!is.numeric(X)) {
@@ -21,6 +30,14 @@
   X
 }
 
+#' .robpca_eigh_desc
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param C See Usage.
+#' @return A list with \code{values}, \code{vectors}.
+#' @export
 .robpca_eigh_desc <- function(C) {
   e <- eigen(C, symmetric = TRUE)
   ord <- order(e$values, decreasing = TRUE)
@@ -34,12 +51,30 @@
   list(values = as.numeric(e$values[ord]), vectors = Vm)
 }
 
+#' .robpca_det_from_chol
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param C See Usage.
+#' @return The value of \code{prod}.
+#' @export
 .robpca_det_from_chol <- function(C) {
   L <- tryCatch(chol(C), error = function(e) NULL)
   if (is.null(L)) return(0.0)
   prod(diag(L) ^ 2)
 }
 
+#' .robpca_mahalanobis
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param mu See Usage.
+#' @param C See Usage.
+#' @return A numeric value.
+#' @export
 .robpca_mahalanobis <- function(X, mu, C) {
   invC <- tryCatch(solve(C), error = function(e) NULL)
   if (is.null(invC)) stop("singular")
@@ -89,6 +124,16 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
   c(loc = unname(best_mean), scale = unname(scale))
 }
 
+#' .robpca_directions
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param n_dirs See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{do.call}.
+#' @export
 .robpca_directions <- function(rows, n_dirs, seed) {
   n <- nrow(rows)
   p <- ncol(rows)
@@ -155,6 +200,16 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
   list(outl = out, exact_fit_direction = NULL)
 }
 
+#' .robpca_c_steps
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param idx See Usage.
+#' @param max_iter Defaults to \code{100L}.
+#' @return A list with \code{idx}, \code{mu}, \code{C}, \code{det}.
+#' @export
 .robpca_c_steps <- function(rows, idx, max_iter = 100L) {
   h <- length(idx)
   cur <- idx
@@ -182,6 +237,17 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
   list(idx = cur, mu = mu, C = C, det = detval)
 }
 
+#' .robpca_fast_mcd
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param h See Usage.
+#' @param n_start Defaults to \code{250L}.
+#' @param seed Defaults to \code{17L}.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .robpca_fast_mcd <- function(rows, h, n_start = 250L, seed = 17L) {
   n <- nrow(rows)
   p <- ncol(rows)
@@ -280,6 +346,17 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
   out
 }
 
+#' .robpca_choose_k
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param l0 See Usage.
+#' @param k See Usage.
+#' @param kmax See Usage.
+#' @param r1 See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .robpca_choose_k <- function(l0, k, kmax, r1) {
   pos <- l0[l0 > 1e-12]
   r <- length(pos)
@@ -306,6 +383,15 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
   stop("robpca: k must be an integer, 'cumulative' (eq. 5) or 'ratio' (eq. 6)")
 }
 
+#' .robpca_drop_direction
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param v See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 .robpca_drop_direction <- function(rows, v) {
   p <- ncol(rows)
   norm <- sqrt(sum(v * v))
@@ -333,11 +419,29 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
   rows %*% basis[, seq_len(nbasis), drop = FALSE]
 }
 
+#' .robpca_reweight_factor
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param k See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .robpca_reweight_factor <- function(q, k) {
   denom <- pchisq(qchisq(q, k), k + 2)
   if (denom > 0) q / denom else 1.0
 }
 
+#' .robpca_od_cutoff
+#'
+#' Part of the robpca_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param od See Usage.
+#' @param h See Usage.
+#' @return A numeric value.
+#' @export
 .robpca_od_cutoff <- function(od, h) {
   v <- od ^ (2.0 / 3.0)
   if (length(v) < 2L) return(Inf)

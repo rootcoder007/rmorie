@@ -57,6 +57,16 @@
 
 ROUTES <- c("km", "empirical")
 
+#' .survroc_clean
+#'
+#' Part of the survroc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param marker Defaults to \code{NULL}.
+#' @return A list with \code{T}, \code{E}, \code{M}.
+#' @export
 .survroc_clean <- function(times, events, marker = NULL) {
   T <- as.numeric(times)
   E <- as.integer(events)
@@ -135,6 +145,18 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
   val
 }
 
+#' .survroc_empirical
+#'
+#' Part of the survroc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param T See Usage.
+#' @param E See Usage.
+#' @param M See Usage.
+#' @param c See Usage.
+#' @param t See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .survroc_empirical <- function(T, E, M, c, t) {
   if (any(E == 0L & T < t)) {
     stop(sprintf("survroc: the empirical route needs complete follow-up to time %g, but a subject is censored before it", t))
@@ -149,6 +171,18 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
   c(se = se, sp = sp)
 }
 
+#' .survroc_km_pair
+#'
+#' Part of the survroc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param T See Usage.
+#' @param E See Usage.
+#' @param M See Usage.
+#' @param c See Usage.
+#' @param t See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .survroc_km_pair <- function(T, E, M, c, t) {
   n <- length(T)
   hi_idx <- which(M > c)
@@ -177,6 +211,19 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
   c(se = se, sp = sp)
 }
 
+#' .survroc_pair
+#'
+#' Part of the survroc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param marker See Usage.
+#' @param c See Usage.
+#' @param t See Usage.
+#' @param route See Usage.
+#' @return The value of \code{.survroc_km_pair}.
+#' @export
 .survroc_pair <- function(times, events, marker, c, t, route) {
   if (!(route %in% ROUTES)) {
     stop(sprintf("survroc: route must be one of %s, got '%s'",

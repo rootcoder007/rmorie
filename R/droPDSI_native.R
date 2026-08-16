@@ -113,6 +113,13 @@ morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
                      "PDSI"))
 }
 
+#' .droPDSI_cheatsheet
+#'
+#' Part of the droPDSI_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .droPDSI_cheatsheet <- function() {
   paste0("droPDSI: morie_droPDSI_palmer_pdsi(precip, pet, awc) -> PDSI, Z ",
          "index and the CAFEC water balance (Palmer 1965)")

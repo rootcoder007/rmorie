@@ -9,6 +9,14 @@
 .prsclm_DEFAULT_THRESHOLDS <- c(5e-8, 1e-6, 1e-4, 1e-3, 0.01, 0.05, 0.1,
                                 0.5, 1.0)
 
+#' .prsclm_rows
+#'
+#' Part of the prsclm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .prsclm_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -167,6 +175,13 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
                      "number would hide that a choice was made"))
 }
 
+#' .prsclm_cheatsheet
+#'
+#' Part of the prsclm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .prsclm_cheatsheet <- function() {
   paste0("prsclm: morie_prsclm_prs_cs_clump(sumstats, ld_ref, p_threshold) ",
          "-> LD clumping plus thresholded polygenic scores (Purcell et al. ",

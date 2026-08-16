@@ -53,6 +53,14 @@
 
 # Private helper: coerce a codebook or image (list-of-vectors or matrix)
 # to a 2-D numeric matrix with one row per entry.
+#' Private helper: coerce a codebook or image (list-of-vectors or
+#' matrix)
+#'
+#' to a 2-D numeric matrix with one row per entry.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{as.matrix}.
+#' @export
 .vqgdec_to_matrix <- function(x) {
     if (is.matrix(x)) {
         return(`storage.mode<-`(x, "double"))

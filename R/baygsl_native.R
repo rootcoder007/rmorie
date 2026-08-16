@@ -26,6 +26,15 @@
 # drawing uniforms until we get one strictly positive, then take -log(u).
 # R's qexp would consume the rng from somewhere else, so the loop
 # matches the Python arm draw-for-draw.
+#' Exp(1) on the log scale without underflow. Mirrors baygsl._expo: keep
+#'
+#' drawing uniforms until we get one strictly positive, then take
+#' -log(u). R\'s qexp would consume the rng from somewhere else, so the
+#' loop matches the Python arm draw-for-draw.
+#'
+#' @param e See Usage.
+#' @return A numeric value.
+#' @export
 .baygsl_expo <- function(e) {
   u <- .ghc_unif(e, 1L)
   while (u <= 0) u <- .ghc_unif(e, 1L)
@@ -35,6 +44,20 @@
 # One univariate slice transition. Returns list(x, n_eval, interval).
 # `logf` is the log of an unnormalised density; rng is the .ghc_rng
 # environment so the chain stays reproducible.
+#' One univariate slice transition. Returns list(x, n_eval, interval)
+#'
+#' `logf` is the log of an unnormalised density; rng is the .ghc_rng
+#' environment so the chain stays reproducible.
+#'
+#' @param logf See Usage.
+#' @param x0 See Usage.
+#' @param e See Usage.
+#' @param w Defaults to \code{1}.
+#' @param max_steps Defaults to \code{50L}.
+#' @param lower Defaults to \code{.baygsl_NEG_INF}.
+#' @param upper Defaults to \code{.baygsl_POS_INF}.
+#' @return Nothing; this branch always raises.
+#' @export
 .baygsl_slice_1d <- function(logf, x0, e, w = 1.0, max_steps = 50L,
                              lower = .baygsl_NEG_INF,
                              upper = .baygsl_POS_INF) {

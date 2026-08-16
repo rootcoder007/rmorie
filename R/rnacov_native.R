@@ -159,6 +159,15 @@ morie_rnacov_parse <- function(s) {
   cbind(pi[ord], pj[ord])
 }
 
+#' .rnacov_can_pair
+#'
+#' Part of the rnacov_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .rnacov_can_pair <- function(a, b) {
   for (p in .RNACOV_PAIRS) if (a == p[1] && b == p[2]) return(TRUE)
   FALSE

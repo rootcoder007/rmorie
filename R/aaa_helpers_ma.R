@@ -6,6 +6,16 @@
 # Weighted least squares. cov is (X' W X)^{-1}, the model-based
 # covariance -- correct when the weights really are inverse variances,
 # which is the whole premise of inverse-variance meta-analysis.
+#' Weighted least squares. cov is (X\' W X)^{-1}, the model-based
+#'
+#' covariance -- correct when the weights really are inverse variances,
+#' which is the whole premise of inverse-variance meta-analysis.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{beta}, \code{cov}, \code{A}.
+#' @export
 .ma_wls <- function(X, y, w) {
   X <- as.matrix(X)
   p <- ncol(X)
@@ -20,6 +30,15 @@
 # Contrast design matrix of a treatment network. Treatments are sorted
 # and the smallest is the reference, fixed at zero; a study comparing t2
 # against t1 contributes +1 in the column of t2 and -1 in that of t1.
+#' Contrast design matrix of a treatment network. Treatments are sorted
+#'
+#' and the smallest is the reference, fixed at zero; a study comparing
+#' t2 against t1 contributes +1 in the column of t2 and -1 in that of
+#' t1.
+#'
+#' @param design See Usage.
+#' @return A list with \code{X}, \code{treats}, \code{T}.
+#' @export
 .ma_net_design <- function(design) {
   D <- as.matrix(design)
   if (ncol(D) != 2L)

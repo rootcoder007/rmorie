@@ -72,6 +72,17 @@
 .tlsieve_eps <- 1e-12
 
 
+#' .tlsieve_cause_specific_hazard
+#'
+#' Part of the tlsieve_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param time See Usage.
+#' @param event_type See Usage.
+#' @param times See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{hazards}, \code{types}, \code{times}.
+#' @export
 .tlsieve_cause_specific_hazard <- function(time, event_type, times, weights = NULL) {
   t <- as.numeric(time)
   e <- as.integer(event_type)
@@ -100,6 +111,15 @@
 }
 
 
+#' .tlsieve_cumulative_incidence
+#'
+#' Part of the tlsieve_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param hazards See Usage.
+#' @param times See Usage.
+#' @return A list with \code{F}, \code{survival}, \code{times}, \code{types}, \code{closure}, \code{note}.
+#' @export
 .tlsieve_cumulative_incidence <- function(hazards, times) {
   type_names <- names(hazards)
   if (is.null(type_names) || length(type_names) == 0) {
@@ -136,6 +156,17 @@
 }
 
 
+#' .tlsieve_aalen_johansen
+#'
+#' Part of the tlsieve_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param time See Usage.
+#' @param event_type See Usage.
+#' @param times See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{F}, \code{survival}, \code{types}, \code{times}, \code{closure}, \code{method}, \code{caveat}.
+#' @export
 .tlsieve_aalen_johansen <- function(time, event_type, times, weights = NULL) {
   h <- .tlsieve_cause_specific_hazard(time, event_type, times, weights)
   ci <- .tlsieve_cumulative_incidence(h$hazards, times)
@@ -147,6 +178,15 @@
 }
 
 
+#' .tlsieve_vaccine_efficacy
+#'
+#' Part of the tlsieve_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param F_vaccine See Usage.
+#' @param F_placebo See Usage.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 .tlsieve_vaccine_efficacy <- function(F_vaccine, F_placebo) {
   a <- as.numeric(F_vaccine)
   b <- as.numeric(F_placebo)
@@ -187,6 +227,13 @@ morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
 }
 
 
+#' .tlsieve_cheatsheet
+#'
+#' Part of the tlsieve_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlsieve_cheatsheet <- function() {
   paste("tlsieve: an HIV vaccine built from a few antigens protects",
         "unevenly across strains, so SIEVE ANALYSIS asks how efficacy",

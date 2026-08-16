@@ -4,6 +4,14 @@
 # the Synthetic Control Method", *American Journal of Political Science* 59(2),
 # 495-510.
 
+#' .plcbsc_simplex_project
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 .plcbsc_simplex_project <- function(v) {
   n <- length(v)
   if (n == 0L) return(numeric(0))
@@ -18,6 +26,19 @@
   pmax(v - theta, 0.0)
 }
 
+#' .plcbsc_synthetic_control
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x_treated See Usage.
+#' @param x_donors See Usage.
+#' @param v Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{5000}.
+#' @param tol Defaults to \code{1e-12}.
+#' @param step Defaults to \code{NULL}.
+#' @return A list with \code{weights}, \code{loss}, \code{fitted}, \code{n_iter}, \code{converged}.
+#' @export
 .plcbsc_synthetic_control <- function(x_treated, x_donors, v = NULL,
                                       max_iter = 5000, tol = 1e-12,
                                       step = NULL) {
@@ -92,16 +113,45 @@
        n_iter = it, converged = converged)
 }
 
+#' .plcbsc_gaps
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y_treated See Usage.
+#' @param y_donors See Usage.
+#' @param weights See Usage.
+#' @return A numeric value.
+#' @export
 .plcbsc_gaps <- function(y_treated, y_donors, weights) {
   Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
   y_treated - as.numeric(crossprod(Y0, weights))
 }
 
+#' .plcbsc_rmspe
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gaps See Usage.
+#' @return A numeric value.
+#' @export
 .plcbsc_rmspe <- function(gaps) {
   if (length(gaps) == 0L) return(NaN)
   sqrt(sum(gaps ^ 2) / length(gaps))
 }
 
+#' .plcbsc_effect
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gaps See Usage.
+#' @param t0 See Usage.
+#' @param statistic See Usage.
+#' @param pre_gaps Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .plcbsc_effect <- function(gaps, t0, statistic, pre_gaps = NULL) {
   T <- length(gaps)
   post <- if (t0 < T) gaps[(t0 + 1):T] else numeric(0)
@@ -209,6 +259,19 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
   )
 }
 
+#' .plcbsc_in_time_placebo
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y_treated See Usage.
+#' @param y_donors See Usage.
+#' @param t0 See Usage.
+#' @param fake_t0 See Usage.
+#' @param v Defaults to \code{NULL}.
+#' @param ... Passed through.
+#' @return A list with \code{weights}, \code{gaps}, \code{placebo_effect}, \code{rmspe_pre}, \code{rmspe_placebo}.
+#' @export
 .plcbsc_in_time_placebo <- function(y_treated, y_donors, t0, fake_t0, v = NULL, ...) {
   y1 <- as.numeric(y_treated)
   Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
@@ -231,6 +294,13 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
        rmspe_placebo = .plcbsc_rmspe(gaps[(fake_t0 + 1):t0]))
 }
 
+#' .plcbsc_cheatsheet
+#'
+#' Part of the plcbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .plcbsc_cheatsheet <- function() {
   paste("plcbsc: synthetic control + placebo inference (Abadie, Diamond & Hainmueller 2015).",
         "Weights live on the SIMPLEX -- non-negative, summing to one -- which is what stops the",

@@ -96,6 +96,14 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 }
 
 # Scaling filter from the exact radical closed form.
+#' Scaling filter from the exact radical closed form
+#'
+#' Part of the wave implementation; see the file header for the source
+#' it follows.
+#'
+#' @param name See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .dbfilter <- function(name) {
   key <- tolower(trimws(as.character(name)[1L]))
   r2 <- sqrt(2)
@@ -115,6 +123,14 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
   stop(sprintf("wavelet_basis: unknown wavelet '%s' (db1, db2, db3)", key))
 }
 
+#' .dbmirror
+#'
+#' Part of the wave implementation; see the file header for the source
+#' it follows.
+#'
+#' @param h See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .dbmirror <- function(h) {
   L <- length(h)
   out <- numeric(L)
@@ -122,6 +138,16 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
   out
 }
 
+#' .dbstep
+#'
+#' Part of the wave implementation; see the file header for the source
+#' it follows.
+#'
+#' @param a See Usage.
+#' @param h See Usage.
+#' @param g See Usage.
+#' @return A list with \code{a}, \code{d}.
+#' @export
 .dbstep <- function(a, h, g) {
   n <- length(a)
   m <- n %/% 2L
@@ -142,6 +168,17 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
   list(a = ap, d = de)
 }
 
+#' .dbforward
+#'
+#' Part of the wave implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param g See Usage.
+#' @param level See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .dbforward <- function(x, h, g, level) {
   a <- x
   coeffs <- vector("list", level)
@@ -155,6 +192,14 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
   out
 }
 
+#' .dbpow2
+#'
+#' Part of the wave implementation; see the file header for the source
+#' it follows.
+#'
+#' @param n See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .dbpow2 <- function(n) {
   k <- 0L
   m <- n

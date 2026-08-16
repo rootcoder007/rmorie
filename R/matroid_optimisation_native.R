@@ -19,6 +19,14 @@
 # Edmonds J (1971); Kruskal JB (1956); Hall P (1935); Konig D (1931);
 # Ford LR, Fulkerson DR (1956).
 
+#' .morie_subsets
+#'
+#' Part of the matroid_optimisation_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_subsets <- function(g) {
   n <- length(g)
   out <- list(integer(0))
@@ -31,6 +39,14 @@
   out
 }
 
+#' .morie_key
+#'
+#' Part of the matroid_optimisation_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param s See Usage.
+#' @return A character value.
+#' @export
 .morie_key <- function(s) paste(sort(as.integer(s)), collapse = ",")
 
 #' Check the two matroid axioms directly

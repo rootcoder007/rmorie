@@ -43,6 +43,14 @@
 .trnsfr_EPS <- 1e-12
 .trnsfr_METHODS <- c("dr", "ipw", "outcome", "balance")
 
+#' .trnsfr_cohort
+#'
+#' Part of the trnsfr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param S See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .trnsfr_cohort <- function(S) {
   s <- .s03vec(S)
   if (any(!(s %in% c(0.0, 1.0)))) {
@@ -56,6 +64,16 @@
   s
 }
 
+#' Weighted least squares with an intercept prepended. rows is a
+#'
+#' matrix (or vector) of predictors; returns list(coef=...) with the
+#' intercept first.
+#'
+#' @param rows See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}.
+#' @export
 .trnsfr_wls <- function(rows, y, w) {
   # Weighted least squares with an intercept prepended. rows is a
   # matrix (or vector) of predictors; returns list(coef=...) with the

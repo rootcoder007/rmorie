@@ -29,6 +29,14 @@
 # neighbour ordering (distance, then x), same lambda_q scaling when
 # q >= n, same degenerate-weight fallbacks.
 
+#' .mor_stl_tricube
+#'
+#' Part of the stlAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .mor_stl_tricube <- function(u) {
   if (u >= 1) return(0)
   t <- 1 - u * u * u
@@ -36,6 +44,19 @@
 }
 
 # loess fitted value at x0 (Cleveland et al. 1990, Sec. 2.1)
+#' Loess fitted value at x0 (Cleveland et al. 1990, Sec. 2.1)
+#'
+#' Part of the stlAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xs See Usage.
+#' @param ys See Usage.
+#' @param x0 See Usage.
+#' @param q See Usage.
+#' @param degree See Usage.
+#' @param rho Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .mor_stl_loess_at <- function(xs, ys, x0, q, degree, rho = NULL) {
   n <- length(xs)
   if (q >= n) {
@@ -67,16 +88,41 @@
 }
 
 # moving average of length k; output length length(v) - k + 1
+#' Moving average of length k; output length length(v) - k + 1
+#'
+#' Part of the stlAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .mor_stl_ma <- function(v, k) {
   cs <- cumsum(c(0, v))
   (cs[(k + 1L):length(cs)] - cs[seq_len(length(v) - k + 1L)]) / k
 }
 
+#' .mor_stl_next_odd
+#'
+#' Part of the stlAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_stl_next_odd <- function(v) {
   v <- as.integer(ceiling(v))
   if (v %% 2L == 1L) v else v + 1L
 }
 
+#' .mor_stl_median
+#'
+#' Part of the stlAn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_stl_median <- function(v) {
   s <- sort(v); n <- length(s); mid <- n %/% 2L
   if (n %% 2L == 1L) s[mid + 1L] else 0.5 * (s[mid] + s[mid + 1L])

@@ -20,6 +20,19 @@
 # masks are stored as 0/1 floats so element-wise multiply drops blocked
 # connections, which is what the masked matrix product reduces to in
 # any case.
+#' A single Masked Autoregressive layer as a list of named matrices. The
+#'
+#' masks are stored as 0/1 floats so element-wise multiply drops blocked
+#' connections, which is what the masked matrix product reduces to in
+#' any case.
+#'
+#' @param dim_x See Usage.
+#' @param dim_t See Usage.
+#' @param hidden See Usage.
+#' @param e See Usage.
+#' @param reverse Defaults to \code{FALSE}.
+#' @return A list with \code{W1}, \code{b1}, \code{Wm}, \code{bm}, \code{Wa}, \code{ba}, \code{M1}, \code{M2}, \code{dim_x}, \code{dim_t}, \code{hidden}, \code{order}.
+#' @export
 .abcnnt_made_layer <- function(dim_x, dim_t, hidden, e, reverse = FALSE) {
   order <- seq_len(dim_x)
   if (reverse) order <- rev(order)
@@ -48,6 +61,16 @@
 }
 
 # Returns list(mu, al, h). Tanh hidden activations, clipped log-scale.
+#' Returns list(mu, al, h). Tanh hidden activations, clipped log-scale
+#'
+#' Part of the abcnnt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param layer See Usage.
+#' @param x See Usage.
+#' @param t See Usage.
+#' @return A list with \code{mu}, \code{al}, \code{h}.
+#' @export
 .abcnnt_layer_stats <- function(layer, x, t) {
   dx <- layer$dim_x; dt <- layer$dim_t; H <- layer$hidden
   inp <- c(x, t)
@@ -96,6 +119,14 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 # Walk every (container, index) the gradient touches. A parameter is
 # in the active set iff its mask entry is 1; theta columns are always
 # unmasked, hidden units are masked by deg_in, output by deg_out.
+#' Walk every (container, index) the gradient touches. A parameter is
+#'
+#' in the active set iff its mask entry is 1; theta columns are always
+#' unmasked, hidden units are masked by deg_in, output by deg_out.
+#'
+#' @param flow See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .abcnnt_params <- function(flow) {
   out <- list()
   for (L in flow$layers) {

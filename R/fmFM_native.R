@@ -41,6 +41,17 @@ predict_naive <- function(x, w0, w, V) {
 }
 
 # --- the same value in O(kn) by Lemma 3.1 ---------------------------
+#' The same value in O(kn) by Lemma 3.1 ---------------------------
+#'
+#' Part of the fmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param w0 See Usage.
+#' @param w See Usage.
+#' @param V See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .fmFM_predict <- function(x, w0, w, V) {
   xs <- as.numeric(x)
   n <- length(xs); kk <- length(V[[1]])
@@ -153,6 +164,13 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
 }
 
 # --- cheatsheet -----------------------------------------------------
+#' Cheatsheet -----------------------------------------------------
+#'
+#' Part of the fmFM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .fmFM_cheatsheet <- function() {
   paste0("fmFM: y = w0 + sum w_i x_i + sum_{i<j} <v_i,v_j> x_i x_j. ",
          "Factorising the interaction parameter COUPLES pairs that ",

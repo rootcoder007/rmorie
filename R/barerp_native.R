@@ -148,6 +148,16 @@ centering_steps <- function(m, eps, t0, mu) {
 # numerical derivatives, supplied or differenced
 # ---------------------------------------------------------------------------
 
+#' .barerp_num_grad
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param x See Usage.
+#' @param h Defaults to \code{1e-06}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .barerp_num_grad <- function(f, x, h = 1e-6) {
   x <- as.numeric(x)
   n <- length(x)
@@ -161,6 +171,16 @@ centering_steps <- function(m, eps, t0, mu) {
   out
 }
 
+#' .num_hess
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param x See Usage.
+#' @param h Defaults to \code{1e-04}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .num_hess <- function(f, x, h = 1e-4) {
   x <- as.numeric(x)
   n <- length(x)
@@ -189,6 +209,16 @@ centering_steps <- function(m, eps, t0, mu) {
 
 # An R closure carrying whatever derivatives were supplied. Mirrors
 # the Python _Fun class field-for-field.
+#' An R closure carrying whatever derivatives were supplied. Mirrors
+#'
+#' the Python _Fun class field-for-field.
+#'
+#' @param f See Usage.
+#' @param grad Defaults to \code{NULL}.
+#' @param hess Defaults to \code{NULL}.
+#' @param affine Defaults to \code{FALSE}.
+#' @return The value of \code{self}, as built in the body.
+#' @export
 .Fun <- function(f, grad = NULL, hess = NULL, affine = FALSE) {
   self <- list(f = f, .g = grad, .h = hess, affine = isTRUE(affine))
   class(self) <- "Fun"
@@ -239,6 +269,14 @@ hess.Fun <- function(self, x) {
   .num_hess(self$f, x)
 }
 
+#' .as_fun
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .as_fun <- function(spec) {
   if (inherits(spec, "Fun")) return(spec)
   if (is.function(spec)) return(.Fun(spec))
@@ -253,6 +291,16 @@ hess.Fun <- function(self, x) {
 # the KKT solve for one Newton step (Boyd eq. 11.14)
 # ---------------------------------------------------------------------------
 
+#' .solve_kkt
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hmat See Usage.
+#' @param grad See Usage.
+#' @param aeq See Usage.
+#' @return The value of \code{[}.
+#' @export
 .solve_kkt <- function(hmat, grad, aeq) {
   n <- length(grad)
   if (is.null(aeq) || length(aeq) == 0L) {
@@ -274,6 +322,15 @@ hess.Fun <- function(self, x) {
 # centering
 # ---------------------------------------------------------------------------
 
+#' .project_null
+#'
+#' Part of the barerp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param aeq See Usage.
+#' @return A numeric value.
+#' @export
 .project_null <- function(v, aeq) {
   aeq <- as.matrix(aeq)
   v <- as.numeric(v)

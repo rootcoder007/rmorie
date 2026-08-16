@@ -18,6 +18,15 @@
   "gumbel", "frank", "joe", "plackett"
 )
 
+#' .morie_cop_uv
+#'
+#' Part of the copula_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param v See Usage.
+#' @return A list with \code{u}, \code{v}.
+#' @export
 .morie_cop_uv <- function(u, v) {
   u <- as.numeric(u)
   v <- as.numeric(v)
@@ -99,6 +108,15 @@ morie_copula_cdf <- function(family, u, v, theta = NULL, nu = NULL) {
 
 # Bivariate normal CDF by one-dimensional quadrature over the
 # conditional normal -- avoids a mvtnorm dependency.
+#' Bivariate normal CDF by one-dimensional quadrature over the
+#'
+#' conditional normal -- avoids a mvtnorm dependency.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param rho See Usage.
+#' @return The value of \code{$}.
+#' @export
 .morie_bvn_cdf <- function(x, y, rho) {
   if (!is.finite(x) || !is.finite(y)) {
     return(as.numeric(is.finite(x) && x > 0) * as.numeric(is.finite(y) && y > 0))
@@ -115,6 +133,17 @@ morie_copula_cdf <- function(family, u, v, theta = NULL, nu = NULL) {
 }
 
 # Bivariate t CDF as a chi-square scale mixture of bivariate normals.
+#' Bivariate t CDF as a chi-square scale mixture of bivariate normals
+#'
+#' Part of the copula_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param rho See Usage.
+#' @param nu See Usage.
+#' @return The value of \code{$}.
+#' @export
 .morie_bvt_cdf <- function(x, y, rho, nu) {
   if (!is.finite(x) || !is.finite(y)) {
     return(as.numeric(is.finite(x) && x > 0) * as.numeric(is.finite(y) && y > 0))
@@ -181,6 +210,16 @@ morie_copula_tau <- function(family, theta = NULL, nu = NULL) {
 
 # tau = 4 int int C dC - 1 on a grid; used for families whose closed
 # form Czado's Table 3.2 does not give.
+#' Tau = 4 int int C dC - 1 on a grid; used for families whose closed
+#'
+#' form Czado\'s Table 3.2 does not give.
+#'
+#' @param family See Usage.
+#' @param theta Defaults to \code{NULL}.
+#' @param nu Defaults to \code{NULL}.
+#' @param n Defaults to \code{200L}.
+#' @return A numeric value.
+#' @export
 .morie_tau_numeric <- function(family, theta = NULL, nu = NULL, n = 200L) {
   g <- (seq_len(n) - 0.5) / n
   U <- rep(g, each = n)
@@ -385,6 +424,15 @@ morie_extreme_value_copula <- function(u, v, A = "gumbel", theta = 2) {
 }
 
 # Kaplan-Meier survival evaluated at the observed times.
+#' Kaplan-Meier survival evaluated at the observed times
+#'
+#' Part of the copula_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @return A list with \code{grid}, \code{vals}.
+#' @export
 .morie_cop_km <- function(time, event) {
   o <- order(time)
   tt <- time[o]

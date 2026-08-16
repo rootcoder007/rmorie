@@ -1,4 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+#' SPDX-License-Identifier: AGPL-3.0-or-later
+#'
+#' Part of the jsdivg implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param base See Usage.
+#' @return A numeric value.
+#' @export
 .t4_jsd <- function(p, q, base) {
   lg <- log(base); s1 <- 0; s2 <- 0
   for (i in seq_along(p)) {

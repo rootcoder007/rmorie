@@ -15,6 +15,15 @@
 # convention for the critical Gamma.
 
 # Wilcoxon signed-rank sensitivity bound at one Gamma (Python cnsRos).
+#' Wilcoxon signed-rank sensitivity bound at one Gamma (Python cnsRos)
+#'
+#' Part of the rosenb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pairs See Usage.
+#' @param Gamma Defaults to \code{1}.
+#' @return A list with \code{p_upper}, \code{p_lower}, \code{W}, \code{mu_plus}, \code{sigma_plus}, \code{z_upper}, \code{n_pairs}, \code{Gamma}.
+#' @export
 .mor_ros_signed <- function(pairs, Gamma = 1) {
   d <- as.numeric(pairs)
   d <- d[d != 0]

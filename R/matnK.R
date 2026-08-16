@@ -62,6 +62,17 @@ MatnK <- function(d, nu, rho, sigma2 = 1) {
 
 # Equation (2.4.7) p. 18 at a single lag.  Written in logs so that large nu
 # does not overflow (z/2)^nu before Gamma(nu) divides it out again.
+#' Equation (2.4.7) p. 18 at a single lag.  Written in logs so that
+#' large nu
+#'
+#' does not overflow (z/2)^nu before Gamma(nu) divides it out again.
+#'
+#' @param d See Usage.
+#' @param nu See Usage.
+#' @param rho See Usage.
+#' @param sigma2 See Usage.
+#' @return A numeric value.
+#' @export
 .s03maternk <- function(d, nu, rho, sigma2) {
   if (d < 0) stop("matern_kernel: distances d must be non-negative")
   if (d == 0) return(sigma2)

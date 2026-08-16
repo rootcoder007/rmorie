@@ -1,6 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Nichol-Dhariwal cosine schedule for the cumulative alpha.
+#' Nichol-Dhariwal cosine schedule for the cumulative alpha
+#'
+#' Part of the ddimst implementation; see the file header for the source
+#' it follows.
+#'
+#' @param t See Usage.
+#' @param T See Usage.
+#' @return A numeric value.
+#' @export
 .ddim_alpha_bar <- function(t, T) {
   f <- function(u) cos((u / T + 0.008) / 1.008 * pi / 2)^2
   f(t) / f(0)

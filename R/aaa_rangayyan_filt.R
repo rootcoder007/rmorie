@@ -6,6 +6,15 @@
 # Equation numbers verified in the PDF: 3.45, 3.49, 3.50, 3.52, 3.67,
 # 3.68, 3.72, 3.73, 3.97-3.107, and Section 3.8.
 
+#' .morie_rg_polyz
+#'
+#' Part of the rangayyan_filt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coefs See Usage.
+#' @param z See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_rg_polyz <- function(coefs, z) {
   zc <- as.complex(z)
   if (any(zc == 0)) {

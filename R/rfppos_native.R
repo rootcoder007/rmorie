@@ -61,10 +61,27 @@
 .rfppos_burgi_dunitz <- 107
 .rfppos_modes <- c("burgi_dunitz", "michael")
 
+#' .rfppos_cross
+#'
+#' Part of the rfppos_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .rfppos_cross <- function(a, b)
   c(a[2] * b[3] - a[3] * b[2], a[3] * b[1] - a[1] * b[3],
     a[1] * b[2] - a[2] * b[1])
 
+#' .rfppos_norm
+#'
+#' Part of the rfppos_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return A numeric value.
+#' @export
 .rfppos_norm <- function(a) sqrt(.w3_csum(a * a))
 
 #' The straight-line distance between two points

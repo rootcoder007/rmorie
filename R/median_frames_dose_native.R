@@ -13,8 +13,25 @@
 # normal -- on a t(2) sample the normal formula runs over 1.3 times the
 # density-based one -- so the difference is not cosmetic.
 
+#' .morie_z
+#'
+#' Part of the median_frames_dose_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{stats::qnorm}.
+#' @export
 .morie_z <- function(p) stats::qnorm(p)
 
+#' .morie_binom_cdf_half
+#'
+#' Part of the median_frames_dose_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param k See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .morie_binom_cdf_half <- function(k, n) {
   if (k < 0) return(0)
   if (k >= n) return(1)
@@ -22,6 +39,15 @@
                lgamma(n - seq.int(0, k) + 1) - n * log(2))), 1)
 }
 
+#' .morie_kde_at
+#'
+#' Part of the median_frames_dose_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param x See Usage.
+#' @param point See Usage.
+#' @return A numeric value.
+#' @export
 .morie_kde_at <- function(x, point) {
   n <- length(x)
   s <- stats::sd(x)
@@ -141,6 +167,16 @@ morie_optimal_overlap_weight <- function(var_a, var_b) {
   vb / (va + vb)
 }
 
+#' .morie_domain_total
+#'
+#' Part of the median_frames_dose_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param mask See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_domain_total <- function(y, w, mask) {
   if (!any(mask)) return(c(0, 0))
   contrib <- w[mask] * y[mask]
@@ -250,6 +286,19 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
        method = "Hartley dual-frame estimator with overlap weighting")
 }
 
+#' .morie_glm_quantal
+#'
+#' Part of the median_frames_dose_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param X See Usage.
+#' @param k See Usage.
+#' @param n See Usage.
+#' @param link See Usage.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-11}.
+#' @return A list with \code{beta}, \code{cov}, \code{converged}, \code{fitted}.
+#' @export
 .morie_glm_quantal <- function(X, k, n, link, max_iter = 100L, tol = 1e-11) {
   mu <- function(eta) {
     e <- pmin(pmax(eta, -8), 8)

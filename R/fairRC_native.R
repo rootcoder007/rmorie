@@ -42,10 +42,29 @@ cutoffs <- function(N, step = 10) {
   seq(s, n, by = s)
 }
 
+#' .shares
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param protected See Usage.
+#' @param i See Usage.
+#' @return A numeric value.
+#' @export
 .shares <- function(protected, i) {
   sum(protected[seq_len(i)]) / as.numeric(i)
 }
 
+#' .raw
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param protected See Usage.
+#' @param measure See Usage.
+#' @param step See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 .raw <- function(protected, measure, step) {
   N <- length(protected)
   P <- sum(protected) / as.numeric(N)
@@ -91,6 +110,18 @@ normalizer <- function(protected, measure = "rND", step = 10) {
   if (z > .FAIRRC_EPS) z else 1
 }
 
+#' .measure
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param protected See Usage.
+#' @param measure See Usage.
+#' @param step See Usage.
+#' @param normalize See Usage.
+#' @param caveat Defaults to \code{NULL}.
+#' @return The value of \code{pay}, as built in the body.
+#' @export
 .measure <- function(protected, measure, step, normalize,
                       caveat = NULL) {
   p <- as.integer(as.logical(protected))
@@ -176,6 +207,13 @@ rRD <- function(protected, step = 10, normalize = TRUE) {
   .measure(p, "rRD", step, normalize, cav)
 }
 
+#' .fairRC_cheatsheet
+#'
+#' Part of the fairRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .fairRC_cheatsheet <- function() {
   paste0("fairRC: statistical parity for RANKINGS -- did group ",
          "membership influence POSITION. Set-based fairness at ",

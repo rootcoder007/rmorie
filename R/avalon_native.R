@@ -81,6 +81,15 @@
 # Byte order, not the locale's collation. R would otherwise compare
 # strings by whatever collation happens to be in force, and the
 # canonical spelling of a path would depend on the machine.
+#' Byte order, not the locale\'s collation. R would otherwise compare
+#'
+#' strings by whatever collation happens to be in force, and the
+#' canonical spelling of a path would depend on the machine.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .avalon_lte <- function(a, b) {
   x <- utf8ToInt(a); y <- utf8ToInt(b)
   m <- min(length(x), length(y))
@@ -91,6 +100,14 @@
   length(x) <= length(y)
 }
 
+#' .avalon_sortkeys
+#'
+#' Part of the avalon_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .avalon_sortkeys <- function(v) sort(unique(v), method = "radix")
 
 #' FNV-1a over the bytes of a feature key
@@ -259,6 +276,15 @@ morie_avalon_parse <- function(smiles) {
        closures = closures)
 }
 
+#' .avalon_adj
+#'
+#' Part of the avalon_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param bonds See Usage.
+#' @return The value of \code{adj}, as built in the body.
+#' @export
 .avalon_adj <- function(n, bonds) {
   adj <- vector("list", n)
   for (i in seq_len(n)) adj[[i]] <- list()
@@ -304,6 +330,17 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
   out
 }
 
+#' .avalon_shortest
+#'
+#' Part of the avalon_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param src See Usage.
+#' @param dst See Usage.
+#' @param banned See Usage.
+#' @return A vector, from \code{rev}.
+#' @export
 .avalon_shortest <- function(adj, src, dst, banned) {
   n <- length(adj)
   dist <- rep(-1L, n); prv <- rep(-1L, n)
@@ -350,9 +387,32 @@ morie_avalon_rings <- function(n, bonds, closures) {
   list(rings = rings, inring = inring)
 }
 
+#' .avalon_ty
+#'
+#' Part of the avalon_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param el See Usage.
+#' @param arom See Usage.
+#' @param i See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .avalon_ty <- function(el, arom, i)
   if (arom[i] == 1L) tolower(el[i]) else el[i]
 
+#' A path and its reverse are the same feature, so only the smaller of
+#'
+#' the two spellings is kept -- otherwise a symmetric molecule would
+#' light twice as many bits as an asymmetric one for no chemical reason.
+#' The key is built here rather than by the caller so the two arms of
+#' this package cannot canonicalise it differently.
+#'
+#' @param adj See Usage.
+#' @param n See Usage.
+#' @param maxpath See Usage.
+#' @param ty See Usage.
+#' @return The value of \code{unique}.
+#' @export
 .avalon_paths <- function(adj, n, maxpath, ty) {
   # A path and its reverse are the same feature, so only the smaller of
   # the two spellings is kept -- otherwise a symmetric molecule would
@@ -393,6 +453,15 @@ morie_avalon_rings <- function(n, bonds, closures) {
   unique(out)
 }
 
+#' .avalon_dist
+#'
+#' Part of the avalon_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param n See Usage.
+#' @return The value of \code{D}, as built in the body.
+#' @export
 .avalon_dist <- function(adj, n) {
   D <- matrix(-1L, n, n)
   for (s in 0:(n - 1L)) {

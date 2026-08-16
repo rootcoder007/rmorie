@@ -125,12 +125,28 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 # destination vertex indices (1-based), one column per edge. Parallel
 # edges are allowed and their weights are stored positionally.
 
+#' .grclus_rows_to_mat
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .grclus_rows_to_mat <- function(A) {
   if (is.matrix(A)) return(A)
   if (is.list(A)) return(do.call(rbind, lapply(A, as.numeric)))
   stop("grclus: A must be a matrix or list of numeric vectors")
 }
 
+#' .grclus_as_graph
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{adj}, as built in the body.
+#' @export
 .grclus_as_graph <- function(A) {
   M <- .grclus_rows_to_mat(A)
   if (nrow(M) == 0L) stop("grclus: A is empty")
@@ -163,6 +179,15 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   adj
 }
 
+#' .grclus_edge_cut
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param parts See Usage.
+#' @return A numeric value.
+#' @export
 .grclus_edge_cut <- function(adj, parts) {
   cut <- 0.0
   for (u in seq_along(adj)) {
@@ -172,12 +197,30 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   cut / 2.0
 }
 
+#' .grclus_total_edge_weight
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @return A numeric value.
+#' @export
 .grclus_total_edge_weight <- function(adj) {
   s <- 0.0
   for (nbr in adj) s <- s + sum(nbr$w)
   s / 2.0
 }
 
+#' Members: 0-based
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param vw See Usage.
+#' @param members See Usage.
+#' @return A list with \code{adj}, \code{vw}.
+#' @export
 .grclus_subgraph <- function(adj, vw, members) {
   # members: 0-based
   index <- new.env(hash = TRUE, parent = emptyenv())
@@ -200,12 +243,31 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 }
 
 # ---- RNG helpers (shared) ----
+#' RNG helpers (shared) ----
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return A numeric value.
+#' @export
 .grclus_int_in <- function(e, lo, hi) {
   # numpy rng.integers(0, k): low inclusive, high exclusive
   if (hi <= lo) return(lo)
   as.integer(.ghc_unif(e, 1L) * (hi - lo))[1L] + lo
 }
 
+#' .grclus_shuffled
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{idx}, as built in the body.
+#' @export
 .grclus_shuffled <- function(n, seed) {
   e <- .ghc_rng(seed)
   idx <- as.integer(seq_len(n) - 1L)
@@ -218,6 +280,16 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 }
 
 # ---- coarsening ----
+#' Coarsening ----
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param scheme See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{mate}, as built in the body.
+#' @export
 .grclus_match_vertices <- function(adj, scheme, seed) {
   n <- length(adj)
   mate <- as.integer(seq_len(n) - 1L)
@@ -250,6 +322,16 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   mate
 }
 
+#' Mate: 0-based, mate[u] = v means u matched with v
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param vw See Usage.
+#' @param mate See Usage.
+#' @return A list with \code{adj}, \code{vw}, \code{mapping}.
+#' @export
 .grclus_coarsen <- function(adj, vw, mate) {
   # mate: 0-based, mate[u] = v means u matched with v
   n <- length(adj)
@@ -293,6 +375,15 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 }
 
 # ---- region growing ----
+#' Region growing ----
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param parts See Usage.
+#' @return The value of \code{g}, as built in the body.
+#' @export
 .grclus_gains <- function(adj, parts) {
   n <- length(adj)
   g <- numeric(n)
@@ -308,6 +399,19 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   g
 }
 
+#' .grclus_grow_partition
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param vw See Usage.
+#' @param target See Usage.
+#' @param seed See Usage.
+#' @param greedy See Usage.
+#' @param n_starts Defaults to \code{NULL}.
+#' @return The value of \code{best_parts}, as built in the body.
+#' @export
 .grclus_grow_partition <- function(adj, vw, target, seed, greedy,
                                    n_starts = NULL) {
   n <- length(adj)
@@ -365,6 +469,21 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 }
 
 # ---- refinement ----
+#' Refinement ----
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param vw See Usage.
+#' @param parts See Usage.
+#' @param target See Usage.
+#' @param tolerance See Usage.
+#' @param boundary See Usage.
+#' @param max_passes See Usage.
+#' @param patience See Usage.
+#' @return A list with \code{parts}, \code{cut}.
+#' @export
 .grclus_kl <- function(adj, vw, parts, target, tolerance, boundary,
                        max_passes, patience) {
   n <- length(adj)
@@ -428,6 +547,18 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   list(parts = parts, cut = best_cut)
 }
 
+#' .grclus_balance_bisection
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param vw See Usage.
+#' @param parts See Usage.
+#' @param target See Usage.
+#' @param tolerance See Usage.
+#' @return The value of \code{parts}, as built in the body.
+#' @export
 .grclus_balance_bisection <- function(adj, vw, parts, target, tolerance) {
   n <- length(adj)
   parts <- as.integer(parts)
@@ -449,6 +580,22 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   parts
 }
 
+#' .grclus_bisect
+#'
+#' Part of the grclus_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param vw See Usage.
+#' @param target See Usage.
+#' @param matching See Usage.
+#' @param initial See Usage.
+#' @param refinement See Usage.
+#' @param tolerance See Usage.
+#' @param coarsest See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{.grclus_balance_bisection}.
+#' @export
 .grclus_bisect <- function(adj, vw, target, matching, initial, refinement,
                            tolerance, coarsest, seed) {
   levels <- list()

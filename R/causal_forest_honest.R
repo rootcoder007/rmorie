@@ -10,6 +10,15 @@
 #
 # Shared helpers live in R/causal_shared_native.R.
 
+#' .morie_cf_tau
+#'
+#' Part of the causal_forest_honest implementation; see the file header
+#' for the source it follows.
+#'
+#' @param y See Usage.
+#' @param d See Usage.
+#' @return A numeric value.
+#' @export
 .morie_cf_tau <- function(y, d) {
   tr <- d == 1
   co <- d == 0
@@ -21,6 +30,22 @@
 
 # Grow one honest tree. `split_rows` chooses the splits; `est_rows`
 # (never seen by the splitter) fills the leaf values.
+#' Grow one honest tree. `split_rows` chooses the splits; `est_rows`
+#'
+#' (never seen by the splitter) fills the leaf values.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param d See Usage.
+#' @param split_rows See Usage.
+#' @param est_rows See Usage.
+#' @param depth See Usage.
+#' @param max_depth See Usage.
+#' @param min_leaf See Usage.
+#' @param mtry See Usage.
+#' @param imbalance_penalty Defaults to \code{0}.
+#' @return The value of \code{node}, as built in the body.
+#' @export
 .morie_cf_grow <- function(X, y, d, split_rows, est_rows, depth, max_depth,
                            min_leaf, mtry, imbalance_penalty = 0) {
   node <- list(
@@ -87,6 +112,15 @@
   node
 }
 
+#' .morie_cf_walk
+#'
+#' Part of the causal_forest_honest implementation; see the file header
+#' for the source it follows.
+#'
+#' @param node See Usage.
+#' @param xrow See Usage.
+#' @return The value of \code{$}.
+#' @export
 .morie_cf_walk <- function(node, xrow) {
   while (!is.na(node$feature)) {
     node <- if (xrow[node$feature] <= node$threshold) node$left else node$right

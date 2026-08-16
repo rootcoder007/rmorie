@@ -1,0 +1,20 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.bsalpc}
+\alias{.bsalpc}
+\title{Levinson-Durbin linear prediction; returns list(a = a[1..p], e =}
+\usage{
+.bsalpc(x, order)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{order}{See Usage.}
+}
+\description{
+error) Part of the rangayyan_phys implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{a}, \code{e}.
+}
+\keyword{internal}

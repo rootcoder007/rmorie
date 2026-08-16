@@ -198,6 +198,16 @@ morie_pmpfit_cheatsheet <- function() {
 }
 
 # Internal: ratio-of-gammas beta, same RNG consumption as Python.
+#' Internal: ratio-of-gammas beta, same RNG consumption as Python
+#'
+#' Part of the pmpfit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .ghc_beta <- function(e, a, b) {
   g1 <- .ghc_gamma(e, a)
   g2 <- .ghc_gamma(e, b)
@@ -206,6 +216,16 @@ morie_pmpfit_cheatsheet <- function() {
 }
 
 # Internal: Marsaglia-Tsang gamma with Ahrens-Dieter boost for shape < 1.
+#' Internal: Marsaglia-Tsang gamma with Ahrens-Dieter boost for shape <
+#' 1
+#'
+#' Part of the pmpfit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param shape See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 .ghc_gamma <- function(e, shape) {
   if (shape < 1.0) {
     u <- max(.ghc_unif(e, 1L), 1e-15)

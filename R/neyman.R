@@ -92,6 +92,16 @@ Neyman <- function(y, N_h, S_h, n) {
 # Shared by Neyman, Neymal and Propal.  Coerce and validate the common
 # stratum arguments; S is all ones when S_h is NULL, which turns Neyman
 # allocation into proportional allocation.
+#' Shared by Neyman, Neymal and Propal.  Coerce and validate the common
+#'
+#' stratum arguments; S is all ones when S_h is NULL, which turns Neyman
+#' allocation into proportional allocation.
+#'
+#' @param N_h See Usage.
+#' @param S_h See Usage.
+#' @param n See Usage.
+#' @return A list with \code{M}, \code{S}, \code{m0}, \code{H}.
+#' @export
 .s03allocCheck <- function(N_h, S_h, n) {
   M <- .s03vec(N_h)
   H <- length(M)
@@ -123,6 +133,17 @@ Neyman <- function(y, N_h, S_h, n) {
 # the units left over after flooring go to the largest fractional parts,
 # ties broken by the lower stratum index, so both language arms land on the
 # same integers.
+#' Round a real allocation to integers summing to round(m0).
+#' Deterministic:
+#'
+#' the units left over after flooring go to the largest fractional
+#' parts, ties broken by the lower stratum index, so both language arms
+#' land on the same integers.
+#'
+#' @param alloc See Usage.
+#' @param m0 See Usage.
+#' @return The value of \code{base}, as built in the body.
+#' @export
 .s03allocInt <- function(alloc, m0) {
   H <- length(alloc)
   base <- floor(alloc)
@@ -135,6 +156,15 @@ Neyman <- function(y, N_h, S_h, n) {
 
 # Neyman (1934) eq. (37), p. 579, with sigma_i^2 eliminated:
 # sigma^2 = sum_i M_i (M_i - m_i) S_i^2 / m_i.
+#' Neyman (1934) eq. (37), p. 579, with sigma_i^2 eliminated:
+#'
+#' sigma^2 = sum_i M_i (M_i - m_i) S_i^2 / m_i.
+#'
+#' @param M See Usage.
+#' @param S See Usage.
+#' @param m See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 .s03allocVar <- function(M, S, m) {
   tot <- 0
   for (i in seq_along(M)) {
@@ -147,6 +177,18 @@ Neyman <- function(y, N_h, S_h, n) {
 # The A and C pieces of Neyman (1934) eq. (39), p. 580, together with M_0
 # and T = sum_j M_j S_j.  B is omitted because it depends on the allocation
 # rather than on the population; the callers add it themselves.
+#' The A and C pieces of Neyman (1934) eq. (39), p. 580, together with
+#' M_0
+#'
+#' and T = sum_j M_j S_j.  B is omitted because it depends on the
+#' allocation rather than on the population; the callers add it
+#' themselves.
+#'
+#' @param M See Usage.
+#' @param S See Usage.
+#' @param m0 See Usage.
+#' @return A list with \code{A}, \code{C}, \code{M0}, \code{T}.
+#' @export
 .s03allocABC <- function(M, S, m0) {
   M0 <- 0
   for (v in M) M0 <- M0 + v

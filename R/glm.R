@@ -4,6 +4,13 @@
 # scoring for the links used here.  Self-contained: this does not call
 # stats::glm, it reimplements it, and is verified against it to 1e-12.
 
+#' .morie_glm_families
+#'
+#' Part of the glm implementation; see the file header for the source it
+#' follows.
+#'
+#' @return A list with \code{binomial}, \code{poisson}, \code{gaussian}, \code{gamma}.
+#' @export
 .morie_glm_families <- function() {
   eps <- 1e-10
   clip01 <- function(p) pmin(pmax(p, eps), 1 - eps)
@@ -58,6 +65,15 @@
   )
 }
 
+#' .morie_glm_solve
+#'
+#' Part of the glm implementation; see the file header for the source it
+#' follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_glm_solve <- function(A, b) {
   r <- tryCatch(solve(A, b), error = function(e) NULL)
   if (is.null(r) || any(!is.finite(r))) {

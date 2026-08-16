@@ -7,6 +7,15 @@
 # in the cited paper; the real method implemented here is eq. (2.3).
 # Printed anchor: Freireich data, PH error -> beta -1.74, se 0.41.
 
+#' .morie_km_censoring
+#'
+#' Part of the twostg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param delta See Usage.
+#' @return The value of \code{function}.
+#' @export
 .morie_km_censoring <- function(x, delta) {
   n <- length(x)
   ord <- order(x, delta)
@@ -35,10 +44,34 @@
   }
 }
 
+#' .morie_xi_ph
+#'
+#' Part of the twostg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .morie_xi_ph <- function(s) 1 / (1 + exp(pmax(pmin(s, 30), -30)))
+#' .morie_dxi_ph
+#'
+#' Part of the twostg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .morie_dxi_ph <- function(s) {
   e <- exp(pmax(pmin(s, 30), -30)); -e / (1 + e)^2
 }
+#' .morie_xi_po
+#'
+#' Part of the twostg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .morie_xi_po <- function(s) {
   a <- -40; b <- 40; m <- 4000L; h <- (b - a) / m
   k <- 0:m; t <- a + k * h
@@ -47,6 +80,14 @@
   w <- ifelse(k == 0 | k == m, 1, ifelse(k %% 2 == 1, 4, 2))
   sum(w * (1 - Fts) * ft) * h / 3
 }
+#' .morie_dxi_po
+#'
+#' Part of the twostg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .morie_dxi_po <- function(s) {
   a <- -40; b <- 40; m <- 4000L; h <- (b - a) / m
   k <- 0:m; t <- a + k * h

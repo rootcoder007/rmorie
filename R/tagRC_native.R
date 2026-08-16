@@ -202,6 +202,13 @@ folkrank_search <- folkrank
 tag_aware_rec <- folkrank
 tagawarerec <- folkrank
 
+#' .tagRC_cheatsheet
+#'
+#' Part of the tagRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tagRC_cheatsheet <- function() {
   paste("tagRC: a folksonomy is (user, tag, resource) TRIPLES, so",
         "the structure is an undirected triadic HYPEREDGE, not a",

@@ -57,11 +57,28 @@
 # Graph Contrastive Representation Learning", arXiv:2006.04131. The
 # graph-domain descendant; implemented in :mod:`grace`.
 
+#' .mienco_softplus
+#'
+#' Part of the mienco_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .mienco_softplus <- function(z) {
   v <- as.numeric(z)
   ifelse(v > 0, v + log1p(exp(-v)), log1p(exp(v)))
 }
 
+#' .mienco_jsd_estimate
+#'
+#' Part of the mienco_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param paired See Usage.
+#' @param unpaired See Usage.
+#' @return A numeric value.
+#' @export
 .mienco_jsd_estimate <- function(paired, unpaired) {
   p <- as.numeric(paired)
   q <- as.numeric(unpaired)
@@ -71,6 +88,15 @@
   mean(-.mienco_softplus(-p)) - mean(.mienco_softplus(q))
 }
 
+#' .mienco_dv_estimate
+#'
+#' Part of the mienco_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param paired See Usage.
+#' @param unpaired See Usage.
+#' @return A numeric value.
+#' @export
 .mienco_dv_estimate <- function(paired, unpaired) {
   p <- as.numeric(paired)
   q <- as.numeric(unpaired)
@@ -116,10 +142,32 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
   )
 }
 
+#' .mienco_global_objective
+#'
+#' Part of the mienco_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param summary See Usage.
+#' @param whole See Usage.
+#' @param other_whole See Usage.
+#' @param critic See Usage.
+#' @param estimator Defaults to \code{"jsd"}.
+#' @return The value of \code{morie_mienco}.
+#' @export
 .mienco_global_objective <- function(summary, whole, other_whole, critic, estimator = "jsd") {
   morie_mienco(summary, list(whole), list(other_whole), critic, estimator)
 }
 
+#' .mienco_prior_matching_loss
+#'
+#' Part of the mienco_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param samples See Usage.
+#' @param prior_samples See Usage.
+#' @param discriminator See Usage.
+#' @return A numeric value.
+#' @export
 .mienco_prior_matching_loss <- function(samples, prior_samples, discriminator) {
   a <- sapply(samples, function(s) as.numeric(discriminator(s)))
   b <- sapply(prior_samples, function(s) as.numeric(discriminator(s)))
@@ -129,6 +177,13 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
   mean(.mienco_softplus(-b)) + mean(.mienco_softplus(a))
 }
 
+#' .mienco_cheatsheet
+#'
+#' Part of the mienco_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .mienco_cheatsheet <- function() {
   paste0("mienco: unsupervised representations by maximising mutual ",
          "information -- but GLOBAL MI is weak, since MI is ",

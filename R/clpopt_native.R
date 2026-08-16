@@ -25,6 +25,15 @@ clpopt_pivots <- c("bland", "dantzig")
 
 # Internal: build a numeric matrix from a list-of-lists / matrix.
 # Mirrors clpopt._mat.
+#' Internal: build a numeric matrix from a list-of-lists / matrix
+#'
+#' Mirrors clpopt._mat.
+#'
+#' @param A See Usage.
+#' @param name See Usage.
+#' @param ncol Defaults to \code{NULL}.
+#' @return The value of \code{do.call}.
+#' @export
 .clpopt_mat <- function(A, name, ncol = NULL) {
   if (is.matrix(A)) {
     M <- lapply(seq_len(nrow(A)), function(i) as.numeric(A[i, ]))
@@ -123,6 +132,16 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 }
 
 # Internal: pivot on T[row, col]. Mirrors clpopt._pivot.
+#' Internal: pivot on T[row, col]. Mirrors clpopt._pivot
+#'
+#' Part of the clpopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param row See Usage.
+#' @param col See Usage.
+#' @return The value of \code{T}, as built in the body.
+#' @export
 .clpopt_pivot <- function(T, row, col) {
   p <- T[row, col]
   T[row, ] <- T[row, ] / p
@@ -137,6 +156,19 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 }
 
 # Internal: pivot to optimality. Mirrors clpopt._run.
+#' Internal: pivot to optimality. Mirrors clpopt._run
+#'
+#' Part of the clpopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param basis See Usage.
+#' @param cols See Usage.
+#' @param rule See Usage.
+#' @param blocked See Usage.
+#' @param max_iter See Usage.
+#' @return A character value.
+#' @export
 .clpopt_run <- function(T, basis, cols, rule, blocked, max_iter) {
   m <- length(basis)
   seen_set <- new.env(hash = TRUE, parent = emptyenv())
@@ -168,6 +200,20 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 }
 
 # Internal: report a successful solution. Mirrors clpopt._report.
+#' Internal: report a successful solution. Mirrors clpopt._report
+#'
+#' Part of the clpopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param basis See Usage.
+#' @param cv See Usage.
+#' @param n See Usage.
+#' @param m See Usage.
+#' @param total See Usage.
+#' @param rule See Usage.
+#' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate}, \code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
+#' @export
 .clpopt_report <- function(T, basis, cv, n, m, total, rule) {
   x <- rep(0.0, n)
   for (i in seq_len(m)) {
@@ -198,6 +244,16 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 }
 
 # Internal: report a failure. Mirrors clpopt._fail.
+#' Internal: report a failure. Mirrors clpopt._fail
+#'
+#' Part of the clpopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @param rule See Usage.
+#' @param phase See Usage.
+#' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule}, \code{message}, \code{method}.
+#' @export
 .clpopt_fail <- function(st, rule, phase) {
   why <- if (st == "cycling")
     "the basis repeated, so the method is cycling"

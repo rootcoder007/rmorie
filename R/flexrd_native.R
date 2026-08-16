@@ -148,6 +148,15 @@ morie_flexrd_energy <- function(rec, lig, rec_r, lig_r, scale = 1,
   .w3_csum(terms)
 }
 
+#' .flexrd_grid
+#'
+#' Part of the flexrd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nchi See Usage.
+#' @param angles See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .flexrd_grid <- function(nchi, angles) {
   out <- list(numeric(0))
   if (nchi > 0L) for (k in seq_len(nchi)) {

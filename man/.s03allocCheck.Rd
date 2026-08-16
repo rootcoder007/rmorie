@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.s03allocCheck}
+\alias{.s03allocCheck}
+\title{Shared by Neyman, Neymal and Propal.  Coerce and validate the common}
+\usage{
+.s03allocCheck(N_h, S_h, n)
+}
+\arguments{
+\item{N_h}{See Usage.}
+\item{S_h}{See Usage.}
+\item{n}{See Usage.}
+}
+\description{
+stratum arguments; S is all ones when S_h is NULL, which turns Neyman allocation into proportional allocation.
+}
+\value{
+A list with \code{M}, \code{S}, \code{m0}, \code{H}.
+}
+\keyword{internal}

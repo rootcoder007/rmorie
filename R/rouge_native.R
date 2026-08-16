@@ -32,6 +32,14 @@
 # Multiple references are handled per Sec. 3.2 by taking the best score
 # over references.
 
+#' .rouge_toks
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A character value.
+#' @export
 .rouge_toks <- function(x) {
   if (is.character(x) && length(x) == 1L) {
     if (nchar(x) == 0L) return(character(0))
@@ -43,6 +51,15 @@
   return(as.character(x))
 }
 
+#' .rouge_ngrams
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param toks See Usage.
+#' @param n See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .rouge_ngrams <- function(toks, n) {
   len <- length(toks)
   if (len < n) return(list())
@@ -50,6 +67,14 @@
   lapply(starts, function(i) toks[i:(i + n - 1L)])
 }
 
+#' .rouge_counts
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param keys See Usage.
+#' @return The value of \code{table}.
+#' @export
 .rouge_counts <- function(keys) {
   if (length(keys) == 0L) {
     return(structure(integer(0), names = character(0)))
@@ -57,6 +82,17 @@
   table(keys)
 }
 
+#' .rouge_prf
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param match See Usage.
+#' @param n_cand See Usage.
+#' @param n_ref See Usage.
+#' @param beta See Usage.
+#' @return A list with \code{precision}, \code{recall}, \code{f1}.
+#' @export
 .rouge_prf <- function(match, n_cand, n_ref, beta) {
   p <- if (n_cand > 0L) as.numeric(match) / n_cand else 0.0
   r <- if (n_ref > 0L) as.numeric(match) / n_ref else 0.0
@@ -69,6 +105,14 @@
   list(precision = p, recall = r, f1 = f)
 }
 
+#' .rouge_get_refs_complex
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reference See Usage.
+#' @return The value of \code{list}.
+#' @export
 .rouge_get_refs_complex <- function(reference) {
   if (is.list(reference)) {
     if (length(reference) == 0L) return(list())
@@ -98,6 +142,14 @@
   list(reference)
 }
 
+#' .rouge_get_refs_simple
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reference See Usage.
+#' @return The value of \code{list}.
+#' @export
 .rouge_get_refs_simple <- function(reference) {
   if (is.character(reference) && length(reference) == 1L) {
     return(list(reference))
@@ -111,6 +163,15 @@
   list(reference)
 }
 
+#' .rouge_lcs_length
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{[}.
+#' @export
 .rouge_lcs_length <- function(a, b) {
   m <- length(a)
   n <- length(b)
@@ -131,6 +192,16 @@
   prev[n + 1L]
 }
 
+#' .rouge_wlcs
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param alpha See Usage.
+#' @return The value of \code{[}.
+#' @export
 .rouge_wlcs <- function(a, b, alpha) {
   m <- length(a)
   n <- length(b)

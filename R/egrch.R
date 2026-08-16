@@ -14,6 +14,23 @@
 # alpha1/gamma1 out of a package using the opposite order, so the returned
 # alpha and gamma swapped meaning depending on whether that package
 # happened to be installed.
+#' Parameter naming for EGARCH is not standard across implementations:
+#'
+#' arch (Python): log s2 = w + a(|z| - E|z|) + g z + b log s2 -- a =
+#' size rugarch (R): log s2 = w + a z + g(|z| - E|z|) + b log s2 -- a =
+#' sign We follow the first: alpha multiplies the centred magnitude (the
+#' size effect) and gamma the signed z (the sign / leverage effect),
+#' matching the Python sibling. This module used to compute that
+#' internally while reading alpha1/gamma1 out of a package using the
+#' opposite order, so the returned alpha and gamma swapped meaning
+#' depending on whether that package happened to be installed.
+#'
+#' @param p See Usage.
+#' @param r See Usage.
+#' @param n See Usage.
+#' @param EZ See Usage.
+#' @return The value of \code{res}, as built in the body.
+#' @export
 .egrch_negll <- function(p, r, n, EZ) {
   omega <- p[1]
   alpha <- p[2]

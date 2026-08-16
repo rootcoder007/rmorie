@@ -33,7 +33,23 @@
 # multinomial logistic regression (logistic_trainer) is the default.
 # The attack is only as strong as the gap it feeds on.
 
+#' .memb_sigmoid
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .memb_sigmoid <- function(x) 1 / (1 + exp(-x))
+#' .memb_softmax
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .memb_softmax <- function(z) {
   mx <- max(z)
   ez <- exp(z - mx)
@@ -335,6 +351,15 @@ precision_recall <- function(pred, truth) {
        tp = tp, fp = fp, fn = fn, tn = tn)
 }
 
+#' .memb_sorted_features
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vec See Usage.
+#' @param top Defaults to \code{NULL}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .memb_sorted_features <- function(vec, top = NULL) {
   s <- sort(as.numeric(vec), decreasing = TRUE)
   if (is.null(top)) s else s[seq_len(min(top, length(s)))]
@@ -429,6 +454,13 @@ memb <- function(target_predict, shadow_data, eval_in, eval_out,
 
 membership_inference <- memb
 
+#' .memb_cheatsheet
+#'
+#' Part of the memb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .memb_cheatsheet <- function() {
   paste("memb: membership inference (Shokri et al. 2017). Black-box ",
         "output vector in, member/non-member out. Train k SHADOW ",

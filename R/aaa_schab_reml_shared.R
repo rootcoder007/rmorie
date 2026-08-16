@@ -30,6 +30,17 @@
 #
 # Internal; `aaa_` keeps it collated before its callers.
 
+#' Sigma(theta*) = xi I + (1 - xi) R(h; a). Factoring
+#'
+#' sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in
+#' [0, 1] -- the reparameterisation Sec. 5.5.2 calls for.
+#'
+#' @param coords See Usage.
+#' @param nugget_ratio See Usage.
+#' @param rng See Usage.
+#' @param model See Usage.
+#' @return A list with \code{sigma}, \code{d}, \code{r}.
+#' @export
 .schab_correlation_matrix <- function(coords, nugget_ratio, rng, model) {
   # Sigma(theta*) = xi I + (1 - xi) R(h; a). Factoring
   # sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in
@@ -42,6 +53,19 @@
   list(sigma = sigma, d = d, r = r)
 }
 
+#' DSigma(theta*)/d(xi, a): d/dxi is I - R, d/da is (1 - xi) dR/da.
+#' dR/da is
+#'
+#' the same expression the Gauss-Newton Jacobian uses, so both fitters
+#' share one derivation.
+#'
+#' @param d See Usage.
+#' @param r See Usage.
+#' @param nugget_ratio See Usage.
+#' @param rng See Usage.
+#' @param model See Usage.
+#' @return The value of \code{list}.
+#' @export
 .schab_dsigma <- function(d, r, nugget_ratio, rng, model) {
   # dSigma(theta*)/d(xi, a): d/dxi is I - R, d/da is (1 - xi) dR/da. dR/da is
   # the same expression the Gauss-Newton Jacobian uses, so both fitters share
@@ -56,6 +80,19 @@
   list(d_xi, d_a)
 }
 
+#' .schab_profiled_reml
+#'
+#' Part of the schab_reml_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param z See Usage.
+#' @param X See Usage.
+#' @param nugget_ratio See Usage.
+#' @param rng See Usage.
+#' @param model See Usage.
+#' @return A list with \code{value}, \code{gradient}, \code{sigma2}, \code{beta}.
+#' @export
 .schab_profiled_reml <- function(coords, z, X, nugget_ratio, rng, model) {
   n <- nrow(X)
   k <- ncol(X)
@@ -111,12 +148,43 @@
   list(value = value, gradient = grad, sigma2 = sigma2, beta = beta)
 }
 
+#' .schab_logistic
+#'
+#' Part of the schab_reml_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .schab_logistic <- function(u) 1 / (1 + exp(-u))
+#' .schab_logit
+#'
+#' Part of the schab_reml_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .schab_logit <- function(p) {
   p <- min(max(p, 1e-12), 1 - 1e-12)
   log(p / (1 - p))
 }
 
+#' .schab_fit_reml
+#'
+#' Part of the schab_reml_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param z See Usage.
+#' @param X See Usage.
+#' @param model Defaults to \code{"exponential"}.
+#' @param start_ratio Defaults to \code{0.1}.
+#' @param start_range Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{200L}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget}, \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
+#' @export
 .schab_fit_reml <- function(coords, z, X, model = "exponential",
                             start_ratio = 0.1, start_range = NULL,
                             max_iter = 200L, tol = 1e-10) {

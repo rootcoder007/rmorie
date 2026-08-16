@@ -75,6 +75,14 @@
 # rather than a sharp distribution.
 .VIT2LF_TAU_FLOOR <- 0.01
 
+#' .vit2lf_norm
+#'
+#' Part of the vit2lf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .vit2lf_norm <- function(v) sqrt(.w3_dot(v, v))
 
 #' The pre-softmax attention scores, one row per query

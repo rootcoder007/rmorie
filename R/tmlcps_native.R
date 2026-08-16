@@ -16,8 +16,28 @@
 
 .FITS <- c("kernel", "locallinear", "polynomial")
 
+#' .kern
+#'
+#' Part of the tmlcps_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .kern <- function(u) exp(-0.5 * u * u)
 
+#' .smooth_at
+#'
+#' Part of the tmlcps_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xv See Usage.
+#' @param av See Usage.
+#' @param g See Usage.
+#' @param h See Usage.
+#' @param fit See Usage.
+#' @return A numeric value.
+#' @export
 .smooth_at <- function(xv, av, g, h, fit) {
   n <- length(xv)
   w <- .kern((av - g) / h)
@@ -34,6 +54,17 @@
   (s2 * t0 - s1 * t1) / det
 }
 
+#' .cv_bandwidth
+#'
+#' Part of the tmlcps_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xv See Usage.
+#' @param av See Usage.
+#' @param fit See Usage.
+#' @param n_folds See Usage.
+#' @return The value of \code{best_h}, as built in the body.
+#' @export
 .cv_bandwidth <- function(xv, av, fit, n_folds) {
   n <- length(xv)
   spread <- max(av) - min(av)

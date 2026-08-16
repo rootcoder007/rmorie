@@ -67,6 +67,15 @@
 # implemented in :mod:`ncfRS`.
 # """
 
+#' .ngcf_leaky
+#'
+#' Part of the ngcf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param slope Defaults to \code{0.2}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .ngcf_leaky <- function(x, slope=0.2) {
   if (x >= 0.0) x else slope * x
 }

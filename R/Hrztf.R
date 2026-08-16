@@ -6,6 +6,19 @@
 # an arbitrarily large negative number if y < y2 and an arbitrarily
 # large positive number if y > y1".  Inside [y2, y1] the grid values
 # are interpolated.
+#' T_n evaluated at an observation.  Page 219: T_n(y) "is replaced with
+#'
+#' an arbitrarily large negative number if y < y2 and an arbitrarily
+#' large positive number if y > y1".  Inside [y2, y1] the grid values
+#' are interpolated.
+#'
+#' @param yv See Usage.
+#' @param ygrid See Usage.
+#' @param T See Usage.
+#' @param y2 See Usage.
+#' @param y1 See Usage.
+#' @return The value of \code{[}.
+#' @export
 .hrztf_tn_at <- function(yv, ygrid, T, y2, y1) {
   if (yv < y2) {
     return(-.hrztf_big)

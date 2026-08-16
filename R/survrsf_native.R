@@ -74,6 +74,14 @@ morie_survrsf_rule_status <- function(rule=NULL) {
        reason=if (is.null(reason)) "" else reason)
 }
 
+#' .survrsf_check_rule
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rule See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .survrsf_check_rule <- function(rule) {
   if (!(rule %in% morie_survrsf_SPLIT_RULES)) {
     stop(sprintf("survrsf: rule must be one of %s, got %s",
@@ -88,6 +96,14 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 # Small deterministic generator: a float-safe 32-bit LCG. (Exact match
 # to the Python 64-bit generator is not required -- the forest's
 # randomness only needs to be reproducible.)
+#' Small deterministic generator: a float-safe 32-bit LCG. (Exact match
+#'
+#' to the Python 64-bit generator is not required -- the forest\'s
+#' randomness only needs to be reproducible.)
+#'
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .survrsf_rng <- function(seed=0) {
   e <- new.env(parent=emptyenv())
   e$s <- as.numeric(seed) %% 2147483648
@@ -169,6 +185,15 @@ morie_survrsf_nelson_aalen <- function(times, events) {
   list(time=ts, chf=ds, n=n, deaths=as.integer(sum(events != 0)))
 }
 
+#' .survrsf_chf_at
+#'
+#' Part of the survrsf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param na See Usage.
+#' @param t See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .survrsf_chf_at <- function(na, t) {
   out <- 0.0
   tm <- na$time

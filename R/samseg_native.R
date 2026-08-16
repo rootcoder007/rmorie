@@ -21,6 +21,17 @@
 
 .SAMSEG_EPS <- 1e-12
 
+#' .samseg_pos_enc
+#'
+#' Part of the samseg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param dim Defaults to \code{8}.
+#' @param scale Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .samseg_pos_enc <- function(x, y, dim = 8, scale = 1.0) {
   out <- numeric(0)
   for (j in 0:(as.integer(dim) %/% 2L - 1L)) {
@@ -159,6 +170,13 @@ promptable_segment <- function(image_embedding, prompt_tokens, decoder,
                     "intended object", sep = ""))
 }
 
+#' .samseg_cheatsheet
+#'
+#' Part of the samseg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .samseg_cheatsheet <- function() {
   paste("samseg: the task is 'return a VALID mask for any prompt, ",
         "and for an AMBIGUOUS prompt a valid mask for at least one ",

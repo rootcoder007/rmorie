@@ -168,6 +168,13 @@ verify_gradient <- function(psi_of_P, D, score, weights = NULL,
        note = "must hold along ANY path, including ones not used to fit the gradient")
 }
 
+#' .tlheic_cheatsheet
+#'
+#' Part of the tlheic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlheic_cheatsheet <- function() {
   paste("tlheic: for many parameters the efficient influence curve ",
         "exists only IMPLICITLY and deriving it is what stops the ",

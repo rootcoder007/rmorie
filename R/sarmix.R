@@ -4,6 +4,19 @@
 # language arms run the identical arithmetic -- a fixed 21x21 sweep,
 # then 7 zooms each shrinking the box by ten -- so they land on the same
 # numbers rather than on two different optimiser trajectories.
+#' Internal: deterministic nested-grid minimiser on a rectangle. Both
+#'
+#' language arms run the identical arithmetic -- a fixed 21x21 sweep,
+#' then 7 zooms each shrinking the box by ten -- so they land on the
+#' same numbers rather than on two different optimiser trajectories.
+#'
+#' @param negll See Usage.
+#' @param lo1 See Usage.
+#' @param hi1 See Usage.
+#' @param lo2 See Usage.
+#' @param hi2 See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .sarmix_refine <- function(negll, lo1, hi1, lo2, hi2) {
   levels <- 7L
   ngrid <- 21L

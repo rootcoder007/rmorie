@@ -3,6 +3,15 @@
 # bsastat additions.  Equations verified in the PDF: 8.30, 8.31, 4.24-4.25.
 
 # ---------------------------------------------------------------- bsaadapt
+#' Bsaadapt
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seg See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .morie_rg_tse <- function(seg, p) {
   # AR prediction-error energy, eq (7.19), by Levinson-Durbin.
   k <- length(seg)
@@ -32,6 +41,15 @@
   e * k
 }
 
+#' .morie_rg_H
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seg See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .morie_rg_H <- function(seg, p) {
   L <- length(seg)
   t <- .morie_rg_tse(seg, p)

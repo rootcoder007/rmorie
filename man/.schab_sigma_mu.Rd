@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.schab_sigma_mu}
+\alias{.schab_sigma_mu}
+\title{Eq (6.79): the covariance of the PSEUDO-data, carrying Psi^-1 on both}
+\usage{
+.schab_sigma_mu(mu, sigma2, family, link_kind, R = NULL)
+}
+\arguments{
+\item{mu}{See Usage.}
+\item{sigma2}{See Usage.}
+\item{family}{See Usage.}
+\item{link_kind}{See Usage.}
+\item{R}{Defaults to \code{NULL}.}
+}
+\description{
+sides. Distinct from .schab_data_covariance -- see .schab_pql_score.
+}
+\value{
+A numeric value.
+}
+\keyword{internal}

@@ -4,6 +4,16 @@
 # Alignment Search Tool.pdf).  Mirrors Python morie.fn.blastp
 # exactly (same ungapped diagonal scan, same tie-breaking).
 
+#' .blast_best
+#'
+#' Part of the blastp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param score See Usage.
+#' @return A list with \code{score}, \code{qi}, \code{sj}, \code{ln}.
+#' @export
 .blast_best <- function(a, b, score) {
   n <- length(a); m <- length(b)
   best <- 0; bi <- 0; bj <- 0; ln <- 0

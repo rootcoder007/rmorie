@@ -18,23 +18,63 @@
 # International Journal of Biostatistics 6(1), article 26,
 # doi:10.2202/1557-4679.1260.
 
+#' .RichResult
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param payload See Usage.
+#' @return The value of \code{payload}, as built in the body.
+#' @export
 .RichResult <- function(payload) {
   payload
 }
 
+#' .tmlcds_sigmoid
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .tmlcds_sigmoid <- function(x) {
   1.0 / (1.0 + exp(-x))
 }
 
+#' .tmlcds_logit
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tmlcds_logit <- function(p) {
   log(p / (1.0 - p))
 }
 
+#' .tmlcds_vec
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tmlcds_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
 }
 
+#' .tmlcds_mat
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmlcds_mat <- function(X) {
   if (is.null(X)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   if (is.data.frame(X)) X <- as.matrix(X)
@@ -42,6 +82,15 @@
 }
 
 # cols is a list of column vectors; prepend the intercept
+#' Cols is a list of column vectors; prepend the intercept
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cols See Usage.
+#' @param n See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .tmlcds_design <- function(cols, n) {
   if (is.null(cols) || length(cols) == 0) {
     return(matrix(1.0, nrow = n, ncol = 1))
@@ -50,12 +99,30 @@
   cbind(1.0, M)
 }
 
+#' .tmlcds_matvec
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tmlcds_matvec <- function(M, v) {
   as.numeric(M %*% v)
 }
 
 # ridge-stabilised least squares -- Python k.lstsq ALWAYS adds the 1e-10
 # ridge, so the R arm must too or near-singular designs drift
+#' Ridge-stabilised least squares -- Python k.lstsq ALWAYS adds the
+#' 1e-10
+#'
+#' ridge, so the R arm must too or near-singular designs drift
+#'
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tmlcds_lstsq <- function(Z, y) {
   as.numeric(solve(crossprod(Z) + 1e-10 * diag(ncol(Z)), crossprod(Z, y)))
 }
@@ -64,6 +131,21 @@
 # `penalty` is a ridge on the OBJECTIVE for the slopes only (intercept
 # unpenalized), `ridge` stabilises the Newton solve without changing the
 # fitted coefficients
+#' Logistic regression by IRLS, mirroring k.logit_irls: beta starts at
+#' 0,
+#'
+#' `penalty` is a ridge on the OBJECTIVE for the slopes only (intercept
+#' unpenalized), `ridge` stabilises the Newton solve without changing
+#' the fitted coefficients
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param iters Defaults to \code{60L}.
+#' @param ridge Defaults to \code{1e-10}.
+#' @param tol Defaults to \code{1e-13}.
+#' @param penalty Defaults to \code{0}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .tmlcds_logit_irls <- function(X, y, iters = 60L, ridge = 1e-10,
                                tol = 1e-13, penalty = 0.0) {
   n <- nrow(X)
@@ -91,6 +173,19 @@
 
 # one targeting step: the Example 10.3 submodel, solved by Newton.
 # clever covariate A/G - (1-A)/(1-G); returns updated fits and epsilon
+#' One targeting step: the Example 10.3 submodel, solved by Newton
+#'
+#' clever covariate A/G - (1-A)/(1-G); returns updated fits and epsilon
+#'
+#' @param qa See Usage.
+#' @param q1 See Usage.
+#' @param q0 See Usage.
+#' @param y See Usage.
+#' @param d See Usage.
+#' @param g See Usage.
+#' @param clip Defaults to \code{1e-08}.
+#' @return A list with \code{qa}, \code{q1}, \code{q0}, \code{eps}.
+#' @export
 .tmlcds_fluctuate <- function(qa, q1, q0, y, d, g, clip = 1e-8) {
   n <- length(y)
   h <- d / g - (1.0 - d) / (1.0 - g)
@@ -115,11 +210,32 @@
 }
 
 # L(Qbar) = -{Y log Qbar + (1-Y) log(1-Qbar)}
+#' L(Qbar) = -{Y log Qbar + (1-Y) log(1-Qbar)}
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param qa See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .tmlcds_qloss <- function(qa, y) {
   -sum(y * log(qa) + (1.0 - y) * log(1.0 - qa)) / length(y)
 }
 
 # treatment mechanism fit; cols is a list of column vectors
+#' Treatment mechanism fit; cols is a list of column vectors
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param cols See Usage.
+#' @param n See Usage.
+#' @param penalty Defaults to \code{0}.
+#' @param trim Defaults to \code{0.005}.
+#' @return A list with \code{g}, \code{b}.
+#' @export
 .tmlcds_propensity <- function(d, cols, n, penalty = 0.0, trim = 0.005) {
   Z <- .tmlcds_design(cols, n)
   b <- .tmlcds_logit_irls(Z, d, 60L, 1e-10, penalty = as.numeric(penalty))
@@ -257,6 +373,21 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 
 # out-of-sample loss of step s (1-based), refitting on the training rows.
 # tr and fold hold 1-based row indices.
+#' Out-of-sample loss of step s (1-based), refitting on the training
+#' rows
+#'
+#' tr and fold hold 1-based row indices.
+#'
+#' @param info See Usage.
+#' @param steps See Usage.
+#' @param s See Usage.
+#' @param tr See Usage.
+#' @param fold See Usage.
+#' @param tuning See Usage.
+#' @param penalties See Usage.
+#' @param trim See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmlcds_refit_on <- function(info, steps, s, tr, fold, tuning, penalties,
                              trim) {
   ys <- info$y_scaled; d <- info$treatment; cols <- info$columns
@@ -375,6 +506,13 @@ tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
   ))
 }
 
+#' .tmlcds_cheatsheet
+#'
+#' Part of the tmlcds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tmlcds_cheatsheet <- function() {
   paste0("tmlcds: collaborative TMLE. Build a NESTED sequence of ",
          "treatment mechanisms and select by the cross-validated loss of ",

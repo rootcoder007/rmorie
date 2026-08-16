@@ -9,6 +9,15 @@
 # in-place sweep order s = 1..S, same lowest-index tie-breaking,
 # same 1e-12 policy-stability slack.
 
+#' .mdp_args
+#'
+#' Part of the mdpval_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @param R See Usage.
+#' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
+#' @export
 .mdp_args <- function(P, R) {
   Pm <- lapply(P, function(Pa) as.matrix(Pa))
   A <- length(Pm)

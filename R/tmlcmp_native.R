@@ -60,11 +60,27 @@
 # for Non-Homogeneous Markov Chains Based on Censored Observations",
 # Scandinavian Journal of Statistics 5(3), 141-150.
 
+#' .tmlcmp_vec
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tmlcmp_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(unlist(x))
 }
 
+#' .tmlcmp_mat
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .tmlcmp_mat <- function(x) {
   if (is.null(x)) return(matrix(0, nrow=0, ncol=0))
   if (is.vector(x) && !is.list(x)) x <- as.matrix(x)
@@ -73,11 +89,31 @@
   m
 }
 
+#' .tmlcmp_design
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param n See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .tmlcmp_design <- function(W, n) {
   if (nrow(W) == 0) return(matrix(1, nrow=n, ncol=1))
   cbind(rep(1, n), W)
 }
 
+#' .tmlcmp_logit_irls
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param des See Usage.
+#' @param a See Usage.
+#' @param max_iter Defaults to \code{25}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 .tmlcmp_logit_irls <- function(des, a, max_iter=25, tol=1e-8) {
   n <- nrow(des)
   p <- ncol(des)
@@ -319,6 +355,13 @@ morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
   )
 }
 
+#' .tmlcmp_cheatsheet
+#'
+#' Part of the tmlcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tmlcmp_cheatsheet <- function() {
   paste("tmlcmp: with competing risks the estimand is CUMULATIVE",
         "INCIDENCE, F_j = integral S(u-) lambda_j(u) du, not a",

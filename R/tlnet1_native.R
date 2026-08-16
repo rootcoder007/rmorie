@@ -60,6 +60,14 @@
 .tlnet1_EPS <- 1e-12
 
 # Private helper: coerce to a flat numeric vector (equivalent of k.vec)
+#' Private helper: coerce to a flat numeric vector (equivalent of k.vec)
+#'
+#' Part of the tlnet1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tlnet1_vec <- function(values) {
   if (is.matrix(values)) {
     as.numeric(values)
@@ -71,6 +79,15 @@
 }
 
 # Private helper: coerce to a list of numeric row-vectors (equivalent of k.mat)
+#' Private helper: coerce to a list of numeric row-vectors (equivalent
+#' of k.mat)
+#'
+#' Part of the tlnet1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tlnet1_mat <- function(W) {
   if (is.matrix(W) || is.data.frame(W)) {
     n <- nrow(W)
@@ -83,11 +100,28 @@
 }
 
 # Private helper: friend set for unit i (1-based, excluding self)
+#' Private helper: friend set for unit i (1-based, excluding self)
+#'
+#' Part of the tlnet1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param friends See Usage.
+#' @param i See Usage.
+#' @return The value of \code{setdiff}.
+#' @export
 .tlnet1_fset <- function(friends, i) {
   setdiff(friends[[i]], i)
 }
 
 # Private helper: count total directed edges (i -> j for j in F_i)
+#' Private helper: count total directed edges (i -> j for j in F_i)
+#'
+#' Part of the tlnet1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param friends See Usage.
+#' @return The value of \code{total}, as built in the body.
+#' @export
 .tlnet1_count_edges <- function(friends) {
   N <- length(friends)
   total <- 0L

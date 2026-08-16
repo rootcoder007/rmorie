@@ -42,6 +42,16 @@
 # A decoder is a plain environment so the position advances by reference
 # the way the Python reader's self.pos does; passing it around by value
 # would need every helper to return (value, pos) pairs.
+#' A decoder is a plain environment so the position advances by
+#' reference
+#'
+#' the way the Python reader\'s self.pos does; passing it around by
+#' value would need every helper to return (value, pos) pairs.
+#'
+#' @param buf See Usage.
+#' @param pos Defaults to \code{1L}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .pq_reader <- function(buf, pos = 1L) {
   e <- new.env(parent = emptyenv())
   e$buf <- buf
@@ -49,12 +59,28 @@
   e
 }
 
+#' .pq_byte
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 .pq_byte <- function(e) {
   b <- as.integer(e$buf[e$pos])
   e$pos <- e$pos + 1L
   b
 }
 
+#' .pq_varint
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 .pq_varint <- function(e) {
   result <- 0
   shift <- 0
@@ -68,6 +94,14 @@
   }
 }
 
+#' .pq_zigzag
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .pq_zigzag <- function(e) {
   n <- .pq_varint(e)
   # (n >> 1) xor -(n & 1), written in doubles so values past 2^31 stay
@@ -75,6 +109,14 @@
   if (n %% 2 == 1) -(n + 1) / 2 else n / 2
 }
 
+#' .pq_binary
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .pq_binary <- function(e) {
   n <- .pq_varint(e)
   out <- e$buf[seq.int(e$pos, length.out = n)]
@@ -82,6 +124,14 @@
   out
 }
 
+#' .pq_double
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .pq_double <- function(e) {
   v <- readBin(e$buf[seq.int(e$pos, length.out = 8L)], "double",
     n = 1L, size = 8L, endian = "little"
@@ -90,6 +140,15 @@
   v
 }
 
+#' .pq_scalar
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param ttype See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .pq_scalar <- function(e, ttype) {
   if (ttype == .pqTTrue) {
     return(TRUE)
@@ -124,6 +183,14 @@
   )
 }
 
+#' .pq_list
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .pq_list <- function(e) {
   h <- .pq_byte(e)
   size <- bitwShiftR(h, 4L)
@@ -135,6 +202,14 @@
   lapply(seq_len(size), function(i) .pq_scalar(e, etype))
 }
 
+#' .pq_map
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .pq_map <- function(e) {
   size <- .pq_varint(e)
   if (size == 0) {
@@ -151,6 +226,14 @@
   out
 }
 
+#' .pq_struct
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 .pq_struct <- function(e) {
   out <- list()
   fid <- 0L
@@ -166,6 +249,16 @@
   }
 }
 
+#' .pq_f
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @param id See Usage.
+#' @param default Defaults to \code{NULL}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .pq_f <- function(st, id, default = NULL) {
   v <- st[[as.character(id)]]
   if (is.null(v)) default else v
@@ -173,6 +266,12 @@
 
 # Writer. Accumulates into a list of raw vectors and concatenates once,
 # because growing a raw vector element by element is quadratic.
+#' Writer. Accumulates into a list of raw vectors and concatenates once,
+#'
+#' because growing a raw vector element by element is quadratic.
+#'
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .pq_writer <- function() {
   e <- new.env(parent = emptyenv())
   e$parts <- list()
@@ -180,12 +279,30 @@
   e
 }
 
+#' .pq_emit
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param r See Usage.
+#' @return Invisibly,nothing; the function is called for its effect.
+#' @export
 .pq_emit <- function(e, r) {
   e$n <- e$n + 1L
   e$parts[[e$n]] <- r
   invisible(NULL)
 }
 
+#' .pq_wvarint
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param n See Usage.
+#' @return The value of \code{.pq_emit}.
+#' @export
 .pq_wvarint <- function(e, n) {
   out <- raw(0)
   repeat {
@@ -199,16 +316,45 @@
   .pq_emit(e, out)
 }
 
+#' .pq_wzigzag
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param n See Usage.
+#' @return The value of \code{.pq_wvarint}.
+#' @export
 .pq_wzigzag <- function(e, n) {
   .pq_wvarint(e, if (n < 0) -2 * n - 1 else 2 * n)
 }
 
+#' .pq_wbinary
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.pq_emit}.
+#' @export
 .pq_wbinary <- function(e, b) {
   if (is.character(b)) b <- charToRaw(enc2utf8(b))
   .pq_wvarint(e, length(b))
   .pq_emit(e, b)
 }
 
+#' .pq_wfield
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param ttype See Usage.
+#' @param last See Usage.
+#' @return The value of \code{fid}, as built in the body.
+#' @export
 .pq_wfield <- function(e, fid, ttype, last) {
   delta <- fid - last
   if (delta > 0 && delta <= 15) {
@@ -220,24 +366,67 @@
   fid
 }
 
+#' .pq_wi32
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param v See Usage.
+#' @param last See Usage.
+#' @return The value of \code{last}, as built in the body.
+#' @export
 .pq_wi32 <- function(e, fid, v, last) {
   last <- .pq_wfield(e, fid, .pqTI32, last)
   .pq_wzigzag(e, v)
   last
 }
 
+#' .pq_wi64
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param v See Usage.
+#' @param last See Usage.
+#' @return The value of \code{last}, as built in the body.
+#' @export
 .pq_wi64 <- function(e, fid, v, last) {
   last <- .pq_wfield(e, fid, .pqTI64, last)
   .pq_wzigzag(e, v)
   last
 }
 
+#' .pq_wbytes
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param v See Usage.
+#' @param last See Usage.
+#' @return The value of \code{last}, as built in the body.
+#' @export
 .pq_wbytes <- function(e, fid, v, last) {
   last <- .pq_wfield(e, fid, .pqTBinary, last)
   .pq_wbinary(e, v)
   last
 }
 
+#' .pq_wlisthdr
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param size See Usage.
+#' @param etype See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .pq_wlisthdr <- function(e, size, etype) {
   if (size < 15) {
     .pq_emit(e, as.raw(bitwOr(bitwShiftL(size, 4L), etype)))
@@ -247,6 +436,17 @@
   }
 }
 
+#' .pq_wlisti32
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param vals See Usage.
+#' @param last See Usage.
+#' @return The value of \code{last}, as built in the body.
+#' @export
 .pq_wlisti32 <- function(e, fid, vals, last) {
   last <- .pq_wfield(e, fid, .pqTList, last)
   .pq_wlisthdr(e, length(vals), .pqTI32)
@@ -254,6 +454,17 @@
   last
 }
 
+#' .pq_wlistbin
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param vals See Usage.
+#' @param last See Usage.
+#' @return The value of \code{last}, as built in the body.
+#' @export
 .pq_wlistbin <- function(e, fid, vals, last) {
   last <- .pq_wfield(e, fid, .pqTList, last)
   .pq_wlisthdr(e, length(vals), .pqTBinary)
@@ -261,6 +472,17 @@
   last
 }
 
+#' .pq_wliststruct
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param bodies See Usage.
+#' @param last See Usage.
+#' @return The value of \code{last}, as built in the body.
+#' @export
 .pq_wliststruct <- function(e, fid, bodies, last) {
   last <- .pq_wfield(e, fid, .pqTList, last)
   .pq_wlisthdr(e, length(bodies), .pqTStruct)
@@ -268,12 +490,31 @@
   last
 }
 
+#' .pq_wstruct
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param fid See Usage.
+#' @param body See Usage.
+#' @param last See Usage.
+#' @return The value of \code{last}, as built in the body.
+#' @export
 .pq_wstruct <- function(e, fid, body, last) {
   last <- .pq_wfield(e, fid, .pqTStruct, last)
   .pq_emit(e, body)
   last
 }
 
+#' .pq_wstop
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{do.call}.
+#' @export
 .pq_wstop <- function(e) {
   .pq_emit(e, as.raw(0L))
   do.call(base::c, e$parts)
@@ -281,6 +522,14 @@
 
 # ---------------------------------------------------------------- snappy
 
+#' .pq_snappy_decompress
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .pq_snappy_decompress <- function(data) {
   pos <- 1L
   n <- 0
@@ -350,6 +599,13 @@
   out
 }
 
+#' Literal-only stream: fully conformant, just does not shrink
+#'
+#' ponytail: no match-finder; add one if written size ever matters.
+#'
+#' @param data See Usage.
+#' @return The value of \code{do.call}.
+#' @export
 .pq_snappy_compress <- function(data) {
   # Literal-only stream: fully conformant, just does not shrink.
   # ponytail: no match-finder; add one if written size ever matters.
@@ -423,6 +679,15 @@
 # readBin ignores signed = FALSE for sizes above 2 and warns about it, so
 # unsigned 32-bit values (byte-array lengths, the footer length, the low
 # half of an INT64) have to be read signed and folded back up.
+#' ReadBin ignores signed = FALSE for sizes above 2 and warns about it,
+#' so
+#'
+#' unsigned 32-bit values (byte-array lengths, the footer length, the
+#' low half of an INT64) have to be read signed and folded back up.
+#'
+#' @param r See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .pq_u32 <- function(r) {
   v <- readBin(r, "integer",
     n = length(r) %/% 4L, size = 4L,
@@ -431,6 +696,14 @@
   ifelse(v < 0, v + 2^32, v)
 }
 
+#' .pq_bit_width
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 .pq_bit_width <- function(n) {
   w <- 0L
   while (n > 0) {
@@ -440,6 +713,18 @@
   w
 }
 
+#' .pq_read_rle
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param buf See Usage.
+#' @param pos See Usage.
+#' @param width See Usage.
+#' @param count See Usage.
+#' @param end See Usage.
+#' @return A list with \code{values}, \code{pos}.
+#' @export
 .pq_read_rle <- function(buf, pos, width, count, end) {
   if (width == 0L) {
     return(list(values = rep(0L, count), pos = pos))
@@ -492,6 +777,14 @@
   list(values = out, pos = pos)
 }
 
+#' ReadBin has no 64-bit integer, so recombine two 32-bit halves. Exact
+#'
+#' to 2^53, which covers every count, offset and epoch value here.
+#'
+#' @param raw_bytes See Usage.
+#' @param count See Usage.
+#' @return A numeric value.
+#' @export
 .pq_read_i64 <- function(raw_bytes, count) {
   # readBin has no 64-bit integer, so recombine two 32-bit halves. Exact
   # to 2^53, which covers every count, offset and epoch value here.
@@ -503,6 +796,18 @@
   hi * 2^32 + lo
 }
 
+#' .pq_decode_plain
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param buf See Usage.
+#' @param pos See Usage.
+#' @param ptype See Usage.
+#' @param count See Usage.
+#' @param type_length Defaults to \code{NULL}.
+#' @return Nothing; this branch always raises.
+#' @export
 .pq_decode_plain <- function(buf, pos, ptype, count, type_length = NULL) {
   if (count == 0L) {
     return(list(values = list(), pos = pos))
@@ -573,6 +878,16 @@
   stop("unsupported physical type ", ptype, call. = FALSE)
 }
 
+#' .pq_convert
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vals See Usage.
+#' @param ptype See Usage.
+#' @param converted See Usage.
+#' @return The value of \code{vals}, as built in the body.
+#' @export
 .pq_convert <- function(vals, ptype, converted) {
   if (ptype == .pqByteArray) {
     return(vapply(vals, function(v) {
@@ -594,6 +909,18 @@
 # the two agree on the epoch value; without this a DATE column came back
 # as a bare day count while nanoparquet handed the caller a Date, which
 # is a silent factor-of-86400 trap for anyone swapping the engines.
+#' Logical (converted) types. Applied identically in the Python arm, so
+#'
+#' the two agree on the epoch value; without this a DATE column came
+#' back as a bare day count while nanoparquet handed the caller a Date,
+#' which is a silent factor-of-86400 trap for anyone swapping the
+#' engines.
+#'
+#' @param v See Usage.
+#' @param ptype See Usage.
+#' @param converted See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .pq_apply_logical <- function(v, ptype, converted) {
   if (is.null(converted)) {
     return(v)
@@ -612,6 +939,15 @@
 
 # ------------------------------------------------------------------ read
 
+#' .pq_read_footer
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param con See Usage.
+#' @param size See Usage.
+#' @return The value of \code{.pq_struct}.
+#' @export
 .pq_read_footer <- function(con, size) {
   seek(con, 0L)
   if (!identical(readBin(con, "raw", 4L), charToRaw("PAR1"))) {
@@ -627,6 +963,18 @@
   .pq_struct(.pq_reader(readBin(con, "raw", n)))
 }
 
+#' .pq_column_values
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param con See Usage.
+#' @param cm See Usage.
+#' @param num_rows See Usage.
+#' @param maxdef See Usage.
+#' @param typelen See Usage.
+#' @return The value of \code{[}.
+#' @export
 .pq_column_values <- function(con, cm, num_rows, maxdef, typelen) {
   ptype <- as.integer(.pq_f(cm, 1))
   codec <- as.integer(.pq_f(cm, 4))
@@ -847,6 +1195,15 @@ morie_read_parquet <- function(path, columns = NULL) {
 
 # ----------------------------------------------------------------- write
 
+#' Date and POSIXct must keep their logical type on the way out
+#'
+#' Without this a column read as TIMESTAMP_MICROS was written back as a
+#' bare DOUBLE of seconds: readable, but no longer a timestamp to any
+#' other engine, and off by a factor of 1e6 from where it started.
+#'
+#' @param v See Usage.
+#' @return A list with \code{type}, \code{converted}.
+#' @export
 .pq_infer <- function(v) {
   # Date and POSIXct must keep their logical type on the way out.
   # Without this a column read as TIMESTAMP_MICROS was written back as a
@@ -870,6 +1227,15 @@ morie_read_parquet <- function(path, columns = NULL) {
   list(type = .pqByteArray, converted = .pqCtUtf8)
 }
 
+#' .pq_prep_write
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param inf See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .pq_prep_write <- function(v, inf) {
   if (inherits(v, "Date")) {
     return(as.integer(unclass(v)))
@@ -880,6 +1246,13 @@ morie_read_parquet <- function(path, columns = NULL) {
   v
 }
 
+#' WriteBin has no 64-bit integer; emit two 32-bit halves, folding the
+#'
+#' low half back into signed range because that is all writeBin takes.
+#'
+#' @param values See Usage.
+#' @return The value of \code{writeBin}.
+#' @export
 .pq_encode_i64 <- function(values) {
   # writeBin has no 64-bit integer; emit two 32-bit halves, folding the
   # low half back into signed range because that is all writeBin takes.
@@ -893,6 +1266,15 @@ morie_read_parquet <- function(path, columns = NULL) {
   writeBin(out, raw(), size = 4L, endian = "little")
 }
 
+#' .pq_encode_plain
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @param ptype See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .pq_encode_plain <- function(values, ptype) {
   if (length(values) == 0L) {
     return(raw(0))
@@ -933,6 +1315,15 @@ morie_read_parquet <- function(path, columns = NULL) {
   stop("cannot PLAIN-encode physical type ", ptype, call. = FALSE)
 }
 
+#' .pq_encode_levels
+#'
+#' Part of the parquet implementation; see the file header for the
+#' source it follows.
+#'
+#' @param levels See Usage.
+#' @param width See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .pq_encode_levels <- function(levels, width) {
   if (width == 0L) {
     return(raw(0))

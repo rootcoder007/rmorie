@@ -32,6 +32,14 @@
 
 .sctraj_COV <- c("full", "diagonal", "euclidean")
 
+#' .sctraj_matrix
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 .sctraj_matrix <- function(X) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -47,6 +55,15 @@
   M
 }
 
+#' Solve A x = b; singular pooled covariance gets the paper\'s advice
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .sctraj_solve <- function(A, b) {
   # Solve A x = b; singular pooled covariance gets the paper's advice.
   n <- nrow(A)
@@ -259,6 +276,14 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 
 # ------------------------------------------------------ principal curves
 
+#' .sctraj_arc_length
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param curve See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .sctraj_arc_length <- function(curve) {
   m <- nrow(curve)
   s <- numeric(m)
@@ -270,6 +295,16 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
   s
 }
 
+#' Nearest point on the polyline, and its arc length
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param point See Usage.
+#' @param curve See Usage.
+#' @param s See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .sctraj_project <- function(point, curve, s) {
   # Nearest point on the polyline, and its arc length.
   best <- NULL
@@ -294,6 +329,16 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
   best
 }
 
+#' Local linear smoother of y on t -- the "smoothing spline" step,
+#'
+#' kept simple and weight-aware.
+#'
+#' @param t See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param span Defaults to \code{0.4}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .sctraj_smooth <- function(t, y, w, span=0.4) {
   # Local linear smoother of y on t -- the "smoothing spline" step,
   # kept simple and weight-aware.
@@ -405,6 +450,16 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
        sse=sum(weights * dist ^ 2))
 }
 
+#' .sctraj_interp
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param curve See Usage.
+#' @param u See Usage.
+#' @return The value of \code{[}.
+#' @export
 .sctraj_interp <- function(s, curve, u) {
   m <- length(s)
   if (u <= s[1L]) {
@@ -516,6 +571,14 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
   1.0 - morie_sctraj_cosine_cdf(num / (t_max - t_min) - 0.5)
 }
 
+#' Lowest and highest non-outlier values, by the 1.5 IQR rule
+#'
+#' Part of the sctraj_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vals See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .sctraj_non_outlier_range <- function(vals) {
   # Lowest and highest non-outlier values, by the 1.5 IQR rule.
   v <- sort(as.numeric(vals))

@@ -20,6 +20,14 @@
 
 .comet_EPS <- 1e-12
 
+#' .comet_vec
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .comet_vec <- function(x) as.numeric(x)
 
 #' pooled_features
@@ -73,6 +81,15 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
        note = "trained against HUMAN judgements, not n-gram overlap")
 }
 
+#' .comet_dist
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .comet_dist <- function(a, b) {
   x <- .comet_vec(a); y <- .comet_vec(b)
   if (length(x) != length(y))
@@ -180,6 +197,13 @@ morie_comet <- function(hyp, src, ref, W, b = NULL) {
   estimator_score(hyp, src, ref, W, b = b)
 }
 
+#' .comet_cheatsheet
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .comet_cheatsheet <- function() {
   paste("comet: replace n-gram overlap with a LEARNED metric",
         "trained on human judgements, embedding hypothesis,",

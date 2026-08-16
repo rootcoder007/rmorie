@@ -18,10 +18,26 @@
 .MOR_FP_MOD <- 2147483647
 .MOR_FP_MUL <- 1000003
 
+#' .mor_fp_mix
+#'
+#' Part of the ecfp4_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .mor_fp_mix <- function(h, v) (h * .MOR_FP_MUL + (v %% .MOR_FP_MOD)) %% .MOR_FP_MOD
 
 # bond list: 0-based (i, j, order) triples in the Python enumeration
 # order (i ascending, then j > i ascending)
+#' Bond list: 0-based (i, j, order) triples in the Python enumeration
+#'
+#' order (i ascending, then j > i ascending)
+#'
+#' @param adjacency See Usage.
+#' @return A list with \code{a}, \code{i}, \code{j}, \code{o}.
+#' @export
 .mor_fp_bonds <- function(adjacency) {
   A <- as.matrix(adjacency)
   a <- nrow(A)
@@ -36,6 +52,20 @@
   list(a = a, i = bi, j = bj, o = bo)
 }
 
+#' .mor_fp_invariants
+#'
+#' Part of the ecfp4_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param bd See Usage.
+#' @param atomnum See Usage.
+#' @param numhs See Usage.
+#' @param charge See Usage.
+#' @param inring See Usage.
+#' @param isotope_delta See Usage.
+#' @return The value of \code{inv}, as built in the body.
+#' @export
 .mor_fp_invariants <- function(a, bd, atomnum, numhs, charge, inring,
                                isotope_delta) {
   deg <- integer(a)
@@ -56,11 +86,32 @@
 }
 
 # canonical key of a bond set: sorted 0-based indices, four digits each
+#' Canonical key of a bond set: sorted 0-based indices, four digits each
+#'
+#' Part of the ecfp4_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bs See Usage.
+#' @return A character value.
+#' @export
 .mor_fp_envkey <- function(bs) {
   if (length(bs) == 0L) return("")
   paste(sprintf("%04d", sort(bs)), collapse = "")
 }
 
+#' .mor_fp_morgan
+#'
+#' Part of the ecfp4_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param bd See Usage.
+#' @param invariants See Usage.
+#' @param radius See Usage.
+#' @param nbits See Usage.
+#' @param use_bond_order Defaults to \code{TRUE}.
+#' @return A list with \code{bits}, \code{count}, \code{ident}.
+#' @export
 .mor_fp_morgan <- function(a, bd, invariants, radius, nbits,
                            use_bond_order = TRUE) {
   inc_b <- vector("list", a); inc_o <- vector("list", a)
@@ -142,6 +193,18 @@
   list(bits = bits, count = cnt, ident = ident)
 }
 
+#' .mor_fp_defaults
+#'
+#' Part of the ecfp4_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param numhs See Usage.
+#' @param charge See Usage.
+#' @param inring See Usage.
+#' @param isotope_delta See Usage.
+#' @return A list with \code{numhs}, \code{charge}, \code{inring}, \code{isotope_delta}.
+#' @export
 .mor_fp_defaults <- function(a, numhs, charge, inring, isotope_delta) {
   col <- function(x, default) {
     if (is.null(x)) return(rep(default, a))

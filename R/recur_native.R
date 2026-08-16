@@ -7,6 +7,21 @@
 # Bit-identical to the Python in src/morie/fn/_recur_core.py: Breslow
 # ties, Newton on the stratified counting-process partial likelihood.
 
+#' .morie_cox_counting
+#'
+#' Part of the recur_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param start See Usage.
+#' @param stop See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param strata Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{50L}.
+#' @param tol Defaults to \code{1e-09}.
+#' @param offset Defaults to \code{NULL}.
+#' @return A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter}, \code{n_events}.
+#' @export
 .morie_cox_counting <- function(start, stop, event, X, strata = NULL,
                                 max_iter = 50L, tol = 1e-9,
                                 offset = NULL) {

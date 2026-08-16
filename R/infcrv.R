@@ -64,8 +64,26 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
        n = n, method = "Influence function")
 }
 
+#' .if_wmean
+#'
+#' Part of the infcrv implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .if_wmean <- function(v, w) sum(w * v) / sum(w)
 
+#' .if_wvar
+#'
+#' Part of the infcrv implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .if_wvar <- function(v, w) {
   m <- .if_wmean(v, w)
   sum(w * (v - m)^2) / sum(w)
@@ -73,6 +91,15 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 
 # Lower weighted median: the smallest value whose cumulative weight reaches
 # half the total.
+#' Lower weighted median: the smallest value whose cumulative weight
+#' reaches
+#'
+#' half the total.
+#'
+#' @param v See Usage.
+#' @param w See Usage.
+#' @return The value of \code{[}.
+#' @export
 .if_wmedian <- function(v, w) {
   o <- order(v)
   tot <- sum(w)
@@ -84,6 +111,15 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
   v[o[length(o)]]
 }
 
+#' .if_resolve
+#'
+#' Part of the infcrv implementation; see the file header for the source
+#' it follows.
+#'
+#' @param estimator See Usage.
+#' @param who See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .if_resolve <- function(estimator, who) {
   if (is.function(estimator)) return(estimator)
   if (is.character(estimator) && length(estimator) == 1L) {

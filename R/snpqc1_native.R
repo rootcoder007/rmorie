@@ -35,6 +35,14 @@
 # Genotypes are counts of the minor allele, 0/1/2, with NA for a
 # missing call.
 
+#' .snpqc1_check
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param genotypes See Usage.
+#' @return A list with \code{G}, \code{n}, \code{m}.
+#' @export
 .snpqc1_check <- function(genotypes) {
   G <- as.matrix(genotypes)
   storage.mode(G) <- "double"
@@ -91,6 +99,14 @@ morie_snpqc1_maf <- function(genotypes) {
   out
 }
 
+#' .snpqc1_log_fact
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @return The value of \code{lgamma}.
+#' @export
 .snpqc1_log_fact <- function(n) {
   lgamma(n + 1.0)
 }
@@ -160,6 +176,14 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
   min(max(p, 0.0), 1.0)
 }
 
+#' Complementary error function via pnorm: erfc(x) = 2*pnorm(-x*sqrt2)
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .snpqc1_erfc <- function(x) {
   # complementary error function via pnorm: erfc(x) = 2*pnorm(-x*sqrt2)
   2.0 * stats::pnorm(-x * sqrt(2.0))

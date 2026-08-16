@@ -1,0 +1,19 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.dmlqs_norm_adj}
+\alias{.dmlqs_norm_adj}
+\title{Coerce an adjacency mapping to a list keyed by character atom id,}
+\usage{
+.dmlqs_norm_adj(adj)
+}
+\arguments{
+\item{adj}{See Usage.}
+}
+\description{
+each value a sorted unique integer vector of neighbours (with v itself excluded -- mirrors Python `set(adj[v]) - {v}`).
+}
+\value{
+Nothing; this branch always raises.
+}
+\keyword{internal}

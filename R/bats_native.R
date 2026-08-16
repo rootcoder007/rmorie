@@ -298,6 +298,15 @@ label <- function(spec) {
          if (nzchar(seas)) paste0(", ", seas) else "", ")")
 }
 
+#' .unpack
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{alpha}, \code{beta}, \code{phi}, \code{gam}, \code{ar}, \code{ma}, \code{omega}.
+#' @export
 .unpack <- function(spec, theta) {
   i <- 1L
   alpha <- theta[i]; i <- i + 1L
@@ -460,6 +469,15 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
   as.numeric(sol)
 }
 
+#' .flatten_carry
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @param carry See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .flatten_carry <- function(spec, carry) {
   out <- c(carry$level)
   if (spec$use_trend) out <- c(out, carry$trend)
@@ -570,6 +588,14 @@ concentrated_loglik <- function(y, resid, omega) {
   out
 }
 
+#' .bats_bounds
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @return A list with \code{lo}, \code{hi}.
+#' @export
 .bats_bounds <- function(spec) {
   lo <- 0; hi <- 1
   if (spec$use_trend) {
@@ -587,6 +613,16 @@ concentrated_loglik <- function(y, resid, omega) {
   list(lo = lo, hi = hi)
 }
 
+#' Several starting points for the smoothing parameters. Nelder-Mead
+#'
+#' builds its initial simplex by nudging each coordinate by 5% of its
+#' own value (the same rule as scipy), so a single start of alpha = 0.09
+#' only ever explores a box 0.004 wide. Starting from a small grid
+#' instead is what makes the search actually search.
+#'
+#' @param spec See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .starts <- function(spec) {
   # Several starting points for the smoothing parameters. Nelder-Mead
   # builds its initial simplex by nudging each coordinate by 5% of its
@@ -611,6 +647,17 @@ concentrated_loglik <- function(y, resid, omega) {
   out
 }
 
+#' .fit_spec
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param spec See Usage.
+#' @param long_run_b Defaults to \code{0}.
+#' @param maxiter Defaults to \code{2000}.
+#' @return A list with \code{theta}, \code{x0}, \code{resid}, \code{fitted}, \code{loglik}, \code{omega}, \code{aic}, \code{n_par}.
+#' @export
 .fit_spec <- function(y, spec, long_run_b = 0, maxiter = 2000) {
   bds <- .bats_bounds(spec)
   lo <- bds$lo; hi <- bds$hi
@@ -655,6 +702,20 @@ concentrated_loglik <- function(y, resid, omega) {
        loglik = ll, omega = omega, aic = -2 * ll + 2 * k, n_par = k)
 }
 
+#' Iterate the state equations with epsilon = 0. Future innovations
+#'
+#' have mean zero, so the point forecast just runs equations 3b-3f
+#' forward from the final state. The MA terms die after q steps; the AR
+#' recursion on d continues.
+#'
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @param x0 See Usage.
+#' @param z See Usage.
+#' @param h See Usage.
+#' @param long_run_b Defaults to \code{0}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .forecast <- function(spec, theta, x0, z, h, long_run_b = 0) {
   # Iterate the state equations with epsilon = 0. Future innovations
   # have mean zero, so the point forecast just runs equations 3b-3f
@@ -715,6 +776,13 @@ concentrated_loglik <- function(y, resid, omega) {
   out
 }
 
+#' .bats_cheatsheet
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .bats_cheatsheet <- function() {
   paste0("bats: De Livera, Hyndman & Snyder (2010). BATS = Box-Cox ",
          "transform, ARMA errors, Trend, Seasonal -- an innovations ",

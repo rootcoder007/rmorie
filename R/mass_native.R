@@ -83,6 +83,14 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 # --- Module 31: negative-binomial GLM + 2-D KDE (native MASS) ---------
 
 # Normal-reference bandwidth (reproduces MASS::bandwidth.nrd).
+#' Normal-reference bandwidth (reproduces MASS::bandwidth.nrd)
+#'
+#' Part of the mass_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .morie_bandwidth_nrd <- function(x) {
   r <- stats::quantile(x, c(0.25, 0.75))
   h <- (r[2L] - r[1L]) / 1.34
@@ -127,6 +135,14 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 
 # Negative-binomial family with fixed theta (reproduces
 # MASS::negative.binomial for the log link path used by glm.nb).
+#' Negative-binomial family with fixed theta (reproduces
+#'
+#' MASS::negative.binomial for the log link path used by glm.nb).
+#'
+#' @param theta See Usage.
+#' @param link Defaults to \code{"log"}.
+#' @return The value of \code{structure}.
+#' @export
 .morie_negbin_family <- function(theta, link = "log") {
   lk <- stats::make.link(link)
   variance <- function(mu) mu + mu^2 / theta
@@ -156,6 +172,19 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 }
 
 # Theta MLE by Fisher scoring (reproduces MASS::theta.ml).
+#' Theta MLE by Fisher scoring (reproduces MASS::theta.ml)
+#'
+#' Part of the mass_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param mu See Usage.
+#' @param n Defaults to \code{sum(weights)}.
+#' @param weights See Usage.
+#' @param limit Defaults to \code{10}.
+#' @param eps Defaults to \code{.Machine$double.eps^0.25}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_theta_ml <- function(y, mu, n = sum(weights), weights,
                             limit = 10, eps = .Machine$double.eps^0.25) {
   if (missing(weights)) weights <- rep(1, length(y))

@@ -12,6 +12,14 @@
 
 .funCA_EPS <- 1e-12
 
+#' .funCA_grid_weights
+#'
+#' Part of the funCA_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_t See Usage.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 .funCA_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
@@ -19,6 +27,16 @@
   w
 }
 
+#' .funCA_fpca
+#'
+#' Part of the funCA_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param C See Usage.
+#' @param w See Usage.
+#' @param n_keep See Usage.
+#' @return A list with \code{lam}, \code{phi}, \code{all}.
+#' @export
 .funCA_fpca <- function(C, w, n_keep) {
   T <- length(w)
   rw <- sqrt(w)
@@ -38,6 +56,14 @@
        phi = phi[, seq_len(n_keep), drop = FALSE], all = lam)
 }
 
+#' .funCA_sym_inv_sqrt
+#'
+#' Part of the funCA_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 .funCA_sym_inv_sqrt <- function(M) {
   ev <- eigen(M, symmetric = TRUE)
   d <- ev$values
@@ -160,6 +186,13 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
   )
 }
 
+#' .funCA_cheatsheet
+#'
+#' Part of the funCA_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .funCA_cheatsheet <- function() {
   paste0("funCA: morie_funCA_functional_cca(X, Y, p, q) -> canonical ",
          "correlations between two sets of curves, restricted to the ",

@@ -149,6 +149,13 @@ cv_tmle_split <- function(n, V = 10L, seed = 0L) {
        note = "the fit is independent of the validation sample, so no Donsker condition is needed")
 }
 
+#' .tlhaltm_cheatsheet
+#'
+#' Part of the tlhaltm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlhaltm_cheatsheet <- function() {
   paste("tlhaltm: TMLE is efficient when (a) the second-order ",
         "remainder -- a PRODUCT of the two nuisance errors -- is ",

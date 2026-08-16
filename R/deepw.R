@@ -1,6 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Neighbour lists from a square 0/1 adjacency matrix.
+#' Neighbour lists from a square 0/1 adjacency matrix
+#'
+#' Part of the deepw implementation; see the file header for the source
+#' it follows.
+#'
+#' @param G See Usage.
+#' @return A list with \code{A}, \code{n}, \code{nb}.
+#' @export
 .dw_adj <- function(G) {
   A <- .s03mat(G)
   n <- nrow(A)
@@ -14,6 +22,17 @@
 }
 
 # One uniform random walk: every neighbour has probability 1/deg.
+#' One uniform random walk: every neighbour has probability 1/deg
+#'
+#' Part of the deepw implementation; see the file header for the source
+#' it follows.
+#'
+#' @param nb See Usage.
+#' @param start See Usage.
+#' @param length_ See Usage.
+#' @param e See Usage.
+#' @return The value of \code{[}.
+#' @export
 .dw_walk <- function(nb, start, length_, e) {
   w <- integer(length_)
   w[1] <- start
@@ -33,6 +52,21 @@
 }
 
 # Skip-gram with negative sampling, plain SGD, fixed schedule.
+#' Skip-gram with negative sampling, plain SGD, fixed schedule
+#'
+#' Part of the deepw implementation; see the file header for the source
+#' it follows.
+#'
+#' @param walks See Usage.
+#' @param n See Usage.
+#' @param dim See Usage.
+#' @param window See Usage.
+#' @param epochs See Usage.
+#' @param lr See Usage.
+#' @param neg See Usage.
+#' @param e See Usage.
+#' @return A list with \code{W}, \code{C}.
+#' @export
 .dw_skipgram <- function(walks, n, dim, window, epochs, lr, neg, e) {
   W <- matrix(0, n, dim)
   for (i in seq_len(n)) for (d in seq_len(dim))

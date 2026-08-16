@@ -16,6 +16,16 @@
 # including the NaN curve returned when a core allele has fewer than
 # two carriers.
 
+#' .mor_ehh_curve
+#'
+#' Part of the ehhdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param core See Usage.
+#' @param carriers See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .mor_ehh_curve <- function(H, core, carriers) {
   L <- ncol(H)
   n <- length(carriers)
@@ -78,6 +88,19 @@ morie_ehhdec <- function(hap, core, positions = NULL) {
 # stopping once the curve drops below min_ehh.  `truncated` stays TRUE
 # when the curve never dropped that far before the data ran out, which
 # is exactly the case where the integral understates iHH.
+#' Trapezoid integral of an EHH curve out from the core on one side,
+#'
+#' stopping once the curve drops below min_ehh.  `truncated` stays TRUE
+#' when the curve never dropped that far before the data ran out, which
+#' is exactly the case where the integral understates iHH.
+#'
+#' @param pos See Usage.
+#' @param ehh See Usage.
+#' @param core See Usage.
+#' @param side See Usage.
+#' @param min_ehh See Usage.
+#' @return A list with \code{area}, \code{truncated}.
+#' @export
 .mor_ihh_one_side <- function(pos, ehh, core, side, min_ehh) {
   L <- length(pos)
   cc <- core + 1L

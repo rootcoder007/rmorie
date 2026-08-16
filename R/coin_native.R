@@ -21,6 +21,17 @@
 #   h : n x q influence (transformation) of the response
 # Returns the vec'd statistic T (pq), its conditional mean mu and
 # covariance Sigma, matching coin's `expectation()` / `covariance()`.
+#' Strasser-Weber conditional moments of the linear statistic
+#'
+#' g : n x p transformation of the covariate (e.g. group indicators) h :
+#' n x q influence (transformation) of the response Returns the vec\'d
+#' statistic T (pq), its conditional mean mu and covariance Sigma,
+#' matching coin\'s `expectation()` / `covariance()`.
+#'
+#' @param g See Usage.
+#' @param h See Usage.
+#' @return A list with \code{T}, \code{mu}, \code{Sigma}, \code{n}.
+#' @export
 .morie_sw_moments <- function(g, h) {
   g <- as.matrix(g)
   h <- as.matrix(h)
@@ -39,6 +50,15 @@
 }
 
 # Quadratic-form statistic c = (T-mu)' Sigma^+ (T-mu) ~ chi-square(df).
+#' Quadratic-form statistic c = (T-mu)\' Sigma^+ (T-mu) ~ chi-square(df)
+#'
+#' Part of the coin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{statistic}, \code{df}, \code{p.value}.
+#' @export
 .morie_quad_stat <- function(m, tol = 1e-8) {
   d <- m$T - m$mu
   ev <- eigen(m$Sigma, symmetric = TRUE)
@@ -54,6 +74,15 @@
 }
 
 # Standardized (scalar / maximum) statistic and asymptotic p-value.
+#' Standardized (scalar / maximum) statistic and asymptotic p-value
+#'
+#' Part of the coin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param alternative Defaults to \code{"two.sided"}.
+#' @return A list with \code{statistic}, \code{p.value}, \code{cor}, \code{z}.
+#' @export
 .morie_max_stat <- function(m, alternative = "two.sided") {
   d <- m$T - m$mu
   z <- d / sqrt(diag(m$Sigma))
@@ -79,6 +108,14 @@
 
 # Factor -> indicator design matching coin's f_trafo: k>2 gives k columns,
 # k==2 gives a single column (indicator of the second level).
+#' Factor -> indicator design matching coin\'s f_trafo: k>2 gives k
+#' columns,
+#'
+#' k==2 gives a single column (indicator of the second level).
+#'
+#' @param f See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_f_trafo <- function(f) {
   f <- as.factor(f)
   lv <- levels(f)
@@ -98,6 +135,15 @@
   }
 }
 
+#' .morie_coin_parse
+#'
+#' Part of the coin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param formula See Usage.
+#' @param data See Usage.
+#' @return A list with \code{y}, \code{x}.
+#' @export
 .morie_coin_parse <- function(formula, data) {
   mf <- stats::model.frame(formula, data = data)
   y <- mf[[1L]]

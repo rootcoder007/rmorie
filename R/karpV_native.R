@@ -50,15 +50,51 @@
 # 32-bit range and overflows above 2^31, so the words are split into two
 # 16-bit halves; every value stays well under 2^53 and the arithmetic is
 # exact.
+#' 32-bit operations on doubles. R\'s bitwXor is defined over the signed
+#'
+#' 32-bit range and overflows above 2^31, so the words are split into
+#' two 16-bit halves; every value stays well under 2^53 and the
+#' arithmetic is exact.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .karpv_xor32 <- function(a, b) {
   ah <- a %/% 65536; al <- a %% 65536
   bh <- b %/% 65536; bl <- b %% 65536
   bitwXor(ah, bh) * 65536 + bitwXor(al, bl)
 }
 
+#' .karpv_shl
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .karpv_shl <- function(a, k) (a * 2^k) %% .KARPV_2_32
+#' .karpv_shr
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .karpv_shr <- function(a, k) a %/% 2^k
 
+#' .karpv_rng
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .karpv_rng <- function(seed) {
   s <- seed %% .KARPV_2_32
   if (s == 0) s <- 2463534242
@@ -67,6 +103,14 @@
   e
 }
 
+#' .karpv_u32
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @return The value of \code{$}.
+#' @export
 .karpv_u32 <- function(e) {
   s <- e$s
   s <- .karpv_xor32(s, .karpv_shl(s, 13))
@@ -78,11 +122,27 @@
 
 # 32 bits over 2^32, so the draw is in [0,1) with no rounding surprise
 # and the same bits in both arms.
+#' 32 bits over 2^32, so the draw is in [0,1) with no rounding surprise
+#'
+#' and the same bits in both arms.
+#'
+#' @param e See Usage.
+#' @return A numeric value.
+#' @export
 .karpv_unit <- function(e) .karpv_u32(e) / .KARPV_2_32
 
 # A whole number in 0..n-1 by rejection, so the range is exact. A
 # remainder would bias the low end, and the bias changes with n -- the
 # kind of thing that never shows up in one language alone.
+#' A whole number in 0..n-1 by rejection, so the range is exact. A
+#'
+#' remainder would bias the low end, and the bias changes with n -- the
+#' kind of thing that never shows up in one language alone.
+#'
+#' @param e See Usage.
+#' @param n See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 .karpv_below <- function(e, n) {
   if (n <= 1) return(0)
   mask <- .KARPV_2_32 - 1
@@ -95,13 +155,47 @@
 
 # ---------------------------------------------------------------- trees
 
+#' .karpv_fnode
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param args See Usage.
+#' @return A list with \code{op}, \code{args}.
+#' @export
 .karpv_fnode <- function(op, args) list(op = op, args = args)
+#' .karpv_tnode
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param term See Usage.
+#' @return A list with \code{term}.
+#' @export
 .karpv_tnode <- function(term) list(term = term)
+#' .karpv_is_term
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @return A logical value.
+#' @export
 .karpv_is_term <- function(node) !is.null(node$term)
 
 .KARPV_FUNCTIONS <- list(list("+", 2L), list("-", 2L), list("*", 2L),
                          list("%", 2L))
 
+#' .karpv_apply
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param vals See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .karpv_apply <- function(op, vals) {
   if (op == "+") return(vals[1] + vals[2])
   if (op == "-") return(vals[1] - vals[2])
@@ -172,6 +266,16 @@ morie_karpV_to_string <- function(node) {
                collapse = " "), ")")
 }
 
+#' .karpv_random_terminal
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param terminals See Usage.
+#' @param erc See Usage.
+#' @return The value of \code{.karpv_tnode}.
+#' @export
 .karpv_random_terminal <- function(e, terminals, erc) {
   n <- length(terminals) + (if (is.null(erc)) 0L else 1L)
   i <- .karpv_below(e, n)
@@ -179,6 +283,19 @@ morie_karpV_to_string <- function(node) {
   .karpv_tnode(erc[1] + (erc[2] - erc[1]) * .karpv_unit(e))
 }
 
+#' .karpv_grow
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param functions See Usage.
+#' @param terminals See Usage.
+#' @param erc See Usage.
+#' @param d See Usage.
+#' @param full See Usage.
+#' @return The value of \code{.karpv_fnode}.
+#' @export
 .karpv_grow <- function(e, functions, terminals, erc, d, full) {
   if (d <= 1) return(.karpv_random_terminal(e, terminals, erc))
   if (!full) {
@@ -214,6 +331,16 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 
 # ---------------------------------------------------------------- nodes
 
+#' .karpv_collect
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path See Usage.
+#' @param out See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .karpv_collect <- function(node, path, out) {
   out[[length(out) + 1L]] <- list(path = path, node = node)
   if (!.karpv_is_term(node))
@@ -222,6 +349,16 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
   out
 }
 
+#' .karpv_pick_point
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param node See Usage.
+#' @param internal_bias See Usage.
+#' @return The value of \code{$}.
+#' @export
 .karpv_pick_point <- function(e, node, internal_bias) {
   nodes <- .karpv_collect(node, integer(0), list())
   is_t <- vapply(nodes, function(p) .karpv_is_term(p$node), logical(1))
@@ -232,16 +369,43 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
   pool[[.karpv_below(e, length(pool)) + 1L]]$path
 }
 
+#' .karpv_get
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path See Usage.
+#' @return The value of \code{node}, as built in the body.
+#' @export
 .karpv_get <- function(node, path) {
   for (k in path) node <- node$args[[k]]
   node
 }
 
+#' .karpv_copy
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @return The value of \code{.karpv_fnode}.
+#' @export
 .karpv_copy <- function(node) {
   if (.karpv_is_term(node)) return(.karpv_tnode(node$term))
   .karpv_fnode(node$op, lapply(node$args, .karpv_copy))
 }
 
+#' .karpv_replace
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path See Usage.
+#' @param new See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .karpv_replace <- function(node, path, new) {
   if (!length(path)) return(.karpv_copy(new))
   out <- .karpv_fnode(node$op, node$args)
@@ -252,6 +416,14 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 # Compensated accumulation, so both arms agree bit for bit: R's sum()
 # accumulates in long double, CPython's compensates, and neither is the
 # plain loop the other one is.
+#' Compensated accumulation, so both arms agree bit for bit: R\'s sum()
+#'
+#' accumulates in long double, CPython\'s compensates, and neither is
+#' the plain loop the other one is.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .karpv_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -290,6 +462,16 @@ morie_karpV_raw_fitness <- function(node, cases, terminals) {
 #' @export
 morie_karpV_adjusted <- function(raw) if (!is.finite(raw)) 0 else 1 / (1 + raw)
 
+#' .karpv_roulette
+#'
+#' Part of the karpV_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param adj See Usage.
+#' @param total See Usage.
+#' @return A numeric value.
+#' @export
 .karpv_roulette <- function(e, adj, total) {
   if (total <= 0) return(.karpv_below(e, length(adj)))
   r <- .karpv_unit(e) * total

@@ -23,15 +23,40 @@
 .TMLDYN_METHODS <- c("cv-tmle", "tmle", "ipw", "gcomp")
 .tmldyn_EPS <- 1e-9
 
+#' .tmldyn_logit
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tmldyn_logit <- function(p) {
   q <- min(max(as.numeric(p), .tmldyn_EPS), 1 - .tmldyn_EPS)
   log(q / (1 - q))
 }
 
+#' .tmldyn_expit
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmldyn_expit <- function(z) {
   if (z > 700) 1 else if (z < -700) 0 else 1 / (1 + exp(-z))
 }
 
+#' .blocks
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param covariate_history See Usage.
+#' @param n See Usage.
+#' @return A list with \code{L0}, \code{L1}.
+#' @export
 .blocks <- function(covariate_history, n) {
   if (is.null(covariate_history))
     stop("tmldyn: covariate_history is required")
@@ -46,6 +71,17 @@
   list(L0 = L0, L1 = L1)
 }
 
+#' .project
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @param basis See Usage.
+#' @param n See Usage.
+#' @param ridge See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .project <- function(values, basis, n, ridge) {
   if (is.null(basis)) return(as.numeric(values))
   Z <- cbind(1, as.matrix(basis))
@@ -106,6 +142,20 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
                    known = !is.null(known)))
 }
 
+#' .fit_q2
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param L0 See Usage.
+#' @param A0 See Usage.
+#' @param L1 See Usage.
+#' @param A1 See Usage.
+#' @param idx See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{q2}, \code{b}.
+#' @export
 .fit_q2 <- function(y, L0, A0, L1, A1, idx, ridge) {
   p0 <- ncol(L0); p1 <- ncol(L1)
   row_q2 <- function(a0, a1, i) {
@@ -123,6 +173,18 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
   list(q2 = q2, b = b)
 }
 
+#' .fit_q1
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pseudo See Usage.
+#' @param L0 See Usage.
+#' @param A0 See Usage.
+#' @param idx See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{q1}, \code{b}.
+#' @export
 .fit_q1 <- function(pseudo, L0, A0, idx, ridge) {
   p0 <- ncol(L0)
   row_q1 <- function(a0, i) {
@@ -221,6 +283,19 @@ exceptional_law_share <- function(blips, tol = 0.01) {
   sum(v <= tol) / length(v)
 }
 
+#' .fluctuate
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param outcome See Usage.
+#' @param offset_logit See Usage.
+#' @param H See Usage.
+#' @param rows See Usage.
+#' @param iters Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .fluctuate <- function(outcome, offset_logit, H, rows, iters = 100,
                        tol = 1e-12) {
   if (length(rows) == 0L ||
@@ -241,6 +316,15 @@ exceptional_law_share <- function(blips, tol = 0.01) {
   e
 }
 
+#' .tmldyn_folds
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param n_folds See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .tmldyn_folds <- function(n, n_folds) {
   J <- max(2L, min(as.integer(n_folds), n))
   lapply(seq_len(J) - 1L, function(j) which(seq_len(n) %% J == j))
@@ -275,6 +359,15 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
   mean(vapply(seq_len(n), function(i) q1(d0[i], i), numeric(1)))
 }
 
+#' .coerce_regime
+#'
+#' Part of the tmldyn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param regime See Usage.
+#' @param n See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .coerce_regime <- function(regime, n) {
   if (is.null(regime) || (is.character(regime) &&
       tolower(regime) %in% c("optimal", "v-optimal"))) return(NULL)

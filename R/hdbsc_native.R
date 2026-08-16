@@ -6,10 +6,30 @@
 # same Prim MST tie-breaking, same single-linkage merge order,
 # same condense/stability/selection, same label assignment.
 
+#' .hdb_core
+#'
+#' Part of the hdbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param n See Usage.
+#' @param mp See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .hdb_core <- function(D, n, mp) {
   vapply(seq_len(n), function(i) sort(D[i, ])[min(mp, n)], numeric(1))
 }
 
+#' .hdb_mst
+#'
+#' Part of the hdbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param core See Usage.
+#' @param n See Usage.
+#' @return The value of \code{edges}, as built in the body.
+#' @export
 .hdb_mst <- function(D, core, n) {
   in_tree <- rep(FALSE, n)
   key <- rep(Inf, n)
@@ -36,6 +56,15 @@
 }
 
 # single linkage (Prop. 1): 0-based node ids to mirror Python.
+#' Single linkage (Prop. 1): 0-based node ids to mirror Python
+#'
+#' Part of the hdbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param n See Usage.
+#' @return A list with \code{root}, \code{children}, \code{node_size}.
+#' @export
 .hdb_linkage <- function(edges, n) {
   m <- length(edges)
   E <- if (m) do.call(rbind, edges) else matrix(numeric(0), 0, 3)
@@ -65,6 +94,16 @@
   list(root = nid - 1L, children = children, node_size = node_size)
 }
 
+#' .hdb_points_under
+#'
+#' Part of the hdbsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param children See Usage.
+#' @param n See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .hdb_points_under <- function(node, children, n) {
   out <- integer(0)
   stack <- c(node)

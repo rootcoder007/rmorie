@@ -8,6 +8,17 @@
 
 # Shared design helper: long panel -> cohort (first treated period,
 # NA = never), event time, and the treated-post indicator.
+#' Shared design helper: long panel -> cohort (first treated period,
+#'
+#' NA = never), event time, and the treated-post indicator.
+#'
+#' @param data See Usage.
+#' @param outcome See Usage.
+#' @param unit See Usage.
+#' @param time See Usage.
+#' @param treatment_time See Usage.
+#' @return A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel}, \code{treated_post}.
+#' @export
 .morie_did_modern_frame <- function(data, outcome, unit, time,
                                     treatment_time) {
   need <- c(outcome, unit, time, treatment_time)
@@ -117,6 +128,16 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
 
 # Solve additive unit/time FEs on (possibly unbalanced) untreated
 # cells by alternating projections; returns per-level lookups.
+#' Solve additive unit/time FEs on (possibly unbalanced) untreated
+#'
+#' cells by alternating projections; returns per-level lookups.
+#'
+#' @param y0 See Usage.
+#' @param u0 See Usage.
+#' @param t0 See Usage.
+#' @param iters Defaults to \code{50L}.
+#' @return A list with \code{a}, \code{g}.
+#' @export
 .morie_did_fe_solve <- function(y0, u0, t0, iters = 50L) {
   a <- stats::setNames(rep(0, nlevels(u0)), levels(u0))
   gm <- stats::setNames(rep(0, nlevels(t0)), levels(t0))

@@ -31,6 +31,18 @@
 .MORIE_GRID_SCAN_HALF_WIDTH <- 10
 .MORIE_GRID_SCAN_POINTS <- 2001L
 
+#' .morie_optimize_scale_normalized
+#'
+#' Part of the horowitz_native4 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param fn See Usage.
+#' @param d See Usage.
+#' @param n_restarts Defaults to \code{8L}.
+#' @param seed Defaults to \code{0L}.
+#' @param x0 Defaults to \code{NULL}.
+#' @return A list with \code{beta}, \code{value}.
+#' @export
 .morie_optimize_scale_normalized <- function(fn, d, n_restarts = 8L, seed = 0L,
                                              x0 = NULL) {
   d <- as.integer(d)

@@ -5,6 +5,15 @@
 
 .pesdol_EPS <- 1e-12
 
+#' .pesdol_ols
+#'
+#' Part of the pesdol_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{beta}, \code{fit}, \code{res}.
+#' @export
 .pesdol_ols <- function(X, y) {
   n <- nrow(X); p <- ncol(X)
   XtX <- crossprod(X)
@@ -96,6 +105,13 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
                      "which is the method working rather than failing"))
 }
 
+#' .pesdol_cheatsheet
+#'
+#' Part of the pesdol_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .pesdol_cheatsheet <- function() {
   paste0("pesdol: morie_pesdol_ardl_bounds(y, x, p, q) -> ARDL long-run ",
          "coefficients and the bounds test (Pesaran, Shin & Smith 2001)")

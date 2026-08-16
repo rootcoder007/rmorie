@@ -57,10 +57,27 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
   idx
 }
 
+#' .scalar
+#'
+#' Part of the prtcl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .scalar <- function(state) {
   if (is.list(state)) state[[1]] else if (length(state) > 1L) state[1] else as.numeric(state)
 }
 
+#' .multinomial
+#'
+#' Part of the prtcl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @param e See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .multinomial <- function(w, e) {
   tot <- sum(w)
   J <- length(w)
