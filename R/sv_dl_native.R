@@ -100,6 +100,16 @@
   (p$pos2 + p$len2) - p$pos1
 }
 
+#' morie_sv_dl_insert_size_stats
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pairs See Usage.
+#' @param orientation Defaults to \code{NULL}.
+#' @param spread Defaults to \code{"mad"}.
+#' @return A list with \code{median}, \code{sd}, \code{spread}, \code{orientation}, \code{n}.
+#' @export
 morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
                                           spread="mad") {
   # Median and spread of the library insert size, and its orientation.
@@ -149,6 +159,18 @@ morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
        orientation=orientation, n=length(concordant))
 }
 
+#' morie_sv_dl_classify_pair
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param median See Usage.
+#' @param sd See Usage.
+#' @param orientation Defaults to \code{c("+", "-")}.
+#' @param n_sd Defaults to \code{3}.
+#' @return Nothing; the function is called for its effect.
+#' @export
 morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
                                       n_sd=3.0) {
   # The signature of one pair (Section 2.1, Figure 2). Returns NULL
@@ -192,6 +214,20 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
   .sv_dl_insert(p) - median
 }
 
+#' morie_sv_dl_build_sv_graph
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pairs See Usage.
+#' @param median See Usage.
+#' @param sd See Usage.
+#' @param label See Usage.
+#' @param orientation Defaults to \code{c("+", "-")}.
+#' @param n_sd Defaults to \code{3}.
+#' @param window Defaults to \code{NULL}.
+#' @return A list with \code{nodes}, \code{edges}, \code{sizes}, \code{label}.
+#' @export
 morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
                                        orientation=c("+", "-"), n_sd=3.0,
                                        window=NULL) {
@@ -258,6 +294,15 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
   out
 }
 
+#' Grow a clique from the lowest-weight edge (Section 2.1): the seed
+#'
+#' is e_min; then repeatedly the lowest-weight edge with exactly one
+#' endpoint inside, whose other endpoint is adjacent to every member.
+#'
+#' @param members See Usage.
+#' @param edges See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 morie_sv_dl_maximal_clique <- function(members, edges) {
   # Grow a clique from the lowest-weight edge (Section 2.1): the seed
   # is e_min; then repeatedly the lowest-weight edge with exactly one
@@ -304,6 +349,21 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
   sort(unique(clique))
 }
 
+#' morie_sv_dl_paired_end_calls
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pairs See Usage.
+#' @param median Defaults to \code{NULL}.
+#' @param sd Defaults to \code{NULL}.
+#' @param orientation Defaults to \code{NULL}.
+#' @param n_sd Defaults to \code{3}.
+#' @param min_support Defaults to \code{2}.
+#' @param window Defaults to \code{NULL}.
+#' @param spread Defaults to \code{"mad"}.
+#' @return The value of \code{calls}, as built in the body.
+#' @export
 morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
                                          orientation=NULL, n_sd=3.0,
                                          min_support=2, window=NULL,
@@ -382,6 +442,15 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
   paste(comp, collapse="")
 }
 
+#' Rewrite the region so a deletion-type search works (Figure 4): a
+#'
+#' tandem duplication has its two halves swapped, an inversion has its
+#' second half reverse complemented, a translocation gets both.
+#'
+#' @param ref See Usage.
+#' @param sv_type See Usage.
+#' @return A character value.
+#' @export
 morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
   # Rewrite the region so a deletion-type search works (Figure 4): a
   # tandem duplication has its two halves swapped, an inversion has
@@ -406,6 +475,18 @@ morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
   paste0(.sv_dl_revcomp(b), a)
 }
 
+#' morie_sv_dl_kmer_diagonals
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param read See Usage.
+#' @param ref See Usage.
+#' @param k Defaults to \code{7}.
+#' @param k_min Defaults to \code{3}.
+#' @param require_half Defaults to \code{TRUE}.
+#' @return The value of \code{[}.
+#' @export
 morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
                                        require_half=TRUE) {
   # Bin the read's k-mer hits by alignment diagonal (Section 2.2).
@@ -471,6 +552,14 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
   kept[, 1:2, drop=FALSE]
 }
 
+#' Gapless majority-vote consensus over the aligned reads. starts
+#'
+#' places each read in a common frame. Returns list(consensus, start).
+#'
+#' @param reads See Usage.
+#' @param starts Defaults to \code{NULL}.
+#' @return A list with \code{consensus}, \code{start}.
+#' @export
 morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
   # Gapless majority-vote consensus over the aligned reads. starts
   # places each read in a common frame. Returns list(consensus, start).
@@ -549,6 +638,19 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
   list(best=best, best_at=best_at)
 }
 
+#' morie_sv_dl_gotoh_score_vectors
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param consensus See Usage.
+#' @param ref See Usage.
+#' @param match Defaults to \code{1}.
+#' @param mismatch Defaults to \code{-2}.
+#' @param gap_open Defaults to \code{-4}.
+#' @param gap_extend Defaults to \code{-1}.
+#' @return A list with \code{f}, \code{f_at}, \code{r}, \code{r_at}.
+#' @export
 morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
                                             mismatch=-2.0, gap_open=-4.0,
                                             gap_extend=-1.0) {
@@ -576,6 +678,14 @@ morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
   list(f=fw$best, f_at=fw$best_at, r=r, r_at=r_at)
 }
 
+#' Argmax_{i<j} f_i + r_j -- the split with a microinsertion gap
+#'
+#' Indices are 1-based over the consensus, as in the paper.
+#'
+#' @param f See Usage.
+#' @param r See Usage.
+#' @return A list with \code{i}, \code{j}, \code{score}.
+#' @export
 morie_sv_dl_optimal_split <- function(f, r) {
   # argmax_{i<j} f_i + r_j -- the split with a microinsertion gap.
   # Indices are 1-based over the consensus, as in the paper.
@@ -598,6 +708,24 @@ morie_sv_dl_optimal_split <- function(f, r) {
   list(i=as.integer(best[2L]), j=as.integer(best[3L]), score=best[1L])
 }
 
+#' morie_sv_dl_refine_breakpoint
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param call See Usage.
+#' @param reference See Usage.
+#' @param reads See Usage.
+#' @param k Defaults to \code{7}.
+#' @param k_min Defaults to \code{3}.
+#' @param min_split_support Defaults to \code{2}.
+#' @param max_length_diff Defaults to \code{0.1}.
+#' @param match Defaults to \code{1}.
+#' @param mismatch Defaults to \code{-2}.
+#' @param gap_open Defaults to \code{-4}.
+#' @param gap_extend Defaults to \code{-1}.
+#' @return A list with \code{start}, \code{end}, \code{size}, \code{split_support}, \code{consensus}, \code{score}, \code{microinsertion}, \code{microhomology}, \code{kmer_offset}.
+#' @export
 morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
                                           k_min=3, min_split_support=2,
                                           max_length_diff=0.10, match=1.0,
@@ -675,6 +803,27 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
 
 # ------------------------------------------------------------- driver
 
+#' morie_sv_dl_structural_variant
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pairs See Usage.
+#' @param reference Defaults to \code{NULL}.
+#' @param split_reads Defaults to \code{NULL}.
+#' @param orientation Defaults to \code{NULL}.
+#' @param median Defaults to \code{NULL}.
+#' @param sd Defaults to \code{NULL}.
+#' @param n_sd Defaults to \code{3}.
+#' @param min_support Defaults to \code{2}.
+#' @param k Defaults to \code{7}.
+#' @param k_min Defaults to \code{3}.
+#' @param min_split_support Defaults to \code{2}.
+#' @param max_length_diff Defaults to \code{0.1}.
+#' @param window Defaults to \code{NULL}.
+#' @param spread Defaults to \code{"mad"}.
+#' @return A list with \code{estimate}, \code{calls}, \code{n_calls}, \code{n_precise}, \code{insert_median}, \code{insert_sd}, \code{spread}, \code{orientation}, \code{n_sd}, \code{min_support}, \code{method}, \code{note}.
+#' @export
 morie_sv_dl_structural_variant <- function(pairs, reference=NULL,
                                            split_reads=NULL,
                                            orientation=NULL, median=NULL,
@@ -734,6 +883,13 @@ morie_sv_dl_structural_variant <- function(pairs, reference=NULL,
                 "to within max_length_diff"))
 }
 
+#' morie_sv_dl_cheatsheet
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_sv_dl_cheatsheet <- function() {
   paste0(
     "sv_dl: DELLY (Rausch et al. 2012). Discordant pairs are ",

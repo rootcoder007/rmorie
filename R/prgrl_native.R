@@ -105,6 +105,14 @@
   sqrt(-2.0 * log(u)) * cos(2.0 * pi * v)
 }
 
+#' entropy
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @return A numeric value.
+#' @export
 entropy <- function(q) {
   q <- as.numeric(q)
   tot <- sum(q)
@@ -114,6 +122,16 @@ entropy <- function(q) {
   -sum(p * log(p))
 }
 
+#' curriculum_schedule
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param difficulty See Usage.
+#' @param n_steps Defaults to \code{5}.
+#' @param hard_first Defaults to \code{FALSE}.
+#' @return A list with \code{lambdas}, \code{weights}, \code{dists}.
+#' @export
 curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
   d <- .prgrl_to_vec(difficulty)
   n <- length(d)
@@ -142,6 +160,16 @@ curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
   list(lambdas = lambdas, weights = weights, dists = dists)
 }
 
+#' is_curriculum
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @param p Defaults to \code{NULL}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{is_curriculum}, \code{entropy_increasing}, \code{strictly_increasing}, \code{weights_monotone}, \code{final_step_is_p}, \code{entropies}.
+#' @export
 is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
   if (length(weights) < 2) stop("prgrl: need at least two steps to check")
   n <- length(weights[[1]])
@@ -229,6 +257,23 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
   bad / length(X)
 }
 
+#' prgrl
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param difficulty See Usage.
+#' @param X_test Defaults to \code{NULL}.
+#' @param y_test Defaults to \code{NULL}.
+#' @param updates Defaults to \code{200}.
+#' @param n_steps Defaults to \code{5}.
+#' @param seed Defaults to \code{0}.
+#' @param n_repeats Defaults to \code{50}.
+#' @param order Defaults to \code{"sampled"}.
+#' @return A list with \code{estimate}, \code{curriculum_error}, \code{baseline_error}, \code{improvement}, \code{curriculum_errors}, \code{baseline_errors}, \code{held_out}, \code{updates}, \code{order}, \code{n_repeats}, \code{lambdas}, \code{weights}, \code{entropies}, \code{is_curriculum}, \code{n}, \code{method}, \code{note}.
+#' @export
 prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
                   updates = 200, n_steps = 5, seed = 0, n_repeats = 50,
                   order = "sampled") {
@@ -337,6 +382,22 @@ prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
   )
 }
 
+#' easy_only_fit
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param difficulty See Usage.
+#' @param X_test See Usage.
+#' @param y_test See Usage.
+#' @param quantile Defaults to \code{0.5}.
+#' @param updates Defaults to \code{200}.
+#' @param seed Defaults to \code{0}.
+#' @param n_repeats Defaults to \code{50}.
+#' @return A list with \code{estimate}, \code{easy_only_error}, \code{all_examples_error}, \code{improvement}, \code{n_kept}, \code{n}, \code{method}, \code{note}.
+#' @export
 easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
                           updates = 200, seed = 0, n_repeats = 50) {
   Xr <- .prgrl_to_rows(X)

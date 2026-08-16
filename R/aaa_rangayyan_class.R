@@ -66,9 +66,45 @@
 .morie_rg_fmul <- function(a, b) .morie_rg_frac(a$n * b$n, a$d * b$d)
 
 # as.numeric() dispatches to as.double methods, not as.numeric ones
+#' As.numeric() dispatches to as.double methods, not as.numeric ones
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param ... Passed through.
+#' @return A numeric value.
+#' @export
 as.double.morie_frac <- function(x, ...) x$n / x$d
+#' as.numeric.morie_frac
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param ... Passed through.
+#' @return A numeric value.
+#' @export
 as.numeric.morie_frac <- function(x, ...) x$n / x$d
+#' format.morie_frac
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param ... Passed through.
+#' @return A character value.
+#' @export
 format.morie_frac <- function(x, ...) paste0(x$n, "/", x$d)
+#' print.morie_frac
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{cat}.
+#' @export
 print.morie_frac <- function(x, ...) cat(format(x), "\n")
 "==.morie_frac" <- function(e1, e2) {
   a <- .morie_rg_asfrac(e1)
@@ -91,6 +127,16 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
   )
 }
 
+#' Eq (10.100): S+ = TP / (subjects with the disease).  Measures the
+#'
+#' capability to DETECT and says nothing about false alarms -- a test
+#' calling everyone positive scores 1, which is why the book always
+#' reports it beside the specificity.
+#'
+#' @param tp See Usage.
+#' @param fn Defaults to \code{NULL}.
+#' @return A list with \code{sensitivity}, \code{tpf}, \code{fnf}, \code{n_diseased}, \code{tp}, \code{fn}, \code{says_nothing_about_false_alarms}, \code{method}.
+#' @export
 Sens <- function(tp, fn = NULL) {
   # eq (10.100): S+ = TP / (subjects with the disease).  Measures the
   # capability to DETECT and says nothing about false alarms -- a test
@@ -120,6 +166,15 @@ Sens <- function(tp, fn = NULL) {
   )
 }
 
+#' Eq (10.101): S- = TN / (subjects without the disease)
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tn See Usage.
+#' @param fp Defaults to \code{NULL}.
+#' @return A list with \code{specificity}, \code{tnf}, \code{fpf}, \code{n_healthy}, \code{tn}, \code{fp}, \code{method}.
+#' @export
 Spec <- function(tn, fp = NULL) {
   # eq (10.101): S- = TN / (subjects without the disease).
   if (is.null(fp)) {
@@ -145,6 +200,18 @@ Spec <- function(tn, fp = NULL) {
   )
 }
 
+#' Ppv
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tp See Usage.
+#' @param fp Defaults to \code{NULL}.
+#' @param prevalence Defaults to \code{NULL}.
+#' @param sensitivity Defaults to \code{NULL}.
+#' @param specificity Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
                 specificity = NULL) {
   # eq (10.106): PPV = TP / (TP + FP).  Unlike sensitivity and
@@ -189,6 +256,21 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
   out
 }
 
+#' Accuracy
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param table Defaults to \code{NULL}.
+#' @param tp Defaults to \code{NULL}.
+#' @param tn Defaults to \code{NULL}.
+#' @param fp Defaults to \code{NULL}.
+#' @param fn Defaults to \code{NULL}.
+#' @param prevalence Defaults to \code{NULL}.
+#' @param kind Defaults to \code{NULL}.
+#' @param exact Defaults to \code{FALSE}.
+#' @return A list with \code{accuracy}, \code{kind}, \code{raw_accuracy}, \code{weighted_accuracy}, \code{balanced_accuracy}, \code{sensitivity}, \code{specificity}, \code{prevalence}, \code{test_set_prevalence}, \code{counts}, \code{n}, \code{exact}, \code{prior_weighted}, \code{balanced_is_eq_10_102_at_one_half}, \code{eq_10_103_is_eq_10_102_at_the_test_set_prevalence}, \code{method}.
+#' @export
 Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
                      fn = NULL, prevalence = NULL, kind = NULL,
                      exact = FALSE) {
@@ -308,6 +390,19 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
   )
 }
 
+#' Section 10.9.1.  The area the book calls A_z, by the trapezoidal
+#'
+#' rule, which for tied scores is exactly the Mann-Whitney statistic --
+#' the probability a random diseased subject outscores a random healthy
+#' one, ties counted as half.  Summing rectangles instead biases the
+#' area whenever scores tie, which they do whenever a classifier emits a
+#' class rather than a probability.
+#'
+#' @param scores See Usage.
+#' @param labels See Usage.
+#' @param positive Defaults to \code{1}.
+#' @return A list with \code{fpf}, \code{tpf}, \code{sensitivity}, \code{one_minus_specificity}, \code{thresholds}, \code{auc}, \code{az}, \code{mann_whitney}, \code{trapezoidal_equals_mann_whitney}, \code{n_positive}, \code{n_negative}, \code{best_index}, \code{best_operating_point}, \code{ties_counted_as_half}, \code{method}.
+#' @export
 Roc <- function(scores, labels, positive = 1) {
   # Section 10.9.1.  The area the book calls A_z, by the trapezoidal
   # rule, which for tied scores is exactly the Mann-Whitney statistic --
@@ -347,6 +442,19 @@ Roc <- function(scores, labels, positive = 1) {
   )
 }
 
+#' Section 10.9.2, McNemar\'s test of SYMMETRY.  The book states it on a
+#'
+#' general contingency table -- its worked example, Table 10.4, is 3x3
+#' with normal / indeterminate / abnormal -- so any k x k is accepted. k
+#' = 2 gives McNemar with Yates\' correction, k > 2 its generalization,
+#' Bowker\'s test.  Only the OFF-DIAGONAL disagreements enter: the
+#' diagonal, usually most of the cases, contributes nothing, because the
+#' question is whether the disagreements are one-sided.
+#'
+#' @param table See Usage.
+#' @param correct Defaults to \code{NULL}.
+#' @return A list with \code{statistic}, \code{df}, \code{p_value}, \code{pairs}, \code{n}, \code{n_agree}, \code{continuity_correction}, \code{is_bowker}, \code{k}, \code{diagonal_contributes_nothing}, \code{method}.
+#' @export
 McNemar <- function(table, correct = NULL) {
   # Section 10.9.2, McNemar's test of SYMMETRY.  The book states it on a
   # general contingency table -- its worked example, Table 10.4, is 3x3
@@ -398,6 +506,19 @@ McNemar <- function(table, correct = NULL) {
   )
 }
 
+#' Eq (10.112): d_n = |m1 - m2| / (sigma1 + sigma2).  The denominator is
+#'
+#' the SUM of the SDs, not their quadrature sum -- this is not the
+#' Fisher criterion.  The book states the limitation: d_n = 0 whenever
+#' m1 = m2, however different the dispersions, so classes separated only
+#' by variance score zero.  The divergence has no such blind spot.
+#'
+#' @param m1 See Usage.
+#' @param m2 See Usage.
+#' @param s1 See Usage.
+#' @param s2 See Usage.
+#' @return A list with \code{dn}, \code{mean_difference}, \code{sd_sum}, \code{blind_to_variance_when_means_match}, \code{denominator_is_the_sum_not_the_quadrature_sum}, \code{method}.
+#' @export
 NormDist <- function(m1, m2, s1, s2) {
   # eq (10.112): d_n = |m1 - m2| / (sigma1 + sigma2).  The denominator is
   # the SUM of the SDs, not their quadrature sum -- this is not the
@@ -424,6 +545,21 @@ NormDist <- function(m1, m2, s1, s2) {
   )
 }
 
+#' Eq (10.117), the closed form of the symmetric divergence of
+#'
+#' eq (10.115): D = (1/2) tr[(Ci - Cj)(Cj^-1 - Ci^-1)] + (1/2) tr[(Ci^-1
+#' + Cj^-1)(mi - mj)(mi - mj)^T] The second term resembles eq (10.112)
+#' and vanishes for equal means; the FIRST does not, so unlike d_n the
+#' divergence still separates classes differing only in covariance.
+#' This is the measure the book uses; Bhattacharyya appears nowhere in
+#' it.
+#'
+#' @param m1 See Usage.
+#' @param m2 See Usage.
+#' @param C1 See Usage.
+#' @param C2 See Usage.
+#' @return A list with \code{divergence}, \code{covariance_term}, \code{mean_term}, \code{nonnegative}, \code{symmetric}, \code{zero_for_identical_pdfs}, \code{separates_equal_means_via_the_covariance_term}, \code{additive_over_independent_features}, \code{method}.
+#' @export
 Divergence <- function(m1, m2, C1, C2) {
   # eq (10.117), the closed form of the symmetric divergence of
   # eq (10.115):
@@ -458,6 +594,16 @@ Divergence <- function(m1, m2, C1, C2) {
   )
 }
 
+#' The book averages the pairwise divergences for a single measure over
+#'
+#' m classes.  Averaging hides a badly separated PAIR behind well
+#' separated ones, so the minimum is returned too -- that is the pair
+#' that will actually be confused.
+#'
+#' @param means See Usage.
+#' @param covs See Usage.
+#' @return A list with \code{average}, \code{pairwise}, \code{minimum}, \code{worst_pair}, \code{n_classes}, \code{n_pairs}, \code{average_hides_the_worst_pair}, \code{method}.
+#' @export
 DivAv <- function(means, covs) {
   # The book averages the pairwise divergences for a single measure over
   # m classes.  Averaging hides a badly separated PAIR behind well
@@ -487,6 +633,20 @@ DivAv <- function(means, covs) {
   )
 }
 
+#' Eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)]
+#'
+#' NOTE THE ARGUMENT ORDER -- the book weights by the SECOND PDF, so its
+#' KLD(p1, p2) is D_KL(p2 || p1) in standard notation, the REVERSE of
+#' what most texts and libraries mean by KL(p, q).  That is the single
+#' most likely way to get a wrong number out of this family. KLD is not
+#' symmetric, so swapping the arguments gives a different number; both
+#' are returned so the asymmetry is visible rather than a trap.  Their
+#' sum is exactly the divergence of eq (10.115).
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @return A list with \code{kld}, \code{reversed}, \code{symmetric_sum}, \code{asymmetric}, \code{weighted_by_the_second_pdf}, \code{symmetric_sum_is_the_divergence_of_eq_10_115}, \code{nonnegative}, \code{method}.
+#' @export
 Kld <- function(p1, p2) {
   # eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)].
   # NOTE THE ARGUMENT ORDER -- the book weights by the SECOND PDF, so its
@@ -528,6 +688,17 @@ Kld <- function(p1, p2) {
   )
 }
 
+#' BC(p1, p2) = sum_l sqrt(p1 p2): the OVERLAP between two PDFs,
+#'
+#' bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built
+#' from, D_B = -ln BC, and what makes the error bound work: the overlap
+#' of the two class-conditional densities IS the region where the
+#' optimal classifier must make mistakes.  NOT FROM THIS BOOK.
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @return A list with \code{coefficient}, \code{overlap}, \code{distance}, \code{identical}, \code{disjoint}, \code{in_unit_interval}, \code{the_overlap_is_where_errors_must_happen}, \code{not_from_this_book}, \code{reference}, \code{method}.
+#' @export
 PdfOverlap <- function(p1, p2) {
   # BC(p1, p2) = sum_l sqrt(p1 p2): the OVERLAP between two PDFs,
   # bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built
@@ -564,6 +735,22 @@ PdfOverlap <- function(p1, p2) {
   )
 }
 
+#' Rho_a = sum_l p1^a p2^(1-a); C = -ln min_a rho_a.  The Bhattacharyya
+#'
+#' coefficient is exactly this at a = 1/2, which is the relationship the
+#' whole family turns on.  Leaving alpha unset searches for the
+#' minimizing a, which is what makes the Chernoff bound TIGHTER than the
+#' Bhattacharyya bound -- the latter is the same bound fixed at a = 1/2
+#' rather than the best a.  Every a gives a valid bound P_e <= P1^a
+#' P2^(1-a) rho_a; the minimum gives the best of them. NOT FROM
+#' RANGAYYAN (2024).
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @param alpha Defaults to \code{NULL}.
+#' @param n_grid Defaults to \code{201}.
+#' @return A list with \code{coefficient}, \code{alpha}, \code{information}, \code{bhattacharyya_coefficient}, \code{bhattacharyya_is_alpha_one_half}, \code{alpha_searched}, \code{at_least_as_tight_as_bhattacharyya}, \code{reference}, \code{not_from_this_book}, \code{method}.
+#' @export
 Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
   # rho_a = sum_l p1^a p2^(1-a);  C = -ln min_a rho_a.  The Bhattacharyya
   # coefficient is exactly this at a = 1/2, which is the relationship the
@@ -620,6 +807,22 @@ Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
   )
 }
 
+#' H = sqrt(1 - BC), so H^2 = 1 - BC.  The Python arm delegates to
+#'
+#' morie.fn.helld.hellinger_dist; this is the same arithmetic, kept here
+#' because the R tree has no separate helld module.  Unlike the
+#' Bhattacharyya distance -ln BC, this is a TRUE METRIC: bounded in [0,
+#' 1], symmetric, and it satisfies the triangle inequality, which -ln BC
+#' does not.  That is the reason to reach for it -- anything needing a
+#' metric over distributions needs this and not D_B.  The 1/2
+#' normalization is the usual one; unnormalized gives H^2 = 2(1 - BC),
+#' so the convention is reported rather than assumed.  NOT FROM
+#' RANGAYYAN (2024).
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @return A list with \code{hellinger}, \code{squared}, \code{bhattacharyya_coefficient}, \code{identity_h2_equals_one_minus_bc}, \code{is_a_true_metric}, \code{satisfies_the_triangle_inequality}, \code{bhattacharyya_distance_does_not}, \code{normalization}, \code{in_unit_interval}, \code{reference}, \code{not_from_this_book}, \code{method}.
+#' @export
 Hellinger <- function(p1, p2) {
   # H = sqrt(1 - BC), so H^2 = 1 - BC.  The Python arm delegates to
   # morie.fn.helld.hellinger_dist; this is the same arithmetic, kept here
@@ -660,6 +863,19 @@ Hellinger <- function(p1, p2) {
   )
 }
 
+#' NOT FROM THIS BOOK.  A full-text search of the 2024 third edition --
+#'
+#' Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor
+#' of Chernoff or Hellinger.  The book gives the KLD of eq (5.33) and
+#' the divergence of eqs (10.115)-(10.117), which is the symmetric sum
+#' of the two KLDs, and cites Swain for them.
+#'
+#' @param m1 See Usage.
+#' @param m2 See Usage.
+#' @param C1 See Usage.
+#' @param C2 See Usage.
+#' @return A list with \code{bhattacharyya}, \code{mean_term}, \code{covariance_term}, \code{not_from_this_book}, \code{book_uses_divergence_eq_10_115}, \code{reference}, \code{method}.
+#' @export
 GaussOverlap <- function(m1, m2, C1, C2) {
   # NOT FROM THIS BOOK.  A full-text search of the 2024 third edition --
   # Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor
@@ -717,6 +933,18 @@ GaussOverlap <- function(m1, m2, C1, C2) {
   )
 }
 
+#' P_e <= sqrt(P1 P2) exp(-D_B).  NOT FROM THIS BOOK -- the standard
+#'
+#' Kailath bound.  It pairs with GaussOverlap, NOT with Divergence: the
+#' divergence does not bound the error this way, and substituting it
+#' would give a number that looks like a bound and is not one.  The
+#' bound is on the OPTIMAL classifier, a floor no real one can beat.
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @param db See Usage.
+#' @return A list with \code{bound}, \code{priors}, \code{bhattacharyya}, \code{tightest_at_equal_priors}, \code{bounds_the_optimal_classifier_not_yours}, \code{not_from_this_book}, \code{pairs_with_the_overlap_not_with_divergence}, \code{reference}, \code{method}.
+#' @export
 ErrBound <- function(p1, p2, db) {
   # P_e <= sqrt(P1 P2) exp(-D_B).  NOT FROM THIS BOOK -- the standard
   # Kailath bound.  It pairs with GaussOverlap, NOT with Divergence:
@@ -746,6 +974,15 @@ ErrBound <- function(p1, p2, db) {
   )
 }
 
+#' J = (m1 - m2)^2 / (s1^2 + s2^2).  Close kin to eq (10.112) but NOT
+#'
+#' the same measure: that divides |m1 - m2| by (s1 + s2).  They rank
+#' features identically only when the dispersions are equal.
+#'
+#' @param x1 See Usage.
+#' @param x2 See Usage.
+#' @return A list with \code{j}, \code{means}, \code{variances}, \code{normalized_distance}, \code{agrees_with_eq_10_112_ranking_only_for_equal_spread}, \code{is_not_eq_10_112}, \code{method}.
+#' @export
 FishCrit <- function(x1, x2) {
   # J = (m1 - m2)^2 / (s1^2 + s2^2).  Close kin to eq (10.112) but NOT
   # the same measure: that divides |m1 - m2| by (s1 + s2).  They rank
@@ -779,6 +1016,16 @@ FishCrit <- function(x1, x2) {
   )
 }
 
+#' Section 10.10.1: J = tr(S_B) / tr(S_W).  The trace ratio ignores the
+#'
+#' OFF-diagonal structure, so it cannot see that a pair of features is
+#' jointly discriminating when neither is alone -- for that, the
+#' divergence, which uses the full covariance, is the measure to use.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{j}, \code{trace_between}, \code{trace_within}, \code{s_within}, \code{s_between}, \code{classes}, \code{n_classes}, \code{n_features}, \code{ignores_off_diagonal_structure}, \code{method}.
+#' @export
 SepIndex <- function(X, y) {
   # Section 10.10.1: J = tr(S_B) / tr(S_W).  The trace ratio ignores the
   # OFF-diagonal structure, so it cannot see that a pair of features is
@@ -817,6 +1064,17 @@ SepIndex <- function(X, y) {
   )
 }
 
+#' Section 10.4.2: w = S_W^-1 (m1 - m2), the direction maximizing the
+#'
+#' ratio of between- to within-class scatter of the PROJECTED data.  Two
+#' classes only.  It reduces the data to ONE number chosen for
+#' separation, not reconstruction, so unlike a principal component it is
+#' not meant to represent the data.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{w}, \code{threshold}, \code{classes}, \code{means}, \code{s_within}, \code{projected}, \code{projected_means}, \code{criterion}, \code{two_class_only}, \code{not_a_reconstruction_basis}, \code{method}.
+#' @export
 FishLda <- function(X, y) {
   # Section 10.4.2: w = S_W^-1 (m1 - m2), the direction maximizing the
   # ratio of between- to within-class scatter of the PROJECTED data.  Two
@@ -861,6 +1119,18 @@ FishLda <- function(X, y) {
   )
 }
 
+#' Section 10.4.3: D^2 = (x - mu)^T C^-1 (x - mu).  Distance in units of
+#'
+#' the data\'s own scatter: a point far along an axis of natural
+#' variation is NEAR, one close by across the grain is far.  Euclidean
+#' distance would quietly favour whichever feature has the largest
+#' units.
+#'
+#' @param x See Usage.
+#' @param mu See Usage.
+#' @param C See Usage.
+#' @return A list with \code{d2}, \code{distance}, \code{squared}, \code{euclidean}, \code{differs_from_euclidean}, \code{scale_free}, \code{method}.
+#' @export
 Mahal <- function(x, mu, C) {
   # Section 10.4.3: D^2 = (x - mu)^T C^-1 (x - mu).  Distance in units of
   # the data's own scatter: a point far along an axis of natural
@@ -886,6 +1156,18 @@ Mahal <- function(x, mu, C) {
   )
 }
 
+#' Section 10.4.1: d_i(x) = w_i^T x + w_i0, assign to the largest.  The
+#'
+#' surfaces between classes are hyperplanes, so a linear machine carves
+#' the space into CONVEX regions -- which is why it cannot separate
+#' classes whose regions are not convex, however many features are
+#' added.
+#'
+#' @param x See Usage.
+#' @param weights See Usage.
+#' @param w0 Defaults to \code{NULL}.
+#' @return A list with \code{d}, \code{assigned}, \code{margin}, \code{n_classes}, \code{regions_are_convex}, \code{decision_surfaces_are_hyperplanes}, \code{method}.
+#' @export
 LinDisc <- function(x, weights, w0 = NULL) {
   # Section 10.4.1: d_i(x) = w_i^T x + w_i0, assign to the largest.  The
   # surfaces between classes are hyperplanes, so a linear machine carves
@@ -913,6 +1195,18 @@ LinDisc <- function(x, weights, w0 = NULL) {
   )
 }
 
+#' Section 10.4.2 with a fitted cut.  The midpoint of the projected
+#'
+#' means is optimal only for equal priors AND equal variances, so the
+#' error-minimizing cut is the default and the midpoint is reported
+#' beside it.  Both errors are resubstitution errors -- measured on the
+#' data that chose the cut -- so they are optimistic; Section 10.10.3 is
+#' the book\'s warning, and KFoldCv or LooCv gives an honest figure.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{w}, \code{threshold}, \code{midpoint_threshold}, \code{classes}, \code{first_class_is_above}, \code{training_errors}, \code{midpoint_errors}, \code{training_accuracy}, \code{n}, \code{projected}, \code{midpoint_optimal_only_for_equal_priors_and_spread}, \code{resubstitution_error_is_optimistic}, \code{method}.
+#' @export
 LinDSep <- function(X, y) {
   # Section 10.4.2 with a fitted cut.  The midpoint of the projected
   # means is optimal only for equal priors AND equal variances, so the
@@ -948,6 +1242,22 @@ LinDSep <- function(X, y) {
   )
 }
 
+#' Eq (10.29) and Section 10.4.4.  The book is explicit about why k > 1:
+#'
+#' with k = 1 "the nearest neighbor may happen to be an outlier that is
+#' not representative of its class", so one freak point owns a whole
+#' region.  The Mahalanobis metric is the one to use when features have
+#' different units, since Euclidean distance is otherwise dominated by
+#' whichever feature has the largest numbers.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param query See Usage.
+#' @param k Defaults to \code{1}.
+#' @param metric Defaults to \code{"euclidean"}.
+#' @param C Defaults to \code{NULL}.
+#' @return A list with \code{assigned}, \code{votes}, \code{k}, \code{metric}, \code{neighbours}, \code{tie}, \code{tied_classes}, \code{nearest_distance}, \code{nearest_label}, \code{single_neighbour_may_be_an_outlier}, \code{method}.
+#' @export
 Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
   # eq (10.29) and Section 10.4.4.  The book is explicit about why k > 1:
   # with k = 1 "the nearest neighbor may happen to be an outlier that is
@@ -1005,6 +1315,17 @@ Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
   )
 }
 
+#' Eq (10.70): d_i(x) = p(x|C_i) P(C_i), assign to the largest -- the
+#'
+#' MAXIMUM A POSTERIORI rule.  Comparing likelihoods alone is maximum
+#' likelihood, a different classifier, and they differ whenever the
+#' classes are unequally common: for a rare disease the prior is
+#' precisely what stops the classifier calling everything positive.
+#'
+#' @param likelihoods See Usage.
+#' @param priors Defaults to \code{NULL}.
+#' @return A list with \code{d}, \code{posterior}, \code{assigned}, \code{maximum_likelihood_choice}, \code{prior_changed_the_decision}, \code{priors}, \code{uniform_priors}, \code{method}.
+#' @export
 BayesCls <- function(likelihoods, priors = NULL) {
   # eq (10.70): d_i(x) = p(x|C_i) P(C_i), assign to the largest -- the
   # MAXIMUM A POSTERIORI rule.  Comparing likelihoods alone is maximum
@@ -1035,6 +1356,22 @@ BayesCls <- function(likelihoods, priors = NULL) {
   )
 }
 
+#' Eq (10.72).  The book takes logarithms at eq (10.71) because the
+#'
+#' normal PDF is an exponential and ln is monotonic: the ranking is
+#' unchanged while the arithmetic stops underflowing.  It then drops the
+#' (n/2) ln(2 pi) term, which "does not depend upon i", giving eq
+#' (10.73) -- safe for CLASSIFYING, wrong for reading the value as a log
+#' density, so both forms are returned.  The surfaces are hyperquadrics
+#' and reduce to hyperplanes exactly when the covariances are equal.
+#'
+#' @param x See Usage.
+#' @param means See Usage.
+#' @param covs See Usage.
+#' @param priors Defaults to \code{NULL}.
+#' @param full Defaults to \code{FALSE}.
+#' @return A list with \code{d}, \code{d_full}, \code{d_dropped_constant}, \code{assigned}, \code{priors}, \code{constant_term}, \code{surfaces_are_hyperquadrics}, \code{linear_when_covariances_are_equal}, \code{log_form_avoids_underflow}, \code{method}.
+#' @export
 BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
   # eq (10.72).  The book takes logarithms at eq (10.71) because the
   # normal PDF is an exponential and ln is monotonic: the ranking is
@@ -1085,6 +1422,20 @@ BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
   )
 }
 
+#' Eq (10.73) with the mean and covariance estimated per class by
+#'
+#' eqs (10.68)-(10.69).  Each class keeps its OWN covariance, so the
+#' boundaries are quadrics; a single pooled covariance would make this
+#' LDA.  A class needs more samples than features or its covariance is
+#' singular -- QDA estimates p(p+1)/2 covariance parameters PER CLASS,
+#' so it is the first thing to break on small samples.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param query See Usage.
+#' @param priors Defaults to \code{NULL}.
+#' @return A list with \code{g}, \code{assigned}, \code{assigned_index}, \code{classes}, \code{means}, \code{covariances}, \code{priors}, \code{reduces_to_lda_when_covariances_are_equal}, \code{parameters_per_class}, \code{method}.
+#' @export
 Qda <- function(X, y, query, priors = NULL) {
   # eq (10.73) with the mean and covariance estimated per class by
   # eqs (10.68)-(10.69).  Each class keeps its OWN covariance, so the
@@ -1135,6 +1486,22 @@ Qda <- function(X, y, query, priors = NULL) {
   )
 }
 
+#' Section 10.7, fitted by Newton-Raphson on the log-likelihood.  Unlike
+#'
+#' the Bayes classifier it models the POSTERIOR directly and assumes
+#' nothing about the shape of p(x|C), which is why it survives features
+#' that are plainly not Gaussian.  Perfectly separable classes have no
+#' finite maximum, so a small ridge is added and `separable` is reported
+#' -- without it the coefficients merely record where the optimizer
+#' stopped.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param maxiter Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{intercept}, \code{coefficients}, \code{w}, \code{fitted}, \code{predicted}, \code{loglik}, \code{iterations}, \code{converged}, \code{separable}, \code{ridge}, \code{training_accuracy}, \code{n}, \code{models_the_posterior_directly}, \code{no_gaussian_assumption}, \code{method}.
+#' @export
 LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
   # Section 10.7, fitted by Newton-Raphson on the log-likelihood.  Unlike
   # the Bayes classifier it models the POSTERIOR directly and assumes
@@ -1184,6 +1551,22 @@ LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
   )
 }
 
+#' Section 10.5.1.  WCSS falls at every step, so the iteration always
+#'
+#' terminates -- at a LOCAL minimum that depends on where the centroids
+#' started.  The method is unsupervised: it finds groups, and whether
+#' those groups are the diagnostic classes is a question it cannot
+#' answer.  Starting centroids are the first k distinct patterns, so the
+#' result is reproducible; random starts would return different
+#' clusterings from the same call.
+#'
+#' @param X See Usage.
+#' @param k See Usage.
+#' @param maxiter Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param init Defaults to \code{NULL}.
+#' @return A list with \code{labels}, \code{centroids}, \code{wcss}, \code{k}, \code{sizes}, \code{iterations}, \code{converged}, \code{local_minimum_only}, \code{depends_on_the_starting_centroids}, \code{unsupervised_groups_need_not_be_the_classes}, \code{method}.
+#' @export
 KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
   # Section 10.5.1.  WCSS falls at every step, so the iteration always
   # terminates -- at a LOCAL minimum that depends on where the centroids
@@ -1247,6 +1630,19 @@ KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
   )
 }
 
+#' WCSS falls monotonically with k and reaches zero at k = n, so it
+#'
+#' cannot be minimized -- the choice is the KNEE.  Located here as the
+#' point of maximum distance from the chord joining the curve\'s ends,
+#' which is a definite rule rather than an eye judgement.  Still a
+#' heuristic: on data with no cluster structure the curve is smooth and
+#' the knee is wherever the arithmetic puts it.
+#'
+#' @param X See Usage.
+#' @param kmax Defaults to \code{8}.
+#' @param kmin Defaults to \code{1}.
+#' @return A list with \code{k}, \code{wcss}, \code{knee}, \code{monotonic}, \code{wcss_cannot_be_minimized}, \code{heuristic_only}, \code{method}.
+#' @export
 Elbow <- function(X, kmax = 8, kmin = 1) {
   # WCSS falls monotonically with k and reaches zero at k = n, so it
   # cannot be minimized -- the choice is the KNEE.  Located here as the
@@ -1285,6 +1681,19 @@ Elbow <- function(X, kmax = 8, kmin = 1) {
   )
 }
 
+#' Section 10.5.1.  Single linkage CHAINS -- it will string distant
+#'
+#' clusters together through a bridge of intermediate points -- while
+#' complete linkage is compact and splits elongated clusters.  The
+#' choice is not cosmetic: on the same data they routinely give
+#' different partitions, which is why the full merge history is returned
+#' rather than only a labelling.
+#'
+#' @param X See Usage.
+#' @param linkage Defaults to \code{"single"}.
+#' @param k Defaults to \code{NULL}.
+#' @return A list with \code{history}, \code{labels}, \code{linkage}, \code{n}, \code{k}, \code{merge_distances}, \code{monotonic_merges}, \code{single_linkage_chains}, \code{linkage_changes_the_partition}, \code{method}.
+#' @export
 HClust <- function(X, linkage = "single", k = NULL) {
   # Section 10.5.1.  Single linkage CHAINS -- it will string distant
   # clusters together through a bridge of intermediate points -- while
@@ -1358,6 +1767,22 @@ HClust <- function(X, linkage = "single", k = NULL) {
   )
 }
 
+#' Section 10.10.3.  The book\'s point is that the training and test
+#'
+#' steps must use SEPARATE data: an error rate measured on the samples
+#' that trained the classifier is optimistic, and with enough free
+#' parameters it reaches zero while the classifier generalizes not at
+#' all.  Folds are stratified by default; unstratified folds on
+#' unbalanced data can leave a class absent from a training fold, which
+#' measures luck rather than generalization.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param k Defaults to \code{5}.
+#' @param classifier Defaults to \code{NULL}.
+#' @param stratified Defaults to \code{TRUE}.
+#' @return A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{n}, \code{k}, \code{per_fold}, \code{stratified}, \code{train_and_test_must_be_separate}, \code{method}.
+#' @export
 KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
   # Section 10.10.3.  The book's point is that the training and test
   # steps must use SEPARATE data: an error rate measured on the samples
@@ -1422,6 +1847,18 @@ KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
   )
 }
 
+#' K-fold with K = N.  It uses the most training data of any split, so
+#'
+#' it is nearly unbiased, and it is deterministic -- there is only one
+#' way to leave one out, so unlike 5-fold it gives the same answer every
+#' time.  The cost is N fits and a high variance: the training sets
+#' differ by a single sample, so the errors are heavily correlated.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param classifier Defaults to \code{NULL}.
+#' @return A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{misclassified}, \code{n}, \code{n_fits}, \code{deterministic}, \code{nearly_unbiased}, \code{high_variance}, \code{method}.
+#' @export
 LooCv <- function(X, y, classifier = NULL) {
   # K-fold with K = N.  It uses the most training data of any split, so
   # it is nearly unbiased, and it is deterministic -- there is only one
@@ -1506,6 +1943,22 @@ LooCv <- function(X, y, classifier = NULL) {
   list(a = a, b = b, it = it)
 }
 
+#' Section 10.4.5.  Only the patterns with a_i > 0 -- the SUPPORT
+#'
+#' VECTORS -- enter the solution, so the boundary is set by the samples
+#' nearest it and is untouched by the bulk of the data.  That is the
+#' strength on small samples and the weakness against one mislabelled
+#' point near the boundary, which C controls: small C tolerates
+#' violations, large C insists on separating and contorts around an
+#' outlier.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param C Defaults to \code{1}.
+#' @param maxiter Defaults to \code{2000}.
+#' @param tol Defaults to \code{1e-06}.
+#' @return A list with \code{w}, \code{b}, \code{alpha}, \code{support_vectors}, \code{n_support}, \code{margin}, \code{C}, \code{iterations}, \code{converged}, \code{training_accuracy}, \code{boundary_set_by_the_support_vectors_only}, \code{large_c_contorts_around_outliers}, \code{method}.
+#' @export
 Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
   # Section 10.4.5.  Only the patterns with a_i > 0 -- the SUPPORT
   # VECTORS -- enter the solution, so the boundary is set by the samples
@@ -1542,6 +1995,23 @@ Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
   )
 }
 
+#' SvmKern
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param query Defaults to \code{NULL}.
+#' @param kernel Defaults to \code{"rbf"}.
+#' @param gamma Defaults to \code{NULL}.
+#' @param degree Defaults to \code{3}.
+#' @param coef0 Defaults to \code{0}.
+#' @param C Defaults to \code{1}.
+#' @param maxiter Defaults to \code{2000}.
+#' @param tol Defaults to \code{1e-06}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 SvmKern <- function(X, y, query = NULL, kernel = "rbf", gamma = NULL,
                     degree = 3, coef0 = 0, C = 1, maxiter = 2000,
                     tol = 1e-6) {

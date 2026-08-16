@@ -49,6 +49,14 @@
   list(G=G, n=nrow(G), m=ncol(G))
 }
 
+#' Per-SNP and per-individual call rates
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param genotypes See Usage.
+#' @return A list with \code{per_snp}, \code{per_ind}.
+#' @export
 morie_snpqc1_call_rates <- function(genotypes) {
   # Per-SNP and per-individual call rates.
   ch <- .snpqc1_check(genotypes)
@@ -58,6 +66,14 @@ morie_snpqc1_call_rates <- function(genotypes) {
   list(per_snp=as.numeric(per_snp), per_ind=as.numeric(per_ind))
 }
 
+#' Minor allele frequency per SNP, over non-missing calls
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param genotypes See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_snpqc1_maf <- function(genotypes) {
   # Minor allele frequency per SNP, over non-missing calls.
   ch <- .snpqc1_check(genotypes)
@@ -79,6 +95,17 @@ morie_snpqc1_maf <- function(genotypes) {
   lgamma(n + 1.0)
 }
 
+#' morie_snpqc1_hwe_pvalue
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_hom_minor See Usage.
+#' @param n_het See Usage.
+#' @param n_hom_major See Usage.
+#' @param test Defaults to \code{"exact"}.
+#' @return A numeric value.
+#' @export
 morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
                                     test="exact") {
   # Hardy-Weinberg p-value for one SNP. "exact" is the conditional
@@ -138,6 +165,14 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
   2.0 * stats::pnorm(-x * sqrt(2.0))
 }
 
+#' Per-individual heterozygosity rate over non-missing calls
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param genotypes See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_snpqc1_heterozygosity <- function(genotypes) {
   # Per-individual heterozygosity rate over non-missing calls.
   ch <- .snpqc1_check(genotypes)
@@ -154,6 +189,17 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
   out
 }
 
+#' morie_snpqc1_sex_check
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x_genotypes See Usage.
+#' @param reported_sex Defaults to \code{NULL}.
+#' @param male_min Defaults to \code{0.8}.
+#' @param female_max Defaults to \code{0.2}.
+#' @return The value of \code{res}, as built in the body.
+#' @export
 morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
                                    male_min=0.8, female_max=0.2) {
   # X-chromosome homozygosity F = (O - E)/(n - E) with the tutorial's
@@ -195,6 +241,15 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
   res
 }
 
+#' PLINK\'s Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with
+#'
+#' rows Z=0,1,2 and columns I=0,1,2 (lower triangle zero).
+#'
+#' @param x_count See Usage.
+#' @param y_count See Usage.
+#' @param correction Defaults to \code{TRUE}.
+#' @return The value of \code{rbind}.
+#' @export
 morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
   # PLINK's Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with
   # rows Z=0,1,2 and columns I=0,1,2 (lower triangle zero).
@@ -236,6 +291,15 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
   rbind(c(i0z0, i1z0, i2z0), c(0.0, i1z1, i2z1), c(0.0, 0.0, 1.0))
 }
 
+#' PLINK\'s method-of-moments IBD estimates for every pair. Returns
+#'
+#' list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2)) after
+#' the paper\'s bounding rules and pihat[i, k] = P(Z=2) + P(Z=1)/2.
+#'
+#' @param genotypes See Usage.
+#' @param correction Defaults to \code{TRUE}.
+#' @return A list with \code{Z}, \code{pihat}.
+#' @export
 morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
   # PLINK's method-of-moments IBD estimates for every pair. Returns
   # list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2))
@@ -326,11 +390,28 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
   list(Z=Z, pihat=P)
 }
 
+#' Just the pi-hat = P(Z=2) + P(Z=1)/2 matrix
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param genotypes See Usage.
+#' @param correction Defaults to \code{TRUE}.
+#' @return The value of \code{$}.
+#' @export
 morie_snpqc1_pihat_matrix <- function(genotypes, correction=TRUE) {
   # Just the pi-hat = P(Z=2) + P(Z=1)/2 matrix.
   morie_snpqc1_ibd_moments(genotypes, correction)$pihat
 }
 
+#' Genomic kinship from centred, scaled genotypes:
+#'
+#' K_ik = (1/M) sum_j (g_ij - 2p_j)(g_kj - 2p_j) / (2 p_j (1 - p_j)). On
+#' the same scale as pi-hat but NOT PLINK\'s pi-hat.
+#'
+#' @param genotypes See Usage.
+#' @return The value of \code{K}, as built in the body.
+#' @export
 morie_snpqc1_kinship_matrix <- function(genotypes) {
   # Genomic kinship from centred, scaled genotypes:
   # K_ik = (1/M) sum_j (g_ij - 2p_j)(g_kj - 2p_j) / (2 p_j (1 - p_j)).
@@ -375,6 +456,16 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
   K
 }
 
+#' Window-based pruning: drop one of any pair with r^2 above the
+#'
+#' threshold. Returns kept SNP indices (1-based).
+#'
+#' @param genotypes See Usage.
+#' @param window Defaults to \code{50}.
+#' @param step Defaults to \code{5}.
+#' @param r2 Defaults to \code{0.2}.
+#' @return The value of \code{keep}, as built in the body.
+#' @export
 morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
   # Window-based pruning: drop one of any pair with r^2 above the
   # threshold. Returns kept SNP indices (1-based).
@@ -423,6 +514,31 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
   keep
 }
 
+#' morie_snpqc1
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param genotypes See Usage.
+#' @param phenotype Defaults to \code{NULL}.
+#' @param trait Defaults to \code{"binary"}.
+#' @param geno_relaxed Defaults to \code{0.2}.
+#' @param mind_relaxed Defaults to \code{0.2}.
+#' @param geno Defaults to \code{0.02}.
+#' @param mind Defaults to \code{0.02}.
+#' @param maf_threshold Defaults to \code{0.01}.
+#' @param hwe_case Defaults to \code{1e-10}.
+#' @param hwe_control Defaults to \code{1e-06}.
+#' @param hwe_quantitative Defaults to \code{1e-06}.
+#' @param het_sd Defaults to \code{3}.
+#' @param pihat Defaults to \code{0.2}.
+#' @param hwe_test Defaults to \code{"exact"}.
+#' @param x_genotypes Defaults to \code{NULL}.
+#' @param reported_sex Defaults to \code{NULL}.
+#' @param relatedness Defaults to \code{"pihat"}.
+#' @param ibd_correction Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals}, \code{removed}, \code{n_snps_kept}, \code{n_individuals_kept}, \code{call_rate_snp}, \code{call_rate_ind}, \code{maf}, \code{hwe_p}, \code{heterozygosity}, \code{relatedness_matrix}, \code{kinship}, \code{ibd_states}, \code{relatedness}, \code{pruned_snps}, \code{thresholds}, \code{trait}, \code{hwe_test}, \code{note}, \code{method}.
+#' @export
 morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
                          geno_relaxed=0.2, mind_relaxed=0.2, geno=0.02,
                          mind=0.02, maf_threshold=0.01, hwe_case=1e-10,
@@ -638,6 +754,13 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
   )
 }
 
+#' morie_snpqc1_cheatsheet
+#'
+#' Part of the snpqc1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_snpqc1_cheatsheet <- function() {
   paste0(
     "snpqc1: GWAS QC (Marees et al. 2018, Table 1). Seven steps ",

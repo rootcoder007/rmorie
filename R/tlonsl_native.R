@@ -48,6 +48,14 @@
   -(y * log(q) + (1.0 - y) * log(1.0 - q))
 }
 
+#' A fixed-dimensional summary Z of the past. lags=0 gives the empty
+#'
+#' summary, which is exactly the i.i.d. case.
+#'
+#' @param history See Usage.
+#' @param lags Defaults to \code{1}.
+#' @return The value of \code{z}, as built in the body.
+#' @export
 morie_tlonsl_summary_measure <- function(history, lags=1) {
   # A fixed-dimensional summary Z of the past. lags=0 gives the empty
   # summary, which is exactly the i.i.d. case.
@@ -67,6 +75,18 @@ morie_tlonsl_summary_measure <- function(history, lags=1) {
   z
 }
 
+#' morie_tlonsl_sequential_risk
+#'
+#' Part of the tlonsl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param algorithm See Usage.
+#' @param loss Defaults to \code{"squared"}.
+#' @param burn_in Defaults to \code{5}.
+#' @param lags Defaults to \code{1}.
+#' @return A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \code{note}.
+#' @export
 morie_tlonsl_sequential_risk <- function(y, algorithm, loss="squared",
                                          burn_in=5, lags=1) {
   # Train on the past, score the one-step-ahead prediction. V-fold
@@ -100,6 +120,14 @@ morie_tlonsl_sequential_risk <- function(y, algorithm, loss="squared",
                    "held-out FUTURE observation"))
 }
 
+#' Exponentially weighted update from cumulative losses. The
+#'
+#' cumulative losses are sufficient, so the update is O(1) in memory.
+#'
+#' @param cum_losses See Usage.
+#' @param eta Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 morie_tlonsl_update_weights <- function(cum_losses, eta=1.0) {
   # Exponentially weighted update from cumulative losses. The
   # cumulative losses are sufficient, so the update is O(1) in memory.
@@ -112,6 +140,19 @@ morie_tlonsl_update_weights <- function(cum_losses, eta=1.0) {
   e / sum(e)
 }
 
+#' morie_tlonsl_online_super_learner
+#'
+#' Part of the tlonsl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param library See Usage.
+#' @param loss Defaults to \code{"squared"}.
+#' @param burn_in Defaults to \code{5}.
+#' @param lags Defaults to \code{1}.
+#' @param eta Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{weights}, \code{risk}, \code{member_risks}, \code{best_single}, \code{best_member}, \code{weight_path}, \code{n_scored}, \code{method}, \code{note}.
+#' @export
 morie_tlonsl_online_super_learner <- function(y, library, loss="squared",
                                               burn_in=5, lags=1, eta=1.0) {
   # Sequentially-validated ensemble over a library. Weights are
@@ -160,6 +201,13 @@ morie_tlonsl_online_super_learner <- function(y, library, loss="squared",
   )
 }
 
+#' morie_tlonsl_cheatsheet
+#'
+#' Part of the tlonsl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_tlonsl_cheatsheet <- function() {
   paste0(
     "tlonsl: data arrive sequentially, O(t) given a ",

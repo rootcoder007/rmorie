@@ -57,6 +57,16 @@
   list(q = q, alpha = alpha, beta = beta)
 }
 
+#' morie_droSPI
+#'
+#' Part of the droSPI_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param precip See Usage.
+#' @param scale Defaults to \code{3L}.
+#' @param by_month Defaults to \code{TRUE}.
+#' @return A list with \code{spi}, \code{totals}, \code{params}, \code{scale}, \code{by_month}, \code{method}.
+#' @export
 morie_droSPI <- function(precip, scale = 3L, by_month = TRUE) {
   x <- as.numeric(precip)
   if (any(x < 0))

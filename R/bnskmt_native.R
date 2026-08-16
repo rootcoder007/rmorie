@@ -6,6 +6,16 @@
 
 .bnskmt_EPS <- 1e-12
 
+#' S_function
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param std_moments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @return A numeric value.
+#' @export
 S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   v <- as.numeric(std_moments); J <- length(v); ne <- as.integer(n_equality)
   ineq <- v[seq_len(J - ne)]; eq <- v[(J - ne + 1L):J]
@@ -16,6 +26,15 @@ S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   s + sum(eq * eq)
 }
 
+#' weighted_moments
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param g See Usage.
+#' @return A list with \code{mean}, \code{sd}, \code{n}.
+#' @export
 weighted_moments <- function(m, g) {
   if (is.matrix(m)) M <- split(m, row(m)) else M <- m
   M <- lapply(M, as.numeric); n <- length(M)
@@ -32,6 +51,15 @@ weighted_moments <- function(m, g) {
   list(mean = means, sd = sds, n = n)
 }
 
+#' hypercube_instruments
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param n_levels Defaults to \code{3L}.
+#' @return A list with \code{instruments}, \code{n_instruments}, \code{n_levels}.
+#' @export
 hypercube_instruments <- function(X, n_levels = 3L) {
   if (!is.list(X) && !is.matrix(X)) stop("bnskmt: X must be a matrix or list of rows")
   if (is.matrix(X)) Xm <- split(X, row(X)) else Xm <- X
@@ -65,6 +93,17 @@ hypercube_instruments <- function(X, n_levels = 3L) {
   list(instruments = G, n_instruments = length(G), n_levels = as.integer(n_levels))
 }
 
+#' ks_statistic
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param instruments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @return A list with \code{statistic}, \code{argmax}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
+#' @export
 ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
     instruments$instruments else instruments
@@ -84,6 +123,21 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
        method = "Kolmogorov-Smirnov: supremum of S over G (Andrews & Shi, Sec. 1)")
 }
 
+#' ks_critical_value
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param instruments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @param level Defaults to \code{0.95}.
+#' @param reps Defaults to \code{200L}.
+#' @param seed Defaults to \code{0L}.
+#' @param kappa Defaults to \code{NULL}.
+#' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}.
+#' @export
 ks_critical_value <- function(m, instruments, form = "sum",
                               n_equality = 0L, level = 0.95,
                               reps = 200L, seed = 0L, kappa = NULL) {
@@ -119,6 +173,22 @@ ks_critical_value <- function(m, instruments, form = "sum",
        level = as.numeric(level))
 }
 
+#' ks_confidence_set
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param moment_fn See Usage.
+#' @param theta_grid See Usage.
+#' @param X See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @param level Defaults to \code{0.95}.
+#' @param n_levels Defaults to \code{2L}.
+#' @param reps Defaults to \code{100L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds}, \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
+#' @export
 ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                               n_equality = 0L, level = 0.95,
                               n_levels = 2L, reps = 100L, seed = 0L) {
@@ -139,6 +209,18 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
        method = "KS test with GMS critical values, inverted over the grid; Andrews & Shi")
 }
 
+#' cvm_statistic
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param instruments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
+#' @export
 cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
                           weights = NULL) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
@@ -163,6 +245,17 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
        method = "Cramer-von Mises: integral of S over Q (Andrews & Shi, Sec. 1)")
 }
 
+#' compare_forms
+#'
+#' Part of the bnskmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param instruments See Usage.
+#' @param form Defaults to \code{"sum"}.
+#' @param n_equality Defaults to \code{0L}.
+#' @return A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm}, \code{argmax_instrument}, \code{note}.
+#' @export
 compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
   cv <- cvm_statistic(m, instruments, form = form, n_equality = n_equality)
   ks <- ks_statistic(m, instruments, form = form, n_equality = n_equality)

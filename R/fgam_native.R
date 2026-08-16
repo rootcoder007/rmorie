@@ -65,6 +65,20 @@
   crossprod(D)
 }
 
+#' morie_fgam_functional_gam
+#'
+#' Part of the fgam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param basis Defaults to \code{NULL}.
+#' @param n_x Defaults to \code{6}.
+#' @param n_t Defaults to \code{6}.
+#' @param lam_x Defaults to \code{1}.
+#' @param lam_t Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{residuals}, \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf}, \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t}, \code{linear_deviation}, \code{n}, \code{method}, \code{note}.
+#' @export
 morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
                                       lam_x = 1.0, lam_t = 1.0) {
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"

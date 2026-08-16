@@ -81,6 +81,29 @@
   lapply(clean, function(c) .alfbnp_atoms(c, "alfbnp clean"))
 }
 
+#' morie_alfbnp_af3_sample
+#'
+#' Part of the alfbnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_atoms Defaults to \code{NULL}.
+#' @param denoiser Defaults to \code{NULL}.
+#' @param clean Defaults to \code{NULL}.
+#' @param steps Defaults to \code{20L}.
+#' @param sigma_data Defaults to \code{16}.
+#' @param s_max Defaults to \code{160}.
+#' @param s_min Defaults to \code{4e-04}.
+#' @param rho Defaults to \code{7}.
+#' @param gamma_0 Defaults to \code{0.8}.
+#' @param gamma_min Defaults to \code{1}.
+#' @param noise_scale Defaults to \code{1.003}.
+#' @param step_scale Defaults to \code{1.5}.
+#' @param noise Defaults to \code{NULL}.
+#' @param seed Defaults to \code{2}.
+#' @param x_init Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-06}.
+#' @return A list with \code{estimate}, \code{coords}, \code{sigmas}, \code{trace}, \code{denoiser_coefs}, \code{sigma_data}, \code{steps}, \code{rmsd_to_reference}, \code{n_atoms}, \code{route}, \code{method}, \code{note}.
+#' @export
 morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
                                     clean = NULL, steps = 20L,
                                     sigma_data = 16.0, s_max = 160.0,

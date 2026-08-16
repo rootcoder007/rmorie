@@ -27,6 +27,20 @@
                       "gaussian, got '%s'"), family))
 }
 
+#' morie_glmbay_bayesian_glm
+#'
+#' Part of the glmbay_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param family Defaults to \code{"binomial"}.
+#' @param prior_sd Defaults to \code{2.5}.
+#' @param add_intercept Defaults to \code{TRUE}.
+#' @param max_iter Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{posterior_sd}, \code{std_error}, \code{ci_lower}, \code{ci_upper}, \code{fitted}, \code{linear_predictor}, \code{loglik}, \code{log_prior}, \code{log_marginal}, \code{log_det_hessian}, \code{iterations}, \code{converged}, \code{family}, \code{prior_sd}, \code{n}, \code{p}, \code{method}, \code{note}.
+#' @export
 morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
                                       prior_sd = 2.5, add_intercept = TRUE,
                                       max_iter = 100, tol = 1e-10) {

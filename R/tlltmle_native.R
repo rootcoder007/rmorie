@@ -72,6 +72,16 @@
   ifelse(x > -700, 1.0 / (1.0 + exp(-x)), 0.0)
 }
 
+#' tlltmle_clever_covariate
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param g See Usage.
+#' @param rule Defaults to \code{1}.
+#' @return A list with \code{H}, \code{max}, \code{mean}, \code{note}.
+#' @export
 tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
   a <- as.numeric(A)
   gg <- as.numeric(g)
@@ -88,6 +98,18 @@ tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
        note = "a large clever covariate IS the positivity violation showing itself")
 }
 
+#' tlltmle_fluctuate
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q See Usage.
+#' @param H See Usage.
+#' @param Y See Usage.
+#' @param iters Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{epsilon}, \code{Q_star}, \code{score}.
+#' @export
 tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
   q <- as.numeric(Q)
   h <- as.numeric(H)
@@ -112,6 +134,18 @@ tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
        score = sum(h * (y - upd)) / n)
 }
 
+#' tlltmle_tmle_point
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{initial_plugin}, \code{method}, \code{note}.
+#' @export
 tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
   a <- as.numeric(A)
   y <- as.numeric(Y)
@@ -139,6 +173,16 @@ tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
        note = "consistent if EITHER the outcome regression OR the treatment mechanism is consistent")
 }
 
+#' tlltmle_ltmle
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q_seq See Usage.
+#' @param H_seq See Usage.
+#' @param Y_seq See Usage.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilons}, \code{Q_star}, \code{T}, \code{method}.
+#' @export
 tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
   T_ <- length(Q_seq)
   if (T_ < 1) stop("ltmle: the sequence is empty")
@@ -161,6 +205,14 @@ tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
        method = "LTMLE by backward sequential fluctuation; van der Laan & Rose (2018) Chap. 4")
 }
 
+#' tlltmle_influence_curve_se
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param d See Usage.
+#' @return A numeric value.
+#' @export
 tlltmle_influence_curve_se <- function(d) {
   v <- as.numeric(d)
   n <- length(v)
@@ -169,6 +221,13 @@ tlltmle_influence_curve_se <- function(d) {
   sqrt(sum((v - m)^2) / (n - 1) / n)
 }
 
+#' tlltmle_cheatsheet
+#'
+#' Part of the tlltmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 tlltmle_cheatsheet <- function() {
   "tlltmle: write the g-formula as ITERATED conditional expectations, fit them with machine learning, then TARGET each one. Every step is a one-dimensional logistic fluctuation with the initial fit as OFFSET and the clever covariate H = I(A = d)/g as the covariate; the MLE for epsilon makes the update solve the efficient influence curve equation. DOUBLE ROBUST: consistent if EITHER the outcome regressions OR the treatment mechanism is right -- not both. The clever covariate is an inverse probability, so a large one IS the positivity violation."
 }

@@ -18,6 +18,19 @@
 # values to machine precision, and the same component-wise sd ranking
 # (not a variance decomposition -- the components overlap).
 
+#' prophe_additive_components
+#'
+#' Part of the prophe_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param y See Usage.
+#' @param seasonalities Defaults to \code{NULL}.
+#' @param holidays Defaults to \code{NULL}.
+#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param ... Passed through.
+#' @return A list with \code{estimate}, \code{components}, \code{total}, \code{fitted}, \code{residual}, \code{reconstruction_error}, \code{reconstructs}, \code{coef}, \code{changepoints}, \code{sigma}, \code{n}, \code{component_names}, \code{method}.
+#' @export
 prophe_additive_components <- function(t, y, seasonalities = NULL,
                                        holidays = NULL,
                                        holiday_window = c(0, 0), ...) {
@@ -87,6 +100,14 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
                        "Letham (2018) eq. (1)"))
 }
 
+#' prophe_component_shares
+#'
+#' Part of the prophe_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param components See Usage.
+#' @return A list with \code{sd}, \code{relative}, \code{ranked}, \code{note}.
+#' @export
 prophe_component_shares <- function(components) {
   out <- list()
   for (nm in names(components)) {
@@ -109,6 +130,13 @@ prophe_component_shares <- function(components) {
                      "split -- the components overlap"))
 }
 
+#' prophe_cheatsheet
+#'
+#' Part of the prophe_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 prophe_cheatsheet <- function() {
   paste0("prophe: same model and source as prphet (Taylor & Letham ",
          "2018 eq. 1) -- this is the DECOMPOSITION view. Fit once, ",
@@ -118,6 +146,19 @@ prophe_cheatsheet <- function() {
          "terms both absorb slow drift.")
 }
 
+#' morie_prophe
+#'
+#' Part of the prophe_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param y See Usage.
+#' @param seasonalities Defaults to \code{NULL}.
+#' @param holidays Defaults to \code{NULL}.
+#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param ... Passed through.
+#' @return The value of \code{prophe_additive_components}.
+#' @export
 morie_prophe <- function(t, y, seasonalities = NULL, holidays = NULL,
                          holiday_window = c(0, 0), ...) {
   prophe_additive_components(t, y, seasonalities = seasonalities,

@@ -41,6 +41,17 @@
   L * log(t / L)
 }
 
+#' Eqs (8.30)-(8.31), after Appel and v. Brandt.  The reference window
+#'
+#' GROWS from the start of the segment -- that is what separates GLR
+#' from the SEM and ACF methods.
+#'
+#' @param x See Usage.
+#' @param m See Usage.
+#' @param n Defaults to \code{NULL}.
+#' @param order Defaults to \code{4}.
+#' @return A list with \code{d}, \code{h_pooled}, \code{h_reference}, \code{h_test}, \code{m}, \code{n}, \code{order}, \code{n_reference}, \code{n_test}, \code{reference_window_grows}, \code{near_zero_when_one_model_explains_both}, \code{method}.
+#' @export
 Glr <- function(x, m, n = NULL, order = 4) {
   # eqs (8.30)-(8.31), after Appel and v. Brandt.  The reference window
   # GROWS from the start of the segment -- that is what separates GLR from
@@ -77,6 +88,19 @@ Glr <- function(x, m, n = NULL, order = 4) {
   )
 }
 
+#' EegAdapt
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param window Defaults to \code{NULL}.
+#' @param step Defaults to \code{NULL}.
+#' @param order Defaults to \code{4}.
+#' @param threshold Defaults to \code{NULL}.
+#' @return A list with \code{d}, \code{d_fixed_reference}, \code{times}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad}, \code{window}, \code{step}, \code{order}, \code{fs}, \code{reference_restarts_at_boundaries}, \code{robust_threshold}, \code{method}.
+#' @export
 EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
                      threshold = NULL) {
   # Section 8.5.3.  On a boundary the reference window RESTARTS; without
@@ -156,6 +180,18 @@ EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
 }
 
 # ----------------------------------------------------------------- bsacorr
+#' Bsacorr
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param maxlag Defaults to \code{NULL}.
+#' @param normalize Defaults to \code{FALSE}.
+#' @param biased Defaults to \code{TRUE}.
+#' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{n}, \code{biased}, \code{normalized}, \code{positive_lag_means_y_trails_x}, \code{biased_keeps_nonnegative_definiteness}, \code{method}.
+#' @export
 XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
   # R_xy(m) = (1/N) sum_n x(n) y(n + m).  A POSITIVE lag means y trails x.
   xs <- as.numeric(x)
@@ -190,6 +226,17 @@ XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
   )
 }
 
+#' The RAW sum, not divided by N: the matched-filter output AT each
+#'
+#' instant IS this sum, so its peak locates the pattern.  Neither XCorr
+#' mode gives it (biased divides by n, unbiased by the overlap count),
+#' so it is computed here rather than delegated.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param delays Defaults to \code{NULL}.
+#' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{normalized}, \code{is_the_matched_filter_output}, \code{method}.
+#' @export
 XCorrDisc <- function(x, y, delays = NULL) {
   # The RAW sum, not divided by N: the matched-filter output AT each
   # instant IS this sum, so its peak locates the pattern.  Neither XCorr
@@ -223,6 +270,17 @@ XCorrDisc <- function(x, y, delays = NULL) {
   )
 }
 
+#' The continuous-time form, evaluated by the trapezoidal rule on the
+#'
+#' samples that BOTH signals cover.  Long delays use less data, so the
+#' overlap fraction travels with the estimate.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param t See Usage.
+#' @param delays See Usage.
+#' @return A list with \code{ccf}, \code{delays}, \code{overlap_fraction}, \code{interpolated}, \code{trapezoidal}, \code{long_delays_use_less_data}, \code{method}.
+#' @export
 XCorrCont <- function(x, y, t, delays) {
   # The continuous-time form, evaluated by the trapezoidal rule on the
   # samples that BOTH signals cover.  Long delays use less data, so the
@@ -262,6 +320,17 @@ XCorrCont <- function(x, y, t, delays) {
   )
 }
 
+#' The ensemble expectation is estimated by a TIME average, which is
+#' only
+#'
+#' legitimate under joint stationarity and ergodicity.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param lags Defaults to \code{NULL}.
+#' @param remove_mean Defaults to \code{TRUE}.
+#' @return A list with \code{ccf}, \code{lags}, \code{means}, \code{mean_product}, \code{mean_removed}, \code{is_cross_covariance_when_mean_removed}, \code{expectation_estimated_by_time_average}, \code{requires_joint_stationarity_and_ergodicity}, \code{method}.
+#' @export
 XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
   # The ensemble expectation is estimated by a TIME average, which is only
   # legitimate under joint stationarity and ergodicity.
@@ -285,6 +354,15 @@ XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
   )
 }
 
+#' Correlation IS convolution with one sequence reversed
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A list with \code{ccf}, \code{via_convolution}, \code{lags}, \code{max_difference}, \code{identity_holds}, \code{correlation_is_convolution_with_one_reversed}, \code{method}.
+#' @export
 CorrConv <- function(x, y) {
   # Correlation IS convolution with one sequence reversed.
   xs <- as.numeric(x)
@@ -321,6 +399,16 @@ CorrConv <- function(x, y) {
   )
 }
 
+#' Normalized per shift, so a LOUD stretch cannot outscore a matching
+#' one
+#'
+#' -- that is the whole reason to normalize rather than take the raw
+#' CCF.
+#'
+#' @param x See Usage.
+#' @param template See Usage.
+#' @return A list with \code{gamma}, \code{shifts}, \code{peak}, \code{peak_shift}, \code{normalized_per_shift}, \code{bounded_in_unit_interval}, \code{loud_beats_matching_without_normalization}, \code{method}.
+#' @export
 NccfTpl <- function(x, template) {
   # Normalized per shift, so a LOUD stretch cannot outscore a matching one
   # -- that is the whole reason to normalize rather than take the raw CCF.
@@ -348,6 +436,15 @@ NccfTpl <- function(x, template) {
   )
 }
 
+#' Eq (4.25).  Delegates to DotProd -- one copy of the arithmetic
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A list with \code{gamma}, \code{dot_product}, \code{norms}, \code{pearson}, \code{is_a_cosine_not_an_agreement}, \code{unity_for_a_positive_rescaling}, \code{method}.
+#' @export
 CorrDot <- function(x, y) {
   # eq (4.25).  Delegates to DotProd -- one copy of the arithmetic.
   raw <- DotProd(x, y)
@@ -366,6 +463,17 @@ CorrDot <- function(x, y) {
   )
 }
 
+#' Phi(m) = (1/N) sum_n x(n) x(n + m).  BOTH the raw phi and the
+#'
+#' normalized rho are returned: rho is what a threshold can be set on,
+#' phi is what the equation says, and conflating them makes any
+#' threshold depend on the signal amplitude.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param maxlag Defaults to \code{NULL}.
+#' @return A list with \code{acf}, \code{normalized}, \code{lags}, \code{fs}, \code{peak_lag}, \code{peak_lag_seconds}, \code{implied_frequency_hz}, \code{peak_value}, \code{a_rhythm_gives_a_periodic_acf}, \code{robust_to_amplitude_variation}, \code{method}.
+#' @export
 EegAcf <- function(x, fs, maxlag = NULL) {
   # phi(m) = (1/N) sum_n x(n) x(n + m).  BOTH the raw phi and the
   # normalized rho are returned: rho is what a threshold can be set on,
@@ -408,6 +516,18 @@ EegAcf <- function(x, fs, maxlag = NULL) {
   )
 }
 
+#' The alpha band by convention; the SAME test serves the other bands,
+#'
+#' so the band is an argument, not a constant.  Both the band AND the
+#' amplitude have to be satisfied -- a lag in band with a tiny peak is
+#' not a rhythm.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param band Defaults to \code{c(8, 13)}.
+#' @param threshold Defaults to \code{0.3}.
+#' @return A list with \code{acf}, \code{band}, \code{lag_range}, \code{peak_lag}, \code{peak}, \code{frequency_hz}, \code{threshold}, \code{present}, \code{needs_both_the_band_and_the_amplitude}, \code{same_test_serves_other_bands}, \code{fs}, \code{method}.
+#' @export
 AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
   # The alpha band by convention; the SAME test serves the other bands,
   # so the band is an argument, not a constant.  Both the band AND the
@@ -439,6 +559,20 @@ AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
 }
 
 # ------------------------------------------------------------------ bsasig
+#' Bsasig
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n Defaults to \code{NULL}.
+#' @param f1 Defaults to \code{5}.
+#' @param f2 Defaults to \code{20}.
+#' @param a1 Defaults to \code{1}.
+#' @param a2 Defaults to \code{1}.
+#' @param fs Defaults to \code{100}.
+#' @param duration Defaults to \code{1}.
+#' @return A list with \code{x}, \code{t}, \code{n}, \code{fs}, \code{f1}, \code{f2}, \code{a1}, \code{a2}, \code{components_are_known_by_construction}, \code{method}.
+#' @export
 SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
                        fs = 100, duration = 1) {
   # A test signal whose components are known BY CONSTRUCTION, which is
@@ -462,6 +596,17 @@ SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
   )
 }
 
+#' A composite of shifted, scaled copies of one pattern.  Copies closer
+#'
+#' together than the pattern is long OVERLAP, and the count is reported
+#' because an overlap is what breaks a peak-picking detector.
+#'
+#' @param g See Usage.
+#' @param shifts See Usage.
+#' @param scales Defaults to \code{NULL}.
+#' @param n Defaults to \code{NULL}.
+#' @return A list with \code{x}, \code{n}, \code{shifts}, \code{scales}, \code{peaks_expected_at}, \code{overlapping_pairs}, \code{pattern}, \code{pattern_length}, \code{n_copies}, \code{copies_add}, \code{overlap_breaks_peak_picking}, \code{method}.
+#' @export
 CompSig <- function(g, shifts, scales = NULL, n = NULL) {
   # A composite of shifted, scaled copies of one pattern.  Copies closer
   # together than the pattern is long OVERLAP, and the count is reported
@@ -501,6 +646,15 @@ CompSig <- function(g, shifts, scales = NULL, n = NULL) {
 }
 
 # ----------------------------------------------------------------- bsastat
+#' Bsastat
+#'
+#' Part of the rangayyan_ccf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A list with \code{r}, \code{r_squared}, \code{n}, \code{means}, \code{cosine_without_removing_means}, \code{means_are_removed}, \code{invariant_to_positive_affine_change}, \code{says_nothing_about_agreement}, \code{method}.
+#' @export
 CorrCoef <- function(x, y) {
   # Pearson's r.  The MEANS ARE REMOVED, which is what separates it from
   # the Chapter 4 dot-product cosine; both are returned so the difference

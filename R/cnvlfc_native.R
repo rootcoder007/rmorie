@@ -220,6 +220,16 @@
     list(x = X, y = Y, bxy = as.numeric(bxy), byx = as.numeric(byx))
 }
 
+#' cnvlfc_embed
+#'
+#' Part of the cnvlfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param series See Usage.
+#' @param E Defaults to \code{2}.
+#' @param tau Defaults to \code{1}.
+#' @return A list with \code{points}, \code{index}, \code{E}, \code{tau}.
+#' @export
 cnvlfc_embed <- function(series, E = 2, tau = 1) {
     em <- .cnvlfc_embed(series, E, tau)
     list(points = lapply(seq_len(nrow(em$points)),
@@ -228,22 +238,77 @@ cnvlfc_embed <- function(series, E = 2, tau = 1) {
          E = em$E, tau = em$tau)
 }
 
+#' cnvlfc_cross_map
+#'
+#' Part of the cnvlfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param driver See Usage.
+#' @param response See Usage.
+#' @param E Defaults to \code{2L}.
+#' @param tau Defaults to \code{1L}.
+#' @param library Defaults to \code{NULL}.
+#' @param seed Defaults to \code{1L}.
+#' @param exclude Defaults to \code{0L}.
+#' @return The value of \code{.cnvlfc_cross_map}.
+#' @export
 cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
                              library = NULL, seed = 1L, exclude = 0L) {
     .cnvlfc_cross_map(driver, response, E, tau, library, seed, exclude)
 }
 
+#' cnvlfc_ccm
+#'
+#' Part of the cnvlfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param E Defaults to \code{2L}.
+#' @param tau Defaults to \code{1L}.
+#' @param lib_sizes Defaults to \code{NULL}.
+#' @param seed Defaults to \code{1L}.
+#' @param exclude Defaults to \code{0L}.
+#' @return The value of \code{.cnvlfc_ccm}.
+#' @export
 cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
                        seed = 1L, exclude = 0L) {
     .cnvlfc_ccm(x, y, E, tau, lib_sizes, seed, exclude)
 }
 
+#' cnvlfc_coupled_logistic
+#'
+#' Part of the cnvlfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param rx Defaults to \code{3.8}.
+#' @param ry Defaults to \code{3.5}.
+#' @param bxy Defaults to \code{0}.
+#' @param byx Defaults to \code{0.1}.
+#' @param x0 Defaults to \code{0.4}.
+#' @param y0 Defaults to \code{0.2}.
+#' @param burn Defaults to \code{300L}.
+#' @return The value of \code{.cnvlfc_coupled_logistic}.
+#' @export
 cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
                                     byx = 0.1, x0 = 0.4, y0 = 0.2,
                                     burn = 300L) {
     .cnvlfc_coupled_logistic(n, rx, ry, bxy, byx, x0, y0, burn)
 }
 
+#' cnvlfc_convergent_cross_mapping
+#'
+#' Part of the cnvlfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param E Defaults to \code{2L}.
+#' @param tau Defaults to \code{1L}.
+#' @param ... Passed through.
+#' @return The value of \code{do.call}.
+#' @export
 cnvlfc_convergent_cross_mapping <- function(x, y, E = 2L, tau = 1L, ...) {
     dots <- list(...)
     do.call(.cnvlfc_ccm,

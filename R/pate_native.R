@@ -25,6 +25,16 @@
   -sign(u) * log(1 - 2 * abs(u)) / gamma
 }
 
+#' teacher_votes
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param teacher_predicts See Usage.
+#' @param rows See Usage.
+#' @param n_classes Defaults to \code{NULL}.
+#' @return The value of \code{split}.
+#' @export
 teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
   teachers <- as.list(teacher_predicts)
   if (length(teachers) == 0L)
@@ -60,6 +70,16 @@ teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
   split(votes, row(votes))
 }
 
+#' noisy_argmax
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param gamma See Usage.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{arg}, as built in the body.
+#' @export
 noisy_argmax <- function(counts, gamma, seed = 0) {
   gamma <- as.numeric(gamma)
   if (gamma <= 0)
@@ -78,6 +98,16 @@ noisy_argmax <- function(counts, gamma, seed = 0) {
   arg
 }
 
+#' epsilon_data_independent
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param gamma See Usage.
+#' @param delta See Usage.
+#' @return A numeric value.
+#' @export
 epsilon_data_independent <- function(T, gamma, delta) {
   T <- as.numeric(T)
   gamma <- as.numeric(gamma)
@@ -90,6 +120,15 @@ epsilon_data_independent <- function(T, gamma, delta) {
     2.0 * gamma * sqrt(2.0 * T * log(1.0 / delta))
 }
 
+#' lemma4_bound
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param gamma See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 lemma4_bound <- function(counts, gamma) {
   gamma <- as.numeric(gamma)
   if (gamma <= 0)
@@ -107,6 +146,16 @@ lemma4_bound <- function(counts, gamma) {
   c(min(tot, 1.0), tot)
 }
 
+#' theorem3_moment
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param gamma See Usage.
+#' @param l See Usage.
+#' @return A numeric value.
+#' @export
 theorem3_moment <- function(q, gamma, l) {
   q <- as.numeric(q)
   gamma <- as.numeric(gamma)
@@ -122,6 +171,18 @@ theorem3_moment <- function(q, gamma, l) {
   log((1.0 - q) * ratio^l + q * exp(2.0 * gamma * l))
 }
 
+#' moments_accountant
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vote_counts See Usage.
+#' @param gamma See Usage.
+#' @param delta See Usage.
+#' @param lambdas Defaults to \code{NULL}.
+#' @param data_dependent Defaults to \code{TRUE}.
+#' @return A list with \code{epsilon}, \code{lambda}, \code{alpha}, \code{delta}, \code{queries}, \code{used}.
+#' @export
 moments_accountant <- function(vote_counts, gamma, delta,
                                lambdas = NULL,
                                data_dependent = TRUE) {
@@ -171,6 +232,22 @@ moments_accountant <- function(vote_counts, gamma, delta,
   )
 }
 
+#' pate
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param teacher_predicts See Usage.
+#' @param queries See Usage.
+#' @param gamma Defaults to \code{0.05}.
+#' @param delta Defaults to \code{1e-05}.
+#' @param n_classes Defaults to \code{NULL}.
+#' @param student_train_fn Defaults to \code{NULL}.
+#' @param student_features Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param lambdas Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{labels}, \code{clean_labels}, \code{votes}, \code{agreement}, \code{epsilon}, \code{epsilon_accountant}, \code{epsilon_data_independent}, \code{accountant}, \code{delta}, \code{gamma}, \code{n_teachers}, \code{n_queries}, \code{student}, \code{note}, \code{method}.
+#' @export
 pate <- function(teacher_predicts, queries, gamma = 0.05,
                  delta = 1e-5, n_classes = NULL,
                  student_train_fn = NULL, student_features = NULL,

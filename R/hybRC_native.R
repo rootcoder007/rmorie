@@ -87,6 +87,14 @@
   }
 }
 
+#' is_order_sensitive
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param method See Usage.
+#' @return A list with \code{method}, \code{order_sensitive}, \code{note}.
+#' @export
 is_order_sensitive <- function(method) {
   m <- as.character(method)
   if (!(m %in% .METHODS)) {
@@ -101,6 +109,15 @@ is_order_sensitive <- function(method) {
   )
 }
 
+#' weighted
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{scores}, \code{ranking}, \code{partially_scored}, \code{note}.
+#' @export
 weighted <- function(scores, weights = NULL) {
   S <- lapply(scores, function(s) as.list(s))
   if (length(S) == 0L) {
@@ -144,6 +161,16 @@ weighted <- function(scores, weights = NULL) {
   )
 }
 
+#' switching
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param criterion See Usage.
+#' @param context Defaults to \code{NULL}.
+#' @return A list with \code{scores}, \code{chosen}, \code{ranking}, \code{note}.
+#' @export
 switching <- function(scores, criterion, context = NULL) {
   S <- lapply(scores, function(s) as.list(s))
   c_idx <- as.integer(criterion(context))
@@ -165,6 +192,15 @@ switching <- function(scores, criterion, context = NULL) {
   )
 }
 
+#' mixed
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param recommendations See Usage.
+#' @param top_k Defaults to \code{NULL}.
+#' @return A list with \code{presented}, \code{n_sources}, \code{note}.
+#' @export
 mixed <- function(recommendations, top_k = NULL) {
   L <- lapply(recommendations, function(r) as.list(r))
   if (length(L) == 0L) {
@@ -198,6 +234,15 @@ mixed <- function(recommendations, top_k = NULL) {
   )
 }
 
+#' feature_combination
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param content_features See Usage.
+#' @param collaborative_features See Usage.
+#' @return A list with \code{features}, \code{content_dim}, \code{collaborative_dim}, \code{note}.
+#' @export
 feature_combination <- function(content_features, collaborative_features) {
   C <- .hybRC_mat(content_features)
   D <- .hybRC_mat(collaborative_features)
@@ -225,6 +270,16 @@ feature_combination <- function(content_features, collaborative_features) {
   )
 }
 
+#' cascade
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param primary See Usage.
+#' @param secondary See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{ranking}, \code{tie_groups_broken}, \code{primary_respected}, \code{note}.
+#' @export
 cascade <- function(primary, secondary, tol = 1e-9) {
   P <- as.list(primary)
   S <- as.list(secondary)
@@ -253,6 +308,15 @@ cascade <- function(primary, secondary, tol = 1e-9) {
   )
 }
 
+#' feature_augmentation
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param base_output See Usage.
+#' @param consumer See Usage.
+#' @return A list with \code{result}, \code{note}.
+#' @export
 feature_augmentation <- function(base_output, consumer) {
   list(
     result = consumer(base_output),
@@ -260,6 +324,16 @@ feature_augmentation <- function(base_output, consumer) {
   )
 }
 
+#' meta_level
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model_builder See Usage.
+#' @param consumer See Usage.
+#' @param data See Usage.
+#' @return A list with \code{estimate}, \code{result}, \code{model}, \code{method}, \code{note}.
+#' @export
 meta_level <- function(model_builder, consumer, data) {
   model <- model_builder(data)
   estimate <- consumer(model)

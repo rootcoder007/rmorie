@@ -77,6 +77,14 @@
 
 # decode_indices: lookup. Exactly inverts quantisation for in-codebook
 # vectors. Indices are 0-based, matching the Python implementation.
+#' Decode_indices: lookup. Exactly inverts quantisation for in-codebook
+#'
+#' vectors. Indices are 0-based, matching the Python implementation.
+#'
+#' @param indices See Usage.
+#' @param codebook See Usage.
+#' @return A list with \code{codes}, \code{n}, \code{note}.
+#' @export
 morie_vqgdec_decode_indices <- function(indices, codebook) {
     Z <- .vqgdec_to_matrix(codebook)
     n_code <- nrow(Z)
@@ -102,6 +110,16 @@ morie_vqgdec_decode_indices <- function(indices, codebook) {
 
 # adaptive_weight: lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
 # Balances the two losses at the decoder's last layer.
+#' Adaptive_weight: lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#'
+#' Balances the two losses at the decoder\'s last layer.
+#'
+#' @param grad_rec See Usage.
+#' @param grad_gan See Usage.
+#' @param delta Defaults to \code{1e-06}.
+#' @param clip Defaults to \code{10000}.
+#' @return A list with \code{lambda}, \code{raw}, \code{clipped}, \code{note}.
+#' @export
 morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
                                           delta = 1e-6, clip = 1e4) {
     gr <- abs(as.numeric(grad_rec))
@@ -123,6 +141,15 @@ morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
 
 # patch_discriminator: score patches, not the whole image. Gives a
 # dense signal about local texture.
+#' Patch_discriminator: score patches, not the whole image. Gives a
+#'
+#' dense signal about local texture.
+#'
+#' @param image See Usage.
+#' @param patch Defaults to \code{4}.
+#' @param scorer Defaults to \code{NULL}.
+#' @return A list with \code{scores}, \code{n_patches}, \code{mean}, \code{note}.
+#' @export
 morie_vqgdec_patch_discriminator <- function(image, patch = 4,
                                               scorer = NULL) {
     I <- .vqgdec_to_matrix(image)
@@ -166,6 +193,16 @@ morie_vqgdec_patch_discriminator <- function(image, patch = 4,
 
 # sliding_windows: generate windows for images larger than the
 # transformer's context.
+#' Sliding_windows: generate windows for images larger than the
+#'
+#' transformer\'s context.
+#'
+#' @param height See Usage.
+#' @param width See Usage.
+#' @param window See Usage.
+#' @param stride Defaults to \code{NULL}.
+#' @return A list with \code{windows}, \code{n_windows}, \code{covers_everything}, \code{context}, \code{note}.
+#' @export
 morie_vqgdec_sliding_windows <- function(height, width, window,
                                           stride = NULL) {
     H <- as.integer(height)
@@ -237,6 +274,18 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 }
 
 # decode: indices to codes to image, with the adaptive GAN weight.
+#' Decode: indices to codes to image, with the adaptive GAN weight
+#'
+#' Part of the vqgdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param indices See Usage.
+#' @param codebook See Usage.
+#' @param generator Defaults to \code{NULL}.
+#' @param grad_rec Defaults to \code{NULL}.
+#' @param grad_gan Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens}, \code{adaptive_lambda}, \code{method}, \code{note}.
+#' @export
 morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
                                  grad_rec = NULL, grad_gan = NULL) {
     d <- morie_vqgdec_decode_indices(indices, codebook)
@@ -261,6 +310,13 @@ morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
 }
 
 # cheatsheet
+#' Cheatsheet
+#'
+#' Part of the vqgdec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_vqgdec_cheatsheet <- function() {
     paste(
         "vqgdec: at compression 16 an L2 loss returns the conditional",

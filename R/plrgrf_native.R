@@ -65,6 +65,20 @@
   out
 }
 
+#' local_centering
+#'
+#' Part of the plrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param n_folds Defaults to \code{5}.
+#' @param n_trees Defaults to \code{100}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{mh}, \code{eh}.
+#' @export
 local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
                             min_leaf = 5, seed = 0) {
   n <- length(y)
@@ -82,6 +96,22 @@ local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
   list(mh = mh, eh = eh)
 }
 
+#' residual_forest
+#'
+#' Part of the plrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y_res See Usage.
+#' @param w_res See Usage.
+#' @param X See Usage.
+#' @param at Defaults to \code{NULL}.
+#' @param n_trees Defaults to \code{200}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param seed Defaults to \code{0}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @return A list with \code{tau}, \code{info}.
+#' @export
 residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
                             min_leaf = 5, seed = 0, alpha = 0.05, pi = 0.5) {
   n <- length(y_res)
@@ -112,6 +142,23 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
                               numerator = num, denominator = den))
 }
 
+#' morie_plrgrf
+#'
+#' Part of the plrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param at Defaults to \code{NULL}.
+#' @param n_trees Defaults to \code{200}.
+#' @param n_folds Defaults to \code{5}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param seed Defaults to \code{0}.
+#' @param center Defaults to \code{TRUE}.
+#' @param level Defaults to \code{0.95}.
+#' @return A list with \code{estimate}, \code{tau}, \code{se}, \code{ci}, \code{m_hat}, \code{e_hat}, \code{y_residual}, \code{w_residual}, \code{centered}, \code{n}, \code{n_trees}, \code{ate}, \code{level}, \code{method}.
+#' @export
 morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
                          n_folds = 5, min_leaf = 5, seed = 0,
                          center = TRUE, level = 0.95) {

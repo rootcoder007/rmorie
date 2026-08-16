@@ -510,6 +510,17 @@
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
+#' morie_groebn
+#'
+#' Entry point
+#' ---------------------------------------------------------------------------
+#'
+#' @param polys See Usage.
+#' @param order Defaults to \code{"lex"}.
+#' @param prune Defaults to \code{TRUE}.
+#' @param reduced Defaults to \code{TRUE}.
+#' @return The value of \code{.groebn_buchberger}.
+#' @export
 morie_groebn <- function(polys, order = "lex", prune = TRUE, reduced = TRUE) {
   polys_norm <- lapply(polys, .groebn_poly)
   .groebn_buchberger(polys_norm, order = order, prune = prune, reduced = reduced)

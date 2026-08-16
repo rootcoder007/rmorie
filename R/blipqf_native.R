@@ -6,6 +6,14 @@
 # second copy, so the two entries cannot drift apart -- the same
 # reason the Python module re-exports instead of duplicating.
 
+#' morie_blipqf
+#'
+#' Part of the blipqf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{morie_blip2v}.
+#' @export
 morie_blipqf <- function(...) {
   if (!exists("morie_blip2v", mode = "function")) {
     stop(paste0("blipqf: the blip2v arm must be loaded first; this ",

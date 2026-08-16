@@ -2,6 +2,17 @@
 # Reference: Oreshkin et al. (2020) "N-BEATS" arXiv:1905.10437
 # Base R only.
 
+#' nbeats_trend_basis
+#'
+#' Part of the nbeats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param length See Usage.
+#' @param degree See Usage.
+#' @param offset Defaults to \code{0}.
+#' @param scale Defaults to \code{NULL}.
+#' @return A matrix, from \code{t}.
+#' @export
 nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
   if (degree < 0L) stop(sprintf("nbeats: degree must be non-negative, got %d", degree))
   sc <- if (is.null(scale)) as.numeric(length) else as.numeric(scale)
@@ -14,6 +25,17 @@ nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
            function(p) ((offset + t_seq) / sc)^p))
 }
 
+#' nbeats_seasonality_basis
+#'
+#' Part of the nbeats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param length See Usage.
+#' @param harmonics See Usage.
+#' @param offset Defaults to \code{0}.
+#' @param period Defaults to \code{NULL}.
+#' @return The value of \code{do.call}.
+#' @export
 nbeats_seasonality_basis <- function(length, harmonics, offset = 0, period = NULL) {
   if (harmonics < 1L) stop(sprintf("nbeats: need at least 1 harmonic, got %d", harmonics))
   per <- if (is.null(period)) as.numeric(length) else as.numeric(period)
@@ -26,6 +48,16 @@ nbeats_seasonality_basis <- function(length, harmonics, offset = 0, period = NUL
   do.call(rbind, rows)
 }
 
+#' X is L x P, y is length L; return theta
+#'
+#' Part of the nbeats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 nbeats_lstsq <- function(X, y, ridge = 1e-8) {
   # X is L x P, y is length L; return theta
   p <- ncol(X)
@@ -35,6 +67,19 @@ nbeats_lstsq <- function(X, y, ridge = 1e-8) {
   as.numeric(solve(XtX, Xty))
 }
 
+#' nbeats_block
+#'
+#' Part of the nbeats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param window See Usage.
+#' @param horizon See Usage.
+#' @param kind Defaults to \code{"generic"}.
+#' @param degree Defaults to \code{2}.
+#' @param harmonics Defaults to \code{3}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{backcast}, \code{forecast}, \code{theta}.
+#' @export
 nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
                          harmonics = 3, ridge = 1e-8) {
   if (!(kind %in% c("generic", "trend", "seasonality"))) {
@@ -61,6 +106,17 @@ nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
   list(backcast = backcast, forecast = forecast, theta = theta)
 }
 
+#' nbeats_stack
+#'
+#' Part of the nbeats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param window See Usage.
+#' @param horizon See Usage.
+#' @param blocks See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{forecast}, \code{residual}, \code{trace}.
+#' @export
 nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
   resid <- as.numeric(window)
   total <- rep(0, as.integer(horizon))
@@ -78,6 +134,18 @@ nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
   list(forecast = total, residual = resid, trace = trace)
 }
 
+#' nbeats_forecast
+#'
+#' Part of the nbeats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param horizon See Usage.
+#' @param lookback Defaults to \code{NULL}.
+#' @param blocks Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{backcast}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{residual_norm}, \code{window_norm}, \code{n_blocks}, \code{method}.
+#' @export
 nbeats_forecast <- function(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-8) {
   yv <- as.numeric(y)
   n <- length(yv)
@@ -98,6 +166,13 @@ nbeats_forecast <- function(y, horizon, lookback = NULL, blocks = NULL, ridge = 
        method = "N-BEATS doubly residual stacking, Oreshkin, Carpov, Chapados & Bengio (2020)")
 }
 
+#' nbeats_cheatsheet
+#'
+#' Part of the nbeats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 nbeats_cheatsheet <- function() {
   paste("nbeats: each block emits a BACKCAST and a forecast from one theta. Residual in: x_l = x_{l-1} - xhat_{l-1}; forecasts out: yhat = sum_l yhat_l. The residual telescopes exactly, so block l only ever sees what its predecessors could not explain -- skip the subtraction and every block re-fits the same trend. Trend and seasonality blocks CONSTRAIN the basis (polynomial, Fourier); that is where interpretability comes from.")
 }

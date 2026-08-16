@@ -60,6 +60,18 @@
   as.numeric(Z %*% b)
 }
 
+#' thrtmt_blip_function
+#'
+#' Part of the thrtmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param V Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{blip}, \code{info}.
+#' @export
 thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
   yv <- .thrtmt_vec(y)
   av <- .thrtmt_vec(A)

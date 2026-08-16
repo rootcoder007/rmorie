@@ -58,6 +58,16 @@
   integer(0)
 }
 
+#' The L-hop neighbourhood -- everything the prediction could depend on
+#'
+#' Part of the gnnEx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param v See Usage.
+#' @param L See Usage.
+#' @return A list with \code{nodes}, \code{edges}, \code{hops}, \code{size}.
+#' @export
 gnnEx_computation_graph <- function(adj, v, L) {
   # The L-hop neighbourhood -- everything the prediction could depend on.
   v_int <- as.integer(v)
@@ -92,6 +102,14 @@ gnnEx_computation_graph <- function(adj, v, L) {
   )
 }
 
+#' H(Y | .) for a predicted distribution
+#'
+#' Part of the gnnEx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param probs See Usage.
+#' @return A numeric value.
+#' @export
 gnnEx_conditional_entropy <- function(probs) {
   # H(Y | .) for a predicted distribution.
   p <- as.numeric(probs)
@@ -103,6 +121,20 @@ gnnEx_conditional_entropy <- function(probs) {
   -sum(p * log(pmax(p, .gnnEx_EPS)))
 }
 
+#' gnnEx_mask_objective
+#'
+#' Part of the gnnEx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param predict See Usage.
+#' @param edges See Usage.
+#' @param edge_logits See Usage.
+#' @param feature_logits See Usage.
+#' @param y See Usage.
+#' @param size_coef Defaults to \code{0.005}.
+#' @param entropy_coef Defaults to \code{1}.
+#' @return A list with \code{loss}, \code{fit}, \code{size}, \code{entropy}, \code{edge_mask}, \code{feature_mask}, \code{prediction}.
+#' @export
 gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
                                  size_coef = 0.005, entropy_coef = 1.0) {
   # Minimise -log p_theta(y) plus size and entropy penalties.
@@ -127,6 +159,25 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
   )
 }
 
+#' gnnEx_explain_node
+#'
+#' Part of the gnnEx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param predict See Usage.
+#' @param adj See Usage.
+#' @param v See Usage.
+#' @param y See Usage.
+#' @param n_features See Usage.
+#' @param L Defaults to \code{2}.
+#' @param iters Defaults to \code{300}.
+#' @param lr Defaults to \code{0.1}.
+#' @param size_coef Defaults to \code{0.005}.
+#' @param entropy_coef Defaults to \code{1}.
+#' @param seed Defaults to \code{0}.
+#' @param penalize Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{edges_ranked}, \code{edge_mask}, \code{feature_mask}, \code{loss_history}, \code{final}, \code{computation_graph}, \code{penalized}, \code{method}, \code{note}.
+#' @export
 gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
                                iters = 300, lr = 0.1, size_coef = 0.005,
                                entropy_coef = 1.0, seed = 0, penalize = TRUE) {
@@ -193,6 +244,13 @@ gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
   )
 }
 
+#' gnnEx_cheatsheet
+#'
+#' Part of the gnnEx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 gnnEx_cheatsheet <- function() {
   paste("gnnEx: explanation = a SMALL SUBGRAPH plus a SMALL FEATURE",
         "SUBSET, chosen by maximising MI(Y, (G_S, X_S)). Since H(Y) is",

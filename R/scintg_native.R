@@ -364,6 +364,25 @@
        objective=.scintg_harmony_objective(Zn, R, centres, batches, sigma, theta))
 }
 
+#' morie_scintg
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param batches See Usage.
+#' @param K Defaults to \code{NULL}.
+#' @param sigma Defaults to \code{0.1}.
+#' @param theta Defaults to \code{2}.
+#' @param lam Defaults to \code{1}.
+#' @param max_iter Defaults to \code{10}.
+#' @param cluster_iter Defaults to \code{25}.
+#' @param tol Defaults to \code{1e-04}.
+#' @param seed Defaults to \code{0}.
+#' @param reference Defaults to \code{NULL}.
+#' @param diversity Defaults to \code{"penalise"}.
+#' @return A list with \code{estimate}, \code{embedding}, \code{R}, \code{Y}, \code{K}, \code{objective}, \code{history}, \code{n_rounds}, \code{theta}, \code{sigma}, \code{lam}, \code{diversity}, \code{method}, \code{note}.
+#' @export
 morie_scintg <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0, lam=1.0,
                           max_iter=10, cluster_iter=25, tol=1e-4, seed=0,
                           reference=NULL, diversity="penalise") {

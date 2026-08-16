@@ -38,6 +38,15 @@
                     gwp  = c("20" = 18200, "100" = 24300, "500" = 29000))
 )
 
+#' morie_gwPot
+#'
+#' Part of the gwPot_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param gas See Usage.
+#' @param horizon Defaults to \code{100}.
+#' @return A list with \code{estimate}, \code{agwp}, \code{agwp_co2}, \code{gwp_from_agwp}, \code{lifetime}, \code{radiative_efficiency}, \code{gas}, \code{horizon}, \code{method}.
+#' @export
 morie_gwPot <- function(gas, horizon = 100) {
   key <- toupper(gsub("_", "-", trimws(as.character(gas))))
   aliases <- c("CFC11" = "CFC-11", "CFC12" = "CFC-12",

@@ -30,6 +30,16 @@
 # ICLR 2023, arXiv:2211.14730 -- the patching idea, used here with the
 # input/output asymmetry added.
 
+#' morie_timesfm_input_patches
+#'
+#' Part of the timesfm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param patch_len See Usage.
+#' @param pad_value Defaults to \code{0}.
+#' @return A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{n_padded}, \code{L}, \code{note}.
+#' @export
 morie_timesfm_input_patches <- function(x, patch_len, pad_value = 0) {
   v <- as.numeric(unlist(x))
   p <- as.integer(patch_len)
@@ -48,6 +58,14 @@ morie_timesfm_input_patches <- function(x, patch_len, pad_value = 0) {
                     "final patch"))
 }
 
+#' morie_timesfm_causal_mask
+#'
+#' Part of the timesfm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n_patches See Usage.
+#' @return A list with \code{mask}, \code{n_patches}, \code{training_signals}.
+#' @export
 morie_timesfm_causal_mask <- function(n_patches) {
   n <- as.integer(n_patches)
   if (n < 1L) stop("timesfm: need at least one patch")
@@ -60,6 +78,15 @@ morie_timesfm_causal_mask <- function(n_patches) {
   list(mask = m, n_patches = n, training_signals = n)
 }
 
+#' morie_timesfm_rollout_steps
+#'
+#' Part of the timesfm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param horizon See Usage.
+#' @param output_patch_len See Usage.
+#' @return A list with \code{steps}, \code{horizon}, \code{output_patch_len}, \code{single_step}.
+#' @export
 morie_timesfm_rollout_steps <- function(horizon, output_patch_len) {
   H <- as.integer(horizon)
   q <- as.integer(output_patch_len)
@@ -69,6 +96,16 @@ morie_timesfm_rollout_steps <- function(horizon, output_patch_len) {
        output_patch_len = q, single_step = q >= H)
 }
 
+#' morie_timesfm_horizon_plan
+#'
+#' Part of the timesfm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param horizon See Usage.
+#' @param input_patch_len See Usage.
+#' @param output_patch_len See Usage.
+#' @return A list with \code{steps_asymmetric}, \code{steps_symmetric}, \code{steps_direct}, \code{input_patch_len}, \code{output_patch_len}, \code{horizon}, \code{speedup_vs_symmetric}, \code{note}.
+#' @export
 morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
                                        output_patch_len) {
   H <- as.integer(horizon)
@@ -84,6 +121,18 @@ morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
                     "forecast a single direct prediction"))
 }
 
+#' morie_timesfm
+#'
+#' Part of the timesfm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param history See Usage.
+#' @param predictor See Usage.
+#' @param horizon See Usage.
+#' @param input_patch_len See Usage.
+#' @param output_patch_len See Usage.
+#' @return A list with \code{estimate}, \code{forecast}, \code{steps}, \code{horizon}, \code{input_patch_len}, \code{output_patch_len}, \code{context_grew_to}, \code{method}.
+#' @export
 morie_timesfm <- function(history, predictor, horizon, input_patch_len,
                           output_patch_len) {
   v <- as.numeric(unlist(history))
@@ -112,6 +161,13 @@ morie_timesfm <- function(history, predictor, horizon, input_patch_len,
                       "Zhou (2024)"))
 }
 
+#' morie_timesfm_cheatsheet
+#'
+#' Part of the timesfm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_timesfm_cheatsheet <- function() {
   paste("timesfm: decoder-only + input patching. Causal attention",
         "over patches means N patches give N training signals,",

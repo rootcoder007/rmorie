@@ -439,6 +439,20 @@
   }
 }
 
+#' morie_limmav
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param design See Usage.
+#' @param contrast Defaults to \code{NULL}.
+#' @param lib_sizes Defaults to \code{NULL}.
+#' @param span Defaults to \code{0.5}.
+#' @param weights Defaults to \code{TRUE}.
+#' @param moderate Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{log_fold_change}, \code{se}, \code{t}, \code{pvalue}, \code{padj}, \code{df}, \code{df_total}, \code{d0}, \code{s0_sq}, \code{s2_gene}, \code{s2_post}, \code{moderated}, \code{voom_weights}, \code{log_cpm}, \code{mean_log_count}, \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{weighted}, \code{n_genes}, \code{n_samples}, \code{note}, \code{method}.
+#' @export
 morie_limmav <- function(counts, design, contrast = NULL, lib_sizes = NULL,
                          span = 0.5, weights = TRUE, moderate = TRUE) {
   if (is.matrix(design)) {

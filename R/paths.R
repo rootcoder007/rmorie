@@ -9,6 +9,14 @@
   x
 }
 
+#' is_absolute_path
+#'
+#' Part of the paths implementation; see the file header for the source
+#' it follows.
+#'
+#' @param path See Usage.
+#' @return The value of \code{grepl}.
+#' @export
 is_absolute_path <- function(path) {
   grepl("^(/|[A-Za-z]:[/\\\\])", path)
 }

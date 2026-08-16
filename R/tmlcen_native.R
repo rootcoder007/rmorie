@@ -155,6 +155,14 @@
 
 # coarsen_interval: the interval (L, R] implied by one subject's
 # monitoring, Sec. 8.5.
+#' Coarsen_interval: the interval (L, R] implied by one subject\'s
+#'
+#' monitoring, Sec. 8.5.
+#'
+#' @param times See Usage.
+#' @param deltas See Usage.
+#' @return A list with \code{L}, \code{R}.
+#' @export
 morie_coarsen_interval <- function(times, deltas) {
   ts <- as.numeric(times)
   ds <- as.numeric(deltas)
@@ -179,6 +187,21 @@ morie_coarsen_interval <- function(times, deltas) {
 }
 
 # censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j | A, W))
+#' Censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j |
+#' A, W))
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param times See Usage.
+#' @param censored See Usage.
+#' @param A Defaults to \code{NULL}.
+#' @param W Defaults to \code{NULL}.
+#' @param grid Defaults to \code{NULL}.
+#' @param by_covariate Defaults to \code{TRUE}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{G}, \code{grid}, \code{b}.
+#' @export
 morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
                                      grid = NULL, by_covariate = TRUE,
                                      ridge = 1e-8) {
@@ -239,6 +262,23 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 }
 
 # ipcw_interval: Sec. 8.5's IPCW estimator of Psi_a = int r(t) Fbar_a(t) dt
+#' Ipcw_interval: Sec. 8.5\'s IPCW estimator of Psi_a = int r(t)
+#' Fbar_a(t) dt
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param A See Usage.
+#' @param times See Usage.
+#' @param deltas See Usage.
+#' @param a Defaults to \code{1}.
+#' @param r Defaults to \code{NULL}.
+#' @param g Defaults to \code{NULL}.
+#' @param gc Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A numeric value.
+#' @export
 morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
                                 g = NULL, gc = NULL, ridge = 1e-8) {
   av <- as.numeric(A)
@@ -295,6 +335,25 @@ morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
 }
 
 # tmle_censoring: causal survival under censoring
+#' Tmle_censoring: causal survival under censoring
+#'
+#' Part of the tmlcen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param censor See Usage.
+#' @param treatment See Usage.
+#' @param covariates See Usage.
+#' @param kind Defaults to \code{"right"}.
+#' @param grid Defaults to \code{NULL}.
+#' @param a Defaults to \code{1}.
+#' @param r Defaults to \code{NULL}.
+#' @param g Defaults to \code{NULL}.
+#' @param gc Defaults to \code{NULL}.
+#' @param trim Defaults to \code{0.001}.
+#' @return The value of \code{.tmlcen_RichResult}.
+#' @export
 morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
                                  kind = "right", grid = NULL, a = 1.0,
                                  r = NULL, g = NULL, gc = NULL,

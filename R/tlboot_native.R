@@ -21,6 +21,19 @@
 # same targeted- and multiplier-bootstraps, the same moment check,
 # and the same warning string kept so the failure is visible.
 
+#' morie_tlboot
+#'
+#' Part of the tlboot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data See Usage.
+#' @param estimator See Usage.
+#' @param B Defaults to \code{200L}.
+#' @param seed Defaults to \code{0L}.
+#' @param method Defaults to \code{c("naive", "targeted", "multiplier")}.
+#' @param ic Defaults to \code{NULL}.
+#' @return A list with \code{replicates}, \code{mean}, \code{se}, \code{influence_curve_se}, \code{ratio}, \code{note}.
+#' @export
 morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
                          method = c("naive", "targeted",
                                     "multiplier"),
@@ -102,22 +115,65 @@ morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
 }
 
 # compat with the Python arm: expose the three entry points
+#' Compat with the Python arm: expose the three entry points
+#'
+#' Part of the tlboot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data See Usage.
+#' @param estimator See Usage.
+#' @param B Defaults to \code{200L}.
+#' @param seed Defaults to \code{0L}.
+#' @return The value of \code{morie_tlboot}.
+#' @export
 naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
   morie_tlboot(data = data, estimator = estimator, B = B,
                seed = seed, method = "naive")
 }
 
+#' targeted_bootstrap
+#'
+#' Part of the tlboot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P_star_sampler See Usage.
+#' @param estimator See Usage.
+#' @param B Defaults to \code{200L}.
+#' @param seed Defaults to \code{0L}.
+#' @return The value of \code{morie_tlboot}.
+#' @export
 targeted_bootstrap <- function(P_star_sampler, estimator, B = 200L,
                                seed = 0L) {
   morie_tlboot(data = NULL, estimator = estimator, B = B,
                seed = seed, method = "targeted")
 }
 
+#' multiplier_bootstrap
+#'
+#' Part of the tlboot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ic See Usage.
+#' @param B Defaults to \code{1000L}.
+#' @param seed Defaults to \code{0L}.
+#' @return The value of \code{morie_tlboot}.
+#' @export
 multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
   morie_tlboot(data = NULL, estimator = NULL, B = B,
                seed = seed, method = "multiplier", ic = ic)
 }
 
+#' moment_check
+#'
+#' Part of the tlboot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param replicates See Usage.
+#' @param target_mean See Usage.
+#' @param target_se See Usage.
+#' @param tol Defaults to \code{0.15}.
+#' @return A list with \code{mean}, \code{se}, \code{mean_error}, \code{se_ratio}, \code{first_two_moments_ok}, \code{note}.
+#' @export
 moment_check <- function(replicates, target_mean, target_se,
                          tol = 0.15) {
   v <- as.numeric(replicates)

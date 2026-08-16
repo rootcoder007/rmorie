@@ -21,6 +21,16 @@
   w
 }
 
+#' morie_rgs_functional_regression
+#'
+#' Part of the rgs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param basis Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals}, \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve}, \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
+#' @export
 morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"
   y <- as.numeric(Y)

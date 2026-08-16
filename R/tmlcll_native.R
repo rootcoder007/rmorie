@@ -162,6 +162,15 @@
 
 # Public entry points
 
+#' morie_clpm_coefficients
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y}, \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{parametrization}, \code{caveat}.
+#' @export
 morie_clpm_coefficients <- function(X, Y) {
   xs <- .tmlcll_mat(X)
   ys <- .tmlcll_mat(Y)
@@ -204,6 +213,14 @@ morie_clpm_coefficients <- function(X, Y) {
   )
 }
 
+#' morie_within_between_decomposition
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @return A list with \code{person_means}, \code{within}, \code{between_variance}, \code{within_variance}.
+#' @export
 morie_within_between_decomposition <- function(P) {
   rows <- .tmlcll_mat(P)
   n <- nrow(rows)
@@ -219,6 +236,15 @@ morie_within_between_decomposition <- function(P) {
   )
 }
 
+#' morie_ri_clpm_coefficients
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y}, \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{between_variance_x}, \code{between_variance_y}, \code{parametrization}, \code{note}.
+#' @export
 morie_ri_clpm_coefficients <- function(X, Y) {
   dx <- morie_within_between_decomposition(X)
   dy <- morie_within_between_decomposition(Y)
@@ -237,6 +263,19 @@ morie_ri_clpm_coefficients <- function(X, Y) {
   )
 }
 
+#' morie_tmle_cross_lagged
+#'
+#' Part of the tmlcll_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param X See Usage.
+#' @param time See Usage.
+#' @param g Defaults to \code{NULL}.
+#' @param bounds Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{n_waves}, \code{method}, \code{note}.
+#' @export
 morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
   yv <- .tmlcll_vec(y)
   a <- .tmlcll_vec(D)

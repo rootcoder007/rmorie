@@ -61,6 +61,18 @@
   }
 }
 
+#' A simple reward machine <U, u0, delta_u, delta_r> (Defs 3.1-3.2)
+#'
+#' Edges are list(u, formula, u_next, reward). formula is either the
+#' string "true" or list(positive, negative) of proposition names. Edges
+#' are tested in the order given and the first match wins; if none
+#' matches, the machine stays in u and pays 0.
+#'
+#' @param edges See Usage.
+#' @param u0 Defaults to \code{0}.
+#' @param terminal Defaults to \code{c()}.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
   # A simple reward machine <U, u0, delta_u, delta_r> (Defs 3.1-3.2).
   # Edges are list(u, formula, u_next, reward). formula is either the
@@ -84,6 +96,16 @@ morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
   m
 }
 
+#' (delta_u(u, sigma), delta_r(u, delta_u(u, sigma)))
+#'
+#' Part of the rmrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param machine See Usage.
+#' @param u See Usage.
+#' @param sigma See Usage.
+#' @return A list with \code{u}, \code{reward}.
+#' @export
 morie_rmrl_machine_step <- function(machine, u, sigma) {
   # (delta_u(u, sigma), delta_r(u, delta_u(u, sigma))).
   if (as.character(u) %in% machine$terminal) {
@@ -97,6 +119,15 @@ morie_rmrl_machine_step <- function(machine, u, sigma) {
   list(u=u, reward=0.0)
 }
 
+#' Drive a machine over a sequence of truth assignments. labels is
+#'
+#' sigma_0, sigma_1, ..., i.e. L(s) for each visited state. Returns the
+#' machine-state trajectory and the rewards emitted.
+#'
+#' @param machine See Usage.
+#' @param labels See Usage.
+#' @return A list with \code{estimate}, \code{states}, \code{rewards}, \code{total_reward}, \code{final_state}, \code{accepted}, \code{method}.
+#' @export
 morie_rmrl_reward_machine_run <- function(machine, labels) {
   # Drive a machine over a sequence of truth assignments. labels is
   # sigma_0, sigma_1, ..., i.e. L(s) for each visited state. Returns
@@ -147,6 +178,27 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
   best[[as.integer(.ghc_unif(rng, 1L) * length(best)) + 1L]]
 }
 
+#' morie_rmrl
+#'
+#' Part of the rmrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param machines See Usage.
+#' @param states See Usage.
+#' @param actions See Usage.
+#' @param step See Usage.
+#' @param label See Usage.
+#' @param gamma Defaults to \code{0.9}.
+#' @param alpha Defaults to \code{0.5}.
+#' @param epsilon Defaults to \code{0.1}.
+#' @param episodes Defaults to \code{500}.
+#' @param horizon Defaults to \code{100}.
+#' @param start Defaults to \code{NULL}.
+#' @param dead_end Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param task_order Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{n_qfunctions}, \code{episodes}, \code{method}.
+#' @export
 morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
                        alpha=0.5, epsilon=0.1, episodes=500, horizon=100,
                        start=NULL, dead_end=NULL, seed=0,
@@ -285,6 +337,26 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
   )
 }
 
+#' morie_rmrl_qlearn_flat
+#'
+#' Part of the rmrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param machine See Usage.
+#' @param states See Usage.
+#' @param actions See Usage.
+#' @param step See Usage.
+#' @param label See Usage.
+#' @param gamma Defaults to \code{0.9}.
+#' @param alpha Defaults to \code{0.5}.
+#' @param epsilon Defaults to \code{0.1}.
+#' @param episodes Defaults to \code{500}.
+#' @param horizon Defaults to \code{100}.
+#' @param start Defaults to \code{NULL}.
+#' @param dead_end Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{q}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{method}.
+#' @export
 morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
                                    gamma=0.9, alpha=0.5, epsilon=0.1,
                                    episodes=500, horizon=100, start=NULL,
@@ -363,6 +435,13 @@ morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
   )
 }
 
+#' morie_rmrl_cheatsheet
+#'
+#' Part of the rmrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_rmrl_cheatsheet <- function() {
   paste0(
     "rmrl: reward machine <U, u0, delta_u, delta_r> (Icarte ",

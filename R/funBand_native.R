@@ -205,6 +205,13 @@ morie_funBand <- function(Y, alpha = 0.05, x = NULL, lam = NULL,
 #' @export
 morie_functional_band <- morie_funBand
 
+#' morie_funBand_cheatsheet
+#'
+#' Part of the funBand_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_funBand_cheatsheet <- function() {
   paste0("funBand: smoothing-spline band. Theorem 1 of Wahba (1983): ",
          "cov(g_hat|Y) = sigma^2 A(lambda), so the interval at t_i is ",

@@ -43,6 +43,16 @@
     as_cell(cl[[1L]], cl[[2L]], cl[[3L]], cl[[4L]]))
 }
 
+#' morie_smatch_poisson_design
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cases See Usage.
+#' @param risk_periods See Usage.
+#' @param age_breaks Defaults to \code{numeric(0)}.
+#' @return A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age}, \code{n_people}, \code{n_rows}.
+#' @export
 morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
   rp <- lapply(risk_periods, function(r) c(as.numeric(r[1]), as.numeric(r[2])))
   ab <- as.numeric(age_breaks)
@@ -83,6 +93,19 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
        n_people = P, n_rows = length(y))
 }
 
+#' morie_smatch_sccs_poisson_fit
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cases See Usage.
+#' @param risk_periods See Usage.
+#' @param age_breaks Defaults to \code{numeric(0)}.
+#' @param iters Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-12}.
+#' @param ridge Defaults to \code{1e-09}.
+#' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{age_effects}, \code{individual_effects}, \code{coef}, \code{converged}, \code{iterations}, \code{n_rows}, \code{n_people}, \code{method}, \code{identical_to}.
+#' @export
 morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
                              iters = 200, tol = 1e-12, ridge = 1e-9) {
   d <- morie_smatch_poisson_design(cases, risk_periods, age_breaks = age_breaks)
@@ -127,6 +150,18 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 
 .smatch_pnorm <- function(z) pnorm(z)
 
+#' morie_smatch_sample_size
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param log_ri See Usage.
+#' @param r See Usage.
+#' @param p_exposed See Usage.
+#' @param alpha Defaults to \code{0.05}.
+#' @param power Defaults to \code{0.8}.
+#' @return A list with \code{n_events}, \code{n_events_ceiling}, \code{rho}, \code{A}, \code{B}, \code{C}, \code{z_alpha_2}, \code{z_power}, \code{log_ri}, \code{r}, \code{p_exposed}, \code{assumes}, \code{method}.
+#' @export
 morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
   b <- as.numeric(log_ri)
   rr <- as.numeric(r)
@@ -164,6 +199,18 @@ morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power =
        method = "Whitaker et al. (2006) Sec. 7.6")
 }
 
+#' morie_smatch_power
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_events See Usage.
+#' @param log_ri See Usage.
+#' @param r See Usage.
+#' @param p_exposed See Usage.
+#' @param alpha Defaults to \code{0.05}.
+#' @return A list with \code{power}, \code{z_power}, \code{n_events}, \code{A}, \code{B}, \code{C}.
+#' @export
 morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
   s <- morie_smatch_sample_size(log_ri, r, p_exposed, alpha = alpha, power = 0.5)
   A <- s$A; B <- s$B; C <- s$C
@@ -174,6 +221,15 @@ morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
        n_events = as.numeric(n_events), A = A, B = B, C = C)
 }
 
+#' morie_smatch_relative_efficiency
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @param log_ri See Usage.
+#' @return A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri}, \code{interpretation}.
+#' @export
 morie_smatch_relative_efficiency <- function(r, log_ri) {
   rr <- as.numeric(r); b <- as.numeric(log_ri)
   if (!(rr > 0.0 && rr < 1.0))

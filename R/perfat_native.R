@@ -7,6 +7,17 @@
 .dot <- function(a, b) sum(a * b)
 .norm2 <- function(a) sum(a * a)
 
+#' draw_projections
+#'
+#' Part of the perfat_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param d See Usage.
+#' @param seed Defaults to \code{0L}.
+#' @param orthogonal Defaults to \code{TRUE}.
+#' @return The value of \code{[}.
+#' @export
 draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
   m <- as.integer(m); d <- as.integer(d)
   if (m < 1L || d < 1L)
@@ -46,6 +57,17 @@ draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
   out[seq_len(m), , drop = FALSE]
 }
 
+#' favor_features
+#'
+#' Part of the perfat_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param omegas See Usage.
+#' @param kind Defaults to \code{"positive"}.
+#' @param eps Defaults to \code{1e-06}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
   if (!kind %in% c("positive", "trig"))
     stop(sprintf("perfat: kind must be positive or trig, got %s", kind))
@@ -69,11 +91,33 @@ favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
   out
 }
 
+#' kernel_estimate
+#'
+#' Part of the perfat_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param omegas See Usage.
+#' @param kind Defaults to \code{"positive"}.
+#' @return The value of \code{.dot}.
+#' @export
 kernel_estimate <- function(x, y, omegas, kind = "positive") {
   f <- favor_features(rbind(x, y), omegas, kind = kind)
   .dot(f[1L, ], f[2L, ])
 }
 
+#' softmax_attention
+#'
+#' Part of the perfat_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @param causal Defaults to \code{FALSE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 softmax_attention <- function(Q, K, V, causal = FALSE) {
   Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
   L <- nrow(Qm); d <- ncol(Qm); dv <- ncol(Vm)
@@ -88,6 +132,21 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
   out
 }
 
+#' favor_attention
+#'
+#' Part of the perfat_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @param n_features Defaults to \code{128L}.
+#' @param seed Defaults to \code{0L}.
+#' @param kind Defaults to \code{"positive"}.
+#' @param orthogonal Defaults to \code{TRUE}.
+#' @param causal Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind}, \code{orthogonal}, \code{causal}, \code{L}, \code{d}, \code{d_v}, \code{method}.
+#' @export
 favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,
                             kind = "positive", orthogonal = TRUE,
                             causal = FALSE) {

@@ -46,6 +46,15 @@
 }
 
 # --- default library, in the shape Pirracchio et al. use ------------
+#' Default library, in the shape Pirracchio et al. use ------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param ridge_penalties Defaults to \code{c(0, 1, 10)}.
+#' @return The value of \code{lib}, as built in the body.
+#' @export
 default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
   lib <- list(
     list(name = "intercept", kind = "intercept", penalty = 0),
@@ -188,6 +197,16 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 }
 
 # --- cross-validated risk per column of Z ---------------------------
+#' Cross-validated risk per column of Z ---------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param Z See Usage.
+#' @param loss Defaults to \code{"l2"}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 cv_risk <- function(y, Z, loss = "l2") {
   y <- as.numeric(y); Z <- as.matrix(Z)
   J <- ncol(Z)
@@ -206,6 +225,22 @@ cv_risk <- function(y, Z, loss = "l2") {
 }
 
 # --- the Super Learner ---------------------------------------------
+#' The Super Learner ---------------------------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param library Defaults to \code{NULL}.
+#' @param n_folds Defaults to \code{10}.
+#' @param meta Defaults to \code{"nnls"}.
+#' @param binary Defaults to \code{NULL}.
+#' @param loss Defaults to \code{"l2"}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param honest_level_one Defaults to \code{TRUE}.
+#' @return A list with \code{fitted}, \code{estimate}, \code{weights}, \code{weight_vector}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{best_candidate_risk}, \code{discrete_choice}, \code{level_one}, \code{candidate_fits}, \code{library}, \code{n}, \code{n_folds}, \code{meta}, \code{loss}, \code{binary}, \code{honest_level_one}, \code{method}.
+#' @export
 super_learner <- function(y, X, library = NULL, n_folds = 10,
                           meta = "nnls", binary = NULL, loss = "l2",
                           ridge = 1e-8, honest_level_one = TRUE) {
@@ -287,6 +322,21 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 }
 
 # --- IPTW: propensity by Super Learner, weights A/g + (1-A)/(1-g)
+#' IPTW: propensity by Super Learner, weights A/g + (1-A)/(1-g)
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param library Defaults to \code{NULL}.
+#' @param n_folds Defaults to \code{10}.
+#' @param meta Defaults to \code{"nnls"}.
+#' @param trim Defaults to \code{0.01}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param stabilize Defaults to \code{FALSE}.
+#' @return A list with \code{propensity}, \code{weights}, \code{estimate}, \code{sl_weights}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n}, \code{trim}, \code{stabilized}, \code{library}, \code{method}.
+#' @export
 flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
                           meta = "nnls", trim = 0.01, ridge = 1e-8,
                           stabilize = FALSE) {
@@ -326,6 +376,22 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 }
 
 # --- ATE by weighted regression of Y on A --------------------------
+#' ATE by weighted regression of Y on A --------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param library Defaults to \code{NULL}.
+#' @param n_folds Defaults to \code{10}.
+#' @param meta Defaults to \code{"nnls"}.
+#' @param trim Defaults to \code{0.01}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param level Defaults to \code{0.95}.
+#' @return A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated}, \code{mean_control}, \code{propensity}, \code{weights}, \code{sl_weights}, \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{n}, \code{level}, \code{method}.
+#' @export
 iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
                      meta = "nnls", trim = 0.01, ridge = 1e-8,
                      level = 0.95) {

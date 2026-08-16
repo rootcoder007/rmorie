@@ -1,22 +1,34 @@
-% Generated from the module source by ledger/gen_rd.R -- roxygen2 hangs
-% on this package. Usage comes from args(), so it tracks the formals.
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
 \name{morie_alfbnp_af3_sample}
 \alias{morie_alfbnp_af3_sample}
-\alias{morie_alfbnp}
-\title{AlphaFold-3 SampleDiffusion (Abramson et al. 2024)}
+\title{morie_alfbnp_af3_sample}
 \usage{
 morie_alfbnp_af3_sample(n_atoms = NULL, denoiser = NULL, clean = NULL, steps = 20L, sigma_data = 16, s_max = 160, s_min = 4e-04, rho = 7, gamma_0 = 0.8, gamma_min = 1, noise_scale = 1.003, step_scale = 1.5, noise = NULL, seed = 2, x_init = NULL, ridge = 1e-06)
 }
+\arguments{
+\item{n_atoms}{Defaults to \code{NULL}.}
+\item{denoiser}{Defaults to \code{NULL}.}
+\item{clean}{Defaults to \code{NULL}.}
+\item{steps}{Defaults to \code{20L}.}
+\item{sigma_data}{Defaults to \code{16}.}
+\item{s_max}{Defaults to \code{160}.}
+\item{s_min}{Defaults to \code{4e-04}.}
+\item{rho}{Defaults to \code{7}.}
+\item{gamma_0}{Defaults to \code{0.8}.}
+\item{gamma_min}{Defaults to \code{1}.}
+\item{noise_scale}{Defaults to \code{1.003}.}
+\item{step_scale}{Defaults to \code{1.5}.}
+\item{noise}{Defaults to \code{NULL}.}
+\item{seed}{Defaults to \code{2}.}
+\item{x_init}{Defaults to \code{NULL}.}
+\item{ridge}{Defaults to \code{1e-06}.}
+}
 \description{
-R arm of alfbnp -- AlphaFold-3 SampleDiffusion (Abramson et al. 2024).   sigma_data 16, s_max 160, s_min 4e-4, rho 7, gamma_0 0.8, gamma_min 1.0,   noise_scale 1.003, step_scale 1.5.
+Part of the alfbnp_native implementation; see the file header for the source it follows.
 }
 \value{
-A list with components \code{sigma_data}, \code{estimate}, \code{coords}, \code{sigmas}, \code{trace}, \code{denoiser_coefs}, \code{steps}, \code{rmsd_to_reference}, \code{n_atoms}, \code{route}, \code{method}, \code{note}.
-}
-\references{
-Abramson, J. et al. (2024) Nature 630(8016), 493-500,
-  doi:10.1038/s41586-024-07487-w. Algorithm 18 and the Table 6 defaults:
-Karras, T. et al. (2022) NeurIPS 35, 26565-26577 -- the sigma schedule.
-Vincent, P. (2011) Neural Computation 23(7), 1661-1674 -- the fit objective.
+A list with \code{estimate}, \code{coords}, \code{sigmas}, \code{trace}, \code{denoiser_coefs}, \code{sigma_data}, \code{steps}, \code{rmsd_to_reference}, \code{n_atoms}, \code{route}, \code{method}, \code{note}.
 }
 \keyword{internal}

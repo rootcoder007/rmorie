@@ -25,6 +25,18 @@
 # effect, the same two g-formula parametrizations with the same
 # consistency check, and the same LTMLE-with-clustering entry point.
 
+#' The LTMLE-with-clustering entry point
+#'
+#' Part of the tlclust_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q_seq See Usage.
+#' @param H_seq See Usage.
+#' @param Y See Usage.
+#' @param cluster See Usage.
+#' @param ic Defaults to \code{NULL}.
+#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{estimate}, \code{psi}, \code{se_clustered}, \code{se_naive}, \code{ci}, \code{n_clusters}, \code{design_effect}, \code{method}, \code{note}, \code{naive}, \code{pooled}, \code{sequential}.
+#' @export
 morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
   # the LTMLE-with-clustering entry point
   if (is.list(Q_seq) && !is.null(Y) && !is.null(cluster)) {
@@ -50,6 +62,14 @@ morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
   }
 }
 
+#' naive_variance
+#'
+#' Part of the tlclust_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ic See Usage.
+#' @return A numeric value.
+#' @export
 naive_variance <- function(ic) {
   v <- as.numeric(ic)
   n <- length(v)
@@ -59,6 +79,15 @@ naive_variance <- function(ic) {
   sqrt(sum((v - m)^2) / (n - 1) / n)
 }
 
+#' cluster_variance
+#'
+#' Part of the tlclust_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ic See Usage.
+#' @param cluster See Usage.
+#' @return A list with \code{se}, \code{n_clusters}, \code{cluster_sums}, \code{note}.
+#' @export
 cluster_variance <- function(ic, cluster) {
   v <- as.numeric(ic)
   c <- as.character(cluster)
@@ -77,6 +106,15 @@ cluster_variance <- function(ic, cluster) {
        note = "the CLUSTER is independent, not the individual")
 }
 
+#' design_effect
+#'
+#' Part of the tlclust_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ic See Usage.
+#' @param cluster See Usage.
+#' @return A list with \code{se_naive}, \code{se_clustered}, \code{ratio}, \code{note}.
+#' @export
 design_effect <- function(ic, cluster) {
   a <- naive_variance(ic)
   b <- cluster_variance(ic, cluster)$se
@@ -85,6 +123,15 @@ design_effect <- function(ic, cluster) {
        note = "a ratio above 1 is the understatement caused by treating within-cluster observations as independent")
 }
 
+#' g_formula_pooled
+#'
+#' Part of the tlclust_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q_final See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{psi}, \code{parametrization}, \code{note}.
+#' @export
 g_formula_pooled <- function(Q_final, weights = NULL) {
   q <- as.numeric(Q_final)
   w <- if (is.null(weights)) rep(1, length(q)) else as.numeric(weights)
@@ -96,6 +143,14 @@ g_formula_pooled <- function(Q_final, weights = NULL) {
        note = "one regression on the full history")
 }
 
+#' g_formula_sequential
+#'
+#' Part of the tlclust_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q_seq See Usage.
+#' @return A list with \code{psi}, \code{parametrization}, \code{T}, \code{note}.
+#' @export
 g_formula_sequential <- function(Q_seq) {
   if (length(Q_seq) == 0L)
     stop("tlclust: the sequence is empty")

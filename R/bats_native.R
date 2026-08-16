@@ -124,6 +124,15 @@ morie_bats <- function(y, seasonal_periods = numeric(0),
                      "that fits at different omega are comparable"))
 }
 
+#' box_cox
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param omega See Usage.
+#' @return A numeric value.
+#' @export
 box_cox <- function(y, omega) {
   y <- as.numeric(y)
   if (any(y <= 0))
@@ -132,6 +141,15 @@ box_cox <- function(y, omega) {
   (y^omega - 1) / omega
 }
 
+#' inv_box_cox
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param omega See Usage.
+#' @return A numeric value.
+#' @export
 inv_box_cox <- function(z, omega) {
   z <- as.numeric(z)
   if (omega == 0) return(exp(z))
@@ -141,6 +159,15 @@ inv_box_cox <- function(z, omega) {
   base^(1 / omega)
 }
 
+#' seasonal_harmonics
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param k Defaults to \code{NULL}.
+#' @return A vector, from \code{vapply}.
+#' @export
 seasonal_harmonics <- function(m, k = NULL) {
   m <- as.numeric(m)
   if (m <= 1) stop("bats: a seasonal period must exceed 1")
@@ -160,6 +187,20 @@ seasonal_harmonics <- function(m, k = NULL) {
   vapply(seq_len(k), function(j) 2 * pi * j / m, numeric(1))
 }
 
+#' BatsSpec
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param periods Defaults to \code{numeric(0)}.
+#' @param harmonics Defaults to \code{NULL}.
+#' @param use_box_cox Defaults to \code{FALSE}.
+#' @param use_trend Defaults to \code{TRUE}.
+#' @param damped Defaults to \code{FALSE}.
+#' @param p Defaults to \code{0L}.
+#' @param q Defaults to \code{0L}.
+#' @return The value of \code{structure}.
+#' @export
 BatsSpec <- function(periods = numeric(0), harmonics = NULL,
                      use_box_cox = FALSE, use_trend = TRUE,
                      damped = FALSE, p = 0L, q = 0L) {
@@ -197,6 +238,14 @@ BatsSpec <- function(periods = numeric(0), harmonics = NULL,
             class = "BatsSpec")
 }
 
+#' n_states
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @return A numeric value.
+#' @export
 n_states <- function(spec) {
   n <- 1L + if (spec$use_trend) 1L else 0L
   if (!is.null(spec$harmonics))
@@ -206,6 +255,14 @@ n_states <- function(spec) {
   n + spec$p + spec$q
 }
 
+#' n_free
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @return The value of \code{n}, as built in the body.
+#' @export
 n_free <- function(spec) {
   n <- 1L
   if (spec$use_trend) {
@@ -219,6 +276,14 @@ n_free <- function(spec) {
   n
 }
 
+#' label
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @return A character value.
+#' @export
 label <- function(spec) {
   head <- if (!is.null(spec$harmonics)) "TBATS" else "BATS"
   om <- if (spec$use_box_cox) "omega" else "1"
@@ -264,6 +329,18 @@ label <- function(spec) {
        ma = ma, omega = omega)
 }
 
+#' bats_filter
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @param x0 See Usage.
+#' @param long_run_b Defaults to \code{0}.
+#' @return A list with \code{resid}, \code{fitted}, \code{carry}.
+#' @export
 bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   u <- .unpack(spec, theta)
   alpha <- u$alpha; beta <- u$beta; phi <- u$phi
@@ -349,6 +426,17 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   list(resid = resid, fitted = fitted, carry = carry)
 }
 
+#' fit_seed_state
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @param long_run_b Defaults to \code{0}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
   n <- length(z)
   ns <- n_states(spec)
@@ -384,6 +472,15 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
   c(out, carry$dlag, carry$elag)
 }
 
+#' state_matrices
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{w}, \code{fmat}, \code{g}.
+#' @export
 state_matrices <- function(spec, theta) {
   ns <- n_states(spec)
   zero <- rep(0, ns)
@@ -404,6 +501,16 @@ state_matrices <- function(spec, theta) {
   list(w = w, fmat = fcols, g = g)
 }
 
+#' spectral_radius
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @param tol Defaults to \code{1e-06}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 spectral_radius <- function(spec, theta, tol = 1e-6) {
   sm <- state_matrices(spec, theta)
   ns <- length(sm$w)
@@ -413,6 +520,15 @@ spectral_radius <- function(spec, theta, tol = 1e-6) {
   if (length(rest) == 0L) 0 else max(rest)
 }
 
+#' all_eigenvalues
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 all_eigenvalues <- function(spec, theta) {
   sm <- state_matrices(spec, theta)
   ns <- length(sm$w)
@@ -421,10 +537,30 @@ all_eigenvalues <- function(spec, theta) {
   sort(ev, decreasing = TRUE)
 }
 
+#' is_forecastable
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param spec See Usage.
+#' @param theta See Usage.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A logical value.
+#' @export
 is_forecastable <- function(spec, theta, tol = 1e-8) {
   spectral_radius(spec, theta) < 1 - tol
 }
 
+#' concentrated_loglik
+#'
+#' Part of the bats_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param resid See Usage.
+#' @param omega See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 concentrated_loglik <- function(y, resid, omega) {
   n <- length(resid)
   sse <- sum(resid^2)

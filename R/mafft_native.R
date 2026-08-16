@@ -74,6 +74,16 @@ names(.MAFFT_PHAT) <- .MAFFT_AA
   list(seqs = out, type = seq_type)
 }
 
+#' residue_vectors
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param group See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param seq_type Defaults to \code{"aa"}.
+#' @return A list with \code{vol}, \code{pol}.
+#' @export
 residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
   rows <- vapply(group, function(s) toupper(as.character(s)), character(1))
   if (length(rows) == 0L)
@@ -148,6 +158,19 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
   out
 }
 
+#' correlation
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param group1 See Usage.
+#' @param group2 See Usage.
+#' @param weights1 Defaults to \code{NULL}.
+#' @param weights2 Defaults to \code{NULL}.
+#' @param seq_type Defaults to \code{"aa"}.
+#' @param method Defaults to \code{"fft"}.
+#' @return A list with \code{lags}, \code{c}, \code{size}.
+#' @export
 correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
                         seq_type = "aa", method = "fft") {
   if (!(method %in% c("fft", "direct")))
@@ -220,6 +243,15 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
   list(S = S, f = f)
 }
 
+#' jtt_matrix
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pam Defaults to \code{200L}.
+#' @param scale Defaults to \code{10}.
+#' @return A list with \code{matrix}, \code{freqs}, \code{P}, \code{Q}, \code{pam}, \code{rate}.
+#' @export
 jtt_matrix <- function(pam = 200L, scale = 10.0) {
   if (pam <= 0)
     stop("mafft: pam must be positive")
@@ -288,6 +320,19 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
   if (is.null(v)) 0.0 else v
 }
 
+#' normalized_similarity_matrix
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param raw_matrix Defaults to \code{NULL}.
+#' @param freqs Defaults to \code{NULL}.
+#' @param s_a Defaults to \code{0.06}.
+#' @param seq_type Defaults to \code{"aa"}.
+#' @param mode Defaults to \code{"normalized"}.
+#' @param default Defaults to \code{"jtt200"}.
+#' @return A list with \code{matrix}, \code{s_a}, \code{alphabet}, \code{average1}, \code{average2}, \code{freqs}, \code{mode}.
+#' @export
 normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
                                          s_a = 0.06, seq_type = "aa",
                                          mode = "normalized",
@@ -442,6 +487,20 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
   list(out1 = out1, out2 = out2)
 }
 
+#' group_align
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param group1 See Usage.
+#' @param group2 See Usage.
+#' @param scoring See Usage.
+#' @param weights1 Defaults to \code{NULL}.
+#' @param weights2 Defaults to \code{NULL}.
+#' @param s_op Defaults to \code{2.4}.
+#' @param anchors Defaults to \code{NULL}.
+#' @return The value of \code{.mafft_nw}.
+#' @export
 group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NULL,
                         s_op = 2.4, anchors = NULL) {
   g1 <- vapply(group1, function(s) toupper(as.character(s)), character(1))
@@ -489,6 +548,24 @@ group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NUL
   .mafft_nw(g1, g2, M, w1, w2, s_op)
 }
 
+#' find_homologous_segments
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param group1 See Usage.
+#' @param group2 See Usage.
+#' @param scoring See Usage.
+#' @param weights1 Defaults to \code{NULL}.
+#' @param weights2 Defaults to \code{NULL}.
+#' @param seq_type Defaults to \code{"aa"}.
+#' @param window Defaults to \code{30L}.
+#' @param n_peaks Defaults to \code{20L}.
+#' @param threshold Defaults to \code{0.7}.
+#' @param max_len Defaults to \code{150L}.
+#' @param corr_method Defaults to \code{"fft"}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 find_homologous_segments <- function(group1, group2, scoring,
                                      weights1 = NULL, weights2 = NULL,
                                      seq_type = "aa", window = 30L,
@@ -551,6 +628,14 @@ find_homologous_segments <- function(group1, group2, scoring,
   }
 }
 
+#' arrange_segments
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param segments See Usage.
+#' @return A vector, from \code{rev}.
+#' @export
 arrange_segments <- function(segments) {
   segs <- segments[order(vapply(segments, `[`, integer(1), 1L))]
   n <- length(segs)
@@ -584,6 +669,14 @@ arrange_segments <- function(segments) {
   out
 }
 
+#' sixtuple_distance
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seqs See Usage.
+#' @return The value of \code{D}, as built in the body.
+#' @export
 sixtuple_distance <- function(seqs) {
   coded <- c()
   for (s in seqs) {
@@ -631,6 +724,14 @@ sixtuple_distance <- function(seqs) {
   D
 }
 
+#' guide_tree
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 guide_tree <- function(D) {
   n <- nrow(D)
   if (n < 2L) stop("mafft: a guide tree needs at least two sequences")
@@ -669,6 +770,20 @@ guide_tree <- function(D) {
 
 .mafft_weights <- function(k) rep(1.0 / k, k)
 
+#' progressive_align
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seqs See Usage.
+#' @param scoring See Usage.
+#' @param tree Defaults to \code{NULL}.
+#' @param seq_type Defaults to \code{"aa"}.
+#' @param s_op Defaults to \code{2.4}.
+#' @param use_fft Defaults to \code{TRUE}.
+#' @param ... Passed through.
+#' @return A vector, from \code{unlist}.
+#' @export
 progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
                               s_op = 2.4, use_fft = TRUE, ...) {
   seqs <- vapply(seqs, function(s) toupper(as.character(s)), character(1))
@@ -720,6 +835,17 @@ progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
+#' wsp_score
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alignment See Usage.
+#' @param scoring See Usage.
+#' @param s_op Defaults to \code{2.4}.
+#' @param weights Defaults to \code{NULL}.
+#' @return The value of \code{total}, as built in the body.
+#' @export
 wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
   aln <- vapply(alignment, function(s) toupper(as.character(s)), character(1))
   if (length(unique(vapply(aln, nchar, integer(1)))) != 1L)
@@ -763,6 +889,21 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
   }, character(1))
 }
 
+#' iterative_refine
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alignment See Usage.
+#' @param scoring See Usage.
+#' @param tree Defaults to \code{NULL}.
+#' @param s_op Defaults to \code{2.4}.
+#' @param max_iterate Defaults to \code{16L}.
+#' @param seq_type Defaults to \code{"aa"}.
+#' @param use_fft Defaults to \code{TRUE}.
+#' @param ... Passed through.
+#' @return A list with \code{aln}, \code{score}, \code{rounds}.
+#' @export
 iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
                              max_iterate = 16L, seq_type = "aa",
                              use_fft = TRUE, ...) {
@@ -819,6 +960,26 @@ iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
   list(aln = aln, score = best, rounds = rounds)
 }
 
+#' mafft_alignment
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sequences See Usage.
+#' @param method Defaults to \code{"FFT-NS-2"}.
+#' @param seq_type Defaults to \code{NULL}.
+#' @param raw_matrix Defaults to \code{NULL}.
+#' @param freqs Defaults to \code{NULL}.
+#' @param s_a Defaults to \code{0.06}.
+#' @param s_op Defaults to \code{2.4}.
+#' @param matrix Defaults to \code{"normalized"}.
+#' @param window Defaults to \code{30L}.
+#' @param n_peaks Defaults to \code{20L}.
+#' @param threshold Defaults to \code{0.7}.
+#' @param max_len Defaults to \code{150L}.
+#' @param max_iterate Defaults to \code{16L}.
+#' @return A list with \code{estimate}, \code{alignment}, \code{score}, \code{method}, \code{seq_type}, \code{length}, \code{n}, \code{s_a}, \code{s_op}, \code{matrix_mode}, \code{tree}, \code{refine_rounds}, \code{note}.
+#' @export
 mafft_alignment <- function(sequences, method = "FFT-NS-2", seq_type = NULL,
                             raw_matrix = NULL, freqs = NULL, s_a = 0.06,
                             s_op = 2.4, matrix = "normalized",
@@ -875,6 +1036,15 @@ mafftalignment <- mafft_alignment
         "FFT-NS-i, NW-NS-1, NW-NS-2.", sep = "")
 }
 
+#' morie_mafft
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param op See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{switch}.
+#' @export
 morie_mafft <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("mafft: op must be one of mafft_alignment, residue_vectors, correlation, find_homologous_segments, arrange_segments, normalized_similarity_matrix, jtt_matrix, group_align, sixtuple_distance, guide_tree, progressive_align, iterative_refine, wsp_score, cheatsheet")

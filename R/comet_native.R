@@ -22,6 +22,16 @@
 
 .comet_vec <- function(x) as.numeric(x)
 
+#' pooled_features
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hyp See Usage.
+#' @param src See Usage.
+#' @param ref See Usage.
+#' @return A list with \code{features}, \code{dim}, \code{hyp_ref_diff}, \code{hyp_src_diff}, \code{note}.
+#' @export
 pooled_features <- function(hyp, src, ref) {
   h <- .comet_vec(hyp); s <- .comet_vec(src); r <- .comet_vec(ref)
   if (!(length(h) == length(s) && length(s) == length(r)))
@@ -37,6 +47,18 @@ pooled_features <- function(hyp, src, ref) {
                     "translation"))
 }
 
+#' estimator_score
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hyp See Usage.
+#' @param src See Usage.
+#' @param ref See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
+#' @export
 estimator_score <- function(hyp, src, ref, W, b = NULL) {
   W <- as.matrix(W); storage.mode(W) <- "double"
   f <- pooled_features(hyp, src, ref)$features
@@ -58,6 +80,18 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
   sqrt(sum((x - y)^2))
 }
 
+#' triplet_loss
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param better See Usage.
+#' @param worse See Usage.
+#' @param src See Usage.
+#' @param ref See Usage.
+#' @param margin Defaults to \code{1}.
+#' @return A list with \code{loss}, \code{source_term}, \code{reference_term}, \code{satisfied}, \code{note}.
+#' @export
 triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
   m <- as.numeric(margin)
   if (m <= 0) stop("comet: the margin must be positive")
@@ -69,6 +103,15 @@ triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
                     "closer to BOTH anchors by the margin"))
 }
 
+#' kendall_tau
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param human See Usage.
+#' @return A list with \code{tau}, \code{concordant}, \code{discordant}, \code{n_segments}.
+#' @export
 kendall_tau <- function(scores, human) {
   a <- .comet_vec(scores); b <- .comet_vec(human)
   if (length(a) != length(b))
@@ -90,6 +133,17 @@ kendall_tau <- function(scores, human) {
        concordant = conc, discordant = disc, n_segments = n)
 }
 
+#' reference_free
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hyp See Usage.
+#' @param src See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @return A list with \code{score}, \code{reference_used}, \code{note}.
+#' @export
 reference_free <- function(hyp, src, W, b = NULL) {
   h <- .comet_vec(hyp); s <- .comet_vec(src)
   if (length(h) != length(s))
@@ -110,6 +164,18 @@ reference_free <- function(hyp, src, W, b = NULL) {
 cometmetric <- estimator_score
 comet <- estimator_score
 
+#' morie_comet
+#'
+#' Part of the comet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hyp See Usage.
+#' @param src See Usage.
+#' @param ref See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @return The value of \code{estimator_score}.
+#' @export
 morie_comet <- function(hyp, src, ref, W, b = NULL) {
   estimator_score(hyp, src, ref, W, b = b)
 }

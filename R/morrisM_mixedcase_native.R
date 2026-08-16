@@ -17,6 +17,19 @@
 # Saltelli (2007) Env. Modelling & Software 22, 1509-1518;
 # Saltelli et al. (2008) GSA Primer Sec. 3.2-3.3.
 
+#' morie_morrisM
+#'
+#' Part of the morrisM_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param fun See Usage.
+#' @param k See Usage.
+#' @param r Defaults to \code{10}.
+#' @param p Defaults to \code{4}.
+#' @param seed Defaults to \code{0}.
+#' @param bounds Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{mu}, \code{mu_star}, \code{sigma}, \code{elementary_effects}, \code{n_runs}, \code{delta}, \code{n_levels}, \code{r}, \code{p}, \code{k}, \code{method}.
+#' @export
 morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
                           bounds = NULL) {
   k <- as.integer(k); r <- as.integer(r); p <- as.integer(p)

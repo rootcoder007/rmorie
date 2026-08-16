@@ -90,6 +90,15 @@
 
 # Public functions (prefixed morie_genemt_ to avoid namespace collision)
 
+#' morie_genemt_ld_principal_components
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param G See Usage.
+#' @param keep Defaults to \code{0.999}.
+#' @return A list with \code{components}, \code{n_components}, \code{n_markers}, \code{variance_explained}, \code{note}.
+#' @export
 morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
   M <- as.matrix(G)
   storage.mode(M) <- "numeric"
@@ -137,6 +146,16 @@ morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
        note = "orthogonal by construction, so LD needs no permutation")
 }
 
+#' morie_genemt_gene_statistic
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param G See Usage.
+#' @param keep Defaults to \code{0.999}.
+#' @return A list with \code{F}, \code{df1}, \code{df2}, \code{p}, \code{z}, \code{n_markers}, \code{note}.
+#' @export
 morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
   yv <- as.numeric(y)
   pc <- morie_genemt_ld_principal_components(G, keep)
@@ -169,6 +188,16 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
        note = "an ANALYTIC p-value; no permutation")
 }
 
+#' morie_genemt_gene_covariates
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_markers See Usage.
+#' @param gene_length See Usage.
+#' @param ld_scores Defaults to \code{NULL}.
+#' @return A list with \code{covariates}, \code{names}, \code{note}.
+#' @export
 morie_genemt_gene_covariates <- function(n_markers, gene_length,
                                          ld_scores = NULL) {
   nm <- as.numeric(n_markers)
@@ -194,6 +223,16 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
                     "enriched for everything", sep = ""))
 }
 
+#' morie_genemt_gene_set_regression
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z_scores See Usage.
+#' @param membership See Usage.
+#' @param covariates Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p}, \code{n_genes}, \code{covariates_used}, \code{method}, \code{note}.
+#' @export
 morie_genemt_gene_set_regression <- function(z_scores, membership,
                                              covariates = NULL) {
   z <- as.numeric(z_scores)
@@ -232,6 +271,17 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
                     "coefficient", sep = ""))
 }
 
+#' morie_genemt_conditional_set_test
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z_scores See Usage.
+#' @param set_a See Usage.
+#' @param set_b See Usage.
+#' @param covariates Defaults to \code{NULL}.
+#' @return A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta}, \code{conditional_p}, \code{attenuation}, \code{note}.
+#' @export
 morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
                                              covariates = NULL) {
   z <- as.numeric(z_scores)
@@ -264,6 +314,13 @@ morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
                     "conditional coefficient collapses", sep = ""))
 }
 
+#' morie_genemt_cheatsheet
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_genemt_cheatsheet <- function() {
   paste("genemt: single markers are underpowered, so aggregate -- ",
         "but existing tools lost power to LINKAGE DISEQUILIBRIUM ",

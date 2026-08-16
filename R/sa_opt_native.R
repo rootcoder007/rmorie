@@ -46,6 +46,23 @@
   return(T0 / log(k + exp(1)))
 }
 
+#' morie_sa_opt
+#'
+#' Part of the sa_opt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fun See Usage.
+#' @param x0 See Usage.
+#' @param step Defaults to \code{1}.
+#' @param T0 Defaults to \code{1}.
+#' @param n_iter Defaults to \code{1000}.
+#' @param schedule Defaults to \code{"geometric"}.
+#' @param alpha Defaults to \code{0.99}.
+#' @param lower Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_sa_opt <- function(fun, x0, step=1.0, T0=1.0, n_iter=1000,
                          schedule="geometric", alpha=0.99, lower=NULL,
                          upper=NULL, seed=0) {

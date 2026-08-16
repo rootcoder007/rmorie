@@ -54,6 +54,15 @@
 COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 
 
+#' sasimi_fingerprint
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bits See Usage.
+#' @param n_bits Defaults to \code{NULL}.
+#' @return A vector, from \code{sort}.
+#' @export
 sasimi_fingerprint <- function(bits, n_bits = NULL) {
   bits <- as.vector(bits)
 
@@ -93,6 +102,15 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 }
 
 
+#' sasimi_counts
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fp_a See Usage.
+#' @param fp_b See Usage.
+#' @return A list with \code{a}, \code{b}, \code{c}, \code{union}.
+#' @export
 sasimi_counts <- function(fp_a, fp_b) {
   A <- sasimi_fingerprint(fp_a)
   B <- sasimi_fingerprint(fp_b)
@@ -112,6 +130,15 @@ sasimi_counts <- function(fp_a, fp_b) {
 }
 
 
+#' sasimi_tanimoto
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fp_a See Usage.
+#' @param fp_b See Usage.
+#' @return A numeric value.
+#' @export
 sasimi_tanimoto <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -119,6 +146,15 @@ sasimi_tanimoto <- function(fp_a, fp_b) {
 }
 
 
+#' sasimi_dice
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fp_a See Usage.
+#' @param fp_b See Usage.
+#' @return A numeric value.
+#' @export
 sasimi_dice <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -126,6 +162,15 @@ sasimi_dice <- function(fp_a, fp_b) {
 }
 
 
+#' sasimi_cosine
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fp_a See Usage.
+#' @param fp_b See Usage.
+#' @return A numeric value.
+#' @export
 sasimi_cosine <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -136,6 +181,17 @@ sasimi_cosine <- function(fp_a, fp_b) {
 }
 
 
+#' sasimi_tversky
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fp_a See Usage.
+#' @param fp_b See Usage.
+#' @param alpha Defaults to \code{1}.
+#' @param beta Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
   al <- as.numeric(alpha)
   be <- as.numeric(beta)
@@ -162,11 +218,30 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 }
 
 
+#' sasimi_distance
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fp_a See Usage.
+#' @param fp_b See Usage.
+#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @return A numeric value.
+#' @export
 sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
   1.0 - .sasimi_coef(coefficient)(fp_a, fp_b)
 }
 
 
+#' sasimi_similarity_matrix
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fps See Usage.
+#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
   f <- .sasimi_coef(coefficient)
   F <- lapply(fps, sasimi_fingerprint)
@@ -186,6 +261,17 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 }
 
 
+#' sasimi_nearest_neighbours
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query See Usage.
+#' @param fps See Usage.
+#' @param k Defaults to \code{5L}.
+#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimoto") {
   if (as.integer(k) < 1L) {
     stop("sasimi: k must be at least 1")
@@ -211,6 +297,18 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 }
 
 
+#' morie_sasimi
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fp_a See Usage.
+#' @param fp_b See Usage.
+#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @param alpha Defaults to \code{NULL}.
+#' @param beta Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{similarity}, \code{distance}, \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.
+#' @export
 morie_sasimi <- function(fp_a, fp_b, coefficient = "tanimoto",
                          alpha = NULL, beta = NULL) {
   n <- sasimi_counts(fp_a, fp_b)

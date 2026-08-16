@@ -296,6 +296,24 @@
 .frfgrf_forest_fit_consistency <- .frfgrf_forest_fit_check
 
 # Main entry point: same argument names and defaults as forest_fit_check.
+#' Main entry point: same argument names and defaults as
+#' forest_fit_check
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param n_trees Defaults to \code{100}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param subsample_frac Defaults to \code{0.5}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @param seed Defaults to \code{0}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param sizes Defaults to \code{NULL}.
+#' @return The value of \code{.frfgrf_forest_fit_check}.
+#' @export
 morie_frfgrf <- function(y, X, n_trees = 100, min_leaf = 5,
                          subsample_frac = 0.5, alpha = 0.05,
                          pi = 0.5, seed = 0,

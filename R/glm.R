@@ -66,6 +66,21 @@
   as.numeric(r)
 }
 
+#' morie_glm
+#'
+#' Part of the glm implementation; see the file header for the source it
+#' follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param family Defaults to \code{"binomial"}.
+#' @param add_intercept Defaults to \code{TRUE}.
+#' @param weights Defaults to \code{NULL}.
+#' @param offset Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{25L}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{coef}, \code{se}, \code{statistic}, \code{statistic_name}, \code{p_value}, \code{fitted}, \code{linear_predictor}, \code{residuals}, \code{deviance}, \code{null_deviance}, \code{df_residual}, \code{df_null}, \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged}, \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.
+#' @export
 morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
                       weights = NULL, offset = NULL, max_iter = 25L,
                       tol = 1e-8) {
@@ -176,6 +191,18 @@ morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
   )
 }
 
+#' morie_glm_predict
+#'
+#' Part of the glm implementation; see the file header for the source it
+#' follows.
+#'
+#' @param fit See Usage.
+#' @param X See Usage.
+#' @param add_intercept Defaults to \code{TRUE}.
+#' @param type Defaults to \code{c("response", "link")}.
+#' @param offset Defaults to \code{NULL}.
+#' @return The value of \code{.morie_glm_families()[[fit$family]]$linkinv}.
+#' @export
 morie_glm_predict <- function(fit, X, add_intercept = TRUE,
                               type = c("response", "link"), offset = NULL) {
   type <- match.arg(type)
@@ -196,6 +223,15 @@ morie_glm_predict <- function(fit, X, add_intercept = TRUE,
   .morie_glm_families()[[fit$family]]$linkinv(eta)
 }
 
+#' morie_deviance_residuals
+#'
+#' Part of the glm implementation; see the file header for the source it
+#' follows.
+#'
+#' @param fit See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 morie_deviance_residuals <- function(fit, y) {
   y <- as.numeric(y)
   d <- pmax(.morie_glm_families()[[fit$family]]$dev_resid(y, fit$fitted), 0)

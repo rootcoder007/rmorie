@@ -9,6 +9,19 @@
   exp(-gamma * d2)
 }
 
+#' svdd
+#'
+#' Part of the deepSVDD_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param C Defaults to \code{1}.
+#' @param kernel Defaults to \code{"linear"}.
+#' @param gamma Defaults to \code{1}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_sweeps Defaults to \code{500L}.
+#' @return A list with \code{alpha}, \code{center}, \code{radius2}, \code{support}, \code{outliers}, \code{kkt_violation}, \code{kernel}, \code{C}, \code{method}.
+#' @export
 svdd <- function(X, C = 1.0, kernel = "linear", gamma = 1.0,
                  tol = 1e-10, max_sweeps = 500L) {
   Xv <- lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -110,6 +123,13 @@ deepsvdd <- svdd
 
 morie_deepSVDD <- svdd
 
+#' deepSVDD_cheatsheet
+#'
+#' Part of the deepSVDD_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 deepSVDD_cheatsheet <- function() {
   "svdd: max sum a K_ii - aa'K, sum a=1, 0<=a<=C; a = center weights"
 }

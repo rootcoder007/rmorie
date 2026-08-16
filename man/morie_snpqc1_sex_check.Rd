@@ -1,0 +1,22 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_snpqc1_sex_check}
+\alias{morie_snpqc1_sex_check}
+\title{morie_snpqc1_sex_check}
+\usage{
+morie_snpqc1_sex_check(x_genotypes, reported_sex = NULL, male_min = 0.8, female_max = 0.2)
+}
+\arguments{
+\item{x_genotypes}{See Usage.}
+\item{reported_sex}{Defaults to \code{NULL}.}
+\item{male_min}{Defaults to \code{0.8}.}
+\item{female_max}{Defaults to \code{0.2}.}
+}
+\description{
+Part of the snpqc1_native implementation; see the file header for the source it follows.
+}
+\value{
+The value of \code{res}, as built in the body.
+}
+\keyword{internal}

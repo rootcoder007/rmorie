@@ -49,6 +49,15 @@
 
 # ---------------------------------------------------- Wiener, 3.154-3.186
 
+#' Eq. (3.154): the estimate is the convolution of the tap weights with
+#'
+#' the input.  The first M-1 outputs run on a partly empty delay line
+#' and are reported as unsettled rather than trimmed away.
+#'
+#' @param w See Usage.
+#' @param x See Usage.
+#' @return A list with \code{d_hat}, \code{n}, \code{order}, \code{settled_from}, \code{method}.
+#' @export
 WienerOut <- function(w, x) {
   # eq. (3.154): the estimate is the convolution of the tap weights with
   # the input.  The first M-1 outputs run on a partly empty delay line and
@@ -69,6 +78,17 @@ WienerOut <- function(w, x) {
   )
 }
 
+#' Eq. (3.155): the same estimate written as an inner product.  x(n)
+#' runs
+#'
+#' BACKWARDS in time, its first entry being the current sample; getting
+#' that order wrong reverses the filter without any error being raised,
+#' which is why the length check is not the only thing recorded.
+#'
+#' @param w See Usage.
+#' @param xvec See Usage.
+#' @return A list with \code{d_hat}, \code{order}, \code{vector_is_time_reversed}, \code{method}.
+#' @export
 WienerDot <- function(w, xvec) {
   # eq. (3.155): the same estimate written as an inner product.  x(n) runs
   # BACKWARDS in time, its first entry being the current sample; getting
@@ -90,6 +110,16 @@ WienerDot <- function(w, xvec) {
   )
 }
 
+#' Eq. (3.167): grad J = -2 Theta + 2 Phi w.  The surface is quadratic
+#'
+#' with a single minimum, so a vanishing gradient is the optimum and not
+#' merely a stationary point.
+#'
+#' @param phi See Usage.
+#' @param theta See Usage.
+#' @param w See Usage.
+#' @return A list with \code{gradient}, \code{norm}, \code{at_optimum}, \code{order}, \code{surface}, \code{method}.
+#' @export
 MseGrad <- function(phi, theta, w) {
   # eq. (3.167): grad J = -2 Theta + 2 Phi w.  The surface is quadratic
   # with a single minimum, so a vanishing gradient is the optimum and not
@@ -112,6 +142,15 @@ MseGrad <- function(phi, theta, w) {
   )
 }
 
+#' Eq. (3.168): Phi w = Theta.  At the solution the input vector and the
+#'
+#' error are orthogonal, and so are the output and the error -- the
+#' orthogonality principle, which is what makes the solution optimal.
+#'
+#' @param phi See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{w}, \code{residual}, \code{max_residual}, \code{order}, \code{condition}, \code{orthogonality}, \code{method}.
+#' @export
 WienerHopf <- function(phi, theta) {
   # eq. (3.168): Phi w = Theta.  At the solution the input vector and the
   # error are orthogonal, and so are the output and the error -- the
@@ -139,6 +178,15 @@ WienerHopf <- function(phi, theta) {
   )
 }
 
+#' Eq. (3.169): w_o = Phi^-1 Theta.  Written as an inverse in the book,
+#'
+#' computed here by solving the system -- the inverse is never formed,
+#' which is both faster and better conditioned.
+#'
+#' @param phi See Usage.
+#' @param theta See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 WienerOpt <- function(phi, theta) {
   # eq. (3.169): w_o = Phi^-1 Theta.  Written as an inverse in the book,
   # computed here by solving the system -- the inverse is never formed,
@@ -150,6 +198,17 @@ WienerOpt <- function(phi, theta) {
   r
 }
 
+#' Eq. (3.172): J_min = var(d) - Theta\' w_o.  A negative J_min cannot
+#'
+#' happen for consistent statistics, so it is reported rather than
+#' clamped: it means the supplied variance and covariances do not come
+#' from the same process.
+#'
+#' @param phi See Usage.
+#' @param theta See Usage.
+#' @param var_d See Usage.
+#' @return A list with \code{j_min}, \code{w_o}, \code{var_d}, \code{explained}, \code{consistent}, \code{fraction_explained}, \code{method}.
+#' @export
 WienerMin <- function(phi, theta, var_d) {
   # eq. (3.172): J_min = var(d) - Theta' w_o.  A negative J_min cannot
   # happen for consistent statistics, so it is reported rather than
@@ -172,6 +231,18 @@ WienerMin <- function(phi, theta, var_d) {
   )
 }
 
+#' Eqs. (3.173)-(3.174): the normal equations written as a convolution
+#' of
+#'
+#' the tap weights with the ACF.  It holds only for a stationary
+#' process; that premise is recorded because nothing in the arithmetic
+#' checks it.
+#'
+#' @param w See Usage.
+#' @param phi See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{lhs}, \code{theta}, \code{max_difference}, \code{holds}, \code{order}, \code{requires_stationarity}, \code{method}.
+#' @export
 WienerConv <- function(w, phi, theta) {
   # eqs. (3.173)-(3.174): the normal equations written as a convolution of
   # the tap weights with the ACF.  It holds only for a stationary process;
@@ -197,6 +268,15 @@ WienerConv <- function(w, phi, theta) {
   )
 }
 
+#' Eq. (3.175): W(w) S_xx(w) = S_xd(w).  Bins where S_xx vanishes carry
+#'
+#' no information about W and are listed, not silently satisfied.
+#'
+#' @param W See Usage.
+#' @param sxx See Usage.
+#' @param sxd See Usage.
+#' @return A list with \code{lhs}, \code{sxd}, \code{max_difference}, \code{holds}, \code{undetermined_bins}, \code{n_undetermined}, \code{method}.
+#' @export
 WienerFreqR <- function(W, sxx, sxd) {
   # eq. (3.175): W(w) S_xx(w) = S_xd(w).  Bins where S_xx vanishes carry
   # no information about W and are listed, not silently satisfied.
@@ -219,6 +299,16 @@ WienerFreqR <- function(W, sxx, sxd) {
   )
 }
 
+#' Eq. (3.176): W(w) = S_xd(w) / S_xx(w).  Where the denominator
+#' vanishes
+#'
+#' the ratio is undefined; returning zero there is a choice, and it is
+#' flagged so a caller can tell it apart from a genuine zero response.
+#'
+#' @param sxx See Usage.
+#' @param sxd See Usage.
+#' @return A list with \code{W}, \code{magnitude}, \code{undetermined_bins}, \code{n_undetermined}, \code{zero_where_undetermined}, \code{n}, \code{method}.
+#' @export
 WienerFreq <- function(sxx, sxd) {
   # eq. (3.176): W(w) = S_xd(w) / S_xx(w).  Where the denominator vanishes
   # the ratio is undefined; returning zero there is a choice, and it is
@@ -238,6 +328,16 @@ WienerFreq <- function(sxx, sxd) {
   )
 }
 
+#' Eq. (3.186): W = S_d / (S_d + S_eta).  Three properties the book
+#'
+#' stresses and this checks: zero where the signal is absent (nothing to
+#' restore), unity where the noise is absent (nothing to suppress), and
+#' falling monotonically with the SNR in between.
+#'
+#' @param sd See Usage.
+#' @param seta See Usage.
+#' @return A list with \code{W}, \code{snr}, \code{undetermined_bins}, \code{zero_where_signal_absent}, \code{unity_where_noise_absent}, \code{n}, \code{method}.
+#' @export
 WienerSnr <- function(sd, seta) {
   # eq. (3.186): W = S_d / (S_d + S_eta).  Three properties the book
   # stresses and this checks: zero where the signal is absent (nothing to
@@ -262,6 +362,17 @@ WienerSnr <- function(sd, seta) {
   )
 }
 
+#' Eqs. (3.168), (3.171): build the Toeplitz correlation matrix and the
+#'
+#' cross-correlation vector from data and solve for the tap weights.
+#' The biased (1/N) ACF estimate is used, which is what makes Phi
+#' nonnegative-definite and so keeps the system solvable.
+#'
+#' @param x See Usage.
+#' @param d See Usage.
+#' @param order See Usage.
+#' @return A list with \code{w}, \code{phi}, \code{theta}, \code{Phi}, \code{order}, \code{j_min}, \code{var_d}, \code{toeplitz}, \code{acf_biased}, \code{condition}, \code{method}.
+#' @export
 Whopf <- function(x, d, order) {
   # eqs. (3.168), (3.171): build the Toeplitz correlation matrix and the
   # cross-correlation vector from data and solve for the tap weights.  The
@@ -291,6 +402,19 @@ Whopf <- function(x, d, order) {
   )
 }
 
+#' WienerFilt
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param desired Defaults to \code{NULL}.
+#' @param order Defaults to \code{8}.
+#' @param sd Defaults to \code{NULL}.
+#' @param seta Defaults to \code{NULL}.
+#' @param fs Defaults to \code{1}.
+#' @return A list with \code{y}, \code{W}, \code{route}, \code{fs}, \code{n}, \code{method}.
+#' @export
 WienerFilt <- function(x, desired = NULL, order = 8, sd = NULL,
                        seta = NULL, fs = 1) {
   # The two routes to the same filter.  The time route estimates the
@@ -353,6 +477,16 @@ WienerFilt <- function(x, desired = NULL, order = 8, sd = NULL,
 
 # ------------------------------------------- noise canceller, 3.187-3.205
 
+#' Section 3.10.1: the primary input is x = v + m.  The method needs the
+#'
+#' signal and the interference statistically independent; the sample
+#' correlation between them is returned so that premise is testable
+#' instead of assumed.
+#'
+#' @param v See Usage.
+#' @param m See Usage.
+#' @return A list with \code{x}, \code{v}, \code{m}, \code{n}, \code{correlation}, \code{independent}, \code{assumption}, \code{method}.
+#' @export
 AncInput <- function(v, m) {
   # Section 3.10.1: the primary input is x = v + m.  The method needs the
   # signal and the interference statistically independent; the sample
@@ -383,6 +517,17 @@ AncInput <- function(v, m) {
   )
 }
 
+#' Eq. (3.196): e = x - y, and the ERROR is the canceller\'s output.
+#' This
+#'
+#' is the step that surprises: the quantity being minimized is the thing
+#' you keep, because minimizing it drives y toward the interference and
+#' leaves the signal behind in e.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A list with \code{e}, \code{v_hat}, \code{n}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{error_is_the_output}, \code{method}.
+#' @export
 AncOut <- function(x, y) {
   # eq. (3.196): e = x - y, and the ERROR is the canceller's output.  This
   # is the step that surprises: the quantity being minimized is the thing
@@ -406,6 +551,14 @@ AncOut <- function(x, y) {
   )
 }
 
+#' Eq. (3.195): the adaptive filter runs on the REFERENCE, not on the
+#'
+#' primary input.  Filtering the primary would cancel the signal too.
+#'
+#' @param w See Usage.
+#' @param r See Usage.
+#' @return A list with \code{y}, \code{n}, \code{order}, \code{settled_from}, \code{filters_the_reference}, \code{method}.
+#' @export
 LmsOut <- function(w, r) {
   # eq. (3.195): the adaptive filter runs on the REFERENCE, not on the
   # primary input.  Filtering the primary would cancel the signal too.
@@ -425,6 +578,18 @@ LmsOut <- function(w, r) {
   )
 }
 
+#' Eq. (3.200): e^2 = x^2 - 2 x r\'w + (r\'w)^2.  The expansion is
+#' checked
+#'
+#' against the square itself.  This is the INSTANTANEOUS squared error
+#' standing in for the expectation -- that substitution is the whole of
+#' LMS, and the reason the algorithm converges only in the mean.
+#'
+#' @param x See Usage.
+#' @param rvec See Usage.
+#' @param w See Usage.
+#' @return A list with \code{e}, \code{e_squared}, \code{expanded}, \code{max_difference}, \code{agrees}, \code{nonnegative}, \code{instantaneous_not_expected}, \code{method}.
+#' @export
 LmsSqErr <- function(x, rvec, w) {
   # eq. (3.200): e^2 = x^2 - 2 x r'w + (r'w)^2.  The expansion is checked
   # against the square itself.  This is the INSTANTANEOUS squared error
@@ -450,6 +615,16 @@ LmsSqErr <- function(x, rvec, w) {
   )
 }
 
+#' Eqs. (3.201)-(3.202): the instantaneous gradient is -2 e r, so
+#'
+#' steepest descent gives w - mu grad, which is exactly Widrow-Hoff.
+#'
+#' @param w See Usage.
+#' @param e See Usage.
+#' @param rvec See Usage.
+#' @param mu See Usage.
+#' @return A list with \code{gradient}, \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{equals_widrow_hoff}, \code{method}.
+#' @export
 LmsDescent <- function(w, e, rvec, mu) {
   # eqs. (3.201)-(3.202): the instantaneous gradient is -2 e r, so
   # steepest descent gives w - mu grad, which is exactly Widrow-Hoff.
@@ -469,6 +644,18 @@ LmsDescent <- function(w, e, rvec, mu) {
   )
 }
 
+#' Eq. (3.203): w(n+1) = w(n) + 2 mu e(n) r(n).  The factor of two is in
+#'
+#' the book\'s equation and is kept; folding it into mu silently halves
+#' every step size a reader transcribes from the text.  The stability
+#' bound 0 < mu < 1/lambda_max is reported against the input power.
+#'
+#' @param w See Usage.
+#' @param e See Usage.
+#' @param rvec See Usage.
+#' @param mu See Usage.
+#' @return A list with \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{factor_of_two_is_in_the_equation}, \code{stable_bound}, \code{within_bound}, \code{method}.
+#' @export
 WidrowHoff <- function(w, e, rvec, mu) {
   # eq. (3.203): w(n+1) = w(n) + 2 mu e(n) r(n).  The factor of two is in
   # the book's equation and is kept; folding it into mu silently halves
@@ -492,6 +679,17 @@ WidrowHoff <- function(w, e, rvec, mu) {
   )
 }
 
+#' Eq. (3.204): eq. (3.203) with a step size that changes each sample
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w See Usage.
+#' @param e See Usage.
+#' @param rvec See Usage.
+#' @param mu_n See Usage.
+#' @return A list with \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{time_varying}, \code{method}.
+#' @export
 LmsVarStep <- function(w, e, rvec, mu_n) {
   # eq. (3.204): eq. (3.203) with a step size that changes each sample.
   ws <- as.numeric(w)
@@ -509,6 +707,22 @@ LmsVarStep <- function(w, e, rvec, mu_n) {
   )
 }
 
+#' Eq. (3.205), after Zhang et al.: mu(n) = mu / ((M+1) xbar^2(n)) with
+#'
+#' xbar^2(n) = alpha r^2(n) + (1-alpha) xbar^2(n-1).  Normalizing by the
+#' running power is what makes the step scale-free, so one mu works
+#' across a record whose amplitude varies by an order of magnitude --
+#' the book\'s motivation for VAG signals.  alpha must be small: near 1
+#' it tracks the instantaneous sample and reintroduces the very jitter
+#' the averaging removes, so a value above 0.5 is refused.
+#'
+#' @param mu See Usage.
+#' @param order See Usage.
+#' @param r See Usage.
+#' @param alpha Defaults to \code{0.02}.
+#' @param power_prev Defaults to \code{NULL}.
+#' @return A list with \code{mu}, \code{power}, \code{power_prev}, \code{alpha}, \code{order}, \code{base_mu}, \code{method}.
+#' @export
 LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
   # eq. (3.205), after Zhang et al.: mu(n) = mu / ((M+1) xbar^2(n)) with
   # xbar^2(n) = alpha r^2(n) + (1-alpha) xbar^2(n-1).  Normalizing by the
@@ -541,6 +755,19 @@ LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
   )
 }
 
+#' LmsFilt
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param primary See Usage.
+#' @param reference See Usage.
+#' @param order Defaults to \code{8}.
+#' @param mu Defaults to \code{0.01}.
+#' @param variable Defaults to \code{FALSE}.
+#' @param alpha Defaults to \code{0.02}.
+#' @return A list with \code{e}, \code{output}, \code{y}, \code{final_weights}, \code{order}, \code{mu}, \code{variable_step}, \code{step_history}, \code{stable_bound}, \code{within_bound}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{converges_in_the_mean_only}, \code{method}.
+#' @export
 LmsFilt <- function(primary, reference, order = 8, mu = 0.01,
                     variable = FALSE, alpha = 0.02) {
   # Section 3.10.2: run the canceller, eqs. (3.195)-(3.196), (3.203).
@@ -602,6 +829,15 @@ LmsFilt <- function(primary, reference, order = 8, mu = 0.01,
 
 # --------------------------------------------------------- RLS, 3.206-3.225
 
+#' Eq. (3.206): xi = sum lambda^(n-i) e^2(i).  lambda < 1 discounts old
+#'
+#' errors, giving an effective memory of 1/(1-lambda) samples; lambda =
+#' 1 is the growing window, which never forgets and so cannot track.
+#'
+#' @param errors See Usage.
+#' @param lam See Usage.
+#' @return A list with \code{xi}, \code{weights}, \code{lam}, \code{n}, \code{memory}, \code{growing_window}, \code{method}.
+#' @export
 RlsObj <- function(errors, lam) {
   # eq. (3.206): xi = sum lambda^(n-i) e^2(i).  lambda < 1 discounts old
   # errors, giving an effective memory of 1/(1-lambda) samples; lambda = 1
@@ -620,6 +856,15 @@ RlsObj <- function(errors, lam) {
   )
 }
 
+#' Eq. (3.207): the same form as Wiener-Hopf, but with time-averaged and
+#'
+#' exponentially weighted correlations.  Solving it outright each sample
+#' is what the matrix inversion lemma exists to avoid.
+#'
+#' @param phi See Usage.
+#' @param theta See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 RlsNormal <- function(phi, theta) {
   # eq. (3.207): the same form as Wiener-Hopf, but with time-averaged and
   # exponentially weighted correlations.  Solving it outright each sample
@@ -632,6 +877,19 @@ RlsNormal <- function(phi, theta) {
   r
 }
 
+#' Eq. (3.213), the matrix inversion lemma:
+#'
+#' (A + B C D)^-1 = A^-1 - A^-1 B (D A^-1 B + C^-1)^-1 D A^-1. Both
+#' sides are formed and compared.  Its value in RLS is that with k = 1
+#' the only inverse left is of a SCALAR, which turns an O(M^3) inversion
+#' per sample into O(M^2).
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param C See Usage.
+#' @param D See Usage.
+#' @return A list with \code{direct}, \code{lemma}, \code{max_difference}, \code{holds}, \code{n}, \code{k}, \code{scalar_when_k_is_one}, \code{method}.
+#' @export
 AbcdLemma <- function(A, B, C, D) {
   # eq. (3.213), the matrix inversion lemma:
   #   (A + B C D)^-1 = A^-1 - A^-1 B (D A^-1 B + C^-1)^-1 D A^-1.
@@ -668,6 +926,16 @@ AbcdLemma <- function(A, B, C, D) {
   )
 }
 
+#' Eq. (3.224): w(n) = w(n-1) + k(n) alpha(n)
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w_prev See Usage.
+#' @param k See Usage.
+#' @param alpha See Usage.
+#' @return A list with \code{w_next}, \code{correction}, \code{alpha}, \code{order}, \code{sign}, \code{erratum}, \code{method}.
+#' @export
 RlsUpdate <- function(w_prev, k, alpha) {
   # eq. (3.224): w(n) = w(n-1) + k(n) alpha(n).
   #
@@ -692,6 +960,18 @@ RlsUpdate <- function(w_prev, k, alpha) {
   )
 }
 
+#' Eq. (3.225): alpha(n) = x(n) - w\'(n-1) r(n).  The A PRIORI error,
+#' made
+#'
+#' with the PREVIOUS weights.  Using the updated weights gives the a
+#' posteriori error, a different and always smaller quantity, and the
+#' recursion is not valid with it.
+#'
+#' @param x See Usage.
+#' @param rvec See Usage.
+#' @param w_prev See Usage.
+#' @return A list with \code{alpha}, \code{prediction}, \code{order}, \code{uses_previous_weights}, \code{not_the_a_posteriori_error}, \code{method}.
+#' @export
 RlsApriori <- function(x, rvec, w_prev) {
   # eq. (3.225): alpha(n) = x(n) - w'(n-1) r(n).  The A PRIORI error, made
   # with the PREVIOUS weights.  Using the updated weights gives the a
@@ -711,6 +991,20 @@ RlsApriori <- function(x, rvec, w_prev) {
   )
 }
 
+#' Section 3.10.3, eqs. (3.215), (3.221), (3.224)-(3.225).  P is
+#'
+#' symmetrized every sample: in exact arithmetic the update preserves
+#' symmetry, in floating point it does not, and the asymmetry grows
+#' until P loses positive definiteness and the filter diverges.  The
+#' size of that drift is returned rather than hidden.
+#'
+#' @param primary See Usage.
+#' @param reference See Usage.
+#' @param order Defaults to \code{8}.
+#' @param lam Defaults to \code{0.98}.
+#' @param delta Defaults to \code{1}.
+#' @return A list with \code{e}, \code{output}, \code{y}, \code{final_weights}, \code{P}, \code{order}, \code{lam}, \code{delta}, \code{memory}, \code{p_symmetry_error}, \code{p_symmetrized}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{method}.
+#' @export
 RlsFilt <- function(primary, reference, order = 8, lam = 0.98, delta = 1) {
   # Section 3.10.3, eqs. (3.215), (3.221), (3.224)-(3.225).  P is
   # symmetrized every sample: in exact arithmetic the update preserves
@@ -776,6 +1070,19 @@ RlsFilt <- function(primary, reference, order = 8, lam = 0.98, delta = 1) {
   )
 }
 
+#' Section 8.6.2.  Every stage is itself a predictor, so one run gives
+#'
+#' the fit at EVERY order up to the one requested -- an order need not
+#' be chosen in advance, which is the lattice\'s advantage over the
+#' direct form.  |gamma| < 1 at every stage is the stability condition,
+#' the same one as eq. (7.39).
+#'
+#' @param x See Usage.
+#' @param order Defaults to \code{4}.
+#' @param lam Defaults to \code{0.98}.
+#' @param delta Defaults to \code{0.01}.
+#' @return A list with \code{reflection}, \code{forward_error}, \code{backward_error}, \code{all_orders_forward}, \code{order}, \code{lam}, \code{stable}, \code{every_stage_is_a_predictor}, \code{method}.
+#' @export
 RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
   # Section 8.6.2.  Every stage is itself a predictor, so one run gives
   # the fit at EVERY order up to the one requested -- an order need not be
@@ -830,6 +1137,20 @@ RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
   )
 }
 
+#' RlsMonitor
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param reference Defaults to \code{NULL}.
+#' @param order Defaults to \code{8}.
+#' @param lam Defaults to \code{0.98}.
+#' @param settle Defaults to \code{NULL}.
+#' @param threshold Defaults to \code{3}.
+#' @param window Defaults to \code{NULL}.
+#' @return A list with \code{error}, \code{error_power}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{baseline}, \code{baseline_sd}, \code{settle}, \code{window}, \code{order}, \code{transient_excluded}, \code{method}.
+#' @export
 RlsMonitor <- function(x, reference = NULL, order = 8, lam = 0.98,
                        settle = NULL, threshold = 3, window = NULL) {
   # Section 8.6.1: watch the RLS error power and mark a boundary where it
@@ -880,6 +1201,23 @@ RlsMonitor <- function(x, reference = NULL, order = 8, lam = 0.98,
 
 # ------------------------------------------------------ Kalman and Riccati
 
+#' The recursive counterpart of the Wiener filter: it tracks a state
+#'
+#' through a model instead of filtering a stationary record.  P is
+#' symmetrized each step for the same floating-point reason as in RLS,
+#' and the asymmetry it removed is returned.  The plain covariance
+#' update is used rather than the Joseph form, which is recorded because
+#' the Joseph form is the numerically safer one when R is small.
+#'
+#' @param z See Usage.
+#' @param F See Usage.
+#' @param H See Usage.
+#' @param Q See Usage.
+#' @param R See Usage.
+#' @param x0 Defaults to \code{NULL}.
+#' @param P0 Defaults to \code{NULL}.
+#' @return A list with \code{states}, \code{covariances}, \code{gains}, \code{innovations}, \code{n}, \code{state_dim}, \code{obs_dim}, \code{p_symmetry_error}, \code{p_symmetrized}, \code{joseph_form}, \code{method}.
+#' @export
 Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
   # The recursive counterpart of the Wiener filter: it tracks a state
   # through a model instead of filtering a stationary record.  P is
@@ -937,6 +1275,23 @@ Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
   )
 }
 
+#' The fixed point of the Kalman covariance recursion.  Once P settles
+#'
+#' the gain is constant and the filter is a fixed linear filter -- which
+#' is the Wiener solution for that model, and the sense in which Kalman
+#' generalizes Wiener.  Solved by iterating rather than by an eigenvalue
+#' method; a model that is not detectable has no stabilizing solution
+#' and will not converge, which `converged` reports instead of returning
+#' whatever P happened to be at the iteration limit.
+#'
+#' @param F See Usage.
+#' @param H See Usage.
+#' @param Q See Usage.
+#' @param R See Usage.
+#' @param maxiter Defaults to \code{1000L}.
+#' @param tol Defaults to \code{1e-12}.
+#' @return A list with \code{P}, \code{K}, \code{iterations}, \code{change}, \code{converged}, \code{n}, \code{steady_state_is_the_wiener_solution}, \code{method}.
+#' @export
 Riccati <- function(F, H, Q, R, maxiter = 1000L, tol = 1e-12) {
   # The fixed point of the Kalman covariance recursion.  Once P settles
   # the gain is constant and the filter is a fixed linear filter -- which
@@ -980,6 +1335,17 @@ Riccati <- function(F, H, Q, R, maxiter = 1000L, tol = 1e-12) {
 
 # ------------------------------------------------- segmentation, 8.27-8.29
 
+#' Section 8.5.1, the spectral error measure: the mean squared
+#' difference
+#'
+#' of the LOG spectra.  Taking logs is what makes it scale-free -- a
+#' pure gain change shifts every log bin by the same constant, so it
+#' lands entirely in mean_offset and leaves shape_only at zero.
+#'
+#' @param psd See Usage.
+#' @param reference See Usage.
+#' @return A list with \code{sem}, \code{log_difference}, \code{n_bins}, \code{mean_offset}, \code{shape_only}, \code{gain_change_only}, \code{zero_bins}, \code{scale_free}, \code{method}.
+#' @export
 Sem <- function(psd, reference) {
   # Section 8.5.1, the spectral error measure: the mean squared difference
   # of the LOG spectra.  Taking logs is what makes it scale-free -- a pure
@@ -1007,6 +1373,18 @@ Sem <- function(psd, reference) {
   )
 }
 
+#' Section 8.5.2, eqs. (8.27)-(8.29), after Michael and Houchin
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param test See Usage.
+#' @param reference See Usage.
+#' @param lags Defaults to \code{NULL}.
+#' @param thp Defaults to \code{1}.
+#' @param thf Defaults to \code{1}.
+#' @return A list with \code{distance}, \code{power_distance}, \code{spectral_distance}, \code{lags}, \code{lags_auto}, \code{acf_test}, \code{acf_reference}, \code{power_test}, \code{power_reference}, \code{boundary}, \code{th_power}, \code{th_spectral}, \code{amplitude_invariant}, \code{method}.
+#' @export
 Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
   # Section 8.5.2, eqs. (8.27)-(8.29), after Michael and Houchin.
   #
@@ -1077,6 +1455,19 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
   )
 }
 
+#' PcgSeg
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param window Defaults to \code{NULL}.
+#' @param step Defaults to \code{NULL}.
+#' @param order Defaults to \code{6}.
+#' @param threshold Defaults to \code{NULL}.
+#' @return A list with \code{sem}, \code{sem_fixed_reference}, \code{times}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad}, \code{window}, \code{step}, \code{order}, \code{fs}, \code{reference_restarted_at_boundaries}, \code{robust_threshold}, \code{method}.
+#' @export
 PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
                    threshold = NULL) {
   # Section 8.5: adaptive segmentation of the PCG by the spectral error
@@ -1163,6 +1554,15 @@ PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
   )
 }
 
+#' Eq. (4.30): the PSD is the DFT of the ACF.  It holds exactly for the
+#'
+#' CIRCULAR autocorrelation.  The linear (biased) ACF gives a smoothed
+#' version instead, and the size of that difference is returned -- the
+#' distinction is the reason the periodogram is inconsistent.
+#'
+#' @param x See Usage.
+#' @return A list with \code{psd}, \code{via_circular_acf}, \code{acf_circular}, \code{acf_linear}, \code{max_difference}, \code{holds}, \code{linear_difference}, \code{linear_acf_is_smoothed}, \code{n}, \code{method}.
+#' @export
 PsdAcf <- function(x) {
   # eq. (4.30): the PSD is the DFT of the ACF.  It holds exactly for the
   # CIRCULAR autocorrelation.  The linear (biased) ACF gives a smoothed
@@ -1209,6 +1609,20 @@ PsdAcf <- function(x) {
 
 # --------------------------------------------------------- applications
 
+#' Anc
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param primary See Usage.
+#' @param reference See Usage.
+#' @param order Defaults to \code{8}.
+#' @param mu Defaults to \code{0.01}.
+#' @param method Defaults to \code{"lms"}.
+#' @param lam Defaults to \code{0.98}.
+#' @param delta Defaults to \code{1}.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 Anc <- function(primary, reference, order = 8, mu = 0.01,
                 method = "lms", lam = 0.98, delta = 1) {
   # Section 3.10, eqs. (3.195)-(3.196): the canceller with either
@@ -1243,6 +1657,18 @@ Anc <- function(primary, reference, order = 8, mu = 0.01,
   r
 }
 
+#' FetalEcg
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param abdominal See Usage.
+#' @param chest See Usage.
+#' @param order Defaults to \code{32}.
+#' @param mu Defaults to \code{0.005}.
+#' @param method Defaults to \code{"lms"}.
+#' @return A list with \code{fetal}, \code{maternal_estimate}, \code{order}, \code{input_power}, \code{output_power}, \code{suppression_db}, \code{reference_leakage}, \code{single_reference}, \code{widrow_used_multiple_references}, \code{method}.
+#' @export
 FetalEcg <- function(abdominal, chest, order = 32, mu = 0.005,
                      method = "lms") {
   # Section 3.14, after Widrow et al.: cancel the maternal ECG from an

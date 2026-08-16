@@ -15,6 +15,17 @@
 # same zero-based 0..T-1 actions, the same 0-based estimate being
 # the argmax over final weights, and the same payload keys.
 
+#' morie_exp3
+#'
+#' Part of the exp3_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param gamma_ See Usage.
+#' @param T Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{probs}, \code{weights}, \code{total_reward}, \code{method}.
+#' @export
 morie_exp3 <- function(x, gamma_, T = NULL, seed = 0) {
   x <- as.matrix(x)
   storage.mode(x) <- "double"

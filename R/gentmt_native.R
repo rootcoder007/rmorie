@@ -216,6 +216,21 @@
   )
 }
 
+#' morie_gentmt
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param method Defaults to \code{"weight"}.
+#' @param degree Defaults to \code{1}.
+#' @param n_strata Defaults to \code{5}.
+#' @param doses Defaults to \code{NULL}.
+#' @param trim Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
                          n_strata = 5, doses = NULL, trim = NULL) {
   methods <- c("weight", "subclassify", "doseresponse")

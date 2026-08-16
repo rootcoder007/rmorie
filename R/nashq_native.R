@@ -89,6 +89,16 @@
   TRUE
 }
 
+#' nash_equilibria_bimatrix
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
   B <- .nashq_mat(B, "B")
@@ -149,6 +159,16 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
   TRUE
 }
 
+#' stage_game_type
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{estimate}, \code{equilibria}, \code{n_equilibria}, \code{has_global_optimal}, \code{has_saddle}, \code{global_optimal}, \code{saddle}, \code{method}.
+#' @export
 stage_game_type <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
   B <- .nashq_mat(B, "B")
@@ -233,6 +253,28 @@ stage_game_type <- function(A, B, tol = 1e-9) {
   }
 }
 
+#' morie_nashq
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param states See Usage.
+#' @param actions See Usage.
+#' @param step See Usage.
+#' @param rewards See Usage.
+#' @param gamma Defaults to \code{0.9}.
+#' @param alpha Defaults to \code{0.5}.
+#' @param epsilon Defaults to \code{0.1}.
+#' @param episodes Defaults to \code{500}.
+#' @param horizon Defaults to \code{50}.
+#' @param start Defaults to \code{NULL}.
+#' @param selection Defaults to \code{"global_optimal"}.
+#' @param terminal Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param agent Defaults to \code{0L}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{nash_values}, \code{stage_game_types}, \code{returns}, \code{mean_return_last}, \code{selection}, \code{method}.
+#' @export
 morie_nashq <- function(states, actions, step, rewards,
                         gamma = 0.9, alpha = 0.5, epsilon = 0.1,
                         episodes = 500, horizon = 50, start = NULL,

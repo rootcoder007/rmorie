@@ -12,6 +12,16 @@
 #
 # Koenker, R. & Bassett, G. (1978) Econometrica 46(1), 33-50, Sec. 2.
 
+#' morie_qrF
+#'
+#' Part of the qrF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param y_true See Usage.
+#' @param y_pred See Usage.
+#' @param theta Defaults to \code{0.5}.
+#' @return A list with \code{estimate}, \code{total}, \code{losses}, \code{theta}, \code{n}, \code{method}.
+#' @export
 morie_qrF <- function(y_true, y_pred, theta = 0.5) {
   yt <- as.numeric(y_true)
   yp <- as.numeric(y_pred)

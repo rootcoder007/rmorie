@@ -80,6 +80,16 @@
   return(p)
 }
 
+#' substitution_matrix
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param pi Defaults to \code{NULL}.
+#' @param u Defaults to \code{1}.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   t <- as.numeric(t)
@@ -130,12 +140,35 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   return(out)
 }
 
+#' site_likelihood
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param seqs See Usage.
+#' @param site See Usage.
+#' @param pi Defaults to \code{NULL}.
+#' @param u Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   L <- .phylml_prune(tree, site, p, u, seqs)
   return(sum(p * L))
 }
 
+#' morie_phylml
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param seqs See Usage.
+#' @param pi Defaults to \code{NULL}.
+#' @param u Defaults to \code{1}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   if (!(is.list(seqs) || is.character(seqs)) || length(seqs) == 0) {
@@ -180,6 +213,21 @@ morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
   return(result)
 }
 
+#' optimise_branch
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param make_tree See Usage.
+#' @param seqs See Usage.
+#' @param pi Defaults to \code{NULL}.
+#' @param u Defaults to \code{1}.
+#' @param lo Defaults to \code{1e-06}.
+#' @param hi Defaults to \code{10}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_iter Defaults to \code{200}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi = 10.0,
                             tol = 1e-10, max_iter = 200) {
   if (!is.function(make_tree)) {

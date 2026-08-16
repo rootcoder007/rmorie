@@ -151,6 +151,18 @@
   sum(N * log(P))
 }
 
+#' morie_plsa
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param K See Usage.
+#' @param iters Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{P_z}, \code{P_d_given_z}, \code{P_w_given_z}, \code{loglik_history}, \code{final_loglik}, \code{iterations}, \code{K}, \code{n_docs}, \code{vocab}, \code{n_parameters}, \code{method}, \code{caveat}.
+#' @export
 morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -236,15 +248,69 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 }
 
 # Compact aliases per ledger/NAMING.md
+#' Compact aliases per ledger/NAMING.md
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param K See Usage.
+#' @param iters Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-08}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{morie_plsa}.
+#' @export
 probabilisticlsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
   morie_plsa(n_dw, K, iters, tol, seed)
 }
 plsa <- probabilisticlsa
 
 # Public helpers
+#' Public helpers
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param Pz See Usage.
+#' @param Pd_z See Usage.
+#' @param Pw_z See Usage.
+#' @return The value of \code{.plsa_e_step}.
+#' @export
 e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
+#' m_step
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param post See Usage.
+#' @param K See Usage.
+#' @return The value of \code{.plsa_m_step}.
+#' @export
 m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
 .plsa_log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, Pd_z, Pw_z)
+#' joint_probability
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Pz See Usage.
+#' @param Pd_z See Usage.
+#' @param Pw_z See Usage.
+#' @return The value of \code{.plsa_joint_probability}.
+#' @export
 joint_probability <- function(Pz, Pd_z, Pw_z) .plsa_joint_probability(Pz, Pd_z, Pw_z)
+#' perplexity
+#'
+#' Part of the plsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_dw See Usage.
+#' @param Pz See Usage.
+#' @param Pd_z See Usage.
+#' @param Pw_z See Usage.
+#' @return The value of \code{.plsa_perplexity}.
+#' @export
 perplexity <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_perplexity(n_dw, Pz, Pd_z, Pw_z)
 .plsa_cheatsheet <- .plsa_cheatsheet

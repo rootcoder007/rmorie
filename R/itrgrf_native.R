@@ -101,6 +101,23 @@
   out
 }
 
+#' morie_itrgrf
+#'
+#' Part of the itrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param cost Defaults to \code{0}.
+#' @param n_trees Defaults to \code{150}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param seed Defaults to \code{0}.
+#' @param evaluate Defaults to \code{"split"}.
+#' @param propensity Defaults to \code{NULL}.
+#' @param level Defaults to \code{0.95}.
+#' @return A list with \code{estimate}, \code{value}, \code{se}, \code{ci}, \code{rule}, \code{tau}, \code{mu1}, \code{mu0}, \code{treated_fraction}, \code{value_treat_all}, \code{value_treat_none}, \code{gain_over_treat_all}, \code{gain_over_treat_none}, \code{scores}, \code{cost}, \code{evaluate}, \code{n}, \code{n_scored}, \code{level}, \code{method}.
+#' @export
 morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
                          min_leaf = 5, seed = 0, evaluate = "split",
                          propensity = NULL, level = 0.95) {

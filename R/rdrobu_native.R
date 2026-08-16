@@ -27,6 +27,18 @@
 # (nearest-neighbour or plug-in residuals), fuzzy and kink designs, and the
 # bandwidth selectors.
 
+#' morie_rdrobu
+#'
+#' Part of the rdrobu_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @param cutoff Defaults to \code{0}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param ... Passed through.
+#' @return A vector, from \code{c}.
+#' @export
 morie_rdrobu <- function(y, x, cutoff = 0.0, alpha = 0.05, ...) {
   fit <- morie_causrddc(y, x, cutoff = cutoff, alpha = alpha, ...)
   ci_c <- fit$ci_conventional
@@ -57,6 +69,17 @@ morie_rdrobu <- function(y, x, cutoff = 0.0, alpha = 0.05, ...) {
 }
 
 # Alias kept from the generated stub's signature.
+#' Alias kept from the generated stub\'s signature
+#'
+#' Part of the rdrobu_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @param cutoff Defaults to \code{0}.
+#' @param ... Passed through.
+#' @return The value of \code{morie_rdrobu}.
+#' @export
 morie_calonico_cattaneo_titiunik <- function(y, x, cutoff = 0.0, ...) {
   morie_rdrobu(y, x, cutoff, ...)
 }

@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{LsiSerY}
+\alias{LsiSerY}
+\title{Eq (3.44): the cascade output, read off LsiSer rather than convolved}
+\usage{
+LsiSerY(x, h1, h2)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{h1}{See Usage.}
+\item{h2}{See Usage.}
+}
+\description{
+a second time -- the content of the equation is that the cascade IS a single filter, not that there are two ways to compute it.
+}
+\value{
+A list with \code{y}, \code{h}, \code{s}, \code{equivalent}, \code{max_difference}, \code{method}.
+}
+\keyword{internal}

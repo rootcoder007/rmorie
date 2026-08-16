@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{BiorDwt}
+\alias{BiorDwt}
+\title{Biorthogonal 5/3 (CDF) transform via lifting}
+\usage{
+BiorDwt(x, wavelet = "bior2.2", levels = 3)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{wavelet}{Defaults to \code{"bior2.2"}.}
+\item{levels}{Defaults to \code{3}.}
+}
+\description{
+Part of the rangayyan_tf implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{reconstructed}, \code{max_reconstruction_error}, \code{symmetric}, \code{wavelet}, \code{method}.
+}
+\keyword{internal}

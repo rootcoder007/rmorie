@@ -72,6 +72,20 @@
 # phase switch. The gamma = beta branch is the limit of the
 # (e^-gt - e^-bt)/(g - b) term, which is t*e^-bt at g = b, not a
 # genuine singularity.
+#' The explicit solution of the splicing ODEs at time tau after a
+#'
+#' phase switch. The gamma = beta branch is the limit of the (e^-gt -
+#' e^-bt)/(g - b) term, which is t*e^-bt at g = b, not a genuine
+#' singularity.
+#'
+#' @param tau See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param u0 Defaults to \code{0}.
+#' @param s0 Defaults to \code{0}.
+#' @return A list with \code{u}, \code{s}, \code{tau}.
+#' @export
 morie_solve_kinetics <- function(tau, alpha, beta, gamma,
                                 u0 = 0.0, s0 = 0.0) {
   if (beta <= 0) stop("scvelo: beta must be positive", call. = FALSE)
@@ -94,6 +108,17 @@ morie_solve_kinetics <- function(tau, alpha, beta, gamma,
 }
 
 # nu = beta*u - gamma*s, the derivative of spliced abundance.
+#' Nu = beta*u - gamma*s, the derivative of spliced abundance
+#'
+#' Part of the scvelo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param s See Usage.
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @return A numeric value.
+#' @export
 morie_velocity <- function(u, s, beta, gamma) {
   beta * as.numeric(u) - gamma * as.numeric(s)
 }
@@ -102,6 +127,19 @@ morie_velocity <- function(u, s, beta, gamma) {
 # form. At the switch, (u, s) lands on the steady-on value scaled by
 # the (1 - exp) factor; after the switch the gene decays freely
 # toward zero.
+#' A gene through induction (on) then repression (off) on the closed
+#'
+#' form. At the switch, (u, s) lands on the steady-on value scaled by
+#' the (1 - exp) factor; after the switch the gene decays freely toward
+#' zero.
+#'
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param t_switch See Usage.
+#' @param times See Usage.
+#' @return A list with \code{observations}, \code{switch}, \code{steady_on}.
+#' @export
 morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
   if (t_switch < 0) stop("scvelo: t_switch cannot be negative", call. = FALSE)
   sw <- morie_solve_kinetics(t_switch, alpha, beta, gamma)
@@ -128,6 +166,17 @@ morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
 # cells assumed to be at steady state, and call the residual the
 # velocity. It needs the steady states to be present in the data,
 # which is the assumption the dynamical model removes.
+#' The baseline model: regress gamma/beta through the origin on the
+#'
+#' cells assumed to be at steady state, and call the residual the
+#' velocity. It needs the steady states to be present in the data, which
+#' is the assumption the dynamical model removes.
+#'
+#' @param u See Usage.
+#' @param s See Usage.
+#' @param quantile Defaults to \code{0.95}.
+#' @return A list with \code{gamma_over_beta}, \code{velocity}, \code{n_fitted}, \code{assumptions}, \code{method}.
+#' @export
 morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
   n <- length(u)
   if (n != length(s)) stop("scvelo: u and s must have the same length",
@@ -154,6 +203,21 @@ morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
 # E step: each observation is assigned the time on the trajectory
 # closest to it, in Euclidean (u, s) distance, and the transcriptional
 # state of the segment it lands on.
+#' E step: each observation is assigned the time on the trajectory
+#'
+#' closest to it, in Euclidean (u, s) distance, and the transcriptional
+#' state of the segment it lands on.
+#'
+#' @param u See Usage.
+#' @param s See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param t_switch See Usage.
+#' @param grid Defaults to \code{200}.
+#' @param t_max Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
                                      grid = 200, t_max = NULL) {
   if (is.null(t_max)) {
@@ -191,6 +255,23 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 # grid search on alpha, beta, gamma, t_switch. The loop stops as soon
 # as no candidate improves the residual, so the rss_history is the
 # visible monotone sequence.
+#' EM over the rates and the latent variables. E step is the closest
+#'
+#' point on the trajectory; M step is a one-at-a-time multiplicative
+#' grid search on alpha, beta, gamma, t_switch. The loop stops as soon
+#' as no candidate improves the residual, so the rss_history is the
+#' visible monotone sequence.
+#'
+#' @param u See Usage.
+#' @param s See Usage.
+#' @param alpha0 Defaults to \code{NULL}.
+#' @param beta0 Defaults to \code{1}.
+#' @param gamma0 Defaults to \code{0.5}.
+#' @param t_switch0 Defaults to \code{NULL}.
+#' @param n_iter Defaults to \code{25}.
+#' @param grid Defaults to \code{120}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{beta}, \code{gamma}, \code{t_switch}, \code{rss}, \code{rss_history}, \code{latent}, \code{velocity}, \code{steady_on}, \code{method}.
+#' @export
 morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
                                 gamma0 = 0.5, t_switch0 = NULL,
                                 n_iter = 25, grid = 120) {
@@ -271,6 +352,14 @@ morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
 # A gene-shared clock: the per-cell median of the gene times. Each
 # gene has its own fit and its own rate, so without this aggregation
 # the per-cell times are not comparable across genes.
+#' A gene-shared clock: the per-cell median of the gene times. Each
+#'
+#' gene has its own fit and its own rate, so without this aggregation
+#' the per-cell times are not comparable across genes.
+#'
+#' @param fits See Usage.
+#' @return A list with \code{latent_time}, \code{n_genes}, \code{n_cells}, \code{note}.
+#' @export
 morie_latent_time <- function(fits) {
   if (length(fits) == 0) stop("scvelo: no gene fits supplied", call. = FALSE)
   n <- length(fits[[1]]$latent)

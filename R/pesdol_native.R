@@ -19,6 +19,17 @@
   list(beta = beta, fit = fit, res = y - fit)
 }
 
+#' morie_pesdol_ardl_bounds
+#'
+#' Part of the pesdol_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @param p Defaults to \code{1}.
+#' @param q Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{long_run}, \code{coefficients}, \code{residuals}, \code{fitted}, \code{speed_of_adjustment}, \code{f_statistic}, \code{bound_lower}, \code{bound_upper}, \code{verdict}, \code{n_used}, \code{n_params}, \code{rss_unrestricted}, \code{rss_restricted}, \code{p}, \code{q}, \code{n_regressors}, \code{method}, \code{note}.
+#' @export
 morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
   yv <- as.numeric(y)
   Xm <- as.matrix(x); storage.mode(Xm) <- "double"

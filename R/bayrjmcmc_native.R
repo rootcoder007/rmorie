@@ -62,6 +62,16 @@
   total
 }
 
+#' numeric_log_jacobian
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param mapfun See Usage.
+#' @param z See Usage.
+#' @param h Defaults to \code{1e-06}.
+#' @return The value of \code{.logabsdet}.
+#' @export
 numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
   z <- as.numeric(z)
   n <- length(z)
@@ -88,6 +98,15 @@ numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
 # dimension matching
 # --------------------------------------------------------------------------
 
+#' check_dimension_matching
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param models See Usage.
+#' @param moves See Usage.
+#' @return The value of \code{by_pair}, as built in the body.
+#' @export
 check_dimension_matching <- function(models, moves) {
   if (length(models) == 0) stop("bayrjmcmc: no models given")
   for (nm in names(models)) {
@@ -142,6 +161,20 @@ check_dimension_matching <- function(models, moves) {
   by_pair
 }
 
+#' rj_log_acceptance
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param logpost_from See Usage.
+#' @param logpost_to See Usage.
+#' @param log_j_from See Usage.
+#' @param log_j_to See Usage.
+#' @param logq_u See Usage.
+#' @param logq_u_rev See Usage.
+#' @param log_jacobian See Usage.
+#' @return A numeric value.
+#' @export
 rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
                               log_j_to, logq_u, logq_u_rev, log_jacobian) {
   (logpost_to - logpost_from) + (log_j_to - log_j_from) +
@@ -166,6 +199,27 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 # general reversible jump sampler
 # --------------------------------------------------------------------------
 
+#' reversible_jump_mcmc
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param models See Usage.
+#' @param moves See Usage.
+#' @param init_model See Usage.
+#' @param init_theta Defaults to \code{c()}.
+#' @param n_iter Defaults to \code{10000L}.
+#' @param burn_in Defaults to \code{0L}.
+#' @param thin Defaults to \code{1L}.
+#' @param seed Defaults to \code{0L}.
+#' @param within Defaults to \code{NULL}.
+#' @param within_scale Defaults to \code{0.5}.
+#' @param within_weight Defaults to \code{1}.
+#' @param move_weight Defaults to \code{1}.
+#' @param jacobian Defaults to \code{"analytic"}.
+#' @param keep_chain Defaults to \code{TRUE}.
+#' @return A list with \code{model_freq}, \code{visits}, \code{n_kept}, \code{accept}, \code{tried}, \code{chain}, \code{jacobian}, \code{method}, \code{note}.
+#' @export
 reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
                                  n_iter = 10000L, burn_in = 0L, thin = 1L,
                                  seed = 0L, within = NULL,
@@ -325,6 +379,17 @@ bayrjmcmc <- reversible_jump_mcmc
 # §4: step-function rate for a point process
 # --------------------------------------------------------------------------
 
+#' step_function_loglik
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param s See Usage.
+#' @param h See Usage.
+#' @param L See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 step_function_loglik <- function(y, s, h, L) {
   edges <- c(0, as.numeric(s), as.numeric(L))
   if (length(h) != length(edges) - 1)
@@ -349,6 +414,16 @@ step_function_loglik <- function(y, s, h, L) {
   out
 }
 
+#' changepoint_move_probabilities
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param lam See Usage.
+#' @param k_max See Usage.
+#' @param cap Defaults to \code{0.9}.
+#' @return A list with \code{eta}, \code{pi}, \code{b}, \code{d}, \code{c}.
+#' @export
 changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
   lam <- as.numeric(lam)
   k_max <- as.integer(k_max)
@@ -372,6 +447,18 @@ changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
   list(eta = eta, pi = pi_, b = b, d = d, c = c_)
 }
 
+#' birth_split_heights
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h_j See Usage.
+#' @param u See Usage.
+#' @param s_left See Usage.
+#' @param s_star See Usage.
+#' @param s_right See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 birth_split_heights <- function(h_j, u, s_left, s_star, s_right) {
   span <- as.numeric(s_right) - as.numeric(s_left)
   if (span <= 0) stop("bayrjmcmc: empty interval in a birth move")
@@ -383,6 +470,16 @@ birth_split_heights <- function(h_j, u, s_left, s_star, s_right) {
   c(hj, hj1)
 }
 
+#' birth_log_jacobian
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h_j See Usage.
+#' @param h_new_left See Usage.
+#' @param h_new_right See Usage.
+#' @return A numeric value.
+#' @export
 birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
   2 * log(as.numeric(h_new_left) + as.numeric(h_new_right)) -
     log(as.numeric(h_j))
@@ -398,6 +495,27 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
   log(lam) - log(k + 1)
 }
 
+#' changepoint_rjmcmc
+#'
+#' Part of the bayrjmcmc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y Defaults to \code{numeric(0)}.
+#' @param L Defaults to \code{1}.
+#' @param n_iter Defaults to \code{40000L}.
+#' @param burn_in Defaults to \code{4000L}.
+#' @param lam Defaults to \code{3}.
+#' @param k_max Defaults to \code{30L}.
+#' @param alpha Defaults to \code{1}.
+#' @param beta Defaults to \code{200}.
+#' @param seed Defaults to \code{0L}.
+#' @param cap Defaults to \code{0.9}.
+#' @param use_likelihood Defaults to \code{TRUE}.
+#' @param k_init Defaults to \code{0L}.
+#' @param thin Defaults to \code{1L}.
+#' @param keep_chain Defaults to \code{FALSE}.
+#' @return A list with \code{k_posterior}, \code{k_counts}, \code{k_mean}, \code{s}, \code{h}, \code{accept}, \code{tried}, \code{c}, \code{b}, \code{d}, \code{eta}, \code{pi}, \code{mean_s1_given_k1}, \code{var_s1_given_k1}, \code{mean_height}, \code{chain}, \code{n_kept}, \code{use_likelihood}, \code{method}, \code{note}.
+#' @export
 changepoint_rjmcmc <- function(y = numeric(0), L = 1, n_iter = 40000L,
                                burn_in = 4000L, lam = 3, k_max = 30L,
                                alpha = 1, beta = 200, seed = 0L, cap = 0.9,

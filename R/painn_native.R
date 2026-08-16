@@ -27,6 +27,14 @@
   }
 }
 
+#' vector_norm
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 vector_norm <- function(v) {
   a <- .painn_mat(v)
   F <- ncol(a)
@@ -39,6 +47,19 @@ vector_norm <- function(v) {
   out
 }
 
+#' scalar_vector_message
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s_j See Usage.
+#' @param v_j See Usage.
+#' @param r_ij See Usage.
+#' @param phi_s See Usage.
+#' @param phi_v See Usage.
+#' @param W_rbf See Usage.
+#' @return A list with \code{ds}, \code{dv}, \code{note}.
+#' @export
 scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
                                   W_rbf) {
   s <- .painn_vec(s_j)
@@ -68,6 +89,18 @@ scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
   )
 }
 
+#' gated_update
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param v See Usage.
+#' @param U See Usage.
+#' @param V See Usage.
+#' @param phi See Usage.
+#' @return A list with \code{ds}, \code{dv}, \code{scalar_from_vectors}, \code{note}.
+#' @export
 gated_update <- function(s, v, U, V, phi) {
   sv <- .painn_vec(s)
   Vv <- .painn_mat(v)
@@ -99,6 +132,16 @@ gated_update <- function(s, v, U, V, phi) {
   )
 }
 
+#' dipole_moment
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param charges See Usage.
+#' @param R See Usage.
+#' @param centre Defaults to \code{NULL}.
+#' @return A list with \code{dipole}, \code{magnitude}, \code{note}.
+#' @export
 dipole_moment <- function(charges, R, centre = NULL) {
   q <- .painn_vec(charges)
   pos <- .painn_mat(R)
@@ -129,6 +172,19 @@ dipole_moment <- function(charges, R, centre = NULL) {
   )
 }
 
+#' morie_painn_equivariance_error
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param model See Usage.
+#' @param s See Usage.
+#' @param v See Usage.
+#' @param R See Usage.
+#' @param Q See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{scalar_error}, \code{vector_error}, \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.
+#' @export
 morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   pos <- .painn_mat(R)
   d <- ncol(pos)

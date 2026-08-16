@@ -145,6 +145,22 @@
   list(crit, cen, labels, kept, dists)
 }
 
+#' morie_rkmeans
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param k Defaults to \code{2}.
+#' @param alpha Defaults to \code{0.1}.
+#' @param penalty Defaults to \code{"square"}.
+#' @param n_start Defaults to \code{20}.
+#' @param max_iter Defaults to \code{100}.
+#' @param huber_c Defaults to \code{1.345}.
+#' @param seed Defaults to \code{0}.
+#' @param centers Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{centers}, \code{labels}, \code{kept}, \code{outliers}, \code{criterion}, \code{distances}, \code{sizes}, \code{n_trimmed}, \code{n_kept}, \code{alpha}, \code{k}, \code{penalty}, \code{method}.
+#' @export
 morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
                           n_start = 20, max_iter = 100,
                           huber_c = 1.345, seed = 0, centers = NULL) {

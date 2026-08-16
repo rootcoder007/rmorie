@@ -1,0 +1,24 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_chrF}
+\alias{morie_chrF}
+\title{morie_chrF}
+\usage{
+morie_chrF(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRUE, word_order = 0L)
+}
+\arguments{
+\item{hypothesis}{See Usage.}
+\item{reference}{See Usage.}
+\item{n_char}{Defaults to \code{6L}.}
+\item{beta}{Defaults to \code{2}.}
+\item{remove_whitespace}{Defaults to \code{TRUE}.}
+\item{word_order}{Defaults to \code{0L}.}
+}
+\description{
+Part of the chrF_native implementation; see the file header for the source it follows.
+}
+\value{
+The value of \code{chrf_score}.
+}
+\keyword{internal}

@@ -24,6 +24,17 @@
   v
 }
 
+#' normalise_bbox
+#'
+#' Part of the ocrwit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param box See Usage.
+#' @param width See Usage.
+#' @param height See Usage.
+#' @param scale Defaults to \code{1000}.
+#' @return A vector, from \code{c}.
+#' @export
 normalise_bbox <- function(box, width, height, scale = 1000) {
   if (length(box) < 4L)
     stop("ocrwit: the box must have four coordinates")
@@ -44,6 +55,18 @@ normalise_bbox <- function(box, width, height, scale = 1000) {
     .ocrwit_clip_int(y1 / H * s, 0, s))
 }
 
+#' segment_layout_boxes
+#'
+#' Part of the ocrwit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param boxes See Usage.
+#' @param segment_ids See Usage.
+#' @param width See Usage.
+#' @param height See Usage.
+#' @param scale Defaults to \code{1000}.
+#' @return A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{note}.
+#' @export
 segment_layout_boxes <- function(boxes, segment_ids, width, height,
                                  scale = 1000) {
   segs <- as.list(segment_ids)
@@ -77,6 +100,17 @@ segment_layout_boxes <- function(boxes, segment_ids, width, height,
   )
 }
 
+#' mask_units
+#'
+#' Part of the ocrwit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_units See Usage.
+#' @param rate Defaults to \code{0.3}.
+#' @param seed Defaults to \code{0}.
+#' @param block Defaults to \code{1}.
+#' @return A list with \code{masked}, \code{kept}, \code{rate}, \code{block}, \code{note}.
+#' @export
 mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
   n <- as.integer(n_units)
   r <- as.numeric(rate)
@@ -109,6 +143,17 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
   )
 }
 
+#' patch_of_box
+#'
+#' Part of the ocrwit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param box See Usage.
+#' @param width See Usage.
+#' @param height See Usage.
+#' @param patch_grid Defaults to \code{14}.
+#' @return A vector, from \code{sort}.
+#' @export
 patch_of_box <- function(box, width, height, patch_grid = 14) {
   g <- as.integer(patch_grid)
   nb <- normalise_bbox(box, width, height, g)
@@ -120,6 +165,19 @@ patch_of_box <- function(box, width, height, patch_grid = 14) {
   sort(unique(out))
 }
 
+#' word_patch_alignment
+#'
+#' Part of the ocrwit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param text_boxes See Usage.
+#' @param masked_patches See Usage.
+#' @param width See Usage.
+#' @param height See Usage.
+#' @param patch_grid Defaults to \code{14}.
+#' @param masked_text Defaults to \code{list()}.
+#' @return A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples}, \code{positive_rate}, \code{method}, \code{note}.
+#' @export
 word_patch_alignment <- function(text_boxes, masked_patches, width,
                                  height, patch_grid = 14,
                                  masked_text = list()) {

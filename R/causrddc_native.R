@@ -161,6 +161,20 @@
   max(tot / (n * h), 1e-12)
 }
 
+#' morie_causrddc_rd_bandwidth
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param nu Defaults to \code{0}.
+#' @param p Defaults to \code{1}.
+#' @param kernel Defaults to \code{"triangular"}.
+#' @param s Defaults to \code{0}.
+#' @param prelim_order Defaults to \code{NULL}.
+#' @return A list with \code{h}, \code{h_unclamped}, \code{at_bound}, \code{C}, \code{B}, \code{V}, \code{f}, \code{mu_plus}, \code{mu_minus}.
+#' @export
 morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, prelim_order = NULL) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -229,6 +243,26 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
   out
 }
 
+#' morie_causrddc
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @param treatment Defaults to \code{NULL}.
+#' @param cutoff Defaults to \code{0}.
+#' @param nu Defaults to \code{0}.
+#' @param p Defaults to \code{1}.
+#' @param q Defaults to \code{NULL}.
+#' @param h Defaults to \code{NULL}.
+#' @param b Defaults to \code{NULL}.
+#' @param kernel Defaults to \code{"triangular"}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param vce Defaults to \code{"nn"}.
+#' @param J Defaults to \code{3}.
+#' @return A list with \code{estimate}, \code{bias_corrected}, \code{se_conventional}, \code{se_robust}, \code{ci_conventional}, \code{ci_bias_corrected}, \code{ci_robust}, \code{pvalue_robust}, \code{h}, \code{b}, \code{rho}, \code{p}, \code{q}, \code{nu}, \code{kernel}, \code{vce}, \code{alpha}, \code{n}, \code{n_left}, \code{n_right}, \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy}, \code{method}.
+#' @export
 morie_causrddc <- function(y, x, treatment = NULL, cutoff = 0.0, nu = 0, p = 1, q = NULL, h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", J = 3) {
   y <- as.numeric(y)
   x <- as.numeric(x) - as.numeric(cutoff)
@@ -357,6 +391,13 @@ morie_causrddc_causal_rdd_ccft_bw <- morie_causrddc
 morie_causrddc_kernel_constants <- .causrddc_kernel_constants
 morie_causrddc_local_poly_weights <- .causrddc_local_poly_weights
 
+#' morie_causrddc_cheatsheet
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_causrddc_cheatsheet <- function() {
   "causrddc: robust bias-corrected RD inference (Calonico, Cattaneo & Titiunik 2014). MSE-optimal bandwidths are 'large' on purpose, so the conventional CI carries a first-order bias and undercovers. Fix: recentre by an estimated bias from a higher-order local polynomial at pilot bandwidth b, AND rescale by V + C^bc, a variance that includes the bias estimate's own variability -- which is what lets rho = h/b stay non-zero. Remark 7: at h = b the bias-corrected estimator IS the local-quadratic estimator (Frisch-Waugh). Bandwidths from Lemma 1; variance nearest-neighbour (J=3) or plug-in residuals. Sharp, kink (nu=1) and fuzzy all from one code path."
 }

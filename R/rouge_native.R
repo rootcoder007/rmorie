@@ -157,10 +157,30 @@
   c_mat[m + 1L, n + 1L]
 }
 
+#' morie_lcs_length
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.rouge_lcs_length}.
+#' @export
 morie_lcs_length <- function(a, b) {
   .rouge_lcs_length(a, b)
 }
 
+#' morie_rouge_n
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param candidate See Usage.
+#' @param reference See Usage.
+#' @param n Defaults to \code{1}.
+#' @param beta Defaults to \code{1}.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 morie_rouge_n <- function(candidate, reference, n = 1, beta = 1.0) {
   n <- as.integer(n)
   if (n < 1L) {
@@ -205,6 +225,16 @@ morie_rouge_n <- function(candidate, reference, n = 1, beta = 1.0) {
   best
 }
 
+#' morie_rouge_l
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param candidate See Usage.
+#' @param reference See Usage.
+#' @param beta Defaults to \code{1}.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 morie_rouge_l <- function(candidate, reference, beta = 1.0) {
   c_toks <- .rouge_toks(candidate)
   refs <- .rouge_get_refs_simple(reference)
@@ -231,6 +261,17 @@ morie_rouge_l <- function(candidate, reference, beta = 1.0) {
   best
 }
 
+#' morie_rouge_w
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param candidate See Usage.
+#' @param reference See Usage.
+#' @param alpha Defaults to \code{1.2}.
+#' @param beta Defaults to \code{1}.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
   alpha <- as.numeric(alpha)
   if (alpha < 1.0) {
@@ -273,6 +314,19 @@ morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
   best
 }
 
+#' morie_rouge
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param candidate See Usage.
+#' @param reference See Usage.
+#' @param variant Defaults to \code{"L"}.
+#' @param n Defaults to \code{1}.
+#' @param alpha Defaults to \code{1.2}.
+#' @param beta Defaults to \code{1}.
+#' @return Nothing; this branch always raises.
+#' @export
 morie_rouge <- function(candidate, reference, variant = "L",
                         n = 1, alpha = 1.2, beta = 1.0) {
   v <- toupper(as.character(variant))
@@ -288,6 +342,13 @@ morie_rouge <- function(candidate, reference, variant = "L",
   stop(sprintf("rouge: variant must be N, L or W, got %s", variant))
 }
 
+#' morie_rouge_cheatsheet
+#'
+#' Part of the rouge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_rouge_cheatsheet <- function() {
   "rouge: ROUGE-N clipped n-gram recall; ROUGE-L LCS F with R=LCS/m, P=LCS/n; ROUGE-W weighted LCS f(k)=k^alpha with f^-1 before the ratios; best over multiple references."
 }

@@ -83,6 +83,16 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
   lapply(reads, function(r) { r$seq <- .varcal_chars(r$seq); r })
 }
 
+#' varcal_pileup_column
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reads See Usage.
+#' @param position See Usage.
+#' @param reference See Usage.
+#' @return A list with \code{observations}, \code{reference}, \code{depth}.
+#' @export
 varcal_pileup_column <- function(reads, position, reference) {
   reads <- .varcal_norm_reads(reads)
   reference <- .varcal_chars(reference)
@@ -108,6 +118,18 @@ varcal_pileup_column <- function(reads, position, reference) {
   list(observations = obs, reference = ref, depth = length(obs))
 }
 
+#' varcal_find_candidates
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reads See Usage.
+#' @param reference See Usage.
+#' @param min_alt_count Defaults to \code{2}.
+#' @param min_alt_fraction Defaults to \code{0.05}.
+#' @param min_bq Defaults to \code{10}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
                                    min_alt_fraction = 0.05, min_bq = 10) {
   reads <- .varcal_norm_reads(reads)
@@ -159,6 +181,19 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
   out
 }
 
+#' varcal_encode_pileup
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reads See Usage.
+#' @param reference See Usage.
+#' @param candidate See Usage.
+#' @param width Defaults to \code{21}.
+#' @param height Defaults to \code{100}.
+#' @param channels Defaults to \code{"base_quality_strand"}.
+#' @return A list with \code{reference_row}, \code{read_rows}, \code{n_reads}, \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
+#' @export
 varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
                                  height = 100,
                                  channels = "base_quality_strand") {
@@ -225,6 +260,16 @@ varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
   )
 }
 
+#' varcal_genotype_posterior
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param image See Usage.
+#' @param scorer Defaults to \code{NULL}.
+#' @param prior Defaults to \code{NULL}.
+#' @return A list with \code{posterior}, \code{call}, \code{quality}, \code{scores}, \code{source}.
+#' @export
 varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
   if (is.null(prior)) {
     prior <- c(0.9985, 0.001, 0.0005)
@@ -277,6 +322,18 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
   )
 }
 
+#' morie_varcal
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reads See Usage.
+#' @param reference See Usage.
+#' @param scorer Defaults to \code{NULL}.
+#' @param min_quality Defaults to \code{10}.
+#' @param ... Passed through.
+#' @return A list with \code{estimate}, \code{candidates}, \code{n_candidates}, \code{calls}, \code{n_called}, \code{method}.
+#' @export
 morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
                          ...) {
   reads <- .varcal_norm_reads(reads)
@@ -306,6 +363,16 @@ morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
   )
 }
 
+#' varcal_evaluate
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param called See Usage.
+#' @param truth See Usage.
+#' @param candidates Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 varcal_evaluate <- function(called, truth, candidates = NULL) {
   tset <- character(0)
   for (t in truth) {
@@ -351,6 +418,13 @@ varcal_evaluate <- function(called, truth, candidates = NULL) {
   out
 }
 
+#' varcal_cheatsheet
+#'
+#' Part of the varcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 varcal_cheatsheet <- function() {
   "varcal: candidates are generated with HIGH sensitivity and low specificity on purpose -- 8.1% PPV on Ion Torrent, which the classifier lifts to 99.7% while giving up a mean 2.3% of candidate sensitivity. The pileup image puts every read at the locus in one picture so the network can use the dependence between reads. The Inception-v2 network itself is not reimplemented here; genotype_posterior takes any scorer, and the default is a labelled fallback, not a trained model."
 }

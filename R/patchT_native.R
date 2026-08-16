@@ -26,6 +26,16 @@
   }
 }
 
+#' patchify
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param patch_len See Usage.
+#' @param stride Defaults to \code{NULL}.
+#' @return A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{stride}, \code{L}, \code{covers}.
+#' @export
 patchify <- function(x, patch_len, stride = NULL) {
   v <- .patcht_vec(x)
   L <- length(v)
@@ -54,6 +64,16 @@ patchify <- function(x, patch_len, stride = NULL) {
   )
 }
 
+#' channel_independent_tokens
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param patch_len See Usage.
+#' @param stride Defaults to \code{NULL}.
+#' @return A list with \code{tokens}, \code{D}, \code{n_patches}, \code{patch_len}, \code{n_tokens_total}, \code{design}, \code{note}.
+#' @export
 channel_independent_tokens <- function(X, patch_len, stride = NULL) {
   Xm <- .patcht_mat(X)
   if (nrow(Xm) == 0L)
@@ -76,6 +96,16 @@ channel_independent_tokens <- function(X, patch_len, stride = NULL) {
   )
 }
 
+#' channel_mixed_tokens
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param patch_len See Usage.
+#' @param stride Defaults to \code{NULL}.
+#' @return A list with \code{tokens}, \code{n_patches}, \code{n_tokens_total}, \code{design}, \code{note}.
+#' @export
 channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
   Xm <- .patcht_mat(X)
   if (nrow(Xm) == 0L)
@@ -91,6 +121,14 @@ channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
   )
 }
 
+#' instance_norm
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{normalised}, \code{mean}, \code{sd}, \code{degenerate}.
+#' @export
 instance_norm <- function(x) {
   v <- .patcht_vec(x)
   if (length(v) < 2L)
@@ -110,6 +148,18 @@ instance_norm <- function(x) {
   )
 }
 
+#' attention_cost
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param patch_len See Usage.
+#' @param stride Defaults to \code{NULL}.
+#' @param D Defaults to \code{1}.
+#' @param channel_independent Defaults to \code{TRUE}.
+#' @return A list with \code{n_patches}, \code{pointwise}, \code{patched}, \code{reduction}, \code{stride}, \code{patch_len}, \code{note}.
+#' @export
 attention_cost <- function(L, patch_len, stride = NULL, D = 1,
                             channel_independent = TRUE) {
   P <- as.integer(patch_len)
@@ -131,6 +181,17 @@ attention_cost <- function(L, patch_len, stride = NULL, D = 1,
   )
 }
 
+#' patchtst_encode
+#'
+#' Part of the patchT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param patch_len See Usage.
+#' @param stride Defaults to \code{NULL}.
+#' @param normalise Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{tokens}, \code{D}, \code{n_patches}, \code{n_tokens_total}, \code{norm_stats}, \code{normalised}, \code{cost}, \code{method}.
+#' @export
 patchtst_encode <- function(X, patch_len, stride = NULL,
                             normalise = TRUE) {
   Xm <- .patcht_mat(X)

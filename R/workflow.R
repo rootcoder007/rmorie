@@ -15,6 +15,14 @@ morie_default_workflow_map <- function() {
   )
 }
 
+#' validate_workflow_map
+#'
+#' Part of the workflow implementation; see the file header for the
+#' source it follows.
+#'
+#' @param script_map See Usage.
+#' @return The value of \code{script_map}, as built in the body.
+#' @export
 validate_workflow_map <- function(script_map) {
   if (!is.character(script_map) || is.null(names(script_map))) {
     stop("`script_map` must be a named character vector.", call. = FALSE)

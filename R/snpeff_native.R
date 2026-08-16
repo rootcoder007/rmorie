@@ -37,8 +37,24 @@
                       "inframe_deletion")
 .SNPEFF_LOW <- c("synonymous_variant", "stop_retained_variant")
 
+#' codon_table
+#'
+#' Part of the snpeff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return The value of \code{.SNPEFF_CODONS}, as built in the body.
+#' @export
 codon_table <- function() .SNPEFF_CODONS
 
+#' translate
+#'
+#' Part of the snpeff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param to_stop Defaults to \code{FALSE}.
+#' @return A character value.
+#' @export
 translate <- function(seq, to_stop = FALSE) {
   s <- toupper(as.character(seq))
   s <- gsub("U", "T", s, fixed = TRUE)
@@ -80,6 +96,21 @@ translate <- function(seq, to_stop = FALSE) {
        pos = as.integer(pos), ref = ref, alt = alt)
 }
 
+#' annotate_variant
+#'
+#' Part of the snpeff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cds See Usage.
+#' @param pos See Usage.
+#' @param ref See Usage.
+#' @param alt See Usage.
+#' @param cds_start Defaults to \code{0}.
+#' @param upstream Defaults to \code{5000}.
+#' @param downstream Defaults to \code{5000}.
+#' @param transcript_len Defaults to \code{NULL}.
+#' @return The value of \code{.snpeff_pack}.
+#' @export
 annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
                              upstream = 5000, downstream = 5000,
                              transcript_len = NULL) {
@@ -161,6 +192,19 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
                codon_index = ci, hgvs_p = hgvs_p)
 }
 
+#' snpeff
+#'
+#' Part of the snpeff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cds See Usage.
+#' @param variants See Usage.
+#' @param cds_start Defaults to \code{0}.
+#' @param upstream Defaults to \code{5000}.
+#' @param downstream Defaults to \code{5000}.
+#' @param transcript_len Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{annotations}, \code{effect_counts}, \code{impact_counts}, \code{n_variants}, \code{protein}, \code{method}, \code{note}.
+#' @export
 snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
                    downstream = 5000, transcript_len = NULL) {
   if (length(variants) == 0L)

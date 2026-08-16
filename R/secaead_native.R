@@ -139,6 +139,16 @@
   out
 }
 
+#' One 64-byte keystream block. The permuted state is ADDED to the
+#'
+#' original, which is what stops the block function being invertible.
+#'
+#' @param key See Usage.
+#' @param counter See Usage.
+#' @param nonce See Usage.
+#' @param rounds Defaults to \code{20}.
+#' @return The value of \code{.secaead_le_bytes}.
+#' @export
 morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
   # One 64-byte keystream block. The permuted state is ADDED to the
   # original, which is what stops the block function being invertible.
@@ -167,6 +177,17 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
   .secaead_le_bytes((work + state) %% .secaead_MASK32)
 }
 
+#' XOR the data with the keystream from counter onward
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param key See Usage.
+#' @param counter See Usage.
+#' @param nonce See Usage.
+#' @param data See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   # XOR the data with the keystream from counter onward.
   d <- .secaead_as_bytes(data)
@@ -335,6 +356,14 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   r
 }
 
+#' The one-time authenticator over 2^130 - 5. key is 32 bytes: the
+#'
+#' low 16 become r (clamped) and the high 16 become s.
+#'
+#' @param message See Usage.
+#' @param key See Usage.
+#' @return The value of \code{.secaead_bytes_from_limbs}.
+#' @export
 morie_secaead_poly1305_mac <- function(message, key) {
   # The one-time authenticator over 2^130 - 5. key is 32 bytes: the
   # low 16 become r (clamped) and the high 16 become s.
@@ -363,6 +392,15 @@ morie_secaead_poly1305_mac <- function(message, key) {
   .secaead_bytes_from_limbs(acc, 16L)
 }
 
+#' Block 0 gives the one-time key; the message starts at 1
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param key See Usage.
+#' @param nonce See Usage.
+#' @return The value of \code{[}.
+#' @export
 morie_secaead_poly1305_key_gen <- function(key, nonce) {
   # Block 0 gives the one-time key; the message starts at 1.
   morie_secaead_chacha20_block(key, 0, nonce)[1:32]
@@ -389,6 +427,17 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
     .secaead_len8(length(a)), .secaead_len8(length(c)))
 }
 
+#' Encrypt from counter 1, then authenticate AAD and ciphertext
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param key See Usage.
+#' @param nonce See Usage.
+#' @param plaintext See Usage.
+#' @param aad Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{ciphertext}, \code{ciphertext_hex}, \code{tag}, \code{tag_hex}, \code{onetime_key}, \code{aad_len}, \code{ct_len}, \code{method}, \code{note}.
+#' @export
 morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad=NULL) {
   # Encrypt from counter 1, then authenticate AAD and ciphertext.
   otk <- morie_secaead_poly1305_key_gen(key, nonce)
@@ -406,6 +455,18 @@ morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad=NULL) {
   )
 }
 
+#' morie_secaead_aead_decrypt
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param key See Usage.
+#' @param nonce See Usage.
+#' @param ciphertext See Usage.
+#' @param tag See Usage.
+#' @param aad Defaults to \code{NULL}.
+#' @return A list with \code{valid}, \code{plaintext}, \code{expected_tag}.
+#' @export
 morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
                                        aad=NULL) {
   # Verify FIRST, in constant time, and return nothing on failure.
@@ -422,6 +483,13 @@ morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
   list(valid=TRUE, plaintext=pt, expected_tag=want)
 }
 
+#' morie_secaead_cheatsheet
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_secaead_cheatsheet <- function() {
   paste0(
     "secaead: a stream cipher alone lets an attacker flip a ",

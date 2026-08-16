@@ -33,6 +33,16 @@
 # Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
 # Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 
+#' morie_sdxlcd_fourier_embedding
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param value See Usage.
+#' @param dim Defaults to \code{8}.
+#' @param scale Defaults to \code{0.001}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 morie_sdxlcd_fourier_embedding <- function(value, dim = 8, scale = 0.001) {
   v <- as.numeric(value)
   n <- as.integer(dim)
@@ -48,6 +58,16 @@ morie_sdxlcd_fourier_embedding <- function(value, dim = 8, scale = 0.001) {
   out
 }
 
+#' morie_sdxlcd_size_conditioning
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h_original See Usage.
+#' @param w_original See Usage.
+#' @param dim Defaults to \code{8}.
+#' @return A list with \code{c_size}, \code{embedding}, \code{note}.
+#' @export
 morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
   h <- as.numeric(h_original)
   w <- as.numeric(w_original)
@@ -60,6 +80,16 @@ morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
        note = "the ORIGINAL size, so no training image has to be thrown away or upscaled")
 }
 
+#' morie_sdxlcd_crop_conditioning
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param c_top Defaults to \code{0}.
+#' @param c_left Defaults to \code{0}.
+#' @param dim Defaults to \code{8}.
+#' @return A list with \code{c_crop}, \code{embedding}, \code{object_centred}, \code{note}.
+#' @export
 morie_sdxlcd_crop_conditioning <- function(c_top = 0, c_left = 0, dim = 8) {
   top <- as.numeric(c_top)
   left <- as.numeric(c_left)
@@ -73,6 +103,18 @@ morie_sdxlcd_crop_conditioning <- function(c_top = 0, c_left = 0, dim = 8) {
        note = "(0,0) at inference asks for an UNCROPPED image")
 }
 
+#' morie_sdxlcd_sample_crop
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param height See Usage.
+#' @param width See Usage.
+#' @param target_h See Usage.
+#' @param target_w See Usage.
+#' @param rng See Usage.
+#' @return A list with \code{c_top}, \code{c_left}.
+#' @export
 morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
   H <- as.integer(height)
   W <- as.integer(width)
@@ -88,6 +130,15 @@ morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
   list(c_top = min(top, H - th), c_left = min(left, W - tw))
 }
 
+#' morie_sdxlcd_discarded_fraction
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sizes See Usage.
+#' @param minimum Defaults to \code{256}.
+#' @return A list with \code{discarded}, \code{total}, \code{fraction}, \code{kept_with_conditioning}, \code{minimum}, \code{note}.
+#' @export
 morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
   if (is.matrix(sizes)) {
     S <- lapply(seq_len(nrow(sizes)), function(i) c(as.numeric(sizes[i, 1]), as.numeric(sizes[i, 2])))
@@ -116,6 +167,16 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
        note = "conditioning keeps every image; filtering does not")
 }
 
+#' morie_sdxlcd_aspect_ratio_buckets
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratios See Usage.
+#' @param pixels Defaults to \code{1024 * 1024}.
+#' @param multiple Defaults to \code{64}.
+#' @return A list with \code{buckets}, \code{max_pixel_error}, \code{note}.
+#' @export
 morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, multiple = 64) {
   out <- list()
   for (r in ratios) {
@@ -139,6 +200,19 @@ morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, mult
        note = "square output is an unnatural default for landscape and portrait screens")
 }
 
+#' morie_sdxlcd_condition_vector
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h_original See Usage.
+#' @param w_original See Usage.
+#' @param c_top Defaults to \code{0}.
+#' @param c_left Defaults to \code{0}.
+#' @param timestep_embedding Defaults to \code{NULL}.
+#' @param dim Defaults to \code{8}.
+#' @return A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size}, \code{c_crop}, \code{method}, \code{note}.
+#' @export
 morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_left = 0,
                                           timestep_embedding = NULL, dim = 8) {
   s <- morie_sdxlcd_size_conditioning(h_original, w_original, dim)
@@ -160,6 +234,13 @@ morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_l
        note = "concatenated, then ADDED to the timestep embedding in the UNet")
 }
 
+#' morie_sdxlcd_cheatsheet
+#'
+#' Part of the sdxlcd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_sdxlcd_cheatsheet <- function() {
   "sdxlcd: two improvements that add NO supervision -- they condition on metadata the pipeline already had and threw away. SIZE: filtering below a minimum resolution discarded 39% of the data and upscaling bakes in artefacts, so give the UNet the ORIGINAL (h,w) as Fourier-embedded conditioning added to the timestep embedding. CROP: batching forces a random crop that LEAKS into samples (cut-off heads), so condition on (c_top,c_left) and set (0,0) at inference to ask for an uncropped image. Plus multi-aspect buckets at ~1024^2 pixels."
 }

@@ -12,22 +12,73 @@
 # carry the "alf" prefix so that none of them can mask a base R function
 # (alfRap would otherwise collide with base::rapply).
 
+#' alfSigm
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 alfSigm <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)), exp(x) / (1 + exp(x)))
 
+#' alfRelu
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 alfRelu <- function(x) ifelse(x > 0, x, 0)
 
 # Softmax with max subtraction.  The stabilisation is part of the contract:
 # the Python arm subtracts the same maximum.
+#' Softmax with max subtraction.  The stabilisation is part of the
+#' contract:
+#'
+#' the Python arm subtracts the same maximum.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 alfSmax <- function(v) {
   e <- exp(v - max(v))
   e / sum(e)
 }
 
+#' alfVdot
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 alfVdot <- function(a, b) sum(a * b)
 
+#' alfVn2
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return A numeric value.
+#' @export
 alfVn2 <- function(a) sum(a * a)
 
 # Dense projection of a vector; W is (n_out x n_in).
+#' Dense projection of a vector; W is (n_out x n_in)
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param W See Usage.
+#' @param b Defaults to \code{NULL}.
+#' @return The value of \code{o}, as built in the body.
+#' @export
 alfLin <- function(v, W, b = NULL) {
   o <- as.numeric(W %*% as.numeric(v))
   if (!is.null(b)) o <- o + as.numeric(b)
@@ -36,6 +87,16 @@ alfLin <- function(v, W, b = NULL) {
 
 # Layer normalisation over the channel axis of one vector.  Uses the
 # population variance (divide by n), matching the Python arm.
+#' Layer normalisation over the channel axis of one vector.  Uses the
+#'
+#' population variance (divide by n), matching the Python arm.
+#'
+#' @param v See Usage.
+#' @param g Defaults to \code{NULL}.
+#' @param b Defaults to \code{NULL}.
+#' @param eps Defaults to \code{1e-05}.
+#' @return The value of \code{o}, as built in the body.
+#' @export
 alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
   v <- as.numeric(v)
   n <- length(v)
@@ -48,24 +109,70 @@ alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
 }
 
 # A frame is list(R = 3x3 matrix, t = length-3 vector); T o x = R x + t.
+#' A frame is list(R = 3x3 matrix, t = length-3 vector); T o x = R x + t
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Tf See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
 
+#' alfRinv
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Tf See Usage.
+#' @return A list with \code{R}, \code{t}.
+#' @export
 alfRinv <- function(Tf) {
   Rt <- t(Tf$R)
   list(R = Rt, t = -as.numeric(Rt %*% as.numeric(Tf$t)))
 }
 
 # T^-1 o x, without materialising the inverse frame.
+#' T^-1 o x, without materialising the inverse frame
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Tf See Usage.
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 alfRinvap <- function(Tf, x) {
   as.numeric(t(Tf$R) %*% (as.numeric(x) - as.numeric(Tf$t)))
 }
 
 # Frame composition A o B, i.e. (A o B) o x = A o (B o x).
+#' Frame composition A o B, i.e. (A o B) o x = A o (B o x)
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return A list with \code{R}, \code{t}.
+#' @export
 alfRcomp <- function(A, B) list(R = A$R %*% B$R, t = alfRap(A, B$t))
 
 # Non-unit quaternion (1, b, c, d) to a rotation matrix -- Algorithm 23
 # lines 2-3.  Fixing the leading component to 1 before normalisation both
 # guarantees a unit quaternion and makes zero input the identity rotation.
+#' Non-unit quaternion (1, b, c, d) to a rotation matrix -- Algorithm 23
+#'
+#' lines 2-3.  Fixing the leading component to 1 before normalisation
+#' both guarantees a unit quaternion and makes zero input the identity
+#' rotation.
+#'
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param d See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 alfQ2rot <- function(b, c, d) {
   n <- sqrt(1 + b * b + c * c + d * d)
   a <- 1 / n; b <- b / n; c <- c / n; d <- d / n
@@ -76,10 +183,26 @@ alfQ2rot <- function(b, c, d) {
   ), nrow = 3, ncol = 3, byrow = TRUE)
 }
 
+#' alfIdent
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A list with \code{R}, \code{t}.
+#' @export
 alfIdent <- function() list(R = diag(3), t = c(0, 0, 0))
 
 # One-hot encoding with nearest bin -- Algorithm 5.  Ties go to the lowest
 # index, matching arg min in the pseudocode and which.min here.
+#' One-hot encoding with nearest bin -- Algorithm 5.  Ties go to the
+#' lowest
+#'
+#' index, matching arg min in the pseudocode and which.min here.
+#'
+#' @param x See Usage.
+#' @param bins See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 alfOnehot <- function(x, bins) {
   p <- numeric(length(bins))
   p[which.min(abs(x - bins))] <- 1
@@ -87,6 +210,16 @@ alfOnehot <- function(x, bins) {
 }
 
 # Cross entropy -sum(y log p) for one distribution.
+#' Cross entropy -sum(y log p) for one distribution
+#'
+#' Part of the alf_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param p See Usage.
+#' @param eps Defaults to \code{1e-12}.
+#' @return A numeric value.
+#' @export
 alfXent <- function(y, p, eps = 1e-12) {
   -sum(y * log(pmax(p, eps)))
 }

@@ -239,6 +239,13 @@ morie_snmcox <- function(time, event, treatment_history,
 #' @export
 morie_snm_cox <- morie_snmcox
 
+#' morie_snmcox_cheatsheet
+#'
+#' Part of the snmcox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_snmcox_cheatsheet <- function() {
   paste0("snmcox: structural nested failure time model by g-estimation. ",
          "Blip down U(psi) = int_0^T exp(psi A(u)) du; the true psi is the ",

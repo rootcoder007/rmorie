@@ -62,6 +62,23 @@
 # Factorization", *NIPS 2007*, 1257-1264. The probabilistic reading of
 # the same objective.
 
+#' morie_funkM
+#'
+#' Part of the funkM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param factors Defaults to \code{8}.
+#' @param epochs Defaults to \code{60}.
+#' @param lr Defaults to \code{0.005}.
+#' @param reg Defaults to \code{0.02}.
+#' @param seed Defaults to \code{0}.
+#' @param incremental Defaults to \code{FALSE}.
+#' @param epochs_per_factor Defaults to \code{20}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_funkM <- function(ratings, n_users, n_items, factors = 8,
                         epochs = 60, lr = 0.005, reg = 0.02, seed = 0,
                         incremental = FALSE, epochs_per_factor = 20) {
@@ -212,6 +229,19 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 }
 
 # Root mean squared error on a held-out set.
+#' Root mean squared error on a held-out set
+#'
+#' Part of the funkM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param mu See Usage.
+#' @param bu See Usage.
+#' @param bi See Usage.
+#' @param P See Usage.
+#' @param Q See Usage.
+#' @return A numeric value.
+#' @export
 morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
   R <- .funkM_as_ratings(ratings)
   if (nrow(R) == 0L) stop("funkM: no ratings to score")
@@ -231,6 +261,18 @@ morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
 }
 
 # What filling the holes and running an SVD actually gives.
+#' What filling the holes and running an SVD actually gives
+#'
+#' Part of the funkM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param rank Defaults to \code{2}.
+#' @param fill Defaults to \code{"zero"}.
+#' @return A list with \code{rmse_on_observed}, \code{fill}, \code{rank}, \code{note}.
+#' @export
 morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
                                           rank = 2, fill = "zero") {
   R  <- .funkM_as_ratings(ratings)

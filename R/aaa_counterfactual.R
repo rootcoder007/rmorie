@@ -92,6 +92,19 @@
   list(par = simplex[which.min(fv), ], value = min(fv))
 }
 
+#' Counterfactual
+#'
+#' Part of the counterfactual implementation; see the file header for
+#' the source it follows.
+#'
+#' @param evidence See Usage.
+#' @param equations See Usage.
+#' @param exogenous See Usage.
+#' @param do See Usage.
+#' @param query See Usage.
+#' @param u_support Defaults to \code{NULL}.
+#' @return A list with \code{counterfactual}, \code{factual}, \code{abducted}, \code{n_compatible_u}, \code{counterfactual_unique}, \code{residual}, \code{do}, \code{query}, \code{method}.
+#' @export
 Counterfactual <- function(evidence, equations, exogenous, do, query,
                            u_support = NULL) {
   if (!length(exogenous)) stop("need at least one exogenous variable")

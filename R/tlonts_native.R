@@ -62,6 +62,16 @@
 
 .TLONTS_EPS <- 1e-12
 
+#' lag_summary
+#'
+#' Part of the tlonts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param series See Usage.
+#' @param t See Usage.
+#' @param lags Defaults to \code{2}.
+#' @return A vector, from \code{c}.
+#' @export
 lag_summary <- function(series, t, lags = 2) {
   v <- as.numeric(series)
   L <- as.integer(lags)
@@ -84,6 +94,17 @@ lag_summary <- function(series, t, lags = 2) {
   c(rep(0.0, pad_len), past)
 }
 
+#' stochastic_intervention
+#'
+#' Part of the tlonts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param nodes See Usage.
+#' @param shift Defaults to \code{NULL}.
+#' @param prob Defaults to \code{NULL}.
+#' @return A list with \code{intervened}, \code{nodes}, \code{n_intervened}, \code{kind}.
+#' @export
 stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
   a <- as.numeric(A)
   idx <- as.integer(nodes)
@@ -113,6 +134,14 @@ stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
   )
 }
 
+#' martingale_variance
+#'
+#' Part of the tlonts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @return A list with \code{variance}, \code{se}, \code{T}, \code{note}.
+#' @export
 martingale_variance <- function(D) {
   v <- as.numeric(D)
   T_len <- length(v)
@@ -127,6 +156,16 @@ martingale_variance <- function(D) {
   )
 }
 
+#' martingale_check
+#'
+#' Part of the tlonts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param past See Usage.
+#' @param tol Defaults to \code{0.2}.
+#' @return A list with \code{correlation}, \code{is_martingale}, \code{note}.
+#' @export
 martingale_check <- function(D, past, tol = 0.2) {
   d <- as.numeric(D)
   p <- as.numeric(past)
@@ -147,6 +186,20 @@ martingale_check <- function(D, past, tol = 0.2) {
   )
 }
 
+#' online_tmle_series
+#'
+#' Part of the tlonts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param Z See Usage.
+#' @param Q_fn See Usage.
+#' @param g_fn See Usage.
+#' @param target_prob See Usage.
+#' @param burn_in Defaults to \code{10}.
+#' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci}, \code{T_scored}, \code{method}, \code{note}.
+#' @export
 online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
   y <- as.numeric(Y)
   a <- as.numeric(A)

@@ -9,6 +9,18 @@
 # Liang, K.-Y. & Zeger, S. L. (1986) Biometrika 73(1), 13-22,
 # doi:10.1093/biomet/73.1.13.
 
+#' morie_acigls
+#'
+#' Part of the acigls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param cluster See Usage.
+#' @param small_sample Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{std_errors}, \code{naive_std_errors}, \code{vcov}, \code{residuals}, \code{n}, \code{n_clusters}, \code{n_coefficients}, \code{sum_weights}, \code{finite_sample_correction}, \code{inflation}, \code{method}.
+#' @export
 morie_acigls <- function(y, A, H, cluster, small_sample = TRUE) {
   y <- as.numeric(y)
   n <- length(y)

@@ -65,6 +65,17 @@
   }
 }
 
+#' morie_ncfRS_gmf
+#'
+#' Part of the ncfRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p_u See Usage.
+#' @param q_i See Usage.
+#' @param h Defaults to \code{NULL}.
+#' @param activation Defaults to \code{"sigmoid"}.
+#' @return Nothing; this branch always raises.
+#' @export
 morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
   p <- as.numeric(p_u)
   q <- as.numeric(q_i)
@@ -86,6 +97,17 @@ morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
   stop(sprintf("ncfRS: activation must be identity or sigmoid, got %s", activation))
 }
 
+#' morie_ncfRS_mlp_layers
+#'
+#' Part of the ncfRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p_u See Usage.
+#' @param q_i See Usage.
+#' @param Ws See Usage.
+#' @param bs See Usage.
+#' @return The value of \code{z}, as built in the body.
+#' @export
 morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
   z <- c(as.numeric(p_u), as.numeric(q_i))
   for (l in seq_along(Ws)) {
@@ -98,6 +120,20 @@ morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
   z
 }
 
+#' morie_ncfRS_neumf
+#'
+#' Part of the ncfRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p_gmf See Usage.
+#' @param q_gmf See Usage.
+#' @param p_mlp See Usage.
+#' @param q_mlp See Usage.
+#' @param Ws See Usage.
+#' @param bs See Usage.
+#' @param h See Usage.
+#' @return A list with \code{score}, \code{gmf_part}, \code{mlp_part}, \code{note}.
+#' @export
 morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
   g <- as.numeric(p_gmf) * as.numeric(q_gmf)
   m <- morie_ncfRS_mlp_layers(p_mlp, q_mlp, Ws, bs)
@@ -114,12 +150,37 @@ morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
   )
 }
 
+#' morie_ncfRS_log_loss
+#'
+#' Part of the ncfRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param y_hat See Usage.
+#' @return A numeric value.
+#' @export
 morie_ncfRS_log_loss <- function(y, y_hat) {
   p <- min(max(as.numeric(y_hat), .ncfRS_EPS), 1.0 - .ncfRS_EPS)
   yv <- as.numeric(y)
   -(yv * log(p) + (1.0 - yv) * log(1.0 - p))
 }
 
+#' morie_ncfRS_fit_gmf
+#'
+#' Part of the ncfRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pos See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param k_dim Defaults to \code{8}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param iters Defaults to \code{2000}.
+#' @param n_neg Defaults to \code{4}.
+#' @param seed Defaults to \code{0}.
+#' @param learn_h Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{P}, \code{Q}, \code{h}, \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.
+#' @export
 morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
                                 iters = 2000, n_neg = 4, seed = 0, learn_h = TRUE) {
   U <- as.integer(n_users)
@@ -219,6 +280,13 @@ morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
   )
 }
 
+#' morie_ncfRS_cheatsheet
+#'
+#' Part of the ncfRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 morie_ncfRS_cheatsheet <- function() {
   paste0("ncfRS: the inner product is an ASSUMPTION, not a ",
          "necessity. GMF = a_out(h' (p_u * q_i)) elementwise, which ",

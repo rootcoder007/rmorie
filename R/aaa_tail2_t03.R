@@ -60,6 +60,27 @@
 #\' @return list(d, s_pooled, var_d, se_d, j, j_approx, hedges_g, var_g,
 #\'   se_g, df, n, method)
 #\' @export
+#' \\' Cohen\\'s d and Hedges\\' g for two independent groups
+#'
+#' \\' \\' d = (m1 - m2) / s_pooled with the usual pooled standard
+#' deviation. \\' The bias correction is the exact Hedges (1981) factor
+#' \\' J = Gamma(df/2) / (sqrt(df/2) Gamma((df-1)/2)), and the variance
+#' is \\' 1/n1 + 1/n2 + estimate^2 / (2 (n1 + n2)) evaluated at the
+#' estimate. \\' Both conventions were settled against
+#' metafor::escalc(measure="SMD"). \\' \\' @param m1,m2 group means \\'
+#' @param s1,s2 group standard deviations (denominator n-1) \\' @param
+#' n1,n2 group sizes, each at least 2 \\' @return list(d, s_pooled,
+#' var_d, se_d, j, j_approx, hedges_g, var_g, \\' se_g, df, n, method)
+#' \\' @export
+#'
+#' @param m1 See Usage.
+#' @param m2 See Usage.
+#' @param s1 See Usage.
+#' @param s2 See Usage.
+#' @param n1 See Usage.
+#' @param n2 See Usage.
+#' @return A list with \code{d}, \code{s_pooled}, \code{var_d}, \code{se_d}, \code{j}, \code{j_approx}, \code{hedges_g}, \code{var_g}, \code{se_g}, \code{df}, \code{n}, \code{method}.
+#' @export
 CohensD <- function(m1, m2, s1, s2, n1, n2) {
   n1 <- as.integer(n1); n2 <- as.integer(n2)
   if (n1 < 2L || n2 < 2L)
@@ -99,6 +120,20 @@ CohensD <- function(m1, m2, s1, s2, n1, n2) {
 #\' @return list(bound, variance, se, information, k, efficiency,
 #\'   attained, method)
 #\' @export
+#' \\' Cramer-Rao lower bound implied by a Fisher information matrix
+#'
+#' \\' \\' Cov(theta_hat) >= I(theta)^-1 in the Loewner order, so the
+#' bound on \\' component k is the k-th diagonal entry of the inverse
+#' information. \\' \\' @param fisher_info a scalar, a vector read as a
+#' diagonal, or a \\' square symmetric matrix \\' @param var_estimate
+#' optional actual variances, one per parameter \\' @return list(bound,
+#' variance, se, information, k, efficiency, \\' attained, method) \\'
+#' @export
+#'
+#' @param fisher_info See Usage.
+#' @param var_estimate Defaults to \code{NULL}.
+#' @return A list with \code{bound}, \code{variance}, \code{se}, \code{information}, \code{k}, \code{efficiency}, \code{attained}, \code{method}.
+#' @export
 CramerRao <- function(fisher_info, var_estimate = NULL) {
   if (is.matrix(fisher_info)) {
     info <- matrix(as.numeric(fisher_info), nrow(fisher_info))
@@ -204,6 +239,27 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #\' @return list(loglik, score, information, coefficients, vcov, se, n,
 #\'   n_event, iterations, converged, method)
 #\' @export
+#' \\' Cox partial likelihood, its score and information, optionally
+#' fitted
+#'
+#' \\' \\' Breslow handling of tied event times.  When beta is NULL the
+#' partial \\' likelihood is maximised by Newton-Raphson from zero.
+#' Checked against \\' survival::coxph(ties = "breslow"). \\' \\' @param
+#' time follow-up times \\' @param event 1 for an observed event, 0 for
+#' right censoring \\' @param X covariate matrix, no intercept column
+#' \\' @param beta coefficients to evaluate at, or NULL to fit \\'
+#' @param max_iter,tol Newton-Raphson controls, used only when beta is
+#' NULL \\' @return list(loglik, score, information, coefficients, vcov,
+#' se, n, \\' n_event, iterations, converged, method) \\' @export
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param beta Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{50L}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{loglik}, \code{score}, \code{information}, \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event}, \code{iterations}, \code{converged}, \code{method}.
+#' @export
 CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
                   tol = 1e-10) {
   time <- as.numeric(time)
@@ -289,6 +345,33 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #\' @return list(x, f, penalty, violation, max_violation, q, mu, n_outer,
 #\'   n_inner, method)
 #\' @export
+#' \\' Minimise f subject to g_i(x) <= 0 by Courant\\'s quadratic
+#' penalty
+#'
+#' \\' \\' Q(x; mu) = f(x) + mu sum_i max(0, g_i(x))^2, minimised for an
+#' \\' increasing sequence of mu.  The inner solve is steepest descent
+#' with \\' an Armijo backtracking line search on central finite
+#' differences, run \\' for a fixed budget. \\' \\' @param f objective,
+#' taking a numeric vector \\' @param constraints list of functions;
+#' g_i(x) <= 0 is the constraint \\' @param x0 starting point \\' @param
+#' mu initial penalty weight \\' @param
+#' n_outer,growth,n_inner,step0,h,armijo,max_halving fixed budget \\'
+#' @return list(x, f, penalty, violation, max_violation, q, mu, n_outer,
+#' \\' n_inner, method) \\' @export
+#'
+#' @param f See Usage.
+#' @param constraints See Usage.
+#' @param x0 See Usage.
+#' @param mu See Usage.
+#' @param n_outer Defaults to \code{8L}.
+#' @param growth Defaults to \code{10}.
+#' @param n_inner Defaults to \code{200L}.
+#' @param step0 Defaults to \code{1}.
+#' @param h Defaults to \code{1e-06}.
+#' @param armijo Defaults to \code{1e-04}.
+#' @param max_halving Defaults to \code{40L}.
+#' @return A list with \code{x}, \code{f}, \code{penalty}, \code{violation}, \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner}, \code{method}.
+#' @export
 PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
                        growth = 10, n_inner = 200L, step0 = 1,
                        h = 1e-6, armijo = 1e-4, max_halving = 40L) {
@@ -350,6 +433,27 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #\' @param relaxation the survey\'s lambda_n, in ]0, 3/2[
 #\' @return list(x, objective, n_iter, lr, relaxation, step_norm, method)
 #\' @export
+#' \\' Minimise f + g by proximal forward-backward splitting
+#'
+#' \\' \\' x_{n+1} = x_n + lambda (prox_{lr g}(x_n - lr grad f(x_n)) -
+#' x_n), \\' equation (21) of Combettes & Pesquet (2011),
+#' arXiv:0912.3522. \\' Runs a fixed number of iterations. \\' \\'
+#' @param f smooth part, reported only as the objective \\' @param
+#' grad_f gradient of f \\' @param prox_g function(y, lr) giving prox of
+#' lr * g at y \\' @param x0 starting point \\' @param lr step size, the
+#' survey\\'s beta^-1 \\' @param n_iter fixed iteration count \\' @param
+#' relaxation the survey\\'s lambda_n, in ]0, 3/2[ \\' @return list(x,
+#' objective, n_iter, lr, relaxation, step_norm, method) \\' @export
+#'
+#' @param f See Usage.
+#' @param grad_f See Usage.
+#' @param prox_g See Usage.
+#' @param x0 See Usage.
+#' @param lr See Usage.
+#' @param n_iter Defaults to \code{200L}.
+#' @param relaxation Defaults to \code{1}.
+#' @return A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr}, \code{relaxation}, \code{step_norm}, \code{method}.
+#' @export
 ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
                      relaxation = 1) {
   x <- as.numeric(x0)
@@ -392,6 +496,24 @@ ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
 #\' @return list(Xs_adapted, gamma, cost, transport_cost, row_error,
 #\'   col_error, ns, nt, d, epsilon, n_iter, method)
 #\' @export
+#' \\' Adapt source samples to a target domain through an OT plan
+#'
+#' \\' \\' The entropy-regularised plan of equation (9) is found by a
+#' fixed \\' number of Sinkhorn-Knopp sweeps, then the source samples
+#' are moved by \\' the barycentric mapping of equation (14), \\' Xs_hat
+#' = diag(gamma 1_nt)^-1 gamma Xt, with squared Euclidean cost. \\' \\'
+#' @param Xs source samples, ns x d \\' @param Xt target samples, nt x d
+#' \\' @param epsilon entropic regularisation weight (1/lambda in the
+#' paper) \\' @param n_iter fixed number of Sinkhorn sweeps \\' @return
+#' list(Xs_adapted, gamma, cost, transport_cost, row_error, \\'
+#' col_error, ns, nt, d, epsilon, n_iter, method) \\' @export
+#'
+#' @param Xs See Usage.
+#' @param Xt See Usage.
+#' @param epsilon See Usage.
+#' @param n_iter Defaults to \code{1000L}.
+#' @return A list with \code{Xs_adapted}, \code{gamma}, \code{cost}, \code{transport_cost}, \code{row_error}, \code{col_error}, \code{ns}, \code{nt}, \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
+#' @export
 OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {
   Xs <- as.matrix(Xs); Xt <- as.matrix(Xt)
   ns <- nrow(Xs); nt <- nrow(Xt)

@@ -11,12 +11,30 @@
 
 .prtcl_EPS <- 1e-300
 
+#' morie_prtcl_effective_sample_size
+#'
+#' Part of the prtcl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @return A numeric value.
+#' @export
 morie_prtcl_effective_sample_size <- function(weights) {
   s1 <- sum(weights); s2 <- sum(weights^2)
   if (s2 <= 0) return(0)
   s1 * s1 / s2
 }
 
+#' morie_prtcl_systematic_resample
+#'
+#' Part of the prtcl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @param u Defaults to \code{NULL}.
+#' @param e Defaults to \code{NULL}.
+#' @return The value of \code{idx}, as built in the body.
+#' @export
 morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
   J <- length(weights)
   tot <- sum(weights)
@@ -57,6 +75,21 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
   out
 }
 
+#' morie_prtcl_particle_filter
+#'
+#' Part of the prtcl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param n.particles See Usage.
+#' @param init See Usage.
+#' @param step See Usage.
+#' @param loglik See Usage.
+#' @param seed Defaults to \code{0L}.
+#' @param resample.threshold Defaults to \code{1}.
+#' @param systematic Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{filtered.mean}, \code{loglik}, \code{ess}, \code{min.ess}, \code{resampled}, \code{n.particles}, \code{n.obs}, \code{systematic}, \code{particles}, \code{method}.
+#' @export
 morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
                                        seed = 0L, resample.threshold = 1.0,
                                        systematic = TRUE) {
@@ -101,6 +134,20 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
        method = ("bootstrap particle filter, King, Nguyen & Ionides (2016) Algorithm 1 with systematic resampling (Algorithm 2)"))
 }
 
+#' morie_prtcl_kalman_filter_1d
+#'
+#' Part of the prtcl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param a See Usage.
+#' @param q See Usage.
+#' @param c See Usage.
+#' @param r See Usage.
+#' @param m0 Defaults to \code{0}.
+#' @param p0 Defaults to \code{1}.
+#' @return A list with \code{means}, \code{loglik}.
+#' @export
 morie_prtcl_kalman_filter_1d <- function(y, a, q, c, r, m0 = 0, p0 = 1) {
   m <- as.numeric(m0); p <- as.numeric(p0)
   N <- length(y); means <- numeric(N); ll <- 0

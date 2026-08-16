@@ -44,6 +44,20 @@
   lv
 }
 
+#' identified_set
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param n_pre See Usage.
+#' @param n_post See Usage.
+#' @param M Defaults to \code{0}.
+#' @param family Defaults to \code{"SD"}.
+#' @param l_vec Defaults to \code{NULL}.
+#' @param grid Defaults to \code{NULL}.
+#' @return A list with \code{lower}, \code{upper}, \code{estimate}, \code{pre_max_change}, \code{bound}, \code{M}, \code{family}, \code{width}, \code{note}.
+#' @export
 identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
                            l_vec = NULL, grid = NULL) {
   if (!(family %in% .SNMTST_FAMILIES))
@@ -140,6 +154,19 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
   list(lo = lo, hi = hi)
 }
 
+#' sensitivity_curve
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param n_pre See Usage.
+#' @param n_post See Usage.
+#' @param Ms See Usage.
+#' @param family Defaults to \code{"SD"}.
+#' @param l_vec Defaults to \code{NULL}.
+#' @return A list with \code{curve}, \code{family}, \code{M}, \code{width}.
+#' @export
 sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
                               l_vec = NULL) {
   curve <- lapply(Ms, function(M) {
@@ -152,6 +179,21 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
        width = vapply(curve, function(o) o$width, numeric(1)))
 }
 
+#' breakdown_value
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param n_pre See Usage.
+#' @param n_post See Usage.
+#' @param family Defaults to \code{"SD"}.
+#' @param l_vec Defaults to \code{NULL}.
+#' @param sign Defaults to \code{"positive"}.
+#' @param M_max Defaults to \code{10}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{breakdown}, \code{family}, \code{sign}, \code{status}.
+#' @export
 breakdown_value <- function(beta, n_pre, n_post, family = "SD",
                             l_vec = NULL, sign = "positive",
                             M_max = 10.0, tol = 1e-9) {
@@ -178,6 +220,21 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
        status = "interior")
 }
 
+#' fixed_length_ci
+#'
+#' Part of the snmtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param sigma See Usage.
+#' @param n_pre See Usage.
+#' @param n_post See Usage.
+#' @param M Defaults to \code{0}.
+#' @param family Defaults to \code{"SD"}.
+#' @param l_vec Defaults to \code{NULL}.
+#' @param level Defaults to \code{0.95}.
+#' @return A list with \code{estimate}, \code{lower}, \code{upper}, \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family}, \code{level}, \code{conservative}, \code{method}.
+#' @export
 fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
                             family = "SD", l_vec = NULL, level = 0.95) {
   s <- identified_set(beta, n_pre, n_post, M = M, family = family,

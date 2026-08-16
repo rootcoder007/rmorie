@@ -94,6 +94,17 @@
 
 # ------------------------------------------------------------- eqs 3.1-3.6
 
+#' Eq (3.1): mu = E[eta] = integral eta p(eta) d eta
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pdf Defaults to \code{NULL}.
+#' @param x Defaults to \code{NULL}.
+#' @param lower Defaults to \code{-Inf}.
+#' @param upper Defaults to \code{Inf}.
+#' @return A vector, from \code{c}.
+#' @export
 PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.1): mu = E[eta] = integral eta p(eta) d eta
   mass <- .morie_rg_pdfint(function(v) 1, pdf, x, lower, upper)
@@ -104,6 +115,16 @@ PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   )
 }
 
+#' Eq (3.2): E[eta^2].  Equal to the variance only when mu = 0, so both
+#'
+#' are returned rather than one being assumed for the other.
+#'
+#' @param pdf Defaults to \code{NULL}.
+#' @param x Defaults to \code{NULL}.
+#' @param lower Defaults to \code{-Inf}.
+#' @param upper Defaults to \code{Inf}.
+#' @return A vector, from \code{c}.
+#' @export
 PdfMS <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.2): E[eta^2].  Equal to the variance only when mu = 0, so both
   # are returned rather than one being assumed for the other.
@@ -120,6 +141,18 @@ PdfMS <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   )
 }
 
+#' Eq (3.3): sigma^2 = integral (eta - mu)^2 p(eta) d eta.  CV =
+#' sigma/mu
+#'
+#' is left NULL once mu is negligible against sigma; the book warns it
+#' diverges as mu -> 0.
+#'
+#' @param pdf Defaults to \code{NULL}.
+#' @param x Defaults to \code{NULL}.
+#' @param lower Defaults to \code{-Inf}.
+#' @param upper Defaults to \code{Inf}.
+#' @return A vector, from \code{c}.
+#' @export
 PdfVar <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.3): sigma^2 = integral (eta - mu)^2 p(eta) d eta.  CV = sigma/mu
   # is left NULL once mu is negligible against sigma; the book warns it
@@ -139,6 +172,17 @@ PdfVar <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   )
 }
 
+#' Eq (3.4): S = (1/sigma^3) integral (eta - mu)^3 p(eta) d eta
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pdf Defaults to \code{NULL}.
+#' @param x Defaults to \code{NULL}.
+#' @param lower Defaults to \code{-Inf}.
+#' @param upper Defaults to \code{Inf}.
+#' @return A vector, from \code{c}.
+#' @export
 PdfSkew <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.4): S = (1/sigma^3) integral (eta - mu)^3 p(eta) d eta
   mass <- .morie_rg_pdfint(function(v) 1, pdf, x, lower, upper)
@@ -157,6 +201,17 @@ PdfSkew <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   )
 }
 
+#' Eq (3.5): K = (1/sigma^4) integral (eta - mu)^4 p(eta) d eta.  The
+#' book
+#'
+#' gives 3 for a Gaussian and defines the excess K\' = K - 3.
+#'
+#' @param pdf Defaults to \code{NULL}.
+#' @param x Defaults to \code{NULL}.
+#' @param lower Defaults to \code{-Inf}.
+#' @param upper Defaults to \code{Inf}.
+#' @return A vector, from \code{c}.
+#' @export
 PdfKurt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.5): K = (1/sigma^4) integral (eta - mu)^4 p(eta) d eta.  The book
   # gives 3 for a Gaussian and defines the excess K' = K - 3.
@@ -177,6 +232,17 @@ PdfKurt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   )
 }
 
+#' Eq (3.6): H = - integral p log2(p) d eta, in bits.  p log p -> 0 as
+#'
+#' p -> 0, so zero-density points contribute nothing.  This is a density
+#' inside the log, so unlike eq (3.11) the result may be negative.
+#'
+#' @param pdf Defaults to \code{NULL}.
+#' @param x Defaults to \code{NULL}.
+#' @param lower Defaults to \code{-Inf}.
+#' @param upper Defaults to \code{Inf}.
+#' @return A vector, from \code{c}.
+#' @export
 DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.6): H = - integral p log2(p) d eta, in bits.  p log p -> 0 as
   # p -> 0, so zero-density points contribute nothing.  This is a density
@@ -213,6 +279,14 @@ DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 
 # ----------------------------------------------------------- eqs 3.7-3.11
 
+#' Eq (3.7): mu = (1/N) sum eta(n) -- the DC component of the signal
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{mean}, \code{n}, \code{method}.
+#' @export
 Smean <- function(x) {
   # eq (3.7): mu = (1/N) sum eta(n) -- the DC component of the signal
   xs <- .morie_rg_aslist(x)
@@ -223,6 +297,13 @@ Smean <- function(x) {
   )
 }
 
+#' Eqs (3.8)-(3.10): MS, RMS, SD.  The divisor is N in all three; eq
+#'
+#' (3.10) is the population SD, not the N-1 unbiased one.
+#'
+#' @param x See Usage.
+#' @return A list with \code{rms}, \code{ms}, \code{sd}, \code{mean}, \code{n}, \code{ddof}, \code{method}.
+#' @export
 Srms <- function(x) {
   # eqs (3.8)-(3.10): MS, RMS, SD.  The divisor is N in all three; eq
   # (3.10) is the population SD, not the N-1 unbiased one.
@@ -238,6 +319,15 @@ Srms <- function(x) {
   )
 }
 
+#' Eq (3.11): H = - sum p(eta_l) log2 p(eta_l), over L quantized values
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param levels Defaults to \code{NULL}.
+#' @return A list with \code{entropy}, \code{units}, \code{levels}, \code{max_entropy}, \code{probabilities}, \code{method}.
+#' @export
 Shannon <- function(p, levels = NULL) {
   # eq (3.11): H = - sum p(eta_l) log2 p(eta_l), over L quantized values
   vals <- .morie_rg_aslist(p)
@@ -272,6 +362,15 @@ Shannon <- function(p, levels = NULL) {
 
 # ---------------------------------------------------------- eqs 3.12-3.22
 
+#' Eqs (3.12)-(3.14).  Eq (3.14) holds only if x and eta are
+#'
+#' uncorrelated, so the sample correlation is measured and both the
+#' observed and the additive variance are returned side by side.
+#'
+#' @param x See Usage.
+#' @param eta See Usage.
+#' @return A list with \code{y}, \code{mean_signal}, \code{mean_noise}, \code{mean_observed}, \code{mean_additive}, \code{variance_observed}, \code{variance_additive}, \code{covariance}, \code{correlation}, \code{n}, \code{method}.
+#' @export
 NoiseModel <- function(x, eta) {
   # eqs (3.12)-(3.14).  Eq (3.14) holds only if x and eta are
   # uncorrelated, so the sample correlation is measured and both the
@@ -300,6 +399,13 @@ NoiseModel <- function(x, eta) {
   )
 }
 
+#' Eq (3.13): mu_y = mu_x + mu_eta.  Linearity of expectation needs no
+#'
+#' independence -- that is what separates it from eq (3.14).
+#'
+#' @param ... Passed through.
+#' @return A list with \code{mean}, \code{component_means}, \code{n_processes}, \code{method}.
+#' @export
 MeanSum <- function(...) {
   # eq (3.13): mu_y = mu_x + mu_eta.  Linearity of expectation needs no
   # independence -- that is what separates it from eq (3.14).
@@ -316,6 +422,15 @@ MeanSum <- function(...) {
   )
 }
 
+#' Eq (3.15): mu_x(t1) = (1/M) sum_k x_k(t1)
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param observations See Usage.
+#' @param index Defaults to \code{NULL}.
+#' @return A list with \code{mean}, \code{m}, \code{sd}, \code{se}, \code{method}.
+#' @export
 EnsMean <- function(observations, index = NULL) {
   # eq (3.15): mu_x(t1) = (1/M) sum_k x_k(t1)
   if (is.null(index)) {
@@ -340,6 +455,13 @@ EnsMean <- function(observations, index = NULL) {
   )
 }
 
+#' Eq (3.18): x_bar(t) = (1/M) sum_k x_k(t) for all t -- the prototype
+#'
+#' signal, a filtered version of the M observations.
+#'
+#' @param observations See Usage.
+#' @return A list with \code{average}, \code{sd}, \code{m}, \code{n}, \code{se}, \code{method}.
+#' @export
 EnsAvg <- function(observations) {
   # eq (3.18): x_bar(t) = (1/M) sum_k x_k(t) for all t -- the prototype
   # signal, a filtered version of the M observations.
@@ -364,6 +486,16 @@ EnsAvg <- function(observations) {
   )
 }
 
+#' Eqs (3.21)-(3.22): C_xy and rho = C_xy / (sigma_x sigma_y)
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param ddof Defaults to \code{0}.
+#' @return A list with \code{covariance}, \code{correlation}, \code{sd_x}, \code{sd_y}, \code{mean_x}, \code{mean_y}, \code{n}, \code{ddof}, \code{method}.
+#' @export
 CovXY <- function(x, y, ddof = 0) {
   # eqs (3.21)-(3.22): C_xy and rho = C_xy / (sigma_x sigma_y)
   xs <- .morie_rg_aslist(x)
@@ -387,6 +519,16 @@ CovXY <- function(x, y, ddof = 0) {
 
 # ---------------------------------------------------------- eqs 3.24-3.35
 
+#' Eq (3.24): delta(t) is undefined at t = 0 and 0 elsewhere.  A
+#'
+#' generalized function has no pointwise value at the origin, so NA is
+#' returned there.  With width= the unit-area rectangle of Figure 3.10
+#' is returned instead -- the approximating family, not the delta.
+#'
+#' @param t See Usage.
+#' @param width Defaults to \code{NULL}.
+#' @return A list with \code{delta}, \code{t}, \code{width}, \code{height}, \code{undefined_at_zero}, \code{method}.
+#' @export
 DiracDelta <- function(t, width = NULL) {
   # eq (3.24): delta(t) is undefined at t = 0 and 0 elsewhere.  A
   # generalized function has no pointwise value at the origin, so NA is
@@ -410,6 +552,15 @@ DiracDelta <- function(t, width = NULL) {
   )
 }
 
+#' Eq (3.25): integral delta(t) dt = 1.  The property defines the delta,
+#'
+#' so the useful computation is the check on a candidate approximation.
+#'
+#' @param t Defaults to \code{NULL}.
+#' @param values Defaults to \code{NULL}.
+#' @param width Defaults to \code{NULL}.
+#' @return A list with \code{area}, \code{unit_area}, \code{method}.
+#' @export
 DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
   # eq (3.25): integral delta(t) dt = 1.  The property defines the delta,
   # so the useful computation is the check on a candidate approximation.
@@ -442,6 +593,16 @@ DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
   list(area = 1, unit_area = TRUE, method = "Rangayyan (2024) eq. (3.25)")
 }
 
+#' Eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is
+#'
+#' negative for every a in (0,1), so the function diverges at t = 0 (NA,
+#' not a large finite number).  Its integral over [-L, L] is L^a, which
+#' tends to 1 as a -> 0 -- the unit-area property in the limit.
+#'
+#' @param t See Usage.
+#' @param a See Usage.
+#' @return A list with \code{values}, \code{t}, \code{a}, \code{area_symmetric}, \code{half_width}, \code{method}.
+#' @export
 DeltaLim <- function(t, a) {
   # eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is
   # negative for every a in (0,1), so the function diverges at t = 0 (NA,
@@ -459,6 +620,15 @@ DeltaLim <- function(t, a) {
   )
 }
 
+#' Eq (3.27): u(t) = 1 for t > 0, 0 otherwise.  Strict: u(0) = 0 here,
+#'
+#' whereas the discrete step of eq (3.35) has u(0) = 1.  They are
+#' separate definitions, not one sampled from the other.
+#'
+#' @param t See Usage.
+#' @param shift Defaults to \code{0}.
+#' @return A list with \code{u}, \code{t}, \code{shift}, \code{value_at_origin}, \code{method}.
+#' @export
 Ustep <- function(t, shift = 0) {
   # eq (3.27): u(t) = 1 for t > 0, 0 otherwise.  Strict: u(0) = 0 here,
   # whereas the discrete step of eq (3.35) has u(0) = 1.  They are
@@ -471,6 +641,17 @@ Ustep <- function(t, shift = 0) {
   )
 }
 
+#' Eq (3.28): integral_{T1}^{T2} x(t) delta(t - to) dt = x(to) if
+#'
+#' T1 < to < T2, else 0.  Both inequalities are strict, so an impulse
+#' sitting on a limit contributes nothing.
+#'
+#' @param x See Usage.
+#' @param t0 See Usage.
+#' @param lower See Usage.
+#' @param upper See Usage.
+#' @return A list with \code{value}, \code{inside}, \code{t0}, \code{lower}, \code{upper}, \code{method}.
+#' @export
 Sifting <- function(x, t0, lower, upper) {
   # eq (3.28): integral_{T1}^{T2} x(t) delta(t - to) dt = x(to) if
   # T1 < to < T2, else 0.  Both inequalities are strict, so an impulse
@@ -488,6 +669,15 @@ Sifting <- function(x, t0, lower, upper) {
   )
 }
 
+#' Eq (3.29): x(t) = integral x(alpha) delta(t - alpha) d alpha.  The
+#'
+#' weight at alpha_i is x(alpha_i) times a trapezoidal spacing, so the
+#' weights sum to the integral of x rather than to the sum of samples.
+#'
+#' @param x See Usage.
+#' @param t Defaults to \code{NULL}.
+#' @return A list with \code{locations}, \code{weights}, \code{amplitudes}, \code{total_weight}, \code{integral}, \code{reconstruction_error}, \code{method}.
+#' @export
 DeltaDecomp <- function(x, t = NULL) {
   # eq (3.29): x(t) = integral x(alpha) delta(t - alpha) d alpha.  The
   # weight at alpha_i is x(alpha_i) times a trapezoidal spacing, so the
@@ -517,6 +707,18 @@ DeltaDecomp <- function(x, t = NULL) {
   )
 }
 
+#' Eq (3.30): y(t) = integral x(tau) h(t - tau) d tau.  Tabulated on a
+#'
+#' uniform grid this is the discrete convolution SCALED BY dt; dropping
+#' the dt is how a continuous-time convolution comes out wrong by a
+#' factor of the sampling interval.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param dt Defaults to \code{1}.
+#' @param t Defaults to \code{NULL}.
+#' @return A list with \code{y}, \code{t}, \code{dt}, \code{n}, \code{m}, \code{integral}, \code{method}.
+#' @export
 ContConv <- function(x, h, dt = 1, t = NULL) {
   # eq (3.30): y(t) = integral x(tau) h(t - tau) d tau.  Tabulated on a
   # uniform grid this is the discrete convolution SCALED BY dt; dropping
@@ -553,6 +755,17 @@ ContConv <- function(x, h, dt = 1, t = NULL) {
   )
 }
 
+#' Eq (3.31): y(t) = integral h(tau) x(t - tau) d tau, given by the book
+#'
+#' as an equivalent result.  Computed the other way round and compared
+#' against eq (3.30) rather than asserted equivalent.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param dt Defaults to \code{1}.
+#' @param t Defaults to \code{NULL}.
+#' @return The value of \code{swapped}, as built in the body.
+#' @export
 ContConvAlt <- function(x, h, dt = 1, t = NULL) {
   # eq (3.31): y(t) = integral h(tau) x(t - tau) d tau, given by the book
   # as an equivalent result.  Computed the other way round and compared
@@ -566,6 +779,15 @@ ContConvAlt <- function(x, h, dt = 1, t = NULL) {
   swapped
 }
 
+#' Eq (3.34): delta(n) = 1 if n = 0, 0 otherwise.  Unlike eq (3.24) this
+#'
+#' is an ordinary sequence, evaluable at the origin.
+#'
+#' @param n See Usage.
+#' @param shift Defaults to \code{0}.
+#' @param amplitude Defaults to \code{1}.
+#' @return A list with \code{delta}, \code{n}, \code{shift}, \code{amplitude}, \code{method}.
+#' @export
 KDelta <- function(n, shift = 0, amplitude = 1) {
   # eq (3.34): delta(n) = 1 if n = 0, 0 otherwise.  Unlike eq (3.24) this
   # is an ordinary sequence, evaluable at the origin.
@@ -582,6 +804,14 @@ KDelta <- function(n, shift = 0, amplitude = 1) {
   )
 }
 
+#' Eq (3.35): u(n) = 1 for n >= 0, 0 otherwise.  Non-strict, so
+#'
+#' u(0) = 1 -- the opposite of eq (3.27).
+#'
+#' @param n See Usage.
+#' @param shift Defaults to \code{0}.
+#' @return A list with \code{u}, \code{n}, \code{shift}, \code{first_difference}, \code{value_at_origin}, \code{method}.
+#' @export
 StepSeq <- function(n, shift = 0) {
   # eq (3.35): u(n) = 1 for n >= 0, 0 otherwise.  Non-strict, so
   # u(0) = 1 -- the opposite of eq (3.27).
@@ -599,6 +829,19 @@ StepSeq <- function(n, shift = 0) {
   )
 }
 
+#' Eq (3.42): h(t) = 10 (0.25 - t), 0 <= t <= 0.25 s, at fs = 2 kHz.
+#' The
+#'
+#' text immediately after states the output was divided by the sum of
+#' all values of h(n) -- the normalization is part of the method; the
+#' raw taps sum to 626.25 for the book\'s constants.
+#'
+#' @param x Defaults to \code{NULL}.
+#' @param fs Defaults to \code{2000}.
+#' @param duration Defaults to \code{0.25}.
+#' @param slope Defaults to \code{10}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 RampFilt <- function(x = NULL, fs = 2000, duration = 0.25, slope = 10) {
   # eq (3.42): h(t) = 10 (0.25 - t), 0 <= t <= 0.25 s, at fs = 2 kHz.  The
   # text immediately after states the output was divided by the sum of

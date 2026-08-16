@@ -69,21 +69,62 @@
   out
 }
 
+#' surepi_c1_mild
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param threshold Defaults to \code{3}.
+#' @param sigma_floor Defaults to \code{1}.
+#' @return The value of \code{surepi_ears_detect}.
+#' @export
 surepi_c1_mild <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
   surepi_ears_detect(counts, method = "C1", threshold = threshold,
                      sigma_floor = sigma_floor)
 }
 
+#' surepi_c2_medium
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param threshold Defaults to \code{3}.
+#' @param sigma_floor Defaults to \code{1}.
+#' @return The value of \code{surepi_ears_detect}.
+#' @export
 surepi_c2_medium <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
   surepi_ears_detect(counts, method = "C2", threshold = threshold,
                      sigma_floor = sigma_floor)
 }
 
+#' surepi_c3_ultra
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param threshold Defaults to \code{2}.
+#' @param sigma_floor Defaults to \code{1}.
+#' @return The value of \code{surepi_ears_detect}.
+#' @export
 surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
   surepi_ears_detect(counts, method = "C3", threshold = threshold,
                      sigma_floor = sigma_floor)
 }
 
+#' surepi_ears_detect
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param method Defaults to \code{"C2"}.
+#' @param threshold Defaults to \code{3}.
+#' @param sigma_floor Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged}, \code{method}, \code{threshold}, \code{baseline_lag}, \code{baseline_width}, \code{sigma_floor}, \code{n}, \code{n_evaluable}, \code{reference}, \code{caveat}.
+#' @export
 surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
                                sigma_floor = 1.0) {
   if (!(method %in% .surepi_methods)) {
@@ -140,6 +181,19 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
   )
 }
 
+#' surepi_salmonella_cusum
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param mu0 See Usage.
+#' @param sigma See Usage.
+#' @param k_shift Defaults to \code{1}.
+#' @param decision Defaults to \code{0.5}.
+#' @param min_count Defaults to \code{5}.
+#' @return A list with \code{cusum}, \code{flag}, \code{estimate}, \code{n_flagged}, \code{decision}, \code{k}, \code{min_count}, \code{method}.
+#' @export
 surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
                                     decision = 0.5, min_count = 5) {
   cv <- as.numeric(counts)
@@ -186,6 +240,17 @@ surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
   )
 }
 
+#' surepi_compound_smoothing
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @param current See Usage.
+#' @param passes Defaults to \code{c(4, 2, 5, 3)}.
+#' @param multiplier Defaults to \code{2}.
+#' @return A list with \code{smoothed}, \code{baseline}, \code{sigma}, \code{threshold}, \code{flag}, \code{current}, \code{method}.
+#' @export
 surepi_compound_smoothing <- function(values, current,
                                       passes = c(4, 2, 5, 3),
                                       multiplier = 2.0) {
@@ -249,6 +314,13 @@ surepi_compound_smoothing <- function(values, current,
   out
 }
 
+#' surepi_cheatsheet
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 surepi_cheatsheet <- function() {
   paste("surepi: EARS. C1 baseline = days t-7..t-1, C2 = t-9..t-3,",
         "C3 = sum of three consecutive C2s. S_{t-1} = 0 for C1 and",

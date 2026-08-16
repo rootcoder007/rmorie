@@ -129,6 +129,19 @@
   return(out)
 }
 
+#' morie_ngnest
+#'
+#' Part of the ngnest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param horizon See Usage.
+#' @param lookback_multiples Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
+#' @param block_sets Defaults to \code{NULL}.
+#' @param how Defaults to \code{"median"}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 morie_ngnest <- function(y, horizon,
                          lookback_multiples = c(2, 3, 4, 5, 6, 7),
                          block_sets = NULL, how = "median", ridge = 1e-8) {

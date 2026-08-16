@@ -10,12 +10,31 @@
 .ragRet_EPS <- 1e-12
 .METRICS <- c("inner_product", "cosine")
 
+#' morie_ragRet_normalise
+#'
+#' Part of the ragRet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 morie_ragRet_normalise <- function(v) {
   x <- as.numeric(v); n <- sqrt(sum(x^2))
   if (n <= .ragRet_EPS) stop("ragRet: a zero vector has no direction")
   x / n
 }
 
+#' morie_ragRet_top_k
+#'
+#' Part of the ragRet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query See Usage.
+#' @param corpus See Usage.
+#' @param k.top Defaults to \code{5L}.
+#' @param metric Defaults to \code{"inner_product"}.
+#' @return A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric}, \code{comparisons}, \code{note}.
+#' @export
 morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
                                metric = "inner_product") {
   if (!(metric %in% .METRICS))
@@ -40,6 +59,17 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
        note = "exact, and linear in the corpus -- which is the reason approximate indexes exist")
 }
 
+#' morie_ragRet_ivf_index
+#'
+#' Part of the ragRet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param corpus See Usage.
+#' @param n.cells Defaults to \code{4L}.
+#' @param iters Defaults to \code{25L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{centroids}, \code{lists}, \code{assign}, \code{n.cells}, \code{n}, \code{note}.
+#' @export
 morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
                                    seed = 0L) {
   D <- lapply(corpus, as.numeric); n <- length(D)
@@ -85,6 +115,19 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
        note = "the inverted file: which vectors live in which cell")
 }
 
+#' morie_ragRet_ivf_search
+#'
+#' Part of the ragRet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query See Usage.
+#' @param corpus See Usage.
+#' @param index See Usage.
+#' @param k.top Defaults to \code{5L}.
+#' @param nprobe Defaults to \code{1L}.
+#' @param metric Defaults to \code{"inner_product"}.
+#' @return A list with \code{indices}, \code{scores}, \code{comparisons}, \code{probed}, \code{n.cells}, \code{fraction.scanned}, \code{note}.
+#' @export
 morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
                                     nprobe = 1L, metric = "inner_product") {
   q <- as.numeric(query)
@@ -108,6 +151,15 @@ morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
        note = "approximate: the true nearest neighbour may sit in a cell that was not probed")
 }
 
+#' morie_ragRet_recall_at_k
+#'
+#' Part of the ragRet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param approximate See Usage.
+#' @param exact See Usage.
+#' @return A list with \code{recall}, \code{hits}, \code{k}, \code{missed}.
+#' @export
 morie_ragRet_recall_at_k <- function(approximate, exact) {
   A <- as.integer(approximate)
   E <- as.integer(exact)
@@ -117,6 +169,16 @@ morie_ragRet_recall_at_k <- function(approximate, exact) {
        missed = E[!(E %in% A)])
 }
 
+#' morie_ragRet_marginalise
+#'
+#' Part of the ragRet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param doc.scores See Usage.
+#' @param token.probs See Usage.
+#' @param mode Defaults to \code{"sequence"}.
+#' @return Nothing; this branch always raises.
+#' @export
 morie_ragRet_marginalise <- function(doc.scores, token.probs,
                                      mode = "sequence") {
   p <- as.numeric(doc.scores)
