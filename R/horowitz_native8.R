@@ -22,6 +22,17 @@
 # a uniform grid, and the index here is sorted data, which is anything
 # but. Using the naive form put every quantity downstream of G' about
 # 1e-4 away from morie.fn, which is small but is not parity.
+#' The interior formula must account for UNEQUAL spacing -- the naive
+#'
+#' (f[i+1] - f[i-1]) / (x[i+1] - x[i-1]) is only second-order accurate
+#' on a uniform grid, and the index here is sorted data, which is
+#' anything but. Using the naive form put every quantity downstream of
+#' G\' about 1e-4 away from morie.fn, which is small but is not parity.
+#'
+#' @param fv See Usage.
+#' @param xv See Usage.
+#' @return The value of \code{g}, as built in the body.
+#' @export
 .morie_hrz_gradient <- function(fv, xv) {
   n <- length(fv)
   g <- numeric(n)
@@ -40,6 +51,17 @@
 }
 
 # Nadaraya-Watson fitted values on a supplied grid.
+#' Nadaraya-Watson fitted values on a supplied grid
+#'
+#' Part of the horowitz_native8 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param grid See Usage.
+#' @param h See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_hrz_nw <- function(x, y, grid, h) {
   w <- exp(-0.5 * (outer(grid, x, "-") / h)^2)
   den <- rowSums(w)

@@ -5,6 +5,17 @@
 # (fetched-wave3/Forensic_DNA_Evidence_Interpretation..pdf).
 # Mirrors Python morie.fn.forsnp exactly.
 
+#' .forsnp_locus
+#'
+#' Part of the forsnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a1 See Usage.
+#' @param a2 See Usage.
+#' @param fr See Usage.
+#' @param theta See Usage.
+#' @return A numeric value.
+#' @export
 .forsnp_locus <- function(a1, a2, fr, theta) {
   p1 <- as.numeric(fr[[a1]])
   if (a1 == a2) {

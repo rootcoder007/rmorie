@@ -15,8 +15,27 @@
 
 # canonical fixed-width key of a sorted bond-index tuple: usable for
 # ordering because every tuple compared shares a length
+#' Canonical fixed-width key of a sorted bond-index tuple: usable for
+#'
+#' ordering because every tuple compared shares a length
+#'
+#' @param v See Usage.
+#' @return A character value.
+#' @export
 .mor_rdk_key <- function(v) paste(sprintf("%06d", v), collapse = "")
 
+#' .mor_rdk_subgraphs
+#'
+#' Part of the rdkfp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param bd See Usage.
+#' @param minpath See Usage.
+#' @param maxpath See Usage.
+#' @param branched See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .mor_rdk_subgraphs <- function(a, bd, minpath, maxpath, branched) {
   nb <- length(bd$i)
   touch <- vector("list", a)

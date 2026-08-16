@@ -28,6 +28,16 @@
 
 .causdidwd_EPS <- 1e-12
 
+#' .causdidwd_panel
+#'
+#' Part of the causdidwd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param unit See Usage.
+#' @param period See Usage.
+#' @return A list with \code{y}, \code{u}, \code{t}, \code{n}.
+#' @export
 .causdidwd_panel <- function(Y, unit, period) {
   yv <- as.numeric(unlist(Y, use.names = FALSE))
   uv <- as.character(unlist(unit, use.names = FALSE))
@@ -42,6 +52,14 @@
   list(y = yv, u = uv, t = tv, n = n)
 }
 
+#' .causdidwd_unique_sorted
+#'
+#' Part of the causdidwd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .causdidwd_unique_sorted <- function(v) {
   out <- character(0)
   seen <- character(0)
@@ -54,10 +72,27 @@
   out
 }
 
+#' .causdidwd_with_intercept
+#'
+#' Part of the causdidwd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rows See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .causdidwd_with_intercept <- function(rows) {
   cbind(1, rows)
 }
 
+#' .causdidwd_cohorts
+#'
+#' Part of the causdidwd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param first_treated See Usage.
+#' @param period See Usage.
+#' @return A list with \code{G}, \code{ts}, \code{order}.
+#' @export
 .causdidwd_cohorts <- function(first_treated, period) {
   ts <- sort(unique(as.character(period)))
   ord <- setNames(seq_along(ts) - 1L, ts)
@@ -425,6 +460,13 @@ morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
   list(profile = prof, scheme = scheme, estimate = est)
 }
 
+#' .causdidwd_morie_cheatsheet
+#'
+#' Part of the causdidwd_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .causdidwd_morie_cheatsheet <- function() {
   paste("causdidwd: ETWFE. TWFE == two-way MUNDLAK -- pooled OLS ",
         "with unit-specific time averages AND period-specific ",

@@ -56,6 +56,14 @@ Btcimed <- function(x, B = 200L, alpha = 0.05, rng = 2L, exhaustive = FALSE) {
        method = "Bootstrap CI for the median")
 }
 
+#' .bt_median
+#'
+#' Part of the btcimed implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sorted_vals See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .bt_median <- function(sorted_vals) {
   m <- length(sorted_vals)
   h <- m %/% 2L

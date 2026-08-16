@@ -9,6 +9,15 @@
 # Internal: weighted mean and the weighted variance used for the SMD.
 # The sw - sum(w^2)/sw denominator reduces to n - 1 at equal weights, so
 # the weighted and unweighted diagnostics agree there.
+#' Internal: weighted mean and the weighted variance used for the SMD
+#'
+#' The sw - sum(w^2)/sw denominator reduces to n - 1 at equal weights,
+#' so the weighted and unweighted diagnostics agree there.
+#'
+#' @param x See Usage.
+#' @param w See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .smd_moments <- function(x, w) {
   sw <- sum(w)
   m <- sum(w * x) / sw
@@ -97,6 +106,15 @@ morie_covariate_balance <- function(x, treat, weights = NULL, threshold = 0.1) {
 }
 
 # Internal: a_ij = 1 when j is among i's k nearest, excluding i itself.
+#' Internal: a_ij = 1 when j is among i\'s k nearest, excluding i itself
+#'
+#' Part of the panelspatial implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param k See Usage.
+#' @return The value of \code{A}, as built in the body.
+#' @export
 .knn_indicator <- function(D, k) {
   diag(D) <- Inf
   n <- nrow(D)
@@ -175,6 +193,16 @@ morie_jacquez_knn <- function(coords, time, k = 3L, B = 999L) {
 
 # Internal: Ripley's K without edge correction. The bias is shared with
 # the simulated patterns, drawn in the same window, so it cancels.
+#' Internal: Ripley\'s K without edge correction. The bias is shared
+#' with
+#'
+#' the simulated patterns, drawn in the same window, so it cancels.
+#'
+#' @param P See Usage.
+#' @param radii See Usage.
+#' @param area See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .ripley_k <- function(P, radii, area) {
   n <- nrow(P)
   d <- as.matrix(stats::dist(P))

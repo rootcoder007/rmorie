@@ -4,8 +4,24 @@
 # Genomic Prediction, Springer, DOI 10.1007/978-3-030-89010-0).
 # Base R only. Not exported.
 
+#' .gpflat
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .gpflat <- function(x) as.numeric(unlist(x))
 
+#' .gpmat
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .gpmat <- function(A) {
   if (is.matrix(A)) return(matrix(as.numeric(A), nrow(A), ncol(A)))
   if (is.list(A)) return(do.call(rbind, lapply(A, as.numeric)))
@@ -14,6 +30,14 @@
 
 # Solve A x = b; rank-deficient systems fall back on the minimum-norm
 # pseudo-inverse solution, as the Python arm does.
+#' Solve A x = b; rank-deficient systems fall back on the minimum-norm
+#'
+#' pseudo-inverse solution, as the Python arm does.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .gpsolve <- function(A, b) {
   A <- .gpmat(A); b <- .gpflat(b)
   out <- tryCatch(as.numeric(solve(A, b)), error = function(e) NULL)
@@ -21,6 +45,14 @@
   as.numeric(.gppinv(A) %*% b)
 }
 
+#' .gppinv
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 .gppinv <- function(A) {
   s <- svd(.gpmat(A))
   tol <- max(dim(A)) * .Machine$double.eps * max(s$d, 0)
@@ -28,6 +60,14 @@
   s$v %*% (di * t(s$u))
 }
 
+#' .gpinv
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{.gppinv}.
+#' @export
 .gpinv <- function(A) {
   A <- .gpmat(A)
   out <- tryCatch(solve(A), error = function(e) NULL)
@@ -37,6 +77,13 @@
 
 # log|det A| via the modulus, matching _gp_core._logdet (which sums
 # log|pivot| and so discards the sign).
+#' Log|det A| via the modulus, matching _gp_core._logdet (which sums
+#'
+#' log|pivot| and so discards the sign).
+#'
+#' @param A See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gplogdet <- function(A) {
   A <- .gpmat(A)
   d <- determinant(A, logarithm = TRUE)
@@ -45,6 +92,15 @@
 }
 
 # --- chapter 1: balanced one-way layout, eqs (1.2)-(1.5) -------------------
+#' Chapter 1: balanced one-way layout, eqs (1.2)-(1.5)
+#' -------------------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param groups See Usage.
+#' @return A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means}, \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between}, \code{ms_within}.
+#' @export
 .gponeway <- function(groups) {
   gs <- lapply(groups, as.numeric)
   if (length(gs) == 0L || any(vapply(gs, length, 1L) != length(gs[[1L]]))) {
@@ -70,6 +126,17 @@
 }
 
 # --- chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14) -------------
+#' Chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14)
+#' -------------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y_true See Usage.
+#' @param y_pred See Usage.
+#' @param n_classes Defaults to \code{NULL}.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 .gpconf <- function(y_true, y_pred, n_classes = NULL) {
   yt <- as.integer(.gpflat(y_true)); yp <- as.integer(.gpflat(y_pred))
   C <- if (is.null(n_classes)) max(c(yt, yp)) + 1L else as.integer(n_classes)
@@ -78,6 +145,15 @@
   M
 }
 
+#' .gpclassmetrics
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param conf See Usage.
+#' @param i See Usage.
+#' @return A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all}, \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
+#' @export
 .gpclassmetrics <- function(conf, i) {
   conf <- .gpmat(conf); C <- nrow(conf); ii <- as.integer(i) + 1L
   tfn <- sum(conf[ii, -ii]); tfp <- sum(conf[-ii, ii])
@@ -89,6 +165,17 @@
        pCCC = if (total) ttp / total else 0)
 }
 
+#' .gpbrier
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param probs See Usage.
+#' @param y_true See Usage.
+#' @param n_classes Defaults to \code{NULL}.
+#' @param halved Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gpbrier <- function(probs, y_true, n_classes = NULL, halved = FALSE) {
   P <- .gpmat(probs); yt <- as.integer(.gpflat(y_true)); Tn <- length(yt)
   C <- if (is.null(n_classes)) ncol(P) else as.integer(n_classes)
@@ -101,18 +188,51 @@
   if (halved) bs / 2 else bs
 }
 
+#' .gpmll
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param probs See Usage.
+#' @param y_true See Usage.
+#' @param n_classes Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .gpmll <- function(probs, y_true, n_classes = NULL) {
   P <- .gpmat(probs); yt <- as.integer(.gpflat(y_true))
   -sum(log(pmax(P[cbind(seq_along(yt), yt + 1L)], 1e-300))) / length(yt)
 }
 
 # --- chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML ---------------
+#' Chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML
+#' ---------------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Z See Usage.
+#' @param D See Usage.
+#' @param R Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .gplmmV <- function(Z, D, R = NULL) {
   Z <- .gpmat(Z); n <- nrow(Z)
   V <- Z %*% .gpmat(D) %*% t(Z)
   V + (if (is.null(R)) diag(n) else .gpmat(R))
 }
 
+#' .gpblueblup
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param Sigma See Usage.
+#' @param R Defaults to \code{NULL}.
+#' @return A list with \code{beta}, \code{u}.
+#' @export
 .gpblueblup <- function(X, Z, y, Sigma, R = NULL) {
   X <- .gpmat(X); Z <- .gpmat(Z); y <- .gpflat(y)
   V <- .gplmmV(Z, Sigma, R)
@@ -124,6 +244,19 @@
   list(beta = beta, u = u)
 }
 
+#' .gplmmloglik
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param beta Defaults to \code{NULL}.
+#' @param R Defaults to \code{NULL}.
+#' @return A list with \code{value}, \code{beta}.
+#' @export
 .gplmmloglik <- function(X, Z, y, D, beta = NULL, R = NULL) {
   Xm <- .gpmat(X); y <- .gpflat(y); n <- length(y)
   V <- .gplmmV(Z, D, R); Vi <- .gpinv(V)
@@ -137,6 +270,18 @@
        beta = beta)
 }
 
+#' .gpremlloglik
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param R Defaults to \code{NULL}.
+#' @return A list with \code{value}, \code{beta}.
+#' @export
 .gpremlloglik <- function(X, Z, y, D, R = NULL) {
   Xm <- .gpmat(X); y <- .gpflat(y)
   V <- .gplmmV(Z, D, R); Vi <- .gpinv(V)
@@ -150,6 +295,17 @@
 }
 
 # --- chapter 3: least squares, eq (3.1) -----------------------------------
+#' Chapter 3: least squares, eq (3.1)
+#' -----------------------------------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param add_intercept Defaults to \code{FALSE}.
+#' @return A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
+#' @export
 .gpolsfit <- function(X, y, add_intercept = FALSE) {
   Xm <- .gpmat(X)
   if (add_intercept) Xm <- cbind(1, Xm)
@@ -169,8 +325,31 @@
 }
 
 # --- chapter 5: Kronecker products and the multi-trait model, eq (5.5) -----
+#' Chapter 5: Kronecker products and the multi-trait model, eq (5.5)
+#' -----
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return The value of \code{kronecker}.
+#' @export
 .gpkron <- function(A, B) kronecker(.gpmat(A), .gpmat(B))
 
+#' .gpmultitrait
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param Z See Usage.
+#' @param G See Usage.
+#' @param Sigma_T See Usage.
+#' @param R_T See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @return A list with \code{mu}, \code{beta}, \code{b}, \code{b_by_line}.
+#' @export
 .gpmultitrait <- function(Y, Z, G, Sigma_T, R_T, X = NULL) {
   Ym <- .gpmat(Y); J <- nrow(Ym); nT <- ncol(Ym)
   y <- as.numeric(t(Ym))                      # stacked line-by-line
@@ -188,6 +367,18 @@
 }
 
 # --- chapter 7: multinomial logistic model, eqs (7.6)-(7.10) ---------------
+#' Chapter 7: multinomial logistic model, eqs (7.6)-(7.10)
+#' ---------------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param beta0 See Usage.
+#' @param beta See Usage.
+#' @param baseline_last Defaults to \code{TRUE}.
+#' @return A matrix, from \code{t}.
+#' @export
 .gpmnprobs <- function(X, beta0, beta, baseline_last = TRUE) {
   Xm <- .gpmat(X); b0 <- .gpflat(beta0); B <- .gpmat(beta)
   if (baseline_last) { b0 <- c(b0, 0); B <- rbind(B, rep(0, ncol(Xm))) }
@@ -198,12 +389,38 @@
   }))
 }
 
+#' .gpmnloglik
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param beta0 See Usage.
+#' @param beta See Usage.
+#' @param baseline_last Defaults to \code{TRUE}.
+#' @return A numeric value.
+#' @export
 .gpmnloglik <- function(X, y, beta0, beta, baseline_last = TRUE) {
   P <- .gpmnprobs(X, beta0, beta, baseline_last)
   ys <- as.integer(.gpflat(y))
   sum(log(pmax(P[cbind(seq_along(ys), ys + 1L)], 1e-300)))
 }
 
+#' .gppenmnloglik
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param beta0 See Usage.
+#' @param beta See Usage.
+#' @param lam See Usage.
+#' @param penalty Defaults to \code{"ridge"}.
+#' @param baseline_last Defaults to \code{TRUE}.
+#' @return A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.
+#' @export
 .gppenmnloglik <- function(X, y, beta0, beta, lam, penalty = "ridge",
                            baseline_last = TRUE) {
   ll <- .gpmnloglik(X, y, beta0, beta, baseline_last)
@@ -214,9 +431,30 @@
 }
 
 # --- chapter 10: ANN loss, eq (10.5) --------------------------------------
+#' Chapter 10: ANN loss, eq (10.5)
+#' --------------------------------------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y_hat See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .gpannsse <- function(y_hat, y) 0.5 * sum((.gpmat(y_hat) - .gpmat(y))^2)
 
 # --- chapter 3: expected prediction error, p.80 ---------------------------
+#' Chapter 3: expected prediction error, p.80
+#' ---------------------------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sigma2 See Usage.
+#' @param x_star See Usage.
+#' @param eigenvalues See Usage.
+#' @return A numeric value.
+#' @export
 .gpepe <- function(sigma2, x_star, eigenvalues) {
   xs <- .gpflat(x_star); lam <- .gpflat(eigenvalues)
   if (any(lam <= 0)) stop("eigenvalues must be positive")
@@ -224,6 +462,16 @@
 }
 
 # --- chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4) -----------
+#' Chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4)
+#' -----------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param mu_pred See Usage.
+#' @param theta_pred See Usage.
+#' @return A list with \code{mu}, \code{theta}.
+#' @export
 .gpzaplink <- function(mu_pred, theta_pred)
   list(mu = exp(min(as.numeric(mu_pred), 700)),
        theta = 1 / (1 + exp(-as.numeric(theta_pred))))
@@ -232,21 +480,62 @@
 # ZAP pmf printed above it, the Var(Y) line below it, and the p.652
 # estimating equation for mu all carry the mu, so the internally consistent
 # mean (1 - theta) mu / (1 - exp(-mu)) is what is implemented.
+#' Book erratum: eq. (15.3) as printed drops the mu from the numerator.
+#' The
+#'
+#' ZAP pmf printed above it, the Var(Y) line below it, and the p.652
+#' estimating equation for mu all carry the mu, so the internally
+#' consistent mean (1 - theta) mu / (1 - exp(-mu)) is what is
+#' implemented.
+#'
+#' @param theta_hat See Usage.
+#' @param mu_hat See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gpzappredict <- function(theta_hat, mu_hat) {
   th <- as.numeric(theta_hat); mu <- as.numeric(mu_hat)
   denom <- 1 - exp(-mu)
   if (denom <= 0) 0 else (1 - th) * mu / denom
 }
 
+#' .gpzapcpredict
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param theta_hat See Usage.
+#' @param mu_hat See Usage.
+#' @param threshold Defaults to \code{0.5}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gpzapcpredict <- function(theta_hat, mu_hat, threshold = 0.5)
   if (as.numeric(theta_hat) > as.numeric(threshold)) 0 else as.numeric(mu_hat)
 
+#' .gpztploglik
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y_positive See Usage.
+#' @param mu See Usage.
+#' @return A numeric value.
+#' @export
 .gpztploglik <- function(y_positive, mu) {
   ys <- .gpflat(y_positive); n <- length(ys); mu <- as.numeric(mu)
   if (mu <= 0 || n == 0L) return(-Inf)
   -n * log(1 - exp(-mu)) + log(mu) * sum(ys) - n * mu - sum(lgamma(ys + 1))
 }
 
+#' .gpztpmle
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y_positive See Usage.
+#' @param tol Defaults to \code{1e-12}.
+#' @param max_iter Defaults to \code{200}.
+#' @return A numeric value.
+#' @export
 .gpztpmle <- function(y_positive, tol = 1e-12, max_iter = 200) {
   ys <- .gpflat(y_positive); n <- length(ys)
   if (n == 0L) stop("need at least one positive observation")
@@ -263,6 +552,16 @@
   0.5 * (lo + hi)
 }
 
+#' .gpzapbestsplit
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @param candidates Defaults to \code{NULL}.
+#' @return A list with \code{threshold}, \code{loglik}.
+#' @export
 .gpzapbestsplit <- function(y, x, candidates = NULL) {
   ys <- .gpflat(y); xs <- .gpflat(x)
   vals <- if (is.null(candidates)) sort(unique(xs)) else .gpflat(candidates)
@@ -277,6 +576,20 @@
 }
 
 # --- chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5) ----------
+#' Chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5)
+#' ----------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param X_E Defaults to \code{NULL}.
+#' @param X Defaults to \code{NULL}.
+#' @param X_EM Defaults to \code{NULL}.
+#' @param Z_L Defaults to \code{NULL}.
+#' @param L_g Defaults to \code{NULL}.
+#' @return A list with \code{design}, \code{widths}, \code{n_columns}.
+#' @export
 .gpordlatent <- function(n, X_E = NULL, X = NULL, X_EM = NULL,
                          Z_L = NULL, L_g = NULL) {
   blocks <- list(); nm <- character(0)
@@ -293,13 +606,43 @@
 }
 
 # --- chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3) ---------
+#' Chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3)
+#' ---------
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param beta See Usage.
+#' @param K See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .gprkhsnorm <- function(beta, K) {
   b <- .gpflat(beta); as.numeric(t(b) %*% .gpmat(K) %*% b)
 }
 
+#' .gprkhspredict
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param K_new See Usage.
+#' @param beta See Usage.
+#' @param eta0 Defaults to \code{0}.
+#' @return A numeric value.
+#' @export
 .gprkhspredict <- function(K_new, beta, eta0 = 0)
   as.numeric(eta0) + as.numeric(.gpmat(K_new) %*% .gpflat(beta))
 
+#' .gprkhsfitsq
+#'
+#' Part of the helpers_gp_core implementation; see the file header for
+#' the source it follows.
+#'
+#' @param K See Usage.
+#' @param y See Usage.
+#' @param lam Defaults to \code{1}.
+#' @return A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals}, \code{loss}, \code{penalty}, \code{objective}.
+#' @export
 .gprkhsfitsq <- function(K, y, lam = 1) {
   Km <- .gpmat(K); ys <- .gpflat(y); n <- length(ys)
   A <- matrix(0, n + 1L, n + 1L); rhs <- numeric(n + 1L)

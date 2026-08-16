@@ -19,6 +19,14 @@
 
 # ---- Cvetkovic-Doob-Sachs (1995) signless Laplacian ------------------
 
+#' .morie_t2_checkadj
+#'
+#' Part of the tail2_t04 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{A}, as built in the body.
+#' @export
 .morie_t2_checkadj <- function(A) {
   A <- as.matrix(A)
   storage.mode(A) <- "double"
@@ -37,6 +45,15 @@
   A
 }
 
+#' .morie_t2_neigh
+#'
+#' Part of the tail2_t04 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param n See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .morie_t2_neigh <- function(A, n)
   lapply(seq_len(n), function(i) {
     v <- which(A[i, ] != 0)
@@ -183,6 +200,15 @@ BipartSpec <- function(A) {
 
 # ---- Davis-Logemann-Loveland (1962) DPLL ----------------------------
 
+#' .morie_t2_simplify
+#'
+#' Part of the tail2_t04 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param clauses See Usage.
+#' @param lit See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_t2_simplify <- function(clauses, lit) {
   out <- list()
   for (cl in clauses) {

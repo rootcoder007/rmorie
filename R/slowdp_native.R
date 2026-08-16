@@ -17,6 +17,15 @@
 #   doi:10.1080/10618600.2000.10474879. The sampling context in which
 #   a truncation level has to be chosen.
 
+#' .slowdp_beta1alpha
+#'
+#' Part of the slowdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param alpha See Usage.
+#' @return A numeric value.
+#' @export
 .slowdp_beta1alpha <- function(e, alpha) {
   u <- .ghc_unif(e, 1L)
   u <- min(max(u, 1e-15), 1.0 - 1e-15)
@@ -174,6 +183,13 @@ truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
                      "survivors, which is why the amount is returned"))
 }
 
+#' .slowdp_cheatsheet
+#'
+#' Part of the slowdp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .slowdp_cheatsheet <- function() {
   paste0("slowdp: Sethuraman writes the DP as a PROGRAM -- ",
          "p_k = V_k prod(1 - V_l) with V_k ~ Beta(1, alpha) and ",

@@ -72,6 +72,18 @@
 # is absolutely continuous. "constant" holds a_m fixed, which does NOT:
 # the limit is continuous but singular, and it is here because a reader
 # who wants to see that happen should be able to.
+#' The Beta concentration a_m at a given level. "cubic" is the paper\'s
+#'
+#' a_m = c m^3, for which the sum of 1/sqrt(a_m) converges and the limit
+#' is absolutely continuous. "constant" holds a_m fixed, which does NOT:
+#' the limit is continuous but singular, and it is here because a reader
+#' who wants to see that happen should be able to.
+#'
+#' @param level See Usage.
+#' @param c See Usage.
+#' @param schedule See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .bnppvl_conc <- function(level, c, schedule) {
   if (schedule == "cubic") return(as.numeric(c) * level * level * level)
   if (schedule == "constant") return(as.numeric(c))
@@ -82,6 +94,17 @@
 # of the parent interval that the guess assigns to the left child, which
 # is the paper's equation (6). A guess that is flat over the parent
 # gives exactly a half, the symmetric case.
+#' The mean of V that centres the pyramid on a prior guess: the fraction
+#'
+#' of the parent interval that the guess assigns to the left child,
+#' which is the paper\'s equation (6). A guess that is flat over the
+#' parent gives exactly a half, the symmetric case.
+#'
+#' @param nullq See Usage.
+#' @param j See Usage.
+#' @param level See Usage.
+#' @return A numeric value.
+#' @export
 .bnppvl_null_mean <- function(nullq, j, level) {
   d <- 1 / bitwShiftL(1L, level)
   a <- nullq((j - 1) * d)
@@ -94,6 +117,19 @@
   (b - a) / wide
 }
 
+#' .bnppvl_ab
+#'
+#' Part of the bnppvl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param level See Usage.
+#' @param c See Usage.
+#' @param schedule See Usage.
+#' @param centring See Usage.
+#' @param nullq See Usage.
+#' @param j See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .bnppvl_ab <- function(level, c, schedule, centring, nullq, j) {
   a_m <- .bnppvl_conc(level, c, schedule)
   if (a_m <= 0) stop("the concentration must be positive")
@@ -140,6 +176,16 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
   q
 }
 
+#' .bnppvl_log_beta
+#'
+#' Part of the bnppvl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .bnppvl_log_beta <- function(v, a, b) {
   if (!(v > 0 && v < 1)) return(-Inf)
   (a - 1) * log(v) + (b - 1) * log1p(-v) + .w3_lgamma(a + b) -
@@ -187,6 +233,16 @@ morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
 # The index j in 1..k of the cell holding u, ties to the left cell. A
 # linear scan, not a bisection: k is 2^m with m small by construction,
 # and a scan visits the cells in one fixed order in both arms.
+#' The index j in 1..k of the cell holding u, ties to the left cell. A
+#'
+#' linear scan, not a bisection: k is 2^m with m small by construction,
+#' and a scan visits the cells in one fixed order in both arms.
+#'
+#' @param u See Usage.
+#' @param q See Usage.
+#' @param k See Usage.
+#' @return The value of \code{k}, as built in the body.
+#' @export
 .bnppvl_cell <- function(u, q, k) {
   for (j in seq_len(k)) if (u <= q[j + 1L]) return(j)
   k
@@ -246,6 +302,18 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 # because the histogram is uniform inside the cell. Taking these in
 # closed form rather than from the sampled positions is what keeps the
 # predictive moments exact given the draws.
+#' Cellwise first and second moments of the random histogram. The mean
+#' of
+#'
+#' a cell is its midpoint and the second moment is (a^2 + ab + b^2)/3,
+#' because the histogram is uniform inside the cell. Taking these in
+#' closed form rather than from the sampled positions is what keeps the
+#' predictive moments exact given the draws.
+#'
+#' @param draws See Usage.
+#' @param k See Usage.
+#' @return A list with \code{m1}, \code{m2}.
+#' @export
 .bnppvl_moments <- function(draws, k) {
   m1 <- numeric(length(draws)); m2 <- numeric(length(draws))
   for (d in seq_along(draws)) {
@@ -261,12 +329,32 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
   list(m1 = m1, m2 = m2)
 }
 
+#' .bnppvl_density_at
+#'
+#' Part of the bnppvl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param q See Usage.
+#' @param k See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .bnppvl_density_at <- function(u, q, k) {
   j <- .bnppvl_cell(u, q, k)
   w <- q[j + 1L] - q[j]
   if (w <= 0) 0 else 1 / (k * w)
 }
 
+#' .bnppvl_cdf_at
+#'
+#' Part of the bnppvl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param q See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .bnppvl_cdf_at <- function(u, q, k) {
   if (u <= 0) return(0)
   if (u >= 1) return(1)
@@ -284,6 +372,20 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 # least one over twice the cell count while still starting the chain
 # where the data are, which is worth a great many sweeps of a
 # single-site sampler.
+#' A starting pyramid halfway between the data and the uniform one. The
+#'
+#' empirical quantiles alone will not do: with ties, or with fewer
+#' observations than cells, two of them can coincide and a quantile
+#' function with a zero-width cell is not a quantile function at all.
+#' Averaging with the uniform grid guarantees a strict increase of at
+#' least one over twice the cell count while still starting the chain
+#' where the data are, which is worth a great many sweeps of a
+#' single-site sampler.
+#'
+#' @param u See Usage.
+#' @param k See Usage.
+#' @return The value of \code{q}, as built in the body.
+#' @export
 .bnppvl_empirical_start <- function(u, k) {
   n <- length(u)
   su <- sort(u, method = "radix")

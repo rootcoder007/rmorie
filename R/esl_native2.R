@@ -9,6 +9,19 @@
 ## kernel's copy and not another's.
 ## ---------------------------------------------------------------------------
 
+#' .morie_kernel_matrix
+#'
+#' Part of the esl_native2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Z Defaults to \code{NULL}.
+#' @param kernel Defaults to \code{"rbf"}.
+#' @param gamma Defaults to \code{NULL}.
+#' @param degree Defaults to \code{3}.
+#' @param coef0 Defaults to \code{1}.
+#' @return Nothing; this branch always raises.
+#' @export
 .morie_kernel_matrix <- function(X, Z = NULL, kernel = "rbf", gamma = NULL,
                                  degree = 3, coef0 = 1) {
   X <- as.matrix(X)
@@ -34,6 +47,20 @@
   stop(sprintf("unknown kernel '%s'", kernel), call. = FALSE)
 }
 
+#' .morie_smo
+#'
+#' Part of the esl_native2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param K See Usage.
+#' @param y See Usage.
+#' @param C Defaults to \code{1}.
+#' @param tol Defaults to \code{0.001}.
+#' @param max_passes Defaults to \code{50L}.
+#' @param max_iter Defaults to \code{10000L}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{alpha}, \code{b}, \code{n_iter}, \code{converged}.
+#' @export
 .morie_smo <- function(K, y, C = 1, tol = 1e-3, max_passes = 50L,
                        max_iter = 10000L, seed = 0L) {
   y <- as.numeric(y)
@@ -469,6 +496,15 @@ morie_esl_thin_plate_spline <- function(X, y, lambda_ = 1, newdata = NULL) {
   )
 }
 
+#' .morie_tps_kernel
+#'
+#' Part of the esl_native2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_tps_kernel <- function(A, B) {
   d2 <- outer(rowSums(A^2), rowSums(B^2), "+") - 2 * tcrossprod(A, B)
   d2 <- pmax(d2, 0)
@@ -655,6 +691,14 @@ morie_esl_isomap <- function(X, k = 2, neighbors = 5) {
   )
 }
 
+#' .morie_n_components
+#'
+#' Part of the esl_native2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @return The value of \code{comps}, as built in the body.
+#' @export
 .morie_n_components <- function(adj) {
   n <- nrow(adj)
   seen <- logical(n)

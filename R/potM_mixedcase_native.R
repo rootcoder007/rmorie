@@ -1,6 +1,16 @@
 # Peaks-over-threshold GPD analysis (Pickands 1975; Davison & Smith 1990).
 # R translation of morie.fn.potM.
 
+#' .potM_loglik
+#'
+#' Part of the potM_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param z See Usage.
+#' @param sigma See Usage.
+#' @param xi See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .potM_loglik <- function(z, sigma, xi) {
   k <- length(z)
   if (sigma <= 0) return(-Inf)
@@ -14,6 +24,15 @@
   }
 }
 
+#' .potM_neg_loglik
+#'
+#' Part of the potM_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param par See Usage.
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .potM_neg_loglik <- function(par, z) {
   sigma <- par[1]
   xi <- par[2]
@@ -22,6 +41,14 @@
   -ll
 }
 
+#' .potM_gpd_mle
+#'
+#' Part of the potM_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param exc See Usage.
+#' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov}, \code{converged}.
+#' @export
 .potM_gpd_mle <- function(exc) {
   z <- as.numeric(exc)
   k <- length(z)

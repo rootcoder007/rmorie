@@ -83,6 +83,13 @@ morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
                      "tends to 1 and the fit returns to least squares"))
 }
 
+#' .bayreg2_cheatsheet
+#'
+#' Part of the bayreg2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .bayreg2_cheatsheet <- function() {
   paste0("bayreg2: morie_bayreg2_student_t_regression(X, y, nu) -> robust ",
          "regression by EM on the Student-t scale mixture (West 1984)")

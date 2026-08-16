@@ -123,6 +123,14 @@ sasimi_counts <- function(fp_a, fp_b) {
 }
 
 
+#' .sasimi_guard
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .sasimi_guard <- function(n) {
   if (n$a == 0L && n$b == 0L) {
     stop("sasimi: both fingerprints are empty, so no similarity is defined")
@@ -209,6 +217,14 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 }
 
 
+#' .sasimi_coef
+#'
+#' Part of the sasimi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .sasimi_coef <- function(name) {
   if (name == "tanimoto") return(sasimi_tanimoto)
   if (name == "dice") return(sasimi_dice)

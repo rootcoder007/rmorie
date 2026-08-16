@@ -15,8 +15,27 @@
 
 .SOURCES <- c("gaussian", "empirical", "uniform")
 
+#' .tqlld_phi
+#'
+#' Part of the tqlld_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .tqlld_phi <- function(x) exp(-0.5 * x * x) / sqrt(2 * pi)
 
+#' .gaussian_cells
+#'
+#' Part of the tqlld_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bounds See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param n_grid See Usage.
+#' @return A list with \code{mass}, \code{mom}.
+#' @export
 .gaussian_cells <- function(bounds, lo, hi, n_grid) {
   edges <- c(lo, bounds, hi)
   mass <- mom <- numeric(length(edges) - 1L)

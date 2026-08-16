@@ -104,6 +104,15 @@ morie_evt_gev_mle <- function(x) {
 
 # central-difference observed information (the numeric-differencing
 # route Coles p. 56 prescribes)
+#' Central-difference observed information (the numeric-differencing
+#'
+#' route Coles p. 56 prescribes)
+#'
+#' @param f See Usage.
+#' @param theta See Usage.
+#' @param h Defaults to \code{1e-04}.
+#' @return The value of \code{H}, as built in the body.
+#' @export
 .evt_num_hessian <- function(f, theta, h = 1e-4) {
   k <- length(theta)
   H <- matrix(0, k, k)

@@ -243,6 +243,19 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 
 # Private helper: residual sum of squares for the EM loop, with the
 # latent assignment as a side product.
+#' Private helper: residual sum of squares for the EM loop, with the
+#'
+#' latent assignment as a side product.
+#'
+#' @param u See Usage.
+#' @param s See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param t_switch See Usage.
+#' @param grid Defaults to \code{200}.
+#' @return A list with \code{rss}, \code{assign}.
+#' @export
 .scvelo_residual <- function(u, s, alpha, beta, gamma, t_switch,
                              grid = 200) {
   a <- morie_assign_latent_time(u, s, alpha, beta, gamma, t_switch, grid)
@@ -384,6 +397,14 @@ morie_latent_time <- function(fits) {
 # there. The dynamical model is the answer to the two assumptions the
 # steady-state model makes and that transient or heterogeneous
 # populations break.
+#' One-paragraph reminder of the whole model and why each piece is
+#'
+#' there. The dynamical model is the answer to the two assumptions the
+#' steady-state model makes and that transient or heterogeneous
+#' populations break.
+#'
+#' @return A character value.
+#' @export
 .scvelo_morie_cheatsheet <- function() {
   paste("scvelo: du/dt = alpha - beta u, ds/dt = beta u - gamma s,",
         "and velocity IS ds/dt. The steady-state model reads velocity",

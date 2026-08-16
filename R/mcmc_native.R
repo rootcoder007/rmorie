@@ -12,6 +12,15 @@
 # Autocovariance by FFT, matching _mcmc.autocov: zero-padded to a power
 # of two at least 2n, divided by n (biased, which is what keeps the
 # sequence positive semi-definite).
+#' Autocovariance by FFT, matching _mcmc.autocov: zero-padded to a power
+#'
+#' of two at least 2n, divided by n (biased, which is what keeps the
+#' sequence positive semi-definite).
+#'
+#' @param x See Usage.
+#' @param max_lag Defaults to \code{NULL}.
+#' @return The value of \code{[}.
+#' @export
 .morie_mcmc_autocov <- function(x, max_lag = NULL) {
   x <- as.numeric(x)
   n <- length(x)
@@ -24,6 +33,14 @@
   acov[seq_len(max_lag + 1L)]
 }
 
+#' .morie_ess_from_chains
+#'
+#' Part of the mcmc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param chains See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_ess_from_chains <- function(chains) {
   C <- if (is.matrix(chains)) chains else matrix(chains, nrow = 1L)
   m <- nrow(C)
@@ -56,6 +73,14 @@
   if (tau > 0) m * n / max(tau, 1e-12) else m * n
 }
 
+#' .morie_rank_normalize
+#'
+#' Part of the mcmc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param C See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .morie_rank_normalize <- function(C) {
   flat <- as.vector(C)
   ranks <- order(order(flat))          # stable both sides
@@ -63,6 +88,15 @@
   matrix(z, nrow = nrow(C), ncol = ncol(C))
 }
 
+#' .morie_split_rhat
+#'
+#' Part of the mcmc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param chains See Usage.
+#' @param rank_normalized Defaults to \code{TRUE}.
+#' @return A numeric value.
+#' @export
 .morie_split_rhat <- function(chains, rank_normalized = TRUE) {
   C <- if (is.matrix(chains)) chains else matrix(chains, nrow = 1L)
   n <- ncol(C)

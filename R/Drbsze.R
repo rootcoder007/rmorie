@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Two-sided Student-t quantile by Cornish-Fisher expansion on the normal.
+#' Two-sided Student-t quantile by Cornish-Fisher expansion on the
+#' normal
+#'
+#' Part of the Drbsze implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @param df See Usage.
+#' @return A numeric value.
+#' @export
 .drbsze_tquant <- function(p, df) {
   z <- .s03qnorm(p)
   g1 <- (z^3 + z) / 4

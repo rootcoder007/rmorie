@@ -60,6 +60,14 @@
 # networks for semantic segmentation", *CVPR 2015*, 3431-3440,
 # doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 
+#' .unetbk_as_matrix
+#'
+#' Part of the unetbk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{as.matrix}.
+#' @export
 .unetbk_as_matrix <- function(x) {
   if (is.matrix(x)) return(x)
   if (is.list(x)) {
@@ -280,6 +288,13 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
   )
 }
 
+#' .unetbk_cheatsheet
+#'
+#' Part of the unetbk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .unetbk_cheatsheet <- function() {
   "unetbk: built for the case where annotated IMAGES are scarce though pixels are plentiful. Contracting path for context, symmetric expanding path for localisation, and SKIP CONNECTIONS carrying high-resolution detail that pooling destroyed -- context alone cannot localise. Only VALID convolutions and no fully connected layers, so the output is smaller than the input and covers only pixels with full context; hence the OVERLAP-TILE strategy with missing border data MIRRORED. A weight map raises the loss on the thin background between touching objects."
 }

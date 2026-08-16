@@ -1,5 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+#' .tl_lchoose
+#'
+#' Part of the evtlmom implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .tl_lchoose <- function(n, k) {
   if (k < 0 || k > n) return(-Inf)
   lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)

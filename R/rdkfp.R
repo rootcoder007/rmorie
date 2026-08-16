@@ -12,6 +12,17 @@
 # reproduce RDKit exactly -- benzene 31 / 6, ethanol 3 / 3, isobutane
 # 7 / 3, cyclopropane 7 / 3, aspirin 301 / 201.
 
+#' .rdkfp_subgraphs
+#'
+#' Part of the rdkfp implementation; see the file header for the source
+#' it follows.
+#'
+#' @param B See Usage.
+#' @param minpath See Usage.
+#' @param maxpath See Usage.
+#' @param branched See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .rdkfp_subgraphs <- function(B, minpath, maxpath, branched) {
   a <- B$a; nb <- length(B$i)
   touch <- vector("list", a)

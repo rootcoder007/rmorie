@@ -18,10 +18,27 @@
 .rob_qn_d <- 1 / (sqrt(2) * stats::qnorm(5 / 8))
 .rob_sn_c <- 1.1926
 
+#' .rob_mad
+#'
+#' Part of the robust_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @return A numeric value.
+#' @export
 .rob_mad <- function(r) {
   1.482602218505602 * stats::median(abs(r - stats::median(r)))
 }
 
+#' .rob_tukey_rho
+#'
+#' Part of the robust_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @param cc See Usage.
+#' @return A numeric value.
+#' @export
 .rob_tukey_rho <- function(u, cc) {
   v <- pmin(pmax(u / cc, -1), 1)
   1 - (1 - v^2)^3
@@ -30,6 +47,15 @@
 # w(u) = psi(u)/u: (1 - (u/c)^2)^2 inside, ZERO outside. The
 # redescending part is what buys breakdown -- a gross outlier gets no
 # vote at all, where Huber's psi still gives it a bounded one.
+#' W(u) = psi(u)/u: (1 - (u/c)^2)^2 inside, ZERO outside. The
+#'
+#' redescending part is what buys breakdown -- a gross outlier gets no
+#' vote at all, where Huber\'s psi still gives it a bounded one.
+#'
+#' @param u See Usage.
+#' @param cc See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .rob_tukey_w <- function(u, cc) {
   v <- u / cc
   ifelse(abs(v) < 1, (1 - v^2)^2, 0)
@@ -38,6 +64,16 @@
 # The M-scale: s solving mean(rho(r/s)) = b, biweight at c = 1.5476,
 # b = 1/2 -- the 50%-breakdown calibration. The fixed-point iteration
 # s^2 <- s^2 * mean(rho(r/s))/b is monotone for the biweight.
+#' The M-scale: s solving mean(rho(r/s)) = b, biweight at c = 1.5476,
+#'
+#' b = 1/2 -- the 50%-breakdown calibration. The fixed-point iteration
+#' s^2 <- s^2 * mean(rho(r/s))/b is monotone for the biweight.
+#'
+#' @param r See Usage.
+#' @param cc Defaults to \code{.rob_tukey_c_bdp}.
+#' @param b Defaults to \code{0.5}.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .rob_s_scale <- function(r, cc = .rob_tukey_c_bdp, b = 0.5) {
   s <- .rob_mad(r)
   if (s <= 0) s <- mean(abs(r))
@@ -52,6 +88,15 @@
   s
 }
 
+#' .rob_design
+#'
+#' Part of the robust_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{X}, \code{y}.
+#' @export
 .rob_design <- function(X, y) {
   yv <- as.numeric(y)
   A <- as.matrix(X)
@@ -70,6 +115,17 @@
 # S-estimator core: random p-subsets ranked by residual M-scale, then
 # local IRLS refinement. Non-convex objective, so the subsets are the
 # global search and the refinement the local one.
+#' S-estimator core: random p-subsets ranked by residual M-scale, then
+#'
+#' local IRLS refinement. Non-convex objective, so the subsets are the
+#' global search and the refinement the local one.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param n_subsets See Usage.
+#' @param seed See Usage.
+#' @return A list with \code{beta}, \code{scale}.
+#' @export
 .rob_s_reg <- function(X, y, n_subsets, seed) {
   n <- nrow(X)
   p <- ncol(X)
@@ -117,6 +173,18 @@
   list(beta = beta, scale = best_s)
 }
 
+#' .rob_irls_fixed_scale
+#'
+#' Part of the robust_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param beta See Usage.
+#' @param scale See Usage.
+#' @param cc See Usage.
+#' @return A list with \code{beta}, \code{converged}.
+#' @export
 .rob_irls_fixed_scale <- function(X, y, beta, scale, cc) {
   conv <- FALSE
   for (i in seq_len(100L)) {

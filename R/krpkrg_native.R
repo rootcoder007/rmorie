@@ -5,6 +5,18 @@
 
 .krpkrg_EPS <- 1e-12
 
+#' .krpkrg_gamma
+#'
+#' Part of the krpkrg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @param model See Usage.
+#' @param nugget See Usage.
+#' @param sill See Usage.
+#' @param rng See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .krpkrg_gamma <- function(h, model, nugget, sill, rng) {
   if (h <= 0.0) return(0.0)
   ps <- sill - nugget
@@ -89,6 +101,13 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
                      "which is what makes it usable as a design criterion"))
 }
 
+#' .krpkrg_cheatsheet
+#'
+#' Part of the krpkrg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .krpkrg_cheatsheet <- function() {
   paste0("krpkrg: morie_krpkrg_ordinary_kriging(coords, values, targets, ",
          "model, nugget, sill, range) -> BLUP and kriging variance ",

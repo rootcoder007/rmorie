@@ -13,6 +13,15 @@
 .FLXIPT_METAS <- c("nnls", "discrete", "ols")
 
 # --- design expansion per learner kind ------------------------------
+#' Design expansion per learner kind ------------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param spec See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .flxipt_expand <- function(W, spec) {
   W <- as.matrix(W); storage.mode(W) <- "double"
   n <- nrow(W)
@@ -77,6 +86,19 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 }
 
 # --- logistic IRLS, internal: returns coef vector --------------------
+#' Logistic IRLS, internal: returns coef vector --------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-10}.
+#' @param penalty Defaults to \code{0}.
+#' @param max_iter Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 .flxipt_logit_irls <- function(X, y, ridge = 1e-10, penalty = 0,
                                max_iter = 200, tol = 1e-8) {
   X <- as.matrix(X); y <- as.numeric(y)
@@ -100,6 +122,16 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 }
 
 # --- internal lstsq with optional ridge ----------------------------
+#' Internal lstsq with optional ridge ----------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .flxipt_lstsq <- function(X, y, ridge = 1e-10) {
   X <- as.matrix(X); y <- as.numeric(y)
   m <- ncol(X)
@@ -108,12 +140,33 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 }
 
 # --- sigmoid --------------------------------------------------------
+#' Sigmoid --------------------------------------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .flxipt_sigmoid <- function(v) {
   v <- pmin(pmax(v, -30), 30)
   1 / (1 + exp(-v))
 }
 
 # --- train one candidate on `rows`; return predictor over all rows
+#' Train one candidate on `rows`; return predictor over all rows
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param spec See Usage.
+#' @param rows See Usage.
+#' @param binary See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{pred}, \code{b}.
+#' @export
 .flxipt_fit <- function(y, W, spec, rows, binary, ridge) {
   X <- .flxipt_expand(W, spec)
   Xr <- X[rows, , drop = FALSE]
@@ -132,12 +185,29 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 }
 
 # --- disjoint validation blocks -------------------------------------
+#' Disjoint validation blocks -------------------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param V See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .flxipt_folds <- function(n, V) {
   V <- max(2L, min(as.integer(V), n))
   lapply(0:(V - 1L), function(v) which(seq_len(n) %% V == v))
 }
 
 # --- projection onto {a >= 0, sum a = 1}, exact sort-based ---------
+#' Projection onto {a >= 0, sum a = 1}, exact sort-based ---------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 .flxipt_project_simplex <- function(v) {
   n <- length(v)
   if (n == 0L) return(numeric(0))
@@ -154,6 +224,17 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- nnls_simplex: convex combination minimising ||y - Z a||^2 ----
 # Accelerated projected gradient with step from the largest
 # eigenvalue of the Gram matrix (estimated by power iteration).
+#' Nnls_simplex: convex combination minimising ||y - Z a||^2 ----
+#'
+#' Accelerated projected gradient with step from the largest eigenvalue
+#' of the Gram matrix (estimated by power iteration).
+#'
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param iters Defaults to \code{8000}.
+#' @param tol Defaults to \code{1e-14}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .flxipt_nnls_simplex <- function(Z, y, iters = 8000, tol = 1e-14) {
   n <- nrow(Z); J <- ncol(Z)
   if (J == 0L) return(numeric(0))
@@ -427,6 +508,13 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
 }
 
 # --- cheatsheet -----------------------------------------------------
+#' Cheatsheet -----------------------------------------------------
+#'
+#' Part of the flxipt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .flxipt_cheatsheet <- function() {
   paste0("flxipt: Super Learner. Z[i,j] = candidate j's HELD-OUT ",
          "prediction for i; fit the meta-learner of y on Z (nnls ",

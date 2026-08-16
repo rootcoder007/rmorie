@@ -16,6 +16,14 @@
 # Munkres JR (1984) Elements of Algebraic Topology; Matousek J (2003)
 # Using the Borsuk-Ulam Theorem.
 
+#' .morie_face_key
+#'
+#' Part of the topological_combinatorics_native implementation; see the
+#' file header for the source it follows.
+#'
+#' @param v See Usage.
+#' @return A character value.
+#' @export
 .morie_face_key <- function(v) paste(v, collapse = ",")
 
 #' Close maximal simplices under taking faces
@@ -72,6 +80,14 @@ morie_euler_characteristic <- function(maximal_simplices) {
 }
 
 # rank over F_2 by elimination on 0/1 matrices; exact at any size
+#' Rank over F_2 by elimination on 0/1 matrices; exact at any size
+#'
+#' Part of the topological_combinatorics_native implementation; see the
+#' file header for the source it follows.
+#'
+#' @param m See Usage.
+#' @return The value of \code{rank}, as built in the body.
+#' @export
 .morie_gf2_rank <- function(m) {
   if (is.null(m) || nrow(m) == 0L || ncol(m) == 0L) return(0L)
   m <- m %% 2L

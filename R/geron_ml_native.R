@@ -25,6 +25,14 @@
 # duplicated: .morie_al_softmax_rows (alammar_llm_native.R) is the
 # row-wise softmax used by every attention/contrastive routine here.
 
+#' .morie_gr_pvar
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_pvar <- function(x) {
   n <- length(x)
   if (n == 0) {
@@ -33,20 +41,52 @@
   mean((x - mean(x))^2)
 }
 
+#' .morie_gr_psd
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_psd <- function(x) sqrt(.morie_gr_pvar(x))
 
+#' .morie_gr_softmax
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_softmax <- function(z) {
   e <- exp(z - max(z))
   e / sum(e)
 }
 
 # log-softmax of a vector, overflow safe.
+#' Log-softmax of a vector, overflow safe
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_log_softmax <- function(z) {
   m <- max(z)
   zz <- z - m
   zz - log(sum(exp(zz)))
 }
 
+#' .morie_gr_log_softmax_rows
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_log_softmax_rows <- function(Z) {
   Z <- as.matrix(Z)
   m <- apply(Z, 1, max)
@@ -55,10 +95,27 @@
 }
 
 # Column-wise softmax (numpy softmax(axis = 0)).
+#' Column-wise softmax (numpy softmax(axis = 0))
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Z See Usage.
+#' @return A matrix, from \code{t}.
+#' @export
 .morie_gr_softmax_cols <- function(Z) {
   t(.morie_al_softmax_rows(t(as.matrix(Z))))
 }
 
+#' .morie_gr_layernorm
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param eps Defaults to \code{1e-05}.
+#' @return A numeric value.
+#' @export
 .morie_gr_layernorm <- function(X, eps = 1e-5) {
   X <- as.matrix(X)
   mu <- rowMeans(X)
@@ -70,6 +127,16 @@
 #   s <- (1664525 s + 1013904223) mod 2^32
 # `.morie_gr_lcg_u` returns the (s + 0.5)/2^32 uniform stream,
 # `.morie_gr_lcg_w` the symmetric weight stream 2u - 1 scaled.
+#' Integer LCG shared by every reproducible morie.fn module:
+#'
+#' s <- (1664525 s + 1013904223) mod 2^32 `.morie_gr_lcg_u` returns the
+#' (s + 0.5)/2^32 uniform stream, `.morie_gr_lcg_w` the symmetric weight
+#' stream 2u - 1 scaled.
+#'
+#' @param count See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_gr_lcg_u <- function(count, seed) {
   count <- as.integer(count)
   s <- as.numeric(seed) %% 2^32
@@ -83,12 +150,32 @@
   out
 }
 
+#' .morie_gr_lcg_w
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param count See Usage.
+#' @param seed See Usage.
+#' @param scale Defaults to \code{0.1}.
+#' @return A numeric value.
+#' @export
 .morie_gr_lcg_w <- function(count, seed, scale = 0.1) {
   (2 * .morie_gr_lcg_u(count, seed) - 1) * scale
 }
 
 # numpy `_init(shape, seed, scale)`: a row-major reshape of the weight
 # stream, so byrow = TRUE.
+#' Numpy `_init(shape, seed, scale)`: a row-major reshape of the weight
+#'
+#' stream, so byrow = TRUE.
+#'
+#' @param nrow See Usage.
+#' @param ncol See Usage.
+#' @param seed See Usage.
+#' @param scale Defaults to \code{0.1}.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .morie_gr_init <- function(nrow, ncol, seed, scale = 0.1) {
   matrix(.morie_gr_lcg_w(nrow * ncol, seed, scale),
     nrow = nrow,
@@ -98,6 +185,14 @@
 
 # Minimum-norm least squares, matching numpy.linalg.lstsq (SVD based),
 # which differs from qr.solve on rank-deficient designs.
+#' Minimum-norm least squares, matching numpy.linalg.lstsq (SVD based),
+#'
+#' which differs from qr.solve on rank-deficient designs.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_gr_lstsq <- function(A, b) {
   A <- as.matrix(A)
   if (ncol(A) == 0L) {
@@ -109,8 +204,26 @@
   as.numeric(s$v %*% (dinv * (t(s$u) %*% as.numeric(b))))
 }
 
+#' .morie_gr_need
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param cond See Usage.
+#' @param msg See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_gr_need <- function(cond, msg) if (!cond) stop(msg, call. = FALSE)
 
+#' .morie_gr_mat
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param name See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .morie_gr_mat <- function(x, name) {
   m <- if (is.matrix(x)) x else as.matrix(x)
   storage.mode(m) <- "double"
@@ -119,6 +232,15 @@
 }
 
 # numpy array_split(seq_len(m), K): first m %% K parts get one extra.
+#' Numpy array_split(seq_len(m), K): first m %% K parts get one extra
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param idx See Usage.
+#' @param K See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_gr_array_split <- function(idx, K) {
   m <- length(idx)
   base <- m %/% K
@@ -2663,6 +2785,13 @@ morie_geron_detr_hungarian_matching <- function(pred_boxes, pred_classes,
 
 # Jonker-Volgenant shortest augmenting path, ported line-for-line from
 # grdetr._linear_sum_assignment. Returns 0-based rows/cols.
+#' Jonker-Volgenant shortest augmenting path, ported line-for-line from
+#'
+#' grdetr._linear_sum_assignment. Returns 0-based rows/cols.
+#'
+#' @param cost See Usage.
+#' @return A list with \code{rows}, \code{cols}.
+#' @export
 .morie_gr_lsa <- function(cost) {
   C <- .morie_gr_mat(cost, "cost matrix")
   .morie_gr_need(length(C) > 0L, "cost must be a non-empty 2-D matrix.")
@@ -4072,6 +4201,16 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
   )
 }
 
+#' .morie_gr_conv2d_valid
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Z See Usage.
+#' @param K See Usage.
+#' @param s See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_gr_conv2d_valid <- function(Z, K, s) {
   kh <- nrow(K)
   kw <- ncol(K)
@@ -4094,6 +4233,16 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
   out
 }
 
+#' .morie_gr_conv_transpose2d
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Z See Usage.
+#' @param K See Usage.
+#' @param s See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_gr_conv_transpose2d <- function(Z, K, s) {
   kh <- nrow(K)
   kw <- ncol(K)
@@ -4495,6 +4644,14 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 # 32-bit integer exposes the bit pattern. Endianness is pinned to little
 # so the port is machine-independent.
 
+#' .morie_gr_f32_bits
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_gr_f32_bits <- function(x) {
   raw4 <- writeBin(as.double(x), raw(), size = 4, endian = "little")
   i <- readBin(raw4, "integer", n = length(x), size = 4, endian = "little")
@@ -4502,17 +4659,43 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
   ifelse(u < 0, u + 2^32, u)
 }
 
+#' .morie_gr_bits_f32
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @return The value of \code{readBin}.
+#' @export
 .morie_gr_bits_f32 <- function(u) {
   signed <- ifelse(u >= 2^31, u - 2^32, u)
   raw4 <- writeBin(as.integer(signed), raw(), size = 4, endian = "little")
   readBin(raw4, "double", n = length(u), size = 4, endian = "little")
 }
 
+#' .morie_gr_f32
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{.morie_gr_bits_f32}.
+#' @export
 .morie_gr_f32 <- function(x) .morie_gr_bits_f32(.morie_gr_f32_bits(x))
 
 # Round the float32 bit pattern to the BF16 grid. mode is
 # "nearest_even" or "truncate"; arithmetic is done in doubles and folded
 # back mod 2^32, exactly reproducing numpy's uint32/uint64 masking.
+#' Round the float32 bit pattern to the BF16 grid. mode is
+#'
+#' "nearest_even" or "truncate"; arithmetic is done in doubles and
+#' folded back mod 2^32, exactly reproducing numpy\'s uint32/uint64
+#' masking.
+#'
+#' @param u See Usage.
+#' @param mode Defaults to \code{"nearest_even"}.
+#' @return A numeric value.
+#' @export
 .morie_gr_bf16_bits <- function(u, mode = "nearest_even") {
   if (mode == "nearest_even") {
     lsb <- floor(u / 2^16) %% 2
@@ -4608,6 +4791,16 @@ morie_geron_bf16_range <- function(x) {
 .morie_gr_tape_counter <- new.env(parent = emptyenv())
 .morie_gr_tape_counter$id <- 0L
 
+#' .morie_gvar
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param value See Usage.
+#' @param parents Defaults to \code{list()}.
+#' @param op Defaults to \code{"leaf"}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .morie_gvar <- function(value, parents = list(), op = "leaf") {
   e <- new.env(parent = emptyenv())
   .morie_gr_tape_counter$id <- .morie_gr_tape_counter$id + 1L
@@ -4620,6 +4813,14 @@ morie_geron_bf16_range <- function(x) {
   e
 }
 
+#' .morie_gvar_wrap
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_gvar_wrap <- function(x) if (inherits(x, "morie_gvar")) x else .morie_gvar(x)
 
 #' Arithmetic on reverse-mode tape nodes
@@ -5355,6 +5556,18 @@ morie_geron_bpe_merge <- function(corpus, n_merges) {
 # ------------------------------------------------------------- transformers
 
 # Shared post-layernorm encoder block. `W` is a list of Wq/Wk/Wv/Wo/W1/b1/W2/b2.
+#' Shared post-layernorm encoder block. `W` is a list of
+#' Wq/Wk/Wv/Wo/W1/b1/W2/b2
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param W See Usage.
+#' @param n_heads See Usage.
+#' @param keep_attn Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_gr_encoder_block <- function(X, W, n_heads, keep_attn = FALSE) {
   Tn <- nrow(X)
   d <- ncol(X)
@@ -5378,6 +5591,16 @@ morie_geron_bpe_merge <- function(corpus, n_merges) {
   if (keep_attn) list(X = Xo, attn = attn) else Xo
 }
 
+#' .morie_gr_block_weights
+#'
+#' Part of the geron_ml_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param d_model See Usage.
+#' @param d_ff See Usage.
+#' @param seed See Usage.
+#' @return A list with \code{Wq}, \code{Wk}, \code{Wv}, \code{Wo}, \code{W1}, \code{b1}, \code{W2}, \code{b2}.
+#' @export
 .morie_gr_block_weights <- function(d_model, d_ff, seed) {
   list(
     Wq = .morie_gr_init(d_model, d_model, seed + 1),

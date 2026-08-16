@@ -59,6 +59,15 @@
 
 .ucfR_EPS <- 1e-12
 
+#' .ucfR_co_rated
+#'
+#' Part of the ucfR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings_a See Usage.
+#' @param ratings_b See Usage.
+#' @return A list with \code{items}, \code{n}, \code{a}, \code{b}, \code{note}.
+#' @export
 .ucfR_co_rated <- function(ratings_a, ratings_b) {
   A <- as.list(ratings_a)
   B <- as.list(ratings_b)
@@ -74,6 +83,15 @@
   )
 }
 
+#' .ucfR_significance_weight
+#'
+#' Part of the ucfR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_common See Usage.
+#' @param threshold Defaults to \code{50}.
+#' @return A numeric value.
+#' @export
 .ucfR_significance_weight <- function(n_common, threshold = 50) {
   n <- as.integer(n_common)
   t <- as.integer(threshold)
@@ -81,6 +99,18 @@
   min(n / as.numeric(t), 1.0)
 }
 
+#' .ucfR_pearson
+#'
+#' Part of the ucfR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings_a See Usage.
+#' @param ratings_b See Usage.
+#' @param min_common Defaults to \code{2}.
+#' @param significance Defaults to \code{FALSE}.
+#' @param threshold Defaults to \code{50}.
+#' @return A list with \code{w}, \code{n_common}, \code{degenerate}, \code{significance_applied}.
+#' @export
 .ucfR_pearson <- function(ratings_a, ratings_b, min_common = 2,
                           significance = FALSE, threshold = 50) {
   c <- .ucfR_co_rated(ratings_a, ratings_b)
@@ -107,6 +137,18 @@
        significance_applied = sig)
 }
 
+#' .ucfR_neighbours
+#'
+#' Part of the ucfR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param target See Usage.
+#' @param others See Usage.
+#' @param min_common Defaults to \code{2}.
+#' @param top_k Defaults to \code{NULL}.
+#' @param significance Defaults to \code{FALSE}.
+#' @return A list with \code{neighbours}, \code{n}, \code{note}.
+#' @export
 .ucfR_neighbours <- function(target, others, min_common = 2,
                              top_k = NULL, significance = FALSE) {
   out <- list()
@@ -136,6 +178,19 @@
        note = "ranked by |w|: a reliable DISAGREER is information too")
 }
 
+#' .ucfR_predict_rating
+#'
+#' Part of the ucfR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param target See Usage.
+#' @param others See Usage.
+#' @param item See Usage.
+#' @param min_common Defaults to \code{2}.
+#' @param top_k Defaults to \code{NULL}.
+#' @param significance Defaults to \code{FALSE}.
+#' @return A list with \code{estimate}, \code{prediction}, \code{naive_weighted_mean}, \code{user_mean}, \code{n_neighbours}, \code{fell_back}, \code{method}, \code{note}.
+#' @export
 .ucfR_predict_rating <- function(target, others, item, min_common = 2,
                                  top_k = NULL, significance = FALSE) {
   item <- as.character(item)
@@ -185,6 +240,13 @@
   )
 }
 
+#' .ucfR_cheatsheet
+#'
+#' Part of the ucfR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .ucfR_cheatsheet <- function() {
   "ucfR: people who agreed before will probably agree again -- so predict from correlated users, with NO content analysis, which is why it worked on Usenet news. Correlate over CO-RATED items only; unrated is silent, not zero. Predict the user's own mean plus a weighted average of neighbours' DEVIATIONS from their means, since one person's 3 is another's 5 -- averaging raw ratings imports the neighbour's generosity. Normalise by the sum of ABSOLUTE weights, so a reliable disagreer still counts. A correlation of 1.0 from two co-rated items is not evidence: scale by min(n/50, 1)."
 }

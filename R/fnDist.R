@@ -33,6 +33,15 @@ FnDist <- function(f, g, t = NULL) {
        method = "Ramsay-Silverman (2005) L2 metric, composite trapezoid over the whole interval")
 }
 
+#' .fnDist_trapz
+#'
+#' Part of the fnDist implementation; see the file header for the source
+#' it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .fnDist_trapz <- function(t, v) {
   s <- 0
   n <- length(t)

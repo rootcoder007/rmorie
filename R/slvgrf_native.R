@@ -22,6 +22,15 @@
 .SLVGRF_EPS <- 1e-12
 .SLVGRF_WEIGHTS <- c("qini", "autoc", "uniform")
 
+#' .slvgrf_check
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param scores See Usage.
+#' @param priority See Usage.
+#' @return A list with \code{g}, \code{s}.
+#' @export
 .slvgrf_check <- function(scores, priority) {
   g <- as.numeric(scores)
   s <- as.numeric(priority)
@@ -239,6 +248,13 @@ rate_test <- function(scores, priority, weight = "autoc", reps = 500,
                        "et al. (2025) Corollary 5"))
 }
 
+#' .slvgrf_cheatsheet
+#'
+#' Part of the slvgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .slvgrf_cheatsheet <- function() {
   paste0("slvgrf: score a PRIORITIZATION RULE, not a CATE fit. ",
          "TOC(u) = mean effect in the top u minus the ATE, so ",

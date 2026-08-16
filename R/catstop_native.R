@@ -5,6 +5,18 @@
 # se_BM = 1/sqrt(1/sigma^2 + sum I_j).  Mirrors Python
 # morie.fn.catstop exactly.
 
+#' .catstop_info_4pl
+#'
+#' Part of the catstop_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param theta See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param d See Usage.
+#' @return A numeric value.
+#' @export
 .catstop_info_4pl <- function(theta, a, b, c, d) {
   e <- exp(a * (theta - b))
   p <- c + (d - c) * e / (1 + e)

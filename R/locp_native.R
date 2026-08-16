@@ -7,6 +7,15 @@
 # Mirrors Python morie.fn.locp exactly (centered design, same
 # kernels, normal equations solved by base solve()).
 
+#' .locp_kernel
+#'
+#' Part of the locp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @param t See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .locp_kernel <- function(name, t) {
   out <- numeric(length(t))
   if (name == "gaussian") return(exp(-0.5 * t * t))

@@ -65,6 +65,13 @@
 
 # CBS statistic Z_C = max_{i<j} |Z_{ij}| on v; returns list(z, i, j)
 # where indices are 0-based half-open into v (i < j), matching Python.
+#' CBS statistic Z_C = max_{i<j} |Z_{ij}| on v; returns list(z, i, j)
+#'
+#' where indices are 0-based half-open into v (i < j), matching Python.
+#'
+#' @param v See Usage.
+#' @return A list with \code{z}, \code{i}, \code{j}.
+#' @export
 .copynm_cbs_stat <- function(v) {
   n <- length(v)
   if (n < 3L) stop("copynm: need at least 3 points to test for a change")
@@ -90,6 +97,15 @@
 }
 
 # In-place Fisher-Yates shuffle with one .ghc_unif draw per swap.
+#' In-place Fisher-Yates shuffle with one .ghc_unif draw per swap
+#'
+#' Part of the copynm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @param e See Usage.
+#' @return Invisibly,the value of \code{w}, as built in the body.
+#' @export
 .copynm_shuffle <- function(w, e) {
   n <- length(w)
   # Python: for t in range(n - 1, 0, -1):  u = int(rng.random() * (t + 1))
@@ -103,6 +119,18 @@
 }
 
 # Edge-effect undo: is `cut` a viable BINARY change-point for v?
+#' Edge-effect undo: is `cut` a viable BINARY change-point for v?
+#'
+#' Part of the copynm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param cut See Usage.
+#' @param alpha See Usage.
+#' @param perms See Usage.
+#' @param e See Usage.
+#' @return A logical value.
+#' @export
 .copynm_binary_supported <- function(v, cut, alpha, perms, e) {
   n <- length(v)
   if (cut <= 0L || cut >= n) return(FALSE)

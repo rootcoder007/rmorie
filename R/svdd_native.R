@@ -2,6 +2,15 @@
 # Tax, D. M. J., & Duin, R. P. W. (2004) "Support Vector Data
 # Description", Machine Learning 54(1), 45-66.
 
+#' .morie_svdd_mat
+#'
+#' Part of the svdd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param name See Usage.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .morie_svdd_mat <- function(X, name) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -11,6 +20,19 @@
   X
 }
 
+#' .morie_svdd_kernel_matrix
+#'
+#' Part of the svdd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Y Defaults to \code{NULL}.
+#' @param kernel Defaults to \code{"rbf"}.
+#' @param gamma Defaults to \code{NULL}.
+#' @param degree Defaults to \code{3}.
+#' @param coef0 Defaults to \code{1}.
+#' @return The value of \code{K}, as built in the body.
+#' @export
 .morie_svdd_kernel_matrix <- function(X, Y = NULL, kernel = "rbf",
                                        gamma = NULL, degree = 3,
                                        coef0 = 1.0) {
@@ -51,6 +73,18 @@
   K
 }
 
+#' .morie_svdd_solve_dual
+#'
+#' Part of the svdd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param K See Usage.
+#' @param C See Usage.
+#' @param n See Usage.
+#' @param tol See Usage.
+#' @param max_iter See Usage.
+#' @return The value of \code{alpha}, as built in the body.
+#' @export
 .morie_svdd_solve_dual <- function(K, C, n, tol, max_iter) {
   alpha <- rep(1.0 / n, n)
   if (C < 1.0 / n) {
@@ -276,6 +310,13 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
   )
 }
 
+#' .morie_svdd_cheatsheet
+#'
+#' Part of the svdd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .morie_svdd_cheatsheet <- function() {
   paste0("svdd: smallest enclosing sphere, min R^2 + C sum xi ",
          "(Tax & Duin 2004 eqs. 3-4). Dual: max sum a_i K_ii - ",

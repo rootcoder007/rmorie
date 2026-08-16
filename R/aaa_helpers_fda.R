@@ -13,6 +13,15 @@
 #
 # Nothing here is exported.
 
+#' .fdtrapz
+#'
+#' Part of the helpers_fda implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .fdtrapz <- function(t, v) {
   s <- 0
   n <- length(t)
@@ -21,8 +30,26 @@
   s
 }
 
+#' .fdgrid
+#'
+#' Part of the helpers_fda implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .fdgrid <- function(n) (seq_len(n) - 1) / (n - 1)
 
+#' .fdcolmeans
+#'
+#' Part of the helpers_fda implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param nr See Usage.
+#' @param nc See Usage.
+#' @return A numeric value.
+#' @export
 .fdcolmeans <- function(A, nr, nc) {
   m <- numeric(nc)
   for (i in seq_len(nr)) for (j in seq_len(nc)) m[j] <- m[j] + A[i, j]

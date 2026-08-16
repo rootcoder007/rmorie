@@ -15,6 +15,15 @@
 
 .causrddc_kernels <- c("triangular", "uniform", "epanechnikov")
 
+#' .causrddc_kern
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @param kernel See Usage.
+#' @return A numeric value.
+#' @export
 .causrddc_kern <- function(u, kernel) {
   a <- abs(u)
   if (a > 1.0) return(0.0)
@@ -23,10 +32,32 @@
   0.75 * (1.0 - a * a)
 }
 
+#' .causrddc_solve
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param M See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .causrddc_solve <- function(M, b) {
   as.numeric(solve(M, b))
 }
 
+#' .causrddc_local_poly_weights
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param h See Usage.
+#' @param p See Usage.
+#' @param nu See Usage.
+#' @param kernel Defaults to \code{"triangular"}.
+#' @param side Defaults to \code{1}.
+#' @return A list with \code{w}, \code{omega}.
+#' @export
 .causrddc_local_poly_weights <- function(x, h, p, nu, kernel = "triangular", side = 1) {
   n <- length(x)
   side_cond <- if (side > 0) x >= 0.0 else x < 0.0
@@ -53,6 +84,17 @@
   list(w = w, omega = omega)
 }
 
+#' .causrddc_kernel_constants
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param kernel Defaults to \code{"triangular"}.
+#' @param n_grid Defaults to \code{2001}.
+#' @return A list with \code{G}, \code{th}, \code{P}.
+#' @export
 .causrddc_kernel_constants <- function(p, q, kernel = "triangular", n_grid = 2001) {
   d <- p + 1
   G <- matrix(0.0, d, d)
@@ -79,6 +121,18 @@
   list(G = G, th = th, P = P)
 }
 
+#' .causrddc_global_derivative
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param side See Usage.
+#' @param order See Usage.
+#' @param deriv See Usage.
+#' @return A list with \code{deriv}, \code{sigma2}.
+#' @export
 .causrddc_global_derivative <- function(x, y, side, order, deriv) {
   side_cond <- if (side > 0) x >= 0.0 else x < 0.0
   idx <- which(side_cond)
@@ -104,6 +158,17 @@
   list(deriv = beta[deriv + 1] * factorial(deriv), sigma2 = sigma2)
 }
 
+#' .causrddc_nn_sigma2
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param J See Usage.
+#' @param side_of See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .causrddc_nn_sigma2 <- function(x, y, J, side_of) {
   n <- length(x)
   out <- rep(0.0, n)
@@ -140,6 +205,15 @@
   out
 }
 
+#' .causrddc_density_at_zero
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param h Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .causrddc_density_at_zero <- function(x, h = NULL) {
   n <- length(x)
   xs <- sort(x)
@@ -218,6 +292,18 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
   list(h = min(h, span), h_unclamped = h, at_bound = at_bound, C = C, B = B, V = V, f = f, mu_plus = mu_p, mu_minus = mu_m)
 }
 
+#' .causrddc_hc_sigma2
+#'
+#' Part of the causrddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param h See Usage.
+#' @param p See Usage.
+#' @param kernel See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .causrddc_hc_sigma2 <- function(x, y, h, p, kernel) {
   n <- length(x)
   out <- rep(0.0, n)

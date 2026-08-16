@@ -20,8 +20,24 @@
 # two arms is that an int action and a float action with the same value
 # share a key here but not in Python; in practice users pass one type.
 
+#' .log
+#'
+#' Part of the airl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .log <- function(x) log(max(x, 1e-300))
 
+#' .state_key
+#'
+#' Part of the airl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A character value.
+#' @export
 .state_key <- function(s) {
   if (is.character(s)) return(s)
   if (is.list(s)) s <- unlist(s, use.names = FALSE)
@@ -30,6 +46,14 @@
   paste0(sprintf("%.17g", s), collapse = "\x1f")
 }
 
+#' .action_key
+#'
+#' Part of the airl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return A character value.
+#' @export
 .action_key <- function(a) {
   if (is.character(a)) return(a)
   if (is.list(a)) a <- unlist(a, use.names = FALSE)

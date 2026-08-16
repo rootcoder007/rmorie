@@ -163,6 +163,15 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 # Weak connectivity over vertices that carry at least one edge, used
 # by eulerian_path to enforce the "connected on its non-isolated
 # vertices" half of the Eulerian existence condition.
+#' Weak connectivity over vertices that carry at least one edge, used
+#'
+#' by eulerian_path to enforce the "connected on its non-isolated
+#' vertices" half of the Eulerian existence condition.
+#'
+#' @param edges See Usage.
+#' @param verts See Usage.
+#' @return A logical value.
+#' @export
 .connected <- function(edges, verts) {
   edge_keys <- ls(edges, all.names = TRUE)
   v_with_out <- character(0)
@@ -287,6 +296,18 @@ eulerian_path <- function(edges, indeg, outdeg) {
 # of every non-simple vertex (in sorted order) and through every
 # simple vertex until a branch point; a graph that is one pure
 # cycle contributes the cycle itself.
+#' Maximal non-branching paths: the part of the assembly that is
+#'
+#' unambiguous even when the whole graph is not. Walks each edge out of
+#' every non-simple vertex (in sorted order) and through every simple
+#' vertex until a branch point; a graph that is one pure cycle
+#' contributes the cycle itself.
+#'
+#' @param edges See Usage.
+#' @param indeg See Usage.
+#' @param outdeg See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .unitigs <- function(edges, indeg, outdeg) {
   simple <- function(v) {
     iv <- if (is.null(indeg[[v]])) 0L else indeg[[v]]
@@ -341,6 +362,13 @@ eulerian_path <- function(edges, indeg, outdeg) {
 
 # Spell a walk of (k-1)-mers back into the sequence: the first
 # (k-1)-mer in full, then the last character of each subsequent one.
+#' Spell a walk of (k-1)-mers back into the sequence: the first
+#'
+#' (k-1)-mer in full, then the last character of each subsequent one.
+#'
+#' @param path See Usage.
+#' @return A character value.
+#' @export
 .spell <- function(path) {
   if (length(path) == 0L) return("")
   paste0(path[1L],

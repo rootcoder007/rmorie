@@ -45,6 +45,19 @@
 # doi:10.1057/jors.1969.103. Why combining decorrelated forecasts beats
 # choosing among them.
 
+#' Delegate to the shared implementation, which is what the Python arm
+#'
+#' does (morie.fn.ngnest imports nbeats_stack from morie.fn.nbeats). The
+#' local copy that used to live here normalised trend time by (lb - 1)
+#' rather than lb and built the Fourier basis on max(H, lb) with 1-based
+#' time, so its forecasts drifted from the spec.
+#'
+#' @param window See Usage.
+#' @param H See Usage.
+#' @param blocks See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return The value of \code{list}.
+#' @export
 .ngnest_nbeats_stack <- function(window, H, blocks, ridge = 1e-8) {
   # Delegate to the shared implementation, which is what the Python arm
   # does (morie.fn.ngnest imports nbeats_stack from morie.fn.nbeats). The
@@ -56,6 +69,13 @@
   list(res$forecast, res$residual, res$trace)
 }
 
+#' .ngnest_default_block_sets
+#'
+#' Part of the ngnest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return The value of \code{list}.
+#' @export
 .ngnest_default_block_sets <- function() {
   list(
     list(list("trend", 2L, 3L), list("seasonality", 2L, 3L)),
@@ -64,6 +84,18 @@
   )
 }
 
+#' .ngnest_ensemble_members
+#'
+#' Part of the ngnest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param horizon See Usage.
+#' @param lookback_multiples Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
+#' @param block_sets Defaults to \code{NULL}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .ngnest_ensemble_members <- function(y, horizon,
                                      lookback_multiples = c(2, 3, 4, 5, 6, 7),
                                      block_sets = NULL, ridge = 1e-8) {
@@ -106,6 +138,15 @@
   return(out)
 }
 
+#' .ngnest_aggregate_forecasts
+#'
+#' Part of the ngnest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param members See Usage.
+#' @param how Defaults to \code{"median"}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .ngnest_aggregate_forecasts <- function(members, how = "median") {
   how <- match.arg(how, c("median", "mean"))
   if (length(members) == 0L) stop("ngnest: no members to aggregate")
@@ -195,6 +236,13 @@ morie_ngnest <- function(y, horizon,
   return(result)
 }
 
+#' .ngnest_cheatsheet
+#'
+#' Part of the ngnest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .ngnest_cheatsheet <- function() {
   paste("ngnest: same source as nbeats -- this is the ENSEMBLE, ",
         "which is what the paper's numbers actually are (180 models ",

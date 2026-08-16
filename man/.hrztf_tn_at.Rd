@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.hrztf_tn_at}
+\alias{.hrztf_tn_at}
+\title{T_n evaluated at an observation.  Page 219: T_n(y) "is replaced with}
+\usage{
+.hrztf_tn_at(yv, ygrid, T, y2, y1)
+}
+\arguments{
+\item{yv}{See Usage.}
+\item{ygrid}{See Usage.}
+\item{T}{See Usage.}
+\item{y2}{See Usage.}
+\item{y1}{See Usage.}
+}
+\description{
+an arbitrarily large negative number if y < y2 and an arbitrarily large positive number if y > y1".  Inside [y2, y1] the grid values are interpolated.
+}
+\value{
+The value of \code{[}.
+}
+\keyword{internal}

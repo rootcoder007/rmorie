@@ -50,15 +50,41 @@
 
 # ---- private helpers (prefixed .polkrn_ to avoid name collisions) ----
 
+#' .polkrn_vec
+#'
+#' Part of the polkrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .polkrn_vec <- function(x) {
   as.numeric(x)
 }
 
+#' Type 7 quantile: linear interpolation, the R default
+#'
+#' Part of the polkrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param q See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .polkrn_quantile7 <- function(x, q) {
   # type 7 quantile: linear interpolation, the R default
   as.numeric(quantile(x, probs=q, type=7, names=FALSE))
 }
 
+#' Weighted least squares with an intercept added automatically
+#'
+#' Returns a list with coef, se, vcov.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}.
+#' @export
 .polkrn_wls <- function(X, y, w) {
   # Weighted least squares with an intercept added automatically.
   # Returns a list with coef, se, vcov.
@@ -79,6 +105,14 @@
   list(coef=as.numeric(beta), se=se, vcov=vcov)
 }
 
+#' Iteratively reweighted least squares for logistic regression
+#'
+#' X: design matrix (with intercept), y: 0/1 vector.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{beta}, \code{mu}.
+#' @export
 .polkrn_logistic <- function(X, y) {
   # Iteratively reweighted least squares for logistic regression.
   # X: design matrix (with intercept), y: 0/1 vector.
@@ -107,6 +141,18 @@
   list(beta=as.numeric(beta), mu=mu)
 }
 
+#' Compute inverse-probability weights for a treatment history
+#'
+#' Part of the polkrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A_hist See Usage.
+#' @param L_hist See Usage.
+#' @param kind See Usage.
+#' @param stabilize See Usage.
+#' @param trim See Usage.
+#' @return A list with \code{w}, \code{per_time}.
+#' @export
 .polkrn_ip_weights_history <- function(A_hist, L_hist, kind, stabilize, trim) {
   # Compute inverse-probability weights for a treatment history.
   n <- length(A_hist[[1]])
@@ -367,6 +413,13 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
   out
 }
 
+#' .polkrn_cheatsheet
+#'
+#' Part of the polkrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .polkrn_cheatsheet <- function() {
   "polkrn: MSM on a flexible function of cumulative exposure (Hernan-Brumback-Robins 2002). polynomial degree D or RBF with quantile centres; weights are the Sec.21.2 product. summary = cumulative | final | duration."
 }

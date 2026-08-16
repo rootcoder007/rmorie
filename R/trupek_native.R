@@ -55,6 +55,14 @@
 #
 # So dot products and matrix-vector products are written out as loops.
 # Slower, and exactly reproducible.
+#' So dot products and matrix-vector products are written out as loops
+#'
+#' Slower, and exactly reproducible.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .trupek_dot <- function(a, b) {
   s <- 0
   cc <- 0
@@ -68,6 +76,14 @@
   s + cc
 }
 
+#' .trupek_csum
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .trupek_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -81,8 +97,25 @@
   s + cc
 }
 
+#' .trupek_norm
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return A numeric value.
+#' @export
 .trupek_norm <- function(a) sqrt(.trupek_dot(a, a))
 
+#' .trupek_matvec
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param H See Usage.
+#' @param v See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .trupek_matvec <- function(H, v) {
   n <- nrow(H)
   out <- numeric(n)
@@ -90,12 +123,33 @@
   out
 }
 
+#' .trupek_model
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param H See Usage.
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .trupek_model <- function(g, H, s)
   .trupek_dot(g, s) + 0.5 * .trupek_dot(s, .trupek_matvec(H, s))
 
 # The positive tau with ||z + tau d|| = delta. Taking the stable root and
 # recovering the other from the product keeps precision when the two roots
 # differ wildly.
+#' The positive tau with ||z + tau d|| = delta. Taking the stable root
+#' and
+#'
+#' recovering the other from the product keeps precision when the two
+#' roots differ wildly.
+#'
+#' @param z See Usage.
+#' @param d See Usage.
+#' @param delta See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .trupek_boundary <- function(z, d, delta) {
   dd <- .trupek_dot(d, d)
   zd <- .trupek_dot(z, d)
@@ -112,6 +166,16 @@
   }
 }
 
+#' .trupek_cauchy
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param H See Usage.
+#' @param delta See Usage.
+#' @return A numeric value.
+#' @export
 .trupek_cauchy <- function(g, H, delta) {
   gn <- .trupek_norm(g)
   if (gn == 0) return(rep(0, length(g)))
@@ -122,6 +186,13 @@
 
 # Cholesky, or NULL when H is not positive definite. Used both to test
 # definiteness and to solve, so there is one code path.
+#' Cholesky, or NULL when H is not positive definite. Used both to test
+#'
+#' definiteness and to solve, so there is one code path.
+#'
+#' @param H See Usage.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .trupek_chol <- function(H) {
   n <- nrow(H)
   L <- matrix(0, n, n)
@@ -137,6 +208,15 @@
   L
 }
 
+#' .trupek_chol_solve
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .trupek_chol_solve <- function(L, b) {
   n <- nrow(L)
   y <- numeric(n)
@@ -148,6 +228,16 @@
   x
 }
 
+#' .trupek_dogleg
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param H See Usage.
+#' @param delta See Usage.
+#' @return A numeric value.
+#' @export
 .trupek_dogleg <- function(g, H, delta) {
   L <- .trupek_chol(H)
   if (is.null(L)) return(.trupek_cauchy(g, H, delta))
@@ -161,6 +251,18 @@
   pu + .trupek_boundary(pu, d, delta) * d
 }
 
+#' .trupek_steihaug
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param H See Usage.
+#' @param delta See Usage.
+#' @param tol See Usage.
+#' @param maxit See Usage.
+#' @return A list with \code{s}, \code{why}.
+#' @export
 .trupek_steihaug <- function(g, H, delta, tol, maxit) {
   n <- length(g)
   z <- rep(0, n)
@@ -196,6 +298,18 @@
   list(s = z, why = "iteration limit")
 }
 
+#' .trupek_exact
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param H See Usage.
+#' @param delta See Usage.
+#' @param tol See Usage.
+#' @param maxit See Usage.
+#' @return A list with \code{s}, \code{lambda}, \code{why}.
+#' @export
 .trupek_exact <- function(g, H, delta, tol, maxit) {
   n <- length(g)
   L <- .trupek_chol(H)
@@ -234,6 +348,19 @@
   list(s = s, lambda = lam, why = "on the boundary, shifted by lambda")
 }
 
+#' .trupek_sub
+#'
+#' Part of the trupek_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param H See Usage.
+#' @param delta See Usage.
+#' @param sub See Usage.
+#' @param tol See Usage.
+#' @param maxit See Usage.
+#' @return The value of \code{.trupek_steihaug}.
+#' @export
 .trupek_sub <- function(g, H, delta, sub, tol, maxit) {
   if (sub == "cauchy")
     return(list(s = .trupek_cauchy(g, H, delta), why = "Cauchy point"))

@@ -60,6 +60,14 @@
 
 .sdne_EPS <- 1e-12
 
+#' .sdne_mat
+#'
+#' Part of the sdne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .sdne_mat <- function(x) {
   if (is.matrix(x)) {
     storage.mode(x) <- "double"
@@ -74,6 +82,15 @@
   out
 }
 
+#' .sdne_penalty_matrix
+#'
+#' Part of the sdne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adjacency See Usage.
+#' @param beta Defaults to \code{5}.
+#' @return A list with \code{B}, \code{beta}, \code{n_nonzero}, \code{n_zero}.
+#' @export
 .sdne_penalty_matrix <- function(adjacency, beta = 5.0) {
   A <- .sdne_mat(adjacency)
   b <- as.numeric(beta)
@@ -87,6 +104,16 @@
        n_zero = sum(A == 0.0))
 }
 
+#' .sdne_second_order_loss
+#'
+#' Part of the sdne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adjacency See Usage.
+#' @param reconstruction See Usage.
+#' @param beta Defaults to \code{5}.
+#' @return A list with \code{loss}, \code{unweighted}, \code{beta}, \code{note}.
+#' @export
 .sdne_second_order_loss <- function(adjacency, reconstruction, beta = 5.0) {
   X <- .sdne_mat(adjacency)
   H <- .sdne_mat(reconstruction)
@@ -104,6 +131,15 @@
        note = "the row is mostly zeros, so the unweighted loss rewards predicting nothing")
 }
 
+#' .sdne_first_order_loss
+#'
+#' Part of the sdne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adjacency See Usage.
+#' @param embeddings See Usage.
+#' @return A list with \code{loss}, \code{linked_pairs}, \code{note}.
+#' @export
 .sdne_first_order_loss <- function(adjacency, embeddings) {
   S <- .sdne_mat(adjacency)
   Y <- .sdne_mat(embeddings)
@@ -125,6 +161,14 @@
        note = "zero iff every LINKED pair shares an embedding")
 }
 
+#' .sdne_proximity_counts
+#'
+#' Part of the sdne_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adjacency See Usage.
+#' @return A list with \code{first_order_pairs}, \code{second_order_pairs}, \code{total_pairs}, \code{density}, \code{ratio}, \code{note}.
+#' @export
 .sdne_proximity_counts <- function(adjacency) {
   A <- .sdne_mat(adjacency)
   n <- nrow(A)

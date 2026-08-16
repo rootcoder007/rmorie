@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Negative log-likelihood of the GPD at (sigma, xi) for excesses y.
+#' Negative log-likelihood of the GPD at (sigma, xi) for excesses y
+#'
+#' Part of the evpot implementation; see the file header for the source
+#' it follows.
+#'
+#' @param y See Usage.
+#' @param sigma See Usage.
+#' @param xi See Usage.
+#' @return A numeric value.
+#' @export
 .gpd_nll <- function(y, sigma, xi) {
   n <- length(y)
   if (sigma <= 0) return(Inf)
@@ -15,6 +25,16 @@
 }
 
 # Grimshaw's reparametrisation: given t = xi/sigma, xi and sigma follow.
+#' Grimshaw\'s reparametrisation: given t = xi/sigma, xi and sigma
+#' follow
+#'
+#' Part of the evpot implementation; see the file header for the source
+#' it follows.
+#'
+#' @param y See Usage.
+#' @param t See Usage.
+#' @return A list with \code{xi}, \code{sigma}, \code{g}.
+#' @export
 .gpd_profile <- function(y, t) {
   n <- length(y)
   s <- 0

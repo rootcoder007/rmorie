@@ -17,6 +17,16 @@
 
 # --- coercion --------------------------------------------------------------
 
+#' .tf_need
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param name Defaults to \code{"x"}.
+#' @param minlen Defaults to \code{2L}.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .tf_need <- function(x, name = "x", minlen = 2L) {
   v <- as.numeric(x)
   if (length(v) < minlen) {
@@ -33,6 +43,14 @@
 
 # --- direct DFT / IDFT (O(N^2), not an FFT -- the Python arm is the same) ---
 
+#' .tf_dft
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .tf_dft <- function(x) {
   z <- as.complex(x)
   n <- length(z)
@@ -50,6 +68,14 @@
   }, complex(1))
 }
 
+#' .tf_idft
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .tf_idft <- function(X) {
   z <- as.complex(X)
   n <- length(z)
@@ -69,6 +95,15 @@
 
 # --- analysis windows (eq 8.7 plus the usual raised cosines) ---------------
 
+#' .tf_win
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @param m See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .tf_win <- function(name, m) {
   m <- as.integer(m)
   if (m < 1L) stop("window length must be >= 1")
@@ -94,6 +129,14 @@
 
 # --- analytic signal, Sec 5.5.3 -------------------------------------------
 
+#' .tf_analytic
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{.tf_idft}.
+#' @export
 .tf_analytic <- function(x) {
   v <- as.numeric(x)
   n <- length(v)
@@ -173,6 +216,14 @@
   )
 )
 
+#' .tf_dbname
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param wavelet See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .tf_dbname <- function(wavelet) {
   w <- gsub("[-_]", "", tolower(trimws(as.character(wavelet))))
   if (w %in% c("haar", "db1", "d2")) {
@@ -196,6 +247,14 @@
   ))
 }
 
+#' .tf_filters
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param wavelet See Usage.
+#' @return A list with \code{h}, \code{g}, \code{rec_lo}, \code{rec_hi}.
+#' @export
 .tf_filters <- function(wavelet) {
   h <- .TF_DBTAPS[[as.character(.tf_dbname(wavelet))]]
   L <- length(h)
@@ -219,6 +278,16 @@
 
 # --- decimated filter bank, periodic extension -----------------------------
 
+#' .tf_dwtstep
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param h See Usage.
+#' @param g See Usage.
+#' @return A list with \code{lo}, \code{hi}.
+#' @export
 .tf_dwtstep <- function(a, h, g) {
   a <- as.numeric(a)
   n <- length(a)
@@ -238,6 +307,17 @@
   list(lo = lo, hi = hi)
 }
 
+#' .tf_idwtstep
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param h See Usage.
+#' @param g See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tf_idwtstep <- function(lo, hi, h, g) {
   half <- length(lo)
   n <- 2L * half
@@ -252,6 +332,16 @@
   out
 }
 
+#' .tf_dwt
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet See Usage.
+#' @param levels See Usage.
+#' @return A list with \code{approx}, \code{details}, \code{lengths}.
+#' @export
 .tf_dwt <- function(x, wavelet, levels) {
   f <- .tf_filters(wavelet)
   a <- as.numeric(x)
@@ -283,6 +373,17 @@
   list(approx = a, details = rev(details), lengths = rev(lengths))
 }
 
+#' .tf_idwt
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param details See Usage.
+#' @param lengths See Usage.
+#' @param wavelet See Usage.
+#' @return The value of \code{cur}, as built in the body.
+#' @export
 .tf_idwt <- function(a, details, lengths, wavelet) {
   f <- .tf_filters(wavelet)
   cur <- as.numeric(a)
@@ -295,6 +396,16 @@
 
 # --- undecimated (a-trous) transform, Nason & Silverman (1995) -------------
 
+#' .tf_swt
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param wavelet See Usage.
+#' @param levels See Usage.
+#' @return A list with \code{approx}, \code{details}, \code{approxes}.
+#' @export
 .tf_swt <- function(x, wavelet, levels) {
   f <- .tf_filters(wavelet)
   n <- length(x)
@@ -321,6 +432,16 @@
 
 # --- natural cubic spline (EMD envelopes, Sec 9.4 step 2) ------------------
 
+#' .tf_spline
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xs See Usage.
+#' @param ys See Usage.
+#' @param xq See Usage.
+#' @return A numeric value.
+#' @export
 .tf_spline <- function(xs, ys, xq) {
   xs <- as.numeric(xs)
   ys <- as.numeric(ys)
@@ -363,6 +484,14 @@
 
 # --- extrema / zero crossings ---------------------------------------------
 
+#' .tf_extrema
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{mx}, \code{mn}.
+#' @export
 .tf_extrema <- function(x) {
   n <- length(x)
   mx <- integer(0)
@@ -388,6 +517,14 @@
   list(mx = mx, mn = mn)
 }
 
+#' .tf_zerox
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .tf_zerox <- function(x) {
   n <- length(x)
   if (n < 2L) {
@@ -400,6 +537,16 @@
 
 # --- sifting / EMD, Sec 9.4 steps 1-6 --------------------------------------
 
+#' .tf_sift
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param maxiter Defaults to \code{50L}.
+#' @param tol Defaults to \code{0.05}.
+#' @return A list with \code{imf}, \code{iterations}, \code{converged}.
+#' @export
 .tf_sift <- function(x, maxiter = 50L, tol = 0.05) {
   h <- as.numeric(x)
   n <- length(h)
@@ -424,6 +571,16 @@
   list(imf = h, iterations = maxiter, converged = FALSE)
 }
 
+#' .tf_emd
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param maxmodes Defaults to \code{10L}.
+#' @param tol Defaults to \code{0.05}.
+#' @return A list with \code{imfs}, \code{residual}.
+#' @export
 .tf_emd <- function(x, maxmodes = 10L, tol = 0.05) {
   res <- as.numeric(x)
   imfs <- list()
@@ -439,6 +596,16 @@
 
 # --- mother wavelets, eqs (8.115)/(8.116) ---------------------------------
 
+#' .tf_mother
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @param t See Usage.
+#' @param w0 Defaults to \code{5}.
+#' @return Nothing; this branch always raises.
+#' @export
 .tf_mother <- function(name, t, w0 = 5) {
   nm <- tolower(trimws(as.character(name)))
   if (nm %in% c("mexh", "mexicanhat", "sombrero", "ricker")) {
@@ -457,6 +624,14 @@
   stop(sprintf("unknown wavelet '%s'; use 'morlet', 'mexh' or 'haar'", nm))
 }
 
+#' .tf_support
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .tf_support <- function(name) {
   nm <- tolower(trimws(as.character(name)))
   v <- c(
@@ -467,6 +642,17 @@
   v
 }
 
+#' .tf_cwt
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param scales See Usage.
+#' @param wavelet Defaults to \code{"morlet"}.
+#' @param w0 Defaults to \code{5}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tf_cwt <- function(x, scales, wavelet = "morlet", w0 = 5) {
   v <- as.numeric(x)
   n <- length(v)
@@ -490,6 +676,16 @@
 
 # --- Wigner-Ville, eq (8.123), Claasen-Mecklenbrauker form ----------------
 
+#' .tf_wvd
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param nfreq Defaults to \code{NULL}.
+#' @return A list with \code{tfd}, \code{freqs}.
+#' @export
 .tf_wvd <- function(x, fs, nfreq = NULL) {
   v <- as.numeric(x)
   n <- length(v)
@@ -509,6 +705,16 @@
   list(tfd = tfd, freqs = freqs)
 }
 
+#' .tf_smooth2d
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tfd See Usage.
+#' @param tlen See Usage.
+#' @param flen See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tf_smooth2d <- function(tfd, tlen, flen) {
   nt <- nrow(tfd)
   nf <- ncol(tfd)
@@ -538,6 +744,14 @@
   out
 }
 
+#' .tf_energy
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{.morie_fsum}.
+#' @export
 .tf_energy <- function(v) .morie_fsum(Mod(v)^2)
 
 # --- deterministic 64-bit LCG for the EEMD noise ---------------------------
@@ -548,6 +762,14 @@
 .TF_LCG_M <- c(0x7F2D, 0x4C95, 0xF42D, 0x5851)
 .TF_LCG_C <- c(0x814F, 0xF767, 0x7B7E, 0x1405)
 
+#' .tf_lcg_step
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .tf_lcg_step <- function(st) {
   r <- c(0, 0, 0, 0)
   for (i in 1:4) {
@@ -566,14 +788,38 @@
   r
 }
 
+#' (state >> 11) is exact in a double: it is at most 2^53 - 1
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param st See Usage.
+#' @return A numeric value.
+#' @export
 .tf_lcg_unif <- function(st) {
   # (state >> 11) is exact in a double: it is at most 2^53 - 1.
   (floor(st[1] / 2048) + st[2] * 2^5 + st[3] * 2^21 + st[4] * 2^37 + 1) /
     (2^53 + 1)
 }
 
+#' .tf_lcg_seed
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{.tf_lcg_step}.
+#' @export
 .tf_lcg_seed <- function(seed) .tf_lcg_step(c(0, 0, 0, 0) + .tf_seed_limbs(seed))
 
+#' .tf_seed_limbs
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .tf_seed_limbs <- function(seed) {
   s <- as.numeric(seed)
   if (s < 0) stop("seed must be non-negative")
@@ -2823,6 +3069,15 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 #  Here `n` is the BOOK'S sample-index variable and stays 0-based.
 # ---------------------------------------------------------------------------
 
+#' .tf_echo_idx
+#'
+#' Part of the rangayyan_tf implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param default Defaults to \code{NULL}.
+#' @return The value of \code{idx}, as built in the body.
+#' @export
 .tf_echo_idx <- function(n, default = NULL) {
   if (is.null(n)) {
     return(default)

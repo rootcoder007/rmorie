@@ -10,6 +10,14 @@
 # self-match exclusion |p - q| < n, same tie-breaking by index, same
 # early-abandon condition.
 
+#' .mor_hot_znorm
+#'
+#' Part of the hot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seg See Usage.
+#' @return A numeric value.
+#' @export
 .mor_hot_znorm <- function(seg) {
   m <- mean(seg)
   sdv <- sqrt(mean((seg - m)^2))

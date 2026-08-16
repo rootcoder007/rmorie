@@ -8,6 +8,15 @@
 ## between steps, matching the Python signatures exactly so results agree to
 ## machine precision.
 
+#' .morie_opt_vec
+#'
+#' Part of the optim_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param name Defaults to \code{"g"}.
+#' @return The value of \code{a}, as built in the body.
+#' @export
 .morie_opt_vec <- function(g, name = "g") {
   a <- as.numeric(g)
   if (length(a) == 0L) stop(sprintf("%s must be non-empty", name), call. = FALSE)
@@ -15,6 +24,16 @@
   a
 }
 
+#' .morie_opt_state
+#'
+#' Part of the optim_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param n See Usage.
+#' @param keys Defaults to \code{c("m", "v")}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_opt_state <- function(state, n, keys = c("m", "v")) {
   out <- list(t = 0L)
   if (!is.null(state)) {

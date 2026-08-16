@@ -7,8 +7,30 @@
 # Mirrors Python morie.fn.netcms exactly (same sweep order, same
 # warm-started coordinate descent).
 
+#' .netcms_soft
+#'
+#' Part of the netcms_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param t See Usage.
+#' @return A numeric value.
+#' @export
 .netcms_soft <- function(x, t) sign(x) * pmax(abs(x) - t, 0)
 
+#' .netcms_lasso
+#'
+#' Part of the netcms_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param V See Usage.
+#' @param s12 See Usage.
+#' @param lam See Usage.
+#' @param beta See Usage.
+#' @param tol See Usage.
+#' @param maxit See Usage.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .netcms_lasso <- function(V, s12, lam, beta, tol, maxit) {
   p1 <- length(s12)
   for (it in seq_len(maxit)) {

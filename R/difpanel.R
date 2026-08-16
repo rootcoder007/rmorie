@@ -181,6 +181,14 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 
 # Internal: Newey-West (1987) long-run variance, default bandwidth
 # 4 (T/100)^(2/9).
+#' Internal: Newey-West (1987) long-run variance, default bandwidth
+#'
+#' 4 (T/100)^(2/9).
+#'
+#' @param u See Usage.
+#' @param bandwidth Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .nw_lrv <- function(u, bandwidth = NULL) {
   Tn <- length(u)
   if (Tn < 2L) {
@@ -199,6 +207,16 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 
 # Internal: Pedroni's steps 2-4 nuisance terms for one panel unit.
 # Returns L11^2, lambda_i and sigma^2_i.
+#' Internal: Pedroni\'s steps 2-4 nuisance terms for one panel unit
+#'
+#' Returns L11^2, lambda_i and sigma^2_i.
+#'
+#' @param y See Usage.
+#' @param Zx See Usage.
+#' @param e See Usage.
+#' @param bandwidth See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .pdcoin_nuisance <- function(y, Zx, e, bandwidth) {
   dy <- diff(y)
   dX <- apply(Zx, 2L, diff)

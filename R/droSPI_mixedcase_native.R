@@ -26,6 +26,14 @@
 .drospi_c0 <- 2.515517; .drospi_c1 <- 0.802853; .drospi_c2 <- 0.010328
 .drospi_d1 <- 1.432788; .drospi_d2 <- 0.189269; .drospi_d3 <- 0.001308
 
+#' .drospi_as_z
+#'
+#' Part of the droSPI_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param h See Usage.
+#' @return A numeric value.
+#' @export
 .drospi_as_z <- function(h) {
   if (h <= 0.0 || h >= 1.0)
     stop("cumulative probability out of (0, 1)")
@@ -41,6 +49,14 @@
   sign * (t - num / den)
 }
 
+#' .drospi_fit_thom
+#'
+#' Part of the droSPI_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param xs See Usage.
+#' @return A list with \code{q}, \code{alpha}, \code{beta}.
+#' @export
 .drospi_fit_thom <- function(xs) {
   pos <- xs[xs > 0]
   n <- length(xs)
@@ -121,6 +137,13 @@ morie_droSPI <- function(precip, scale = 3L, by_month = TRUE) {
 standardized_precipitation_index <- morie_droSPI
 spi <- morie_droSPI
 
+#' .droSPI_cheatsheet
+#'
+#' Part of the droSPI_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @return A character value.
+#' @export
 .droSPI_cheatsheet <- function() {
   "droSPI: gamma-fit totals (Thom MLE), H=q+(1-q)G, A-S normal transform"
 }

@@ -9,16 +9,41 @@
 
 # ---- private helpers (namespaced to avoid collisions across R/) ----
 
+#' .linwlr_vec
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .linwlr_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
 }
 
+#' .linwlr_mat
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{as.matrix}.
+#' @export
 .linwlr_mat <- function(x) {
   if (is.null(x)) return(matrix(0, nrow = 0, ncol = 0))
   as.matrix(x)
 }
 
+#' .linwlr_design
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Zsrc See Usage.
+#' @param n See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .linwlr_design <- function(Zsrc, n) {
   if (is.null(Zsrc)) {
     return(matrix(1, nrow = n, ncol = 1))
@@ -26,10 +51,29 @@
   cbind(1, Zsrc)
 }
 
+#' .linwlr_sigmoid
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .linwlr_sigmoid <- function(v) {
   1 / (1 + exp(-v))
 }
 
+#' .linwlr_logit_irls
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param max_iter See Usage.
+#' @param ridge See Usage.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .linwlr_logit_irls <- function(Z, y, max_iter, ridge) {
   n <- nrow(Z)
   q <- ncol(Z)
@@ -51,6 +95,16 @@
   beta
 }
 
+#' .linwlr_lstsq
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param ridge See Usage.
+#' @return A matrix, from \code{solve}.
+#' @export
 .linwlr_lstsq <- function(Z, y, ridge) {
   q <- ncol(Z)
   A <- crossprod(Z) + ridge * diag(q)
@@ -58,12 +112,32 @@
   solve(A, b)
 }
 
+#' .linwlr_ridgesolve
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param rhs See Usage.
+#' @param ridge See Usage.
+#' @return A matrix, from \code{solve}.
+#' @export
 .linwlr_ridgesolve <- function(M, rhs, ridge) {
   q <- nrow(M)
   A <- M + ridge * diag(q)
   solve(A, as.numeric(rhs))
 }
 
+#' .linwlr_wls
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}, \code{se}, \code{resid}.
+#' @export
 .linwlr_wls <- function(X, y, w) {
   X <- cbind(1, X)
   n <- nrow(X)
@@ -78,6 +152,17 @@
   list(coef = as.numeric(coef), se = sqrt(diag(var_beta)), resid = resid)
 }
 
+#' .linwlr_sandwich_se
+#'
+#' Part of the linwlr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bread See Usage.
+#' @param meat See Usage.
+#' @param n See Usage.
+#' @param ridge See Usage.
+#' @return The value of \code{se}, as built in the body.
+#' @export
 .linwlr_sandwich_se <- function(bread, meat, n, ridge) {
   q <- nrow(bread)
   inv_mat <- solve(bread + ridge * diag(q))

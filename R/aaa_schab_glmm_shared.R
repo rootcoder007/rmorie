@@ -28,6 +28,16 @@
 
 # --- links and variance functions -----------------------------------------
 
+#' .schab_link
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param kind See Usage.
+#' @param inverse Defaults to \code{FALSE}.
+#' @return Nothing; this branch always raises.
+#' @export
 .schab_link <- function(x, kind, inverse = FALSE) {
   x <- as.numeric(x)
   if (identical(kind, "log")) {
@@ -44,6 +54,15 @@
   )
 }
 
+#' .schab_link_derivative
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param mu See Usage.
+#' @param kind See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .schab_link_derivative <- function(mu, kind) {
   mu <- as.numeric(mu) # g'(mu) = d eta / d mu
   if (identical(kind, "log")) {
@@ -58,12 +77,30 @@
   stop("unknown link", call. = FALSE)
 }
 
+#' D mu / d eta, the diagonal of Psi; the reciprocal of g\'(mu), as the
+#' text
+#'
+#' notes when deriving (6.89).
+#'
+#' @param mu See Usage.
+#' @param kind See Usage.
+#' @return A numeric value.
+#' @export
 .schab_mu_eta <- function(mu, kind) {
   # d mu / d eta, the diagonal of Psi; the reciprocal of g'(mu), as the text
   # notes when deriving (6.89).
   1 / .schab_link_derivative(mu, kind)
 }
 
+#' .schab_variance_function
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param mu See Usage.
+#' @param family See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .schab_variance_function <- function(mu, family) {
   mu <- as.numeric(mu) # v(mu) in eq (6.74)
   if (identical(family, "poisson")) {
@@ -78,6 +115,14 @@
   stop("`family` must be 'poisson', 'binomial' or 'gaussian'", call. = FALSE)
 }
 
+#' .schab_canonical_link
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param family See Usage.
+#' @return The value of \code{switch}.
+#' @export
 .schab_canonical_link <- function(family) {
   switch(family,
     poisson = "log",
@@ -89,6 +134,17 @@
 
 # --- Sec. 6.3.4, the conditional specification ----------------------------
 
+#' .schab_conditional_mean
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @param S See Usage.
+#' @param link_kind Defaults to \code{"log"}.
+#' @return The value of \code{.schab_link}.
+#' @export
 .schab_conditional_mean <- function(X, beta, S, link_kind = "log") {
   X <- as.matrix(X) # eq (6.73)
   .schab_link(as.numeric(X %*% as.numeric(beta)) + as.numeric(S),
@@ -97,10 +153,32 @@
   )
 }
 
+#' .schab_conditional_variance
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param mu See Usage.
+#' @param sigma2 See Usage.
+#' @param family See Usage.
+#' @return A numeric value.
+#' @export
 .schab_conditional_variance <- function(mu, sigma2, family) {
   as.numeric(sigma2) * .schab_variance_function(mu, family) # eq (6.74)
 }
 
+#' .schab_marginal_moments_lognormal
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @param sigma2_S See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @param rho Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .schab_marginal_moments_lognormal <- function(X, beta, sigma2_S, sigma2 = 1,
                                               rho = NULL) {
   # Example 6.6. NOTE the second variance term carries m(s)^2: the printed
@@ -122,6 +200,16 @@
   out
 }
 
+#' G^-1(x\'beta) -- what the marginal mean is NOT, in a GLMM
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @param link_kind Defaults to \code{"log"}.
+#' @return The value of \code{.schab_link}.
+#' @export
 .schab_naive_marginal_mean <- function(X, beta, link_kind = "log") {
   # g^-1(x'beta) -- what the marginal mean is NOT, in a GLMM.
   X <- as.matrix(X)
@@ -130,12 +218,33 @@
 
 # --- Sec. 6.3.5, pseudo-likelihood ----------------------------------------
 
+#' .schab_pseudo_data
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param mu See Usage.
+#' @param link_kind See Usage.
+#' @return A numeric value.
+#' @export
 .schab_pseudo_data <- function(z, mu, link_kind) {
   z <- as.numeric(z)
   mu <- as.numeric(mu) # eq (6.78)
   .schab_link(mu, link_kind) + .schab_link_derivative(mu, link_kind) * (z - mu)
 }
 
+#' Eq (6.79): the covariance of the PSEUDO-data, carrying Psi^-1 on both
+#'
+#' sides. Distinct from .schab_data_covariance -- see .schab_pql_score.
+#'
+#' @param mu See Usage.
+#' @param sigma2 See Usage.
+#' @param family See Usage.
+#' @param link_kind See Usage.
+#' @param R Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .schab_sigma_mu <- function(mu, sigma2, family, link_kind, R = NULL) {
   # eq (6.79): the covariance of the PSEUDO-data, carrying Psi^-1 on both
   # sides. Distinct from .schab_data_covariance -- see .schab_pql_score.
@@ -148,6 +257,19 @@
   as.numeric(sigma2) * (d %o% d) * as.matrix(R)
 }
 
+#' Sigma^2 V^1/2 R V^1/2, on the DATA scale. Sec. 6.3.5.3 writes its
+#' score
+#'
+#' equations with the symbol Sigma_mu, but the matrix they need is this
+#' one; with (6.79) as written the scores are wrong by a factor of
+#' Psi^2.
+#'
+#' @param mu See Usage.
+#' @param sigma2 See Usage.
+#' @param family See Usage.
+#' @param R Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .schab_data_covariance <- function(mu, sigma2, family, R = NULL) {
   # sigma^2 V^1/2 R V^1/2, on the DATA scale. Sec. 6.3.5.3 writes its score
   # equations with the symbol Sigma_mu, but the matrix they need is this
@@ -159,6 +281,16 @@
   as.numeric(sigma2) * (v_half %o% v_half) * as.matrix(R)
 }
 
+#' .schab_gls_beta
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Sigma_nu See Usage.
+#' @param nu See Usage.
+#' @return A list with \code{beta}, \code{cov_beta}.
+#' @export
 .schab_gls_beta <- function(X, Sigma_nu, nu) {
   X <- as.matrix(X)
   nu <- as.numeric(nu) # eq (6.80)
@@ -170,11 +302,33 @@
   )
 }
 
+#' .schab_predict_random_field
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Sigma_S See Usage.
+#' @param Sigma_nu See Usage.
+#' @param nu See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .schab_predict_random_field <- function(Sigma_S, Sigma_nu, nu, X, beta) {
   resid <- as.numeric(nu) - as.numeric(as.matrix(X) %*% as.numeric(beta))
   as.numeric(as.matrix(Sigma_S) %*% solve(as.matrix(Sigma_nu), resid)) # (6.81)
 }
 
+#' .schab_reml_objective
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Sigma_nu See Usage.
+#' @param nu See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .schab_reml_objective <- function(X, Sigma_nu, nu) {
   X <- as.matrix(X)
   nu <- as.numeric(nu)
@@ -197,6 +351,15 @@
     (n - k) * log(2 * pi))
 }
 
+#' .schab_initial_mu
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param family See Usage.
+#' @return The value of \code{z}, as built in the body.
+#' @export
 .schab_initial_mu <- function(z, family) {
   z <- as.numeric(z)
   if (identical(family, "poisson")) {
@@ -208,6 +371,22 @@
   z
 }
 
+#' .schab_fit_pseudo_likelihood
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param X See Usage.
+#' @param Sigma_S See Usage.
+#' @param family Defaults to \code{"poisson"}.
+#' @param link_kind Defaults to \code{NULL}.
+#' @param sigma2 Defaults to \code{1}.
+#' @param R Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta}, \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged}, \code{link}, \code{family}.
+#' @export
 .schab_fit_pseudo_likelihood <- function(z, X, Sigma_S, family = "poisson",
                                          link_kind = NULL, sigma2 = 1,
                                          R = NULL, max_iter = 100L,
@@ -260,6 +439,22 @@
   )
 }
 
+#' .schab_pql_score
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @param S See Usage.
+#' @param Sigma_S See Usage.
+#' @param family See Usage.
+#' @param link_kind See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @param R Defaults to \code{NULL}.
+#' @return A list with \code{score_beta}, \code{score_S}.
+#' @export
 .schab_pql_score <- function(z, X, beta, S, Sigma_S, family, link_kind,
                              sigma2 = 1, R = NULL) {
   # Sec. 6.3.5.3 first-order conditions, with the DATA-scale covariance.
@@ -281,6 +476,17 @@
 
 # --- Sec. 6.3.6, prediction -----------------------------------------------
 
+#' Eq (6.90) with its own MSPE (6.91), kept apart from the inverse-link
+#'
+#' predictor (6.87), whose delta-method variance (6.88) the text says
+#' belongs to a different predictor.
+#'
+#' @param nu0_hat See Usage.
+#' @param sigma2_nu0 See Usage.
+#' @param mu0_hat See Usage.
+#' @param link_kind See Usage.
+#' @return A list with \code{prediction}, \code{mspe}, \code{prediction_error}, \code{inverse_link_prediction}, \code{pseudo_scale_prediction}, \code{pseudo_scale_mspe}, \code{mspe_is_for}.
+#' @export
 .schab_predict_glm <- function(nu0_hat, sigma2_nu0, mu0_hat, link_kind) {
   # eq (6.90) with its own MSPE (6.91), kept apart from the inverse-link
   # predictor (6.87), whose delta-method variance (6.88) the text says
@@ -305,6 +511,14 @@
 
 # --- CAR family -----------------------------------------------------------
 
+#' .schab_neighbour_structure
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param adjacency See Usage.
+#' @return A numeric value.
+#' @export
 .schab_neighbour_structure <- function(adjacency) {
   A <- as.matrix(adjacency) # R_ii = n_i, R_ij = -1
   if (nrow(A) != ncol(A)) stop("`adjacency` must be square", call. = FALSE)
@@ -322,6 +536,15 @@
   diag(rowSums(A)) - A
 }
 
+#' Sigma^2 R^-, the Moore-Penrose inverse: R is singular by construction
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param R See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .schab_icar_covariance <- function(R, sigma2 = 1) {
   # sigma^2 R^-, the Moore-Penrose inverse: R is singular by construction.
   R <- as.matrix(R)
@@ -331,6 +554,16 @@
   as.numeric(sigma2) * (e$vectors %*% diag(inv) %*% t(e$vectors))
 }
 
+#' .schab_icar_full_conditional
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @param adjacency See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @return A list with \code{mean}, \code{variance}, \code{n_neighbours}.
+#' @export
 .schab_icar_full_conditional <- function(u, adjacency, sigma2 = 1) {
   u <- as.numeric(u)
   A <- as.matrix(adjacency) # eq (5)/(4.3)
@@ -344,6 +577,16 @@
   )
 }
 
+#' .schab_lcar_precision
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param R See Usage.
+#' @param rho See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .schab_lcar_precision <- function(R, rho, sigma2 = 1) {
   R <- as.matrix(R)
   rho <- as.numeric(rho) # eq (6)
@@ -352,6 +595,17 @@
   rho * R + (1 - rho) * diag(nrow(R))
 }
 
+#' .schab_lcar_full_conditional
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @param adjacency See Usage.
+#' @param rho See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @return A list with \code{mean}, \code{variance}, \code{n_neighbours}.
+#' @export
 .schab_lcar_full_conditional <- function(u, adjacency, rho, sigma2 = 1) {
   u <- as.numeric(u)
   A <- as.matrix(adjacency)
@@ -365,6 +619,15 @@
   )
 }
 
+#' .schab_bym_convolution
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .schab_bym_convolution <- function(u, v) {
   u <- as.numeric(u)
   v <- as.numeric(v)
@@ -374,6 +637,13 @@
   u + v
 }
 
+#' .schab_bym_identifiability_note
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .schab_bym_identifiability_note <- function() {
   paste(
     "only u + v enters the likelihood, so sigma_u^2 and sigma_v^2 are not",
@@ -383,6 +653,15 @@
   )
 }
 
+#' .schab_smr
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param counts See Usage.
+#' @param expected See Usage.
+#' @return A numeric value.
+#' @export
 .schab_smr <- function(counts, expected) {
   z <- as.numeric(counts)
   e <- as.numeric(expected)
@@ -393,6 +672,17 @@
   z / e
 }
 
+#' .schab_poisson_disease_mean
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param expected See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @param psi See Usage.
+#' @return A numeric value.
+#' @export
 .schab_poisson_disease_mean <- function(expected, X, beta, psi) {
   as.numeric(expected) *
     exp(as.numeric(as.matrix(X) %*% as.numeric(beta)) + as.numeric(psi))
@@ -400,6 +690,16 @@
 
 # --- Besag, York & Mollie (1991) Sec. 4 -----------------------------------
 
+#' .schab_bym_icar_log_prior
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @param adjacency See Usage.
+#' @param kappa See Usage.
+#' @return A numeric value.
+#' @export
 .schab_bym_icar_log_prior <- function(u, adjacency, kappa) {
   u <- as.numeric(u)
   R <- .schab_neighbour_structure(adjacency) # eq (4.2)
@@ -408,6 +708,16 @@
   -0.5 * length(u) * log(kappa) - as.numeric(t(u) %*% R %*% u) / (2 * kappa)
 }
 
+#' .schab_bym_median_log_prior
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @param adjacency See Usage.
+#' @param kappa See Usage.
+#' @return A numeric value.
+#' @export
 .schab_bym_median_log_prior <- function(u, adjacency, kappa) {
   u <- as.numeric(u)
   A <- as.matrix(adjacency) # eq (4.4)
@@ -418,6 +728,21 @@
   -length(u) * log(kappa) - total / kappa
 }
 
+#' .schab_bym_log_posterior
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param c_exp See Usage.
+#' @param u See Usage.
+#' @param v See Usage.
+#' @param kappa See Usage.
+#' @param lam See Usage.
+#' @param adjacency See Usage.
+#' @param epsilon Defaults to \code{0.01}.
+#' @return A numeric value.
+#' @export
 .schab_bym_log_posterior <- function(y, c_exp, u, v, kappa, lam, adjacency,
                                      epsilon = 0.01) {
   y <- as.numeric(y)
@@ -441,6 +766,20 @@
     epsilon / (2 * kappa) - epsilon / (2 * lam) # (4.6)
 }
 
+#' .schab_bym_map
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param c_exp See Usage.
+#' @param adjacency See Usage.
+#' @param kappa See Usage.
+#' @param lam See Usage.
+#' @param max_iter Defaults to \code{200L}.
+#' @param tol Defaults to \code{1e-11}.
+#' @return A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted}, \code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total}, \code{observed_total}, \code{log_posterior}.
+#' @export
 .schab_bym_map <- function(y, c_exp, adjacency, kappa, lam, max_iter = 200L,
                            tol = 1e-11) {
   # Conditional MAP of u and v by Newton. The paper states the log posterior
@@ -504,6 +843,15 @@
 
 # --- temporal and space-time structures -----------------------------------
 
+#' .schab_random_walk_structure
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n_time See Usage.
+#' @param order Defaults to \code{1L}.
+#' @return The value of \code{%*%}.
+#' @export
 .schab_random_walk_structure <- function(n_time, order = 1L) {
   T_ <- as.integer(n_time)
   k <- as.integer(order)
@@ -519,6 +867,16 @@
   t(D) %*% D
 }
 
+#' .schab_interaction_structure
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param R_space See Usage.
+#' @param R_time See Usage.
+#' @param kind See Usage.
+#' @return A list with \code{structure}, \code{kind}, \code{rank}, \code{rank_deficiency}, \code{n_constraints_required}.
+#' @export
 .schab_interaction_structure <- function(R_space, R_time, kind) {
   kinds <- c("I", "II", "III", "IV")
   if (!kind %in% kinds) {
@@ -541,6 +899,15 @@
   )
 }
 
+#' .schab_null_space_constraints
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param R_delta See Usage.
+#' @param tol Defaults to \code{NULL}.
+#' @return A list with \code{A}, \code{e}, \code{n_constraints}, \code{rank_deficiency}.
+#' @export
 .schab_null_space_constraints <- function(R_delta, tol = NULL) {
   M <- as.matrix(R_delta) # eq (12)
   e <- eigen(M, symmetric = TRUE)
@@ -554,6 +921,15 @@
   )
 }
 
+#' .schab_apply_sum_to_zero
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param delta See Usage.
+#' @param A See Usage.
+#' @return A numeric value.
+#' @export
 .schab_apply_sum_to_zero <- function(delta, A) {
   d <- as.numeric(delta)
   A <- as.matrix(A)
@@ -563,6 +939,18 @@
   d - as.numeric(t(A) %*% solve(A %*% t(A), A %*% d))
 }
 
+#' .schab_linear_trend_log_risk
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param alpha See Usage.
+#' @param u See Usage.
+#' @param beta_t See Usage.
+#' @param delta_i See Usage.
+#' @param times See Usage.
+#' @return A numeric value.
+#' @export
 .schab_linear_trend_log_risk <- function(alpha, u, beta_t, delta_i, times) {
   u <- as.numeric(u)
   d <- as.numeric(delta_i)
@@ -574,6 +962,18 @@
     outer(as.numeric(beta_t) + d, t_) # eq (9)
 }
 
+#' .schab_nonparametric_log_risk
+#'
+#' Part of the schab_glmm_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param alpha See Usage.
+#' @param u See Usage.
+#' @param phi See Usage.
+#' @param gamma See Usage.
+#' @param delta Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .schab_nonparametric_log_risk <- function(alpha, u, phi, gamma, delta = NULL) {
   u <- as.numeric(u)
   phi <- as.numeric(phi)

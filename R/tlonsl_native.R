@@ -40,6 +40,16 @@
 .tlonsl_EPS <- 1e-12
 .tlonsl_LOSSES <- c("squared", "log")
 
+#' .tlonsl_loss
+#'
+#' Part of the tlonsl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param kind See Usage.
+#' @param y See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tlonsl_loss <- function(kind, y, p) {
   if (kind == "squared") {
     return((y - p) ^ 2)

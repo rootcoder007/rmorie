@@ -75,6 +75,14 @@
 
 .scintg_signs <- c("penalise", "as_printed")
 
+#' .scintg_matrix
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @return The value of \code{Z}, as built in the body.
+#' @export
 .scintg_matrix <- function(Z) {
   if (is.data.frame(Z)) Z <- as.matrix(Z)
   if (!is.matrix(Z)) {
@@ -102,12 +110,28 @@
   Z
 }
 
+#' .scintg_l2_normalise
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @return The value of \code{sweep}.
+#' @export
 .scintg_l2_normalise <- function(Z) {
   n <- sqrt(rowSums(Z * Z))
   n[n <= 0] <- 1
   sweep(Z, 1, n, "/")
 }
 
+#' .scintg_design
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param batches See Usage.
+#' @return A list with \code{phi}, \code{names}.
+#' @export
 .scintg_design <- function(batches) {
   names <- sort(unique(as.character(batches)))
   B <- length(names)
@@ -121,6 +145,16 @@
   list(phi=phi, names=names)
 }
 
+#' .scintg_cluster_batch_counts
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R See Usage.
+#' @param batches See Usage.
+#' @param names Defaults to \code{NULL}.
+#' @return A list with \code{O}, \code{E}, \code{batches}.
+#' @export
 .scintg_cluster_batch_counts <- function(R, batches, names=NULL) {
   K <- nrow(R)
   N <- ncol(R)
@@ -139,6 +173,19 @@
   list(O=O, E=E, batches=names)
 }
 
+#' .scintg_harmony_objective
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param R See Usage.
+#' @param Y See Usage.
+#' @param batches See Usage.
+#' @param sigma Defaults to \code{0.1}.
+#' @param theta Defaults to \code{2}.
+#' @return A list with \code{total}, \code{fit}, \code{entropy}, \code{kl}.
+#' @export
 .scintg_harmony_objective <- function(Z, R, Y, batches, sigma=0.1, theta=2.0) {
   K <- nrow(R)
   N <- ncol(R)
@@ -155,6 +202,16 @@
        fit=fit, entropy=ent, kl=kl)
 }
 
+#' .scintg_kmeans_init
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Zn See Usage.
+#' @param K See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{centres}, as built in the body.
+#' @export
 .scintg_kmeans_init <- function(Zn, K, seed) {
   N <- nrow(Zn)
   d <- ncol(Zn)
@@ -213,6 +270,15 @@
   centres
 }
 
+#' .scintg_solve
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .scintg_solve <- function(A, B) {
   n <- nrow(A)
   m <- ncol(B)
@@ -241,6 +307,18 @@
   X
 }
 
+#' .scintg_correct_batch
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param R See Usage.
+#' @param batches See Usage.
+#' @param lam Defaults to \code{1}.
+#' @param reference Defaults to \code{NULL}.
+#' @return A list with \code{Z}, \code{W}, \code{batches}.
+#' @export
 .scintg_correct_batch <- function(Z, R, batches, lam=1.0, reference=NULL) {
   rows <- .scintg_matrix(Z)
   N <- nrow(rows)
@@ -285,6 +363,23 @@
   list(Z=out, W=Ws, batches=names)
 }
 
+#' .scintg_maximum_diversity_clustering
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param batches See Usage.
+#' @param K Defaults to \code{NULL}.
+#' @param sigma Defaults to \code{0.1}.
+#' @param theta Defaults to \code{2}.
+#' @param max_iter Defaults to \code{25}.
+#' @param tol Defaults to \code{1e-05}.
+#' @param seed Defaults to \code{0}.
+#' @param Y Defaults to \code{NULL}.
+#' @param diversity Defaults to \code{"penalise"}.
+#' @return A list with \code{R}, \code{Y}, \code{K}, \code{objective}.
+#' @export
 .scintg_maximum_diversity_clustering <- function(Z, batches, K=NULL, sigma=0.1,
                                                  theta=2.0, max_iter=25,
                                                  tol=1e-5, seed=0, Y=NULL,
@@ -439,6 +534,13 @@ morie_scintg <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0, lam=1.0,
 harmony_integrate <- morie_scintg
 singlecell_integration <- morie_scintg
 
+#' .scintg_cheatsheet
+#'
+#' Part of the scintg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .scintg_cheatsheet <- function() {
   paste("scintg: Harmony (Korsunsky et al. 2019). Alternates maximum",
         "diversity clustering -- soft spherical k-means whose",

@@ -95,6 +95,16 @@ Jntlo <- function(y_dict, y_hat_dict, weights = NULL) {
                        "loss per outcome type, weights per Chapter 12 Sect. 12.4"))
 }
 
+#' .jntlo_loss
+#'
+#' Part of the jntlO implementation; see the file header for the source
+#' it follows.
+#'
+#' @param kind See Usage.
+#' @param y See Usage.
+#' @param yh See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .jntlo_loss <- function(kind, y, yh) {
   n <- length(y)
   s <- 0

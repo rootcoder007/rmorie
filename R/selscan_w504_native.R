@@ -6,6 +6,18 @@
 # (ehhdec_native.R). R cores are 1-based; the Python arms are 0-based
 # (parity harnesses pass core+1 on the R side).
 
+#' Voight et al. 2006, Materials and Methods "Calculation of iHS":
+#'
+#' trapezoid area outward from the core, INCLUDING the segment that ends
+#' at the first marker below min_ehh.
+#'
+#' @param pos See Usage.
+#' @param ehh See Usage.
+#' @param core See Usage.
+#' @param side See Usage.
+#' @param min_ehh See Usage.
+#' @return A list with \code{area}, \code{truncated}.
+#' @export
 .morie_ihh_side <- function(pos, ehh, core, side, min_ehh) {
   # Voight et al. 2006, Materials and Methods "Calculation of iHS":
   # trapezoid area outward from the core, INCLUDING the segment that
@@ -138,6 +150,16 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
        method = "XP-EHH (Sabeti 2007): ln(I_A/I_B) of integrated site-EHH")
 }
 
+#' PLINK Table 1 with finite-sample corrections (Purcell 2007 p 566)
+#'
+#' Part of the selscan_w504_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param T_ See Usage.
+#' @return The value of \code{rbind}.
+#' @export
 .morie_p_ibs_ibd <- function(X, Y, T_) {
   # PLINK Table 1 with finite-sample corrections (Purcell 2007 p 566)
   X <- as.numeric(X); Y <- as.numeric(Y); T_ <- as.numeric(T_)

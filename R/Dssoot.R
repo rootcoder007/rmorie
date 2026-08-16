@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Least squares of y on an intercept, x1 and optionally x2.
+#' Least squares of y on an intercept, x1 and optionally x2
+#'
+#' Part of the Dssoot implementation; see the file header for the source
+#' it follows.
+#'
+#' @param y See Usage.
+#' @param x1 See Usage.
+#' @param x2 Defaults to \code{NULL}.
+#' @return The value of \code{.s03lstsq}.
+#' @export
 .dssoot_ols <- function(y, x1, x2 = NULL) {
   Z <- if (is.null(x2)) cbind(1, x1) else cbind(1, x1, x2)
   .s03lstsq(Z, y)

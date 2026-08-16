@@ -21,6 +21,15 @@
 
 # --------------------------------------------------------------- helpers
 
+#' .morie_w4c_lcgvec
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_w4c_lcgvec <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -34,6 +43,14 @@
 
 # Box-Muller normals from the integer LCG, draw for draw with Python's
 # morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
+#' Box-Muller normals from the integer LCG, draw for draw with Python\'s
+#'
+#' morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
+#'
+#' @param n See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_w4c_lcg_normal <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -51,12 +68,34 @@
   out
 }
 
+#' .morie_w4c_lcg_uniform
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rows See Usage.
+#' @param cols See Usage.
+#' @param seed See Usage.
+#' @param scale See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .morie_w4c_lcg_uniform <- function(rows, cols, seed, scale) {
   u <- .morie_w4c_lcgvec(rows * cols, seed)
   matrix((u * 2 - 1) * scale, nrow = rows, ncol = cols, byrow = TRUE)
 }
 
 # Fisher-Yates partial shuffle drawing k of n indices (0-based out), LCG-seeded.
+#' Fisher-Yates partial shuffle drawing k of n indices (0-based out),
+#' LCG-seeded
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @param seed See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .morie_w4c_lcg_sample <- function(n, k, seed) {
   s <- as.numeric(seed) %% 2^32
   pool <- 0:(n - 1L)
@@ -73,6 +112,17 @@
 # Least-squares stump, matching the internal `stump` in morie_geron_bagging
 # (geron_ml_native.R): best single-feature split minimising SSE; classify
 # rounds each leaf to {0, 1}.
+#' Least-squares stump, matching the internal `stump` in
+#' morie_geron_bagging
+#'
+#' (geron_ml_native.R): best single-feature split minimising SSE;
+#' classify rounds each leaf to {0, 1}.
+#'
+#' @param Xb See Usage.
+#' @param yb See Usage.
+#' @param classify See Usage.
+#' @return The value of \code{function}.
+#' @export
 .morie_w4c_stump <- function(Xb, yb, classify) {
   best <- list(sse = Inf, j = 1L, thr = Inf, lp = mean(yb), rp = mean(yb))
   for (j in seq_len(ncol(Xb))) {
@@ -104,6 +154,17 @@
 }
 
 # PCA by SVD of the centred (optionally scaled) matrix.
+#' PCA by SVD of the centred (optionally scaled) matrix
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param k See Usage.
+#' @param center Defaults to \code{TRUE}.
+#' @param scale Defaults to \code{FALSE}.
+#' @return A list with \code{components}, \code{scores}, \code{explained_variance}, \code{explained_variance_ratio}, \code{singular_values}, \code{Xc}.
+#' @export
 .morie_w4c_pca_svd <- function(X, k, center = TRUE, scale = FALSE) {
   Xc <- if (center) sweep(X, 2, colMeans(X)) else X
   if (scale) {
@@ -127,6 +188,18 @@
 }
 
 # Lee-Seung multiplicative-update NMF; LCG-seeded uniform(0, 1) init.
+#' Lee-Seung multiplicative-update NMF; LCG-seeded uniform(0, 1) init
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param k See Usage.
+#' @param max_iter See Usage.
+#' @param tol See Usage.
+#' @param seed See Usage.
+#' @return A list with \code{W}, \code{H}, \code{n_iter}.
+#' @export
 .morie_w4c_nmf <- function(X, k, max_iter, tol, seed) {
   m <- nrow(X)
   p <- ncol(X)
@@ -149,6 +222,17 @@
 # Standard (sklearn-style) precision-recall curve: sweep in descending score
 # order, one vertex per distinct score, leading (recall=0, precision=1) point
 # from a threshold above every score, step-function average precision.
+#' Standard (sklearn-style) precision-recall curve: sweep in descending
+#' score
+#'
+#' order, one vertex per distinct score, leading (recall=0, precision=1)
+#' point from a threshold above every score, step-function average
+#' precision.
+#'
+#' @param y_bin See Usage.
+#' @param s See Usage.
+#' @return A list with \code{precision}, \code{recall}, \code{average_precision}.
+#' @export
 .morie_w4c_pr_curve <- function(y_bin, s) {
   ord <- order(-s, method = "radix")
   ys <- y_bin[ord]
@@ -167,6 +251,14 @@
 
 # Contiguous greedy partition of layer sizes into n_stages devices,
 # minimising the maximum device load (prefix-sum greedy assignment).
+#' Contiguous greedy partition of layer sizes into n_stages devices,
+#'
+#' minimising the maximum device load (prefix-sum greedy assignment).
+#'
+#' @param sizes See Usage.
+#' @param n_stages See Usage.
+#' @return A list with \code{assignment}, \code{device_loads}, \code{max_load}, \code{imbalance}.
+#' @export
 .morie_w4c_model_parallel <- function(sizes, n_stages) {
   L <- length(sizes)
   total <- sum(sizes)
@@ -522,6 +614,16 @@ morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL,
 
 # ============================================================ hmocsv
 
+#' .morie_w4c_rbf
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param gamma See Usage.
+#' @return A numeric value.
+#' @export
 .morie_w4c_rbf <- function(A, B, gamma) {
   d2 <- outer(rowSums(A^2), rowSums(B^2), "+") - 2 * (A %*% t(B))
   exp(-gamma * pmax(d2, 0))
@@ -841,6 +943,15 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
 
 # ============================================================ hmovo / hmovr
 
+#' .morie_w4c_centroid_pair
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Xp See Usage.
+#' @param yp See Usage.
+#' @return The value of \code{function}.
+#' @export
 .morie_w4c_centroid_pair <- function(Xp, yp) {
   c0 <- colMeans(Xp[yp == 0, , drop = FALSE])
   c1 <- colMeans(Xp[yp == 1, , drop = FALSE])
@@ -903,6 +1014,15 @@ morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL)
   )
 }
 
+#' .morie_w4c_centroid_score
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Xb See Usage.
+#' @param yb See Usage.
+#' @return The value of \code{function}.
+#' @export
 .morie_w4c_centroid_score <- function(Xb, yb) {
   c1 <- colMeans(Xb[yb == 1, , drop = FALSE])
   c0 <- if (any(yb == 0)) colMeans(Xb[yb == 0, , drop = FALSE]) else c1
@@ -1276,6 +1396,14 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
 
 # ============================================================ hmphp
 
+#' .morie_w4c_sigmoid
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_w4c_sigmoid <- function(z) 1.0 / (1.0 + exp(-z))
 
 #' Peephole LSTM cell forward step: gates also see the cell state (Geron Ch 13, hmphp)
@@ -1354,6 +1482,16 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
   )
 }
 
+#' 1-based column indices, combinations with replacement, itertools
+#' order
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_w4c_combos_with_repl <- function(n, k) {
   # 1-based column indices, combinations with replacement, itertools order.
   out <- list()
@@ -1453,6 +1591,14 @@ morie_geron_policy <- function(state, pi, seed = 0) {
 
 # ============================================================ hmppo
 
+#' .morie_w4c_bind_env
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param env See Usage.
+#' @return A list with \code{reset}, \code{step}.
+#' @export
 .morie_w4c_bind_env <- function(env) {
   reset <- if (is.function(env$reset)) env$reset else env$reset
   step <- if (is.function(env$step)) env$step else env$step
@@ -1912,6 +2058,15 @@ morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
 
 # ============================================================ hmqat
 
+#' .morie_w4c_fake_quant
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w See Usage.
+#' @param bits See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_w4c_fake_quant <- function(w, bits) {
   qmax <- 2^(bits - 1) - 1
   scale <- max(abs(w)) / qmax
@@ -1978,6 +2133,15 @@ morie_geron_reverse_autodiff <- function(f, x) {
 
 # ============================================================ hmrdt (wraps morie_geron_cart_split_cost)
 
+#' .morie_w4c_leaf_value
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param criterion See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_w4c_leaf_value <- function(y, criterion) {
   if (criterion == "mse") {
     return(mean(y))
@@ -1986,6 +2150,18 @@ morie_geron_reverse_autodiff <- function(f, x) {
   as.numeric(names(tb)[which.max(tb)])
 }
 
+#' .morie_w4c_best_split
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param criterion See Usage.
+#' @param columns See Usage.
+#' @param min_leaf See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .morie_w4c_best_split <- function(X, y, criterion, columns, min_leaf) {
   best <- NULL
   for (j in columns) {
@@ -2002,6 +2178,20 @@ morie_geron_reverse_autodiff <- function(f, x) {
   best
 }
 
+#' .morie_w4c_grow
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param depth See Usage.
+#' @param max_depth See Usage.
+#' @param min_leaf See Usage.
+#' @param criterion See Usage.
+#' @param columns_fn See Usage.
+#' @return A list with \code{leaf}, \code{feature}, \code{threshold}, \code{n}, \code{left}, \code{right}.
+#' @export
 .morie_w4c_grow <- function(X, y, depth, max_depth, min_leaf, criterion, columns_fn) {
   if (depth >= max_depth || length(y) < 2 * min_leaf || length(unique(y)) == 1L) {
     return(list(leaf = TRUE, value = .morie_w4c_leaf_value(y, criterion), n = length(y)))
@@ -2018,6 +2208,15 @@ morie_geron_reverse_autodiff <- function(f, x) {
   )
 }
 
+#' .morie_w4c_predict_tree
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param node See Usage.
+#' @param X See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_w4c_predict_tree <- function(node, X) {
   out <- numeric(nrow(X))
   for (i in seq_len(nrow(X))) {
@@ -2028,7 +2227,23 @@ morie_geron_reverse_autodiff <- function(f, x) {
   out
 }
 
+#' .morie_w4c_count_leaves
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param node See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_w4c_count_leaves <- function(node) if (node$leaf) 1L else .morie_w4c_count_leaves(node$left) + .morie_w4c_count_leaves(node$right)
+#' .morie_w4c_tree_depth
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param node See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_w4c_tree_depth <- function(node) if (node$leaf) 0L else 1L + max(.morie_w4c_tree_depth(node$left), .morie_w4c_tree_depth(node$right))
 
 #' CART regression tree minimising per-leaf MSE (Geron Ch 5, hmrdt)
@@ -2173,6 +2388,15 @@ morie_geron_relu <- function(z, leaky = 0.0) {
 
 # ============================================================ hmrfc (reuses hmrdt's grow/predict)
 
+#' .morie_w4c_bootstrap
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_w4c_bootstrap <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- integer(n)
@@ -2581,6 +2805,14 @@ morie_geron_random_patches <- function(X, y, base_estimator = NULL, n_estimators
 
 # ============================================================ hmrsc (wraps morie_geron_cross_validation_score)
 
+#' .morie_w4c_ridge_estimator
+#'
+#' Part of the geron_w4c_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param params See Usage.
+#' @return A list with \code{fit}, \code{predict}.
+#' @export
 .morie_w4c_ridge_estimator <- function(params) {
   alpha <- if (is.null(params$alpha)) 0.0 else as.numeric(params$alpha)
   fit <- function(Xtr, ytr) solve(t(Xtr) %*% Xtr + alpha * diag(ncol(Xtr)), t(Xtr) %*% ytr)

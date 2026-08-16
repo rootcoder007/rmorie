@@ -3,6 +3,15 @@
 
 .mdppol_method <- "Policy iteration (iterative policy evaluation + greedy improvement)"
 
+#' .mdppol_args
+#'
+#' Part of the mdppol_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @param R See Usage.
+#' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
+#' @export
 .mdppol_args <- function(P, R) {
   Pm <- lapply(P, function(p) {
     if (is.matrix(p)) {
@@ -133,6 +142,13 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
 
 mdppol <- morie_mdppol
 
+#' .mdppol_cheatsheet
+#'
+#' Part of the mdppol_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .mdppol_cheatsheet <- function() {
   "mdppol(P, R, gamma) -> optimal policy/V by Howard policy iteration (Sutton-Barto 2018 Sec 4.3)."
 }

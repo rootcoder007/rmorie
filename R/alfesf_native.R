@@ -10,6 +10,15 @@
 .alfesf_LDDT_BINS <- 50L
 .alfesf_PAE_WIDTH <- 0.5
 
+#' .alfesf_rows
+#'
+#' Part of the alfesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param what See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .alfesf_rows <- function(x, what) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -20,6 +29,15 @@
   m
 }
 
+#' .alfesf_softmax_rows
+#'
+#' Part of the alfesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param temp See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .alfesf_softmax_rows <- function(M, temp) {
   out <- M
   for (i in seq_len(nrow(M))) {
@@ -31,13 +49,40 @@
   out
 }
 
+#' .alfesf_lddt_centres
+#'
+#' Part of the alfesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nb See Usage.
+#' @return A numeric value.
+#' @export
 .alfesf_lddt_centres <- function(nb) ((seq_len(nb) - 1L) + 0.5) * 100.0 / nb
 
+#' .alfesf_pae_centres
+#'
+#' Part of the alfesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nb See Usage.
+#' @param width See Usage.
+#' @return A numeric value.
+#' @export
 .alfesf_pae_centres <- function(nb, width) ((seq_len(nb) - 1L) + 0.5) * width
 
 # Zhang-Skolnick normalisation. Below 16 residues the cube-root term goes
 # negative and the published clamp at 0.5 applies -- which is why pTM on a
 # very short chain saturates well below 1 however confident the model is.
+#' Zhang-Skolnick normalisation. Below 16 residues the cube-root term
+#' goes
+#'
+#' negative and the published clamp at 0.5 applies -- which is why pTM
+#' on a very short chain saturates well below 1 however confident the
+#' model is.
+#'
+#' @param n See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .alfesf_d0 <- function(n) {
   if (n <= 15L) return(0.5)
   v <- 1.24 * (n - 15.0)^(1.0 / 3.0) - 1.8
@@ -48,6 +93,21 @@
 # zero init, fixed step, fixed iteration count, so both language arms walk
 # the same path. No line search -- a search that branches on a
 # floating-point comparison is exactly what makes two arms disagree.
+#' Multinomial logistic head by full-batch gradient ascent.
+#' Deterministic:
+#'
+#' zero init, fixed step, fixed iteration count, so both language arms
+#' walk the same path. No line search -- a search that branches on a
+#' floating-point comparison is exactly what makes two arms disagree.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param n_bins See Usage.
+#' @param l2 See Usage.
+#' @param iters See Usage.
+#' @param lr See Usage.
+#' @return A list with \code{W}, \code{b}.
+#' @export
 .alfesf_fit_multinomial <- function(X, y, n_bins, l2, iters, lr) {
   n <- nrow(X); d <- ncol(X)
   W <- matrix(0.0, d, n_bins)
@@ -79,6 +139,17 @@
   list(W = W, b = b)
 }
 
+#' .alfesf_fit_temperature
+#'
+#' Part of the alfesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param y See Usage.
+#' @param iters Defaults to \code{200L}.
+#' @param lr Defaults to \code{0.5}.
+#' @return A numeric value.
+#' @export
 .alfesf_fit_temperature <- function(L, y, iters = 200L, lr = 0.5) {
   logt <- 0.0
   n <- nrow(L)
@@ -261,6 +332,13 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
                      "the inter-chain restriction."))
 }
 
+#' .alfesf_cheatsheet
+#'
+#' Part of the alfesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .alfesf_cheatsheet <- function() {
   paste0("alfesf: morie_alfesf_esmfold_confidence(lddt_logits, pae_logits) ",
          "-> pLDDT, pTM, ipTM; or features+weights to run, features+lddt to ",

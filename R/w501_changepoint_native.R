@@ -6,6 +6,14 @@
 # (PELT and BinSeg), ecp::e.divisive locations, and the closed-form
 # linear-kernel KFDR.
 
+#' .w501_cost_tables
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{cs}, \code{css}.
+#' @export
 .w501_cost_tables <- function(x) {
   n <- length(x)
   cs <- c(0, cumsum(x))
@@ -13,6 +21,17 @@
   list(cs = cs, css = css)
 }
 
+#' 0-based half-open [a, b): R indices a+1 .. b
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param tb See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param cost See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .w501_seg_cost <- function(tb, a, b, cost) {
   # 0-based half-open [a, b): R indices a+1 .. b
   nl <- b - a
@@ -27,6 +46,17 @@
   stop("cost must be 'mean' or 'meanvar'", call. = FALSE)
 }
 
+#' .w501_pelt_core
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param x See Usage.
+#' @param cost See Usage.
+#' @param penalty See Usage.
+#' @param min_seglen Defaults to \code{1L}.
+#' @return A list with \code{taus}, \code{Fn}.
+#' @export
 .w501_pelt_core <- function(x, cost, penalty, min_seglen = 1L) {
   n <- length(x)
   tb <- .w501_cost_tables(x)
@@ -210,6 +240,15 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
        method = "Binary segmentation (Scott-Knott 1974; Killick et al. 2012 Sec. 2.1)")
 }
 
+#' Z: matrix with observations in rows
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param Z See Usage.
+#' @param alpha See Usage.
+#' @return The value of \code{D}, as built in the body.
+#' @export
 .w501_pairwise_alpha <- function(Z, alpha) {
   # Z: matrix with observations in rows
   n <- nrow(Z)
@@ -226,6 +265,14 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   D
 }
 
+#' .w501_prefix2d
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param D See Usage.
+#' @return The value of \code{P}, as built in the body.
+#' @export
 .w501_prefix2d <- function(D) {
   n <- nrow(D)
   P <- matrix(0, n + 1, n + 1)
@@ -237,10 +284,33 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   P
 }
 
+#' .w501_block
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param P See Usage.
+#' @param a1 See Usage.
+#' @param b1 See Usage.
+#' @param a2 See Usage.
+#' @param b2 See Usage.
+#' @return A numeric value.
+#' @export
 .w501_block <- function(P, a1, b1, a2, b2) {
   P[b1 + 1, b2 + 1] - P[a1 + 1, b2 + 1] - P[b1 + 1, a2 + 1] + P[a1 + 1, a2 + 1]
 }
 
+#' .w501_qhat
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param P See Usage.
+#' @param a See Usage.
+#' @param tau See Usage.
+#' @param kappa See Usage.
+#' @return A numeric value.
+#' @export
 .w501_qhat <- function(P, a, tau, kappa) {
   n1 <- tau - a
   m1 <- kappa - tau
@@ -253,6 +323,17 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   (n1 * m1 / (n1 + m1)) * e
 }
 
+#' .w501_best_split
+#'
+#' Part of the w501_changepoint_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param P See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param min_size See Usage.
+#' @return A list with \code{q}, \code{tau}, \code{kappa}.
+#' @export
 .w501_best_split <- function(P, a, b, min_size) {
   best_q <- -Inf; best_tau <- -1L; best_kappa <- -1L
   for (tau in seq(a + min_size, b - min_size)) {
@@ -264,6 +345,16 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   list(q = best_q, tau = best_tau, kappa = best_kappa)
 }
 
+#' Fisher-Yates within each 0-based half-open cluster, mirroring the
+#'
+#' Python arm swap-for-swap.
+#'
+#' @param ord See Usage.
+#' @param clusters See Usage.
+#' @param us See Usage.
+#' @param pos See Usage.
+#' @return A list with \code{ord}, \code{pos}.
+#' @export
 .w501_shuffle_within <- function(ord, clusters, us, pos) {
   # Fisher-Yates within each 0-based half-open cluster, mirroring the
   # Python arm swap-for-swap.

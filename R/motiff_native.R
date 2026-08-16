@@ -4,6 +4,15 @@
 # networks.pdf).  Mirrors Python morie.fn.motiff exactly (same
 # SplitMix64 swap-index stream, same triad enumeration).
 
+#' .motiff_triads
+#'
+#' Part of the motiff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param n See Usage.
+#' @return A list with \code{ffl}, \code{cycle3}.
+#' @export
 .motiff_triads <- function(adj, n) {
   ff <- 0L
   cyc <- 0L
@@ -20,6 +29,19 @@
   list(ffl = ff, cycle3 = cyc %/% 3L)
 }
 
+#' Mfinder switching (Milo refs. 17-18) mirroring Python exactly:
+#'
+#' row-major classify into single edges and mutual (bidirectional)
+#' pairs; single<->single and mutual<->mutual switches only, so the
+#' mutual-edge count is invariant; identical RNG draw order.
+#'
+#' @param adj See Usage.
+#' @param n See Usage.
+#' @param e See Usage.
+#' @param swaps See Usage.
+#' @param preserve_mutual See Usage.
+#' @return The value of \code{new}, as built in the body.
+#' @export
 .motiff_shuffle <- function(adj, n, e, swaps, preserve_mutual) {
   # mfinder switching (Milo refs. 17-18) mirroring Python exactly:
   # row-major classify into single edges and mutual (bidirectional)

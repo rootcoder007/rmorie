@@ -8,12 +8,29 @@
 # Caller-supplied models arrive as R functions, mirroring Python's
 # callables; the algorithm around them is computed natively here.
 
+#' .morie_al_softmax_rows
+#'
+#' Part of the alammar_llm_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_al_softmax_rows <- function(z) {
   z <- z - apply(z, 1, max)
   e <- exp(z)
   e / rowSums(e)
 }
 
+#' .morie_al_cos
+#'
+#' Part of the alammar_llm_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .morie_al_cos <- function(a, b) {
   na <- sqrt(sum(a^2))
   nb <- sqrt(sum(b^2))
@@ -25,6 +42,14 @@
   sum(a * b) / (na * nb)
 }
 
+#' .morie_al_lcg
+#'
+#' Part of the alammar_llm_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param state See Usage.
+#' @return A numeric value.
+#' @export
 .morie_al_lcg <- function(state) {
   (1664525 * state + 1013904223) %% 2^32
 }
@@ -542,6 +567,14 @@ morie_alammar_infonce_loss <- function(anchor, positive, negatives,
   )
 }
 
+#' .morie_al_inbatch_ce
+#'
+#' Part of the alammar_llm_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param S See Usage.
+#' @return A numeric value.
+#' @export
 .morie_al_inbatch_ce <- function(S) {
   Z <- S - apply(S, 1, max)
   logp <- Z - log(rowSums(exp(Z)))

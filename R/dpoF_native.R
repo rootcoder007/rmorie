@@ -17,6 +17,14 @@
 # per-pair gradient weight is sigma(rhat_l - rhat_w).
 # Both bradley-terry (eq. 7) and plackett-luce (eq. 20) are implemented.
 
+#' .dpoF_logsigmoid
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .dpoF_logsigmoid <- function(z) {
   if (z >= 0.0) {
     return(-log1p(exp(-z)))
@@ -24,6 +32,14 @@
   return(z - log1p(exp(z)))
 }
 
+#' .dpoF_sigmoid
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .dpoF_sigmoid <- function(z) {
   if (z >= 0.0) {
     return(1.0 / (1.0 + exp(-z)))
@@ -32,6 +48,14 @@
   return(e / (1.0 + e))
 }
 
+#' .dpoF_logsumexp
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vals See Usage.
+#' @return A numeric value.
+#' @export
 .dpoF_logsumexp <- function(vals) {
   if (length(vals) == 0L) {
     return(-Inf)
@@ -43,6 +67,15 @@
   return(m + log(sum(exp(vals - m))))
 }
 
+#' .dpoF_vec
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param name See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .dpoF_vec <- function(x, name) {
   v <- as.numeric(x)
   if (length(v) == 0L) {
@@ -134,6 +167,16 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
   ))
 }
 
+#' .dpoF_plackett_luce
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param logp See Usage.
+#' @param logp_ref See Usage.
+#' @param beta See Usage.
+#' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards}, \code{beta}, \code{n}, \code{model}, \code{method}.
+#' @export
 .dpoF_plackett_luce <- function(logp, logp_ref, beta) {
   if (is.null(logp) || is.null(logp_ref)) {
     stop("dpoF: model='plackett-luce' needs logp and logp_ref, shape (n_rankings, K)")
@@ -219,6 +262,13 @@ optimal_policy <- function(logp_ref, reward, beta) {
   return(list(unnorm - logZ, as.numeric(logZ)))
 }
 
+#' .dpoF_cheatsheet
+#'
+#' Part of the dpoF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .dpoF_cheatsheet <- function() {
   return("dpoF: DPO loss -log sigma(beta log pi_w/ref_w - beta log pi_l/ref_l) (Rafailov 2023 eq. 7); implicit reward rhat = beta log pi/pi_ref; grad weight sigma(rhat_l - rhat_w); model='plackett-luce' is eq. 20 and reduces to eq. 7 at K=2. optimal_policy() is eq. 4.")
 }

@@ -42,6 +42,14 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
   )
 }
 
+#' |DFT|^2 per bin by direct evaluation: exact at any M, no padding
+#'
+#' Part of the rangayyan_sig implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seg See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_dft_power <- function(seg) {
   # |DFT|^2 per bin by direct evaluation: exact at any M, no padding.
   m <- length(seg)

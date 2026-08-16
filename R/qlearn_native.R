@@ -11,6 +11,15 @@
 # inverse-CDF transition draw of _array_core Generator.choice.
 
 # argmax with the lowest index winning ties (Python _greedy)
+#' Argmax with the lowest index winning ties (Python _greedy)
+#'
+#' Part of the qlearn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Qs See Usage.
+#' @param A See Usage.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 .mor_rl_greedy <- function(Qs, A) {
   b <- 1L
   for (a in seq.int(2L, A)) if (Qs[a] > Qs[b]) b <- a
@@ -19,6 +28,15 @@
 
 # inverse-CDF draw on a stochastic row from one uniform (Python
 # _sample_row); returns a 1-based state index
+#' Inverse-CDF draw on a stochastic row from one uniform (Python
+#'
+#' _sample_row); returns a 1-based state index
+#'
+#' @param row See Usage.
+#' @param S See Usage.
+#' @param u See Usage.
+#' @return The value of \code{S}, as built in the body.
+#' @export
 .mor_rl_sample_row <- function(row, S, u) {
   cc <- 0
   for (s2 in seq_len(S)) {
@@ -29,6 +47,17 @@
 }
 
 # epsilon-greedy action (1-based) consuming one or two uniforms
+#' Epsilon-greedy action (1-based) consuming one or two uniforms
+#'
+#' Part of the qlearn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param Qs See Usage.
+#' @param A See Usage.
+#' @param epsilon See Usage.
+#' @return The value of \code{.mor_rl_greedy}.
+#' @export
 .mor_rl_eps <- function(e, Qs, A, epsilon) {
   u1 <- .ghc_unif(e, 1L)
   if (u1 < epsilon) {
@@ -39,8 +68,26 @@
   .mor_rl_greedy(Qs, A)
 }
 
+#' .mor_rl_terminal
+#'
+#' Part of the qlearn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param terminal See Usage.
+#' @return A numeric value.
+#' @export
 .mor_rl_terminal <- function(terminal) as.integer(terminal) + 1L
 
+#' .mor_rl_out
+#'
+#' Part of the qlearn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param S See Usage.
+#' @param A See Usage.
+#' @return A list with \code{policy}, \code{v}.
+#' @export
 .mor_rl_out <- function(Q, S, A) {
   pol <- numeric(S); V <- numeric(S)
   for (s in seq_len(S)) {

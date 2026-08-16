@@ -194,6 +194,17 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
   list(cols = cols, ins = ins)
 }
 
+#' Ties go to the draft base if it is among the leaders, and otherwise
+#'
+#' to the first base in alphabetical order -- an arbitrary rule, but a
+#' STATED arbitrary rule, which is what makes the two arms agree.
+#'
+#' @param col See Usage.
+#' @param draft_base See Usage.
+#' @param min_depth See Usage.
+#' @param min_frac See Usage.
+#' @return The value of \code{list}.
+#' @export
 .longrd_call <- function(col, draft_base, min_depth, min_frac) {
   # Ties go to the draft base if it is among the leaders, and otherwise
   # to the first base in alphabetical order -- an arbitrary rule, but a

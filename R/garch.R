@@ -3,6 +3,16 @@
 # Internal: GARCH(1,1) Gaussian negative log-likelihood for the base-R
 # fallback. Extracted from the morie_garch_fit() optimiser closure so the
 # parameter-domain guard is directly unit-testable.
+#' Internal: GARCH(1,1) Gaussian negative log-likelihood for the base-R
+#'
+#' fallback. Extracted from the morie_garch_fit() optimiser closure so
+#' the parameter-domain guard is directly unit-testable.
+#'
+#' @param p See Usage.
+#' @param r See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .garch_negll <- function(p, r, n) {
   omega <- p[1]
   alpha <- p[2]

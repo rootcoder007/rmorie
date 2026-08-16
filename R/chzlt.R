@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # OLS coefficient j (1-based), its standard error and the residual df.
+#' OLS coefficient j (1-based), its standard error and the residual df
+#'
+#' Part of the chzlt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param j See Usage.
+#' @return A list with \code{beta}, \code{se}, \code{df}.
+#' @export
 .ch_ols_se <- function(y, X, j) {
   y <- .s03vec(y)
   D <- .s03mat(X)
@@ -23,6 +33,16 @@
 }
 
 # RV_q: the partial R2 an omitted confounder needs, eq. (9).
+#' RV_q: the partial R2 an omitted confounder needs, eq. (9)
+#'
+#' Part of the chzlt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param t See Usage.
+#' @param df See Usage.
+#' @param q Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .ch_rv <- function(t, df, q = 1) {
   fq <- q * abs(t) / sqrt(df)
   rv <- 0.5 * (sqrt(fq^4 + 4 * fq^2) - fq^2)

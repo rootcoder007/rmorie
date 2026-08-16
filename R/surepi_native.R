@@ -35,6 +35,18 @@
 # only in how far back they stop.
 .surepi_windows <- list(C1 = c(1L, 7L), C2 = c(3L, 7L), C3 = c(3L, 7L))
 
+#' `t` is 0-based (Python convention); translate to 1-based R indices
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param t See Usage.
+#' @param lag See Usage.
+#' @param width See Usage.
+#' @param sigma_floor See Usage.
+#' @return A list with \code{m}, \code{s}, \code{used}.
+#' @export
 .surepi_baseline <- function(counts, t, lag, width, sigma_floor) {
   # `t` is 0-based (Python convention); translate to 1-based R indices.
   lo <- t - lag - width + 2L
@@ -52,6 +64,16 @@
   list(m = m, s = s, used = length(win))
 }
 
+#' .surepi_stat
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param method See Usage.
+#' @param sigma_floor See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .surepi_stat <- function(counts, method, sigma_floor) {
   w <- .surepi_windows[[method]]
   lag <- w[1]
@@ -292,6 +314,15 @@ surepi_compound_smoothing <- function(values, current,
   )
 }
 
+#' Running median of odd or even width, endpoints carried
+#'
+#' Part of the surepi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param width See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .surepi_runmed <- function(x, width) {
   # Running median of odd or even width, endpoints carried.
   n <- length(x)

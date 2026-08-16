@@ -71,11 +71,27 @@
 
 .strec_EPS <- 1e-12
 
+#' .strec_sigmoid
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .strec_sigmoid <- function(x) {
   x <- max(-60.0, min(60.0, x))
   1.0 / (1.0 + exp(-x))
 }
 
+#' .strec_as_rows
+#'
+#' Part of the strec_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{list}.
+#' @export
 .strec_as_rows <- function(x) {
   if (is.list(x) && !is.data.frame(x)) {
     return(lapply(x, as.numeric))

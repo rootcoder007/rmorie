@@ -20,6 +20,17 @@
 
 # Build the atom support z_i = v_min + i * dz, with dz = (v_max - v_min) /
 # (n_atoms - 1), and the spacing. n must be at least 2 and v_max > v_min.
+#' Build the atom support z_i = v_min + i * dz, with dz = (v_max -
+#' v_min) /
+#'
+#' (n_atoms - 1), and the spacing. n must be at least 2 and v_max >
+#' v_min.
+#'
+#' @param v_min See Usage.
+#' @param v_max See Usage.
+#' @param n_atoms See Usage.
+#' @return A list with \code{z}, \code{dz}.
+#' @export
 .distq_atoms <- function(v_min, v_max, n_atoms) {
   n <- as.integer(n_atoms)
   if (n < 2L)
@@ -35,6 +46,16 @@
 }
 
 # Coerce next_probs to numeric, validate length / sign / sum-to-one.
+#' Coerce next_probs to numeric, validate length / sign / sum-to-one
+#'
+#' Part of the distq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param next_probs See Usage.
+#' @param n_atoms See Usage.
+#' @param name See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .distq_check_prob <- function(next_probs, n_atoms, name) {
   p <- as.numeric(next_probs)
   if (length(p) != n_atoms)
@@ -68,6 +89,15 @@ atoms <- function(v_min, v_max, n_atoms) {
 
 # (Internal companion returning both z and dz -- used by the other
 # routines so we don't rebuild the spacing each time.)
+#' (Internal companion returning both z and dz -- used by the other
+#'
+#' routines so we don\'t rebuild the spacing each time.)
+#'
+#' @param v_min See Usage.
+#' @param v_max See Usage.
+#' @param n_atoms See Usage.
+#' @return The value of \code{.distq_atoms}.
+#' @export
 .distq_atoms_full <- function(v_min, v_max, n_atoms) {
   .distq_atoms(v_min, v_max, n_atoms)
 }

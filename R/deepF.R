@@ -2,6 +2,16 @@
 
 # 0.5 sum_f ((sum_i v_if x_i)^2 - sum_i (v_if x_i)^2): the O(kn) identity
 # for the pairwise term, exactly equal to the naive double sum over i<j.
+#' 0.5 sum_f ((sum_i v_if x_i)^2 - sum_i (v_if x_i)^2): the O(kn)
+#' identity
+#'
+#' for the pairwise term, exactly equal to the naive double sum over
+#' i<j.
+#'
+#' @param V See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .fm_second_order <- function(V, x) {
   n <- length(x)
   K <- ncol(V)

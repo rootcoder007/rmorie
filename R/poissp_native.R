@@ -21,6 +21,14 @@
 # with two applications in spatial statistics", Annals of the Institute
 # of Statistical Mathematics 43(1), 1-20, doi:10.1007/BF00116466.
 
+#' .poissp_adjacency
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @return The value of \code{A}, as built in the body.
+#' @export
 .poissp_adjacency <- function(W) {
   A <- as.matrix(W)
   storage.mode(A) <- "double"
@@ -73,11 +81,31 @@ morie_poissp_rho_bounds <- function(W) {
 }
 
 # weight of the sum(u) = 0 penalty
+#' Weight of the sum(u) = 0 penalty
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @return A numeric value.
+#' @export
 .poissp_constraint_weight <- function(m) {
   1e8 * max(1.0, if (length(m)) max(m) else 1.0)
 }
 
 # negative joint Hessian [[X'MX, X'M], [MX, M + Q]] (+ constraint block)
+#' Negative joint Hessian [[X\'MX, X\'M], [MX, M + Q]] (+ constraint
+#' block)
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param m See Usage.
+#' @param Q See Usage.
+#' @param constrain See Usage.
+#' @return The value of \code{H}, as built in the body.
+#' @export
 .poissp_joint_hessian <- function(X, m, Q, constrain) {
   n <- length(m)
   p <- ncol(X)
@@ -94,11 +122,36 @@ morie_poissp_rho_bounds <- function(W) {
   H
 }
 
+#' .poissp_ridgesolve
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param ridge Defaults to \code{1e-10}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .poissp_ridgesolve <- function(A, b, ridge = 1e-10) {
   as.numeric(solve(A + ridge * diag(nrow(A)), b))
 }
 
 # joint Newton-Raphson for (beta, u) at fixed (tau, rho)
+#' Joint Newton-Raphson for (beta, u) at fixed (tau, rho)
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param off See Usage.
+#' @param Q See Usage.
+#' @param constrain See Usage.
+#' @param iters See Usage.
+#' @param tol See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{beta}, \code{u}, \code{m}, \code{eta}.
+#' @export
 .poissp_fit_mode <- function(y, X, off, Q, constrain, iters, tol, ridge) {
   n <- length(y)
   p <- ncol(X)
@@ -130,22 +183,62 @@ morie_poissp_rho_bounds <- function(W) {
   list(beta = beta, u = u, m = m, eta = eta)
 }
 
+#' .poissp_loglik
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param m See Usage.
+#' @return A numeric value.
+#' @export
 .poissp_loglik <- function(y, m) {
   sum(y * log(m) - m - lgamma(y + 1))
 }
 
+#' .poissp_logdet_pd
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param ridge Defaults to \code{0}.
+#' @return A numeric value.
+#' @export
 .poissp_logdet_pd <- function(A, ridge = 0.0) {
   L <- chol(A + ridge * diag(nrow(A)))
   2 * sum(log(diag(L)))
 }
 
 # generalised log-determinant: drop the rank_deficit smallest |eigenvalues|
+#' Generalised log-determinant: drop the rank_deficit smallest
+#' |eigenvalues|
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param rank_deficit Defaults to \code{0L}.
+#' @return A numeric value.
+#' @export
 .poissp_logdet_gen <- function(A, rank_deficit = 0L) {
   ev <- sort(abs(eigen(A, symmetric = TRUE)$values), decreasing = TRUE)
   keep <- if (rank_deficit > 0L) ev[seq_len(length(ev) - rank_deficit)] else ev
   sum(log(keep[keep > 1e-300]))
 }
 
+#' .poissp_laplace
+#'
+#' Part of the poissp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param u See Usage.
+#' @param m See Usage.
+#' @param Q See Usage.
+#' @param constrain See Usage.
+#' @return A numeric value.
+#' @export
 .poissp_laplace <- function(y, u, m, Q, constrain) {
   n <- length(y)
   quad <- sum(u * as.numeric(Q %*% u))

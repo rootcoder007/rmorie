@@ -44,8 +44,25 @@
 
 .trmRew_STRATEGIES <- c("innermost", "outermost")
 
+#' .trmRew_is_var
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @return The value of \code{morie_unifAlg_is_var}.
+#' @export
 .trmRew_is_var <- function(t) morie_unifAlg_is_var(t)
 
+#' .trmRew_app
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param symbol See Usage.
+#' @param args See Usage.
+#' @return The value of \code{do.call}.
+#' @export
 .trmRew_app <- function(symbol, args) {
   do.call(morie_unifAlg_app, c(list(symbol), args))
 }
@@ -216,6 +233,15 @@ morie_trmRew_normal_form <- function(t, rules, strategy="innermost",
                as.integer(max_steps)))
 }
 
+#' .trmRew_prec
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param precedence See Usage.
+#' @param sym See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .trmRew_prec <- function(precedence, sym) {
   if (!is.null(precedence) && sym %in% names(precedence)) {
     as.numeric(precedence[[sym]])
@@ -302,6 +328,15 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
                      "Ch. 5); sufficient, not necessary"))
 }
 
+#' .trmRew_rename
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param tag See Usage.
+#' @return The value of \code{.trmRew_app}.
+#' @export
 .trmRew_rename <- function(t, tag) {
   if (.trmRew_is_var(t)) {
     return(morie_unifAlg_var(paste0(t[[2]], tag)))
@@ -309,6 +344,15 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
   .trmRew_app(t[[2]], lapply(t[[3]], function(a) .trmRew_rename(a, tag)))
 }
 
+#' Superpose rb\'s left-hand side on ra\'s, at every non-variable
+#'
+#' position, and rewrite the overlap both ways.
+#'
+#' @param ra See Usage.
+#' @param rb See Usage.
+#' @param same See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .trmRew_overlap <- function(ra, rb, same) {
   # Superpose rb's left-hand side on ra's, at every non-variable
   # position, and rewrite the overlap both ways.
@@ -427,6 +471,16 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
                      "implies confluent"))
 }
 
+#' .trmRew_incomplete
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rules See Usage.
+#' @param why See Usage.
+#' @param pair See Usage.
+#' @return A list with \code{estimate}, \code{rules}, \code{complete}, \code{reason}, \code{pair}, \code{n_rules}, \code{method}.
+#' @export
 .trmRew_incomplete <- function(rules, why, pair) {
   list(estimate=NULL, rules=rules, complete=FALSE, reason=why, pair=pair,
        n_rules=length(rules),
@@ -434,6 +488,13 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
                      "lexicographic path order"))
 }
 
+#' Rename variables to x0, x1, ... so completion output does not carry
+#'
+#' the bookkeeping suffixes renaming apart introduced.
+#'
+#' @param rules See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .trmRew_canonical <- function(rules) {
   # Rename variables to x0, x1, ... so completion output does not carry
   # the bookkeeping suffixes renaming apart introduced.
@@ -452,6 +513,15 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
   out
 }
 
+#' .trmRew_interreduce
+#'
+#' Part of the trmRew_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rules See Usage.
+#' @param precedence See Usage.
+#' @return The value of \code{.trmRew_canonical}.
+#' @export
 .trmRew_interreduce <- function(rules, precedence) {
   out <- rules
   changed <- TRUE

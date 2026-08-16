@@ -15,6 +15,14 @@
 #     median-trimmed sample while the pilot quadratics are fitted on
 #     the full-sample window.
 
+#' .mor_ik_median
+#'
+#' Part of the causrddh_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_ik_median <- function(v) {
   s <- sort(as.numeric(v))
   n <- length(s)
@@ -24,6 +32,15 @@
 }
 
 # minimum-norm least squares, matching numpy lstsq(rcond=None)
+#' Minimum-norm least squares, matching numpy lstsq(rcond=None)
+#'
+#' Part of the causrddh_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .mor_ik_ols <- function(X, y) as.numeric(.ghc_pinv(X) %*% as.numeric(y))
 
 #' Imbens-Kalyanaraman optimal RDD bandwidth

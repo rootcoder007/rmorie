@@ -73,6 +73,15 @@ morie_garch_recursion <- function(eps, params, spec = "garch") {
   pmax(s2, 1e-12)
 }
 
+#' .morie_garch_pack
+#'
+#' Part of the garch_coint_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param spec See Usage.
+#' @param x See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .morie_garch_pack <- function(spec, x) {
   sig <- function(z) 1 / (1 + exp(-pmax(pmin(z, 30), -30)))
   if (spec == "igarch") {

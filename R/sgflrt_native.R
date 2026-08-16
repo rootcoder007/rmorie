@@ -8,6 +8,14 @@
 .sgflrt_EPS <- 1e-12
 .sgflrt_INVPHI <- 0.6180339887498949
 
+#' .sgflrt_rows
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .sgflrt_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -17,6 +25,15 @@
   m
 }
 
+#' .sgflrt_chol
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param rel_jitter Defaults to \code{1e-10}.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .sgflrt_chol <- function(A, rel_jitter = 1e-10) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -37,6 +54,15 @@
   L
 }
 
+#' .sgflrt_solve
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .sgflrt_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -54,6 +80,14 @@
   x
 }
 
+#' .sgflrt_inv
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 .sgflrt_inv <- function(L) {
   n <- nrow(L)
   M <- matrix(0.0, n, n)
@@ -64,8 +98,27 @@
   M
 }
 
+#' .sgflrt_logdet
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @return A numeric value.
+#' @export
 .sgflrt_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
+#' .sgflrt_corr
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @param model See Usage.
+#' @param phi See Usage.
+#' @param kappa See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .sgflrt_corr <- function(h, model, phi, kappa) {
   if (h <= 0.0) return(1.0)
   if (model == "exponential") return(exp(-h / phi))
@@ -92,6 +145,19 @@
 # eta + (y - mu) / W looks correct and is -- right up until a family with a
 # real dispersion parameter arrives, where it is off by exactly that factor.
 # The working response is eta + (y - mu) / V(mu) and nothing else.
+#' Return (linkinv, V, W, loglik). V is the variance function and W =
+#' V/phi
+#'
+#' the IRLS weight. They coincide for the canonical links with a fixed
+#' dispersion, which is why writing the working response as eta + (y -
+#' mu) / W looks correct and is -- right up until a family with a real
+#' dispersion parameter arrives, where it is off by exactly that factor.
+#' The working response is eta + (y - mu) / V(mu) and nothing else.
+#'
+#' @param family See Usage.
+#' @param disp Defaults to \code{1}.
+#' @return Nothing; this branch always raises.
+#' @export
 .sgflrt_family <- function(family, disp = 1.0) {
   if (family == "poisson")
     return(list(inv = function(e) exp(pmax(-500.0, pmin(500.0, e))),
@@ -128,6 +194,25 @@
 # explicitly inverted one is dominated by the jitter that made the inversion
 # possible, and the fitted coefficients then miss the exact Gaussian answer
 # by tenths rather than by 1e-10.
+#' Inner Laplace mode and the approximated log likelihood. The random
+#' effect
+#'
+#' is carried as u = Lv with LL\' = Sigma and v ~ N(0, I), so the
+#' penalty is v\'v/2 and Sigma^-1 is never formed. That is not a nicety:
+#' a spatial correlation matrix with any two nearby locations is close
+#' to singular, an explicitly inverted one is dominated by the jitter
+#' that made the inversion possible, and the fitted coefficients then
+#' miss the exact Gaussian answer by tenths rather than by 1e-10.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param Sig See Usage.
+#' @param family See Usage.
+#' @param inner_iter See Usage.
+#' @param tol See Usage.
+#' @param disp Defaults to \code{1}.
+#' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta}, \code{loglik}, \code{w}, \code{L}, \code{v}.
+#' @export
 .sgflrt_laplace <- function(y, X, Sig, family, inner_iter, tol, disp = 1.0) {
   n <- length(y); p <- ncol(X)
   fam <- .sgflrt_family(family, disp)
@@ -172,6 +257,17 @@
        mu = mu, eta = eta, loglik = loglik, w = w, L = L, v = v)
 }
 
+#' .sgflrt_golden
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param iters Defaults to \code{16L}.
+#' @return A numeric value.
+#' @export
 .sgflrt_golden <- function(f, lo, hi, iters = 16L) {
   a <- lo; b <- hi
   c0 <- b - (b - a) * .sgflrt_INVPHI
@@ -394,6 +490,13 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
                      "identified whatever value it was left at"))
 }
 
+#' .sgflrt_cheatsheet
+#'
+#' Part of the sgflrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .sgflrt_cheatsheet <- function() {
   paste0("sgflrt: morie_sgflrt_spatial_glmm_fit(y, X, coords, family) -> ",
          "spatial GLMM by Laplace, with the spatial random effect returned ",

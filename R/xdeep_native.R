@@ -50,10 +50,26 @@
 
 .xdeep_EPS <- 1e-12
 
+#' .xdeep_to_vec
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .xdeep_to_vec <- function(a) {
   as.numeric(a)
 }
 
+#' .xdeep_to_mat
+#'
+#' Part of the xdeep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .xdeep_to_mat <- function(M) {
   m <- as.matrix(M)
   storage.mode(m) <- "double"

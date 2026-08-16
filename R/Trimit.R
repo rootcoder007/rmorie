@@ -56,6 +56,14 @@ Trimit <- function(y, weights, threshold) {
        method = "cap at w_max then redistribute the excess [Potter 1990]")
 }
 
+#' .trimit_deff
+#'
+#' Part of the Trimit implementation; see the file header for the source
+#' it follows.
+#'
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .trimit_deff <- function(w) {
   s <- sum(w)
   if (s <= 0) return(NaN)

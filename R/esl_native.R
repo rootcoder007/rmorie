@@ -4,6 +4,16 @@
 ## Ported at full precision from the Python modules of the same name so the
 ## two agree to machine precision on the shared anchors.
 
+#' .morie_esl_logmvn
+#'
+#' Part of the esl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param mu See Usage.
+#' @param S See Usage.
+#' @return A numeric value.
+#' @export
 .morie_esl_logmvn <- function(X, mu, S) {
   p <- ncol(X)
   L <- chol(S) # R's chol is upper-triangular

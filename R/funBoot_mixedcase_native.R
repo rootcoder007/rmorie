@@ -94,6 +94,13 @@ morie_funBoot <- function(curves, statistic = NULL, alpha = 0.05, B = 500L,
 functional_bootstrap_band <- morie_funBoot
 functional_bootstrap <- morie_funBoot
 
+#' .funBoot_cheatsheet
+#'
+#' Part of the funBoot_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @return A character value.
+#' @export
 .funBoot_cheatsheet <- function() {
   "funBoot: D = q_{1-a}(dist(T*_b, mean T*)); band = ball(center, D)"
 }

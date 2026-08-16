@@ -113,6 +113,15 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
   k
 }
 
+#' .pmfsc_key
+#'
+#' Part of the pmfsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A character value.
+#' @export
 .pmfsc_key <- function(a, b) paste0(a, "|", b)
 
 #' Turn observed contacts into a potential, one curve per type pair
@@ -244,6 +253,15 @@ morie_pmfsc_score <- function(pairs, potential,
        beyond = beyond, unknown = unknown)
 }
 
+#' .pmfsc_dist
+#'
+#' Part of the pmfsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .pmfsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Derive a potential if needed, then score the pose

@@ -1,0 +1,30 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.stahdo_stahel_donoho}
+\alias{.stahdo_stahel_donoho}
+\title{.stahdo_stahel_donoho}
+\usage{
+.stahdo_stahel_donoho(X, directions = "subsample", n_directions = 500, seed = 1, cutoff = NULL)
+}
+\arguments{
+\item{X}{See Usage.}
+\item{directions}{Defaults to \code{"subsample"}.}
+\item{n_directions}{Defaults to \code{500}.}
+\item{seed}{Defaults to \code{1}.}
+\item{cutoff}{Defaults to \code{NULL}.}
+}
+\description{
+Part of the stahdo_native implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{estimate}, \code{location}, \code{scatter}, \code{outlyingness}, \code{weights}, \code{cutoff}, \code{n_directions}, \code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n}, \code{p}, \code{method}.
+}
+\references{
+----------
+Maronna, R. A. & Yohai, V. J. (1995) "The behavior of the
+Stahel-Donoho robust multivariate estimator", *Journal of the
+American Statistical Association* 90(429), 330-341,
+doi:10.1080/01621459.1995.10476517.
+}
+\keyword{internal}

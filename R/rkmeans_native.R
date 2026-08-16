@@ -4,6 +4,16 @@
 
 .PENALTIES_RKMEANS <- c("square", "absolute", "huber")
 
+#' .rkmeans_phi
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param penalty See Usage.
+#' @param c_val See Usage.
+#' @return A numeric value.
+#' @export
 .rkmeans_phi <- function(t, penalty, c_val) {
   if (penalty == "square") {
     return(t * t)
@@ -17,11 +27,28 @@
   c_val * (2.0 * t - c_val)
 }
 
+#' .rkmeans_dist
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param m See Usage.
+#' @return A numeric value.
+#' @export
 .rkmeans_dist <- function(x, m) {
   d <- x - m
   sqrt(sum(d * d))
 }
 
+#' .rkmeans_mean
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pts See Usage.
+#' @return A numeric value.
+#' @export
 .rkmeans_mean <- function(pts) {
   p <- length(pts[[1]])
   out <- numeric(p)
@@ -31,6 +58,16 @@
   out / length(pts)
 }
 
+#' .rkmeans_spatial_median
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pts See Usage.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_iter Defaults to \code{200}.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .rkmeans_spatial_median <- function(pts, tol = 1e-10, max_iter = 200) {
   m <- .rkmeans_mean(pts)
   for (iter in seq_len(max_iter)) {
@@ -60,6 +97,17 @@
   m
 }
 
+#' .rkmeans_huber_centre
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param pts See Usage.
+#' @param c_val See Usage.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_iter Defaults to \code{200}.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .rkmeans_huber_centre <- function(pts, c_val, tol = 1e-10, max_iter = 200) {
   m <- .rkmeans_mean(pts)
   for (iter in seq_len(max_iter)) {
@@ -84,6 +132,20 @@
   m
 }
 
+#' .rkmeans_concentrate
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rows See Usage.
+#' @param cen See Usage.
+#' @param k See Usage.
+#' @param n_keep See Usage.
+#' @param penalty See Usage.
+#' @param huber_c See Usage.
+#' @param max_iter See Usage.
+#' @return The value of \code{list}.
+#' @export
 .rkmeans_concentrate <- function(rows, cen, k, n_keep, penalty, huber_c, max_iter) {
   n <- length(rows)
   prev <- NULL
@@ -253,6 +315,13 @@ morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
   )
 }
 
+#' .rkmeans_cheatsheet
+#'
+#' Part of the rkmeans_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .rkmeans_cheatsheet <- function() {
   paste0("rkmeans: impartially alpha-trimmed k-Phi-means ",
          "(Cuesta-Albertos, Gordaliza & Matran 1997). Minimises ",

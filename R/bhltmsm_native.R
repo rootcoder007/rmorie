@@ -33,6 +33,15 @@ cumulative_episodes <- function(histories, states = .STATES) {
                     "counts add to the number of periods"))
 }
 
+#' Linear interpolation, type 7 (R default)
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param q See Usage.
+#' @return A numeric value.
+#' @export
 .quantile7 <- function(x, q) {
   # Linear interpolation, type 7 (R default)
   x <- sort(as.numeric(x))
@@ -120,6 +129,15 @@ weight_diagnostics <- function(weights) {
                     "violation looks like"))
 }
 
+#' .corr_r
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .corr_r <- function(x, y) {
   x <- as.numeric(x); y <- as.numeric(y)
   n <- length(x)
@@ -166,6 +184,16 @@ confounding_check <- function(covariate_history, treatment_history,
   out
 }
 
+#' .wls_r
+#'
+#' Part of the bhltmsm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A matrix, from \code{solve}.
+#' @export
 .wls_r <- function(X, y, w) {
   X <- as.matrix(X); storage.mode(X) <- "double"
   y <- as.numeric(y); w <- as.numeric(w)

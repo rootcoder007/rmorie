@@ -71,6 +71,15 @@
 .BLINKG_CHISQ1_MEDIAN <- 0.45493642311957283
 
 # Pearson correlation, compensated, zero when either side is constant.
+#' Pearson correlation, compensated, zero when either side is constant
+#'
+#' Part of the blinkg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .blinkg_corr <- function(a, b) {
   n <- length(a)
   ma <- .w3_csum(a) / n
@@ -83,6 +92,16 @@
 }
 
 # Intercept, fixed covariates, then the given genotype columns.
+#' Intercept, fixed covariates, then the given genotype columns
+#'
+#' Part of the blinkg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param covars See Usage.
+#' @param cols See Usage.
+#' @return The value of \code{d}, as built in the body.
+#' @export
 .blinkg_design <- function(n, covars, cols) {
   d <- matrix(1, n, 1L + length(covars) + length(cols))
   k <- 1L
@@ -145,6 +164,16 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
 # on a small panel several markers can share a p value to the last bit,
 # and a selection that depended on which one the sort happened to put
 # first would not be reproducible.
+#' Markers sorted by p value, ties broken by index. The tie break
+#' matters:
+#'
+#' on a small panel several markers can share a p value to the last bit,
+#' and a selection that depended on which one the sort happened to put
+#' first would not be reproducible.
+#'
+#' @param pv See Usage.
+#' @return The value of \code{[}.
+#' @export
 .blinkg_order <- function(pv) {
   live <- which(!is.nan(pv))
   if (!length(live)) return(integer(0))
@@ -203,6 +232,15 @@ morie_blinkg_bin_filter <- function(order, positions, bin_size) {
 }
 
 # Gaussian log likelihood at the least-squares fit.
+#' Gaussian log likelihood at the least-squares fit
+#'
+#' Part of the blinkg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rss See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .blinkg_loglik <- function(rss, n) {
   if (rss <= 0) return(Inf)
   -0.5 * n * (log(2 * pi) + log(rss / n) + 1)

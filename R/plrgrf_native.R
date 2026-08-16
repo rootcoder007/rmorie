@@ -47,11 +47,34 @@
 
 .plrgrf_eps <- 1e-12
 
+#' .plrgrf_folds
+#'
+#' Part of the plrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param V See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .plrgrf_folds <- function(n, V) {
   V <- max(2, min(as.integer(V), n))
   lapply(0:(V - 1), function(v) which((seq_len(n) - 1) %% V == v))
 }
 
+#' .plrgrf_forest_predict
+#'
+#' Part of the plrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param train See Usage.
+#' @param at_rows See Usage.
+#' @param n_trees See Usage.
+#' @param min_leaf See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .plrgrf_forest_predict <- function(X, y, train, at_rows, n_trees, min_leaf, seed) {
   forest <- grow_forest(X[train, , drop = FALSE], y[train],
                         n_trees = n_trees, min_leaf = min_leaf, seed = seed)
@@ -211,6 +234,13 @@ morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
        method = "partial-linear generalized random forest, Athey, Tibshirani & Wager (2019) eq. (2)-(3) with local centering")
 }
 
+#' .plrgrf_cheatsheet
+#'
+#' Part of the plrgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .plrgrf_cheatsheet <- function() {
   "plrgrf: residualise FIRST -- Ytilde = Y - m(X), Wtilde = W - e(X), both cross-fitted -- then solve eq. (2) in the forest neighbourhood: tau(x) = sum a_i Wtilde Ytilde / sum a_i Wtilde^2. Skip the centering and the forest splits on m(X), the confounding surface, not on tau."
 }

@@ -5,6 +5,20 @@
 # optimiser closure so the parameter-domain and non-positive-determinant
 # guards are directly unit-testable. `Q_bar` is the unconditional
 # correlation, `n` the sample size, `Z` the standardised residuals.
+#' Internal: DCC(1,1) two-step Gaussian negative log-likelihood for the
+#'
+#' base-R fallback path. Extracted from the
+#' morie_dcc_multivariate_garch() optimiser closure so the
+#' parameter-domain and non-positive-determinant guards are directly
+#' unit-testable. `Q_bar` is the unconditional correlation, `n` the
+#' sample size, `Z` the standardised residuals.
+#'
+#' @param p See Usage.
+#' @param Q_bar See Usage.
+#' @param n See Usage.
+#' @param Z See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .dccmd_negll <- function(p, Q_bar, n, Z) {
   a <- p[1]
   b <- p[2]

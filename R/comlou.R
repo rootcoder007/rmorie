@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Q = (1/2m) sum_ij (A_ij - gamma k_i k_j / 2m) delta(z_i, z_j)
+#' Q = (1/2m) sum_ij (A_ij - gamma k_i k_j / 2m) delta(z_i, z_j)
+#'
+#' Part of the comlou implementation; see the file header for the source
+#' it follows.
+#'
+#' @param A See Usage.
+#' @param z See Usage.
+#' @param resolution Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .lou_modularity <- function(A, z, resolution = 1) {
   n <- nrow(A)
   k <- numeric(n)

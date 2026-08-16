@@ -47,11 +47,47 @@
 .prsLL_ROUTES <- c("table", "recursive_descent")
 
 # ----- Set operations on character vectors -----
+#' Set operations on character vectors -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{unique}.
+#' @export
 .prsLL_union <- function(a, b) unique(c(a, b))
+#' .prsLL_setdiff
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{[}.
+#' @export
 .prsLL_setdiff <- function(a, b) a[!(a %in% b)]
+#' .prsLL_subset
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .prsLL_subset <- function(a, b) all(a %in% b)
 
 # ----- Grammar construction and validation -----
+#' Grammar construction and validation -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rules See Usage.
+#' @param start Defaults to \code{NULL}.
+#' @return The value of \code{g}, as built in the body.
+#' @export
 .prsLL_grammar <- function(rules, start = NULL) {
   R <- list()
   for (item in rules) {
@@ -88,6 +124,14 @@
   g
 }
 
+#' .prsLL_reachable
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{seen}, as built in the body.
+#' @export
 .prsLL_reachable <- function(g) {
   nts <- .prsLL_nonterminals(g)
   seen <- c(g$start)
@@ -108,6 +152,14 @@
   seen
 }
 
+#' .prsLL_nonterminals
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .prsLL_nonterminals <- function(g) {
   out <- character(0)
   for (rule in g$rules) {
@@ -119,6 +171,14 @@
   out
 }
 
+#' .prsLL_terminals
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .prsLL_terminals <- function(g) {
   nts <- .prsLL_nonterminals(g)
   out <- character(0)
@@ -133,6 +193,14 @@
 }
 
 # ----- FIRST and FOLLOW sets -----
+#' FIRST and FOLLOW sets -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{first}, as built in the body.
+#' @export
 .prsLL_first_sets <- function(g) {
   nts <- .prsLL_nonterminals(g)
   first <- list()
@@ -153,6 +221,16 @@
   first
 }
 
+#' .prsLL_first_seq
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param first See Usage.
+#' @param nts See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .prsLL_first_seq <- function(seq, first, nts) {
   out <- character(0)
   for (s in seq) {
@@ -169,11 +247,30 @@
   out
 }
 
+#' .prsLL_first_of
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param g See Usage.
+#' @param first Defaults to \code{NULL}.
+#' @return The value of \code{.prsLL_first_seq}.
+#' @export
 .prsLL_first_of <- function(seq, g, first = NULL) {
   f <- if (is.null(first)) .prsLL_first_sets(g) else first
   .prsLL_first_seq(as.character(seq), f, .prsLL_nonterminals(g))
 }
 
+#' .prsLL_follow_sets
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param first Defaults to \code{NULL}.
+#' @return The value of \code{follow}, as built in the body.
+#' @export
 .prsLL_follow_sets <- function(g, first = NULL) {
   nts <- .prsLL_nonterminals(g)
   f <- if (is.null(first)) .prsLL_first_sets(g) else first
@@ -206,6 +303,14 @@
 }
 
 # ----- LL(1) table construction -----
+#' LL(1) table construction -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return A list with \code{table}, \code{conflicts}, \code{first}, \code{follow}.
+#' @export
 .prsLL_ll1_table <- function(g) {
   first <- .prsLL_first_sets(g)
   follow <- .prsLL_follow_sets(g, first)
@@ -237,6 +342,14 @@
   list(table = table, conflicts = conflicts, first = first, follow = follow)
 }
 
+#' .prsLL_is_ll1
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table}, \code{first}, \code{follow}, \code{left_recursive}, \code{method}.
+#' @export
 .prsLL_is_ll1 <- function(g) {
   t <- .prsLL_ll1_table(g)
   list(
@@ -252,6 +365,14 @@
 }
 
 # ----- Left recursion detection and removal -----
+#' Left recursion detection and removal -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .prsLL_left_recursive <- function(g) {
   nts <- .prsLL_nonterminals(g)
   first <- .prsLL_first_sets(g)
@@ -291,6 +412,14 @@
   out
 }
 
+#' .prsLL_remove_left_recursion
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{.prsLL_grammar}.
+#' @export
 .prsLL_remove_left_recursion <- function(g) {
   rules <- list()
   nts <- .prsLL_nonterminals(g)
@@ -338,15 +467,42 @@
 }
 
 # ----- Parse tree nodes -----
+#' Parse tree nodes -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sym See Usage.
+#' @return A list with \code{symbol}, \code{children}.
+#' @export
 .prsLL_leaf <- function(sym) {
   list(symbol = sym, children = NULL)
 }
 
+#' .prsLL_node
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sym See Usage.
+#' @param kids See Usage.
+#' @return A list with \code{symbol}, \code{children}.
+#' @export
 .prsLL_node <- function(sym, kids) {
   list(symbol = sym, children = kids)
 }
 
 # ----- Parsing -----
+#' Parsing -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param table See Usage.
+#' @param A See Usage.
+#' @param a See Usage.
+#' @return The value of \code{[[}.
+#' @export
 .prsLL_pick <- function(table, A, a) {
   key <- paste(A, a, sep = "\r")
   if (is.null(table[[key]])) {
@@ -355,6 +511,18 @@
   table[[key]]
 }
 
+#' .prsLL_parse_rd
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param table See Usage.
+#' @param toks See Usage.
+#' @param A See Usage.
+#' @param pos See Usage.
+#' @return The value of \code{list}.
+#' @export
 .prsLL_parse_rd <- function(g, table, toks, A, pos) {
   i <- .prsLL_pick(table, A, toks[pos + 1L])
   rhs <- g$rules[[i]][[2]]
@@ -378,6 +546,16 @@
   list(.prsLL_node(A, kids), pos)
 }
 
+#' .prsLL_parse_table
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param table See Usage.
+#' @param toks See Usage.
+#' @return The value of \code{list}.
+#' @export
 .prsLL_parse_table <- function(g, table, toks) {
   nts <- .prsLL_nonterminals(g)
   root <- .prsLL_node(g$start, list())
@@ -414,6 +592,16 @@
   list(root, pos)
 }
 
+#' .prsLL_parse
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param tokens See Usage.
+#' @param route Defaults to \code{"table"}.
+#' @return The value of \code{tree}, as built in the body.
+#' @export
 .prsLL_parse <- function(g, tokens, route = "table") {
   if (!(route %in% .prsLL_ROUTES)) {
     stop(sprintf("prsLL: route must be one of %s, got %s",
@@ -442,6 +630,14 @@
 }
 
 # ----- Tree linearisation -----
+#' Tree linearisation -----
+#'
+#' Part of the prsLL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .prsLL_linearise <- function(tree) {
   if (is.null(tree$children)) {
     return(c(tree$symbol))

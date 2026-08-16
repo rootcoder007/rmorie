@@ -56,12 +56,29 @@
 # ECML 2010 paper above is the one held locally and is the text this
 # module follows.
 
+#' .warpL_vec
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .warpL_vec <- function(x) {
   as.numeric(x)
 }
 
 .warpL_eps <- 1e-12
 
+#' .warpL_alpha_weights
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param scheme Defaults to \code{"reciprocal"}.
+#' @return The value of \code{a}, as built in the body.
+#' @export
 .warpL_alpha_weights <- function(n, scheme = "reciprocal") {
   N <- as.integer(n)
   if (N < 1) stop("warpL: n must be at least 1")
@@ -84,6 +101,15 @@
   a
 }
 
+#' .warpL_rank_weight
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rank See Usage.
+#' @param alphas See Usage.
+#' @return A numeric value.
+#' @export
 .warpL_rank_weight <- function(rank, alphas) {
   r <- as.integer(rank)
   if (r < 0) stop("warpL: the rank cannot be negative")
@@ -91,6 +117,15 @@
   sum(alphas[seq_len(r_capped)])
 }
 
+#' .warpL_estimate_rank
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_draws See Usage.
+#' @param n_labels See Usage.
+#' @return The value of \code{as.integer}.
+#' @export
 .warpL_estimate_rank <- function(n_draws, n_labels) {
   N <- as.integer(n_draws)
   Y <- as.integer(n_labels)
@@ -98,6 +133,19 @@
   as.integer((Y - 1) %/% N)
 }
 
+#' .warpL_sample_violation
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param score_positive See Usage.
+#' @param negative_scorer See Usage.
+#' @param n_labels See Usage.
+#' @param rng See Usage.
+#' @param margin Defaults to \code{1}.
+#' @param max_draws Defaults to \code{NULL}.
+#' @return A list with \code{violated}, \code{draws}, \code{negative}, \code{estimated_rank}, \code{capped}, \code{note}.
+#' @export
 .warpL_sample_violation <- function(score_positive, negative_scorer, n_labels,
                                      rng, margin = 1.0, max_draws = NULL) {
   Y <- as.integer(n_labels)
@@ -132,6 +180,18 @@
   )
 }
 
+#' .warpL_warp_loss
+#'
+#' Part of the warpL_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param score_positive See Usage.
+#' @param score_negative See Usage.
+#' @param estimated_rank See Usage.
+#' @param alphas See Usage.
+#' @param margin Defaults to \code{1}.
+#' @return A list with \code{loss}, \code{hinge}, \code{rank_weight}, \code{estimated_rank}.
+#' @export
 .warpL_warp_loss <- function(score_positive, score_negative, estimated_rank,
                               alphas, margin = 1.0) {
   hinge <- max(0, as.numeric(margin) - as.numeric(score_positive) + as.numeric(score_negative))

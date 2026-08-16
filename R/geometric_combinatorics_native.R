@@ -17,6 +17,16 @@
 # Pick GA (1899); Erdos P, Szekeres G (1935) Compositio Math 2:463-470;
 # Helly E (1923); Matousek J (2002) Lectures on Discrete Geometry.
 
+#' .morie_cross3
+#'
+#' Part of the geometric_combinatorics_native implementation; see the
+#' file header for the source it follows.
+#'
+#' @param o See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .morie_cross3 <- function(o, a, b) {
   (a[1] - o[1]) * (b[2] - o[2]) - (a[2] - o[2]) * (b[1] - o[1])
 }

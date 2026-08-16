@@ -29,6 +29,20 @@
 # Refinement stops while adjacent grid values still differ by far more than
 # floating-point noise. Going finer would push the comparison back below the
 # noise floor and reintroduce exactly the disagreement this exists to remove.
+#' Refinement stops while adjacent grid values still differ by far more
+#' than
+#'
+#' floating-point noise. Going finer would push the comparison back
+#' below the noise floor and reintroduce exactly the disagreement this
+#' exists to remove.
+#'
+#' @param f See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param points Defaults to \code{201L}.
+#' @param stages Defaults to \code{4L}.
+#' @return The value of \code{a}, as built in the body.
+#' @export
 .cmlmer_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
   a <- as.numeric(lo); b <- as.numeric(hi)
   npt <- as.integer(points)
@@ -55,8 +69,26 @@
 # give different groups and therefore a different model. The grid is far
 # finer than any distance the caller can distinguish and far coarser than
 # the last-bit noise that would otherwise decide a tie.
+#' Quantise a UPGMA distance to a 1e-12 grid. Average linkage merges the
+#'
+#' closest pair, and a tie broken differently in the two languages would
+#' give different groups and therefore a different model. The grid is
+#' far finer than any distance the caller can distinguish and far
+#' coarser than the last-bit noise that would otherwise decide a tie.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .cmlmer_snap12 <- function(x) floor(x * 1e12 + 0.5) / 1e12
 
+#' .cmlmer_rows
+#'
+#' Part of the cmlmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .cmlmer_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -66,6 +98,14 @@
   m
 }
 
+#' .cmlmer_chol
+#'
+#' Part of the cmlmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .cmlmer_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -87,6 +127,15 @@
   L
 }
 
+#' .cmlmer_solve
+#'
+#' Part of the cmlmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .cmlmer_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -104,11 +153,28 @@
   x
 }
 
+#' .cmlmer_logdet
+#'
+#' Part of the cmlmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @return A numeric value.
+#' @export
 .cmlmer_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 # Average-linkage clustering on 1 - K, cut at g groups. Deterministic
 # throughout: ties are broken by the smaller index pair, so two
 # implementations agree on the dendrogram, not merely on its quality.
+#' Average-linkage clustering on 1 - K, cut at g groups. Deterministic
+#'
+#' throughout: ties are broken by the smaller index pair, so two
+#' implementations agree on the dendrogram, not merely on its quality.
+#'
+#' @param K See Usage.
+#' @param g See Usage.
+#' @return A list with \code{lab}, \code{groups}.
+#' @export
 .cmlmer_upgma <- function(K, g) {
   n <- nrow(K)
   members <- lapply(seq_len(n), function(i) i)
@@ -147,6 +213,17 @@
   list(lab = lab, groups = groups)
 }
 
+#' .cmlmer_reml_at
+#'
+#' Part of the cmlmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param logdelta See Usage.
+#' @param Vk See Usage.
+#' @param y See Usage.
+#' @param X See Usage.
+#' @return A list with \code{ll}, \code{delta}, \code{beta}, \code{s2g}, \code{L}.
+#' @export
 .cmlmer_reml_at <- function(logdelta, Vk, y, X) {
   n <- length(y); p <- ncol(X)
   delta <- exp(logdelta)
@@ -313,6 +390,13 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
                      "than approximating it"))
 }
 
+#' .cmlmer_cheatsheet
+#'
+#' Part of the cmlmer_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .cmlmer_cheatsheet <- function() {
   paste0("cmlmer: morie_cmlmer_compressed_lmm(y, M, K, clusters) -> ",
          "compressed MLM genome scan with REML variance components ",

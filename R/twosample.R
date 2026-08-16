@@ -3,6 +3,16 @@
 # Internal: 1-Wasserstein distance between two empirical measures on the
 # line. On R the p = 1 transport cost is integral |F - G|, so sorting
 # solves the problem and no linear program is needed.
+#' Internal: 1-Wasserstein distance between two empirical measures on
+#' the
+#'
+#' line. On R the p = 1 transport cost is integral |F - G|, so sorting
+#' solves the problem and no linear program is needed.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .w1_distance <- function(a, b) {
   xs <- sort(a)
   ys <- sort(b)
@@ -94,6 +104,16 @@ morie_wasserstein_test <- function(x, y, B = 999L, cdf = NULL) {
 }
 
 # Internal: Gram matrix for the three supported kernels.
+#' Internal: Gram matrix for the three supported kernels
+#'
+#' Part of the twosample implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param kernel See Usage.
+#' @param gamma See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mmd_gram <- function(Z, kernel, gamma) {
   if (identical(kernel, "linear")) return(tcrossprod(Z))
   d2 <- as.matrix(stats::dist(Z))^2

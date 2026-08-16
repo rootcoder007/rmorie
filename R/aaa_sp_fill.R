@@ -12,12 +12,39 @@
 # eigenvector signs, because an early exit or a sign flip on one language
 # arm and not the other silently breaks Py<->R parity.
 
+#' .morie_spx_dot
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.morie_fsum}.
+#' @export
 .morie_spx_dot <- function(a, b) .morie_fsum(a * b)
 
+#' .morie_spx_matvec
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_spx_matvec <- function(A, b) {
   vapply(seq_len(nrow(A)), function(i) .morie_fsum(A[i, ] * b), numeric(1))
 }
 
+#' .morie_spx_matmul
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_spx_matmul <- function(A, B) {
   out <- matrix(0, nrow(A), ncol(B))
   for (i in seq_len(nrow(A))) {
@@ -28,8 +55,24 @@
   out
 }
 
+#' .morie_spx_trace
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{.morie_fsum}.
+#' @export
 .morie_spx_trace <- function(A) .morie_fsum(diag(A))
 
+#' Gauss-Jordan with partial pivoting; raises rather than returning
+#'
+#' garbage on a singular system.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_spx_solve <- function(A, b) {
   # Gauss-Jordan with partial pivoting; raises rather than returning
   # garbage on a singular system.
@@ -58,6 +101,14 @@
   vapply(seq_len(n), function(i) M[i, n + 1L] / M[i, i], numeric(1))
 }
 
+#' (sign, log|det|) by LU with partial pivoting
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_spx_logabsdet <- function(A) {
   # (sign, log|det|) by LU with partial pivoting.
   n <- nrow(A)
@@ -90,17 +141,46 @@
   c(sgn, acc)
 }
 
+#' .morie_spx_lstsq
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{0}.
+#' @return The value of \code{.morie_spx_solve}.
+#' @export
 .morie_spx_lstsq <- function(A, y, ridge = 0) {
   G <- .morie_spx_matmul(t(A), A)
   if (ridge) diag(G) <- diag(G) + ridge
   .morie_spx_solve(G, .morie_spx_matvec(t(A), y))
 }
 
+#' .morie_spx_fixsign
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_spx_fixsign <- function(v) {
   j <- which.max(abs(v))
   if (v[j] < 0) -v else v
 }
 
+#' Top-k eigenpairs of a SYMMETRIC matrix by power iteration + deflation
+#'
+#' The start vector is fixed and slightly non-uniform: an all-ones start
+#' is orthogonal to the leading eigenvector of some ordinary matrices
+#' and fails silently when it is.
+#'
+#' @param A See Usage.
+#' @param k See Usage.
+#' @param iters Defaults to \code{400L}.
+#' @return A list with \code{values}, \code{vectors}.
+#' @export
 .morie_spx_topeigs <- function(A, k, iters = 400L) {
   # Top-k eigenpairs of a SYMMETRIC matrix by power iteration + deflation.
   # The start vector is fixed and slightly non-uniform: an all-ones start
@@ -129,6 +209,14 @@
   list(values = vals, vectors = vecs)
 }
 
+#' X_k = sum_u x_u exp(-i w_k u), u and k running from 0
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{re}, \code{im}.
+#' @export
 .morie_spx_dft <- function(x) {
   # X_k = sum_u x_u exp(-i w_k u), u and k running from 0.
   n <- length(x)
@@ -142,6 +230,15 @@
   list(re = re, im = im)
 }
 
+#' .morie_spx_idftre
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param re See Usage.
+#' @param im See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_spx_idftre <- function(re, im) {
   n <- length(re)
   idx <- seq_len(n) - 1L
@@ -151,6 +248,14 @@
   }, numeric(1))
 }
 
+#' .morie_spx_median
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_spx_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -159,10 +264,37 @@
   if (n %% 2L == 1L) s[h + 1L] else 0.5 * (s[h] + s[h + 1L])
 }
 
+#' .morie_spx_dist
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .morie_spx_dist <- function(a, b) sqrt(.morie_fsum((a - b)^2))
 
+#' .morie_spx_p2
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_spx_p2 <- function(z) 2 * (1 - pnorm(abs(z)))
 
+#' .morie_spx_chkw
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @param n See Usage.
+#' @param zero_diag Defaults to \code{TRUE}.
+#' @return The value of \code{W}, as built in the body.
+#' @export
 .morie_spx_chkw <- function(w, n, zero_diag = TRUE) {
   W <- as.matrix(w)
   if (nrow(W) != ncol(W)) stop("`w` must be square")
@@ -176,6 +308,15 @@
   W
 }
 
+#' .morie_spx_chkv
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param name Defaults to \code{"x"}.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .morie_spx_chkv <- function(x, name = "x") {
   v <- as.numeric(x)
   if (!length(v)) stop(sprintf("`%s` must contain at least one value", name))
@@ -819,6 +960,17 @@ SpecRad <- function(g, iters = 400L) {
   )
 }
 
+#' .morie_spx_sarneg2
+#'
+#' Part of the sp_fill implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param W See Usage.
+#' @param rho See Usage.
+#' @return A list with \code{v}, \code{b}, \code{s2}.
+#' @export
 .morie_spx_sarneg2 <- function(y, X, W, rho) {
   n <- length(y)
   A <- diag(n) - rho * W

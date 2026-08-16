@@ -16,11 +16,27 @@
 # overfits. Each function below is one step of that chain and says
 # which.
 
+#' .esl_K
+#'
+#' Part of the esl_native0 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .esl_K <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
 
 # (7.55): Pr{i in bootstrap sample b} = 1 - (1 - 1/n)^n -> 1 - e^-1.
 # The exact finite-n value, not the limit; they differ by about 1% at
 # n = 20, which is the regime where anyone reaches for a bootstrap.
+#' (7.55): Pr{i in bootstrap sample b} = 1 - (1 - 1/n)^n -> 1 - e^-1
+#'
+#' The exact finite-n value, not the limit; they differ by about 1% at n
+#' = 20, which is the regime where anyone reaches for a bootstrap.
+#'
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .esl_inclusion <- function(n) {
   n <- as.integer(n)
   if (is.na(n) || n < 1L) {
@@ -34,6 +50,17 @@
 # classification rule is larger, above it the regression rule is, by
 # a widening margin (33 against 10 at p = 100). Both are tuning
 # parameters, not laws.
+#' The book\'s defaults for the number of variables sampled at each
+#'
+#' split. They cross at p = 9, where both give 3: below it the
+#' classification rule is larger, above it the regression rule is, by a
+#' widening margin (33 against 10 at p = 100). Both are tuning
+#' parameters, not laws.
+#'
+#' @param p See Usage.
+#' @param task Defaults to \code{"regression"}.
+#' @return Nothing; this branch always raises.
+#' @export
 .esl_mtry <- function(p, task = "regression") {
   p <- as.integer(p)
   if (is.na(p) || p < 1L) stop("need at least one predictor.", call. = FALSE)
@@ -46,6 +73,17 @@
   stop("task must be 'regression' or 'classification'.", call. = FALSE)
 }
 
+#' .esl_stop
+#'
+#' Part of the esl_native0 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param depth See Usage.
+#' @param max_depth See Usage.
+#' @param min_node See Usage.
+#' @return A logical value.
+#' @export
 .esl_stop <- function(y, depth, max_depth, min_node) {
   depth >= max_depth || length(y) <= min_node || stats::var(y) < 1e-12
 }
@@ -54,6 +92,20 @@
 # node, not once per tree: averaging B identically distributed trees
 # leaves rho sigma^2 behind, so the gain is bounded by how
 # decorrelated they are, and a per-tree draw decorrelates far less.
+#' Algorithm 15.1 step 1(b). The mtry-of-p subset is drawn at EVERY
+#'
+#' node, not once per tree: averaging B identically distributed trees
+#' leaves rho sigma^2 behind, so the gain is bounded by how decorrelated
+#' they are, and a per-tree draw decorrelates far less.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param mtry See Usage.
+#' @param depth See Usage.
+#' @param max_depth See Usage.
+#' @param min_node See Usage.
+#' @return A list with \code{leaf}, \code{feature}, \code{threshold}, \code{left}, \code{right}.
+#' @export
 .esl_grow <- function(X, y, mtry, depth, max_depth, min_node) {
   if (.esl_stop(y, depth, max_depth, min_node)) {
     return(list(leaf = TRUE, value = mean(y)))
@@ -95,6 +147,14 @@
 # population variance, matching numpy's np.var default (ddof = 0);
 # stats::var uses ddof = 1 and would weight the split criterion
 # differently
+#' Population variance, matching numpy\'s np.var default (ddof = 0);
+#'
+#' stats::var uses ddof = 1 and would weight the split criterion
+#' differently
+#'
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .esl_var_p <- function(y) {
   n <- length(y)
   if (n < 1L) {
@@ -103,6 +163,15 @@
   mean((y - mean(y))^2)
 }
 
+#' .esl_predict_tree
+#'
+#' Part of the esl_native0 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param X See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .esl_predict_tree <- function(node, X) {
   vapply(seq_len(nrow(X)), function(i) {
     nd <- node
@@ -113,6 +182,16 @@
   }, numeric(1))
 }
 
+#' .esl_matrix
+#'
+#' Part of the esl_native0 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param what Defaults to \code{"X"}.
+#' @return A list with \code{X}, \code{y}.
+#' @export
 .esl_matrix <- function(X, y, what = "X") {
   A <- as.matrix(X)
   storage.mode(A) <- "double"

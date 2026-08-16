@@ -7,6 +7,17 @@
 # Moore-Penrose pseudo-inverse via SVD, for singular Hessians.
 
 # Newton-Raphson logistic regression; returns fitted probabilities.
+#' Newton-Raphson logistic regression; returns fitted probabilities
+#'
+#' Part of the causal_shared_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return The value of \code{as.vector}.
+#' @export
 .morie_logit_fit <- function(X, y, max_iter = 100L, tol = 1e-9) {
   D <- cbind(1, X)
   beta <- rep(0, ncol(D))
@@ -45,6 +56,16 @@
 }
 
 # Ridge coefficients with an unpenalised intercept.
+#' Ridge coefficients with an unpenalised intercept
+#'
+#' Part of the causal_shared_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lam Defaults to \code{0.001}.
+#' @return A matrix, from \code{solve}.
+#' @export
 .morie_ridge_fit <- function(X, y, lam = 1e-3) {
   D <- cbind(1, X)
   A <- crossprod(D) + lam * diag(ncol(D))
@@ -54,6 +75,15 @@
 
 # Inverse-probability-of-censoring-weighted RMST pseudo outcome, whose
 # expectation is E[min(T, horizon)] under independent censoring.
+#' Inverse-probability-of-censoring-weighted RMST pseudo outcome, whose
+#'
+#' expectation is E[min(T, horizon)] under independent censoring.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param horizon See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_cf_rmst_pseudo <- function(time, event, horizon) {
   n <- length(time)
   o <- order(time)

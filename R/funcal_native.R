@@ -52,12 +52,28 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 
 .funcal_SEARCHERS <- c("diamond", "mmseqs", "hmmer")
 
+#' .funcal_first
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{[}.
+#' @export
 .funcal_first <- function(x) {
   if (is.null(x) || length(x) == 0) return(NULL)
   if (is.list(x)) return(x[[1]])
   return(x[1])
 }
 
+#' .funcal_hit
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @return A list with \code{query}, \code{target}, \code{evalue}, \code{score}, \code{query_cov}, \code{target_cov}.
+#' @export
 .funcal_hit <- function(h) {
   if (is.null(h) || is.null(h[["query"]]) || is.null(h[["target"]])) {
     stop("funcal: a hit needs 'query' and 'target'")
@@ -137,6 +153,15 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
   return(result)
 }
 
+#' .funcal_type_of
+#'
+#' Part of the funcal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_query_side See Usage.
+#' @param n_target_side See Usage.
+#' @return A character value.
+#' @export
 .funcal_type_of <- function(n_query_side, n_target_side) {
   left <- if (n_query_side <= 1) "one" else "many"
   right <- if (n_target_side <= 1) "one" else "many"

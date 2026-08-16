@@ -10,9 +10,27 @@
 # boot/simpleboot results agree to machine precision under a common
 # seed. tests/cross validates this.
 
+#' .boot_n
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .boot_n <- function(data) if (is.null(dim(data))) length(data) else nrow(data)
 
 # boot:::ordinary.array -- single- or multi-stratum R x n index matrix.
+#' Boot:::ordinary.array -- single- or multi-stratum R x n index matrix
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param R See Usage.
+#' @param strata Defaults to \code{NULL}.
+#' @return The value of \code{output}, as built in the body.
+#' @export
 .morie_boot_index <- function(n, R, strata = NULL) {
   if (is.null(strata) || length(unique(strata)) == 1L) {
     out <- sample.int(n, n * R, replace = TRUE)
@@ -72,6 +90,14 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 }
 
 # boot:::freq.array -- R x n resample frequency counts.
+#' Boot:::freq.array -- R x n resample frequency counts
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param boot_obj See Usage.
+#' @return A matrix, from \code{t}.
+#' @export
 .morie_boot_freq <- function(boot_obj) {
   idx <- boot_obj$index
   n <- ncol(idx)
@@ -79,6 +105,15 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 }
 
 # boot:::empinf.reg -- regression estimate of empirical influence.
+#' Boot:::empinf.reg -- regression estimate of empirical influence
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param boot_obj See Usage.
+#' @param t Defaults to \code{boot_obj$t[, 1L]}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_empinf_reg <- function(boot_obj, t = boot_obj$t[, 1L]) {
   fins <- which(is.finite(t))
   t <- t[fins]
@@ -102,6 +137,14 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 
 # boot:::norm.inter -- interpolation of order statistics on the normal
 # quantile scale (shared by percentile / basic / BCa).
+#' Boot:::norm.inter -- interpolation of order statistics on the normal
+#'
+#' quantile scale (shared by percentile / basic / BCa).
+#'
+#' @param t See Usage.
+#' @param alpha See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_norm_inter <- function(t, alpha) {
   t <- sort(t[is.finite(t)])
   R <- length(t)
@@ -130,12 +173,41 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
   out
 }
 
+#' .morie_ci_perc
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param conf See Usage.
+#' @return The value of \code{.morie_norm_inter}.
+#' @export
 .morie_ci_perc <- function(t, conf) .morie_norm_inter(t, (1 + c(-conf, conf)) / 2)
 
+#' .morie_ci_basic
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t0 See Usage.
+#' @param t See Usage.
+#' @param conf See Usage.
+#' @return A numeric value.
+#' @export
 .morie_ci_basic <- function(t0, t, conf) {
   2 * t0 - .morie_norm_inter(t, (1 + c(conf, -conf)) / 2)
 }
 
+#' .morie_ci_norm
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t0 See Usage.
+#' @param t See Usage.
+#' @param conf See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_ci_norm <- function(t0, t, conf) {
   t <- t[is.finite(t)]
   bias <- mean(t) - t0
@@ -143,6 +215,16 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
   c(t0 - bias - merr, t0 - bias + merr)
 }
 
+#' .morie_ci_bca
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param boot_obj See Usage.
+#' @param index See Usage.
+#' @param conf See Usage.
+#' @return The value of \code{.morie_norm_inter}.
+#' @export
 .morie_ci_bca <- function(boot_obj, index, conf) {
   t_all <- boot_obj$t[, index]
   t0 <- boot_obj$t0[index]
@@ -196,6 +278,19 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 }
 
 # boot:::ts.array -- block start/length arrays for the block bootstrap.
+#' Boot:::ts.array -- block start/length arrays for the block bootstrap
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param n.sim See Usage.
+#' @param R See Usage.
+#' @param l See Usage.
+#' @param sim See Usage.
+#' @param endcorr See Usage.
+#' @return A list with \code{starts}, \code{lengths}.
+#' @export
 .morie_ts_array <- function(n, n.sim, R, l, sim, endcorr) {
   endpt <- if (endcorr) n else n - l + 1
   if (sim == "geom") {
@@ -220,6 +315,15 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
   list(starts = st, lengths = lens)
 }
 
+#' .morie_make_ends
+#'
+#' Part of the boot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .morie_make_ends <- function(a, n) {
   if (a[2L] == 0) {
     return(numeric())

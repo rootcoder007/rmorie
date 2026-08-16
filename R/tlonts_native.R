@@ -250,6 +250,13 @@ online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
   )
 }
 
+#' .tlonts_cheatsheet
+#'
+#' Part of the tlonts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlonts_cheatsheet <- function() {
   "tlonts: ONE time series -- covariate, treatment, outcome at each step -- with the conditional law depending on the past only through a FIXED-DIMENSIONAL summary and a time-invariant mechanism. Effects are defined by STOCHASTIC interventions on a SUBSET of future treatment nodes, since with a single series there is no population to set treatment for. Sample size comes from TIME: the influence terms are a MARTINGALE difference sequence, so variance is the sum of squares and the CLT is the martingale one. If the summary is too small the martingale property fails and the interval is simply wrong."
 }

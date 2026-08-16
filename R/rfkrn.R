@@ -103,6 +103,14 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
 }
 
 # The first k primes, for the Halton bases.
+#' The first k primes, for the Halton bases
+#'
+#' Part of the rfkrn implementation; see the file header for the source
+#' it follows.
+#'
+#' @param k See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .rfkprimes <- function(k) {
   out <- integer(0); c <- 2L
   while (length(out) < k) {

@@ -18,6 +18,14 @@
 #                 sigma2_hat + 1) using the biased MLE sigma2_hat.
 
 # cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs[k - 1]
+#' Cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs[k - 1]
+#'
+#' Part of the pelt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{cs}, \code{css}.
+#' @export
 .mor_cp_tables <- function(x) {
   n <- length(x)
   cs <- numeric(n + 1L)
@@ -30,6 +38,15 @@
 }
 
 # segment cost of the 0-based half-open block [a, b)
+#' Segment cost of the 0-based half-open block [a, b)
+#'
+#' Part of the pelt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tab See Usage.
+#' @param cost See Usage.
+#' @return The value of \code{function}.
+#' @export
 .mor_cp_cost <- function(tab, cost) {
   log2pi <- log(2 * pi)
   function(a, b) {
@@ -46,6 +63,17 @@
   }
 }
 
+#' .mor_pelt_core
+#'
+#' Part of the pelt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param cost See Usage.
+#' @param penalty See Usage.
+#' @param min_seglen See Usage.
+#' @return A list with \code{taus}, \code{objective}.
+#' @export
 .mor_pelt_core <- function(x, cost, penalty, min_seglen) {
   n <- length(x)
   tab <- .mor_cp_tables(x)
@@ -82,6 +110,15 @@
 }
 
 # segment means of the 0-based bounds vector
+#' Segment means of the 0-based bounds vector
+#'
+#' Part of the pelt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param bounds See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .mor_cp_segmeans <- function(x, bounds) {
   vapply(seq_len(length(bounds) - 1L), function(i)
     mean(x[(bounds[i] + 1L):bounds[i + 1L]]), numeric(1))

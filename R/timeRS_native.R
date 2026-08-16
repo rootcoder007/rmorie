@@ -67,6 +67,16 @@
 
 # Private helpers (prefixed .timeRS_ to avoid collisions in the shared R/ env)
 
+#' .timeRS_deviation
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param t_user See Usage.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return A numeric value.
+#' @export
 .timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
   d <- as.numeric(t) - as.numeric(t_user)
   b <- as.numeric(beta)
@@ -77,6 +87,16 @@
   sgn * (abs(d) ^ b)
 }
 
+#' .timeRS_time_bin
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @return A numeric value.
+#' @export
 .timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
   w <- as.integer(bin_days)
   if (w < 1L) {
@@ -87,6 +107,19 @@
   min(idx, nb - 1L)
 }
 
+#' .timeRS_user_bias
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param b_u See Usage.
+#' @param alpha_u See Usage.
+#' @param t See Usage.
+#' @param t_user See Usage.
+#' @param per_day Defaults to \code{NULL}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return A list with \code{bias}, \code{deviation}, \code{per_day}, \code{note}.
+#' @export
 .timeRS_user_bias <- function(b_u, alpha_u, t, t_user, per_day = NULL,
                               beta = .timeRS_BETA) {
   dev <- .timeRS_deviation(t, t_user, beta)
@@ -108,6 +141,18 @@
   )
 }
 
+#' .timeRS_item_bias
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param b_i See Usage.
+#' @param bins See Usage.
+#' @param t See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @return A list with \code{bias}, \code{bin}.
+#' @export
 .timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
   idx <- .timeRS_time_bin(t, bin_days, n_bins)
   nb <- length(bins)
@@ -119,6 +164,25 @@
   list(bias = bias, bin = idx)
 }
 
+#' .timeRS_predict_time
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param b_u See Usage.
+#' @param alpha_u See Usage.
+#' @param t_user See Usage.
+#' @param b_i See Usage.
+#' @param item_bins See Usage.
+#' @param t See Usage.
+#' @param p_u Defaults to \code{NULL}.
+#' @param q_i Defaults to \code{NULL}.
+#' @param per_day Defaults to \code{NULL}.
+#' @param bin_days Defaults to \code{70}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return A list with \code{prediction}, \code{user_bias}, \code{item_bias}, \code{deviation}, \code{bin}.
+#' @export
 .timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins, t,
                                  p_u = NULL, q_i = NULL, per_day = NULL,
                                  bin_days = 70, beta = .timeRS_BETA) {
@@ -142,6 +206,22 @@
   )
 }
 
+#' .timeRS_fit_time_bias
+#'
+#' Part of the timeRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ratings See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param bin_days Defaults to \code{70}.
+#' @param n_bins Defaults to \code{30}.
+#' @param epochs Defaults to \code{40}.
+#' @param lr Defaults to \code{0.005}.
+#' @param reg Defaults to \code{0.02}.
+#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @return A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{alpha_user}, \code{b_item}, \code{item_bins}, \code{t_user}, \code{beta}, \code{n_instances}, \code{method}, \code{note}.
+#' @export
 .timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
                                   n_bins = 30, epochs = 40, lr = 0.005,
                                   reg = 0.02, beta = .timeRS_BETA) {

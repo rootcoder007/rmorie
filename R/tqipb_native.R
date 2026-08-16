@@ -64,11 +64,26 @@
 .TQIPB_TABLE <- c(1.57, 0.56, 0.18, 0.047)
 
 # sqrt(3) * pi^2, the Panter-Dite constant in this normalisation.
+#' Sqrt(3) * pi^2, the Panter-Dite constant in this normalisation
+#'
+#' Part of the tqipb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A numeric value.
+#' @export
 .tqipb_pd <- function() sqrt(3) * pi * pi
 
 # 4^b by repeated multiplication. Written out because R's `^` on an
 # integer exponent is repeated squaring while Python's `**` calls libm
 # pow(); the module does not rely on the two agreeing.
+#' 4^b by repeated multiplication. Written out because R\'s `^` on an
+#'
+#' integer exponent is repeated squaring while Python\'s `**` calls libm
+#' pow(); the module does not rely on the two agreeing.
+#'
+#' @param b See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .tqipb_pow4 <- function(b) {
   p <- 1
   b <- as.integer(b)
@@ -105,6 +120,15 @@ morie_tqipb_constant <- function(bits, d, route = "table") {
 # Split d coordinates into n_blocks as evenly as possible; the first
 # d %% n_blocks blocks get one extra, which is what a packer does when
 # the dimension does not divide.
+#' Split d coordinates into n_blocks as evenly as possible; the first
+#'
+#' d %% n_blocks blocks get one extra, which is what a packer does when
+#' the dimension does not divide.
+#'
+#' @param d See Usage.
+#' @param n_blocks See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .tqipb_blocks <- function(d, n_blocks) {
   d <- as.integer(d)
   k <- as.integer(n_blocks)

@@ -3,6 +3,17 @@
 # Hat values, residuals and (X'X)^-1 for the OLS fit of y on X.  Returns
 # a list with n, p, e, h, sse and inv (inv[[k]] is COLUMN k of the
 # inverse), shared by the DFFITS, DFBETAS and COVRATIO diagnostics.
+#' Hat values, residuals and (X\'X)^-1 for the OLS fit of y on X.
+#' Returns
+#'
+#' a list with n, p, e, h, sse and inv (inv[[k]] is COLUMN k of the
+#' inverse), shared by the DFFITS, DFBETAS and COVRATIO diagnostics.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param intercept Defaults to \code{TRUE}.
+#' @return A list with \code{n}, \code{p}, \code{e}, \code{h}, \code{sse}, \code{inv}, \code{D}.
+#' @export
 .bkw_influence <- function(y, X, intercept = TRUE) {
   y <- .s03vec(y)
   Xm <- .s03mat(X)
@@ -32,6 +43,18 @@
 }
 
 # s_(i): the residual sd with observation i removed.
+#' S_(i): the residual sd with observation i removed
+#'
+#' Part of the dffit implementation; see the file header for the source
+#' it follows.
+#'
+#' @param sse See Usage.
+#' @param e_i See Usage.
+#' @param h_i See Usage.
+#' @param n See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .bkw_sdel <- function(sse, e_i, h_i, n, p) {
   num <- sse - e_i * e_i / (1 - h_i)
   sqrt(max(num, 0) / (n - p - 1))

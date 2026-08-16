@@ -53,6 +53,16 @@
 # doi:10.1016/0196-8858(85)90002-8. The reward-maximising tradition
 # this departs from.
 
+#' .tlbandt_design_probability
+#'
+#' Part of the tlbandt_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param blip_estimate See Usage.
+#' @param delta Defaults to \code{0.1}.
+#' @param greedy Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tlbandt_design_probability <- function(blip_estimate, delta = 0.1,
                                         greedy = FALSE) {
   d <- as.numeric(delta)
@@ -126,6 +136,19 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
        note = "only the reward of the action TAKEN is observed")
 }
 
+#' .tlbandt_martingale_terms
+#'
+#' Part of the tlbandt_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param g See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param psi See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tlbandt_martingale_terms <- function(A, Y, g, Q1, Q0, psi) {
   a <- as.numeric(A)
   y <- as.numeric(Y)
@@ -145,6 +168,15 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
   out
 }
 
+#' .tlbandt_sequential_ci
+#'
+#' Part of the tlbandt_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param D See Usage.
+#' @param level Defaults to \code{1.96}.
+#' @return A list with \code{se}, \code{half_width}, \code{T}, \code{note}.
+#' @export
 .tlbandt_sequential_ci <- function(D, level = 1.96) {
   v <- as.numeric(D)
   Tlen <- length(v)
@@ -157,6 +189,16 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
        note = "sum of squares, not the i.i.d. variance -- the terms are dependent but uncorrelated")
 }
 
+#' .tlbandt_regret
+#'
+#' Part of the tlbandt_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param Y1 See Usage.
+#' @param Y0 See Usage.
+#' @return A list with \code{cumulative_regret}, \code{mean_regret}, \code{note}.
+#' @export
 .tlbandt_regret <- function(Y, Y1, Y0) {
   y <- as.numeric(Y)
   a <- as.numeric(Y1)
@@ -169,6 +211,13 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
        note = "the price of keeping the design randomised")
 }
 
+#' .tlbandt_cheatsheet
+#'
+#' Part of the tlbandt_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlbandt_cheatsheet <- function() {
   "tlbandt: contexts arrive, we choose a RANDOMISED action with a probability we design from the past, and only the reward of the action taken is revealed. The goal is INFERENCE, not cumulative reward -- and those pull apart, because an algorithm that converges to one arm stops generating data about the other. So keep g in [delta, 1-delta]: it costs regret and buys positivity. The data are dependent, but the influence terms are a MARTINGALE difference sequence precisely because the randomisation probability is known and past-measurable."
 }

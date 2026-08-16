@@ -12,6 +12,15 @@
 # the same objective rather than from the optimiser's own internal
 # approximation.
 
+#' .morie_aft_log_dens_surv
+#'
+#' Part of the aft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param family See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .morie_aft_log_dens_surv <- function(z, family) {
   if (identical(family, "weibull")) {
     zc <- pmax(pmin(z, 500), -500)
@@ -37,6 +46,16 @@
 # Inverse of the central-difference Hessian. The optimiser's own
 # inverse-Hessian is a secant approximation accumulated along whatever
 # path it walked, so it is not reproducible across solvers; this is.
+#' Inverse of the central-difference Hessian. The optimiser\'s own
+#'
+#' inverse-Hessian is a secant approximation accumulated along whatever
+#' path it walked, so it is not reproducible across solvers; this is.
+#'
+#' @param fn See Usage.
+#' @param theta See Usage.
+#' @param rel Defaults to \code{1e-05}.
+#' @return The value of \code{tryCatch}.
+#' @export
 .morie_numeric_cov <- function(fn, theta, rel = 1e-5) {
   k <- length(theta)
   h <- rel * pmax(abs(theta), 1)
@@ -62,6 +81,20 @@
   tryCatch(solve(H), error = function(err) NULL)
 }
 
+#' .morie_aft_fit
+#'
+#' Part of the aft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param family Defaults to \code{"weibull"}.
+#' @param max_iter Defaults to \code{500L}.
+#' @param tol Defaults to \code{1e-06}.
+#' @param add_intercept Defaults to \code{TRUE}.
+#' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
+#' @export
 .morie_aft_fit <- function(t, e, X, family = "weibull", max_iter = 500L,
                            tol = 1e-6, add_intercept = TRUE) {
   n <- length(t)
@@ -96,6 +129,20 @@
   )
 }
 
+#' .morie_aft_result
+#'
+#' Part of the aft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param fit See Usage.
+#' @param family See Usage.
+#' @param title See Usage.
+#' @param method See Usage.
+#' @return A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma}, \code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events}, \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X}, \code{method}.
+#' @export
 .morie_aft_result <- function(t, e, X, fit, family, title, method) {
   p <- length(fit$beta)
   se <- if (is.null(fit$cov)) {
@@ -113,6 +160,20 @@
   )
 }
 
+#' .morie_aft_common
+#'
+#' Part of the aft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param family See Usage.
+#' @param title See Usage.
+#' @param method See Usage.
+#' @param ... Passed through.
+#' @return The value of \code{.morie_aft_result}.
+#' @export
 .morie_aft_common <- function(time, event, X, family, title, method, ...) {
   d <- .morie_cox_prepare(time, event, X)
   if (any(d$t <= 0)) {

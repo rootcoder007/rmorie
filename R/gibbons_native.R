@@ -135,6 +135,14 @@ morie_runs_updown <- function(n = NULL, x = NULL) {
   out
 }
 
+#' .morie_permutations
+#'
+#' Part of the gibbons_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_permutations <- function(n) {
   if (n == 1L) {
     return(matrix(1L, 1L, 1L))

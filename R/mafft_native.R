@@ -34,6 +34,14 @@
 .MAFFT_MATRICES <- c("normalized", "all_positive")
 .MAFFT_SIX_GROUPS <- c("AGPST", "C", "DENQ", "FWY", "HKR", "ILMV")
 
+#' .mafft_norm
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vals See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .mafft_norm <- function(vals) {
   n <- length(vals)
   mu <- sum(vals) / n
@@ -52,6 +60,15 @@
 names(.MAFFT_VHAT) <- .MAFFT_AA
 names(.MAFFT_PHAT) <- .MAFFT_AA
 
+#' .mafft_clean
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seqs See Usage.
+#' @param seq_type Defaults to \code{NULL}.
+#' @return A list with \code{seqs}, \code{type}.
+#' @export
 .mafft_clean <- function(seqs, seq_type = NULL) {
   out <- c()
   for (s in seqs) {
@@ -121,19 +138,53 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
   list(vol = vol, pol = pol)
 }
 
+#' .mafft_fft_size
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param m See Usage.
+#' @return The value of \code{size}, as built in the body.
+#' @export
 .mafft_fft_size <- function(n, m) {
   size <- 1L
   while (size < n + m) size <- size * 2L
   size
 }
 
+#' .mafft_fft
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{fft}.
+#' @export
 .mafft_fft <- function(x) {
   fft(x)
 }
+#' .mafft_ifft
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .mafft_ifft <- function(x) {
   fft(x, inverse = TRUE) / length(x)
 }
 
+#' .mafft_xcorr_fft
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{out}, \code{size}.
+#' @export
 .mafft_xcorr_fft <- function(a, b) {
   n <- length(a); m <- length(b)
   size <- .mafft_fft_size(n, m)
@@ -144,6 +195,16 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
   list(out = Re(back), size = size)
 }
 
+#' .mafft_xcorr_direct
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param size See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .mafft_xcorr_direct <- function(a, b, size) {
   out <- rep(0.0, size)
   n <- length(a); m <- length(b)
@@ -198,6 +259,16 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
   list(lags = lags, c = total, size = size)
 }
 
+#' .mafft_peaks
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lags See Usage.
+#' @param c See Usage.
+#' @param n_peaks See Usage.
+#' @return The value of \code{[}.
+#' @export
 .mafft_peaks <- function(lags, c, n_peaks) {
   ord <- order(-c, seq_along(c))
   lags[ord[seq_len(min(as.integer(n_peaks), length(lags)))]]
@@ -228,6 +299,13 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
   41, 46, 114, 89, 164, 40, 15, 15, 514, 61, 84, 20, 17, 850, 22, 164, 45, 41,
   1766, 69, 55, 127, 99, 58, 226, 276, 22, 3938, 1261, 58, 559, 189, 84, 219, 526, 27, 42)
 
+#' .mafft_jtt_exchangeability
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A list with \code{S}, \code{f}.
+#' @export
 .mafft_jtt_exchangeability <- function() {
   f <- .MAFFT_JTT_FREQ
   S <- matrix(0, 20L, 20L)
@@ -296,6 +374,15 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
        rate = -sum(f * diag(Q)))
 }
 
+#' .mafft_default_raw_matrix
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq_type See Usage.
+#' @param which Defaults to \code{"jtt200"}.
+#' @return A list with \code{M}, \code{freqs}.
+#' @export
 .mafft_default_raw_matrix <- function(seq_type, which = "jtt200") {
   if (seq_type == "nt") {
     M <- list()
@@ -315,6 +402,16 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
   list(M = j$matrix, freqs = j$freqs)
 }
 
+#' .mafft_get
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mafft_get <- function(M, a, b) {
   v <- M[[paste(a, b, sep = "|")]]
   if (is.null(v)) 0.0 else v
@@ -376,6 +473,20 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
        average1 = avg1, average2 = avg2, freqs = freqs, mode = mode)
 }
 
+#' .mafft_site_score
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param ga See Usage.
+#' @param gb See Usage.
+#' @param wa See Usage.
+#' @param wb See Usage.
+#' @param i See Usage.
+#' @param j See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 .mafft_site_score <- function(M, ga, gb, wa, wb, i, j) {
   tot <- 0.0
   for (wn in seq_along(wa)) {
@@ -390,6 +501,15 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
   tot
 }
 
+#' .mafft_gap_profiles
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param group See Usage.
+#' @param weights See Usage.
+#' @return A list with \code{gs}, \code{ge}.
+#' @export
 .mafft_gap_profiles <- function(group, weights) {
   L <- nchar(group[1L])
   gs <- rep(0.0, L + 1L); ge <- rep(0.0, L + 1L)
@@ -407,6 +527,19 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
   list(gs = gs, ge = ge)
 }
 
+#' .mafft_nw
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g1 See Usage.
+#' @param g2 See Usage.
+#' @param M See Usage.
+#' @param w1 See Usage.
+#' @param w2 See Usage.
+#' @param s_op See Usage.
+#' @return A list with \code{out1}, \code{out2}.
+#' @export
 .mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
   n <- nchar(g1[1L])
   m <- nchar(g2[1L])
@@ -660,6 +793,14 @@ arrange_segments <- function(segments) {
   rev(chain)
 }
 
+#' .mafft_anchors_from
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param chain See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .mafft_anchors_from <- function(chain) {
   out <- list()
   for (s in chain) {
@@ -768,6 +909,14 @@ guide_tree <- function(D) {
                                   members = m$members))
 }
 
+#' .mafft_weights
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param k See Usage.
+#' @return The value of \code{rep}.
+#' @export
 .mafft_weights <- function(k) rep(1.0 / k, k)
 
 #' progressive_align
@@ -874,6 +1023,14 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
   total
 }
 
+#' .mafft_degap
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param group See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .mafft_degap <- function(group) {
   if (length(group) == 0L) return(group)
   L <- nchar(group[1L])
@@ -1023,6 +1180,13 @@ mafft_alignment <- function(sequences, method = "FFT-NS-2", seq_type = NULL,
 
 mafftalignment <- mafft_alignment
 
+#' .mafft_cheatsheet
+#'
+#' Part of the mafft_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .mafft_cheatsheet <- function() {
   paste("mafft: MAFFT (Katoh et al. 2002). Residues become Grantham ",
         "volume/polarity vectors, c(k) = c_v(k) + c_p(k) is got by ",

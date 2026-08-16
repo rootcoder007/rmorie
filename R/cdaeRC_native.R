@@ -13,6 +13,15 @@
 .cdae_losses <- c("square", "log", "hinge", "cross_entropy")
 .cdae_eps <- 1e-12
 
+#' .cdae_act
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @param x See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .cdae_act <- function(name, x) {
   if (name == "sigmoid") {
     if (x >= -700) return(1.0 / (1.0 + exp(-x)))
@@ -24,6 +33,15 @@
                paste(.cdae_acts, collapse = ", "), name))
 }
 
+#' .cdae_dact
+#'
+#' Part of the cdaeRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .cdae_dact <- function(name, y) {
   if (name == "sigmoid") return(y * (1.0 - y))
   if (name == "identity") return(1.0)

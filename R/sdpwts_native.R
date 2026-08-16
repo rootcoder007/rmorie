@@ -158,6 +158,18 @@ sdpwts_central_path_gap <- function(t, m) {
 }
 
 # Private: the centring objective t * c'x - log det F(x)
+#' Private: the centring objective t * c\'x - log det F(x)
+#'
+#' Part of the sdpwts_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param c_vec See Usage.
+#' @param F0 See Usage.
+#' @param Fs See Usage.
+#' @param t See Usage.
+#' @return A numeric value.
+#' @export
 .sdpwts_objective <- function(x, c_vec, F0, Fs, t) {
   b <- sdpwts_barrier(x, F0, Fs)
   if (!b$feasible) return(Inf)
@@ -166,6 +178,20 @@ sdpwts_central_path_gap <- function(t, m) {
 
 # Private: centring by gradient descent with a feasibility-aware
 # backtracking line search
+#' Private: centring by gradient descent with a feasibility-aware
+#'
+#' backtracking line search
+#'
+#' @param x0 See Usage.
+#' @param c_vec See Usage.
+#' @param F0 See Usage.
+#' @param Fs See Usage.
+#' @param t See Usage.
+#' @param iters Defaults to \code{200}.
+#' @param tol Defaults to \code{1e-12}.
+#' @param h Defaults to \code{1e-06}.
+#' @return A list with \code{x}, \code{value}, \code{iterations}.
+#' @export
 .sdpwts_centre <- function(x0, c_vec, F0, Fs, t, iters = 200,
                            tol = 1e-12, h = 1e-6) {
   x <- as.numeric(x0)

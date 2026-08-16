@@ -474,6 +474,15 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   )
 }
 
+#' .morie_descendants
+#'
+#' Part of the abundance_text_voting_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param A See Usage.
+#' @param start See Usage.
+#' @return The value of \code{seen}, as built in the body.
+#' @export
 .morie_descendants <- function(A, start) {
   seen <- integer(0)
   stack <- start
@@ -488,6 +497,16 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   seen
 }
 
+#' .morie_reachable
+#'
+#' Part of the abundance_text_voting_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param A See Usage.
+#' @param x See Usage.
+#' @param Z See Usage.
+#' @return The value of \code{setdiff}.
+#' @export
 .morie_reachable <- function(A, x, Z) {
   n <- nrow(A)
   anc <- integer(0)

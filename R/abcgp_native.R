@@ -27,6 +27,14 @@
   list(degree = 5L, coeff = 2L,  m_init = c(1L, 1L, 5L, 5L, 17L))
 )
 
+#' .abcgp.lse
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param values See Usage.
+#' @return A numeric value.
+#' @export
 .abcgp.lse <- function(values) {
   vals <- values[!is.na(values)]
   if (length(vals) == 0L) return(-Inf)
@@ -35,6 +43,15 @@
   a + log(sum(exp(vals - a)))
 }
 
+#' .abcgp.sobol_dir
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dim See Usage.
+#' @param bits See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .abcgp.sobol_dir <- function(dim, bits) {
   out <- vector("list", dim)
   for (d in seq_len(dim)) {
@@ -59,6 +76,16 @@
   out
 }
 
+#' .abcgp.sobol_sequence
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param dim See Usage.
+#' @param skip Defaults to \code{0}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .abcgp.sobol_sequence <- function(n, dim, skip = 0) {
   n <- as.integer(n); dim <- as.integer(dim)
   if (n < 1L) stop("sobol_sequence: n must be at least 1")
@@ -78,11 +105,29 @@
   out
 }
 
+#' .abcgp.summarise
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param summary See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .abcgp.summarise <- function(x, summary) {
   v <- if (is.null(summary)) x else summary(x)
   as.numeric(v)
 }
 
+#' .abcgp.chol
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param jitter Defaults to \code{1e-12}.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .abcgp.chol <- function(a, jitter = 1e-12) {
   n <- length(a)
   L <- matrix(0, n, n)
@@ -96,6 +141,15 @@
   L
 }
 
+#' .abcgp.chol_solve
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .abcgp.chol_solve <- function(L, b) {
   n <- length(b); y <- numeric(n)
   for (i in seq_len(n))
@@ -106,6 +160,16 @@
   x
 }
 
+#' .abcgp.mvn_logpdf
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param mu See Usage.
+#' @param cov See Usage.
+#' @return A numeric value.
+#' @export
 .abcgp.mvn_logpdf <- function(y, mu, cov) {
   n <- length(y)
   L <- .abcgp.chol(cov)
@@ -116,6 +180,17 @@
   -0.5 * (quad + logdet + n * log(2 * pi))
 }
 
+#' .abcgp.corr
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param lengthscale See Usage.
+#' @param kernel See Usage.
+#' @return A numeric value.
+#' @export
 .abcgp.corr <- function(a, b, lengthscale, kernel) {
   r2 <- sum(((a - b) / lengthscale) ^ 2)
   if (kernel == "sqexp") return(exp(-0.5 * r2))
@@ -124,9 +199,26 @@
   s <- sqrt(5) * r; (1 + s + s * s / 3) * exp(-s)
 }
 
+#' .abcgp.basis
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .abcgp.basis <- function(theta)
   c(1, as.numeric(theta), as.numeric(theta) ^ 2)
 
+#' .abcgp.as_nugget
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nugget See Usage.
+#' @param n See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 .abcgp.as_nugget <- function(nugget, n) {
   if (is.null(nugget)) return(rep(1e-8, n))
   v <- as.numeric(nugget)
@@ -135,6 +227,18 @@
   pmax(v, 1e-12)
 }
 
+#' .abcgp.profile_nll
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ls See Usage.
+#' @param nug See Usage.
+#' @param kernel See Usage.
+#' @return A numeric value.
+#' @export
 .abcgp.profile_nll <- function(X, y, ls, nug, kernel) {
   n <- nrow(X)
   A <- matrix(0, n, n)
@@ -161,6 +265,17 @@
   0.5 * (logdet + (n - q) * log(s2))
 }
 
+#' .abcgp.mle_lengthscale
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param nugget See Usage.
+#' @param kernel See Usage.
+#' @return The value of \code{ls}, as built in the body.
+#' @export
 .abcgp.mle_lengthscale <- function(X, y, nugget, kernel) {
   n <- nrow(X); p <- ncol(X)
   nug <- .abcgp.as_nugget(nugget, n)
@@ -180,6 +295,19 @@
   ls
 }
 
+#' .abcgp.gp_fit
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param design See Usage.
+#' @param values See Usage.
+#' @param nugget Defaults to \code{NULL}.
+#' @param lengthscale Defaults to \code{NULL}.
+#' @param kernel Defaults to \code{"sqexp"}.
+#' @param tau2 Defaults to \code{NULL}.
+#' @return A list with \code{design}, \code{values}, \code{beta}, \code{tau2}, \code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r}, \code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
+#' @export
 .abcgp.gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
                           kernel = "sqexp", tau2 = NULL) {
   kernels <- c("sqexp", "matern32", "matern52")
@@ -219,6 +347,15 @@
        n = n, q = q, dim = p)
 }
 
+#' .abcgp.gp_predict
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param theta See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .abcgp.gp_predict <- function(fit, theta) {
   t <- as.numeric(theta)
   if (length(t) != fit$dim)
@@ -237,11 +374,33 @@
   c(mean, sqrt(var))
 }
 
+#' .abcgp.implausible
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param theta See Usage.
+#' @param threshold Defaults to \code{10}.
+#' @param n_sd Defaults to \code{3}.
+#' @return A logical value.
+#' @export
 .abcgp.implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
   pr <- .abcgp.gp_predict(fit, theta)
   pr[1] + n_sd * pr[2] < max(fit$values) - threshold
 }
 
+#' .abcgp.design_from_prior
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param prior_ppf See Usage.
+#' @param dim Defaults to \code{NULL}.
+#' @param skip Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .abcgp.design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1) {
   if (is.numeric(prior_ppf) || is.matrix(prior_ppf)) {
     prior_ppf <- list(prior_ppf)  # treat as (lo, hi) below
@@ -265,6 +424,22 @@
   out
 }
 
+#' .abcgp.gabc_log_likelihood
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sim See Usage.
+#' @param obs See Usage.
+#' @param theta See Usage.
+#' @param n_sim Defaults to \code{50}.
+#' @param epsilon Defaults to \code{1}.
+#' @param summary Defaults to \code{NULL}.
+#' @param kernel Defaults to \code{"gaussian"}.
+#' @param seed Defaults to \code{0}.
+#' @param bootstrap Defaults to \code{25}.
+#' @return A vector, from \code{c}.
+#' @export
 .abcgp.gabc_log_likelihood <- function(sim, obs, theta, n_sim = 50, epsilon = 1,
                                       summary = NULL, kernel = "gaussian",
                                       seed = 0, bootstrap = 25) {
@@ -300,6 +475,17 @@
   c(log_lik, var)
 }
 
+#' .abcgp.synthetic_log_likelihood
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param draws See Usage.
+#' @param obs See Usage.
+#' @param epsilon Defaults to \code{0}.
+#' @param summary Defaults to \code{NULL}.
+#' @return A list with \code{log_lik}, \code{mu}, \code{cov}.
+#' @export
 .abcgp.synthetic_log_likelihood <- function(draws, obs, epsilon = 0,
                                             summary = NULL) {
   rows <- lapply(draws, function(x) .abcgp.summarise(x, summary))
@@ -317,6 +503,26 @@
   list(log_lik = .abcgp.mvn_logpdf(y, mu, cov), mu = mu, cov = cov)
 }
 
+#' .abcgp.history_match
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sim See Usage.
+#' @param obs See Usage.
+#' @param prior_ppf See Usage.
+#' @param n_waves Defaults to \code{3}.
+#' @param n_design Defaults to \code{32}.
+#' @param n_sim Defaults to \code{50}.
+#' @param epsilon Defaults to \code{1}.
+#' @param summary Defaults to \code{NULL}.
+#' @param threshold Defaults to \code{10}.
+#' @param n_sd Defaults to \code{3}.
+#' @param kernel Defaults to \code{"sqexp"}.
+#' @param accept_kernel Defaults to \code{"gaussian"}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{fit}, \code{waves}.
+#' @export
 .abcgp.history_match <- function(sim, obs, prior_ppf, n_waves = 3,
                                  n_design = 32, n_sim = 50, epsilon = 1,
                                  summary = NULL, threshold = 10, n_sd = 3,
@@ -357,10 +563,34 @@
   list(fit = fit, waves = waves)
 }
 
+#' .abcgp.alpha_terms
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param log_prior See Usage.
+#' @param theta See Usage.
+#' @param theta_p See Usage.
+#' @param ll See Usage.
+#' @param ll_p See Usage.
+#' @param log_q See Usage.
+#' @param log_q_p See Usage.
+#' @return A numeric value.
+#' @export
 .abcgp.alpha_terms <- function(log_prior, theta, theta_p, ll, ll_p,
                                log_q, log_q_p)
   min(0, (log_prior(theta_p) + ll_p + log_q_p) - (log_prior(theta) + ll + log_q))
 
+#' .abcgp.expected_error
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param alphas See Usage.
+#' @param tau See Usage.
+#' @param n_grid Defaults to \code{101}.
+#' @return A numeric value.
+#' @export
 .abcgp.expected_error <- function(alphas, tau, n_grid = 101) {
   M <- length(alphas); total <- 0
   for (i in seq_len(n_grid)) {
@@ -372,11 +602,30 @@
   total / n_grid
 }
 
+#' .abcgp.median
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .abcgp.median <- function(v) {
   s <- sort(v); n <- length(s)
   if (n %% 2L == 1L) s[(n + 1L) %/% 2L] else 0.5 * (s[n %/% 2L] + s[n %/% 2L + 1L])
 }
 
+#' .abcgp.draw_mean
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param cov See Usage.
+#' @param S See Usage.
+#' @param e See Usage.
+#' @return A numeric value.
+#' @export
 .abcgp.draw_mean <- function(mu, cov, S, e) {
   n <- length(mu)
   scaled <- cov / S
@@ -385,12 +634,50 @@
   as.numeric(mu) + L %*% z
 }
 
+#' .abcgp.synthetic_abc
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sim See Usage.
+#' @param obs See Usage.
+#' @param log_prior See Usage.
+#' @param theta0 See Usage.
+#' @param n_iter Defaults to \code{200}.
+#' @param n_sim Defaults to \code{20}.
+#' @param epsilon Defaults to \code{0}.
+#' @param proposal_sd Defaults to \code{0.5}.
+#' @param summary Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{.abcgp.mw_sampler}.
+#' @export
 .abcgp.synthetic_abc <- function(sim, obs, log_prior, theta0, n_iter = 200,
                                  n_sim = 20, epsilon = 0, proposal_sd = 0.5,
                                  summary = NULL, seed = 0)
   .abcgp.mw_sampler(sim, obs, log_prior, theta0, n_iter, n_sim, epsilon,
                     proposal_sd, summary, seed, FALSE, NULL, 0, 0)
 
+#' .abcgp.gps_abc
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sim See Usage.
+#' @param obs See Usage.
+#' @param log_prior See Usage.
+#' @param theta0 See Usage.
+#' @param n_iter Defaults to \code{200}.
+#' @param n_sim Defaults to \code{10}.
+#' @param epsilon Defaults to \code{0}.
+#' @param proposal_sd Defaults to \code{0.5}.
+#' @param summary Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0}.
+#' @param xi Defaults to \code{0.05}.
+#' @param delta_s Defaults to \code{10}.
+#' @param n_alpha Defaults to \code{64}.
+#' @param max_sim Defaults to \code{400}.
+#' @return The value of \code{.abcgp.mw_sampler}.
+#' @export
 .abcgp.gps_abc <- function(sim, obs, log_prior, theta0, n_iter = 200,
                            n_sim = 10, epsilon = 0, proposal_sd = 0.5,
                            summary = NULL, seed = 0, xi = 0.05, delta_s = 10,
@@ -399,6 +686,28 @@
                     proposal_sd, summary, seed, TRUE, xi, delta_s, n_alpha,
                     max_sim)
 
+#' .abcgp.mw_sampler
+#'
+#' Part of the abcgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sim See Usage.
+#' @param obs See Usage.
+#' @param log_prior See Usage.
+#' @param theta0 See Usage.
+#' @param n_iter See Usage.
+#' @param n_sim See Usage.
+#' @param epsilon See Usage.
+#' @param proposal_sd See Usage.
+#' @param summary See Usage.
+#' @param seed See Usage.
+#' @param adaptive See Usage.
+#' @param xi See Usage.
+#' @param delta_s See Usage.
+#' @param n_alpha See Usage.
+#' @param max_sim Defaults to \code{NULL}.
+#' @return A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations}, \code{unresolved_steps}.
+#' @export
 .abcgp.mw_sampler <- function(sim, obs, log_prior, theta0, n_iter, n_sim,
                              epsilon, proposal_sd, summary, seed,
                              adaptive, xi, delta_s, n_alpha, max_sim = NULL) {

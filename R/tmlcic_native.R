@@ -45,16 +45,43 @@
 .tmlcic_DESIGNS <- c("unmatched", "matched", "clustered")
 .tmlcic_EPS <- 1e-9
 
+#' .tmlcic_logit
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tmlcic_logit <- function(p) {
   q <- min(max(as.numeric(p), .tmlcic_EPS), 1.0 - .tmlcic_EPS)
   log(q / (1.0 - q))
 }
 
+#' Vectorised sigmoid (.s03sigmoid is scalar-only)
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .tmlcic_sig <- function(z) {
   # vectorised sigmoid (.s03sigmoid is scalar-only)
   vapply(z, .s03sigmoid, numeric(1))
 }
 
+#' Weighted logistic IRLS with a ridge penalty
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-10}.
+#' @param obs_weights Defaults to \code{NULL}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .tmlcic_wlogit <- function(X, y, ridge=1e-10, obs_weights=NULL) {
   # Weighted logistic IRLS with a ridge penalty.
   X <- as.matrix(X)
@@ -78,6 +105,17 @@
   beta
 }
 
+#' One-parameter logistic fluctuation: solve
+#'
+#' sum w H (y - sigmoid(off + eps H)) = 0 for eps on the given rows.
+#'
+#' @param y See Usage.
+#' @param off See Usage.
+#' @param H See Usage.
+#' @param rows Defaults to \code{NULL}.
+#' @param obs_weights Defaults to \code{NULL}.
+#' @return The value of \code{eps}, as built in the body.
+#' @export
 .tmlcic_fluct <- function(y, off, H, rows=NULL, obs_weights=NULL) {
   # One-parameter logistic fluctuation: solve
   # sum w H (y - sigmoid(off + eps H)) = 0 for eps on the given rows.
@@ -127,6 +165,15 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   lib
 }
 
+#' .tmlcic_row_fun
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param cand See Usage.
+#' @return The value of \code{function}.
+#' @export
 .tmlcic_row_fun <- function(W, cand) {
   cols1 <- cand$cols + 1L
   interact <- isTRUE(cand$interact)
@@ -139,6 +186,19 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   }
 }
 
+#' Logit[Qbar(A,W)] on the candidate\'s terms, fitted on rows
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param cand See Usage.
+#' @param rows See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{q}, \code{b}.
+#' @export
 .tmlcic_fit_working_model <- function(y, A, W, cand, rows, ridge) {
   # logit[Qbar(A,W)] on the candidate's terms, fitted on rows.
   rowf <- .tmlcic_row_fun(W, cand)
@@ -148,6 +208,18 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   list(q=q, b=b)
 }
 
+#' A candidate for the exposure mechanism, P(A = 1 | W)
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param cand See Usage.
+#' @param rows See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{g1}, \code{b}.
+#' @export
 .tmlcic_fit_g <- function(A, W, cand, rows, ridge) {
   # A candidate for the exposure mechanism, P(A = 1 | W).
   cols1 <- cand$cols + 1L
@@ -244,6 +316,15 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
   out
 }
 
+#' Group row indices by pair (or cluster) label, in first-seen order
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cluster See Usage.
+#' @param n See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .tmlcic_pairs_from <- function(cluster, n) {
   # Group row indices by pair (or cluster) label, in first-seen order.
   if (is.null(cluster)) {
@@ -310,6 +391,20 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
   list(var=v / m, info=list(unit="pair", m=m))
 }
 
+#' Eq. (13.5)/(13.6) unmatched, (13.8)/(13.9) matched
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param y See Usage.
+#' @param qa See Usage.
+#' @param groups See Usage.
+#' @param design See Usage.
+#' @param target See Usage.
+#' @param rows See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmlcic_loss <- function(D, y, qa, groups, design, target, rows) {
   # Eq. (13.5)/(13.6) unmatched, (13.8)/(13.9) matched.
   if (design == "unmatched") {
@@ -341,6 +436,17 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
   if (m > 0L) tot / m else Inf
 }
 
+#' Folds that respect the pairing: a pair is never split
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param groups See Usage.
+#' @param n_folds See Usage.
+#' @param design See Usage.
+#' @param n See Usage.
+#' @return The value of \code{Filter}.
+#' @export
 .tmlcic_cv_folds <- function(groups, n_folds, design, n) {
   # Folds that respect the pairing: a pair is never split.
   if (design == "unmatched") {
@@ -620,6 +726,16 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
   list(alpha=alpha, groups=grp)
 }
 
+#' Pull a cluster-level variable out of per-individual rows
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param groups See Usage.
+#' @param name See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tmlcic_one_per_cluster <- function(v, groups, name) {
   # Pull a cluster-level variable out of per-individual rows.
   out <- numeric(length(groups))
@@ -635,6 +751,21 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
   out
 }
 
+#' .tmlcic_hier_cluster_arm
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param yc See Usage.
+#' @param Aj See Usage.
+#' @param Zj See Usage.
+#' @param groups See Usage.
+#' @param a See Usage.
+#' @param trim See Usage.
+#' @param ridge See Usage.
+#' @param known_g See Usage.
+#' @return A list with \code{psi}, \code{D}, \code{info}.
+#' @export
 .tmlcic_hier_cluster_arm <- function(yc, Aj, Zj, groups, a, trim, ridge,
                                      known_g) {
   # TMLE I, eq. (4)-(9): fit, target and average at cluster level.
@@ -667,6 +798,22 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
                                min_g=min(ga)))
 }
 
+#' .tmlcic_hier_individual_arm
+#'
+#' Part of the tmlcic_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param Ai See Usage.
+#' @param Zi See Usage.
+#' @param alpha See Usage.
+#' @param groups See Usage.
+#' @param a See Usage.
+#' @param trim See Usage.
+#' @param ridge See Usage.
+#' @param known_g See Usage.
+#' @return A list with \code{psi}, \code{D}, \code{info}.
+#' @export
 .tmlcic_hier_individual_arm <- function(y, Ai, Zi, alpha, groups, a, trim,
                                         ridge, known_g) {
   # TMLE II, eq. (14)-(21): individual clever covariate, targeted

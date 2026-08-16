@@ -20,9 +20,26 @@
 # within-cluster shuffle consuming the shared Philox stream in the
 # same order, and the same (count + 0) / (R + 1) p-value.
 
+#' .mor_ed_dist
+#'
+#' Part of the e_div_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @param alpha See Usage.
+#' @return A numeric value.
+#' @export
 .mor_ed_dist <- function(z, alpha) as.matrix(dist(z))^alpha
 
 # P[i + 1, j + 1] = sum of D[1..i, 1..j]
+#' P[i + 1, j + 1] = sum of D[1..i, 1..j]
+#'
+#' Part of the e_div_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @return The value of \code{P}, as built in the body.
+#' @export
 .mor_ed_prefix <- function(D) {
   n <- nrow(D)
   P <- matrix(0, n + 1L, n + 1L)
@@ -32,10 +49,33 @@
 }
 
 # sum of D over the 0-based half-open block [a1, b1) x [a2, b2)
+#' Sum of D over the 0-based half-open block [a1, b1) x [a2, b2)
+#'
+#' Part of the e_div_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @param a1 See Usage.
+#' @param b1 See Usage.
+#' @param a2 See Usage.
+#' @param b2 See Usage.
+#' @return A numeric value.
+#' @export
 .mor_ed_block <- function(P, a1, b1, a2, b2)
   P[b1 + 1L, b2 + 1L] - P[a1 + 1L, b2 + 1L] - P[b1 + 1L, a2 + 1L] +
     P[a1 + 1L, a2 + 1L]
 
+#' .mor_ed_qhat
+#'
+#' Part of the e_div_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @param a See Usage.
+#' @param tau See Usage.
+#' @param kappa See Usage.
+#' @return A numeric value.
+#' @export
 .mor_ed_qhat <- function(P, a, tau, kappa) {
   n1 <- tau - a
   m1 <- kappa - tau
@@ -48,6 +88,17 @@
   (n1 * m1 / (n1 + m1)) * e
 }
 
+#' .mor_ed_best_split
+#'
+#' Part of the e_div_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param P See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param min_size See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .mor_ed_best_split <- function(P, a, b, min_size) {
   bestq <- -Inf; bt <- -1L; bk <- -1L
   lo <- a + min_size; hi <- b - min_size
@@ -63,6 +114,16 @@
 
 # Fisher-Yates within each cluster, consuming us[pos ...] in the same
 # order as the Python arm.
+#' Fisher-Yates within each cluster, consuming us[pos ...] in the same
+#'
+#' order as the Python arm.
+#'
+#' @param order See Usage.
+#' @param clusters See Usage.
+#' @param us See Usage.
+#' @param pos See Usage.
+#' @return A list with \code{order}, \code{pos}.
+#' @export
 .mor_ed_shuffle <- function(order, clusters, us, pos) {
   for (ci in seq_len(nrow(clusters))) {
     a <- clusters[ci, 1L]; b <- clusters[ci, 2L]

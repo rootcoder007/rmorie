@@ -20,6 +20,20 @@
 # Statistical Society: Series A 162(1), 121-129,
 # doi:10.1111/1467-985X.00125.
 
+#' .morie_likemc_incidence
+#'
+#' Part of the likemc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param S0 See Usage.
+#' @param I0 See Usage.
+#' @param N See Usage.
+#' @param n_steps See Usage.
+#' @param dt Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_likemc_incidence <- function(beta, gamma, S0, I0, N, n_steps,
                                     dt = 1) {
   if (beta <= 0 || gamma <= 0) {
@@ -39,6 +53,15 @@
   out
 }
 
+#' .morie_likemc_poisll
+#'
+#' Part of the likemc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param observed See Usage.
+#' @param expected See Usage.
+#' @return A numeric value.
+#' @export
 .morie_likemc_poisll <- function(observed, expected) {
   y <- as.numeric(observed)
   lam <- as.numeric(expected)
@@ -51,6 +74,16 @@
   sum(y * log(L) - L - lgamma(y + 1))
 }
 
+#' .morie_likemc_lnorm
+#'
+#' Part of the likemc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param mu See Usage.
+#' @param sigma See Usage.
+#' @return A numeric value.
+#' @export
 .morie_likemc_lnorm <- function(x, mu, sigma) {
   if (x <= 0) return(-Inf)
   z <- (log(x) - mu) / sigma

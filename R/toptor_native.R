@@ -15,6 +15,15 @@
 .COMMON_TYPES <- c("C", "N", "O", "S", "P", "F", "Cl", "Br", "I", "Si",
                    "B", "Se", "As")
 
+#' .neighbours
+#'
+#' Part of the toptor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_atoms See Usage.
+#' @param bonds See Usage.
+#' @return The value of \code{adj}, as built in the body.
+#' @export
 .neighbours <- function(n_atoms, bonds) {
   adj <- vector("list", n_atoms)
   for (i in seq_len(n_atoms)) adj[[i]] <- integer(0)
@@ -29,6 +38,15 @@
   adj
 }
 
+#' .pi_electrons
+#'
+#' Part of the toptor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_atoms See Usage.
+#' @param bonds See Usage.
+#' @return The value of \code{as.integer}.
+#' @export
 .pi_electrons <- function(n_atoms, bonds) {
   npi <- rep(0, n_atoms)
   for (b in bonds) {
@@ -105,6 +123,17 @@ torsion_similarity <- function(t1, t2) {
   2 * length(intersect(s1, s2)) / (length(s1) + length(s2))
 }
 
+#' .trend_vector
+#'
+#' Part of the toptor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param torsion_sets See Usage.
+#' @param activities See Usage.
+#' @param permutations See Usage.
+#' @param seed See Usage.
+#' @return A list with \code{vector}, \code{descriptors}, \code{length}, \code{null_mean}, \code{null_sd}, \code{z}.
+#' @export
 .trend_vector <- function(torsion_sets, activities, permutations, seed) {
   sets <- lapply(torsion_sets, function(t) {
     if (is.list(t)) names(t) else unique(as.character(t))

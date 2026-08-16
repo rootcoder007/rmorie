@@ -1,5 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+#' .crp_norm_logpdf
+#'
+#' Part of the crpcol implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @param mu See Usage.
+#' @param var See Usage.
+#' @return A numeric value.
+#' @export
 .crp_norm_logpdf <- function(x, mu, var) {
   -0.5 * (log(2 * pi * var) + (x - mu)^2 / var)
 }
@@ -9,6 +19,22 @@
 # n_k f(y_i | y_k) and opens a new one with weight alpha f(y_i).  The
 # sweep order and the uniform draws are fixed, so the two language arms
 # visit identical states.
+#' Neal\'s algorithm 3 for a conjugate normal DP mixture.  theta is
+#'
+#' integrated out, so a customer joins table k with weight n_k f(y_i |
+#' y_k) and opens a new one with weight alpha f(y_i).  The sweep order
+#' and the uniform draws are fixed, so the two language arms visit
+#' identical states.
+#'
+#' @param y See Usage.
+#' @param alpha See Usage.
+#' @param n_iter See Usage.
+#' @param mu0 See Usage.
+#' @param tau2 See Usage.
+#' @param sigma2 See Usage.
+#' @param seed See Usage.
+#' @return A list with \code{z}, \code{counts}, \code{sums}.
+#' @export
 .crp_collapsed_sweep <- function(y, alpha, n_iter, mu0, tau2, sigma2, seed) {
   n <- length(y)
   z <- rep(1L, n)

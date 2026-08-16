@@ -84,6 +84,18 @@ dual_objective <- function(alpha, y, K) {
   sum(a) - 0.5 * q
 }
 
+#' .svmopt_bounds
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param i See Usage.
+#' @param j See Usage.
+#' @param a See Usage.
+#' @param y See Usage.
+#' @param C See Usage.
+#' @return A list with \code{L}, \code{H}.
+#' @export
 .svmopt_bounds <- function(i, j, a, y, C) {
   if (y[i] != y[j]) {
     L <- max(0.0, a[j] - a[i])
@@ -244,6 +256,13 @@ smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
                      "the stopping criterion"))
 }
 
+#' .svmopt_cheatsheet
+#'
+#' Part of the svmopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .svmopt_cheatsheet <- function() {
   paste0("svmopt: the SVM DUAL is where the kernel enters and where ",
          "the structure is exploitable -- max sum(a) - 0.5 a'Qa ",

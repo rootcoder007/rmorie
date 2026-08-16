@@ -20,6 +20,14 @@
 # Collision scan: b2gpts.R and all ten exported names were free in both
 # R trees and in _lazy_map.json at the time of writing.
 
+#' .b2se
+#'
+#' Part of the b2gpts implementation; see the file header for the source
+#' it follows.
+#'
+#' @param spec Defaults to \code{NULL}.
+#' @return The value of \code{function}.
+#' @export
 .b2se <- function(spec = NULL) {
   if (is.function(spec)) return(function(a, b) as.numeric(spec(a, b)))
   pars <- if (is.null(spec)) c(1, 1) else as.numeric(spec)
@@ -30,6 +38,16 @@
   function(a, b) sf * sf * exp(-sum((as.numeric(a) - as.numeric(b))^2) / (2 * ell * ell))
 }
 
+#' .b2gram
+#'
+#' Part of the b2gpts implementation; see the file header for the source
+#' it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param kf See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .b2gram <- function(A, B, kf) {
   out <- matrix(0, nrow(A), nrow(B))
   for (i in seq_len(nrow(A))) {

@@ -191,6 +191,13 @@ moment_check <- function(replicates, target_mean, target_se,
        note = "consistency for the first two moments is the stated design goal")
 }
 
+#' .tlboot_cheatsheet
+#'
+#' Part of the tlboot_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlboot_cheatsheet <- function() {
   paste("tlboot: the ordinary bootstrap FAILS for TMLE. Refitting ",
         "a super learner on every resample makes the nuisance fits ",

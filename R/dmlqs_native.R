@@ -26,9 +26,26 @@
 # some looser tolerance. No external packages. Private helpers are
 # prefixed .dmlqs_ to keep R/ shared-environment namespacing clean.
 
+#' .dmlqs_edge_key
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param w See Usage.
+#' @return A character value.
+#' @export
 .dmlqs_edge_key <- function(v, w) paste(as.character(v), as.character(w),
                                        sep = ",")
 
+#' Coerce an adjacency mapping to a list keyed by character atom id,
+#'
+#' each value a sorted unique integer vector of neighbours (with v
+#' itself excluded -- mirrors Python `set(adj[v]) - {v}`).
+#'
+#' @param adj See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .dmlqs_norm_adj <- function(adj) {
   # Coerce an adjacency mapping to a list keyed by character atom id,
   # each value a sorted unique integer vector of neighbours (with v
@@ -63,6 +80,14 @@
   stop("dmlqs: adj must be a named list, named integer vector, or matrix")
 }
 
+#' .dmlqs_directed_edges
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .dmlqs_directed_edges <- function(adj) {
   A <- .dmlqs_norm_adj(adj)
   out <- list()
@@ -77,6 +102,16 @@
   out
 }
 
+#' .dmlqs_count_totters
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param adj See Usage.
+#' @param length Defaults to \code{3L}.
+#' @param exclude_reverse Defaults to \code{TRUE}.
+#' @return A list with \code{paths}, \code{totters}, \code{fraction}, \code{excluded_reverse}.
+#' @export
 .dmlqs_count_totters <- function(adj, length = 3L, exclude_reverse = TRUE) {
   L <- as.integer(length)
   if (L < 3L) {
@@ -122,6 +157,15 @@
        fraction = frac, excluded_reverse = excl)
 }
 
+#' .dmlqs_act
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param activation See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .dmlqs_act <- function(x, activation) {
   act <- as.character(activation)
   if (act == "relu") return(pmax(0, as.numeric(x)))
@@ -129,6 +173,19 @@
   stop(sprintf("dmlqs: activation must be relu or tanh, got %s", act))
 }
 
+#' .dmlqs_message_pass
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h0 See Usage.
+#' @param adj See Usage.
+#' @param T Defaults to \code{3L}.
+#' @param W Defaults to \code{NULL}.
+#' @param activation Defaults to \code{"relu"}.
+#' @param exclude_reverse Defaults to \code{TRUE}.
+#' @return A list with \code{edge_states}, \code{T}, \code{excluded_reverse}, \code{note}.
+#' @export
 .dmlqs_message_pass <- function(h0, adj, T = 3L, W = NULL,
                                 activation = "relu",
                                 exclude_reverse = TRUE) {
@@ -210,6 +267,16 @@
        note = "the exclusion of the reverse edge IS the anti-tottering mechanism")
 }
 
+#' .dmlqs_atom_readout
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edge_states See Usage.
+#' @param adj See Usage.
+#' @param n See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .dmlqs_atom_readout <- function(edge_states, adj, n) {
   N <- as.integer(n)
   A <- .dmlqs_norm_adj(adj)
@@ -235,6 +302,15 @@
   out
 }
 
+#' .dmlqs_concat_descriptors
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param learned See Usage.
+#' @param descriptors See Usage.
+#' @return A list with \code{estimate}, \code{representation}, \code{learned_dim}, \code{descriptor_dim}, \code{method}.
+#' @export
 .dmlqs_concat_descriptors <- function(learned, descriptors) {
   a <- as.numeric(learned)
   b <- as.numeric(descriptors)
@@ -245,6 +321,13 @@
        method = "D-MPNN representation with computed features; Yang et al. (2019)")
 }
 
+#' .dmlqs_cheatsheet
+#'
+#' Part of the dmlqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .dmlqs_cheatsheet <- function() {
   paste("dmlqs: pass messages along DIRECTED BONDS, not atoms. The ",
         "stated reason is TOTTERS -- paths v1 v2 ... vn with ",

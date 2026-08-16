@@ -19,6 +19,15 @@
 
 .smatch_EPS <- 1e-12
 
+#' Symmetric positive-definite solve via base R\'s chol
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .smatch_cholsolve <- function(M, b) {
   # Symmetric positive-definite solve via base R's chol.
   L <- chol(M)
@@ -26,6 +35,19 @@
   as.numeric(backsolve(L, y))
 }
 
+#' .smatch_build_intervals
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param start See Usage.
+#' @param end See Usage.
+#' @param exposure See Usage.
+#' @param events See Usage.
+#' @param rp See Usage.
+#' @param ab See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .smatch_build_intervals <- function(start, end, exposure, events, rp,
                                     ab) {
   # Python's smatch imports build_intervals from sccsno rather than defining
@@ -146,8 +168,24 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
        identical_to = "the conditional multinomial fit of sccsno")
 }
 
+#' .smatch_qnorm
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{qnorm}.
+#' @export
 .smatch_qnorm <- function(p) qnorm(p)
 
+#' .smatch_pnorm
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{pnorm}.
+#' @export
 .smatch_pnorm <- function(z) pnorm(z)
 
 #' morie_smatch_sample_size
@@ -246,6 +284,13 @@ morie_smatch_relative_efficiency <- function(r, log_ri) {
                                "high (Sec. 7.5)"))
 }
 
+#' .smatch_cheatsheet
+#'
+#' Part of the smatch_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .smatch_cheatsheet <- function() {
   paste0("smatch: the case series fitted as a POISSON model -- ",
          "counts n_ijk, offset log(e_ijk), factors for age, ",

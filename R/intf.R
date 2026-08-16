@@ -33,6 +33,15 @@ Intf <- function(coef, basis, t = NULL) {
        method = "Ramsay-Silverman (2005) linearity of the integral over a basis expansion, trapezoid over the whole grid")
 }
 
+#' .intf_trapz
+#'
+#' Part of the intf implementation; see the file header for the source
+#' it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .intf_trapz <- function(t, v) {
   s <- 0
   n <- length(t)

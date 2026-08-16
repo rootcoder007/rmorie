@@ -103,6 +103,18 @@
 .tsbF_METHODS <- c("tsb", "croston", "sba")
 .tsbF_INITS <- c("global", "heuristic", "known")
 
+#' .tsbF_init
+#'
+#' Part of the tsbF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param init Defaults to \code{"global"}.
+#' @param z0 Defaults to \code{NULL}.
+#' @param x0 Defaults to \code{NULL}.
+#' @param p0 Defaults to \code{NULL}.
+#' @return A list with \code{first}, \code{Z}, \code{X}, \code{P}.
+#' @export
 .tsbF_init <- function(y, init = "global", z0 = NULL, x0 = NULL, p0 = NULL) {
   yv <- as.numeric(y)
   pos <- yv[yv > 0]
@@ -158,6 +170,15 @@
               P = length(pos) / as.numeric(length(yv))))
 }
 
+#' .tsbF_burn
+#'
+#' Part of the tsbF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param burn_in See Usage.
+#' @return The value of \code{[}.
+#' @export
 .tsbF_burn <- function(seq, burn_in) {
   b <- as.integer(burn_in)
   if (b < 0) {

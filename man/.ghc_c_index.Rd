@@ -1,0 +1,21 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.ghc_c_index}
+\alias{.ghc_c_index}
+\title{Internal: Harrell\\\'s concordance index in base R, mirroring}
+\usage{
+.ghc_c_index(times, events, risks)
+}
+\arguments{
+\item{times}{See Usage.}
+\item{events}{See Usage.}
+\item{risks}{See Usage.}
+}
+\description{
+morie.fn.survrsf.c_index. Counts over comparable pairs (i, j) where the earlier observation is an event; non-events at the shorter time do not contribute because their true event time is unknown.
+}
+\value{
+A numeric value.
+}
+\keyword{internal}

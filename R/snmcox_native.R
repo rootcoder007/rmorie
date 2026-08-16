@@ -53,6 +53,17 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 }
 
 # fitted E[A | L]: logistic when the treatment is binary, least squares else
+#' Fitted E[A | L]: logistic when the treatment is binary, least squares
+#' else
+#'
+#' Part of the snmcox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param L See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{e}, \code{b}, \code{kind}.
+#' @export
 .snmcox_treat_model <- function(A, L, ridge = 1e-8) {
   n <- length(A)
   Z <- if (is.null(L)) matrix(1.0, n, 1L) else cbind(1.0, as.matrix(L))
@@ -67,6 +78,18 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
   }
 }
 
+#' .snmcox_logit_irls
+#'
+#' Part of the snmcox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param iters Defaults to \code{60L}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param tol Defaults to \code{1e-13}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .snmcox_logit_irls <- function(X, y, iters = 60L, ridge = 1e-8, tol = 1e-13) {
   p <- ncol(X)
   beta <- numeric(p)

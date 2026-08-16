@@ -70,11 +70,27 @@
                         "feature_combination")
 
 # Private helpers (prefixed to avoid R/ environment collisions)
+#' Private helpers (prefixed to avoid R/ environment collisions)
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .hybRC_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(unlist(x))
 }
 
+#' .hybRC_mat
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .hybRC_mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   if (is.list(x) && !is.data.frame(x)) {
@@ -346,6 +362,13 @@ meta_level <- function(model_builder, consumer, data) {
   )
 }
 
+#' .hybRC_cheatsheet
+#'
+#' Part of the hybRC_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .hybRC_cheatsheet <- function() {
   paste("hybRC: collaborative filtering cannot recommend what",
         "nobody rated; content-based filtering cannot surprise",

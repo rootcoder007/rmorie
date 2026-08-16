@@ -231,6 +231,15 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
                        "joint loss sum_t w_t L_t; Montesinos Lopez et al. (2022)"))
 }
 
+#' .dnnact
+#'
+#' Part of the dnnmt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param name See Usage.
+#' @param z See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .dnnact <- function(name, z) {
   if (identical(name, "linear")) return(z)
   if (identical(name, "relu")) return(if (z > 0) z else 0)
@@ -240,6 +249,16 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 }
 
 # Derivative of the activation at z, given its value g.
+#' Derivative of the activation at z, given its value g
+#'
+#' Part of the dnnmt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param name See Usage.
+#' @param z See Usage.
+#' @param g See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .dnndact <- function(name, z, g) {
   if (identical(name, "linear")) return(1)
   if (identical(name, "relu")) return(if (z > 0) 1 else 0)
@@ -249,6 +268,16 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 }
 
 # The p.493 median/quantile recipe.
+#' The p.493 median/quantile recipe
+#'
+#' Part of the dnnmt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param Yc See Usage.
+#' @param nt See Usage.
+#' @param n See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .dnnheadweights <- function(Yc, nt, n) {
   d <- numeric(nt)
   for (t in seq_len(nt)) {
@@ -269,6 +298,13 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 
 # One LCG step, s <- (1103515245 s + 12345) mod 2^31, split so that no
 # intermediate product exceeds 2^53 and R doubles stay exact.
+#' One LCG step, s <- (1103515245 s + 12345) mod 2^31, split so that no
+#'
+#' intermediate product exceeds 2^53 and R doubles stay exact.
+#'
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .dnnlcg <- function(s) {
   hi <- floor(s / 65536)
   lo <- s %% 65536

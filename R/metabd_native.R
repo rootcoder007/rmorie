@@ -20,6 +20,14 @@
 .METABD_EPS <- 1e-12
 .METABD_BASES <- strsplit("ACGT", "")[[1L]]
 
+#' .metabd_mat
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .metabd_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -29,6 +37,14 @@
     lapply(X, function(r) as.numeric(unlist(r)))
   }
 }
+#' .metabd_vec
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .metabd_vec <- function(v) as.numeric(unlist(v))
 
 #' tetranucleotide_frequency
@@ -230,6 +246,13 @@ purity_completeness <- function(bins, truth) {
 metabat2 <- bin_contigs
 metagenome_binning <- bin_contigs
 
+#' .metabd_cheatsheet
+#'
+#' Part of the metabd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .metabd_cheatsheet <- function() {
   paste("metabd: bin contigs into draft genomes from TWO signals ",
         "-- tetranucleotide composition (available always, noisy ",

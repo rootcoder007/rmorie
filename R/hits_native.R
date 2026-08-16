@@ -10,6 +10,14 @@
 # updated first within each sweep, then hubs from the NEW authority
 # vector), and the same lowest-index tie-break for the top hub.
 
+#' .mor_hits_unit
+#'
+#' Part of the hits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_hits_unit <- function(v) {
   s <- sqrt(sum(v * v))
   if (s == 0) v else v / s

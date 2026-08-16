@@ -22,6 +22,16 @@
 #                 identical clusters give the estimator's known floor
 #                 -1/(n0 - 1)
 
+#' Fisher-Yates driven by the package\'s Philox stream, swapping
+#'
+#' downward from n-1 and consuming one uniform per step, so the Python
+#' mirror reproduces it exactly.
+#'
+#' @param n See Usage.
+#' @param seed Defaults to \code{0}.
+#' @param stream Defaults to \code{0}.
+#' @return The value of \code{idx}, as built in the body.
+#' @export
 .morie_k05_permutation <- function(n, seed = 0, stream = 0) {
   # Fisher-Yates driven by the package's Philox stream, swapping
   # downward from n-1 and consuming one uniform per step, so the
@@ -39,6 +49,14 @@
   idx
 }
 
+#' .morie_k05_hits
+#'
+#' Part of the k05_tranche1 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hits See Usage.
+#' @return A list with \code{h}, \code{t}, \code{n}.
+#' @export
 .morie_k05_hits <- function(hits) {
   h <- as.numeric(hits)
   if (length(h) < 2L) stop("need at least 2 observations in the hit sequence.", call. = FALSE)
@@ -46,6 +64,16 @@
   list(h = h, t = length(h), n = sum(h == 1))
 }
 
+#' .morie_k05_lr_uc
+#'
+#' Part of the k05_tranche1 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param t See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .morie_k05_lr_uc <- function(p, t, n) {
   if (!(p > 0 && p < 1)) stop("alpha must lie strictly between 0 and 1.", call. = FALSE)
   phat <- n / t
@@ -83,6 +111,14 @@ morie_kupiec_var_test <- function(hits, alpha = 0.05) {
        method = "Kupiec (1995) unconditional coverage LR test")
 }
 
+#' .morie_k05_lr_ind
+#'
+#' Part of the k05_tranche1 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @return A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11}, \code{pi01}, \code{pi11}, \code{pi}.
+#' @export
 .morie_k05_lr_ind <- function(h) {
   a <- h[-length(h)]; b <- h[-1]
   n00 <- sum(a == 0 & b == 0); n01 <- sum(a == 0 & b == 1)
@@ -160,6 +196,14 @@ morie_var_backtest <- function(hits, alpha = 0.05) {
 # mu_{4/3}^{-3} for tripower quarticity
 .MORIE_K05_MU43I3 <- (gamma(0.5) / (2^(2 / 3) * gamma(7 / 6)))^3
 
+#' .morie_k05_bns_one
+#'
+#' Part of the k05_tranche1 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @return A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.
+#' @export
 .morie_k05_bns_one <- function(r) {
   n <- length(r)
   a <- abs(r)
@@ -225,6 +269,17 @@ morie_bns_jump_test <- function(r_intraday, block_index = NULL) {
        method = "BNS (2006) linear jump test per block; statistic is the max z")
 }
 
+#' .morie_k05_tk
+#'
+#' Part of the k05_tranche1 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param n See Usage.
+#' @param xbar See Usage.
+#' @param sigma See Usage.
+#' @return A list with \code{tk}, \code{s}.
+#' @export
 .morie_k05_tk <- function(x, n, xbar, sigma) {
   s <- cumsum((x[seq_len(n - 1L)] - xbar) / sigma)
   k <- seq_len(n - 1L)
@@ -278,6 +333,16 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
        method = "Alexandersson (1986) SNHT, Monte Carlo p-value")
 }
 
+#' .morie_k05_acvf
+#'
+#' Part of the k05_tranche1 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param n See Usage.
+#' @param max_lag See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_k05_acvf <- function(v, n, max_lag) {
   d <- v - mean(v)
   vapply(0:max_lag, function(k) sum(d[seq.int(k + 1L, n)] * d[seq_len(n - k)]) / n, numeric(1))
@@ -315,6 +380,15 @@ morie_sample_acf <- function(y, max_lag = 20) {
        method = "Sample autocorrelation function (divide-by-n convention)")
 }
 
+#' R is indexed from 1 for lag 0, so r[k + 1] is lag k
+#'
+#' Part of the k05_tranche1 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @param max_lag See Usage.
+#' @return The value of \code{phi}, as built in the body.
+#' @export
 .morie_k05_durbin_levinson <- function(r, max_lag) {
   # r is indexed from 1 for lag 0, so r[k + 1] is lag k.
   phi <- numeric(max_lag)

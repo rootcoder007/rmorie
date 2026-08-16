@@ -67,6 +67,17 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
        method = sprintf("Sobel (1982) delta-method test of a*b (%s variance)", variant))
 }
 
+#' .morie_k05_item_params
+#'
+#' Part of the k05_tranche2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c Defaults to \code{NULL}.
+#' @param upper Defaults to \code{NULL}.
+#' @return A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.
+#' @export
 .morie_k05_item_params <- function(a, b, c = NULL, upper = NULL) {
   bb <- as.numeric(b); n <- length(bb)
   if (n == 0L) stop("need at least one item.", call. = FALSE)
@@ -86,6 +97,19 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
   list(a = aa, b = bb, c = cc, u = uu, n = n)
 }
 
+#' Branch on the sign so exp never overflows for large |z|
+#'
+#' Part of the k05_tranche2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param u See Usage.
+#' @param D Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .morie_k05_prob <- function(theta, a, b, c, u, D = 1) {
   # branch on the sign so exp never overflows for large |z|
   z <- D * a * (theta - b)
@@ -93,6 +117,20 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
   c + (u - c) * p2
 }
 
+#' General two-category Fisher information I = (P\')^2/(PQ);
+#' substituting
+#'
+#' the 4PL P and using P-c = (u-c)P*, u-P = (u-c)Q* gives this form,
+#' which collapses to D^2 a^2 P Q when c = 0, u = 1.
+#'
+#' @param theta See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param u See Usage.
+#' @param D Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .morie_k05_info <- function(theta, a, b, c, u, D = 1) {
   # general two-category Fisher information I = (P')^2/(PQ); substituting
   # the 4PL P and using P-c = (u-c)P*, u-P = (u-c)Q* gives this form,
@@ -288,6 +326,17 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
        method = "Tarone-Ware (1977) family of weighted log-rank tests")
 }
 
+#' .morie_k05_schoenfeld
+#'
+#' Part of the k05_tranche2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @return A list with \code{times}, \code{res}, \code{var}.
+#' @export
 .morie_k05_schoenfeld <- function(t, e, X, beta) {
   n <- length(t); p <- ncol(X)
   idx <- order(t)
@@ -309,6 +358,16 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
   list(times = times, res = res, var = var)
 }
 
+#' .morie_k05_gtime
+#'
+#' Part of the k05_tranche2 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param times See Usage.
+#' @param e_times See Usage.
+#' @param how See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_k05_gtime <- function(times, e_times, how) {
   if (how == "identity") return(times)
   if (how == "log") return(log(times))

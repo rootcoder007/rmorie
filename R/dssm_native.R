@@ -64,6 +64,14 @@
 # Vectorise a "vec" coercion: an R numeric/integer, a list of numbers,
 # or anything that as.numeric() can flatten. Mirrors k.vec() on the
 # Python side which is forgiving about list/array inputs.
+#' Vectorise a "vec" coercion: an R numeric/integer, a list of numbers,
+#'
+#' or anything that as.numeric() can flatten. Mirrors k.vec() on the
+#' Python side which is forgiving about list/array inputs.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .dssm_to_vec <- function(x) {
   if (is.null(x)) return(numeric(0L))
   if (is.numeric(x)) return(as.numeric(x))

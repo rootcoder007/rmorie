@@ -93,6 +93,16 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
   list(v = v, hit = hit)
 }
 
+#' .gram_slot
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param gram_index See Usage.
+#' @param hash_buckets See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gram_slot <- function(g, gram_index, hash_buckets) {
   if (!is.null(hash_buckets))
     return(.fnv1a(g) %% as.integer(hash_buckets))
@@ -100,6 +110,14 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
   if (is.null(gi)) NULL else gi
 }
 
+#' .fnv1a
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return The value of \code{as.integer}.
+#' @export
 .fnv1a <- function(s) {
   s <- charToRaw(as.character(s))
   h <- 2166136261
@@ -110,6 +128,14 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
   as.integer(h)
 }
 
+#' .as_docs
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param corpus See Usage.
+#' @return The value of \code{docs}, as built in the body.
+#' @export
 .as_docs <- function(corpus) {
   if (is.null(corpus))
     stop("fasttext: corpus must not be None")
@@ -282,6 +308,13 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
                       sep = " "))
 }
 
+#' .fastxt_cheatsheet
+#'
+#' Part of the fastxt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .fastxt_cheatsheet <- function() {
   paste("fastxt: word = bag of character n-grams with < >",
         "boundaries plus the whole word; s(w,c) = sum_g z_g . v_c",

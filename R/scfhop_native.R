@@ -122,6 +122,13 @@ morie_scfhop_types <- function(smiles) {
   out
 }
 
+#' .scfhop_pairs
+#'
+#' Part of the scfhop_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .scfhop_pairs <- function() {
   out <- list()
   for (a in seq_along(.scfhop_types))

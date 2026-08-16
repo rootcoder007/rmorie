@@ -53,6 +53,17 @@ morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
   out
 }
 
+#' .morie_rappor_bloom
+#'
+#' Part of the rappor_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param value See Usage.
+#' @param k See Usage.
+#' @param h See Usage.
+#' @param cohort Defaults to \code{0}.
+#' @return A vector, from \code{sort}.
+#' @export
 .morie_rappor_bloom <- function(value, k, h, cohort = 0) {
   s <- as.character(value)
   chars <- utf8ToInt(s)

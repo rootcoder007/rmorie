@@ -4,6 +4,15 @@
 # Python morie.fn.btarsv exactly (same Levinson-Durbin fit, same
 # SplitMix64 residual-index stream).
 
+#' .btarsv_yw
+#'
+#' Part of the btarsv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xc See Usage.
+#' @param p See Usage.
+#' @return A list with \code{phi}, \code{v}.
+#' @export
 .btarsv_yw <- function(xc, p) {
   n <- length(xc)
   g <- sapply(0:p, function(k) sum(xc[1:(n - k)] * xc[(1 + k):n]) / n)

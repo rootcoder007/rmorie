@@ -27,6 +27,15 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
     ((1 / s$d[positive]) * t(s$u[, positive, drop = FALSE]))
 }
 
+#' .morie_pinv
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param rcond Defaults to \code{1e-15}.
+#' @return The value of \code{%*%}.
+#' @export
 .morie_pinv <- function(M, rcond = 1e-15) {
   s <- svd(M)
   cutoff <- rcond * max(s$d)
@@ -48,14 +57,38 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 #' @keywords internal
 NULL
 
+#' .t1_vec
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .t1_vec <- function(x) as.numeric(unlist(x))
 
+#' .t1_mat
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .t1_mat <- function(X) {
   if (is.matrix(X)) return(matrix(as.numeric(X), nrow = nrow(X)))
   if (is.data.frame(X)) return(as.matrix(X))
   matrix(as.numeric(X), ncol = 1L)
 }
 
+#' .t1_eigsym
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return A list with \code{values}, \code{vectors}.
+#' @export
 .t1_eigsym <- function(A) {
   e <- eigen((A + t(A)) / 2, symmetric = TRUE)
   V <- e$vectors
@@ -66,6 +99,14 @@ NULL
   list(values = e$values, vectors = V)
 }
 
+#' Minimum-norm least squares via the SVD, matching numpy.linalg.lstsq
+#'
+#' and so the Python arm\'s _lstsq.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
+#' @export
 .t1_lstsq <- function(X, y) {
   # Minimum-norm least squares via the SVD, matching numpy.linalg.lstsq
   # and so the Python arm's _lstsq.
@@ -97,16 +138,49 @@ NULL
 }
 
 
+#' .t1_hatdiag
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param xtxinv See Usage.
+#' @return The value of \code{rowSums}.
+#' @export
 .t1_hatdiag <- function(X, xtxinv) {
   X <- as.matrix(X)
   rowSums((X %*% xtxinv) * X)
 }
 
+#' .t1_cbind1
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{cbind}.
+#' @export
 .t1_cbind1 <- function(X) cbind(1, as.matrix(X))
 
+#' .t1_sd
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{stats::sd}.
+#' @export
 .t1_sd <- function(x) stats::sd(as.numeric(x))
 
 # Lehmer minstd -- identical stream to the Python arm.
+#' Lehmer minstd -- identical stream to the Python arm
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed Defaults to \code{1}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .t1_lcg <- function(seed = 1) {
   s <- as.numeric(seed) %% 2147483647
   if (s <= 0) s <- 1
@@ -121,6 +195,14 @@ NULL
   e
 }
 
+#' .t1_result
+#'
+#' Part of the tail1_core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .t1_result <- function(...) {
   out <- list(...)
   class(out) <- c("morie_rich_result", "list")

@@ -60,6 +60,15 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 
 # ---- Cronbach (1951) alpha ------------------------------------------
 
+#' .t2_alpha_on
+#'
+#' Part of the tail2_t02 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param cols See Usage.
+#' @return A numeric value.
+#' @export
 .t2_alpha_on <- function(X, cols) {
   k <- length(cols)
   if (k < 2L) stop("alpha needs at least two items")
@@ -78,6 +87,14 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
   (k / (k - 1)) * (1 - sv / tv)
 }
 
+#' .t2_table
+#'
+#' Part of the tail2_t02 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .t2_table <- function(X) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -139,6 +156,14 @@ CttAlphaMax <- function(X) {
                   .85877, .66993, .87344, .72014, .88906, .75743)
 .T2_SN_SMALL <- c(0.743, 1.851, 0.954, 1.351, 0.993, 1.198, 1.005, 1.131)
 
+#' .t2_qn_finite_c
+#'
+#' Part of the tail2_t02 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .t2_qn_finite_c <- function(n) {
   inner <- if (n %% 2L)  1.60188 + (-2.1284 - 5.172 / n) / n
            else          3.67561 + ( 1.9654 + (6.987 - 77 / n) / n) / n
@@ -232,6 +257,14 @@ BrayCurt <- function(x, y, close = TRUE) {
 
 # ---- Csiszar (1967) f-divergence ------------------------------------
 
+#' .t2_named_f
+#'
+#' Part of the tail2_t02 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param key See Usage.
+#' @return The value of \code{switch}.
+#' @export
 .t2_named_f <- function(key) switch(key,
   kl        = function(t) if (t > 0) t * log(t) else 0,
   rkl       = function(t) if (t > 0) -log(t) else Inf,
@@ -242,6 +275,14 @@ BrayCurt <- function(x, y, close = TRUE) {
                           (t + 1) * log((t + 1) / 2),
   stop(sprintf("unknown generator '%s'", key)))
 
+#' .t2_named_inf
+#'
+#' Part of the tail2_t02 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param key See Usage.
+#' @return The value of \code{switch}.
+#' @export
 .t2_named_inf <- function(key) switch(key,
   kl = Inf, rkl = 0, tv = 0.5, chi2 = Inf, hellinger = 1, js = log(2),
   stop(sprintf("unknown generator '%s'", key)))

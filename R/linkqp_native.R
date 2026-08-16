@@ -6,6 +6,17 @@
 # stats::optim Nelder-Mead, argmin agreement bound 1e-6 under the
 # criterion-parity plateau doctrine).
 
+#' .linkqp_p3pl
+#'
+#' Part of the linkqp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @return A numeric value.
+#' @export
 .linkqp_p3pl <- function(theta, a, b, c) {
   e <- exp(a * (theta - b))
   c + (1 - c) * e / (1 + e)

@@ -20,6 +20,14 @@
 .NRFRAD_EPS <- 1e-12
 
 # S3 helper: ensure a numeric vector (k.vec).
+#' S3 helper: ensure a numeric vector (k.vec)
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .nrfrad_vec <- function(p) {
   if (is.numeric(p) && !is.list(p)) {
     as.numeric(p)
@@ -31,6 +39,14 @@
 }
 
 # S3 helper: ensure a numeric matrix of row vectors (k.mat).
+#' S3 helper: ensure a numeric matrix of row vectors (k.mat)
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param colour See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .nrfrad_mat <- function(colour) {
   if (is.matrix(colour)) {
     storage.mode(colour) <- "double"
@@ -217,6 +233,13 @@ density_is_view_independent <- function(model, point, directions,
   )
 }
 
+#' .nrfrad_cheatsheet
+#'
+#' Part of the nrfrad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .nrfrad_cheatsheet <- function() {
   paste("nrfrad: a scene IS a continuous 5D function -- position plus ",
         "viewing direction to density and radiance -- stored in a ",

@@ -13,6 +13,18 @@
 # the same MLE but not to the same last digits, which is why it is not
 # reused here.
 
+#' .morie_bounds_logit
+#'
+#' Part of the bounds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-10}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{beta}, \code{fitted}, \code{separated}.
+#' @export
 .morie_bounds_logit <- function(X, y, max_iter = 100L, tol = 1e-10,
                                 ridge = 1e-8) {
   beta <- rep(0, ncol(X))

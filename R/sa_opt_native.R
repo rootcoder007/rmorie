@@ -35,6 +35,18 @@
 
 .sa_opt_schedules <- c("geometric", "linear", "logarithmic")
 
+#' .sa_opt_temperature
+#'
+#' Part of the sa_opt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param schedule See Usage.
+#' @param T0 See Usage.
+#' @param k See Usage.
+#' @param n_iter See Usage.
+#' @param alpha See Usage.
+#' @return A numeric value.
+#' @export
 .sa_opt_temperature <- function(schedule, T0, k, n_iter, alpha) {
   if (schedule == "geometric") {
     return(T0 * (alpha ^ k))
@@ -165,6 +177,13 @@ morie_sa_opt <- function(fun, x0, step=1.0, T0=1.0, n_iter=1000,
   result
 }
 
+#' .sa_opt_cheatsheet
+#'
+#' Part of the sa_opt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .sa_opt_cheatsheet <- function() {
   paste("sa_opt: Metropolis accept exp(-dE/T) for dE>0, always for dE<=0;",
         "schedules geometric T0 a^k, linear, logarithmic T0/ln(k+e);",

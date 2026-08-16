@@ -17,6 +17,16 @@
 
 .OCRWIT_EPS <- 1e-12
 
+#' .ocrwit_clip_int
+#'
+#' Part of the ocrwit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .ocrwit_clip_int <- function(v, lo, hi) {
   v <- as.integer(round(v))
   if (v < lo) return(as.integer(lo))
@@ -208,6 +218,13 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
   )
 }
 
+#' .ocrwit_cheatsheet
+#'
+#' Part of the ocrwit_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .ocrwit_cheatsheet <- function() {
   paste("ocrwit: document models pre-trained text and image with ",
         "DIFFERENT objectives, giving two spaces and a bridge. ",

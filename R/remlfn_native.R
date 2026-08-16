@@ -7,6 +7,15 @@
 # information when block sizes are unequal. Biometrika 58(3), 545-554
 # (the original REML).
 
+#' Group y values by group label, preserving first-appearance order
+#'
+#' Part of the remlfn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param group See Usage.
+#' @return A list with \code{keys}, \code{gs}.
+#' @export
 .remlfn_groups <- function(y, group) {
   # Group y values by group label, preserving first-appearance order.
   if (length(y) != length(group)) {
@@ -25,6 +34,15 @@
   list(keys = keys, gs = gs[keys])
 }
 
+#' .remlfn_ranova
+#'
+#' Part of the remlfn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param group See Usage.
+#' @return A list with \code{msa}, \code{mse}, \code{sigma2_a_raw}, \code{sigma2_a}, \code{balanced}, \code{dfa}, \code{dfe}, \code{ssa}, \code{sse}.
+#' @export
 .remlfn_ranova <- function(y, group) {
   grp <- .remlfn_groups(y, group)
   keys <- grp$keys
@@ -66,6 +84,17 @@
   )
 }
 
+#' .remlfn_loglik
+#'
+#' Part of the remlfn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gs See Usage.
+#' @param ns See Usage.
+#' @param s2a See Usage.
+#' @param s2e See Usage.
+#' @return A list with \code{loglik}, \code{mu}.
+#' @export
 .remlfn_loglik <- function(gs, ns, s2a, s2e) {
   logdetV <- 0
   xvx <- 0
@@ -87,6 +116,18 @@
   list(loglik = -0.5 * (logdetV + log(xvx) + ypy), mu = mu)
 }
 
+#' .remlfn_nelder_mead
+#'
+#' Part of the remlfn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fn See Usage.
+#' @param x0 See Usage.
+#' @param xatol Defaults to \code{1e-10}.
+#' @param fatol Defaults to \code{1e-10}.
+#' @param maxiter Defaults to \code{5000}.
+#' @return A list with \code{x}, \code{fun}, \code{nit}, \code{success}.
+#' @export
 .remlfn_nelder_mead <- function(fn, x0, xatol = 1e-10, fatol = 1e-10, maxiter = 5000) {
   n <- length(x0)
   alpha <- 1
@@ -347,6 +388,13 @@ morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto"
 morie_reml_variance_components <- morie_remlfn
 
 # Cheatsheet
+#' Cheatsheet
+#'
+#' Part of the remlfn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .remlfn_cheatsheet <- function() {
   return("remlfn: REML for the one-way random model; balanced data REML solutions = ANOVA estimators (Searle Sec. 4.8)")
 }

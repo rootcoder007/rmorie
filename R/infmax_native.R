@@ -61,6 +61,14 @@
 
 .infmax_EPS <- 1e-12
 
+#' Sp(z) = log(1 + exp(z)), branch-stable so neither branch overflows
+#'
+#' Part of the infmax_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .infmax_softplus <- function(z) {
   # sp(z) = log(1 + exp(z)), branch-stable so neither branch overflows.
   v <- as.numeric(z)
@@ -71,6 +79,15 @@
   out
 }
 
+#' I_JSD = E_P[-sp(-T)] - E_{PxP~}[sp(T)]
+#'
+#' Part of the infmax_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param joint_scores See Usage.
+#' @param marginal_scores See Usage.
+#' @return A list with \code{estimate}, \code{positive}, \code{negative}, \code{bounded}, \code{note}.
+#' @export
 .infmax_jsd_estimator <- function(joint_scores, marginal_scores) {
   # I_JSD = E_P[-sp(-T)] - E_{PxP~}[sp(T)].
   J <- as.numeric(unlist(joint_scores))
@@ -87,6 +104,15 @@
        note     = "each term is bounded by construction")
 }
 
+#' I_DV = E_P[T] - log E_{PxP~}[exp(T)]
+#'
+#' Part of the infmax_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param joint_scores See Usage.
+#' @param marginal_scores See Usage.
+#' @return A list with \code{estimate}, \code{log_sum_exp}, \code{negative_variance}, \code{bounded}, \code{note}.
+#' @export
 .infmax_dv_estimator <- function(joint_scores, marginal_scores) {
   # I_DV = E_P[T] - log E_{PxP~}[exp(T)].
   J <- as.numeric(unlist(joint_scores))
@@ -105,6 +131,17 @@
        note              = "unbounded above; large scores dominate the log-mean-exp")
 }
 
+#' .infmax_global_objective
+#'
+#' Part of the infmax_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param global_features See Usage.
+#' @param feature_maps See Usage.
+#' @param critic See Usage.
+#' @param estimator Defaults to \code{"jsd"}.
+#' @return A list with \code{objective}, \code{estimator}, \code{n_positive}, \code{n_negative}, \code{note}.
+#' @export
 .infmax_global_objective <- function(global_features, feature_maps, critic,
                                      estimator = "jsd") {
   # MI between the global vector and the WHOLE feature map.
@@ -142,6 +179,17 @@
        note       = "one score per image; the spatial structure is discarded")
 }
 
+#' .infmax_local_objective
+#'
+#' Part of the infmax_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param global_features See Usage.
+#' @param feature_maps See Usage.
+#' @param critic See Usage.
+#' @param estimator Defaults to \code{"jsd"}.
+#' @return A list with \code{estimate}, \code{objective}, \code{estimator}, \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.
+#' @export
 .infmax_local_objective <- function(global_features, feature_maps, critic,
                                     estimator = "jsd") {
   # MI between the global vector and EACH LOCAL patch, averaged.
@@ -191,6 +239,13 @@
        note        = "the global feature predicts ALL locations at once, with ONE estimator and no autoregression")
 }
 
+#' .infmax_cheatsheet
+#'
+#' Part of the infmax_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .infmax_cheatsheet <- function() {
   paste0("infmax: maximising MI between input and representation is ",
          "a bad objective alone -- MI is invariant to invertible ",

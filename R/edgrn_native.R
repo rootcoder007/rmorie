@@ -5,10 +5,36 @@
 
 .edgrn_eps <- 1e-12
 
+#' .edgrn_lgamma
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{lgamma}.
+#' @export
 .edgrn_lgamma <- function(x) lgamma(x)
 
+#' .edgrn_vec
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .edgrn_vec <- function(x) as.numeric(x)
 
+#' .edgrn_nb_logpmf
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param mu See Usage.
+#' @param phi See Usage.
+#' @return The value of \code{(}.
+#' @export
 .edgrn_nb_logpmf <- function(y, mu, phi) {
   if (phi <= .edgrn_eps) {
     return (-mu + y * log(max(mu, .edgrn_eps)) - .edgrn_lgamma(y + 1))
@@ -18,6 +44,17 @@
    + r * log(r / (r + mu)) + y * log(mu / (r + mu)))
 }
 
+#' .edgrn_betainc
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @param iters Defaults to \code{300}.
+#' @return A numeric value.
+#' @export
 .edgrn_betainc <- function(a, b, x, iters = 300) {
   if (x <= 0) return(0)
   if (x >= 1) return(1)
@@ -48,6 +85,16 @@
   front * (f - 1) / a
 }
 
+#' .edgrn_chi2_sf
+#'
+#' Part of the edgrn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param df See Usage.
+#' @param iters Defaults to \code{400}.
+#' @return A numeric value.
+#' @export
 .edgrn_chi2_sf <- function(x, df, iters = 400) {
   if (x <= 0) return(1)
   a <- 0.5 * df

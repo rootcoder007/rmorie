@@ -101,6 +101,14 @@ rgkneejt <- function(vag, fs, force = 1.5, window = NULL) {
        method = "Rangayyan (2024) Sect. 7.7.3 pp.402-404, Beverland et al. (1985) stick-slip model; burst = a maximal run of the RMS envelope above mu_s/mu_k times its median")
 }
 
+#' .rgkneejt_median
+#'
+#' Part of the rgkneejt implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .rgkneejt_median <- function(v) {
   s <- sort(v)
   m <- length(s)

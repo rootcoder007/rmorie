@@ -8,6 +8,15 @@
 # multimodel ensemble. *Journal of Climate*, 28, 5171-5194 (the
 # scheme's basis, Eqs. 10-16, as cited by Knutti et al.).
 
+#' .ca_rms
+#'
+#' Part of the caCMIP_mixedcase_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .ca_rms <- function(a, b) {
   n <- length(a)
   sqrt(sum((as.numeric(a) - as.numeric(b))^2) / n)

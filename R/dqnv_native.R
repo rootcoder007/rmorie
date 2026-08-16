@@ -59,10 +59,32 @@
 
 .dqnv_eps <- 1e-12
 
+#' .dqnv_clip_reward
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @param lo Defaults to \code{-1}.
+#' @param hi Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .dqnv_clip_reward <- function(r, lo = -1.0, hi = 1.0) {
   max(as.numeric(lo), min(as.numeric(hi), as.numeric(r)))
 }
 
+#' .dqnv_td_target
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @param s2 See Usage.
+#' @param Q_target See Usage.
+#' @param gamma Defaults to \code{0.99}.
+#' @param done Defaults to \code{FALSE}.
+#' @return A numeric value.
+#' @export
 .dqnv_td_target <- function(r, s2, Q_target, gamma = 0.99, done = FALSE) {
   if (as.logical(done)) {
     return(as.numeric(r))
@@ -71,6 +93,17 @@
   as.numeric(r) + as.numeric(gamma) * max(row)
 }
 
+#' .dqnv_bellman_residual
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param P See Usage.
+#' @param R See Usage.
+#' @param gamma Defaults to \code{0.99}.
+#' @return The value of \code{worst}, as built in the body.
+#' @export
 .dqnv_bellman_residual <- function(Q, P, R, gamma = 0.99) {
   nS <- length(Q)
   nA <- length(Q[[1L]])
@@ -93,12 +126,33 @@
   worst
 }
 
+#' .dqnv_replay_buffer_new
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param capacity See Usage.
+#' @return A list with \code{capacity}, \code{data}.
+#' @export
 .dqnv_replay_buffer_new <- function(capacity) {
   capacity <- as.integer(capacity)
   if (capacity < 1L) stop("dqnv: the capacity must be at least 1")
   list(capacity = capacity, data = list())
 }
 
+#' .dqnv_replay_buffer_add
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param buf See Usage.
+#' @param s See Usage.
+#' @param a See Usage.
+#' @param r See Usage.
+#' @param s2 See Usage.
+#' @param done Defaults to \code{FALSE}.
+#' @return The value of \code{buf}, as built in the body.
+#' @export
 .dqnv_replay_buffer_add <- function(buf, s, a, r, s2, done = FALSE) {
   buf$data[[length(buf$data) + 1L]] <- list(
     s, as.integer(a), as.numeric(r), as.integer(s2), as.logical(done)
@@ -109,6 +163,16 @@
   buf
 }
 
+#' .dqnv_replay_buffer_sample
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param buf See Usage.
+#' @param n See Usage.
+#' @param rng_state See Usage.
+#' @return A list with \code{state}, \code{samples}.
+#' @export
 .dqnv_replay_buffer_sample <- function(buf, n, rng_state) {
   if (length(buf$data) == 0L) stop("dqnv: the buffer is empty")
   m <- min(as.integer(n), length(buf$data))
@@ -124,6 +188,14 @@
   list(state = rng_state, samples = results)
 }
 
+#' .dqnv_replay_buffer_len
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param buf See Usage.
+#' @return The value of \code{length}.
+#' @export
 .dqnv_replay_buffer_len <- function(buf) {
   length(buf$data)
 }
@@ -245,6 +317,13 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
   )
 }
 
+#' .dqnv_cheatsheet
+#'
+#' Part of the dqnv_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .dqnv_cheatsheet <- function() {
   paste("dqnv: the LEARNING RULE is ordinary Q-learning; what",
         "changed is the data and the target. EXPERIENCE REPLAY",

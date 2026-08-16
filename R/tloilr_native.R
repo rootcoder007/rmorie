@@ -54,6 +54,15 @@
 
 .tloilr_eps <- 1e-12
 
+#' .tloilr_blip
+#'
+#' Part of the tloilr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @return A numeric value.
+#' @export
 .tloilr_blip <- function(Q1, Q0) {
   a <- as.numeric(Q1)
   b <- as.numeric(Q0)
@@ -63,6 +72,15 @@
   a - b
 }
 
+#' .tloilr_resource_threshold
+#'
+#' Part of the tloilr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param B See Usage.
+#' @param kappa See Usage.
+#' @return A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding}, \code{fraction_positive_blip}, \code{note}.
+#' @export
 .tloilr_resource_threshold <- function(B, kappa) {
   b <- sort(as.numeric(B))
   kp <- as.numeric(kappa)
@@ -84,6 +102,15 @@
        note = "tau = 0 exactly when the budget is not binding, which recovers the unconstrained rule")
 }
 
+#' .tloilr_constrained_rule
+#'
+#' Part of the tloilr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param B See Usage.
+#' @param kappa See Usage.
+#' @return A list with \code{rule}, \code{tau}, \code{treated_fraction}, \code{binding}.
+#' @export
 .tloilr_constrained_rule <- function(B, kappa) {
   b <- as.numeric(B)
   t <- .tloilr_resource_threshold(b, kappa)
@@ -94,6 +121,16 @@
        binding = t$binding)
 }
 
+#' .tloilr_constrained_value
+#'
+#' Part of the tloilr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param kappa See Usage.
+#' @return A list with \code{estimate}, \code{value}, \code{unconstrained_value}, \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa}, \code{binding}, \code{method}, \code{note}.
+#' @export
 .tloilr_constrained_value <- function(Q1, Q0, kappa) {
   q1 <- as.numeric(Q1)
   q0 <- as.numeric(Q0)
@@ -114,6 +151,15 @@
        note = "a binding constraint makes the estimation problem EASIER: the condition concerns the blip's density at tau > 0 rather than the absence of an atom at zero")
 }
 
+#' .tloilr_exceptional_law
+#'
+#' Part of the tloilr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param B See Usage.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{mass_at_zero}, \code{exceptional}, \code{n_at_zero}, \code{note}.
+#' @export
 .tloilr_exceptional_law <- function(B, tol = 1e-9) {
   b <- as.numeric(B)
   n <- length(b)
@@ -124,6 +170,13 @@
        note = "exceptional laws break regular estimation of the UNCONSTRAINED optimal value; the constrained problem is unaffected when tau > 0")
 }
 
+#' .tloilr_cheatsheet
+#'
+#' Part of the tloilr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tloilr_cheatsheet <- function() {
   paste0("tloilr: at most a proportion kappa can be treated, so the ",
          "rule is a THRESHOLD on the blip B(W) = Q(1,W) - Q(0,W): ",

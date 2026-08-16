@@ -8,6 +8,22 @@
 # numerical search there decides its steps on the last bits, which
 # walked the arms 1e-8 apart.  The sums are accumulated in loops for the
 # same reason -- R sums in long double, Python in double.
+#' Objective at b with a, mu and sigma all profiled out.  For fixed b
+#' the
+#'
+#' residual variance is a quadratic in a, so the minimising a is the
+#' ordinary-least-squares slope of u = y/x^b on v = x^(1-b) about their
+#' means.  Profiling a out ANALYTICALLY is what makes the two language
+#' arms agree: the likelihood is flat along the (a, b) ridge, and a
+#' numerical search there decides its steps on the last bits, which
+#' walked the arms 1e-8 apart.  The sums are accumulated in loops for
+#' the same reason -- R sums in long double, Python in double.
+#'
+#' @param xv See Usage.
+#' @param yv See Usage.
+#' @param b See Usage.
+#' @return A list with \code{f}, \code{a}, \code{mu}, \code{sd}.
+#' @export
 .ht_prof <- function(xv, yv, b) {
   n <- length(xv)
   p <- xv^b

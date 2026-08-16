@@ -53,15 +53,39 @@
 
 # ---- private helpers (prefixed .tl1step_ to avoid collisions) --------------
 
+#' .tl1step_logit
+#'
+#' Part of the tl1step_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tl1step_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
+#' .tl1step_expit
+#'
+#' Part of the tl1step_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tl1step_expit <- function(x) {
   if (x > -700) 1 / (1 + exp(-x)) else 0
 }
 
+#' .tl1step_as_numvec
+#'
+#' Part of the tl1step_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tl1step_as_numvec <- function(x) {
   as.numeric(unlist(x))
 }
@@ -72,6 +96,19 @@
 # recomputed continuously from the current point (H_fn(Q_current))
 # rather than fixed at the start, which is what makes the submodel
 # universal rather than local.
+#' Integrate the universal least favorable path. The direction is
+#'
+#' recomputed continuously from the current point (H_fn(Q_current))
+#' rather than fixed at the start, which is what makes the submodel
+#' universal rather than local.
+#'
+#' @param Q See Usage.
+#' @param H_fn See Usage.
+#' @param Y See Usage.
+#' @param eps_max Defaults to \code{2}.
+#' @param steps Defaults to \code{400}.
+#' @return A list with \code{path}, \code{steps}, \code{d_epsilon}, \code{note}.
+#' @export
 .tl1step_build_ulfm <- function(Q, H_fn, Y, eps_max = 2.0, steps = 400) {
   q <- .tl1step_as_numvec(Q)
   y <- .tl1step_as_numvec(Y)
@@ -122,6 +159,18 @@
 # Evaluated away from zero, because at zero a local least favorable
 # submodel satisfies it too, so testing only there cannot distinguish
 # the two.
+#' Check the defining property: score = gradient at every epsilon
+#'
+#' Evaluated away from zero, because at zero a local least favorable
+#' submodel satisfies it too, so testing only there cannot distinguish
+#' the two.
+#'
+#' @param Q See Usage.
+#' @param H_fn See Usage.
+#' @param eps Defaults to \code{0.3}.
+#' @param h Defaults to \code{1e-05}.
+#' @return A list with \code{max_deviation}, \code{universal}, \code{epsilon}, \code{local_submodel_direction_drift}, \code{note}.
+#' @export
 .tl1step_is_universal <- function(Q, H_fn, eps = 0.3, h = 1e-5) {
   q <- .tl1step_as_numvec(Q)
   n <- length(q)
@@ -166,6 +215,18 @@
 # ---- one_step_tmle ---------------------------------------------------------
 
 # Move once along the universal path to where the score vanishes.
+#' Move once along the universal path to where the score vanishes
+#'
+#' Part of the tl1step_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q See Usage.
+#' @param H_fn See Usage.
+#' @param Y See Usage.
+#' @param eps_max Defaults to \code{3}.
+#' @param steps Defaults to \code{600}.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star}, \code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.
+#' @export
 .tl1step_one_step_tmle <- function(Q, H_fn, Y, eps_max = 3.0, steps = 600) {
   b <- .tl1step_build_ulfm(Q, H_fn, Y, eps_max, steps)
   y <- .tl1step_as_numvec(Y)
@@ -206,6 +267,18 @@
 # The ordinary iterative TMLE, for comparison. The direction is frozen
 # within each iteration and recomputed between them -- a sequence of
 # jumps rather than a path.
+#' The ordinary iterative TMLE, for comparison. The direction is frozen
+#'
+#' within each iteration and recomputed between them -- a sequence of
+#' jumps rather than a path.
+#'
+#' @param Q See Usage.
+#' @param H_fn See Usage.
+#' @param Y See Usage.
+#' @param max_iter Defaults to \code{25}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star}, \code{abs_score}, \code{method}.
+#' @export
 .tl1step_iterative_tmle <- function(Q, H_fn, Y, max_iter = 25, tol = 1e-8) {
   q <- .tl1step_as_numvec(Q)
   y <- .tl1step_as_numvec(Y)
@@ -244,6 +317,13 @@
 
 # ---- cheatsheet ------------------------------------------------------------
 
+#' .tl1step_cheatsheet
+#'
+#' Part of the tl1step_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tl1step_cheatsheet <- function() {
   paste0("tl1step: an ordinary TMLE fluctuates along a LOCAL least ",
          "favorable submodel and ITERATES, which is where it becomes ",

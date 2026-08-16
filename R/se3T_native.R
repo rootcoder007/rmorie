@@ -60,12 +60,28 @@
 .se3T_EPS <- 1e-12
 
 # Helper: coerce input to a numeric vector
+#' Helper: coerce input to a numeric vector
+#'
+#' Part of the se3T_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .se3T_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(unlist(x))
 }
 
 # Helper: coerce input to a numeric matrix
+#' Helper: coerce input to a numeric matrix
+#'
+#' Part of the se3T_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .se3T_mat <- function(x) {
   if (is.matrix(x)) {
     return(matrix(as.numeric(x), nrow=nrow(x), ncol=ncol(x)))
@@ -85,6 +101,15 @@
 }
 
 # Apply 3x3 rotation matrix R to a 3-vector v
+#' Apply 3x3 rotation matrix R to a 3-vector v
+#'
+#' Part of the se3T_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R See Usage.
+#' @param v See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .se3T_apply <- function(R, v) {
   v <- as.numeric(v)
   c(R[1,1]*v[1] + R[1,2]*v[2] + R[1,3]*v[3],

@@ -77,6 +77,20 @@
 # cuts are midpoints between consecutive DISTINCT values -- the only set
 # that can produce different partitions, and putting a cut exactly on a
 # data point is where the two arms' comparisons could part company.
+#' Variance-reduction split over the given rows and features. Candidate
+#'
+#' cuts are midpoints between consecutive DISTINCT values -- the only
+#' set that can produce different partitions, and putting a cut exactly
+#' on a data point is where the two arms\' comparisons could part
+#' company.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param rows See Usage.
+#' @param feats See Usage.
+#' @param min_leaf See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .sdcfst_best_split <- function(X, y, rows, feats, min_leaf) {
   n <- length(rows)
   if (n < 2L * min_leaf) return(NULL)
@@ -108,6 +122,22 @@
 }
 
 # One honest tree: split on struct_rows, fill leaves from leaf_rows.
+#' One honest tree: split on struct_rows, fill leaves from leaf_rows
+#'
+#' Part of the sdcfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param struct_rows See Usage.
+#' @param leaf_rows See Usage.
+#' @param feats_n See Usage.
+#' @param min_leaf See Usage.
+#' @param max_depth See Usage.
+#' @param e See Usage.
+#' @param depth Defaults to \code{0L}.
+#' @return A list with \code{leaf}, \code{feature}, \code{cut}, \code{left}, \code{right}.
+#' @export
 .sdcfst_grow <- function(X, y, struct_rows, leaf_rows, feats_n, min_leaf,
                          max_depth, e, depth = 0L) {
   p <- ncol(X)
@@ -149,6 +179,15 @@
                             depth + 1L))
 }
 
+#' .sdcfst_tree_predict
+#'
+#' Part of the sdcfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param x See Usage.
+#' @return The value of \code{$}.
+#' @export
 .sdcfst_tree_predict <- function(node, x) {
   while (!node$leaf)
     node <- if (x[node$feature] <= node$cut) node$left else node$right
@@ -252,6 +291,15 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
   beta
 }
 
+#' .sdcfst_logit_predict
+#'
+#' Part of the sdcfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param beta See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .sdcfst_logit_predict <- function(beta, x) {
   eta <- beta[1] + .w3_dot(beta[-1], as.numeric(x))
   if (eta > 30) eta <- 30 else if (eta < -30) eta <- -30
@@ -259,6 +307,16 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 }
 
 # Fold labels from a shuffle, so folds are balanced by construction.
+#' Fold labels from a shuffle, so folds are balanced by construction
+#'
+#' Part of the sdcfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @param e See Usage.
+#' @return The value of \code{lab}, as built in the body.
+#' @export
 .sdcfst_folds <- function(n, k, e) {
   idx <- seq_len(n)
   if (n > 1L)

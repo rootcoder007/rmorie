@@ -1,6 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Internal: Gamma_l = n^-1 sum_{t=l+1}^{n} e_t e_{t-l}'.
+#' Internal: Gamma_l = n^-1 sum_{t=l+1}^{n} e_t e_{t-l}\'
+#'
+#' Part of the whtnse implementation; see the file header for the source
+#' it follows.
+#'
+#' @param E See Usage.
+#' @param lag See Usage.
+#' @return A numeric value.
+#' @export
 .whtnse_autocov <- function(E, lag) {
   n <- nrow(E)
   if (lag == 0L) return(crossprod(E) / n)

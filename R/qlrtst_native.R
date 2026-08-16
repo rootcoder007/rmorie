@@ -39,6 +39,15 @@
               "0.35" = c(-2.92, 1.05, 13.0))
 )
 
+#' .qlr_ssr
+#'
+#' Part of the qlrtst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .qlr_ssr <- function(X, y) {
   A <- t(X) %*% X
   b <- t(X) %*% y

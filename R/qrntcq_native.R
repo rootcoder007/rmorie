@@ -45,6 +45,17 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
   list(t = ts, density = dens / z)
 }
 
+#' .mass
+#'
+#' Part of the qrntcq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ts See Usage.
+#' @param ys See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 .mass <- function(ts, ys, lo, hi) {
   if (hi <= lo) return(0)
   tot <- 0

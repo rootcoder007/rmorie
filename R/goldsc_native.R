@@ -76,9 +76,25 @@
 # Guide 8.3.1. It exists to encourage hydrophobic contact.
 .GOLDSC_VDW_WEIGHT <- 1.375
 
+#' .goldsc_outer
+#'
+#' Part of the goldsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{switch}.
+#' @export
 .goldsc_outer <- function(p)
   switch(p, "4-8" = c(4, 8), "6-12" = c(6, 12), "split_2-4" = c(4, 8),
          "split_1-2" = c(4, 8), NULL)
+#' .goldsc_inner
+#'
+#' Part of the goldsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{switch}.
+#' @export
 .goldsc_inner <- function(p)
   switch(p, "split_2-4" = c(2, 4), "split_1-2" = c(1, 2), NULL)
 
@@ -88,6 +104,18 @@
 # disagree in the last bit. A potential that is about to be summed over
 # thousands of contacts cannot afford to be a different function in the
 # two arms.
+#' X to a small non-negative integer power, by repeated multiplication
+#'
+#' Not the language\'s power operator: R raises to an integer exponent
+#' by repeated squaring while Python calls the C library\'s pow, and the
+#' two disagree in the last bit. A potential that is about to be summed
+#' over thousands of contacts cannot afford to be a different function
+#' in the two arms.
+#'
+#' @param x See Usage.
+#' @param k See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .goldsc_ipow <- function(x, k) {
   p <- 1
   k <- as.integer(k)
@@ -140,6 +168,17 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
   morie_goldsc_lj(r, r0, eps, inner[1], inner[2])
 }
 
+#' .goldsc_pair
+#'
+#' Part of the goldsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @param r0 See Usage.
+#' @param eps See Usage.
+#' @param potential See Usage.
+#' @return The value of \code{morie_goldsc_lj}.
+#' @export
 .goldsc_pair <- function(r, r0, eps, potential) {
   if (!(potential %in% .GOLDSC_POTENTIALS))
     stop("potential must be one of ",
@@ -151,6 +190,16 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
   morie_goldsc_lj(r, r0, eps, mn[1], mn[2])
 }
 
+#' .goldsc_lookup
+#'
+#' Part of the goldsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param table See Usage.
+#' @param key See Usage.
+#' @param what See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .goldsc_lookup <- function(table, key, what) {
   for (kv in table) if (kv[[1]] == key) return(as.numeric(kv[[2]]))
   stop("no ", what, " for atom type ", key)
@@ -228,6 +277,15 @@ morie_goldsc_torsion <- function(torsions) {
   list(total = if (length(terms)) .w3_csum(terms) else 0, terms = terms)
 }
 
+#' .goldsc_dist
+#'
+#' Part of the goldsc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .goldsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' The GoldScore fitness of a pose

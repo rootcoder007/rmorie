@@ -29,6 +29,17 @@
 .vitlneps <- 1e-6
 
 # A deterministic nr-by-nc parameter matrix, row-major off the stream.
+#' A deterministic nr-by-nc parameter matrix, row-major off the stream
+#'
+#' Part of the helpers_vit implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nr See Usage.
+#' @param nc See Usage.
+#' @param skip Defaults to \code{0}.
+#' @param scale Defaults to \code{1}.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .vitdraw <- function(nr, nc, skip = 0, scale = 1) {
   nr <- as.integer(nr)
   nc <- as.integer(nc)
@@ -41,6 +52,15 @@
 }
 
 # LN(v) = (v - mean v) / sqrt(pop.var v + eps), gamma = 1, beta = 0.
+#' LN(v) = (v - mean v) / sqrt(pop.var v + eps), gamma = 1, beta = 0
+#'
+#' Part of the helpers_vit implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param eps Defaults to \code{.vitlneps}.
+#' @return A numeric value.
+#' @export
 .vitln <- function(v, eps = .vitlneps) {
   n <- length(v)
   if (n == 0L) stop("layernorm: empty vector")
@@ -49,6 +69,15 @@
   (v - m) / sd
 }
 
+#' .vitlnrows
+#'
+#' Part of the helpers_vit implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param eps Defaults to \code{.vitlneps}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .vitlnrows <- function(A, eps = .vitlneps) {
   out <- A
   for (i in seq_len(nrow(A))) out[i, ] <- .vitln(A[i, ], eps)
@@ -57,6 +86,14 @@
 
 # Read an image as a list of C matrices, each H-by-W.  A plain H-by-W matrix is
 # the single-channel case, C = 1.
+#' Read an image as a list of C matrices, each H-by-W.  A plain H-by-W
+#' matrix is
+#'
+#' the single-channel case, C = 1.
+#'
+#' @param image See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .vitchan <- function(image) {
   out <- if (is.list(image)) lapply(image, .s03mat) else list(.s03mat(image))
   h <- nrow(out[[1L]])
@@ -70,6 +107,14 @@
 }
 
 # Index of the first maximum; R's which.max already has this tie rule.
+#' Index of the first maximum; R\'s which.max already has this tie rule
+#'
+#' Part of the helpers_vit implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{which.max}.
+#' @export
 .vitargmax <- function(v) {
   if (length(v) == 0L) stop("argmax_first: empty vector")
   which.max(v)

@@ -122,6 +122,15 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 # Re-uses the same SHA-256 / HMAC primitives as sechsh via the local
 # .sech_sha256 and .sech_hmac defined there; this file is intended to
 # be sourced together with sechsh_native.R.
+#' Re-uses the same SHA-256 / HMAC primitives as sechsh via the local
+#'
+#' .sech_sha256 and .sech_hmac defined there; this file is intended to
+#' be sourced together with sechsh_native.R.
+#'
+#' @param key See Usage.
+#' @param msg See Usage.
+#' @return The value of \code{.sech_sha256}.
+#' @export
 .kdf_hmac <- function(key, msg) {
   key <- as.raw(key)
   if (length(key) > 64L) key <- .sech_sha256(key)
@@ -131,6 +140,14 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
   .sech_sha256(c(opad, .sech_sha256(c(ipad, as.raw(msg)))))
 }
 
+#' .kdf_hex
+#'
+#' Part of the seckdf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bs See Usage.
+#' @return A character value.
+#' @export
 .kdf_hex <- function(bs) {
   paste(format(as.hexmode(as.integer(bs)), width = 2L), collapse = "")
 }

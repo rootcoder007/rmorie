@@ -19,6 +19,17 @@
 # including the support check on observed outcomes: the support is
 # the single assumption being made, so violating it voids the bounds.
 
+#' .mor_bnd_one_mean
+#'
+#' Part of the bndest_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param yv See Usage.
+#' @param seen See Usage.
+#' @param k0 See Usage.
+#' @param k1 See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .mor_bnd_one_mean <- function(yv, seen, k0, k1) {
   p <- mean(seen)
   if (p > 0) {

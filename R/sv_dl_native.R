@@ -48,6 +48,14 @@
 
 # ------------------------------------------------------------- helpers
 
+#' Normalise one read pair; mate 1 is the left-most alignment
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A list with \code{chrom1}, \code{pos1}, \code{strand1}, \code{len1}, \code{chrom2}, \code{pos2}, \code{strand2}, \code{len2}, \code{seq}, \code{id}.
+#' @export
 .sv_dl_pair <- function(p) {
   # Normalise one read pair; mate 1 is the left-most alignment.
   need <- c("chrom1", "pos1", "strand1", "chrom2", "pos2", "strand2")
@@ -82,6 +90,14 @@
        seq=p[["seq"]], id=p[["id"]])
 }
 
+#' .sv_dl_median
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .sv_dl_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -95,6 +111,14 @@
   }
 }
 
+#' Outer distance: left-most start to right-most end
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .sv_dl_insert <- function(p) {
   # Outer distance: left-most start to right-most end.
   (p$pos2 + p$len2) - p$pos1
@@ -206,6 +230,16 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
   NULL
 }
 
+#' The SV size this pair implies, used as the clustering weight
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param label See Usage.
+#' @param median See Usage.
+#' @return A numeric value.
+#' @export
 .sv_dl_size <- function(p, label, median) {
   # The SV size this pair implies, used as the clustering weight.
   if (label[1L] == "TRA") {
@@ -266,6 +300,15 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
   list(nodes=ps, edges=edges, sizes=sizes, label=label)
 }
 
+#' Connected components (union-find); singletons dropped
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param edges See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .sv_dl_components <- function(n, edges) {
   # Connected components (union-find); singletons dropped.
   parent <- seq_len(n)
@@ -435,6 +478,14 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
 
 # ------------------------------------------------------- split reads
 
+#' .sv_dl_revcomp
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A character value.
+#' @export
 .sv_dl_revcomp <- function(s) {
   chars <- rev(strsplit(toupper(s), "")[[1L]])
   comp <- ifelse(chars %in% names(.sv_dl_COMPLEMENT),
@@ -599,6 +650,19 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
   list(consensus=paste(out, collapse=""), start=lo)
 }
 
+#' .sv_dl_gotoh
+#'
+#' Part of the sv_dl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param query See Usage.
+#' @param ref See Usage.
+#' @param match Defaults to \code{1}.
+#' @param mismatch Defaults to \code{-2}.
+#' @param gap_open Defaults to \code{-4}.
+#' @param gap_extend Defaults to \code{-1}.
+#' @return A list with \code{best}, \code{best_at}.
+#' @export
 .sv_dl_gotoh <- function(query, ref, match=1.0, mismatch=-2.0,
                          gap_open=-4.0, gap_extend=-1.0) {
   # Affine-gap DP; returns, for each query prefix, its best score and

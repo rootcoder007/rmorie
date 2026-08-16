@@ -5,6 +5,14 @@
 
 .glmbay_EPS <- 1e-12
 
+#' .glmbay_links
+#'
+#' Part of the glmbay_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param family See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .glmbay_links <- function(family) {
   if (family == "binomial")
     return(list(inv = function(e) 1.0 / (1.0 + exp(-pmax(-500, pmin(500, e)))),
@@ -107,6 +115,13 @@ morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
                      "approximation is exact for the Gaussian family"))
 }
 
+#' .glmbay_cheatsheet
+#'
+#' Part of the glmbay_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .glmbay_cheatsheet <- function() {
   paste0("glmbay: morie_glmbay_bayesian_glm(X, y, family, prior_sd) -> ",
          "posterior mode, Laplace covariance and log marginal likelihood ",

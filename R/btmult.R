@@ -49,6 +49,17 @@ Btmult <- function(n, B = 200L, rng = 2L, exhaustive = FALSE) {
 }
 
 # Resample count vectors: one row per bootstrap replication.
+#' Resample count vectors: one row per bootstrap replication
+#'
+#' Part of the btmult implementation; see the file header for the source
+#' it follows.
+#'
+#' @param n See Usage.
+#' @param B See Usage.
+#' @param rng See Usage.
+#' @param exhaustive See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .bt_counts <- function(n, B, rng, exhaustive) {
   if (exhaustive) {
     if (n > 6L) {
@@ -79,6 +90,14 @@ Btmult <- function(n, B = 200L, rng = 2L, exhaustive = FALSE) {
   out
 }
 
+#' .bt_primes
+#'
+#' Part of the btmult implementation; see the file header for the source
+#' it follows.
+#'
+#' @param m See Usage.
+#' @return The value of \code{ps}, as built in the body.
+#' @export
 .bt_primes <- function(m) {
   ps <- integer(0); c <- 2L
   while (length(ps) < m) {

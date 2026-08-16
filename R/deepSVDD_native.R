@@ -2,6 +2,17 @@
 # Sources: Tax, D. M. J. & Duin, R. P. W. (2004). Support vector
 # data description. Machine Learning, 54(1), 45-66, Eqs. 3-14.
 
+#' .deep_svdd_kernel
+#'
+#' Part of the deepSVDD_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param kern See Usage.
+#' @param gamma See Usage.
+#' @return A numeric value.
+#' @export
 .deep_svdd_kernel <- function(a, b, kern, gamma) {
   if (kern == "linear")
     return(sum(a * b))

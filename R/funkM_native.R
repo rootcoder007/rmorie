@@ -150,6 +150,14 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 # Coerce the ratings argument to a data.frame with columns u, i, r.
 # Accepts a data.frame (with those columns) or a list of length-3
 # vectors. Indices are kept 0-based, matching the Python source.
+#' Coerce the ratings argument to a data.frame with columns u, i, r
+#'
+#' Accepts a data.frame (with those columns) or a list of length-3
+#' vectors. Indices are kept 0-based, matching the Python source.
+#'
+#' @param ratings See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .funkM_as_ratings <- function(ratings) {
   if (is.data.frame(ratings)) {
     if (!all(c("u", "i", "r") %in% names(ratings))) {
@@ -182,12 +190,32 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 }
 
 # mu over the OBSERVED entries only.
+#' Mu over the OBSERVED entries only
+#'
+#' Part of the funkM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R See Usage.
+#' @return A numeric value.
+#' @export
 .funkM_global_mean <- function(R) {
   if (nrow(R) == 0L) stop("funkM: no ratings given")
   sum(R$r) / as.numeric(nrow(R))
 }
 
 # r_hat = mu + b_u + b_i + q_i^T p_u.
+#' R_hat = mu + b_u + b_i + q_i^T p_u
+#'
+#' Part of the funkM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mu See Usage.
+#' @param b_user See Usage.
+#' @param b_item See Usage.
+#' @param p_u See Usage.
+#' @param q_i See Usage.
+#' @return A numeric value.
+#' @export
 .funkM_predict <- function(mu, b_user, b_item, p_u, q_i) {
   if (length(p_u) != length(q_i)) {
     stop(sprintf("funkM: the factors differ in width (%d, %d)",
@@ -198,6 +226,22 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 }
 
 # One pass over the observed ratings. `factor` is 0-based; NULL = all.
+#' One pass over the observed ratings. `factor` is 0-based; NULL = all
+#'
+#' Part of the funkM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R See Usage.
+#' @param mu See Usage.
+#' @param bu See Usage.
+#' @param bi See Usage.
+#' @param P See Usage.
+#' @param Q See Usage.
+#' @param lr See Usage.
+#' @param reg See Usage.
+#' @param factor Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .funkM_sgd_epoch <- function(R, mu, bu, bi, P, Q, lr, reg, factor = NULL) {
   se <- 0.0
   n  <- nrow(R)
@@ -316,6 +360,13 @@ morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
   )
 }
 
+#' .funkM_cheatsheet
+#'
+#' Part of the funkM_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .funkM_cheatsheet <- function() {
   paste("funkM: a true SVD needs a COMPLETE matrix and a ratings",
         "matrix is >99% missing -- filling the holes with zeros or",

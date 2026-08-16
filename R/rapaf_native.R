@@ -210,6 +210,17 @@ morie_rapaf_ar_confidence_interval <- function(case_counts, rate_ratios,
 
 # ---- internals ----
 
+#' .rapaf_logit_irls
+#'
+#' Part of the rapaf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @param obs_weights Defaults to \code{NULL}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .rapaf_logit_irls <- function(X, y, ridge = 1e-8, obs_weights = NULL) {
   if (is.null(obs_weights)) obs_weights <- rep(1.0, length(y))
   X <- cbind(0, X)

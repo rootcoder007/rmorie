@@ -60,10 +60,29 @@
 .tlroad_EPS <- 1e-12
 .tlroad_STEPS <- c("data", "model", "target", "estimate")
 
+#' .tlroad_vec
+#'
+#' Part of the tlroad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .tlroad_vec <- function(x) {
   as.numeric(x)
 }
 
+#' .tlroad_roadmap
+#'
+#' Part of the tlroad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data_description See Usage.
+#' @param model_assumptions See Usage.
+#' @param target_name See Usage.
+#' @param estimator Defaults to \code{"TMLE"}.
+#' @return A list with \code{steps}, \code{data}, \code{model}, \code{target}, \code{estimator}, \code{note}.
+#' @export
 .tlroad_roadmap <- function(data_description, model_assumptions, target_name,
                             estimator = "TMLE") {
   if (!nzchar(trimws(as.character(data_description)))) {
@@ -85,6 +104,19 @@
   )
 }
 
+#' .tlroad_eic_ate
+#'
+#' Part of the tlroad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @param psi See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tlroad_eic_ate <- function(A, Y, Q1, Q0, g, psi) {
   a <- .tlroad_vec(A)
   y <- .tlroad_vec(Y)
@@ -108,6 +140,19 @@
   out
 }
 
+#' .tlroad_score_spans_eic
+#'
+#' Part of the tlroad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @param h Defaults to \code{1e-06}.
+#' @return A list with \code{score}, \code{eic_component}, \code{difference}, \code{spans}, \code{note}.
+#' @export
 .tlroad_score_spans_eic <- function(A, Y, Q1, Q0, g, h = 1e-6) {
   a <- .tlroad_vec(A)
   y <- .tlroad_vec(Y)
@@ -148,6 +193,15 @@
   )
 }
 
+#' .tlroad_plugin
+#'
+#' Part of the tlroad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @return A numeric value.
+#' @export
 .tlroad_plugin <- function(Q1, Q0) {
   q1 <- .tlroad_vec(Q1)
   q0 <- .tlroad_vec(Q0)
@@ -157,6 +211,20 @@
   sum(q1 - q0) / length(q1)
 }
 
+#' .tlroad_solves_eic_equation
+#'
+#' Part of the tlroad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param Y See Usage.
+#' @param Q1 See Usage.
+#' @param Q0 See Usage.
+#' @param g See Usage.
+#' @param psi See Usage.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{estimate}, \code{mean_eic}, \code{solved}, \code{se}, \code{ci}, \code{method}.
+#' @export
 .tlroad_solves_eic_equation <- function(A, Y, Q1, Q0, g, psi, tol = 1e-8) {
   d <- .tlroad_eic_ate(A, Y, Q1, Q0, g, psi)
   m <- mean(d)
@@ -171,6 +239,13 @@
   )
 }
 
+#' .tlroad_cheatsheet
+#'
+#' Part of the tlroad_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlroad_cheatsheet <- function() {
   "tlroad: (1) data as a random variable, (2) a statistical model stating only what is KNOWN, (3) the scientific question as a target parameter, (4) TMLE plus inference -- in that order, because you cannot shoot the arrow then paint the bullseye. A TMLE needs three matched pieces: a pathwise differentiable parameter with canonical gradient D*, a least favorable submodel through the initial fit, and a LOSS WHOSE SCORE SPANS D*. That span is the mechanism: it makes the update solve P_n D* = 0, which is where double robustness and efficiency come from."
 }

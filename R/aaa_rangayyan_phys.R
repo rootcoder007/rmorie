@@ -15,6 +15,15 @@
 .BSA_FARADAY <- 96485.33212 # C/mol,     CODATA 2018
 
 
+#' In-place iterative radix-2 Cooley-Tukey FFT; len must be a power of 2
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param re See Usage.
+#' @param im See Usage.
+#' @return A list with \code{re}, \code{im}.
+#' @export
 .bsafft <- function(re, im) {
   # In-place iterative radix-2 Cooley-Tukey FFT; len must be a power of 2.
   n <- length(re)
@@ -68,6 +77,16 @@
 }
 
 
+#' Periodogram of x sampled at fs Hz with a Hann window, 0 .. fs/2
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param detrend Defaults to \code{TRUE}.
+#' @return A list with \code{freqs}, \code{power}.
+#' @export
 .bsapsd <- function(x, fs, detrend = TRUE) {
   # Periodogram of x sampled at fs Hz with a Hann window, 0 .. fs/2.
   xs <- as.numeric(x)
@@ -89,12 +108,34 @@
 }
 
 
+#' Total power in the half-open band [lo, hi) Hz
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param freqs See Usage.
+#' @param power See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return The value of \code{.morie_fsum}.
+#' @export
 .bsabandpow <- function(freqs, power, lo, hi) {
   # Total power in the half-open band [lo, hi) Hz.
   .morie_fsum(power[freqs >= lo & freqs < hi])
 }
 
 
+#' Local maxima of power, strongest first, at least minsep Hz apart
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param freqs See Usage.
+#' @param power See Usage.
+#' @param count Defaults to \code{3L}.
+#' @param minsep Defaults to \code{0}.
+#' @return A list with \code{freqs}, \code{powers}.
+#' @export
 .bsapeaks <- function(freqs, power, count = 3L, minsep = 0) {
   # Local maxima of power, strongest first, at least minsep Hz apart.
   np <- length(power)
@@ -120,6 +161,15 @@
 }
 
 
+#' Biased autocorrelation of the mean-removed x, lags 0..maxlag
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param maxlag See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .bsaacf <- function(x, maxlag) {
   # Biased autocorrelation of the mean-removed x, lags 0..maxlag.
   xs <- as.numeric(x)
@@ -135,6 +185,16 @@
 }
 
 
+#' Levinson-Durbin linear prediction; returns list(a = a[1..p], e =
+#' error)
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param order See Usage.
+#' @return A list with \code{a}, \code{e}.
+#' @export
 .bsalpc <- function(x, order) {
   # Levinson-Durbin linear prediction; returns list(a = a[1..p], e = error).
   if (order < 1L) stop("order must be >= 1")
@@ -165,6 +225,16 @@
 }
 
 
+#' Magnitude-squared response of the all-pole LPC filter, 0..fs/2 Hz
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param fs See Usage.
+#' @param npts Defaults to \code{1024L}.
+#' @return A list with \code{freqs}, \code{power}.
+#' @export
 .bsalpcspec <- function(a, fs, npts = 1024L) {
   # Magnitude-squared response of the all-pole LPC filter, 0..fs/2 Hz.
   i <- seq_len(npts) - 1L
@@ -181,6 +251,15 @@
 }
 
 
+#' Moments of a PSD treated as a density, Rangayyan (2024) Section 6.4.1
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param freqs See Usage.
+#' @param power See Usage.
+#' @return A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz}, \code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.
+#' @export
 .bsapsdmom <- function(freqs, power) {
   # Moments of a PSD treated as a density, Rangayyan (2024) Section 6.4.1.
   Ep <- .morie_fsum(power)
@@ -202,6 +281,16 @@
 }
 
 
+#' 3 dB bandwidth and Q = f_peak / bandwidth of the peak at fpeak
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param freqs See Usage.
+#' @param power See Usage.
+#' @param fpeak See Usage.
+#' @return A list with \code{bandwidth_hz}, \code{q}.
+#' @export
 .bsaqfactor <- function(freqs, power, fpeak) {
   # -3 dB bandwidth and Q = f_peak / bandwidth of the peak at fpeak.
   if (!length(freqs)) {
@@ -231,6 +320,15 @@
 }
 
 
+#' Hjorth activity, mobility, form factor; Rangayyan (2024) eqs.
+#' (5.25-26)
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{activity}, \code{mobility}, \code{form_factor}.
+#' @export
 .bsahjorth <- function(x) {
   # Hjorth activity, mobility, form factor; Rangayyan (2024) eqs. (5.25-26).
   xs <- as.numeric(x)
@@ -255,6 +353,14 @@
 }
 
 
+#' .bsarms
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .bsarms <- function(x) {
   xs <- as.numeric(x)
   if (!length(xs)) stop("empty signal")
@@ -262,6 +368,13 @@
 }
 
 
+#' (mean, variance, skewness, kurtosis); kurtosis is the raw fourth
+#'
+#' standardised moment (3.0 for a Gaussian).
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .bsamoments <- function(x) {
   # (mean, variance, skewness, kurtosis); kurtosis is the raw fourth
   # standardised moment (3.0 for a Gaussian).
@@ -281,6 +394,16 @@
 }
 
 
+#' Short-time RMS envelope, non-overlapping windows of win_s seconds
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @param win_s See Usage.
+#' @return A list with \code{env}, \code{step_s}.
+#' @export
 .bsaenvelope <- function(x, fs, win_s) {
   # Short-time RMS envelope, non-overlapping windows of win_s seconds.
   xs <- as.numeric(x)
@@ -297,6 +420,14 @@
 }
 
 
+#' Hodgkin-Huxley (1952) alpha/beta rate constants in 1/ms for membrane
+#'
+#' potential v in mV, modern sign convention, rest -65 mV.  Removable
+#' singularities at v = -55 and v = -40 mV replaced by their limits.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .bsahhrates <- function(v) {
   # Hodgkin-Huxley (1952) alpha/beta rate constants in 1/ms for membrane
   # potential v in mV, modern sign convention, rest -65 mV.  Removable
@@ -3007,6 +3138,14 @@ VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {
 }
 
 
+#' .bsaunwrap
+#'
+#' Part of the rangayyan_phys implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ph See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .bsaunwrap <- function(ph) {
   out <- numeric(length(ph))
   out[1L] <- ph[1L]

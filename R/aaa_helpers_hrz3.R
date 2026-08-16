@@ -19,6 +19,17 @@ NULL
 # carrying out a monotone increasing transformation of (X, W)".  The
 # mid-rank map is such a transformation and is exactly reproducible in
 # both language arms, unlike a fitted CDF.
+#' Mid-rank transform onto [0, 1].  Horowitz (2009) p. 156 observes the
+#'
+#' support of (X, W) may be taken to be [0, 1]^2 with no loss of
+#' generality, "because it can always be satisfied by, if necessary,
+#' carrying out a monotone increasing transformation of (X, W)".  The
+#' mid-rank map is such a transformation and is exactly reproducible in
+#' both language arms, unlike a fitted CDF.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .hrz3_u01 <- function(v) {
   v <- as.numeric(v)
   n <- length(v)
@@ -27,6 +38,14 @@ NULL
 }
 
 # Equispaced grid on [0, 1] with trapezoid quadrature weights.
+#' Equispaced grid on [0, 1] with trapezoid quadrature weights
+#'
+#' Part of the helpers_hrz3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @return A list with \code{z}, \code{w}.
+#' @export
 .hrz3_grid_w <- function(m) {
   m <- as.integer(m)
   if (m < 3L) stop(sprintf("grid must have at least 3 points, got %d.", m))
@@ -39,6 +58,16 @@ NULL
 }
 
 # Gaussian kernel matrix K((a_i - b_j)/h).
+#' Gaussian kernel matrix K((a_i - b_j)/h)
+#'
+#' Part of the helpers_hrz3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param h See Usage.
+#' @return A numeric value.
+#' @export
 .hrz3_kmat <- function(a, b, h) {
   a <- as.numeric(a)
   b <- as.numeric(b)
@@ -52,6 +81,18 @@ NULL
 # Local linear reproduces an affine function exactly, which is what
 # makes an exact-recovery anchor possible for the additive fits built
 # on it; Nadaraya-Watson does not.
+#' Local-linear regression of y on z evaluated at zq (Appendix A.3)
+#'
+#' Local linear reproduces an affine function exactly, which is what
+#' makes an exact-recovery anchor possible for the additive fits built
+#' on it; Nadaraya-Watson does not.
+#'
+#' @param z See Usage.
+#' @param y See Usage.
+#' @param zq See Usage.
+#' @param h See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .hrz3_ll_smooth <- function(z, y, zq, h) {
   z <- as.numeric(z)
   y <- as.numeric(y)
@@ -82,6 +123,17 @@ NULL
 # cumulative normalised weight reaches tau.  With equal weights this is
 # the usual empirical quantile, so it agrees with a plain sort on a
 # degenerate kernel -- the anchor used by Hrzplrq.
+#' Weighted tau-quantile: the smallest order statistic of v whose
+#'
+#' cumulative normalised weight reaches tau.  With equal weights this is
+#' the usual empirical quantile, so it agrees with a plain sort on a
+#' degenerate kernel -- the anchor used by Hrzplrq.
+#'
+#' @param v See Usage.
+#' @param w See Usage.
+#' @param tau See Usage.
+#' @return The value of \code{[}.
+#' @export
 .hrz3_wquant <- function(v, w, tau) {
   v <- as.numeric(v)
   w <- as.numeric(w)
@@ -109,6 +161,19 @@ NULL
 # form is used: the own-observation term of a kernel density derivative
 # is identically zero only in the limit, and keeping it biases delta
 # toward zero.
+#' Density-weighted average derivative, Horowitz Sec. 2.6.1:
+#'
+#' delta = E[f_X(X) dE(Y|X)/dX] = -2 E[f_X\'(X) Y]. In a single-index
+#' model delta is proportional to beta, so it fixes the index DIRECTION
+#' without optimising over it.  The leave-one-out form is used: the
+#' own-observation term of a kernel density derivative is identically
+#' zero only in the limit, and keeping it biases delta toward zero.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param h See Usage.
+#' @return The value of \code{delta}, as built in the body.
+#' @export
 .hrz3_ade <- function(X, y, h) {
   X <- if (is.null(dim(X))) matrix(as.numeric(X), ncol = 1L) else as.matrix(X)
   y <- as.numeric(y)
@@ -137,6 +202,15 @@ NULL
 
 # Index direction with the scale normalisation |beta_1| = 1
 # (Horowitz assumption HT2(a), p. 219).
+#' Index direction with the scale normalisation |beta_1| = 1
+#'
+#' (Horowitz assumption HT2(a), p. 219).
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param h See Usage.
+#' @return A numeric value.
+#' @export
 .hrz3_index_dir <- function(X, y, h) {
   d <- .hrz3_ade(X, y, h)
   lead <- d[1L]
@@ -152,6 +226,17 @@ NULL
 # 1/sqrt(12), so Silverman's constant gives a scale rather than only a
 # rate.  n^(-1/6) alone is a rate and on the unit interval is far too
 # wide: at n = 40 it puts two thirds of the kernel mass outside support.
+#' Default bandwidth on the mid-rank [0, 1] scale.  After .hrz3_u01 the
+#'
+#' marginals are exactly uniform on [0, 1], whose standard deviation is
+#' 1/sqrt(12), so Silverman\'s constant gives a scale rather than only a
+#' rate.  n^(-1/6) alone is a rate and on the unit interval is far too
+#' wide: at n = 40 it puts two thirds of the kernel mass outside
+#' support.
+#'
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .hrz3_bw01 <- function(n) {
   n <- as.integer(n)
   if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n))
@@ -167,6 +252,24 @@ NULL
 # Renormalising the discretised density to unit mass on [0, 1]^2 is
 # such a correction, and it makes mass == 1 an exact identity that
 # fails loudly if the 1/(n h^2) constant is mis-wired.
+#' Bivariate kernel density of (X, W) on the grid, mass-corrected
+#'
+#' A Gaussian kernel has unbounded support, so on the compact [0, 1]^2 a
+#' fixed share of its mass falls outside and the raw estimate does NOT
+#' integrate to one.  Horowitz (2009) p. 173 requires a compactly
+#' supported kernel (HH5) and notes boundary effects "can be
+#' accommodated by replacing the kernel K with a boundary kernel".
+#' Renormalising the discretised density to unit mass on [0, 1]^2 is
+#' such a correction, and it makes mass == 1 an exact identity that
+#' fails loudly if the 1/(n h^2) constant is mis-wired.
+#'
+#' @param u See Usage.
+#' @param v See Usage.
+#' @param z See Usage.
+#' @param wq See Usage.
+#' @param h See Usage.
+#' @return A list with \code{f}, \code{mass}.
+#' @export
 .hrz3_fxw_grid <- function(u, v, z, wq, h) {
   u <- as.numeric(u)
   v <- as.numeric(v)
@@ -187,6 +290,18 @@ NULL
 # are literally the inner products beta_j = <g, psi_j> as the text
 # notes.  "poly" is the monomial basis, which spans the same spaces but
 # is not orthonormal.
+#' Series basis on [0, 1], eq. (5.79).  "cos" is the orthonormal cosine
+#'
+#' basis {1, sqrt(2) cos(pi k v)}, for which the coefficients in (5.79)
+#' are literally the inner products beta_j = <g, psi_j> as the text
+#' notes.  "poly" is the monomial basis, which spans the same spaces but
+#' is not orthonormal.
+#'
+#' @param z See Usage.
+#' @param J See Usage.
+#' @param kind Defaults to \code{"poly"}.
+#' @return Nothing; this branch always raises.
+#' @export
 .hrz3_sieve <- function(z, J, kind = "poly") {
   z <- as.numeric(z)
   J <- as.integer(J)

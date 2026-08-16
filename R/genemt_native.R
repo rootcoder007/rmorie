@@ -60,15 +60,42 @@
 
 .genemt_EPS <- 1e-12
 
+#' .genemt_norm_cdf
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{pnorm}.
+#' @export
 .genemt_norm_cdf <- function(x) {
   pnorm(x)
 }
 
+#' .genemt_norm_ppf
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{qnorm}.
+#' @export
 .genemt_norm_ppf <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-12), 1.0 - 1e-12)
   qnorm(q)
 }
 
+#' .genemt_wls
+#'
+#' Part of the genemt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{coef}.
+#' @export
 .genemt_wls <- function(X, y, w, ridge) {
   X <- as.matrix(X)
   y <- as.numeric(y)

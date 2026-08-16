@@ -5,6 +5,22 @@
 ## that each arm mean -- not just the contrast -- solves its own
 ## efficient score. Monotonicity is restored by a running maximum, the
 ## cheapest rearrangement that cannot move a correctly ordered pair.
+#' SPDX-License-Identifier: AGPL-3.0-or-later
+#'
+#' # Targeted counterfactual CDFs and their influence curves on a grid.
+#' # One point-treatment TMLE per threshold on the binary outcome # I(Y
+#' <= t), with an arm-specific clever covariate H_a = I(D = a)/g_a so #
+#' that each arm mean -- not just the contrast -- solves its own #
+#' efficient score. Monotonicity is restored by a running maximum, the #
+#' cheapest rearrangement that cannot move a correctly ordered pair.
+#'
+#' @param yv See Usage.
+#' @param Dv See Usage.
+#' @param W See Usage.
+#' @param g See Usage.
+#' @param grid See Usage.
+#' @return A list with \code{F}, \code{IC}.
+#' @export
 .tmlmpi_cdf_bank <- function(yv, Dv, W, g, grid) {
   n <- length(yv); K <- length(grid)
   Fv <- list(numeric(K), numeric(K))

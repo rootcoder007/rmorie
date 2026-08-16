@@ -57,6 +57,15 @@ alpha_pq <- function(d_tx, p, q) {
 
 # Internal helper: shortest-path distance from t to x in the unweighted
 # adjacency dict, restricted to 0/1/2.
+#' Internal helper: shortest-path distance from t to x in the unweighted
+#'
+#' adjacency dict, restricted to 0/1/2.
+#'
+#' @param adj See Usage.
+#' @param t See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .node2v_dist <- function(adj, t, x) {
   if (identical(t, x)) return(0L)
   nb_t <- adj[[t]]
@@ -224,6 +233,13 @@ skipgram_pairs <- function(walks, window = 2) {
   do.call(rbind, pairs)
 }
 
+#' .node2v_cheatsheet
+#'
+#' Part of the node2v_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .node2v_cheatsheet <- function() {
   paste("node2v: graph as document, walk as sentence, skip-gram on ",
         "top. The point is that NO sampling strategy wins everywhere: ",

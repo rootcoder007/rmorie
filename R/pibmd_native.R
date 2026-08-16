@@ -7,6 +7,14 @@
 
 .pibmd_EPS <- 1e-12
 
+#' .pibmd_moments
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .pibmd_moments <- function(v) {
   n <- length(v)
   m <- sum(v) / n
@@ -15,12 +23,32 @@
 }
 
 # KL(q || p) for two normals -- exact when both are normal.
+#' KL(q || p) for two normals -- exact when both are normal
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mq See Usage.
+#' @param sq2 See Usage.
+#' @param mp See Usage.
+#' @param sp2 See Usage.
+#' @return A numeric value.
+#' @export
 .pibmd_kl_gaussian <- function(mq, sq2, mp, sp2) {
   sp2 <- max(sp2, 1e-300); sq2 <- max(sq2, 1e-300)
   0.5 * log(sp2 / sq2) + (sq2 + (mq - mp) ^ 2) / (2.0 * sp2) - 0.5
 }
 
 # Type-7 quantile of an already-sorted vector.
+#' Type-7 quantile of an already-sorted vector
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sorted_v See Usage.
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .pibmd_quantile <- function(sorted_v, u) {
   n <- length(sorted_v)
   if (n == 1L) return(sorted_v[1])
@@ -31,6 +59,14 @@
 }
 
 # Silverman's rule of thumb, robustified by the interquartile range.
+#' Silverman\'s rule of thumb, robustified by the interquartile range
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .pibmd_bandwidth <- function(v) {
   n <- length(v)
   s <- sort(v)
@@ -41,6 +77,16 @@
   0.9 * a * n ^ (-0.2)
 }
 
+#' .pibmd_kde
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param sample_ See Usage.
+#' @param h See Usage.
+#' @return A numeric value.
+#' @export
 .pibmd_kde <- function(x, sample_, h) {
   cst <- 1.0 / (length(sample_) * h * sqrt(2.0 * pi))
   z <- (x - sample_) / h
@@ -48,6 +94,16 @@
 }
 
 # KL(q || p) from Gaussian kernel densities integrated on a grid.
+#' KL(q || p) from Gaussian kernel densities integrated on a grid
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param p See Usage.
+#' @param n_grid See Usage.
+#' @return A numeric value.
+#' @export
 .pibmd_kl_kde <- function(q, p, n_grid) {
   n <- length(q); m <- length(p)
   if (n < 2L || m < 2L) return(NaN)
@@ -68,6 +124,15 @@
   sum(a[keep] * log(a[keep] / pmax(b[keep], 1e-300)) * dx)
 }
 
+#' .pibmd_ecdf
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sorted_v See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .pibmd_ecdf <- function(sorted_v, x) sum(sorted_v <= x) / length(sorted_v)
 
 #' morie_pibmd_prior_informativeness_bias_diagnostic
@@ -179,6 +244,13 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
                      "disagreement is the signal, not an error"))
 }
 
+#' .pibmd_cheatsheet
+#'
+#' Part of the pibmd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .pibmd_cheatsheet <- function() {
   paste0("pibmd: morie_pibmd_prior_informativeness_bias_diagnostic(samples, ",
          "prior) -> KL(posterior||prior) two ways, shrinkage and a ",

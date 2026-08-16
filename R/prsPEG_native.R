@@ -10,6 +10,17 @@
 .prsPEG_EPS <- 1e-12
 FAIL <- NA_integer_
 
+#' .probe
+#'
+#' Part of the prsPEG_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param text See Usage.
+#' @param pos See Usage.
+#' @param ctx See Usage.
+#' @param fn See Usage.
+#' @return The value of \code{fn}.
+#' @export
 .probe <- function(text, pos, ctx, fn) {
   ctx$steps <- ctx$steps + 1L
   fn(text, pos, ctx)
