@@ -30,7 +30,7 @@ unknown baseline leaves available.
 \details{
 Formula: log pi(b | data) = -b^2/(2 prior_sd^2)
 \itemize{
-\item sum_i \link{b z_i - log sum_{j in R_i} exp(b z_j)}, on a grid.
+\item sum_i [b z_i - log sum_{j in R_i] exp(b z_j)}, on a grid.
 }
 }
 \references{

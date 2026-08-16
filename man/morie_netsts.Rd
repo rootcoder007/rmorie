@@ -8,17 +8,17 @@
 morie_netsts(y, horizon, hidden = 8, n_lags = 4, strategy = "recursive", forget_bias = 1, seed = 0, ridge = 1e-06)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{.netsts_vec}.}
 \item{horizon}{See Usage.}
 \item{hidden}{Defaults to \code{8}.}
 \item{n_lags}{Defaults to \code{4}.}
-\item{strategy}{Defaults to \code{"recursive"}.}
-\item{forget_bias}{Defaults to \code{1}.}
-\item{seed}{Defaults to \code{0}.}
-\item{ridge}{Defaults to \code{1e-06}.}
+\item{strategy}{One of \code{"direct"}, \code{"recursive"}. Defaults to \code{"recursive"}.}
+\item{forget_bias}{Passed to \code{.netsts_lstm_run}. Defaults to \code{1}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{ridge}{Passed to \code{.netsts_lstsq}. Defaults to \code{1e-06}.}
 }
 \description{
-Part of the netsts_native implementation; see the file header for the source it follows.
+A step of the netsts_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{forecast}, \code{strategy}, \code{hidden}, \code{n_lags}, \code{forget_bias}, \code{mean}, \code{sd}, \code{n_models}, \code{retention_10}, \code{method}.

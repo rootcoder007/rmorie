@@ -10,16 +10,16 @@ morie_word_hits(query, subject, w, mode = "exact", threshold = NULL, match = 5, 
 \arguments{
 \item{query}{See Usage.}
 \item{subject}{See Usage.}
-\item{w}{See Usage.}
-\item{mode}{Defaults to \code{"exact"}.}
+\item{w}{A count; the body uses it as \code{seq_len(...)}.}
+\item{mode}{One of \code{"exact"}, \code{"neighborhood"}. Defaults to \code{"exact"}.}
 \item{threshold}{Defaults to \code{NULL}.}
 \item{match}{Defaults to \code{5}.}
 \item{mismatch}{Defaults to \code{-4}.}
-\item{matrix}{Defaults to \code{NULL}.}
-\item{alphabet}{Defaults to \code{"ACGT"}.}
+\item{matrix}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
+\item{alphabet}{Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.}
 }
 \description{
-Part of the blstn_native implementation; see the file header for the source it follows.
+A step of the blstn_native implementation. Called by \code{morie_blstn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{hits}, as built in the body.

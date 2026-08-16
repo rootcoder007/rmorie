@@ -11,13 +11,13 @@ RespSound(length_m = 0.1, radius_m = 0.009, freqs = NULL, rho = 1.2, c = 343, mu
 \item{length_m}{Defaults to \code{0.1}.}
 \item{radius_m}{Defaults to \code{0.009}.}
 \item{freqs}{Defaults to \code{NULL}.}
-\item{rho}{Defaults to \code{1.2}.}
-\item{c}{Defaults to \code{343}.}
-\item{mu}{Defaults to \code{1.8e-05}.}
-\item{P0}{Defaults to \code{101325}.}
-\item{eta}{Defaults to \code{1.4}.}
-\item{lam}{Defaults to \code{0.026}.}
-\item{cp}{Defaults to \code{1005}.}
+\item{rho}{Numeric; passed to \code{min}. Defaults to \code{1.2}.}
+\item{c}{Numeric; passed to \code{min}. Defaults to \code{343}.}
+\item{mu}{Numeric; passed to \code{min}. Defaults to \code{1.8e-05}.}
+\item{P0}{Numeric; passed to \code{min}. Defaults to \code{101325}.}
+\item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{1.4}.}
+\item{lam}{Numeric; passed to \code{min}. Defaults to \code{0.026}.}
+\item{cp}{Numeric; passed to \code{min}. Defaults to \code{1005}.}
 }
 \description{
 Rangayyan (2024) eqs. (7.122), (7.127), (7.128), (7.129), Section 7.7.1.

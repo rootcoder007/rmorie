@@ -66,22 +66,24 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 
 #' .if_wmean
 #'
-#' Part of the infcrv implementation; see the file header for the source
+#' A step of the infcrv implementation. Called by \code{.if_wvar}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
-#' @param w See Usage.
+#' @param v Numeric; combined arithmetically in the body.
+#' @param w Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 .if_wmean <- function(v, w) sum(w * v) / sum(w)
 
 #' .if_wvar
 #'
-#' Part of the infcrv implementation; see the file header for the source
+#' A step of the infcrv implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
-#' @param w See Usage.
+#' @param v Numeric; combined arithmetically in the body.
+#' @param w Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 .if_wvar <- function(v, w) {
@@ -96,8 +98,8 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #'
 #' half the total.
 #'
-#' @param v See Usage.
-#' @param w See Usage.
+#' @param v A vector; indexed elementwise.
+#' @param w A vector; indexed elementwise.
 #' @return The value of \code{[}.
 #' @export
 .if_wmedian <- function(v, w) {
@@ -113,10 +115,11 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 
 #' .if_resolve
 #'
-#' Part of the infcrv implementation; see the file header for the source
+#' A step of the infcrv implementation. Called by \code{Btvinf}, \code{Infcrv}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param estimator See Usage.
+#' @param estimator One of \code{"mean"}, \code{"median"}, \code{"var"}.
 #' @param who See Usage.
 #' @return Nothing; this branch always raises.
 #' @export

@@ -9,7 +9,7 @@ Roc(scores, labels, positive = 1)
 }
 \arguments{
 \item{scores}{See Usage.}
-\item{labels}{See Usage.}
+\item{labels}{A vector; its length is taken.}
 \item{positive}{Defaults to \code{1}.}
 }
 \description{

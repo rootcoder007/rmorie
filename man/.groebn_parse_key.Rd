@@ -8,7 +8,7 @@
 .groebn_parse_key(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Character; passed to \code{strsplit}.}
 }
 \description{
 Exponent keys ---------------------------------------------------------------------------

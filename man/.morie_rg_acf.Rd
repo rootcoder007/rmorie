@@ -8,11 +8,11 @@
 .morie_rg_acf(x, lags)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{lags}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{lags}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. Called by \code{Acfseg}, \code{PcgSeg}, \code{PsdAcf} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

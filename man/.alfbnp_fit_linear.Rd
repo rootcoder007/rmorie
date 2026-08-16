@@ -8,10 +8,10 @@
 .alfbnp_fit_linear(clean, sigmas, draws, ridge)
 }
 \arguments{
-\item{clean}{See Usage.}
-\item{sigmas}{See Usage.}
-\item{draws}{See Usage.}
-\item{ridge}{See Usage.}
+\item{clean}{A vector; indexed elementwise.}
+\item{sigmas}{A vector; its length is taken and its elements indexed.}
+\item{draws}{A vector; its length is taken and its elements indexed.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
 optimal linear map is a ridge regression with a closed form; descending to it would only add a tolerance for the two arms to disagree about.

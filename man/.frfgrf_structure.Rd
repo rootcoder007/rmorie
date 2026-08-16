@@ -8,10 +8,10 @@
 .frfgrf_structure(tree)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right}, \code{$threshold} from it.}
 }
 \description{
-Part of the frfgrf_native implementation; see the file header for the source it follows.
+A step of the frfgrf_native implementation. Called by \code{.frfgrf_honesty_test}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

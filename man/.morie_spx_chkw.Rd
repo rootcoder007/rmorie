@@ -8,12 +8,12 @@
 .morie_spx_chkw(w, n, zero_diag = TRUE)
 }
 \arguments{
-\item{w}{See Usage.}
+\item{w}{A matrix; passed to \code{as.matrix}.}
 \item{n}{See Usage.}
-\item{zero_diag}{Defaults to \code{TRUE}.}
+\item{zero_diag}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{LisaClust}, \code{LisaI}, \code{MantelM2} and 7 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{W}, as built in the body.

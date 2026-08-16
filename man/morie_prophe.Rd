@@ -16,7 +16,7 @@ morie_prophe(t, y, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 
 \item{...}{Passed through.}
 }
 \description{
-Part of the prophe_native implementation; see the file header for the source it follows.
+A step of the prophe_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{prophe_additive_components}.

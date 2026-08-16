@@ -8,7 +8,7 @@
 .s03pairs(coords)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 matrix or data frame, or a flat vector of even length in x, y order.

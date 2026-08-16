@@ -8,10 +8,10 @@
 .rmorie_random_bytes_impl(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

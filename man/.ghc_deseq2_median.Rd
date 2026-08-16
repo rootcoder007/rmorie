@@ -8,10 +8,10 @@
 .ghc_deseq2_median(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{sort}.}
 }
 \description{
-Part of the deseq2_native implementation; see the file header for the source it follows.
+A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_mad}, \code{dispersion_trend}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

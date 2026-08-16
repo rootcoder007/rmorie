@@ -8,19 +8,19 @@
 .scintg_maximum_diversity_clustering(Z, batches, K = NULL, sigma = 0.1, theta = 2, max_iter = 25, tol = 1e-05, seed = 0, Y = NULL, diversity = "penalise")
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{batches}{See Usage.}
-\item{K}{Defaults to \code{NULL}.}
-\item{sigma}{Defaults to \code{0.1}.}
-\item{theta}{Defaults to \code{2}.}
+\item{Z}{Passed to \code{.scintg_matrix}.}
+\item{batches}{A vector; its length is taken.}
+\item{K}{Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.}
+\item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
+\item{theta}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 \item{max_iter}{Defaults to \code{25}.}
-\item{tol}{Defaults to \code{1e-05}.}
-\item{seed}{Defaults to \code{0}.}
-\item{Y}{Defaults to \code{NULL}.}
-\item{diversity}{Defaults to \code{"penalise"}.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
+\item{seed}{Passed to \code{.scintg_kmeans_init}. Defaults to \code{0}.}
+\item{Y}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{diversity}{Compared against \code{"as_printed"}. Defaults to \code{"penalise"}.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{morie_scintg}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{R}, \code{Y}, \code{K}, \code{objective}.

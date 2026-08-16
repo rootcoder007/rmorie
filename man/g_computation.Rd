@@ -13,7 +13,7 @@ g_computation(strata, outcome_means, covariate_probs)
 \item{covariate_probs}{See Usage.}
 }
 \description{
-Part of the tlgcmp_native implementation; see the file header for the source it follows.
+A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

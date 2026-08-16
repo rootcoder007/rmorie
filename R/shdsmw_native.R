@@ -21,21 +21,23 @@
 
 #' .vec
 #'
-#' Part of the shdsmw_native implementation; see the file header for the
+#' A step of the shdsmw_native implementation. Called by \code{.shdsmw_wls}, \code{shrinkage_msm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .vec <- function(x) as.numeric(as.matrix(x))
 
 #' .hist
 #'
-#' Part of the shdsmw_native implementation; see the file header for the
+#' A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param obj See Usage.
-#' @param allow_none Defaults to \code{FALSE}.
+#' @param obj Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param allow_none A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{list}.
 #' @export
 .hist <- function(obj, allow_none = FALSE) {
@@ -50,12 +52,13 @@
 
 #' .shdsmw_wls
 #'
-#' Part of the shdsmw_native implementation; see the file header for the
+#' A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}.
 #' @export
 .shdsmw_wls <- function(X, y, w) {

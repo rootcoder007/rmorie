@@ -63,12 +63,13 @@
 # F(x) = F0 + sum x_i F_i (the LMI)
 #' F(x) = F0 + sum x_i F_i (the LMI)
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. Called by \code{sdpwts_barrier}, \code{sdpwts_solve_sdp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param F0 See Usage.
-#' @param Fs See Usage.
+#' @param F0 A matrix; passed to \code{as.matrix}.
+#' @param Fs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 sdpwts_lmi <- function(x, F0, Fs) {
@@ -93,10 +94,11 @@ sdpwts_lmi <- function(x, F0, Fs) {
 # Eigenvalue test on the constraint matrix
 #' Eigenvalue test on the constraint matrix
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; passed to \code{as.matrix}.
 #' @param tol Defaults to \code{-1e-10}.
 #' @return A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd}, \code{strictly_feasible}.
 #' @export
@@ -113,7 +115,8 @@ sdpwts_is_psd <- function(M, tol = -1e-10) {
 # -log det F(x), INFINITE outside the cone
 #' Log det F(x), INFINITE outside the cone
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. Called by \code{.sdpwts_objective}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -140,7 +143,8 @@ sdpwts_barrier <- function(x, F0, Fs) {
 # The duality gap at a central point is exactly m/t
 #' The duality gap at a central point is exactly m/t
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t See Usage.
@@ -160,7 +164,8 @@ sdpwts_central_path_gap <- function(t, m) {
 # Private: the centring objective t * c'x - log det F(x)
 #' Private: the centring objective t * c\'x - log det F(x)
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. Called by \code{.sdpwts_centre}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -183,13 +188,13 @@ sdpwts_central_path_gap <- function(t, m) {
 #' backtracking line search
 #'
 #' @param x0 See Usage.
-#' @param c_vec See Usage.
-#' @param F0 See Usage.
-#' @param Fs See Usage.
-#' @param t See Usage.
+#' @param c_vec Passed to \code{.sdpwts_objective}.
+#' @param F0 Passed to \code{.sdpwts_objective}.
+#' @param Fs Passed to \code{.sdpwts_objective}.
+#' @param t Passed to \code{.sdpwts_objective}.
 #' @param iters Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-12}.
-#' @param h Defaults to \code{1e-06}.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return A list with \code{x}, \code{value}, \code{iterations}.
 #' @export
 .sdpwts_centre <- function(x0, c_vec, F0, Fs, t, iters = 200,
@@ -238,12 +243,13 @@ sdpwts_central_path_gap <- function(t, m) {
 # The barrier method: centre, increase t, repeat
 #' The barrier method: centre, increase t, repeat
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. Called by \code{sdpwts_min_eigenvalue_sdp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param c See Usage.
-#' @param F0 See Usage.
-#' @param Fs See Usage.
+#' @param F0 A matrix; passed to \code{as.matrix}.
+#' @param Fs Passed to \code{.sdpwts_centre}.
 #' @param x0 See Usage.
 #' @param t0 Defaults to \code{1}.
 #' @param mu Defaults to \code{10}.
@@ -293,10 +299,11 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 # Maximise t s.t. A - tI >= 0  (exact answer = lambda_min(A))
 #' Maximise t s.t. A - tI >= 0 (exact answer = lambda_min(A))
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
 #' @param t0 Defaults to \code{1}.
 #' @param mu Defaults to \code{10}.
 #' @param tol Defaults to \code{1e-09}.
@@ -328,7 +335,8 @@ morie_sdpwts <- sdpwts_solve_sdp
 
 #' sdpwts_cheatsheet
 #'
-#' Part of the sdpwts_native implementation; see the file header for the
+#' A step of the sdpwts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

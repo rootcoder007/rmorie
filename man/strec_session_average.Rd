@@ -8,10 +8,10 @@
 strec_session_average(embeddings)
 }
 \arguments{
-\item{embeddings}{See Usage.}
+\item{embeddings}{Passed to \code{.strec_as_rows}.}
 }
 \description{
-Part of the strec_native implementation; see the file header for the source it follows.
+A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_stamp_scores}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{m_s}, \code{m_t}, \code{length}, \code{note}.

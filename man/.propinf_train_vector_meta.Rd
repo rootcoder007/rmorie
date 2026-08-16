@@ -8,15 +8,15 @@
 .propinf_train_vector_meta(feats, labels, hidden, epochs, lr, seed)
 }
 \arguments{
-\item{feats}{See Usage.}
-\item{labels}{See Usage.}
+\item{feats}{A vector; its length is taken and its elements indexed.}
+\item{labels}{A vector; indexed elementwise.}
 \item{hidden}{See Usage.}
 \item{epochs}{See Usage.}
-\item{lr}{See Usage.}
+\item{lr}{Passed to \code{.propinf_sgd_step}.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{morie_propinf_property_inference}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{net}, as built in the body.

@@ -8,14 +8,14 @@
 morie_acigls(y, A, H, cluster, small_sample = TRUE)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{A}{A matrix; indexed by row and column.}
 \item{H}{See Usage.}
 \item{cluster}{See Usage.}
-\item{small_sample}{Defaults to \code{TRUE}.}
+\item{small_sample}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the acigls_native implementation; see the file header for the source it follows.
+A step of the acigls_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{coefficients}, \code{std_errors}, \code{naive_std_errors}, \code{vcov}, \code{residuals}, \code{n}, \code{n_clusters}, \code{n_coefficients}, \code{sum_weights}, \code{finite_sample_correction}, \code{inflation}, \code{method}.

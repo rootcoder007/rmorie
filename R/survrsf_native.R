@@ -52,7 +52,8 @@ morie_survrsf_SPLIT_RULES <- c("logrank", "logrankrandom", "conserve",
 
 #' Which of the paper\'s four splitting rules are implemented
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param rule Defaults to \code{NULL}.
@@ -76,7 +77,8 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 
 #' .survrsf_check_rule
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}, \code{morie_survrsf_forest}, \code{morie_survrsf_grow_tree}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param rule See Usage.
@@ -142,11 +144,12 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 
 #' The terminal-node estimator of equation (3.1)
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals}, \code{morie_survrsf_grow_tree}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
 #' @return A list with \code{time}, \code{chf}, \code{n}, \code{deaths}.
 #' @export
 morie_survrsf_nelson_aalen <- function(times, events) {
@@ -187,10 +190,11 @@ morie_survrsf_nelson_aalen <- function(times, events) {
 
 #' .survrsf_chf_at
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals}, \code{morie_survrsf_ensemble_chf} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param na See Usage.
+#' @param na A list; the body reads \code{$chf}, \code{$time} from it.
 #' @param t See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -211,8 +215,8 @@ morie_survrsf_nelson_aalen <- function(times, events) {
 #'
 #' Censored times count too.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param times Passed to \code{morie_survrsf_nelson_aalen}.
+#' @param events Passed to \code{morie_survrsf_nelson_aalen}.
 #' @return A list with \code{sum_chf}, \code{deaths}, \code{difference}, \code{conserved}.
 #' @export
 morie_survrsf_conservation_check <- function(times, events) {
@@ -228,12 +232,13 @@ morie_survrsf_conservation_check <- function(times, events) {
 
 #' The two-sample log-rank statistic used for splitting
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param group See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
+#' @param group A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 morie_survrsf_logrank_statistic <- function(times, events, group) {
@@ -285,8 +290,8 @@ morie_survrsf_logrank_statistic <- function(times, events, group) {
 #' Without censoring or ties these are the Savage scores and sum to
 #' zero.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_survrsf_logrank_scores <- function(times, events) {
@@ -317,12 +322,13 @@ morie_survrsf_logrank_scores <- function(times, events) {
 
 #' morie_survrsf_logrank_score_statistic
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param group See Usage.
+#' @param times A vector; its length is taken.
+#' @param events Passed to \code{morie_survrsf_logrank_scores}.
+#' @param group A vector; its length is taken.
 #' @param scores Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -359,8 +365,8 @@ morie_survrsf_logrank_score_statistic <- function(times, events, group,
 #'
 #' times of a node. Lemma 1 forces M_n = 0.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_survrsf_conservation_residuals <- function(times, events) {
@@ -392,9 +398,9 @@ morie_survrsf_conservation_residuals <- function(times, events) {
 #'
 #' Returns the transform 1/(1 + Conserve).
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param group See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
+#' @param group A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 morie_survrsf_conserve_statistic <- function(times, events, group) {
@@ -422,16 +428,17 @@ morie_survrsf_conserve_statistic <- function(times, events, group) {
 
 #' morie_survrsf_best_split
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_grow_tree}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param times A vector; its length is taken.
+#' @param events A vector; indexed elementwise.
 #' @param features See Usage.
 #' @param min_deaths Defaults to \code{3}.
-#' @param rule Defaults to \code{"logrank"}.
-#' @param rng Defaults to \code{NULL}.
+#' @param rule One of \code{"conserve"}, \code{"logrankrandom"}, \code{"logrankscore"}. Defaults to \code{"logrank"}.
+#' @param rng Optional; may be \code{NULL}. A list; the body reads \code{$randint} from it.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 morie_survrsf_best_split <- function(X, times, events, features,
@@ -487,17 +494,18 @@ morie_survrsf_best_split <- function(X, times, events, features,
 
 #' morie_survrsf_grow_tree
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_forest}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; indexed elementwise.
 #' @param mtry Defaults to \code{NULL}.
-#' @param min_deaths Defaults to \code{3}.
-#' @param rule Defaults to \code{"logrank"}.
-#' @param seed Defaults to \code{0}.
-#' @param rng Defaults to \code{NULL}.
+#' @param min_deaths Numeric; combined arithmetically in the body. Defaults to \code{3}.
+#' @param rule Passed to \code{.survrsf_check_rule}. Defaults to \code{"logrank"}.
+#' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{0}.
+#' @param rng Optional; may be \code{NULL}. A list; the body reads \code{$sample_} from it.
 #' @return A list with \code{root}, \code{rule}, \code{mtry}, \code{min_deaths}, \code{n}.
 #' @export
 morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
@@ -548,11 +556,12 @@ morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
 
 #' morie_survrsf_predict_tree
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_ensemble_chf}, \code{morie_survrsf_mortality}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param tree See Usage.
-#' @param x See Usage.
+#' @param tree A list; the body reads \code{$root} from it.
+#' @param x A vector; indexed elementwise.
 #' @param random_variable Defaults to \code{NULL}.
 #' @param rng Defaults to \code{NULL}.
 #' @return The value of \code{node}, as built in the body.
@@ -577,17 +586,18 @@ morie_survrsf_predict_tree <- function(tree, x, random_variable=NULL,
 
 #' morie_survrsf_forest
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; indexed elementwise.
 #' @param n_trees Defaults to \code{50}.
-#' @param mtry Defaults to \code{NULL}.
-#' @param min_deaths Defaults to \code{3}.
-#' @param rule Defaults to \code{"logrank"}.
-#' @param seed Defaults to \code{0}.
+#' @param mtry Passed to \code{morie_survrsf_grow_tree}.
+#' @param min_deaths Numeric; combined arithmetically in the body. Defaults to \code{3}.
+#' @param rule Passed to \code{.survrsf_check_rule}. Defaults to \code{"logrank"}.
+#' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{0}.
 #' @return A list with \code{trees}, \code{inbag}, \code{n}, \code{rule}, \code{n_trees}, \code{oob_fraction}, \code{times}, \code{events}.
 #' @export
 morie_survrsf_forest <- function(X, times, events, n_trees=50, mtry=NULL,
@@ -626,15 +636,16 @@ morie_survrsf_forest <- function(X, times, events, n_trees=50, mtry=NULL,
 
 #' morie_survrsf_ensemble_chf
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fit See Usage.
-#' @param X See Usage.
-#' @param t See Usage.
-#' @param oob Defaults to \code{TRUE}.
-#' @param random_variable Defaults to \code{NULL}.
-#' @param seed Defaults to \code{1}.
+#' @param fit A list; the body reads \code{$inbag}, \code{$trees} from it.
+#' @param X A matrix; indexed by row and column.
+#' @param t Passed to \code{.survrsf_chf_at}.
+#' @param oob A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param random_variable Passed to \code{morie_survrsf_predict_tree}.
+#' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_survrsf_ensemble_chf <- function(fit, X, t, oob=TRUE,
@@ -663,14 +674,15 @@ morie_survrsf_ensemble_chf <- function(fit, X, t, oob=TRUE,
 
 #' morie_survrsf_mortality
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_vimp}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fit See Usage.
-#' @param X See Usage.
-#' @param oob Defaults to \code{TRUE}.
-#' @param random_variable Defaults to \code{NULL}.
-#' @param seed Defaults to \code{1}.
+#' @param fit A list; the body reads \code{$inbag}, \code{$times}, \code{$trees} from it.
+#' @param X A matrix; indexed by row and column.
+#' @param oob A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param random_variable Passed to \code{morie_survrsf_predict_tree}.
+#' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_survrsf_mortality <- function(fit, X, oob=TRUE,
@@ -705,9 +717,9 @@ morie_survrsf_mortality <- function(fit, X, oob=TRUE,
 #' worse-outcome score: larger means the case is expected to fail
 #' sooner.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param predicted See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
+#' @param predicted A vector; its length is taken and its elements indexed.
 #' @return A list with \code{c_index}, \code{concordance}, \code{permissible}, \code{prediction_error}.
 #' @export
 morie_survrsf_c_index <- function(times, events, predicted) {
@@ -778,10 +790,10 @@ morie_survrsf_c_index <- function(times, events, predicted) {
 #'
 #' 0-based variable indices to match the Python.
 #'
-#' @param fit See Usage.
-#' @param X See Usage.
+#' @param fit A list; the body reads \code{$events}, \code{$times} from it.
+#' @param X A matrix; passed to \code{ncol}.
 #' @param variables Defaults to \code{NULL}.
-#' @param seed Defaults to \code{1}.
+#' @param seed Passed to \code{morie_survrsf_mortality}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{vimp}, \code{baseline_error}, \code{note}, \code{method}.
 #' @export
 morie_survrsf_vimp <- function(fit, X, variables=NULL, seed=1) {
@@ -818,7 +830,8 @@ morie_survrsf_vimp <- function(fit, X, variables=NULL, seed=1) {
 
 #' morie_survrsf_cheatsheet
 #'
-#' Part of the survrsf_native implementation; see the file header for
+#' A step of the survrsf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

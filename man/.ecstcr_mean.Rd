@@ -8,10 +8,10 @@
 .ecstcr_mean(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the ecsTCR_native implementation; see the file header for the source it follows.
+A step of the ecsTCR_native implementation. Called by \code{.ecstcr_ols}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.
@@ -19,7 +19,7 @@ One of two values, depending on the branch taken.
 \references{
   Charney, J.G. et al. (1979) "Carbon Dioxide and Climate: A Scientific
     Assessment." National Academy of Sciences, Washington DC.
-  Forster, P. et al. (2021) "The Earth\\'s Energy Budget, Climate
+  Forster, P. et al. (2021) "The Earth\'s Energy Budget, Climate
     Feedbacks, and Climate Sensitivity", Chapter 7 of IPCC AR6 WG1,
     Cambridge University Press, 923-1054,
     doi:10.1017/9781009157896.009

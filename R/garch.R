@@ -8,9 +8,9 @@
 #' fallback. Extracted from the morie_garch_fit() optimiser closure so
 #' the parameter-domain guard is directly unit-testable.
 #'
-#' @param p See Usage.
-#' @param r See Usage.
-#' @param n See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param r A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{numeric(...)}.
 #' @return A numeric value.
 #' @export
 .garch_negll <- function(p, r, n) {

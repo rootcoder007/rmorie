@@ -8,12 +8,12 @@
 .morie_km2_sim_matrix(x, xhat, normalize)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{xhat}{See Usage.}
-\item{normalize}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
+\item{xhat}{A matrix; passed to \code{as.matrix}.}
+\item{normalize}{A flag; the body branches on it.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch8_bertscore_recall}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

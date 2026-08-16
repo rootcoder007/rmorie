@@ -9,7 +9,7 @@ Fastm(X, h = NULL, n_starts = 500L, max_iter = 100L, n_keep = 10L)
 \arguments{
 \item{X}{n-by-p data matrix.}
 
-\item{h}{subset size; defaults to \link{(n + p + 1)/2}.}
+\item{h}{subset size; defaults to [(n + p + 1)/2].}
 
 \item{n_starts}{how many lexicographic elemental subsets to start from.}
 

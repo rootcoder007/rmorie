@@ -8,10 +8,10 @@
 .ecfp_envkey(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the ecfp4 implementation; see the file header for the source it follows.
+A step of the ecfp4 implementation. Called by \code{.ecfp_morgan}. See the file header for the source the module follows.
 }
 \value{
 A character value.

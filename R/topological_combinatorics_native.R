@@ -85,7 +85,7 @@ morie_euler_characteristic <- function(maximal_simplices) {
 #' Part of the topological_combinatorics_native implementation; see the
 #' file header for the source it follows.
 #'
-#' @param m See Usage.
+#' @param m Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return The value of \code{rank}, as built in the body.
 #' @export
 .morie_gf2_rank <- function(m) {

@@ -8,9 +8,9 @@
 .morie_random_uniform(n, seed = 0, stream = 0)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
-\item{stream}{Defaults to \code{0}.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{stream}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
 normal quantile at 0 or 1 is infinite, and (w + 0.5)/2^32 reaches neither endpoint.

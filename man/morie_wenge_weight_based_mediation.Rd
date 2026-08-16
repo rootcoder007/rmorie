@@ -8,15 +8,15 @@
 morie_wenge_weight_based_mediation(X, M, C, Y, strategy = "em", saturated = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{M}{See Usage.}
-\item{C}{See Usage.}
-\item{Y}{See Usage.}
-\item{strategy}{Defaults to \code{"em"}.}
-\item{saturated}{Defaults to \code{TRUE}.}
+\item{X}{Passed to \code{.s03vec}.}
+\item{M}{Optional; may be \code{NULL}. Passed to \code{morie_wenge_mediation_functional}.}
+\item{C}{Optional; may be \code{NULL}. Passed to \code{morie_wenge_mediation_functional}.}
+\item{Y}{Passed to \code{.s03vec}.}
+\item{strategy}{Passed to \code{morie_wenge_mediation_functional}. Defaults to \code{"em"}.}
+\item{saturated}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the wenge_native implementation; see the file header for the source it follows.
+A step of the wenge_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

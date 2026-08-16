@@ -13,7 +13,7 @@ morie_tsbF_demand_classification(y, adi_cut = 1.32, cv2_cut = 0.49)
 \item{cv2_cut}{Defaults to \code{0.49}.}
 }
 \description{
-Part of the tsbF_native implementation; see the file header for the source it follows.
+A step of the tsbF_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{class}, \code{adi}, \code{cv2}, \code{n_positive}, \code{n}.

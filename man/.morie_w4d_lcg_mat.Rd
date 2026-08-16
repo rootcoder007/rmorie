@@ -8,13 +8,13 @@
 .morie_w4d_lcg_mat(nr, nc, seed, scale = 0.1)
 }
 \arguments{
-\item{nr}{See Usage.}
-\item{nc}{See Usage.}
+\item{nr}{A count; the body uses it as \code{matrix(...)}.}
+\item{nc}{A count; the body uses it as \code{matrix(...)}.}
 \item{seed}{See Usage.}
-\item{scale}{Defaults to \code{0.1}.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_sae_train_layer}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

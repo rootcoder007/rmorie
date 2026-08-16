@@ -12,7 +12,8 @@
 
 #' morie_ragRet_normalise
 #'
-#' Part of the ragRet_native implementation; see the file header for the
+#' A step of the ragRet_native implementation. Called by \code{morie_ragRet_top_k}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -26,13 +27,14 @@ morie_ragRet_normalise <- function(v) {
 
 #' morie_ragRet_top_k
 #'
-#' Part of the ragRet_native implementation; see the file header for the
+#' A step of the ragRet_native implementation. Called by \code{morie_ragRet_ivf_search}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param query See Usage.
 #' @param corpus See Usage.
 #' @param k.top Defaults to \code{5L}.
-#' @param metric Defaults to \code{"inner_product"}.
+#' @param metric Compared against \code{"cosine"}. Defaults to \code{"inner_product"}.
 #' @return A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric}, \code{comparisons}, \code{note}.
 #' @export
 morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
@@ -61,7 +63,8 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
 
 #' morie_ragRet_ivf_index
 #'
-#' Part of the ragRet_native implementation; see the file header for the
+#' A step of the ragRet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param corpus See Usage.
@@ -117,15 +120,16 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
 
 #' morie_ragRet_ivf_search
 #'
-#' Part of the ragRet_native implementation; see the file header for the
+#' A step of the ragRet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param query See Usage.
-#' @param corpus See Usage.
-#' @param index See Usage.
+#' @param corpus A vector; indexed elementwise.
+#' @param index A list; the body reads \code{$centroids}, \code{$lists}, \code{$n}, \code{$n.cells} from it.
 #' @param k.top Defaults to \code{5L}.
 #' @param nprobe Defaults to \code{1L}.
-#' @param metric Defaults to \code{"inner_product"}.
+#' @param metric Passed to \code{morie_ragRet_top_k}. Defaults to \code{"inner_product"}.
 #' @return A list with \code{indices}, \code{scores}, \code{comparisons}, \code{probed}, \code{n.cells}, \code{fraction.scanned}, \code{note}.
 #' @export
 morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
@@ -153,7 +157,8 @@ morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
 
 #' morie_ragRet_recall_at_k
 #'
-#' Part of the ragRet_native implementation; see the file header for the
+#' A step of the ragRet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param approximate See Usage.
@@ -171,12 +176,13 @@ morie_ragRet_recall_at_k <- function(approximate, exact) {
 
 #' morie_ragRet_marginalise
 #'
-#' Part of the ragRet_native implementation; see the file header for the
+#' A step of the ragRet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param doc.scores See Usage.
 #' @param token.probs See Usage.
-#' @param mode Defaults to \code{"sequence"}.
+#' @param mode One of \code{"sequence"}, \code{"token"}. Defaults to \code{"sequence"}.
 #' @return Nothing; this branch always raises.
 #' @export
 morie_ragRet_marginalise <- function(doc.scores, token.probs,

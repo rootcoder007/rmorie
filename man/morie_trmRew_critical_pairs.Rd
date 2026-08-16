@@ -8,10 +8,10 @@
 morie_trmRew_critical_pairs(rules)
 }
 \arguments{
-\item{rules}{See Usage.}
+\item{rules}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{morie_trmRew_is_locally_confluent}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

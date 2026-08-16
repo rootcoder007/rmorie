@@ -11,7 +11,7 @@
 \item{base}{See Usage.}
 }
 \description{
-Part of the phylml_native implementation; see the file header for the source it follows.
+A step of the phylml_native implementation. Called by \code{.phylml_prune}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

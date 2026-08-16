@@ -8,14 +8,14 @@
 .survroc_km_pair(T, E, M, c, t)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{E}{See Usage.}
+\item{T}{A vector; its length is taken and its elements indexed.}
+\item{E}{A vector; indexed elementwise.}
 \item{M}{See Usage.}
 \item{c}{See Usage.}
-\item{t}{See Usage.}
+\item{t}{Passed to \code{morie_survroc_kaplan_meier}.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. Called by \code{.survroc_pair}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

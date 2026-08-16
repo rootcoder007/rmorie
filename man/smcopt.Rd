@@ -19,10 +19,10 @@ smcopt(objective, initial, n_particles = 200, n_steps = 30, phi_max = 50, phi_mi
 \item{ess_threshold}{Defaults to \code{0.5}.}
 \item{scheme}{Defaults to \code{"systematic"}.}
 \item{seed}{Defaults to \code{0}.}
-\item{maximise}{Defaults to \code{TRUE}.}
+\item{maximise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the smcopt_native implementation; see the file header for the source it follows.
+A step of the smcopt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{best_x}, \code{best_value}, \code{particles}, \code{weights}, \code{particle_mean}, \code{ladder}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{n_particles}, \code{maximise}, \code{note}, \code{method}.

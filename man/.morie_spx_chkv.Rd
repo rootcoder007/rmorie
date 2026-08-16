@@ -12,7 +12,7 @@
 \item{name}{Defaults to \code{"x"}.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{LisaClust}, \code{LisaI} and 16 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

@@ -10,10 +10,10 @@
 \arguments{
 \item{f}{See Usage.}
 \item{G}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
+\item{order}{Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_normal_form}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{quotients}, \code{remainder}.

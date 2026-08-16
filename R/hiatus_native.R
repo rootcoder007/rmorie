@@ -9,13 +9,14 @@
 
 #' ._check
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \code{derivatives}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
-#' @param nu See Usage.
+#' @param nu A vector; its length is taken.
 #' @param mu See Usage.
-#' @param sigma See Usage.
+#' @param sigma A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{b}, \code{nv}, \code{m}, \code{sg}, \code{n}.
 #' @export
 ._check <- function(beta, nu, mu, sigma) {
@@ -54,11 +55,12 @@
 
 #' basic_reproduction_numbers
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \code{endemic_equilibrium}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
-#' @param nu See Usage.
+#' @param nu A vector; its length is taken.
 #' @param mu See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -80,11 +82,12 @@ basic_reproduction_numbers <- function(beta, nu, mu) {
 
 #' endemic_equilibrium
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
-#' @param nu See Usage.
+#' @param nu A vector; its length is taken.
 #' @param mu See Usage.
 #' @param strain Defaults to \code{0L}.
 #' @return A list with \code{R0}, \code{S}, \code{I}.
@@ -105,15 +108,16 @@ endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
 
 #' derivatives
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param S See Usage.
 #' @param I See Usage.
-#' @param beta See Usage.
-#' @param nu See Usage.
-#' @param mu See Usage.
-#' @param sigma See Usage.
+#' @param beta Passed to \code{._check}.
+#' @param nu Passed to \code{._check}.
+#' @param mu Passed to \code{._check}.
+#' @param sigma Passed to \code{._check}.
 #' @return A list with \code{dS}, \code{dI}.
 #' @export
 derivatives <- function(S, I, beta, nu, mu, sigma) {
@@ -145,16 +149,17 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 
 #' .hiatus_simulate
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. Called by \code{morie_hiatus}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
-#' @param nu See Usage.
-#' @param mu See Usage.
-#' @param sigma See Usage.
+#' @param beta Passed to \code{._check}.
+#' @param nu Passed to \code{._check}.
+#' @param mu Passed to \code{._check}.
+#' @param sigma Passed to \code{._check}.
 #' @param S0 Defaults to \code{NULL}.
 #' @param I0 Defaults to \code{NULL}.
-#' @param t_end Defaults to \code{2000}.
+#' @param t_end Numeric; combined arithmetically in the body. Defaults to \code{2000}.
 #' @param dt Defaults to \code{0.05}.
 #' @param mutation Defaults to \code{0}.
 #' @param record_every Defaults to \code{100L}.
@@ -251,7 +256,8 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 
 #' linear_strain_space
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
@@ -280,19 +286,20 @@ hiatusmodel <- .hiatus_simulate
 
 #' morie_hiatus
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
-#' @param nu See Usage.
-#' @param mu See Usage.
-#' @param sigma See Usage.
-#' @param S0 Defaults to \code{NULL}.
-#' @param I0 Defaults to \code{NULL}.
-#' @param t_end Defaults to \code{2000}.
-#' @param dt Defaults to \code{0.05}.
-#' @param mutation Defaults to \code{0}.
-#' @param record_every Defaults to \code{100L}.
+#' @param beta Passed to \code{.hiatus_simulate}.
+#' @param nu Passed to \code{.hiatus_simulate}.
+#' @param mu Passed to \code{.hiatus_simulate}.
+#' @param sigma Passed to \code{.hiatus_simulate}.
+#' @param S0 Passed to \code{.hiatus_simulate}.
+#' @param I0 Passed to \code{.hiatus_simulate}.
+#' @param t_end Passed to \code{.hiatus_simulate}. Defaults to \code{2000}.
+#' @param dt Passed to \code{.hiatus_simulate}. Defaults to \code{0.05}.
+#' @param mutation Passed to \code{.hiatus_simulate}. Defaults to \code{0}.
+#' @param record_every Passed to \code{.hiatus_simulate}. Defaults to \code{100L}.
 #' @return The value of \code{.hiatus_simulate}.
 #' @export
 morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
@@ -304,7 +311,8 @@ morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
 
 #' .hiatus_cheatsheet
 #'
-#' Part of the hiatus_native implementation; see the file header for the
+#' A step of the hiatus_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

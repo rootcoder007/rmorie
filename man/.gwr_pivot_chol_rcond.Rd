@@ -8,7 +8,7 @@
 .gwr_pivot_chol_rcond(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; indexed by row and column.}
 }
 \description{
 essentially zero; returns a list with the cholesky factor, the rank-deficient count, and the effective rank threshold.

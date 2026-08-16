@@ -8,11 +8,11 @@
 .morie_w4d_lcg_normal(n, seed)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_vae}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

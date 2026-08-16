@@ -8,8 +8,8 @@
 .s4_ols(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
 }
 \description{
 # shared tail1 core uses each language own QR (MGS in Python, Householder # in R); on an ill-conditioned design those part company around 1e-8, # above the parity threshold and below anything a user would notice.

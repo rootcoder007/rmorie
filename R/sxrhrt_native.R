@@ -66,10 +66,11 @@
 
 #' .sxrhrt_rows
 #'
-#' Part of the sxrhrt_native implementation; see the file header for the
+#' A step of the sxrhrt_native implementation. Called by \code{morie_sxrhrt_sex_specific_h2}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .sxrhrt_rows <- function(x) {
@@ -83,10 +84,11 @@
 
 #' .sxrhrt_chol
 #'
-#' Part of the sxrhrt_native implementation; see the file header for the
+#' A step of the sxrhrt_native implementation. Called by \code{.sxrhrt_reml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .sxrhrt_chol <- function(A) {
@@ -111,11 +113,12 @@
 
 #' .sxrhrt_solve
 #'
-#' Part of the sxrhrt_native implementation; see the file header for the
+#' A step of the sxrhrt_native implementation. Called by \code{.sxrhrt_reml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param b See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .sxrhrt_solve <- function(L, b) {
@@ -137,10 +140,11 @@
 
 #' .sxrhrt_logdet
 #'
-#' Part of the sxrhrt_native implementation; see the file header for the
+#' A step of the sxrhrt_native implementation. Called by \code{.sxrhrt_reml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
+#' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
 .sxrhrt_logdet <- function(L) 2.0 * sum(log(diag(L)))
@@ -148,14 +152,15 @@
 # Restricted log likelihood at (s2gm, s2gf, rg, s2em, s2ef).
 #' Restricted log likelihood at (s2gm, s2gf, rg, s2em, s2ef)
 #'
-#' Part of the sxrhrt_native implementation; see the file header for the
+#' A step of the sxrhrt_native implementation. Called by \code{morie_sxrhrt_sex_specific_h2}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param Km See Usage.
-#' @param male See Usage.
+#' @param theta A vector; indexed elementwise.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; indexed by row and column.
+#' @param Km A matrix; indexed by row and column.
+#' @param male A vector; indexed elementwise.
 #' @return A list with \code{ll}, \code{beta}, \code{L}.
 #' @export
 .sxrhrt_reml <- function(theta, y, X, Km, male) {
@@ -190,13 +195,14 @@
 
 #' morie_sxrhrt_sex_specific_h2
 #'
-#' Part of the sxrhrt_native implementation; see the file header for the
+#' A step of the sxrhrt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param sex See Usage.
-#' @param K See Usage.
-#' @param X Defaults to \code{NULL}.
+#' @param K Passed to \code{.sxrhrt_rows}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.sxrhrt_rows}.
 #' @param max_cycles Defaults to \code{60L}.
 #' @param tol Defaults to \code{1e-09}.
 #' @param male_label Defaults to \code{1}.
@@ -325,7 +331,8 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
 
 #' .sxrhrt_cheatsheet
 #'
-#' Part of the sxrhrt_native implementation; see the file header for the
+#' A step of the sxrhrt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

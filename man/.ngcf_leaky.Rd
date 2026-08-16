@@ -8,11 +8,11 @@
 .ngcf_leaky(x, slope = 0.2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{slope}{Defaults to \code{0.2}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{slope}{Numeric; combined arithmetically in the body. Defaults to \code{0.2}.}
 }
 \description{
-Part of the ngcf_native implementation; see the file header for the source it follows.
+A step of the ngcf_native implementation. Called by \code{ngcf_propagate}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.
@@ -22,7 +22,7 @@ One of two values, depending on the branch taken.
 Wang, X., He, X., Wang, M., Feng, F. & Chua, T.-S. (2019) "Neural
 Graph Collaborative Filtering", *Proceedings of the 42nd
 International ACM SIGIR Conference on Research and Development in
-Information Retrieval (SIGIR \\'19)*, 165-174,
+Information Retrieval (SIGIR \'19)*, 165-174,
 doi:10.1145/3331184.3331267. Sec. 1 (the collaborative signal is
 absent from the embedding in conventional CF; the interpretation of
 two- and three-layer propagation as behavioural similarity and
@@ -37,7 +37,7 @@ Graph Convolutional Networks", *ICLR 2017*, arXiv:1609.02907. The
 graph convolution being extended.
 
 He, X., Liao, L., Zhang, H., Nie, L., Hu, X. & Chua, T.-S. (2017)
-"Neural Collaborative Filtering", *WWW \\'17*, 173-182,
+"Neural Collaborative Filtering", *WWW \'17*, 173-182,
 doi:10.1145/3038912.3052569. The framework NGCF is measured against;
 implemented in :mod:`ncfRS`.
 """

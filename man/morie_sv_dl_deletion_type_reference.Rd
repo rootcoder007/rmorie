@@ -9,7 +9,7 @@ morie_sv_dl_deletion_type_reference(ref, sv_type)
 }
 \arguments{
 \item{ref}{See Usage.}
-\item{sv_type}{See Usage.}
+\item{sv_type}{One of \code{"DEL"}, \code{"DUP"}, \code{"INV"}.}
 }
 \description{
 tandem duplication has its two halves swapped, an inversion has its second half reverse complemented, a translocation gets both.

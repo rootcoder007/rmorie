@@ -10,12 +10,12 @@
 \arguments{
 \item{s}{See Usage.}
 \item{a}{See Usage.}
-\item{s_next}{See Usage.}
-\item{g}{See Usage.}
+\item{s_next}{A vector; its length is taken and its elements indexed.}
+\item{g}{A vector; its length is taken and its elements indexed.}
 \item{tol}{See Usage.}
 }
 \description{
-Part of the hindsr_native implementation; see the file header for the source it follows.
+A step of the hindsr_native implementation. Called by \code{hindsr}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

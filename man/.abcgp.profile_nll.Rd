@@ -8,14 +8,14 @@
 .abcgp.profile_nll(X, y, ls, nug, kernel)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{ls}{See Usage.}
-\item{nug}{See Usage.}
-\item{kernel}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{ls}{Passed to \code{.abcgp.corr}.}
+\item{nug}{A vector; indexed elementwise.}
+\item{kernel}{Passed to \code{.abcgp.corr}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.mle_lengthscale}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

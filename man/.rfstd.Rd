@@ -8,12 +8,12 @@
 .rfstd(Y, n, q)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{n}{See Usage.}
-\item{q}{See Usage.}
+\item{Y}{A matrix; indexed by row and column.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
+\item{q}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the mvsml_rf_shared implementation; see the file header for the source it follows.
+A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

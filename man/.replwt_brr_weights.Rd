@@ -8,11 +8,11 @@
 .replwt_brr_weights(d, fay = 0)
 }
 \arguments{
-\item{d}{See Usage.}
+\item{d}{A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.}
 \item{fay}{Defaults to \code{0}.}
 }
 \description{
-Part of the replwt_native implementation; see the file header for the source it follows.
+A step of the replwt_native implementation. Called by \code{morie_replwt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{hadamard_order}, \code{fay}, \code{method}.
@@ -22,7 +22,7 @@ A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{hadamard_or
 Wolter, K. M. (2007) Introduction to Variance Estimation, 2nd
 edition, Springer, ISBN 978-0-387-32917-8,
 doi:10.1007/978-0-387-35099-8. Ch. 2 (random groups), Ch. 3
-(balanced half-samples, the Hadamard construction, Fay\\'s
+(balanced half-samples, the Hadamard construction, Fay\'s
 modification), Ch. 4 (the jackknife, JK1 and JKn multipliers) and
 Ch. 5 (the bootstrap); the exact equivalence of full-orthogonal
 BRR to the stratified variance estimator for linear statistics.

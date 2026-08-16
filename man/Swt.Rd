@@ -8,12 +8,12 @@
 Swt(x, wavelet = "db4", levels = 3)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{wavelet}{Defaults to \code{"db4"}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{wavelet}{Passed to \code{.tf_swt}. Defaults to \code{"db4"}.}
 \item{levels}{Defaults to \code{3}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{approx}, \code{details}, \code{levels}, \code{wavelet}, \code{redundancy}, \code{energy_per_level}, \code{method}.

@@ -8,14 +8,14 @@
 .morie_glrtest_scores(x, p0, p1, family, sd)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p0}{See Usage.}
-\item{p1}{See Usage.}
-\item{family}{See Usage.}
-\item{sd}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{p0}{Numeric; combined arithmetically in the body.}
+\item{p1}{Numeric; combined arithmetically in the body.}
+\item{family}{One of \code{"bernoulli"}, \code{"normal"}.}
+\item{sd}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the glrtest_native implementation; see the file header for the source it follows.
+A step of the glrtest_native implementation. Called by \code{morie_glrtest}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

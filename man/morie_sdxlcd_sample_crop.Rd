@@ -12,10 +12,10 @@ morie_sdxlcd_sample_crop(height, width, target_h, target_w, rng)
 \item{width}{See Usage.}
 \item{target_h}{See Usage.}
 \item{target_w}{See Usage.}
-\item{rng}{See Usage.}
+\item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the sdxlcd_native implementation; see the file header for the source it follows.
+A step of the sdxlcd_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{c_top}, \code{c_left}.
@@ -28,7 +28,7 @@ arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
 backbone, more attention blocks, a second text encoder), Sec. 2.2
 ("Conditioning the Model on Image Size": the two existing approaches of
 discarding images below a minimum resolution or upscaling them, the
-measured 39% of data that would be discarded at 256 pixels, and the
+measured 39\% of data that would be discarded at 256 pixels, and the
 proposal to condition on the original height and width, each embedded
 by Fourier features, concatenated and ADDED to the timestep embedding;
 "Conditioning the Model on Cropping Parameters": random cropping during

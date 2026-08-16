@@ -3,7 +3,7 @@
 % the formals.
 \name{morie_coarsen_interval}
 \alias{morie_coarsen_interval}
-\title{Coarsen_interval: the interval (L, R] implied by one subject\\'s}
+\title{Coarsen_interval: the interval (L, R] implied by one subject\'s}
 \usage{
 morie_coarsen_interval(times, deltas)
 }

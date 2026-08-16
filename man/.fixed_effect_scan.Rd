@@ -8,13 +8,13 @@
 .fixed_effect_scan(y, G, covariates = integer(0), K = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{G}{See Usage.}
+\item{y}{Passed to \code{.to_vec}.}
+\item{G}{Passed to \code{.farmlmm_to_mat}.}
 \item{covariates}{Defaults to \code{integer(0)}.}
 \item{K}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. Called by \code{.farmcpu}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p}, \code{beta}, \code{covariates}, \code{note}.

@@ -10,10 +10,10 @@
 \arguments{
 \item{name}{See Usage.}
 \item{z}{See Usage.}
-\item{g}{See Usage.}
+\item{g}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dnnmt implementation; see the file header for the source it follows.
+A step of the dnnmt implementation. Called by \code{Dnnmt}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

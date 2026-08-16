@@ -4,7 +4,8 @@
 
 #' logmeanexp
 #'
-#' Part of the pftrep_native implementation; see the file header for the
+#' A step of the pftrep_native implementation. Called by \code{replicated_pfilter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values See Usage.
@@ -20,11 +21,12 @@ logmeanexp <- function(values) {
 
 #' particle_filter_simple
 #'
-#' Part of the pftrep_native implementation; see the file header for the
+#' A step of the pftrep_native implementation. Called by \code{replicated_pfilter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param n_particles See Usage.
+#' @param n_particles A count; the body uses it as \code{rep(...)}.
 #' @param init See Usage.
 #' @param step See Usage.
 #' @param loglik See Usage.
@@ -59,7 +61,8 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 
 #' replicated_pfilter
 #'
-#' Part of the pftrep_native implementation; see the file header for the
+#' A step of the pftrep_native implementation. Called by \code{loglik_profile}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -68,7 +71,7 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 #' @param step See Usage.
 #' @param loglik See Usage.
 #' @param n_reps Defaults to \code{10L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{loglik}, \code{logmeanexp}, \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps}, \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
 #' @export
 replicated_pfilter <- function(y, n_particles, init, step, loglik,
@@ -94,7 +97,8 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 
 #' loglik_profile
 #'
-#' Part of the pftrep_native implementation; see the file header for the
+#' A step of the pftrep_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -102,7 +106,7 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #' @param make_model See Usage.
 #' @param n_particles Defaults to \code{200L}.
 #' @param n_reps Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik}, \code{se}, \code{max_loglik}, \code{n_particles}, \code{n_reps}, \code{method}.
 #' @export
 loglik_profile <- function(y, grid, make_model, n_particles = 200L,

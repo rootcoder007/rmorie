@@ -9,12 +9,12 @@ endemic_equilibrium(beta, nu, mu, strain = 0L)
 }
 \arguments{
 \item{beta}{See Usage.}
-\item{nu}{See Usage.}
+\item{nu}{A vector; its length is taken.}
 \item{mu}{See Usage.}
 \item{strain}{Defaults to \code{0L}.}
 }
 \description{
-Part of the hiatus_native implementation; see the file header for the source it follows.
+A step of the hiatus_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{R0}, \code{S}, \code{I}.

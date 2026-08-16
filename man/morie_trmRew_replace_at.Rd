@@ -8,12 +8,12 @@
 morie_trmRew_replace_at(t, pos, new)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{pos}{See Usage.}
-\item{new}{See Usage.}
+\item{t}{A vector; indexed elementwise.}
+\item{pos}{A vector; its length is taken and its elements indexed.}
+\item{new}{Passed to \code{morie_trmRew_replace_at}.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{.trmRew_overlap}, \code{morie_trmRew_rewrite_step}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.trmRew_app}.

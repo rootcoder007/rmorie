@@ -8,17 +8,17 @@
 morie_survrsf_forest(X, times, events, n_trees = 50, mtry = NULL, min_deaths = 3, rule = "logrank", seed = 0)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{times}{See Usage.}
-\item{events}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; indexed elementwise.}
 \item{n_trees}{Defaults to \code{50}.}
-\item{mtry}{Defaults to \code{NULL}.}
-\item{min_deaths}{Defaults to \code{3}.}
-\item{rule}{Defaults to \code{"logrank"}.}
-\item{seed}{Defaults to \code{0}.}
+\item{mtry}{Passed to \code{morie_survrsf_grow_tree}.}
+\item{min_deaths}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
+\item{rule}{Passed to \code{.survrsf_check_rule}. Defaults to \code{"logrank"}.}
+\item{seed}{Passed to \code{.survrsf_rng}. Defaults to \code{0}.}
 }
 \description{
-Part of the survrsf_native implementation; see the file header for the source it follows.
+A step of the survrsf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{trees}, \code{inbag}, \code{n}, \code{rule}, \code{n_trees}, \code{oob_fraction}, \code{times}, \code{events}.

@@ -8,11 +8,11 @@
 shrink_covariance(residuals, lam = NULL)
 }
 \arguments{
-\item{residuals}{See Usage.}
-\item{lam}{Defaults to \code{NULL}.}
+\item{residuals}{A matrix; passed to \code{nrow}.}
+\item{lam}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hierF_native implementation; see the file header for the source it follows.
+A step of the hierF_native implementation. Called by \code{mint_P}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cov}, \code{lambda}.

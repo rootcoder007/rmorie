@@ -12,7 +12,7 @@
 \item{b}{See Usage.}
 }
 \description{
-all match (R\\\'s == coerces); int vs str does not (mirrors Python: 1 == "1" is False, and isTRUE(1 == "1") is FALSE in R).
+all match (R\\'s == coerces); int vs str does not (mirrors Python: 1 == "1" is False, and isTRUE(1 == "1") is FALSE in R).
 }
 \value{
 A logical value.

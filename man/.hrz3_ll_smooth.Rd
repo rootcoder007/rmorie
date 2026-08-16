@@ -8,10 +8,10 @@
 .hrz3_ll_smooth(z, y, zq, h)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{y}{See Usage.}
+\item{z}{A vector; its length is taken.}
+\item{y}{A vector; its length is taken.}
 \item{zq}{See Usage.}
-\item{h}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Local linear reproduces an affine function exactly, which is what makes an exact-recovery anchor possible for the additive fits built on it; Nadaraya-Watson does not.

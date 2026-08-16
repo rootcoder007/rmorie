@@ -8,10 +8,10 @@
 .ot_sortbasis(edges)
 }
 \arguments{
-\item{edges}{See Usage.}
+\item{edges}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{.ot_complete_tree}, \code{.ot_emd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

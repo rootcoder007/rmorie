@@ -8,10 +8,10 @@
 .hibrid_logdet(L)
 }
 \arguments{
-\item{L}{See Usage.}
+\item{L}{A matrix; passed to \code{diag}.}
 }
 \description{
-Part of the hibrid_native implementation; see the file header for the source it follows.
+A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

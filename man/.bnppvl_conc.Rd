@@ -3,14 +3,14 @@
 % the formals.
 \name{.bnppvl_conc}
 \alias{.bnppvl_conc}
-\title{The Beta concentration a_m at a given level. "cubic" is the paper\\\'s}
+\title{The Beta concentration a_m at a given level. "cubic" is the paper\\'s}
 \usage{
 .bnppvl_conc(level, c, schedule)
 }
 \arguments{
-\item{level}{See Usage.}
+\item{level}{Numeric; combined arithmetically in the body.}
 \item{c}{See Usage.}
-\item{schedule}{See Usage.}
+\item{schedule}{One of \code{"constant"}, \code{"cubic"}.}
 }
 \description{
 a_m = c m^3, for which the sum of 1/sqrt(a_m) converges and the limit is absolutely continuous. "constant" holds a_m fixed, which does NOT: the limit is continuous but singular, and it is here because a reader who wants to see that happen should be able to.

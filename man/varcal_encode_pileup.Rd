@@ -8,15 +8,15 @@
 varcal_encode_pileup(reads, reference, candidate, width = 21, height = 100, channels = "base_quality_strand")
 }
 \arguments{
-\item{reads}{See Usage.}
-\item{reference}{See Usage.}
-\item{candidate}{See Usage.}
-\item{width}{Defaults to \code{21}.}
+\item{reads}{Passed to \code{.varcal_norm_reads}.}
+\item{reference}{A vector; its length is taken and its elements indexed.}
+\item{candidate}{A list; the body reads \code{$position} from it.}
+\item{width}{Numeric; combined arithmetically in the body. Defaults to \code{21}.}
 \item{height}{Defaults to \code{100}.}
 \item{channels}{Defaults to \code{"base_quality_strand"}.}
 }
 \description{
-Part of the varcal_native implementation; see the file header for the source it follows.
+A step of the varcal_native implementation. Called by \code{morie_varcal}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{reference_row}, \code{read_rows}, \code{n_reads}, \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
@@ -33,8 +33,8 @@ stage, the pileup image of reference and read data around each
 candidate, the Inception-v2 classifier emitting the three diploid
 genotype probabilities, the calibration argument for why an image of
 all reads captures inter-read dependence, and the printed accounting:
-candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
-of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+candidate PPV 8.1\% raised to 99.7\% on Ion Torrent, a mean loss of 2.3\%
+of candidate sensitivity, and the SOLiD figures of 13.9\% PPV at 96.2\%
 sensitivity.
 
 Li, H. (2011) "A statistical framework for SNP calling, mutation

@@ -12,7 +12,7 @@
 \item{priority}{See Usage.}
 }
 \description{
-Part of the slvgrf_native implementation; see the file header for the source it follows.
+A step of the slvgrf_native implementation. Called by \code{qini_curve}, \code{rate_test}, \code{toc_curve}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{g}, \code{s}.

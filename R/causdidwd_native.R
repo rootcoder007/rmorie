@@ -30,7 +30,8 @@
 
 #' .causdidwd_panel
 #'
-#' Part of the causdidwd_native implementation; see the file header for
+#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Y See Usage.
@@ -54,7 +55,8 @@
 
 #' .causdidwd_unique_sorted
 #'
-#' Part of the causdidwd_native implementation; see the file header for
+#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v See Usage.
@@ -74,7 +76,8 @@
 
 #' .causdidwd_with_intercept
 #'
-#' Part of the causdidwd_native implementation; see the file header for
+#' A step of the causdidwd_native implementation. Called by \code{morie_two_way_fixed_effects}, \code{morie_two_way_mundlak}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param rows See Usage.
@@ -86,10 +89,11 @@
 
 #' .causdidwd_cohorts
 #'
-#' Part of the causdidwd_native implementation; see the file header for
+#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param first_treated See Usage.
+#' @param first_treated A vector; its length is taken and its elements indexed.
 #' @param period See Usage.
 #' @return A list with \code{G}, \code{ts}, \code{order}.
 #' @export
@@ -462,7 +466,8 @@ morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
 
 #' .causdidwd_morie_cheatsheet
 #'
-#' Part of the causdidwd_native implementation; see the file header for
+#' A step of the causdidwd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

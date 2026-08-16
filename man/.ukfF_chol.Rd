@@ -8,10 +8,10 @@
 .ukfF_chol(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the ukfF_mixedcase_native implementation; see the file header for the source it follows.
+A step of the ukfF_mixedcase_native implementation. Called by \code{.ukfF_sigma_points}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{l}, as built in the body.

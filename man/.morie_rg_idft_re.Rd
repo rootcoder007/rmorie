@@ -8,11 +8,11 @@
 .morie_rg_idft_re(re, im)
 }
 \arguments{
-\item{re}{See Usage.}
-\item{im}{See Usage.}
+\item{re}{A vector; its length is taken.}
+\item{im}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_cep implementation; see the file header for the source it follows.
+A step of the rangayyan_cep implementation. Called by \code{CCepstrum}, \code{Cepstrum}, \code{HomDeconv} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

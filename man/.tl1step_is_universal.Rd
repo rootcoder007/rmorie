@@ -8,10 +8,10 @@
 .tl1step_is_universal(Q, H_fn, eps = 0.3, h = 1e-05)
 }
 \arguments{
-\item{Q}{See Usage.}
+\item{Q}{Passed to \code{.tl1step_as_numvec}.}
 \item{H_fn}{See Usage.}
-\item{eps}{Defaults to \code{0.3}.}
-\item{h}{Defaults to \code{1e-05}.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{0.3}.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
 Evaluated away from zero, because at zero a local least favorable submodel satisfies it too, so testing only there cannot distinguish the two.

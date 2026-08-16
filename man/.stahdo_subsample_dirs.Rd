@@ -8,14 +8,14 @@
 .stahdo_subsample_dirs(M, n, p, n_dirs, seed)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{n}{See Usage.}
-\item{p}{See Usage.}
+\item{M}{A matrix; indexed by row and column.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
 \item{n_dirs}{See Usage.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dirs}, \code{exhaustive}.

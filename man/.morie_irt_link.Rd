@@ -13,8 +13,8 @@
 \item{a_focal}{See Usage.}
 \item{b_focal}{See Usage.}
 \item{n_quad}{See Usage.}
-\item{theta_range}{See Usage.}
-\item{aggregate_first}{See Usage.}
+\item{theta_range}{Numeric; combined arithmetically in the body.}
+\item{aggregate_first}{A flag; the body branches on it.}
 }
 \description{
 differ ONLY in whether the curve differences are summed before or after squaring, which is exactly the difference between matching every item and matching the test as a whole.

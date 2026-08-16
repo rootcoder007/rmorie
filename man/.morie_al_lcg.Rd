@@ -8,10 +8,10 @@
 .morie_al_lcg(state)
 }
 \arguments{
-\item{state}{See Usage.}
+\item{state}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the alammar_llm_native implementation; see the file header for the source it follows.
+A step of the alammar_llm_native implementation. Called by \code{.morie_gr_lcg_normals}, \code{.morie_gr_lcg_perm}, \code{.morie_gr_lcg_u} and 21 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

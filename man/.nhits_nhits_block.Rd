@@ -10,13 +10,13 @@
 \arguments{
 \item{window}{See Usage.}
 \item{horizon}{See Usage.}
-\item{kernel}{Defaults to \code{1L}.}
-\item{ratio}{Defaults to \code{1}.}
-\item{degree}{Defaults to \code{2L}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{kernel}{Passed to \code{.nhits_max_pool}. Defaults to \code{1L}.}
+\item{ratio}{Passed to \code{.nhits_expressiveness_knots}. Defaults to \code{1}.}
+\item{degree}{Numeric; combined arithmetically in the body. Defaults to \code{2L}.}
+\item{ridge}{Passed to \code{.nhits_lstsq}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the nhits_native implementation; see the file header for the source it follows.
+A step of the nhits_native implementation. Called by \code{.nhits_nhits_stack}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{backcast}, \code{forecast}, \code{knots}, \code{pooled}.

@@ -8,12 +8,12 @@
 Dt(x, df, log = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{df}{See Usage.}
-\item{log}{Defaults to \code{FALSE}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{df}{Numeric; combined arithmetically in the body.}
+\item{log}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

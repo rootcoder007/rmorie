@@ -8,11 +8,11 @@
 .tmlcmp_design(W, n)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{n}{See Usage.}
+\item{W}{A matrix; passed to \code{nrow}.}
+\item{n}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the tmlcmp_native implementation; see the file header for the source it follows.
+A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cbind}.
@@ -32,7 +32,7 @@ van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
 Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 11
 (Benkeser, Carone & Gilbert): the competing risks framework with
 each endpoint type a separate risk; cumulative incidence as the
-cumulative parameter; the Aalen-Johansen estimator\\'s consistency
+cumulative parameter; the Aalen-Johansen estimator\'s consistency
 under uninformative censoring and its efficiency absent covariates;
 and the drawback that semiparametric hazard-based alternatives
 require a correctly specified finite-dimensional regression model.

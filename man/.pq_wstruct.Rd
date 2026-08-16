@@ -8,13 +8,13 @@
 .pq_wstruct(e, fid, body, last)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{fid}{See Usage.}
-\item{body}{See Usage.}
-\item{last}{See Usage.}
+\item{e}{Passed to \code{.pq_wfield}.}
+\item{fid}{Passed to \code{.pq_wfield}.}
+\item{body}{Passed to \code{.pq_emit}.}
+\item{last}{Passed to \code{.pq_wfield}.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{morie_write_parquet}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{last}, as built in the body.

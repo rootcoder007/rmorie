@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the tail1_core implementation; see the file header for the source it follows.
+A step of the tail1_core implementation. Called by \code{.ecfp_percol}, \code{Admmlasso}, \code{Advielbo} and 154 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

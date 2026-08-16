@@ -8,12 +8,12 @@
 .wenge_saturated_models(ev, Mm, Xm)
 }
 \arguments{
-\item{ev}{See Usage.}
-\item{Mm}{See Usage.}
-\item{Xm}{See Usage.}
+\item{ev}{A vector; its length is taken and its elements indexed.}
+\item{Mm}{A matrix; indexed by row and column.}
+\item{Xm}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the wenge_native implementation; see the file header for the source it follows.
+A step of the wenge_native implementation. Called by \code{morie_wenge_mediation_functional}, \code{morie_wenge_weight_based_mediation}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{fe1}, \code{fm}.

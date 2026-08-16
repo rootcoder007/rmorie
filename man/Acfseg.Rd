@@ -15,7 +15,7 @@ Acfseg(test, reference, lags = NULL, thp = 1, thf = 1)
 \item{thf}{Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{distance}, \code{power_distance}, \code{spectral_distance}, \code{lags}, \code{lags_auto}, \code{acf_test}, \code{acf_reference}, \code{power_test}, \code{power_reference}, \code{boundary}, \code{th_power}, \code{th_spectral}, \code{amplitude_invariant}, \code{method}.

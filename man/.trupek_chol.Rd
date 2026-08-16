@@ -8,7 +8,7 @@
 .trupek_chol(H)
 }
 \arguments{
-\item{H}{See Usage.}
+\item{H}{A matrix; indexed by row and column.}
 }
 \description{
 definiteness and to solve, so there is one code path.

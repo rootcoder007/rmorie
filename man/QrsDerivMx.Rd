@@ -8,8 +8,8 @@
 QrsDerivMx(y0, y1)
 }
 \arguments{
-\item{y0}{See Usage.}
-\item{y1}{See Usage.}
+\item{y0}{A vector; its length is taken.}
+\item{y1}{A vector; its length is taken.}
 }
 \description{
 to different parts of the complex; the mix has its peak reliably inside it.

@@ -8,9 +8,9 @@
 SpAcf(coords, z, bins = NULL, cutoff = NULL)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{z}{See Usage.}
-\item{bins}{Defaults to \code{NULL}.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
+\item{z}{Passed to \code{.morie_spx_chkv}.}
+\item{bins}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{cutoff}{Defaults to \code{NULL}.}
 }
 \description{

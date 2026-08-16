@@ -11,12 +11,12 @@ morie_blast_pvalue(score, m, n, lam, K, c = 1L)
 \item{score}{See Usage.}
 \item{m}{See Usage.}
 \item{n}{See Usage.}
-\item{lam}{See Usage.}
-\item{K}{See Usage.}
-\item{c}{Defaults to \code{1L}.}
+\item{lam}{Numeric; combined arithmetically in the body.}
+\item{K}{Numeric; combined arithmetically in the body.}
+\item{c}{Numeric; combined arithmetically in the body. Defaults to \code{1L}.}
 }
 \description{
-Part of the blstn_native implementation; see the file header for the source it follows.
+A step of the blstn_native implementation. Called by \code{morie_blstn}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

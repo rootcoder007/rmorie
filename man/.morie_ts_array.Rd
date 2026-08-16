@@ -8,15 +8,15 @@
 .morie_ts_array(n, n.sim, R, l, sim, endcorr)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{n.sim}{See Usage.}
-\item{R}{See Usage.}
-\item{l}{See Usage.}
-\item{sim}{See Usage.}
-\item{endcorr}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{n.sim}{Numeric; combined arithmetically in the body.}
+\item{R}{A count; the body uses it as \code{rep(...)}.}
+\item{l}{A count; the body uses it as \code{rep(...)}.}
+\item{sim}{Compared against \code{"geom"}.}
+\item{endcorr}{A flag; the body branches on it.}
 }
 \description{
-Part of the boot_native implementation; see the file header for the source it follows.
+A step of the boot_native implementation. Called by \code{morie_tsboot}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{starts}, \code{lengths}.

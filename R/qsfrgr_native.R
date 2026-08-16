@@ -101,10 +101,11 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 
 #' .qsfrgr_events_in
 #'
-#' Part of the qsfrgr_native implementation; see the file header for the
+#' A step of the qsfrgr_native implementation. Called by \code{.qsfrgr_best_split}, \code{.qsfrgr_grow}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param event See Usage.
+#' @param event A vector; indexed elementwise.
 #' @param rows See Usage.
 #' @return A numeric value.
 #' @export
@@ -112,16 +113,17 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 
 #' .qsfrgr_best_split
 #'
-#' Part of the qsfrgr_native implementation; see the file header for the
+#' A step of the qsfrgr_native implementation. Called by \code{.qsfrgr_grow}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param rows See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param time Passed to \code{morie_qsfrgr_logrank}.
+#' @param event Passed to \code{morie_qsfrgr_logrank}.
+#' @param rows A vector; indexed elementwise.
 #' @param feats See Usage.
 #' @param min_leaf See Usage.
-#' @param rule See Usage.
+#' @param rule Compared against \code{"logrank"}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .qsfrgr_best_split <- function(X, time, event, rows, feats, min_leaf,
@@ -156,20 +158,21 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 
 #' .qsfrgr_grow
 #'
-#' Part of the qsfrgr_native implementation; see the file header for the
+#' A step of the qsfrgr_native implementation. Called by \code{morie_qsfrgr_forest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param struct_rows See Usage.
-#' @param leaf_rows See Usage.
-#' @param feats_n See Usage.
-#' @param min_leaf See Usage.
-#' @param max_depth See Usage.
-#' @param depth See Usage.
-#' @param e See Usage.
-#' @param rule See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param time Passed to \code{.qsfrgr_best_split}.
+#' @param event Passed to \code{.qsfrgr_events_in}.
+#' @param struct_rows A vector; its length is taken and its elements indexed.
+#' @param leaf_rows A vector; indexed elementwise.
+#' @param feats_n Numeric; passed to \code{min}.
+#' @param min_leaf Numeric; combined arithmetically in the body.
+#' @param max_depth Passed to \code{.qsfrgr_grow}.
+#' @param depth Numeric; combined arithmetically in the body.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param rule Passed to \code{.qsfrgr_best_split}.
 #' @return A list with \code{leaf}, \code{f}, \code{thr}, \code{l}, \code{r}.
 #' @export
 .qsfrgr_grow <- function(X, time, event, struct_rows, leaf_rows, feats_n,
@@ -209,11 +212,12 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 
 #' .qsfrgr_leaf_of
 #'
-#' Part of the qsfrgr_native implementation; see the file header for the
+#' A step of the qsfrgr_native implementation. Called by \code{morie_qsfrgr_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
-#' @param x See Usage.
+#' @param node A list; the body reads \code{$f}, \code{$l}, \code{$leaf}, \code{$r}, \code{$rows}, \code{$thr} from it.
+#' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
 .qsfrgr_leaf_of <- function(node, x) {

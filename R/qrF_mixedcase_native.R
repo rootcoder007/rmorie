@@ -14,12 +14,13 @@
 
 #' morie_qrF
 #'
-#' Part of the qrF_mixedcase_native implementation; see the file header
+#' A step of the qrF_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param y_true See Usage.
 #' @param y_pred See Usage.
-#' @param theta Defaults to \code{0.5}.
+#' @param theta Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A list with \code{estimate}, \code{total}, \code{losses}, \code{theta}, \code{n}, \code{method}.
 #' @export
 morie_qrF <- function(y_true, y_pred, theta = 0.5) {

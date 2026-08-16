@@ -8,15 +8,15 @@
 cubic_interpolate(ta, fa, da, tb, fb, db)
 }
 \arguments{
-\item{ta}{See Usage.}
-\item{fa}{See Usage.}
-\item{da}{See Usage.}
-\item{tb}{See Usage.}
-\item{fb}{See Usage.}
-\item{db}{See Usage.}
+\item{ta}{Numeric; passed to \code{max}.}
+\item{fa}{Numeric; combined arithmetically in the body.}
+\item{da}{Numeric; combined arithmetically in the body.}
+\item{tb}{Numeric; passed to \code{max}.}
+\item{fb}{Numeric; combined arithmetically in the body.}
+\item{db}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the cgnonl_native implementation; see the file header for the source it follows.
+A step of the cgnonl_native implementation. Called by \code{line_search_fr}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{t}, as built in the body.

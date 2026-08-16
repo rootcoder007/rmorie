@@ -8,10 +8,10 @@
 .causscd_project_simplex(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the causscd_native implementation; see the file header for the source it follows.
+A step of the causscd_native implementation. Called by \code{.causscd_simplex_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pmax}.

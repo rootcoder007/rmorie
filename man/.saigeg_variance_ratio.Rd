@@ -12,7 +12,7 @@
 \item{scores_naive}{See Usage.}
 }
 \description{
-Part of the saigeg_native implementation; see the file header for the source it follows.
+A step of the saigeg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ratio}, \code{var_full}, \code{var_naive}, \code{n_variants}.

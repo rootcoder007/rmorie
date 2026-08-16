@@ -8,12 +8,12 @@
 Sift(x, max_imfs = 10, tol = 0.05)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.tf_need}.}
 \item{max_imfs}{Defaults to \code{10}.}
 \item{tol}{Defaults to \code{0.05}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{reconstruction_error}, \code{energy_per_imf}, \code{tol}, \code{method}.

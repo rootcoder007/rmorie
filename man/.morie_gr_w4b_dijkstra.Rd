@@ -8,12 +8,12 @@
 .morie_gr_w4b_dijkstra(adj, source, m)
 }
 \arguments{
-\item{adj}{See Usage.}
+\item{adj}{A vector; indexed elementwise.}
 \item{source}{See Usage.}
-\item{m}{See Usage.}
+\item{m}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the geron_w4b_native implementation; see the file header for the source it follows.
+A step of the geron_w4b_native implementation. Called by \code{morie_geron_isomap}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{dist}, as built in the body.

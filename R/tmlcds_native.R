@@ -20,7 +20,8 @@
 
 #' .RichResult
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. Called by \code{tmle_cdrs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param payload See Usage.
@@ -32,10 +33,11 @@
 
 #' .tmlcds_sigmoid
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. Called by \code{.tmlcds_fluctuate}, \code{.tmlcds_logit_irls}, \code{.tmlcds_propensity} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tmlcds_sigmoid <- function(x) {
@@ -44,10 +46,11 @@
 
 #' .tmlcds_logit
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tmlcds_logit <- function(p) {
@@ -56,7 +59,8 @@
 
 #' .tmlcds_vec
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -69,10 +73,11 @@
 
 #' .tmlcds_mat
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tmlcds_mat <- function(X) {
@@ -84,11 +89,12 @@
 # cols is a list of column vectors; prepend the intercept
 #' Cols is a list of column vectors; prepend the intercept
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. Called by \code{.tmlcds_propensity}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cols See Usage.
-#' @param n See Usage.
+#' @param cols Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{cbind}.
 #' @export
 .tmlcds_design <- function(cols, n) {
@@ -101,11 +107,12 @@
 
 #' .tmlcds_matvec
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param v See Usage.
+#' @param M A matrix; passed to \code{\%*\%}.
+#' @param v A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tmlcds_matvec <- function(M, v) {
@@ -119,8 +126,8 @@
 #'
 #' ridge, so the R arm must too or near-singular designs drift
 #'
-#' @param Z See Usage.
-#' @param y See Usage.
+#' @param Z A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tmlcds_lstsq <- function(Z, y) {
@@ -138,10 +145,10 @@
 #' unpenalized), `ridge` stabilises the Newton solve without changing
 #' the fitted coefficients
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param iters Defaults to \code{60L}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param tol Defaults to \code{1e-13}.
 #' @param penalty Defaults to \code{0}.
 #' @return The value of \code{beta}, as built in the body.
@@ -177,13 +184,13 @@
 #'
 #' clever covariate A/G - (1-A)/(1-G); returns updated fits and epsilon
 #'
-#' @param qa See Usage.
-#' @param q1 See Usage.
-#' @param q0 See Usage.
-#' @param y See Usage.
-#' @param d See Usage.
-#' @param g See Usage.
-#' @param clip Defaults to \code{1e-08}.
+#' @param qa Numeric; combined arithmetically in the body.
+#' @param q1 Numeric; combined arithmetically in the body.
+#' @param q0 Numeric; combined arithmetically in the body.
+#' @param y A vector; its length is taken.
+#' @param d Numeric; combined arithmetically in the body.
+#' @param g Numeric; combined arithmetically in the body.
+#' @param clip Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{qa}, \code{q1}, \code{q0}, \code{eps}.
 #' @export
 .tmlcds_fluctuate <- function(qa, q1, q0, y, d, g, clip = 1e-8) {
@@ -212,11 +219,12 @@
 # L(Qbar) = -{Y log Qbar + (1-Y) log(1-Qbar)}
 #' L(Qbar) = -{Y log Qbar + (1-Y) log(1-Qbar)}
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param qa See Usage.
-#' @param y See Usage.
+#' @param qa Numeric; passed to \code{log}.
+#' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .tmlcds_qloss <- function(qa, y) {
@@ -226,14 +234,15 @@
 # treatment mechanism fit; cols is a list of column vectors
 #' Treatment mechanism fit; cols is a list of column vectors
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. Called by \code{.tmlcds_refit_on}, \code{ctmle_sequence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param cols See Usage.
-#' @param n See Usage.
+#' @param d Passed to \code{.tmlcds_logit_irls}.
+#' @param cols Passed to \code{.tmlcds_design}.
+#' @param n Passed to \code{.tmlcds_design}.
 #' @param penalty Defaults to \code{0}.
-#' @param trim Defaults to \code{0.005}.
+#' @param trim Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
 #' @return A list with \code{g}, \code{b}.
 #' @export
 .tmlcds_propensity <- function(d, cols, n, penalty = 0.0, trim = 0.005) {
@@ -251,13 +260,13 @@
 #'
 #' q_covariates uses 0-based indices, matching the Python arm exactly.
 #'
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param X See Usage.
-#' @param tuning Defaults to \code{"discrete"}.
-#' @param penalties Defaults to \code{NULL}.
-#' @param trim Defaults to \code{0.005}.
-#' @param scale Defaults to \code{NULL}.
+#' @param y Passed to \code{.tmlcds_vec}.
+#' @param D Passed to \code{.tmlcds_vec}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.tmlcds_mat}.
+#' @param tuning Compared against \code{"discrete"}. Defaults to \code{"discrete"}.
+#' @param penalties Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param trim Passed to \code{.tmlcds_propensity}. Defaults to \code{0.005}.
+#' @param scale Optional; may be \code{NULL}. A flag; the body branches on it.
 #' @param q_covariates Defaults to \code{NULL}.
 #' @return A list with \code{steps}, \code{info}.
 #' @export
@@ -378,14 +387,14 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #'
 #' tr and fold hold 1-based row indices.
 #'
-#' @param info See Usage.
-#' @param steps See Usage.
+#' @param info A list; the body reads \code{$columns}, \code{$q_covariates}, \code{$treatment}, \code{$y_scaled} from it.
+#' @param steps A vector; indexed elementwise.
 #' @param s See Usage.
-#' @param tr See Usage.
-#' @param fold See Usage.
+#' @param tr A vector; its length is taken.
+#' @param fold A vector; its length is taken and its elements indexed.
 #' @param tuning See Usage.
 #' @param penalties See Usage.
-#' @param trim See Usage.
+#' @param trim Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tmlcds_refit_on <- function(info, steps, s, tr, fold, tuning, penalties,
@@ -508,7 +517,8 @@ tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
 
 #' .tmlcds_cheatsheet
 #'
-#' Part of the tmlcds_native implementation; see the file header for the
+#' A step of the tmlcds_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

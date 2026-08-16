@@ -8,10 +8,10 @@
 .informer_to_rows(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the informer_native implementation; see the file header for the source it follows.
+A step of the informer_native implementation. Called by \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention}, \code{morie_informer_select_queries} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

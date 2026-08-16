@@ -8,8 +8,8 @@
 .psy_spearman_brown(icc1, k)
 }
 \arguments{
-\item{icc1}{See Usage.}
-\item{k}{See Usage.}
+\item{icc1}{Numeric; combined arithmetically in the body.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
 least the single-measure value, which is why every average-measure ICC exceeds its single-measure counterpart.

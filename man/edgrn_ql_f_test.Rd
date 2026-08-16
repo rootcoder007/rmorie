@@ -15,7 +15,7 @@ edgrn_ql_f_test(lrt, q, quasi_dispersion, df_residual, df_prior = NULL)
 \item{df_prior}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the edgrn_native implementation; see the file header for the source it follows.
+A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{F}, \code{df1}, \code{df2}, \code{p_value}, \code{lrt_p_value}, \code{method}, \code{note}.

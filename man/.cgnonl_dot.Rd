@@ -8,11 +8,11 @@
 .cgnonl_dot(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the cgnonl_native implementation; see the file header for the source it follows.
+A step of the cgnonl_native implementation. Called by \code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves}, \code{beta_polak_ribiere} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -11,7 +11,7 @@
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-to the Python 64-bit generator is not required -- the forest\\\'s randomness only needs to be reproducible.)
+to the Python 64-bit generator is not required -- the forest\\'s randomness only needs to be reproducible.)
 }
 \value{
 The value of \code{e}, as built in the body.

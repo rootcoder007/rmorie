@@ -11,8 +11,8 @@ AmSig(x, fc, fs, conventional = FALSE, depth = 1)
 \item{x}{See Usage.}
 \item{fc}{See Usage.}
 \item{fs}{See Usage.}
-\item{conventional}{Defaults to \code{FALSE}.}
-\item{depth}{Defaults to \code{1}.}
+\item{conventional}{A flag; the body branches on it. Defaults to \code{FALSE}.}
+\item{depth}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
 carrier -- with synchronous demodulation x_d = y cos(wc t) = 0.5 x + 0.5 x cos(2 wc t).  The placeholder stated the conventional large-carrier form A(1 + m) cos(wc t), which is a different model; it is available under conventional=TRUE rather than substituted.

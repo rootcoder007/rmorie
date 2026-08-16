@@ -8,13 +8,13 @@
 neighbours(order, seasonal_order, constant, s)
 }
 \arguments{
-\item{order}{See Usage.}
-\item{seasonal_order}{See Usage.}
-\item{constant}{See Usage.}
+\item{order}{A vector; indexed elementwise.}
+\item{seasonal_order}{A vector; indexed elementwise.}
+\item{constant}{A flag; the body branches on it.}
 \item{s}{See Usage.}
 }
 \description{
-Part of the sarimax_native implementation; see the file header for the source it follows.
+A step of the sarimax_native implementation. Called by \code{auto_order}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

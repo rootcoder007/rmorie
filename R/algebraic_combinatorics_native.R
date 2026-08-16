@@ -94,8 +94,8 @@ morie_hook_lengths <- function(shape) {
 #' Part of the algebraic_combinatorics_native implementation; see the
 #' file header for the source it follows.
 #'
-#' @param n See Usage.
-#' @param p See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .morie_legendre <- function(n, p) {
@@ -122,9 +122,9 @@ morie_hook_lengths <- function(shape) {
 #' discarded. Dropping it silently would understate the hook product and
 #' make the division look inexact.
 #'
-#' @param x See Usage.
-#' @param exps See Usage.
-#' @param primes See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param exps A vector; indexed elementwise.
+#' @param primes A vector; its length is taken and its elements indexed.
 #' @return A list with \code{exps}, \code{remainder}.
 #' @export
 .morie_factorise <- function(x, exps, primes) {
@@ -250,7 +250,7 @@ morie_standard_tableaux_count <- function(shape) {
 #' Part of the algebraic_combinatorics_native implementation; see the
 #' file header for the source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{which}.
 #' @export
 .morie_primes_upto <- function(n) {

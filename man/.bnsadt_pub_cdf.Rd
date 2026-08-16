@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{theta}{See Usage.}
-\item{sigma}{See Usage.}
-\item{family}{See Usage.}
-\item{params}{See Usage.}
+\item{theta}{Numeric; combined arithmetically in the body.}
+\item{sigma}{Numeric; combined arithmetically in the body.}
+\item{family}{Passed to \code{.bnsadt_betas}.}
+\item{params}{Passed to \code{.bnsadt_betas}.}
 }
 \description{
 denominator are both finite sums of normal increments, so this is exact rather than quadrature.

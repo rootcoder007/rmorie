@@ -8,12 +8,12 @@
 .slbpdg_theta(e, ys, m0, kappa0, a0, b0)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{ys}{See Usage.}
-\item{m0}{See Usage.}
-\item{kappa0}{See Usage.}
-\item{a0}{See Usage.}
-\item{b0}{See Usage.}
+\item{e}{Passed to \code{.ghc_gamma1}.}
+\item{ys}{A vector; its length is taken.}
+\item{m0}{Numeric; combined arithmetically in the body.}
+\item{kappa0}{Numeric; combined arithmetically in the body.}
+\item{a0}{Numeric; combined arithmetically in the body.}
+\item{b0}{Numeric; combined arithmetically in the body.}
 }
 \description{
 members this is a draw from the PRIOR, which is what the slice sampler needs for components it has to invent to cover the slice -- they are not fitted to anything, so their parameters must come from the prior and not from some neighbour.

@@ -8,12 +8,12 @@
 epsilon_data_independent(T, gamma, delta)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{gamma}{See Usage.}
-\item{delta}{See Usage.}
+\item{T}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{delta}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the pate_native implementation; see the file header for the source it follows.
+A step of the pate_native implementation. Called by \code{pate}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

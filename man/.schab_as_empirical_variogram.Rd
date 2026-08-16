@@ -8,7 +8,7 @@
 .schab_as_empirical_variogram(ev)
 }
 \arguments{
-\item{ev}{See Usage.}
+\item{ev}{A list; the body reads \code{$counts}, \code{$gamma}, \code{$lag}, \code{$lags}, \code{$n_pairs} from it.}
 }
 \description{
 Counts default to 1 so an unweighted table still fits; that makes the WLS weights degenerate to 1/(2 gamma^2), the right limiting form rather than a silent failure.

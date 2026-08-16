@@ -13,27 +13,30 @@ NULL
 
 #' .s4_expit
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlphd_lasso_logit} and 23 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
 #' @export
 .s4_expit <- function(z) ifelse(z >= 0, 1 / (1 + exp(-z)), exp(z) / (1 + exp(z)))
 
 #' .s4_logit
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Tmlhrz}, \code{Tmlmpc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s4_logit <- function(p) log(p / (1 - p))
 
 #' .s4_clip
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlmpi_cdf_bank} and 25 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -45,10 +48,11 @@ NULL
 
 #' .s4_median
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Tukeyw}, \code{Tukrr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .s4_median <- function(x) {
@@ -62,11 +66,12 @@ NULL
 ## R quantile type 7, spelled out so the two arms cannot drift.
 #' # R quantile type 7, spelled out so the two arms cannot drift
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Nprphet}, \code{Winz}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param p See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s4_quantile7 <- function(x, p) {
@@ -83,7 +88,8 @@ NULL
 ## 0-based order, ties by original position -- matches the Python arm.
 #' # 0-based order, ties by original position -- matches the Python arm
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -93,7 +99,8 @@ NULL
 
 #' .s4_rank_avg
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -103,10 +110,11 @@ NULL
 
 #' .s4_softmax
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Gat}, \code{Gpmoe}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .s4_softmax <- function(v) {
@@ -116,13 +124,14 @@ NULL
 
 #' .s4_glmbin
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn}, \code{Medmsm} and 19 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param iters Defaults to \code{25L}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.
+#' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .s4_glmbin <- function(X, y, iters = 25L, ridge = 1e-8) {
@@ -143,12 +152,13 @@ NULL
 
 #' .s4_rbf
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Gpmoe}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param Z See Usage.
-#' @param ell Defaults to \code{1}.
+#' @param X A matrix; indexed by row and column.
+#' @param Z A matrix; indexed by row and column.
+#' @param ell Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s4_rbf <- function(X, Z, ell = 1) {
@@ -164,14 +174,15 @@ NULL
 
 #' .s4_gppost
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Gpmoe}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param K See Usage.
-#' @param Ks See Usage.
+#' @param K A matrix; passed to \code{nrow}.
+#' @param Ks A matrix; passed to \code{crossprod}.
 #' @param Kss See Usage.
 #' @param y See Usage.
-#' @param noise Defaults to \code{1e-06}.
+#' @param noise A matrix; passed to \code{diag}. Defaults to \code{1e-06}.
 #' @return A list with \code{mean}, \code{var}.
 #' @export
 .s4_gppost <- function(K, Ks, Kss, y, noise = 1e-6) {
@@ -187,10 +198,11 @@ NULL
 
 #' .s4_colstd
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s4_colstd <- function(X) {
@@ -208,7 +220,8 @@ NULL
 
 #' .s4_euclid
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -219,7 +232,8 @@ NULL
 
 #' .s4_sgn
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{.s4_rnd}, \code{Tqhs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -233,7 +247,7 @@ NULL
 #'
 #' # half to even but disagree about which values are exactly half.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
 .s4_rnd <- function(v) .s4_sgn(v) * floor(abs(v) + 0.5)
@@ -247,7 +261,7 @@ NULL
 #' for # the two arms to disagree about (LAPACK and LINPACK differ
 #' here).
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return A list with \code{Q}, \code{R}.
 #' @export
 .s4_qr_mgs <- function(A) {
@@ -269,10 +283,11 @@ NULL
 
 #' .s4_rank_first
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Matrim}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .s4_rank_first <- function(x) {
@@ -291,10 +306,10 @@ NULL
 #' # model M = b0 + b1 a + b2\'c; cbar is where the decomposition is
 #' read.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param M See Usage.
-#' @param Cc Defaults to \code{NULL}.
+#' @param Y A vector; its length is taken.
+#' @param A Numeric; combined arithmetically in the body.
+#' @param M Numeric; combined arithmetically in the body.
+#' @param Cc Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{theta}, \code{beta}, \code{cbar}.
 #' @export
 .s4_medmodels <- function(Y, A, M, Cc = NULL) {
@@ -312,15 +327,16 @@ NULL
 ## VanderWeele four-way decomposition from fitted coefficients.
 #' # VanderWeele four-way decomposition from fitted coefficients
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4}, \code{Intvse} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param beta See Usage.
-#' @param cbar See Usage.
-#' @param a Defaults to \code{1}.
-#' @param astar Defaults to \code{0}.
-#' @param m Defaults to \code{0}.
+#' @param theta A vector; indexed elementwise.
+#' @param beta A vector; indexed elementwise.
+#' @param cbar A vector; its length is taken.
+#' @param a Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param astar Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param m Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{cde}, \code{intref}, \code{intmed}, \code{pie}, \code{te}.
 #' @export
 .s4_fourway <- function(theta, beta, cbar, a = 1, astar = 0, m = 0) {
@@ -338,13 +354,14 @@ NULL
 ## One TMLE pass for a binary point treatment. W carries its intercept.
 #' # One TMLE pass for a binary point treatment. W carries its intercept
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte}, \code{Tmlper} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param W See Usage.
-#' @param gbound Defaults to \code{0.025}.
+#' @param y A vector; its length is taken.
+#' @param D Numeric; combined arithmetically in the body.
+#' @param W A matrix; passed to \code{\%*\%}.
+#' @param gbound Numeric; combined arithmetically in the body. Defaults to \code{0.025}.
 #' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1}, \code{Q0}, \code{ic}, \code{n}.
 #' @export
 .s4_tmle <- function(y, D, W, gbound = 0.025) {
@@ -379,8 +396,8 @@ NULL
 #' around 1e-8, # above the parity threshold and below anything a user
 #' would notice.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
 .s4_ols <- function(X, y) {
@@ -410,8 +427,8 @@ NULL
 #' # than testing a condition number, so a rank-deficient design gives
 #' the # same large numbers in both arms instead of one raising.
 #'
-#' @param R See Usage.
-#' @param p See Usage.
+#' @param R A matrix; indexed by row and column.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s4_triinv <- function(R, p) {
@@ -436,7 +453,7 @@ NULL
 #' # O(n^3). Ties broken by the first strictly improving index so both
 #' arms # walk the same path. Returns 0-based column for each row.
 #'
-#' @param cost See Usage.
+#' @param cost A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{ans}, as built in the body.
 #' @export
 .s4_hungarian <- function(cost) {
@@ -482,7 +499,8 @@ NULL
 ## Two-way ANOVA mean squares for the intraclass correlations.
 #' # Two-way ANOVA mean squares for the intraclass correlations
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Icc12c}, \code{IccA}, \code{IccC}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -518,7 +536,7 @@ NULL
 #' # 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
 #' # optimiser, so the arms cannot land on different local optima.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{k}, \code{sigma}.
 #' @export
 .s4_gpdfit <- function(x) {
@@ -545,10 +563,11 @@ NULL
 ## Pareto-smoothed importance sampling on log weights.
 #' # Pareto-smoothed importance sampling on log weights
 #'
-#' Part of the s04core implementation; see the file header for the
+#' A step of the s04core implementation. Called by \code{Infcrt}, \code{Khatd}, \code{Loopr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lw See Usage.
+#' @param lw A vector; its length is taken and its elements indexed.
 #' @return A list with \code{lw}, \code{k}.
 #' @export
 .s4_psis <- function(lw) {

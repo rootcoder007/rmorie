@@ -8,13 +8,13 @@
 .avalon_shortest(adj, src, dst, banned)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{src}{See Usage.}
-\item{dst}{See Usage.}
+\item{adj}{A vector; its length is taken and its elements indexed.}
+\item{src}{Numeric; combined arithmetically in the body.}
+\item{dst}{Numeric; combined arithmetically in the body.}
 \item{banned}{See Usage.}
 }
 \description{
-Part of the avalon_native implementation; see the file header for the source it follows.
+A step of the avalon_native implementation. Called by \code{morie_avalon_rings}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{rev}.

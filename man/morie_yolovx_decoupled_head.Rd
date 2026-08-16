@@ -13,7 +13,7 @@ morie_yolovx_decoupled_head(channels, reduced = 256, n_classes = 80)
 \item{n_classes}{Defaults to \code{80}.}
 }
 \description{
-Part of the yolovx_native implementation; see the file header for the source it follows.
+A step of the yolovx_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{reduce_params}, \code{cls_params}, \code{reg_params}, \code{total}, \code{coupled_total}, \code{branches}, \code{extra_latency_ms}, \code{note}.

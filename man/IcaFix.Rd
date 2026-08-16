@@ -8,11 +8,11 @@
 IcaFix(X, ncomp = NULL, maxiter = 200, tol = 1e-08, seed = 1)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.morie_bx_mat}.}
 \item{ncomp}{Defaults to \code{NULL}.}
-\item{maxiter}{Defaults to \code{200}.}
+\item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 \item{tol}{Defaults to \code{1e-08}.}
-\item{seed}{Defaults to \code{1}.}
+\item{seed}{Passed to \code{.morie_bx_rng}. Defaults to \code{1}.}
 }
 \description{
 make components uncorrelated, which is independence only for Gaussians, and a linear mixture tends TOWARDS a Gaussian -- so driving the estimates away from Gaussianity is what unmixes them.  Fixed-point update from Hyvarinen and Oja, Neural Networks 13, 2000, ref [50] of that section.

@@ -10,14 +10,14 @@ gnnEx_mask_objective(predict, edges, edge_logits, feature_logits, y, size_coef =
 \arguments{
 \item{predict}{See Usage.}
 \item{edges}{See Usage.}
-\item{edge_logits}{See Usage.}
-\item{feature_logits}{See Usage.}
+\item{edge_logits}{Passed to \code{.gnnEx_sig}.}
+\item{feature_logits}{Passed to \code{.gnnEx_sig}.}
 \item{y}{See Usage.}
-\item{size_coef}{Defaults to \code{0.005}.}
-\item{entropy_coef}{Defaults to \code{1}.}
+\item{size_coef}{Numeric; combined arithmetically in the body. Defaults to \code{0.005}.}
+\item{entropy_coef}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the gnnEx_native implementation; see the file header for the source it follows.
+A step of the gnnEx_native implementation. Called by \code{gnnEx_explain_node}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{fit}, \code{size}, \code{entropy}, \code{edge_mask}, \code{feature_mask}, \code{prediction}.

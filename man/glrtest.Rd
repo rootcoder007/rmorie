@@ -8,15 +8,15 @@
 glrtest(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p0}{See Usage.}
-\item{p1}{See Usage.}
-\item{threshold}{Defaults to \code{NULL}.}
-\item{family}{Defaults to \code{"bernoulli"}.}
-\item{sd}{Defaults to \code{1}.}
+\item{x}{Passed to \code{morie_glr_test}.}
+\item{p0}{Passed to \code{morie_glr_test}.}
+\item{p1}{Passed to \code{morie_glr_test}.}
+\item{threshold}{Passed to \code{morie_glr_test}.}
+\item{family}{Passed to \code{morie_glr_test}. Defaults to \code{"bernoulli"}.}
+\item{sd}{Passed to \code{morie_glr_test}. Defaults to \code{1}.}
 }
 \description{
-Part of the glm_native implementation; see the file header for the source it follows.
+A step of the glm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_glr_test}.

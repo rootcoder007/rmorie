@@ -8,12 +8,12 @@
 morie_prtcl_systematic_resample(weights, u = NULL, e = NULL)
 }
 \arguments{
-\item{weights}{See Usage.}
-\item{u}{Defaults to \code{NULL}.}
-\item{e}{Defaults to \code{NULL}.}
+\item{weights}{A vector; its length is taken.}
+\item{u}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{e}{Optional; may be \code{NULL}. Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the prtcl_native implementation; see the file header for the source it follows.
+A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{idx}, as built in the body.

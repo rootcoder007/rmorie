@@ -11,7 +11,7 @@
 \item{terminal}{See Usage.}
 }
 \description{
-Part of the qlearn_native implementation; see the file header for the source it follows.
+A step of the qlearn_native implementation. Called by \code{morie_ddqn}, \code{morie_qlearn}, \code{morie_sarsa}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

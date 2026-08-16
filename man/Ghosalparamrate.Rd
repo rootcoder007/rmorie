@@ -27,7 +27,7 @@ one against n.  Recovering a slope of one is the whole content of the
 section -- a nonparametric prior paying no price on a parametric truth.
 }
 \details{
-Formula: K-hat = argmax_K \link{log m_K(y) - lam K log n};
+Formula: K-hat = argmax_K [log m_K(y) - lam K log n];
 risk = K-hat/(n + 1) + sum_{k=K-hat}^{d-1} theta_k^2.
 }
 \references{

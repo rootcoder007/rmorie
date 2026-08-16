@@ -8,13 +8,13 @@
 .limmav_voom_weights(counts, design, lib_sizes = NULL, span = 0.5)
 }
 \arguments{
-\item{counts}{See Usage.}
-\item{design}{See Usage.}
-\item{lib_sizes}{Defaults to \code{NULL}.}
-\item{span}{Defaults to \code{0.5}.}
+\item{counts}{Passed to \code{.limmav_log_cpm}.}
+\item{design}{A matrix; passed to \code{as.matrix}.}
+\item{lib_sizes}{Passed to \code{.limmav_log_cpm}.}
+\item{span}{Passed to \code{.limmav_lowess}. Defaults to \code{0.5}.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{morie_limmav}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{log_cpm}, \code{weights}, \code{mean_log_count}, \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{lo}.

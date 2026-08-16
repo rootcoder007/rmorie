@@ -8,11 +8,11 @@
 .bnd_interval(moments, name)
 }
 \arguments{
-\item{moments}{See Usage.}
+\item{moments}{A matrix; passed to \code{as.matrix}.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the helpers_bnd implementation; see the file header for the source it follows.
+A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{yl}, \code{yu}.

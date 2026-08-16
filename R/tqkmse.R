@@ -21,11 +21,12 @@
 
 #' .kvmse_rotation
 #'
-#' Part of the tqkmse implementation; see the file header for the source
+#' A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \code{Vcquant}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param d See Usage.
-#' @param seed See Usage.
+#' @param d A count; the body uses it as \code{seq_len(...)}.
+#' @param seed Passed to \code{.t1_lcg}.
 #' @return The value of \code{Q}, as built in the body.
 #' @export
 .kvmse_rotation <- function(d, seed) {
@@ -46,14 +47,15 @@
 
 #' .kvmse_codebook
 #'
-#' Part of the tqkmse implementation; see the file header for the source
+#' A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \code{Vcquant}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param b See Usage.
 #' @param iters Defaults to \code{200}.
 #' @param grid Defaults to \code{2001}.
-#' @param lo Defaults to \code{-6}.
-#' @param hi Defaults to \code{6}.
+#' @param lo Numeric; combined arithmetically in the body. Defaults to \code{-6}.
+#' @param hi Numeric; combined arithmetically in the body. Defaults to \code{6}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .kvmse_codebook <- function(b, iters = 200, grid = 2001, lo = -6, hi = 6) {
@@ -77,7 +79,8 @@
 
 #' .kvmse_quantize
 #'
-#' Part of the tqkmse implementation; see the file header for the source
+#' A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \code{Vcquant}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param y See Usage.

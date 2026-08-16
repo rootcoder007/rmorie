@@ -8,11 +8,11 @@
 .ot_frob(T, C)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{C}{See Usage.}
+\item{T}{Numeric; combined arithmetically in the body.}
+\item{C}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 .schab_covariance_matrix(coords, nugget, sill, rng, model)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{nugget}{See Usage.}
-\item{sill}{See Usage.}
-\item{rng}{See Usage.}
-\item{model}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
+\item{nugget}{Numeric; combined arithmetically in the body.}
+\item{sill}{Numeric; combined arithmetically in the body.}
+\item{rng}{Passed to \code{.sp_correlogram}.}
+\item{model}{Passed to \code{.sp_correlogram}.}
 }
 \description{
 C(h) = sigma0^2 R(h) for h > 0, so the nugget enters only on the diagonal -- it is a discontinuity at the origin, not a term added everywhere.

@@ -17,7 +17,7 @@ walk(adj, start, length, p = 1, q = 1, seed = 0, weights = NULL)
 \item{weights}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the node2v_native implementation; see the file header for the source it follows.
+A step of the node2v_native implementation. Called by \code{.avalon_paths}, \code{.depth_counts}, \code{.dmlqs_count_totters} and 13 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{path}, as built in the body.

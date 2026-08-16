@@ -8,8 +8,8 @@
 HClust(X, linkage = "single", k = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{linkage}{Defaults to \code{"single"}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{linkage}{One of \code{"average"}, \code{"complete"}, \code{"single"}. Defaults to \code{"single"}.}
 \item{k}{Defaults to \code{NULL}.}
 }
 \description{

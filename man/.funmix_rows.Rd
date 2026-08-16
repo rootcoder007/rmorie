@@ -8,10 +8,10 @@
 .funmix_rows(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the funmix_native implementation; see the file header for the source it follows.
+A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

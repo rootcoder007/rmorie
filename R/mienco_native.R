@@ -59,7 +59,8 @@
 
 #' .mienco_softplus
 #'
-#' Part of the mienco_native implementation; see the file header for the
+#' A step of the mienco_native implementation. Called by \code{.mienco_jsd_estimate}, \code{.mienco_prior_matching_loss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -72,7 +73,8 @@
 
 #' .mienco_jsd_estimate
 #'
-#' Part of the mienco_native implementation; see the file header for the
+#' A step of the mienco_native implementation. Called by \code{morie_mienco}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param paired See Usage.
@@ -90,7 +92,8 @@
 
 #' .mienco_dv_estimate
 #'
-#' Part of the mienco_native implementation; see the file header for the
+#' A step of the mienco_native implementation. Called by \code{morie_mienco}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param paired See Usage.
@@ -107,14 +110,15 @@
 
 #' morie_mienco
 #'
-#' Part of the mienco_native implementation; see the file header for the
+#' A step of the mienco_native implementation. Called by \code{.mienco_global_objective}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param summary See Usage.
-#' @param patches See Usage.
-#' @param other_patches See Usage.
+#' @param patches A vector; its length is taken.
+#' @param other_patches A vector; its length is taken.
 #' @param critic See Usage.
-#' @param estimator Defaults to \code{"jsd"}.
+#' @param estimator Compared against \code{"jsd"}. Defaults to \code{"jsd"}.
 #' @return A list with \code{estimate}, \code{mi_lower_bound}, \code{estimator}, \code{n_patches}, \code{n_negative_patches}, \code{method}, \code{note}.
 #' @export
 morie_mienco <- function(summary, patches, other_patches, critic, estimator = "jsd") {
@@ -144,14 +148,15 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 
 #' .mienco_global_objective
 #'
-#' Part of the mienco_native implementation; see the file header for the
+#' A step of the mienco_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param summary See Usage.
+#' @param summary Passed to \code{morie_mienco}.
 #' @param whole See Usage.
 #' @param other_whole See Usage.
-#' @param critic See Usage.
-#' @param estimator Defaults to \code{"jsd"}.
+#' @param critic Passed to \code{morie_mienco}.
+#' @param estimator Passed to \code{morie_mienco}. Defaults to \code{"jsd"}.
 #' @return The value of \code{morie_mienco}.
 #' @export
 .mienco_global_objective <- function(summary, whole, other_whole, critic, estimator = "jsd") {
@@ -160,7 +165,8 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 
 #' .mienco_prior_matching_loss
 #'
-#' Part of the mienco_native implementation; see the file header for the
+#' A step of the mienco_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param samples See Usage.
@@ -179,7 +185,8 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 
 #' .mienco_cheatsheet
 #'
-#' Part of the mienco_native implementation; see the file header for the
+#' A step of the mienco_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

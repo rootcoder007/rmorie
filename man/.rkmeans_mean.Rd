@@ -8,10 +8,10 @@
 .rkmeans_mean(pts)
 }
 \arguments{
-\item{pts}{See Usage.}
+\item{pts}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the rkmeans_native implementation; see the file header for the source it follows.
+A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}, \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

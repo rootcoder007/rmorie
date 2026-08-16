@@ -20,7 +20,8 @@
 
 #' node2v_check_pq
 #'
-#' Part of the node2v_native implementation; see the file header for the
+#' A step of the node2v_native implementation. Called by \code{alpha_pq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -37,7 +38,8 @@ node2v_check_pq <- function(p, q) {
 
 #' alpha_pq
 #'
-#' Part of the node2v_native implementation; see the file header for the
+#' A step of the node2v_native implementation. Called by \code{transition_probabilities}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param d_tx See Usage.
@@ -61,7 +63,7 @@ alpha_pq <- function(d_tx, p, q) {
 #'
 #' adjacency dict, restricted to 0/1/2.
 #'
-#' @param adj See Usage.
+#' @param adj A vector; indexed elementwise.
 #' @param t See Usage.
 #' @param x See Usage.
 #' @return A numeric value.
@@ -76,15 +78,16 @@ alpha_pq <- function(d_tx, p, q) {
 
 #' transition_probabilities
 #'
-#' Part of the node2v_native implementation; see the file header for the
+#' A step of the node2v_native implementation. Called by \code{walk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
-#' @param t See Usage.
+#' @param adj A vector; indexed elementwise.
+#' @param t Optional; may be \code{NULL}. Passed to \code{.node2v_dist}.
 #' @param v See Usage.
 #' @param p See Usage.
 #' @param q See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
 #' @export
 transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
@@ -121,7 +124,8 @@ transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
 
 #' walk
 #'
-#' Part of the node2v_native implementation; see the file header for the
+#' A step of the node2v_native implementation. Called by \code{.avalon_paths}, \code{.depth_counts}, \code{.dmlqs_count_totters} and 13 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param adj See Usage.
@@ -162,7 +166,8 @@ walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
 
 #' generate_walks
 #'
-#' Part of the node2v_native implementation; see the file header for the
+#' A step of the node2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param adj See Usage.
@@ -205,7 +210,8 @@ node2vec <- generate_walks
 
 #' skipgram_pairs
 #'
-#' Part of the node2v_native implementation; see the file header for the
+#' A step of the node2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param walks See Usage.
@@ -235,7 +241,8 @@ skipgram_pairs <- function(walks, window = 2) {
 
 #' .node2v_cheatsheet
 #'
-#' Part of the node2v_native implementation; see the file header for the
+#' A step of the node2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,13 +8,13 @@
 morie_dsp_lms_cpp(x, d, order, mu)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{d}{See Usage.}
-\item{order}{See Usage.}
-\item{mu}{See Usage.}
+\item{x}{Passed to \code{.Call}.}
+\item{d}{Passed to \code{.Call}.}
+\item{order}{Passed to \code{.Call}.}
+\item{mu}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_dsp_lms}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

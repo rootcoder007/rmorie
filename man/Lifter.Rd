@@ -11,7 +11,7 @@ Lifter(cepstrum_values, low = NULL, high = NULL, keep = "low")
 \item{cepstrum_values}{See Usage.}
 \item{low}{Defaults to \code{NULL}.}
 \item{high}{Defaults to \code{NULL}.}
-\item{keep}{Defaults to \code{"low"}.}
+\item{keep}{One of \code{"band"}, \code{"high"}, \code{"low"}. Defaults to \code{"low"}.}
 }
 \description{
 excitation at the pitch period and its multiples.  The window is applied SYMMETRICALLY about zero quefrency, because the cepstrum of a mixed-phase signal is two-sided (eq 4.72) and keeping only the causal half would discard the maximum-phase component.

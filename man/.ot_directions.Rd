@@ -8,11 +8,11 @@
 .ot_directions(d, n_proj)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{n_proj}{See Usage.}
+\item{d}{A count; the body uses it as \code{matrix(...)}.}
+\item{n_proj}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,7 +8,7 @@
 .meglt_cheatsheet()
 }
 \description{
-Part of the meglt_native implementation; see the file header for the source it follows.
+A step of the meglt_native implementation. Called by \code{morie_meglt}. See the file header for the source the module follows.
 }
 \value{
 A character value.

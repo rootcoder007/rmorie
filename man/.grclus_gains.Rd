@@ -8,11 +8,11 @@
 .grclus_gains(adj, parts)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{parts}{See Usage.}
+\item{adj}{A vector; its length is taken and its elements indexed.}
+\item{parts}{A vector; indexed elementwise.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{.grclus_balance_bisection}, \code{.grclus_kl}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{g}, as built in the body.

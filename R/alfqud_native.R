@@ -50,11 +50,12 @@
 
 #' .alfqud_read
 #'
-#' Part of the alfqud_native implementation; see the file header for the
+#' A step of the alfqud_native implementation. Called by \code{morie_alfqud_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
-#' @param loc See Usage.
+#' @param st A list; the body reads \code{$mem}, \code{$reg} from it.
+#' @param loc A vector; indexed elementwise.
 #' @return Nothing; this branch always raises.
 #' @export
 .alfqud_read <- function(st, loc) {
@@ -74,11 +75,12 @@
 
 #' .alfqud_write
 #'
-#' Part of the alfqud_native implementation; see the file header for the
+#' A step of the alfqud_native implementation. Called by \code{morie_alfqud_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
-#' @param loc See Usage.
+#' @param st A list; the body reads \code{$mem}, \code{$reg} from it.
+#' @param loc A vector; indexed elementwise.
 #' @param v See Usage.
 #' @return The value of \code{st}, as built in the body.
 #' @export
@@ -214,13 +216,14 @@ morie_alfqud_text <- function(program) {
 
 #' .alfqud_score
 #'
-#' Part of the alfqud_native implementation; see the file header for the
+#' A step of the alfqud_native implementation. Called by \code{.alfqud_bfs}, \code{.alfqud_mcts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param program See Usage.
-#' @param inputs See Usage.
-#' @param targets See Usage.
-#' @param n_reg See Usage.
+#' @param program A vector; its length is taken.
+#' @param inputs Passed to \code{morie_alfqud_correctness}.
+#' @param targets Passed to \code{morie_alfqud_correctness}.
+#' @param n_reg Passed to \code{morie_alfqud_correctness}.
 #' @param lw See Usage.
 #' @param rf See Usage.
 #' @return A vector, from \code{c}.
@@ -234,16 +237,17 @@ morie_alfqud_text <- function(program) {
 
 #' .alfqud_bfs
 #'
-#' Part of the alfqud_native implementation; see the file header for the
+#' A step of the alfqud_native implementation. Called by \code{morie_alfqud}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param inputs See Usage.
-#' @param targets See Usage.
+#' @param inputs Passed to \code{.alfqud_score}.
+#' @param targets Passed to \code{.alfqud_score}.
 #' @param acts See Usage.
-#' @param n_reg See Usage.
+#' @param n_reg Passed to \code{.alfqud_score}.
 #' @param max_len See Usage.
-#' @param lw See Usage.
-#' @param rf See Usage.
+#' @param lw Passed to \code{.alfqud_score}.
+#' @param rf Passed to \code{.alfqud_score}.
 #' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
 #' @export
 .alfqud_bfs <- function(inputs, targets, acts, n_reg, max_len, lw, rf) {
@@ -268,18 +272,19 @@ morie_alfqud_text <- function(program) {
 
 #' .alfqud_mcts
 #'
-#' Part of the alfqud_native implementation; see the file header for the
+#' A step of the alfqud_native implementation. Called by \code{morie_alfqud}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param inputs See Usage.
-#' @param targets See Usage.
-#' @param acts See Usage.
-#' @param n_reg See Usage.
+#' @param inputs Passed to \code{.alfqud_score}.
+#' @param targets Passed to \code{.alfqud_score}.
+#' @param acts A vector; its length is taken and its elements indexed.
+#' @param n_reg Passed to \code{.alfqud_score}.
 #' @param max_len See Usage.
-#' @param lw See Usage.
-#' @param rf See Usage.
+#' @param lw Passed to \code{.alfqud_score}.
+#' @param rf Passed to \code{.alfqud_score}.
 #' @param n_sim See Usage.
-#' @param c_puct See Usage.
+#' @param c_puct Numeric; combined arithmetically in the body.
 #' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
 #' @export
 .alfqud_mcts <- function(inputs, targets, acts, n_reg, max_len, lw, rf,

@@ -8,12 +8,12 @@
 .trupek_model(g, H, s)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{H}{See Usage.}
-\item{s}{See Usage.}
+\item{g}{Passed to \code{.trupek_dot}.}
+\item{H}{Passed to \code{.trupek_matvec}.}
+\item{s}{Passed to \code{.trupek_dot}.}
 }
 \description{
-Part of the trupek_native implementation; see the file header for the source it follows.
+A step of the trupek_native implementation. Called by \code{morie_trupek_trust_region}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

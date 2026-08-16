@@ -8,7 +8,7 @@
 .mafft_jtt_exchangeability()
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{jtt_matrix}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{S}, \code{f}.

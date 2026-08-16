@@ -8,10 +8,10 @@
 .gpmnprobs(X, beta0, beta, baseline_last = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{beta0}{See Usage.}
-\item{beta}{See Usage.}
-\item{baseline_last}{Defaults to \code{TRUE}.}
+\item{X}{Passed to \code{.gpmat}.}
+\item{beta0}{Passed to \code{.gpflat}.}
+\item{beta}{Passed to \code{.gpmat}.}
+\item{baseline_last}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 --------------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

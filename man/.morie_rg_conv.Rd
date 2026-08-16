@@ -8,11 +8,11 @@
 .morie_rg_conv(xs, hs)
 }
 \arguments{
-\item{xs}{See Usage.}
-\item{hs}{See Usage.}
+\item{xs}{A vector; its length is taken and its elements indexed.}
+\item{hs}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the rangayyan_xfrm implementation; see the file header for the source it follows.
+A step of the rangayyan_xfrm implementation. Called by \code{CCepSum}, \code{ClogSum}, \code{ConvModel} and 13 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

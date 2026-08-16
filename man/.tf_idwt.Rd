@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{a}{See Usage.}
-\item{details}{See Usage.}
-\item{lengths}{See Usage.}
-\item{wavelet}{See Usage.}
+\item{details}{A vector; its length is taken and its elements indexed.}
+\item{lengths}{A vector; indexed elementwise.}
+\item{wavelet}{Passed to \code{.tf_filters}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{Mra}, \code{SwtDen}, \code{WtThresh}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cur}, as built in the body.

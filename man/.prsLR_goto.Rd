@@ -10,13 +10,13 @@
 \arguments{
 \item{state}{See Usage.}
 \item{sym}{See Usage.}
-\item{ag}{See Usage.}
-\item{first}{See Usage.}
-\item{nts}{See Usage.}
-\item{k}{See Usage.}
+\item{ag}{A list; the body reads \code{$rules} from it.}
+\item{first}{Passed to \code{.prsLR_closure}.}
+\item{nts}{Passed to \code{.prsLR_closure}.}
+\item{k}{Passed to \code{.prsLR_closure}.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{morie_goto}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.prsLR_closure}.

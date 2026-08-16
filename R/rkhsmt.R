@@ -147,8 +147,8 @@ Rkhsmt <- function(Y, K, n_iter = 200L, X = NULL, Z1 = NULL, v_T = NULL,
 #'
 #' that the two arms cannot drift on round-off.
 #'
-#' @param A See Usage.
-#' @param ridge Defaults to \code{1e-12}.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param ridge Passed to \code{.s03ridgesolve}. Defaults to \code{1e-12}.
 #' @return A numeric value.
 #' @export
 .mvsinv <- function(A, ridge = 1e-12) {

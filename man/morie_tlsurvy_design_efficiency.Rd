@@ -9,9 +9,9 @@ morie_tlsurvy_design_efficiency(values, influence, n, seed = 0)
 }
 \arguments{
 \item{values}{See Usage.}
-\item{influence}{See Usage.}
-\item{n}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
+\item{influence}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
+\item{n}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
+\item{seed}{Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.}
 }
 \description{
 Adaptation can only help when the influence is unevenly spread; where it is flat the two coincide, and claiming otherwise would be claiming something for nothing.

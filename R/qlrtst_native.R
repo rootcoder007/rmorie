@@ -41,11 +41,12 @@
 
 #' .qlr_ssr
 #'
-#' Part of the qlrtst_native implementation; see the file header for the
+#' A step of the qlrtst_native implementation. Called by \code{morie_qlrtst}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{t}.
+#' @param y A matrix; passed to \code{\%*\%}.
 #' @return A numeric value.
 #' @export
 .qlr_ssr <- function(X, y) {

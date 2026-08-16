@@ -49,7 +49,8 @@
 # ----- Set operations on character vectors -----
 #' Set operations on character vectors -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -59,17 +60,19 @@
 .prsLL_union <- function(a, b) unique(c(a, b))
 #' .prsLL_setdiff
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \code{.prsLL_follow_sets}, \code{.prsLL_ll1_table}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a A vector; indexed elementwise.
 #' @param b See Usage.
 #' @return The value of \code{[}.
 #' @export
 .prsLL_setdiff <- function(a, b) a[!(a %in% b)]
 #' .prsLL_subset
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_sets}, \code{.prsLL_follow_sets}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -81,7 +84,8 @@
 # ----- Grammar construction and validation -----
 #' Grammar construction and validation -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_remove_left_recursion}, \code{morie_prsLL}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param rules See Usage.
@@ -126,10 +130,11 @@
 
 #' .prsLL_reachable
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_grammar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return The value of \code{seen}, as built in the body.
 #' @export
 .prsLL_reachable <- function(g) {
@@ -154,10 +159,11 @@
 
 #' .prsLL_nonterminals
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 8 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .prsLL_nonterminals <- function(g) {
@@ -173,10 +179,11 @@
 
 #' .prsLL_terminals
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .prsLL_terminals <- function(g) {
@@ -195,10 +202,11 @@
 # ----- FIRST and FOLLOW sets -----
 #' FIRST and FOLLOW sets -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_follow_sets}, \code{.prsLL_left_recursive} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{first}, as built in the body.
 #' @export
 .prsLL_first_sets <- function(g) {
@@ -223,11 +231,12 @@
 
 #' .prsLL_first_seq
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seq See Usage.
-#' @param first See Usage.
+#' @param first A vector; indexed elementwise.
 #' @param nts See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -249,11 +258,12 @@
 
 #' .prsLL_first_of
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seq See Usage.
-#' @param g See Usage.
+#' @param g Passed to \code{.prsLL_first_sets}.
 #' @param first Defaults to \code{NULL}.
 #' @return The value of \code{.prsLL_first_seq}.
 #' @export
@@ -264,10 +274,11 @@
 
 #' .prsLL_follow_sets
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_ll1_table}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @param first Defaults to \code{NULL}.
 #' @return The value of \code{follow}, as built in the body.
 #' @export
@@ -305,10 +316,11 @@
 # ----- LL(1) table construction -----
 #' LL(1) table construction -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}, \code{.prsLL_parse}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return A list with \code{table}, \code{conflicts}, \code{first}, \code{follow}.
 #' @export
 .prsLL_ll1_table <- function(g) {
@@ -344,10 +356,11 @@
 
 #' .prsLL_is_ll1
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g Passed to \code{.prsLL_ll1_table}.
 #' @return A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table}, \code{first}, \code{follow}, \code{left_recursive}, \code{method}.
 #' @export
 .prsLL_is_ll1 <- function(g) {
@@ -367,10 +380,11 @@
 # ----- Left recursion detection and removal -----
 #' Left recursion detection and removal -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .prsLL_left_recursive <- function(g) {
@@ -414,10 +428,11 @@
 
 #' .prsLL_remove_left_recursion
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return The value of \code{.prsLL_grammar}.
 #' @export
 .prsLL_remove_left_recursion <- function(g) {
@@ -469,7 +484,8 @@
 # ----- Parse tree nodes -----
 #' Parse tree nodes -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sym See Usage.
@@ -481,7 +497,8 @@
 
 #' .prsLL_node
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sym See Usage.
@@ -495,10 +512,11 @@
 # ----- Parsing -----
 #' Parsing -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param table See Usage.
+#' @param table A vector; indexed elementwise.
 #' @param A See Usage.
 #' @param a See Usage.
 #' @return The value of \code{[[}.
@@ -513,14 +531,15 @@
 
 #' .prsLL_parse_rd
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param table See Usage.
-#' @param toks See Usage.
-#' @param A See Usage.
-#' @param pos See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
+#' @param table Passed to \code{.prsLL_pick}.
+#' @param toks A vector; indexed elementwise.
+#' @param A Passed to \code{.prsLL_pick}.
+#' @param pos Numeric; combined arithmetically in the body.
 #' @return The value of \code{list}.
 #' @export
 .prsLL_parse_rd <- function(g, table, toks, A, pos) {
@@ -548,12 +567,13 @@
 
 #' .prsLL_parse_table
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param table See Usage.
-#' @param toks See Usage.
+#' @param g A list; the body reads \code{$rules}, \code{$start} from it.
+#' @param table Passed to \code{.prsLL_pick}.
+#' @param toks A vector; indexed elementwise.
 #' @return The value of \code{list}.
 #' @export
 .prsLL_parse_table <- function(g, table, toks) {
@@ -594,12 +614,13 @@
 
 #' .prsLL_parse
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{morie_prsLL}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$start} from it.
 #' @param tokens See Usage.
-#' @param route Defaults to \code{"table"}.
+#' @param route Compared against \code{"table"}. Defaults to \code{"table"}.
 #' @return The value of \code{tree}, as built in the body.
 #' @export
 .prsLL_parse <- function(g, tokens, route = "table") {
@@ -632,10 +653,11 @@
 # ----- Tree linearisation -----
 #' Tree linearisation -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. Called by \code{morie_prsLL}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree A list; the body reads \code{$children}, \code{$symbol} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .prsLL_linearise <- function(tree) {
@@ -652,12 +674,13 @@
 # ----- Entry point -----
 #' Entry point -----
 #'
-#' Part of the prsLL_native implementation; see the file header for the
+#' A step of the prsLL_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param grammar_ See Usage.
-#' @param tokens See Usage.
-#' @param route Defaults to \code{"table"}.
+#' @param grammar_ A list; the body reads \code{$rules}, \code{$start} from it.
+#' @param tokens Passed to \code{.prsLL_parse}.
+#' @param route Passed to \code{.prsLL_parse}. Defaults to \code{"table"}.
 #' @return A list with \code{estimate}, \code{tree}, \code{route}, \code{tokens}, \code{yield}, \code{method}.
 #' @export
 morie_prsLL <- function(grammar_, tokens, route = "table") {

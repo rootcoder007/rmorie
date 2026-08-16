@@ -8,11 +8,11 @@
 .schab_variance_function(mu, family)
 }
 \arguments{
-\item{mu}{See Usage.}
+\item{mu}{A vector; its length is taken.}
 \item{family}{See Usage.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{.schab_conditional_variance}, \code{.schab_data_covariance}, \code{.schab_sigma_mu}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

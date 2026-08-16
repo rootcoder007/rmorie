@@ -9,7 +9,7 @@ Reffec(R0, S, N)
 \arguments{
 \item{R0}{Basic reproduction number, non-negative.}
 
-\item{S}{Current susceptible count in \link{0, N}.}
+\item{S}{Current susceptible count in [0, N].}
 
 \item{N}{Population size, positive.}
 }

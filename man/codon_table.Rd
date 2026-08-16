@@ -8,7 +8,7 @@
 codon_table()
 }
 \description{
-Part of the snpeff_native implementation; see the file header for the source it follows.
+A step of the snpeff_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.SNPEFF_CODONS}, as built in the body.

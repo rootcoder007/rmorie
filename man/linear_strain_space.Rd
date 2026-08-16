@@ -13,7 +13,7 @@ linear_strain_space(n, width = 2, floor = 0)
 \item{floor}{Defaults to \code{0}.}
 }
 \description{
-Part of the hiatus_native implementation; see the file header for the source it follows.
+A step of the hiatus_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

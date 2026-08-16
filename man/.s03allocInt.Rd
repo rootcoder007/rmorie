@@ -8,7 +8,7 @@
 .s03allocInt(alloc, m0)
 }
 \arguments{
-\item{alloc}{See Usage.}
+\item{alloc}{A vector; its length is taken.}
 \item{m0}{See Usage.}
 }
 \description{

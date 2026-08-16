@@ -8,11 +8,11 @@
 .tmlphd_lasso(X, y, lam, w = NULL, sweeps = 400L)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{lam}{See Usage.}
-\item{w}{Defaults to \code{NULL}.}
-\item{sweeps}{Defaults to \code{400L}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{lam}{Passed to \code{.tmlphd_soft}.}
+\item{w}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{sweeps}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400L}.}
 }
 \description{
 unpenalised # Fixed sweep count and fixed cyclic order, so both language arms take # the same path even where the objective has a flat direction.

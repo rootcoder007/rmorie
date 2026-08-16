@@ -8,10 +8,10 @@
 alfLnorm(v, g = NULL, b = NULL, eps = 1e-05)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 \item{g}{Defaults to \code{NULL}.}
 \item{b}{Defaults to \code{NULL}.}
-\item{eps}{Defaults to \code{1e-05}.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
 population variance (divide by n), matching the Python arm.

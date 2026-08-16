@@ -9,11 +9,11 @@ morie_genemt_gene_statistic(y, G, keep = 0.999)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{G}{See Usage.}
-\item{keep}{Defaults to \code{0.999}.}
+\item{G}{Passed to \code{morie_genemt_ld_principal_components}.}
+\item{keep}{Passed to \code{morie_genemt_ld_principal_components}. Defaults to \code{0.999}.}
 }
 \description{
-Part of the genemt_native implementation; see the file header for the source it follows.
+A step of the genemt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{F}, \code{df1}, \code{df2}, \code{p}, \code{z}, \code{n_markers}, \code{note}.

@@ -8,11 +8,11 @@
 sdpwts_is_psd(M, tol = -1e-10)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; passed to \code{as.matrix}.}
 \item{tol}{Defaults to \code{-1e-10}.}
 }
 \description{
-Part of the sdpwts_native implementation; see the file header for the source it follows.
+A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd}, \code{strictly_feasible}.

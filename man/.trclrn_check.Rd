@@ -10,12 +10,12 @@
 \arguments{
 \item{Y}{See Usage.}
 \item{A}{See Usage.}
-\item{X}{See Usage.}
-\item{propensity}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{propensity}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{min_propensity}{See Usage.}
 }
 \description{
-Part of the trclrn_native implementation; see the file header for the source it follows.
+A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}, \code{trclrn_rule_value}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{a}, \code{Xm}, \code{p}, \code{n}, \code{arms}.

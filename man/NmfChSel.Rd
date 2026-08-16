@@ -8,15 +8,15 @@
 NmfChSel(trials, nselect, rank = 4, maxiter = 200, tol = 1e-08, seed = 1)
 }
 \arguments{
-\item{trials}{See Usage.}
-\item{nselect}{See Usage.}
-\item{rank}{Defaults to \code{4}.}
-\item{maxiter}{Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-08}.}
-\item{seed}{Defaults to \code{1}.}
+\item{trials}{Passed to \code{.morie_bx_chsel}.}
+\item{nselect}{Passed to \code{.morie_bx_chsel}.}
+\item{rank}{Passed to \code{.morie_bx_chsel}. Defaults to \code{4}.}
+\item{maxiter}{Passed to \code{.morie_bx_chsel}. Defaults to \code{200}.}
+\item{tol}{Passed to \code{.morie_bx_chsel}. Defaults to \code{1e-08}.}
+\item{seed}{Passed to \code{.morie_bx_chsel}. Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{selected}, \code{rmsd}, \code{ranking}, \code{normalized}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.

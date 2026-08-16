@@ -8,8 +8,8 @@
 .morie_bx_mm(A, B)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
+\item{B}{A matrix; indexed by row and column.}
 }
 \description{
 order has to match the Python arm or an iterative update diverges

@@ -8,10 +8,10 @@
 .rouge_toks(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the rouge_native implementation; see the file header for the source it follows.
+A step of the rouge_native implementation. Called by \code{.rouge_get_refs_complex}, \code{morie_rouge_l}, \code{morie_rouge_n} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A character value.

@@ -23,11 +23,12 @@
 
 #' .schab_st_as_lags
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{.schab_st_anisotropic_correlation}, \code{.schab_st_exponential_separable}, \code{.schab_st_gneiting} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
+#' @param h A vector; its length is taken.
+#' @param k A vector; its length is taken.
 #' @return A list with \code{h}, \code{k}.
 #' @export
 .schab_st_as_lags <- function(h, k) {
@@ -40,11 +41,12 @@
 
 #' .schab_st_lag_matrices
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{.schab_st_covariance_matrix}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
-#' @param times See Usage.
+#' @param coords A matrix; passed to \code{nrow}.
+#' @param times A vector; its length is taken.
 #' @return A list with \code{d}, \code{k}.
 #' @export
 .schab_st_lag_matrices <- function(coords, times) {
@@ -62,11 +64,12 @@
 
 #' .schab_st_separable_covariance
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstcv}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
 #' @param cov_spatial See Usage.
 #' @param cov_temporal See Usage.
 #' @param form Defaults to \code{"product"}.
@@ -89,10 +92,11 @@
 
 #' .schab_st_is_separable
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstcv}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param form See Usage.
+#' @param form One of \code{"product"}, \code{"sum"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .schab_st_is_separable <- function(form) {
@@ -107,13 +111,14 @@
 
 #' .schab_st_anisotropic_correlation
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
-#' @param theta_s See Usage.
-#' @param theta_t See Usage.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
+#' @param theta_s Numeric; combined arithmetically in the body.
+#' @param theta_t Numeric; combined arithmetically in the body.
 #' @param corr_fn See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -127,13 +132,14 @@
 
 #' .schab_st_exponential_separable
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
-#' @param theta_s See Usage.
-#' @param theta_t See Usage.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
+#' @param theta_s Numeric; combined arithmetically in the body.
+#' @param theta_t Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .schab_st_exponential_separable <- function(h, k, theta_s, theta_t) {
@@ -148,18 +154,19 @@
 
 #' .schab_st_gneiting
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
-#' @param sigma2 Defaults to \code{1}.
-#' @param a Defaults to \code{1}.
-#' @param c Defaults to \code{1}.
-#' @param alpha Defaults to \code{1}.
-#' @param beta Defaults to \code{1}.
-#' @param gamma Defaults to \code{1}.
-#' @param d Defaults to \code{2}.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
+#' @param sigma2 Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param a Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param c Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param beta Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param d Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
 .schab_st_gneiting <- function(h, k, sigma2 = 1, a = 1, c = 1, alpha = 1,
@@ -176,19 +183,20 @@
 
 #' .schab_st_gneiting_with_temporal
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
-#' @param sigma2 Defaults to \code{1}.
-#' @param a Defaults to \code{1}.
-#' @param c Defaults to \code{1}.
-#' @param alpha Defaults to \code{1}.
-#' @param beta Defaults to \code{1}.
-#' @param beta_t Defaults to \code{1}.
-#' @param gamma Defaults to \code{1}.
-#' @param d Defaults to \code{2}.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
+#' @param sigma2 Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param a Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param c Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param beta Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param beta_t Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param d Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
 .schab_st_gneiting_with_temporal <- function(h, k, sigma2 = 1, a = 1, c = 1,
@@ -234,11 +242,12 @@
 
 #' .schab_st_power_mixture
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rs See Usage.
-#' @param rt See Usage.
+#' @param rs Numeric; passed to \code{abs}.
+#' @param rt Numeric; passed to \code{abs}.
 #' @param distribution Defaults to \code{"poisson"}.
 #' @param ... Passed through.
 #' @return Nothing; this branch always raises.
@@ -269,12 +278,13 @@
 
 #' .schab_st_bivariate_power_mixture
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstcn}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rs See Usage.
-#' @param rt See Usage.
-#' @param pmf See Usage.
+#' @param rs A vector; its length is taken.
+#' @param rt A vector; its length is taken.
+#' @param pmf A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .schab_st_bivariate_power_mixture <- function(rs, rt, pmf) {
@@ -300,11 +310,12 @@
 
 #' .schab_st_scale_mixture
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstcn}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
 #' @param cov_spatial See Usage.
 #' @param cov_temporal See Usage.
 #' @param nodes See Usage.
@@ -342,7 +353,7 @@
 #' for Legendre on [-1, 1]. The Hermite rule elsewhere carries no such
 #' factor because there the Gaussian weight integrates to 1.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return A list with \code{nodes}, \code{weights}.
 #' @export
 .schab_gauss_legendre <- function(n) {
@@ -392,12 +403,13 @@
 
 #' K_1(z) = integral_0^inf exp{-z cosh u} cosh u du
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{.schab_whittle_covariance}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param z See Usage.
-#' @param upper Defaults to \code{40}.
-#' @param n_quad Defaults to \code{400L}.
+#' @param upper Numeric; combined arithmetically in the body. Defaults to \code{40}.
+#' @param n_quad Passed to \code{.schab_gauss_legendre}. Defaults to \code{400L}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .schab_bessel_k1 <- function(z, upper = 40, n_quad = 400L) {
@@ -411,12 +423,13 @@
 
 #' .schab_whittle_covariance
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param sigma2 Defaults to \code{1}.
-#' @param theta Defaults to \code{1}.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param sigma2 A count; the body uses it as \code{rep(...)}. Defaults to \code{1}.
+#' @param theta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .schab_whittle_covariance <- function(h, sigma2 = 1, theta = 1) {
@@ -432,12 +445,13 @@
 
 #' .schab_st_tail_bound_j0
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{.schab_st_hankel_panels}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
-#' @param h See Usage.
-#' @param p See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .schab_st_tail_bound_j0 <- function(t, h, p) {
@@ -455,15 +469,16 @@
 
 #' .schab_st_hankel_panels
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{.schab_st_jones_zhang}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param hval See Usage.
-#' @param kval See Usage.
-#' @param theta See Usage.
-#' @param c See Usage.
-#' @param p See Usage.
-#' @param n_quad Defaults to \code{40L}.
+#' @param hval Numeric; combined arithmetically in the body.
+#' @param kval Numeric; combined arithmetically in the body.
+#' @param theta Numeric; combined arithmetically in the body.
+#' @param c Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param n_quad Passed to \code{.schab_gauss_legendre}. Defaults to \code{40L}.
 #' @param rtol Defaults to \code{1e-10}.
 #' @param max_panels Defaults to \code{20000L}.
 #' @param quiet_runs Defaults to \code{4L}.
@@ -507,17 +522,18 @@
 
 #' .schab_st_jones_zhang
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
-#' @param sigma2 Defaults to \code{1}.
-#' @param theta Defaults to \code{1}.
-#' @param c Defaults to \code{1}.
-#' @param p Defaults to \code{1.5}.
-#' @param d Defaults to \code{2}.
-#' @param n_quad Defaults to \code{40L}.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
+#' @param sigma2 Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param theta Passed to \code{.schab_st_hankel_panels}. Defaults to \code{1}.
+#' @param c Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param p Passed to \code{.schab_st_hankel_panels}. Defaults to \code{1.5}.
+#' @param d Numeric; combined arithmetically in the body. Defaults to \code{2}.
+#' @param n_quad Passed to \code{.schab_st_hankel_panels}. Defaults to \code{40L}.
 #' @return A list with \code{covariance}, \code{quadrature}.
 #' @export
 .schab_st_jones_zhang <- function(h, k, sigma2 = 1, theta = 1, c = 1, p = 1.5,
@@ -559,11 +575,12 @@
 
 #' .schab_st_covariance_matrix
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{.schab_st_is_valid_covariance}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
-#' @param times See Usage.
+#' @param coords Passed to \code{.schab_st_lag_matrices}.
+#' @param times Passed to \code{.schab_st_lag_matrices}.
 #' @param cov_fn See Usage.
 #' @return A matrix, from \code{matrix}.
 #' @export
@@ -581,9 +598,9 @@
 #' (2002) found published covariance functions in Cressie and Huang
 #' (1999) to be invalid, so construction alone is not proof.
 #'
-#' @param coords See Usage.
-#' @param times See Usage.
-#' @param cov_fn See Usage.
+#' @param coords Passed to \code{.schab_st_covariance_matrix}.
+#' @param times Passed to \code{.schab_st_covariance_matrix}.
+#' @param cov_fn Passed to \code{.schab_st_covariance_matrix}.
 #' @param tol Defaults to \code{NULL}.
 #' @return A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue}, \code{tolerance}, \code{reason}.
 #' @export
@@ -616,11 +633,12 @@
 
 #' .schab_st_semivariogram_from_cov
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h See Usage.
-#' @param k See Usage.
+#' @param h Passed to \code{.schab_st_as_lags}.
+#' @param k Passed to \code{.schab_st_as_lags}.
 #' @param cov_fn See Usage.
 #' @return A numeric value.
 #' @export
@@ -632,12 +650,13 @@
 
 #' .schab_st_empirical_semivariogram
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstvg}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
-#' @param times See Usage.
-#' @param z See Usage.
+#' @param coords A matrix; indexed by row and column.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param z A vector; its length is taken and its elements indexed.
 #' @param n_space_bins Defaults to \code{10L}.
 #' @param n_time_bins Defaults to \code{5L}.
 #' @param max_dist Defaults to \code{NULL}.
@@ -697,12 +716,13 @@
 
 #' .schab_st_conditional_semivariogram
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstvg}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
-#' @param times See Usage.
-#' @param z See Usage.
+#' @param coords A matrix; indexed by row and column.
+#' @param times Numeric; combined arithmetically in the body.
+#' @param z A vector; indexed elementwise.
 #' @param at_time See Usage.
 #' @param n_bins Defaults to \code{10L}.
 #' @param max_dist Defaults to \code{NULL}.
@@ -751,10 +771,11 @@
 
 #' .schab_st_wls_objective
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstvg}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param emp See Usage.
+#' @param emp A list; the body reads \code{$counts}, \code{$gamma}, \code{$space_lags}, \code{$time_lags} from it.
 #' @param model_fn See Usage.
 #' @return A numeric value.
 #' @export
@@ -778,7 +799,8 @@
 
 #' .schab_st_region_box
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{.schab_cstr_test}, \code{.schab_st_intensity}, \code{.schab_st_marginal_intensities}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param region See Usage.
@@ -795,13 +817,14 @@
 
 #' .schab_st_intensity
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstp}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param points See Usage.
+#' @param points A matrix; passed to \code{as.matrix}.
 #' @param times See Usage.
-#' @param region See Usage.
-#' @param time_interval See Usage.
+#' @param region Passed to \code{.schab_st_region_box}.
+#' @param time_interval A vector; indexed elementwise.
 #' @return A list with \code{intensity}, \code{n}, \code{area}, \code{duration}, \code{volume}.
 #' @export
 .schab_st_intensity <- function(points, times, region, time_interval) {
@@ -822,13 +845,14 @@
 
 #' .schab_st_marginal_intensities
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstp}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param points See Usage.
+#' @param points A matrix; passed to \code{as.matrix}.
 #' @param times See Usage.
-#' @param region See Usage.
-#' @param time_interval See Usage.
+#' @param region Passed to \code{.schab_st_region_box}.
+#' @param time_interval A vector; indexed elementwise.
 #' @param n_space_bins Defaults to \code{4L}.
 #' @param n_time_bins Defaults to \code{4L}.
 #' @return A list with \code{marginal_spatial}, \code{marginal_temporal}, \code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
@@ -866,12 +890,13 @@
 
 #' .schab_cstr_reference
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstp}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param area See Usage.
-#' @param duration See Usage.
-#' @param lam See Usage.
+#' @param area Numeric; combined arithmetically in the body.
+#' @param duration Numeric; combined arithmetically in the body.
+#' @param lam Numeric; combined arithmetically in the body.
 #' @return A list with \code{expected_count}, \code{variance}, \code{intensity}, \code{second_order_intensity}, \code{volume}.
 #' @export
 .schab_cstr_reference <- function(area, duration, lam) {
@@ -890,13 +915,14 @@
 
 #' .schab_cstr_test
 #'
-#' Part of the schab_st_shared implementation; see the file header for
+#' A step of the schab_st_shared implementation. Called by \code{spstp}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param points See Usage.
+#' @param points A matrix; passed to \code{as.matrix}.
 #' @param times See Usage.
-#' @param region See Usage.
-#' @param time_interval See Usage.
+#' @param region Passed to \code{.schab_st_region_box}.
+#' @param time_interval A vector; indexed elementwise.
 #' @param n_space_bins Defaults to \code{3L}.
 #' @param n_time_bins Defaults to \code{3L}.
 #' @return A list with \code{index_of_dispersion}, \code{df}, \code{p_value}, \code{counts}, \code{mean_count}, \code{var_count}.
@@ -949,7 +975,7 @@
 #' the mapping and is easy to drop: Q(df/2, x) is a perfectly
 #' well-behaved number, just not this one.
 #'
-#' @param x See Usage.
+#' @param x Numeric; passed to \code{log}.
 #' @param df See Usage.
 #' @return A numeric value.
 #' @export

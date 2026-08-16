@@ -8,7 +8,7 @@
 LogReg(X, y, maxiter = 100, tol = 1e-08, ridge = 1e-08)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 \item{maxiter}{Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-08}.}

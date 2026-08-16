@@ -8,14 +8,14 @@
 .lcwphr_logit_irls(X, y, max_iter = 100L, tol = 1e-11, ridge_rel = 1e-08)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
 \item{max_iter}{Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-11}.}
-\item{ridge_rel}{Defaults to \code{1e-08}.}
+\item{ridge_rel}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the lcwphr_native implementation; see the file header for the source it follows.
+A step of the lcwphr_native implementation. Called by \code{morie_lcwphr_latent_class_weighted}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{fitted}.

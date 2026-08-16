@@ -8,11 +8,11 @@
 .hapblk_ci(h, grid = 200)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{grid}{Defaults to \code{200}.}
+\item{h}{A vector; indexed elementwise.}
+\item{grid}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 }
 \description{
-Part of the hapblk_native implementation; see the file header for the source it follows.
+A step of the hapblk_native implementation. Called by \code{morie_hapblk}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

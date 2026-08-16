@@ -8,10 +8,10 @@
 .morie_jo_sigmoid(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Numeric; passed to \code{exp}.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_glu}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

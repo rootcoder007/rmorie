@@ -8,12 +8,12 @@
 .crkbsg_rho(h, model, rng)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{model}{See Usage.}
-\item{rng}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{model}{One of \code{"exponential"}, \code{"gaussian"}, \code{"spherical"}.}
+\item{rng}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the crkbsg_native implementation; see the file header for the source it follows.
+A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

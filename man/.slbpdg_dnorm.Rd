@@ -8,12 +8,12 @@
 .slbpdg_dnorm(x, mu, s2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{mu}{See Usage.}
-\item{s2}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{s2}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the slbpdg_native implementation; see the file header for the source it follows.
+A step of the slbpdg_native implementation. Called by \code{morie_slbpdg}, \code{morie_slbpdg_density}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

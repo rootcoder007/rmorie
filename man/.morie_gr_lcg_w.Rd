@@ -8,12 +8,12 @@
 .morie_gr_lcg_w(count, seed, scale = 0.1)
 }
 \arguments{
-\item{count}{See Usage.}
-\item{seed}{See Usage.}
-\item{scale}{Defaults to \code{0.1}.}
+\item{count}{Passed to \code{.morie_gr_lcg_u}.}
+\item{seed}{Passed to \code{.morie_gr_lcg_u}.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_init}, \code{morie_geron_bert}, \code{morie_geron_roberta}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -9,16 +9,16 @@ morie_randIE_interventional_mean(Y, A, M, C = NULL, a = "1", a.star = "0", route
 }
 \arguments{
 \item{Y}{See Usage.}
-\item{A}{See Usage.}
-\item{M}{See Usage.}
-\item{C}{Defaults to \code{NULL}.}
+\item{A}{Passed to \code{.labels}.}
+\item{M}{Passed to \code{.labels}.}
+\item{C}{Optional; may be \code{NULL}. Passed to \code{.labels}.}
 \item{a}{Defaults to \code{"1"}.}
 \item{a.star}{Defaults to \code{"0"}.}
-\item{route}{Defaults to \code{"gformula"}.}
-\item{laplace}{Defaults to \code{0}.}
+\item{route}{Compared against \code{"weighting"}. Defaults to \code{"gformula"}.}
+\item{laplace}{Passed to \code{morie_randIE_mediator_distribution}. Defaults to \code{0}.}
 }
 \description{
-Part of the randIE_native implementation; see the file header for the source it follows.
+A step of the randIE_native implementation. Called by \code{morie_randIE_randomized_interventional_effect}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{a}, \code{a.star}, \code{route}, \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.

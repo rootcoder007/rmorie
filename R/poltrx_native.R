@@ -169,8 +169,8 @@ poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
 #' Strict: the SAME uniform draws in the SAME order as the Python
 #' implementation, so both arms agree on every variate.
 #'
-#' @param e See Usage.
-#' @param shape See Usage.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param shape Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
 #' @export
 poltrx_gamma <- function(e, shape) {
@@ -198,10 +198,11 @@ poltrx_gamma <- function(e, shape) {
 # Convert a list key of the form "(0,1,1)" back to an integer vector.
 #' Convert a list key of the form "(0,1,1)" back to an integer vector
 #'
-#' Part of the poltrx_native implementation; see the file header for the
+#' A step of the poltrx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param key See Usage.
+#' @param key Compared against \code{"()"}.
 #' @return The value of \code{as.integer}.
 #' @export
 poltrx_eps_from_key <- function(key) {

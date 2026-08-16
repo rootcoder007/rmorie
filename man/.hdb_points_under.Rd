@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{node}{See Usage.}
-\item{children}{See Usage.}
+\item{children}{A vector; indexed elementwise.}
 \item{n}{See Usage.}
 }
 \description{
-Part of the hdbsc_native implementation; see the file header for the source it follows.
+A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

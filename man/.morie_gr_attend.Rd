@@ -8,13 +8,13 @@
 .morie_gr_attend(Q, K, V, mask = NULL)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{K}{See Usage.}
-\item{V}{See Usage.}
+\item{Q}{A matrix; passed to \code{ncol}.}
+\item{K}{A matrix; passed to \code{nrow}.}
+\item{V}{A matrix; passed to \code{nrow}.}
 \item{mask}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{morie_geron_block_multi_head_attention}, \code{morie_geron_flash_attention_tile}, \code{morie_geron_multi_head_attention} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{output}, \code{weights}, \code{scores}.

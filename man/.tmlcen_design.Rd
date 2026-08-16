@@ -8,11 +8,11 @@
 .tmlcen_design(rows, n)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{n}{See Usage.}
+\item{rows}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}, \code{morie_tmle_censoring}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{Z}, as built in the body.

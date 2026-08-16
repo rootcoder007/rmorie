@@ -8,11 +8,11 @@
 .regmlm_residualise(v, cols)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{cols}{See Usage.}
+\item{v}{A matrix; passed to \code{crossprod}.}
+\item{cols}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{test_variant}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

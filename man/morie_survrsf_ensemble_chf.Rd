@@ -8,15 +8,15 @@
 morie_survrsf_ensemble_chf(fit, X, t, oob = TRUE, random_variable = NULL, seed = 1)
 }
 \arguments{
-\item{fit}{See Usage.}
-\item{X}{See Usage.}
-\item{t}{See Usage.}
-\item{oob}{Defaults to \code{TRUE}.}
-\item{random_variable}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{1}.}
+\item{fit}{A list; the body reads \code{$inbag}, \code{$trees} from it.}
+\item{X}{A matrix; indexed by row and column.}
+\item{t}{Passed to \code{.survrsf_chf_at}.}
+\item{oob}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{random_variable}{Passed to \code{morie_survrsf_predict_tree}.}
+\item{seed}{Passed to \code{.survrsf_rng}. Defaults to \code{1}.}
 }
 \description{
-Part of the survrsf_native implementation; see the file header for the source it follows.
+A step of the survrsf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

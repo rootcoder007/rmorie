@@ -9,11 +9,11 @@ lag_summary(series, t, lags = 2)
 }
 \arguments{
 \item{series}{See Usage.}
-\item{t}{See Usage.}
+\item{t}{Numeric; passed to \code{min}.}
 \item{lags}{Defaults to \code{2}.}
 }
 \description{
-Part of the tlonts_native implementation; see the file header for the source it follows.
+A step of the tlonts_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

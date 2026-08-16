@@ -11,13 +11,13 @@
 \item{log_prior}{See Usage.}
 \item{theta}{See Usage.}
 \item{theta_p}{See Usage.}
-\item{ll}{See Usage.}
-\item{ll_p}{See Usage.}
-\item{log_q}{See Usage.}
-\item{log_q_p}{See Usage.}
+\item{ll}{Numeric; combined arithmetically in the body.}
+\item{ll_p}{Numeric; combined arithmetically in the body.}
+\item{log_q}{Numeric; combined arithmetically in the body.}
+\item{log_q_p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

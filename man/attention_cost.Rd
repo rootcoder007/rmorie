@@ -12,10 +12,10 @@ attention_cost(L, patch_len, stride = NULL, D = 1, channel_independent = TRUE)
 \item{patch_len}{See Usage.}
 \item{stride}{Defaults to \code{NULL}.}
 \item{D}{Defaults to \code{1}.}
-\item{channel_independent}{Defaults to \code{TRUE}.}
+\item{channel_independent}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the patchT_native implementation; see the file header for the source it follows.
+A step of the patchT_native implementation. Called by \code{patchtst_encode}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{n_patches}, \code{pointwise}, \code{patched}, \code{reduction}, \code{stride}, \code{patch_len}, \code{note}.

@@ -8,7 +8,7 @@
 .schab_haas_window(coords, target, min_sites = 35L, step = 5L, lag_classes = NULL, max_sites = NULL)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
 \item{target}{See Usage.}
 \item{min_sites}{Defaults to \code{35L}.}
 \item{step}{Defaults to \code{5L}.}
@@ -16,7 +16,7 @@
 \item{max_sites}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_moving_window_krige}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{repeat}.

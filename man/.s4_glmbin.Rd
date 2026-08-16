@@ -8,13 +8,13 @@
 .s4_glmbin(X, y, iters = 25L, ridge = 1e-08)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{iters}{Defaults to \code{25L}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.}
+\item{ridge}{A matrix; passed to \code{diag}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn}, \code{Medmsm} and 19 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{beta}, as built in the body.

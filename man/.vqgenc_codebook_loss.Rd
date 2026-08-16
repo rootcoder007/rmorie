@@ -8,11 +8,11 @@
 .vqgenc_codebook_loss(encoder_output, quantized)
 }
 \arguments{
-\item{encoder_output}{See Usage.}
-\item{quantized}{See Usage.}
+\item{encoder_output}{Passed to \code{.vqgenc_as_vector}.}
+\item{quantized}{Passed to \code{.vqgenc_as_vector}.}
 }
 \description{
-Part of the vqgenc_native implementation; see the file header for the source it follows.
+A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{gradient_flows_to}, \code{note}.

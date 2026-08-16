@@ -10,13 +10,13 @@ morie_sequence_probabilities(beta, gamma, x, alpha, y0, link = "logit")
 \arguments{
 \item{beta}{See Usage.}
 \item{gamma}{See Usage.}
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 \item{alpha}{See Usage.}
 \item{y0}{See Usage.}
-\item{link}{Defaults to \code{"logit"}.}
+\item{link}{One of \code{"logit"}, \code{"probit"}. Defaults to \code{"logit"}.}
 }
 \description{
-Part of the bnshrt_native implementation; see the file header for the source it follows.
+A step of the bnshrt_native implementation. Called by \code{morie_in_identified_set}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -13,7 +13,7 @@ naive_reuse(define_and_estimate, n, seed = 0L)
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{
-Part of the tldapar_native implementation; see the file header for the source it follows.
+A step of the tldapar_native implementation. Called by \code{morie_tldapar}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{warning}.

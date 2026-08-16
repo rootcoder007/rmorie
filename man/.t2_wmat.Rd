@@ -8,11 +8,11 @@
 .t2_wmat(weights, k)
 }
 \arguments{
-\item{weights}{See Usage.}
-\item{k}{See Usage.}
+\item{weights}{A matrix; passed to \code{as.matrix}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the tail2_t01 implementation; see the file header for the source it follows.
+A step of the tail2_t01 implementation. Called by \code{KappaWt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{w}, as built in the body.

@@ -8,11 +8,11 @@
 .morie_km_censoring(x, delta)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{delta}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{delta}{A vector; indexed elementwise.}
 }
 \description{
-Part of the twostg_native implementation; see the file header for the source it follows.
+A step of the twostg_native implementation. Called by \code{Twostg}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{function}.

@@ -8,15 +8,15 @@
 morie_tmle_cross_lagged(y, D, X, time, g = NULL, bounds = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{D}{See Usage.}
-\item{X}{See Usage.}
-\item{time}{See Usage.}
-\item{g}{Defaults to \code{NULL}.}
-\item{bounds}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.tmlcll_vec}.}
+\item{D}{Passed to \code{.tmlcll_vec}.}
+\item{X}{Passed to \code{.tmlcll_mat}.}
+\item{time}{Passed to \code{.tmlcll_vec}.}
+\item{g}{Optional; may be \code{NULL}. Passed to \code{.tmlcll_vec}.}
+\item{bounds}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{n_waves}, \code{method}, \code{note}.

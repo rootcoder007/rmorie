@@ -8,13 +8,13 @@
 .abcgp.mle_lengthscale(X, y, nugget, kernel)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{nugget}{See Usage.}
-\item{kernel}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Passed to \code{.abcgp.profile_nll}.}
+\item{nugget}{Passed to \code{.abcgp.as_nugget}.}
+\item{kernel}{Passed to \code{.abcgp.profile_nll}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ls}, as built in the body.

@@ -8,18 +8,18 @@
 .ecstcr_rk4(T, TD, F, lam, gam, eps, C, CD, h)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{TD}{See Usage.}
-\item{F}{See Usage.}
-\item{lam}{See Usage.}
-\item{gam}{See Usage.}
-\item{eps}{See Usage.}
-\item{C}{See Usage.}
-\item{CD}{See Usage.}
-\item{h}{See Usage.}
+\item{T}{Numeric; combined arithmetically in the body.}
+\item{TD}{Numeric; combined arithmetically in the body.}
+\item{F}{Passed to \code{.ecstcr_deriv}.}
+\item{lam}{Passed to \code{.ecstcr_deriv}.}
+\item{gam}{Passed to \code{.ecstcr_deriv}.}
+\item{eps}{Passed to \code{.ecstcr_deriv}.}
+\item{C}{Passed to \code{.ecstcr_deriv}.}
+\item{CD}{Passed to \code{.ecstcr_deriv}.}
+\item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ecsTCR_native implementation; see the file header for the source it follows.
+A step of the ecsTCR_native implementation. Called by \code{.ecstcr_analytic}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.
@@ -27,7 +27,7 @@ A vector, from \code{c}.
 \references{
   Charney, J.G. et al. (1979) "Carbon Dioxide and Climate: A Scientific
     Assessment." National Academy of Sciences, Washington DC.
-  Forster, P. et al. (2021) "The Earth\\'s Energy Budget, Climate
+  Forster, P. et al. (2021) "The Earth\'s Energy Budget, Climate
     Feedbacks, and Climate Sensitivity", Chapter 7 of IPCC AR6 WG1,
     Cambridge University Press, 923-1054,
     doi:10.1017/9781009157896.009

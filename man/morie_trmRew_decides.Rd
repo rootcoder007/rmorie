@@ -8,10 +8,10 @@
 morie_trmRew_decides(s, t, rules, max_steps = 10000)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{t}{See Usage.}
-\item{rules}{See Usage.}
-\item{max_steps}{Defaults to \code{10000}.}
+\item{s}{Passed to \code{morie_trmRew_normal_form}.}
+\item{t}{Passed to \code{morie_trmRew_normal_form}.}
+\item{rules}{Passed to \code{morie_trmRew_normal_form}.}
+\item{max_steps}{Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.}
 }
 \description{
 only for a convergent system.

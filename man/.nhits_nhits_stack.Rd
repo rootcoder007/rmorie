@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{window}{See Usage.}
-\item{horizon}{See Usage.}
-\item{blocks}{See Usage.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{horizon}{Passed to \code{.nhits_nhits_block}.}
+\item{blocks}{A vector; its length is taken and its elements indexed.}
+\item{ridge}{Passed to \code{.nhits_nhits_block}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the nhits_native implementation; see the file header for the source it follows.
+A step of the nhits_native implementation. Called by \code{morie_nhits}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{total}, \code{resid}, \code{trace}.

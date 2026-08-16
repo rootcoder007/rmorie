@@ -11,14 +11,15 @@
 
 #' morie_acigls
 #'
-#' Part of the acigls_native implementation; see the file header for the
+#' A step of the acigls_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
+#' @param y A vector; its length is taken.
+#' @param A A matrix; indexed by row and column.
 #' @param H See Usage.
 #' @param cluster See Usage.
-#' @param small_sample Defaults to \code{TRUE}.
+#' @param small_sample A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{std_errors}, \code{naive_std_errors}, \code{vcov}, \code{residuals}, \code{n}, \code{n_clusters}, \code{n_coefficients}, \code{sum_weights}, \code{finite_sample_correction}, \code{inflation}, \code{method}.
 #' @export
 morie_acigls <- function(y, A, H, cluster, small_sample = TRUE) {

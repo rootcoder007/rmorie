@@ -8,11 +8,11 @@
 .if_wvar(v, w)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{w}{See Usage.}
+\item{v}{Numeric; combined arithmetically in the body.}
+\item{w}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the infcrv implementation; see the file header for the source it follows.
+A step of the infcrv implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

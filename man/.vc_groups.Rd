@@ -8,11 +8,11 @@
 .vc_groups(y, group)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; indexed elementwise.}
 \item{group}{See Usage.}
 }
 \description{
-Part of the ranova_native implementation; see the file header for the source it follows.
+A step of the ranova_native implementation. Called by \code{morie_ranova}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{keys}, \code{gs}.

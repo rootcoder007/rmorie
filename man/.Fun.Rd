@@ -11,7 +11,7 @@
 \item{f}{See Usage.}
 \item{grad}{Defaults to \code{NULL}.}
 \item{hess}{Defaults to \code{NULL}.}
-\item{affine}{Defaults to \code{FALSE}.}
+\item{affine}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
 the Python _Fun class field-for-field.

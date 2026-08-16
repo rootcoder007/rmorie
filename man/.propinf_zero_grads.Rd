@@ -8,10 +8,10 @@
 .propinf_zero_grads(model)
 }
 \arguments{
-\item{model}{See Usage.}
+\item{model}{A list; the body reads \code{$phis}, \code{$psis}, \code{$rho} from it.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{phis}, \code{psis}, \code{rho}.

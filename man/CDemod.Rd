@@ -8,13 +8,13 @@
 CDemod(x, fs = 1, f0 = NULL, bandwidth = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{f0}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{f0}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{bandwidth}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{amplitude}, \code{phase}, \code{demodulated}, \code{f0}, \code{bandwidth}, \code{mean_amplitude}, \code{method}.

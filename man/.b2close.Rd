@@ -8,10 +8,10 @@
 .b2close(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the b2ot implementation; see the file header for the source it follows.
+A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otfreeen}, \code{Otsinktol}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

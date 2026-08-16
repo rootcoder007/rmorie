@@ -12,7 +12,7 @@
 \item{r}{See Usage.}
 }
 \description{
-Part of the sacrb_native implementation; see the file header for the source it follows.
+A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

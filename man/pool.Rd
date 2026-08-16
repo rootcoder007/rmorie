@@ -8,12 +8,12 @@
 pool(token_vectors, mode = "mean", mask = NULL)
 }
 \arguments{
-\item{token_vectors}{See Usage.}
-\item{mode}{Defaults to \code{"mean"}.}
+\item{token_vectors}{Passed to \code{.sbert_mat}.}
+\item{mode}{One of \code{"cls"}, \code{"max"}. Defaults to \code{"mean"}.}
 \item{mask}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the sbert_native implementation; see the file header for the source it follows.
+A step of the sbert_native implementation. Called by \code{morie_geron_lenet5}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

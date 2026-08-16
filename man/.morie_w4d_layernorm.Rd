@@ -8,11 +8,11 @@
 .morie_w4d_layernorm(x, eps = 1e-05)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{eps}{Defaults to \code{1e-05}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_transformer}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

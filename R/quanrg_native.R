@@ -8,11 +8,12 @@
 
 #' .quanrg_loss
 #'
-#' Part of the quanrg_native implementation; see the file header for the
+#' A step of the quanrg_native implementation. Called by \code{morie_quanrg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param res See Usage.
-#' @param theta See Usage.
+#' @param res Numeric; combined arithmetically in the body.
+#' @param theta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .quanrg_loss <- function(res, theta) {

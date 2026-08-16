@@ -79,11 +79,11 @@
 #' singularity.
 #'
 #' @param tau See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param gamma See Usage.
-#' @param u0 Defaults to \code{0}.
-#' @param s0 Defaults to \code{0}.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param beta Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param u0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param s0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{u}, \code{s}, \code{tau}.
 #' @export
 morie_solve_kinetics <- function(tau, alpha, beta, gamma,
@@ -110,13 +110,14 @@ morie_solve_kinetics <- function(tau, alpha, beta, gamma,
 # nu = beta*u - gamma*s, the derivative of spliced abundance.
 #' Nu = beta*u - gamma*s, the derivative of spliced abundance
 #'
-#' Part of the scvelo_native implementation; see the file header for the
+#' A step of the scvelo_native implementation. Called by \code{morie_dynamical_fit}, \code{morie_simulate_gene}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param u See Usage.
 #' @param s See Usage.
-#' @param beta See Usage.
-#' @param gamma See Usage.
+#' @param beta Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 morie_velocity <- function(u, s, beta, gamma) {
@@ -133,11 +134,11 @@ morie_velocity <- function(u, s, beta, gamma) {
 #' the (1 - exp) factor; after the switch the gene decays freely toward
 #' zero.
 #'
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param gamma See Usage.
-#' @param t_switch See Usage.
-#' @param times See Usage.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param beta Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param t_switch Numeric; combined arithmetically in the body.
+#' @param times A vector; its length is taken and its elements indexed.
 #' @return A list with \code{observations}, \code{switch}, \code{steady_on}.
 #' @export
 morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
@@ -172,9 +173,9 @@ morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
 #' velocity. It needs the steady states to be present in the data, which
 #' is the assumption the dynamical model removes.
 #'
-#' @param u See Usage.
-#' @param s See Usage.
-#' @param quantile Defaults to \code{0.95}.
+#' @param u A vector; its length is taken and its elements indexed.
+#' @param s A vector; its length is taken and its elements indexed.
+#' @param quantile Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @return A list with \code{gamma_over_beta}, \code{velocity}, \code{n_fitted}, \code{assumptions}, \code{method}.
 #' @export
 morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
@@ -208,14 +209,14 @@ morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
 #' closest to it, in Euclidean (u, s) distance, and the transcriptional
 #' state of the segment it lands on.
 #'
-#' @param u See Usage.
-#' @param s See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param gamma See Usage.
-#' @param t_switch See Usage.
-#' @param grid Defaults to \code{200}.
-#' @param t_max Defaults to \code{NULL}.
+#' @param u A vector; its length is taken and its elements indexed.
+#' @param s A vector; indexed elementwise.
+#' @param alpha Passed to \code{morie_simulate_gene}.
+#' @param beta Numeric; passed to \code{min}.
+#' @param gamma Numeric; passed to \code{min}.
+#' @param t_switch Numeric; combined arithmetically in the body.
+#' @param grid Numeric; combined arithmetically in the body. Defaults to \code{200}.
+#' @param t_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
@@ -247,13 +248,13 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 #'
 #' latent assignment as a side product.
 #'
-#' @param u See Usage.
-#' @param s See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param gamma See Usage.
-#' @param t_switch See Usage.
-#' @param grid Defaults to \code{200}.
+#' @param u Passed to \code{morie_assign_latent_time}.
+#' @param s Passed to \code{morie_assign_latent_time}.
+#' @param alpha Passed to \code{morie_assign_latent_time}.
+#' @param beta Passed to \code{morie_assign_latent_time}.
+#' @param gamma Passed to \code{morie_assign_latent_time}.
+#' @param t_switch Passed to \code{morie_assign_latent_time}.
+#' @param grid Passed to \code{morie_assign_latent_time}. Defaults to \code{200}.
 #' @return A list with \code{rss}, \code{assign}.
 #' @export
 .scvelo_residual <- function(u, s, alpha, beta, gamma, t_switch,
@@ -275,14 +276,14 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 #' as no candidate improves the residual, so the rss_history is the
 #' visible monotone sequence.
 #'
-#' @param u See Usage.
-#' @param s See Usage.
+#' @param u A vector; its length is taken and its elements indexed.
+#' @param s A vector; its length is taken and its elements indexed.
 #' @param alpha0 Defaults to \code{NULL}.
-#' @param beta0 Defaults to \code{1}.
+#' @param beta0 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param gamma0 Defaults to \code{0.5}.
 #' @param t_switch0 Defaults to \code{NULL}.
 #' @param n_iter Defaults to \code{25}.
-#' @param grid Defaults to \code{120}.
+#' @param grid Passed to \code{.scvelo_residual}. Defaults to \code{120}.
 #' @return A list with \code{estimate}, \code{alpha}, \code{beta}, \code{gamma}, \code{t_switch}, \code{rss}, \code{rss_history}, \code{latent}, \code{velocity}, \code{steady_on}, \code{method}.
 #' @export
 morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
@@ -370,7 +371,7 @@ morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
 #' gene has its own fit and its own rate, so without this aggregation
 #' the per-cell times are not comparable across genes.
 #'
-#' @param fits See Usage.
+#' @param fits A vector; its length is taken and its elements indexed.
 #' @return A list with \code{latent_time}, \code{n_genes}, \code{n_cells}, \code{note}.
 #' @export
 morie_latent_time <- function(fits) {

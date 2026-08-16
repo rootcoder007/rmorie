@@ -8,14 +8,14 @@
 infinitesimal_jackknife(preds, in_bag, n, s, correction = TRUE)
 }
 \arguments{
-\item{preds}{See Usage.}
+\item{preds}{A vector; its length is taken.}
 \item{in_bag}{See Usage.}
-\item{n}{See Usage.}
-\item{s}{See Usage.}
-\item{correction}{Defaults to \code{TRUE}.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{s}{Numeric; combined arithmetically in the body.}
+\item{correction}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the hntfst_native implementation; see the file header for the source it follows.
+A step of the hntfst_native implementation. Called by \code{honest_forest}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{total}, as built in the body.

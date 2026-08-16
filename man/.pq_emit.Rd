@@ -8,11 +8,11 @@
 .pq_emit(e, r)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{A list; the body reads \code{$n}, \code{$parts} from it.}
 \item{r}{See Usage.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wfield}, \code{.pq_wlisthdr} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 Invisibly,nothing; the function is called for its effect.

@@ -8,10 +8,10 @@
 .morie_big_trim(limbs)
 }
 \arguments{
-\item{limbs}{See Usage.}
+\item{limbs}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the bigint_native implementation; see the file header for the source it follows.
+A step of the bigint_native implementation. Called by \code{.morie_big_add_abs}, \code{.morie_big_new}, \code{.morie_big_sub_abs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

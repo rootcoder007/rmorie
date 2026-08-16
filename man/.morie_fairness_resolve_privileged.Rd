@@ -10,10 +10,10 @@
 \arguments{
 \item{privileged}{See Usage.}
 \item{rates}{See Usage.}
-\item{warnings_env}{See Usage.}
+\item{warnings_env}{A list; the body reads \code{$w} from it.}
 }
 \description{
-Part of the frns_metrics implementation; see the file header for the source it follows.
+A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{inferred}, as built in the body.

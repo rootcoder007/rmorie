@@ -8,10 +8,10 @@
 .prsLR_nonterminals(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$rules} from it.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. Called by \code{.prsLR_augment}, \code{.prsLR_canonical_collection}, \code{.prsLR_first_sets} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{unique}.

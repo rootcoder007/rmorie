@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{seed}{See Usage.}
-\item{n}{See Usage.}
+\item{n}{Passed to \code{.ghc_unif}.}
 }
 \description{
 not an LCG at all. Making the LCG exact would still have left the two arms on different generators, so this takes the bit-identical mirror of default_rng that .ghc_rng already provides.

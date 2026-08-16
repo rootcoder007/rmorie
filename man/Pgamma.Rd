@@ -9,12 +9,12 @@ Pgamma(q, shape, rate = 1, lower_tail = TRUE)
 }
 \arguments{
 \item{q}{See Usage.}
-\item{shape}{See Usage.}
-\item{rate}{Defaults to \code{1}.}
-\item{lower_tail}{Defaults to \code{TRUE}.}
+\item{shape}{Passed to \code{.morie_gammainc_p}.}
+\item{rate}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. Called by \code{Pchisq}, \code{Qgamma}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

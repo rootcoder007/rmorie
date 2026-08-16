@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{protected}{See Usage.}
-\item{measure}{See Usage.}
-\item{step}{See Usage.}
-\item{normalize}{See Usage.}
+\item{measure}{Passed to \code{.raw}.}
+\item{step}{Passed to \code{.raw}.}
+\item{normalize}{A flag; the body branches on it.}
 \item{caveat}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the fairRC_native implementation; see the file header for the source it follows.
+A step of the fairRC_native implementation. Called by \code{rKL}, \code{rND}, \code{rRD}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pay}, as built in the body.

@@ -8,13 +8,13 @@
 clrgrf_cluster_jackknife(preds, bags, groups, correction = TRUE)
 }
 \arguments{
-\item{preds}{See Usage.}
-\item{bags}{See Usage.}
-\item{groups}{See Usage.}
-\item{correction}{Defaults to \code{TRUE}.}
+\item{preds}{A vector; its length is taken.}
+\item{bags}{A vector; indexed elementwise.}
+\item{groups}{A vector; its length is taken.}
+\item{correction}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the clrgrf_native implementation; see the file header for the source it follows.
+A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{variance}, \code{info}.

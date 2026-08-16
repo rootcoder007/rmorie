@@ -8,12 +8,12 @@
 morie_sccsno_check_assumptions(fit_with_pre, pre_index = 0, tol = 0.25)
 }
 \arguments{
-\item{fit_with_pre}{See Usage.}
+\item{fit_with_pre}{A list; the body reads \code{$relative_incidence} from it.}
 \item{pre_index}{Defaults to \code{0}.}
 \item{tol}{Defaults to \code{0.25}.}
 }
 \description{
-Part of the sccsno_native implementation; see the file header for the source it follows.
+A step of the sccsno_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{pre_exposure_ri}, \code{consistent_with_design}, \code{tolerance_log}, \code{interpretation}.

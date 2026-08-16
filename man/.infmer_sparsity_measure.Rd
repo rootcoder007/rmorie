@@ -8,11 +8,11 @@
 .infmer_sparsity_measure(q, k)
 }
 \arguments{
-\item{q}{See Usage.}
-\item{k}{See Usage.}
+\item{q}{A matrix; passed to \code{ncol}.}
+\item{k}{A matrix; passed to \code{ncol}.}
 }
 \description{
-Part of the infmer_native implementation; see the file header for the source it follows.
+A step of the infmer_native implementation. Called by \code{.infmer_select_queries}, \code{morie_infmer}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m_scores}, as built in the body.

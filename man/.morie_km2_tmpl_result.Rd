@@ -8,13 +8,13 @@
 .morie_km2_tmpl_result(prompt, filled, eq, template)
 }
 \arguments{
-\item{prompt}{See Usage.}
+\item{prompt}{Character; passed to \code{trimws}.}
 \item{filled}{See Usage.}
 \item{eq}{See Usage.}
 \item{template}{See Usage.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_cloze_prompt_template}, \code{morie_kamath_ch3_prefix_prompt_template}, \code{morie_kamath_ch3_translate_prefix_prompt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{prompt}, \code{slot_filled}, \code{template}, \code{tokens}, \code{estimate}, \code{n}, \code{method}.

@@ -8,14 +8,14 @@
 Spectrogram(x, fs = 1, nperseg = 64, noverlap = NULL, window = "hann")
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{nperseg}{Defaults to \code{64}.}
 \item{noverlap}{Defaults to \code{NULL}.}
-\item{window}{Defaults to \code{"hann"}.}
+\item{window}{Passed to \code{.tf_win}. Defaults to \code{"hann"}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{HrvTv}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{spectrogram}, \code{stft}, \code{times}, \code{freqs}, \code{nperseg}, \code{hop}, \code{window}, \code{n_frames}, \code{total_energy}, \code{peak_freq}, \code{method}.

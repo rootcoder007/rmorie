@@ -11,7 +11,7 @@ softplus(z)
 \item{z}{See Usage.}
 }
 \description{
-Part of the mambss_native implementation; see the file header for the source it follows.
+A step of the mambss_native implementation. Called by \code{morie_geron_blip_itm_itc}, \code{selective_scan}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{log1p}.

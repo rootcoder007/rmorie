@@ -4,7 +4,8 @@
 
 #' narm_softmax
 #'
-#' Part of the narm_native implementation; see the file header for the
+#' A step of the narm_native implementation. Called by \code{narm_attention_weights}, \code{narm_bilinear_scores}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -19,14 +20,15 @@ narm_softmax <- function(z) {
 
 #' narm_attention_weights
 #'
-#' Part of the narm_native implementation; see the file header for the
+#' A step of the narm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param h_t See Usage.
-#' @param H See Usage.
-#' @param A1 See Usage.
-#' @param A2 See Usage.
-#' @param v See Usage.
+#' @param H A matrix; passed to \code{as.matrix}.
+#' @param A1 A matrix; passed to \code{\%*\%}.
+#' @param A2 A matrix; passed to \code{\%*\%}.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return The value of \code{narm_softmax}.
 #' @export
 narm_attention_weights <- function(h_t, H, A1, A2, v) {
@@ -46,10 +48,11 @@ narm_attention_weights <- function(h_t, H, A1, A2, v) {
 
 #' narm_local_encoder
 #'
-#' Part of the narm_native implementation; see the file header for the
+#' A step of the narm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
+#' @param H A matrix; passed to \code{as.matrix}.
 #' @param alpha See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -64,7 +67,8 @@ narm_local_encoder <- function(H, alpha) {
 
 #' narm_session_repr
 #'
-#' Part of the narm_native implementation; see the file header for the
+#' A step of the narm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param h_t_global See Usage.
@@ -77,11 +81,12 @@ narm_session_repr <- function(h_t_global, c_local) {
 
 #' narm_bilinear_scores
 #'
-#' Part of the narm_native implementation; see the file header for the
+#' A step of the narm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param embeddings See Usage.
-#' @param B See Usage.
+#' @param embeddings A matrix; passed to \code{as.matrix}.
+#' @param B A matrix; passed to \code{ncol}.
 #' @param c_t See Usage.
 #' @return A list with \code{estimate}, \code{scores}, \code{probabilities}, \code{method}, \code{note}.
 #' @export
@@ -106,7 +111,8 @@ narm_bilinear_scores <- function(embeddings, B, c_t) {
 
 #' narm_decoder_parameters
 #'
-#' Part of the narm_native implementation; see the file header for the
+#' A step of the narm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_items See Usage.
@@ -124,7 +130,8 @@ narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
 
 #' narm_cheatsheet
 #'
-#' Part of the narm_native implementation; see the file header for the
+#' A step of the narm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

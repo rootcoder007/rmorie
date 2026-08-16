@@ -56,12 +56,13 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' Fitted E[A | L]: logistic when the treatment is binary, least squares
 #' else
 #'
-#' Part of the snmcox_native implementation; see the file header for the
+#' A step of the snmcox_native implementation. Called by \code{morie_snmcox_gest_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param L See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param A A matrix; passed to \code{crossprod}.
+#' @param L Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list, whose contents depend on the branch taken; across the branches its names are \code{e}, \code{b}, \code{kind}.
 #' @export
 .snmcox_treat_model <- function(A, L, ridge = 1e-8) {
@@ -80,13 +81,14 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 
 #' .snmcox_logit_irls
 #'
-#' Part of the snmcox_native implementation; see the file header for the
+#' A step of the snmcox_native implementation. Called by \code{.snmcox_treat_model}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param iters Defaults to \code{60L}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @param tol Defaults to \code{1e-13}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
@@ -264,7 +266,8 @@ morie_snm_cox <- morie_snmcox
 
 #' morie_snmcox_cheatsheet
 #'
-#' Part of the snmcox_native implementation; see the file header for the
+#' A step of the snmcox_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

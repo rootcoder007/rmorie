@@ -8,16 +8,16 @@
 .alfqud_bfs(inputs, targets, acts, n_reg, max_len, lw, rf)
 }
 \arguments{
-\item{inputs}{See Usage.}
-\item{targets}{See Usage.}
+\item{inputs}{Passed to \code{.alfqud_score}.}
+\item{targets}{Passed to \code{.alfqud_score}.}
 \item{acts}{See Usage.}
-\item{n_reg}{See Usage.}
+\item{n_reg}{Passed to \code{.alfqud_score}.}
 \item{max_len}{See Usage.}
-\item{lw}{See Usage.}
-\item{rf}{See Usage.}
+\item{lw}{Passed to \code{.alfqud_score}.}
+\item{rf}{Passed to \code{.alfqud_score}.}
 }
 \description{
-Part of the alfqud_native implementation; see the file header for the source it follows.
+A step of the alfqud_native implementation. Called by \code{morie_alfqud}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{prog}, \code{s}, \code{c}, \code{seen}.

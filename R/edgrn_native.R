@@ -7,7 +7,8 @@
 
 #' .edgrn_lgamma
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. Called by \code{.edgrn_betainc}, \code{.edgrn_chi2_sf}, \code{.edgrn_nb_logpmf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -17,7 +18,8 @@
 
 #' .edgrn_vec
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. Called by \code{edgrn_moderate_dispersion}, \code{edgrn_tmm_factor}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -27,12 +29,13 @@
 
 #' .edgrn_nb_logpmf
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. Called by \code{edgrn_exact_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param mu See Usage.
-#' @param phi See Usage.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param mu Numeric; passed to \code{max}.
+#' @param phi Numeric; combined arithmetically in the body.
 #' @return The value of \code{(}.
 #' @export
 .edgrn_nb_logpmf <- function(y, mu, phi) {
@@ -46,13 +49,14 @@
 
 #' .edgrn_betainc
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param x See Usage.
-#' @param iters Defaults to \code{300}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param x Numeric; passed to \code{log}.
+#' @param iters Numeric; combined arithmetically in the body. Defaults to \code{300}.
 #' @return A numeric value.
 #' @export
 .edgrn_betainc <- function(a, b, x, iters = 300) {
@@ -87,12 +91,13 @@
 
 #' .edgrn_chi2_sf
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param df See Usage.
-#' @param iters Defaults to \code{400}.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param df Numeric; combined arithmetically in the body.
+#' @param iters Numeric; combined arithmetically in the body. Defaults to \code{400}.
 #' @return A numeric value.
 #' @export
 .edgrn_chi2_sf <- function(x, df, iters = 400) {
@@ -134,7 +139,8 @@
 
 #' edgrn_nb_variance
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param mu See Usage.
@@ -152,11 +158,12 @@ edgrn_nb_variance <- function(mu, dispersion) {
 
 #' edgrn_tmm_factor
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts_sample See Usage.
-#' @param counts_reference See Usage.
+#' @param counts_sample Passed to \code{.edgrn_vec}.
+#' @param counts_reference Passed to \code{.edgrn_vec}.
 #' @param trim_m Defaults to \code{0.3}.
 #' @param trim_a Defaults to \code{0.05}.
 #' @param lib_sample Defaults to \code{NULL}.
@@ -207,7 +214,8 @@ edgrn_tmm_factor <- function(counts_sample, counts_reference,
 
 #' edgrn_effective_library_size
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param library_size See Usage.
@@ -224,10 +232,11 @@ edgrn_effective_library_size <- function(library_size, factor) {
 
 #' edgrn_moderate_dispersion
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gene_dispersions See Usage.
+#' @param gene_dispersions Passed to \code{.edgrn_vec}.
 #' @param common Defaults to \code{NULL}.
 #' @param prior_df Defaults to \code{10}.
 #' @param df_residual Defaults to \code{1}.
@@ -264,7 +273,8 @@ edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
 
 #' edgrn_exact_test
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param count_a See Usage.
@@ -300,7 +310,8 @@ edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
 
 #' edgrn_ql_f_test
 #'
-#' Part of the edgrn_native implementation; see the file header for the
+#' A step of the edgrn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param lrt See Usage.

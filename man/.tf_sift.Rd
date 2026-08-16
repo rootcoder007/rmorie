@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{maxiter}{Defaults to \code{50L}.}
+\item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{0.05}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_emd}, \code{Imf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{imf}, \code{iterations}, \code{converged}.

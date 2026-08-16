@@ -8,10 +8,10 @@
 .s4_expit(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{exp}.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlphd_lasso_logit} and 23 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

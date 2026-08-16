@@ -3,7 +3,7 @@
 % the formals.
 \name{.sdpwts_objective}
 \alias{.sdpwts_objective}
-\title{Private: the centring objective t * c\\\'x - log det F(x)}
+\title{Private: the centring objective t * c\\'x - log det F(x)}
 \usage{
 .sdpwts_objective(x, c_vec, F0, Fs, t)
 }
@@ -15,7 +15,7 @@
 \item{t}{See Usage.}
 }
 \description{
-Part of the sdpwts_native implementation; see the file header for the source it follows.
+A step of the sdpwts_native implementation. Called by \code{.sdpwts_centre}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.
@@ -41,6 +41,6 @@ treatment, including the eigenvalue problems that reduce to SDP.
 Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
 Algorithms in Convex Programming*, SIAM,
 doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-the barrier method\\'s complexity claim hold.
+the barrier method\'s complexity claim hold.
 }
 \keyword{internal}

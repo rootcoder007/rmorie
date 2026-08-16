@@ -17,10 +17,11 @@
 
 #' .offlrl_logsumexp
 #'
-#' Part of the offlrl_native implementation; see the file header for the
+#' A step of the offlrl_native implementation. Called by \code{offlrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .offlrl_logsumexp <- function(v) {
@@ -30,10 +31,11 @@
 
 #' .offlrl_softmax
 #'
-#' Part of the offlrl_native implementation; see the file header for the
+#' A step of the offlrl_native implementation. Called by \code{offlrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .offlrl_softmax <- function(v) {
@@ -45,10 +47,11 @@
 
 #' .offlrl_as_dist
 #'
-#' Part of the offlrl_native implementation; see the file header for the
+#' A step of the offlrl_native implementation. Called by \code{offlrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
+#' @param d Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param S See Usage.
 #' @param A See Usage.
 #' @param name See Usage.
@@ -84,7 +87,8 @@
 
 #' .offlrl_key
 #'
-#' Part of the offlrl_native implementation; see the file header for the
+#' A step of the offlrl_native implementation. Called by \code{offlrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s See Usage.
@@ -95,18 +99,19 @@
 
 #' offlrl
 #'
-#' Part of the offlrl_native implementation; see the file header for the
+#' A step of the offlrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param dataset See Usage.
 #' @param states Defaults to \code{NULL}.
 #' @param actions Defaults to \code{NULL}.
-#' @param alpha Defaults to \code{1}.
-#' @param gamma Defaults to \code{0.99}.
-#' @param variant Defaults to \code{"H"}.
-#' @param backup Defaults to \code{"max"}.
-#' @param policy Defaults to \code{NULL}.
-#' @param mu Defaults to \code{NULL}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
+#' @param variant One of \code{"H"}, \code{"mu"}, \code{"rho"}. Defaults to \code{"H"}.
+#' @param backup One of \code{"max"}, \code{"pi"}. Defaults to \code{"max"}.
+#' @param policy Passed to \code{.offlrl_as_dist}.
+#' @param mu Passed to \code{.offlrl_as_dist}.
 #' @param lr Defaults to \code{0.5}.
 #' @param iters Defaults to \code{2000}.
 #' @param tol Defaults to \code{1e-12}.
@@ -343,7 +348,8 @@ conservative_q_learning <- offlrl
 
 #' .offlrl_cheatsheet
 #'
-#' Part of the offlrl_native implementation; see the file header for the
+#' A step of the offlrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

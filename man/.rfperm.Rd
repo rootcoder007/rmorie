@@ -8,12 +8,12 @@
 .rfperm(trees, oob, X, Y, q, normalise = TRUE)
 }
 \arguments{
-\item{trees}{See Usage.}
-\item{oob}{See Usage.}
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
+\item{trees}{A vector; its length is taken and its elements indexed.}
+\item{oob}{A vector; indexed elementwise.}
+\item{X}{A matrix; indexed by row and column.}
+\item{Y}{A matrix; indexed by row and column.}
 \item{q}{See Usage.}
-\item{normalise}{Defaults to \code{TRUE}.}
+\item{normalise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 the jth variable are randomly permuted in the OOB observations and j new PE is computed.  The differences between the two are then averaged over all the trees, and normalized by the standard deviation of the differences."  The permutation is the deterministic reversal of the OOB row order.

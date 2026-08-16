@@ -8,11 +8,11 @@
 .morie_spx_idftre(re, im)
 }
 \arguments{
-\item{re}{See Usage.}
-\item{im}{See Usage.}
+\item{re}{A vector; its length is taken.}
+\item{im}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{SpecAnom}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

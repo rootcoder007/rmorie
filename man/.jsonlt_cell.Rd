@@ -8,9 +8,9 @@
 .jsonlt_cell(col, i, o)
 }
 \arguments{
-\item{col}{See Usage.}
+\item{col}{A matrix; indexed by row and column.}
 \item{i}{See Usage.}
-\item{o}{See Usage.}
+\item{o}{A list; the body reads \code{$factor}, \code{$na} from it.}
 }
 \description{
 jsonlite does for NA inside rows when na is unset.

@@ -78,13 +78,14 @@ Wvltdb <- function(y, level = NULL, wavelet = "db2") {
 # Exact adjoint of .dbstep.
 #' Exact adjoint of .dbstep
 #'
-#' Part of the wvltdb implementation; see the file header for the source
+#' A step of the wvltdb implementation. Called by \code{Wvltdb}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param a See Usage.
-#' @param d See Usage.
-#' @param h See Usage.
-#' @param g See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param d A vector; indexed elementwise.
+#' @param h A vector; its length is taken and its elements indexed.
+#' @param g A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .dbsynth <- function(a, d, h, g) {

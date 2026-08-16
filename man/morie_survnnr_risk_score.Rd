@@ -8,11 +8,11 @@
 morie_survnnr_risk_score(fit_result, X)
 }
 \arguments{
-\item{fit_result}{See Usage.}
+\item{fit_result}{A list; the body reads \code{$activation}, \code{$b}, \code{$W} from it.}
 \item{X}{See Usage.}
 }
 \description{
-Part of the survnnr_native implementation; see the file header for the source it follows.
+A step of the survnnr_native implementation. Called by \code{morie_survnnr_concordance}, \code{morie_survnnr_survival_function}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{sapply}.

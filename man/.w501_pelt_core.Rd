@@ -8,8 +8,8 @@
 .w501_pelt_core(x, cost, penalty, min_seglen = 1L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{cost}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{cost}{Passed to \code{.w501_seg_cost}.}
 \item{penalty}{See Usage.}
 \item{min_seglen}{Defaults to \code{1L}.}
 }

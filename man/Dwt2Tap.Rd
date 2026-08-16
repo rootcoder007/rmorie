@@ -8,11 +8,11 @@
 Dwt2Tap(x, levels = 3)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.tf_need}.}
 \item{levels}{Defaults to \code{3}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{energy}, \code{input_energy}, \code{method}.

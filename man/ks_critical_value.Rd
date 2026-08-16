@@ -9,7 +9,7 @@ ks_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, r
 }
 \arguments{
 \item{m}{See Usage.}
-\item{instruments}{See Usage.}
+\item{instruments}{A list; the body reads \code{$instruments} from it.}
 \item{form}{Defaults to \code{"sum"}.}
 \item{n_equality}{Defaults to \code{0L}.}
 \item{level}{Defaults to \code{0.95}.}
@@ -18,7 +18,7 @@ ks_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, r
 \item{kappa}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the bnskmt_native implementation; see the file header for the source it follows.
+A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}.

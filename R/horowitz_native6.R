@@ -22,7 +22,8 @@
 
 #' .morie_hrz_normalize_scale
 #'
-#' Part of the horowitz_native6 implementation; see the file header for
+#' A step of the horowitz_native6 implementation. Called by \code{morie_chen_transform}, \code{morie_transform_prediction}, \code{morie_transform_T_F}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param beta See Usage.
@@ -52,7 +53,7 @@
 #' of K_Z, those converge relatively slowly, and the higher-order kernel
 #' is what restores fast enough convergence (printed p. 220-221).
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_hrz_kz6 <- function(u) (15 - 10 * u^2 + u^4) / 16 * stats::dnorm(u)
@@ -63,7 +64,7 @@
 #'
 #' and using phi\'(u) = -u phi(u).
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_hrz_kz6_deriv <- function(u) {

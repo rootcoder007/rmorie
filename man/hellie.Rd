@@ -18,7 +18,7 @@ morie_hellinger_distance(p, q, normalise = TRUE)
 list: estimate, h2, bc, affinity, n, method.
 }
 \description{
-H(P, Q) = (1/sqrt 2) sqrt(sum (sqrt p - sqrt q)^2), which lies in \link{0, 1} and
+H(P, Q) = (1/sqrt 2) sqrt(sum (sqrt p - sqrt q)^2), which lies in [0, 1] and
 satisfies H^2 = 1 - BC for the Bhattacharyya coefficient BC.  Source
 consulted: Hellinger (1909), Neue Begruendung der Theorie quadratischer
 Formen von unendlichvielen Veraenderlichen, Journal fuer die reine und

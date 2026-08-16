@@ -14,13 +14,14 @@
 
 #' .rdkfp_subgraphs
 #'
-#' Part of the rdkfp implementation; see the file header for the source
+#' A step of the rdkfp implementation. Called by \code{Rdkfp}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param B See Usage.
+#' @param B A list; the body reads \code{$a}, \code{$i}, \code{$j} from it.
 #' @param minpath See Usage.
 #' @param maxpath See Usage.
-#' @param branched See Usage.
+#' @param branched A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rdkfp_subgraphs <- function(B, minpath, maxpath, branched) {

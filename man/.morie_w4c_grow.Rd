@@ -8,16 +8,16 @@
 .morie_w4c_grow(X, y, depth, max_depth, min_leaf, criterion, columns_fn)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{depth}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{min_leaf}{See Usage.}
-\item{criterion}{See Usage.}
-\item{columns_fn}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{depth}{Numeric; combined arithmetically in the body.}
+\item{max_depth}{Passed to \code{.morie_w4c_grow}.}
+\item{min_leaf}{Numeric; combined arithmetically in the body.}
+\item{criterion}{Passed to \code{.morie_w4c_leaf_value}.}
+\item{columns_fn}{Passed to \code{.morie_w4c_grow}.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_random_forest}, \code{morie_geron_regression_tree}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{leaf}, \code{feature}, \code{threshold}, \code{n}, \code{left}, \code{right}.

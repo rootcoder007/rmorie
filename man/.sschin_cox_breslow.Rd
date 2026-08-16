@@ -8,14 +8,14 @@
 .sschin_cox_breslow(t, e, X, max_iter = 100L, tol = 1e-10)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{e}{See Usage.}
-\item{X}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{e}{A vector; indexed elementwise.}
+\item{X}{A matrix; indexed by row and column.}
 \item{max_iter}{Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the sschin_native implementation; see the file header for the source it follows.
+A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.

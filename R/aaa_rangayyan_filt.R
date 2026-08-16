@@ -8,10 +8,11 @@
 
 #' .morie_rg_polyz
 #'
-#' Part of the rangayyan_filt implementation; see the file header for
+#' A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{BwHp}, \code{Comb} and 6 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coefs See Usage.
+#' @param coefs A vector; its length is taken.
 #' @param z See Usage.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -183,7 +184,7 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
 #'
 #' @param b_k See Usage.
 #' @param a_k See Usage.
-#' @param z See Usage.
+#' @param z Passed to \code{.morie_rg_polyz}.
 #' @param N Defaults to \code{NULL}.
 #' @param M Defaults to \code{NULL}.
 #' @return A list with \code{H}, \code{z}, \code{numerator}, \code{denominator}, \code{N}, \code{M}, \code{leading_one_is_implicit}, \code{method}.
@@ -219,7 +220,8 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
 
 #' IirDiff
 #'
-#' Part of the rangayyan_filt implementation; see the file header for
+#' A step of the rangayyan_filt implementation. Called by \code{IirDiffGen}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -404,7 +406,7 @@ MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
 #' so an FIR filter is stable whatever its coefficients.
 #'
 #' @param b_k See Usage.
-#' @param z See Usage.
+#' @param z Passed to \code{.morie_rg_polyz}.
 #' @param N Defaults to \code{NULL}.
 #' @return A list with \code{H}, \code{z}, \code{b}, \code{N}, \code{dc_gain}, \code{always_stable}, \code{poles_only_at_the_origin}, \code{method}.
 #' @export
@@ -536,7 +538,8 @@ HannTf <- function(z) {
 
 #' Eq (3.104): the transfer function on the unit circle, raw form
 #'
-#' Part of the rangayyan_filt implementation; see the file header for
+#' A step of the rangayyan_filt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param omega See Usage.
@@ -630,12 +633,13 @@ HannPh <- function(omega) {
 
 #' OsFilt
 #'
-#' Part of the rangayyan_filt implementation; see the file header for
+#' A step of the rangayyan_filt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
 #' @param window See Usage.
-#' @param kind Defaults to \code{"median"}.
+#' @param kind One of \code{"l"}, \code{"order"}, \code{"trimmed"}. Defaults to \code{"median"}.
 #' @param alpha Defaults to \code{0}.
 #' @param weights Defaults to \code{NULL}.
 #' @param order Defaults to \code{NULL}.

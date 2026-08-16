@@ -8,14 +8,14 @@
 morie_nhits(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{.nhits_vec}.}
 \item{horizon}{See Usage.}
 \item{lookback}{Defaults to \code{NULL}.}
 \item{blocks}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Passed to \code{.nhits_nhits_stack}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the nhits_native implementation; see the file header for the source it follows.
+A step of the nhits_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{forecast}, \code{residual}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{total_knots}, \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.

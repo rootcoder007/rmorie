@@ -55,7 +55,8 @@ gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
 # Flatten to a numeric vector (mirrors s03core.vec).
 #' Flatten to a numeric vector (mirrors s03core.vec)
 #'
-#' Part of the dits16_native implementation; see the file header for the
+#' A step of the dits16_native implementation. Called by \code{adaln_zero}, \code{dit_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.

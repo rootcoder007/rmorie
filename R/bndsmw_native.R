@@ -10,10 +10,11 @@
 
 #' morie_hypercube_instruments
 #'
-#' Part of the bndsmw_native implementation; see the file header for the
+#' A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param n_levels Defaults to \code{3L}.
 #' @return A list with \code{instruments}, \code{n_instruments}, \code{n_levels}, \code{note}.
 #' @export
@@ -51,10 +52,11 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
 
 #' morie_weighted_moments
 #'
-#' Part of the bndsmw_native implementation; see the file header for the
+#' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic}, \code{morie_gms_critical_value}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m A matrix; passed to \code{as.matrix}.
 #' @param g See Usage.
 #' @return A list with \code{mean}, \code{sd}, \code{n}.
 #' @export
@@ -81,11 +83,12 @@ morie_weighted_moments <- function(m, g) {
 
 #' morie_S_function
 #'
-#' Part of the bndsmw_native implementation; see the file header for the
+#' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic}, \code{morie_gms_critical_value}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param std_moments See Usage.
-#' @param form Defaults to \code{"sum"}.
+#' @param form One of \code{"max"}, \code{"sum"}. Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export
@@ -105,13 +108,14 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 
 #' morie_cvm_statistic
 #'
-#' Part of the bndsmw_native implementation; see the file header for the
+#' A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
-#' @param instruments See Usage.
-#' @param form Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
+#' @param m Passed to \code{morie_weighted_moments}.
+#' @param instruments A list; the body reads \code{$instruments} from it.
+#' @param form Passed to \code{morie_S_function}. Defaults to \code{"sum"}.
+#' @param n_equality Passed to \code{morie_S_function}. Defaults to \code{0L}.
 #' @param weights Defaults to \code{NULL}.
 #' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
 #' @export
@@ -143,16 +147,17 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
 
 #' morie_gms_critical_value
 #'
-#' Part of the bndsmw_native implementation; see the file header for the
+#' A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
-#' @param instruments See Usage.
-#' @param form Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
-#' @param level Defaults to \code{0.95}.
+#' @param m A matrix; passed to \code{as.matrix}.
+#' @param instruments A list; the body reads \code{$instruments} from it.
+#' @param form Passed to \code{morie_S_function}. Defaults to \code{"sum"}.
+#' @param n_equality Passed to \code{morie_S_function}. Defaults to \code{0L}.
+#' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @param reps Defaults to \code{200L}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param kappa Defaults to \code{NULL}.
 #' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}, \code{method}.
 #' @export
@@ -197,18 +202,19 @@ morie_gms_critical_value <- function(m, instruments, form = "sum",
 
 #' morie_confidence_set
 #'
-#' Part of the bndsmw_native implementation; see the file header for the
+#' A step of the bndsmw_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param moment_fn See Usage.
 #' @param theta_grid See Usage.
-#' @param X See Usage.
-#' @param form Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
-#' @param level Defaults to \code{0.95}.
-#' @param n_levels Defaults to \code{2L}.
-#' @param reps Defaults to \code{100L}.
-#' @param seed Defaults to \code{0}.
+#' @param X Passed to \code{morie_hypercube_instruments}.
+#' @param form Passed to \code{morie_cvm_statistic}. Defaults to \code{"sum"}.
+#' @param n_equality Passed to \code{morie_cvm_statistic}. Defaults to \code{0L}.
+#' @param level Passed to \code{morie_gms_critical_value}. Defaults to \code{0.95}.
+#' @param n_levels Passed to \code{morie_hypercube_instruments}. Defaults to \code{2L}.
+#' @param reps Passed to \code{morie_gms_critical_value}. Defaults to \code{100L}.
+#' @param seed Passed to \code{morie_gms_critical_value}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds}, \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
 #' @export
 morie_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",

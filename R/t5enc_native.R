@@ -61,7 +61,8 @@
 
 #' t5enc_task_prefix
 #'
-#' Part of the t5enc_native implementation; see the file header for the
+#' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param task See Usage.
@@ -78,14 +79,15 @@ t5enc_task_prefix <- function(task, text) {
 
 #' t5enc_span_corruption
 #'
-#' Part of the t5enc_native implementation; see the file header for the
+#' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tokens See Usage.
 #' @param rate Defaults to \code{0.15}.
 #' @param mean_span Defaults to \code{3}.
-#' @param seed Defaults to \code{0}.
-#' @param sentinel Defaults to \code{"<extra_id_%d>"}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param sentinel Defaults to \code{"<extra_id_\%d>"}.
 #' @return A list with \code{input}, \code{target}, \code{n_spans}, \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by}, \code{note}.
 #' @export
 t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
@@ -166,11 +168,12 @@ t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
 
 #' t5enc_relative_bucket
 #'
-#' Part of the t5enc_native implementation; see the file header for the
+#' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param relative_position See Usage.
-#' @param bidirectional Defaults to \code{TRUE}.
+#' @param bidirectional A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param num_buckets Defaults to \code{32L}.
 #' @param max_distance Defaults to \code{128}.
 #' @return A numeric value.
@@ -202,7 +205,8 @@ t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
 
 #' t5enc_format_regression
 #'
-#' Part of the t5enc_native implementation; see the file header for the
+#' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param value See Usage.
@@ -222,7 +226,8 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
 
 #' t5enc_parse_prediction
 #'
-#' Part of the t5enc_native implementation; see the file header for the
+#' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param text See Usage.
@@ -250,7 +255,8 @@ t5enc_parse_prediction <- function(text, labels = NULL) {
 
 #' t5enc_cheatsheet
 #'
-#' Part of the t5enc_native implementation; see the file header for the
+#' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -281,7 +287,8 @@ t5 <- t5enc_span_corruption
 # entry point
 #' Entry point
 #'
-#' Part of the t5enc_native implementation; see the file header for the
+#' A step of the t5enc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param method Defaults to \code{c("task_prefix", "span_corruption", "relative_bucket", "format_regression",     "parse_prediction", "cheatsheet")}.

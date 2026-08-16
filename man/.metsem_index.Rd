@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{edges}{See Usage.}
-\item{k}{See Usage.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the metsem_native implementation; see the file header for the source it follows.
+A step of the metsem_native implementation. Called by \code{.metsem_drop}, \code{morie_metsem_graph}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{out}, \code{inc}, \code{nodes}.

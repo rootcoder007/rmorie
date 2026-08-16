@@ -8,16 +8,16 @@
 morie_survrsf_best_split(X, times, events, features, min_deaths = 3, rule = "logrank", rng = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{times}{See Usage.}
-\item{events}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{times}{A vector; its length is taken.}
+\item{events}{A vector; indexed elementwise.}
 \item{features}{See Usage.}
 \item{min_deaths}{Defaults to \code{3}.}
-\item{rule}{Defaults to \code{"logrank"}.}
-\item{rng}{Defaults to \code{NULL}.}
+\item{rule}{One of \code{"conserve"}, \code{"logrankrandom"}, \code{"logrankscore"}. Defaults to \code{"logrank"}.}
+\item{rng}{Optional; may be \code{NULL}. A list; the body reads \code{$randint} from it.}
 }
 \description{
-Part of the survrsf_native implementation; see the file header for the source it follows.
+A step of the survrsf_native implementation. Called by \code{morie_survrsf_grow_tree}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

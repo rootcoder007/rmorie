@@ -8,14 +8,14 @@
 .gentmt_gps_subclassify(y, A, H, n_strata = 5, degree = 1)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{H}{See Usage.}
+\item{y}{Passed to \code{.gentmt_vec}.}
+\item{A}{Passed to \code{.gentmt_vec}.}
+\item{H}{Passed to \code{.gentmt_treatment_density}.}
 \item{n_strata}{Defaults to \code{5}.}
 \item{degree}{Defaults to \code{1}.}
 }
 \description{
-Part of the gentmt_native implementation; see the file header for the source it follows.
+A step of the gentmt_native implementation. Called by \code{morie_gentmt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{stratum_slopes}, \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n}, \code{degree}.

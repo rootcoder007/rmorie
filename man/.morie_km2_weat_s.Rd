@@ -8,12 +8,12 @@
 .morie_km2_weat_s(a, W_1, W_2)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{W_1}{See Usage.}
-\item{W_2}{See Usage.}
+\item{a}{Passed to \code{.morie_km2_cos_mean}.}
+\item{W_1}{Passed to \code{.morie_km2_cos_mean}.}
+\item{W_2}{Passed to \code{.morie_km2_cos_mean}.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,12 +8,12 @@
 morie_safrl_worst_case_violation(delta, gamma, epsilon)
 }
 \arguments{
-\item{delta}{See Usage.}
-\item{gamma}{See Usage.}
+\item{delta}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 \item{epsilon}{See Usage.}
 }
 \description{
-Part of the safrl_native implementation; see the file header for the source it follows.
+A step of the safrl_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

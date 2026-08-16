@@ -9,7 +9,7 @@ QrsHpLpTf(freq, fs = 200)
 }
 \arguments{
 \item{freq}{See Usage.}
-\item{fs}{Defaults to \code{200}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 }
 \description{
 samples Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.

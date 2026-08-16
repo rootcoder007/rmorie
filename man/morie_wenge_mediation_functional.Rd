@@ -8,16 +8,16 @@
 morie_wenge_mediation_functional(Y, E, M, X, strategy = "em", saturated = TRUE, ridge = 1e-08)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{E}{See Usage.}
-\item{M}{See Usage.}
-\item{X}{See Usage.}
-\item{strategy}{Defaults to \code{"em"}.}
-\item{saturated}{Defaults to \code{TRUE}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{Y}{Passed to \code{.s03vec}.}
+\item{E}{Passed to \code{.s03vec}.}
+\item{M}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
+\item{strategy}{One of \code{"all"}, \code{"em"}, \code{"ye"}, \code{"ym"}. Defaults to \code{"em"}.}
+\item{saturated}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{ridge}{Passed to \code{.wenge_parametric_models}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the wenge_native implementation; see the file header for the source it follows.
+A step of the wenge_native implementation. Called by \code{morie_wenge_weight_based_mediation}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

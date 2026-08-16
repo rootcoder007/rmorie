@@ -7,11 +7,12 @@
 
 #' .phylby_tips
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_splits_of}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
-#' @param out Defaults to \code{NULL}.
+#' @param node A vector; its length is taken and its elements indexed.
+#' @param out Optional; may be \code{NULL}. Passed to \code{.phylby_tips}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .phylby_tips <- function(node, out = NULL) {
@@ -29,10 +30,11 @@
 
 #' .phylby_splits_of
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_clade_credibility}, \code{.phylby_topology_key}, \code{morie_phylby_splits_of}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{.phylby_tips}.
 #' @return The value of \code{[}.
 #' @export
 .phylby_splits_of <- function(tree) {
@@ -73,10 +75,11 @@
 
 #' .phylby_topology_key
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}, \code{morie_phylby_topology_key}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{.phylby_splits_of}.
 #' @return The value of \code{[}.
 #' @export
 .phylby_topology_key <- function(tree) {
@@ -89,12 +92,13 @@
 
 #' .phylby_replace_branch
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param node See Usage.
-#' @param path See Usage.
-#' @param value See Usage.
+#' @param path A vector; its length is taken and its elements indexed.
+#' @param value Passed to \code{.phylby_replace_branch}.
 #' @return The value of \code{parts}, as built in the body.
 #' @export
 .phylby_replace_branch <- function(node, path, value) {
@@ -111,10 +115,11 @@
 
 #' .phylby_branch_paths
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior}, \code{.phylby_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
+#' @param node A vector; its length is taken and its elements indexed.
 #' @param path Defaults to \code{integer(0)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -135,10 +140,11 @@
 
 #' .phylby_subtrees
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
+#' @param node A vector; its length is taken and its elements indexed.
 #' @param path Defaults to \code{integer(0)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -156,12 +162,13 @@
 
 #' .phylby_set_at
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param node See Usage.
-#' @param path See Usage.
-#' @param value See Usage.
+#' @param path A vector; its length is taken and its elements indexed.
+#' @param value Passed to \code{.phylby_set_at}.
 #' @return The value of \code{parts}, as built in the body.
 #' @export
 .phylby_set_at <- function(node, path, value) {
@@ -174,10 +181,11 @@
 
 #' .phylby_get_at
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior}, \code{.phylby_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
+#' @param node A vector; indexed elementwise.
 #' @param path See Usage.
 #' @return The value of \code{node}, as built in the body.
 #' @export
@@ -190,10 +198,11 @@
 
 #' .phylby_nni_neighbours
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_step}, \code{morie_phylby_nni_neighbours}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{.phylby_subtrees}.
 #' @return The value of \code{uniq}, as built in the body.
 #' @export
 .phylby_nni_neighbours <- function(tree) {
@@ -236,17 +245,18 @@
 
 #' .phylby_log_posterior
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{.phylby_step}, \code{morie_phylby_log_posterior}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
-#' @param seqs See Usage.
-#' @param pi Defaults to \code{NULL}.
-#' @param rate Defaults to \code{1}.
-#' @param branch_prior_mean Defaults to \code{0.1}.
+#' @param tree Passed to \code{.phylby_branch_paths}.
+#' @param seqs A vector; indexed elementwise.
+#' @param pi Passed to \code{morie_phylml}.
+#' @param rate Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param branch_prior_mean Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param partitions Defaults to \code{NULL}.
-#' @param rates Defaults to \code{NULL}.
-#' @param temperature Defaults to \code{1}.
+#' @param rates Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param temperature Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{loglik}, \code{logprior}, \code{logpost}.
 #' @export
 .phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
@@ -298,7 +308,8 @@
 
 #' .phylby_rng
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed See Usage.
@@ -317,10 +328,11 @@
 
 #' .phylby_clade_credibility
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby_clade_credibility}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param samples See Usage.
+#' @param samples A vector; its length is taken.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 .phylby_clade_credibility <- function(samples) {
@@ -345,17 +357,18 @@
 
 #' .phylby_step
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
-#' @param seqs See Usage.
-#' @param pi See Usage.
-#' @param prior_mean See Usage.
-#' @param partitions See Usage.
+#' @param state A list; the body reads \code{$rate}, \code{$rates}, \code{$tree} from it.
+#' @param seqs Passed to \code{.phylby_log_posterior}.
+#' @param pi Passed to \code{.phylby_log_posterior}.
+#' @param prior_mean Passed to \code{.phylby_log_posterior}.
+#' @param partitions Passed to \code{.phylby_log_posterior}.
 #' @param rnd See Usage.
-#' @param beta See Usage.
-#' @param tune See Usage.
+#' @param beta Numeric; combined arithmetically in the body.
+#' @param tune Numeric; combined arithmetically in the body.
 #' @return A list with \code{state}, \code{accepted}.
 #' @export
 .phylby_step <- function(state, seqs, pi, prior_mean, partitions, rnd, beta, tune) {
@@ -399,11 +412,12 @@
 
 #' morie_phylby_chain_temperature
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param j See Usage.
-#' @param lam Defaults to \code{0.2}.
+#' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @return A numeric value.
 #' @export
 morie_phylby_chain_temperature <- function(j, lam = 0.2) {
@@ -414,13 +428,14 @@ morie_phylby_chain_temperature <- function(j, lam = 0.2) {
 
 #' morie_phylby_swap_acceptance
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta_j See Usage.
-#' @param beta_k See Usage.
-#' @param logp_j See Usage.
-#' @param logp_k See Usage.
+#' @param beta_j Numeric; combined arithmetically in the body.
+#' @param beta_k Numeric; combined arithmetically in the body.
+#' @param logp_j Numeric; combined arithmetically in the body.
+#' @param logp_k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 morie_phylby_swap_acceptance <- function(beta_j, beta_k, logp_j, logp_k) {
@@ -429,10 +444,11 @@ morie_phylby_swap_acceptance <- function(beta_j, beta_k, logp_j, logp_k) {
 
 #' morie_phylby_splits_of
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{.phylby_splits_of}.
 #' @return The value of \code{.phylby_splits_of}.
 #' @export
 morie_phylby_splits_of <- function(tree) {
@@ -441,10 +457,11 @@ morie_phylby_splits_of <- function(tree) {
 
 #' morie_phylby_topology_key
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{.phylby_topology_key}.
 #' @return The value of \code{.phylby_topology_key}.
 #' @export
 morie_phylby_topology_key <- function(tree) {
@@ -453,10 +470,11 @@ morie_phylby_topology_key <- function(tree) {
 
 #' morie_phylby_nni_neighbours
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{.phylby_nni_neighbours}.
 #' @return The value of \code{.phylby_nni_neighbours}.
 #' @export
 morie_phylby_nni_neighbours <- function(tree) {
@@ -465,17 +483,18 @@ morie_phylby_nni_neighbours <- function(tree) {
 
 #' morie_phylby_log_posterior
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
-#' @param seqs See Usage.
-#' @param pi Defaults to \code{NULL}.
-#' @param rate Defaults to \code{1}.
-#' @param branch_prior_mean Defaults to \code{0.1}.
-#' @param partitions Defaults to \code{NULL}.
-#' @param rates Defaults to \code{NULL}.
-#' @param temperature Defaults to \code{1}.
+#' @param tree Passed to \code{.phylby_log_posterior}.
+#' @param seqs Passed to \code{.phylby_log_posterior}.
+#' @param pi Passed to \code{.phylby_log_posterior}.
+#' @param rate Passed to \code{.phylby_log_posterior}. Defaults to \code{1}.
+#' @param branch_prior_mean Passed to \code{.phylby_log_posterior}. Defaults to \code{0.1}.
+#' @param partitions Passed to \code{.phylby_log_posterior}.
+#' @param rates Passed to \code{.phylby_log_posterior}.
+#' @param temperature Passed to \code{.phylby_log_posterior}. Defaults to \code{1}.
 #' @return The value of \code{.phylby_log_posterior}.
 #' @export
 morie_phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
@@ -487,10 +506,11 @@ morie_phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
 
 #' morie_phylby_clade_credibility
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. Called by \code{morie_phylby}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param samples See Usage.
+#' @param samples Passed to \code{.phylby_clade_credibility}.
 #' @return The value of \code{.phylby_clade_credibility}.
 #' @export
 morie_phylby_clade_credibility <- function(samples) {
@@ -499,24 +519,25 @@ morie_phylby_clade_credibility <- function(samples) {
 
 #' morie_phylby
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alignment See Usage.
-#' @param n_iter Defaults to \code{2000}.
+#' @param alignment A vector; indexed elementwise.
+#' @param n_iter Numeric; combined arithmetically in the body. Defaults to \code{2000}.
 #' @param burnin Defaults to \code{NULL}.
-#' @param n_chains Defaults to \code{4}.
-#' @param lam Defaults to \code{0.2}.
+#' @param n_chains Numeric; combined arithmetically in the body. Defaults to \code{4}.
+#' @param lam Passed to \code{morie_phylby_chain_temperature}. Defaults to \code{0.2}.
 #' @param swap_every Defaults to \code{10}.
 #' @param sample_every Defaults to \code{10}.
-#' @param pi Defaults to \code{NULL}.
+#' @param pi Passed to \code{.phylby_step}.
 #' @param rate Defaults to \code{1}.
-#' @param branch_prior_mean Defaults to \code{0.1}.
-#' @param partitions Defaults to \code{NULL}.
+#' @param branch_prior_mean Passed to \code{.phylby_step}. Defaults to \code{0.1}.
+#' @param partitions Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param tree Defaults to \code{NULL}.
-#' @param n_runs Defaults to \code{2}.
-#' @param tune Defaults to \code{1}.
-#' @param seed Defaults to \code{0}.
+#' @param n_runs Numeric; combined arithmetically in the body. Defaults to \code{2}.
+#' @param tune Passed to \code{.phylby_step}. Defaults to \code{1}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
@@ -662,7 +683,8 @@ morie_bayesian_phylogeny <- morie_phylby
 
 #' morie_phylby_cheatsheet
 #'
-#' Part of the phylby_native implementation; see the file header for the
+#' A step of the phylby_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,17 +8,17 @@
 morie_informer_probsparse_attention(Q, K, V, factor = 5, measure = "maxmean", n_sample = NULL, seed = 0, scale = NULL)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{K}{See Usage.}
-\item{V}{See Usage.}
-\item{factor}{Defaults to \code{5}.}
-\item{measure}{Defaults to \code{"maxmean"}.}
-\item{n_sample}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
+\item{Q}{Passed to \code{.informer_to_rows}.}
+\item{K}{Passed to \code{.informer_to_rows}.}
+\item{V}{Passed to \code{.informer_to_rows}.}
+\item{factor}{Passed to \code{morie_informer_select_queries}. Defaults to \code{5}.}
+\item{measure}{Passed to \code{morie_informer_select_queries}. Defaults to \code{"maxmean"}.}
+\item{n_sample}{Passed to \code{morie_informer_select_queries}.}
+\item{seed}{Passed to \code{morie_informer_select_queries}. Defaults to \code{0}.}
 \item{scale}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the informer_native implementation; see the file header for the source it follows.
+A step of the informer_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{output}, \code{selected}, \code{u}, \code{L_Q}, \code{L_K}, \code{measure}, \code{complexity}, \code{method}, \code{note}.

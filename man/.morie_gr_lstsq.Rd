@@ -8,7 +8,7 @@
 .morie_gr_lstsq(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{ncol}.}
 \item{b}{See Usage.}
 }
 \description{

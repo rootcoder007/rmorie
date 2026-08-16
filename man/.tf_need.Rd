@@ -13,7 +13,7 @@
 \item{minlen}{Defaults to \code{2L}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{AtomTfd}, \code{BiorDwt}, \code{CDemod} and 28 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

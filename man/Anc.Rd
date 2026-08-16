@@ -12,12 +12,12 @@ Anc(primary, reference, order = 8, mu = 0.01, method = "lms", lam = 0.98, delta 
 \item{reference}{See Usage.}
 \item{order}{Defaults to \code{8}.}
 \item{mu}{Defaults to \code{0.01}.}
-\item{method}{Defaults to \code{"lms"}.}
+\item{method}{One of \code{"lms"}, \code{"rls"}. Defaults to \code{"lms"}.}
 \item{lam}{Defaults to \code{0.98}.}
 \item{delta}{Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. Called by \code{FetalEcg}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

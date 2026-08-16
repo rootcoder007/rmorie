@@ -8,9 +8,9 @@
 .morie_qrs_peaks(g, th, m)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A vector; its length is taken and its elements indexed.}
 \item{th}{See Usage.}
-\item{m}{See Usage.}
+\item{m}{Numeric; combined arithmetically in the body.}
 }
 \description{
 neighbours on each side.

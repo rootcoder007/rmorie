@@ -3,12 +3,12 @@
 % the formals.
 \name{.morie_bx_kurt}
 \alias{.morie_bx_kurt}
-\title{Kurtosis EXCESS K\\\' = K - 3, eq (3.5) and the note below it: zero for}
+\title{Kurtosis EXCESS K\\' = K - 3, eq (3.5) and the note below it: zero for}
 \usage{
 .morie_bx_kurt(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
 a Gaussian, positive for a peaked heavy-tailed PDF

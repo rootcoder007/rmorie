@@ -8,16 +8,16 @@
 .gppenmnloglik(X, y, beta0, beta, lam, penalty = "ridge", baseline_last = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{beta0}{See Usage.}
-\item{beta}{See Usage.}
+\item{X}{Passed to \code{.gpmnloglik}.}
+\item{y}{Passed to \code{.gpmnloglik}.}
+\item{beta0}{Passed to \code{.gpmnloglik}.}
+\item{beta}{Passed to \code{.gpmnloglik}.}
 \item{lam}{See Usage.}
 \item{penalty}{Defaults to \code{"ridge"}.}
-\item{baseline_last}{Defaults to \code{TRUE}.}
+\item{baseline_last}{Passed to \code{.gpmnloglik}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm109}, \code{Msm115}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.

@@ -8,7 +8,7 @@
 .morie_fairness_gini_core(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
 input (no inequality defined), matching the Python helper.

@@ -8,10 +8,10 @@
 .lggvls_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{as.matrix}.

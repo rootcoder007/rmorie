@@ -8,11 +8,11 @@
 .log_prob(x, layers)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{layers}{See Usage.}
+\item{x}{Passed to \code{.flow_forward}.}
+\item{layers}{Passed to \code{.flow_forward}.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. Called by \code{.anomaly_score}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lp}, \code{z}, \code{logdet}.

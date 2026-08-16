@@ -10,7 +10,7 @@ morie_tlsurvy_inclusion_probabilities(V, n, design = "adaptive", influence = NUL
 \arguments{
 \item{V}{See Usage.}
 \item{n}{See Usage.}
-\item{design}{Defaults to \code{"adaptive"}.}
+\item{design}{One of \code{"proportional"}, \code{"uniform"}. Defaults to \code{"adaptive"}.}
 \item{influence}{Defaults to \code{NULL}.}
 \item{floor}{Defaults to \code{0.01}.}
 }

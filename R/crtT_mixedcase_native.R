@@ -8,7 +8,8 @@
 
 #' Extended Euclid: returns (g, c, d) with c*a + d*b = g
 #'
-#' Part of the crtT_mixedcase_native implementation; see the file header
+#' A step of the crtT_mixedcase_native implementation. Called by \code{crtT}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param a See Usage.
@@ -37,7 +38,8 @@
 
 #' crtT
 #'
-#' Part of the crtT_mixedcase_native implementation; see the file header
+#' A step of the crtT_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param residues See Usage.
@@ -80,7 +82,8 @@ morie_crtT <- crtT
 
 #' crtT_cheatsheet
 #'
-#' Part of the crtT_mixedcase_native implementation; see the file header
+#' A step of the crtT_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @return A character value.

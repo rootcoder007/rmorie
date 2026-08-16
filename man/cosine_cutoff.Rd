@@ -12,7 +12,7 @@ cosine_cutoff(r, cutoff = 5)
 \item{cutoff}{Defaults to \code{5}.}
 }
 \description{
-Part of the schN_native implementation; see the file header for the source it follows.
+A step of the schN_native implementation. Called by \code{cfconv}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

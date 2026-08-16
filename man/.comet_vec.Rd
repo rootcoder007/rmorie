@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the comet_native implementation; see the file header for the source it follows.
+A step of the comet_native implementation. Called by \code{.comet_dist}, \code{kendall_tau}, \code{pooled_features} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

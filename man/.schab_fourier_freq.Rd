@@ -8,11 +8,11 @@
 .schab_fourier_freq(r, c)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{c}{See Usage.}
+\item{r}{Numeric; combined arithmetically in the body.}
+\item{c}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram}, \code{.schab_periodogram_from_cov}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{w1}, \code{w2}, \code{j}, \code{k}.

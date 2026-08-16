@@ -8,10 +8,10 @@
 .poissp_adjacency(W)
 }
 \arguments{
-\item{W}{See Usage.}
+\item{W}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the poissp_native implementation; see the file header for the source it follows.
+A step of the poissp_native implementation. Called by \code{morie_poissp_car_precision}, \code{morie_poissp_rho_bounds}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{A}, as built in the body.

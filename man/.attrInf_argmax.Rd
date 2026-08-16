@@ -3,12 +3,12 @@
 % the formals.
 \name{.attrInf_argmax}
 \alias{.attrInf_argmax}
-\title{Mirror Python\\\'s max(sorted(scores, key=str),}
+\title{Mirror Python\\'s max(sorted(scores, key=str),}
 \usage{
 .attrInf_argmax(scored)
 }
 \arguments{
-\item{scored}{See Usage.}
+\item{scored}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 key=scores.__getitem__): among ties, the key whose str() sorts earliest wins.

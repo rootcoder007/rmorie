@@ -8,10 +8,10 @@
 .tf_extrema(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_emd}, \code{.tf_sift}, \code{Imf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mx}, \code{mn}.

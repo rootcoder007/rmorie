@@ -8,10 +8,10 @@
 .ot_lse(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{.ot_sinkhorn}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

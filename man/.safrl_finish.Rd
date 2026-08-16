@@ -8,11 +8,11 @@
 .safrl_finish(step, g, cols, cv, H, delta, lam, nu, feasible, recovery)
 }
 \arguments{
-\item{step}{See Usage.}
-\item{g}{See Usage.}
-\item{cols}{See Usage.}
-\item{cv}{See Usage.}
-\item{H}{See Usage.}
+\item{step}{A vector; indexed elementwise.}
+\item{g}{A vector; its length is taken and its elements indexed.}
+\item{cols}{A vector; its length is taken and its elements indexed.}
+\item{cv}{A vector; indexed elementwise.}
+\item{H}{A vector; indexed elementwise.}
 \item{delta}{See Usage.}
 \item{lam}{See Usage.}
 \item{nu}{See Usage.}
@@ -20,7 +20,7 @@
 \item{recovery}{See Usage.}
 }
 \description{
-Part of the safrl_native implementation; see the file header for the source it follows.
+A step of the safrl_native implementation. Called by \code{morie_safrl}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu}, \code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation}, \code{kl}, \code{delta}, \code{method}.

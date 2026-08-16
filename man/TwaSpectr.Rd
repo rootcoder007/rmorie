@@ -8,7 +8,7 @@
 TwaSpectr(twaves, noiselo = 0.33, noisehi = 0.45)
 }
 \arguments{
-\item{twaves}{See Usage.}
+\item{twaves}{A vector; its length is taken.}
 \item{noiselo}{Defaults to \code{0.33}.}
 \item{noisehi}{Defaults to \code{0.45}.}
 }

@@ -8,10 +8,10 @@
 .morie_rg_dft(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the rangayyan_cep implementation; see the file header for the source it follows.
+A step of the rangayyan_cep implementation. Called by \code{CardioResp}, \code{CCepstrum}, \code{Cepstrum} and 11 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{re}, \code{im}.

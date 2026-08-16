@@ -3,15 +3,15 @@
 % the formals.
 \name{.pdcoin_nuisance}
 \alias{.pdcoin_nuisance}
-\title{Internal: Pedroni\\\'s steps 2-4 nuisance terms for one panel unit}
+\title{Internal: Pedroni\\'s steps 2-4 nuisance terms for one panel unit}
 \usage{
 .pdcoin_nuisance(y, Zx, e, bandwidth)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{Zx}{See Usage.}
-\item{e}{See Usage.}
-\item{bandwidth}{See Usage.}
+\item{Zx}{A matrix; passed to \code{ncol}.}
+\item{e}{A vector; its length is taken and its elements indexed.}
+\item{bandwidth}{Passed to \code{.nw_lrv}.}
 }
 \description{
 Returns L11^2, lambda_i and sigma^2_i.

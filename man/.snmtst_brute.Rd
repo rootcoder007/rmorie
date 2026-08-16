@@ -8,16 +8,16 @@
 .snmtst_brute(point, c, M, grid, post = NULL, lin = NULL, lv = NULL)
 }
 \arguments{
-\item{point}{See Usage.}
-\item{c}{See Usage.}
-\item{M}{See Usage.}
-\item{grid}{See Usage.}
-\item{post}{Defaults to \code{NULL}.}
-\item{lin}{Defaults to \code{NULL}.}
-\item{lv}{Defaults to \code{NULL}.}
+\item{point}{Numeric; combined arithmetically in the body.}
+\item{c}{A vector; its length is taken.}
+\item{M}{Numeric; combined arithmetically in the body.}
+\item{grid}{A count; the body uses it as \code{seq_len(...)}.}
+\item{post}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{lin}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{lv}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the snmtst_native implementation; see the file header for the source it follows.
+A step of the snmtst_native implementation. Called by \code{identified_set}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lo}, \code{hi}.

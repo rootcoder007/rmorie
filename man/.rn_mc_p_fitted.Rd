@@ -10,7 +10,7 @@
 \arguments{
 \item{d_obs}{See Usage.}
 \item{n}{See Usage.}
-\item{n_mc}{See Usage.}
+\item{n_mc}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 parameters (the Lilliefors construction; parameter-free for a fitted location-scale family).

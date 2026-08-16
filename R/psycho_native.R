@@ -80,8 +80,8 @@
 #' least the single-measure value, which is why every average-measure
 #' ICC exceeds its single-measure counterpart.
 #'
-#' @param icc1 See Usage.
-#' @param k See Usage.
+#' @param icc1 Numeric; combined arithmetically in the body.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .psy_spearman_brown <- function(icc1, k) {
@@ -96,10 +96,10 @@
 #'
 #' with c > 0 the curve never reaches zero.
 #'
-#' @param theta See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param cc See Usage.
+#' @param theta A vector; its length is taken.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b A vector; its length is taken.
+#' @param cc A count; the body uses it as \code{matrix(...)}.
 #' @return A numeric value.
 #' @export
 .psy_p3pl <- function(theta, a, b, cc) {
@@ -110,13 +110,14 @@
 
 #' .psy_dp3pl
 #'
-#' Part of the psycho_native implementation; see the file header for the
+#' A step of the psycho_native implementation. Called by \code{.psy_info}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param cc See Usage.
+#' @param theta Passed to \code{.psy_p3pl}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Passed to \code{.psy_p3pl}.
+#' @param cc Numeric; combined arithmetically in the body.
 #' @return The value of \code{sweep}.
 #' @export
 .psy_dp3pl <- function(theta, a, b, cc) {
@@ -128,10 +129,11 @@
 
 #' .psy_items
 #'
-#' Part of the psycho_native implementation; see the file header for the
+#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m A count; the body uses it as \code{rep(...)}.
 #' @param a See Usage.
 #' @param b See Usage.
 #' @param cc See Usage.
@@ -153,7 +155,8 @@
 
 #' .psy_check_y
 #'
-#' Part of the psycho_native implementation; see the file header for the
+#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -169,12 +172,13 @@
 
 #' .psy_ll
 #'
-#' Part of the psycho_native implementation; see the file header for the
+#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param grid See Usage.
-#' @param yv See Usage.
-#' @param it See Usage.
+#' @param grid Passed to \code{.psy_p3pl}.
+#' @param yv A matrix; passed to \code{\%*\%}.
+#' @param it A list; the body reads \code{$a}, \code{$b}, \code{$c} from it.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .psy_ll <- function(grid, yv, it) {
@@ -184,11 +188,12 @@
 
 #' .psy_info
 #'
-#' Part of the psycho_native implementation; see the file header for the
+#' A step of the psycho_native implementation. Called by \code{morie_psy_map_theta}, \code{morie_psy_mle_theta}, \code{morie_psy_wle_theta}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param it See Usage.
+#' @param theta Passed to \code{.psy_p3pl}.
+#' @param it A list; the body reads \code{$a}, \code{$b}, \code{$c} from it.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .psy_info <- function(theta, it) {
@@ -199,7 +204,8 @@
 
 #' .psy_fixed_pool
 #'
-#' Part of the psycho_native implementation; see the file header for the
+#' A step of the psycho_native implementation. Called by \code{.psy_dl}, \code{morie_psy_ma_paule_mandel}, \code{morie_psy_ma_reml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param yi See Usage.
@@ -233,8 +239,8 @@
 #' at zero is not symmetric -- a biased tau^2 that hits the floor
 #' understates heterogeneity AND overstates precision together.
 #'
-#' @param yi See Usage.
-#' @param vi See Usage.
+#' @param yi Passed to \code{.psy_fixed_pool}.
+#' @param vi Passed to \code{.psy_fixed_pool}.
 #' @return A numeric value.
 #' @export
 .psy_dl <- function(yi, vi) {

@@ -8,11 +8,11 @@
 .morie_w4d_symd_eqnum(t, v)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
 \item{v}{See Usage.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_symd_simplify}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

@@ -8,10 +8,10 @@
 label(spec)
 }
 \arguments{
-\item{spec}{See Usage.}
+\item{spec}{A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_box_cox} from it.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{morie_bats}, \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}. See the file header for the source the module follows.
 }
 \value{
 A character value.

@@ -9,10 +9,10 @@ dequantize(tokens, bins)
 }
 \arguments{
 \item{tokens}{See Usage.}
-\item{bins}{See Usage.}
+\item{bins}{A list; the body reads \code{$centers} from it.}
 }
 \description{
-Part of the chronos_native implementation; see the file header for the source it follows.
+A step of the chronos_native implementation. Called by \code{detokenize}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

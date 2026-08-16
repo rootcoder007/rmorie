@@ -14,7 +14,7 @@ focal_loss(prob, target, gamma = 2, alpha = 0.25)
 \item{alpha}{Defaults to \code{0.25}.}
 }
 \description{
-Part of the samdec_native implementation; see the file header for the source it follows.
+A step of the samdec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{modulating}, \code{gamma}, \code{note}.

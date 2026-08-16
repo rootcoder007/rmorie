@@ -10,11 +10,11 @@ encode_point_prompt(points, labels, dim = 8, type_embeddings = NULL)
 \arguments{
 \item{points}{See Usage.}
 \item{labels}{See Usage.}
-\item{dim}{Defaults to \code{8}.}
+\item{dim}{Passed to \code{.samseg_pos_enc}. Defaults to \code{8}.}
 \item{type_embeddings}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the samseg_native implementation; see the file header for the source it follows.
+A step of the samseg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tokens}, \code{n_prompts}, \code{sparse}, \code{note}.

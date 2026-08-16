@@ -8,14 +8,14 @@
 segment_layout_boxes(boxes, segment_ids, width, height, scale = 1000)
 }
 \arguments{
-\item{boxes}{See Usage.}
+\item{boxes}{A matrix; indexed by row and column.}
 \item{segment_ids}{See Usage.}
 \item{width}{See Usage.}
 \item{height}{See Usage.}
 \item{scale}{Defaults to \code{1000}.}
 }
 \description{
-Part of the ocrwit_native implementation; see the file header for the source it follows.
+A step of the ocrwit_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{note}.

@@ -8,10 +8,10 @@
 morie_snpqc1_heterozygosity(genotypes)
 }
 \arguments{
-\item{genotypes}{See Usage.}
+\item{genotypes}{Passed to \code{.snpqc1_check}.}
 }
 \description{
-Part of the snpqc1_native implementation; see the file header for the source it follows.
+A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

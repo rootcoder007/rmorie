@@ -8,11 +8,11 @@
 .tf_echo_idx(n, default = NULL)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{default}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoImp}, \code{EchoSig}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{idx}, as built in the body.

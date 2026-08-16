@@ -8,10 +8,10 @@
 .groebn_key(order)
 }
 \arguments{
-\item{order}{See Usage.}
+\item{order}{One of \code{"grevlex"}, \code{"grlex"}, \code{"lex"}.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_monomials}, \code{.groebn_reduce_basis}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

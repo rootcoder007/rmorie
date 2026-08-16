@@ -8,22 +8,22 @@
 morie_causrddc(y, x, treatment = NULL, cutoff = 0, nu = 0, p = 1, q = NULL, h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", J = 3)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{x}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 \item{treatment}{Defaults to \code{NULL}.}
 \item{cutoff}{Defaults to \code{0}.}
-\item{nu}{Defaults to \code{0}.}
-\item{p}{Defaults to \code{1}.}
-\item{q}{Defaults to \code{NULL}.}
-\item{h}{Defaults to \code{NULL}.}
-\item{b}{Defaults to \code{NULL}.}
-\item{kernel}{Defaults to \code{"triangular"}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{vce}{Defaults to \code{"nn"}.}
+\item{nu}{Passed to \code{morie_causrddc_rd_bandwidth}. Defaults to \code{0}.}
+\item{p}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{q}{Optional; may be \code{NULL}. Passed to \code{morie_causrddc_rd_bandwidth}.}
+\item{h}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{b}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{kernel}{Passed to \code{morie_causrddc_rd_bandwidth}. Defaults to \code{"triangular"}.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
+\item{vce}{One of \code{"hc"}, \code{"nn"}. Defaults to \code{"nn"}.}
 \item{J}{Defaults to \code{3}.}
 }
 \description{
-Part of the causrddc_native implementation; see the file header for the source it follows.
+A step of the causrddc_native implementation. Called by \code{morie_rdrobu}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{bias_corrected}, \code{se_conventional}, \code{se_robust}, \code{ci_conventional}, \code{ci_bias_corrected}, \code{ci_robust}, \code{pvalue_robust}, \code{h}, \code{b}, \code{rho}, \code{p}, \code{q}, \code{nu}, \code{kernel}, \code{vce}, \code{alpha}, \code{n}, \code{n_left}, \code{n_right}, \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy}, \code{method}.

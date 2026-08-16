@@ -11,7 +11,8 @@ NULL
 
 #' .b1_bound
 #'
-#' Part of the b1_tmle implementation; see the file header for the
+#' A step of the b1_tmle implementation. Called by \code{.b1_logit}, \code{.b1_target}, \code{Comptml} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -23,10 +24,11 @@ NULL
 
 #' .b1_logit
 #'
-#' Part of the b1_tmle implementation; see the file header for the
+#' A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat}, \code{Tmlecde}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .b1_logit <- function(p) {
@@ -36,10 +38,11 @@ NULL
 
 #' .b1_expit
 #'
-#' Part of the b1_tmle implementation; see the file header for the
+#' A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat}, \code{Tmlecde}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
 #' @export
 .b1_expit <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)),
@@ -47,16 +50,17 @@ NULL
 
 #' .b1_target
 #'
-#' Part of the b1_tmle implementation; see the file header for the
+#' A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot}, \code{Tmleor} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param QAW See Usage.
-#' @param Q1W See Usage.
-#' @param Q0W See Usage.
-#' @param g1W See Usage.
-#' @param gbound Defaults to \code{0.025}.
+#' @param Y A vector; its length is taken.
+#' @param A Numeric; combined arithmetically in the body.
+#' @param QAW Passed to \code{.b1_logit}.
+#' @param Q1W Passed to \code{.b1_logit}.
+#' @param Q0W Passed to \code{.b1_logit}.
+#' @param g1W Passed to \code{.b1_bound}.
+#' @param gbound Numeric; combined arithmetically in the body. Defaults to \code{0.025}.
 #' @param iters Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star}, \code{g1}, \code{g0}, \code{H1}, \code{H0}.
@@ -91,12 +95,13 @@ NULL
 
 #' .b1_curves
 #'
-#' Part of the b1_tmle implementation; see the file header for the
+#' A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot}, \code{Tmleor} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param fit See Usage.
+#' @param Y A vector; its length is taken.
+#' @param A Numeric; combined arithmetically in the body.
+#' @param fit A list; the body reads \code{$g0}, \code{$g1}, \code{$Q0star}, \code{$Q1star}, \code{$QAstar} from it.
 #' @return A list with \code{mu1}, \code{mu0}, \code{ic1}, \code{ic0}.
 #' @export
 .b1_curves <- function(Y, A, fit) {

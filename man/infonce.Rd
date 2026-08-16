@@ -8,12 +8,12 @@
 infonce(image_embeddings, text_embeddings, temperature = 0.07)
 }
 \arguments{
-\item{image_embeddings}{See Usage.}
-\item{text_embeddings}{See Usage.}
+\item{image_embeddings}{Passed to \code{.opnclp_mat}.}
+\item{text_embeddings}{Passed to \code{.opnclp_mat}.}
 \item{temperature}{Defaults to \code{0.07}.}
 }
 \description{
-Part of the opnclp_native implementation; see the file header for the source it follows.
+A step of the opnclp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{image_to_text}, \code{text_to_image}, \code{logits}, \code{note}.

@@ -8,11 +8,11 @@
 .morie_ml_cutout(edges, sources)
 }
 \arguments{
-\item{edges}{See Usage.}
+\item{edges}{A matrix; indexed by row and column.}
 \item{sources}{See Usage.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{morie_docalc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

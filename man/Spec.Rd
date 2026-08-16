@@ -8,11 +8,11 @@
 Spec(tn, fp = NULL)
 }
 \arguments{
-\item{tn}{See Usage.}
+\item{tn}{A matrix; passed to \code{as.matrix}.}
 \item{fp}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_class implementation; see the file header for the source it follows.
+A step of the rangayyan_class implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{specificity}, \code{tnf}, \code{fpf}, \code{n_healthy}, \code{tn}, \code{fp}, \code{method}.

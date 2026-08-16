@@ -66,7 +66,8 @@
 # sqrt(3) * pi^2, the Panter-Dite constant in this normalisation.
 #' Sqrt(3) * pi^2, the Panter-Dite constant in this normalisation
 #'
-#' Part of the tqipb_native implementation; see the file header for the
+#' A step of the tqipb_native implementation. Called by \code{morie_tqipb_constant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A numeric value.
@@ -81,7 +82,7 @@
 #' integer exponent is repeated squaring while Python\'s `**` calls libm
 #' pow(); the module does not rely on the two agreeing.
 #'
-#' @param b See Usage.
+#' @param b A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .tqipb_pow4 <- function(b) {
@@ -125,7 +126,7 @@ morie_tqipb_constant <- function(bits, d, route = "table") {
 #' d %% n_blocks blocks get one extra, which is what a packer does when
 #' the dimension does not divide.
 #'
-#' @param d See Usage.
+#' @param d Numeric; combined arithmetically in the body.
 #' @param n_blocks See Usage.
 #' @return The value of \code{ifelse}.
 #' @export

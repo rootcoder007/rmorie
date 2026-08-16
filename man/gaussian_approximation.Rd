@@ -18,7 +18,7 @@ gaussian_approximation(log_lik, log_lik_d1, log_lik_d2, prior_mean, prior_precis
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{
-Part of the inlasm_native implementation; see the file header for the source it follows.
+A step of the inlasm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mode}, \code{precision}, \code{sd}, \code{iterations}, \code{log_norm}, \code{note}.

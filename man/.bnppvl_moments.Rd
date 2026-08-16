@@ -8,8 +8,8 @@
 .bnppvl_moments(draws, k)
 }
 \arguments{
-\item{draws}{See Usage.}
-\item{k}{See Usage.}
+\item{draws}{A vector; its length is taken and its elements indexed.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 of a cell is its midpoint and the second moment is (a^2 + ab + b^2)/3, because the histogram is uniform inside the cell. Taking these in closed form rather than from the sampled positions is what keeps the predictive moments exact given the draws.

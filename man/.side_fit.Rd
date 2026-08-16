@@ -8,16 +8,16 @@
 .side_fit(v, y, k_pt, bandwidth, order, side, kernel)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{y}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; indexed elementwise.}
 \item{k_pt}{See Usage.}
 \item{bandwidth}{See Usage.}
 \item{order}{See Usage.}
-\item{side}{See Usage.}
-\item{kernel}{See Usage.}
+\item{side}{One of \code{"left"}, \code{"right"}.}
+\item{kernel}{Compared against \code{"triangular"}.}
 }
 \description{
-Part of the bnskt2_native implementation; see the file header for the source it follows.
+A step of the bnskt2_native implementation. Called by \code{covariate_kink_test}, \code{density_kink_test}, \code{local_polynomial_slope} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{slope}, \code{coef}, \code{n}.

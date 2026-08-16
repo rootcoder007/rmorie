@@ -8,15 +8,15 @@
 .fluctuate(outcome, offset_logit, H, rows, iters = 100, tol = 1e-12)
 }
 \arguments{
-\item{outcome}{See Usage.}
-\item{offset_logit}{See Usage.}
-\item{H}{See Usage.}
-\item{rows}{See Usage.}
+\item{outcome}{A vector; indexed elementwise.}
+\item{offset_logit}{A vector; indexed elementwise.}
+\item{H}{A vector; indexed elementwise.}
+\item{rows}{A vector; its length is taken.}
 \item{iters}{Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{
-Part of the tmldyn_native implementation; see the file header for the source it follows.
+A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{e}, as built in the body.

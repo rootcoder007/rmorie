@@ -9,12 +9,12 @@ wsp_score(alignment, scoring, s_op = 2.4, weights = NULL)
 }
 \arguments{
 \item{alignment}{See Usage.}
-\item{scoring}{See Usage.}
-\item{s_op}{Defaults to \code{2.4}.}
+\item{scoring}{A list; the body reads \code{$matrix} from it.}
+\item{s_op}{Numeric; combined arithmetically in the body. Defaults to \code{2.4}.}
 \item{weights}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{iterative_refine}, \code{mafft_alignment}, \code{morie_mafft}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{total}, as built in the body.

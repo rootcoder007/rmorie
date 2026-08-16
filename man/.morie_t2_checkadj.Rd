@@ -8,10 +8,10 @@
 .morie_t2_checkadj(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the tail2_t04 implementation; see the file header for the source it follows.
+A step of the tail2_t04 implementation. Called by \code{BipartSpec}, \code{SignlessL}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{A}, as built in the body.

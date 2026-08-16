@@ -8,21 +8,21 @@
 explor(states, actions, next_states, n_actions = NULL, n_features = 8, eta = 1, beta = 0.2, lr = 0.05, epochs = 1, features = "inverse", discrete = TRUE, seed = 0)
 }
 \arguments{
-\item{states}{See Usage.}
-\item{actions}{See Usage.}
-\item{next_states}{See Usage.}
+\item{states}{Passed to \code{.mat}.}
+\item{actions}{Passed to \code{.mat}.}
+\item{next_states}{Passed to \code{.mat}.}
 \item{n_actions}{Defaults to \code{NULL}.}
 \item{n_features}{Defaults to \code{8}.}
-\item{eta}{Defaults to \code{1}.}
-\item{beta}{Defaults to \code{0.2}.}
-\item{lr}{Defaults to \code{0.05}.}
+\item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{beta}{Numeric; combined arithmetically in the body. Defaults to \code{0.2}.}
+\item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
 \item{epochs}{Defaults to \code{1}.}
-\item{features}{Defaults to \code{"inverse"}.}
-\item{discrete}{Defaults to \code{TRUE}.}
+\item{features}{Compared against \code{"identity"}. Defaults to \code{"inverse"}.}
+\item{discrete}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the explor_native implementation; see the file header for the source it follows.
+A step of the explor_native implementation. Called by \code{morie_explor}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{payload}, as built in the body.

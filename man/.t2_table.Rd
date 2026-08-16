@@ -8,10 +8,10 @@
 .t2_table(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the tail2_t02 implementation; see the file header for the source it follows.
+A step of the tail2_t02 implementation. Called by \code{CttAlpha}, \code{CttAlphaMax}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

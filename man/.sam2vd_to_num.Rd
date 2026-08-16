@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the sam2vd_native implementation; see the file header for the source it follows.
+A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate}, \code{morie_sam2vd_push_memory}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

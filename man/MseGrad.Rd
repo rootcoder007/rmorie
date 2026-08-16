@@ -8,7 +8,7 @@
 MseGrad(phi, theta, w)
 }
 \arguments{
-\item{phi}{See Usage.}
+\item{phi}{A matrix; passed to \code{as.matrix}.}
 \item{theta}{See Usage.}
 \item{w}{See Usage.}
 }

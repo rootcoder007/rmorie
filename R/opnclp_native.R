@@ -20,7 +20,8 @@
 
 #' .opnclp_vec
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. Called by \code{fit_power_law}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -30,7 +31,8 @@
 
 #' .opnclp_mat
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. Called by \code{infonce}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
@@ -47,7 +49,8 @@
 
 #' total_compute
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param samples_seen See Usage.
@@ -69,11 +72,12 @@ total_compute <- function(samples_seen, model_params) {
 
 #' fit_power_law
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. Called by \code{compare_scaling}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Passed to \code{.opnclp_vec}.
+#' @param y Passed to \code{.opnclp_vec}.
 #' @return A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared}, \code{range}, \code{n}.
 #' @export
 fit_power_law <- function(x, y) {
@@ -113,10 +117,11 @@ fit_power_law <- function(x, y) {
 
 #' .opnclp_predict
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
+#' @param fit A list; the body reads \code{$alpha}, \code{$beta}, \code{$range} from it.
 #' @param compute See Usage.
 #' @return A list with \code{value}, \code{extrapolation_decades}, \code{interpolated}, \code{note}.
 #' @export
@@ -143,7 +148,8 @@ fit_power_law <- function(x, y) {
 
 #' compare_scaling
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x_a See Usage.
@@ -173,11 +179,12 @@ compare_scaling <- function(x_a, y_a, x_b, y_b,
 
 #' infonce
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param image_embeddings See Usage.
-#' @param text_embeddings See Usage.
+#' @param image_embeddings Passed to \code{.opnclp_mat}.
+#' @param text_embeddings Passed to \code{.opnclp_mat}.
 #' @param temperature Defaults to \code{0.07}.
 #' @return A list with \code{loss}, \code{image_to_text}, \code{text_to_image}, \code{logits}, \code{note}.
 #' @export
@@ -234,7 +241,8 @@ infonce <- function(image_embeddings, text_embeddings,
 
 #' .opnclp_cheatsheet
 #'
-#' Part of the opnclp_native implementation; see the file header for the
+#' A step of the opnclp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

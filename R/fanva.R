@@ -82,11 +82,12 @@ Fanva <- function(functions, groups, t = NULL) {
 
 #' .fanva_trapz
 #'
-#' Part of the fanva implementation; see the file header for the source
+#' A step of the fanva implementation. Called by \code{Fanva}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param t See Usage.
-#' @param v See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .fanva_trapz <- function(t, v) {

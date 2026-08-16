@@ -6,11 +6,12 @@
 
 #' .motiff_triads
 #'
-#' Part of the motiff_native implementation; see the file header for the
+#' A step of the motiff_native implementation. Called by \code{morie_motiff}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
-#' @param n See Usage.
+#' @param adj A matrix; indexed by row and column.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{ffl}, \code{cycle3}.
 #' @export
 .motiff_triads <- function(adj, n) {
@@ -35,11 +36,11 @@
 #' pairs; single<->single and mutual<->mutual switches only, so the
 #' mutual-edge count is invariant; identical RNG draw order.
 #'
-#' @param adj See Usage.
-#' @param n See Usage.
-#' @param e See Usage.
-#' @param swaps See Usage.
-#' @param preserve_mutual See Usage.
+#' @param adj A matrix; indexed by row and column.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param swaps A count; the body uses it as \code{seq_len(...)}.
+#' @param preserve_mutual A flag; the body branches on it.
 #' @return The value of \code{new}, as built in the body.
 #' @export
 .motiff_shuffle <- function(adj, n, e, swaps, preserve_mutual) {

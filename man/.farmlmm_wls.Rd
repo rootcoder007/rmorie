@@ -8,13 +8,13 @@
 .farmlmm_wls(X, y, w, rcond)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{A vector; its length is taken.}
+\item{w}{Numeric; passed to \code{sqrt}.}
 \item{rcond}{See Usage.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. Called by \code{.fixed_effect_scan}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}.

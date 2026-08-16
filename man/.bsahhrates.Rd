@@ -8,7 +8,7 @@
 .bsahhrates(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
 potential v in mV, modern sign convention, rest -65 mV.  Removable singularities at v = -55 and v = -40 mV replaced by their limits.

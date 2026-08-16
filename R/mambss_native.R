@@ -10,7 +10,8 @@
 
 #' softplus
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. Called by \code{morie_geron_blip_itm_itc}, \code{selective_scan}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -25,13 +26,14 @@ softplus <- function(z) {
 
 #' discretize_zoh
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. Called by \code{selective_ssm_step}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param delta See Usage.
 #' @param A See Usage.
 #' @param B See Usage.
-#' @param rule Defaults to \code{"zoh"}.
+#' @param rule One of \code{"euler"}, \code{"zoh"}. Defaults to \code{"zoh"}.
 #' @return A list with \code{Abar}, \code{Bbar}.
 #' @export
 discretize_zoh <- function(delta, A, B, rule = "zoh") {
@@ -60,14 +62,15 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
 
 #' selective_ssm_step
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. Called by \code{selective_scan}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param h See Usage.
-#' @param A See Usage.
+#' @param h A vector; its length is taken and its elements indexed.
+#' @param A A vector; its length is taken.
 #' @param B See Usage.
-#' @param C See Usage.
+#' @param C A vector; its length is taken.
 #' @param delta See Usage.
 #' @param rule Defaults to \code{"zoh"}.
 #' @return A list with \code{h}, \code{y}.
@@ -88,12 +91,13 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 
 #' .linear
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. Called by \code{selective_scan}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param Wm See Usage.
-#' @param b See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param Wm A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .linear <- function(x, Wm, b) {
@@ -108,7 +112,8 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 
 #' .sigmoid
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. Called by \code{gated_rnn_equivalent}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -118,14 +123,15 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 
 #' selective_scan
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. Called by \code{morie_mambss}, \code{s6_layer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param A See Usage.
-#' @param W_B See Usage.
-#' @param W_C See Usage.
-#' @param W_delta See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param A A matrix; passed to \code{as.matrix}.
+#' @param W_B A matrix; passed to \code{as.matrix}.
+#' @param W_C A matrix; passed to \code{as.matrix}.
+#' @param W_delta A matrix; passed to \code{as.matrix}.
 #' @param delta_bias Defaults to \code{NULL}.
 #' @param b_B Defaults to \code{NULL}.
 #' @param b_C Defaults to \code{NULL}.
@@ -184,10 +190,11 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
 
 #' gated_rnn_equivalent
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @param w See Usage.
 #' @param b Defaults to \code{0}.
 #' @return A list with \code{h}, \code{g}.
@@ -205,7 +212,8 @@ gated_rnn_equivalent <- function(x, w, b = 0.0) {
 
 #' s6_layer
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -222,7 +230,8 @@ s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
 
 #' .mambss_cheatsheet
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -237,7 +246,8 @@ mambassmstep <- selective_ssm_step
 
 #' morie_mambss
 #'
-#' Part of the mambss_native implementation; see the file header for the
+#' A step of the mambss_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.

@@ -8,13 +8,14 @@
 
 #' .linkhae_p3pl
 #'
-#' Part of the linkhae_native implementation; see the file header for
+#' A step of the linkhae_native implementation. Called by \code{morie_linkhae}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param theta See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
+#' @param theta Numeric; combined arithmetically in the body.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param c Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .linkhae_p3pl <- function(theta, a, b, c) {

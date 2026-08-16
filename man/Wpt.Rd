@@ -8,12 +8,12 @@
 Wpt(x, wavelet = "db4", levels = 3)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{wavelet}{Defaults to \code{"db4"}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{wavelet}{Passed to \code{.tf_filters}. Defaults to \code{"db4"}.}
 \item{levels}{Defaults to \code{3}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{nodes}, \code{leaves}, \code{n_leaves}, \code{energy_per_leaf}, \code{dominant_leaf}, \code{entropy}, \code{levels}, \code{wavelet}, \code{method}.

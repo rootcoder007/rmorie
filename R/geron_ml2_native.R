@@ -2299,11 +2299,12 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 
 #' .morie_gr2_leaf
 #'
-#' Part of the geron_ml2_native implementation; see the file header for
+#' A step of the geron_ml2_native implementation. Called by \code{.morie_gr2_grow}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param criterion See Usage.
+#' @param y A vector; its length is taken.
+#' @param criterion One of \code{"gini"}, \code{"mse"}.
 #' @return A list with \code{leaf}, \code{value}, \code{proba}, \code{n}, \code{impurity}.
 #' @export
 .morie_gr2_leaf <- function(y, criterion) {
@@ -2328,12 +2329,13 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 
 #' .morie_gr2_best_split
 #'
-#' Part of the geron_ml2_native implementation; see the file header for
+#' A step of the geron_ml2_native implementation. Called by \code{.morie_gr2_grow}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param criterion See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y Passed to \code{morie_geron_cart_split_cost}.
+#' @param criterion Passed to \code{morie_geron_cart_split_cost}.
 #' @param min_samples_leaf See Usage.
 #' @return The value of \code{best}, as built in the body.
 #' @export
@@ -2370,18 +2372,19 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 
 #' .morie_gr2_grow
 #'
-#' Part of the geron_ml2_native implementation; see the file header for
+#' A step of the geron_ml2_native implementation. Called by \code{morie_geron_cart_algorithm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param criterion See Usage.
-#' @param max_depth See Usage.
-#' @param min_samples_split See Usage.
-#' @param min_samples_leaf See Usage.
-#' @param min_impurity_decrease See Usage.
-#' @param depth See Usage.
-#' @param stats See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param criterion Passed to \code{.morie_gr2_leaf}.
+#' @param max_depth Optional; may be \code{NULL}. Passed to \code{.morie_gr2_grow}.
+#' @param min_samples_split Passed to \code{.morie_gr2_grow}.
+#' @param min_samples_leaf Passed to \code{.morie_gr2_best_split}.
+#' @param min_impurity_decrease Passed to \code{.morie_gr2_grow}.
+#' @param depth Numeric; passed to \code{max}.
+#' @param stats A list; the body reads \code{$leaves}, \code{$max_depth}, \code{$splits} from it.
 #' @return The value of \code{lf}, as built in the body.
 #' @export
 .morie_gr2_grow <- function(X, y, criterion, max_depth, min_samples_split,
@@ -2600,12 +2603,13 @@ morie_geron_classification_tree <- function(X, y, criterion = "gini",
 
 #' .morie_gr2_onehot
 #'
-#' Part of the geron_ml2_native implementation; see the file header for
+#' A step of the geron_ml2_native implementation. Called by \code{morie_geron_cross_entropy_cost}, \code{morie_geron_cross_entropy_gradient}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Y See Usage.
-#' @param m See Usage.
-#' @param K See Usage.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
+#' @param K A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{Yoh}, as built in the body.
 #' @export
 .morie_gr2_onehot <- function(Y, m, K) {
@@ -3129,9 +3133,9 @@ morie_geron_classification_localization <- function(image, model,
 #' out literally -- which is every documented use -- the two agree,
 #' because distinct Python literals are distinct objects too.
 #'
-#' @param node See Usage.
-#' @param env See Usage.
-#' @param st See Usage.
+#' @param node A vector; its length is taken and its elements indexed.
+#' @param env A vector; indexed elementwise.
+#' @param st A list; the body reads \code{$nodes} from it.
 #' @return The value of \code{length}.
 #' @export
 .morie_gr2_forward <- function(node, env, st) {

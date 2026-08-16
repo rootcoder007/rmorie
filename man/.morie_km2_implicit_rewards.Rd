@@ -10,10 +10,10 @@
 \arguments{
 \item{pi_star}{See Usage.}
 \item{pi_ref}{See Usage.}
-\item{beta}{See Usage.}
+\item{beta}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch5_dpo_loss}, \code{morie_kamath_ch5_dpo_pref_simplified}, \code{morie_kamath_ch5_dpo_pref_substituted}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

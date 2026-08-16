@@ -24,7 +24,7 @@ ALTERNATIVE, so the null carries 1 - lam.
 }
 \details{
 Formula: B_n = prod_i p*(X_i) / int prod_i p(X_i) dPi_1(p);
-Pi_n(p = p* | X) = (1-lam) L* / \link{ (1-lam) L* + lam int L dPi_1 }
+Pi_n(p = p* | X) = (1-lam) L* / [ (1-lam) L* + lam int L dPi_1 ]
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of

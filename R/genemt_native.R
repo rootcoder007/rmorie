@@ -62,7 +62,8 @@
 
 #' .genemt_norm_cdf
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -74,7 +75,8 @@
 
 #' .genemt_norm_ppf
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_statistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -87,13 +89,14 @@
 
 #' .genemt_wls
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
-#' @param ridge See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; passed to \code{sqrt}.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}.
 #' @export
 .genemt_wls <- function(X, y, w, ridge) {
@@ -119,10 +122,11 @@
 
 #' morie_genemt_ld_principal_components
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_statistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param G See Usage.
+#' @param G A matrix; passed to \code{as.matrix}.
 #' @param keep Defaults to \code{0.999}.
 #' @return A list with \code{components}, \code{n_components}, \code{n_markers}, \code{variance_explained}, \code{note}.
 #' @export
@@ -175,12 +179,13 @@ morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
 
 #' morie_genemt_gene_statistic
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param G See Usage.
-#' @param keep Defaults to \code{0.999}.
+#' @param G Passed to \code{morie_genemt_ld_principal_components}.
+#' @param keep Passed to \code{morie_genemt_ld_principal_components}. Defaults to \code{0.999}.
 #' @return A list with \code{F}, \code{df1}, \code{df2}, \code{p}, \code{z}, \code{n_markers}, \code{note}.
 #' @export
 morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
@@ -217,7 +222,8 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
 
 #' morie_genemt_gene_covariates
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_markers See Usage.
@@ -252,12 +258,13 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
 
 #' morie_genemt_gene_set_regression
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. Called by \code{morie_genemt_conditional_set_test}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z_scores See Usage.
 #' @param membership See Usage.
-#' @param covariates Defaults to \code{NULL}.
+#' @param covariates Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p}, \code{n_genes}, \code{covariates_used}, \code{method}, \code{note}.
 #' @export
 morie_genemt_gene_set_regression <- function(z_scores, membership,
@@ -300,13 +307,14 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
 
 #' morie_genemt_conditional_set_test
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z_scores See Usage.
 #' @param set_a See Usage.
 #' @param set_b See Usage.
-#' @param covariates Defaults to \code{NULL}.
+#' @param covariates Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta}, \code{conditional_p}, \code{attenuation}, \code{note}.
 #' @export
 morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
@@ -343,7 +351,8 @@ morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
 
 #' morie_genemt_cheatsheet
 #'
-#' Part of the genemt_native implementation; see the file header for the
+#' A step of the genemt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

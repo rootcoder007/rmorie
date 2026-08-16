@@ -31,7 +31,7 @@
 #'
 #' phat = colMeans(X)/2.
 #'
-#' @param M See Usage.
+#' @param M A matrix; passed to \code{as.matrix}.
 #' @param freq Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export

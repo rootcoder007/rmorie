@@ -3,12 +3,12 @@
 % the formals.
 \name{bilm_forward}
 \alias{bilm_forward}
-\title{Run the biLM and return every layer\\'s representation}
+\title{Run the biLM and return every layer\'s representation}
 \usage{
 bilm_forward(X, layers)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{layers}{See Usage.}
 }
 \description{

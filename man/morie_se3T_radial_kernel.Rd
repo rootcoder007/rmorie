@@ -9,11 +9,11 @@ morie_se3T_radial_kernel(distance, weights = NULL, sigma = 1)
 }
 \arguments{
 \item{distance}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Passed to \code{.se3T_vec}.}
 \item{sigma}{Defaults to \code{1}.}
 }
 \description{
-Part of the se3T_native implementation; see the file header for the source it follows.
+A step of the se3T_native implementation. Called by \code{morie_se3T_se3_attention}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

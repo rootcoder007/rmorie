@@ -8,11 +8,11 @@
 .multinomial(w, e)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{e}{See Usage.}
+\item{w}{A vector; its length is taken.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the prtcl_native implementation; see the file header for the source it follows.
+A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -24,7 +24,7 @@
 #' itself, and adding a second leading minus flips the average
 #' derivative\'s sign (measured -0.548 against a theoretical +0.564).
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .hrz_gauss_kernel_deriv <- function(u) -u * exp(-0.5 * u^2) / sqrt(2 * pi)

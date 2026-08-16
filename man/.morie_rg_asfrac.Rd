@@ -11,7 +11,7 @@
 \item{v}{See Usage.}
 }
 \description{
-Part of the rangayyan_class implementation; see the file header for the source it follows.
+A step of the rangayyan_class implementation. Called by \code{Accuracy}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

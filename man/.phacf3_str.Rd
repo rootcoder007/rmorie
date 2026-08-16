@@ -3,12 +3,12 @@
 % the formals.
 \name{.phacf3_str}
 \alias{.phacf3_str}
-\title{A key\\\'s string form, zero padded so that byte order is numeric order}
+\title{A key\\'s string form, zero padded so that byte order is numeric order}
 \usage{
 .phacf3_str(k)
 }
 \arguments{
-\item{k}{See Usage.}
+\item{k}{A vector; indexed elementwise.}
 }
 \description{
 Only used to index the lookup table; the ORDERING of the bit space is done on the numbers themselves.

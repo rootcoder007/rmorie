@@ -8,11 +8,11 @@
 .s03hcU(r, v)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{v}{See Usage.}
+\item{r}{Numeric; combined arithmetically in the body.}
+\item{v}{Passed to \code{.s03lens}.}
 }
 \description{
-Part of the hcoreg implementation; see the file header for the source it follows.
+A step of the hcoreg implementation. Called by \code{.s03hcK1}, \code{.s03hcK2}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

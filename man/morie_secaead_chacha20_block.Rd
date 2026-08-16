@@ -8,9 +8,9 @@
 morie_secaead_chacha20_block(key, counter, nonce, rounds = 20)
 }
 \arguments{
-\item{key}{See Usage.}
+\item{key}{Passed to \code{.secaead_as_bytes}.}
 \item{counter}{See Usage.}
-\item{nonce}{See Usage.}
+\item{nonce}{Passed to \code{.secaead_as_bytes}.}
 \item{rounds}{Defaults to \code{20}.}
 }
 \description{

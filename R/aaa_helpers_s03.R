@@ -17,7 +17,8 @@
 
 #' .s03vec
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.ch_ols_se}, \code{.icc_balanced} and 343 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -30,7 +31,8 @@
 
 #' .s03mat
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.cfa_cov}, \code{.ch_ols_se} and 236 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -50,11 +52,12 @@
 
 #' .s03matmul
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.s03crossprod}, \code{Fevdc}, \code{Fnlm} and 11 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param B A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s03matmul <- function(A, B) {
@@ -72,11 +75,12 @@
 
 #' .s03matvec
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.ch_ols_se}, \code{.jnt_lmm_ri} and 36 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param v See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param v A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s03matvec <- function(A, v) {
@@ -91,20 +95,22 @@
 
 #' .s03crossprod
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.btres_xtxinv}, \code{.ch_ols_se} and 7 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{t}.
 #' @return The value of \code{.s03matmul}.
 #' @export
 .s03crossprod <- function(A) .s03matmul(t(A), A)
 
 #' .s03chol
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.cfa_logdet}, \code{.s03cholsolve}, \code{Fevdc} and 14 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .s03chol <- function(A) {
@@ -141,11 +147,12 @@
 
 #' .s03cholsolve
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.cfa_inv}, \code{.ch_ols_se} and 35 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .s03cholsolve <- function(A, b) {
@@ -168,12 +175,13 @@
 
 #' .s03ridgesolve
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.btres_xtxinv}, \code{.cfa_em}, \code{.htprd_ridge_cv} and 25 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param b Passed to \code{.s03cholsolve}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return The value of \code{.s03cholsolve}.
 #' @export
 .s03ridgesolve <- function(A, b, ridge = 1e-10) {
@@ -185,12 +193,13 @@
 
 #' .s03lstsq
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.btnpqr_fit}, \code{.btsieve_arfit}, \code{.dssoot_ols} and 36 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param X A matrix; passed to \code{t}.
+#' @param y Passed to \code{.s03matvec}.
+#' @param ridge Passed to \code{.s03ridgesolve}. Defaults to \code{1e-10}.
 #' @return The value of \code{.s03ridgesolve}.
 #' @export
 .s03lstsq <- function(X, y, ridge = 1e-10) {
@@ -208,8 +217,8 @@
 #' sign-fixed so its largest-magnitude entry is positive, because the
 #' eigenproblem does not determine the sign and the arms must agree.
 #'
-#' @param A See Usage.
-#' @param sweeps Defaults to \code{60L}.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param sweeps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
 .s03jacobi <- function(A, sweeps = 60L) {
@@ -261,10 +270,11 @@
 
 #' .s03sigmoid
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.dnnact}, \code{.dw_skipgram}, \code{.s03swish} and 21 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{exp}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .s03sigmoid <- function(z) {
@@ -278,7 +288,7 @@
 #' erf(z/sqrt(2)) = 2 pnorm(z) - 1, so 0.5 z (1 + erf(z/sqrt 2)) = z
 #' Phi(z).
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s03gelu <- function(z) z * pnorm(z)
@@ -286,18 +296,20 @@
 # Swish_beta(x) = x sigma(beta x) (Ramachandran et al. 2017).
 #' Swish_beta(x) = x sigma(beta x) (Ramachandran et al. 2017)
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{Llamablock}, \code{Mbconv}, \code{Swiglu}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
-#' @param beta Defaults to \code{1}.
+#' @param z Numeric; combined arithmetically in the body.
+#' @param beta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .s03swish <- function(z, beta = 1) z * .s03sigmoid(beta * z)
 
 #' .s03relu
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{DeepF}, \code{Reglu}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -307,10 +319,11 @@
 
 #' .s03softmax
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{Bertrec}, \code{Deitkd} and 7 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .s03softmax <- function(v) {
@@ -324,10 +337,11 @@
 
 #' .s03logsumexp
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{Dpgmm}, \code{Hdpgmm}, \code{Hdplda} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .s03logsumexp <- function(v) {
@@ -341,10 +355,11 @@
 
 #' .s03mean
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.btsieve_arfit}, \code{.s03corr}, \code{.s03var} and 42 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .s03mean <- function(v) {
@@ -357,11 +372,12 @@
 
 #' .s03var
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.s03sd}, \code{Btsubs}, \code{Dic} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param ddof Defaults to \code{1L}.
+#' @param v A vector; its length is taken.
+#' @param ddof Numeric; combined arithmetically in the body. Defaults to \code{1L}.
 #' @return A numeric value.
 #' @export
 .s03var <- function(v, ddof = 1L) {
@@ -375,21 +391,23 @@
 
 #' .s03sd
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{Btbayes}, \code{Btcbb}, \code{Btcicor} and 28 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param ddof Defaults to \code{1L}.
+#' @param v Passed to \code{.s03var}.
+#' @param ddof Passed to \code{.s03var}. Defaults to \code{1L}.
 #' @return A numeric value.
 #' @export
 .s03sd <- function(v, ddof = 1L) sqrt(.s03var(v, ddof))
 
 #' .s03median
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.dnnheadweights}, \code{.s03mad}, \code{Epicur} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .s03median <- function(v) {
@@ -402,11 +420,12 @@
 
 #' .s03mad
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{Irlsfn}, \code{Ogkcv}, \code{Ramsw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param constant Defaults to \code{1.4826}.
+#' @param v Numeric; combined arithmetically in the body.
+#' @param constant Numeric; combined arithmetically in the body. Defaults to \code{1.4826}.
 #' @return A numeric value.
 #' @export
 .s03mad <- function(v, constant = 1.4826) {
@@ -417,11 +436,12 @@
 # Type-7 quantile, the default of R's quantile().
 #' Type-7 quantile, the default of R\'s quantile()
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.cstat_uno}, \code{.dnnheadweights}, \code{.ot_quantiles} and 38 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param p See Usage.
+#' @param v Numeric; passed to \code{sort}.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s03quantile7 <- function(v, p) {
@@ -437,10 +457,11 @@
 
 #' .s03rank
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.hrz3_u01}, \code{CnsRos}, \code{Evangia} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .s03rank <- function(v) {
@@ -460,11 +481,12 @@
 
 #' .s03corr
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{Btcicor}, \code{Cv1gn}, \code{Hetero} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param y A vector; indexed elementwise.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .s03corr <- function(x, y) {
@@ -483,11 +505,12 @@
 # Van der Corput point -- the deterministic stand-in for a uniform draw.
 #' Van der Corput point -- the deterministic stand-in for a uniform draw
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.bt_counts}, \code{.rfcand}, \code{.s03mammen} and 22 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param i See Usage.
-#' @param base Defaults to \code{2L}.
+#' @param base Numeric; combined arithmetically in the body. Defaults to \code{2L}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .s03vdc <- function(i, base = 2L) {
@@ -503,10 +526,11 @@
 
 #' .s03unif
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.s03normdraws}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param base Defaults to \code{2L}.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -515,7 +539,8 @@
 # R's qnorm IS Wichura AS 241, the same algorithm the Python arm codes.
 #' R\'s qnorm IS Wichura AS 241, the same algorithm the Python arm codes
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.drbsze_tquant}, \code{Btbca}, \code{Btcicor} and 20 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -525,7 +550,8 @@
 
 #' .s03pnorm
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.huber_k}, \code{Augmn}, \code{Btbca} and 10 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -535,18 +561,20 @@
 
 #' .s03normdraws
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.ot_directions}, \code{.vitdraw}, \code{MedCI} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param base Defaults to \code{2L}.
+#' @param n Passed to \code{.s03unif}.
+#' @param base Passed to \code{.s03unif}. Defaults to \code{2L}.
 #' @return The value of \code{qnorm}.
 #' @export
 .s03normdraws <- function(n, base = 2L) qnorm(.s03unif(n, base))
 
 #' .s03lgamma
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.sgflrt_corr}, \code{Vbnpc}, \code{Vinfer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -562,7 +590,7 @@
 #' term for term rather than relying on R\'s digamma matching a Python
 #' series.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .s03digamma <- function(x) {
@@ -601,11 +629,12 @@
 # terms is retained for backward compatibility and is not used.
 #' Terms is retained for backward compatibility and is not used
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.s03maternk}, \code{.sgflrt_corr}, \code{Maternvg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nu See Usage.
-#' @param x See Usage.
+#' @param nu Numeric; combined arithmetically in the body.
+#' @param x Numeric; combined arithmetically in the body.
 #' @param terms Defaults to \code{160L}.
 #' @return A numeric value.
 #' @export
@@ -638,10 +667,10 @@
 #' which for the canonical link is exactly IRLS, beta <- beta + (X\' W
 #' X)^-1 X\' (y - p), W = diag(p (1 - p)).
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param iters Defaults to \code{60L}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
+#' @param ridge Passed to \code{.s03ridgesolve}. Defaults to \code{1e-10}.
 #' @param tol Defaults to \code{1e-13}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
@@ -673,11 +702,12 @@
 
 #' .s03design
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.s03drdid}, \code{.s03tmle}, \code{.tmlcic_hier_cluster_arm} and 16 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param n See Usage.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.s03mat}.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{cbind}.
 #' @export
 .s03design <- function(X, n) {
@@ -697,10 +727,10 @@
 #' tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] w1 = D / E[D] w0 =
 #' [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
 #'
-#' @param dy See Usage.
-#' @param D See Usage.
-#' @param X Defaults to \code{NULL}.
-#' @param weights Defaults to \code{NULL}.
+#' @param dy Passed to \code{.s03vec}.
+#' @param D Passed to \code{.s03vec}.
+#' @param X Passed to \code{.s03design}.
+#' @param weights Optional; may be \code{NULL}. Passed to \code{.s03vec}.
 #' @return A list with \code{tau}, \code{inf}, \code{se}, \code{pi}, \code{mu0}, \code{w1}, \code{w0}, \code{gamma}, \code{beta0}.
 #' @export
 .s03drdid <- function(dy, D, X = NULL, weights = NULL) {
@@ -743,7 +773,7 @@
 #'
 #' variance 1, third moment 1, and deterministic, so both arms agree.
 #'
-#' @param i See Usage.
+#' @param i Passed to \code{.s03vdc}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .s03mammen <- function(i) {
@@ -768,9 +798,9 @@
 #' fluctuation is valid for continuous outcomes (Gruber and van der Laan
 #' 2010).
 #'
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param X Defaults to \code{NULL}.
+#' @param y Passed to \code{.s03vec}.
+#' @param D Passed to \code{.s03vec}.
+#' @param X Passed to \code{.s03design}.
 #' @param trim Defaults to \code{0}.
 #' @param link Defaults to \code{"logit"}.
 #' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0}, \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
@@ -849,13 +879,14 @@
 
 #' .s03json_toJSON
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.morie_to_json}, \code{.s03json_write}, \code{jsonlite_toJSON_or_stub} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param auto_unbox Defaults to \code{TRUE}.
-#' @param digits Defaults to \code{NULL}.
-#' @param pretty Defaults to \code{FALSE}.
+#' @param x Passed to \code{morie_jsonlt_to_json}.
+#' @param auto_unbox Passed to \code{morie_jsonlt_to_json}. Defaults to \code{TRUE}.
+#' @param digits Passed to \code{morie_jsonlt_to_json}.
+#' @param pretty Passed to \code{morie_jsonlt_to_json}. Defaults to \code{FALSE}.
 #' @param ... Passed through.
 #' @return The value of \code{morie_jsonlt_to_json}.
 #' @export
@@ -866,11 +897,12 @@
 
 #' .s03json_pretty
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param txt See Usage.
-#' @param indent Defaults to \code{2L}.
+#' @param txt Passed to \code{morie_jsonlt_prettify}.
+#' @param indent Passed to \code{morie_jsonlt_prettify}. Defaults to \code{2L}.
 #' @return The value of \code{morie_jsonlt_prettify}.
 #' @export
 .s03json_pretty <- function(txt, indent = 2L)
@@ -878,10 +910,11 @@
 
 #' .s03json_fromJSON
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{.morie_datasette_get_json}, \code{.morie_from_json}, \code{.siu_panel_extract} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param txt See Usage.
+#' @param txt Passed to \code{morie_jsonlt_from_json}.
 #' @param ... Passed through.
 #' @return The value of \code{morie_jsonlt_from_json}.
 #' @export
@@ -891,14 +924,15 @@
 
 #' .s03json_write
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.s03json_toJSON}.
 #' @param path See Usage.
-#' @param auto_unbox Defaults to \code{TRUE}.
-#' @param digits Defaults to \code{NULL}.
-#' @param pretty Defaults to \code{FALSE}.
+#' @param auto_unbox Passed to \code{.s03json_toJSON}. Defaults to \code{TRUE}.
+#' @param digits Passed to \code{.s03json_toJSON}.
+#' @param pretty Passed to \code{.s03json_toJSON}. Defaults to \code{FALSE}.
 #' @param ... Passed through.
 #' @return Invisibly,the value of \code{path}, as built in the body.
 #' @export
@@ -911,7 +945,8 @@
 # newline-delimited JSON: one object per line
 #' Newline-delimited JSON: one object per line
 #'
-#' Part of the helpers_s03 implementation; see the file header for the
+#' A step of the helpers_s03 implementation. Called by \code{morie_dataset_load}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param con See Usage.

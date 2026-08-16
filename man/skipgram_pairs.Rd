@@ -12,7 +12,7 @@ skipgram_pairs(walks, window = 2)
 \item{window}{Defaults to \code{2}.}
 }
 \description{
-Part of the node2v_native implementation; see the file header for the source it follows.
+A step of the node2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{do.call}.

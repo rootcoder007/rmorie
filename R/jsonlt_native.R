@@ -22,7 +22,8 @@
 
 #' .jsonlt_opts
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser_opts}, \code{morie_jsonlt_to_json}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param dataframe Defaults to \code{"rows"}.
@@ -34,9 +35,9 @@
 #' @param raw Defaults to \code{"base64"}.
 #' @param null Defaults to \code{"list"}.
 #' @param na Defaults to \code{NULL}.
-#' @param auto_unbox Defaults to \code{FALSE}.
+#' @param auto_unbox A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param digits Defaults to \code{4}.
-#' @param force Defaults to \code{FALSE}.
+#' @param force A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{o}, as built in the body.
 #' @export
 .jsonlt_opts <- function(dataframe = "rows", matrix = "rowmajor",
@@ -91,7 +92,7 @@
 #' float-to-string would put them one ulp apart and call it a failure.
 #'
 #' @param x See Usage.
-#' @param digits See Usage.
+#' @param digits Optional; may be \code{NULL}. Passed to \code{.jsonlt_sig}.
 #' @return The value of \code{.jsonlt_tidy}.
 #' @export
 .jsonlt_num <- function(x, digits) {
@@ -105,10 +106,11 @@
 
 #' .jsonlt_tidy
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_num}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Compared against \code{"-0"}.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .jsonlt_tidy <- function(s) {
@@ -137,10 +139,11 @@
 
 #' .jsonlt_esc
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_df_columns}, \code{.jsonlt_df_rows}, \code{.jsonlt_encode} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Character; passed to \code{grepl}.
 #' @return A character value.
 #' @export
 .jsonlt_esc <- function(s) {
@@ -169,7 +172,8 @@
 # Base64 without a library, so both arms produce the same string.
 #' Base64 without a library, so both arms produce the same string
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_raw_enc}, \code{.jsonlt_ser}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param data See Usage.
@@ -204,10 +208,11 @@
 
 #' .jsonlt_unb64
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_unser}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Character; passed to \code{gsub}.
 #' @return The value of \code{as.raw}.
 #' @export
 .jsonlt_unb64 <- function(s) {
@@ -235,7 +240,7 @@
 #' columns. That is morie_jsonlt_flatten\'s job, opt-in, and doing it
 #' here would make a nested structure impossible to represent at all.
 #'
-#' @param cols See Usage.
+#' @param cols A vector; its length is taken and its elements indexed.
 #' @param nms See Usage.
 #' @return The value of \code{structure}.
 #' @export
@@ -249,10 +254,11 @@
 
 #' .jsonlt_na_token
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_atomic}, \code{.jsonlt_cell}, \code{.jsonlt_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param o See Usage.
+#' @param o A list; the body reads \code{$na} from it.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .jsonlt_na_token <- function(o) if (identical(o$na, "string")) "\"NA\"" else "null"
@@ -261,11 +267,12 @@
 
 #' .jsonlt_posix
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_scalar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
-#' @param o See Usage.
+#' @param o A list; the body reads \code{$digits}, \code{$POSIXt} from it.
 #' @return The value of \code{.jsonlt_esc}.
 #' @export
 .jsonlt_posix <- function(v, o) {
@@ -281,11 +288,12 @@
 # One element of an atomic vector, already known to be non-NA.
 #' One element of an atomic vector, already known to be non-NA
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_atomic}, \code{.jsonlt_cell}, \code{.jsonlt_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param o See Usage.
+#' @param v A flag; the body branches on it.
+#' @param o A list; the body reads \code{$Date}, \code{$digits} from it.
 #' @return The value of \code{.jsonlt_esc}.
 #' @export
 .jsonlt_scalar <- function(v, o) {
@@ -308,11 +316,12 @@
 
 #' .jsonlt_atomic
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}, \code{.jsonlt_ser}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param o See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param o A list; the body reads \code{$auto_unbox}, \code{$complex}, \code{$digits} from it.
 #' @param unbox_ok See Usage.
 #' @return A character value.
 #' @export
@@ -337,11 +346,12 @@
 
 #' .jsonlt_raw_enc
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rv See Usage.
-#' @param o See Usage.
+#' @param rv Passed to \code{.jsonlt_b64}.
+#' @param o A list; the body reads \code{$raw} from it.
 #' @return The value of \code{.jsonlt_esc}.
 #' @export
 .jsonlt_raw_enc <- function(rv, o) {
@@ -361,9 +371,9 @@
 #'
 #' jsonlite does for NA inside rows when na is unset.
 #'
-#' @param col See Usage.
+#' @param col A matrix; indexed by row and column.
 #' @param i See Usage.
-#' @param o See Usage.
+#' @param o A list; the body reads \code{$factor}, \code{$na} from it.
 #' @return The value of \code{.jsonlt_scalar}.
 #' @export
 .jsonlt_cell <- function(col, i, o) {
@@ -385,11 +395,12 @@
 
 #' .jsonlt_df_rows
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param df See Usage.
-#' @param o See Usage.
+#' @param df A matrix; passed to \code{nrow}.
+#' @param o Passed to \code{.jsonlt_cell}.
 #' @return A character value.
 #' @export
 .jsonlt_df_rows <- function(df, o) {
@@ -409,11 +420,12 @@
 
 #' .jsonlt_df_columns
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param df See Usage.
-#' @param o See Usage.
+#' @param df A vector; indexed elementwise.
+#' @param o Passed to \code{.jsonlt_encode}.
 #' @return A character value.
 #' @export
 .jsonlt_df_columns <- function(df, o) {
@@ -426,11 +438,12 @@
 
 #' .jsonlt_df_values
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param df See Usage.
-#' @param o See Usage.
+#' @param df A matrix; passed to \code{nrow}.
+#' @param o Passed to \code{.jsonlt_cell}.
 #' @return A character value.
 #' @export
 .jsonlt_df_values <- function(df, o) {
@@ -447,12 +460,13 @@
 
 #' .jsonlt_encode
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_df_columns}, \code{morie_jsonlt_to_json}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param o See Usage.
-#' @param unbox_ok See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; indexed by row and column.
+#' @param o A list; the body reads \code{$dataframe}, \code{$factor}, \code{$force}, \code{$matrix}, \code{$null} from it.
+#' @param unbox_ok Passed to \code{.jsonlt_atomic}.
 #' @return Nothing; this branch always raises.
 #' @export
 .jsonlt_encode <- function(x, o, unbox_ok) {
@@ -539,7 +553,8 @@ morie_jsonlt_unbox <- function(x) {
 
 #' .jsonlt_parse
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_json}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param txt See Usage.
@@ -669,10 +684,11 @@ morie_jsonlt_unbox <- function(x) {
 
 #' .jsonlt_is_scalar
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A logical value.
 #' @export
 .jsonlt_is_scalar <- function(x)
@@ -680,14 +696,15 @@ morie_jsonlt_unbox <- function(x) {
 
 #' .jsonlt_simplify
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_json}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param sv See Usage.
-#' @param sdf See Usage.
-#' @param sm See Usage.
-#' @param flat See Usage.
+#' @param x A vector; its length is taken.
+#' @param sv A flag; the body branches on it.
+#' @param sdf A flag; the body branches on it.
+#' @param sm A flag; the body branches on it.
+#' @param flat A flag; the body branches on it.
 #' @return The value of \code{kids}, as built in the body.
 #' @export
 .jsonlt_simplify <- function(x, sv, sdf, sm, flat) {
@@ -768,7 +785,7 @@ morie_jsonlt_from_json <- function(txt, simplifyVector = TRUE,
 #' @param close_pad See Usage.
 #' @param comma_pad See Usage.
 #' @param colon_txt See Usage.
-#' @param keep_ws See Usage.
+#' @param keep_ws A flag; the body branches on it.
 #' @return A character value.
 #' @export
 .jsonlt_walk <- function(txt, open_pad, close_pad, comma_pad, colon_txt,
@@ -855,7 +872,8 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
 
 #' .jsonlt_ser_opts
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.jsonlt_opts}.
@@ -865,10 +883,11 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
 
 #' .jsonlt_ser_attr
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pairs See Usage.
+#' @param pairs A vector; its length is taken and its elements indexed.
 #' @return A character value.
 #' @export
 .jsonlt_ser_attr <- function(pairs) {
@@ -880,7 +899,8 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
 
 #' .jsonlt_rtype
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -896,10 +916,11 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
 
 #' .jsonlt_ser
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser_attr}, \code{morie_jsonlt_serialize}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
 #' @return A character value.
 #' @export
 .jsonlt_ser <- function(x) {
@@ -955,11 +976,12 @@ morie_jsonlt_serialize <- function(x, pretty = FALSE) {
 
 #' .jsonlt_coerce
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param t See Usage.
+#' @param v Optional; may be \code{NULL}. One of \code{"-Inf"}, \code{"Inf"}, \code{"NaN"}.
+#' @param t One of \code{"complex"}, \code{"double"}, \code{"integer"}, \code{"logical"}.
 #' @return A character value.
 #' @export
 .jsonlt_coerce <- function(v, t) {
@@ -983,10 +1005,11 @@ morie_jsonlt_serialize <- function(x, pretty = FALSE) {
 
 #' .jsonlt_unser
 #'
-#' Part of the jsonlt_native implementation; see the file header for the
+#' A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_unserialize}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
+#' @param node A list; the body reads \code{$attributes}, \code{$type}, \code{$value} from it.
 #' @return The value of \code{vec}, as built in the body.
 #' @export
 .jsonlt_unser <- function(node) {

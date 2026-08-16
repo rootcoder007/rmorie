@@ -8,9 +8,9 @@
 .w3_nppf(p, lo = -40, hi = 40)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{lo}{Defaults to \code{-40}.}
-\item{hi}{Defaults to \code{40}.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{lo}{Passed to \code{.w3_bisect}. Defaults to \code{-40}.}
+\item{hi}{Passed to \code{.w3_bisect}. Defaults to \code{40}.}
 }
 \description{
 rational approximation and exactly as accurate as the CDF it inverts, which is the property that matters here.

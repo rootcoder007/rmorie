@@ -11,11 +11,11 @@
 \item{s_left}{See Usage.}
 \item{s_mid}{See Usage.}
 \item{s_right}{See Usage.}
-\item{h_left}{See Usage.}
-\item{h_right}{See Usage.}
+\item{h_left}{Numeric; passed to \code{log}.}
+\item{h_right}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

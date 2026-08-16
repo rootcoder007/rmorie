@@ -8,11 +8,11 @@
 morie_dsp_median_filter_cpp(x, kernel_size)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{kernel_size}{See Usage.}
+\item{x}{Passed to \code{.Call}.}
+\item{kernel_size}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_dsp_median_filter}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

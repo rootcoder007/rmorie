@@ -8,15 +8,15 @@
 .smatch_build_intervals(start, end, exposure, events, rp, ab)
 }
 \arguments{
-\item{start}{See Usage.}
-\item{end}{See Usage.}
-\item{exposure}{See Usage.}
-\item{events}{See Usage.}
-\item{rp}{See Usage.}
-\item{ab}{See Usage.}
+\item{start}{Passed to \code{morie_sccsno_build_intervals}.}
+\item{end}{Passed to \code{morie_sccsno_build_intervals}.}
+\item{exposure}{Passed to \code{morie_sccsno_build_intervals}.}
+\item{events}{Passed to \code{morie_sccsno_build_intervals}.}
+\item{rp}{Passed to \code{morie_sccsno_build_intervals}.}
+\item{ab}{Passed to \code{morie_sccsno_build_intervals}.}
 }
 \description{
-Part of the smatch_native implementation; see the file header for the source it follows.
+A step of the smatch_native implementation. Called by \code{morie_smatch_poisson_design}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

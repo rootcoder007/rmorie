@@ -8,12 +8,12 @@
 CovXY(x, y, ddof = 0)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Passed to \code{.morie_rg_aslist}.}
+\item{y}{Passed to \code{.morie_rg_aslist}.}
 \item{ddof}{Defaults to \code{0}.}
 }
 \description{
-Part of the rangayyan_ch3 implementation; see the file header for the source it follows.
+A step of the rangayyan_ch3 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{covariance}, \code{correlation}, \code{sd_x}, \code{sd_y}, \code{mean_x}, \code{mean_y}, \code{n}, \code{ddof}, \code{method}.

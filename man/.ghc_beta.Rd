@@ -8,12 +8,12 @@
 .ghc_beta(e, a, b)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{e}{Passed to \code{.ghc_gamma}.}
+\item{a}{Passed to \code{.ghc_gamma}.}
+\item{b}{Passed to \code{.ghc_gamma}.}
 }
 \description{
-Part of the pmpfit_native implementation; see the file header for the source it follows.
+A step of the pmpfit_native implementation. Called by \code{morie_pmpfit}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

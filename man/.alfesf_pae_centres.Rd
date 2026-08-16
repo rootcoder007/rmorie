@@ -8,11 +8,11 @@
 .alfesf_pae_centres(nb, width)
 }
 \arguments{
-\item{nb}{See Usage.}
-\item{width}{See Usage.}
+\item{nb}{A count; the body uses it as \code{seq_len(...)}.}
+\item{width}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the alfesf_native implementation; see the file header for the source it follows.
+A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,12 +8,12 @@
 .abcgp.sobol_sequence(n, dim, skip = 0)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{dim}{See Usage.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
+\item{dim}{A count; the body uses it as \code{seq_len(...)}.}
 \item{skip}{Defaults to \code{0}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.design_from_prior}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,10 +8,10 @@
 .sgflrt_inv(L)
 }
 \arguments{
-\item{L}{See Usage.}
+\item{L}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the sgflrt_native implementation; see the file header for the source it follows.
+A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{M}, as built in the body.

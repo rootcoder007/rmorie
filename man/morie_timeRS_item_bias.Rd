@@ -8,14 +8,14 @@
 morie_timeRS_item_bias(b_i, bins, t, bin_days = 70, n_bins = 30)
 }
 \arguments{
-\item{b_i}{See Usage.}
-\item{bins}{See Usage.}
-\item{t}{See Usage.}
-\item{bin_days}{Defaults to \code{70}.}
-\item{n_bins}{Defaults to \code{30}.}
+\item{b_i}{Passed to \code{.timeRS_item_bias}.}
+\item{bins}{Passed to \code{.timeRS_item_bias}.}
+\item{t}{Passed to \code{.timeRS_item_bias}.}
+\item{bin_days}{Passed to \code{.timeRS_item_bias}. Defaults to \code{70}.}
+\item{n_bins}{Passed to \code{.timeRS_item_bias}. Defaults to \code{30}.}
 }
 \description{
-Part of the timeRS_native implementation; see the file header for the source it follows.
+A step of the timeRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.timeRS_item_bias}.

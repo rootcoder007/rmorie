@@ -9,7 +9,7 @@ PCepstrum(x, square = TRUE)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{square}{Defaults to \code{TRUE}.}
+\item{square}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 definitions, and that it matters: WITH the square, eq (4.82) holds only when the cross-term is negligible; WITHOUT it, no cross-term arises and eq (4.82) is exact.

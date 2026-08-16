@@ -10,8 +10,8 @@
 \arguments{
 \item{elogd}{See Usage.}
 \item{fi}{See Usage.}
-\item{fu}{See Usage.}
-\item{coefficients}{See Usage.}
+\item{fu}{Numeric; combined arithmetically in the body.}
+\item{coefficients}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
 log(1/fut) = a + b ElogD(7.4) + c fi(7.4) + d log(1/fu) The four coefficients are fitted quantities that belong to the papers. This module will not guess them: pass them, or use the measured route.

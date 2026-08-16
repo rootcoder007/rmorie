@@ -10,11 +10,11 @@ morie_velocity(u, s, beta, gamma)
 \arguments{
 \item{u}{See Usage.}
 \item{s}{See Usage.}
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
+\item{beta}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the scvelo_native implementation; see the file header for the source it follows.
+A step of the scvelo_native implementation. Called by \code{morie_dynamical_fit}, \code{morie_simulate_gene}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

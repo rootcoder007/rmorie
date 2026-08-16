@@ -12,10 +12,10 @@
 \item{horizon}{See Usage.}
 \item{lookback_multiples}{Defaults to \code{c(2, 3, 4, 5, 6, 7)}.}
 \item{block_sets}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Passed to \code{.ngnest_nbeats_stack}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the ngnest_native implementation; see the file header for the source it follows.
+A step of the ngnest_native implementation. Called by \code{morie_ngnest}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

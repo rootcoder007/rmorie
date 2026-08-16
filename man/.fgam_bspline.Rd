@@ -8,13 +8,13 @@
 .fgam_bspline(x, kn, n_basis, degree = 3L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{kn}{See Usage.}
-\item{n_basis}{See Usage.}
-\item{degree}{Defaults to \code{3L}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{kn}{A vector; its length is taken and its elements indexed.}
+\item{n_basis}{A count; the body uses it as \code{seq_len(...)}.}
+\item{degree}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{3L}.}
 }
 \description{
-Part of the fgam_native implementation; see the file header for the source it follows.
+A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

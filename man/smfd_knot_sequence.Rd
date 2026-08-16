@@ -3,15 +3,15 @@
 % the formals.
 \name{smfd_knot_sequence}
 \alias{smfd_knot_sequence}
-\title{Internal: evenly spaced knots, extended by \\'degree\\' at each end}
+\title{Internal: evenly spaced knots, extended by \'degree\' at each end}
 \usage{
 smfd_knot_sequence(xmin, xmax, nseg = 10L, degree = 3L)
 }
 \arguments{
-\item{xmin}{See Usage.}
-\item{xmax}{See Usage.}
-\item{nseg}{Defaults to \code{10L}.}
-\item{degree}{Defaults to \code{3L}.}
+\item{xmin}{Numeric; combined arithmetically in the body.}
+\item{xmax}{Numeric; combined arithmetically in the body.}
+\item{nseg}{Numeric; combined arithmetically in the body. Defaults to \code{10L}.}
+\item{degree}{Numeric; combined arithmetically in the body. Defaults to \code{3L}.}
 }
 \description{
 Mirrors Python knot_sequence(xmin, xmax, nseg, degree) in smfd.

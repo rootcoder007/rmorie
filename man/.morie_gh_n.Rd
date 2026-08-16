@@ -11,7 +11,7 @@
 \item{n}{See Usage.}
 }
 \description{
-formulas are routinely evaluated at hypothetical sample sizes like 1e10, which overflow R\\\'s 32-bit integer and silently become NA. Python\\\'s int has no such limit, so coercing here would break parity exactly where the asymptotics become interesting.
+formulas are routinely evaluated at hypothetical sample sizes like 1e10, which overflow R\\'s 32-bit integer and silently become NA. Python\\'s int has no such limit, so coercing here would break parity exactly where the asymptotics become interesting.
 }
 \value{
 The value of \code{v}, as built in the body.

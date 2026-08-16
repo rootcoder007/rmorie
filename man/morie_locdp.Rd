@@ -8,8 +8,8 @@
 morie_locdp(x, epsilon = 1, seed = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{epsilon}{Defaults to \code{1}.}
+\item{x}{A vector; its length is taken.}
+\item{epsilon}{A vector; its length is taken. Defaults to \code{1}.}
 \item{seed}{Defaults to \code{NULL}.}
 }
 \description{

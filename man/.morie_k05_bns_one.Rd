@@ -8,10 +8,10 @@
 .morie_k05_bns_one(r)
 }
 \arguments{
-\item{r}{See Usage.}
+\item{r}{A vector; its length is taken.}
 }
 \description{
-Part of the k05_tranche1 implementation; see the file header for the source it follows.
+A step of the k05_tranche1 implementation. Called by \code{morie_bns_jump_test}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.

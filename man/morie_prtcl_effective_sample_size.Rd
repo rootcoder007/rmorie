@@ -8,10 +8,10 @@
 morie_prtcl_effective_sample_size(weights)
 }
 \arguments{
-\item{weights}{See Usage.}
+\item{weights}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the prtcl_native implementation; see the file header for the source it follows.
+A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

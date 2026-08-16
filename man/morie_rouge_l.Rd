@@ -8,12 +8,12 @@
 morie_rouge_l(candidate, reference, beta = 1)
 }
 \arguments{
-\item{candidate}{See Usage.}
-\item{reference}{See Usage.}
-\item{beta}{Defaults to \code{1}.}
+\item{candidate}{Passed to \code{.rouge_toks}.}
+\item{reference}{Passed to \code{.rouge_get_refs_simple}.}
+\item{beta}{Passed to \code{.rouge_prf}. Defaults to \code{1}.}
 }
 \description{
-Part of the rouge_native implementation; see the file header for the source it follows.
+A step of the rouge_native implementation. Called by \code{morie_rouge}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

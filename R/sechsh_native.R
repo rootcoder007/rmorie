@@ -201,7 +201,8 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 # Pure base-R SHA-256 (FIPS 180-4). Slow but exact, no package.
 #' Pure base-R SHA-256 (FIPS 180-4). Slow but exact, no package
 #'
-#' Part of the sechsh_native implementation; see the file header for the
+#' A step of the sechsh_native implementation. Called by \code{.kdf_hmac}, \code{.sech_hmac}, \code{morie_sechsh_chain_entry} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param bytes See Usage.
@@ -284,10 +285,11 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 
 #' .sech_hmac
 #'
-#' Part of the sechsh_native implementation; see the file header for the
+#' A step of the sechsh_native implementation. Called by \code{morie_sechsh_chain_entry}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param key See Usage.
+#' @param key A vector; its length is taken.
 #' @param msg See Usage.
 #' @return The value of \code{.sech_sha256}.
 #' @export
@@ -302,7 +304,8 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 
 #' .sech_hexlify
 #'
-#' Part of the sechsh_native implementation; see the file header for the
+#' A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_chain}, \code{morie_sechsh_verify_inclusion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param bs See Usage.
@@ -314,11 +317,12 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 
 #' .sech_cteq
 #'
-#' Part of the sechsh_native implementation; see the file header for the
+#' A step of the sechsh_native implementation. Called by \code{morie_sechsh_verify_chain}, \code{morie_sechsh_verify_inclusion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return A logical value.
 #' @export
 .sech_cteq <- function(a, b) {

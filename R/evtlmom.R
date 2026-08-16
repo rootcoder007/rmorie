@@ -2,11 +2,12 @@
 
 #' .tl_lchoose
 #'
-#' Part of the evtlmom implementation; see the file header for the
+#' A step of the evtlmom implementation. Called by \code{Evtlmom}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param k See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tl_lchoose <- function(n, k) {

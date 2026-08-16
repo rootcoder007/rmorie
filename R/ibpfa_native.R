@@ -11,12 +11,13 @@
 
 #' sample_ibp
 #'
-#' Part of the ibpfa_native implementation; see the file header for the
+#' A step of the ibpfa_native implementation. Called by \code{morie_ibpfa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
 #' @param alpha See Usage.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @return A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n}, \code{features_per_object}, \code{note}.
 #' @export
 sample_ibp <- function(n, alpha, seed = 0L) {
@@ -71,7 +72,8 @@ sample_ibp <- function(n, alpha, seed = 0L) {
 
 #' expected_features
 #'
-#' Part of the ibpfa_native implementation; see the file header for the
+#' A step of the ibpfa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
@@ -92,10 +94,11 @@ expected_features <- function(n, alpha) {
 
 #' left_ordered_form
 #'
-#' Part of the ibpfa_native implementation; see the file header for the
+#' A step of the ibpfa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{Z}, \code{order}, \code{note}.
 #' @export
 left_ordered_form <- function(Z) {
@@ -119,10 +122,11 @@ left_ordered_form <- function(Z) {
 
 #' ibp_log_probability
 #'
-#' Part of the ibpfa_native implementation; see the file header for the
+#' A step of the ibpfa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z A matrix; passed to \code{as.matrix}.
 #' @param alpha See Usage.
 #' @return The value of \code{lp}, as built in the body.
 #' @export
@@ -145,11 +149,12 @@ ibp_log_probability <- function(Z, alpha) {
 
 #' gibbs_feature_update
 #'
-#' Part of the ibpfa_native implementation; see the file header for the
+#' A step of the ibpfa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param i See Usage.
+#' @param Z A matrix; passed to \code{as.matrix}.
+#' @param i Numeric; combined arithmetically in the body.
 #' @param kk See Usage.
 #' @param likelihood See Usage.
 #' @param alpha See Usage.
@@ -180,7 +185,8 @@ indian_buffet_factor <- sample_ibp
 
 #' morie_ibpfa
 #'
-#' Part of the ibpfa_native implementation; see the file header for the
+#' A step of the ibpfa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
@@ -194,7 +200,8 @@ morie_ibpfa <- function(n, alpha, seed = 0L) {
 
 #' .ibpfa_cheatsheet
 #'
-#' Part of the ibpfa_native implementation; see the file header for the
+#' A step of the ibpfa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

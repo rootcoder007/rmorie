@@ -8,10 +8,10 @@
 .schab_correlation_matrix(coords, nugget_ratio, rng, model)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{nugget_ratio}{See Usage.}
-\item{rng}{See Usage.}
-\item{model}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
+\item{nugget_ratio}{Numeric; combined arithmetically in the body.}
+\item{rng}{Passed to \code{.sp_correlogram}.}
+\item{model}{Passed to \code{.sp_correlogram}.}
 }
 \description{
 sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in [0, 1] -- the reparameterisation Sec. 5.5.2 calls for.

@@ -8,10 +8,10 @@
 .karpv_copy(node)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{A list; the body reads \code{$args}, \code{$op}, \code{$term} from it.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{.karpv_replace}, \code{morie_karpV}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.karpv_fnode}.

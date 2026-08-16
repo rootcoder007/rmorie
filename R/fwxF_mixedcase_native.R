@@ -13,14 +13,15 @@
 
 #' Fine Fuel Moisture Code, statements 110-165 of the FTR-33 program
 #'
-#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' A step of the fwxF_mixedcase_native implementation. Called by \code{morie_fwxF}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param f0 See Usage.
-#' @param t See Usage.
-#' @param h See Usage.
-#' @param w See Usage.
-#' @param r See Usage.
+#' @param f0 Numeric; combined arithmetically in the body.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param w Numeric; passed to \code{sqrt}.
+#' @param r Numeric; combined arithmetically in the body.
 #' @return The value of \code{ffm}, as built in the body.
 #' @export
 .fwxF_ffmc_day <- function(f0, t, h, w, r) {
@@ -73,13 +74,14 @@
 
 #' Duff Moisture Code, statements 165-210
 #'
-#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' A step of the fwxF_mixedcase_native implementation. Called by \code{morie_fwxF}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param p0 See Usage.
-#' @param t See Usage.
-#' @param h See Usage.
-#' @param r See Usage.
+#' @param p0 Numeric; passed to \code{log}.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param r Numeric; combined arithmetically in the body.
 #' @param month See Usage.
 #' @return A numeric value.
 #' @export
@@ -113,12 +115,13 @@
 
 #' Drought Code, statements 215-235
 #'
-#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' A step of the fwxF_mixedcase_native implementation. Called by \code{morie_fwxF}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param d0 See Usage.
-#' @param t See Usage.
-#' @param r See Usage.
+#' @param d0 Numeric; combined arithmetically in the body.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param r Numeric; combined arithmetically in the body.
 #' @param month See Usage.
 #' @return The value of \code{dc}, as built in the body.
 #' @export
@@ -148,13 +151,14 @@
 
 #' ISI, BUI, FWI, DSR, statements 235-280
 #'
-#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' A step of the fwxF_mixedcase_native implementation. Called by \code{morie_fwxF}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param ffm See Usage.
-#' @param dmc See Usage.
-#' @param dc See Usage.
-#' @param w See Usage.
+#' @param ffm Numeric; combined arithmetically in the body.
+#' @param dmc Numeric; combined arithmetically in the body.
+#' @param dc Numeric; combined arithmetically in the body.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .fwxF_isi_bui_fwi <- function(ffm, dmc, dc, w) {
@@ -192,14 +196,15 @@
 
 #' morie_fwxF
 #'
-#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' A step of the fwxF_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param temp See Usage.
 #' @param rh See Usage.
 #' @param wind See Usage.
 #' @param rain See Usage.
-#' @param month See Usage.
+#' @param month A vector; its length is taken.
 #' @param ffmc_init Defaults to \code{85}.
 #' @param dmc_init Defaults to \code{6}.
 #' @param dc_init Defaults to \code{15}.
@@ -263,7 +268,8 @@ fire_weather_index <- morie_fwxF
 
 #' .fwxF_cheatsheet
 #'
-#' Part of the fwxF_mixedcase_native implementation; see the file header
+#' A step of the fwxF_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @return A character value.

@@ -50,13 +50,13 @@ mk <- function(f) {
         1L, j - 1L)
     m
 }
-LAND <- mk(function(i, j) ((i * 5 + j * 2)%%10)/10)
-ICE <- mk(function(i, j) if (i >= 4) (((j * 3)%%4)/4) else 0)
-TG <- mk(function(i, j) if ((i * 3 + j)%%5 == 0) NA_real_ else (((i * 
-    7 + j * 3)%%11) - 5)/10)
-SG <- mk(function(i, j) if ((i + 2 * j)%%4 == 0) NA_real_ else (((i * 
-    4 + j * 9)%%13) - 6)/20)
-TV <- mk(function(i, j) 0.01 * (1 + (i + j)%%3))
-SV <- mk(function(i, j) 0.02 * (1 + (i * j)%%4))
+LAND <- mk(function(i, j) ((i * 5 + j * 2)\%\%10)/10)
+ICE <- mk(function(i, j) if (i >= 4) (((j * 3)\%\%4)/4) else 0)
+TG <- mk(function(i, j) if ((i * 3 + j)\%\%5 == 0) NA_real_ else (((i * 
+    7 + j * 3)\%\%11) - 5)/10)
+SG <- mk(function(i, j) if ((i + 2 * j)\%\%4 == 0) NA_real_ else (((i * 
+    4 + j * 9)\%\%13) - 6)/20)
+TV <- mk(function(i, j) 0.01 * (1 + (i + j)\%\%3))
+SV <- mk(function(i, j) 0.02 * (1 + (i * j)\%\%4))
 morie_hadcrut_blend(TG, SG, LAND, ICE, "hadcrut5", TV, SV)
 }

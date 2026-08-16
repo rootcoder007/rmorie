@@ -8,18 +8,18 @@
 .itrgrf_fit_arm(X, y, W, arm, rows, at_rows, n_trees, min_leaf, seed)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{W}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{W}{A vector; indexed elementwise.}
 \item{arm}{See Usage.}
-\item{rows}{See Usage.}
-\item{at_rows}{See Usage.}
+\item{rows}{A vector; indexed elementwise.}
+\item{at_rows}{A vector; its length is taken and its elements indexed.}
 \item{n_trees}{See Usage.}
-\item{min_leaf}{See Usage.}
+\item{min_leaf}{Numeric; combined arithmetically in the body.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the itrgrf_native implementation; see the file header for the source it follows.
+A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

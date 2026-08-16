@@ -17,8 +17,8 @@
 #' of two at least 2n, divided by n (biased, which is what keeps the
 #' sequence positive semi-definite).
 #'
-#' @param x See Usage.
-#' @param max_lag Defaults to \code{NULL}.
+#' @param x A vector; its length is taken.
+#' @param max_lag Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
 .morie_mcmc_autocov <- function(x, max_lag = NULL) {
@@ -35,10 +35,11 @@
 
 #' .morie_ess_from_chains
 #'
-#' Part of the mcmc_native implementation; see the file header for the
+#' A step of the mcmc_native implementation. Called by \code{morie_effective_sample_size_bayes}, \code{morie_effective_sample_size_bulk}, \code{morie_effective_sample_size_tail}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param chains See Usage.
+#' @param chains A count; the body uses it as \code{matrix(...)}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_ess_from_chains <- function(chains) {
@@ -75,10 +76,11 @@
 
 #' .morie_rank_normalize
 #'
-#' Part of the mcmc_native implementation; see the file header for the
+#' A step of the mcmc_native implementation. Called by \code{.morie_split_rhat}, \code{morie_effective_sample_size_bulk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
+#' @param C A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .morie_rank_normalize <- function(C) {
@@ -90,11 +92,12 @@
 
 #' .morie_split_rhat
 #'
-#' Part of the mcmc_native implementation; see the file header for the
+#' A step of the mcmc_native implementation. Called by \code{morie_effective_sample_size_bayes}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param chains See Usage.
-#' @param rank_normalized Defaults to \code{TRUE}.
+#' @param chains A count; the body uses it as \code{matrix(...)}.
+#' @param rank_normalized A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
 .morie_split_rhat <- function(chains, rank_normalized = TRUE) {

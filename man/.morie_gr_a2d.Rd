@@ -8,10 +8,10 @@
 .morie_gr_a2d(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_check_mdp}, \code{.morie_gr_mse_core} and 71 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

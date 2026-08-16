@@ -9,14 +9,14 @@ morie_tlonsl_online_super_learner(y, library, loss = "squared", burn_in = 5, lag
 }
 \arguments{
 \item{y}{See Usage.}
-\item{library}{See Usage.}
-\item{loss}{Defaults to \code{"squared"}.}
-\item{burn_in}{Defaults to \code{5}.}
-\item{lags}{Defaults to \code{1}.}
-\item{eta}{Defaults to \code{1}.}
+\item{library}{A vector; its length is taken and its elements indexed.}
+\item{loss}{Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{"squared"}.}
+\item{burn_in}{Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{5}.}
+\item{lags}{Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{1}.}
+\item{eta}{Passed to \code{morie_tlonsl_update_weights}. Defaults to \code{1}.}
 }
 \description{
-Part of the tlonsl_native implementation; see the file header for the source it follows.
+A step of the tlonsl_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{weights}, \code{risk}, \code{member_risks}, \code{best_single}, \code{best_member}, \code{weight_path}, \code{n_scored}, \code{method}, \code{note}.

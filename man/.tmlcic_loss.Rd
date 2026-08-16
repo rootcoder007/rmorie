@@ -8,16 +8,16 @@
 .tmlcic_loss(D, y, qa, groups, design, target, rows)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{y}{See Usage.}
-\item{qa}{See Usage.}
+\item{D}{A vector; indexed elementwise.}
+\item{y}{A vector; indexed elementwise.}
+\item{qa}{A vector; indexed elementwise.}
 \item{groups}{See Usage.}
-\item{design}{See Usage.}
-\item{target}{See Usage.}
-\item{rows}{See Usage.}
+\item{design}{Compared against \code{"unmatched"}.}
+\item{target}{Compared against \code{"PATE"}.}
+\item{rows}{A vector; its length is taken.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

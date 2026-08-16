@@ -8,10 +8,10 @@
 .morie_gr_psd(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.morie_gr_pvar}.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{morie_geron_credit_assignment}, \code{morie_geron_dcgan_generator}, \code{morie_geron_randomized_search_cv}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

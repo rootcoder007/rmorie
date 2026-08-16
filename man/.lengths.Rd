@@ -8,11 +8,11 @@
 .lengths(ls, d)
 }
 \arguments{
-\item{ls}{See Usage.}
-\item{d}{See Usage.}
+\item{ls}{A vector; its length is taken.}
+\item{d}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient}, \code{matern52}, \code{squared_exponential}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

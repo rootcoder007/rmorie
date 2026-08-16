@@ -35,11 +35,12 @@ FnDist <- function(f, g, t = NULL) {
 
 #' .fnDist_trapz
 #'
-#' Part of the fnDist implementation; see the file header for the source
+#' A step of the fnDist implementation. Called by \code{FnDist}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param t See Usage.
-#' @param v See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .fnDist_trapz <- function(t, v) {

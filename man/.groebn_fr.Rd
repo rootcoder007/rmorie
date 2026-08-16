@@ -8,8 +8,8 @@
 .groebn_fr(num, den = 1L)
 }
 \arguments{
-\item{num}{See Usage.}
-\item{den}{Defaults to \code{1L}.}
+\item{num}{Numeric; passed to \code{abs}.}
+\item{den}{Numeric; combined arithmetically in the body. Defaults to \code{1L}.}
 }
 \description{
 Exact rationals (Fraction-equivalent) ---------------------------------------------------------------------------

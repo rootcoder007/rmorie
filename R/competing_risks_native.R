@@ -82,13 +82,13 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
 #' Part of the competing_risks_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param t See Usage.
+#' @param t A vector; indexed elementwise.
 #' @param e See Usage.
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @param competing See Usage.
 #' @param Gfun See Usage.
-#' @param Gi See Usage.
-#' @param max_iter Defaults to \code{50L}.
+#' @param Gi Numeric; combined arithmetically in the body.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}.
 #' @export

@@ -127,7 +127,7 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' .sech_sha256 and .sech_hmac defined there; this file is intended to
 #' be sourced together with sechsh_native.R.
 #'
-#' @param key See Usage.
+#' @param key A vector; its length is taken.
 #' @param msg See Usage.
 #' @return The value of \code{.sech_sha256}.
 #' @export
@@ -142,7 +142,8 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 
 #' .kdf_hex
 #'
-#' Part of the seckdf_native implementation; see the file header for the
+#' A step of the seckdf_native implementation. Called by \code{morie_seckdf_hkdf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param bs See Usage.

@@ -8,11 +8,11 @@
 .s4_quantile7(x, p)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Nprphet}, \code{Winz}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

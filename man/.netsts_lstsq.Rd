@@ -8,12 +8,12 @@
 .netsts_lstsq(X, y, ridge)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the netsts_native implementation; see the file header for the source it follows.
+A step of the netsts_native implementation. Called by \code{morie_netsts}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{beta}, as built in the body.

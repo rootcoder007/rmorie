@@ -7,11 +7,12 @@
 
 #' .morie_swin_bias
 #'
-#' Part of the swinmw_native implementation; see the file header for the
+#' A step of the swinmw_native implementation. Called by \code{Swinmw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param tab See Usage.
+#' @param M Numeric; combined arithmetically in the body.
+#' @param tab A matrix; indexed by row and column.
 #' @return The value of \code{B}, as built in the body.
 #' @export
 .morie_swin_bias <- function(M, tab) {

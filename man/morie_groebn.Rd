@@ -9,9 +9,9 @@ morie_groebn(polys, order = "lex", prune = TRUE, reduced = TRUE)
 }
 \arguments{
 \item{polys}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
-\item{prune}{Defaults to \code{TRUE}.}
-\item{reduced}{Defaults to \code{TRUE}.}
+\item{order}{Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.}
+\item{prune}{Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.}
+\item{reduced}{Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.}
 }
 \description{
 Entry point ---------------------------------------------------------------------------

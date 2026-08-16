@@ -9,10 +9,10 @@ fold_in(query, model)
 }
 \arguments{
 \item{query}{See Usage.}
-\item{model}{See Usage.}
+\item{model}{A list; the body reads \code{$S}, \code{$T} from it.}
 }
 \description{
-Part of the lsa_native implementation; see the file header for the source it follows.
+A step of the lsa_native implementation. Called by \code{morie_lsa}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

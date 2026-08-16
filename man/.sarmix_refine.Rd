@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{negll}{See Usage.}
-\item{lo1}{See Usage.}
-\item{hi1}{See Usage.}
-\item{lo2}{See Usage.}
-\item{hi2}{See Usage.}
+\item{lo1}{Numeric; passed to \code{max}.}
+\item{hi1}{Numeric; passed to \code{min}.}
+\item{lo2}{Numeric; passed to \code{max}.}
+\item{hi2}{Numeric; passed to \code{min}.}
 }
 \description{
 language arms run the identical arithmetic -- a fixed 21x21 sweep, then 7 zooms each shrinking the box by ten -- so they land on the same numbers rather than on two different optimiser trajectories.

@@ -9,12 +9,12 @@ morie_fairRC(protected, measure = "rND", step = 10, normalize = TRUE)
 }
 \arguments{
 \item{protected}{See Usage.}
-\item{measure}{Defaults to \code{"rND"}.}
+\item{measure}{One of \code{"rKL"}, \code{"rND"}. Defaults to \code{"rND"}.}
 \item{step}{Defaults to \code{10}.}
 \item{normalize}{Defaults to \code{TRUE}.}
 }
 \description{
-Part of the fairRC_native implementation; see the file header for the source it follows.
+A step of the fairRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

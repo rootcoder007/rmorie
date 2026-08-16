@@ -8,10 +8,10 @@
 .morie_ml_acyclic(edges)
 }
 \arguments{
-\item{edges}{See Usage.}
+\item{edges}{Passed to \code{.morie_ml_nodes}.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{morie_bowarc}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

@@ -7,7 +7,7 @@
 Martcons(dh2, variances = NULL)
 }
 \arguments{
-\item{dh2}{Squared Hellinger distances, each in \link{0, 1}.}
+\item{dh2}{Squared Hellinger distances, each in [0, 1].}
 
 \item{variances}{Optional variances of the martingale differences.}
 }

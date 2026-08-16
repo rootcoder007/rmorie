@@ -8,11 +8,11 @@
 .tmlcen_W_mat(W, n)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{n}{See Usage.}
+\item{W}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}, \code{morie_tmle_censoring}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{Wm}, as built in the body.

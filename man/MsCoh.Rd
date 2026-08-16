@@ -8,10 +8,10 @@
 MsCoh(x, y, nperseg = NULL, overlap = 0.5)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Passed to \code{.morie_spx_chkv}.}
+\item{y}{Passed to \code{.morie_spx_chkv}.}
 \item{nperseg}{Defaults to \code{NULL}.}
-\item{overlap}{Defaults to \code{0.5}.}
+\item{overlap}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{
 2010, Ch. 5).  NOT in Schabenberger & Gotway -- a fixed-string search for "coherence" returns nothing.  AVERAGING IS NOT OPTIONAL: on a single segment the coherence of ANY two records is exactly 1, so fewer than two segments raises.

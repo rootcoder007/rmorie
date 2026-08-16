@@ -8,11 +8,11 @@
 .tmlcen_coerce_subject_list(x, n)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; indexed by row and column.}
 \item{n}{See Usage.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

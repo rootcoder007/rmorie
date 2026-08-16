@@ -8,18 +8,18 @@
 morie_tmlcic_influence_curve(y, A, q1, q0, qa, gA, rows, psi, target)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{q1}{See Usage.}
-\item{q0}{See Usage.}
-\item{qa}{See Usage.}
-\item{gA}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{A}{A vector; indexed elementwise.}
+\item{q1}{A vector; indexed elementwise.}
+\item{q0}{A vector; indexed elementwise.}
+\item{qa}{A vector; indexed elementwise.}
+\item{gA}{A vector; indexed elementwise.}
 \item{rows}{See Usage.}
-\item{psi}{See Usage.}
-\item{target}{See Usage.}
+\item{psi}{Numeric; combined arithmetically in the body.}
+\item{target}{Compared against \code{"SATE"}.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,12 +8,12 @@
 volume_render(sigma, colour, t)
 }
 \arguments{
-\item{sigma}{See Usage.}
-\item{colour}{See Usage.}
-\item{t}{See Usage.}
+\item{sigma}{Passed to \code{.nrfrad_vec}.}
+\item{colour}{Passed to \code{.nrfrad_mat}.}
+\item{t}{Passed to \code{.nrfrad_vec}.}
 }
 \description{
-Part of the nrfrad_native implementation; see the file header for the source it follows.
+A step of the nrfrad_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{colour}, \code{weights}, \code{accumulated_alpha}, \code{transmittance_final}, \code{note}.

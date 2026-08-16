@@ -8,10 +8,10 @@
 .s03chol(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.cfa_logdet}, \code{.s03cholsolve}, \code{Fevdc} and 14 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{L}, as built in the body.

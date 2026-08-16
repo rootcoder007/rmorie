@@ -6,7 +6,8 @@
 
 #' .gpflat
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gpbrier}, \code{.gpconf} and 17 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -16,10 +17,11 @@
 
 #' .gpmat
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpannsse}, \code{.gpblueblup}, \code{.gpbrier} and 18 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .gpmat <- function(A) {
@@ -34,8 +36,8 @@
 #'
 #' pseudo-inverse solution, as the Python arm does.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; passed to \code{solve}.
+#' @param b A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .gpsolve <- function(A, b) {
@@ -47,10 +49,11 @@
 
 #' .gppinv
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpinv}, \code{.gpsolve}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{dim}.
 #' @return The value of \code{%*%}.
 #' @export
 .gppinv <- function(A) {
@@ -62,10 +65,11 @@
 
 #' .gpinv
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gplmmloglik}, \code{.gpolsfit} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{solve}.
 #' @return The value of \code{.gppinv}.
 #' @export
 .gpinv <- function(A) {
@@ -81,7 +85,7 @@
 #'
 #' log|pivot| and so discards the sign).
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{.gpmat}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .gplogdet <- function(A) {
@@ -95,7 +99,8 @@
 #' Chapter 1: balanced one-way layout, eqs (1.2)-(1.5)
 #' -------------------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm002}, \code{Msm003}, \code{Msm005} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param groups See Usage.
@@ -129,11 +134,12 @@
 #' Chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14)
 #' -------------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y_true See Usage.
-#' @param y_pred See Usage.
+#' @param y_true Passed to \code{.gpflat}.
+#' @param y_pred Passed to \code{.gpflat}.
 #' @param n_classes Defaults to \code{NULL}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
@@ -147,10 +153,11 @@
 
 #' .gpclassmetrics
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param conf See Usage.
+#' @param conf A matrix; indexed by row and column.
 #' @param i See Usage.
 #' @return A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all}, \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
 #' @export
@@ -167,13 +174,14 @@
 
 #' .gpbrier
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm009}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param probs See Usage.
-#' @param y_true See Usage.
+#' @param probs Passed to \code{.gpmat}.
+#' @param y_true Passed to \code{.gpflat}.
 #' @param n_classes Defaults to \code{NULL}.
-#' @param halved Defaults to \code{FALSE}.
+#' @param halved A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .gpbrier <- function(probs, y_true, n_classes = NULL, halved = FALSE) {
@@ -190,11 +198,12 @@
 
 #' .gpmll
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm009}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param probs See Usage.
-#' @param y_true See Usage.
+#' @param probs Passed to \code{.gpmat}.
+#' @param y_true Passed to \code{.gpflat}.
 #' @param n_classes Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -207,12 +216,13 @@
 #' Chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML
 #' ---------------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gplmmloglik}, \code{.gpremlloglik} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Z See Usage.
-#' @param D See Usage.
-#' @param R Defaults to \code{NULL}.
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param D Passed to \code{.gpmat}.
+#' @param R Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @return A numeric value.
 #' @export
 .gplmmV <- function(Z, D, R = NULL) {
@@ -223,14 +233,15 @@
 
 #' .gpblueblup
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpmultitrait}, \code{Msm010}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param Sigma See Usage.
-#' @param R Defaults to \code{NULL}.
+#' @param X A matrix; passed to \code{t}.
+#' @param Z A matrix; passed to \code{t}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param Sigma Passed to \code{.gplmmV}.
+#' @param R Passed to \code{.gplmmV}.
 #' @return A list with \code{beta}, \code{u}.
 #' @export
 .gpblueblup <- function(X, Z, y, Sigma, R = NULL) {
@@ -246,15 +257,16 @@
 
 #' .gplmmloglik
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm010}, \code{Msm011}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param beta Defaults to \code{NULL}.
-#' @param R Defaults to \code{NULL}.
+#' @param X Passed to \code{.gpmat}.
+#' @param Z Passed to \code{.gplmmV}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param D Passed to \code{.gplmmV}.
+#' @param beta Optional; may be \code{NULL}. A matrix; passed to \code{\%*\%}.
+#' @param R Passed to \code{.gplmmV}.
 #' @return A list with \code{value}, \code{beta}.
 #' @export
 .gplmmloglik <- function(X, Z, y, D, beta = NULL, R = NULL) {
@@ -272,14 +284,15 @@
 
 #' .gpremlloglik
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm011}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param R Defaults to \code{NULL}.
+#' @param X Passed to \code{.gpmat}.
+#' @param Z Passed to \code{.gplmmV}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param D Passed to \code{.gplmmV}.
+#' @param R Passed to \code{.gplmmV}.
 #' @return A list with \code{value}, \code{beta}.
 #' @export
 .gpremlloglik <- function(X, Z, y, D, R = NULL) {
@@ -298,12 +311,13 @@
 #' Chapter 3: least squares, eq (3.1)
 #' -----------------------------------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm042}, \code{Msm332}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param add_intercept Defaults to \code{FALSE}.
+#' @param X Passed to \code{.gpmat}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
 #' @export
 .gpolsfit <- function(X, y, add_intercept = FALSE) {
@@ -328,26 +342,28 @@
 #' Chapter 5: Kronecker products and the multi-trait model, eq (5.5)
 #' -----
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpmultitrait}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param A Passed to \code{.gpmat}.
+#' @param B Passed to \code{.gpmat}.
 #' @return The value of \code{kronecker}.
 #' @export
 .gpkron <- function(A, B) kronecker(.gpmat(A), .gpmat(B))
 
 #' .gpmultitrait
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm026}, \code{Msm028}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param Z See Usage.
-#' @param G See Usage.
-#' @param Sigma_T See Usage.
-#' @param R_T See Usage.
-#' @param X Defaults to \code{NULL}.
+#' @param Y Passed to \code{.gpmat}.
+#' @param Z Passed to \code{.gpkron}.
+#' @param G Passed to \code{.gpkron}.
+#' @param Sigma_T Passed to \code{.gpkron}.
+#' @param R_T Passed to \code{.gpkron}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @return A list with \code{mu}, \code{beta}, \code{b}, \code{b_by_line}.
 #' @export
 .gpmultitrait <- function(Y, Z, G, Sigma_T, R_T, X = NULL) {
@@ -370,13 +386,14 @@
 #' Chapter 7: multinomial logistic model, eqs (7.6)-(7.10)
 #' ---------------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpmnloglik}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param beta0 See Usage.
-#' @param beta See Usage.
-#' @param baseline_last Defaults to \code{TRUE}.
+#' @param X Passed to \code{.gpmat}.
+#' @param beta0 Passed to \code{.gpflat}.
+#' @param beta Passed to \code{.gpmat}.
+#' @param baseline_last A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A matrix, from \code{t}.
 #' @export
 .gpmnprobs <- function(X, beta0, beta, baseline_last = TRUE) {
@@ -391,14 +408,15 @@
 
 #' .gpmnloglik
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gppenmnloglik}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param beta0 See Usage.
-#' @param beta See Usage.
-#' @param baseline_last Defaults to \code{TRUE}.
+#' @param X Passed to \code{.gpmnprobs}.
+#' @param y Passed to \code{.gpflat}.
+#' @param beta0 Passed to \code{.gpmnprobs}.
+#' @param beta Passed to \code{.gpmnprobs}.
+#' @param baseline_last Passed to \code{.gpmnprobs}. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
 .gpmnloglik <- function(X, y, beta0, beta, baseline_last = TRUE) {
@@ -409,16 +427,17 @@
 
 #' .gppenmnloglik
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm109}, \code{Msm115}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param beta0 See Usage.
-#' @param beta See Usage.
+#' @param X Passed to \code{.gpmnloglik}.
+#' @param y Passed to \code{.gpmnloglik}.
+#' @param beta0 Passed to \code{.gpmnloglik}.
+#' @param beta Passed to \code{.gpmnloglik}.
 #' @param lam See Usage.
 #' @param penalty Defaults to \code{"ridge"}.
-#' @param baseline_last Defaults to \code{TRUE}.
+#' @param baseline_last Passed to \code{.gpmnloglik}. Defaults to \code{TRUE}.
 #' @return A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.
 #' @export
 .gppenmnloglik <- function(X, y, beta0, beta, lam, penalty = "ridge",
@@ -434,11 +453,12 @@
 #' Chapter 10: ANN loss, eq (10.5)
 #' --------------------------------------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm249}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y_hat See Usage.
-#' @param y See Usage.
+#' @param y_hat Passed to \code{.gpmat}.
+#' @param y Passed to \code{.gpmat}.
 #' @return A numeric value.
 #' @export
 .gpannsse <- function(y_hat, y) 0.5 * sum((.gpmat(y_hat) - .gpmat(y))^2)
@@ -447,12 +467,13 @@
 #' Chapter 3: expected prediction error, p.80
 #' ---------------------------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm334}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param sigma2 See Usage.
-#' @param x_star See Usage.
-#' @param eigenvalues See Usage.
+#' @param x_star Passed to \code{.gpflat}.
+#' @param eigenvalues Passed to \code{.gpflat}.
 #' @return A numeric value.
 #' @export
 .gpepe <- function(sigma2, x_star, eigenvalues) {
@@ -465,7 +486,8 @@
 #' Chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4)
 #' -----------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm323}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param mu_pred See Usage.
@@ -500,7 +522,8 @@
 
 #' .gpzapcpredict
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm329}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param theta_hat See Usage.
@@ -513,11 +536,12 @@
 
 #' .gpztploglik
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, \code{Msm325}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y_positive See Usage.
-#' @param mu See Usage.
+#' @param y_positive Passed to \code{.gpflat}.
+#' @param mu Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .gpztploglik <- function(y_positive, mu) {
@@ -528,10 +552,11 @@
 
 #' .gpztpmle
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, \code{Msm325}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y_positive See Usage.
+#' @param y_positive Passed to \code{.gpflat}.
 #' @param tol Defaults to \code{1e-12}.
 #' @param max_iter Defaults to \code{200}.
 #' @return A numeric value.
@@ -554,12 +579,13 @@
 
 #' .gpzapbestsplit
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm325}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param x See Usage.
-#' @param candidates Defaults to \code{NULL}.
+#' @param y Passed to \code{.gpflat}.
+#' @param x Passed to \code{.gpflat}.
+#' @param candidates Optional; may be \code{NULL}. Passed to \code{.gpflat}.
 #' @return A list with \code{threshold}, \code{loglik}.
 #' @export
 .gpzapbestsplit <- function(y, x, candidates = NULL) {
@@ -579,15 +605,16 @@
 #' Chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5)
 #' ----------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm092}, \code{Msm098}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param X_E Defaults to \code{NULL}.
 #' @param X Defaults to \code{NULL}.
 #' @param X_EM Defaults to \code{NULL}.
-#' @param Z_L Defaults to \code{NULL}.
-#' @param L_g Defaults to \code{NULL}.
+#' @param Z_L Optional; may be \code{NULL}. Passed to \code{.gpmat}.
+#' @param L_g Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @return A list with \code{design}, \code{widths}, \code{n_columns}.
 #' @export
 .gpordlatent <- function(n, X_E = NULL, X = NULL, X_EM = NULL,
@@ -609,11 +636,12 @@
 #' Chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3)
 #' ---------
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gprkhsfitsq}, \code{Msm123}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param beta See Usage.
-#' @param K See Usage.
+#' @param beta Passed to \code{.gpflat}.
+#' @param K Passed to \code{.gpmat}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .gprkhsnorm <- function(beta, K) {
@@ -622,11 +650,12 @@
 
 #' .gprkhspredict
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{.gprkhsfitsq}, \code{Msm123}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param K_new See Usage.
-#' @param beta See Usage.
+#' @param K_new Passed to \code{.gpmat}.
+#' @param beta Passed to \code{.gpflat}.
 #' @param eta0 Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
@@ -635,11 +664,12 @@
 
 #' .gprkhsfitsq
 #'
-#' Part of the helpers_gp_core implementation; see the file header for
+#' A step of the helpers_gp_core implementation. Called by \code{Msm128}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param K See Usage.
-#' @param y See Usage.
+#' @param K Passed to \code{.gpmat}.
+#' @param y Passed to \code{.gpflat}.
 #' @param lam Defaults to \code{1}.
 #' @return A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals}, \code{loss}, \code{penalty}, \code{objective}.
 #' @export

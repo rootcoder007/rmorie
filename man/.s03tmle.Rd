@@ -8,9 +8,9 @@
 .s03tmle(y, D, X = NULL, trim = 0, link = "logit")
 }
 \arguments{
-\item{y}{See Usage.}
-\item{D}{See Usage.}
-\item{X}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.s03vec}.}
+\item{D}{Passed to \code{.s03vec}.}
+\item{X}{Passed to \code{.s03design}.}
 \item{trim}{Defaults to \code{0}.}
 \item{link}{Defaults to \code{"logit"}.}
 }

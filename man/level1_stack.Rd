@@ -8,14 +8,14 @@
 level1_stack(preds, y, cv = "kfold", k = 5, lam = NULL)
 }
 \arguments{
-\item{preds}{See Usage.}
-\item{y}{See Usage.}
-\item{cv}{Defaults to \code{"kfold"}.}
-\item{k}{Defaults to \code{5}.}
+\item{preds}{A vector; its length is taken.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{cv}{Passed to \code{.regmlm_folds}. Defaults to \code{"kfold"}.}
+\item{k}{Passed to \code{.regmlm_folds}. Defaults to \code{5}.}
 \item{lam}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{morie_regmlm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv}, \code{lam}, \code{n_predictors}.

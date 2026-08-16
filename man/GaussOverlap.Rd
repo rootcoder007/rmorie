@@ -10,8 +10,8 @@ GaussOverlap(m1, m2, C1, C2)
 \arguments{
 \item{m1}{See Usage.}
 \item{m2}{See Usage.}
-\item{C1}{See Usage.}
-\item{C2}{See Usage.}
+\item{C1}{A matrix; passed to \code{as.matrix}.}
+\item{C2}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor of Chernoff or Hellinger.  The book gives the KLD of eq (5.33) and the divergence of eqs (10.115)-(10.117), which is the symmetric sum of the two KLDs, and cites Swain for them.

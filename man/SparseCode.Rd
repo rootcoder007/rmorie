@@ -8,15 +8,15 @@
 SparseCode(x, D, sparsity = NULL, lam = NULL, maxiter = 2000, tol = 1e-10)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{D}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{D}{Passed to \code{.morie_bx_mat}.}
 \item{sparsity}{Defaults to \code{NULL}.}
 \item{lam}{Defaults to \code{NULL}.}
 \item{maxiter}{Defaults to \code{2000}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{energyratio}, \code{mode}, \code{method}.

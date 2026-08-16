@@ -11,10 +11,10 @@ morie_censoring_survival(times, censored, A = NULL, W = NULL, grid = NULL, by_co
 \item{times}{See Usage.}
 \item{censored}{See Usage.}
 \item{A}{Defaults to \code{NULL}.}
-\item{W}{Defaults to \code{NULL}.}
-\item{grid}{Defaults to \code{NULL}.}
+\item{W}{Passed to \code{.tmlcen_W_mat}.}
+\item{grid}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{by_covariate}{Defaults to \code{TRUE}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.}
 }
 \description{
 A, W)) Part of the tmlcen_native implementation; see the file header for the source it follows.

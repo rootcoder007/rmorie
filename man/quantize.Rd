@@ -8,11 +8,11 @@
 quantize(x, bins)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{bins}{See Usage.}
+\item{x}{Passed to \code{.chronos_vec}.}
+\item{bins}{A list; the body reads \code{$centers}, \code{$edges} from it.}
 }
 \description{
-Part of the chronos_native implementation; see the file header for the source it follows.
+A step of the chronos_native implementation. Called by \code{tokenize}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tokens}, \code{n_clipped}, \code{clipped_fraction}, \code{in_range}, \code{note}.

@@ -8,15 +8,15 @@
 .ot_sinkhorn_unbalanced(a, b, C, eps, lam, n_iter = 200L)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{C}{See Usage.}
-\item{eps}{See Usage.}
-\item{lam}{See Usage.}
+\item{a}{A vector; its length is taken and its elements indexed.}
+\item{b}{A vector; its length is taken and its elements indexed.}
+\item{C}{Numeric; combined arithmetically in the body.}
+\item{eps}{Numeric; combined arithmetically in the body.}
+\item{lam}{Numeric; combined arithmetically in the body.}
 \item{n_iter}{Defaults to \code{200L}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otunbal}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

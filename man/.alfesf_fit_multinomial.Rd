@@ -8,12 +8,12 @@
 .alfesf_fit_multinomial(X, y, n_bins, l2, iters, lr)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{n_bins}{See Usage.}
-\item{l2}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{n_bins}{A count; the body uses it as \code{seq_len(...)}.}
+\item{l2}{Numeric; combined arithmetically in the body.}
 \item{iters}{See Usage.}
-\item{lr}{See Usage.}
+\item{lr}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Deterministic: zero init, fixed step, fixed iteration count, so both language arms walk the same path. No line search -- a search that branches on a floating-point comparison is exactly what makes two arms disagree.

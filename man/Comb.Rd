@@ -10,7 +10,7 @@ Comb(period_samples, fs = 1000, z = NULL)
 \arguments{
 \item{period_samples}{See Usage.}
 \item{fs}{Defaults to \code{1000}.}
-\item{z}{Defaults to \code{NULL}.}
+\item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{
 so it notches DC and every harmonic of fs/N at once -- which is what powerline interference is.  The zero at DC is not optional, so a comb removes the mean along with the interference.

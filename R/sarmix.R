@@ -11,10 +11,10 @@
 #' same numbers rather than on two different optimiser trajectories.
 #'
 #' @param negll See Usage.
-#' @param lo1 See Usage.
-#' @param hi1 See Usage.
-#' @param lo2 See Usage.
-#' @param hi2 See Usage.
+#' @param lo1 Numeric; passed to \code{max}.
+#' @param hi1 Numeric; passed to \code{min}.
+#' @param lo2 Numeric; passed to \code{max}.
+#' @param hi2 Numeric; passed to \code{min}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .sarmix_refine <- function(negll, lo1, hi1, lo2, hi2) {

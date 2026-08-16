@@ -8,7 +8,7 @@
 .schab_bym_identifiability_note()
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spbym}. See the file header for the source the module follows.
 }
 \value{
 A character value.

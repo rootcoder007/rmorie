@@ -9,11 +9,11 @@ MuapModel(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3, amp_uV = 8, width
 }
 \arguments{
 \item{t}{See Usage.}
-\item{n_fibers}{Defaults to \code{25}.}
-\item{conduction_vel}{Defaults to \code{4}.}
-\item{spread_mm}{Defaults to \code{3}.}
-\item{amp_uV}{Defaults to \code{8}.}
-\item{width_ms}{Defaults to \code{1}.}
+\item{n_fibers}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.}
+\item{conduction_vel}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
+\item{spread_mm}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
+\item{amp_uV}{Numeric; combined arithmetically in the body. Defaults to \code{8}.}
+\item{width_ms}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{phases}{Defaults to \code{3}.}
 }
 \description{

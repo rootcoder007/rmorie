@@ -16,7 +16,7 @@ morie_samdec(prompt_tokens, image_tokens, grid_shape, n_blocks = 2, upsample_fac
 \item{output_index}{Defaults to \code{0}.}
 }
 \description{
-Part of the samdec_native implementation; see the file header for the source it follows.
+A step of the samdec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{decode_mask}.

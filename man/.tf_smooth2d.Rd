@@ -8,12 +8,12 @@
 .tf_smooth2d(tfd, tlen, flen)
 }
 \arguments{
-\item{tfd}{See Usage.}
+\item{tfd}{A matrix; indexed by row and column.}
 \item{tlen}{See Usage.}
 \item{flen}{See Usage.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{Gtfd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

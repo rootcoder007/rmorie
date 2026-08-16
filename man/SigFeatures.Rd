@@ -13,7 +13,7 @@ SigFeatures(x, fs = 1, threshold = 0)
 \item{threshold}{Defaults to \code{0}.}
 }
 \description{
-computed by the function that owns its definition so the vector cannot disagree with the individual measures.  threshold defaults to 0 (every direction change counts); pass the book\\'s 100 microvolts for a real EMG record or the count is dominated by noise.
+computed by the function that owns its definition so the vector cannot disagree with the individual measures.  threshold defaults to 0 (every direction change counts); pass the book\'s 100 microvolts for a real EMG record or the count is dominated by noise.
 }
 \value{
 A list with \code{mean}, \code{sd}, \code{rms}, \code{zero_crossings}, \code{zcr}, \code{turns}, \code{activity}, \code{mobility}, \code{form_factor}, \code{spectral_centroid}, \code{spectral_bandwidth}, \code{spectral_entropy}, \code{n}, \code{fs}, \code{method}.

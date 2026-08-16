@@ -8,12 +8,12 @@
 cv_risk(y, Z, loss = "l2")
 }
 \arguments{
-\item{y}{See Usage.}
-\item{Z}{See Usage.}
-\item{loss}{Defaults to \code{"l2"}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{Z}{A matrix; indexed by row and column.}
+\item{loss}{One of \code{"l2"}, \code{"nll"}. Defaults to \code{"l2"}.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{super_learner}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

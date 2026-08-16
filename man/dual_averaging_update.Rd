@@ -8,14 +8,14 @@
 dual_averaging_update(t, h_bar, log_eps_bar, h_new, mu, gamma = 0.05, t0 = 10, kappa = 0.75)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{h_bar}{See Usage.}
-\item{log_eps_bar}{See Usage.}
-\item{h_new}{See Usage.}
-\item{mu}{See Usage.}
-\item{gamma}{Defaults to \code{0.05}.}
-\item{t0}{Defaults to \code{10}.}
-\item{kappa}{Defaults to \code{0.75}.}
+\item{t}{Numeric; passed to \code{sqrt}.}
+\item{h_bar}{Numeric; combined arithmetically in the body.}
+\item{log_eps_bar}{Numeric; combined arithmetically in the body.}
+\item{h_new}{Numeric; combined arithmetically in the body.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
+\item{t0}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
+\item{kappa}{Numeric; combined arithmetically in the body. Defaults to \code{0.75}.}
 }
 \description{
 for the log step size. Returns the new step size and the running averages carried between calls.

@@ -8,14 +8,14 @@
 .schab_simulate_unconditional(mean, cov, method = "cholesky", seed = 0, stream = 0)
 }
 \arguments{
-\item{mean}{See Usage.}
-\item{cov}{See Usage.}
+\item{mean}{A vector; its length is taken.}
+\item{cov}{A matrix; passed to \code{dim}.}
 \item{method}{Defaults to \code{"cholesky"}.}
-\item{seed}{Defaults to \code{0}.}
-\item{stream}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.morie_random_normal}. Defaults to \code{0}.}
+\item{stream}{Passed to \code{.morie_random_normal}. Defaults to \code{0}.}
 }
 \description{
-Part of the schab_sim_shared implementation; see the file header for the source it follows.
+A step of the schab_sim_shared implementation. Called by \code{.schab_simulate_conditional}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

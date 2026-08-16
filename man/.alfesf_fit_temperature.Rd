@@ -8,13 +8,13 @@
 .alfesf_fit_temperature(L, y, iters = 200L, lr = 0.5)
 }
 \arguments{
-\item{L}{See Usage.}
-\item{y}{See Usage.}
+\item{L}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
 \item{iters}{Defaults to \code{200L}.}
-\item{lr}{Defaults to \code{0.5}.}
+\item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{
-Part of the alfesf_native implementation; see the file header for the source it follows.
+A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

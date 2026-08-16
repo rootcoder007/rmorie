@@ -8,11 +8,11 @@
 .morie_sb_pairs(coords, z)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
 \item{z}{See Usage.}
 }
 \description{
-Part of the schaben_native implementation; see the file header for the source it follows.
+A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins}, \code{morie_matheron_estimator}, \code{morie_variogram_composite_likelihood}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{h}, \code{d}.

@@ -74,12 +74,13 @@
 
 #' .tlsieve_cause_specific_hazard
 #'
-#' Part of the tlsieve_native implementation; see the file header for
+#' A step of the tlsieve_native implementation. Called by \code{.tlsieve_aalen_johansen}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param time See Usage.
 #' @param event_type See Usage.
-#' @param times See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
 #' @param weights Defaults to \code{NULL}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}.
 #' @export
@@ -113,11 +114,12 @@
 
 #' .tlsieve_cumulative_incidence
 #'
-#' Part of the tlsieve_native implementation; see the file header for
+#' A step of the tlsieve_native implementation. Called by \code{.tlsieve_aalen_johansen}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param hazards See Usage.
-#' @param times See Usage.
+#' @param hazards A vector; indexed elementwise.
+#' @param times A vector; its length is taken.
 #' @return A list with \code{F}, \code{survival}, \code{times}, \code{types}, \code{closure}, \code{note}.
 #' @export
 .tlsieve_cumulative_incidence <- function(hazards, times) {
@@ -158,13 +160,14 @@
 
 #' .tlsieve_aalen_johansen
 #'
-#' Part of the tlsieve_native implementation; see the file header for
+#' A step of the tlsieve_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param time See Usage.
-#' @param event_type See Usage.
-#' @param times See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param time Passed to \code{.tlsieve_cause_specific_hazard}.
+#' @param event_type Passed to \code{.tlsieve_cause_specific_hazard}.
+#' @param times Passed to \code{.tlsieve_cause_specific_hazard}.
+#' @param weights Passed to \code{.tlsieve_cause_specific_hazard}.
 #' @return A list with \code{estimate}, \code{F}, \code{survival}, \code{types}, \code{times}, \code{closure}, \code{method}, \code{caveat}.
 #' @export
 .tlsieve_aalen_johansen <- function(time, event_type, times, weights = NULL) {
@@ -180,7 +183,8 @@
 
 #' .tlsieve_vaccine_efficacy
 #'
-#' Part of the tlsieve_native implementation; see the file header for
+#' A step of the tlsieve_native implementation. Called by \code{morie_tlsieve}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param F_vaccine See Usage.
@@ -203,13 +207,14 @@
 
 #' morie_tlsieve
 #'
-#' Part of the tlsieve_native implementation; see the file header for
+#' A step of the tlsieve_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param F_vac_matched See Usage.
-#' @param F_pla_matched See Usage.
-#' @param F_vac_mismatched See Usage.
-#' @param F_pla_mismatched See Usage.
+#' @param F_vac_matched Passed to \code{.tlsieve_vaccine_efficacy}.
+#' @param F_pla_matched Passed to \code{.tlsieve_vaccine_efficacy}.
+#' @param F_vac_mismatched Passed to \code{.tlsieve_vaccine_efficacy}.
+#' @param F_pla_mismatched Passed to \code{.tlsieve_vaccine_efficacy}.
 #' @return A list with \code{estimate}, \code{sieve_effect}, \code{ve_matched}, \code{ve_mismatched}, \code{method}, \code{note}.
 #' @export
 morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
@@ -229,7 +234,8 @@ morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
 
 #' .tlsieve_cheatsheet
 #'
-#' Part of the tlsieve_native implementation; see the file header for
+#' A step of the tlsieve_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

@@ -8,13 +8,13 @@
 .scvelo_residual(u, s, alpha, beta, gamma, t_switch, grid = 200)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{s}{See Usage.}
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
-\item{t_switch}{See Usage.}
-\item{grid}{Defaults to \code{200}.}
+\item{u}{Passed to \code{morie_assign_latent_time}.}
+\item{s}{Passed to \code{morie_assign_latent_time}.}
+\item{alpha}{Passed to \code{morie_assign_latent_time}.}
+\item{beta}{Passed to \code{morie_assign_latent_time}.}
+\item{gamma}{Passed to \code{morie_assign_latent_time}.}
+\item{t_switch}{Passed to \code{morie_assign_latent_time}.}
+\item{grid}{Passed to \code{morie_assign_latent_time}. Defaults to \code{200}.}
 }
 \description{
 latent assignment as a side product.

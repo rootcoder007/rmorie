@@ -200,12 +200,13 @@ morie_pmpfit_cheatsheet <- function() {
 # Internal: ratio-of-gammas beta, same RNG consumption as Python.
 #' Internal: ratio-of-gammas beta, same RNG consumption as Python
 #'
-#' Part of the pmpfit_native implementation; see the file header for the
+#' A step of the pmpfit_native implementation. Called by \code{morie_pmpfit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param e Passed to \code{.ghc_gamma}.
+#' @param a Passed to \code{.ghc_gamma}.
+#' @param b Passed to \code{.ghc_gamma}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ghc_beta <- function(e, a, b) {
@@ -219,11 +220,12 @@ morie_pmpfit_cheatsheet <- function() {
 #' Internal: Marsaglia-Tsang gamma with Ahrens-Dieter boost for shape <
 #' 1
 #'
-#' Part of the pmpfit_native implementation; see the file header for the
+#' A step of the pmpfit_native implementation. Called by \code{.ghc_beta}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param shape See Usage.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param shape Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
 #' @export
 .ghc_gamma <- function(e, shape) {

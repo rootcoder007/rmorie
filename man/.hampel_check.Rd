@@ -14,7 +14,7 @@
 \item{who}{See Usage.}
 }
 \description{
-Part of the hampw implementation; see the file header for the source it follows.
+A step of the hampw implementation. Called by \code{Hampel}, \code{Hampw}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

@@ -8,16 +8,16 @@
 .schab_gwr_criterion(y, X, distances, bandwidth, kernel = "gaussian", adaptive = FALSE, criterion = "cv")
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{distances}{See Usage.}
-\item{bandwidth}{See Usage.}
-\item{kernel}{Defaults to \code{"gaussian"}.}
-\item{adaptive}{Defaults to \code{FALSE}.}
-\item{criterion}{Defaults to \code{"cv"}.}
+\item{y}{Passed to \code{.schab_cv_score}.}
+\item{X}{Passed to \code{.schab_cv_score}.}
+\item{distances}{Passed to \code{.schab_cv_score}.}
+\item{bandwidth}{Passed to \code{.schab_cv_score}.}
+\item{kernel}{Passed to \code{.schab_cv_score}. Defaults to \code{"gaussian"}.}
+\item{adaptive}{Passed to \code{.schab_cv_score}. Defaults to \code{FALSE}.}
+\item{criterion}{One of \code{"aic"}, \code{"aicc"}, \code{"cv"}. Defaults to \code{"cv"}.}
 }
 \description{
-Part of the schab_gwr_shared implementation; see the file header for the source it follows.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_select_bandwidth}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

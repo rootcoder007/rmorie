@@ -14,11 +14,11 @@ morie_prtcl_particle_filter(y, n.particles, init, step, loglik, seed = 0L, resam
 \item{step}{See Usage.}
 \item{loglik}{See Usage.}
 \item{seed}{Defaults to \code{0L}.}
-\item{resample.threshold}{Defaults to \code{1}.}
-\item{systematic}{Defaults to \code{TRUE}.}
+\item{resample.threshold}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{systematic}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the prtcl_native implementation; see the file header for the source it follows.
+A step of the prtcl_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{filtered.mean}, \code{loglik}, \code{ess}, \code{min.ess}, \code{resampled}, \code{n.particles}, \code{n.obs}, \code{systematic}, \code{particles}, \code{method}.

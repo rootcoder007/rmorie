@@ -8,13 +8,13 @@
 .morie_bvt_cdf(x, y, rho, nu)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{rho}{See Usage.}
-\item{nu}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{rho}{Passed to \code{.morie_bvn_cdf}.}
+\item{nu}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the copula_native implementation; see the file header for the source it follows.
+A step of the copula_native implementation. Called by \code{morie_copula_cdf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

@@ -150,10 +150,11 @@ morie_flexrd_energy <- function(rec, lig, rec_r, lig_r, scale = 1,
 
 #' .flexrd_grid
 #'
-#' Part of the flexrd_native implementation; see the file header for the
+#' A step of the flexrd_native implementation. Called by \code{morie_flexrd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nchi See Usage.
+#' @param nchi A count; the body uses it as \code{seq_len(...)}.
 #' @param angles See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export

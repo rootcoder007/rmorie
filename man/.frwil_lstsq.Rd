@@ -8,12 +8,12 @@
 .frwil_lstsq(M, y, ridge = 0)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{y}{See Usage.}
+\item{M}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
 \item{ridge}{Defaults to \code{0}.}
 }
 \description{
-Part of the frwil_native implementation; see the file header for the source it follows.
+A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

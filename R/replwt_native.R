@@ -51,7 +51,8 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' .replwt_design
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param weights See Usage.
@@ -133,7 +134,8 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' .replwt_hadamard
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. Called by \code{.replwt_brr_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param order See Usage.
@@ -154,11 +156,12 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' .replwt_psu_totals
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param values See Usage.
+#' @param d A list; the body reads \code{$psu_order}, \code{$psu_units}, \code{$weights} from it.
+#' @param values A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .replwt_psu_totals <- function(d, values) {
@@ -172,11 +175,12 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' .replwt_jackknife_weights
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. Called by \code{morie_replwt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param method Defaults to \code{"jkn"}.
+#' @param d A list; the body reads \code{$n}, \code{$psu_order}, \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
+#' @param method One of \code{"jk1"}, \code{"jkn"}. Defaults to \code{"jkn"}.
 #' @return A list with \code{weights}, \code{dropped}, \code{scale}, \code{method}.
 #' @export
 .replwt_jackknife_weights <- function(d, method = "jkn") {
@@ -235,10 +239,11 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' .replwt_brr_weights
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. Called by \code{morie_replwt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
+#' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
 #' @param fay Defaults to \code{0}.
 #' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{hadamard_order}, \code{fay}, \code{method}.
 #' @export
@@ -297,11 +302,12 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' .replwt_bootstrap_weights
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. Called by \code{morie_replwt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param R Defaults to \code{200}.
+#' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
+#' @param R A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param seed Defaults to \code{1}.
 #' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed}, \code{method}.
 #' @export
@@ -345,12 +351,13 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' .replwt_replicate_variance
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param estimator See Usage.
-#' @param d See Usage.
-#' @param rep See Usage.
+#' @param d A list; the body reads \code{$weights} from it.
+#' @param rep A list; the body reads \code{$method}, \code{$scale}, \code{$weights} from it.
 #' @param values Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error}, \code{replicates}, \code{n_replicates}, \code{method}.
 #' @export
@@ -380,14 +387,15 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
 #' morie_replwt
 #'
-#' Part of the replwt_native implementation; see the file header for the
+#' A step of the replwt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param method Defaults to \code{"jkn"}.
-#' @param R Defaults to \code{200}.
-#' @param fay Defaults to \code{0}.
-#' @param seed Defaults to \code{1}.
+#' @param d Passed to \code{.replwt_jackknife_weights}.
+#' @param method One of \code{"brr"}, \code{"fay"}, \code{"jk1"}, \code{"jkn"}. Defaults to \code{"jkn"}.
+#' @param R Passed to \code{.replwt_bootstrap_weights}. Defaults to \code{200}.
+#' @param fay A flag; the body branches on it. Defaults to \code{0}.
+#' @param seed Passed to \code{.replwt_bootstrap_weights}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{weights}, \code{scale}, \code{n_replicates}, \code{method}, \code{dropped}, \code{hadamard_order}, \code{fay}, \code{seed}.
 #' @export
 morie_replwt <- function(d, method = "jkn", R = 200, fay = 0.0, seed = 1) {

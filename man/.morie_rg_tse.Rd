@@ -8,11 +8,11 @@
 .morie_rg_tse(seg, p)
 }
 \arguments{
-\item{seg}{See Usage.}
-\item{p}{See Usage.}
+\item{seg}{A vector; its length is taken and its elements indexed.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+A step of the rangayyan_ccf implementation. Called by \code{.morie_rg_H}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

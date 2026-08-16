@@ -8,11 +8,11 @@
 .potM_neg_loglik(par, z)
 }
 \arguments{
-\item{par}{See Usage.}
-\item{z}{See Usage.}
+\item{par}{A vector; indexed elementwise.}
+\item{z}{Passed to \code{.potM_loglik}.}
 }
 \description{
-Part of the potM_mixedcase_native implementation; see the file header for the source it follows.
+A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

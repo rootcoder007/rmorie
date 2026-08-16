@@ -14,7 +14,7 @@ alignment_error(features, box, out_size = 2L, stride = 1)
 \item{stride}{Defaults to \code{1}.}
 }
 \description{
-Part of the masrcn_native implementation; see the file header for the source it follows.
+A step of the masrcn_native implementation. Called by \code{morie_masrcn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{feature_shift}, \code{input_pixel_shift}, \code{stride}, \code{note}.

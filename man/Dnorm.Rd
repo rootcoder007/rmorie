@@ -8,13 +8,13 @@
 Dnorm(x, mean = 0, sd = 1, log = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{mean}{Defaults to \code{0}.}
-\item{sd}{Defaults to \code{1}.}
-\item{log}{Defaults to \code{FALSE}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{mean}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{sd}{Numeric; passed to \code{log}. Defaults to \code{1}.}
+\item{log}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

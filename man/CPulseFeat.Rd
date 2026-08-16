@@ -8,10 +8,10 @@
 CPulseFeat(cp, fs, qrs, hr = NULL)
 }
 \arguments{
-\item{cp}{See Usage.}
-\item{fs}{See Usage.}
+\item{cp}{A vector; its length is taken.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{qrs}{See Usage.}
-\item{hr}{Defaults to \code{NULL}.}
+\item{hr}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
 intervals of Section 4.9.  PEPC = PEP + 0.4 HR and ETC = ET + 1.6 HR are the rate corrections that make the intervals comparable between subjects.

@@ -8,8 +8,8 @@
 Qda(X, y, query, priors = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A vector; its length is taken.}
 \item{query}{See Usage.}
 \item{priors}{Defaults to \code{NULL}.}
 }

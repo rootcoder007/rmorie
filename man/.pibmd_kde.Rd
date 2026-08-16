@@ -8,12 +8,12 @@
 .pibmd_kde(x, sample_, h)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{sample_}{See Usage.}
-\item{h}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{sample_}{A vector; its length is taken.}
+\item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the pibmd_native implementation; see the file header for the source it follows.
+A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

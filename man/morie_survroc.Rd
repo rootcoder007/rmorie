@@ -8,14 +8,14 @@
 morie_survroc(times, events, marker, t, route = "km")
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{marker}{See Usage.}
-\item{t}{See Usage.}
-\item{route}{Defaults to \code{"km"}.}
+\item{times}{Passed to \code{.survroc_clean}.}
+\item{events}{Passed to \code{.survroc_clean}.}
+\item{marker}{Passed to \code{.survroc_clean}.}
+\item{t}{Passed to \code{morie_survroc_roc_at}.}
+\item{route}{Passed to \code{morie_survroc_roc_at}. Defaults to \code{"km"}.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{auc}, \code{roc}, \code{horizon}, \code{route}, \code{n}, \code{n_events_by_t}, \code{n_at_risk_after_t}, \code{n_censored_before_t}, \code{survival_at_t}, \code{out_of_range}, \code{method}.

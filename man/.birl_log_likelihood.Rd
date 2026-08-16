@@ -8,12 +8,12 @@
 .birl_log_likelihood(Q, observations, alpha = 1)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{observations}{See Usage.}
-\item{alpha}{Defaults to \code{1}.}
+\item{Q}{A matrix; indexed by row and column.}
+\item{observations}{A vector; its length is taken.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the birl_native implementation; see the file header for the source it follows.
+A step of the birl_native implementation. Called by \code{policy_walk}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{total}, as built in the body.

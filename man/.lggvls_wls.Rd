@@ -8,12 +8,12 @@
 .lggvls_wls(X, y, w)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{X}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; its length is taken.}
+\item{w}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. Called by \code{morie_lggvls}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}, \code{se}, \code{vcov}, \code{sigma2}.

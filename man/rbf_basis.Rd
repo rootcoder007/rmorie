@@ -8,12 +8,12 @@
 rbf_basis(x, n_centres = 5, width = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.polkrn_vec}.}
 \item{n_centres}{Defaults to \code{5}.}
 \item{width}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the polkrn_native implementation; see the file header for the source it follows.
+A step of the polkrn_native implementation. Called by \code{morie_polkrn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{centres}, \code{width}.

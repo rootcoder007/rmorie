@@ -8,12 +8,12 @@
 .morie_lda_topic_words(beta, n_top = 5, vocab = NULL)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{A matrix; passed to \code{as.matrix}.}
 \item{n_top}{Defaults to \code{5}.}
-\item{vocab}{Defaults to \code{NULL}.}
+\item{vocab}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the lda_native implementation; see the file header for the source it follows.
+A step of the lda_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

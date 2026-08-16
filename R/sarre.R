@@ -10,12 +10,12 @@
 #' non-positive-variance and non-positive-determinant guards are all
 #' directly unit-testable.
 #'
-#' @param lam See Usage.
-#' @param I See Usage.
-#' @param W See Usage.
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param n See Usage.
+#' @param lam Numeric; combined arithmetically in the body.
+#' @param I Numeric; combined arithmetically in the body.
+#' @param W Numeric; combined arithmetically in the body.
+#' @param X A matrix; passed to \code{\%*\%}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .sarre_negll <- function(lam, I, W, X, y, n) {

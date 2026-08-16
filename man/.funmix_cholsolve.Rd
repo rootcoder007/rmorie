@@ -8,11 +8,11 @@
 .funmix_cholsolve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{chol}.}
 \item{b}{See Usage.}
 }
 \description{
-Part of the funmix_native implementation; see the file header for the source it follows.
+A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -8,11 +8,11 @@
 .causrddc_density_at_zero(x, h = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{Defaults to \code{NULL}.}
+\item{x}{A vector; its length is taken.}
+\item{h}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the causrddc_native implementation; see the file header for the source it follows.
+A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_bandwidth}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 .lyapun_ols_slope(xs, ys)
 }
 \arguments{
-\item{xs}{See Usage.}
-\item{ys}{See Usage.}
+\item{xs}{A vector; its length is taken and its elements indexed.}
+\item{ys}{A vector; indexed elementwise.}
 }
 \description{
-Part of the lyapun_native implementation; see the file header for the source it follows.
+A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{slope}, \code{intercept}, \code{se}, \code{r2}.

@@ -3,7 +3,7 @@
 % the formals.
 \name{RlsApriori}
 \alias{RlsApriori}
-\title{Eq. (3.225): alpha(n) = x(n) - w\\'(n-1) r(n).  The A PRIORI error,}
+\title{Eq. (3.225): alpha(n) = x(n) - w\'(n-1) r(n).  The A PRIORI error,}
 \usage{
 RlsApriori(x, rvec, w_prev)
 }

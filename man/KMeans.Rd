@@ -8,11 +8,11 @@
 KMeans(X, k, maxiter = 100, tol = 1e-10, init = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{k}{See Usage.}
 \item{maxiter}{Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-10}.}
-\item{init}{Defaults to \code{NULL}.}
+\item{init}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
 terminates -- at a LOCAL minimum that depends on where the centroids started.  The method is unsupervised: it finds groups, and whether those groups are the diagnostic classes is a question it cannot answer.  Starting centroids are the first k distinct patterns, so the result is reproducible; random starts would return different clusterings from the same call.

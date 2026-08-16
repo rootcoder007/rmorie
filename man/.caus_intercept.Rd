@@ -8,10 +8,10 @@
 .caus_intercept(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the caus_native implementation; see the file header for the source it follows.
+A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cbind}.

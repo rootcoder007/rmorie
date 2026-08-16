@@ -61,10 +61,11 @@
 
 #' .tmlcll_mat
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}, \code{morie_clpm_coefficients}, \code{morie_tmle_cross_lagged} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
 #' @export
 .tmlcll_mat <- function(X) {
@@ -102,7 +103,8 @@
 
 #' .tmlcll_vec
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}, \code{morie_tmle_cross_lagged}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -117,13 +119,14 @@
 
 #' .tmlcll_wls
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
-#' @param ridge See Usage.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A vector; its length is taken.
+#' @param w Numeric; combined arithmetically in the body.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}.
 #' @export
 .tmlcll_wls <- function(X, y, w, ridge) {
@@ -141,11 +144,12 @@
 
 #' .tmlcll_design
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param n See Usage.
+#' @param W A matrix; passed to \code{ncol}.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{des}, as built in the body.
 #' @export
 .tmlcll_design <- function(W, n) {
@@ -158,11 +162,12 @@
 
 #' .tmlcll_logit_irls
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param des See Usage.
-#' @param a See Usage.
+#' @param des A matrix; passed to \code{nrow}.
+#' @param a Numeric; combined arithmetically in the body.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .tmlcll_logit_irls <- function(des, a) {
@@ -191,11 +196,12 @@
 
 #' .tmlcll_ols
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{morie_clpm_coefficients}, \code{morie_tmle_cross_lagged}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X Passed to \code{.tmlcll_mat}.
+#' @param y Passed to \code{.tmlcll_vec}.
 #' @return The value of \code{$}.
 #' @export
 .tmlcll_ols <- function(X, y) {
@@ -208,10 +214,11 @@
 
 #' .tmlcll_logit
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tmlcll_logit <- function(p) {
@@ -220,10 +227,11 @@
 
 #' .tmlcll_expit
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
 .tmlcll_expit <- function(x) {
@@ -234,11 +242,12 @@
 
 #' morie_clpm_coefficients
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{morie_ri_clpm_coefficients}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
+#' @param X Passed to \code{.tmlcll_mat}.
+#' @param Y Passed to \code{.tmlcll_mat}.
 #' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y}, \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{parametrization}, \code{caveat}.
 #' @export
 morie_clpm_coefficients <- function(X, Y) {
@@ -285,10 +294,11 @@ morie_clpm_coefficients <- function(X, Y) {
 
 #' morie_within_between_decomposition
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. Called by \code{morie_ri_clpm_coefficients}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P See Usage.
+#' @param P Passed to \code{.tmlcll_mat}.
 #' @return A list with \code{person_means}, \code{within}, \code{between_variance}, \code{within_variance}.
 #' @export
 morie_within_between_decomposition <- function(P) {
@@ -308,11 +318,12 @@ morie_within_between_decomposition <- function(P) {
 
 #' morie_ri_clpm_coefficients
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
+#' @param X Passed to \code{morie_within_between_decomposition}.
+#' @param Y Passed to \code{morie_within_between_decomposition}.
 #' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y}, \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{between_variance_x}, \code{between_variance_y}, \code{parametrization}, \code{note}.
 #' @export
 morie_ri_clpm_coefficients <- function(X, Y) {
@@ -335,15 +346,16 @@ morie_ri_clpm_coefficients <- function(X, Y) {
 
 #' morie_tmle_cross_lagged
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param X See Usage.
-#' @param time See Usage.
-#' @param g Defaults to \code{NULL}.
-#' @param bounds Defaults to \code{NULL}.
+#' @param y Passed to \code{.tmlcll_vec}.
+#' @param D Passed to \code{.tmlcll_vec}.
+#' @param X Passed to \code{.tmlcll_mat}.
+#' @param time Passed to \code{.tmlcll_vec}.
+#' @param g Optional; may be \code{NULL}. Passed to \code{.tmlcll_vec}.
+#' @param bounds Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{n_waves}, \code{method}, \code{note}.
 #' @export
 morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
@@ -433,7 +445,8 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
 
 #' .tmlcll_morie_cheatsheet
 #'
-#' Part of the tmlcll_native implementation; see the file header for the
+#' A step of the tmlcll_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

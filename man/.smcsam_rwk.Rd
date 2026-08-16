@@ -3,7 +3,7 @@
 % the formals.
 \name{.smcsam_rwk}
 \alias{.smcsam_rwk}
-\title{A Metropolis random walk that, just like the Python arm\\\'s}
+\title{A Metropolis random walk that, just like the Python arm\\'s}
 \usage{
 .smcsam_rwk(scale, n_moves)
 }
@@ -12,7 +12,7 @@
 \item{n_moves}{See Usage.}
 }
 \description{
-random_walk_kernel(scale, n_moves), performs n_moves of x\\\' = x + Normal(0, scale^2) and returns the average accept rate over the inner moves.
+random_walk_kernel(scale, n_moves), performs n_moves of x\\' = x + Normal(0, scale^2) and returns the average accept rate over the inner moves.
 }
 \value{
 The value of \code{function}.

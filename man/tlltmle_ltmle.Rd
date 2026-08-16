@@ -8,12 +8,12 @@
 tlltmle_ltmle(Q_seq, H_seq, Y_seq)
 }
 \arguments{
-\item{Q_seq}{See Usage.}
-\item{H_seq}{See Usage.}
-\item{Y_seq}{See Usage.}
+\item{Q_seq}{A vector; its length is taken and its elements indexed.}
+\item{H_seq}{A vector; its length is taken and its elements indexed.}
+\item{Y_seq}{A vector; indexed elementwise.}
 }
 \description{
-Part of the tlltmle_native implementation; see the file header for the source it follows.
+A step of the tlltmle_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{epsilons}, \code{Q_star}, \code{T}, \code{method}.

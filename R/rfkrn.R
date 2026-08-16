@@ -105,7 +105,8 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
 # The first k primes, for the Halton bases.
 #' The first k primes, for the Halton bases
 #'
-#' Part of the rfkrn implementation; see the file header for the source
+#' A step of the rfkrn implementation. Called by \code{Rfkrn}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param k See Usage.

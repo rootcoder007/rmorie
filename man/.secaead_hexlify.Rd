@@ -8,10 +8,10 @@
 .secaead_hexlify(bs)
 }
 \arguments{
-\item{bs}{See Usage.}
+\item{bs}{Passed to \code{.secaead_as_bytes}.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{morie_secaead_aead_encrypt}. See the file header for the source the module follows.
 }
 \value{
 A character value.

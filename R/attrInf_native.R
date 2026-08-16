@@ -33,7 +33,7 @@
 #' "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None";
 #' reproducing those quirks keeps the sort identical to the Python arm.
 #'
-#' @param v See Usage.
+#' @param v Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A character value.
 #' @export
 .attrInf_py_str <- function(v) {
@@ -53,10 +53,11 @@
 
 #' .attrInf_sort_keys
 #'
-#' Part of the attrInf_native implementation; see the file header for
+#' A step of the attrInf_native implementation. Called by \code{morie_attrInf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param vals See Usage.
+#' @param vals A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
 .attrInf_sort_keys <- function(vals) {
@@ -72,7 +73,7 @@
 #'
 #' among ties, the key whose str() sorts earliest wins.
 #'
-#' @param scored See Usage.
+#' @param scored A vector; its length is taken and its elements indexed.
 #' @return Nothing; the function is called for its effect.
 #' @export
 .attrInf_argmax <- function(scored) {
@@ -246,11 +247,12 @@ morie_attrInf <- function(tree, targets, priors,
 
 #' .attrInf_tree_predict
 #'
-#' Part of the attrInf_native implementation; see the file header for
+#' A step of the attrInf_native implementation. Called by \code{morie_attrInf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param tree See Usage.
-#' @param x See Usage.
+#' @param x A vector; indexed elementwise.
 #' @return The value of \code{[[}.
 #' @export
 .attrInf_tree_predict <- function(tree, x) {
@@ -285,7 +287,8 @@ morie_attrInf <- function(tree, targets, priors,
 
 #' tree_paths
 #'
-#' Part of the attrInf_native implementation; see the file header for
+#' A step of the attrInf_native implementation. Called by \code{morie_attrInf}, \code{wbwc_invert}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param tree See Usage.
@@ -325,11 +328,12 @@ tree_paths <- function(tree) {
 
 #' confusion_error
 #'
-#' Part of the attrInf_native implementation; see the file header for
+#' A step of the attrInf_native implementation. Called by \code{morie_attrInf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param C See Usage.
-#' @param labels Defaults to \code{NULL}.
+#' @param C A matrix; indexed by row and column.
+#' @param labels Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{err}, as built in the body.
 #' @export
 confusion_error <- function(C, labels = NULL) {
@@ -374,15 +378,16 @@ confusion_error <- function(C, labels = NULL) {
 
 #' map_invert
 #'
-#' Part of the attrInf_native implementation; see the file header for
+#' A step of the attrInf_native implementation. Called by \code{morie_attrInf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param model See Usage.
 #' @param y See Usage.
 #' @param known See Usage.
-#' @param candidates See Usage.
+#' @param candidates A vector; its length is taken.
 #' @param err See Usage.
-#' @param priors See Usage.
+#' @param priors A vector; indexed elementwise.
 #' @param sensitive Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{scores}.
 #' @export
@@ -412,13 +417,14 @@ map_invert <- function(model, y, known, candidates, err, priors,
 
 #' wbwc_invert
 #'
-#' Part of the attrInf_native implementation; see the file header for
+#' A step of the attrInf_native implementation. Called by \code{morie_attrInf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param tree See Usage.
 #' @param known See Usage.
-#' @param candidates See Usage.
-#' @param priors See Usage.
+#' @param candidates A vector; its length is taken.
+#' @param priors A vector; indexed elementwise.
 #' @param sensitive Defaults to \code{0L}.
 #' @param unknown Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{scores}, \code{n_paths}, \code{N}.

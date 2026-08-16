@@ -8,7 +8,7 @@
 .abcnnt_params(flow)
 }
 \arguments{
-\item{flow}{See Usage.}
+\item{flow}{A list; the body reads \code{$layers} from it.}
 }
 \description{
 in the active set iff its mask entry is 1; theta columns are always unmasked, hidden units are masked by deg_in, output by deg_out.

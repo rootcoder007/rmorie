@@ -104,11 +104,12 @@ Fnlm <- function(X, Y, basis_X, basis_Y, s = NULL, t = NULL) {
 
 #' .fnlm_trapz
 #'
-#' Part of the fnlm implementation; see the file header for the source
+#' A step of the fnlm implementation. Called by \code{Fnlm}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param t See Usage.
-#' @param v See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .fnlm_trapz <- function(t, v) {

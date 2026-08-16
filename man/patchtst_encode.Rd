@@ -8,13 +8,13 @@
 patchtst_encode(X, patch_len, stride = NULL, normalise = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.patcht_mat}.}
 \item{patch_len}{See Usage.}
 \item{stride}{Defaults to \code{NULL}.}
-\item{normalise}{Defaults to \code{TRUE}.}
+\item{normalise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the patchT_native implementation; see the file header for the source it follows.
+A step of the patchT_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{tokens}, \code{D}, \code{n_patches}, \code{n_tokens_total}, \code{norm_stats}, \code{normalised}, \code{cost}, \code{method}.

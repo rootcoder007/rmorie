@@ -12,7 +12,7 @@
 \item{b}{See Usage.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_reduce_basis}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

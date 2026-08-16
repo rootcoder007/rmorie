@@ -8,13 +8,13 @@
 RampFilt(x = NULL, fs = 2000, duration = 0.25, slope = 10)
 }
 \arguments{
-\item{x}{Defaults to \code{NULL}.}
-\item{fs}{Defaults to \code{2000}.}
-\item{duration}{Defaults to \code{0.25}.}
-\item{slope}{Defaults to \code{10}.}
+\item{x}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{2000}.}
+\item{duration}{Numeric; combined arithmetically in the body. Defaults to \code{0.25}.}
+\item{slope}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
 }
 \description{
-The text immediately after states the output was divided by the sum of all values of h(n) -- the normalization is part of the method; the raw taps sum to 626.25 for the book\\'s constants.
+The text immediately after states the output was divided by the sum of all values of h(n) -- the normalization is part of the method; the raw taps sum to 626.25 for the book\'s constants.
 }
 \value{
 The value of \code{out}, as built in the body.

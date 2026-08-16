@@ -14,7 +14,7 @@ promptable_segment(image_embedding, prompt_tokens, decoder, multimask = TRUE)
 \item{multimask}{Defaults to \code{TRUE}.}
 }
 \description{
-Part of the samseg_native implementation; see the file header for the source it follows.
+A step of the samseg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask}, \code{method}, \code{note}.

@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{u}{See Usage.}
-\item{equations}{See Usage.}
+\item{equations}{A vector; indexed elementwise.}
 }
 \description{
-Part of the counterfactual implementation; see the file header for the source it follows.
+A step of the counterfactual implementation. Called by \code{Counterfactual}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{vals}, as built in the body.

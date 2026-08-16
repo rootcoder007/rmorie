@@ -8,10 +8,10 @@
 PvcBayes(features, labels, priors = NULL, query = NULL)
 }
 \arguments{
-\item{features}{See Usage.}
-\item{labels}{See Usage.}
-\item{priors}{Defaults to \code{NULL}.}
-\item{query}{Defaults to \code{NULL}.}
+\item{features}{Passed to \code{.morie_bx_mat}.}
+\item{labels}{Passed to \code{.morie_bx_vec}.}
+\item{priors}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
+\item{query}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 }
 \description{
 The linear rule of 10.11.1 commits to a hard boundary; the Bayes rule states the posterior odds and lets the prevalence of ectopy enter, which matters because a PVC prior is far below one half.

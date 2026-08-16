@@ -26,11 +26,11 @@
 #' connections, which is what the masked matrix product reduces to in
 #' any case.
 #'
-#' @param dim_x See Usage.
-#' @param dim_t See Usage.
-#' @param hidden See Usage.
-#' @param e See Usage.
-#' @param reverse Defaults to \code{FALSE}.
+#' @param dim_x A count; the body uses it as \code{seq_len(...)}.
+#' @param dim_t A count; the body uses it as \code{seq_len(...)}.
+#' @param hidden A count; the body uses it as \code{seq_len(...)}.
+#' @param e Passed to \code{.ghc_norm}.
+#' @param reverse A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{W1}, \code{b1}, \code{Wm}, \code{bm}, \code{Wa}, \code{ba}, \code{M1}, \code{M2}, \code{dim_x}, \code{dim_t}, \code{hidden}, \code{order}.
 #' @export
 .abcnnt_made_layer <- function(dim_x, dim_t, hidden, e, reverse = FALSE) {
@@ -63,10 +63,11 @@
 # Returns list(mu, al, h). Tanh hidden activations, clipped log-scale.
 #' Returns list(mu, al, h). Tanh hidden activations, clipped log-scale
 #'
-#' Part of the abcnnt_native implementation; see the file header for the
+#' A step of the abcnnt_native implementation. Called by \code{flow_forward}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param layer See Usage.
+#' @param layer A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t}, \code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa}, \code{$Wm} from it.
 #' @param x See Usage.
 #' @param t See Usage.
 #' @return A list with \code{mu}, \code{al}, \code{h}.
@@ -124,7 +125,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' in the active set iff its mask entry is 1; theta columns are always
 #' unmasked, hidden units are masked by deg_in, output by deg_out.
 #'
-#' @param flow See Usage.
+#' @param flow A list; the body reads \code{$layers} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .abcnnt_params <- function(flow) {

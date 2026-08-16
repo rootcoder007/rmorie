@@ -8,14 +8,14 @@
 .alfbnp_schedule(T, sigma_data, s_max, s_min, rho)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{sigma_data}{See Usage.}
-\item{s_max}{See Usage.}
-\item{s_min}{See Usage.}
-\item{rho}{See Usage.}
+\item{T}{A count; the body uses it as \code{seq_len(...)}.}
+\item{sigma_data}{Numeric; combined arithmetically in the body.}
+\item{s_max}{Numeric; combined arithmetically in the body.}
+\item{s_min}{Numeric; combined arithmetically in the body.}
+\item{rho}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the alfbnp_native implementation; see the file header for the source it follows.
+A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sample}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,14 +8,14 @@
 morie_remlfn(y, group, tol = 1e-10, max_iter = 5000, solver = "auto")
 }
 \arguments{
-\item{y}{See Usage.}
-\item{group}{See Usage.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{y}{A vector; its length is taken.}
+\item{group}{A vector; its length is taken.}
+\item{tol}{Passed to \code{.remlfn_nelder_mead}. Defaults to \code{1e-10}.}
 \item{max_iter}{Defaults to \code{5000}.}
-\item{solver}{Defaults to \code{"auto"}.}
+\item{solver}{One of \code{"auto"}, \code{"closed"}, \code{"optim"}. Defaults to \code{"auto"}.}
 }
 \description{
-Part of the remlfn_native implementation; see the file header for the source it follows.
+A step of the remlfn_native implementation. Called by \code{morie_vcomp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik}, \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form}, \code{solver}, \code{method}.

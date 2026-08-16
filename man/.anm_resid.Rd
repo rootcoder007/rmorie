@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the causal_native implementation; see the file header for the source it follows.
+A step of the causal_native implementation. Called by \code{morie_anm_direction}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

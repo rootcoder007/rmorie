@@ -8,12 +8,12 @@
 m_step(n_dw, post, K)
 }
 \arguments{
-\item{n_dw}{See Usage.}
-\item{post}{See Usage.}
-\item{K}{See Usage.}
+\item{n_dw}{Passed to \code{.plsa_m_step}.}
+\item{post}{Passed to \code{.plsa_m_step}.}
+\item{K}{Passed to \code{.plsa_m_step}.}
 }
 \description{
-Part of the plsa_native implementation; see the file header for the source it follows.
+A step of the plsa_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.plsa_m_step}.

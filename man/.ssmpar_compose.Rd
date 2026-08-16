@@ -8,11 +8,11 @@
 .ssmpar_compose(left, right)
 }
 \arguments{
-\item{left}{See Usage.}
-\item{right}{See Usage.}
+\item{left}{A vector; indexed elementwise.}
+\item{right}{A vector; indexed elementwise.}
 }
 \description{
-Part of the ssmpar_native implementation; see the file header for the source it follows.
+A step of the ssmpar_native implementation. Called by \code{.ssmpar_upsweep}, \code{check_associativity}, \code{parallel_scan}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

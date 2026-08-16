@@ -8,10 +8,10 @@
 .alfesf_lddt_centres(nb)
 }
 \arguments{
-\item{nb}{See Usage.}
+\item{nb}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the alfesf_native implementation; see the file header for the source it follows.
+A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

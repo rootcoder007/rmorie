@@ -13,7 +13,7 @@ probability_of_control(reps = 200, seed = 0, ...)
 \item{...}{Passed through.}
 }
 \description{
-Part of the ttrace_native implementation; see the file header for the source it follows.
+A step of the ttrace_native implementation. Called by \code{morie_ttrace}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{probability_of_control}, \code{se}, \code{reps}, \code{median_size}, \code{max_size}, \code{max_cases}, \code{max_weeks}, \code{definition}, \code{method}.

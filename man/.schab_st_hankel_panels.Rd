@@ -8,18 +8,18 @@
 .schab_st_hankel_panels(hval, kval, theta, c, p, n_quad = 40L, rtol = 1e-10, max_panels = 20000L, quiet_runs = 4L)
 }
 \arguments{
-\item{hval}{See Usage.}
-\item{kval}{See Usage.}
-\item{theta}{See Usage.}
-\item{c}{See Usage.}
-\item{p}{See Usage.}
-\item{n_quad}{Defaults to \code{40L}.}
+\item{hval}{Numeric; combined arithmetically in the body.}
+\item{kval}{Numeric; combined arithmetically in the body.}
+\item{theta}{Numeric; combined arithmetically in the body.}
+\item{c}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{n_quad}{Passed to \code{.schab_gauss_legendre}. Defaults to \code{40L}.}
 \item{rtol}{Defaults to \code{1e-10}.}
 \item{max_panels}{Defaults to \code{20000L}.}
 \item{quiet_runs}{Defaults to \code{4L}.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{.schab_st_jones_zhang}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{value}, \code{upper}, \code{last_rel}, \code{tail_bound}.

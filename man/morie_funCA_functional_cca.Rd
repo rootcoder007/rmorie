@@ -8,13 +8,13 @@
 morie_funCA_functional_cca(X, Y, p = NULL, q = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{Y}{A matrix; passed to \code{as.matrix}.}
 \item{p}{Defaults to \code{NULL}.}
 \item{q}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the funCA_native implementation; see the file header for the source it follows.
+A step of the funCA_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{correlations}, \code{weights_x}, \code{weights_y}, \code{variates_x}, \code{variates_y}, \code{p}, \code{q}, \code{explained_x}, \code{explained_y}, \code{eigenvalues_x}, \code{eigenvalues_y}, \code{n}, \code{method}, \code{note}.

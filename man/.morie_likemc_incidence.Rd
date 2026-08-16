@@ -8,16 +8,16 @@
 .morie_likemc_incidence(beta, gamma, S0, I0, N, n_steps, dt = 1)
 }
 \arguments{
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
+\item{beta}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 \item{S0}{See Usage.}
 \item{I0}{See Usage.}
-\item{N}{See Usage.}
-\item{n_steps}{See Usage.}
-\item{dt}{Defaults to \code{1}.}
+\item{N}{Numeric; combined arithmetically in the body.}
+\item{n_steps}{A count; the body uses it as \code{seq_len(...)}.}
+\item{dt}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the likemc_native implementation; see the file header for the source it follows.
+A step of the likemc_native implementation. Called by \code{morie_likemc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,10 +8,10 @@
 .prsLL_reachable(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$rules}, \code{$start} from it.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_grammar}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{seen}, as built in the body.

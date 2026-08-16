@@ -27,7 +27,8 @@
 
 #' morie_tlctmle
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A See Usage.
@@ -49,7 +50,8 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 
 #' .ctmle_logit
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. Called by \code{ctmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param p See Usage.
@@ -62,10 +64,11 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 
 #' .ctmle_expit
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. Called by \code{.ctmle_fluct}, \code{ctmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ctmle_expit <- function(x) {
@@ -74,13 +77,14 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 
 #' .ctmle_fluct
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. Called by \code{ctmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Q See Usage.
 #' @param H See Usage.
 #' @param Y See Usage.
-#' @param iters Defaults to \code{60L}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @return A list with \code{epsilon}, \code{q}.
 #' @export
 .ctmle_fluct <- function(Q, H, Y, iters = 60L) {
@@ -105,7 +109,8 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 
 #' targeted_loss
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. Called by \code{ctmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Q_star See Usage.
@@ -126,12 +131,13 @@ targeted_loss <- function(Q_star, Y) {
 
 #' candidate_sequence
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. Called by \code{ctmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A See Usage.
-#' @param W See Usage.
-#' @param g_models See Usage.
+#' @param W A matrix; passed to \code{as.matrix}.
+#' @param g_models A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 candidate_sequence <- function(A, W, g_models) {
@@ -177,7 +183,8 @@ candidate_sequence <- function(A, W, g_models) {
 
 #' instrument_penalty
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param g_small See Usage.
@@ -194,7 +201,8 @@ instrument_penalty <- function(g_small, g_large) {
 
 #' ctmle
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. Called by \code{morie_tlctmle}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A See Usage.
@@ -205,7 +213,7 @@ instrument_penalty <- function(g_small, g_large) {
 #' @param g_models See Usage.
 #' @param V Defaults to \code{5L}.
 #' @param seed Defaults to \code{0L}.
-#' @param penalty Defaults to \code{TRUE}.
+#' @param penalty A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{psi}, \code{selected}, \code{selected_covariates}, \code{cv_risks}, \code{cv_losses}, \code{variance_penalties}, \code{penalized}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method}, \code{note}.
 #' @export
 ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
@@ -285,7 +293,8 @@ ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
 
 #' .tlctmle_cheatsheet
 #'
-#' Part of the tlctmle_native implementation; see the file header for
+#' A step of the tlctmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

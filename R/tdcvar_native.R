@@ -44,7 +44,8 @@
 
 #' .tdcvar_vec
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -56,10 +57,11 @@
 
 #' .tdcvar_mat
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .tdcvar_mat <- function(X) {
@@ -83,12 +85,13 @@
 
 #' .tdcvar_wls
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. Called by \code{morie_tdcvar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}.
 #' @export
 .tdcvar_wls <- function(X, y, w) {
@@ -107,12 +110,13 @@
 
 #' .tdcvar_logreg
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param max_iter Defaults to \code{25L}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
@@ -141,11 +145,12 @@
 
 #' .tdcvar_logreg_pred
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param beta See Usage.
+#' @param X A matrix; passed to \code{\%*\%}.
+#' @param beta A matrix; passed to \code{\%*\%}.
 #' @return The value of \code{pmin}.
 #' @export
 .tdcvar_logreg_pred <- function(X, beta) {
@@ -157,14 +162,15 @@
 
 #' .tdcvar_ip_weights_history
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. Called by \code{morie_tdcvar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A_hist See Usage.
-#' @param L_hist See Usage.
+#' @param A_hist A vector; its length is taken and its elements indexed.
+#' @param L_hist A vector; indexed elementwise.
 #' @param kind Defaults to \code{"binary"}.
-#' @param stabilize Defaults to \code{TRUE}.
-#' @param trim Defaults to \code{NULL}.
+#' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param trim Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{weights}, \code{per_time}.
 #' @export
 .tdcvar_ip_weights_history <- function(A_hist, L_hist, kind="binary",
@@ -233,17 +239,18 @@
 
 #' morie_tdcvar
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{.tdcvar_vec}.
 #' @param A See Usage.
 #' @param L_t See Usage.
-#' @param time Defaults to \code{NULL}.
-#' @param contrast Defaults to \code{"cumulative"}.
-#' @param kind Defaults to \code{"binary"}.
-#' @param stabilize Defaults to \code{TRUE}.
-#' @param trim Defaults to \code{NULL}.
+#' @param time Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
+#' @param kind Passed to \code{.tdcvar_ip_weights_history}. Defaults to \code{"binary"}.
+#' @param stabilize Passed to \code{.tdcvar_ip_weights_history}. Defaults to \code{TRUE}.
+#' @param trim Passed to \code{.tdcvar_ip_weights_history}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_tdcvar <- function(y, A, L_t, time=NULL, contrast="cumulative",
@@ -364,7 +371,8 @@ morie_tdcvar <- function(y, A, L_t, time=NULL, contrast="cumulative",
 
 #' morie_tdcvar_cheatsheet
 #'
-#' Part of the tdcvar_native implementation; see the file header for the
+#' A step of the tdcvar_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

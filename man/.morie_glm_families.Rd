@@ -8,7 +8,7 @@
 .morie_glm_families()
 }
 \description{
-Part of the glm implementation; see the file header for the source it follows.
+A step of the glm implementation. Called by \code{morie_deviance_residuals}, \code{morie_glm}, \code{morie_glm_predict}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{binomial}, \code{poisson}, \code{gaussian}, \code{gamma}.

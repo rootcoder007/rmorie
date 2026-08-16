@@ -8,17 +8,17 @@
 morie_glm(y, X, family = "binomial", add_intercept = TRUE, weights = NULL, offset = NULL, max_iter = 25L, tol = 1e-08)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{X}{A matrix; passed to \code{nrow}.}
 \item{family}{Defaults to \code{"binomial"}.}
-\item{add_intercept}{Defaults to \code{TRUE}.}
+\item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{weights}{Defaults to \code{NULL}.}
 \item{offset}{Defaults to \code{NULL}.}
 \item{max_iter}{Defaults to \code{25L}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the glm implementation; see the file header for the source it follows.
+A step of the glm implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}, \code{se}, \code{statistic}, \code{statistic_name}, \code{p_value}, \code{fitted}, \code{linear_predictor}, \code{residuals}, \code{deviance}, \code{null_deviance}, \code{df_residual}, \code{df_null}, \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged}, \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.

@@ -64,11 +64,12 @@
 
 #' lag_summary
 #'
-#' Part of the tlonts_native implementation; see the file header for the
+#' A step of the tlonts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param series See Usage.
-#' @param t See Usage.
+#' @param t Numeric; passed to \code{min}.
 #' @param lags Defaults to \code{2}.
 #' @return A vector, from \code{c}.
 #' @export
@@ -96,7 +97,8 @@ lag_summary <- function(series, t, lags = 2) {
 
 #' stochastic_intervention
 #'
-#' Part of the tlonts_native implementation; see the file header for the
+#' A step of the tlonts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A See Usage.
@@ -136,7 +138,8 @@ stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
 
 #' martingale_variance
 #'
-#' Part of the tlonts_native implementation; see the file header for the
+#' A step of the tlonts_native implementation. Called by \code{online_tmle_series}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param D See Usage.
@@ -158,7 +161,8 @@ martingale_variance <- function(D) {
 
 #' martingale_check
 #'
-#' Part of the tlonts_native implementation; see the file header for the
+#' A step of the tlonts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param D See Usage.
@@ -188,12 +192,13 @@ martingale_check <- function(D, past, tol = 0.2) {
 
 #' online_tmle_series
 #'
-#' Part of the tlonts_native implementation; see the file header for the
+#' A step of the tlonts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Y See Usage.
 #' @param A See Usage.
-#' @param Z See Usage.
+#' @param Z A matrix; indexed by row and column.
 #' @param Q_fn See Usage.
 #' @param g_fn See Usage.
 #' @param target_prob See Usage.
@@ -252,7 +257,8 @@ online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
 
 #' .tlonts_cheatsheet
 #'
-#' Part of the tlonts_native implementation; see the file header for the
+#' A step of the tlonts_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

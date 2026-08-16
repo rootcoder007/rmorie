@@ -8,11 +8,11 @@
 .fanva_trapz(t, v)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{v}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{v}{A vector; indexed elementwise.}
 }
 \description{
-Part of the fanva implementation; see the file header for the source it follows.
+A step of the fanva implementation. Called by \code{Fanva}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{s}, as built in the body.

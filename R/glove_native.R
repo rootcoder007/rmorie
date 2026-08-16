@@ -54,7 +54,8 @@
 # Private helper: turn a corpus into a list of token character vectors.
 #' Private helper: turn a corpus into a list of token character vectors
 #'
-#' Part of the glove_native implementation; see the file header for the
+#' A step of the glove_native implementation. Called by \code{cooccurrence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param corpus See Usage.
@@ -89,9 +90,9 @@
 #'
 #' capped at 1.
 #'
-#' @param x See Usage.
-#' @param x_max Defaults to \code{100}.
-#' @param alpha Defaults to \code{0.75}.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param x_max Numeric; combined arithmetically in the body. Defaults to \code{100}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.75}.
 #' @return A numeric value.
 #' @export
 glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
@@ -116,9 +117,9 @@ glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
 #' Sec. 4.2: a token d positions away contributes 1/d to the count when
 #' harmonic = TRUE.
 #'
-#' @param corpus See Usage.
+#' @param corpus Passed to \code{.glove_as_docs}.
 #' @param window Defaults to \code{10}.
-#' @param harmonic Defaults to \code{TRUE}.
+#' @param harmonic A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param min_count Defaults to \code{1}.
 #' @return A list with \code{X}, \code{vocab}, \code{index}.
 #' @export
@@ -175,14 +176,15 @@ cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
 # Eq. (8), evaluated over the nonzero entries only.
 #' Eq. (8), evaluated over the nonzero entries only
 #'
-#' Part of the glove_native implementation; see the file header for the
+#' A step of the glove_native implementation. Called by \code{morie_glove}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param W See Usage.
-#' @param Wt See Usage.
-#' @param b See Usage.
-#' @param bt See Usage.
+#' @param X A list; the body reads \code{$count}, \code{$i}, \code{$j} from it.
+#' @param W A matrix; indexed by row and column.
+#' @param Wt A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
+#' @param bt A vector; indexed elementwise.
 #' @param x_max Defaults to \code{100}.
 #' @param alpha Defaults to \code{0.75}.
 #' @return The value of \code{total}, as built in the body.
@@ -208,7 +210,8 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 # Fit GloVe vectors.
 #' Fit GloVe vectors
 #'
-#' Part of the glove_native implementation; see the file header for the
+#' A step of the glove_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param corpus See Usage.
@@ -221,7 +224,7 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' @param harmonic Defaults to \code{TRUE}.
 #' @param min_count Defaults to \code{1}.
 #' @param seed Defaults to \code{0}.
-#' @param combine Defaults to \code{"sum"}.
+#' @param combine One of \code{"concat"}, \code{"sum"}, \code{"w"}, \code{"wtilde"}. Defaults to \code{"sum"}.
 #' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{W}, \code{W_tilde}, \code{b}, \code{b_tilde}, \code{cooccurrence}, \code{loss_history}, \code{running_loss}, \code{final_loss}, \code{n_vocab}, \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max}, \code{alpha}, \code{combine}, \code{method}.
 #' @export
 morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
@@ -351,7 +354,8 @@ morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
 
 #' .glove_cheatsheet
 #'
-#' Part of the glove_native implementation; see the file header for the
+#' A step of the glove_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

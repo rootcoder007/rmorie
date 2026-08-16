@@ -17,7 +17,7 @@ MatchedFilt(ref, x = NULL, noise_psd = NULL, freqs = NULL, t0 = NULL, gain = 1, 
 \item{dt}{Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_corr implementation; see the file header for the source it follows.
+A step of the rangayyan_corr implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

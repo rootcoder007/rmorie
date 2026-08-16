@@ -8,12 +8,12 @@
 .schab_variogram_wls(h, gamma, counts)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{A vector; indexed elementwise.}
 \item{gamma}{See Usage.}
 \item{counts}{See Usage.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_moving_window_krige}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{sill}, \code{range}, \code{converged}, \code{wls}.

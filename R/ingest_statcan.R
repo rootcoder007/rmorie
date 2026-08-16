@@ -323,8 +323,8 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
 #' Column set is StatCan\'s raw CSV schema (REF_DATE, GEO, VALUE, ...),
 #' which is the subset of get_cansim() output the callers use.
 #'
-#' @param table_id See Usage.
-#' @param language Defaults to \code{"en"}.
+#' @param table_id Character; passed to \code{gsub}.
+#' @param language Character; passed to \code{tolower}. Defaults to \code{"en"}.
 #' @return The value of \code{utils::read.csv}.
 #' @export
 .morie_statcan_wds_table <- function(table_id, language = "en") {

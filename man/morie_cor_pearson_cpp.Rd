@@ -8,11 +8,11 @@
 morie_cor_pearson_cpp(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Passed to \code{.Call}.}
+\item{y}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_cor_pearson}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

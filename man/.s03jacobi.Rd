@@ -8,8 +8,8 @@
 .s03jacobi(A, sweeps = 60L)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{sweeps}{Defaults to \code{60L}.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{sweeps}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 }
 \description{
 vector sign-fixed so its largest-magnitude entry is positive, because the eigenproblem does not determine the sign and the arms must agree.

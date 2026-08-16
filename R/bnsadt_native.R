@@ -86,7 +86,8 @@
 
 #' .bnsadt_nfree
 #'
-#' Part of the bnsadt_native implementation; see the file header for the
+#' A step of the bnsadt_native implementation. Called by \code{morie_bnsadt}, \code{morie_bnsadt_fit}, \code{morie_bnsadt_group_counts}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param family See Usage.
@@ -101,11 +102,12 @@
 # Per-interval publication probabilities from the free parameters.
 #' Per-interval publication probabilities from the free parameters
 #'
-#' Part of the bnsadt_native implementation; see the file header for the
+#' A step of the bnsadt_native implementation. Called by \code{.bnsadt_expected_p}, \code{.bnsadt_pub_cdf}, \code{morie_bnsadt_p}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param family See Usage.
-#' @param params See Usage.
+#' @param params A vector; indexed elementwise.
 #' @return A vector, from \code{vapply}.
 #' @export
 .bnsadt_betas <- function(family, params) {
@@ -136,11 +138,11 @@ morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
 #' sum of normal increments because p is a step function -- the reason
 #' no quadrature appears anywhere in this module.
 #'
-#' @param sigma See Usage.
-#' @param mu See Usage.
-#' @param tau See Usage.
-#' @param family See Usage.
-#' @param params See Usage.
+#' @param sigma Numeric; combined arithmetically in the body.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param tau Numeric; combined arithmetically in the body.
+#' @param family Passed to \code{.bnsadt_betas}.
+#' @param params Passed to \code{.bnsadt_betas}.
 #' @return The value of \code{.w3_csum}.
 #' @export
 .bnsadt_expected_p <- function(sigma, mu, tau, family, params) {
@@ -295,10 +297,10 @@ morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
 #' exact rather than quadrature.
 #'
 #' @param x See Usage.
-#' @param theta See Usage.
-#' @param sigma See Usage.
-#' @param family See Usage.
-#' @param params See Usage.
+#' @param theta Numeric; combined arithmetically in the body.
+#' @param sigma Numeric; combined arithmetically in the body.
+#' @param family Passed to \code{.bnsadt_betas}.
+#' @param params Passed to \code{.bnsadt_betas}.
 #' @return A numeric value.
 #' @export
 .bnsadt_pub_cdf <- function(x, theta, sigma, family, params) {

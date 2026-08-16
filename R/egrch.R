@@ -25,10 +25,10 @@
 #' opposite order, so the returned alpha and gamma swapped meaning
 #' depending on whether that package happened to be installed.
 #'
-#' @param p See Usage.
-#' @param r See Usage.
-#' @param n See Usage.
-#' @param EZ See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param r A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{numeric(...)}.
+#' @param EZ Numeric; combined arithmetically in the body.
 #' @return The value of \code{res}, as built in the body.
 #' @export
 .egrch_negll <- function(p, r, n, EZ) {

@@ -8,10 +8,10 @@
 ContConv(x, h, dt = 1, t = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
+\item{x}{Passed to \code{.morie_rg_aslist}.}
+\item{h}{Passed to \code{.morie_rg_aslist}.}
 \item{dt}{Defaults to \code{1}.}
-\item{t}{Defaults to \code{NULL}.}
+\item{t}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.}
 }
 \description{
 uniform grid this is the discrete convolution SCALED BY dt; dropping the dt is how a continuous-time convolution comes out wrong by a factor of the sampling interval.

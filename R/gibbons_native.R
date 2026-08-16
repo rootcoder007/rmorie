@@ -137,10 +137,11 @@ morie_runs_updown <- function(n = NULL, x = NULL) {
 
 #' .morie_permutations
 #'
-#' Part of the gibbons_native implementation; see the file header for
+#' A step of the gibbons_native implementation. Called by \code{morie_rank_exact_null}, \code{morie_runs_updown}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_permutations <- function(n) {

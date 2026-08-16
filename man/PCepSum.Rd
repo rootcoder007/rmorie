@@ -10,10 +10,10 @@ PCepSum(x, h, square = FALSE)
 \arguments{
 \item{x}{See Usage.}
 \item{h}{See Usage.}
-\item{square}{Defaults to \code{FALSE}.}
+\item{square}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-squaring of eq (4.81) is omitted.  square defaults to FALSE here for that reason; TRUE reproduces the book\\'s definition and shows how large the neglected cross-term is on the caller\\'s own data.
+squaring of eq (4.81) is omitted.  square defaults to FALSE here for that reason; TRUE reproduces the book\'s definition and shows how large the neglected cross-term is on the caller\'s own data.
 }
 \value{
 A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{squared}, \code{exact}, \code{method}.

@@ -7,11 +7,12 @@
 
 #' .pesdol_ols
 #'
-#' Part of the pesdol_native implementation; see the file header for the
+#' A step of the pesdol_native implementation. Called by \code{morie_pesdol_ardl_bounds}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fit}, \code{res}.
 #' @export
 .pesdol_ols <- function(X, y) {
@@ -30,13 +31,14 @@
 
 #' morie_pesdol_ardl_bounds
 #'
-#' Part of the pesdol_native implementation; see the file header for the
+#' A step of the pesdol_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param x See Usage.
-#' @param p Defaults to \code{1}.
-#' @param q Defaults to \code{1}.
+#' @param x A matrix; passed to \code{as.matrix}.
+#' @param p Numeric; passed to \code{max}. Defaults to \code{1}.
+#' @param q Numeric; passed to \code{max}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{long_run}, \code{coefficients}, \code{residuals}, \code{fitted}, \code{speed_of_adjustment}, \code{f_statistic}, \code{bound_lower}, \code{bound_upper}, \code{verdict}, \code{n_used}, \code{n_params}, \code{rss_unrestricted}, \code{rss_restricted}, \code{p}, \code{q}, \code{n_regressors}, \code{method}, \code{note}.
 #' @export
 morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
@@ -107,7 +109,8 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
 
 #' .pesdol_cheatsheet
 #'
-#' Part of the pesdol_native implementation; see the file header for the
+#' A step of the pesdol_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

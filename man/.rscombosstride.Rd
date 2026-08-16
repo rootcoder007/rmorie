@@ -8,9 +8,9 @@
 .rscombosstride(n, k, want, max_walk = 5e+06)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{k}{See Usage.}
-\item{want}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
+\item{want}{Numeric; combined arithmetically in the body.}
 \item{max_walk}{Defaults to \code{5e+06}.}
 }
 \description{

@@ -47,7 +47,8 @@ Hampw <- function(y, a = 2, b = 4, c = 8) {
 
 #' .hampel_check
 #'
-#' Part of the hampw implementation; see the file header for the source
+#' A step of the hampw implementation. Called by \code{Hampel}, \code{Hampw}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param a See Usage.

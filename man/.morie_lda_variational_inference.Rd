@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{doc}{See Usage.}
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
-\item{iters}{Defaults to \code{100}.}
+\item{alpha}{A vector; its length is taken.}
+\item{beta}{A matrix; passed to \code{as.matrix}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the lda_native implementation; see the file header for the source it follows.
+A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged}, \code{K}, \code{N}, \code{topic_proportions}.

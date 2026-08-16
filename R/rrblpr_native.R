@@ -66,10 +66,11 @@
 
 #' .rrblpr_rows
 #'
-#' Part of the rrblpr_native implementation; see the file header for the
+#' A step of the rrblpr_native implementation. Called by \code{morie_rrblpr_rr_blup}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .rrblpr_rows <- function(x) {
@@ -84,10 +85,11 @@
 # Cholesky factor, lower triangular, with a scaled jitter.
 #' Cholesky factor, lower triangular, with a scaled jitter
 #'
-#' Part of the rrblpr_native implementation; see the file header for the
+#' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}, \code{morie_rrblpr_rr_blup}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .rrblpr_chol <- function(A) {
@@ -113,11 +115,12 @@
 
 #' .rrblpr_chol_solve
 #'
-#' Part of the rrblpr_native implementation; see the file header for the
+#' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}, \code{morie_rrblpr_rr_blup}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param b See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .rrblpr_chol_solve <- function(L, b) {
@@ -139,10 +142,11 @@
 
 #' .rrblpr_logdet
 #'
-#' Part of the rrblpr_native implementation; see the file header for the
+#' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
+#' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
 .rrblpr_logdet <- function(L) 2.0 * sum(log(diag(L)))
@@ -150,13 +154,14 @@
 # Restricted log likelihood at lambda, profiled over sigma_e^2.
 #' Restricted log likelihood at lambda, profiled over sigma_e^2
 #'
-#' Part of the rrblpr_native implementation; see the file header for the
+#' A step of the rrblpr_native implementation. Called by \code{morie_rrblpr_rr_blup}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param loglam See Usage.
-#' @param G See Usage.
-#' @param y See Usage.
-#' @param X See Usage.
+#' @param loglam Numeric; passed to \code{exp}.
+#' @param G Numeric; combined arithmetically in the body.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; indexed by row and column.
 #' @return A list with \code{ll}, \code{lam}, \code{beta}, \code{s2e}, \code{L}.
 #' @export
 .rrblpr_reml_at <- function(loglam, G, y, X) {
@@ -184,14 +189,15 @@
 
 #' morie_rrblpr_rr_blup
 #'
-#' Part of the rrblpr_native implementation; see the file header for the
+#' A step of the rrblpr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param M See Usage.
+#' @param M Passed to \code{.rrblpr_rows}.
 #' @param lam Defaults to \code{NULL}.
-#' @param X Defaults to \code{NULL}.
-#' @param M_new Defaults to \code{NULL}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.
+#' @param M_new Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.
 #' @param log_lam_lo Defaults to \code{-12}.
 #' @param log_lam_hi Defaults to \code{12}.
 #' @param max_iter Defaults to \code{200L}.
@@ -317,7 +323,8 @@ morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
 
 #' .rrblpr_cheatsheet
 #'
-#' Part of the rrblpr_native implementation; see the file header for the
+#' A step of the rrblpr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

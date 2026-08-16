@@ -8,12 +8,12 @@
 .ecfp_percol(x, a, default)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{a}{See Usage.}
-\item{default}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Passed to \code{.t1_vec}.}
+\item{a}{A count; the body uses it as \code{rep(...)}.}
+\item{default}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the ecfp4 implementation; see the file header for the source it follows.
+A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

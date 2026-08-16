@@ -9,10 +9,10 @@ morie_tlsurvy_draw_sample(pi, seed = 0)
 }
 \arguments{
 \item{pi}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{
-Part of the tlsurvy_native implementation; see the file header for the source it follows.
+A step of the tlsurvy_native implementation. Called by \code{morie_tlsurvy_adaptive_survey_tmle}, \code{morie_tlsurvy_design_efficiency}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{selected}, \code{n}, \code{fraction}.

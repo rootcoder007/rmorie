@@ -8,16 +8,16 @@
 .rkmeans_concentrate(rows, cen, k, n_keep, penalty, huber_c, max_iter)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{cen}{See Usage.}
-\item{k}{See Usage.}
-\item{n_keep}{See Usage.}
-\item{penalty}{See Usage.}
-\item{huber_c}{See Usage.}
-\item{max_iter}{See Usage.}
+\item{rows}{A vector; its length is taken and its elements indexed.}
+\item{cen}{A vector; indexed elementwise.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
+\item{n_keep}{A count; the body uses it as \code{seq_len(...)}.}
+\item{penalty}{One of \code{"absolute"}, \code{"square"}.}
+\item{huber_c}{Passed to \code{.rkmeans_phi}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the rkmeans_native implementation; see the file header for the source it follows.
+A step of the rkmeans_native implementation. Called by \code{morie_rkmeans}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

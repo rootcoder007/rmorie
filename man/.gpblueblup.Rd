@@ -8,14 +8,14 @@
 .gpblueblup(X, Z, y, Sigma, R = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Z}{See Usage.}
-\item{y}{See Usage.}
-\item{Sigma}{See Usage.}
-\item{R}{Defaults to \code{NULL}.}
+\item{X}{A matrix; passed to \code{t}.}
+\item{Z}{A matrix; passed to \code{t}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
+\item{Sigma}{Passed to \code{.gplmmV}.}
+\item{R}{Passed to \code{.gplmmV}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{.gpmultitrait}, \code{Msm010}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{u}.

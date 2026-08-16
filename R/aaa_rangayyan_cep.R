@@ -10,10 +10,11 @@
 
 #' .morie_rg_dft
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. Called by \code{CardioResp}, \code{CCepstrum}, \code{Cepstrum} and 11 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A list with \code{re}, \code{im}.
 #' @export
 .morie_rg_dft <- function(x) {
@@ -32,11 +33,12 @@
 
 #' .morie_rg_idft_re
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. Called by \code{CCepstrum}, \code{Cepstrum}, \code{HomDeconv} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param re See Usage.
-#' @param im See Usage.
+#' @param re A vector; its length is taken.
+#' @param im Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_rg_idft_re <- function(re, im) {
@@ -50,10 +52,11 @@
 
 #' .morie_rg_unwrap
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. Called by \code{CCepstrum}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param phase See Usage.
+#' @param phase A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_rg_unwrap <- function(phase) {
@@ -291,7 +294,8 @@ CCepSum <- function(x, h) {
 
 #' RatZ
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param gain See Usage.
@@ -358,7 +362,8 @@ RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
 
 #' CCepClosed
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param gain See Usage.
@@ -404,7 +409,8 @@ CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
 
 #' CCepDecay
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param zeros_in See Usage.
@@ -499,7 +505,7 @@ EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
 #' arises and eq (4.82) is exact.
 #'
 #' @param x See Usage.
-#' @param square Defaults to \code{TRUE}.
+#' @param square A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{cepstrum}, \code{unsquared}, \code{log_power}, \code{n}, \code{squared}, \code{zero_bins}, \code{retains_phase}, \code{additivity_exact}, \code{method}.
 #' @export
 PCepstrum <- function(x, square = TRUE) {
@@ -532,7 +538,7 @@ PCepstrum <- function(x, square = TRUE) {
 #'
 #' @param x See Usage.
 #' @param h See Usage.
-#' @param square Defaults to \code{FALSE}.
+#' @param square A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{squared}, \code{exact}, \code{method}.
 #' @export
 PCepSum <- function(x, h, square = FALSE) {
@@ -605,7 +611,7 @@ PCepRel <- function(x) {
 #' @param cepstrum_values See Usage.
 #' @param low Defaults to \code{NULL}.
 #' @param high Defaults to \code{NULL}.
-#' @param keep Defaults to \code{"low"}.
+#' @param keep One of \code{"band"}, \code{"high"}, \code{"low"}. Defaults to \code{"low"}.
 #' @return A list with \code{liftered}, \code{n}, \code{low}, \code{high}, \code{keep}, \code{symmetric}, \code{n_kept}, \code{energy_kept}, \code{method}.
 #' @export
 Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
@@ -649,7 +655,7 @@ Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
 #'
 #' @param y See Usage.
 #' @param cutoff See Usage.
-#' @param keep Defaults to \code{"low"}.
+#' @param keep One of \code{"high"}, \code{"low"}. Defaults to \code{"low"}.
 #' @return A list with \code{y}, \code{log_domain}, \code{log_input}, \code{cutoff}, \code{keep}, \code{n}, \code{stages}, \code{method}.
 #' @export
 HomoFilt <- function(y, cutoff, keep = "low") {
@@ -765,14 +771,15 @@ HomPred <- function(y, cutoff) {
 
 #' VocalTract
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param fs See Usage.
 #' @param pitch_period Defaults to \code{NULL}.
 #' @param cutoff Defaults to \code{NULL}.
-#' @param pitch_range Defaults to \code{c(0.002, 0.02)}.
+#' @param pitch_range A vector; indexed elementwise. Defaults to \code{c(0.002, 0.02)}.
 #' @return A list with \code{response}, \code{cepstrum}, \code{cutoff}, \code{pitch_period}, \code{pitch_hz}, \code{peak_quefrency}, \code{fs}, \code{n}, \code{method}.
 #' @export
 VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
@@ -870,7 +877,8 @@ MinPhase <- function(x) {
 
 #' Mfcc
 #'
-#' Part of the rangayyan_cep implementation; see the file header for the
+#' A step of the rangayyan_cep implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.

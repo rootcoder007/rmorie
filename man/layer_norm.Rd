@@ -8,13 +8,13 @@
 layer_norm(x, gain = NULL, bias = NULL, eps = 1e-12)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{gain}{Defaults to \code{NULL}.}
-\item{bias}{Defaults to \code{NULL}.}
-\item{eps}{Defaults to \code{1e-12}.}
+\item{x}{A vector; its length is taken.}
+\item{gain}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{bias}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.}
 }
 \description{
-Part of the berte_native implementation; see the file header for the source it follows.
+A step of the berte_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

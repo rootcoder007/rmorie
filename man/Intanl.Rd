@@ -31,7 +31,7 @@ Because the weights are estimated, the robust (sandwich) standard
 error is reported rather than the model-based one.
 }
 \details{
-Formula: E\link{Y^a|V} = b0 + b1 a + b2 V a + b3 V.
+Formula: E[Y^a|V] = b0 + b1 a + b2 V a + b3 V.
 }
 \references{
 Hernan and Robins (2020), Causal Inference: What If,

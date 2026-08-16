@@ -8,13 +8,13 @@
 .tlstoch_shift_regime(A, delta, lower = NULL, upper = NULL)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Passed to \code{.tlstoch_vec}.}
 \item{delta}{See Usage.}
 \item{lower}{Defaults to \code{NULL}.}
 \item{upper}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tlstoch_native implementation; see the file header for the source it follows.
+A step of the tlstoch_native implementation. Called by \code{.tlstoch_shift_tmle}, \code{.tlstoch_stochastic_estimand}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{shifted}, \code{delta}, \code{n_clipped}, \code{fraction_clipped}.

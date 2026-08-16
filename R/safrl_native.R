@@ -71,10 +71,11 @@
 
 #' .safrl_mat
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. Called by \code{morie_safrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; indexed by row and column.
 #' @param name See Usage.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
@@ -109,7 +110,8 @@
 
 #' .safrl_vec
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. Called by \code{morie_safrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -132,11 +134,12 @@
 
 #' .safrl_solve
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. Called by \code{morie_safrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A vector; indexed elementwise.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
 .safrl_solve <- function(A, b) {
@@ -185,15 +188,16 @@
 
 #' .safrl_dual
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. Called by \code{morie_safrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param q See Usage.
-#' @param r See Usage.
-#' @param S See Usage.
-#' @param c See Usage.
-#' @param delta See Usage.
-#' @param m See Usage.
+#' @param r A vector; indexed elementwise.
+#' @param S A matrix; indexed by row and column.
+#' @param c A vector; indexed elementwise.
+#' @param delta Numeric; combined arithmetically in the body.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @param tol See Usage.
 #' @param max_iter See Usage.
 #' @return A list with \code{lam}, \code{nu}.
@@ -261,14 +265,15 @@
 
 #' .safrl_finish
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. Called by \code{morie_safrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param step See Usage.
-#' @param g See Usage.
-#' @param cols See Usage.
-#' @param cv See Usage.
-#' @param H See Usage.
+#' @param step A vector; indexed elementwise.
+#' @param g A vector; its length is taken and its elements indexed.
+#' @param cols A vector; its length is taken and its elements indexed.
+#' @param cv A vector; indexed elementwise.
+#' @param H A vector; indexed elementwise.
 #' @param delta See Usage.
 #' @param lam See Usage.
 #' @param nu See Usage.
@@ -316,16 +321,17 @@
 
 #' morie_safrl
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param H See Usage.
-#' @param B Defaults to \code{NULL}.
-#' @param c Defaults to \code{NULL}.
-#' @param delta Defaults to \code{0.01}.
-#' @param tol Defaults to \code{1e-12}.
-#' @param max_iter Defaults to \code{5000}.
+#' @param g Passed to \code{.safrl_vec}.
+#' @param H Passed to \code{.safrl_mat}.
+#' @param B Optional; may be \code{NULL}. Passed to \code{.safrl_mat}.
+#' @param c Optional; may be \code{NULL}. Passed to \code{.safrl_vec}.
+#' @param delta Numeric; combined arithmetically in the body. Defaults to \code{0.01}.
+#' @param tol Passed to \code{.safrl_dual}. Defaults to \code{1e-12}.
+#' @param max_iter Passed to \code{.safrl_dual}. Defaults to \code{5000}.
 #' @return The value of \code{.safrl_finish}.
 #' @export
 morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
@@ -455,7 +461,8 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 
 #' morie_safrl_cmdp_returns
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param policy See Usage.
@@ -464,7 +471,7 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 #' @param step See Usage.
 #' @param reward See Usage.
 #' @param costs See Usage.
-#' @param gamma Defaults to \code{0.9}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param start Defaults to \code{NULL}.
 #' @param iters Defaults to \code{5000}.
 #' @param tol Defaults to \code{1e-14}.
@@ -530,11 +537,12 @@ morie_safrl_cmdp_returns <- function(policy, states, actions, step,
 
 #' morie_safrl_worst_case_violation
 #'
-#' Part of the safrl_native implementation; see the file header for the
+#' A step of the safrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param delta See Usage.
-#' @param gamma See Usage.
+#' @param delta Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @param epsilon See Usage.
 #' @return A numeric value.
 #' @export

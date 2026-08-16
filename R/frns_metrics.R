@@ -44,7 +44,8 @@ NULL
 
 #' .frns_check_aligned
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
@@ -68,10 +69,11 @@ NULL
 
 #' .frns_favorable_rates
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param outcome See Usage.
+#' @param outcome A vector; indexed elementwise.
 #' @param group See Usage.
 #' @param favorable See Usage.
 #' @return The value of \code{rates}, as built in the body.
@@ -90,7 +92,8 @@ NULL
 
 #' Returns list(privileged = <key>, warning = <chr or NULL>)
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param privileged See Usage.
@@ -123,11 +126,12 @@ NULL
 
 #' .frns_rates_from_labels
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y_true See Usage.
-#' @param y_pred See Usage.
+#' @param y_true A vector; indexed elementwise.
+#' @param y_pred A vector; indexed elementwise.
 #' @param group See Usage.
 #' @param favorable See Usage.
 #' @return The value of \code{out}, as built in the body.
@@ -155,7 +159,7 @@ NULL
 #'
 #' (2 n sum x). Returns 0 for all-zero or single-element input.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .frns_gini <- function(x) {
@@ -173,10 +177,11 @@ NULL
 
 #' The element with the largest absolute value (finite only); NA if none
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
+#' @param values A vector; indexed elementwise.
 #' @return The value of \code{[}.
 #' @export
 .frns_worst_abs <- function(values) {
@@ -209,7 +214,8 @@ NULL
 
 #' .morie_fairness_as_1d
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -226,7 +232,8 @@ NULL
 
 #' .morie_fairness_check_aligned
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
@@ -247,7 +254,8 @@ NULL
 
 #' Python\'s "first-seen" order; unique() in R is already first-seen
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. Called by \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels}, \code{morie_fairness_gini} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param arr See Usage.
@@ -260,11 +268,12 @@ NULL
 
 #' .morie_fairness_favorable_rates
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. Called by \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity}, \code{morie_fairness_disparate_impact}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param outcome See Usage.
-#' @param group See Usage.
+#' @param outcome A vector; indexed elementwise.
+#' @param group Passed to \code{.morie_fairness_ordered_unique}.
 #' @param favorable See Usage.
 #' @return The value of \code{rates}, as built in the body.
 #' @export
@@ -284,12 +293,13 @@ NULL
 
 #' .morie_fairness_resolve_privileged
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param privileged See Usage.
 #' @param rates See Usage.
-#' @param warnings_env See Usage.
+#' @param warnings_env A list; the body reads \code{$w} from it.
 #' @return The value of \code{inferred}, as built in the body.
 #' @export
 .morie_fairness_resolve_privileged <- function(privileged, rates, warnings_env) {
@@ -314,12 +324,13 @@ NULL
 
 #' .morie_fairness_rates_from_labels
 #'
-#' Part of the frns_metrics implementation; see the file header for the
+#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y_true See Usage.
-#' @param y_pred See Usage.
-#' @param group See Usage.
+#' @param y_true A vector; indexed elementwise.
+#' @param y_pred A vector; indexed elementwise.
+#' @param group Passed to \code{.morie_fairness_ordered_unique}.
 #' @param favorable See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -348,7 +359,7 @@ NULL
 #'
 #' input (no inequality defined), matching the Python helper.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .morie_fairness_gini_core <- function(x) {

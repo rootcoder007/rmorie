@@ -8,12 +8,12 @@
 corrupt(y, q, rng)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; its length is taken.}
 \item{q}{See Usage.}
-\item{rng}{See Usage.}
+\item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the cdaeRC_native implementation; see the file header for the source it follows.
+A step of the cdaeRC_native implementation. Called by \code{fit_cdae}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

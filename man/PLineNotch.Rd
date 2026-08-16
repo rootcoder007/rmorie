@@ -8,10 +8,10 @@
 PLineNotch(x, fs, f0 = 60, harmonics = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{f0}{Defaults to \code{60}.}
-\item{harmonics}{Defaults to \code{1}.}
+\item{x}{Passed to \code{.morie_qrs_check}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{f0}{Numeric; combined arithmetically in the body. Defaults to \code{60}.}
+\item{harmonics}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1}.}
 }
 \description{
 H(1) = 2 - 2 cos(wo) so the passband gain at DC is unity.  Extra zeros at n fo / fs make it a comb for the harmonics of a non-sinusoidal mains waveform.

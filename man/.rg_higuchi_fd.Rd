@@ -12,7 +12,7 @@
 \item{kmax}{See Usage.}
 }
 \description{
-Part of the rgemgfd implementation; see the file header for the source it follows.
+A step of the rgemgfd implementation. Called by \code{rgemgfd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

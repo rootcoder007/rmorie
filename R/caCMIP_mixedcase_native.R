@@ -13,7 +13,7 @@
 #' Part of the caCMIP_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param a See Usage.
+#' @param a A vector; its length is taken.
 #' @param b See Usage.
 #' @return A numeric value.
 #' @export

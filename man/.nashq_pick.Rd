@@ -8,14 +8,14 @@
 .nashq_pick(M, A, who, epsilon, rng_e)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{A}{See Usage.}
+\item{M}{A matrix; passed to \code{nrow}.}
+\item{A}{A vector; its length is taken.}
 \item{who}{See Usage.}
 \item{epsilon}{See Usage.}
-\item{rng_e}{See Usage.}
+\item{rng_e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{morie_nashq}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

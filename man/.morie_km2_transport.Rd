@@ -8,12 +8,12 @@
 .morie_km2_transport(a, b, C)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{C}{See Usage.}
+\item{a}{A vector; its length is taken.}
+\item{b}{A vector; its length is taken.}
+\item{C}{A matrix; indexed by row and column.}
 }
 \description{
-Bellman-Ford potentials); ports km122\\\'s _solve_transport, and km/kmmsc\\\'s WMD reads its objective off the same core.
+Bellman-Ford potentials); ports km122\\'s _solve_transport, and km/kmmsc\\'s WMD reads its objective off the same core.
 }
 \value{
 A list with \code{flow}, \code{u}, \code{v}.

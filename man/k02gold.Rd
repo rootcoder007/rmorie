@@ -14,7 +14,7 @@ k02gold(f, lo, hi, iters = 80L)
 \item{iters}{Defaults to \code{80L}.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{magpa}, \code{matrl}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

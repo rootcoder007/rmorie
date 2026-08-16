@@ -8,7 +8,7 @@
 StepSeq(n, shift = 0)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A vector; its length is taken.}
 \item{shift}{Defaults to \code{0}.}
 }
 \description{

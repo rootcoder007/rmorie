@@ -8,12 +8,12 @@
 .morie_spx_lstsq(A, y, ridge = 0)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{Defaults to \code{0}.}
+\item{A}{A matrix; passed to \code{t}.}
+\item{y}{Passed to \code{.morie_spx_matvec}.}
+\item{ridge}{A flag; the body branches on it. Defaults to \code{0}.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}, \code{ShiftInt}, \code{SpErrMod}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_spx_solve}.

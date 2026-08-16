@@ -16,7 +16,7 @@ compare_scaling(x_a, y_a, x_b, y_b, label_a = "A", label_b = "B")
 \item{label_b}{Defaults to \code{"B"}.}
 }
 \description{
-Part of the opnclp_native implementation; see the file header for the source it follows.
+A step of the opnclp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

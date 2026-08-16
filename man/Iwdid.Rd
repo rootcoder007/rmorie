@@ -21,7 +21,7 @@ Iwdid(y, unit, time, cohort, never = 0)
 List with \code{event_time}, \code{att}, \code{overall}, \code{cohorts}, \code{n}.
 }
 \description{
-Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in \link{-l, T-l}}
+Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in [-l, T-l]}
 }
 \references{
 Sun and Abraham (2021), Estimating dynamic treatment effects in event studies with heterogeneous treatment effects, Journal of Econometrics 225(3):175-199. Equations (26) and (28) for the estimand and the IW estimator, Section 4.2 for the DID choice of pre-period and control cohort. Verified against the paper.

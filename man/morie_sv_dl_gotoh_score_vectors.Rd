@@ -10,13 +10,13 @@ morie_sv_dl_gotoh_score_vectors(consensus, ref, match = 1, mismatch = -2, gap_op
 \arguments{
 \item{consensus}{See Usage.}
 \item{ref}{See Usage.}
-\item{match}{Defaults to \code{1}.}
-\item{mismatch}{Defaults to \code{-2}.}
-\item{gap_open}{Defaults to \code{-4}.}
-\item{gap_extend}{Defaults to \code{-1}.}
+\item{match}{Passed to \code{.sv_dl_gotoh}. Defaults to \code{1}.}
+\item{mismatch}{Passed to \code{.sv_dl_gotoh}. Defaults to \code{-2}.}
+\item{gap_open}{Passed to \code{.sv_dl_gotoh}. Defaults to \code{-4}.}
+\item{gap_extend}{Passed to \code{.sv_dl_gotoh}. Defaults to \code{-1}.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_refine_breakpoint}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{f}, \code{f_at}, \code{r}, \code{r_at}.

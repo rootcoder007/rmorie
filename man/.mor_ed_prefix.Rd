@@ -8,10 +8,10 @@
 .mor_ed_prefix(D)
 }
 \arguments{
-\item{D}{See Usage.}
+\item{D}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the e_div_native implementation; see the file header for the source it follows.
+A step of the e_div_native implementation. Called by \code{morie_e_div}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{P}, as built in the body.

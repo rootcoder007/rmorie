@@ -8,14 +8,14 @@
 .schab_cross_k(p1, p2, region, r, correction = "ripley")
 }
 \arguments{
-\item{p1}{See Usage.}
-\item{p2}{See Usage.}
-\item{region}{See Usage.}
+\item{p1}{A matrix; indexed by row and column.}
+\item{p2}{A matrix; indexed by row and column.}
+\item{region}{A vector; indexed elementwise.}
 \item{r}{See Usage.}
-\item{correction}{Defaults to \code{"ripley"}.}
+\item{correction}{One of \code{"none"}, \code{"ripley"}. Defaults to \code{"ripley"}.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_cross_k_combined}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

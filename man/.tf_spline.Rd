@@ -8,12 +8,12 @@
 .tf_spline(xs, ys, xq)
 }
 \arguments{
-\item{xs}{See Usage.}
-\item{ys}{See Usage.}
-\item{xq}{See Usage.}
+\item{xs}{A vector; its length is taken and its elements indexed.}
+\item{ys}{A vector; indexed elementwise.}
+\item{xq}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_sift}, \code{Imf}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

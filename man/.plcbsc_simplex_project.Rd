@@ -8,10 +8,10 @@
 .plcbsc_simplex_project(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the plcbsc_native implementation; see the file header for the source it follows.
+A step of the plcbsc_native implementation. Called by \code{.plcbsc_synthetic_control}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pmax}.

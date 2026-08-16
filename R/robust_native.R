@@ -20,10 +20,11 @@
 
 #' .rob_mad
 #'
-#' Part of the robust_native implementation; see the file header for the
+#' A step of the robust_native implementation. Called by \code{.rob_s_scale}, \code{morie_rob_huber}, \code{morie_rob_m}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
+#' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rob_mad <- function(r) {
@@ -32,11 +33,12 @@
 
 #' .rob_tukey_rho
 #'
-#' Part of the robust_native implementation; see the file header for the
+#' A step of the robust_native implementation. Called by \code{.rob_s_scale}, \code{morie_rob_tau}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param cc See Usage.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param cc Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rob_tukey_rho <- function(u, cc) {
@@ -52,8 +54,8 @@
 #' redescending part is what buys breakdown -- a gross outlier gets no
 #' vote at all, where Huber\'s psi still gives it a bounded one.
 #'
-#' @param u See Usage.
-#' @param cc See Usage.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param cc Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
 .rob_tukey_w <- function(u, cc) {
@@ -69,9 +71,9 @@
 #' b = 1/2 -- the 50%-breakdown calibration. The fixed-point iteration
 #' s^2 <- s^2 * mean(rho(r/s))/b is monotone for the biweight.
 #'
-#' @param r See Usage.
-#' @param cc Defaults to \code{.rob_tukey_c_bdp}.
-#' @param b Defaults to \code{0.5}.
+#' @param r Numeric; passed to \code{abs}.
+#' @param cc Passed to \code{.rob_tukey_rho}. Defaults to \code{.rob_tukey_c_bdp}.
+#' @param b Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .rob_s_scale <- function(r, cc = .rob_tukey_c_bdp, b = 0.5) {
@@ -90,10 +92,11 @@
 
 #' .rob_design
 #'
-#' Part of the robust_native implementation; see the file header for the
+#' A step of the robust_native implementation. Called by \code{morie_rob_huber}, \code{morie_rob_m}, \code{morie_rob_mm} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @return A list with \code{X}, \code{y}.
 #' @export
@@ -120,9 +123,9 @@
 #' local IRLS refinement. Non-convex objective, so the subsets are the
 #' global search and the refinement the local one.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param n_subsets See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param n_subsets A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.
 #' @return A list with \code{beta}, \code{scale}.
 #' @export
@@ -175,14 +178,15 @@
 
 #' .rob_irls_fixed_scale
 #'
-#' Part of the robust_native implementation; see the file header for the
+#' A step of the robust_native implementation. Called by \code{morie_rob_mm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param beta See Usage.
-#' @param scale See Usage.
-#' @param cc See Usage.
+#' @param X A matrix; passed to \code{\%*\%}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param beta A matrix; passed to \code{\%*\%}.
+#' @param scale Numeric; combined arithmetically in the body.
+#' @param cc Passed to \code{.rob_tukey_w}.
 #' @return A list with \code{beta}, \code{converged}.
 #' @export
 .rob_irls_fixed_scale <- function(X, y, beta, scale, cc) {

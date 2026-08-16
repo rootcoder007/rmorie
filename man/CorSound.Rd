@@ -11,9 +11,9 @@ CorSound(diameter, flow_velocity, stenosis_pct = 0, p2max = 1, freqs = NULL, nu 
 \item{diameter}{See Usage.}
 \item{flow_velocity}{See Usage.}
 \item{stenosis_pct}{Defaults to \code{0}.}
-\item{p2max}{Defaults to \code{1}.}
+\item{p2max}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{freqs}{Defaults to \code{NULL}.}
-\item{nu}{Defaults to \code{3.5e-06}.}
+\item{nu}{Numeric; combined arithmetically in the body. Defaults to \code{3.5e-06}.}
 }
 \description{
 Rangayyan (2024) eqs. (7.135)-(7.136), Section 7.7.2.

@@ -8,11 +8,11 @@
 .morie_gr_sym_eval(e, env)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{env}{See Usage.}
+\item{e}{A vector; its length is taken and its elements indexed.}
+\item{env}{A vector; indexed elementwise.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_sym_simplify}, \code{morie_geron_symbolic_differentiation}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{switch}.

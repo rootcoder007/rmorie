@@ -8,11 +8,11 @@
 .morie_km2_layer_norm(x, eps = 1e-05)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{eps}{Defaults to \code{1e-05}.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_layer_norm_rows}, \code{morie_kamath_post_ln_transformer}, \code{morie_kamath_pre_ln_transformer}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

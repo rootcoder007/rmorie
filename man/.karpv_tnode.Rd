@@ -11,7 +11,7 @@
 \item{term}{See Usage.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{.karpv_copy}, \code{.karpv_random_terminal}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{term}.

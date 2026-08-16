@@ -8,11 +8,11 @@
 .saigeg_design(X, n)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{n}{See Usage.}
+\item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
-Part of the saigeg_native implementation; see the file header for the source it follows.
+A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

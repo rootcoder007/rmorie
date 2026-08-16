@@ -8,10 +8,10 @@
 .s03sigmoid(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{exp}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.dnnact}, \code{.dw_skipgram}, \code{.s03swish} and 21 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

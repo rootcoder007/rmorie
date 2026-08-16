@@ -8,12 +8,12 @@
 .bnppvl_cdf_at(u, q, k)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{q}{See Usage.}
-\item{k}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{q}{A vector; indexed elementwise.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bnppvl_native implementation; see the file header for the source it follows.
+A step of the bnppvl_native implementation. Called by \code{morie_bnppvl}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

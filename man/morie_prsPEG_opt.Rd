@@ -8,10 +8,10 @@
 morie_prsPEG_opt(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Passed to \code{morie_prsPEG_choice}.}
 }
 \description{
-Part of the prsPEG_native implementation; see the file header for the source it follows.
+A step of the prsPEG_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_prsPEG_choice}.

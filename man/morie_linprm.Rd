@@ -10,12 +10,12 @@ morie_linprm(c, A, b, tol = 1e-10, max_iter = 200)
 \arguments{
 \item{c}{See Usage.}
 \item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{b}{A vector; its length is taken and its elements indexed.}
 \item{tol}{Defaults to \code{1e-10}.}
 \item{max_iter}{Defaults to \code{200}.}
 }
 \description{
-Part of the linprm_native implementation; see the file header for the source it follows.
+A step of the linprm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{x}, \code{y}, \code{s}, \code{iterations}, \code{gap}, \code{converged}, \code{mu_history}, \code{primal_residual}, \code{dual_residual}.

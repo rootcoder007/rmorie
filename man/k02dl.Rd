@@ -8,11 +8,11 @@
 k02dl(y, v)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{v}{See Usage.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{mabay}, \code{mac3}, \code{macum} and 7 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tau2}, \code{mu}, \code{var}, \code{Q}, \code{df}.

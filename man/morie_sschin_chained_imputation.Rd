@@ -10,13 +10,13 @@ morie_sschin_chained_imputation(time, event, X, mi_iter = 5L, cycles = 10L, ties
 \arguments{
 \item{time}{See Usage.}
 \item{event}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{mi_iter}{Defaults to \code{5L}.}
 \item{cycles}{Defaults to \code{10L}.}
-\item{ties}{Defaults to \code{"breslow"}.}
+\item{ties}{Compared against \code{"breslow"}. Defaults to \code{"breslow"}.}
 }
 \description{
-Part of the sschin_native implementation; see the file header for the source it follows.
+A step of the sschin_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{coefficients}, \code{hazard_ratio}, \code{std_error}, \code{total_variance}, \code{within_variance}, \code{between_variance}, \code{ci_lower}, \code{ci_upper}, \code{t_quantile}, \code{df}, \code{relative_increase_variance}, \code{fraction_missing_info}, \code{per_imputation}, \code{complete_case_coefficients}, \code{complete_case_se}, \code{n_complete_cases}, \code{n}, \code{p}, \code{m}, \code{cycles}, \code{n_missing}, \code{columns_imputed}, \code{n_events}, \code{df_complete}, \code{method}, \code{note}.

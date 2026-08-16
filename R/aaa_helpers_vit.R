@@ -31,12 +31,13 @@
 # A deterministic nr-by-nc parameter matrix, row-major off the stream.
 #' A deterministic nr-by-nc parameter matrix, row-major off the stream
 #'
-#' Part of the helpers_vit implementation; see the file header for the
+#' A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber}, \code{Vaecf} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nr See Usage.
-#' @param nc See Usage.
-#' @param skip Defaults to \code{0}.
+#' @param nr A count; the body uses it as \code{matrix(...)}.
+#' @param nc A count; the body uses it as \code{matrix(...)}.
+#' @param skip Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param scale Defaults to \code{1}.
 #' @return A matrix, from \code{matrix}.
 #' @export
@@ -54,11 +55,12 @@
 # LN(v) = (v - mean v) / sqrt(pop.var v + eps), gamma = 1, beta = 0.
 #' LN(v) = (v - mean v) / sqrt(pop.var v + eps), gamma = 1, beta = 0
 #'
-#' Part of the helpers_vit implementation; see the file header for the
+#' A step of the helpers_vit implementation. Called by \code{.vitlnrows}, \code{Vitfwd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param eps Defaults to \code{.vitlneps}.
+#' @param v A vector; its length is taken.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{.vitlneps}.
 #' @return A numeric value.
 #' @export
 .vitln <- function(v, eps = .vitlneps) {
@@ -71,11 +73,12 @@
 
 #' .vitlnrows
 #'
-#' Part of the helpers_vit implementation; see the file header for the
+#' A step of the helpers_vit implementation. Called by \code{Vitfwd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param eps Defaults to \code{.vitlneps}.
+#' @param A A matrix; indexed by row and column.
+#' @param eps Passed to \code{.vitln}. Defaults to \code{.vitlneps}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .vitlnrows <- function(A, eps = .vitlneps) {
@@ -91,7 +94,7 @@
 #'
 #' the single-channel case, C = 1.
 #'
-#' @param image See Usage.
+#' @param image Passed to \code{.s03mat}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .vitchan <- function(image) {
@@ -109,10 +112,11 @@
 # Index of the first maximum; R's which.max already has this tie rule.
 #' Index of the first maximum; R\'s which.max already has this tie rule
 #'
-#' Part of the helpers_vit implementation; see the file header for the
+#' A step of the helpers_vit implementation. Called by \code{Vitfsv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return The value of \code{which.max}.
 #' @export
 .vitargmax <- function(v) {

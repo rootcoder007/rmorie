@@ -9,11 +9,11 @@ morie_S_function(std_moments, form = "sum", n_equality = 0L)
 }
 \arguments{
 \item{std_moments}{See Usage.}
-\item{form}{Defaults to \code{"sum"}.}
+\item{form}{One of \code{"max"}, \code{"sum"}. Defaults to \code{"sum"}.}
 \item{n_equality}{Defaults to \code{0L}.}
 }
 \description{
-Part of the bndsmw_native implementation; see the file header for the source it follows.
+A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic}, \code{morie_gms_critical_value}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

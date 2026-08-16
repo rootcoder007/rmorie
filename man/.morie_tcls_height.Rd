@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{n}{See Usage.}
-\item{children}{See Usage.}
+\item{children}{A vector; indexed elementwise.}
 }
 \description{
-Part of the tcls_native implementation; see the file header for the source it follows.
+A step of the tcls_native implementation. Called by \code{.morie_tcls_hier}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

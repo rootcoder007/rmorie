@@ -6,12 +6,13 @@
 
 #' .rkmeans_phi
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param t See Usage.
-#' @param penalty See Usage.
-#' @param c_val See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param penalty One of \code{"absolute"}, \code{"square"}.
+#' @param c_val Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rkmeans_phi <- function(t, penalty, c_val) {
@@ -29,11 +30,12 @@
 
 #' .rkmeans_dist
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}, \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param m See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param m Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rkmeans_dist <- function(x, m) {
@@ -43,10 +45,11 @@
 
 #' .rkmeans_mean
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}, \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param pts See Usage.
+#' @param pts A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .rkmeans_mean <- function(pts) {
@@ -60,12 +63,13 @@
 
 #' .rkmeans_spatial_median
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param pts See Usage.
+#' @param pts Passed to \code{.rkmeans_mean}.
 #' @param tol Defaults to \code{1e-10}.
-#' @param max_iter Defaults to \code{200}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .rkmeans_spatial_median <- function(pts, tol = 1e-10, max_iter = 200) {
@@ -99,13 +103,14 @@
 
 #' .rkmeans_huber_centre
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param pts See Usage.
-#' @param c_val See Usage.
+#' @param pts Passed to \code{.rkmeans_mean}.
+#' @param c_val Numeric; combined arithmetically in the body.
 #' @param tol Defaults to \code{1e-10}.
-#' @param max_iter Defaults to \code{200}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .rkmeans_huber_centre <- function(pts, c_val, tol = 1e-10, max_iter = 200) {
@@ -134,16 +139,17 @@
 
 #' .rkmeans_concentrate
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. Called by \code{morie_rkmeans}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rows See Usage.
-#' @param cen See Usage.
-#' @param k See Usage.
-#' @param n_keep See Usage.
-#' @param penalty See Usage.
-#' @param huber_c See Usage.
-#' @param max_iter See Usage.
+#' @param rows A vector; its length is taken and its elements indexed.
+#' @param cen A vector; indexed elementwise.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param n_keep A count; the body uses it as \code{seq_len(...)}.
+#' @param penalty One of \code{"absolute"}, \code{"square"}.
+#' @param huber_c Passed to \code{.rkmeans_phi}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{list}.
 #' @export
 .rkmeans_concentrate <- function(rows, cen, k, n_keep, penalty, huber_c, max_iter) {
@@ -209,18 +215,19 @@
 
 #' morie_rkmeans
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param k Defaults to \code{2}.
-#' @param alpha Defaults to \code{0.1}.
-#' @param penalty Defaults to \code{"square"}.
+#' @param X A matrix; indexed by row and column.
+#' @param k A count; the body uses it as \code{integer(...)}. Defaults to \code{2}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param penalty Compared against \code{"huber"}. Defaults to \code{"square"}.
 #' @param n_start Defaults to \code{20}.
 #' @param max_iter Defaults to \code{100}.
-#' @param huber_c Defaults to \code{1.345}.
-#' @param seed Defaults to \code{0}.
-#' @param centers Defaults to \code{NULL}.
+#' @param huber_c Passed to \code{.rkmeans_concentrate}. Defaults to \code{1.345}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param centers Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return A list with \code{estimate}, \code{centers}, \code{labels}, \code{kept}, \code{outliers}, \code{criterion}, \code{distances}, \code{sizes}, \code{n_trimmed}, \code{n_kept}, \code{alpha}, \code{k}, \code{penalty}, \code{method}.
 #' @export
 morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
@@ -317,7 +324,8 @@ morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
 
 #' .rkmeans_cheatsheet
 #'
-#' Part of the rkmeans_native implementation; see the file header for
+#' A step of the rkmeans_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

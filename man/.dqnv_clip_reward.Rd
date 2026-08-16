@@ -13,7 +13,7 @@
 \item{hi}{Defaults to \code{1}.}
 }
 \description{
-Part of the dqnv_native implementation; see the file header for the source it follows.
+A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

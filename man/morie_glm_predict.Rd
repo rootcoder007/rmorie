@@ -8,14 +8,14 @@
 morie_glm_predict(fit, X, add_intercept = TRUE, type = c("response", "link"), offset = NULL)
 }
 \arguments{
-\item{fit}{See Usage.}
-\item{X}{See Usage.}
-\item{add_intercept}{Defaults to \code{TRUE}.}
-\item{type}{Defaults to \code{c("response", "link")}.}
+\item{fit}{A list; the body reads \code{$coef}, \code{$family} from it.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{type}{Compared against \code{"link"}. Defaults to \code{c("response", "link")}.}
 \item{offset}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the glm implementation; see the file header for the source it follows.
+A step of the glm implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_glm_families()[[fit$family]]$linkinv}.

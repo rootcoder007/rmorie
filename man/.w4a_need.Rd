@@ -8,11 +8,11 @@
 .w4a_need(cond, msg)
 }
 \arguments{
-\item{cond}{See Usage.}
+\item{cond}{A flag; the body branches on it.}
 \item{msg}{See Usage.}
 }
 \description{
-Part of the geron_w4a_native implementation; see the file header for the source it follows.
+A step of the geron_w4a_native implementation. Called by \code{morie_beta_schedule_values}, \code{morie_check_buffer}, \code{morie_dueling_q} and 35 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

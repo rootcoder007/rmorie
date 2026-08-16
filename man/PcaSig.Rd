@@ -8,7 +8,7 @@
 PcaSig(X, ncomp = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.morie_bx_mat}.}
 \item{ncomp}{Defaults to \code{NULL}.}
 }
 \description{

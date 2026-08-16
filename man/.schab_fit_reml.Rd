@@ -8,17 +8,17 @@
 .schab_fit_reml(coords, z, X, model = "exponential", start_ratio = 0.1, start_range = NULL, max_iter = 200L, tol = 1e-10)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{z}{See Usage.}
-\item{X}{See Usage.}
-\item{model}{Defaults to \code{"exponential"}.}
-\item{start_ratio}{Defaults to \code{0.1}.}
-\item{start_range}{Defaults to \code{NULL}.}
-\item{max_iter}{Defaults to \code{200L}.}
+\item{coords}{A matrix; passed to \code{nrow}.}
+\item{z}{A vector; its length is taken.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{model}{Passed to \code{.schab_profiled_reml}. Defaults to \code{"exponential"}.}
+\item{start_ratio}{Passed to \code{.schab_logit}. Defaults to \code{0.1}.}
+\item{start_range}{Optional; may be \code{NULL}. Numeric; passed to \code{log}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the schab_reml_shared implementation; see the file header for the source it follows.
+A step of the schab_reml_shared implementation. Called by \code{spreml}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget}, \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.

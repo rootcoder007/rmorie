@@ -8,7 +8,7 @@
 .tlnet1_mat(W)
 }
 \arguments{
-\item{W}{See Usage.}
+\item{W}{A matrix; indexed by row and column.}
 }
 \description{
 of k.mat) Part of the tlnet1_native implementation; see the file header for the source it follows.

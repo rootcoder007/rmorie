@@ -6,7 +6,8 @@
 
 #' .morie_rg_aslist
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY}, \code{DeltaDecomp} and 10 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -24,8 +25,8 @@
 #' O(h^4)); trapezoid otherwise, which is what a non-uniform grid admits
 #' without interpolating.
 #'
-#' @param y See Usage.
-#' @param x Defaults to \code{NULL}.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param x Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{.morie_fsum}.
 #' @export
 .morie_rg_gridint <- function(y, x = NULL) {
@@ -58,9 +59,9 @@
 #' a black-box integrator happens to do.
 #'
 #' @param f See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param tol Defaults to \code{1.49e-08}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1.49e-08}.
 #' @param maxdepth Defaults to \code{50L}.
 #' @return The value of \code{rec}.
 #' @export
@@ -92,7 +93,8 @@
 
 #' .morie_rg_pdfint
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt}, \code{PdfMean} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
@@ -131,10 +133,11 @@
 
 #' .morie_rg_checkpdf
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt}, \code{PdfMean} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mass See Usage.
+#' @param mass Numeric; combined arithmetically in the body.
 #' @param tol Defaults to \code{1e-06}.
 #' @return A list with \code{pdf_mass}, \code{pdf_mass_ok}.
 #' @export
@@ -146,13 +149,14 @@
 
 #' Eq (3.1): mu = E[eta] = integral eta p(eta) d eta
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pdf Defaults to \code{NULL}.
-#' @param x Defaults to \code{NULL}.
-#' @param lower Defaults to \code{-Inf}.
-#' @param upper Defaults to \code{Inf}.
+#' @param pdf Passed to \code{.morie_rg_pdfint}.
+#' @param x Passed to \code{.morie_rg_pdfint}.
+#' @param lower Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.
+#' @param upper Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.
 #' @return A vector, from \code{c}.
 #' @export
 PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
@@ -169,10 +173,10 @@ PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #'
 #' are returned rather than one being assumed for the other.
 #'
-#' @param pdf Defaults to \code{NULL}.
-#' @param x Defaults to \code{NULL}.
-#' @param lower Defaults to \code{-Inf}.
-#' @param upper Defaults to \code{Inf}.
+#' @param pdf Passed to \code{.morie_rg_pdfint}.
+#' @param x Passed to \code{.morie_rg_pdfint}.
+#' @param lower Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.
+#' @param upper Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.
 #' @return A vector, from \code{c}.
 #' @export
 PdfMS <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
@@ -197,10 +201,10 @@ PdfMS <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' is left NULL once mu is negligible against sigma; the book warns it
 #' diverges as mu -> 0.
 #'
-#' @param pdf Defaults to \code{NULL}.
-#' @param x Defaults to \code{NULL}.
-#' @param lower Defaults to \code{-Inf}.
-#' @param upper Defaults to \code{Inf}.
+#' @param pdf Passed to \code{.morie_rg_pdfint}.
+#' @param x Passed to \code{.morie_rg_pdfint}.
+#' @param lower Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.
+#' @param upper Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.
 #' @return A vector, from \code{c}.
 #' @export
 PdfVar <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
@@ -224,13 +228,14 @@ PdfVar <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 
 #' Eq (3.4): S = (1/sigma^3) integral (eta - mu)^3 p(eta) d eta
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pdf Defaults to \code{NULL}.
-#' @param x Defaults to \code{NULL}.
-#' @param lower Defaults to \code{-Inf}.
-#' @param upper Defaults to \code{Inf}.
+#' @param pdf Passed to \code{.morie_rg_pdfint}.
+#' @param x Passed to \code{.morie_rg_pdfint}.
+#' @param lower Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.
+#' @param upper Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.
 #' @return A vector, from \code{c}.
 #' @export
 PdfSkew <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
@@ -256,10 +261,10 @@ PdfSkew <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #'
 #' gives 3 for a Gaussian and defines the excess K\' = K - 3.
 #'
-#' @param pdf Defaults to \code{NULL}.
-#' @param x Defaults to \code{NULL}.
-#' @param lower Defaults to \code{-Inf}.
-#' @param upper Defaults to \code{Inf}.
+#' @param pdf Passed to \code{.morie_rg_pdfint}.
+#' @param x Passed to \code{.morie_rg_pdfint}.
+#' @param lower Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.
+#' @param upper Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.
 #' @return A vector, from \code{c}.
 #' @export
 PdfKurt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
@@ -287,10 +292,10 @@ PdfKurt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' p -> 0, so zero-density points contribute nothing.  This is a density
 #' inside the log, so unlike eq (3.11) the result may be negative.
 #'
-#' @param pdf Defaults to \code{NULL}.
+#' @param pdf Passed to \code{.morie_rg_pdfint}.
 #' @param x Defaults to \code{NULL}.
-#' @param lower Defaults to \code{-Inf}.
-#' @param upper Defaults to \code{Inf}.
+#' @param lower Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.
+#' @param upper Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.
 #' @return A vector, from \code{c}.
 #' @export
 DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
@@ -331,10 +336,11 @@ DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 
 #' Eq (3.7): mu = (1/N) sum eta(n) -- the DC component of the signal
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.morie_rg_aslist}.
 #' @return A list with \code{mean}, \code{n}, \code{method}.
 #' @export
 Smean <- function(x) {
@@ -351,7 +357,7 @@ Smean <- function(x) {
 #'
 #' (3.10) is the population SD, not the N-1 unbiased one.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.morie_rg_aslist}.
 #' @return A list with \code{rms}, \code{ms}, \code{sd}, \code{mean}, \code{n}, \code{ddof}, \code{method}.
 #' @export
 Srms <- function(x) {
@@ -371,10 +377,11 @@ Srms <- function(x) {
 
 #' Eq (3.11): H = - sum p(eta_l) log2 p(eta_l), over L quantized values
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{.morie_rg_aslist}.
 #' @param levels Defaults to \code{NULL}.
 #' @return A list with \code{entropy}, \code{units}, \code{levels}, \code{max_entropy}, \code{probabilities}, \code{method}.
 #' @export
@@ -417,8 +424,8 @@ Shannon <- function(p, levels = NULL) {
 #' uncorrelated, so the sample correlation is measured and both the
 #' observed and the additive variance are returned side by side.
 #'
-#' @param x See Usage.
-#' @param eta See Usage.
+#' @param x Passed to \code{.morie_rg_aslist}.
+#' @param eta Passed to \code{.morie_rg_aslist}.
 #' @return A list with \code{y}, \code{mean_signal}, \code{mean_noise}, \code{mean_observed}, \code{mean_additive}, \code{variance_observed}, \code{variance_additive}, \code{covariance}, \code{correlation}, \code{n}, \code{method}.
 #' @export
 NoiseModel <- function(x, eta) {
@@ -474,10 +481,11 @@ MeanSum <- function(...) {
 
 #' Eq (3.15): mu_x(t1) = (1/M) sum_k x_k(t1)
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param observations See Usage.
+#' @param observations Passed to \code{.morie_rg_aslist}.
 #' @param index Defaults to \code{NULL}.
 #' @return A list with \code{mean}, \code{m}, \code{sd}, \code{se}, \code{method}.
 #' @export
@@ -538,11 +546,12 @@ EnsAvg <- function(observations) {
 
 #' Eqs (3.21)-(3.22): C_xy and rho = C_xy / (sigma_x sigma_y)
 #'
-#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Passed to \code{.morie_rg_aslist}.
+#' @param y Passed to \code{.morie_rg_aslist}.
 #' @param ddof Defaults to \code{0}.
 #' @return A list with \code{covariance}, \code{correlation}, \code{sd_x}, \code{sd_y}, \code{mean_x}, \code{mean_y}, \code{n}, \code{ddof}, \code{method}.
 #' @export
@@ -575,7 +584,7 @@ CovXY <- function(x, y, ddof = 0) {
 #' returned there.  With width= the unit-area rectangle of Figure 3.10
 #' is returned instead -- the approximating family, not the delta.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{.morie_rg_aslist}.
 #' @param width Defaults to \code{NULL}.
 #' @return A list with \code{delta}, \code{t}, \code{width}, \code{height}, \code{undefined_at_zero}, \code{method}.
 #' @export
@@ -606,8 +615,8 @@ DiracDelta <- function(t, width = NULL) {
 #'
 #' so the useful computation is the check on a candidate approximation.
 #'
-#' @param t Defaults to \code{NULL}.
-#' @param values Defaults to \code{NULL}.
+#' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.
+#' @param values Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.
 #' @param width Defaults to \code{NULL}.
 #' @return A list with \code{area}, \code{unit_area}, \code{method}.
 #' @export
@@ -649,7 +658,7 @@ DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
 #' not a large finite number).  Its integral over [-L, L] is L^a, which
 #' tends to 1 as a -> 0 -- the unit-area property in the limit.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{.morie_rg_aslist}.
 #' @param a See Usage.
 #' @return A list with \code{values}, \code{t}, \code{a}, \code{area_symmetric}, \code{half_width}, \code{method}.
 #' @export
@@ -675,7 +684,7 @@ DeltaLim <- function(t, a) {
 #' whereas the discrete step of eq (3.35) has u(0) = 1.  They are
 #' separate definitions, not one sampled from the other.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{.morie_rg_aslist}.
 #' @param shift Defaults to \code{0}.
 #' @return A list with \code{u}, \code{t}, \code{shift}, \code{value_at_origin}, \code{method}.
 #' @export
@@ -724,8 +733,8 @@ Sifting <- function(x, t0, lower, upper) {
 #' weight at alpha_i is x(alpha_i) times a trapezoidal spacing, so the
 #' weights sum to the integral of x rather than to the sum of samples.
 #'
-#' @param x See Usage.
-#' @param t Defaults to \code{NULL}.
+#' @param x Passed to \code{.morie_rg_aslist}.
+#' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.
 #' @return A list with \code{locations}, \code{weights}, \code{amplitudes}, \code{total_weight}, \code{integral}, \code{reconstruction_error}, \code{method}.
 #' @export
 DeltaDecomp <- function(x, t = NULL) {
@@ -763,10 +772,10 @@ DeltaDecomp <- function(x, t = NULL) {
 #' the dt is how a continuous-time convolution comes out wrong by a
 #' factor of the sampling interval.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x Passed to \code{.morie_rg_aslist}.
+#' @param h Passed to \code{.morie_rg_aslist}.
 #' @param dt Defaults to \code{1}.
-#' @param t Defaults to \code{NULL}.
+#' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.
 #' @return A list with \code{y}, \code{t}, \code{dt}, \code{n}, \code{m}, \code{integral}, \code{method}.
 #' @export
 ContConv <- function(x, h, dt = 1, t = NULL) {
@@ -833,7 +842,7 @@ ContConvAlt <- function(x, h, dt = 1, t = NULL) {
 #'
 #' is an ordinary sequence, evaluable at the origin.
 #'
-#' @param n See Usage.
+#' @param n A vector; its length is taken.
 #' @param shift Defaults to \code{0}.
 #' @param amplitude Defaults to \code{1}.
 #' @return A list with \code{delta}, \code{n}, \code{shift}, \code{amplitude}, \code{method}.
@@ -858,7 +867,7 @@ KDelta <- function(n, shift = 0, amplitude = 1) {
 #'
 #' u(0) = 1 -- the opposite of eq (3.27).
 #'
-#' @param n See Usage.
+#' @param n A vector; its length is taken.
 #' @param shift Defaults to \code{0}.
 #' @return A list with \code{u}, \code{n}, \code{shift}, \code{first_difference}, \code{value_at_origin}, \code{method}.
 #' @export
@@ -886,10 +895,10 @@ StepSeq <- function(n, shift = 0) {
 #' all values of h(n) -- the normalization is part of the method; the
 #' raw taps sum to 626.25 for the book\'s constants.
 #'
-#' @param x Defaults to \code{NULL}.
-#' @param fs Defaults to \code{2000}.
-#' @param duration Defaults to \code{0.25}.
-#' @param slope Defaults to \code{10}.
+#' @param x Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{2000}.
+#' @param duration Numeric; combined arithmetically in the body. Defaults to \code{0.25}.
+#' @param slope Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 RampFilt <- function(x = NULL, fs = 2000, duration = 0.25, slope = 10) {

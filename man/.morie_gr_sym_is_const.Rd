@@ -8,10 +8,10 @@
 .morie_gr_sym_is_const(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{A vector; its length is taken.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_sym_diff}, \code{.morie_gr_sym_eval}, \code{.morie_gr_sym_simplify} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A logical value.

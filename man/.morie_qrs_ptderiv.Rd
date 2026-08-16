@@ -8,10 +8,10 @@
 .morie_qrs_ptderiv(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{.morie_qrs_chain}, \code{QrsDerivOp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -3,11 +3,12 @@
 # Internal: Gamma_l = n^-1 sum_{t=l+1}^{n} e_t e_{t-l}'.
 #' Internal: Gamma_l = n^-1 sum_{t=l+1}^{n} e_t e_{t-l}\'
 #'
-#' Part of the whtnse implementation; see the file header for the source
+#' A step of the whtnse implementation. Called by \code{morie_portmanteau_hosking}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param E See Usage.
-#' @param lag See Usage.
+#' @param E A matrix; indexed by row and column.
+#' @param lag Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .whtnse_autocov <- function(E, lag) {

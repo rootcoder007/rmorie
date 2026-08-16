@@ -12,7 +12,7 @@ phmmsr_striped_layout(length, vector_width = 4)
 \item{vector_width}{Defaults to \code{4}.}
 }
 \description{
-Part of the phmmsr_native implementation; see the file header for the source it follows.
+A step of the phmmsr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{order}, \code{segments}, \code{width}, \code{note}.

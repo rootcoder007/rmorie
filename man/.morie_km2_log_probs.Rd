@@ -13,7 +13,7 @@
 \item{name}{See Usage.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_cat_metric}, \code{morie_kamath_ch6_pll}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

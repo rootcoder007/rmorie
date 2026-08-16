@@ -8,11 +8,11 @@
 .morie_km2_dist(p, name)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{A vector; its length is taken.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_prompt_label_mapping}, \code{morie_kamath_ch3_top1_prompt_metric}, \code{morie_kamath_ch5_rlhf_objective} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{p}, as built in the body.

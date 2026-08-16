@@ -62,10 +62,11 @@
 
 #' .sdne_mat
 #'
-#' Part of the sdne_native implementation; see the file header for the
+#' A step of the sdne_native implementation. Called by \code{.sdne_first_order_loss}, \code{.sdne_penalty_matrix}, \code{.sdne_proximity_counts} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .sdne_mat <- function(x) {
@@ -84,10 +85,11 @@
 
 #' .sdne_penalty_matrix
 #'
-#' Part of the sdne_native implementation; see the file header for the
+#' A step of the sdne_native implementation. Called by \code{.sdne_second_order_loss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adjacency See Usage.
+#' @param adjacency Passed to \code{.sdne_mat}.
 #' @param beta Defaults to \code{5}.
 #' @return A list with \code{B}, \code{beta}, \code{n_nonzero}, \code{n_zero}.
 #' @export
@@ -106,12 +108,13 @@
 
 #' .sdne_second_order_loss
 #'
-#' Part of the sdne_native implementation; see the file header for the
+#' A step of the sdne_native implementation. Called by \code{morie_sdne}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adjacency See Usage.
-#' @param reconstruction See Usage.
-#' @param beta Defaults to \code{5}.
+#' @param adjacency Passed to \code{.sdne_mat}.
+#' @param reconstruction Passed to \code{.sdne_mat}.
+#' @param beta Passed to \code{.sdne_penalty_matrix}. Defaults to \code{5}.
 #' @return A list with \code{loss}, \code{unweighted}, \code{beta}, \code{note}.
 #' @export
 .sdne_second_order_loss <- function(adjacency, reconstruction, beta = 5.0) {
@@ -133,11 +136,12 @@
 
 #' .sdne_first_order_loss
 #'
-#' Part of the sdne_native implementation; see the file header for the
+#' A step of the sdne_native implementation. Called by \code{morie_sdne}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adjacency See Usage.
-#' @param embeddings See Usage.
+#' @param adjacency Passed to \code{.sdne_mat}.
+#' @param embeddings Passed to \code{.sdne_mat}.
 #' @return A list with \code{loss}, \code{linked_pairs}, \code{note}.
 #' @export
 .sdne_first_order_loss <- function(adjacency, embeddings) {
@@ -163,10 +167,11 @@
 
 #' .sdne_proximity_counts
 #'
-#' Part of the sdne_native implementation; see the file header for the
+#' A step of the sdne_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adjacency See Usage.
+#' @param adjacency Passed to \code{.sdne_mat}.
 #' @return A list with \code{first_order_pairs}, \code{second_order_pairs}, \code{total_pairs}, \code{density}, \code{ratio}, \code{note}.
 #' @export
 .sdne_proximity_counts <- function(adjacency) {
@@ -194,16 +199,17 @@
 
 #' morie_sdne
 #'
-#' Part of the sdne_native implementation; see the file header for the
+#' A step of the sdne_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adjacency See Usage.
-#' @param reconstruction See Usage.
-#' @param embeddings See Usage.
-#' @param beta Defaults to \code{5}.
+#' @param adjacency Passed to \code{.sdne_second_order_loss}.
+#' @param reconstruction Passed to \code{.sdne_second_order_loss}.
+#' @param embeddings Passed to \code{.sdne_first_order_loss}.
+#' @param beta Passed to \code{.sdne_second_order_loss}. Defaults to \code{5}.
 #' @param alpha Defaults to \code{0.1}.
 #' @param nu Defaults to \code{0}.
-#' @param parameters Defaults to \code{NULL}.
+#' @param parameters Optional; may be \code{NULL}. Passed to \code{.sdne_mat}.
 #' @return A list with \code{estimate}, \code{loss}, \code{second_order}, \code{first_order}, \code{regulariser}, \code{alpha}, \code{beta}, \code{method}, \code{note}.
 #' @export
 morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
@@ -229,7 +235,8 @@ morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
 
 #' morie_sdne_cheatsheet
 #'
-#' Part of the sdne_native implementation; see the file header for the
+#' A step of the sdne_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

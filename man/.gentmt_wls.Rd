@@ -8,12 +8,12 @@
 .gentmt_wls(X, y, w)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{w}{Numeric; passed to \code{sqrt}.}
 }
 \description{
-Part of the gentmt_native implementation; see the file header for the source it follows.
+A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{morie_gentmt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.

@@ -8,13 +8,13 @@
 reference_free(hyp, src, W, b = NULL)
 }
 \arguments{
-\item{hyp}{See Usage.}
-\item{src}{See Usage.}
-\item{W}{See Usage.}
+\item{hyp}{Passed to \code{.comet_vec}.}
+\item{src}{Passed to \code{.comet_vec}.}
+\item{W}{A matrix; passed to \code{nrow}.}
 \item{b}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the comet_native implementation; see the file header for the source it follows.
+A step of the comet_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{score}, \code{reference_used}, \code{note}.

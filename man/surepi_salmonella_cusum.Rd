@@ -9,14 +9,14 @@ surepi_salmonella_cusum(counts, mu0, sigma, k_shift = 1, decision = 0.5, min_cou
 }
 \arguments{
 \item{counts}{See Usage.}
-\item{mu0}{See Usage.}
-\item{sigma}{See Usage.}
+\item{mu0}{A vector; its length is taken.}
+\item{sigma}{A vector; its length is taken.}
 \item{k_shift}{Defaults to \code{1}.}
 \item{decision}{Defaults to \code{0.5}.}
 \item{min_count}{Defaults to \code{5}.}
 }
 \description{
-Part of the surepi_native implementation; see the file header for the source it follows.
+A step of the surepi_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cusum}, \code{flag}, \code{estimate}, \code{n_flagged}, \code{decision}, \code{k}, \code{min_count}, \code{method}.

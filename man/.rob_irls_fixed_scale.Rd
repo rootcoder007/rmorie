@@ -8,14 +8,14 @@
 .rob_irls_fixed_scale(X, y, beta, scale, cc)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{beta}{See Usage.}
-\item{scale}{See Usage.}
-\item{cc}{See Usage.}
+\item{X}{A matrix; passed to \code{\%*\%}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{beta}{A matrix; passed to \code{\%*\%}.}
+\item{scale}{Numeric; combined arithmetically in the body.}
+\item{cc}{Passed to \code{.rob_tukey_w}.}
 }
 \description{
-Part of the robust_native implementation; see the file header for the source it follows.
+A step of the robust_native implementation. Called by \code{morie_rob_mm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{converged}.

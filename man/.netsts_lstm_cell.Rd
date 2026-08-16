@@ -9,14 +9,14 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{c}{See Usage.}
-\item{W}{See Usage.}
-\item{b}{See Usage.}
-\item{forget_bias}{Defaults to \code{0}.}
+\item{h}{A vector; its length is taken.}
+\item{c}{A vector; its length is taken.}
+\item{W}{A matrix; indexed by row and column.}
+\item{b}{A vector; its length is taken and its elements indexed.}
+\item{forget_bias}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the netsts_native implementation; see the file header for the source it follows.
+A step of the netsts_native implementation. Called by \code{.netsts_lstm_run}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{h}, \code{c}, \code{gates}.

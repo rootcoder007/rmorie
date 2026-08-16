@@ -8,10 +8,10 @@
 morie_sccsno_loglik(params, cells_by_person, n_risk, n_age)
 }
 \arguments{
-\item{params}{See Usage.}
+\item{params}{A vector; indexed elementwise.}
 \item{cells_by_person}{See Usage.}
-\item{n_risk}{See Usage.}
-\item{n_age}{See Usage.}
+\item{n_risk}{A count; the body uses it as \code{seq_len(...)}.}
+\item{n_age}{Numeric; combined arithmetically in the body.}
 }
 \description{
 (beta_1..beta_s, alpha_1..alpha_{m-1}) with beta_0 = alpha_0 = 0. The individual effects phi_i do not appear -- that is the point.

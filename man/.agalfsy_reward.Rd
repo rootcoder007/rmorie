@@ -8,12 +8,12 @@
 .agalfsy_reward(site, before, after)
 }
 \arguments{
-\item{site}{See Usage.}
-\item{before}{See Usage.}
-\item{after}{See Usage.}
+\item{site}{Passed to \code{.agalfsy_rmsd}.}
+\item{before}{Passed to \code{.agalfsy_rmsd}.}
+\item{after}{Passed to \code{.agalfsy_rmsd}.}
 }
 \description{
-Part of the agalfsy_native implementation; see the file header for the source it follows.
+A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_pose_search}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

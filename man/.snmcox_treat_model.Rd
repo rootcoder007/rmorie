@@ -8,9 +8,9 @@
 .snmcox_treat_model(A, L, ridge = 1e-08)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{L}{See Usage.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{A}{A matrix; passed to \code{crossprod}.}
+\item{L}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
 else Part of the snmcox_native implementation; see the file header for the source it follows.

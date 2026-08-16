@@ -8,11 +8,11 @@
 .gpztploglik(y_positive, mu)
 }
 \arguments{
-\item{y_positive}{See Usage.}
-\item{mu}{See Usage.}
+\item{y_positive}{Passed to \code{.gpflat}.}
+\item{mu}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, \code{Msm325}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

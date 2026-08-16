@@ -8,12 +8,12 @@
 .lcfsdq_d(a, b, metric)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{metric}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{metric}{One of \code{"chebyshev"}, \code{"euclidean"}, \code{"manhattan"}.}
 }
 \description{
-Part of the lcfsdq_native implementation; see the file header for the source it follows.
+A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq}, \code{morie_lcfsdq_nn}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

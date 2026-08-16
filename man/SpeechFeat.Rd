@@ -9,13 +9,13 @@ SpeechFeat(speech, fs, order = NULL, n_formants = 4, f0_range = c(60, 400))
 }
 \arguments{
 \item{speech}{See Usage.}
-\item{fs}{See Usage.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{order}{Defaults to \code{NULL}.}
-\item{n_formants}{Defaults to \code{4}.}
-\item{f0_range}{Defaults to \code{c(60, 400)}.}
+\item{n_formants}{Passed to \code{.bsapeaks}. Defaults to \code{4}.}
+\item{f0_range}{A vector; indexed elementwise. Defaults to \code{c(60, 400)}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{formants_hz}, \code{formant_bandwidths_hz}, \code{formant_powers}, \code{f0_hz}, \code{pitch_period_ms}, \code{voiced}, \code{voicing_strength}, \code{voicing_threshold}, \code{zero_crossing_rate}, \code{order}, \code{ar_coeffs}, \code{prediction_error}, \code{freq_hz}, \code{lpc_psd}, \code{fs_hz}, \code{units}, \code{method}.

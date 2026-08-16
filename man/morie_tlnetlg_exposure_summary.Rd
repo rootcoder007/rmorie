@@ -8,12 +8,12 @@
 morie_tlnetlg_exposure_summary(A, friends, kind = "fraction")
 }
 \arguments{
-\item{A}{See Usage.}
-\item{friends}{See Usage.}
-\item{kind}{Defaults to \code{"fraction"}.}
+\item{A}{Passed to \code{.tlnetlg_vec}.}
+\item{friends}{A vector; its length is taken and its elements indexed.}
+\item{kind}{One of \code{"any"}, \code{"count"}, \code{"fraction"}. Defaults to \code{"fraction"}.}
 }
 \description{
-Part of the tlnetlg_native implementation; see the file header for the source it follows.
+A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_community_estimand}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{summary}, \code{kind}, \code{note}.

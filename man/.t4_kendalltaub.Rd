@@ -8,8 +8,8 @@
 .t4_kendalltaub(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{y}{Passed to \code{.t4_kendallS}.}
 }
 \description{
 stats::cor.test(method = "kendall", exact = FALSE).

@@ -8,9 +8,9 @@
 .rob_s_scale(r, cc = .rob_tukey_c_bdp, b = 0.5)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{cc}{Defaults to \code{.rob_tukey_c_bdp}.}
-\item{b}{Defaults to \code{0.5}.}
+\item{r}{Numeric; passed to \code{abs}.}
+\item{cc}{Passed to \code{.rob_tukey_rho}. Defaults to \code{.rob_tukey_c_bdp}.}
+\item{b}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{
 b = 1/2 -- the 50\%-breakdown calibration. The fixed-point iteration s^2 <- s^2 * mean(rho(r/s))/b is monotone for the biweight.

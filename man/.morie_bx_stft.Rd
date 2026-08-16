@@ -8,12 +8,12 @@
 .morie_bx_stft(x, nwin, hop)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{nwin}{See Usage.}
-\item{hop}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{nwin}{A count; the body uses it as \code{seq_len(...)}.}
+\item{hop}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{FecgNmf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{re}, \code{im}, \code{mag}, \code{win}.

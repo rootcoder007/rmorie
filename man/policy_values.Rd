@@ -8,13 +8,13 @@
 policy_values(T, R, gamma, policy)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{R}{See Usage.}
-\item{gamma}{See Usage.}
-\item{policy}{See Usage.}
+\item{T}{A vector; indexed elementwise.}
+\item{R}{A vector; its length is taken.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{policy}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the birl_native implementation; see the file header for the source it follows.
+A step of the birl_native implementation. Called by \code{policy_iteration}, \code{policy_walk}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.solve}.

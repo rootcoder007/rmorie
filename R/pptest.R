@@ -21,11 +21,12 @@
 # Interpolated Dickey-Fuller critical values at sample size n.
 #' Interpolated Dickey-Fuller critical values at sample size n
 #'
-#' Part of the pptest implementation; see the file header for the source
+#' A step of the pptest implementation. Called by \code{Pptest}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param n See Usage.
-#' @param kind Defaults to \code{"Z(t_alpha)"}.
+#' @param kind Compared against \code{"Z(alpha)"}. Defaults to \code{"Z(t_alpha)"}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .t4_ppcrit <- function(n, kind = "Z(t_alpha)") {

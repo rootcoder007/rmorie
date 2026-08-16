@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{obj}{See Usage.}
-\item{allow_one}{Defaults to \code{FALSE}.}
+\item{allow_one}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the mfovsm_native implementation; see the file header for the source it follows.
+A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

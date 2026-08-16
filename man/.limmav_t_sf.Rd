@@ -8,11 +8,11 @@
 .limmav_t_sf(t, df)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{df}{See Usage.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{df}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{morie_limmav}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

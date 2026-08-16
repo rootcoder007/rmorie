@@ -3,16 +3,16 @@
 % the formals.
 \name{.s03quantile7}
 \alias{.s03quantile7}
-\title{Type-7 quantile, the default of R\\\'s quantile()}
+\title{Type-7 quantile, the default of R\\'s quantile()}
 \usage{
 .s03quantile7(v, p)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{p}{See Usage.}
+\item{v}{Numeric; passed to \code{sort}.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.cstat_uno}, \code{.dnnheadweights}, \code{.ot_quantiles} and 38 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

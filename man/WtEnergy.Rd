@@ -8,12 +8,12 @@
 WtEnergy(x, wavelet = "db4", levels = 3)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{wavelet}{Defaults to \code{"db4"}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{wavelet}{Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.}
 \item{levels}{Defaults to \code{3}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{WtEntropy}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{energies}, \code{relative}, \code{labels}, \code{total_energy}, \code{input_energy}, \code{energy_balance}, \code{dominant_band}, \code{levels}, \code{wavelet}, \code{method}.

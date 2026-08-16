@@ -8,11 +8,11 @@
 state_matrices(spec, theta)
 }
 \arguments{
-\item{spec}{See Usage.}
+\item{spec}{Passed to \code{.flatten_carry}.}
 \item{theta}{See Usage.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{all_eigenvalues}, \code{spectral_radius}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{w}, \code{fmat}, \code{g}.

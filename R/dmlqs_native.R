@@ -28,7 +28,8 @@
 
 #' .dmlqs_edge_key
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{.dmlqs_atom_readout}, \code{.dmlqs_message_pass}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -43,7 +44,7 @@
 #' each value a sorted unique integer vector of neighbours (with v
 #' itself excluded -- mirrors Python `set(adj[v]) - {v}`).
 #'
-#' @param adj See Usage.
+#' @param adj Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return Nothing; this branch always raises.
 #' @export
 .dmlqs_norm_adj <- function(adj) {
@@ -82,10 +83,11 @@
 
 #' .dmlqs_directed_edges
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
+#' @param adj Passed to \code{.dmlqs_norm_adj}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .dmlqs_directed_edges <- function(adj) {
@@ -104,10 +106,11 @@
 
 #' .dmlqs_count_totters
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
+#' @param adj Passed to \code{.dmlqs_norm_adj}.
 #' @param length Defaults to \code{3L}.
 #' @param exclude_reverse Defaults to \code{TRUE}.
 #' @return A list with \code{paths}, \code{totters}, \code{fraction}, \code{excluded_reverse}.
@@ -159,7 +162,8 @@
 
 #' .dmlqs_act
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{.dmlqs_message_pass}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -175,11 +179,12 @@
 
 #' .dmlqs_message_pass
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h0 See Usage.
-#' @param adj See Usage.
+#' @param h0 Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param adj Passed to \code{.dmlqs_norm_adj}.
 #' @param T Defaults to \code{3L}.
 #' @param W Defaults to \code{NULL}.
 #' @param activation Defaults to \code{"relu"}.
@@ -269,11 +274,12 @@
 
 #' .dmlqs_atom_readout
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param edge_states See Usage.
-#' @param adj See Usage.
+#' @param edge_states Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param adj Passed to \code{.dmlqs_norm_adj}.
 #' @param n See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -304,7 +310,8 @@
 
 #' .dmlqs_concat_descriptors
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param learned See Usage.
@@ -323,7 +330,8 @@
 
 #' .dmlqs_cheatsheet
 #'
-#' Part of the dmlqs_native implementation; see the file header for the
+#' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,8 +8,8 @@
 .s4_triinv(R, p)
 }
 \arguments{
-\item{R}{See Usage.}
-\item{p}{See Usage.}
+\item{R}{A matrix; indexed by row and column.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 rather # than testing a condition number, so a rank-deficient design gives the # same large numbers in both arms instead of one raising.

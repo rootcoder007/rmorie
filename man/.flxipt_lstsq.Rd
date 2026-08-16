@@ -8,12 +8,12 @@
 .flxipt_lstsq(X, y, ridge = 1e-10)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
+\item{ridge}{A matrix; passed to \code{diag}. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{.flxipt_fit}, \code{super_learner}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

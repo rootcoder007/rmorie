@@ -7,10 +7,11 @@
 
 #' .glmbay_links
 #'
-#' Part of the glmbay_native implementation; see the file header for the
+#' A step of the glmbay_native implementation. Called by \code{morie_glmbay_bayesian_glm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param family See Usage.
+#' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .glmbay_links <- function(family) {
@@ -37,14 +38,15 @@
 
 #' morie_glmbay_bayesian_glm
 #'
-#' Part of the glmbay_native implementation; see the file header for the
+#' A step of the glmbay_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
-#' @param family Defaults to \code{"binomial"}.
+#' @param family Passed to \code{.glmbay_links}. Defaults to \code{"binomial"}.
 #' @param prior_sd Defaults to \code{2.5}.
-#' @param add_intercept Defaults to \code{TRUE}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param max_iter Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{posterior_sd}, \code{std_error}, \code{ci_lower}, \code{ci_upper}, \code{fitted}, \code{linear_predictor}, \code{loglik}, \code{log_prior}, \code{log_marginal}, \code{log_det_hessian}, \code{iterations}, \code{converged}, \code{family}, \code{prior_sd}, \code{n}, \code{p}, \code{method}, \code{note}.
@@ -117,7 +119,8 @@ morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
 
 #' .glmbay_cheatsheet
 #'
-#' Part of the glmbay_native implementation; see the file header for the
+#' A step of the glmbay_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

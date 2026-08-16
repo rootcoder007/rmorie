@@ -8,10 +8,10 @@
 .w3_logsumexp(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the helpers_w3num implementation; see the file header for the source it follows.
+A step of the helpers_w3num implementation. Called by \code{morie_snpest}, \code{morie_varqc1_logpdf}, \code{morie_varqc1_mixture}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

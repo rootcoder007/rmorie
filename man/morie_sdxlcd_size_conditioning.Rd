@@ -10,10 +10,10 @@ morie_sdxlcd_size_conditioning(h_original, w_original, dim = 8)
 \arguments{
 \item{h_original}{See Usage.}
 \item{w_original}{See Usage.}
-\item{dim}{Defaults to \code{8}.}
+\item{dim}{Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.}
 }
 \description{
-Part of the sdxlcd_native implementation; see the file header for the source it follows.
+A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_condition_vector}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{c_size}, \code{embedding}, \code{note}.
@@ -26,7 +26,7 @@ arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
 backbone, more attention blocks, a second text encoder), Sec. 2.2
 ("Conditioning the Model on Image Size": the two existing approaches of
 discarding images below a minimum resolution or upscaling them, the
-measured 39% of data that would be discarded at 256 pixels, and the
+measured 39\% of data that would be discarded at 256 pixels, and the
 proposal to condition on the original height and width, each embedded
 by Fourier features, concatenated and ADDED to the timestep embedding;
 "Conditioning the Model on Cropping Parameters": random cropping during

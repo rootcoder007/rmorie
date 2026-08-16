@@ -8,12 +8,12 @@
 morie_informer_kl_from_uniform(q, K, scale = NULL)
 }
 \arguments{
-\item{q}{See Usage.}
-\item{K}{See Usage.}
-\item{scale}{Defaults to \code{NULL}.}
+\item{q}{Passed to \code{morie_informer_sparsity_measure}.}
+\item{K}{Passed to \code{morie_informer_sparsity_measure}.}
+\item{scale}{Passed to \code{morie_informer_sparsity_measure}.}
 }
 \description{
-Part of the informer_native implementation; see the file header for the source it follows.
+A step of the informer_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

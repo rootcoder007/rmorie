@@ -11,7 +11,7 @@ morie_trkassign(posdist, appdist = NULL, weight = 0.5, maxn = 8L)
 
 \item{appdist}{matching appearance cost matrix, or NULL}
 
-\item{weight}{the appearance share of the combined cost, in \link{0, 1}}
+\item{weight}{the appearance share of the combined cost, in [0, 1]}
 
 \item{maxn}{cap on the exhaustive search}
 }

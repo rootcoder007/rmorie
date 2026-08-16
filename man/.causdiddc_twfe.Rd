@@ -8,13 +8,13 @@
 .causdiddc_twfe(Y, D, group, period)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{D}{See Usage.}
-\item{group}{See Usage.}
-\item{period}{See Usage.}
+\item{Y}{Passed to \code{.causdiddc_panel}.}
+\item{D}{Passed to \code{.causdiddc_panel}.}
+\item{group}{Passed to \code{.causdiddc_panel}.}
+\item{period}{Passed to \code{.causdiddc_panel}.}
 }
 \description{
-Part of the causdiddc_native implementation; see the file header for the source it follows.
+A step of the causdiddc_native implementation. Called by \code{morie_causdiddc}, \code{morie_causdiddc_twfe}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{beta_fe}, \code{weights}, \code{n_negative}, \code{negative_mass}, \code{weight_sum}, \code{n_treated_cells}, \code{n}, \code{method}, \code{note}.

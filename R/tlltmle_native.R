@@ -65,7 +65,8 @@
 
 #' .tlltmle_logit
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. Called by \code{tlltmle_fluctuate}, \code{tlltmle_tmle_point}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param p See Usage.
@@ -78,10 +79,11 @@
 
 #' .tlltmle_expit
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. Called by \code{tlltmle_fluctuate}, \code{tlltmle_tmle_point}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
 .tlltmle_expit <- function(x) {
@@ -90,7 +92,8 @@
 
 #' tlltmle_clever_covariate
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A See Usage.
@@ -116,7 +119,8 @@ tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
 
 #' tlltmle_fluctuate
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. Called by \code{tlltmle_ltmle}, \code{tlltmle_tmle_point}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Q See Usage.
@@ -152,7 +156,8 @@ tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
 
 #' tlltmle_tmle_point
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A See Usage.
@@ -191,12 +196,13 @@ tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
 
 #' tlltmle_ltmle
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q_seq See Usage.
-#' @param H_seq See Usage.
-#' @param Y_seq See Usage.
+#' @param Q_seq A vector; its length is taken and its elements indexed.
+#' @param H_seq A vector; its length is taken and its elements indexed.
+#' @param Y_seq A vector; indexed elementwise.
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilons}, \code{Q_star}, \code{T}, \code{method}.
 #' @export
 tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
@@ -223,7 +229,8 @@ tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
 
 #' tlltmle_influence_curve_se
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param d See Usage.
@@ -239,7 +246,8 @@ tlltmle_influence_curve_se <- function(d) {
 
 #' tlltmle_cheatsheet
 #'
-#' Part of the tlltmle_native implementation; see the file header for
+#' A step of the tlltmle_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

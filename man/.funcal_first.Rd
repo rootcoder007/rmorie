@@ -8,10 +8,10 @@
 .funcal_first(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the funcal_native implementation; see the file header for the source it follows.
+A step of the funcal_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

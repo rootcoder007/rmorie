@@ -10,11 +10,11 @@
 \arguments{
 \item{data}{See Usage.}
 \item{statistic}{See Usage.}
-\item{B}{See Usage.}
+\item{B}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the wsm_native implementation; see the file header for the source it follows.
+A step of the wsm_native implementation. Called by \code{morie_wsm_bootstrap}, \code{morie_wsm_plug_in}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

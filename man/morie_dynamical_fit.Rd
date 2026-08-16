@@ -8,14 +8,14 @@
 morie_dynamical_fit(u, s, alpha0 = NULL, beta0 = 1, gamma0 = 0.5, t_switch0 = NULL, n_iter = 25, grid = 120)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{s}{See Usage.}
+\item{u}{A vector; its length is taken and its elements indexed.}
+\item{s}{A vector; its length is taken and its elements indexed.}
 \item{alpha0}{Defaults to \code{NULL}.}
-\item{beta0}{Defaults to \code{1}.}
+\item{beta0}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{gamma0}{Defaults to \code{0.5}.}
 \item{t_switch0}{Defaults to \code{NULL}.}
 \item{n_iter}{Defaults to \code{25}.}
-\item{grid}{Defaults to \code{120}.}
+\item{grid}{Passed to \code{.scvelo_residual}. Defaults to \code{120}.}
 }
 \description{
 point on the trajectory; M step is a one-at-a-time multiplicative grid search on alpha, beta, gamma, t_switch. The loop stops as soon as no candidate improves the residual, so the rss_history is the visible monotone sequence.

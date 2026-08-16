@@ -8,10 +8,10 @@
 .schab_logistic(u)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the schab_reml_shared implementation; see the file header for the source it follows.
+A step of the schab_reml_shared implementation. Called by \code{.schab_fit_reml}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

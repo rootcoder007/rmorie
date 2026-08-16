@@ -15,7 +15,7 @@ tlltmle_tmle_point(A, Y, Q1, Q0, g)
 \item{g}{See Usage.}
 }
 \description{
-Part of the tlltmle_native implementation; see the file header for the source it follows.
+A step of the tlltmle_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{initial_plugin}, \code{method}, \code{note}.

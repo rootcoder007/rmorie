@@ -8,12 +8,12 @@
 .frns_favorable_rates(outcome, group, favorable)
 }
 \arguments{
-\item{outcome}{See Usage.}
+\item{outcome}{A vector; indexed elementwise.}
 \item{group}{See Usage.}
 \item{favorable}{See Usage.}
 }
 \description{
-Part of the frns_metrics implementation; see the file header for the source it follows.
+A step of the frns_metrics implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rates}, as built in the body.

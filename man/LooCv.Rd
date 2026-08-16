@@ -8,8 +8,8 @@
 LooCv(X, y, classifier = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{classifier}{Defaults to \code{NULL}.}
 }
 \description{

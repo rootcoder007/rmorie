@@ -8,11 +8,11 @@
 .tmlcll_ols(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{Passed to \code{.tmlcll_mat}.}
+\item{y}{Passed to \code{.tmlcll_vec}.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. Called by \code{morie_clpm_coefficients}, \code{morie_tmle_cross_lagged}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

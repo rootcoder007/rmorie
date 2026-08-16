@@ -8,11 +8,11 @@
 .hrz3_fxw_grid(u, v, z, wq, h)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{v}{See Usage.}
-\item{z}{See Usage.}
+\item{u}{A vector; its length is taken.}
+\item{v}{A vector; its length is taken.}
+\item{z}{Passed to \code{.hrz3_kmat}.}
 \item{wq}{See Usage.}
-\item{h}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{
 A Gaussian kernel has unbounded support, so on the compact [0, 1]^2 a fixed share of its mass falls outside and the raw estimate does NOT integrate to one.  Horowitz (2009) p. 173 requires a compactly supported kernel (HH5) and notes boundary effects "can be accommodated by replacing the kernel K with a boundary kernel". Renormalising the discretised density to unit mass on [0, 1]^2 is such a correction, and it makes mass == 1 an exact identity that fails loudly if the 1/(n h^2) constant is mis-wired.

@@ -27,11 +27,12 @@
 
 #' (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
 #'
-#' Part of the ssmpar_native implementation; see the file header for the
+#' A step of the ssmpar_native implementation. Called by \code{.ssmpar_upsweep}, \code{check_associativity}, \code{parallel_scan}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param left See Usage.
-#' @param right See Usage.
+#' @param left A vector; indexed elementwise.
+#' @param right A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
 .ssmpar_compose <- function(left, right) {
@@ -48,10 +49,11 @@
 
 #' The recurrence as written: L steps, no parallelism
 #'
-#' Part of the ssmpar_native implementation; see the file header for the
+#' A step of the ssmpar_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pairs See Usage.
+#' @param pairs A vector; its length is taken.
 #' @param x0 Defaults to \code{0}.
 #' @return A list with \code{states}, \code{steps}, \code{depth}, \code{note}.
 #' @export
@@ -80,7 +82,8 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 
 #' Build the tree of partial compositions (private helper)
 #'
-#' Part of the ssmpar_native implementation; see the file header for the
+#' A step of the ssmpar_native implementation. Called by \code{parallel_scan}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param P See Usage.
@@ -167,12 +170,13 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 
 #' Test (a o b) o c == a o (b o c) directly
 #'
-#' Part of the ssmpar_native implementation; see the file header for the
+#' A step of the ssmpar_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
+#' @param a Passed to \code{.ssmpar_compose}.
+#' @param b Passed to \code{.ssmpar_compose}.
+#' @param c Passed to \code{.ssmpar_compose}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{left}, \code{right}, \code{deviation}, \code{associative}, \code{note}.
 #' @export
@@ -189,7 +193,8 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 
 #' Sequential against parallel depth
 #'
-#' Part of the ssmpar_native implementation; see the file header for the
+#' A step of the ssmpar_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param length See Usage.
@@ -214,7 +219,8 @@ scan_depth <- function(length) {
 
 #' .ssmpar_cheatsheet
 #'
-#' Part of the ssmpar_native implementation; see the file header for the
+#' A step of the ssmpar_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

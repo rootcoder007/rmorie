@@ -3,12 +3,12 @@
 % the formals.
 \name{.schab_spectral_root}
 \alias{.schab_spectral_root}
-\title{Symmetric square root P Delta^(1/2) P\\\'. Negative eigenvalues can}
+\title{Symmetric square root P Delta^(1/2) P\\'. Negative eigenvalues can}
 \usage{
 .schab_spectral_root(cov, tol = NULL)
 }
 \arguments{
-\item{cov}{See Usage.}
+\item{cov}{A matrix; passed to \code{nrow}.}
 \item{tol}{Defaults to \code{NULL}.}
 }
 \description{

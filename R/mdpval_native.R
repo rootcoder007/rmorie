@@ -11,11 +11,12 @@
 
 #' .mdp_args
 #'
-#' Part of the mdpval_native implementation; see the file header for the
+#' A step of the mdpval_native implementation. Called by \code{morie_ddqn}, \code{morie_mdpval}, \code{morie_qlearn} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param P See Usage.
-#' @param R See Usage.
+#' @param R A matrix; passed to \code{dim}.
 #' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 #' @export
 .mdp_args <- function(P, R) {

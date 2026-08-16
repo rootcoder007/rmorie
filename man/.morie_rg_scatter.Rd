@@ -8,11 +8,11 @@
 .morie_rg_scatter(X, mu)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{mu}{See Usage.}
 }
 \description{
-Part of the rangayyan_class implementation; see the file header for the source it follows.
+A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{SepIndex}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{\%*\%}.

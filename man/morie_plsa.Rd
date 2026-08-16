@@ -8,14 +8,14 @@
 morie_plsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0)
 }
 \arguments{
-\item{n_dw}{See Usage.}
-\item{K}{See Usage.}
+\item{n_dw}{Passed to \code{.plsa_check}.}
+\item{K}{A count; the body uses it as \code{seq_len(...)}.}
 \item{iters}{Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-08}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{
-Part of the plsa_native implementation; see the file header for the source it follows.
+A step of the plsa_native implementation. Called by \code{probabilisticlsa}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{P_z}, \code{P_d_given_z}, \code{P_w_given_z}, \code{loglik_history}, \code{final_loglik}, \code{iterations}, \code{K}, \code{n_docs}, \code{vocab}, \code{n_parameters}, \code{method}, \code{caveat}.

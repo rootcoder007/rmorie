@@ -8,10 +8,10 @@
 .mor_hot_znorm(seg)
 }
 \arguments{
-\item{seg}{See Usage.}
+\item{seg}{A vector; its length is taken.}
 }
 \description{
-Part of the hot_native implementation; see the file header for the source it follows.
+A step of the hot_native implementation. Called by \code{morie_hot}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

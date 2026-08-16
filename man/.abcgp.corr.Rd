@@ -8,13 +8,13 @@
 .abcgp.corr(a, b, lengthscale, kernel)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{lengthscale}{See Usage.}
-\item{kernel}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{lengthscale}{Numeric; combined arithmetically in the body.}
+\item{kernel}{One of \code{"matern32"}, \code{"sqexp"}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.gp_predict}, \code{.abcgp.profile_nll}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

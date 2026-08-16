@@ -8,13 +8,13 @@
 .ot_tree_path(basis, n, si, sj)
 }
 \arguments{
-\item{basis}{See Usage.}
-\item{n}{See Usage.}
+\item{basis}{Passed to \code{.ot_adj}.}
+\item{n}{Numeric; combined arithmetically in the body.}
 \item{si}{See Usage.}
-\item{sj}{See Usage.}
+\item{sj}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{.ot_emd}. See the file header for the source the module follows.
 }
 \value{
 Nothing; the function is called for its effect.

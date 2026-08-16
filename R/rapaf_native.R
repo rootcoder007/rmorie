@@ -212,13 +212,14 @@ morie_rapaf_ar_confidence_interval <- function(case_counts, rate_ratios,
 
 #' .rapaf_logit_irls
 #'
-#' Part of the rapaf_native implementation; see the file header for the
+#' A step of the rapaf_native implementation. Called by \code{morie_rapaf_rate_ratios_from_logit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-08}.
-#' @param obs_weights Defaults to \code{NULL}.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
+#' @param obs_weights Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .rapaf_logit_irls <- function(X, y, ridge = 1e-8, obs_weights = NULL) {

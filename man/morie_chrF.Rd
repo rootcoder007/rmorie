@@ -16,7 +16,7 @@ morie_chrF(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRU
 \item{word_order}{Defaults to \code{0L}.}
 }
 \description{
-Part of the chrF_native implementation; see the file header for the source it follows.
+A step of the chrF_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{chrf_score}.

@@ -3,25 +3,25 @@
 % the formals.
 \name{.baysmplr_build_tree}
 \alias{.baysmplr_build_tree}
-\title{Hoffman and Gelman\\\'s recursive doubling, Algorithm 3}
+\title{Hoffman and Gelman\\'s recursive doubling, Algorithm 3}
 \usage{
 .baysmplr_build_tree(log_p, grad, q, p, u, v, j, eps, e, h0, dmax = 1000)
 }
 \arguments{
-\item{log_p}{See Usage.}
-\item{grad}{See Usage.}
-\item{q}{See Usage.}
-\item{p}{See Usage.}
-\item{u}{See Usage.}
-\item{v}{See Usage.}
-\item{j}{See Usage.}
-\item{eps}{See Usage.}
-\item{e}{See Usage.}
-\item{h0}{See Usage.}
-\item{dmax}{Defaults to \code{1000}.}
+\item{log_p}{Passed to \code{.baysmplr_build_tree}.}
+\item{grad}{Passed to \code{.baysmplr_leapfrog}.}
+\item{q}{Passed to \code{.baysmplr_leapfrog}.}
+\item{p}{Passed to \code{.baysmplr_leapfrog}.}
+\item{u}{Numeric; passed to \code{log}.}
+\item{v}{Numeric; combined arithmetically in the body.}
+\item{j}{Numeric; combined arithmetically in the body.}
+\item{eps}{Numeric; combined arithmetically in the body.}
+\item{e}{Passed to \code{.baysmplr_build_tree}.}
+\item{h0}{Numeric; combined arithmetically in the body.}
+\item{dmax}{Numeric; combined arithmetically in the body. Defaults to \code{1000}.}
 }
 \description{
-Part of the baysmplr_native implementation; see the file header for the source it follows.
+A step of the baysmplr_native implementation. Called by \code{morie_baysmplr_nuts}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

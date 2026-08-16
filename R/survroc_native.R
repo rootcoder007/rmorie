@@ -59,7 +59,8 @@ ROUTES <- c("km", "empirical")
 
 #' .survroc_clean
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. Called by \code{.survroc_pair}, \code{morie_survroc}, \code{morie_survroc_kaplan_meier} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param times See Usage.
@@ -96,11 +97,12 @@ ROUTES <- c("km", "empirical")
 
 #' morie_survroc_kaplan_meier
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. Called by \code{.survroc_km_pair}, \code{morie_survroc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param times Passed to \code{.survroc_clean}.
+#' @param events Passed to \code{.survroc_clean}.
 #' @param at Defaults to \code{NULL}.
 #' @return The value of \code{val}, as built in the body.
 #' @export
@@ -147,12 +149,13 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 
 #' .survroc_empirical
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. Called by \code{.survroc_pair}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param T See Usage.
 #' @param E See Usage.
-#' @param M See Usage.
+#' @param M A vector; indexed elementwise.
 #' @param c See Usage.
 #' @param t See Usage.
 #' @return A vector, from \code{c}.
@@ -173,14 +176,15 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 
 #' .survroc_km_pair
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. Called by \code{.survroc_pair}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param T See Usage.
-#' @param E See Usage.
+#' @param T A vector; its length is taken and its elements indexed.
+#' @param E A vector; indexed elementwise.
 #' @param M See Usage.
 #' @param c See Usage.
-#' @param t See Usage.
+#' @param t Passed to \code{morie_survroc_kaplan_meier}.
 #' @return A vector, from \code{c}.
 #' @export
 .survroc_km_pair <- function(T, E, M, c, t) {
@@ -213,15 +217,16 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 
 #' .survroc_pair
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. Called by \code{morie_survroc_roc_at}, \code{morie_survroc_sensitivity}, \code{morie_survroc_specificity}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param marker See Usage.
+#' @param times Passed to \code{.survroc_clean}.
+#' @param events Passed to \code{.survroc_clean}.
+#' @param marker Passed to \code{.survroc_clean}.
 #' @param c See Usage.
 #' @param t See Usage.
-#' @param route See Usage.
+#' @param route Compared against \code{"empirical"}.
 #' @return The value of \code{.survroc_km_pair}.
 #' @export
 .survroc_pair <- function(times, events, marker, c, t, route) {
@@ -246,15 +251,16 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 
 #' morie_survroc_sensitivity
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param marker See Usage.
-#' @param threshold See Usage.
-#' @param t See Usage.
-#' @param route Defaults to \code{"km"}.
+#' @param times Passed to \code{.survroc_pair}.
+#' @param events Passed to \code{.survroc_pair}.
+#' @param marker Passed to \code{.survroc_pair}.
+#' @param threshold Passed to \code{.survroc_pair}.
+#' @param t Passed to \code{.survroc_pair}.
+#' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[[}.
 #' @export
 morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
@@ -265,15 +271,16 @@ morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
 
 #' morie_survroc_specificity
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param marker See Usage.
-#' @param threshold See Usage.
-#' @param t See Usage.
-#' @param route Defaults to \code{"km"}.
+#' @param times Passed to \code{.survroc_pair}.
+#' @param events Passed to \code{.survroc_pair}.
+#' @param marker Passed to \code{.survroc_pair}.
+#' @param threshold Passed to \code{.survroc_pair}.
+#' @param t Passed to \code{.survroc_pair}.
+#' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[[}.
 #' @export
 morie_survroc_specificity <- function(times, events, marker, threshold, t,
@@ -284,14 +291,15 @@ morie_survroc_specificity <- function(times, events, marker, threshold, t,
 
 #' morie_survroc_roc_at
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. Called by \code{morie_survroc}, \code{morie_survroc_auc_at}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param marker See Usage.
-#' @param t See Usage.
-#' @param route Defaults to \code{"km"}.
+#' @param times Passed to \code{.survroc_clean}.
+#' @param events Passed to \code{.survroc_clean}.
+#' @param marker Passed to \code{.survroc_clean}.
+#' @param t Passed to \code{.survroc_pair}.
+#' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[}.
 #' @export
 morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
@@ -317,14 +325,15 @@ morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
 
 #' morie_survroc_auc_at
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param marker See Usage.
-#' @param t See Usage.
-#' @param route Defaults to \code{"km"}.
+#' @param times Passed to \code{morie_survroc_roc_at}.
+#' @param events Passed to \code{morie_survroc_roc_at}.
+#' @param marker Passed to \code{morie_survroc_roc_at}.
+#' @param t Passed to \code{morie_survroc_roc_at}.
+#' @param route Passed to \code{morie_survroc_roc_at}. Defaults to \code{"km"}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
 morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
@@ -342,14 +351,15 @@ morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
 
 #' morie_survroc
 #'
-#' Part of the survroc_native implementation; see the file header for
+#' A step of the survroc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param marker See Usage.
-#' @param t See Usage.
-#' @param route Defaults to \code{"km"}.
+#' @param times Passed to \code{.survroc_clean}.
+#' @param events Passed to \code{.survroc_clean}.
+#' @param marker Passed to \code{.survroc_clean}.
+#' @param t Passed to \code{morie_survroc_roc_at}.
+#' @param route Passed to \code{morie_survroc_roc_at}. Defaults to \code{"km"}.
 #' @return A list with \code{estimate}, \code{auc}, \code{roc}, \code{horizon}, \code{route}, \code{n}, \code{n_events_by_t}, \code{n_at_risk_after_t}, \code{n_censored_before_t}, \code{survival_at_t}, \code{out_of_range}, \code{method}.
 #' @export
 morie_survroc <- function(times, events, marker, t, route = "km") {

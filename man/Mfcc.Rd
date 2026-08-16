@@ -16,7 +16,7 @@ Mfcc(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0, fmax = NULL)
 \item{fmax}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_cep implementation; see the file header for the source it follows.
+A step of the rangayyan_cep implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mfcc}, \code{filterbank_energies}, \code{log_energies}, \code{edges}, \code{n_filters}, \code{n_coeffs}, \code{fs}, \code{empty_filters}, \code{c0_is_energy}, \code{method}.

@@ -8,14 +8,14 @@
 .gpmnloglik(X, y, beta0, beta, baseline_last = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{beta0}{See Usage.}
-\item{beta}{See Usage.}
-\item{baseline_last}{Defaults to \code{TRUE}.}
+\item{X}{Passed to \code{.gpmnprobs}.}
+\item{y}{Passed to \code{.gpflat}.}
+\item{beta0}{Passed to \code{.gpmnprobs}.}
+\item{beta}{Passed to \code{.gpmnprobs}.}
+\item{baseline_last}{Passed to \code{.gpmnprobs}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{.gppenmnloglik}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

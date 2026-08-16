@@ -8,12 +8,12 @@
 .dkernel_dr2(name, amplitude, r2)
 }
 \arguments{
-\item{name}{See Usage.}
-\item{amplitude}{See Usage.}
-\item{r2}{See Usage.}
+\item{name}{Compared against \code{"se"}.}
+\item{amplitude}{Numeric; combined arithmetically in the body.}
+\item{r2}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

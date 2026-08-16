@@ -8,10 +8,10 @@
 .funkM_global_mean(R)
 }
 \arguments{
-\item{R}{See Usage.}
+\item{R}{A list; the body reads \code{$r} from it.}
 }
 \description{
-Part of the funkM_native implementation; see the file header for the source it follows.
+A step of the funkM_native implementation. Called by \code{morie_funkM}, \code{morie_funkM_imputed_svd_error}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.
@@ -28,7 +28,7 @@ of the same model are the two references below, and the
 implementation follows those.
 
 Koren, Y. (2008) "Factorization Meets the Neighborhood: a
-Multifaceted Collaborative Filtering Model", *KDD \\'08*, 426-434,
+Multifaceted Collaborative Filtering Model", *KDD \'08*, 426-434,
 doi:10.1145/1401890.1401944. The baseline decomposition
 b_ui = mu + b_u + b_i and the regularised squared-error objective
 over the OBSERVED ratings, optimised by stochastic gradient descent.

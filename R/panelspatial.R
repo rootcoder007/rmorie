@@ -14,8 +14,8 @@
 #' The sw - sum(w^2)/sw denominator reduces to n - 1 at equal weights,
 #' so the weighted and unweighted diagnostics agree there.
 #'
-#' @param x See Usage.
-#' @param w See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param w Numeric; passed to \code{sum}.
 #' @return A vector, from \code{c}.
 #' @export
 .smd_moments <- function(x, w) {
@@ -108,11 +108,12 @@ morie_covariate_balance <- function(x, treat, weights = NULL, threshold = 0.1) {
 # Internal: a_ij = 1 when j is among i's k nearest, excluding i itself.
 #' Internal: a_ij = 1 when j is among i\'s k nearest, excluding i itself
 #'
-#' Part of the panelspatial implementation; see the file header for the
+#' A step of the panelspatial implementation. Called by \code{morie_jacquez_knn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param k See Usage.
+#' @param D A matrix; indexed by row and column.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{A}, as built in the body.
 #' @export
 .knn_indicator <- function(D, k) {
@@ -198,9 +199,9 @@ morie_jacquez_knn <- function(coords, time, k = 3L, B = 999L) {
 #'
 #' the simulated patterns, drawn in the same window, so it cancels.
 #'
-#' @param P See Usage.
+#' @param P A matrix; passed to \code{nrow}.
 #' @param radii See Usage.
-#' @param area See Usage.
+#' @param area Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
 .ripley_k <- function(P, radii, area) {

@@ -8,15 +8,15 @@
 morie_goto(state, sym, ag, first, nts, k = 1)
 }
 \arguments{
-\item{state}{See Usage.}
-\item{sym}{See Usage.}
-\item{ag}{See Usage.}
-\item{first}{See Usage.}
-\item{nts}{See Usage.}
-\item{k}{Defaults to \code{1}.}
+\item{state}{Passed to \code{.prsLR_goto}.}
+\item{sym}{Passed to \code{.prsLR_goto}.}
+\item{ag}{Passed to \code{.prsLR_goto}.}
+\item{first}{Passed to \code{.prsLR_goto}.}
+\item{nts}{Passed to \code{.prsLR_goto}.}
+\item{k}{Passed to \code{.prsLR_goto}. Defaults to \code{1}.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.prsLR_goto}.

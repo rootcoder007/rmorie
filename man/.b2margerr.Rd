@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{T}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the b2ot implementation; see the file header for the source it follows.
+A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otsinkh}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

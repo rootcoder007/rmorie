@@ -97,12 +97,13 @@ Jntlo <- function(y_dict, y_hat_dict, weights = NULL) {
 
 #' .jntlo_loss
 #'
-#' Part of the jntlO implementation; see the file header for the source
+#' A step of the jntlO implementation. Called by \code{Jntlo}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param kind See Usage.
-#' @param y See Usage.
-#' @param yh See Usage.
+#' @param kind One of \code{"binary"}, \code{"cont"}, \code{"count"}, \code{"ordinal"}.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param yh A vector; indexed elementwise.
 #' @return Nothing; this branch always raises.
 #' @export
 .jntlo_loss <- function(kind, y, yh) {

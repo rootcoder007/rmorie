@@ -11,7 +11,7 @@
 \item{M}{See Usage.}
 }
 \description{
-Part of the funCA_native implementation; see the file header for the source it follows.
+A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{\%*\%}.

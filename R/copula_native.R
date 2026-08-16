@@ -20,11 +20,12 @@
 
 #' .morie_cop_uv
 #'
-#' Part of the copula_native implementation; see the file header for the
+#' A step of the copula_native implementation. Called by \code{morie_copula_cdf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param v See Usage.
+#' @param u A vector; its length is taken.
+#' @param v A vector; its length is taken.
 #' @return A list with \code{u}, \code{v}.
 #' @export
 .morie_cop_uv <- function(u, v) {
@@ -112,9 +113,9 @@ morie_copula_cdf <- function(family, u, v, theta = NULL, nu = NULL) {
 #'
 #' conditional normal -- avoids a mvtnorm dependency.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param rho See Usage.
+#' @param x Numeric; passed to \code{max}.
+#' @param y Numeric; passed to \code{max}.
+#' @param rho Numeric; combined arithmetically in the body.
 #' @return The value of \code{$}.
 #' @export
 .morie_bvn_cdf <- function(x, y, rho) {
@@ -135,13 +136,14 @@ morie_copula_cdf <- function(family, u, v, theta = NULL, nu = NULL) {
 # Bivariate t CDF as a chi-square scale mixture of bivariate normals.
 #' Bivariate t CDF as a chi-square scale mixture of bivariate normals
 #'
-#' Part of the copula_native implementation; see the file header for the
+#' A step of the copula_native implementation. Called by \code{morie_copula_cdf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param rho See Usage.
-#' @param nu See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param rho Passed to \code{.morie_bvn_cdf}.
+#' @param nu Numeric; combined arithmetically in the body.
 #' @return The value of \code{$}.
 #' @export
 .morie_bvt_cdf <- function(x, y, rho, nu) {
@@ -214,10 +216,10 @@ morie_copula_tau <- function(family, theta = NULL, nu = NULL) {
 #'
 #' form Czado\'s Table 3.2 does not give.
 #'
-#' @param family See Usage.
-#' @param theta Defaults to \code{NULL}.
-#' @param nu Defaults to \code{NULL}.
-#' @param n Defaults to \code{200L}.
+#' @param family Passed to \code{morie_copula_cdf}.
+#' @param theta Passed to \code{morie_copula_cdf}.
+#' @param nu Passed to \code{morie_copula_cdf}.
+#' @param n A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
 .morie_tau_numeric <- function(family, theta = NULL, nu = NULL, n = 200L) {
@@ -426,11 +428,12 @@ morie_extreme_value_copula <- function(u, v, A = "gumbel", theta = 2) {
 # Kaplan-Meier survival evaluated at the observed times.
 #' Kaplan-Meier survival evaluated at the observed times
 #'
-#' Part of the copula_native implementation; see the file header for the
+#' A step of the copula_native implementation. Called by \code{morie_copula_survival}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
+#' @param time A vector; indexed elementwise.
+#' @param event A vector; indexed elementwise.
 #' @return A list with \code{grid}, \code{vals}.
 #' @export
 .morie_cop_km <- function(time, event) {

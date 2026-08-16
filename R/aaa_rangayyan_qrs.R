@@ -10,11 +10,12 @@
 
 #' .morie_qrs_pad
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{QrsDeriv}, \code{QrsDeriv1}, \code{QrsDeriv2} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
-#' @param k See Usage.
+#' @param k A count; the body uses it as \code{rep(...)}.
 #' @return A vector, from \code{c}.
 #' @export
 .morie_qrs_pad <- function(v, k) c(rep(0, k), v)
@@ -25,8 +26,8 @@
 #' The running sum is accumulated in the same order as the Python arm,
 #' so the rounding sequence matches term for term.
 #'
-#' @param x See Usage.
-#' @param m See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param m Numeric; passed to \code{min}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_qrs_mavg <- function(x, m) {
@@ -51,7 +52,7 @@
 #' NOT as -2 pi k j / n: the two differ in the last bits and the Python
 #' arm uses the former.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A list with \code{re}, \code{im}.
 #' @export
 .morie_qrs_dft <- function(x) {
@@ -73,11 +74,12 @@
 
 #' One-sided periodogram; power in units^2/Hz
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl}, \code{EdrSignal}, \code{HrvFreq} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
+#' @param x A vector; its length is taken.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{freqs}, \code{power}.
 #' @export
 .morie_qrs_psd <- function(x, fs) {
@@ -101,9 +103,9 @@
 #'
 #' neighbours on each side.
 #'
-#' @param g See Usage.
+#' @param g A vector; its length is taken and its elements indexed.
 #' @param th See Usage.
-#' @param m See Usage.
+#' @param m Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_qrs_peaks <- function(g, th, m) {
@@ -130,7 +132,7 @@
 #' coefficients are integers tied to fs = 200 Hz (book, Section 4.3.2)
 #' and are NOT rescaled here.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .morie_qrs_ptbp <- function(x) {
@@ -159,10 +161,11 @@
 
 #' Pan-Tompkins derivative, eq (4.14)
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{.morie_qrs_chain}, \code{QrsDerivOp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_qrs_ptderiv <- function(x) {
@@ -179,11 +182,12 @@
 
 #' Full Pan-Tompkins front end: bandpass, derivative, square, integrate
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{QrsDetect}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
+#' @param x Passed to \code{.morie_qrs_ptbp}.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{bp}, \code{dv}, \code{sq}, \code{ig}, \code{w}.
 #' @export
 .morie_qrs_chain <- function(x, fs) {
@@ -197,11 +201,12 @@
 
 #' .morie_qrs_corr
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .morie_qrs_corr <- function(a, b) {
@@ -221,7 +226,8 @@
 
 #' .morie_qrs_check
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 29 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -239,10 +245,11 @@
 
 #' .morie_qrs_fs
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 20 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fs See Usage.
+#' @param fs A vector; its length is taken.
 #' @return The value of \code{fs}, as built in the body.
 #' @export
 .morie_qrs_fs <- function(fs) {
@@ -253,10 +260,11 @@
 
 #' .morie_qrs_median
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{MotionArt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_qrs_median <- function(v) {
@@ -267,10 +275,11 @@
 
 #' .morie_qrs_mean
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{CPulseFeat}, \code{EcgFeat}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_qrs_mean <- function(v) if (length(v)) .morie_fsum(v) / length(v) else NULL
@@ -279,8 +288,8 @@
 #'
 #' exactly as Python\'s max(range(...), key=...).
 #'
-#' @param v See Usage.
-#' @param lo See Usage.
+#' @param v A vector; indexed elementwise.
+#' @param lo Numeric; combined arithmetically in the body.
 #' @param hi See Usage.
 #' @return A numeric value.
 #' @export
@@ -292,11 +301,12 @@
 
 #' .morie_qrs_argmin
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat}, \code{PpgFeat}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param lo See Usage.
+#' @param v A vector; indexed elementwise.
+#' @param lo Numeric; combined arithmetically in the body.
 #' @param hi See Usage.
 #' @return A numeric value.
 #' @export
@@ -374,10 +384,10 @@ BlWander <- function(ecg, fs, pole = 0.995) {
 #' of the pulse, which a first derivative cannot separate from the limb
 #' itself.
 #'
-#' @param cp See Usage.
-#' @param fs See Usage.
+#' @param cp A vector; its length is taken and its elements indexed.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @param qrs Defaults to \code{NULL}.
-#' @param mwin Defaults to \code{16}.
+#' @param mwin Numeric; combined arithmetically in the body. Defaults to \code{16}.
 #' @return A list with \code{notch}, \code{upstroke}, \code{s}, \code{p}, \code{mwin}, \code{fs}, \code{tolerancems}, \code{method}.
 #' @export
 DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
@@ -453,10 +463,10 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
 #' of Section 4.9.  PEPC = PEP + 0.4 HR and ETC = ET + 1.6 HR are the
 #' rate corrections that make the intervals comparable between subjects.
 #'
-#' @param cp See Usage.
-#' @param fs See Usage.
+#' @param cp A vector; its length is taken.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @param qrs See Usage.
-#' @param hr Defaults to \code{NULL}.
+#' @param hr Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{upstroke}, \code{percussion}, \code{notch}, \code{dicwave}, \code{pep}, \code{et}, \code{pepc}, \code{etc}, \code{peppmean}, \code{etmean}, \code{pepcmean}, \code{etcmean}, \code{hr}, \code{fs}, \code{normpepc}, \code{normetcmale}, \code{normetcfemale}, \code{method}.
 #' @export
 CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
@@ -524,8 +534,8 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
 #' which is what makes the decision robust to single-sample derivative
 #' spikes.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
+#' @param x Numeric; passed to \code{abs}.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @param thresh Defaults to \code{1}.
 #' @return A list with \code{qrs}, \code{y0}, \code{y1}, \code{y2}, \code{y3}, \code{mask}, \code{thresh}, \code{fs}, \code{hr}, \code{method}.
 #' @export
@@ -594,10 +604,10 @@ QrsDeriv <- function(x, fs, thresh = 1) {
 #' Section 2.2.5 (rate rises with effort).  Both series are sampled on
 #' the same beat grid so the correlation between them is well defined.
 #'
-#' @param ecg See Usage.
-#' @param emg See Usage.
+#' @param ecg A vector; its length is taken.
+#' @param emg A vector; its length is taken and its elements indexed.
 #' @param qrs See Usage.
-#' @param fs See Usage.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{hr}, \code{rms}, \code{meanfreq}, \code{rrms}, \code{rmnf}, \code{nbeats}, \code{fs}, \code{method}.
 #' @export
 EcgEmgCpl <- function(ecg, emg, qrs, fs) {
@@ -655,9 +665,9 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
 #' reference the book names, and it absorbs any residual baseline
 #' offset.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @param qrs See Usage.
-#' @param fs See Usage.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{pamp}, \code{qamp}, \code{ramp}, \code{samp}, \code{tamp}, \code{qrsdur}, \code{pdur}, \code{tdur}, \code{prdur}, \code{qtdur}, \code{qrsdurmean}, \code{prdurmean}, \code{qtdurmean}, \code{rampmean}, \code{nbeats}, \code{fs}, \code{method}.
 #' @export
 EcgFeat <- function(x, qrs, fs) {
@@ -754,10 +764,11 @@ EcgFeat <- function(x, qrs, fs) {
 
 #' EcgWaveShp
 #'
-#' Part of the rangayyan_qrs implementation; see the file header for the
+#' A step of the rangayyan_qrs implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param qrsdur See Usage.
+#' @param qrsdur Numeric; combined arithmetically in the body.
 #' @param stdev See Usage.
 #' @param rdur Defaults to \code{NULL}.
 #' @param sdur Defaults to \code{NULL}.
@@ -816,10 +827,10 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
 #' the conventional clinical figure, NOT a book value -- the payload
 #' says so.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @param qrs See Usage.
-#' @param fs See Usage.
-#' @param jofs Defaults to \code{0.06}.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param jofs Numeric; combined arithmetically in the body. Defaults to \code{0.06}.
 #' @param thresh Defaults to \code{0.1}.
 #' @return A list with \code{stdev}, \code{stslope}, \code{pattern}, \code{stdevmean}, \code{stslopemean}, \code{flagged}, \code{thresh}, \code{threshnote}, \code{jofs}, \code{fs}, \code{method}.
 #' @export
@@ -886,8 +897,8 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
 #' onto a uniform grid before the periodogram; the mean is removed first
 #' so DC does not leak into VLF.
 #'
-#' @param rr See Usage.
-#' @param fsr Defaults to \code{4}.
+#' @param rr A vector; its length is taken and its elements indexed.
+#' @param fsr Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @param bands Defaults to \code{"taskforce"}.
 #' @return A list with \code{vlf}, \code{lf}, \code{hf}, \code{total}, \code{vlfpct}, \code{lfpct}, \code{hfpct}, \code{lfhf}, \code{bands}, \code{limits}, \code{fsr}, \code{n}, \code{method}.
 #' @export
@@ -958,7 +969,7 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
 #' them; the definitions are the Task Force ones, Circulation
 #' 93(5):1043- 1065, 1996, reference [84] of the book\'s Chapter 8.
 #'
-#' @param rr See Usage.
+#' @param rr Numeric; combined arithmetically in the body.
 #' @return A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50}, \code{meannn}, \code{meanhr}, \code{n}, \code{units}, \code{method}.
 #' @export
 HrvTime <- function(rr) {
@@ -996,9 +1007,9 @@ HrvTime <- function(rr) {
 #' same aortic-valve closure observed after propagation up the arterial
 #' tree.
 #'
-#' @param ecg See Usage.
-#' @param cp See Usage.
-#' @param fs See Usage.
+#' @param ecg A vector; its length is taken.
+#' @param cp A vector; its length is taken.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{s1}, \code{s2}, \code{notch}, \code{qrs}, \code{s2delayms}, \code{s2delaymeasured}, \code{searchwindowms}, \code{fs}, \code{method}.
 #' @export
 HSoundId <- function(ecg, cp, fs) {
@@ -1037,10 +1048,10 @@ HSoundId <- function(ecg, cp, fs) {
 #' so the residual error is the fetal ECG.  Normalised LMS, weights
 #' start at zero, no random initialisation.
 #'
-#' @param abd See Usage.
-#' @param thor See Usage.
-#' @param order Defaults to \code{16}.
-#' @param mu Defaults to \code{0.01}.
+#' @param abd A vector; its length is taken and its elements indexed.
+#' @param thor A vector; its length is taken and its elements indexed.
+#' @param order A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16}.
+#' @param mu Numeric; combined arithmetically in the body. Defaults to \code{0.01}.
 #' @return A list with \code{fetal}, \code{maternal}, \code{weights}, \code{order}, \code{mu}, \code{n}, \code{method}.
 #' @export
 MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
@@ -1096,10 +1107,10 @@ MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
 #' activity are both compared against their MEDIANS, because the mean is
 #' dragged upward by the very segments being detected.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
-#' @param win Defaults to \code{1}.
-#' @param factor Defaults to \code{4}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param win Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param factor Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @return A list with \code{clean}, \code{artifact}, \code{nsegments}, \code{fraction}, \code{win}, \code{factor}, \code{fs}, \code{method}.
 #' @export
 MotionArt <- function(x, fs, win = 1, factor = 4) {
@@ -1182,8 +1193,8 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
 #' rescale; the timing constants (150 ms integrator, 200 ms refractory)
 #' do.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{200}.
+#' @param x A vector; its length is taken.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{qrs}, \code{rr}, \code{hr}, \code{integrated}, \code{bandpass}, \code{delay}, \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2}, \code{searchback}, \code{fs}, \code{fsnote}, \code{method}.
 #' @export
 QrsDetect <- function(x, fs = 200) {
@@ -1298,10 +1309,10 @@ QrsDetect <- function(x, fs = 200) {
 #' and the carotid pulse because S1 and S2 are not reliably the loudest
 #' events in a PCG once murmurs are present.
 #'
-#' @param pcg See Usage.
-#' @param ecg See Usage.
-#' @param cp See Usage.
-#' @param fs See Usage.
+#' @param pcg A vector; its length is taken and its elements indexed.
+#' @param ecg A vector; its length is taken.
+#' @param cp A vector; its length is taken.
+#' @param fs Passed to \code{.morie_qrs_fs}.
 #' @return A list with \code{s1}, \code{s2}, \code{systole}, \code{diastole}, \code{systolerms}, \code{diastolerms}, \code{fs}, \code{method}.
 #' @export
 PcgParts <- function(pcg, ecg, cp, fs) {
@@ -1357,10 +1368,10 @@ PcgParts <- function(pcg, ecg, cp, fs) {
 #' zeros at n fo / fs make it a comb for the harmonics of a
 #' non-sinusoidal mains waveform.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
-#' @param f0 Defaults to \code{60}.
-#' @param harmonics Defaults to \code{1}.
+#' @param x Passed to \code{.morie_qrs_check}.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param f0 Numeric; combined arithmetically in the body. Defaults to \code{60}.
+#' @param harmonics A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{coeffs}, \code{notched}, \code{f0}, \code{fs}, \code{n}, \code{method}.
 #' @export
 PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
@@ -1416,8 +1427,8 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
 #' index says how much of the reading is pulsatile blood volume rather
 #' than static tissue absorption.
 #'
-#' @param ppg See Usage.
-#' @param fs See Usage.
+#' @param ppg A vector; its length is taken and its elements indexed.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @param mwin Defaults to \code{16}.
 #' @return A list with \code{systolic}, \code{notch}, \code{diastolic}, \code{onset}, \code{amplitude}, \code{ac}, \code{dc}, \code{pi}, \code{rate}, \code{fs}, \code{method}.
 #' @export
@@ -1476,10 +1487,10 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
 #' against a ternary template.  Matching a TERNARY version is what makes
 #' it tolerant of P-wave amplitude and shape variation.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @param qrs See Usage.
-#' @param fs See Usage.
-#' @param template Defaults to \code{NULL}.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param template Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{p}, \code{template}, \code{windows}, \code{bandpass}, \code{fs}, \code{method}.
 #' @export
 PWaveDet <- function(x, qrs, fs, template = NULL) {
@@ -1586,10 +1597,10 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
 #' sampled once per beat is a respiratory signal without a respiration
 #' sensor.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @param qrs See Usage.
-#' @param fs See Usage.
-#' @param fsr Defaults to \code{4}.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param fsr Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @return A list with \code{edr}, \code{amp}, \code{times}, \code{resprate}, \code{fsr}, \code{nbeats}, \code{method}.
 #' @export
 EdrSignal <- function(x, qrs, fs, fsr = 4) {
@@ -1657,11 +1668,11 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
 #' pause and an SpO2 desaturation is what keeps a motion-induced flat
 #' stretch of EDR from being scored as an apnea.
 #'
-#' @param edr See Usage.
-#' @param spo2 See Usage.
-#' @param fs See Usage.
-#' @param hours Defaults to \code{NULL}.
-#' @param mindur Defaults to \code{10}.
+#' @param edr A vector; its length is taken.
+#' @param spo2 A vector; its length is taken and its elements indexed.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param hours Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param mindur Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @param desat Defaults to \code{3}.
 #' @return A list with \code{events}, \code{nevents}, \code{ahi}, \code{desatdepth}, \code{hours}, \code{mindur}, \code{desat}, \code{fs}, \code{method}.
 #' @export
@@ -1732,7 +1743,7 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
 #' the RR variance alongside it so it can be interpreted rather than
 #' read bare.
 #'
-#' @param rr See Usage.
+#' @param rr Passed to \code{.morie_qrs_check}.
 #' @param fsr Defaults to \code{4}.
 #' @param bands Defaults to \code{"taskforce"}.
 #' @return A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct}, \code{rrvar}, \code{bands}, \code{n}, \code{method}.
@@ -1763,7 +1774,7 @@ LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
 #' lands on 0.5 cycles per beat -- the last bin of the beat-series
 #' spectrum. An EVEN beat count is required or that is not an exact bin.
 #'
-#' @param twaves See Usage.
+#' @param twaves A vector; its length is taken.
 #' @param noiselo Defaults to \code{0.33}.
 #' @param noisehi Defaults to \code{0.45}.
 #' @return A list with \code{valt}, \code{kscore}, \code{altpower}, \code{noisemean}, \code{noisesd}, \code{nbeats}, \code{npoints}, \code{cyclesperbeat}, \code{present}, \code{method}.
@@ -1834,10 +1845,10 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
 #' with the window at the average T duration.  Working ACROSS channels
 #' is what makes T detection tractable.
 #'
-#' @param chans See Usage.
+#' @param chans A vector; its length is taken.
 #' @param qrs See Usage.
-#' @param fs See Usage.
-#' @param tdur Defaults to \code{0.16}.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param tdur Numeric; combined arithmetically in the body. Defaults to \code{0.16}.
 #' @return A list with \code{t}, \code{onset}, \code{offset}, \code{length}, \code{tdur}, \code{nchan}, \code{fs}, \code{method}.
 #' @export
 TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
@@ -1916,9 +1927,9 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
 #' quasi-sinusoidal 4-7 Hz activity (so the spectral concentration is
 #' high).
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
-#' @param win Defaults to \code{4}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param fs Numeric; combined arithmetically in the body.
+#' @param win Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @param conc Defaults to \code{0.6}.
 #' @param crest Defaults to \code{4}.
 #' @return A list with \code{flag}, \code{domfreq}, \code{concentration}, \code{crest}, \code{rate}, \code{conc}, \code{crestmax}, \code{nwin}, \code{fraction}, \code{win}, \code{fs}, \code{method}.
@@ -1995,7 +2006,7 @@ VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
 #' "smoothed"; the absolute value makes an inverted QRS give the same
 #' response.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y0}, \code{n}, \code{method}.
 #' @export
 QrsDeriv1 <- function(x) {
@@ -2019,7 +2030,7 @@ QrsDeriv1 <- function(x) {
 #' removes any locally linear trend, so T-wave limbs and baseline drift
 #' give nothing while the QRS curvature gives a large output.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y1}, \code{n}, \code{method}.
 #' @export
 QrsDeriv2 <- function(x) {
@@ -2045,8 +2056,8 @@ QrsDeriv2 <- function(x) {
 #' different parts of the complex; the mix has its peak reliably inside
 #' it.
 #'
-#' @param y0 See Usage.
-#' @param y1 See Usage.
+#' @param y0 A vector; its length is taken.
+#' @param y1 A vector; its length is taken.
 #' @return A list with \code{y2}, \code{w0}, \code{w1}, \code{n}, \code{method}.
 #' @export
 QrsDerivMx <- function(y0, y1) {
@@ -2070,8 +2081,8 @@ QrsDerivMx <- function(y0, y1) {
 #' (N - i + 1).  Squaring rewards the large QRS differences; the
 #' linearly falling weight smooths the result without a separate filter.
 #'
-#' @param x See Usage.
-#' @param nwin Defaults to \code{8}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param nwin A count; the body uses it as \code{seq_len(...)}. Defaults to \code{8}.
 #' @return A list with \code{g1}, \code{nwin}, \code{n}, \code{method}.
 #' @export
 QrsWSqDrv <- function(x, nwin = 8) {
@@ -2104,8 +2115,8 @@ QrsWSqDrv <- function(x, nwin = 8) {
 #'
 #' derivative peaks across the Q-R-S swings into one pulse per beat.
 #'
-#' @param g1 See Usage.
-#' @param mwin Defaults to \code{8}.
+#' @param g1 A vector; its length is taken.
+#' @param mwin Passed to \code{.morie_qrs_mavg}. Defaults to \code{8}.
 #' @return A list with \code{g}, \code{mwin}, \code{n}, \code{method}.
 #' @export
 QrsDrvSmth <- function(g1, mwin = 8) {
@@ -2131,7 +2142,7 @@ QrsDrvSmth <- function(g1, mwin = 8) {
 #' Hz, 5-sample delay, >35 dB at 60 Hz -- all tied to fs = 200 Hz.
 #'
 #' @param freq See Usage.
-#' @param fs Defaults to \code{200}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{a}, \code{fs}, \code{fsnote}, \code{method}.
 #' @export
 QrsLPassTf <- function(freq, fs = 200) {
@@ -2175,7 +2186,7 @@ QrsLPassTf <- function(freq, fs = 200) {
 #'
 #' Adds and one shift by 32 -- which is why it was chosen for real time.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y}, \code{delay}, \code{n}, \code{fsnote}, \code{method}.
 #' @export
 QrsLPassDf <- function(x) {
@@ -2207,7 +2218,7 @@ QrsLPassDf <- function(x) {
 #' Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
 #'
 #' @param freq See Usage.
-#' @param fs Defaults to \code{200}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{fs}, \code{method}.
 #' @export
 QrsHpLpTf <- function(freq, fs = 200) {
@@ -2241,7 +2252,7 @@ QrsHpLpTf <- function(freq, fs = 200) {
 #'
 #' sample regardless of window length.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y}, \code{n}, \code{method}.
 #' @export
 QrsHpLpDf <- function(x) {
@@ -2268,7 +2279,7 @@ QrsHpLpDf <- function(x) {
 #' computed.  fc = 5 Hz and 80 ms delay hold at fs = 200 Hz.
 #'
 #' @param freq See Usage.
-#' @param fs Defaults to \code{200}.
+#' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{fs}, \code{fsnote}, \code{method}.
 #' @export
 QrsHPassTf <- function(freq, fs = 200) {
@@ -2307,7 +2318,7 @@ QrsHPassTf <- function(freq, fs = 200) {
 #' bracketed group is exactly y(n) of eq (4.10), so the running-sum
 #' state is reused directly.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{p}, \code{y}, \code{n}, \code{method}.
 #' @export
 QrsHPassDf <- function(x) {
@@ -2340,7 +2351,7 @@ QrsHPassDf <- function(x) {
 #' (1/32) x(n-32).  Eqs (4.9)-(4.12) folded into one recursion: four
 #' adds per sample and a single state variable.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{p}, \code{n}, \code{delayms}, \code{fsnote}, \code{method}.
 #' @export
 QrsHPassIo <- function(x) {
@@ -2372,7 +2383,7 @@ QrsHPassIo <- function(x) {
 #' antisymmetric taps make it exactly zero on any constant or linear
 #' baseline.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A list with \code{y}, \code{b}, \code{n}, \code{fsnote}, \code{method}.
 #' @export
 QrsDerivOp <- function(x) {
@@ -2398,9 +2409,9 @@ QrsDerivOp <- function(x) {
 #' multiple peaks.  The book found N = 30 at fs = 200 Hz, i.e. 150 ms,
 #' and supplying fs preserves the 150 ms window at any rate.
 #'
-#' @param x See Usage.
-#' @param nwin Defaults to \code{30}.
-#' @param fs Defaults to \code{NULL}.
+#' @param x A vector; its length is taken.
+#' @param nwin Numeric; combined arithmetically in the body. Defaults to \code{30}.
+#' @param fs Optional; may be \code{NULL}. Passed to \code{.morie_qrs_fs}.
 #' @return A list with \code{y}, \code{nwin}, \code{widthsec}, \code{n}, \code{method}.
 #' @export
 QrsMwInt <- function(x, nwin = 30, fs = NULL) {
@@ -2430,9 +2441,9 @@ QrsMwInt <- function(x, nwin = 30, fs = NULL) {
 #' one artifact.  I1 sits a quarter of the way from noise up to signal;
 #' I2 is half of I1 and is reserved for search-back.
 #'
-#' @param peaki See Usage.
-#' @param spki See Usage.
-#' @param npki See Usage.
+#' @param peaki Numeric; combined arithmetically in the body.
+#' @param spki Numeric; combined arithmetically in the body.
+#' @param npki Numeric; combined arithmetically in the body.
 #' @param issignal See Usage.
 #' @return A list with \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2}, \code{peaki}, \code{issignal}, \code{method}.
 #' @export
@@ -2468,8 +2479,8 @@ QrsThresh <- function(peaki, spki, npki, issignal) {
 #' so the running estimate is too high and the heavier weight pulls it
 #' down.
 #'
-#' @param peaki See Usage.
-#' @param spki See Usage.
+#' @param peaki Numeric; combined arithmetically in the body.
+#' @param spki Numeric; combined arithmetically in the body.
 #' @return A list with \code{spki}, \code{previous}, \code{peaki}, \code{method}.
 #' @export
 QrsSpkiUpd <- function(peaki, spki) {
@@ -2494,8 +2505,8 @@ QrsSpkiUpd <- function(peaki, spki) {
 #' window, so unlike the beat-to-beat form of eq (4.20) it is
 #' insensitive to a single mis-detected interval.
 #'
-#' @param nbeats See Usage.
-#' @param duration See Usage.
+#' @param nbeats Numeric; combined arithmetically in the body.
+#' @param duration Numeric; combined arithmetically in the body.
 #' @return A list with \code{hr}, \code{nbeats}, \code{duration}, \code{method}.
 #' @export
 HrFromCnt <- function(nbeats, duration) {
@@ -2524,9 +2535,9 @@ HrFromCnt <- function(nbeats, duration) {
 #' integrating is the whole point: a wave well defined in only one lead
 #' still contributes.
 #'
-#' @param chans See Usage.
-#' @param wwin See Usage.
-#' @param fs See Usage.
+#' @param chans A vector; its length is taken.
+#' @param wwin Numeric; combined arithmetically in the body.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{length}, \code{nchan}, \code{wsamp}, \code{wsec}, \code{fs}, \code{n}, \code{method}.
 #' @export
 LengthXfm <- function(chans, wwin, fs) {
@@ -2576,8 +2587,8 @@ LengthXfm <- function(chans, wwin, fs) {
 #' sample.  s(n) has two peaks per cycle: the upstroke onset, then the
 #' dicrotic notch.
 #'
-#' @param p See Usage.
-#' @param mwin Defaults to \code{16}.
+#' @param p A vector; its length is taken and its elements indexed.
+#' @param mwin A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16}.
 #' @return A list with \code{s}, \code{weights}, \code{mwin}, \code{n}, \code{method}.
 #' @export
 DNotchSmth <- function(p, mwin = 16) {

@@ -11,7 +11,7 @@
 \item{M}{See Usage.}
 }
 \description{
-Part of the painn_native implementation; see the file header for the source it follows.
+A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

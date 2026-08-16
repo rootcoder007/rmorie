@@ -76,17 +76,18 @@
 #' far finer than any distance the caller can distinguish and far
 #' coarser than the last-bit noise that would otherwise decide a tie.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .cmlmer_snap12 <- function(x) floor(x * 1e12 + 0.5) / 1e12
 
 #' .cmlmer_rows
 #'
-#' Part of the cmlmer_native implementation; see the file header for the
+#' A step of the cmlmer_native implementation. Called by \code{morie_cmlmer_compressed_lmm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .cmlmer_rows <- function(x) {
@@ -100,10 +101,11 @@
 
 #' .cmlmer_chol
 #'
-#' Part of the cmlmer_native implementation; see the file header for the
+#' A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}, \code{morie_cmlmer_compressed_lmm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .cmlmer_chol <- function(A) {
@@ -129,11 +131,12 @@
 
 #' .cmlmer_solve
 #'
-#' Part of the cmlmer_native implementation; see the file header for the
+#' A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}, \code{morie_cmlmer_compressed_lmm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param b See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .cmlmer_solve <- function(L, b) {
@@ -155,10 +158,11 @@
 
 #' .cmlmer_logdet
 #'
-#' Part of the cmlmer_native implementation; see the file header for the
+#' A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
+#' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
 .cmlmer_logdet <- function(L) 2.0 * sum(log(diag(L)))
@@ -171,7 +175,7 @@
 #' throughout: ties are broken by the smaller index pair, so two
 #' implementations agree on the dendrogram, not merely on its quality.
 #'
-#' @param K See Usage.
+#' @param K A matrix; passed to \code{nrow}.
 #' @param g See Usage.
 #' @return A list with \code{lab}, \code{groups}.
 #' @export
@@ -215,13 +219,14 @@
 
 #' .cmlmer_reml_at
 #'
-#' Part of the cmlmer_native implementation; see the file header for the
+#' A step of the cmlmer_native implementation. Called by \code{morie_cmlmer_compressed_lmm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param logdelta See Usage.
+#' @param logdelta Numeric; passed to \code{exp}.
 #' @param Vk See Usage.
-#' @param y See Usage.
-#' @param X See Usage.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; indexed by row and column.
 #' @return A list with \code{ll}, \code{delta}, \code{beta}, \code{s2g}, \code{L}.
 #' @export
 .cmlmer_reml_at <- function(logdelta, Vk, y, X) {
@@ -247,15 +252,16 @@
 
 #' morie_cmlmer_compressed_lmm
 #'
-#' Part of the cmlmer_native implementation; see the file header for the
+#' A step of the cmlmer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param M See Usage.
-#' @param K See Usage.
+#' @param M Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param K Passed to \code{.cmlmer_rows}.
 #' @param clusters Defaults to \code{NULL}.
-#' @param X Defaults to \code{NULL}.
-#' @param compare_levels Defaults to \code{NULL}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.cmlmer_rows}.
+#' @param compare_levels Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param log_delta_lo Defaults to \code{-10}.
 #' @param log_delta_hi Defaults to \code{10}.
 #' @param max_iter Defaults to \code{200L}.
@@ -392,7 +398,8 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
 
 #' .cmlmer_cheatsheet
 #'
-#' Part of the cmlmer_native implementation; see the file header for the
+#' A step of the cmlmer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

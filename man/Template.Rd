@@ -11,7 +11,7 @@ Template(x, ref, threshold = NULL, subtract_mean = TRUE)
 \item{x}{See Usage.}
 \item{ref}{See Usage.}
 \item{threshold}{Defaults to \code{NULL}.}
-\item{subtract_mean}{Defaults to \code{TRUE}.}
+\item{subtract_mean}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 gamma is normalized at EVERY shift by the energy of the segment under the template, which is what makes it a correlation rather than a convolution -- a large low-frequency excursion cannot produce a spurious match because the normalization divides the amplitude out.

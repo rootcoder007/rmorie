@@ -8,11 +8,11 @@
 abundance_correlation(cov_a, cov_b)
 }
 \arguments{
-\item{cov_a}{See Usage.}
-\item{cov_b}{See Usage.}
+\item{cov_a}{Passed to \code{.metabd_vec}.}
+\item{cov_b}{Passed to \code{.metabd_vec}.}
 }
 \description{
-Part of the metabd_native implementation; see the file header for the source it follows.
+A step of the metabd_native implementation. Called by \code{composite_distance}, \code{morie_metabd}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{correlation}, \code{n_samples}.

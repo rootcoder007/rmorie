@@ -11,7 +11,7 @@
 \item{seed}{Defaults to \code{1}.}
 }
 \description{
-Part of the tail1_core implementation; see the file header for the source it follows.
+A step of the tail1_core implementation. Called by \code{.btdir_rows}, \code{.btmbb_reps}, \code{.kvmse_rotation} and 32 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{e}, as built in the body.

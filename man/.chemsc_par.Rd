@@ -8,11 +8,11 @@
 .chemsc_par(base, over)
 }
 \arguments{
-\item{base}{See Usage.}
-\item{over}{See Usage.}
+\item{base}{A vector; indexed elementwise.}
+\item{over}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the chemsc_native implementation; see the file header for the source it follows.
+A step of the chemsc_native implementation. Called by \code{morie_chemsc_clash}, \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{base}, as built in the body.

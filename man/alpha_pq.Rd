@@ -13,7 +13,7 @@ alpha_pq(d_tx, p, q)
 \item{q}{See Usage.}
 }
 \description{
-Part of the node2v_native implementation; see the file header for the source it follows.
+A step of the node2v_native implementation. Called by \code{transition_probabilities}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

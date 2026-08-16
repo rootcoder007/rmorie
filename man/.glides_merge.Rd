@@ -8,11 +8,11 @@
 .glides_merge(base, over)
 }
 \arguments{
-\item{base}{See Usage.}
-\item{over}{See Usage.}
+\item{base}{A vector; indexed elementwise.}
+\item{over}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the glides_native implementation; see the file header for the source it follows.
+A step of the glides_native implementation. Called by \code{morie_glides_hbond}, \code{morie_glides_score}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{base}, as built in the body.

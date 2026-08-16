@@ -8,14 +8,14 @@
 .s4_gppost(K, Ks, Kss, y, noise = 1e-06)
 }
 \arguments{
-\item{K}{See Usage.}
-\item{Ks}{See Usage.}
+\item{K}{A matrix; passed to \code{nrow}.}
+\item{Ks}{A matrix; passed to \code{crossprod}.}
 \item{Kss}{See Usage.}
 \item{y}{See Usage.}
-\item{noise}{Defaults to \code{1e-06}.}
+\item{noise}{A matrix; passed to \code{diag}. Defaults to \code{1e-06}.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Gpmoe}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{var}.

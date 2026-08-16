@@ -8,14 +8,14 @@
 morie_sam2vd_push_memory(bank, frame_index, features, prompted = FALSE, object_pointer = NULL)
 }
 \arguments{
-\item{bank}{See Usage.}
+\item{bank}{A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.}
 \item{frame_index}{See Usage.}
-\item{features}{See Usage.}
-\item{prompted}{Defaults to \code{FALSE}.}
-\item{object_pointer}{Defaults to \code{NULL}.}
+\item{features}{Passed to \code{.sam2vd_to_num}.}
+\item{prompted}{A flag; the body branches on it. Defaults to \code{FALSE}.}
+\item{object_pointer}{Optional; may be \code{NULL}. Passed to \code{.sam2vd_to_num}.}
 }
 \description{
-Part of the sam2vd_native implementation; see the file header for the source it follows.
+A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{b}, as built in the body.

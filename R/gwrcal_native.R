@@ -20,12 +20,13 @@
 
 #' .gwr_kernel
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{.gwr_cv_score}, \code{.gwr_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param h See Usage.
-#' @param kernel See Usage.
+#' @param d A vector; its length is taken.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param kernel One of \code{"bisquare"}, \code{"gaussian"}, \code{"tricube"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .gwr_kernel <- function(d, h, kernel) {
@@ -41,10 +42,11 @@
 
 #' .gwr_default_bounds
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
+#' @param C A matrix; indexed by row and column.
 #' @return A vector, from \code{c}.
 #' @export
 .gwr_default_bounds <- function(C) {
@@ -61,10 +63,11 @@
 
 #' .gwr_pairwise
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
+#' @param C A matrix; indexed by row and column.
 #' @return The value of \code{D}, as built in the body.
 #' @export
 .gwr_pairwise <- function(C) {
@@ -82,7 +85,7 @@
 #' essentially zero; returns a list with the cholesky factor, the
 #' rank-deficient count, and the effective rank threshold.
 #'
-#' @param M See Usage.
+#' @param M A matrix; indexed by row and column.
 #' @return A list with \code{L}, \code{rdef}, \code{piv}.
 #' @export
 .gwr_pivot_chol_rcond <- function(M) {
@@ -115,15 +118,16 @@
 
 #' .gwr_fit
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}, \code{morie_gwrcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param D See Usage.
-#' @param bw See Usage.
-#' @param kernel See Usage.
-#' @param adaptive See Usage.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param X A matrix; indexed by row and column.
+#' @param D A matrix; indexed by row and column.
+#' @param bw Passed to \code{.gwr_kernel}.
+#' @param kernel Passed to \code{.gwr_kernel}.
+#' @param adaptive A flag; the body branches on it.
 #' @return A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid}, \code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
 #' @export
 .gwr_fit <- function(y, X, D, bw, kernel, adaptive) {
@@ -208,12 +212,13 @@
 
 #' .gwr_aicc
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}, \code{morie_gwrcal}, \code{morie_gwrcal_global_aicc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param sigma2 See Usage.
-#' @param tr_S See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param sigma2 Numeric; passed to \code{log}.
+#' @param tr_S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .gwr_aicc <- function(n, sigma2, tr_S) {
@@ -225,12 +230,13 @@
 
 #' .gwr_aic
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param sigma2 See Usage.
-#' @param tr_S See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param sigma2 Numeric; passed to \code{log}.
+#' @param tr_S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .gwr_aic <- function(n, sigma2, tr_S) {
@@ -240,15 +246,16 @@
 
 #' .gwr_cv_score
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param D See Usage.
-#' @param bw See Usage.
-#' @param kernel See Usage.
-#' @param adaptive See Usage.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param X A matrix; indexed by row and column.
+#' @param D A matrix; indexed by row and column.
+#' @param bw Passed to \code{.gwr_kernel}.
+#' @param kernel Passed to \code{.gwr_kernel}.
+#' @param adaptive A flag; the body branches on it.
 #' @return The value of \code{acc}, as built in the body.
 #' @export
 .gwr_cv_score <- function(y, X, D, bw, kernel, adaptive) {
@@ -295,16 +302,17 @@
 
 #' .gwr_criterion
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param D See Usage.
-#' @param bw See Usage.
-#' @param kernel See Usage.
-#' @param adaptive See Usage.
-#' @param criterion See Usage.
+#' @param y A vector; its length is taken.
+#' @param X Passed to \code{.gwr_cv_score}.
+#' @param D Passed to \code{.gwr_cv_score}.
+#' @param bw Passed to \code{.gwr_cv_score}.
+#' @param kernel Passed to \code{.gwr_cv_score}.
+#' @param adaptive Passed to \code{.gwr_cv_score}.
+#' @param criterion One of \code{"aic"}, \code{"cv"}.
 #' @return The value of \code{.gwr_aicc}.
 #' @export
 .gwr_criterion <- function(y, X, D, bw, kernel, adaptive, criterion) {
@@ -317,13 +325,14 @@
 
 #' .gwr_golden
 #'
-#' Part of the gwrcal_native implementation; see the file header for the
+#' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fn See Usage.
 #' @param lo See Usage.
 #' @param hi See Usage.
-#' @param tol See Usage.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .gwr_golden <- function(fn, lo, hi, tol) {

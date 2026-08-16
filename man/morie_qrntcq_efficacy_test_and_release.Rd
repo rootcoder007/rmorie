@@ -8,15 +8,15 @@
 morie_qrntcq_efficacy_test_and_release(t.Q, t.T, t.R, false.negative, generation.time = NULL, t.R.positive = NULL)
 }
 \arguments{
-\item{t.Q}{See Usage.}
+\item{t.Q}{Passed to \code{morie_qrntcq_quarantine_efficacy}.}
 \item{t.T}{See Usage.}
-\item{t.R}{See Usage.}
+\item{t.R}{Passed to \code{morie_qrntcq_quarantine_efficacy}.}
 \item{false.negative}{See Usage.}
 \item{generation.time}{Defaults to \code{NULL}.}
 \item{t.R.positive}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the qrntcq_native implementation; see the file header for the source it follows.
+A step of the qrntcq_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{efficacy}, \code{efficacy.detained}, \code{efficacy.released}, \code{false.negative}, \code{t.T}, \code{t.R}, \code{bound}, \code{note}.

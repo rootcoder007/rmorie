@@ -8,10 +8,10 @@
 .morie_spx_trace(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{diag}.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{MantelZ}, \code{MoranRes}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_fsum}.

@@ -8,14 +8,14 @@
 .med_fit(X, M, Y, C, who)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{M}{See Usage.}
-\item{Y}{See Usage.}
-\item{C}{See Usage.}
+\item{X}{Passed to \code{.s03vec}.}
+\item{M}{Passed to \code{.s03vec}.}
+\item{Y}{Passed to \code{.s03vec}.}
+\item{C}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
 \item{who}{See Usage.}
 }
 \description{
-Part of the ctde implementation; see the file header for the source it follows.
+A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tnie}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{theta}, \code{cbar}, \code{n}.

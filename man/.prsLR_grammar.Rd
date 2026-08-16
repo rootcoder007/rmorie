@@ -8,10 +8,10 @@
 .prsLR_grammar(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$rules}, \code{$start} from it.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. Called by \code{morie_prsLR}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

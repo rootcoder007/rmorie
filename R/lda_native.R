@@ -71,7 +71,8 @@
 
 #' .morie_lda_e_log_theta
 #'
-#' Part of the lda_native implementation; see the file header for the
+#' A step of the lda_native implementation. Called by \code{.morie_lda_elbo}, \code{.morie_lda_variational_inference}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param gamma See Usage.
@@ -88,13 +89,14 @@
 
 #' .morie_lda_variational_inference
 #'
-#' Part of the lda_native implementation; see the file header for the
+#' A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param doc See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param iters Defaults to \code{100}.
+#' @param alpha A vector; its length is taken.
+#' @param beta A matrix; passed to \code{as.matrix}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged}, \code{K}, \code{N}, \code{topic_proportions}.
 #' @export
@@ -150,13 +152,14 @@
 
 #' .morie_lda_elbo
 #'
-#' Part of the lda_native implementation; see the file header for the
+#' A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param doc See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param phi See Usage.
+#' @param alpha A vector; its length is taken.
+#' @param beta A matrix; passed to \code{as.matrix}.
+#' @param phi A matrix; indexed by row and column.
 #' @param gamma See Usage.
 #' @return The value of \code{val}, as built in the body.
 #' @export
@@ -191,16 +194,17 @@
 
 #' .morie_lda_variational_em
 #'
-#' Part of the lda_native implementation; see the file header for the
+#' A step of the lda_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param docs See Usage.
-#' @param K See Usage.
-#' @param V See Usage.
-#' @param alpha Defaults to \code{0.1}.
-#' @param iters Defaults to \code{30}.
-#' @param inner Defaults to \code{50}.
-#' @param seed Defaults to \code{0}.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
+#' @param V A count; the body uses it as \code{matrix(...)}.
+#' @param alpha Passed to \code{.morie_lda_variational_inference}. Defaults to \code{0.1}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.
+#' @param inner Passed to \code{.morie_lda_variational_inference}. Defaults to \code{50}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param tol Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{beta}, \code{elbo_history}, \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations}, \code{method}.
 #' @export
@@ -254,12 +258,13 @@
 
 #' .morie_lda_topic_words
 #'
-#' Part of the lda_native implementation; see the file header for the
+#' A step of the lda_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta A matrix; passed to \code{as.matrix}.
 #' @param n_top Defaults to \code{5}.
-#' @param vocab Defaults to \code{NULL}.
+#' @param vocab Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_lda_topic_words <- function(beta, n_top=5, vocab=NULL) {
@@ -278,7 +283,8 @@
 
 #' .morie_lda_cheatsheet
 #'
-#' Part of the lda_native implementation; see the file header for the
+#' A step of the lda_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

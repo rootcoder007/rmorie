@@ -12,7 +12,7 @@
 \item{vi}{See Usage.}
 }
 \description{
-Part of the psycho_native implementation; see the file header for the source it follows.
+A step of the psycho_native implementation. Called by \code{.psy_dl}, \code{morie_psy_ma_paule_mandel}, \code{morie_psy_ma_reml}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mu}, \code{Q}, \code{w}, \code{k}.

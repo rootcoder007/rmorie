@@ -8,10 +8,10 @@
 .mor_ps_standardize(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the causal implementation; see the file header for the source it follows.
+A step of the causal implementation. Called by \code{.fit_propensity}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

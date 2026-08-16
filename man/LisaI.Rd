@@ -8,8 +8,8 @@
 LisaI(x, w)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{w}{See Usage.}
+\item{x}{Passed to \code{.morie_spx_chkv}.}
+\item{w}{Passed to \code{.morie_spx_chkw}.}
 }
 \description{
 a non-zero gap means the weights or the scaling are wrong.

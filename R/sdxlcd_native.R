@@ -35,7 +35,8 @@
 
 #' morie_sdxlcd_fourier_embedding
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_crop_conditioning}, \code{morie_sdxlcd_size_conditioning}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param value See Usage.
@@ -60,12 +61,13 @@ morie_sdxlcd_fourier_embedding <- function(value, dim = 8, scale = 0.001) {
 
 #' morie_sdxlcd_size_conditioning
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_condition_vector}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param h_original See Usage.
 #' @param w_original See Usage.
-#' @param dim Defaults to \code{8}.
+#' @param dim Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.
 #' @return A list with \code{c_size}, \code{embedding}, \code{note}.
 #' @export
 morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
@@ -82,12 +84,13 @@ morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
 
 #' morie_sdxlcd_crop_conditioning
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_condition_vector}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param c_top Defaults to \code{0}.
 #' @param c_left Defaults to \code{0}.
-#' @param dim Defaults to \code{8}.
+#' @param dim Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.
 #' @return A list with \code{c_crop}, \code{embedding}, \code{object_centred}, \code{note}.
 #' @export
 morie_sdxlcd_crop_conditioning <- function(c_top = 0, c_left = 0, dim = 8) {
@@ -105,14 +108,15 @@ morie_sdxlcd_crop_conditioning <- function(c_top = 0, c_left = 0, dim = 8) {
 
 #' morie_sdxlcd_sample_crop
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param height See Usage.
 #' @param width See Usage.
 #' @param target_h See Usage.
 #' @param target_w See Usage.
-#' @param rng See Usage.
+#' @param rng Passed to \code{.ghc_unif}.
 #' @return A list with \code{c_top}, \code{c_left}.
 #' @export
 morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
@@ -132,10 +136,11 @@ morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
 
 #' morie_sdxlcd_discarded_fraction
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sizes See Usage.
+#' @param sizes A matrix; indexed by row and column.
 #' @param minimum Defaults to \code{256}.
 #' @return A list with \code{discarded}, \code{total}, \code{fraction}, \code{kept_with_conditioning}, \code{minimum}, \code{note}.
 #' @export
@@ -169,7 +174,8 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
 
 #' morie_sdxlcd_aspect_ratio_buckets
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ratios See Usage.
@@ -202,15 +208,16 @@ morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, mult
 
 #' morie_sdxlcd_condition_vector
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h_original See Usage.
-#' @param w_original See Usage.
-#' @param c_top Defaults to \code{0}.
-#' @param c_left Defaults to \code{0}.
+#' @param h_original Passed to \code{morie_sdxlcd_size_conditioning}.
+#' @param w_original Passed to \code{morie_sdxlcd_size_conditioning}.
+#' @param c_top Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.
+#' @param c_left Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.
 #' @param timestep_embedding Defaults to \code{NULL}.
-#' @param dim Defaults to \code{8}.
+#' @param dim Passed to \code{morie_sdxlcd_size_conditioning}. Defaults to \code{8}.
 #' @return A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size}, \code{c_crop}, \code{method}, \code{note}.
 #' @export
 morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_left = 0,
@@ -236,7 +243,8 @@ morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_l
 
 #' morie_sdxlcd_cheatsheet
 #'
-#' Part of the sdxlcd_native implementation; see the file header for the
+#' A step of the sdxlcd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,12 +8,12 @@
 project_to_llm(query_out, W, b = NULL)
 }
 \arguments{
-\item{query_out}{See Usage.}
-\item{W}{See Usage.}
+\item{query_out}{A matrix; passed to \code{as.matrix}.}
+\item{W}{A matrix; passed to \code{nrow}.}
 \item{b}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the blip2v_native implementation; see the file header for the source it follows.
+A step of the blip2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.

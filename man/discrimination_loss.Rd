@@ -8,11 +8,11 @@
 discrimination_loss(f_x, f_gz)
 }
 \arguments{
-\item{f_x}{See Usage.}
-\item{f_gz}{See Usage.}
+\item{f_x}{Passed to \code{.gan_an_discrimination_loss_impl}.}
+\item{f_gz}{Passed to \code{.gan_an_discrimination_loss_impl}.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.gan_an_discrimination_loss_impl}.

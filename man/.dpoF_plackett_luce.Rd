@@ -8,12 +8,12 @@
 .dpoF_plackett_luce(logp, logp_ref, beta)
 }
 \arguments{
-\item{logp}{See Usage.}
-\item{logp_ref}{See Usage.}
-\item{beta}{See Usage.}
+\item{logp}{Optional; may be \code{NULL}. A matrix; passed to \code{dim}.}
+\item{logp_ref}{Optional; may be \code{NULL}. A matrix; passed to \code{dim}.}
+\item{beta}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dpoF_native implementation; see the file header for the source it follows.
+A step of the dpoF_native implementation. Called by \code{morie_dpoF}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards}, \code{beta}, \code{n}, \code{model}, \code{method}.

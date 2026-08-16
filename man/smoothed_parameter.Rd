@@ -14,7 +14,7 @@ smoothed_parameter(X, x0, h, kernel = "epanechnikov")
 \item{kernel}{Defaults to \code{"epanechnikov"}.}
 }
 \description{
-Part of the tlcvnp_native implementation; see the file header for the source it follows.
+A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed}, \code{select_bandwidth}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{psi_h}, \code{se}, \code{h}, \code{n}, \code{influence_curve}, \code{note}.

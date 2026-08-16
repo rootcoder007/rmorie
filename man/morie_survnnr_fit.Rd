@@ -8,19 +8,19 @@
 morie_survnnr_fit(X, times, events, hidden = c(), activation = "tanh", l2 = 0, lr = 0.1, n_epochs = 400, seed = 0, tol = 1e-10)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{hidden}{Defaults to \code{c()}.}
-\item{activation}{Defaults to \code{"tanh"}.}
-\item{l2}{Defaults to \code{0}.}
-\item{lr}{Defaults to \code{0.1}.}
+\item{X}{A vector; its length is taken and its elements indexed.}
+\item{times}{A vector; its length is taken.}
+\item{events}{A vector; its length is taken.}
+\item{hidden}{A vector; its length is taken. Defaults to \code{c()}.}
+\item{activation}{Passed to \code{morie_survnnr_forward}. Defaults to \code{"tanh"}.}
+\item{l2}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{n_epochs}{Defaults to \code{400}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.survnnr_init}. Defaults to \code{0}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the survnnr_native implementation; see the file header for the source it follows.
+A step of the survnnr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{W}, \code{b}, \code{activation}, \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk}, \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties}, \code{scale_note}, \code{method}.

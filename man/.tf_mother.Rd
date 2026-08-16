@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{name}{See Usage.}
-\item{t}{See Usage.}
-\item{w0}{Defaults to \code{5}.}
+\item{t}{A vector; its length is taken.}
+\item{w0}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_cwt}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

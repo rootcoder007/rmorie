@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{P}{See Usage.}
-\item{R}{See Usage.}
+\item{R}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the mdpval_native implementation; see the file header for the source it follows.
+A step of the mdpval_native implementation. Called by \code{morie_ddqn}, \code{morie_mdpval}, \code{morie_qlearn} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{Pm}, \code{R}, \code{S}, \code{A}.

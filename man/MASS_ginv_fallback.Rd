@@ -11,10 +11,10 @@ MASS_ginv_fallback(H)
 \item{H}{See Usage.}
 }
 \description{
-Part of the evt_coles implementation; see the file header for the source it follows.
+A step of the evt_coles implementation. Called by \code{morie_evt_gev_mle}, \code{morie_evt_gpd_mle}. See the file header for the source the module follows.
 }
 \value{
-The value of \code{%*%}.
+The value of \code{\%*\%}.
 }
 \keyword{internal}
 \examples{

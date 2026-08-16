@@ -105,7 +105,8 @@ morie_burkov_cosine_similarity <- function(x, y) {
 
 #' .morie_burkov_phi
 #'
-#' Part of the burkov_lm_native implementation; see the file header for
+#' A step of the burkov_lm_native implementation. Called by \code{morie_burkov_layer1_output}, \code{morie_burkov_layer2_output}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param name See Usage.

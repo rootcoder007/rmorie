@@ -12,10 +12,11 @@
 
 #' .boot_n
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{.morie_empinf_reg}, \code{morie_boot}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
+#' @param data A matrix; passed to \code{nrow}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .boot_n <- function(data) if (is.null(dim(data))) length(data) else nrow(data)
@@ -23,11 +24,12 @@
 # boot:::ordinary.array -- single- or multi-stratum R x n index matrix.
 #' Boot:::ordinary.array -- single- or multi-stratum R x n index matrix
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{morie_boot}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param R See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param R A count; the body uses it as \code{rep(...)}.
 #' @param strata Defaults to \code{NULL}.
 #' @return The value of \code{output}, as built in the body.
 #' @export
@@ -92,10 +94,11 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 # boot:::freq.array -- R x n resample frequency counts.
 #' Boot:::freq.array -- R x n resample frequency counts
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{.morie_empinf_reg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param boot_obj See Usage.
+#' @param boot_obj A list; the body reads \code{$index} from it.
 #' @return A matrix, from \code{t}.
 #' @export
 .morie_boot_freq <- function(boot_obj) {
@@ -107,11 +110,12 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 # boot:::empinf.reg -- regression estimate of empirical influence.
 #' Boot:::empinf.reg -- regression estimate of empirical influence
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{.morie_ci_bca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param boot_obj See Usage.
-#' @param t Defaults to \code{boot_obj$t[, 1L]}.
+#' @param boot_obj A list; the body reads \code{$data}, \code{$strata} from it.
+#' @param t A vector; its length is taken and its elements indexed. Defaults to \code{boot_obj$t[, 1L]}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .morie_empinf_reg <- function(boot_obj, t = boot_obj$t[, 1L]) {
@@ -141,8 +145,8 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' quantile scale (shared by percentile / basic / BCa).
 #'
-#' @param t See Usage.
-#' @param alpha See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param alpha A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_norm_inter <- function(t, alpha) {
@@ -175,23 +179,25 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 
 #' .morie_ci_perc
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param conf See Usage.
+#' @param t Passed to \code{.morie_norm_inter}.
+#' @param conf Numeric; combined arithmetically in the body.
 #' @return The value of \code{.morie_norm_inter}.
 #' @export
 .morie_ci_perc <- function(t, conf) .morie_norm_inter(t, (1 + c(-conf, conf)) / 2)
 
 #' .morie_ci_basic
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t0 See Usage.
-#' @param t See Usage.
-#' @param conf See Usage.
+#' @param t0 Numeric; combined arithmetically in the body.
+#' @param t Passed to \code{.morie_norm_inter}.
+#' @param conf Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_ci_basic <- function(t0, t, conf) {
@@ -200,12 +206,13 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 
 #' .morie_ci_norm
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t0 See Usage.
-#' @param t See Usage.
-#' @param conf See Usage.
+#' @param t0 Numeric; combined arithmetically in the body.
+#' @param t A vector; indexed elementwise.
+#' @param conf Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .morie_ci_norm <- function(t0, t, conf) {
@@ -217,12 +224,13 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 
 #' .morie_ci_bca
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param boot_obj See Usage.
+#' @param boot_obj A list; the body reads \code{$t}, \code{$t0} from it.
 #' @param index See Usage.
-#' @param conf See Usage.
+#' @param conf Numeric; combined arithmetically in the body.
 #' @return The value of \code{.morie_norm_inter}.
 #' @export
 .morie_ci_bca <- function(boot_obj, index, conf) {
@@ -280,15 +288,16 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 # boot:::ts.array -- block start/length arrays for the block bootstrap.
 #' Boot:::ts.array -- block start/length arrays for the block bootstrap
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{morie_tsboot}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param n.sim See Usage.
-#' @param R See Usage.
-#' @param l See Usage.
-#' @param sim See Usage.
-#' @param endcorr See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param n.sim Numeric; combined arithmetically in the body.
+#' @param R A count; the body uses it as \code{rep(...)}.
+#' @param l A count; the body uses it as \code{rep(...)}.
+#' @param sim Compared against \code{"geom"}.
+#' @param endcorr A flag; the body branches on it.
 #' @return A list with \code{starts}, \code{lengths}.
 #' @export
 .morie_ts_array <- function(n, n.sim, R, l, sim, endcorr) {
@@ -317,11 +326,12 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 
 #' .morie_make_ends
 #'
-#' Part of the boot_native implementation; see the file header for the
+#' A step of the boot_native implementation. Called by \code{morie_tsboot}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param n See Usage.
+#' @param a A vector; indexed elementwise.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_make_ends <- function(a, n) {

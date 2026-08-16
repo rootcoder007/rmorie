@@ -14,7 +14,7 @@ dirichlet_predictive(N_ij, N_j, beta, m)
 \item{m}{See Usage.}
 }
 \description{
-Part of the bigtm_native implementation; see the file header for the source it follows.
+A step of the bigtm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{predictive}, \code{lambda}, \code{f}, \code{interpolated}, \code{note}.

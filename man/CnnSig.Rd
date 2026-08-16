@@ -8,11 +8,11 @@
 CnnSig(x, kernels, bias = NULL, pool = 2, dense = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{kernels}{See Usage.}
-\item{bias}{Defaults to \code{NULL}.}
-\item{pool}{Defaults to \code{2}.}
-\item{dense}{Defaults to \code{NULL}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{kernels}{Passed to \code{.morie_bx_mat}.}
+\item{bias}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
+\item{pool}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
+\item{dense}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 }
 \description{
 equations; the convolution, rectifier and pooling used here are those of LeCun, Bengio and Hinton, Nature 521(7553):436-444, 2015, which is reference [35] of that section.

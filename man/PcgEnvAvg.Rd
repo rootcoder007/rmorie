@@ -8,9 +8,9 @@
 PcgEnvAvg(pcg, ecg, fs = 1000, cycle_len = NULL, envelope_smoothing = NULL)
 }
 \arguments{
-\item{pcg}{See Usage.}
-\item{ecg}{See Usage.}
-\item{fs}{Defaults to \code{1000}.}
+\item{pcg}{Passed to \code{.tf_need}.}
+\item{ecg}{Passed to \code{.tf_need}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1000}.}
 \item{cycle_len}{Defaults to \code{NULL}.}
 \item{envelope_smoothing}{Defaults to \code{NULL}.}
 }

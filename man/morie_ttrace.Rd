@@ -13,7 +13,7 @@ morie_ttrace(reps = 200, seed = 0, ...)
 \item{...}{Passed through.}
 }
 \description{
-Part of the ttrace_native implementation; see the file header for the source it follows.
+A step of the ttrace_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{probability_of_control}.

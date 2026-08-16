@@ -8,22 +8,22 @@
 morie_surxgb_boost(X, y_lower, y_upper, n_rounds = 50, eta = 0.1, max_depth = 3, lam = 1, gamma = 0, min_child = 5, sigma = 1, dist = "normal", base_score = NULL, derivatives = "analytic")
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y_lower}{See Usage.}
-\item{y_upper}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y_lower}{A vector; its length is taken.}
+\item{y_upper}{A vector; its length is taken.}
 \item{n_rounds}{Defaults to \code{50}.}
-\item{eta}{Defaults to \code{0.1}.}
+\item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{max_depth}{Defaults to \code{3}.}
 \item{lam}{Defaults to \code{1}.}
 \item{gamma}{Defaults to \code{0}.}
 \item{min_child}{Defaults to \code{5}.}
-\item{sigma}{Defaults to \code{1}.}
-\item{dist}{Defaults to \code{"normal"}.}
+\item{sigma}{Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{1}.}
+\item{dist}{Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.}
 \item{base_score}{Defaults to \code{NULL}.}
-\item{derivatives}{Defaults to \code{"analytic"}.}
+\item{derivatives}{Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{"analytic"}.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{trees}, \code{eta}, \code{lam}, \code{gamma}, \code{sigma}, \code{dist}, \code{base_score}, \code{derivatives}, \code{loss_history}, \code{prediction}, \code{n_rounds}, \code{max_depth}, \code{method}.

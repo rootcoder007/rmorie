@@ -8,10 +8,10 @@
 .gpinv(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{solve}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gplmmloglik}, \code{.gpolsfit} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.gppinv}.

@@ -8,8 +8,8 @@
 .w3_gammq(a, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{x}{Passed to \code{.w3_gammp}.}
 }
 \description{
 1 - P when x is large, so the far tail keeps its significant digits instead of cancelling against 1.

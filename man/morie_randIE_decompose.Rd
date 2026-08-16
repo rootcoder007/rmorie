@@ -8,10 +8,10 @@
 morie_randIE_decompose(result)
 }
 \arguments{
-\item{result}{See Usage.}
+\item{result}{A list; the body reads \code{$direct}, \code{$indirect}, \code{$total} from it.}
 }
 \description{
-Part of the randIE_native implementation; see the file header for the source it follows.
+A step of the randIE_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{total}, \code{direct}, \code{indirect}, \code{residual}, \code{proportion.mediated}.

@@ -8,16 +8,16 @@
 ray_points(origin, direction, t_near, t_far, n_samples, seed = 0, stratified = TRUE)
 }
 \arguments{
-\item{origin}{See Usage.}
-\item{direction}{See Usage.}
+\item{origin}{Passed to \code{.nrfrad_vec}.}
+\item{direction}{Passed to \code{.nrfrad_vec}.}
 \item{t_near}{See Usage.}
 \item{t_far}{See Usage.}
 \item{n_samples}{See Usage.}
 \item{seed}{Defaults to \code{0}.}
-\item{stratified}{Defaults to \code{TRUE}.}
+\item{stratified}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the nrfrad_native implementation; see the file header for the source it follows.
+A step of the nrfrad_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{t}, \code{points}, \code{direction}.

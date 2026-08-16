@@ -8,19 +8,19 @@
 .snpeff_pack(effect, ref_codon, alt_codon, ref_aa, alt_aa, ref, alt, pos, codon_index = NULL, hgvs_p = NULL)
 }
 \arguments{
-\item{effect}{See Usage.}
+\item{effect}{Passed to \code{.snpeff_impact}.}
 \item{ref_codon}{See Usage.}
 \item{alt_codon}{See Usage.}
 \item{ref_aa}{See Usage.}
 \item{alt_aa}{See Usage.}
 \item{ref}{See Usage.}
 \item{alt}{See Usage.}
-\item{pos}{See Usage.}
+\item{pos}{Numeric; combined arithmetically in the body.}
 \item{codon_index}{Defaults to \code{NULL}.}
 \item{hgvs_p}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the snpeff_native implementation; see the file header for the source it follows.
+A step of the snpeff_native implementation. Called by \code{annotate_variant}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon}, \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c}, \code{pos}, \code{ref}, \code{alt}.

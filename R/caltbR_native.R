@@ -62,7 +62,7 @@
 #'
 #' columns, the G determined from the first non-empty row.
 #'
-#' @param p_g_given_i See Usage.
+#' @param p_g_given_i A matrix; passed to \code{as.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
 .caltbR_to_pgi <- function(p_g_given_i) {
@@ -344,7 +344,8 @@ calibratedrec <- calibrated_rerank
 
 #' .caltbR_cheatsheet
 #'
-#' Part of the caltbR_native implementation; see the file header for the
+#' A step of the caltbR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -13,7 +13,7 @@ multitask_loss(l_cls, l_box, l_mask)
 \item{l_mask}{See Usage.}
 }
 \description{
-Part of the masrcn_native implementation; see the file header for the source it follows.
+A step of the masrcn_native implementation. Called by \code{morie_masrcn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{total}, \code{cls}, \code{box}, \code{mask}, \code{note}.

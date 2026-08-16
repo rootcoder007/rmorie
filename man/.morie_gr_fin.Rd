@@ -12,7 +12,7 @@
 \item{name}{See Usage.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_check_mdp}, \code{.morie_gr_mse_core} and 105 others in the module. See the file header for the source the module follows.
 }
 \value{
 Invisibly,a logical value.

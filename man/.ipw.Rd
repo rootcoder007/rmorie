@@ -8,14 +8,14 @@
 .ipw(y, w, e, keep = NULL, weights = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{w}{See Usage.}
-\item{e}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{w}{A vector; indexed elementwise.}
+\item{e}{A vector; indexed elementwise.}
 \item{keep}{Defaults to \code{NULL}.}
 \item{weights}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tmlefp_native implementation; see the file header for the source it follows.
+A step of the tmlefp_native implementation. Called by \code{morie_tmlefp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{est}, \code{n_kept}.

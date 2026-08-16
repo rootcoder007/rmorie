@@ -8,16 +8,16 @@
 morie_frfgrf(y, X, n_trees = 100, min_leaf = 5, subsample_frac = 0.5, alpha = 0.05, pi = 0.5, seed = 0, kind = "double-sample", sizes = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{n_trees}{Defaults to \code{100}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{subsample_frac}{Defaults to \code{0.5}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{pi}{Defaults to \code{0.5}.}
-\item{seed}{Defaults to \code{0}.}
-\item{kind}{Defaults to \code{"double-sample"}.}
-\item{sizes}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.frfgrf_forest_fit_check}.}
+\item{X}{Passed to \code{.frfgrf_forest_fit_check}.}
+\item{n_trees}{Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{100}.}
+\item{min_leaf}{Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{5}.}
+\item{subsample_frac}{Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0.5}.}
+\item{alpha}{Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0.05}.}
+\item{pi}{Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0.5}.}
+\item{seed}{Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{0}.}
+\item{kind}{Passed to \code{.frfgrf_forest_fit_check}. Defaults to \code{"double-sample"}.}
+\item{sizes}{Passed to \code{.frfgrf_forest_fit_check}.}
 }
 \description{
 forest_fit_check Part of the frfgrf_native implementation; see the file header for the source it follows.

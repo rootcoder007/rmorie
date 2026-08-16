@@ -9,10 +9,11 @@
 
 #' .pibmd_moments
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth}, \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A vector, from \code{c}.
 #' @export
 .pibmd_moments <- function(v) {
@@ -25,13 +26,14 @@
 # KL(q || p) for two normals -- exact when both are normal.
 #' KL(q || p) for two normals -- exact when both are normal
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mq See Usage.
-#' @param sq2 See Usage.
-#' @param mp See Usage.
-#' @param sp2 See Usage.
+#' @param mq Numeric; combined arithmetically in the body.
+#' @param sq2 Numeric; passed to \code{max}.
+#' @param mp Numeric; combined arithmetically in the body.
+#' @param sp2 Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .pibmd_kl_gaussian <- function(mq, sq2, mp, sp2) {
@@ -42,11 +44,12 @@
 # Type-7 quantile of an already-sorted vector.
 #' Type-7 quantile of an already-sorted vector
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth}, \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sorted_v See Usage.
-#' @param u See Usage.
+#' @param sorted_v A vector; its length is taken and its elements indexed.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .pibmd_quantile <- function(sorted_v, u) {
@@ -61,10 +64,11 @@
 # Silverman's rule of thumb, robustified by the interquartile range.
 #' Silverman\'s rule of thumb, robustified by the interquartile range
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .pibmd_bandwidth <- function(v) {
@@ -79,12 +83,13 @@
 
 #' .pibmd_kde
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param sample_ See Usage.
-#' @param h See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param sample_ A vector; its length is taken.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .pibmd_kde <- function(x, sample_, h) {
@@ -96,12 +101,13 @@
 # KL(q || p) from Gaussian kernel densities integrated on a grid.
 #' KL(q || p) from Gaussian kernel densities integrated on a grid
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
-#' @param p See Usage.
-#' @param n_grid See Usage.
+#' @param q A vector; its length is taken.
+#' @param p A vector; its length is taken.
+#' @param n_grid A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .pibmd_kl_kde <- function(q, p, n_grid) {
@@ -126,10 +132,11 @@
 
 #' .pibmd_ecdf
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sorted_v See Usage.
+#' @param sorted_v A vector; its length is taken.
 #' @param x See Usage.
 #' @return A numeric value.
 #' @export
@@ -137,11 +144,12 @@
 
 #' morie_pibmd_prior_informativeness_bias_diagnostic
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param samples See Usage.
-#' @param prior See Usage.
+#' @param prior A list; the body reads \code{$mean}, \code{$sd} from it.
 #' @param n_grid Defaults to \code{512L}.
 #' @return A list with \code{estimate}, \code{kl_divergence}, \code{kl_divergence_kde}, \code{kl_divergence_reverse}, \code{kl_symmetric}, \code{shrinkage}, \code{bias_in_prior_sd}, \code{wasserstein_1}, \code{conflict_p_value}, \code{conflict_p_value_gaussian}, \code{conflict_p_value_empirical}, \code{posterior_mean}, \code{posterior_var}, \code{posterior_sd}, \code{prior_mean}, \code{prior_var}, \code{prior_sd}, \code{n_posterior}, \code{n_prior}, \code{moments_only}, \code{verdict}, \code{informativeness}, \code{method}, \code{note}.
 #' @export
@@ -246,7 +254,8 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
 
 #' .pibmd_cheatsheet
 #'
-#' Part of the pibmd_native implementation; see the file header for the
+#' A step of the pibmd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

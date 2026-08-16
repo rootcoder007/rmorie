@@ -8,11 +8,11 @@
 .sdne_first_order_loss(adjacency, embeddings)
 }
 \arguments{
-\item{adjacency}{See Usage.}
-\item{embeddings}{See Usage.}
+\item{adjacency}{Passed to \code{.sdne_mat}.}
+\item{embeddings}{Passed to \code{.sdne_mat}.}
 }
 \description{
-Part of the sdne_native implementation; see the file header for the source it follows.
+A step of the sdne_native implementation. Called by \code{morie_sdne}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{linked_pairs}, \code{note}.
@@ -21,7 +21,7 @@ A list with \code{loss}, \code{linked_pairs}, \code{note}.
 ----------
 Wang, D., Cui, P. & Zhu, W. (2016) "Structural Deep Network
 Embedding", Proceedings of the 22nd ACM SIGKDD International
-Conference on Knowledge Discovery and Data Mining (KDD \\'16),
+Conference on Knowledge Discovery and Data Mining (KDD \'16),
 1225-1234, doi:10.1145/2939672.2939753. Sec. 1 and 3: that shallow
 models such as IsoMap, Laplacian Eigenmaps and LINE have limited
 representation ability and cannot capture the highly non-linear

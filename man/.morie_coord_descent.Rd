@@ -8,12 +8,12 @@
 .morie_coord_descent(X, y, alpha, lambda, max_iter = 1000L, tol = 1e-06, warm = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{alpha}{See Usage.}
-\item{lambda}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; passed to \code{mean}.}
+\item{alpha}{Passed to \code{.morie_coord_descent_cpp}.}
+\item{lambda}{Passed to \code{.morie_coord_descent_cpp}.}
 \item{max_iter}{Defaults to \code{1000L}.}
-\item{tol}{Defaults to \code{1e-06}.}
+\item{tol}{Passed to \code{.morie_coord_descent_cpp}. Defaults to \code{1e-06}.}
 \item{warm}{Defaults to \code{NULL}.}
 }
 \description{

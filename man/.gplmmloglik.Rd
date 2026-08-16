@@ -8,15 +8,15 @@
 .gplmmloglik(X, Z, y, D, beta = NULL, R = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Z}{See Usage.}
-\item{y}{See Usage.}
-\item{D}{See Usage.}
-\item{beta}{Defaults to \code{NULL}.}
-\item{R}{Defaults to \code{NULL}.}
+\item{X}{Passed to \code{.gpmat}.}
+\item{Z}{Passed to \code{.gplmmV}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
+\item{D}{Passed to \code{.gplmmV}.}
+\item{beta}{Optional; may be \code{NULL}. A matrix; passed to \code{\%*\%}.}
+\item{R}{Passed to \code{.gplmmV}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm010}, \code{Msm011}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{value}, \code{beta}.

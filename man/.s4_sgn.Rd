@@ -11,7 +11,7 @@
 \item{v}{See Usage.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{.s4_rnd}, \code{Tqhs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

@@ -23,14 +23,15 @@
 
 #' morie_tlboot
 #'
-#' Part of the tlboot_native implementation; see the file header for the
+#' A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap}, \code{naive_bootstrap}, \code{targeted_bootstrap}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param data See Usage.
 #' @param estimator See Usage.
-#' @param B Defaults to \code{200L}.
+#' @param B A vector; its length is taken. Defaults to \code{200L}.
 #' @param seed Defaults to \code{0L}.
-#' @param method Defaults to \code{c("naive", "targeted", "multiplier")}.
+#' @param method One of \code{"naive"}, \code{"targeted"}.
 #' @param ic Defaults to \code{NULL}.
 #' @return A list with \code{replicates}, \code{mean}, \code{se}, \code{influence_curve_se}, \code{ratio}, \code{note}.
 #' @export
@@ -117,13 +118,14 @@ morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
 # compat with the Python arm: expose the three entry points
 #' Compat with the Python arm: expose the three entry points
 #'
-#' Part of the tlboot_native implementation; see the file header for the
+#' A step of the tlboot_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
-#' @param estimator See Usage.
-#' @param B Defaults to \code{200L}.
-#' @param seed Defaults to \code{0L}.
+#' @param data Passed to \code{morie_tlboot}.
+#' @param estimator Passed to \code{morie_tlboot}.
+#' @param B Passed to \code{morie_tlboot}. Defaults to \code{200L}.
+#' @param seed Passed to \code{morie_tlboot}. Defaults to \code{0L}.
 #' @return The value of \code{morie_tlboot}.
 #' @export
 naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
@@ -133,13 +135,14 @@ naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
 
 #' targeted_bootstrap
 #'
-#' Part of the tlboot_native implementation; see the file header for the
+#' A step of the tlboot_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param P_star_sampler See Usage.
-#' @param estimator See Usage.
-#' @param B Defaults to \code{200L}.
-#' @param seed Defaults to \code{0L}.
+#' @param estimator Passed to \code{morie_tlboot}.
+#' @param B Passed to \code{morie_tlboot}. Defaults to \code{200L}.
+#' @param seed Passed to \code{morie_tlboot}. Defaults to \code{0L}.
 #' @return The value of \code{morie_tlboot}.
 #' @export
 targeted_bootstrap <- function(P_star_sampler, estimator, B = 200L,
@@ -150,12 +153,13 @@ targeted_bootstrap <- function(P_star_sampler, estimator, B = 200L,
 
 #' multiplier_bootstrap
 #'
-#' Part of the tlboot_native implementation; see the file header for the
+#' A step of the tlboot_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ic See Usage.
-#' @param B Defaults to \code{1000L}.
-#' @param seed Defaults to \code{0L}.
+#' @param ic Passed to \code{morie_tlboot}.
+#' @param B Passed to \code{morie_tlboot}. Defaults to \code{1000L}.
+#' @param seed Passed to \code{morie_tlboot}. Defaults to \code{0L}.
 #' @return The value of \code{morie_tlboot}.
 #' @export
 multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
@@ -165,7 +169,8 @@ multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
 
 #' moment_check
 #'
-#' Part of the tlboot_native implementation; see the file header for the
+#' A step of the tlboot_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param replicates See Usage.
@@ -193,7 +198,8 @@ moment_check <- function(replicates, target_mean, target_se,
 
 #' .tlboot_cheatsheet
 #'
-#' Part of the tlboot_native implementation; see the file header for the
+#' A step of the tlboot_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

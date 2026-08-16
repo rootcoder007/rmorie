@@ -16,7 +16,7 @@ morie_funcal_seed_orthologs(hits, evalue = 0.001, score = 60, query_cov = 0.2, t
 \item{searcher}{Defaults to \code{"diamond"}.}
 }
 \description{
-Part of the funcal_native implementation; see the file header for the source it follows.
+A step of the funcal_native implementation. Called by \code{morie_funcal}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

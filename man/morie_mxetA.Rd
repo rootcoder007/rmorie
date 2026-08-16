@@ -8,9 +8,9 @@
 morie_mxetA(F, n_sim = 1, seed = 0, max_points = 100000L)
 }
 \arguments{
-\item{F}{See Usage.}
+\item{F}{A matrix; passed to \code{as.matrix}.}
 \item{n_sim}{Defaults to \code{1}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{max_points}{Defaults to \code{100000L}.}
 }
 \description{

@@ -8,7 +8,7 @@
 .dnnlcg(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Numeric; combined arithmetically in the body.}
 }
 \description{
 intermediate product exceeds 2^53 and R doubles stay exact.

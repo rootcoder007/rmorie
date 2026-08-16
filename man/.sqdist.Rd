@@ -8,11 +8,11 @@
 .sqdist(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the egnnL_native implementation; see the file header for the source it follows.
+A step of the egnnL_native implementation. Called by \code{edge_message}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

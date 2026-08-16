@@ -8,10 +8,10 @@
 .morie_gr_pvar(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_psd}, \code{.morie_w4c_pca_svd}, \code{morie_geron_glorot_xavier_init} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

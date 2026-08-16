@@ -11,7 +11,7 @@ maximise_acquisition(X, y, best, box, acq = "ei", kernel = "matern52", amplitude
 \item{X}{See Usage.}
 \item{y}{See Usage.}
 \item{best}{See Usage.}
-\item{box}{See Usage.}
+\item{box}{A vector; its length is taken and its elements indexed.}
 \item{acq}{Defaults to \code{"ei"}.}
 \item{kernel}{Defaults to \code{"matern52"}.}
 \item{amplitude}{Defaults to \code{1}.}
@@ -19,14 +19,14 @@ maximise_acquisition(X, y, best, box, acq = "ei", kernel = "matern52", amplitude
 \item{noise}{Defaults to \code{1e-08}.}
 \item{kappa}{Defaults to \code{2}.}
 \item{xi}{Defaults to \code{0}.}
-\item{starts}{Defaults to \code{NULL}.}
+\item{starts}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{n_starts}{Defaults to \code{8}.}
 \item{max_iter}{Defaults to \code{60}.}
 \item{tol}{Defaults to \code{1e-08}.}
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{bayopt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{x}, \code{acq}, \code{n_starts}, \code{evaluations}.

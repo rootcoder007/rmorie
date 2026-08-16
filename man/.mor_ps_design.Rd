@@ -8,11 +8,11 @@
 .mor_ps_design(data, covariates)
 }
 \arguments{
-\item{data}{See Usage.}
+\item{data}{A vector; indexed elementwise.}
 \item{covariates}{See Usage.}
 }
 \description{
-Part of the causal implementation; see the file header for the source it follows.
+A step of the causal implementation. Called by \code{.fit_propensity}, \code{morie_estimate_aipw}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cbind}.

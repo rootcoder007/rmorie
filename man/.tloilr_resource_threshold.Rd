@@ -12,7 +12,7 @@
 \item{kappa}{See Usage.}
 }
 \description{
-Part of the tloilr_native implementation; see the file header for the source it follows.
+A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_rule}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding}, \code{fraction_positive_blip}, \code{note}.

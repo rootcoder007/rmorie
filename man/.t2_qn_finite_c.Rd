@@ -8,10 +8,10 @@
 .t2_qn_finite_c(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tail2_t02 implementation; see the file header for the source it follows.
+A step of the tail2_t02 implementation. Called by \code{QnScale}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

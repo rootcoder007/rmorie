@@ -8,10 +8,10 @@
 escape_regex(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Character; passed to \code{gsub}.}
 }
 \description{
-Part of the manifest implementation; see the file header for the source it follows.
+A step of the manifest implementation. Called by \code{morie_build_outputs_manifest}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{gsub}.

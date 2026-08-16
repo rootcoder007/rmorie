@@ -15,7 +15,7 @@ morie_yolovx_center_sampling(box, grid_w, grid_h, stride = 1, radius = 1.5)
 \item{radius}{Defaults to \code{1.5}.}
 }
 \description{
-Part of the yolovx_native implementation; see the file header for the source it follows.
+A step of the yolovx_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{in_box}, \code{in_center}, \code{candidates}, \code{n_candidates}, \code{single_center}, \code{note}.

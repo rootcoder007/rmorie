@@ -9,7 +9,7 @@ MaTf(b_k, z, N = NULL)
 }
 \arguments{
 \item{b_k}{See Usage.}
-\item{z}{See Usage.}
+\item{z}{Passed to \code{.morie_rg_polyz}.}
 \item{N}{Defaults to \code{NULL}.}
 }
 \description{

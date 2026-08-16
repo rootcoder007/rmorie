@@ -10,10 +10,10 @@ prediction_accuracy(predicted, observed, fold = 2)
 \arguments{
 \item{predicted}{See Usage.}
 \item{observed}{See Usage.}
-\item{fold}{Defaults to \code{2}.}
+\item{fold}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 }
 \description{
-Part of the clrnt_native implementation; see the file header for the source it follows.
+A step of the clrnt_native implementation. Called by \code{clrnt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf}, \code{average_esf}, \code{within_fold}, \code{beyond_fold}, \code{n}, \code{fold}.

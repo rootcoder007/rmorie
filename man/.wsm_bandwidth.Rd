@@ -12,7 +12,7 @@
 \item{rule}{Defaults to \code{"3.31"}.}
 }
 \description{
-normal reference; "3.29" is 0.79 R n^(-1/5) with R the interquartile range; "3.31" is 0.9 A n^(-1/5) and is the book\\\'s actual recommendation, reported to land within 10\% of the optimal mean integrated square error across every t-distribution considered, log-normals with skewness up to about 1.8, and normal mixtures separated by up to 3 standard deviations.
+normal reference; "3.29" is 0.79 R n^(-1/5) with R the interquartile range; "3.31" is 0.9 A n^(-1/5) and is the book\\'s actual recommendation, reported to land within 10\% of the optimal mean integrated square error across every t-distribution considered, log-normals with skewness up to about 1.8, and normal mixtures separated by up to 3 standard deviations.
 }
 \value{
 Nothing; this branch always raises.

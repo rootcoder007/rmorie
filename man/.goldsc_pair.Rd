@@ -8,13 +8,13 @@
 .goldsc_pair(r, r0, eps, potential)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{r0}{See Usage.}
-\item{eps}{See Usage.}
-\item{potential}{See Usage.}
+\item{r}{Passed to \code{morie_goldsc_split}.}
+\item{r0}{Passed to \code{morie_goldsc_split}.}
+\item{eps}{Passed to \code{morie_goldsc_split}.}
+\item{potential}{Passed to \code{.goldsc_inner}.}
 }
 \description{
-Part of the goldsc_native implementation; see the file header for the source it follows.
+A step of the goldsc_native implementation. Called by \code{morie_goldsc_vdw}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_goldsc_lj}.

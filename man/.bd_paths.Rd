@@ -10,11 +10,11 @@
 \arguments{
 \item{x}{See Usage.}
 \item{y}{See Usage.}
-\item{ch}{See Usage.}
-\item{pa}{See Usage.}
+\item{ch}{A vector; indexed elementwise.}
+\item{pa}{A vector; indexed elementwise.}
 }
 \description{
-Part of the causal_native implementation; see the file header for the source it follows.
+A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

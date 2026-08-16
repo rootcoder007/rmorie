@@ -18,7 +18,7 @@ run_egnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 \item{C}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the egnnL_native implementation; see the file header for the source it follows.
+A step of the egnnL_native implementation. Called by \code{e_gcn}, \code{egnn_layer}, \code{egnnlayer} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method}, \code{note}.

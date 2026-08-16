@@ -8,16 +8,16 @@
 log_prior(R, prior = "uniform", scale = 1, r_max = NULL, J = 0.1, H = 0, neighbours = NULL)
 }
 \arguments{
-\item{R}{See Usage.}
-\item{prior}{Defaults to \code{"uniform"}.}
-\item{scale}{Defaults to \code{1}.}
-\item{r_max}{Defaults to \code{NULL}.}
-\item{J}{Defaults to \code{0.1}.}
-\item{H}{Defaults to \code{0}.}
+\item{R}{A vector; its length is taken and its elements indexed.}
+\item{prior}{One of \code{"gaussian"}, \code{"laplacian"}, \code{"uniform"}. Defaults to \code{"uniform"}.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{r_max}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{J}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
+\item{H}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{neighbours}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the birl_native implementation; see the file header for the source it follows.
+A step of the birl_native implementation. Called by \code{.abcgp.alpha_terms}, \code{.abcgp.mw_sampler}, \code{abcnnt} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

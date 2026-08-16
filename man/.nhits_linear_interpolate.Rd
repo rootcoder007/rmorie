@@ -12,7 +12,7 @@
 \item{horizon}{See Usage.}
 }
 \description{
-Part of the nhits_native implementation; see the file header for the source it follows.
+A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

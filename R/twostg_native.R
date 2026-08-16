@@ -9,11 +9,12 @@
 
 #' .morie_km_censoring
 #'
-#' Part of the twostg_native implementation; see the file header for the
+#' A step of the twostg_native implementation. Called by \code{Twostg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param delta See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param delta A vector; indexed elementwise.
 #' @return The value of \code{function}.
 #' @export
 .morie_km_censoring <- function(x, delta) {
@@ -46,7 +47,8 @@
 
 #' .morie_xi_ph
 #'
-#' Part of the twostg_native implementation; see the file header for the
+#' A step of the twostg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s See Usage.
@@ -55,7 +57,8 @@
 .morie_xi_ph <- function(s) 1 / (1 + exp(pmax(pmin(s, 30), -30)))
 #' .morie_dxi_ph
 #'
-#' Part of the twostg_native implementation; see the file header for the
+#' A step of the twostg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s See Usage.
@@ -66,10 +69,11 @@
 }
 #' .morie_xi_po
 #'
-#' Part of the twostg_native implementation; see the file header for the
+#' A step of the twostg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_xi_po <- function(s) {
@@ -82,10 +86,11 @@
 }
 #' .morie_dxi_po
 #'
-#' Part of the twostg_native implementation; see the file header for the
+#' A step of the twostg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_dxi_po <- function(s) {

@@ -8,9 +8,9 @@
 .morie_w4c_stump(Xb, yb, classify)
 }
 \arguments{
-\item{Xb}{See Usage.}
-\item{yb}{See Usage.}
-\item{classify}{See Usage.}
+\item{Xb}{A matrix; indexed by row and column.}
+\item{yb}{A vector; indexed elementwise.}
+\item{classify}{A flag; the body branches on it.}
 }
 \description{
 morie_geron_bagging (geron_ml_native.R): best single-feature split minimising SSE; classify rounds each leaf to {0, 1}.

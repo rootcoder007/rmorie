@@ -3,20 +3,20 @@
 % the formals.
 \name{Gtfd}
 \alias{Gtfd}
-\title{Cohen\\'s class generalised TFD, eqs (8.124)-(8.127)}
+\title{Cohen\'s class generalised TFD, eqs (8.124)-(8.127)}
 \usage{
 Gtfd(x, fs = 1, kernel = "spwvd", nfreq = NULL, tsmooth = NULL, fsmooth = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{kernel}{Defaults to \code{"spwvd"}.}
 \item{nfreq}{Defaults to \code{NULL}.}
 \item{tsmooth}{Defaults to \code{NULL}.}
 \item{fsmooth}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tfd}, \code{times}, \code{freqs}, \code{kernel}, \code{tsmooth}, \code{fsmooth}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.

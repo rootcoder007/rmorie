@@ -8,12 +8,12 @@
 .morie_gr_gradient_matrix(X, Y, theta)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
-\item{theta}{See Usage.}
+\item{X}{Passed to \code{.morie_gr_probability_matrix}.}
+\item{Y}{Passed to \code{.morie_gr_one_hot}.}
+\item{theta}{Passed to \code{.morie_gr_probability_matrix}.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{morie_geron_ch4_cross_entropy_gradient_vector}, \code{morie_geron_softmax_cost_gradient}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{P}, \code{Yh}, \code{G}.

@@ -8,10 +8,10 @@
 .groebn_as_fr(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_poly}, \code{.groebn_scale}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

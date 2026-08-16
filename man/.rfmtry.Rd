@@ -8,11 +8,11 @@
 .rfmtry(p, kind = "regression")
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; passed to \code{sqrt}.}
 \item{kind}{Defaults to \code{"regression"}.}
 }
 \description{
-Part of the mvsml_rf_shared implementation; see the file header for the source it follows.
+A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

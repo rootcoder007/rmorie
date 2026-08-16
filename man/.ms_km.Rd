@@ -8,11 +8,11 @@
 .ms_km(time, event)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
+\item{time}{Passed to \code{.ms_check}.}
+\item{event}{Passed to \code{.ms_check}.}
 }
 \description{
-Part of the survival_more implementation; see the file header for the source it follows.
+A step of the survival_more implementation. Called by \code{Cif}, \code{Finegray}, \code{Landmark} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{time}, \code{surv}, \code{n_risk}, \code{n_event}, \code{greenwood}.

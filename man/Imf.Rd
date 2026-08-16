@@ -8,12 +8,12 @@
 Imf(x, max_iter = 50, tol = 0.05)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.tf_need}.}
 \item{max_iter}{Defaults to \code{50}.}
 \item{tol}{Defaults to \code{0.05}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{imf}, \code{residual}, \code{n_extrema}, \code{n_zero_crossings}, \code{extrema_zerox_ok}, \code{mean_envelope}, \code{max_envelope_mean}, \code{envelope_mean_ok}, \code{is_imf}, \code{iterations}, \code{converged}, \code{amplitude}, \code{phase}, \code{method}.

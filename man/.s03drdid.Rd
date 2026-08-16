@@ -3,15 +3,15 @@
 % the formals.
 \name{.s03drdid}
 \alias{.s03drdid}
-\title{Doubly robust DiD for panel data, Sant\\\'Anna and Zhao (2020) eq.}
+\title{Doubly robust DiD for panel data, Sant\\'Anna and Zhao (2020) eq.}
 \usage{
 .s03drdid(dy, D, X = NULL, weights = NULL)
 }
 \arguments{
-\item{dy}{See Usage.}
-\item{D}{See Usage.}
-\item{X}{Defaults to \code{NULL}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{dy}{Passed to \code{.s03vec}.}
+\item{D}{Passed to \code{.s03vec}.}
+\item{X}{Passed to \code{.s03design}.}
+\item{weights}{Optional; may be \code{NULL}. Passed to \code{.s03vec}.}
 }
 \description{
 (2.6): tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] w1 = D / E[D] w0 = [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]

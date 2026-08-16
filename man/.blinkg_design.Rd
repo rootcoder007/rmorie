@@ -8,12 +8,12 @@
 .blinkg_design(n, covars, cols)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{covars}{See Usage.}
-\item{cols}{See Usage.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
+\item{covars}{A vector; its length is taken.}
+\item{cols}{A vector; its length is taken.}
 }
 \description{
-Part of the blinkg_native implementation; see the file header for the source it follows.
+A step of the blinkg_native implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{d}, as built in the body.

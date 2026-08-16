@@ -8,10 +8,10 @@
 .frns_worst_abs(values)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{A vector; indexed elementwise.}
 }
 \description{
-Part of the frns_metrics implementation; see the file header for the source it follows.
+A step of the frns_metrics implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

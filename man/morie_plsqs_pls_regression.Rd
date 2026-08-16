@@ -8,12 +8,12 @@
 morie_plsqs_pls_regression(X, Y, n_components = 2)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{Y}{See Usage.}
 \item{n_components}{Defaults to \code{2}.}
 }
 \description{
-Part of the plsqs_native implementation; see the file header for the source it follows.
+A step of the plsqs_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{coefficients}, \code{intercept}, \code{fitted}, \code{residuals}, \code{scores}, \code{weights}, \code{loadings}, \code{y_loadings}, \code{explained_x}, \code{explained_y}, \code{n_components}, \code{r_squared}, \code{n}, \code{p}, \code{method}, \code{note}.

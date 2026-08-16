@@ -8,10 +8,10 @@
 .P_mut(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{.gb_mut}.}
 }
 \description{
-Part of the secarg_native implementation; see the file header for the source it follows.
+A step of the secarg_native implementation. Called by \code{morie_secarg_compress}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.gb_mut}.

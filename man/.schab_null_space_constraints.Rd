@@ -8,11 +8,11 @@
 .schab_null_space_constraints(R_delta, tol = NULL)
 }
 \arguments{
-\item{R_delta}{See Usage.}
+\item{R_delta}{A matrix; passed to \code{as.matrix}.}
 \item{tol}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{A}, \code{e}, \code{n_constraints}, \code{rank_deficiency}.

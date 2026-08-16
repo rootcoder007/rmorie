@@ -6,12 +6,13 @@
 
 #' Eq (3.54): X(z) = sum_n x(n) z^-n; eq (3.55) is the causal FIR case
 #'
-#' Part of the rangayyan_xfrm implementation; see the file header for
+#' A step of the rangayyan_xfrm implementation. Called by \code{Zfm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
 #' @param z Defaults to \code{NULL}.
-#' @param n0 Defaults to \code{0}.
+#' @param n0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 Ztrans <- function(x, z = NULL, n0 = 0) {
@@ -42,11 +43,12 @@ Ztrans <- function(x, z = NULL, n0 = 0) {
 
 #' .morie_rg_conv
 #'
-#' Part of the rangayyan_xfrm implementation; see the file header for
+#' A step of the rangayyan_xfrm implementation. Called by \code{CCepSum}, \code{ClogSum}, \code{ConvModel} and 13 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param xs See Usage.
-#' @param hs See Usage.
+#' @param xs A vector; its length is taken and its elements indexed.
+#' @param hs A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_rg_conv <- function(xs, hs) {
@@ -125,7 +127,8 @@ DtftZ <- function(x, omega, fs = NULL) {
 
 #' Eq (3.74): exp(j omega t) = cos(omega t) + j sin(omega t)
 #'
-#' Part of the rangayyan_xfrm implementation; see the file header for
+#' A step of the rangayyan_xfrm implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param omega See Usage.
@@ -217,7 +220,8 @@ CtftF <- function(x, f, t = NULL, dt = NULL) {
 
 #' Eqs (3.75)-(3.76); the name Section 3.4.4 uses
 #'
-#' Part of the rangayyan_xfrm implementation; see the file header for
+#' A step of the rangayyan_xfrm implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -289,7 +293,7 @@ Ictft <- function(X, t, omega = NULL, f = NULL) {
 #'
 #' @param x See Usage.
 #' @param omega See Usage.
-#' @param n0 Defaults to \code{0}.
+#' @param n0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{X}, \code{omega}, \code{n0}, \code{n}, \code{method}.
 #' @export
 Dtft <- function(x, omega, n0 = 0) {
@@ -398,7 +402,8 @@ DftX <- function(x, fs = 1) {
 
 #' Eq (3.82): W_N = exp(-j 2 pi / N), the N-th root of unity
 #'
-#' Part of the rangayyan_xfrm implementation; see the file header for
+#' A step of the rangayyan_xfrm implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param npoints See Usage.
@@ -690,7 +695,8 @@ CircConv <- function(x, h, npoints = NULL) {
 
 #' .morie_rg_evenodd
 #'
-#' Part of the rangayyan_xfrm implementation; see the file header for
+#' A step of the rangayyan_xfrm implementation. Called by \code{EvenOdd}, \code{EvenPart}, \code{OddPart}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -733,8 +739,8 @@ CircConv <- function(x, h, npoints = NULL) {
 #' index grid has to be symmetric; reflecting a causal sequence about 0
 #' instead computes x/2, which is something else entirely.
 #'
-#' @param x See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param x Passed to \code{.morie_rg_evenodd}.
+#' @param n Passed to \code{.morie_rg_evenodd}.
 #' @return A vector, from \code{c}.
 #' @export
 EvenPart <- function(x, n = NULL) {
@@ -746,11 +752,12 @@ EvenPart <- function(x, n = NULL) {
 
 #' Eq (3.93): x_o(n) = 0.5 [x(n) - x(-n)]; forced to 0 at the origin
 #'
-#' Part of the rangayyan_xfrm implementation; see the file header for
+#' A step of the rangayyan_xfrm implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param x Passed to \code{.morie_rg_evenodd}.
+#' @param n Passed to \code{.morie_rg_evenodd}.
 #' @return A vector, from \code{c}.
 #' @export
 OddPart <- function(x, n = NULL) {
@@ -762,8 +769,8 @@ OddPart <- function(x, n = NULL) {
 #'
 #' error checks the index bookkeeping, not the arithmetic.
 #'
-#' @param x See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param x Passed to \code{.morie_rg_evenodd}.
+#' @param n Passed to \code{.morie_rg_evenodd}.
 #' @return A vector, from \code{c}.
 #' @export
 EvenOdd <- function(x, n = NULL) {

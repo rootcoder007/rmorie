@@ -8,12 +8,12 @@
 .morie_k05_lr_uc(p, t, n)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{t}{See Usage.}
-\item{n}{See Usage.}
+\item{p}{Numeric; passed to \code{log}.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the k05_tranche1 implementation; see the file header for the source it follows.
+A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

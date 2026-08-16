@@ -8,10 +8,10 @@
 .varcal_base_code(b)
 }
 \arguments{
-\item{b}{See Usage.}
+\item{b}{One of \code{"A"}, \code{"C"}, \code{"G"}, \code{"T"}.}
 }
 \description{
-Part of the varcal_native implementation; see the file header for the source it follows.
+A step of the varcal_native implementation. Called by \code{varcal_encode_pileup}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

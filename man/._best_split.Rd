@@ -8,15 +8,15 @@
 ._best_split(X, y, rows, feats, min_leaf, alpha)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{rows}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
+\item{rows}{A vector; its length is taken.}
 \item{feats}{See Usage.}
-\item{min_leaf}{See Usage.}
-\item{alpha}{See Usage.}
+\item{min_leaf}{Numeric; passed to \code{max}.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hntfst_native implementation; see the file header for the source it follows.
+A step of the hntfst_native implementation. Called by \code{honest_tree}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

@@ -8,7 +8,7 @@
 QrsDerivOp(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
 antisymmetric taps make it exactly zero on any constant or linear baseline.

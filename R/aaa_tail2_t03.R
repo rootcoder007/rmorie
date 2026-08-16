@@ -22,10 +22,11 @@
 
 #' .morie_t2_inv
 #'
-#' Part of the tail2_t03 implementation; see the file header for the
+#' A step of the tail2_t03 implementation. Called by \code{CoxPL}, \code{CramerRao}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_t2_inv <- function(A) {
@@ -68,25 +69,25 @@
 #\' @return list(d, s_pooled, var_d, se_d, j, j_approx, hedges_g, var_g,
 #\'   se_g, df, n, method)
 #\' @export
-#' \\' Cohen\\'s d and Hedges\\' g for two independent groups
+#' \' Cohen\'s d and Hedges\' g for two independent groups
 #'
-#' \\' \\' d = (m1 - m2) / s_pooled with the usual pooled standard
-#' deviation. \\' The bias correction is the exact Hedges (1981) factor
-#' \\' J = Gamma(df/2) / (sqrt(df/2) Gamma((df-1)/2)), and the variance
-#' is \\' 1/n1 + 1/n2 + estimate^2 / (2 (n1 + n2)) evaluated at the
-#' estimate. \\' Both conventions were settled against
-#' metafor::escalc(measure="SMD"). \\' \\' @param m1,m2 group means \\'
-#' @param s1,s2 group standard deviations (denominator n-1) \\' @param
-#' n1,n2 group sizes, each at least 2 \\' @return list(d, s_pooled,
-#' var_d, se_d, j, j_approx, hedges_g, var_g, \\' se_g, df, n, method)
-#' \\' @export
+#' \' \' d = (m1 - m2) / s_pooled with the usual pooled standard
+#' deviation. \' The bias correction is the exact Hedges (1981) factor
+#' \' J = Gamma(df/2) / (sqrt(df/2) Gamma((df-1)/2)), and the variance
+#' is \' 1/n1 + 1/n2 + estimate^2 / (2 (n1 + n2)) evaluated at the
+#' estimate. \' Both conventions were settled against
+#' metafor::escalc(measure="SMD"). \' \' @param m1,m2 group means \'
+#' @param s1,s2 group standard deviations (denominator n-1) \' @param
+#' n1,n2 group sizes, each at least 2 \' @return list(d, s_pooled,
+#' var_d, se_d, j, j_approx, hedges_g, var_g, \' se_g, df, n, method)
+#' \' @export
 #'
-#' @param m1 See Usage.
-#' @param m2 See Usage.
-#' @param s1 See Usage.
-#' @param s2 See Usage.
-#' @param n1 See Usage.
-#' @param n2 See Usage.
+#' @param m1 Numeric; combined arithmetically in the body.
+#' @param m2 Numeric; combined arithmetically in the body.
+#' @param s1 Numeric; combined arithmetically in the body.
+#' @param s2 Numeric; combined arithmetically in the body.
+#' @param n1 Numeric; combined arithmetically in the body.
+#' @param n2 Numeric; combined arithmetically in the body.
 #' @return A list with \code{d}, \code{s_pooled}, \code{var_d}, \code{se_d}, \code{j}, \code{j_approx}, \code{hedges_g}, \code{var_g}, \code{se_g}, \code{df}, \code{n}, \code{method}.
 #' @export
 CohensD <- function(m1, m2, s1, s2, n1, n2) {
@@ -128,17 +129,17 @@ CohensD <- function(m1, m2, s1, s2, n1, n2) {
 #\' @return list(bound, variance, se, information, k, efficiency,
 #\'   attained, method)
 #\' @export
-#' \\' Cramer-Rao lower bound implied by a Fisher information matrix
+#' \' Cramer-Rao lower bound implied by a Fisher information matrix
 #'
-#' \\' \\' Cov(theta_hat) >= I(theta)^-1 in the Loewner order, so the
-#' bound on \\' component k is the k-th diagonal entry of the inverse
-#' information. \\' \\' @param fisher_info a scalar, a vector read as a
-#' diagonal, or a \\' square symmetric matrix \\' @param var_estimate
-#' optional actual variances, one per parameter \\' @return list(bound,
-#' variance, se, information, k, efficiency, \\' attained, method) \\'
+#' \' \' Cov(theta_hat) >= I(theta)^-1 in the Loewner order, so the
+#' bound on \' component k is the k-th diagonal entry of the inverse
+#' information. \' \' @param fisher_info a scalar, a vector read as a
+#' diagonal, or a \' square symmetric matrix \' @param var_estimate
+#' optional actual variances, one per parameter \' @return list(bound,
+#' variance, se, information, k, efficiency, \' attained, method) \'
 #' @export
 #'
-#' @param fisher_info See Usage.
+#' @param fisher_info A matrix; passed to \code{nrow}.
 #' @param var_estimate Defaults to \code{NULL}.
 #' @return A list with \code{bound}, \code{variance}, \code{se}, \code{information}, \code{k}, \code{efficiency}, \code{attained}, \code{method}.
 #' @export
@@ -186,13 +187,14 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 
 #' .morie_t2_coxterms
 #'
-#' Part of the tail2_t03 implementation; see the file header for the
+#' A step of the tail2_t03 implementation. Called by \code{CoxPL}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X See Usage.
-#' @param beta See Usage.
+#' @param time A vector; its length is taken and its elements indexed.
+#' @param event A vector; indexed elementwise.
+#' @param X A matrix; indexed by row and column.
+#' @param beta A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{loglik}, \code{score}, \code{info}, \code{nevent}.
 #' @export
 .morie_t2_coxterms <- function(time, event, X, beta) {
@@ -258,23 +260,23 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #\' @return list(loglik, score, information, coefficients, vcov, se, n,
 #\'   n_event, iterations, converged, method)
 #\' @export
-#' \\' Cox partial likelihood, its score and information, optionally
+#' \' Cox partial likelihood, its score and information, optionally
 #' fitted
 #'
-#' \\' \\' Breslow handling of tied event times.  When beta is NULL the
-#' partial \\' likelihood is maximised by Newton-Raphson from zero.
-#' Checked against \\' survival::coxph(ties = "breslow"). \\' \\' @param
-#' time follow-up times \\' @param event 1 for an observed event, 0 for
-#' right censoring \\' @param X covariate matrix, no intercept column
-#' \\' @param beta coefficients to evaluate at, or NULL to fit \\'
+#' \' \' Breslow handling of tied event times.  When beta is NULL the
+#' partial \' likelihood is maximised by Newton-Raphson from zero.
+#' Checked against \' survival::coxph(ties = "breslow"). \' \' @param
+#' time follow-up times \' @param event 1 for an observed event, 0 for
+#' right censoring \' @param X covariate matrix, no intercept column
+#' \' @param beta coefficients to evaluate at, or NULL to fit \'
 #' @param max_iter,tol Newton-Raphson controls, used only when beta is
-#' NULL \\' @return list(loglik, score, information, coefficients, vcov,
-#' se, n, \\' n_event, iterations, converged, method) \\' @export
+#' NULL \' @return list(loglik, score, information, coefficients, vcov,
+#' se, n, \' n_event, iterations, converged, method) \' @export
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X See Usage.
-#' @param beta Defaults to \code{NULL}.
+#' @param time A vector; its length is taken.
+#' @param event A vector; its length is taken.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param beta Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param max_iter Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{loglik}, \code{score}, \code{information}, \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event}, \code{iterations}, \code{converged}, \code{method}.
@@ -332,7 +334,8 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 
 #' .morie_t2_viol
 #'
-#' Part of the tail2_t03 implementation; see the file header for the
+#' A step of the tail2_t03 implementation. Called by \code{.morie_t2_qpen}, \code{PenaltyMin}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param constraints See Usage.
@@ -344,13 +347,14 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 
 #' .morie_t2_qpen
 #'
-#' Part of the tail2_t03 implementation; see the file header for the
+#' A step of the tail2_t03 implementation. Called by \code{PenaltyMin}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param constraints See Usage.
-#' @param x See Usage.
-#' @param mu See Usage.
+#' @param constraints Passed to \code{.morie_t2_viol}.
+#' @param x Passed to \code{.morie_t2_viol}.
+#' @param mu Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_t2_qpen <- function(f, constraints, x, mu) {
@@ -360,12 +364,13 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 
 #' .morie_t2_fdgrad
 #'
-#' Part of the tail2_t03 implementation; see the file header for the
+#' A step of the tail2_t03 implementation. Called by \code{PenaltyMin}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fun See Usage.
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x A vector; its length is taken.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{g}, as built in the body.
 #' @export
 .morie_t2_fdgrad <- function(fun, x, h) {
@@ -394,30 +399,30 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #\' @return list(x, f, penalty, violation, max_violation, q, mu, n_outer,
 #\'   n_inner, method)
 #\' @export
-#' \\' Minimise f subject to g_i(x) <= 0 by Courant\\'s quadratic
+#' \' Minimise f subject to g_i(x) <= 0 by Courant\'s quadratic
 #' penalty
 #'
-#' \\' \\' Q(x; mu) = f(x) + mu sum_i max(0, g_i(x))^2, minimised for an
-#' \\' increasing sequence of mu.  The inner solve is steepest descent
-#' with \\' an Armijo backtracking line search on central finite
-#' differences, run \\' for a fixed budget. \\' \\' @param f objective,
-#' taking a numeric vector \\' @param constraints list of functions;
-#' g_i(x) <= 0 is the constraint \\' @param x0 starting point \\' @param
-#' mu initial penalty weight \\' @param
-#' n_outer,growth,n_inner,step0,h,armijo,max_halving fixed budget \\'
+#' \' \' Q(x; mu) = f(x) + mu sum_i max(0, g_i(x))^2, minimised for an
+#' \' increasing sequence of mu.  The inner solve is steepest descent
+#' with \' an Armijo backtracking line search on central finite
+#' differences, run \' for a fixed budget. \' \' @param f objective,
+#' taking a numeric vector \' @param constraints list of functions;
+#' g_i(x) <= 0 is the constraint \' @param x0 starting point \' @param
+#' mu initial penalty weight \' @param
+#' n_outer,growth,n_inner,step0,h,armijo,max_halving fixed budget \'
 #' @return list(x, f, penalty, violation, max_violation, q, mu, n_outer,
-#' \\' n_inner, method) \\' @export
+#' \' n_inner, method) \' @export
 #'
-#' @param f See Usage.
-#' @param constraints See Usage.
+#' @param f Passed to \code{.morie_t2_qpen}.
+#' @param constraints Passed to \code{.morie_t2_qpen}.
 #' @param x0 See Usage.
-#' @param mu See Usage.
+#' @param mu Numeric; combined arithmetically in the body.
 #' @param n_outer Defaults to \code{8L}.
-#' @param growth Defaults to \code{10}.
+#' @param growth Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @param n_inner Defaults to \code{200L}.
 #' @param step0 Defaults to \code{1}.
-#' @param h Defaults to \code{1e-06}.
-#' @param armijo Defaults to \code{1e-04}.
+#' @param h Passed to \code{.morie_t2_fdgrad}. Defaults to \code{1e-06}.
+#' @param armijo Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @param max_halving Defaults to \code{40L}.
 #' @return A list with \code{x}, \code{f}, \code{penalty}, \code{violation}, \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner}, \code{method}.
 #' @export
@@ -482,25 +487,25 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #\' @param relaxation the survey\'s lambda_n, in ]0, 3/2[
 #\' @return list(x, objective, n_iter, lr, relaxation, step_norm, method)
 #\' @export
-#' \\' Minimise f + g by proximal forward-backward splitting
+#' \' Minimise f + g by proximal forward-backward splitting
 #'
-#' \\' \\' x_{n+1} = x_n + lambda (prox_{lr g}(x_n - lr grad f(x_n)) -
-#' x_n), \\' equation (21) of Combettes & Pesquet (2011),
-#' arXiv:0912.3522. \\' Runs a fixed number of iterations. \\' \\'
-#' @param f smooth part, reported only as the objective \\' @param
-#' grad_f gradient of f \\' @param prox_g function(y, lr) giving prox of
-#' lr * g at y \\' @param x0 starting point \\' @param lr step size, the
-#' survey\\'s beta^-1 \\' @param n_iter fixed iteration count \\' @param
-#' relaxation the survey\\'s lambda_n, in ]0, 3/2[ \\' @return list(x,
-#' objective, n_iter, lr, relaxation, step_norm, method) \\' @export
+#' \' \' x_{n+1} = x_n + lambda (prox_{lr g}(x_n - lr grad f(x_n)) -
+#' x_n), \' equation (21) of Combettes & Pesquet (2011),
+#' arXiv:0912.3522. \' Runs a fixed number of iterations. \' \'
+#' @param f smooth part, reported only as the objective \' @param
+#' grad_f gradient of f \' @param prox_g function(y, lr) giving prox of
+#' lr * g at y \' @param x0 starting point \' @param lr step size, the
+#' survey\'s beta^-1 \' @param n_iter fixed iteration count \' @param
+#' relaxation the survey\'s lambda_n, in ]0, 3/2[ \' @return list(x,
+#' objective, n_iter, lr, relaxation, step_norm, method) \' @export
 #'
 #' @param f See Usage.
 #' @param grad_f See Usage.
 #' @param prox_g See Usage.
 #' @param x0 See Usage.
-#' @param lr See Usage.
+#' @param lr Numeric; combined arithmetically in the body.
 #' @param n_iter Defaults to \code{200L}.
-#' @param relaxation Defaults to \code{1}.
+#' @param relaxation Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr}, \code{relaxation}, \code{step_norm}, \code{method}.
 #' @export
 ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
@@ -545,21 +550,21 @@ ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
 #\' @return list(Xs_adapted, gamma, cost, transport_cost, row_error,
 #\'   col_error, ns, nt, d, epsilon, n_iter, method)
 #\' @export
-#' \\' Adapt source samples to a target domain through an OT plan
+#' \' Adapt source samples to a target domain through an OT plan
 #'
-#' \\' \\' The entropy-regularised plan of equation (9) is found by a
-#' fixed \\' number of Sinkhorn-Knopp sweeps, then the source samples
-#' are moved by \\' the barycentric mapping of equation (14), \\' Xs_hat
-#' = diag(gamma 1_nt)^-1 gamma Xt, with squared Euclidean cost. \\' \\'
-#' @param Xs source samples, ns x d \\' @param Xt target samples, nt x d
-#' \\' @param epsilon entropic regularisation weight (1/lambda in the
-#' paper) \\' @param n_iter fixed number of Sinkhorn sweeps \\' @return
-#' list(Xs_adapted, gamma, cost, transport_cost, row_error, \\'
-#' col_error, ns, nt, d, epsilon, n_iter, method) \\' @export
+#' \' \' The entropy-regularised plan of equation (9) is found by a
+#' fixed \' number of Sinkhorn-Knopp sweeps, then the source samples
+#' are moved by \' the barycentric mapping of equation (14), \' Xs_hat
+#' = diag(gamma 1_nt)^-1 gamma Xt, with squared Euclidean cost. \' \'
+#' @param Xs source samples, ns x d \' @param Xt target samples, nt x d
+#' \' @param epsilon entropic regularisation weight (1/lambda in the
+#' paper) \' @param n_iter fixed number of Sinkhorn sweeps \' @return
+#' list(Xs_adapted, gamma, cost, transport_cost, row_error, \'
+#' col_error, ns, nt, d, epsilon, n_iter, method) \' @export
 #'
-#' @param Xs See Usage.
-#' @param Xt See Usage.
-#' @param epsilon See Usage.
+#' @param Xs A matrix; indexed by row and column.
+#' @param Xt A matrix; indexed by row and column.
+#' @param epsilon Numeric; combined arithmetically in the body.
 #' @param n_iter Defaults to \code{1000L}.
 #' @return A list with \code{Xs_adapted}, \code{gamma}, \code{cost}, \code{transport_cost}, \code{row_error}, \code{col_error}, \code{ns}, \code{nt}, \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
 #' @export

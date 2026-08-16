@@ -12,7 +12,7 @@ bayopt(f, bounds, n_iter = 20, n_init = 5, acq = "ei", kernel = "matern52", ampl
 \item{bounds}{See Usage.}
 \item{n_iter}{Defaults to \code{20}.}
 \item{n_init}{Defaults to \code{5}.}
-\item{acq}{Defaults to \code{"ei"}.}
+\item{acq}{One of \code{"ei"}, \code{"lcb"}, \code{"pi"}. Defaults to \code{"ei"}.}
 \item{kernel}{Defaults to \code{"matern52"}.}
 \item{amplitude}{Defaults to \code{1}.}
 \item{length_scale}{Defaults to \code{1}.}
@@ -21,13 +21,13 @@ bayopt(f, bounds, n_iter = 20, n_init = 5, acq = "ei", kernel = "matern52", ampl
 \item{xi}{Defaults to \code{0}.}
 \item{n_candidates}{Defaults to \code{200}.}
 \item{seed}{Defaults to \code{0}.}
-\item{X0}{Defaults to \code{NULL}.}
+\item{X0}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{y0}{Defaults to \code{NULL}.}
-\item{inner}{Defaults to \code{"gradient"}.}
+\item{inner}{One of \code{"gradient"}, \code{"random"}. Defaults to \code{"gradient"}.}
 \item{n_starts}{Defaults to \code{8}.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{x_best}, \code{y_best}, \code{X}, \code{y}, \code{trace}, \code{acq}, \code{kernel}, \code{inner}, \code{n_eval}, \code{method}, \code{note}.

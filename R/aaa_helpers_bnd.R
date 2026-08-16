@@ -5,7 +5,8 @@
 
 #' .bnd_yd
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt}, \code{Bndnpr} and 6 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -25,10 +26,11 @@
 
 #' .bnd_cellmeans
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt}, \code{Bndnvg} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yv See Usage.
+#' @param yv A vector; its length is taken and its elements indexed.
 #' @param dv See Usage.
 #' @return A list with \code{p1}, \code{m1}, \code{p0}, \code{m0}.
 #' @export
@@ -43,13 +45,14 @@
 
 #' .bnd_wc_arm
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndnpr}, \code{Bnssel} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m_t See Usage.
-#' @param p_t See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param m_t Numeric; combined arithmetically in the body.
+#' @param p_t Numeric; combined arithmetically in the body.
+#' @param lo Numeric; combined arithmetically in the body.
+#' @param hi Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .bnd_wc_arm <- function(m_t, p_t, lo, hi) {
@@ -58,13 +61,14 @@
 
 #' .bnd_wc_ate
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. Called by \code{Bndtfm}, \code{Bnscbo}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yv See Usage.
-#' @param dv See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param yv Passed to \code{.bnd_cellmeans}.
+#' @param dv Passed to \code{.bnd_cellmeans}.
+#' @param lo Passed to \code{.bnd_wc_arm}.
+#' @param hi Passed to \code{.bnd_wc_arm}.
 #' @return A vector, from \code{c}.
 #' @export
 .bnd_wc_ate <- function(yv, dv, lo, hi) {
@@ -76,11 +80,12 @@
 
 #' .bnd_q1
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndtfm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param p See Usage.
+#' @param v Numeric; passed to \code{sort}.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
 .bnd_q1 <- function(v, p) {
@@ -98,10 +103,11 @@
 
 #' .bnd_interval
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param moments See Usage.
+#' @param moments A matrix; passed to \code{as.matrix}.
 #' @param name See Usage.
 #' @return A list with \code{yl}, \code{yu}.
 #' @export
@@ -117,11 +123,12 @@
 
 #' .bnd_mistats
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yl See Usage.
-#' @param yu See Usage.
+#' @param yl A vector; its length is taken.
+#' @param yu Numeric; passed to \code{mean}.
 #' @return A list with \code{n}, \code{mL}, \code{sL}, \code{mU}, \code{sU}.
 #' @export
 .bnd_mistats <- function(yl, yu) {
@@ -134,11 +141,12 @@
 
 #' .bnd_crit
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param st See Usage.
+#' @param theta Numeric; combined arithmetically in the body.
+#' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL}, \code{$sU} from it.
 #' @return A numeric value.
 #' @export
 .bnd_crit <- function(theta, st) {
@@ -150,11 +158,12 @@
 
 #' .bnd_critmax
 #'
-#' Part of the helpers_bnd implementation; see the file header for the
+#' A step of the helpers_bnd implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param st See Usage.
+#' @param theta Numeric; combined arithmetically in the body.
+#' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL}, \code{$sU} from it.
 #' @return A numeric value.
 #' @export
 .bnd_critmax <- function(theta, st) {

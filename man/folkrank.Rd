@@ -15,7 +15,7 @@ folkrank(triples, focus, d = 0.7, weight = 0.9, iters = 200)
 \item{iters}{Defaults to \code{200}.}
 }
 \description{
-Part of the tagRC_native implementation; see the file header for the source it follows.
+A step of the tagRC_native implementation. Called by \code{morie_tagRC}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{ranking}, \code{difference}, \code{with_preference}, \code{without_preference}, \code{undifferenced_ranking}, \code{baseline_ranking}, \code{focus}, \code{n_nodes}, \code{method}, \code{note}.

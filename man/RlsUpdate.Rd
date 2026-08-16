@@ -13,7 +13,7 @@ RlsUpdate(w_prev, k, alpha)
 \item{alpha}{See Usage.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{w_next}, \code{correction}, \code{alpha}, \code{order}, \code{sign}, \code{erratum}, \code{method}.

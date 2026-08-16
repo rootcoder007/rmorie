@@ -8,13 +8,13 @@
 .bnd_wc_ate(yv, dv, lo, hi)
 }
 \arguments{
-\item{yv}{See Usage.}
-\item{dv}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
+\item{yv}{Passed to \code{.bnd_cellmeans}.}
+\item{dv}{Passed to \code{.bnd_cellmeans}.}
+\item{lo}{Passed to \code{.bnd_wc_arm}.}
+\item{hi}{Passed to \code{.bnd_wc_arm}.}
 }
 \description{
-Part of the helpers_bnd implementation; see the file header for the source it follows.
+A step of the helpers_bnd implementation. Called by \code{Bndtfm}, \code{Bnscbo}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

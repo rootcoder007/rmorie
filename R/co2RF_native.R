@@ -15,14 +15,15 @@
 
 #' radiative_forcing_co2
 #'
-#' Part of the co2RF_native implementation; see the file header for the
+#' A step of the co2RF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
-#' @param C0 Defaults to \code{.C0_FIT}.
-#' @param N Defaults to \code{273.87}.
+#' @param C Numeric; combined arithmetically in the body.
+#' @param C0 Numeric; combined arithmetically in the body. Defaults to \code{.C0_FIT}.
+#' @param N Numeric; passed to \code{sqrt}. Defaults to \code{273.87}.
 #' @param method Defaults to \code{"ar6"}.
-#' @param erf_adjustment Defaults to \code{FALSE}.
+#' @param erf_adjustment A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{sarf}, \code{alpha_prime}, \code{method_used}, \code{C}, \code{C0}, \code{N}, \code{erf_adjustment}, \code{method}.
 #' @export
 radiative_forcing_co2 <- function(C, C0 = .C0_FIT, N = 273.87,
@@ -70,7 +71,8 @@ morie_co2RF <- radiative_forcing_co2
 
 #' co2RF_cheatsheet
 #'
-#' Part of the co2RF_native implementation; see the file header for the
+#' A step of the co2RF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

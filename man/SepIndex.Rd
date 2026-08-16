@@ -8,8 +8,8 @@
 SepIndex(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A vector; its length is taken.}
 }
 \description{
 OFF-diagonal structure, so it cannot see that a pair of features is jointly discriminating when neither is alone -- for that, the divergence, which uses the full covariance, is the measure to use.

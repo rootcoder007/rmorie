@@ -8,12 +8,12 @@
 confounding_check(covariate_history, treatment_history, outcome = NULL)
 }
 \arguments{
-\item{covariate_history}{See Usage.}
-\item{treatment_history}{See Usage.}
+\item{covariate_history}{A matrix; passed to \code{as.matrix}.}
+\item{treatment_history}{A matrix; passed to \code{as.matrix}.}
 \item{outcome}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the bhltmsm_native implementation; see the file header for the source it follows.
+A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

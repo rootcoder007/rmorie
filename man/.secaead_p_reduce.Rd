@@ -8,7 +8,7 @@
 .secaead_p_reduce(res)
 }
 \arguments{
-\item{res}{See Usage.}
+\item{res}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 since 2^130 == 5 (mod 2^130 - 5), then carry-normalize; repeat

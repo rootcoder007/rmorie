@@ -8,12 +8,12 @@
 .tmlcic_one_per_cluster(v, groups, name)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{groups}{See Usage.}
+\item{v}{A vector; indexed elementwise.}
+\item{groups}{A vector; its length is taken and its elements indexed.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

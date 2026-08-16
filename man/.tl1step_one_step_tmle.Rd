@@ -8,14 +8,14 @@
 .tl1step_one_step_tmle(Q, H_fn, Y, eps_max = 3, steps = 600)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{H_fn}{See Usage.}
-\item{Y}{See Usage.}
-\item{eps_max}{Defaults to \code{3}.}
-\item{steps}{Defaults to \code{600}.}
+\item{Q}{Passed to \code{.tl1step_build_ulfm}.}
+\item{H_fn}{Passed to \code{.tl1step_build_ulfm}.}
+\item{Y}{Passed to \code{.tl1step_build_ulfm}.}
+\item{eps_max}{Passed to \code{.tl1step_build_ulfm}. Defaults to \code{3}.}
+\item{steps}{Passed to \code{.tl1step_build_ulfm}. Defaults to \code{600}.}
 }
 \description{
-Part of the tl1step_native implementation; see the file header for the source it follows.
+A step of the tl1step_native implementation. Called by \code{morie_tl1step}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star}, \code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.

@@ -8,12 +8,12 @@
 morie_gsageemd_aggregate(vectors, how = "mean", W = NULL)
 }
 \arguments{
-\item{vectors}{See Usage.}
-\item{how}{Defaults to \code{"mean"}.}
-\item{W}{Defaults to \code{NULL}.}
+\item{vectors}{Passed to \code{.gsageemd_mat}.}
+\item{how}{One of \code{"max_pool"}, \code{"mean"}. Defaults to \code{"mean"}.}
+\item{W}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
 }
 \description{
-Part of the gsageemd_native implementation; see the file header for the source it follows.
+A step of the gsageemd_native implementation. Called by \code{sage_layer}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

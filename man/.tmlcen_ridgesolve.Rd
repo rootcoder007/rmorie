@@ -8,12 +8,12 @@
 .tmlcen_ridgesolve(A, b, ridge)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
-\item{ridge}{See Usage.}
+\item{A}{A matrix; passed to \code{ncol}.}
+\item{b}{A matrix; passed to \code{solve}.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{solve}.

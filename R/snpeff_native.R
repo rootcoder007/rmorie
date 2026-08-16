@@ -39,7 +39,8 @@
 
 #' codon_table
 #'
-#' Part of the snpeff_native implementation; see the file header for the
+#' A step of the snpeff_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.SNPEFF_CODONS}, as built in the body.
@@ -48,11 +49,12 @@ codon_table <- function() .SNPEFF_CODONS
 
 #' translate
 #'
-#' Part of the snpeff_native implementation; see the file header for the
+#' A step of the snpeff_native implementation. Called by \code{.vepan_coding_terms}, \code{annotate_variant}, \code{snpeff}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seq See Usage.
-#' @param to_stop Defaults to \code{FALSE}.
+#' @param to_stop A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A character value.
 #' @export
 translate <- function(seq, to_stop = FALSE) {
@@ -79,7 +81,8 @@ translate <- function(seq, to_stop = FALSE) {
 
 #' .snpeff_impact
 #'
-#' Part of the snpeff_native implementation; see the file header for the
+#' A step of the snpeff_native implementation. Called by \code{.snpeff_pack}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param effect See Usage.
@@ -94,17 +97,18 @@ translate <- function(seq, to_stop = FALSE) {
 
 #' .snpeff_pack
 #'
-#' Part of the snpeff_native implementation; see the file header for the
+#' A step of the snpeff_native implementation. Called by \code{annotate_variant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param effect See Usage.
+#' @param effect Passed to \code{.snpeff_impact}.
 #' @param ref_codon See Usage.
 #' @param alt_codon See Usage.
 #' @param ref_aa See Usage.
 #' @param alt_aa See Usage.
 #' @param ref See Usage.
 #' @param alt See Usage.
-#' @param pos See Usage.
+#' @param pos Numeric; combined arithmetically in the body.
 #' @param codon_index Defaults to \code{NULL}.
 #' @param hgvs_p Defaults to \code{NULL}.
 #' @return A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon}, \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c}, \code{pos}, \code{ref}, \code{alt}.
@@ -123,14 +127,15 @@ translate <- function(seq, to_stop = FALSE) {
 
 #' annotate_variant
 #'
-#' Part of the snpeff_native implementation; see the file header for the
+#' A step of the snpeff_native implementation. Called by \code{snpeff}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param cds See Usage.
-#' @param pos See Usage.
-#' @param ref See Usage.
-#' @param alt See Usage.
-#' @param cds_start Defaults to \code{0}.
+#' @param pos Numeric; combined arithmetically in the body.
+#' @param ref A vector; its length is taken.
+#' @param alt A vector; its length is taken.
+#' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param upstream Defaults to \code{5000}.
 #' @param downstream Defaults to \code{5000}.
 #' @param transcript_len Defaults to \code{NULL}.
@@ -219,12 +224,13 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
 
 #' snpeff
 #'
-#' Part of the snpeff_native implementation; see the file header for the
+#' A step of the snpeff_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param cds See Usage.
-#' @param variants See Usage.
-#' @param cds_start Defaults to \code{0}.
+#' @param variants A vector; its length is taken and its elements indexed.
+#' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param upstream Defaults to \code{5000}.
 #' @param downstream Defaults to \code{5000}.
 #' @param transcript_len Defaults to \code{NULL}.
@@ -282,7 +288,8 @@ snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
 
 #' .snpeff_cheatsheet
 #'
-#' Part of the snpeff_native implementation; see the file header for the
+#' A step of the snpeff_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -21,14 +21,15 @@
 
 #' subwords
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param word See Usage.
 #' @param n_min Defaults to \code{3}.
 #' @param n_max Defaults to \code{6}.
-#' @param boundary Defaults to \code{TRUE}.
-#' @param whole_word Defaults to \code{TRUE}.
+#' @param boundary A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param whole_word A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{grams}, as built in the body.
 #' @export
 subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
@@ -64,17 +65,18 @@ subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
 
 #' word_vector
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. Called by \code{fasttext}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param word See Usage.
-#' @param Z See Usage.
-#' @param gram_index See Usage.
+#' @param Z A matrix; indexed by row and column.
+#' @param gram_index Passed to \code{.gram_slot}.
 #' @param n_min Defaults to \code{3}.
 #' @param n_max Defaults to \code{6}.
 #' @param boundary Defaults to \code{TRUE}.
 #' @param whole_word Defaults to \code{TRUE}.
-#' @param hash_buckets Defaults to \code{NULL}.
+#' @param hash_buckets Passed to \code{.gram_slot}.
 #' @return A list with \code{v}, \code{hit}.
 #' @export
 word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
@@ -95,11 +97,12 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 
 #' .gram_slot
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param gram_index See Usage.
+#' @param g Passed to \code{.fnv1a}.
+#' @param gram_index A vector; indexed elementwise.
 #' @param hash_buckets See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -112,10 +115,11 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 
 #' .fnv1a
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. Called by \code{.gram_slot}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s A vector; its length is taken and its elements indexed.
 #' @return The value of \code{as.integer}.
 #' @export
 .fnv1a <- function(s) {
@@ -130,7 +134,8 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 
 #' .as_docs
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. Called by \code{fasttext}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param corpus See Usage.
@@ -154,10 +159,11 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 
 #' fasttext
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. Called by \code{morie_fastxt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param corpus See Usage.
+#' @param corpus Passed to \code{.as_docs}.
 #' @param dim Defaults to \code{50}.
 #' @param n_min Defaults to \code{3}.
 #' @param n_max Defaults to \code{6}.
@@ -168,7 +174,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @param min_count Defaults to \code{1}.
 #' @param boundary Defaults to \code{TRUE}.
 #' @param whole_word Defaults to \code{TRUE}.
-#' @param hash_buckets Defaults to \code{NULL}.
+#' @param hash_buckets Optional; may be \code{NULL}. Passed to \code{.gram_slot}.
 #' @param seed Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{ngrams}, \code{ngram_index}, \code{Z}, \code{context}, \code{loss_history}, \code{final_loss}, \code{oov}, \code{n_vocab}, \code{n_ngrams}, \code{dim}, \code{n_min}, \code{n_max}, \code{hash_buckets}, \code{method}.
 #' @export
@@ -310,7 +316,8 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 
 #' .fastxt_cheatsheet
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -325,7 +332,8 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 
 #' morie_fastxt
 #'
-#' Part of the fastxt_native implementation; see the file header for the
+#' A step of the fastxt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param corpus See Usage.

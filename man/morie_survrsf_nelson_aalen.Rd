@@ -8,11 +8,11 @@
 morie_survrsf_nelson_aalen(times, events)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the survrsf_native implementation; see the file header for the source it follows.
+A step of the survrsf_native implementation. Called by \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals}, \code{morie_survrsf_grow_tree}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{time}, \code{chf}, \code{n}, \code{deaths}.

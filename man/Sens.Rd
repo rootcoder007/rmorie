@@ -8,7 +8,7 @@
 Sens(tp, fn = NULL)
 }
 \arguments{
-\item{tp}{See Usage.}
+\item{tp}{A matrix; passed to \code{as.matrix}.}
 \item{fn}{Defaults to \code{NULL}.}
 }
 \description{

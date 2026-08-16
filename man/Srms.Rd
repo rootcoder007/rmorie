@@ -8,7 +8,7 @@
 Srms(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.morie_rg_aslist}.}
 }
 \description{
 (3.10) is the population SD, not the N-1 unbiased one.

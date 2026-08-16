@@ -8,8 +8,8 @@
 PpgFeat(ppg, fs, mwin = 16)
 }
 \arguments{
-\item{ppg}{See Usage.}
-\item{fs}{See Usage.}
+\item{ppg}{A vector; its length is taken and its elements indexed.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{mwin}{Defaults to \code{16}.}
 }
 \description{

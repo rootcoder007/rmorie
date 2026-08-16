@@ -9,13 +9,13 @@ morie_mienco(summary, patches, other_patches, critic, estimator = "jsd")
 }
 \arguments{
 \item{summary}{See Usage.}
-\item{patches}{See Usage.}
-\item{other_patches}{See Usage.}
+\item{patches}{A vector; its length is taken.}
+\item{other_patches}{A vector; its length is taken.}
 \item{critic}{See Usage.}
-\item{estimator}{Defaults to \code{"jsd"}.}
+\item{estimator}{Compared against \code{"jsd"}. Defaults to \code{"jsd"}.}
 }
 \description{
-Part of the mienco_native implementation; see the file header for the source it follows.
+A step of the mienco_native implementation. Called by \code{.mienco_global_objective}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{mi_lower_bound}, \code{estimator}, \code{n_patches}, \code{n_negative_patches}, \code{method}, \code{note}.

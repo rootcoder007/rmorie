@@ -152,12 +152,13 @@ owate_weights <- function(pscore, sigma2_treated = NULL,
 
 #' .ipw
 #'
-#' Part of the tmlefp_native implementation; see the file header for the
+#' A step of the tmlefp_native implementation. Called by \code{morie_tmlefp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param w See Usage.
-#' @param e See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param w A vector; indexed elementwise.
+#' @param e A vector; indexed elementwise.
 #' @param keep Defaults to \code{NULL}.
 #' @param weights Defaults to \code{NULL}.
 #' @return A list with \code{est}, \code{n_kept}.

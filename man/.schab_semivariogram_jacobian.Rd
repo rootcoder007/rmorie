@@ -8,11 +8,11 @@
 .schab_semivariogram_jacobian(h, nugget, sill, rng, model)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{A vector; its length is taken and its elements indexed.}
 \item{nugget}{See Usage.}
-\item{sill}{See Usage.}
-\item{rng}{See Usage.}
-\item{model}{See Usage.}
+\item{sill}{Numeric; combined arithmetically in the body.}
+\item{rng}{Numeric; combined arithmetically in the body.}
+\item{model}{Passed to \code{.sp_correlogram}.}
 }
 \description{
 d gamma / d c0 = 1 d gamma / d sigma0^2 = 1 - R(h; a) d gamma / d a = -sigma0^2 dR/da Every row is zero at h = 0, where gamma(0) = 0 by definition whatever the nugget (Sec. 4.3.6).

@@ -10,10 +10,11 @@
 
 #' .sgflrt_rows
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .sgflrt_rows <- function(x) {
@@ -27,11 +28,12 @@
 
 #' .sgflrt_chol
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param rel_jitter Defaults to \code{1e-10}.
+#' @param A A matrix; indexed by row and column.
+#' @param rel_jitter Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .sgflrt_chol <- function(A, rel_jitter = 1e-10) {
@@ -56,11 +58,12 @@
 
 #' .sgflrt_solve
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. Called by \code{.sgflrt_inv}, \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param b See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .sgflrt_solve <- function(L, b) {
@@ -82,10 +85,11 @@
 
 #' .sgflrt_inv
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
+#' @param L A matrix; passed to \code{nrow}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .sgflrt_inv <- function(L) {
@@ -100,23 +104,25 @@
 
 #' .sgflrt_logdet
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
+#' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
 .sgflrt_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 #' .sgflrt_corr
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h See Usage.
-#' @param model See Usage.
-#' @param phi See Usage.
-#' @param kappa See Usage.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param model One of \code{"exponential"}, \code{"gaussian"}, \code{"matern"}, \code{"spherical"}.
+#' @param phi Numeric; combined arithmetically in the body.
+#' @param kappa Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
 .sgflrt_corr <- function(h, model, phi, kappa) {
@@ -154,7 +160,7 @@
 #' dispersion parameter arrives, where it is off by exactly that factor.
 #' The working response is eta + (y - mu) / V(mu) and nothing else.
 #'
-#' @param family See Usage.
+#' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.
 #' @param disp Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -204,13 +210,13 @@
 #' that made the inversion possible, and the fitted coefficients then
 #' miss the exact Gaussian answer by tenths rather than by 1e-10.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param Sig See Usage.
-#' @param family See Usage.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param Sig Passed to \code{.sgflrt_chol}.
+#' @param family Passed to \code{.sgflrt_family}.
 #' @param inner_iter See Usage.
 #' @param tol See Usage.
-#' @param disp Defaults to \code{1}.
+#' @param disp Passed to \code{.sgflrt_family}. Defaults to \code{1}.
 #' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta}, \code{loglik}, \code{w}, \code{L}, \code{v}.
 #' @export
 .sgflrt_laplace <- function(y, X, Sig, family, inner_iter, tol, disp = 1.0) {
@@ -259,13 +265,14 @@
 
 #' .sgflrt_golden
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param f See Usage.
 #' @param lo See Usage.
 #' @param hi See Usage.
-#' @param iters Defaults to \code{16L}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16L}.
 #' @return A numeric value.
 #' @export
 .sgflrt_golden <- function(f, lo, hi, iters = 16L) {
@@ -290,22 +297,23 @@
 
 #' morie_sgflrt_spatial_glmm_fit
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param X See Usage.
-#' @param coords See Usage.
-#' @param family Defaults to \code{"poisson"}.
-#' @param model Defaults to \code{"exponential"}.
+#' @param X Passed to \code{.sgflrt_rows}.
+#' @param coords Passed to \code{.sgflrt_rows}.
+#' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}. Defaults to \code{"poisson"}.
+#' @param model Passed to \code{.sgflrt_corr}. Defaults to \code{"exponential"}.
 #' @param sigma2 Defaults to \code{NULL}.
 #' @param phi Defaults to \code{NULL}.
 #' @param kappa Defaults to \code{1.5}.
 #' @param nugget Defaults to \code{0}.
 #' @param dispersion Defaults to \code{NULL}.
-#' @param inner_iter Defaults to \code{50L}.
+#' @param inner_iter Passed to \code{.sgflrt_laplace}. Defaults to \code{50L}.
 #' @param outer_cycles Defaults to \code{3L}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{.sgflrt_laplace}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z}, \code{spatial_effect}, \code{fitted}, \code{linear_predictor}, \code{sigma2}, \code{phi}, \code{dispersion}, \code{sigma2_at_lower_bound}, \code{spatial_signal}, \code{kappa}, \code{nugget}, \code{loglik}, \code{laplace_loglik}, \code{gls_identity_gap}, \code{covariance}, \code{family}, \code{model}, \code{n}, \code{p}, \code{d}, \code{min_distance}, \code{max_distance}, \code{method}, \code{note}.
 #' @export
 morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
@@ -492,7 +500,8 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
 
 #' .sgflrt_cheatsheet
 #'
-#' Part of the sgflrt_native implementation; see the file header for the
+#' A step of the sgflrt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

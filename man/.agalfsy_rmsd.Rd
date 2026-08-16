@@ -8,8 +8,8 @@
 .agalfsy_rmsd(A, B)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
+\item{B}{A matrix; indexed by row and column.}
 }
 \description{
 correspondence is fixed, and fitting it away would hide the very displacement the reward is scoring.

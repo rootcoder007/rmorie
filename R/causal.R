@@ -128,10 +128,11 @@ NULL
 
 #' .mor_ps_design
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{.fit_propensity}, \code{morie_estimate_aipw}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param data See Usage.
+#' @param data A vector; indexed elementwise.
 #' @param covariates See Usage.
 #' @return The value of \code{cbind}.
 #' @export
@@ -147,10 +148,11 @@ NULL
 
 #' .mor_ps_standardize
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{.fit_propensity}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .mor_ps_standardize <- function(X) {
@@ -166,14 +168,15 @@ NULL
 
 #' .mor_ps_irls
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{.fit_propensity}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param lam Defaults to \code{0}.
-#' @param max_iter Defaults to \code{200L}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param X A matrix; passed to \code{\%*\%}.
+#' @param y Passed to \code{.mor_ps_irls_beta}.
+#' @param lam Passed to \code{.mor_ps_irls_beta}. Defaults to \code{0}.
+#' @param max_iter Passed to \code{.mor_ps_irls_beta}. Defaults to \code{200L}.
+#' @param tol Passed to \code{.mor_ps_irls_beta}. Defaults to \code{1e-12}.
 #' @return A numeric value.
 #' @export
 .mor_ps_irls <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
@@ -184,11 +187,12 @@ NULL
 
 #' .mor_ps_irls_beta
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{.mor_om_fit_predict}, \code{.mor_ps_irls}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
 #' @param lam Defaults to \code{0}.
 #' @param max_iter Defaults to \code{200L}.
 #' @param tol Defaults to \code{1e-12}.
@@ -216,13 +220,14 @@ NULL
 
 #' .fit_propensity
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{.fit_propensity_weightit}, \code{morie_estimate_propensity_scores}, \code{morie_weight_ow} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param data See Usage.
+#' @param data A vector; indexed elementwise.
 #' @param treatment See Usage.
-#' @param covariates See Usage.
-#' @param ps_model Defaults to \code{"mle"}.
+#' @param covariates Passed to \code{.mor_ps_design}.
+#' @param ps_model One of \code{"mle"}, \code{"ridge"}. Defaults to \code{"mle"}.
 #' @param ridge_lambda Defaults to \code{1}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -362,7 +367,7 @@ NULL
 #'
 #' @param w See Usage.
 #' @param weight_trim Defaults to \code{NULL}.
-#' @param side Defaults to \code{"upper"}.
+#' @param side One of \code{"both"}, \code{"upper"}. Defaults to \code{"upper"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_trim_weights <- function(w, weight_trim = NULL, side = "upper") {
@@ -402,8 +407,8 @@ NULL
 #' data can actually identify.  The estimators report n_discarded and an
 #' estimand note whenever this route is taken.
 #'
-#' @param ps See Usage.
-#' @param trim Defaults to \code{c(0.1, 0.9)}.
+#' @param ps A vector; its length is taken.
+#' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.1, 0.9)}.
 #' @param trim_type Defaults to \code{"value"}.
 #' @return A logical value.
 #' @export
@@ -418,12 +423,13 @@ NULL
 
 #' .mor_trim_ps
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{morie_estimate_aipw}, \code{morie_estimate_ate}, \code{morie_estimate_propensity_scores}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param ps See Usage.
-#' @param trim Defaults to \code{c(0.01, 0.99)}.
-#' @param trim_type Defaults to \code{"value"}.
+#' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.01, 0.99)}.
+#' @param trim_type One of \code{"discard"}, \code{"quantile"}, \code{"value"}. Defaults to \code{"value"}.
 #' @return The value of \code{pmin}.
 #' @export
 .mor_trim_ps <- function(ps, trim = c(0.01, 0.99), trim_type = "value") {
@@ -446,16 +452,17 @@ NULL
 
 #' morie_estimate_propensity_scores
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{morie_estimate_aipw}, \code{morie_estimate_atc}, \code{morie_estimate_ate} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param data See Usage.
-#' @param treatment See Usage.
-#' @param covariates See Usage.
-#' @param trim Defaults to \code{c(0.01, 0.99)}.
-#' @param trim_type Defaults to \code{"value"}.
-#' @param ps_model Defaults to \code{"mle"}.
-#' @param ridge_lambda Defaults to \code{1}.
+#' @param data Passed to \code{.fit_propensity}.
+#' @param treatment Passed to \code{.fit_propensity}.
+#' @param covariates Passed to \code{.fit_propensity}.
+#' @param trim Passed to \code{.mor_trim_ps}. Defaults to \code{c(0.01, 0.99)}.
+#' @param trim_type Passed to \code{.mor_trim_ps}. Defaults to \code{"value"}.
+#' @param ps_model Passed to \code{.fit_propensity}. Defaults to \code{"mle"}.
+#' @param ridge_lambda Passed to \code{.fit_propensity}. Defaults to \code{1}.
 #' @return The value of \code{.mor_trim_ps}.
 #' @export
 morie_estimate_propensity_scores <- function(data, treatment, covariates,
@@ -709,14 +716,15 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 
 #' .mor_om_fit_predict
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{morie_estimate_aipw}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
 #' @param rows See Usage.
-#' @param Xpred See Usage.
-#' @param outcome_model See Usage.
+#' @param Xpred A matrix; passed to \code{\%*\%}.
+#' @param outcome_model Compared against \code{"logistic"}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .mor_om_fit_predict <- function(X, y, rows, Xpred, outcome_model) {
@@ -734,20 +742,21 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 
 #' morie_estimate_aipw
 #'
-#' Part of the causal implementation; see the file header for the source
+#' A step of the causal implementation. Called by \code{morie_dag_estimate}, \code{morie_estimate_gate}, \code{morie_gate} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param data See Usage.
-#' @param treatment See Usage.
+#' @param data A vector; indexed elementwise.
+#' @param treatment Passed to \code{morie_estimate_propensity_scores}.
 #' @param outcome See Usage.
-#' @param covariates See Usage.
+#' @param covariates Passed to \code{morie_estimate_propensity_scores}.
 #' @param propensity_col Defaults to \code{NULL}.
-#' @param outcome_model Defaults to \code{c("linear", "logistic")}.
-#' @param trim Defaults to \code{c(0.01, 0.99)}.
-#' @param trim_type Defaults to \code{"value"}.
-#' @param ps_model Defaults to \code{"mle"}.
-#' @param ridge_lambda Defaults to \code{1}.
-#' @param outcome_fit Defaults to \code{"separate"}.
+#' @param outcome_model Passed to \code{.mor_om_fit_predict}. Defaults to \code{c("linear", "logistic")}.
+#' @param trim Passed to \code{.mor_trim_ps}. Defaults to \code{c(0.01, 0.99)}.
+#' @param trim_type Passed to \code{.mor_trim_ps}. Defaults to \code{"value"}.
+#' @param ps_model Passed to \code{morie_estimate_propensity_scores}. Defaults to \code{"mle"}.
+#' @param ridge_lambda Passed to \code{morie_estimate_propensity_scores}. Defaults to \code{1}.
+#' @param outcome_fit One of \code{"pooled"}, \code{"separate"}. Defaults to \code{"separate"}.
 #' @return A list with \code{n_used}, \code{n_discarded}, \code{estimand}, \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}.
 #' @export
 morie_estimate_aipw <- function(data, treatment, outcome, covariates,

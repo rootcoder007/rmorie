@@ -8,10 +8,10 @@
 .strec_sigmoid(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the strec_native implementation; see the file header for the source it follows.
+A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_stamp_scores}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.
@@ -21,10 +21,10 @@ A numeric value.
 Liu, Q., Zeng, Y., Mokhosi, R. & Zhang, H. (2018) "STAMP: Short-Term
 Attention/Memory Priority Model for Session-based Recommendation",
 *Proceedings of the 24th ACM SIGKDD International Conference on
-Knowledge Discovery & Data Mining (KDD \\'18)*, 1831-1839,
+Knowledge Discovery & Data Mining (KDD \'18)*, 1831-1839,
 doi:10.1145/3219819.3219950. [PDF supplied by Vee.] The abstract and
 Sec. 1 (that predicting from a session prefix without allowing for
-users\\' interests drifting with time is problematic, the digital-camera
+users\' interests drifting with time is problematic, the digital-camera
 example, and the proposal of a short-term attention/memory priority
 model capturing general interests from the long-term memory of the
 session context while taking the current interests from the short-term

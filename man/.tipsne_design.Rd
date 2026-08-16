@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{arm}{See Usage.}
-\item{X}{See Usage.}
-\item{n}{See Usage.}
+\item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{n}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the tipsne_native implementation; see the file header for the source it follows.
+A step of the tipsne_native implementation. Called by \code{morie_tipsne}, \code{morie_tipsne_impute}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

@@ -11,7 +11,7 @@ morie_timesfm_causal_mask(n_patches)
 \item{n_patches}{See Usage.}
 }
 \description{
-Part of the timesfm_native implementation; see the file header for the source it follows.
+A step of the timesfm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mask}, \code{n_patches}, \code{training_signals}.

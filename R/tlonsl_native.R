@@ -42,12 +42,13 @@
 
 #' .tlonsl_loss
 #'
-#' Part of the tlonsl_native implementation; see the file header for the
+#' A step of the tlonsl_native implementation. Called by \code{morie_tlonsl_online_super_learner}, \code{morie_tlonsl_sequential_risk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param kind See Usage.
-#' @param y See Usage.
-#' @param p See Usage.
+#' @param kind Compared against \code{"squared"}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param p Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .tlonsl_loss <- function(kind, y, p) {
@@ -87,14 +88,15 @@ morie_tlonsl_summary_measure <- function(history, lags=1) {
 
 #' morie_tlonsl_sequential_risk
 #'
-#' Part of the tlonsl_native implementation; see the file header for the
+#' A step of the tlonsl_native implementation. Called by \code{morie_tlonsl_online_super_learner}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param algorithm See Usage.
-#' @param loss Defaults to \code{"squared"}.
+#' @param loss Passed to \code{.tlonsl_loss}. Defaults to \code{"squared"}.
 #' @param burn_in Defaults to \code{5}.
-#' @param lags Defaults to \code{1}.
+#' @param lags Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.
 #' @return A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \code{note}.
 #' @export
 morie_tlonsl_sequential_risk <- function(y, algorithm, loss="squared",
@@ -152,15 +154,16 @@ morie_tlonsl_update_weights <- function(cum_losses, eta=1.0) {
 
 #' morie_tlonsl_online_super_learner
 #'
-#' Part of the tlonsl_native implementation; see the file header for the
+#' A step of the tlonsl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param library See Usage.
-#' @param loss Defaults to \code{"squared"}.
-#' @param burn_in Defaults to \code{5}.
-#' @param lags Defaults to \code{1}.
-#' @param eta Defaults to \code{1}.
+#' @param library A vector; its length is taken and its elements indexed.
+#' @param loss Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{"squared"}.
+#' @param burn_in Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{5}.
+#' @param lags Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{1}.
+#' @param eta Passed to \code{morie_tlonsl_update_weights}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{weights}, \code{risk}, \code{member_risks}, \code{best_single}, \code{best_member}, \code{weight_path}, \code{n_scored}, \code{method}, \code{note}.
 #' @export
 morie_tlonsl_online_super_learner <- function(y, library, loss="squared",
@@ -213,7 +216,8 @@ morie_tlonsl_online_super_learner <- function(y, library, loss="squared",
 
 #' morie_tlonsl_cheatsheet
 #'
-#' Part of the tlonsl_native implementation; see the file header for the
+#' A step of the tlonsl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

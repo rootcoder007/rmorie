@@ -65,12 +65,13 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
 
 #' .cstat_uno
 #'
-#' Part of the Cstat implementation; see the file header for the source
+#' A step of the Cstat implementation. Called by \code{Cstat}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param risk_score See Usage.
+#' @param time A vector; its length is taken and its elements indexed.
+#' @param event A vector; indexed elementwise.
+#' @param risk_score A vector; indexed elementwise.
 #' @return A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.
 #' @export
 .cstat_uno <- function(time, event, risk_score) {

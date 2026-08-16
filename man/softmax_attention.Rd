@@ -8,13 +8,13 @@
 softmax_attention(Q, K, V, causal = FALSE)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{K}{See Usage.}
-\item{V}{See Usage.}
-\item{causal}{Defaults to \code{FALSE}.}
+\item{Q}{A matrix; passed to \code{as.matrix}.}
+\item{K}{A matrix; passed to \code{as.matrix}.}
+\item{V}{A matrix; passed to \code{as.matrix}.}
+\item{causal}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the perfat_native implementation; see the file header for the source it follows.
+A step of the perfat_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

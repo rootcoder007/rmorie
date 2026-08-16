@@ -3,16 +3,16 @@
 % the formals.
 \name{.w3_gammcf}
 \alias{.w3_gammcf}
-\title{Q(a, x) by Lentz\\\'s continued fraction}
+\title{Q(a, x) by Lentz\\'s continued fraction}
 \usage{
 .w3_gammcf(a, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the helpers_w3num implementation; see the file header for the source it follows.
+A step of the helpers_w3num implementation. Called by \code{.w3_gammp}, \code{.w3_gammq}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

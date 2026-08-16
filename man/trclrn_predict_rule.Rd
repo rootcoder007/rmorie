@@ -9,10 +9,10 @@ trclrn_predict_rule(tree, X)
 }
 \arguments{
 \item{tree}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the trclrn_native implementation; see the file header for the source it follows.
+A step of the trclrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

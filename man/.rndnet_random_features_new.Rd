@@ -8,11 +8,11 @@
 .rndnet_random_features_new(n_in, n_hidden, n_out, rng, scale = 1)
 }
 \arguments{
-\item{n_in}{See Usage.}
-\item{n_hidden}{See Usage.}
-\item{n_out}{See Usage.}
-\item{rng}{See Usage.}
-\item{scale}{Defaults to \code{1}.}
+\item{n_in}{A count; the body uses it as \code{matrix(...)}.}
+\item{n_hidden}{A count; the body uses it as \code{matrix(...)}.}
+\item{n_out}{A count; the body uses it as \code{matrix(...)}.}
+\item{rng}{Passed to \code{.ghc_unif}.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
 init Part of the rndnet_native implementation; see the file header for the source it follows.

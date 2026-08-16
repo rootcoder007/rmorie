@@ -21,7 +21,7 @@ morie_mambss(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NULL,
 \item{D_skip}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the mambss_native implementation; see the file header for the source it follows.
+A step of the mambss_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{selective_scan}.

@@ -13,7 +13,7 @@ morie_genemt_gene_covariates(n_markers, gene_length, ld_scores = NULL)
 \item{ld_scores}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the genemt_native implementation; see the file header for the source it follows.
+A step of the genemt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{covariates}, \code{names}, \code{note}.

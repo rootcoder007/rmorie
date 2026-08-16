@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the gentmt_native implementation; see the file header for the source it follows.
+A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_treatment_density} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

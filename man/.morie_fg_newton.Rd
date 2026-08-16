@@ -8,13 +8,13 @@
 .morie_fg_newton(t, e, X, competing, Gfun, Gi, max_iter = 50L, tol = 1e-09)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{A vector; indexed elementwise.}
 \item{e}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
 \item{competing}{See Usage.}
 \item{Gfun}{See Usage.}
-\item{Gi}{See Usage.}
-\item{max_iter}{Defaults to \code{50L}.}
+\item{Gi}{Numeric; combined arithmetically in the body.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{

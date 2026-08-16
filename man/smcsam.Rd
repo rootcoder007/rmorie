@@ -17,12 +17,12 @@ smcsam(log_gamma, initial, n_particles = 500L, ladder = NULL, n_steps = 20L, ker
 \item{ess_threshold}{Defaults to \code{0.5}.}
 \item{scheme}{Defaults to \code{"systematic"}.}
 \item{seed}{Defaults to \code{0L}.}
-\item{weight_rule}{Defaults to \code{"mcmc"}.}
+\item{weight_rule}{One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.}
 \item{log_forward}{Defaults to \code{NULL}.}
 \item{log_backward}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the smcsam_native implementation; see the file header for the source it follows.
+A step of the smcsam_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{mean}, \code{variance}, \code{particles}, \code{weights}, \code{log_norm_const}, \code{ess}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule}, \code{method}.

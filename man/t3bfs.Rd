@@ -8,11 +8,11 @@
 t3bfs(A, s)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
 \item{s}{See Usage.}
 }
 \description{
-Part of the t3util implementation; see the file header for the source it follows.
+A step of the t3util implementation. Called by \code{ecccen}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{d}, as built in the body.

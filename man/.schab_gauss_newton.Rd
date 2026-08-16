@@ -8,18 +8,18 @@
 .schab_gauss_newton(lags, ghat, counts, start, model = "exponential", kind = "wls", max_iter = 200L, tol = 1e-12, max_halvings = 40L)
 }
 \arguments{
-\item{lags}{See Usage.}
-\item{ghat}{See Usage.}
-\item{counts}{See Usage.}
-\item{start}{See Usage.}
-\item{model}{Defaults to \code{"exponential"}.}
-\item{kind}{Defaults to \code{"wls"}.}
-\item{max_iter}{Defaults to \code{200L}.}
+\item{lags}{A vector; indexed elementwise.}
+\item{ghat}{A vector; indexed elementwise.}
+\item{counts}{A vector; indexed elementwise.}
+\item{start}{Passed to \code{.schab_gn_project}.}
+\item{model}{Passed to \code{.sp_semivariogram}. Defaults to \code{"exponential"}.}
+\item{kind}{Passed to \code{.schab_gn_weights}. Defaults to \code{"wls"}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 \item{tol}{Defaults to \code{1e-12}.}
-\item{max_halvings}{Defaults to \code{40L}.}
+\item{max_halvings}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.}
 }
 \description{
-Part of the schab_gn_shared implementation; see the file header for the source it follows.
+A step of the schab_gn_shared implementation. Called by \code{.schab_fit_semivariogram}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{theta}, \code{objective}, \code{converged}, \code{iterations}.

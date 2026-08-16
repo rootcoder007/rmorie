@@ -8,11 +8,11 @@
 .k01_soft(v, t)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{t}{See Usage.}
+\item{v}{Numeric; passed to \code{abs}.}
+\item{t}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the acclso implementation; see the file header for the source it follows.
+A step of the acclso implementation. Called by \code{Admmlasso}, \code{Fistalasso}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

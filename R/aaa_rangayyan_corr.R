@@ -6,11 +6,12 @@
 
 #' .morie_rg_xcorr
 #'
-#' Part of the rangayyan_corr implementation; see the file header for
+#' A step of the rangayyan_corr implementation. Called by \code{MfAcf}, \code{RefPattern}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param maxlag Defaults to \code{NULL}.
 #' @return A list with \code{lags}, \code{values}.
 #' @export
@@ -37,7 +38,7 @@
 #'
 #' @param x See Usage.
 #' @param y See Usage.
-#' @param subtract_mean Defaults to \code{FALSE}.
+#' @param subtract_mean A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{dot_product}, \code{gamma}, \code{energy_x}, \code{energy_y}, \code{n}, \code{mean_removed}, \code{method}.
 #' @export
 DotProd <- function(x, y, subtract_mean = FALSE) {
@@ -295,7 +296,7 @@ Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #' @param x See Usage.
 #' @param ref See Usage.
 #' @param threshold Defaults to \code{NULL}.
-#' @param subtract_mean Defaults to \code{TRUE}.
+#' @param subtract_mean A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 Template <- function(x, ref, threshold = NULL, subtract_mean = TRUE) {
@@ -421,7 +422,7 @@ MfOutput <- function(x, h, dt = 1) {
 #' twice it.  Getting it wrong is a factor of two in every SNR below.
 #'
 #' @param power See Usage.
-#' @param freqs Defaults to \code{NULL}.
+#' @param freqs Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 MfNoiseIn <- function(power, freqs = NULL) {
@@ -1003,7 +1004,8 @@ MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
 
 #' MatchedFilt
 #'
-#' Part of the rangayyan_corr implementation; see the file header for
+#' A step of the rangayyan_corr implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param ref See Usage.
@@ -1249,7 +1251,7 @@ EmgFreq <- function(x, fs, nperseg = NULL) {
 #'
 #' @param n See Usage.
 #' @param fs Defaults to \code{1}.
-#' @param window Defaults to \code{"rectangular"}.
+#' @param window Character; passed to \code{tolower}. Defaults to \code{"rectangular"}.
 #' @return A list with \code{delta_f}, \code{resolution}, \code{main_lobe_bins}, \code{sidelobe_db}, \code{equivalent_noise_bandwidth_bins}, \code{duration}, \code{n}, \code{fs}, \code{window}, \code{zero_padding_helps}, \code{method}.
 #' @export
 SpecRes <- function(n, fs = 1, window = "rectangular") {
@@ -1440,14 +1442,15 @@ ErpArtifact <- function(epochs, reject = NULL) {
 
 #' SeizCohere
 #'
-#' Part of the rangayyan_corr implementation; see the file header for
+#' A step of the rangayyan_corr implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param channels See Usage.
 #' @param fs See Usage.
 #' @param window See Usage.
 #' @param step Defaults to \code{NULL}.
-#' @param bands Defaults to \code{NULL}.
+#' @param bands Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param nperseg Defaults to \code{NULL}.
 #' @return A list with \code{times}, \code{coherence}, \code{bands}, \code{window}, \code{step}, \code{nperseg}, \code{n_windows}, \code{n_channels}, \code{sustained_criterion}, \code{method}.
 #' @export
@@ -1514,13 +1517,14 @@ SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
 
 #' CardioResp
 #'
-#' Part of the rangayyan_corr implementation; see the file header for
+#' A step of the rangayyan_corr implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param ecg_rate See Usage.
 #' @param resp See Usage.
 #' @param fs See Usage.
-#' @param band Defaults to \code{c(0.15, 0.4)}.
+#' @param band A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.
 #' @param nperseg Defaults to \code{NULL}.
 #' @return A list with \code{plv}, \code{mean_phase_difference}, \code{phase_difference}, \code{coherence_peak}, \code{coherence_mean}, \code{coherence}, \code{freqs}, \code{band}, \code{n}, \code{fs}, \code{method}.
 #' @export

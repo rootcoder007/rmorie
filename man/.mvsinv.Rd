@@ -8,8 +8,8 @@
 .mvsinv(A, ridge = 1e-12)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{ridge}{Defaults to \code{1e-12}.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{ridge}{Passed to \code{.s03ridgesolve}. Defaults to \code{1e-12}.}
 }
 \description{
 symmetrised so that the two arms cannot drift on round-off.

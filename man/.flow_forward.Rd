@@ -12,7 +12,7 @@
 \item{layers}{See Usage.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. Called by \code{.log_prob}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{z}, \code{logdet}.

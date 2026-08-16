@@ -6,10 +6,11 @@
 
 #' .plcbsc_simplex_project
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. Called by \code{.plcbsc_synthetic_control}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
 #' @export
 .plcbsc_simplex_project <- function(v) {
@@ -28,14 +29,15 @@
 
 #' .plcbsc_synthetic_control
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x_treated See Usage.
 #' @param x_donors See Usage.
 #' @param v Defaults to \code{NULL}.
 #' @param max_iter Defaults to \code{5000}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @param step Defaults to \code{NULL}.
 #' @return A list with \code{weights}, \code{loss}, \code{fitted}, \code{n_iter}, \code{converged}.
 #' @export
@@ -115,12 +117,13 @@
 
 #' .plcbsc_gaps
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. Called by \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y_treated See Usage.
+#' @param y_treated Numeric; combined arithmetically in the body.
 #' @param y_donors See Usage.
-#' @param weights See Usage.
+#' @param weights A matrix; passed to \code{crossprod}.
 #' @return A numeric value.
 #' @export
 .plcbsc_gaps <- function(y_treated, y_donors, weights) {
@@ -130,10 +133,11 @@
 
 #' .plcbsc_rmspe
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. Called by \code{.plcbsc_effect}, \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gaps See Usage.
+#' @param gaps A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .plcbsc_rmspe <- function(gaps) {
@@ -143,12 +147,13 @@
 
 #' .plcbsc_effect
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. Called by \code{morie_plcbsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gaps See Usage.
-#' @param t0 See Usage.
-#' @param statistic See Usage.
+#' @param gaps A vector; its length is taken and its elements indexed.
+#' @param t0 A count; the body uses it as \code{seq_len(...)}.
+#' @param statistic Compared against \code{"effect"}.
 #' @param pre_gaps Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -167,16 +172,17 @@
 
 #' morie_plcbsc
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y_treated See Usage.
 #' @param y_donors See Usage.
-#' @param t0 See Usage.
+#' @param t0 A count; the body uses it as \code{seq_len(...)}.
 #' @param x_treated Defaults to \code{NULL}.
-#' @param x_donors Defaults to \code{NULL}.
+#' @param x_donors Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param v Defaults to \code{NULL}.
-#' @param statistic Defaults to \code{"effect"}.
+#' @param statistic One of \code{"effect"}, \code{"rmspe_ratio"}. Defaults to \code{"effect"}.
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{gaps}, \code{weights}, \code{fit_loss}, \code{placebo}, \code{pvalue}, \code{rank}, \code{n_donors}, \code{t0}, \code{statistic}, \code{rmspe_pre}, \code{rmspe_post}, \code{note}, \code{method}.
 #' @export
@@ -261,13 +267,14 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 
 #' .plcbsc_in_time_placebo
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y_treated See Usage.
 #' @param y_donors See Usage.
-#' @param t0 See Usage.
-#' @param fake_t0 See Usage.
+#' @param t0 Numeric; combined arithmetically in the body.
+#' @param fake_t0 A count; the body uses it as \code{seq_len(...)}.
 #' @param v Defaults to \code{NULL}.
 #' @param ... Passed through.
 #' @return A list with \code{weights}, \code{gaps}, \code{placebo_effect}, \code{rmspe_pre}, \code{rmspe_placebo}.
@@ -296,7 +303,8 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 
 #' .plcbsc_cheatsheet
 #'
-#' Part of the plcbsc_native implementation; see the file header for the
+#' A step of the plcbsc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

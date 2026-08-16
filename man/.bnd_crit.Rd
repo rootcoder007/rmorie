@@ -8,11 +8,11 @@
 .bnd_crit(theta, st)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{st}{See Usage.}
+\item{theta}{Numeric; combined arithmetically in the body.}
+\item{st}{A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL}, \code{$sU} from it.}
 }
 \description{
-Part of the helpers_bnd implementation; see the file header for the source it follows.
+A step of the helpers_bnd implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

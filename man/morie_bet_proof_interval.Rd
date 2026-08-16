@@ -8,13 +8,13 @@
 morie_bet_proof_interval(x, level = 0.95, lower_bound = 0, min_width = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{level}{Defaults to \code{0.95}.}
-\item{lower_bound}{Defaults to \code{0}.}
+\item{x}{Passed to \code{morie_truncated_normal_interval}.}
+\item{level}{Passed to \code{morie_truncated_normal_interval}. Defaults to \code{0.95}.}
+\item{lower_bound}{Passed to \code{morie_truncated_normal_interval}. Defaults to \code{0}.}
 \item{min_width}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the bndpcb_native implementation; see the file header for the source it follows.
+A step of the bndpcb_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{width}, \code{empty}, \code{min_width}, \code{naive_width}, \code{naive_empty}, \code{widened}, \code{method}.

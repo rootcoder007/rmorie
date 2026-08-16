@@ -13,7 +13,7 @@ morie_timesfm_horizon_plan(horizon, input_patch_len, output_patch_len)
 \item{output_patch_len}{See Usage.}
 }
 \description{
-Part of the timesfm_native implementation; see the file header for the source it follows.
+A step of the timesfm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{steps_asymmetric}, \code{steps_symmetric}, \code{steps_direct}, \code{input_patch_len}, \code{output_patch_len}, \code{horizon}, \code{speedup_vs_symmetric}, \code{note}.

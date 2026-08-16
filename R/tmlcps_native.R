@@ -18,24 +18,26 @@
 
 #' .kern
 #'
-#' Part of the tmlcps_native implementation; see the file header for the
+#' A step of the tmlcps_native implementation. Called by \code{.smooth_at}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .kern <- function(u) exp(-0.5 * u * u)
 
 #' .smooth_at
 #'
-#' Part of the tmlcps_native implementation; see the file header for the
+#' A step of the tmlcps_native implementation. Called by \code{.cv_bandwidth}, \code{effect_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param xv See Usage.
-#' @param av See Usage.
-#' @param g See Usage.
-#' @param h See Usage.
-#' @param fit See Usage.
+#' @param xv A vector; its length is taken.
+#' @param av Numeric; combined arithmetically in the body.
+#' @param g Numeric; combined arithmetically in the body.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param fit Compared against \code{"kernel"}.
 #' @return A numeric value.
 #' @export
 .smooth_at <- function(xv, av, g, h, fit) {
@@ -56,12 +58,13 @@
 
 #' .cv_bandwidth
 #'
-#' Part of the tmlcps_native implementation; see the file header for the
+#' A step of the tmlcps_native implementation. Called by \code{effect_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param xv See Usage.
-#' @param av See Usage.
-#' @param fit See Usage.
+#' @param xv A vector; its length is taken and its elements indexed.
+#' @param av A vector; indexed elementwise.
+#' @param fit Passed to \code{.smooth_at}.
 #' @param n_folds See Usage.
 #' @return The value of \code{best_h}, as built in the body.
 #' @export

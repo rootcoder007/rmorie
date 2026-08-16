@@ -36,7 +36,7 @@ Betavae(
 List with objective, recon, kl, klper, penalty, beta, J, d.
 }
 \description{
-L = E_q\link{log p(x|z)} - beta D_KL(q||p) with
+L = E_q[log p(x|z)] - beta D_KL(q||p) with
 D_KL = 0.5 sum_j (mu_j^2 + sigma_j^2 - 1 - log sigma_j^2); the
 capacity variant uses gamma |D_KL - C| in place of beta D_KL.
 }

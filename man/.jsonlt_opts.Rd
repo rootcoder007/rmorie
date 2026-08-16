@@ -17,12 +17,12 @@
 \item{raw}{Defaults to \code{"base64"}.}
 \item{null}{Defaults to \code{"list"}.}
 \item{na}{Defaults to \code{NULL}.}
-\item{auto_unbox}{Defaults to \code{FALSE}.}
+\item{auto_unbox}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{digits}{Defaults to \code{4}.}
-\item{force}{Defaults to \code{FALSE}.}
+\item{force}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser_opts}, \code{morie_jsonlt_to_json}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{o}, as built in the body.

@@ -10,10 +10,10 @@ cascade(primary, secondary, tol = 1e-09)
 \arguments{
 \item{primary}{See Usage.}
 \item{secondary}{See Usage.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Numeric; passed to \code{max}. Defaults to \code{1e-09}.}
 }
 \description{
-Part of the hybRC_native implementation; see the file header for the source it follows.
+A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ranking}, \code{tie_groups_broken}, \code{primary_respected}, \code{note}.

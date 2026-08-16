@@ -8,10 +8,10 @@
 .tmlcds_mat(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the tmlcds_native implementation; see the file header for the source it follows.
+A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

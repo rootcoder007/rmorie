@@ -10,14 +10,14 @@ online_tmle_series(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10)
 \arguments{
 \item{Y}{See Usage.}
 \item{A}{See Usage.}
-\item{Z}{See Usage.}
+\item{Z}{A matrix; indexed by row and column.}
 \item{Q_fn}{See Usage.}
 \item{g_fn}{See Usage.}
 \item{target_prob}{See Usage.}
 \item{burn_in}{Defaults to \code{10}.}
 }
 \description{
-Part of the tlonts_native implementation; see the file header for the source it follows.
+A step of the tlonts_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci}, \code{T_scored}, \code{method}, \code{note}.

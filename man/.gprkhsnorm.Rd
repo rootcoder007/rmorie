@@ -8,8 +8,8 @@
 .gprkhsnorm(beta, K)
 }
 \arguments{
-\item{beta}{See Usage.}
-\item{K}{See Usage.}
+\item{beta}{Passed to \code{.gpflat}.}
+\item{K}{Passed to \code{.gpmat}.}
 }
 \description{
 --------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

@@ -20,7 +20,8 @@
 
 #' .b2logb
 #'
-#' Part of the b2info implementation; see the file header for the source
+#' A step of the b2info implementation. Called by \code{.b2kl}, \code{.b2xlogx}, \code{Compshan} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param v See Usage.
@@ -37,10 +38,11 @@
 
 #' .b2pnorm
 #'
-#' Part of the b2info implementation; see the file header for the source
+#' A step of the b2info implementation. Called by \code{Compshan}, \code{Crsent}, \code{Predcomp} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 .b2pnorm <- function(p) {
@@ -53,11 +55,12 @@
 
 #' .b2xlogx
 #'
-#' Part of the b2info implementation; see the file header for the source
+#' A step of the b2info implementation. Called by \code{.b2ent}, \code{Difent}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
-#' @param base Defaults to \code{2}.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param base Passed to \code{.b2logb}. Defaults to \code{2}.
 #' @return The value of \code{ifelse}.
 #' @export
 .b2xlogx <- function(p, base = 2) {
@@ -67,23 +70,25 @@
 
 #' .b2ent
 #'
-#' Part of the b2info implementation; see the file header for the source
+#' A step of the b2info implementation. Called by \code{Cndent}, \code{Cndmi}, \code{Compshan} and 8 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
-#' @param base Defaults to \code{2}.
+#' @param p Passed to \code{.b2xlogx}.
+#' @param base Passed to \code{.b2xlogx}. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
 .b2ent <- function(p, base = 2) -sum(.b2xlogx(p, base))
 
 #' .b2kl
 #'
-#' Part of the b2info implementation; see the file header for the source
+#' A step of the b2info implementation. Called by \code{Klchain}, \code{Predcomp}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; combined arithmetically in the body.
 #' @param q See Usage.
-#' @param base Defaults to \code{2}.
+#' @param base Passed to \code{.b2logb}. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
 .b2kl <- function(p, q, base = 2) {
@@ -146,10 +151,11 @@ Cndmi <- function(pxyz, base = 2) {
 
 #' .b2as3d
 #'
-#' Part of the b2info implementation; see the file header for the source
+#' A step of the b2info implementation. Called by \code{Cndmi}, \code{Dpineq}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
+#' @param p A matrix; passed to \code{dim}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .b2as3d <- function(p) {
@@ -177,7 +183,8 @@ Cndmi <- function(pxyz, base = 2) {
 
 #' .b2as2d
 #'
-#' Part of the b2info implementation; see the file header for the source
+#' A step of the b2info implementation. Called by \code{Cndent}, \code{Jntent}, \code{Klchain} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param p See Usage.

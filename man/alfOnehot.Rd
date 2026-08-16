@@ -8,8 +8,8 @@
 alfOnehot(x, bins)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{bins}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{bins}{A vector; its length is taken.}
 }
 \description{
 lowest index, matching arg min in the pseudocode and which.min here.

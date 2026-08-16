@@ -8,13 +8,13 @@
 .random_effect_step(y, G, selected, bins = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{G}{See Usage.}
+\item{y}{Passed to \code{.to_vec}.}
+\item{G}{Passed to \code{.kinship_from_markers}.}
 \item{selected}{See Usage.}
 \item{bins}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. Called by \code{.farmcpu}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{K}, \code{markers_used}, \code{blup}, \code{note}.

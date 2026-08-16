@@ -8,10 +8,10 @@
 DicNotch(cp, fs, qrs = NULL, mwin = 16)
 }
 \arguments{
-\item{cp}{See Usage.}
-\item{fs}{See Usage.}
+\item{cp}{A vector; its length is taken and its elements indexed.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{qrs}{Defaults to \code{NULL}.}
-\item{mwin}{Defaults to \code{16}.}
+\item{mwin}{Numeric; combined arithmetically in the body. Defaults to \code{16}.}
 }
 \description{
 second derivative of eq (4.22), squared and smoothed by eq (4.23).  The second derivative is used because the notch rides on the falling limb of the pulse, which a first derivative cannot separate from the limb itself.

@@ -11,11 +11,11 @@ estimator_score(hyp, src, ref, W, b = NULL)
 \item{hyp}{See Usage.}
 \item{src}{See Usage.}
 \item{ref}{See Usage.}
-\item{W}{See Usage.}
+\item{W}{A matrix; passed to \code{nrow}.}
 \item{b}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the comet_native implementation; see the file header for the source it follows.
+A step of the comet_native implementation. Called by \code{morie_comet}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{score}, \code{method}, \code{note}.

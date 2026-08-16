@@ -29,7 +29,7 @@ right one.
 }
 \details{
 Formula: K(h) = (2 sqrt(pi))^(-1) int cos(h lambda) exp(-lambda^2/4)
-dlambda, by midpoint rule over \link{-lam_max, lam_max}.
+dlambda, by midpoint rule over [-lam_max, lam_max].
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of

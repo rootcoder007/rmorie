@@ -8,11 +8,11 @@
 .pq_wvarint(e, n)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{n}{See Usage.}
+\item{e}{Passed to \code{.pq_emit}.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wlisthdr}, \code{.pq_wzigzag}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.pq_emit}.

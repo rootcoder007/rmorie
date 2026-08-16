@@ -8,12 +8,12 @@
 .morie_boot_index(n, R, strata = NULL)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{R}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{R}{A count; the body uses it as \code{rep(...)}.}
 \item{strata}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the boot_native implementation; see the file header for the source it follows.
+A step of the boot_native implementation. Called by \code{morie_boot}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{output}, as built in the body.

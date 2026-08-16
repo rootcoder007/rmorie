@@ -19,11 +19,12 @@
 
 #' .schab_hermite_e
 #'
-#' Part of the schab_hermite_shared implementation; see the file header
+#' A step of the schab_hermite_shared implementation. Called by \code{.schab_hermite_orthonormal}, \code{.schab_indicator_coefficients}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x See Usage.
-#' @param degree See Usage.
+#' @param x A vector; its length is taken.
+#' @param degree Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .schab_hermite_e <- function(x, degree) {
@@ -43,7 +44,8 @@
 
 #' .schab_factorial
 #'
-#' Part of the schab_hermite_shared implementation; see the file header
+#' A step of the schab_hermite_shared implementation. Called by \code{.schab_indicator_coefficients}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param p See Usage.
@@ -58,11 +60,12 @@
 
 #' .schab_hermite_orthonormal
 #'
-#' Part of the schab_hermite_shared implementation; see the file header
+#' A step of the schab_hermite_shared implementation. Called by \code{.schab_disjunctive_kriging}, \code{.schab_hermite_coefficients}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x See Usage.
-#' @param degree See Usage.
+#' @param x Passed to \code{.schab_hermite_e}.
+#' @param degree Passed to \code{.schab_hermite_e}.
 #' @return A numeric value.
 #' @export
 .schab_hermite_orthonormal <- function(x, degree) {
@@ -80,7 +83,7 @@
 #' only a symmetric eigensolver. The weights sum to 1, so sum(w * g(x))
 #' is E[g(X)] for X ~ N(0, 1).
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return A list with \code{nodes}, \code{weights}.
 #' @export
 .schab_gauss_hermite <- function(n) {
@@ -111,8 +114,8 @@
 #' come out exactly.
 #'
 #' @param g See Usage.
-#' @param degree See Usage.
-#' @param n_quad Defaults to \code{NULL}.
+#' @param degree Numeric; combined arithmetically in the body.
+#' @param n_quad Optional; may be \code{NULL}. Passed to \code{.schab_gauss_hermite}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .schab_hermite_coefficients <- function(g, degree, n_quad = NULL) {
@@ -133,8 +136,8 @@
 #' the canonical target of the method. b_0 = F(z_k), b_p = (-1)^p
 #' H_{p-1}(z_k) f(z_k) / sqrt(p!)
 #'
-#' @param z_k See Usage.
-#' @param degree See Usage.
+#' @param z_k Numeric; combined arithmetically in the body.
+#' @param degree A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .schab_indicator_coefficients <- function(z_k, degree) {
@@ -157,15 +160,16 @@
 
 #' .schab_disjunctive_kriging
 #'
-#' Part of the schab_hermite_shared implementation; see the file header
+#' A step of the schab_hermite_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param coords See Usage.
-#' @param y See Usage.
-#' @param target See Usage.
+#' @param coords A matrix; passed to \code{nrow}.
+#' @param y A vector; its length is taken.
+#' @param target A count; the body uses it as \code{matrix(...)}.
 #' @param correlation_fn See Usage.
-#' @param b See Usage.
-#' @param degree See Usage.
+#' @param b A vector; indexed elementwise.
+#' @param degree A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{prediction}, \code{variance}, \code{coefficients}, \code{component_variances}.
 #' @export
 .schab_disjunctive_kriging <- function(coords, y, target, correlation_fn,

@@ -8,10 +8,10 @@
 ExerEcgSt(x, qrs, fs, jofs = 0.06, thresh = 0.1)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 \item{qrs}{See Usage.}
-\item{fs}{See Usage.}
-\item{jofs}{Defaults to \code{0.06}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{jofs}{Numeric; combined arithmetically in the body. Defaults to \code{0.06}.}
 \item{thresh}{Defaults to \code{0.1}.}
 }
 \description{

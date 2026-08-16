@@ -8,14 +8,14 @@
 ngcf_stack_layers(E0, adjacency, Ws, affinity = TRUE, slope = 0.2)
 }
 \arguments{
-\item{E0}{See Usage.}
+\item{E0}{A matrix; passed to \code{as.matrix}.}
 \item{adjacency}{See Usage.}
-\item{Ws}{See Usage.}
+\item{Ws}{A vector; its length is taken.}
 \item{affinity}{Defaults to \code{TRUE}.}
 \item{slope}{Defaults to \code{0.2}.}
 }
 \description{
-Part of the ngcf_native implementation; see the file header for the source it follows.
+A step of the ngcf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers}, \code{affinity}, \code{method}, \code{note}.

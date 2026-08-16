@@ -15,7 +15,7 @@ morie_tlclust(Q_seq, H_seq, Y, cluster, ic = NULL)
 \item{ic}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tlclust_native implementation; see the file header for the source it follows.
+A step of the tlclust_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list, whose contents depend on the branch taken; across the branches its names are \code{estimate}, \code{psi}, \code{se_clustered}, \code{se_naive}, \code{ci}, \code{n_clusters}, \code{design_effect}, \code{method}, \code{note}, \code{naive}, \code{pooled}, \code{sequential}.

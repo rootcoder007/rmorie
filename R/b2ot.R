@@ -22,7 +22,8 @@
 
 #' .b2mat
 #'
-#' Part of the b2ot implementation; see the file header for the source
+#' A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup}, \code{Gppost} and 13 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param a See Usage.
@@ -37,10 +38,11 @@
 
 #' .b2close
 #'
-#' Part of the b2ot implementation; see the file header for the source
+#' A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otfreeen}, \code{Otsinktol}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 .b2close <- function(p) {
@@ -53,12 +55,13 @@
 
 #' .b2margerr
 #'
-#' Part of the b2ot implementation; see the file header for the source
+#' A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otsinkh}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param T See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .b2margerr <- function(T, a, b) {
@@ -73,12 +76,12 @@
 #' Cuturi\'s exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v)
 #' then v <- b/(K\' u), started from v = 1.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param C See Usage.
+#' @param a Passed to \code{.b2close}.
+#' @param b Passed to \code{.b2close}.
+#' @param C Passed to \code{.b2mat}.
 #' @param epsilon See Usage.
 #' @param max_iter Defaults to \code{200L}.
-#' @param trace Defaults to \code{FALSE}.
+#' @param trace A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{T}, \code{u}, \code{v}, \code{a}, \code{b}, \code{trace}.
 #' @export
 .b2sinkhorn <- function(a, b, C, epsilon, max_iter = 200L, trace = FALSE) {

@@ -8,14 +8,14 @@
 .scintg_correct_batch(Z, R, batches, lam = 1, reference = NULL)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{R}{See Usage.}
-\item{batches}{See Usage.}
-\item{lam}{Defaults to \code{1}.}
-\item{reference}{Defaults to \code{NULL}.}
+\item{Z}{Passed to \code{.scintg_matrix}.}
+\item{R}{A matrix; indexed by row and column.}
+\item{batches}{A vector; its length is taken.}
+\item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{reference}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{morie_scintg}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{Z}, \code{W}, \code{batches}.

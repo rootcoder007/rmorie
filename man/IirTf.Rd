@@ -10,7 +10,7 @@ IirTf(b_k, a_k, z, N = NULL, M = NULL)
 \arguments{
 \item{b_k}{See Usage.}
 \item{a_k}{See Usage.}
-\item{z}{See Usage.}
+\item{z}{Passed to \code{.morie_rg_polyz}.}
 \item{N}{Defaults to \code{NULL}.}
 \item{M}{Defaults to \code{NULL}.}
 }

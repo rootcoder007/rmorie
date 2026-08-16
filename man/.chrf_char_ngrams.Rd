@@ -8,11 +8,11 @@
 .chrf_char_ngrams(s, n)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{n}{See Usage.}
+\item{s}{A vector; its length is taken.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the chrF_native implementation; see the file header for the source it follows.
+A step of the chrF_native implementation. Called by \code{chrf_score}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,13 +8,13 @@
 .morie_w4d_lloyd(Z, k, seed = 0, iters = 100)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{k}{See Usage.}
+\item{Z}{A matrix; indexed by row and column.}
+\item{k}{Numeric; combined arithmetically in the body.}
 \item{seed}{Defaults to \code{0}.}
-\item{iters}{Defaults to \code{100}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_semisupervised_cluster}, \code{morie_geron_spectral_clustering}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{labels}, \code{centers}.

@@ -9,15 +9,16 @@
 
 #' .morie_cox_counting
 #'
-#' Part of the recur_native implementation; see the file header for the
+#' A step of the recur_native implementation. Called by \code{Agrec}, \code{Pwpgt}, \code{Shfrm} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param start See Usage.
 #' @param stop See Usage.
 #' @param event See Usage.
-#' @param X See Usage.
-#' @param strata Defaults to \code{NULL}.
-#' @param max_iter Defaults to \code{50L}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param strata Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-09}.
 #' @param offset Defaults to \code{NULL}.
 #' @return A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter}, \code{n_events}.

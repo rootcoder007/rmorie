@@ -8,12 +8,12 @@
 .gpztpmle(y_positive, tol = 1e-12, max_iter = 200)
 }
 \arguments{
-\item{y_positive}{See Usage.}
+\item{y_positive}{Passed to \code{.gpflat}.}
 \item{tol}{Defaults to \code{1e-12}.}
 \item{max_iter}{Defaults to \code{200}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, \code{Msm325}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

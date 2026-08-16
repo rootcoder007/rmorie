@@ -8,13 +8,13 @@
 .esl_stop(y, depth, max_depth, min_node)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; its length is taken.}
 \item{depth}{See Usage.}
 \item{max_depth}{See Usage.}
 \item{min_node}{See Usage.}
 }
 \description{
-Part of the esl_native0 implementation; see the file header for the source it follows.
+A step of the esl_native0 implementation. Called by \code{.esl_grow}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

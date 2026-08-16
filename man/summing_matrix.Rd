@@ -8,11 +8,11 @@
 summing_matrix(groups, n_bottom)
 }
 \arguments{
-\item{groups}{See Usage.}
-\item{n_bottom}{See Usage.}
+\item{groups}{A vector; its length is taken and its elements indexed.}
+\item{n_bottom}{A matrix; passed to \code{diag}.}
 }
 \description{
-Part of the hierF_native implementation; see the file header for the source it follows.
+A step of the hierF_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rbind}.

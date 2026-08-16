@@ -3,15 +3,15 @@
 % the formals.
 \name{.morie_hrz_kz6_deriv}
 \alias{.morie_hrz_kz6_deriv}
-\title{K\\\'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above}
+\title{K\\'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above}
 \usage{
 .morie_hrz_kz6_deriv(u)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
 }
 \description{
-and using phi\\\'(u) = -u phi(u).
+and using phi\\'(u) = -u phi(u).
 }
 \value{
 A numeric value.

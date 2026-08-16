@@ -11,7 +11,7 @@ XCorrProc(x, y, lags = NULL, remove_mean = TRUE)
 \item{x}{See Usage.}
 \item{y}{See Usage.}
 \item{lags}{Defaults to \code{NULL}.}
-\item{remove_mean}{Defaults to \code{TRUE}.}
+\item{remove_mean}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 only legitimate under joint stationarity and ergodicity.

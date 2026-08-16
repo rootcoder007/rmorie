@@ -11,7 +11,7 @@
 \item{wavelet}{See Usage.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_filters}, \code{WtVar}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

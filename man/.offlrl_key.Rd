@@ -12,7 +12,7 @@
 \item{a}{See Usage.}
 }
 \description{
-Part of the offlrl_native implementation; see the file header for the source it follows.
+A step of the offlrl_native implementation. Called by \code{offlrl}. See the file header for the source the module follows.
 }
 \value{
 A character value.

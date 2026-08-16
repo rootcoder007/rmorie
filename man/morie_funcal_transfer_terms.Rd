@@ -8,13 +8,13 @@
 morie_funcal_transfer_terms(assignments, annotations, sources = NULL, min_support = 1)
 }
 \arguments{
-\item{assignments}{See Usage.}
-\item{annotations}{See Usage.}
+\item{assignments}{A vector; indexed elementwise.}
+\item{annotations}{A vector; indexed elementwise.}
 \item{sources}{Defaults to \code{NULL}.}
 \item{min_support}{Defaults to \code{1}.}
 }
 \description{
-Part of the funcal_native implementation; see the file header for the source it follows.
+A step of the funcal_native implementation. Called by \code{morie_funcal}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

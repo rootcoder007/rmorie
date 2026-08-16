@@ -8,8 +8,8 @@
 .morie_w4c_model_parallel(sizes, n_stages)
 }
 \arguments{
-\item{sizes}{See Usage.}
-\item{n_stages}{See Usage.}
+\item{sizes}{A vector; its length is taken and its elements indexed.}
+\item{n_stages}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{
 minimising the maximum device load (prefix-sum greedy assignment).

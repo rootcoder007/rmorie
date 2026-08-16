@@ -8,14 +8,14 @@
 morie_prphet_piecewise_trend(t, k.rate, m.off, deltas, cps)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{k.rate}{See Usage.}
-\item{m.off}{See Usage.}
-\item{deltas}{See Usage.}
-\item{cps}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{k.rate}{Numeric; combined arithmetically in the body.}
+\item{m.off}{Numeric; combined arithmetically in the body.}
+\item{deltas}{Numeric; combined arithmetically in the body.}
+\item{cps}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the prphet_native implementation; see the file header for the source it follows.
+A step of the prphet_native implementation. Called by \code{.prnFil_simulate_future_trend}, \code{morie_prphet_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

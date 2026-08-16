@@ -14,7 +14,7 @@
 \item{scale}{Defaults to \code{1}.}
 }
 \description{
-Part of the samseg_native implementation; see the file header for the source it follows.
+A step of the samseg_native implementation. Called by \code{encode_box_prompt}, \code{encode_point_prompt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{detrend}{Defaults to \code{TRUE}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{detrend}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{CadSpec}, \code{EggFeat} and 7 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{freqs}, \code{power}.

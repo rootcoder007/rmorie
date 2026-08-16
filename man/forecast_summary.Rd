@@ -8,12 +8,12 @@
 forecast_summary(token_probs, bins, quantiles = c(0.1, 0.5, 0.9))
 }
 \arguments{
-\item{token_probs}{See Usage.}
-\item{bins}{See Usage.}
+\item{token_probs}{Passed to \code{.chronos_vec}.}
+\item{bins}{A list; the body reads \code{$centers} from it.}
 \item{quantiles}{Defaults to \code{c(0.1, 0.5, 0.9)}.}
 }
 \description{
-Part of the chronos_native implementation; see the file header for the source it follows.
+A step of the chronos_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{quantiles}, \code{mode}, \code{note}.

@@ -8,15 +8,15 @@
 nbeats_block(window, horizon, kind = "generic", degree = 2, harmonics = 3, ridge = 1e-08)
 }
 \arguments{
-\item{window}{See Usage.}
+\item{window}{A vector; its length is taken.}
 \item{horizon}{See Usage.}
-\item{kind}{Defaults to \code{"generic"}.}
+\item{kind}{One of \code{"generic"}, \code{"seasonality"}, \code{"trend"}. Defaults to \code{"generic"}.}
 \item{degree}{Defaults to \code{2}.}
 \item{harmonics}{Defaults to \code{3}.}
 \item{ridge}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the nbeats_native implementation; see the file header for the source it follows.
+A step of the nbeats_native implementation. Called by \code{nbeats_stack}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{backcast}, \code{forecast}, \code{theta}.

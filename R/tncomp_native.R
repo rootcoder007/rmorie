@@ -43,10 +43,11 @@ OBJECTIVES <- c("maxmin", "maxsum")
 
 #' .tncomp_fingerprint
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tncomp_fingerprint <- function(x) {
@@ -68,11 +69,12 @@ OBJECTIVES <- c("maxmin", "maxsum")
 
 #' .tncomp_tanimoto
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. Called by \code{distance_matrix}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f1 See Usage.
-#' @param f2 See Usage.
+#' @param f1 A vector; its length is taken.
+#' @param f2 A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .tncomp_tanimoto <- function(f1, f2) {
@@ -87,7 +89,8 @@ OBJECTIVES <- c("maxmin", "maxsum")
 
 #' distance_matrix
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. Called by \code{.tncomp_select}, \code{diversity}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fps See Usage.
@@ -110,10 +113,11 @@ distance_matrix <- function(fps) {
 
 #' .tncomp_seed
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. Called by \code{.tncomp_select}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
+#' @param D A matrix; passed to \code{nrow}.
 #' @param seed See Usage.
 #' @return The value of \code{which.max}.
 #' @export
@@ -132,13 +136,14 @@ distance_matrix <- function(fps) {
 
 #' .tncomp_select
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. Called by \code{maxmin_selection}, \code{maxsum_selection}, \code{morie_tncomp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fps See Usage.
 #' @param k See Usage.
-#' @param objective See Usage.
-#' @param seed Defaults to \code{NULL}.
+#' @param objective Compared against \code{"maxmin"}.
+#' @param seed Passed to \code{.tncomp_seed}.
 #' @param D Defaults to \code{NULL}.
 #' @return A list with \code{chosen}, \code{M}.
 #' @export
@@ -172,12 +177,13 @@ distance_matrix <- function(fps) {
 
 #' maxmin_selection
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fps See Usage.
-#' @param k See Usage.
-#' @param seed Defaults to \code{NULL}.
+#' @param fps Passed to \code{.tncomp_select}.
+#' @param k Passed to \code{.tncomp_select}.
+#' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{$}.
 #' @export
 maxmin_selection <- function(fps, k, seed = NULL) {
@@ -186,12 +192,13 @@ maxmin_selection <- function(fps, k, seed = NULL) {
 
 #' maxsum_selection
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fps See Usage.
-#' @param k See Usage.
-#' @param seed Defaults to \code{NULL}.
+#' @param fps Passed to \code{.tncomp_select}.
+#' @param k Passed to \code{.tncomp_select}.
+#' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{$}.
 #' @export
 maxsum_selection <- function(fps, k, seed = NULL) {
@@ -200,7 +207,8 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 
 #' diversity
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. Called by \code{morie_tncomp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fps See Usage.
@@ -234,13 +242,14 @@ diversity <- function(fps, subset, D = NULL) {
 
 #' morie_tncomp
 #'
-#' Part of the tncomp_native implementation; see the file header for the
+#' A step of the tncomp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fps See Usage.
-#' @param k See Usage.
-#' @param objective Defaults to \code{"maxmin"}.
-#' @param seed Defaults to \code{NULL}.
+#' @param fps Passed to \code{.tncomp_select}.
+#' @param k Passed to \code{.tncomp_select}.
+#' @param objective Passed to \code{.tncomp_select}. Defaults to \code{"maxmin"}.
+#' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_tncomp <- function(fps, k, objective = "maxmin", seed = NULL) {

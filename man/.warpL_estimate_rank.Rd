@@ -12,7 +12,7 @@
 \item{n_labels}{See Usage.}
 }
 \description{
-Part of the warpL_native implementation; see the file header for the source it follows.
+A step of the warpL_native implementation. Called by \code{.warpL_sample_violation}, \code{morie_warpL_estimate_rank}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{as.integer}.

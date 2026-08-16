@@ -3,15 +3,15 @@
 % the formals.
 \name{.tipsne_draw_beta}
 \alias{.tipsne_draw_beta}
-\title{Beta* ~ N(betahat, sigma2 (X\\\'X)^-1) via the Cholesky of the}
+\title{Beta* ~ N(betahat, sigma2 (X\\'X)^-1) via the Cholesky of the}
 \usage{
 .tipsne_draw_beta(e, beta, xtx_inv, sigma2_draw)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{beta}{See Usage.}
-\item{xtx_inv}{See Usage.}
-\item{sigma2_draw}{See Usage.}
+\item{e}{Passed to \code{.ghc_norm}.}
+\item{beta}{A vector; its length is taken and its elements indexed.}
+\item{xtx_inv}{Numeric; combined arithmetically in the body.}
+\item{sigma2_draw}{Numeric; combined arithmetically in the body.}
 }
 \description{
 covariance The draw is coordinate by coordinate so the stream position matches the Python arm term for term.

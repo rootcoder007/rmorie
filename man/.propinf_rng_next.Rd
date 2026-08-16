@@ -8,10 +8,10 @@
 .propinf_rng_next(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{A list; the body reads \code{$st} from it.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_normal}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

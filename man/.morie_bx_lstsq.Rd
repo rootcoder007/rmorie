@@ -8,12 +8,12 @@
 .morie_bx_lstsq(A, y, ridge = 1e-10)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{A}{A matrix; passed to \code{t}.}
+\item{y}{Passed to \code{.morie_bx_mv}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp}, \code{Lstm}, \code{Rbfn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_bx_solve}.

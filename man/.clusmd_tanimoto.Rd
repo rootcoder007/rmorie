@@ -8,8 +8,8 @@
 .clusmd_tanimoto(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{.clusmd_fp}.}
+\item{b}{Passed to \code{.clusmd_fp}.}
 }
 \description{
 c / (a + b - c), guarding the all-zero case like sasimi._guard.
@@ -20,7 +20,7 @@ A numeric value.
 \references{
 ----------
 Butina, D. (1999) "Unsupervised data base clustering based on
-Daylight\\'s fingerprint and Tanimoto similarity: a fast and automated
+Daylight\'s fingerprint and Tanimoto similarity: a fast and automated
 way to cluster small and large data sets", *Journal of Chemical
 Information and Computer Sciences* 39(4), 747-750,
 doi:10.1021/ci9803381. The neighbour-count ordering, the exclusion

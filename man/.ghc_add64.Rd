@@ -8,11 +8,11 @@
 .ghc_add64(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A list; the body reads \code{$hi}, \code{$lo} from it.}
+\item{b}{A list; the body reads \code{$hi}, \code{$lo} from it.}
 }
 \description{
-Part of the helpers_ghc_rng implementation; see the file header for the source it follows.
+A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}, \code{.survrsf_rng}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{hi}, \code{lo}.

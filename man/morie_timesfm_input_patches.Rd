@@ -13,7 +13,7 @@ morie_timesfm_input_patches(x, patch_len, pad_value = 0)
 \item{pad_value}{Defaults to \code{0}.}
 }
 \description{
-Part of the timesfm_native implementation; see the file header for the source it follows.
+A step of the timesfm_native implementation. Called by \code{morie_timesfm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{n_padded}, \code{L}, \code{note}.

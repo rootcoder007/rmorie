@@ -8,11 +8,11 @@
 .morie_wsm_lcg_u(count, seed = 13)
 }
 \arguments{
-\item{count}{See Usage.}
+\item{count}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{Defaults to \code{13}.}
 }
 \description{
-Part of the wasserman_native implementation; see the file header for the source it follows.
+A step of the wasserman_native implementation. Called by \code{.morie_wsm_boot_reps}, \code{morie_wasserman_gibbs_sampler}, \code{morie_wasserman_mcmc_metropolis} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

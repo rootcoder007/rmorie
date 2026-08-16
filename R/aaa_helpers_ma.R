@@ -11,9 +11,9 @@
 #' covariance -- correct when the weights really are inverse variances,
 #' which is the whole premise of inverse-variance meta-analysis.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{cov}, \code{A}.
 #' @export
 .ma_wls <- function(X, y, w) {
@@ -36,7 +36,7 @@
 #' t2 against t1 contributes +1 in the column of t2 and -1 in that of
 #' t1.
 #'
-#' @param design See Usage.
+#' @param design A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{X}, \code{treats}, \code{T}.
 #' @export
 .ma_net_design <- function(design) {

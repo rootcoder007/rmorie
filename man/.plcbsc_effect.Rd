@@ -8,13 +8,13 @@
 .plcbsc_effect(gaps, t0, statistic, pre_gaps = NULL)
 }
 \arguments{
-\item{gaps}{See Usage.}
-\item{t0}{See Usage.}
-\item{statistic}{See Usage.}
+\item{gaps}{A vector; its length is taken and its elements indexed.}
+\item{t0}{A count; the body uses it as \code{seq_len(...)}.}
+\item{statistic}{Compared against \code{"effect"}.}
 \item{pre_gaps}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the plcbsc_native implementation; see the file header for the source it follows.
+A step of the plcbsc_native implementation. Called by \code{morie_plcbsc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

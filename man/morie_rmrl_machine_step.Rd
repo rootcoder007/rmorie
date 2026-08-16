@@ -8,12 +8,12 @@
 morie_rmrl_machine_step(machine, u, sigma)
 }
 \arguments{
-\item{machine}{See Usage.}
+\item{machine}{A list; the body reads \code{$edges}, \code{$terminal} from it.}
 \item{u}{See Usage.}
 \item{sigma}{See Usage.}
 }
 \description{
-Part of the rmrl_native implementation; see the file header for the source it follows.
+A step of the rmrl_native implementation. Called by \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}, \code{morie_rmrl_reward_machine_run}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{u}, \code{reward}.

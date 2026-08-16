@@ -8,11 +8,11 @@
 .nashq_mat(M, name)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; passed to \code{nrow}.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}, \code{stage_game_type}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{M}, as built in the body.

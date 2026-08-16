@@ -69,7 +69,8 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 
 #' .morie_k05_item_params
 #'
-#' Part of the k05_tranche2 implementation; see the file header for the
+#' A step of the k05_tranche2 implementation. Called by \code{morie_tcc}, \code{morie_test_information}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -99,15 +100,16 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 
 #' Branch on the sign so exp never overflows for large |z|
 #'
-#' Part of the k05_tranche2 implementation; see the file header for the
+#' A step of the k05_tranche2 implementation. Called by \code{.morie_k05_info}, \code{morie_tcc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
-#' @param u See Usage.
-#' @param D Defaults to \code{1}.
+#' @param theta Numeric; combined arithmetically in the body.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param c Numeric; combined arithmetically in the body.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param D Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .morie_k05_prob <- function(theta, a, b, c, u, D = 1) {
@@ -123,12 +125,12 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 #' the 4PL P and using P-c = (u-c)P*, u-P = (u-c)Q* gives this form,
 #' which collapses to D^2 a^2 P Q when c = 0, u = 1.
 #'
-#' @param theta See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
-#' @param u See Usage.
-#' @param D Defaults to \code{1}.
+#' @param theta Passed to \code{.morie_k05_prob}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Passed to \code{.morie_k05_prob}.
+#' @param c Numeric; combined arithmetically in the body.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param D Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .morie_k05_info <- function(theta, a, b, c, u, D = 1) {
@@ -262,8 +264,8 @@ morie_lord_chisq <- function(b_R, b_F, V_R, V_F = NULL) {
 #' morie_cochran_q is an alias of it. See aaa_macn.R for the references
 #' and the derivation.
 #'
-#' @param yi See Usage.
-#' @param vi See Usage.
+#' @param yi Passed to \code{morie_ma_cochran_q}.
+#' @param vi Passed to \code{morie_ma_cochran_q}.
 #' @return The value of \code{morie_ma_cochran_q}.
 #' @export
 morie_cochran_q <- function(yi, vi) morie_ma_cochran_q(yi, vi)
@@ -328,13 +330,14 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 
 #' .morie_k05_schoenfeld
 #'
-#' Part of the k05_tranche2 implementation; see the file header for the
+#' A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param e See Usage.
-#' @param X See Usage.
-#' @param beta See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param e A vector; indexed elementwise.
+#' @param X A matrix; indexed by row and column.
+#' @param beta A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{times}, \code{res}, \code{var}.
 #' @export
 .morie_k05_schoenfeld <- function(t, e, X, beta) {
@@ -360,12 +363,13 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 
 #' .morie_k05_gtime
 #'
-#' Part of the k05_tranche2 implementation; see the file header for the
+#' A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param times See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
 #' @param e_times See Usage.
-#' @param how See Usage.
+#' @param how One of \code{"identity"}, \code{"log"}, \code{"rank"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_k05_gtime <- function(times, e_times, how) {

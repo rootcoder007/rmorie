@@ -9,15 +9,15 @@ morie_sv_dl_build_sv_graph(pairs, median, sd, label, orientation = c("+", "-"), 
 }
 \arguments{
 \item{pairs}{See Usage.}
-\item{median}{See Usage.}
-\item{sd}{See Usage.}
-\item{label}{See Usage.}
+\item{median}{Numeric; combined arithmetically in the body.}
+\item{sd}{Numeric; combined arithmetically in the body.}
+\item{label}{A vector; indexed elementwise.}
 \item{orientation}{Defaults to \code{c("+", "-")}.}
-\item{n_sd}{Defaults to \code{3}.}
+\item{n_sd}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 \item{window}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{nodes}, \code{edges}, \code{sizes}, \code{label}.

@@ -8,10 +8,10 @@
 .trimit_deff(w)
 }
 \arguments{
-\item{w}{See Usage.}
+\item{w}{A vector; its length is taken.}
 }
 \description{
-Part of the Trimit implementation; see the file header for the source it follows.
+A step of the Trimit implementation. Called by \code{Trimit}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

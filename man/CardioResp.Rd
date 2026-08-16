@@ -11,11 +11,11 @@ CardioResp(ecg_rate, resp, fs, band = c(0.15, 0.4), nperseg = NULL)
 \item{ecg_rate}{See Usage.}
 \item{resp}{See Usage.}
 \item{fs}{See Usage.}
-\item{band}{Defaults to \code{c(0.15, 0.4)}.}
+\item{band}{A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.}
 \item{nperseg}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_corr implementation; see the file header for the source it follows.
+A step of the rangayyan_corr implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{plv}, \code{mean_phase_difference}, \code{phase_difference}, \code{coherence_peak}, \code{coherence_mean}, \code{coherence}, \code{freqs}, \code{band}, \code{n}, \code{fs}, \code{method}.

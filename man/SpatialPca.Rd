@@ -3,14 +3,14 @@
 % the formals.
 \name{SpatialPca}
 \alias{SpatialPca}
-\title{MULTISPATI: diagonalise H = (1/n) X\\' ((W + W\\')/2) X on the centred,}
+\title{MULTISPATI: diagonalise H = (1/n) X\' ((W + W\')/2) X on the centred,}
 \usage{
 SpatialPca(x, w, naxes = 2L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{w}{See Usage.}
-\item{naxes}{Defaults to \code{2L}.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
+\item{w}{Passed to \code{.morie_spx_chkw}.}
+\item{naxes}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.}
 }
 \description{
 unit-variance X, so an axis is scored by SPATIAL covariance, not variance.  Eigenvalues may be NEGATIVE -- that is a local-contrast axis, which ordinary PCA cannot express -- and are returned signed. W is symmetrised first: a row-standardised W is ASYMMETRIC and a symmetric eigensolver would read one triangle only.  Dray, Said & Debias (2008).  NOT in Schabenberger & Gotway.

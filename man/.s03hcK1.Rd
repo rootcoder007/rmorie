@@ -8,12 +8,12 @@
 .s03hcK1(r, v, lam)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{v}{See Usage.}
-\item{lam}{See Usage.}
+\item{r}{Passed to \code{.s03hcU}.}
+\item{v}{Passed to \code{.s03hcU}.}
+\item{lam}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hcoreg implementation; see the file header for the source it follows.
+A step of the hcoreg implementation. Called by \code{Hcoreg}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

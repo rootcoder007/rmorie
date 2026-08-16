@@ -8,12 +8,12 @@
 .tlseqsl_loss(kind, y, p)
 }
 \arguments{
-\item{kind}{See Usage.}
-\item{y}{See Usage.}
-\item{p}{See Usage.}
+\item{kind}{Compared against \code{"squared"}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the tlseqsl_native implementation; see the file header for the source it follows.
+A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_risk}, \code{morie_tlseqsl_ensemble_super_learner}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

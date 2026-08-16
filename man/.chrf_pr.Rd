@@ -8,11 +8,11 @@
 .chrf_pr(hyp_grams, ref_grams)
 }
 \arguments{
-\item{hyp_grams}{See Usage.}
-\item{ref_grams}{See Usage.}
+\item{hyp_grams}{A vector; its length is taken.}
+\item{ref_grams}{A vector; its length is taken.}
 }
 \description{
-Part of the chrF_native implementation; see the file header for the source it follows.
+A step of the chrF_native implementation. Called by \code{chrf_score}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

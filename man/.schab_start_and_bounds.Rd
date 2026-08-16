@@ -8,8 +8,8 @@
 .schab_start_and_bounds(lags, ghat)
 }
 \arguments{
-\item{lags}{See Usage.}
-\item{ghat}{See Usage.}
+\item{lags}{A vector; indexed elementwise.}
+\item{ghat}{A vector; indexed elementwise.}
 }
 \description{
 partial sill are variances so they are non-negative, and a range is a distance so it is strictly positive. Nothing narrower -- a fit that cannot reach sill = 0 cannot report "no spatial structure", and one that cannot reach nugget = 0 cannot report a continuous field.

@@ -8,11 +8,11 @@
 .morie_bx_mv(A, v)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{v}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_lstsq}, \code{.morie_bx_omp}, \code{BmiDec} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

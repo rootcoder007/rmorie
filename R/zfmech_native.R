@@ -27,7 +27,8 @@
 
 #' .zfmech_check_rho
 #'
-#' Part of the zfmech_native implementation; see the file header for the
+#' A step of the zfmech_native implementation. Called by \code{group_privacy}, \code{postprocessing}, \code{sigma_for_rho} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param rho See Usage.

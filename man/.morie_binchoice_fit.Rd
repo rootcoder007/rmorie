@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{link}{Defaults to \code{"probit"}.}
-\item{max_iter}{Defaults to \code{100L}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{link}{Compared against \code{"probit"}. Defaults to \code{"probit"}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{

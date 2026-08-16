@@ -22,7 +22,7 @@ morie_survival_deviance(time, event, X, beta)
 list with the deviance residuals and the martingale residuals they derive from.
 }
 \description{
-d_i = sign(M) sqrt(-2\link{M + delta log(delta - M)}), a symmetrizing transform of the martingale residuals: roughly normal when the model holds.
+d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing transform of the martingale residuals: roughly normal when the model holds.
 }
 \references{
 Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.

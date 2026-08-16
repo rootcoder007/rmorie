@@ -8,8 +8,8 @@
 HrvFreq(rr, fsr = 4, bands = "taskforce")
 }
 \arguments{
-\item{rr}{See Usage.}
-\item{fsr}{Defaults to \code{4}.}
+\item{rr}{A vector; its length is taken and its elements indexed.}
+\item{fsr}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
 \item{bands}{Defaults to \code{"taskforce"}.}
 }
 \description{

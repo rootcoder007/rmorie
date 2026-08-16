@@ -8,11 +8,11 @@
 .goldsc_ipow(x, k)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{k}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Not the language\\\'s power operator: R raises to an integer exponent by repeated squaring while Python calls the C library\\\'s pow, and the two disagree in the last bit. A potential that is about to be summed over thousands of contacts cannot afford to be a different function in the two arms.
+Not the language\\'s power operator: R raises to an integer exponent by repeated squaring while Python calls the C library\\'s pow, and the two disagree in the last bit. A potential that is about to be summed over thousands of contacts cannot afford to be a different function in the two arms.
 }
 \value{
 The value of \code{p}, as built in the body.

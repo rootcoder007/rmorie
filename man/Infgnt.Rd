@@ -31,7 +31,7 @@ the metric is 1/sigma^2 and for Bernoulli(theta) it is
 1/(theta(1 - theta)); both closed forms are what the tests check.
 }
 \details{
-Formula: g_ij(theta) = E\link{d_i log p d_j log p}.
+Formula: g_ij(theta) = E[d_i log p d_j log p].
 }
 \references{
 Amari (1985), Differential-Geometrical Methods in

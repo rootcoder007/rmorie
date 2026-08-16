@@ -18,7 +18,7 @@ egnn_layer(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 \item{C}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the egnnL_native implementation; see the file header for the source it follows.
+A step of the egnnL_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{run_egnn}.

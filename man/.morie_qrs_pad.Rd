@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{v}{See Usage.}
-\item{k}{See Usage.}
+\item{k}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{QrsDeriv}, \code{QrsDeriv1}, \code{QrsDeriv2} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

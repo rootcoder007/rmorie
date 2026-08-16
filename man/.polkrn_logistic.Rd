@@ -8,8 +8,8 @@
 .polkrn_logistic(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
 }
 \description{
 X: design matrix (with intercept), y: 0/1 vector.

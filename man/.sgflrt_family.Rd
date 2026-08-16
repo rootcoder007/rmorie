@@ -8,7 +8,7 @@
 .sgflrt_family(family, disp = 1)
 }
 \arguments{
-\item{family}{See Usage.}
+\item{family}{One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.}
 \item{disp}{Defaults to \code{1}.}
 }
 \description{

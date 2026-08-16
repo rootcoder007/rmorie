@@ -8,11 +8,11 @@
 .fgam_diff_penalty(n, order = 2L)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{order}{Defaults to \code{2L}.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
+\item{order}{Numeric; combined arithmetically in the body. Defaults to \code{2L}.}
 }
 \description{
-Part of the fgam_native implementation; see the file header for the source it follows.
+A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{crossprod}.

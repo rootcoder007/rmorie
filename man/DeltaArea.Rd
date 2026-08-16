@@ -8,8 +8,8 @@
 DeltaArea(t = NULL, values = NULL, width = NULL)
 }
 \arguments{
-\item{t}{Defaults to \code{NULL}.}
-\item{values}{Defaults to \code{NULL}.}
+\item{t}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.}
+\item{values}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.}
 \item{width}{Defaults to \code{NULL}.}
 }
 \description{

@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{x0}{See Usage.}
-\item{c_vec}{See Usage.}
-\item{F0}{See Usage.}
-\item{Fs}{See Usage.}
-\item{t}{See Usage.}
+\item{c_vec}{Passed to \code{.sdpwts_objective}.}
+\item{F0}{Passed to \code{.sdpwts_objective}.}
+\item{Fs}{Passed to \code{.sdpwts_objective}.}
+\item{t}{Passed to \code{.sdpwts_objective}.}
 \item{iters}{Defaults to \code{200}.}
 \item{tol}{Defaults to \code{1e-12}.}
-\item{h}{Defaults to \code{1e-06}.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }
 \description{
 backtracking line search
@@ -44,6 +44,6 @@ treatment, including the eigenvalue problems that reduce to SDP.
 Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
 Algorithms in Convex Programming*, SIAM,
 doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-the barrier method\\'s complexity claim hold.
+the barrier method\'s complexity claim hold.
 }
 \keyword{internal}

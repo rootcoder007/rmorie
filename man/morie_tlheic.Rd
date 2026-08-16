@@ -16,10 +16,10 @@ morie_tlheic(psi_of_P = NULL, basis = NULL, D = NULL, score = NULL, weights = NU
 \item{h}{Defaults to \code{1e-05}.}
 \item{tol}{Defaults to \code{1e-04}.}
 \item{ridge}{Defaults to \code{1e-08}.}
-\item{mode}{Defaults to \code{c("estimate", "verify", "grad", "deriv")}.}
+\item{mode}{One of \code{"deriv"}, \code{"grad"}, \code{"verify"}.}
 }
 \description{
-Part of the tlheic_native implementation; see the file header for the source it follows.
+A step of the tlheic_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{estimate_eic}.

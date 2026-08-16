@@ -8,10 +8,10 @@
 .to_words(bs)
 }
 \arguments{
-\item{bs}{See Usage.}
+\item{bs}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the secarg_native implementation; see the file header for the source it follows.
+A step of the secarg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

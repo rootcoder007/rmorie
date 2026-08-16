@@ -8,9 +8,9 @@
 .rsmahal2(X, mu, S)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{mu}{See Usage.}
-\item{S}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{mu}{A vector; its length is taken.}
+\item{S}{Passed to \code{.rslufactor}.}
 }
 \description{
 singular Part of the helpers_rouss implementation; see the file header for the source it follows.

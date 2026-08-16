@@ -8,11 +8,11 @@
 .morie_gr_probability_matrix(X, theta)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{theta}{See Usage.}
+\item{X}{Passed to \code{.morie_gr_score_matrix}.}
+\item{theta}{Passed to \code{.morie_gr_score_matrix}.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_gradient_matrix}, \code{morie_geron_softmax_cross_entropy_cost}, \code{morie_geron_softmax_probability}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{theta}, \code{probabilities}, \code{scores}.

@@ -11,7 +11,7 @@ PcgAr(x, fs, order = NULL, segment = NULL)
 \item{x}{See Usage.}
 \item{fs}{See Usage.}
 \item{order}{Defaults to \code{NULL}.}
-\item{segment}{Defaults to \code{NULL}.}
+\item{segment}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
 of S1 and S2.  A pole p gives a resonance at (fs/2pi) Arg(p) with bandwidth -(fs/pi) log|p|.  Only the upper half plane is reported: for a real signal the poles are conjugate pairs, and listing both halves would double-count every resonance.

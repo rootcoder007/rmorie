@@ -8,10 +8,10 @@
 average_of_valid_masks(masks)
 }
 \arguments{
-\item{masks}{See Usage.}
+\item{masks}{A vector; its length is taken.}
 }
 \description{
-Part of the sammkr_native implementation; see the file header for the source it follows.
+A step of the sammkr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mask}, \code{ambiguous_fraction}, \code{n_averaged}, \code{note}.

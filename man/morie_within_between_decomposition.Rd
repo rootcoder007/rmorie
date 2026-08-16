@@ -8,10 +8,10 @@
 morie_within_between_decomposition(P)
 }
 \arguments{
-\item{P}{See Usage.}
+\item{P}{Passed to \code{.tmlcll_mat}.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. Called by \code{morie_ri_clpm_coefficients}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{person_means}, \code{within}, \code{between_variance}, \code{within_variance}.

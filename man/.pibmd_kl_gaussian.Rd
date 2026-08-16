@@ -8,13 +8,13 @@
 .pibmd_kl_gaussian(mq, sq2, mp, sp2)
 }
 \arguments{
-\item{mq}{See Usage.}
-\item{sq2}{See Usage.}
-\item{mp}{See Usage.}
-\item{sp2}{See Usage.}
+\item{mq}{Numeric; combined arithmetically in the body.}
+\item{sq2}{Numeric; passed to \code{max}.}
+\item{mp}{Numeric; combined arithmetically in the body.}
+\item{sp2}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the pibmd_native implementation; see the file header for the source it follows.
+A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

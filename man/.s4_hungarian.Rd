@@ -8,7 +8,7 @@
 .s4_hungarian(cost)
 }
 \arguments{
-\item{cost}{See Usage.}
+\item{cost}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 Exact, # O(n^3). Ties broken by the first strictly improving index so both arms # walk the same path. Returns 0-based column for each row.

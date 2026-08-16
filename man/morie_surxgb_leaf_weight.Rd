@@ -9,11 +9,11 @@ morie_surxgb_leaf_weight(G, H, lam = 1)
 }
 \arguments{
 \item{G}{See Usage.}
-\item{H}{See Usage.}
-\item{lam}{Defaults to \code{1}.}
+\item{H}{Numeric; combined arithmetically in the body.}
+\item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{.surxgb_build}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

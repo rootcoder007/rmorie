@@ -10,7 +10,7 @@ LpcSynth(a, excitation, gain = 1, initial = NULL)
 \arguments{
 \item{a}{See Usage.}
 \item{excitation}{See Usage.}
-\item{gain}{Defaults to \code{1}.}
+\item{gain}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{initial}{Defaults to \code{NULL}.}
 }
 \description{

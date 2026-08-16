@@ -43,7 +43,8 @@
 
 #' .wenge_key
 #'
-#' Part of the wenge_native implementation; see the file header for the
+#' A step of the wenge_native implementation. Called by \code{.wenge_saturated_models}, \code{.wenge_saturated_outcome}, \code{morie_wenge_mediation_functional}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param row See Usage.
@@ -55,12 +56,13 @@
 
 #' Nonparametric cell estimates of f(E|X) and f(M|E,X)
 #'
-#' Part of the wenge_native implementation; see the file header for the
+#' A step of the wenge_native implementation. Called by \code{morie_wenge_mediation_functional}, \code{morie_wenge_weight_based_mediation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ev See Usage.
-#' @param Mm See Usage.
-#' @param Xm See Usage.
+#' @param ev A vector; its length is taken and its elements indexed.
+#' @param Mm A matrix; indexed by row and column.
+#' @param Xm A matrix; indexed by row and column.
 #' @return A list with \code{fe1}, \code{fm}.
 #' @export
 .wenge_saturated_models <- function(ev, Mm, Xm) {
@@ -104,13 +106,14 @@
 
 #' Nonparametric E(Y | E, M, X) as a cell mean
 #'
-#' Part of the wenge_native implementation; see the file header for the
+#' A step of the wenge_native implementation. Called by \code{morie_wenge_mediation_functional}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yv See Usage.
-#' @param ev See Usage.
-#' @param Mm See Usage.
-#' @param Xm See Usage.
+#' @param yv A vector; its length is taken and its elements indexed.
+#' @param ev A vector; indexed elementwise.
+#' @param Mm A matrix; indexed by row and column.
+#' @param Xm A matrix; indexed by row and column.
 #' @return The value of \code{function}.
 #' @export
 .wenge_saturated_outcome <- function(yv, ev, Mm, Xm) {
@@ -135,14 +138,15 @@
 
 #' Logistic f(E|X), Gaussian f(M|E,X), linear E(Y|E,M,X)
 #'
-#' Part of the wenge_native implementation; see the file header for the
+#' A step of the wenge_native implementation. Called by \code{morie_wenge_mediation_functional}, \code{morie_wenge_weight_based_mediation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yv See Usage.
-#' @param ev See Usage.
-#' @param Mm See Usage.
-#' @param Xm See Usage.
-#' @param ridge See Usage.
+#' @param yv A vector; its length is taken.
+#' @param ev Numeric; combined arithmetically in the body.
+#' @param Mm A matrix; indexed by row and column.
+#' @param Xm A matrix; indexed by row and column.
+#' @param ridge Passed to \code{.s03logit}.
 #' @return A list with \code{fe1}, \code{fm}, \code{ey}.
 #' @export
 .wenge_parametric_models <- function(yv, ev, Mm, Xm, ridge) {
@@ -181,16 +185,17 @@
 
 #' morie_wenge_mediation_functional
 #'
-#' Part of the wenge_native implementation; see the file header for the
+#' A step of the wenge_native implementation. Called by \code{morie_wenge_weight_based_mediation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param E See Usage.
-#' @param M See Usage.
-#' @param X See Usage.
-#' @param strategy Defaults to \code{"em"}.
-#' @param saturated Defaults to \code{TRUE}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param Y Passed to \code{.s03vec}.
+#' @param E Passed to \code{.s03vec}.
+#' @param M Optional; may be \code{NULL}. Passed to \code{.s03mat}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.s03mat}.
+#' @param strategy One of \code{"all"}, \code{"em"}, \code{"ye"}, \code{"ym"}. Defaults to \code{"em"}.
+#' @param saturated A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param ridge Passed to \code{.wenge_parametric_models}. Defaults to \code{1e-08}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_wenge_mediation_functional <- function(Y, E, M, X, strategy="em",
@@ -294,15 +299,16 @@ morie_wenge_mediation_functional <- function(Y, E, M, X, strategy="em",
 
 #' morie_wenge_weight_based_mediation
 #'
-#' Part of the wenge_native implementation; see the file header for the
+#' A step of the wenge_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param M See Usage.
-#' @param C See Usage.
-#' @param Y See Usage.
-#' @param strategy Defaults to \code{"em"}.
-#' @param saturated Defaults to \code{TRUE}.
+#' @param X Passed to \code{.s03vec}.
+#' @param M Optional; may be \code{NULL}. Passed to \code{morie_wenge_mediation_functional}.
+#' @param C Optional; may be \code{NULL}. Passed to \code{morie_wenge_mediation_functional}.
+#' @param Y Passed to \code{.s03vec}.
+#' @param strategy Passed to \code{morie_wenge_mediation_functional}. Defaults to \code{"em"}.
+#' @param saturated A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy="em",
@@ -346,7 +352,8 @@ morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy="em",
 
 #' morie_wenge_cheatsheet
 #'
-#' Part of the wenge_native implementation; see the file header for the
+#' A step of the wenge_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

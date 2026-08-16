@@ -61,7 +61,8 @@
 
 #' .dqnv_clip_reward
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param r See Usage.
@@ -75,12 +76,13 @@
 
 #' .dqnv_td_target
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param r See Usage.
 #' @param s2 See Usage.
-#' @param Q_target See Usage.
+#' @param Q_target A vector; indexed elementwise.
 #' @param gamma Defaults to \code{0.99}.
 #' @param done Defaults to \code{FALSE}.
 #' @return A numeric value.
@@ -95,12 +97,13 @@
 
 #' .dqnv_bellman_residual
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
-#' @param P See Usage.
-#' @param R See Usage.
+#' @param Q A vector; its length is taken and its elements indexed.
+#' @param P A vector; indexed elementwise.
+#' @param R A vector; indexed elementwise.
 #' @param gamma Defaults to \code{0.99}.
 #' @return The value of \code{worst}, as built in the body.
 #' @export
@@ -128,7 +131,8 @@
 
 #' .dqnv_replay_buffer_new
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param capacity See Usage.
@@ -142,10 +146,11 @@
 
 #' .dqnv_replay_buffer_add
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param buf See Usage.
+#' @param buf A list; the body reads \code{$capacity}, \code{$data} from it.
 #' @param s See Usage.
 #' @param a See Usage.
 #' @param r See Usage.
@@ -165,12 +170,13 @@
 
 #' .dqnv_replay_buffer_sample
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param buf See Usage.
+#' @param buf A list; the body reads \code{$data} from it.
 #' @param n See Usage.
-#' @param rng_state See Usage.
+#' @param rng_state Passed to \code{.ghc_unif}.
 #' @return A list with \code{state}, \code{samples}.
 #' @export
 .dqnv_replay_buffer_sample <- function(buf, n, rng_state) {
@@ -190,10 +196,11 @@
 
 #' .dqnv_replay_buffer_len
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param buf See Usage.
+#' @param buf A list; the body reads \code{$data} from it.
 #' @return The value of \code{length}.
 #' @export
 .dqnv_replay_buffer_len <- function(buf) {
@@ -202,22 +209,23 @@
 
 #' morie_dqnv
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P See Usage.
-#' @param R See Usage.
+#' @param P A vector; indexed elementwise.
+#' @param R A vector; indexed elementwise.
 #' @param n_states See Usage.
 #' @param n_actions See Usage.
-#' @param gamma Defaults to \code{0.99}.
+#' @param gamma Passed to \code{.dqnv_td_target}. Defaults to \code{0.99}.
 #' @param alpha Defaults to \code{0.1}.
 #' @param steps Defaults to \code{20000}.
 #' @param C Defaults to \code{100}.
-#' @param buffer_size Defaults to \code{1000}.
-#' @param batch Defaults to \code{16}.
-#' @param seed Defaults to \code{0}.
-#' @param use_replay Defaults to \code{TRUE}.
-#' @param use_target Defaults to \code{TRUE}.
+#' @param buffer_size Passed to \code{.dqnv_replay_buffer_new}. Defaults to \code{1000}.
+#' @param batch Passed to \code{.dqnv_replay_buffer_sample}. Defaults to \code{16}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param use_replay A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param use_target A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{Q}, \code{residual_history}, \code{final_residual}, \code{greedy_policy}, \code{used_replay}, \code{used_target_network}, \code{C}, \code{method}.
 #' @export
 morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
@@ -319,7 +327,8 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
 
 #' .dqnv_cheatsheet
 #'
-#' Part of the dqnv_native implementation; see the file header for the
+#' A step of the dqnv_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

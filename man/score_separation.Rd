@@ -8,11 +8,11 @@
 score_separation(normal_scores, anomalous_scores)
 }
 \arguments{
-\item{normal_scores}{See Usage.}
-\item{anomalous_scores}{See Usage.}
+\item{normal_scores}{Passed to \code{.gan_an_as_num}.}
+\item{anomalous_scores}{Passed to \code{.gan_an_as_num}.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{auc}, \code{mean_normal}, \code{mean_anomalous}, \code{separated}, \code{note}.

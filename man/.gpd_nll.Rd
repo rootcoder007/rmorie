@@ -8,12 +8,12 @@
 .gpd_nll(y, sigma, xi)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{sigma}{See Usage.}
-\item{xi}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{sigma}{Numeric; passed to \code{log}.}
+\item{xi}{Numeric; passed to \code{abs}.}
 }
 \description{
-Part of the evpot implementation; see the file header for the source it follows.
+A step of the evpot implementation. Called by \code{Evpot}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

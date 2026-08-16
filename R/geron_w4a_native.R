@@ -18,10 +18,11 @@
 
 #' .w4a_need
 #'
-#' Part of the geron_w4a_native implementation; see the file header for
+#' A step of the geron_w4a_native implementation. Called by \code{morie_beta_schedule_values}, \code{morie_check_buffer}, \code{morie_dueling_q} and 35 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param cond See Usage.
+#' @param cond A flag; the body branches on it.
 #' @param msg See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -29,10 +30,11 @@
 
 #' .w4a_lcg_u
 #'
-#' Part of the geron_w4a_native implementation; see the file header for
+#' A step of the geron_w4a_native implementation. Called by \code{morie_geron_dataloader}, \code{morie_geron_dropout_alt}, \code{morie_lcg_normal}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.
 #' @return The value of \code{u}, as built in the body.
 #' @export

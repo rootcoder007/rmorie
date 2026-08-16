@@ -3,12 +3,12 @@
 % the formals.
 \name{.tipsne_chol}
 \alias{.tipsne_chol}
-\title{Cholesky factor L with A = L L\\\', lower triangular. Explicit rather}
+\title{Cholesky factor L with A = L L\\', lower triangular. Explicit rather}
 \usage{
 .tipsne_chol(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{A matrix; indexed by row and column.}
 }
 \description{
 than chol() so the Python arm can match it element by element.

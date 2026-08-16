@@ -8,7 +8,7 @@
 .morie_qrs_ptbp(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 coefficients are integers tied to fs = 200 Hz (book, Section 4.3.2) and are NOT rescaled here.

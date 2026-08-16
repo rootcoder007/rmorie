@@ -8,10 +8,10 @@
 .ecfp_bonds(adjacency)
 }
 \arguments{
-\item{adjacency}{See Usage.}
+\item{adjacency}{Passed to \code{.t1_mat}.}
 }
 \description{
-Part of the ecfp4 implementation; see the file header for the source it follows.
+A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{a}, \code{i}, \code{j}, \code{o}.

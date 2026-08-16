@@ -12,11 +12,11 @@ morie_sacrb_bleu(candidates, references, max_n = 4L, weights = NULL, tokenizer =
 \item{references}{See Usage.}
 \item{max_n}{Defaults to \code{4L}.}
 \item{weights}{Defaults to \code{NULL}.}
-\item{tokenizer}{Defaults to \code{"13a"}.}
-\item{lowercase}{Defaults to \code{FALSE}.}
+\item{tokenizer}{Passed to \code{.sacrb_tok}. Defaults to \code{"13a"}.}
+\item{lowercase}{Passed to \code{.sacrb_tok}. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the sacrb_native implementation; see the file header for the source it follows.
+A step of the sacrb_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{bleu}, \code{score}, \code{precisions}, \code{bp}, \code{candidate_length}, \code{reference_length}, \code{ratio}, \code{tokenizer}, \code{lowercase}, \code{max_n}, \code{signature}, \code{method}.

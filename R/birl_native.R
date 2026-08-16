@@ -7,10 +7,11 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 
 #' .mdp
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{birl}, \code{policy_iteration}, \code{policy_values} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
+#' @param T A vector; its length is taken and its elements indexed.
 #' @param gamma See Usage.
 #' @return A list with \code{nS}, \code{nA}.
 #' @export
@@ -37,10 +38,11 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 
 #' .solve
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{policy_values}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @param b See Usage.
 #' @return A numeric value.
 #' @export
@@ -68,13 +70,14 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 
 #' policy_values
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{policy_iteration}, \code{policy_walk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param R See Usage.
-#' @param gamma See Usage.
-#' @param policy See Usage.
+#' @param T A vector; indexed elementwise.
+#' @param R A vector; its length is taken.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param policy A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.solve}.
 #' @export
 policy_values <- function(T, R, gamma, policy) {
@@ -90,13 +93,14 @@ policy_values <- function(T, R, gamma, policy) {
 
 #' q_values
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{policy_iteration}, \code{policy_walk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param R See Usage.
-#' @param gamma See Usage.
-#' @param V See Usage.
+#' @param T A vector; indexed elementwise.
+#' @param R A vector; indexed elementwise.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{Q}, as built in the body.
 #' @export
 q_values <- function(T, R, gamma, V) {
@@ -110,14 +114,15 @@ q_values <- function(T, R, gamma, V) {
 
 #' policy_iteration
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{birl}, \code{policy_walk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param R See Usage.
-#' @param gamma See Usage.
+#' @param T Passed to \code{.mdp}.
+#' @param R A vector; its length is taken.
+#' @param gamma Passed to \code{.mdp}.
 #' @param policy Defaults to \code{NULL}.
-#' @param max_iter Defaults to \code{200}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
 #' @export
 policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
@@ -142,12 +147,13 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 
 #' .birl_log_likelihood
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{policy_walk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
-#' @param observations See Usage.
-#' @param alpha Defaults to \code{1}.
+#' @param Q A matrix; indexed by row and column.
+#' @param observations A vector; its length is taken.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
 .birl_log_likelihood <- function(Q, observations, alpha = 1) {
@@ -167,15 +173,16 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 
 #' log_prior
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{.abcgp.alpha_terms}, \code{.abcgp.mw_sampler}, \code{abcnnt} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R See Usage.
-#' @param prior Defaults to \code{"uniform"}.
-#' @param scale Defaults to \code{1}.
-#' @param r_max Defaults to \code{NULL}.
-#' @param J Defaults to \code{0.1}.
-#' @param H Defaults to \code{0}.
+#' @param R A vector; its length is taken and its elements indexed.
+#' @param prior One of \code{"gaussian"}, \code{"laplacian"}, \code{"uniform"}. Defaults to \code{"uniform"}.
+#' @param scale Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param r_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param J Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param H Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param neighbours Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -198,7 +205,8 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 
 #' .rng
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{policy_walk}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed See Usage.
@@ -215,22 +223,23 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 
 #' policy_walk
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. Called by \code{birl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param observations See Usage.
-#' @param gamma See Usage.
-#' @param n_iter Defaults to \code{1000}.
-#' @param delta Defaults to \code{0.25}.
-#' @param alpha Defaults to \code{1}.
+#' @param T Passed to \code{.mdp}.
+#' @param observations Passed to \code{.birl_log_likelihood}.
+#' @param gamma Passed to \code{.mdp}.
+#' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
+#' @param delta Numeric; combined arithmetically in the body. Defaults to \code{0.25}.
+#' @param alpha Passed to \code{.birl_log_likelihood}. Defaults to \code{1}.
 #' @param prior Defaults to \code{"uniform"}.
 #' @param scale Defaults to \code{1}.
-#' @param r_max Defaults to \code{1}.
+#' @param r_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param J Defaults to \code{0.1}.
 #' @param H Defaults to \code{0}.
-#' @param burn Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param burn Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param R0 Defaults to \code{NULL}.
 #' @return A list with \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{final_policy}.
 #' @export
@@ -297,12 +306,13 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 
 #' birl
 #'
-#' Part of the birl_native implementation; see the file header for the
+#' A step of the birl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
+#' @param T Passed to \code{.mdp}.
 #' @param observations See Usage.
-#' @param gamma Defaults to \code{0.9}.
+#' @param gamma Passed to \code{.mdp}. Defaults to \code{0.9}.
 #' @param n_iter Defaults to \code{1000}.
 #' @param delta Defaults to \code{0.25}.
 #' @param alpha Defaults to \code{1}.

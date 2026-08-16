@@ -17,11 +17,12 @@
 
 #' .morie_tcls_dist
 #'
-#' Part of the tcls_native implementation; see the file header for the
+#' A step of the tcls_native implementation. Called by \code{morie_tcls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param labels See Usage.
-#' @param domain See Usage.
+#' @param labels A vector; its length is taken.
+#' @param domain A vector; its length is taken.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .morie_tcls_dist <- function(labels, domain) {
@@ -40,22 +41,24 @@
 
 #' .morie_tcls_equal
 #'
-#' Part of the tcls_native implementation; see the file header for the
+#' A step of the tcls_native implementation. Called by \code{morie_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param q Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_tcls_equal <- function(p, q) 0.5 * sum(abs(p - q))
 
 #' .morie_tcls_ordered
 #'
-#' Part of the tcls_native implementation; see the file header for the
+#' A step of the tcls_native implementation. Called by \code{morie_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p A vector; its length is taken and its elements indexed.
+#' @param q A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .morie_tcls_ordered <- function(p, q) {
@@ -72,11 +75,12 @@
 
 #' .morie_tcls_height
 #'
-#' Part of the tcls_native implementation; see the file header for the
+#' A step of the tcls_native implementation. Called by \code{.morie_tcls_hier}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
-#' @param children See Usage.
+#' @param children A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .morie_tcls_height <- function(n, children) {
@@ -87,11 +91,12 @@
 
 #' .morie_tcls_hier
 #'
-#' Part of the tcls_native implementation; see the file header for the
+#' A step of the tcls_native implementation. Called by \code{morie_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p A vector; indexed elementwise.
+#' @param q A vector; indexed elementwise.
 #' @param hierarchy See Usage.
 #' @param domain See Usage.
 #' @return The value of \code{cost}, as built in the body.

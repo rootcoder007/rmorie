@@ -8,12 +8,12 @@
 .tf_swt(x, wavelet, levels)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{wavelet}{See Usage.}
-\item{levels}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{wavelet}{Passed to \code{.tf_filters}.}
+\item{levels}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{Swt}, \code{WtVar}, \code{WtXcor}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{approx}, \code{details}, \code{approxes}.

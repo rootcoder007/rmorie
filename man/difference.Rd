@@ -9,12 +9,12 @@ difference(y, d = 0, D = 0, s = 1)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{d}{Defaults to \code{0}.}
-\item{D}{Defaults to \code{0}.}
-\item{s}{Defaults to \code{1}.}
+\item{d}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.}
+\item{D}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.}
+\item{s}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{.sarimax_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{w}, as built in the body.

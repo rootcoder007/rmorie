@@ -29,7 +29,7 @@
 #' header for the source it follows.
 #'
 #' @param k See Usage.
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_binom_cdf_half <- function(k, n) {
@@ -44,8 +44,8 @@
 #' Part of the median_frames_dose_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param x See Usage.
-#' @param point See Usage.
+#' @param x A vector; its length is taken.
+#' @param point Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_kde_at <- function(x, point) {
@@ -172,8 +172,8 @@ morie_optimal_overlap_weight <- function(var_a, var_b) {
 #' Part of the median_frames_dose_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param y A vector; indexed elementwise.
+#' @param w A vector; indexed elementwise.
 #' @param mask See Usage.
 #' @return A vector, from \code{c}.
 #' @export
@@ -291,11 +291,11 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
 #' Part of the median_frames_dose_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param X See Usage.
-#' @param k See Usage.
-#' @param n See Usage.
-#' @param link See Usage.
-#' @param max_iter Defaults to \code{100L}.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param k Numeric; passed to \code{sum}.
+#' @param n Numeric; passed to \code{sum}.
+#' @param link One of \code{"logit"}, \code{"probit"}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-11}.
 #' @return A list with \code{beta}, \code{cov}, \code{converged}, \code{fitted}.
 #' @export

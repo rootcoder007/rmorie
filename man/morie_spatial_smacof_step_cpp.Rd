@@ -8,12 +8,12 @@
 morie_spatial_smacof_step_cpp(X, D, W)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{D}{See Usage.}
-\item{W}{See Usage.}
+\item{X}{Passed to \code{.Call}.}
+\item{D}{Passed to \code{.Call}.}
+\item{W}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_spatial_voting_smacof}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

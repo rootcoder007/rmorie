@@ -8,19 +8,19 @@
 morie_funkM(ratings, n_users, n_items, factors = 8, epochs = 60, lr = 0.005, reg = 0.02, seed = 0, incremental = FALSE, epochs_per_factor = 20)
 }
 \arguments{
-\item{ratings}{See Usage.}
+\item{ratings}{Passed to \code{.funkM_as_ratings}.}
 \item{n_users}{See Usage.}
 \item{n_items}{See Usage.}
 \item{factors}{Defaults to \code{8}.}
 \item{epochs}{Defaults to \code{60}.}
-\item{lr}{Defaults to \code{0.005}.}
-\item{reg}{Defaults to \code{0.02}.}
-\item{seed}{Defaults to \code{0}.}
-\item{incremental}{Defaults to \code{FALSE}.}
+\item{lr}{Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.005}.}
+\item{reg}{Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.02}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{incremental}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{epochs_per_factor}{Defaults to \code{20}.}
 }
 \description{
-Part of the funkM_native implementation; see the file header for the source it follows.
+A step of the funkM_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

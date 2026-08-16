@@ -8,11 +8,11 @@
 .qsfrgr_events_in(event, rows)
 }
 \arguments{
-\item{event}{See Usage.}
+\item{event}{A vector; indexed elementwise.}
 \item{rows}{See Usage.}
 }
 \description{
-Part of the qsfrgr_native implementation; see the file header for the source it follows.
+A step of the qsfrgr_native implementation. Called by \code{.qsfrgr_best_split}, \code{.qsfrgr_grow}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

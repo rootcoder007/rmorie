@@ -8,11 +8,11 @@
 .rsmeancov(X, idx)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{idx}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{idx}{A vector; its length is taken.}
 }
 \description{
-Part of the helpers_rouss implementation; see the file header for the source it follows.
+A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm}, \code{Mcdcv} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mu}, \code{S}.

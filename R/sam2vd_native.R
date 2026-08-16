@@ -63,7 +63,8 @@
 
 #' .sam2vd_to_num
 #'
-#' Part of the sam2vd_native implementation; see the file header for the
+#' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate}, \code{morie_sam2vd_push_memory}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -79,7 +80,8 @@
 
 #' morie_sam2vd_memory_bank
 #'
-#' Part of the sam2vd_native implementation; see the file header for the
+#' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_recent Defaults to \code{7}.
@@ -104,14 +106,15 @@ morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
 
 #' morie_sam2vd_push_memory
 #'
-#' Part of the sam2vd_native implementation; see the file header for the
+#' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bank See Usage.
+#' @param bank A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.
 #' @param frame_index See Usage.
-#' @param features See Usage.
-#' @param prompted Defaults to \code{FALSE}.
-#' @param object_pointer Defaults to \code{NULL}.
+#' @param features Passed to \code{.sam2vd_to_num}.
+#' @param prompted A flag; the body branches on it. Defaults to \code{FALSE}.
+#' @param object_pointer Optional; may be \code{NULL}. Passed to \code{.sam2vd_to_num}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 morie_sam2vd_push_memory <- function(bank, frame_index, features,
@@ -156,10 +159,11 @@ morie_sam2vd_push_memory <- function(bank, frame_index, features,
 
 #' morie_sam2vd_temporal_embedding
 #'
-#' Part of the sam2vd_native implementation; see the file header for the
+#' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param entry See Usage.
+#' @param entry A list; the body reads \code{$features}, \code{$frame}, \code{$prompted} from it.
 #' @param current_frame See Usage.
 #' @param dim Defaults to \code{NULL}.
 #' @param scale Defaults to \code{0.1}.
@@ -194,14 +198,15 @@ morie_sam2vd_temporal_embedding <- function(entry, current_frame,
 
 #' morie_sam2vd_memory_attention
 #'
-#' Part of the sam2vd_native implementation; see the file header for the
+#' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param frame_features See Usage.
-#' @param bank See Usage.
-#' @param current_frame See Usage.
+#' @param frame_features Passed to \code{.sam2vd_to_num}.
+#' @param bank A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.
+#' @param current_frame Passed to \code{morie_sam2vd_temporal_embedding}.
 #' @param n_blocks Defaults to \code{1}.
-#' @param include_pointers Defaults to \code{TRUE}.
+#' @param include_pointers A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{features}, \code{attended}, \code{n_memories}, \code{weights}, \code{note}.
 #' @export
 morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
@@ -265,15 +270,16 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
 
 #' morie_sam2vd_propagate
 #'
-#' Part of the sam2vd_native implementation; see the file header for the
+#' A step of the sam2vd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param frames See Usage.
+#' @param frames A vector; its length is taken and its elements indexed.
 #' @param encoder See Usage.
 #' @param decoder See Usage.
 #' @param prompts Defaults to \code{NULL}.
-#' @param n_recent Defaults to \code{7}.
-#' @param m_prompted Defaults to \code{1}.
+#' @param n_recent Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{7}.
+#' @param m_prompted Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{masks}, \code{conditioned}, \code{n_frames}, \code{first_frame_is_sam}, \code{method}, \code{note}.
 #' @export
 morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
@@ -318,7 +324,8 @@ morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
 
 #' morie_sam2vd_cheatsheet
 #'
-#' Part of the sam2vd_native implementation; see the file header for the
+#' A step of the sam2vd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

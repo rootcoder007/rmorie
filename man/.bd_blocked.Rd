@@ -8,13 +8,13 @@
 .bd_blocked(p, d, Z, ch)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{d}{See Usage.}
+\item{p}{A vector; its length is taken and its elements indexed.}
+\item{d}{A vector; indexed elementwise.}
 \item{Z}{See Usage.}
-\item{ch}{See Usage.}
+\item{ch}{Passed to \code{.bd_desc}.}
 }
 \description{
-Part of the causal_native implementation; see the file header for the source it follows.
+A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

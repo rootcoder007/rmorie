@@ -8,7 +8,7 @@
 .morie_gr_lsa(cost)
 }
 \arguments{
-\item{cost}{See Usage.}
+\item{cost}{Passed to \code{.morie_gr_mat}.}
 }
 \description{
 grdetr._linear_sum_assignment. Returns 0-based rows/cols.

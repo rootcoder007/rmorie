@@ -9,11 +9,11 @@ standard_form(c, A_ub = NULL, b_ub = NULL, A_eq = NULL, b_eq = NULL, upper = NUL
 }
 \arguments{
 \item{c}{See Usage.}
-\item{A_ub}{Defaults to \code{NULL}.}
+\item{A_ub}{Optional; may be \code{NULL}. Passed to \code{.clpopt_mat}.}
 \item{b_ub}{Defaults to \code{NULL}.}
-\item{A_eq}{Defaults to \code{NULL}.}
+\item{A_eq}{Optional; may be \code{NULL}. Passed to \code{.clpopt_mat}.}
 \item{b_eq}{Defaults to \code{NULL}.}
-\item{upper}{Defaults to \code{NULL}.}
+\item{upper}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
 Mirrors clpopt.standard_form.

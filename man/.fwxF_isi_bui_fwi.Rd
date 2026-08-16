@@ -8,13 +8,13 @@
 .fwxF_isi_bui_fwi(ffm, dmc, dc, w)
 }
 \arguments{
-\item{ffm}{See Usage.}
-\item{dmc}{See Usage.}
-\item{dc}{See Usage.}
-\item{w}{See Usage.}
+\item{ffm}{Numeric; combined arithmetically in the body.}
+\item{dmc}{Numeric; combined arithmetically in the body.}
+\item{dc}{Numeric; combined arithmetically in the body.}
+\item{w}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the fwxF_mixedcase_native implementation; see the file header for the source it follows.
+A step of the fwxF_mixedcase_native implementation. Called by \code{morie_fwxF}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

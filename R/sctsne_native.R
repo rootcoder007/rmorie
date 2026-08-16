@@ -8,13 +8,14 @@
 
 #' .tsne_pcond
 #'
-#' Part of the sctsne_native implementation; see the file header for the
+#' A step of the sctsne_native implementation. Called by \code{morie_sctsne}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D2 See Usage.
-#' @param perp See Usage.
+#' @param D2 A matrix; indexed by row and column.
+#' @param perp Numeric; passed to \code{log}.
 #' @param tol Defaults to \code{1e-05}.
-#' @param max_iter Defaults to \code{60}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.
 #' @return The value of \code{P}, as built in the body.
 #' @export
 .tsne_pcond <- function(D2, perp, tol = 1e-5, max_iter = 60) {

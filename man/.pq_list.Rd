@@ -8,10 +8,10 @@
 .pq_list(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.pq_byte}.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_scalar}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

@@ -9,11 +9,11 @@ alfLin(v, W, b = NULL)
 }
 \arguments{
 \item{v}{See Usage.}
-\item{W}{See Usage.}
+\item{W}{A matrix; passed to \code{\%*\%}.}
 \item{b}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the alf_core implementation; see the file header for the source it follows.
+A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfdgram}, \code{Alfembed} and 11 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{o}, as built in the body.

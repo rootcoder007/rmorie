@@ -10,13 +10,13 @@ morie_tlboot(data, estimator, B = 200L, seed = 0L, method = c("naive", "targeted
 \arguments{
 \item{data}{See Usage.}
 \item{estimator}{See Usage.}
-\item{B}{Defaults to \code{200L}.}
+\item{B}{A vector; its length is taken. Defaults to \code{200L}.}
 \item{seed}{Defaults to \code{0L}.}
-\item{method}{Defaults to \code{c("naive", "targeted", "multiplier")}.}
+\item{method}{One of \code{"naive"}, \code{"targeted"}.}
 \item{ic}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tlboot_native implementation; see the file header for the source it follows.
+A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap}, \code{naive_bootstrap}, \code{targeted_bootstrap}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{replicates}, \code{mean}, \code{se}, \code{influence_curve_se}, \code{ratio}, \code{note}.

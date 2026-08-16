@@ -18,10 +18,11 @@
 
 #' .flow_an_to_mat
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{.anomaly_score}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .flow_an_to_mat <- function(X) {
@@ -33,11 +34,12 @@
 
 #' .flow_an_quantile7
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{.anomaly_score}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param sorted_x See Usage.
-#' @param q See Usage.
+#' @param sorted_x A vector; its length is taken and its elements indexed.
+#' @param q Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .flow_an_quantile7 <- function(sorted_x, q) {
@@ -53,11 +55,12 @@
 
 #' .alternating_masks
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param d See Usage.
-#' @param n_layers See Usage.
+#' @param d A count; the body uses it as \code{seq_len(...)}.
+#' @param n_layers A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .alternating_masks <- function(d, n_layers) {
@@ -72,16 +75,17 @@
 
 #' .st
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{.coupling_forward}, \code{.coupling_inverse}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param mask See Usage.
-#' @param Ws See Usage.
-#' @param bs See Usage.
-#' @param Wt See Usage.
-#' @param bt See Usage.
-#' @param scale_cap Defaults to \code{5}.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param mask Numeric; combined arithmetically in the body.
+#' @param Ws A matrix; passed to \code{as.matrix}.
+#' @param bs Numeric; combined arithmetically in the body.
+#' @param Wt A matrix; passed to \code{as.matrix}.
+#' @param bt Numeric; combined arithmetically in the body.
+#' @param scale_cap Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A list with \code{s}, \code{t}.
 #' @export
 .st <- function(x, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
@@ -95,16 +99,17 @@
 
 #' .coupling_forward
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{.flow_forward}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param mask See Usage.
-#' @param Ws See Usage.
-#' @param bs See Usage.
-#' @param Wt See Usage.
-#' @param bt See Usage.
-#' @param scale_cap Defaults to \code{5}.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param mask Numeric; combined arithmetically in the body.
+#' @param Ws Passed to \code{.st}.
+#' @param bs Passed to \code{.st}.
+#' @param Wt Passed to \code{.st}.
+#' @param bt Passed to \code{.st}.
+#' @param scale_cap Passed to \code{.st}. Defaults to \code{5}.
 #' @return A list with \code{y}, \code{logdet}.
 #' @export
 .coupling_forward <- function(x, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
@@ -115,16 +120,17 @@
 
 #' .coupling_inverse
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{.flow_inverse}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param mask See Usage.
-#' @param Ws See Usage.
-#' @param bs See Usage.
-#' @param Wt See Usage.
-#' @param bt See Usage.
-#' @param scale_cap Defaults to \code{5}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param mask Numeric; combined arithmetically in the body.
+#' @param Ws Passed to \code{.st}.
+#' @param bs Passed to \code{.st}.
+#' @param Wt Passed to \code{.st}.
+#' @param bt Passed to \code{.st}.
+#' @param scale_cap Passed to \code{.st}. Defaults to \code{5}.
 #' @return A list with \code{x}, \code{logdet}.
 #' @export
 .coupling_inverse <- function(y, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
@@ -135,7 +141,8 @@
 
 #' .flow_forward
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{.log_prob}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -155,11 +162,12 @@
 
 #' .flow_inverse
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param z See Usage.
-#' @param layers See Usage.
+#' @param layers Numeric; passed to \code{rev}.
 #' @return A list with \code{x}, \code{logdet}.
 #' @export
 .flow_inverse <- function(z, layers) {
@@ -175,11 +183,12 @@
 
 #' .log_prob
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{.anomaly_score}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param layers See Usage.
+#' @param x Passed to \code{.flow_forward}.
+#' @param layers Passed to \code{.flow_forward}.
 #' @return A list with \code{lp}, \code{z}, \code{logdet}.
 #' @export
 .log_prob <- function(x, layers) {
@@ -190,13 +199,14 @@
 
 #' .anomaly_score
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. Called by \code{morie_flow_an}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param layers See Usage.
+#' @param X Passed to \code{.flow_an_to_mat}.
+#' @param layers Passed to \code{.log_prob}.
 #' @param threshold_quantile Defaults to \code{0.95}.
-#' @param reference Defaults to \code{NULL}.
+#' @param reference Optional; may be \code{NULL}. Passed to \code{.flow_an_to_mat}.
 #' @return A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag}, \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced}, \code{log_likelihood}, \code{method}.
 #' @export
 .anomaly_score <- function(X, layers, threshold_quantile = 0.95, reference = NULL) {
@@ -225,13 +235,14 @@
 
 #' morie_flow_an
 #'
-#' Part of the flow_an_native implementation; see the file header for
+#' A step of the flow_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param threshold_quantile Defaults to \code{0.95}.
-#' @param reference Defaults to \code{NULL}.
+#' @param X Passed to \code{.anomaly_score}.
+#' @param layers Passed to \code{.anomaly_score}.
+#' @param threshold_quantile Passed to \code{.anomaly_score}. Defaults to \code{0.95}.
+#' @param reference Passed to \code{.anomaly_score}.
 #' @return The value of \code{.anomaly_score}.
 #' @export
 morie_flow_an <- function(X, layers, threshold_quantile = 0.95, reference = NULL) {

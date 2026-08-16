@@ -11,7 +11,7 @@ gcd_span(scores)
 \item{scores}{See Usage.}
 }
 \description{
-Part of the blstn_native implementation; see the file header for the source it follows.
+A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,8 +8,8 @@
 .w3_gammp(a, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
 }
 \description{
 continued fraction for the complement above: the crossover is where each is the convergent one, and using the wrong side is where a hand-rolled version loses its digits.

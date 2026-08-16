@@ -8,12 +8,12 @@
 .k01_speclip(Xm, p, iters = 50L)
 }
 \arguments{
-\item{Xm}{See Usage.}
-\item{p}{See Usage.}
-\item{iters}{Defaults to \code{50L}.}
+\item{Xm}{A matrix; passed to \code{t}.}
+\item{p}{A count; the body uses it as \code{rep(...)}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 }
 \description{
-Part of the acclso implementation; see the file header for the source it follows.
+A step of the acclso implementation. Called by \code{Agdproj}, \code{Fistalasso}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lam}, as built in the body.

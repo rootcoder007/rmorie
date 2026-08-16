@@ -8,15 +8,15 @@
 edgrn_tmm_factor(counts_sample, counts_reference, trim_m = 0.3, trim_a = 0.05, lib_sample = NULL, lib_reference = NULL)
 }
 \arguments{
-\item{counts_sample}{See Usage.}
-\item{counts_reference}{See Usage.}
+\item{counts_sample}{Passed to \code{.edgrn_vec}.}
+\item{counts_reference}{Passed to \code{.edgrn_vec}.}
 \item{trim_m}{Defaults to \code{0.3}.}
 \item{trim_a}{Defaults to \code{0.05}.}
 \item{lib_sample}{Defaults to \code{NULL}.}
 \item{lib_reference}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the edgrn_native implementation; see the file header for the source it follows.
+A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{factor}, \code{log2_factor}, \code{n_used}, \code{n_genes}, \code{trimmed_m}, \code{trimmed_a}, \code{note}.

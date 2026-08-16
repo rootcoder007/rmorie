@@ -15,7 +15,7 @@ morie_tagRC(triples, focus, d = 0.7, weight = 0.9, iters = 200)
 \item{iters}{Defaults to \code{200}.}
 }
 \description{
-Part of the tagRC_native implementation; see the file header for the source it follows.
+A step of the tagRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{folkrank}.

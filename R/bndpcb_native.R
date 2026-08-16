@@ -7,7 +7,8 @@
 
 #' morie_truncated_normal_interval
 #'
-#' Part of the bndpcb_native implementation; see the file header for the
+#' A step of the bndpcb_native implementation. Called by \code{morie_bet_proof_interval}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -29,14 +30,15 @@ morie_truncated_normal_interval <- function(x, level = 0.95,
 
 #' morie_coverage_by_region
 #'
-#' Part of the bndpcb_native implementation; see the file header for the
+#' A step of the bndpcb_native implementation. Called by \code{morie_bet_violation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param theta See Usage.
-#' @param level Defaults to \code{0.95}.
+#' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @param lower_bound Defaults to \code{0}.
 #' @param draws Defaults to \code{20000L}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param split Defaults to \code{NULL}.
 #' @return A list with \code{marginal_coverage}, \code{subset_coverage}, \code{subset_share}, \code{mean_width}, \code{p_empty}, \code{split}, \code{theta}, \code{draws}.
 #' @export
@@ -73,14 +75,15 @@ morie_coverage_by_region <- function(theta, level = 0.95, lower_bound = 0,
 
 #' morie_bet_violation
 #'
-#' Part of the bndpcb_native implementation; see the file header for the
+#' A step of the bndpcb_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param level Defaults to \code{0.95}.
-#' @param lower_bound Defaults to \code{0}.
-#' @param draws Defaults to \code{20000L}.
-#' @param seed Defaults to \code{0}.
+#' @param theta Passed to \code{morie_coverage_by_region}.
+#' @param level Passed to \code{morie_coverage_by_region}. Defaults to \code{0.95}.
+#' @param lower_bound Passed to \code{morie_coverage_by_region}. Defaults to \code{0}.
+#' @param draws Passed to \code{morie_coverage_by_region}. Defaults to \code{20000L}.
+#' @param seed Passed to \code{morie_coverage_by_region}. Defaults to \code{0}.
 #' @param grid Defaults to \code{NULL}.
 #' @return A list with \code{max_shortfall}, \code{at_cut}, \code{subset_coverage}, \code{subset_share}, \code{bet_proof}, \code{level}, \code{note}.
 #' @export
@@ -110,12 +113,13 @@ morie_bet_violation <- function(theta, level = 0.95, lower_bound = 0,
 
 #' morie_bet_proof_interval
 #'
-#' Part of the bndpcb_native implementation; see the file header for the
+#' A step of the bndpcb_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param level Defaults to \code{0.95}.
-#' @param lower_bound Defaults to \code{0}.
+#' @param x Passed to \code{morie_truncated_normal_interval}.
+#' @param level Passed to \code{morie_truncated_normal_interval}. Defaults to \code{0.95}.
+#' @param lower_bound Passed to \code{morie_truncated_normal_interval}. Defaults to \code{0}.
 #' @param min_width Defaults to \code{NULL}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{empty}, \code{min_width}, \code{naive_width}, \code{naive_empty}, \code{widened}, \code{method}.
 #' @export

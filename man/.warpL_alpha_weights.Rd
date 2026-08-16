@@ -12,7 +12,7 @@
 \item{scheme}{Defaults to \code{"reciprocal"}.}
 }
 \description{
-Part of the warpL_native implementation; see the file header for the source it follows.
+A step of the warpL_native implementation. Called by \code{morie_warpL_alpha_weights}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{a}, as built in the body.

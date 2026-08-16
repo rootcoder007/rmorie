@@ -8,14 +8,14 @@
 .s03json_toJSON(x, auto_unbox = TRUE, digits = NULL, pretty = FALSE, ...)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{auto_unbox}{Defaults to \code{TRUE}.}
-\item{digits}{Defaults to \code{NULL}.}
-\item{pretty}{Defaults to \code{FALSE}.}
+\item{x}{Passed to \code{morie_jsonlt_to_json}.}
+\item{auto_unbox}{Passed to \code{morie_jsonlt_to_json}. Defaults to \code{TRUE}.}
+\item{digits}{Passed to \code{morie_jsonlt_to_json}.}
+\item{pretty}{Passed to \code{morie_jsonlt_to_json}. Defaults to \code{FALSE}.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.morie_to_json}, \code{.s03json_write}, \code{jsonlite_toJSON_or_stub} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_jsonlt_to_json}.

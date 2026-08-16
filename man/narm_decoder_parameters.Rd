@@ -13,7 +13,7 @@ narm_decoder_parameters(n_items, hidden, emb_dim)
 \item{emb_dim}{See Usage.}
 }
 \description{
-Part of the narm_native implementation; see the file header for the source it follows.
+A step of the narm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{fully_connected}, \code{bilinear}, \code{ratio}, \code{note}.

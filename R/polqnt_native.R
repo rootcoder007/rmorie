@@ -18,7 +18,8 @@
 
 #' .mor_pq_decompose
 #'
-#' Part of the polqnt_native implementation; see the file header for the
+#' A step of the polqnt_native implementation. Called by \code{morie_polqnt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -42,10 +43,11 @@
 
 #' .mor_pq_reconstruct
 #'
-#' Part of the polqnt_native implementation; see the file header for the
+#' A step of the polqnt_native implementation. Called by \code{morie_polqnt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param levels See Usage.
+#' @param levels A vector; its length is taken and its elements indexed.
 #' @param radius See Usage.
 #' @return The value of \code{r}, as built in the body.
 #' @export

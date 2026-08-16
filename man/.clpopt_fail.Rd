@@ -8,12 +8,12 @@
 .clpopt_fail(st, rule, phase)
 }
 \arguments{
-\item{st}{See Usage.}
-\item{rule}{See Usage.}
+\item{st}{Compared against \code{"cycling"}.}
+\item{rule}{Compared against \code{"dantzig"}.}
 \item{phase}{See Usage.}
 }
 \description{
-Part of the clpopt_native implementation; see the file header for the source it follows.
+A step of the clpopt_native implementation. Called by \code{simplex}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule}, \code{message}, \code{method}.

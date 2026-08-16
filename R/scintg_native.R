@@ -77,10 +77,11 @@
 
 #' .scintg_matrix
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}, \code{.scintg_maximum_diversity_clustering}, \code{morie_scintg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z A matrix; passed to \code{nrow}.
 #' @return The value of \code{Z}, as built in the body.
 #' @export
 .scintg_matrix <- function(Z) {
@@ -112,10 +113,11 @@
 
 #' .scintg_l2_normalise
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{.scintg_kmeans_init}, \code{.scintg_maximum_diversity_clustering}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z Numeric; combined arithmetically in the body.
 #' @return The value of \code{sweep}.
 #' @export
 .scintg_l2_normalise <- function(Z) {
@@ -126,10 +128,11 @@
 
 #' .scintg_design
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param batches See Usage.
+#' @param batches A vector; its length is taken.
 #' @return A list with \code{phi}, \code{names}.
 #' @export
 .scintg_design <- function(batches) {
@@ -147,12 +150,13 @@
 
 #' .scintg_cluster_batch_counts
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{.scintg_harmony_objective}, \code{.scintg_maximum_diversity_clustering}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R See Usage.
-#' @param batches See Usage.
-#' @param names Defaults to \code{NULL}.
+#' @param R A matrix; indexed by row and column.
+#' @param batches A vector; its length is taken.
+#' @param names Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{O}, \code{E}, \code{batches}.
 #' @export
 .scintg_cluster_batch_counts <- function(R, batches, names=NULL) {
@@ -175,15 +179,16 @@
 
 #' .scintg_harmony_objective
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{.scintg_maximum_diversity_clustering}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param R See Usage.
-#' @param Y See Usage.
-#' @param batches See Usage.
-#' @param sigma Defaults to \code{0.1}.
-#' @param theta Defaults to \code{2}.
+#' @param Z A matrix; passed to \code{t}.
+#' @param R A matrix; passed to \code{nrow}.
+#' @param Y A matrix; passed to \code{\%*\%}.
+#' @param batches Passed to \code{.scintg_cluster_batch_counts}.
+#' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param theta Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A list with \code{total}, \code{fit}, \code{entropy}, \code{kl}.
 #' @export
 .scintg_harmony_objective <- function(Z, R, Y, batches, sigma=0.1, theta=2.0) {
@@ -204,11 +209,12 @@
 
 #' .scintg_kmeans_init
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{.scintg_maximum_diversity_clustering}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Zn See Usage.
-#' @param K See Usage.
+#' @param Zn A matrix; indexed by row and column.
+#' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.
 #' @return The value of \code{centres}, as built in the body.
 #' @export
@@ -272,11 +278,12 @@
 
 #' .scintg_solve
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param B A matrix; passed to \code{ncol}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .scintg_solve <- function(A, B) {
@@ -309,14 +316,15 @@
 
 #' .scintg_correct_batch
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{morie_scintg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param R See Usage.
-#' @param batches See Usage.
-#' @param lam Defaults to \code{1}.
-#' @param reference Defaults to \code{NULL}.
+#' @param Z Passed to \code{.scintg_matrix}.
+#' @param R A matrix; indexed by row and column.
+#' @param batches A vector; its length is taken.
+#' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param reference Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{Z}, \code{W}, \code{batches}.
 #' @export
 .scintg_correct_batch <- function(Z, R, batches, lam=1.0, reference=NULL) {
@@ -365,19 +373,20 @@
 
 #' .scintg_maximum_diversity_clustering
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. Called by \code{morie_scintg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param batches See Usage.
-#' @param K Defaults to \code{NULL}.
-#' @param sigma Defaults to \code{0.1}.
-#' @param theta Defaults to \code{2}.
+#' @param Z Passed to \code{.scintg_matrix}.
+#' @param batches A vector; its length is taken.
+#' @param K Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
+#' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param theta Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @param max_iter Defaults to \code{25}.
-#' @param tol Defaults to \code{1e-05}.
-#' @param seed Defaults to \code{0}.
-#' @param Y Defaults to \code{NULL}.
-#' @param diversity Defaults to \code{"penalise"}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
+#' @param seed Passed to \code{.scintg_kmeans_init}. Defaults to \code{0}.
+#' @param Y Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param diversity Compared against \code{"as_printed"}. Defaults to \code{"penalise"}.
 #' @return A list with \code{R}, \code{Y}, \code{K}, \code{objective}.
 #' @export
 .scintg_maximum_diversity_clustering <- function(Z, batches, K=NULL, sigma=0.1,
@@ -461,21 +470,22 @@
 
 #' morie_scintg
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Z See Usage.
-#' @param batches See Usage.
-#' @param K Defaults to \code{NULL}.
-#' @param sigma Defaults to \code{0.1}.
-#' @param theta Defaults to \code{2}.
-#' @param lam Defaults to \code{1}.
+#' @param Z Passed to \code{.scintg_matrix}.
+#' @param batches A vector; its length is taken.
+#' @param K Passed to \code{.scintg_maximum_diversity_clustering}.
+#' @param sigma Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{0.1}.
+#' @param theta Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{2}.
+#' @param lam Passed to \code{.scintg_correct_batch}. Defaults to \code{1}.
 #' @param max_iter Defaults to \code{10}.
-#' @param cluster_iter Defaults to \code{25}.
+#' @param cluster_iter Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{25}.
 #' @param tol Defaults to \code{1e-04}.
-#' @param seed Defaults to \code{0}.
-#' @param reference Defaults to \code{NULL}.
-#' @param diversity Defaults to \code{"penalise"}.
+#' @param seed Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{0}.
+#' @param reference Passed to \code{.scintg_correct_batch}.
+#' @param diversity Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{"penalise"}.
 #' @return A list with \code{estimate}, \code{embedding}, \code{R}, \code{Y}, \code{K}, \code{objective}, \code{history}, \code{n_rounds}, \code{theta}, \code{sigma}, \code{lam}, \code{diversity}, \code{method}, \code{note}.
 #' @export
 morie_scintg <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0, lam=1.0,
@@ -536,7 +546,8 @@ singlecell_integration <- morie_scintg
 
 #' .scintg_cheatsheet
 #'
-#' Part of the scintg_native implementation; see the file header for the
+#' A step of the scintg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

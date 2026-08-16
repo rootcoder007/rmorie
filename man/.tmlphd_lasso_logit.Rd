@@ -8,14 +8,14 @@
 .tmlphd_lasso_logit(X, y, lam, outer = 15L, sweeps = 60L)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{lam}{See Usage.}
-\item{outer}{Defaults to \code{15L}.}
-\item{sweeps}{Defaults to \code{60L}.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{lam}{Passed to \code{.tmlphd_lasso}.}
+\item{outer}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{15L}.}
+\item{sweeps}{Passed to \code{.tmlphd_lasso}. Defaults to \code{60L}.}
 }
 \description{
-Part of the tmlphd implementation; see the file header for the source it follows.
+A step of the tmlphd implementation. Called by \code{Tmlphd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{beta}, as built in the body.

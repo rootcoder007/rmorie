@@ -8,11 +8,11 @@
 morie_ri_clpm_coefficients(X, Y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
+\item{X}{Passed to \code{morie_within_between_decomposition}.}
+\item{Y}{Passed to \code{morie_within_between_decomposition}.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y}, \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{between_variance_x}, \code{between_variance_y}, \code{parametrization}, \code{note}.

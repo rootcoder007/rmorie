@@ -8,22 +8,22 @@
 .abcgp.history_match(sim, obs, prior_ppf, n_waves = 3, n_design = 32, n_sim = 50, epsilon = 1, summary = NULL, threshold = 10, n_sd = 3, kernel = "sqexp", accept_kernel = "gaussian", seed = 0)
 }
 \arguments{
-\item{sim}{See Usage.}
-\item{obs}{See Usage.}
-\item{prior_ppf}{See Usage.}
+\item{sim}{Passed to \code{.abcgp.gabc_log_likelihood}.}
+\item{obs}{Passed to \code{.abcgp.gabc_log_likelihood}.}
+\item{prior_ppf}{Passed to \code{.abcgp.design_from_prior}.}
 \item{n_waves}{Defaults to \code{3}.}
 \item{n_design}{Defaults to \code{32}.}
-\item{n_sim}{Defaults to \code{50}.}
-\item{epsilon}{Defaults to \code{1}.}
-\item{summary}{Defaults to \code{NULL}.}
-\item{threshold}{Defaults to \code{10}.}
-\item{n_sd}{Defaults to \code{3}.}
-\item{kernel}{Defaults to \code{"sqexp"}.}
-\item{accept_kernel}{Defaults to \code{"gaussian"}.}
+\item{n_sim}{Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{50}.}
+\item{epsilon}{Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{1}.}
+\item{summary}{Passed to \code{.abcgp.gabc_log_likelihood}.}
+\item{threshold}{Passed to \code{.abcgp.implausible}. Defaults to \code{10}.}
+\item{n_sd}{Passed to \code{.abcgp.implausible}. Defaults to \code{3}.}
+\item{kernel}{Passed to \code{.abcgp.gp_fit}. Defaults to \code{"sqexp"}.}
+\item{accept_kernel}{Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{"gaussian"}.}
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{morie_abcgp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{fit}, \code{waves}.

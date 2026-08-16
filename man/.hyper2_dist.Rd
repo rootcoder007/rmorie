@@ -8,11 +8,11 @@
 .hyper2_dist(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hyper2_native implementation; see the file header for the source it follows.
+A step of the hyper2_native implementation. Called by \code{morie_hyper2_kernel}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

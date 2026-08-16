@@ -72,10 +72,11 @@
 
 #' .vdcal_phys
 #'
-#' Part of the vdcal_native implementation; see the file header for the
+#' A step of the vdcal_native implementation. Called by \code{morie_vdcal}, \code{morie_vdcal_fut}, \code{morie_vdcal_oie_tozer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param par See Usage.
+#' @param par Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .vdcal_phys <- function(par) {
@@ -155,8 +156,8 @@ morie_vdcal_fut <- function(vss, fu, par = NULL) {
 #'
 #' @param elogd See Usage.
 #' @param fi See Usage.
-#' @param fu See Usage.
-#' @param coefficients See Usage.
+#' @param fu Numeric; combined arithmetically in the body.
+#' @param coefficients Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{fut}, as built in the body.
 #' @export
 .vdcal_fut_descriptors <- function(elogd, fi, fu, coefficients) {

@@ -8,8 +8,8 @@
 .bnppvl_empirical_start(u, k)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{k}{See Usage.}
+\item{u}{A vector; its length is taken.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
 empirical quantiles alone will not do: with ties, or with fewer observations than cells, two of them can coincide and a quantile function with a zero-width cell is not a quantile function at all. Averaging with the uniform grid guarantees a strict increase of at least one over twice the cell count while still starting the chain where the data are, which is worth a great many sweeps of a single-site sampler.

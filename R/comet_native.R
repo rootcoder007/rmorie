@@ -22,7 +22,8 @@
 
 #' .comet_vec
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. Called by \code{.comet_dist}, \code{kendall_tau}, \code{pooled_features} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -32,12 +33,13 @@
 
 #' pooled_features
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. Called by \code{estimator_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hyp See Usage.
-#' @param src See Usage.
-#' @param ref See Usage.
+#' @param hyp Passed to \code{.comet_vec}.
+#' @param src Passed to \code{.comet_vec}.
+#' @param ref Passed to \code{.comet_vec}.
 #' @return A list with \code{features}, \code{dim}, \code{hyp_ref_diff}, \code{hyp_src_diff}, \code{note}.
 #' @export
 pooled_features <- function(hyp, src, ref) {
@@ -57,13 +59,14 @@ pooled_features <- function(hyp, src, ref) {
 
 #' estimator_score
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. Called by \code{morie_comet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param hyp See Usage.
 #' @param src See Usage.
 #' @param ref See Usage.
-#' @param W See Usage.
+#' @param W A matrix; passed to \code{nrow}.
 #' @param b Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
 #' @export
@@ -83,11 +86,12 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 
 #' .comet_dist
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. Called by \code{triplet_loss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{.comet_vec}.
+#' @param b Passed to \code{.comet_vec}.
 #' @return A numeric value.
 #' @export
 .comet_dist <- function(a, b) {
@@ -99,13 +103,14 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 
 #' triplet_loss
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param better See Usage.
-#' @param worse See Usage.
-#' @param src See Usage.
-#' @param ref See Usage.
+#' @param better Passed to \code{.comet_dist}.
+#' @param worse Passed to \code{.comet_dist}.
+#' @param src Passed to \code{.comet_dist}.
+#' @param ref Passed to \code{.comet_dist}.
 #' @param margin Defaults to \code{1}.
 #' @return A list with \code{loss}, \code{source_term}, \code{reference_term}, \code{satisfied}, \code{note}.
 #' @export
@@ -122,11 +127,12 @@ triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
 
 #' kendall_tau
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
-#' @param human See Usage.
+#' @param scores Passed to \code{.comet_vec}.
+#' @param human Passed to \code{.comet_vec}.
 #' @return A list with \code{tau}, \code{concordant}, \code{discordant}, \code{n_segments}.
 #' @export
 kendall_tau <- function(scores, human) {
@@ -152,12 +158,13 @@ kendall_tau <- function(scores, human) {
 
 #' reference_free
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hyp See Usage.
-#' @param src See Usage.
-#' @param W See Usage.
+#' @param hyp Passed to \code{.comet_vec}.
+#' @param src Passed to \code{.comet_vec}.
+#' @param W A matrix; passed to \code{nrow}.
 #' @param b Defaults to \code{NULL}.
 #' @return A list with \code{score}, \code{reference_used}, \code{note}.
 #' @export
@@ -183,7 +190,8 @@ comet <- estimator_score
 
 #' morie_comet
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param hyp See Usage.
@@ -199,7 +207,8 @@ morie_comet <- function(hyp, src, ref, W, b = NULL) {
 
 #' .comet_cheatsheet
 #'
-#' Part of the comet_native implementation; see the file header for the
+#' A step of the comet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

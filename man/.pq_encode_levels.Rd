@@ -8,11 +8,11 @@
 .pq_encode_levels(levels, width)
 }
 \arguments{
-\item{levels}{See Usage.}
+\item{levels}{A vector; its length is taken.}
 \item{width}{See Usage.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{morie_write_parquet}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

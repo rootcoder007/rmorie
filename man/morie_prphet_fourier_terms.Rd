@@ -8,12 +8,12 @@
 morie_prphet_fourier_terms(t, period, order)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{period}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{period}{Numeric; combined arithmetically in the body.}
 \item{order}{See Usage.}
 }
 \description{
-Part of the prphet_native implementation; see the file header for the source it follows.
+A step of the prphet_native implementation. Called by \code{morie_prphet_design}, \code{prophe_additive_components}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rows}, as built in the body.

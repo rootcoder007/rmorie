@@ -8,14 +8,14 @@
 .farmcpu(y, G, max_iter = 10L, threshold = NULL, seed = 0L)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{G}{See Usage.}
+\item{y}{Passed to \code{.to_vec}.}
+\item{G}{Passed to \code{.farmlmm_to_mat}.}
 \item{max_iter}{Defaults to \code{10L}.}
 \item{threshold}{Defaults to \code{NULL}.}
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. Called by \code{morie_farmlmm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations}, \code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method}, \code{note}.

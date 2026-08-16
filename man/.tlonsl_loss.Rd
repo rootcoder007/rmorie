@@ -8,12 +8,12 @@
 .tlonsl_loss(kind, y, p)
 }
 \arguments{
-\item{kind}{See Usage.}
-\item{y}{See Usage.}
-\item{p}{See Usage.}
+\item{kind}{Compared against \code{"squared"}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the tlonsl_native implementation; see the file header for the source it follows.
+A step of the tlonsl_native implementation. Called by \code{morie_tlonsl_online_super_learner}, \code{morie_tlonsl_sequential_risk}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

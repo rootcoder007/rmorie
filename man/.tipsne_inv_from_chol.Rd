@@ -3,15 +3,15 @@
 % the formals.
 \name{.tipsne_inv_from_chol}
 \alias{.tipsne_inv_from_chol}
-\title{(L L\\\')^-1, formed column by column from the factor}
+\title{(L L\\')^-1, formed column by column from the factor}
 \usage{
 .tipsne_inv_from_chol(lo)
 }
 \arguments{
-\item{lo}{See Usage.}
+\item{lo}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the tipsne_native implementation; see the file header for the source it follows.
+A step of the tipsne_native implementation. Called by \code{morie_tipsne_ancova}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

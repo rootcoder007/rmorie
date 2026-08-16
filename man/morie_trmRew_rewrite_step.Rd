@@ -8,9 +8,9 @@
 morie_trmRew_rewrite_step(t, rules, strategy = "innermost")
 }
 \arguments{
-\item{t}{See Usage.}
-\item{rules}{See Usage.}
-\item{strategy}{Defaults to \code{"innermost"}.}
+\item{t}{Passed to \code{morie_trmRew_positions}.}
+\item{rules}{A vector; its length is taken and its elements indexed.}
+\item{strategy}{Compared against \code{"innermost"}. Defaults to \code{"innermost"}.}
 }
 \description{
 reduces arguments before the term above them; outermost the other way round.

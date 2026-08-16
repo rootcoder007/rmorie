@@ -59,10 +59,11 @@
 
 #' .ncfRS_sig
 #'
-#' Part of the ncfRS_native implementation; see the file header for the
+#' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}, \code{morie_ncfRS_gmf}, \code{morie_ncfRS_neumf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ncfRS_sig <- function(x) {
@@ -75,7 +76,8 @@
 
 #' morie_ncfRS_gmf
 #'
-#' Part of the ncfRS_native implementation; see the file header for the
+#' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p_u See Usage.
@@ -107,13 +109,14 @@ morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
 
 #' morie_ncfRS_mlp_layers
 #'
-#' Part of the ncfRS_native implementation; see the file header for the
+#' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_neumf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p_u See Usage.
 #' @param q_i See Usage.
-#' @param Ws See Usage.
-#' @param bs See Usage.
+#' @param Ws A vector; its length is taken and its elements indexed.
+#' @param bs A vector; indexed elementwise.
 #' @return The value of \code{z}, as built in the body.
 #' @export
 morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
@@ -130,15 +133,16 @@ morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
 
 #' morie_ncfRS_neumf
 #'
-#' Part of the ncfRS_native implementation; see the file header for the
+#' A step of the ncfRS_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p_gmf See Usage.
 #' @param q_gmf See Usage.
-#' @param p_mlp See Usage.
-#' @param q_mlp See Usage.
-#' @param Ws See Usage.
-#' @param bs See Usage.
+#' @param p_mlp Passed to \code{morie_ncfRS_mlp_layers}.
+#' @param q_mlp Passed to \code{morie_ncfRS_mlp_layers}.
+#' @param Ws Passed to \code{morie_ncfRS_mlp_layers}.
+#' @param bs Passed to \code{morie_ncfRS_mlp_layers}.
 #' @param h See Usage.
 #' @return A list with \code{score}, \code{gmf_part}, \code{mlp_part}, \code{note}.
 #' @export
@@ -160,7 +164,8 @@ morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
 
 #' morie_ncfRS_log_loss
 #'
-#' Part of the ncfRS_native implementation; see the file header for the
+#' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -175,18 +180,19 @@ morie_ncfRS_log_loss <- function(y, y_hat) {
 
 #' morie_ncfRS_fit_gmf
 #'
-#' Part of the ncfRS_native implementation; see the file header for the
+#' A step of the ncfRS_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pos See Usage.
+#' @param pos A vector; indexed elementwise.
 #' @param n_users See Usage.
 #' @param n_items See Usage.
 #' @param k_dim Defaults to \code{8}.
 #' @param alpha Defaults to \code{0.05}.
 #' @param iters Defaults to \code{2000}.
 #' @param n_neg Defaults to \code{4}.
-#' @param seed Defaults to \code{0}.
-#' @param learn_h Defaults to \code{TRUE}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param learn_h A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{P}, \code{Q}, \code{h}, \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.
 #' @export
 morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
@@ -290,7 +296,8 @@ morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
 
 #' morie_ncfRS_cheatsheet
 #'
-#' Part of the ncfRS_native implementation; see the file header for the
+#' A step of the ncfRS_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -10,7 +10,8 @@
 
 #' .morie_datasette_base
 #'
-#' Part of the ingest_datasette implementation; see the file header for
+#' A step of the ingest_datasette implementation. Called by \code{morie_datasette_databases}, \code{morie_datasette_read}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param base_url Defaults to \code{NULL}.
@@ -34,7 +35,8 @@
 
 #' .morie_datasette_get_json
 #'
-#' Part of the ingest_datasette implementation; see the file header for
+#' A step of the ingest_datasette implementation. Called by \code{morie_datasette_databases}, \code{morie_datasette_read}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param url See Usage.

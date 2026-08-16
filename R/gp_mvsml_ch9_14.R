@@ -15,11 +15,12 @@
 
 #' morie_khatri_rao_rows
 #'
-#' Part of the gp_mvsml_ch9_14 implementation; see the file header for
+#' A step of the gp_mvsml_ch9_14 implementation. Called by \code{Apxkern}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param B A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_khatri_rao_rows <- function(A, B) {
@@ -389,7 +390,7 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 #'
 #' @param t See Usage.
 #' @param n_basis See Usage.
-#' @param p Defaults to \code{1L}.
+#' @param p A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.
 #' @param kind Defaults to \code{"fourier"}.
 #' @param period Defaults to \code{NULL}.
 #' @return The value of \code{out}, as built in the body.
@@ -551,9 +552,9 @@ Penfreg <- function(y, X, P, lam, mu = NULL, tol = 1e-10) {
 #' model.matrix(~0+Env, data = dat_F)[, -1].  Pass reference = FALSE for
 #' the redundant parameterization as printed.
 #'
-#' @param X See Usage.
-#' @param env See Usage.
-#' @param reference Defaults to \code{TRUE}.
+#' @param X A matrix; indexed by row and column.
+#' @param env A vector; indexed elementwise.
+#' @param reference A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{X_EF}, \code{levels}, \code{kept_levels}, \code{reference}, \code{n_columns}.
 #' @export
 morie_fda_env_interaction <- function(X, env, reference = TRUE) {

@@ -8,15 +8,15 @@
 covariate_kink_test(V, Z, kink, bandwidth, order = 2L, kernel = "triangular")
 }
 \arguments{
-\item{V}{See Usage.}
-\item{Z}{See Usage.}
-\item{kink}{See Usage.}
-\item{bandwidth}{See Usage.}
+\item{V}{Passed to \code{.side_fit}.}
+\item{Z}{Passed to \code{.side_fit}.}
+\item{kink}{Passed to \code{.side_fit}.}
+\item{bandwidth}{Passed to \code{.side_fit}.}
 \item{order}{Defaults to \code{2L}.}
-\item{kernel}{Defaults to \code{"triangular"}.}
+\item{kernel}{Passed to \code{.side_fit}. Defaults to \code{"triangular"}.}
 }
 \description{
-Part of the bnskt2_native implementation; see the file header for the source it follows.
+A step of the bnskt2_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{slope_change}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{interpretation}.

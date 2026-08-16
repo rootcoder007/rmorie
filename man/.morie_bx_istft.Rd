@@ -8,15 +8,15 @@
 .morie_bx_istft(re_f, im_f, nwin, hop, win, n)
 }
 \arguments{
-\item{re_f}{See Usage.}
-\item{im_f}{See Usage.}
-\item{nwin}{See Usage.}
-\item{hop}{See Usage.}
-\item{win}{See Usage.}
-\item{n}{See Usage.}
+\item{re_f}{A matrix; indexed by row and column.}
+\item{im_f}{A matrix; indexed by row and column.}
+\item{nwin}{A count; the body uses it as \code{seq_len(...)}.}
+\item{hop}{Numeric; combined arithmetically in the body.}
+\item{win}{A vector; indexed elementwise.}
+\item{n}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{FecgNmf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

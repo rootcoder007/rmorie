@@ -45,10 +45,11 @@
 
 #' .informer_to_rows
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. Called by \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention}, \code{morie_informer_select_queries} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{lapply}.
 #' @export
 .informer_to_rows <- function(x) {
@@ -58,12 +59,13 @@
 
 #' .informer_logits
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. Called by \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention}, \code{morie_informer_sparsity_measure}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param q See Usage.
+#' @param q Numeric; combined arithmetically in the body.
 #' @param K See Usage.
-#' @param scale See Usage.
+#' @param scale Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{sapply}.
 #' @export
 .informer_logits <- function(q, K, scale) {
@@ -72,12 +74,13 @@
 
 #' morie_informer_sparsity_measure
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. Called by \code{morie_informer_kl_from_uniform}, \code{morie_informer_select_queries}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param q See Usage.
-#' @param K See Usage.
-#' @param measure Defaults to \code{"exact"}.
+#' @param K Passed to \code{.informer_to_rows}.
+#' @param measure Compared against \code{"maxmean"}. Defaults to \code{"exact"}.
 #' @param scale Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -106,12 +109,13 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
 
 #' morie_informer_kl_from_uniform
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param q See Usage.
-#' @param K See Usage.
-#' @param scale Defaults to \code{NULL}.
+#' @param q Passed to \code{morie_informer_sparsity_measure}.
+#' @param K Passed to \code{morie_informer_sparsity_measure}.
+#' @param scale Passed to \code{morie_informer_sparsity_measure}.
 #' @return A numeric value.
 #' @export
 morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
@@ -122,15 +126,16 @@ morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
 
 #' morie_informer_select_queries
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. Called by \code{morie_informer_probsparse_attention}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
+#' @param Q Passed to \code{.informer_to_rows}.
+#' @param K Passed to \code{.informer_to_rows}.
 #' @param factor Defaults to \code{5}.
-#' @param measure Defaults to \code{"maxmean"}.
+#' @param measure Passed to \code{morie_informer_sparsity_measure}. Defaults to \code{"maxmean"}.
 #' @param n_sample Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{top}, \code{u}, \code{scores}, \code{L_Q}, \code{L_K}, \code{n_sample}, \code{measure}.
 #' @export
 morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
@@ -169,12 +174,13 @@ morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
 
 #' morie_informer_full_attention
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
-#' @param V See Usage.
+#' @param Q Passed to \code{.informer_to_rows}.
+#' @param K Passed to \code{.informer_to_rows}.
+#' @param V Passed to \code{.informer_to_rows}.
 #' @param scale Defaults to \code{NULL}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -201,16 +207,17 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
 
 #' morie_informer_probsparse_attention
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
-#' @param V See Usage.
-#' @param factor Defaults to \code{5}.
-#' @param measure Defaults to \code{"maxmean"}.
-#' @param n_sample Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param Q Passed to \code{.informer_to_rows}.
+#' @param K Passed to \code{.informer_to_rows}.
+#' @param V Passed to \code{.informer_to_rows}.
+#' @param factor Passed to \code{morie_informer_select_queries}. Defaults to \code{5}.
+#' @param measure Passed to \code{morie_informer_select_queries}. Defaults to \code{"maxmean"}.
+#' @param n_sample Passed to \code{morie_informer_select_queries}.
+#' @param seed Passed to \code{morie_informer_select_queries}. Defaults to \code{0}.
 #' @param scale Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{output}, \code{selected}, \code{u}, \code{L_Q}, \code{L_K}, \code{measure}, \code{complexity}, \code{method}, \code{note}.
 #' @export
@@ -257,7 +264,8 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
 
 #' morie_informer_complexity
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. Called by \code{morie_informer_probsparse_attention}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param L_Q See Usage.
@@ -281,7 +289,8 @@ morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
 
 #' morie_informer_cheatsheet
 #'
-#' Part of the informer_native implementation; see the file header for
+#' A step of the informer_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

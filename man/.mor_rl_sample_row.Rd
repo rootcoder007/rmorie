@@ -8,8 +8,8 @@
 .mor_rl_sample_row(row, S, u)
 }
 \arguments{
-\item{row}{See Usage.}
-\item{S}{See Usage.}
+\item{row}{A vector; indexed elementwise.}
+\item{S}{A count; the body uses it as \code{seq_len(...)}.}
 \item{u}{See Usage.}
 }
 \description{

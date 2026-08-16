@@ -8,9 +8,9 @@
 .hrz3_sieve(z, J, kind = "poly")
 }
 \arguments{
-\item{z}{See Usage.}
-\item{J}{See Usage.}
-\item{kind}{Defaults to \code{"poly"}.}
+\item{z}{A vector; its length is taken.}
+\item{J}{A count; the body uses it as \code{seq_len(...)}.}
+\item{kind}{One of \code{"cos"}, \code{"poly"}. Defaults to \code{"poly"}.}
 }
 \description{
 basis {1, sqrt(2) cos(pi k v)}, for which the coefficients in (5.79) are literally the inner products beta_j = <g, psi_j> as the text notes.  "poly" is the monomial basis, which spans the same spaces but is not orthonormal.

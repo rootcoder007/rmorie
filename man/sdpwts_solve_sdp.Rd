@@ -9,8 +9,8 @@ sdpwts_solve_sdp(c, F0, Fs, x0, t0 = 1, mu = 10, tol = 1e-08, max_outer = 60)
 }
 \arguments{
 \item{c}{See Usage.}
-\item{F0}{See Usage.}
-\item{Fs}{See Usage.}
+\item{F0}{A matrix; passed to \code{as.matrix}.}
+\item{Fs}{Passed to \code{.sdpwts_centre}.}
 \item{x0}{See Usage.}
 \item{t0}{Defaults to \code{1}.}
 \item{mu}{Defaults to \code{10}.}
@@ -18,7 +18,7 @@ sdpwts_solve_sdp(c, F0, Fs, x0, t0 = 1, mu = 10, tol = 1e-08, max_outer = 60)
 \item{max_outer}{Defaults to \code{60}.}
 }
 \description{
-Part of the sdpwts_native implementation; see the file header for the source it follows.
+A step of the sdpwts_native implementation. Called by \code{sdpwts_min_eigenvalue_sdp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{x}, \code{objective}, \code{gap}, \code{outer_iterations}, \code{path}, \code{m}, \code{min_eigenvalue}, \code{method}, \code{note}.

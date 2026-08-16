@@ -88,7 +88,8 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 
 #' Python range(lo, hi+1); empty when hi < lo
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{.vepan_hgvs_c}, \code{.vepan_splice_terms} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param lo See Usage.
@@ -102,7 +103,8 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 
 #' 0-based index of ch in s, or -1 (like Python str.find)
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_coding_terms}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s See Usage.
@@ -117,11 +119,12 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 
 #' 0-based character access
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_cds_frame}, \code{.vepan_coding_terms}, \code{.vepan_hgvs_c}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param k See Usage.
+#' @param s Character; passed to \code{substr}.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{substr}.
 #' @export
 .vepan_char <- function(s, k) {
@@ -131,7 +134,8 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 
 #' Severity rank of an SO term; 1 is worst. Unknown terms sort last
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_pick_key}, \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param term See Usage.
@@ -145,7 +149,8 @@ morie_vepan_consequence_rank <- function(term) {
 
 #' HIGH/MODERATE/LOW/MODIFIER for an SO term
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param term See Usage.
@@ -159,7 +164,8 @@ morie_vepan_consequence_impact <- function(term) {
 
 #' The lowest-ranked (worst) term
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param terms See Usage.
@@ -178,10 +184,11 @@ morie_vepan_most_severe_consequence <- function(terms) {
 
 #' .vepan_revcomp
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{.vepan_hgvs_c}, \code{morie_vepan_transcript_sequence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Character; passed to \code{toupper}.
 #' @return A character value.
 #' @export
 .vepan_revcomp <- function(s) {
@@ -195,7 +202,8 @@ morie_vepan_most_severe_consequence <- function(terms) {
 
 #' .vepan_exons
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_transcript}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ex See Usage.
@@ -213,10 +221,11 @@ morie_vepan_most_severe_consequence <- function(terms) {
 
 #' .vepan_transcript
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_transcript_sequence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tr See Usage.
+#' @param tr A list; the body reads \code{$biotype}, \code{$canonical}, \code{$cds_end}, \code{$cds_start}, \code{$chrom}, \code{$exons}, \code{$gene}, \code{$id}, \code{$strand} from it.
 #' @return A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons}, \code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start}, \code{end}.
 #' @export
 .vepan_transcript <- function(tr) {
@@ -274,7 +283,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #'
 #' of its bases (returns list(seq, gpos)).
 #'
-#' @param tr See Usage.
+#' @param tr Passed to \code{.vepan_transcript}.
 #' @param genome See Usage.
 #' @return A list with \code{seq}, \code{gpos}.
 #' @export
@@ -301,11 +310,12 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' CDNA index (0-based) of each coding base, and the coding sequence
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param genome See Usage.
+#' @param t A list; the body reads \code{$cds_end}, \code{$cds_start} from it.
+#' @param genome Passed to \code{morie_vepan_transcript_sequence}.
 #' @return A list with \code{cds}, \code{coding}, \code{sg}.
 #' @export
 .vepan_cds_frame <- function(t, genome) {
@@ -327,10 +337,11 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' .vepan_introns
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_splice_terms}, \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t A list; the body reads \code{$exons} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .vepan_introns <- function(t) {
@@ -348,10 +359,11 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' .vepan_variant
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A list; the body reads \code{$alt}, \code{$chrom}, \code{$id}, \code{$pos}, \code{$ref} from it.
 #' @return A list with \code{chrom}, \code{pos}, \code{ref}, \code{alt}, \code{id}.
 #' @export
 .vepan_variant <- function(v) {
@@ -380,10 +392,11 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' .vepan_kind
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{.vepan_affected}, \code{.vepan_apply}, \code{.vepan_coding_terms} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A list; the body reads \code{$alt}, \code{$ref} from it.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .vepan_kind <- function(v) {
@@ -397,7 +410,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #'
 #' yields lo > hi (an empty span between pos and pos+1).
 #'
-#' @param v See Usage.
+#' @param v A list; the body reads \code{$pos}, \code{$ref} from it.
 #' @return A vector, from \code{c}.
 #' @export
 .vepan_affected <- function(v) {
@@ -417,13 +430,14 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' Splice consequences from the distance to each exon boundary
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t A list; the body reads \code{$end}, \code{$exons}, \code{$start}, \code{$strand} from it.
 #' @param v See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param lo Passed to \code{.vepan_seqrange}.
+#' @param hi Passed to \code{.vepan_seqrange}.
 #' @return The value of \code{unique}.
 #' @export
 .vepan_splice_terms <- function(t, v, lo, hi) {
@@ -487,11 +501,11 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #'
 #' (0-based offset). Returns list(alt_cds, off) or list(NULL, NULL).
 #'
-#' @param cds See Usage.
-#' @param v See Usage.
-#' @param coding See Usage.
-#' @param gpos See Usage.
-#' @param strand See Usage.
+#' @param cds A vector; its length is taken.
+#' @param v A list; the body reads \code{$alt}, \code{$pos} from it.
+#' @param coding Numeric; combined arithmetically in the body.
+#' @param gpos A vector; indexed elementwise.
+#' @param strand One of \code{"-"}, \code{"+"}.
 #' @return A list with \code{alt_cds}, \code{off}.
 #' @export
 .vepan_apply <- function(cds, v, coding, gpos, strand) {
@@ -540,11 +554,11 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #'
 #' list(terms, info).
 #'
-#' @param t See Usage.
-#' @param v See Usage.
-#' @param cds See Usage.
-#' @param coding See Usage.
-#' @param gpos See Usage.
+#' @param t A list; the body reads \code{$strand} from it.
+#' @param v Passed to \code{.vepan_apply}.
+#' @param cds A vector; its length is taken.
+#' @param coding Passed to \code{.vepan_apply}.
+#' @param gpos Passed to \code{.vepan_apply}.
 #' @return A list with \code{terms}, \code{info}.
 #' @export
 .vepan_coding_terms <- function(t, v, cds, coding, gpos) {
@@ -624,14 +638,15 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' C. notation, with an indel shifted to its most 3\' position
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param v See Usage.
-#' @param seq See Usage.
-#' @param gpos See Usage.
-#' @param cds_first See Usage.
+#' @param t A list; the body reads \code{$strand} from it.
+#' @param v A list; the body reads \code{$alt}, \code{$pos} from it.
+#' @param seq A vector; its length is taken.
+#' @param gpos A vector; its length is taken.
+#' @param cds_first Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A character value.
 #' @export
 .vepan_hgvs_c <- function(t, v, seq, gpos, cds_first) {
@@ -690,11 +705,12 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' .vepan_hgvs_p
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param info See Usage.
-#' @param terms See Usage.
+#' @param info A list; the body reads \code{$alt_aa}, \code{$protein_position}, \code{$ref_aa} from it.
+#' @param terms One of \code{"frameshift_variant"}, \code{"start_retained_variant"}, \code{"stop_retained_variant"}, \code{"synonymous_variant"}.
 #' @return A character value.
 #' @export
 .vepan_hgvs_p <- function(info, terms) {
@@ -729,10 +745,11 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 #' morie_vepan_annotate
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_vep_annotation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param variant See Usage.
+#' @param variant Passed to \code{.vepan_variant}.
 #' @param transcripts See Usage.
 #' @param genome See Usage.
 #' @param upstream Defaults to \code{5000}.
@@ -886,10 +903,11 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 
 #' Table 7\'s order: canonical, then protein coding, then severity
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_pick}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
+#' @param r A list; the body reads \code{$biotype}, \code{$canonical}, \code{$most_severe}, \code{$transcript} from it.
 #' @return The value of \code{list}.
 #' @export
 .vepan_pick_key <- function(r) {
@@ -902,11 +920,12 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 
 #' Lexicographic comparison of two pick keys
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_pick}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param k1 See Usage.
-#' @param k2 See Usage.
+#' @param k1 A vector; its length is taken and its elements indexed.
+#' @param k2 A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
 .vepan_key_less <- function(k1, k2) {
@@ -925,11 +944,12 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 
 #' Pick (one record) or --per_gene (one per gene)
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. Called by \code{morie_vepan_vep_annotation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param records See Usage.
-#' @param per_gene Defaults to \code{FALSE}.
+#' @param per_gene A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{unname}.
 #' @export
 morie_vepan_pick <- function(records, per_gene=FALSE) {
@@ -966,16 +986,17 @@ morie_vepan_pick <- function(records, per_gene=FALSE) {
 
 #' morie_vepan_vep_annotation
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param variants See Usage.
 #' @param transcripts See Usage.
-#' @param genome See Usage.
-#' @param upstream Defaults to \code{5000}.
-#' @param downstream Defaults to \code{5000}.
-#' @param mode Defaults to \code{"all"}.
-#' @param no_intergenic Defaults to \code{FALSE}.
+#' @param genome Passed to \code{morie_vepan_annotate}.
+#' @param upstream Passed to \code{morie_vepan_annotate}. Defaults to \code{5000}.
+#' @param downstream Passed to \code{morie_vepan_annotate}. Defaults to \code{5000}.
+#' @param mode One of \code{"all"}, \code{"per_gene"}, \code{"pick"}. Defaults to \code{"all"}.
+#' @param no_intergenic A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{annotations}, \code{n_variants}, \code{n_annotations}, \code{consequence_counts}, \code{mode}, \code{method}, \code{note}.
 #' @export
 morie_vepan_vep_annotation <- function(variants, transcripts, genome,
@@ -1030,7 +1051,8 @@ morie_vepan_vep_annotation <- function(variants, transcripts, genome,
 
 #' morie_vepan_cheatsheet
 #'
-#' Part of the vepan_native implementation; see the file header for the
+#' A step of the vepan_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

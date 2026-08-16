@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
 \item{grid}{See Usage.}
-\item{h}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the horowitz_native8 implementation; see the file header for the source it follows.
+A step of the horowitz_native8 implementation. Called by \code{morie_direct_discrete}, \code{morie_nls_weight_function}, \code{morie_one_step_efficient}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

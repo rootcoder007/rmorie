@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the sbert_native implementation; see the file header for the source it follows.
+A step of the sbert_native implementation. Called by \code{classification_features}, \code{cosine_similarity}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

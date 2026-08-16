@@ -8,12 +8,12 @@
 .bsalpcspec(a, fs, npts = 1024L)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{fs}{See Usage.}
-\item{npts}{Defaults to \code{1024L}.}
+\item{a}{A vector; its length is taken and its elements indexed.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{npts}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1024L}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{InfantCry}, \code{SpeechFeat} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{freqs}, \code{power}.

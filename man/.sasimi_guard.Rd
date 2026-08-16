@@ -8,10 +8,10 @@
 .sasimi_guard(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A list; the body reads \code{$a}, \code{$b} from it.}
 }
 \description{
-Part of the sasimi_native implementation; see the file header for the source it follows.
+A step of the sasimi_native implementation. Called by \code{sasimi_cosine}, \code{sasimi_dice}, \code{sasimi_tanimoto} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,10 +8,10 @@
 .schab_data_covariance(mu, sigma2, family, R = NULL)
 }
 \arguments{
-\item{mu}{See Usage.}
+\item{mu}{A vector; its length is taken.}
 \item{sigma2}{See Usage.}
-\item{family}{See Usage.}
-\item{R}{Defaults to \code{NULL}.}
+\item{family}{Passed to \code{.schab_variance_function}.}
+\item{R}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
 score equations with the symbol Sigma_mu, but the matrix they need is this one; with (6.79) as written the scores are wrong by a factor of Psi^2.

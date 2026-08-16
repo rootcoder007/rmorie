@@ -73,7 +73,8 @@
 
 #' .tlsate_check
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_pate_influence_curve}, \code{.tlsate_sate_influence_curve}, \code{.tlsate_sate_tmle} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A See Usage.
@@ -102,7 +103,8 @@
 
 #' .tlsate_logit
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -115,10 +117,11 @@
 
 #' .tlsate_expit
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
 .tlsate_expit <- function(x) {
@@ -127,10 +130,11 @@
 
 #' .tlsate_var
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_variance_gap}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .tlsate_var <- function(v) {
@@ -140,10 +144,11 @@
 
 #' .tlsate_se
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .tlsate_se <- function(v) {
@@ -153,15 +158,16 @@
 
 #' .tlsate_pate_influence_curve
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}, \code{.tlsate_variance_gap}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
-#' @param psi See Usage.
+#' @param A Passed to \code{.tlsate_check}.
+#' @param Y Passed to \code{.tlsate_check}.
+#' @param Q1 Passed to \code{.tlsate_check}.
+#' @param Q0 Passed to \code{.tlsate_check}.
+#' @param g Passed to \code{.tlsate_check}.
+#' @param psi Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .tlsate_pate_influence_curve <- function(A, Y, Q1, Q0, g, psi) {
@@ -175,14 +181,15 @@
 
 #' .tlsate_sate_influence_curve
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}, \code{.tlsate_variance_gap}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
+#' @param A Passed to \code{.tlsate_check}.
+#' @param Y Passed to \code{.tlsate_check}.
+#' @param Q1 Passed to \code{.tlsate_check}.
+#' @param Q0 Passed to \code{.tlsate_check}.
+#' @param g Passed to \code{.tlsate_check}.
 #' @return A numeric value.
 #' @export
 .tlsate_sate_influence_curve <- function(A, Y, Q1, Q0, g) {
@@ -195,15 +202,16 @@
 
 #' .tlsate_variance_gap
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
-#' @param psi See Usage.
+#' @param A Passed to \code{.tlsate_check}.
+#' @param Y Passed to \code{.tlsate_check}.
+#' @param Q1 Passed to \code{.tlsate_check}.
+#' @param Q0 Passed to \code{.tlsate_check}.
+#' @param g Passed to \code{.tlsate_check}.
+#' @param psi Passed to \code{.tlsate_pate_influence_curve}.
 #' @return A list with \code{var_pate}, \code{var_sate}, \code{gap}, \code{var_conditional_effect}, \code{note}.
 #' @export
 .tlsate_variance_gap <- function(A, Y, Q1, Q0, g, psi) {
@@ -223,14 +231,15 @@
 
 #' .tlsate_sate_tmle
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
+#' @param A Passed to \code{.tlsate_check}.
+#' @param Y Passed to \code{.tlsate_check}.
+#' @param Q1 Passed to \code{.tlsate_check}.
+#' @param Q0 Passed to \code{.tlsate_check}.
+#' @param g Passed to \code{.tlsate_check}.
 #' @return A list with \code{estimate}, \code{psi}, \code{se_population}, \code{se_sample}, \code{ci_population}, \code{ci_sample}, \code{width_ratio}, \code{method}, \code{note}.
 #' @export
 .tlsate_sate_tmle <- function(A, Y, Q1, Q0, g) {
@@ -275,7 +284,8 @@
 
 #' .tlsate_paired_variance
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pair_ids See Usage.
@@ -309,7 +319,8 @@
 
 #' .tlsate_cheatsheet
 #'
-#' Part of the tlsate_native implementation; see the file header for the
+#' A step of the tlsate_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

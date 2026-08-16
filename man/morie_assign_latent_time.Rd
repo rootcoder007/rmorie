@@ -8,14 +8,14 @@
 morie_assign_latent_time(u, s, alpha, beta, gamma, t_switch, grid = 200, t_max = NULL)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{s}{See Usage.}
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
-\item{t_switch}{See Usage.}
-\item{grid}{Defaults to \code{200}.}
-\item{t_max}{Defaults to \code{NULL}.}
+\item{u}{A vector; its length is taken and its elements indexed.}
+\item{s}{A vector; indexed elementwise.}
+\item{alpha}{Passed to \code{morie_simulate_gene}.}
+\item{beta}{Numeric; passed to \code{min}.}
+\item{gamma}{Numeric; passed to \code{min}.}
+\item{t_switch}{Numeric; combined arithmetically in the body.}
+\item{grid}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
+\item{t_max}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
 closest to it, in Euclidean (u, s) distance, and the transcriptional state of the segment it lands on.

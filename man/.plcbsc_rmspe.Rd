@@ -8,10 +8,10 @@
 .plcbsc_rmspe(gaps)
 }
 \arguments{
-\item{gaps}{See Usage.}
+\item{gaps}{A vector; its length is taken.}
 }
 \description{
-Part of the plcbsc_native implementation; see the file header for the source it follows.
+A step of the plcbsc_native implementation. Called by \code{.plcbsc_effect}, \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

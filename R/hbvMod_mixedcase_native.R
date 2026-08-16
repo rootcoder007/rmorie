@@ -59,8 +59,8 @@
 #' @param precip See Usage.
 #' @param temp See Usage.
 #' @param epot See Usage.
-#' @param params See Usage.
-#' @param init Defaults to \code{NULL}.
+#' @param params A list; the body reads \code{$beta}, \code{$cfmax}, \code{$cfr}, \code{$fc}, \code{$k0}, \code{$k1}, \code{$k2}, \code{$lp}, \code{$maxbas}, \code{$perc}, \code{$tt}, \code{$uzl} from it.
+#' @param init Optional; may be \code{NULL}. A list; the body reads \code{$slz}, \code{$snow}, \code{$soil}, \code{$suz}, \code{$swater} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {

@@ -8,12 +8,12 @@
 .morie_w4c_rbf(A, B, gamma)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
-\item{gamma}{See Usage.}
+\item{A}{A matrix; passed to \code{\%*\%}.}
+\item{B}{A matrix; passed to \code{t}.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_one_class_svm}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

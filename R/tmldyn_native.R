@@ -25,7 +25,8 @@
 
 #' .tmldyn_logit
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -38,10 +39,11 @@
 
 #' .tmldyn_expit
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{.fluctuate}, \code{intervention_mechanism}, \code{morie_tmldyn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tmldyn_expit <- function(z) {
@@ -50,7 +52,8 @@
 
 #' .blocks
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param covariate_history See Usage.
@@ -73,13 +76,14 @@
 
 #' .project
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{sequential_blips}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values See Usage.
-#' @param basis See Usage.
+#' @param basis Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n See Usage.
-#' @param ridge See Usage.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .project <- function(values, basis, n, ridge) {
@@ -144,16 +148,17 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 
 #' .fit_q2
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}, \code{rule_value_seq}, \code{sequential_blips}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param L0 See Usage.
-#' @param A0 See Usage.
-#' @param L1 See Usage.
-#' @param A1 See Usage.
+#' @param y A vector; indexed elementwise.
+#' @param L0 A matrix; indexed by row and column.
+#' @param A0 A vector; indexed elementwise.
+#' @param L1 A matrix; indexed by row and column.
+#' @param A1 A vector; indexed elementwise.
 #' @param idx See Usage.
-#' @param ridge See Usage.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{q2}, \code{b}.
 #' @export
 .fit_q2 <- function(y, L0, A0, L1, A1, idx, ridge) {
@@ -175,14 +180,15 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 
 #' .fit_q1
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}, \code{rule_value_seq}, \code{sequential_blips}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pseudo See Usage.
-#' @param L0 See Usage.
-#' @param A0 See Usage.
+#' @param pseudo A vector; indexed elementwise.
+#' @param L0 A matrix; indexed by row and column.
+#' @param A0 A vector; indexed elementwise.
 #' @param idx See Usage.
-#' @param ridge See Usage.
+#' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{q1}, \code{b}.
 #' @export
 .fit_q1 <- function(pseudo, L0, A0, idx, ridge) {
@@ -285,13 +291,14 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 
 #' .fluctuate
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param outcome See Usage.
-#' @param offset_logit See Usage.
-#' @param H See Usage.
-#' @param rows See Usage.
+#' @param outcome A vector; indexed elementwise.
+#' @param offset_logit A vector; indexed elementwise.
+#' @param H A vector; indexed elementwise.
+#' @param rows A vector; its length is taken.
 #' @param iters Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return The value of \code{e}, as built in the body.
@@ -318,10 +325,11 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 
 #' .tmldyn_folds
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param n_folds See Usage.
 #' @return The value of \code{lapply}.
 #' @export
@@ -361,10 +369,11 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
 
 #' .coerce_regime
 #'
-#' Part of the tmldyn_native implementation; see the file header for the
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param regime See Usage.
+#' @param regime Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @param n See Usage.
 #' @return Nothing; this branch always raises.
 #' @export

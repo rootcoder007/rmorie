@@ -11,7 +11,7 @@ PzResp(zeros, poles, omega, gain = 1)
 \item{zeros}{See Usage.}
 \item{poles}{See Usage.}
 \item{omega}{See Usage.}
-\item{gain}{Defaults to \code{1}.}
+\item{gain}{Numeric; passed to \code{abs}. Defaults to \code{1}.}
 }
 \description{
 of distances to the zeros over the product of distances to the poles, and the phase is (M-N) angle(z0) plus the zero angles minus the pole angles.  A zero ON the circle sends one distance to zero -- a spectral null; a pole near it makes one distance small -- a resonance.  The distances are returned so that reading can be made.

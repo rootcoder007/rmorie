@@ -8,14 +8,14 @@
 .fwxF_dmc_day(p0, t, h, r, month)
 }
 \arguments{
-\item{p0}{See Usage.}
-\item{t}{See Usage.}
-\item{h}{See Usage.}
-\item{r}{See Usage.}
+\item{p0}{Numeric; passed to \code{log}.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{r}{Numeric; combined arithmetically in the body.}
 \item{month}{See Usage.}
 }
 \description{
-Part of the fwxF_mixedcase_native implementation; see the file header for the source it follows.
+A step of the fwxF_mixedcase_native implementation. Called by \code{morie_fwxF}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

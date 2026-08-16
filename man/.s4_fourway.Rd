@@ -8,15 +8,15 @@
 .s4_fourway(theta, beta, cbar, a = 1, astar = 0, m = 0)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{beta}{See Usage.}
-\item{cbar}{See Usage.}
-\item{a}{Defaults to \code{1}.}
-\item{astar}{Defaults to \code{0}.}
-\item{m}{Defaults to \code{0}.}
+\item{theta}{A vector; indexed elementwise.}
+\item{beta}{A vector; indexed elementwise.}
+\item{cbar}{A vector; its length is taken.}
+\item{a}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{astar}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{m}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4}, \code{Intvse} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cde}, \code{intref}, \code{intmed}, \code{pie}, \code{te}.

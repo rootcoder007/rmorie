@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{lam}{See Usage.}
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.ghc_norm}.}
 }
 \description{
-Part of the ttrace_native implementation; see the file header for the source it follows.
+A step of the ttrace_native implementation. Called by \code{negbinom_offspring}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{repeat}.

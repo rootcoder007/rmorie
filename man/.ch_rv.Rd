@@ -8,12 +8,12 @@
 .ch_rv(t, df, q = 1)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{df}{See Usage.}
-\item{q}{Defaults to \code{1}.}
+\item{t}{Numeric; passed to \code{abs}.}
+\item{df}{Numeric; passed to \code{sqrt}.}
+\item{q}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the chzlt implementation; see the file header for the source it follows.
+A step of the chzlt implementation. Called by \code{Chzlt}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

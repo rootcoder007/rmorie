@@ -62,11 +62,12 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 
 #' .t2_alpha_on
 #'
-#' Part of the tail2_t02 implementation; see the file header for the
+#' A step of the tail2_t02 implementation. Called by \code{CttAlphaMax}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param cols See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param cols A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .t2_alpha_on <- function(X, cols) {
@@ -89,10 +90,11 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 
 #' .t2_table
 #'
-#' Part of the tail2_t02 implementation; see the file header for the
+#' A step of the tail2_t02 implementation. Called by \code{CttAlpha}, \code{CttAlphaMax}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{nrow}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .t2_table <- function(X) {
@@ -158,10 +160,11 @@ CttAlphaMax <- function(X) {
 
 #' .t2_qn_finite_c
 #'
-#' Part of the tail2_t02 implementation; see the file header for the
+#' A step of the tail2_t02 implementation. Called by \code{QnScale}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .t2_qn_finite_c <- function(n) {
@@ -259,7 +262,8 @@ BrayCurt <- function(x, y, close = TRUE) {
 
 #' .t2_named_f
 #'
-#' Part of the tail2_t02 implementation; see the file header for the
+#' A step of the tail2_t02 implementation. Called by \code{FDiverg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param key See Usage.
@@ -277,7 +281,8 @@ BrayCurt <- function(x, y, close = TRUE) {
 
 #' .t2_named_inf
 #'
-#' Part of the tail2_t02 implementation; see the file header for the
+#' A step of the tail2_t02 implementation. Called by \code{FDiverg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param key See Usage.

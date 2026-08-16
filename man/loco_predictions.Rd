@@ -8,13 +8,13 @@
 loco_predictions(preds, meta, weights, chromosomes = NULL)
 }
 \arguments{
-\item{preds}{See Usage.}
+\item{preds}{A vector; indexed elementwise.}
 \item{meta}{See Usage.}
-\item{weights}{See Usage.}
+\item{weights}{A vector; indexed elementwise.}
 \item{chromosomes}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{morie_regmlm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loco}, \code{chromosomes}, \code{note}.

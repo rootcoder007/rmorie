@@ -83,10 +83,11 @@ FormFactor <- function(x) {
 
 #' .morie_rg_turns
 #'
-#' Part of the rangayyan_stat implementation; see the file header for
+#' A step of the rangayyan_stat implementation. Called by \code{TurnsCount}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param seg See Usage.
+#' @param seg A vector; its length is taken and its elements indexed.
 #' @param threshold See Usage.
 #' @return A list with \code{turns}, \code{positions}.
 #' @export
@@ -126,7 +127,7 @@ FormFactor <- function(x) {
 #' what separates it from counting turning points.
 #'
 #' @param x See Usage.
-#' @param threshold Defaults to \code{100}.
+#' @param threshold Passed to \code{.morie_rg_turns}. Defaults to \code{100}.
 #' @param window Defaults to \code{NULL}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -168,7 +169,7 @@ TurnsCount <- function(x, threshold = 100, window = NULL) {
 #'
 #' @param signal See Usage.
 #' @param noise See Usage.
-#' @param definition Defaults to \code{"power"}.
+#' @param definition One of \code{"peak"}, \code{"power"}. Defaults to \code{"power"}.
 #' @return A list with \code{snr_db}, \code{snr_power_db}, \code{snr_peak_db}, \code{signal_power}, \code{noise_power}, \code{noise_rms}, \code{definition}, \code{method}.
 #' @export
 Snr <- function(signal, noise, definition = "power") {
@@ -373,11 +374,12 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
 
 #' .morie_rg_periodogram
 #'
-#' Part of the rangayyan_stat implementation; see the file header for
+#' A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdVag}, \code{SigFeatures}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param xs See Usage.
-#' @param fs See Usage.
+#' @param xs A vector; its length is taken.
+#' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{psd}, \code{freqs}.
 #' @export
 .morie_rg_periodogram <- function(xs, fs) {

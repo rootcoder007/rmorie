@@ -8,11 +8,11 @@
 .scintg_solve(A, B)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{B}{A matrix; passed to \code{ncol}.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

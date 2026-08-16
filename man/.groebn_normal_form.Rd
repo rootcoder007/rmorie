@@ -8,12 +8,12 @@
 .groebn_normal_form(f, G, order = "lex")
 }
 \arguments{
-\item{f}{See Usage.}
-\item{G}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
+\item{f}{Passed to \code{.groebn_divide}.}
+\item{G}{Passed to \code{.groebn_divide}.}
+\item{order}{Passed to \code{.groebn_divide}. Defaults to \code{"lex"}.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_ideal_member}, \code{.groebn_reduce_basis}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

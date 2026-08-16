@@ -3,16 +3,16 @@
 % the formals.
 \name{morie_wrd2v_analogy}
 \alias{morie_wrd2v_analogy}
-\title{Section 4\\'s offset query: b - a + c. The three question words are}
+\title{Section 4\'s offset query: b - a + c. The three question words are}
 \usage{
 morie_wrd2v_analogy(vectors, a, b, c, topn = 1)
 }
 \arguments{
-\item{vectors}{See Usage.}
+\item{vectors}{A vector; indexed elementwise.}
 \item{a}{See Usage.}
 \item{b}{See Usage.}
 \item{c}{See Usage.}
-\item{topn}{Defaults to \code{1}.}
+\item{topn}{Numeric; passed to \code{min}. Defaults to \code{1}.}
 }
 \description{
 excluded from the answer.

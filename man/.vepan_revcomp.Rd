@@ -8,10 +8,10 @@
 .vepan_revcomp(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Character; passed to \code{toupper}.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{.vepan_hgvs_c}, \code{morie_vepan_transcript_sequence}. See the file header for the source the module follows.
 }
 \value{
 A character value.

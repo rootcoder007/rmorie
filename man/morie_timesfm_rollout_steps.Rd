@@ -12,7 +12,7 @@ morie_timesfm_rollout_steps(horizon, output_patch_len)
 \item{output_patch_len}{See Usage.}
 }
 \description{
-Part of the timesfm_native implementation; see the file header for the source it follows.
+A step of the timesfm_native implementation. Called by \code{morie_timesfm}, \code{morie_timesfm_horizon_plan}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{steps}, \code{horizon}, \code{output_patch_len}, \code{single_step}.

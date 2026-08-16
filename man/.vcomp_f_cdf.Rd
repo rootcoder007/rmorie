@@ -8,9 +8,9 @@
 .vcomp_f_cdf(x, d1, d2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{d1}{See Usage.}
-\item{d2}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{d1}{Numeric; combined arithmetically in the body.}
+\item{d2}{Numeric; combined arithmetically in the body.}
 }
 \description{
 P(F <= x) = I_{d1 x / (d1 x + d2)}(d1/2, d2/2)

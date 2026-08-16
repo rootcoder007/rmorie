@@ -12,7 +12,7 @@
 \item{pred}{See Usage.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{CadPipe}, \code{PvcBayes}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tp}, \code{tn}, \code{fp}, \code{fn}.

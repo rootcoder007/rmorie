@@ -8,8 +8,8 @@
 .bsalpc(x, order)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{order}{See Usage.}
+\item{x}{Passed to \code{.bsaacf}.}
+\item{order}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 error) Part of the rangayyan_phys implementation; see the file header for the source it follows.

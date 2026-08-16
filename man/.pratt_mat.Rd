@@ -8,10 +8,10 @@
 .pratt_mat(H)
 }
 \arguments{
-\item{H}{See Usage.}
+\item{H}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the pratt_native implementation; see the file header for the source it follows.
+A step of the pratt_native implementation. Called by \code{.pratt_attention}, \code{.pratt_document_vector}, \code{.pratt_sentence_vector}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

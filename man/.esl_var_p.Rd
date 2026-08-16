@@ -3,12 +3,12 @@
 % the formals.
 \name{.esl_var_p}
 \alias{.esl_var_p}
-\title{Population variance, matching numpy\\\'s np.var default (ddof = 0);}
+\title{Population variance, matching numpy\\'s np.var default (ddof = 0);}
 \usage{
 .esl_var_p(y)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; its length is taken.}
 }
 \description{
 stats::var uses ddof = 1 and would weight the split criterion differently

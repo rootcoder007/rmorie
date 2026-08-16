@@ -8,11 +8,11 @@
 .s03mad(v, constant = 1.4826)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{constant}{Defaults to \code{1.4826}.}
+\item{v}{Numeric; combined arithmetically in the body.}
+\item{constant}{Numeric; combined arithmetically in the body. Defaults to \code{1.4826}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{Irlsfn}, \code{Ogkcv}, \code{Ramsw}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

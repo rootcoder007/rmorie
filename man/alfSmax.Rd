@@ -8,7 +8,7 @@
 alfSmax(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{max}.}
 }
 \description{
 contract: the Python arm subtracts the same maximum.

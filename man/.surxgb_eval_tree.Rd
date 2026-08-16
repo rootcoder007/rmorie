@@ -8,11 +8,11 @@
 .surxgb_eval_tree(node, x)
 }
 \arguments{
-\item{node}{See Usage.}
-\item{x}{See Usage.}
+\item{node}{A list; the body reads \code{$cut}, \code{$leaf}, \code{$left}, \code{$right}, \code{$variable}, \code{$weight} from it.}
+\item{x}{A vector; indexed elementwise.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}, \code{morie_surxgb_predict}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.
@@ -20,7 +20,7 @@ The value of \code{$}.
 \references{
 ----------
 Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-System", KDD \\'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
+System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
 and 2.2, eqs (5)-(7).
 
 Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with

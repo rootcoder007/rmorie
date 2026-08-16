@@ -11,10 +11,10 @@ stick_breaking(alpha, K, rng = NULL, seed = 0)
 \item{alpha}{See Usage.}
 \item{K}{See Usage.}
 \item{rng}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{
-Part of the slowdp_native implementation; see the file header for the source it follows.
+A step of the slowdp_native implementation. Called by \code{truncated_dp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass}, \code{K}, \code{alpha}, \code{note}.

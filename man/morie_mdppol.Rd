@@ -8,16 +8,16 @@
 morie_mdppol(P, R, gamma, tol = 1e-12, max_eval = 1e+05, max_improve = 1000, pi0 = NULL)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{R}{See Usage.}
-\item{gamma}{See Usage.}
+\item{P}{Passed to \code{.mdppol_args}.}
+\item{R}{A matrix; indexed by row and column.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 \item{tol}{Defaults to \code{1e-12}.}
-\item{max_eval}{Defaults to \code{1e+05}.}
-\item{max_improve}{Defaults to \code{1000}.}
+\item{max_eval}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1e+05}.}
+\item{max_improve}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.}
 \item{pi0}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the mdppol_native implementation; see the file header for the source it follows.
+A step of the mdppol_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve}, \code{n_eval}, \code{policy_stable}, \code{method}.

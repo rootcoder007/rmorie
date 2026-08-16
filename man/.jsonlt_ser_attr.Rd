@@ -8,10 +8,10 @@
 .jsonlt_ser_attr(pairs)
 }
 \arguments{
-\item{pairs}{See Usage.}
+\item{pairs}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}. See the file header for the source the module follows.
 }
 \value{
 A character value.

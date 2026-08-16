@@ -8,19 +8,19 @@
 morie_dreamr(state, action_model, transition, reward_model, value_model, horizon = 15, gamma = 0.99, lam = 0.95, estimator = "lambda", k = 1)
 }
 \arguments{
-\item{state}{See Usage.}
-\item{action_model}{See Usage.}
-\item{transition}{See Usage.}
-\item{reward_model}{See Usage.}
-\item{value_model}{See Usage.}
-\item{horizon}{Defaults to \code{15}.}
-\item{gamma}{Defaults to \code{0.99}.}
-\item{lam}{Defaults to \code{0.95}.}
-\item{estimator}{Defaults to \code{"lambda"}.}
-\item{k}{Defaults to \code{1}.}
+\item{state}{Passed to \code{morie_dreamr_imagine}.}
+\item{action_model}{Passed to \code{morie_dreamr_imagine}.}
+\item{transition}{Passed to \code{morie_dreamr_imagine}.}
+\item{reward_model}{Passed to \code{morie_dreamr_imagine}.}
+\item{value_model}{Passed to \code{morie_dreamr_imagine}.}
+\item{horizon}{Passed to \code{morie_dreamr_imagine}. Defaults to \code{15}.}
+\item{gamma}{Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{0.99}.}
+\item{lam}{Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{0.95}.}
+\item{estimator}{Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{"lambda"}.}
+\item{k}{Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{1}.}
 }
 \description{
-Part of the dreamr_native implementation; see the file header for the source it follows.
+A step of the dreamr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{returns}, \code{objective}, \code{value_loss}, \code{residual}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{gamma}, \code{lam}, \code{estimator}, \code{method}.

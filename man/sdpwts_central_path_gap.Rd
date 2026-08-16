@@ -12,7 +12,7 @@ sdpwts_central_path_gap(t, m)
 \item{m}{See Usage.}
 }
 \description{
-Part of the sdpwts_native implementation; see the file header for the source it follows.
+A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{gap}, \code{t}, \code{m}, \code{note}.

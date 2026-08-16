@@ -11,7 +11,7 @@ HyperLim(k, n, p, N)
 
 \item{n}{draws, >= 0.}
 
-\item{p}{success fraction in the population, in \link{0, 1}.}
+\item{p}{success fraction in the population, in [0, 1].}
 
 \item{N}{population size, >= n.}
 }

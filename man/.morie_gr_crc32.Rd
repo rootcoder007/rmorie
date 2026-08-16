@@ -11,7 +11,7 @@
 \item{value}{See Usage.}
 }
 \description{
-Part of the ml_geron implementation; see the file header for the source it follows.
+A step of the ml_geron implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_gr_xor32}.

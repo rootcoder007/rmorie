@@ -8,11 +8,11 @@
 .morie_as241_poly(coef, x)
 }
 \arguments{
-\item{coef}{See Usage.}
-\item{x}{See Usage.}
+\item{coef}{A vector; its length is taken and its elements indexed.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the rng_native implementation; see the file header for the source it follows.
+A step of the rng_native implementation. Called by \code{.morie_normal_quantile}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

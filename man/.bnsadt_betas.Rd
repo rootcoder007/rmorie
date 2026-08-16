@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{family}{See Usage.}
-\item{params}{See Usage.}
+\item{params}{A vector; indexed elementwise.}
 }
 \description{
-Part of the bnsadt_native implementation; see the file header for the source it follows.
+A step of the bnsadt_native implementation. Called by \code{.bnsadt_expected_p}, \code{.bnsadt_pub_cdf}, \code{morie_bnsadt_p}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

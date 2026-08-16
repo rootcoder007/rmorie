@@ -8,10 +8,10 @@
 .phylby_splits_of(tree)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{Passed to \code{.phylby_tips}.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{.phylby_clade_credibility}, \code{.phylby_topology_key}, \code{morie_phylby_splits_of}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

@@ -8,16 +8,16 @@
 morie_estimate_propensity_scores(data, treatment, covariates, trim = c(0.01, 0.99), trim_type = "value", ps_model = "mle", ridge_lambda = 1)
 }
 \arguments{
-\item{data}{See Usage.}
-\item{treatment}{See Usage.}
-\item{covariates}{See Usage.}
-\item{trim}{Defaults to \code{c(0.01, 0.99)}.}
-\item{trim_type}{Defaults to \code{"value"}.}
-\item{ps_model}{Defaults to \code{"mle"}.}
-\item{ridge_lambda}{Defaults to \code{1}.}
+\item{data}{Passed to \code{.fit_propensity}.}
+\item{treatment}{Passed to \code{.fit_propensity}.}
+\item{covariates}{Passed to \code{.fit_propensity}.}
+\item{trim}{Passed to \code{.mor_trim_ps}. Defaults to \code{c(0.01, 0.99)}.}
+\item{trim_type}{Passed to \code{.mor_trim_ps}. Defaults to \code{"value"}.}
+\item{ps_model}{Passed to \code{.fit_propensity}. Defaults to \code{"mle"}.}
+\item{ridge_lambda}{Passed to \code{.fit_propensity}. Defaults to \code{1}.}
 }
 \description{
-Part of the causal implementation; see the file header for the source it follows.
+A step of the causal implementation. Called by \code{morie_estimate_aipw}, \code{morie_estimate_atc}, \code{morie_estimate_ate} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.mor_trim_ps}.

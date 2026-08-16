@@ -8,12 +8,12 @@
 .morie_jo_daynum(y, m, d)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{m}{See Usage.}
-\item{d}{See Usage.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{m}{Numeric; combined arithmetically in the body.}
+\item{d}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{morie_calfeat}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

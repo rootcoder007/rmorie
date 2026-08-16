@@ -11,7 +11,7 @@
 \item{u}{See Usage.}
 }
 \description{
-distribution-function estimator smooths with the kernel\\\'s integral, not the kernel, which is what makes it continuous where the empirical df jumps and why its bias carries f\\\' rather than f\\\'\\\'.
+distribution-function estimator smooths with the kernel\\'s integral, not the kernel, which is what makes it continuous where the empirical df jumps and why its bias carries f\\' rather than f\\'\\'.
 }
 \value{
 The value of \code{stats::pnorm}.

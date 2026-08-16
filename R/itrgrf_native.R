@@ -50,7 +50,8 @@
 
 #' .itrgrf_policy_from_tau
 #'
-#' Part of the itrgrf_native implementation; see the file header for the
+#' A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tau See Usage.
@@ -63,15 +64,16 @@
 
 #' .itrgrf_dr_scores
 #'
-#' Part of the itrgrf_native implementation; see the file header for the
+#' A step of the itrgrf_native implementation. Called by \code{.itrgrf_rule_value}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
-#' @param mu1 See Usage.
-#' @param mu0 See Usage.
-#' @param e See Usage.
-#' @param d See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param W A vector; indexed elementwise.
+#' @param mu1 A vector; indexed elementwise.
+#' @param mu0 A vector; indexed elementwise.
+#' @param e A vector; indexed elementwise.
+#' @param d A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .itrgrf_dr_scores <- function(y, W, mu1, mu0, e, d) {
@@ -97,15 +99,16 @@
 
 #' .itrgrf_rule_value
 #'
-#' Part of the itrgrf_native implementation; see the file header for the
+#' A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
-#' @param mu1 See Usage.
-#' @param mu0 See Usage.
-#' @param e See Usage.
-#' @param d See Usage.
+#' @param y Passed to \code{.itrgrf_dr_scores}.
+#' @param W Passed to \code{.itrgrf_dr_scores}.
+#' @param mu1 Passed to \code{.itrgrf_dr_scores}.
+#' @param mu0 Passed to \code{.itrgrf_dr_scores}.
+#' @param e Passed to \code{.itrgrf_dr_scores}.
+#' @param d Passed to \code{.itrgrf_dr_scores}.
 #' @return A list with \code{value}, \code{se}, \code{scores}.
 #' @export
 .itrgrf_rule_value <- function(y, W, mu1, mu0, e, d) {
@@ -118,17 +121,18 @@
 
 #' .itrgrf_fit_arm
 #'
-#' Part of the itrgrf_native implementation; see the file header for the
+#' A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param W See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param W A vector; indexed elementwise.
 #' @param arm See Usage.
-#' @param rows See Usage.
-#' @param at_rows See Usage.
+#' @param rows A vector; indexed elementwise.
+#' @param at_rows A vector; its length is taken and its elements indexed.
 #' @param n_trees See Usage.
-#' @param min_leaf See Usage.
+#' @param min_leaf Numeric; combined arithmetically in the body.
 #' @param seed See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -154,19 +158,20 @@
 
 #' morie_itrgrf
 #'
-#' Part of the itrgrf_native implementation; see the file header for the
+#' A step of the itrgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param W See Usage.
-#' @param X See Usage.
-#' @param cost Defaults to \code{0}.
-#' @param n_trees Defaults to \code{150}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param seed Defaults to \code{0}.
-#' @param evaluate Defaults to \code{"split"}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param cost Passed to \code{.itrgrf_policy_from_tau}. Defaults to \code{0}.
+#' @param n_trees Passed to \code{.itrgrf_fit_arm}. Defaults to \code{150}.
+#' @param min_leaf Passed to \code{.itrgrf_fit_arm}. Defaults to \code{5}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param evaluate One of \code{"in-sample"}, \code{"split"}. Defaults to \code{"split"}.
 #' @param propensity Defaults to \code{NULL}.
-#' @param level Defaults to \code{0.95}.
+#' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{value}, \code{se}, \code{ci}, \code{rule}, \code{tau}, \code{mu1}, \code{mu0}, \code{treated_fraction}, \code{value_treat_all}, \code{value_treat_none}, \code{gain_over_treat_all}, \code{gain_over_treat_none}, \code{scores}, \code{cost}, \code{evaluate}, \code{n}, \code{n_scored}, \code{level}, \code{method}.
 #' @export
 morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
@@ -270,7 +275,8 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
 
 #' .itrgrf_cheatsheet
 #'
-#' Part of the itrgrf_native implementation; see the file header for the
+#' A step of the itrgrf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -12,7 +12,7 @@ hypercube_instruments(X, n_levels = 3L)
 \item{n_levels}{Defaults to \code{3L}.}
 }
 \description{
-Part of the bnskmt_native implementation; see the file header for the source it follows.
+A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{instruments}, \code{n_instruments}, \code{n_levels}.

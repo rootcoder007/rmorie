@@ -39,10 +39,11 @@ CV_SCHEMES <- c("kfold", "loo")
 
 #' .regmlm_lambda_grid
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{level0_predictors}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; combined arithmetically in the body.
 #' @param n See Usage.
 #' @param n_ridge Defaults to \code{5}.
 #' @return A numeric value.
@@ -56,12 +57,13 @@ CV_SCHEMES <- c("kfold", "loo")
 
 #' .regmlm_folds
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{level1_stack}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param k See Usage.
-#' @param scheme See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param scheme Compared against \code{"loo"}.
 #' @return The value of \code{lapply}.
 #' @export
 .regmlm_folds <- function(n, k, scheme) {
@@ -74,11 +76,12 @@ CV_SCHEMES <- c("kfold", "loo")
 
 #' .regmlm_residualise
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{test_variant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param cols See Usage.
+#' @param v A matrix; passed to \code{crossprod}.
+#' @param cols A matrix; passed to \code{\%*\%}.
 #' @return A numeric value.
 #' @export
 .regmlm_residualise <- function(v, cols) {
@@ -93,7 +96,8 @@ CV_SCHEMES <- c("kfold", "loo")
 
 #' make_blocks
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_markers See Usage.
@@ -137,12 +141,13 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
 
 #' ridge_fit
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{level0_predictors}, \code{level1_stack}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param lam See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param lam Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{fitted}, \code{lam}.
 #' @export
 ridge_fit <- function(X, y, lam) {
@@ -168,13 +173,14 @@ ridge_fit <- function(X, y, lam) {
 
 #' level0_predictors
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param G See Usage.
-#' @param y See Usage.
+#' @param G A matrix; indexed by row and column.
+#' @param y A vector; its length is taken.
 #' @param blocks See Usage.
-#' @param n_ridge Defaults to \code{5}.
+#' @param n_ridge Passed to \code{.regmlm_lambda_grid}. Defaults to \code{5}.
 #' @return A list with \code{predictors}, \code{meta}, \code{n_predictors}, \code{reduction}.
 #' @export
 level0_predictors <- function(G, y, blocks, n_ridge = 5) {
@@ -213,13 +219,14 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
 
 #' level1_stack
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param preds See Usage.
-#' @param y See Usage.
-#' @param cv Defaults to \code{"kfold"}.
-#' @param k Defaults to \code{5}.
+#' @param preds A vector; its length is taken.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param cv Passed to \code{.regmlm_folds}. Defaults to \code{"kfold"}.
+#' @param k Passed to \code{.regmlm_folds}. Defaults to \code{5}.
 #' @param lam Defaults to \code{NULL}.
 #' @return A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv}, \code{lam}, \code{n_predictors}.
 #' @export
@@ -261,12 +268,13 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 
 #' loco_predictions
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param preds See Usage.
+#' @param preds A vector; indexed elementwise.
 #' @param meta See Usage.
-#' @param weights See Usage.
+#' @param weights A vector; indexed elementwise.
 #' @param chromosomes Defaults to \code{NULL}.
 #' @return A list with \code{loco}, \code{chromosomes}, \code{note}.
 #' @export
@@ -298,13 +306,14 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
 
 #' test_variant
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param y See Usage.
+#' @param g A vector; its length is taken.
+#' @param y A vector; its length is taken.
 #' @param offset Defaults to \code{NULL}.
-#' @param covariates Defaults to \code{list()}.
+#' @param covariates A vector; its length is taken. Defaults to \code{list()}.
 #' @return A list with \code{beta}, \code{se}, \code{chisq}, \code{p_value}, \code{n}.
 #' @export
 test_variant <- function(g, y, offset = NULL, covariates = list()) {
@@ -349,11 +358,12 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
 
 #' morie_regmlm
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param G See Usage.
-#' @param y See Usage.
+#' @param G A matrix; passed to \code{nrow}.
+#' @param y A vector; its length is taken.
 #' @param chromosomes Defaults to \code{NULL}.
 #' @param block_size Defaults to \code{1000}.
 #' @param n_ridge Defaults to \code{5}.
@@ -391,7 +401,8 @@ whole_genome_regression <- morie_regmlm
 
 #' .regmlm_cheatsheet
 #'
-#' Part of the regmlm_native implementation; see the file header for the
+#' A step of the regmlm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

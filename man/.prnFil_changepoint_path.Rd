@@ -8,16 +8,16 @@
 .prnFil_changepoint_path(t, y, taus = NULL, n_changepoints = 15, changepoint_range = 0.8, seasonalities = NULL, ...)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{y}{See Usage.}
+\item{t}{Passed to \code{morie_prphet_fit}.}
+\item{y}{Passed to \code{morie_prphet_fit}.}
 \item{taus}{Defaults to \code{NULL}.}
-\item{n_changepoints}{Defaults to \code{15}.}
-\item{changepoint_range}{Defaults to \code{0.8}.}
-\item{seasonalities}{Defaults to \code{NULL}.}
+\item{n_changepoints}{Passed to \code{morie_prphet_fit}. Defaults to \code{15}.}
+\item{changepoint_range}{Passed to \code{morie_prphet_fit}. Defaults to \code{0.8}.}
+\item{seasonalities}{Passed to \code{morie_prphet_fit}.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the prnFil_native implementation; see the file header for the source it follows.
+A step of the prnFil_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rows}, as built in the body.

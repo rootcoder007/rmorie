@@ -10,11 +10,11 @@
 \arguments{
 \item{torsion_sets}{See Usage.}
 \item{activities}{See Usage.}
-\item{permutations}{See Usage.}
-\item{seed}{See Usage.}
+\item{permutations}{A count; the body uses it as \code{seq_len(...)}.}
+\item{seed}{Passed to \code{.ghc_rng}.}
 }
 \description{
-Part of the toptor_native implementation; see the file header for the source it follows.
+A step of the toptor_native implementation. Called by \code{morie_toptor}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{vector}, \code{descriptors}, \code{length}, \code{null_mean}, \code{null_sd}, \code{z}.

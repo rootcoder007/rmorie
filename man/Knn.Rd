@@ -8,12 +8,12 @@
 Knn(X, y, query, k = 1, metric = "euclidean", C = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{query}{See Usage.}
 \item{k}{Defaults to \code{1}.}
-\item{metric}{Defaults to \code{"euclidean"}.}
-\item{C}{Defaults to \code{NULL}.}
+\item{metric}{One of \code{"euclidean"}, \code{"mahalanobis"}. Defaults to \code{"euclidean"}.}
+\item{C}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
 with k = 1 "the nearest neighbor may happen to be an outlier that is not representative of its class", so one freak point owns a whole region.  The Mahalanobis metric is the one to use when features have different units, since Euclidean distance is otherwise dominated by whichever feature has the largest numbers.

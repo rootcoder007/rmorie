@@ -8,7 +8,7 @@
 MixCmp(X, ncomp = NULL, maxiter = 200, seed = 1)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.morie_bx_mat}.}
 \item{ncomp}{Defaults to \code{NULL}.}
 \item{maxiter}{Defaults to \code{200}.}
 \item{seed}{Defaults to \code{1}.}

@@ -14,15 +14,15 @@ morie_primal(K, Kt, prox_f_star, prox_g, x0, y0, tau = NULL, sigma = NULL, theta
 \item{prox_g}{See Usage.}
 \item{x0}{See Usage.}
 \item{y0}{See Usage.}
-\item{tau}{Defaults to \code{NULL}.}
-\item{sigma}{Defaults to \code{NULL}.}
-\item{theta}{Defaults to \code{1}.}
-\item{norm_K}{Defaults to \code{NULL}.}
+\item{tau}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{sigma}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{theta}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{norm_K}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{max_iter}{Defaults to \code{500}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the primal_native implementation; see the file header for the source it follows.
+A step of the primal_native implementation. Called by \code{morie_tv_denoise_1d}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

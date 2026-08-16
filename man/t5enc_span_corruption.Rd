@@ -5,17 +5,17 @@
 \alias{t5enc_span_corruption}
 \title{t5enc_span_corruption}
 \usage{
-t5enc_span_corruption(tokens, rate = 0.15, mean_span = 3, seed = 0, sentinel = "<extra_id_%d>")
+t5enc_span_corruption(tokens, rate = 0.15, mean_span = 3, seed = 0, sentinel = "<extra_id_\%d>")
 }
 \arguments{
 \item{tokens}{See Usage.}
 \item{rate}{Defaults to \code{0.15}.}
 \item{mean_span}{Defaults to \code{3}.}
-\item{seed}{Defaults to \code{0}.}
-\item{sentinel}{Defaults to \code{"<extra_id_%d>"}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{sentinel}{Defaults to \code{"<extra_id_\%d>"}.}
 }
 \description{
-Part of the t5enc_native implementation; see the file header for the source it follows.
+A step of the t5enc_native implementation. Called by \code{morie_t5enc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{input}, \code{target}, \code{n_spans}, \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by}, \code{note}.
@@ -31,7 +31,7 @@ prefixes; the treatment of classification by emitting the label text
 and of regression by emitting a rounded number as a string, with
 outputs that do not match any label counted as wrong; the span
 corruption pre-training objective with sentinels and the ablations
-selecting 15% corruption and mean span length 3; and the simplified
+selecting 15\% corruption and mean span length 3; and the simplified
 relative position embeddings shared across layers, bucketed by
 relative offset with logarithmically growing buckets.
 

@@ -8,11 +8,11 @@
 .impFB_solve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
+\item{b}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the impFB_native implementation; see the file header for the source it follows.
+A step of the impFB_native implementation. Called by \code{.impFB_als_step}, \code{.impFB_explain}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.
@@ -27,7 +27,7 @@ feedback, in particular that its numerical value indicates confidence
 rather than preference). Sec. 4 (the binarised p_ui, the confidence
 c_ui = 1 + alpha r_ui with alpha = 40, the cost function of eq. (3)
 summed over ALL m*n pairs, the alternating least squares update
-eq. (4), and the Y\\'C^u Y = Y\\'Y + Y\\'(C^u - I)Y decomposition giving
+eq. (4), and the Y\'C^u Y = Y\'Y + Y\'(C^u - I)Y decomposition giving
 O(f^2 N + f^3 m) total time). Sec. 5 (explaining recommendations
 through W^u).
 

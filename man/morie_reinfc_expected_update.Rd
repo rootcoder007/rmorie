@@ -8,14 +8,14 @@
 morie_reinfc_expected_update(p, r0, r1, alpha = 1, b = 0)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{r0}{See Usage.}
-\item{r1}{See Usage.}
-\item{alpha}{Defaults to \code{1}.}
-\item{b}{Defaults to \code{0}.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{r0}{Numeric; combined arithmetically in the body.}
+\item{r1}{Numeric; combined arithmetically in the body.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{b}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the reinfc_native implementation; see the file header for the source it follows.
+A step of the reinfc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

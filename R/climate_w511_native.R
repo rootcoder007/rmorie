@@ -48,11 +48,12 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 
 #' .morie_qm_ecdf
 #'
-#' Part of the climate_w511_native implementation; see the file header
+#' A step of the climate_w511_native implementation. Called by \code{Qmds}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param sx See Usage.
-#' @param v See Usage.
+#' @param sx A vector; its length is taken and its elements indexed.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_qm_ecdf <- function(sx, v) {
@@ -71,11 +72,12 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 
 #' .morie_qm_quant
 #'
-#' Part of the climate_w511_native implementation; see the file header
+#' A step of the climate_w511_native implementation. Called by \code{Qmds}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param sx See Usage.
-#' @param p See Usage.
+#' @param sx A vector; its length is taken and its elements indexed.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_qm_quant <- function(sx, p) {

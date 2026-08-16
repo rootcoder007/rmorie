@@ -55,7 +55,8 @@ CONSTRAINTS <- c("reference", "sum_zero")
 
 #' .frwil_prep
 #'
-#' Part of the frwil_native implementation; see the file header for the
+#' A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param compounds See Usage.
@@ -81,11 +82,12 @@ CONSTRAINTS <- c("reference", "sum_zero")
 
 #' .frwil_design_matrix
 #'
-#' Part of the frwil_native implementation; see the file header for the
+#' A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param compounds See Usage.
-#' @param constraint Defaults to \code{"reference"}.
+#' @param constraint Compared against \code{"reference"}. Defaults to \code{"reference"}.
 #' @return A list with \code{matrix}, \code{names}, \code{groups}, \code{columns}, \code{constraint}, \code{n_positions}, \code{reference}.
 #' @export
 .frwil_design_matrix <- function(compounds, constraint = "reference") {
@@ -145,11 +147,12 @@ CONSTRAINTS <- c("reference", "sum_zero")
 
 #' .frwil_lstsq
 #'
-#' Part of the frwil_native implementation; see the file header for the
+#' A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param y See Usage.
+#' @param M A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
 #' @param ridge Defaults to \code{0}.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -208,12 +211,13 @@ CONSTRAINTS <- c("reference", "sum_zero")
 
 #' .frwil_free_wilson
 #'
-#' Part of the frwil_native implementation; see the file header for the
+#' A step of the frwil_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param compounds See Usage.
-#' @param activity See Usage.
-#' @param constraint Defaults to \code{"reference"}.
+#' @param compounds Passed to \code{.frwil_prep}.
+#' @param activity Passed to \code{.frwil_prep}.
+#' @param constraint Compared against \code{"sum_zero"}. Defaults to \code{"reference"}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{names}, \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{tss}, \code{r_squared}, \code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences}, \code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.
 #' @export
 .frwil_free_wilson <- function(compounds, activity, constraint = "reference") {
@@ -280,10 +284,11 @@ CONSTRAINTS <- c("reference", "sum_zero")
 
 #' .frwil_predict_activity
 #'
-#' Part of the frwil_native implementation; see the file header for the
+#' A step of the frwil_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
+#' @param fit A list; the body reads \code{$coefficients}, \code{$groups}, \code{$n_positions} from it.
 #' @param compound See Usage.
 #' @return The value of \code{total}, as built in the body.
 #' @export

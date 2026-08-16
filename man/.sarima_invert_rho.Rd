@@ -11,7 +11,7 @@
 \item{rho}{See Usage.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. Called by \code{moment_estimate}, \code{preliminary_estimates}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

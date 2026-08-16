@@ -59,7 +59,8 @@
 
 #' gaussian_approximation
 #'
-#' Part of the inlasm_native implementation; see the file header for the
+#' A step of the inlasm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param log_lik See Usage.
@@ -107,7 +108,8 @@ gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
 
 #' skewness_correction
 #'
-#' Part of the inlasm_native implementation; see the file header for the
+#' A step of the inlasm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param third_derivative See Usage.
@@ -129,7 +131,8 @@ skewness_correction <- function(third_derivative, precision) {
 
 #' laplace_marginal
 #'
-#' Part of the inlasm_native implementation; see the file header for the
+#' A step of the inlasm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param log_joint See Usage.
@@ -175,7 +178,8 @@ laplace_marginal <- function(log_joint, x_grid, theta) {
 
 #' hyperparameter_design
 #'
-#' Part of the inlasm_native implementation; see the file header for the
+#' A step of the inlasm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param mode See Usage.
@@ -217,7 +221,8 @@ hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
 
 #' integrate_marginals
 #'
-#' Part of the inlasm_native implementation; see the file header for the
+#' A step of the inlasm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param conditional_marginals See Usage.
@@ -276,7 +281,8 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
 
 #' .inlasm_cheatsheet
 #'
-#' Part of the inlasm_native implementation; see the file header for the
+#' A step of the inlasm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

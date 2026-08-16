@@ -8,11 +8,11 @@
 .tmlcds_qloss(qa, y)
 }
 \arguments{
-\item{qa}{See Usage.}
-\item{y}{See Usage.}
+\item{qa}{Numeric; passed to \code{log}.}
+\item{y}{A vector; its length is taken.}
 }
 \description{
-Part of the tmlcds_native implementation; see the file header for the source it follows.
+A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

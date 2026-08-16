@@ -8,12 +8,12 @@
 .morie_jo_fitpred(rows, y, newrow)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{y}{See Usage.}
+\item{rows}{A matrix; passed to \code{nrow}.}
+\item{y}{Passed to \code{.morie_jo_ols}.}
 \item{newrow}{See Usage.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{morie_dirmulti}, \code{morie_dirrec}, \code{morie_recmulti}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -13,7 +13,7 @@ lsa_decompose(X, k_dim = NULL, how = "log_entropy")
 \item{how}{Defaults to \code{"log_entropy"}.}
 }
 \description{
-Part of the lsa_native implementation; see the file header for the source it follows.
+A step of the lsa_native implementation. Called by \code{morie_lsa}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k}, \code{full_rank}, \code{weighting}, \code{method}, \code{note}.

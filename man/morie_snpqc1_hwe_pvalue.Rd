@@ -11,10 +11,10 @@ morie_snpqc1_hwe_pvalue(n_hom_minor, n_het, n_hom_major, test = "exact")
 \item{n_hom_minor}{See Usage.}
 \item{n_het}{See Usage.}
 \item{n_hom_major}{See Usage.}
-\item{test}{Defaults to \code{"exact"}.}
+\item{test}{One of \code{"chisq"}, \code{"exact"}. Defaults to \code{"exact"}.}
 }
 \description{
-Part of the snpqc1_native implementation; see the file header for the source it follows.
+A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

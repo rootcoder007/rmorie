@@ -8,10 +8,10 @@
 .vepan_kind(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A list; the body reads \code{$alt}, \code{$ref} from it.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{.vepan_affected}, \code{.vepan_apply}, \code{.vepan_coding_terms} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

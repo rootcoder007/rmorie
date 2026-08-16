@@ -3,13 +3,13 @@
 % the formals.
 \name{.morie_legendre}
 \alias{.morie_legendre}
-\title{Helper: exponent of prime p in n!, by Legendre\\\'s formula}
+\title{Helper: exponent of prime p in n!, by Legendre\\'s formula}
 \usage{
 .morie_legendre(n, p)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{p}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Part of the algebraic_combinatorics_native implementation; see the file header for the source it follows.

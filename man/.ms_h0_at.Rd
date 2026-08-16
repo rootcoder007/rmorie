@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{ut}{See Usage.}
-\item{H}{See Usage.}
+\item{H}{A vector; indexed elementwise.}
 \item{t}{See Usage.}
 }
 \description{
-Part of the survival_more implementation; see the file header for the source it follows.
+A step of the survival_more implementation. Called by \code{Coxsnell}, \code{Martingale}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

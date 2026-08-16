@@ -14,11 +14,11 @@
 #' efficient score. Monotonicity is restored by a running maximum, the #
 #' cheapest rearrangement that cannot move a correctly ordered pair.
 #'
-#' @param yv See Usage.
-#' @param Dv See Usage.
+#' @param yv A vector; its length is taken.
+#' @param Dv Numeric; combined arithmetically in the body.
 #' @param W See Usage.
-#' @param g See Usage.
-#' @param grid See Usage.
+#' @param g Numeric; combined arithmetically in the body.
+#' @param grid A vector; its length is taken and its elements indexed.
 #' @return A list with \code{F}, \code{IC}.
 #' @export
 .tmlmpi_cdf_bank <- function(yv, Dv, W, g, grid) {

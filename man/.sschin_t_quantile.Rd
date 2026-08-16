@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{pq}{See Usage.}
-\item{df}{See Usage.}
+\item{df}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sschin_native implementation; see the file header for the source it follows.
+A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

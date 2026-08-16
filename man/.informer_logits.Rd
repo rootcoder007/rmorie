@@ -8,12 +8,12 @@
 .informer_logits(q, K, scale)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Numeric; combined arithmetically in the body.}
 \item{K}{See Usage.}
-\item{scale}{See Usage.}
+\item{scale}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the informer_native implementation; see the file header for the source it follows.
+A step of the informer_native implementation. Called by \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention}, \code{morie_informer_sparsity_measure}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{sapply}.

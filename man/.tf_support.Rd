@@ -11,7 +11,7 @@
 \item{name}{See Usage.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_cwt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

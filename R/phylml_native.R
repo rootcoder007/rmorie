@@ -64,7 +64,8 @@
 
 #' .phylml_pi
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. Called by \code{morie_phylml}, \code{site_likelihood}, \code{substitution_matrix}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pi See Usage.
@@ -90,11 +91,12 @@
 
 #' substitution_matrix
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. Called by \code{.phylml_prune}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param pi Defaults to \code{NULL}.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param pi Passed to \code{.phylml_pi}.
 #' @param u Defaults to \code{1}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
@@ -116,7 +118,8 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 
 #' .phylml_tip_vector
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. Called by \code{.phylml_prune}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param base See Usage.
@@ -137,14 +140,15 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 
 #' .phylml_prune
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. Called by \code{site_likelihood}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
-#' @param site See Usage.
-#' @param pi See Usage.
-#' @param u See Usage.
-#' @param seqs See Usage.
+#' @param node A vector; its length is taken and its elements indexed.
+#' @param site Character; passed to \code{substr}.
+#' @param pi Passed to \code{.phylml_prune}.
+#' @param u Passed to \code{.phylml_prune}.
+#' @param seqs A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .phylml_prune <- function(node, site, pi, u, seqs) {
@@ -170,14 +174,15 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 
 #' site_likelihood
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. Called by \code{morie_phylml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
-#' @param seqs See Usage.
-#' @param site See Usage.
-#' @param pi Defaults to \code{NULL}.
-#' @param u Defaults to \code{1}.
+#' @param tree Passed to \code{.phylml_prune}.
+#' @param seqs Passed to \code{.phylml_prune}.
+#' @param site Passed to \code{.phylml_prune}.
+#' @param pi Passed to \code{.phylml_pi}.
+#' @param u Passed to \code{.phylml_prune}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
@@ -188,12 +193,13 @@ site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
 
 #' morie_phylml
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. Called by \code{.phylby_log_posterior}, \code{optimise_branch}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tree See Usage.
-#' @param seqs See Usage.
-#' @param pi Defaults to \code{NULL}.
+#' @param seqs A vector; its length is taken.
+#' @param pi Passed to \code{.phylml_pi}.
 #' @param u Defaults to \code{1}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
@@ -243,13 +249,14 @@ morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
 
 #' optimise_branch
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param make_tree See Usage.
-#' @param seqs See Usage.
-#' @param pi Defaults to \code{NULL}.
-#' @param u Defaults to \code{1}.
+#' @param seqs Passed to \code{morie_phylml}.
+#' @param pi Passed to \code{morie_phylml}.
+#' @param u Passed to \code{morie_phylml}. Defaults to \code{1}.
 #' @param lo Defaults to \code{1e-06}.
 #' @param hi Defaults to \code{10}.
 #' @param tol Defaults to \code{1e-10}.
@@ -313,7 +320,8 @@ optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi =
 
 #' .phylml_cheatsheet
 #'
-#' Part of the phylml_native implementation; see the file header for the
+#' A step of the phylml_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

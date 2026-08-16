@@ -8,11 +8,11 @@
 .groebn_gcd(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_fr}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

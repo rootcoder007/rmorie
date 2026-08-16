@@ -8,10 +8,11 @@
 
 #' .ukfF_chol
 #'
-#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' A step of the ukfF_mixedcase_native implementation. Called by \code{.ukfF_sigma_points}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param a See Usage.
+#' @param a A matrix; indexed by row and column.
 #' @return The value of \code{l}, as built in the body.
 #' @export
 .ukfF_chol <- function(a) {
@@ -45,11 +46,12 @@
 
 #' Solve A X = B for X (small systems, partial pivoting, Gauss-Jordan)
 #'
-#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' A step of the ukfF_mixedcase_native implementation. Called by \code{morie_ukfF}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param a See Usage.
-#' @param b_cols See Usage.
+#' @param a A matrix; passed to \code{nrow}.
+#' @param b_cols A matrix; passed to \code{ncol}.
 #' @return The value of \code{[}.
 #' @export
 .ukfF_solve_mat <- function(a, b_cols) {
@@ -81,12 +83,13 @@
 
 #' .ukfF_sigma_points
 #'
-#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' A step of the ukfF_mixedcase_native implementation. Called by \code{morie_ukfF}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x See Usage.
-#' @param P See Usage.
-#' @param kappa See Usage.
+#' @param x A vector; its length is taken.
+#' @param P Numeric; combined arithmetically in the body.
+#' @param kappa Numeric; combined arithmetically in the body.
 #' @return A list with \code{pts}, \code{w}.
 #' @export
 .ukfF_sigma_points <- function(x, P, kappa) {
@@ -109,11 +112,12 @@
 
 #' .ukfF_ut
 #'
-#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' A step of the ukfF_mixedcase_native implementation. Called by \code{morie_ukfF}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param pts See Usage.
-#' @param w See Usage.
+#' @param pts A matrix; indexed by row and column.
+#' @param w A matrix; passed to \code{crossprod}.
 #' @param fun See Usage.
 #' @return A list with \code{ys}, \code{mean}, \code{cov}.
 #' @export
@@ -136,17 +140,18 @@
 
 #' morie_ukfF
 #'
-#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' A step of the ukfF_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param f See Usage.
-#' @param h See Usage.
+#' @param f Passed to \code{.ukfF_ut}.
+#' @param h Passed to \code{.ukfF_ut}.
 #' @param Q See Usage.
-#' @param R See Usage.
+#' @param R A matrix; passed to \code{as.matrix}.
 #' @param x0 See Usage.
 #' @param P0 See Usage.
 #' @param measurements See Usage.
-#' @param kappa Defaults to \code{NULL}.
+#' @param kappa Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{states}, \code{covariances}, \code{innovations}, \code{kappa}, \code{method}.
 #' @export
 morie_ukfF <- function(f, h, Q, R, x0, P0, measurements, kappa = NULL) {
@@ -232,7 +237,8 @@ morie_unscented_kalman <- morie_ukfF
 
 #' morie_ukfF_cheatsheet
 #'
-#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' A step of the ukfF_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @return A character value.

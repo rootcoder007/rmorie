@@ -16,7 +16,7 @@ morie_dreamr_imagine(state, action_model, transition, reward_model, horizon, val
 \item{value_model}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the dreamr_native implementation; see the file header for the source it follows.
+A step of the dreamr_native implementation. Called by \code{morie_dreamr}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{method}.

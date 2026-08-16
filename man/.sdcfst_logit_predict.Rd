@@ -8,11 +8,11 @@
 .sdcfst_logit_predict(beta, x)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{A vector; indexed elementwise.}
 \item{x}{See Usage.}
 }
 \description{
-Part of the sdcfst_native implementation; see the file header for the source it follows.
+A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

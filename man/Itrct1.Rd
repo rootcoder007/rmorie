@@ -29,7 +29,7 @@ functions are computed on disjoint subsamples, so the variance of the
 contrast is the sum of the level variances.
 }
 \details{
-Formula: tau = E\link{(w1(D) - w0(D, X; pi)) (dY - mu_0(X))} within levels.
+Formula: tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] within levels.
 }
 \references{
 Sant'Anna and Zhao (2020), Doubly robust

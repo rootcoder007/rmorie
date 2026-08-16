@@ -8,10 +8,10 @@
 .morie_ml_colliders(edges)
 }
 \arguments{
-\item{edges}{See Usage.}
+\item{edges}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{morie_collider}, \code{morie_mectest}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{sort}.

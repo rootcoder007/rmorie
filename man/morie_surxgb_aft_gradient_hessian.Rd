@@ -8,16 +8,16 @@
 morie_surxgb_aft_gradient_hessian(y_lower, y_upper, u, sigma = 1, dist = "normal", method = "analytic", eps = 1e-05)
 }
 \arguments{
-\item{y_lower}{See Usage.}
-\item{y_upper}{See Usage.}
-\item{u}{See Usage.}
-\item{sigma}{Defaults to \code{1}.}
-\item{dist}{Defaults to \code{"normal"}.}
-\item{method}{Defaults to \code{"analytic"}.}
-\item{eps}{Defaults to \code{1e-05}.}
+\item{y_lower}{Passed to \code{morie_surxgb_aft_loss}.}
+\item{y_upper}{Passed to \code{morie_surxgb_aft_loss}.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{dist}{Passed to \code{morie_surxgb_aft_loss}. Defaults to \code{"normal"}.}
+\item{method}{One of \code{"analytic"}, \code{"numeric"}. Defaults to \code{"analytic"}.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{gradient}, \code{hessian}, \code{loss}, \code{hessian_floored}, \code{derivative_method}.

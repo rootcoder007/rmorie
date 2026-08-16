@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{F}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
-\item{prune}{Defaults to \code{TRUE}.}
-\item{reduced}{Defaults to \code{TRUE}.}
+\item{order}{Passed to \code{.groebn_key}. Defaults to \code{"lex"}.}
+\item{prune}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{reduced}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 Buchberger completion and reduce_basis ---------------------------------------------------------------------------

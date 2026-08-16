@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{sigma2}{See Usage.}
-\item{x_star}{See Usage.}
-\item{eigenvalues}{See Usage.}
+\item{x_star}{Passed to \code{.gpflat}.}
+\item{eigenvalues}{Passed to \code{.gpflat}.}
 }
 \description{
 --------------------------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

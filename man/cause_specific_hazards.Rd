@@ -8,15 +8,15 @@
 cause_specific_hazards(time, event_type, times, A = NULL, arm = NULL, weights = NULL)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event_type}{See Usage.}
-\item{times}{See Usage.}
-\item{A}{Defaults to \code{NULL}.}
+\item{time}{Passed to \code{.tmlcmp_vec}.}
+\item{event_type}{Passed to \code{.tmlcmp_vec}.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{A}{Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.}
 \item{arm}{Defaults to \code{NULL}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.}
 }
 \description{
-Part of the tmlcmp_native implementation; see the file header for the source it follows.
+A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{hazards}, \code{types}, \code{times}, \code{n}.

@@ -17,14 +17,15 @@
 #' Private: frozen random target net x -> tanh(W1 x + b1) W2, W fixed at
 #' init
 #'
-#' Part of the rndnet_native implementation; see the file header for the
+#' A step of the rndnet_native implementation. Called by \code{.rndnet_predictor_new}, \code{morie_rndnet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_in See Usage.
-#' @param n_hidden See Usage.
-#' @param n_out See Usage.
-#' @param rng See Usage.
-#' @param scale Defaults to \code{1}.
+#' @param n_in A count; the body uses it as \code{matrix(...)}.
+#' @param n_hidden A count; the body uses it as \code{matrix(...)}.
+#' @param n_out A count; the body uses it as \code{matrix(...)}.
+#' @param rng Passed to \code{.ghc_unif}.
+#' @param scale Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .rndnet_random_features_new <- function(n_in, n_hidden, n_out, rng, scale=1.0) {
@@ -81,11 +82,11 @@
 #'
 #' output weight matrix W, updated by plain SGD on the MSE.
 #'
-#' @param n_in See Usage.
-#' @param n_hidden See Usage.
-#' @param n_out See Usage.
-#' @param rng See Usage.
-#' @param scale Defaults to \code{1}.
+#' @param n_in Passed to \code{.rndnet_random_features_new}.
+#' @param n_hidden A count; the body uses it as \code{matrix(...)}.
+#' @param n_out A count; the body uses it as \code{matrix(...)}.
+#' @param rng Passed to \code{.rndnet_random_features_new}.
+#' @param scale Passed to \code{.rndnet_random_features_new}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .rndnet_predictor_new <- function(n_in, n_hidden, n_out, rng, scale=1.0) {
@@ -126,10 +127,11 @@
 # Private: Welford running mean and variance for the normalisers.
 #' Private: Welford running mean and variance for the normalisers
 #'
-#' Part of the rndnet_native implementation; see the file header for the
+#' A step of the rndnet_native implementation. Called by \code{morie_rndnet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .rndnet_running_stats_new <- function(n) {
@@ -163,19 +165,19 @@
 #'
 #' observation stream.
 #'
-#' @param observations See Usage.
-#' @param n_hidden Defaults to \code{64}.
-#' @param n_out Defaults to \code{8}.
+#' @param observations A matrix; passed to \code{as.matrix}.
+#' @param n_hidden Passed to \code{.rndnet_random_features_new}. Defaults to \code{64}.
+#' @param n_out Passed to \code{.rndnet_random_features_new}. Defaults to \code{8}.
 #' @param lr Defaults to \code{0.05}.
-#' @param clip Defaults to \code{5}.
-#' @param normalize_obs Defaults to \code{TRUE}.
-#' @param normalize_reward Defaults to \code{TRUE}.
-#' @param init_steps Defaults to \code{0}.
-#' @param gamma_int Defaults to \code{0.99}.
-#' @param seed Defaults to \code{0}.
+#' @param clip Numeric; combined arithmetically in the body. Defaults to \code{5}.
+#' @param normalize_obs A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param normalize_reward A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param init_steps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.
+#' @param gamma_int Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param target Defaults to \code{NULL}.
 #' @param predictor Defaults to \code{NULL}.
-#' @param update Defaults to \code{TRUE}.
+#' @param update A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{intrinsic_reward}, \code{raw_error}, \code{returns}, \code{mse}, \code{mean_first}, \code{mean_last}, \code{n}, \code{target}, \code{predictor}, \code{method}.
 #' @export
 morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
@@ -309,8 +311,8 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
 #'
 #' @param reward_ext See Usage.
 #' @param reward_int See Usage.
-#' @param gamma_ext Defaults to \code{0.999}.
-#' @param gamma_int Defaults to \code{0.99}.
+#' @param gamma_ext Numeric; combined arithmetically in the body. Defaults to \code{0.999}.
+#' @param gamma_int Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
 #' @param done Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{return_ext}, \code{return_int}, \code{return_total}, \code{gamma_ext}, \code{gamma_int}, \code{method}.
 #' @export
@@ -357,7 +359,8 @@ morie_rndnet_combine_returns <- function(reward_ext, reward_int,
 # Private one-line reminder of what this module is for.
 #' Private one-line reminder of what this module is for
 #'
-#' Part of the rndnet_native implementation; see the file header for the
+#' A step of the rndnet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

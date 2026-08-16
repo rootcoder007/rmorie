@@ -8,11 +8,11 @@
 .sgflrt_chol(A, rel_jitter = 1e-10)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{rel_jitter}{Defaults to \code{1e-10}.}
+\item{A}{A matrix; indexed by row and column.}
+\item{rel_jitter}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the sgflrt_native implementation; see the file header for the source it follows.
+A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{L}, as built in the body.

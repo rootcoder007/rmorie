@@ -8,17 +8,17 @@
 .trclrn_best_treatment(y, a, p, rows, arms, method, Xm, outcome_model)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{a}{See Usage.}
-\item{p}{See Usage.}
+\item{y}{A vector; indexed elementwise.}
+\item{a}{A vector; indexed elementwise.}
+\item{p}{A vector; indexed elementwise.}
 \item{rows}{See Usage.}
 \item{arms}{See Usage.}
-\item{method}{See Usage.}
-\item{Xm}{See Usage.}
+\item{method}{Compared against \code{"ipw"}.}
+\item{Xm}{A matrix; indexed by row and column.}
 \item{outcome_model}{See Usage.}
 }
 \description{
-Part of the trclrn_native implementation; see the file header for the source it follows.
+A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{best}, \code{bv}.

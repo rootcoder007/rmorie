@@ -8,10 +8,10 @@
 .morie_bx_nrm(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_gabor}, \code{.morie_bx_omp}, \code{BPursuit} and 6 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

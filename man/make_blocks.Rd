@@ -13,7 +13,7 @@ make_blocks(n_markers, chromosomes = NULL, block_size = 1000)
 \item{block_size}{Defaults to \code{1000}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{morie_regmlm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{blocks}, as built in the body.

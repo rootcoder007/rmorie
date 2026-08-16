@@ -8,8 +8,8 @@
 morie_yolovx_simota_assign(costs, ious, top_q = 10, max_k = NULL)
 }
 \arguments{
-\item{costs}{See Usage.}
-\item{ious}{See Usage.}
+\item{costs}{Passed to \code{.s03mat}.}
+\item{ious}{Passed to \code{.s03mat}.}
 \item{top_q}{Defaults to \code{10}.}
 \item{max_k}{Defaults to \code{NULL}.}
 }

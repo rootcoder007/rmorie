@@ -16,7 +16,7 @@ PcgSeg(x, fs, window = NULL, step = NULL, order = 6, threshold = NULL)
 \item{threshold}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{sem}, \code{sem_fixed_reference}, \code{times}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad}, \code{window}, \code{step}, \code{order}, \code{fs}, \code{reference_restarted_at_boundaries}, \code{robust_threshold}, \code{method}.

@@ -10,12 +10,12 @@ morie_sasimi(fp_a, fp_b, coefficient = "tanimoto", alpha = NULL, beta = NULL)
 \arguments{
 \item{fp_a}{See Usage.}
 \item{fp_b}{See Usage.}
-\item{coefficient}{Defaults to \code{"tanimoto"}.}
+\item{coefficient}{Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.}
 \item{alpha}{Defaults to \code{NULL}.}
 \item{beta}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the sasimi_native implementation; see the file header for the source it follows.
+A step of the sasimi_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{similarity}, \code{distance}, \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.

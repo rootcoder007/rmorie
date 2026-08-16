@@ -11,7 +11,7 @@ causal_mask(n)
 \item{n}{See Usage.}
 }
 \description{
-Part of the sasRec_native implementation; see the file header for the source it follows.
+A step of the sasRec_native implementation. Called by \code{self_attention}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{mask}, as built in the body.

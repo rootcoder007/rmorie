@@ -8,11 +8,11 @@
 .vepan_coding_terms(t, v, cds, coding, gpos)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{v}{See Usage.}
-\item{cds}{See Usage.}
-\item{coding}{See Usage.}
-\item{gpos}{See Usage.}
+\item{t}{A list; the body reads \code{$strand} from it.}
+\item{v}{Passed to \code{.vepan_apply}.}
+\item{cds}{A vector; its length is taken.}
+\item{coding}{Passed to \code{.vepan_apply}.}
+\item{gpos}{Passed to \code{.vepan_apply}.}
 }
 \description{
 list(terms, info).

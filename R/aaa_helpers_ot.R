@@ -10,11 +10,12 @@
 
 #' .ot_hist
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otbar}, \code{Otbarfree}, \code{Otbreg} and 9 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
-#' @param normalise Defaults to \code{FALSE}.
+#' @param normalise A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .ot_hist <- function(a, normalise = FALSE) {
@@ -30,12 +31,13 @@
 
 #' .ot_costmat
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otbarfree}, \code{Otker}, \code{Otmcluster} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param Y See Usage.
-#' @param p Defaults to \code{2}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param Y A matrix; passed to \code{as.matrix}.
+#' @param p Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .ot_costmat <- function(X, Y, p = 2) {
@@ -52,22 +54,24 @@
 
 #' .ot_frob
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param C See Usage.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param C Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .ot_frob <- function(T, C) sum(T * C)
 
 #' .ot_kl
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otdiv}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param R See Usage.
+#' @param T A vector; indexed elementwise.
+#' @param R A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .ot_kl <- function(T, R) {
@@ -77,10 +81,11 @@
 
 #' .ot_lse
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_sinkhorn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .ot_lse <- function(v) {
@@ -91,13 +96,14 @@
 
 #' .ot_sinkhorn
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otdiv}, \code{Otgws}, \code{Otker} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param C See Usage.
-#' @param eps See Usage.
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
+#' @param C A matrix; indexed by row and column.
+#' @param eps Numeric; combined arithmetically in the body.
 #' @param n_iter Defaults to \code{200L}.
 #' @return A list with \code{T}, \code{f}, \code{g}.
 #' @export
@@ -124,14 +130,15 @@
 
 #' .ot_sinkhorn_unbalanced
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otunbal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param C See Usage.
-#' @param eps See Usage.
-#' @param lam See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
+#' @param C Numeric; combined arithmetically in the body.
+#' @param eps Numeric; combined arithmetically in the body.
+#' @param lam Numeric; combined arithmetically in the body.
 #' @param n_iter Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
@@ -158,11 +165,12 @@
 
 #' .ot_nwcorner
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
 #' @return A list with \code{T}, \code{basis}.
 #' @export
 .ot_nwcorner <- function(a, b) {
@@ -186,12 +194,13 @@
 
 #' .ot_complete_tree
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param basis See Usage.
-#' @param n See Usage.
-#' @param m See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{.ot_sortbasis}.
 #' @export
 .ot_complete_tree <- function(basis, n, m) {
@@ -222,10 +231,11 @@
 
 #' .ot_sortbasis
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_complete_tree}, \code{.ot_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param edges See Usage.
+#' @param edges A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
 .ot_sortbasis <- function(edges) {
@@ -236,11 +246,12 @@
 
 #' .ot_adj
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_potentials}, \code{.ot_tree_path}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param basis See Usage.
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
 .ot_adj <- function(basis, n) {
@@ -255,13 +266,14 @@
 
 #' .ot_potentials
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param basis See Usage.
-#' @param C See Usage.
-#' @param n See Usage.
-#' @param m See Usage.
+#' @param basis Passed to \code{.ot_adj}.
+#' @param C A matrix; indexed by row and column.
+#' @param n A count; the body uses it as \code{numeric(...)}.
+#' @param m A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{u}, \code{v}.
 #' @export
 .ot_potentials <- function(basis, C, n, m) {
@@ -284,13 +296,14 @@
 
 #' .ot_tree_path
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param basis See Usage.
-#' @param n See Usage.
+#' @param basis Passed to \code{.ot_adj}.
+#' @param n Numeric; combined arithmetically in the body.
 #' @param si See Usage.
-#' @param sj See Usage.
+#' @param sj Numeric; combined arithmetically in the body.
 #' @return Nothing; the function is called for its effect.
 #' @export
 .ot_tree_path <- function(basis, n, si, sj) {
@@ -313,12 +326,13 @@
 
 #' .ot_emd
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_partial_plan}, \code{Otbarfree}, \code{Otemd} and 6 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param C See Usage.
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
+#' @param C A matrix; passed to \code{nrow}.
 #' @param max_pivots Defaults to \code{20000L}.
 #' @return A list with \code{T}, \code{cost}.
 #' @export
@@ -374,10 +388,10 @@
 #' column (Caffarelli and McCann 2010): the inequality-constrained
 #' problem becomes an ordinary balanced one and is solved exactly.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param C See Usage.
-#' @param m See Usage.
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
+#' @param C Numeric; passed to \code{max}.
+#' @param m Numeric; combined arithmetically in the body.
 #' @return A list with \code{T}, \code{cost}.
 #' @export
 .ot_partial_plan <- function(a, b, C, m) {
@@ -397,10 +411,11 @@
 
 #' .ot_sqrtm
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{.ot_w2gauss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param S See Usage.
+#' @param S A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{%*%}.
 #' @export
 .ot_sqrtm <- function(S) {
@@ -411,13 +426,14 @@
 
 #' .ot_w2gauss
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otmxh}, \code{Otwsg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m1 See Usage.
-#' @param S1 See Usage.
+#' @param S1 A matrix; passed to \code{as.matrix}.
 #' @param m2 See Usage.
-#' @param S2 See Usage.
+#' @param S2 A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
 .ot_w2gauss <- function(m1, S1, m2, S2) {
@@ -437,12 +453,13 @@
 
 #' .ot_wp1d
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsw}, \code{Otws2}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
 #' @param y See Usage.
-#' @param p Defaults to \code{2}.
+#' @param p Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
 .ot_wp1d <- function(x, y, p = 2) {
@@ -455,7 +472,8 @@
 
 #' .ot_quantiles
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otsd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -469,11 +487,12 @@
 
 #' .ot_directions
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param n_proj See Usage.
+#' @param d A count; the body uses it as \code{matrix(...)}.
+#' @param n_proj A count; the body uses it as \code{matrix(...)}.
 #' @return A numeric value.
 #' @export
 .ot_directions <- function(d, n_proj) {
@@ -489,10 +508,11 @@
 
 #' .ot_project
 #'
-#' Part of the helpers_ot implementation; see the file header for the
+#' A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param theta See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export

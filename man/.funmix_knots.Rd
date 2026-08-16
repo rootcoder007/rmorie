@@ -8,13 +8,13 @@
 .funmix_knots(tmin, tmax, n_basis, degree)
 }
 \arguments{
-\item{tmin}{See Usage.}
-\item{tmax}{See Usage.}
-\item{n_basis}{See Usage.}
-\item{degree}{See Usage.}
+\item{tmin}{A count; the body uses it as \code{rep(...)}.}
+\item{tmax}{A count; the body uses it as \code{rep(...)}.}
+\item{n_basis}{Numeric; combined arithmetically in the body.}
+\item{degree}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the funmix_native implementation; see the file header for the source it follows.
+A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

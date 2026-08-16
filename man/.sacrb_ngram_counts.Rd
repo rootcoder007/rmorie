@@ -8,11 +8,11 @@
 .sacrb_ngram_counts(tokens, n)
 }
 \arguments{
-\item{tokens}{See Usage.}
-\item{n}{See Usage.}
+\item{tokens}{A vector; its length is taken and its elements indexed.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sacrb_native implementation; see the file header for the source it follows.
+A step of the sacrb_native implementation. Called by \code{.sacrb_modified_precision}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{c}, as built in the body.

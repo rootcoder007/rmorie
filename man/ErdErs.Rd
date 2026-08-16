@@ -9,13 +9,13 @@ ErdErs(eeg, fs, ref_window, active_window, band = c(8, 13))
 }
 \arguments{
 \item{eeg}{See Usage.}
-\item{fs}{See Usage.}
-\item{ref_window}{See Usage.}
-\item{active_window}{See Usage.}
-\item{band}{Defaults to \code{c(8, 13)}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{ref_window}{A vector; indexed elementwise.}
+\item{active_window}{A vector; indexed elementwise.}
+\item{band}{A vector; indexed elementwise. Defaults to \code{c(8, 13)}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{erd_percent}, \code{ref_power}, \code{active_power}, \code{power_ratio}, \code{event}, \code{band_hz}, \code{ref_window_s}, \code{active_window_s}, \code{ref_samples}, \code{active_samples}, \code{fs_hz}, \code{sign_convention}, \code{units}, \code{method}.

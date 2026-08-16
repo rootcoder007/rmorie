@@ -8,12 +8,12 @@
 .distq_atoms_full(v_min, v_max, n_atoms)
 }
 \arguments{
-\item{v_min}{See Usage.}
-\item{v_max}{See Usage.}
-\item{n_atoms}{See Usage.}
+\item{v_min}{Passed to \code{.distq_atoms}.}
+\item{v_max}{Passed to \code{.distq_atoms}.}
+\item{n_atoms}{Passed to \code{.distq_atoms}.}
 }
 \description{
-routines so we don\\\'t rebuild the spacing each time.)
+routines so we don\\'t rebuild the spacing each time.)
 }
 \value{
 The value of \code{.distq_atoms}.

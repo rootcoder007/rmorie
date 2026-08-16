@@ -56,10 +56,11 @@
 
 #' .prsLR_grammar
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{morie_prsLR}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return Nothing; this branch always raises.
 #' @export
 .prsLR_grammar <- function(g) {
@@ -69,10 +70,11 @@
 
 #' .prsLR_nonterminals
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_augment}, \code{.prsLR_canonical_collection}, \code{.prsLR_first_sets} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{unique}.
 #' @export
 .prsLR_nonterminals <- function(g) {
@@ -81,10 +83,11 @@
 
 #' .prsLR_terminals
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{setdiff}.
 #' @export
 .prsLR_terminals <- function(g) {
@@ -95,11 +98,12 @@
 
 #' .prsLR_first_seq
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_closure}, \code{.prsLR_first_sets}, \code{.prsLR_follow_sets}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq See Usage.
-#' @param first See Usage.
+#' @param seq A vector; its length is taken.
+#' @param first A vector; indexed elementwise.
 #' @param nts See Usage.
 #' @return The value of \code{unique}.
 #' @export
@@ -122,10 +126,11 @@
 
 #' .prsLR_first_sets
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{first}, as built in the body.
 #' @export
 .prsLR_first_sets <- function(g) {
@@ -151,11 +156,12 @@
 
 #' .prsLR_follow_sets
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param first See Usage.
+#' @param g A list; the body reads \code{$rules}, \code{$start} from it.
+#' @param first Passed to \code{.prsLR_first_seq}.
 #' @return The value of \code{follow}, as built in the body.
 #' @export
 .prsLR_follow_sets <- function(g, first) {
@@ -191,10 +197,11 @@
 
 #' .prsLR_linearise
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{morie_prsLR}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree A list; the body reads \code{$children}, \code{$symbol} from it.
 #' @return A character value.
 #' @export
 .prsLR_linearise <- function(tree) {
@@ -206,10 +213,11 @@
 
 #' .prsLR_augment
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}, \code{morie_augment}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return A list with \code{rules}, \code{start}, \code{original_start}.
 #' @export
 .prsLR_augment <- function(g) {
@@ -223,13 +231,14 @@
 
 #' .prsLR_closure
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{.prsLR_goto}, \code{morie_closure}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param items See Usage.
-#' @param ag See Usage.
-#' @param first See Usage.
-#' @param nts See Usage.
+#' @param ag A list; the body reads \code{$rules} from it.
+#' @param first Passed to \code{.prsLR_first_seq}.
+#' @param nts Passed to \code{.prsLR_first_seq}.
 #' @param k See Usage.
 #' @return A vector, from \code{sort}.
 #' @export
@@ -281,15 +290,16 @@
 
 #' .prsLR_goto
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{morie_goto}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param state See Usage.
 #' @param sym See Usage.
-#' @param ag See Usage.
-#' @param first See Usage.
-#' @param nts See Usage.
-#' @param k See Usage.
+#' @param ag A list; the body reads \code{$rules} from it.
+#' @param first Passed to \code{.prsLR_closure}.
+#' @param nts Passed to \code{.prsLR_closure}.
+#' @param k Passed to \code{.prsLR_closure}.
 #' @return The value of \code{.prsLR_closure}.
 #' @export
 .prsLR_goto <- function(state, sym, ag, first, nts, k) {
@@ -314,7 +324,8 @@
 
 #' .prsLR_core
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param state See Usage.
@@ -331,11 +342,12 @@
 
 #' .prsLR_canonical_collection
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}, \code{morie_canonical_collection}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ag See Usage.
-#' @param k See Usage.
+#' @param ag A list; the body reads \code{$rules}, \code{$start} from it.
+#' @param k Passed to \code{.prsLR_closure}.
 #' @return A list with \code{states}, \code{index}, \code{transitions}, \code{first}, \code{nonterminals}.
 #' @export
 .prsLR_canonical_collection <- function(ag, k) {
@@ -373,11 +385,12 @@
 
 #' .prsLR_build_tables
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_parse}, \code{morie_build_tables}, \code{morie_conflicts} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param method See Usage.
+#' @param g Passed to \code{.prsLR_augment}.
+#' @param method One of \code{"lalr1"}, \code{"slr1"}.
 #' @return A list with \code{action}, \code{goto}, \code{states}, \code{n_states}, \code{conflicts}, \code{rules}, \code{augmented}, \code{method}.
 #' @export
 .prsLR_build_tables <- function(g, method) {
@@ -500,7 +513,8 @@
 
 #' .prsLR_leaf
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_parse}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sym See Usage.
@@ -512,12 +526,13 @@
 
 #' .prsLR_parse
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. Called by \code{morie_parse}, \code{morie_prsLR}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g Passed to \code{.prsLR_build_tables}.
 #' @param tokens See Usage.
-#' @param method See Usage.
+#' @param method Passed to \code{.prsLR_build_tables}.
 #' @param tables See Usage.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -583,10 +598,11 @@
 
 #' morie_augment
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g Passed to \code{.prsLR_augment}.
 #' @return The value of \code{.prsLR_augment}.
 #' @export
 morie_augment <- function(g) {
@@ -595,14 +611,15 @@ morie_augment <- function(g) {
 
 #' morie_closure
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param items See Usage.
-#' @param ag See Usage.
-#' @param first See Usage.
-#' @param nts See Usage.
-#' @param k Defaults to \code{1}.
+#' @param items Passed to \code{.prsLR_closure}.
+#' @param ag Passed to \code{.prsLR_closure}.
+#' @param first Passed to \code{.prsLR_closure}.
+#' @param nts Passed to \code{.prsLR_closure}.
+#' @param k Passed to \code{.prsLR_closure}. Defaults to \code{1}.
 #' @return The value of \code{.prsLR_closure}.
 #' @export
 morie_closure <- function(items, ag, first, nts, k = 1) {
@@ -611,15 +628,16 @@ morie_closure <- function(items, ag, first, nts, k = 1) {
 
 #' morie_goto
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
-#' @param sym See Usage.
-#' @param ag See Usage.
-#' @param first See Usage.
-#' @param nts See Usage.
-#' @param k Defaults to \code{1}.
+#' @param state Passed to \code{.prsLR_goto}.
+#' @param sym Passed to \code{.prsLR_goto}.
+#' @param ag Passed to \code{.prsLR_goto}.
+#' @param first Passed to \code{.prsLR_goto}.
+#' @param nts Passed to \code{.prsLR_goto}.
+#' @param k Passed to \code{.prsLR_goto}. Defaults to \code{1}.
 #' @return The value of \code{.prsLR_goto}.
 #' @export
 morie_goto <- function(state, sym, ag, first, nts, k = 1) {
@@ -628,11 +646,12 @@ morie_goto <- function(state, sym, ag, first, nts, k = 1) {
 
 #' morie_canonical_collection
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ag See Usage.
-#' @param k Defaults to \code{1}.
+#' @param ag Passed to \code{.prsLR_canonical_collection}.
+#' @param k Passed to \code{.prsLR_canonical_collection}. Defaults to \code{1}.
 #' @return The value of \code{.prsLR_canonical_collection}.
 #' @export
 morie_canonical_collection <- function(ag, k = 1) {
@@ -641,11 +660,12 @@ morie_canonical_collection <- function(ag, k = 1) {
 
 #' morie_build_tables
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param method Defaults to \code{"lr1"}.
+#' @param g Passed to \code{.prsLR_build_tables}.
+#' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
 #' @return The value of \code{.prsLR_build_tables}.
 #' @export
 morie_build_tables <- function(g, method = "lr1") {
@@ -654,11 +674,12 @@ morie_build_tables <- function(g, method = "lr1") {
 
 #' morie_conflicts
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param method Defaults to \code{"lr1"}.
+#' @param g Passed to \code{.prsLR_build_tables}.
+#' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
 #' @return A list with \code{estimate}, \code{conflicts}, \code{n_conflicts}, \code{method}, \code{n_states}, \code{ok}.
 #' @export
 morie_conflicts <- function(g, method = "lr1") {
@@ -675,13 +696,14 @@ morie_conflicts <- function(g, method = "lr1") {
 
 #' morie_parse
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param tokens See Usage.
-#' @param method Defaults to \code{"lr1"}.
-#' @param tables Defaults to \code{NULL}.
+#' @param g Passed to \code{.prsLR_parse}.
+#' @param tokens Passed to \code{.prsLR_parse}.
+#' @param method Passed to \code{.prsLR_parse}. Defaults to \code{"lr1"}.
+#' @param tables Passed to \code{.prsLR_parse}.
 #' @return The value of \code{.prsLR_parse}.
 #' @export
 morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
@@ -690,12 +712,13 @@ morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
 
 #' morie_prsLR
 #'
-#' Part of the prsLR_native implementation; see the file header for the
+#' A step of the prsLR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param grammar_ See Usage.
-#' @param tokens See Usage.
-#' @param method Defaults to \code{"lr1"}.
+#' @param grammar_ Passed to \code{.prsLR_grammar}.
+#' @param tokens Passed to \code{.prsLR_parse}.
+#' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
 #' @return A list with \code{estimate}, \code{tree}, \code{method}, \code{n_states}, \code{conflicts}, \code{tokens}, \code{yield}.
 #' @export
 morie_prsLR <- function(grammar_, tokens, method = "lr1") {

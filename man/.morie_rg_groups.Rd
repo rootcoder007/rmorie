@@ -8,11 +8,11 @@
 .morie_rg_groups(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
 \item{y}{See Usage.}
 }
 \description{
-Part of the rangayyan_class implementation; see the file header for the source it follows.
+A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{Qda}, \code{SepIndex}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{order}, \code{groups}.

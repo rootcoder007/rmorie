@@ -3,12 +3,13 @@
 # Bilinear sample of a feature map at a real-valued location.
 #' Bilinear sample of a feature map at a real-valued location
 #'
-#' Part of the defdtr implementation; see the file header for the source
+#' A step of the defdtr implementation. Called by \code{Defdtr}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param F See Usage.
-#' @param y See Usage.
-#' @param x See Usage.
+#' @param F A matrix; indexed by row and column.
+#' @param y Numeric; passed to \code{max}.
+#' @param x Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .defdtr_bilinear <- function(F, y, x) {

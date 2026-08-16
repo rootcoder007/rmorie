@@ -8,10 +8,10 @@
 instance_norm(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.patcht_vec}.}
 }
 \description{
-Part of the patchT_native implementation; see the file header for the source it follows.
+A step of the patchT_native implementation. Called by \code{patchtst_encode}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{normalised}, \code{mean}, \code{sd}, \code{degenerate}.

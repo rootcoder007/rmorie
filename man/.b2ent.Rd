@@ -8,11 +8,11 @@
 .b2ent(p, base = 2)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{base}{Defaults to \code{2}.}
+\item{p}{Passed to \code{.b2xlogx}.}
+\item{base}{Passed to \code{.b2xlogx}. Defaults to \code{2}.}
 }
 \description{
-Part of the b2info implementation; see the file header for the source it follows.
+A step of the b2info implementation. Called by \code{Cndent}, \code{Cndmi}, \code{Compshan} and 8 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

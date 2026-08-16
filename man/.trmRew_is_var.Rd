@@ -8,10 +8,10 @@
 .trmRew_is_var(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{morie_unifAlg_is_var}.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{.trmRew_overlap}, \code{.trmRew_rename}, \code{morie_trmRew_lpo_greater} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_unifAlg_is_var}.
@@ -24,7 +24,7 @@ Abstract Algebra, Pergamon Press, 263-297,
 doi:10.1016/B978-0-08-012975-4.50028-X.
 
 Newman, M. H. A. (1942) "On theories with a combinatorial definition
-of \\'equivalence\\'", Annals of Mathematics 43(2), 223-243,
+of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
 doi:10.2307/1968867.
 
 Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,

@@ -11,7 +11,7 @@
 \item{...}{Passed through.}
 }
 \description{
-Part of the tail1_core implementation; see the file header for the source it follows.
+A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlasso}, \code{Advielbo} and 735 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

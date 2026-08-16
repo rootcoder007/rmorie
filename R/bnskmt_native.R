@@ -8,11 +8,12 @@
 
 #' S_function
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. Called by \code{cvm_statistic}, \code{ks_critical_value}, \code{ks_statistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param std_moments See Usage.
-#' @param form Defaults to \code{"sum"}.
+#' @param form One of \code{"max"}, \code{"sum"}. Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export
@@ -28,7 +29,8 @@ S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 
 #' weighted_moments
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. Called by \code{cvm_statistic}, \code{ks_critical_value}, \code{ks_statistic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
@@ -53,7 +55,8 @@ weighted_moments <- function(m, g) {
 
 #' hypercube_instruments
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -95,11 +98,12 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 
 #' ks_statistic
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. Called by \code{compare_forms}, \code{ks_confidence_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
-#' @param instruments See Usage.
+#' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @return A list with \code{statistic}, \code{argmax}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
@@ -125,11 +129,12 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
 
 #' ks_critical_value
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
-#' @param instruments See Usage.
+#' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @param level Defaults to \code{0.95}.
@@ -175,7 +180,8 @@ ks_critical_value <- function(m, instruments, form = "sum",
 
 #' ks_confidence_set
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param moment_fn See Usage.
@@ -211,11 +217,12 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
 
 #' cvm_statistic
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. Called by \code{compare_forms}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
-#' @param instruments See Usage.
+#' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @param weights Defaults to \code{NULL}.
@@ -247,7 +254,8 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
 
 #' compare_forms
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
@@ -267,7 +275,8 @@ compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
 
 #' .bnskmt_cheatsheet
 #'
-#' Part of the bnskmt_native implementation; see the file header for the
+#' A step of the bnskmt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,11 +8,11 @@
 .gan_an_discrimination_loss_impl(f_x, f_gz)
 }
 \arguments{
-\item{f_x}{See Usage.}
-\item{f_gz}{See Usage.}
+\item{f_x}{Passed to \code{.gan_an_as_num}.}
+\item{f_gz}{Passed to \code{.gan_an_as_num}.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. Called by \code{.gan_an_anomaly_score_impl}, \code{discrimination_loss}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

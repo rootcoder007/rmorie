@@ -8,12 +8,12 @@
 .sdcfst_folds(n, k, e)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{k}{See Usage.}
-\item{e}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{k}{Numeric; combined arithmetically in the body.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the sdcfst_native implementation; see the file header for the source it follows.
+A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lab}, as built in the body.

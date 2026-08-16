@@ -8,7 +8,7 @@
 .vepan_affected(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A list; the body reads \code{$pos}, \code{$ref} from it.}
 }
 \description{
 yields lo > hi (an empty span between pos and pos+1).

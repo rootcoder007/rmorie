@@ -8,16 +8,16 @@
 morie_tlseqsl_ensemble_super_learner(X, y, library, V = 10, loss = "squared", seed = 0, grid = 21)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{library}{See Usage.}
-\item{V}{Defaults to \code{10}.}
-\item{loss}{Defaults to \code{"squared"}.}
-\item{seed}{Defaults to \code{0}.}
-\item{grid}{Defaults to \code{21}.}
+\item{X}{Passed to \code{morie_tlseqsl_discrete_super_learner}.}
+\item{y}{Passed to \code{morie_tlseqsl_discrete_super_learner}.}
+\item{library}{Passed to \code{morie_tlseqsl_discrete_super_learner}.}
+\item{V}{Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{10}.}
+\item{loss}{Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{"squared"}.}
+\item{seed}{Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{0}.}
+\item{grid}{Numeric; combined arithmetically in the body. Defaults to \code{21}.}
 }
 \description{
-Part of the tlseqsl_native implementation; see the file header for the source it follows.
+A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_sequential_super_learner}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{weights}, \code{cv_risk}, \code{discrete_risks}, \code{discrete_choice}, \code{best_single}, \code{method}, \code{note}.

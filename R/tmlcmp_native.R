@@ -62,7 +62,8 @@
 
 #' .tmlcmp_vec
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. Called by \code{cause_specific_hazards}, \code{morie_tmlcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -75,10 +76,11 @@
 
 #' .tmlcmp_mat
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .tmlcmp_mat <- function(x) {
@@ -91,11 +93,12 @@
 
 #' .tmlcmp_design
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param n See Usage.
+#' @param W A matrix; passed to \code{nrow}.
+#' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{cbind}.
 #' @export
 .tmlcmp_design <- function(W, n) {
@@ -105,12 +108,13 @@
 
 #' .tmlcmp_logit_irls
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param des See Usage.
-#' @param a See Usage.
-#' @param max_iter Defaults to \code{25}.
+#' @param des A matrix; passed to \code{nrow}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
@@ -140,15 +144,16 @@
 
 #' cause_specific_hazards
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event_type See Usage.
-#' @param times See Usage.
-#' @param A Defaults to \code{NULL}.
+#' @param time Passed to \code{.tmlcmp_vec}.
+#' @param event_type Passed to \code{.tmlcmp_vec}.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param A Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.
 #' @param arm Defaults to \code{NULL}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}, \code{n}.
 #' @export
 cause_specific_hazards <- function(time, event_type, times,
@@ -201,11 +206,12 @@ cause_specific_hazards <- function(time, event_type, times,
 
 #' cumulative_incidence
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hazards See Usage.
-#' @param times See Usage.
+#' @param hazards A vector; indexed elementwise.
+#' @param times A vector; its length is taken.
 #' @return A list with \code{F}, \code{survival}, \code{types}, \code{closure}.
 #' @export
 cumulative_incidence <- function(hazards, times) {
@@ -246,11 +252,12 @@ cumulative_incidence <- function(hazards, times) {
 
 #' one_minus_km
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hazards See Usage.
-#' @param times See Usage.
+#' @param hazards A vector; indexed elementwise.
+#' @param times A vector; its length is taken.
 #' @param cause See Usage.
 #' @return A list with \code{estimate}, \code{caveat}.
 #' @export
@@ -273,13 +280,14 @@ one_minus_km <- function(hazards, times, cause) {
 
 #' morie_tmlcmp
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event_type See Usage.
-#' @param D See Usage.
-#' @param X See Usage.
+#' @param time Passed to \code{.tmlcmp_vec}.
+#' @param event_type Passed to \code{.tmlcmp_vec}.
+#' @param D Passed to \code{.tmlcmp_vec}.
+#' @param X Passed to \code{.tmlcmp_mat}.
 #' @param times Defaults to \code{NULL}.
 #' @param cause Defaults to \code{1}.
 #' @param horizon Defaults to \code{NULL}.
@@ -357,7 +365,8 @@ morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
 
 #' .tmlcmp_cheatsheet
 #'
-#' Part of the tmlcmp_native implementation; see the file header for the
+#' A step of the tmlcmp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

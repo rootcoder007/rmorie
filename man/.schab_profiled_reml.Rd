@@ -8,15 +8,15 @@
 .schab_profiled_reml(coords, z, X, nugget_ratio, rng, model)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{z}{See Usage.}
-\item{X}{See Usage.}
-\item{nugget_ratio}{See Usage.}
-\item{rng}{See Usage.}
-\item{model}{See Usage.}
+\item{coords}{Passed to \code{.schab_correlation_matrix}.}
+\item{z}{A matrix; passed to \code{crossprod}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{nugget_ratio}{Passed to \code{.schab_correlation_matrix}.}
+\item{rng}{Passed to \code{.schab_correlation_matrix}.}
+\item{model}{Passed to \code{.schab_correlation_matrix}.}
 }
 \description{
-Part of the schab_reml_shared implementation; see the file header for the source it follows.
+A step of the schab_reml_shared implementation. Called by \code{.schab_fit_reml}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{value}, \code{gradient}, \code{sigma2}, \code{beta}.

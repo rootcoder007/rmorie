@@ -8,12 +8,12 @@
 theorem3_moment(q, gamma, l)
 }
 \arguments{
-\item{q}{See Usage.}
-\item{gamma}{See Usage.}
-\item{l}{See Usage.}
+\item{q}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{l}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the pate_native implementation; see the file header for the source it follows.
+A step of the pate_native implementation. Called by \code{moments_accountant}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -13,7 +13,7 @@
 \item{n}{See Usage.}
 }
 \description{
-Part of the fauzi_native implementation; see the file header for the source it follows.
+A step of the fauzi_native implementation. Called by \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_cumulative_survival_1} and 7 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{seq}.

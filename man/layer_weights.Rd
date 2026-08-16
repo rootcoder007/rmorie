@@ -8,10 +8,10 @@
 layer_weights(raw)
 }
 \arguments{
-\item{raw}{See Usage.}
+\item{raw}{A vector; its length is taken.}
 }
 \description{
-choose WHICH layers to read and cannot alter the magnitude, which is gamma\\'s job alone.
+choose WHICH layers to read and cannot alter the magnitude, which is gamma\'s job alone.
 }
 \value{
 A numeric value.

@@ -12,7 +12,7 @@ PoleZero(b, a = NULL)
 \item{a}{Defaults to \code{NULL}.}
 }
 \description{
-roots of the denominator.  The denominator is in the book\\'s normalized form, so pass `a` WITHOUT the leading 1.
+roots of the denominator.  The denominator is in the book\'s normalized form, so pass `a` WITHOUT the leading 1.
 }
 \value{
 A list with \code{zeros}, \code{poles}, \code{n_zeros}, \code{n_poles}, \code{stable}, \code{minimum_phase}, \code{zeros_on_unit_circle}, \code{method}.

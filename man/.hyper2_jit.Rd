@@ -8,11 +8,11 @@
 .hyper2_jit(K, v)
 }
 \arguments{
-\item{K}{See Usage.}
-\item{v}{See Usage.}
+\item{K}{A matrix; indexed by row and column.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hyper2_native implementation; see the file header for the source it follows.
+A step of the hyper2_native implementation. Called by \code{morie_hyper2}, \code{morie_hyper2_logml}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{K}, as built in the body.

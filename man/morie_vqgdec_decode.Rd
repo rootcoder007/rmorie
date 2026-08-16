@@ -8,14 +8,14 @@
 morie_vqgdec_decode(indices, codebook, generator = NULL, grad_rec = NULL, grad_gan = NULL)
 }
 \arguments{
-\item{indices}{See Usage.}
-\item{codebook}{See Usage.}
+\item{indices}{Passed to \code{morie_vqgdec_decode_indices}.}
+\item{codebook}{Passed to \code{morie_vqgdec_decode_indices}.}
 \item{generator}{Defaults to \code{NULL}.}
-\item{grad_rec}{Defaults to \code{NULL}.}
-\item{grad_gan}{Defaults to \code{NULL}.}
+\item{grad_rec}{Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.}
+\item{grad_gan}{Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.}
 }
 \description{
-Part of the vqgdec_native implementation; see the file header for the source it follows.
+A step of the vqgdec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens}, \code{adaptive_lambda}, \code{method}, \code{note}.

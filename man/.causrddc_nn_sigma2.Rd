@@ -8,13 +8,13 @@
 .causrddc_nn_sigma2(x, y, J, side_of)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{J}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; indexed elementwise.}
+\item{J}{Numeric; combined arithmetically in the body.}
 \item{side_of}{See Usage.}
 }
 \description{
-Part of the causrddc_native implementation; see the file header for the source it follows.
+A step of the causrddc_native implementation. Called by \code{morie_causrddc}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -15,7 +15,7 @@ tlltmle_fluctuate(Q, H, Y, iters = 100, tol = 1e-10)
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{
-Part of the tlltmle_native implementation; see the file header for the source it follows.
+A step of the tlltmle_native implementation. Called by \code{tlltmle_ltmle}, \code{tlltmle_tmle_point}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{epsilon}, \code{Q_star}, \code{score}.

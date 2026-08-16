@@ -15,13 +15,14 @@
 # --- eq. (1) as written -- the O(kn^2) double sum -------------------
 #' Eq. (1) as written -- the O(kn^2) double sum -------------------
 #'
-#' Part of the fmFM_native implementation; see the file header for the
+#' A step of the fmFM_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
 #' @param w0 See Usage.
-#' @param w See Usage.
-#' @param V See Usage.
+#' @param w Numeric; combined arithmetically in the body.
+#' @param V A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 predict_naive <- function(x, w0, w, V) {
@@ -43,13 +44,14 @@ predict_naive <- function(x, w0, w, V) {
 # --- the same value in O(kn) by Lemma 3.1 ---------------------------
 #' The same value in O(kn) by Lemma 3.1 ---------------------------
 #'
-#' Part of the fmFM_native implementation; see the file header for the
+#' A step of the fmFM_native implementation. Called by \code{fit_fm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
 #' @param w0 See Usage.
-#' @param w See Usage.
-#' @param V See Usage.
+#' @param w Numeric; combined arithmetically in the body.
+#' @param V A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .fmFM_predict <- function(x, w0, w, V) {
@@ -69,11 +71,12 @@ predict_naive <- function(x, w0, w, V) {
 # --- d/d v_{i,f} of hat y, used in the SGD step --------------------
 #' D/d v_{i,f} of hat y, used in the SGD step --------------------
 #'
-#' Part of the fmFM_native implementation; see the file header for the
+#' A step of the fmFM_native implementation. Called by \code{fit_fm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
-#' @param V See Usage.
+#' @param V A vector; indexed elementwise.
 #' @param f See Usage.
 #' @param i See Usage.
 #' @return A numeric value.
@@ -109,13 +112,14 @@ design_mf <- function(u, i, n_users, n_items) {
 # --- least-squares FM by stochastic gradient descent ----------------
 #' Least-squares FM by stochastic gradient descent ----------------
 #'
-#' Part of the fmFM_native implementation; see the file header for the
+#' A step of the fmFM_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param k_dim Defaults to \code{4}.
-#' @param iters Defaults to \code{300}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @param alpha Defaults to \code{0.02}.
 #' @param lam Defaults to \code{0.01}.
 #' @param seed Defaults to \code{0}.
@@ -166,7 +170,8 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
 # --- cheatsheet -----------------------------------------------------
 #' Cheatsheet -----------------------------------------------------
 #'
-#' Part of the fmFM_native implementation; see the file header for the
+#' A step of the fmFM_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,18 +8,18 @@
 morie_ncfRS_fit_gmf(pos, n_users, n_items, k_dim = 8, alpha = 0.05, iters = 2000, n_neg = 4, seed = 0, learn_h = TRUE)
 }
 \arguments{
-\item{pos}{See Usage.}
+\item{pos}{A vector; indexed elementwise.}
 \item{n_users}{See Usage.}
 \item{n_items}{See Usage.}
 \item{k_dim}{Defaults to \code{8}.}
 \item{alpha}{Defaults to \code{0.05}.}
 \item{iters}{Defaults to \code{2000}.}
 \item{n_neg}{Defaults to \code{4}.}
-\item{seed}{Defaults to \code{0}.}
-\item{learn_h}{Defaults to \code{TRUE}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{learn_h}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the ncfRS_native implementation; see the file header for the source it follows.
+A step of the ncfRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{P}, \code{Q}, \code{h}, \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.

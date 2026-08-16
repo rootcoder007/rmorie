@@ -6,7 +6,8 @@
 
 #' .morie_glm_families
 #'
-#' Part of the glm implementation; see the file header for the source it
+#' A step of the glm implementation. Called by \code{morie_deviance_residuals}, \code{morie_glm}, \code{morie_glm_predict}.
+#' See the file header for the source the module follows.
 #' follows.
 #'
 #' @return A list with \code{binomial}, \code{poisson}, \code{gaussian}, \code{gamma}.
@@ -67,11 +68,12 @@
 
 #' .morie_glm_solve
 #'
-#' Part of the glm implementation; see the file header for the source it
+#' A step of the glm implementation. Called by \code{morie_glm}.
+#' See the file header for the source the module follows.
 #' follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; passed to \code{solve}.
+#' @param b A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .morie_glm_solve <- function(A, b) {
@@ -84,13 +86,14 @@
 
 #' morie_glm
 #'
-#' Part of the glm implementation; see the file header for the source it
+#' A step of the glm implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; passed to \code{nrow}.
 #' @param family Defaults to \code{"binomial"}.
-#' @param add_intercept Defaults to \code{TRUE}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param weights Defaults to \code{NULL}.
 #' @param offset Defaults to \code{NULL}.
 #' @param max_iter Defaults to \code{25L}.
@@ -209,13 +212,14 @@ morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
 
 #' morie_glm_predict
 #'
-#' Part of the glm implementation; see the file header for the source it
+#' A step of the glm implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' follows.
 #'
-#' @param fit See Usage.
-#' @param X See Usage.
-#' @param add_intercept Defaults to \code{TRUE}.
-#' @param type Defaults to \code{c("response", "link")}.
+#' @param fit A list; the body reads \code{$coef}, \code{$family} from it.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param type Compared against \code{"link"}. Defaults to \code{c("response", "link")}.
 #' @param offset Defaults to \code{NULL}.
 #' @return The value of \code{.morie_glm_families()[[fit$family]]$linkinv}.
 #' @export
@@ -241,11 +245,12 @@ morie_glm_predict <- function(fit, X, add_intercept = TRUE,
 
 #' morie_deviance_residuals
 #'
-#' Part of the glm implementation; see the file header for the source it
+#' A step of the glm implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' follows.
 #'
-#' @param fit See Usage.
-#' @param y See Usage.
+#' @param fit A list; the body reads \code{$family}, \code{$fitted} from it.
+#' @param y Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 morie_deviance_residuals <- function(fit, y) {

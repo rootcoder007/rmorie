@@ -8,9 +8,9 @@
 .schab_aicc_from_parts(n, sigma2, tr_S)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{sigma2}{See Usage.}
-\item{tr_S}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{sigma2}{Numeric; passed to \code{sqrt}.}
+\item{tr_S}{Numeric; combined arithmetically in the body.}
 }
 \description{
 mgwr.diagnostics.get_AICc Fotheringham et al. (2002) p. 61 eq (2.33) / p. 96 eq (4.21).

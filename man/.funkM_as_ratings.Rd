@@ -8,7 +8,7 @@
 .funkM_as_ratings(ratings)
 }
 \arguments{
-\item{ratings}{See Usage.}
+\item{ratings}{A list; the body reads \code{$i}, \code{$r}, \code{$u} from it.}
 }
 \description{
 Accepts a data.frame (with those columns) or a list of length-3 vectors. Indices are kept 0-based, matching the Python source.
@@ -28,7 +28,7 @@ of the same model are the two references below, and the
 implementation follows those.
 
 Koren, Y. (2008) "Factorization Meets the Neighborhood: a
-Multifaceted Collaborative Filtering Model", *KDD \\'08*, 426-434,
+Multifaceted Collaborative Filtering Model", *KDD \'08*, 426-434,
 doi:10.1145/1401890.1401944. The baseline decomposition
 b_ui = mu + b_u + b_i and the regularised squared-error objective
 over the OBSERVED ratings, optimised by stochastic gradient descent.

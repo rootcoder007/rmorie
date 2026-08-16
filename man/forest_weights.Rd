@@ -8,12 +8,12 @@
 forest_weights(trees, X, x)
 }
 \arguments{
-\item{trees}{See Usage.}
-\item{X}{See Usage.}
+\item{trees}{A vector; its length is taken.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{x}{See Usage.}
 }
 \description{
-Part of the hntfst_native implementation; see the file header for the source it follows.
+A step of the hntfst_native implementation. Called by \code{.center_cate}, \code{.ipwgrf_forest_nuisances}, \code{.itrgrf_fit_arm} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

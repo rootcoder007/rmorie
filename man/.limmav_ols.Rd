@@ -8,12 +8,12 @@
 .limmav_ols(X, y, w = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
 \item{w}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}, \code{.limmav_weighted_lm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{fit}, \code{sd}, \code{inv}, \code{df}.

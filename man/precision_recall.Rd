@@ -12,7 +12,7 @@ precision_recall(pred, truth)
 \item{truth}{See Usage.}
 }
 \description{
-Part of the memb_native implementation; see the file header for the source it follows.
+A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{precision}, \code{recall}, \code{accuracy}, \code{tp}, \code{fp}, \code{fn}, \code{tn}.

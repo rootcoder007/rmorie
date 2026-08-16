@@ -8,10 +8,10 @@
 .scintg_design(batches)
 }
 \arguments{
-\item{batches}{See Usage.}
+\item{batches}{A vector; its length is taken.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{phi}, \code{names}.

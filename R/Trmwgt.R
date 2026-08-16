@@ -41,10 +41,11 @@ Trmwgt <- function(weights, quantile = 0.99) {
 
 #' .trmwgt_cv
 #'
-#' Part of the Trmwgt implementation; see the file header for the source
+#' A step of the Trmwgt implementation. Called by \code{Trmwgt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param w See Usage.
+#' @param w A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .trmwgt_cv <- function(w) {

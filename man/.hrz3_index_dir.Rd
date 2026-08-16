@@ -8,9 +8,9 @@
 .hrz3_index_dir(X, y, h)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{h}{See Usage.}
+\item{X}{Passed to \code{.hrz3_ade}.}
+\item{y}{Passed to \code{.hrz3_ade}.}
+\item{h}{Passed to \code{.hrz3_ade}.}
 }
 \description{
 (Horowitz assumption HT2(a), p. 219).

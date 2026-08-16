@@ -8,12 +8,12 @@
 .schab_aic_from_parts(n, sigma2, tr_S)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{sigma2}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{sigma2}{Numeric; passed to \code{sqrt}.}
 \item{tr_S}{See Usage.}
 }
 \description{
-Part of the schab_gwr_shared implementation; see the file header for the source it follows.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{spgwrb}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

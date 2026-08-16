@@ -8,13 +8,13 @@
 morie_sctraj_shrinkage_weight(t, t_min, t_max, arg = "shifted")
 }
 \arguments{
-\item{t}{See Usage.}
-\item{t_min}{See Usage.}
-\item{t_max}{See Usage.}
-\item{arg}{Defaults to \code{"shifted"}.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{t_min}{Numeric; combined arithmetically in the body.}
+\item{t_max}{Numeric; combined arithmetically in the body.}
+\item{arg}{One of \code{"as_printed"}, \code{"shifted"}. Defaults to \code{"shifted"}.}
 }
 \description{
-Part of the sctraj_native implementation; see the file header for the source it follows.
+A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

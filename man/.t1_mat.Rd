@@ -8,10 +8,10 @@
 .t1_mat(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the tail1_core implementation; see the file header for the source it follows.
+A step of the tail1_core implementation. Called by \code{.ecfp_bonds}, \code{Admmlasso}, \code{Advielbo} and 45 others in the module. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

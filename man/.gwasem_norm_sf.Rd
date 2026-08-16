@@ -8,10 +8,10 @@
 .gwasem_norm_sf(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{abs}.}
 }
 \description{
-Part of the gwasem_native implementation; see the file header for the source it follows.
+A step of the gwasem_native implementation. Called by \code{morie_gwasem}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pnorm}.

@@ -14,13 +14,13 @@ morie_safrl_cmdp_returns(policy, states, actions, step, reward, costs, gamma = 0
 \item{step}{See Usage.}
 \item{reward}{See Usage.}
 \item{costs}{See Usage.}
-\item{gamma}{Defaults to \code{0.9}.}
+\item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 \item{start}{Defaults to \code{NULL}.}
 \item{iters}{Defaults to \code{5000}.}
 \item{tol}{Defaults to \code{1e-14}.}
 }
 \description{
-Part of the safrl_native implementation; see the file header for the source it follows.
+A step of the safrl_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{J}, \code{J_C}, \code{gamma}, \code{method}.

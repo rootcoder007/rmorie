@@ -11,7 +11,7 @@
 \item{m}{See Usage.}
 }
 \description{
-Part of the btmult implementation; see the file header for the source it follows.
+A step of the btmult implementation. Called by \code{.bt_counts}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ps}, as built in the body.

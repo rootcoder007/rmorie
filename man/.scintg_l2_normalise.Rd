@@ -8,10 +8,10 @@
 .scintg_l2_normalise(Z)
 }
 \arguments{
-\item{Z}{See Usage.}
+\item{Z}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{.scintg_kmeans_init}, \code{.scintg_maximum_diversity_clustering}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{sweep}.

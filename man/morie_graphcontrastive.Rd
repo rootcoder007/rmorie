@@ -8,13 +8,13 @@
 morie_graphcontrastive(U, V, tau = 0.5, intra = TRUE)
 }
 \arguments{
-\item{U}{See Usage.}
-\item{V}{See Usage.}
-\item{tau}{Defaults to \code{0.5}.}
-\item{intra}{Defaults to \code{TRUE}.}
+\item{U}{Passed to \code{.grace_objective}.}
+\item{V}{Passed to \code{.grace_objective}.}
+\item{tau}{Passed to \code{.grace_objective}. Defaults to \code{0.5}.}
+\item{intra}{Passed to \code{.grace_objective}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the grace_native implementation; see the file header for the source it follows.
+A step of the grace_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.grace_objective}.

@@ -58,10 +58,11 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 # Internal: KS statistic for a sorted sample against CDF values.
 #' Internal: KS statistic for a sorted sample against CDF values
 #'
-#' Part of the reds_native implementation; see the file header for the
+#' A step of the reds_native implementation. Called by \code{.rn_mc_p_fitted}, \code{morie_multi_horizon_ks}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cdf_vals See Usage.
+#' @param cdf_vals A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .rn_ks_stat <- function(cdf_vals) {
@@ -80,7 +81,7 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 #'
 #' @param d_obs See Usage.
 #' @param n See Usage.
-#' @param n_mc See Usage.
+#' @param n_mc A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .rn_mc_p_fitted <- function(d_obs, n, n_mc) {

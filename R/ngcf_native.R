@@ -69,11 +69,12 @@
 
 #' .ngcf_leaky
 #'
-#' Part of the ngcf_native implementation; see the file header for the
+#' A step of the ngcf_native implementation. Called by \code{ngcf_propagate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param slope Defaults to \code{0.2}.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param slope Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ngcf_leaky <- function(x, slope=0.2) {
@@ -82,7 +83,8 @@
 
 #' ngcf_laplacian_coefficient
 #'
-#' Part of the ngcf_native implementation; see the file header for the
+#' A step of the ngcf_native implementation. Called by \code{ngcf_propagate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_u See Usage.
@@ -100,15 +102,16 @@ ngcf_laplacian_coefficient <- function(n_u, n_i) {
 
 #' ngcf_message
 #'
-#' Part of the ngcf_native implementation; see the file header for the
+#' A step of the ngcf_native implementation. Called by \code{ngcf_propagate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param e_i See Usage.
 #' @param e_u See Usage.
-#' @param W1 See Usage.
-#' @param W2 See Usage.
-#' @param p_ui See Usage.
-#' @param affinity Defaults to \code{TRUE}.
+#' @param W1 A matrix; indexed by row and column.
+#' @param W2 A matrix; indexed by row and column.
+#' @param p_ui Numeric; combined arithmetically in the body.
+#' @param affinity A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity=TRUE) {
@@ -128,15 +131,16 @@ ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity=TRUE) {
 
 #' ngcf_propagate
 #'
-#' Part of the ngcf_native implementation; see the file header for the
+#' A step of the ngcf_native implementation. Called by \code{ngcf_stack_layers}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param E See Usage.
-#' @param adjacency See Usage.
+#' @param E A matrix; indexed by row and column.
+#' @param adjacency A vector; indexed elementwise.
 #' @param W1 See Usage.
 #' @param W2 See Usage.
 #' @param affinity Defaults to \code{TRUE}.
-#' @param slope Defaults to \code{0.2}.
+#' @param slope Passed to \code{.ngcf_leaky}. Defaults to \code{0.2}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
@@ -165,12 +169,13 @@ ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
 
 #' ngcf_stack_layers
 #'
-#' Part of the ngcf_native implementation; see the file header for the
+#' A step of the ngcf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param E0 See Usage.
+#' @param E0 A matrix; passed to \code{as.matrix}.
 #' @param adjacency See Usage.
-#' @param Ws See Usage.
+#' @param Ws A vector; its length is taken.
 #' @param affinity Defaults to \code{TRUE}.
 #' @param slope Defaults to \code{0.2}.
 #' @return A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers}, \code{affinity}, \code{method}, \code{note}.
@@ -205,10 +210,11 @@ ngcf_stack_layers <- function(E0, adjacency, Ws, affinity=TRUE, slope=0.2) {
 
 #' ngcf_score
 #'
-#' Part of the ngcf_native implementation; see the file header for the
+#' A step of the ngcf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param final See Usage.
+#' @param final A matrix; indexed by row and column.
 #' @param u See Usage.
 #' @param i See Usage.
 #' @return A numeric value.
@@ -224,7 +230,8 @@ ngcf_score <- function(final, u, i) {
 
 #' ngcf_cheatsheet
 #'
-#' Part of the ngcf_native implementation; see the file header for the
+#' A step of the ngcf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

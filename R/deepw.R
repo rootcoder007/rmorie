@@ -3,10 +3,11 @@
 # Neighbour lists from a square 0/1 adjacency matrix.
 #' Neighbour lists from a square 0/1 adjacency matrix
 #'
-#' Part of the deepw implementation; see the file header for the source
+#' A step of the deepw implementation. Called by \code{Comemb}, \code{Deepw}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param G See Usage.
+#' @param G Passed to \code{.s03mat}.
 #' @return A list with \code{A}, \code{n}, \code{nb}.
 #' @export
 .dw_adj <- function(G) {
@@ -24,13 +25,14 @@
 # One uniform random walk: every neighbour has probability 1/deg.
 #' One uniform random walk: every neighbour has probability 1/deg
 #'
-#' Part of the deepw implementation; see the file header for the source
+#' A step of the deepw implementation. Called by \code{Deepw}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param nb See Usage.
+#' @param nb A vector; indexed elementwise.
 #' @param start See Usage.
-#' @param length_ See Usage.
-#' @param e See Usage.
+#' @param length_ A count; the body uses it as \code{integer(...)}.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{[}.
 #' @export
 .dw_walk <- function(nb, start, length_, e) {
@@ -54,17 +56,18 @@
 # Skip-gram with negative sampling, plain SGD, fixed schedule.
 #' Skip-gram with negative sampling, plain SGD, fixed schedule
 #'
-#' Part of the deepw implementation; see the file header for the source
+#' A step of the deepw implementation. Called by \code{Comemb}, \code{Deepw}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param walks See Usage.
-#' @param n See Usage.
-#' @param dim See Usage.
-#' @param window See Usage.
-#' @param epochs See Usage.
-#' @param lr See Usage.
-#' @param neg See Usage.
-#' @param e See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param dim A count; the body uses it as \code{seq_len(...)}.
+#' @param window Numeric; combined arithmetically in the body.
+#' @param epochs A count; the body uses it as \code{seq_len(...)}.
+#' @param lr Numeric; combined arithmetically in the body.
+#' @param neg A count; the body uses it as \code{seq_len(...)}.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return A list with \code{W}, \code{C}.
 #' @export
 .dw_skipgram <- function(walks, n, dim, window, epochs, lr, neg, e) {

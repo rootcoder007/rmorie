@@ -8,13 +8,13 @@
 PdfMean(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
 }
 \arguments{
-\item{pdf}{Defaults to \code{NULL}.}
-\item{x}{Defaults to \code{NULL}.}
-\item{lower}{Defaults to \code{-Inf}.}
-\item{upper}{Defaults to \code{Inf}.}
+\item{pdf}{Passed to \code{.morie_rg_pdfint}.}
+\item{x}{Passed to \code{.morie_rg_pdfint}.}
+\item{lower}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.}
+\item{upper}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.}
 }
 \description{
-Part of the rangayyan_ch3 implementation; see the file header for the source it follows.
+A step of the rangayyan_ch3 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

@@ -8,11 +8,11 @@
 .tmlcic_row_fun(W, cand)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{cand}{See Usage.}
+\item{W}{A matrix; indexed by row and column.}
+\item{cand}{A list; the body reads \code{$cols}, \code{$interact} from it.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_working_model}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{function}.

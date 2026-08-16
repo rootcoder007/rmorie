@@ -56,10 +56,11 @@
 
 #' .vqgenc_as_matrix
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}, \code{.vqgenc_quantize}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
 #' @export
 .vqgenc_as_matrix <- function(x) {
@@ -94,10 +95,11 @@
 
 #' .vqgenc_as_vector
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_codebook_loss}, \code{.vqgenc_commitment_loss}, \code{.vqgenc_straight_through}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{nrow}.
 #' @return Nothing; this branch always raises.
 #' @export
 .vqgenc_as_vector <- function(x) {
@@ -124,11 +126,12 @@
 
 #' .vqgenc_quantize
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vectors See Usage.
-#' @param codebook See Usage.
+#' @param vectors Passed to \code{.vqgenc_as_matrix}.
+#' @param codebook Passed to \code{.vqgenc_as_matrix}.
 #' @return A list with \code{indices}, \code{codes}, \code{distance}, \code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.
 #' @export
 .vqgenc_quantize <- function(vectors, codebook) {
@@ -178,12 +181,13 @@
 
 #' .vqgenc_straight_through
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param encoder_output See Usage.
-#' @param quantized See Usage.
-#' @param upstream_gradient See Usage.
+#' @param encoder_output Passed to \code{.vqgenc_as_vector}.
+#' @param quantized Passed to \code{.vqgenc_as_vector}.
+#' @param upstream_gradient Passed to \code{.vqgenc_as_vector}.
 #' @return A list with \code{forward}, \code{backward}, \code{jacobian_is_identity}, \code{note}.
 #' @export
 .vqgenc_straight_through <- function(encoder_output, quantized, upstream_gradient) {
@@ -205,11 +209,12 @@
 
 #' .vqgenc_codebook_loss
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param encoder_output See Usage.
-#' @param quantized See Usage.
+#' @param encoder_output Passed to \code{.vqgenc_as_vector}.
+#' @param quantized Passed to \code{.vqgenc_as_vector}.
 #' @return A list with \code{loss}, \code{gradient_flows_to}, \code{note}.
 #' @export
 .vqgenc_codebook_loss <- function(encoder_output, quantized) {
@@ -231,11 +236,12 @@
 
 #' .vqgenc_commitment_loss
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param encoder_output See Usage.
-#' @param quantized See Usage.
+#' @param encoder_output Passed to \code{.vqgenc_as_vector}.
+#' @param quantized Passed to \code{.vqgenc_as_vector}.
 #' @param beta Defaults to \code{0.25}.
 #' @return A list with \code{loss}, \code{beta}, \code{gradient_flows_to}, \code{note}.
 #' @export
@@ -264,7 +270,8 @@
 
 #' .vqgenc_sequence_length
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param height See Usage.
@@ -296,13 +303,14 @@
 
 #' .vqgenc_encode
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vectors See Usage.
-#' @param codebook See Usage.
-#' @param beta Defaults to \code{0.25}.
-#' @param target Defaults to \code{NULL}.
+#' @param vectors Passed to \code{.vqgenc_quantize}.
+#' @param codebook Passed to \code{.vqgenc_quantize}.
+#' @param beta Passed to \code{.vqgenc_commitment_loss}. Defaults to \code{0.25}.
+#' @param target Optional; may be \code{NULL}. Passed to \code{.vqgenc_as_matrix}.
 #' @return A list with \code{estimate}, \code{indices}, \code{codes}, \code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss}, \code{usage_fraction}, \code{method}, \code{note}.
 #' @export
 .vqgenc_encode <- function(vectors, codebook, beta = 0.25, target = NULL) {
@@ -343,7 +351,8 @@
 
 #' .vqgenc_cheatsheet
 #'
-#' Part of the vqgenc_native implementation; see the file header for the
+#' A step of the vqgenc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

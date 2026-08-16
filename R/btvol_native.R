@@ -15,12 +15,13 @@
 
 #' .btv_boot_reps
 #'
-#' Part of the btvol_native implementation; see the file header for the
+#' A step of the btvol_native implementation. Called by \code{morie_bt_iid}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; indexed by row and column.
 #' @param stat See Usage.
-#' @param B See Usage.
+#' @param B A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.
 #' @return A vector, from \code{vapply}.
 #' @export

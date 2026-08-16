@@ -8,7 +8,7 @@
 .s02freq(M, freq = NULL)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; passed to \code{as.matrix}.}
 \item{freq}{Defaults to \code{NULL}.}
 }
 \description{

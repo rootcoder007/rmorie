@@ -3,15 +3,15 @@
 % the formals.
 \name{.w3_inv_from_chol}
 \alias{.w3_inv_from_chol}
-\title{(L L\\\')^-1, column by column from the factor}
+\title{(L L\\')^-1, column by column from the factor}
 \usage{
 .w3_inv_from_chol(lo)
 }
 \arguments{
-\item{lo}{See Usage.}
+\item{lo}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the helpers_w3num implementation; see the file header for the source it follows.
+A step of the helpers_w3num implementation. Called by \code{.w3_ols}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,10 +8,10 @@
 vector_norm(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{.painn_mat}.}
 }
 \description{
-Part of the painn_native implementation; see the file header for the source it follows.
+A step of the painn_native implementation. Called by \code{gated_update}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

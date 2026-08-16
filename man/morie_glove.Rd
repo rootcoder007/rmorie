@@ -18,10 +18,10 @@ morie_glove(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05, x_max = 100, 
 \item{harmonic}{Defaults to \code{TRUE}.}
 \item{min_count}{Defaults to \code{1}.}
 \item{seed}{Defaults to \code{0}.}
-\item{combine}{Defaults to \code{"sum"}.}
+\item{combine}{One of \code{"concat"}, \code{"sum"}, \code{"w"}, \code{"wtilde"}. Defaults to \code{"sum"}.}
 }
 \description{
-Part of the glove_native implementation; see the file header for the source it follows.
+A step of the glove_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{W}, \code{W_tilde}, \code{b}, \code{b_tilde}, \code{cooccurrence}, \code{loss_history}, \code{running_loss}, \code{final_loss}, \code{n_vocab}, \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max}, \code{alpha}, \code{combine}, \code{method}.

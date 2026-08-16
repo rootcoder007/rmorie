@@ -8,13 +8,13 @@
 .limmav_log_cpm(counts, lib_sizes = NULL, prior_count = 0.5, lib_offset = 1)
 }
 \arguments{
-\item{counts}{See Usage.}
+\item{counts}{A matrix; passed to \code{nrow}.}
 \item{lib_sizes}{Defaults to \code{NULL}.}
-\item{prior_count}{Defaults to \code{0.5}.}
-\item{lib_offset}{Defaults to \code{1}.}
+\item{prior_count}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
+\item{lib_offset}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{R}.

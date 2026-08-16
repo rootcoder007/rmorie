@@ -11,7 +11,7 @@
 \item{p}{See Usage.}
 }
 \description{
-Part of the tl1step_native implementation; see the file header for the source it follows.
+A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

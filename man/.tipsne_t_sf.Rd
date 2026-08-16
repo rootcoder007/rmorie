@@ -3,13 +3,13 @@
 % the formals.
 \name{.tipsne_t_sf}
 \alias{.tipsne_t_sf}
-\title{Upper tail of Student\\\'s t, from the regularised incomplete beta}
+\title{Upper tail of Student\\'s t, from the regularised incomplete beta}
 \usage{
 .tipsne_t_sf(t, df)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{df}{See Usage.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{df}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Written out because pt() and the Python arm are separate implementations and would disagree in the last digits.

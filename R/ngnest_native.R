@@ -52,7 +52,7 @@
 #' rather than lb and built the Fourier basis on max(H, lb) with 1-based
 #' time, so its forecasts drifted from the spec.
 #'
-#' @param window See Usage.
+#' @param window A vector; its length is taken.
 #' @param H See Usage.
 #' @param blocks See Usage.
 #' @param ridge Defaults to \code{1e-08}.
@@ -71,7 +71,8 @@
 
 #' .ngnest_default_block_sets
 #'
-#' Part of the ngnest_native implementation; see the file header for the
+#' A step of the ngnest_native implementation. Called by \code{.ngnest_ensemble_members}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{list}.
@@ -86,14 +87,15 @@
 
 #' .ngnest_ensemble_members
 #'
-#' Part of the ngnest_native implementation; see the file header for the
+#' A step of the ngnest_native implementation. Called by \code{morie_ngnest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param horizon See Usage.
 #' @param lookback_multiples Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
 #' @param block_sets Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{.ngnest_nbeats_stack}. Defaults to \code{1e-08}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .ngnest_ensemble_members <- function(y, horizon,
@@ -140,11 +142,12 @@
 
 #' .ngnest_aggregate_forecasts
 #'
-#' Part of the ngnest_native implementation; see the file header for the
+#' A step of the ngnest_native implementation. Called by \code{morie_ngnest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param members See Usage.
-#' @param how Defaults to \code{"median"}.
+#' @param members A vector; its length is taken and its elements indexed.
+#' @param how Compared against \code{"median"}. Defaults to \code{"median"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .ngnest_aggregate_forecasts <- function(members, how = "median") {
@@ -172,15 +175,16 @@
 
 #' morie_ngnest
 #'
-#' Part of the ngnest_native implementation; see the file header for the
+#' A step of the ngnest_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param horizon See Usage.
-#' @param lookback_multiples Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
-#' @param block_sets Defaults to \code{NULL}.
-#' @param how Defaults to \code{"median"}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param y Passed to \code{.ngnest_ensemble_members}.
+#' @param horizon Passed to \code{.ngnest_ensemble_members}.
+#' @param lookback_multiples Passed to \code{.ngnest_ensemble_members}. Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
+#' @param block_sets Passed to \code{.ngnest_ensemble_members}.
+#' @param how Passed to \code{.ngnest_aggregate_forecasts}. Defaults to \code{"median"}.
+#' @param ridge Passed to \code{.ngnest_ensemble_members}. Defaults to \code{1e-08}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_ngnest <- function(y, horizon,
@@ -238,7 +242,8 @@ morie_ngnest <- function(y, horizon,
 
 #' .ngnest_cheatsheet
 #'
-#' Part of the ngnest_native implementation; see the file header for the
+#' A step of the ngnest_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

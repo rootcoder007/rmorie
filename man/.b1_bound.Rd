@@ -13,7 +13,7 @@
 \item{hi}{See Usage.}
 }
 \description{
-Part of the b1_tmle implementation; see the file header for the source it follows.
+A step of the b1_tmle implementation. Called by \code{.b1_logit}, \code{.b1_target}, \code{Comptml} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pmin}.

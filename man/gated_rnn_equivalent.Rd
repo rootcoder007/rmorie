@@ -8,12 +8,12 @@
 gated_rnn_equivalent(x, w, b = 0)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 \item{w}{See Usage.}
 \item{b}{Defaults to \code{0}.}
 }
 \description{
-Part of the mambss_native implementation; see the file header for the source it follows.
+A step of the mambss_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{h}, \code{g}.

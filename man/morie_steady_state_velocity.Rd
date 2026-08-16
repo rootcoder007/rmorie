@@ -8,9 +8,9 @@
 morie_steady_state_velocity(u, s, quantile = 0.95)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{s}{See Usage.}
-\item{quantile}{Defaults to \code{0.95}.}
+\item{u}{A vector; its length is taken and its elements indexed.}
+\item{s}{A vector; its length is taken and its elements indexed.}
+\item{quantile}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
 }
 \description{
 cells assumed to be at steady state, and call the residual the velocity. It needs the steady states to be present in the data, which is the assumption the dynamical model removes.

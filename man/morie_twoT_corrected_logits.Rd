@@ -8,12 +8,12 @@
 morie_twoT_corrected_logits(scores, probabilities, temperature = 1)
 }
 \arguments{
-\item{scores}{See Usage.}
-\item{probabilities}{See Usage.}
+\item{scores}{Passed to \code{.twoT_as_vec}.}
+\item{probabilities}{Passed to \code{.twoT_as_vec}.}
 \item{temperature}{Defaults to \code{1}.}
 }
 \description{
-Part of the twoT_native implementation; see the file header for the source it follows.
+A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{corrected}, \code{raw}, \code{shift}, \code{note}.

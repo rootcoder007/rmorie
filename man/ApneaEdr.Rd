@@ -8,11 +8,11 @@
 ApneaEdr(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3)
 }
 \arguments{
-\item{edr}{See Usage.}
-\item{spo2}{See Usage.}
-\item{fs}{See Usage.}
-\item{hours}{Defaults to \code{NULL}.}
-\item{mindur}{Defaults to \code{10}.}
+\item{edr}{A vector; its length is taken.}
+\item{spo2}{A vector; its length is taken and its elements indexed.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{hours}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{mindur}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
 \item{desat}{Defaults to \code{3}.}
 }
 \description{

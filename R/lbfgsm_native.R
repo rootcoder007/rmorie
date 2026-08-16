@@ -30,11 +30,12 @@
 
 #' .lbfgsm_dot
 #'
-#' Part of the lbfgsm_native implementation; see the file header for the
+#' A step of the lbfgsm_native implementation. Called by \code{morie_lbfgsm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .lbfgsm_dot <- function(a, b) {
@@ -43,7 +44,8 @@
 
 #' morie_lbfgsm
 #'
-#' Part of the lbfgsm_native implementation; see the file header for the
+#' A step of the lbfgsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fun See Usage.
@@ -52,8 +54,8 @@
 #' @param m Defaults to \code{10}.
 #' @param max_iter Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-08}.
-#' @param c1 Defaults to \code{1e-04}.
-#' @param c2 Defaults to \code{0.9}.
+#' @param c1 Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
+#' @param c2 Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param max_ls Defaults to \code{60}.
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{grad}, \code{grad_norm}, \code{iterations}, \code{n_fun}, \code{memory}, \code{converged}, \code{history}, \code{method}.
 #' @export
@@ -197,7 +199,8 @@ lbfgsm <- morie_lbfgsm
 
 #' .lbfgsm_cheatsheet
 #'
-#' Part of the lbfgsm_native implementation; see the file header for the
+#' A step of the lbfgsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

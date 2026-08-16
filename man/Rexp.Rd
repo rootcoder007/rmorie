@@ -8,13 +8,13 @@
 Rexp(n, rate = 1, seed = 0, stream = 0)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Passed to \code{.morie_random_uniform}.}
 \item{rate}{Defaults to \code{1}.}
-\item{seed}{Defaults to \code{0}.}
-\item{stream}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
+\item{stream}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{Qexp}.

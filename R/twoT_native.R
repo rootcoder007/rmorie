@@ -63,7 +63,8 @@
 
 #' .twoT_as_vec
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_corrected_logits}, \code{morie_twoT_retrieve} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -77,10 +78,11 @@
 
 #' .twoT_as_mat
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}, \code{morie_twoT_tower_embedding}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .twoT_as_mat <- function(m) {
@@ -95,13 +97,14 @@
 
 #' morie_twoT_tower_embedding
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param features See Usage.
-#' @param W See Usage.
-#' @param b Defaults to \code{NULL}.
-#' @param normalise Defaults to \code{TRUE}.
+#' @param features Passed to \code{.twoT_as_vec}.
+#' @param W Passed to \code{.twoT_as_mat}.
+#' @param b Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
+#' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{embedding}, \code{norm}, \code{normalised}.
 #' @export
 morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) {
@@ -130,11 +133,12 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
 
 #' morie_twoT_corrected_logits
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
-#' @param probabilities See Usage.
+#' @param scores Passed to \code{.twoT_as_vec}.
+#' @param probabilities Passed to \code{.twoT_as_vec}.
 #' @param temperature Defaults to \code{1}.
 #' @return A list with \code{corrected}, \code{raw}, \code{shift}, \code{note}.
 #' @export
@@ -162,11 +166,12 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 
 #' .twoT_get_items
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. Called by \code{morie_twoT_streaming_frequency}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hits See Usage.
-#' @param t See Usage.
+#' @param hits Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param t Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{integer}.
 #' @export
 .twoT_get_items <- function(hits, t) {
@@ -179,11 +184,12 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 
 #' morie_twoT_streaming_frequency
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hits See Usage.
-#' @param n_steps See Usage.
+#' @param hits Passed to \code{.twoT_get_items}.
+#' @param n_steps A count; the body uses it as \code{seq_len(...)}.
 #' @param alpha Defaults to \code{0.05}.
 #' @param init Defaults to \code{NULL}.
 #' @return A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
@@ -222,12 +228,13 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
 
 #' morie_twoT_batch_softmax_loss
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query_embeddings See Usage.
-#' @param item_embeddings See Usage.
-#' @param probabilities Defaults to \code{NULL}.
+#' @param query_embeddings Passed to \code{.twoT_as_mat}.
+#' @param item_embeddings Passed to \code{.twoT_as_mat}.
+#' @param probabilities Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
 #' @param temperature Defaults to \code{0.05}.
 #' @return A list with \code{loss}, \code{per_example}, \code{corrected}.
 #' @export
@@ -267,14 +274,15 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
 
 #' morie_twoT_retrieve
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query_embedding See Usage.
-#' @param item_embeddings See Usage.
-#' @param probabilities Defaults to \code{NULL}.
+#' @param query_embedding Passed to \code{.twoT_as_vec}.
+#' @param item_embeddings Passed to \code{.twoT_as_mat}.
+#' @param probabilities Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
 #' @param top_k Defaults to \code{5}.
-#' @param temperature Defaults to \code{1}.
+#' @param temperature Passed to \code{morie_twoT_corrected_logits}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{top_k}, \code{uncorrected_top_k}, \code{scores}, \code{corrected_scores}, \code{changed}, \code{method}, \code{note}.
 #' @export
 morie_twoT_retrieve <- function(query_embedding, item_embeddings,
@@ -306,7 +314,8 @@ morie_twoT_retrieve <- function(query_embedding, item_embeddings,
 
 #' morie_twoT_cheatsheet
 #'
-#' Part of the twoT_native implementation; see the file header for the
+#' A step of the twoT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

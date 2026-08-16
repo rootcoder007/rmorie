@@ -8,10 +8,10 @@
 .trclrn_count_leaves(nd)
 }
 \arguments{
-\item{nd}{See Usage.}
+\item{nd}{A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.}
 }
 \description{
-Part of the trclrn_native implementation; see the file header for the source it follows.
+A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

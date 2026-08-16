@@ -8,10 +8,10 @@
 .scintg_matrix(Z)
 }
 \arguments{
-\item{Z}{See Usage.}
+\item{Z}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the scintg_native implementation; see the file header for the source it follows.
+A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}, \code{.scintg_maximum_diversity_clustering}, \code{morie_scintg}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{Z}, as built in the body.

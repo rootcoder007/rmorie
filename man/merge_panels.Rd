@@ -8,11 +8,11 @@
 merge_panels(panels, study_snps)
 }
 \arguments{
-\item{panels}{See Usage.}
+\item{panels}{A vector; its length is taken and its elements indexed.}
 \item{study_snps}{See Usage.}
 }
 \description{
-Part of the impfun_native implementation; see the file header for the source it follows.
+A step of the impfun_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{scaffold}, \code{targets}, \code{union}, \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain}, \code{note}.
@@ -29,7 +29,7 @@ feasible; higher accuracy than other methods when HapMap provides the
 sole reference panel, with the panel size constraining the
 improvements possible; greatly enhanced accuracy from expanding the
 panel to thousands of chromosomes, outperforming other methods at both
-rare and common SNPs with error rates 15-20% lower than the closest
+rare and common SNPs with error rates 15-20\% lower than the closest
 competitor; and the practical advantages of this approach to
 integrating information across panels genotyped on different sets of
 SNPs.

@@ -9,10 +9,10 @@ kernel_smooth(u, kernel = "epanechnikov")
 }
 \arguments{
 \item{u}{See Usage.}
-\item{kernel}{Defaults to \code{"epanechnikov"}.}
+\item{kernel}{One of \code{"epanechnikov"}, \code{"uniform"}. Defaults to \code{"epanechnikov"}.}
 }
 \description{
-Part of the tlcvnp_native implementation; see the file header for the source it follows.
+A step of the tlcvnp_native implementation. Called by \code{smoothed_parameter}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

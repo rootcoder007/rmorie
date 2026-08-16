@@ -8,9 +8,9 @@
 .hrz3_wquant(v, w, tau)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{w}{See Usage.}
-\item{tau}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
+\item{w}{A vector; its length is taken and its elements indexed.}
+\item{tau}{Numeric; combined arithmetically in the body.}
 }
 \description{
 cumulative normalised weight reaches tau.  With equal weights this is the usual empirical quantile, so it agrees with a plain sort on a degenerate kernel -- the anchor used by Hrzplrq.

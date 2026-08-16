@@ -8,11 +8,11 @@
 .nashq_indifference(payoff, k)
 }
 \arguments{
-\item{payoff}{See Usage.}
-\item{k}{See Usage.}
+\item{payoff}{A matrix; indexed by row and column.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

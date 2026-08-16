@@ -8,10 +8,11 @@
 
 #' .taulep_poisson
 #'
-#' Part of the taulep_native implementation; see the file header for the
+#' A step of the taulep_native implementation. Called by \code{morie_taulep}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.ghc_unif}.
 #' @param lam See Usage.
 #' @return The value of \code{repeat}.
 #' @export

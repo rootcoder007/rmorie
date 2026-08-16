@@ -8,21 +8,21 @@
 morie_timeRS_predict_time(mu, b_u, alpha_u, t_user, b_i, item_bins, t, p_u = NULL, q_i = NULL, per_day = NULL, bin_days = 70, beta = .timeRS_BETA)
 }
 \arguments{
-\item{mu}{See Usage.}
-\item{b_u}{See Usage.}
-\item{alpha_u}{See Usage.}
-\item{t_user}{See Usage.}
-\item{b_i}{See Usage.}
-\item{item_bins}{See Usage.}
-\item{t}{See Usage.}
-\item{p_u}{Defaults to \code{NULL}.}
-\item{q_i}{Defaults to \code{NULL}.}
-\item{per_day}{Defaults to \code{NULL}.}
-\item{bin_days}{Defaults to \code{70}.}
-\item{beta}{Defaults to \code{.timeRS_BETA}.}
+\item{mu}{Passed to \code{.timeRS_predict_time}.}
+\item{b_u}{Passed to \code{.timeRS_predict_time}.}
+\item{alpha_u}{Passed to \code{.timeRS_predict_time}.}
+\item{t_user}{Passed to \code{.timeRS_predict_time}.}
+\item{b_i}{Passed to \code{.timeRS_predict_time}.}
+\item{item_bins}{Passed to \code{.timeRS_predict_time}.}
+\item{t}{Passed to \code{.timeRS_predict_time}.}
+\item{p_u}{Passed to \code{.timeRS_predict_time}.}
+\item{q_i}{Passed to \code{.timeRS_predict_time}.}
+\item{per_day}{Passed to \code{.timeRS_predict_time}.}
+\item{bin_days}{Passed to \code{.timeRS_predict_time}. Defaults to \code{70}.}
+\item{beta}{Passed to \code{.timeRS_predict_time}. Defaults to \code{.timeRS_BETA}.}
 }
 \description{
-Part of the timeRS_native implementation; see the file header for the source it follows.
+A step of the timeRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.timeRS_predict_time}.

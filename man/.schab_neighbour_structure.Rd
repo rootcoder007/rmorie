@@ -8,10 +8,10 @@
 .schab_neighbour_structure(adjacency)
 }
 \arguments{
-\item{adjacency}{See Usage.}
+\item{adjacency}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{.schab_bym_icar_log_prior}, \code{.schab_bym_map}, \code{spbayr}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

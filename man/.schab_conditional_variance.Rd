@@ -8,12 +8,12 @@
 .schab_conditional_variance(mu, sigma2, family)
 }
 \arguments{
-\item{mu}{See Usage.}
+\item{mu}{Passed to \code{.schab_variance_function}.}
 \item{sigma2}{See Usage.}
-\item{family}{See Usage.}
+\item{family}{Passed to \code{.schab_variance_function}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spglmm}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

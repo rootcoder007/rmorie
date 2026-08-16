@@ -10,11 +10,11 @@ predict_next(state, item_embeddings, top_k = 5, exclude = numeric(0))
 \arguments{
 \item{state}{See Usage.}
 \item{item_embeddings}{See Usage.}
-\item{top_k}{Defaults to \code{5}.}
+\item{top_k}{Numeric; passed to \code{min}. Defaults to \code{5}.}
 \item{exclude}{Defaults to \code{numeric(0)}.}
 }
 \description{
-Part of the sasRec_native implementation; see the file header for the source it follows.
+A step of the sasRec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{ranking}, \code{n_scored}, \code{method}.

@@ -8,10 +8,10 @@
 .vepan_transcript(tr)
 }
 \arguments{
-\item{tr}{See Usage.}
+\item{tr}{A list; the body reads \code{$biotype}, \code{$canonical}, \code{$cds_end}, \code{$cds_start}, \code{$chrom}, \code{$exons}, \code{$gene}, \code{$id}, \code{$strand} from it.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{morie_vepan_transcript_sequence}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons}, \code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start}, \code{end}.

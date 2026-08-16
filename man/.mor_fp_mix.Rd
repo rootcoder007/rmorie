@@ -8,11 +8,11 @@
 .mor_fp_mix(h, v)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{v}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ecfp4_native implementation; see the file header for the source it follows.
+A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants}, \code{.mor_fp_morgan}, \code{morie_rdkfp}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

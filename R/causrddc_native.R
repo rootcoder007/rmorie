@@ -17,11 +17,12 @@
 
 #' .causrddc_kern
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma2}, \code{.causrddc_kernel_constants}, \code{.causrddc_local_poly_weights}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param u See Usage.
-#' @param kernel See Usage.
+#' @param u Numeric; passed to \code{abs}.
+#' @param kernel One of \code{"triangular"}, \code{"uniform"}.
 #' @return A numeric value.
 #' @export
 .causrddc_kern <- function(u, kernel) {
@@ -34,11 +35,12 @@
 
 #' .causrddc_solve
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{.causrddc_global_derivative}, \code{.causrddc_hc_sigma2}, \code{.causrddc_local_poly_weights} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param M See Usage.
-#' @param b See Usage.
+#' @param M A matrix; passed to \code{solve}.
+#' @param b A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .causrddc_solve <- function(M, b) {
@@ -47,14 +49,15 @@
 
 #' .causrddc_local_poly_weights
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_causrddc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param p See Usage.
-#' @param nu See Usage.
-#' @param kernel Defaults to \code{"triangular"}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param nu Numeric; combined arithmetically in the body.
+#' @param kernel Passed to \code{.causrddc_kern}. Defaults to \code{"triangular"}.
 #' @param side Defaults to \code{1}.
 #' @return A list with \code{w}, \code{omega}.
 #' @export
@@ -86,12 +89,13 @@
 
 #' .causrddc_kernel_constants
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_bandwidth}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
-#' @param kernel Defaults to \code{"triangular"}.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param q Numeric; combined arithmetically in the body.
+#' @param kernel Passed to \code{.causrddc_kern}. Defaults to \code{"triangular"}.
 #' @param n_grid Defaults to \code{2001}.
 #' @return A list with \code{G}, \code{th}, \code{P}.
 #' @export
@@ -123,14 +127,15 @@
 
 #' .causrddc_global_derivative
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_bandwidth}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; indexed elementwise.
+#' @param y A vector; indexed elementwise.
 #' @param side See Usage.
-#' @param order See Usage.
-#' @param deriv See Usage.
+#' @param order Numeric; combined arithmetically in the body.
+#' @param deriv Numeric; combined arithmetically in the body.
 #' @return A list with \code{deriv}, \code{sigma2}.
 #' @export
 .causrddc_global_derivative <- function(x, y, side, order, deriv) {
@@ -160,12 +165,13 @@
 
 #' .causrddc_nn_sigma2
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_causrddc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param J See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param y A vector; indexed elementwise.
+#' @param J Numeric; combined arithmetically in the body.
 #' @param side_of See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -207,11 +213,12 @@
 
 #' .causrddc_density_at_zero
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_bandwidth}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param h Defaults to \code{NULL}.
+#' @param x A vector; its length is taken.
+#' @param h Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .causrddc_density_at_zero <- function(x, h = NULL) {
@@ -237,15 +244,16 @@
 
 #' morie_causrddc_rd_bandwidth
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_causrddc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param nu Defaults to \code{0}.
-#' @param p Defaults to \code{1}.
-#' @param kernel Defaults to \code{"triangular"}.
-#' @param s Defaults to \code{0}.
+#' @param x A vector; its length is taken.
+#' @param y A vector; its length is taken.
+#' @param nu Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param p Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param kernel Passed to \code{.causrddc_kernel_constants}. Defaults to \code{"triangular"}.
+#' @param s Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param prelim_order Defaults to \code{NULL}.
 #' @return A list with \code{h}, \code{h_unclamped}, \code{at_bound}, \code{C}, \code{B}, \code{V}, \code{f}, \code{mu_plus}, \code{mu_minus}.
 #' @export
@@ -294,14 +302,15 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 
 #' .causrddc_hc_sigma2
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_causrddc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param h See Usage.
-#' @param p See Usage.
-#' @param kernel See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param y A vector; indexed elementwise.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param kernel Passed to \code{.causrddc_kern}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .causrddc_hc_sigma2 <- function(x, y, h, p, kernel) {
@@ -331,21 +340,22 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 
 #' morie_causrddc
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. Called by \code{morie_rdrobu}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param x See Usage.
+#' @param y A vector; its length is taken.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @param treatment Defaults to \code{NULL}.
 #' @param cutoff Defaults to \code{0}.
-#' @param nu Defaults to \code{0}.
-#' @param p Defaults to \code{1}.
-#' @param q Defaults to \code{NULL}.
-#' @param h Defaults to \code{NULL}.
-#' @param b Defaults to \code{NULL}.
-#' @param kernel Defaults to \code{"triangular"}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param vce Defaults to \code{"nn"}.
+#' @param nu Passed to \code{morie_causrddc_rd_bandwidth}. Defaults to \code{0}.
+#' @param p Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param q Optional; may be \code{NULL}. Passed to \code{morie_causrddc_rd_bandwidth}.
+#' @param h Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param b Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param kernel Passed to \code{morie_causrddc_rd_bandwidth}. Defaults to \code{"triangular"}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
+#' @param vce One of \code{"hc"}, \code{"nn"}. Defaults to \code{"nn"}.
 #' @param J Defaults to \code{3}.
 #' @return A list with \code{estimate}, \code{bias_corrected}, \code{se_conventional}, \code{se_robust}, \code{ci_conventional}, \code{ci_bias_corrected}, \code{ci_robust}, \code{pvalue_robust}, \code{h}, \code{b}, \code{rho}, \code{p}, \code{q}, \code{nu}, \code{kernel}, \code{vce}, \code{alpha}, \code{n}, \code{n_left}, \code{n_right}, \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy}, \code{method}.
 #' @export
@@ -479,7 +489,8 @@ morie_causrddc_local_poly_weights <- .causrddc_local_poly_weights
 
 #' morie_causrddc_cheatsheet
 #'
-#' Part of the causrddc_native implementation; see the file header for
+#' A step of the causrddc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

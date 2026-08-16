@@ -8,8 +8,8 @@
 QrsDeriv(x, fs, thresh = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
+\item{x}{Numeric; passed to \code{abs}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{thresh}{Defaults to \code{1}.}
 }
 \description{

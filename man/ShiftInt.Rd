@@ -8,14 +8,14 @@
 ShiftInt(y, a, h, delta = 1, trim = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{a}{See Usage.}
-\item{h}{See Usage.}
+\item{y}{Passed to \code{.morie_spx_chkv}.}
+\item{a}{Passed to \code{.morie_spx_chkv}.}
+\item{h}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{delta}{Defaults to \code{1}.}
 \item{trim}{Defaults to \code{NULL}.}
 }
 \description{
-the BACK-shifted exposure.  Forward-shifting is the sign error this estimand invites.  Gaussian working model A|H ~ N(H\\'gamma, tau^2), so w = exp{(delta/tau^2)(A - H\\'gamma - delta/2)}.  Diaz & van der Laan (2012, 2018).  NOT in Schabenberger & Gotway.
+the BACK-shifted exposure.  Forward-shifting is the sign error this estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2), so w = exp{(delta/tau^2)(A - H\'gamma - delta/2)}.  Diaz & van der Laan (2012, 2018).  NOT in Schabenberger & Gotway.
 }
 \value{
 A list with \code{psi}, \code{naive_mean}, \code{weights}, \code{max_weight}, \code{mean_weight}, \code{tau2}, \code{gamma}, \code{delta}, \code{weight_uses_back_shifted_density}, \code{gaussian_working_model}, \code{n}, \code{method}.

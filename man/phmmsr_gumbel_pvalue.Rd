@@ -13,7 +13,7 @@ phmmsr_gumbel_pvalue(score, mu, lam)
 \item{lam}{See Usage.}
 }
 \description{
-Part of the phmmsr_native implementation; see the file header for the source it follows.
+A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,11 +8,11 @@
 .morie_rg_fsub(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A list; the body reads \code{$d}, \code{$n} from it.}
+\item{b}{A list; the body reads \code{$d}, \code{$n} from it.}
 }
 \description{
-Part of the rangayyan_class implementation; see the file header for the source it follows.
+A step of the rangayyan_class implementation. Called by \code{Accuracy}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_rg_frac}.

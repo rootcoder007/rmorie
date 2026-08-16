@@ -8,14 +8,14 @@
 .secaead_qr(s, a, b, c, d)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{A vector; indexed elementwise.}
 \item{a}{See Usage.}
 \item{b}{See Usage.}
 \item{c}{See Usage.}
 \item{d}{See Usage.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{morie_secaead_chacha20_block}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{s}, as built in the body.

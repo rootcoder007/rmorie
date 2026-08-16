@@ -8,12 +8,12 @@
 .morie_random_normal(n, seed = 0, stream = 0)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
-\item{stream}{Defaults to \code{0}.}
+\item{n}{Passed to \code{.morie_random_uniform}.}
+\item{seed}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
+\item{stream}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
 }
 \description{
-Part of the rng_native implementation; see the file header for the source it follows.
+A step of the rng_native implementation. Called by \code{.morie_random_multivariate_normal}, \code{.schab_simulate_unconditional}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_normal_quantile}.

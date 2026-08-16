@@ -11,7 +11,7 @@ k02z(p)
 \item{p}{See Usage.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{mabay}, \code{macum}, \code{mafix} and 9 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{stats::qnorm}.

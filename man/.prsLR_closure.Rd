@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{items}{See Usage.}
-\item{ag}{See Usage.}
-\item{first}{See Usage.}
-\item{nts}{See Usage.}
+\item{ag}{A list; the body reads \code{$rules} from it.}
+\item{first}{Passed to \code{.prsLR_first_seq}.}
+\item{nts}{Passed to \code{.prsLR_first_seq}.}
 \item{k}{See Usage.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{.prsLR_goto}, \code{morie_closure}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{sort}.

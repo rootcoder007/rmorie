@@ -11,7 +11,7 @@
 \item{theta}{See Usage.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.gp_predict}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

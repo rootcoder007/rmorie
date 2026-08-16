@@ -8,10 +8,10 @@
 .morie_did_fe_solve(y0, u0, t0, iters = 50L)
 }
 \arguments{
-\item{y0}{See Usage.}
+\item{y0}{Numeric; combined arithmetically in the body.}
 \item{u0}{See Usage.}
 \item{t0}{See Usage.}
-\item{iters}{Defaults to \code{50L}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 }
 \description{
 cells by alternating projections; returns per-level lookups.

@@ -18,7 +18,8 @@
 
 #' .tqpack_pack_indices
 #'
-#' Part of the tqpack_native implementation; see the file header for the
+#' A step of the tqpack_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param indices See Usage.
@@ -103,7 +104,8 @@
 
 #' .tqpack_unpack_indices
 #'
-#' Part of the tqpack_native implementation; see the file header for the
+#' A step of the tqpack_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param data See Usage.
@@ -177,7 +179,8 @@
 
 #' .tqpack_cheatsheet
 #'
-#' Part of the tqpack_native implementation; see the file header for the
+#' A step of the tqpack_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

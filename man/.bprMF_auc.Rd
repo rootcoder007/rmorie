@@ -8,13 +8,13 @@
 .bprMF_auc(W, H, pos, n_items)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{H}{See Usage.}
-\item{pos}{See Usage.}
-\item{n_items}{See Usage.}
+\item{W}{Passed to \code{.bprMF_predict}.}
+\item{H}{Passed to \code{.bprMF_predict}.}
+\item{pos}{A vector; indexed elementwise.}
+\item{n_items}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the bprMF_native implementation; see the file header for the source it follows.
+A step of the bprMF_native implementation. Called by \code{.bprMF_learn_bpr}, \code{bpr_auc_R}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{auc}, \code{per_user}, \code{note}.

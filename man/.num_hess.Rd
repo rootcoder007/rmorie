@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{x}{See Usage.}
-\item{h}{Defaults to \code{1e-04}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.}
 }
 \description{
-Part of the barerp_native implementation; see the file header for the source it follows.
+A step of the barerp_native implementation. Called by \code{hess.Fun}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

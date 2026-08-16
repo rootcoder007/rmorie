@@ -11,6 +11,6 @@
 Internal helper: Sv Safe Pinv
 }
 \value{
-The value of \code{%*%}.
+The value of \code{\%*\%}.
 }
 \keyword{internal}

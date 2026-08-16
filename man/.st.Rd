@@ -8,16 +8,16 @@
 .st(x, mask, Ws, bs, Wt, bt, scale_cap = 5)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{mask}{See Usage.}
-\item{Ws}{See Usage.}
-\item{bs}{See Usage.}
-\item{Wt}{See Usage.}
-\item{bt}{See Usage.}
-\item{scale_cap}{Defaults to \code{5}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{mask}{Numeric; combined arithmetically in the body.}
+\item{Ws}{A matrix; passed to \code{as.matrix}.}
+\item{bs}{Numeric; combined arithmetically in the body.}
+\item{Wt}{A matrix; passed to \code{as.matrix}.}
+\item{bt}{Numeric; combined arithmetically in the body.}
+\item{scale_cap}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. Called by \code{.coupling_forward}, \code{.coupling_inverse}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{s}, \code{t}.

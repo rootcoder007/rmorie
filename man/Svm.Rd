@@ -8,11 +8,11 @@
 Svm(X, y, C = 1, maxiter = 2000, tol = 1e-06)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 \item{C}{Defaults to \code{1}.}
-\item{maxiter}{Defaults to \code{2000}.}
-\item{tol}{Defaults to \code{1e-06}.}
+\item{maxiter}{Passed to \code{.morie_rg_smo}. Defaults to \code{2000}.}
+\item{tol}{Passed to \code{.morie_rg_smo}. Defaults to \code{1e-06}.}
 }
 \description{
 VECTORS -- enter the solution, so the boundary is set by the samples nearest it and is untouched by the bulk of the data.  That is the strength on small samples and the weakness against one mislabelled point near the boundary, which C controls: small C tolerates violations, large C insists on separating and contorts around an outlier.

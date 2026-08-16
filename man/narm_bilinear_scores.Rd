@@ -8,12 +8,12 @@
 narm_bilinear_scores(embeddings, B, c_t)
 }
 \arguments{
-\item{embeddings}{See Usage.}
-\item{B}{See Usage.}
+\item{embeddings}{A matrix; passed to \code{as.matrix}.}
+\item{B}{A matrix; passed to \code{ncol}.}
 \item{c_t}{See Usage.}
 }
 \description{
-Part of the narm_native implementation; see the file header for the source it follows.
+A step of the narm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{scores}, \code{probabilities}, \code{method}, \code{note}.

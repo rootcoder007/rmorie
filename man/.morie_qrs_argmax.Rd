@@ -8,12 +8,12 @@
 .morie_qrs_argmax(v, lo, hi)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{lo}{See Usage.}
+\item{v}{A vector; indexed elementwise.}
+\item{lo}{Numeric; combined arithmetically in the body.}
 \item{hi}{See Usage.}
 }
 \description{
-exactly as Python\\\'s max(range(...), key=...).
+exactly as Python\\'s max(range(...), key=...).
 }
 \value{
 A numeric value.

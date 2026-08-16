@@ -8,10 +8,10 @@
 .thrtmt_mat(W)
 }
 \arguments{
-\item{W}{See Usage.}
+\item{W}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the thrtmt_native implementation; see the file header for the source it follows.
+A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

@@ -8,8 +8,8 @@
 morie_survrsf_conservation_residuals(times, events)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 times of a node. Lemma 1 forces M_n = 0.

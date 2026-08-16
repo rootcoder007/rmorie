@@ -8,11 +8,11 @@
 .frfgrf_split_share_walk(nd, counts)
 }
 \arguments{
-\item{nd}{See Usage.}
-\item{counts}{See Usage.}
+\item{nd}{A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right} from it.}
+\item{counts}{A vector; indexed elementwise.}
 }
 \description{
-Part of the frfgrf_native implementation; see the file header for the source it follows.
+A step of the frfgrf_native implementation. Called by \code{.frfgrf_split_share}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{counts}, as built in the body.

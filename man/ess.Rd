@@ -8,10 +8,10 @@
 ess(weights)
 }
 \arguments{
-\item{weights}{See Usage.}
+\item{weights}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the smcsam_native implementation; see the file header for the source it follows.
+A step of the smcsam_native implementation. Called by \code{Drvst}, \code{morie_att_weights}, \code{smcsam}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

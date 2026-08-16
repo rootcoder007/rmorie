@@ -19,10 +19,11 @@
 
 #' .slowdp_beta1alpha
 #'
-#' Part of the slowdp_native implementation; see the file header for the
+#' A step of the slowdp_native implementation. Called by \code{stick_breaking}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.ghc_unif}.
 #' @param alpha See Usage.
 #' @return A numeric value.
 #' @export
@@ -34,13 +35,14 @@
 
 #' stick_breaking
 #'
-#' Part of the slowdp_native implementation; see the file header for the
+#' A step of the slowdp_native implementation. Called by \code{truncated_dp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
 #' @param K See Usage.
 #' @param rng Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass}, \code{K}, \code{alpha}, \code{note}.
 #' @export
 stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
@@ -69,7 +71,8 @@ stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
 
 #' truncation_error
 #'
-#' Part of the slowdp_native implementation; see the file header for the
+#' A step of the slowdp_native implementation. Called by \code{decay_diagnostics}, \code{sticks_for_tolerance}, \code{truncated_dp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
@@ -89,7 +92,8 @@ truncation_error <- function(alpha, K) {
 
 #' sticks_for_tolerance
 #'
-#' Part of the slowdp_native implementation; see the file header for the
+#' A step of the slowdp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
@@ -113,7 +117,8 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
 
 #' decay_diagnostics
 #'
-#' Part of the slowdp_native implementation; see the file header for the
+#' A step of the slowdp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param weights See Usage.
@@ -143,15 +148,16 @@ decay_diagnostics <- function(weights, alpha) {
 
 #' truncated_dp
 #'
-#' Part of the slowdp_native implementation; see the file header for the
+#' A step of the slowdp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
 #' @param K See Usage.
 #' @param base_sampler Defaults to \code{NULL}.
 #' @param rng Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
-#' @param renormalise Defaults to \code{TRUE}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param renormalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{weights}, \code{atoms}, \code{discarded_mass}, \code{expected_discarded}, \code{renormalised}, \code{K}, \code{alpha}, \code{method}, \code{note}.
 #' @export
 truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
@@ -185,7 +191,8 @@ truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
 
 #' .slowdp_cheatsheet
 #'
-#' Part of the slowdp_native implementation; see the file header for the
+#' A step of the slowdp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

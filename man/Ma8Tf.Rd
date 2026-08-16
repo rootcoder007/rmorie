@@ -8,7 +8,7 @@
 Ma8Tf(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Passed to \code{.morie_rg_polyz}.}
 }
 \description{
 multiple of fs/8 except DC.  For fs = 1000 Hz the book puts them at 125, 250, 375 and 500 Hz.

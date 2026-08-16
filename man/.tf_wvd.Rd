@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{fs}{See Usage.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{nfreq}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{Gtfd}, \code{WvDist}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tfd}, \code{freqs}.

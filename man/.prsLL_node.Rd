@@ -12,7 +12,7 @@
 \item{kids}{See Usage.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{symbol}, \code{children}.

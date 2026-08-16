@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{.secaead_constant_time_equal}, \code{.secaead_hexlify}, \code{.secaead_mac_data} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

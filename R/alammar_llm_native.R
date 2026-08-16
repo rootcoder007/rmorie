@@ -10,10 +10,11 @@
 
 #' .morie_al_softmax_rows
 #'
-#' Part of the alammar_llm_native implementation; see the file header
+#' A step of the alammar_llm_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_encoder_block}, \code{.morie_gr_softmax_cols} and 13 others in the module.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
 .morie_al_softmax_rows <- function(z) {
@@ -24,11 +25,12 @@
 
 #' .morie_al_cos
 #'
-#' Part of the alammar_llm_native implementation; see the file header
+#' A step of the alammar_llm_native implementation. Called by \code{morie_alammar_cosine_similarity_loss}, \code{morie_alammar_infonce_loss}, \code{morie_alammar_multiple_negatives_ranking} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_al_cos <- function(a, b) {
@@ -44,10 +46,11 @@
 
 #' .morie_al_lcg
 #'
-#' Part of the alammar_llm_native implementation; see the file header
+#' A step of the alammar_llm_native implementation. Called by \code{.morie_gr_lcg_normals}, \code{.morie_gr_lcg_perm}, \code{.morie_gr_lcg_u} and 21 others in the module.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param state See Usage.
+#' @param state Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_al_lcg <- function(state) {
@@ -569,10 +572,11 @@ morie_alammar_infonce_loss <- function(anchor, positive, negatives,
 
 #' .morie_al_inbatch_ce
 #'
-#' Part of the alammar_llm_native implementation; see the file header
+#' A step of the alammar_llm_native implementation. Called by \code{morie_alammar_multiple_negatives_ranking}, \code{morie_alammar_openclip_contrastive}, \code{morie_alammar_simcse_dropout_aug}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param S See Usage.
+#' @param S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_al_inbatch_ce <- function(S) {

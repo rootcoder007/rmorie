@@ -8,15 +8,15 @@
 .flxipt_fit(y, W, spec, rows, binary, ridge)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
-\item{spec}{See Usage.}
+\item{y}{A vector; indexed elementwise.}
+\item{W}{Passed to \code{.flxipt_expand}.}
+\item{spec}{A list; the body reads \code{$penalty} from it.}
 \item{rows}{See Usage.}
-\item{binary}{See Usage.}
-\item{ridge}{See Usage.}
+\item{binary}{A flag; the body branches on it.}
+\item{ridge}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{super_learner}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{pred}, \code{b}.

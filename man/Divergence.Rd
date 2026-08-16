@@ -10,8 +10,8 @@ Divergence(m1, m2, C1, C2)
 \arguments{
 \item{m1}{See Usage.}
 \item{m2}{See Usage.}
-\item{C1}{See Usage.}
-\item{C2}{See Usage.}
+\item{C1}{A matrix; passed to \code{as.matrix}.}
+\item{C2}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 eq (10.115): D = (1/2) tr[(Ci - Cj)(Cj^-1 - Ci^-1)] + (1/2) tr[(Ci^-1 + Cj^-1)(mi - mj)(mi - mj)^T] The second term resembles eq (10.112) and vanishes for equal means; the FIRST does not, so unlike d_n the divergence still separates classes differing only in covariance. This is the measure the book uses; Bhattacharyya appears nowhere in it.

@@ -8,13 +8,13 @@
 morie_parse(g, tokens, method = "lr1", tables = NULL)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{tokens}{See Usage.}
-\item{method}{Defaults to \code{"lr1"}.}
-\item{tables}{Defaults to \code{NULL}.}
+\item{g}{Passed to \code{.prsLR_parse}.}
+\item{tokens}{Passed to \code{.prsLR_parse}.}
+\item{method}{Passed to \code{.prsLR_parse}. Defaults to \code{"lr1"}.}
+\item{tables}{Passed to \code{.prsLR_parse}.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.prsLR_parse}.

@@ -8,14 +8,14 @@
 morie_tl1step(Q, H_fn, Y, eps_max = 3, steps = 600)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{H_fn}{See Usage.}
-\item{Y}{See Usage.}
-\item{eps_max}{Defaults to \code{3}.}
-\item{steps}{Defaults to \code{600}.}
+\item{Q}{Passed to \code{.tl1step_one_step_tmle}.}
+\item{H_fn}{Passed to \code{.tl1step_one_step_tmle}.}
+\item{Y}{Passed to \code{.tl1step_one_step_tmle}.}
+\item{eps_max}{Passed to \code{.tl1step_one_step_tmle}. Defaults to \code{3}.}
+\item{steps}{Passed to \code{.tl1step_one_step_tmle}. Defaults to \code{600}.}
 }
 \description{
-Part of the tl1step_native implementation; see the file header for the source it follows.
+A step of the tl1step_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.tl1step_one_step_tmle}.

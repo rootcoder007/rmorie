@@ -8,11 +8,11 @@
 .morie_cv_ridge_predict(x_train, z_train, x_test, n_folds = 5L, lambdas = NULL)
 }
 \arguments{
-\item{x_train}{See Usage.}
-\item{z_train}{See Usage.}
-\item{x_test}{See Usage.}
-\item{n_folds}{Defaults to \code{5L}.}
-\item{lambdas}{Defaults to \code{NULL}.}
+\item{x_train}{A matrix; passed to \code{nrow}.}
+\item{z_train}{Numeric; passed to \code{mean}.}
+\item{x_test}{A matrix; passed to \code{as.matrix}.}
+\item{n_folds}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5L}.}
+\item{lambdas}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
 Ridge regression with SVD path + k-fold CV lambda selection, then prediction -- the cv.glmnet(alpha = 0, s = "lambda.min") surface the DML cross-fit nuisance learners used. The SVD makes the whole lambda path essentially free.

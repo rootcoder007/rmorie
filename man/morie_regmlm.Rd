@@ -8,8 +8,8 @@
 morie_regmlm(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5, cv = "kfold", k = 5)
 }
 \arguments{
-\item{G}{See Usage.}
-\item{y}{See Usage.}
+\item{G}{A matrix; passed to \code{nrow}.}
+\item{y}{A vector; its length is taken.}
 \item{chromosomes}{Defaults to \code{NULL}.}
 \item{block_size}{Defaults to \code{1000}.}
 \item{n_ridge}{Defaults to \code{5}.}
@@ -17,7 +17,7 @@ morie_regmlm(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5, cv = "kfo
 \item{k}{Defaults to \code{5}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{blocks}, \code{n_blocks}, \code{level0}, \code{level1}, \code{loco}, \code{chromosomes}, \code{n_predictors}, \code{reduction}, \code{method}.

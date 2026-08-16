@@ -8,10 +8,10 @@
 .morie_spx_p2(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{abs}.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ}, \code{MoranRes}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

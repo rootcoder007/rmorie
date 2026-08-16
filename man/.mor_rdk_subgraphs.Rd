@@ -8,14 +8,14 @@
 .mor_rdk_subgraphs(a, bd, minpath, maxpath, branched)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{bd}{See Usage.}
+\item{a}{A count; the body uses it as \code{seq_len(...)}.}
+\item{bd}{A list; the body reads \code{$i}, \code{$j} from it.}
 \item{minpath}{See Usage.}
-\item{maxpath}{See Usage.}
-\item{branched}{See Usage.}
+\item{maxpath}{A count; the body uses it as \code{seq_len(...)}.}
+\item{branched}{A flag; the body branches on it.}
 }
 \description{
-Part of the rdkfp_native implementation; see the file header for the source it follows.
+A step of the rdkfp_native implementation. Called by \code{morie_rdkfp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

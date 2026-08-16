@@ -8,12 +8,12 @@
 .mor_bjs_check(obs, n, T)
 }
 \arguments{
-\item{obs}{See Usage.}
-\item{n}{See Usage.}
-\item{T}{See Usage.}
+\item{obs}{Numeric; passed to \code{sum}.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{T}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the boryis_native implementation; see the file header for the source it follows.
+A step of the boryis_native implementation. Called by \code{morie_impute_untreated}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

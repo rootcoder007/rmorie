@@ -8,10 +8,10 @@
 .morie_km2_tokens(Y)
 }
 \arguments{
-\item{Y}{See Usage.}
+\item{Y}{A vector; its length is taken.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_count_word}, \code{morie_kamath_ch6_demographic_representation}, \code{morie_kamath_ch6_stereotypical_assoc}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,11 +8,11 @@
 .groebn_fr_eq(p, q)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{p}{A vector; indexed elementwise.}
+\item{q}{A vector; indexed elementwise.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A logical value.

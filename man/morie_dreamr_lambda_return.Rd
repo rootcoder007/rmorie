@@ -8,15 +8,15 @@
 morie_dreamr_lambda_return(rewards, values, gamma = 0.99, lam = 0.95, estimator = "lambda", k = 1)
 }
 \arguments{
-\item{rewards}{See Usage.}
-\item{values}{See Usage.}
-\item{gamma}{Defaults to \code{0.99}.}
-\item{lam}{Defaults to \code{0.95}.}
-\item{estimator}{Defaults to \code{"lambda"}.}
+\item{rewards}{Passed to \code{.dreamr_vec}.}
+\item{values}{Passed to \code{.dreamr_vec}.}
+\item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.99}.}
+\item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
+\item{estimator}{One of \code{"k-step"}, \code{"lambda"}, \code{"reward"}. Defaults to \code{"lambda"}.}
 \item{k}{Defaults to \code{1}.}
 }
 \description{
-Part of the dreamr_native implementation; see the file header for the source it follows.
+A step of the dreamr_native implementation. Called by \code{morie_dreamr}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.dreamr_pack}.

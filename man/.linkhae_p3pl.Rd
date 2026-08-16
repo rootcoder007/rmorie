@@ -8,13 +8,13 @@
 .linkhae_p3pl(theta, a, b, c)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{c}{See Usage.}
+\item{theta}{Numeric; combined arithmetically in the body.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{c}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the linkhae_native implementation; see the file header for the source it follows.
+A step of the linkhae_native implementation. Called by \code{morie_linkhae}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -12,7 +12,7 @@
 \item{feature}{Defaults to \code{"reading an .rds file"}.}
 }
 \description{
-loading (S4/ALTREP/reference-object unserialize hooks), so a locked-down environment can forbid it entirely via MORIE_NO_EXEC. By default it loads normally -- the path is user-chosen or a first-party cache file; provenance is the caller\\\'s responsibility. Feed it only .rds files you trust.
+loading (S4/ALTREP/reference-object unserialize hooks), so a locked-down environment can forbid it entirely via MORIE_NO_EXEC. By default it loads normally -- the path is user-chosen or a first-party cache file; provenance is the caller\\'s responsibility. Feed it only .rds files you trust.
 }
 \value{
 The value of \code{readRDS}.

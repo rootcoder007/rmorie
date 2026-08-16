@@ -9,16 +9,16 @@
 }
 \arguments{
 \item{q}{See Usage.}
-\item{r}{See Usage.}
-\item{S}{See Usage.}
-\item{c}{See Usage.}
-\item{delta}{See Usage.}
-\item{m}{See Usage.}
+\item{r}{A vector; indexed elementwise.}
+\item{S}{A matrix; indexed by row and column.}
+\item{c}{A vector; indexed elementwise.}
+\item{delta}{Numeric; combined arithmetically in the body.}
+\item{m}{A count; the body uses it as \code{seq_len(...)}.}
 \item{tol}{See Usage.}
 \item{max_iter}{See Usage.}
 }
 \description{
-Part of the safrl_native implementation; see the file header for the source it follows.
+A step of the safrl_native implementation. Called by \code{morie_safrl}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lam}, \code{nu}.

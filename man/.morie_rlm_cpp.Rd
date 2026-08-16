@@ -8,14 +8,14 @@
 .morie_rlm_cpp(X, y, k, maxit, acc)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{k}{See Usage.}
-\item{maxit}{See Usage.}
-\item{acc}{See Usage.}
+\item{X}{Passed to \code{.Call}.}
+\item{y}{Passed to \code{.Call}.}
+\item{k}{Passed to \code{.Call}.}
+\item{maxit}{Passed to \code{.Call}.}
+\item{acc}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_rlm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

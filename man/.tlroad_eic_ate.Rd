@@ -8,15 +8,15 @@
 .tlroad_eic_ate(A, Y, Q1, Q0, g, psi)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{Y}{See Usage.}
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
-\item{g}{See Usage.}
+\item{A}{Passed to \code{.tlroad_vec}.}
+\item{Y}{Passed to \code{.tlroad_vec}.}
+\item{Q1}{Passed to \code{.tlroad_vec}.}
+\item{Q0}{Passed to \code{.tlroad_vec}.}
+\item{g}{Passed to \code{.tlroad_vec}.}
 \item{psi}{See Usage.}
 }
 \description{
-Part of the tlroad_native implementation; see the file header for the source it follows.
+A step of the tlroad_native implementation. Called by \code{.tlroad_solves_eic_equation}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

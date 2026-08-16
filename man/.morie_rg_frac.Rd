@@ -8,11 +8,11 @@
 .morie_rg_frac(n, d)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{d}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{d}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_class implementation; see the file header for the source it follows.
+A step of the rangayyan_class implementation. Called by \code{.morie_rg_asfrac}, \code{.morie_rg_fadd}, \code{.morie_rg_fmul} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{structure}.

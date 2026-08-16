@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{beta}{See Usage.}
-\item{nu}{See Usage.}
+\item{nu}{A vector; its length is taken.}
 \item{mu}{See Usage.}
-\item{sigma}{See Usage.}
+\item{sigma}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the hiatus_native implementation; see the file header for the source it follows.
+A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \code{derivatives}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{b}, \code{nv}, \code{m}, \code{sg}, \code{n}.

@@ -26,7 +26,8 @@
 
 #' morie_tlhaltm
 #'
-#' Part of the tlhaltm_native implementation; see the file header for
+#' A step of the tlhaltm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param rate_Q Defaults to \code{NULL}.
@@ -36,7 +37,7 @@
 #' @param err_g Defaults to \code{NULL}.
 #' @param delta Defaults to \code{NULL}.
 #' @param donsker Defaults to \code{TRUE}.
-#' @param mode Defaults to \code{c("rate", "remainder", "efficiency", "split")}.
+#' @param mode One of \code{"rate"}, \code{"remainder"}, \code{"split"}.
 #' @return The value of \code{efficiency_check}.
 #' @export
 morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
@@ -54,7 +55,8 @@ morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
 
 #' rate_condition
 #'
-#' Part of the tlhaltm_native implementation; see the file header for
+#' A step of the tlhaltm_native implementation. Called by \code{morie_tlhaltm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param rate_Q See Usage.
@@ -74,7 +76,8 @@ rate_condition <- function(rate_Q, rate_g, n) {
 
 #' remainder_bound
 #'
-#' Part of the tlhaltm_native implementation; see the file header for
+#' A step of the tlhaltm_native implementation. Called by \code{efficiency_check}, \code{morie_tlhaltm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param err_Q See Usage.
@@ -95,14 +98,15 @@ remainder_bound <- function(err_Q, err_g, delta) {
 
 #' efficiency_check
 #'
-#' Part of the tlhaltm_native implementation; see the file header for
+#' A step of the tlhaltm_native implementation. Called by \code{morie_tlhaltm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param err_Q See Usage.
 #' @param err_g See Usage.
 #' @param delta See Usage.
 #' @param n See Usage.
-#' @param donsker Defaults to \code{TRUE}.
+#' @param donsker A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{remainder_bound}, \code{root_n}, \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient}, \code{positivity_delta}, \code{method}, \code{note}.
 #' @export
 efficiency_check <- function(err_Q, err_g, delta, n, donsker = TRUE) {
@@ -120,11 +124,12 @@ efficiency_check <- function(err_Q, err_g, delta, n, donsker = TRUE) {
 
 #' cv_tmle_split
 #'
-#' Part of the tlhaltm_native implementation; see the file header for
+#' A step of the tlhaltm_native implementation. Called by \code{morie_tlhaltm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
-#' @param V Defaults to \code{10L}.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param V A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
 #' @param seed Defaults to \code{0L}.
 #' @return A list with \code{folds}, \code{training}, \code{V}, \code{note}.
 #' @export
@@ -151,7 +156,8 @@ cv_tmle_split <- function(n, V = 10L, seed = 0L) {
 
 #' .tlhaltm_cheatsheet
 #'
-#' Part of the tlhaltm_native implementation; see the file header for
+#' A step of the tlhaltm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

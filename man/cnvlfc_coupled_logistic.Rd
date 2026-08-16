@@ -8,17 +8,17 @@
 cnvlfc_coupled_logistic(n, rx = 3.8, ry = 3.5, bxy = 0, byx = 0.1, x0 = 0.4, y0 = 0.2, burn = 300L)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{rx}{Defaults to \code{3.8}.}
-\item{ry}{Defaults to \code{3.5}.}
-\item{bxy}{Defaults to \code{0}.}
-\item{byx}{Defaults to \code{0.1}.}
-\item{x0}{Defaults to \code{0.4}.}
-\item{y0}{Defaults to \code{0.2}.}
-\item{burn}{Defaults to \code{300L}.}
+\item{n}{Passed to \code{.cnvlfc_coupled_logistic}.}
+\item{rx}{Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{3.8}.}
+\item{ry}{Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{3.5}.}
+\item{bxy}{Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0}.}
+\item{byx}{Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0.1}.}
+\item{x0}{Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0.4}.}
+\item{y0}{Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{0.2}.}
+\item{burn}{Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{300L}.}
 }
 \description{
-Part of the cnvlfc_native implementation; see the file header for the source it follows.
+A step of the cnvlfc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.cnvlfc_coupled_logistic}.

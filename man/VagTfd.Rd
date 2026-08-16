@@ -8,12 +8,12 @@
 VagTfd(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{natoms}{Defaults to \code{12}.}
-\item{nfreq}{Defaults to \code{32}.}
+\item{nfreq}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{32}.}
 \item{ntime}{Defaults to \code{NULL}.}
-\item{lag}{Defaults to \code{12}.}
+\item{lag}{Numeric; combined arithmetically in the body. Defaults to \code{12}.}
 }
 \description{
 resolution with cross-terms; decompose first and the interaction is known, so the cross-term double sum of eq (9.15) is simply left out -- that omission is what makes the TFD adaptive rather than smoothed. Features EP (9.79), ESP (9.80), FP (9.81), FSP (9.82).

@@ -34,11 +34,11 @@
 #' -sigma0^2 dR/da Every row is zero at h = 0, where gamma(0) = 0 by
 #' definition whatever the nugget (Sec. 4.3.6).
 #'
-#' @param h See Usage.
+#' @param h A vector; its length is taken and its elements indexed.
 #' @param nugget See Usage.
-#' @param sill See Usage.
-#' @param rng See Usage.
-#' @param model See Usage.
+#' @param sill Numeric; combined arithmetically in the body.
+#' @param rng Numeric; combined arithmetically in the body.
+#' @param model Passed to \code{.sp_correlogram}.
 #' @return The value of \code{jac}, as built in the body.
 #' @export
 .schab_semivariogram_jacobian <- function(h, nugget, sill, rng, model) {
@@ -76,8 +76,8 @@
 #' whose reciprocal is the weight in (4.34).
 #'
 #' @param kind See Usage.
-#' @param fitted See Usage.
-#' @param counts See Usage.
+#' @param fitted A vector; its length is taken.
+#' @param counts Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
 .schab_gn_weights <- function(kind, fitted, counts) {
@@ -96,7 +96,7 @@
 #'
 #' the constraint the model imposes, not a search box.
 #'
-#' @param theta See Usage.
+#' @param theta A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
 .schab_gn_project <- function(theta) {
@@ -107,18 +107,19 @@
 
 #' .schab_gauss_newton
 #'
-#' Part of the schab_gn_shared implementation; see the file header for
+#' A step of the schab_gn_shared implementation. Called by \code{.schab_fit_semivariogram}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param lags See Usage.
-#' @param ghat See Usage.
-#' @param counts See Usage.
-#' @param start See Usage.
-#' @param model Defaults to \code{"exponential"}.
-#' @param kind Defaults to \code{"wls"}.
-#' @param max_iter Defaults to \code{200L}.
+#' @param lags A vector; indexed elementwise.
+#' @param ghat A vector; indexed elementwise.
+#' @param counts A vector; indexed elementwise.
+#' @param start Passed to \code{.schab_gn_project}.
+#' @param model Passed to \code{.sp_semivariogram}. Defaults to \code{"exponential"}.
+#' @param kind Passed to \code{.schab_gn_weights}. Defaults to \code{"wls"}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @param tol Defaults to \code{1e-12}.
-#' @param max_halvings Defaults to \code{40L}.
+#' @param max_halvings A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.
 #' @return A list with \code{theta}, \code{objective}, \code{converged}, \code{iterations}.
 #' @export
 .schab_gauss_newton <- function(lags, ghat, counts, start, model = "exponential",

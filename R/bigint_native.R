@@ -29,10 +29,11 @@
 
 #' .morie_big_trim
 #'
-#' Part of the bigint_native implementation; see the file header for the
+#' A step of the bigint_native implementation. Called by \code{.morie_big_add_abs}, \code{.morie_big_new}, \code{.morie_big_sub_abs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param limbs See Usage.
+#' @param limbs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
 .morie_big_trim <- function(limbs) {
@@ -43,11 +44,12 @@
 
 #' .morie_big_new
 #'
-#' Part of the bigint_native implementation; see the file header for the
+#' A step of the bigint_native implementation. Called by \code{morie_big_add}, \code{morie_big_divmod_small}, \code{morie_big_fits_double} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sign See Usage.
-#' @param limbs See Usage.
+#' @param limbs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{structure}.
 #' @export
 .morie_big_new <- function(sign, limbs) {
@@ -141,11 +143,12 @@ format.morie_bigint <- function(x, ...) as.character(x)
 
 #' .morie_big_cmp_abs
 #'
-#' Part of the bigint_native implementation; see the file header for the
+#' A step of the bigint_native implementation. Called by \code{morie_big_add}, \code{morie_big_cmp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .morie_big_cmp_abs <- function(a, b) {
@@ -164,11 +167,12 @@ format.morie_bigint <- function(x, ...) as.character(x)
 
 #' .morie_big_add_abs
 #'
-#' Part of the bigint_native implementation; see the file header for the
+#' A step of the bigint_native implementation. Called by \code{morie_big_add}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.morie_big_trim}.
 #' @export
 .morie_big_add_abs <- function(a, b) {
@@ -194,11 +198,12 @@ format.morie_bigint <- function(x, ...) as.character(x)
 # assumes |a| >= |b|
 #' Assumes |a| >= |b|
 #'
-#' Part of the bigint_native implementation; see the file header for the
+#' A step of the bigint_native implementation. Called by \code{morie_big_add}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.morie_big_trim}.
 #' @export
 .morie_big_sub_abs <- function(a, b) {

@@ -8,12 +8,12 @@
 k02mm(y, v, tau0)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{v}{See Usage.}
-\item{tau0}{See Usage.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{v}{Numeric; combined arithmetically in the body.}
+\item{tau0}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{matr}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

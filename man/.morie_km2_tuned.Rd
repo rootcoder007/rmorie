@@ -8,13 +8,13 @@
 .morie_km2_tuned(W, A_k, B_k, s)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{A_k}{See Usage.}
-\item{B_k}{See Usage.}
-\item{s}{See Usage.}
+\item{W}{A matrix; passed to \code{as.matrix}.}
+\item{A_k}{A matrix; passed to \code{as.matrix}.}
+\item{B_k}{A matrix; passed to \code{as.matrix}.}
+\item{s}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_krona_output}, \code{morie_kamath_ch4_krona_tuned_weights}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

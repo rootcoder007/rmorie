@@ -8,11 +8,11 @@
 .morie_qm_ecdf(sx, v)
 }
 \arguments{
-\item{sx}{See Usage.}
-\item{v}{See Usage.}
+\item{sx}{A vector; its length is taken and its elements indexed.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the climate_w511_native implementation; see the file header for the source it follows.
+A step of the climate_w511_native implementation. Called by \code{Qmds}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

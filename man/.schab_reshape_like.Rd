@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{values}{See Usage.}
-\item{template}{See Usage.}
+\item{template}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the schab_gwr_shared implementation; see the file header for the source it follows.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_kernel_weights}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{array}.

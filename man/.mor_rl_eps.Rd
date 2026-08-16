@@ -8,13 +8,13 @@
 .mor_rl_eps(e, Qs, A, epsilon)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{Qs}{See Usage.}
-\item{A}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
+\item{Qs}{Passed to \code{.mor_rl_greedy}.}
+\item{A}{Numeric; combined arithmetically in the body.}
 \item{epsilon}{See Usage.}
 }
 \description{
-Part of the qlearn_native implementation; see the file header for the source it follows.
+A step of the qlearn_native implementation. Called by \code{morie_qlearn}, \code{morie_sarsa}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.mor_rl_greedy}.

@@ -8,7 +8,7 @@
 .pq_apply_logical(v, ptype, converted)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; combined arithmetically in the body.}
 \item{ptype}{See Usage.}
 \item{converted}{See Usage.}
 }

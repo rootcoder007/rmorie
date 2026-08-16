@@ -9,13 +9,13 @@ encode(y_tilde, W, V_u, b, activation = "sigmoid")
 }
 \arguments{
 \item{y_tilde}{See Usage.}
-\item{W}{See Usage.}
-\item{V_u}{See Usage.}
-\item{b}{See Usage.}
-\item{activation}{Defaults to \code{"sigmoid"}.}
+\item{W}{A vector; indexed elementwise.}
+\item{V_u}{A vector; indexed elementwise.}
+\item{b}{A vector; its length is taken and its elements indexed.}
+\item{activation}{Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.}
 }
 \description{
-Part of the cdaeRC_native implementation; see the file header for the source it follows.
+A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{z}, as built in the body.

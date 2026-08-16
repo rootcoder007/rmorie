@@ -12,7 +12,7 @@ choose_k(graph_sizes, coverage = 0.6)
 \item{coverage}{Defaults to \code{0.6}.}
 }
 \description{
-Part of the sortP_native implementation; see the file header for the source it follows.
+A step of the sortP_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{k}, \code{coverage}, \code{fraction_untruncated}, \code{note}.

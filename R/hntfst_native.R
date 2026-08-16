@@ -18,25 +18,27 @@
 
 #' ._mean
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{._best_split}, \code{honest_forest}, \code{honest_tree} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 ._mean <- function(v) if (length(v) == 0L) 0.0 else mean(v)
 
 #' ._best_split
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{honest_tree}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param rows See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param rows A vector; its length is taken.
 #' @param feats See Usage.
-#' @param min_leaf See Usage.
-#' @param alpha See Usage.
+#' @param min_leaf Numeric; passed to \code{max}.
+#' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 ._best_split <- function(X, y, rows, feats, min_leaf, alpha) {
@@ -79,18 +81,19 @@
 
 #' honest_tree
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{.frfgrf_honesty_test}, \code{grow_forest}, \code{honest_forest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param W Defaults to \code{NULL}.
-#' @param kind Defaults to \code{"double-sample"}.
-#' @param min_leaf Defaults to \code{5L}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
+#' @param kind One of \code{"double-sample"}, \code{"propensity"}. Defaults to \code{"double-sample"}.
+#' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
+#' @param alpha Passed to \code{._best_split}. Defaults to \code{0.05}.
+#' @param pi Numeric; passed to \code{max}. Defaults to \code{0.5}.
 #' @param max_depth Defaults to \code{12L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @param subsample Defaults to \code{NULL}.
 #' @return A list with \code{tree}, \code{info}.
 #' @export
@@ -170,11 +173,12 @@ honest_tree <- function(X, y, W = NULL, kind = "double-sample",
 
 #' leaf_of
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{.hntfst_tree_predict}, \code{forest_weights}, \code{morie_clrgrf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tree See Usage.
-#' @param x See Usage.
+#' @param x A vector; indexed elementwise.
 #' @return A list with \code{node}, \code{path}.
 #' @export
 leaf_of <- function(tree, x) {
@@ -191,7 +195,8 @@ leaf_of <- function(tree, x) {
 
 #' .hntfst_tree_predict
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{honest_forest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tree See Usage.
@@ -204,14 +209,15 @@ leaf_of <- function(tree, x) {
 
 #' infinitesimal_jackknife
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{honest_forest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param preds See Usage.
+#' @param preds A vector; its length is taken.
 #' @param in_bag See Usage.
-#' @param n See Usage.
-#' @param s See Usage.
-#' @param correction Defaults to \code{TRUE}.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param s Numeric; combined arithmetically in the body.
+#' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
 infinitesimal_jackknife <- function(preds, in_bag, n, s,
@@ -242,23 +248,24 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
 
 #' honest_forest
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{morie_hntfst}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param W Defaults to \code{NULL}.
-#' @param kind Defaults to \code{"double-sample"}.
+#' @param kind Compared against \code{"adaptive"}. Defaults to \code{"double-sample"}.
 #' @param n_trees Defaults to \code{200L}.
-#' @param subsample_frac Defaults to \code{0.5}.
-#' @param min_leaf Defaults to \code{5L}.
+#' @param subsample_frac Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
 #' @param alpha Defaults to \code{0.05}.
 #' @param pi Defaults to \code{0.5}.
 #' @param max_depth Defaults to \code{12L}.
-#' @param seed Defaults to \code{0L}.
-#' @param at Defaults to \code{NULL}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
+#' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param level Defaults to \code{0.95}.
-#' @param correction Defaults to \code{TRUE}.
+#' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{s}, \code{n_trees}, \code{split_counts}, \code{split_share}, \code{mean_depth}, \code{kind}, \code{honest}, \code{correction}, \code{level}, \code{method}.
 #' @export
 honest_forest <- function(X, y, W = NULL, kind = "double-sample",
@@ -342,20 +349,21 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 
 #' grow_forest
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{.center_cate}, \code{.frfgrf_forest_fit_check}, \code{.ipwgrf_forest_nuisances} and 6 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
-#' @param y See Usage.
+#' @param y A vector; its length is taken.
 #' @param W Defaults to \code{NULL}.
 #' @param kind Defaults to \code{"double-sample"}.
 #' @param n_trees Defaults to \code{200L}.
-#' @param subsample_frac Defaults to \code{0.5}.
-#' @param min_leaf Defaults to \code{5L}.
+#' @param subsample_frac Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
 #' @param alpha Defaults to \code{0.05}.
 #' @param pi Defaults to \code{0.5}.
 #' @param max_depth Defaults to \code{12L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @param clusters Defaults to \code{NULL}.
 #' @return A list with \code{trees}, \code{bags}, \code{s}.
 #' @export
@@ -403,11 +411,12 @@ grow_forest <- function(X, y, W = NULL, kind = "double-sample",
 
 #' forest_weights
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. Called by \code{.center_cate}, \code{.ipwgrf_forest_nuisances}, \code{.itrgrf_fit_arm} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param trees See Usage.
-#' @param X See Usage.
+#' @param trees A vector; its length is taken.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param x See Usage.
 #' @return A numeric value.
 #' @export
@@ -437,7 +446,8 @@ honest_random_forest <- honest_forest
 
 #' morie_hntfst
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -467,7 +477,8 @@ morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
 
 #' .hntfst_cheatsheet
 #'
-#' Part of the hntfst_native implementation; see the file header for the
+#' A step of the hntfst_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

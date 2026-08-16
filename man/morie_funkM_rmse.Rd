@@ -8,15 +8,15 @@
 morie_funkM_rmse(ratings, mu, bu, bi, P, Q)
 }
 \arguments{
-\item{ratings}{See Usage.}
-\item{mu}{See Usage.}
-\item{bu}{See Usage.}
-\item{bi}{See Usage.}
-\item{P}{See Usage.}
-\item{Q}{See Usage.}
+\item{ratings}{Passed to \code{.funkM_as_ratings}.}
+\item{mu}{Passed to \code{.funkM_predict}.}
+\item{bu}{A vector; indexed elementwise.}
+\item{bi}{A vector; indexed elementwise.}
+\item{P}{A matrix; indexed by row and column.}
+\item{Q}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the funkM_native implementation; see the file header for the source it follows.
+A step of the funkM_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

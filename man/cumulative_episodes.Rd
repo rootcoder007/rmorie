@@ -8,11 +8,11 @@
 cumulative_episodes(histories, states = .STATES)
 }
 \arguments{
-\item{histories}{See Usage.}
+\item{histories}{A vector; its length is taken and its elements indexed.}
 \item{states}{Defaults to \code{.STATES}.}
 }
 \description{
-Part of the bhltmsm_native implementation; see the file header for the source it follows.
+A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cumulative}, \code{states}, \code{periods}, \code{note}.

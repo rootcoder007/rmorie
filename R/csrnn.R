@@ -4,7 +4,8 @@
 #' Internal: nearest-neighbour distance for each row of an (n x d)
 #' pattern
 #'
-#' Part of the csrnn implementation; see the file header for the source
+#' A step of the csrnn implementation. Called by \code{morie_csr_nn_test}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param P See Usage.
@@ -19,10 +20,11 @@
 # Internal: G-hat(y) = #(y_i <= y) / n, evaluated on `grid`.
 #' Internal: G-hat(y) = #(y_i <= y) / n, evaluated on `grid`
 #'
-#' Part of the csrnn implementation; see the file header for the source
+#' A step of the csrnn implementation. Called by \code{morie_csr_nn_test}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param nn See Usage.
+#' @param nn A vector; its length is taken.
 #' @param grid See Usage.
 #' @return A numeric value.
 #' @export
@@ -33,11 +35,12 @@
 # Internal: normalise `window` to a d x 2 matrix of (min, max) rows.
 #' Internal: normalise `window` to a d x 2 matrix of (min, max) rows
 #'
-#' Part of the csrnn implementation; see the file header for the source
+#' A step of the csrnn implementation. Called by \code{morie_csr_nn_test}, \code{morie_ripley_csr_test}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param window See Usage.
-#' @param P See Usage.
+#' @param window Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
+#' @param P A matrix; passed to \code{ncol}.
 #' @return The value of \code{bounds}, as built in the body.
 #' @export
 .csrnn_window <- function(window, P) {

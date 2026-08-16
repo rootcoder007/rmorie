@@ -8,13 +8,13 @@
 .linwlr_sandwich_se(bread, meat, n, ridge)
 }
 \arguments{
-\item{bread}{See Usage.}
-\item{meat}{See Usage.}
-\item{n}{See Usage.}
-\item{ridge}{See Usage.}
+\item{bread}{A matrix; passed to \code{nrow}.}
+\item{meat}{A matrix; passed to \code{\%*\%}.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the linwlr_native implementation; see the file header for the source it follows.
+A step of the linwlr_native implementation. Called by \code{morie_linwlr}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{se}, as built in the body.

@@ -8,14 +8,14 @@
 .nashq_is_saddle(A, B, p, q, tol)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
-\item{p}{See Usage.}
-\item{q}{See Usage.}
-\item{tol}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{B}{Passed to \code{.nashq_payoff}.}
+\item{p}{Passed to \code{.nashq_payoff}.}
+\item{q}{Passed to \code{.nashq_payoff}.}
+\item{tol}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{.nashq_select}, \code{stage_game_type}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

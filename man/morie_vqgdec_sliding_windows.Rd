@@ -14,7 +14,7 @@ morie_vqgdec_sliding_windows(height, width, window, stride = NULL)
 \item{stride}{Defaults to \code{NULL}.}
 }
 \description{
-transformer\\'s context.
+transformer\'s context.
 }
 \value{
 A list with \code{windows}, \code{n_windows}, \code{covers_everything}, \code{context}, \code{note}.

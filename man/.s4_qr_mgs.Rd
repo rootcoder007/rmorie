@@ -8,7 +8,7 @@
 .s4_qr_mgs(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
 }
 \description{
 # construction, so Q is unique and there is no sign convention left for # the two arms to disagree about (LAPACK and LINPACK differ here).

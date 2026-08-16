@@ -8,10 +8,10 @@
 .log(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the airl_native implementation; see the file header for the source it follows.
+A step of the airl_native implementation. Called by \code{morie_airl}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

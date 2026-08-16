@@ -8,11 +8,11 @@
 .dueld_anchor(a, mode)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{mode}{See Usage.}
+\item{a}{A vector; its length is taken and its elements indexed.}
+\item{mode}{One of \code{"max"}, \code{"mean"}.}
 }
 \description{
-Part of the dueldqn_native implementation; see the file header for the source it follows.
+A step of the dueldqn_native implementation. Called by \code{dueling_aggregate}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

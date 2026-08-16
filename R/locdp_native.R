@@ -26,7 +26,7 @@
 #'
 #' p = 1 / (1 + exp(epsilon)) -> achieves epsilon-local-DP.
 #'
-#' @param epsilon See Usage.
+#' @param epsilon Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
 .locdp_flip_prob <- function(epsilon) {
@@ -61,8 +61,8 @@
 #' exp(epsilon)) n : integer, length of x rng : the RNG state returned
 #' by .ghc_rng / .ghc_unif
 #'
-#' @param x See Usage.
-#' @param epsilon Defaults to \code{1}.
+#' @param x A vector; its length is taken.
+#' @param epsilon A vector; its length is taken. Defaults to \code{1}.
 #' @param seed Defaults to \code{NULL}.
 #' @return A list with \code{y}, \code{epsilon}, \code{p}, \code{n}, \code{rng}.
 #' @export
@@ -107,7 +107,8 @@ morie_localdp  <- morie_locdp
 # morie_locdp_cheatsheet: short description string.
 #' Morie_locdp_cheatsheet: short description string
 #'
-#' Part of the locdp_native implementation; see the file header for the
+#' A step of the locdp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

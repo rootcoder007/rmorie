@@ -8,10 +8,10 @@
 .tdcvar_mat(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the tdcvar_native implementation; see the file header for the source it follows.
+A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{M}, as built in the body.

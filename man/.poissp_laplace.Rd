@@ -8,14 +8,14 @@
 .poissp_laplace(y, u, m, Q, constrain)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{u}{See Usage.}
-\item{m}{See Usage.}
-\item{Q}{See Usage.}
-\item{constrain}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{u}{A matrix; passed to \code{\%*\%}.}
+\item{m}{A matrix; passed to \code{diag}.}
+\item{Q}{A matrix; passed to \code{\%*\%}.}
+\item{constrain}{A flag; the body branches on it.}
 }
 \description{
-Part of the poissp_native implementation; see the file header for the source it follows.
+A step of the poissp_native implementation. Called by \code{morie_poissp}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

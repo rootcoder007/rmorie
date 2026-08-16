@@ -8,17 +8,17 @@
 trclrn_rule_value(Y, A, X, rule, propensity = NULL, method = "ipw", outcome_model = NULL, min_propensity = 0.01)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{A}{See Usage.}
-\item{X}{See Usage.}
+\item{Y}{Passed to \code{.trclrn_check}.}
+\item{A}{Passed to \code{.trclrn_check}.}
+\item{X}{Passed to \code{.trclrn_check}.}
 \item{rule}{See Usage.}
-\item{propensity}{Defaults to \code{NULL}.}
-\item{method}{Defaults to \code{"ipw"}.}
+\item{propensity}{Passed to \code{.trclrn_check}.}
+\item{method}{Compared against \code{"ipw"}. Defaults to \code{"ipw"}.}
 \item{outcome_model}{Defaults to \code{NULL}.}
-\item{min_propensity}{Defaults to \code{0.01}.}
+\item{min_propensity}{Passed to \code{.trclrn_check}. Defaults to \code{0.01}.}
 }
 \description{
-Part of the trclrn_native implementation; see the file header for the source it follows.
+A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

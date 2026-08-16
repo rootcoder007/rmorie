@@ -11,15 +11,16 @@
 
 #' .morie_kernel_matrix
 #'
-#' Part of the esl_native2 implementation; see the file header for the
+#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param Z Defaults to \code{NULL}.
-#' @param kernel Defaults to \code{"rbf"}.
-#' @param gamma Defaults to \code{NULL}.
-#' @param degree Defaults to \code{3}.
-#' @param coef0 Defaults to \code{1}.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param Z Optional; may be \code{NULL}. A matrix; passed to \code{ncol}.
+#' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}. Defaults to \code{"rbf"}.
+#' @param gamma Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3}.
+#' @param coef0 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
 .morie_kernel_matrix <- function(X, Z = NULL, kernel = "rbf", gamma = NULL,
@@ -49,13 +50,14 @@
 
 #' .morie_smo
 #'
-#' Part of the esl_native2 implementation; see the file header for the
+#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param K See Usage.
-#' @param y See Usage.
-#' @param C Defaults to \code{1}.
-#' @param tol Defaults to \code{0.001}.
+#' @param K A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param C Numeric; passed to \code{min}. Defaults to \code{1}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @param max_passes Defaults to \code{50L}.
 #' @param max_iter Defaults to \code{10000L}.
 #' @param seed Defaults to \code{0L}.
@@ -498,11 +500,12 @@ morie_esl_thin_plate_spline <- function(X, y, lambda_ = 1, newdata = NULL) {
 
 #' .morie_tps_kernel
 #'
-#' Part of the esl_native2 implementation; see the file header for the
+#' A step of the esl_native2 implementation. Called by \code{morie_esl_thin_plate_spline}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param A A matrix; passed to \code{tcrossprod}.
+#' @param B A matrix; passed to \code{tcrossprod}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_tps_kernel <- function(A, B) {
@@ -693,10 +696,11 @@ morie_esl_isomap <- function(X, k = 2, neighbors = 5) {
 
 #' .morie_n_components
 #'
-#' Part of the esl_native2 implementation; see the file header for the
+#' A step of the esl_native2 implementation. Called by \code{morie_esl_isomap}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
+#' @param adj A matrix; indexed by row and column.
 #' @return The value of \code{comps}, as built in the body.
 #' @export
 .morie_n_components <- function(adj) {

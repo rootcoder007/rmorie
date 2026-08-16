@@ -8,13 +8,13 @@
 morie_informer_full_attention(Q, K, V, scale = NULL)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{K}{See Usage.}
-\item{V}{See Usage.}
+\item{Q}{Passed to \code{.informer_to_rows}.}
+\item{K}{Passed to \code{.informer_to_rows}.}
+\item{V}{Passed to \code{.informer_to_rows}.}
 \item{scale}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the informer_native implementation; see the file header for the source it follows.
+A step of the informer_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.
