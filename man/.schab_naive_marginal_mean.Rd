@@ -3,17 +3,17 @@
 % the formals.
 \name{.schab_naive_marginal_mean}
 \alias{.schab_naive_marginal_mean}
-\title{G^-1(x\\\'beta) -- what the marginal mean is NOT, in a GLMM}
+\title{G^-1(x\\'beta) -- what the marginal mean is NOT, in a GLMM}
 \usage{
 .schab_naive_marginal_mean(X, beta, link_kind = "log")
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{\%*\%}.}
 \item{beta}{See Usage.}
-\item{link_kind}{Defaults to \code{"log"}.}
+\item{link_kind}{Passed to \code{.schab_link}. Defaults to \code{"log"}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spglmm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.schab_link}.

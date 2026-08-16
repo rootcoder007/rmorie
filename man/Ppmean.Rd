@@ -20,7 +20,7 @@ replicated observations; the second is the predictive spread and is
 always the wider.
 }
 \details{
-Formula: E\link{ytilde | y} ~= (1/S) sum_s ytilde^s, interval from
+Formula: E[ytilde | y] ~= (1/S) sum_s ytilde^s, interval from
 empirical quantiles of the pooled draws
 }
 \references{

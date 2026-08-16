@@ -8,14 +8,14 @@
 .morie_ml_dsep(edges, x, y, z = character(0), nodes = NULL)
 }
 \arguments{
-\item{edges}{See Usage.}
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{z}{Defaults to \code{character(0)}.}
-\item{nodes}{Defaults to \code{NULL}.}
+\item{edges}{Passed to \code{.morie_ml_nodes}.}
+\item{x}{Passed to \code{.morie_ml_paths}.}
+\item{y}{Passed to \code{.morie_ml_paths}.}
+\item{z}{Passed to \code{.morie_ml_blocked}. Defaults to \code{character(0)}.}
+\item{nodes}{Optional; may be \code{NULL}. Passed to \code{.morie_ml_children}.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{morie_docalc}, \code{morie_dseptest}, \code{morie_faithchk} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A logical value.

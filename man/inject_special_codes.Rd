@@ -8,12 +8,12 @@
 inject_special_codes(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 998L, 999L))
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 \item{rate}{Defaults to \code{0.02}.}
 \item{codes}{Defaults to \code{c(97L, 98L, 99L, 997L, 998L, 999L)}.}
 }
 \description{
-Part of the synthetic implementation; see the file header for the source it follows.
+A step of the synthetic implementation. Called by \code{morie_generate_synthetic_data}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{x}, as built in the body.

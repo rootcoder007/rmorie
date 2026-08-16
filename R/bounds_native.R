@@ -15,14 +15,15 @@
 
 #' .morie_bounds_logit
 #'
-#' Part of the bounds_native implementation; see the file header for the
+#' A step of the bounds_native implementation. Called by \code{morie_efficiency_bound_ate}, \code{morie_text_ate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param max_iter Defaults to \code{100L}.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-10}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{fitted}, \code{separated}.
 #' @export
 .morie_bounds_logit <- function(X, y, max_iter = 100L, tol = 1e-10,

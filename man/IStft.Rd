@@ -8,12 +8,12 @@
 IStft(stft, window = "hann", hop = NULL)
 }
 \arguments{
-\item{stft}{See Usage.}
-\item{window}{Defaults to \code{"hann"}.}
+\item{stft}{A matrix; indexed by row and column.}
+\item{window}{Passed to \code{.tf_win}. Defaults to \code{"hann"}.}
 \item{hop}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start}, \code{valid_end}, \code{n_frames}, \code{method}.

@@ -48,10 +48,11 @@
 
 #' .k02relabel
 #'
-#' Part of the sgtcoml implementation; see the file header for the
+#' A step of the sgtcoml implementation. Called by \code{louv}, \code{sgtcoml}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param comm See Usage.
+#' @param comm A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .k02relabel <- function(comm) {

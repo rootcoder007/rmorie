@@ -31,7 +31,8 @@
 
 #' .resnxt_vec
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -43,11 +44,12 @@
 
 #' .resnxt_lin
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param x See Usage.
+#' @param W A vector; its length is taken and its elements indexed.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
 .resnxt_lin <- function(W, x) {
@@ -56,7 +58,8 @@
 
 #' .resnxt_relu
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -68,13 +71,14 @@
 
 #' .resnxt_aggregated_block
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_block_equivalence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param Wins See Usage.
-#' @param Wmids See Usage.
-#' @param Wouts See Usage.
+#' @param x Passed to \code{.resnxt_vec}.
+#' @param Wins A vector; its length is taken and its elements indexed.
+#' @param Wmids A vector; indexed elementwise.
+#' @param Wouts A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .resnxt_aggregated_block <- function(x, Wins, Wmids, Wouts) {
@@ -91,13 +95,14 @@
 
 #' .resnxt_grouped_block
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_block_equivalence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param Wins See Usage.
-#' @param Wmids See Usage.
-#' @param Wout_concat See Usage.
+#' @param x Passed to \code{.resnxt_vec}.
+#' @param Wins A vector; its length is taken and its elements indexed.
+#' @param Wmids A vector; indexed elementwise.
+#' @param Wout_concat Passed to \code{.resnxt_lin}.
 #' @return A numeric value.
 #' @export
 .resnxt_grouped_block <- function(x, Wins, Wmids, Wout_concat) {
@@ -114,13 +119,14 @@
 
 #' .resnxt_block_equivalence
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param Wins See Usage.
-#' @param Wmids See Usage.
-#' @param Wouts See Usage.
+#' @param x Passed to \code{.resnxt_aggregated_block}.
+#' @param Wins Passed to \code{.resnxt_aggregated_block}.
+#' @param Wmids Passed to \code{.resnxt_aggregated_block}.
+#' @param Wouts A vector; indexed elementwise.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{equivalent}, \code{max_deviation}, \code{aggregated}, \code{grouped}, \code{note}.
 #' @export
@@ -142,7 +148,8 @@
 
 #' .resnxt_block_parameters
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_match_complexity}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param width See Usage.
@@ -165,7 +172,8 @@
 
 #' .resnxt_match_complexity
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param width See Usage.
@@ -191,7 +199,8 @@
 
 #' .resnxt_cheatsheet
 #'
-#' Part of the resnxt_native implementation; see the file header for the
+#' A step of the resnxt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

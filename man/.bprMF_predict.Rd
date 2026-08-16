@@ -8,13 +8,13 @@
 .bprMF_predict(W, H, u, i)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{H}{See Usage.}
-\item{u}{See Usage.}
-\item{i}{See Usage.}
+\item{W}{A vector; indexed elementwise.}
+\item{H}{A vector; indexed elementwise.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{i}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bprMF_native implementation; see the file header for the source it follows.
+A step of the bprMF_native implementation. Called by \code{.bprMF_auc}, \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

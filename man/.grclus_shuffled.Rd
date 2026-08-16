@@ -8,11 +8,11 @@
 .grclus_shuffled(n, seed)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{seed}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{seed}{Passed to \code{.ghc_rng}.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{.grclus_match_vertices}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{idx}, as built in the body.

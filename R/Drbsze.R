@@ -4,11 +4,12 @@
 #' Two-sided Student-t quantile by Cornish-Fisher expansion on the
 #' normal
 #'
-#' Part of the Drbsze implementation; see the file header for the source
+#' A step of the Drbsze implementation. Called by \code{Drbsze}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
-#' @param df See Usage.
+#' @param p Passed to \code{.s03qnorm}.
+#' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .drbsze_tquant <- function(p, df) {

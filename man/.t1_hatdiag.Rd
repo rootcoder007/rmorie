@@ -8,11 +8,11 @@
 .t1_hatdiag(X, xtxinv)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{xtxinv}{See Usage.}
+\item{X}{A matrix; passed to \code{\%*\%}.}
+\item{xtxinv}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the tail1_core implementation; see the file header for the source it follows.
+A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitsols}, \code{Olsnormeq}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rowSums}.

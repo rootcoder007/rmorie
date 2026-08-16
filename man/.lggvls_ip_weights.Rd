@@ -8,14 +8,14 @@
 .lggvls_ip_weights(a, den_X, num_X, kind = "binary", stabilize = TRUE)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{den_X}{See Usage.}
-\item{num_X}{See Usage.}
-\item{kind}{Defaults to \code{"binary"}.}
-\item{stabilize}{Defaults to \code{TRUE}.}
+\item{a}{A vector; its length is taken.}
+\item{den_X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{num_X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{kind}{Compared against \code{"binary"}. Defaults to \code{"binary"}.}
+\item{stabilize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. Called by \code{morie_lggvls}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{w}, \code{info}.

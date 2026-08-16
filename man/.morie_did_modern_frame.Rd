@@ -8,7 +8,7 @@
 .morie_did_modern_frame(data, outcome, unit, time, treatment_time)
 }
 \arguments{
-\item{data}{See Usage.}
+\item{data}{A vector; indexed elementwise.}
 \item{outcome}{See Usage.}
 \item{unit}{See Usage.}
 \item{time}{See Usage.}

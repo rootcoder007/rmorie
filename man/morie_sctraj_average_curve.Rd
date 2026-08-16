@@ -8,12 +8,12 @@
 morie_sctraj_average_curve(curves, n_points = 100, return_grid = FALSE)
 }
 \arguments{
-\item{curves}{See Usage.}
-\item{n_points}{Defaults to \code{100}.}
-\item{return_grid}{Defaults to \code{FALSE}.}
+\item{curves}{A vector; its length is taken and its elements indexed.}
+\item{n_points}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.}
+\item{return_grid}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the sctraj_native implementation; see the file header for the source it follows.
+A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

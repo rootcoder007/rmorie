@@ -8,14 +8,14 @@
 .mienco_global_objective(summary, whole, other_whole, critic, estimator = "jsd")
 }
 \arguments{
-\item{summary}{See Usage.}
+\item{summary}{Passed to \code{morie_mienco}.}
 \item{whole}{See Usage.}
 \item{other_whole}{See Usage.}
-\item{critic}{See Usage.}
-\item{estimator}{Defaults to \code{"jsd"}.}
+\item{critic}{Passed to \code{morie_mienco}.}
+\item{estimator}{Passed to \code{morie_mienco}. Defaults to \code{"jsd"}.}
 }
 \description{
-Part of the mienco_native implementation; see the file header for the source it follows.
+A step of the mienco_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_mienco}.

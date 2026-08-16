@@ -8,12 +8,12 @@
 .htpfourier(s, L, P)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{L}{See Usage.}
-\item{P}{See Usage.}
+\item{s}{Numeric; combined arithmetically in the body.}
+\item{L}{A count; the body uses it as \code{seq_len(...)}.}
+\item{P}{Numeric; passed to \code{sqrt}.}
 }
 \description{
-Part of the htpfn implementation; see the file header for the source it follows.
+A step of the htpfn implementation. Called by \code{Htpfn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

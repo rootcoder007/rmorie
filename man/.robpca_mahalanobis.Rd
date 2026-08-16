@@ -10,10 +10,10 @@
 \arguments{
 \item{X}{See Usage.}
 \item{mu}{See Usage.}
-\item{C}{See Usage.}
+\item{C}{A matrix; passed to \code{solve}.}
 }
 \description{
-Part of the robpca_native implementation; see the file header for the source it follows.
+A step of the robpca_native implementation. Called by \code{.robpca_c_steps}, \code{.robpca_fast_mcd}, \code{morie_robpca}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

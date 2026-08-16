@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{p}{See Usage.}
-\item{d1}{See Usage.}
-\item{d2}{See Usage.}
-\item{iters}{Defaults to \code{300}.}
+\item{d1}{Passed to \code{.vcomp_f_cdf}.}
+\item{d2}{Passed to \code{.vcomp_f_cdf}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.}
 }
 \description{
-Part of the vcomp_native implementation; see the file header for the source it follows.
+A step of the vcomp_native implementation. Called by \code{morie_vcomp}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

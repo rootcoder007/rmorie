@@ -161,7 +161,8 @@ morie_rnacov_parse <- function(s) {
 
 #' .rnacov_can_pair
 #'
-#' Part of the rnacov_native implementation; see the file header for the
+#' A step of the rnacov_native implementation. Called by \code{morie_rnacov_nussinov}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.

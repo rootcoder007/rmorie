@@ -15,7 +15,7 @@
 \item{upper}{Defaults to \code{Inf}.}
 }
 \description{
-Part of the rangayyan_ch3 implementation; see the file header for the source it follows.
+A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt}, \code{PdfMean} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.morie_rg_quad}.

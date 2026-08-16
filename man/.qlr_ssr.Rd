@@ -8,11 +8,11 @@
 .qlr_ssr(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{t}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the qlrtst_native implementation; see the file header for the source it follows.
+A step of the qlrtst_native implementation. Called by \code{morie_qlrtst}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

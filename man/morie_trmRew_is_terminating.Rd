@@ -8,8 +8,8 @@
 morie_trmRew_is_terminating(rules, precedence)
 }
 \arguments{
-\item{rules}{See Usage.}
-\item{precedence}{See Usage.}
+\item{rules}{A vector; its length is taken and its elements indexed.}
+\item{precedence}{Passed to \code{morie_trmRew_lpo_greater}.}
 }
 \description{
 necessary. Returns 0-based indices of unoriented rules.

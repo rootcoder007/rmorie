@@ -3,7 +3,7 @@
 % the formals.
 \name{.avalon_lte}
 \alias{.avalon_lte}
-\title{Byte order, not the locale\\\'s collation. R would otherwise compare}
+\title{Byte order, not the locale\\'s collation. R would otherwise compare}
 \usage{
 .avalon_lte(a, b)
 }

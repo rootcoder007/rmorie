@@ -8,8 +8,8 @@
 .pq_read_i64(raw_bytes, count)
 }
 \arguments{
-\item{raw_bytes}{See Usage.}
-\item{count}{See Usage.}
+\item{raw_bytes}{Passed to \code{.pq_u32}.}
+\item{count}{Numeric; combined arithmetically in the body.}
 }
 \description{
 to 2^53, which covers every count, offset and epoch value here.

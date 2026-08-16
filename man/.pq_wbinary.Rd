@@ -8,11 +8,11 @@
 .pq_wbinary(e, b)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{b}{See Usage.}
+\item{e}{Passed to \code{.pq_wvarint}.}
+\item{b}{A vector; its length is taken.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wlistbin}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.pq_emit}.

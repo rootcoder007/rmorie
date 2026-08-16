@@ -8,10 +8,10 @@
 .morie_km2_lse_rows(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_rowce}, \code{morie_kamath_word2vec_skipgram}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 .schab_sigma_mu(mu, sigma2, family, link_kind, R = NULL)
 }
 \arguments{
-\item{mu}{See Usage.}
+\item{mu}{A vector; its length is taken.}
 \item{sigma2}{See Usage.}
-\item{family}{See Usage.}
-\item{link_kind}{See Usage.}
-\item{R}{Defaults to \code{NULL}.}
+\item{family}{Passed to \code{.schab_variance_function}.}
+\item{link_kind}{Passed to \code{.schab_link_derivative}.}
+\item{R}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
 sides. Distinct from .schab_data_covariance -- see .schab_pql_score.

@@ -8,15 +8,15 @@
 .schab_gwr_fit(y, X, distances, bandwidth, kernel = "gaussian", adaptive = FALSE)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{distances}{See Usage.}
-\item{bandwidth}{See Usage.}
-\item{kernel}{Defaults to \code{"gaussian"}.}
-\item{adaptive}{Defaults to \code{FALSE}.}
+\item{y}{A matrix; passed to \code{t}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{distances}{A matrix; passed to \code{as.matrix}.}
+\item{bandwidth}{Passed to \code{.schab_local_weights}.}
+\item{kernel}{Passed to \code{.schab_local_weights}. Defaults to \code{"gaussian"}.}
+\item{adaptive}{Passed to \code{.schab_local_weights}. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the schab_gwr_shared implementation; see the file header for the source it follows.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{.schab_mgwr_backfit}, \code{spgwrb}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{se_params}, \code{sigma2_gwr}, \code{edf_resid}, \code{v1}, \code{v2}, \code{params}, \code{fitted}, \code{resid}, \code{S}, \code{tr_S}, \code{tr_STS}, \code{effective_parameters}, \code{rss}, \code{sigma2}, \code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel}, \code{adaptive}, \code{n_rank_deficient}.

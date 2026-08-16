@@ -8,13 +8,13 @@
 .dw_walk(nb, start, length_, e)
 }
 \arguments{
-\item{nb}{See Usage.}
+\item{nb}{A vector; indexed elementwise.}
 \item{start}{See Usage.}
-\item{length_}{See Usage.}
-\item{e}{See Usage.}
+\item{length_}{A count; the body uses it as \code{integer(...)}.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the deepw implementation; see the file header for the source it follows.
+A step of the deepw implementation. Called by \code{Deepw}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

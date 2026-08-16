@@ -9,12 +9,12 @@ fit_msm(outcome, cumulative, weights = NULL, states = .STATES)
 }
 \arguments{
 \item{outcome}{See Usage.}
-\item{cumulative}{See Usage.}
+\item{cumulative}{A matrix; passed to \code{as.matrix}.}
 \item{weights}{Defaults to \code{NULL}.}
 \item{states}{Defaults to \code{.STATES}.}
 }
 \description{
-Part of the bhltmsm_native implementation; see the file header for the source it follows.
+A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se}, \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.

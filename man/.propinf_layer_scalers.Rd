@@ -8,10 +8,10 @@
 .propinf_layer_scalers(sets_list)
 }
 \arguments{
-\item{sets_list}{See Usage.}
+\item{sets_list}{A vector; indexed elementwise.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

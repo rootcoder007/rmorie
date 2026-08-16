@@ -8,11 +8,11 @@
 .s03corr(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; indexed elementwise.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{Btcicor}, \code{Cv1gn}, \code{Hetero} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

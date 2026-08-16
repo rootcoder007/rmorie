@@ -8,14 +8,14 @@
 morie_funcal_assign_orthologs(seeds, groups, taxa = NULL, target_taxa = NULL, target_types = NULL)
 }
 \arguments{
-\item{seeds}{See Usage.}
-\item{groups}{See Usage.}
-\item{taxa}{Defaults to \code{NULL}.}
+\item{seeds}{A vector; indexed elementwise.}
+\item{groups}{A vector; indexed elementwise.}
+\item{taxa}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{target_taxa}{Defaults to \code{NULL}.}
-\item{target_types}{Defaults to \code{NULL}.}
+\item{target_types}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the funcal_native implementation; see the file header for the source it follows.
+A step of the funcal_native implementation. Called by \code{morie_funcal}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

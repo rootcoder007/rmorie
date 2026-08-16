@@ -26,7 +26,8 @@
 
 #' morie_tlheic
 #'
-#' Part of the tlheic_native implementation; see the file header for the
+#' A step of the tlheic_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param psi_of_P Defaults to \code{NULL}.
@@ -37,7 +38,7 @@
 #' @param h Defaults to \code{1e-05}.
 #' @param tol Defaults to \code{1e-04}.
 #' @param ridge Defaults to \code{1e-08}.
-#' @param mode Defaults to \code{c("estimate", "verify", "grad", "deriv")}.
+#' @param mode One of \code{"deriv"}, \code{"grad"}, \code{"verify"}.
 #' @return The value of \code{estimate_eic}.
 #' @export
 morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
@@ -59,13 +60,14 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
 
 #' numerical_derivative
 #'
-#' Part of the tlheic_native implementation; see the file header for the
+#' A step of the tlheic_native implementation. Called by \code{estimate_eic}, \code{morie_tlheic}, \code{verify_gradient}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param psi_of_P See Usage.
 #' @param weights See Usage.
 #' @param score See Usage.
-#' @param h Defaults to \code{1e-05}.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A numeric value.
 #' @export
 numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
@@ -85,7 +87,8 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
 
 #' gradient_inner_product
 #'
-#' Part of the tlheic_native implementation; see the file header for the
+#' A step of the tlheic_native implementation. Called by \code{morie_tlheic}, \code{verify_gradient}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param D See Usage.
@@ -106,14 +109,15 @@ gradient_inner_product <- function(D, score, weights = NULL) {
 
 #' estimate_eic
 #'
-#' Part of the tlheic_native implementation; see the file header for the
+#' A step of the tlheic_native implementation. Called by \code{morie_tlheic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param psi_of_P See Usage.
-#' @param basis See Usage.
+#' @param basis A matrix; passed to \code{as.matrix}.
 #' @param weights Defaults to \code{NULL}.
 #' @param h Defaults to \code{1e-05}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{D}, \code{coefficients}, \code{n_directions}, \code{mean}, \code{method}, \code{note}.
 #' @export
 estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
@@ -144,11 +148,12 @@ estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
 
 #' verify_gradient
 #'
-#' Part of the tlheic_native implementation; see the file header for the
+#' A step of the tlheic_native implementation. Called by \code{morie_tlheic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param psi_of_P See Usage.
-#' @param D See Usage.
+#' @param D A vector; its length is taken.
 #' @param score See Usage.
 #' @param weights Defaults to \code{NULL}.
 #' @param h Defaults to \code{1e-05}.
@@ -170,7 +175,8 @@ verify_gradient <- function(psi_of_P, D, score, weights = NULL,
 
 #' .tlheic_cheatsheet
 #'
-#' Part of the tlheic_native implementation; see the file header for the
+#' A step of the tlheic_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

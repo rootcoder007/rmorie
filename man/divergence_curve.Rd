@@ -8,15 +8,15 @@
 divergence_curve(y, m = NULL, tau = NULL, dt = 1, min_sep = NULL, max_steps = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{m}{Defaults to \code{NULL}.}
-\item{tau}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
-\item{min_sep}{Defaults to \code{NULL}.}
-\item{max_steps}{Defaults to \code{NULL}.}
+\item{y}{A vector; its length is taken.}
+\item{m}{Optional; may be \code{NULL}. Passed to \code{morie_lyapun_embed}.}
+\item{tau}{Optional; may be \code{NULL}. Passed to \code{morie_lyapun_embed}.}
+\item{dt}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{min_sep}{Optional; may be \code{NULL}. Passed to \code{.lyapun_nearest_neighbours}.}
+\item{max_steps}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the lyapun_native implementation; see the file header for the source it follows.
+A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}, \code{morie_lyapun}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{neighbour}, \code{d0}, \code{points}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n_obs}.

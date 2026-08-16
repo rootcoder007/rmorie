@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{z}{See Usage.}
-\item{alpha}{See Usage.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the e_div_native implementation; see the file header for the source it follows.
+A step of the e_div_native implementation. Called by \code{morie_e_div}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

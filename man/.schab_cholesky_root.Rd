@@ -3,16 +3,16 @@
 % the formals.
 \name{.schab_cholesky_root}
 \alias{.schab_cholesky_root}
-\title{Lower-triangular L with L L\\\' = Sigma. The book writes the root as an}
+\title{Lower-triangular L with L L\\' = Sigma. The book writes the root as an}
 \usage{
 .schab_cholesky_root(cov, jitter = 1e-10)
 }
 \arguments{
-\item{cov}{See Usage.}
-\item{jitter}{Defaults to \code{1e-10}.}
+\item{cov}{A matrix; passed to \code{nrow}.}
+\item{jitter}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
-upper triangular U with Sigma = U\\\'U; L is that U\\\'.
+upper triangular U with Sigma = U\\'U; L is that U\\'.
 }
 \value{
 A matrix, from \code{t}.

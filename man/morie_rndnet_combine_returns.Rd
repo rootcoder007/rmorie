@@ -10,8 +10,8 @@ morie_rndnet_combine_returns(reward_ext, reward_int, gamma_ext = 0.999, gamma_in
 \arguments{
 \item{reward_ext}{See Usage.}
 \item{reward_int}{See Usage.}
-\item{gamma_ext}{Defaults to \code{0.999}.}
-\item{gamma_int}{Defaults to \code{0.99}.}
+\item{gamma_ext}{Numeric; combined arithmetically in the body. Defaults to \code{0.999}.}
+\item{gamma_int}{Numeric; combined arithmetically in the body. Defaults to \code{0.99}.}
 \item{done}{Defaults to \code{NULL}.}
 }
 \description{

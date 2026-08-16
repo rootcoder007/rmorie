@@ -8,11 +8,11 @@
 .hdb_linkage(edges, n)
 }
 \arguments{
-\item{edges}{See Usage.}
-\item{n}{See Usage.}
+\item{edges}{A vector; its length is taken.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the hdbsc_native implementation; see the file header for the source it follows.
+A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{root}, \code{children}, \code{node_size}.

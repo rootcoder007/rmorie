@@ -8,14 +8,14 @@
 gated_update(s, v, U, V, phi)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{v}{See Usage.}
-\item{U}{See Usage.}
-\item{V}{See Usage.}
+\item{s}{Passed to \code{.painn_vec}.}
+\item{v}{Passed to \code{.painn_mat}.}
+\item{U}{A matrix; passed to \code{t}.}
+\item{V}{A matrix; passed to \code{t}.}
 \item{phi}{See Usage.}
 }
 \description{
-Part of the painn_native implementation; see the file header for the source it follows.
+A step of the painn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ds}, \code{dv}, \code{scalar_from_vectors}, \code{note}.

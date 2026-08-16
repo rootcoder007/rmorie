@@ -8,13 +8,13 @@
 .prnFil_simulate_future_trend(fit, t_future, n_sims = 200, seed = 0)
 }
 \arguments{
-\item{fit}{See Usage.}
+\item{fit}{A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k}, \code{$m}, \code{$t} from it.}
 \item{t_future}{See Usage.}
 \item{n_sims}{Defaults to \code{200}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{
-Part of the prnFil_native implementation; see the file header for the source it follows.
+A step of the prnFil_native implementation. Called by \code{.prnFil_trend_intervals}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{sims}, as built in the body.

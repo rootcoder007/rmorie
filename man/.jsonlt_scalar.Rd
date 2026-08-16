@@ -8,11 +8,11 @@
 .jsonlt_scalar(v, o)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{o}{See Usage.}
+\item{v}{A flag; the body branches on it.}
+\item{o}{A list; the body reads \code{$Date}, \code{$digits} from it.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_atomic}, \code{.jsonlt_cell}, \code{.jsonlt_encode}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.jsonlt_esc}.

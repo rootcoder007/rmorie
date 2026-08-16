@@ -8,11 +8,11 @@
 print.andmnh(x, ...)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A list; the body reads \code{$alpha}, \code{$bandwidth}, \code{$bandwidth_automatic}, \code{$J}, \code{$kernel}, \code{$n}, \code{$n_params}, \code{$p}, \code{$prewhitened}, \code{$var_order} from it.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the andmnh_native implementation; see the file header for the source it follows.
+A step of the andmnh_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 Invisibly,the value of \code{x}, as built in the body.

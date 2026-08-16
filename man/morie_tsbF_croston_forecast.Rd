@@ -11,13 +11,13 @@ morie_tsbF_croston_forecast(y, alpha = 0.1, horizon = 1, init = "global", z0 = N
 \item{y}{See Usage.}
 \item{alpha}{Defaults to \code{0.1}.}
 \item{horizon}{Defaults to \code{1}.}
-\item{init}{Defaults to \code{"global"}.}
-\item{z0}{Defaults to \code{NULL}.}
-\item{x0}{Defaults to \code{NULL}.}
-\item{burn_in}{Defaults to \code{0}.}
+\item{init}{Passed to \code{.tsbF_init}. Defaults to \code{"global"}.}
+\item{z0}{Passed to \code{.tsbF_init}.}
+\item{x0}{Passed to \code{.tsbF_init}.}
+\item{burn_in}{Passed to \code{.tsbF_burn}. Defaults to \code{0}.}
 }
 \description{
-Part of the tsbF_native implementation; see the file header for the source it follows.
+A step of the tsbF_native implementation. Called by \code{morie_tsbF_intermittent_forecast}, \code{morie_tsbF_sba_forecast}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

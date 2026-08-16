@@ -8,13 +8,13 @@
 morie_trmRew_joinable(a, b, rules, max_steps = 10000)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{rules}{See Usage.}
-\item{max_steps}{Defaults to \code{10000}.}
+\item{a}{Passed to \code{morie_trmRew_normal_form}.}
+\item{b}{Passed to \code{morie_trmRew_normal_form}.}
+\item{rules}{Passed to \code{morie_trmRew_normal_form}.}
+\item{max_steps}{Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.}
 }
 \description{
-Part of the trmRew_native implementation; see the file header for the source it follows.
+A step of the trmRew_native implementation. Called by \code{morie_trmRew_is_locally_confluent}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{res}, as built in the body.

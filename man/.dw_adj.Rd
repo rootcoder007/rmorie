@@ -8,10 +8,10 @@
 .dw_adj(G)
 }
 \arguments{
-\item{G}{See Usage.}
+\item{G}{Passed to \code{.s03mat}.}
 }
 \description{
-Part of the deepw implementation; see the file header for the source it follows.
+A step of the deepw implementation. Called by \code{Comemb}, \code{Deepw}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{A}, \code{n}, \code{nb}.

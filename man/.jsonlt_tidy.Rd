@@ -8,10 +8,10 @@
 .jsonlt_tidy(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Compared against \code{"-0"}.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_num}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{s}, as built in the body.

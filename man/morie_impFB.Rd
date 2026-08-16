@@ -8,16 +8,16 @@
 morie_impFB(R, f = 8, alpha = 40, lam = 0.1, iters = 15, seed = 0, fast = TRUE)
 }
 \arguments{
-\item{R}{See Usage.}
+\item{R}{A matrix; passed to \code{as.matrix}.}
 \item{f}{Defaults to \code{8}.}
-\item{alpha}{Defaults to \code{40}.}
-\item{lam}{Defaults to \code{0.1}.}
+\item{alpha}{Passed to \code{.impFB_confidence}. Defaults to \code{40}.}
+\item{lam}{Passed to \code{.impFB_als_step}. Defaults to \code{0.1}.}
 \item{iters}{Defaults to \code{15}.}
-\item{seed}{Defaults to \code{0}.}
-\item{fast}{Defaults to \code{TRUE}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{fast}{Passed to \code{.impFB_als_step}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the impFB_native implementation; see the file header for the source it follows.
+A step of the impFB_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

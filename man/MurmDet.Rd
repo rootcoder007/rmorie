@@ -8,13 +8,13 @@
 MurmDet(pcg, fs, threshold = 0.15, hf_band = c(150, 600))
 }
 \arguments{
-\item{pcg}{See Usage.}
-\item{fs}{See Usage.}
-\item{threshold}{Defaults to \code{0.15}.}
-\item{hf_band}{Defaults to \code{c(150, 600)}.}
+\item{pcg}{Passed to \code{.bsapsd}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{threshold}{Numeric; combined arithmetically in the body. Defaults to \code{0.15}.}
+\item{hf_band}{A vector; indexed elementwise. Defaults to \code{c(150, 600)}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

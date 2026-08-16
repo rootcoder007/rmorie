@@ -22,7 +22,7 @@ morie_cdaeRC(pos, n_users, n_items, k_dim = 8L, q = 0.2, alpha = 0.05, lam = 0.0
 \item{init_scale}{Defaults to \code{0.1}.}
 }
 \description{
-Part of the cdaeRC_native implementation; see the file header for the source it follows.
+A step of the cdaeRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{fit_cdae}.

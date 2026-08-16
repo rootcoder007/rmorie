@@ -8,10 +8,10 @@
 morie_survrsf_vimp(fit, X, variables = NULL, seed = 1)
 }
 \arguments{
-\item{fit}{See Usage.}
-\item{X}{See Usage.}
+\item{fit}{A list; the body reads \code{$events}, \code{$times} from it.}
+\item{X}{A matrix; passed to \code{ncol}.}
 \item{variables}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{1}.}
+\item{seed}{Passed to \code{morie_survrsf_mortality}. Defaults to \code{1}.}
 }
 \description{
 0-based variable indices to match the Python.

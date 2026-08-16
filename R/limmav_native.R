@@ -73,10 +73,11 @@
 
 #' .limmav_digamma
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{.limmav_ebayes}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .limmav_digamma <- function(x) {
@@ -94,10 +95,11 @@
 
 #' .limmav_trigamma
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{.limmav_trigamma_inverse}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .limmav_trigamma <- function(x) {
@@ -116,10 +118,11 @@
 
 #' .limmav_tetragamma
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{.limmav_trigamma_inverse}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .limmav_tetragamma <- function(x) {
@@ -137,12 +140,13 @@
 
 #' .limmav_trigamma_inverse
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{.limmav_ebayes}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; passed to \code{sqrt}.
 #' @param tol Defaults to \code{1e-08}.
-#' @param max_iter Defaults to \code{60}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.
 #' @return The value of \code{y}, as built in the body.
 #' @export
 .limmav_trigamma_inverse <- function(x, tol = 1e-8, max_iter = 60) {
@@ -164,10 +168,11 @@
 
 #' .limmav_erf
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
 .limmav_erf <- function(x) {
@@ -186,10 +191,11 @@
 
 #' .limmav_benjamini_hochberg
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .limmav_benjamini_hochberg <- function(p) {
@@ -213,11 +219,12 @@
 
 #' .limmav_ebayes
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sigma2 See Usage.
-#' @param df See Usage.
+#' @param df A vector; its length is taken.
 #' @param robust_floor Defaults to \code{1e-12}.
 #' @return A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total}, \code{no_gene_variation}.
 #' @export
@@ -263,11 +270,12 @@
 
 #' .limmav_ols
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}, \code{.limmav_weighted_lm}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
 #' @param w Defaults to \code{NULL}.
 #' @return A list with \code{beta}, \code{fit}, \code{sd}, \code{inv}, \code{df}.
 #' @export
@@ -297,13 +305,14 @@
 
 #' .limmav_log_cpm
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
+#' @param counts A matrix; passed to \code{nrow}.
 #' @param lib_sizes Defaults to \code{NULL}.
-#' @param prior_count Defaults to \code{0.5}.
-#' @param lib_offset Defaults to \code{1}.
+#' @param prior_count Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param lib_offset Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{R}.
 #' @export
 .limmav_log_cpm <- function(counts, lib_sizes = NULL, prior_count = 0.5,
@@ -330,12 +339,13 @@
 
 #' .limmav_lowess
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param span Defaults to \code{0.5}.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param span Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param iterations Defaults to \code{3}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -403,13 +413,14 @@
 
 #' .limmav_voom_weights
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param design See Usage.
-#' @param lib_sizes Defaults to \code{NULL}.
-#' @param span Defaults to \code{0.5}.
+#' @param counts Passed to \code{.limmav_log_cpm}.
+#' @param design A matrix; passed to \code{as.matrix}.
+#' @param lib_sizes Passed to \code{.limmav_log_cpm}.
+#' @param span Passed to \code{.limmav_lowess}. Defaults to \code{0.5}.
 #' @return A list with \code{log_cpm}, \code{weights}, \code{mean_log_count}, \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{lo}.
 #' @export
 .limmav_voom_weights <- function(counts, design, lib_sizes = NULL, span = 0.5) {
@@ -476,12 +487,13 @@
 
 #' .limmav_weighted_lm
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param w See Usage.
+#' @param y Passed to \code{.limmav_ols}.
+#' @param X Passed to \code{.limmav_ols}.
+#' @param w Passed to \code{.limmav_ols}.
 #' @param contrast See Usage.
 #' @return A list with \code{est}, \code{se}, \code{t}, \code{df}, \code{sd}, \code{v_un}.
 #' @export
@@ -508,11 +520,12 @@
 
 #' .limmav_t_sf
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param df See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param df Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .limmav_t_sf <- function(t, df) {
@@ -564,16 +577,17 @@
 
 #' morie_limmav
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param design See Usage.
-#' @param contrast Defaults to \code{NULL}.
-#' @param lib_sizes Defaults to \code{NULL}.
-#' @param span Defaults to \code{0.5}.
-#' @param weights Defaults to \code{TRUE}.
-#' @param moderate Defaults to \code{TRUE}.
+#' @param counts Passed to \code{.limmav_voom_weights}.
+#' @param design A vector; its length is taken and its elements indexed.
+#' @param contrast Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param lib_sizes Passed to \code{.limmav_voom_weights}.
+#' @param span Passed to \code{.limmav_voom_weights}. Defaults to \code{0.5}.
+#' @param weights A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param moderate A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{log_fold_change}, \code{se}, \code{t}, \code{pvalue}, \code{padj}, \code{df}, \code{df_total}, \code{d0}, \code{s0_sq}, \code{s2_gene}, \code{s2_post}, \code{moderated}, \code{voom_weights}, \code{log_cpm}, \code{mean_log_count}, \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{weighted}, \code{n_genes}, \code{n_samples}, \code{note}, \code{method}.
 #' @export
 morie_limmav <- function(counts, design, contrast = NULL, lib_sizes = NULL,
@@ -696,7 +710,8 @@ morie_limmavoom <- morie_limmav
 
 #' .limmav_cheatsheet
 #'
-#' Part of the limmav_native implementation; see the file header for the
+#' A step of the limmav_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

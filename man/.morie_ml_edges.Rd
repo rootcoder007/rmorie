@@ -8,7 +8,7 @@
 .morie_ml_edges(dag)
 }
 \arguments{
-\item{dag}{See Usage.}
+\item{dag}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 list(node = c(children)). Both spellings normalize to a sorted character matrix of edges.

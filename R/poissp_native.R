@@ -23,10 +23,11 @@
 
 #' .poissp_adjacency
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{morie_poissp_car_precision}, \code{morie_poissp_rho_bounds}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
+#' @param W A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{A}, as built in the body.
 #' @export
 .poissp_adjacency <- function(W) {
@@ -83,10 +84,11 @@ morie_poissp_rho_bounds <- function(W) {
 # weight of the sum(u) = 0 penalty
 #' Weight of the sum(u) = 0 penalty
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{.poissp_joint_hessian}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .poissp_constraint_weight <- function(m) {
@@ -97,13 +99,14 @@ morie_poissp_rho_bounds <- function(W) {
 #' Negative joint Hessian [[X\'MX, X\'M], [MX, M + Q]] (+ constraint
 #' block)
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{morie_poissp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param m See Usage.
-#' @param Q See Usage.
-#' @param constrain See Usage.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param m A matrix; passed to \code{diag}.
+#' @param Q Numeric; combined arithmetically in the body.
+#' @param constrain A flag; the body branches on it.
 #' @return The value of \code{H}, as built in the body.
 #' @export
 .poissp_joint_hessian <- function(X, m, Q, constrain) {
@@ -124,12 +127,13 @@ morie_poissp_rho_bounds <- function(W) {
 
 #' .poissp_ridgesolve
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{morie_poissp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param b A matrix; passed to \code{solve}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .poissp_ridgesolve <- function(A, b, ridge = 1e-10) {
@@ -139,17 +143,18 @@ morie_poissp_rho_bounds <- function(W) {
 # joint Newton-Raphson for (beta, u) at fixed (tau, rho)
 #' Joint Newton-Raphson for (beta, u) at fixed (tau, rho)
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{morie_poissp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param off See Usage.
-#' @param Q See Usage.
-#' @param constrain See Usage.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; indexed by row and column.
+#' @param off Numeric; passed to \code{sum}.
+#' @param Q A matrix; passed to \code{\%*\%}.
+#' @param constrain A flag; the body branches on it.
 #' @param iters See Usage.
 #' @param tol See Usage.
-#' @param ridge See Usage.
+#' @param ridge Passed to \code{.poissp_ridgesolve}.
 #' @return A list with \code{beta}, \code{u}, \code{m}, \code{eta}.
 #' @export
 .poissp_fit_mode <- function(y, X, off, Q, constrain, iters, tol, ridge) {
@@ -185,11 +190,12 @@ morie_poissp_rho_bounds <- function(W) {
 
 #' .poissp_loglik
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{.poissp_laplace}, \code{morie_poissp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param m See Usage.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param m Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .poissp_loglik <- function(y, m) {
@@ -198,11 +204,12 @@ morie_poissp_rho_bounds <- function(W) {
 
 #' .poissp_logdet_pd
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{.poissp_laplace}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param ridge Defaults to \code{0}.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
 .poissp_logdet_pd <- function(A, ridge = 0.0) {
@@ -214,11 +221,12 @@ morie_poissp_rho_bounds <- function(W) {
 #' Generalised log-determinant: drop the rank_deficit smallest
 #' |eigenvalues|
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{.poissp_laplace}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A See Usage.
-#' @param rank_deficit Defaults to \code{0L}.
+#' @param rank_deficit Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export
 .poissp_logdet_gen <- function(A, rank_deficit = 0L) {
@@ -229,14 +237,15 @@ morie_poissp_rho_bounds <- function(W) {
 
 #' .poissp_laplace
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. Called by \code{morie_poissp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param u See Usage.
-#' @param m See Usage.
-#' @param Q See Usage.
-#' @param constrain See Usage.
+#' @param y A vector; its length is taken.
+#' @param u A matrix; passed to \code{\%*\%}.
+#' @param m A matrix; passed to \code{diag}.
+#' @param Q A matrix; passed to \code{\%*\%}.
+#' @param constrain A flag; the body branches on it.
 #' @return A numeric value.
 #' @export
 .poissp_laplace <- function(y, u, m, Q, constrain) {
@@ -370,7 +379,8 @@ morie_poisson_spatial_glm <- morie_poissp
 
 #' morie_poissp_cheatsheet
 #'
-#' Part of the poissp_native implementation; see the file header for the
+#' A step of the poissp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,13 +8,13 @@
 morie_rouge_w(candidate, reference, alpha = 1.2, beta = 1)
 }
 \arguments{
-\item{candidate}{See Usage.}
-\item{reference}{See Usage.}
-\item{alpha}{Defaults to \code{1.2}.}
-\item{beta}{Defaults to \code{1}.}
+\item{candidate}{Passed to \code{.rouge_toks}.}
+\item{reference}{Passed to \code{.rouge_get_refs_simple}.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{1.2}.}
+\item{beta}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the rouge_native implementation; see the file header for the source it follows.
+A step of the rouge_native implementation. Called by \code{morie_rouge}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

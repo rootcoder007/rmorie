@@ -8,11 +8,11 @@
 .propinf_forward(net, x)
 }
 \arguments{
-\item{net}{See Usage.}
+\item{net}{A vector; its length is taken and its elements indexed.}
 \item{x}{See Usage.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{acts}, \code{pre}.

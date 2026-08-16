@@ -12,7 +12,7 @@
 \item{ch}{See Usage.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{.vepan_coding_terms}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

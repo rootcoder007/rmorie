@@ -8,13 +8,13 @@
 .psy_items(m, a, b, cc)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{A count; the body uses it as \code{rep(...)}.}
 \item{a}{See Usage.}
 \item{b}{See Usage.}
 \item{cc}{See Usage.}
 }
 \description{
-Part of the psycho_native implementation; see the file header for the source it follows.
+A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{a}, \code{b}, \code{c}.

@@ -14,10 +14,11 @@
 
 #' .morie_gr_w4b_sigmoid
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_gru}, \code{morie_geron_lstm}, \code{morie_geron_mish}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_w4b_sigmoid <- function(z) {
@@ -31,10 +32,11 @@
 
 #' .morie_gr_w4b_softmax_rows
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{.morie_gr_w4b_sdpa}, \code{morie_geron_hf_pipelines}, \code{morie_geron_knowledge_distillation} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Z See Usage.
+#' @param Z A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
 .morie_gr_w4b_softmax_rows <- function(Z) {
@@ -46,30 +48,33 @@
 
 #' .morie_gr_w4b_popsd
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_he_init_hmhei}, \code{morie_geron_learning_curves_hmlcv}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; passed to \code{mean}.
 #' @return A numeric value.
 #' @export
 .morie_gr_w4b_popsd <- function(x) sqrt(mean((x - mean(x))^2))
 
 #' .morie_gr_w4b_softplus
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_mish}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
 .morie_gr_w4b_softplus <- function(z) pmax(z, 0) + log1p(exp(-abs(z)))
 
 #' .morie_gr_w4b_pairwise_distances
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_isomap}, \code{morie_geron_kernel_pca_rbf_hmkprbf}, \code{morie_geron_kmeans_plus_plus} and 7 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
 .morie_gr_w4b_pairwise_distances <- function(X) {
@@ -82,10 +87,11 @@
 
 #' .morie_gr_w4b_double_center
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_double_center}, \code{morie_geron_mds}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param D See Usage.
+#' @param D A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
 .morie_gr_w4b_double_center <- function(D) {
@@ -324,12 +330,13 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 
 #' .morie_gr_w4b_bincount
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{.morie_gr_w4b_hgb_best_split}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @param w See Usage.
-#' @param minlength See Usage.
+#' @param minlength A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_w4b_bincount <- function(x, w, minlength) {
@@ -344,11 +351,12 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 
 #' .morie_gr_w4b_searchsorted_left
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_histogram_gradient_boosting}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param e See Usage.
-#' @param x See Usage.
+#' @param e A vector; its length is taken.
+#' @param x A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_gr_w4b_searchsorted_left <- function(e, x) {
@@ -360,13 +368,14 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 
 #' .morie_gr_w4b_hgb_best_split
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{.morie_gr_w4b_hgb_grow}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param binned See Usage.
-#' @param grad See Usage.
-#' @param hess See Usage.
-#' @param n_bins See Usage.
+#' @param binned A matrix; indexed by row and column.
+#' @param grad Numeric; passed to \code{sum}.
+#' @param hess Numeric; passed to \code{sum}.
+#' @param n_bins Numeric; combined arithmetically in the body.
 #' @param min_leaf See Usage.
 #' @return A list with \code{gain}, \code{feature}, \code{bin0}.
 #' @export
@@ -400,17 +409,18 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 
 #' .morie_gr_w4b_hgb_grow
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_histogram_gradient_boosting}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param binned See Usage.
-#' @param grad See Usage.
-#' @param hess See Usage.
-#' @param rows See Usage.
-#' @param depth See Usage.
-#' @param max_depth See Usage.
-#' @param n_bins See Usage.
-#' @param min_leaf See Usage.
+#' @param binned A matrix; indexed by row and column.
+#' @param grad A vector; indexed elementwise.
+#' @param hess A vector; indexed elementwise.
+#' @param rows A vector; its length is taken and its elements indexed.
+#' @param depth Numeric; combined arithmetically in the body.
+#' @param max_depth Passed to \code{.morie_gr_w4b_hgb_grow}.
+#' @param n_bins Passed to \code{.morie_gr_w4b_hgb_best_split}.
+#' @param min_leaf Numeric; combined arithmetically in the body.
 #' @return A list with \code{feature}, \code{bin0}, \code{gain}, \code{left}, \code{right}.
 #' @export
 .morie_gr_w4b_hgb_grow <- function(binned, grad, hess, rows, depth, max_depth, n_bins, min_leaf) {
@@ -439,11 +449,12 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 
 #' .morie_gr_w4b_hgb_predict
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_histogram_gradient_boosting}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param node See Usage.
-#' @param binned See Usage.
+#' @param binned A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_w4b_hgb_predict <- function(node, binned) {
@@ -618,12 +629,13 @@ morie_geron_hidden_layers_heuristic <- function(model, X, y, max_layers = 10, mi
 
 #' .morie_gr_w4b_ridge_estimator
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Xtr See Usage.
+#' @param Xtr A matrix; passed to \code{as.matrix}.
 #' @param ytr See Usage.
-#' @param alpha Defaults to \code{0}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{function}.
 #' @export
 .morie_gr_w4b_ridge_estimator <- function(Xtr, ytr, alpha = 0.0) {
@@ -637,15 +649,16 @@ morie_geron_hidden_layers_heuristic <- function(model, X, y, max_layers = 10, mi
 
 #' .morie_gr_w4b_grid_search
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_hyperparameter_tuning}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param param_grid See Usage.
-#' @param X See Usage.
+#' @param X Passed to \code{.morie_gr_mat}.
 #' @param y See Usage.
 #' @param estimator Defaults to \code{NULL}.
-#' @param K Defaults to \code{3}.
-#' @param score Defaults to \code{NULL}.
+#' @param K Passed to \code{morie_geron_cross_validation_score}. Defaults to \code{3}.
+#' @param score Passed to \code{morie_geron_cross_validation_score}.
 #' @return A list with \code{best_params}, \code{best_score}, \code{results}, \code{n_candidates}, \code{n_fits}, \code{estimate}, \code{n}, \code{method}.
 #' @export
 .morie_gr_w4b_grid_search <- function(param_grid, X, y, estimator = NULL, K = 3, score = NULL) {
@@ -2472,12 +2485,13 @@ morie_geron_mdp <- function(states, actions, P, R, gamma = 0.95, max_iter = 1000
 
 #' .morie_gr_w4b_dijkstra
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_isomap}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param adj See Usage.
+#' @param adj A vector; indexed elementwise.
 #' @param source See Usage.
-#' @param m See Usage.
+#' @param m A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{dist}, as built in the body.
 #' @export
 .morie_gr_w4b_dijkstra <- function(adj, source, m) {
@@ -2546,13 +2560,14 @@ morie_geron_isomap <- function(X, n_components, n_neighbors = 5) {
 
 #' .morie_gr_w4b_sdpa
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_multihead_attention}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
-#' @param V See Usage.
-#' @param mask Defaults to \code{NULL}.
+#' @param Q A matrix; passed to \code{ncol}.
+#' @param K A matrix; passed to \code{t}.
+#' @param V A matrix; passed to \code{\%*\%}.
+#' @param mask Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{output}, \code{attention}.
 #' @export
 .morie_gr_w4b_sdpa <- function(Q, K, V, mask = NULL) {
@@ -3046,11 +3061,12 @@ morie_geron_model_based <- function(X, y, add_bias = TRUE, eta = NULL, n_iter = 
 
 #' .morie_gr_w4b_mpp_partition
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_model_parallelism}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param w See Usage.
-#' @param k See Usage.
+#' @param w A vector; its length is taken and its elements indexed.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{assign}, as built in the body.
 #' @export
 .morie_gr_w4b_mpp_partition <- function(w, k) {
@@ -3188,12 +3204,13 @@ morie_geron_multioutput <- function(X, Y, k = 1, X_new = NULL) {
 
 #' .morie_gr_w4b_maxpool
 #'
-#' Part of the geron_w4b_native implementation; see the file header for
+#' A step of the geron_w4b_native implementation. Called by \code{morie_geron_max_pool}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param k See Usage.
-#' @param s See Usage.
+#' @param x A matrix; indexed by row and column.
+#' @param k Numeric; combined arithmetically in the body.
+#' @param s Numeric; combined arithmetically in the body.
 #' @return A list with \code{y}, \code{argmax}, \code{output_shape}.
 #' @export
 .morie_gr_w4b_maxpool <- function(x, k, s) {

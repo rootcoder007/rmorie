@@ -12,7 +12,7 @@ node2v_check_pq(p, q)
 \item{q}{See Usage.}
 }
 \description{
-Part of the node2v_native implementation; see the file header for the source it follows.
+A step of the node2v_native implementation. Called by \code{alpha_pq}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p}, \code{q}.

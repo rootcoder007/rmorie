@@ -8,7 +8,7 @@
 varcal_cheatsheet()
 }
 \description{
-Part of the varcal_native implementation; see the file header for the source it follows.
+A step of the varcal_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A character value.
@@ -25,8 +25,8 @@ stage, the pileup image of reference and read data around each
 candidate, the Inception-v2 classifier emitting the three diploid
 genotype probabilities, the calibration argument for why an image of
 all reads captures inter-read dependence, and the printed accounting:
-candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
-of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+candidate PPV 8.1\% raised to 99.7\% on Ion Torrent, a mean loss of 2.3\%
+of candidate sensitivity, and the SOLiD figures of 13.9\% PPV at 96.2\%
 sensitivity.
 
 Li, H. (2011) "A statistical framework for SNP calling, mutation

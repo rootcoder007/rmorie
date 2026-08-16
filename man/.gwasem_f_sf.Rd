@@ -8,12 +8,12 @@
 .gwasem_f_sf(f, df1, df2)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{df1}{See Usage.}
-\item{df2}{See Usage.}
+\item{f}{Numeric; combined arithmetically in the body.}
+\item{df1}{Numeric; combined arithmetically in the body.}
+\item{df2}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the gwasem_native implementation; see the file header for the source it follows.
+A step of the gwasem_native implementation. Called by \code{morie_gwasem}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,11 +8,11 @@
 skip_concat(upsampled, contracting)
 }
 \arguments{
-\item{upsampled}{See Usage.}
-\item{contracting}{See Usage.}
+\item{upsampled}{Passed to \code{.unetbk_as_matrix}.}
+\item{contracting}{Passed to \code{.unetbk_as_matrix}.}
 }
 \description{
-Part of the unetbk_native implementation; see the file header for the source it follows.
+A step of the unetbk_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{concatenated}, \code{crop_offset}, \code{channels}, \code{note}.

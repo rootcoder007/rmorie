@@ -8,19 +8,19 @@
 morie_svdpp(ratings, n_users, n_items, factors = 4, epochs = 30, lr = 0.007, reg = 0.015, exponent = -0.5, seed = 0, implicit = TRUE)
 }
 \arguments{
-\item{ratings}{See Usage.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{factors}{Defaults to \code{4}.}
-\item{epochs}{Defaults to \code{30}.}
-\item{lr}{Defaults to \code{0.007}.}
-\item{reg}{Defaults to \code{0.015}.}
-\item{exponent}{Defaults to \code{-0.5}.}
-\item{seed}{Defaults to \code{0}.}
-\item{implicit}{Defaults to \code{TRUE}.}
+\item{ratings}{Passed to \code{.svdpp_fit}.}
+\item{n_users}{Passed to \code{.svdpp_fit}.}
+\item{n_items}{Passed to \code{.svdpp_fit}.}
+\item{factors}{Passed to \code{.svdpp_fit}. Defaults to \code{4}.}
+\item{epochs}{Passed to \code{.svdpp_fit}. Defaults to \code{30}.}
+\item{lr}{Passed to \code{.svdpp_fit}. Defaults to \code{0.007}.}
+\item{reg}{Passed to \code{.svdpp_fit}. Defaults to \code{0.015}.}
+\item{exponent}{Passed to \code{.svdpp_fit}. Defaults to \code{-0.5}.}
+\item{seed}{Passed to \code{.svdpp_fit}. Defaults to \code{0}.}
+\item{implicit}{Passed to \code{.svdpp_fit}. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the svdpp_native implementation; see the file header for the source it follows.
+A step of the svdpp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.svdpp_fit}.

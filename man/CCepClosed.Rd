@@ -16,7 +16,7 @@ CCepClosed(gain, zeros_in, zeros_out, poles_in, poles_out, nmax = 32)
 \item{nmax}{Defaults to \code{32}.}
 }
 \description{
-Part of the rangayyan_cep implementation; see the file header for the source it follows.
+A step of the rangayyan_cep implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cepstrum}, \code{quefrency}, \code{c0}, \code{positive}, \code{negative}, \code{causal}, \code{anticausal}, \code{infinite_duration}, \code{nmax}, \code{method}.

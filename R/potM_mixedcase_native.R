@@ -3,12 +3,13 @@
 
 #' .potM_loglik
 #'
-#' Part of the potM_mixedcase_native implementation; see the file header
+#' A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle}, \code{.potM_neg_loglik}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param z See Usage.
-#' @param sigma See Usage.
-#' @param xi See Usage.
+#' @param z A vector; its length is taken.
+#' @param sigma Numeric; passed to \code{log}.
+#' @param xi Numeric; passed to \code{abs}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .potM_loglik <- function(z, sigma, xi) {
@@ -26,11 +27,12 @@
 
 #' .potM_neg_loglik
 #'
-#' Part of the potM_mixedcase_native implementation; see the file header
+#' A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param par See Usage.
-#' @param z See Usage.
+#' @param par A vector; indexed elementwise.
+#' @param z Passed to \code{.potM_loglik}.
 #' @return A numeric value.
 #' @export
 .potM_neg_loglik <- function(par, z) {
@@ -43,7 +45,8 @@
 
 #' .potM_gpd_mle
 #'
-#' Part of the potM_mixedcase_native implementation; see the file header
+#' A step of the potM_mixedcase_native implementation. Called by \code{morie_potM}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param exc See Usage.
@@ -121,11 +124,12 @@
 
 #' morie_potM
 #'
-#' Part of the potM_mixedcase_native implementation; see the file header
+#' A step of the potM_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param y See Usage.
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @param return_periods Defaults to \code{c(10, 100)}.
 #' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov}, \code{n_exceedances}, \code{n}, \code{rate}, \code{return_levels}, \code{threshold}, \code{converged}, \code{method}.
 #' @export
@@ -178,7 +182,8 @@ peaks_over_threshold <- morie_potM
 
 #' morie_potM_cheatsheet
 #'
-#' Part of the potM_mixedcase_native implementation; see the file header
+#' A step of the potM_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @return A character value.

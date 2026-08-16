@@ -8,12 +8,12 @@
 .r2(a, b, ls)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{ls}{See Usage.}
+\item{a}{A vector; its length is taken and its elements indexed.}
+\item{b}{A vector; indexed elementwise.}
+\item{ls}{A vector; indexed elementwise.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient}, \code{matern52}, \code{squared_exponential}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{s}, as built in the body.

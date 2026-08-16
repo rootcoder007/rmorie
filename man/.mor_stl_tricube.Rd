@@ -8,10 +8,10 @@
 .mor_stl_tricube(u)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the stlAn_native implementation; see the file header for the source it follows.
+A step of the stlAn_native implementation. Called by \code{.mor_stl_loess_at}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

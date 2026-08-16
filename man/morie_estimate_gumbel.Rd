@@ -11,16 +11,16 @@ morie_estimate_gumbel(m, n, letter_freqs, match = 5, mismatch = -4, matrix = NUL
 \item{m}{See Usage.}
 \item{n}{See Usage.}
 \item{letter_freqs}{See Usage.}
-\item{match}{Defaults to \code{5}.}
-\item{mismatch}{Defaults to \code{-4}.}
-\item{matrix}{Defaults to \code{NULL}.}
-\item{alphabet}{Defaults to \code{"ACGT"}.}
-\item{n_sim}{Defaults to \code{200}.}
+\item{match}{Passed to \code{morie_msp_exact}. Defaults to \code{5}.}
+\item{mismatch}{Passed to \code{morie_msp_exact}. Defaults to \code{-4}.}
+\item{matrix}{Passed to \code{morie_msp_exact}.}
+\item{alphabet}{Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.}
+\item{n_sim}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 \item{seed}{Defaults to \code{0}.}
-\item{quantiles}{Defaults to \code{c(0.2, 0.9)}.}
+\item{quantiles}{A vector; indexed elementwise. Defaults to \code{c(0.2, 0.9)}.}
 }
 \description{
-Part of the blstn_native implementation; see the file header for the source it follows.
+A step of the blstn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lam}, \code{K}, \code{scores}.

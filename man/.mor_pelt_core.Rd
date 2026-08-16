@@ -8,13 +8,13 @@
 .mor_pelt_core(x, cost, penalty, min_seglen)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{cost}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{cost}{Passed to \code{.mor_cp_cost}.}
 \item{penalty}{See Usage.}
 \item{min_seglen}{See Usage.}
 }
 \description{
-Part of the pelt_native implementation; see the file header for the source it follows.
+A step of the pelt_native implementation. Called by \code{morie_pelt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{taus}, \code{objective}.

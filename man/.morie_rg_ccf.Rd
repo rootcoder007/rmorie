@@ -8,12 +8,12 @@
 .morie_rg_ccf(x, d, lags)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{d}{See Usage.}
-\item{lags}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{d}{A vector; its length is taken and its elements indexed.}
+\item{lags}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. Called by \code{Whopf}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

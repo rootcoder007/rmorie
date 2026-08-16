@@ -9,17 +9,17 @@ morie_cmlmer_compressed_lmm(y, M, K, clusters = NULL, X = NULL, compare_levels =
 }
 \arguments{
 \item{y}{See Usage.}
-\item{M}{See Usage.}
-\item{K}{See Usage.}
+\item{M}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{K}{Passed to \code{.cmlmer_rows}.}
 \item{clusters}{Defaults to \code{NULL}.}
-\item{X}{Defaults to \code{NULL}.}
-\item{compare_levels}{Defaults to \code{NULL}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.cmlmer_rows}.}
+\item{compare_levels}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{log_delta_lo}{Defaults to \code{-10}.}
 \item{log_delta_hi}{Defaults to \code{10}.}
 \item{max_iter}{Defaults to \code{200L}.}
 }
 \description{
-Part of the cmlmer_native implementation; see the file header for the source it follows.
+A step of the cmlmer_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value}, \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship}, \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n}, \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.

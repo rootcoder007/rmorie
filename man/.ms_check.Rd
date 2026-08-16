@@ -12,7 +12,7 @@
 \item{event}{See Usage.}
 }
 \description{
-Part of the survival_more implementation; see the file header for the source it follows.
+A step of the survival_more implementation. Called by \code{.ms_baseline}, \code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{t}, \code{e}.

@@ -45,10 +45,11 @@
 
 #' .trnsfr_cohort
 #'
-#' Part of the trnsfr_native implementation; see the file header for the
+#' A step of the trnsfr_native implementation. Called by \code{morie_trnsfr_balancing_weights}, \code{morie_trnsfr_transport_ate}, \code{morie_trnsfr_transport_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param S See Usage.
+#' @param S Passed to \code{.s03vec}.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .trnsfr_cohort <- function(S) {
@@ -69,9 +70,9 @@
 #' matrix (or vector) of predictors; returns list(coef=...) with the
 #' intercept first.
 #'
-#' @param rows See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param rows A matrix; passed to \code{as.matrix}.
+#' @param y A vector; indexed elementwise.
+#' @param w A vector; indexed elementwise.
 #' @return A list with \code{coef}.
 #' @export
 .trnsfr_wls <- function(rows, y, w) {
@@ -96,10 +97,10 @@
 #' logistic regression on the pooled data and returns, for each source
 #' unit, (1-pi)/pi, normalised to mean 1. Target units get 0.
 #'
-#' @param X See Usage.
-#' @param S See Usage.
+#' @param X Passed to \code{.s03mat}.
+#' @param S Passed to \code{.trnsfr_cohort}.
 #' @param trim Defaults to \code{0.001}.
-#' @param ridge Defaults to \code{1e-06}.
+#' @param ridge Passed to \code{.s03logit}. Defaults to \code{1e-06}.
 #' @return A list with \code{weights}, \code{pi}, \code{max_weight}, \code{ess}, \code{ess_fraction}, \code{n_source}, \code{coef}, \code{method}.
 #' @export
 morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
@@ -145,9 +146,9 @@ morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
 #' Xbar_target with Xtilde = (1, X). Weights may go negative, which is
 #' reported.
 #'
-#' @param X See Usage.
-#' @param S See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param X Passed to \code{.s03mat}.
+#' @param S Passed to \code{.trnsfr_cohort}.
+#' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
 #' @return A list with \code{weights}, \code{target_moments}, \code{achieved}, \code{max_imbalance}, \code{n_negative}, \code{positive_mass}, \code{method}.
 #' @export
 morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
@@ -187,17 +188,18 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
 
 #' morie_trnsfr_transport_ate
 #'
-#' Part of the trnsfr_native implementation; see the file header for the
+#' A step of the trnsfr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param W See Usage.
-#' @param X See Usage.
-#' @param S See Usage.
-#' @param method Defaults to \code{"dr"}.
-#' @param e Defaults to \code{NULL}.
-#' @param trim Defaults to \code{0.001}.
-#' @param ridge Defaults to \code{1e-06}.
+#' @param Y Passed to \code{.s03vec}.
+#' @param W Passed to \code{.s03vec}.
+#' @param X Passed to \code{.s03mat}.
+#' @param S Passed to \code{.trnsfr_cohort}.
+#' @param method One of \code{"balance"}, \code{"ipw"}, \code{"outcome"}. Defaults to \code{"dr"}.
+#' @param e Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param trim Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{0.001}.
+#' @param ridge Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{source_ate}, \code{outcome_route}, \code{n_source}, \code{n_target}, \code{method}, \code{diagnostics}, \code{assumption}.
 #' @export
 morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
@@ -293,17 +295,18 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
 
 #' morie_trnsfr_transfer_msm
 #'
-#' Part of the trnsfr_native implementation; see the file header for the
+#' A step of the trnsfr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param H See Usage.
+#' @param Y Passed to \code{.s03vec}.
+#' @param A Passed to \code{.s03vec}.
+#' @param H Passed to \code{.s03mat}.
 #' @param cohort See Usage.
 #' @param target Defaults to \code{0}.
-#' @param e Defaults to \code{NULL}.
-#' @param trim Defaults to \code{0.001}.
-#' @param ridge Defaults to \code{1e-06}.
+#' @param e Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param trim Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{0.001}.
+#' @param ridge Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{intercept}, \code{coef}, \code{weights}, \code{transport_weights}, \code{msm_weights}, \code{target}, \code{cohorts}, \code{n}, \code{method}.
 #' @export
 morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target=0, e=NULL,
@@ -363,7 +366,8 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target=0, e=NULL,
 
 #' morie_trnsfr_cheatsheet
 #'
-#' Part of the trnsfr_native implementation; see the file header for the
+#' A step of the trnsfr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

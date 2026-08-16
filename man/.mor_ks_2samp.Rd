@@ -12,7 +12,7 @@
 \item{b}{See Usage.}
 }
 \description{
-Part of the over_native implementation; see the file header for the source it follows.
+A step of the over_native implementation. Called by \code{morie_over}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus}, \code{d_minus}, \code{n_ties}.

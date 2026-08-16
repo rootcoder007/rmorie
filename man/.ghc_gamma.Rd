@@ -8,8 +8,8 @@
 .ghc_gamma(e, shape)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{shape}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
+\item{shape}{Numeric; combined arithmetically in the body.}
 }
 \description{
 1 Part of the pmpfit_native implementation; see the file header for the source it follows.

@@ -8,11 +8,11 @@
 .vepan_cds_frame(t, genome)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{genome}{See Usage.}
+\item{t}{A list; the body reads \code{$cds_end}, \code{$cds_start} from it.}
+\item{genome}{Passed to \code{morie_vepan_transcript_sequence}.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cds}, \code{coding}, \code{sg}.

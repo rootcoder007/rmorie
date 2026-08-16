@@ -11,7 +11,7 @@ alfRelu(x)
 \item{x}{See Usage.}
 }
 \description{
-Part of the alf_core implementation; see the file header for the source it follows.
+A step of the alf_core implementation. Called by \code{Alfevo}, \code{Alfplddt}, \code{Alfstrtr}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

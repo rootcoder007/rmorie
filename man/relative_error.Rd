@@ -8,11 +8,11 @@
 relative_error(X, M)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{M}{See Usage.}
+\item{X}{A vector; indexed elementwise.}
+\item{M}{Passed to \code{.meglt_mat}.}
 }
 \description{
-Part of the meglt_native implementation; see the file header for the source it follows.
+A step of the meglt_native implementation. Called by \code{morie_meglt}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

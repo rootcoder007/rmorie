@@ -8,10 +8,10 @@
 .flow_an_to_mat(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. Called by \code{.anomaly_score}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

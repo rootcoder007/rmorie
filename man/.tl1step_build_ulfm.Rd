@@ -8,9 +8,9 @@
 .tl1step_build_ulfm(Q, H_fn, Y, eps_max = 2, steps = 400)
 }
 \arguments{
-\item{Q}{See Usage.}
+\item{Q}{Passed to \code{.tl1step_as_numvec}.}
 \item{H_fn}{See Usage.}
-\item{Y}{See Usage.}
+\item{Y}{Passed to \code{.tl1step_as_numvec}.}
 \item{eps_max}{Defaults to \code{2}.}
 \item{steps}{Defaults to \code{400}.}
 }

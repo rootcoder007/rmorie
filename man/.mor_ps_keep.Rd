@@ -8,8 +8,8 @@
 .mor_ps_keep(ps, trim = c(0.1, 0.9), trim_type = "value")
 }
 \arguments{
-\item{ps}{See Usage.}
-\item{trim}{Defaults to \code{c(0.1, 0.9)}.}
+\item{ps}{A vector; its length is taken.}
+\item{trim}{Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.1, 0.9)}.}
 \item{trim_type}{Defaults to \code{"value"}.}
 }
 \description{

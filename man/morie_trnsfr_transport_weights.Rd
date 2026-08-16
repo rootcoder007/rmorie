@@ -8,10 +8,10 @@
 morie_trnsfr_transport_weights(X, S, trim = 0.001, ridge = 1e-06)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{S}{See Usage.}
+\item{X}{Passed to \code{.s03mat}.}
+\item{S}{Passed to \code{.trnsfr_cohort}.}
 \item{trim}{Defaults to \code{0.001}.}
-\item{ridge}{Defaults to \code{1e-06}.}
+\item{ridge}{Passed to \code{.s03logit}. Defaults to \code{1e-06}.}
 }
 \description{
 logistic regression on the pooled data and returns, for each source unit, (1-pi)/pi, normalised to mean 1. Target units get 0.

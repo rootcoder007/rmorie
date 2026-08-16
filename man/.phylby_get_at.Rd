@@ -8,11 +8,11 @@
 .phylby_get_at(node, path)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{A vector; indexed elementwise.}
 \item{path}{See Usage.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{.phylby_log_posterior}, \code{.phylby_step}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{node}, as built in the body.

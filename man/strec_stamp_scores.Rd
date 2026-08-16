@@ -8,16 +8,16 @@
 strec_stamp_scores(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL, attention = NULL)
 }
 \arguments{
-\item{embeddings}{See Usage.}
-\item{item_table}{See Usage.}
+\item{embeddings}{Passed to \code{.strec_as_rows}.}
+\item{item_table}{Passed to \code{.strec_as_rows}.}
 \item{Ws}{See Usage.}
 \item{Wt}{See Usage.}
 \item{bs}{Defaults to \code{NULL}.}
 \item{bt}{Defaults to \code{NULL}.}
-\item{attention}{Defaults to \code{NULL}.}
+\item{attention}{Optional; may be \code{NULL}. A list; the body reads \code{$m_a} from it.}
 }
 \description{
-Part of the strec_native implementation; see the file header for the source it follows.
+A step of the strec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{ranking}, \code{probability}, \code{score}, \code{h_s}, \code{h_t}, \code{attention_used}, \code{model}, \code{method}, \code{note}.

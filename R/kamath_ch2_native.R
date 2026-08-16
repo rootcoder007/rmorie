@@ -9,10 +9,11 @@
 
 #' .morie_km_softmax
 #'
-#' Part of the kamath_ch2_native implementation; see the file header for
+#' A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_attention_softmax}, \code{morie_kamath_decoder_token_distribution}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
+#' @param a Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .morie_km_softmax <- function(a) {
@@ -22,10 +23,11 @@
 
 #' .morie_km_probs
 #'
-#' Part of the kamath_ch2_native implementation; see the file header for
+#' A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_clm_loss}, \code{morie_kamath_gpt_unsupervised}, \code{morie_kamath_mlm_loss} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param p See Usage.
+#' @param p A vector; its length is taken.
 #' @param name See Usage.
 #' @return The value of \code{p}, as built in the body.
 #' @export

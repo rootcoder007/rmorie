@@ -12,7 +12,7 @@
 \item{cost}{Defaults to \code{0}.}
 }
 \description{
-Part of the itrgrf_native implementation; see the file header for the source it follows.
+A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

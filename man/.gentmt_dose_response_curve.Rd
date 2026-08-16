@@ -8,14 +8,14 @@
 .gentmt_dose_response_curve(y, A, H, doses = NULL, degree = 1)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{H}{See Usage.}
-\item{doses}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.gentmt_vec}.}
+\item{A}{Passed to \code{.gentmt_vec}.}
+\item{H}{Passed to \code{.gentmt_treatment_density}.}
+\item{doses}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{degree}{Defaults to \code{1}.}
 }
 \description{
-Part of the gentmt_native implementation; see the file header for the source it follows.
+A step of the gentmt_native implementation. Called by \code{morie_gentmt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{doses}, \code{curve}, \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.

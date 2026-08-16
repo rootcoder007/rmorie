@@ -8,10 +8,10 @@
 .ot_partial_plan(a, b, C, m)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{C}{See Usage.}
-\item{m}{See Usage.}
+\item{a}{A vector; its length is taken.}
+\item{b}{A vector; its length is taken.}
+\item{C}{Numeric; passed to \code{max}.}
+\item{m}{Numeric; combined arithmetically in the body.}
 }
 \description{
 column (Caffarelli and McCann 2010): the inequality-constrained problem becomes an ordinary balanced one and is solved exactly.

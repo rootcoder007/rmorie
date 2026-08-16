@@ -91,10 +91,11 @@
 
 #' .saigeg_sigmoid
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}, \code{.saigeg_logit_irls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .saigeg_sigmoid <- function(x) {
@@ -109,7 +110,8 @@
 
 #' .saigeg_pnorm
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_normal_pvalue}, \code{.saigeg_saddlepoint_pvalue}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -121,10 +123,11 @@
 
 #' .saigeg_variance
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_variance_ratio}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .saigeg_variance <- function(x) {
@@ -137,11 +140,12 @@
 
 #' .saigeg_design
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param n See Usage.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return Nothing; this branch always raises.
 #' @export
 .saigeg_design <- function(X, n) {
@@ -178,12 +182,13 @@
 
 #' .saigeg_logit_irls
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param D A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .saigeg_logit_irls <- function(D, y, ridge=1e-8) {
@@ -211,12 +216,13 @@
 
 #' .saigeg_fit_null
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param y A vector; its length is taken.
+#' @param X Passed to \code{.saigeg_design}.
+#' @param ridge Passed to \code{.saigeg_logit_irls}. Defaults to \code{1e-08}.
 #' @return A list with \code{mu}, \code{beta}.
 #' @export
 .saigeg_fit_null <- function(y, X, ridge=1e-8) {
@@ -229,7 +235,8 @@
 
 #' .saigeg_score_statistic
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -259,7 +266,8 @@
 
 #' .saigeg_cgf
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t See Usage.
@@ -292,16 +300,17 @@
 
 #' .saigeg_solve_saddle
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_saddlepoint_pvalue}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param G See Usage.
-#' @param mu See Usage.
-#' @param lo Defaults to \code{-50}.
-#' @param hi Defaults to \code{50}.
+#' @param s Numeric; combined arithmetically in the body.
+#' @param G Passed to \code{.saigeg_cgf}.
+#' @param mu Passed to \code{.saigeg_cgf}.
+#' @param lo Numeric; combined arithmetically in the body. Defaults to \code{-50}.
+#' @param hi Numeric; combined arithmetically in the body. Defaults to \code{50}.
 #' @param tol Defaults to \code{1e-11}.
-#' @param iters Defaults to \code{200}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A numeric value.
 #' @export
 .saigeg_solve_saddle <- function(s, G, mu, lo=-50, hi=50, tol=1e-11, iters=200) {
@@ -327,13 +336,14 @@
 
 #' .saigeg_saddlepoint_pvalue
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s See Usage.
-#' @param G See Usage.
-#' @param mu See Usage.
-#' @param two_sided Defaults to \code{TRUE}.
+#' @param G Passed to \code{.saigeg_cgf}.
+#' @param mu Passed to \code{.saigeg_cgf}.
+#' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K}, \code{K2}, \code{method}.
 #' @export
 .saigeg_saddlepoint_pvalue <- function(s, G, mu, two_sided=TRUE) {
@@ -380,12 +390,13 @@
 
 #' .saigeg_normal_pvalue
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s See Usage.
 #' @param variance See Usage.
-#' @param two_sided Defaults to \code{TRUE}.
+#' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{p_value}, \code{z}, \code{method}.
 #' @export
 .saigeg_normal_pvalue <- function(s, variance, two_sided=TRUE) {
@@ -407,7 +418,8 @@
 
 #' .saigeg_variance_ratio
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param scores_full See Usage.
@@ -435,7 +447,8 @@
 
 #' .saigeg_cheatsheet
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -448,15 +461,16 @@
 
 #' morie_saigeg
 #'
-#' Part of the saigeg_native implementation; see the file header for the
+#' A step of the saigeg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param G See Usage.
-#' @param X Defaults to \code{NULL}.
-#' @param mu Defaults to \code{NULL}.
+#' @param G Passed to \code{.saigeg_score_statistic}.
+#' @param X Passed to \code{.saigeg_fit_null}.
+#' @param mu Optional; may be \code{NULL}. Passed to \code{.saigeg_score_statistic}.
 #' @param ratio Defaults to \code{1}.
-#' @param two_sided Defaults to \code{TRUE}.
+#' @param two_sided Passed to \code{.saigeg_normal_pvalue}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{p_value}, \code{p_normal}, \code{score}, \code{variance}, \code{z}, \code{case_control_ratio}, \code{n_cases}, \code{n_controls}, \code{variance_ratio}, \code{saddlepoint}, \code{method}, \code{why}.
 #' @export
 morie_saigeg <- function(y, G, X=NULL, mu=NULL, ratio=1.0, two_sided=TRUE) {

@@ -9,12 +9,12 @@ surepi_ears_detect(counts, method = "C2", threshold = 3, sigma_floor = 1)
 }
 \arguments{
 \item{counts}{See Usage.}
-\item{method}{Defaults to \code{"C2"}.}
+\item{method}{Compared against \code{"C3"}. Defaults to \code{"C2"}.}
 \item{threshold}{Defaults to \code{3}.}
-\item{sigma_floor}{Defaults to \code{1}.}
+\item{sigma_floor}{Passed to \code{.surepi_stat}. Defaults to \code{1}.}
 }
 \description{
-Part of the surepi_native implementation; see the file header for the source it follows.
+A step of the surepi_native implementation. Called by \code{surepi_c1_mild}, \code{surepi_c2_medium}, \code{surepi_c3_ultra}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged}, \code{method}, \code{threshold}, \code{baseline_lag}, \code{baseline_width}, \code{sigma_floor}, \code{n}, \code{n_evaluable}, \code{reference}, \code{caveat}.

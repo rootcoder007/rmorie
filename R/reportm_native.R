@@ -30,10 +30,11 @@
 
 #' .mor_lcg_unif
 #'
-#' Part of the reportm_native implementation; see the file header for
+#' A step of the reportm_native implementation. Called by \code{morie_reportm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param e See Usage.
+#' @param e A list; the body reads \code{$s} from it.
 #' @return A numeric value.
 #' @export
 .mor_lcg_unif <- function(e) {

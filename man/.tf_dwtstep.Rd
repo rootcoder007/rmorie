@@ -8,12 +8,12 @@
 .tf_dwtstep(a, h, g)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{h}{See Usage.}
-\item{g}{See Usage.}
+\item{a}{A vector; its length is taken and its elements indexed.}
+\item{h}{A vector; its length is taken.}
+\item{g}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{Wpt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lo}, \code{hi}.

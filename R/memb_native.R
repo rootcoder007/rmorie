@@ -35,19 +35,21 @@
 
 #' .memb_sigmoid
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .memb_sigmoid <- function(x) 1 / (1 + exp(-x))
 #' .memb_softmax
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .memb_softmax <- function(z) {
@@ -58,12 +60,13 @@
 
 #' logistic_trainer
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param l2 Defaults to \code{0.001}.
+#' @param l2 Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @param epochs Defaults to \code{300L}.
-#' @param lr Defaults to \code{0.5}.
+#' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param seed Defaults to \code{0}.
 #' @return The value of \code{train}, as built in the body.
 #' @export
@@ -110,11 +113,12 @@ logistic_trainer <- function(l2 = 1e-3, epochs = 300L, lr = 0.5, seed = 0) {
 
 #' knn_trainer
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param k Defaults to \code{1L}.
-#' @param smoothing Defaults to \code{0.001}.
+#' @param k A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.
+#' @param smoothing A count; the body uses it as \code{rep(...)}. Defaults to \code{0.001}.
 #' @return The value of \code{train}, as built in the body.
 #' @export
 knn_trainer <- function(k = 1L, smoothing = 1e-3) {
@@ -150,14 +154,15 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
 
 #' attack_dataset
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param model_predict See Usage.
-#' @param in_X See Usage.
-#' @param in_y See Usage.
-#' @param out_X See Usage.
-#' @param out_y See Usage.
+#' @param in_X A vector; its length is taken.
+#' @param in_y A vector; indexed elementwise.
+#' @param out_X A vector; its length is taken.
+#' @param out_y A vector; indexed elementwise.
 #' @return A list with \code{rows}, \code{labels}, \code{classes}.
 #' @export
 attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
@@ -183,17 +188,18 @@ attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
 
 #' synthesize
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param target_predict See Usage.
-#' @param c See Usage.
-#' @param n_features See Usage.
+#' @param c Numeric; combined arithmetically in the body.
+#' @param n_features A count; the body uses it as \code{seq_len(...)}.
 #' @param feature_values Defaults to \code{NULL}.
 #' @param k_max Defaults to \code{NULL}.
-#' @param k_min Defaults to \code{1L}.
+#' @param k_min Numeric; passed to \code{max}. Defaults to \code{1L}.
 #' @param conf_min Defaults to \code{0.8}.
-#' @param iter_max Defaults to \code{1000L}.
+#' @param iter_max A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.
 #' @param rej_max Defaults to \code{10L}.
 #' @param seed Defaults to \code{0}.
 #' @return Nothing; the function is called for its effect.
@@ -268,11 +274,12 @@ synthesize <- function(target_predict, c, n_features, feature_values = NULL,
 
 #' synthesize_marginals
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param n See Usage.
+#' @param X A vector; its length is taken and its elements indexed.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param seed Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -295,10 +302,11 @@ synthesize_marginals <- function(X, n, seed = 0) {
 
 #' synthesize_noisy
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A vector; indexed elementwise.
 #' @param fraction Defaults to \code{0.1}.
 #' @param feature_values Defaults to \code{NULL}.
 #' @param seed Defaults to \code{0}.
@@ -331,7 +339,8 @@ synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
 
 #' precision_recall
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pred See Usage.
@@ -353,11 +362,12 @@ precision_recall <- function(pred, truth) {
 
 #' .memb_sorted_features
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param vec See Usage.
-#' @param top Defaults to \code{NULL}.
+#' @param top Optional; may be \code{NULL}. Numeric; passed to \code{min}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .memb_sorted_features <- function(vec, top = NULL) {
@@ -367,17 +377,18 @@ precision_recall <- function(pred, truth) {
 
 #' memb
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param target_predict See Usage.
 #' @param shadow_data See Usage.
-#' @param eval_in See Usage.
-#' @param eval_out See Usage.
+#' @param eval_in A vector; indexed elementwise.
+#' @param eval_out A vector; indexed elementwise.
 #' @param train_fn Defaults to \code{NULL}.
 #' @param attack_train_fn Defaults to \code{NULL}.
 #' @param n_shadow Defaults to \code{NULL}.
-#' @param sort_features Defaults to \code{FALSE}.
+#' @param sort_features A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param threshold Defaults to \code{0.5}.
 #' @return A list with \code{estimate}, \code{metrics}, \code{per_class}, \code{predictions}, \code{scores}, \code{truth}, \code{n_shadow}, \code{attack_train_size}, \code{attack_classes}, \code{threshold}, \code{note}, \code{method}.
 #' @export
@@ -456,7 +467,8 @@ membership_inference <- memb
 
 #' .memb_cheatsheet
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. Called by \code{morie_memb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -477,10 +489,11 @@ membership_inference <- memb
 
 #' morie_memb
 #'
-#' Part of the memb_native implementation; see the file header for the
+#' A step of the memb_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param op See Usage.
+#' @param op A vector; its length is taken.
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export

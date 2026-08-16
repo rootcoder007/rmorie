@@ -8,10 +8,10 @@
 .s03median(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{sort}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.dnnheadweights}, \code{.s03mad}, \code{Epicur} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,12 +8,12 @@
 .icc_balanced(y, group, who)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{group}{See Usage.}
+\item{y}{Passed to \code{.s03vec}.}
+\item{group}{Passed to \code{.s03vec}.}
 \item{who}{See Usage.}
 }
 \description{
-Part of the icc1 implementation; see the file header for the source it follows.
+A step of the icc1 implementation. Called by \code{Icc1}, \code{Icc2}, \code{Icc3}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rows}, \code{n}, \code{k}.

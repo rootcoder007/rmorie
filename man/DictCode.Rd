@@ -8,9 +8,9 @@
 DictCode(Y, D, sparsity, tol = 1e-12)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{D}{See Usage.}
-\item{sparsity}{See Usage.}
+\item{Y}{Passed to \code{.morie_bx_mat}.}
+\item{D}{Passed to \code{.morie_bx_mat}.}
+\item{sparsity}{Passed to \code{.morie_bx_omp}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{

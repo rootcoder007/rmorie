@@ -11,7 +11,7 @@
 \item{t}{See Usage.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock}, \code{morie_itrans}, \code{morie_tsmixer}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

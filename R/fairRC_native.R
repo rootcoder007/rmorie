@@ -27,7 +27,8 @@
 
 #' cutoffs
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. Called by \code{.measure}, \code{.raw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param N See Usage.
@@ -44,11 +45,12 @@ cutoffs <- function(N, step = 10) {
 
 #' .shares
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. Called by \code{.raw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param protected See Usage.
-#' @param i See Usage.
+#' @param protected A vector; indexed elementwise.
+#' @param i A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .shares <- function(protected, i) {
@@ -57,11 +59,12 @@ cutoffs <- function(N, step = 10) {
 
 #' .raw
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. Called by \code{.measure}, \code{normalizer}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param protected See Usage.
-#' @param measure See Usage.
+#' @param protected A vector; its length is taken and its elements indexed.
+#' @param measure One of \code{"rKL"}, \code{"rND"}.
 #' @param step See Usage.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
@@ -95,9 +98,9 @@ cutoffs <- function(N, step = 10) {
 #'
 #' entirely last maximises the deviation at every cut-off.
 #'
-#' @param protected See Usage.
-#' @param measure Defaults to \code{"rND"}.
-#' @param step Defaults to \code{10}.
+#' @param protected A vector; its length is taken.
+#' @param measure Passed to \code{.raw}. Defaults to \code{"rND"}.
+#' @param step Passed to \code{.raw}. Defaults to \code{10}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 normalizer <- function(protected, measure = "rND", step = 10) {
@@ -112,13 +115,14 @@ normalizer <- function(protected, measure = "rND", step = 10) {
 
 #' .measure
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. Called by \code{rKL}, \code{rND}, \code{rRD}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param protected See Usage.
-#' @param measure See Usage.
-#' @param step See Usage.
-#' @param normalize See Usage.
+#' @param measure Passed to \code{.raw}.
+#' @param step Passed to \code{.raw}.
+#' @param normalize A flag; the body branches on it.
 #' @param caveat Defaults to \code{NULL}.
 #' @return The value of \code{pay}, as built in the body.
 #' @export
@@ -156,12 +160,13 @@ normalizer <- function(protected, measure = "rND", step = 10) {
 
 #' Normalised discounted difference
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. Called by \code{morie_fairRC}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param protected See Usage.
-#' @param step Defaults to \code{10}.
-#' @param normalize Defaults to \code{TRUE}.
+#' @param protected Passed to \code{.measure}.
+#' @param step Passed to \code{.measure}. Defaults to \code{10}.
+#' @param normalize Passed to \code{.measure}. Defaults to \code{TRUE}.
 #' @return The value of \code{.measure}.
 #' @export
 rND <- function(protected, step = 10, normalize = TRUE) {
@@ -171,12 +176,13 @@ rND <- function(protected, step = 10, normalize = TRUE) {
 
 #' Normalised discounted KL divergence
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. Called by \code{morie_fairRC}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param protected See Usage.
-#' @param step Defaults to \code{10}.
-#' @param normalize Defaults to \code{TRUE}.
+#' @param protected Passed to \code{.measure}.
+#' @param step Passed to \code{.measure}. Defaults to \code{10}.
+#' @param normalize Passed to \code{.measure}. Defaults to \code{TRUE}.
 #' @return The value of \code{.measure}.
 #' @export
 rKL <- function(protected, step = 10, normalize = TRUE) {
@@ -190,8 +196,8 @@ rKL <- function(protected, step = 10, normalize = TRUE) {
 #' symmetrically.
 #'
 #' @param protected See Usage.
-#' @param step Defaults to \code{10}.
-#' @param normalize Defaults to \code{TRUE}.
+#' @param step Passed to \code{.measure}. Defaults to \code{10}.
+#' @param normalize Passed to \code{.measure}. Defaults to \code{TRUE}.
 #' @return The value of \code{.measure}.
 #' @export
 rRD <- function(protected, step = 10, normalize = TRUE) {
@@ -209,7 +215,8 @@ rRD <- function(protected, step = 10, normalize = TRUE) {
 
 #' .fairRC_cheatsheet
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -237,11 +244,12 @@ fairnessrec <- rND
 # morie entry point
 #' Morie entry point
 #'
-#' Part of the fairRC_native implementation; see the file header for the
+#' A step of the fairRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param protected See Usage.
-#' @param measure Defaults to \code{"rND"}.
+#' @param measure One of \code{"rKL"}, \code{"rND"}. Defaults to \code{"rND"}.
 #' @param step Defaults to \code{10}.
 #' @param normalize Defaults to \code{TRUE}.
 #' @return One of two values, depending on the branch taken.

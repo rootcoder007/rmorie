@@ -8,10 +8,10 @@
 .karpv_u32(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{A list; the body reads \code{$s} from it.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{.karpv_below}, \code{.karpv_unit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

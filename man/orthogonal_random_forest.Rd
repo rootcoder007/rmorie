@@ -10,9 +10,9 @@ orthogonal_random_forest(Y, T, X, W, x_eval = NULL, n_trees = 100, min_leaf = 5,
 \arguments{
 \item{Y}{See Usage.}
 \item{T}{See Usage.}
-\item{X}{See Usage.}
-\item{W}{See Usage.}
-\item{x_eval}{Defaults to \code{NULL}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{W}{A matrix; passed to \code{as.matrix}.}
+\item{x_eval}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{n_trees}{Defaults to \code{100}.}
 \item{min_leaf}{Defaults to \code{5}.}
 \item{alpha}{Defaults to \code{0.05}.}
@@ -20,11 +20,11 @@ orthogonal_random_forest(Y, T, X, W, x_eval = NULL, n_trees = 100, min_leaf = 5,
 \item{seed}{Defaults to \code{0}.}
 \item{residualize}{Defaults to \code{"local"}.}
 \item{ridge}{Defaults to \code{1e-08}.}
-\item{kind}{Defaults to \code{"double-sample"}.}
+\item{kind}{Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.}
 \item{leave_one_out}{Defaults to \code{TRUE}.}
 }
 \description{
-Part of the orfgrf_native implementation; see the file header for the source it follows.
+A step of the orfgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n}, \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features}, \code{orthogonal}, \code{method}.

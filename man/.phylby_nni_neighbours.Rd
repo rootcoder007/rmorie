@@ -8,10 +8,10 @@
 .phylby_nni_neighbours(tree)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{Passed to \code{.phylby_subtrees}.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{.phylby_step}, \code{morie_phylby_nni_neighbours}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{uniq}, as built in the body.

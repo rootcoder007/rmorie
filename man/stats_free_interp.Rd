@@ -8,9 +8,9 @@
 stats_free_interp(beats, values, grid)
 }
 \arguments{
-\item{beats}{See Usage.}
-\item{values}{See Usage.}
-\item{grid}{See Usage.}
+\item{beats}{A vector; its length is taken and its elements indexed.}
+\item{values}{A vector; its length is taken and its elements indexed.}
+\item{grid}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 delegated so the R and Python arms resample identically

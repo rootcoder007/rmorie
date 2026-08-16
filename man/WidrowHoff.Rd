@@ -14,7 +14,7 @@ WidrowHoff(w, e, rvec, mu)
 \item{mu}{See Usage.}
 }
 \description{
-the book\\'s equation and is kept; folding it into mu silently halves every step size a reader transcribes from the text.  The stability bound 0 < mu < 1/lambda_max is reported against the input power.
+the book\'s equation and is kept; folding it into mu silently halves every step size a reader transcribes from the text.  The stability bound 0 < mu < 1/lambda_max is reported against the input power.
 }
 \value{
 A list with \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{factor_of_two_is_in_the_equation}, \code{stable_bound}, \code{within_bound}, \code{method}.

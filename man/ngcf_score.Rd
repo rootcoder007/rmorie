@@ -8,12 +8,12 @@
 ngcf_score(final, u, i)
 }
 \arguments{
-\item{final}{See Usage.}
+\item{final}{A matrix; indexed by row and column.}
 \item{u}{See Usage.}
 \item{i}{See Usage.}
 }
 \description{
-Part of the ngcf_native implementation; see the file header for the source it follows.
+A step of the ngcf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

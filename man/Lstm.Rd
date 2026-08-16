@@ -8,15 +8,15 @@
 Lstm(sequences, labels = NULL, hidden = 8, ridge = 1e-06, seed = 1, weights = NULL)
 }
 \arguments{
-\item{sequences}{See Usage.}
-\item{labels}{Defaults to \code{NULL}.}
+\item{sequences}{A vector; its length is taken.}
+\item{labels}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
 \item{hidden}{Defaults to \code{8}.}
 \item{ridge}{Defaults to \code{1e-06}.}
-\item{seed}{Defaults to \code{1}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{seed}{Passed to \code{.morie_bx_rng}. Defaults to \code{1}.}
+\item{weights}{Optional; may be \code{NULL}. A list; the body reads \code{$bias} from it.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{hidden}, \code{cell}, \code{predictions}, \code{accuracy}, \code{readout}, \code{classes}, \code{method}.

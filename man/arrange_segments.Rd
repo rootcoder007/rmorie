@@ -8,10 +8,10 @@
 arrange_segments(segments)
 }
 \arguments{
-\item{segments}{See Usage.}
+\item{segments}{A vector; indexed elementwise.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{iterative_refine}, \code{morie_mafft}, \code{progressive_align}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{rev}.

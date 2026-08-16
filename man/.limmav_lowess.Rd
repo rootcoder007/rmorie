@@ -8,13 +8,13 @@
 .limmav_lowess(x, y, span = 0.5, iterations = 3)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{span}{Defaults to \code{0.5}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{span}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{iterations}{Defaults to \code{3}.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,8 +8,8 @@
 .rstrimmedh(n, p)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{p}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
 [(p+1)/2] Part of the helpers_rouss implementation; see the file header for the source it follows.

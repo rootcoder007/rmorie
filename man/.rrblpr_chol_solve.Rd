@@ -8,11 +8,11 @@
 .rrblpr_chol_solve(L, b)
 }
 \arguments{
-\item{L}{See Usage.}
-\item{b}{See Usage.}
+\item{L}{A matrix; indexed by row and column.}
+\item{b}{A vector; indexed elementwise.}
 }
 \description{
-Part of the rrblpr_native implementation; see the file header for the source it follows.
+A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}, \code{morie_rrblpr_rr_blup}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{x}, as built in the body.

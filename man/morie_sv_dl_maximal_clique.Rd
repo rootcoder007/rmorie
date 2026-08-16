@@ -9,7 +9,7 @@ morie_sv_dl_maximal_clique(members, edges)
 }
 \arguments{
 \item{members}{See Usage.}
-\item{edges}{See Usage.}
+\item{edges}{A matrix; indexed by row and column.}
 }
 \description{
 is e_min; then repeatedly the lowest-weight edge with exactly one endpoint inside, whose other endpoint is adjacent to every member.

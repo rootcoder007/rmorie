@@ -8,10 +8,10 @@
 .morie_km2_stable_desc(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_adalora_rank_allocation}, \code{morie_kamath_cross_encoder_rerank}, \code{morie_kamath_dense_passage_retrieval} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{order}.

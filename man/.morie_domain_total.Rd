@@ -8,8 +8,8 @@
 .morie_domain_total(y, w, mask)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{y}{A vector; indexed elementwise.}
+\item{w}{A vector; indexed elementwise.}
 \item{mask}{See Usage.}
 }
 \description{

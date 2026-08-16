@@ -8,11 +8,11 @@
 .stahdo_weight(r, cutoff)
 }
 \arguments{
-\item{r}{See Usage.}
+\item{r}{Numeric; combined arithmetically in the body.}
 \item{cutoff}{See Usage.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{.stahdo_stahel_donoho}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

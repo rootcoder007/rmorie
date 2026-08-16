@@ -8,12 +8,12 @@
 morie_survrsf_logrank_statistic(times, events, group)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{group}{See Usage.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; its length is taken and its elements indexed.}
+\item{group}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the survrsf_native implementation; see the file header for the source it follows.
+A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

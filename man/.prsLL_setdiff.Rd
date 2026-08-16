@@ -8,11 +8,11 @@
 .prsLL_setdiff(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{A vector; indexed elementwise.}
 \item{b}{See Usage.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \code{.prsLL_follow_sets}, \code{.prsLL_ll1_table}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

@@ -8,10 +8,10 @@
 .w501_shuffle_within(ord, clusters, us, pos)
 }
 \arguments{
-\item{ord}{See Usage.}
+\item{ord}{A vector; indexed elementwise.}
 \item{clusters}{See Usage.}
-\item{us}{See Usage.}
-\item{pos}{See Usage.}
+\item{us}{A vector; indexed elementwise.}
+\item{pos}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Python arm swap-for-swap.

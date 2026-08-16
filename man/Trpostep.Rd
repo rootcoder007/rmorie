@@ -35,7 +35,7 @@ delta, n, method.
 \description{
 Schulman, Levine, Moritz, Jordan and Abbeel (2015), Trust region policy
 optimization, ICML 37, 1889-1897 (arXiv:1502.05477 -- FETCHED),
-equation (14): maximise E\link{pi_theta(a|s)/pi_old(a|s) A} subject to
+equation (14): maximise E[pi_theta(a|s)/pi_old(a|s) A] subject to
 Dbar_KL^(rho_old)(theta_old, theta) <= delta -- the AVERAGE KL over the
 state distribution, substituted for the maximum KL of equation (12)
 because the max "is impractical to solve".  Section 6 solves the

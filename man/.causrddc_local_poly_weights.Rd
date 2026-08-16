@@ -8,15 +8,15 @@
 .causrddc_local_poly_weights(x, h, p, nu, kernel = "triangular", side = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{p}{See Usage.}
-\item{nu}{See Usage.}
-\item{kernel}{Defaults to \code{"triangular"}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{nu}{Numeric; combined arithmetically in the body.}
+\item{kernel}{Passed to \code{.causrddc_kern}. Defaults to \code{"triangular"}.}
 \item{side}{Defaults to \code{1}.}
 }
 \description{
-Part of the causrddc_native implementation; see the file header for the source it follows.
+A step of the causrddc_native implementation. Called by \code{morie_causrddc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{w}, \code{omega}.

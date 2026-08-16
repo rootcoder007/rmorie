@@ -8,14 +8,14 @@
 morie_survroc_roc_at(times, events, marker, t, route = "km")
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{marker}{See Usage.}
-\item{t}{See Usage.}
-\item{route}{Defaults to \code{"km"}.}
+\item{times}{Passed to \code{.survroc_clean}.}
+\item{events}{Passed to \code{.survroc_clean}.}
+\item{marker}{Passed to \code{.survroc_clean}.}
+\item{t}{Passed to \code{.survroc_pair}.}
+\item{route}{Passed to \code{.survroc_pair}. Defaults to \code{"km"}.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. Called by \code{morie_survroc}, \code{morie_survroc_auc_at}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

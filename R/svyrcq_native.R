@@ -7,14 +7,15 @@
 
 #' morie_svyrcq_survey_quantile_regression
 #'
-#' Part of the svyrcq_native implementation; see the file header for the
+#' A step of the svyrcq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
-#' @param tau Defaults to \code{0.5}.
+#' @param tau Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param weights Defaults to \code{NULL}.
-#' @param add_intercept Defaults to \code{TRUE}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param max_iter Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param eps Defaults to \code{1e-06}.
@@ -98,7 +99,8 @@ morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
 
 #' .svyrcq_cheatsheet
 #'
-#' Part of the svyrcq_native implementation; see the file header for the
+#' A step of the svyrcq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,9 +8,9 @@
 PvcLinDf(rr, ff, train = NULL)
 }
 \arguments{
-\item{rr}{See Usage.}
-\item{ff}{See Usage.}
-\item{train}{Defaults to \code{NULL}.}
+\item{rr}{A vector; its length is taken.}
+\item{ff}{A vector; its length is taken.}
+\item{train}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
 interval and a more complex waveshape, and the form factor of eq (5.26) turns the qualitative half of the clinical rule into a number.

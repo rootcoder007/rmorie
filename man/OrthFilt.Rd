@@ -11,7 +11,7 @@ OrthFilt(order = 4)
 \item{order}{Defaults to \code{4}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dec_lo}, \code{dec_hi}, \code{rec_lo}, \code{rec_hi}, \code{order}, \code{length}, \code{vanishing_moments}, \code{sum_lo}, \code{norm_lo}, \code{max_shift_inner_product}, \code{method}.

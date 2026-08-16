@@ -10,10 +10,10 @@
 \arguments{
 \item{x}{See Usage.}
 \item{y}{See Usage.}
-\item{p}{Defaults to \code{2}.}
+\item{p}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsw}, \code{Otws2}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -10,7 +10,7 @@ LinConv(x, h, causal = TRUE)
 \arguments{
 \item{x}{See Usage.}
 \item{h}{See Usage.}
-\item{causal}{Defaults to \code{TRUE}.}
+\item{causal}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 causality assumed as the book states under eq (3.37).  eq (3.39) reads the same sum as delayed, weighted copies of h; those copies are returned so the overlap of Figure 3.19 is visible.

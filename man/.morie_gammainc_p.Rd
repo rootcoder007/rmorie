@@ -8,8 +8,8 @@
 .morie_gammainc_p(a, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
 }
 \description{
 Lentz continued fraction for the complement otherwise.

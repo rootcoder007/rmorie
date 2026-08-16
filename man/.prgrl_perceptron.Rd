@@ -8,14 +8,14 @@
 .prgrl_perceptron(X, y, order, updates, w0)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{order}{See Usage.}
+\item{X}{A vector; indexed elementwise.}
+\item{y}{A vector; indexed elementwise.}
+\item{order}{A vector; its length is taken and its elements indexed.}
 \item{updates}{See Usage.}
 \item{w0}{See Usage.}
 }
 \description{
-Part of the prgrl_native implementation; see the file header for the source it follows.
+A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{w}, as built in the body.

@@ -12,16 +12,16 @@ bcq(dataset, states = NULL, actions = NULL, tau = 0.3, gamma = 0.99, lr = 0.5, i
 \item{states}{Defaults to \code{NULL}.}
 \item{actions}{Defaults to \code{NULL}.}
 \item{tau}{Defaults to \code{0.3}.}
-\item{gamma}{Defaults to \code{0.99}.}
-\item{lr}{Defaults to \code{0.5}.}
+\item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.99}.}
+\item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{iters}{Defaults to \code{2000}.}
-\item{loss}{Defaults to \code{"huber"}.}
-\item{huber_c}{Defaults to \code{1}.}
-\item{behavior}{Defaults to \code{NULL}.}
+\item{loss}{One of \code{"huber"}, \code{"squared"}. Defaults to \code{"huber"}.}
+\item{huber_c}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{behavior}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{
-Part of the bcq_native implementation; see the file header for the source it follows.
+A step of the bcq_native implementation. Called by \code{morie_bcq}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{q}, \code{policy}, \code{allowed}, \code{behavior}, \code{value}, \code{n_eliminated}, \code{bellman_error}, \code{tau}, \code{gamma}, \code{n_transitions}, \code{method}.

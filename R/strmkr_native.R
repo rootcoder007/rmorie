@@ -8,10 +8,11 @@
 
 #' .strmkr_rows
 #'
-#' Part of the strmkr_native implementation; see the file header for the
+#' A step of the strmkr_native implementation. Called by \code{morie_strmkr_strauss_process}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .strmkr_rows <- function(x) {
@@ -30,15 +31,16 @@
 
 #' morie_strmkr_strauss_process
 #'
-#' Part of the strmkr_native implementation; see the file header for the
+#' A step of the strmkr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param coords See Usage.
+#' @param coords Passed to \code{.strmkr_rows}.
 #' @param r See Usage.
 #' @param gamma Defaults to \code{NULL}.
 #' @param window Defaults to \code{NULL}.
-#' @param nx Defaults to \code{12L}.
-#' @param ny Defaults to \code{12L}.
+#' @param nx A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
+#' @param ny A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
 #' @param max_iter Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-11}.
 #' @return The value of \code{out}, as built in the body.
@@ -189,7 +191,8 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
 
 #' .strmkr_cheatsheet
 #'
-#' Part of the strmkr_native implementation; see the file header for the
+#' A step of the strmkr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

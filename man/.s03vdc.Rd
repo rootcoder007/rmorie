@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{i}{See Usage.}
-\item{base}{Defaults to \code{2L}.}
+\item{base}{Numeric; combined arithmetically in the body. Defaults to \code{2L}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.bt_counts}, \code{.rfcand}, \code{.s03mammen} and 22 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

@@ -10,10 +10,10 @@ Ztrans(x, z = NULL, n0 = 0)
 \arguments{
 \item{x}{See Usage.}
 \item{z}{Defaults to \code{NULL}.}
-\item{n0}{Defaults to \code{0}.}
+\item{n0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the rangayyan_xfrm implementation; see the file header for the source it follows.
+A step of the rangayyan_xfrm implementation. Called by \code{Zfm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

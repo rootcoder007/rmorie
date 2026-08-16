@@ -15,11 +15,12 @@
 
 #' .fdtrapz
 #'
-#' Part of the helpers_fda implementation; see the file header for the
+#' A step of the helpers_fda implementation. Called by \code{Scfd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param v See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .fdtrapz <- function(t, v) {
@@ -32,22 +33,24 @@
 
 #' .fdgrid
 #'
-#' Part of the helpers_fda implementation; see the file header for the
+#' A step of the helpers_fda implementation. Called by \code{Scfd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .fdgrid <- function(n) (seq_len(n) - 1) / (n - 1)
 
 #' .fdcolmeans
 #'
-#' Part of the helpers_fda implementation; see the file header for the
+#' A step of the helpers_fda implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param nr See Usage.
-#' @param nc See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param nr A count; the body uses it as \code{seq_len(...)}.
+#' @param nc A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .fdcolmeans <- function(A, nr, nc) {

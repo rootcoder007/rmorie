@@ -199,7 +199,7 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
 #' to the first base in alphabetical order -- an arbitrary rule, but a
 #' STATED arbitrary rule, which is what makes the two arms agree.
 #'
-#' @param col See Usage.
+#' @param col A list; the body reads \code{$-}, \code{$A}, \code{$C}, \code{$G}, \code{$T} from it.
 #' @param draft_base See Usage.
 #' @param min_depth See Usage.
 #' @param min_frac See Usage.

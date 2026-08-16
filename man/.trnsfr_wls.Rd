@@ -8,9 +8,9 @@
 .trnsfr_wls(rows, y, w)
 }
 \arguments{
-\item{rows}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{rows}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A vector; indexed elementwise.}
+\item{w}{A vector; indexed elementwise.}
 }
 \description{
 matrix (or vector) of predictors; returns list(coef=...) with the intercept first.

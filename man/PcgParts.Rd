@@ -8,10 +8,10 @@
 PcgParts(pcg, ecg, cp, fs)
 }
 \arguments{
-\item{pcg}{See Usage.}
-\item{ecg}{See Usage.}
-\item{cp}{See Usage.}
-\item{fs}{See Usage.}
+\item{pcg}{A vector; its length is taken and its elements indexed.}
+\item{ecg}{A vector; its length is taken.}
+\item{cp}{A vector; its length is taken.}
+\item{fs}{Passed to \code{.morie_qrs_fs}.}
 }
 \description{
 ECG and the carotid pulse because S1 and S2 are not reliably the loudest events in a PCG once murmurs are present.

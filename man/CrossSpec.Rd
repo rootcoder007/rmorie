@@ -8,8 +8,8 @@
 CrossSpec(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Passed to \code{.morie_spx_chkv}.}
+\item{y}{Passed to \code{.morie_spx_chkv}.}
 }
 \description{
 MEAN-REMOVED records (Brillinger 2001, Ch. 7).  NOT in Schabenberger & Gotway -- a fixed-string search for "cross-spectr" finds one bibliography entry and no method.  Zero frequency dropped.

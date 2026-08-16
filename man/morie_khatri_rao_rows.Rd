@@ -8,11 +8,11 @@
 morie_khatri_rao_rows(A, B)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
+\item{B}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the gp_mvsml_ch9_14 implementation; see the file header for the source it follows.
+A step of the gp_mvsml_ch9_14 implementation. Called by \code{Apxkern}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -13,10 +13,11 @@
 
 #' .ghc_svd
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. Called by \code{lsa_decompose}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return A list with \code{T}, \code{S}, \code{Dt}.
 #' @export
 .ghc_svd <- function(A) {
@@ -27,11 +28,12 @@
 
 #' term_weighting
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. Called by \code{lsa_decompose}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
-#' @param how Defaults to \code{"log_entropy"}.
+#' @param how One of \code{"raw"}, \code{"tfidf"}. Defaults to \code{"log_entropy"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 term_weighting <- function(X, how = "log_entropy") {
@@ -67,7 +69,8 @@ term_weighting <- function(X, how = "log_entropy") {
 
 #' lsa_decompose
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. Called by \code{morie_lsa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -94,10 +97,11 @@ lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
 
 #' reconstruct
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. Called by \code{Singsd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model See Usage.
+#' @param model A list; the body reads \code{$D}, \code{$S}, \code{$T} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 reconstruct <- function(model) {
@@ -116,11 +120,12 @@ reconstruct <- function(model) {
 
 #' fold_in
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. Called by \code{morie_lsa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param query See Usage.
-#' @param model See Usage.
+#' @param model A list; the body reads \code{$S}, \code{$T} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 fold_in <- function(query, model) {
@@ -141,11 +146,12 @@ fold_in <- function(query, model) {
 
 #' cosine_ranking
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. Called by \code{morie_lsa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q_hat See Usage.
-#' @param model See Usage.
+#' @param q_hat A vector; indexed elementwise.
+#' @param model A list; the body reads \code{$D}, \code{$S} from it.
 #' @param top_k Defaults to \code{5}.
 #' @return A list with \code{ranking}, \code{scores}, \code{n_documents}.
 #' @export
@@ -176,7 +182,8 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
 
 #' .lsa_cheatsheet
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -190,7 +197,8 @@ lsa <- lsa_decompose
 
 #' morie_lsa
 #'
-#' Part of the lsa_native implementation; see the file header for the
+#' A step of the lsa_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.

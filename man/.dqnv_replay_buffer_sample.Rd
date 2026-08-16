@@ -8,12 +8,12 @@
 .dqnv_replay_buffer_sample(buf, n, rng_state)
 }
 \arguments{
-\item{buf}{See Usage.}
+\item{buf}{A list; the body reads \code{$data} from it.}
 \item{n}{See Usage.}
-\item{rng_state}{See Usage.}
+\item{rng_state}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the dqnv_native implementation; see the file header for the source it follows.
+A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{state}, \code{samples}.

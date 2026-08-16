@@ -18,7 +18,8 @@
 
 #' .painn_vec
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{scalar_vector_message}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -28,7 +29,8 @@
 
 #' .painn_mat
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param M See Usage.
@@ -45,10 +47,11 @@
 
 #' vector_norm
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. Called by \code{gated_update}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{.painn_mat}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 vector_norm <- function(v) {
@@ -65,12 +68,13 @@ vector_norm <- function(v) {
 
 #' scalar_vector_message
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s_j See Usage.
-#' @param v_j See Usage.
-#' @param r_ij See Usage.
+#' @param s_j Passed to \code{.painn_vec}.
+#' @param v_j Passed to \code{.painn_mat}.
+#' @param r_ij Passed to \code{.painn_vec}.
 #' @param phi_s See Usage.
 #' @param phi_v See Usage.
 #' @param W_rbf See Usage.
@@ -107,13 +111,14 @@ scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
 
 #' gated_update
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param v See Usage.
-#' @param U See Usage.
-#' @param V See Usage.
+#' @param s Passed to \code{.painn_vec}.
+#' @param v Passed to \code{.painn_mat}.
+#' @param U A matrix; passed to \code{t}.
+#' @param V A matrix; passed to \code{t}.
 #' @param phi See Usage.
 #' @return A list with \code{ds}, \code{dv}, \code{scalar_from_vectors}, \code{note}.
 #' @export
@@ -150,12 +155,13 @@ gated_update <- function(s, v, U, V, phi) {
 
 #' dipole_moment
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param charges See Usage.
-#' @param R See Usage.
-#' @param centre Defaults to \code{NULL}.
+#' @param charges Passed to \code{.painn_vec}.
+#' @param R Passed to \code{.painn_mat}.
+#' @param centre Optional; may be \code{NULL}. Passed to \code{.painn_vec}.
 #' @return A list with \code{dipole}, \code{magnitude}, \code{note}.
 #' @export
 dipole_moment <- function(charges, R, centre = NULL) {
@@ -190,14 +196,15 @@ dipole_moment <- function(charges, R, centre = NULL) {
 
 #' morie_painn_equivariance_error
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param model See Usage.
 #' @param s See Usage.
-#' @param v See Usage.
-#' @param R See Usage.
-#' @param Q See Usage.
+#' @param v Passed to \code{.painn_mat}.
+#' @param R Passed to \code{.painn_mat}.
+#' @param Q Passed to \code{.painn_mat}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{scalar_error}, \code{vector_error}, \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.
 #' @export
@@ -243,7 +250,8 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
 
 #' .painn_cheatsheet
 #'
-#' Part of the painn_native implementation; see the file header for the
+#' A step of the painn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

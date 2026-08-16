@@ -8,10 +8,10 @@
 .rouge_get_refs_simple(reference)
 }
 \arguments{
-\item{reference}{See Usage.}
+\item{reference}{A vector; its length is taken.}
 }
 \description{
-Part of the rouge_native implementation; see the file header for the source it follows.
+A step of the rouge_native implementation. Called by \code{morie_rouge_l}, \code{morie_rouge_w}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

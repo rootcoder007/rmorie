@@ -8,10 +8,10 @@
 .trnsfr_cohort(S)
 }
 \arguments{
-\item{S}{See Usage.}
+\item{S}{Passed to \code{.s03vec}.}
 }
 \description{
-Part of the trnsfr_native implementation; see the file header for the source it follows.
+A step of the trnsfr_native implementation. Called by \code{morie_trnsfr_balancing_weights}, \code{morie_trnsfr_transport_ate}, \code{morie_trnsfr_transport_weights}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{s}, as built in the body.

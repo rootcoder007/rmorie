@@ -8,13 +8,13 @@
 morie_flow_an(X, layers, threshold_quantile = 0.95, reference = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{layers}{See Usage.}
-\item{threshold_quantile}{Defaults to \code{0.95}.}
-\item{reference}{Defaults to \code{NULL}.}
+\item{X}{Passed to \code{.anomaly_score}.}
+\item{layers}{Passed to \code{.anomaly_score}.}
+\item{threshold_quantile}{Passed to \code{.anomaly_score}. Defaults to \code{0.95}.}
+\item{reference}{Passed to \code{.anomaly_score}.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.anomaly_score}.

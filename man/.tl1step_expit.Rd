@@ -8,10 +8,10 @@
 .tl1step_expit(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tl1step_native implementation; see the file header for the source it follows.
+A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

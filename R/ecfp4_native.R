@@ -20,11 +20,12 @@
 
 #' .mor_fp_mix
 #'
-#' Part of the ecfp4_native implementation; see the file header for the
+#' A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants}, \code{.mor_fp_morgan}, \code{morie_rdkfp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h See Usage.
-#' @param v See Usage.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .mor_fp_mix <- function(h, v) (h * .MOR_FP_MUL + (v %% .MOR_FP_MOD)) %% .MOR_FP_MOD
@@ -35,7 +36,7 @@
 #'
 #' order (i ascending, then j > i ascending)
 #'
-#' @param adjacency See Usage.
+#' @param adjacency A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{a}, \code{i}, \code{j}, \code{o}.
 #' @export
 .mor_fp_bonds <- function(adjacency) {
@@ -54,16 +55,17 @@
 
 #' .mor_fp_invariants
 #'
-#' Part of the ecfp4_native implementation; see the file header for the
+#' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param bd See Usage.
-#' @param atomnum See Usage.
-#' @param numhs See Usage.
-#' @param charge See Usage.
-#' @param inring See Usage.
-#' @param isotope_delta See Usage.
+#' @param a A count; the body uses it as \code{seq_len(...)}.
+#' @param bd A list; the body reads \code{$i}, \code{$j} from it.
+#' @param atomnum A vector; indexed elementwise.
+#' @param numhs A vector; indexed elementwise.
+#' @param charge A vector; indexed elementwise.
+#' @param inring A vector; indexed elementwise.
+#' @param isotope_delta A vector; indexed elementwise.
 #' @return The value of \code{inv}, as built in the body.
 #' @export
 .mor_fp_invariants <- function(a, bd, atomnum, numhs, charge, inring,
@@ -88,10 +90,11 @@
 # canonical key of a bond set: sorted 0-based indices, four digits each
 #' Canonical key of a bond set: sorted 0-based indices, four digits each
 #'
-#' Part of the ecfp4_native implementation; see the file header for the
+#' A step of the ecfp4_native implementation. Called by \code{.mor_fp_morgan}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bs See Usage.
+#' @param bs A vector; its length is taken.
 #' @return A character value.
 #' @export
 .mor_fp_envkey <- function(bs) {
@@ -101,15 +104,16 @@
 
 #' .mor_fp_morgan
 #'
-#' Part of the ecfp4_native implementation; see the file header for the
+#' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}, \code{morie_fcfp4}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param bd See Usage.
+#' @param a A count; the body uses it as \code{seq_len(...)}.
+#' @param bd A list; the body reads \code{$i}, \code{$j}, \code{$o} from it.
 #' @param invariants See Usage.
 #' @param radius See Usage.
-#' @param nbits See Usage.
-#' @param use_bond_order Defaults to \code{TRUE}.
+#' @param nbits A count; the body uses it as \code{integer(...)}.
+#' @param use_bond_order A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{bits}, \code{count}, \code{ident}.
 #' @export
 .mor_fp_morgan <- function(a, bd, invariants, radius, nbits,
@@ -195,10 +199,11 @@
 
 #' .mor_fp_defaults
 #'
-#' Part of the ecfp4_native implementation; see the file header for the
+#' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a A count; the body uses it as \code{rep(...)}.
 #' @param numhs See Usage.
 #' @param charge See Usage.
 #' @param inring See Usage.

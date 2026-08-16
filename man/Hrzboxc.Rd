@@ -31,22 +31,22 @@ list: estimate, lambda_hat, beta_hat, criterion, resid, n, method.
 }
 \description{
 Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
-Econometrics, Springer, Section 6.1.2, page 195 (volume \link{Pages 189-232},
+Econometrics, Springer, Section 6.1.2, page 195 (volume [Pages 189-232],
 read as a rendered page image).  The model is (6.2) with T the Box-Cox
 transformation (6.3), page 190, T(y, a) = (y^a - 1)/a for a nonzero and
 log y at a = 0, and F_U left unrestricted.  For any candidate a the slope
 solves the ordinary least-squares problem printed at the top of p. 195,
 b_n(a) = (sum_i X_i X_i')^-1 sum_i X_i T(Y_i, a); the residuals
 U_hat_i = T(Y_i, a) - X_i b_n(a) give the empirical CDF
-F_n\link{u; a, b_n(a)} = n^-1 sum_i I(U_hat_i < u); and since
-P(Y < y) = E F_U\link{T(y, a) - X beta}, alpha is estimated by minimising
-R_n\link{a, b_n(a)} = n^-1 sum_i integral over u of
-{I(Y_i < u) - F_n\link{T(u, a) - X_i b_n(a)}}^2 w(u) du.
+F_n[u; a, b_n(a)] = n^-1 sum_i I(U_hat_i < u); and since
+P(Y < y) = E F_U[T(y, a) - X beta], alpha is estimated by minimising
+R_n[a, b_n(a)] = n^-1 sum_i integral over u of
+{I(Y_i < u) - F_n[T(u, a) - X_i b_n(a)]}^2 w(u) du.
 }
 \details{
 BOOK NOTE.  The displayed criterion on p. 195 prints the inner argument as
 T(y, a); y is not bound anywhere in the expression while u is the variable
-of integration, and the identity P(Y < y) = E F_U\link{T(y, a) - X beta} two
+of integration, and the identity P(Y < y) = E F_U[T(y, a) - X beta] two
 lines above fixes the reading: it is T(u, a).  That is what is implemented.
 
 The weight w is, as the book requires, positive, deterministic and bounded:

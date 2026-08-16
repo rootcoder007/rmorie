@@ -8,11 +8,11 @@
 .vepan_char(s, k)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{k}{See Usage.}
+\item{s}{Character; passed to \code{substr}.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{.vepan_cds_frame}, \code{.vepan_coding_terms}, \code{.vepan_hgvs_c}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{substr}.

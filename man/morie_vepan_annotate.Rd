@@ -8,14 +8,14 @@
 morie_vepan_annotate(variant, transcripts, genome, upstream = 5000, downstream = 5000)
 }
 \arguments{
-\item{variant}{See Usage.}
+\item{variant}{Passed to \code{.vepan_variant}.}
 \item{transcripts}{See Usage.}
 \item{genome}{See Usage.}
 \item{upstream}{Defaults to \code{5000}.}
 \item{downstream}{Defaults to \code{5000}.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{morie_vepan_vep_annotation}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

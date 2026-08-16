@@ -8,11 +8,11 @@
 quantile_bins(samples, n_bins = 4096L)
 }
 \arguments{
-\item{samples}{See Usage.}
+\item{samples}{Passed to \code{.chronos_vec}.}
 \item{n_bins}{Defaults to \code{4096L}.}
 }
 \description{
-Part of the chronos_native implementation; see the file header for the source it follows.
+A step of the chronos_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}, \code{caveat}.

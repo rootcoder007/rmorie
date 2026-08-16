@@ -10,12 +10,12 @@ PcgEeg(pcg, eeg, fs, n_segments = 8, band = c(1, 100))
 \arguments{
 \item{pcg}{See Usage.}
 \item{eeg}{See Usage.}
-\item{fs}{See Usage.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{n_segments}{Defaults to \code{8}.}
-\item{band}{Defaults to \code{c(1, 100)}.}
+\item{band}{A vector; indexed elementwise. Defaults to \code{c(1, 100)}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{freq_hz}, \code{coherence}, \code{coherence_sq}, \code{phase_rad}, \code{peak_coherence}, \code{peak_freq_hz}, \code{mean_coherence}, \code{delay_ms_at_peak}, \code{significance_level}, \code{n_segments}, \code{segment_samples}, \code{band_hz}, \code{fs_hz}, \code{units}, \code{method}.

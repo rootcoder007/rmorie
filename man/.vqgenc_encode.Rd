@@ -8,13 +8,13 @@
 .vqgenc_encode(vectors, codebook, beta = 0.25, target = NULL)
 }
 \arguments{
-\item{vectors}{See Usage.}
-\item{codebook}{See Usage.}
-\item{beta}{Defaults to \code{0.25}.}
-\item{target}{Defaults to \code{NULL}.}
+\item{vectors}{Passed to \code{.vqgenc_quantize}.}
+\item{codebook}{Passed to \code{.vqgenc_quantize}.}
+\item{beta}{Passed to \code{.vqgenc_commitment_loss}. Defaults to \code{0.25}.}
+\item{target}{Optional; may be \code{NULL}. Passed to \code{.vqgenc_as_matrix}.}
 }
 \description{
-Part of the vqgenc_native implementation; see the file header for the source it follows.
+A step of the vqgenc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{indices}, \code{codes}, \code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss}, \code{usage_fraction}, \code{method}, \code{note}.

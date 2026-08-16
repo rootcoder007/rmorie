@@ -12,7 +12,7 @@
 \item{base}{Defaults to \code{2}.}
 }
 \description{
-Part of the b2info implementation; see the file header for the source it follows.
+A step of the b2info implementation. Called by \code{.b2kl}, \code{.b2xlogx}, \code{Compshan} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

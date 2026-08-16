@@ -11,7 +11,7 @@ morie_sarimax(...)
 \item{...}{Passed through.}
 }
 \description{
-Part of the sarimax_native implementation; see the file header for the source it follows.
+A step of the sarimax_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.sarimax_fit}.

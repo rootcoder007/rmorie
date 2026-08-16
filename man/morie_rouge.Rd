@@ -8,15 +8,15 @@
 morie_rouge(candidate, reference, variant = "L", n = 1, alpha = 1.2, beta = 1)
 }
 \arguments{
-\item{candidate}{See Usage.}
-\item{reference}{See Usage.}
+\item{candidate}{Passed to \code{morie_rouge_l}.}
+\item{reference}{Passed to \code{morie_rouge_l}.}
 \item{variant}{Defaults to \code{"L"}.}
-\item{n}{Defaults to \code{1}.}
-\item{alpha}{Defaults to \code{1.2}.}
-\item{beta}{Defaults to \code{1}.}
+\item{n}{Passed to \code{morie_rouge_n}. Defaults to \code{1}.}
+\item{alpha}{Passed to \code{morie_rouge_w}. Defaults to \code{1.2}.}
+\item{beta}{Passed to \code{morie_rouge_l}. Defaults to \code{1}.}
 }
 \description{
-Part of the rouge_native implementation; see the file header for the source it follows.
+A step of the rouge_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

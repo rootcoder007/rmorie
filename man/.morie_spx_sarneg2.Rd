@@ -8,13 +8,13 @@
 .morie_spx_sarneg2(y, X, W, rho)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{W}{See Usage.}
-\item{rho}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{X}{Passed to \code{.morie_spx_matmul}.}
+\item{W}{Numeric; combined arithmetically in the body.}
+\item{rho}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{SpErrMod}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{v}, \code{b}, \code{s2}.

@@ -27,7 +27,8 @@
 
 #' The LTMLE-with-clustering entry point
 #'
-#' Part of the tlclust_native implementation; see the file header for
+#' A step of the tlclust_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Q_seq See Usage.
@@ -64,7 +65,8 @@ morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
 
 #' naive_variance
 #'
-#' Part of the tlclust_native implementation; see the file header for
+#' A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param ic See Usage.
@@ -81,7 +83,8 @@ naive_variance <- function(ic) {
 
 #' cluster_variance
 #'
-#' Part of the tlclust_native implementation; see the file header for
+#' A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param ic See Usage.
@@ -108,7 +111,8 @@ cluster_variance <- function(ic, cluster) {
 
 #' design_effect
 #'
-#' Part of the tlclust_native implementation; see the file header for
+#' A step of the tlclust_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param ic See Usage.
@@ -125,7 +129,8 @@ design_effect <- function(ic, cluster) {
 
 #' g_formula_pooled
 #'
-#' Part of the tlclust_native implementation; see the file header for
+#' A step of the tlclust_native implementation. Called by \code{morie_tlclust}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Q_final See Usage.
@@ -145,10 +150,11 @@ g_formula_pooled <- function(Q_final, weights = NULL) {
 
 #' g_formula_sequential
 #'
-#' Part of the tlclust_native implementation; see the file header for
+#' A step of the tlclust_native implementation. Called by \code{morie_tlclust}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q_seq See Usage.
+#' @param Q_seq A vector; its length is taken and its elements indexed.
 #' @return A list with \code{psi}, \code{parametrization}, \code{T}, \code{note}.
 #' @export
 g_formula_sequential <- function(Q_seq) {
@@ -170,7 +176,8 @@ g_formula_sequential <- function(Q_seq) {
 
 #' .tlclust_cheatsheet
 #'
-#' Part of the tlclust_native implementation; see the file header for
+#' A step of the tlclust_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

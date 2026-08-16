@@ -8,11 +8,11 @@
 classification_features(u, v)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{v}{See Usage.}
+\item{u}{Passed to \code{.sbert_vec}.}
+\item{v}{Passed to \code{.sbert_vec}.}
 }
 \description{
-Part of the sbert_native implementation; see the file header for the source it follows.
+A step of the sbert_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{features}, \code{u}, \code{v}, \code{abs_diff}, \code{dim}, \code{note}.

@@ -8,10 +8,10 @@
 .s4_rank_first(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Matrim}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

@@ -8,7 +8,7 @@
 .dueldqn_argmax(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 Double-DQN target: the ONLINE net picks the action, the TARGET net values it. Using one net for both over-estimates because the max of a noisy estimate is biased upward and the same noise supplies the value. ---------------------------------------------------------------------------

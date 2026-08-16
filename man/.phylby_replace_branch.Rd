@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{node}{See Usage.}
-\item{path}{See Usage.}
-\item{value}{See Usage.}
+\item{path}{A vector; its length is taken and its elements indexed.}
+\item{value}{Passed to \code{.phylby_replace_branch}.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{.phylby_step}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{parts}, as built in the body.

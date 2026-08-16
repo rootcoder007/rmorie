@@ -8,12 +8,12 @@
 .edgrn_chi2_sf(x, df, iters = 400)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{df}{See Usage.}
-\item{iters}{Defaults to \code{400}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{df}{Numeric; combined arithmetically in the body.}
+\item{iters}{Numeric; combined arithmetically in the body. Defaults to \code{400}.}
 }
 \description{
-Part of the edgrn_native implementation; see the file header for the source it follows.
+A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

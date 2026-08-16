@@ -8,10 +8,10 @@
 .norm_cdf(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. Called by \code{.fixed_effect_scan}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

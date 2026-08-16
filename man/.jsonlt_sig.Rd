@@ -11,7 +11,7 @@
 \item{digits}{See Usage.}
 }
 \description{
-jsonlite\\\'s digits = I(n). Anything else is decimal places.
+jsonlite\\'s digits = I(n). Anything else is decimal places.
 }
 \value{
 The value of \code{inherits}.

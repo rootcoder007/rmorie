@@ -8,11 +8,11 @@
 .mor_cp_cost(tab, cost)
 }
 \arguments{
-\item{tab}{See Usage.}
-\item{cost}{See Usage.}
+\item{tab}{A list; the body reads \code{$cs}, \code{$css} from it.}
+\item{cost}{One of \code{"mean"}, \code{"meanvar"}.}
 }
 \description{
-Part of the pelt_native implementation; see the file header for the source it follows.
+A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code{morie_binseg}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{function}.

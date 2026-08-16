@@ -11,7 +11,7 @@ martingale_variance(D)
 \item{D}{See Usage.}
 }
 \description{
-Part of the tlonts_native implementation; see the file header for the source it follows.
+A step of the tlonts_native implementation. Called by \code{online_tmle_series}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{variance}, \code{se}, \code{T}, \code{note}.

@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{win_s}{See Usage.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{win_s}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{env}, \code{step_s}.

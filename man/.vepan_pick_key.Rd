@@ -3,15 +3,15 @@
 % the formals.
 \name{.vepan_pick_key}
 \alias{.vepan_pick_key}
-\title{Table 7\\\'s order: canonical, then protein coding, then severity}
+\title{Table 7\\'s order: canonical, then protein coding, then severity}
 \usage{
 .vepan_pick_key(r)
 }
 \arguments{
-\item{r}{See Usage.}
+\item{r}{A list; the body reads \code{$biotype}, \code{$canonical}, \code{$most_severe}, \code{$transcript} from it.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{morie_vepan_pick}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

@@ -3,10 +3,11 @@
 # Least squares of y on an intercept, x1 and optionally x2.
 #' Least squares of y on an intercept, x1 and optionally x2
 #'
-#' Part of the Dssoot implementation; see the file header for the source
+#' A step of the Dssoot implementation. Called by \code{Dssoot}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{.s03lstsq}.
 #' @param x1 See Usage.
 #' @param x2 Defaults to \code{NULL}.
 #' @return The value of \code{.s03lstsq}.

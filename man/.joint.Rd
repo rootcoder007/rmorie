@@ -10,7 +10,7 @@
 \arguments{
 \item{logp}{See Usage.}
 \item{theta}{See Usage.}
-\item{r}{See Usage.}
+\item{r}{Numeric; combined arithmetically in the body.}
 }
 \description{
 log p(r), with p(r) the standard normal so log p(r) = -r.r/2.

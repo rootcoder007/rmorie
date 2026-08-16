@@ -8,10 +8,10 @@
 .agalfsy_centroid(P)
 }
 \arguments{
-\item{P}{See Usage.}
+\item{P}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the agalfsy_native implementation; see the file header for the source it follows.
+A step of the agalfsy_native implementation. Called by \code{.agalfsy_rotate}, \code{morie_agalfsy_rl_pose_search}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -22,7 +22,7 @@
 #'
 #' are taken in sorted order, matching numpy\'s unique().
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken.
 #' @param unit See Usage.
 #' @param time See Usage.
 #' @return A list with \code{Y}, \code{units}, \code{periods}.
@@ -55,12 +55,13 @@
 # First treated period index (0-based) per unit; Inf if never treated.
 #' First treated period index (0-based) per unit; Inf if never treated
 #'
-#' Part of the cssant_native implementation; see the file header for the
+#' A step of the cssant_native implementation. Called by \code{morie_boryis}, \code{morie_cssant}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param unit See Usage.
-#' @param time See Usage.
+#' @param D Passed to \code{.mor_did_panel}.
+#' @param unit Passed to \code{.mor_did_panel}.
+#' @param time Passed to \code{.mor_did_panel}.
 #' @param units Defaults to \code{NULL}.
 #' @param periods Defaults to \code{NULL}.
 #' @return A list with \code{g}, \code{Dm}, \code{units}, \code{periods}.

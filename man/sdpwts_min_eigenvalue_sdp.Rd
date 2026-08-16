@@ -8,13 +8,13 @@
 sdpwts_min_eigenvalue_sdp(A, t0 = 1, mu = 10, tol = 1e-09)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{as.matrix}.}
 \item{t0}{Defaults to \code{1}.}
 \item{mu}{Defaults to \code{10}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{
-Part of the sdpwts_native implementation; see the file header for the source it follows.
+A step of the sdpwts_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{t}, \code{lambda_min}, \code{error}, \code{outer_iterations}, \code{gap}, \code{method}, \code{note}.

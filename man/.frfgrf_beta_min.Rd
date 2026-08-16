@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{d}{See Usage.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{pi}{Defaults to \code{0.5}.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
+\item{pi}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{
-Part of the frfgrf_native implementation; see the file header for the source it follows.
+A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

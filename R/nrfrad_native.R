@@ -22,7 +22,8 @@
 # S3 helper: ensure a numeric vector (k.vec).
 #' S3 helper: ensure a numeric vector (k.vec)
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. Called by \code{density_is_view_independent}, \code{positional_encoding}, \code{ray_points} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -41,10 +42,11 @@
 # S3 helper: ensure a numeric matrix of row vectors (k.mat).
 #' S3 helper: ensure a numeric matrix of row vectors (k.mat)
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. Called by \code{volume_render}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param colour See Usage.
+#' @param colour A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .nrfrad_mat <- function(colour) {
@@ -61,12 +63,13 @@
 
 #' positional_encoding
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{.nrfrad_vec}.
 #' @param L Defaults to \code{10}.
-#' @param include_input Defaults to \code{TRUE}.
+#' @param include_input A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 positional_encoding <- function(p, L = 10, include_input = TRUE) {
@@ -86,16 +89,17 @@ positional_encoding <- function(p, L = 10, include_input = TRUE) {
 
 #' ray_points
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param origin See Usage.
-#' @param direction See Usage.
+#' @param origin Passed to \code{.nrfrad_vec}.
+#' @param direction Passed to \code{.nrfrad_vec}.
 #' @param t_near See Usage.
 #' @param t_far See Usage.
 #' @param n_samples See Usage.
 #' @param seed Defaults to \code{0}.
-#' @param stratified Defaults to \code{TRUE}.
+#' @param stratified A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{t}, \code{points}, \code{direction}.
 #' @export
 ray_points <- function(origin, direction, t_near, t_far, n_samples,
@@ -126,12 +130,13 @@ ray_points <- function(origin, direction, t_near, t_far, n_samples,
 
 #' volume_render
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sigma See Usage.
-#' @param colour See Usage.
-#' @param t See Usage.
+#' @param sigma Passed to \code{.nrfrad_vec}.
+#' @param colour Passed to \code{.nrfrad_mat}.
+#' @param t Passed to \code{.nrfrad_vec}.
 #' @return A list with \code{colour}, \code{weights}, \code{accumulated_alpha}, \code{transmittance_final}, \code{note}.
 #' @export
 volume_render <- function(sigma, colour, t) {
@@ -172,11 +177,12 @@ volume_render <- function(sigma, colour, t) {
 
 #' sample_pdf
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bins See Usage.
-#' @param weights See Usage.
+#' @param bins Passed to \code{.nrfrad_vec}.
+#' @param weights Passed to \code{.nrfrad_vec}.
 #' @param n_samples See Usage.
 #' @param seed Defaults to \code{0}.
 #' @param eps Defaults to \code{1e-05}.
@@ -208,11 +214,12 @@ sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
 
 #' density_is_view_independent
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param model See Usage.
-#' @param point See Usage.
+#' @param point Passed to \code{.nrfrad_vec}.
 #' @param directions See Usage.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{sigmas}, \code{max_deviation}, \code{view_independent}, \code{note}.
@@ -235,7 +242,8 @@ density_is_view_independent <- function(model, point, directions,
 
 #' .nrfrad_cheatsheet
 #'
-#' Part of the nrfrad_native implementation; see the file header for the
+#' A step of the nrfrad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

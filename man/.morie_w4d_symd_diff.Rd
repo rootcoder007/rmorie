@@ -8,11 +8,11 @@
 .morie_w4d_symd_diff(t, var)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{var}{See Usage.}
+\item{t}{A vector; indexed elementwise.}
+\item{var}{Passed to \code{.morie_w4d_symd_diff}.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_symbolic_diff}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

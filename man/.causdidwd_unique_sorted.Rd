@@ -11,7 +11,7 @@
 \item{v}{See Usage.}
 }
 \description{
-Part of the causdidwd_native implementation; see the file header for the source it follows.
+A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

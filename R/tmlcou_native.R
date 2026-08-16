@@ -20,7 +20,8 @@
 
 #' .tmlcou_logit
 #'
-#' Part of the tmlcou_native implementation; see the file header for the
+#' A step of the tmlcou_native implementation. Called by \code{morie_tmlcou}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -33,10 +34,11 @@
 
 #' .tmlcou_expit
 #'
-#' Part of the tmlcou_native implementation; see the file header for the
+#' A step of the tmlcou_native implementation. Called by \code{morie_tmlcou}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tmlcou_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0

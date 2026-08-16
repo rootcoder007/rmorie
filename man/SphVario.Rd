@@ -8,10 +8,10 @@
 SphVario(h, c0 = 0, c = 1, a = 1)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{c0}{Defaults to \code{0}.}
-\item{c}{Defaults to \code{1}.}
-\item{a}{Defaults to \code{1}.}
+\item{h}{Passed to \code{.morie_spx_chkv}.}
+\item{c0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{c}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{a}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
 plus the nugget of Sec. 4.3.6; covariance eq (4.14).  gamma(0) = 0 ALWAYS -- the discontinuity at the origin IS the nugget, and dropping the h = 0 case is the usual way to lose it.

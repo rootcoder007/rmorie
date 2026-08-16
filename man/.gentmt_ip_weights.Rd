@@ -8,14 +8,14 @@
 .gentmt_ip_weights(A, H, kind = "normal", stabilize = TRUE, trim = NULL)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{H}{See Usage.}
-\item{kind}{Defaults to \code{"normal"}.}
-\item{stabilize}{Defaults to \code{TRUE}.}
-\item{trim}{Defaults to \code{NULL}.}
+\item{A}{Numeric; passed to \code{mean}.}
+\item{H}{Passed to \code{.gentmt_treatment_density}.}
+\item{kind}{Passed to \code{.gentmt_treatment_density}. Defaults to \code{"normal"}.}
+\item{stabilize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{trim}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the gentmt_native implementation; see the file header for the source it follows.
+A step of the gentmt_native implementation. Called by \code{morie_gentmt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{w}, \code{info}.

@@ -8,9 +8,9 @@
 .gplmmV(Z, D, R = NULL)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{D}{See Usage.}
-\item{R}{Defaults to \code{NULL}.}
+\item{Z}{A matrix; passed to \code{nrow}.}
+\item{D}{Passed to \code{.gpmat}.}
+\item{R}{Optional; may be \code{NULL}. Passed to \code{.gpmat}.}
 }
 \description{
 --------------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

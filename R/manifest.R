@@ -1,9 +1,10 @@
 #' escape_regex
 #'
-#' Part of the manifest implementation; see the file header for the
+#' A step of the manifest implementation. Called by \code{morie_build_outputs_manifest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Character; passed to \code{gsub}.
 #' @return The value of \code{gsub}.
 #' @export
 escape_regex <- function(x) {

@@ -8,11 +8,11 @@
 moment_vectors(e, X)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{X}{See Usage.}
+\item{e}{A vector; its length is taken.}
+\item{X}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the andmnh_native implementation; see the file header for the source it follows.
+A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{V}, as built in the body.

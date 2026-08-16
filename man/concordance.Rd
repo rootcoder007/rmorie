@@ -8,11 +8,11 @@
 concordance(imputed, truth)
 }
 \arguments{
-\item{imputed}{See Usage.}
-\item{truth}{See Usage.}
+\item{imputed}{Passed to \code{.impfun_as_double_vec}.}
+\item{truth}{Passed to \code{.impfun_as_double_vec}.}
 }
 \description{
-Part of the impfun_native implementation; see the file header for the source it follows.
+A step of the impfun_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error}, \code{n}, \code{method}.
@@ -29,7 +29,7 @@ feasible; higher accuracy than other methods when HapMap provides the
 sole reference panel, with the panel size constraining the
 improvements possible; greatly enhanced accuracy from expanding the
 panel to thousands of chromosomes, outperforming other methods at both
-rare and common SNPs with error rates 15-20% lower than the closest
+rare and common SNPs with error rates 15-20\% lower than the closest
 competitor; and the practical advantages of this approach to
 integrating information across panels genotyped on different sets of
 SNPs.

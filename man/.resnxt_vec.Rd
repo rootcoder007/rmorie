@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the resnxt_native implementation; see the file header for the source it follows.
+A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

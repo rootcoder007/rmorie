@@ -8,10 +8,10 @@
 EdrSignal(x, qrs, fs, fsr = 4)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 \item{qrs}{See Usage.}
-\item{fs}{See Usage.}
-\item{fsr}{Defaults to \code{4}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{fsr}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
 }
 \description{
 Brown, Proc. IEEE EMBC 2009, pp. 5681-5684 (reference [52] of Chapter 2). Chest motion swings the cardiac electrical axis, so the R amplitude sampled once per beat is a respiratory signal without a respiration sensor.

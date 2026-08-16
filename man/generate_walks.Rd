@@ -17,7 +17,7 @@ generate_walks(adj, num_walks = 10, length = 10, p = 1, q = 1, seed = 0, weights
 \item{weights}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the node2v_native implementation; see the file header for the source it follows.
+A step of the node2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{walks}, \code{p}, \code{q}, \code{n_walks}, \code{length}, \code{method}, \code{note}.

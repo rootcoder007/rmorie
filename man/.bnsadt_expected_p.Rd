@@ -8,11 +8,11 @@
 .bnsadt_expected_p(sigma, mu, tau, family, params)
 }
 \arguments{
-\item{sigma}{See Usage.}
-\item{mu}{See Usage.}
-\item{tau}{See Usage.}
-\item{family}{See Usage.}
-\item{params}{See Usage.}
+\item{sigma}{Numeric; combined arithmetically in the body.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{tau}{Numeric; combined arithmetically in the body.}
+\item{family}{Passed to \code{.bnsadt_betas}.}
+\item{params}{Passed to \code{.bnsadt_betas}.}
 }
 \description{
 sum of normal increments because p is a step function -- the reason no quadrature appears anywhere in this module.

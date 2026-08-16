@@ -8,11 +8,11 @@
 .hadcrut_band_weight(i, n_lat)
 }
 \arguments{
-\item{i}{See Usage.}
-\item{n_lat}{See Usage.}
+\item{i}{Passed to \code{.hadcrut_cell_lat}.}
+\item{n_lat}{Passed to \code{.hadcrut_cell_lat}.}
 }
 \description{
-Part of the hadcrut_native implementation; see the file header for the source it follows.
+A step of the hadcrut_native implementation. Called by \code{.hadcrut_region_mean}, \code{morie_hadcrut}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cos}.

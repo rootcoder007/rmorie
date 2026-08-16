@@ -8,13 +8,13 @@
 prewhiten_var(v, order = 1, cap = 0.97, adjust = TRUE)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{order}{Defaults to \code{1}.}
-\item{cap}{Defaults to \code{0.97}.}
-\item{adjust}{Defaults to \code{TRUE}.}
+\item{v}{A matrix; passed to \code{as.matrix}.}
+\item{order}{A count; the body uses it as \code{vector(...)}. Defaults to \code{1}.}
+\item{cap}{Numeric; combined arithmetically in the body. Defaults to \code{0.97}.}
+\item{adjust}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the andmnh_native implementation; see the file header for the source it follows.
+A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{A}, \code{residuals}, \code{D}.

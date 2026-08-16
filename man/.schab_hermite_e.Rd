@@ -8,11 +8,11 @@
 .schab_hermite_e(x, degree)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{degree}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{degree}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the schab_hermite_shared implementation; see the file header for the source it follows.
+A step of the schab_hermite_shared implementation. Called by \code{.schab_hermite_orthonormal}, \code{.schab_indicator_coefficients}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

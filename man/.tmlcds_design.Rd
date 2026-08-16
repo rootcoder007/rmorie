@@ -8,11 +8,11 @@
 .tmlcds_design(cols, n)
 }
 \arguments{
-\item{cols}{See Usage.}
-\item{n}{See Usage.}
+\item{cols}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
-Part of the tmlcds_native implementation; see the file header for the source it follows.
+A step of the tmlcds_native implementation. Called by \code{.tmlcds_propensity}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cbind}.

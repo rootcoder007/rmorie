@@ -12,7 +12,7 @@ complexity(n, d)
 \item{d}{See Usage.}
 }
 \description{
-Part of the sasRec_native implementation; see the file header for the source it follows.
+A step of the sasRec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{attention_ops}, \code{rnn_ops}, \code{attention_sequential_steps}, \code{rnn_sequential_steps}, \code{note}.

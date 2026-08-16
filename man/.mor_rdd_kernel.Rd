@@ -8,11 +8,11 @@
 .mor_rdd_kernel(name, u)
 }
 \arguments{
-\item{name}{See Usage.}
-\item{u}{See Usage.}
+\item{name}{One of \code{"triangular"}, \code{"uniform"}.}
+\item{u}{Numeric; passed to \code{abs}.}
 }
 \description{
-Part of the causrdd_native implementation; see the file header for the source it follows.
+A step of the causrdd_native implementation. Called by \code{morie_causrdd}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

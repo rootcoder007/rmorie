@@ -8,13 +8,13 @@
 PdfKurt(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
 }
 \arguments{
-\item{pdf}{Defaults to \code{NULL}.}
-\item{x}{Defaults to \code{NULL}.}
-\item{lower}{Defaults to \code{-Inf}.}
-\item{upper}{Defaults to \code{Inf}.}
+\item{pdf}{Passed to \code{.morie_rg_pdfint}.}
+\item{x}{Passed to \code{.morie_rg_pdfint}.}
+\item{lower}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.}
+\item{upper}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.}
 }
 \description{
-book gives 3 for a Gaussian and defines the excess K\\' = K - 3.
+book gives 3 for a Gaussian and defines the excess K\' = K - 3.
 }
 \value{
 A vector, from \code{c}.

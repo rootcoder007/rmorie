@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{b}{A vector; its length is taken.}
 }
 \description{
 symmetric but NOT positive definite -- the Lagrange rows see to that -- so a Cholesky solve is not available.

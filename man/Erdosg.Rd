@@ -9,7 +9,7 @@ Erdosg(n, p)
 \arguments{
 \item{n}{Number of vertices (>= 1).}
 
-\item{p}{Edge probability in \link{0, 1}.}
+\item{p}{Edge probability in [0, 1].}
 }
 \value{
 List with \code{estimate}, \code{edges}, \code{density},

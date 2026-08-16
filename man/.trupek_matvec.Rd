@@ -8,11 +8,11 @@
 .trupek_matvec(H, v)
 }
 \arguments{
-\item{H}{See Usage.}
-\item{v}{See Usage.}
+\item{H}{A matrix; indexed by row and column.}
+\item{v}{Passed to \code{.trupek_dot}.}
 }
 \description{
-Part of the trupek_native implementation; see the file header for the source it follows.
+A step of the trupek_native implementation. Called by \code{.trupek_cauchy}, \code{.trupek_dogleg}, \code{.trupek_model} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

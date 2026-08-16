@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{r}{See Usage.}
-\item{r1}{See Usage.}
+\item{r1}{Numeric; combined arithmetically in the body.}
 }
 \description{
-metal and lipophilic terms are RANGES, not windows: the guide calls R1 the ideal separation and R2 "the maximum distance to be considered a binding interaction", so anything at or inside R1 is fully ideal and only the far side ramps down. Folding this about zero the way the hydrogen-bond deviations are folded would penalise a contact for being too close, which is the clash term\\\'s job and not this one\\\'s -- and it would also make a contact sitting exactly on R1 score a hair under one whenever the coordinate arithmetic put it a single bit on the wrong side.
+metal and lipophilic terms are RANGES, not windows: the guide calls R1 the ideal separation and R2 "the maximum distance to be considered a binding interaction", so anything at or inside R1 is fully ideal and only the far side ramps down. Folding this about zero the way the hydrogen-bond deviations are folded would penalise a contact for being too close, which is the clash term\\'s job and not this one\\'s -- and it would also make a contact sitting exactly on R1 score a hair under one whenever the coordinate arithmetic put it a single bit on the wrong side.
 }
 \value{
 One of two values, depending on the branch taken.

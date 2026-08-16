@@ -26,11 +26,12 @@
 
 #' .mor_tts_t_cdf
 #'
-#' Part of the ttsAn_native implementation; see the file header for the
+#' A step of the ttsAn_native implementation. Called by \code{morie_t_quantile}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param v See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_tts_t_cdf <- function(t, v) {
@@ -70,10 +71,11 @@ morie_t_quantile <- function(p, v) {
 
 #' .mor_tts_median
 #'
-#' Part of the ttsAn_native implementation; see the file header for the
+#' A step of the ttsAn_native implementation. Called by \code{.mor_tts_esd}, \code{morie_ttsAn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_tts_median <- function(v) {
@@ -83,13 +85,14 @@ morie_t_quantile <- function(p, v) {
 
 #' .mor_tts_esd
 #'
-#' Part of the ttsAn_native implementation; see the file header for the
+#' A step of the ttsAn_native implementation. Called by \code{morie_ttsAn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param res See Usage.
-#' @param k See Usage.
-#' @param alpha See Usage.
-#' @param hybrid Defaults to \code{TRUE}.
+#' @param res A vector; its length is taken.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param hybrid A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{anoms}, \code{stats}, \code{lams}.
 #' @export
 .mor_tts_esd <- function(res, k, alpha, hybrid = TRUE) {

@@ -8,8 +8,8 @@
 .bnppct_wq(ys_sorted, weights, q)
 }
 \arguments{
-\item{ys_sorted}{See Usage.}
-\item{weights}{See Usage.}
+\item{ys_sorted}{A vector; its length is taken and its elements indexed.}
+\item{weights}{A vector; indexed elementwise.}
 \item{q}{See Usage.}
 }
 \description{

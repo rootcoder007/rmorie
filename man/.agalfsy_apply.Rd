@@ -8,11 +8,11 @@
 .agalfsy_apply(P, a)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{a}{See Usage.}
+\item{P}{Passed to \code{.agalfsy_translate}.}
+\item{a}{Numeric; combined arithmetically in the body.}
 }
 \description{
-0-based here to match the Python arm\\\'s action numbering, which is a REPORTED quantity (it appears in the trajectory).
+0-based here to match the Python arm\\'s action numbering, which is a REPORTED quantity (it appears in the trajectory).
 }
 \value{
 The value of \code{.agalfsy_rotate}.

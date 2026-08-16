@@ -8,11 +8,11 @@
 .bsafft(re, im)
 }
 \arguments{
-\item{re}{See Usage.}
-\item{im}{See Usage.}
+\item{re}{A vector; its length is taken and its elements indexed.}
+\item{im}{A vector; indexed elementwise.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{.bsapsd}, \code{PcgEeg}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{re}, \code{im}.

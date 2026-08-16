@@ -8,10 +8,10 @@
 .vepan_introns(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{A list; the body reads \code{$exons} from it.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{.vepan_splice_terms}, \code{morie_vepan_annotate}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

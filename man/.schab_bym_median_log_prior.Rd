@@ -8,12 +8,12 @@
 .schab_bym_median_log_prior(u, adjacency, kappa)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{adjacency}{See Usage.}
-\item{kappa}{See Usage.}
+\item{u}{A vector; its length is taken and its elements indexed.}
+\item{adjacency}{A matrix; passed to \code{as.matrix}.}
+\item{kappa}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spbym}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

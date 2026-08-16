@@ -9,7 +9,7 @@ MfNoiseIn(power, freqs = NULL)
 }
 \arguments{
 \item{power}{See Usage.}
-\item{freqs}{Defaults to \code{NULL}.}
+\item{freqs}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{
 convention: integrating the flat density over all f returns P, not twice it.  Getting it wrong is a factor of two in every SNR below.

@@ -8,13 +8,13 @@
 .gwasem_loglik(yt, Xt, d, ml)
 }
 \arguments{
-\item{yt}{See Usage.}
-\item{Xt}{See Usage.}
-\item{d}{See Usage.}
-\item{ml}{See Usage.}
+\item{yt}{A vector; its length is taken.}
+\item{Xt}{A matrix; indexed by row and column.}
+\item{d}{Numeric; passed to \code{log}.}
+\item{ml}{A flag; the body branches on it.}
 }
 \description{
-Part of the gwasem_native implementation; see the file header for the source it follows.
+A step of the gwasem_native implementation. Called by \code{.gwasem_reml_delta}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

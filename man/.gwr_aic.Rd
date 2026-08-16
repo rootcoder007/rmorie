@@ -8,12 +8,12 @@
 .gwr_aic(n, sigma2, tr_S)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{sigma2}{See Usage.}
-\item{tr_S}{See Usage.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{sigma2}{Numeric; passed to \code{log}.}
+\item{tr_S}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the gwrcal_native implementation; see the file header for the source it follows.
+A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

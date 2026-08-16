@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{max_iter}{Defaults to \code{100L}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{
-Part of the causal_shared_native implementation; see the file header for the source it follows.
+A step of the causal_shared_native implementation. Called by \code{morie_dr_learner}, \code{morie_regime_value}, \code{morie_tmle_ate} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{as.vector}.

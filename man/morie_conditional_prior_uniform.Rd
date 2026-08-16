@@ -8,11 +8,11 @@
 morie_conditional_prior_uniform(theta_set, n_grid = 401L)
 }
 \arguments{
-\item{theta_set}{See Usage.}
+\item{theta_set}{A list; the body reads \code{$lower}, \code{$upper} from it.}
 \item{n_grid}{Defaults to \code{401L}.}
 }
 \description{
-Part of the bndbye_native implementation; see the file header for the source it follows.
+A step of the bndbye_native implementation. Called by \code{morie_posterior_hpd}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{grid}, \code{density}.

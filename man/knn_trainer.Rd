@@ -8,11 +8,11 @@
 knn_trainer(k = 1L, smoothing = 0.001)
 }
 \arguments{
-\item{k}{Defaults to \code{1L}.}
-\item{smoothing}{Defaults to \code{0.001}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.}
+\item{smoothing}{A count; the body uses it as \code{rep(...)}. Defaults to \code{0.001}.}
 }
 \description{
-Part of the memb_native implementation; see the file header for the source it follows.
+A step of the memb_native implementation. Called by \code{morie_memb}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{train}, as built in the body.

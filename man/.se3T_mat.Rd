@@ -8,10 +8,10 @@
 .se3T_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the se3T_native implementation; see the file header for the source it follows.
+A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}, \code{morie_se3T_invariant_features}, \code{morie_se3T_se3_attention}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

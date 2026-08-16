@@ -9,16 +9,16 @@ annotate_variant(cds, pos, ref, alt, cds_start = 0, upstream = 5000, downstream 
 }
 \arguments{
 \item{cds}{See Usage.}
-\item{pos}{See Usage.}
-\item{ref}{See Usage.}
-\item{alt}{See Usage.}
-\item{cds_start}{Defaults to \code{0}.}
+\item{pos}{Numeric; combined arithmetically in the body.}
+\item{ref}{A vector; its length is taken.}
+\item{alt}{A vector; its length is taken.}
+\item{cds_start}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{upstream}{Defaults to \code{5000}.}
 \item{downstream}{Defaults to \code{5000}.}
 \item{transcript_len}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the snpeff_native implementation; see the file header for the source it follows.
+A step of the snpeff_native implementation. Called by \code{snpeff}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.snpeff_pack}.

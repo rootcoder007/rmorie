@@ -8,12 +8,12 @@
 .defdtr_bilinear(F, y, x)
 }
 \arguments{
-\item{F}{See Usage.}
-\item{y}{See Usage.}
-\item{x}{See Usage.}
+\item{F}{A matrix; indexed by row and column.}
+\item{y}{Numeric; passed to \code{max}.}
+\item{x}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the defdtr implementation; see the file header for the source it follows.
+A step of the defdtr implementation. Called by \code{Defdtr}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

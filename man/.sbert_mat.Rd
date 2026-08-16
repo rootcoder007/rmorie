@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the sbert_native implementation; see the file header for the source it follows.
+A step of the sbert_native implementation. Called by \code{pool}, \code{rank_by_similarity}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

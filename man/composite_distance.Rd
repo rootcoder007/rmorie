@@ -8,16 +8,16 @@
 composite_distance(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL, len_a = NULL, len_b = NULL, w_abundance = 0.5)
 }
 \arguments{
-\item{tnf_a}{See Usage.}
-\item{tnf_b}{See Usage.}
-\item{cov_a}{Defaults to \code{NULL}.}
+\item{tnf_a}{Passed to \code{.metabd_vec}.}
+\item{tnf_b}{Passed to \code{.metabd_vec}.}
+\item{cov_a}{Optional; may be \code{NULL}. Passed to \code{.metabd_vec}.}
 \item{cov_b}{Defaults to \code{NULL}.}
 \item{len_a}{Defaults to \code{NULL}.}
 \item{len_b}{Defaults to \code{NULL}.}
 \item{w_abundance}{Defaults to \code{0.5}.}
 }
 \description{
-Part of the metabd_native implementation; see the file header for the source it follows.
+A step of the metabd_native implementation. Called by \code{bin_contigs}, \code{morie_metabd}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{distance}, \code{composition}, \code{abundance}, \code{abundance_usable}, \code{confidence}, \code{effective_weight}, \code{note}.

@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{sigma2}{See Usage.}
-\item{df}{See Usage.}
+\item{df}{A vector; its length is taken.}
 \item{robust_floor}{Defaults to \code{1e-12}.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{morie_limmav}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total}, \code{no_gene_variation}.

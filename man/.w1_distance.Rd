@@ -8,8 +8,8 @@
 .w1_distance(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; passed to \code{sort}.}
+\item{b}{Numeric; passed to \code{sort}.}
 }
 \description{
 the line. On R the p = 1 transport cost is integral |F - G|, so sorting solves the problem and no linear program is needed.

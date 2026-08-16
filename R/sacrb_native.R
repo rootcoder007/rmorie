@@ -73,11 +73,12 @@
 
 #' .sacrb_tokenize_13a
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{.sacrb_tok}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param text See Usage.
-#' @param lowercase Defaults to \code{FALSE}.
+#' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .sacrb_tokenize_13a <- function(text, lowercase = FALSE) {
@@ -102,11 +103,12 @@
 
 #' .sacrb_tokenize_intl
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{.sacrb_tok}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param text See Usage.
-#' @param lowercase Defaults to \code{FALSE}.
+#' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .sacrb_tokenize_intl <- function(text, lowercase = FALSE) {
@@ -142,12 +144,13 @@
 
 #' .sacrb_tok
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param text See Usage.
-#' @param scheme See Usage.
-#' @param lowercase See Usage.
+#' @param text Passed to \code{.sacrb_tokenize_13a}.
+#' @param scheme One of \code{"13a"}, \code{"intl"}, \code{"none"}.
+#' @param lowercase A flag; the body branches on it.
 #' @return Nothing; this branch always raises.
 #' @export
 .sacrb_tok <- function(text, scheme, lowercase) {
@@ -175,11 +178,12 @@
 
 #' .sacrb_ngram_counts
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{.sacrb_modified_precision}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tokens See Usage.
-#' @param n See Usage.
+#' @param tokens A vector; its length is taken and its elements indexed.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{c}, as built in the body.
 #' @export
 .sacrb_ngram_counts <- function(tokens, n) {
@@ -205,12 +209,13 @@
 
 #' .sacrb_modified_precision
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cand_tokens See Usage.
+#' @param cand_tokens Passed to \code{.sacrb_ngram_counts}.
 #' @param refs_tokens See Usage.
-#' @param n See Usage.
+#' @param n Passed to \code{.sacrb_ngram_counts}.
 #' @return A list with \code{numerator}, \code{denominator}, \code{precision}.
 #' @export
 .sacrb_modified_precision <- function(cand_tokens, refs_tokens, n) {
@@ -249,7 +254,8 @@
 
 #' .sacrb_brevity_penalty
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param c See Usage.
@@ -270,11 +276,12 @@
 
 #' .sacrb_best_match
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param clen See Usage.
-#' @param rlens See Usage.
+#' @param clen Numeric; combined arithmetically in the body.
+#' @param rlens A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .sacrb_best_match <- function(clen, rlens) {
@@ -289,15 +296,16 @@
 
 #' morie_sacrb_bleu
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param candidates See Usage.
 #' @param references See Usage.
 #' @param max_n Defaults to \code{4L}.
 #' @param weights Defaults to \code{NULL}.
-#' @param tokenizer Defaults to \code{"13a"}.
-#' @param lowercase Defaults to \code{FALSE}.
+#' @param tokenizer Passed to \code{.sacrb_tok}. Defaults to \code{"13a"}.
+#' @param lowercase Passed to \code{.sacrb_tok}. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{bleu}, \code{score}, \code{precisions}, \code{bp}, \code{candidate_length}, \code{reference_length}, \code{ratio}, \code{tokenizer}, \code{lowercase}, \code{max_n}, \code{signature}, \code{method}.
 #' @export
 morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
@@ -380,11 +388,12 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 
 #' .sacrb_signature
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param tokenizer Defaults to \code{"13a"}.
-#' @param lowercase Defaults to \code{FALSE}.
+#' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param max_n Defaults to \code{4L}.
 #' @param n_refs Defaults to \code{1L}.
 #' @param version Defaults to \code{"morie-sacrb-1"}.
@@ -402,7 +411,8 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 
 #' .sacrb_cheatsheet
 #'
-#' Part of the sacrb_native implementation; see the file header for the
+#' A step of the sacrb_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

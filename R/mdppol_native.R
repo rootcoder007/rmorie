@@ -5,11 +5,12 @@
 
 #' .mdppol_args
 #'
-#' Part of the mdppol_native implementation; see the file header for the
+#' A step of the mdppol_native implementation. Called by \code{morie_mdppol}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param P See Usage.
-#' @param R See Usage.
+#' @param R A vector; its length is taken and its elements indexed.
 #' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 #' @export
 .mdppol_args <- function(P, R) {
@@ -45,15 +46,16 @@
 
 #' morie_mdppol
 #'
-#' Part of the mdppol_native implementation; see the file header for the
+#' A step of the mdppol_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P See Usage.
-#' @param R See Usage.
-#' @param gamma See Usage.
+#' @param P Passed to \code{.mdppol_args}.
+#' @param R A matrix; indexed by row and column.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @param tol Defaults to \code{1e-12}.
-#' @param max_eval Defaults to \code{1e+05}.
-#' @param max_improve Defaults to \code{1000}.
+#' @param max_eval A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1e+05}.
+#' @param max_improve A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
 #' @param pi0 Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve}, \code{n_eval}, \code{policy_stable}, \code{method}.
 #' @export
@@ -144,7 +146,8 @@ mdppol <- morie_mdppol
 
 #' .mdppol_cheatsheet
 #'
-#' Part of the mdppol_native implementation; see the file header for the
+#' A step of the mdppol_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

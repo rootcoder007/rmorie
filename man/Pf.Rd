@@ -9,12 +9,12 @@ Pf(q, df1, df2, lower_tail = TRUE)
 }
 \arguments{
 \item{q}{See Usage.}
-\item{df1}{See Usage.}
-\item{df2}{See Usage.}
-\item{lower_tail}{Defaults to \code{TRUE}.}
+\item{df1}{Numeric; combined arithmetically in the body.}
+\item{df2}{Numeric; combined arithmetically in the body.}
+\item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. Called by \code{Qf}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

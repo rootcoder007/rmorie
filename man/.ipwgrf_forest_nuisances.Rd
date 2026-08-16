@@ -8,16 +8,16 @@
 .ipwgrf_forest_nuisances(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5, seed = 0)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
-\item{X}{See Usage.}
-\item{n_folds}{Defaults to \code{5}.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{W}{A vector; indexed elementwise.}
+\item{X}{A matrix; indexed by row and column.}
+\item{n_folds}{Passed to \code{.ipwgrf_folds}. Defaults to \code{5}.}
 \item{n_trees}{Defaults to \code{120}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{seed}{Defaults to \code{0}.}
+\item{min_leaf}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
+\item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the ipwgrf_native implementation; see the file header for the source it follows.
+A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mu1}, \code{mu0}, \code{e}.

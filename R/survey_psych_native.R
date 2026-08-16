@@ -246,12 +246,13 @@ morie_brr_variance <- function(estimates, full_estimate = NULL, fay_k = 0) {
 # Two-parameter logistic ICC with the 1.7 normal-metric scaling.
 #' Two-parameter logistic ICC with the 1.7 normal-metric scaling
 #'
-#' Part of the survey_psych_native implementation; see the file header
+#' A step of the survey_psych_native implementation. Called by \code{.morie_irt_link}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param a See Usage.
+#' @param a A vector; its length is taken.
 #' @param b See Usage.
-#' @param theta See Usage.
+#' @param theta A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .morie_irt_icc <- function(a, b, theta) {
@@ -275,8 +276,8 @@ morie_brr_variance <- function(estimates, full_estimate = NULL, fay_k = 0) {
 #' @param a_focal See Usage.
 #' @param b_focal See Usage.
 #' @param n_quad See Usage.
-#' @param theta_range See Usage.
-#' @param aggregate_first See Usage.
+#' @param theta_range Numeric; combined arithmetically in the body.
+#' @param aggregate_first A flag; the body branches on it.
 #' @return A list with \code{A}, \code{B}, \code{criterion}, \code{a_transformed}, \code{b_transformed}, \code{n_items}, \code{converged}, \code{warnings}.
 #' @export
 .morie_irt_link <- function(a_ref, b_ref, a_focal, b_focal, n_quad,

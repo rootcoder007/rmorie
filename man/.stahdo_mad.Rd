@@ -8,11 +8,11 @@
 .stahdo_mad(v, consistent = TRUE)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{consistent}{Defaults to \code{TRUE}.}
+\item{v}{Numeric; combined arithmetically in the body.}
+\item{consistent}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,10 +8,10 @@
 .tmlcds_logit_irls(X, y, iters = 60L, ridge = 1e-10, tol = 1e-13, penalty = 0)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{iters}{Defaults to \code{60L}.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 \item{tol}{Defaults to \code{1e-13}.}
 \item{penalty}{Defaults to \code{0}.}
 }

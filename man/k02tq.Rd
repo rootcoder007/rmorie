@@ -12,7 +12,7 @@ k02tq(p, df)
 \item{df}{See Usage.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{mahks}, \code{mahsj}, \code{matau2pi}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{stats::qt}.

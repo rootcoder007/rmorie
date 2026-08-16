@@ -8,10 +8,10 @@
 .avalon_paths(adj, n, maxpath, ty)
 }
 \arguments{
-\item{adj}{See Usage.}
-\item{n}{See Usage.}
+\item{adj}{A vector; indexed elementwise.}
+\item{n}{A count; the body uses it as \code{rep(...)}.}
 \item{maxpath}{See Usage.}
-\item{ty}{See Usage.}
+\item{ty}{A vector; indexed elementwise.}
 }
 \description{
 the two spellings is kept -- otherwise a symmetric molecule would light twice as many bits as an asymmetric one for no chemical reason. The key is built here rather than by the caller so the two arms of this package cannot canonicalise it differently.

@@ -8,16 +8,16 @@
 .gwr_criterion(y, X, D, bw, kernel, adaptive, criterion)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{D}{See Usage.}
-\item{bw}{See Usage.}
-\item{kernel}{See Usage.}
-\item{adaptive}{See Usage.}
-\item{criterion}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{X}{Passed to \code{.gwr_cv_score}.}
+\item{D}{Passed to \code{.gwr_cv_score}.}
+\item{bw}{Passed to \code{.gwr_cv_score}.}
+\item{kernel}{Passed to \code{.gwr_cv_score}.}
+\item{adaptive}{Passed to \code{.gwr_cv_score}.}
+\item{criterion}{One of \code{"aic"}, \code{"cv"}.}
 }
 \description{
-Part of the gwrcal_native implementation; see the file header for the source it follows.
+A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.gwr_aicc}.

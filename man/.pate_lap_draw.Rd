@@ -8,11 +8,11 @@
 .pate_lap_draw(e, gamma)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{gamma}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the pate_native implementation; see the file header for the source it follows.
+A step of the pate_native implementation. Called by \code{noisy_argmax}, \code{pate}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

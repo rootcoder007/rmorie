@@ -8,14 +8,14 @@
 .bkw_sdel(sse, e_i, h_i, n, p)
 }
 \arguments{
-\item{sse}{See Usage.}
-\item{e_i}{See Usage.}
-\item{h_i}{See Usage.}
-\item{n}{See Usage.}
-\item{p}{See Usage.}
+\item{sse}{Numeric; combined arithmetically in the body.}
+\item{e_i}{Numeric; combined arithmetically in the body.}
+\item{h_i}{Numeric; combined arithmetically in the body.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dffit implementation; see the file header for the source it follows.
+A step of the dffit implementation. Called by \code{Covrat}, \code{Dfbetb}, \code{Dffit}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

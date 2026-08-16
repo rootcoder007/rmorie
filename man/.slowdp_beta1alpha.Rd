@@ -8,11 +8,11 @@
 .slowdp_beta1alpha(e, alpha)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
 \item{alpha}{See Usage.}
 }
 \description{
-Part of the slowdp_native implementation; see the file header for the source it follows.
+A step of the slowdp_native implementation. Called by \code{stick_breaking}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

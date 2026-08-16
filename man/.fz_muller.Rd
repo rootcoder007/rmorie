@@ -8,7 +8,7 @@
 .fz_muller(u, m = 4L)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
 \item{m}{Defaults to \code{4L}.}
 }
 \description{

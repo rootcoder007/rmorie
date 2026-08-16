@@ -30,7 +30,8 @@
 
 #' .lyapun_as_series
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{autocorrelation_lag}, \code{divergence_curve}, \code{mean_period} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -51,12 +52,13 @@
 
 #' morie_lyapun_embed
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{morie_lyapun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param m See Usage.
-#' @param tau See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
+#' @param tau Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_lyapun_embed <- function(y, m, tau) {
@@ -81,10 +83,11 @@ morie_lyapun_embed <- function(y, m, tau) {
 
 #' autocorrelation_lag
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{morie_lyapun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param threshold Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -107,11 +110,12 @@ autocorrelation_lag <- function(y, threshold = NULL) {
 
 #' mean_period
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{morie_lyapun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param dt Defaults to \code{1}.
+#' @param y A vector; its length is taken.
+#' @param dt Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 mean_period <- function(y, dt = 1.0) {
@@ -137,10 +141,11 @@ mean_period <- function(y, dt = 1.0) {
 
 #' .lyapun_nearest_neighbours
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pts See Usage.
+#' @param pts A vector; its length is taken and its elements indexed.
 #' @param min_sep See Usage.
 #' @return A list with \code{nn}, \code{d0}.
 #' @export
@@ -172,10 +177,11 @@ mean_period <- function(y, dt = 1.0) {
 
 #' .lyapun_distance
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{lyapunov_exponent}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pts See Usage.
+#' @param pts A vector; indexed elementwise.
 #' @param a See Usage.
 #' @param b See Usage.
 #' @return A numeric value.
@@ -189,15 +195,16 @@ mean_period <- function(y, dt = 1.0) {
 
 #' divergence_curve
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}, \code{morie_lyapun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param m Defaults to \code{NULL}.
-#' @param tau Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
-#' @param min_sep Defaults to \code{NULL}.
-#' @param max_steps Defaults to \code{NULL}.
+#' @param y A vector; its length is taken.
+#' @param m Optional; may be \code{NULL}. Passed to \code{morie_lyapun_embed}.
+#' @param tau Optional; may be \code{NULL}. Passed to \code{morie_lyapun_embed}.
+#' @param dt Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param min_sep Optional; may be \code{NULL}. Passed to \code{.lyapun_nearest_neighbours}.
+#' @param max_steps Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{neighbour}, \code{d0}, \code{points}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n_obs}.
 #' @export
 divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
@@ -253,12 +260,13 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 
 #' .lyapun_linear_region
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param curve See Usage.
-#' @param lo_frac Defaults to \code{0.1}.
-#' @param hi_frac Defaults to \code{0.8}.
+#' @param curve A vector; its length is taken and its elements indexed.
+#' @param lo_frac Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param hi_frac Numeric; combined arithmetically in the body. Defaults to \code{0.8}.
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
 .lyapun_linear_region <- function(curve, lo_frac = 0.1, hi_frac = 0.8) {
@@ -282,11 +290,12 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 
 #' .lyapun_ols_slope
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param xs See Usage.
-#' @param ys See Usage.
+#' @param xs A vector; its length is taken and its elements indexed.
+#' @param ys A vector; indexed elementwise.
 #' @return A list with \code{slope}, \code{intercept}, \code{se}, \code{r2}.
 #' @export
 .lyapun_ols_slope <- function(xs, ys) {
@@ -310,18 +319,19 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 
 #' lyapunov_exponent
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{morie_lyapun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param embedding Defaults to \code{NULL}.
 #' @param tau Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
-#' @param fit Defaults to \code{NULL}.
+#' @param dt Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param fit Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param min_sep Defaults to \code{NULL}.
 #' @param max_steps Defaults to \code{NULL}.
-#' @param method Defaults to \code{"rosenstein"}.
-#' @param k Defaults to \code{NULL}.
+#' @param method One of \code{"rosenstein"}, \code{"sato"}, \code{"sato_k"}. Defaults to \code{"rosenstein"}.
+#' @param k Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{estimate}, \code{lambda1}, \code{rosenstein}, \code{sato}, \code{sato_k}, \code{sato_k_curve}, \code{se}, \code{r_squared}, \code{intercept}, \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{fit_range}, \code{k}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n}, \code{dt}, \code{method}, \code{note}.
 #' @export
 lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
@@ -409,7 +419,8 @@ largest_lyapunov <- lyapunov_exponent
 
 #' .lyapun_cheatsheet
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. Called by \code{morie_lyapun}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -429,10 +440,11 @@ largest_lyapunov <- lyapunov_exponent
 
 #' morie_lyapun
 #'
-#' Part of the lyapun_native implementation; see the file header for the
+#' A step of the lyapun_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param op See Usage.
+#' @param op A vector; its length is taken.
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export

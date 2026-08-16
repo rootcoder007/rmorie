@@ -8,10 +8,10 @@
 alfVn2(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the alf_core implementation; see the file header for the source it follows.
+A step of the alf_core implementation. Called by \code{Alffape}, \code{Alfipa}, \code{Alfrecyc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

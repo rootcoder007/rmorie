@@ -8,10 +8,10 @@
 .dpoF_logsumexp(vals)
 }
 \arguments{
-\item{vals}{See Usage.}
+\item{vals}{A vector; its length is taken.}
 }
 \description{
-Part of the dpoF_native implementation; see the file header for the source it follows.
+A step of the dpoF_native implementation. Called by \code{.dpoF_plackett_luce}, \code{optimal_policy}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

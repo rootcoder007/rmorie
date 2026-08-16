@@ -8,11 +8,11 @@
 .schab_hermite_orthonormal(x, degree)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{degree}{See Usage.}
+\item{x}{Passed to \code{.schab_hermite_e}.}
+\item{degree}{Passed to \code{.schab_hermite_e}.}
 }
 \description{
-Part of the schab_hermite_shared implementation; see the file header for the source it follows.
+A step of the schab_hermite_shared implementation. Called by \code{.schab_disjunctive_kriging}, \code{.schab_hermite_coefficients}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

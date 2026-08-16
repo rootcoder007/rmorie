@@ -8,13 +8,13 @@
 .tmlcmp_logit_irls(des, a, max_iter = 25, tol = 1e-08)
 }
 \arguments{
-\item{des}{See Usage.}
-\item{a}{See Usage.}
-\item{max_iter}{Defaults to \code{25}.}
+\item{des}{A matrix; passed to \code{nrow}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the tmlcmp_native implementation; see the file header for the source it follows.
+A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{b}, as built in the body.
@@ -34,7 +34,7 @@ van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
 Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 11
 (Benkeser, Carone & Gilbert): the competing risks framework with
 each endpoint type a separate risk; cumulative incidence as the
-cumulative parameter; the Aalen-Johansen estimator\\'s consistency
+cumulative parameter; the Aalen-Johansen estimator\'s consistency
 under uninformative censoring and its efficiency absent covariates;
 and the drawback that semiparametric hazard-based alternatives
 require a correctly specified finite-dimensional regression model.

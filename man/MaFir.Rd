@@ -14,7 +14,7 @@ MaFir(x, b_k = NULL, N = NULL, n = NULL)
 \item{n}{Defaults to \code{NULL}.}
 }
 \description{
-used.  Equal weights are the worst choice for stopband attenuation -- a rectangle\\'s sidelobes fall off slowly -- which is what the window functions of Section 3.4 exist to fix.
+used.  Equal weights are the worst choice for stopband attenuation -- a rectangle\'s sidelobes fall off slowly -- which is what the window functions of Section 3.4 exist to fix.
 }
 \value{
 A list with \code{y}, \code{value}, \code{index}, \code{b}, \code{N}, \code{settled_from}, \code{dc_gain}, \code{equal_weights}, \code{delay_samples}, \code{method}.

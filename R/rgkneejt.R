@@ -103,10 +103,11 @@ rgkneejt <- function(vag, fs, force = 1.5, window = NULL) {
 
 #' .rgkneejt_median
 #'
-#' Part of the rgkneejt implementation; see the file header for the
+#' A step of the rgkneejt implementation. Called by \code{rgkneejt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .rgkneejt_median <- function(v) {

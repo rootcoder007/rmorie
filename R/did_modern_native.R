@@ -12,7 +12,7 @@
 #'
 #' NA = never), event time, and the treated-post indicator.
 #'
-#' @param data See Usage.
+#' @param data A vector; indexed elementwise.
 #' @param outcome See Usage.
 #' @param unit See Usage.
 #' @param time See Usage.
@@ -132,10 +132,10 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
 #'
 #' cells by alternating projections; returns per-level lookups.
 #'
-#' @param y0 See Usage.
+#' @param y0 Numeric; combined arithmetically in the body.
 #' @param u0 See Usage.
 #' @param t0 See Usage.
-#' @param iters Defaults to \code{50L}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @return A list with \code{a}, \code{g}.
 #' @export
 .morie_did_fe_solve <- function(y0, u0, t0, iters = 50L) {

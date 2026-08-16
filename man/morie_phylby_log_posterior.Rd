@@ -8,17 +8,17 @@
 morie_phylby_log_posterior(tree, seqs, pi = NULL, rate = 1, branch_prior_mean = 0.1, partitions = NULL, rates = NULL, temperature = 1)
 }
 \arguments{
-\item{tree}{See Usage.}
-\item{seqs}{See Usage.}
-\item{pi}{Defaults to \code{NULL}.}
-\item{rate}{Defaults to \code{1}.}
-\item{branch_prior_mean}{Defaults to \code{0.1}.}
-\item{partitions}{Defaults to \code{NULL}.}
-\item{rates}{Defaults to \code{NULL}.}
-\item{temperature}{Defaults to \code{1}.}
+\item{tree}{Passed to \code{.phylby_log_posterior}.}
+\item{seqs}{Passed to \code{.phylby_log_posterior}.}
+\item{pi}{Passed to \code{.phylby_log_posterior}.}
+\item{rate}{Passed to \code{.phylby_log_posterior}. Defaults to \code{1}.}
+\item{branch_prior_mean}{Passed to \code{.phylby_log_posterior}. Defaults to \code{0.1}.}
+\item{partitions}{Passed to \code{.phylby_log_posterior}.}
+\item{rates}{Passed to \code{.phylby_log_posterior}.}
+\item{temperature}{Passed to \code{.phylby_log_posterior}. Defaults to \code{1}.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{morie_phylby}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.phylby_log_posterior}.

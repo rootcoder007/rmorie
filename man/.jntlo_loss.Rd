@@ -8,12 +8,12 @@
 .jntlo_loss(kind, y, yh)
 }
 \arguments{
-\item{kind}{See Usage.}
-\item{y}{See Usage.}
-\item{yh}{See Usage.}
+\item{kind}{One of \code{"binary"}, \code{"cont"}, \code{"count"}, \code{"ordinal"}.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{yh}{A vector; indexed elementwise.}
 }
 \description{
-Part of the jntlO implementation; see the file header for the source it follows.
+A step of the jntlO implementation. Called by \code{Jntlo}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

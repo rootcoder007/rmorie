@@ -85,8 +85,8 @@
 #' exponent and Python calls the C library\'s pow, and they disagree in
 #' the last bit.
 #'
-#' @param x See Usage.
-#' @param k See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .glides_ipow <- function(x, k) {
@@ -98,11 +98,12 @@
 
 #' .glides_merge
 #'
-#' Part of the glides_native implementation; see the file header for the
+#' A step of the glides_native implementation. Called by \code{morie_glides_hbond}, \code{morie_glides_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param base See Usage.
-#' @param over See Usage.
+#' @param base A vector; indexed elementwise.
+#' @param over Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{base}, as built in the body.
 #' @export
 .glides_merge <- function(base, over) {
@@ -250,11 +251,12 @@ morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
 
 #' .glides_dist
 #'
-#' Part of the glides_native implementation; see the file header for the
+#' A step of the glides_native implementation. Called by \code{morie_glides}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .glides_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))

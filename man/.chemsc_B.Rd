@@ -8,14 +8,14 @@
 .chemsc_B(d, d_ideal, d_max, sigma, smoothing)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{d_ideal}{See Usage.}
-\item{d_max}{See Usage.}
-\item{sigma}{See Usage.}
-\item{smoothing}{See Usage.}
+\item{d}{Passed to \code{morie_chemsc_block}.}
+\item{d_ideal}{Passed to \code{morie_chemsc_block}.}
+\item{d_max}{Passed to \code{morie_chemsc_block}.}
+\item{sigma}{Passed to \code{morie_chemsc_smooth_block}.}
+\item{smoothing}{One of \code{"gaussian"}, \code{"none"}.}
 }
 \description{
-Part of the chemsc_native implementation; see the file header for the source it follows.
+A step of the chemsc_native implementation. Called by \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic}, \code{morie_chemsc_metal}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

@@ -8,9 +8,9 @@
 .morie_spx_topeigs(A, k, iters = 400L)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{k}{See Usage.}
-\item{iters}{Defaults to \code{400L}.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400L}.}
 }
 \description{
 The start vector is fixed and slightly non-uniform: an all-ones start is orthogonal to the leading eigenvector of some ordinary matrices and fails silently when it is.

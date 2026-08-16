@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{b}{A vector; its length is taken.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_ols}, \code{morie_adfur}, \code{morie_quantreg}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

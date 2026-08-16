@@ -16,11 +16,12 @@
 # piecewise-linear CDF through (x_(j), j/(n-1)), clamped to [0, 1]
 #' Piecewise-linear CDF through (x_(j), j/(n-1)), clamped to [0, 1]
 #'
-#' Part of the qmDS_native implementation; see the file header for the
+#' A step of the qmDS_native implementation. Called by \code{morie_qmDS}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sorted_x See Usage.
-#' @param v See Usage.
+#' @param sorted_x A vector; its length is taken and its elements indexed.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .mor_qm_ecdf <- function(sorted_x, v) {
@@ -41,11 +42,12 @@
 # inverse empirical CDF, type-7 convention h = (n - 1) p
 #' Inverse empirical CDF, type-7 convention h = (n - 1) p
 #'
-#' Part of the qmDS_native implementation; see the file header for the
+#' A step of the qmDS_native implementation. Called by \code{morie_qmDS}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sorted_x See Usage.
-#' @param p See Usage.
+#' @param sorted_x A vector; its length is taken and its elements indexed.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .mor_qm_quantile <- function(sorted_x, p) {

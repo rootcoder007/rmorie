@@ -22,16 +22,17 @@
 
 #' .morie_likemc_incidence
 #'
-#' Part of the likemc_native implementation; see the file header for the
+#' A step of the likemc_native implementation. Called by \code{morie_likemc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
-#' @param gamma See Usage.
+#' @param beta Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @param S0 See Usage.
 #' @param I0 See Usage.
-#' @param N See Usage.
-#' @param n_steps See Usage.
-#' @param dt Defaults to \code{1}.
+#' @param N Numeric; combined arithmetically in the body.
+#' @param n_steps A count; the body uses it as \code{seq_len(...)}.
+#' @param dt Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_likemc_incidence <- function(beta, gamma, S0, I0, N, n_steps,
@@ -55,7 +56,8 @@
 
 #' .morie_likemc_poisll
 #'
-#' Part of the likemc_native implementation; see the file header for the
+#' A step of the likemc_native implementation. Called by \code{morie_likemc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param observed See Usage.
@@ -76,12 +78,13 @@
 
 #' .morie_likemc_lnorm
 #'
-#' Part of the likemc_native implementation; see the file header for the
+#' A step of the likemc_native implementation. Called by \code{morie_likemc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param mu See Usage.
-#' @param sigma See Usage.
+#' @param x Numeric; passed to \code{log}.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param sigma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_likemc_lnorm <- function(x, mu, sigma) {
@@ -92,15 +95,16 @@
 
 #' morie_likemc
 #'
-#' Part of the likemc_native implementation; see the file header for the
+#' A step of the likemc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model See Usage.
+#' @param model A list; the body reads \code{$dt}, \code{$I0}, \code{$N}, \code{$S0} from it.
 #' @param data See Usage.
 #' @param priors See Usage.
 #' @param n_iter See Usage.
 #' @param seed Defaults to \code{1}.
-#' @param step Defaults to \code{0.15}.
+#' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.15}.
 #' @param burn Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{beta_mean}, \code{gamma_mean}, \code{chain}, \code{n_draws}, \code{n_iter}, \code{acceptance_rate}, \code{R0_mean}, \code{R0_q025}, \code{R0_median}, \code{R0_q975}, \code{logpost_final}, \code{seed}, \code{step}, \code{method}.
 #' @export

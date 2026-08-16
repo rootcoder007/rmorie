@@ -10,17 +10,17 @@ morie_itrgrf(y, W, X, cost = 0, n_trees = 150, min_leaf = 5, seed = 0, evaluate 
 \arguments{
 \item{y}{See Usage.}
 \item{W}{See Usage.}
-\item{X}{See Usage.}
-\item{cost}{Defaults to \code{0}.}
-\item{n_trees}{Defaults to \code{150}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{seed}{Defaults to \code{0}.}
-\item{evaluate}{Defaults to \code{"split"}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{cost}{Passed to \code{.itrgrf_policy_from_tau}. Defaults to \code{0}.}
+\item{n_trees}{Passed to \code{.itrgrf_fit_arm}. Defaults to \code{150}.}
+\item{min_leaf}{Passed to \code{.itrgrf_fit_arm}. Defaults to \code{5}.}
+\item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{evaluate}{One of \code{"in-sample"}, \code{"split"}. Defaults to \code{"split"}.}
 \item{propensity}{Defaults to \code{NULL}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
 }
 \description{
-Part of the itrgrf_native implementation; see the file header for the source it follows.
+A step of the itrgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{value}, \code{se}, \code{ci}, \code{rule}, \code{tau}, \code{mu1}, \code{mu0}, \code{treated_fraction}, \code{value_treat_all}, \code{value_treat_none}, \code{gain_over_treat_all}, \code{gain_over_treat_none}, \code{scores}, \code{cost}, \code{evaluate}, \code{n}, \code{n_scored}, \code{level}, \code{method}.

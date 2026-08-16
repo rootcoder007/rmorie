@@ -3,7 +3,7 @@
 % the formals.
 \name{Ma8Fr}
 \alias{Ma8Fr}
-\title{Eq (3.111).  The book\\'s factored form is EXACT: the bracket is the}
+\title{Eq (3.111).  The book\'s factored form is EXACT: the bracket is the}
 \usage{
 Ma8Fr(omega)
 }

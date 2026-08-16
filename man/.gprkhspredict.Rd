@@ -8,12 +8,12 @@
 .gprkhspredict(K_new, beta, eta0 = 0)
 }
 \arguments{
-\item{K_new}{See Usage.}
-\item{beta}{See Usage.}
+\item{K_new}{Passed to \code{.gpmat}.}
+\item{beta}{Passed to \code{.gpflat}.}
 \item{eta0}{Defaults to \code{0}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{.gprkhsfitsq}, \code{Msm123}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

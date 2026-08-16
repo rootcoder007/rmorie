@@ -3,7 +3,7 @@
 % the formals.
 \name{.s03qnorm}
 \alias{.s03qnorm}
-\title{R\\\'s qnorm IS Wichura AS 241, the same algorithm the Python arm codes}
+\title{R\\'s qnorm IS Wichura AS 241, the same algorithm the Python arm codes}
 \usage{
 .s03qnorm(p)
 }
@@ -11,7 +11,7 @@
 \item{p}{See Usage.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.drbsze_tquant}, \code{Btbca}, \code{Btcicor} and 20 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{qnorm}.

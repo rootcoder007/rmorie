@@ -8,10 +8,10 @@
 .pq_wstop(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{A list; the body reads \code{$parts} from it.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{morie_write_parquet}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{do.call}.

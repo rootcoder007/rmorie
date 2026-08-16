@@ -8,18 +8,18 @@
 Ahi(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.1, hypofrac = 0.5, minsec = 10, desat = 0, envsec = 1)
 }
 \arguments{
-\item{airflow}{See Usage.}
-\item{fs}{See Usage.}
-\item{spo2}{Defaults to \code{NULL}.}
+\item{airflow}{Passed to \code{.morie_bx_vec}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{spo2}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
 \item{hours}{Defaults to \code{NULL}.}
-\item{apneafrac}{Defaults to \code{0.1}.}
-\item{hypofrac}{Defaults to \code{0.5}.}
-\item{minsec}{Defaults to \code{10}.}
+\item{apneafrac}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
+\item{hypofrac}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
+\item{minsec}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
 \item{desat}{Defaults to \code{0}.}
-\item{envsec}{Defaults to \code{1}.}
+\item{envsec}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ahi}, \code{severity}, \code{apnea}, \code{hypopnea}, \code{events}, \code{hours}, \code{baseline}, \code{envsec}, \code{oxygenchecked}, \code{method}.

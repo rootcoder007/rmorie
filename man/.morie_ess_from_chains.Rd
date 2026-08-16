@@ -8,10 +8,10 @@
 .morie_ess_from_chains(chains)
 }
 \arguments{
-\item{chains}{See Usage.}
+\item{chains}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
-Part of the mcmc_native implementation; see the file header for the source it follows.
+A step of the mcmc_native implementation. Called by \code{morie_effective_sample_size_bayes}, \code{morie_effective_sample_size_bulk}, \code{morie_effective_sample_size_tail}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

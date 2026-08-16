@@ -8,13 +8,13 @@
 .mass(ts, ys, lo, hi)
 }
 \arguments{
-\item{ts}{See Usage.}
-\item{ys}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
+\item{ts}{A vector; its length is taken and its elements indexed.}
+\item{ys}{A vector; indexed elementwise.}
+\item{lo}{Numeric; passed to \code{max}.}
+\item{hi}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the qrntcq_native implementation; see the file header for the source it follows.
+A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_quarantine_efficacy}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tot}, as built in the body.

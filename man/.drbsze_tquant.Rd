@@ -8,8 +8,8 @@
 .drbsze_tquant(p, df)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{df}{See Usage.}
+\item{p}{Passed to \code{.s03qnorm}.}
+\item{df}{Numeric; combined arithmetically in the body.}
 }
 \description{
 normal Part of the Drbsze implementation; see the file header for the source it follows.

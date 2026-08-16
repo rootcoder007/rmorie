@@ -8,11 +8,11 @@
 .morie_cf_tau(y, d)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; indexed elementwise.}
 \item{d}{See Usage.}
 }
 \description{
-Part of the causal_forest_honest implementation; see the file header for the source it follows.
+A step of the causal_forest_honest implementation. Called by \code{.morie_cf_grow}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

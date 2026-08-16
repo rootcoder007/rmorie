@@ -11,7 +11,7 @@
 \item{name}{See Usage.}
 }
 \description{
-Part of the burkov_lm_native implementation; see the file header for the source it follows.
+A step of the burkov_lm_native implementation. Called by \code{morie_burkov_layer1_output}, \code{morie_burkov_layer2_output}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{switch}.

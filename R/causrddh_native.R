@@ -17,7 +17,8 @@
 
 #' .mor_ik_median
 #'
-#' Part of the causrddh_native implementation; see the file header for
+#' A step of the causrddh_native implementation. Called by \code{morie_causrddh}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v See Usage.
@@ -34,10 +35,11 @@
 # minimum-norm least squares, matching numpy lstsq(rcond=None)
 #' Minimum-norm least squares, matching numpy lstsq(rcond=None)
 #'
-#' Part of the causrddh_native implementation; see the file header for
+#' A step of the causrddh_native implementation. Called by \code{morie_causrddh}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.ghc_pinv}.
 #' @param y See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export

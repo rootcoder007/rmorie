@@ -11,7 +11,7 @@
 \item{z}{See Usage.}
 }
 \description{
-Part of the mambss_native implementation; see the file header for the source it follows.
+A step of the mambss_native implementation. Called by \code{gated_rnn_equivalent}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

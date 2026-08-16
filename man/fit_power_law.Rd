@@ -8,11 +8,11 @@
 fit_power_law(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Passed to \code{.opnclp_vec}.}
+\item{y}{Passed to \code{.opnclp_vec}.}
 }
 \description{
-Part of the opnclp_native implementation; see the file header for the source it follows.
+A step of the opnclp_native implementation. Called by \code{compare_scaling}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared}, \code{range}, \code{n}.

@@ -8,12 +8,12 @@
 .pq_f(st, id, default = NULL)
 }
 \arguments{
-\item{st}{See Usage.}
+\item{st}{A vector; indexed elementwise.}
 \item{id}{See Usage.}
 \item{default}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the parquet implementation; see the file header for the source it follows.
+A step of the parquet implementation. Called by \code{.pq_column_values}, \code{morie_read_parquet}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

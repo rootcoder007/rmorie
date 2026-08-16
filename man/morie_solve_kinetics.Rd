@@ -9,11 +9,11 @@ morie_solve_kinetics(tau, alpha, beta, gamma, u0 = 0, s0 = 0)
 }
 \arguments{
 \item{tau}{See Usage.}
-\item{alpha}{See Usage.}
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
-\item{u0}{Defaults to \code{0}.}
-\item{s0}{Defaults to \code{0}.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
+\item{beta}{Numeric; combined arithmetically in the body.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
+\item{u0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{s0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
 phase switch. The gamma = beta branch is the limit of the (e^-gt - e^-bt)/(g - b) term, which is t*e^-bt at g = b, not a genuine singularity.

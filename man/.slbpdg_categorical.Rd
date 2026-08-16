@@ -8,8 +8,8 @@
 .slbpdg_categorical(e, weights)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{weights}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
+\item{weights}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 cumulative sum is a plain running sum in both arms rather than a compensated one, because the comparison is against a uniform scaled by the same total -- consistency between the two sums is what matters, not their accuracy.

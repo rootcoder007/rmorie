@@ -8,12 +8,12 @@
 .cstat_uno(time, event, risk_score)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{risk_score}{See Usage.}
+\item{time}{A vector; its length is taken and its elements indexed.}
+\item{event}{A vector; indexed elementwise.}
+\item{risk_score}{A vector; indexed elementwise.}
 }
 \description{
-Part of the Cstat implementation; see the file header for the source it follows.
+A step of the Cstat implementation. Called by \code{Cstat}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.

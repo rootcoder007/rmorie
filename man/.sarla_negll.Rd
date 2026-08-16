@@ -8,12 +8,12 @@
 .sarla_negll(rho, e0, e1, n, I, W)
 }
 \arguments{
-\item{rho}{See Usage.}
-\item{e0}{See Usage.}
-\item{e1}{See Usage.}
-\item{n}{See Usage.}
-\item{I}{See Usage.}
-\item{W}{See Usage.}
+\item{rho}{Numeric; combined arithmetically in the body.}
+\item{e0}{Numeric; combined arithmetically in the body.}
+\item{e1}{Numeric; combined arithmetically in the body.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{I}{Numeric; combined arithmetically in the body.}
+\item{W}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Extracted from the sarla() optimiser closure so the singular-system / non-positive-variance guard is directly unit-testable. `e0`, `e1` are the residual projections, `n` the sample size, `I`/`W` the identity and spatial-weights matrices.

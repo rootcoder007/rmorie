@@ -8,8 +8,8 @@
 .smd_moments(x, w)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{w}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{w}{Numeric; passed to \code{sum}.}
 }
 \description{
 The sw - sum(w^2)/sw denominator reduces to n - 1 at equal weights, so the weighted and unweighted diagnostics agree there.

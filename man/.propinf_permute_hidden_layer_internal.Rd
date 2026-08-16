@@ -8,12 +8,12 @@
 .propinf_permute_hidden_layer_internal(net, t, sigma)
 }
 \arguments{
-\item{net}{See Usage.}
-\item{t}{See Usage.}
-\item{sigma}{See Usage.}
+\item{net}{A vector; indexed elementwise.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{sigma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_sorted_representation_internal}, \code{morie_propinf_sorted_representation}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

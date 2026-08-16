@@ -33,10 +33,11 @@
 # L2-normalise a single row vector.  Mirrors Python's _norm().
 #' L2-normalise a single row vector.  Mirrors Python\'s _norm()
 #'
-#' Part of the dnvtwo_native implementation; see the file header for the
+#' A step of the dnvtwo_native implementation. Called by \code{.dnvtwo_cos_raw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .dnvtwo_norm_vec <- function(v) {
@@ -48,11 +49,12 @@
 # Cosine similarity between two numeric vectors.
 #' Cosine similarity between two numeric vectors
 #'
-#' Part of the dnvtwo_native implementation; see the file header for the
+#' A step of the dnvtwo_native implementation. Called by \code{deduplicate}, \code{retrieve_augment}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .dnvtwo_cos_raw <- function(a, b) {
@@ -64,10 +66,11 @@
 # Coerce to list-of-rows of doubles (mirrors k.mat).
 #' Coerce to list-of-rows of doubles (mirrors k.mat)
 #'
-#' Part of the dnvtwo_native implementation; see the file header for the
+#' A step of the dnvtwo_native implementation. Called by \code{deduplicate}, \code{koleo}, \code{retrieve_augment} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return The value of \code{list}.
 #' @export
 .dnvtwo_mat <- function(x) {
@@ -84,7 +87,8 @@
 # Coerce to a single numeric vector (mirrors k.vec).
 #' Coerce to a single numeric vector (mirrors k.vec)
 #'
-#' Part of the dnvtwo_native implementation; see the file header for the
+#' A step of the dnvtwo_native implementation. Called by \code{self_distillation_loss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.

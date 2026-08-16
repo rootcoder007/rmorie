@@ -8,10 +8,10 @@
 .lcwphr_rows(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the lcwphr_native implementation; see the file header for the source it follows.
+A step of the lcwphr_native implementation. Called by \code{morie_lcwphr_latent_class_weighted}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

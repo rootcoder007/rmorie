@@ -8,13 +8,13 @@
 .sgflrt_corr(h, model, phi, kappa)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{model}{See Usage.}
-\item{phi}{See Usage.}
-\item{kappa}{See Usage.}
+\item{h}{Numeric; combined arithmetically in the body.}
+\item{model}{One of \code{"exponential"}, \code{"gaussian"}, \code{"matern"}, \code{"spherical"}.}
+\item{phi}{Numeric; combined arithmetically in the body.}
+\item{kappa}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sgflrt_native implementation; see the file header for the source it follows.
+A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

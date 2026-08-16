@@ -8,18 +8,18 @@
 .surxgb_build(X, g, h, idx, depth, max_depth, lam, gamma, min_child)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{g}{See Usage.}
-\item{h}{See Usage.}
-\item{idx}{See Usage.}
-\item{depth}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{lam}{See Usage.}
-\item{gamma}{See Usage.}
-\item{min_child}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{g}{A vector; indexed elementwise.}
+\item{h}{A vector; indexed elementwise.}
+\item{idx}{A vector; its length is taken and its elements indexed.}
+\item{depth}{Numeric; combined arithmetically in the body.}
+\item{max_depth}{Passed to \code{.surxgb_build}.}
+\item{lam}{Passed to \code{morie_surxgb_leaf_weight}.}
+\item{gamma}{Passed to \code{morie_surxgb_split_gain}.}
+\item{min_child}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain}, \code{left}, \code{right}.
@@ -27,7 +27,7 @@ A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain}, \code{left}, 
 \references{
 ----------
 Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-System", KDD \\'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
+System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
 and 2.2, eqs (5)-(7).
 
 Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with

@@ -75,10 +75,11 @@
 
 #' .prgrl_to_rows
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .prgrl_to_rows <- function(X) {
@@ -94,7 +95,8 @@
 
 #' .prgrl_to_vec
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{curriculum_schedule}, \code{easy_only_fit}, \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -106,7 +108,8 @@
 
 #' .prgrl_rng
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed See Usage.
@@ -125,7 +128,8 @@
 
 #' .prgrl_gauss
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param r See Usage.
@@ -139,10 +143,11 @@
 
 #' entropy
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{is_curriculum}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
+#' @param q Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 entropy <- function(q) {
@@ -156,12 +161,13 @@ entropy <- function(q) {
 
 #' curriculum_schedule
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param difficulty See Usage.
-#' @param n_steps Defaults to \code{5}.
-#' @param hard_first Defaults to \code{FALSE}.
+#' @param difficulty Passed to \code{.prgrl_to_vec}.
+#' @param n_steps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5}.
+#' @param hard_first A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{lambdas}, \code{weights}, \code{dists}.
 #' @export
 curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
@@ -194,12 +200,13 @@ curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
 
 #' is_curriculum
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
-#' @param p Defaults to \code{NULL}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param weights A vector; its length is taken and its elements indexed.
+#' @param p Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @return A list with \code{is_curriculum}, \code{entropy_increasing}, \code{strictly_increasing}, \code{weights_monotone}, \code{final_step_is_p}, \code{entropies}.
 #' @export
 is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
@@ -257,12 +264,13 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 
 #' .prgrl_perceptron
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param order See Usage.
+#' @param X A vector; indexed elementwise.
+#' @param y A vector; indexed elementwise.
+#' @param order A vector; its length is taken and its elements indexed.
 #' @param updates See Usage.
 #' @param w0 See Usage.
 #' @return The value of \code{w}, as built in the body.
@@ -289,12 +297,13 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 
 #' .prgrl_error
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A vector; its length is taken and its elements indexed.
+#' @param y A vector; indexed elementwise.
+#' @param w A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .prgrl_error <- function(X, y, w) {
@@ -313,19 +322,20 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 
 #' prgrl
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param difficulty See Usage.
-#' @param X_test Defaults to \code{NULL}.
-#' @param y_test Defaults to \code{NULL}.
-#' @param updates Defaults to \code{200}.
+#' @param X Passed to \code{.prgrl_to_rows}.
+#' @param y Passed to \code{.prgrl_to_vec}.
+#' @param difficulty Passed to \code{.prgrl_to_vec}.
+#' @param X_test Optional; may be \code{NULL}. Passed to \code{.prgrl_to_rows}.
+#' @param y_test Passed to \code{.prgrl_to_vec}.
+#' @param updates Passed to \code{.prgrl_perceptron}. Defaults to \code{200}.
 #' @param n_steps Defaults to \code{5}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.prgrl_rng}. Defaults to \code{0}.
 #' @param n_repeats Defaults to \code{50}.
-#' @param order Defaults to \code{"sampled"}.
+#' @param order One of \code{"sampled"}, \code{"sorted"}. Defaults to \code{"sampled"}.
 #' @return A list with \code{estimate}, \code{curriculum_error}, \code{baseline_error}, \code{improvement}, \code{curriculum_errors}, \code{baseline_errors}, \code{held_out}, \code{updates}, \code{order}, \code{n_repeats}, \code{lambdas}, \code{weights}, \code{entropies}, \code{is_curriculum}, \code{n}, \code{method}, \code{note}.
 #' @export
 prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
@@ -438,17 +448,18 @@ prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
 
 #' easy_only_fit
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param difficulty See Usage.
-#' @param X_test See Usage.
-#' @param y_test See Usage.
-#' @param quantile Defaults to \code{0.5}.
+#' @param X Passed to \code{.prgrl_to_rows}.
+#' @param y Passed to \code{.prgrl_to_vec}.
+#' @param difficulty Passed to \code{.prgrl_to_vec}.
+#' @param X_test Passed to \code{.prgrl_to_rows}.
+#' @param y_test Passed to \code{.prgrl_to_vec}.
+#' @param quantile Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param updates Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.prgrl_rng}. Defaults to \code{0}.
 #' @param n_repeats Defaults to \code{50}.
 #' @return A list with \code{estimate}, \code{easy_only_error}, \code{all_examples_error}, \code{improvement}, \code{n_kept}, \code{n}, \code{method}, \code{note}.
 #' @export
@@ -508,7 +519,8 @@ easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
 
 #' .prgrl_cheatsheet
 #'
-#' Part of the prgrl_native implementation; see the file header for the
+#' A step of the prgrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

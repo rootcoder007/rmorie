@@ -20,7 +20,7 @@ field_aware_fm(rows, labels, fields, n_features, n_fields, k_dim = 4, eta = 0.1,
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the ffmFM_native implementation; see the file header for the source it follows.
+A step of the ffmFM_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{fit_ffm}.

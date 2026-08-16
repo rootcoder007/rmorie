@@ -11,7 +11,7 @@
 \item{key}{See Usage.}
 }
 \description{
-Part of the tail2_t02 implementation; see the file header for the source it follows.
+A step of the tail2_t02 implementation. Called by \code{FDiverg}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{switch}.

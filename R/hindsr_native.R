@@ -9,7 +9,8 @@
 
 #' ._as_states
 #'
-#' Part of the hindsr_native implementation; see the file header for the
+#' A step of the hindsr_native implementation. Called by \code{hindsr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seq See Usage.
@@ -26,13 +27,14 @@
 
 #' ._sparse_reward
 #'
-#' Part of the hindsr_native implementation; see the file header for the
+#' A step of the hindsr_native implementation. Called by \code{hindsr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s See Usage.
 #' @param a See Usage.
-#' @param s_next See Usage.
-#' @param g See Usage.
+#' @param s_next A vector; its length is taken and its elements indexed.
+#' @param g A vector; its length is taken and its elements indexed.
 #' @param tol See Usage.
 #' @return A numeric value.
 #' @export
@@ -48,17 +50,18 @@
 
 #' ._sample_goals
 #'
-#' Part of the hindsr_native implementation; see the file header for the
+#' A step of the hindsr_native implementation. Called by \code{hindsr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param strategy See Usage.
-#' @param episode See Usage.
-#' @param t See Usage.
-#' @param T See Usage.
-#' @param k See Usage.
+#' @param strategy One of \code{"episode"}, \code{"final"}, \code{"future"}.
+#' @param episode A vector; indexed elementwise.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param T Numeric; combined arithmetically in the body.
+#' @param k Passed to \code{.ghc_unif}.
 #' @param m See Usage.
-#' @param pool See Usage.
-#' @param e See Usage.
+#' @param pool A vector; its length is taken and its elements indexed.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{lapply}.
 #' @export
 ._sample_goals <- function(strategy, episode, t, T, k, m, pool, e) {
@@ -83,19 +86,20 @@
 
 #' hindsr
 #'
-#' Part of the hindsr_native implementation; see the file header for the
+#' A step of the hindsr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param episodes See Usage.
+#' @param episodes Passed to \code{._as_states}.
 #' @param actions Defaults to \code{NULL}.
 #' @param goals Defaults to \code{NULL}.
-#' @param strategy Defaults to \code{"future"}.
-#' @param k Defaults to \code{4L}.
-#' @param tol Defaults to \code{1e-06}.
+#' @param strategy Passed to \code{._sample_goals}. Defaults to \code{"future"}.
+#' @param k Passed to \code{._sample_goals}. Defaults to \code{4L}.
+#' @param tol Passed to \code{._sparse_reward}. Defaults to \code{1e-06}.
 #' @param reward_fn Defaults to \code{NULL}.
 #' @param state_to_goal Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0L}.
-#' @param history Defaults to \code{NULL}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
+#' @param history Optional; may be \code{NULL}. Passed to \code{._as_states}.
 #' @return A list with \code{estimate}, \code{transitions}, \code{n_transitions}, \code{n_original}, \code{n_relabelled}, \code{rewards}, \code{success_rate}, \code{strategy}, \code{k}, \code{n_episodes}, \code{method}.
 #' @export
 hindsr <- function(episodes, actions = NULL, goals = NULL,
@@ -202,7 +206,8 @@ morie_hindsr <- hindsr
 
 #' .hindsr_cheatsheet
 #'
-#' Part of the hindsr_native implementation; see the file header for the
+#' A step of the hindsr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

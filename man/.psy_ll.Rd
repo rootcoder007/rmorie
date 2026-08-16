@@ -8,12 +8,12 @@
 .psy_ll(grid, yv, it)
 }
 \arguments{
-\item{grid}{See Usage.}
-\item{yv}{See Usage.}
-\item{it}{See Usage.}
+\item{grid}{Passed to \code{.psy_p3pl}.}
+\item{yv}{A matrix; passed to \code{\%*\%}.}
+\item{it}{A list; the body reads \code{$a}, \code{$b}, \code{$c} from it.}
 }
 \description{
-Part of the psycho_native implementation; see the file header for the source it follows.
+A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

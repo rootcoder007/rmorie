@@ -8,12 +8,12 @@
 .morie_p_ibs_ibd(X, Y, T_)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
-\item{T_}{See Usage.}
+\item{X}{Numeric; combined arithmetically in the body.}
+\item{Y}{Numeric; combined arithmetically in the body.}
+\item{T_}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the selscan_w504_native implementation; see the file header for the source it follows.
+A step of the selscan_w504_native implementation. Called by \code{Ibdmtx}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rbind}.

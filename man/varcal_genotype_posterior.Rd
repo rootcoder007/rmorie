@@ -8,12 +8,12 @@
 varcal_genotype_posterior(image, scorer = NULL, prior = NULL)
 }
 \arguments{
-\item{image}{See Usage.}
+\item{image}{A list; the body reads \code{$read_rows}, \code{$width} from it.}
 \item{scorer}{Defaults to \code{NULL}.}
-\item{prior}{Defaults to \code{NULL}.}
+\item{prior}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{
-Part of the varcal_native implementation; see the file header for the source it follows.
+A step of the varcal_native implementation. Called by \code{morie_varcal}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{posterior}, \code{call}, \code{quality}, \code{scores}, \code{source}.
@@ -30,8 +30,8 @@ stage, the pileup image of reference and read data around each
 candidate, the Inception-v2 classifier emitting the three diploid
 genotype probabilities, the calibration argument for why an image of
 all reads captures inter-read dependence, and the printed accounting:
-candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
-of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+candidate PPV 8.1\% raised to 99.7\% on Ion Torrent, a mean loss of 2.3\%
+of candidate sensitivity, and the SOLiD figures of 13.9\% PPV at 96.2\%
 sensitivity.
 
 Li, H. (2011) "A statistical framework for SNP calling, mutation

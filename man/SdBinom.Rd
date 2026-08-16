@@ -9,7 +9,7 @@ SdBinom(n = 10000, p = 1/6)
 \arguments{
 \item{n}{number of trials, >= 0.}
 
-\item{p}{success probability, in \link{0, 1}.}
+\item{p}{success probability, in [0, 1].}
 }
 \value{
 list(n, p, sd, sd_tot); sd_tot is an alias of sd kept for

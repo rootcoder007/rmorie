@@ -8,11 +8,11 @@
 .dpvar_laplace(u, scale)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{scale}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{scale}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the Dpvar implementation; see the file header for the source it follows.
+A step of the Dpvar implementation. Called by \code{Dpvar}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

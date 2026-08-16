@@ -8,12 +8,12 @@
 .tipsne_betainc(a, b, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the tipsne_native implementation; see the file header for the source it follows.
+A step of the tipsne_native implementation. Called by \code{.tipsne_t_sf}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,7 +8,7 @@
 .s4_gpdfit(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 of # 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no # optimiser, so the arms cannot land on different local optima.

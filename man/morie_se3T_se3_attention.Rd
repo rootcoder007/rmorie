@@ -8,15 +8,15 @@
 morie_se3T_se3_attention(positions, type0, type1, weights = NULL, sigma = 1, temperature = 1)
 }
 \arguments{
-\item{positions}{See Usage.}
-\item{type0}{See Usage.}
-\item{type1}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
-\item{sigma}{Defaults to \code{1}.}
+\item{positions}{Passed to \code{.se3T_mat}.}
+\item{type0}{Passed to \code{.se3T_vec}.}
+\item{type1}{Passed to \code{.se3T_mat}.}
+\item{weights}{Passed to \code{morie_se3T_radial_kernel}.}
+\item{sigma}{Passed to \code{morie_se3T_radial_kernel}. Defaults to \code{1}.}
 \item{temperature}{Defaults to \code{1}.}
 }
 \description{
-Part of the se3T_native implementation; see the file header for the source it follows.
+A step of the se3T_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{type1}, \code{type0}, \code{weights}, \code{note}.

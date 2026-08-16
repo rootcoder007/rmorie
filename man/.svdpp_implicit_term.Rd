@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{rated_items}{See Usage.}
-\item{y}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{exponent}{Defaults to \code{-0.5}.}
 }
 \description{
-Part of the svdpp_native implementation; see the file header for the source it follows.
+A step of the svdpp_native implementation. Called by \code{.svdpp_predict}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{term}, \code{n_rated}, \code{scale}, \code{exponent}, \code{raw_sum}.
@@ -21,7 +21,7 @@ A list with \code{term}, \code{n_rated}, \code{scale}, \code{exponent}, \code{ra
 \references{
 ----------
 Koren, Y. (2008) "Factorization Meets the Neighborhood: a
-Multifaceted Collaborative Filtering Model", KDD \\'08, 426-434,
+Multifaceted Collaborative Filtering Model", KDD \'08, 426-434,
 doi:10.1145/1401890.1401944. Sec. 1 and 4, eq. (15).
 
 Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization

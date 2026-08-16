@@ -15,21 +15,23 @@
 
 #' .ecfp_mix
 #'
-#' Part of the ecfp4 implementation; see the file header for the source
+#' A step of the ecfp4 implementation. Called by \code{.ecfp_conninv}, \code{.ecfp_morgan}, \code{Rdkfp}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param h See Usage.
-#' @param v See Usage.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .ecfp_mix <- function(h, v) (h * .ecfp_mul + (v %% .ecfp_mod)) %% .ecfp_mod
 
 #' .ecfp_bonds
 #'
-#' Part of the ecfp4 implementation; see the file header for the source
+#' A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param adjacency See Usage.
+#' @param adjacency Passed to \code{.t1_mat}.
 #' @return A list with \code{a}, \code{i}, \code{j}, \code{o}.
 #' @export
 .ecfp_bonds <- function(adjacency) {
@@ -46,15 +48,16 @@
 
 #' .ecfp_conninv
 #'
-#' Part of the ecfp4 implementation; see the file header for the source
+#' A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param B See Usage.
-#' @param atomnum See Usage.
-#' @param numhs See Usage.
-#' @param charge See Usage.
-#' @param inring See Usage.
-#' @param isodelta See Usage.
+#' @param B A list; the body reads \code{$a}, \code{$i}, \code{$j} from it.
+#' @param atomnum A vector; indexed elementwise.
+#' @param numhs A vector; indexed elementwise.
+#' @param charge A vector; indexed elementwise.
+#' @param inring A vector; indexed elementwise.
+#' @param isodelta A vector; indexed elementwise.
 #' @return The value of \code{inv}, as built in the body.
 #' @export
 .ecfp_conninv <- function(B, atomnum, numhs, charge, inring, isodelta) {
@@ -76,10 +79,11 @@
 
 #' .ecfp_envkey
 #'
-#' Part of the ecfp4 implementation; see the file header for the source
+#' A step of the ecfp4 implementation. Called by \code{.ecfp_morgan}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A character value.
 #' @export
 .ecfp_envkey <- function(v) {
@@ -89,14 +93,15 @@
 
 #' .ecfp_morgan
 #'
-#' Part of the ecfp4 implementation; see the file header for the source
+#' A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param B See Usage.
+#' @param B A list; the body reads \code{$a}, \code{$i}, \code{$j}, \code{$o} from it.
 #' @param invariants See Usage.
-#' @param radius See Usage.
-#' @param nbits See Usage.
-#' @param use_bond_order Defaults to \code{TRUE}.
+#' @param radius A count; the body uses it as \code{seq_len(...)}.
+#' @param nbits A count; the body uses it as \code{integer(...)}.
+#' @param use_bond_order A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{bits}, \code{count}, \code{ident}.
 #' @export
 .ecfp_morgan <- function(B, invariants, radius, nbits, use_bond_order = TRUE) {
@@ -160,12 +165,13 @@
 
 #' .ecfp_percol
 #'
-#' Part of the ecfp4 implementation; see the file header for the source
+#' A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
-#' @param a See Usage.
-#' @param default See Usage.
+#' @param x Optional; may be \code{NULL}. Passed to \code{.t1_vec}.
+#' @param a A count; the body uses it as \code{rep(...)}.
+#' @param default A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .ecfp_percol <- function(x, a, default) {

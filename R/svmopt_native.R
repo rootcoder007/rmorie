@@ -29,11 +29,12 @@
 
 #' kernel_matrix
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param kernel Defaults to \code{"linear"}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}. Defaults to \code{"linear"}.
 #' @param gamma Defaults to \code{1}.
 #' @param degree Defaults to \code{3}.
 #' @param coef0 Defaults to \code{0}.
@@ -65,12 +66,13 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
 
 #' dual_objective
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. Called by \code{smo}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
 #' @param y See Usage.
-#' @param K See Usage.
+#' @param K A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
 dual_objective <- function(alpha, y, K) {
@@ -86,14 +88,15 @@ dual_objective <- function(alpha, y, K) {
 
 #' .svmopt_bounds
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. Called by \code{solve_pair}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param i See Usage.
 #' @param j See Usage.
-#' @param a See Usage.
-#' @param y See Usage.
-#' @param C See Usage.
+#' @param a A vector; indexed elementwise.
+#' @param y A vector; indexed elementwise.
+#' @param C Numeric; passed to \code{min}.
 #' @return A list with \code{L}, \code{H}.
 #' @export
 .svmopt_bounds <- function(i, j, a, y, C) {
@@ -109,16 +112,17 @@ dual_objective <- function(alpha, y, K) {
 
 #' solve_pair
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. Called by \code{smo}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param i See Usage.
-#' @param j See Usage.
+#' @param i Passed to \code{.svmopt_bounds}.
+#' @param j Passed to \code{.svmopt_bounds}.
 #' @param alpha See Usage.
-#' @param y See Usage.
-#' @param K See Usage.
-#' @param grad See Usage.
-#' @param C See Usage.
+#' @param y A vector; indexed elementwise.
+#' @param K A matrix; indexed by row and column.
+#' @param grad A vector; indexed elementwise.
+#' @param C Passed to \code{.svmopt_bounds}.
 #' @return A list with \code{alpha}, \code{moved}, \code{clipped}, \code{L}, \code{H}, \code{eta}, \code{step}.
 #' @export
 solve_pair <- function(i, j, alpha, y, K, grad, C) {
@@ -149,13 +153,14 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
 
 #' kkt_violation
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. Called by \code{recover_bias}, \code{smo}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
 #' @param y See Usage.
-#' @param grad See Usage.
-#' @param C See Usage.
+#' @param grad A vector; indexed elementwise.
+#' @param C Numeric; combined arithmetically in the body.
 #' @return A list with \code{gap}, \code{i}, \code{j}, \code{n_up}, \code{n_low}.
 #' @export
 kkt_violation <- function(alpha, y, grad, C) {
@@ -178,13 +183,14 @@ kkt_violation <- function(alpha, y, grad, C) {
 
 #' recover_bias
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. Called by \code{smo}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha See Usage.
 #' @param y See Usage.
-#' @param grad See Usage.
-#' @param C See Usage.
+#' @param grad A vector; indexed elementwise.
+#' @param C Numeric; combined arithmetically in the body.
 #' @return A list with \code{b}, \code{n_free}, \code{bracketed}, \code{note}.
 #' @export
 recover_bias <- function(alpha, y, grad, C) {
@@ -205,11 +211,12 @@ recover_bias <- function(alpha, y, grad, C) {
 
 #' smo
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param K See Usage.
+#' @param K A matrix; indexed by row and column.
 #' @param C Defaults to \code{1}.
 #' @param tol Defaults to \code{1e-08}.
 #' @param max_iter Defaults to \code{20000}.
@@ -258,7 +265,8 @@ smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
 
 #' .svmopt_cheatsheet
 #'
-#' Part of the svmopt_native implementation; see the file header for the
+#' A step of the svmopt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

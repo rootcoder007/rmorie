@@ -12,10 +12,10 @@ observed_clint_u(cl_h, fu_blood, species = "human", qh = NULL, liver_model = "we
 \item{fu_blood}{See Usage.}
 \item{species}{Defaults to \code{"human"}.}
 \item{qh}{Defaults to \code{NULL}.}
-\item{liver_model}{Defaults to \code{"well_stirred"}.}
+\item{liver_model}{One of \code{"parallel_tube"}, \code{"well_stirred"}. Defaults to \code{"well_stirred"}.}
 }
 \description{
-Part of the clrnt_native implementation; see the file header for the source it follows.
+A step of the clrnt_native implementation. Called by \code{clrnt}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

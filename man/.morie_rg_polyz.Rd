@@ -8,11 +8,11 @@
 .morie_rg_polyz(coefs, z)
 }
 \arguments{
-\item{coefs}{See Usage.}
+\item{coefs}{A vector; its length is taken.}
 \item{z}{See Usage.}
 }
 \description{
-Part of the rangayyan_filt implementation; see the file header for the source it follows.
+A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{BwHp}, \code{Comb} and 6 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

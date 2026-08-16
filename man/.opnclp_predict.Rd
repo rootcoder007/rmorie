@@ -8,11 +8,11 @@
 .opnclp_predict(fit, compute)
 }
 \arguments{
-\item{fit}{See Usage.}
+\item{fit}{A list; the body reads \code{$alpha}, \code{$beta}, \code{$range} from it.}
 \item{compute}{See Usage.}
 }
 \description{
-Part of the opnclp_native implementation; see the file header for the source it follows.
+A step of the opnclp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{value}, \code{extrapolation_decades}, \code{interpolated}, \code{note}.

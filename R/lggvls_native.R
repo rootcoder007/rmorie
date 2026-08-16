@@ -44,7 +44,8 @@
 
 #' .lggvls_vec
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -57,10 +58,11 @@
 
 #' .lggvls_mat
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
 .lggvls_mat <- function(x) {
@@ -71,7 +73,8 @@
 # type-7 quantile (R default, matches numpy.quantile default)
 #' Type-7 quantile (R default, matches numpy.quantile default)
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -85,12 +88,13 @@
 # IRLS logistic regression (no package dependencies)
 #' IRLS logistic regression (no package dependencies)
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. Called by \code{.lggvls_ip_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param max_iter Defaults to \code{25L}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{p_hat}, \code{converged}.
 #' @export
@@ -122,14 +126,15 @@
 # IPW for a single time point, binary treatment
 #' IPW for a single time point, binary treatment
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param den_X See Usage.
-#' @param num_X See Usage.
-#' @param kind Defaults to \code{"binary"}.
-#' @param stabilize Defaults to \code{TRUE}.
+#' @param a A vector; its length is taken.
+#' @param den_X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param num_X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param kind Compared against \code{"binary"}. Defaults to \code{"binary"}.
+#' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{w}, \code{info}.
 #' @export
 .lggvls_ip_weights <- function(a, den_X, num_X, kind = "binary", stabilize = TRUE) {
@@ -186,12 +191,13 @@
 # weighted least squares, intercept added
 #' Weighted least squares, intercept added
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param y A vector; its length is taken.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{sigma2}.
 #' @export
 .lggvls_wls <- function(X, y, w) {
@@ -220,10 +226,11 @@
 # bind a list of length-n vectors into an n-by-p matrix
 #' Bind a list of length-n vectors into an n-by-p matrix
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cols See Usage.
+#' @param cols A vector; its length is taken.
 #' @param n See Usage.
 #' @return The value of \code{do.call}.
 #' @export
@@ -235,11 +242,12 @@
 # wrap a single vector/matrix as a one-element history
 #' Wrap a single vector/matrix as a one-element history
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param obj See Usage.
-#' @param allow_none Defaults to \code{FALSE}.
+#' @param obj Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param allow_none A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{list}.
 #' @export
 .lggvls_as_history <- function(obj, allow_none = FALSE) {
@@ -260,13 +268,14 @@
 # build columns at time k_time with `lag` earlier values
 #' Build columns at time k_time with `lag` earlier values
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. Called by \code{lagged_design}, \code{morie_lggvls}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L_hist See Usage.
-#' @param Y_hist Defaults to \code{NULL}.
-#' @param k_time Defaults to \code{0}.
-#' @param lag Defaults to \code{1}.
+#' @param L_hist Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param Y_hist Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param k_time Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param lag Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{cols}, as built in the body.
 #' @export
 .lggvls_lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
@@ -306,13 +315,14 @@
 # Covariates at time `k_time` together with `lag` earlier values.
 #' Covariates at time `k_time` together with `lag` earlier values
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L_hist See Usage.
-#' @param Y_hist Defaults to \code{NULL}.
-#' @param k_time Defaults to \code{0}.
-#' @param lag Defaults to \code{1}.
+#' @param L_hist Passed to \code{.lggvls_lagged_design}.
+#' @param Y_hist Passed to \code{.lggvls_lagged_design}.
+#' @param k_time Passed to \code{.lggvls_lagged_design}. Defaults to \code{0}.
+#' @param lag Passed to \code{.lggvls_lagged_design}. Defaults to \code{1}.
 #' @return The value of \code{.lggvls_lagged_design}.
 #' @export
 lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
@@ -323,18 +333,19 @@ lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
 #' IPTW for a sustained exposure, with lagged values in the treatment
 #' model
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param A See Usage.
-#' @param H See Usage.
-#' @param lag Defaults to \code{1}.
-#' @param Y_hist Defaults to \code{NULL}.
-#' @param stabilize Defaults to \code{TRUE}.
-#' @param kind Defaults to \code{"binary"}.
+#' @param A Passed to \code{.lggvls_as_history}.
+#' @param H Passed to \code{.lggvls_as_history}.
+#' @param lag Passed to \code{.lggvls_lagged_design}. Defaults to \code{1}.
+#' @param Y_hist Passed to \code{.lggvls_lagged_design}.
+#' @param stabilize Passed to \code{.lggvls_ip_weights}. Defaults to \code{TRUE}.
+#' @param kind Passed to \code{.lggvls_ip_weights}. Defaults to \code{"binary"}.
 #' @param trim Defaults to \code{NULL}.
-#' @param contrast Defaults to \code{"cumulative"}.
+#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
 #' @return A list with \code{estimate}, \code{se}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{cumulative_exposure}, \code{per_time}, \code{n_times}, \code{lag}, \code{n}, \code{contrast}, \code{method}.
 #' @export
 morie_lggvls <- function(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE,
@@ -443,7 +454,8 @@ laggedvaliptw  <- morie_lggvls
 # cheatsheet
 #' Cheatsheet
 #'
-#' Part of the lggvls_native implementation; see the file header for the
+#' A step of the lggvls_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

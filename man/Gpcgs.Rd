@@ -50,7 +50,7 @@ of the paper, so the two arms follow the same path.  At the starting
 point q(u) = p(u) the KL term is exactly zero.
 }
 \details{
-Formula: L = sum_i E_q\link{log p(y_i | f_i)} - KL(q(u) || p(u)),
+Formula: L = sum_i E_q[log p(y_i | f_i)] - KL(q(u) || p(u)),
 mu_i = a_i' m, var_i = k_ii - a_i'(K_mm - S) a_i.
 }
 \references{

@@ -8,12 +8,12 @@
 .orfgrf_forest_weights(trees, X, x)
 }
 \arguments{
-\item{trees}{See Usage.}
-\item{X}{See Usage.}
-\item{x}{See Usage.}
+\item{trees}{A list; the body reads \code{$trees} from it.}
+\item{X}{A matrix; indexed by row and column.}
+\item{x}{A vector; indexed elementwise.}
 }
 \description{
-Each unit that lands in the same leaf as x in tree t contributes 1 / (#units from tree t\\\'s leaf-sample in that leaf).
+Each unit that lands in the same leaf as x in tree t contributes 1 / (#units from tree t\\'s leaf-sample in that leaf).
 }
 \value{
 A numeric value.

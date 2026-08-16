@@ -56,10 +56,11 @@ COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 
 #' sasimi_fingerprint
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. Called by \code{sasimi_counts}, \code{sasimi_nearest_neighbours}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bits See Usage.
+#' @param bits A vector; its length is taken.
 #' @param n_bits Defaults to \code{NULL}.
 #' @return A vector, from \code{sort}.
 #' @export
@@ -104,7 +105,8 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 
 #' sasimi_counts
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. Called by \code{morie_sasimi}, \code{sasimi_cosine}, \code{sasimi_dice} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fp_a See Usage.
@@ -125,10 +127,11 @@ sasimi_counts <- function(fp_a, fp_b) {
 
 #' .sasimi_guard
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. Called by \code{sasimi_cosine}, \code{sasimi_dice}, \code{sasimi_tanimoto} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n A list; the body reads \code{$a}, \code{$b} from it.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .sasimi_guard <- function(n) {
@@ -140,7 +143,8 @@ sasimi_counts <- function(fp_a, fp_b) {
 
 #' sasimi_tanimoto
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fp_a See Usage.
@@ -156,7 +160,8 @@ sasimi_tanimoto <- function(fp_a, fp_b) {
 
 #' sasimi_dice
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fp_a See Usage.
@@ -172,7 +177,8 @@ sasimi_dice <- function(fp_a, fp_b) {
 
 #' sasimi_cosine
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fp_a See Usage.
@@ -191,7 +197,8 @@ sasimi_cosine <- function(fp_a, fp_b) {
 
 #' sasimi_tversky
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. Called by \code{morie_sasimi}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fp_a See Usage.
@@ -219,10 +226,11 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 
 #' .sasimi_coef
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. Called by \code{morie_sasimi}, \code{sasimi_distance}, \code{sasimi_nearest_neighbours} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param name See Usage.
+#' @param name One of \code{"cosine"}, \code{"dice"}, \code{"tanimoto"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .sasimi_coef <- function(name) {
@@ -236,12 +244,13 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 
 #' sasimi_distance
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fp_a See Usage.
 #' @param fp_b See Usage.
-#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return A numeric value.
 #' @export
 sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
@@ -251,11 +260,12 @@ sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
 
 #' sasimi_similarity_matrix
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fps See Usage.
-#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
@@ -279,13 +289,14 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 
 #' sasimi_nearest_neighbours
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param query See Usage.
-#' @param fps See Usage.
+#' @param fps A vector; its length is taken and its elements indexed.
 #' @param k Defaults to \code{5L}.
-#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimoto") {
@@ -315,12 +326,13 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 
 #' morie_sasimi
 #'
-#' Part of the sasimi_native implementation; see the file header for the
+#' A step of the sasimi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fp_a See Usage.
 #' @param fp_b See Usage.
-#' @param coefficient Defaults to \code{"tanimoto"}.
+#' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @param alpha Defaults to \code{NULL}.
 #' @param beta Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{similarity}, \code{distance}, \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.

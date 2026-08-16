@@ -8,16 +8,16 @@
 morie_spatial_nominate_iterate_cpp(votes, X, w, nv, mid, beta, max_iter)
 }
 \arguments{
-\item{votes}{See Usage.}
-\item{X}{See Usage.}
-\item{w}{See Usage.}
-\item{nv}{See Usage.}
-\item{mid}{See Usage.}
-\item{beta}{See Usage.}
-\item{max_iter}{See Usage.}
+\item{votes}{Passed to \code{.Call}.}
+\item{X}{Passed to \code{.Call}.}
+\item{w}{Passed to \code{.Call}.}
+\item{nv}{Passed to \code{.Call}.}
+\item{mid}{Passed to \code{.Call}.}
+\item{beta}{Passed to \code{.Call}.}
+\item{max_iter}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_spatial_voting_dw_nominate}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

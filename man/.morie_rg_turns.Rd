@@ -8,11 +8,11 @@
 .morie_rg_turns(seg, threshold)
 }
 \arguments{
-\item{seg}{See Usage.}
+\item{seg}{A vector; its length is taken and its elements indexed.}
 \item{threshold}{See Usage.}
 }
 \description{
-Part of the rangayyan_stat implementation; see the file header for the source it follows.
+A step of the rangayyan_stat implementation. Called by \code{TurnsCount}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{turns}, \code{positions}.

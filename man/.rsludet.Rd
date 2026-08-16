@@ -8,10 +8,10 @@
 .rsludet(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the helpers_rouss implementation; see the file header for the source it follows.
+A step of the helpers_rouss implementation. Called by \code{.rscovdet}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{d}, as built in the body.

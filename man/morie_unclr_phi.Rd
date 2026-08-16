@@ -8,10 +8,10 @@
 morie_unclr_phi(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the unclr implementation; see the file header for the source it follows.
+A step of the unclr implementation. Called by \code{morie_unclr_lr_impute}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 .alfqud_read(st, loc)
 }
 \arguments{
-\item{st}{See Usage.}
-\item{loc}{See Usage.}
+\item{st}{A list; the body reads \code{$mem}, \code{$reg} from it.}
+\item{loc}{A vector; indexed elementwise.}
 }
 \description{
-Part of the alfqud_native implementation; see the file header for the source it follows.
+A step of the alfqud_native implementation. Called by \code{morie_alfqud_step}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

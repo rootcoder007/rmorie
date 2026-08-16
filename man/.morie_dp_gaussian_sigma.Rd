@@ -10,10 +10,10 @@
 \arguments{
 \item{sensitivity}{See Usage.}
 \item{epsilon}{See Usage.}
-\item{delta}{See Usage.}
+\item{delta}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the dp_native implementation; see the file header for the source it follows.
+A step of the dp_native implementation. Called by \code{morie_dp_covariance}, \code{morie_dp_gaussian_mechanism}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

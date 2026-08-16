@@ -15,13 +15,13 @@
 #' corners and there are no triple intersections; inclusion-exclusion is
 #' exact.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param rad See Usage.
-#' @param x0 See Usage.
-#' @param x1 See Usage.
-#' @param y0 See Usage.
-#' @param y1 See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param rad Numeric; combined arithmetically in the body.
+#' @param x0 Numeric; combined arithmetically in the body.
+#' @param x1 Numeric; combined arithmetically in the body.
+#' @param y0 Numeric; combined arithmetically in the body.
+#' @param y1 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ripk_weight <- function(x, y, rad, x0, x1, y0, y1) {

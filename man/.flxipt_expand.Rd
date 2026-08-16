@@ -8,11 +8,11 @@
 .flxipt_expand(W, spec)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{spec}{See Usage.}
+\item{W}{A matrix; indexed by row and column.}
+\item{spec}{A list; the body reads \code{$cols}, \code{$kind} from it.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{.flxipt_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

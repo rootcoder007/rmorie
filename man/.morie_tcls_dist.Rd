@@ -8,11 +8,11 @@
 .morie_tcls_dist(labels, domain)
 }
 \arguments{
-\item{labels}{See Usage.}
-\item{domain}{See Usage.}
+\item{labels}{A vector; its length is taken.}
+\item{domain}{A vector; its length is taken.}
 }
 \description{
-Part of the tcls_native implementation; see the file header for the source it follows.
+A step of the tcls_native implementation. Called by \code{morie_tcls}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{p}, as built in the body.

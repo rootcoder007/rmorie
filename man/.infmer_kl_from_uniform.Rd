@@ -8,10 +8,10 @@
 .infmer_kl_from_uniform(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{A vector; its length is taken.}
 }
 \description{
-Part of the infmer_native implementation; see the file header for the source it follows.
+A step of the infmer_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{kl}, as built in the body.

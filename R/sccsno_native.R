@@ -40,13 +40,14 @@
 
 #' Ordered distinct cutpoints for one individual (Fig. 1)
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param start See Usage.
 #' @param end See Usage.
 #' @param exposure See Usage.
-#' @param risk_periods See Usage.
+#' @param risk_periods A matrix; indexed by row and column.
 #' @param age_breaks See Usage.
 #' @return A vector, from \code{sort}.
 #' @export
@@ -74,7 +75,8 @@
 
 #' Index of the age band containing t (0-based, matching alpha[j+1])
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t See Usage.
@@ -96,12 +98,13 @@
 
 #' Index of the risk period containing t; 0 is the control period
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t See Usage.
 #' @param exposure See Usage.
-#' @param risk_periods See Usage.
+#' @param risk_periods A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
 .sccsno_risk <- function(t, exposure, risk_periods) {
@@ -120,15 +123,16 @@
 
 #' morie_sccsno_build_intervals
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. Called by \code{.smatch_build_intervals}, \code{morie_sccsno_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param start See Usage.
 #' @param end See Usage.
-#' @param exposure See Usage.
+#' @param exposure Optional; may be \code{NULL}. Passed to \code{.sccsno_cuts}.
 #' @param event_times See Usage.
-#' @param risk_periods See Usage.
-#' @param age_breaks See Usage.
+#' @param risk_periods Passed to \code{.sccsno_rp}.
+#' @param age_breaks Passed to \code{.sccsno_cuts}.
 #' @return The value of \code{cells}, as built in the body.
 #' @export
 morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
@@ -192,7 +196,8 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 
 #' .sccsno_rp
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}, \code{morie_sccsno_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param risk_periods See Usage.
@@ -214,10 +219,10 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 #' (beta_1..beta_s, alpha_1..alpha_{m-1}) with beta_0 = alpha_0 = 0. The
 #' individual effects phi_i do not appear -- that is the point.
 #'
-#' @param params See Usage.
+#' @param params A vector; indexed elementwise.
 #' @param cells_by_person See Usage.
-#' @param n_risk See Usage.
-#' @param n_age See Usage.
+#' @param n_risk A count; the body uses it as \code{seq_len(...)}.
+#' @param n_age Numeric; combined arithmetically in the body.
 #' @return The value of \code{ll}, as built in the body.
 #' @export
 morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
@@ -260,13 +265,14 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 
 #' .sccsno_grad_hess
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. Called by \code{morie_sccsno_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param params See Usage.
+#' @param params A vector; indexed elementwise.
 #' @param cells_by_person See Usage.
-#' @param n_risk See Usage.
-#' @param n_age See Usage.
+#' @param n_risk A count; the body uses it as \code{seq_len(...)}.
+#' @param n_age Numeric; combined arithmetically in the body.
 #' @return A list with \code{g}, \code{H}.
 #' @export
 .sccsno_grad_hess <- function(params, cells_by_person, n_risk, n_age) {
@@ -324,15 +330,16 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 
 #' morie_sccsno_fit
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param cases See Usage.
-#' @param risk_periods See Usage.
+#' @param risk_periods Passed to \code{.sccsno_rp}.
 #' @param age_breaks Defaults to \code{c()}.
 #' @param iters Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-10}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{se_log_ri}, \code{age_effects}, \code{se_age}, \code{coef}, \code{se}, \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations}, \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.
 #' @export
 morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
@@ -409,10 +416,11 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
 
 #' Point estimates and Wald intervals on the incidence scale
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
+#' @param fit A list; the body reads \code{$log_ri}, \code{$se_log_ri} from it.
 #' @param level Defaults to \code{0.95}.
 #' @return A list with \code{intervals}, \code{level}.
 #' @export
@@ -431,10 +439,11 @@ morie_sccsno_relative_incidence <- function(fit, level=0.95) {
 
 #' morie_sccsno_check_assumptions
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit_with_pre See Usage.
+#' @param fit_with_pre A list; the body reads \code{$relative_incidence} from it.
 #' @param pre_index Defaults to \code{0}.
 #' @param tol Defaults to \code{0.25}.
 #' @return A list with \code{pre_exposure_ri}, \code{consistent_with_design}, \code{tolerance_log}, \code{interpretation}.
@@ -458,7 +467,8 @@ morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index=0,
 
 #' morie_sccsno_cheatsheet
 #'
-#' Part of the sccsno_native implementation; see the file header for the
+#' A step of the sccsno_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

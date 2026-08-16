@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{c}{See Usage.}
+\item{c}{Passed to \code{.groebn_as_fr}.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_reduce_basis}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

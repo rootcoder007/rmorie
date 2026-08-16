@@ -8,7 +8,7 @@
 .caltbR_to_pgi(p_g_given_i)
 }
 \arguments{
-\item{p_g_given_i}{See Usage.}
+\item{p_g_given_i}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 columns, the G determined from the first non-empty row.

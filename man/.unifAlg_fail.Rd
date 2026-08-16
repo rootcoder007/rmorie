@@ -13,7 +13,7 @@
 \item{oc}{See Usage.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_unify}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason}, \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.

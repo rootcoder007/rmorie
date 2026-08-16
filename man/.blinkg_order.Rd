@@ -8,7 +8,7 @@
 .blinkg_order(pv)
 }
 \arguments{
-\item{pv}{See Usage.}
+\item{pv}{A vector; indexed elementwise.}
 }
 \description{
 matters: on a small panel several markers can share a p value to the last bit, and a selection that depended on which one the sort happened to put first would not be reproducible.

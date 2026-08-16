@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{g}{See Usage.}
-\item{degree}{See Usage.}
-\item{n_quad}{Defaults to \code{NULL}.}
+\item{degree}{Numeric; combined arithmetically in the body.}
+\item{n_quad}{Optional; may be \code{NULL}. Passed to \code{.schab_gauss_hermite}.}
 }
 \description{
 quadrature -- exact for polynomial g, so the Example 5.12 identities come out exactly.

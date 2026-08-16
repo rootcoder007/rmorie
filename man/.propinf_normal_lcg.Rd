@@ -8,11 +8,11 @@
 .propinf_normal_lcg(e, scale = 1)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{scale}{Defaults to \code{1}.}
+\item{e}{Passed to \code{.propinf_lcg_draw}.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_init_net}, \code{.propinf_mlp_init}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

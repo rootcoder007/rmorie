@@ -8,9 +8,9 @@
 .tgarch_negll(p, r, n)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{r}{See Usage.}
-\item{n}{See Usage.}
+\item{p}{A vector; indexed elementwise.}
+\item{r}{A vector; indexed elementwise.}
+\item{n}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{
 base-R fallback. Extracted from the morie_tgarch_model() optimiser closure so the parameter-domain guard is directly unit-testable.

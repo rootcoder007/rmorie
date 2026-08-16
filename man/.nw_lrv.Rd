@@ -8,7 +8,7 @@
 .nw_lrv(u, bandwidth = NULL)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{A vector; its length is taken.}
 \item{bandwidth}{Defaults to \code{NULL}.}
 }
 \description{

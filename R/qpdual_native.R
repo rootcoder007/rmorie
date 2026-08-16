@@ -17,13 +17,14 @@
 # Linear minimisation oracle
 #' Linear minimisation oracle
 #'
-#' Part of the qpdual_native implementation; see the file header for the
+#' A step of the qpdual_native implementation. Called by \code{morie_qpdual}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gradient See Usage.
-#' @param domain See Usage.
-#' @param lower See Usage.
-#' @param upper See Usage.
+#' @param gradient A vector; its length is taken and its elements indexed.
+#' @param domain Compared against \code{"simplex"}.
+#' @param lower A vector; indexed elementwise.
+#' @param upper A vector; indexed elementwise.
 #' @return A vector, from \code{vapply}.
 #' @export
 .lmo <- function(gradient, domain, lower, upper) {

@@ -32,7 +32,7 @@
 #' -log(u). R\'s qexp would consume the rng from somewhere else, so the
 #' loop matches the Python arm draw-for-draw.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return A numeric value.
 #' @export
 .baygsl_expo <- function(e) {
@@ -50,10 +50,10 @@
 #' environment so the chain stays reproducible.
 #'
 #' @param logf See Usage.
-#' @param x0 See Usage.
-#' @param e See Usage.
-#' @param w Defaults to \code{1}.
-#' @param max_steps Defaults to \code{50L}.
+#' @param x0 Numeric; combined arithmetically in the body.
+#' @param e Passed to \code{.baygsl_expo}.
+#' @param w Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param max_steps Numeric; combined arithmetically in the body. Defaults to \code{50L}.
 #' @param lower Defaults to \code{.baygsl_NEG_INF}.
 #' @param upper Defaults to \code{.baygsl_POS_INF}.
 #' @return Nothing; this branch always raises.

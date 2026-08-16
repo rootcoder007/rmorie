@@ -8,10 +8,10 @@
 .prsLL_is_ll1(g)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{Passed to \code{.prsLL_ll1_table}.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table}, \code{first}, \code{follow}, \code{left_recursive}, \code{method}.

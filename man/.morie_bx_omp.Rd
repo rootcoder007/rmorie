@@ -8,13 +8,13 @@
 .morie_bx_omp(x, D, sparsity, tol)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{D}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{D}{A matrix; indexed by row and column.}
 \item{sparsity}{See Usage.}
 \item{tol}{See Usage.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{DictCode}, \code{KsvdFit}, \code{OmpFit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coefficients}, \code{support}, \code{residual}.

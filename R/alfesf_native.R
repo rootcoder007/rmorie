@@ -12,10 +12,11 @@
 
 #' .alfesf_rows
 #'
-#' Part of the alfesf_native implementation; see the file header for the
+#' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @param what See Usage.
 #' @return The value of \code{m}, as built in the body.
 #' @export
@@ -31,11 +32,12 @@
 
 #' .alfesf_softmax_rows
 #'
-#' Part of the alfesf_native implementation; see the file header for the
+#' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param temp See Usage.
+#' @param M A matrix; indexed by row and column.
+#' @param temp Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .alfesf_softmax_rows <- function(M, temp) {
@@ -51,21 +53,23 @@
 
 #' .alfesf_lddt_centres
 #'
-#' Part of the alfesf_native implementation; see the file header for the
+#' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nb See Usage.
+#' @param nb A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .alfesf_lddt_centres <- function(nb) ((seq_len(nb) - 1L) + 0.5) * 100.0 / nb
 
 #' .alfesf_pae_centres
 #'
-#' Part of the alfesf_native implementation; see the file header for the
+#' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nb See Usage.
-#' @param width See Usage.
+#' @param nb A count; the body uses it as \code{seq_len(...)}.
+#' @param width Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .alfesf_pae_centres <- function(nb, width) ((seq_len(nb) - 1L) + 0.5) * width
@@ -80,7 +84,7 @@
 #' on a very short chain saturates well below 1 however confident the
 #' model is.
 #'
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .alfesf_d0 <- function(n) {
@@ -100,12 +104,12 @@
 #' walk the same path. No line search -- a search that branches on a
 #' floating-point comparison is exactly what makes two arms disagree.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param n_bins See Usage.
-#' @param l2 See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param n_bins A count; the body uses it as \code{seq_len(...)}.
+#' @param l2 Numeric; combined arithmetically in the body.
 #' @param iters See Usage.
-#' @param lr See Usage.
+#' @param lr Numeric; combined arithmetically in the body.
 #' @return A list with \code{W}, \code{b}.
 #' @export
 .alfesf_fit_multinomial <- function(X, y, n_bins, l2, iters, lr) {
@@ -141,13 +145,14 @@
 
 #' .alfesf_fit_temperature
 #'
-#' Part of the alfesf_native implementation; see the file header for the
+#' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param y See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
 #' @param iters Defaults to \code{200L}.
-#' @param lr Defaults to \code{0.5}.
+#' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A numeric value.
 #' @export
 .alfesf_fit_temperature <- function(L, y, iters = 200L, lr = 0.5) {
@@ -171,20 +176,21 @@
 
 #' morie_alfesf_esmfold_confidence
 #'
-#' Part of the alfesf_native implementation; see the file header for the
+#' A step of the alfesf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lddt_logits Defaults to \code{NULL}.
-#' @param pae_logits Defaults to \code{NULL}.
-#' @param features Defaults to \code{NULL}.
-#' @param weights Defaults to \code{NULL}.
+#' @param lddt_logits Optional; may be \code{NULL}. A matrix; indexed by row and column.
+#' @param pae_logits Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.
+#' @param features Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.
+#' @param weights Optional; may be \code{NULL}. A list; the body reads \code{$b}, \code{$W} from it.
 #' @param lddt Defaults to \code{NULL}.
 #' @param chain_id Defaults to \code{NULL}.
-#' @param temperature Defaults to \code{1}.
-#' @param l2 Defaults to \code{0.001}.
-#' @param iters Defaults to \code{300L}.
-#' @param lr Defaults to \code{0.5}.
-#' @param pae_bin_width Defaults to \code{0.5}.
+#' @param temperature Compared against \code{"fit"}. Defaults to \code{1}.
+#' @param l2 Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{0.001}.
+#' @param iters Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{300L}.
+#' @param lr Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{0.5}.
+#' @param pae_bin_width Passed to \code{.alfesf_pae_centres}. Defaults to \code{0.5}.
 #' @return A list with \code{estimate}, \code{plddt}, \code{plddt_mean}, \code{ptm}, \code{iptm}, \code{pae}, \code{d0}, \code{temperature}, \code{weights}, \code{route}, \code{n_lddt_bins}, \code{n_pae_bins}, \code{method}, \code{note}.
 #' @export
 morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
@@ -334,7 +340,8 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
 
 #' .alfesf_cheatsheet
 #'
-#' Part of the alfesf_native implementation; see the file header for the
+#' A step of the alfesf_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

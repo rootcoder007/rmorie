@@ -17,10 +17,11 @@
 
 #' .neighbours
 #'
-#' Part of the toptor_native implementation; see the file header for the
+#' A step of the toptor_native implementation. Called by \code{topological_torsions}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_atoms See Usage.
+#' @param n_atoms A count; the body uses it as \code{seq_len(...)}.
 #' @param bonds See Usage.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
@@ -40,10 +41,11 @@
 
 #' .pi_electrons
 #'
-#' Part of the toptor_native implementation; see the file header for the
+#' A step of the toptor_native implementation. Called by \code{topological_torsions}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_atoms See Usage.
+#' @param n_atoms A count; the body uses it as \code{rep(...)}.
 #' @param bonds See Usage.
 #' @return The value of \code{as.integer}.
 #' @export
@@ -125,13 +127,14 @@ torsion_similarity <- function(t1, t2) {
 
 #' .trend_vector
 #'
-#' Part of the toptor_native implementation; see the file header for the
+#' A step of the toptor_native implementation. Called by \code{morie_toptor}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param torsion_sets See Usage.
 #' @param activities See Usage.
-#' @param permutations See Usage.
-#' @param seed See Usage.
+#' @param permutations A count; the body uses it as \code{seq_len(...)}.
+#' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{vector}, \code{descriptors}, \code{length}, \code{null_mean}, \code{null_sd}, \code{z}.
 #' @export
 .trend_vector <- function(torsion_sets, activities, permutations, seed) {

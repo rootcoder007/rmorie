@@ -27,7 +27,8 @@
 
 #' .clrnt_binding_term
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. Called by \code{fu_hepatocytes}, \code{fu_microsomes}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param log_pd See Usage.
@@ -40,10 +41,11 @@
 
 #' fu_microsomes
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_pd See Usage.
+#' @param log_pd Passed to \code{.clrnt_binding_term}.
 #' @param protein Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
@@ -55,10 +57,11 @@ fu_microsomes <- function(log_pd, protein = 1.0) {
 
 #' fu_hepatocytes
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_pd See Usage.
+#' @param log_pd Passed to \code{.clrnt_binding_term}.
 #' @param volume_ratio Defaults to \code{0.005}.
 #' @return A numeric value.
 #' @export
@@ -71,13 +74,14 @@ fu_hepatocytes <- function(log_pd, volume_ratio = 0.005) {
 
 #' blood_from_plasma
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. Called by \code{clrnt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param cl_plasma See Usage.
 #' @param fu_plasma See Usage.
 #' @param blood_plasma_ratio Defaults to \code{NULL}.
-#' @param charge Defaults to \code{"neutral"}.
+#' @param charge One of \code{"acidic"}, \code{"basic"}, \code{"neutral"}. Defaults to \code{"neutral"}.
 #' @return A list with \code{cl_blood}, \code{fu_blood}, \code{rb}.
 #' @export
 blood_from_plasma <- function(cl_plasma, fu_plasma,
@@ -96,12 +100,13 @@ blood_from_plasma <- function(cl_plasma, fu_plasma,
 
 #' scale_to_liver
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. Called by \code{clrnt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param clint_in_vitro See Usage.
 #' @param fu_incubation See Usage.
-#' @param system Defaults to \code{"hepatocytes"}.
+#' @param system One of \code{"hepatocytes"}, \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
 #' @param species Defaults to \code{"human"}.
 #' @param pbsf Defaults to \code{NULL}.
 #' @param liver_weight Defaults to \code{NULL}.
@@ -130,14 +135,15 @@ scale_to_liver <- function(clint_in_vitro, fu_incubation,
 
 #' observed_clint_u
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. Called by \code{clrnt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param cl_h See Usage.
 #' @param fu_blood See Usage.
 #' @param species Defaults to \code{"human"}.
 #' @param qh Defaults to \code{NULL}.
-#' @param liver_model Defaults to \code{"well_stirred"}.
+#' @param liver_model One of \code{"parallel_tube"}, \code{"well_stirred"}. Defaults to \code{"well_stirred"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 observed_clint_u <- function(cl_h, fu_blood, species = "human",
@@ -165,12 +171,13 @@ observed_clint_u <- function(cl_h, fu_blood, species = "human",
 
 #' prediction_accuracy
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. Called by \code{clrnt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param predicted See Usage.
 #' @param observed See Usage.
-#' @param fold Defaults to \code{2}.
+#' @param fold Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf}, \code{average_esf}, \code{within_fold}, \code{beyond_fold}, \code{n}, \code{fold}.
 #' @export
 prediction_accuracy <- function(predicted, observed, fold = 2.0) {
@@ -193,15 +200,16 @@ prediction_accuracy <- function(predicted, observed, fold = 2.0) {
 
 #' clrnt
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. Called by \code{morie_clrnt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param clint_in_vitro See Usage.
+#' @param clint_in_vitro A vector; its length is taken.
 #' @param cl_h Defaults to \code{NULL}.
 #' @param fu_blood Defaults to \code{NULL}.
 #' @param log_pd Defaults to \code{NULL}.
 #' @param fu_incubation Defaults to \code{NULL}.
-#' @param system Defaults to \code{"hepatocytes"}.
+#' @param system Compared against \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
 #' @param species Defaults to \code{"human"}.
 #' @param liver_model Defaults to \code{"well_stirred"}.
 #' @param protein Defaults to \code{1}.
@@ -301,7 +309,8 @@ clearance_intrinsic <- clrnt
 
 #' morie_clrnt
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param clint_in_vitro See Usage.
@@ -339,7 +348,8 @@ morie_clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,
 
 #' .clrnt_cheatsheet
 #'
-#' Part of the clrnt_native implementation; see the file header for the
+#' A step of the clrnt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

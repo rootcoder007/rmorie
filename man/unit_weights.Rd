@@ -8,13 +8,13 @@
 unit_weights(Y, treated, t_post, zeta = NULL)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{treated}{See Usage.}
-\item{t_post}{See Usage.}
-\item{zeta}{Defaults to \code{NULL}.}
+\item{Y}{Passed to \code{.causscd_grid}.}
+\item{treated}{Passed to \code{.causscd_grid}.}
+\item{t_post}{A count; the body uses it as \code{seq_len(...)}.}
+\item{zeta}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the causscd_native implementation; see the file header for the source it follows.
+A step of the causscd_native implementation. Called by \code{sdid}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{weights}, \code{intercept}, \code{zeta}.

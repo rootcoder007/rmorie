@@ -8,12 +8,12 @@
 stage_game_type(A, B, tol = 1e-09)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{A}{Numeric; passed to \code{max}.}
+\item{B}{Numeric; passed to \code{max}.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{morie_nashq}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{equilibria}, \code{n_equilibria}, \code{has_global_optimal}, \code{has_saddle}, \code{global_optimal}, \code{saddle}, \code{method}.

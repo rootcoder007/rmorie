@@ -13,7 +13,7 @@ morie_smatch_poisson_design(cases, risk_periods, age_breaks = numeric(0))
 \item{age_breaks}{Defaults to \code{numeric(0)}.}
 }
 \description{
-Part of the smatch_native implementation; see the file header for the source it follows.
+A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_poisson_fit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age}, \code{n_people}, \code{n_rows}.

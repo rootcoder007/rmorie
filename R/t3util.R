@@ -6,7 +6,8 @@
 
 #' t3golden
 #'
-#' Part of the t3util implementation; see the file header for the source
+#' A step of the t3util implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param f See Usage.
@@ -34,11 +35,12 @@ t3golden <- function(f, lo, hi, iters = 80L) {
 
 #' t3nodes
 #'
-#' Part of the t3util implementation; see the file header for the source
+#' A step of the t3util implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param m Defaults to \code{401L}.
-#' @param lim Defaults to \code{8}.
+#' @param lim Numeric; combined arithmetically in the body. Defaults to \code{8}.
 #' @return A list with \code{u}, \code{w}.
 #' @export
 t3nodes <- function(m = 401L, lim = 8.0) {
@@ -51,10 +53,11 @@ t3nodes <- function(m = 401L, lim = 8.0) {
 
 #' t3bfs
 #'
-#' Part of the t3util implementation; see the file header for the source
+#' A step of the t3util implementation. Called by \code{ecccen}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @param s See Usage.
 #' @return The value of \code{d}, as built in the body.
 #' @export
@@ -74,7 +77,8 @@ t3bfs <- function(A, s) {
 
 #' t3relu
 #'
-#' Part of the t3util implementation; see the file header for the source
+#' A step of the t3util implementation. Called by \code{sage}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param x See Usage.
@@ -84,21 +88,23 @@ t3relu <- function(x) ifelse(x > 0, x, 0)
 
 #' t3expit
 #'
-#' Part of the t3util implementation; see the file header for the source
+#' A step of the t3util implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 t3expit <- function(x) 1 / (1 + exp(-x))
 
 #' t3ols
 #'
-#' Part of the t3util implementation; see the file header for the source
+#' A step of the t3util implementation. Called by \code{giss}, \code{qsarh}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{t}.
+#' @param y A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 t3ols <- function(X, y) {

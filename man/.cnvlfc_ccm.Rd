@@ -10,14 +10,14 @@
 \arguments{
 \item{x}{See Usage.}
 \item{y}{See Usage.}
-\item{E}{Defaults to \code{2L}.}
-\item{tau}{Defaults to \code{1L}.}
+\item{E}{Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.}
+\item{tau}{Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.}
 \item{lib_sizes}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{1L}.}
-\item{exclude}{Defaults to \code{0L}.}
+\item{seed}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.}
+\item{exclude}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.}
 }
 \description{
-Part of the cnvlfc_native implementation; see the file header for the source it follows.
+A step of the cnvlfc_native implementation. Called by \code{cnvlfc_ccm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x}, \code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict}, \code{method}.

@@ -11,18 +11,18 @@ offlrl(dataset, states = NULL, actions = NULL, alpha = 1, gamma = 0.99, variant 
 \item{dataset}{See Usage.}
 \item{states}{Defaults to \code{NULL}.}
 \item{actions}{Defaults to \code{NULL}.}
-\item{alpha}{Defaults to \code{1}.}
-\item{gamma}{Defaults to \code{0.99}.}
-\item{variant}{Defaults to \code{"H"}.}
-\item{backup}{Defaults to \code{"max"}.}
-\item{policy}{Defaults to \code{NULL}.}
-\item{mu}{Defaults to \code{NULL}.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.99}.}
+\item{variant}{One of \code{"H"}, \code{"mu"}, \code{"rho"}. Defaults to \code{"H"}.}
+\item{backup}{One of \code{"max"}, \code{"pi"}. Defaults to \code{"max"}.}
+\item{policy}{Passed to \code{.offlrl_as_dist}.}
+\item{mu}{Passed to \code{.offlrl_as_dist}.}
 \item{lr}{Defaults to \code{0.5}.}
 \item{iters}{Defaults to \code{2000}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{
-Part of the offlrl_native implementation; see the file header for the source it follows.
+A step of the offlrl_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{q}, \code{value}, \code{greedy}, \code{behavior}, \code{counts}, \code{penalty}, \code{bellman_error}, \code{objective}, \code{alpha}, \code{variant}, \code{backup}, \code{n_transitions}, \code{method}.

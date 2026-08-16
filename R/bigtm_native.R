@@ -8,7 +8,8 @@
 
 #' dirichlet_predictive
 #'
-#' Part of the bigtm_native implementation; see the file header for the
+#' A step of the bigtm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param N_ij See Usage.
@@ -37,7 +38,8 @@ dirichlet_predictive <- function(N_ij, N_j, beta, m) {
 
 #' lda_predictive
 #'
-#' Part of the bigtm_native implementation; see the file header for the
+#' A step of the bigtm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param N_ik See Usage.
@@ -63,7 +65,8 @@ lda_predictive <- function(N_ik, N_k, beta, m) {
 
 #' bigram_topic_predictive
 #'
-#' Part of the bigtm_native implementation; see the file header for the
+#' A step of the bigtm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param N_ijk See Usage.
@@ -88,13 +91,14 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 
 #' .counts
 #'
-#' Part of the bigtm_native implementation; see the file header for the
+#' A step of the bigtm_native implementation. Called by \code{.log_evidence}, \code{gibbs_bigram_topic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param Tn See Usage.
+#' @param D A vector; its length is taken and its elements indexed.
+#' @param Tn A count; the body uses it as \code{numeric(...)}.
 #' @param Vn See Usage.
-#' @param z See Usage.
+#' @param z A vector; indexed elementwise.
 #' @return A list with \code{N_ijk}, \code{N_jk}, \code{N_kd}, \code{N_d}.
 #' @export
 .counts <- function(D, Tn, Vn, z) {
@@ -128,7 +132,7 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' of default_rng that .ghc_rng already provides.
 #'
 #' @param seed See Usage.
-#' @param n See Usage.
+#' @param n Passed to \code{.ghc_unif}.
 #' @return The value of \code{.ghc_unif}.
 #' @export
 .lcg_uniform <- function(seed, n) {
@@ -137,7 +141,8 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 
 #' gibbs_bigram_topic
 #'
-#' Part of the bigtm_native implementation; see the file header for the
+#' A step of the bigtm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param docs See Usage.
@@ -149,7 +154,7 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' @param n Defaults to \code{NULL}.
 #' @param prior Defaults to \code{1}.
 #' @param iters Defaults to \code{200L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Passed to \code{.lcg_uniform}. Defaults to \code{0L}.
 #' @param burn Defaults to \code{50L}.
 #' @return A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta}, \code{N_ijk}, \code{N_jk}, \code{T}, \code{V}, \code{prior}, \code{iterations}, \code{burn_in}, \code{samples_kept}, \code{method}, \code{caveat}.
 #' @export
@@ -251,17 +256,18 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 
 #' .log_evidence
 #'
-#' Part of the bigtm_native implementation; see the file header for the
+#' A step of the bigtm_native implementation. Called by \code{log_evidence}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param Tn See Usage.
-#' @param Vn See Usage.
-#' @param z See Usage.
-#' @param mm See Usage.
-#' @param nn See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param D A vector; its length is taken.
+#' @param Tn Passed to \code{.counts}.
+#' @param Vn Passed to \code{.counts}.
+#' @param z Passed to \code{.counts}.
+#' @param mm A vector; indexed elementwise.
+#' @param nn A vector; indexed elementwise.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 .log_evidence <- function(D, Tn, Vn, z, mm, nn, a, b) {
@@ -291,13 +297,14 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 
 #' log_evidence
 #'
-#' Part of the bigtm_native implementation; see the file header for the
+#' A step of the bigtm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param docs See Usage.
 #' @param T See Usage.
 #' @param V See Usage.
-#' @param z See Usage.
+#' @param z Passed to \code{.log_evidence}.
 #' @param alpha Defaults to \code{0.5}.
 #' @param beta Defaults to \code{0.5}.
 #' @param m Defaults to \code{NULL}.

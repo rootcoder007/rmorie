@@ -8,9 +8,9 @@
 smfd_bspline_basis(x, knots, degree = 3L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{knots}{See Usage.}
-\item{degree}{Defaults to \code{3L}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{knots}{A vector; its length is taken.}
+\item{degree}{Numeric; combined arithmetically in the body. Defaults to \code{3L}.}
 }
 \description{
 bspline_basis(x, knots, degree) in smfd.

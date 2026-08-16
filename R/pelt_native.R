@@ -20,10 +20,11 @@
 # cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs[k - 1]
 #' Cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs[k - 1]
 #'
-#' Part of the pelt_native implementation; see the file header for the
+#' A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code{morie_binseg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{cs}, \code{css}.
 #' @export
 .mor_cp_tables <- function(x) {
@@ -40,11 +41,12 @@
 # segment cost of the 0-based half-open block [a, b)
 #' Segment cost of the 0-based half-open block [a, b)
 #'
-#' Part of the pelt_native implementation; see the file header for the
+#' A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code{morie_binseg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tab See Usage.
-#' @param cost See Usage.
+#' @param tab A list; the body reads \code{$cs}, \code{$css} from it.
+#' @param cost One of \code{"mean"}, \code{"meanvar"}.
 #' @return The value of \code{function}.
 #' @export
 .mor_cp_cost <- function(tab, cost) {
@@ -65,11 +67,12 @@
 
 #' .mor_pelt_core
 #'
-#' Part of the pelt_native implementation; see the file header for the
+#' A step of the pelt_native implementation. Called by \code{morie_pelt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param cost See Usage.
+#' @param x A vector; its length is taken.
+#' @param cost Passed to \code{.mor_cp_cost}.
 #' @param penalty See Usage.
 #' @param min_seglen See Usage.
 #' @return A list with \code{taus}, \code{objective}.
@@ -112,11 +115,12 @@
 # segment means of the 0-based bounds vector
 #' Segment means of the 0-based bounds vector
 #'
-#' Part of the pelt_native implementation; see the file header for the
+#' A step of the pelt_native implementation. Called by \code{morie_binseg}, \code{morie_pelt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param bounds See Usage.
+#' @param x A vector; indexed elementwise.
+#' @param bounds A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
 #' @export
 .mor_cp_segmeans <- function(x, bounds) {

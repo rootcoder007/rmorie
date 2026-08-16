@@ -3,13 +3,13 @@
 % the formals.
 \name{morie_tmlcic_default_library}
 \alias{morie_tmlcic_default_library}
-\title{The chapter\\'s example library: the unadjusted model, one main term}
+\title{The chapter\'s example library: the unadjusted model, one main term}
 \usage{
 morie_tmlcic_default_library(p, interactions = TRUE)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{interactions}{Defaults to \code{TRUE}.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
+\item{interactions}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 per covariate, and optionally one treatment interaction each. cols are 0-based covariate indices.

@@ -8,11 +8,11 @@
 morie_warpL_alpha_weights(n, scheme = "reciprocal")
 }
 \arguments{
-\item{n}{See Usage.}
-\item{scheme}{Defaults to \code{"reciprocal"}.}
+\item{n}{Passed to \code{.warpL_alpha_weights}.}
+\item{scheme}{Passed to \code{.warpL_alpha_weights}. Defaults to \code{"reciprocal"}.}
 }
 \description{
-Part of the warpL_native implementation; see the file header for the source it follows.
+A step of the warpL_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.warpL_alpha_weights}.

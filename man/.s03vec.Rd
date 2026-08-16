@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.ch_ols_se}, \code{.icc_balanced} and 343 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

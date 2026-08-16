@@ -61,10 +61,11 @@
 
 #' .pq_byte
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map}, \code{.pq_scalar} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .pq_byte <- function(e) {
@@ -75,10 +76,11 @@
 
 #' .pq_varint
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_binary}, \code{.pq_list}, \code{.pq_map} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{repeat}.
 #' @export
 .pq_varint <- function(e) {
@@ -96,10 +98,11 @@
 
 #' .pq_zigzag
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_scalar}, \code{.pq_struct}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.pq_varint}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .pq_zigzag <- function(e) {
@@ -111,10 +114,11 @@
 
 #' .pq_binary
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_scalar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .pq_binary <- function(e) {
@@ -126,10 +130,11 @@
 
 #' .pq_double
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_scalar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .pq_double <- function(e) {
@@ -142,10 +147,11 @@
 
 #' .pq_scalar
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map}, \code{.pq_struct}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e A list; the body reads \code{$pos} from it.
 #' @param ttype See Usage.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -185,10 +191,11 @@
 
 #' .pq_list
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_scalar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{lapply}.
 #' @export
 .pq_list <- function(e) {
@@ -204,10 +211,11 @@
 
 #' .pq_map
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_scalar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.pq_varint}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .pq_map <- function(e) {
@@ -228,10 +236,11 @@
 
 #' .pq_struct
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_column_values}, \code{.pq_read_footer}, \code{.pq_scalar}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{repeat}.
 #' @export
 .pq_struct <- function(e) {
@@ -251,10 +260,11 @@
 
 #' .pq_f
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_column_values}, \code{morie_read_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param st See Usage.
+#' @param st A vector; indexed elementwise.
 #' @param id See Usage.
 #' @param default Defaults to \code{NULL}.
 #' @return One of two values, depending on the branch taken.
@@ -281,10 +291,11 @@
 
 #' .pq_emit
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wfield}, \code{.pq_wlisthdr} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e A list; the body reads \code{$n}, \code{$parts} from it.
 #' @param r See Usage.
 #' @return Invisibly,nothing; the function is called for its effect.
 #' @export
@@ -296,11 +307,12 @@
 
 #' .pq_wvarint
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wlisthdr}, \code{.pq_wzigzag}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param n See Usage.
+#' @param e Passed to \code{.pq_emit}.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{.pq_emit}.
 #' @export
 .pq_wvarint <- function(e, n) {
@@ -318,11 +330,12 @@
 
 #' .pq_wzigzag
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_wfield}, \code{.pq_wi32}, \code{.pq_wi64} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param n See Usage.
+#' @param e Passed to \code{.pq_wvarint}.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{.pq_wvarint}.
 #' @export
 .pq_wzigzag <- function(e, n) {
@@ -331,11 +344,12 @@
 
 #' .pq_wbinary
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wlistbin}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param b See Usage.
+#' @param e Passed to \code{.pq_wvarint}.
+#' @param b A vector; its length is taken.
 #' @return The value of \code{.pq_emit}.
 #' @export
 .pq_wbinary <- function(e, b) {
@@ -346,13 +360,14 @@
 
 #' .pq_wfield
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wi32}, \code{.pq_wi64} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
+#' @param e Passed to \code{.pq_emit}.
+#' @param fid Numeric; combined arithmetically in the body.
 #' @param ttype See Usage.
-#' @param last See Usage.
+#' @param last Numeric; combined arithmetically in the body.
 #' @return The value of \code{fid}, as built in the body.
 #' @export
 .pq_wfield <- function(e, fid, ttype, last) {
@@ -368,13 +383,14 @@
 
 #' .pq_wi32
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
-#' @param v See Usage.
-#' @param last See Usage.
+#' @param e Passed to \code{.pq_wfield}.
+#' @param fid Passed to \code{.pq_wfield}.
+#' @param v Passed to \code{.pq_wzigzag}.
+#' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
 .pq_wi32 <- function(e, fid, v, last) {
@@ -385,13 +401,14 @@
 
 #' .pq_wi64
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
-#' @param v See Usage.
-#' @param last See Usage.
+#' @param e Passed to \code{.pq_wfield}.
+#' @param fid Passed to \code{.pq_wfield}.
+#' @param v Passed to \code{.pq_wzigzag}.
+#' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
 .pq_wi64 <- function(e, fid, v, last) {
@@ -402,13 +419,14 @@
 
 #' .pq_wbytes
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
-#' @param v See Usage.
-#' @param last See Usage.
+#' @param e Passed to \code{.pq_wfield}.
+#' @param fid Passed to \code{.pq_wfield}.
+#' @param v Passed to \code{.pq_wbinary}.
+#' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
 .pq_wbytes <- function(e, fid, v, last) {
@@ -419,11 +437,12 @@
 
 #' .pq_wlisthdr
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_wlistbin}, \code{.pq_wlisti32}, \code{.pq_wliststruct}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param size See Usage.
+#' @param e Passed to \code{.pq_emit}.
+#' @param size Passed to \code{.pq_wvarint}.
 #' @param etype See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -438,13 +457,14 @@
 
 #' .pq_wlisti32
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
-#' @param vals See Usage.
-#' @param last See Usage.
+#' @param e Passed to \code{.pq_wfield}.
+#' @param fid Passed to \code{.pq_wfield}.
+#' @param vals A vector; its length is taken.
+#' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
 .pq_wlisti32 <- function(e, fid, vals, last) {
@@ -456,13 +476,14 @@
 
 #' .pq_wlistbin
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
-#' @param vals See Usage.
-#' @param last See Usage.
+#' @param e Passed to \code{.pq_wfield}.
+#' @param fid Passed to \code{.pq_wfield}.
+#' @param vals A vector; its length is taken.
+#' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
 .pq_wlistbin <- function(e, fid, vals, last) {
@@ -474,13 +495,14 @@
 
 #' .pq_wliststruct
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
-#' @param bodies See Usage.
-#' @param last See Usage.
+#' @param e Passed to \code{.pq_wfield}.
+#' @param fid Passed to \code{.pq_wfield}.
+#' @param bodies A vector; its length is taken.
+#' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
 .pq_wliststruct <- function(e, fid, bodies, last) {
@@ -492,13 +514,14 @@
 
 #' .pq_wstruct
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param fid See Usage.
-#' @param body See Usage.
-#' @param last See Usage.
+#' @param e Passed to \code{.pq_wfield}.
+#' @param fid Passed to \code{.pq_wfield}.
+#' @param body Passed to \code{.pq_emit}.
+#' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
 .pq_wstruct <- function(e, fid, body, last) {
@@ -509,10 +532,11 @@
 
 #' .pq_wstop
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e A list; the body reads \code{$parts} from it.
 #' @return The value of \code{do.call}.
 #' @export
 .pq_wstop <- function(e) {
@@ -524,10 +548,11 @@
 
 #' .pq_snappy_decompress
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_column_values}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
+#' @param data A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .pq_snappy_decompress <- function(data) {
@@ -603,7 +628,7 @@
 #'
 #' ponytail: no match-finder; add one if written size ever matters.
 #'
-#' @param data See Usage.
+#' @param data A vector; its length is taken and its elements indexed.
 #' @return The value of \code{do.call}.
 #' @export
 .pq_snappy_compress <- function(data) {
@@ -685,7 +710,7 @@
 #' unsigned 32-bit values (byte-array lengths, the footer length, the
 #' low half of an INT64) have to be read signed and folded back up.
 #'
-#' @param r See Usage.
+#' @param r A vector; its length is taken.
 #' @return The value of \code{ifelse}.
 #' @export
 .pq_u32 <- function(r) {
@@ -698,7 +723,8 @@
 
 #' .pq_bit_width
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_column_values}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
@@ -715,13 +741,14 @@
 
 #' .pq_read_rle
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_column_values}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param buf See Usage.
-#' @param pos See Usage.
-#' @param width See Usage.
-#' @param count See Usage.
+#' @param buf A vector; indexed elementwise.
+#' @param pos Numeric; combined arithmetically in the body.
+#' @param width A count; the body uses it as \code{seq_len(...)}.
+#' @param count A count; the body uses it as \code{rep(...)}.
 #' @param end See Usage.
 #' @return A list with \code{values}, \code{pos}.
 #' @export
@@ -781,8 +808,8 @@
 #'
 #' to 2^53, which covers every count, offset and epoch value here.
 #'
-#' @param raw_bytes See Usage.
-#' @param count See Usage.
+#' @param raw_bytes Passed to \code{.pq_u32}.
+#' @param count Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .pq_read_i64 <- function(raw_bytes, count) {
@@ -798,14 +825,15 @@
 
 #' .pq_decode_plain
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{.pq_column_values}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param buf See Usage.
-#' @param pos See Usage.
+#' @param buf A vector; indexed elementwise.
+#' @param pos Numeric; combined arithmetically in the body.
 #' @param ptype See Usage.
-#' @param count See Usage.
-#' @param type_length Defaults to \code{NULL}.
+#' @param count A count; the body uses it as \code{seq_len(...)}.
+#' @param type_length Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
 .pq_decode_plain <- function(buf, pos, ptype, count, type_length = NULL) {
@@ -880,7 +908,8 @@
 
 #' .pq_convert
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_read_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param vals See Usage.
@@ -916,7 +945,7 @@
 #' which is a silent factor-of-86400 trap for anyone swapping the
 #' engines.
 #'
-#' @param v See Usage.
+#' @param v Numeric; combined arithmetically in the body.
 #' @param ptype See Usage.
 #' @param converted See Usage.
 #' @return The value of \code{v}, as built in the body.
@@ -941,11 +970,12 @@
 
 #' .pq_read_footer
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_read_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param con See Usage.
-#' @param size See Usage.
+#' @param size Numeric; combined arithmetically in the body.
 #' @return The value of \code{.pq_struct}.
 #' @export
 .pq_read_footer <- function(con, size) {
@@ -965,14 +995,15 @@
 
 #' .pq_column_values
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_read_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param con See Usage.
-#' @param cm See Usage.
-#' @param num_rows See Usage.
-#' @param maxdef See Usage.
-#' @param typelen See Usage.
+#' @param cm Passed to \code{.pq_f}.
+#' @param num_rows A count; the body uses it as \code{seq_len(...)}.
+#' @param maxdef Passed to \code{.pq_bit_width}.
+#' @param typelen Passed to \code{.pq_decode_plain}.
 #' @return The value of \code{[}.
 #' @export
 .pq_column_values <- function(con, cm, num_rows, maxdef, typelen) {
@@ -1229,7 +1260,8 @@ morie_read_parquet <- function(path, columns = NULL) {
 
 #' .pq_prep_write
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -1268,10 +1300,11 @@ morie_read_parquet <- function(path, columns = NULL) {
 
 #' .pq_encode_plain
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
+#' @param values A vector; its length is taken and its elements indexed.
 #' @param ptype See Usage.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -1317,10 +1350,11 @@ morie_read_parquet <- function(path, columns = NULL) {
 
 #' .pq_encode_levels
 #'
-#' Part of the parquet implementation; see the file header for the
+#' A step of the parquet implementation. Called by \code{morie_write_parquet}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param levels See Usage.
+#' @param levels A vector; its length is taken.
 #' @param width See Usage.
 #' @return A vector, from \code{c}.
 #' @export

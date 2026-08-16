@@ -8,15 +8,15 @@
 .survroc_pair(times, events, marker, c, t, route)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{marker}{See Usage.}
+\item{times}{Passed to \code{.survroc_clean}.}
+\item{events}{Passed to \code{.survroc_clean}.}
+\item{marker}{Passed to \code{.survroc_clean}.}
 \item{c}{See Usage.}
 \item{t}{See Usage.}
-\item{route}{See Usage.}
+\item{route}{Compared against \code{"empirical"}.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. Called by \code{morie_survroc_roc_at}, \code{morie_survroc_sensitivity}, \code{morie_survroc_specificity}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.survroc_km_pair}.

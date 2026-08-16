@@ -3,15 +3,15 @@
 % the formals.
 \name{.morie_rg_quad}
 \alias{.morie_rg_quad}
-\title{Adaptive Simpson, the same rule the Python arm\\\'s quad() uses, so the}
+\title{Adaptive Simpson, the same rule the Python arm\\'s quad() uses, so the}
 \usage{
 .morie_rg_quad(f, a, b, tol = 1.49e-08, maxdepth = 50L)
 }
 \arguments{
 \item{f}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{tol}{Defaults to \code{1.49e-08}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1.49e-08}.}
 \item{maxdepth}{Defaults to \code{50L}.}
 }
 \description{

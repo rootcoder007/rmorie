@@ -8,11 +8,11 @@
 confusion_error(C, labels = NULL)
 }
 \arguments{
-\item{C}{See Usage.}
-\item{labels}{Defaults to \code{NULL}.}
+\item{C}{A matrix; indexed by row and column.}
+\item{labels}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{
-Part of the attrInf_native implementation; see the file header for the source it follows.
+A step of the attrInf_native implementation. Called by \code{morie_attrInf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{err}, as built in the body.

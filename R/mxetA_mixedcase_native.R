@@ -22,9 +22,9 @@
 #' Part of the mxetA_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param F See Usage.
+#' @param F A matrix; passed to \code{as.matrix}.
 #' @param n_sim Defaults to \code{1}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param max_points Defaults to \code{100000L}.
 #' @return A list with \code{fields}, \code{scales}, \code{n_points}, \code{frechet_uniform}, \code{seed}, \code{method}.
 #' @export

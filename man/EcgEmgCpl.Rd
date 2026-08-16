@@ -8,10 +8,10 @@
 EcgEmgCpl(ecg, emg, qrs, fs)
 }
 \arguments{
-\item{ecg}{See Usage.}
-\item{emg}{See Usage.}
+\item{ecg}{A vector; its length is taken.}
+\item{emg}{A vector; its length is taken and its elements indexed.}
 \item{qrs}{See Usage.}
-\item{fs}{See Usage.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 }
 \description{
 meets Section 2.2.5 (rate rises with effort).  Both series are sampled on the same beat grid so the correlation between them is well defined.

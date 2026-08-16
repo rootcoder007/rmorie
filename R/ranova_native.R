@@ -11,10 +11,11 @@
 
 #' .vc_groups
 #'
-#' Part of the ranova_native implementation; see the file header for the
+#' A step of the ranova_native implementation. Called by \code{morie_ranova}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; indexed elementwise.
 #' @param group See Usage.
 #' @return A list with \code{keys}, \code{gs}.
 #' @export
@@ -77,13 +78,14 @@ morie_ranova <- function(y, group) {
 
 #' .reml_loglik
 #'
-#' Part of the ranova_native implementation; see the file header for the
+#' A step of the ranova_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gs See Usage.
-#' @param ns See Usage.
-#' @param s2a See Usage.
-#' @param s2e See Usage.
+#' @param gs A vector; its length is taken and its elements indexed.
+#' @param ns A vector; indexed elementwise.
+#' @param s2a Numeric; combined arithmetically in the body.
+#' @param s2e Numeric; passed to \code{log}.
 #' @return A list with \code{ll}, \code{mu}.
 #' @export
 .reml_loglik <- function(gs, ns, s2a, s2e) {

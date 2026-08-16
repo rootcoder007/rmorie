@@ -8,10 +8,10 @@
 .meglt_svd(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the meglt_native implementation; see the file header for the source it follows.
+A step of the meglt_native implementation. Called by \code{coherence}, \code{nuclear_norm}, \code{svt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{U}, \code{s}, \code{Vt}.

@@ -8,13 +8,13 @@
 .abcgp.implausible(fit, theta, threshold = 10, n_sd = 3)
 }
 \arguments{
-\item{fit}{See Usage.}
-\item{theta}{See Usage.}
-\item{threshold}{Defaults to \code{10}.}
-\item{n_sd}{Defaults to \code{3}.}
+\item{fit}{A list; the body reads \code{$values} from it.}
+\item{theta}{Passed to \code{.abcgp.gp_predict}.}
+\item{threshold}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
+\item{n_sd}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

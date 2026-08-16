@@ -8,11 +8,11 @@
 .morie_gr_bf16_bits(u, mode = "nearest_even")
 }
 \arguments{
-\item{u}{See Usage.}
-\item{mode}{Defaults to \code{"nearest_even"}.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{mode}{Compared against \code{"nearest_even"}. Defaults to \code{"nearest_even"}.}
 }
 \description{
-"nearest_even" or "truncate"; arithmetic is done in doubles and folded back mod 2^32, exactly reproducing numpy\\\'s uint32/uint64 masking.
+"nearest_even" or "truncate"; arithmetic is done in doubles and folded back mod 2^32, exactly reproducing numpy\\'s uint32/uint64 masking.
 }
 \value{
 A numeric value.

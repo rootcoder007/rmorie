@@ -8,15 +8,15 @@
 .s03json_write(x, path, auto_unbox = TRUE, digits = NULL, pretty = FALSE, ...)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.s03json_toJSON}.}
 \item{path}{See Usage.}
-\item{auto_unbox}{Defaults to \code{TRUE}.}
-\item{digits}{Defaults to \code{NULL}.}
-\item{pretty}{Defaults to \code{FALSE}.}
+\item{auto_unbox}{Passed to \code{.s03json_toJSON}. Defaults to \code{TRUE}.}
+\item{digits}{Passed to \code{.s03json_toJSON}.}
+\item{pretty}{Passed to \code{.s03json_toJSON}. Defaults to \code{FALSE}.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 Invisibly,the value of \code{path}, as built in the body.

@@ -8,14 +8,14 @@
 morie_replwt(d, method = "jkn", R = 200, fay = 0, seed = 1)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{method}{Defaults to \code{"jkn"}.}
-\item{R}{Defaults to \code{200}.}
-\item{fay}{Defaults to \code{0}.}
-\item{seed}{Defaults to \code{1}.}
+\item{d}{Passed to \code{.replwt_jackknife_weights}.}
+\item{method}{One of \code{"brr"}, \code{"fay"}, \code{"jk1"}, \code{"jkn"}. Defaults to \code{"jkn"}.}
+\item{R}{Passed to \code{.replwt_bootstrap_weights}. Defaults to \code{200}.}
+\item{fay}{A flag; the body branches on it. Defaults to \code{0}.}
+\item{seed}{Passed to \code{.replwt_bootstrap_weights}. Defaults to \code{1}.}
 }
 \description{
-Part of the replwt_native implementation; see the file header for the source it follows.
+A step of the replwt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{weights}, \code{scale}, \code{n_replicates}, \code{method}, \code{dropped}, \code{hadamard_order}, \code{fay}, \code{seed}.

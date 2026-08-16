@@ -8,11 +8,11 @@
 .morie_qrs_corr(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A vector; its length is taken.}
+\item{b}{A vector; its length is taken.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

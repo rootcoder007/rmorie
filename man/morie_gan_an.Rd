@@ -8,19 +8,19 @@
 morie_gan_an(x, generator, feature_fn, z_dim, steps = 200, lr = 0.05, lam = 0.1, seed = 0, h = 1e-04, step_decay = 0.05)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.gan_an_anomaly_score_impl}.}
 \item{generator}{See Usage.}
 \item{feature_fn}{See Usage.}
 \item{z_dim}{See Usage.}
 \item{steps}{Defaults to \code{200}.}
 \item{lr}{Defaults to \code{0.05}.}
-\item{lam}{Defaults to \code{0.1}.}
+\item{lam}{Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.}
 \item{seed}{Defaults to \code{0}.}
-\item{h}{Defaults to \code{1e-04}.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.}
 \item{step_decay}{Defaults to \code{0.05}.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{score}, \code{z}, \code{reconstruction}, \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step}, \code{method}, \code{note}.

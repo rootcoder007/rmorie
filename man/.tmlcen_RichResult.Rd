@@ -11,7 +11,7 @@
 \item{payload}{See Usage.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{payload}, as built in the body.

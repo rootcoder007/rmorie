@@ -8,10 +8,10 @@
 .morie_spx_dft(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{MsCoh}, \code{SpecAnom}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{re}, \code{im}.

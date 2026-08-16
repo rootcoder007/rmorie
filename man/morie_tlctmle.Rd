@@ -19,7 +19,7 @@ morie_tlctmle(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L, penalty = TRUE)
 \item{penalty}{Defaults to \code{TRUE}.}
 }
 \description{
-Part of the tlctmle_native implementation; see the file header for the source it follows.
+A step of the tlctmle_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ctmle}.

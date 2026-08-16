@@ -8,7 +8,7 @@
 .morie_gr_lcg_perm(n, seed)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{

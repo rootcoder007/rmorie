@@ -69,10 +69,11 @@
 
 #' .hibrid_rows
 #'
-#' Part of the hibrid_native implementation; see the file header for the
+#' A step of the hibrid_native implementation. Called by \code{morie_hibrid_hibrid_prediction}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .hibrid_rows <- function(x) {
@@ -86,10 +87,11 @@
 
 #' .hibrid_chol
 #'
-#' Part of the hibrid_native implementation; see the file header for the
+#' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .hibrid_chol <- function(A) {
@@ -115,11 +117,12 @@
 
 #' .hibrid_solve
 #'
-#' Part of the hibrid_native implementation; see the file header for the
+#' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}, \code{morie_hibrid_hibrid_prediction}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param b See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .hibrid_solve <- function(L, b) {
@@ -141,10 +144,11 @@
 
 #' .hibrid_logdet
 #'
-#' Part of the hibrid_native implementation; see the file header for the
+#' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
+#' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
 .hibrid_logdet <- function(L) 2.0 * sum(log(diag(L)))
@@ -152,15 +156,16 @@
 # Restricted log likelihood at the two ratios, sigma_e^2 profiled out.
 #' Restricted log likelihood at the two ratios, sigma_e^2 profiled out
 #'
-#' Part of the hibrid_native implementation; see the file header for the
+#' A step of the hibrid_native implementation. Called by \code{morie_hibrid_hibrid_prediction}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param la See Usage.
-#' @param ls See Usage.
-#' @param Kg See Usage.
-#' @param Ks See Usage.
-#' @param y See Usage.
-#' @param X See Usage.
+#' @param la Numeric; combined arithmetically in the body.
+#' @param ls Numeric; combined arithmetically in the body.
+#' @param Kg Numeric; combined arithmetically in the body.
+#' @param Ks Numeric; combined arithmetically in the body.
+#' @param y A vector; its length is taken.
+#' @param X A matrix; indexed by row and column.
 #' @return A list with \code{ll}, \code{beta}, \code{s2e}, \code{L}.
 #' @export
 .hibrid_reml_at <- function(la, ls, Kg, Ks, y, X) {
@@ -185,16 +190,17 @@
 
 #' morie_hibrid_hibrid_prediction
 #'
-#' Part of the hibrid_native implementation; see the file header for the
+#' A step of the hibrid_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param p1_geno See Usage.
-#' @param p2_geno See Usage.
+#' @param p1_geno Passed to \code{.hibrid_rows}.
+#' @param p2_geno Passed to \code{.hibrid_rows}.
 #' @param sigma2_sca Defaults to \code{NULL}.
-#' @param X Defaults to \code{NULL}.
-#' @param p1_new Defaults to \code{NULL}.
-#' @param p2_new Defaults to \code{NULL}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
+#' @param p1_new Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
+#' @param p2_new Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
 #' @param max_iter Defaults to \code{300L}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{gca_effect}, \code{sca_effect}, \code{coefficients}, \code{sigma2_gca}, \code{sigma2_sca}, \code{sigma2_e}, \code{sca_share}, \code{h2}, \code{gca_kernel}, \code{sca_kernel}, \code{reml_path}, \code{reml_loglik}, \code{iterations}, \code{converged}, \code{sca_fixed}, \code{prediction_new}, \code{residuals}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.
@@ -333,7 +339,8 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
 
 #' .hibrid_cheatsheet
 #'
-#' Part of the hibrid_native implementation; see the file header for the
+#' A step of the hibrid_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

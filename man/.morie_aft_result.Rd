@@ -8,16 +8,16 @@
 .morie_aft_result(t, e, X, fit, family, title, method)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{e}{See Usage.}
+\item{t}{A vector; its length is taken.}
+\item{e}{Numeric; passed to \code{sum}.}
 \item{X}{See Usage.}
-\item{fit}{See Usage.}
+\item{fit}{A list; the body reads \code{$beta}, \code{$converged}, \code{$cov}, \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.}
 \item{family}{See Usage.}
 \item{title}{See Usage.}
 \item{method}{See Usage.}
 }
 \description{
-Part of the aft_native implementation; see the file header for the source it follows.
+A step of the aft_native implementation. Called by \code{.morie_aft_common}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma}, \code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events}, \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X}, \code{method}.

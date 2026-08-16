@@ -8,8 +8,8 @@
 .fm_second_order(V, x)
 }
 \arguments{
-\item{V}{See Usage.}
-\item{x}{See Usage.}
+\item{V}{A matrix; indexed by row and column.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 identity for the pairwise term, exactly equal to the naive double sum over i<j.

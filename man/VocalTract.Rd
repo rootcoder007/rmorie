@@ -12,10 +12,10 @@ VocalTract(y, fs, pitch_period = NULL, cutoff = NULL, pitch_range = c(0.002, 0.0
 \item{fs}{See Usage.}
 \item{pitch_period}{Defaults to \code{NULL}.}
 \item{cutoff}{Defaults to \code{NULL}.}
-\item{pitch_range}{Defaults to \code{c(0.002, 0.02)}.}
+\item{pitch_range}{A vector; indexed elementwise. Defaults to \code{c(0.002, 0.02)}.}
 }
 \description{
-Part of the rangayyan_cep implementation; see the file header for the source it follows.
+A step of the rangayyan_cep implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{response}, \code{cepstrum}, \code{cutoff}, \code{pitch_period}, \code{pitch_hz}, \code{peak_quefrency}, \code{fs}, \code{n}, \code{method}.

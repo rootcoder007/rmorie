@@ -8,7 +8,7 @@
 .k03_lcg(state)
 }
 \arguments{
-\item{state}{See Usage.}
+\item{state}{Numeric; combined arithmetically in the body.}
 }
 \description{
 # language arms produce bit-identical initial weights.

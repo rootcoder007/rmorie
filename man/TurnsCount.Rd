@@ -9,7 +9,7 @@ TurnsCount(x, threshold = 100, window = NULL)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{threshold}{Defaults to \code{100}.}
+\item{threshold}{Passed to \code{.morie_rg_turns}. Defaults to \code{100}.}
 \item{window}{Defaults to \code{NULL}.}
 }
 \description{

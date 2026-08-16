@@ -8,12 +8,12 @@
 .morie_gr_w4b_maxpool(x, k, s)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{k}{See Usage.}
-\item{s}{See Usage.}
+\item{x}{A matrix; indexed by row and column.}
+\item{k}{Numeric; combined arithmetically in the body.}
+\item{s}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the geron_w4b_native implementation; see the file header for the source it follows.
+A step of the geron_w4b_native implementation. Called by \code{morie_geron_max_pool}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{argmax}, \code{output_shape}.

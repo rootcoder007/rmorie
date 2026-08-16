@@ -8,11 +8,11 @@
 .rob_tukey_rho(u, cc)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{cc}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{cc}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the robust_native implementation; see the file header for the source it follows.
+A step of the robust_native implementation. Called by \code{.rob_s_scale}, \code{morie_rob_tau}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,12 +8,12 @@
 BiorDwt(x, wavelet = "bior2.2", levels = 3)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.tf_need}.}
 \item{wavelet}{Defaults to \code{"bior2.2"}.}
 \item{levels}{Defaults to \code{3}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{reconstructed}, \code{max_reconstruction_error}, \code{symmetric}, \code{wavelet}, \code{method}.

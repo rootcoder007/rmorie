@@ -8,7 +8,7 @@
 .morie_forensics_flatten_namus_search(rec)
 }
 \arguments{
-\item{rec}{See Usage.}
+\item{rec}{A vector; indexed elementwise.}
 }
 \description{
 NamUs Search endpoint actually returns; verified live 2026-07). Height/weight are not projectable via Search -- NA by contract.

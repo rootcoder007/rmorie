@@ -8,10 +8,10 @@
 .rfgain(Y, left, right, q)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{left}{See Usage.}
-\item{right}{See Usage.}
-\item{q}{See Usage.}
+\item{Y}{A matrix; indexed by row and column.}
+\item{left}{A vector; its length is taken.}
+\item{right}{A vector; its length is taken.}
+\item{q}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 rfmlt.R Part of the mvsml_rf_shared implementation; see the file header for the source it follows.

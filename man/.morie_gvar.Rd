@@ -13,7 +13,7 @@
 \item{op}{Defaults to \code{"leaf"}.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{.morie_gvar_wrap}, \code{Math.morie_gvar}, \code{morie_gvar_relu} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{e}, as built in the body.

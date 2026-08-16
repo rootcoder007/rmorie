@@ -8,11 +8,11 @@
 .lyapun_nearest_neighbours(pts, min_sep)
 }
 \arguments{
-\item{pts}{See Usage.}
+\item{pts}{A vector; its length is taken and its elements indexed.}
 \item{min_sep}{See Usage.}
 }
 \description{
-Part of the lyapun_native implementation; see the file header for the source it follows.
+A step of the lyapun_native implementation. Called by \code{divergence_curve}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{nn}, \code{d0}.

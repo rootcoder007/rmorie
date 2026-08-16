@@ -23,11 +23,11 @@
 #' header for the source it follows.
 #'
 #' @param fun See Usage.
-#' @param k See Usage.
-#' @param r Defaults to \code{10}.
-#' @param p Defaults to \code{4}.
-#' @param seed Defaults to \code{0}.
-#' @param bounds Defaults to \code{NULL}.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
+#' @param r A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10}.
+#' @param p A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param bounds Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{estimate}, \code{mu}, \code{mu_star}, \code{sigma}, \code{elementary_effects}, \code{n_runs}, \code{delta}, \code{n_levels}, \code{r}, \code{p}, \code{k}, \code{method}.
 #' @export
 morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,

@@ -20,12 +20,13 @@
 
 #' .mor_kc_gram
 #'
-#' Part of the kcusum_native implementation; see the file header for the
+#' A step of the kcusum_native implementation. Called by \code{morie_kcusum}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
-#' @param kernel See Usage.
-#' @param bandwidth See Usage.
+#' @param z A matrix; passed to \code{nrow}.
+#' @param kernel One of \code{"gaussian"}, \code{"linear"}.
+#' @param bandwidth Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{K}, \code{bw}.
 #' @export
 .mor_kc_gram <- function(z, kernel, bandwidth) {

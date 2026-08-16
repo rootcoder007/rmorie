@@ -8,11 +8,11 @@
 .t4_kendallS(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; indexed elementwise.}
 }
 \description{
-Part of the tail4_core implementation; see the file header for the source it follows.
+A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{S}, as built in the body.

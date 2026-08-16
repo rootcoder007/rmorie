@@ -8,11 +8,11 @@
 .vitln(v, eps = .vitlneps)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{eps}{Defaults to \code{.vitlneps}.}
+\item{v}{A vector; its length is taken.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{.vitlneps}.}
 }
 \description{
-Part of the helpers_vit implementation; see the file header for the source it follows.
+A step of the helpers_vit implementation. Called by \code{.vitlnrows}, \code{Vitfwd}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

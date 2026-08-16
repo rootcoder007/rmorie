@@ -49,11 +49,12 @@ Strtwt <- function(A, H = NULL, S = NULL) {
 
 #' .strtwt_cols
 #'
-#' Part of the Strtwt implementation; see the file header for the source
+#' A step of the Strtwt implementation. Called by \code{Strtwt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param X See Usage.
-#' @param n See Usage.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.s03mat}.
+#' @param n A count; the body uses it as \code{matrix(...)}.
 #' @param nm See Usage.
 #' @return The value of \code{M}, as built in the body.
 #' @export
@@ -66,11 +67,12 @@ Strtwt <- function(A, H = NULL, S = NULL) {
 
 #' .strtwt_fit
 #'
-#' Part of the Strtwt implementation; see the file header for the source
+#' A step of the Strtwt implementation. Called by \code{Strtwt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param Z See Usage.
-#' @param a See Usage.
+#' @param Z Passed to \code{.s03logit}.
+#' @param a Passed to \code{.s03logit}.
 #' @return The value of \code{pmin}.
 #' @export
 .strtwt_fit <- function(Z, a) {

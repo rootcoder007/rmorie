@@ -8,21 +8,21 @@
 morie_polkrn(y, A_history, H_history, degree = 2, basis = "both", summary = "cumulative", n_centres = 5, width = NULL, kind = "binary", stabilize = TRUE, trim = NULL, grid = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{.polkrn_vec}.}
 \item{A_history}{See Usage.}
 \item{H_history}{See Usage.}
 \item{degree}{Defaults to \code{2}.}
-\item{basis}{Defaults to \code{"both"}.}
+\item{basis}{One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.}
 \item{summary}{Defaults to \code{"cumulative"}.}
 \item{n_centres}{Defaults to \code{5}.}
 \item{width}{Defaults to \code{NULL}.}
-\item{kind}{Defaults to \code{"binary"}.}
-\item{stabilize}{Defaults to \code{TRUE}.}
-\item{trim}{Defaults to \code{NULL}.}
-\item{grid}{Defaults to \code{NULL}.}
+\item{kind}{Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{"binary"}.}
+\item{stabilize}{Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{TRUE}.}
+\item{trim}{Passed to \code{.polkrn_ip_weights_history}.}
+\item{grid}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the polkrn_native implementation; see the file header for the source it follows.
+A step of the polkrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

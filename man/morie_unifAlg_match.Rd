@@ -8,11 +8,11 @@
 morie_unifAlg_match(pattern, subject)
 }
 \arguments{
-\item{pattern}{See Usage.}
-\item{subject}{See Usage.}
+\item{pattern}{Passed to \code{.unifAlg_check}.}
+\item{subject}{Passed to \code{.unifAlg_check}.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{morie_trmRew_rewrite_step}, \code{morie_unifAlg_factor_through}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{sub}, as built in the body.

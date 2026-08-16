@@ -8,13 +8,13 @@
 .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 }
 \arguments{
-\item{n_dw}{See Usage.}
-\item{Pz}{See Usage.}
-\item{Pd_z}{See Usage.}
-\item{Pw_z}{See Usage.}
+\item{n_dw}{Passed to \code{.plsa_check}.}
+\item{Pz}{A vector; its length is taken.}
+\item{Pd_z}{A matrix; indexed by row and column.}
+\item{Pw_z}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the plsa_native implementation; see the file header for the source it follows.
+A step of the plsa_native implementation. Called by \code{e_step}, \code{morie_plsa}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{post}, as built in the body.

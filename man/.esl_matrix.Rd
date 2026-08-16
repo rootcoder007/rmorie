@@ -8,12 +8,12 @@
 .esl_matrix(X, y, what = "X")
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 \item{what}{Defaults to \code{"X"}.}
 }
 \description{
-Part of the esl_native0 implementation; see the file header for the source it follows.
+A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_err}, \code{morie_esl_random_forest}, \code{morie_esl_residual_variance}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{y}.

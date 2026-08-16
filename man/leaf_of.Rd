@@ -9,10 +9,10 @@ leaf_of(tree, x)
 }
 \arguments{
 \item{tree}{See Usage.}
-\item{x}{See Usage.}
+\item{x}{A vector; indexed elementwise.}
 }
 \description{
-Part of the hntfst_native implementation; see the file header for the source it follows.
+A step of the hntfst_native implementation. Called by \code{.hntfst_tree_predict}, \code{forest_weights}, \code{morie_clrgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{node}, \code{path}.

@@ -14,7 +14,7 @@ morie_qrntcq_quarantine_efficacy(t.Q, t.R, generation.time = NULL, t.E = 0)
 \item{t.E}{Defaults to \code{0}.}
 }
 \description{
-Part of the qrntcq_native implementation; see the file header for the source it follows.
+A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration}, \code{morie_qrntcq_relative_utility}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{efficacy}, \code{prevented.mass}, \code{remaining.mass}, \code{t.Q}, \code{t.R}, \code{max.attainable}, \code{pre.quarantine.mass}.

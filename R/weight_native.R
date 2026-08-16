@@ -11,10 +11,11 @@
 
 #' .morie_weight_result
 #'
-#' Part of the weight_native implementation; see the file header for the
+#' A step of the weight_native implementation. Called by \code{morie_weight_cbps}, \code{morie_weight_entropy}, \code{morie_weight_ow} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
+#' @param weights A vector; its length is taken.
 #' @param propensity See Usage.
 #' @param method See Usage.
 #' @param estimand See Usage.
@@ -55,10 +56,11 @@ print.morie_weight <- function(x, ...) {
 
 #' .morie_weight_from_ps
 #'
-#' Part of the weight_native implementation; see the file header for the
+#' A step of the weight_native implementation. Called by \code{morie_weight_cbps}, \code{morie_weight_ps}, \code{morie_weight_super}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ps See Usage.
+#' @param ps Numeric; combined arithmetically in the body.
 #' @param t01 See Usage.
 #' @param estimand See Usage.
 #' @return The value of \code{switch}.
@@ -343,10 +345,10 @@ morie_weight_super <- function(data, treatment, covariates,
 #' normal-equation solves that break active-set methods when learner
 #' predictions are collinear.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param b Numeric; combined arithmetically in the body.
 #' @param tol Defaults to \code{1e-10}.
-#' @param max_iter Defaults to \code{2000L}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000L}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .morie_nnls <- function(A, b, tol = 1e-10, max_iter = 2000L) {

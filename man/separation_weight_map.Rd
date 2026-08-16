@@ -8,12 +8,12 @@
 separation_weight_map(labels, w0 = 10, sigma = 5)
 }
 \arguments{
-\item{labels}{See Usage.}
-\item{w0}{Defaults to \code{10}.}
-\item{sigma}{Defaults to \code{5}.}
+\item{labels}{Passed to \code{.unetbk_as_matrix}.}
+\item{w0}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
+\item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 }
 \description{
-Part of the unetbk_native implementation; see the file header for the source it follows.
+A step of the unetbk_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{weights}, \code{n_instances}, \code{max_weight}, \code{note}.

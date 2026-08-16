@@ -8,8 +8,8 @@
 .gpannsse(y_hat, y)
 }
 \arguments{
-\item{y_hat}{See Usage.}
-\item{y}{See Usage.}
+\item{y_hat}{Passed to \code{.gpmat}.}
+\item{y}{Passed to \code{.gpmat}.}
 }
 \description{
 -------------------------------------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

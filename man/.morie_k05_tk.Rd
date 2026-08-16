@@ -8,13 +8,13 @@
 .morie_k05_tk(x, n, xbar, sigma)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{n}{See Usage.}
-\item{xbar}{See Usage.}
-\item{sigma}{See Usage.}
+\item{x}{A vector; indexed elementwise.}
+\item{n}{Numeric; combined arithmetically in the body.}
+\item{xbar}{Numeric; combined arithmetically in the body.}
+\item{sigma}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the k05_tranche1 implementation; see the file header for the source it follows.
+A step of the k05_tranche1 implementation. Called by \code{morie_snht}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tk}, \code{s}.

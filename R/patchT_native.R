@@ -17,7 +17,8 @@
 
 #' .patcht_vec
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. Called by \code{instance_norm}, \code{patchify}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -27,7 +28,8 @@
 
 #' .patcht_mat
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. Called by \code{channel_independent_tokens}, \code{channel_mixed_tokens}, \code{patchtst_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param M See Usage.
@@ -44,10 +46,11 @@
 
 #' patchify
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. Called by \code{channel_independent_tokens}, \code{channel_mixed_tokens}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.patcht_vec}.
 #' @param patch_len See Usage.
 #' @param stride Defaults to \code{NULL}.
 #' @return A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{stride}, \code{L}, \code{covers}.
@@ -82,10 +85,11 @@ patchify <- function(x, patch_len, stride = NULL) {
 
 #' channel_independent_tokens
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. Called by \code{patchtst_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.patcht_mat}.
 #' @param patch_len See Usage.
 #' @param stride Defaults to \code{NULL}.
 #' @return A list with \code{tokens}, \code{D}, \code{n_patches}, \code{patch_len}, \code{n_tokens_total}, \code{design}, \code{note}.
@@ -114,10 +118,11 @@ channel_independent_tokens <- function(X, patch_len, stride = NULL) {
 
 #' channel_mixed_tokens
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.patcht_mat}.
 #' @param patch_len See Usage.
 #' @param stride Defaults to \code{NULL}.
 #' @return A list with \code{tokens}, \code{n_patches}, \code{n_tokens_total}, \code{design}, \code{note}.
@@ -139,10 +144,11 @@ channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
 
 #' instance_norm
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. Called by \code{patchtst_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.patcht_vec}.
 #' @return A list with \code{normalised}, \code{mean}, \code{sd}, \code{degenerate}.
 #' @export
 instance_norm <- function(x) {
@@ -166,14 +172,15 @@ instance_norm <- function(x) {
 
 #' attention_cost
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. Called by \code{patchtst_encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param L See Usage.
 #' @param patch_len See Usage.
 #' @param stride Defaults to \code{NULL}.
 #' @param D Defaults to \code{1}.
-#' @param channel_independent Defaults to \code{TRUE}.
+#' @param channel_independent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{n_patches}, \code{pointwise}, \code{patched}, \code{reduction}, \code{stride}, \code{patch_len}, \code{note}.
 #' @export
 attention_cost <- function(L, patch_len, stride = NULL, D = 1,
@@ -199,13 +206,14 @@ attention_cost <- function(L, patch_len, stride = NULL, D = 1,
 
 #' patchtst_encode
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.patcht_mat}.
 #' @param patch_len See Usage.
 #' @param stride Defaults to \code{NULL}.
-#' @param normalise Defaults to \code{TRUE}.
+#' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{tokens}, \code{D}, \code{n_patches}, \code{n_tokens_total}, \code{norm_stats}, \code{normalised}, \code{cost}, \code{method}.
 #' @export
 patchtst_encode <- function(X, patch_len, stride = NULL,
@@ -244,7 +252,8 @@ patchtst_encode <- function(X, patch_len, stride = NULL,
 
 #' .patchT_cheatsheet
 #'
-#' Part of the patchT_native implementation; see the file header for the
+#' A step of the patchT_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

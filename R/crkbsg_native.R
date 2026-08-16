@@ -12,10 +12,11 @@
 
 #' .crkbsg_rows
 #'
-#' Part of the crkbsg_native implementation; see the file header for the
+#' A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .crkbsg_rows <- function(x) {
@@ -35,12 +36,13 @@
 # Correlogram of the basic structure; rho(0) = 1.
 #' Correlogram of the basic structure; rho(0) = 1
 #'
-#' Part of the crkbsg_native implementation; see the file header for the
+#' A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h See Usage.
-#' @param model See Usage.
-#' @param rng See Usage.
+#' @param h Numeric; combined arithmetically in the body.
+#' @param model One of \code{"exponential"}, \code{"gaussian"}, \code{"spherical"}.
+#' @param rng Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
 .crkbsg_rho <- function(h, model, rng) {
@@ -59,11 +61,12 @@
 
 #' .crkbsg_dist
 #'
-#' Part of the crkbsg_native implementation; see the file header for the
+#' A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .crkbsg_dist <- function(a, b) sqrt(sum((a - b) ^ 2))
@@ -77,7 +80,7 @@
 #' -- so a Cholesky solve is not available.
 #'
 #' @param A See Usage.
-#' @param b See Usage.
+#' @param b A vector; its length is taken.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .crkbsg_solve <- function(A, b) {
@@ -112,15 +115,16 @@
 
 #' morie_crkbsg_cokriging
 #'
-#' Part of the crkbsg_native implementation; see the file header for the
+#' A step of the crkbsg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param coords See Usage.
+#' @param coords Passed to \code{.crkbsg_rows}.
 #' @param y See Usage.
 #' @param z See Usage.
-#' @param s_predict See Usage.
-#' @param cross_variogram Defaults to \code{NULL}.
-#' @param coords_z Defaults to \code{NULL}.
+#' @param s_predict Passed to \code{.crkbsg_rows}.
+#' @param cross_variogram Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param coords_z Optional; may be \code{NULL}. Passed to \code{.crkbsg_rows}.
 #' @return A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{kriging_prediction}, \code{kriging_variance}, \code{variance_reduction}, \code{weights_primary}, \code{weights_secondary}, \code{lagrange}, \code{targets}, \code{coregionalisation}, \code{nugget_matrix}, \code{model}, \code{range}, \code{n_primary}, \code{n_secondary}, \code{method}, \code{note}.
 #' @export
 morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
@@ -245,7 +249,8 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
 
 #' .crkbsg_cheatsheet
 #'
-#' Part of the crkbsg_native implementation; see the file header for the
+#' A step of the crkbsg_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

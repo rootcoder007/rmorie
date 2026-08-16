@@ -11,12 +11,12 @@ acquire(mu, sd, best, acq = "ei", kappa = 2, xi = 0)
 \item{mu}{See Usage.}
 \item{sd}{See Usage.}
 \item{best}{See Usage.}
-\item{acq}{Defaults to \code{"ei"}.}
+\item{acq}{One of \code{"ei"}, \code{"lcb"}, \code{"pi"}. Defaults to \code{"ei"}.}
 \item{kappa}{Defaults to \code{2}.}
 \item{xi}{Defaults to \code{0}.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{bayopt}, \code{maximise_acquisition}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

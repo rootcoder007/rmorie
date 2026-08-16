@@ -9,17 +9,17 @@ morie_rrblpr_rr_blup(y, M, lam = NULL, X = NULL, M_new = NULL, log_lam_lo = -12,
 }
 \arguments{
 \item{y}{See Usage.}
-\item{M}{See Usage.}
+\item{M}{Passed to \code{.rrblpr_rows}.}
 \item{lam}{Defaults to \code{NULL}.}
-\item{X}{Defaults to \code{NULL}.}
-\item{M_new}{Defaults to \code{NULL}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.}
+\item{M_new}{Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.}
 \item{log_lam_lo}{Defaults to \code{-12}.}
 \item{log_lam_hi}{Defaults to \code{12}.}
 \item{max_iter}{Defaults to \code{200L}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{
-Part of the rrblpr_native implementation; see the file header for the source it follows.
+A step of the rrblpr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{marker_effects}, \code{coefficients}, \code{breeding_values}, \code{breeding_values_kernel}, \code{kernel_identity_gap}, \code{fitted}, \code{residuals}, \code{lambda}, \code{lambda_estimated}, \code{sigma2_e}, \code{sigma2_u}, \code{sigma2_g}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{prediction_new}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.

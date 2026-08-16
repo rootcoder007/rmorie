@@ -12,7 +12,7 @@ weighted_moments(m, g)
 \item{g}{See Usage.}
 }
 \description{
-Part of the bnskmt_native implementation; see the file header for the source it follows.
+A step of the bnskmt_native implementation. Called by \code{cvm_statistic}, \code{ks_critical_value}, \code{ks_statistic}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{sd}, \code{n}.

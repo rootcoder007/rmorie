@@ -10,12 +10,12 @@
 \arguments{
 \item{T}{See Usage.}
 \item{E}{See Usage.}
-\item{M}{See Usage.}
+\item{M}{A vector; indexed elementwise.}
 \item{c}{See Usage.}
 \item{t}{See Usage.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. Called by \code{.survroc_pair}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

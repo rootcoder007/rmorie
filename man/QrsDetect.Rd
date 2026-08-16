@@ -8,8 +8,8 @@
 QrsDetect(x, fs = 200)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{200}.}
+\item{x}{A vector; its length is taken.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 }
 \description{
 filter coefficients are integers designed for fs = 200 Hz and DO NOT rescale; the timing constants (150 ms integrator, 200 ms refractory) do.

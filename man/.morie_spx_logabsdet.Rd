@@ -8,10 +8,10 @@
 .morie_spx_logabsdet(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

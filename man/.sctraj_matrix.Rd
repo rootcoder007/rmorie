@@ -8,10 +8,10 @@
 .sctraj_matrix(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the sctraj_native implementation; see the file header for the source it follows.
+A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_cluster_distances}, \code{morie_sctraj_principal_curve}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{M}, as built in the body.

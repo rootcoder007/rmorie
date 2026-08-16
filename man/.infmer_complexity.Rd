@@ -10,10 +10,10 @@
 \arguments{
 \item{L_Q}{See Usage.}
 \item{L_K}{See Usage.}
-\item{c}{Defaults to \code{5}.}
+\item{c}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 }
 \description{
-Part of the infmer_native implementation; see the file header for the source it follows.
+A step of the infmer_native implementation. Called by \code{morie_infmer}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{full_attention_flops}, \code{probsparse_flops}, \code{ratio}, \code{u}.

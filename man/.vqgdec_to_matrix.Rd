@@ -8,7 +8,7 @@
 .vqgdec_to_matrix(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{dim}.}
 }
 \description{
 matrix) to a 2-D numeric matrix with one row per entry.

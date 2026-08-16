@@ -8,11 +8,11 @@
 .morie_km_probs(p, name)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{A vector; its length is taken.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the kamath_ch2_native implementation; see the file header for the source it follows.
+A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_clm_loss}, \code{morie_kamath_gpt_unsupervised}, \code{morie_kamath_mlm_loss} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{p}, as built in the body.

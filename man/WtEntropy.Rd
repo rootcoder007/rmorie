@@ -14,7 +14,7 @@ WtEntropy(x, wavelet = "db4", levels = 3, base = "e")
 \item{base}{Defaults to \code{"e"}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{entropy}, \code{max_entropy}, \code{normalized_entropy}, \code{relative_energy}, \code{labels}, \code{levels}, \code{base}, \code{wavelet}, \code{method}.

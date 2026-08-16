@@ -12,7 +12,7 @@
 \item{activity}{See Usage.}
 }
 \description{
-Part of the frwil_native implementation; see the file header for the source it follows.
+A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{C}, \code{y}, \code{k}.

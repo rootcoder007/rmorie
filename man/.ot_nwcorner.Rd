@@ -8,11 +8,11 @@
 .ot_nwcorner(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A vector; its length is taken.}
+\item{b}{A vector; its length is taken.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{.ot_emd}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{T}, \code{basis}.

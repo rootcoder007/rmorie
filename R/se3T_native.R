@@ -62,7 +62,8 @@
 # Helper: coerce input to a numeric vector
 #' Helper: coerce input to a numeric vector
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}, \code{morie_se3T_radial_kernel}, \code{morie_se3T_rotation_matrix} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -76,10 +77,11 @@
 # Helper: coerce input to a numeric matrix
 #' Helper: coerce input to a numeric matrix
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}, \code{morie_se3T_invariant_features}, \code{morie_se3T_se3_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .se3T_mat <- function(x) {
@@ -103,11 +105,12 @@
 # Apply 3x3 rotation matrix R to a 3-vector v
 #' Apply 3x3 rotation matrix R to a 3-vector v
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R See Usage.
-#' @param v See Usage.
+#' @param R A matrix; indexed by row and column.
+#' @param v A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
 .se3T_apply <- function(R, v) {
@@ -120,10 +123,11 @@
 # Rodrigues' formula -- a genuine element of SO(3)
 #' Rodrigues\' formula -- a genuine element of SO(3)
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param axis See Usage.
+#' @param axis Passed to \code{.se3T_vec}.
 #' @param angle See Usage.
 #' @return A matrix, from \code{matrix}.
 #' @export
@@ -148,10 +152,11 @@ morie_se3T_rotation_matrix <- function(axis, angle) {
 #' Invariant features: the distance is invariant, the direction is
 #' equivariant
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. Called by \code{morie_se3T_se3_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param positions See Usage.
+#' @param positions Passed to \code{.se3T_mat}.
 #' @param i See Usage.
 #' @param j See Usage.
 #' @return A list with \code{distance}, \code{direction}, \code{note}.
@@ -170,11 +175,12 @@ morie_se3T_invariant_features <- function(positions, i, j) {
 # Radial kernel: a learnable function of the distance ALONE
 #' Radial kernel: a learnable function of the distance ALONE
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. Called by \code{morie_se3T_se3_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param distance See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Passed to \code{.se3T_vec}.
 #' @param sigma Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
@@ -195,14 +201,15 @@ morie_se3T_radial_kernel <- function(distance, weights=NULL, sigma=1.0) {
 # SE(3) attention: invariant weights over equivariant values
 #' SE(3) attention: invariant weights over equivariant values
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param positions See Usage.
-#' @param type0 See Usage.
-#' @param type1 See Usage.
-#' @param weights Defaults to \code{NULL}.
-#' @param sigma Defaults to \code{1}.
+#' @param positions Passed to \code{.se3T_mat}.
+#' @param type0 Passed to \code{.se3T_vec}.
+#' @param type1 Passed to \code{.se3T_mat}.
+#' @param weights Passed to \code{morie_se3T_radial_kernel}.
+#' @param sigma Passed to \code{morie_se3T_radial_kernel}. Defaults to \code{1}.
 #' @param temperature Defaults to \code{1}.
 #' @return A list with \code{type1}, \code{type0}, \code{weights}, \code{note}.
 #' @export
@@ -254,16 +261,17 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights=NULL,
 #' Check equivariance: rotate and translate the input; the output must
 #' follow
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param positions See Usage.
+#' @param positions Passed to \code{.se3T_mat}.
 #' @param type0 See Usage.
-#' @param type1 See Usage.
+#' @param type1 Passed to \code{.se3T_mat}.
 #' @param layer Defaults to \code{NULL}.
-#' @param axis Defaults to \code{c(0.3, -0.7, 0.4)}.
-#' @param angle Defaults to \code{1.1}.
-#' @param translation Defaults to \code{c(2, -1, 0.5)}.
+#' @param axis Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{c(0.3, -0.7, 0.4)}.
+#' @param angle Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{1.1}.
+#' @param translation Passed to \code{.se3T_vec}. Defaults to \code{c(2, -1, 0.5)}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{type1_deviation}, \code{type0_deviation}, \code{weight_deviation}, \code{equivariant}, \code{weights_invariant}, \code{method}, \code{note}.
 #' @export
@@ -318,7 +326,8 @@ morie_se3T_check_equivariance <- function(positions, type0, type1, layer=NULL,
 # Cheatsheet
 #' Cheatsheet
 #'
-#' Part of the se3T_native implementation; see the file header for the
+#' A step of the se3T_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

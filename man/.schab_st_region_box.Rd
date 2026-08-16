@@ -11,7 +11,7 @@
 \item{region}{See Usage.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{.schab_cstr_test}, \code{.schab_st_intensity}, \code{.schab_st_marginal_intensities}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{r}, as built in the body.

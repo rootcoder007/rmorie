@@ -8,12 +8,12 @@
 qini_curve(scores, priority, cost = NULL)
 }
 \arguments{
-\item{scores}{See Usage.}
-\item{priority}{See Usage.}
-\item{cost}{Defaults to \code{NULL}.}
+\item{scores}{Passed to \code{.slvgrf_check}.}
+\item{priority}{Passed to \code{.slvgrf_check}.}
+\item{cost}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{
-Part of the slvgrf_native implementation; see the file header for the source it follows.
+A step of the slvgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{spend}, \code{gain}, \code{ate}, \code{n}, \code{constrained}.

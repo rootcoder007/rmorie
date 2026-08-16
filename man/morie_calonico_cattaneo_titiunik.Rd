@@ -3,18 +3,18 @@
 % the formals.
 \name{morie_calonico_cattaneo_titiunik}
 \alias{morie_calonico_cattaneo_titiunik}
-\title{Alias kept from the generated stub\\'s signature}
+\title{Alias kept from the generated stub\'s signature}
 \usage{
 morie_calonico_cattaneo_titiunik(y, x, cutoff = 0, ...)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{x}{See Usage.}
-\item{cutoff}{Defaults to \code{0}.}
+\item{y}{Passed to \code{morie_rdrobu}.}
+\item{x}{Passed to \code{morie_rdrobu}.}
+\item{cutoff}{Passed to \code{morie_rdrobu}. Defaults to \code{0}.}
 \item{...}{Passed through.}
 }
 \description{
-Part of the rdrobu_native implementation; see the file header for the source it follows.
+A step of the rdrobu_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{morie_rdrobu}.

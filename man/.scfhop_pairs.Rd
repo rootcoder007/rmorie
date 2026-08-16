@@ -8,14 +8,14 @@
 .scfhop_pairs()
 }
 \description{
-Part of the scfhop_native implementation; see the file header for the source it follows.
+A step of the scfhop_native implementation. Called by \code{morie_scfhop_cats}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.
 }
 \references{
   Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-    "\\'Scaffold-hopping\\' by topological pharmacophore search."
+    "\'Scaffold-hopping\' by topological pharmacophore search."
     Angewandte Chemie International Edition 38(19), 2894-2896.
   Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
     1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),

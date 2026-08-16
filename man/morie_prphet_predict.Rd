@@ -8,14 +8,14 @@
 morie_prphet_predict(fit, t.new, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0))
 }
 \arguments{
-\item{fit}{See Usage.}
+\item{fit}{A list; the body reads \code{$beta}, \code{$changepoints}, \code{$columns} from it.}
 \item{t.new}{See Usage.}
-\item{seasonalities}{Defaults to \code{NULL}.}
-\item{holidays}{Defaults to \code{NULL}.}
-\item{holiday_window}{Defaults to \code{c(0, 0)}.}
+\item{seasonalities}{Passed to \code{morie_prphet_design}.}
+\item{holidays}{Passed to \code{morie_prphet_design}.}
+\item{holiday_window}{Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.}
 }
 \description{
-Part of the prphet_native implementation; see the file header for the source it follows.
+A step of the prphet_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

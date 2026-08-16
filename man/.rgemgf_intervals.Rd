@@ -8,7 +8,7 @@
 .rgemgf_intervals(f)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 half-open, c(start, stop), to match the Python arm exactly

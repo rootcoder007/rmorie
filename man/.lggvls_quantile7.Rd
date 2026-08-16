@@ -12,7 +12,7 @@
 \item{q}{See Usage.}
 }
 \description{
-Part of the lggvls_native implementation; see the file header for the source it follows.
+A step of the lggvls_native implementation. Called by \code{morie_lggvls}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

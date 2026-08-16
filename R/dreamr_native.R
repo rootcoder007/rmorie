@@ -77,7 +77,8 @@
 
 #' .dreamr_vec
 #'
-#' Part of the dreamr_native implementation; see the file header for the
+#' A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}, \code{morie_dreamr_value_update}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -92,10 +93,11 @@
 
 #' .dreamr_pack
 #'
-#' Part of the dreamr_native implementation; see the file header for the
+#' A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vals See Usage.
+#' @param vals A vector; its length is taken.
 #' @param name See Usage.
 #' @return A list with \code{estimate}, \code{returns}, \code{n}, \code{method}.
 #' @export
@@ -110,7 +112,8 @@
 
 #' morie_dreamr_imagine
 #'
-#' Part of the dreamr_native implementation; see the file header for the
+#' A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param state See Usage.
@@ -163,14 +166,15 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
 
 #' morie_dreamr_lambda_return
 #'
-#' Part of the dreamr_native implementation; see the file header for the
+#' A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rewards See Usage.
-#' @param values See Usage.
-#' @param gamma Defaults to \code{0.99}.
-#' @param lam Defaults to \code{0.95}.
-#' @param estimator Defaults to \code{"lambda"}.
+#' @param rewards Passed to \code{.dreamr_vec}.
+#' @param values Passed to \code{.dreamr_vec}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
+#' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
+#' @param estimator One of \code{"k-step"}, \code{"lambda"}, \code{"reward"}. Defaults to \code{"lambda"}.
 #' @param k Defaults to \code{1}.
 #' @return The value of \code{.dreamr_pack}.
 #' @export
@@ -243,11 +247,12 @@ morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95
 
 #' morie_dreamr_value_update
 #'
-#' Part of the dreamr_native implementation; see the file header for the
+#' A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
-#' @param targets See Usage.
+#' @param values Passed to \code{.dreamr_vec}.
+#' @param targets Passed to \code{.dreamr_vec}.
 #' @return A list with \code{estimate}, \code{loss}, \code{residual}, \code{grad}, \code{method}.
 #' @export
 morie_dreamr_value_update <- function(values, targets) {
@@ -270,19 +275,20 @@ morie_dreamr_value_update <- function(values, targets) {
 
 #' morie_dreamr
 #'
-#' Part of the dreamr_native implementation; see the file header for the
+#' A step of the dreamr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
-#' @param action_model See Usage.
-#' @param transition See Usage.
-#' @param reward_model See Usage.
-#' @param value_model See Usage.
-#' @param horizon Defaults to \code{15}.
-#' @param gamma Defaults to \code{0.99}.
-#' @param lam Defaults to \code{0.95}.
-#' @param estimator Defaults to \code{"lambda"}.
-#' @param k Defaults to \code{1}.
+#' @param state Passed to \code{morie_dreamr_imagine}.
+#' @param action_model Passed to \code{morie_dreamr_imagine}.
+#' @param transition Passed to \code{morie_dreamr_imagine}.
+#' @param reward_model Passed to \code{morie_dreamr_imagine}.
+#' @param value_model Passed to \code{morie_dreamr_imagine}.
+#' @param horizon Passed to \code{morie_dreamr_imagine}. Defaults to \code{15}.
+#' @param gamma Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{0.99}.
+#' @param lam Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{0.95}.
+#' @param estimator Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{"lambda"}.
+#' @param k Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{returns}, \code{objective}, \code{value_loss}, \code{residual}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{gamma}, \code{lam}, \code{estimator}, \code{method}.
 #' @export
 morie_dreamr <- function(state, action_model, transition, reward_model, value_model,
@@ -315,7 +321,8 @@ morie_dreamer <- morie_dreamr
 
 #' morie_dreamr_cheatsheet
 #'
-#' Part of the dreamr_native implementation; see the file header for the
+#' A step of the dreamr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

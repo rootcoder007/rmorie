@@ -8,10 +8,10 @@
 morie_unifAlg_is_var(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{.unifAlg_is_var}.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{.trmRew_is_var}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.unifAlg_is_var}.

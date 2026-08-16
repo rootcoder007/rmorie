@@ -50,7 +50,8 @@
 
 #' .nhits_vec
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. Called by \code{morie_nhits}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -62,12 +63,13 @@
 
 #' .nhits_lstsq
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param X A matrix; passed to \code{crossprod}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .nhits_lstsq <- function(X, y, ridge = 1e-8) {
@@ -82,7 +84,8 @@
 
 #' .nhits_max_pool
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -105,7 +108,8 @@
 
 #' .nhits_expressiveness_knots
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param horizon See Usage.
@@ -123,7 +127,8 @@
 
 #' .nhits_linear_interpolate
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param knots See Usage.
@@ -147,15 +152,16 @@
 
 #' .nhits_nhits_block
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. Called by \code{.nhits_nhits_stack}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param window See Usage.
 #' @param horizon See Usage.
-#' @param kernel Defaults to \code{1L}.
-#' @param ratio Defaults to \code{1}.
-#' @param degree Defaults to \code{2L}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param kernel Passed to \code{.nhits_max_pool}. Defaults to \code{1L}.
+#' @param ratio Passed to \code{.nhits_expressiveness_knots}. Defaults to \code{1}.
+#' @param degree Numeric; combined arithmetically in the body. Defaults to \code{2L}.
+#' @param ridge Passed to \code{.nhits_lstsq}. Defaults to \code{1e-08}.
 #' @return A list with \code{backcast}, \code{forecast}, \code{knots}, \code{pooled}.
 #' @export
 .nhits_nhits_block <- function(window, horizon, kernel = 1L, ratio = 1.0,
@@ -194,13 +200,14 @@
 
 #' .nhits_nhits_stack
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. Called by \code{morie_nhits}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param window See Usage.
-#' @param horizon See Usage.
-#' @param blocks See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param horizon Passed to \code{.nhits_nhits_block}.
+#' @param blocks A vector; its length is taken and its elements indexed.
+#' @param ridge Passed to \code{.nhits_nhits_block}. Defaults to \code{1e-08}.
 #' @return A list with \code{total}, \code{resid}, \code{trace}.
 #' @export
 .nhits_nhits_stack <- function(window, horizon, blocks, ridge = 1e-8) {
@@ -228,14 +235,15 @@
 
 #' morie_nhits
 #'
-#' Part of the nhits_native implementation; see the file header for the
+#' A step of the nhits_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{.nhits_vec}.
 #' @param horizon See Usage.
 #' @param lookback Defaults to \code{NULL}.
 #' @param blocks Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{.nhits_nhits_stack}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{total_knots}, \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.
 #' @export
 morie_nhits <- function(y, horizon, lookback = NULL, blocks = NULL,

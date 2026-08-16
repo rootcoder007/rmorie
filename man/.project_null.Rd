@@ -8,11 +8,11 @@
 .project_null(v, aeq)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{aeq}{See Usage.}
+\item{v}{A matrix; passed to \code{\%*\%}.}
+\item{aeq}{A matrix; passed to \code{t}.}
 }
 \description{
-Part of the barerp_native implementation; see the file header for the source it follows.
+A step of the barerp_native implementation. Called by \code{central_point}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

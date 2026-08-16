@@ -12,7 +12,7 @@ LinDSep(X, y)
 \item{y}{See Usage.}
 }
 \description{
-means is optimal only for equal priors AND equal variances, so the error-minimizing cut is the default and the midpoint is reported beside it.  Both errors are resubstitution errors -- measured on the data that chose the cut -- so they are optimistic; Section 10.10.3 is the book\\'s warning, and KFoldCv or LooCv gives an honest figure.
+means is optimal only for equal priors AND equal variances, so the error-minimizing cut is the default and the midpoint is reported beside it.  Both errors are resubstitution errors -- measured on the data that chose the cut -- so they are optimistic; Section 10.10.3 is the book\'s warning, and KFoldCv or LooCv gives an honest figure.
 }
 \value{
 A list with \code{w}, \code{threshold}, \code{midpoint_threshold}, \code{classes}, \code{first_class_is_above}, \code{training_errors}, \code{midpoint_errors}, \code{training_accuracy}, \code{n}, \code{projected}, \code{midpoint_optimal_only_for_equal_priors_and_spread}, \code{resubstitution_error_is_optimistic}, \code{method}.

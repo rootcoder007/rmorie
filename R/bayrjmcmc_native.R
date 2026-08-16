@@ -11,7 +11,8 @@
 
 #' .unif_stream
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}, \code{reversible_jump_mcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param seed See Usage.
@@ -49,10 +50,11 @@
 
 #' .logabsdet
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{numeric_log_jacobian}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
+#' @param a A matrix; passed to \code{nrow}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
 .logabsdet <- function(a) {
@@ -81,12 +83,13 @@
 
 #' numeric_log_jacobian
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_mcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param mapfun See Usage.
-#' @param z See Usage.
-#' @param h Defaults to \code{1e-06}.
+#' @param z A vector; its length is taken and its elements indexed.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{.logabsdet}.
 #' @export
 numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
@@ -117,10 +120,11 @@ numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
 
 #' check_dimension_matching
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_mcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param models See Usage.
+#' @param models A vector; its length is taken and its elements indexed.
 #' @param moves See Usage.
 #' @return The value of \code{by_pair}, as built in the body.
 #' @export
@@ -180,16 +184,17 @@ check_dimension_matching <- function(models, moves) {
 
 #' rj_log_acceptance
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_mcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param logpost_from See Usage.
-#' @param logpost_to See Usage.
-#' @param log_j_from See Usage.
-#' @param log_j_to See Usage.
-#' @param logq_u See Usage.
-#' @param logq_u_rev See Usage.
-#' @param log_jacobian See Usage.
+#' @param logpost_from Numeric; combined arithmetically in the body.
+#' @param logpost_to Numeric; combined arithmetically in the body.
+#' @param log_j_from Numeric; combined arithmetically in the body.
+#' @param log_j_to Numeric; combined arithmetically in the body.
+#' @param logq_u Numeric; combined arithmetically in the body.
+#' @param logq_u_rev Numeric; combined arithmetically in the body.
+#' @param log_jacobian Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
@@ -204,12 +209,13 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 
 #' .rw_within
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_mcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param theta See Usage.
+#' @param theta A vector; its length is taken and its elements indexed.
 #' @param uni See Usage.
-#' @param scale See Usage.
+#' @param scale Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rw_within <- function(theta, uni, scale) {
@@ -228,23 +234,24 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 
 #' reversible_jump_mcmc
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param models See Usage.
+#' @param models A vector; its length is taken and its elements indexed.
 #' @param moves See Usage.
 #' @param init_model See Usage.
 #' @param init_theta Defaults to \code{c()}.
-#' @param n_iter Defaults to \code{10000L}.
-#' @param burn_in Defaults to \code{0L}.
-#' @param thin Defaults to \code{1L}.
-#' @param seed Defaults to \code{0L}.
-#' @param within Defaults to \code{NULL}.
-#' @param within_scale Defaults to \code{0.5}.
+#' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10000L}.
+#' @param burn_in Numeric; combined arithmetically in the body. Defaults to \code{0L}.
+#' @param thin Numeric; combined arithmetically in the body. Defaults to \code{1L}.
+#' @param seed Passed to \code{.unif_stream}. Defaults to \code{0L}.
+#' @param within Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param within_scale Passed to \code{.rw_within}. Defaults to \code{0.5}.
 #' @param within_weight Defaults to \code{1}.
 #' @param move_weight Defaults to \code{1}.
-#' @param jacobian Defaults to \code{"analytic"}.
-#' @param keep_chain Defaults to \code{TRUE}.
+#' @param jacobian One of \code{"analytic"}, \code{"numeric"}. Defaults to \code{"analytic"}.
+#' @param keep_chain A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{model_freq}, \code{visits}, \code{n_kept}, \code{accept}, \code{tried}, \code{chain}, \code{jacobian}, \code{method}, \code{note}.
 #' @export
 reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
@@ -408,12 +415,13 @@ bayrjmcmc <- reversible_jump_mcmc
 
 #' step_function_loglik
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param y See Usage.
 #' @param s See Usage.
-#' @param h See Usage.
+#' @param h A vector; its length is taken and its elements indexed.
 #' @param L See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -443,12 +451,13 @@ step_function_loglik <- function(y, s, h, L) {
 
 #' changepoint_move_probabilities
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param lam See Usage.
-#' @param k_max See Usage.
-#' @param cap Defaults to \code{0.9}.
+#' @param lam Numeric; combined arithmetically in the body.
+#' @param k_max Numeric; combined arithmetically in the body.
+#' @param cap Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @return A list with \code{eta}, \code{pi}, \code{b}, \code{d}, \code{c}.
 #' @export
 changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
@@ -476,7 +485,8 @@ changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
 
 #' birth_split_heights
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param h_j See Usage.
@@ -499,7 +509,8 @@ birth_split_heights <- function(h_j, u, s_left, s_star, s_right) {
 
 #' birth_log_jacobian
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param h_j See Usage.
@@ -514,14 +525,15 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 
 #' .merge_height
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param s_left See Usage.
 #' @param s_mid See Usage.
 #' @param s_right See Usage.
-#' @param h_left See Usage.
-#' @param h_right See Usage.
+#' @param h_left Numeric; passed to \code{log}.
+#' @param h_right Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .merge_height <- function(s_left, s_mid, s_right, h_left, h_right) {
@@ -532,11 +544,12 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 
 #' .log_k_prior_ratio
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param lam See Usage.
-#' @param k See Usage.
+#' @param lam Numeric; passed to \code{log}.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .log_k_prior_ratio <- function(lam, k) {
@@ -545,23 +558,24 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 
 #' changepoint_rjmcmc
 #'
-#' Part of the bayrjmcmc_native implementation; see the file header for
+#' A step of the bayrjmcmc_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param y Defaults to \code{numeric(0)}.
-#' @param L Defaults to \code{1}.
-#' @param n_iter Defaults to \code{40000L}.
-#' @param burn_in Defaults to \code{4000L}.
-#' @param lam Defaults to \code{3}.
-#' @param k_max Defaults to \code{30L}.
-#' @param alpha Defaults to \code{1}.
-#' @param beta Defaults to \code{200}.
-#' @param seed Defaults to \code{0L}.
+#' @param L Numeric; passed to \code{log}. Defaults to \code{1}.
+#' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40000L}.
+#' @param burn_in Numeric; combined arithmetically in the body. Defaults to \code{4000L}.
+#' @param lam Passed to \code{.log_k_prior_ratio}. Defaults to \code{3}.
+#' @param k_max Numeric; combined arithmetically in the body. Defaults to \code{30L}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param beta Numeric; passed to \code{log}. Defaults to \code{200}.
+#' @param seed Passed to \code{.unif_stream}. Defaults to \code{0L}.
 #' @param cap Defaults to \code{0.9}.
-#' @param use_likelihood Defaults to \code{TRUE}.
-#' @param k_init Defaults to \code{0L}.
-#' @param thin Defaults to \code{1L}.
-#' @param keep_chain Defaults to \code{FALSE}.
+#' @param use_likelihood A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param k_init A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0L}.
+#' @param thin Numeric; combined arithmetically in the body. Defaults to \code{1L}.
+#' @param keep_chain A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{k_posterior}, \code{k_counts}, \code{k_mean}, \code{s}, \code{h}, \code{accept}, \code{tried}, \code{c}, \code{b}, \code{d}, \code{eta}, \code{pi}, \code{mean_s1_given_k1}, \code{var_s1_given_k1}, \code{mean_height}, \code{chain}, \code{n_kept}, \code{use_likelihood}, \code{method}, \code{note}.
 #' @export
 changepoint_rjmcmc <- function(y = numeric(0), L = 1, n_iter = 40000L,

@@ -8,10 +8,10 @@
 .mor_ed_shuffle(order, clusters, us, pos)
 }
 \arguments{
-\item{order}{See Usage.}
-\item{clusters}{See Usage.}
-\item{us}{See Usage.}
-\item{pos}{See Usage.}
+\item{order}{A vector; indexed elementwise.}
+\item{clusters}{A matrix; indexed by row and column.}
+\item{us}{A vector; indexed elementwise.}
+\item{pos}{Numeric; combined arithmetically in the body.}
 }
 \description{
 order as the Python arm.

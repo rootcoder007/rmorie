@@ -8,15 +8,15 @@
 .morie_kernel_matrix(X, Z = NULL, kernel = "rbf", gamma = NULL, degree = 3, coef0 = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Z}{Defaults to \code{NULL}.}
-\item{kernel}{Defaults to \code{"rbf"}.}
-\item{gamma}{Defaults to \code{NULL}.}
-\item{degree}{Defaults to \code{3}.}
-\item{coef0}{Defaults to \code{1}.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{Z}{Optional; may be \code{NULL}. A matrix; passed to \code{ncol}.}
+\item{kernel}{One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}. Defaults to \code{"rbf"}.}
+\item{gamma}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{degree}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
+\item{coef0}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the esl_native2 implementation; see the file header for the source it follows.
+A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

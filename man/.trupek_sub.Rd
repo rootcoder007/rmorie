@@ -8,15 +8,15 @@
 .trupek_sub(g, H, delta, sub, tol, maxit)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{H}{See Usage.}
-\item{delta}{See Usage.}
-\item{sub}{See Usage.}
-\item{tol}{See Usage.}
-\item{maxit}{See Usage.}
+\item{g}{Passed to \code{.trupek_cauchy}.}
+\item{H}{Passed to \code{.trupek_cauchy}.}
+\item{delta}{Passed to \code{.trupek_cauchy}.}
+\item{sub}{One of \code{"cauchy"}, \code{"dogleg"}, \code{"exact"}.}
+\item{tol}{Passed to \code{.trupek_exact}.}
+\item{maxit}{Passed to \code{.trupek_exact}.}
 }
 \description{
-Part of the trupek_native implementation; see the file header for the source it follows.
+A step of the trupek_native implementation. Called by \code{morie_trupek_trust_region}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.trupek_steihaug}.

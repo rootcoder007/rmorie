@@ -8,10 +8,10 @@
 BPursuit(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{D}{See Usage.}
-\item{lam}{Defaults to \code{0.01}.}
-\item{maxiter}{Defaults to \code{2000}.}
+\item{x}{A vector; its length is taken.}
+\item{D}{Passed to \code{.morie_bx_mat}.}
+\item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{0.01}.}
+\item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{

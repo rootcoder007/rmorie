@@ -8,14 +8,14 @@
 HrvTv(rr_intervals, fs_resamp = 4, window_len = 64, noverlap = NULL, standard = "taskforce")
 }
 \arguments{
-\item{rr_intervals}{See Usage.}
+\item{rr_intervals}{Passed to \code{.tf_need}.}
 \item{fs_resamp}{Defaults to \code{4}.}
 \item{window_len}{Defaults to \code{64}.}
 \item{noverlap}{Defaults to \code{NULL}.}
 \item{standard}{Defaults to \code{"taskforce"}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{times}, \code{vlf}, \code{lf}, \code{hf}, \code{total_power}, \code{lf_hf_ratio}, \code{lf_percent}, \code{hf_percent}, \code{bands}, \code{standard}, \code{mean_rr}, \code{mean_hr}, \code{resampled}, \code{fs_resamp}, \code{method}.

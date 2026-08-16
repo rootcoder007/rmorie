@@ -8,11 +8,11 @@
 .ot_kl(T, R)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{R}{See Usage.}
+\item{T}{A vector; indexed elementwise.}
+\item{R}{A vector; indexed elementwise.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otdiv}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

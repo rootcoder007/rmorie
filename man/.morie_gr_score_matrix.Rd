@@ -8,11 +8,11 @@
 .morie_gr_score_matrix(X, theta)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
 \item{theta}{See Usage.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_probability_matrix}, \code{morie_geron_softmax_score_grsmxs}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{theta}, \code{scores}.

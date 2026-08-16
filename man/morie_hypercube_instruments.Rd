@@ -8,11 +8,11 @@
 morie_hypercube_instruments(X, n_levels = 3L)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{n_levels}{Defaults to \code{3L}.}
 }
 \description{
-Part of the bndsmw_native implementation; see the file header for the source it follows.
+A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{instruments}, \code{n_instruments}, \code{n_levels}, \code{note}.

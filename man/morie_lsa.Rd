@@ -15,7 +15,7 @@ morie_lsa(X, k_dim = NULL, how = "log_entropy", query = NULL, top_k = 5L)
 \item{top_k}{Defaults to \code{5L}.}
 }
 \description{
-Part of the lsa_native implementation; see the file header for the source it follows.
+A step of the lsa_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lsa_decompose}.

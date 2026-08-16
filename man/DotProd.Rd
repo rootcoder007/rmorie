@@ -10,10 +10,10 @@ DotProd(x, y, subtract_mean = FALSE)
 \arguments{
 \item{x}{See Usage.}
 \item{y}{See Usage.}
-\item{subtract_mean}{Defaults to \code{FALSE}.}
+\item{subtract_mean}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-it normalizes to.  The book notes the means may be removed first (eq 3.97), which is a DIFFERENT quantity -- without removal gamma is the cosine between the raw vectors, with it, Pearson\\'s r.
+it normalizes to.  The book notes the means may be removed first (eq 3.97), which is a DIFFERENT quantity -- without removal gamma is the cosine between the raw vectors, with it, Pearson\'s r.
 }
 \value{
 A list with \code{dot_product}, \code{gamma}, \code{energy_x}, \code{energy_y}, \code{n}, \code{mean_removed}, \code{method}.

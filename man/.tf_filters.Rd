@@ -8,10 +8,10 @@
 .tf_filters(wavelet)
 }
 \arguments{
-\item{wavelet}{See Usage.}
+\item{wavelet}{Passed to \code{.tf_dbname}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_idwt}, \code{.tf_swt} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{h}, \code{g}, \code{rec_lo}, \code{rec_hi}.

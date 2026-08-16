@@ -8,7 +8,7 @@
 fasttext(corpus, dim = 50, n_min = 3, n_max = 6, window = 5, epochs = 5, lr = 0.05, negative = 5, min_count = 1, boundary = TRUE, whole_word = TRUE, hash_buckets = NULL, seed = 0)
 }
 \arguments{
-\item{corpus}{See Usage.}
+\item{corpus}{Passed to \code{.as_docs}.}
 \item{dim}{Defaults to \code{50}.}
 \item{n_min}{Defaults to \code{3}.}
 \item{n_max}{Defaults to \code{6}.}
@@ -19,11 +19,11 @@ fasttext(corpus, dim = 50, n_min = 3, n_max = 6, window = 5, epochs = 5, lr = 0.
 \item{min_count}{Defaults to \code{1}.}
 \item{boundary}{Defaults to \code{TRUE}.}
 \item{whole_word}{Defaults to \code{TRUE}.}
-\item{hash_buckets}{Defaults to \code{NULL}.}
+\item{hash_buckets}{Optional; may be \code{NULL}. Passed to \code{.gram_slot}.}
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the fastxt_native implementation; see the file header for the source it follows.
+A step of the fastxt_native implementation. Called by \code{morie_fastxt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{ngrams}, \code{ngram_index}, \code{Z}, \code{context}, \code{loss_history}, \code{final_loss}, \code{oov}, \code{n_vocab}, \code{n_ngrams}, \code{dim}, \code{n_min}, \code{n_max}, \code{hash_buckets}, \code{method}.

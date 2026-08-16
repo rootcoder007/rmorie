@@ -12,12 +12,12 @@ VagClean(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02, adaptive_mu = TR
 \item{emg_ref}{See Usage.}
 \item{fs}{See Usage.}
 \item{n_taps}{Defaults to \code{8}.}
-\item{mu}{Defaults to \code{0.05}.}
-\item{alpha}{Defaults to \code{0.02}.}
-\item{adaptive_mu}{Defaults to \code{TRUE}.}
+\item{mu}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.02}.}
+\item{adaptive_mu}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cleaned}, \code{artifact_estimate}, \code{weights}, \code{rms_before}, \code{rms_after}, \code{artifact_reduction_db}, \code{mu_trace}, \code{n_taps}, \code{alpha}, \code{adaptive_mu}, \code{fs_hz}, \code{units}, \code{method}.

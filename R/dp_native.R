@@ -13,7 +13,8 @@
 
 #' .morie_dp_check_budget
 #'
-#' Part of the dp_native implementation; see the file header for the
+#' A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \code{morie_dp_count}, \code{morie_dp_covariance} and 12 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param epsilon See Usage.
@@ -36,11 +37,12 @@
 # Laplace(0, b) by inverse transform; R has no rlaplace in base.
 #' Laplace(0, b) by inverse transform; R has no rlaplace in base
 #'
-#' Part of the dp_native implementation; see the file header for the
+#' A step of the dp_native implementation. Called by \code{morie_dp_count}, \code{morie_dp_histogram}, \code{morie_dp_kmeans} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n See Usage.
-#' @param scale See Usage.
+#' @param scale Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_dp_rlaplace <- function(n, scale) {
@@ -50,12 +52,13 @@
 
 #' .morie_dp_gaussian_sigma
 #'
-#' Part of the dp_native implementation; see the file header for the
+#' A step of the dp_native implementation. Called by \code{morie_dp_covariance}, \code{morie_dp_gaussian_mechanism}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param sensitivity See Usage.
 #' @param epsilon See Usage.
-#' @param delta See Usage.
+#' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_dp_gaussian_sigma <- function(sensitivity, epsilon, delta) {
@@ -70,7 +73,8 @@
 
 #' .morie_dp_clip
 #'
-#' Part of the dp_native implementation; see the file header for the
+#' A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \code{morie_dp_kmeans}, \code{morie_dp_quantile} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -89,7 +93,8 @@
 
 #' .morie_dp_seed
 #'
-#' Part of the dp_native implementation; see the file header for the
+#' A step of the dp_native implementation. Called by \code{morie_approx_dp}, \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed See Usage.
@@ -110,7 +115,8 @@
 
 #' .morie_dp_unseed
 #'
-#' Part of the dp_native implementation; see the file header for the
+#' A step of the dp_native implementation. Called by \code{morie_approx_dp}, \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param old See Usage.

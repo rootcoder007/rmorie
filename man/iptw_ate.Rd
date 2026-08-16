@@ -19,7 +19,7 @@ iptw_ate(y, A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, ridg
 \item{level}{Defaults to \code{0.95}.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated}, \code{mean_control}, \code{propensity}, \code{weights}, \code{sl_weights}, \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{n}, \code{level}, \code{method}.

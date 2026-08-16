@@ -15,7 +15,7 @@ gaussian_expansion(r, mu_min = 0, mu_max = 6, n_gaussians = 25, gamma = NULL)
 \item{gamma}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the schN_native implementation; see the file header for the source it follows.
+A step of the schN_native implementation. Called by \code{cfconv}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

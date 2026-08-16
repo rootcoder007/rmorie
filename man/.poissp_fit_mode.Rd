@@ -8,17 +8,17 @@
 .poissp_fit_mode(y, X, off, Q, constrain, iters, tol, ridge)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{off}{See Usage.}
-\item{Q}{See Usage.}
-\item{constrain}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{X}{A matrix; indexed by row and column.}
+\item{off}{Numeric; passed to \code{sum}.}
+\item{Q}{A matrix; passed to \code{\%*\%}.}
+\item{constrain}{A flag; the body branches on it.}
 \item{iters}{See Usage.}
 \item{tol}{See Usage.}
-\item{ridge}{See Usage.}
+\item{ridge}{Passed to \code{.poissp_ridgesolve}.}
 }
 \description{
-Part of the poissp_native implementation; see the file header for the source it follows.
+A step of the poissp_native implementation. Called by \code{morie_poissp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{u}, \code{m}, \code{eta}.

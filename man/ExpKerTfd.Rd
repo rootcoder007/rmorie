@@ -8,14 +8,14 @@
 ExpKerTfd(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{sigma}{Defaults to \code{1}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{nfreq}{Defaults to \code{NULL}.}
 \item{maxlag}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma}, \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.

@@ -8,11 +8,11 @@
 .singular_value_adjust(a, cap = 0.97)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Passed to \code{.svd_r}.}
 \item{cap}{Defaults to \code{0.97}.}
 }
 \description{
-Part of the andmnh_native implementation; see the file header for the source it follows.
+A step of the andmnh_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{\%*\%}.

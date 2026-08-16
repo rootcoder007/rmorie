@@ -12,8 +12,8 @@
 #' conventions and code ported from MASS::ginv must keep MASS\'s answer.
 #' Mirrors morie.fn._array_core.ginv exactly.
 #'
-#' @param X See Usage.
-#' @param tol Defaults to \code{sqrt(.Machine$double.eps)}.
+#' @param X A matrix; passed to \code{dim}.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @return The value of \code{%*%}.
 #' @export
 MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
@@ -29,11 +29,12 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 
 #' .morie_pinv
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{.schab_disjunctive_kriging}, \code{t3ols}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param M See Usage.
-#' @param rcond Defaults to \code{1e-15}.
+#' @param rcond Numeric; combined arithmetically in the body. Defaults to \code{1e-15}.
 #' @return The value of \code{%*%}.
 #' @export
 .morie_pinv <- function(M, rcond = 1e-15) {
@@ -59,7 +60,8 @@ NULL
 
 #' .t1_vec
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{.ecfp_percol}, \code{Admmlasso}, \code{Advielbo} and 154 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -69,10 +71,11 @@ NULL
 
 #' .t1_mat
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{.ecfp_bonds}, \code{Admmlasso}, \code{Advielbo} and 45 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .t1_mat <- function(X) {
@@ -83,10 +86,11 @@ NULL
 
 #' .t1_eigsym
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{Clrpca}, \code{Eigcent}, \code{Lapeig} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{t}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
 .t1_eigsym <- function(A) {
@@ -103,8 +107,8 @@ NULL
 #'
 #' and so the Python arm\'s _lstsq.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
 .t1_lstsq <- function(X, y) {
@@ -140,11 +144,12 @@ NULL
 
 #' .t1_hatdiag
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitsols}, \code{Olsnormeq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param xtxinv See Usage.
+#' @param X A matrix; passed to \code{\%*\%}.
+#' @param xtxinv A matrix; passed to \code{\%*\%}.
 #' @return The value of \code{rowSums}.
 #' @export
 .t1_hatdiag <- function(X, xtxinv) {
@@ -154,17 +159,19 @@ NULL
 
 #' .t1_cbind1
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{Bayeslogit}, \code{Dfbetas}, \code{Dffitsols} and 9 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{cbind}.
 #' @export
 .t1_cbind1 <- function(X) cbind(1, as.matrix(X))
 
 #' .t1_sd
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -175,7 +182,8 @@ NULL
 # Lehmer minstd -- identical stream to the Python arm.
 #' Lehmer minstd -- identical stream to the Python arm
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{.btdir_rows}, \code{.btmbb_reps}, \code{.kvmse_rotation} and 32 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed Defaults to \code{1}.
@@ -197,7 +205,8 @@ NULL
 
 #' .t1_result
 #'
-#' Part of the tail1_core implementation; see the file header for the
+#' A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlasso}, \code{Advielbo} and 735 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.

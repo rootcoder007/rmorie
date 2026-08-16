@@ -8,11 +8,11 @@
 .s03unif(n, base = 2L)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{base}{Defaults to \code{2L}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.s03normdraws}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

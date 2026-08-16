@@ -11,7 +11,7 @@
 \item{beta}{See Usage.}
 }
 \description{
-Part of the horowitz_native6 implementation; see the file header for the source it follows.
+A step of the horowitz_native6 implementation. Called by \code{morie_chen_transform}, \code{morie_transform_prediction}, \code{morie_transform_T_F}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

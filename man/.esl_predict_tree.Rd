@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{node}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the esl_native0 implementation; see the file header for the source it follows.
+A step of the esl_native0 implementation. Called by \code{morie_esl_random_forest}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

@@ -10,10 +10,10 @@ Mahal(x, mu, C)
 \arguments{
 \item{x}{See Usage.}
 \item{mu}{See Usage.}
-\item{C}{See Usage.}
+\item{C}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-the data\\'s own scatter: a point far along an axis of natural variation is NEAR, one close by across the grain is far.  Euclidean distance would quietly favour whichever feature has the largest units.
+the data\'s own scatter: a point far along an axis of natural variation is NEAR, one close by across the grain is far.  Euclidean distance would quietly favour whichever feature has the largest units.
 }
 \value{
 A list with \code{d2}, \code{distance}, \code{squared}, \code{euclidean}, \code{differs_from_euclidean}, \code{scale_free}, \code{method}.

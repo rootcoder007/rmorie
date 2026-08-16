@@ -8,12 +8,12 @@
 .abcgp.mvn_logpdf(y, mu, cov)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{mu}{See Usage.}
-\item{cov}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{cov}{Passed to \code{.abcgp.chol}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}, \code{.abcgp.synthetic_log_likelihood}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

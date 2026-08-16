@@ -8,11 +8,11 @@
 .tmldyn_folds(n, n_folds)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{n_folds}{See Usage.}
 }
 \description{
-Part of the tmldyn_native implementation; see the file header for the source it follows.
+A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

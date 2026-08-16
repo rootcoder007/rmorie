@@ -11,15 +11,15 @@ lyapunov_exponent(y, embedding = NULL, tau = NULL, dt = 1, fit = NULL, min_sep =
 \item{y}{See Usage.}
 \item{embedding}{Defaults to \code{NULL}.}
 \item{tau}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
-\item{fit}{Defaults to \code{NULL}.}
+\item{dt}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{fit}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{min_sep}{Defaults to \code{NULL}.}
 \item{max_steps}{Defaults to \code{NULL}.}
-\item{method}{Defaults to \code{"rosenstein"}.}
-\item{k}{Defaults to \code{NULL}.}
+\item{method}{One of \code{"rosenstein"}, \code{"sato"}, \code{"sato_k"}. Defaults to \code{"rosenstein"}.}
+\item{k}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the lyapun_native implementation; see the file header for the source it follows.
+A step of the lyapun_native implementation. Called by \code{morie_lyapun}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{lambda1}, \code{rosenstein}, \code{sato}, \code{sato_k}, \code{sato_k_curve}, \code{se}, \code{r_squared}, \code{intercept}, \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{fit_range}, \code{k}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n}, \code{dt}, \code{method}, \code{note}.

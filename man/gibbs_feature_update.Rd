@@ -8,14 +8,14 @@
 gibbs_feature_update(Z, i, kk, likelihood, alpha)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{i}{See Usage.}
+\item{Z}{A matrix; passed to \code{as.matrix}.}
+\item{i}{Numeric; combined arithmetically in the body.}
 \item{kk}{See Usage.}
 \item{likelihood}{See Usage.}
 \item{alpha}{See Usage.}
 }
 \description{
-Part of the ibpfa_native implementation; see the file header for the source it follows.
+A step of the ibpfa_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p_on}, \code{prior}, \code{z}, \code{note}.

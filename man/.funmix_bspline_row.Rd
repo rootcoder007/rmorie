@@ -8,14 +8,14 @@
 .funmix_bspline_row(x, kn, degree, n_basis, tmax)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{kn}{See Usage.}
-\item{degree}{See Usage.}
-\item{n_basis}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{kn}{A vector; its length is taken and its elements indexed.}
+\item{degree}{A count; the body uses it as \code{seq_len(...)}.}
+\item{n_basis}{A count; the body uses it as \code{seq_len(...)}.}
 \item{tmax}{See Usage.}
 }
 \description{
-Part of the funmix_native implementation; see the file header for the source it follows.
+A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

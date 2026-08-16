@@ -8,10 +8,10 @@
 .to_vec(y)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. Called by \code{.farmcpu}, \code{.farmlmm_wls}, \code{.fixed_effect_scan} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -8,12 +8,12 @@
 .schab_empirical_variogram(coords, z, n_lags = 10L)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{z}{See Usage.}
-\item{n_lags}{Defaults to \code{10L}.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
+\item{z}{A vector; indexed elementwise.}
+\item{n_lags}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_moving_window_krige}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{h}, \code{gamma}, \code{counts}.

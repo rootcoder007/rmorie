@@ -12,10 +12,10 @@ aipw_scores(Y, W, mu1, mu0, e)
 \item{W}{See Usage.}
 \item{mu1}{See Usage.}
 \item{mu0}{See Usage.}
-\item{e}{See Usage.}
+\item{e}{A vector; its length is taken.}
 }
 \description{
-Part of the slvgrf_native implementation; see the file header for the source it follows.
+A step of the slvgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -8,13 +8,13 @@
 morie_secaead_chacha20(key, counter, nonce, data)
 }
 \arguments{
-\item{key}{See Usage.}
+\item{key}{Passed to \code{morie_secaead_chacha20_block}.}
 \item{counter}{See Usage.}
-\item{nonce}{See Usage.}
-\item{data}{See Usage.}
+\item{nonce}{Passed to \code{morie_secaead_chacha20_block}.}
+\item{data}{Passed to \code{.secaead_as_bytes}.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

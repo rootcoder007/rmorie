@@ -479,7 +479,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' Part of the abundance_text_voting_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @param start See Usage.
 #' @return The value of \code{seen}, as built in the body.
 #' @export
@@ -502,7 +502,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' Part of the abundance_text_voting_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; indexed by row and column.
 #' @param x See Usage.
 #' @param Z See Usage.
 #' @return The value of \code{setdiff}.

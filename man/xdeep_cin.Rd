@@ -8,11 +8,11 @@
 xdeep_cin(X0, Ws)
 }
 \arguments{
-\item{X0}{See Usage.}
-\item{Ws}{See Usage.}
+\item{X0}{Passed to \code{.xdeep_to_mat}.}
+\item{Ws}{A vector; its length is taken.}
 }
 \description{
-Part of the xdeep_native implementation; see the file header for the source it follows.
+A step of the xdeep_native implementation. Called by \code{xdeep_xdeepfm_score}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees}, \code{n_layers}, \code{method}, \code{note}.

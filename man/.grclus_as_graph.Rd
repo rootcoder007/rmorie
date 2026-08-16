@@ -8,10 +8,10 @@
 .grclus_as_graph(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Passed to \code{.grclus_rows_to_mat}.}
 }
 \description{
-Part of the grclus_native implementation; see the file header for the source it follows.
+A step of the grclus_native implementation. Called by \code{morie_grclus}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{adj}, as built in the body.

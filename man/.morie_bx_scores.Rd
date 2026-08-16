@@ -8,13 +8,13 @@
 .morie_bx_scores(tp, tn, fp, fn)
 }
 \arguments{
-\item{tp}{See Usage.}
-\item{tn}{See Usage.}
-\item{fp}{See Usage.}
-\item{fn}{See Usage.}
+\item{tp}{Numeric; combined arithmetically in the body.}
+\item{tn}{Numeric; combined arithmetically in the body.}
+\item{fp}{Numeric; combined arithmetically in the body.}
+\item{fn}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{CadPipe}, \code{PvcBayes}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{sensitivity}, \code{specificity}, \code{accuracy}.

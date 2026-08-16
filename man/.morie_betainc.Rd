@@ -8,12 +8,12 @@
 .morie_betainc(a, b, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the dist_native implementation; see the file header for the source it follows.
+A step of the dist_native implementation. Called by \code{Pbeta}, \code{Pbinom}, \code{Pf} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

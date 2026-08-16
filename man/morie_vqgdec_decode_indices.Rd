@@ -9,7 +9,7 @@ morie_vqgdec_decode_indices(indices, codebook)
 }
 \arguments{
 \item{indices}{See Usage.}
-\item{codebook}{See Usage.}
+\item{codebook}{Passed to \code{.vqgdec_to_matrix}.}
 }
 \description{
 vectors. Indices are 0-based, matching the Python implementation.

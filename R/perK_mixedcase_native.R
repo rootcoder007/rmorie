@@ -13,7 +13,8 @@
 
 #' morie_perK
 #'
-#' Part of the perK_mixedcase_native implementation; see the file header
+#' A step of the perK_mixedcase_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param x1 See Usage.

@@ -8,14 +8,14 @@
 .trupek_exact(g, H, delta, tol, maxit)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{H}{See Usage.}
-\item{delta}{See Usage.}
-\item{tol}{See Usage.}
+\item{g}{A vector; its length is taken.}
+\item{H}{A matrix; indexed by row and column.}
+\item{delta}{Numeric; combined arithmetically in the body.}
+\item{tol}{Numeric; combined arithmetically in the body.}
 \item{maxit}{See Usage.}
 }
 \description{
-Part of the trupek_native implementation; see the file header for the source it follows.
+A step of the trupek_native implementation. Called by \code{.trupek_sub}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{s}, \code{lambda}, \code{why}.

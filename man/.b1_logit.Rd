@@ -8,10 +8,10 @@
 .b1_logit(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the b1_tmle implementation; see the file header for the source it follows.
+A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat}, \code{Tmlecde}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

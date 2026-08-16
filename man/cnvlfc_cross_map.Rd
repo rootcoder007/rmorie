@@ -8,16 +8,16 @@
 cnvlfc_cross_map(driver, response, E = 2L, tau = 1L, library = NULL, seed = 1L, exclude = 0L)
 }
 \arguments{
-\item{driver}{See Usage.}
-\item{response}{See Usage.}
-\item{E}{Defaults to \code{2L}.}
-\item{tau}{Defaults to \code{1L}.}
-\item{library}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{1L}.}
-\item{exclude}{Defaults to \code{0L}.}
+\item{driver}{Passed to \code{.cnvlfc_cross_map}.}
+\item{response}{Passed to \code{.cnvlfc_cross_map}.}
+\item{E}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{2L}.}
+\item{tau}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.}
+\item{library}{Passed to \code{.cnvlfc_cross_map}.}
+\item{seed}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.}
+\item{exclude}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.}
 }
 \description{
-Part of the cnvlfc_native implementation; see the file header for the source it follows.
+A step of the cnvlfc_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.cnvlfc_cross_map}.

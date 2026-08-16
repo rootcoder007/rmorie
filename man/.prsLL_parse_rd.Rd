@@ -8,14 +8,14 @@
 .prsLL_parse_rd(g, table, toks, A, pos)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{table}{See Usage.}
-\item{toks}{See Usage.}
-\item{A}{See Usage.}
-\item{pos}{See Usage.}
+\item{g}{A list; the body reads \code{$rules} from it.}
+\item{table}{Passed to \code{.prsLL_pick}.}
+\item{toks}{A vector; indexed elementwise.}
+\item{A}{Passed to \code{.prsLL_pick}.}
+\item{pos}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the prsLL_native implementation; see the file header for the source it follows.
+A step of the prsLL_native implementation. Called by \code{.prsLL_parse}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

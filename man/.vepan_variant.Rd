@@ -8,10 +8,10 @@
 .vepan_variant(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A list; the body reads \code{$alt}, \code{$chrom}, \code{$id}, \code{$pos}, \code{$ref} from it.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{chrom}, \code{pos}, \code{ref}, \code{alt}, \code{id}.

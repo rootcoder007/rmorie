@@ -8,10 +8,10 @@
 .rmrl_eps_greedy(row, A, epsilon, rng)
 }
 \arguments{
-\item{row}{See Usage.}
-\item{A}{See Usage.}
+\item{row}{A vector; indexed elementwise.}
+\item{A}{A vector; its length is taken and its elements indexed.}
 \item{epsilon}{See Usage.}
-\item{rng}{See Usage.}
+\item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{
 starts all-zero, so every action ties; deterministic tie-breaking would turn the initial behaviour into a systematic drift. rng is a .ghc_rng state: the Python arm draws rng.random() from np.random.default_rng(seed), bit-identical to .ghc_unif here.

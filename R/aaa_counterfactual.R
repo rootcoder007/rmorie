@@ -18,11 +18,12 @@
 
 #' .morie_scm_solve
 #'
-#' Part of the counterfactual implementation; see the file header for
+#' A step of the counterfactual implementation. Called by \code{Counterfactual}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param u See Usage.
-#' @param equations See Usage.
+#' @param equations A vector; indexed elementwise.
 #' @return The value of \code{vals}, as built in the body.
 #' @export
 .morie_scm_solve <- function(u, equations) {
@@ -61,9 +62,9 @@
 #' sweep reaches the 680 call sites.
 #'
 #' @param f See Usage.
-#' @param x0 See Usage.
-#' @param maxit Defaults to \code{400}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param x0 A vector; its length is taken.
+#' @param maxit A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return A list with \code{par}, \code{value}.
 #' @export
 .morie_neldermead <- function(f, x0, maxit = 400, tol = 1e-10) {
@@ -115,13 +116,14 @@
 
 #' Counterfactual
 #'
-#' Part of the counterfactual implementation; see the file header for
+#' A step of the counterfactual implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param evidence See Usage.
+#' @param evidence A vector; indexed elementwise.
 #' @param equations See Usage.
-#' @param exogenous See Usage.
-#' @param do See Usage.
+#' @param exogenous A vector; its length is taken.
+#' @param do A vector; indexed elementwise.
 #' @param query See Usage.
 #' @param u_support Defaults to \code{NULL}.
 #' @return A list with \code{counterfactual}, \code{factual}, \code{abducted}, \code{n_compatible_u}, \code{counterfactual_unique}, \code{residual}, \code{do}, \code{query}, \code{method}.

@@ -8,14 +8,14 @@
 .med_effects(beta, theta, cbar, a, astar)
 }
 \arguments{
-\item{beta}{See Usage.}
-\item{theta}{See Usage.}
-\item{cbar}{See Usage.}
-\item{a}{See Usage.}
-\item{astar}{See Usage.}
+\item{beta}{A vector; its length is taken and its elements indexed.}
+\item{theta}{A vector; indexed elementwise.}
+\item{cbar}{Numeric; combined arithmetically in the body.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{astar}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ctde implementation; see the file header for the source it follows.
+A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tnie}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te}, \code{mediated_interaction}, \code{beta}, \code{theta}.

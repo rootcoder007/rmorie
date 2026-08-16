@@ -12,11 +12,11 @@ morie_msp_exact(query, subject, match = 5, mismatch = -4, matrix = NULL, alphabe
 \item{subject}{See Usage.}
 \item{match}{Defaults to \code{5}.}
 \item{mismatch}{Defaults to \code{-4}.}
-\item{matrix}{Defaults to \code{NULL}.}
-\item{alphabet}{Defaults to \code{"ACGT"}.}
+\item{matrix}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
+\item{alphabet}{Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.}
 }
 \description{
-Part of the blstn_native implementation; see the file header for the source it follows.
+A step of the blstn_native implementation. Called by \code{morie_estimate_gumbel}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{score}, \code{qstart}, \code{sstart}, \code{length}.

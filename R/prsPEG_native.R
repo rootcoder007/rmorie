@@ -12,12 +12,13 @@ FAIL <- NA_integer_
 
 #' .probe
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_and_}, \code{morie_prsPEG_choice}, \code{morie_prsPEG_not_} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param text See Usage.
 #' @param pos See Usage.
-#' @param ctx See Usage.
+#' @param ctx A list; the body reads \code{$steps} from it.
 #' @param fn See Usage.
 #' @return The value of \code{fn}.
 #' @export
@@ -28,10 +29,11 @@ FAIL <- NA_integer_
 
 #' morie_prsPEG_lit
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_opt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s A vector; its length is taken.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
 morie_prsPEG_lit <- function(s) {
@@ -45,7 +47,8 @@ morie_prsPEG_lit <- function(s) {
 
 #' morie_prsPEG_seq
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_plus}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
@@ -68,7 +71,8 @@ morie_prsPEG_seq <- function(...) {
 
 #' morie_prsPEG_choice
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_opt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
@@ -90,10 +94,11 @@ morie_prsPEG_choice <- function(...) {
 
 #' morie_prsPEG_star
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_plus}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.probe}.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
 morie_prsPEG_star <- function(e) {
@@ -112,30 +117,33 @@ morie_prsPEG_star <- function(e) {
 
 #' morie_prsPEG_plus
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{morie_prsPEG_seq}.
 #' @return The value of \code{morie_prsPEG_seq}.
 #' @export
 morie_prsPEG_plus <- function(e) morie_prsPEG_seq(e, morie_prsPEG_star(e))
 
 #' morie_prsPEG_opt
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{morie_prsPEG_choice}.
 #' @return The value of \code{morie_prsPEG_choice}.
 #' @export
 morie_prsPEG_opt <- function(e) morie_prsPEG_choice(e, morie_prsPEG_lit(""))
 
 #' morie_prsPEG_and_
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.probe}.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
 morie_prsPEG_and_ <- function(e) {
@@ -149,10 +157,11 @@ morie_prsPEG_and_ <- function(e) {
 
 #' morie_prsPEG_not_
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Passed to \code{.probe}.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
 morie_prsPEG_not_ <- function(e) {
@@ -166,12 +175,13 @@ morie_prsPEG_not_ <- function(e) {
 
 #' morie_prsPEG_parse
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param expr See Usage.
-#' @param text See Usage.
-#' @param full Defaults to \code{TRUE}.
+#' @param text A vector; its length is taken.
+#' @param full A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{consumed}, \code{steps}, \code{memoised}, \code{method}, \code{note}.
 #' @export
 morie_prsPEG_parse <- function(expr, text, full = TRUE) {
@@ -187,12 +197,13 @@ morie_prsPEG_parse <- function(expr, text, full = TRUE) {
 
 #' morie_prsPEG_packrat_parse
 #'
-#' Part of the prsPEG_native implementation; see the file header for the
+#' A step of the prsPEG_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param expr See Usage.
-#' @param text See Usage.
-#' @param full Defaults to \code{TRUE}.
+#' @param text A vector; its length is taken.
+#' @param full A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{steps}, \code{memo.entries}, \code{memoised}, \code{method}.
 #' @export
 morie_prsPEG_packrat_parse <- function(expr, text, full = TRUE) {

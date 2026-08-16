@@ -8,13 +8,13 @@
 .ms_fit_lls(dist, time, event, X = NULL)
 }
 \arguments{
-\item{dist}{See Usage.}
-\item{time}{See Usage.}
-\item{event}{See Usage.}
-\item{X}{Defaults to \code{NULL}.}
+\item{dist}{Compared against \code{"exponential"}.}
+\item{time}{Passed to \code{.ms_check}.}
+\item{event}{Passed to \code{.ms_check}.}
+\item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the survival_more implementation; see the file header for the source it follows.
+A step of the survival_more implementation. Called by \code{Aftfit}, \code{Parasurv}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dist}, \code{coef}, \code{log_scale}, \code{scale}, \code{loglik}, \code{n_par}, \code{n}, \code{n_events}, \code{aic}, \code{bic}, \code{fixed_scale}, \code{convergence}.

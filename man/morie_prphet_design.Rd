@@ -8,14 +8,14 @@
 morie_prphet_design(t, cps, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0))
 }
 \arguments{
-\item{t}{See Usage.}
-\item{cps}{See Usage.}
+\item{t}{Passed to \code{morie_prphet_trend_matrix}.}
+\item{cps}{A vector; its length is taken.}
 \item{seasonalities}{Defaults to \code{NULL}.}
-\item{holidays}{Defaults to \code{NULL}.}
-\item{holiday_window}{Defaults to \code{c(0, 0)}.}
+\item{holidays}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{holiday_window}{A vector; indexed elementwise. Defaults to \code{c(0, 0)}.}
 }
 \description{
-Part of the prphet_native implementation; see the file header for the source it follows.
+A step of the prphet_native implementation. Called by \code{morie_prphet_fit}, \code{morie_prphet_predict}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{cols}, \code{holiday.names}.

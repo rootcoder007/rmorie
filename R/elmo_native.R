@@ -24,7 +24,7 @@
 #' choose WHICH layers to read and cannot alter the magnitude, which is
 #' gamma\'s job alone.
 #'
-#' @param raw See Usage.
+#' @param raw A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 layer_weights <- function(raw) {
@@ -41,15 +41,16 @@ layer_weights <- function(raw) {
 
 #' One LSTM cell step, gates in the order i, f, g, o
 #'
-#' Part of the elmo_native implementation; see the file header for the
+#' A step of the elmo_native implementation. Called by \code{bilm_forward}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param c See Usage.
-#' @param Wx See Usage.
-#' @param Wh See Usage.
-#' @param b See Usage.
+#' @param x A vector; its length is taken.
+#' @param h A vector; its length is taken.
+#' @param c A vector; its length is taken.
+#' @param Wx A matrix; passed to \code{\%*\%}.
+#' @param Wh A matrix; passed to \code{\%*\%}.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{h}, \code{c}.
 #' @export
 lstm_step <- function(x, h, c, Wx, Wh, b) {
@@ -81,7 +82,7 @@ lstm_step <- function(x, h, c, Wx, Wh, b) {
 #' output is re-reversed before concatenation, so position k always
 #' aligns with token k.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param layers See Usage.
 #' @return The value of \code{reps}, as built in the body.
 #' @export
@@ -138,11 +139,12 @@ bilm_forward <- function(X, layers) {
 
 #' Eq. (1): gamma * sum_j s_j h_{k,j}
 #'
-#' Part of the elmo_native implementation; see the file header for the
+#' A step of the elmo_native implementation. Called by \code{elmo_representation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reps See Usage.
-#' @param raw_weights See Usage.
+#' @param reps A vector; its length is taken and its elements indexed.
+#' @param raw_weights A vector; its length is taken.
 #' @param gamma Defaults to \code{1}.
 #' @param position Defaults to \code{NULL}.
 #' @return One of two values, depending on the branch taken.
@@ -170,7 +172,8 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
 
 #' elmo_representation
 #'
-#' Part of the elmo_native implementation; see the file header for the
+#' A step of the elmo_native implementation. Called by \code{elmo}, \code{elmorepresentation}, \code{morie_elmo}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -196,7 +199,8 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 
 #' .elmo_cheatsheet
 #'
-#' Part of the elmo_native implementation; see the file header for the
+#' A step of the elmo_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -214,7 +218,8 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 # compact alias per ledger/NAMING.md
 #' Compact alias per ledger/NAMING.md
 #'
-#' Part of the elmo_native implementation; see the file header for the
+#' A step of the elmo_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -231,7 +236,8 @@ elmorepresentation <- function(X, layers, raw_weights = NULL,
 # public name resolved by fn/_lazy_map.json
 #' Public name resolved by fn/_lazy_map.json
 #'
-#' Part of the elmo_native implementation; see the file header for the
+#' A step of the elmo_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
@@ -247,7 +253,8 @@ elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 # morie entry point: matches the Python payload keys
 #' Morie entry point: matches the Python payload keys
 #'
-#' Part of the elmo_native implementation; see the file header for the
+#' A step of the elmo_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.

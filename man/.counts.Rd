@@ -8,13 +8,13 @@
 .counts(D, Tn, Vn, z)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{Tn}{See Usage.}
+\item{D}{A vector; its length is taken and its elements indexed.}
+\item{Tn}{A count; the body uses it as \code{numeric(...)}.}
 \item{Vn}{See Usage.}
-\item{z}{See Usage.}
+\item{z}{A vector; indexed elementwise.}
 }
 \description{
-Part of the bigtm_native implementation; see the file header for the source it follows.
+A step of the bigtm_native implementation. Called by \code{.log_evidence}, \code{gibbs_bigram_topic}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{N_ijk}, \code{N_jk}, \code{N_kd}, \code{N_d}.

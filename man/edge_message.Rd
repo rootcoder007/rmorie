@@ -10,8 +10,8 @@ edge_message(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL)
 \arguments{
 \item{h_i}{See Usage.}
 \item{h_j}{See Usage.}
-\item{x_i}{See Usage.}
-\item{x_j}{See Usage.}
+\item{x_i}{Passed to \code{.sqdist}.}
+\item{x_j}{Passed to \code{.sqdist}.}
 \item{phi_e}{See Usage.}
 \item{a_ij}{Defaults to \code{NULL}.}
 }

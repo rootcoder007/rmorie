@@ -8,11 +8,11 @@
 .caus_annihilate(Z, M)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{M}{See Usage.}
+\item{Z}{Passed to \code{.caus_project}.}
+\item{M}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the caus_native implementation; see the file header for the source it follows.
+A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -11,7 +11,7 @@ weight_diagnostics(weights)
 \item{weights}{See Usage.}
 }
 \description{
-Part of the bhltmsm_native implementation; see the file header for the source it follows.
+A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{max}, \code{min}, \code{effective_n}, \code{n}, \code{efficiency}, \code{mean_near_one}, \code{note}.

@@ -8,11 +8,11 @@
 .jsonlt_raw_enc(rv, o)
 }
 \arguments{
-\item{rv}{See Usage.}
-\item{o}{See Usage.}
+\item{rv}{Passed to \code{.jsonlt_b64}.}
+\item{o}{A list; the body reads \code{$raw} from it.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.jsonlt_esc}.

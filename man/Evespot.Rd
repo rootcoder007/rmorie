@@ -23,7 +23,7 @@ List with \code{ES}, \code{estimate}, \code{ratio},
 Formula: ES_p = (VaR_p + sigma - xi u) / (1 - xi)
 }
 \details{
-E\link{X | X > VaR} for the generalised Pareto tail.  The mean excess of a
+E[X | X > VaR] for the generalised Pareto tail.  The mean excess of a
 GPD is finite only for xi < 1, so xi >= 1 is refused rather than
 returned as a number.  At xi = 0 the expression collapses to
 VaR + sigma, the memoryless exponential mean excess.

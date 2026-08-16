@@ -8,15 +8,15 @@
 .morie_bx_chsel(trials, nselect, rank, maxiter, tol, seed)
 }
 \arguments{
-\item{trials}{See Usage.}
-\item{nselect}{See Usage.}
-\item{rank}{See Usage.}
-\item{maxiter}{See Usage.}
-\item{tol}{See Usage.}
-\item{seed}{See Usage.}
+\item{trials}{Passed to \code{.morie_bx_mat}.}
+\item{nselect}{A count; the body uses it as \code{seq_len(...)}.}
+\item{rank}{A count; the body uses it as \code{matrix(...)}.}
+\item{maxiter}{Passed to \code{.morie_bx_nmfmu}.}
+\item{tol}{Passed to \code{.morie_bx_nmfmu}.}
+\item{seed}{Passed to \code{.morie_bx_nmfmu}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{BciChSel}, \code{NmfChSel}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{C}, \code{W}, \code{H}, \code{error}, \code{rmsd}, \code{normalized}, \code{ranking}, \code{selected}.

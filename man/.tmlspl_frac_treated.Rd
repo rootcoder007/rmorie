@@ -8,8 +8,8 @@
 .tmlspl_frac_treated(D, A)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{A}{See Usage.}
+\item{D}{A vector; its length is taken and its elements indexed.}
+\item{A}{A matrix; indexed by row and column.}
 }
 \description{
 # Default exposure summary: fraction of neighbours treated.

@@ -15,7 +15,7 @@ nbeats_forecast(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08)
 \item{ridge}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the nbeats_native implementation; see the file header for the source it follows.
+A step of the nbeats_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{forecast}, \code{residual}, \code{backcast}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{residual_norm}, \code{window_norm}, \code{n_blocks}, \code{method}.

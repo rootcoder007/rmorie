@@ -12,12 +12,13 @@
 
 #' .changepoints
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
 #' @param n.cp See Usage.
-#' @param range Defaults to \code{0.8}.
+#' @param range Numeric; combined arithmetically in the body. Defaults to \code{0.8}.
 #' @param cps Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -33,14 +34,15 @@
 
 #' morie_prphet_piecewise_trend
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. Called by \code{.prnFil_simulate_future_trend}, \code{morie_prphet_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param k.rate See Usage.
-#' @param m.off See Usage.
-#' @param deltas See Usage.
-#' @param cps See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param k.rate Numeric; combined arithmetically in the body.
+#' @param m.off Numeric; combined arithmetically in the body.
+#' @param deltas Numeric; combined arithmetically in the body.
+#' @param cps Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
@@ -56,11 +58,12 @@ morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
 
 #' morie_prphet_trend_matrix
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_design}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param cps See Usage.
+#' @param t A vector; its length is taken.
+#' @param cps A vector; its length is taken and its elements indexed.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
 morie_prphet_trend_matrix <- function(t, cps) {
@@ -76,11 +79,12 @@ morie_prphet_trend_matrix <- function(t, cps) {
 
 #' morie_prphet_fourier_terms
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_design}, \code{prophe_additive_components}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param period See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param period Numeric; combined arithmetically in the body.
 #' @param order See Usage.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
@@ -101,13 +105,14 @@ morie_prphet_fourier_terms <- function(t, period, order) {
 
 #' morie_prphet_holiday_matrix
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_design}, \code{prophe_additive_components}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param holidays See Usage.
-#' @param lower Defaults to \code{0}.
-#' @param upper Defaults to \code{0}.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param holidays A vector; indexed elementwise.
+#' @param lower Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param upper Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{rows}, \code{names}.
 #' @export
 morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
@@ -126,14 +131,15 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 
 #' morie_prphet_design
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_fit}, \code{morie_prphet_predict}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param cps See Usage.
+#' @param t Passed to \code{morie_prphet_trend_matrix}.
+#' @param cps A vector; its length is taken.
 #' @param seasonalities Defaults to \code{NULL}.
-#' @param holidays Defaults to \code{NULL}.
-#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param holidays Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param holiday_window A vector; indexed elementwise. Defaults to \code{c(0, 0)}.
 #' @return A list with \code{X}, \code{cols}, \code{holiday.names}.
 #' @export
 morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
@@ -163,19 +169,20 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 
 #' morie_prphet_fit
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. Called by \code{.prnFil_changepoint_path}, \code{.prnFil_select_changepoints}, \code{prophe_additive_components}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t See Usage.
 #' @param y See Usage.
-#' @param n_changepoints Defaults to \code{10L}.
-#' @param changepoint_range Defaults to \code{0.8}.
-#' @param changepoints Defaults to \code{NULL}.
-#' @param seasonalities Defaults to \code{NULL}.
-#' @param holidays Defaults to \code{NULL}.
-#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param n_changepoints Passed to \code{.changepoints}. Defaults to \code{10L}.
+#' @param changepoint_range Passed to \code{.changepoints}. Defaults to \code{0.8}.
+#' @param changepoints Passed to \code{.changepoints}.
+#' @param seasonalities Optional; may be \code{NULL}. Passed to \code{morie_prphet_design}.
+#' @param holidays Passed to \code{morie_prphet_design}.
+#' @param holiday_window Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.
 #' @param changepoint_prior Defaults to \code{0.05}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{residual}, \code{coef}, \code{beta}, \code{columns}, \code{changepoints}, \code{deltas}, \code{k}, \code{m}, \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior}, \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.
 #' @export
 morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8,
@@ -240,14 +247,15 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
 
 #' morie_prphet_predict
 #'
-#' Part of the prphet_native implementation; see the file header for the
+#' A step of the prphet_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
+#' @param fit A list; the body reads \code{$beta}, \code{$changepoints}, \code{$columns} from it.
 #' @param t.new See Usage.
-#' @param seasonalities Defaults to \code{NULL}.
-#' @param holidays Defaults to \code{NULL}.
-#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param seasonalities Passed to \code{morie_prphet_design}.
+#' @param holidays Passed to \code{morie_prphet_design}.
+#' @param holiday_window Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 morie_prphet_predict <- function(fit, t.new, seasonalities = NULL,

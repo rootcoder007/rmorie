@@ -12,7 +12,7 @@ morie_sam2vd_memory_bank(n_recent = 7, m_prompted = 1)
 \item{m_prompted}{Defaults to \code{1}.}
 }
 \description{
-Part of the sam2vd_native implementation; see the file header for the source it follows.
+A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{recent}, \code{prompted}, \code{pointers}, \code{n_recent}, \code{m_prompted}, \code{note}.

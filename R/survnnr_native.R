@@ -37,11 +37,12 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 
 #' .survnnr_act
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_forward}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v See Usage.
-#' @param kind See Usage.
+#' @param kind One of \code{"relu"}, \code{"tanh"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .survnnr_act <- function(v, kind) {
@@ -52,11 +53,12 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 
 #' .survnnr_dact
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v See Usage.
-#' @param kind See Usage.
+#' @param kind One of \code{"relu"}, \code{"tanh"}.
 #' @return A numeric value.
 #' @export
 .survnnr_dact <- function(v, kind) {
@@ -70,12 +72,13 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 
 #' .survnnr_init
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param d See Usage.
 #' @param hidden See Usage.
-#' @param seed See Usage.
+#' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{W}, \code{b}.
 #' @export
 .survnnr_init <- function(d, hidden, seed) {
@@ -105,13 +108,14 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 
 #' morie_survnnr_forward
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}, \code{morie_survnnr_risk_score}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param W See Usage.
-#' @param b See Usage.
+#' @param W A vector; its length is taken and its elements indexed.
+#' @param b A vector; indexed elementwise.
 #' @param x See Usage.
-#' @param activation Defaults to \code{"tanh"}.
+#' @param activation Passed to \code{.survnnr_act}. Defaults to \code{"tanh"}.
 #' @return A list with \code{output}, \code{pre}, \code{acts}.
 #' @export
 morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
@@ -133,12 +137,13 @@ morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
 
 #' morie_survnnr_partial_loglik
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param risk See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; its length is taken and its elements indexed.
+#' @param risk A vector; its length is taken and its elements indexed.
 #' @return A list with \code{loglik}, \code{average}, \code{n_events}, \code{ties}.
 #' @export
 morie_survnnr_partial_loglik <- function(times, events, risk) {
@@ -165,12 +170,13 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 
 #' .survnnr_grad_wrt_risk
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param risk See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; indexed elementwise.
+#' @param risk A vector; indexed elementwise.
 #' @return The value of \code{g}, as built in the body.
 #' @export
 .survnnr_grad_wrt_risk <- function(times, events, risk) {
@@ -191,18 +197,19 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 
 #' morie_survnnr_fit
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param hidden Defaults to \code{c()}.
-#' @param activation Defaults to \code{"tanh"}.
-#' @param l2 Defaults to \code{0}.
-#' @param lr Defaults to \code{0.1}.
+#' @param X A vector; its length is taken and its elements indexed.
+#' @param times A vector; its length is taken.
+#' @param events A vector; its length is taken.
+#' @param hidden A vector; its length is taken. Defaults to \code{c()}.
+#' @param activation Passed to \code{morie_survnnr_forward}. Defaults to \code{"tanh"}.
+#' @param l2 Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param n_epochs Defaults to \code{400}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.survnnr_init}. Defaults to \code{0}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{W}, \code{b}, \code{activation}, \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk}, \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties}, \code{scale_note}, \code{method}.
 #' @export
@@ -280,10 +287,11 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
 
 #' morie_survnnr_risk_score
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_concordance}, \code{morie_survnnr_survival_function}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fit_result See Usage.
+#' @param fit_result A list; the body reads \code{$activation}, \code{$b}, \code{$W} from it.
 #' @param X See Usage.
 #' @return A vector, from \code{sapply}.
 #' @export
@@ -294,10 +302,11 @@ morie_survnnr_risk_score <- function(fit_result, X) {
 
 #' morie_survnnr_baseline_hazard
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_survival_function}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fit_result See Usage.
+#' @param fit_result A list; the body reads \code{$events}, \code{$risk}, \code{$times} from it.
 #' @return A list with \code{time}, \code{cumulative_hazard}.
 #' @export
 morie_survnnr_baseline_hazard <- function(fit_result) {
@@ -323,10 +332,11 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
 
 #' morie_survnnr_survival_function
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fit_result See Usage.
+#' @param fit_result Passed to \code{morie_survnnr_baseline_hazard}.
 #' @param x See Usage.
 #' @param times Defaults to \code{NULL}.
 #' @return A list with \code{time}, \code{survival}.
@@ -353,12 +363,13 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
 
 #' .survnnr_c_index
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_concordance}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param risk See Usage.
+#' @param times A vector; its length is taken and its elements indexed.
+#' @param events A vector; indexed elementwise.
+#' @param risk A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .survnnr_c_index <- function(times, events, risk) {
@@ -385,13 +396,14 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
 
 #' morie_survnnr_concordance
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fit_result See Usage.
-#' @param X See Usage.
-#' @param times See Usage.
-#' @param events See Usage.
+#' @param fit_result Passed to \code{morie_survnnr_risk_score}.
+#' @param X Passed to \code{morie_survnnr_risk_score}.
+#' @param times Passed to \code{.survnnr_c_index}.
+#' @param events Passed to \code{.survnnr_c_index}.
 #' @return The value of \code{.survnnr_c_index}.
 #' @export
 morie_survnnr_concordance <- function(fit_result, X, times, events) {
@@ -400,7 +412,8 @@ morie_survnnr_concordance <- function(fit_result, X, times, events) {
 
 #' morie_survnnr_cheatsheet
 #'
-#' Part of the survnnr_native implementation; see the file header for
+#' A step of the survnnr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

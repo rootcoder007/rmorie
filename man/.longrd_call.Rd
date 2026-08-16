@@ -8,7 +8,7 @@
 .longrd_call(col, draft_base, min_depth, min_frac)
 }
 \arguments{
-\item{col}{See Usage.}
+\item{col}{A list; the body reads \code{$-}, \code{$A}, \code{$C}, \code{$G}, \code{$T} from it.}
 \item{draft_base}{See Usage.}
 \item{min_depth}{See Usage.}
 \item{min_frac}{See Usage.}

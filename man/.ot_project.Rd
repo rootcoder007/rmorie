@@ -8,11 +8,11 @@
 .ot_project(X, theta)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{theta}{See Usage.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -8,12 +8,12 @@
 .karpv_random_terminal(e, terminals, erc)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{terminals}{See Usage.}
-\item{erc}{See Usage.}
+\item{e}{Passed to \code{.karpv_below}.}
+\item{terminals}{A vector; its length is taken and its elements indexed.}
+\item{erc}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{.karpv_grow}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.karpv_tnode}.

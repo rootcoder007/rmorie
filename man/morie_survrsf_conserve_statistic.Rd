@@ -8,9 +8,9 @@
 morie_survrsf_conserve_statistic(times, events, group)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{group}{See Usage.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; its length is taken and its elements indexed.}
+\item{group}{A vector; its length is taken.}
 }
 \description{
 Returns the transform 1/(1 + Conserve).

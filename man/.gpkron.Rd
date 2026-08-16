@@ -8,8 +8,8 @@
 .gpkron(A, B)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{Passed to \code{.gpmat}.}
+\item{B}{Passed to \code{.gpmat}.}
 }
 \description{
 ----- Part of the helpers_gp_core implementation; see the file header for the source it follows.

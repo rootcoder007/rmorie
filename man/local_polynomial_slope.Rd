@@ -8,16 +8,16 @@
 local_polynomial_slope(v, y, kink, bandwidth, order = 2L, side = "right", kernel = "triangular")
 }
 \arguments{
-\item{v}{See Usage.}
-\item{y}{See Usage.}
-\item{kink}{See Usage.}
-\item{bandwidth}{See Usage.}
+\item{v}{Passed to \code{.side_fit}.}
+\item{y}{Passed to \code{.side_fit}.}
+\item{kink}{Passed to \code{.side_fit}.}
+\item{bandwidth}{Passed to \code{.side_fit}.}
 \item{order}{Defaults to \code{2L}.}
-\item{side}{Defaults to \code{"right"}.}
-\item{kernel}{Defaults to \code{"triangular"}.}
+\item{side}{One of \code{"left"}, \code{"right"}. Defaults to \code{"right"}.}
+\item{kernel}{One of \code{"triangular"}, \code{"uniform"}. Defaults to \code{"triangular"}.}
 }
 \description{
-Part of the bnskt2_native implementation; see the file header for the source it follows.
+A step of the bnskt2_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.side_fit}.

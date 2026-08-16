@@ -47,7 +47,8 @@
 
 #' .tmlcic_logit
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm}, \code{morie_tmlcic_candidate_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -60,7 +61,8 @@
 
 #' Vectorised sigmoid (.s03sigmoid is scalar-only)
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fluct}, \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -73,12 +75,13 @@
 
 #' Weighted logistic IRLS with a ridge penalty
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_g}, \code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param ridge Numeric; passed to \code{max}. Defaults to \code{1e-10}.
 #' @param obs_weights Defaults to \code{NULL}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
@@ -109,9 +112,9 @@
 #'
 #' sum w H (y - sigmoid(off + eps H)) = 0 for eps on the given rows.
 #'
-#' @param y See Usage.
-#' @param off See Usage.
-#' @param H See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param off A vector; indexed elementwise.
+#' @param H A vector; indexed elementwise.
 #' @param rows Defaults to \code{NULL}.
 #' @param obs_weights Defaults to \code{NULL}.
 #' @return The value of \code{eps}, as built in the body.
@@ -143,8 +146,8 @@
 #' per covariate, and optionally one treatment interaction each. cols
 #' are 0-based covariate indices.
 #'
-#' @param p See Usage.
-#' @param interactions Defaults to \code{TRUE}.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
+#' @param interactions A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{lib}, as built in the body.
 #' @export
 morie_tmlcic_default_library <- function(p, interactions=TRUE) {
@@ -167,11 +170,12 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 
 #' .tmlcic_row_fun
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_working_model}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param cand See Usage.
+#' @param W A matrix; indexed by row and column.
+#' @param cand A list; the body reads \code{$cols}, \code{$interact} from it.
 #' @return The value of \code{function}.
 #' @export
 .tmlcic_row_fun <- function(W, cand) {
@@ -188,15 +192,16 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 
 #' Logit[Qbar(A,W)] on the candidate\'s terms, fitted on rows
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_candidate_tmle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param W See Usage.
-#' @param cand See Usage.
+#' @param y A vector; indexed elementwise.
+#' @param A A vector; indexed elementwise.
+#' @param W Passed to \code{.tmlcic_row_fun}.
+#' @param cand Passed to \code{.tmlcic_row_fun}.
 #' @param rows See Usage.
-#' @param ridge See Usage.
+#' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{q}, \code{b}.
 #' @export
 .tmlcic_fit_working_model <- function(y, A, W, cand, rows, ridge) {
@@ -210,14 +215,15 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 
 #' A candidate for the exposure mechanism, P(A = 1 | W)
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param W See Usage.
-#' @param cand See Usage.
+#' @param A A vector; indexed elementwise.
+#' @param W A matrix; indexed by row and column.
+#' @param cand A list; the body reads \code{$cols} from it.
 #' @param rows See Usage.
-#' @param ridge See Usage.
+#' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{g1}, \code{b}.
 #' @export
 .tmlcic_fit_g <- function(A, W, cand, rows, ridge) {
@@ -231,18 +237,19 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 
 #' morie_tmlcic_candidate_tmle
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param W See Usage.
-#' @param cand See Usage.
+#' @param y A vector; its length is taken.
+#' @param A A vector; indexed elementwise.
+#' @param W Passed to \code{.tmlcic_fit_working_model}.
+#' @param cand Passed to \code{.tmlcic_fit_working_model}.
 #' @param g1 See Usage.
-#' @param rows Defaults to \code{NULL}.
+#' @param rows Optional; may be \code{NULL}. Passed to \code{.tmlcic_fit_working_model}.
 #' @param eval_rows Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
-#' @param target_step Defaults to \code{TRUE}.
+#' @param ridge Passed to \code{.tmlcic_fit_working_model}. Defaults to \code{1e-08}.
+#' @param target_step A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{q1}, \code{q0}, \code{qa}, \code{info}.
 #' @export
 morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows=NULL,
@@ -283,18 +290,19 @@ morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows=NULL,
 
 #' morie_tmlcic_influence_curve
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param q1 See Usage.
-#' @param q0 See Usage.
-#' @param qa See Usage.
-#' @param gA See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param A A vector; indexed elementwise.
+#' @param q1 A vector; indexed elementwise.
+#' @param q0 A vector; indexed elementwise.
+#' @param qa A vector; indexed elementwise.
+#' @param gA A vector; indexed elementwise.
 #' @param rows See Usage.
-#' @param psi See Usage.
-#' @param target See Usage.
+#' @param psi Numeric; combined arithmetically in the body.
+#' @param target Compared against \code{"SATE"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
@@ -318,11 +326,12 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 
 #' Group row indices by pair (or cluster) label, in first-seen order
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_cluster_ic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param cluster See Usage.
-#' @param n See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{lapply}.
 #' @export
 .tmlcic_pairs_from <- function(cluster, n) {
@@ -349,16 +358,17 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 
 #' morie_tmlcic_variance_estimate
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_cluster_ic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param y See Usage.
-#' @param qa See Usage.
-#' @param groups See Usage.
-#' @param n See Usage.
-#' @param design See Usage.
-#' @param target See Usage.
+#' @param D A vector; indexed elementwise.
+#' @param y A vector; indexed elementwise.
+#' @param qa A vector; indexed elementwise.
+#' @param groups A vector; its length is taken.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param design Compared against \code{"unmatched"}.
+#' @param target Compared against \code{"PATE"}.
 #' @return A list with \code{var}, \code{info}.
 #' @export
 morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
@@ -393,16 +403,17 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 
 #' Eq. (13.5)/(13.6) unmatched, (13.8)/(13.9) matched
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param y See Usage.
-#' @param qa See Usage.
+#' @param D A vector; indexed elementwise.
+#' @param y A vector; indexed elementwise.
+#' @param qa A vector; indexed elementwise.
 #' @param groups See Usage.
-#' @param design See Usage.
-#' @param target See Usage.
-#' @param rows See Usage.
+#' @param design Compared against \code{"unmatched"}.
+#' @param target Compared against \code{"PATE"}.
+#' @param rows A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tmlcic_loss <- function(D, y, qa, groups, design, target, rows) {
@@ -438,13 +449,14 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 
 #' Folds that respect the pairing: a pair is never split
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param groups See Usage.
 #' @param n_folds See Usage.
-#' @param design See Usage.
-#' @param n See Usage.
+#' @param design Compared against \code{"unmatched"}.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{Filter}.
 #' @export
 .tmlcic_cv_folds <- function(groups, n_folds, design, n) {
@@ -470,19 +482,20 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 
 #' morie_tmlcic_adaptive_prespecification
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_cluster_ic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param W See Usage.
-#' @param groups See Usage.
-#' @param design See Usage.
-#' @param target See Usage.
+#' @param y A vector; its length is taken.
+#' @param A Passed to \code{morie_tmlcic_candidate_tmle}.
+#' @param W A matrix; passed to \code{ncol}.
+#' @param groups Passed to \code{.tmlcic_cv_folds}.
+#' @param design Passed to \code{.tmlcic_cv_folds}.
+#' @param target Passed to \code{morie_tmlcic_influence_curve}.
 #' @param library Defaults to \code{NULL}.
 #' @param g_library Defaults to \code{NULL}.
-#' @param n_folds Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param n_folds Passed to \code{.tmlcic_cv_folds}.
+#' @param ridge Passed to \code{morie_tmlcic_candidate_tmle}. Defaults to \code{1e-08}.
 #' @return A list with \code{q_candidate}, \code{q_risks}, \code{q_names}, \code{g_candidate}, \code{g_risks}, \code{g_names}, \code{gfit}, \code{n_folds}.
 #' @export
 morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
@@ -545,20 +558,21 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
 
 #' morie_tmlcic_tmle_cluster_ic
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param X See Usage.
-#' @param cluster Defaults to \code{NULL}.
-#' @param target Defaults to \code{"SATE"}.
-#' @param design Defaults to \code{NULL}.
-#' @param library Defaults to \code{NULL}.
-#' @param g_library Defaults to \code{NULL}.
-#' @param n_folds Defaults to \code{NULL}.
-#' @param adapt Defaults to \code{TRUE}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param y Passed to \code{.s03vec}.
+#' @param D Passed to \code{.s03vec}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.s03mat}.
+#' @param cluster Optional; may be \code{NULL}. Passed to \code{.tmlcic_pairs_from}.
+#' @param target Passed to \code{morie_tmlcic_adaptive_prespecification}. Defaults to \code{"SATE"}.
+#' @param design Optional; may be \code{NULL}. One of \code{"matched"}, \code{"unmatched"}.
+#' @param library Passed to \code{morie_tmlcic_adaptive_prespecification}.
+#' @param g_library Passed to \code{morie_tmlcic_adaptive_prespecification}.
+#' @param n_folds Passed to \code{morie_tmlcic_adaptive_prespecification}.
+#' @param adapt A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param ridge Passed to \code{morie_tmlcic_adaptive_prespecification}. Defaults to \code{1e-08}.
 #' @param level Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{se}, \code{n}, \code{ci}, \code{level}, \code{unadjusted}, \code{se_unadjusted}, \code{variance_ratio}, \code{q_selected}, \code{q_risks}, \code{g_selected}, \code{g_risks}, \code{epsilon}, \code{influence_curve}, \code{eic_mean}, \code{rho}, \code{independent_units}, \code{unit}, \code{design}, \code{target}, \code{n_folds}, \code{adapt}, \code{method}.
 #' @export
@@ -728,11 +742,12 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 
 #' Pull a cluster-level variable out of per-individual rows
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param groups See Usage.
+#' @param v A vector; indexed elementwise.
+#' @param groups A vector; its length is taken and its elements indexed.
 #' @param name See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -753,16 +768,17 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 
 #' .tmlcic_hier_cluster_arm
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yc See Usage.
-#' @param Aj See Usage.
-#' @param Zj See Usage.
-#' @param groups See Usage.
+#' @param yc Numeric; combined arithmetically in the body.
+#' @param Aj A vector; indexed elementwise.
+#' @param Zj A matrix; passed to \code{as.matrix}.
+#' @param groups A vector; its length is taken.
 #' @param a See Usage.
-#' @param trim See Usage.
-#' @param ridge See Usage.
+#' @param trim Numeric; combined arithmetically in the body.
+#' @param ridge Numeric; passed to \code{max}.
 #' @param known_g See Usage.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
@@ -800,17 +816,18 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 
 #' .tmlcic_hier_individual_arm
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param Ai See Usage.
-#' @param Zi See Usage.
-#' @param alpha See Usage.
-#' @param groups See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param Ai A vector; indexed elementwise.
+#' @param Zi A matrix; passed to \code{as.matrix}.
+#' @param alpha A vector; indexed elementwise.
+#' @param groups A vector; its length is taken.
 #' @param a See Usage.
-#' @param trim See Usage.
-#' @param ridge See Usage.
+#' @param trim Numeric; combined arithmetically in the body.
+#' @param ridge Numeric; passed to \code{max}.
 #' @param known_g See Usage.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
@@ -853,19 +870,20 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 
 #' morie_tmlcic_tmle_hierarchical
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param E See Usage.
-#' @param W See Usage.
-#' @param cluster See Usage.
-#' @param arm Defaults to \code{"both"}.
-#' @param weights Defaults to \code{NULL}.
-#' @param known_g Defaults to \code{NULL}.
+#' @param y Passed to \code{.s03vec}.
+#' @param A Passed to \code{.s03vec}.
+#' @param E Optional; may be \code{NULL}. Passed to \code{.s03mat}.
+#' @param W Optional; may be \code{NULL}. Passed to \code{.s03mat}.
+#' @param cluster Passed to \code{morie_tmlcic_cluster_weights}.
+#' @param arm One of \code{"both"}, \code{"cluster"}, \code{"individual"}. Defaults to \code{"both"}.
+#' @param weights Passed to \code{morie_tmlcic_cluster_weights}.
+#' @param known_g Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param trim Defaults to \code{0.01}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{.tmlcic_hier_cluster_arm}. Defaults to \code{1e-08}.
 #' @param level Defaults to \code{0.95}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
@@ -986,7 +1004,8 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
 
 #' morie_tmlcic_cheatsheet
 #'
-#' Part of the tmlcic_native implementation; see the file header for the
+#' A step of the tmlcic_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

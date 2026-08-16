@@ -3,20 +3,20 @@
 % the formals.
 \name{morie_ipcw_interval}
 \alias{morie_ipcw_interval}
-\title{Ipcw_interval: Sec. 8.5\\'s IPCW estimator of Psi_a = int r(t)}
+\title{Ipcw_interval: Sec. 8.5\'s IPCW estimator of Psi_a = int r(t)}
 \usage{
 morie_ipcw_interval(W, A, times, deltas, a = 1, r = NULL, g = NULL, gc = NULL, ridge = 1e-08)
 }
 \arguments{
-\item{W}{See Usage.}
+\item{W}{Passed to \code{.tmlcen_W_mat}.}
 \item{A}{See Usage.}
-\item{times}{See Usage.}
-\item{deltas}{See Usage.}
+\item{times}{Passed to \code{.tmlcen_coerce_subject_list}.}
+\item{deltas}{Passed to \code{.tmlcen_coerce_subject_list}.}
 \item{a}{Defaults to \code{1}.}
 \item{r}{Defaults to \code{NULL}.}
-\item{g}{Defaults to \code{NULL}.}
-\item{gc}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{g}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
+\item{gc}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
+\item{ridge}{Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.}
 }
 \description{
 Fbar_a(t) dt Part of the tmlcen_native implementation; see the file header for the source it follows.

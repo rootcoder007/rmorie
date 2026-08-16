@@ -8,11 +8,11 @@
 .t2_agg(name, vals)
 }
 \arguments{
-\item{name}{See Usage.}
-\item{vals}{See Usage.}
+\item{name}{One of \code{"max"}, \code{"mean"}, \code{"min"}, \code{"std"}.}
+\item{vals}{A vector; its length is taken.}
 }
 \description{
-Part of the tail2_t01 implementation; see the file header for the source it follows.
+A step of the tail2_t01 implementation. Called by \code{PnaAgg}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

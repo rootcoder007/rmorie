@@ -63,11 +63,12 @@
 
 #' .rfppos_cross
 #'
-#' Part of the rfppos_native implementation; see the file header for the
+#' A step of the rfppos_native implementation. Called by \code{morie_rfppos_dihedral}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; indexed elementwise.
+#' @param b A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
 .rfppos_cross <- function(a, b)
@@ -76,10 +77,11 @@
 
 #' .rfppos_norm
 #'
-#' Part of the rfppos_native implementation; see the file header for the
+#' A step of the rfppos_native implementation. Called by \code{morie_rfppos_angle}, \code{morie_rfppos_dihedral}, \code{morie_rfppos_distance}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .rfppos_norm <- function(a) sqrt(.w3_csum(a * a))

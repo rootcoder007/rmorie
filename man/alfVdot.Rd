@@ -8,11 +8,11 @@
 alfVdot(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the alf_core implementation; see the file header for the source it follows.
+A step of the alf_core implementation. Called by \code{Alfipa}, \code{Alfmsaat}, \code{Alftmpl} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

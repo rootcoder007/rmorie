@@ -19,7 +19,7 @@ effective_reproduction_number(R0, si_mean, si_sd, delay_mean, delay_sd, trace_pr
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the ttrace_native implementation; see the file header for the source it follows.
+A step of the ttrace_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{R_eff}, \code{R0}, \code{fraction_before_isolation}, \code{controlled_in_expectation}, \code{note}.

@@ -15,7 +15,7 @@ Scalogram(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5)
 \item{w0}{Defaults to \code{5}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{CwtRidge}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{scalogram}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{total_energy}, \code{ridge}, \code{method}.

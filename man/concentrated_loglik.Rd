@@ -9,11 +9,11 @@ concentrated_loglik(y, resid, omega)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{resid}{See Usage.}
-\item{omega}{See Usage.}
+\item{resid}{A vector; its length is taken.}
+\item{omega}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{.fit_spec}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

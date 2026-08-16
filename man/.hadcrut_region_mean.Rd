@@ -8,9 +8,9 @@
 .hadcrut_region_mean(grid, rows, var = NULL)
 }
 \arguments{
-\item{grid}{See Usage.}
+\item{grid}{A matrix; indexed by row and column.}
 \item{rows}{See Usage.}
-\item{var}{Defaults to \code{NULL}.}
+\item{var}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
 }
 \description{
 is NA when the region holds no observation, which is a real state in 1850 and must not silently become zero.

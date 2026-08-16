@@ -8,10 +8,11 @@
 
 #' .robpca_matrix
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}, \code{outlyingness}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @param name Defaults to \code{"X"}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
@@ -32,7 +33,8 @@
 
 #' .robpca_eigh_desc
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param C See Usage.
@@ -53,10 +55,11 @@
 
 #' .robpca_det_from_chol
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{.robpca_c_steps}, \code{.robpca_fast_mcd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
+#' @param C A matrix; passed to \code{chol}.
 #' @return The value of \code{prod}.
 #' @export
 .robpca_det_from_chol <- function(C) {
@@ -67,12 +70,13 @@
 
 #' .robpca_mahalanobis
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{.robpca_c_steps}, \code{.robpca_fast_mcd}, \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
 #' @param mu See Usage.
-#' @param C See Usage.
+#' @param C A matrix; passed to \code{solve}.
 #' @return A numeric value.
 #' @export
 .robpca_mahalanobis <- function(X, mu, C) {
@@ -86,12 +90,13 @@
 
 #' univariate_mcd
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{.robpca_od_cutoff}, \code{outlyingness}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values See Usage.
-#' @param h Defaults to \code{NULL}.
-#' @param consistent Defaults to \code{TRUE}.
+#' @param h Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param consistent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A vector, from \code{c}.
 #' @export
 univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
@@ -126,12 +131,13 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
 
 #' .robpca_directions
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{outlyingness}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param n_dirs See Usage.
-#' @param seed See Usage.
+#' @param rows A matrix; indexed by row and column.
+#' @param n_dirs Numeric; combined arithmetically in the body.
+#' @param seed Passed to \code{.ghc_rng}.
 #' @return The value of \code{do.call}.
 #' @export
 .robpca_directions <- function(rows, n_dirs, seed) {
@@ -171,13 +177,14 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
 
 #' outlyingness
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{.robpca_matrix}.
 #' @param h Defaults to \code{NULL}.
-#' @param n_dirs Defaults to \code{250L}.
-#' @param seed Defaults to \code{17L}.
+#' @param n_dirs Passed to \code{.robpca_directions}. Defaults to \code{250L}.
+#' @param seed Passed to \code{.robpca_directions}. Defaults to \code{17L}.
 #' @return A list with \code{outl}, \code{exact_fit_direction}.
 #' @export
 outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
@@ -202,12 +209,13 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 
 #' .robpca_c_steps
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{.robpca_fast_mcd}, \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param idx See Usage.
-#' @param max_iter Defaults to \code{100L}.
+#' @param rows A matrix; indexed by row and column.
+#' @param idx A vector; its length is taken.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
 #' @return A list with \code{idx}, \code{mu}, \code{C}, \code{det}.
 #' @export
 .robpca_c_steps <- function(rows, idx, max_iter = 100L) {
@@ -239,13 +247,14 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 
 #' .robpca_fast_mcd
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
+#' @param rows A matrix; indexed by row and column.
 #' @param h See Usage.
 #' @param n_start Defaults to \code{250L}.
-#' @param seed Defaults to \code{17L}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{17L}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .robpca_fast_mcd <- function(rows, h, n_start = 250L, seed = 17L) {
@@ -318,11 +327,12 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 
 #' classify_outliers
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sd See Usage.
-#' @param od See Usage.
+#' @param sd A vector; its length is taken and its elements indexed.
+#' @param od A vector; indexed elementwise.
 #' @param sd_cut See Usage.
 #' @param od_cut See Usage.
 #' @return The value of \code{out}, as built in the body.
@@ -348,13 +358,14 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 
 #' .robpca_choose_k
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param l0 See Usage.
-#' @param k See Usage.
-#' @param kmax See Usage.
-#' @param r1 See Usage.
+#' @param l0 A vector; indexed elementwise.
+#' @param k Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param kmax Numeric; passed to \code{min}.
+#' @param r1 Numeric; passed to \code{min}.
 #' @return Nothing; this branch always raises.
 #' @export
 .robpca_choose_k <- function(l0, k, kmax, r1) {
@@ -385,11 +396,12 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 
 #' .robpca_drop_direction
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param v See Usage.
+#' @param rows A matrix; passed to \code{nrow}.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return The value of \code{%*%}.
 #' @export
 .robpca_drop_direction <- function(rows, v) {
@@ -421,11 +433,12 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 
 #' .robpca_reweight_factor
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
-#' @param k See Usage.
+#' @param q Numeric; combined arithmetically in the body.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .robpca_reweight_factor <- function(q, k) {
@@ -435,11 +448,12 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 
 #' .robpca_od_cutoff
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. Called by \code{morie_robpca}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param od See Usage.
-#' @param h See Usage.
+#' @param od Numeric; combined arithmetically in the body.
+#' @param h Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
 .robpca_od_cutoff <- function(od, h) {
@@ -454,17 +468,18 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 
 #' morie_robpca
 #'
-#' Part of the robpca_native implementation; see the file header for the
+#' A step of the robpca_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param k Defaults to \code{NULL}.
-#' @param alpha Defaults to \code{0.75}.
-#' @param kmax Defaults to \code{10L}.
+#' @param X Passed to \code{.robpca_matrix}.
+#' @param k Passed to \code{.robpca_choose_k}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.75}.
+#' @param kmax Numeric; combined arithmetically in the body. Defaults to \code{10L}.
 #' @param n_dirs Defaults to \code{250L}.
-#' @param n_start Defaults to \code{250L}.
-#' @param seed Defaults to \code{17L}.
-#' @param reweight Defaults to \code{TRUE}.
+#' @param n_start Passed to \code{.robpca_fast_mcd}. Defaults to \code{250L}.
+#' @param seed Passed to \code{.robpca_fast_mcd}. Defaults to \code{17L}.
+#' @param reweight A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{loadings}, \code{eigenvalues}, \code{center}, \code{scores}, \code{k}, \code{k0}, \code{h}, \code{alpha}, \code{rank}, \code{subspace_rank}, \code{outlyingness}, \code{h_subset}, \code{reweighted_kept}, \code{consistency_factor}, \code{score_distance}, \code{orthogonal_distance}, \code{sd_cutoff}, \code{od_cutoff}, \code{classification}, \code{n_outliers}, \code{n}, \code{p}, \code{reweighted}, \code{method}, \code{note}.
 #' @export
 morie_robpca <- function(X, k = NULL, alpha = 0.75, kmax = 10L,

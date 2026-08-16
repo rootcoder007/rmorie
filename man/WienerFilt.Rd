@@ -16,7 +16,7 @@ WienerFilt(x, desired = NULL, order = 8, sd = NULL, seta = NULL, fs = 1)
 \item{fs}{Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_adapt implementation; see the file header for the source it follows.
+A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{W}, \code{route}, \code{fs}, \code{n}, \code{method}.

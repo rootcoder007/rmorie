@@ -43,7 +43,8 @@
 
 #' morie_yolovx_decoupled_head
 #'
-#' Part of the yolovx_native implementation; see the file header for the
+#' A step of the yolovx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param channels See Usage.
@@ -74,7 +75,8 @@ morie_yolovx_decoupled_head <- function(channels, reduced=256,
 
 #' Four distances from a location to the box sides
 #'
-#' Part of the yolovx_native implementation; see the file header for the
+#' A step of the yolovx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param box See Usage.
@@ -103,10 +105,11 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
 
 #' Back to corners. Inverts encode_box exactly
 #'
-#' Part of the yolovx_native implementation; see the file header for the
+#' A step of the yolovx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ltrb See Usage.
+#' @param ltrb Passed to \code{.s03vec}.
 #' @param cx See Usage.
 #' @param cy See Usage.
 #' @param stride Defaults to \code{1}.
@@ -127,11 +130,12 @@ morie_yolovx_decode_box <- function(ltrb, cx, cy, stride=1.0) {
 
 #' Intersection over union of two corner boxes
 #'
-#' Part of the yolovx_native implementation; see the file header for the
+#' A step of the yolovx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; indexed elementwise.
+#' @param b A vector; indexed elementwise.
 #' @return One of two values, depending on the branch taken.
 #' @export
 morie_yolovx_box_iou <- function(a, b) {
@@ -148,7 +152,8 @@ morie_yolovx_box_iou <- function(a, b) {
 
 #' morie_yolovx_center_sampling
 #'
-#' Part of the yolovx_native implementation; see the file header for the
+#' A step of the yolovx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param box See Usage.
@@ -211,8 +216,8 @@ morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride=1.0,
 #' rounded sum of the q largest IoUs for that ground truth. Returns the
 #' assignment keyed by 0-based ground-truth index.
 #'
-#' @param costs See Usage.
-#' @param ious See Usage.
+#' @param costs Passed to \code{.s03mat}.
+#' @param ious Passed to \code{.s03mat}.
 #' @param top_q Defaults to \code{10}.
 #' @param max_k Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{assignment}, \code{dynamic_k}, \code{n_positives}, \code{contested}, \code{method}, \code{note}.
@@ -274,7 +279,8 @@ morie_yolovx_simota_assign <- function(costs, ious, top_q=10, max_k=NULL) {
 
 #' morie_yolovx_cheatsheet
 #'
-#' Part of the yolovx_native implementation; see the file header for the
+#' A step of the yolovx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

@@ -8,11 +8,11 @@
 .ecstcr_ols(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{y}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ecsTCR_native implementation; see the file header for the source it follows.
+A step of the ecsTCR_native implementation. Called by \code{morie_ecsTCR}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.
@@ -20,7 +20,7 @@ A vector, from \code{c}.
 \references{
   Charney, J.G. et al. (1979) "Carbon Dioxide and Climate: A Scientific
     Assessment." National Academy of Sciences, Washington DC.
-  Forster, P. et al. (2021) "The Earth\\'s Energy Budget, Climate
+  Forster, P. et al. (2021) "The Earth\'s Energy Budget, Climate
     Feedbacks, and Climate Sensitivity", Chapter 7 of IPCC AR6 WG1,
     Cambridge University Press, 923-1054,
     doi:10.1017/9781009157896.009

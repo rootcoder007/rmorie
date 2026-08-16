@@ -8,10 +8,10 @@
 .trmwgt_cv(w)
 }
 \arguments{
-\item{w}{See Usage.}
+\item{w}{A vector; its length is taken.}
 }
 \description{
-Part of the Trmwgt implementation; see the file header for the source it follows.
+A step of the Trmwgt implementation. Called by \code{Trmwgt}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

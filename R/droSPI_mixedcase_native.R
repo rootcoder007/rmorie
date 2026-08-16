@@ -31,7 +31,7 @@
 #' Part of the droSPI_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param h See Usage.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .drospi_as_z <- function(h) {
@@ -54,7 +54,7 @@
 #' Part of the droSPI_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param xs See Usage.
+#' @param xs A vector; its length is taken and its elements indexed.
 #' @return A list with \code{q}, \code{alpha}, \code{beta}.
 #' @export
 .drospi_fit_thom <- function(xs) {
@@ -80,7 +80,7 @@
 #'
 #' @param precip See Usage.
 #' @param scale Defaults to \code{3L}.
-#' @param by_month Defaults to \code{TRUE}.
+#' @param by_month A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{spi}, \code{totals}, \code{params}, \code{scale}, \code{by_month}, \code{method}.
 #' @export
 morie_droSPI <- function(precip, scale = 3L, by_month = TRUE) {

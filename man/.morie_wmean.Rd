@@ -3,13 +3,13 @@
 % the formals.
 \name{.morie_wmean}
 \alias{.morie_wmean}
-\title{Normalised weighted mean: sum(y * w) / sum(w). Huber\\\'s Section 3}
+\title{Normalised weighted mean: sum(y * w) / sum(w). Huber\\'s Section 3}
 \usage{
 .morie_wmean(y, w)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{w}{Numeric; passed to \code{sum}.}
 }
 \description{
 normalises so the weights within each treatment state add to unity, following Imbens (2004) and Busso, DiNardo and McCrary (2009).

@@ -8,11 +8,11 @@
 .tlsieve_cumulative_incidence(hazards, times)
 }
 \arguments{
-\item{hazards}{See Usage.}
-\item{times}{See Usage.}
+\item{hazards}{A vector; indexed elementwise.}
+\item{times}{A vector; its length is taken.}
 }
 \description{
-Part of the tlsieve_native implementation; see the file header for the source it follows.
+A step of the tlsieve_native implementation. Called by \code{.tlsieve_aalen_johansen}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{F}, \code{survival}, \code{times}, \code{types}, \code{closure}, \code{note}.
@@ -28,7 +28,7 @@ viruses, and its use in selecting antigens for multivalent vaccines;
 the competing risks framework with each genotype a separate endpoint;
 cumulative incidence as the cumulative parameter, of greater public
 health relevance when vaccine effects wane; the Aalen-Johansen
-estimator\\'s consistency under uninformative censoring and
+estimator\'s consistency under uninformative censoring and
 nonparametric efficiency absent covariates; the concern of informative
 censoring and the routine availability of prognostic covariates; and
 the drawback that semiparametric hazard-based alternatives require a

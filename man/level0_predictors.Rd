@@ -8,13 +8,13 @@
 level0_predictors(G, y, blocks, n_ridge = 5)
 }
 \arguments{
-\item{G}{See Usage.}
-\item{y}{See Usage.}
+\item{G}{A matrix; indexed by row and column.}
+\item{y}{A vector; its length is taken.}
 \item{blocks}{See Usage.}
-\item{n_ridge}{Defaults to \code{5}.}
+\item{n_ridge}{Passed to \code{.regmlm_lambda_grid}. Defaults to \code{5}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{morie_regmlm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{predictors}, \code{meta}, \code{n_predictors}, \code{reduction}.

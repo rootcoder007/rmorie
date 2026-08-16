@@ -8,10 +8,10 @@
 .dbmirror(h)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the wave implementation; see the file header for the source it follows.
+A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

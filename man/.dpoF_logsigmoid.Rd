@@ -8,10 +8,10 @@
 .dpoF_logsigmoid(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; passed to \code{exp}.}
 }
 \description{
-Part of the dpoF_native implementation; see the file header for the source it follows.
+A step of the dpoF_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -15,11 +15,12 @@
 # --- design expansion per learner kind ------------------------------
 #' Design expansion per learner kind ------------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param W See Usage.
-#' @param spec See Usage.
+#' @param W A matrix; indexed by row and column.
+#' @param spec A list; the body reads \code{$cols}, \code{$kind} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .flxipt_expand <- function(W, spec) {
@@ -57,7 +58,8 @@
 # --- default library, in the shape Pirracchio et al. use ------------
 #' Default library, in the shape Pirracchio et al. use ------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{super_learner}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -88,14 +90,15 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- logistic IRLS, internal: returns coef vector --------------------
 #' Logistic IRLS, internal: returns coef vector --------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-10}.
-#' @param penalty Defaults to \code{0}.
-#' @param max_iter Defaults to \code{200}.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
+#' @param penalty Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
@@ -124,12 +127,13 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- internal lstsq with optional ridge ----------------------------
 #' Internal lstsq with optional ridge ----------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}, \code{super_learner}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .flxipt_lstsq <- function(X, y, ridge = 1e-10) {
@@ -142,10 +146,11 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- sigmoid --------------------------------------------------------
 #' Sigmoid --------------------------------------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .flxipt_sigmoid <- function(v) {
@@ -156,15 +161,16 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- train one candidate on `rows`; return predictor over all rows
 #' Train one candidate on `rows`; return predictor over all rows
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{super_learner}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
-#' @param spec See Usage.
+#' @param y A vector; indexed elementwise.
+#' @param W Passed to \code{.flxipt_expand}.
+#' @param spec A list; the body reads \code{$penalty} from it.
 #' @param rows See Usage.
-#' @param binary See Usage.
-#' @param ridge See Usage.
+#' @param binary A flag; the body branches on it.
+#' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{pred}, \code{b}.
 #' @export
 .flxipt_fit <- function(y, W, spec, rows, binary, ridge) {
@@ -187,11 +193,12 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- disjoint validation blocks -------------------------------------
 #' Disjoint validation blocks -------------------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{super_learner}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param V See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
 .flxipt_folds <- function(n, V) {
@@ -202,10 +209,11 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- projection onto {a >= 0, sum a = 1}, exact sort-based ---------
 #' Projection onto {a >= 0, sum a = 1}, exact sort-based ---------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{.flxipt_nnls_simplex}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
 #' @export
 .flxipt_project_simplex <- function(v) {
@@ -229,9 +237,9 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' Accelerated projected gradient with step from the largest eigenvalue
 #' of the Gram matrix (estimated by power iteration).
 #'
-#' @param Z See Usage.
-#' @param y See Usage.
-#' @param iters Defaults to \code{8000}.
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{8000}.
 #' @param tol Defaults to \code{1e-14}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -280,12 +288,13 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- cross-validated risk per column of Z ---------------------------
 #' Cross-validated risk per column of Z ---------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{super_learner}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param Z See Usage.
-#' @param loss Defaults to \code{"l2"}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param Z A matrix; indexed by row and column.
+#' @param loss One of \code{"l2"}, \code{"nll"}. Defaults to \code{"l2"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 cv_risk <- function(y, Z, loss = "l2") {
@@ -308,18 +317,19 @@ cv_risk <- function(y, Z, loss = "l2") {
 # --- the Super Learner ---------------------------------------------
 #' The Super Learner ---------------------------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{flexible_iptw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param X See Usage.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param library Defaults to \code{NULL}.
-#' @param n_folds Defaults to \code{10}.
-#' @param meta Defaults to \code{"nnls"}.
-#' @param binary Defaults to \code{NULL}.
-#' @param loss Defaults to \code{"l2"}.
-#' @param ridge Defaults to \code{1e-08}.
-#' @param honest_level_one Defaults to \code{TRUE}.
+#' @param n_folds Passed to \code{.flxipt_folds}. Defaults to \code{10}.
+#' @param meta One of \code{"discrete"}, \code{"nnls"}. Defaults to \code{"nnls"}.
+#' @param binary Optional; may be \code{NULL}. A flag; the body branches on it.
+#' @param loss Compared against \code{"nll"}. Defaults to \code{"l2"}.
+#' @param ridge Numeric; passed to \code{max}. Defaults to \code{1e-08}.
+#' @param honest_level_one A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{fitted}, \code{estimate}, \code{weights}, \code{weight_vector}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{best_candidate_risk}, \code{discrete_choice}, \code{level_one}, \code{candidate_fits}, \code{library}, \code{n}, \code{n_folds}, \code{meta}, \code{loss}, \code{binary}, \code{honest_level_one}, \code{method}.
 #' @export
 super_learner <- function(y, X, library = NULL, n_folds = 10,
@@ -405,7 +415,8 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 # --- IPTW: propensity by Super Learner, weights A/g + (1-A)/(1-g)
 #' IPTW: propensity by Super Learner, weights A/g + (1-A)/(1-g)
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. Called by \code{iptw_ate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A See Usage.
@@ -415,7 +426,7 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 #' @param meta Defaults to \code{"nnls"}.
 #' @param trim Defaults to \code{0.01}.
 #' @param ridge Defaults to \code{1e-08}.
-#' @param stabilize Defaults to \code{FALSE}.
+#' @param stabilize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{propensity}, \code{weights}, \code{estimate}, \code{sl_weights}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n}, \code{trim}, \code{stabilized}, \code{library}, \code{method}.
 #' @export
 flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
@@ -459,7 +470,8 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 # --- ATE by weighted regression of Y on A --------------------------
 #' ATE by weighted regression of Y on A --------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -510,7 +522,8 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
 # --- cheatsheet -----------------------------------------------------
 #' Cheatsheet -----------------------------------------------------
 #'
-#' Part of the flxipt_native implementation; see the file header for the
+#' A step of the flxipt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

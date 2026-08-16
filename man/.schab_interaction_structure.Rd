@@ -8,12 +8,12 @@
 .schab_interaction_structure(R_space, R_time, kind)
 }
 \arguments{
-\item{R_space}{See Usage.}
-\item{R_time}{See Usage.}
+\item{R_space}{A matrix; passed to \code{as.matrix}.}
+\item{R_time}{A matrix; passed to \code{as.matrix}.}
 \item{kind}{See Usage.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{structure}, \code{kind}, \code{rank}, \code{rank_deficiency}, \code{n_constraints_required}.

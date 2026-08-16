@@ -8,11 +8,11 @@
 .frfgrf_regularity_walk(nd, worst)
 }
 \arguments{
-\item{nd}{See Usage.}
-\item{worst}{See Usage.}
+\item{nd}{A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.}
+\item{worst}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the frfgrf_native implementation; see the file header for the source it follows.
+A step of the frfgrf_native implementation. Called by \code{.frfgrf_regularity}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{worst}, as built in the body.

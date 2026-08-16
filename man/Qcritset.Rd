@@ -20,7 +20,7 @@ List with Q, nQ, argmin (zero-based), minQ, inset, nin,
 cutoff, g, J.
 }
 \description{
-Q_n(theta) = sum_j \link{max(mbar_j/sigma_j, 0)}^2 and
+Q_n(theta) = sum_j [max(mbar_j/sigma_j, 0)]^2 and
 C_n = {theta : n Q_n(theta) <= cutoff}.
 }
 \references{

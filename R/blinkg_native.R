@@ -73,11 +73,12 @@
 # Pearson correlation, compensated, zero when either side is constant.
 #' Pearson correlation, compensated, zero when either side is constant
 #'
-#' Part of the blinkg_native implementation; see the file header for the
+#' A step of the blinkg_native implementation. Called by \code{morie_blinkg_ld_filter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken.
+#' @param b Numeric; passed to \code{.w3_csum}.
 #' @return A numeric value.
 #' @export
 .blinkg_corr <- function(a, b) {
@@ -94,12 +95,13 @@
 # Intercept, fixed covariates, then the given genotype columns.
 #' Intercept, fixed covariates, then the given genotype columns
 #'
-#' Part of the blinkg_native implementation; see the file header for the
+#' A step of the blinkg_native implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param covars See Usage.
-#' @param cols See Usage.
+#' @param n A count; the body uses it as \code{matrix(...)}.
+#' @param covars A vector; its length is taken.
+#' @param cols A vector; its length is taken.
 #' @return The value of \code{d}, as built in the body.
 #' @export
 .blinkg_design <- function(n, covars, cols) {
@@ -171,7 +173,7 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
 #' and a selection that depended on which one the sort happened to put
 #' first would not be reproducible.
 #'
-#' @param pv See Usage.
+#' @param pv A vector; indexed elementwise.
 #' @return The value of \code{[}.
 #' @export
 .blinkg_order <- function(pv) {
@@ -234,11 +236,12 @@ morie_blinkg_bin_filter <- function(order, positions, bin_size) {
 # Gaussian log likelihood at the least-squares fit.
 #' Gaussian log likelihood at the least-squares fit
 #'
-#' Part of the blinkg_native implementation; see the file header for the
+#' A step of the blinkg_native implementation. Called by \code{morie_blinkg_select}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rss See Usage.
-#' @param n See Usage.
+#' @param rss Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .blinkg_loglik <- function(rss, n) {

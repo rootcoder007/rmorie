@@ -8,11 +8,11 @@
 .resnxt_lin(W, x)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{x}{See Usage.}
+\item{W}{A vector; its length is taken and its elements indexed.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the resnxt_native implementation; see the file header for the source it follows.
+A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

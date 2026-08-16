@@ -8,11 +8,11 @@
 .groebn_leading_monomial(f, order = "lex")
 }
 \arguments{
-\item{f}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
+\item{f}{Passed to \code{.groebn_monomials}.}
+\item{order}{Passed to \code{.groebn_monomials}. Defaults to \code{"lex"}.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_divide}, \code{.groebn_leading_coeff} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

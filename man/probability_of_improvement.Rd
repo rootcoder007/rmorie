@@ -8,13 +8,13 @@
 probability_of_improvement(mu, sd, best, xi = 0)
 }
 \arguments{
-\item{mu}{See Usage.}
-\item{sd}{See Usage.}
-\item{best}{See Usage.}
-\item{xi}{Defaults to \code{0}.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{sd}{Numeric; combined arithmetically in the body.}
+\item{best}{Numeric; combined arithmetically in the body.}
+\item{xi}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{acquire}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Phi}.

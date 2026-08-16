@@ -11,7 +11,7 @@
 \item{k}{See Usage.}
 }
 \description{
-Part of the rfkrn implementation; see the file header for the source it follows.
+A step of the rfkrn implementation. Called by \code{Rfkrn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

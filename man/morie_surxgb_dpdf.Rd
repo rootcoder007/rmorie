@@ -3,16 +3,16 @@
 % the formals.
 \name{morie_surxgb_dpdf}
 \alias{morie_surxgb_dpdf}
-\title{Table 2: f_Z\\'(z)}
+\title{Table 2: f_Z\'(z)}
 \usage{
 morie_surxgb_dpdf(z, dist = "normal")
 }
 \arguments{
-\item{z}{See Usage.}
-\item{dist}{Defaults to \code{"normal"}.}
+\item{z}{Passed to \code{morie_surxgb_pdf}.}
+\item{dist}{One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

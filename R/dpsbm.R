@@ -2,11 +2,12 @@
 
 #' .sbm_log_beta
 #'
-#' Part of the dpsbm implementation; see the file header for the source
+#' A step of the dpsbm implementation. Called by \code{Dpsbm}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .sbm_log_beta <- function(a, b) lgamma(a) + lgamma(b) - lgamma(a + b)

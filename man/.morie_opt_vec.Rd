@@ -12,7 +12,7 @@
 \item{name}{Defaults to \code{"g"}.}
 }
 \description{
-Part of the optim_native implementation; see the file header for the source it follows.
+A step of the optim_native implementation. Called by \code{morie_adagrad}, \code{morie_adam}, \code{morie_adamw_step} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{a}, as built in the body.

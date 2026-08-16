@@ -11,7 +11,7 @@
 \item{rows}{See Usage.}
 }
 \description{
-Part of the causdidwd_native implementation; see the file header for the source it follows.
+A step of the causdidwd_native implementation. Called by \code{morie_two_way_fixed_effects}, \code{morie_two_way_mundlak}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cbind}.

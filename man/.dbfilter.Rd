@@ -11,7 +11,7 @@
 \item{name}{See Usage.}
 }
 \description{
-Part of the wave implementation; see the file header for the source it follows.
+A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

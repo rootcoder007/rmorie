@@ -22,9 +22,9 @@
 #' Part of the geometric_combinatorics_native implementation; see the
 #' file header for the source it follows.
 #'
-#' @param o See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param o A vector; indexed elementwise.
+#' @param a A vector; indexed elementwise.
+#' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .morie_cross3 <- function(o, a, b) {

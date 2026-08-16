@@ -8,11 +8,11 @@
 .unifAlg_apply_once(t, subst)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{subst}{See Usage.}
+\item{t}{A vector; indexed elementwise.}
+\item{subst}{A vector; indexed elementwise.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose}, \code{morie_unifAlg_substitute}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

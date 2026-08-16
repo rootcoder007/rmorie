@@ -10,7 +10,7 @@ Dtft(x, omega, n0 = 0)
 \arguments{
 \item{x}{See Usage.}
 \item{omega}{See Usage.}
-\item{n0}{Defaults to \code{0}.}
+\item{n0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
 distinction from the DFT of eq (3.80), which samples this at N points.

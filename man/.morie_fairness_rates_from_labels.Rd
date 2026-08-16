@@ -8,13 +8,13 @@
 .morie_fairness_rates_from_labels(y_true, y_pred, group, favorable)
 }
 \arguments{
-\item{y_true}{See Usage.}
-\item{y_pred}{See Usage.}
-\item{group}{See Usage.}
+\item{y_true}{A vector; indexed elementwise.}
+\item{y_pred}{A vector; indexed elementwise.}
+\item{group}{Passed to \code{.morie_fairness_ordered_unique}.}
 \item{favorable}{See Usage.}
 }
 \description{
-Part of the frns_metrics implementation; see the file header for the source it follows.
+A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

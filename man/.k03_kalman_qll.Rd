@@ -8,13 +8,13 @@
 .k03_kalman_qll(y, mu, phi, sig2)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{mu}{See Usage.}
-\item{phi}{See Usage.}
-\item{sig2}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{phi}{Numeric; combined arithmetically in the body.}
+\item{sig2}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the k03volsv implementation; see the file header for the source it follows.
+A step of the k03volsv implementation. Called by \code{Volsv}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ll}, as built in the body.

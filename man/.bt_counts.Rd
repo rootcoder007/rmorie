@@ -8,13 +8,13 @@
 .bt_counts(n, B, rng, exhaustive)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{B}{See Usage.}
-\item{rng}{See Usage.}
-\item{exhaustive}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{B}{A count; the body uses it as \code{seq_len(...)}.}
+\item{rng}{Numeric; combined arithmetically in the body.}
+\item{exhaustive}{A flag; the body branches on it.}
 }
 \description{
-Part of the btmult implementation; see the file header for the source it follows.
+A step of the btmult implementation. Called by \code{Btcimed}, \code{Btmult}, \code{Btvarm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -11,10 +11,10 @@ query_tokens(n_queries, dim, seed = 0, scale = 0.02)
 \item{n_queries}{See Usage.}
 \item{dim}{See Usage.}
 \item{seed}{Defaults to \code{0}.}
-\item{scale}{Defaults to \code{0.02}.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.02}.}
 }
 \description{
-Part of the blip2v_native implementation; see the file header for the source it follows.
+A step of the blip2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

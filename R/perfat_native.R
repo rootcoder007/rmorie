@@ -6,33 +6,36 @@
 
 #' .dot
 #'
-#' Part of the perfat_native implementation; see the file header for the
+#' A step of the perfat_native implementation. Called by \code{draw_projections}, \code{favor_attention}, \code{kernel_estimate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .dot <- function(a, b) sum(a * b)
 #' .norm2
 #'
-#' Part of the perfat_native implementation; see the file header for the
+#' A step of the perfat_native implementation. Called by \code{draw_projections}, \code{favor_features}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .norm2 <- function(a) sum(a * a)
 
 #' draw_projections
 #'
-#' Part of the perfat_native implementation; see the file header for the
+#' A step of the perfat_native implementation. Called by \code{favor_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
-#' @param d See Usage.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
+#' @param d A count; the body uses it as \code{matrix(...)}.
 #' @param seed Defaults to \code{0L}.
-#' @param orthogonal Defaults to \code{TRUE}.
+#' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
 draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
@@ -76,13 +79,14 @@ draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
 
 #' favor_features
 #'
-#' Part of the perfat_native implementation; see the file header for the
+#' A step of the perfat_native implementation. Called by \code{favor_attention}, \code{kernel_estimate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param omegas See Usage.
-#' @param kind Defaults to \code{"positive"}.
-#' @param eps Defaults to \code{1e-06}.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param omegas A matrix; passed to \code{nrow}.
+#' @param kind One of \code{"positive"}, \code{"trig"}. Defaults to \code{"positive"}.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
@@ -110,7 +114,8 @@ favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
 
 #' kernel_estimate
 #'
-#' Part of the perfat_native implementation; see the file header for the
+#' A step of the perfat_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -126,13 +131,14 @@ kernel_estimate <- function(x, y, omegas, kind = "positive") {
 
 #' softmax_attention
 #'
-#' Part of the perfat_native implementation; see the file header for the
+#' A step of the perfat_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
-#' @param V See Usage.
-#' @param causal Defaults to \code{FALSE}.
+#' @param Q A matrix; passed to \code{as.matrix}.
+#' @param K A matrix; passed to \code{as.matrix}.
+#' @param V A matrix; passed to \code{as.matrix}.
+#' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 softmax_attention <- function(Q, K, V, causal = FALSE) {
@@ -151,17 +157,18 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 
 #' favor_attention
 #'
-#' Part of the perfat_native implementation; see the file header for the
+#' A step of the perfat_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
-#' @param V See Usage.
+#' @param Q A matrix; passed to \code{as.matrix}.
+#' @param K A matrix; passed to \code{as.matrix}.
+#' @param V A matrix; passed to \code{as.matrix}.
 #' @param n_features Defaults to \code{128L}.
 #' @param seed Defaults to \code{0L}.
 #' @param kind Defaults to \code{"positive"}.
-#' @param orthogonal Defaults to \code{TRUE}.
-#' @param causal Defaults to \code{FALSE}.
+#' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind}, \code{orthogonal}, \code{causal}, \code{L}, \code{d}, \code{d_v}, \code{method}.
 #' @export
 favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,

@@ -11,7 +11,7 @@
 \item{net}{See Usage.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. Called by \code{.propinf_sorted_representation_internal}, \code{morie_propinf_sorted_representation}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{F}, as built in the body.

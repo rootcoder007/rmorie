@@ -78,7 +78,8 @@
 
 #' .goldsc_outer
 #'
-#' Part of the goldsc_native implementation; see the file header for the
+#' A step of the goldsc_native implementation. Called by \code{.goldsc_pair}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -89,7 +90,8 @@
          "split_1-2" = c(4, 8), NULL)
 #' .goldsc_inner
 #'
-#' Part of the goldsc_native implementation; see the file header for the
+#' A step of the goldsc_native implementation. Called by \code{.goldsc_pair}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
@@ -112,8 +114,8 @@
 #' over thousands of contacts cannot afford to be a different function
 #' in the two arms.
 #'
-#' @param x See Usage.
-#' @param k See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .goldsc_ipow <- function(x, k) {
@@ -170,13 +172,14 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 
 #' .goldsc_pair
 #'
-#' Part of the goldsc_native implementation; see the file header for the
+#' A step of the goldsc_native implementation. Called by \code{morie_goldsc_vdw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
-#' @param r0 See Usage.
-#' @param eps See Usage.
-#' @param potential See Usage.
+#' @param r Passed to \code{morie_goldsc_split}.
+#' @param r0 Passed to \code{morie_goldsc_split}.
+#' @param eps Passed to \code{morie_goldsc_split}.
+#' @param potential Passed to \code{.goldsc_inner}.
 #' @return The value of \code{morie_goldsc_lj}.
 #' @export
 .goldsc_pair <- function(r, r0, eps, potential) {
@@ -192,7 +195,8 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 
 #' .goldsc_lookup
 #'
-#' Part of the goldsc_native implementation; see the file header for the
+#' A step of the goldsc_native implementation. Called by \code{morie_goldsc_vdw}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param table See Usage.
@@ -279,11 +283,12 @@ morie_goldsc_torsion <- function(torsions) {
 
 #' .goldsc_dist
 #'
-#' Part of the goldsc_native implementation; see the file header for the
+#' A step of the goldsc_native implementation. Called by \code{morie_goldsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .goldsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))

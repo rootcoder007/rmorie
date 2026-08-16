@@ -9,18 +9,18 @@
 }
 \arguments{
 \item{y}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{n_trees}{Defaults to \code{100}.}
-\item{min_leaf}{Defaults to \code{5}.}
+\item{min_leaf}{Passed to \code{.frfgrf_honesty_test}. Defaults to \code{5}.}
 \item{subsample_frac}{Defaults to \code{0.5}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{pi}{Defaults to \code{0.5}.}
-\item{seed}{Defaults to \code{0}.}
-\item{kind}{Defaults to \code{"double-sample"}.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
+\item{pi}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
+\item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{kind}{Passed to \code{.frfgrf_honesty_test}. Defaults to \code{"double-sample"}.}
 \item{sizes}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the frfgrf_native implementation; see the file header for the source it follows.
+A step of the frfgrf_native implementation. Called by \code{morie_frfgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty}, \code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share}, \code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity}, \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d}, \code{n_trees}, \code{kind}, \code{failed}, \code{method}.

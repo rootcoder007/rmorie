@@ -8,7 +8,7 @@
 .morie_gr_lcg_u(count, seed)
 }
 \arguments{
-\item{count}{See Usage.}
+\item{count}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}
 }
 \description{

@@ -9,13 +9,13 @@ expand_polynomials(phi = numeric(0), Phi = numeric(0), theta = numeric(0), Theta
 }
 \arguments{
 \item{phi}{Defaults to \code{numeric(0)}.}
-\item{Phi}{Defaults to \code{numeric(0)}.}
+\item{Phi}{A vector; its length is taken. Defaults to \code{numeric(0)}.}
 \item{theta}{Defaults to \code{numeric(0)}.}
-\item{Theta}{Defaults to \code{numeric(0)}.}
-\item{s}{Defaults to \code{12}.}
+\item{Theta}{A vector; its length is taken. Defaults to \code{numeric(0)}.}
+\item{s}{Passed to \code{.sarima_seasonal_lift}. Defaults to \code{12}.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{.sarima_package}, \code{.sarimax_fit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ar}, \code{ma}.

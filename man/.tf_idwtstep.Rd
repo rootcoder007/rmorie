@@ -8,13 +8,13 @@
 .tf_idwtstep(lo, hi, h, g)
 }
 \arguments{
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
-\item{h}{See Usage.}
-\item{g}{See Usage.}
+\item{lo}{A vector; its length is taken and its elements indexed.}
+\item{hi}{A vector; indexed elementwise.}
+\item{h}{A vector; its length is taken and its elements indexed.}
+\item{g}{A vector; indexed elementwise.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{.tf_idwt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

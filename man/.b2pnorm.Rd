@@ -8,10 +8,10 @@
 .b2pnorm(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the b2info implementation; see the file header for the source it follows.
+A step of the b2info implementation. Called by \code{Compshan}, \code{Crsent}, \code{Predcomp} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -70,7 +70,7 @@
 #'
 #' @param V See Usage.
 #' @param n See Usage.
-#' @param design Defaults to \code{"adaptive"}.
+#' @param design One of \code{"proportional"}, \code{"uniform"}. Defaults to \code{"adaptive"}.
 #' @param influence Defaults to \code{NULL}.
 #' @param floor Defaults to \code{0.01}.
 #' @return A list with \code{pi}, \code{design}, \code{n_expected}, \code{N}, \code{min_pi}, \code{note}.
@@ -149,11 +149,12 @@ morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
 # draw_sample: Poisson sampling: include unit i with probability pi_i.
 #' Draw_sample: Poisson sampling: include unit i with probability pi_i
 #'
-#' Part of the tlsurvy_native implementation; see the file header for
+#' A step of the tlsurvy_native implementation. Called by \code{morie_tlsurvy_adaptive_survey_tmle}, \code{morie_tlsurvy_design_efficiency}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param pi See Usage.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{selected}, \code{n}, \code{fraction}.
 #' @export
 morie_tlsurvy_draw_sample <- function(pi, seed=0) {
@@ -215,9 +216,9 @@ morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N=NULL) {
 #' something for nothing.
 #'
 #' @param values See Usage.
-#' @param influence See Usage.
-#' @param n See Usage.
-#' @param seed Defaults to \code{0}.
+#' @param influence Passed to \code{morie_tlsurvy_inclusion_probabilities}.
+#' @param n Passed to \code{morie_tlsurvy_inclusion_probabilities}.
+#' @param seed Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.
 #' @return A list with \code{uniform_se}, \code{adaptive_se}, \code{ratio}, \code{note}.
 #' @export
 morie_tlsurvy_design_efficiency <- function(values, influence, n, seed=0) {
@@ -253,11 +254,11 @@ morie_tlsurvy_design_efficiency <- function(values, influence, n, seed=0) {
 #' estimator on the sample. Reports both error sources: the sampling
 #' variance from using n of N, and the estimator\'s own standard error.
 #'
-#' @param V See Usage.
-#' @param influence_proxy See Usage.
+#' @param V Passed to \code{morie_tlsurvy_inclusion_probabilities}.
+#' @param influence_proxy Passed to \code{morie_tlsurvy_inclusion_probabilities}.
 #' @param full_estimator See Usage.
-#' @param n See Usage.
-#' @param seed Defaults to \code{0}.
+#' @param n Passed to \code{morie_tlsurvy_inclusion_probabilities}.
+#' @param seed Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{psi}, \code{se_estimator}, \code{n_used}, \code{N}, \code{sampling_fraction}, \code{inclusion_probabilities}, \code{method}, \code{note}.
 #' @export
 morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
@@ -284,7 +285,8 @@ morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
 # cheatsheet: Brief description of the module.
 #' Cheatsheet: Brief description of the module
 #'
-#' Part of the tlsurvy_native implementation; see the file header for
+#' A step of the tlsurvy_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

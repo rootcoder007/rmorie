@@ -1,9 +1,10 @@
 #' morie_pace
 #'
-#' Part of the pace_native implementation; see the file header for the
+#' A step of the pace_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
+#' @param Y A vector; its length is taken.
 #' @param argvals See Usage.
 #' @param K See Usage.
 #' @return A list with \code{estimate}, \code{se}, \code{n}, \code{method}.

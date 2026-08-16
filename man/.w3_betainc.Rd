@@ -8,12 +8,12 @@
 .w3_betainc(a, b, x)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{x}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{x}{Numeric; passed to \code{log}.}
 }
 \description{
-Part of the helpers_w3num implementation; see the file header for the source it follows.
+A step of the helpers_w3num implementation. Called by \code{.w3_t_sf}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

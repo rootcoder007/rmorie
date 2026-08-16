@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{param}{See Usage.}
-\item{rewards}{See Usage.}
+\item{rewards}{A vector; its length is taken and its elements indexed.}
 \item{bs}{See Usage.}
 \item{traj}{See Usage.}
 }
 \description{
-Part of the reinfc_native implementation; see the file header for the source it follows.
+A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{rewards}, \code{baseline}, \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last}, \code{method}.

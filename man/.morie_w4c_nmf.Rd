@@ -8,14 +8,14 @@
 .morie_w4c_nmf(X, k, max_iter, tol, seed)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{k}{See Usage.}
-\item{max_iter}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{k}{A count; the body uses it as \code{matrix(...)}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}.}
 \item{tol}{See Usage.}
-\item{seed}{See Usage.}
+\item{seed}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_nmf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{W}, \code{H}, \code{n_iter}.

@@ -8,12 +8,12 @@
 .thrtmt_lstsq(Z, y, ridge)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{See Usage.}
+\item{Z}{A matrix; passed to \code{ncol}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{ridge}{A matrix; passed to \code{diag}.}
 }
 \description{
-Returns b solving (Z\\\'Z + ridge I) b = Z\\\' y
+Returns b solving (Z\\'Z + ridge I) b = Z\\' y
 }
 \value{
 A vector, from \code{as.numeric}.

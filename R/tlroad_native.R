@@ -62,7 +62,8 @@
 
 #' .tlroad_vec
 #'
-#' Part of the tlroad_native implementation; see the file header for the
+#' A step of the tlroad_native implementation. Called by \code{.tlroad_eic_ate}, \code{.tlroad_plugin}, \code{.tlroad_score_spans_eic}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -74,11 +75,12 @@
 
 #' .tlroad_roadmap
 #'
-#' Part of the tlroad_native implementation; see the file header for the
+#' A step of the tlroad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param data_description See Usage.
-#' @param model_assumptions See Usage.
+#' @param model_assumptions A vector; its length is taken.
 #' @param target_name See Usage.
 #' @param estimator Defaults to \code{"TMLE"}.
 #' @return A list with \code{steps}, \code{data}, \code{model}, \code{target}, \code{estimator}, \code{note}.
@@ -106,14 +108,15 @@
 
 #' .tlroad_eic_ate
 #'
-#' Part of the tlroad_native implementation; see the file header for the
+#' A step of the tlroad_native implementation. Called by \code{.tlroad_solves_eic_equation}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
+#' @param A Passed to \code{.tlroad_vec}.
+#' @param Y Passed to \code{.tlroad_vec}.
+#' @param Q1 Passed to \code{.tlroad_vec}.
+#' @param Q0 Passed to \code{.tlroad_vec}.
+#' @param g Passed to \code{.tlroad_vec}.
 #' @param psi See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -142,15 +145,16 @@
 
 #' .tlroad_score_spans_eic
 #'
-#' Part of the tlroad_native implementation; see the file header for the
+#' A step of the tlroad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
-#' @param h Defaults to \code{1e-06}.
+#' @param A Passed to \code{.tlroad_vec}.
+#' @param Y Passed to \code{.tlroad_vec}.
+#' @param Q1 Passed to \code{.tlroad_vec}.
+#' @param Q0 Passed to \code{.tlroad_vec}.
+#' @param g Passed to \code{.tlroad_vec}.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return A list with \code{score}, \code{eic_component}, \code{difference}, \code{spans}, \code{note}.
 #' @export
 .tlroad_score_spans_eic <- function(A, Y, Q1, Q0, g, h = 1e-6) {
@@ -195,11 +199,12 @@
 
 #' .tlroad_plugin
 #'
-#' Part of the tlroad_native implementation; see the file header for the
+#' A step of the tlroad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
+#' @param Q1 Passed to \code{.tlroad_vec}.
+#' @param Q0 Passed to \code{.tlroad_vec}.
 #' @return A numeric value.
 #' @export
 .tlroad_plugin <- function(Q1, Q0) {
@@ -213,15 +218,16 @@
 
 #' .tlroad_solves_eic_equation
 #'
-#' Part of the tlroad_native implementation; see the file header for the
+#' A step of the tlroad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
-#' @param psi See Usage.
+#' @param A Passed to \code{.tlroad_eic_ate}.
+#' @param Y Passed to \code{.tlroad_eic_ate}.
+#' @param Q1 Passed to \code{.tlroad_eic_ate}.
+#' @param Q0 Passed to \code{.tlroad_eic_ate}.
+#' @param g Passed to \code{.tlroad_eic_ate}.
+#' @param psi Passed to \code{.tlroad_eic_ate}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{mean_eic}, \code{solved}, \code{se}, \code{ci}, \code{method}.
 #' @export
@@ -241,7 +247,8 @@
 
 #' .tlroad_cheatsheet
 #'
-#' Part of the tlroad_native implementation; see the file header for the
+#' A step of the tlroad_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

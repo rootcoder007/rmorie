@@ -8,7 +8,7 @@
 .bprMF_learn_bpr(pos, n_users, n_items, k_dim = 8L, alpha = 0.05, lam = 0.01, iters = 2000L, seed = 0L, regularizer_sign = "correct", init_scale = 0.1)
 }
 \arguments{
-\item{pos}{See Usage.}
+\item{pos}{A vector; indexed elementwise.}
 \item{n_users}{See Usage.}
 \item{n_items}{See Usage.}
 \item{k_dim}{Defaults to \code{8L}.}

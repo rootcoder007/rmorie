@@ -106,11 +106,12 @@ morie_drift_forecast <- function(y, h = 1) {
 
 #' .morie_ses_run
 #'
-#' Part of the forecast_native implementation; see the file header for
+#' A step of the forecast_native implementation. Called by \code{morie_joseph_simple_exponential_smoothing}, \code{morie_theta_method}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param series See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param series A vector; its length is taken and its elements indexed.
 #' @return A list with \code{fitted}, \code{level}.
 #' @export
 .morie_ses_run <- function(a, series) {
@@ -181,16 +182,17 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 # One Holt-Winters recursion, additive or multiplicative.
 #' One Holt-Winters recursion, additive or multiplicative
 #'
-#' Part of the forecast_native implementation; see the file header for
+#' A step of the forecast_native implementation. Called by \code{morie_holt_winters_additive}, \code{morie_holt_winters_mult}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param period See Usage.
-#' @param alpha See Usage.
-#' @param beta See Usage.
-#' @param gamma See Usage.
-#' @param horizon See Usage.
-#' @param mult See Usage.
+#' @param alpha Numeric; combined arithmetically in the body.
+#' @param beta Numeric; combined arithmetically in the body.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @param horizon Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
+#' @param mult A flag; the body branches on it.
 #' @return A list with \code{forecast}, \code{level}, \code{trend}, \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma}, \code{period}, \code{horizon}.
 #' @export
 .morie_holt_winters <- function(y, period, alpha, beta, gamma, horizon,

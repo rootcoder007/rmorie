@@ -8,14 +8,14 @@
 .morie_random_multivariate_normal(mean, cov, seed = 0, stream = 0, jitter = 1e-10)
 }
 \arguments{
-\item{mean}{See Usage.}
-\item{cov}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
-\item{stream}{Defaults to \code{0}.}
-\item{jitter}{Defaults to \code{1e-10}.}
+\item{mean}{A vector; its length is taken.}
+\item{cov}{A matrix; passed to \code{dim}.}
+\item{seed}{Passed to \code{.morie_random_normal}. Defaults to \code{0}.}
+\item{stream}{Passed to \code{.morie_random_normal}. Defaults to \code{0}.}
+\item{jitter}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the rng_native implementation; see the file header for the source it follows.
+A step of the rng_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

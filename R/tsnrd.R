@@ -60,14 +60,15 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
 # Exact t-SNE core. Returns list(Y, kl).
 #' Exact t-SNE core. Returns list(Y, kl)
 #'
-#' Part of the tsnrd implementation; see the file header for the source
+#' A step of the tsnrd implementation. Called by \code{morie_tsne_reduction}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
-#' @param dims Defaults to \code{2L}.
-#' @param perplexity Defaults to \code{30}.
+#' @param x A matrix; passed to \code{nrow}.
+#' @param dims A count; the body uses it as \code{matrix(...)}. Defaults to \code{2L}.
+#' @param perplexity Numeric; passed to \code{log}. Defaults to \code{30}.
 #' @param n_iter Defaults to \code{1000L}.
-#' @param eta Defaults to \code{"auto"}.
+#' @param eta Passed to \code{.morie_tsne_descent_cpp}. Defaults to \code{"auto"}.
 #' @return A list with \code{Y}, \code{kl}.
 #' @export
 .morie_tsne <- function(x, dims = 2L, perplexity = 30, n_iter = 1000L,

@@ -3,11 +3,12 @@
 # OLS coefficient j (1-based), its standard error and the residual df.
 #' OLS coefficient j (1-based), its standard error and the residual df
 #'
-#' Part of the chzlt implementation; see the file header for the source
+#' A step of the chzlt implementation. Called by \code{Chzlt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
+#' @param y A vector; its length is taken.
+#' @param X Passed to \code{.s03mat}.
 #' @param j See Usage.
 #' @return A list with \code{beta}, \code{se}, \code{df}.
 #' @export
@@ -35,12 +36,13 @@
 # RV_q: the partial R2 an omitted confounder needs, eq. (9).
 #' RV_q: the partial R2 an omitted confounder needs, eq. (9)
 #'
-#' Part of the chzlt implementation; see the file header for the source
+#' A step of the chzlt implementation. Called by \code{Chzlt}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param t See Usage.
-#' @param df See Usage.
-#' @param q Defaults to \code{1}.
+#' @param t Numeric; passed to \code{abs}.
+#' @param df Numeric; passed to \code{sqrt}.
+#' @param q Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .ch_rv <- function(t, df, q = 1) {

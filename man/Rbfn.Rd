@@ -8,16 +8,16 @@
 Rbfn(X, y, ncenters = NULL, spread = 1, centers = NULL, ridge = 1e-08, query = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{Passed to \code{.morie_bx_mat}.}
+\item{y}{Passed to \code{.morie_bx_vec}.}
 \item{ncenters}{Defaults to \code{NULL}.}
-\item{spread}{Defaults to \code{1}.}
-\item{centers}{Defaults to \code{NULL}.}
+\item{spread}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{centers}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 \item{ridge}{Defaults to \code{1e-08}.}
-\item{query}{Defaults to \code{NULL}.}
+\item{query}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{centers}, \code{weights}, \code{bias}, \code{predictions}, \code{queryvalues}, \code{mse}, \code{spread}, \code{method}.

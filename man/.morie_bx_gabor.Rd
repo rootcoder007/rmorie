@@ -8,7 +8,7 @@
 .morie_bx_gabor(n, natoms, seed = 1)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{natoms}{See Usage.}
 \item{seed}{Defaults to \code{1}.}
 }

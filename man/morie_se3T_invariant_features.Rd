@@ -8,7 +8,7 @@
 morie_se3T_invariant_features(positions, i, j)
 }
 \arguments{
-\item{positions}{See Usage.}
+\item{positions}{Passed to \code{.se3T_mat}.}
 \item{i}{See Usage.}
 \item{j}{See Usage.}
 }

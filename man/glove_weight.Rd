@@ -8,9 +8,9 @@
 glove_weight(x, x_max = 100, alpha = 0.75)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{x_max}{Defaults to \code{100}.}
-\item{alpha}{Defaults to \code{0.75}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{x_max}{Numeric; combined arithmetically in the body. Defaults to \code{100}.}
+\item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.75}.}
 }
 \description{
 capped at 1.

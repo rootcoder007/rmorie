@@ -13,7 +13,7 @@
 \item{rater}{See Usage.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Icc12c}, \code{IccA}, \code{IccC}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ms_r}, \code{ms_c}, \code{ms_e}, \code{k}, \code{n}.

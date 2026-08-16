@@ -8,11 +8,11 @@
 .abcgp.chol_solve(L, b)
 }
 \arguments{
-\item{L}{See Usage.}
-\item{b}{See Usage.}
+\item{L}{A matrix; indexed by row and column.}
+\item{b}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.gp_predict}, \code{.abcgp.mvn_logpdf} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{x}, as built in the body.

@@ -8,9 +8,9 @@
 .morie_psens_wilcoxon(treated, control, gamma)
 }
 \arguments{
-\item{treated}{See Usage.}
-\item{control}{See Usage.}
-\item{gamma}{See Usage.}
+\item{treated}{A vector; its length is taken.}
+\item{control}{A vector; its length is taken.}
+\item{gamma}{Passed to \code{.morie_psens_wilcoxon_d}.}
 }
 \description{
 Rosenbaum sensitivity bounds for the Wilcoxon signed-rank statistic (Rosenbaum 2002, ch. 4), the same quantity rbounds::psens() reports. Pairs are formed positionally from equal-length treated/control vectors, matching how psens() was called here.

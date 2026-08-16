@@ -11,7 +11,7 @@ narm_softmax(z)
 \item{z}{See Usage.}
 }
 \description{
-Part of the narm_native implementation; see the file header for the source it follows.
+A step of the narm_native implementation. Called by \code{narm_attention_weights}, \code{narm_bilinear_scores}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

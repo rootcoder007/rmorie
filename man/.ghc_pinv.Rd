@@ -11,6 +11,6 @@
 .ghc_pinv
 }
 \value{
-The value of \code{%*%}.
+The value of \code{\%*\%}.
 }
 \keyword{internal}

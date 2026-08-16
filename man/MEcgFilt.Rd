@@ -8,10 +8,10 @@
 MEcgFilt(abd, thor, order = 16, mu = 0.01)
 }
 \arguments{
-\item{abd}{See Usage.}
-\item{thor}{See Usage.}
-\item{order}{Defaults to \code{16}.}
-\item{mu}{Defaults to \code{0.01}.}
+\item{abd}{A vector; its length is taken and its elements indexed.}
+\item{thor}{A vector; its length is taken and its elements indexed.}
+\item{order}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16}.}
+\item{mu}{Numeric; combined arithmetically in the body. Defaults to \code{0.01}.}
 }
 \description{
 an adaptive noise canceller whose primary input is the abdominal lead, so the residual error is the fetal ECG.  Normalised LMS, weights start at zero, no random initialisation.

@@ -7,7 +7,7 @@
 Adwin(x, delta = 0.05)
 }
 \arguments{
-\item{x}{Stream values, expected in \link{0, 1}.}
+\item{x}{Stream values, expected in [0, 1].}
 
 \item{delta}{Confidence parameter in (0, 1).}
 }

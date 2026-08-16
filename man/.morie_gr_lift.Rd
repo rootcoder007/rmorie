@@ -8,10 +8,10 @@
 .morie_gr_lift(o)
 }
 \arguments{
-\item{o}{See Usage.}
+\item{o}{Passed to \code{morie_gr_dual}.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{Ops.morie_gr_dual}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

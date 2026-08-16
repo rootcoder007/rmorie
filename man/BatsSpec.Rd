@@ -8,8 +8,8 @@
 BatsSpec(periods = numeric(0), harmonics = NULL, use_box_cox = FALSE, use_trend = TRUE, damped = FALSE, p = 0L, q = 0L)
 }
 \arguments{
-\item{periods}{Defaults to \code{numeric(0)}.}
-\item{harmonics}{Defaults to \code{NULL}.}
+\item{periods}{A vector; its length is taken and its elements indexed. Defaults to \code{numeric(0)}.}
+\item{harmonics}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{use_box_cox}{Defaults to \code{FALSE}.}
 \item{use_trend}{Defaults to \code{TRUE}.}
 \item{damped}{Defaults to \code{FALSE}.}
@@ -17,7 +17,7 @@ BatsSpec(periods = numeric(0), harmonics = NULL, use_box_cox = FALSE, use_trend 
 \item{q}{Defaults to \code{0L}.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{morie_bats}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{structure}.

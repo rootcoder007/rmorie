@@ -8,9 +8,9 @@
 leapfrog(theta, r, eps, grad)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{r}{See Usage.}
-\item{eps}{See Usage.}
+\item{theta}{Numeric; combined arithmetically in the body.}
+\item{r}{Numeric; combined arithmetically in the body.}
+\item{eps}{Numeric; combined arithmetically in the body.}
 \item{grad}{See Usage.}
 }
 \description{

@@ -8,9 +8,9 @@
 .schab_st_is_valid_covariance(coords, times, cov_fn, tol = NULL)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{times}{See Usage.}
-\item{cov_fn}{See Usage.}
+\item{coords}{Passed to \code{.schab_st_covariance_matrix}.}
+\item{times}{Passed to \code{.schab_st_covariance_matrix}.}
+\item{cov_fn}{Passed to \code{.schab_st_covariance_matrix}.}
 \item{tol}{Defaults to \code{NULL}.}
 }
 \description{

@@ -73,10 +73,11 @@
 
 #' .strec_sigmoid
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_stamp_scores}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; passed to \code{min}.
 #' @return A numeric value.
 #' @export
 .strec_sigmoid <- function(x) {
@@ -86,10 +87,11 @@
 
 #' .strec_as_rows
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_session_average}, \code{strec_stamp_scores}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; indexed by row and column.
 #' @return The value of \code{list}.
 #' @export
 .strec_as_rows <- function(x) {
@@ -104,7 +106,8 @@
 
 #' strec_trilinear
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. Called by \code{strec_stamp_scores}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -125,10 +128,11 @@ strec_trilinear <- function(a, b, c) {
 
 #' strec_session_average
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_stamp_scores}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param embeddings See Usage.
+#' @param embeddings Passed to \code{.strec_as_rows}.
 #' @return A list with \code{m_s}, \code{m_t}, \code{length}, \code{note}.
 #' @export
 strec_session_average <- function(embeddings) {
@@ -152,13 +156,14 @@ strec_session_average <- function(embeddings) {
 
 #' strec_mlp_cell
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. Called by \code{strec_stamp_scores}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
-#' @param W See Usage.
+#' @param W A matrix; passed to \code{nrow}.
 #' @param b Defaults to \code{NULL}.
-#' @param activation Defaults to \code{"tanh"}.
+#' @param activation One of \code{"identity"}, \code{"tanh"}. Defaults to \code{"tanh"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
@@ -185,14 +190,15 @@ strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
 
 #' strec_attention_weights
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param embeddings See Usage.
-#' @param W1 See Usage.
-#' @param W2 See Usage.
-#' @param W3 See Usage.
-#' @param W0 See Usage.
+#' @param embeddings Passed to \code{.strec_as_rows}.
+#' @param W1 A matrix; indexed by row and column.
+#' @param W2 A matrix; indexed by row and column.
+#' @param W3 A matrix; indexed by row and column.
+#' @param W0 Numeric; combined arithmetically in the body.
 #' @param b_a Defaults to \code{NULL}.
 #' @return A list with \code{alpha}, \code{m_a}, \code{sum_alpha}, \code{m_s}, \code{note}.
 #' @export
@@ -251,16 +257,17 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
 
 #' strec_stamp_scores
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param embeddings See Usage.
-#' @param item_table See Usage.
+#' @param embeddings Passed to \code{.strec_as_rows}.
+#' @param item_table Passed to \code{.strec_as_rows}.
 #' @param Ws See Usage.
 #' @param Wt See Usage.
 #' @param bs Defaults to \code{NULL}.
 #' @param bt Defaults to \code{NULL}.
-#' @param attention Defaults to \code{NULL}.
+#' @param attention Optional; may be \code{NULL}. A list; the body reads \code{$m_a} from it.
 #' @return A list with \code{estimate}, \code{ranking}, \code{probability}, \code{score}, \code{h_s}, \code{h_t}, \code{attention_used}, \code{model}, \code{method}, \code{note}.
 #' @export
 strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL,
@@ -305,7 +312,8 @@ strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = N
 
 #' strec_cross_entropy
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param probability See Usage.
@@ -329,7 +337,8 @@ strec_cross_entropy <- function(probability, target_index) {
 
 #' strec_cheatsheet
 #'
-#' Part of the strec_native implementation; see the file header for the
+#' A step of the strec_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

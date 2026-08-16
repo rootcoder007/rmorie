@@ -8,17 +8,17 @@
 .schab_st_jones_zhang(h, k, sigma2 = 1, theta = 1, c = 1, p = 1.5, d = 2, n_quad = 40L)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{k}{See Usage.}
-\item{sigma2}{Defaults to \code{1}.}
-\item{theta}{Defaults to \code{1}.}
-\item{c}{Defaults to \code{1}.}
-\item{p}{Defaults to \code{1.5}.}
-\item{d}{Defaults to \code{2}.}
-\item{n_quad}{Defaults to \code{40L}.}
+\item{h}{Passed to \code{.schab_st_as_lags}.}
+\item{k}{Passed to \code{.schab_st_as_lags}.}
+\item{sigma2}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{theta}{Passed to \code{.schab_st_hankel_panels}. Defaults to \code{1}.}
+\item{c}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{p}{Passed to \code{.schab_st_hankel_panels}. Defaults to \code{1.5}.}
+\item{d}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
+\item{n_quad}{Passed to \code{.schab_st_hankel_panels}. Defaults to \code{40L}.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{covariance}, \code{quadrature}.

@@ -8,7 +8,7 @@
 .wrd2v_rng(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Passed to \code{.ghc_rng}.}
 }
 \description{
 np.random.default_rng(seed) (_array_core _SplitMix64), so the draws here are bit-identical to it

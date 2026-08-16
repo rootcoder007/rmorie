@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{text}{See Usage.}
-\item{lowercase}{Defaults to \code{FALSE}.}
+\item{lowercase}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the sacrb_native implementation; see the file header for the source it follows.
+A step of the sacrb_native implementation. Called by \code{.sacrb_tok}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

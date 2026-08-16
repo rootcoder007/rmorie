@@ -8,15 +8,15 @@
 .mor_stl_loess_at(xs, ys, x0, q, degree, rho = NULL)
 }
 \arguments{
-\item{xs}{See Usage.}
-\item{ys}{See Usage.}
-\item{x0}{See Usage.}
-\item{q}{See Usage.}
+\item{xs}{A vector; its length is taken and its elements indexed.}
+\item{ys}{A vector; indexed elementwise.}
+\item{x0}{Numeric; combined arithmetically in the body.}
+\item{q}{A count; the body uses it as \code{seq_len(...)}.}
 \item{degree}{See Usage.}
-\item{rho}{Defaults to \code{NULL}.}
+\item{rho}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{
-Part of the stlAn_native implementation; see the file header for the source it follows.
+A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

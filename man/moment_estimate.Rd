@@ -8,10 +8,10 @@
 moment_estimate(rho)
 }
 \arguments{
-\item{rho}{See Usage.}
+\item{rho}{Passed to \code{.sarima_invert_rho}.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.sarima_invert_rho}.

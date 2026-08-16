@@ -9,8 +9,8 @@ CLogPz(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0), c_k = complex(0), d_
 }
 \arguments{
 \item{z}{See Usage.}
-\item{A}{Defaults to \code{1}.}
-\item{r}{Defaults to \code{0}.}
+\item{A}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{r}{A flag; the body branches on it. Defaults to \code{0}.}
 \item{a_k}{Defaults to \code{complex(0)}.}
 \item{b_k}{Defaults to \code{complex(0)}.}
 \item{c_k}{Defaults to \code{complex(0)}.}

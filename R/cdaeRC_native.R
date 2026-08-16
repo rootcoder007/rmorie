@@ -15,11 +15,12 @@
 
 #' .cdae_act
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. Called by \code{decode}, \code{encode}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param name See Usage.
-#' @param x See Usage.
+#' @param name One of \code{"identity"}, \code{"sigmoid"}, \code{"tanh"}.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
 .cdae_act <- function(name, x) {
@@ -35,11 +36,12 @@
 
 #' .cdae_dact
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param name See Usage.
-#' @param y See Usage.
+#' @param name One of \code{"identity"}, \code{"sigmoid"}.
+#' @param y Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .cdae_dact <- function(name, y) {
@@ -50,12 +52,13 @@
 
 #' corrupt
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken.
 #' @param q See Usage.
-#' @param rng See Usage.
+#' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{ifelse}.
 #' @export
 corrupt <- function(y, q, rng) {
@@ -69,14 +72,15 @@ corrupt <- function(y, q, rng) {
 
 #' encode
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y_tilde See Usage.
-#' @param W See Usage.
-#' @param V_u See Usage.
-#' @param b See Usage.
-#' @param activation Defaults to \code{"sigmoid"}.
+#' @param W A vector; indexed elementwise.
+#' @param V_u A vector; indexed elementwise.
+#' @param b A vector; its length is taken and its elements indexed.
+#' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
 #' @return The value of \code{z}, as built in the body.
 #' @export
 encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
@@ -95,14 +99,15 @@ encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
 
 #' decode
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
-#' @param Wp See Usage.
-#' @param bp See Usage.
+#' @param z Numeric; combined arithmetically in the body.
+#' @param Wp A vector; indexed elementwise.
+#' @param bp A vector; its length is taken and its elements indexed.
 #' @param items Defaults to \code{NULL}.
-#' @param activation Defaults to \code{"sigmoid"}.
+#' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
 #' @return A vector, from \code{sapply}.
 #' @export
 decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
@@ -114,12 +119,13 @@ decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
 
 #' loss
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. Called by \code{.plcbsc_synthetic_control}, \code{.tlroad_score_spans_eic}, \code{fit_cdae} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param y_hat See Usage.
-#' @param kind Defaults to \code{"square"}.
+#' @param kind One of \code{"hinge"}, \code{"log"}, \code{"square"}. Defaults to \code{"square"}.
 #' @return A numeric value.
 #' @export
 loss <- function(y, y_hat, kind = "square") {
@@ -142,10 +148,11 @@ loss <- function(y, y_hat, kind = "square") {
 
 #' fit_cdae
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. Called by \code{morie_cdaeRC}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pos See Usage.
+#' @param pos A vector; indexed elementwise.
 #' @param n_users See Usage.
 #' @param n_items See Usage.
 #' @param k_dim Defaults to \code{8L}.
@@ -154,9 +161,9 @@ loss <- function(y, y_hat, kind = "square") {
 #' @param lam Defaults to \code{0.01}.
 #' @param iters Defaults to \code{30L}.
 #' @param n_neg Defaults to \code{5L}.
-#' @param seed Defaults to \code{0}.
-#' @param activation Defaults to \code{"sigmoid"}.
-#' @param init_scale Defaults to \code{0.1}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param activation Passed to \code{.cdae_dact}. Defaults to \code{"sigmoid"}.
+#' @param init_scale Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @return A list with \code{estimate}, \code{W}, \code{W_prime}, \code{V}, \code{b}, \code{b_prime}, \code{loss_history}, \code{final_loss}, \code{k}, \code{q}, \code{n_neg}, \code{activation}, \code{method}, \code{note}.
 #' @export
 fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
@@ -236,11 +243,12 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 
 #' recommend
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model See Usage.
-#' @param pos See Usage.
+#' @param model A list; the body reads \code{$b}, \code{$b_prime}, \code{$V}, \code{$W}, \code{$W_prime} from it.
+#' @param pos A vector; indexed elementwise.
 #' @param u See Usage.
 #' @param n_items See Usage.
 #' @param top_k Defaults to \code{5L}.
@@ -268,7 +276,8 @@ recommend <- function(model, pos, u, n_items, top_k = 5L,
 
 #' morie_cdaeRC
 #'
-#' Part of the cdaeRC_native implementation; see the file header for the
+#' A step of the cdaeRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param pos See Usage.

@@ -3,7 +3,7 @@
 % the formals.
 \name{.leaf}
 \alias{.leaf}
-\title{Private helper (mirrors Python\\\'s _leaf: a node is a leaf exactly}
+\title{Private helper (mirrors Python\\'s _leaf: a node is a leaf exactly}
 \usage{
 .leaf(node)
 }

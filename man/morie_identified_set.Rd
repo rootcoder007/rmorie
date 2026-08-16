@@ -8,17 +8,17 @@
 morie_identified_set(Y, x, beta_grid, gamma_grid, alpha_grid, beta_fixed = NULL, link = "logit", tol = 0.001)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{x}{See Usage.}
+\item{Y}{Passed to \code{morie_sequence_frequencies}.}
+\item{x}{Passed to \code{morie_in_identified_set}.}
 \item{beta_grid}{See Usage.}
 \item{gamma_grid}{See Usage.}
-\item{alpha_grid}{See Usage.}
+\item{alpha_grid}{Passed to \code{morie_in_identified_set}.}
 \item{beta_fixed}{Defaults to \code{NULL}.}
-\item{link}{Defaults to \code{"logit"}.}
-\item{tol}{Defaults to \code{0.001}.}
+\item{link}{Passed to \code{morie_in_identified_set}. Defaults to \code{"logit"}.}
+\item{tol}{Passed to \code{morie_in_identified_set}. Defaults to \code{0.001}.}
 }
 \description{
-Part of the bnshrt_native implementation; see the file header for the source it follows.
+A step of the bnshrt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{set}, \code{n_feasible}, \code{beta_bounds}, \code{gamma_bounds}, \code{beta_width}, \code{gamma_width}, \code{point_identified}, \code{discrepancy}, \code{method}, \code{assumes}.

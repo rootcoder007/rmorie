@@ -8,12 +8,12 @@
 .regmlm_folds(n, k, scheme)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{k}{See Usage.}
-\item{scheme}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
+\item{scheme}{Compared against \code{"loo"}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{level1_stack}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

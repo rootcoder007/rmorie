@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{obj}{See Usage.}
-\item{lo}{Defaults to \code{-15}.}
-\item{hi}{Defaults to \code{5}.}
-\item{n_grid}{Defaults to \code{60L}.}
-\item{refine}{Defaults to \code{60L}.}
+\item{lo}{Numeric; passed to \code{exp}. Defaults to \code{-15}.}
+\item{hi}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
+\item{n_grid}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
+\item{refine}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 }
 \description{
-Part of the deseq2_native implementation; see the file header for the source it follows.
+A step of the deseq2_native implementation. Called by \code{deseq2}, \code{dispersion_gene_wise}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

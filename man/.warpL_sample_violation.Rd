@@ -11,12 +11,12 @@
 \item{score_positive}{See Usage.}
 \item{negative_scorer}{See Usage.}
 \item{n_labels}{See Usage.}
-\item{rng}{See Usage.}
+\item{rng}{Passed to \code{.ghc_unif}.}
 \item{margin}{Defaults to \code{1}.}
 \item{max_draws}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the warpL_native implementation; see the file header for the source it follows.
+A step of the warpL_native implementation. Called by \code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{violated}, \code{draws}, \code{negative}, \code{estimated_rank}, \code{capped}, \code{note}.

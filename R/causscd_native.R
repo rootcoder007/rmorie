@@ -5,7 +5,8 @@
 
 #' .causscd_grid
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. Called by \code{sdid}, \code{time_weights}, \code{unit_weights}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Y See Usage.
@@ -34,10 +35,11 @@
 
 #' .causscd_project_simplex
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. Called by \code{.causscd_simplex_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
 #' @export
 .causscd_project_simplex <- function(v) {
@@ -59,12 +61,13 @@
 
 #' .causscd_simplex_fit
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. Called by \code{time_weights}, \code{unit_weights}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param cols See Usage.
-#' @param target See Usage.
-#' @param penalty See Usage.
+#' @param cols A vector; its length is taken and its elements indexed.
+#' @param target A vector; its length is taken.
+#' @param penalty Numeric; combined arithmetically in the body.
 #' @param iters Defaults to \code{2000L}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{w}, \code{intercept}.
@@ -114,13 +117,14 @@
 
 #' unit_weights
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. Called by \code{sdid}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param treated See Usage.
-#' @param t_post See Usage.
-#' @param zeta Defaults to \code{NULL}.
+#' @param Y Passed to \code{.causscd_grid}.
+#' @param treated Passed to \code{.causscd_grid}.
+#' @param t_post A count; the body uses it as \code{seq_len(...)}.
+#' @param zeta Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{weights}, \code{intercept}, \code{zeta}.
 #' @export
 unit_weights <- function(Y, treated, t_post, zeta = NULL) {
@@ -159,12 +163,13 @@ unit_weights <- function(Y, treated, t_post, zeta = NULL) {
 
 #' time_weights
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. Called by \code{sdid}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param treated See Usage.
-#' @param t_post See Usage.
+#' @param Y Passed to \code{.causscd_grid}.
+#' @param treated Passed to \code{.causscd_grid}.
+#' @param t_post A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{weights}, \code{intercept}.
 #' @export
 time_weights <- function(Y, treated, t_post) {
@@ -188,13 +193,14 @@ time_weights <- function(Y, treated, t_post) {
 
 #' sdid
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. Called by \code{causscd}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param treated See Usage.
-#' @param t_post See Usage.
-#' @param method Defaults to \code{"sdid"}.
+#' @param Y Passed to \code{.causscd_grid}.
+#' @param treated Passed to \code{.causscd_grid}.
+#' @param t_post A count; the body uses it as \code{seq_len(...)}.
+#' @param method One of \code{"did"}, \code{"sc"}, \code{"sdid"}. Defaults to \code{"sdid"}.
 #' @param zeta Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{tau}, \code{unit_weights}, \code{time_weights}, \code{zeta}, \code{delta_treated}, \code{delta_control}, \code{method_name}, \code{n_treated}, \code{n_control}, \code{t_pre}, \code{t_post}, \code{method}, \code{note}.
 #' @export
@@ -259,7 +265,8 @@ sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
 
 #' causscd
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. Called by \code{morie_causscd}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Y See Usage.
@@ -279,7 +286,8 @@ causscd <- function(Y, treated, t_post, zeta = NULL) {
 
 #' morie_causscd
 #'
-#' Part of the causscd_native implementation; see the file header for
+#' A step of the causscd_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Y See Usage.

@@ -56,7 +56,8 @@
 
 #' .tloilr_blip
 #'
-#' Part of the tloilr_native implementation; see the file header for the
+#' A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_value}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Q1 See Usage.
@@ -74,7 +75,8 @@
 
 #' .tloilr_resource_threshold
 #'
-#' Part of the tloilr_native implementation; see the file header for the
+#' A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_rule}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param B See Usage.
@@ -104,11 +106,12 @@
 
 #' .tloilr_constrained_rule
 #'
-#' Part of the tloilr_native implementation; see the file header for the
+#' A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_value}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param B See Usage.
-#' @param kappa See Usage.
+#' @param kappa Passed to \code{.tloilr_resource_threshold}.
 #' @return A list with \code{rule}, \code{tau}, \code{treated_fraction}, \code{binding}.
 #' @export
 .tloilr_constrained_rule <- function(B, kappa) {
@@ -123,12 +126,13 @@
 
 #' .tloilr_constrained_value
 #'
-#' Part of the tloilr_native implementation; see the file header for the
+#' A step of the tloilr_native implementation. Called by \code{morie_tloilr}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Q1 See Usage.
 #' @param Q0 See Usage.
-#' @param kappa See Usage.
+#' @param kappa Passed to \code{.tloilr_constrained_rule}.
 #' @return A list with \code{estimate}, \code{value}, \code{unconstrained_value}, \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa}, \code{binding}, \code{method}, \code{note}.
 #' @export
 .tloilr_constrained_value <- function(Q1, Q0, kappa) {
@@ -153,7 +157,8 @@
 
 #' .tloilr_exceptional_law
 #'
-#' Part of the tloilr_native implementation; see the file header for the
+#' A step of the tloilr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param B See Usage.
@@ -172,7 +177,8 @@
 
 #' .tloilr_cheatsheet
 #'
-#' Part of the tloilr_native implementation; see the file header for the
+#' A step of the tloilr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -193,12 +199,13 @@
 # Main entry point -- compact alias per ledger/NAMING.md
 #' Main entry point -- compact alias per ledger/NAMING.md
 #'
-#' Part of the tloilr_native implementation; see the file header for the
+#' A step of the tloilr_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param kappa See Usage.
+#' @param Q1 Passed to \code{.tloilr_constrained_value}.
+#' @param Q0 Passed to \code{.tloilr_constrained_value}.
+#' @param kappa Passed to \code{.tloilr_constrained_value}.
 #' @return The value of \code{.tloilr_constrained_value}.
 #' @export
 morie_tloilr <- function(Q1, Q0, kappa) {

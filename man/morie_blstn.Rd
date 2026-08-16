@@ -10,23 +10,23 @@ morie_blstn(query, subjects, w = 11L, match = 5, mismatch = -4, cutoff = NULL, X
 \arguments{
 \item{query}{See Usage.}
 \item{subjects}{See Usage.}
-\item{w}{Defaults to \code{11L}.}
-\item{match}{Defaults to \code{5}.}
-\item{mismatch}{Defaults to \code{-4}.}
+\item{w}{Numeric; combined arithmetically in the body. Defaults to \code{11L}.}
+\item{match}{Passed to \code{morie_word_hits}. Defaults to \code{5}.}
+\item{mismatch}{Passed to \code{morie_word_hits}. Defaults to \code{-4}.}
 \item{cutoff}{Defaults to \code{NULL}.}
 \item{X}{Defaults to \code{20}.}
-\item{word_mode}{Defaults to \code{"exact"}.}
-\item{threshold}{Defaults to \code{NULL}.}
-\item{matrix}{Defaults to \code{NULL}.}
-\item{alphabet}{Defaults to \code{"ACGT"}.}
-\item{lam}{Defaults to \code{NULL}.}
-\item{K}{Defaults to \code{NULL}.}
+\item{word_mode}{Passed to \code{morie_word_hits}. Defaults to \code{"exact"}.}
+\item{threshold}{Passed to \code{morie_word_hits}.}
+\item{matrix}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
+\item{alphabet}{A vector; its length is taken. Defaults to \code{"ACGT"}.}
+\item{lam}{Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.}
+\item{K}{Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.}
 \item{max_hsps}{Defaults to \code{NULL}.}
 \item{letter_probs}{Defaults to \code{NULL}.}
-\item{pvalues}{Defaults to \code{TRUE}.}
+\item{pvalues}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the blstn_native implementation; see the file header for the source it follows.
+A step of the blstn_native implementation. Called by \code{morie_blast}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps}, \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam}, \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.

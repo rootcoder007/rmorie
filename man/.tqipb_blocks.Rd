@@ -8,7 +8,7 @@
 .tqipb_blocks(d, n_blocks)
 }
 \arguments{
-\item{d}{See Usage.}
+\item{d}{Numeric; combined arithmetically in the body.}
 \item{n_blocks}{See Usage.}
 }
 \description{

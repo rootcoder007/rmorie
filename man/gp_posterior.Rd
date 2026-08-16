@@ -8,17 +8,17 @@
 gp_posterior(X, y, Xs, kernel = "matern52", amplitude = 1, length_scale = 1, noise = 1e-08, mean = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
-\item{Xs}{See Usage.}
-\item{kernel}{Defaults to \code{"matern52"}.}
+\item{Xs}{A matrix; passed to \code{as.matrix}.}
+\item{kernel}{Passed to \code{.kernel}. Defaults to \code{"matern52"}.}
 \item{amplitude}{Defaults to \code{1}.}
 \item{length_scale}{Defaults to \code{1}.}
 \item{noise}{Defaults to \code{1e-08}.}
 \item{mean}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{bayopt}, \code{maximise_acquisition}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mean}, \code{variance}, \code{sd}.

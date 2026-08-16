@@ -6,11 +6,12 @@
 
 #' .blast_best
 #'
-#' Part of the blastp_native implementation; see the file header for the
+#' A step of the blastp_native implementation. Called by \code{morie_blastp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @param score See Usage.
 #' @return A list with \code{score}, \code{qi}, \code{sj}, \code{ln}.
 #' @export

@@ -8,10 +8,10 @@
 .caus_k_class(y, X, Z, k)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{Z}{See Usage.}
-\item{k}{See Usage.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{X}{A matrix; passed to \code{t}.}
+\item{Z}{Passed to \code{.caus_annihilate}.}
+\item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{
 least squares, and k = the Anderson-Rubin ratio is LIML. Keeping them one function is what stops them drifting apart.

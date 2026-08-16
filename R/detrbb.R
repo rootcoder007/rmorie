@@ -6,7 +6,7 @@
 #'
 #' rectangular cost with rows <= columns.  Returns the column per row.
 #'
-#' @param cost See Usage.
+#' @param cost A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .detr_hungarian <- function(cost) {

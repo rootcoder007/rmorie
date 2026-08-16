@@ -7,10 +7,11 @@
 
 #' GELU exact using erf; avoid pnorm dependency for portability
 #'
-#' Part of the berte_native implementation; see the file header for the
+#' A step of the berte_native implementation. Called by \code{encoder_block}, \code{morie_kamath_houlsby_adapter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 gelu <- function(x) {
@@ -31,13 +32,14 @@ gelu <- function(x) {
 
 #' layer_norm
 #'
-#' Part of the berte_native implementation; see the file header for the
+#' A step of the berte_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param gain Defaults to \code{NULL}.
-#' @param bias Defaults to \code{NULL}.
-#' @param eps Defaults to \code{1e-12}.
+#' @param x A vector; its length is taken.
+#' @param gain Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param bias Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
@@ -63,11 +65,12 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 
 #' .proj
 #'
-#' Part of the berte_native implementation; see the file header for the
+#' A step of the berte_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param row See Usage.
-#' @param W See Usage.
+#' @param W A matrix; passed to \code{as.matrix}.
 #' @param b Defaults to \code{NULL}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -79,14 +82,15 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 
 #' attention_weights
 #'
-#' Part of the berte_native implementation; see the file header for the
+#' A step of the berte_native implementation. Called by \code{multi_head_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
-#' @param K See Usage.
-#' @param n_heads See Usage.
-#' @param pad_mask Defaults to \code{NULL}.
-#' @param causal Defaults to \code{FALSE}.
+#' @param Q A matrix; indexed by row and column.
+#' @param K A matrix; indexed by row and column.
+#' @param n_heads A count; the body uses it as \code{vector(...)}.
+#' @param pad_mask Optional; may be \code{NULL}. A flag; the body branches on it.
+#' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{heads}, as built in the body.
 #' @export
 attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
@@ -121,13 +125,14 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
 
 #' multi_head_attention
 #'
-#' Part of the berte_native implementation; see the file header for the
+#' A step of the berte_native implementation. Called by \code{encoder_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
+#' @param Q A matrix; passed to \code{nrow}.
 #' @param K See Usage.
-#' @param V See Usage.
-#' @param n_heads See Usage.
+#' @param V A matrix; indexed by row and column.
+#' @param n_heads Numeric; combined arithmetically in the body.
 #' @param pad_mask Defaults to \code{NULL}.
 #' @param causal Defaults to \code{FALSE}.
 #' @return A list with \code{out}, \code{weights}.
@@ -149,10 +154,11 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
 
 #' encoder_block
 #'
-#' Part of the berte_native implementation; see the file header for the
+#' A step of the berte_native implementation. Called by \code{bert_encoder}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param Wq See Usage.
 #' @param Wk See Usage.
 #' @param Wv See Usage.
@@ -167,7 +173,7 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
 #' @param bias1 Defaults to \code{NULL}.
 #' @param gain2 Defaults to \code{NULL}.
 #' @param bias2 Defaults to \code{NULL}.
-#' @param pre_norm Defaults to \code{FALSE}.
+#' @param pre_norm A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{out}, \code{weights}.
 #' @export
 encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
@@ -202,11 +208,12 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 
 #' bert_encoder
 #'
-#' Part of the berte_native implementation; see the file header for the
+#' A step of the berte_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param blocks See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param blocks A vector; its length is taken.
 #' @param n_heads See Usage.
 #' @param pad_mask Defaults to \code{NULL}.
 #' @param pre_norm Defaults to \code{FALSE}.

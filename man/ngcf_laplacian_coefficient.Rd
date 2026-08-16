@@ -12,7 +12,7 @@ ngcf_laplacian_coefficient(n_u, n_i)
 \item{n_i}{See Usage.}
 }
 \description{
-Part of the ngcf_native implementation; see the file header for the source it follows.
+A step of the ngcf_native implementation. Called by \code{ngcf_propagate}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

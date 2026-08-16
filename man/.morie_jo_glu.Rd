@@ -8,14 +8,14 @@
 .morie_jo_glu(gamma, w4, b4, w5, b5)
 }
 \arguments{
-\item{gamma}{See Usage.}
-\item{w4}{See Usage.}
-\item{b4}{See Usage.}
-\item{w5}{See Usage.}
-\item{b5}{See Usage.}
+\item{gamma}{Passed to \code{.morie_jo_matvec}.}
+\item{w4}{Passed to \code{.morie_jo_matvec}.}
+\item{b4}{Numeric; combined arithmetically in the body.}
+\item{w5}{Passed to \code{.morie_jo_matvec}.}
+\item{b5}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{morie_tftnet}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,12 +8,12 @@
 morie_survnnr_partial_loglik(times, events, risk)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{risk}{See Usage.}
+\item{times}{A vector; its length is taken and its elements indexed.}
+\item{events}{A vector; its length is taken and its elements indexed.}
+\item{risk}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the survnnr_native implementation; see the file header for the source it follows.
+A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loglik}, \code{average}, \code{n_events}, \code{ties}.

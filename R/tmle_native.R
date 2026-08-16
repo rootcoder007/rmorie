@@ -6,16 +6,18 @@
 
 #' .morie_tmle_logit
 #'
-#' Part of the tmle_native implementation; see the file header for the
+#' A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code{morie_tmle_time_varying}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_tmle_logit <- function(p) log(p / (1 - p))
 #' .morie_tmle_expit
 #'
-#' Part of the tmle_native implementation; see the file header for the
+#' A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code{morie_tmle_time_varying}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -26,11 +28,12 @@
 # OLS fitted on `fit_rows` only, predicted for everyone.
 #' OLS fitted on `fit_rows` only, predicted for everyone
 #'
-#' Part of the tmle_native implementation; see the file header for the
+#' A step of the tmle_native implementation. Called by \code{morie_tmle_ate}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X See Usage.
-#' @param y See Usage.
+#' @param y A vector; indexed elementwise.
 #' @param fit_rows See Usage.
 #' @return The value of \code{as.vector}.
 #' @export

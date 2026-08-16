@@ -8,11 +8,11 @@
 .groebn_fr_add(p, q)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{p}{A vector; indexed elementwise.}
+\item{q}{A vector; indexed elementwise.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{.groebn_mul}, \code{.groebn_poly}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.groebn_fr}.

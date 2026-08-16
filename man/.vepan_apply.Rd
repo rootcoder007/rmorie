@@ -8,11 +8,11 @@
 .vepan_apply(cds, v, coding, gpos, strand)
 }
 \arguments{
-\item{cds}{See Usage.}
-\item{v}{See Usage.}
-\item{coding}{See Usage.}
-\item{gpos}{See Usage.}
-\item{strand}{See Usage.}
+\item{cds}{A vector; its length is taken.}
+\item{v}{A list; the body reads \code{$alt}, \code{$pos} from it.}
+\item{coding}{Numeric; combined arithmetically in the body.}
+\item{gpos}{A vector; indexed elementwise.}
+\item{strand}{One of \code{"-"}, \code{"+"}.}
 }
 \description{
 (0-based offset). Returns list(alt_cds, off) or list(NULL, NULL).

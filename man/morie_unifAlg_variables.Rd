@@ -8,10 +8,10 @@
 morie_unifAlg_variables(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{.unifAlg_check}.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{morie_trmRew_lpo_greater}, \code{morie_trmRew_rule} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

@@ -8,11 +8,11 @@
 morie_unifAlg_disagreement(t1, t2)
 }
 \arguments{
-\item{t1}{See Usage.}
-\item{t2}{See Usage.}
+\item{t1}{Passed to \code{.unifAlg_check}.}
+\item{t2}{Passed to \code{.unifAlg_check}.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_unify}. See the file header for the source the module follows.
 }
 \value{
 Nothing; the function is called for its effect.

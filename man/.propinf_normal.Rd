@@ -8,11 +8,11 @@
 .propinf_normal(rnd, scale = 1)
 }
 \arguments{
-\item{rnd}{See Usage.}
-\item{scale}{Defaults to \code{1}.}
+\item{rnd}{A list; the body reads \code{$parent} from it.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the propinf_native implementation; see the file header for the source it follows.
+A step of the propinf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

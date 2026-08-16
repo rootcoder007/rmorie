@@ -8,11 +8,11 @@
 k02fe(y, v)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{v}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the k02util implementation; see the file header for the source it follows.
+A step of the k02util implementation. Called by \code{k02dl}, \code{mafix}, \code{mai2} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mu}, \code{var}, \code{sw}, \code{Q}, \code{df}.

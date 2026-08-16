@@ -8,10 +8,10 @@
 .gh_sig(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the gru4r_native implementation; see the file header for the source it follows.
+A step of the gru4r_native implementation. Called by \code{bpr_loss}, \code{gru_step}, \code{top1_loss}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

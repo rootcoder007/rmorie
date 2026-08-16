@@ -10,7 +10,8 @@
 
 #' .morie_opt_vec
 #'
-#' Part of the optim_native implementation; see the file header for the
+#' A step of the optim_native implementation. Called by \code{morie_adagrad}, \code{morie_adam}, \code{morie_adamw_step} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param g See Usage.
@@ -26,11 +27,12 @@
 
 #' .morie_opt_state
 #'
-#' Part of the optim_native implementation; see the file header for the
+#' A step of the optim_native implementation. Called by \code{morie_adagrad}, \code{morie_adam}, \code{morie_adamw_step} and 6 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
-#' @param n See Usage.
+#' @param state Optional; may be \code{NULL}. A list; the body reads \code{$t} from it.
+#' @param n A count; the body uses it as \code{numeric(...)}.
 #' @param keys Defaults to \code{c("m", "v")}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

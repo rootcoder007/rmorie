@@ -8,7 +8,7 @@
 .gplogdet(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Passed to \code{.gpmat}.}
 }
 \description{
 log|pivot| and so discards the sign).

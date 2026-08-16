@@ -8,10 +8,10 @@
 .alfmpv_field(chain, name, n, default)
 }
 \arguments{
-\item{chain}{See Usage.}
+\item{chain}{A vector; indexed elementwise.}
 \item{name}{See Usage.}
-\item{n}{See Usage.}
-\item{default}{See Usage.}
+\item{n}{A count; the body uses it as \code{rep(...)}.}
+\item{default}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
 caller with no E-values should still be able to run the multimer route, which never looks at them.

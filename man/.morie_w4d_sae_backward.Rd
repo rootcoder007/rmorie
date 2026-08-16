@@ -8,15 +8,15 @@
 .morie_w4d_sae_backward(A, Ws, bs, cs, hs, rs)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{Ws}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{Ws}{A vector; its length is taken and its elements indexed.}
 \item{bs}{See Usage.}
 \item{cs}{See Usage.}
-\item{hs}{See Usage.}
-\item{rs}{See Usage.}
+\item{hs}{A vector; indexed elementwise.}
+\item{rs}{A vector; indexed elementwise.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_stacked_autoencoder_modules}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dW}, \code{db}, \code{dc}.

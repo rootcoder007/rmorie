@@ -8,14 +8,14 @@
 morie_funkM_imputed_svd_error(ratings, n_users, n_items, rank = 2, fill = "zero")
 }
 \arguments{
-\item{ratings}{See Usage.}
+\item{ratings}{Passed to \code{.funkM_as_ratings}.}
 \item{n_users}{See Usage.}
 \item{n_items}{See Usage.}
 \item{rank}{Defaults to \code{2}.}
 \item{fill}{Defaults to \code{"zero"}.}
 }
 \description{
-Part of the funkM_native implementation; see the file header for the source it follows.
+A step of the funkM_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rmse_on_observed}, \code{fill}, \code{rank}, \code{note}.

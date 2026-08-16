@@ -8,12 +8,12 @@
 .dmlqs_atom_readout(edge_states, adj, n)
 }
 \arguments{
-\item{edge_states}{See Usage.}
-\item{adj}{See Usage.}
+\item{edge_states}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{adj}{Passed to \code{.dmlqs_norm_adj}.}
 \item{n}{See Usage.}
 }
 \description{
-Part of the dmlqs_native implementation; see the file header for the source it follows.
+A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

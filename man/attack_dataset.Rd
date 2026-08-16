@@ -9,13 +9,13 @@ attack_dataset(model_predict, in_X, in_y, out_X, out_y)
 }
 \arguments{
 \item{model_predict}{See Usage.}
-\item{in_X}{See Usage.}
-\item{in_y}{See Usage.}
-\item{out_X}{See Usage.}
-\item{out_y}{See Usage.}
+\item{in_X}{A vector; its length is taken.}
+\item{in_y}{A vector; indexed elementwise.}
+\item{out_X}{A vector; its length is taken.}
+\item{out_y}{A vector; indexed elementwise.}
 }
 \description{
-Part of the memb_native implementation; see the file header for the source it follows.
+A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{rows}, \code{labels}, \code{classes}.

@@ -69,10 +69,11 @@
 
 #' .schab_pairwise_distances
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit}, \code{.schab_select_bandwidth}, \code{spgwrb}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param coords See Usage.
+#' @param coords A matrix; passed to \code{ncol}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
 .schab_pairwise_distances <- function(coords) {
@@ -83,11 +84,12 @@
 
 #' .schab_reshape_like
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_kernel_weights}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param values See Usage.
-#' @param template See Usage.
+#' @param template A matrix; passed to \code{dim}.
 #' @return The value of \code{array}.
 #' @export
 .schab_reshape_like <- function(values, template) {
@@ -100,13 +102,14 @@
 
 #' .schab_kernel_weights
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_local_weights}, \code{spgwrk}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param distance See Usage.
+#' @param distance Passed to \code{.schab_reshape_like}.
 #' @param bandwidth See Usage.
-#' @param kernel Defaults to \code{"gaussian"}.
-#' @param normalized Defaults to \code{FALSE}.
+#' @param kernel Compared against \code{"gaussian"}. Defaults to \code{"gaussian"}.
+#' @param normalized A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{.schab_reshape_like}.
 #' @export
 .schab_kernel_weights <- function(distance, bandwidth, kernel = "gaussian",
@@ -147,7 +150,7 @@
 #'
 #' @param distance_row See Usage.
 #' @param n_neighbours See Usage.
-#' @param eps Defaults to \code{1.0000001}.
+#' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1.0000001}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .schab_adaptive_bandwidth <- function(distance_row, n_neighbours,
@@ -162,13 +165,14 @@
 
 #' .schab_local_weights
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_cv_score}, \code{.schab_gwr_fit}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param d_row See Usage.
-#' @param bandwidth See Usage.
-#' @param kernel See Usage.
-#' @param adaptive See Usage.
+#' @param d_row Passed to \code{.schab_adaptive_bandwidth}.
+#' @param bandwidth Passed to \code{.schab_adaptive_bandwidth}.
+#' @param kernel Passed to \code{.schab_kernel_weights}.
+#' @param adaptive A flag; the body branches on it.
 #' @return The value of \code{.schab_kernel_weights}.
 #' @export
 .schab_local_weights <- function(d_row, bandwidth, kernel, adaptive) {
@@ -195,8 +199,8 @@
 #' singular value. Written out rather than taken from MASS::ginv because
 #' MASS is only in Suggests.
 #'
-#' @param X See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param w Numeric; passed to \code{sqrt}.
 #' @return The value of \code{op}, as built in the body.
 #' @export
 .schab_wls_operator <- function(X, w) {
@@ -219,15 +223,16 @@
 
 #' .schab_gwr_fit
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{.schab_mgwr_backfit}, \code{spgwrb}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param distances See Usage.
-#' @param bandwidth See Usage.
-#' @param kernel Defaults to \code{"gaussian"}.
-#' @param adaptive Defaults to \code{FALSE}.
+#' @param y A matrix; passed to \code{t}.
+#' @param X A matrix; indexed by row and column.
+#' @param distances A matrix; passed to \code{as.matrix}.
+#' @param bandwidth Passed to \code{.schab_local_weights}.
+#' @param kernel Passed to \code{.schab_local_weights}. Defaults to \code{"gaussian"}.
+#' @param adaptive Passed to \code{.schab_local_weights}. Defaults to \code{FALSE}.
 #' @return A list with \code{se_params}, \code{sigma2_gwr}, \code{edf_resid}, \code{v1}, \code{v2}, \code{params}, \code{fitted}, \code{resid}, \code{S}, \code{tr_S}, \code{tr_STS}, \code{effective_parameters}, \code{rss}, \code{sigma2}, \code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel}, \code{adaptive}, \code{n_rank_deficient}.
 #' @export
 .schab_gwr_fit <- function(y, X, distances, bandwidth, kernel = "gaussian",
@@ -292,9 +297,9 @@
 #'
 #' Fotheringham et al. (2002) p. 61 eq (2.33) / p. 96 eq (4.21).
 #'
-#' @param n See Usage.
-#' @param sigma2 See Usage.
-#' @param tr_S See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param sigma2 Numeric; passed to \code{sqrt}.
+#' @param tr_S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .schab_aicc_from_parts <- function(n, sigma2, tr_S) {
@@ -310,11 +315,12 @@
 # Fotheringham et al. (2002) p. 96 eq (4.22).
 #' Fotheringham et al. (2002) p. 96 eq (4.22)
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{spgwrb}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
-#' @param sigma2 See Usage.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param sigma2 Numeric; passed to \code{sqrt}.
 #' @param tr_S See Usage.
 #' @return A numeric value.
 #' @export
@@ -326,15 +332,16 @@
 # spgwr::gwr.cv.f -- leave-one-out; y_i never predicts itself.
 #' Spgwr::gwr.cv.f -- leave-one-out; y_i never predicts itself
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{spgwrb}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param distances See Usage.
-#' @param bandwidth See Usage.
-#' @param kernel Defaults to \code{"gaussian"}.
-#' @param adaptive Defaults to \code{FALSE}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param X A matrix; indexed by row and column.
+#' @param distances A matrix; passed to \code{as.matrix}.
+#' @param bandwidth Passed to \code{.schab_local_weights}.
+#' @param kernel Passed to \code{.schab_local_weights}. Defaults to \code{"gaussian"}.
+#' @param adaptive Passed to \code{.schab_local_weights}. Defaults to \code{FALSE}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
 .schab_cv_score <- function(y, X, distances, bandwidth, kernel = "gaussian",
@@ -359,16 +366,17 @@
 
 #' .schab_gwr_criterion
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_select_bandwidth}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param distances See Usage.
-#' @param bandwidth See Usage.
-#' @param kernel Defaults to \code{"gaussian"}.
-#' @param adaptive Defaults to \code{FALSE}.
-#' @param criterion Defaults to \code{"cv"}.
+#' @param y Passed to \code{.schab_cv_score}.
+#' @param X Passed to \code{.schab_cv_score}.
+#' @param distances Passed to \code{.schab_cv_score}.
+#' @param bandwidth Passed to \code{.schab_cv_score}.
+#' @param kernel Passed to \code{.schab_cv_score}. Defaults to \code{"gaussian"}.
+#' @param adaptive Passed to \code{.schab_cv_score}. Defaults to \code{FALSE}.
+#' @param criterion One of \code{"aic"}, \code{"aicc"}, \code{"cv"}. Defaults to \code{"cv"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .schab_gwr_criterion <- function(y, X, distances, bandwidth,
@@ -404,7 +412,7 @@
 #' @param lower See Usage.
 #' @param upper See Usage.
 #' @param tol Defaults to \code{1e-04}.
-#' @param max_iter Defaults to \code{200L}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A list with \code{x}, \code{value}.
 #' @export
 .schab_golden_section <- function(func, lower, upper, tol = 1e-4,
@@ -443,7 +451,7 @@
 #'
 #' thousandth of it.
 #'
-#' @param coords See Usage.
+#' @param coords A matrix; passed to \code{as.matrix}.
 #' @return A vector, from \code{c}.
 #' @export
 .schab_default_bounds <- function(coords) {
@@ -458,17 +466,18 @@
 
 #' .schab_select_bandwidth
 #'
-#' Part of the schab_gwr_shared implementation; see the file header for
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit}, \code{spgwrb}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param coords See Usage.
-#' @param kernel Defaults to \code{"gaussian"}.
-#' @param criterion Defaults to \code{"cv"}.
-#' @param adaptive Defaults to \code{FALSE}.
+#' @param y Passed to \code{.schab_gwr_criterion}.
+#' @param X Passed to \code{.schab_gwr_criterion}.
+#' @param coords Passed to \code{.schab_pairwise_distances}.
+#' @param kernel Passed to \code{.schab_gwr_criterion}. Defaults to \code{"gaussian"}.
+#' @param criterion Passed to \code{.schab_gwr_criterion}. Defaults to \code{"cv"}.
+#' @param adaptive A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param bounds Defaults to \code{NULL}.
-#' @param tol Defaults to \code{1e-04}.
+#' @param tol Passed to \code{.schab_golden_section}. Defaults to \code{1e-04}.
 #' @return A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds}, \code{adaptive}.
 #' @export
 .schab_select_bandwidth <- function(y, X, coords, kernel = "gaussian",
@@ -546,18 +555,18 @@
 #' this port -- the reference uses the same score and the same default
 #' tolerance. `at_search_boundary` flags it.
 #'
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param coords See Usage.
-#' @param kernel Defaults to \code{"gaussian"}.
-#' @param criterion Defaults to \code{"aicc"}.
-#' @param adaptive Defaults to \code{FALSE}.
+#' @param y A matrix; passed to \code{nrow}.
+#' @param X A matrix; indexed by row and column.
+#' @param coords Passed to \code{.schab_pairwise_distances}.
+#' @param kernel Passed to \code{.schab_gwr_fit}. Defaults to \code{"gaussian"}.
+#' @param criterion Passed to \code{.schab_select_bandwidth}. Defaults to \code{"aicc"}.
+#' @param adaptive A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param tol Defaults to \code{1e-05}.
-#' @param max_iter Defaults to \code{200L}.
-#' @param rss_score Defaults to \code{FALSE}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
+#' @param rss_score A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param bws_same_times Defaults to \code{5L}.
 #' @param init_bandwidth Defaults to \code{NULL}.
-#' @param standardize Defaults to \code{TRUE}.
+#' @param standardize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{bandwidths}, \code{at_search_boundary}, \code{standardized}, \code{y_centre}, \code{y_scale}, \code{x_centre}, \code{x_scale}, \code{params}, \code{fitted}, \code{resid}, \code{bandwidth_gwr}, \code{bandwidth_history}, \code{score_history}, \code{n_iter}, \code{converged}, \code{criterion}, \code{kernel}.
 #' @export
 .schab_mgwr_backfit <- function(y, X, coords, kernel = "gaussian",

@@ -11,7 +11,7 @@ morie_pinv(A, rcond = 1e-15)
 morie_pinv
 }
 \value{
-The value of \code{%*%}.
+The value of \code{\%*\%}.
 }
 \keyword{internal}
 \examples{

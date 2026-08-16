@@ -8,7 +8,7 @@
 .clpopt_mat(A, name, ncol = NULL)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
 \item{name}{See Usage.}
 \item{ncol}{Defaults to \code{NULL}.}
 }

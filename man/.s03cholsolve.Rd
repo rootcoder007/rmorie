@@ -8,11 +8,11 @@
 .s03cholsolve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{b}{A vector; indexed elementwise.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.cfa_inv}, \code{.ch_ols_se} and 35 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{x}, as built in the body.

@@ -8,7 +8,7 @@ morie_mxeta(F, n_sim = 1, seed = 0, max_points = 1e+05)
 }
 \arguments{
 \item{F}{Non-negative matrix (n_t x m): spectral functions on m
-uniform sites of \link{0, 1}.}
+uniform sites of [0, 1].}
 
 \item{n_sim}{Number of independent realizations.}
 
@@ -24,7 +24,7 @@ A list with elements \code{fields} (n_sim x n_t matrix),
 \description{
 Y_t = sup_k f_t(T_k) X_k with X_k = 1/Gamma_k (Poisson intensity
 dx/x^2) and T_k uniform; margins P(Y_t <= y) =
-exp(-mean_s F\link{t,s}/y).  Simulation truncates exactly when
+exp(-mean_s F[t,s]/y).  Simulation truncates exactly when
 1/Gamma_k max F < min_t Y_t.
 }
 \references{

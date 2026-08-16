@@ -8,15 +8,15 @@
 morie_crkbsg_cokriging(coords, y, z, s_predict, cross_variogram = NULL, coords_z = NULL)
 }
 \arguments{
-\item{coords}{See Usage.}
+\item{coords}{Passed to \code{.crkbsg_rows}.}
 \item{y}{See Usage.}
 \item{z}{See Usage.}
-\item{s_predict}{See Usage.}
-\item{cross_variogram}{Defaults to \code{NULL}.}
-\item{coords_z}{Defaults to \code{NULL}.}
+\item{s_predict}{Passed to \code{.crkbsg_rows}.}
+\item{cross_variogram}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{coords_z}{Optional; may be \code{NULL}. Passed to \code{.crkbsg_rows}.}
 }
 \description{
-Part of the crkbsg_native implementation; see the file header for the source it follows.
+A step of the crkbsg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{kriging_prediction}, \code{kriging_variance}, \code{variance_reduction}, \code{weights_primary}, \code{weights_secondary}, \code{lagrange}, \code{targets}, \code{coregionalisation}, \code{nugget_matrix}, \code{model}, \code{range}, \code{n_primary}, \code{n_secondary}, \code{method}, \code{note}.

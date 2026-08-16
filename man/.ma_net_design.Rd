@@ -8,7 +8,7 @@
 .ma_net_design(design)
 }
 \arguments{
-\item{design}{See Usage.}
+\item{design}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
 and the smallest is the reference, fixed at zero; a study comparing t2 against t1 contributes +1 in the column of t2 and -1 in that of t1.

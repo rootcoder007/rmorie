@@ -8,12 +8,12 @@
 .schab_k_border(p, region, r)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{region}{See Usage.}
+\item{p}{A matrix; indexed by row and column.}
+\item{region}{A vector; indexed elementwise.}
 \item{r}{See Usage.}
 }
 \description{
-the Python arm\\\'s k_function; needed by Diggle-Chetwynd\\\'s D(h).
+the Python arm\\'s k_function; needed by Diggle-Chetwynd\\'s D(h).
 }
 \value{
 A vector, from \code{vapply}.

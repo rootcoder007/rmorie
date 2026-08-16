@@ -8,8 +8,8 @@
 #' for the pairwise term, exactly equal to the naive double sum over
 #' i<j.
 #'
-#' @param V See Usage.
-#' @param x See Usage.
+#' @param V A matrix; indexed by row and column.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .fm_second_order <- function(V, x) {

@@ -8,7 +8,7 @@
 phmmsr_search_pipeline(sequences, profile, msv_threshold = 0.02, mu = 10, lam = 0.7, full_score = NULL)
 }
 \arguments{
-\item{sequences}{See Usage.}
+\item{sequences}{A vector; its length is taken and its elements indexed.}
 \item{profile}{See Usage.}
 \item{msv_threshold}{Defaults to \code{0.02}.}
 \item{mu}{Defaults to \code{10}.}
@@ -16,7 +16,7 @@ phmmsr_search_pipeline(sequences, profile, msv_threshold = 0.02, mu = 10, lam = 
 \item{full_score}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the phmmsr_native implementation; see the file header for the source it follows.
+A step of the phmmsr_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{passed}, \code{msv_scores}, \code{discarded}, \code{survivor_fraction}, \code{full_scores}, \code{method}, \code{note}.

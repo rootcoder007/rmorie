@@ -8,11 +8,11 @@
 .morie_glm_quantal(X, k, n, link, max_iter = 100L, tol = 1e-11)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{k}{See Usage.}
-\item{n}{See Usage.}
-\item{link}{See Usage.}
-\item{max_iter}{Defaults to \code{100L}.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{k}{Numeric; passed to \code{sum}.}
+\item{n}{Numeric; passed to \code{sum}.}
+\item{link}{One of \code{"logit"}, \code{"probit"}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-11}.}
 }
 \description{

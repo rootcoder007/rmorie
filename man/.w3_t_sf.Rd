@@ -3,16 +3,16 @@
 % the formals.
 \name{.w3_t_sf}
 \alias{.w3_t_sf}
-\title{Upper tail of Student\\\'s t}
+\title{Upper tail of Student\\'s t}
 \usage{
 .w3_t_sf(t, df)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{df}{See Usage.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{df}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the helpers_w3num implementation; see the file header for the source it follows.
+A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

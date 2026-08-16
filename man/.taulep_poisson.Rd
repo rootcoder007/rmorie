@@ -8,11 +8,11 @@
 .taulep_poisson(e, lam)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Passed to \code{.ghc_unif}.}
 \item{lam}{See Usage.}
 }
 \description{
-Part of the taulep_native implementation; see the file header for the source it follows.
+A step of the taulep_native implementation. Called by \code{morie_taulep}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{repeat}.

@@ -31,13 +31,13 @@
 #' cycling-freedom guarantee, which is the right trade at the problem
 #' sizes identification bounds produce.
 #'
-#' @param cv See Usage.
-#' @param A_ub Defaults to \code{NULL}.
+#' @param cv A vector; its length is taken.
+#' @param A_ub Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param b_ub Defaults to \code{NULL}.
-#' @param A_eq Defaults to \code{NULL}.
+#' @param A_eq Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param b_eq Defaults to \code{NULL}.
 #' @param lower See Usage.
-#' @param upper See Usage.
+#' @param upper A vector; indexed elementwise.
 #' @return A list with \code{status}, \code{x}, \code{fun}.
 #' @export
 .bnd_simplex <- function(cv, A_ub = NULL, b_ub = NULL, A_eq = NULL,

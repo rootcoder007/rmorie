@@ -8,9 +8,9 @@
 .unitigs(edges, indeg, outdeg)
 }
 \arguments{
-\item{edges}{See Usage.}
-\item{indeg}{See Usage.}
-\item{outdeg}{See Usage.}
+\item{edges}{A vector; indexed elementwise.}
+\item{indeg}{A vector; indexed elementwise.}
+\item{outdeg}{A vector; indexed elementwise.}
 }
 \description{
 unambiguous even when the whole graph is not. Walks each edge out of every non-simple vertex (in sorted order) and through every simple vertex until a branch point; a graph that is one pure cycle contributes the cycle itself.

@@ -8,11 +8,11 @@
 .metsem_drop(g, es)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{A list; the body reads \code{$edges}, \code{$inc}, \code{$k}, \code{$nodes}, \code{$out} from it.}
 \item{es}{See Usage.}
 }
 \description{
-Part of the metsem_native implementation; see the file header for the source it follows.
+A step of the metsem_native implementation. Called by \code{morie_metsem}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{g}, as built in the body.

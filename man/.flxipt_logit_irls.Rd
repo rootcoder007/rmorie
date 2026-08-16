@@ -8,15 +8,15 @@
 .flxipt_logit_irls(X, y, ridge = 1e-10, penalty = 0, max_iter = 200, tol = 1e-08)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{Defaults to \code{1e-10}.}
-\item{penalty}{Defaults to \code{0}.}
-\item{max_iter}{Defaults to \code{200}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
+\item{penalty}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{.flxipt_fit}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{b}, as built in the body.

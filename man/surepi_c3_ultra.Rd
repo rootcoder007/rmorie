@@ -13,7 +13,7 @@ surepi_c3_ultra(counts, threshold = 2, sigma_floor = 1)
 \item{sigma_floor}{Defaults to \code{1}.}
 }
 \description{
-Part of the surepi_native implementation; see the file header for the source it follows.
+A step of the surepi_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{surepi_ears_detect}.

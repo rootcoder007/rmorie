@@ -8,10 +8,10 @@
 .hrz3_grid_w(m)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the helpers_hrz3 implementation; see the file header for the source it follows.
+A step of the helpers_hrz3 implementation. Called by \code{Hrznpiv}, \code{Hrztiku}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{z}, \code{w}.

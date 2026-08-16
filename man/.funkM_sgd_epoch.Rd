@@ -8,18 +8,18 @@
 .funkM_sgd_epoch(R, mu, bu, bi, P, Q, lr, reg, factor = NULL)
 }
 \arguments{
-\item{R}{See Usage.}
-\item{mu}{See Usage.}
-\item{bu}{See Usage.}
-\item{bi}{See Usage.}
-\item{P}{See Usage.}
-\item{Q}{See Usage.}
-\item{lr}{See Usage.}
-\item{reg}{See Usage.}
+\item{R}{A list; the body reads \code{$i}, \code{$r}, \code{$u} from it.}
+\item{mu}{Passed to \code{.funkM_predict}.}
+\item{bu}{A vector; indexed elementwise.}
+\item{bi}{A vector; indexed elementwise.}
+\item{P}{A matrix; indexed by row and column.}
+\item{Q}{A matrix; indexed by row and column.}
+\item{lr}{Numeric; combined arithmetically in the body.}
+\item{reg}{Numeric; combined arithmetically in the body.}
 \item{factor}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the funkM_native implementation; see the file header for the source it follows.
+A step of the funkM_native implementation. Called by \code{morie_funkM}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.
@@ -36,7 +36,7 @@ of the same model are the two references below, and the
 implementation follows those.
 
 Koren, Y. (2008) "Factorization Meets the Neighborhood: a
-Multifaceted Collaborative Filtering Model", *KDD \\'08*, 426-434,
+Multifaceted Collaborative Filtering Model", *KDD \'08*, 426-434,
 doi:10.1145/1401890.1401944. The baseline decomposition
 b_ui = mu + b_u + b_i and the regularised squared-error objective
 over the OBSERVED ratings, optimised by stochastic gradient descent.

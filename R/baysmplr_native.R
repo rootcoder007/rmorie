@@ -196,13 +196,14 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 
 #' .baysmplr_leapfrog
 #'
-#' Part of the baysmplr_native implementation; see the file header for
+#' A step of the baysmplr_native implementation. Called by \code{.baysmplr_build_tree}, \code{morie_baysmplr_hmc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param grad See Usage.
-#' @param q See Usage.
-#' @param p See Usage.
-#' @param eps See Usage.
+#' @param q Numeric; combined arithmetically in the body.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param eps Numeric; combined arithmetically in the body.
 #' @param steps See Usage.
 #' @return A list with \code{q}, \code{p}, \code{g}.
 #' @export
@@ -261,20 +262,21 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 # Hoffman and Gelman's recursive doubling, Algorithm 3.
 #' Hoffman and Gelman\'s recursive doubling, Algorithm 3
 #'
-#' Part of the baysmplr_native implementation; see the file header for
+#' A step of the baysmplr_native implementation. Called by \code{morie_baysmplr_nuts}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param log_p See Usage.
-#' @param grad See Usage.
-#' @param q See Usage.
-#' @param p See Usage.
-#' @param u See Usage.
-#' @param v See Usage.
-#' @param j See Usage.
-#' @param eps See Usage.
-#' @param e See Usage.
-#' @param h0 See Usage.
-#' @param dmax Defaults to \code{1000}.
+#' @param log_p Passed to \code{.baysmplr_build_tree}.
+#' @param grad Passed to \code{.baysmplr_leapfrog}.
+#' @param q Passed to \code{.baysmplr_leapfrog}.
+#' @param p Passed to \code{.baysmplr_leapfrog}.
+#' @param u Numeric; passed to \code{log}.
+#' @param v Numeric; combined arithmetically in the body.
+#' @param j Numeric; combined arithmetically in the body.
+#' @param eps Numeric; combined arithmetically in the body.
+#' @param e Passed to \code{.baysmplr_build_tree}.
+#' @param h0 Numeric; combined arithmetically in the body.
+#' @param dmax Numeric; combined arithmetically in the body. Defaults to \code{1000}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .baysmplr_build_tree <- function(log_p, grad, q, p, u, v, j, eps, e, h0,

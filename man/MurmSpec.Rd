@@ -8,8 +8,8 @@
 MurmSpec(pcg, fs, f1 = 25, f2 = 75, f3 = 150)
 }
 \arguments{
-\item{pcg}{See Usage.}
-\item{fs}{See Usage.}
+\item{pcg}{Passed to \code{.bsapsd}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 \item{f1}{Defaults to \code{25}.}
 \item{f2}{Defaults to \code{75}.}
 \item{f3}{Defaults to \code{150}.}

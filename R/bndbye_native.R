@@ -8,7 +8,8 @@
 
 #' morie_identified_set_interval
 #'
-#' Part of the bndbye_native implementation; see the file header for the
+#' A step of the bndbye_native implementation. Called by \code{morie_compare_sets}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param phi_hat See Usage.
@@ -24,10 +25,11 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 
 #' morie_conditional_prior_uniform
 #'
-#' Part of the bndbye_native implementation; see the file header for the
+#' A step of the bndbye_native implementation. Called by \code{morie_posterior_hpd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta_set See Usage.
+#' @param theta_set A list; the body reads \code{$lower}, \code{$upper} from it.
 #' @param n_grid Defaults to \code{401L}.
 #' @return A list with \code{grid}, \code{density}.
 #' @export
@@ -42,13 +44,14 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
 
 #' morie_posterior_hpd
 #'
-#' Part of the bndbye_native implementation; see the file header for the
+#' A step of the bndbye_native implementation. Called by \code{morie_compare_sets}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta_set See Usage.
+#' @param theta_set Passed to \code{morie_conditional_prior_uniform}.
 #' @param level Defaults to \code{0.95}.
 #' @param conditional_prior Defaults to \code{NULL}.
-#' @param n_grid Defaults to \code{401L}.
+#' @param n_grid Passed to \code{morie_conditional_prior_uniform}. Defaults to \code{401L}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{level}, \code{covered}, \code{n_grid_points}, \code{method}.
 #' @export
 morie_posterior_hpd <- function(theta_set, level = 0.95,
@@ -81,13 +84,14 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
 
 #' morie_frequentist_confidence_set
 #'
-#' Part of the bndbye_native implementation; see the file header for the
+#' A step of the bndbye_native implementation. Called by \code{morie_compare_sets}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta_set See Usage.
+#' @param theta_set A list; the body reads \code{$lower}, \code{$upper}, \code{$width} from it.
 #' @param se_phi See Usage.
 #' @param level Defaults to \code{0.95}.
-#' @param target Defaults to \code{"parameter"}.
+#' @param target One of \code{"parameter"}, \code{"set"}. Defaults to \code{"parameter"}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value}, \code{target}, \code{level}, \code{note}.
 #' @export
 morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
@@ -107,15 +111,16 @@ morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
 
 #' morie_compare_sets
 #'
-#' Part of the bndbye_native implementation; see the file header for the
+#' A step of the bndbye_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param phi_hat See Usage.
-#' @param half_width See Usage.
-#' @param se_phi See Usage.
-#' @param level Defaults to \code{0.95}.
-#' @param conditional_prior Defaults to \code{NULL}.
-#' @param n_grid Defaults to \code{401L}.
+#' @param phi_hat Passed to \code{morie_identified_set_interval}.
+#' @param half_width Passed to \code{morie_identified_set_interval}.
+#' @param se_phi Passed to \code{morie_frequentist_confidence_set}.
+#' @param level Passed to \code{morie_posterior_hpd}. Defaults to \code{0.95}.
+#' @param conditional_prior Optional; may be \code{NULL}. Passed to \code{morie_posterior_hpd}.
+#' @param n_grid Passed to \code{morie_posterior_hpd}. Defaults to \code{401L}.
 #' @return A list with \code{estimate}, \code{identified_set}, \code{credible_hpd}, \code{confidence_set}, \code{hpd_inside_identified_set}, \code{cs_contains_identified_set}, \code{width_ratio_hpd_over_cs}, \code{conditional_prior_reported}, \code{method}, \code{recommendation}.
 #' @export
 morie_compare_sets <- function(phi_hat, half_width, se_phi, level = 0.95,

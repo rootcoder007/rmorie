@@ -185,7 +185,7 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 #'
 #' 4 (T/100)^(2/9).
 #'
-#' @param u See Usage.
+#' @param u A vector; its length is taken.
 #' @param bandwidth Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -212,9 +212,9 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 #' Returns L11^2, lambda_i and sigma^2_i.
 #'
 #' @param y See Usage.
-#' @param Zx See Usage.
-#' @param e See Usage.
-#' @param bandwidth See Usage.
+#' @param Zx A matrix; passed to \code{ncol}.
+#' @param e A vector; its length is taken and its elements indexed.
+#' @param bandwidth Passed to \code{.nw_lrv}.
 #' @return A vector, from \code{c}.
 #' @export
 .pdcoin_nuisance <- function(y, Zx, e, bandwidth) {

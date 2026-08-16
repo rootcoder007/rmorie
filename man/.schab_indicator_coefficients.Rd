@@ -8,8 +8,8 @@
 .schab_indicator_coefficients(z_k, degree)
 }
 \arguments{
-\item{z_k}{See Usage.}
-\item{degree}{See Usage.}
+\item{z_k}{Numeric; combined arithmetically in the body.}
+\item{degree}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 used: it is exact for polynomials and the indicator is a step function, so it converges slowly and silently -- and the indicator is the canonical target of the method. b_0 = F(z_k), b_p = (-1)^p H_{p-1}(z_k) f(z_k) / sqrt(p!)

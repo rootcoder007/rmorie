@@ -8,15 +8,15 @@
 morie_sdxlcd_condition_vector(h_original, w_original, c_top = 0, c_left = 0, timestep_embedding = NULL, dim = 8)
 }
 \arguments{
-\item{h_original}{See Usage.}
-\item{w_original}{See Usage.}
-\item{c_top}{Defaults to \code{0}.}
-\item{c_left}{Defaults to \code{0}.}
+\item{h_original}{Passed to \code{morie_sdxlcd_size_conditioning}.}
+\item{w_original}{Passed to \code{morie_sdxlcd_size_conditioning}.}
+\item{c_top}{Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.}
+\item{c_left}{Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.}
 \item{timestep_embedding}{Defaults to \code{NULL}.}
-\item{dim}{Defaults to \code{8}.}
+\item{dim}{Passed to \code{morie_sdxlcd_size_conditioning}. Defaults to \code{8}.}
 }
 \description{
-Part of the sdxlcd_native implementation; see the file header for the source it follows.
+A step of the sdxlcd_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size}, \code{c_crop}, \code{method}, \code{note}.
@@ -29,7 +29,7 @@ arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
 backbone, more attention blocks, a second text encoder), Sec. 2.2
 ("Conditioning the Model on Image Size": the two existing approaches of
 discarding images below a minimum resolution or upscaling them, the
-measured 39% of data that would be discarded at 256 pixels, and the
+measured 39\% of data that would be discarded at 256 pixels, and the
 proposal to condition on the original height and width, each embedded
 by Fourier features, concatenated and ADDED to the timestep embedding;
 "Conditioning the Model on Cropping Parameters": random cropping during

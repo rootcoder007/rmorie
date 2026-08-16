@@ -8,10 +8,10 @@
 .karpv_rng(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{morie_karpV}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{e}, as built in the body.

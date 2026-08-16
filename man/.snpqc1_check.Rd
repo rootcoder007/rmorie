@@ -8,10 +8,10 @@
 .snpqc1_check(genotypes)
 }
 \arguments{
-\item{genotypes}{See Usage.}
+\item{genotypes}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the snpqc1_native implementation; see the file header for the source it follows.
+A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}, \code{morie_snpqc1_call_rates}, \code{morie_snpqc1_heterozygosity} and 5 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{G}, \code{n}, \code{m}.

@@ -8,12 +8,12 @@
 .gram_slot(g, gram_index, hash_buckets)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{gram_index}{See Usage.}
+\item{g}{Passed to \code{.fnv1a}.}
+\item{gram_index}{A vector; indexed elementwise.}
 \item{hash_buckets}{See Usage.}
 }
 \description{
-Part of the fastxt_native implementation; see the file header for the source it follows.
+A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

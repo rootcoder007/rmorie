@@ -10,10 +10,10 @@
 \arguments{
 \item{rows}{See Usage.}
 \item{ys}{See Usage.}
-\item{w}{See Usage.}
+\item{w}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bnskt2_native implementation; see the file header for the source it follows.
+A step of the bnskt2_native implementation. Called by \code{.side_fit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}.

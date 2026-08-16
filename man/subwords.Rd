@@ -11,11 +11,11 @@ subwords(word, n_min = 3, n_max = 6, boundary = TRUE, whole_word = TRUE)
 \item{word}{See Usage.}
 \item{n_min}{Defaults to \code{3}.}
 \item{n_max}{Defaults to \code{6}.}
-\item{boundary}{Defaults to \code{TRUE}.}
-\item{whole_word}{Defaults to \code{TRUE}.}
+\item{boundary}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{whole_word}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the fastxt_native implementation; see the file header for the source it follows.
+A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{grams}, as built in the body.

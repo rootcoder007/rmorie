@@ -58,10 +58,11 @@ Trimit <- function(y, weights, threshold) {
 
 #' .trimit_deff
 #'
-#' Part of the Trimit implementation; see the file header for the source
+#' A step of the Trimit implementation. Called by \code{Trimit}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param w See Usage.
+#' @param w A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .trimit_deff <- function(w) {

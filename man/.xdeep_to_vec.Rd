@@ -11,7 +11,7 @@
 \item{a}{See Usage.}
 }
 \description{
-Part of the xdeep_native implementation; see the file header for the source it follows.
+A step of the xdeep_native implementation. Called by \code{xdeep_hadamard}, \code{xdeep_xdeepfm_score}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.
@@ -22,7 +22,7 @@ Lian, J., Zhou, X., Zhang, F., Chen, Z., Xie, X. & Sun, G. (2018)
 "xDeepFM: Combining Explicit and Implicit Feature Interactions for
 Recommender Systems", *Proceedings of the 24th ACM SIGKDD
 International Conference on Knowledge Discovery and Data Mining (KDD
-\\'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
+\'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
 Rendle, S. (2010) "Factorization Machines", *ICDM 2010*, 995-1000,
 doi:10.1109/ICDM.2010.127. The vector-wise tradition; implemented in
 :mod:`fmFM`.

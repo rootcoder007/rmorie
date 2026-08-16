@@ -11,7 +11,7 @@ HannFr(omega)
 \item{omega}{See Usage.}
 }
 \description{
-Part of the rangayyan_filt implementation; see the file header for the source it follows.
+A step of the rangayyan_filt implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{H}, \code{omega}, \code{magnitude}, \code{on_the_unit_circle}, \code{method}.

@@ -10,11 +10,11 @@
 #' = 1 every weight is 1, so the walk is exactly DeepWalk\'s uniform
 #' walk -- the reduction that pins this function.
 #'
-#' @param nb See Usage.
+#' @param nb A vector; indexed elementwise.
 #' @param prev See Usage.
 #' @param cur See Usage.
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param q Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .n2v_probs <- function(nb, prev, cur, p, q) {

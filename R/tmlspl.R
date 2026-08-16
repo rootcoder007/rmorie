@@ -4,8 +4,8 @@
 #'
 #' # Default exposure summary: fraction of neighbours treated.
 #'
-#' @param D See Usage.
-#' @param A See Usage.
+#' @param D A vector; its length is taken and its elements indexed.
+#' @param A A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tmlspl_frac_treated <- function(D, A) {

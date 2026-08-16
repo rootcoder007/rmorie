@@ -3,17 +3,17 @@
 % the formals.
 \name{.morie_k05_info}
 \alias{.morie_k05_info}
-\title{General two-category Fisher information I = (P\\\')^2/(PQ);}
+\title{General two-category Fisher information I = (P\\')^2/(PQ);}
 \usage{
 .morie_k05_info(theta, a, b, c, u, D = 1)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{c}{See Usage.}
-\item{u}{See Usage.}
-\item{D}{Defaults to \code{1}.}
+\item{theta}{Passed to \code{.morie_k05_prob}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Passed to \code{.morie_k05_prob}.}
+\item{c}{Numeric; combined arithmetically in the body.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{D}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
 substituting the 4PL P and using P-c = (u-c)P*, u-P = (u-c)Q* gives this form, which collapses to D^2 a^2 P Q when c = 0, u = 1.

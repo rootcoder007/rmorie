@@ -15,7 +15,7 @@ bigram_topic_predictive(N_ijk, N_jk, beta, m, prior = 1)
 \item{prior}{Defaults to \code{1}.}
 }
 \description{
-Part of the bigtm_native implementation; see the file header for the source it follows.
+A step of the bigtm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{predictive}, \code{prior}, \code{smoothed_by}.

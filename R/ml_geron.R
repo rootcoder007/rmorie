@@ -26,11 +26,12 @@
 
 #' .morie_gr_xor32
 #'
-#' Part of the ml_geron implementation; see the file header for the
+#' A step of the ml_geron implementation. Called by \code{.morie_gr_crc32}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_gr_xor32 <- function(a, b) {
@@ -53,7 +54,8 @@
 
 #' .morie_gr_crc32
 #'
-#' Part of the ml_geron implementation; see the file header for the
+#' A step of the ml_geron implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param value See Usage.
@@ -316,11 +318,12 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 
 #' .morie_gr_perms
 #'
-#' Part of the ml_geron implementation; see the file header for the
+#' A step of the ml_geron implementation. Called by \code{morie_trkassign}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq_ See Usage.
-#' @param k See Usage.
+#' @param seq_ A vector; its length is taken and its elements indexed.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_perms <- function(seq_, k) {
@@ -336,11 +339,12 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 
 #' .morie_gr_combos
 #'
-#' Part of the ml_geron implementation; see the file header for the
+#' A step of the ml_geron implementation. Called by \code{morie_trkassign}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq_ See Usage.
-#' @param k See Usage.
+#' @param seq_ A vector; its length is taken and its elements indexed.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_combos <- function(seq_, k) {

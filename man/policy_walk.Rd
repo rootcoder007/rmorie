@@ -8,23 +8,23 @@
 policy_walk(T, observations, gamma, n_iter = 1000, delta = 0.25, alpha = 1, prior = "uniform", scale = 1, r_max = 1, J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{observations}{See Usage.}
-\item{gamma}{See Usage.}
-\item{n_iter}{Defaults to \code{1000}.}
-\item{delta}{Defaults to \code{0.25}.}
-\item{alpha}{Defaults to \code{1}.}
+\item{T}{Passed to \code{.mdp}.}
+\item{observations}{Passed to \code{.birl_log_likelihood}.}
+\item{gamma}{Passed to \code{.mdp}.}
+\item{n_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.}
+\item{delta}{Numeric; combined arithmetically in the body. Defaults to \code{0.25}.}
+\item{alpha}{Passed to \code{.birl_log_likelihood}. Defaults to \code{1}.}
 \item{prior}{Defaults to \code{"uniform"}.}
 \item{scale}{Defaults to \code{1}.}
-\item{r_max}{Defaults to \code{1}.}
+\item{r_max}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{J}{Defaults to \code{0.1}.}
 \item{H}{Defaults to \code{0}.}
-\item{burn}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
+\item{burn}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
+\item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{R0}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the birl_native implementation; see the file header for the source it follows.
+A step of the birl_native implementation. Called by \code{birl}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{final_policy}.

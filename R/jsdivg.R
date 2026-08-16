@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' SPDX-License-Identifier: AGPL-3.0-or-later
 #'
-#' Part of the jsdivg implementation; see the file header for the source
+#' A step of the jsdivg implementation. Called by \code{Jsdiv}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
-#' @param base See Usage.
+#' @param p A vector; its length is taken and its elements indexed.
+#' @param q A vector; indexed elementwise.
+#' @param base Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .t4_jsd <- function(p, q, base) {

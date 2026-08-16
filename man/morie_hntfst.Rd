@@ -24,7 +24,7 @@ morie_hntfst(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_f
 \item{correction}{Defaults to \code{TRUE}.}
 }
 \description{
-Part of the hntfst_native implementation; see the file header for the source it follows.
+A step of the hntfst_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{honest_forest}.

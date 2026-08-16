@@ -14,10 +14,11 @@
 
 #' .rgs_grid_weights
 #'
-#' Part of the rgs_native implementation; see the file header for the
+#' A step of the rgs_native implementation. Called by \code{morie_rgs_functional_regression}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_t See Usage.
+#' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .rgs_grid_weights <- function(n_t) {
@@ -31,12 +32,13 @@
 
 #' morie_rgs_functional_regression
 #'
-#' Part of the rgs_native implementation; see the file header for the
+#' A step of the rgs_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y See Usage.
-#' @param basis Defaults to \code{NULL}.
+#' @param basis Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals}, \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve}, \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
 #' @export
 morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
@@ -139,7 +141,8 @@ morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
 
 #' .rgs_cheatsheet
 #'
-#' Part of the rgs_native implementation; see the file header for the
+#' A step of the rgs_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

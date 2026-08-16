@@ -9,10 +9,10 @@ BayesNorm(x, means, covs, priors = NULL, full = FALSE)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{means}{See Usage.}
-\item{covs}{See Usage.}
+\item{means}{A vector; its length is taken and its elements indexed.}
+\item{covs}{A vector; its length is taken and its elements indexed.}
 \item{priors}{Defaults to \code{NULL}.}
-\item{full}{Defaults to \code{FALSE}.}
+\item{full}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
 normal PDF is an exponential and ln is monotonic: the ranking is unchanged while the arithmetic stops underflowing.  It then drops the (n/2) ln(2 pi) term, which "does not depend upon i", giving eq (10.73) -- safe for CLASSIFYING, wrong for reading the value as a log density, so both forms are returned.  The surfaces are hyperquadrics and reduce to hyperplanes exactly when the covariances are equal.

@@ -3,7 +3,7 @@
 % the formals.
 \name{.morie_fairness_ordered_unique}
 \alias{.morie_fairness_ordered_unique}
-\title{Python\\\'s "first-seen" order; unique() in R is already first-seen}
+\title{Python\\'s "first-seen" order; unique() in R is already first-seen}
 \usage{
 .morie_fairness_ordered_unique(arr)
 }
@@ -11,7 +11,7 @@
 \item{arr}{See Usage.}
 }
 \description{
-Part of the frns_metrics implementation; see the file header for the source it follows.
+A step of the frns_metrics implementation. Called by \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels}, \code{morie_fairness_gini} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{unique}.

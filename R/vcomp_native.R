@@ -11,9 +11,9 @@
 #'
 #' P(F <= x) = I_{d1 x / (d1 x + d2)}(d1/2, d2/2)
 #'
-#' @param x See Usage.
-#' @param d1 See Usage.
-#' @param d2 See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param d1 Numeric; combined arithmetically in the body.
+#' @param d2 Numeric; combined arithmetically in the body.
 #' @return The value of \code{pbeta}.
 #' @export
 .vcomp_f_cdf <- function(x, d1, d2) {
@@ -25,13 +25,14 @@
 
 #' Monotone bisection on the CDF (same convention as the R arm)
 #'
-#' Part of the vcomp_native implementation; see the file header for the
+#' A step of the vcomp_native implementation. Called by \code{morie_vcomp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p See Usage.
-#' @param d1 See Usage.
-#' @param d2 See Usage.
-#' @param iters Defaults to \code{300}.
+#' @param d1 Passed to \code{.vcomp_f_cdf}.
+#' @param d2 Passed to \code{.vcomp_f_cdf}.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @return A numeric value.
 #' @export
 .vcomp_f_ppf <- function(p, d1, d2, iters = 300) {
@@ -56,13 +57,14 @@
 
 #' morie_vcomp
 #'
-#' Part of the vcomp_native implementation; see the file header for the
+#' A step of the vcomp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param group See Usage.
-#' @param method Defaults to \code{"reml"}.
-#' @param conf_level Defaults to \code{0.95}.
+#' @param y Passed to \code{morie_ranova}.
+#' @param group Passed to \code{morie_ranova}.
+#' @param method One of \code{"anova"}, \code{"reml"}. Defaults to \code{"reml"}.
+#' @param conf_level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{icc}, \code{icc_lower}, \code{icc_upper}, \code{method_used}, \code{balanced}, \code{a}, \code{N}, \code{fit}, \code{method}.
 #' @export
 morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
@@ -114,7 +116,8 @@ variance_components <- morie_vcomp
 
 #' .vcomp_cheatsheet
 #'
-#' Part of the vcomp_native implementation; see the file header for the
+#' A step of the vcomp_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

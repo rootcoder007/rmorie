@@ -8,13 +8,13 @@
 morie_se3T_check_equivariance(positions, type0, type1, layer = NULL, axis = c(0.3, -0.7, 0.4), angle = 1.1, translation = c(2, -1, 0.5), tol = 1e-09)
 }
 \arguments{
-\item{positions}{See Usage.}
+\item{positions}{Passed to \code{.se3T_mat}.}
 \item{type0}{See Usage.}
-\item{type1}{See Usage.}
+\item{type1}{Passed to \code{.se3T_mat}.}
 \item{layer}{Defaults to \code{NULL}.}
-\item{axis}{Defaults to \code{c(0.3, -0.7, 0.4)}.}
-\item{angle}{Defaults to \code{1.1}.}
-\item{translation}{Defaults to \code{c(2, -1, 0.5)}.}
+\item{axis}{Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{c(0.3, -0.7, 0.4)}.}
+\item{angle}{Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{1.1}.}
+\item{translation}{Passed to \code{.se3T_vec}. Defaults to \code{c(2, -1, 0.5)}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{

@@ -12,7 +12,7 @@ targeted_loss(Q_star, Y)
 \item{Y}{See Usage.}
 }
 \description{
-Part of the tlctmle_native implementation; see the file header for the source it follows.
+A step of the tlctmle_native implementation. Called by \code{ctmle}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

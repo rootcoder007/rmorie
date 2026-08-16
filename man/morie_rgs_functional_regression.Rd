@@ -8,12 +8,12 @@
 morie_rgs_functional_regression(X, Y, basis = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{Y}{See Usage.}
-\item{basis}{Defaults to \code{NULL}.}
+\item{basis}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the rgs_native implementation; see the file header for the source it follows.
+A step of the rgs_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals}, \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve}, \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.

@@ -15,10 +15,11 @@
 
 #' .nashq_mat
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}, \code{stage_game_type}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; passed to \code{nrow}.
 #' @param name See Usage.
 #' @return The value of \code{M}, as built in the body.
 #' @export
@@ -36,10 +37,11 @@
 
 #' .nashq_solve
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{.nashq_indifference}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @param b See Usage.
 #' @return The value of \code{[}.
 #' @export
@@ -69,11 +71,12 @@
 
 #' Unknowns x_0..x_{k-1}, v
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param payoff See Usage.
-#' @param k See Usage.
+#' @param payoff A matrix; indexed by row and column.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{[}.
 #' @export
 .nashq_indifference <- function(payoff, k) {
@@ -93,12 +96,13 @@
 
 #' .nashq_payoff
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{.nashq_is_equilibrium}, \code{.nashq_is_saddle}, \code{.nashq_select} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param M A matrix; indexed by row and column.
+#' @param p A vector; its length is taken and its elements indexed.
+#' @param q A vector; its length is taken and its elements indexed.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 .nashq_payoff <- function(M, p, q) {
@@ -114,14 +118,15 @@
 
 #' .nashq_is_equilibrium
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
-#' @param p See Usage.
-#' @param q See Usage.
-#' @param tol See Usage.
+#' @param A A matrix; indexed by row and column.
+#' @param B A matrix; indexed by row and column.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param q Numeric; combined arithmetically in the body.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @return A logical value.
 #' @export
 .nashq_is_equilibrium <- function(A, B, p, q, tol) {
@@ -140,12 +145,13 @@
 
 #' nash_equilibria_bimatrix
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{.nashq_select}, \code{stage_game_type}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
-#' @param tol Defaults to \code{1e-09}.
+#' @param A A matrix; indexed by row and column.
+#' @param B A matrix; indexed by row and column.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
@@ -191,14 +197,15 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 
 #' Definition 13: each agent gains when the OTHER deviates
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{.nashq_select}, \code{stage_game_type}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
-#' @param p See Usage.
-#' @param q See Usage.
-#' @param tol See Usage.
+#' @param A A matrix; passed to \code{nrow}.
+#' @param B Passed to \code{.nashq_payoff}.
+#' @param p Passed to \code{.nashq_payoff}.
+#' @param q Passed to \code{.nashq_payoff}.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @return A logical value.
 #' @export
 .nashq_is_saddle <- function(A, B, p, q, tol) {
@@ -222,12 +229,13 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 
 #' stage_game_type
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{morie_nashq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
-#' @param tol Defaults to \code{1e-09}.
+#' @param A Numeric; passed to \code{max}.
+#' @param B Numeric; passed to \code{max}.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{equilibria}, \code{n_equilibria}, \code{has_global_optimal}, \code{has_saddle}, \code{global_optimal}, \code{saddle}, \code{method}.
 #' @export
 stage_game_type <- function(A, B, tol = 1e-9) {
@@ -262,14 +270,15 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 
 #' .nashq_select
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{morie_nashq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
-#' @param selection See Usage.
+#' @param A Numeric; passed to \code{max}.
+#' @param B Numeric; passed to \code{max}.
+#' @param selection One of \code{"best_for_agent"}, \code{"first"}, \code{"global_optimal"}.
 #' @param agent See Usage.
-#' @param tol See Usage.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @return The value of \code{[[}.
 #' @export
 .nashq_select <- function(A, B, selection, agent, tol) {
@@ -310,14 +319,15 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 
 #' .nashq_pick
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. Called by \code{morie_nashq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
-#' @param A See Usage.
+#' @param M A matrix; passed to \code{nrow}.
+#' @param A A vector; its length is taken.
 #' @param who See Usage.
 #' @param epsilon See Usage.
-#' @param rng_e See Usage.
+#' @param rng_e Passed to \code{.ghc_unif}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .nashq_pick <- function(M, A, who, epsilon, rng_e) {
@@ -340,24 +350,25 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 
 #' morie_nashq
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param states See Usage.
-#' @param actions See Usage.
+#' @param actions A vector; its length is taken and its elements indexed.
 #' @param step See Usage.
 #' @param rewards See Usage.
-#' @param gamma Defaults to \code{0.9}.
-#' @param alpha Defaults to \code{0.5}.
-#' @param epsilon Defaults to \code{0.1}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param epsilon Passed to \code{.nashq_pick}. Defaults to \code{0.1}.
 #' @param episodes Defaults to \code{500}.
 #' @param horizon Defaults to \code{50}.
 #' @param start Defaults to \code{NULL}.
-#' @param selection Defaults to \code{"global_optimal"}.
+#' @param selection Passed to \code{.nashq_select}. Defaults to \code{"global_optimal"}.
 #' @param terminal Defaults to \code{NULL}.
 #' @param seed Defaults to \code{0}.
 #' @param agent Defaults to \code{0L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{.nashq_select}. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{nash_values}, \code{stage_game_types}, \code{returns}, \code{mean_return_last}, \code{selection}, \code{method}.
 #' @export
 morie_nashq <- function(states, actions, step, rewards,
@@ -491,7 +502,8 @@ nashqlearning <- morie_nashq
 
 #' .nashq_cheatsheet
 #'
-#' Part of the nashq_native implementation; see the file header for the
+#' A step of the nashq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

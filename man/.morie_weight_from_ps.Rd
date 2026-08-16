@@ -8,12 +8,12 @@
 .morie_weight_from_ps(ps, t01, estimand)
 }
 \arguments{
-\item{ps}{See Usage.}
+\item{ps}{Numeric; combined arithmetically in the body.}
 \item{t01}{See Usage.}
 \item{estimand}{See Usage.}
 }
 \description{
-Part of the weight_native implementation; see the file header for the source it follows.
+A step of the weight_native implementation. Called by \code{morie_weight_cbps}, \code{morie_weight_ps}, \code{morie_weight_super}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{switch}.

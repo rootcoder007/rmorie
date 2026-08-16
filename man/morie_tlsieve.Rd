@@ -8,13 +8,13 @@
 morie_tlsieve(F_vac_matched, F_pla_matched, F_vac_mismatched, F_pla_mismatched)
 }
 \arguments{
-\item{F_vac_matched}{See Usage.}
-\item{F_pla_matched}{See Usage.}
-\item{F_vac_mismatched}{See Usage.}
-\item{F_pla_mismatched}{See Usage.}
+\item{F_vac_matched}{Passed to \code{.tlsieve_vaccine_efficacy}.}
+\item{F_pla_matched}{Passed to \code{.tlsieve_vaccine_efficacy}.}
+\item{F_vac_mismatched}{Passed to \code{.tlsieve_vaccine_efficacy}.}
+\item{F_pla_mismatched}{Passed to \code{.tlsieve_vaccine_efficacy}.}
 }
 \description{
-Part of the tlsieve_native implementation; see the file header for the source it follows.
+A step of the tlsieve_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{sieve_effect}, \code{ve_matched}, \code{ve_mismatched}, \code{method}, \code{note}.

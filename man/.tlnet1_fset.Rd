@@ -8,11 +8,11 @@
 .tlnet1_fset(friends, i)
 }
 \arguments{
-\item{friends}{See Usage.}
+\item{friends}{A vector; indexed elementwise.}
 \item{i}{See Usage.}
 }
 \description{
-Part of the tlnet1_native implementation; see the file header for the source it follows.
+A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges}, \code{check_network_assumption}, \code{friend_summary} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{setdiff}.

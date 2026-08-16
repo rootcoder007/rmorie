@@ -8,11 +8,11 @@
 t3ols(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{t}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the t3util implementation; see the file header for the source it follows.
+A step of the t3util implementation. Called by \code{giss}, \code{qsarh}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

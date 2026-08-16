@@ -8,13 +8,13 @@
 .genemt_wls(X, y, w, ridge)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
-\item{ridge}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{w}{Numeric; passed to \code{sqrt}.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the genemt_native implementation; see the file header for the source it follows.
+A step of the genemt_native implementation. Called by \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}.

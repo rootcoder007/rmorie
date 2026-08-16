@@ -13,11 +13,12 @@
 
 #' wl_colours
 #'
-#' Part of the sortP_native implementation; see the file header for the
+#' A step of the sortP_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
-#' @param n See Usage.
+#' @param adj A vector; indexed elementwise.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param rounds Defaults to \code{2}.
 #' @param initial Defaults to \code{NULL}.
 #' @return The value of \code{c}, as built in the body.
@@ -45,7 +46,8 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
 
 #' sort_pooling
 #'
-#' Part of the sortP_native implementation; see the file header for the
+#' A step of the sortP_native implementation. Called by \code{order_is_graph_determined}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param features See Usage.
@@ -77,7 +79,8 @@ sort_pooling <- function(features, k_keep, sort_channel = -1) {
 
 #' choose_k
 #'
-#' Part of the sortP_native implementation; see the file header for the
+#' A step of the sortP_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param graph_sizes See Usage.
@@ -100,12 +103,13 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
 
 #' order_is_graph_determined
 #'
-#' Part of the sortP_native implementation; see the file header for the
+#' A step of the sortP_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param features See Usage.
 #' @param adj See Usage.
-#' @param perm See Usage.
+#' @param perm A vector; indexed elementwise.
 #' @param k_keep See Usage.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{max_deviation}, \code{invariant}, \code{note}.
@@ -127,7 +131,8 @@ order_is_graph_determined <- function(features, adj, perm, k_keep,
 
 #' .sortP_cheatsheet
 #'
-#' Part of the sortP_native implementation; see the file header for the
+#' A step of the sortP_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

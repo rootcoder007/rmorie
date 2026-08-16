@@ -45,8 +45,8 @@
 #'
 #' inside the signed 32-bit range, so split into 16-bit halves first.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .morie_xor32 <- function(a, b) {
@@ -65,8 +65,8 @@
 #' full product can reach 2^64, past the 2^53 where doubles stop being
 #' exact integers, so it is assembled from 16-bit partial products.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
 .morie_mulhilo32 <- function(a, b) {
@@ -90,12 +90,13 @@
 #' Counter: an (n x 4) numeric matrix of 32-bit words; key: length-2
 #' numeric
 #'
-#' Part of the rng_native implementation; see the file header for the
+#' A step of the rng_native implementation. Called by \code{.morie_random_uniform}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param counter See Usage.
-#' @param key See Usage.
-#' @param rounds Defaults to \code{.MORIE_PHILOX_ROUNDS}.
+#' @param key A vector; indexed elementwise.
+#' @param rounds A count; the body uses it as \code{seq_len(...)}. Defaults to \code{.MORIE_PHILOX_ROUNDS}.
 #' @return The value of \code{ctr}, as built in the body.
 #' @export
 .morie_philox4x32 <- function(counter, key, rounds = .MORIE_PHILOX_ROUNDS) {
@@ -125,9 +126,9 @@
 #' normal quantile at 0 or 1 is infinite, and (w + 0.5)/2^32 reaches
 #' neither endpoint.
 #'
-#' @param n See Usage.
-#' @param seed Defaults to \code{0}.
-#' @param stream Defaults to \code{0}.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
+#' @param stream Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
 .morie_random_uniform <- function(n, seed = 0, stream = 0) {
@@ -192,11 +193,12 @@
 
 #' .morie_as241_poly
 #'
-#' Part of the rng_native implementation; see the file header for the
+#' A step of the rng_native implementation. Called by \code{.morie_normal_quantile}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param coef See Usage.
-#' @param x See Usage.
+#' @param coef A vector; its length is taken and its elements indexed.
+#' @param x A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_as241_poly <- function(coef, x) {
@@ -208,10 +210,11 @@
 #' Wichura\'s AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <=
 #' 5
 #'
-#' Part of the rng_native implementation; see the file header for the
+#' A step of the rng_native implementation. Called by \code{.morie_random_normal}, \code{morie_anamorphosis}, \code{morie_normal_scores} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_normal_quantile <- function(p) {
@@ -246,12 +249,13 @@
 
 #' .morie_random_normal
 #'
-#' Part of the rng_native implementation; see the file header for the
+#' A step of the rng_native implementation. Called by \code{.morie_random_multivariate_normal}, \code{.schab_simulate_unconditional}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param seed Defaults to \code{0}.
-#' @param stream Defaults to \code{0}.
+#' @param n Passed to \code{.morie_random_uniform}.
+#' @param seed Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
+#' @param stream Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
 #' @return The value of \code{.morie_normal_quantile}.
 #' @export
 .morie_random_normal <- function(n, seed = 0, stream = 0) {
@@ -260,14 +264,15 @@
 
 #' .morie_random_multivariate_normal
 #'
-#' Part of the rng_native implementation; see the file header for the
+#' A step of the rng_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mean See Usage.
-#' @param cov See Usage.
-#' @param seed Defaults to \code{0}.
-#' @param stream Defaults to \code{0}.
-#' @param jitter Defaults to \code{1e-10}.
+#' @param mean A vector; its length is taken.
+#' @param cov A matrix; passed to \code{dim}.
+#' @param seed Passed to \code{.morie_random_normal}. Defaults to \code{0}.
+#' @param stream Passed to \code{.morie_random_normal}. Defaults to \code{0}.
+#' @param jitter Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return A numeric value.
 #' @export
 .morie_random_multivariate_normal <- function(mean, cov, seed = 0, stream = 0,

@@ -8,9 +8,9 @@
 .groebn_spoly(f, g, order = "lex")
 }
 \arguments{
-\item{f}{See Usage.}
-\item{g}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
+\item{f}{A vector; its length is taken and its elements indexed.}
+\item{g}{A vector; its length is taken and its elements indexed.}
+\item{order}{Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.}
 }
 \description{
 S-polynomial and division ---------------------------------------------------------------------------

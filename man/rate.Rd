@@ -10,10 +10,10 @@ rate(scores, priority, weight = "autoc")
 \arguments{
 \item{scores}{See Usage.}
 \item{priority}{See Usage.}
-\item{weight}{Defaults to \code{"autoc"}.}
+\item{weight}{Compared against \code{"qini"}. Defaults to \code{"autoc"}.}
 }
 \description{
-Part of the slvgrf_native implementation; see the file header for the source it follows.
+A step of the slvgrf_native implementation. Called by \code{autoc}, \code{qini_coefficient}, \code{rate_test}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{weight}, \code{curve}, \code{n}.

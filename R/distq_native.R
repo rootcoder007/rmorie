@@ -48,7 +48,8 @@
 # Coerce next_probs to numeric, validate length / sign / sum-to-one.
 #' Coerce next_probs to numeric, validate length / sign / sum-to-one
 #'
-#' Part of the distq_native implementation; see the file header for the
+#' A step of the distq_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param next_probs See Usage.
@@ -93,9 +94,9 @@ atoms <- function(v_min, v_max, n_atoms) {
 #'
 #' routines so we don\'t rebuild the spacing each time.)
 #'
-#' @param v_min See Usage.
-#' @param v_max See Usage.
-#' @param n_atoms See Usage.
+#' @param v_min Passed to \code{.distq_atoms}.
+#' @param v_max Passed to \code{.distq_atoms}.
+#' @param n_atoms Passed to \code{.distq_atoms}.
 #' @return The value of \code{.distq_atoms}.
 #' @export
 .distq_atoms_full <- function(v_min, v_max, n_atoms) {

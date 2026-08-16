@@ -8,8 +8,8 @@
 .secaead_rotl(x, n)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{n}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
 below 2^48 for these n, well within double precision

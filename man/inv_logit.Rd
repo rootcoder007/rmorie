@@ -8,10 +8,10 @@
 inv_logit(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the synthetic implementation; see the file header for the source it follows.
+A step of the synthetic implementation. Called by \code{morie_generate_synthetic_data}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

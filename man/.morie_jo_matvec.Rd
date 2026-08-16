@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{w}{See Usage.}
-\item{v}{See Usage.}
+\item{v}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_glu}, \code{.morie_jo_resblock}, \code{morie_itrans} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

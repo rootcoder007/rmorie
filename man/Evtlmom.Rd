@@ -20,7 +20,7 @@ List with \code{lambda}, \code{estimate}, \code{tau},
 \code{n}, \code{method}.
 }
 \description{
-Formula: lambda_r^(s,t) = (1/r) sum_k (-1)^k C(r-1,k) E\link{X_(r+s-k):(r+s+t)}
+Formula: lambda_r^(s,t) = (1/r) sum_k (-1)^k C(r-1,k) E[X_(r+s-k):(r+s+t)]
 }
 \details{
 with the order statistic expectation estimated by the unbiased

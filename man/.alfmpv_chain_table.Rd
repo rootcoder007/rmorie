@@ -8,11 +8,11 @@
 .alfmpv_chain_table(chain, idx)
 }
 \arguments{
-\item{chain}{See Usage.}
+\item{chain}{A list; the body reads \code{$species} from it.}
 \item{idx}{See Usage.}
 }
 \description{
-Part of the alfmpv_native implementation; see the file header for the source it follows.
+A step of the alfmpv_native implementation. Called by \code{morie_alfmpv_msa_pairing}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps}, \code{coverage}, \code{n}.

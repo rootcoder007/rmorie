@@ -8,13 +8,13 @@
 morie_sctraj_cluster_distances(X, labels, cov = "full", weights = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.sctraj_matrix}.}
 \item{labels}{See Usage.}
-\item{cov}{Defaults to \code{"full"}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{cov}{One of \code{"diagonal"}, \code{"euclidean"}. Defaults to \code{"full"}.}
+\item{weights}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the sctraj_native implementation; see the file header for the source it follows.
+A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{distances}, \code{clusters}, \code{centers}, \code{covariances}.

@@ -13,7 +13,7 @@ spectral_radius(spec, theta, tol = 1e-06)
 \item{tol}{Defaults to \code{1e-06}.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{.fit_spec}, \code{is_forecastable}, \code{morie_bats}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

@@ -8,14 +8,14 @@
 ner_decode(emissions, types, decoder = "viterbi", transition_scores = NULL, gold = NULL)
 }
 \arguments{
-\item{emissions}{See Usage.}
+\item{emissions}{A matrix; passed to \code{as.matrix}.}
 \item{types}{See Usage.}
-\item{decoder}{Defaults to \code{"viterbi"}.}
+\item{decoder}{One of \code{"greedy"}, \code{"viterbi"}. Defaults to \code{"viterbi"}.}
 \item{transition_scores}{Defaults to \code{NULL}.}
 \item{gold}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the benRea_native implementation; see the file header for the source it follows.
+A step of the benRea_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

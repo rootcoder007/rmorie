@@ -8,7 +8,7 @@
 jsonlite_toJSON_or_stub(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.s03json_toJSON}.}
 }
 \description{
 only when a file path is actually given, and fall back to a minimal deparse so the optional side effect never hard-fails.

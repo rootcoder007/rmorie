@@ -132,9 +132,9 @@ morie_spatial_variogram_fit <- function(coords, values,
 #' analogue. Milliseconds at any n; the full Gaussian-likelihood MLE
 #' stays available via morie_spatial_variogram_fit().
 #'
-#' @param coords See Usage.
-#' @param values See Usage.
-#' @param model Defaults to \code{"exponential"}.
+#' @param coords Passed to \code{morie_spatial_variogram}.
+#' @param values Passed to \code{morie_spatial_variogram}.
+#' @param model Passed to \code{.morie_vgm_gamma}. Defaults to \code{"exponential"}.
 #' @return A list with \code{model}, \code{nugget}, \code{psill}, \code{range}, \code{method}.
 #' @export
 .morie_vgm_wls_fit <- function(coords, values, model = "exponential") {

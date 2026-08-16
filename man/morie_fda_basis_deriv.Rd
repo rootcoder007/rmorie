@@ -10,7 +10,7 @@ morie_fda_basis_deriv(t, n_basis, p = 1L, kind = "fourier", period = NULL)
 \arguments{
 \item{t}{See Usage.}
 \item{n_basis}{See Usage.}
-\item{p}{Defaults to \code{1L}.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.}
 \item{kind}{Defaults to \code{"fourier"}.}
 \item{period}{Defaults to \code{NULL}.}
 }

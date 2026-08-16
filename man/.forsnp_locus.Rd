@@ -10,11 +10,11 @@
 \arguments{
 \item{a1}{See Usage.}
 \item{a2}{See Usage.}
-\item{fr}{See Usage.}
-\item{theta}{See Usage.}
+\item{fr}{A vector; indexed elementwise.}
+\item{theta}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the forsnp_native implementation; see the file header for the source it follows.
+A step of the forsnp_native implementation. Called by \code{morie_forsnp}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

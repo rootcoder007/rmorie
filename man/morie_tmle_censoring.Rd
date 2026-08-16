@@ -8,21 +8,21 @@
 morie_tmle_censoring(time, event, censor, treatment, covariates, kind = "right", grid = NULL, a = 1, r = NULL, g = NULL, gc = NULL, trim = 0.001)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
+\item{time}{Passed to \code{morie_ipcw_interval}.}
+\item{event}{Passed to \code{morie_ipcw_interval}.}
 \item{censor}{See Usage.}
-\item{treatment}{See Usage.}
-\item{covariates}{See Usage.}
-\item{kind}{Defaults to \code{"right"}.}
-\item{grid}{Defaults to \code{NULL}.}
-\item{a}{Defaults to \code{1}.}
-\item{r}{Defaults to \code{NULL}.}
-\item{g}{Defaults to \code{NULL}.}
-\item{gc}{Defaults to \code{NULL}.}
-\item{trim}{Defaults to \code{0.001}.}
+\item{treatment}{Passed to \code{morie_ipcw_interval}.}
+\item{covariates}{Passed to \code{morie_ipcw_interval}.}
+\item{kind}{Compared against \code{"interval"}. Defaults to \code{"right"}.}
+\item{grid}{Passed to \code{morie_censoring_survival}.}
+\item{a}{Passed to \code{morie_ipcw_interval}. Defaults to \code{1}.}
+\item{r}{Passed to \code{morie_ipcw_interval}.}
+\item{g}{Passed to \code{morie_ipcw_interval}.}
+\item{gc}{Passed to \code{morie_ipcw_interval}.}
+\item{trim}{Numeric; passed to \code{max}. Defaults to \code{0.001}.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.tmlcen_RichResult}.

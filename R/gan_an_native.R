@@ -58,7 +58,8 @@
 # Private helpers for the gan_an module
 #' Private helpers for the gan_an module
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. Called by \code{.gan_an_discrimination_loss_impl}, \code{.gan_an_residual_loss_impl}, \code{morie_gan_an} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -70,11 +71,12 @@
 
 #' .gan_an_residual_loss_impl
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. Called by \code{.gan_an_anomaly_score_impl}, \code{residual_loss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param g_z See Usage.
+#' @param x Passed to \code{.gan_an_as_num}.
+#' @param g_z Passed to \code{.gan_an_as_num}.
 #' @return A numeric value.
 #' @export
 .gan_an_residual_loss_impl <- function(x, g_z) {
@@ -89,11 +91,12 @@
 
 #' .gan_an_discrimination_loss_impl
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. Called by \code{.gan_an_anomaly_score_impl}, \code{discrimination_loss}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f_x See Usage.
-#' @param f_gz See Usage.
+#' @param f_x Passed to \code{.gan_an_as_num}.
+#' @param f_gz Passed to \code{.gan_an_as_num}.
 #' @return A numeric value.
 #' @export
 .gan_an_discrimination_loss_impl <- function(f_x, f_gz) {
@@ -111,13 +114,14 @@
 
 #' .gan_an_anomaly_score_impl
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. Called by \code{anomaly_score}, \code{morie_gan_an}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param g_z See Usage.
-#' @param f_x See Usage.
-#' @param f_gz See Usage.
+#' @param x Passed to \code{.gan_an_residual_loss_impl}.
+#' @param g_z Passed to \code{.gan_an_residual_loss_impl}.
+#' @param f_x Passed to \code{.gan_an_discrimination_loss_impl}.
+#' @param f_gz Passed to \code{.gan_an_discrimination_loss_impl}.
 #' @param lam Defaults to \code{0.1}.
 #' @return A list with \code{score}, \code{residual}, \code{discrimination}, \code{lambda}.
 #' @export
@@ -138,18 +142,19 @@
 
 #' morie_gan_an
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.gan_an_anomaly_score_impl}.
 #' @param generator See Usage.
 #' @param feature_fn See Usage.
 #' @param z_dim See Usage.
 #' @param steps Defaults to \code{200}.
 #' @param lr Defaults to \code{0.05}.
-#' @param lam Defaults to \code{0.1}.
+#' @param lam Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.
 #' @param seed Defaults to \code{0}.
-#' @param h Defaults to \code{1e-04}.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @param step_decay Defaults to \code{0.05}.
 #' @return A list with \code{estimate}, \code{score}, \code{z}, \code{reconstruction}, \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step}, \code{method}, \code{note}.
 #' @export
@@ -217,11 +222,12 @@ morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
 
 #' residual_loss
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param g_z See Usage.
+#' @param x Passed to \code{.gan_an_residual_loss_impl}.
+#' @param g_z Passed to \code{.gan_an_residual_loss_impl}.
 #' @return The value of \code{.gan_an_residual_loss_impl}.
 #' @export
 residual_loss <- function(x, g_z) {
@@ -230,11 +236,12 @@ residual_loss <- function(x, g_z) {
 
 #' discrimination_loss
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f_x See Usage.
-#' @param f_gz See Usage.
+#' @param f_x Passed to \code{.gan_an_discrimination_loss_impl}.
+#' @param f_gz Passed to \code{.gan_an_discrimination_loss_impl}.
 #' @return The value of \code{.gan_an_discrimination_loss_impl}.
 #' @export
 discrimination_loss <- function(f_x, f_gz) {
@@ -243,14 +250,15 @@ discrimination_loss <- function(f_x, f_gz) {
 
 #' anomaly_score
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param g_z See Usage.
-#' @param f_x See Usage.
-#' @param f_gz See Usage.
-#' @param lam Defaults to \code{0.1}.
+#' @param x Passed to \code{.gan_an_anomaly_score_impl}.
+#' @param g_z Passed to \code{.gan_an_anomaly_score_impl}.
+#' @param f_x Passed to \code{.gan_an_anomaly_score_impl}.
+#' @param f_gz Passed to \code{.gan_an_anomaly_score_impl}.
+#' @param lam Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.
 #' @return The value of \code{.gan_an_anomaly_score_impl}.
 #' @export
 anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
@@ -259,12 +267,13 @@ anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
 
 #' residual_map
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param g_z See Usage.
-#' @param shape Defaults to \code{NULL}.
+#' @param x Passed to \code{.gan_an_as_num}.
+#' @param g_z Passed to \code{.gan_an_as_num}.
+#' @param shape Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{map}, \code{max}, \code{note}.
 #' @export
 residual_map <- function(x, g_z, shape = NULL) {
@@ -292,11 +301,12 @@ residual_map <- function(x, g_z, shape = NULL) {
 
 #' score_separation
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param normal_scores See Usage.
-#' @param anomalous_scores See Usage.
+#' @param normal_scores Passed to \code{.gan_an_as_num}.
+#' @param anomalous_scores Passed to \code{.gan_an_as_num}.
 #' @return A list with \code{auc}, \code{mean_normal}, \code{mean_anomalous}, \code{separated}, \code{note}.
 #' @export
 score_separation <- function(normal_scores, anomalous_scores) {
@@ -323,7 +333,8 @@ score_separation <- function(normal_scores, anomalous_scores) {
 
 #' .gan_an_cheatsheet
 #'
-#' Part of the gan_an_native implementation; see the file header for the
+#' A step of the gan_an_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

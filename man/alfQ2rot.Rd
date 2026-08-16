@@ -8,9 +8,9 @@
 alfQ2rot(b, c, d)
 }
 \arguments{
-\item{b}{See Usage.}
-\item{c}{See Usage.}
-\item{d}{See Usage.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{c}{Numeric; combined arithmetically in the body.}
+\item{d}{Numeric; combined arithmetically in the body.}
 }
 \description{
 lines 2-3.  Fixing the leading component to 1 before normalisation both guarantees a unit quaternion and makes zero input the identity rotation.

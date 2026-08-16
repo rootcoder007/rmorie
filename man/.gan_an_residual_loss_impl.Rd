@@ -8,11 +8,11 @@
 .gan_an_residual_loss_impl(x, g_z)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{g_z}{See Usage.}
+\item{x}{Passed to \code{.gan_an_as_num}.}
+\item{g_z}{Passed to \code{.gan_an_as_num}.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. Called by \code{.gan_an_anomaly_score_impl}, \code{residual_loss}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

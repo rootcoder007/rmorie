@@ -8,13 +8,13 @@
 .schab_st_intensity(points, times, region, time_interval)
 }
 \arguments{
-\item{points}{See Usage.}
+\item{points}{A matrix; passed to \code{as.matrix}.}
 \item{times}{See Usage.}
-\item{region}{See Usage.}
-\item{time_interval}{See Usage.}
+\item{region}{Passed to \code{.schab_st_region_box}.}
+\item{time_interval}{A vector; indexed elementwise.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{spstp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{intensity}, \code{n}, \code{area}, \code{duration}, \code{volume}.

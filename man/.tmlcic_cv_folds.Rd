@@ -10,11 +10,11 @@
 \arguments{
 \item{groups}{See Usage.}
 \item{n_folds}{See Usage.}
-\item{design}{See Usage.}
-\item{n}{See Usage.}
+\item{design}{Compared against \code{"unmatched"}.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{Filter}.

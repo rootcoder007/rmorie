@@ -16,7 +16,8 @@
 
 #' .dueldqn_check_mode
 #'
-#' Part of the dueldqn_native implementation; see the file header for
+#' A step of the dueldqn_native implementation. Called by \code{dueling_aggregate}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param mode See Usage.
@@ -31,11 +32,12 @@
 
 #' .dueld_anchor
 #'
-#' Part of the dueldqn_native implementation; see the file header for
+#' A step of the dueldqn_native implementation. Called by \code{dueling_aggregate}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param mode See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param mode One of \code{"max"}, \code{"mean"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .dueld_anchor <- function(a, mode) {
@@ -118,7 +120,7 @@ duelingdqn <- dueling_q
 #' value.
 #' ---------------------------------------------------------------------------
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .dueldqn_argmax <- function(x) {

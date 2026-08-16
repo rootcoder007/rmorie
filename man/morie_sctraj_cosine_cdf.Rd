@@ -8,7 +8,7 @@
 morie_sctraj_cosine_cdf(u)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
 }
 \description{
 on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).

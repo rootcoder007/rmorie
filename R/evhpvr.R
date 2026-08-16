@@ -19,9 +19,9 @@
 #' walked the arms 1e-8 apart.  The sums are accumulated in loops for
 #' the same reason -- R sums in long double, Python in double.
 #'
-#' @param xv See Usage.
-#' @param yv See Usage.
-#' @param b See Usage.
+#' @param xv A vector; its length is taken and its elements indexed.
+#' @param yv Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{f}, \code{a}, \code{mu}, \code{sd}.
 #' @export
 .ht_prof <- function(xv, yv, b) {

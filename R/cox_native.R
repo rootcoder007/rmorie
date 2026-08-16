@@ -11,12 +11,13 @@
 
 #' .morie_cox_prepare
 #'
-#' Part of the cox_native implementation; see the file header for the
+#' A step of the cox_native implementation. Called by \code{.morie_aft_common}, \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard} and 8 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param time See Usage.
 #' @param event See Usage.
-#' @param X Defaults to \code{NULL}.
+#' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{t}, \code{e}, \code{X}.
 #' @export
 .morie_cox_prepare <- function(time, event, X = NULL) {
@@ -52,11 +53,11 @@
 #'
 #' the stratified model, which needs the pieces without taking a step.
 #'
-#' @param ts See Usage.
+#' @param ts A vector; indexed elementwise.
 #' @param es See Usage.
-#' @param Xs See Usage.
-#' @param beta See Usage.
-#' @param offs See Usage.
+#' @param Xs A matrix; indexed by row and column.
+#' @param beta A matrix; passed to \code{\%*\%}.
+#' @param offs Numeric; combined arithmetically in the body.
 #' @param ties See Usage.
 #' @return A list with \code{loglik}, \code{U}, \code{I}.
 #' @export
@@ -109,14 +110,15 @@
 
 #' .morie_cox_fit
 #'
-#' Part of the cox_native implementation; see the file header for the
+#' A step of the cox_native implementation. Called by \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard}, \code{morie_cox_breslow_step} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param e See Usage.
-#' @param X See Usage.
-#' @param ties Defaults to \code{"efron"}.
-#' @param max_iter Defaults to \code{50L}.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param e A vector; indexed elementwise.
+#' @param X A matrix; indexed by row and column.
+#' @param ties Passed to \code{.morie_cox_score}. Defaults to \code{"efron"}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-09}.
 #' @param offset Defaults to \code{NULL}.
 #' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter}, \code{converged}.
@@ -159,13 +161,14 @@
 
 #' .morie_cox_baseline
 #'
-#' Part of the cox_native implementation; see the file header for the
+#' A step of the cox_native implementation. Called by \code{morie_cox_breslow_step}, \code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
 #' @param e See Usage.
-#' @param X See Usage.
-#' @param beta See Usage.
+#' @param X A matrix; passed to \code{\%*\%}.
+#' @param beta A matrix; passed to \code{\%*\%}.
 #' @param offset Defaults to \code{NULL}.
 #' @return A list with \code{times}, \code{hazard}, \code{cumhazard}.
 #' @export
@@ -184,10 +187,11 @@
 
 #' .morie_km_estimate
 #'
-#' Part of the cox_native implementation; see the file header for the
+#' A step of the cox_native implementation. Called by \code{morie_censoring_at_risk_weight}, \code{morie_competing_risks_fg}, \code{morie_cox_schoenfeld_residuals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t A vector; indexed elementwise.
 #' @param e See Usage.
 #' @return A list with \code{times}, \code{survival}.
 #' @export
@@ -207,14 +211,15 @@
 
 #' .morie_cox_result
 #'
-#' Part of the cox_native implementation; see the file header for the
+#' A step of the cox_native implementation. Called by \code{morie_breslow_tie_correction}, \code{morie_efron_tie_correction}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param e See Usage.
+#' @param t A vector; its length is taken and its elements indexed.
+#' @param e Numeric; passed to \code{sum}.
 #' @param X See Usage.
-#' @param fit See Usage.
-#' @param label See Usage.
+#' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$I}, \code{$loglik}, \code{$n_iter} from it.
+#' @param label Character; passed to \code{tolower}.
 #' @param method See Usage.
 #' @return A list with \code{beta}, \code{se}, \code{z}, \code{p_value}, \code{hazard_ratio}, \code{loglik}, \code{cov}, \code{information}, \code{n_ties}, \code{n_events}, \code{n}, \code{n_iter}, \code{converged}, \code{ties}, \code{time}, \code{event}, \code{X}, \code{method}.
 #' @export

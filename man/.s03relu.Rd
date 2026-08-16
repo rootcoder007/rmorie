@@ -11,7 +11,7 @@
 \item{z}{See Usage.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{DeepF}, \code{Reglu}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

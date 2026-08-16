@@ -84,11 +84,11 @@
 #' on a data point is where the two arms\' comparisons could part
 #' company.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param rows See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param rows A vector; its length is taken and its elements indexed.
 #' @param feats See Usage.
-#' @param min_leaf See Usage.
+#' @param min_leaf Numeric; combined arithmetically in the body.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .sdcfst_best_split <- function(X, y, rows, feats, min_leaf) {
@@ -124,18 +124,19 @@
 # One honest tree: split on struct_rows, fill leaves from leaf_rows.
 #' One honest tree: split on struct_rows, fill leaves from leaf_rows
 #'
-#' Part of the sdcfst_native implementation; see the file header for the
+#' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst_forest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param struct_rows See Usage.
-#' @param leaf_rows See Usage.
-#' @param feats_n See Usage.
-#' @param min_leaf See Usage.
-#' @param max_depth See Usage.
-#' @param e See Usage.
-#' @param depth Defaults to \code{0L}.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param struct_rows A vector; its length is taken and its elements indexed.
+#' @param leaf_rows A vector; its length is taken and its elements indexed.
+#' @param feats_n Numeric; passed to \code{min}.
+#' @param min_leaf Numeric; combined arithmetically in the body.
+#' @param max_depth Passed to \code{.sdcfst_grow}.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param depth Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A list with \code{leaf}, \code{feature}, \code{cut}, \code{left}, \code{right}.
 #' @export
 .sdcfst_grow <- function(X, y, struct_rows, leaf_rows, feats_n, min_leaf,
@@ -181,11 +182,12 @@
 
 #' .sdcfst_tree_predict
 #'
-#' Part of the sdcfst_native implementation; see the file header for the
+#' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst_predict}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
-#' @param x See Usage.
+#' @param node A list; the body reads \code{$cut}, \code{$feature}, \code{$leaf}, \code{$left}, \code{$right}, \code{$value} from it.
+#' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
 .sdcfst_tree_predict <- function(node, x) {
@@ -293,10 +295,11 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 
 #' .sdcfst_logit_predict
 #'
-#' Part of the sdcfst_native implementation; see the file header for the
+#' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta A vector; indexed elementwise.
 #' @param x See Usage.
 #' @return A numeric value.
 #' @export
@@ -309,12 +312,13 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 # Fold labels from a shuffle, so folds are balanced by construction.
 #' Fold labels from a shuffle, so folds are balanced by construction
 #'
-#' Part of the sdcfst_native implementation; see the file header for the
+#' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param k See Usage.
-#' @param e See Usage.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param k Numeric; combined arithmetically in the body.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{lab}, as built in the body.
 #' @export
 .sdcfst_folds <- function(n, k, e) {

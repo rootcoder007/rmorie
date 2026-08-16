@@ -8,13 +8,13 @@
 .gpbrier(probs, y_true, n_classes = NULL, halved = FALSE)
 }
 \arguments{
-\item{probs}{See Usage.}
-\item{y_true}{See Usage.}
+\item{probs}{Passed to \code{.gpmat}.}
+\item{y_true}{Passed to \code{.gpflat}.}
 \item{n_classes}{Defaults to \code{NULL}.}
-\item{halved}{Defaults to \code{FALSE}.}
+\item{halved}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm009}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

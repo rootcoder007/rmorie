@@ -8,16 +8,16 @@
 morie_sdne(adjacency, reconstruction, embeddings, beta = 5, alpha = 0.1, nu = 0, parameters = NULL)
 }
 \arguments{
-\item{adjacency}{See Usage.}
-\item{reconstruction}{See Usage.}
-\item{embeddings}{See Usage.}
-\item{beta}{Defaults to \code{5}.}
+\item{adjacency}{Passed to \code{.sdne_second_order_loss}.}
+\item{reconstruction}{Passed to \code{.sdne_second_order_loss}.}
+\item{embeddings}{Passed to \code{.sdne_first_order_loss}.}
+\item{beta}{Passed to \code{.sdne_second_order_loss}. Defaults to \code{5}.}
 \item{alpha}{Defaults to \code{0.1}.}
 \item{nu}{Defaults to \code{0}.}
-\item{parameters}{Defaults to \code{NULL}.}
+\item{parameters}{Optional; may be \code{NULL}. Passed to \code{.sdne_mat}.}
 }
 \description{
-Part of the sdne_native implementation; see the file header for the source it follows.
+A step of the sdne_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{loss}, \code{second_order}, \code{first_order}, \code{regulariser}, \code{alpha}, \code{beta}, \code{method}, \code{note}.

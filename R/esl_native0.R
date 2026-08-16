@@ -18,10 +18,11 @@
 
 #' .esl_K
 #'
-#' Part of the esl_native0 implementation; see the file header for the
+#' A step of the esl_native0 implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .esl_K <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
@@ -34,7 +35,7 @@
 #' The exact finite-n value, not the limit; they differ by about 1% at n
 #' = 20, which is the regime where anyone reaches for a bootstrap.
 #'
-#' @param n See Usage.
+#' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .esl_inclusion <- function(n) {
@@ -57,7 +58,7 @@
 #' widening margin (33 against 10 at p = 100). Both are tuning
 #' parameters, not laws.
 #'
-#' @param p See Usage.
+#' @param p Numeric; passed to \code{sqrt}.
 #' @param task Defaults to \code{"regression"}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -75,10 +76,11 @@
 
 #' .esl_stop
 #'
-#' Part of the esl_native0 implementation; see the file header for the
+#' A step of the esl_native0 implementation. Called by \code{.esl_grow}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken.
 #' @param depth See Usage.
 #' @param max_depth See Usage.
 #' @param min_node See Usage.
@@ -98,12 +100,12 @@
 #' leaves rho sigma^2 behind, so the gain is bounded by how decorrelated
 #' they are, and a per-tree draw decorrelates far less.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param mtry See Usage.
-#' @param depth See Usage.
-#' @param max_depth See Usage.
-#' @param min_node See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param mtry Numeric; passed to \code{min}.
+#' @param depth Numeric; combined arithmetically in the body.
+#' @param max_depth Passed to \code{.esl_stop}.
+#' @param min_node Passed to \code{.esl_stop}.
 #' @return A list with \code{leaf}, \code{feature}, \code{threshold}, \code{left}, \code{right}.
 #' @export
 .esl_grow <- function(X, y, mtry, depth, max_depth, min_node) {
@@ -152,7 +154,7 @@
 #' stats::var uses ddof = 1 and would weight the split criterion
 #' differently
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .esl_var_p <- function(y) {
@@ -165,11 +167,12 @@
 
 #' .esl_predict_tree
 #'
-#' Part of the esl_native0 implementation; see the file header for the
+#' A step of the esl_native0 implementation. Called by \code{morie_esl_random_forest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param node See Usage.
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @return A vector, from \code{vapply}.
 #' @export
 .esl_predict_tree <- function(node, X) {
@@ -184,10 +187,11 @@
 
 #' .esl_matrix
 #'
-#' Part of the esl_native0 implementation; see the file header for the
+#' A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_err}, \code{morie_esl_random_forest}, \code{morie_esl_residual_variance}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
 #' @param what Defaults to \code{"X"}.
 #' @return A list with \code{X}, \code{y}.

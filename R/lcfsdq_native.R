@@ -59,12 +59,13 @@
 
 #' .lcfsdq_d
 #'
-#' Part of the lcfsdq_native implementation; see the file header for the
+#' A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq}, \code{morie_lcfsdq_nn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param metric See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param metric One of \code{"chebyshev"}, \code{"euclidean"}, \code{"manhattan"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .lcfsdq_d <- function(a, b, metric) {
@@ -107,10 +108,11 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 # Bounding box area and perimeter, in the first two coordinates.
 #' Bounding box area and perimeter, in the first two coordinates
 #'
-#' Part of the lcfsdq_native implementation; see the file header for the
+#' A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param coords See Usage.
+#' @param coords A matrix; indexed by row and column.
 #' @return A list with \code{area}, \code{perimeter}, \code{bb}.
 #' @export
 .lcfsdq_window <- function(coords) {

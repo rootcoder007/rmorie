@@ -8,7 +8,7 @@
 .secaead_p_final(acc)
 }
 \arguments{
-\item{acc}{See Usage.}
+\item{acc}{A vector; indexed elementwise.}
 }
 \description{
 subtraction of P suffices because acc < 2^130 < 2P

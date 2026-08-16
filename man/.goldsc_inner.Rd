@@ -11,7 +11,7 @@
 \item{p}{See Usage.}
 }
 \description{
-Part of the goldsc_native implementation; see the file header for the source it follows.
+A step of the goldsc_native implementation. Called by \code{.goldsc_pair}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{switch}.

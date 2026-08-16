@@ -8,10 +8,10 @@
 .morie_km2_rowce(logits)
 }
 \arguments{
-\item{logits}{See Usage.}
+\item{logits}{A matrix; passed to \code{diag}.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch9_clip_image_to_text}, \code{morie_kamath_image_text_contrastive}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

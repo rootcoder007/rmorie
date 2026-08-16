@@ -8,11 +8,11 @@
 .mehtad_cholsolve(M, rhs)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{rhs}{See Usage.}
+\item{M}{A matrix; passed to \code{chol}.}
+\item{rhs}{A matrix; passed to \code{solve}.}
 }
 \description{
-Part of the mehtad_native implementation; see the file header for the source it follows.
+A step of the mehtad_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -8,12 +8,12 @@
 .esl_grow(X, y, mtry, depth, max_depth, min_node)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{mtry}{See Usage.}
-\item{depth}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{min_node}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{mtry}{Numeric; passed to \code{min}.}
+\item{depth}{Numeric; combined arithmetically in the body.}
+\item{max_depth}{Passed to \code{.esl_stop}.}
+\item{min_node}{Passed to \code{.esl_stop}.}
 }
 \description{
 node, not once per tree: averaging B identically distributed trees leaves rho sigma^2 behind, so the gain is bounded by how decorrelated they are, and a per-tree draw decorrelates far less.

@@ -8,15 +8,15 @@
 .gpmultitrait(Y, Z, G, Sigma_T, R_T, X = NULL)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{Z}{See Usage.}
-\item{G}{See Usage.}
-\item{Sigma_T}{See Usage.}
-\item{R_T}{See Usage.}
-\item{X}{Defaults to \code{NULL}.}
+\item{Y}{Passed to \code{.gpmat}.}
+\item{Z}{Passed to \code{.gpkron}.}
+\item{G}{Passed to \code{.gpkron}.}
+\item{Sigma_T}{Passed to \code{.gpkron}.}
+\item{R_T}{Passed to \code{.gpkron}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.gpmat}.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm026}, \code{Msm028}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mu}, \code{beta}, \code{b}, \code{b_by_line}.

@@ -8,13 +8,13 @@
 lambda_star(dist, hi = 20, tol = 1e-14, max_iter = 300)
 }
 \arguments{
-\item{dist}{See Usage.}
-\item{hi}{Defaults to \code{20}.}
+\item{dist}{A vector; indexed elementwise.}
+\item{hi}{Numeric; combined arithmetically in the body. Defaults to \code{20}.}
 \item{tol}{Defaults to \code{1e-14}.}
-\item{max_iter}{Defaults to \code{300}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.}
 }
 \description{
-Part of the blstn_native implementation; see the file header for the source it follows.
+A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

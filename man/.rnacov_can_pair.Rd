@@ -12,7 +12,7 @@
 \item{b}{See Usage.}
 }
 \description{
-Part of the rnacov_native implementation; see the file header for the source it follows.
+A step of the rnacov_native implementation. Called by \code{morie_rnacov_nussinov}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

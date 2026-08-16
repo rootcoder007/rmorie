@@ -8,18 +8,18 @@
 .tlstoch_shift_tmle(Y, A, W, Q_fn, g_fn, delta, lower = NULL, upper = NULL, iters = 60)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{A}{See Usage.}
-\item{W}{See Usage.}
+\item{Y}{Passed to \code{.tlstoch_vec}.}
+\item{A}{Passed to \code{.tlstoch_vec}.}
+\item{W}{Passed to \code{.tlstoch_mat}.}
 \item{Q_fn}{See Usage.}
-\item{g_fn}{See Usage.}
-\item{delta}{See Usage.}
-\item{lower}{Defaults to \code{NULL}.}
-\item{upper}{Defaults to \code{NULL}.}
+\item{g_fn}{Passed to \code{.tlstoch_density_ratio}.}
+\item{delta}{Passed to \code{.tlstoch_density_ratio}.}
+\item{lower}{Passed to \code{.tlstoch_density_ratio}.}
+\item{upper}{Passed to \code{.tlstoch_density_ratio}.}
 \item{iters}{Defaults to \code{60}.}
 }
 \description{
-Part of the tlstoch_native implementation; see the file header for the source it follows.
+A step of the tlstoch_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{delta}, \code{max_density_ratio}, \code{method}, \code{note}.

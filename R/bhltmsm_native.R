@@ -7,10 +7,11 @@
 
 #' cumulative_episodes
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param histories See Usage.
+#' @param histories A vector; its length is taken and its elements indexed.
 #' @param states Defaults to \code{.STATES}.
 #' @return A list with \code{cumulative}, \code{states}, \code{periods}, \code{note}.
 #' @export
@@ -35,11 +36,12 @@ cumulative_episodes <- function(histories, states = .STATES) {
 
 #' Linear interpolation, type 7 (R default)
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. Called by \code{treatment_weights}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param q See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param q Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .quantile7 <- function(x, q) {
@@ -55,13 +57,14 @@ cumulative_episodes <- function(histories, states = .STATES) {
 
 #' treatment_weights
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param histories See Usage.
-#' @param propensities See Usage.
-#' @param stabilise Defaults to \code{TRUE}.
-#' @param marginal Defaults to \code{NULL}.
+#' @param histories A vector; its length is taken and its elements indexed.
+#' @param propensities A vector; indexed elementwise.
+#' @param stabilise A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param marginal Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param truncate Defaults to \code{NULL}.
 #' @return A list with \code{weights}, \code{raw}, \code{stabilised}, \code{truncated}, \code{n_truncated}, \code{note}.
 #' @export
@@ -110,7 +113,8 @@ treatment_weights <- function(histories, propensities, stabilise = TRUE,
 
 #' weight_diagnostics
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param weights See Usage.
@@ -131,11 +135,12 @@ weight_diagnostics <- function(weights) {
 
 #' .corr_r
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. Called by \code{confounding_check}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; its length is taken.
+#' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .corr_r <- function(x, y) {
@@ -151,11 +156,12 @@ weight_diagnostics <- function(weights) {
 
 #' confounding_check
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param covariate_history See Usage.
-#' @param treatment_history See Usage.
+#' @param covariate_history A matrix; passed to \code{as.matrix}.
+#' @param treatment_history A matrix; passed to \code{as.matrix}.
 #' @param outcome Defaults to \code{NULL}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -186,12 +192,13 @@ confounding_check <- function(covariate_history, treatment_history,
 
 #' .wls_r
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. Called by \code{fit_msm}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
 .wls_r <- function(X, y, w) {
@@ -207,11 +214,12 @@ confounding_check <- function(covariate_history, treatment_history,
 
 #' fit_msm
 #'
-#' Part of the bhltmsm_native implementation; see the file header for
+#' A step of the bhltmsm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param outcome See Usage.
-#' @param cumulative See Usage.
+#' @param cumulative A matrix; passed to \code{as.matrix}.
 #' @param weights Defaults to \code{NULL}.
 #' @param states Defaults to \code{.STATES}.
 #' @return A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se}, \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.

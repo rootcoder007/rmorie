@@ -8,7 +8,7 @@
 .morie_qrs_dft(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
 NOT as -2 pi k j / n: the two differ in the last bits and the Python arm uses the former.

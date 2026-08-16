@@ -8,15 +8,15 @@
 .itrgrf_rule_value(y, W, mu1, mu0, e, d)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
-\item{mu1}{See Usage.}
-\item{mu0}{See Usage.}
-\item{e}{See Usage.}
-\item{d}{See Usage.}
+\item{y}{Passed to \code{.itrgrf_dr_scores}.}
+\item{W}{Passed to \code{.itrgrf_dr_scores}.}
+\item{mu1}{Passed to \code{.itrgrf_dr_scores}.}
+\item{mu0}{Passed to \code{.itrgrf_dr_scores}.}
+\item{e}{Passed to \code{.itrgrf_dr_scores}.}
+\item{d}{Passed to \code{.itrgrf_dr_scores}.}
 }
 \description{
-Part of the itrgrf_native implementation; see the file header for the source it follows.
+A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{value}, \code{se}, \code{scores}.

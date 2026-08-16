@@ -9,13 +9,13 @@ ErpFeat(erp, fs, t0 = 0, components = NULL, baseline_ms = list(NULL, 0))
 }
 \arguments{
 \item{erp}{See Usage.}
-\item{fs}{See Usage.}
-\item{t0}{Defaults to \code{0}.}
-\item{components}{Defaults to \code{NULL}.}
-\item{baseline_ms}{Defaults to \code{list(NULL, 0)}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{t0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{components}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
+\item{baseline_ms}{A vector; indexed elementwise. Defaults to \code{list(NULL, 0)}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{components}, \code{peak_to_peak_uV}, \code{baseline_uV}, \code{t_ms}, \code{erp_uV}, \code{fs_hz}, \code{t0_ms}, \code{units}, \code{method}.

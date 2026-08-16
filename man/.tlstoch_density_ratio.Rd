@@ -8,15 +8,15 @@
 .tlstoch_density_ratio(A, W, delta, g_fn, lower = NULL, upper = NULL)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{W}{See Usage.}
+\item{A}{Passed to \code{.tlstoch_vec}.}
+\item{W}{Passed to \code{.tlstoch_mat}.}
 \item{delta}{See Usage.}
 \item{g_fn}{See Usage.}
 \item{lower}{Defaults to \code{NULL}.}
 \item{upper}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tlstoch_native implementation; see the file header for the source it follows.
+A step of the tlstoch_native implementation. Called by \code{.tlstoch_shift_tmle}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{H}, \code{max}, \code{mean}.

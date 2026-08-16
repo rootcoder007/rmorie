@@ -8,11 +8,11 @@
 .morie_bx_cov(X, unbiased = TRUE)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{unbiased}{Defaults to \code{TRUE}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{unbiased}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel}, \code{PvcBayes}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{mu}, \code{C}.

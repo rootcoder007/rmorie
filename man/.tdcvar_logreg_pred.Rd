@@ -8,11 +8,11 @@
 .tdcvar_logreg_pred(X, beta)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{beta}{See Usage.}
+\item{X}{A matrix; passed to \code{\%*\%}.}
+\item{beta}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the tdcvar_native implementation; see the file header for the source it follows.
+A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pmin}.

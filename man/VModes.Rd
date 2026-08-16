@@ -8,7 +8,7 @@
 VModes(x, K = 3, alpha = 2000, tau = 0, init = "uniform", tol = 1e-07, max_iter = 300)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.tf_need}.}
 \item{K}{Defaults to \code{3}.}
 \item{alpha}{Defaults to \code{2000}.}
 \item{tau}{Defaults to \code{0}.}
@@ -17,7 +17,7 @@ VModes(x, K = 3, alpha = 2000, tau = 0, init = "uniform", tol = 1e-07, max_iter 
 \item{max_iter}{Defaults to \code{300}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{modes}, \code{center_freqs}, \code{K}, \code{alpha}, \code{tau}, \code{iterations}, \code{converged}, \code{reconstruction_error}, \code{residual_energy}, \code{method}.

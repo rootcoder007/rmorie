@@ -9,12 +9,13 @@
 # Newton-Raphson logistic regression; returns fitted probabilities.
 #' Newton-Raphson logistic regression; returns fitted probabilities
 #'
-#' Part of the causal_shared_native implementation; see the file header
+#' A step of the causal_shared_native implementation. Called by \code{morie_dr_learner}, \code{morie_regime_value}, \code{morie_tmle_ate} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param X See Usage.
-#' @param y See Usage.
-#' @param max_iter Defaults to \code{100L}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return The value of \code{as.vector}.
 #' @export
@@ -58,12 +59,13 @@
 # Ridge coefficients with an unpenalised intercept.
 #' Ridge coefficients with an unpenalised intercept
 #'
-#' Part of the causal_shared_native implementation; see the file header
+#' A step of the causal_shared_native implementation. Called by \code{morie_dr_learner}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param X See Usage.
-#' @param y See Usage.
-#' @param lam Defaults to \code{0.001}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @return A matrix, from \code{solve}.
 #' @export
 .morie_ridge_fit <- function(X, y, lam = 1e-3) {
@@ -79,9 +81,9 @@
 #'
 #' expectation is E[min(T, horizon)] under independent censoring.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param horizon See Usage.
+#' @param time A vector; its length is taken and its elements indexed.
+#' @param event A vector; indexed elementwise.
+#' @param horizon Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_cf_rmst_pseudo <- function(time, event, horizon) {

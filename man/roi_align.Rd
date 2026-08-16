@@ -8,14 +8,14 @@
 roi_align(features, box, out_size = 2L, stride = 1, samples = 2L)
 }
 \arguments{
-\item{features}{See Usage.}
-\item{box}{See Usage.}
+\item{features}{Passed to \code{.masrcn_mat}.}
+\item{box}{A vector; indexed elementwise.}
 \item{out_size}{Defaults to \code{2L}.}
 \item{stride}{Defaults to \code{1}.}
 \item{samples}{Defaults to \code{2L}.}
 }
 \description{
-Part of the masrcn_native implementation; see the file header for the source it follows.
+A step of the masrcn_native implementation. Called by \code{morie_masrcn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{pooled}, \code{exact_box}, \code{samples_per_bin}, \code{note}.

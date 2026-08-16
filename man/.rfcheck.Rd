@@ -8,11 +8,11 @@
 .rfcheck(X, Y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{Y}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the mvsml_rf_shared implementation; see the file header for the source it follows.
+A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfmlt}, \code{Rfpmi}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

@@ -8,8 +8,8 @@
 .s03lens(r, v)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{v}{See Usage.}
+\item{r}{Numeric; combined arithmetically in the body.}
+\item{v}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Matern (1960) V_n(A, A; v) of eq. (3.4.4) p. 38, at n = 2.  Shared with Hcoreg.

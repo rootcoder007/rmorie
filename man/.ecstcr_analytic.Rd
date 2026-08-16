@@ -8,15 +8,15 @@
 .ecstcr_analytic(T, TD, F, lam, gam, eps, C, CD, h)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{TD}{See Usage.}
-\item{F}{See Usage.}
-\item{lam}{See Usage.}
-\item{gam}{See Usage.}
-\item{eps}{See Usage.}
-\item{C}{See Usage.}
-\item{CD}{See Usage.}
-\item{h}{See Usage.}
+\item{T}{Numeric; combined arithmetically in the body.}
+\item{TD}{Numeric; combined arithmetically in the body.}
+\item{F}{Numeric; combined arithmetically in the body.}
+\item{lam}{Numeric; combined arithmetically in the body.}
+\item{gam}{Numeric; combined arithmetically in the body.}
+\item{eps}{Numeric; combined arithmetically in the body.}
+\item{C}{Numeric; combined arithmetically in the body.}
+\item{CD}{Numeric; combined arithmetically in the body.}
+\item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{
 step. The system is linear, so diagonalising the 2x2 matrix gives the answer outright: no tolerance, no step-size sensitivity.
@@ -27,7 +27,7 @@ A vector, from \code{c}.
 \references{
   Charney, J.G. et al. (1979) "Carbon Dioxide and Climate: A Scientific
     Assessment." National Academy of Sciences, Washington DC.
-  Forster, P. et al. (2021) "The Earth\\'s Energy Budget, Climate
+  Forster, P. et al. (2021) "The Earth\'s Energy Budget, Climate
     Feedbacks, and Climate Sensitivity", Chapter 7 of IPCC AR6 WG1,
     Cambridge University Press, 923-1054,
     doi:10.1017/9781009157896.009

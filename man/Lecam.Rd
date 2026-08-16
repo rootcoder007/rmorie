@@ -7,9 +7,9 @@
 Lecam(dtv, p0_phi, prior_mass, integral)
 }
 \arguments{
-\item{dtv}{d_TV(P_0, P_U), in \link{0, 1}.}
+\item{dtv}{d_TV(P_0, P_U), in [0, 1].}
 
-\item{p0_phi}{P_0 phi, the type I error, in \link{0, 1}.}
+\item{p0_phi}{P_0 phi, the type I error, in [0, 1].}
 
 \item{prior_mass}{Pi(U), strictly positive.}
 

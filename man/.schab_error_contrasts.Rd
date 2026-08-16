@@ -8,7 +8,7 @@
 .schab_error_contrasts(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
 }
 \description{
 builds K explicitly for the intercept-only case and notes, citing Harville (1974), that the choice of K does not matter for estimation. Taking the orthogonal complement of the column space of X gives one such K for any linear mean structure.

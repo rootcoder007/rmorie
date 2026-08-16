@@ -8,8 +8,8 @@
 .morie_mcmc_autocov(x, max_lag = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{max_lag}{Defaults to \code{NULL}.}
+\item{x}{A vector; its length is taken.}
+\item{max_lag}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{
 of two at least 2n, divided by n (biased, which is what keeps the sequence positive semi-definite).

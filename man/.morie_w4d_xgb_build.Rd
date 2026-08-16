@@ -8,17 +8,17 @@
 .morie_w4d_xgb_build(X, g, h, depth, max_depth, lam, gamma, min_child_weight)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{g}{See Usage.}
-\item{h}{See Usage.}
-\item{depth}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{lam}{See Usage.}
-\item{gamma}{See Usage.}
-\item{min_child_weight}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{g}{A vector; indexed elementwise.}
+\item{h}{A vector; indexed elementwise.}
+\item{depth}{Numeric; combined arithmetically in the body.}
+\item{max_depth}{Passed to \code{.morie_w4d_xgb_build}.}
+\item{lam}{Passed to \code{.morie_w4d_xgb_leaf_weight}.}
+\item{gamma}{Passed to \code{.morie_w4d_xgb_gain}.}
+\item{min_child_weight}{Passed to \code{.morie_w4d_xgb_build}.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_xgboost}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{node}, as built in the body.

@@ -20,14 +20,15 @@
 
 #' prophe_additive_components
 #'
-#' Part of the prophe_native implementation; see the file header for the
+#' A step of the prophe_native implementation. Called by \code{morie_prophe}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param y See Usage.
-#' @param seasonalities Defaults to \code{NULL}.
-#' @param holidays Defaults to \code{NULL}.
-#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param t Passed to \code{morie_prphet_fit}.
+#' @param y Passed to \code{morie_prphet_fit}.
+#' @param seasonalities Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param holidays Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param holiday_window A vector; indexed elementwise. Defaults to \code{c(0, 0)}.
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{components}, \code{total}, \code{fitted}, \code{residual}, \code{reconstruction_error}, \code{reconstructs}, \code{coef}, \code{changepoints}, \code{sigma}, \code{n}, \code{component_names}, \code{method}.
 #' @export
@@ -102,10 +103,11 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
 
 #' prophe_component_shares
 #'
-#' Part of the prophe_native implementation; see the file header for the
+#' A step of the prophe_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param components See Usage.
+#' @param components A vector; indexed elementwise.
 #' @return A list with \code{sd}, \code{relative}, \code{ranked}, \code{note}.
 #' @export
 prophe_component_shares <- function(components) {
@@ -132,7 +134,8 @@ prophe_component_shares <- function(components) {
 
 #' prophe_cheatsheet
 #'
-#' Part of the prophe_native implementation; see the file header for the
+#' A step of the prophe_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -148,7 +151,8 @@ prophe_cheatsheet <- function() {
 
 #' morie_prophe
 #'
-#' Part of the prophe_native implementation; see the file header for the
+#' A step of the prophe_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t See Usage.

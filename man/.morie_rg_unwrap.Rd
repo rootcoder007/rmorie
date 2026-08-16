@@ -8,10 +8,10 @@
 .morie_rg_unwrap(phase)
 }
 \arguments{
-\item{phase}{See Usage.}
+\item{phase}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the rangayyan_cep implementation; see the file header for the source it follows.
+A step of the rangayyan_cep implementation. Called by \code{CCepstrum}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

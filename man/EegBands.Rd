@@ -8,9 +8,9 @@
 EegBands(x, fs, bands = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{bands}{Defaults to \code{NULL}.}
+\item{x}{A vector; its length is taken.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{bands}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }
 \description{
 in Section 10.2.3.  The clinical question -- is there an alpha rhythm -- is answered by the fraction of power in that band, not by the power.

@@ -3,15 +3,15 @@
 % the formals.
 \name{.karpv_csum}
 \alias{.karpv_csum}
-\title{Compensated accumulation, so both arms agree bit for bit: R\\\'s sum()}
+\title{Compensated accumulation, so both arms agree bit for bit: R\\'s sum()}
 \usage{
 .karpv_csum(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-accumulates in long double, CPython\\\'s compensates, and neither is the plain loop the other one is.
+accumulates in long double, CPython\\'s compensates, and neither is the plain loop the other one is.
 }
 \value{
 A numeric value.

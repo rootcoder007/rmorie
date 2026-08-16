@@ -8,12 +8,12 @@
 .potM_loglik(z, sigma, xi)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{sigma}{See Usage.}
-\item{xi}{See Usage.}
+\item{z}{A vector; its length is taken.}
+\item{sigma}{Numeric; passed to \code{log}.}
+\item{xi}{Numeric; passed to \code{abs}.}
 }
 \description{
-Part of the potM_mixedcase_native implementation; see the file header for the source it follows.
+A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle}, \code{.potM_neg_loglik}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

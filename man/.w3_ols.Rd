@@ -8,11 +8,11 @@
 .w3_ols(y, design)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{design}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{design}{A matrix; indexed by row and column.}
 }
 \description{
-Part of the helpers_w3num implementation; see the file header for the source it follows.
+A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}, \code{morie_sdcfst}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv}, \code{fitted}, \code{chol}.

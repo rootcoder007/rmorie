@@ -8,12 +8,12 @@
 .schab_cstr_reference(area, duration, lam)
 }
 \arguments{
-\item{area}{See Usage.}
-\item{duration}{See Usage.}
-\item{lam}{See Usage.}
+\item{area}{Numeric; combined arithmetically in the body.}
+\item{duration}{Numeric; combined arithmetically in the body.}
+\item{lam}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{spstp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{expected_count}, \code{variance}, \code{intensity}, \code{second_order_intensity}, \code{volume}.

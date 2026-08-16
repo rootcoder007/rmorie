@@ -8,18 +8,18 @@
 morie_timeRS_timesvdpp(ratings, n_users, n_items, bin_days = 70, n_bins = 30, epochs = 40, lr = 0.005, reg = 0.02, beta = .timeRS_BETA)
 }
 \arguments{
-\item{ratings}{See Usage.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{bin_days}{Defaults to \code{70}.}
-\item{n_bins}{Defaults to \code{30}.}
-\item{epochs}{Defaults to \code{40}.}
-\item{lr}{Defaults to \code{0.005}.}
-\item{reg}{Defaults to \code{0.02}.}
-\item{beta}{Defaults to \code{.timeRS_BETA}.}
+\item{ratings}{Passed to \code{.timeRS_fit_time_bias}.}
+\item{n_users}{Passed to \code{.timeRS_fit_time_bias}.}
+\item{n_items}{Passed to \code{.timeRS_fit_time_bias}.}
+\item{bin_days}{Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{70}.}
+\item{n_bins}{Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{30}.}
+\item{epochs}{Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{40}.}
+\item{lr}{Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{0.005}.}
+\item{reg}{Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{0.02}.}
+\item{beta}{Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.}
 }
 \description{
-Part of the timeRS_native implementation; see the file header for the source it follows.
+A step of the timeRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.timeRS_fit_time_bias}.

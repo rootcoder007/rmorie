@@ -8,16 +8,16 @@
 morie_safrl(g, H, B = NULL, c = NULL, delta = 0.01, tol = 1e-12, max_iter = 5000)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{H}{See Usage.}
-\item{B}{Defaults to \code{NULL}.}
-\item{c}{Defaults to \code{NULL}.}
-\item{delta}{Defaults to \code{0.01}.}
-\item{tol}{Defaults to \code{1e-12}.}
-\item{max_iter}{Defaults to \code{5000}.}
+\item{g}{Passed to \code{.safrl_vec}.}
+\item{H}{Passed to \code{.safrl_mat}.}
+\item{B}{Optional; may be \code{NULL}. Passed to \code{.safrl_mat}.}
+\item{c}{Optional; may be \code{NULL}. Passed to \code{.safrl_vec}.}
+\item{delta}{Numeric; combined arithmetically in the body. Defaults to \code{0.01}.}
+\item{tol}{Passed to \code{.safrl_dual}. Defaults to \code{1e-12}.}
+\item{max_iter}{Passed to \code{.safrl_dual}. Defaults to \code{5000}.}
 }
 \description{
-Part of the safrl_native implementation; see the file header for the source it follows.
+A step of the safrl_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.safrl_finish}.

@@ -8,10 +8,10 @@
 .tmldta_expit(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmldta_native implementation; see the file header for the source it follows.
+A step of the tmldta_native implementation. Called by \code{.fit_g}, \code{.fit_q}, \code{split_specific_tmle}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

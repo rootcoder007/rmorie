@@ -8,10 +8,10 @@
 .cfa_cov(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{.s03mat}.}
 }
 \description{
-Part of the cfafm2 implementation; see the file header for the source it follows.
+A step of the cfafm2 implementation. Called by \code{Cfafm2}, \code{Cfaftr}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{S}, as built in the body.

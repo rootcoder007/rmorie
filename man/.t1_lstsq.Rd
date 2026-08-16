@@ -8,11 +8,11 @@
 .t1_lstsq(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
 }
 \description{
-and so the Python arm\\\'s _lstsq.
+and so the Python arm\\'s _lstsq.
 }
 \value{
 A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.

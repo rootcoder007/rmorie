@@ -8,14 +8,14 @@
 .morie_w4c_best_split(X, y, criterion, columns, min_leaf)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{criterion}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{Passed to \code{morie_geron_cart_split_cost}.}
+\item{criterion}{Passed to \code{morie_geron_cart_split_cost}.}
 \item{columns}{See Usage.}
 \item{min_leaf}{See Usage.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. Called by \code{.morie_w4c_grow}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

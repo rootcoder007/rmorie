@@ -17,11 +17,11 @@ gibbs_bigram_topic(docs, T, V, alpha = 0.5, beta = 0.5, m = NULL, n = NULL, prio
 \item{n}{Defaults to \code{NULL}.}
 \item{prior}{Defaults to \code{1}.}
 \item{iters}{Defaults to \code{200L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Passed to \code{.lcg_uniform}. Defaults to \code{0L}.}
 \item{burn}{Defaults to \code{50L}.}
 }
 \description{
-Part of the bigtm_native implementation; see the file header for the source it follows.
+A step of the bigtm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta}, \code{N_ijk}, \code{N_jk}, \code{T}, \code{V}, \code{prior}, \code{iterations}, \code{burn_in}, \code{samples_kept}, \code{method}, \code{caveat}.

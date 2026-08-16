@@ -8,14 +8,14 @@
 .mor_ed_block(P, a1, b1, a2, b2)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{a1}{See Usage.}
-\item{b1}{See Usage.}
-\item{a2}{See Usage.}
-\item{b2}{See Usage.}
+\item{P}{A matrix; indexed by row and column.}
+\item{a1}{Numeric; combined arithmetically in the body.}
+\item{b1}{Numeric; combined arithmetically in the body.}
+\item{a2}{Numeric; combined arithmetically in the body.}
+\item{b2}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the e_div_native implementation; see the file header for the source it follows.
+A step of the e_div_native implementation. Called by \code{.mor_ed_qhat}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

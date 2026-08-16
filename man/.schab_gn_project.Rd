@@ -8,7 +8,7 @@
 .schab_gn_project(theta)
 }
 \arguments{
-\item{theta}{See Usage.}
+\item{theta}{A vector; indexed elementwise.}
 }
 \description{
 This is the constraint the model imposes, not a search box.

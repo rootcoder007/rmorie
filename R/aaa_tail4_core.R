@@ -16,7 +16,8 @@ NULL
 
 #' .t4_vec
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. Called by \code{Beggtest}, \code{Boxpierce}, \code{Dprime} and 11 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -26,10 +27,11 @@ NULL
 
 #' .t4_mat
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .t4_mat <- function(X) {
@@ -40,7 +42,8 @@ NULL
 
 #' .t4_ranks
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. Called by \code{Pettitt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -50,7 +53,8 @@ NULL
 
 #' .t4_tiecounts
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}, \code{Mktest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -64,8 +68,8 @@ NULL
 #'
 #' denominator) normalisation, i.e. stats::acf.
 #'
-#' @param x See Usage.
-#' @param lag See Usage.
+#' @param x A vector; its length is taken.
+#' @param lag A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .t4_acfbiased <- function(x, lag) {
@@ -79,11 +83,12 @@ NULL
 #' Newey-West long-run variance with Bartlett weights -- tseries\'
 #' pp_sum
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. Called by \code{Pptest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param lag See Usage.
+#' @param u A vector; its length is taken and its elements indexed.
+#' @param lag A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .t4_lrvnw <- function(u, lag) {
@@ -99,11 +104,12 @@ NULL
 
 #' .t4_olsfit
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. Called by \code{.t4_poly4}, \code{.t4_wls_int}, \code{Lctest} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{\%*\%}.
+#' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
 .t4_olsfit <- function(X, y) {
@@ -117,11 +123,12 @@ NULL
 
 #' .t4_kendallS
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param y A vector; indexed elementwise.
 #' @return The value of \code{S}, as built in the body.
 #' @export
 .t4_kendallS <- function(x, y) {
@@ -138,8 +145,8 @@ NULL
 #'
 #' stats::cor.test(method = "kendall", exact = FALSE).
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; its length is taken.
+#' @param y Passed to \code{.t4_kendallS}.
 #' @return A list with \code{tau}, \code{z}.
 #' @export
 .t4_kendalltaub <- function(x, y) {
@@ -163,7 +170,8 @@ NULL
 
 #' .t4_result
 #'
-#' Part of the tail4_core implementation; see the file header for the
+#' A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Beggtest}, \code{Boxpierce} and 13 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.

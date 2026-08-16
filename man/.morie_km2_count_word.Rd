@@ -12,7 +12,7 @@
 \item{outputs}{See Usage.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

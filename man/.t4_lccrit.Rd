@@ -11,7 +11,7 @@
 \item{df}{See Usage.}
 }
 \description{
-Part of the nybhsn implementation; see the file header for the source it follows.
+A step of the nybhsn implementation. Called by \code{Lctest}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

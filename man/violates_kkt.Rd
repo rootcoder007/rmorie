@@ -9,14 +9,14 @@ violates_kkt(i, alpha, y, E, C, tol = 0.001)
 }
 \arguments{
 \item{i}{See Usage.}
-\item{alpha}{See Usage.}
-\item{y}{See Usage.}
-\item{E}{See Usage.}
+\item{alpha}{A vector; indexed elementwise.}
+\item{y}{A vector; indexed elementwise.}
+\item{E}{A vector; indexed elementwise.}
 \item{C}{See Usage.}
 \item{tol}{Defaults to \code{0.001}.}
 }
 \description{
-Part of the smoopt_native implementation; see the file header for the source it follows.
+A step of the smoopt_native implementation. Called by \code{smo_platt}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

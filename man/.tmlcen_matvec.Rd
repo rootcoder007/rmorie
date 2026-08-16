@@ -8,11 +8,11 @@
 .tmlcen_matvec(Z, b)
 }
 \arguments{
-\item{Z}{See Usage.}
-\item{b}{See Usage.}
+\item{Z}{A matrix; passed to \code{\%*\%}.}
+\item{b}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the tmlcen_native implementation; see the file header for the source it follows.
+A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

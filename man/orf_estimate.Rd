@@ -8,15 +8,15 @@
 orf_estimate(Y, T, X, W, x, trees, residualize = "local", ridge = 1e-08, leave_one_out = TRUE)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{T}{See Usage.}
-\item{X}{See Usage.}
+\item{Y}{A vector; its length is taken and its elements indexed.}
+\item{T}{A vector; indexed elementwise.}
+\item{X}{Passed to \code{.orfgrf_forest_weights}.}
 \item{W}{See Usage.}
-\item{x}{See Usage.}
-\item{trees}{See Usage.}
+\item{x}{Passed to \code{.orfgrf_forest_weights}.}
+\item{trees}{Passed to \code{.orfgrf_forest_weights}.}
 \item{residualize}{Defaults to \code{"local"}.}
 \item{ridge}{Defaults to \code{1e-08}.}
-\item{leave_one_out}{Defaults to \code{TRUE}.}
+\item{leave_one_out}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
 nuisances under the same kernel weights used for the second stage -- the ORF proposal. "global" fits them once on the whole sample, the "local centering" benchmark.

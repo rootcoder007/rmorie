@@ -79,9 +79,9 @@
 #' the limit is continuous but singular, and it is here because a reader
 #' who wants to see that happen should be able to.
 #'
-#' @param level See Usage.
+#' @param level Numeric; combined arithmetically in the body.
 #' @param c See Usage.
-#' @param schedule See Usage.
+#' @param schedule One of \code{"constant"}, \code{"cubic"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .bnppvl_conc <- function(level, c, schedule) {
@@ -101,7 +101,7 @@
 #' parent gives exactly a half, the symmetric case.
 #'
 #' @param nullq See Usage.
-#' @param j See Usage.
+#' @param j Numeric; combined arithmetically in the body.
 #' @param level See Usage.
 #' @return A numeric value.
 #' @export
@@ -119,15 +119,16 @@
 
 #' .bnppvl_ab
 #'
-#' Part of the bnppvl_native implementation; see the file header for the
+#' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_draw}, \code{morie_bnppvl_log_prior}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param level See Usage.
-#' @param c See Usage.
-#' @param schedule See Usage.
-#' @param centring See Usage.
-#' @param nullq See Usage.
-#' @param j See Usage.
+#' @param level Passed to \code{.bnppvl_conc}.
+#' @param c Passed to \code{.bnppvl_conc}.
+#' @param schedule Passed to \code{.bnppvl_conc}.
+#' @param centring Compared against \code{"uniform"}.
+#' @param nullq Passed to \code{.bnppvl_null_mean}.
+#' @param j Passed to \code{.bnppvl_null_mean}.
 #' @return A vector, from \code{c}.
 #' @export
 .bnppvl_ab <- function(level, c, schedule, centring, nullq, j) {
@@ -178,12 +179,13 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
 
 #' .bnppvl_log_beta
 #'
-#' Part of the bnppvl_native implementation; see the file header for the
+#' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_log_prior}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param v Numeric; passed to \code{log}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .bnppvl_log_beta <- function(v, a, b) {
@@ -239,8 +241,8 @@ morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
 #' and a scan visits the cells in one fixed order in both arms.
 #'
 #' @param u See Usage.
-#' @param q See Usage.
-#' @param k See Usage.
+#' @param q A vector; indexed elementwise.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{k}, as built in the body.
 #' @export
 .bnppvl_cell <- function(u, q, k) {
@@ -310,8 +312,8 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' closed form rather than from the sampled positions is what keeps the
 #' predictive moments exact given the draws.
 #'
-#' @param draws See Usage.
-#' @param k See Usage.
+#' @param draws A vector; its length is taken and its elements indexed.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{m1}, \code{m2}.
 #' @export
 .bnppvl_moments <- function(draws, k) {
@@ -331,12 +333,13 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 
 #' .bnppvl_density_at
 #'
-#' Part of the bnppvl_native implementation; see the file header for the
+#' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param q See Usage.
-#' @param k See Usage.
+#' @param u Passed to \code{.bnppvl_cell}.
+#' @param q A vector; indexed elementwise.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .bnppvl_density_at <- function(u, q, k) {
@@ -347,12 +350,13 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 
 #' .bnppvl_cdf_at
 #'
-#' Part of the bnppvl_native implementation; see the file header for the
+#' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param q See Usage.
-#' @param k See Usage.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param q A vector; indexed elementwise.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .bnppvl_cdf_at <- function(u, q, k) {
@@ -382,8 +386,8 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' where the data are, which is worth a great many sweeps of a
 #' single-site sampler.
 #'
-#' @param u See Usage.
-#' @param k See Usage.
+#' @param u A vector; its length is taken.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{q}, as built in the body.
 #' @export
 .bnppvl_empirical_start <- function(u, k) {

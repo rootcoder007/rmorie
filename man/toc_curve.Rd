@@ -8,11 +8,11 @@
 toc_curve(scores, priority)
 }
 \arguments{
-\item{scores}{See Usage.}
-\item{priority}{See Usage.}
+\item{scores}{Passed to \code{.slvgrf_check}.}
+\item{priority}{Passed to \code{.slvgrf_check}.}
 }
 \description{
-Part of the slvgrf_native implementation; see the file header for the source it follows.
+A step of the slvgrf_native implementation. Called by \code{rate}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{u}, \code{toc}, \code{ate}, \code{order}, \code{n}.

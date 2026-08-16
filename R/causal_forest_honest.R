@@ -12,10 +12,11 @@
 
 #' .morie_cf_tau
 #'
-#' Part of the causal_forest_honest implementation; see the file header
+#' A step of the causal_forest_honest implementation. Called by \code{.morie_cf_grow}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; indexed elementwise.
 #' @param d See Usage.
 #' @return A numeric value.
 #' @export
@@ -34,16 +35,16 @@
 #'
 #' (never seen by the splitter) fills the leaf values.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param d See Usage.
-#' @param split_rows See Usage.
-#' @param est_rows See Usage.
-#' @param depth See Usage.
-#' @param max_depth See Usage.
-#' @param min_leaf See Usage.
-#' @param mtry See Usage.
-#' @param imbalance_penalty Defaults to \code{0}.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; indexed elementwise.
+#' @param d A vector; indexed elementwise.
+#' @param split_rows A vector; its length is taken and its elements indexed.
+#' @param est_rows A vector; its length is taken and its elements indexed.
+#' @param depth Numeric; combined arithmetically in the body.
+#' @param max_depth Passed to \code{.morie_cf_grow}.
+#' @param min_leaf Numeric; combined arithmetically in the body.
+#' @param mtry Numeric; passed to \code{min}.
+#' @param imbalance_penalty A flag; the body branches on it. Defaults to \code{0}.
 #' @return The value of \code{node}, as built in the body.
 #' @export
 .morie_cf_grow <- function(X, y, d, split_rows, est_rows, depth, max_depth,
@@ -114,11 +115,12 @@
 
 #' .morie_cf_walk
 #'
-#' Part of the causal_forest_honest implementation; see the file header
+#' A step of the causal_forest_honest implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param node See Usage.
-#' @param xrow See Usage.
+#' @param node A list; the body reads \code{$feature}, \code{$left}, \code{$right}, \code{$tau}, \code{$threshold} from it.
+#' @param xrow A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
 .morie_cf_walk <- function(node, xrow) {

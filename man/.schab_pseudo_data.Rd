@@ -8,12 +8,12 @@
 .schab_pseudo_data(z, mu, link_kind)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{mu}{See Usage.}
-\item{link_kind}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
+\item{mu}{Numeric; combined arithmetically in the body.}
+\item{link_kind}{Passed to \code{.schab_link}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseudo_likelihood}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

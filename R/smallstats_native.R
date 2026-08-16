@@ -38,7 +38,7 @@ NULL
 #' (pracma\'s block-optimal OptN), then compute the whole-series
 #' statistic log(R/S) / log(n).
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
 #' @param d Defaults to \code{50L}.
 #' @return A numeric value.
 #' @export
@@ -87,9 +87,9 @@ NULL
 #' Pairs are formed positionally from equal-length treated/control
 #' vectors, matching how psens() was called here.
 #'
-#' @param treated See Usage.
-#' @param control See Usage.
-#' @param gamma See Usage.
+#' @param treated A vector; its length is taken.
+#' @param control A vector; its length is taken.
+#' @param gamma Passed to \code{.morie_psens_wilcoxon_d}.
 #' @return The value of \code{.morie_psens_wilcoxon_d}.
 #' @export
 .morie_psens_wilcoxon <- function(treated, control, gamma) {
@@ -107,8 +107,8 @@ NULL
 #' computed at p+ (a documented quirk of that implementation), the lower
 #' bound centres at p-, the upper at p+.
 #'
-#' @param d See Usage.
-#' @param gamma See Usage.
+#' @param d A vector; its length is taken and its elements indexed.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .morie_psens_wilcoxon_d <- function(d, gamma) {
@@ -144,8 +144,8 @@ NULL
 #' gradient; weights are the softmax of -Xc l, rescaled to sum to the
 #' number of controls (the ebal::ebalance convention).
 #'
-#' @param t_mask See Usage.
-#' @param X See Usage.
+#' @param t_mask A flag; the body branches on it.
+#' @param X A matrix; indexed by row and column.
 #' @param max_iter Defaults to \code{200L}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{w}, \code{converged}, \code{max_imbalance}.
@@ -197,8 +197,8 @@ NULL
 #' surface used here. Brute force O(n^2) -- the call sites feed spatial
 #' unit tables (hundreds of rows), where this is instant.
 #'
-#' @param coords See Usage.
-#' @param k See Usage.
+#' @param coords A matrix; passed to \code{nrow}.
+#' @param k Passed to \code{.morie_knn_index_cpp}.
 #' @return The value of \code{.morie_knn_index_cpp}.
 #' @export
 .morie_knn_index <- function(coords, k) {
@@ -222,9 +222,9 @@ NULL
 #' linear interpolation towards random minority k-NN until classes
 #' balance. Returns rows to append (X_new, y_new).
 #'
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @param y_chr See Usage.
-#' @param k See Usage.
+#' @param k Passed to \code{.morie_knn_index}.
 #' @return A list with \code{X_new}, \code{y_new}.
 #' @export
 .morie_smote <- function(X, y_chr, k) {
@@ -262,12 +262,12 @@ NULL
 #' Returns coefficients on the ORIGINAL scale plus intercept. `warm`
 #' optionally seeds beta (standardized scale) for path fits.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param alpha See Usage.
-#' @param lambda See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; passed to \code{mean}.
+#' @param alpha Passed to \code{.morie_coord_descent_cpp}.
+#' @param lambda Passed to \code{.morie_coord_descent_cpp}.
 #' @param max_iter Defaults to \code{1000L}.
-#' @param tol Defaults to \code{1e-06}.
+#' @param tol Passed to \code{.morie_coord_descent_cpp}. Defaults to \code{1e-06}.
 #' @param warm Defaults to \code{NULL}.
 #' @return A list with \code{beta}, \code{beta_std}, \code{intercept}, \code{n_iter}.
 #' @export
@@ -308,11 +308,11 @@ NULL
 #' DML cross-fit nuisance learners used. The SVD makes the whole lambda
 #' path essentially free.
 #'
-#' @param x_train See Usage.
-#' @param z_train See Usage.
-#' @param x_test See Usage.
-#' @param n_folds Defaults to \code{5L}.
-#' @param lambdas Defaults to \code{NULL}.
+#' @param x_train A matrix; passed to \code{nrow}.
+#' @param z_train Numeric; passed to \code{mean}.
+#' @param x_test A matrix; passed to \code{as.matrix}.
+#' @param n_folds A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5L}.
+#' @param lambdas Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .morie_cv_ridge_predict <- function(x_train, z_train, x_test,
@@ -368,8 +368,8 @@ NULL
 #' for the QMC helper. Unscrambled; matches randtoolbox\'s unscrambled
 #' output (same standard direction numbers), cross-validated in tests.
 #'
-#' @param n See Usage.
-#' @param d See Usage.
+#' @param n Passed to \code{.morie_sobol_cpp}.
+#' @param d Passed to \code{.morie_sobol_cpp}.
 #' @return The value of \code{.morie_sobol_cpp}.
 #' @export
 .morie_sobol <- function(n, d) {
@@ -393,10 +393,10 @@ NULL
 #' module. Fisher scoring on the working model, moment estimate of the
 #' exchangeable alpha, robust (sandwich) covariance.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param id See Usage.
-#' @param max_iter Defaults to \code{50L}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi}, \code{n_iter}, \code{converged}.
 #' @export
@@ -466,8 +466,8 @@ NULL
 #' p-value is the Landau upper tail at t. The Landau density has no
 #' closed form; integrate its standard integral representation.
 #'
-#' @param p See Usage.
-#' @param L Defaults to \code{length(p)}.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param L Numeric; passed to \code{log}. Defaults to \code{length(p)}.
 #' @return A numeric value.
 #' @export
 .morie_hmp <- function(p, L = length(p)) {

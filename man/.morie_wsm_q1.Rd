@@ -8,11 +8,11 @@
 .morie_wsm_q1(sorted_vals, p)
 }
 \arguments{
-\item{sorted_vals}{See Usage.}
-\item{p}{See Usage.}
+\item{sorted_vals}{A vector; its length is taken and its elements indexed.}
+\item{p}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the wasserman_native implementation; see the file header for the source it follows.
+A step of the wasserman_native implementation. Called by \code{morie_wasserman_bootstrap_percentile}, \code{morie_wasserman_bootstrap_pivotal}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{[}.

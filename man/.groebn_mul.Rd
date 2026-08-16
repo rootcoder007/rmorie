@@ -8,11 +8,11 @@
 .groebn_mul(f, g)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{g}{See Usage.}
+\item{f}{A vector; its length is taken and its elements indexed.}
+\item{g}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_spoly}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

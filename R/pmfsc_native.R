@@ -115,7 +115,8 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 
 #' .pmfsc_key
 #'
-#' Part of the pmfsc_native implementation; see the file header for the
+#' A step of the pmfsc_native implementation. Called by \code{morie_pmfsc_derive}, \code{morie_pmfsc_score}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -255,11 +256,12 @@ morie_pmfsc_score <- function(pairs, potential,
 
 #' .pmfsc_dist
 #'
-#' Part of the pmfsc_native implementation; see the file header for the
+#' A step of the pmfsc_native implementation. Called by \code{morie_pmfsc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .pmfsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))

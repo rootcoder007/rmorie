@@ -8,10 +8,10 @@
 .nrfrad_mat(colour)
 }
 \arguments{
-\item{colour}{See Usage.}
+\item{colour}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the nrfrad_native implementation; see the file header for the source it follows.
+A step of the nrfrad_native implementation. Called by \code{volume_render}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

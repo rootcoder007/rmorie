@@ -8,14 +8,14 @@
 .schab_predict_random_field(Sigma_S, Sigma_nu, nu, X, beta)
 }
 \arguments{
-\item{Sigma_S}{See Usage.}
-\item{Sigma_nu}{See Usage.}
+\item{Sigma_S}{A matrix; passed to \code{as.matrix}.}
+\item{Sigma_nu}{A matrix; passed to \code{as.matrix}.}
 \item{nu}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{beta}{See Usage.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseudo_likelihood}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

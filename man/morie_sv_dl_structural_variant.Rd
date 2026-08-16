@@ -8,23 +8,23 @@
 morie_sv_dl_structural_variant(pairs, reference = NULL, split_reads = NULL, orientation = NULL, median = NULL, sd = NULL, n_sd = 3, min_support = 2, k = 7, k_min = 3, min_split_support = 2, max_length_diff = 0.1, window = NULL, spread = "mad")
 }
 \arguments{
-\item{pairs}{See Usage.}
-\item{reference}{Defaults to \code{NULL}.}
-\item{split_reads}{Defaults to \code{NULL}.}
-\item{orientation}{Defaults to \code{NULL}.}
-\item{median}{Defaults to \code{NULL}.}
-\item{sd}{Defaults to \code{NULL}.}
-\item{n_sd}{Defaults to \code{3}.}
-\item{min_support}{Defaults to \code{2}.}
-\item{k}{Defaults to \code{7}.}
-\item{k_min}{Defaults to \code{3}.}
-\item{min_split_support}{Defaults to \code{2}.}
-\item{max_length_diff}{Defaults to \code{0.1}.}
-\item{window}{Defaults to \code{NULL}.}
-\item{spread}{Defaults to \code{"mad"}.}
+\item{pairs}{Passed to \code{morie_sv_dl_paired_end_calls}.}
+\item{reference}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{split_reads}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{orientation}{Passed to \code{morie_sv_dl_paired_end_calls}.}
+\item{median}{Passed to \code{morie_sv_dl_paired_end_calls}.}
+\item{sd}{Passed to \code{morie_sv_dl_paired_end_calls}.}
+\item{n_sd}{Passed to \code{morie_sv_dl_paired_end_calls}. Defaults to \code{3}.}
+\item{min_support}{Passed to \code{morie_sv_dl_paired_end_calls}. Defaults to \code{2}.}
+\item{k}{Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{7}.}
+\item{k_min}{Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{3}.}
+\item{min_split_support}{Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{2}.}
+\item{max_length_diff}{Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{0.1}.}
+\item{window}{Passed to \code{morie_sv_dl_paired_end_calls}.}
+\item{spread}{Passed to \code{morie_sv_dl_paired_end_calls}. Defaults to \code{"mad"}.}
 }
 \description{
-Part of the sv_dl_native implementation; see the file header for the source it follows.
+A step of the sv_dl_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{calls}, \code{n_calls}, \code{n_precise}, \code{insert_median}, \code{insert_sd}, \code{spread}, \code{orientation}, \code{n_sd}, \code{min_support}, \code{method}, \code{note}.

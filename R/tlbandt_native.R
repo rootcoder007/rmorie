@@ -55,12 +55,13 @@
 
 #' .tlbandt_design_probability
 #'
-#' Part of the tlbandt_native implementation; see the file header for
+#' A step of the tlbandt_native implementation. Called by \code{morie_tlbandt}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param blip_estimate See Usage.
 #' @param delta Defaults to \code{0.1}.
-#' @param greedy Defaults to \code{FALSE}.
+#' @param greedy A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tlbandt_design_probability <- function(blip_estimate, delta = 0.1,
@@ -79,16 +80,17 @@
 
 #' morie_tlbandt
 #'
-#' Part of the tlbandt_native implementation; see the file header for
+#' A step of the tlbandt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param W See Usage.
+#' @param W A matrix; passed to \code{as.matrix}.
 #' @param Y1 See Usage.
 #' @param Y0 See Usage.
 #' @param blip_fn See Usage.
-#' @param delta Defaults to \code{0.1}.
-#' @param seed Defaults to \code{0}.
-#' @param greedy Defaults to \code{FALSE}.
+#' @param delta Passed to \code{.tlbandt_design_probability}. Defaults to \code{0.1}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param greedy A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param burn_in Defaults to \code{20L}.
 #' @return A list with \code{A}, \code{Y}, \code{g}, \code{history}, \code{greedy}, \code{min_g}, \code{max_g}, \code{note}.
 #' @export
@@ -138,7 +140,8 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 
 #' .tlbandt_martingale_terms
 #'
-#' Part of the tlbandt_native implementation; see the file header for
+#' A step of the tlbandt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A See Usage.
@@ -170,7 +173,8 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 
 #' .tlbandt_sequential_ci
 #'
-#' Part of the tlbandt_native implementation; see the file header for
+#' A step of the tlbandt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param D See Usage.
@@ -191,7 +195,8 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 
 #' .tlbandt_regret
 #'
-#' Part of the tlbandt_native implementation; see the file header for
+#' A step of the tlbandt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param Y See Usage.
@@ -213,7 +218,8 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 
 #' .tlbandt_cheatsheet
 #'
-#' Part of the tlbandt_native implementation; see the file header for
+#' A step of the tlbandt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

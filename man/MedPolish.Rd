@@ -8,12 +8,12 @@
 MedPolish(values, grid = NULL, iters = 10L)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{A matrix; passed to \code{as.matrix}.}
 \item{grid}{Defaults to \code{NULL}.}
-\item{iters}{Defaults to \code{10L}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.}
 }
 \description{
-Gotway -- a fixed-string search for "polish" returns nothing; the book\\'s trend removal is the OLS trend surface of Sec. 5.3.1.  Median polish is resistant to outliers, which is why the geostatistical literature reaches for it first.  A sweep must run row-then-column in a FIXED order; median polish is not order-invariant.
+Gotway -- a fixed-string search for "polish" returns nothing; the book\'s trend removal is the OLS trend surface of Sec. 5.3.1.  Median polish is resistant to outliers, which is why the geostatistical literature reaches for it first.  A sweep must run row-then-column in a FIXED order; median polish is not order-invariant.
 }
 \value{
 A list with \code{overall}, \code{row}, \code{col}, \code{residuals}, \code{fitted}, \code{abs_residual_sum}, \code{sweeps}, \code{resistant_to_outliers}, \code{nrow}, \code{ncol}, \code{n}, \code{method}.

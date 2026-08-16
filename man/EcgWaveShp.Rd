@@ -8,14 +8,14 @@
 EcgWaveShp(qrsdur, stdev, rdur = NULL, sdur = NULL, qpresent = NULL)
 }
 \arguments{
-\item{qrsdur}{See Usage.}
+\item{qrsdur}{Numeric; combined arithmetically in the body.}
 \item{stdev}{See Usage.}
 \item{rdur}{Defaults to \code{NULL}.}
 \item{sdur}{Defaults to \code{NULL}.}
 \item{qpresent}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{qrsdurms}, \code{qrswide}, \code{lbbbdur}, \code{rbbbdur}, \code{sdurok}, \code{rdurok}, \code{qabsent}, \code{stdev}, \code{stfinding}, \code{required}, \code{method}.

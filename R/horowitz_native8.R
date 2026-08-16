@@ -29,8 +29,8 @@
 #' anything but. Using the naive form put every quantity downstream of
 #' G\' about 1e-4 away from morie.fn, which is small but is not parity.
 #'
-#' @param fv See Usage.
-#' @param xv See Usage.
+#' @param fv A vector; its length is taken and its elements indexed.
+#' @param xv A vector; indexed elementwise.
 #' @return The value of \code{g}, as built in the body.
 #' @export
 .morie_hrz_gradient <- function(fv, xv) {
@@ -53,13 +53,14 @@
 # Nadaraya-Watson fitted values on a supplied grid.
 #' Nadaraya-Watson fitted values on a supplied grid
 #'
-#' Part of the horowitz_native8 implementation; see the file header for
+#' A step of the horowitz_native8 implementation. Called by \code{morie_direct_discrete}, \code{morie_nls_weight_function}, \code{morie_one_step_efficient}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
-#' @param y See Usage.
+#' @param y A matrix; passed to \code{\%*\%}.
 #' @param grid See Usage.
-#' @param h See Usage.
+#' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_hrz_nw <- function(x, y, grid, h) {

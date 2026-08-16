@@ -8,10 +8,10 @@
 .sxrhrt_rows(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the sxrhrt_native implementation; see the file header for the source it follows.
+A step of the sxrhrt_native implementation. Called by \code{morie_sxrhrt_sex_specific_h2}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

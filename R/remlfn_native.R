@@ -9,11 +9,12 @@
 
 #' Group y values by group label, preserving first-appearance order
 #'
-#' Part of the remlfn_native implementation; see the file header for the
+#' A step of the remlfn_native implementation. Called by \code{.remlfn_ranova}, \code{morie_remlfn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param group See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param group A vector; its length is taken and its elements indexed.
 #' @return A list with \code{keys}, \code{gs}.
 #' @export
 .remlfn_groups <- function(y, group) {
@@ -36,11 +37,12 @@
 
 #' .remlfn_ranova
 #'
-#' Part of the remlfn_native implementation; see the file header for the
+#' A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param group See Usage.
+#' @param y Numeric; passed to \code{mean}.
+#' @param group Passed to \code{.remlfn_groups}.
 #' @return A list with \code{msa}, \code{mse}, \code{sigma2_a_raw}, \code{sigma2_a}, \code{balanced}, \code{dfa}, \code{dfe}, \code{ssa}, \code{sse}.
 #' @export
 .remlfn_ranova <- function(y, group) {
@@ -86,13 +88,14 @@
 
 #' .remlfn_loglik
 #'
-#' Part of the remlfn_native implementation; see the file header for the
+#' A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gs See Usage.
-#' @param ns See Usage.
-#' @param s2a See Usage.
-#' @param s2e See Usage.
+#' @param gs A vector; its length is taken and its elements indexed.
+#' @param ns A vector; indexed elementwise.
+#' @param s2a Numeric; combined arithmetically in the body.
+#' @param s2e Numeric; passed to \code{log}.
 #' @return A list with \code{loglik}, \code{mu}.
 #' @export
 .remlfn_loglik <- function(gs, ns, s2a, s2e) {
@@ -118,14 +121,15 @@
 
 #' .remlfn_nelder_mead
 #'
-#' Part of the remlfn_native implementation; see the file header for the
+#' A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param fn See Usage.
-#' @param x0 See Usage.
+#' @param x0 A vector; its length is taken and its elements indexed.
 #' @param xatol Defaults to \code{1e-10}.
 #' @param fatol Defaults to \code{1e-10}.
-#' @param maxiter Defaults to \code{5000}.
+#' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5000}.
 #' @return A list with \code{x}, \code{fun}, \code{nit}, \code{success}.
 #' @export
 .remlfn_nelder_mead <- function(fn, x0, xatol = 1e-10, fatol = 1e-10, maxiter = 5000) {
@@ -230,14 +234,15 @@
 
 #' morie_remlfn
 #'
-#' Part of the remlfn_native implementation; see the file header for the
+#' A step of the remlfn_native implementation. Called by \code{morie_vcomp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param group See Usage.
-#' @param tol Defaults to \code{1e-10}.
+#' @param y A vector; its length is taken.
+#' @param group A vector; its length is taken.
+#' @param tol Passed to \code{.remlfn_nelder_mead}. Defaults to \code{1e-10}.
 #' @param max_iter Defaults to \code{5000}.
-#' @param solver Defaults to \code{"auto"}.
+#' @param solver One of \code{"auto"}, \code{"closed"}, \code{"optim"}. Defaults to \code{"auto"}.
 #' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik}, \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form}, \code{solver}, \code{method}.
 #' @export
 morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto") {
@@ -390,7 +395,8 @@ morie_reml_variance_components <- morie_remlfn
 # Cheatsheet
 #' Cheatsheet
 #'
-#' Part of the remlfn_native implementation; see the file header for the
+#' A step of the remlfn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

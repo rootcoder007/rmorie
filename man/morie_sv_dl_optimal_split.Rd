@@ -8,8 +8,8 @@
 morie_sv_dl_optimal_split(f, r)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{r}{See Usage.}
+\item{f}{A vector; its length is taken and its elements indexed.}
+\item{r}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 Indices are 1-based over the consensus, as in the paper.

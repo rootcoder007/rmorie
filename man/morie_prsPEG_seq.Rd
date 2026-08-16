@@ -11,7 +11,7 @@ morie_prsPEG_seq(...)
 \item{...}{Passed through.}
 }
 \description{
-Part of the prsPEG_native implementation; see the file header for the source it follows.
+A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_plus}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{fn}, as built in the body.

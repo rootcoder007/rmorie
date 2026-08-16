@@ -8,15 +8,15 @@
 recommend(model, pos, u, n_items, top_k = 5L, activation = "sigmoid")
 }
 \arguments{
-\item{model}{See Usage.}
-\item{pos}{See Usage.}
+\item{model}{A list; the body reads \code{$b}, \code{$b_prime}, \code{$V}, \code{$W}, \code{$W_prime} from it.}
+\item{pos}{A vector; indexed elementwise.}
 \item{u}{See Usage.}
 \item{n_items}{See Usage.}
 \item{top_k}{Defaults to \code{5L}.}
 \item{activation}{Defaults to \code{"sigmoid"}.}
 }
 \description{
-Part of the cdaeRC_native implementation; see the file header for the source it follows.
+A step of the cdaeRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ranking}, \code{n_scored}.

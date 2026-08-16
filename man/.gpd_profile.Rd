@@ -3,13 +3,13 @@
 % the formals.
 \name{.gpd_profile}
 \alias{.gpd_profile}
-\title{Grimshaw\\\'s reparametrisation: given t = xi/sigma, xi and sigma}
+\title{Grimshaw\\'s reparametrisation: given t = xi/sigma, xi and sigma}
 \usage{
 .gpd_profile(y, t)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{t}{See Usage.}
+\item{y}{A vector; its length is taken.}
+\item{t}{Numeric; passed to \code{abs}.}
 }
 \description{
 follow Part of the evpot implementation; see the file header for the source it follows.

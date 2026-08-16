@@ -8,10 +8,10 @@
 .parts_full(label)
 }
 \arguments{
-\item{label}{See Usage.}
+\item{label}{Compared against \code{"O"}.}
 }
 \description{
-Part of the benRea_native implementation; see the file header for the source it follows.
+A step of the benRea_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p}, \code{t}.

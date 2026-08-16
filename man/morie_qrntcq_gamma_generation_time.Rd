@@ -15,7 +15,7 @@ morie_qrntcq_gamma_generation_time(shape = 2.83, scale = 1.86, grid = NULL, t.ma
 \item{n}{Defaults to \code{3001L}.}
 }
 \description{
-Part of the qrntcq_native implementation; see the file header for the source it follows.
+A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration}, \code{morie_qrntcq_quarantine_efficacy} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{t}, \code{density}.

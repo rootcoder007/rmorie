@@ -74,7 +74,8 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
 
 #' .rg_higuchi_fd
 #'
-#' Part of the rgemgfd implementation; see the file header for the
+#' A step of the rgemgfd implementation. Called by \code{rgemgfd}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.

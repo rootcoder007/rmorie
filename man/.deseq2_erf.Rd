@@ -8,7 +8,7 @@
 .deseq2_erf(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
 }
 \description{
 the arm stays base-R only, as the package requires.

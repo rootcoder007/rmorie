@@ -8,11 +8,11 @@
 .jsonlt_df(cols, nms)
 }
 \arguments{
-\item{cols}{See Usage.}
+\item{cols}{A vector; its length is taken and its elements indexed.}
 \item{nms}{See Usage.}
 }
 \description{
-columns. That is morie_jsonlt_flatten\\\'s job, opt-in, and doing it here would make a nested structure impossible to represent at all.
+columns. That is morie_jsonlt_flatten\\'s job, opt-in, and doing it here would make a nested structure impossible to represent at all.
 }
 \value{
 The value of \code{structure}.

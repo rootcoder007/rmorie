@@ -8,14 +8,14 @@
 .schab_marginal_moments_lognormal(X, beta, sigma2_S, sigma2 = 1, rho = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{\%*\%}.}
 \item{beta}{See Usage.}
 \item{sigma2_S}{See Usage.}
 \item{sigma2}{Defaults to \code{1}.}
-\item{rho}{Defaults to \code{NULL}.}
+\item{rho}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{spglmm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

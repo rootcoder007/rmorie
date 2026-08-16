@@ -69,11 +69,12 @@ morie_metsem_kmers <- function(seq, k) {
 
 #' .metsem_index
 #'
-#' Part of the metsem_native implementation; see the file header for the
+#' A step of the metsem_native implementation. Called by \code{.metsem_drop}, \code{morie_metsem_graph}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param edges See Usage.
-#' @param k See Usage.
+#' @param k Numeric; combined arithmetically in the body.
 #' @return A list with \code{out}, \code{inc}, \code{nodes}.
 #' @export
 .metsem_index <- function(edges, k) {
@@ -115,10 +116,11 @@ morie_metsem_graph <- function(reads, k) {
 
 #' .metsem_outdeg
 #'
-#' Part of the metsem_native implementation; see the file header for the
+#' A step of the metsem_native implementation. Called by \code{.metsem_walk}, \code{morie_metsem}, \code{morie_metsem_unitigs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$out} from it.
 #' @param v See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -126,10 +128,11 @@ morie_metsem_graph <- function(reads, k) {
   if (v %in% names(g$out)) length(g$out[[v]]) else 0L
 #' .metsem_indeg
 #'
-#' Part of the metsem_native implementation; see the file header for the
+#' A step of the metsem_native implementation. Called by \code{.metsem_walk}, \code{morie_metsem}, \code{morie_metsem_unitigs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$inc} from it.
 #' @param v See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -138,11 +141,12 @@ morie_metsem_graph <- function(reads, k) {
 
 #' .metsem_walk
 #'
-#' Part of the metsem_native implementation; see the file header for the
+#' A step of the metsem_native implementation. Called by \code{morie_metsem_unitigs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param first See Usage.
+#' @param g A list; the body reads \code{$out} from it.
+#' @param first A vector; its length is taken.
 #' @return The value of \code{path}, as built in the body.
 #' @export
 .metsem_walk <- function(g, first) {
@@ -159,10 +163,11 @@ morie_metsem_graph <- function(reads, k) {
 
 #' .metsem_seq
 #'
-#' Part of the metsem_native implementation; see the file header for the
+#' A step of the metsem_native implementation. Called by \code{morie_metsem_unitigs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param path See Usage.
+#' @param path A vector; its length is taken and its elements indexed.
 #' @return A character value.
 #' @export
 .metsem_seq <- function(path) {
@@ -242,10 +247,11 @@ morie_metsem_n50 <- function(lengths) {
 
 #' .metsem_drop
 #'
-#' Part of the metsem_native implementation; see the file header for the
+#' A step of the metsem_native implementation. Called by \code{morie_metsem}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g A list; the body reads \code{$edges}, \code{$inc}, \code{$k}, \code{$nodes}, \code{$out} from it.
 #' @param es See Usage.
 #' @return The value of \code{g}, as built in the body.
 #' @export

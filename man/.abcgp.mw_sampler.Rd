@@ -9,23 +9,23 @@
 }
 \arguments{
 \item{sim}{See Usage.}
-\item{obs}{See Usage.}
-\item{log_prior}{See Usage.}
+\item{obs}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
+\item{log_prior}{Passed to \code{.abcgp.alpha_terms}.}
 \item{theta0}{See Usage.}
-\item{n_iter}{See Usage.}
+\item{n_iter}{Numeric; combined arithmetically in the body.}
 \item{n_sim}{See Usage.}
-\item{epsilon}{See Usage.}
+\item{epsilon}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
 \item{proposal_sd}{See Usage.}
-\item{summary}{See Usage.}
-\item{seed}{See Usage.}
-\item{adaptive}{See Usage.}
+\item{summary}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
+\item{seed}{Passed to \code{.ghc_rng}.}
+\item{adaptive}{A flag; the body branches on it.}
 \item{xi}{See Usage.}
 \item{delta_s}{See Usage.}
 \item{n_alpha}{See Usage.}
 \item{max_sim}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc}, \code{.abcgp.synthetic_abc}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations}, \code{unresolved_steps}.

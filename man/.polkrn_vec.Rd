@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the polkrn_native implementation; see the file header for the source it follows.
+A step of the polkrn_native implementation. Called by \code{.polkrn_ip_weights_history}, \code{morie_polkrn}, \code{rbf_basis}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

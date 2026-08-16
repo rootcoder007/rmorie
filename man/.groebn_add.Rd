@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{g}{See Usage.}
+\item{g}{A vector; indexed elementwise.}
 }
 \description{
 Polynomial arithmetic ---------------------------------------------------------------------------

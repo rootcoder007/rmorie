@@ -9,13 +9,13 @@ CadAcou(coronary_sound, fs, order = 8, hf_band = c(300, 900), ref_band = c(50, 3
 }
 \arguments{
 \item{coronary_sound}{See Usage.}
-\item{fs}{See Usage.}
-\item{order}{Defaults to \code{8}.}
-\item{hf_band}{Defaults to \code{c(300, 900)}.}
-\item{ref_band}{Defaults to \code{c(50, 300)}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{order}{Numeric; combined arithmetically in the body. Defaults to \code{8}.}
+\item{hf_band}{A vector; indexed elementwise. Defaults to \code{c(300, 900)}.}
+\item{ref_band}{A vector; indexed elementwise. Defaults to \code{c(50, 300)}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

@@ -11,17 +11,17 @@ nonlinear_cg(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = N
 \item{f}{See Usage.}
 \item{grad}{See Usage.}
 \item{x0}{See Usage.}
-\item{beta}{Defaults to \code{"fletcher-reeves"}.}
-\item{restart}{Defaults to \code{NULL}.}
+\item{beta}{Passed to \code{.cgnonl_beta}. Defaults to \code{"fletcher-reeves"}.}
+\item{restart}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{max_iter}{Defaults to \code{NULL}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 \item{est}{Defaults to \code{NULL}.}
-\item{line_search}{Defaults to \code{"fletcher-reeves"}.}
-\item{hess_vec}{Defaults to \code{NULL}.}
-\item{keep_path}{Defaults to \code{FALSE}.}
+\item{line_search}{Compared against \code{"exact-quadratic"}. Defaults to \code{"fletcher-reeves"}.}
+\item{hess_vec}{Optional; may be \code{NULL}. Passed to \code{.cgnonl_exact_quadratic_step}.}
+\item{keep_path}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the cgnonl_native implementation; see the file header for the source it follows.
+A step of the cgnonl_native implementation. Called by \code{morie_cgnonl}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{x}, \code{fun}, \code{grad}, \code{gnorm}, \code{n_iter}, \code{n_restart}, \code{n_feval}, \code{converged}, \code{betas}, \code{path}, \code{beta_rule}, \code{line_search}, \code{restart_every}, \code{method}, \code{note}.

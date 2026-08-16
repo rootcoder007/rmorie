@@ -10,7 +10,7 @@ Notch60(fs, f0 = 60, z = NULL)
 \arguments{
 \item{fs}{See Usage.}
 \item{f0}{Defaults to \code{60}.}
-\item{z}{Defaults to \code{NULL}.}
+\item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{
 there is exactly nought.  With zeros alone the notch is wide, which is why the book goes on to add poles just inside them.

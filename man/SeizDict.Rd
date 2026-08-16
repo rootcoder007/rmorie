@@ -8,14 +8,14 @@
 SeizDict(signals, labels, iterations = 7, atoms = NULL, test = NULL)
 }
 \arguments{
-\item{signals}{See Usage.}
-\item{labels}{See Usage.}
-\item{iterations}{Defaults to \code{7}.}
-\item{atoms}{Defaults to \code{NULL}.}
-\item{test}{Defaults to \code{NULL}.}
+\item{signals}{Passed to \code{.morie_bx_mat}.}
+\item{labels}{Passed to \code{.morie_bx_vec}.}
+\item{iterations}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{7}.}
+\item{atoms}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
+\item{test}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 }
 \description{
-Part of the rangayyan_class2 implementation; see the file header for the source it follows.
+A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{dictionary}, \code{coefficients}, \code{error}, \code{predictions}, \code{isseizure}, \code{testclass}, \code{accuracy}, \code{method}.

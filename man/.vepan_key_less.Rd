@@ -8,11 +8,11 @@
 .vepan_key_less(k1, k2)
 }
 \arguments{
-\item{k1}{See Usage.}
-\item{k2}{See Usage.}
+\item{k1}{A vector; its length is taken and its elements indexed.}
+\item{k2}{A vector; indexed elementwise.}
 }
 \description{
-Part of the vepan_native implementation; see the file header for the source it follows.
+A step of the vepan_native implementation. Called by \code{morie_vepan_pick}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

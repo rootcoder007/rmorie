@@ -8,7 +8,7 @@
 morie_funBoot(curves, statistic = NULL, alpha = 0.05, B = 500L, metric = "l2", smooth = 0, seed = 0)
 }
 \arguments{
-\item{curves}{See Usage.}
+\item{curves}{A matrix; indexed by row and column.}
 \item{statistic}{Defaults to \code{NULL}.}
 \item{alpha}{Defaults to \code{0.05}.}
 \item{B}{Defaults to \code{500L}.}

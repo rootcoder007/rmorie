@@ -8,10 +8,10 @@
 .morie_ml_pinv(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{A matrix; passed to \code{dim}.}
 }
 \description{
-Part of the causal_molak implementation; see the file header for the source it follows.
+A step of the causal_molak implementation. Called by \code{morie_bicdag}, \code{morie_rlearn}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{\%*\%}.

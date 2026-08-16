@@ -15,7 +15,7 @@ birth_split_heights(h_j, u, s_left, s_star, s_right)
 \item{s_right}{See Usage.}
 }
 \description{
-Part of the bayrjmcmc_native implementation; see the file header for the source it follows.
+A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

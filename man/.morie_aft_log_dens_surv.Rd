@@ -8,11 +8,11 @@
 .morie_aft_log_dens_surv(z, family)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
 \item{family}{See Usage.}
 }
 \description{
-Part of the aft_native implementation; see the file header for the source it follows.
+A step of the aft_native implementation. Called by \code{.morie_aft_fit}, \code{morie_aft_residuals}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

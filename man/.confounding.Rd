@@ -8,12 +8,12 @@
 .confounding(G, K, marker)
 }
 \arguments{
-\item{G}{See Usage.}
-\item{K}{See Usage.}
+\item{G}{Passed to \code{.farmlmm_to_mat}.}
+\item{K}{A matrix; passed to \code{\%*\%}.}
 \item{marker}{See Usage.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{correlation}, \code{marker}, \code{note}.

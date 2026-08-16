@@ -3,11 +3,12 @@
 # Inverse Laplace CDF at u in (0, 1), location zero.
 #' Inverse Laplace CDF at u in (0, 1), location zero
 #'
-#' Part of the Dpvar implementation; see the file header for the source
+#' A step of the Dpvar implementation. Called by \code{Dpvar}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param u See Usage.
-#' @param scale See Usage.
+#' @param u Numeric; combined arithmetically in the body.
+#' @param scale Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .dpvar_laplace <- function(u, scale) {

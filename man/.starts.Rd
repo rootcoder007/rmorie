@@ -8,7 +8,7 @@
 .starts(spec)
 }
 \arguments{
-\item{spec}{See Usage.}
+\item{spec}{A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.}
 }
 \description{
 builds its initial simplex by nudging each coordinate by 5\% of its own value (the same rule as scipy), so a single start of alpha = 0.09 only ever explores a box 0.004 wide. Starting from a small grid instead is what makes the search actually search.

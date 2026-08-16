@@ -8,16 +8,16 @@
 .tlroad_solves_eic_equation(A, Y, Q1, Q0, g, psi, tol = 1e-08)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{Y}{See Usage.}
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
-\item{g}{See Usage.}
-\item{psi}{See Usage.}
+\item{A}{Passed to \code{.tlroad_eic_ate}.}
+\item{Y}{Passed to \code{.tlroad_eic_ate}.}
+\item{Q1}{Passed to \code{.tlroad_eic_ate}.}
+\item{Q0}{Passed to \code{.tlroad_eic_ate}.}
+\item{g}{Passed to \code{.tlroad_eic_ate}.}
+\item{psi}{Passed to \code{.tlroad_eic_ate}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the tlroad_native implementation; see the file header for the source it follows.
+A step of the tlroad_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{mean_eic}, \code{solved}, \code{se}, \code{ci}, \code{method}.

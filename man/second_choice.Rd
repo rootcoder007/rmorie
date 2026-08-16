@@ -11,13 +11,13 @@ second_choice(i1, alpha, y, E, C, rng, tol = 0.001)
 \item{i1}{See Usage.}
 \item{alpha}{See Usage.}
 \item{y}{See Usage.}
-\item{E}{See Usage.}
+\item{E}{A vector; indexed elementwise.}
 \item{C}{See Usage.}
-\item{rng}{See Usage.}
+\item{rng}{A list; the body reads \code{$uniform} from it.}
 \item{tol}{Defaults to \code{0.001}.}
 }
 \description{
-Part of the smoopt_native implementation; see the file header for the source it follows.
+A step of the smoopt_native implementation. Called by \code{smo_platt}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{index}, \code{level}, \code{note}.

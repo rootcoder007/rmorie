@@ -61,7 +61,8 @@
 
 #' .ucfR_co_rated
 #'
-#' Part of the ucfR_native implementation; see the file header for the
+#' A step of the ucfR_native implementation. Called by \code{.ucfR_pearson}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ratings_a See Usage.
@@ -85,7 +86,8 @@
 
 #' .ucfR_significance_weight
 #'
-#' Part of the ucfR_native implementation; see the file header for the
+#' A step of the ucfR_native implementation. Called by \code{.ucfR_pearson}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_common See Usage.
@@ -101,14 +103,15 @@
 
 #' .ucfR_pearson
 #'
-#' Part of the ucfR_native implementation; see the file header for the
+#' A step of the ucfR_native implementation. Called by \code{.ucfR_neighbours}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ratings_a See Usage.
-#' @param ratings_b See Usage.
+#' @param ratings_a Passed to \code{.ucfR_co_rated}.
+#' @param ratings_b Passed to \code{.ucfR_co_rated}.
 #' @param min_common Defaults to \code{2}.
 #' @param significance Defaults to \code{FALSE}.
-#' @param threshold Defaults to \code{50}.
+#' @param threshold Passed to \code{.ucfR_significance_weight}. Defaults to \code{50}.
 #' @return A list with \code{w}, \code{n_common}, \code{degenerate}, \code{significance_applied}.
 #' @export
 .ucfR_pearson <- function(ratings_a, ratings_b, min_common = 2,
@@ -139,14 +142,15 @@
 
 #' .ucfR_neighbours
 #'
-#' Part of the ucfR_native implementation; see the file header for the
+#' A step of the ucfR_native implementation. Called by \code{.ucfR_predict_rating}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param target See Usage.
-#' @param others See Usage.
-#' @param min_common Defaults to \code{2}.
+#' @param target Passed to \code{.ucfR_pearson}.
+#' @param others A vector; its length is taken and its elements indexed.
+#' @param min_common Passed to \code{.ucfR_pearson}. Defaults to \code{2}.
 #' @param top_k Defaults to \code{NULL}.
-#' @param significance Defaults to \code{FALSE}.
+#' @param significance Passed to \code{.ucfR_pearson}. Defaults to \code{FALSE}.
 #' @return A list with \code{neighbours}, \code{n}, \code{note}.
 #' @export
 .ucfR_neighbours <- function(target, others, min_common = 2,
@@ -180,15 +184,16 @@
 
 #' .ucfR_predict_rating
 #'
-#' Part of the ucfR_native implementation; see the file header for the
+#' A step of the ucfR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param target See Usage.
-#' @param others See Usage.
+#' @param target Passed to \code{.ucfR_neighbours}.
+#' @param others A vector; indexed elementwise.
 #' @param item See Usage.
-#' @param min_common Defaults to \code{2}.
-#' @param top_k Defaults to \code{NULL}.
-#' @param significance Defaults to \code{FALSE}.
+#' @param min_common Passed to \code{.ucfR_neighbours}. Defaults to \code{2}.
+#' @param top_k Passed to \code{.ucfR_neighbours}.
+#' @param significance Passed to \code{.ucfR_neighbours}. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{prediction}, \code{naive_weighted_mean}, \code{user_mean}, \code{n_neighbours}, \code{fell_back}, \code{method}, \code{note}.
 #' @export
 .ucfR_predict_rating <- function(target, others, item, min_common = 2,
@@ -242,7 +247,8 @@
 
 #' .ucfR_cheatsheet
 #'
-#' Part of the ucfR_native implementation; see the file header for the
+#' A step of the ucfR_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

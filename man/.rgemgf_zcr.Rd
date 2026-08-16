@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the rgemgf implementation; see the file header for the source it follows.
+A step of the rgemgf implementation. Called by \code{rgemgf}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

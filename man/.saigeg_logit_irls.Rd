@@ -8,12 +8,12 @@
 .saigeg_logit_irls(D, y, ridge = 1e-08)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{D}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the saigeg_native implementation; see the file header for the source it follows.
+A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{beta}, as built in the body.

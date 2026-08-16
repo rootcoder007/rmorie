@@ -8,14 +8,14 @@
 .rfbest(X, Y, rows, cand, q)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
-\item{rows}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{Y}{Passed to \code{.rfgain}.}
+\item{rows}{A vector; indexed elementwise.}
 \item{cand}{See Usage.}
-\item{q}{See Usage.}
+\item{q}{Passed to \code{.rfgain}.}
 }
 \description{
-Part of the mvsml_rf_shared implementation; see the file header for the source it follows.
+A step of the mvsml_rf_shared implementation. Called by \code{.rfgrow}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{best}, as built in the body.

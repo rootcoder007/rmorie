@@ -11,6 +11,6 @@
 Internal helper: Newey-West (Bartlett) HAC covariance for OLS
 }
 \value{
-The value of \code{%*%}.
+The value of \code{\%*\%}.
 }
 \keyword{internal}

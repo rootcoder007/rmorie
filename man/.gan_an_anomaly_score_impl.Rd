@@ -8,14 +8,14 @@
 .gan_an_anomaly_score_impl(x, g_z, f_x, f_gz, lam = 0.1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{g_z}{See Usage.}
-\item{f_x}{See Usage.}
-\item{f_gz}{See Usage.}
+\item{x}{Passed to \code{.gan_an_residual_loss_impl}.}
+\item{g_z}{Passed to \code{.gan_an_residual_loss_impl}.}
+\item{f_x}{Passed to \code{.gan_an_discrimination_loss_impl}.}
+\item{f_gz}{Passed to \code{.gan_an_discrimination_loss_impl}.}
 \item{lam}{Defaults to \code{0.1}.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. Called by \code{anomaly_score}, \code{morie_gan_an}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{score}, \code{residual}, \code{discrimination}, \code{lambda}.

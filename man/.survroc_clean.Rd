@@ -13,7 +13,7 @@
 \item{marker}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the survroc_native implementation; see the file header for the source it follows.
+A step of the survroc_native implementation. Called by \code{.survroc_pair}, \code{morie_survroc}, \code{morie_survroc_kaplan_meier} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{T}, \code{E}, \code{M}.

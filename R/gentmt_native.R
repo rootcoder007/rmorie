@@ -12,7 +12,8 @@
 
 #' .gentmt_vec
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_treatment_density} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -24,11 +25,12 @@
 
 #' .gentmt_ols_core
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. Called by \code{.gentmt_treatment_density}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
 #' @export
 .gentmt_ols_core <- function(X, y) {
@@ -49,12 +51,13 @@
 
 #' .gentmt_wls
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{morie_gentmt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; passed to \code{sqrt}.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
 #' @export
 .gentmt_wls <- function(X, y, w) {
@@ -79,11 +82,12 @@
 
 #' .gentmt_treatment_density
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_ip_weights}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param H See Usage.
+#' @param A Passed to \code{.gentmt_vec}.
+#' @param H A matrix; passed to \code{as.matrix}.
 #' @param kind Defaults to \code{"normal"}.
 #' @return A list with \code{dens}, \code{info}.
 #' @export
@@ -100,14 +104,15 @@
 
 #' .gentmt_ip_weights
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param H See Usage.
-#' @param kind Defaults to \code{"normal"}.
-#' @param stabilize Defaults to \code{TRUE}.
-#' @param trim Defaults to \code{NULL}.
+#' @param A Numeric; passed to \code{mean}.
+#' @param H Passed to \code{.gentmt_treatment_density}.
+#' @param kind Passed to \code{.gentmt_treatment_density}. Defaults to \code{"normal"}.
+#' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param trim Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{w}, \code{info}.
 #' @export
 .gentmt_ip_weights <- function(A, H, kind = "normal", stabilize = TRUE, trim = NULL) {
@@ -147,12 +152,13 @@
 
 #' .gentmt_gps_subclassify
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param H See Usage.
+#' @param y Passed to \code{.gentmt_vec}.
+#' @param A Passed to \code{.gentmt_vec}.
+#' @param H Passed to \code{.gentmt_treatment_density}.
 #' @param n_strata Defaults to \code{5}.
 #' @param degree Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{se}, \code{stratum_slopes}, \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n}, \code{degree}.
@@ -213,13 +219,14 @@
 
 #' .gentmt_dose_response_curve
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param H See Usage.
-#' @param doses Defaults to \code{NULL}.
+#' @param y Passed to \code{.gentmt_vec}.
+#' @param A Passed to \code{.gentmt_vec}.
+#' @param H Passed to \code{.gentmt_treatment_density}.
+#' @param doses Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param degree Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{se}, \code{doses}, \code{curve}, \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
 #' @export
@@ -291,17 +298,18 @@
 
 #' morie_gentmt
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
-#' @param H See Usage.
-#' @param method Defaults to \code{"weight"}.
+#' @param y Passed to \code{.gentmt_vec}.
+#' @param A Passed to \code{.gentmt_vec}.
+#' @param H Passed to \code{.gentmt_ip_weights}.
+#' @param method One of \code{"subclassify"}, \code{"weight"}. Defaults to \code{"weight"}.
 #' @param degree Defaults to \code{1}.
-#' @param n_strata Defaults to \code{5}.
-#' @param doses Defaults to \code{NULL}.
-#' @param trim Defaults to \code{NULL}.
+#' @param n_strata Passed to \code{.gentmt_gps_subclassify}. Defaults to \code{5}.
+#' @param doses Passed to \code{.gentmt_dose_response_curve}.
+#' @param trim Passed to \code{.gentmt_ip_weights}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
@@ -367,7 +375,8 @@ morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
 
 #' .gentmt_cheatsheet
 #'
-#' Part of the gentmt_native implementation; see the file header for the
+#' A step of the gentmt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

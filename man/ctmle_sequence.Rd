@@ -8,13 +8,13 @@
 ctmle_sequence(y, D, X, tuning = "discrete", penalties = NULL, trim = 0.005, scale = NULL, q_covariates = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{D}{See Usage.}
-\item{X}{See Usage.}
-\item{tuning}{Defaults to \code{"discrete"}.}
-\item{penalties}{Defaults to \code{NULL}.}
-\item{trim}{Defaults to \code{0.005}.}
-\item{scale}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{.tmlcds_vec}.}
+\item{D}{Passed to \code{.tmlcds_vec}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.tmlcds_mat}.}
+\item{tuning}{Compared against \code{"discrete"}. Defaults to \code{"discrete"}.}
+\item{penalties}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{trim}{Passed to \code{.tmlcds_propensity}. Defaults to \code{0.005}.}
+\item{scale}{Optional; may be \code{NULL}. A flag; the body branches on it.}
 \item{q_covariates}{Defaults to \code{NULL}.}
 }
 \description{

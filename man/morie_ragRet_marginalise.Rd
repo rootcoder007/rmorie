@@ -10,10 +10,10 @@ morie_ragRet_marginalise(doc.scores, token.probs, mode = "sequence")
 \arguments{
 \item{doc.scores}{See Usage.}
 \item{token.probs}{See Usage.}
-\item{mode}{Defaults to \code{"sequence"}.}
+\item{mode}{One of \code{"sequence"}, \code{"token"}. Defaults to \code{"sequence"}.}
 }
 \description{
-Part of the ragRet_native implementation; see the file header for the source it follows.
+A step of the ragRet_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

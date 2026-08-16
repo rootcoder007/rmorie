@@ -8,22 +8,22 @@
 morie_dqnv(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1, steps = 20000, C = 100, buffer_size = 1000, batch = 16, seed = 0, use_replay = TRUE, use_target = TRUE)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{R}{See Usage.}
+\item{P}{A vector; indexed elementwise.}
+\item{R}{A vector; indexed elementwise.}
 \item{n_states}{See Usage.}
 \item{n_actions}{See Usage.}
-\item{gamma}{Defaults to \code{0.99}.}
+\item{gamma}{Passed to \code{.dqnv_td_target}. Defaults to \code{0.99}.}
 \item{alpha}{Defaults to \code{0.1}.}
 \item{steps}{Defaults to \code{20000}.}
 \item{C}{Defaults to \code{100}.}
-\item{buffer_size}{Defaults to \code{1000}.}
-\item{batch}{Defaults to \code{16}.}
-\item{seed}{Defaults to \code{0}.}
-\item{use_replay}{Defaults to \code{TRUE}.}
-\item{use_target}{Defaults to \code{TRUE}.}
+\item{buffer_size}{Passed to \code{.dqnv_replay_buffer_new}. Defaults to \code{1000}.}
+\item{batch}{Passed to \code{.dqnv_replay_buffer_sample}. Defaults to \code{16}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{use_replay}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{use_target}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the dqnv_native implementation; see the file header for the source it follows.
+A step of the dqnv_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{Q}, \code{residual_history}, \code{final_residual}, \code{greedy_policy}, \code{used_replay}, \code{used_target_network}, \code{C}, \code{method}.

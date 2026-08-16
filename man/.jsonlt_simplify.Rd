@@ -8,14 +8,14 @@
 .jsonlt_simplify(x, sv, sdf, sm, flat)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{sv}{See Usage.}
-\item{sdf}{See Usage.}
-\item{sm}{See Usage.}
-\item{flat}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{sv}{A flag; the body branches on it.}
+\item{sdf}{A flag; the body branches on it.}
+\item{sm}{A flag; the body branches on it.}
+\item{flat}{A flag; the body branches on it.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_json}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{kids}, as built in the body.

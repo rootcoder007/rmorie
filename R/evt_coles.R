@@ -109,8 +109,8 @@ morie_evt_gev_mle <- function(x) {
 #' route Coles p. 56 prescribes)
 #'
 #' @param f See Usage.
-#' @param theta See Usage.
-#' @param h Defaults to \code{1e-04}.
+#' @param theta A vector; its length is taken and its elements indexed.
+#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @return The value of \code{H}, as built in the body.
 #' @export
 .evt_num_hessian <- function(f, theta, h = 1e-4) {
@@ -139,7 +139,8 @@ morie_evt_gev_mle <- function(x) {
 # pseudo-inverse fallback for a singular observed information
 #' Pseudo-inverse fallback for a singular observed information
 #'
-#' Part of the evt_coles implementation; see the file header for the
+#' A step of the evt_coles implementation. Called by \code{morie_evt_gev_mle}, \code{morie_evt_gpd_mle}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param H See Usage.

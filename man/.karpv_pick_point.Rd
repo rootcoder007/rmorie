@@ -8,12 +8,12 @@
 .karpv_pick_point(e, node, internal_bias)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{node}{See Usage.}
+\item{e}{Passed to \code{.karpv_unit}.}
+\item{node}{Passed to \code{.karpv_collect}.}
 \item{internal_bias}{See Usage.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{morie_karpV}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

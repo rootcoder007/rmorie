@@ -19,10 +19,10 @@
 #'
 #' path recursion of R\'s psmirnov2x.
 #'
-#' @param d See Usage.
-#' @param n1 See Usage.
-#' @param n2 See Usage.
-#' @param two_sided Defaults to \code{TRUE}.
+#' @param d Numeric; combined arithmetically in the body.
+#' @param n1 A count; the body uses it as \code{seq_len(...)}.
+#' @param n2 A count; the body uses it as \code{seq_len(...)}.
+#' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
 .mor_ks_psmirnov <- function(d, n1, n2, two_sided = TRUE) {
@@ -46,11 +46,12 @@
 # Two-sided asymptotic Kolmogorov series with Stephens' correction.
 #' Two-sided asymptotic Kolmogorov series with Stephens\' correction
 #'
-#' Part of the over_native implementation; see the file header for the
+#' A step of the over_native implementation. Called by \code{.mor_ks_2samp}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
-#' @param n See Usage.
+#' @param d Numeric; combined arithmetically in the body.
+#' @param n Numeric; passed to \code{sqrt}.
 #' @return A numeric value.
 #' @export
 .mor_ks_sf <- function(d, n) {
@@ -75,7 +76,8 @@
 # Two-sample Kolmogorov-Smirnov statistic and p-value.
 #' Two-sample Kolmogorov-Smirnov statistic and p-value
 #'
-#' Part of the over_native implementation; see the file header for the
+#' A step of the over_native implementation. Called by \code{morie_over}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.

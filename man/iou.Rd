@@ -8,12 +8,12 @@
 iou(a, b, threshold = 0.5)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{.sammkr_flat}.}
+\item{b}{Passed to \code{.sammkr_flat}.}
 \item{threshold}{Defaults to \code{0.5}.}
 }
 \description{
-Part of the sammkr_native implementation; see the file header for the source it follows.
+A step of the sammkr_native implementation. Called by \code{rank_masks}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

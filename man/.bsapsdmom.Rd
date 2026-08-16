@@ -8,11 +8,11 @@
 .bsapsdmom(freqs, power)
 }
 \arguments{
-\item{freqs}{See Usage.}
-\item{power}{See Usage.}
+\item{freqs}{A vector; its length is taken and its elements indexed.}
+\item{power}{Numeric; passed to \code{cumsum}.}
 }
 \description{
-Part of the rangayyan_phys implementation; see the file header for the source it follows.
+A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec}, \code{EggFeat} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz}, \code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.

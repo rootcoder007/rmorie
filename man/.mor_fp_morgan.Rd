@@ -8,15 +8,15 @@
 .mor_fp_morgan(a, bd, invariants, radius, nbits, use_bond_order = TRUE)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{bd}{See Usage.}
+\item{a}{A count; the body uses it as \code{seq_len(...)}.}
+\item{bd}{A list; the body reads \code{$i}, \code{$j}, \code{$o} from it.}
 \item{invariants}{See Usage.}
 \item{radius}{See Usage.}
-\item{nbits}{See Usage.}
-\item{use_bond_order}{Defaults to \code{TRUE}.}
+\item{nbits}{A count; the body uses it as \code{integer(...)}.}
+\item{use_bond_order}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the ecfp4_native implementation; see the file header for the source it follows.
+A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}, \code{morie_fcfp4}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{bits}, \code{count}, \code{ident}.

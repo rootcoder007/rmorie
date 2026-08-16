@@ -8,15 +8,15 @@
 .tlsate_pate_influence_curve(A, Y, Q1, Q0, g, psi)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{Y}{See Usage.}
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
-\item{g}{See Usage.}
-\item{psi}{See Usage.}
+\item{A}{Passed to \code{.tlsate_check}.}
+\item{Y}{Passed to \code{.tlsate_check}.}
+\item{Q1}{Passed to \code{.tlsate_check}.}
+\item{Q0}{Passed to \code{.tlsate_check}.}
+\item{g}{Passed to \code{.tlsate_check}.}
+\item{psi}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tlsate_native implementation; see the file header for the source it follows.
+A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}, \code{.tlsate_variance_gap}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

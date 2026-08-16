@@ -19,10 +19,10 @@ morie_tlhal(X, y, lambdas = NULL, V = 5L, seed = 0L, lam = 1, iters = 2000L, ste
 \item{max_order}{Defaults to \code{2L}.}
 \item{knots}{Defaults to \code{NULL}.}
 \item{intercept}{Defaults to \code{TRUE}.}
-\item{mode}{Defaults to \code{c("fit", "predict", "cv", "norm")}.}
+\item{mode}{One of \code{"cv"}, \code{"norm"}, \code{"predict"}.}
 }
 \description{
-Part of the tlhal_native implementation; see the file header for the source it follows.
+A step of the tlhal_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{hal_fit}.

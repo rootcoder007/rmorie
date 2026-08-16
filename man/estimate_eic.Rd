@@ -9,13 +9,13 @@ estimate_eic(psi_of_P, basis, weights = NULL, h = 1e-05, ridge = 1e-08)
 }
 \arguments{
 \item{psi_of_P}{See Usage.}
-\item{basis}{See Usage.}
+\item{basis}{A matrix; passed to \code{as.matrix}.}
 \item{weights}{Defaults to \code{NULL}.}
 \item{h}{Defaults to \code{1e-05}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{A matrix; passed to \code{diag}. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the tlheic_native implementation; see the file header for the source it follows.
+A step of the tlheic_native implementation. Called by \code{morie_tlheic}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{D}, \code{coefficients}, \code{n_directions}, \code{mean}, \code{method}, \code{note}.

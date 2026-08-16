@@ -8,7 +8,7 @@
 QrsDeriv2(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 removes any locally linear trend, so T-wave limbs and baseline drift give nothing while the QRS curvature gives a large output.

@@ -8,16 +8,16 @@
 .saigeg_solve_saddle(s, G, mu, lo = -50, hi = 50, tol = 1e-11, iters = 200)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{G}{See Usage.}
-\item{mu}{See Usage.}
-\item{lo}{Defaults to \code{-50}.}
-\item{hi}{Defaults to \code{50}.}
+\item{s}{Numeric; combined arithmetically in the body.}
+\item{G}{Passed to \code{.saigeg_cgf}.}
+\item{mu}{Passed to \code{.saigeg_cgf}.}
+\item{lo}{Numeric; combined arithmetically in the body. Defaults to \code{-50}.}
+\item{hi}{Numeric; combined arithmetically in the body. Defaults to \code{50}.}
 \item{tol}{Defaults to \code{1e-11}.}
-\item{iters}{Defaults to \code{200}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 }
 \description{
-Part of the saigeg_native implementation; see the file header for the source it follows.
+A step of the saigeg_native implementation. Called by \code{.saigeg_saddlepoint_pvalue}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,10 +8,10 @@
 .sctraj_smooth(t, y, w, span = 0.4)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
-\item{span}{Defaults to \code{0.4}.}
+\item{t}{A vector; its length is taken and its elements indexed.}
+\item{y}{A vector; indexed elementwise.}
+\item{w}{A vector; indexed elementwise.}
+\item{span}{Numeric; combined arithmetically in the body. Defaults to \code{0.4}.}
 }
 \description{
 kept simple and weight-aware.

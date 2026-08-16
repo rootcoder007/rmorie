@@ -8,10 +8,10 @@
 .bayopt_phi(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bayopt_native implementation; see the file header for the source it follows.
+A step of the bayopt_native implementation. Called by \code{acquisition_gradient}, \code{expected_improvement}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

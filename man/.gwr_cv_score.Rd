@@ -8,15 +8,15 @@
 .gwr_cv_score(y, X, D, bw, kernel, adaptive)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{D}{See Usage.}
-\item{bw}{See Usage.}
-\item{kernel}{See Usage.}
-\item{adaptive}{See Usage.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{X}{A matrix; indexed by row and column.}
+\item{D}{A matrix; indexed by row and column.}
+\item{bw}{Passed to \code{.gwr_kernel}.}
+\item{kernel}{Passed to \code{.gwr_kernel}.}
+\item{adaptive}{A flag; the body branches on it.}
 }
 \description{
-Part of the gwrcal_native implementation; see the file header for the source it follows.
+A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{acc}, as built in the body.

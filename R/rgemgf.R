@@ -99,7 +99,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #'
 #' half-open, c(start, stop), to match the Python arm exactly
 #'
-#' @param f See Usage.
+#' @param f A vector; its length is taken and its elements indexed.
 #' @return The value of \code{fine}, as built in the body.
 #' @export
 .rgemgf_intervals <- function(f) {
@@ -141,7 +141,8 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 
 #' .rgemgf_zcr
 #'
-#' Part of the rgemgf implementation; see the file header for the source
+#' A step of the rgemgf implementation. Called by \code{rgemgf}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param x See Usage.
@@ -154,11 +155,12 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 
 #' Equation (5.28), p. 292, written exactly as the book prints it
 #'
-#' Part of the rgemgf implementation; see the file header for the source
+#' A step of the rgemgf implementation. Called by \code{rgemgf}, \code{rgemgfd}, \code{rgisint}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; its length is taken.
+#' @param y Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 .rgemgf_r2 <- function(x, y) {
@@ -174,11 +176,12 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 
 #' .rgemgf_linfit
 #'
-#' Part of the rgemgf implementation; see the file header for the source
+#' A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgemgf}, \code{rgemgfd} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x A vector; its length is taken.
+#' @param y Numeric; passed to \code{sum}.
 #' @return A vector, from \code{c}.
 #' @export
 .rgemgf_linfit <- function(x, y) {

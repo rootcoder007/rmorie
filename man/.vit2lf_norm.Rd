@@ -8,10 +8,10 @@
 .vit2lf_norm(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{.w3_dot}.}
 }
 \description{
-Part of the vit2lf_native implementation; see the file header for the source it follows.
+A step of the vit2lf_native implementation. Called by \code{morie_vit2lf_logits}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

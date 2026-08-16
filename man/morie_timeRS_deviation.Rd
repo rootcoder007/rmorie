@@ -8,12 +8,12 @@
 morie_timeRS_deviation(t, t_user, beta = .timeRS_BETA)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{t_user}{See Usage.}
-\item{beta}{Defaults to \code{.timeRS_BETA}.}
+\item{t}{Passed to \code{.timeRS_deviation}.}
+\item{t_user}{Passed to \code{.timeRS_deviation}.}
+\item{beta}{Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.}
 }
 \description{
-Part of the timeRS_native implementation; see the file header for the source it follows.
+A step of the timeRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.timeRS_deviation}.

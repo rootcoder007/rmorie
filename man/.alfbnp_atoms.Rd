@@ -8,11 +8,11 @@
 .alfbnp_atoms(x, what)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; passed to \code{as.matrix}.}
 \item{what}{See Usage.}
 }
 \description{
-Part of the alfbnp_native implementation; see the file header for the source it follows.
+A step of the alfbnp_native implementation. Called by \code{.alfbnp_clean_list}, \code{morie_alfbnp_af3_sample}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{m}, as built in the body.

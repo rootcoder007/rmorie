@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{logf}{See Usage.}
-\item{x0}{See Usage.}
-\item{e}{See Usage.}
-\item{w}{Defaults to \code{1}.}
-\item{max_steps}{Defaults to \code{50L}.}
+\item{x0}{Numeric; combined arithmetically in the body.}
+\item{e}{Passed to \code{.baygsl_expo}.}
+\item{w}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{max_steps}{Numeric; combined arithmetically in the body. Defaults to \code{50L}.}
 \item{lower}{Defaults to \code{.baygsl_NEG_INF}.}
 \item{upper}{Defaults to \code{.baygsl_POS_INF}.}
 }

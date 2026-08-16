@@ -8,8 +8,8 @@
 SpecDec(draft, target, gamma = 4L)
 }
 \arguments{
-\item{draft}{See Usage.}
-\item{target}{See Usage.}
+\item{draft}{Passed to \code{.morie_spx_chkv}.}
+\item{target}{Passed to \code{.morie_spx_chkv}.}
 \item{gamma}{Defaults to \code{4L}.}
 }
 \description{

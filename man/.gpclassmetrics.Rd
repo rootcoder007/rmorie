@@ -8,11 +8,11 @@
 .gpclassmetrics(conf, i)
 }
 \arguments{
-\item{conf}{See Usage.}
+\item{conf}{A matrix; indexed by row and column.}
 \item{i}{See Usage.}
 }
 \description{
-Part of the helpers_gp_core implementation; see the file header for the source it follows.
+A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all}, \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.

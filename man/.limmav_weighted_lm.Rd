@@ -8,13 +8,13 @@
 .limmav_weighted_lm(y, X, w, contrast)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{See Usage.}
-\item{w}{See Usage.}
+\item{y}{Passed to \code{.limmav_ols}.}
+\item{X}{Passed to \code{.limmav_ols}.}
+\item{w}{Passed to \code{.limmav_ols}.}
 \item{contrast}{See Usage.}
 }
 \description{
-Part of the limmav_native implementation; see the file header for the source it follows.
+A step of the limmav_native implementation. Called by \code{morie_limmav}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{est}, \code{se}, \code{t}, \code{df}, \code{sd}, \code{v_un}.

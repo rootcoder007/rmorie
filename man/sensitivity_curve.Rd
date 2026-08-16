@@ -16,7 +16,7 @@ sensitivity_curve(beta, n_pre, n_post, Ms, family = "SD", l_vec = NULL)
 \item{l_vec}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the snmtst_native implementation; see the file header for the source it follows.
+A step of the snmtst_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{curve}, \code{family}, \code{M}, \code{width}.

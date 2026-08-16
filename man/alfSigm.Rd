@@ -8,10 +8,10 @@
 alfSigm(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{exp}.}
 }
 \description{
-Part of the alf_core implementation; see the file header for the source it follows.
+A step of the alf_core implementation. Called by \code{Alfmsaat}, \code{Alftriat}, \code{Alftrimu}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{ifelse}.

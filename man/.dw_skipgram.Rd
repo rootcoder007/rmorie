@@ -9,16 +9,16 @@
 }
 \arguments{
 \item{walks}{See Usage.}
-\item{n}{See Usage.}
-\item{dim}{See Usage.}
-\item{window}{See Usage.}
-\item{epochs}{See Usage.}
-\item{lr}{See Usage.}
-\item{neg}{See Usage.}
-\item{e}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{dim}{A count; the body uses it as \code{seq_len(...)}.}
+\item{window}{Numeric; combined arithmetically in the body.}
+\item{epochs}{A count; the body uses it as \code{seq_len(...)}.}
+\item{lr}{Numeric; combined arithmetically in the body.}
+\item{neg}{A count; the body uses it as \code{seq_len(...)}.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the deepw implementation; see the file header for the source it follows.
+A step of the deepw implementation. Called by \code{Comemb}, \code{Deepw}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{W}, \code{C}.

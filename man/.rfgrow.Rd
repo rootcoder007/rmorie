@@ -8,14 +8,14 @@
 .rfgrow(X, Y, rows, b, nodesize, mtry, q, env)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{Y}{See Usage.}
-\item{rows}{See Usage.}
-\item{b}{See Usage.}
-\item{nodesize}{See Usage.}
-\item{mtry}{See Usage.}
-\item{q}{See Usage.}
-\item{env}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{Y}{A matrix; indexed by row and column.}
+\item{rows}{A vector; its length is taken.}
+\item{b}{Passed to \code{.rfcand}.}
+\item{nodesize}{Numeric; combined arithmetically in the body.}
+\item{mtry}{Passed to \code{.rfcand}.}
+\item{q}{A count; the body uses it as \code{numeric(...)}.}
+\item{env}{A list; the body reads \code{$k}, \code{$nodes}, \code{$s} from it.}
 }
 \description{
 -1L Part of the mvsml_rf_shared implementation; see the file header for the source it follows.

@@ -8,12 +8,12 @@
 WtVar(x, wavelet = "db1", levels = 3)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{wavelet}{Defaults to \code{"db1"}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{wavelet}{Passed to \code{.tf_filters}. Defaults to \code{"db1"}.}
 \item{levels}{Defaults to \code{3}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{variances}, \code{scales}, \code{n_used}, \code{total_variance}, \code{sample_variance}, \code{dominant_scale}, \code{is_allan}, \code{wavelet}, \code{method}.

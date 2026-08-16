@@ -8,8 +8,8 @@
 EvenPart(x, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{.morie_rg_evenodd}.}
+\item{n}{Passed to \code{.morie_rg_evenodd}.}
 }
 \description{
 index grid has to be symmetric; reflecting a causal sequence about 0 instead computes x/2, which is something else entirely.

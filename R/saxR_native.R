@@ -33,11 +33,12 @@ morie_sax_breakpoints <- function(alphabet) {
 
 #' .mor_sax_paa
 #'
-#' Part of the saxR_native implementation; see the file header for the
+#' A step of the saxR_native implementation. Called by \code{morie_saxR}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
-#' @param w See Usage.
+#' @param z A vector; its length is taken and its elements indexed.
+#' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .mor_sax_paa <- function(z, w) {

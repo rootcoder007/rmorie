@@ -8,11 +8,11 @@
 .fz_check_sample(x, min_n = 2L)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 \item{min_n}{Defaults to \code{2L}.}
 }
 \description{
-Part of the fauzi_native implementation; see the file header for the source it follows.
+A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_conditions_c1_c6} and 7 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{x}, as built in the body.

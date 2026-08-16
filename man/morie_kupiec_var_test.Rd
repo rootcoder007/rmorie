@@ -17,7 +17,7 @@ expected_exceedances, rate, df, alpha, method.
 }
 \description{
 Under the null the exceedance indicator is i.i.d. Bernoulli(alpha),
-so LR_uc = -2 log\link{ (1-p)^(T-N) p^N / ((1-N/T)^(T-N) (N/T)^N ) } is
+so LR_uc = -2 log[ (1-p)^(T-N) p^N / ((1-N/T)^(T-N) (N/T)^N ) ] is
 asymptotically chi-square on 1 df. This tests coverage ONLY: a model
 that puts every breach in one cluster passes it. Pair it with
 \code{morie_christoffersen_cc}.

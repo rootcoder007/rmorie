@@ -85,10 +85,11 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 # Normal-reference bandwidth (reproduces MASS::bandwidth.nrd).
 #' Normal-reference bandwidth (reproduces MASS::bandwidth.nrd)
 #'
-#' Part of the mass_native implementation; see the file header for the
+#' A step of the mass_native implementation. Called by \code{morie_kde2d}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .morie_bandwidth_nrd <- function(x) {
@@ -139,7 +140,7 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 #'
 #' MASS::negative.binomial for the log link path used by glm.nb).
 #'
-#' @param theta See Usage.
+#' @param theta Numeric; passed to \code{log}.
 #' @param link Defaults to \code{"log"}.
 #' @return The value of \code{structure}.
 #' @export
@@ -174,13 +175,14 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 # Theta MLE by Fisher scoring (reproduces MASS::theta.ml).
 #' Theta MLE by Fisher scoring (reproduces MASS::theta.ml)
 #'
-#' Part of the mass_native implementation; see the file header for the
+#' A step of the mass_native implementation. Called by \code{morie_glm_nb}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param mu See Usage.
-#' @param n Defaults to \code{sum(weights)}.
-#' @param weights See Usage.
+#' @param y A vector; its length is taken.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body. Defaults to \code{sum(weights)}.
+#' @param weights Numeric; combined arithmetically in the body.
 #' @param limit Defaults to \code{10}.
 #' @param eps Defaults to \code{.Machine$double.eps^0.25}.
 #' @return A vector, from \code{as.numeric}.

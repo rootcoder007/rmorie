@@ -13,10 +13,11 @@
 # argmax with the lowest index winning ties (Python _greedy)
 #' Argmax with the lowest index winning ties (Python _greedy)
 #'
-#' Part of the qlearn_native implementation; see the file header for the
+#' A step of the qlearn_native implementation. Called by \code{.mor_rl_eps}, \code{.mor_rl_out}, \code{morie_ddqn} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Qs See Usage.
+#' @param Qs A vector; indexed elementwise.
 #' @param A See Usage.
 #' @return The value of \code{b}, as built in the body.
 #' @export
@@ -32,8 +33,8 @@
 #'
 #' _sample_row); returns a 1-based state index
 #'
-#' @param row See Usage.
-#' @param S See Usage.
+#' @param row A vector; indexed elementwise.
+#' @param S A count; the body uses it as \code{seq_len(...)}.
 #' @param u See Usage.
 #' @return The value of \code{S}, as built in the body.
 #' @export
@@ -49,12 +50,13 @@
 # epsilon-greedy action (1-based) consuming one or two uniforms
 #' Epsilon-greedy action (1-based) consuming one or two uniforms
 #'
-#' Part of the qlearn_native implementation; see the file header for the
+#' A step of the qlearn_native implementation. Called by \code{morie_qlearn}, \code{morie_sarsa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param Qs See Usage.
-#' @param A See Usage.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param Qs Passed to \code{.mor_rl_greedy}.
+#' @param A Numeric; combined arithmetically in the body.
 #' @param epsilon See Usage.
 #' @return The value of \code{.mor_rl_greedy}.
 #' @export
@@ -70,7 +72,8 @@
 
 #' .mor_rl_terminal
 #'
-#' Part of the qlearn_native implementation; see the file header for the
+#' A step of the qlearn_native implementation. Called by \code{morie_ddqn}, \code{morie_qlearn}, \code{morie_sarsa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param terminal See Usage.
@@ -80,12 +83,13 @@
 
 #' .mor_rl_out
 #'
-#' Part of the qlearn_native implementation; see the file header for the
+#' A step of the qlearn_native implementation. Called by \code{morie_ddqn}, \code{morie_qlearn}, \code{morie_sarsa}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q See Usage.
-#' @param S See Usage.
-#' @param A See Usage.
+#' @param Q A matrix; indexed by row and column.
+#' @param S A count; the body uses it as \code{seq_len(...)}.
+#' @param A Passed to \code{.mor_rl_greedy}.
 #' @return A list with \code{policy}, \code{v}.
 #' @export
 .mor_rl_out <- function(Q, S, A) {

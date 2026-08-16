@@ -8,7 +8,7 @@
 morie_rmrl_reward_machine_run(machine, labels)
 }
 \arguments{
-\item{machine}{See Usage.}
+\item{machine}{A list; the body reads \code{$terminal}, \code{$u0} from it.}
 \item{labels}{See Usage.}
 }
 \description{

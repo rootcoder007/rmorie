@@ -6,11 +6,12 @@
 
 #' .felsen_pij
 #'
-#' Part of the felsen_native implementation; see the file header for the
+#' A step of the felsen_native implementation. Called by \code{.felsen_prune}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param pi See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param pi A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{P}, as built in the body.
 #' @export
 .felsen_pij <- function(t, pi) {
@@ -22,12 +23,13 @@
 
 #' .felsen_prune
 #'
-#' Part of the felsen_native implementation; see the file header for the
+#' A step of the felsen_native implementation. Called by \code{morie_felsen}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param node See Usage.
-#' @param site See Usage.
-#' @param pi See Usage.
+#' @param site A vector; indexed elementwise.
+#' @param pi Passed to \code{.felsen_prune}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .felsen_prune <- function(node, site, pi) {

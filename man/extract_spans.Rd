@@ -8,10 +8,10 @@
 extract_spans(path)
 }
 \arguments{
-\item{path}{See Usage.}
+\item{path}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the benRea_native implementation; see the file header for the source it follows.
+A step of the benRea_native implementation. Called by \code{ner_decode}, \code{span_f1}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{spans}, as built in the body.

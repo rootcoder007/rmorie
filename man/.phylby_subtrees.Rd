@@ -8,11 +8,11 @@
 .phylby_subtrees(node, path = integer(0))
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{A vector; its length is taken and its elements indexed.}
 \item{path}{Defaults to \code{integer(0)}.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,13 +8,13 @@
 .tmlcic_wlogit(X, y, ridge = 1e-10, obs_weights = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{Numeric; combined arithmetically in the body.}
+\item{ridge}{Numeric; passed to \code{max}. Defaults to \code{1e-10}.}
 \item{obs_weights}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_g}, \code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{beta}, as built in the body.

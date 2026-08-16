@@ -8,10 +8,10 @@
 .jsonlt_ser(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the jsonlt_native implementation; see the file header for the source it follows.
+A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser_attr}, \code{morie_jsonlt_serialize}. See the file header for the source the module follows.
 }
 \value{
 A character value.

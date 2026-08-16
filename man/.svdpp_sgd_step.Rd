@@ -9,19 +9,19 @@
 }
 \arguments{
 \item{rating}{See Usage.}
-\item{mu}{See Usage.}
-\item{b_user}{See Usage.}
-\item{b_item}{See Usage.}
-\item{p_u}{See Usage.}
-\item{q_i}{See Usage.}
-\item{rated_items}{See Usage.}
-\item{y}{See Usage.}
+\item{mu}{Passed to \code{.svdpp_predict}.}
+\item{b_user}{Passed to \code{.svdpp_predict}.}
+\item{b_item}{Passed to \code{.svdpp_predict}.}
+\item{p_u}{Passed to \code{.svdpp_predict}.}
+\item{q_i}{Passed to \code{.svdpp_predict}.}
+\item{rated_items}{A vector; its length is taken.}
+\item{y}{A vector; indexed elementwise.}
 \item{lr}{Defaults to \code{0.007}.}
 \item{reg}{Defaults to \code{0.015}.}
-\item{exponent}{Defaults to \code{-0.5}.}
+\item{exponent}{Passed to \code{.svdpp_predict}. Defaults to \code{-0.5}.}
 }
 \description{
-Part of the svdpp_native implementation; see the file header for the source it follows.
+A step of the svdpp_native implementation. Called by \code{.svdpp_fit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u}, \code{q_i}, \code{y}, \code{note}.
@@ -29,7 +29,7 @@ A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u}, \code{q_i}, 
 \references{
 ----------
 Koren, Y. (2008) "Factorization Meets the Neighborhood: a
-Multifaceted Collaborative Filtering Model", KDD \\'08, 426-434,
+Multifaceted Collaborative Filtering Model", KDD \'08, 426-434,
 doi:10.1145/1401890.1401944. Sec. 1 and 4, eq. (15).
 
 Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization

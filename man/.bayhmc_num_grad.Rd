@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{logp}{See Usage.}
-\item{theta}{See Usage.}
-\item{h}{Defaults to \code{1e-05}.}
+\item{theta}{A vector; its length is taken.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
 not supply one. Same step h = 1e-5 as the Python arm.

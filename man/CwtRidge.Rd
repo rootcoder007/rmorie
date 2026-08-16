@@ -16,7 +16,7 @@ CwtRidge(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5, min_prominence = 0.
 \item{min_prominence}{Defaults to \code{0.1}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{structures}, \code{n_structures}, \code{scalogram}, \code{scales}, \code{times}, \code{min_prominence}, \code{method}.

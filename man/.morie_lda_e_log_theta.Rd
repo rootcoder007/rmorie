@@ -11,7 +11,7 @@
 \item{gamma}{See Usage.}
 }
 \description{
-Part of the lda_native implementation; see the file header for the source it follows.
+A step of the lda_native implementation. Called by \code{.morie_lda_elbo}, \code{.morie_lda_variational_inference}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

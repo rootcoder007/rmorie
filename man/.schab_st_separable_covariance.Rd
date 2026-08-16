@@ -8,14 +8,14 @@
 .schab_st_separable_covariance(h, k, cov_spatial, cov_temporal, form = "product")
 }
 \arguments{
-\item{h}{See Usage.}
-\item{k}{See Usage.}
+\item{h}{Passed to \code{.schab_st_as_lags}.}
+\item{k}{Passed to \code{.schab_st_as_lags}.}
 \item{cov_spatial}{See Usage.}
 \item{cov_temporal}{See Usage.}
 \item{form}{Defaults to \code{"product"}.}
 }
 \description{
-Part of the schab_st_shared implementation; see the file header for the source it follows.
+A step of the schab_st_shared implementation. Called by \code{spstcv}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{switch}.

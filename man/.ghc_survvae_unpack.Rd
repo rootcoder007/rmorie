@@ -8,12 +8,12 @@
 .ghc_survvae_unpack(v, K, d)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{K}{See Usage.}
-\item{d}{See Usage.}
+\item{v}{A vector; its length is taken and its elements indexed.}
+\item{K}{A count; the body uses it as \code{seq_len(...)}.}
+\item{d}{Numeric; combined arithmetically in the body.}
 }
 \description{
-log_shapes | log_scales) into named pieces. Mirrors the Python arm\\\'s .unpack(): W is a list of K length-d vectors, bias is length K, shapes and scales are length K (positives, recovered via exp()).
+log_shapes | log_scales) into named pieces. Mirrors the Python arm\\'s .unpack(): W is a list of K length-d vectors, bias is length K, shapes and scales are length K (positives, recovered via exp()).
 }
 \value{
 A list with \code{W}, \code{bias}, \code{shapes}, \code{scales}.

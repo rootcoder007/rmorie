@@ -11,7 +11,7 @@ Marba(g, n, rho)
 
 \item{n}{Number of subjects; \code{n >= 2}.}
 
-\item{rho}{Correlation between the paired measurements, in \link{-1, 1}.}
+\item{rho}{Correlation between the paired measurements, in [-1, 1].}
 }
 \value{
 List with \code{var_g}, \code{se}, \code{J}, \code{n},

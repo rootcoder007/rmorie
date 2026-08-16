@@ -8,13 +8,13 @@
 morie_randIE_mediator_distribution(A, M, C = NULL, laplace = 0)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{M}{See Usage.}
-\item{C}{Defaults to \code{NULL}.}
-\item{laplace}{Defaults to \code{0}.}
+\item{A}{Passed to \code{.labels}.}
+\item{M}{Passed to \code{.labels}.}
+\item{C}{Optional; may be \code{NULL}. Passed to \code{.labels}.}
+\item{laplace}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{
-Part of the randIE_native implementation; see the file header for the source it follows.
+A step of the randIE_native implementation. Called by \code{morie_randIE_interventional_mean}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p}, \code{levels}, \code{strata}, \code{arms}, \code{n}.

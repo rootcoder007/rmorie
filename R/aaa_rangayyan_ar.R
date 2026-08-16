@@ -71,7 +71,7 @@ Levinson <- function(acf, order = NULL) {
 #'
 #' @param x See Usage.
 #' @param order See Usage.
-#' @param method Defaults to \code{"autocorrelation"}.
+#' @param method Compared against \code{"autocorrelation"}. Defaults to \code{"autocorrelation"}.
 #' @return A list with \code{a}, \code{gain}, \code{error}, \code{reflection}, \code{acf}, \code{order}, \code{residual}, \code{residual_energy}, \code{stable}, \code{normalized_error}, \code{sign_convention}, \code{method}.
 #' @export
 Lpc <- function(x, order, method = "autocorrelation") {
@@ -118,7 +118,7 @@ Lpc <- function(x, order, method = "autocorrelation") {
 #'
 #' @param a See Usage.
 #' @param excitation See Usage.
-#' @param gain Defaults to \code{1}.
+#' @param gain Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param initial Defaults to \code{NULL}.
 #' @return A list with \code{y}, \code{n}, \code{order}, \code{gain}, \code{diverged}, \code{sign_convention}, \code{method}.
 #' @export
@@ -373,7 +373,7 @@ PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
 #' @param zeros See Usage.
 #' @param poles See Usage.
 #' @param omega See Usage.
-#' @param gain Defaults to \code{1}.
+#' @param gain Numeric; passed to \code{abs}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{magnitude}, \code{phase}, \code{zero_distances}, \code{pole_distances}, \code{omega}, \code{magnitude_matches_product}, \code{method}.
 #' @export
 PzResp <- function(zeros, poles, omega, gain = 1) {
@@ -529,7 +529,7 @@ ArmaFit <- function(x, p, q, fs = 1) {
 #' @param x See Usage.
 #' @param fs See Usage.
 #' @param order Defaults to \code{NULL}.
-#' @param segment Defaults to \code{NULL}.
+#' @param segment Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
 PcgAr <- function(x, fs, order = NULL, segment = NULL) {
@@ -638,9 +638,9 @@ HrvAr <- function(rr, order = 16, fs = 4, nfreq = 512) {
 #'
 #' delegated so the R and Python arms resample identically
 #'
-#' @param beats See Usage.
-#' @param values See Usage.
-#' @param grid See Usage.
+#' @param beats A vector; its length is taken and its elements indexed.
+#' @param values A vector; its length is taken and its elements indexed.
+#' @param grid A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 stats_free_interp <- function(beats, values, grid) {

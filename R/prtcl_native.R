@@ -13,10 +13,11 @@
 
 #' morie_prtcl_effective_sample_size
 #'
-#' Part of the prtcl_native implementation; see the file header for the
+#' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
+#' @param weights Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 morie_prtcl_effective_sample_size <- function(weights) {
@@ -27,12 +28,13 @@ morie_prtcl_effective_sample_size <- function(weights) {
 
 #' morie_prtcl_systematic_resample
 #'
-#' Part of the prtcl_native implementation; see the file header for the
+#' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
-#' @param u Defaults to \code{NULL}.
-#' @param e Defaults to \code{NULL}.
+#' @param weights A vector; its length is taken.
+#' @param u Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param e Optional; may be \code{NULL}. Passed to \code{.ghc_unif}.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
 morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
@@ -59,10 +61,11 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 
 #' .scalar
 #'
-#' Part of the prtcl_native implementation; see the file header for the
+#' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
+#' @param state A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .scalar <- function(state) {
@@ -71,11 +74,12 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 
 #' .multinomial
 #'
-#' Part of the prtcl_native implementation; see the file header for the
+#' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param w See Usage.
-#' @param e See Usage.
+#' @param w A vector; its length is taken.
+#' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .multinomial <- function(w, e) {
@@ -94,7 +98,8 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 
 #' morie_prtcl_particle_filter
 #'
-#' Part of the prtcl_native implementation; see the file header for the
+#' A step of the prtcl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -103,8 +108,8 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #' @param step See Usage.
 #' @param loglik See Usage.
 #' @param seed Defaults to \code{0L}.
-#' @param resample.threshold Defaults to \code{1}.
-#' @param systematic Defaults to \code{TRUE}.
+#' @param resample.threshold Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param systematic A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{filtered.mean}, \code{loglik}, \code{ess}, \code{min.ess}, \code{resampled}, \code{n.particles}, \code{n.obs}, \code{systematic}, \code{particles}, \code{method}.
 #' @export
 morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
@@ -153,14 +158,15 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
 
 #' morie_prtcl_kalman_filter_1d
 #'
-#' Part of the prtcl_native implementation; see the file header for the
+#' A step of the prtcl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param a See Usage.
-#' @param q See Usage.
-#' @param c See Usage.
-#' @param r See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param q Numeric; combined arithmetically in the body.
+#' @param c Numeric; combined arithmetically in the body.
+#' @param r Numeric; combined arithmetically in the body.
 #' @param m0 Defaults to \code{0}.
 #' @param p0 Defaults to \code{1}.
 #' @return A list with \code{means}, \code{loglik}.

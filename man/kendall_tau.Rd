@@ -8,11 +8,11 @@
 kendall_tau(scores, human)
 }
 \arguments{
-\item{scores}{See Usage.}
-\item{human}{See Usage.}
+\item{scores}{Passed to \code{.comet_vec}.}
+\item{human}{Passed to \code{.comet_vec}.}
 }
 \description{
-Part of the comet_native implementation; see the file header for the source it follows.
+A step of the comet_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tau}, \code{concordant}, \code{discordant}, \code{n_segments}.

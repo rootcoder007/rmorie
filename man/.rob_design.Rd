@@ -8,11 +8,11 @@
 .rob_design(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 }
 \description{
-Part of the robust_native implementation; see the file header for the source it follows.
+A step of the robust_native implementation. Called by \code{morie_rob_huber}, \code{morie_rob_m}, \code{morie_rob_mm} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{X}, \code{y}.

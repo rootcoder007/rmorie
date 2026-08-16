@@ -8,12 +8,12 @@
 .sarre_negll(lam, I, W, X, y, n)
 }
 \arguments{
-\item{lam}{See Usage.}
-\item{I}{See Usage.}
-\item{W}{See Usage.}
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{n}{See Usage.}
+\item{lam}{Numeric; combined arithmetically in the body.}
+\item{I}{Numeric; combined arithmetically in the body.}
+\item{W}{Numeric; combined arithmetically in the body.}
+\item{X}{A matrix; passed to \code{\%*\%}.}
+\item{y}{A matrix; passed to \code{\%*\%}.}
+\item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Extracted from the sarre() optimiser closure so the singular-GLS, non-positive-variance and non-positive-determinant guards are all directly unit-testable.

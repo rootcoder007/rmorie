@@ -8,12 +8,12 @@
 noisy_argmax(counts, gamma, seed = 0)
 }
 \arguments{
-\item{counts}{See Usage.}
-\item{gamma}{See Usage.}
+\item{counts}{A vector; its length is taken and its elements indexed.}
+\item{gamma}{Passed to \code{.pate_lap_draw}.}
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the pate_native implementation; see the file header for the source it follows.
+A step of the pate_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{arg}, as built in the body.

@@ -8,10 +8,10 @@
 .morie_gr_bits_f32(u)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{A vector; its length is taken.}
 }
 \description{
-Part of the geron_ml_native implementation; see the file header for the source it follows.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_f32}, \code{morie_geron_bf16}, \code{morie_geron_bf16_range}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{readBin}.

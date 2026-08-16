@@ -8,10 +8,10 @@
 morie_phylby_topology_key(tree)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{Passed to \code{.phylby_topology_key}.}
 }
 \description{
-Part of the phylby_native implementation; see the file header for the source it follows.
+A step of the phylby_native implementation. Called by \code{morie_phylby}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.phylby_topology_key}.

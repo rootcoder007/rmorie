@@ -8,11 +8,11 @@
 .coerce_regime(regime, n)
 }
 \arguments{
-\item{regime}{See Usage.}
+\item{regime}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
 \item{n}{See Usage.}
 }
 \description{
-Part of the tmldyn_native implementation; see the file header for the source it follows.
+A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

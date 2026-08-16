@@ -8,16 +8,16 @@
 .plrgrf_forest_predict(X, y, train, at_rows, n_trees, min_leaf, seed)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; indexed elementwise.}
 \item{train}{See Usage.}
-\item{at_rows}{See Usage.}
+\item{at_rows}{A vector; its length is taken and its elements indexed.}
 \item{n_trees}{See Usage.}
 \item{min_leaf}{See Usage.}
 \item{seed}{See Usage.}
 }
 \description{
-Part of the plrgrf_native implementation; see the file header for the source it follows.
+A step of the plrgrf_native implementation. Called by \code{local_centering}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

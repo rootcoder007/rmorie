@@ -8,11 +8,11 @@
 .forwsr_prep(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{See Usage.}
 }
 \description{
-Part of the forwsr_native implementation; see the file header for the source it follows.
+A step of the forwsr_native implementation. Called by \code{morie_forwsr}, \code{morie_forwsr_forward_search}, \code{morie_forwsr_lms_start} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{M}, \code{y}, \code{n}, \code{p}.

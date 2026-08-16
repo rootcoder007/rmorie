@@ -8,9 +8,9 @@
 .s03allocABC(M, S, m0)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{S}{See Usage.}
-\item{m0}{See Usage.}
+\item{M}{A vector; its length is taken and its elements indexed.}
+\item{S}{A vector; indexed elementwise.}
+\item{m0}{Numeric; combined arithmetically in the body.}
 }
 \description{
 M_0 and T = sum_j M_j S_j.  B is omitted because it depends on the allocation rather than on the population; the callers add it themselves.

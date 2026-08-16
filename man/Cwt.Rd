@@ -8,14 +8,14 @@
 Cwt(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{wavelet}{Defaults to \code{"morlet"}.}
+\item{x}{Passed to \code{.tf_need}.}
+\item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{wavelet}{Passed to \code{.tf_cwt}. Defaults to \code{"morlet"}.}
 \item{scales}{Defaults to \code{NULL}.}
 \item{w0}{Defaults to \code{5}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{Scalogram}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coeffs}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{peak_scale}, \code{wavelet}, \code{method}.

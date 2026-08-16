@@ -8,11 +8,11 @@
 .flatten_carry(spec, carry)
 }
 \arguments{
-\item{spec}{See Usage.}
-\item{carry}{See Usage.}
+\item{spec}{A list; the body reads \code{$harmonics}, \code{$periods}, \code{$use_trend} from it.}
+\item{carry}{A list; the body reads \code{$buf}, \code{$dlag}, \code{$elag}, \code{$level}, \code{$s}, \code{$sstar}, \code{$trend} from it.}
 }
 \description{
-Part of the bats_native implementation; see the file header for the source it follows.
+A step of the bats_native implementation. Called by \code{state_matrices}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

@@ -8,10 +8,10 @@
 .morie_qrs_fs(fs)
 }
 \arguments{
-\item{fs}{See Usage.}
+\item{fs}{A vector; its length is taken.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 20 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{fs}, as built in the body.

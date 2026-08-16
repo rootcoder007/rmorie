@@ -8,14 +8,14 @@
 morie_dsp_rls_cpp(x, d, order, lam, delta)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{d}{See Usage.}
-\item{order}{See Usage.}
-\item{lam}{See Usage.}
-\item{delta}{See Usage.}
+\item{x}{Passed to \code{.Call}.}
+\item{d}{Passed to \code{.Call}.}
+\item{order}{Passed to \code{.Call}.}
+\item{lam}{Passed to \code{.Call}.}
+\item{delta}{Passed to \code{.Call}.}
 }
 \description{
-Part of the RcppExports implementation; see the file header for the source it follows.
+A step of the RcppExports implementation. Called by \code{morie_dsp_rls}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.Call}.

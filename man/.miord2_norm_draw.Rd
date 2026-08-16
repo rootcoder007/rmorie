@@ -8,14 +8,14 @@
 .miord2_norm_draw(e, X_obs, y_obs, X_mis, kappa)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{X_obs}{See Usage.}
-\item{y_obs}{See Usage.}
-\item{X_mis}{See Usage.}
-\item{kappa}{See Usage.}
+\item{e}{Passed to \code{.ghc_gamma1}.}
+\item{X_obs}{A matrix; passed to \code{ncol}.}
+\item{y_obs}{A matrix; passed to \code{\%*\%}.}
+\item{X_mis}{A matrix; indexed by row and column.}
+\item{kappa}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the miord2_native implementation; see the file header for the source it follows.
+A step of the miord2_native implementation. Called by \code{morie_miord2}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

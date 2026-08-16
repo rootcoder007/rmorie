@@ -18,12 +18,13 @@
 
 #' .mor_ehh_curve
 #'
-#' Part of the ehhdec_native implementation; see the file header for the
+#' A step of the ehhdec_native implementation. Called by \code{morie_ehhdec}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param core See Usage.
-#' @param carriers See Usage.
+#' @param H A matrix; indexed by row and column.
+#' @param core Numeric; passed to \code{max}.
+#' @param carriers A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .mor_ehh_curve <- function(H, core, carriers) {
@@ -94,9 +95,9 @@ morie_ehhdec <- function(hap, core, positions = NULL) {
 #' when the curve never dropped that far before the data ran out, which
 #' is exactly the case where the integral understates iHH.
 #'
-#' @param pos See Usage.
-#' @param ehh See Usage.
-#' @param core See Usage.
+#' @param pos A vector; its length is taken and its elements indexed.
+#' @param ehh A vector; indexed elementwise.
+#' @param core Numeric; combined arithmetically in the body.
 #' @param side See Usage.
 #' @param min_ehh See Usage.
 #' @return A list with \code{area}, \code{truncated}.

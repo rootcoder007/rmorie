@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{u}{See Usage.}
-\item{q}{See Usage.}
-\item{k}{See Usage.}
+\item{q}{A vector; indexed elementwise.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 linear scan, not a bisection: k is 2^m with m small by construction, and a scan visits the cells in one fixed order in both arms.

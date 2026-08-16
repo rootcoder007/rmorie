@@ -8,13 +8,14 @@
 
 #' query_tokens
 #'
-#' Part of the blip2v_native implementation; see the file header for the
+#' A step of the blip2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_queries See Usage.
 #' @param dim See Usage.
 #' @param seed Defaults to \code{0}.
-#' @param scale Defaults to \code{0.02}.
+#' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
@@ -27,14 +28,15 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
 
 #' qformer_attend
 #'
-#' Part of the blip2v_native implementation; see the file header for the
+#' A step of the blip2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param queries See Usage.
-#' @param image_features See Usage.
-#' @param WQ See Usage.
+#' @param queries A matrix; passed to \code{as.matrix}.
+#' @param image_features A matrix; passed to \code{as.matrix}.
+#' @param WQ A matrix; passed to \code{nrow}.
 #' @param WK See Usage.
-#' @param WV See Usage.
+#' @param WV A matrix; passed to \code{ncol}.
 #' @return A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches}, \code{compression}, \code{note}.
 #' @export
 qformer_attend <- function(queries, image_features, WQ, WK, WV) {
@@ -68,7 +70,8 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
 
 #' trainable_fraction
 #'
-#' Part of the blip2v_native implementation; see the file header for the
+#' A step of the blip2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param qformer_params See Usage.
@@ -89,10 +92,11 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
 
 #' stage_one_objectives
 #'
-#' Part of the blip2v_native implementation; see the file header for the
+#' A step of the blip2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query_out See Usage.
+#' @param query_out A matrix; passed to \code{as.matrix}.
 #' @param text_out See Usage.
 #' @param temperature Defaults to \code{0.07}.
 #' @return A list with \code{per_query_similarity}, \code{image_text_similarity}, \code{best_query}, \code{logit}, \code{note}.
@@ -119,11 +123,12 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
 
 #' project_to_llm
 #'
-#' Part of the blip2v_native implementation; see the file header for the
+#' A step of the blip2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query_out See Usage.
-#' @param W See Usage.
+#' @param query_out A matrix; passed to \code{as.matrix}.
+#' @param W A matrix; passed to \code{nrow}.
 #' @param b Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.
 #' @export

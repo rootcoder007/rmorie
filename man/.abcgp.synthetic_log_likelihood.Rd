@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{draws}{See Usage.}
-\item{obs}{See Usage.}
-\item{epsilon}{Defaults to \code{0}.}
-\item{summary}{Defaults to \code{NULL}.}
+\item{obs}{Passed to \code{.abcgp.summarise}.}
+\item{epsilon}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
+\item{summary}{Passed to \code{.abcgp.summarise}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{log_lik}, \code{mu}, \code{cov}.

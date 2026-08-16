@@ -8,11 +8,11 @@
 .secaead_mac_data(aad, ciphertext)
 }
 \arguments{
-\item{aad}{See Usage.}
-\item{ciphertext}{See Usage.}
+\item{aad}{Passed to \code{.secaead_as_bytes}.}
+\item{ciphertext}{Passed to \code{.secaead_as_bytes}.}
 }
 \description{
-Part of the secaead_native implementation; see the file header for the source it follows.
+A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{c}.

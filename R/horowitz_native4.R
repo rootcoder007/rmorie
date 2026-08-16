@@ -33,11 +33,12 @@
 
 #' .morie_optimize_scale_normalized
 #'
-#' Part of the horowitz_native4 implementation; see the file header for
+#' A step of the horowitz_native4 implementation. Called by \code{morie_choice_based_max_score}, \code{morie_ordered_max_score}, \code{morie_panel_max_score}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param fn See Usage.
-#' @param d See Usage.
+#' @param d Numeric; combined arithmetically in the body.
 #' @param n_restarts Defaults to \code{8L}.
 #' @param seed Defaults to \code{0L}.
 #' @param x0 Defaults to \code{NULL}.

@@ -8,11 +8,11 @@
 .morie_k05_durbin_levinson(r, max_lag)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{max_lag}{See Usage.}
+\item{r}{A vector; indexed elementwise.}
+\item{max_lag}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the k05_tranche1 implementation; see the file header for the source it follows.
+A step of the k05_tranche1 implementation. Called by \code{morie_sample_pacf}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{phi}, as built in the body.

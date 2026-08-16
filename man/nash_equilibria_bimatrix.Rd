@@ -8,12 +8,12 @@
 nash_equilibria_bimatrix(A, B, tol = 1e-09)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{A}{A matrix; indexed by row and column.}
+\item{B}{A matrix; indexed by row and column.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.}
 }
 \description{
-Part of the nashq_native implementation; see the file header for the source it follows.
+A step of the nashq_native implementation. Called by \code{.nashq_select}, \code{stage_game_type}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,11 +8,11 @@
 .morie_spx_matvec(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the sp_fill implementation; see the file header for the source it follows.
+A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq}, \code{.morie_spx_sarneg2}, \code{.morie_spx_topeigs} and 4 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

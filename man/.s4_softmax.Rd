@@ -8,10 +8,10 @@
 .s4_softmax(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the s04core implementation; see the file header for the source it follows.
+A step of the s04core implementation. Called by \code{Gat}, \code{Gpmoe}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

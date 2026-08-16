@@ -21,7 +21,7 @@ A vector, from \code{as.numeric}.
 Huang, P.-S., He, X., Gao, J., Deng, L., Acero, A. & Heck, L. (2013)
 "Learning Deep Structured Semantic Models for Web Search using
 Clickthrough Data", *Proceedings of the 22nd ACM International
-Conference on Information and Knowledge Management (CIKM \\'13)*,
+Conference on Information and Knowledge Management (CIKM \'13)*,
 2333-2338, doi:10.1145/2505515.2505665. Sec. 3: the deep structured
 semantic model projecting queries and documents into a common
 low-dimensional semantic space where relevance is computed by cosine

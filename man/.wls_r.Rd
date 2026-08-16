@@ -8,12 +8,12 @@
 .wls_r(X, y, w)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{w}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the bhltmsm_native implementation; see the file header for the source it follows.
+A step of the bhltmsm_native implementation. Called by \code{fit_msm}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{solve}.

@@ -8,10 +8,10 @@
 .farmlmm_to_mat(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
 }
 \description{
-Part of the farmlmm_native implementation; see the file header for the source it follows.
+A step of the farmlmm_native implementation. Called by \code{.confounding}, \code{.farmcpu}, \code{.farmlmm_wls} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

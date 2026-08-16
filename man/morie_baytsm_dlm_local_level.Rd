@@ -9,13 +9,13 @@ morie_baytsm_dlm_local_level(y, V = 1, W = 0.1, m0 = 0, C0 = 1e+06)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{V}{Defaults to \code{1}.}
-\item{W}{Defaults to \code{0.1}.}
+\item{V}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{W}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{m0}{Defaults to \code{0}.}
 \item{C0}{Defaults to \code{1e+06}.}
 }
 \description{
-Part of the baytsm_native implementation; see the file header for the source it follows.
+A step of the baytsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{smoothed}, \code{smoothed_var}, \code{filtered}, \code{filtered_var}, \code{forecast}, \code{forecast_var}, \code{adaptive_coefficient}, \code{forecast_error}, \code{loglik}, \code{signal_to_noise}, \code{n}, \code{V}, \code{W}, \code{method}, \code{note}.

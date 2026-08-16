@@ -8,11 +8,11 @@
 .abcgp.sobol_dir(dim, bits)
 }
 \arguments{
-\item{dim}{See Usage.}
-\item{bits}{See Usage.}
+\item{dim}{A count; the body uses it as \code{seq_len(...)}.}
+\item{bits}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the abcgp_native implementation; see the file header for the source it follows.
+A step of the abcgp_native implementation. Called by \code{.abcgp.sobol_sequence}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

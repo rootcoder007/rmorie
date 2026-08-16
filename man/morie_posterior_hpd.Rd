@@ -8,13 +8,13 @@
 morie_posterior_hpd(theta_set, level = 0.95, conditional_prior = NULL, n_grid = 401L)
 }
 \arguments{
-\item{theta_set}{See Usage.}
+\item{theta_set}{Passed to \code{morie_conditional_prior_uniform}.}
 \item{level}{Defaults to \code{0.95}.}
 \item{conditional_prior}{Defaults to \code{NULL}.}
-\item{n_grid}{Defaults to \code{401L}.}
+\item{n_grid}{Passed to \code{morie_conditional_prior_uniform}. Defaults to \code{401L}.}
 }
 \description{
-Part of the bndbye_native implementation; see the file header for the source it follows.
+A step of the bndbye_native implementation. Called by \code{morie_compare_sets}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{width}, \code{level}, \code{covered}, \code{n_grid_points}, \code{method}.

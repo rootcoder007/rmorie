@@ -8,10 +8,10 @@
 .mafft_weights(k)
 }
 \arguments{
-\item{k}{See Usage.}
+\item{k}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{iterative_refine}, \code{progressive_align}, \code{wsp_score}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rep}.

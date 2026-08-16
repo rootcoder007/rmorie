@@ -8,13 +8,13 @@
 test_variant(g, y, offset = NULL, covariates = list())
 }
 \arguments{
-\item{g}{See Usage.}
-\item{y}{See Usage.}
+\item{g}{A vector; its length is taken.}
+\item{y}{A vector; its length is taken.}
 \item{offset}{Defaults to \code{NULL}.}
-\item{covariates}{Defaults to \code{list()}.}
+\item{covariates}{A vector; its length is taken. Defaults to \code{list()}.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{se}, \code{chisq}, \code{p_value}, \code{n}.

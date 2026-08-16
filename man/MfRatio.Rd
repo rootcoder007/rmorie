@@ -15,7 +15,7 @@ MfRatio(X, H, freqs, t0, noise_power)
 \item{noise_power}{See Usage.}
 }
 \description{
-something Schwarz\\'s inequality applies to; by eq (4.46) the ratio cannot exceed 2/P_eta_i, with equality exactly at eq (4.48).
+something Schwarz\'s inequality applies to; by eq (4.46) the ratio cannot exceed 2/P_eta_i, with equality exactly at eq (4.48).
 }
 \value{
 A list with \code{ratio}, \code{bound}, \code{optimality}, \code{numerator}, \code{energy_h}, \code{energy_x}, \code{method}.

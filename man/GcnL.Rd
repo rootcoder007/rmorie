@@ -19,7 +19,7 @@ List with \code{estimate}, \code{H}, \code{preactivation},
 }
 \description{
 Adding the self-loop before normalising keeps the eigenvalues of the
-propagation operator inside \link{-1, 1}, which is what stops repeated
+propagation operator inside [-1, 1], which is what stops repeated
 application from exploding.
 }
 \details{

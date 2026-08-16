@@ -12,7 +12,7 @@
 \item{n}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the rangayyan_xfrm implementation; see the file header for the source it follows.
+A step of the rangayyan_xfrm implementation. Called by \code{EvenOdd}, \code{EvenPart}, \code{OddPart}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{n}, \code{even}, \code{odd}, \code{x}, \code{reconstruction_error}.

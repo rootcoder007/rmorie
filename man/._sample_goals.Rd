@@ -8,17 +8,17 @@
 ._sample_goals(strategy, episode, t, T, k, m, pool, e)
 }
 \arguments{
-\item{strategy}{See Usage.}
-\item{episode}{See Usage.}
-\item{t}{See Usage.}
-\item{T}{See Usage.}
-\item{k}{See Usage.}
+\item{strategy}{One of \code{"episode"}, \code{"final"}, \code{"future"}.}
+\item{episode}{A vector; indexed elementwise.}
+\item{t}{Numeric; combined arithmetically in the body.}
+\item{T}{Numeric; combined arithmetically in the body.}
+\item{k}{Passed to \code{.ghc_unif}.}
 \item{m}{See Usage.}
-\item{pool}{See Usage.}
-\item{e}{See Usage.}
+\item{pool}{A vector; its length is taken and its elements indexed.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the hindsr_native implementation; see the file header for the source it follows.
+A step of the hindsr_native implementation. Called by \code{hindsr}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

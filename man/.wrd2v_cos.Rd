@@ -8,11 +8,11 @@
 .wrd2v_cos(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the wrd2v_native implementation; see the file header for the source it follows.
+A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy}, \code{morie_wrd2v_wrd2v}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

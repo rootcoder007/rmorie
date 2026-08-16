@@ -8,10 +8,10 @@
 .fdgrid(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the helpers_fda implementation; see the file header for the source it follows.
+A step of the helpers_fda implementation. Called by \code{Scfd}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 morie_prphet_trend_matrix(t, cps)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{cps}{See Usage.}
+\item{t}{A vector; its length is taken.}
+\item{cps}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the prphet_native implementation; see the file header for the source it follows.
+A step of the prphet_native implementation. Called by \code{morie_prphet_design}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{rows}, as built in the body.

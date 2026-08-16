@@ -8,13 +8,13 @@
 .mor_ed_qhat(P, a, tau, kappa)
 }
 \arguments{
-\item{P}{See Usage.}
-\item{a}{See Usage.}
-\item{tau}{See Usage.}
-\item{kappa}{See Usage.}
+\item{P}{Passed to \code{.mor_ed_block}.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{tau}{Numeric; combined arithmetically in the body.}
+\item{kappa}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the e_div_native implementation; see the file header for the source it follows.
+A step of the e_div_native implementation. Called by \code{.mor_ed_best_split}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

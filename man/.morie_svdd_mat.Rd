@@ -8,11 +8,11 @@
 .morie_svdd_mat(X, name)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
 \item{name}{See Usage.}
 }
 \description{
-Part of the svdd_native implementation; see the file header for the source it follows.
+A step of the svdd_native implementation. Called by \code{morie_svdd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{X}, as built in the body.

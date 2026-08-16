@@ -8,12 +8,12 @@
 .cgnonl_beta(rule, g_new, g_old)
 }
 \arguments{
-\item{rule}{See Usage.}
+\item{rule}{One of \code{"fletcher-reeves"}, \code{"polak-ribiere"}, \code{"polak-ribiere-plus"}.}
 \item{g_new}{See Usage.}
 \item{g_old}{See Usage.}
 }
 \description{
-Part of the cgnonl_native implementation; see the file header for the source it follows.
+A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

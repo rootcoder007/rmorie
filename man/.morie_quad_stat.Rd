@@ -3,16 +3,16 @@
 % the formals.
 \name{.morie_quad_stat}
 \alias{.morie_quad_stat}
-\title{Quadratic-form statistic c = (T-mu)\\\' Sigma^+ (T-mu) ~ chi-square(df)}
+\title{Quadratic-form statistic c = (T-mu)\\' Sigma^+ (T-mu) ~ chi-square(df)}
 \usage{
 .morie_quad_stat(m, tol = 1e-08)
 }
 \arguments{
-\item{m}{See Usage.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{m}{A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{
-Part of the coin_native implementation; see the file header for the source it follows.
+A step of the coin_native implementation. Called by \code{morie_oneway_test}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{statistic}, \code{df}, \code{p.value}.

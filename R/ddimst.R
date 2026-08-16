@@ -3,11 +3,12 @@
 # Nichol-Dhariwal cosine schedule for the cumulative alpha.
 #' Nichol-Dhariwal cosine schedule for the cumulative alpha
 #'
-#' Part of the ddimst implementation; see the file header for the source
+#' A step of the ddimst implementation. Called by \code{Ddimst}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param t See Usage.
-#' @param T See Usage.
+#' @param T Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .ddim_alpha_bar <- function(t, T) {

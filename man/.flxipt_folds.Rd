@@ -8,11 +8,11 @@
 .flxipt_folds(n, V)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{V}{See Usage.}
+\item{n}{A count; the body uses it as \code{seq_len(...)}.}
+\item{V}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{super_learner}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lapply}.

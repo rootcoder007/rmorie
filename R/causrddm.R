@@ -4,9 +4,9 @@
 #'
 #' weighted least squares of y on (1, x); returns the intercept
 #'
-#' @param xs See Usage.
-#' @param ys See Usage.
-#' @param ws See Usage.
+#' @param xs Numeric; combined arithmetically in the body.
+#' @param ys Numeric; combined arithmetically in the body.
+#' @param ws Numeric; passed to \code{sqrt}.
 #' @return The value of \code{[}.
 #' @export
 .t4_wls_int <- function(xs, ys, ws) {
@@ -18,11 +18,12 @@
 # degree-4 polynomial fit; coefficients and residual MSE
 #' Degree-4 polynomial fit; coefficients and residual MSE
 #'
-#' Part of the causrddm implementation; see the file header for the
+#' A step of the causrddm implementation. Called by \code{Rddmanip}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mp See Usage.
-#' @param val See Usage.
+#' @param mp A vector; its length is taken.
+#' @param val Passed to \code{.t4_olsfit}.
 #' @return A list with \code{beta}, \code{mse}.
 #' @export
 .t4_poly4 <- function(mp, val) {

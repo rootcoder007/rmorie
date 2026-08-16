@@ -9,12 +9,12 @@ phmmsr_msv_score(seq, profile, tau = 0.02, lam = 0.7)
 }
 \arguments{
 \item{seq}{See Usage.}
-\item{profile}{See Usage.}
+\item{profile}{Passed to \code{.phmmsr_to_matrix}.}
 \item{tau}{Defaults to \code{0.02}.}
 \item{lam}{Defaults to \code{0.7}.}
 }
 \description{
-Part of the phmmsr_native implementation; see the file header for the source it follows.
+A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{score}, \code{note}.

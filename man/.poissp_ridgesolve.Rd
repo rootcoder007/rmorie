@@ -8,12 +8,12 @@
 .poissp_ridgesolve(A, b, ridge = 1e-10)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{b}{See Usage.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{A}{A matrix; passed to \code{nrow}.}
+\item{b}{A matrix; passed to \code{solve}.}
+\item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 }
 \description{
-Part of the poissp_native implementation; see the file header for the source it follows.
+A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{morie_poissp}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

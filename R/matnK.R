@@ -67,10 +67,10 @@ MatnK <- function(d, nu, rho, sigma2 = 1) {
 #'
 #' does not overflow (z/2)^nu before Gamma(nu) divides it out again.
 #'
-#' @param d See Usage.
-#' @param nu See Usage.
-#' @param rho See Usage.
-#' @param sigma2 See Usage.
+#' @param d Numeric; combined arithmetically in the body.
+#' @param nu Numeric; combined arithmetically in the body.
+#' @param rho Numeric; combined arithmetically in the body.
+#' @param sigma2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .s03maternk <- function(d, nu, rho, sigma2) {

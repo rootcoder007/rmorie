@@ -8,10 +8,10 @@
 r_convention(fitted)
 }
 \arguments{
-\item{fitted}{See Usage.}
+\item{fitted}{A list; the body reads \code{$aic}, \code{$loglik}, \code{$phi}, \code{$Phi}, \code{$sigma2}, \code{$theta}, \code{$Theta} from it.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{ma}, \code{sma}, \code{ar}, \code{sar}, \code{sigma2}, \code{loglik}, \code{aic}, \code{note}.

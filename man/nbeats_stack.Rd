@@ -14,7 +14,7 @@ nbeats_stack(window, horizon, blocks, ridge = 1e-08)
 \item{ridge}{Defaults to \code{1e-08}.}
 }
 \description{
-Part of the nbeats_native implementation; see the file header for the source it follows.
+A step of the nbeats_native implementation. Called by \code{.ngnest_nbeats_stack}, \code{nbeats_forecast}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{forecast}, \code{residual}, \code{trace}.

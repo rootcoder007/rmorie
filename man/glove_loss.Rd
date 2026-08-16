@@ -8,16 +8,16 @@
 glove_loss(X, W, Wt, b, bt, x_max = 100, alpha = 0.75)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{W}{See Usage.}
-\item{Wt}{See Usage.}
-\item{b}{See Usage.}
-\item{bt}{See Usage.}
+\item{X}{A list; the body reads \code{$count}, \code{$i}, \code{$j} from it.}
+\item{W}{A matrix; indexed by row and column.}
+\item{Wt}{A matrix; indexed by row and column.}
+\item{b}{A vector; indexed elementwise.}
+\item{bt}{A vector; indexed elementwise.}
 \item{x_max}{Defaults to \code{100}.}
 \item{alpha}{Defaults to \code{0.75}.}
 }
 \description{
-Part of the glove_native implementation; see the file header for the source it follows.
+A step of the glove_native implementation. Called by \code{morie_glove}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{total}, as built in the body.

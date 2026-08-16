@@ -9,12 +9,12 @@
 }
 \arguments{
 \item{x}{See Usage.}
-\item{p}{See Usage.}
-\item{g}{See Usage.}
+\item{p}{Passed to \code{.cgnonl_dot}.}
+\item{g}{Passed to \code{.cgnonl_dot}.}
 \item{hess_vec}{See Usage.}
 }
 \description{
-Part of the cgnonl_native implementation; see the file header for the source it follows.
+A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

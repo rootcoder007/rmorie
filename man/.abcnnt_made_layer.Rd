@@ -8,11 +8,11 @@
 .abcnnt_made_layer(dim_x, dim_t, hidden, e, reverse = FALSE)
 }
 \arguments{
-\item{dim_x}{See Usage.}
-\item{dim_t}{See Usage.}
-\item{hidden}{See Usage.}
-\item{e}{See Usage.}
-\item{reverse}{Defaults to \code{FALSE}.}
+\item{dim_x}{A count; the body uses it as \code{seq_len(...)}.}
+\item{dim_t}{A count; the body uses it as \code{seq_len(...)}.}
+\item{hidden}{A count; the body uses it as \code{seq_len(...)}.}
+\item{e}{Passed to \code{.ghc_norm}.}
+\item{reverse}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
 masks are stored as 0/1 floats so element-wise multiply drops blocked connections, which is what the masked matrix product reduces to in any case.

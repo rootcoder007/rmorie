@@ -8,9 +8,9 @@
 .morie_cross3(o, a, b)
 }
 \arguments{
-\item{o}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{o}{A vector; indexed elementwise.}
+\item{a}{A vector; indexed elementwise.}
+\item{b}{A vector; indexed elementwise.}
 }
 \description{
 Part of the geometric_combinatorics_native implementation; see the file header for the source it follows.

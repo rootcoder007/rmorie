@@ -8,8 +8,8 @@
 .rsshortesthalf(v, h)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{h}{See Usage.}
+\item{v}{Numeric; passed to \code{sort}.}
+\item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{
 (1984) Theorem 2, p. 873: in one dimension the LMS location is the midpoint of the shortest half, found as the smallest of y_{h:n} - y_{1:n}, ..., y_{n:n} - y_{n-h+1:n}.  The same contiguity argument gives the univariate MCD and MVE subsets.  Returns list(start, width, sorted) with a 1-based start.

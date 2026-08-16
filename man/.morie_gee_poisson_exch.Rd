@@ -8,10 +8,10 @@
 .morie_gee_poisson_exch(X, y, id, max_iter = 50L, tol = 1e-08)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; its length is taken and its elements indexed.}
 \item{id}{See Usage.}
-\item{max_iter}{Defaults to \code{50L}.}
+\item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{

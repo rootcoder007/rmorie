@@ -97,8 +97,8 @@ Neyman <- function(y, N_h, S_h, n) {
 #' stratum arguments; S is all ones when S_h is NULL, which turns Neyman
 #' allocation into proportional allocation.
 #'
-#' @param N_h See Usage.
-#' @param S_h See Usage.
+#' @param N_h Passed to \code{.s03vec}.
+#' @param S_h Optional; may be \code{NULL}. Passed to \code{.s03vec}.
 #' @param n See Usage.
 #' @return A list with \code{M}, \code{S}, \code{m0}, \code{H}.
 #' @export
@@ -140,7 +140,7 @@ Neyman <- function(y, N_h, S_h, n) {
 #' parts, ties broken by the lower stratum index, so both language arms
 #' land on the same integers.
 #'
-#' @param alloc See Usage.
+#' @param alloc A vector; its length is taken.
 #' @param m0 See Usage.
 #' @return The value of \code{base}, as built in the body.
 #' @export
@@ -160,9 +160,9 @@ Neyman <- function(y, N_h, S_h, n) {
 #'
 #' sigma^2 = sum_i M_i (M_i - m_i) S_i^2 / m_i.
 #'
-#' @param M See Usage.
-#' @param S See Usage.
-#' @param m See Usage.
+#' @param M A vector; its length is taken and its elements indexed.
+#' @param S A vector; indexed elementwise.
+#' @param m A vector; indexed elementwise.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 .s03allocVar <- function(M, S, m) {
@@ -184,9 +184,9 @@ Neyman <- function(y, N_h, S_h, n) {
 #' allocation rather than on the population; the callers add it
 #' themselves.
 #'
-#' @param M See Usage.
-#' @param S See Usage.
-#' @param m0 See Usage.
+#' @param M A vector; its length is taken and its elements indexed.
+#' @param S A vector; indexed elementwise.
+#' @param m0 Numeric; combined arithmetically in the body.
 #' @return A list with \code{A}, \code{C}, \code{M0}, \code{T}.
 #' @export
 .s03allocABC <- function(M, S, m0) {

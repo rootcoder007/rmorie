@@ -15,11 +15,12 @@
 
 #' .morie_rg_acf
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. Called by \code{Acfseg}, \code{PcgSeg}, \code{PsdAcf} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param lags See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param lags A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_rg_acf <- function(x, lags) {
@@ -31,12 +32,13 @@
 
 #' Theta(k) = E[x(n-k) d(n)], the right-hand side of eq. (3.168)
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. Called by \code{Whopf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param d See Usage.
-#' @param lags See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param d A vector; its length is taken and its elements indexed.
+#' @param lags A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_rg_ccf <- function(x, d, lags) {
@@ -50,11 +52,12 @@
 
 #' .morie_rg_solve
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. Called by \code{PcgSeg}, \code{WienerHopf}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param b See Usage.
+#' @param A A matrix; passed to \code{solve}.
+#' @param b A matrix; passed to \code{solve}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_rg_solve <- function(A, b) {
@@ -72,9 +75,9 @@
 #'
 #' record starts
 #'
-#' @param r See Usage.
-#' @param i See Usage.
-#' @param m See Usage.
+#' @param r A vector; indexed elementwise.
+#' @param i Numeric; combined arithmetically in the body.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_rg_lagvec <- function(r, i, m) {
@@ -152,7 +155,7 @@ WienerDot <- function(w, xvec) {
 #' with a single minimum, so a vanishing gradient is the optimum and not
 #' merely a stationary point.
 #'
-#' @param phi See Usage.
+#' @param phi A matrix; passed to \code{as.matrix}.
 #' @param theta See Usage.
 #' @param w See Usage.
 #' @return A list with \code{gradient}, \code{norm}, \code{at_optimum}, \code{order}, \code{surface}, \code{method}.
@@ -184,7 +187,7 @@ MseGrad <- function(phi, theta, w) {
 #' error are orthogonal, and so are the output and the error -- the
 #' orthogonality principle, which is what makes the solution optimal.
 #'
-#' @param phi See Usage.
+#' @param phi A matrix; passed to \code{as.matrix}.
 #' @param theta See Usage.
 #' @return A list with \code{w}, \code{residual}, \code{max_residual}, \code{order}, \code{condition}, \code{orthogonality}, \code{method}.
 #' @export
@@ -441,7 +444,8 @@ Whopf <- function(x, d, order) {
 
 #' WienerFilt
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -718,7 +722,8 @@ WidrowHoff <- function(w, e, rvec, mu) {
 
 #' Eq. (3.204): eq. (3.203) with a step size that changes each sample
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param w See Usage.
@@ -794,14 +799,15 @@ LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
 
 #' LmsFilt
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. Called by \code{Anc}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param primary See Usage.
 #' @param reference See Usage.
 #' @param order Defaults to \code{8}.
 #' @param mu Defaults to \code{0.01}.
-#' @param variable Defaults to \code{FALSE}.
+#' @param variable A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param alpha Defaults to \code{0.02}.
 #' @return A list with \code{e}, \code{output}, \code{y}, \code{final_weights}, \code{order}, \code{mu}, \code{variable_step}, \code{step_history}, \code{stable_bound}, \code{within_bound}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{converges_in_the_mean_only}, \code{method}.
 #' @export
@@ -921,10 +927,10 @@ RlsNormal <- function(phi, theta) {
 #' the only inverse left is of a SCALAR, which turns an O(M^3) inversion
 #' per sample into O(M^2).
 #'
-#' @param A See Usage.
-#' @param B See Usage.
-#' @param C See Usage.
-#' @param D See Usage.
+#' @param A A matrix; passed to \code{as.matrix}.
+#' @param B A matrix; passed to \code{as.matrix}.
+#' @param C A matrix; passed to \code{as.matrix}.
+#' @param D A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{direct}, \code{lemma}, \code{max_difference}, \code{holds}, \code{n}, \code{k}, \code{scalar_when_k_is_one}, \code{method}.
 #' @export
 AbcdLemma <- function(A, B, C, D) {
@@ -965,7 +971,8 @@ AbcdLemma <- function(A, B, C, D) {
 
 #' Eq. (3.224): w(n) = w(n-1) + k(n) alpha(n)
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param w_prev See Usage.
@@ -1176,7 +1183,8 @@ RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
 
 #' RlsMonitor
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -1246,13 +1254,13 @@ RlsMonitor <- function(x, reference = NULL, order = 8, lam = 0.98,
 #' update is used rather than the Joseph form, which is recorded because
 #' the Joseph form is the numerically safer one when R is small.
 #'
-#' @param z See Usage.
-#' @param F See Usage.
-#' @param H See Usage.
-#' @param Q See Usage.
-#' @param R See Usage.
+#' @param z A matrix; passed to \code{as.matrix}.
+#' @param F A matrix; passed to \code{as.matrix}.
+#' @param H A matrix; passed to \code{as.matrix}.
+#' @param Q A matrix; passed to \code{as.matrix}.
+#' @param R A matrix; passed to \code{as.matrix}.
 #' @param x0 Defaults to \code{NULL}.
-#' @param P0 Defaults to \code{NULL}.
+#' @param P0 Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{states}, \code{covariances}, \code{gains}, \code{innovations}, \code{n}, \code{state_dim}, \code{obs_dim}, \code{p_symmetry_error}, \code{p_symmetrized}, \code{joseph_form}, \code{method}.
 #' @export
 Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
@@ -1321,10 +1329,10 @@ Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
 #' and will not converge, which `converged` reports instead of returning
 #' whatever P happened to be at the iteration limit.
 #'
-#' @param F See Usage.
-#' @param H See Usage.
-#' @param Q See Usage.
-#' @param R See Usage.
+#' @param F A matrix; passed to \code{as.matrix}.
+#' @param H A matrix; passed to \code{as.matrix}.
+#' @param Q A matrix; passed to \code{as.matrix}.
+#' @param R A matrix; passed to \code{as.matrix}.
 #' @param maxiter Defaults to \code{1000L}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{P}, \code{K}, \code{iterations}, \code{change}, \code{converged}, \code{n}, \code{steady_state_is_the_wiener_solution}, \code{method}.
@@ -1412,7 +1420,8 @@ Sem <- function(psd, reference) {
 
 #' Section 8.5.2, eqs. (8.27)-(8.29), after Michael and Houchin
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param test See Usage.
@@ -1494,7 +1503,8 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
 
 #' PcgSeg
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x See Usage.
@@ -1648,14 +1658,15 @@ PsdAcf <- function(x) {
 
 #' Anc
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. Called by \code{FetalEcg}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param primary See Usage.
 #' @param reference See Usage.
 #' @param order Defaults to \code{8}.
 #' @param mu Defaults to \code{0.01}.
-#' @param method Defaults to \code{"lms"}.
+#' @param method One of \code{"lms"}, \code{"rls"}. Defaults to \code{"lms"}.
 #' @param lam Defaults to \code{0.98}.
 #' @param delta Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
@@ -1696,7 +1707,8 @@ Anc <- function(primary, reference, order = 8, mu = 0.01,
 
 #' FetalEcg
 #'
-#' Part of the rangayyan_adapt implementation; see the file header for
+#' A step of the rangayyan_adapt implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param abdominal See Usage.

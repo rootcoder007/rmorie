@@ -8,11 +8,11 @@
 .schab_dsigma(d, r, nugget_ratio, rng, model)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{r}{See Usage.}
-\item{nugget_ratio}{See Usage.}
-\item{rng}{See Usage.}
-\item{model}{See Usage.}
+\item{d}{A matrix; passed to \code{nrow}.}
+\item{r}{Numeric; combined arithmetically in the body.}
+\item{nugget_ratio}{Numeric; combined arithmetically in the body.}
+\item{rng}{Passed to \code{.schab_semivariogram_jacobian}.}
+\item{model}{Passed to \code{.schab_semivariogram_jacobian}.}
 }
 \description{
 dR/da is the same expression the Gauss-Newton Jacobian uses, so both fitters share one derivation.

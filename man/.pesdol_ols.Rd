@@ -8,11 +8,11 @@
 .pesdol_ols(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
 }
 \description{
-Part of the pesdol_native implementation; see the file header for the source it follows.
+A step of the pesdol_native implementation. Called by \code{morie_pesdol_ardl_bounds}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{fit}, \code{res}.

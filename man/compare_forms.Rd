@@ -14,7 +14,7 @@ compare_forms(m, instruments, form = "sum", n_equality = 0L)
 \item{n_equality}{Defaults to \code{0L}.}
 }
 \description{
-Part of the bnskmt_native implementation; see the file header for the source it follows.
+A step of the bnskmt_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm}, \code{argmax_instrument}, \code{note}.

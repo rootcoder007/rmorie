@@ -8,10 +8,10 @@
 .morie_gr_softmax_vec(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{A vector; its length is taken.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{morie_geron_ch4_softmax_function}, \code{morie_geron_temperature_sampling}, \code{morie_geron_topk_sampling}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

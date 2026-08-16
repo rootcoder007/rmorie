@@ -10,7 +10,7 @@ Snr(signal, noise, definition = "power")
 \arguments{
 \item{signal}{See Usage.}
 \item{noise}{See Usage.}
-\item{definition}{Defaults to \code{"power"}.}
+\item{definition}{One of \code{"peak"}, \code{"power"}. Defaults to \code{"power"}.}
 }
 \description{
 interchangeable: the power ratio (10 log10) and the peak-to-peak amplitude over the noise RMS (20 log10, roughly 9 dB higher for a sinusoid).  Both are returned; snr_db is the one named.

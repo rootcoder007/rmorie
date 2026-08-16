@@ -17,7 +17,7 @@ SinCosTest(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1, fs = 100, duration = 1)
 \item{duration}{Defaults to \code{1}.}
 }
 \description{
-Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+A step of the rangayyan_ccf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{x}, \code{t}, \code{n}, \code{fs}, \code{f1}, \code{f2}, \code{a1}, \code{a2}, \code{components_are_known_by_construction}, \code{method}.

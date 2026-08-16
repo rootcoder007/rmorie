@@ -8,12 +8,12 @@
 morie_prsLR(grammar_, tokens, method = "lr1")
 }
 \arguments{
-\item{grammar_}{See Usage.}
-\item{tokens}{See Usage.}
-\item{method}{Defaults to \code{"lr1"}.}
+\item{grammar_}{Passed to \code{.prsLR_grammar}.}
+\item{tokens}{Passed to \code{.prsLR_parse}.}
+\item{method}{Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.}
 }
 \description{
-Part of the prsLR_native implementation; see the file header for the source it follows.
+A step of the prsLR_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{tree}, \code{method}, \code{n_states}, \code{conflicts}, \code{tokens}, \code{yield}.

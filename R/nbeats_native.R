@@ -4,12 +4,13 @@
 
 #' nbeats_trend_basis
 #'
-#' Part of the nbeats_native implementation; see the file header for the
+#' A step of the nbeats_native implementation. Called by \code{nbeats_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param length See Usage.
-#' @param degree See Usage.
-#' @param offset Defaults to \code{0}.
+#' @param length A count; the body uses it as \code{seq_len(...)}.
+#' @param degree Numeric; combined arithmetically in the body.
+#' @param offset Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param scale Defaults to \code{NULL}.
 #' @return A matrix, from \code{t}.
 #' @export
@@ -27,12 +28,13 @@ nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
 
 #' nbeats_seasonality_basis
 #'
-#' Part of the nbeats_native implementation; see the file header for the
+#' A step of the nbeats_native implementation. Called by \code{nbeats_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param length See Usage.
-#' @param harmonics See Usage.
-#' @param offset Defaults to \code{0}.
+#' @param length A count; the body uses it as \code{seq_len(...)}.
+#' @param harmonics A count; the body uses it as \code{seq_len(...)}.
+#' @param offset Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param period Defaults to \code{NULL}.
 #' @return The value of \code{do.call}.
 #' @export
@@ -50,12 +52,13 @@ nbeats_seasonality_basis <- function(length, harmonics, offset = 0, period = NUL
 
 #' X is L x P, y is length L; return theta
 #'
-#' Part of the nbeats_native implementation; see the file header for the
+#' A step of the nbeats_native implementation. Called by \code{nbeats_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 nbeats_lstsq <- function(X, y, ridge = 1e-8) {
@@ -69,12 +72,13 @@ nbeats_lstsq <- function(X, y, ridge = 1e-8) {
 
 #' nbeats_block
 #'
-#' Part of the nbeats_native implementation; see the file header for the
+#' A step of the nbeats_native implementation. Called by \code{nbeats_stack}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param window See Usage.
+#' @param window A vector; its length is taken.
 #' @param horizon See Usage.
-#' @param kind Defaults to \code{"generic"}.
+#' @param kind One of \code{"generic"}, \code{"seasonality"}, \code{"trend"}. Defaults to \code{"generic"}.
 #' @param degree Defaults to \code{2}.
 #' @param harmonics Defaults to \code{3}.
 #' @param ridge Defaults to \code{1e-08}.
@@ -108,7 +112,8 @@ nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
 
 #' nbeats_stack
 #'
-#' Part of the nbeats_native implementation; see the file header for the
+#' A step of the nbeats_native implementation. Called by \code{.ngnest_nbeats_stack}, \code{nbeats_forecast}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param window See Usage.
@@ -136,7 +141,8 @@ nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
 
 #' nbeats_forecast
 #'
-#' Part of the nbeats_native implementation; see the file header for the
+#' A step of the nbeats_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -168,7 +174,8 @@ nbeats_forecast <- function(y, horizon, lookback = NULL, blocks = NULL, ridge = 
 
 #' nbeats_cheatsheet
 #'
-#' Part of the nbeats_native implementation; see the file header for the
+#' A step of the nbeats_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

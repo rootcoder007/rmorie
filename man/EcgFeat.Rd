@@ -8,9 +8,9 @@
 EcgFeat(x, qrs, fs)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken and its elements indexed.}
 \item{qrs}{See Usage.}
-\item{fs}{See Usage.}
+\item{fs}{Numeric; combined arithmetically in the body.}
 }
 \description{
 the PQ segment, not against zero: the PQ segment is the isoelectric reference the book names, and it absorbs any residual baseline offset.

@@ -8,15 +8,15 @@
 .morie_k05_prob(theta, a, b, c, u, D = 1)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{c}{See Usage.}
-\item{u}{See Usage.}
-\item{D}{Defaults to \code{1}.}
+\item{theta}{Numeric; combined arithmetically in the body.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
+\item{c}{Numeric; combined arithmetically in the body.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{D}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{
-Part of the k05_tranche2 implementation; see the file header for the source it follows.
+A step of the k05_tranche2 implementation. Called by \code{.morie_k05_info}, \code{morie_tcc}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

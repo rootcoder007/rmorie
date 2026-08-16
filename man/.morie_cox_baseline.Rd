@@ -8,14 +8,14 @@
 .morie_cox_baseline(t, e, X, beta, offset = NULL)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{A vector; its length is taken and its elements indexed.}
 \item{e}{See Usage.}
-\item{X}{See Usage.}
-\item{beta}{See Usage.}
+\item{X}{A matrix; passed to \code{\%*\%}.}
+\item{beta}{A matrix; passed to \code{\%*\%}.}
 \item{offset}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the cox_native implementation; see the file header for the source it follows.
+A step of the cox_native implementation. Called by \code{morie_cox_breslow_step}, \code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{times}, \code{hazard}, \code{cumhazard}.

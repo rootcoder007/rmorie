@@ -25,10 +25,11 @@
 
 #' .fz_K
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{.fz_muller}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_kde} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .fz_K <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
@@ -51,7 +52,8 @@
 # V(u) = 1 - W(u), the survival counterpart used throughout Ch. 4.
 #' V(u) = 1 - W(u), the survival counterpart used throughout Ch. 4
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2}, \code{morie_fauzi_mrl_naive}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param u See Usage.
@@ -61,10 +63,11 @@
 
 #' .fz_trapz
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_cumulative_survival_1} and 6 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param x See Usage.
 #' @return A numeric value.
 #' @export
@@ -72,7 +75,8 @@
 
 #' .fz_seq
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_cumulative_survival_1} and 7 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param from See Usage.
@@ -104,7 +108,7 @@
 #' .morie_kdfe_h in aaa_helpers_fauzi.R; kept local so this file stands
 #' alone.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .fz_kdfe_h <- function(x) {
@@ -159,7 +163,7 @@
 #' negative and the distribution estimate non-monotone. That is the
 #' trade the book makes explicit.
 #'
-#' @param u See Usage.
+#' @param u Numeric; combined arithmetically in the body.
 #' @param m Defaults to \code{4L}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -179,10 +183,11 @@
 
 #' .fz_check_sample
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_conditions_c1_c6} and 7 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A vector; its length is taken.
 #' @param min_n Defaults to \code{2L}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
@@ -199,7 +204,8 @@
 
 #' .fz_check_h
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_gamma_kde} and 5 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param h See Usage.
@@ -523,13 +529,14 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
 
 #' .fz_cs_common
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{.fz_check_sample}.
 #' @param t_grid See Usage.
 #' @param h See Usage.
-#' @param transform See Usage.
+#' @param transform Passed to \code{.fz_transform}.
 #' @return A list with \code{tr}, \code{tg}, \code{zx}, \code{zt}, \code{hh}, \code{n}.
 #' @export
 .fz_cs_common <- function(x, t_grid, h, transform) {
@@ -647,12 +654,13 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 
 #' .fz_bias_common
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{morie_fauzi_b1_coefficient}, \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_b3_coefficient}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t See Usage.
 #' @param f_X See Usage.
-#' @param transform See Usage.
+#' @param transform Passed to \code{.fz_transform}.
 #' @return A list with \code{tv}, \code{fx}, \code{tr}, \code{zt}, \code{gp}, \code{gpp}.
 #' @export
 .fz_bias_common <- function(t, f_X, transform) {
@@ -677,10 +685,11 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 
 #' .fz_bias_payload
 #'
-#' Part of the fauzi_native implementation; see the file header for the
+#' A step of the fauzi_native implementation. Called by \code{morie_fauzi_b1_coefficient}, \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_b3_coefficient}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cm See Usage.
+#' @param cm A list; the body reads \code{$gp}, \code{$gpp}, \code{$tr} from it.
 #' @return A list with \code{g_prime}, \code{g_double_prime}, \code{bias_order}, \code{contrast}, \code{transform}.
 #' @export
 .fz_bias_payload <- function(cm) {

@@ -11,10 +11,10 @@ numerical_derivative(psi_of_P, weights, score, h = 1e-05)
 \item{psi_of_P}{See Usage.}
 \item{weights}{See Usage.}
 \item{score}{See Usage.}
-\item{h}{Defaults to \code{1e-05}.}
+\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{
-Part of the tlheic_native implementation; see the file header for the source it follows.
+A step of the tlheic_native implementation. Called by \code{estimate_eic}, \code{morie_tlheic}, \code{verify_gradient}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

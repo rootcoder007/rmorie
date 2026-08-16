@@ -8,14 +8,14 @@
 .phylml_prune(node, site, pi, u, seqs)
 }
 \arguments{
-\item{node}{See Usage.}
-\item{site}{See Usage.}
-\item{pi}{See Usage.}
-\item{u}{See Usage.}
-\item{seqs}{See Usage.}
+\item{node}{A vector; its length is taken and its elements indexed.}
+\item{site}{Character; passed to \code{substr}.}
+\item{pi}{Passed to \code{.phylml_prune}.}
+\item{u}{Passed to \code{.phylml_prune}.}
+\item{seqs}{A vector; indexed elementwise.}
 }
 \description{
-Part of the phylml_native implementation; see the file header for the source it follows.
+A step of the phylml_native implementation. Called by \code{site_likelihood}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

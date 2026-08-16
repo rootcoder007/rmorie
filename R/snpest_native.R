@@ -118,12 +118,13 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 # Indices of the resampled particles; weights assumed normalised.
 #' Indices of the resampled particles; weights assumed normalised
 #'
-#' Part of the snpest_native implementation; see the file header for the
+#' A step of the snpest_native implementation. Called by \code{morie_snpest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
-#' @param weights See Usage.
-#' @param scheme See Usage.
+#' @param e Passed to \code{.ghc_unif}.
+#' @param weights A vector; its length is taken and its elements indexed.
+#' @param scheme One of \code{"multinomial"}, \code{"stratified"}, \code{"systematic"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .snpest_resample <- function(e, weights, scheme) {
@@ -156,10 +157,11 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 # Effective sample size, 1 / sum w^2 for normalised weights.
 #' Effective sample size, 1 / sum w^2 for normalised weights
 #'
-#' Part of the snpest_native implementation; see the file header for the
+#' A step of the snpest_native implementation. Called by \code{morie_snpest}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param w See Usage.
+#' @param w Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .snpest_ess <- function(w) 1 / .w3_csum(w * w)

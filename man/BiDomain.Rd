@@ -14,14 +14,14 @@ BiDomain(n_nodes = 100, dx_cm = 0.02, duration_ms = 60, dt_ms = 0.005, sigma_i =
 \item{dt_ms}{Defaults to \code{0.005}.}
 \item{sigma_i}{Defaults to \code{1}.}
 \item{sigma_e}{Defaults to \code{2}.}
-\item{C_m}{Defaults to \code{1}.}
-\item{Sv}{Defaults to \code{1000}.}
+\item{C_m}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
+\item{Sv}{Numeric; combined arithmetically in the body. Defaults to \code{1000}.}
 \item{I_ion}{Defaults to \code{NULL}.}
 \item{stim_nodes}{Defaults to \code{5}.}
-\item{I_stim}{Defaults to \code{50}.}
+\item{I_stim}{Numeric; combined arithmetically in the body. Defaults to \code{50}.}
 \item{stim_ms}{Defaults to \code{1}.}
-\item{v_rest}{Defaults to \code{-85}.}
-\item{v_peak}{Defaults to \code{20}.}
+\item{v_rest}{A count; the body uses it as \code{rep(...)}. Defaults to \code{-85}.}
+\item{v_peak}{Numeric; combined arithmetically in the body. Defaults to \code{20}.}
 \item{I_ion_peak}{Defaults to \code{10}.}
 \item{threshold_frac}{Defaults to \code{0.25}.}
 }

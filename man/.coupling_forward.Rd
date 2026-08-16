@@ -8,16 +8,16 @@
 .coupling_forward(x, mask, Ws, bs, Wt, bt, scale_cap = 5)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{mask}{See Usage.}
-\item{Ws}{See Usage.}
-\item{bs}{See Usage.}
-\item{Wt}{See Usage.}
-\item{bt}{See Usage.}
-\item{scale_cap}{Defaults to \code{5}.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{mask}{Numeric; combined arithmetically in the body.}
+\item{Ws}{Passed to \code{.st}.}
+\item{bs}{Passed to \code{.st}.}
+\item{Wt}{Passed to \code{.st}.}
+\item{bt}{Passed to \code{.st}.}
+\item{scale_cap}{Passed to \code{.st}. Defaults to \code{5}.}
 }
 \description{
-Part of the flow_an_native implementation; see the file header for the source it follows.
+A step of the flow_an_native implementation. Called by \code{.flow_forward}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{logdet}.

@@ -8,7 +8,7 @@
 .groebn_poly(terms, nvars = NULL)
 }
 \arguments{
-\item{terms}{See Usage.}
+\item{terms}{A vector; its length is taken and its elements indexed.}
 \item{nvars}{Defaults to \code{NULL}.}
 }
 \description{

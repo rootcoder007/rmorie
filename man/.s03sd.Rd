@@ -8,11 +8,11 @@
 .s03sd(v, ddof = 1L)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{ddof}{Defaults to \code{1L}.}
+\item{v}{Passed to \code{.s03var}.}
+\item{ddof}{Passed to \code{.s03var}. Defaults to \code{1L}.}
 }
 \description{
-Part of the helpers_s03 implementation; see the file header for the source it follows.
+A step of the helpers_s03 implementation. Called by \code{Btbayes}, \code{Btcbb}, \code{Btcicor} and 28 others in the module. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

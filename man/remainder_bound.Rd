@@ -13,7 +13,7 @@ remainder_bound(err_Q, err_g, delta)
 \item{delta}{See Usage.}
 }
 \description{
-Part of the tlhaltm_native implementation; see the file header for the source it follows.
+A step of the tlhaltm_native implementation. Called by \code{efficiency_check}, \code{morie_tlhaltm}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{bound}, \code{delta}, \code{err_Q}, \code{err_g}, \code{note}.

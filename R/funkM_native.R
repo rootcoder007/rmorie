@@ -64,18 +64,19 @@
 
 #' morie_funkM
 #'
-#' Part of the funkM_native implementation; see the file header for the
+#' A step of the funkM_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ratings See Usage.
+#' @param ratings Passed to \code{.funkM_as_ratings}.
 #' @param n_users See Usage.
 #' @param n_items See Usage.
 #' @param factors Defaults to \code{8}.
 #' @param epochs Defaults to \code{60}.
-#' @param lr Defaults to \code{0.005}.
-#' @param reg Defaults to \code{0.02}.
-#' @param seed Defaults to \code{0}.
-#' @param incremental Defaults to \code{FALSE}.
+#' @param lr Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.005}.
+#' @param reg Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.02}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param incremental A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param epochs_per_factor Defaults to \code{20}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
@@ -155,7 +156,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' Accepts a data.frame (with those columns) or a list of length-3
 #' vectors. Indices are kept 0-based, matching the Python source.
 #'
-#' @param ratings See Usage.
+#' @param ratings A list; the body reads \code{$i}, \code{$r}, \code{$u} from it.
 #' @return Nothing; this branch always raises.
 #' @export
 .funkM_as_ratings <- function(ratings) {
@@ -192,10 +193,11 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 # mu over the OBSERVED entries only.
 #' Mu over the OBSERVED entries only
 #'
-#' Part of the funkM_native implementation; see the file header for the
+#' A step of the funkM_native implementation. Called by \code{morie_funkM}, \code{morie_funkM_imputed_svd_error}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R See Usage.
+#' @param R A list; the body reads \code{$r} from it.
 #' @return A numeric value.
 #' @export
 .funkM_global_mean <- function(R) {
@@ -206,14 +208,15 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 # r_hat = mu + b_u + b_i + q_i^T p_u.
 #' R_hat = mu + b_u + b_i + q_i^T p_u
 #'
-#' Part of the funkM_native implementation; see the file header for the
+#' A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch}, \code{morie_funkM_rmse}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param mu See Usage.
 #' @param b_user See Usage.
 #' @param b_item See Usage.
-#' @param p_u See Usage.
-#' @param q_i See Usage.
+#' @param p_u A vector; its length is taken.
+#' @param q_i A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .funkM_predict <- function(mu, b_user, b_item, p_u, q_i) {
@@ -228,17 +231,18 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 # One pass over the observed ratings. `factor` is 0-based; NULL = all.
 #' One pass over the observed ratings. `factor` is 0-based; NULL = all
 #'
-#' Part of the funkM_native implementation; see the file header for the
+#' A step of the funkM_native implementation. Called by \code{morie_funkM}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R See Usage.
-#' @param mu See Usage.
-#' @param bu See Usage.
-#' @param bi See Usage.
-#' @param P See Usage.
-#' @param Q See Usage.
-#' @param lr See Usage.
-#' @param reg See Usage.
+#' @param R A list; the body reads \code{$i}, \code{$r}, \code{$u} from it.
+#' @param mu Passed to \code{.funkM_predict}.
+#' @param bu A vector; indexed elementwise.
+#' @param bi A vector; indexed elementwise.
+#' @param P A matrix; indexed by row and column.
+#' @param Q A matrix; indexed by row and column.
+#' @param lr Numeric; combined arithmetically in the body.
+#' @param reg Numeric; combined arithmetically in the body.
 #' @param factor Defaults to \code{NULL}.
 #' @return A numeric value.
 #' @export
@@ -275,15 +279,16 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 # Root mean squared error on a held-out set.
 #' Root mean squared error on a held-out set
 #'
-#' Part of the funkM_native implementation; see the file header for the
+#' A step of the funkM_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ratings See Usage.
-#' @param mu See Usage.
-#' @param bu See Usage.
-#' @param bi See Usage.
-#' @param P See Usage.
-#' @param Q See Usage.
+#' @param ratings Passed to \code{.funkM_as_ratings}.
+#' @param mu Passed to \code{.funkM_predict}.
+#' @param bu A vector; indexed elementwise.
+#' @param bi A vector; indexed elementwise.
+#' @param P A matrix; indexed by row and column.
+#' @param Q A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
 morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
@@ -307,10 +312,11 @@ morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
 # What filling the holes and running an SVD actually gives.
 #' What filling the holes and running an SVD actually gives
 #'
-#' Part of the funkM_native implementation; see the file header for the
+#' A step of the funkM_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ratings See Usage.
+#' @param ratings Passed to \code{.funkM_as_ratings}.
 #' @param n_users See Usage.
 #' @param n_items See Usage.
 #' @param rank Defaults to \code{2}.
@@ -362,7 +368,8 @@ morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
 
 #' .funkM_cheatsheet
 #'
-#' Part of the funkM_native implementation; see the file header for the
+#' A step of the funkM_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

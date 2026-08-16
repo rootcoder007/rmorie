@@ -14,12 +14,12 @@ morie_lbfgsm(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-08, c1 = 1e-04, c2 
 \item{m}{Defaults to \code{10}.}
 \item{max_iter}{Defaults to \code{200}.}
 \item{tol}{Defaults to \code{1e-08}.}
-\item{c1}{Defaults to \code{1e-04}.}
-\item{c2}{Defaults to \code{0.9}.}
+\item{c1}{Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.}
+\item{c2}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 \item{max_ls}{Defaults to \code{60}.}
 }
 \description{
-Part of the lbfgsm_native implementation; see the file header for the source it follows.
+A step of the lbfgsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{x}, \code{fun}, \code{grad}, \code{grad_norm}, \code{iterations}, \code{n_fun}, \code{memory}, \code{converged}, \code{history}, \code{method}.

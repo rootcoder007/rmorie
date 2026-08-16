@@ -8,11 +8,11 @@
 .glides_ipow(x, k)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{k}{See Usage.}
+\item{x}{Numeric; combined arithmetically in the body.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-language\\\'s power operator: R uses repeated squaring for an integer exponent and Python calls the C library\\\'s pow, and they disagree in the last bit.
+language\\'s power operator: R uses repeated squaring for an integer exponent and Python calls the C library\\'s pow, and they disagree in the last bit.
 }
 \value{
 The value of \code{p}, as built in the body.

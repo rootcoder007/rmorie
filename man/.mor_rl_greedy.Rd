@@ -8,11 +8,11 @@
 .mor_rl_greedy(Qs, A)
 }
 \arguments{
-\item{Qs}{See Usage.}
+\item{Qs}{A vector; indexed elementwise.}
 \item{A}{See Usage.}
 }
 \description{
-Part of the qlearn_native implementation; see the file header for the source it follows.
+A step of the qlearn_native implementation. Called by \code{.mor_rl_eps}, \code{.mor_rl_out}, \code{morie_ddqn} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{b}, as built in the body.

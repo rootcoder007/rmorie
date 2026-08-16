@@ -8,10 +8,10 @@
 entropy(q)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the prgrl_native implementation; see the file header for the source it follows.
+A step of the prgrl_native implementation. Called by \code{is_curriculum}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

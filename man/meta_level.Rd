@@ -13,7 +13,7 @@ meta_level(model_builder, consumer, data)
 \item{data}{See Usage.}
 }
 \description{
-Part of the hybRC_native implementation; see the file header for the source it follows.
+A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{result}, \code{model}, \code{method}, \code{note}.

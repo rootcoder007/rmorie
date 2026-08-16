@@ -8,11 +8,11 @@
 .qsfrgr_leaf_of(node, x)
 }
 \arguments{
-\item{node}{See Usage.}
-\item{x}{See Usage.}
+\item{node}{A list; the body reads \code{$f}, \code{$l}, \code{$leaf}, \code{$r}, \code{$rows}, \code{$thr} from it.}
+\item{x}{A vector; indexed elementwise.}
 }
 \description{
-Part of the qsfrgr_native implementation; see the file header for the source it follows.
+A step of the qsfrgr_native implementation. Called by \code{morie_qsfrgr_weights}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

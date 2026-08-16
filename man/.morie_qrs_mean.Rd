@@ -8,10 +8,10 @@
 .morie_qrs_mean(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{CPulseFeat}, \code{EcgFeat}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

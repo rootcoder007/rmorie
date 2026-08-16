@@ -3,17 +3,17 @@
 % the formals.
 \name{.morie_km2_causal_lm_loss}
 \alias{.morie_km2_causal_lm_loss}
-\title{Kmclm\\\'s core: causal-LM cross entropy over non-ignored positions}
+\title{Kmclm\\'s core: causal-LM cross entropy over non-ignored positions}
 \usage{
 .morie_km2_causal_lm_loss(logits, targets, ignore_index = -100L)
 }
 \arguments{
-\item{logits}{See Usage.}
+\item{logits}{A matrix; indexed by row and column.}
 \item{targets}{See Usage.}
 \item{ignore_index}{Defaults to \code{-100L}.}
 }
 \description{
-Part of the kamath_llm2_native implementation; see the file header for the source it follows.
+A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_instruction_tuning_loss}, \code{morie_kamath_llava_visual_instruction}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{loss}, \code{perplexity}, \code{token_losses}, \code{n_tokens}, \code{vocab_size}.

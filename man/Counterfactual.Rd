@@ -8,15 +8,15 @@
 Counterfactual(evidence, equations, exogenous, do, query, u_support = NULL)
 }
 \arguments{
-\item{evidence}{See Usage.}
+\item{evidence}{A vector; indexed elementwise.}
 \item{equations}{See Usage.}
-\item{exogenous}{See Usage.}
-\item{do}{See Usage.}
+\item{exogenous}{A vector; its length is taken.}
+\item{do}{A vector; indexed elementwise.}
 \item{query}{See Usage.}
 \item{u_support}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the counterfactual implementation; see the file header for the source it follows.
+A step of the counterfactual implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{counterfactual}, \code{factual}, \code{abducted}, \code{n_compatible_u}, \code{counterfactual_unique}, \code{residual}, \code{do}, \code{query}, \code{method}.

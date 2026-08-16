@@ -8,12 +8,12 @@
 .mor_did_panel(y, unit, time)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A vector; its length is taken.}
 \item{unit}{See Usage.}
 \item{time}{See Usage.}
 }
 \description{
-are taken in sorted order, matching numpy\\\'s unique().
+are taken in sorted order, matching numpy\\'s unique().
 }
 \value{
 A list with \code{Y}, \code{units}, \code{periods}.

@@ -10,10 +10,10 @@
 \arguments{
 \item{x}{See Usage.}
 \item{maxmodes}{Defaults to \code{10L}.}
-\item{tol}{Defaults to \code{0.05}.}
+\item{tol}{Passed to \code{.tf_sift}. Defaults to \code{0.05}.}
 }
 \description{
-Part of the rangayyan_tf implementation; see the file header for the source it follows.
+A step of the rangayyan_tf implementation. Called by \code{EmdEns}, \code{EmdSpec}, \code{Sift} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{imfs}, \code{residual}.

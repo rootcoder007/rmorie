@@ -8,8 +8,8 @@
 .morie_mulhilo32(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{Numeric; combined arithmetically in the body.}
 }
 \description{
 The full product can reach 2^64, past the 2^53 where doubles stop being exact integers, so it is assembled from 16-bit partial products.

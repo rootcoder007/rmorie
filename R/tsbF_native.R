@@ -105,11 +105,12 @@
 
 #' .tsbF_init
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param init Defaults to \code{"global"}.
+#' @param init One of \code{"global"}, \code{"known"}. Defaults to \code{"global"}.
 #' @param z0 Defaults to \code{NULL}.
 #' @param x0 Defaults to \code{NULL}.
 #' @param p0 Defaults to \code{NULL}.
@@ -172,10 +173,11 @@
 
 #' .tsbF_burn
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq See Usage.
+#' @param seq A vector; its length is taken and its elements indexed.
 #' @param burn_in See Usage.
 #' @return The value of \code{[}.
 #' @export
@@ -193,17 +195,18 @@
 
 #' morie_tsbF_tsb_forecast
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_intermittent_forecast}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param alpha Defaults to \code{0.1}.
 #' @param beta Defaults to \code{0.05}.
 #' @param horizon Defaults to \code{1}.
-#' @param init Defaults to \code{"global"}.
-#' @param z0 Defaults to \code{NULL}.
-#' @param p0 Defaults to \code{NULL}.
-#' @param burn_in Defaults to \code{0}.
+#' @param init Passed to \code{.tsbF_init}. Defaults to \code{"global"}.
+#' @param z0 Passed to \code{.tsbF_init}.
+#' @param p0 Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param burn_in Passed to \code{.tsbF_burn}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
@@ -265,16 +268,17 @@ morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
 
 #' morie_tsbF_croston_forecast
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_intermittent_forecast}, \code{morie_tsbF_sba_forecast}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
 #' @param alpha Defaults to \code{0.1}.
 #' @param horizon Defaults to \code{1}.
-#' @param init Defaults to \code{"global"}.
-#' @param z0 Defaults to \code{NULL}.
-#' @param x0 Defaults to \code{NULL}.
-#' @param burn_in Defaults to \code{0}.
+#' @param init Passed to \code{.tsbF_init}. Defaults to \code{"global"}.
+#' @param z0 Passed to \code{.tsbF_init}.
+#' @param x0 Passed to \code{.tsbF_init}.
+#' @param burn_in Passed to \code{.tsbF_burn}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_tsbF_croston_forecast <- function(y, alpha = 0.1, horizon = 1,
@@ -326,16 +330,17 @@ morie_tsbF_croston_forecast <- function(y, alpha = 0.1, horizon = 1,
 
 #' morie_tsbF_sba_forecast
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_intermittent_forecast}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param alpha Defaults to \code{0.1}.
-#' @param horizon Defaults to \code{1}.
-#' @param init Defaults to \code{"global"}.
-#' @param z0 Defaults to \code{NULL}.
-#' @param x0 Defaults to \code{NULL}.
-#' @param burn_in Defaults to \code{0}.
+#' @param y Passed to \code{morie_tsbF_croston_forecast}.
+#' @param alpha Passed to \code{morie_tsbF_croston_forecast}. Defaults to \code{0.1}.
+#' @param horizon Passed to \code{morie_tsbF_croston_forecast}. Defaults to \code{1}.
+#' @param init Passed to \code{morie_tsbF_croston_forecast}. Defaults to \code{"global"}.
+#' @param z0 Passed to \code{morie_tsbF_croston_forecast}.
+#' @param x0 Passed to \code{morie_tsbF_croston_forecast}.
+#' @param burn_in Passed to \code{morie_tsbF_croston_forecast}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
@@ -362,7 +367,8 @@ morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
 
 #' morie_tsbF_demand_classification
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y See Usage.
@@ -392,19 +398,20 @@ morie_tsbF_demand_classification <- function(y, adi_cut = 1.32, cv2_cut = 0.49) 
 
 #' morie_tsbF_intermittent_forecast
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. Called by \code{morie_tsbF}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param method Defaults to \code{"tsb"}.
-#' @param alpha Defaults to \code{0.1}.
-#' @param beta Defaults to \code{0.05}.
-#' @param horizon Defaults to \code{1}.
-#' @param init Defaults to \code{"global"}.
-#' @param z0 Defaults to \code{NULL}.
-#' @param x0 Defaults to \code{NULL}.
-#' @param p0 Defaults to \code{NULL}.
-#' @param burn_in Defaults to \code{0}.
+#' @param y Passed to \code{morie_tsbF_tsb_forecast}.
+#' @param method One of \code{"croston"}, \code{"tsb"}. Defaults to \code{"tsb"}.
+#' @param alpha Passed to \code{morie_tsbF_tsb_forecast}. Defaults to \code{0.1}.
+#' @param beta Passed to \code{morie_tsbF_tsb_forecast}. Defaults to \code{0.05}.
+#' @param horizon Passed to \code{morie_tsbF_tsb_forecast}. Defaults to \code{1}.
+#' @param init Passed to \code{morie_tsbF_tsb_forecast}. Defaults to \code{"global"}.
+#' @param z0 Passed to \code{morie_tsbF_tsb_forecast}.
+#' @param x0 Passed to \code{morie_tsbF_croston_forecast}.
+#' @param p0 Passed to \code{morie_tsbF_tsb_forecast}.
+#' @param burn_in Passed to \code{morie_tsbF_tsb_forecast}. Defaults to \code{0}.
 #' @return The value of \code{morie_tsbF_sba_forecast}.
 #' @export
 morie_tsbF_intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
@@ -433,7 +440,8 @@ morie_tsbF_intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
 
 #' morie_tsbF_cheatsheet
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -457,19 +465,20 @@ morie_tsbF_cheatsheet <- function() {
 # Main entry point -- dispatch to the requested method.
 #' Main entry point -- dispatch to the requested method
 #'
-#' Part of the tsbF_native implementation; see the file header for the
+#' A step of the tsbF_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param method Defaults to \code{"tsb"}.
-#' @param alpha Defaults to \code{0.1}.
-#' @param beta Defaults to \code{0.05}.
-#' @param horizon Defaults to \code{1}.
-#' @param init Defaults to \code{"global"}.
-#' @param z0 Defaults to \code{NULL}.
-#' @param x0 Defaults to \code{NULL}.
-#' @param p0 Defaults to \code{NULL}.
-#' @param burn_in Defaults to \code{0}.
+#' @param y Passed to \code{morie_tsbF_intermittent_forecast}.
+#' @param method Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{"tsb"}.
+#' @param alpha Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{0.1}.
+#' @param beta Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{0.05}.
+#' @param horizon Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{1}.
+#' @param init Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{"global"}.
+#' @param z0 Passed to \code{morie_tsbF_intermittent_forecast}.
+#' @param x0 Passed to \code{morie_tsbF_intermittent_forecast}.
+#' @param p0 Passed to \code{morie_tsbF_intermittent_forecast}.
+#' @param burn_in Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{0}.
 #' @return The value of \code{morie_tsbF_intermittent_forecast}.
 #' @export
 morie_tsbF <- function(y, method = "tsb", alpha = 0.1, beta = 0.05,

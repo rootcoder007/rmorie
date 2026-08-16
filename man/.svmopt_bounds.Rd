@@ -10,12 +10,12 @@
 \arguments{
 \item{i}{See Usage.}
 \item{j}{See Usage.}
-\item{a}{See Usage.}
-\item{y}{See Usage.}
-\item{C}{See Usage.}
+\item{a}{A vector; indexed elementwise.}
+\item{y}{A vector; indexed elementwise.}
+\item{C}{Numeric; passed to \code{min}.}
 }
 \description{
-Part of the svmopt_native implementation; see the file header for the source it follows.
+A step of the svmopt_native implementation. Called by \code{solve_pair}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{L}, \code{H}.

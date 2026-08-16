@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{v}{See Usage.}
-\item{kind}{See Usage.}
+\item{kind}{One of \code{"relu"}, \code{"tanh"}.}
 }
 \description{
-Part of the survnnr_native implementation; see the file header for the source it follows.
+A step of the survnnr_native implementation. Called by \code{morie_survnnr_forward}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

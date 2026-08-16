@@ -8,7 +8,7 @@
 .morie_gf2_rank(m)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
 }
 \description{
 Part of the topological_combinatorics_native implementation; see the file header for the source it follows.

@@ -8,11 +8,11 @@
 .corr_r(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A vector; its length is taken.}
+\item{y}{A vector; its length is taken.}
 }
 \description{
-Part of the bhltmsm_native implementation; see the file header for the source it follows.
+A step of the bhltmsm_native implementation. Called by \code{confounding_check}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

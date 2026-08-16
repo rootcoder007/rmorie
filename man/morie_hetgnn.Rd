@@ -20,7 +20,7 @@ morie_hetgnn(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem, q_sem, slo
 \item{slope}{Defaults to \code{0.2}.}
 }
 \description{
-Part of the hetgnn_native implementation; see the file header for the source it follows.
+A step of the hetgnn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{han_forward}.

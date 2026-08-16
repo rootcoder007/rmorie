@@ -8,12 +8,12 @@
 .mafft_get(M, a, b)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A vector; indexed elementwise.}
 \item{a}{See Usage.}
 \item{b}{See Usage.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{.mafft_site_score}, \code{normalized_similarity_matrix}, \code{wsp_score}. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.

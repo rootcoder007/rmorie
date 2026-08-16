@@ -8,8 +8,8 @@
 SpecClust(a, k = 2L)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{k}{Defaults to \code{2L}.}
+\item{a}{Passed to \code{.morie_spx_chkw}.}
+\item{k}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.}
 }
 \description{
 eigenvalues, so power iteration runs on 2I - L_sym and the values are mapped back; running it on L_sym and taking the top vectors gets this exactly backwards.  Ng, Jordan & Weiss (2001).  NOT in Schabenberger & Gotway.  A zero-degree node RAISES rather than being quietly assigned.

@@ -8,14 +8,14 @@
 .morie_w4d_sae_train_layer(H, k, epochs, lr, seed)
 }
 \arguments{
-\item{H}{See Usage.}
-\item{k}{See Usage.}
-\item{epochs}{See Usage.}
-\item{lr}{See Usage.}
-\item{seed}{See Usage.}
+\item{H}{A matrix; passed to \code{nrow}.}
+\item{k}{A count; the body uses it as \code{numeric(...)}.}
+\item{epochs}{A count; the body uses it as \code{seq_len(...)}.}
+\item{lr}{Numeric; combined arithmetically in the body.}
+\item{seed}{Passed to \code{.morie_w4d_lcg_mat}.}
 }
 \description{
-Part of the geron_w4d_native implementation; see the file header for the source it follows.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_stacked_autoencoder_modules}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{W}, \code{b}, \code{c}, \code{losses}.

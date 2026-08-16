@@ -24,12 +24,13 @@
 
 #' .snmtst_split
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. Called by \code{identified_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
-#' @param n_pre See Usage.
-#' @param n_post See Usage.
+#' @param n_pre A count; the body uses it as \code{seq_len(...)}.
+#' @param n_post A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{pre}, \code{post}.
 #' @export
 .snmtst_split <- function(beta, n_pre, n_post) {
@@ -45,10 +46,11 @@
 
 #' .snmtst_target
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. Called by \code{identified_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param post See Usage.
+#' @param post A vector; its length is taken.
 #' @param l_vec See Usage.
 #' @return The value of \code{lv}, as built in the body.
 #' @export
@@ -65,15 +67,16 @@
 
 #' identified_set
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. Called by \code{breakdown_value}, \code{fixed_length_ci}, \code{sensitivity_curve}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
-#' @param n_pre See Usage.
-#' @param n_post See Usage.
+#' @param beta Passed to \code{.snmtst_split}.
+#' @param n_pre Passed to \code{.snmtst_split}.
+#' @param n_post Passed to \code{.snmtst_split}.
 #' @param M Defaults to \code{0}.
-#' @param family Defaults to \code{"SD"}.
-#' @param l_vec Defaults to \code{NULL}.
+#' @param family Compared against \code{"SD"}. Defaults to \code{"SD"}.
+#' @param l_vec Passed to \code{.snmtst_target}.
 #' @param grid Defaults to \code{NULL}.
 #' @return A list with \code{lower}, \code{upper}, \code{estimate}, \code{pre_max_change}, \code{bound}, \code{M}, \code{family}, \code{width}, \code{note}.
 #' @export
@@ -133,16 +136,17 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 
 #' .snmtst_brute
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. Called by \code{identified_set}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param point See Usage.
-#' @param c See Usage.
-#' @param M See Usage.
-#' @param grid See Usage.
-#' @param post Defaults to \code{NULL}.
-#' @param lin Defaults to \code{NULL}.
-#' @param lv Defaults to \code{NULL}.
+#' @param point Numeric; combined arithmetically in the body.
+#' @param c A vector; its length is taken.
+#' @param M Numeric; combined arithmetically in the body.
+#' @param grid A count; the body uses it as \code{seq_len(...)}.
+#' @param post Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param lin Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
+#' @param lv Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
 .snmtst_brute <- function(point, c, M, grid, post = NULL, lin = NULL,
@@ -189,7 +193,8 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 
 #' sensitivity_curve
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
@@ -214,7 +219,8 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
 
 #' breakdown_value
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
@@ -222,7 +228,7 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
 #' @param n_post See Usage.
 #' @param family Defaults to \code{"SD"}.
 #' @param l_vec Defaults to \code{NULL}.
-#' @param sign Defaults to \code{"positive"}.
+#' @param sign One of \code{"negative"}, \code{"positive"}. Defaults to \code{"positive"}.
 #' @param M_max Defaults to \code{10}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{breakdown}, \code{family}, \code{sign}, \code{status}.
@@ -255,7 +261,8 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
 
 #' fixed_length_ci
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param beta See Usage.
@@ -291,7 +298,8 @@ fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
 
 #' .snmtst_cheatsheet
 #'
-#' Part of the snmtst_native implementation; see the file header for the
+#' A step of the snmtst_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

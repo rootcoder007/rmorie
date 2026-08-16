@@ -12,7 +12,7 @@ span_f1(pred, gold)
 \item{gold}{See Usage.}
 }
 \description{
-Part of the benRea_native implementation; see the file header for the source it follows.
+A step of the benRea_native implementation. Called by \code{ner_decode}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{precision}, \code{recall}, \code{f1}, \code{true_positives}, \code{n_pred}, \code{n_gold}.

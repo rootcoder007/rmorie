@@ -13,7 +13,7 @@
 \item{name}{See Usage.}
 }
 \description{
-Part of the helpers_bnd implementation; see the file header for the source it follows.
+A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt}, \code{Bndnpr} and 6 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{y}, \code{d}.

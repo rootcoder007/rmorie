@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{node}{See Usage.}
-\item{ch}{See Usage.}
+\item{ch}{A vector; indexed elementwise.}
 }
 \description{
-Part of the causal_native implementation; see the file header for the source it follows.
+A step of the causal_native implementation. Called by \code{.bd_blocked}, \code{morie_backdoor_criterion}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{seen}, as built in the body.

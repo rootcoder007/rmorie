@@ -8,11 +8,11 @@
 .funmix_first_pc(C, p)
 }
 \arguments{
-\item{C}{See Usage.}
-\item{p}{See Usage.}
+\item{C}{A matrix; passed to \code{nrow}.}
+\item{p}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{
-Part of the funmix_native implementation; see the file header for the source it follows.
+A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{score}, \code{pc}.

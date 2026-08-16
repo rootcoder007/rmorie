@@ -12,7 +12,7 @@ symbolic_representation(captions, boxes)
 \item{boxes}{See Usage.}
 }
 \description{
-Part of the llavx_native implementation; see the file header for the source it follows.
+A step of the llavx_native implementation. Called by \code{morie_llavx}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{text}, \code{n_captions}, \code{n_boxes}, \code{note}.

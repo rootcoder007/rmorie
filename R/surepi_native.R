@@ -37,13 +37,14 @@
 
 #' `t` is 0-based (Python convention); translate to 1-based R indices
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. Called by \code{.surepi_stat}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param t See Usage.
-#' @param lag See Usage.
-#' @param width See Usage.
+#' @param counts A vector; indexed elementwise.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param lag Numeric; combined arithmetically in the body.
+#' @param width Numeric; combined arithmetically in the body.
 #' @param sigma_floor See Usage.
 #' @return A list with \code{m}, \code{s}, \code{used}.
 #' @export
@@ -66,12 +67,13 @@
 
 #' .surepi_stat
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. Called by \code{surepi_ears_detect}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
+#' @param counts A vector; its length is taken and its elements indexed.
 #' @param method See Usage.
-#' @param sigma_floor See Usage.
+#' @param sigma_floor Passed to \code{.surepi_baseline}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .surepi_stat <- function(counts, method, sigma_floor) {
@@ -93,7 +95,8 @@
 
 #' surepi_c1_mild
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param counts See Usage.
@@ -108,7 +111,8 @@ surepi_c1_mild <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 
 #' surepi_c2_medium
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param counts See Usage.
@@ -123,7 +127,8 @@ surepi_c2_medium <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 
 #' surepi_c3_ultra
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param counts See Usage.
@@ -138,13 +143,14 @@ surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
 
 #' surepi_ears_detect
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. Called by \code{surepi_c1_mild}, \code{surepi_c2_medium}, \code{surepi_c3_ultra}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param counts See Usage.
-#' @param method Defaults to \code{"C2"}.
+#' @param method Compared against \code{"C3"}. Defaults to \code{"C2"}.
 #' @param threshold Defaults to \code{3}.
-#' @param sigma_floor Defaults to \code{1}.
+#' @param sigma_floor Passed to \code{.surepi_stat}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged}, \code{method}, \code{threshold}, \code{baseline_lag}, \code{baseline_width}, \code{sigma_floor}, \code{n}, \code{n_evaluable}, \code{reference}, \code{caveat}.
 #' @export
 surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
@@ -205,12 +211,13 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
 
 #' surepi_salmonella_cusum
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param counts See Usage.
-#' @param mu0 See Usage.
-#' @param sigma See Usage.
+#' @param mu0 A vector; its length is taken.
+#' @param sigma A vector; its length is taken.
 #' @param k_shift Defaults to \code{1}.
 #' @param decision Defaults to \code{0.5}.
 #' @param min_count Defaults to \code{5}.
@@ -264,12 +271,13 @@ surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
 
 #' surepi_compound_smoothing
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values See Usage.
 #' @param current See Usage.
-#' @param passes Defaults to \code{c(4, 2, 5, 3)}.
+#' @param passes Numeric; passed to \code{max}. Defaults to \code{c(4, 2, 5, 3)}.
 #' @param multiplier Defaults to \code{2}.
 #' @return A list with \code{smoothed}, \code{baseline}, \code{sigma}, \code{threshold}, \code{flag}, \code{current}, \code{method}.
 #' @export
@@ -316,11 +324,12 @@ surepi_compound_smoothing <- function(values, current,
 
 #' Running median of odd or even width, endpoints carried
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. Called by \code{surepi_compound_smoothing}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param width See Usage.
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param width Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .surepi_runmed <- function(x, width) {
@@ -347,7 +356,8 @@ surepi_compound_smoothing <- function(values, current,
 
 #' surepi_cheatsheet
 #'
-#' Part of the surepi_native implementation; see the file header for the
+#' A step of the surepi_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

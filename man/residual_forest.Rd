@@ -8,10 +8,10 @@
 residual_forest(y_res, w_res, X, at = NULL, n_trees = 200, min_leaf = 5, seed = 0, alpha = 0.05, pi = 0.5)
 }
 \arguments{
-\item{y_res}{See Usage.}
-\item{w_res}{See Usage.}
+\item{y_res}{A vector; its length is taken.}
+\item{w_res}{Numeric; combined arithmetically in the body.}
 \item{X}{See Usage.}
-\item{at}{Defaults to \code{NULL}.}
+\item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{n_trees}{Defaults to \code{200}.}
 \item{min_leaf}{Defaults to \code{5}.}
 \item{seed}{Defaults to \code{0}.}
@@ -19,7 +19,7 @@ residual_forest(y_res, w_res, X, at = NULL, n_trees = 200, min_leaf = 5, seed = 
 \item{pi}{Defaults to \code{0.5}.}
 }
 \description{
-Part of the plrgrf_native implementation; see the file header for the source it follows.
+A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{tau}, \code{info}.

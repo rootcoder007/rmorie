@@ -8,7 +8,7 @@
 .spell(path)
 }
 \arguments{
-\item{path}{See Usage.}
+\item{path}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 (k-1)-mer in full, then the last character of each subsequent one.

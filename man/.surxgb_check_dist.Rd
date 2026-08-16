@@ -11,7 +11,7 @@
 \item{dist}{See Usage.}
 }
 \description{
-Part of the surxgb_native implementation; see the file header for the source it follows.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_loss}, \code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 One of two values, depending on the branch taken.
@@ -19,7 +19,7 @@ One of two values, depending on the branch taken.
 \references{
 ----------
 Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-System", KDD \\'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
+System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
 and 2.2, eqs (5)-(7).
 
 Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with

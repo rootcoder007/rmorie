@@ -8,11 +8,11 @@
 .tmlcds_matvec(M, v)
 }
 \arguments{
-\item{M}{See Usage.}
-\item{v}{See Usage.}
+\item{M}{A matrix; passed to \code{\%*\%}.}
+\item{v}{A matrix; passed to \code{\%*\%}.}
 }
 \description{
-Part of the tmlcds_native implementation; see the file header for the source it follows.
+A step of the tmlcds_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

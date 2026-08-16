@@ -59,8 +59,8 @@
 #'
 #' Slower, and exactly reproducible.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .trupek_dot <- function(a, b) {
@@ -78,10 +78,11 @@
 
 #' .trupek_csum
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_exact}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
 .trupek_csum <- function(v) {
@@ -99,21 +100,23 @@
 
 #' .trupek_norm
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_cauchy}, \code{.trupek_dogleg}, \code{.trupek_exact} and 2 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Passed to \code{.trupek_dot}.
 #' @return A numeric value.
 #' @export
 .trupek_norm <- function(a) sqrt(.trupek_dot(a, a))
 
 #' .trupek_matvec
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_cauchy}, \code{.trupek_dogleg}, \code{.trupek_model} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param v See Usage.
+#' @param H A matrix; indexed by row and column.
+#' @param v Passed to \code{.trupek_dot}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .trupek_matvec <- function(H, v) {
@@ -125,12 +128,13 @@
 
 #' .trupek_model
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{morie_trupek_trust_region}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param H See Usage.
-#' @param s See Usage.
+#' @param g Passed to \code{.trupek_dot}.
+#' @param H Passed to \code{.trupek_matvec}.
+#' @param s Passed to \code{.trupek_dot}.
 #' @return A numeric value.
 #' @export
 .trupek_model <- function(g, H, s)
@@ -145,9 +149,9 @@
 #' recovering the other from the product keeps precision when the two
 #' roots differ wildly.
 #'
-#' @param z See Usage.
-#' @param d See Usage.
-#' @param delta See Usage.
+#' @param z Passed to \code{.trupek_dot}.
+#' @param d Passed to \code{.trupek_dot}.
+#' @param delta Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .trupek_boundary <- function(z, d, delta) {
@@ -168,12 +172,13 @@
 
 #' .trupek_cauchy
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_dogleg}, \code{.trupek_sub}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param H See Usage.
-#' @param delta See Usage.
+#' @param g A vector; its length is taken.
+#' @param H Passed to \code{.trupek_matvec}.
+#' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .trupek_cauchy <- function(g, H, delta) {
@@ -190,7 +195,7 @@
 #'
 #' definiteness and to solve, so there is one code path.
 #'
-#' @param H See Usage.
+#' @param H A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .trupek_chol <- function(H) {
@@ -210,11 +215,12 @@
 
 #' .trupek_chol_solve
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_dogleg}, \code{.trupek_exact}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param b See Usage.
+#' @param L A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .trupek_chol_solve <- function(L, b) {
@@ -230,12 +236,13 @@
 
 #' .trupek_dogleg
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_sub}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param H See Usage.
-#' @param delta See Usage.
+#' @param g Numeric; combined arithmetically in the body.
+#' @param H Passed to \code{.trupek_chol}.
+#' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .trupek_dogleg <- function(g, H, delta) {
@@ -253,13 +260,14 @@
 
 #' .trupek_steihaug
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_sub}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param H See Usage.
-#' @param delta See Usage.
-#' @param tol See Usage.
+#' @param g A vector; its length is taken.
+#' @param H Passed to \code{.trupek_matvec}.
+#' @param delta Passed to \code{.trupek_boundary}.
+#' @param tol Numeric; passed to \code{max}.
 #' @param maxit See Usage.
 #' @return A list with \code{s}, \code{why}.
 #' @export
@@ -300,13 +308,14 @@
 
 #' .trupek_exact
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{.trupek_sub}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param H See Usage.
-#' @param delta See Usage.
-#' @param tol See Usage.
+#' @param g A vector; its length is taken.
+#' @param H A matrix; indexed by row and column.
+#' @param delta Numeric; combined arithmetically in the body.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @param maxit See Usage.
 #' @return A list with \code{s}, \code{lambda}, \code{why}.
 #' @export
@@ -350,15 +359,16 @@
 
 #' .trupek_sub
 #'
-#' Part of the trupek_native implementation; see the file header for the
+#' A step of the trupek_native implementation. Called by \code{morie_trupek_trust_region}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param H See Usage.
-#' @param delta See Usage.
-#' @param sub See Usage.
-#' @param tol See Usage.
-#' @param maxit See Usage.
+#' @param g Passed to \code{.trupek_cauchy}.
+#' @param H Passed to \code{.trupek_cauchy}.
+#' @param delta Passed to \code{.trupek_cauchy}.
+#' @param sub One of \code{"cauchy"}, \code{"dogleg"}, \code{"exact"}.
+#' @param tol Passed to \code{.trupek_exact}.
+#' @param maxit Passed to \code{.trupek_exact}.
 #' @return The value of \code{.trupek_steihaug}.
 #' @export
 .trupek_sub <- function(g, H, delta, sub, tol, maxit) {

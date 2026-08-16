@@ -8,11 +8,11 @@
 sequential_scan(pairs, x0 = 0)
 }
 \arguments{
-\item{pairs}{See Usage.}
+\item{pairs}{A vector; its length is taken.}
 \item{x0}{Defaults to \code{0}.}
 }
 \description{
-Part of the ssmpar_native implementation; see the file header for the source it follows.
+A step of the ssmpar_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{states}, \code{steps}, \code{depth}, \code{note}.

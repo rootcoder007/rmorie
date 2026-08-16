@@ -11,7 +11,7 @@
 \item{P}{See Usage.}
 }
 \description{
-Part of the ssmpar_native implementation; see the file header for the source it follows.
+A step of the ssmpar_native implementation. Called by \code{parallel_scan}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{tree}, as built in the body.

@@ -8,11 +8,11 @@
 .bnd_cellmeans(yv, dv)
 }
 \arguments{
-\item{yv}{See Usage.}
+\item{yv}{A vector; its length is taken and its elements indexed.}
 \item{dv}{See Usage.}
 }
 \description{
-Part of the helpers_bnd implementation; see the file header for the source it follows.
+A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt}, \code{Bndnvg} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A list with \code{p1}, \code{m1}, \code{p0}, \code{m0}.

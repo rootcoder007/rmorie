@@ -3,15 +3,15 @@
 % the formals.
 \name{.poissp_joint_hessian}
 \alias{.poissp_joint_hessian}
-\title{Negative joint Hessian [[X\\\'MX, X\\\'M], [MX, M + Q]] (+ constraint}
+\title{Negative joint Hessian [[X\\'MX, X\\'M], [MX, M + Q]] (+ constraint}
 \usage{
 .poissp_joint_hessian(X, m, Q, constrain)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{m}{See Usage.}
-\item{Q}{See Usage.}
-\item{constrain}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{m}{A matrix; passed to \code{diag}.}
+\item{Q}{Numeric; combined arithmetically in the body.}
+\item{constrain}{A flag; the body branches on it.}
 }
 \description{
 block) Part of the poissp_native implementation; see the file header for the source it follows.

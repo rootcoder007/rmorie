@@ -19,9 +19,9 @@
 #' as a model-fitting delegate.
 #'
 #' @param X See Usage.
-#' @param y See Usage.
-#' @param link Defaults to \code{"probit"}.
-#' @param max_iter Defaults to \code{100L}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param link Compared against \code{"probit"}. Defaults to \code{"probit"}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -63,8 +63,8 @@
 #' normalises so the weights within each treatment state add to unity,
 #' following Imbens (2004) and Busso, DiNardo and McCrary (2009).
 #'
-#' @param y See Usage.
-#' @param w See Usage.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
 .morie_wmean <- function(y, w) sum(y * w) / sum(w)
@@ -75,10 +75,10 @@
 #' as potential-outcome means gives, in order, E[Y(1,M(1))],
 #' E[Y(0,M(1))], E[Y(1,M(0))], E[Y(0,M(0))].
 #'
-#' @param y See Usage.
-#' @param d See Usage.
-#' @param pm See Usage.
-#' @param px See Usage.
+#' @param y Passed to \code{.morie_wmean}.
+#' @param d Numeric; combined arithmetically in the body.
+#' @param pm Numeric; combined arithmetically in the body.
+#' @param px Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
 .morie_medweight_point <- function(y, d, pm, px) {

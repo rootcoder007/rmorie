@@ -75,11 +75,12 @@ morie_garch_recursion <- function(eps, params, spec = "garch") {
 
 #' .morie_garch_pack
 #'
-#' Part of the garch_coint_native implementation; see the file header
+#' A step of the garch_coint_native implementation. Called by \code{morie_garch_spec_fit}.
+#' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param spec See Usage.
-#' @param x See Usage.
+#' @param spec One of \code{"aparch"}, \code{"gjr"}, \code{"igarch"}.
+#' @param x A vector; indexed elementwise.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .morie_garch_pack <- function(spec, x) {

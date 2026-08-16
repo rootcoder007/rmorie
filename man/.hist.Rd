@@ -8,11 +8,11 @@
 .hist(obj, allow_none = FALSE)
 }
 \arguments{
-\item{obj}{See Usage.}
-\item{allow_none}{Defaults to \code{FALSE}.}
+\item{obj}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{allow_none}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the shdsmw_native implementation; see the file header for the source it follows.
+A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

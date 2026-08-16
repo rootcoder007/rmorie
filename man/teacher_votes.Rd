@@ -13,7 +13,7 @@ teacher_votes(teacher_predicts, rows, n_classes = NULL)
 \item{n_classes}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the pate_native implementation; see the file header for the source it follows.
+A step of the pate_native implementation. Called by \code{pate}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{split}.

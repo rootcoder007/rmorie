@@ -13,7 +13,7 @@
 \item{what}{Defaults to \code{"signal"}.}
 }
 \description{
-Part of the rangayyan_qrs implementation; see the file header for the source it follows.
+A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 29 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

@@ -8,13 +8,13 @@
 morie_twoT_streaming_frequency(hits, n_steps, alpha = 0.05, init = NULL)
 }
 \arguments{
-\item{hits}{See Usage.}
-\item{n_steps}{See Usage.}
+\item{hits}{Passed to \code{.twoT_get_items}.}
+\item{n_steps}{A count; the body uses it as \code{seq_len(...)}.}
 \item{alpha}{Defaults to \code{0.05}.}
 \item{init}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the twoT_native implementation; see the file header for the source it follows.
+A step of the twoT_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.

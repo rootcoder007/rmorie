@@ -9,12 +9,12 @@ sasimi_nearest_neighbours(query, fps, k = 5L, coefficient = "tanimoto")
 }
 \arguments{
 \item{query}{See Usage.}
-\item{fps}{See Usage.}
+\item{fps}{A vector; its length is taken and its elements indexed.}
 \item{k}{Defaults to \code{5L}.}
-\item{coefficient}{Defaults to \code{"tanimoto"}.}
+\item{coefficient}{Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.}
 }
 \description{
-Part of the sasimi_native implementation; see the file header for the source it follows.
+A step of the sasimi_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{result}, as built in the body.

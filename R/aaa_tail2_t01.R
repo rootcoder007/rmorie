@@ -15,7 +15,8 @@
 
 #' .t2_lvl
 #'
-#' Part of the tail2_t01 implementation; see the file header for the
+#' A step of the tail2_t01 implementation. Called by \code{KappaCoh}, \code{KappaWt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a See Usage.
@@ -51,11 +52,12 @@ KappaCoh <- function(rater1, rater2) {
 
 #' .t2_wmat
 #'
-#' Part of the tail2_t01 implementation; see the file header for the
+#' A step of the tail2_t01 implementation. Called by \code{KappaWt}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
-#' @param k See Usage.
+#' @param weights A matrix; passed to \code{as.matrix}.
+#' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .t2_wmat <- function(weights, k) {
@@ -145,11 +147,12 @@ CooksD <- function(y, X) {
 
 #' .t2_agg
 #'
-#' Part of the tail2_t01 implementation; see the file header for the
+#' A step of the tail2_t01 implementation. Called by \code{PnaAgg}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param name See Usage.
-#' @param vals See Usage.
+#' @param name One of \code{"max"}, \code{"mean"}, \code{"min"}, \code{"std"}.
+#' @param vals A vector; its length is taken.
 #' @return Nothing; this branch always raises.
 #' @export
 .t2_agg <- function(name, vals) {

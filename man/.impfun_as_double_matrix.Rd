@@ -8,10 +8,10 @@
 .impfun_as_double_matrix(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A vector; its length is taken.}
 }
 \description{
-Part of the impfun_native implementation; see the file header for the source it follows.
+A step of the impfun_native implementation. Called by \code{impute_dosage}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{matrix}.

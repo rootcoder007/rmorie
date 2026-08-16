@@ -8,14 +8,14 @@
 .stahdo_stahel_donoho(X, directions = "subsample", n_directions = 500, seed = 1, cutoff = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{directions}{Defaults to \code{"subsample"}.}
-\item{n_directions}{Defaults to \code{500}.}
-\item{seed}{Defaults to \code{1}.}
+\item{X}{Passed to \code{.stahdo_prep}.}
+\item{directions}{Passed to \code{.stahdo_outlyingness}. Defaults to \code{"subsample"}.}
+\item{n_directions}{Passed to \code{.stahdo_outlyingness}. Defaults to \code{500}.}
+\item{seed}{Passed to \code{.stahdo_outlyingness}. Defaults to \code{1}.}
 \item{cutoff}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the stahdo_native implementation; see the file header for the source it follows.
+A step of the stahdo_native implementation. Called by \code{morie_stahdo}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{location}, \code{scatter}, \code{outlyingness}, \code{weights}, \code{cutoff}, \code{n_directions}, \code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n}, \code{p}, \code{method}.

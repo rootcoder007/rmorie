@@ -8,11 +8,11 @@
 .rob_tukey_w(u, cc)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{cc}{See Usage.}
+\item{u}{Numeric; combined arithmetically in the body.}
+\item{cc}{Numeric; combined arithmetically in the body.}
 }
 \description{
-redescending part is what buys breakdown -- a gross outlier gets no vote at all, where Huber\\\'s psi still gives it a bounded one.
+redescending part is what buys breakdown -- a gross outlier gets no vote at all, where Huber\\'s psi still gives it a bounded one.
 }
 \value{
 The value of \code{ifelse}.

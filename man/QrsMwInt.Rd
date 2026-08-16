@@ -8,9 +8,9 @@
 QrsMwInt(x, nwin = 30, fs = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{nwin}{Defaults to \code{30}.}
-\item{fs}{Defaults to \code{NULL}.}
+\item{x}{A vector; its length is taken.}
+\item{nwin}{Numeric; combined arithmetically in the body. Defaults to \code{30}.}
+\item{fs}{Optional; may be \code{NULL}. Passed to \code{.morie_qrs_fs}.}
 }
 \description{
 multiple peaks.  The book found N = 30 at fs = 200 Hz, i.e. 150 ms, and supplying fs preserves the 150 ms window at any rate.

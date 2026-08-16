@@ -12,7 +12,7 @@
 \item{psi_plugin}{See Usage.}
 }
 \description{
-Part of the tlhoest_native implementation; see the file header for the source it follows.
+A step of the tlhoest_native implementation. Called by \code{morie_tlhoest}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{mean_D1}, \code{order}, \code{note}.

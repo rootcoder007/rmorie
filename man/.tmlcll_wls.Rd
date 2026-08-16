@@ -8,13 +8,13 @@
 .tmlcll_wls(X, y, w, ridge)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{w}{See Usage.}
-\item{ridge}{See Usage.}
+\item{X}{A matrix; passed to \code{ncol}.}
+\item{y}{A vector; its length is taken.}
+\item{w}{Numeric; combined arithmetically in the body.}
+\item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the tmlcll_native implementation; see the file header for the source it follows.
+A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{coef}.

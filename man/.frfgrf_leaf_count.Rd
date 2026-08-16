@@ -8,10 +8,10 @@
 .frfgrf_leaf_count(nd)
 }
 \arguments{
-\item{nd}{See Usage.}
+\item{nd}{A list; the body reads \code{$leaf}, \code{$left}, \code{$n_I}, \code{$right} from it.}
 }
 \description{
-Part of the frfgrf_native implementation; see the file header for the source it follows.
+A step of the frfgrf_native implementation. Called by \code{.frfgrf_regularity_walk}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

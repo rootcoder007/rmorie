@@ -8,10 +8,10 @@
 .aitsbm_close(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the aitsbm implementation; see the file header for the source it follows.
+A step of the aitsbm implementation. Called by \code{morie_subcompositional_incoherence}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -9,16 +9,16 @@
 }
 \arguments{
 \item{docs}{See Usage.}
-\item{K}{See Usage.}
-\item{V}{See Usage.}
-\item{alpha}{Defaults to \code{0.1}.}
-\item{iters}{Defaults to \code{30}.}
-\item{inner}{Defaults to \code{50}.}
-\item{seed}{Defaults to \code{0}.}
+\item{K}{A count; the body uses it as \code{seq_len(...)}.}
+\item{V}{A count; the body uses it as \code{matrix(...)}.}
+\item{alpha}{Passed to \code{.morie_lda_variational_inference}. Defaults to \code{0.1}.}
+\item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.}
+\item{inner}{Passed to \code{.morie_lda_variational_inference}. Defaults to \code{50}.}
+\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{tol}{Defaults to \code{1e-06}.}
 }
 \description{
-Part of the lda_native implementation; see the file header for the source it follows.
+A step of the lda_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{beta}, \code{elbo_history}, \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations}, \code{method}.

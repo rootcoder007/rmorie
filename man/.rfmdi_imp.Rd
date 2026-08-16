@@ -8,8 +8,8 @@
 .rfmdi_imp(trees, p)
 }
 \arguments{
-\item{trees}{See Usage.}
-\item{p}{See Usage.}
+\item{trees}{A vector; its length is taken.}
+\item{p}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{
 X_j} (n_t/n) [ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) ], i the within-node sum of squares.  The stored drop is already in raw sum-of-squares units.

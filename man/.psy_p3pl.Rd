@@ -8,10 +8,10 @@
 .psy_p3pl(theta, a, b, cc)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{cc}{See Usage.}
+\item{theta}{A vector; its length is taken.}
+\item{a}{Numeric; combined arithmetically in the body.}
+\item{b}{A vector; its length is taken.}
+\item{cc}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{
 with c > 0 the curve never reaches zero.

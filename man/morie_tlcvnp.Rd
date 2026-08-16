@@ -16,7 +16,7 @@ morie_tlcvnp(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L)
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{
-Part of the tlcvnp_native implementation; see the file header for the source it follows.
+A step of the tlcvnp_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{cv_tmle_smoothed}.

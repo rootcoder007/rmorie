@@ -8,12 +8,12 @@
 .karpv_roulette(e, adj, total)
 }
 \arguments{
-\item{e}{See Usage.}
-\item{adj}{See Usage.}
-\item{total}{See Usage.}
+\item{e}{Passed to \code{.karpv_below}.}
+\item{adj}{A vector; its length is taken and its elements indexed.}
+\item{total}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the karpV_native implementation; see the file header for the source it follows.
+A step of the karpV_native implementation. Called by \code{morie_karpV}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

@@ -8,11 +8,11 @@
 .groebn_sub(f, g)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Passed to \code{.groebn_add}.}
 \item{g}{See Usage.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_spoly}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.groebn_add}.

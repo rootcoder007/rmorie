@@ -8,10 +8,10 @@
 is_absolute_path(path)
 }
 \arguments{
-\item{path}{See Usage.}
+\item{path}{Character; passed to \code{grepl}.}
 }
 \description{
-Part of the paths implementation; see the file header for the source it follows.
+A step of the paths implementation. Called by \code{morie_audit_public_outputs}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{grepl}.

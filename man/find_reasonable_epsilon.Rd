@@ -8,11 +8,11 @@
 find_reasonable_epsilon(theta, logp, grad, rnd, eps = 1, max_doublings = 100)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{logp}{See Usage.}
+\item{theta}{A vector; its length is taken.}
+\item{logp}{Passed to \code{.joint}.}
 \item{grad}{See Usage.}
 \item{rnd}{See Usage.}
-\item{eps}{Defaults to \code{1}.}
+\item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{max_doublings}{Defaults to \code{100}.}
 }
 \description{

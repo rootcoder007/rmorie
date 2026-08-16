@@ -6,15 +6,16 @@
 
 #' morie_msp_exact
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_estimate_gumbel}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param query See Usage.
 #' @param subject See Usage.
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
-#' @param matrix Defaults to \code{NULL}.
-#' @param alphabet Defaults to \code{"ACGT"}.
+#' @param matrix Optional; may be \code{NULL}. A matrix; indexed by row and column.
+#' @param alphabet Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.
 #' @return A list with \code{score}, \code{qstart}, \code{sstart}, \code{length}.
 #' @export
 morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
@@ -55,18 +56,19 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
 
 #' morie_word_hits
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_blstn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param query See Usage.
 #' @param subject See Usage.
-#' @param w See Usage.
-#' @param mode Defaults to \code{"exact"}.
+#' @param w A count; the body uses it as \code{seq_len(...)}.
+#' @param mode One of \code{"exact"}, \code{"neighborhood"}. Defaults to \code{"exact"}.
 #' @param threshold Defaults to \code{NULL}.
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
-#' @param matrix Defaults to \code{NULL}.
-#' @param alphabet Defaults to \code{"ACGT"}.
+#' @param matrix Optional; may be \code{NULL}. A matrix; indexed by row and column.
+#' @param alphabet Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.
 #' @return The value of \code{hits}, as built in the body.
 #' @export
 morie_word_hits <- function(query, subject, w, mode = "exact",
@@ -120,14 +122,15 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
 
 #' extend_one
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_blstn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param qchars See Usage.
-#' @param schars See Usage.
-#' @param qi See Usage.
-#' @param si See Usage.
-#' @param w See Usage.
+#' @param qchars A vector; its length is taken and its elements indexed.
+#' @param schars A vector; its length is taken and its elements indexed.
+#' @param qi Numeric; combined arithmetically in the body.
+#' @param si Numeric; combined arithmetically in the body.
+#' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @param sc See Usage.
 #' @param X See Usage.
 #' @return A list with \code{score}, \code{qs}, \code{ss}, \code{length}.
@@ -159,25 +162,26 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
 
 #' morie_blstn
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_blast}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param query See Usage.
 #' @param subjects See Usage.
-#' @param w Defaults to \code{11L}.
-#' @param match Defaults to \code{5}.
-#' @param mismatch Defaults to \code{-4}.
+#' @param w Numeric; combined arithmetically in the body. Defaults to \code{11L}.
+#' @param match Passed to \code{morie_word_hits}. Defaults to \code{5}.
+#' @param mismatch Passed to \code{morie_word_hits}. Defaults to \code{-4}.
 #' @param cutoff Defaults to \code{NULL}.
 #' @param X Defaults to \code{20}.
-#' @param word_mode Defaults to \code{"exact"}.
-#' @param threshold Defaults to \code{NULL}.
-#' @param matrix Defaults to \code{NULL}.
-#' @param alphabet Defaults to \code{"ACGT"}.
-#' @param lam Defaults to \code{NULL}.
-#' @param K Defaults to \code{NULL}.
+#' @param word_mode Passed to \code{morie_word_hits}. Defaults to \code{"exact"}.
+#' @param threshold Passed to \code{morie_word_hits}.
+#' @param matrix Optional; may be \code{NULL}. A matrix; indexed by row and column.
+#' @param alphabet A vector; its length is taken. Defaults to \code{"ACGT"}.
+#' @param lam Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
+#' @param K Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
 #' @param max_hsps Defaults to \code{NULL}.
 #' @param letter_probs Defaults to \code{NULL}.
-#' @param pvalues Defaults to \code{TRUE}.
+#' @param pvalues A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps}, \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam}, \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.
 #' @export
 morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
@@ -286,25 +290,26 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
 
 #' morie_blast
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
-#' @param subjects See Usage.
-#' @param w Defaults to \code{11L}.
-#' @param match Defaults to \code{5}.
-#' @param mismatch Defaults to \code{-4}.
-#' @param cutoff Defaults to \code{NULL}.
-#' @param X Defaults to \code{20}.
-#' @param word_mode Defaults to \code{"exact"}.
-#' @param threshold Defaults to \code{NULL}.
-#' @param matrix Defaults to \code{NULL}.
-#' @param alphabet Defaults to \code{"ACGT"}.
-#' @param lam Defaults to \code{NULL}.
-#' @param K Defaults to \code{NULL}.
-#' @param max_hsps Defaults to \code{NULL}.
-#' @param letter_probs Defaults to \code{NULL}.
-#' @param pvalues Defaults to \code{TRUE}.
+#' @param query Passed to \code{morie_blstn}.
+#' @param subjects Passed to \code{morie_blstn}.
+#' @param w Passed to \code{morie_blstn}. Defaults to \code{11L}.
+#' @param match Passed to \code{morie_blstn}. Defaults to \code{5}.
+#' @param mismatch Passed to \code{morie_blstn}. Defaults to \code{-4}.
+#' @param cutoff Passed to \code{morie_blstn}.
+#' @param X Passed to \code{morie_blstn}. Defaults to \code{20}.
+#' @param word_mode Passed to \code{morie_blstn}. Defaults to \code{"exact"}.
+#' @param threshold Passed to \code{morie_blstn}.
+#' @param matrix Passed to \code{morie_blstn}.
+#' @param alphabet Passed to \code{morie_blstn}. Defaults to \code{"ACGT"}.
+#' @param lam Passed to \code{morie_blstn}.
+#' @param K Passed to \code{morie_blstn}.
+#' @param max_hsps Passed to \code{morie_blstn}.
+#' @param letter_probs Passed to \code{morie_blstn}.
+#' @param pvalues Passed to \code{morie_blstn}. Defaults to \code{TRUE}.
 #' @return The value of \code{morie_blstn}.
 #' @export
 morie_blast <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
@@ -323,7 +328,8 @@ morie_blast_nucleotide <- morie_blstn
 
 #' lattice_check
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}, \code{morie_score_distribution}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -339,13 +345,14 @@ lattice_check <- function(x) {
 
 #' morie_score_distribution
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
 #' @param letter_probs Defaults to \code{NULL}.
-#' @param matrix Defaults to \code{NULL}.
+#' @param matrix Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param subject_probs Defaults to \code{NULL}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -380,13 +387,14 @@ morie_score_distribution <- function(match = 5, mismatch = -4,
 
 #' lambda_star
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dist See Usage.
-#' @param hi Defaults to \code{20}.
+#' @param dist A vector; indexed elementwise.
+#' @param hi Numeric; combined arithmetically in the body. Defaults to \code{20}.
 #' @param tol Defaults to \code{1e-14}.
-#' @param max_iter Defaults to \code{300}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @return A numeric value.
 #' @export
 lambda_star <- function(dist, hi = 20, tol = 1e-14, max_iter = 300) {
@@ -413,7 +421,8 @@ lambda_star <- function(dist, hi = 20, tol = 1e-14, max_iter = 300) {
 
 #' gcd_span
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param scores See Usage.
@@ -430,18 +439,19 @@ gcd_span <- function(scores) {
 
 #' morie_karlin_altschul
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_blstn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dist Defaults to \code{NULL}.
-#' @param match Defaults to \code{5}.
-#' @param mismatch Defaults to \code{-4}.
-#' @param letter_probs Defaults to \code{NULL}.
-#' @param matrix Defaults to \code{NULL}.
-#' @param subject_probs Defaults to \code{NULL}.
+#' @param dist Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param match Passed to \code{morie_score_distribution}. Defaults to \code{5}.
+#' @param mismatch Passed to \code{morie_score_distribution}. Defaults to \code{-4}.
+#' @param letter_probs Passed to \code{morie_score_distribution}.
+#' @param matrix Passed to \code{morie_score_distribution}.
+#' @param subject_probs Passed to \code{morie_score_distribution}.
 #' @param max_terms Defaults to \code{1000}.
 #' @param tol Defaults to \code{1e-12}.
-#' @param bound Defaults to \code{"upper"}.
+#' @param bound One of \code{"lower"}, \code{"mid"}, \code{"upper"}. Defaults to \code{"upper"}.
 #' @return A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C}, \code{delta}, \code{terms}, \code{series}, \code{mean_score}, \code{distribution}.
 #' @export
 morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
@@ -511,15 +521,16 @@ morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
 
 #' morie_blast_pvalue
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. Called by \code{morie_blstn}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param score See Usage.
 #' @param m See Usage.
 #' @param n See Usage.
-#' @param lam See Usage.
-#' @param K See Usage.
-#' @param c Defaults to \code{1L}.
+#' @param lam Numeric; combined arithmetically in the body.
+#' @param K Numeric; combined arithmetically in the body.
+#' @param c Numeric; combined arithmetically in the body. Defaults to \code{1L}.
 #' @return A numeric value.
 #' @export
 morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
@@ -540,19 +551,20 @@ morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
 
 #' morie_estimate_gumbel
 #'
-#' Part of the blstn_native implementation; see the file header for the
+#' A step of the blstn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m See Usage.
 #' @param n See Usage.
 #' @param letter_freqs See Usage.
-#' @param match Defaults to \code{5}.
-#' @param mismatch Defaults to \code{-4}.
-#' @param matrix Defaults to \code{NULL}.
-#' @param alphabet Defaults to \code{"ACGT"}.
-#' @param n_sim Defaults to \code{200}.
+#' @param match Passed to \code{morie_msp_exact}. Defaults to \code{5}.
+#' @param mismatch Passed to \code{morie_msp_exact}. Defaults to \code{-4}.
+#' @param matrix Passed to \code{morie_msp_exact}.
+#' @param alphabet Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.
+#' @param n_sim A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param seed Defaults to \code{0}.
-#' @param quantiles Defaults to \code{c(0.2, 0.9)}.
+#' @param quantiles A vector; indexed elementwise. Defaults to \code{c(0.2, 0.9)}.
 #' @return A list with \code{lam}, \code{K}, \code{scores}.
 #' @export
 morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,

@@ -3,7 +3,7 @@
 % the formals.
 \name{.morie_wsm_norm_inv}
 \alias{.morie_wsm_norm_inv}
-\title{Acklam\\\'s rational approximation of the standard normal quantile}
+\title{Acklam\\'s rational approximation of the standard normal quantile}
 \usage{
 .morie_wsm_norm_inv(u)
 }

@@ -33,10 +33,11 @@ ChiDep <- function(x, y, u = 0.95) {
 
 #' .chidep_ranks01
 #'
-#' Part of the ChiDep implementation; see the file header for the source
+#' A step of the ChiDep implementation. Called by \code{ChiDep}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .chidep_ranks01 <- function(v) {

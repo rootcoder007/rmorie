@@ -8,12 +8,12 @@
 ridge_fit(X, y, lam)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{lam}{See Usage.}
+\item{X}{A matrix; passed to \code{nrow}.}
+\item{y}{A matrix; passed to \code{crossprod}.}
+\item{lam}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the regmlm_native implementation; see the file header for the source it follows.
+A step of the regmlm_native implementation. Called by \code{level0_predictors}, \code{level1_stack}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta}, \code{fitted}, \code{lam}.

@@ -54,10 +54,11 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 
 #' .funcal_first
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
 .funcal_first <- function(x) {
@@ -68,10 +69,11 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 
 #' .funcal_hit
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. Called by \code{morie_funcal}, \code{morie_funcal_seed_orthologs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h See Usage.
+#' @param h Optional; may be \code{NULL}. A list; the body reads \code{$evalue}, \code{$query}, \code{$query_cov}, \code{$score}, \code{$target}, \code{$target_cov} from it.
 #' @return A list with \code{query}, \code{target}, \code{evalue}, \code{score}, \code{query_cov}, \code{target_cov}.
 #' @export
 .funcal_hit <- function(h) {
@@ -99,7 +101,8 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 
 #' morie_funcal_seed_orthologs
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. Called by \code{morie_funcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param hits See Usage.
@@ -155,7 +158,8 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 
 #' .funcal_type_of
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. Called by \code{morie_funcal_assign_orthologs}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n_query_side See Usage.
@@ -170,14 +174,15 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 
 #' morie_funcal_assign_orthologs
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. Called by \code{morie_funcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seeds See Usage.
-#' @param groups See Usage.
-#' @param taxa Defaults to \code{NULL}.
+#' @param seeds A vector; indexed elementwise.
+#' @param groups A vector; indexed elementwise.
+#' @param taxa Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param target_taxa Defaults to \code{NULL}.
-#' @param target_types Defaults to \code{NULL}.
+#' @param target_types Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
@@ -255,11 +260,12 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 
 #' morie_funcal_transfer_terms
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. Called by \code{morie_funcal}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param assignments See Usage.
-#' @param annotations See Usage.
+#' @param assignments A vector; indexed elementwise.
+#' @param annotations A vector; indexed elementwise.
 #' @param sources Defaults to \code{NULL}.
 #' @param min_support Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
@@ -318,22 +324,23 @@ morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL
 
 #' morie_funcal
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hits See Usage.
-#' @param groups See Usage.
-#' @param annotations See Usage.
-#' @param taxa Defaults to \code{NULL}.
-#' @param target_taxa Defaults to \code{NULL}.
-#' @param target_types Defaults to \code{NULL}.
-#' @param sources Defaults to \code{NULL}.
-#' @param evalue Defaults to \code{0.001}.
-#' @param score Defaults to \code{60}.
-#' @param query_cov Defaults to \code{0.2}.
-#' @param target_cov Defaults to \code{0.2}.
-#' @param min_support Defaults to \code{1}.
-#' @param searcher Defaults to \code{"diamond"}.
+#' @param hits Passed to \code{morie_funcal_seed_orthologs}.
+#' @param groups Passed to \code{morie_funcal_assign_orthologs}.
+#' @param annotations Passed to \code{morie_funcal_transfer_terms}.
+#' @param taxa Passed to \code{morie_funcal_assign_orthologs}.
+#' @param target_taxa Optional; may be \code{NULL}. Passed to \code{morie_funcal_assign_orthologs}.
+#' @param target_types Optional; may be \code{NULL}. Passed to \code{morie_funcal_assign_orthologs}.
+#' @param sources Passed to \code{morie_funcal_transfer_terms}.
+#' @param evalue Passed to \code{morie_funcal_seed_orthologs}. Defaults to \code{0.001}.
+#' @param score Passed to \code{morie_funcal_seed_orthologs}. Defaults to \code{60}.
+#' @param query_cov Passed to \code{morie_funcal_seed_orthologs}. Defaults to \code{0.2}.
+#' @param target_cov Passed to \code{morie_funcal_seed_orthologs}. Defaults to \code{0.2}.
+#' @param min_support Passed to \code{morie_funcal_transfer_terms}. Defaults to \code{1}.
+#' @param searcher Passed to \code{morie_funcal_seed_orthologs}. Defaults to \code{"diamond"}.
 #' @return A list with \code{estimate}, \code{annotations}, \code{seeds}, \code{orthologs}, \code{n_queries}, \code{n_with_seed}, \code{n_annotated}, \code{searcher}, \code{target_taxa}, \code{target_types}, \code{min_support}, \code{method}, \code{note}.
 #' @export
 morie_funcal <- function(hits, groups, annotations, taxa = NULL,
@@ -394,7 +401,8 @@ morie_funcal_functional_annotation <- morie_funcal
 
 #' morie_funcal_cheatsheet
 #'
-#' Part of the funcal_native implementation; see the file header for the
+#' A step of the funcal_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

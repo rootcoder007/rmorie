@@ -10,7 +10,7 @@ Baytrace(chains, probs = c(0.025, 0.5, 0.975))
 \item{chains}{Numeric vector (a single chain) or matrix whose columns
 are chains and whose rows are iterations.}
 
-\item{probs}{Numeric vector of probabilities in \link{0, 1} at which the
+\item{probs}{Numeric vector of probabilities in [0, 1] at which the
 running bands are reported.}
 }
 \value{

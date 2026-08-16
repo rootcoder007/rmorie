@@ -8,11 +8,11 @@
 mean_scale(x, context = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{.chronos_vec}.}
 \item{context}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the chronos_native implementation; see the file header for the source it follows.
+A step of the chronos_native implementation. Called by \code{tokenize}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{scaled}, \code{scale}, \code{degenerate}, \code{context}, \code{preserves_zero}.

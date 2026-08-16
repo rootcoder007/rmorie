@@ -8,9 +8,9 @@
 .mor_ihh_one_side(pos, ehh, core, side, min_ehh)
 }
 \arguments{
-\item{pos}{See Usage.}
-\item{ehh}{See Usage.}
-\item{core}{See Usage.}
+\item{pos}{A vector; its length is taken and its elements indexed.}
+\item{ehh}{A vector; indexed elementwise.}
+\item{core}{Numeric; combined arithmetically in the body.}
 \item{side}{See Usage.}
 \item{min_ehh}{See Usage.}
 }

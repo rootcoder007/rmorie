@@ -8,10 +8,10 @@
 .sasimi_coef(name)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{One of \code{"cosine"}, \code{"dice"}, \code{"tanimoto"}.}
 }
 \description{
-Part of the sasimi_native implementation; see the file header for the source it follows.
+A step of the sasimi_native implementation. Called by \code{morie_sasimi}, \code{sasimi_distance}, \code{sasimi_nearest_neighbours} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

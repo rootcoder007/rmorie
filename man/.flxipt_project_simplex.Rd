@@ -8,10 +8,10 @@
 .flxipt_project_simplex(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
-Part of the flxipt_native implementation; see the file header for the source it follows.
+A step of the flxipt_native implementation. Called by \code{.flxipt_nnls_simplex}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{pmax}.

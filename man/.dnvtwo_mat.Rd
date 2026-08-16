@@ -8,10 +8,10 @@
 .dnvtwo_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
 }
 \description{
-Part of the dnvtwo_native implementation; see the file header for the source it follows.
+A step of the dnvtwo_native implementation. Called by \code{deduplicate}, \code{koleo}, \code{retrieve_augment} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{list}.

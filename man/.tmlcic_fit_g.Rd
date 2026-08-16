@@ -8,14 +8,14 @@
 .tmlcic_fit_g(A, W, cand, rows, ridge)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{W}{See Usage.}
-\item{cand}{See Usage.}
+\item{A}{A vector; indexed elementwise.}
+\item{W}{A matrix; indexed by row and column.}
+\item{cand}{A list; the body reads \code{$cols} from it.}
 \item{rows}{See Usage.}
-\item{ridge}{See Usage.}
+\item{ridge}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{g1}, \code{b}.

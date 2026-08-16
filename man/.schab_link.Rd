@@ -8,12 +8,12 @@
 .schab_link(x, kind, inverse = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; passed to \code{exp}.}
 \item{kind}{See Usage.}
-\item{inverse}{Defaults to \code{FALSE}.}
+\item{inverse}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the schab_glmm_shared implementation; see the file header for the source it follows.
+A step of the schab_glmm_shared implementation. Called by \code{.schab_conditional_mean}, \code{.schab_fit_pseudo_likelihood}, \code{.schab_naive_marginal_mean} and 3 others in the module. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

@@ -8,21 +8,21 @@
 morie_tmlcic_tmle_cluster_ic(y, D, X, cluster = NULL, target = "SATE", design = NULL, library = NULL, g_library = NULL, n_folds = NULL, adapt = TRUE, ridge = 1e-08, level = 0.95)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{D}{See Usage.}
-\item{X}{See Usage.}
-\item{cluster}{Defaults to \code{NULL}.}
-\item{target}{Defaults to \code{"SATE"}.}
-\item{design}{Defaults to \code{NULL}.}
-\item{library}{Defaults to \code{NULL}.}
-\item{g_library}{Defaults to \code{NULL}.}
-\item{n_folds}{Defaults to \code{NULL}.}
-\item{adapt}{Defaults to \code{TRUE}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{y}{Passed to \code{.s03vec}.}
+\item{D}{Passed to \code{.s03vec}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
+\item{cluster}{Optional; may be \code{NULL}. Passed to \code{.tmlcic_pairs_from}.}
+\item{target}{Passed to \code{morie_tmlcic_adaptive_prespecification}. Defaults to \code{"SATE"}.}
+\item{design}{Optional; may be \code{NULL}. One of \code{"matched"}, \code{"unmatched"}.}
+\item{library}{Passed to \code{morie_tmlcic_adaptive_prespecification}.}
+\item{g_library}{Passed to \code{morie_tmlcic_adaptive_prespecification}.}
+\item{n_folds}{Passed to \code{morie_tmlcic_adaptive_prespecification}.}
+\item{adapt}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+\item{ridge}{Passed to \code{morie_tmlcic_adaptive_prespecification}. Defaults to \code{1e-08}.}
 \item{level}{Defaults to \code{0.95}.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{n}, \code{ci}, \code{level}, \code{unadjusted}, \code{se_unadjusted}, \code{variance_ratio}, \code{q_selected}, \code{q_risks}, \code{g_selected}, \code{g_risks}, \code{epsilon}, \code{influence_curve}, \code{eic_mean}, \code{rho}, \code{independent_units}, \code{unit}, \code{design}, \code{target}, \code{n_folds}, \code{adapt}, \code{method}.

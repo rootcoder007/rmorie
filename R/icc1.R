@@ -53,11 +53,12 @@ Icc1 <- function(y, cluster) {
 # Long-format (value, group) into a subjects-by-raters matrix.
 #' Long-format (value, group) into a subjects-by-raters matrix
 #'
-#' Part of the icc1 implementation; see the file header for the source
+#' A step of the icc1 implementation. Called by \code{Icc1}, \code{Icc2}, \code{Icc3}.
+#' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param y See Usage.
-#' @param group See Usage.
+#' @param y Passed to \code{.s03vec}.
+#' @param group Passed to \code{.s03vec}.
 #' @param who See Usage.
 #' @return A list with \code{rows}, \code{n}, \code{k}.
 #' @export

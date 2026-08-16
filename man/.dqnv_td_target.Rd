@@ -10,12 +10,12 @@
 \arguments{
 \item{r}{See Usage.}
 \item{s2}{See Usage.}
-\item{Q_target}{See Usage.}
+\item{Q_target}{A vector; indexed elementwise.}
 \item{gamma}{Defaults to \code{0.99}.}
 \item{done}{Defaults to \code{FALSE}.}
 }
 \description{
-Part of the dqnv_native implementation; see the file header for the source it follows.
+A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

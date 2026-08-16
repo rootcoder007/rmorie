@@ -8,16 +8,16 @@
 .sarimax_fit(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1), s = 12, include_constant = NULL, method = "ml")
 }
 \arguments{
-\item{y}{See Usage.}
-\item{X}{Defaults to \code{NULL}.}
-\item{order}{Defaults to \code{c(0, 1, 1)}.}
-\item{seasonal_order}{Defaults to \code{c(0, 1, 1)}.}
+\item{y}{A vector; its length is taken.}
+\item{X}{Passed to \code{.columns}.}
+\item{order}{A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.}
+\item{seasonal_order}{A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.}
 \item{s}{Defaults to \code{12}.}
-\item{include_constant}{Defaults to \code{NULL}.}
-\item{method}{Defaults to \code{"ml"}.}
+\item{include_constant}{Optional; may be \code{NULL}. A flag; the body branches on it.}
+\item{method}{One of \code{"css"}, \code{"ml"}, \code{"uls"}. Defaults to \code{"ml"}.}
 }
 \description{
-Part of the sarimax_native implementation; see the file header for the source it follows.
+A step of the sarimax_native implementation. Called by \code{.try_fit}, \code{morie_sarimax}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2}, \code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals}, \code{innovation_variance}, \code{include_constant}, \code{order}, \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.

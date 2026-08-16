@@ -8,10 +8,10 @@
 .morie_boot_freq(boot_obj)
 }
 \arguments{
-\item{boot_obj}{See Usage.}
+\item{boot_obj}{A list; the body reads \code{$index} from it.}
 }
 \description{
-Part of the boot_native implementation; see the file header for the source it follows.
+A step of the boot_native implementation. Called by \code{.morie_empinf_reg}. See the file header for the source the module follows.
 }
 \value{
 A matrix, from \code{t}.

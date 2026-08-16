@@ -8,18 +8,18 @@
 .morie_gr2_grow(X, y, criterion, max_depth, min_samples_split, min_samples_leaf, min_impurity_decrease, depth, stats)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{criterion}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{min_samples_split}{See Usage.}
-\item{min_samples_leaf}{See Usage.}
-\item{min_impurity_decrease}{See Usage.}
-\item{depth}{See Usage.}
-\item{stats}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{criterion}{Passed to \code{.morie_gr2_leaf}.}
+\item{max_depth}{Optional; may be \code{NULL}. Passed to \code{.morie_gr2_grow}.}
+\item{min_samples_split}{Passed to \code{.morie_gr2_grow}.}
+\item{min_samples_leaf}{Passed to \code{.morie_gr2_best_split}.}
+\item{min_impurity_decrease}{Passed to \code{.morie_gr2_grow}.}
+\item{depth}{Numeric; passed to \code{max}.}
+\item{stats}{A list; the body reads \code{$leaves}, \code{$max_depth}, \code{$splits} from it.}
 }
 \description{
-Part of the geron_ml2_native implementation; see the file header for the source it follows.
+A step of the geron_ml2_native implementation. Called by \code{morie_geron_cart_algorithm}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{lf}, as built in the body.

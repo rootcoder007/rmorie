@@ -14,7 +14,7 @@
 \item{gamma}{See Usage.}
 }
 \description{
-Part of the geron_train_native implementation; see the file header for the source it follows.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_policy_evaluation}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{pi}, \code{P}, \code{R}, \code{gamma}, \code{S}, \code{A}.

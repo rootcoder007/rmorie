@@ -8,9 +8,9 @@
 .morie_rg_lagvec(r, i, m)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{i}{See Usage.}
-\item{m}{See Usage.}
+\item{r}{A vector; indexed elementwise.}
+\item{i}{Numeric; combined arithmetically in the body.}
+\item{m}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
 record starts

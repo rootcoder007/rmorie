@@ -9,16 +9,16 @@ word_vector(word, Z, gram_index, n_min = 3, n_max = 6, boundary = TRUE, whole_wo
 }
 \arguments{
 \item{word}{See Usage.}
-\item{Z}{See Usage.}
-\item{gram_index}{See Usage.}
+\item{Z}{A matrix; indexed by row and column.}
+\item{gram_index}{Passed to \code{.gram_slot}.}
 \item{n_min}{Defaults to \code{3}.}
 \item{n_max}{Defaults to \code{6}.}
 \item{boundary}{Defaults to \code{TRUE}.}
 \item{whole_word}{Defaults to \code{TRUE}.}
-\item{hash_buckets}{Defaults to \code{NULL}.}
+\item{hash_buckets}{Passed to \code{.gram_slot}.}
 }
 \description{
-Part of the fastxt_native implementation; see the file header for the source it follows.
+A step of the fastxt_native implementation. Called by \code{fasttext}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{v}, \code{hit}.

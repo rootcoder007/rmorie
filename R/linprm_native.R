@@ -1,11 +1,12 @@
 #' morie_linprm
 #'
-#' Part of the linprm_native implementation; see the file header for the
+#' A step of the linprm_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param c See Usage.
 #' @param A See Usage.
-#' @param b See Usage.
+#' @param b A vector; its length is taken and its elements indexed.
 #' @param tol Defaults to \code{1e-10}.
 #' @param max_iter Defaults to \code{200}.
 #' @return A list with \code{x}, \code{y}, \code{s}, \code{iterations}, \code{gap}, \code{converged}, \code{mu_history}, \code{primal_residual}, \code{dual_residual}.

@@ -15,10 +15,11 @@
 
 #' .morie_wsm_need
 #'
-#' Part of the wasserman_native implementation; see the file header for
+#' A step of the wasserman_native implementation. Called by \code{morie_bayes_factor_savage_dickey}, \code{morie_density}, \code{morie_sgt_closeness_centrality} and 58 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param ok See Usage.
+#' @param ok A flag; the body branches on it.
 #' @param msg See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -310,10 +311,11 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 
 #' .morie_wsm_lcg_u
 #'
-#' Part of the wasserman_native implementation; see the file header for
+#' A step of the wasserman_native implementation. Called by \code{.morie_wsm_boot_reps}, \code{morie_wasserman_gibbs_sampler}, \code{morie_wasserman_mcmc_metropolis} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param count See Usage.
+#' @param count A count; the body uses it as \code{seq_len(...)}.
 #' @param seed Defaults to \code{13}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -329,13 +331,14 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 
 #' .morie_wsm_boot_reps
 #'
-#' Part of the wasserman_native implementation; see the file header for
+#' A step of the wasserman_native implementation. Called by \code{morie_wasserman_bootstrap_percentile}, \code{morie_wasserman_bootstrap_pivotal}, \code{morie_wasserman_nonparametric_boot}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param data See Usage.
+#' @param data A vector; its length is taken and its elements indexed.
 #' @param T See Usage.
-#' @param B See Usage.
-#' @param seed See Usage.
+#' @param B A count; the body uses it as \code{seq_len(...)}.
+#' @param seed Passed to \code{.morie_wsm_lcg_u}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_wsm_boot_reps <- function(data, T, B, seed) {
@@ -348,11 +351,12 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 
 #' .morie_wsm_q1
 #'
-#' Part of the wasserman_native implementation; see the file header for
+#' A step of the wasserman_native implementation. Called by \code{morie_wasserman_bootstrap_percentile}, \code{morie_wasserman_bootstrap_pivotal}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param sorted_vals See Usage.
-#' @param p See Usage.
+#' @param sorted_vals A vector; its length is taken and its elements indexed.
+#' @param p Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
 .morie_wsm_q1 <- function(sorted_vals, p) sorted_vals[ceiling(p * length(sorted_vals))]
@@ -738,10 +742,11 @@ morie_wasserman_chi_sq_gof <- function(observed, expected) {
 
 #' .morie_wsm_trapz
 #'
-#' Part of the wasserman_native implementation; see the file header for
+#' A step of the wasserman_native implementation. Called by \code{morie_wasserman_entropy}, \code{morie_wasserman_kullback_leibler}, \code{morie_wasserman_posterior} and 1 others in the module.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
+#' @param y A vector; its length is taken and its elements indexed.
 #' @param x See Usage.
 #' @return A numeric value.
 #' @export

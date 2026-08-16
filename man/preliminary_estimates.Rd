@@ -12,7 +12,7 @@ preliminary_estimates(w, s = 12)
 \item{s}{Defaults to \code{12}.}
 }
 \description{
-Part of the sarima_native implementation; see the file header for the source it follows.
+A step of the sarima_native implementation. Called by \code{.sarima_fit}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1}, \code{r_s}, \code{method}.

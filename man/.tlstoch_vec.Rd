@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the tlstoch_native implementation; see the file header for the source it follows.
+A step of the tlstoch_native implementation. Called by \code{.tlstoch_density_ratio}, \code{.tlstoch_positivity_shift}, \code{.tlstoch_shift_regime} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

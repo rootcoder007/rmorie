@@ -8,8 +8,8 @@
 .phacf3_less(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A vector; indexed elementwise.}
+\item{b}{A vector; indexed elementwise.}
 }
 \description{
 a is strictly smaller. Written out rather than leaning on a string encoding, so the ordering is the ordering of the numbers and not of their spellings.

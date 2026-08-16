@@ -71,12 +71,13 @@
 
 #' .svycox_prep
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param time See Usage.
 #' @param event See Usage.
-#' @param X See Usage.
+#' @param X A matrix; indexed by row and column.
 #' @param weights See Usage.
 #' @param strata See Usage.
 #' @param cluster See Usage.
@@ -152,16 +153,17 @@
 
 #' .svycox_score_and_info
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param T See Usage.
-#' @param E See Usage.
-#' @param M See Usage.
-#' @param w See Usage.
-#' @param beta See Usage.
-#' @param n See Usage.
-#' @param p See Usage.
+#' @param T Numeric; passed to \code{order}.
+#' @param E A vector; indexed elementwise.
+#' @param M A vector; indexed elementwise.
+#' @param w A vector; indexed elementwise.
+#' @param beta Numeric; combined arithmetically in the body.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{U}, \code{I}, \code{resid}.
 #' @export
 .svycox_score_and_info <- function(T, E, M, w, beta, n, p) {
@@ -219,11 +221,12 @@
 
 #' .svycox_solve
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. Called by \code{.svycox_inverse}, \code{.svycox_svycoxph}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A See Usage.
-#' @param b See Usage.
+#' @param b A vector; its length is taken.
 #' @return A vector, from \code{sapply}.
 #' @export
 .svycox_solve <- function(A, b) {
@@ -260,10 +263,11 @@
 
 #' .svycox_inverse
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. Called by \code{.svycox_svycoxph}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .svycox_inverse <- function(A) {
@@ -280,14 +284,15 @@
 
 #' .svycox_design_variance
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. Called by \code{.svycox_svycoxph}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param contrib See Usage.
-#' @param w See Usage.
-#' @param h See Usage.
+#' @param contrib A matrix; indexed by row and column.
+#' @param w A vector; its length is taken and its elements indexed.
+#' @param h A vector; indexed elementwise.
 #' @param c See Usage.
-#' @param p See Usage.
+#' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{V}, as built in the body.
 #' @export
 .svycox_design_variance <- function(contrib, w, h, c, p) {
@@ -330,14 +335,15 @@
 
 #' .svycox_score_residuals
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X See Usage.
-#' @param beta See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param time Passed to \code{.svycox_prep}.
+#' @param event Passed to \code{.svycox_prep}.
+#' @param X Passed to \code{.svycox_prep}.
+#' @param beta Passed to \code{.svycox_score_and_info}.
+#' @param weights Passed to \code{.svycox_prep}.
 #' @return The value of \code{$}.
 #' @export
 .svycox_score_residuals <- function(time, event, X, beta, weights = NULL) {
@@ -355,15 +361,16 @@
 
 #' .svycox_svycoxph
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. Called by \code{morie_svycox}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X See Usage.
-#' @param weights Defaults to \code{NULL}.
-#' @param strata Defaults to \code{NULL}.
-#' @param cluster Defaults to \code{NULL}.
+#' @param time Passed to \code{.svycox_prep}.
+#' @param event Passed to \code{.svycox_prep}.
+#' @param X Passed to \code{.svycox_prep}.
+#' @param weights Passed to \code{.svycox_prep}.
+#' @param strata Passed to \code{.svycox_prep}.
+#' @param cluster Passed to \code{.svycox_prep}.
 #' @param max_iter Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios}, \code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information}, \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events}, \code{n_iterations}, \code{ties}, \code{method}.
@@ -446,15 +453,16 @@
 
 #' morie_svycox
 #'
-#' Part of the svycox_native implementation; see the file header for the
+#' A step of the svycox_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
-#' @param X See Usage.
-#' @param weights Defaults to \code{NULL}.
-#' @param strata Defaults to \code{NULL}.
-#' @param cluster Defaults to \code{NULL}.
+#' @param time Passed to \code{.svycox_svycoxph}.
+#' @param event Passed to \code{.svycox_svycoxph}.
+#' @param X Passed to \code{.svycox_svycoxph}.
+#' @param weights Passed to \code{.svycox_svycoxph}.
+#' @param strata Passed to \code{.svycox_svycoxph}.
+#' @param cluster Passed to \code{.svycox_svycoxph}.
 #' @param ... Passed through.
 #' @return The value of \code{.svycox_svycoxph}.
 #' @export

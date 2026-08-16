@@ -11,7 +11,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the gan_an_native implementation; see the file header for the source it follows.
+A step of the gan_an_native implementation. Called by \code{.gan_an_discrimination_loss_impl}, \code{.gan_an_residual_loss_impl}, \code{morie_gan_an} and 2 others in the module. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{as.numeric}.

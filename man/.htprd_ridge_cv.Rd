@@ -8,13 +8,13 @@
 .htprd_ridge_cv(X, y, K, params)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{K}{See Usage.}
-\item{params}{See Usage.}
+\item{X}{A matrix; indexed by row and column.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{K}{A count; the body uses it as \code{seq_len(...)}.}
+\item{params}{A list; the body reads \code{$lam} from it.}
 }
 \description{
-Part of the htprd implementation; see the file header for the source it follows.
+A step of the htprd implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

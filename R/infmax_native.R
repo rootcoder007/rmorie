@@ -63,7 +63,8 @@
 
 #' Sp(z) = log(1 + exp(z)), branch-stable so neither branch overflows
 #'
-#' Part of the infmax_native implementation; see the file header for the
+#' A step of the infmax_native implementation. Called by \code{.infmax_jsd_estimator}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z See Usage.
@@ -81,7 +82,8 @@
 
 #' I_JSD = E_P[-sp(-T)] - E_{PxP~}[sp(T)]
 #'
-#' Part of the infmax_native implementation; see the file header for the
+#' A step of the infmax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param joint_scores See Usage.
@@ -106,7 +108,8 @@
 
 #' I_DV = E_P[T] - log E_{PxP~}[exp(T)]
 #'
-#' Part of the infmax_native implementation; see the file header for the
+#' A step of the infmax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param joint_scores See Usage.
@@ -133,7 +136,8 @@
 
 #' .infmax_global_objective
 #'
-#' Part of the infmax_native implementation; see the file header for the
+#' A step of the infmax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param global_features See Usage.
@@ -181,7 +185,8 @@
 
 #' .infmax_local_objective
 #'
-#' Part of the infmax_native implementation; see the file header for the
+#' A step of the infmax_native implementation. Called by \code{morie_infmax}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param global_features See Usage.
@@ -241,7 +246,8 @@
 
 #' .infmax_cheatsheet
 #'
-#' Part of the infmax_native implementation; see the file header for the
+#' A step of the infmax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.
@@ -268,13 +274,14 @@
 # entry point -- the headline Deep InfoMax local objective
 #' Entry point -- the headline Deep InfoMax local objective
 #'
-#' Part of the infmax_native implementation; see the file header for the
+#' A step of the infmax_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param global_features See Usage.
-#' @param feature_maps See Usage.
-#' @param critic See Usage.
-#' @param estimator Defaults to \code{"jsd"}.
+#' @param global_features Passed to \code{.infmax_local_objective}.
+#' @param feature_maps Passed to \code{.infmax_local_objective}.
+#' @param critic Passed to \code{.infmax_local_objective}.
+#' @param estimator Passed to \code{.infmax_local_objective}. Defaults to \code{"jsd"}.
 #' @return The value of \code{.infmax_local_objective}.
 #' @export
 morie_infmax <- function(global_features, feature_maps, critic,

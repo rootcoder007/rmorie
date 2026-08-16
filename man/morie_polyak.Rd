@@ -12,7 +12,7 @@ morie_polyak(iterates, burn_in = 0)
 \item{burn_in}{Defaults to \code{0}.}
 }
 \description{
-Part of the polyak_native implementation; see the file header for the source it follows.
+A step of the polyak_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{average}, \code{n_averaged}, \code{burn_in}.

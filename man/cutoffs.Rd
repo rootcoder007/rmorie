@@ -12,7 +12,7 @@ cutoffs(N, step = 10)
 \item{step}{Defaults to \code{10}.}
 }
 \description{
-Part of the fairRC_native implementation; see the file header for the source it follows.
+A step of the fairRC_native implementation. Called by \code{.measure}, \code{.raw}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{seq}.

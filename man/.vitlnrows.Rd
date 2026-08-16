@@ -8,11 +8,11 @@
 .vitlnrows(A, eps = .vitlneps)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{eps}{Defaults to \code{.vitlneps}.}
+\item{A}{A matrix; indexed by row and column.}
+\item{eps}{Passed to \code{.vitln}. Defaults to \code{.vitlneps}.}
 }
 \description{
-Part of the helpers_vit implementation; see the file header for the source it follows.
+A step of the helpers_vit implementation. Called by \code{Vitfwd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

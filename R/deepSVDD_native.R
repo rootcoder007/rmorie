@@ -4,13 +4,14 @@
 
 #' .deep_svdd_kernel
 #'
-#' Part of the deepSVDD_native implementation; see the file header for
+#' A step of the deepSVDD_native implementation. Called by \code{svdd}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param kern See Usage.
-#' @param gamma See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param kern Compared against \code{"linear"}.
+#' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .deep_svdd_kernel <- function(a, b, kern, gamma) {
@@ -22,13 +23,14 @@
 
 #' svdd
 #'
-#' Part of the deepSVDD_native implementation; see the file header for
+#' A step of the deepSVDD_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param C Defaults to \code{1}.
+#' @param X A matrix; indexed by row and column.
+#' @param C Numeric; passed to \code{min}. Defaults to \code{1}.
 #' @param kernel Defaults to \code{"linear"}.
-#' @param gamma Defaults to \code{1}.
+#' @param gamma Passed to \code{.deep_svdd_kernel}. Defaults to \code{1}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param max_sweeps Defaults to \code{500L}.
 #' @return A list with \code{alpha}, \code{center}, \code{radius2}, \code{support}, \code{outliers}, \code{kkt_violation}, \code{kernel}, \code{C}, \code{method}.
@@ -136,7 +138,8 @@ morie_deepSVDD <- svdd
 
 #' deepSVDD_cheatsheet
 #'
-#' Part of the deepSVDD_native implementation; see the file header for
+#' A step of the deepSVDD_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

@@ -8,15 +8,15 @@
 .schab_krige_at(coords, z, target, sill, rng, mu)
 }
 \arguments{
-\item{coords}{See Usage.}
-\item{z}{See Usage.}
+\item{coords}{A matrix; passed to \code{as.matrix}.}
+\item{z}{Numeric; combined arithmetically in the body.}
 \item{target}{See Usage.}
-\item{sill}{See Usage.}
-\item{rng}{See Usage.}
-\item{mu}{See Usage.}
+\item{sill}{Numeric; combined arithmetically in the body.}
+\item{rng}{Numeric; combined arithmetically in the body.}
+\item{mu}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the schab_rest_shared implementation; see the file header for the source it follows.
+A step of the schab_rest_shared implementation. Called by \code{.schab_moving_window_krige}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

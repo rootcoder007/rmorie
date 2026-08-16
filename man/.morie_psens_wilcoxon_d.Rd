@@ -8,8 +8,8 @@
 .morie_psens_wilcoxon_d(d, gamma)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{gamma}{See Usage.}
+\item{d}{A vector; its length is taken and its elements indexed.}
+\item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{
 Exact replica of rbounds::psens(): both bounds share the variance computed at p+ (a documented quirk of that implementation), the lower bound centres at p-, the upper at p+.

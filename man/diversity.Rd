@@ -13,7 +13,7 @@ diversity(fps, subset, D = NULL)
 \item{D}{Defaults to \code{NULL}.}
 }
 \description{
-Part of the tncomp_native implementation; see the file header for the source it follows.
+A step of the tncomp_native implementation. Called by \code{morie_tncomp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{min_distance}, \code{mean_distance}, \code{max_distance}, \code{n_pairs}.

@@ -8,12 +8,12 @@
 morie_unifAlg_unify(t1, t2, occurs_check = TRUE)
 }
 \arguments{
-\item{t1}{See Usage.}
-\item{t2}{See Usage.}
-\item{occurs_check}{Defaults to \code{TRUE}.}
+\item{t1}{Passed to \code{.unifAlg_check}.}
+\item{t2}{Passed to \code{.unifAlg_check}.}
+\item{occurs_check}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{
-Part of the unifAlg_native implementation; see the file header for the source it follows.
+A step of the unifAlg_native implementation. Called by \code{.trmRew_overlap}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

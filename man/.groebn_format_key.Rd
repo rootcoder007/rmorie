@@ -11,7 +11,7 @@
 \item{e}{See Usage.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module. See the file header for the source the module follows.
 }
 \value{
 A character value.

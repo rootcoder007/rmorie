@@ -11,7 +11,7 @@ naive_variance(ic)
 \item{ic}{See Usage.}
 }
 \description{
-Part of the tlclust_native implementation; see the file header for the source it follows.
+A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

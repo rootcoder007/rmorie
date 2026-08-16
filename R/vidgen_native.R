@@ -57,10 +57,11 @@
 
 #' .vidgen_mat
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. Called by \code{morie_vidgen_space_only_conv}, \code{morie_vidgen_spatial_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{do.call}.
 #' @export
 .vidgen_mat <- function(x) {
@@ -71,7 +72,8 @@
 
 #' .vidgen_vec
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. Called by \code{morie_vidgen_reconstruction_guidance}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x See Usage.
@@ -83,11 +85,12 @@
 
 #' .vidgen_softmax_attend
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. Called by \code{morie_vidgen_spatial_attention}, \code{morie_vidgen_temporal_attention}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param mask Defaults to \code{NULL}.
+#' @param X A matrix; indexed by row and column.
+#' @param mask Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return A list with \code{out}, \code{W}.
 #' @export
 .vidgen_softmax_attend <- function(X, mask = NULL) {
@@ -127,11 +130,12 @@
 
 #' morie_vidgen_space_only_conv
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param video See Usage.
-#' @param kernel See Usage.
+#' @param kernel Passed to \code{.vidgen_mat}.
 #' @return A list with \code{video}, \code{frames}, \code{note}.
 #' @export
 morie_vidgen_space_only_conv <- function(video, kernel) {
@@ -170,7 +174,8 @@ morie_vidgen_space_only_conv <- function(video, kernel) {
 
 #' morie_vidgen_spatial_attention
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param video See Usage.
@@ -194,11 +199,12 @@ morie_vidgen_spatial_attention <- function(video) {
 
 #' morie_vidgen_temporal_attention
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param video See Usage.
-#' @param identity Defaults to \code{FALSE}.
+#' @param identity A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{video}, \code{identity}, \code{note}.
 #' @export
 morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
@@ -241,7 +247,8 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
 
 #' morie_vidgen_as_image_model
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param video See Usage.
@@ -257,7 +264,8 @@ morie_vidgen_as_image_model <- function(video, block) {
 
 #' morie_vidgen_attention_cost
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param frames See Usage.
@@ -282,7 +290,8 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 
 #' morie_vidgen_reconstruction_guidance
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x_hat See Usage.
@@ -346,7 +355,8 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
 
 #' morie_vidgen_cheatsheet
 #'
-#' Part of the vidgen_native implementation; see the file header for the
+#' A step of the vidgen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

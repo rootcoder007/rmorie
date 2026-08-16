@@ -8,11 +8,11 @@
 .flexrd_grid(nchi, angles)
 }
 \arguments{
-\item{nchi}{See Usage.}
+\item{nchi}{A count; the body uses it as \code{seq_len(...)}.}
 \item{angles}{See Usage.}
 }
 \description{
-Part of the flexrd_native implementation; see the file header for the source it follows.
+A step of the flexrd_native implementation. Called by \code{morie_flexrd}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.
@@ -28,7 +28,7 @@ The value of \code{out}, as built in the body.
   Jones, J.E. (1924) "On the determination of molecular fields. II."
     Proceedings of the Royal Society A 106(738), 463-477.
   Rodrigues, O. (1840) "Des lois geometriques qui regissent les
-    deplacements d\\'un systeme solide." Journal de Mathematiques Pures
+    deplacements d\'un systeme solide." Journal de Mathematiques Pures
     et Appliquees 5, 380-440.
 }
 \keyword{internal}

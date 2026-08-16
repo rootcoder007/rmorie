@@ -8,10 +8,10 @@
 .huber_k(eps)
 }
 \arguments{
-\item{eps}{See Usage.}
+\item{eps}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the contam implementation; see the file header for the source it follows.
+A step of the contam implementation. Called by \code{Contam}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

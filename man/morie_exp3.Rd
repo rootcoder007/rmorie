@@ -8,13 +8,13 @@
 morie_exp3(x, gamma_, T = NULL, seed = 0)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; indexed by row and column.}
 \item{gamma_}{See Usage.}
 \item{T}{Defaults to \code{NULL}.}
 \item{seed}{Defaults to \code{0}.}
 }
 \description{
-Part of the exp3_native implementation; see the file header for the source it follows.
+A step of the exp3_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{actions}, \code{rewards}, \code{probs}, \code{weights}, \code{total_reward}, \code{method}.

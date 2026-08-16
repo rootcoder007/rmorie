@@ -9,12 +9,12 @@ morie_tlnetlg_community_estimand(Q_fn, friends, W, policy)
 }
 \arguments{
 \item{Q_fn}{See Usage.}
-\item{friends}{See Usage.}
-\item{W}{See Usage.}
+\item{friends}{A vector; its length is taken.}
+\item{W}{Passed to \code{.tlnetlg_mat}.}
 \item{policy}{See Usage.}
 }
 \description{
-Part of the tlnetlg_native implementation; see the file header for the source it follows.
+A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_longitudinal_network_gcomp}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{psi}, \code{assigned}, \code{individual}, \code{N}.

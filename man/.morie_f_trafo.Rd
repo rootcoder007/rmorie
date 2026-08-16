@@ -3,12 +3,12 @@
 % the formals.
 \name{.morie_f_trafo}
 \alias{.morie_f_trafo}
-\title{Factor -> indicator design matching coin\\\'s f_trafo: k>2 gives k}
+\title{Factor -> indicator design matching coin\\'s f_trafo: k>2 gives k}
 \usage{
 .morie_f_trafo(f)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Numeric; combined arithmetically in the body.}
 }
 \description{
 columns, k==2 gives a single column (indicator of the second level).

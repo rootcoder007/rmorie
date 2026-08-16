@@ -11,10 +11,10 @@ discretize_zoh(delta, A, B, rule = "zoh")
 \item{delta}{See Usage.}
 \item{A}{See Usage.}
 \item{B}{See Usage.}
-\item{rule}{Defaults to \code{"zoh"}.}
+\item{rule}{One of \code{"euler"}, \code{"zoh"}. Defaults to \code{"zoh"}.}
 }
 \description{
-Part of the mambss_native implementation; see the file header for the source it follows.
+A step of the mambss_native implementation. Called by \code{selective_ssm_step}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{Abar}, \code{Bbar}.

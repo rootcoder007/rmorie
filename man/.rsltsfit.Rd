@@ -8,13 +8,13 @@
 .rsltsfit(Xm, yy, idx, p)
 }
 \arguments{
-\item{Xm}{See Usage.}
-\item{yy}{See Usage.}
+\item{Xm}{A matrix; indexed by row and column.}
+\item{yy}{A vector; indexed elementwise.}
 \item{idx}{See Usage.}
-\item{p}{See Usage.}
+\item{p}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{
-Part of the helpers_rouss implementation; see the file header for the source it follows.
+A step of the helpers_rouss implementation. Called by \code{Ltsreg}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{.rslusolve}.

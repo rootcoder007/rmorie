@@ -8,11 +8,11 @@
 alfRcomp(A, B)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{A}{A list; the body reads \code{$R} from it.}
+\item{B}{A list; the body reads \code{$R}, \code{$t} from it.}
 }
 \description{
-Part of the alf_core implementation; see the file header for the source it follows.
+A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfschn}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{R}, \code{t}.

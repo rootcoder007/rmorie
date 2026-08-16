@@ -8,10 +8,10 @@
 .morie_jo_leap(y)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the ts_joseph implementation; see the file header for the source it follows.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_daynum}, \code{morie_calfeat}. See the file header for the source the module follows.
 }
 \value{
 A logical value.

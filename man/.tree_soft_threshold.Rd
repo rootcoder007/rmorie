@@ -8,11 +8,11 @@
 .tree_soft_threshold(g, alpha)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{alpha}{See Usage.}
+\item{g}{Numeric; combined arithmetically in the body.}
+\item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the trees_native implementation; see the file header for the source it follows.
+A step of the trees_native implementation. Called by \code{.tree_leaf_weight}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

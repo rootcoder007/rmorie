@@ -7,15 +7,16 @@
 
 #' morie_bayreg2_student_t_regression
 #'
-#' Part of the bayreg2_native implementation; see the file header for
+#' A step of the bayreg2_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; passed to \code{as.matrix}.
 #' @param y See Usage.
-#' @param nu Defaults to \code{4}.
+#' @param nu Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @param max_iter Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-10}.
-#' @param add_intercept Defaults to \code{TRUE}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{weights}, \code{residuals}, \code{scale2}, \code{fitted}, \code{iterations}, \code{converged}, \code{nu}, \code{loglik}, \code{n}, \code{p}, \code{method}, \code{note}.
 #' @export
 morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
@@ -85,7 +86,8 @@ morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
 
 #' .bayreg2_cheatsheet
 #'
-#' Part of the bayreg2_native implementation; see the file header for
+#' A step of the bayreg2_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @return A character value.

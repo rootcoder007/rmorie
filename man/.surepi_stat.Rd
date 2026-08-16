@@ -8,12 +8,12 @@
 .surepi_stat(counts, method, sigma_floor)
 }
 \arguments{
-\item{counts}{See Usage.}
+\item{counts}{A vector; its length is taken and its elements indexed.}
 \item{method}{See Usage.}
-\item{sigma_floor}{See Usage.}
+\item{sigma_floor}{Passed to \code{.surepi_baseline}.}
 }
 \description{
-Part of the surepi_native implementation; see the file header for the source it follows.
+A step of the surepi_native implementation. Called by \code{surepi_ears_detect}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

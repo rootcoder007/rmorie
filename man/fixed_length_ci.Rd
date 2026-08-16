@@ -18,7 +18,7 @@ fixed_length_ci(beta, sigma, n_pre, n_post, M = 0, family = "SD", l_vec = NULL, 
 \item{level}{Defaults to \code{0.95}.}
 }
 \description{
-Part of the snmtst_native implementation; see the file header for the source it follows.
+A step of the snmtst_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{estimate}, \code{lower}, \code{upper}, \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family}, \code{level}, \code{conservative}, \code{method}.

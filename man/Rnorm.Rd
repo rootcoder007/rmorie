@@ -8,11 +8,11 @@
 Rnorm(n, mean = 0, sd = 1, seed = 0, stream = 0)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Passed to \code{.morie_random_uniform}.}
 \item{mean}{Defaults to \code{0}.}
 \item{sd}{Defaults to \code{1}.}
-\item{seed}{Defaults to \code{0}.}
-\item{stream}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
+\item{stream}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
 }
 \description{
 uniform k, so the stream is stable when n changes

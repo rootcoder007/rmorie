@@ -11,7 +11,7 @@ morie_ragRet_normalise(v)
 \item{v}{See Usage.}
 }
 \description{
-Part of the ragRet_native implementation; see the file header for the source it follows.
+A step of the ragRet_native implementation. Called by \code{morie_ragRet_top_k}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

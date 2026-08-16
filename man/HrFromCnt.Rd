@@ -8,8 +8,8 @@
 HrFromCnt(nbeats, duration)
 }
 \arguments{
-\item{nbeats}{See Usage.}
-\item{duration}{See Usage.}
+\item{nbeats}{Numeric; combined arithmetically in the body.}
+\item{duration}{Numeric; combined arithmetically in the body.}
 }
 \description{
 whole window, so unlike the beat-to-beat form of eq (4.20) it is insensitive to a single mis-detected interval.

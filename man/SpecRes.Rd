@@ -10,7 +10,7 @@ SpecRes(n, fs = 1, window = "rectangular")
 \arguments{
 \item{n}{See Usage.}
 \item{fs}{Defaults to \code{1}.}
-\item{window}{Defaults to \code{"rectangular"}.}
+\item{window}{Character; passed to \code{tolower}. Defaults to \code{"rectangular"}.}
 }
 \description{
 interpolates the same spectrum more finely and does NOT improve resolution -- the commonest misreading of a smoother-looking plot. Every window that suppresses leakage widens the main lobe, so a window buys dynamic range with resolution.

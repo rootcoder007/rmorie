@@ -9,10 +9,10 @@ MfiltH(g, normalize = FALSE)
 }
 \arguments{
 \item{g}{See Usage.}
-\item{normalize}{Defaults to \code{FALSE}.}
+\item{normalize}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-filter\\'s output the cross-correlation with the template.  Reversal is the whole content -- convolving with the unreversed template correlates with a mirrored pattern and peaks in the wrong place.
+filter\'s output the cross-correlation with the template.  Reversal is the whole content -- convolving with the unreversed template correlates with a mirrored pattern and peaks in the wrong place.
 }
 \value{
 A list with \code{h}, \code{template}, \code{n}, \code{energy}, \code{normalized}, \code{peak_index}, \code{time_reversed}, \code{output_is_the_cross_correlation}, \code{method}.

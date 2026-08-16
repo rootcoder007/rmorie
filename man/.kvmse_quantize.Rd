@@ -12,7 +12,7 @@
 \item{cb}{See Usage.}
 }
 \description{
-Part of the tqkmse implementation; see the file header for the source it follows.
+A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \code{Vcquant}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

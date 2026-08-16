@@ -9,14 +9,14 @@
 }
 \arguments{
 \item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{kind}{Defaults to \code{"double-sample"}.}
+\item{y}{A vector; indexed elementwise.}
+\item{kind}{Compared against \code{"propensity"}. Defaults to \code{"double-sample"}.}
 \item{min_leaf}{Defaults to \code{5}.}
-\item{seed}{Defaults to \code{11}.}
+\item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{11}.}
 \item{n_permutations}{Defaults to \code{3}.}
 }
 \description{
-Part of the frfgrf_native implementation; see the file header for the source it follows.
+A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{honest}, \code{splits_stable_under_I_permutation}, \code{splits_move_under_J_permutation}, \code{n_splits}.

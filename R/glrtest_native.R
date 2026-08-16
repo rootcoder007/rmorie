@@ -9,14 +9,15 @@
 
 #' .morie_glrtest_scores
 #'
-#' Part of the glrtest_native implementation; see the file header for
+#' A step of the glrtest_native implementation. Called by \code{morie_glrtest}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param p0 See Usage.
-#' @param p1 See Usage.
-#' @param family See Usage.
-#' @param sd See Usage.
+#' @param x Numeric; combined arithmetically in the body.
+#' @param p0 Numeric; combined arithmetically in the body.
+#' @param p1 Numeric; combined arithmetically in the body.
+#' @param family One of \code{"bernoulli"}, \code{"normal"}.
+#' @param sd Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_glrtest_scores <- function(x, p0, p1, family, sd) {

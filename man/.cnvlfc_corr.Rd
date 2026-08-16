@@ -8,11 +8,11 @@
 .cnvlfc_corr(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{A vector; its length is taken.}
+\item{b}{Numeric; passed to \code{sum}.}
 }
 \description{
-Part of the cnvlfc_native implementation; see the file header for the source it follows.
+A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_cross_map}. See the file header for the source the module follows.
 }
 \value{
 A numeric value.

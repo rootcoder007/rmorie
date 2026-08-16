@@ -54,15 +54,16 @@
 
 #' .prnFil_changepoint_path
 #'
-#' Part of the prnFil_native implementation; see the file header for the
+#' A step of the prnFil_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param y See Usage.
+#' @param t Passed to \code{morie_prphet_fit}.
+#' @param y Passed to \code{morie_prphet_fit}.
 #' @param taus Defaults to \code{NULL}.
-#' @param n_changepoints Defaults to \code{15}.
-#' @param changepoint_range Defaults to \code{0.8}.
-#' @param seasonalities Defaults to \code{NULL}.
+#' @param n_changepoints Passed to \code{morie_prphet_fit}. Defaults to \code{15}.
+#' @param changepoint_range Passed to \code{morie_prphet_fit}. Defaults to \code{0.8}.
+#' @param seasonalities Passed to \code{morie_prphet_fit}.
 #' @param ... Passed through.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
@@ -96,15 +97,16 @@
 
 #' .prnFil_select_changepoints
 #'
-#' Part of the prnFil_native implementation; see the file header for the
+#' A step of the prnFil_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param y See Usage.
-#' @param tau Defaults to \code{0.05}.
-#' @param n_changepoints Defaults to \code{15}.
-#' @param changepoint_range Defaults to \code{0.8}.
-#' @param seasonalities Defaults to \code{NULL}.
+#' @param t Passed to \code{morie_prphet_fit}.
+#' @param y Passed to \code{morie_prphet_fit}.
+#' @param tau Passed to \code{morie_prphet_fit}. Defaults to \code{0.05}.
+#' @param n_changepoints Passed to \code{morie_prphet_fit}. Defaults to \code{15}.
+#' @param changepoint_range Passed to \code{morie_prphet_fit}. Defaults to \code{0.8}.
+#' @param seasonalities Passed to \code{morie_prphet_fit}.
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{selected}, \code{selected_index}, \code{deltas}, \code{candidates}, \code{n_selected}, \code{n_candidates}, \code{tau}, \code{fit}, \code{last_candidate_fraction}, \code{changepoint_range}, \code{rmse}, \code{method}.
 #' @export
@@ -139,13 +141,14 @@
 
 #' .prnFil_simulate_future_trend
 #'
-#' Part of the prnFil_native implementation; see the file header for the
+#' A step of the prnFil_native implementation. Called by \code{.prnFil_trend_intervals}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
+#' @param fit A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k}, \code{$m}, \code{$t} from it.
 #' @param t_future See Usage.
 #' @param n_sims Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{sims}, as built in the body.
 #' @export
 .prnFil_simulate_future_trend <- function(fit, t_future, n_sims = 200,
@@ -190,14 +193,15 @@
 
 #' .prnFil_trend_intervals
 #'
-#' Part of the prnFil_native implementation; see the file header for the
+#' A step of the prnFil_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit See Usage.
-#' @param t_future See Usage.
+#' @param fit Passed to \code{.prnFil_simulate_future_trend}.
+#' @param t_future A vector; its length is taken.
 #' @param level Defaults to \code{0.8}.
-#' @param n_sims Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param n_sims Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{200}.
+#' @param seed Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{median}, \code{lower}, \code{upper}, \code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.
 #' @export
 .prnFil_trend_intervals <- function(fit, t_future, level = 0.8,
@@ -225,7 +229,8 @@
 
 #' .prnFil_cheatsheet
 #'
-#' Part of the prnFil_native implementation; see the file header for the
+#' A step of the prnFil_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return A character value.

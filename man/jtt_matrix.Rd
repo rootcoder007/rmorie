@@ -9,10 +9,10 @@ jtt_matrix(pam = 200L, scale = 10)
 }
 \arguments{
 \item{pam}{Defaults to \code{200L}.}
-\item{scale}{Defaults to \code{10}.}
+\item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{.mafft_default_raw_matrix}, \code{morie_mafft}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{matrix}, \code{freqs}, \code{P}, \code{Q}, \code{pam}, \code{rate}.

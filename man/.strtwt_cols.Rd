@@ -8,12 +8,12 @@
 .strtwt_cols(X, n, nm)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{n}{See Usage.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
+\item{n}{A count; the body uses it as \code{matrix(...)}.}
 \item{nm}{See Usage.}
 }
 \description{
-Part of the Strtwt implementation; see the file header for the source it follows.
+A step of the Strtwt implementation. Called by \code{Strtwt}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{M}, as built in the body.

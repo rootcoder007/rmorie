@@ -3,20 +3,20 @@
 % the formals.
 \name{.tmlcic_fit_working_model}
 \alias{.tmlcic_fit_working_model}
-\title{Logit[Qbar(A,W)] on the candidate\\\'s terms, fitted on rows}
+\title{Logit[Qbar(A,W)] on the candidate\\'s terms, fitted on rows}
 \usage{
 .tmlcic_fit_working_model(y, A, W, cand, rows, ridge)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{W}{See Usage.}
-\item{cand}{See Usage.}
+\item{y}{A vector; indexed elementwise.}
+\item{A}{A vector; indexed elementwise.}
+\item{W}{Passed to \code{.tmlcic_row_fun}.}
+\item{cand}{Passed to \code{.tmlcic_row_fun}.}
 \item{rows}{See Usage.}
-\item{ridge}{See Usage.}
+\item{ridge}{Numeric; passed to \code{max}.}
 }
 \description{
-Part of the tmlcic_native implementation; see the file header for the source it follows.
+A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_candidate_tmle}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{q}, \code{b}.

@@ -8,14 +8,14 @@
 .causrddc_global_derivative(x, y, side, order, deriv)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{A vector; indexed elementwise.}
+\item{y}{A vector; indexed elementwise.}
 \item{side}{See Usage.}
-\item{order}{See Usage.}
-\item{deriv}{See Usage.}
+\item{order}{Numeric; combined arithmetically in the body.}
+\item{deriv}{Numeric; combined arithmetically in the body.}
 }
 \description{
-Part of the causrddc_native implementation; see the file header for the source it follows.
+A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_bandwidth}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{deriv}, \code{sigma2}.

@@ -8,10 +8,10 @@
 .glmbay_links(family)
 }
 \arguments{
-\item{family}{See Usage.}
+\item{family}{One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.}
 }
 \description{
-Part of the glmbay_native implementation; see the file header for the source it follows.
+A step of the glmbay_native implementation. Called by \code{morie_glmbay_bayesian_glm}. See the file header for the source the module follows.
 }
 \value{
 Nothing; this branch always raises.

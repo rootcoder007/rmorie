@@ -12,7 +12,7 @@ CorrDot(x, y)
 \item{y}{See Usage.}
 }
 \description{
-Part of the rangayyan_ccf implementation; see the file header for the source it follows.
+A step of the rangayyan_ccf implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{gamma}, \code{dot_product}, \code{norms}, \code{pearson}, \code{is_a_cosine_not_an_agreement}, \code{unity_for_a_positive_rescaling}, \code{method}.

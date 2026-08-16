@@ -8,8 +8,8 @@
 DNotchSmth(p, mwin = 16)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{mwin}{Defaults to \code{16}.}
+\item{p}{A vector; its length is taken and its elements indexed.}
+\item{mwin}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16}.}
 }
 \description{
 Squaring discards the sign of the curvature; the linearly decaying weight smooths while keeping the response prompt at the newest sample.  s(n) has two peaks per cycle: the upstroke onset, then the dicrotic notch.

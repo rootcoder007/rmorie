@@ -8,10 +8,10 @@
 .morie_w4c_ridge_estimator(params)
 }
 \arguments{
-\item{params}{See Usage.}
+\item{params}{A list; the body reads \code{$alpha} from it.}
 }
 \description{
-Part of the geron_w4c_native implementation; see the file header for the source it follows.
+A step of the geron_w4c_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{fit}, \code{predict}.

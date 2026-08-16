@@ -8,15 +8,15 @@
 .fit_q(y, A, W, levels, rows, ridge)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
-\item{W}{See Usage.}
-\item{levels}{See Usage.}
+\item{y}{A vector; its length is taken and its elements indexed.}
+\item{A}{A vector; indexed elementwise.}
+\item{W}{A matrix; indexed by row and column.}
+\item{levels}{A vector; indexed elementwise.}
 \item{rows}{See Usage.}
 \item{ridge}{See Usage.}
 }
 \description{
-Part of the tmldta_native implementation; see the file header for the source it follows.
+A step of the tmldta_native implementation. Called by \code{discover_levels}, \code{split_specific_tmle}. See the file header for the source the module follows.
 }
 \value{
 A list with \code{q}, \code{b}.

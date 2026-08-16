@@ -8,11 +8,11 @@
 .morie_cf_walk(node, xrow)
 }
 \arguments{
-\item{node}{See Usage.}
-\item{xrow}{See Usage.}
+\item{node}{A list; the body reads \code{$feature}, \code{$left}, \code{$right}, \code{$tau}, \code{$threshold} from it.}
+\item{xrow}{A vector; indexed elementwise.}
 }
 \description{
-Part of the causal_forest_honest implementation; see the file header for the source it follows.
+A step of the causal_forest_honest implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{$}.

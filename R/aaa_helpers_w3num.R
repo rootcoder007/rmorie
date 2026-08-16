@@ -23,7 +23,8 @@
 # Neumaier-compensated sum. Not sum(): see the header.
 #' Neumaier-compensated sum. Not sum(): see the header
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.alfrf2_centre}, \code{.baysmplr_build_tree}, \code{.blinkg_corr} and 101 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
@@ -42,11 +43,12 @@
 # Compensated dot product. Not sum(a * b), same reason.
 #' Compensated dot product. Not sum(a * b), same reason
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.baysmplr_build_tree}, \code{.chemsc_angle}, \code{.hyper2_elliptical} and 21 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
 .w3_dot <- function(a, b) {
@@ -65,10 +67,11 @@
 # log(sum(exp(v))), shifted by the maximum so it cannot overflow.
 #' Log(sum(exp(v))), shifted by the maximum so it cannot overflow
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{morie_snpest}, \code{morie_varqc1_logpdf}, \code{morie_varqc1_mixture}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
 .w3_logsumexp <- function(v) {
@@ -81,10 +84,11 @@
 # Lower Cholesky factor L with A = L L'. Explicit, not chol().
 #' Lower Cholesky factor L with A = L L\'. Explicit, not chol()
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.w3_ols}, \code{morie_cypin_fit}, \code{morie_hyper2} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a A matrix; indexed by row and column.
 #' @return The value of \code{lo}, as built in the body.
 #' @export
 .w3_chol <- function(a) {
@@ -106,11 +110,12 @@
 # Solve L L' x = b by forward then back substitution.
 #' Solve L L\' x = b by forward then back substitution
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol}, \code{.w3_ols}, \code{morie_cypin_fit} and 3 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lo See Usage.
-#' @param b See Usage.
+#' @param lo A matrix; indexed by row and column.
+#' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .w3_solve_chol <- function(lo, b) {
@@ -132,10 +137,11 @@
 # (L L')^-1, column by column from the factor.
 #' (L L\')^-1, column by column from the factor
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.w3_ols}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lo See Usage.
+#' @param lo A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .w3_inv_from_chol <- function(lo) {
@@ -152,11 +158,12 @@
 # Least squares by the normal equations.
 #' Least squares by the normal equations
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}, \code{morie_sdcfst}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param design See Usage.
+#' @param y A vector; its length is taken.
+#' @param design A matrix; indexed by row and column.
 #' @return A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv}, \code{fitted}, \code{chol}.
 #' @export
 .w3_ols <- function(y, design) {
@@ -182,10 +189,11 @@
 # Lanczos log-gamma. Not lgamma(): Python's is a different routine.
 #' Lanczos log-gamma. Not lgamma(): Python\'s is a different routine
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta}, \code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .w3_lgamma <- function(z) {
@@ -203,11 +211,12 @@
 # Q(a, x) by Lentz's continued fraction.
 #' Q(a, x) by Lentz\'s continued fraction
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.w3_gammp}, \code{.w3_gammq}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param x See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .w3_gammcf <- function(a, x) {
@@ -241,8 +250,8 @@
 #' each is the convergent one, and using the wrong side is where a
 #' hand-rolled version loses its digits.
 #'
-#' @param a See Usage.
-#' @param x See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .w3_gammp <- function(a, x) {
@@ -271,8 +280,8 @@
 #' 1 - P when x is large, so the far tail keeps its significant digits
 #' instead of cancelling against 1.
 #'
-#' @param a See Usage.
-#' @param x See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param x Passed to \code{.w3_gammp}.
 #' @return The value of \code{.w3_gammcf}.
 #' @export
 .w3_gammq <- function(a, x) {
@@ -292,7 +301,7 @@
 #' approximation, so this is exactly as accurate as gammp -- and it runs
 #' the same series as the Python arm rather than R\'s own pnorm.
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .w3_ncdf <- function(z) {
@@ -303,10 +312,11 @@
 
 #' .w3_npdf
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{morie_chemsc_smooth_block}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .w3_npdf <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
@@ -319,9 +329,9 @@
 #' rational approximation and exactly as accurate as the CDF it inverts,
 #' which is the property that matters here.
 #'
-#' @param p See Usage.
-#' @param lo Defaults to \code{-40}.
-#' @param hi Defaults to \code{40}.
+#' @param p Numeric; combined arithmetically in the body.
+#' @param lo Passed to \code{.w3_bisect}. Defaults to \code{-40}.
+#' @param hi Passed to \code{.w3_bisect}. Defaults to \code{40}.
 #' @return The value of \code{.w3_bisect}.
 #' @export
 .w3_nppf <- function(p, lo = -40, hi = 40) {
@@ -331,12 +341,13 @@
 
 #' .w3_betacf
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.w3_betainc}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param x See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{h}, as built in the body.
 #' @export
 .w3_betacf <- function(a, b, x) {
@@ -375,12 +386,13 @@
 # Regularised incomplete beta I_x(a, b).
 #' Regularised incomplete beta I_x(a, b)
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{.w3_t_sf}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param x See Usage.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
 .w3_betainc <- function(a, b, x) {
@@ -395,11 +407,12 @@
 # Upper tail of Student's t.
 #' Upper tail of Student\'s t
 #'
-#' Part of the helpers_w3num implementation; see the file header for the
+#' A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param df See Usage.
+#' @param t Numeric; combined arithmetically in the body.
+#' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
 .w3_t_sf <- function(t, df) 0.5 * .w3_betainc(df / 2, 0.5, df / (df + t * t))
@@ -415,9 +428,9 @@
 #' which a tolerance test cannot guarantee.
 #'
 #' @param f See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param iters Defaults to \code{200L}.
+#' @param lo Numeric; combined arithmetically in the body.
+#' @param hi Numeric; combined arithmetically in the body.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
 .w3_bisect <- function(f, lo, hi, iters = 200L) {
@@ -446,9 +459,9 @@
 #' very integrals where it matters.
 #'
 #' @param f See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param n Defaults to \code{200L}.
+#' @param a Numeric; combined arithmetically in the body.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
 .w3_simpson <- function(f, a, b, n = 200L) {
@@ -483,13 +496,13 @@
 #' arms in step.
 #'
 #' @param f See Usage.
-#' @param x0 See Usage.
-#' @param step Defaults to \code{0.1}.
+#' @param x0 A vector; its length is taken.
+#' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param iters Defaults to \code{400L}.
-#' @param alpha Defaults to \code{1}.
-#' @param gamma Defaults to \code{2}.
-#' @param rho Defaults to \code{0.5}.
-#' @param sigma Defaults to \code{0.5}.
+#' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{2}.
+#' @param rho Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A list with \code{x}, \code{value}.
 #' @export
 .w3_nelder_mead <- function(f, x0, step = 0.1, iters = 400L, alpha = 1,

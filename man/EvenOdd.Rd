@@ -8,8 +8,8 @@
 EvenOdd(x, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{.morie_rg_evenodd}.}
+\item{n}{Passed to \code{.morie_rg_evenodd}.}
 }
 \description{
 error checks the index bookkeeping, not the arithmetic.

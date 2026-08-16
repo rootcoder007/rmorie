@@ -12,7 +12,7 @@
 \item{ic}{See Usage.}
 }
 \description{
-Part of the tlsate_native implementation; see the file header for the source it follows.
+A step of the tlsate_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{se}, \code{n_pairs}, \code{note}.

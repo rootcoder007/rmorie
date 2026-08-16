@@ -8,10 +8,10 @@
 .ot_sqrtm(S)
 }
 \arguments{
-\item{S}{See Usage.}
+\item{S}{A matrix; passed to \code{as.matrix}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{.ot_w2gauss}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{\%*\%}.

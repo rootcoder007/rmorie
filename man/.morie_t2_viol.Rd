@@ -12,7 +12,7 @@
 \item{x}{See Usage.}
 }
 \description{
-Part of the tail2_t03 implementation; see the file header for the source it follows.
+A step of the tail2_t03 implementation. Called by \code{.morie_t2_qpen}, \code{PenaltyMin}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

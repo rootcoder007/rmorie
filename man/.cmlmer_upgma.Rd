@@ -8,7 +8,7 @@
 .cmlmer_upgma(K, g)
 }
 \arguments{
-\item{K}{See Usage.}
+\item{K}{A matrix; passed to \code{nrow}.}
 \item{g}{See Usage.}
 }
 \description{

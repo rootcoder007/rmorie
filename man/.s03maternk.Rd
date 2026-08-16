@@ -8,10 +8,10 @@
 .s03maternk(d, nu, rho, sigma2)
 }
 \arguments{
-\item{d}{See Usage.}
-\item{nu}{See Usage.}
-\item{rho}{See Usage.}
-\item{sigma2}{See Usage.}
+\item{d}{Numeric; combined arithmetically in the body.}
+\item{nu}{Numeric; combined arithmetically in the body.}
+\item{rho}{Numeric; combined arithmetically in the body.}
+\item{sigma2}{Numeric; combined arithmetically in the body.}
 }
 \description{
 large nu does not overflow (z/2)^nu before Gamma(nu) divides it out again.

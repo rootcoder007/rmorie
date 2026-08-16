@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{a}{See Usage.}
-\item{normalise}{Defaults to \code{FALSE}.}
+\item{normalise}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{
-Part of the helpers_ot implementation; see the file header for the source it follows.
+A step of the helpers_ot implementation. Called by \code{Otbar}, \code{Otbarfree}, \code{Otbreg} and 9 others in the module. See the file header for the source the module follows.
 }
 \value{
 The value of \code{v}, as built in the body.

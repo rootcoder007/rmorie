@@ -3,12 +3,12 @@
 % the formals.
 \name{.esl_mtry}
 \alias{.esl_mtry}
-\title{The book\\\'s defaults for the number of variables sampled at each}
+\title{The book\\'s defaults for the number of variables sampled at each}
 \usage{
 .esl_mtry(p, task = "regression")
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; passed to \code{sqrt}.}
 \item{task}{Defaults to \code{"regression"}.}
 }
 \description{

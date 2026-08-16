@@ -8,11 +8,11 @@
 .groebn_leading_term(f, order = "lex")
 }
 \arguments{
-\item{f}{See Usage.}
-\item{order}{Defaults to \code{"lex"}.}
+\item{f}{A vector; indexed elementwise.}
+\item{order}{Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.}
 }
 \description{
-Part of the groebn_native implementation; see the file header for the source it follows.
+A step of the groebn_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 The value of \code{out}, as built in the body.

@@ -8,10 +8,10 @@
 .mafft_degap(group)
 }
 \arguments{
-\item{group}{See Usage.}
+\item{group}{A vector; its length is taken and its elements indexed.}
 }
 \description{
-Part of the mafft_native implementation; see the file header for the source it follows.
+A step of the mafft_native implementation. Called by \code{iterative_refine}. See the file header for the source the module follows.
 }
 \value{
 A vector, from \code{vapply}.

@@ -8,11 +8,11 @@
 .copynm_shuffle(w, e)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{e}{See Usage.}
+\item{w}{A vector; its length is taken and its elements indexed.}
+\item{e}{Passed to \code{.ghc_unif}.}
 }
 \description{
-Part of the copynm_native implementation; see the file header for the source it follows.
+A step of the copynm_native implementation. Called by \code{.copynm_binary_supported}, \code{copynm}. See the file header for the source the module follows.
 }
 \value{
 Invisibly,the value of \code{w}, as built in the body.

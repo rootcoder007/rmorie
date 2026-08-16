@@ -3,12 +3,12 @@
 % the formals.
 \name{.morie_w4c_lcg_normal}
 \alias{.morie_w4c_lcg_normal}
-\title{Box-Muller normals from the integer LCG, draw for draw with Python\\\'s}
+\title{Box-Muller normals from the integer LCG, draw for draw with Python\\'s}
 \usage{
 .morie_w4c_lcg_normal(n, seed)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{A count; the body uses it as \code{numeric(...)}.}
 \item{seed}{See Usage.}
 }
 \description{

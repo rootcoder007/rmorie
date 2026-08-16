@@ -8,7 +8,7 @@
 .hrz3_u01(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A vector; its length is taken.}
 }
 \description{
 support of (X, W) may be taken to be [0, 1]^2 with no loss of generality, "because it can always be satisfied by, if necessary, carrying out a monotone increasing transformation of (X, W)".  The mid-rank map is such a transformation and is exactly reproducible in both language arms, unlike a fitted CDF.

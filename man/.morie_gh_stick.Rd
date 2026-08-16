@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{alpha}{See Usage.}
-\item{K}{See Usage.}
+\item{K}{Numeric; combined arithmetically in the body.}
 }
 \description{
 with the last stick closing so the weights sum to one exactly.

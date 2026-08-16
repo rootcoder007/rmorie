@@ -48,12 +48,12 @@ A list with the per-observation conditional effect, the   average effect, the tw
 \examples{
 N <- 36L
 X <- matrix(0, N, 2)
-D <- vapply(0:(N - 1L), function(i) if (i%%2 == 1) 1L else 0L, 
+D <- vapply(0:(N - 1L), function(i) if (i\%\%2 == 1) 1L else 0L, 
     integer(1))
 T <- vapply(0:(N - 1L), function(i) round(3 + 6 * (1 - ((i * 
-    7)%%11)/10) + 4 * (if (i%%2 == 1) 1 else 0) + ((i * 3)%%5) * 
+    7)\%\%11)/10) + 4 * (if (i\%\%2 == 1) 1 else 0) + ((i * 3)\%\%5) * 
     0.3, 4), numeric(1))
-E <- vapply(0:(N - 1L), function(i) if (i%%5 == 0) 0L else 1L, 
+E <- vapply(0:(N - 1L), function(i) if (i\%\%5 == 0) 0L else 1L, 
     integer(1))
 morie_crsfst(T, E, D, X, 3L, NULL, 4L, 3L, 2L, TRUE, 2)
 }

@@ -10,12 +10,12 @@ order_is_graph_determined(features, adj, perm, k_keep, tol = 1e-09)
 \arguments{
 \item{features}{See Usage.}
 \item{adj}{See Usage.}
-\item{perm}{See Usage.}
+\item{perm}{A vector; indexed elementwise.}
 \item{k_keep}{See Usage.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{
-Part of the sortP_native implementation; see the file header for the source it follows.
+A step of the sortP_native implementation. No other function in the package calls it. See the file header for the source the module follows.
 }
 \value{
 A list with \code{max_deviation}, \code{invariant}, \code{note}.

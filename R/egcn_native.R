@@ -20,7 +20,8 @@
 # compact alias per ledger/NAMING.md
 #' Compact alias per ledger/NAMING.md
 #'
-#' Part of the egcn_native implementation; see the file header for the
+#' A step of the egcn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param H See Usage.
@@ -41,7 +42,8 @@ equivariantgraphconv <- function(H, X, layers, phi_e, phi_x, phi_h,
 # public name resolved by fn/_lazy_map.json
 #' Public name resolved by fn/_lazy_map.json
 #'
-#' Part of the egcn_native implementation; see the file header for the
+#' A step of the egcn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param H See Usage.
@@ -62,7 +64,8 @@ e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 # morie entry point: matches the Python payload keys
 #' Morie entry point: matches the Python payload keys
 #'
-#' Part of the egcn_native implementation; see the file header for the
+#' A step of the egcn_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param H See Usage.

@@ -8,7 +8,7 @@
 .morie_reachable(A, x, Z)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; indexed by row and column.}
 \item{x}{See Usage.}
 \item{Z}{See Usage.}
 }

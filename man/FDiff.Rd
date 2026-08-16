@@ -13,7 +13,7 @@ FDiff(x, T = 1, n = NULL)
 \item{n}{Defaults to \code{NULL}.}
 }
 \description{
-"is required in order to obtain the rate of change of the signal with respect to the true time".  Highpass, and it amplifies noise -- eq (3.128) is the book\\'s remedy.
+"is required in order to obtain the rate of change of the signal with respect to the true time".  Highpass, and it amplifies noise -- eq (3.128) is the book\'s remedy.
 }
 \value{
 A list with \code{y}, \code{value}, \code{index}, \code{T}, \code{scale_factor_gives_true_time_rate}, \code{highpass}, \code{amplifies_noise}, \code{removes_dc}, \code{method}.

@@ -24,8 +24,8 @@
 #'
 #' upper triangular U with Sigma = U\'U; L is that U\'.
 #'
-#' @param cov See Usage.
-#' @param jitter Defaults to \code{1e-10}.
+#' @param cov A matrix; passed to \code{nrow}.
+#' @param jitter Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return A matrix, from \code{t}.
 #' @export
 .schab_cholesky_root <- function(cov, jitter = 1e-10) {
@@ -45,7 +45,7 @@
 #' come from rounding on a matrix positive semi-definite in exact
 #' arithmetic, so they are clipped rather than allowed to make NaNs.
 #'
-#' @param cov See Usage.
+#' @param cov A matrix; passed to \code{nrow}.
 #' @param tol Defaults to \code{NULL}.
 #' @return The value of \code{%*%}.
 #' @export
@@ -66,14 +66,15 @@
 
 #' .schab_simulate_unconditional
 #'
-#' Part of the schab_sim_shared implementation; see the file header for
+#' A step of the schab_sim_shared implementation. Called by \code{.schab_simulate_conditional}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param mean See Usage.
-#' @param cov See Usage.
+#' @param mean A vector; its length is taken.
+#' @param cov A matrix; passed to \code{dim}.
 #' @param method Defaults to \code{"cholesky"}.
-#' @param seed Defaults to \code{0}.
-#' @param stream Defaults to \code{0}.
+#' @param seed Passed to \code{.morie_random_normal}. Defaults to \code{0}.
+#' @param stream Passed to \code{.morie_random_normal}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .schab_simulate_unconditional <- function(mean, cov, method = "cholesky",
@@ -94,16 +95,17 @@
 
 #' .schab_simulate_conditional
 #'
-#' Part of the schab_sim_shared implementation; see the file header for
+#' A step of the schab_sim_shared implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param cov_all See Usage.
-#' @param z_obs See Usage.
-#' @param n_obs See Usage.
-#' @param mean Defaults to \code{0}.
-#' @param method Defaults to \code{"cholesky"}.
-#' @param seed Defaults to \code{0}.
-#' @param stream Defaults to \code{0}.
+#' @param cov_all A matrix; indexed by row and column.
+#' @param z_obs A vector; its length is taken.
+#' @param n_obs A count; the body uses it as \code{seq_len(...)}.
+#' @param mean A vector; its length is taken. Defaults to \code{0}.
+#' @param method Passed to \code{.schab_simulate_unconditional}. Defaults to \code{"cholesky"}.
+#' @param seed Passed to \code{.schab_simulate_unconditional}. Defaults to \code{0}.
+#' @param stream Passed to \code{.schab_simulate_unconditional}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .schab_simulate_conditional <- function(cov_all, z_obs, n_obs, mean = 0,
@@ -139,8 +141,8 @@
 #'
 #' identity that closes Sec. 7.2.2.
 #'
-#' @param cov_all See Usage.
-#' @param n_obs See Usage.
+#' @param cov_all A matrix; indexed by row and column.
+#' @param n_obs A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
 .schab_simple_kriging_variance <- function(cov_all, n_obs) {

@@ -34,7 +34,7 @@
 #' Compact support in tau is the point: it stops the integrand being
 #' evaluated where the denominator has died.
 #'
-#' @param u See Usage.
+#' @param u Numeric; passed to \code{abs}.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_hrz_smoothing_cf <- function(u) {
@@ -44,11 +44,12 @@
 
 #' .morie_hrz_panel_residuals
 #'
-#' Part of the horowitz_native7 implementation; see the file header for
+#' A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param y See Usage.
-#' @param x See Usage.
+#' @param x A matrix; indexed by row and column.
 #' @param beta See Usage.
 #' @return A list with \code{W}, \code{eta}, \code{n}, \code{T}.
 #' @export
@@ -101,15 +102,16 @@
 
 #' .morie_hrz_deconvolve_pair
 #'
-#' Part of the horowitz_native7 implementation; see the file header for
+#' A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}.
+#' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param w See Usage.
 #' @param eta See Usage.
 #' @param grid_u See Usage.
 #' @param grid_z See Usage.
-#' @param nu_U See Usage.
-#' @param nu_eps See Usage.
+#' @param nu_U Numeric; combined arithmetically in the body.
+#' @param nu_eps Numeric; combined arithmetically in the body.
 #' @param n_tau Defaults to \code{2001L}.
 #' @return A list with \code{f_U}, \code{f_eps}.
 #' @export

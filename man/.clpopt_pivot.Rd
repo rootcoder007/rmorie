@@ -8,12 +8,12 @@
 .clpopt_pivot(T, row, col)
 }
 \arguments{
-\item{T}{See Usage.}
+\item{T}{A matrix; indexed by row and column.}
 \item{row}{See Usage.}
 \item{col}{See Usage.}
 }
 \description{
-Part of the clpopt_native implementation; see the file header for the source it follows.
+A step of the clpopt_native implementation. Called by \code{.clpopt_run}, \code{simplex}. See the file header for the source the module follows.
 }
 \value{
 The value of \code{T}, as built in the body.

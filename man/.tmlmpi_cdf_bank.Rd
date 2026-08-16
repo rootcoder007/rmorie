@@ -8,11 +8,11 @@
 .tmlmpi_cdf_bank(yv, Dv, W, g, grid)
 }
 \arguments{
-\item{yv}{See Usage.}
-\item{Dv}{See Usage.}
+\item{yv}{A vector; its length is taken.}
+\item{Dv}{Numeric; combined arithmetically in the body.}
 \item{W}{See Usage.}
-\item{g}{See Usage.}
-\item{grid}{See Usage.}
+\item{g}{Numeric; combined arithmetically in the body.}
+\item{grid}{A vector; its length is taken and its elements indexed.}
 }
 \description{
 # Targeted counterfactual CDFs and their influence curves on a grid. # One point-treatment TMLE per threshold on the binary outcome # I(Y <= t), with an arm-specific clever covariate H_a = I(D = a)/g_a so # that each arm mean -- not just the contrast -- solves its own # efficient score. Monotonicity is restored by a running maximum, the # cheapest rearrangement that cannot move a correctly ordered pair.

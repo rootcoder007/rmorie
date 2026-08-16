@@ -8,8 +8,8 @@
 QrsWSqDrv(x, nwin = 8)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{nwin}{Defaults to \code{8}.}
+\item{x}{A vector; its length is taken and its elements indexed.}
+\item{nwin}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{8}.}
 }
 \description{
 (N - i + 1).  Squaring rewards the large QRS differences; the linearly falling weight smooths the result without a separate filter.
