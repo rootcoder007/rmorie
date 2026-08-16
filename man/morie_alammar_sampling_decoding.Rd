@@ -1,0 +1,19 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_alammar_sampling_decoding}
+\alias{morie_alammar_sampling_decoding}
+\title{morie_alammar_sampling_decoding}
+\usage{
+morie_alammar_sampling_decoding(logits, seed = 0)
+}
+\arguments{
+\item{seed}{LCG seed; the Python mirror draws the same tokens.}
+}
+\description{
+morie_alammar_sampling_decoding
+}
+\value{
+A list with \code{tokens}, \code{uniforms}, \code{estimate}, \code{n}, \code{method}.
+}
+\keyword{internal}

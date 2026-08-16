@@ -1,0 +1,16 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.morie_sv_bayes_ordinal}
+\alias{.morie_sv_bayes_ordinal}
+\title{Internal helper: native ordinal IRT sampler}
+\usage{
+.morie_sv_bayes_ordinal(votes, n_samples = 1000L, burn_in = 200L)
+}
+\description{
+Internal helper: native ordinal IRT sampler
+}
+\value{
+A list with \code{ideal_points}, \code{ideal_sd}, \code{discrimination}, \code{difficulty}, \code{cutpoints}, \code{n_samples}, \code{engine}.
+}
+\keyword{internal}

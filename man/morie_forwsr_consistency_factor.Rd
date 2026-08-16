@@ -1,18 +1,20 @@
-% Generated from the module source by ledger/gen_rd.R -- roxygen2 hangs
-% on this package. Usage comes from args(), so it tracks the formals.
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
 \name{morie_forwsr_consistency_factor}
 \alias{morie_forwsr_consistency_factor}
-\title{SPDX-License-Identifier: AGPL-3.0-or-later}
+\title{Consistency factor for a scale estimated from a truncated sample}
 \usage{
 morie_forwsr_consistency_factor(m, n)
 }
-\description{
-SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,   least-median-of-squares start, the residual ordering that defines   each subset, and the monitoring of the deletion residuals.   unknown number of multivariate outliers", Journal of the Royal   Statistical Society Series B 71(2), 447-454 -- equation (12), the   consistency factor for a scale estimated from a truncated sample, Native implementation mirroring Python morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting, the same SplitMix64 draws for the LMS start, the same residual ordering, and the same consistency correction. Row indices are 0-based here, as they are in the Python arm; R subscripts add one at the point of use.
+\arguments{
+\item{m}{Subset size.}
+\item{n}{Sample size.}
 }
-\references{
-  Atkinson, A. C. and Riani, M. (2000) Robust Diagnostic Regression
-  doi:10.1007/978-1-4612-1160-0. The forward search: the
-  Riani, M., Atkinson, A. C. and Cerioli, A. (2009) "Finding an
-  doi:10.1111/j.1467-9868.2008.00692.x.
+\description{
+The subset of size \code{m} holds the \code{m} SMALLEST squared residuals, so \code{s^2} estimates a truncated normal variance and is biased low; on clean data the raw scale climbs sixteenfold across the search as that bias unwinds. Riani, Atkinson and Cerioli\'s equation (12) gives the inflation factor \code{c_FS(m) = (m/n) / P(chi2_(v+2) < chi2_(v,m/n))}; for regression residuals \code{v = 1}, and with \code{psi = Phi^-1{(n+m)/2n}} the denominator is \code{m/n - 2 psi phi(psi)}, so the reciprocal is exactly \code{1 - (2n/m) psi phi(psi)}. Multiply \code{s^2} by it.
+}
+\value{
+The multiplier, 1 when \code{m >= n}.
 }
 \keyword{internal}
