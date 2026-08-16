@@ -7,10 +7,35 @@
 # helpers
 # --------------------------------------------------------------------------
 
+#' .bayopt_phi
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .bayopt_phi <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
 
+#' .Phi
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{pnorm}.
+#' @export
 .Phi <- function(z) pnorm(z)
 
+#' .lengths
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ls See Usage.
+#' @param d See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .lengths <- function(ls, d) {
   if (is.numeric(ls) && length(ls) == 1L) {
     out <- rep(as.numeric(ls), d)
@@ -24,6 +49,16 @@
   out
 }
 
+#' .r2
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param ls See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .r2 <- function(a, b, ls) {
   d <- length(a)
   s <- 0
@@ -71,12 +106,30 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
   amplitude * exp(-0.5 * .r2(a, b, ls))
 }
 
+#' .dkernel_dr2
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @param amplitude See Usage.
+#' @param r2 See Usage.
+#' @return A numeric value.
+#' @export
 .dkernel_dr2 <- function(name, amplitude, r2) {
   if (name == "se") return(-0.5 * amplitude * exp(-0.5 * r2))
   s <- sqrt(5 * r2)
   -(5/6) * amplitude * (1 + s) * exp(-s)
 }
 
+#' .kernel
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .kernel <- function(name) {
   if (!(name %in% c("matern52", "se")))
     stop("bayopt: kernel must be one of matern52, se")
@@ -87,6 +140,14 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 # Cholesky
 # --------------------------------------------------------------------------
 
+#' .chol_r
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .chol_r <- function(A) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -108,6 +169,15 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
   L
 }
 
+#' .chol_solve
+#'
+#' Part of the bayopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .chol_solve <- function(L, b) {
   n <- nrow(L)
   y <- numeric(n)

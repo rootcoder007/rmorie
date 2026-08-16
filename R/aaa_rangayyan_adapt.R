@@ -13,6 +13,15 @@
 # from r(0)^2 makes mu(0) unbounded whenever the reference starts at zero,
 # which a sine at phase zero does.
 
+#' .morie_rg_acf
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param lags See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_rg_acf <- function(x, lags) {
   n <- length(x)
   vapply(seq_len(lags) - 1L, function(m) {
@@ -20,6 +29,16 @@
   }, numeric(1))
 }
 
+#' Theta(k) = E[x(n-k) d(n)], the right-hand side of eq. (3.168)
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param d See Usage.
+#' @param lags See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_rg_ccf <- function(x, d, lags) {
   # theta(k) = E[x(n-k) d(n)], the right-hand side of eq. (3.168)
   n <- min(length(x), length(d))
@@ -29,6 +48,15 @@
   }, numeric(1))
 }
 
+#' .morie_rg_solve
+#'
+#' Part of the rangayyan_adapt implementation; see the file header for
+#' the source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_rg_solve <- function(A, b) {
   out <- tryCatch(as.numeric(solve(A, b)), error = function(e) NULL)
   if (is.null(out) || any(!is.finite(out))) {
@@ -40,6 +68,15 @@
   out
 }
 
+#' R(n) as eq. (3.155) wants it: current sample first, zeros before the
+#'
+#' record starts
+#'
+#' @param r See Usage.
+#' @param i See Usage.
+#' @param m See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_rg_lagvec <- function(r, i, m) {
   # r(n) as eq. (3.155) wants it: current sample first, zeros before the
   # record starts

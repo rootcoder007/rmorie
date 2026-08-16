@@ -51,6 +51,16 @@ Icc1 <- function(y, cluster) {
 }
 
 # Long-format (value, group) into a subjects-by-raters matrix.
+#' Long-format (value, group) into a subjects-by-raters matrix
+#'
+#' Part of the icc1 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param y See Usage.
+#' @param group See Usage.
+#' @param who See Usage.
+#' @return A list with \code{rows}, \code{n}, \code{k}.
+#' @export
 .icc_balanced <- function(y, group, who) {
   ys <- .s03vec(y); gs <- .s03vec(group)
   if (length(ys) == 0L) stop(paste0(who, ": y is empty"))

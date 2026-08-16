@@ -86,6 +86,17 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
                      else "m_{i|k}, which varies with the topic")
 }
 
+#' .counts
+#'
+#' Part of the bigtm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param Tn See Usage.
+#' @param Vn See Usage.
+#' @param z See Usage.
+#' @return A list with \code{N_ijk}, \code{N_jk}, \code{N_kd}, \code{N_d}.
+#' @export
 .counts <- function(D, Tn, Vn, z) {
   N_ijk <- new.env(hash = TRUE)
   N_jk <- new.env(hash = TRUE)
@@ -110,6 +121,16 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 # not an LCG at all. Making the LCG exact would still have left the two
 # arms on different generators, so this takes the bit-identical mirror
 # of default_rng that .ghc_rng already provides.
+#' The Python arm draws from np.random.default_rng, i.e. SplitMix64 --
+#'
+#' not an LCG at all. Making the LCG exact would still have left the two
+#' arms on different generators, so this takes the bit-identical mirror
+#' of default_rng that .ghc_rng already provides.
+#'
+#' @param seed See Usage.
+#' @param n See Usage.
+#' @return The value of \code{.ghc_unif}.
+#' @export
 .lcg_uniform <- function(seed, n) {
   .ghc_unif(.ghc_rng(as.numeric(seed)), n)
 }
@@ -228,6 +249,21 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
                       "following eqs. (25) and (29)"))
 }
 
+#' .log_evidence
+#'
+#' Part of the bigtm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param Tn See Usage.
+#' @param Vn See Usage.
+#' @param z See Usage.
+#' @param mm See Usage.
+#' @param nn See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 .log_evidence <- function(D, Tn, Vn, z, mm, nn, a, b) {
   cts <- .counts(D, Tn, Vn, z)
   N_ijk <- cts$N_ijk; N_jk <- cts$N_jk

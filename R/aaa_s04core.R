@@ -11,12 +11,46 @@
 #' @keywords internal
 NULL
 
+#' .s4_expit
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .s4_expit <- function(z) ifelse(z >= 0, 1 / (1 + exp(-z)), exp(z) / (1 + exp(z)))
 
+#' .s4_logit
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .s4_logit <- function(p) log(p / (1 - p))
 
+#' .s4_clip
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return The value of \code{pmin}.
+#' @export
 .s4_clip <- function(v, lo, hi) pmin(pmax(v, lo), hi)
 
+#' .s4_median
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .s4_median <- function(x) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
@@ -26,6 +60,15 @@ NULL
 }
 
 ## R quantile type 7, spelled out so the two arms cannot drift.
+#' # R quantile type 7, spelled out so the two arms cannot drift
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .s4_quantile7 <- function(x, p) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
@@ -38,15 +81,50 @@ NULL
 }
 
 ## 0-based order, ties by original position -- matches the Python arm.
+#' # 0-based order, ties by original position -- matches the Python arm
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .s4_order <- function(x) order(as.numeric(unlist(x)), seq_along(unlist(x))) - 1L
 
+#' .s4_rank_avg
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .s4_rank_avg <- function(x) as.numeric(rank(as.numeric(unlist(x)), ties.method = "average"))
 
+#' .s4_softmax
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .s4_softmax <- function(v) {
   e <- exp(v - max(v))
   e / sum(e)
 }
 
+#' .s4_glmbin
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param iters Defaults to \code{25L}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .s4_glmbin <- function(X, y, iters = 25L, ridge = 1e-8) {
   X <- as.matrix(X); y <- as.numeric(y)
   n <- nrow(X); p <- ncol(X)
@@ -63,6 +141,16 @@ NULL
   beta
 }
 
+#' .s4_rbf
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param Z See Usage.
+#' @param ell Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .s4_rbf <- function(X, Z, ell = 1) {
   X <- as.matrix(X); Z <- as.matrix(Z)
   out <- matrix(0, nrow(X), nrow(Z))
@@ -74,6 +162,18 @@ NULL
   out
 }
 
+#' .s4_gppost
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param K See Usage.
+#' @param Ks See Usage.
+#' @param Kss See Usage.
+#' @param y See Usage.
+#' @param noise Defaults to \code{1e-06}.
+#' @return A list with \code{mean}, \code{var}.
+#' @export
 .s4_gppost <- function(K, Ks, Kss, y, noise = 1e-6) {
   K <- as.matrix(K); Ks <- as.matrix(Ks)
   n <- nrow(K)
@@ -85,6 +185,14 @@ NULL
   list(mean = mean, var = vr)
 }
 
+#' .s4_colstd
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .s4_colstd <- function(X) {
   X <- as.matrix(X)
   n <- nrow(X)
@@ -98,17 +206,50 @@ NULL
   out
 }
 
+#' .s4_euclid
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .s4_euclid <- function(a, b) sqrt(sum((as.numeric(a) - as.numeric(b))^2))
 
+#' .s4_sgn
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .s4_sgn <- function(v) ifelse(v >= 0, 1, -1)
 
 ## Half-away-from-zero. Deliberately not round(): both languages round
 ## half to even but disagree about which values are exactly half.
+#' # Half-away-from-zero. Deliberately not round(): both languages round
+#'
+#' # half to even but disagree about which values are exactly half.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .s4_rnd <- function(v) .s4_sgn(v) * floor(abs(v) + 0.5)
 
 ## Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
 ## construction, so Q is unique and there is no sign convention left for
 ## the two arms to disagree about (LAPACK and LINPACK differ here).
+#' # Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
+#'
+#' # construction, so Q is unique and there is no sign convention left
+#' for # the two arms to disagree about (LAPACK and LINPACK differ
+#' here).
+#'
+#' @param A See Usage.
+#' @return A list with \code{Q}, \code{R}.
+#' @export
 .s4_qr_mgs <- function(A) {
   A <- as.matrix(A)
   n <- nrow(A); p <- ncol(A)
@@ -126,6 +267,14 @@ NULL
   list(Q = Q, R = R)
 }
 
+#' .s4_rank_first
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .s4_rank_first <- function(x) {
   x <- as.numeric(unlist(x))
   o <- order(x, seq_along(x))
@@ -136,6 +285,18 @@ NULL
 
 ## Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4'c and mediator
 ## model M = b0 + b1 a + b2'c; cbar is where the decomposition is read.
+#' # Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4\'c and
+#' mediator
+#'
+#' # model M = b0 + b1 a + b2\'c; cbar is where the decomposition is
+#' read.
+#'
+#' @param Y See Usage.
+#' @param A See Usage.
+#' @param M See Usage.
+#' @param Cc Defaults to \code{NULL}.
+#' @return A list with \code{theta}, \code{beta}, \code{cbar}.
+#' @export
 .s4_medmodels <- function(Y, A, M, Cc = NULL) {
   Y <- as.numeric(Y); A <- as.numeric(A); M <- as.numeric(M)
   n <- length(Y)
@@ -149,6 +310,19 @@ NULL
 }
 
 ## VanderWeele four-way decomposition from fitted coefficients.
+#' # VanderWeele four-way decomposition from fitted coefficients
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param beta See Usage.
+#' @param cbar See Usage.
+#' @param a Defaults to \code{1}.
+#' @param astar Defaults to \code{0}.
+#' @param m Defaults to \code{0}.
+#' @return A list with \code{cde}, \code{intref}, \code{intmed}, \code{pie}, \code{te}.
+#' @export
 .s4_fourway <- function(theta, beta, cbar, a = 1, astar = 0, m = 0) {
   d <- a - astar
   bc <- beta[1] + beta[2] * astar
@@ -162,6 +336,17 @@ NULL
 }
 
 ## One TMLE pass for a binary point treatment. W carries its intercept.
+#' # One TMLE pass for a binary point treatment. W carries its intercept
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param W See Usage.
+#' @param gbound Defaults to \code{0.025}.
+#' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1}, \code{Q0}, \code{ic}, \code{n}.
+#' @export
 .s4_tmle <- function(y, D, W, gbound = 0.025) {
   y <- as.numeric(y); D <- as.numeric(D); W <- as.matrix(W); n <- length(y)
   gb <- .s4_glmbin(W, D)
@@ -187,6 +372,17 @@ NULL
 ## shared tail1 core uses each language own QR (MGS in Python, Householder
 ## in R); on an ill-conditioned design those part company around 1e-8,
 ## above the parity threshold and below anything a user would notice.
+#' # Least squares by the SAME modified Gram-Schmidt in both arms. The
+#'
+#' # shared tail1 core uses each language own QR (MGS in Python,
+#' Householder # in R); on an ill-conditioned design those part company
+#' around 1e-8, # above the parity threshold and below anything a user
+#' would notice.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
+#' @export
 .s4_ols <- function(X, y) {
   X <- as.matrix(X); y <- as.numeric(y)
   n <- nrow(X); p <- ncol(X)
@@ -208,6 +404,16 @@ NULL
 ## Upper-triangular inverse by back substitution. Floors the pivot rather
 ## than testing a condition number, so a rank-deficient design gives the
 ## same large numbers in both arms instead of one raising.
+#' # Upper-triangular inverse by back substitution. Floors the pivot
+#' rather
+#'
+#' # than testing a condition number, so a rank-deficient design gives
+#' the # same large numbers in both arms instead of one raising.
+#'
+#' @param R See Usage.
+#' @param p See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .s4_triinv <- function(R, p) {
   out <- matrix(0, p, p)
   for (j in seq_len(p)) {
@@ -224,6 +430,15 @@ NULL
 ## Optimal assignment, Kuhn-Munkres shortest-augmenting-path form. Exact,
 ## O(n^3). Ties broken by the first strictly improving index so both arms
 ## walk the same path. Returns 0-based column for each row.
+#' # Optimal assignment, Kuhn-Munkres shortest-augmenting-path form.
+#' Exact,
+#'
+#' # O(n^3). Ties broken by the first strictly improving index so both
+#' arms # walk the same path. Returns 0-based column for each row.
+#'
+#' @param cost See Usage.
+#' @return The value of \code{ans}, as built in the body.
+#' @export
 .s4_hungarian <- function(cost) {
   Cst <- as.matrix(cost); n <- nrow(Cst)
   INF <- Inf
@@ -265,6 +480,16 @@ NULL
 }
 
 ## Two-way ANOVA mean squares for the intraclass correlations.
+#' # Two-way ANOVA mean squares for the intraclass correlations
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param subject See Usage.
+#' @param rater See Usage.
+#' @return A list with \code{ms_r}, \code{ms_c}, \code{ms_e}, \code{k}, \code{n}.
+#' @export
 .s4_icc_ms <- function(y, subject, rater) {
   yv <- as.numeric(y)
   sv <- as.integer(round(as.numeric(subject)))
@@ -287,6 +512,15 @@ NULL
 ## Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid of
 ## 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
 ## optimiser, so the arms cannot land on different local optima.
+#' # Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid
+#' of
+#'
+#' # 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
+#' # optimiser, so the arms cannot land on different local optima.
+#'
+#' @param x See Usage.
+#' @return A list with \code{k}, \code{sigma}.
+#' @export
 .s4_gpdfit <- function(x) {
   N <- length(x)
   if (N < 5L) return(list(k = NaN, sigma = NaN))
@@ -309,6 +543,14 @@ NULL
 }
 
 ## Pareto-smoothed importance sampling on log weights.
+#' # Pareto-smoothed importance sampling on log weights
+#'
+#' Part of the s04core implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lw See Usage.
+#' @return A list with \code{lw}, \code{k}.
+#' @export
 .s4_psis <- function(lw) {
   lw <- as.numeric(lw); Sn <- length(lw)
   lw <- lw - max(lw)

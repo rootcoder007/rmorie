@@ -15,11 +15,27 @@
 .OFFLRL_VARIANTS <- c("H", "rho", "mu")
 .OFFLRL_BACKUPS <- c("max", "pi")
 
+#' .offlrl_logsumexp
+#'
+#' Part of the offlrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .offlrl_logsumexp <- function(v) {
   m <- max(v)
   m + log(sum(exp(v - m)))
 }
 
+#' .offlrl_softmax
+#'
+#' Part of the offlrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .offlrl_softmax <- function(v) {
   m <- max(v)
   e <- exp(v - m)
@@ -27,6 +43,17 @@
   e / s
 }
 
+#' .offlrl_as_dist
+#'
+#' Part of the offlrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param S See Usage.
+#' @param A See Usage.
+#' @param name See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .offlrl_as_dist <- function(d, S, A, name) {
   if (is.null(d)) return(NULL)
   if (is.function(d)) {
@@ -55,6 +82,15 @@
   out
 }
 
+#' .offlrl_key
+#'
+#' Part of the offlrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param a See Usage.
+#' @return A character value.
+#' @export
 .offlrl_key <- function(s, a) paste0(s, "\r", a)
 
 #' offlrl
@@ -305,6 +341,13 @@ offline_rl_cql <- offlrl
 offlinerlcql <- offlrl
 conservative_q_learning <- offlrl
 
+#' .offlrl_cheatsheet
+#'
+#' Part of the offlrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .offlrl_cheatsheet <- function() {
   paste("offlrl: CQL (Kumar 2020). Fitted Q plus alpha*(push DOWN ",
         "E_mu[Q] - push UP E_pi_beta[Q]) so the Q-function LOWER ",

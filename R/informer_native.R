@@ -43,11 +43,29 @@
 .informer_EPS <- 1e-12
 .informer_MEASURES <- c("exact", "maxmean")
 
+#' .informer_to_rows
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .informer_to_rows <- function(x) {
   M <- as.matrix(x)
   lapply(seq_len(nrow(M)), function(i) as.numeric(M[i, ]))
 }
 
+#' .informer_logits
+#'
+#' Part of the informer_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param q See Usage.
+#' @param K See Usage.
+#' @param scale See Usage.
+#' @return A vector, from \code{sapply}.
+#' @export
 .informer_logits <- function(q, K, scale) {
   sapply(K, function(kj) scale * sum(q * kj))
 }

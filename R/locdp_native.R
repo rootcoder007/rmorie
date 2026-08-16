@@ -22,6 +22,13 @@
 
 # Private helper: compute Warner flip probability for a given epsilon.
 # p = 1 / (1 + exp(epsilon))  ->  achieves epsilon-local-DP.
+#' Private helper: compute Warner flip probability for a given epsilon
+#'
+#' p = 1 / (1 + exp(epsilon)) -> achieves epsilon-local-DP.
+#'
+#' @param epsilon See Usage.
+#' @return A numeric value.
+#' @export
 .locdp_flip_prob <- function(epsilon) {
   1.0 / (1.0 + exp(epsilon))
 }

@@ -1,0 +1,27 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.stahdo_mad}
+\alias{.stahdo_mad}
+\title{.stahdo_mad}
+\usage{
+.stahdo_mad(v, consistent = TRUE)
+}
+\arguments{
+\item{v}{See Usage.}
+\item{consistent}{Defaults to \code{TRUE}.}
+}
+\description{
+Part of the stahdo_native implementation; see the file header for the source it follows.
+}
+\value{
+One of two values, depending on the branch taken.
+}
+\references{
+----------
+Maronna, R. A. & Yohai, V. J. (1995) "The behavior of the
+Stahel-Donoho robust multivariate estimator", *Journal of the
+American Statistical Association* 90(429), 330-341,
+doi:10.1080/01621459.1995.10476517.
+}
+\keyword{internal}

@@ -84,6 +84,14 @@
   signed_step = list(cuts = c(-1.96, 0, 1.96), groups = c(0L, 1L, 2L, -1L))
 )
 
+#' .bnsadt_nfree
+#'
+#' Part of the bnsadt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param family See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .bnsadt_nfree <- function(family) {
   g <- .BNSADT_FAMILIES[[family]]$groups
   g <- g[g >= 0L]
@@ -91,6 +99,15 @@
 }
 
 # Per-interval publication probabilities from the free parameters.
+#' Per-interval publication probabilities from the free parameters
+#'
+#' Part of the bnsadt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param family See Usage.
+#' @param params See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .bnsadt_betas <- function(family, params) {
   g <- .BNSADT_FAMILIES[[family]]$groups
   vapply(g, function(k) if (k < 0L) 1 else params[k + 1L], numeric(1))
@@ -114,6 +131,18 @@ morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
 # E[p(X/sigma)] under the marginal law of an unselected study. A finite
 # sum of normal increments because p is a step function -- the reason no
 # quadrature appears anywhere in this module.
+#' E[p(X/sigma)] under the marginal law of an unselected study. A finite
+#'
+#' sum of normal increments because p is a step function -- the reason
+#' no quadrature appears anywhere in this module.
+#'
+#' @param sigma See Usage.
+#' @param mu See Usage.
+#' @param tau See Usage.
+#' @param family See Usage.
+#' @param params See Usage.
+#' @return The value of \code{.w3_csum}.
+#' @export
 .bnsadt_expected_p <- function(sigma, mu, tau, family, params) {
   cuts <- .BNSADT_FAMILIES[[family]]$cuts
   betas <- .bnsadt_betas(family, params)
@@ -260,6 +289,18 @@ morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
 # P(X <= x | Theta = theta) for a PUBLISHED study. Numerator and
 # denominator are both finite sums of normal increments, so this is
 # exact rather than quadrature.
+#' P(X <= x | Theta = theta) for a PUBLISHED study. Numerator and
+#'
+#' denominator are both finite sums of normal increments, so this is
+#' exact rather than quadrature.
+#'
+#' @param x See Usage.
+#' @param theta See Usage.
+#' @param sigma See Usage.
+#' @param family See Usage.
+#' @param params See Usage.
+#' @return A numeric value.
+#' @export
 .bnsadt_pub_cdf <- function(x, theta, sigma, family, params) {
   cuts <- .BNSADT_FAMILIES[[family]]$cuts
   betas <- .bnsadt_betas(family, params)

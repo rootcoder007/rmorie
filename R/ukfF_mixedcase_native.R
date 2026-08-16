@@ -6,6 +6,14 @@
 # 12-14 and the transformation procedure (local copy
 # fetched-wave3/julier-uhlmann-1997-ukf.pdf).
 
+#' .ukfF_chol
+#'
+#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param a See Usage.
+#' @return The value of \code{l}, as built in the body.
+#' @export
 .ukfF_chol <- function(a) {
   k <- nrow(a)
   l <- matrix(0, k, k)
@@ -35,6 +43,15 @@
   l
 }
 
+#' Solve A X = B for X (small systems, partial pivoting, Gauss-Jordan)
+#'
+#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param a See Usage.
+#' @param b_cols See Usage.
+#' @return The value of \code{[}.
+#' @export
 .ukfF_solve_mat <- function(a, b_cols) {
   # solve A X = B for X (small systems, partial pivoting, Gauss-Jordan)
   k <- nrow(a)
@@ -62,6 +79,16 @@
   m[, (k + 1):(k + nb), drop = FALSE]
 }
 
+#' .ukfF_sigma_points
+#'
+#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param x See Usage.
+#' @param P See Usage.
+#' @param kappa See Usage.
+#' @return A list with \code{pts}, \code{w}.
+#' @export
 .ukfF_sigma_points <- function(x, P, kappa) {
   n <- length(x)
   scale <- n + kappa
@@ -80,6 +107,16 @@
   list(pts = pts, w = w)
 }
 
+#' .ukfF_ut
+#'
+#' Part of the ukfF_mixedcase_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param pts See Usage.
+#' @param w See Usage.
+#' @param fun See Usage.
+#' @return A list with \code{ys}, \code{mean}, \code{cov}.
+#' @export
 .ukfF_ut <- function(pts, w, fun) {
   np <- nrow(pts)
   # size the output by what fun RETURNS, not by the input dimension --

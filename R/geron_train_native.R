@@ -39,12 +39,29 @@
 
 # ------------------------------------------------------------ helpers
 
+#' .morie_gr_fin
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param x See Usage.
+#' @param name See Usage.
+#' @return Invisibly,a logical value.
+#' @export
 .morie_gr_fin <- function(x, name) {
   .morie_gr_need(all(is.finite(x)), paste0(name, " must be finite."))
   invisible(TRUE)
 }
 
 # np.atleast_2d: a vector becomes a ONE-ROW matrix.
+#' Np.atleast_2d: a vector becomes a ONE-ROW matrix
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .morie_gr_a2d <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -58,6 +75,16 @@
 }
 
 # Box-Muller normals off the reference LCG, cos then sin per pair.
+#' Box-Muller normals off the reference LCG, cos then sin per pair
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param count See Usage.
+#' @param seed See Usage.
+#' @param clamp Defaults to \code{FALSE}.
+#' @return The value of \code{[}.
+#' @export
 .morie_gr_lcg_normals <- function(count, seed, clamp = FALSE) {
   count <- as.integer(count)
   if (count <= 0L) {
@@ -80,6 +107,16 @@
 }
 
 # LCG Fisher-Yates over 0..n-1, exactly the Python loop (i from n-1 down).
+#' LCG Fisher-Yates over 0..n-1, exactly the Python loop (i from n-1
+#' down)
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param n See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{perm}, as built in the body.
+#' @export
 .morie_gr_lcg_perm <- function(n, seed) {
   n <- as.integer(n)
   perm <- seq_len(n) - 1L
@@ -99,6 +136,14 @@
 }
 
 # grsig kernel: the two-branch overflow-safe logistic.
+#' Grsig kernel: the two-branch overflow-safe logistic
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_gr_sigmoid_vec <- function(z) {
   z <- as.numeric(z)
   out <- numeric(length(z))
@@ -110,6 +155,14 @@
 }
 
 # grn021 kernel.
+#' Grn021 kernel
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_softmax_vec <- function(s) {
   s <- as.numeric(s)
   .morie_gr_need(length(s) > 0L, "score vector is empty.")
@@ -119,6 +172,17 @@
 }
 
 # attsdp / grsdpa kernel. mask: logical matrix, TRUE = attend.
+#' Attsdp / grsdpa kernel. mask: logical matrix, TRUE = attend
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param Q See Usage.
+#' @param K See Usage.
+#' @param V See Usage.
+#' @param mask Defaults to \code{NULL}.
+#' @return A list with \code{output}, \code{weights}, \code{scores}.
+#' @export
 .morie_gr_attend <- function(Q, K, V, mask = NULL) {
   Q <- .morie_gr_a2d(Q)
   K <- .morie_gr_a2d(K)
@@ -142,6 +206,16 @@
 }
 
 # grmse core, shared by every regularised cost and every GD driver here.
+#' Grmse core, shared by every regularised cost and every GD driver here
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{cost}, \code{rmse}, \code{residuals}, \code{predictions}, \code{n}.
+#' @export
 .morie_gr_mse_core <- function(X, y, theta) {
   X <- .morie_gr_a2d(X)
   y <- as.numeric(y)
@@ -163,6 +237,14 @@
   )
 }
 
+#' .morie_gr_logaddexp0
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_logaddexp0 <- function(z) pmax(z, 0) + log1p(exp(-abs(z)))
 
 # ------------------------------------------------------------- grdino
@@ -991,6 +1073,14 @@ morie_gr_dual <- function(value, deriv = 0) {
   )
 }
 
+#' .morie_gr_lift
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param o See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_gr_lift <- function(o) {
   if (inherits(o, "morie_gr_dual")) {
     o
@@ -3608,6 +3698,15 @@ morie_geron_ch4_softmax_function <- function(s, k, K = NULL) {
   )
 }
 
+#' .morie_gr_score_matrix
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param X See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{X}, \code{theta}, \code{scores}.
+#' @export
 .morie_gr_score_matrix <- function(X, theta) {
   X <- .morie_gr_a2d(X)
   Tm <- if (is.matrix(theta)) theta else matrix(as.numeric(theta), ncol = 1L)
@@ -3633,6 +3732,15 @@ morie_geron_softmax_score_grsmxs <- function(X, theta) {
   )
 }
 
+#' .morie_gr_probability_matrix
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param X See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{X}, \code{theta}, \code{probabilities}, \code{scores}.
+#' @export
 .morie_gr_probability_matrix <- function(X, theta) {
   r <- .morie_gr_score_matrix(X, theta)
   P <- t(apply(r$scores, 1L, .morie_gr_softmax_vec))
@@ -3656,6 +3764,16 @@ morie_geron_softmax_probability <- function(X, theta) {
   )
 }
 
+#' .morie_gr_one_hot
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param Y See Usage.
+#' @param K See Usage.
+#' @param m See Usage.
+#' @return The value of \code{Y}, as built in the body.
+#' @export
 .morie_gr_one_hot <- function(Y, K, m) {
   if (!is.matrix(Y) || (1L %in% dim(Y) && K != 1L)) {
     idx <- as.numeric(Y)
@@ -3701,6 +3819,16 @@ morie_geron_softmax_cross_entropy_cost <- function(X, Y, theta) {
   )
 }
 
+#' .morie_gr_gradient_matrix
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param theta See Usage.
+#' @return A list with \code{X}, \code{P}, \code{Yh}, \code{G}.
+#' @export
 .morie_gr_gradient_matrix <- function(X, Y, theta) {
   r <- .morie_gr_probability_matrix(X, theta)
   P <- r$probabilities
@@ -4477,6 +4605,15 @@ morie_geron_ppo_clipped_objective <- function(ratios, advantages, eps = 0.2) {
 
 # --------------------------------------------------- grroc / grprc
 
+#' .morie_gr_sorted_counts
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param y_true See Usage.
+#' @param y_scores See Usage.
+#' @return A list with \code{y}, \code{s}, \code{P}, \code{N}.
+#' @export
 .morie_gr_sorted_counts <- function(y_true, y_scores) {
   yt <- as.vector(y_true)
   s <- as.numeric(y_scores)
@@ -4957,6 +5094,17 @@ morie_geron_pyramid_vit_stage <- function(X, WQ, WK, WV, reduction_ratio = 2) {
 
 # ------------------------------------------------------ grvpi / grqpi
 
+#' .morie_gr_check_mdp
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param policy See Usage.
+#' @param transitions See Usage.
+#' @param rewards See Usage.
+#' @param gamma See Usage.
+#' @return A list with \code{pi}, \code{P}, \code{R}, \code{gamma}, \code{S}, \code{A}.
+#' @export
 .morie_gr_check_mdp <- function(policy, transitions, rewards, gamma) {
   P <- transitions
   .morie_gr_need(length(dim(P)) == 3L, "transitions must be (S, A, S').")
@@ -4994,6 +5142,17 @@ morie_geron_pyramid_vit_stage <- function(X, WQ, WK, WV, reduction_ratio = 2) {
   list(pi = pi, P = P, R = R, gamma = gamma, S = S, A = A)
 }
 
+#' .morie_gr_policy_evaluation
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param policy See Usage.
+#' @param transitions See Usage.
+#' @param rewards See Usage.
+#' @param gamma See Usage.
+#' @return A list with \code{V}, \code{pi}, \code{P}, \code{R}, \code{r_sa}, \code{gamma}, \code{S}, \code{A}.
+#' @export
 .morie_gr_policy_evaluation <- function(policy, transitions, rewards, gamma) {
   m <- .morie_gr_check_mdp(policy, transitions, rewards, gamma)
   S <- m$S
@@ -5907,10 +6066,27 @@ morie_geron_silhouette_score <- function(X, labels) {
 
 # -------------------------------------------------------------- grsmd
 
+#' .morie_gr_sym_is_const
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param e See Usage.
+#' @return A logical value.
+#' @export
 .morie_gr_sym_is_const <- function(e) is.numeric(e) && length(e) == 1L
 .morie_gr_sym_unary <- c("sin", "cos", "exp", "log", "neg")
 .morie_gr_sym_binary <- c("+", "-", "*", "/", "^")
 
+#' .morie_gr_sym_eval
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param e See Usage.
+#' @param env See Usage.
+#' @return The value of \code{switch}.
+#' @export
 .morie_gr_sym_eval <- function(e, env) {
   if (.morie_gr_sym_is_const(e)) {
     return(as.numeric(e))
@@ -5954,6 +6130,14 @@ morie_geron_silhouette_score <- function(X, labels) {
   )
 }
 
+#' .morie_gr_sym_simplify
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param e See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_gr_sym_simplify <- function(e) {
   if (.morie_gr_sym_is_const(e) || (is.character(e) && length(e) == 1L)) {
     return(e)
@@ -6008,6 +6192,15 @@ morie_geron_silhouette_score <- function(X, labels) {
   c(list(op), args)
 }
 
+#' .morie_gr_sym_diff
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param e See Usage.
+#' @param var See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_gr_sym_diff <- function(e, var) {
   if (.morie_gr_sym_is_const(e)) {
     return(0)
@@ -6069,6 +6262,14 @@ morie_geron_silhouette_score <- function(X, labels) {
   list("*", outer_e, inner)
 }
 
+#' .morie_gr_sym_str
+#'
+#' Part of the geron_train_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param e See Usage.
+#' @return A character value.
+#' @export
 .morie_gr_sym_str <- function(e) {
   if (.morie_gr_sym_is_const(e)) {
     return(format(e))

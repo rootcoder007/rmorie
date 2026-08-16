@@ -64,6 +64,14 @@ rgisint <- function(emg, force, fs, rest_level = 0) {
        method = "Rangayyan (2024) Sect. 5.11 pp.294-296, RMS per held isometric level; eq. (5.28) for r^2")
 }
 
+#' .rgisint_runs
+#'
+#' Part of the rgisint implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .rgisint_runs <- function(f) {
   out <- list()
   i <- 1L

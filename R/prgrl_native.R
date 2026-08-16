@@ -73,6 +73,14 @@
 # paper makes is about the speed of convergence and the quality of the
 # minimum reached, not about a formula.
 
+#' .prgrl_to_rows
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .prgrl_to_rows <- function(X) {
   if (is.matrix(X)) {
     lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -84,10 +92,26 @@
   }
 }
 
+#' .prgrl_to_vec
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .prgrl_to_vec <- function(x) {
   as.numeric(as.vector(x))
 }
 
+#' .prgrl_rng
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{function}.
+#' @export
 .prgrl_rng <- function(seed) {
   st <- as.numeric(seed) %% 2147483648
   if (st == 0L) st <- 1L
@@ -99,6 +123,14 @@
   }
 }
 
+#' .prgrl_gauss
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @return A numeric value.
+#' @export
 .prgrl_gauss <- function(r) {
   u <- max(r(), 1e-12)
   v <- r()
@@ -223,6 +255,18 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
   )
 }
 
+#' .prgrl_perceptron
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param order See Usage.
+#' @param updates See Usage.
+#' @param w0 See Usage.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 .prgrl_perceptron <- function(X, y, order, updates, w0) {
   p <- length(X[[1]])
   w <- as.numeric(w0)
@@ -243,6 +287,16 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
   w
 }
 
+#' .prgrl_error
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .prgrl_error <- function(X, y, w) {
   p <- length(X[[1]])
   bad <- 0
@@ -452,6 +506,13 @@ easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
   )
 }
 
+#' .prgrl_cheatsheet
+#'
+#' Part of the prgrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .prgrl_cheatsheet <- function() {
   "prgrl: curriculum learning (Bengio et al. 2009). Q_lambda(z) proportional to W_lambda(z) P(z) with W_1 = 1; it is a curriculum only if H(Q_lambda) increases and W_lambda(z) never falls as lambda grows (eqns 3-4), which is checkable and is checked. prgrl trains the same learner on the schedule and on the shuffled data and compares HELD-OUT error under a fixed update budget, which is Section 4.2's experiment; easy_only_fit is Section 4.1's."
 }

@@ -79,6 +79,16 @@
 # language's power operator: R uses repeated squaring for an integer
 # exponent and Python calls the C library's pow, and they disagree in
 # the last bit.
+#' X to a small integer power, by repeated multiplication. Not the
+#'
+#' language\'s power operator: R uses repeated squaring for an integer
+#' exponent and Python calls the C library\'s pow, and they disagree in
+#' the last bit.
+#'
+#' @param x See Usage.
+#' @param k See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .glides_ipow <- function(x, k) {
   p <- 1
   k <- as.integer(k)
@@ -86,6 +96,15 @@
   p
 }
 
+#' .glides_merge
+#'
+#' Part of the glides_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param base See Usage.
+#' @param over See Usage.
+#' @return The value of \code{base}, as built in the body.
+#' @export
 .glides_merge <- function(base, over) {
   if (is.null(over)) return(base)
   for (nm in names(over)) base[[nm]] <- over[[nm]]
@@ -229,6 +248,15 @@ morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
   list(total = total, parts = parts, order = order)
 }
 
+#' .glides_dist
+#'
+#' Part of the glides_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .glides_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Score a pose in the Glide form

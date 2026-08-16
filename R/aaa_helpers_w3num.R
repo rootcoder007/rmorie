@@ -21,6 +21,14 @@
 #                run the SAME algorithm.
 
 # Neumaier-compensated sum. Not sum(): see the header.
+#' Neumaier-compensated sum. Not sum(): see the header
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .w3_csum <- function(v) {
   s <- 0; cc <- 0
   for (t in v) {
@@ -32,6 +40,15 @@
 }
 
 # Compensated dot product. Not sum(a * b), same reason.
+#' Compensated dot product. Not sum(a * b), same reason
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .w3_dot <- function(a, b) {
   n <- length(a)
   if (n == 0L) return(0)
@@ -46,6 +63,14 @@
 }
 
 # log(sum(exp(v))), shifted by the maximum so it cannot overflow.
+#' Log(sum(exp(v))), shifted by the maximum so it cannot overflow
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .w3_logsumexp <- function(v) {
   if (length(v) == 0L) return(-Inf)
   m <- max(v)
@@ -54,6 +79,14 @@
 }
 
 # Lower Cholesky factor L with A = L L'. Explicit, not chol().
+#' Lower Cholesky factor L with A = L L\'. Explicit, not chol()
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return The value of \code{lo}, as built in the body.
+#' @export
 .w3_chol <- function(a) {
   p <- nrow(a)
   lo <- matrix(0, p, p)
@@ -71,6 +104,15 @@
 }
 
 # Solve L L' x = b by forward then back substitution.
+#' Solve L L\' x = b by forward then back substitution
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lo See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .w3_solve_chol <- function(lo, b) {
   p <- nrow(lo)
   z <- numeric(p)
@@ -88,6 +130,14 @@
 }
 
 # (L L')^-1, column by column from the factor.
+#' (L L\')^-1, column by column from the factor
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lo See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .w3_inv_from_chol <- function(lo) {
   p <- nrow(lo)
   cols <- lapply(seq_len(p), function(j) {
@@ -100,6 +150,15 @@
 }
 
 # Least squares by the normal equations.
+#' Least squares by the normal equations
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param design See Usage.
+#' @return A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv}, \code{fitted}, \code{chol}.
+#' @export
 .w3_ols <- function(y, design) {
   n <- length(y)
   p <- ncol(design)
@@ -121,6 +180,14 @@
             -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5)
 
 # Lanczos log-gamma. Not lgamma(): Python's is a different routine.
+#' Lanczos log-gamma. Not lgamma(): Python\'s is a different routine
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .w3_lgamma <- function(z) {
   x <- z
   tmp <- x + 5.5
@@ -134,6 +201,15 @@
 }
 
 # Q(a, x) by Lentz's continued fraction.
+#' Q(a, x) by Lentz\'s continued fraction
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .w3_gammcf <- function(a, x) {
   tiny <- 1e-300
   b <- x + 1 - a
@@ -159,6 +235,16 @@
 # continued fraction for the complement above: the crossover is where
 # each is the convergent one, and using the wrong side is where a
 # hand-rolled version loses its digits.
+#' Regularised lower incomplete gamma P(a, x). Series below a+1, the
+#'
+#' continued fraction for the complement above: the crossover is where
+#' each is the convergent one, and using the wrong side is where a
+#' hand-rolled version loses its digits.
+#'
+#' @param a See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .w3_gammp <- function(a, x) {
   if (x < 0 || a <= 0) stop("gammp: need a > 0 and x >= 0")
   if (x == 0) return(0)
@@ -180,6 +266,15 @@
 # Regularised upper incomplete gamma Q(a, x). Computed without forming
 # 1 - P when x is large, so the far tail keeps its significant digits
 # instead of cancelling against 1.
+#' Regularised upper incomplete gamma Q(a, x). Computed without forming
+#'
+#' 1 - P when x is large, so the far tail keeps its significant digits
+#' instead of cancelling against 1.
+#'
+#' @param a See Usage.
+#' @param x See Usage.
+#' @return The value of \code{.w3_gammcf}.
+#' @export
 .w3_gammq <- function(a, x) {
   if (x < 0 || a <= 0) stop("gammq: need a > 0 and x >= 0")
   if (x == 0) return(1)
@@ -191,22 +286,59 @@
 # Phi(z) = 1/2 (1 + sign(z) P(1/2, z^2/2)) is an identity, not an
 # approximation, so this is exactly as accurate as gammp -- and it runs
 # the same series as the Python arm rather than R's own pnorm.
+#' Standard normal CDF via the incomplete gamma
+#'
+#' Phi(z) = 1/2 (1 + sign(z) P(1/2, z^2/2)) is an identity, not an
+#' approximation, so this is exactly as accurate as gammp -- and it runs
+#' the same series as the Python arm rather than R\'s own pnorm.
+#'
+#' @param z See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .w3_ncdf <- function(z) {
   if (z == 0) return(0.5)
   p <- .w3_gammp(0.5, 0.5 * z * z)
   if (z > 0) 0.5 * (1 + p) else 0.5 * (1 - p)
 }
 
+#' .w3_npdf
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .w3_npdf <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
 
 # Standard normal quantile by bisection on the CDF: slower than a
 # rational approximation and exactly as accurate as the CDF it inverts,
 # which is the property that matters here.
+#' Standard normal quantile by bisection on the CDF: slower than a
+#'
+#' rational approximation and exactly as accurate as the CDF it inverts,
+#' which is the property that matters here.
+#'
+#' @param p See Usage.
+#' @param lo Defaults to \code{-40}.
+#' @param hi Defaults to \code{40}.
+#' @return The value of \code{.w3_bisect}.
+#' @export
 .w3_nppf <- function(p, lo = -40, hi = 40) {
   if (!(p > 0 && p < 1)) stop("nppf: p must lie strictly inside (0, 1)")
   .w3_bisect(function(z) .w3_ncdf(z) - p, lo, hi)
 }
 
+#' .w3_betacf
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @return The value of \code{h}, as built in the body.
+#' @export
 .w3_betacf <- function(a, b, x) {
   tiny <- 1e-30
   qab <- a + b; qap <- a + 1; qam <- a - 1
@@ -241,6 +373,16 @@
 }
 
 # Regularised incomplete beta I_x(a, b).
+#' Regularised incomplete beta I_x(a, b)
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .w3_betainc <- function(a, b, x) {
   if (x <= 0) return(0)
   if (x >= 1) return(1)
@@ -251,12 +393,33 @@
 }
 
 # Upper tail of Student's t.
+#' Upper tail of Student\'s t
+#'
+#' Part of the helpers_w3num implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param df See Usage.
+#' @return A numeric value.
+#' @export
 .w3_t_sf <- function(t, df) 0.5 * .w3_betainc(df / 2, 0.5, df / (df + t * t))
 
 # Root of f on a bracketing interval, by plain bisection. A fixed
 # iteration count rather than a tolerance loop: the two arms then take
 # exactly the same number of steps and end at exactly the same point,
 # which a tolerance test cannot guarantee.
+#' Root of f on a bracketing interval, by plain bisection. A fixed
+#'
+#' iteration count rather than a tolerance loop: the two arms then take
+#' exactly the same number of steps and end at exactly the same point,
+#' which a tolerance test cannot guarantee.
+#'
+#' @param f See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param iters Defaults to \code{200L}.
+#' @return A numeric value.
+#' @export
 .w3_bisect <- function(f, lo, hi, iters = 200L) {
   flo <- f(lo); fhi <- f(hi)
   if (flo == 0) return(lo)
@@ -276,6 +439,18 @@
 # panels, not adaptive: an adaptive rule branches on a tolerance test and
 # the two arms would take different numbers of subdivisions on the very
 # integrals where it matters.
+#' Composite Simpson on n panels (rounded up to an even number). Fixed
+#'
+#' panels, not adaptive: an adaptive rule branches on a tolerance test
+#' and the two arms would take different numbers of subdivisions on the
+#' very integrals where it matters.
+#'
+#' @param f See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param n Defaults to \code{200L}.
+#' @return A numeric value.
+#' @export
 .w3_simpson <- function(f, a, b, n = 200L) {
   n <- as.integer(n)
   if (n %% 2L == 1L) n <- n + 1L
@@ -296,6 +471,27 @@
 # one: x0 plus a step along each coordinate, scaled by the coordinate
 # when it is non-zero so the simplex is not tiny in a large parameter and
 # huge in a small one. A fixed iteration count keeps the arms in step.
+#' Nelder-Mead simplex minimisation. Derivative-free and deterministic
+#'
+#' given the starting point, which is what a likelihood with a
+#' step-function selection term needs -- the objective is not
+#' differentiable at the cutoffs, so a gradient method would be
+#' answering a question the model does not pose. The initial simplex is
+#' the standard one: x0 plus a step along each coordinate, scaled by the
+#' coordinate when it is non-zero so the simplex is not tiny in a large
+#' parameter and huge in a small one. A fixed iteration count keeps the
+#' arms in step.
+#'
+#' @param f See Usage.
+#' @param x0 See Usage.
+#' @param step Defaults to \code{0.1}.
+#' @param iters Defaults to \code{400L}.
+#' @param alpha Defaults to \code{1}.
+#' @param gamma Defaults to \code{2}.
+#' @param rho Defaults to \code{0.5}.
+#' @param sigma Defaults to \code{0.5}.
+#' @return A list with \code{x}, \code{value}.
+#' @export
 .w3_nelder_mead <- function(f, x0, step = 0.1, iters = 400L, alpha = 1,
                             gamma = 2, rho = 0.5, sigma = 0.5) {
   n <- length(x0)

@@ -5,6 +5,15 @@
 
 PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 
+#' .mdp
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param gamma See Usage.
+#' @return A list with \code{nS}, \code{nA}.
+#' @export
 .mdp <- function(T, gamma) {
   if (length(T) == 0) stop("birl: the transition model is empty")
   nS <- length(T)
@@ -26,6 +35,15 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
   list(nS = nS, nA = nA)
 }
 
+#' .solve
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .solve <- function(A, b) {
   n <- nrow(A)
   M <- cbind(A, b)
@@ -122,6 +140,16 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   list(policy = pi, V = V, Q = q_values(T, R, gamma, V), sweeps = sweeps)
 }
 
+#' .birl_log_likelihood
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Q See Usage.
+#' @param observations See Usage.
+#' @param alpha Defaults to \code{1}.
+#' @return The value of \code{total}, as built in the body.
+#' @export
 .birl_log_likelihood <- function(Q, observations, alpha = 1) {
   if (alpha <= 0) stop("birl: alpha must be positive")
   if (length(observations) == 0) stop("birl: no observations")
@@ -168,6 +196,14 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
   -(J * sum(R[pairs[, 1]] * R[pairs[, 2]]) + H * sum(R))
 }
 
+#' .rng
+#'
+#' Part of the birl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{f}, as built in the body.
+#' @export
 .rng <- function(seed) {
   st <- as.integer(seed); if (st <= 0) st <- 1L
   f <- function() {

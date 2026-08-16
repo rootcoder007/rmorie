@@ -24,12 +24,30 @@
 # LAPACK and would drift from the Python arm in the last few bits,
 # which a 1e-9 parity gate on forecasts of order 30 would catch.
 
+#' .morie_jo_vec
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param name Defaults to \code{"x"}.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .morie_jo_vec <- function(x, name = "x") {
   v <- as.numeric(x)
   if (length(v) == 0L) stop(sprintf("%s must be non-empty.", name), call. = FALSE)
   v
 }
 
+#' .morie_jo_pair
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param yhat See Usage.
+#' @return A list with \code{a}, \code{b}.
+#' @export
 .morie_jo_pair <- function(y, yhat) {
   a <- .morie_jo_vec(y, "y")
   b <- .morie_jo_vec(yhat, "yhat")
@@ -39,6 +57,14 @@
   list(a = a, b = b)
 }
 
+#' .morie_jo_med
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_jo_med <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -46,6 +72,15 @@
   if (n %% 2L == 1L) s[mid + 1L] else 0.5 * (s[mid] + s[mid + 1L])
 }
 
+#' .morie_jo_solve
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_jo_solve <- function(a, b) {
   n <- length(b)
   m <- cbind(matrix(as.numeric(unlist(a)), n, n, byrow = TRUE), as.numeric(b))
@@ -67,6 +102,15 @@
   vapply(seq_len(n), function(i) m[i, n + 1L] / m[i, i], numeric(1))
 }
 
+#' .morie_jo_ols
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return The value of \code{.morie_jo_solve}.
+#' @export
 .morie_jo_ols <- function(x, y) {
   x <- as.matrix(x)
   n <- nrow(x); p <- ncol(x)
@@ -386,8 +430,26 @@ morie_fourfeat <- function(n, period, k, start = 0) {
 
 .morie_jo_mlen <- c(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
+#' .morie_jo_leap
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @return A logical value.
+#' @export
 .morie_jo_leap <- function(y) (y %% 4 == 0 && y %% 100 != 0) || y %% 400 == 0
 
+#' .morie_jo_daynum
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param m See Usage.
+#' @param d See Usage.
+#' @return A numeric value.
+#' @export
 .morie_jo_daynum <- function(y, m, d) {
   days <- 0
   if (y >= 1970) {
@@ -705,6 +767,16 @@ morie_tsregmat <- function(x, lags, horizon = 1L) {
        xmean = mean(as.numeric(rows)))
 }
 
+#' .morie_jo_fitpred
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param y See Usage.
+#' @param newrow See Usage.
+#' @return A numeric value.
+#' @export
 .morie_jo_fitpred <- function(rows, y, newrow) {
   design <- cbind(rep(1, nrow(rows)), rows)
   beta <- .morie_jo_ols(design, y)
@@ -1057,6 +1129,15 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 # Deep architectures -- equations from the papers, not the book
 # =====================================================================
 
+#' .morie_jo_matvec
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param w See Usage.
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_jo_matvec <- function(w, v) {
   wm <- if (is.matrix(w)) w else do.call(rbind, w)
   if (ncol(wm) != length(v)) {
@@ -1065,21 +1146,71 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
   as.numeric(wm %*% v)
 }
 
+#' .morie_jo_softmax
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .morie_jo_softmax <- function(v) {
   ex <- exp(v - max(v))
   ex / sum(ex)
 }
 
+#' .morie_jo_ln
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param eps Defaults to \code{1e-05}.
+#' @return A numeric value.
+#' @export
 .morie_jo_ln <- function(v, eps = 1e-5) {
   m <- mean(v)
   (v - m) / sqrt(sum((v - m)^2) / length(v) + eps)
 }
 
+#' .morie_jo_elu
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_jo_elu <- function(t) ifelse(t > 0, t, expm1(t))
+#' .morie_jo_relu
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_jo_relu <- function(t) ifelse(t > 0, t, 0)
+#' .morie_jo_sigmoid
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_jo_sigmoid <- function(t) ifelse(t >= 0, 1 / (1 + exp(-t)),
                                         exp(t) / (1 + exp(t)))
 
+#' .morie_jo_maxpool
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param k See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_jo_maxpool <- function(v, k) {
   k <- as.integer(k)
   if (k < 1L) stop("pool kernel must be at least 1.", call. = FALSE)
@@ -1088,6 +1219,15 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
   vapply(starts, function(s) max(v[s:min(s + k - 1L, length(v))]), numeric(1))
 }
 
+#' .morie_jo_interp
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param length_ See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_jo_interp <- function(theta, length_) {
   n <- length(theta)
   if (n < 1L || length_ < 1L) stop("theta and length must be non-empty.", call. = FALSE)
@@ -1272,6 +1412,18 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
        residnorm = sqrt(sum(resid * resid)))
 }
 
+#' .morie_jo_glu
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gamma See Usage.
+#' @param w4 See Usage.
+#' @param b4 See Usage.
+#' @param w5 See Usage.
+#' @param b5 See Usage.
+#' @return A numeric value.
+#' @export
 .morie_jo_glu <- function(gamma, w4, b4, w5, b5) {
   a <- .morie_jo_matvec(w4, gamma) + b4
   b <- .morie_jo_matvec(w5, gamma) + b5
@@ -1324,6 +1476,19 @@ morie_tftnet <- function(a, w1, b1, w2, b2, w4, b4, w5, b5, wsel, bsel,
   out
 }
 
+#' .morie_jo_resblock
+#'
+#' Part of the ts_joseph implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param w1 See Usage.
+#' @param b1 See Usage.
+#' @param w2 See Usage.
+#' @param b2 See Usage.
+#' @param wskip See Usage.
+#' @return The value of \code{.morie_jo_ln}.
+#' @export
 .morie_jo_resblock <- function(x, w1, b1, w2, b2, wskip) {
   h <- .morie_jo_relu(.morie_jo_matvec(w1, x) + b1)
   out <- .morie_jo_matvec(w2, h) + b2

@@ -32,6 +32,21 @@
 # NOTE: the Python source for slowdp.stick_breaking is not held here;
 # the inverse-CDF form is the standard implementation and matches the
 # GHC stream one-for-one.
+#' Sethuraman stick-breaking for the GEM(alpha) distribution:
+#'
+#' w_1 = V_1, w_h = V_h * prod_{j<h}(1 - V_j), V_h ~ Beta(1, alpha).
+#' Drawn through the inverse CDF V = 1 - U^(1/alpha), consuming ONE
+#' uniform per stick from the shared generator `e`. This is the
+#' canonical construction used by the Python arm\'s sb.stick_breaking
+#' when it consumes from the GHC stream. NOTE: the Python source for
+#' slowdp.stick_breaking is not held here; the inverse-CDF form is the
+#' standard implementation and matches the GHC stream one-for-one.
+#'
+#' @param alpha See Usage.
+#' @param K See Usage.
+#' @param e See Usage.
+#' @return A list with \code{weights}.
+#' @export
 .morie_ddpest_stick_breaking <- function(alpha, K, e) {
   alpha <- as.numeric(alpha)
   K <- as.integer(K)

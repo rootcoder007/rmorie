@@ -10,6 +10,15 @@
 .cgnonl_BETA_RULES <- c("fletcher-reeves", "polak-ribiere", "polak-ribiere-plus")
 .cgnonl_SEARCHES <- c("fletcher-reeves", "exact-quadratic")
 
+#' .cgnonl_dot
+#'
+#' Part of the cgnonl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .cgnonl_dot <- function(a, b) sum(a * b)
 
 #' beta_fletcher_reeves
@@ -45,6 +54,16 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
   if (isTRUE(plus)) max(b, 0.0) else b
 }
 
+#' .cgnonl_beta
+#'
+#' Part of the cgnonl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rule See Usage.
+#' @param g_new See Usage.
+#' @param g_old See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .cgnonl_beta <- function(rule, g_new, g_old) {
   if (rule == "fletcher-reeves") return(beta_fletcher_reeves(g_new, g_old))
   if (rule == "polak-ribiere") return(beta_polak_ribiere(g_new, g_old, plus = FALSE))
@@ -165,6 +184,17 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
   list(t = best_t, x_new = best_x, f_new = best_f, g_new = best_g, n_eval = evals)
 }
 
+#' .cgnonl_exact_quadratic_step
+#'
+#' Part of the cgnonl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param p See Usage.
+#' @param g See Usage.
+#' @param hess_vec See Usage.
+#' @return A numeric value.
+#' @export
 .cgnonl_exact_quadratic_step <- function(x, p, g, hess_vec) {
   ap <- hess_vec(p)
   den <- .cgnonl_dot(p, ap)

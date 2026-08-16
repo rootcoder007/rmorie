@@ -42,22 +42,58 @@
 
 # ---- private helpers --------------------------------------------------
 
+#' .lggvls_vec
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .lggvls_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
 }
 
+#' .lggvls_mat
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{as.matrix}.
+#' @export
 .lggvls_mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   as.matrix(x)
 }
 
 # type-7 quantile (R default, matches numpy.quantile default)
+#' Type-7 quantile (R default, matches numpy.quantile default)
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param q See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .lggvls_quantile7 <- function(x, q) {
   as.numeric(stats::quantile(x, probs = q, type = 7, names = FALSE))
 }
 
 # IRLS logistic regression (no package dependencies)
+#' IRLS logistic regression (no package dependencies)
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param max_iter Defaults to \code{25L}.
+#' @param tol Defaults to \code{1e-08}.
+#' @return A list with \code{beta}, \code{p_hat}, \code{converged}.
+#' @export
 .lggvls_logistic_fit <- function(X, y, max_iter = 25L, tol = 1e-8) {
   n <- nrow(X)
   Xa <- cbind(1, X)
@@ -84,6 +120,18 @@
 }
 
 # IPW for a single time point, binary treatment
+#' IPW for a single time point, binary treatment
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param den_X See Usage.
+#' @param num_X See Usage.
+#' @param kind Defaults to \code{"binary"}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @return A list with \code{w}, \code{info}.
+#' @export
 .lggvls_ip_weights <- function(a, den_X, num_X, kind = "binary", stabilize = TRUE) {
   n <- length(a)
   if (kind != "binary") {
@@ -136,6 +184,16 @@
 }
 
 # weighted least squares, intercept added
+#' Weighted least squares, intercept added
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{sigma2}.
+#' @export
 .lggvls_wls <- function(X, y, w) {
   n <- length(y)
   if (is.null(X) || length(X) == 0L) {
@@ -160,12 +218,30 @@
 }
 
 # bind a list of length-n vectors into an n-by-p matrix
+#' Bind a list of length-n vectors into an n-by-p matrix
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cols See Usage.
+#' @param n See Usage.
+#' @return The value of \code{do.call}.
+#' @export
 .lggvls_bind <- function(cols, n) {
   if (length(cols) == 0L) return(NULL)
   do.call(cbind, cols)
 }
 
 # wrap a single vector/matrix as a one-element history
+#' Wrap a single vector/matrix as a one-element history
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param obj See Usage.
+#' @param allow_none Defaults to \code{FALSE}.
+#' @return The value of \code{list}.
+#' @export
 .lggvls_as_history <- function(obj, allow_none = FALSE) {
   if (is.null(obj)) {
     if (isTRUE(allow_none)) return(list(NULL))
@@ -182,6 +258,17 @@
 }
 
 # build columns at time k_time with `lag` earlier values
+#' Build columns at time k_time with `lag` earlier values
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L_hist See Usage.
+#' @param Y_hist Defaults to \code{NULL}.
+#' @param k_time Defaults to \code{0}.
+#' @param lag Defaults to \code{1}.
+#' @return The value of \code{cols}, as built in the body.
+#' @export
 .lggvls_lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
   cols    <- list()
   k_time  <- as.integer(k_time)
@@ -354,6 +441,13 @@ laggedval_iptw <- morie_lggvls
 laggedvaliptw  <- morie_lggvls
 
 # cheatsheet
+#' Cheatsheet
+#'
+#' Part of the lggvls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .lggvls_cheatsheet <- function() {
   paste("lggvls: sustained-exposure IPTW (Robins 1986). Weight =",
         "prod_k f(A_k|Abar_{k-1}) / f(A_k|Abar_{k-1}, Lbar_k,",

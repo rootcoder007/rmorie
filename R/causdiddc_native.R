@@ -21,6 +21,17 @@
 # weights, same DID_M switcher-vs-stayer construction, same payload
 # keys.
 
+#' .causdiddc_panel
+#'
+#' Part of the causdiddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param D See Usage.
+#' @param group See Usage.
+#' @param period See Usage.
+#' @return A list with \code{Y}, \code{D}, \code{g}, \code{t}, \code{n}.
+#' @export
 .causdiddc_panel <- function(Y, D, group, period) {
   Yv <- as.numeric(Y)
   Dv <- as.numeric(D)
@@ -43,6 +54,17 @@
 }
 
 # Collapse to (group, period) cells: mean Y, count, treatment.
+#' Collapse to (group, period) cells: mean Y, count, treatment
+#'
+#' Part of the causdiddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param D See Usage.
+#' @param g See Usage.
+#' @param t See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .causdiddc_cells <- function(Y, D, g, t) {
   keys <- paste0(g, "\r", t)        # ad-hoc separator that never appears
   uk   <- unique(keys)
@@ -64,6 +86,17 @@
 # The w_{g,t} of Theorem 1, from the residual of D on the two-way
 # fixed effects.  Alternating projections, iterated to convergence --
 # the within-transformation solver, not the matrix-form Frisch-Waugh.
+#' The w_{g,t} of Theorem 1, from the residual of D on the two-way
+#'
+#' fixed effects.  Alternating projections, iterated to convergence --
+#' the within-transformation solver, not the matrix-form Frisch-Waugh.
+#'
+#' @param D See Usage.
+#' @param group See Usage.
+#' @param period See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{weights}, \code{residual}.
+#' @export
 .causdiddc_twfe_weights <- function(D, group, period, weights = NULL) {
   Dv <- as.numeric(D)
   g  <- as.vector(group)
@@ -133,6 +166,17 @@
 }
 
 # The two-way fixed effects coefficient and its decomposition.
+#' The two-way fixed effects coefficient and its decomposition
+#'
+#' Part of the causdiddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param D See Usage.
+#' @param group See Usage.
+#' @param period See Usage.
+#' @return A list with \code{estimate}, \code{beta_fe}, \code{weights}, \code{n_negative}, \code{negative_mass}, \code{weight_sum}, \code{n_treated_cells}, \code{n}, \code{method}, \code{note}.
+#' @export
 .causdiddc_twfe <- function(Y, D, group, period) {
   p <- .causdiddc_panel(Y, D, group, period)
   w  <- .causdiddc_twfe_weights(p$D, p$g, p$t)
@@ -162,6 +206,17 @@
 }
 
 # The paper's DID_M estimator: switchers vs stayers, period by period.
+#' The paper\'s DID_M estimator: switchers vs stayers, period by period
+#'
+#' Part of the causdiddc_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param D See Usage.
+#' @param group See Usage.
+#' @param period See Usage.
+#' @return A list with \code{estimate}, \code{did_m}, \code{switches}, \code{n_switches}, \code{n_switching_obs}, \code{n}, \code{method}, \code{note}.
+#' @export
 .causdiddc_did_m <- function(Y, D, group, period) {
   p <- .causdiddc_panel(Y, D, group, period)
   cells <- .causdiddc_cells(p$Y, p$D, p$g, p$t)

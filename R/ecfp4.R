@@ -13,8 +13,25 @@
 .ecfp_mod <- 2147483647
 .ecfp_mul <- 1000003
 
+#' .ecfp_mix
+#'
+#' Part of the ecfp4 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param h See Usage.
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .ecfp_mix <- function(h, v) (h * .ecfp_mul + (v %% .ecfp_mod)) %% .ecfp_mod
 
+#' .ecfp_bonds
+#'
+#' Part of the ecfp4 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param adjacency See Usage.
+#' @return A list with \code{a}, \code{i}, \code{j}, \code{o}.
+#' @export
 .ecfp_bonds <- function(adjacency) {
   A <- .t1_mat(adjacency)
   a <- nrow(A)
@@ -27,6 +44,19 @@
   list(a = a, i = bi, j = bj, o = as.numeric(as.integer(bo)))
 }
 
+#' .ecfp_conninv
+#'
+#' Part of the ecfp4 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param B See Usage.
+#' @param atomnum See Usage.
+#' @param numhs See Usage.
+#' @param charge See Usage.
+#' @param inring See Usage.
+#' @param isodelta See Usage.
+#' @return The value of \code{inv}, as built in the body.
+#' @export
 .ecfp_conninv <- function(B, atomnum, numhs, charge, inring, isodelta) {
   a <- B$a
   deg <- integer(a)
@@ -44,11 +74,31 @@
   inv
 }
 
+#' .ecfp_envkey
+#'
+#' Part of the ecfp4 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @return A character value.
+#' @export
 .ecfp_envkey <- function(v) {
   if (!length(v)) return("")
   paste0(sprintf("%04d", sort(as.integer(v), method = "radix")), collapse = "")
 }
 
+#' .ecfp_morgan
+#'
+#' Part of the ecfp4 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param B See Usage.
+#' @param invariants See Usage.
+#' @param radius See Usage.
+#' @param nbits See Usage.
+#' @param use_bond_order Defaults to \code{TRUE}.
+#' @return A list with \code{bits}, \code{count}, \code{ident}.
+#' @export
 .ecfp_morgan <- function(B, invariants, radius, nbits, use_bond_order = TRUE) {
   a <- B$a
   nb <- length(B$i)
@@ -108,6 +158,16 @@
   list(bits = bits, count = cnt, ident = ident)
 }
 
+#' .ecfp_percol
+#'
+#' Part of the ecfp4 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @param a See Usage.
+#' @param default See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .ecfp_percol <- function(x, a, default) {
   if (is.null(x)) return(rep(default, a))
   v <- as.numeric(.t1_vec(x))

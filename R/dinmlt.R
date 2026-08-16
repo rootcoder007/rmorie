@@ -1,5 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+#' .dino_softmax
+#'
+#' Part of the dinmlt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @param tau See Usage.
+#' @param center Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .dino_softmax <- function(v, tau, center = NULL) {
   n <- length(v)
   cc <- if (is.null(center)) numeric(n) else center

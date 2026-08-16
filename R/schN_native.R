@@ -19,12 +19,28 @@
 
 .SCHN_EPS <- 1e-12
 
+#' .schn_mat
+#'
+#' Part of the schN_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .schn_mat <- function(x) {
   if (is.list(x) && !is.matrix(x)) return(do.call(rbind, x))
   if (is.matrix(x)) { storage.mode(x) <- "double"; return(x) }
   stop("schn: expected a matrix or list of rows")
 }
 
+#' .schn_vec
+#'
+#' Part of the schN_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .schn_vec <- function(x) {
   if (is.list(x)) return(as.numeric(unlist(x)))
   as.numeric(x)
@@ -161,6 +177,13 @@ invariance_error <- function(energy_fn, R, Q, g = NULL) {
        note = "energy INVARIANT, forces EQUIVARIANT -- two different properties from one design choice")
 }
 
+#' .schN_cheatsheet
+#'
+#' Part of the schN_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .schN_cheatsheet <- function() {
   paste("schn: a convolution needs a grid and atoms have none, so ",
         "make the filter a FUNCTION of interatomic distance -- a ",

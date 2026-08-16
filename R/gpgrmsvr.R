@@ -27,6 +27,14 @@
 # Collision scan: gpgrmsvr.R and all nine exported names were free in
 # both R trees and in _lazy_map.json at the time of writing.
 
+#' Minor allele frequencies for markers coded 0/1/2: MVSML p.51 uses
+#'
+#' phat = colMeans(X)/2.
+#'
+#' @param M See Usage.
+#' @param freq Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .s02freq <- function(M, freq = NULL) {
   # Minor allele frequencies for markers coded 0/1/2: MVSML p.51 uses
   # phat = colMeans(X)/2.

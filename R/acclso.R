@@ -49,8 +49,27 @@ Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
              method = "FISTA for the LASSO (Beck-Teboulle 2009 Sect. 4)")
 }
 
+#' .k01_soft
+#'
+#' Part of the acclso implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @param t See Usage.
+#' @return A numeric value.
+#' @export
 .k01_soft <- function(v, t) sign(v) * pmax(abs(v) - t, 0)
 
+#' .k01_speclip
+#'
+#' Part of the acclso implementation; see the file header for the source
+#' it follows.
+#'
+#' @param Xm See Usage.
+#' @param p See Usage.
+#' @param iters Defaults to \code{50L}.
+#' @return The value of \code{lam}, as built in the body.
+#' @export
 .k01_speclip <- function(Xm, p, iters = 50L) {
   v <- rep(1 / sqrt(p), p)
   lam <- 0

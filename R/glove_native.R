@@ -52,6 +52,14 @@
 
 
 # Private helper: turn a corpus into a list of token character vectors.
+#' Private helper: turn a corpus into a list of token character vectors
+#'
+#' Part of the glove_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param corpus See Usage.
+#' @return The value of \code{docs}, as built in the body.
+#' @export
 .glove_as_docs <- function(corpus) {
   if (is.null(corpus)) {
     stop("glove: corpus must not be None")
@@ -341,6 +349,13 @@ morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
 }
 
 
+#' .glove_cheatsheet
+#'
+#' Part of the glove_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .glove_cheatsheet <- function() {
   paste0("glove: J = sum f(X_ij)(w_i.wt_j + b_i + bt_j - log X_ij)^2 ",
          "with f(x) = (x/xmax)^alpha capped at 1, xmax=100, ",

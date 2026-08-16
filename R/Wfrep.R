@@ -36,6 +36,14 @@ Wfrep <- function(y, weights = NULL, cells = NULL) {
        method = "weighted cell frequencies, f_k = sum_{i in k} w_i [Lohr 2010]")
 }
 
+#' .wfrep_lab
+#'
+#' Part of the Wfrep implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .wfrep_lab <- function(v) {
   if (is.numeric(v)) {
     ifelse(v == trunc(v), format(trunc(v), scientific = FALSE, trim = TRUE),

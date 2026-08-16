@@ -5,6 +5,15 @@
 # (Eq 4's addition), so this is not aliased to them; zero table
 # reduces exactly to their computation.
 
+#' .morie_swin_bias
+#'
+#' Part of the swinmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param tab See Usage.
+#' @return The value of \code{B}, as built in the body.
+#' @export
 .morie_swin_bias <- function(M, tab) {
   n <- M * M
   B <- matrix(0, n, n)

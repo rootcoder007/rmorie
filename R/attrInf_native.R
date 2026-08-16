@@ -12,6 +12,14 @@
 
 # Private helper (mirrors Python's _leaf: a node is a leaf exactly when
 # it is a dict that carries a "label" key).
+#' Private helper (mirrors Python\'s _leaf: a node is a leaf exactly
+#' when
+#'
+#' it is a dict that carries a "label" key).
+#'
+#' @param node See Usage.
+#' @return A logical value.
+#' @export
 .leaf <- function(node) {
   is.list(node) && !is.null(node) && "label" %in% names(node)
 }
@@ -19,6 +27,15 @@
 # Match Python's str() for the tie-breaking sort. Python's str(1.0) is
 # "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None";
 # reproducing those quirks keeps the sort identical to the Python arm.
+#' Match Python\'s str() for the tie-breaking sort. Python\'s str(1.0)
+#' is
+#'
+#' "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None";
+#' reproducing those quirks keeps the sort identical to the Python arm.
+#'
+#' @param v See Usage.
+#' @return A character value.
+#' @export
 .attrInf_py_str <- function(v) {
   if (is.null(v)) return("None")
   if (is.logical(v) && length(v) == 1L)
@@ -34,6 +51,14 @@
   as.character(v)
 }
 
+#' .attrInf_sort_keys
+#'
+#' Part of the attrInf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param vals See Usage.
+#' @return The value of \code{[}.
+#' @export
 .attrInf_sort_keys <- function(vals) {
   if (length(vals) <= 1L) return(vals)
   strs <- vapply(vals, .attrInf_py_str, character(1))
@@ -42,6 +67,14 @@
 
 # Mirror Python's max(sorted(scores, key=str), key=scores.__getitem__):
 # among ties, the key whose str() sorts earliest wins.
+#' Mirror Python\'s max(sorted(scores, key=str),
+#' key=scores.__getitem__):
+#'
+#' among ties, the key whose str() sorts earliest wins.
+#'
+#' @param scored See Usage.
+#' @return Nothing; the function is called for its effect.
+#' @export
 .attrInf_argmax <- function(scored) {
   if (length(scored) == 0L) return(NULL)
   strs <- vapply(scored, function(s) .attrInf_py_str(s$v), character(1))
@@ -55,6 +88,15 @@
 # Python-style == for the accuracy block: bool <-> int, int <-> float
 # all match (R's == coerces); int vs str does not (mirrors Python:
 # 1 == "1" is False, and isTRUE(1 == "1") is FALSE in R).
+#' Python-style == for the accuracy block: bool <-> int, int <-> float
+#'
+#' all match (R\'s == coerces); int vs str does not (mirrors Python: 1
+#' == "1" is False, and isTRUE(1 == "1") is FALSE in R).
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .attrInf_eq <- function(a, b) {
   if (is.null(a) || is.null(b)) return(is.null(a) && is.null(b))
   isTRUE(a == b)
@@ -202,6 +244,15 @@ morie_attrInf <- function(tree, targets, priors,
   )
 }
 
+#' .attrInf_tree_predict
+#'
+#' Part of the attrInf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param tree See Usage.
+#' @param x See Usage.
+#' @return The value of \code{[[}.
+#' @export
 .attrInf_tree_predict <- function(tree, x) {
   node <- tree
   while (!.leaf(node)) {

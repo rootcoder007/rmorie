@@ -217,6 +217,13 @@ morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
               q_sem, slope)
 }
 
+#' .hetgnn_cheatsheet
+#'
+#' Part of the hetgnn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .hetgnn_cheatsheet <- function() {
   paste("hetgnn: in a heterogeneous graph the relation between two nodes depends on the META-PATH -- Movie-Actor-Movie is co-actor, Movie-Director-Movie is shared-director, and a homogeneous GNN cannot say which it followed. TWO attentions in a hierarchy: NODE-level picks which meta-path neighbours matter, SEMANTIC-level picks which meta-paths matter, averaged OVER NODES so the weight describes the relation rather than a node. Collapsing them loses the distinction; keeping them makes both readable, which is the paper's interpretability claim.")
 }

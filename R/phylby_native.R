@@ -5,6 +5,15 @@
 
 # Private helpers (prefixed with .phylby_)
 
+#' .phylby_tips
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param out Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .phylby_tips <- function(node, out = NULL) {
   if (is.null(out)) out <- character(0)
   if (!is.list(node)) {
@@ -18,6 +27,14 @@
   return(out)
 }
 
+#' .phylby_splits_of
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{[}.
+#' @export
 .phylby_splits_of <- function(tree) {
   all_tips <- sort(.phylby_tips(tree))
   n <- length(all_tips)
@@ -54,6 +71,14 @@
   out[!duplicated(keys)]
 }
 
+#' .phylby_topology_key
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{[}.
+#' @export
 .phylby_topology_key <- function(tree) {
   splits <- .phylby_splits_of(tree)
   if (length(splits) == 0) return(list())
@@ -62,6 +87,16 @@
   sorted_splits[order(keys)]
 }
 
+#' .phylby_replace_branch
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path See Usage.
+#' @param value See Usage.
+#' @return The value of \code{parts}, as built in the body.
+#' @export
 .phylby_replace_branch <- function(node, path, value) {
   if (length(path) == 0) return(node)
   idx <- path[1] + 1
@@ -74,6 +109,15 @@
   return(parts)
 }
 
+#' .phylby_branch_paths
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path Defaults to \code{integer(0)}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .phylby_branch_paths <- function(node, path = integer(0)) {
   if (!is.list(node)) return(list())
   if (length(node) %% 2 != 0) {
@@ -89,6 +133,15 @@
   return(out)
 }
 
+#' .phylby_subtrees
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path Defaults to \code{integer(0)}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .phylby_subtrees <- function(node, path = integer(0)) {
   if (!is.list(node)) return(list())
   out <- list()
@@ -101,6 +154,16 @@
   return(out)
 }
 
+#' .phylby_set_at
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path See Usage.
+#' @param value See Usage.
+#' @return The value of \code{parts}, as built in the body.
+#' @export
 .phylby_set_at <- function(node, path, value) {
   if (length(path) == 0) return(value)
   parts <- node
@@ -109,6 +172,15 @@
   return(parts)
 }
 
+#' .phylby_get_at
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param path See Usage.
+#' @return The value of \code{node}, as built in the body.
+#' @export
 .phylby_get_at <- function(node, path) {
   for (i in path) {
     node <- node[[i + 1]]
@@ -116,6 +188,14 @@
   return(node)
 }
 
+#' .phylby_nni_neighbours
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return The value of \code{uniq}, as built in the body.
+#' @export
 .phylby_nni_neighbours <- function(tree) {
   out <- list()
   subs <- .phylby_subtrees(tree)
@@ -154,6 +234,21 @@
   return(uniq)
 }
 
+#' .phylby_log_posterior
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param seqs See Usage.
+#' @param pi Defaults to \code{NULL}.
+#' @param rate Defaults to \code{1}.
+#' @param branch_prior_mean Defaults to \code{0.1}.
+#' @param partitions Defaults to \code{NULL}.
+#' @param rates Defaults to \code{NULL}.
+#' @param temperature Defaults to \code{1}.
+#' @return A list with \code{loglik}, \code{logprior}, \code{logpost}.
+#' @export
 .phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
                                     branch_prior_mean = 0.1,
                                     partitions = NULL, rates = NULL,
@@ -201,6 +296,14 @@
               logpost = temperature * (ll + log_prior)))
 }
 
+#' .phylby_rng
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{function}.
+#' @export
 .phylby_rng <- function(seed) {
   st <- as.numeric(seed) %% 2147483648
   if (st == 0) st <- 1L
@@ -212,6 +315,14 @@
   }
 }
 
+#' .phylby_clade_credibility
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param samples See Usage.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 .phylby_clade_credibility <- function(samples) {
   if (length(samples) == 0) {
     stop("phylby: no samples to summarise")
@@ -232,6 +343,21 @@
   return(result)
 }
 
+#' .phylby_step
+#'
+#' Part of the phylby_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param seqs See Usage.
+#' @param pi See Usage.
+#' @param prior_mean See Usage.
+#' @param partitions See Usage.
+#' @param rnd See Usage.
+#' @param beta See Usage.
+#' @param tune See Usage.
+#' @return A list with \code{state}, \code{accepted}.
+#' @export
 .phylby_step <- function(state, seqs, pi, prior_mean, partitions, rnd, beta, tune) {
   tree <- state$tree
   rate <- state$rate

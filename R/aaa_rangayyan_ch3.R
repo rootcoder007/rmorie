@@ -4,6 +4,14 @@
 # Biomedical Signal Analysis (Rangayyan, 2024).  Nothing here calls
 # stats:: -- the moments are integrated, not delegated.
 
+#' .morie_rg_aslist
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_rg_aslist <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -11,6 +19,15 @@
   as.numeric(x)
 }
 
+#' Composite Simpson on a uniform grid with an even panel count (error
+#'
+#' O(h^4)); trapezoid otherwise, which is what a non-uniform grid admits
+#' without interpolating.
+#'
+#' @param y See Usage.
+#' @param x Defaults to \code{NULL}.
+#' @return The value of \code{.morie_fsum}.
+#' @export
 .morie_rg_gridint <- function(y, x = NULL) {
   # Composite Simpson on a uniform grid with an even panel count (error
   # O(h^4)); trapezoid otherwise, which is what a non-uniform grid admits
@@ -35,6 +52,18 @@
   .morie_fsum(0.5 * (y[-n] + y[-1]) * h)
 }
 
+#' Adaptive Simpson, the same rule the Python arm\'s quad() uses, so the
+#'
+#' two languages agree to their shared tolerance rather than to whatever
+#' a black-box integrator happens to do.
+#'
+#' @param f See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param tol Defaults to \code{1.49e-08}.
+#' @param maxdepth Defaults to \code{50L}.
+#' @return The value of \code{rec}.
+#' @export
 .morie_rg_quad <- function(f, a, b, tol = 1.49e-8, maxdepth = 50L) {
   # Adaptive Simpson, the same rule the Python arm's quad() uses, so the
   # two languages agree to their shared tolerance rather than to whatever
@@ -61,6 +90,18 @@
   rec(a, b, fa, fm, fb, simp(fa, fm, fb, a, b), tol, 0L)
 }
 
+#' .morie_rg_pdfint
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param pdf Defaults to \code{NULL}.
+#' @param x Defaults to \code{NULL}.
+#' @param lower Defaults to \code{-Inf}.
+#' @param upper Defaults to \code{Inf}.
+#' @return The value of \code{.morie_rg_quad}.
+#' @export
 .morie_rg_pdfint <- function(f, pdf = NULL, x = NULL,
                              lower = -Inf, upper = Inf) {
   if (!is.null(x)) {
@@ -88,6 +129,15 @@
   .morie_rg_quad(function(v) f(v) * as.numeric(pdf(v)), lo, hi)
 }
 
+#' .morie_rg_checkpdf
+#'
+#' Part of the rangayyan_ch3 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mass See Usage.
+#' @param tol Defaults to \code{1e-06}.
+#' @return A list with \code{pdf_mass}, \code{pdf_mass_ok}.
+#' @export
 .morie_rg_checkpdf <- function(mass, tol = 1e-6) {
   list(pdf_mass = as.numeric(mass), pdf_mass_ok = abs(mass - 1) <= tol)
 }

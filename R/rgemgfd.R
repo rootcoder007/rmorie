@@ -72,6 +72,15 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
        method = "Rangayyan (2024) eqs. (5.39)-(5.41) p.304 Higuchi FD per 1 s segment, Sect. 5.13.4 p.305; eq. (5.28) for r^2")
 }
 
+#' .rg_higuchi_fd
+#'
+#' Part of the rgemgfd implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param kmax See Usage.
+#' @return The value of \code{[}.
+#' @export
 .rg_higuchi_fd <- function(x, kmax) {
   xs <- as.numeric(x)
   N <- length(xs)

@@ -20,6 +20,14 @@
 # Collision scan: epirate.R and all four exported names were free in
 # both R trees and in _lazy_map.json at the time of writing.
 
+#' .s02z
+#'
+#' Part of the epirate implementation; see the file header for the
+#' source it follows.
+#'
+#' @param confidence See Usage.
+#' @return The value of \code{unname}.
+#' @export
 .s02z <- function(confidence) {
   tab <- c("0.9" = 1.6448536269514722, "0.95" = 1.959963984540054,
            "0.99" = 2.5758293035489004)

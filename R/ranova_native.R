@@ -9,6 +9,15 @@
 # (1971), Biometrika 58(3), 545-554.
 # Mirrors Python morie.fn.ranova / remlfn / vcomp exactly.
 
+#' .vc_groups
+#'
+#' Part of the ranova_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param group See Usage.
+#' @return A list with \code{keys}, \code{gs}.
+#' @export
 .vc_groups <- function(y, group) {
   k <- as.character(group)
   keys <- sort(unique(k))
@@ -66,6 +75,17 @@ morie_ranova <- function(y, group) {
        method = "ANOVA variance components (Searle et al. 1992, Eq. 21)")
 }
 
+#' .reml_loglik
+#'
+#' Part of the ranova_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gs See Usage.
+#' @param ns See Usage.
+#' @param s2a See Usage.
+#' @param s2e See Usage.
+#' @return A list with \code{ll}, \code{mu}.
+#' @export
 .reml_loglik <- function(gs, ns, s2a, s2e) {
   logdetV <- 0; xvx <- 0; xvy <- 0; yvy <- 0
   for (i in seq_along(gs)) {

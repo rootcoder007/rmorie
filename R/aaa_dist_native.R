@@ -12,6 +12,15 @@
 # R's own d/p/q/r at 1e-13 or better in tests/testthat/test-dist-native.R.
 
 
+#' Neumaier compensated summation: the R-side counterpart of Python\'s
+#'
+#' math.fsum (Shewchuk).  On ARM64 R\'s long double IS double, so base
+#' sum() accumulates rounding error this does not; the two language arms
+#' then agree to the last bit instead of to the platform.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .morie_fsum <- function(x) {
   # Neumaier compensated summation: the R-side counterpart of Python's
   # math.fsum (Shewchuk).  On ARM64 R's long double IS double, so base
@@ -27,6 +36,14 @@
   s + comp
 }
 
+#' Regularized UPPER incomplete gamma Q(a, x), computed directly so the
+#'
+#' far tail never passes through 1 - P and lose its digits.
+#'
+#' @param a See Usage.
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_gammainc_q <- function(a, x) {
   # regularized UPPER incomplete gamma Q(a, x), computed directly so the
   # far tail never passes through 1 - P and lose its digits.
@@ -57,6 +74,14 @@
   }
 }
 
+#' Exact identity erfc(v) = Q(1/2, v^2): no transcribed continued
+#'
+#' fraction of its own, and the tail comes straight from the CF branch
+#' of the incomplete gamma, which computes Q without forming 1 - P.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_erfc <- function(x) {
   # exact identity erfc(v) = Q(1/2, v^2): no transcribed continued
   # fraction of its own, and the tail comes straight from the CF branch
@@ -70,6 +95,14 @@
   }, numeric(1))
 }
 
+#' .morie_erf
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_erf <- function(x) {
   vapply(x, function(v) {
     if (v < 0) {
@@ -79,6 +112,14 @@
   }, numeric(1))
 }
 
+#' Regularized lower incomplete gamma P(a, x): series for x < a + 1,
+#'
+#' Lentz continued fraction for the complement otherwise.
+#'
+#' @param a See Usage.
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_gammainc_p <- function(a, x) {
   # regularized lower incomplete gamma P(a, x): series for x < a + 1,
   # Lentz continued fraction for the complement otherwise.
@@ -118,6 +159,16 @@
   }
 }
 
+#' .morie_betacf
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @return The value of \code{h}, as built in the body.
+#' @export
 .morie_betacf <- function(a, b, x) {
   tiny <- 1e-300
   qab <- a + b
@@ -150,6 +201,16 @@
   h
 }
 
+#' Regularized incomplete beta I_x(a, b)
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_betainc <- function(a, b, x) {
   # regularized incomplete beta I_x(a, b)
   if (x <= 0) {
@@ -168,6 +229,18 @@
   }
 }
 
+#' .morie_bisect_q
+#'
+#' Part of the dist_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cdf See Usage.
+#' @param p See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param tol Defaults to \code{1e-13}.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .morie_bisect_q <- function(cdf, p, lo, hi, tol = 1e-13) {
   if (p <= 0) {
     return(lo)

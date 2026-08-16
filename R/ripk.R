@@ -6,6 +6,24 @@
 # Two opposite sides can never both be crossed by the same angle, so the
 # only overlaps between the four "outside" arcs are the four corners and
 # there are no triple intersections; inclusion-exclusion is exact.
+#' Internal: proportion of the circle of radius `rad` centred at (x, y)
+#'
+#' that lies inside the rectangle [x0, x1] x [y0, y1] -- Ripley\'s edge
+#' correction weight w(s_i, s_j) (Schabenberger & Gotway 2005, p. 102).
+#' Two opposite sides can never both be crossed by the same angle, so
+#' the only overlaps between the four "outside" arcs are the four
+#' corners and there are no triple intersections; inclusion-exclusion is
+#' exact.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param rad See Usage.
+#' @param x0 See Usage.
+#' @param x1 See Usage.
+#' @param y0 See Usage.
+#' @param y1 See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .ripk_weight <- function(x, y, rad, x0, x1, y0, y1) {
   if (rad <= 0) return(1)
   d <- c(x - x0, x1 - x, y - y0, y1 - y)

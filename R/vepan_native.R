@@ -86,17 +86,44 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
                 M="Met", F="Phe", P="Pro", S="Ser", T="Thr", W="Trp",
                 Y="Tyr", V="Val", "*"="Ter", X="Xaa")
 
+#' Python range(lo, hi+1); empty when hi < lo
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .vepan_seqrange <- function(lo, hi) {
   # Python range(lo, hi+1); empty when hi < lo.
   if (hi >= lo) lo:hi else integer(0)
 }
 
+#' 0-based index of ch in s, or -1 (like Python str.find)
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param ch See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .vepan_find <- function(s, ch) {
   # 0-based index of ch in s, or -1 (like Python str.find).
   p <- regexpr(ch, s, fixed=TRUE)
   if (p < 0) -1L else as.integer(p - 1L)
 }
 
+#' 0-based character access
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @param k See Usage.
+#' @return The value of \code{substr}.
+#' @export
 .vepan_char <- function(s, k) {
   # 0-based character access.
   substr(s, k + 1L, k + 1L)
@@ -149,6 +176,14 @@ morie_vepan_most_severe_consequence <- function(terms) {
   ts[ord[1L]]
 }
 
+#' .vepan_revcomp
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A character value.
+#' @export
 .vepan_revcomp <- function(s) {
   chars <- rev(strsplit(toupper(s), "")[[1L]])
   comp <- ifelse(chars %in% names(.vepan_COMPLEMENT),
@@ -158,6 +193,14 @@ morie_vepan_most_severe_consequence <- function(terms) {
 
 # ------------------------------------------------------ transcript model
 
+#' .vepan_exons
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ex See Usage.
+#' @return The value of \code{[}.
+#' @export
 .vepan_exons <- function(ex) {
   if (is.matrix(ex)) {
     m <- ex
@@ -168,6 +211,14 @@ morie_vepan_most_severe_consequence <- function(terms) {
   m[order(m[, 1L]), , drop=FALSE]
 }
 
+#' .vepan_transcript
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tr See Usage.
+#' @return A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons}, \code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start}, \code{end}.
+#' @export
 .vepan_transcript <- function(tr) {
   if (is.null(tr[["exons"]])) {
     stop("vepan: a transcript needs exons as (start, end)")
@@ -248,6 +299,15 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   list(seq=s, gpos=gpos)
 }
 
+#' CDNA index (0-based) of each coding base, and the coding sequence
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param genome See Usage.
+#' @return A list with \code{cds}, \code{coding}, \code{sg}.
+#' @export
 .vepan_cds_frame <- function(t, genome) {
   # cDNA index (0-based) of each coding base, and the coding sequence.
   if (is.null(t$cds_start)) {
@@ -265,6 +325,14 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   list(cds=cds, coding=coding, sg=sg)
 }
 
+#' .vepan_introns
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .vepan_introns <- function(t) {
   ex <- t$exons
   out <- list()
@@ -278,6 +346,14 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   out
 }
 
+#' .vepan_variant
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A list with \code{chrom}, \code{pos}, \code{ref}, \code{alt}, \code{id}.
+#' @export
 .vepan_variant <- function(v) {
   if (is.null(v[["pos"]]) || is.null(v[["ref"]]) || is.null(v[["alt"]])) {
     stop("vepan: a variant needs pos, ref and alt")
@@ -302,6 +378,14 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
        pos=pos, ref=ref, alt=alt, id=v[["id"]])
 }
 
+#' .vepan_kind
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .vepan_kind <- function(v) {
   if (nchar(v$ref) == 1L && nchar(v$alt) == 1L) {
     return("SNV")
@@ -309,6 +393,13 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   if (nchar(v$alt) > nchar(v$ref)) "insertion" else "deletion"
 }
 
+#' Genomic bases the variant changes (1-based, inclusive). Insertion
+#'
+#' yields lo > hi (an empty span between pos and pos+1).
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .vepan_affected <- function(v) {
   # Genomic bases the variant changes (1-based, inclusive). Insertion
   # yields lo > hi (an empty span between pos and pos+1).
@@ -324,6 +415,17 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 
 # ------------------------------------------------------- the predicates
 
+#' Splice consequences from the distance to each exon boundary
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return The value of \code{unique}.
+#' @export
 .vepan_splice_terms <- function(t, v, lo, hi) {
   # Splice consequences from the distance to each exon boundary.
   terms <- character(0)
@@ -381,6 +483,17 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   unique(terms)
 }
 
+#' The coding sequence after the variant, and where it changed
+#'
+#' (0-based offset). Returns list(alt_cds, off) or list(NULL, NULL).
+#'
+#' @param cds See Usage.
+#' @param v See Usage.
+#' @param coding See Usage.
+#' @param gpos See Usage.
+#' @param strand See Usage.
+#' @return A list with \code{alt_cds}, \code{off}.
+#' @export
 .vepan_apply <- function(cds, v, coding, gpos, strand) {
   # The coding sequence after the variant, and where it changed
   # (0-based offset). Returns list(alt_cds, off) or list(NULL, NULL).
@@ -423,6 +536,17 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
                       substr(cds, o + 2L, nchar(cds))), off=o)
 }
 
+#' Everything that depends on the protein: the predicate set. Returns
+#'
+#' list(terms, info).
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @param cds See Usage.
+#' @param coding See Usage.
+#' @param gpos See Usage.
+#' @return A list with \code{terms}, \code{info}.
+#' @export
 .vepan_coding_terms <- function(t, v, cds, coding, gpos) {
   # Everything that depends on the protein: the predicate set. Returns
   # list(terms, info).
@@ -498,6 +622,18 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   list(terms=unique(terms), info=info)
 }
 
+#' C. notation, with an indel shifted to its most 3\' position
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @param seq See Usage.
+#' @param gpos See Usage.
+#' @param cds_first See Usage.
+#' @return A character value.
+#' @export
 .vepan_hgvs_c <- function(t, v, seq, gpos, cds_first) {
   # c. notation, with an indel shifted to its most 3' position.
   idx <- stats::setNames(seq_along(gpos) - 1L, as.character(gpos))
@@ -552,6 +688,15 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   sprintf("c.%d_%ddel%s", c_of(a), c_of(b), dele)
 }
 
+#' .vepan_hgvs_p
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param info See Usage.
+#' @param terms See Usage.
+#' @return A character value.
+#' @export
 .vepan_hgvs_p <- function(info, terms) {
   if (length(info) == 0L || is.null(info$protein_position)) {
     return(NULL)
@@ -739,6 +884,14 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
   out[order(keys_rank, keys_tr)]
 }
 
+#' Table 7\'s order: canonical, then protein coding, then severity
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @return The value of \code{list}.
+#' @export
 .vepan_pick_key <- function(r) {
   # Table 7's order: canonical, then protein coding, then severity.
   list(if (isTRUE(r$canonical)) 0L else 1L,
@@ -747,6 +900,15 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
        if (is.null(r$transcript)) "" else r$transcript)
 }
 
+#' Lexicographic comparison of two pick keys
+#'
+#' Part of the vepan_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param k1 See Usage.
+#' @param k2 See Usage.
+#' @return A logical value.
+#' @export
 .vepan_key_less <- function(k1, k2) {
   # Lexicographic comparison of two pick keys.
   for (i in seq_along(k1)) {

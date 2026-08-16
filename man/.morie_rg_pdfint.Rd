@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.morie_rg_pdfint}
+\alias{.morie_rg_pdfint}
+\title{.morie_rg_pdfint}
+\usage{
+.morie_rg_pdfint(f, pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
+}
+\arguments{
+\item{f}{See Usage.}
+\item{pdf}{Defaults to \code{NULL}.}
+\item{x}{Defaults to \code{NULL}.}
+\item{lower}{Defaults to \code{-Inf}.}
+\item{upper}{Defaults to \code{Inf}.}
+}
+\description{
+Part of the rangayyan_ch3 implementation; see the file header for the source it follows.
+}
+\value{
+The value of \code{.morie_rg_quad}.
+}
+\keyword{internal}

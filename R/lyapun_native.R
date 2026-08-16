@@ -28,6 +28,14 @@
 # anchored against: 0.693 for the logistic map at mu = 4 and 0.418 for
 # the Henon map at a = 1.4, b = 0.3.
 
+#' .lyapun_as_series
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .lyapun_as_series <- function(y) {
   if (is.matrix(y) || is.list(y)) {
     out <- as.numeric(unlist(y))
@@ -127,6 +135,15 @@ mean_period <- function(y, dt = 1.0) {
   (1.0 / f_mean) / dt
 }
 
+#' .lyapun_nearest_neighbours
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pts See Usage.
+#' @param min_sep See Usage.
+#' @return A list with \code{nn}, \code{d0}.
+#' @export
 .lyapun_nearest_neighbours <- function(pts, min_sep) {
   n_pts <- length(pts)
   m <- length(pts[[1L]])
@@ -153,6 +170,16 @@ mean_period <- function(y, dt = 1.0) {
   list(nn = nn, d0 = d0)
 }
 
+#' .lyapun_distance
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pts See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .lyapun_distance <- function(pts, a, b) {
   pa <- pts[[a]]; pb <- pts[[b]]
   s <- 0.0
@@ -224,6 +251,16 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
        m = m, tau = tau, min_sep = min_sep, n_points = n_pts, n_obs = n)
 }
 
+#' .lyapun_linear_region
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param curve See Usage.
+#' @param lo_frac Defaults to \code{0.1}.
+#' @param hi_frac Defaults to \code{0.8}.
+#' @return A list with \code{lo}, \code{hi}.
+#' @export
 .lyapun_linear_region <- function(curve, lo_frac = 0.1, hi_frac = 0.8) {
   n <- length(curve)
   if (n < 4L) return(list(lo = 0L, hi = n))
@@ -243,6 +280,15 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
   list(lo = lo, hi = hi)
 }
 
+#' .lyapun_ols_slope
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xs See Usage.
+#' @param ys See Usage.
+#' @return A list with \code{slope}, \code{intercept}, \code{se}, \code{r2}.
+#' @export
 .lyapun_ols_slope <- function(xs, ys) {
   n <- length(xs)
   mx <- sum(xs) / n
@@ -361,6 +407,13 @@ lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
 
 largest_lyapunov <- lyapunov_exponent
 
+#' .lyapun_cheatsheet
+#'
+#' Part of the lyapun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .lyapun_cheatsheet <- function() {
   paste("lyapun: largest Lyapunov exponent (Rosenstein, Collins & De ",
         "Luca 1993). Embed with delay J and dimension m, find each ",

@@ -8,6 +8,14 @@
 # is configurable via MORIE_DATASETTE_URL, so these functions work
 # against any Datasette instance the caller has access to.
 
+#' .morie_datasette_base
+#'
+#' Part of the ingest_datasette implementation; see the file header for
+#' the source it follows.
+#'
+#' @param base_url Defaults to \code{NULL}.
+#' @return The value of \code{sub}.
+#' @export
 .morie_datasette_base <- function(base_url = NULL) {
   url <- base_url
   if (is.null(url) || !nzchar(url)) {
@@ -24,6 +32,15 @@
   sub("/+$", "", url)
 }
 
+#' .morie_datasette_get_json
+#'
+#' Part of the ingest_datasette implementation; see the file header for
+#' the source it follows.
+#'
+#' @param url See Usage.
+#' @param timeout Defaults to \code{60}.
+#' @return The value of \code{.s03json_fromJSON}.
+#' @export
 .morie_datasette_get_json <- function(url, timeout = 60) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("Package 'jsonlite' is required for the Datasette connector. ",

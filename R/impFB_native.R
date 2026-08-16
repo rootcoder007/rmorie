@@ -22,6 +22,14 @@
 
 .impFB_eps <- 1e-12
 
+#' .impFB_preference
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 .impFB_preference <- function(r) {
   r <- as.matrix(r)
   storage.mode(r) <- "double"
@@ -30,6 +38,15 @@
   return(result)
 }
 
+#' .impFB_confidence
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @param alpha Defaults to \code{40}.
+#' @return A numeric value.
+#' @export
 .impFB_confidence <- function(r, alpha = 40.0) {
   a <- as.numeric(alpha)
   if (a < 0.0) stop("impFB: alpha must be non-negative")
@@ -38,6 +55,15 @@
   return(1.0 + a * r)
 }
 
+#' .impFB_solve
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return The value of \code{[}.
+#' @export
 .impFB_solve <- function(A, b) {
   n <- length(b)
   M <- matrix(0, nrow = n, ncol = n + 1)
@@ -76,6 +102,18 @@
   return(M[, n + 1])
 }
 
+#' .impFB_als_step
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param C_row See Usage.
+#' @param p_row See Usage.
+#' @param lam See Usage.
+#' @param fast Defaults to \code{TRUE}.
+#' @return The value of \code{.impFB_solve}.
+#' @export
 .impFB_als_step <- function(Y, C_row, p_row, lam, fast = TRUE) {
   n <- nrow(Y)
   f <- ncol(Y)
@@ -99,6 +137,18 @@
   return(.impFB_solve(A, rhs))
 }
 
+#' .impFB_cost
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param R See Usage.
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param alpha Defaults to \code{40}.
+#' @param lam Defaults to \code{0.1}.
+#' @return A numeric value.
+#' @export
 .impFB_cost <- function(R, X, Y, alpha = 40.0, lam = 0.1) {
   P <- .impFB_preference(R)
   C <- .impFB_confidence(R, alpha)
@@ -174,6 +224,18 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
   return(result)
 }
 
+#' .impFB_explain
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Y See Usage.
+#' @param C_row See Usage.
+#' @param p_row See Usage.
+#' @param i See Usage.
+#' @param lam Defaults to \code{0.1}.
+#' @return A list with \code{contributions}, \code{prediction}, \code{note}.
+#' @export
 .impFB_explain <- function(Y, C_row, p_row, i, lam = 0.1) {
   n <- nrow(Y)
   f <- ncol(Y)
@@ -210,6 +272,13 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
   ))
 }
 
+#' .impFB_cheatsheet
+#'
+#' Part of the impFB_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .impFB_cheatsheet <- function() {
   return("impFB: implicit feedback measures CONFIDENCE, not preference -- the favourite film is watched once, the merely-liked series weekly. Split into binary p_ui and c_ui = 1 + alpha r_ui (alpha = 40). The cost sums over ALL m*n pairs, because zeros are missing evidence rather than negatives, which rules out SGD and forces ALS. Y'C^u Y = Y'Y + Y'(C^u - I)Y makes each update O(f^2 n_u + f^3), linear in the input. Substituting the update into the prediction yields per-item explanations.")
 }

@@ -150,6 +150,18 @@ owate_weights <- function(pscore, sigma2_treated = NULL,
   1 / (s1 / e + s0 / (1 - e))
 }
 
+#' .ipw
+#'
+#' Part of the tmlefp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param e See Usage.
+#' @param keep Defaults to \code{NULL}.
+#' @param weights Defaults to \code{NULL}.
+#' @return A list with \code{est}, \code{n_kept}.
+#' @export
 .ipw <- function(y, w, e, keep = NULL, weights = NULL) {
   n <- length(y)
   sel <- if (is.null(keep)) seq_len(n) else which(keep)

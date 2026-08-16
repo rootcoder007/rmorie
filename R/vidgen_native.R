@@ -55,16 +55,41 @@
 # Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
 # arXiv:2207.12598. The guidance framework this parallels.
 
+#' .vidgen_mat
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{do.call}.
+#' @export
 .vidgen_mat <- function(x) {
   if (is.matrix(x)) return(x * 1.0)
   rows <- lapply(x, function(r) as.numeric(unlist(r)))
   do.call(rbind, rows)
 }
 
+#' .vidgen_vec
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .vidgen_vec <- function(x) {
   as.numeric(unlist(x))
 }
 
+#' .vidgen_softmax_attend
+#'
+#' Part of the vidgen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param mask Defaults to \code{NULL}.
+#' @return A list with \code{out}, \code{W}.
+#' @export
 .vidgen_softmax_attend <- function(X, mask = NULL) {
   n <- nrow(X)
   d <- ncol(X)

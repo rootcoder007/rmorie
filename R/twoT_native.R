@@ -61,12 +61,28 @@
 
 .twoT_EPS <- 1e-12
 
+#' .twoT_as_vec
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .twoT_as_vec <- function(v) {
   if (is.null(v)) return(numeric(0))
   if (is.matrix(v)) as.numeric(v)
   else as.numeric(unlist(v))
 }
 
+#' .twoT_as_mat
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .twoT_as_mat <- function(m) {
   if (is.null(m)) return(matrix(numeric(0), nrow = 0L, ncol = 0L))
   if (is.list(m)) {
@@ -144,6 +160,15 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
                     "undoing its over-representation"))
 }
 
+#' .twoT_get_items
+#'
+#' Part of the twoT_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param hits See Usage.
+#' @param t See Usage.
+#' @return A vector, from \code{integer}.
+#' @export
 .twoT_get_items <- function(hits, t) {
   if (is.null(hits)) return(integer(0))
   if (!is.null(hits[[t + 1L]])) return(hits[[t + 1L]])

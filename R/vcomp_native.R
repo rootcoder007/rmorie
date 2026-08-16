@@ -7,6 +7,15 @@
 # Sec. 6.6, balanced-data equivalence Sec. 4.8, interval estimation
 # Sec. 3.5 (local copy fetched-wave3/Variance_components_FULL.pdf).
 
+#' F CDF via the regularized incomplete beta:
+#'
+#' P(F <= x) = I_{d1 x / (d1 x + d2)}(d1/2, d2/2)
+#'
+#' @param x See Usage.
+#' @param d1 See Usage.
+#' @param d2 See Usage.
+#' @return The value of \code{pbeta}.
+#' @export
 .vcomp_f_cdf <- function(x, d1, d2) {
   # F CDF via the regularized incomplete beta:
   # P(F <= x) = I_{d1 x / (d1 x + d2)}(d1/2, d2/2)
@@ -14,6 +23,17 @@
   pbeta(d1 * x / (d1 * x + d2), d1 / 2.0, d2 / 2.0)
 }
 
+#' Monotone bisection on the CDF (same convention as the R arm)
+#'
+#' Part of the vcomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param d1 See Usage.
+#' @param d2 See Usage.
+#' @param iters Defaults to \code{300}.
+#' @return A numeric value.
+#' @export
 .vcomp_f_ppf <- function(p, d1, d2, iters = 300) {
   # monotone bisection on the CDF (same convention as the R arm)
   if (p <= 0.0) return(0.0)
@@ -92,6 +112,13 @@ morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
 # long descriptive alias (stub-era name)
 variance_components <- morie_vcomp
 
+#' .vcomp_cheatsheet
+#'
+#' Part of the vcomp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .vcomp_cheatsheet <- function() {
   return("vcomp: ANOVA or REML variance components + exact ICC F interval on balanced data (Searle Sec. 3.5)")
 }

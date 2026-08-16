@@ -34,6 +34,17 @@
 # deviation is what makes the rule oversmooth skewed and long-tailed
 # data -- one outlier moves the standard deviation a long way and the
 # interquartile range hardly at all.
+#' Silverman (3.30): A = min(standard deviation, interquartile
+#'
+#' range / 1.34). The divisor is 1.34 as the book prints it; 1.349 is
+#' the normal-theory value it rounds. Using the plain standard deviation
+#' is what makes the rule oversmooth skewed and long-tailed data -- one
+#' outlier moves the standard deviation a long way and the interquartile
+#' range hardly at all.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .wsm_spread <- function(x) {
   xv <- as.numeric(x)
   if (length(xv) < 2L) {
@@ -52,6 +63,19 @@
 # mean integrated square error across every t-distribution
 # considered, log-normals with skewness up to about 1.8, and normal
 # mixtures separated by up to 3 standard deviations.
+#' Silverman Sec. 3.4.2. "3.28" is 1.06 sigma n^(-1/5), the pure
+#'
+#' normal reference; "3.29" is 0.79 R n^(-1/5) with R the interquartile
+#' range; "3.31" is 0.9 A n^(-1/5) and is the book\'s actual
+#' recommendation, reported to land within 10% of the optimal mean
+#' integrated square error across every t-distribution considered,
+#' log-normals with skewness up to about 1.8, and normal mixtures
+#' separated by up to 3 standard deviations.
+#'
+#' @param x See Usage.
+#' @param rule Defaults to \code{"3.31"}.
+#' @return Nothing; this branch always raises.
+#' @export
 .wsm_bandwidth <- function(x, rule = "3.31") {
   xv <- as.numeric(x)
   n <- length(xv)
@@ -73,6 +97,17 @@
   stop("rule must be '3.28', '3.29' or '3.31'.", call. = FALSE)
 }
 
+#' .wsm_boot_reps
+#'
+#' Part of the wsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param data See Usage.
+#' @param statistic See Usage.
+#' @param B See Usage.
+#' @param seed See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .wsm_boot_reps <- function(data, statistic, B, seed) {
   d <- if (is.matrix(data)) data else matrix(as.numeric(data), ncol = 1L)
   n <- nrow(d)

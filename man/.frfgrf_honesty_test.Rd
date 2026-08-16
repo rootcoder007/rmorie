@@ -1,0 +1,41 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.frfgrf_honesty_test}
+\alias{.frfgrf_honesty_test}
+\title{.frfgrf_honesty_test}
+\usage{
+.frfgrf_honesty_test(X, y, kind = "double-sample", min_leaf = 5, seed = 11, n_permutations = 3)
+}
+\arguments{
+\item{X}{See Usage.}
+\item{y}{See Usage.}
+\item{kind}{Defaults to \code{"double-sample"}.}
+\item{min_leaf}{Defaults to \code{5}.}
+\item{seed}{Defaults to \code{11}.}
+\item{n_permutations}{Defaults to \code{3}.}
+}
+\description{
+Part of the frfgrf_native implementation; see the file header for the source it follows.
+}
+\value{
+A list with \code{honest}, \code{splits_stable_under_I_permutation}, \code{splits_move_under_J_permutation}, \code{n_splits}.
+}
+\references{
+----------
+Wager, S. & Athey, S. (2018) "Estimation and Inference of Heterogeneous
+Treatment Effects using Random Forests", Journal of the American
+Statistical Association 113(523), 1228-1242,
+doi:10.1080/01621459.2017.1319839, arXiv:1510.04342. Definitions 2-5,
+Theorem 3 and its beta_min, Theorem 1.
+
+Athey, S., Tibshirani, J. & Wager, S. (2019) "Generalized Random
+Forests", The Annals of Statistics 47(2), 1148-1178,
+doi:10.1214/18-AOS1709, arXiv:1610.01271. The same conditions in the
+generalized setting.
+
+Biau, G. (2012) "Analysis of a Random Forests Model", Journal of
+Machine Learning Research 13, 1063-1095. Earlier consistency analysis
+of the same shape.
+}
+\keyword{internal}

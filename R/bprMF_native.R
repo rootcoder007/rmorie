@@ -83,6 +83,14 @@
 .bprMF_EPS <- 1e-12
 .bprMF_SIGNS <- c("correct", "paper")
 
+#' .bprMF_sigmoid
+#'
+#' Part of the bprMF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .bprMF_sigmoid <- function(x) {
   v <- as.numeric(x)
   if (v >= 0) return(1 / (1 + exp(-v)))
@@ -90,10 +98,30 @@
   e / (1 + e)
 }
 
+#' .bprMF_predict
+#'
+#' Part of the bprMF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param H See Usage.
+#' @param u See Usage.
+#' @param i See Usage.
+#' @return A numeric value.
+#' @export
 .bprMF_predict <- function(W, H, u, i) {
   sum(W[[u + 1L]] * H[[i + 1L]])
 }
 
+#' .bprMF_triples
+#'
+#' Part of the bprMF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pos See Usage.
+#' @param n_items See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .bprMF_triples <- function(pos, n_items) {
   out <- list()
   users <- sort(names(pos))
@@ -116,6 +144,19 @@
 # (seen, unseen) pairs per user; both the total BPR-Opt and the two
 # pieces are returned so callers that want just the data loglik or just
 # the penalty term can pull them out.
+#' Compute sum ln sigma(x_ui - x_uj) and lambda * ||Theta||^2 over the
+#'
+#' (seen, unseen) pairs per user; both the total BPR-Opt and the two
+#' pieces are returned so callers that want just the data loglik or just
+#' the penalty term can pull them out.
+#'
+#' @param W See Usage.
+#' @param H See Usage.
+#' @param pos See Usage.
+#' @param n_items See Usage.
+#' @param lam Defaults to \code{0.01}.
+#' @return A list with \code{bpr_opt}, \code{loglik}, \code{penalty}, \code{n_triples}.
+#' @export
 .bprMF_bpr_opt <- function(W, H, pos, n_items, lam = 0.01) {
   lm <- as.numeric(lam)
   n_items <- as.integer(n_items)
@@ -146,6 +187,17 @@
        n_triples = ntriples)
 }
 
+#' .bprMF_auc
+#'
+#' Part of the bprMF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param H See Usage.
+#' @param pos See Usage.
+#' @param n_items See Usage.
+#' @return A list with \code{auc}, \code{per_user}, \code{note}.
+#' @export
 .bprMF_auc <- function(W, H, pos, n_items) {
   n_items <- as.integer(n_items)
   users <- sort(names(pos))
@@ -184,6 +236,28 @@
 # rejection-guard uniforms.  regularizer_sign="paper" reproduces the
 # printed Figure 4 update whose +lambda*Theta term diverges; the
 # default is the sign that actually ascends BPR-Opt.
+#' LearnBPR: bootstrap-sampled stochastic gradient ascent over triples
+#'
+#' drawn from D_S. Mirrors morie.fn.bprMF.learn_bpr step for step, with
+#' the same draw order from the shared SplitMix64 stream: U*K uniforms
+#' fill W, I*K uniforms fill H, then per iteration three uniforms (user
+#' index, positive item, negative item) plus up to 100 negative-item
+#' rejection-guard uniforms.  regularizer_sign="paper" reproduces the
+#' printed Figure 4 update whose +lambda*Theta term diverges; the
+#' default is the sign that actually ascends BPR-Opt.
+#'
+#' @param pos See Usage.
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param k_dim Defaults to \code{8L}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param lam Defaults to \code{0.01}.
+#' @param iters Defaults to \code{2000L}.
+#' @param seed Defaults to \code{0L}.
+#' @param regularizer_sign Defaults to \code{"correct"}.
+#' @param init_scale Defaults to \code{0.1}.
+#' @return A list with \code{estimate}, \code{W}, \code{H}, \code{k}, \code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc}, \code{param_norm}, \code{regularizer_sign}, \code{method}, \code{caveat}.
+#' @export
 .bprMF_learn_bpr <- function(pos, n_users, n_items, k_dim = 8L,
                              alpha = 0.05, lam = 0.01, iters = 2000L,
                              seed = 0L, regularizer_sign = "correct",
@@ -266,6 +340,19 @@
 }
 
 # Rank items for one user by x_hat_ui.
+#' Rank items for one user by x_hat_ui
+#'
+#' Part of the bprMF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @param H See Usage.
+#' @param u See Usage.
+#' @param n_items See Usage.
+#' @param top_k Defaults to \code{5L}.
+#' @param exclude Defaults to \code{integer(0)}.
+#' @return A list with \code{ranking}, \code{n_scored}.
+#' @export
 .bprMF_recommend <- function(W, H, u, n_items, top_k = 5L,
                              exclude = integer(0)) {
   u_idx <- as.integer(u)
@@ -390,6 +477,13 @@ bpr_mf <- bpr_learn_bpr_R
 bprmf <- bpr_learn_bpr_R
 bayesianpersonalizedranking <- bpr_learn_bpr_R
 
+#' .bprMF_cheatsheet
+#'
+#' Part of the bprMF_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .bprMF_cheatsheet <- function() {
   paste("bprMF: implicit feedback is positive-only, and labelling every",
         "unobserved pair NEGATIVE trains the model to predict 0 on",

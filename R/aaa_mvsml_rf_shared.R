@@ -32,6 +32,15 @@
 .rfLCGC <- 1013904223
 .rfLCGM <- 4294967296
 
+#' .rfboot
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param b See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .rfboot <- function(b, n) {
   x <- ((b + 1) * 2654435761) %% .rfLCGM
   rows <- numeric(n)
@@ -42,17 +51,49 @@
   pmin(pmax(rows, 0), n - 1) + 1L
 }
 
+#' .rfcand
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param b See Usage.
+#' @param s See Usage.
+#' @param p See Usage.
+#' @param mtry See Usage.
+#' @return A numeric value.
+#' @export
 .rfcand <- function(b, s, p, mtry) {
   off <- floor(.s03vdc(b * 4096 + s + 1, 3L) * p)
   ((off + seq_len(mtry) - 1L) %% p) + 1L
 }
 
+#' .rfmtry
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p See Usage.
+#' @param kind Defaults to \code{"regression"}.
+#' @return A numeric value.
+#' @export
 .rfmtry <- function(p, kind = "regression") {
   m <- if (identical(kind, "regression")) ceiling(p / 3) else ceiling(sqrt(p))
   max(1L, min(as.integer(p), as.integer(m)))
 }
 
 # The (15.6) objective, MAXIMISED -- see the erratum recorded in rfmlt.R.
+#' The (15.6) objective, MAXIMISED -- see the erratum recorded in
+#' rfmlt.R
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param left See Usage.
+#' @param right See Usage.
+#' @param q See Usage.
+#' @return The value of \code{g}, as built in the body.
+#' @export
 .rfgain <- function(Y, left, right, q) {
   nL <- length(left); nR <- length(right)
   if (nL == 0L || nR == 0L) return(NULL)
@@ -65,6 +106,16 @@
 }
 
 # Within-node sum of squares, the least-square criterion of p. 643.
+#' Within-node sum of squares, the least-square criterion of p. 643
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param rows See Usage.
+#' @param q See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 .rfimp <- function(Y, rows, q) {
   n <- length(rows)
   if (n == 0L) return(0)
@@ -76,6 +127,18 @@
   tot
 }
 
+#' .rfbest
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param rows See Usage.
+#' @param cand See Usage.
+#' @param q See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .rfbest <- function(X, Y, rows, cand, q) {
   best <- NULL
   for (v in cand) {
@@ -96,6 +159,22 @@
 }
 
 # A node is list(var, thr, li, ri, value, n, drop).  A leaf has var = -1L.
+#' A node is list(var, thr, li, ri, value, n, drop).  A leaf has var =
+#' -1L
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param rows See Usage.
+#' @param b See Usage.
+#' @param nodesize See Usage.
+#' @param mtry See Usage.
+#' @param q See Usage.
+#' @param env See Usage.
+#' @return The value of \code{idx}, as built in the body.
+#' @export
 .rfgrow <- function(X, Y, rows, b, nodesize, mtry, q, env) {
   n <- length(rows)
   idx <- env$k + 1L
@@ -124,6 +203,16 @@
   idx
 }
 
+#' .rfpredtree
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param nodes See Usage.
+#' @param root See Usage.
+#' @param x See Usage.
+#' @return The value of \code{$}.
+#' @export
 .rfpredtree <- function(nodes, root, x) {
   i <- root
   while (nodes[[i]]$var != -1L) {
@@ -132,6 +221,19 @@
   nodes[[i]]$value
 }
 
+#' .rfforest
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param n_trees See Usage.
+#' @param nodesize See Usage.
+#' @param mtry See Usage.
+#' @param q See Usage.
+#' @return A list with \code{trees}, \code{oob}.
+#' @export
 .rfforest <- function(X, Y, n_trees, nodesize, mtry, q) {
   n <- nrow(X)
   trees <- vector("list", n_trees)
@@ -148,6 +250,16 @@
 }
 
 # yhat_i = (1/B) sum_b T_b(x_i), the p. 640 aggregation.
+#' Yhat_i = (1/B) sum_b T_b(x_i), the p. 640 aggregation
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param trees See Usage.
+#' @param Xnew See Usage.
+#' @param q See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .rfpredict <- function(trees, Xnew, q) {
   B <- length(trees)
   out <- matrix(0, nrow(Xnew), q)
@@ -159,6 +271,15 @@
   out
 }
 
+#' .rfcheck
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .rfcheck <- function(X, Y) {
   n <- nrow(X)
   if (n == 0L) stop("random forest: X is empty")
@@ -171,6 +292,16 @@
 }
 
 # The p. 656 requirement: responses standardized before splitting.
+#' The p. 656 requirement: responses standardized before splitting
+#'
+#' Part of the mvsml_rf_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param n See Usage.
+#' @param q See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .rfstd <- function(Y, n, q) {
   out <- matrix(0, n, q)
   for (j in seq_len(q)) {
@@ -186,6 +317,23 @@
 # computed.  The differences between the two are then averaged over all the
 # trees, and normalized by the standard deviation of the differences."  The
 # permutation is the deterministic reversal of the OOB row order.
+#' Out-of-bag permutation VIM, Chapter 15 pp. 642-643: "the values of
+#' the jth
+#'
+#' variable are randomly permuted in the OOB observations and j new PE
+#' is computed.  The differences between the two are then averaged over
+#' all the trees, and normalized by the standard deviation of the
+#' differences."  The permutation is the deterministic reversal of the
+#' OOB row order.
+#'
+#' @param trees See Usage.
+#' @param oob See Usage.
+#' @param X See Usage.
+#' @param Y See Usage.
+#' @param q See Usage.
+#' @param normalise Defaults to \code{TRUE}.
+#' @return The value of \code{imp}, as built in the body.
+#' @export
 .rfperm <- function(trees, oob, X, Y, q, normalise = TRUE) {
   p <- ncol(X)
   imp <- numeric(p)
@@ -226,6 +374,17 @@
 # Mean decrease in impurity: Imp(X_j) = (1/B) sum_b sum_{t: split on X_j}
 # (n_t/n) [ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) ], i the within-node
 # sum of squares.  The stored drop is already in raw sum-of-squares units.
+#' Mean decrease in impurity: Imp(X_j) = (1/B) sum_b sum_{t: split on
+#' X_j}
+#'
+#' (n_t/n) [ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) ], i the
+#' within-node sum of squares.  The stored drop is already in raw
+#' sum-of-squares units.
+#'
+#' @param trees See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .rfmdi_imp <- function(trees, p) {
   B <- length(trees)
   imp <- numeric(p)

@@ -1,5 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # weighted least squares of y on (1, x); returns the intercept
+#' SPDX-License-Identifier: AGPL-3.0-or-later
+#'
+#' weighted least squares of y on (1, x); returns the intercept
+#'
+#' @param xs See Usage.
+#' @param ys See Usage.
+#' @param ws See Usage.
+#' @return The value of \code{[}.
+#' @export
 .t4_wls_int <- function(xs, ys, ws) {
   sw <- sqrt(ws)
   X <- cbind(sw, sw * xs)
@@ -7,6 +16,15 @@
 }
 
 # degree-4 polynomial fit; coefficients and residual MSE
+#' Degree-4 polynomial fit; coefficients and residual MSE
+#'
+#' Part of the causrddm implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mp See Usage.
+#' @param val See Usage.
+#' @return A list with \code{beta}, \code{mse}.
+#' @export
 .t4_poly4 <- function(mp, val) {
   X <- cbind(1, mp, mp^2, mp^3, mp^4)
   fit <- .t4_olsfit(X, val)

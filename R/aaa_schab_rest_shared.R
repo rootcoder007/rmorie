@@ -31,6 +31,14 @@
 
 # --- Ch 1: Moran's I and Geary's c ------------------------------------------
 
+#' .schab_moran_check_w
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w See Usage.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 .schab_moran_check_w <- function(w) {
   w <- as.matrix(w)
   if (nrow(w) != ncol(w)) stop("weights must be a square matrix")
@@ -41,6 +49,14 @@
   w
 }
 
+#' .schab_weight_sums
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w See Usage.
+#' @return A list with \code{S0}, \code{S1}, \code{S2}.
+#' @export
 .schab_weight_sums <- function(w) {
   w <- .schab_moran_check_w(w)
   s0 <- sum(w)
@@ -52,6 +68,15 @@
   )
 }
 
+#' .schab_moran_i
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .schab_moran_i <- function(z, w) {
   z <- as.numeric(z)
   w <- .schab_moran_check_w(w)
@@ -64,6 +89,15 @@
   n * as.numeric(t(d) %*% w %*% d) / (sum(w) * denom)
 }
 
+#' .schab_geary_c
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .schab_geary_c <- function(z, w) {
   z <- as.numeric(z)
   w <- .schab_moran_check_w(w)
@@ -76,6 +110,14 @@
   (n - 1) * sum(w * diff2) / (2 * sum(w) * denom)
 }
 
+#' .schab_kurtosis_b
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .schab_kurtosis_b <- function(z) {
   d <- as.numeric(z) - mean(as.numeric(z))
   s2 <- sum(d * d)
@@ -83,6 +125,15 @@
   length(d) * sum(d^4) / s2^2
 }
 
+#' .schab_moran_moments
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param w See Usage.
+#' @return A list with \code{I}, \code{expectation}, \code{variance_normal}, \code{variance_randomization}, \code{sd_normal}, \code{sd_randomization}, \code{z_normal}, \code{z_randomization}, \code{kurtosis_b}, \code{S0}, \code{S1}, \code{S2}, \code{n}, \code{geary_c}, \code{geary_expectation}.
+#' @export
 .schab_moran_moments <- function(z, w) {
   z <- as.numeric(z)
   s <- .schab_weight_sums(w)
@@ -114,6 +165,16 @@
 
 # --- Ch 3: cross-K ----------------------------------------------------------
 
+#' .schab_ripley_weights
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param points See Usage.
+#' @param region See Usage.
+#' @param radii See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .schab_ripley_weights <- function(points, region, radii) {
   p <- matrix(as.numeric(points), ncol = 2)
   t_ <- as.numeric(radii)
@@ -156,6 +217,18 @@
   ifelse(whole | (t_ <= 0), 1, w)
 }
 
+#' .schab_cross_k
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @param region See Usage.
+#' @param r See Usage.
+#' @param correction Defaults to \code{"ripley"}.
+#' @return A vector, from \code{vapply}.
+#' @export
 .schab_cross_k <- function(p1, p2, region, r, correction = "ripley") {
   p1 <- matrix(as.numeric(p1), ncol = 2)
   p2 <- matrix(as.numeric(p2), ncol = 2)
@@ -186,6 +259,18 @@
   vapply(r, function(h) sum(winv[d <= h]) / (lam1 * lam2 * area), numeric(1))
 }
 
+#' .schab_cross_k_combined
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @param region See Usage.
+#' @param r See Usage.
+#' @param correction Defaults to \code{"ripley"}.
+#' @return A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star}, \code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.
+#' @export
 .schab_cross_k_combined <- function(p1, p2, region, r, correction = "ripley") {
   p1 <- matrix(as.numeric(p1), ncol = 2)
   p2 <- matrix(as.numeric(p2), ncol = 2)
@@ -205,6 +290,16 @@
 
 # Single-pattern K with the border ("reduced sample") correction, as in the
 # Python arm's k_function; needed by Diggle-Chetwynd's D(h).
+#' Single-pattern K with the border ("reduced sample") correction, as in
+#' the
+#'
+#' Python arm\'s k_function; needed by Diggle-Chetwynd\'s D(h).
+#'
+#' @param p See Usage.
+#' @param region See Usage.
+#' @param r See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .schab_k_border <- function(p, region, r) {
   p <- matrix(as.numeric(p), ncol = 2)
   n <- nrow(p)
@@ -226,6 +321,17 @@
   }, numeric(1))
 }
 
+#' .schab_dc_d
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p1 See Usage.
+#' @param p2 See Usage.
+#' @param region See Usage.
+#' @param r See Usage.
+#' @return A list with \code{D}, \code{K_11}, \code{K_22}, \code{r}.
+#' @export
 .schab_dc_d <- function(p1, p2, region, r) {
   k11 <- .schab_k_border(p1, region, r)
   k22 <- .schab_k_border(p2, region, r)
@@ -234,6 +340,14 @@
 
 # --- Ch 4: periodogram ------------------------------------------------------
 
+#' .schab_lattice_check
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{z}, as built in the body.
+#' @export
 .schab_lattice_check <- function(z) {
   z <- as.matrix(z)
   if (nrow(z) < 2L || ncol(z) < 2L) stop("lattice must be at least 2x2")
@@ -241,12 +355,29 @@
   z
 }
 
+#' .schab_fourier_freq
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param r See Usage.
+#' @param c See Usage.
+#' @return A list with \code{w1}, \code{w2}, \code{j}, \code{k}.
+#' @export
 .schab_fourier_freq <- function(r, c) {
   j <- seq.int(-((r - 1) %/% 2), r %/% 2)
   k <- seq.int(-((c - 1) %/% 2), c %/% 2)
   list(w1 = 2 * pi * j / r, w2 = 2 * pi * k / c, j = j, k = k)
 }
 
+#' .schab_sample_cov2d
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return A list with \code{cov}, \code{lags_j}, \code{lags_k}.
+#' @export
 .schab_sample_cov2d <- function(z) {
   z <- .schab_lattice_check(z)
   r <- nrow(z)
@@ -274,6 +405,15 @@
   list(cov = out, lags_j = lags_j, lags_k = lags_k)
 }
 
+#' .schab_periodogram
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param omit_zero_frequency Defaults to \code{TRUE}.
+#' @return A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{j}, \code{k}, \code{zero_index}, \code{nonzero_mask}, \code{mean_invariant}, \code{r}, \code{c}.
+#' @export
 .schab_periodogram <- function(z, omit_zero_frequency = TRUE) {
   z <- .schab_lattice_check(z)
   r <- nrow(z)
@@ -303,6 +443,14 @@
   )
 }
 
+#' .schab_periodogram_from_cov
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{covariance}, \code{lags_j}, \code{lags_k}.
+#' @export
 .schab_periodogram_from_cov <- function(z) {
   z <- .schab_lattice_check(z)
   f <- .schab_fourier_freq(nrow(z), ncol(z))
@@ -322,6 +470,20 @@
 
 # --- Ch 8: point source + moving windows ------------------------------------
 
+#' .schab_point_source_corr
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param source See Usage.
+#' @param theta1 See Usage.
+#' @param theta2 Defaults to \code{0}.
+#' @param theta3 Defaults to \code{0}.
+#' @param anisotropy Defaults to \code{NULL}.
+#' @param source_anisotropy Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .schab_point_source_corr <- function(coords, source, theta1, theta2 = 0,
                                      theta3 = 0, anisotropy = NULL,
                                      source_anisotropy = NULL) {
@@ -367,6 +529,18 @@
   out
 }
 
+#' .schab_practical_range
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param theta1 See Usage.
+#' @param theta2 Defaults to \code{0}.
+#' @param theta3 Defaults to \code{0}.
+#' @param ci Defaults to \code{NULL}.
+#' @param cj Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .schab_practical_range <- function(theta1, theta2 = 0, theta3 = 0,
                                    ci = NULL, cj = NULL) {
   if (theta1 <= 0) stop("theta1 must be positive")
@@ -376,6 +550,19 @@
   3 * exp(-theta2 * abs(ci - cj) - theta3 * pmin(ci, cj)) / theta1
 }
 
+#' .schab_haas_window
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param target See Usage.
+#' @param min_sites Defaults to \code{35L}.
+#' @param step Defaults to \code{5L}.
+#' @param lag_classes Defaults to \code{NULL}.
+#' @param max_sites Defaults to \code{NULL}.
+#' @return The value of \code{repeat}.
+#' @export
 .schab_haas_window <- function(coords, target, min_sites = 35L, step = 5L,
                                lag_classes = NULL, max_sites = NULL) {
   s <- as.matrix(coords)
@@ -416,6 +603,16 @@
   }
 }
 
+#' .schab_empirical_variogram
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param z See Usage.
+#' @param n_lags Defaults to \code{10L}.
+#' @return A list with \code{h}, \code{gamma}, \code{counts}.
+#' @export
 .schab_empirical_variogram <- function(coords, z, n_lags = 10L) {
   s <- as.matrix(coords)
   z <- as.numeric(z)
@@ -444,6 +641,16 @@
   list(h = hbar, gamma = gbar, counts = cnt)
 }
 
+#' .schab_variogram_wls
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param gamma See Usage.
+#' @param counts See Usage.
+#' @return A list with \code{sill}, \code{range}, \code{converged}, \code{wls}.
+#' @export
 .schab_variogram_wls <- function(h, gamma, counts) {
   h <- as.numeric(h)
   g <- as.numeric(gamma)
@@ -477,6 +684,19 @@
   list(sill = best[1], range = best[2], converged = TRUE, wls = loss)
 }
 
+#' .schab_krige_at
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param z See Usage.
+#' @param target See Usage.
+#' @param sill See Usage.
+#' @param rng See Usage.
+#' @param mu See Usage.
+#' @return A numeric value.
+#' @export
 .schab_krige_at <- function(coords, z, target, sill, rng, mu) {
   s <- as.matrix(coords)
   z <- as.numeric(z)
@@ -489,6 +709,21 @@
   mu + sum(c0 * sol)
 }
 
+#' .schab_moving_window_krige
+#'
+#' Part of the schab_rest_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param z See Usage.
+#' @param targets See Usage.
+#' @param min_sites Defaults to \code{35L}.
+#' @param step Defaults to \code{5L}.
+#' @param n_lags Defaults to \code{10L}.
+#' @param local_mean Defaults to \code{FALSE}.
+#' @param local_variogram Defaults to \code{TRUE}.
+#' @return A list with \code{prediction}, \code{local_sill}, \code{local_range}, \code{window_sizes}, \code{converged}, \code{theta_is_global}, \code{global_sill}, \code{global_range}, \code{caveats}.
+#' @export
 .schab_moving_window_krige <- function(coords, z, targets, min_sites = 35L,
                                        step = 5L, n_lags = 10L,
                                        local_mean = FALSE,

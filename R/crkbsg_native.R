@@ -10,6 +10,14 @@
                         b22 = 1.0, b12 = 0.0, nugget11 = 0.0,
                         nugget22 = 0.0, nugget12 = 0.0)
 
+#' .crkbsg_rows
+#'
+#' Part of the crkbsg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .crkbsg_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -25,6 +33,16 @@
 }
 
 # Correlogram of the basic structure; rho(0) = 1.
+#' Correlogram of the basic structure; rho(0) = 1
+#'
+#' Part of the crkbsg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @param model See Usage.
+#' @param rng See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .crkbsg_rho <- function(h, model, rng) {
   if (h <= 0.0) return(1.0)
   if (rng <= .crkbsg_EPS) return(0.0)
@@ -39,11 +57,29 @@
                       "gaussian, got '%s'"), model))
 }
 
+#' .crkbsg_dist
+#'
+#' Part of the crkbsg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .crkbsg_dist <- function(a, b) sqrt(sum((a - b) ^ 2))
 
 # Gaussian elimination with partial pivoting. The cokriging matrix is
 # symmetric but NOT positive definite -- the Lagrange rows see to that --
 # so a Cholesky solve is not available.
+#' Gaussian elimination with partial pivoting. The cokriging matrix is
+#'
+#' symmetric but NOT positive definite -- the Lagrange rows see to that
+#' -- so a Cholesky solve is not available.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .crkbsg_solve <- function(A, b) {
   n <- length(b)
   M <- cbind(A, b)
@@ -207,6 +243,13 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
                      "zero when b12 = 0"))
 }
 
+#' .crkbsg_cheatsheet
+#'
+#' Part of the crkbsg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .crkbsg_cheatsheet <- function() {
   paste0("crkbsg: morie_crkbsg_cokriging(coords, y, z, s_predict, ",
          "cross_variogram) -> ordinary cokriging prediction and variance ",

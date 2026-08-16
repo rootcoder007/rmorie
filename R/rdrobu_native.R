@@ -87,6 +87,13 @@ morie_calonico_cattaneo_titiunik <- function(y, x, cutoff = 0.0, ...) {
 # Compact alias per ledger/NAMING.md
 morie_rd_confidence_intervals <- morie_rdrobu
 
+#' .rdrobu_cheatsheet
+#'
+#' Part of the rdrobu_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .rdrobu_cheatsheet <- function() {
   "rdrobu: the three RD intervals of Calonico, Cattaneo & Titiunik (2014) side by side -- conventional, bias-corrected, and robust (recentred AND rescaled by V + C^bc). Shares its implementation with causrddc; see that module for the estimator, bandwidths and designs."
 }

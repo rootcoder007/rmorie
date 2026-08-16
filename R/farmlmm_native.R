@@ -16,12 +16,35 @@
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
+#' Base R has no erf/erfc; both are pnorm in disguise. Defined here so
+#'
+#' the arm stays base-R only, as the package requires.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .farmlmm_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+#' .farmlmm_erfc
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .farmlmm_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .farmlmm_EPS <- 1e-12
 
 # mirror _s03core.mat
+#' Mirror _s03core.mat
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{X}, as built in the body.
+#' @export
 .farmlmm_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   if (is.null(dim(X))) X <- matrix(as.numeric(X), nrow = length(X))
@@ -30,15 +53,42 @@
 }
 
 # mirror _s03core.vec
+#' Mirror _s03core.vec
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .to_vec <- function(y) {
   if (is.data.frame(y)) y <- as.matrix(y)
   if (!is.null(dim(y))) y <- as.numeric(y)
   as.numeric(y)
 }
 
+#' .norm_cdf
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .norm_cdf <- function(x) 0.5 * (1 + .farmlmm_erf(x / sqrt(2)))
 
 # mirror _s03core.wls
+#' Mirror _s03core.wls
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @param rcond See Usage.
+#' @return A list with \code{coef}.
+#' @export
 .farmlmm_wls <- function(X, y, w, rcond) {
   X <- .farmlmm_to_mat(X)
   y <- .to_vec(y)
@@ -53,6 +103,15 @@
   list(coef = as.numeric(co))
 }
 
+#' .kinship_from_markers
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param G See Usage.
+#' @param markers Defaults to \code{NULL}.
+#' @return A list with \code{K}, \code{markers_used}, \code{n_markers}, \code{all_markers}.
+#' @export
 .kinship_from_markers <- function(G, markers = NULL) {
   M <- .farmlmm_to_mat(G)
   n <- nrow(M); p <- ncol(M)
@@ -72,6 +131,16 @@
        n_markers = length(cols), all_markers = is.null(markers))
 }
 
+#' .confounding
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param G See Usage.
+#' @param K See Usage.
+#' @param marker See Usage.
+#' @return A list with \code{correlation}, \code{marker}, \code{note}.
+#' @export
 .confounding <- function(G, K, marker) {
   M <- .farmlmm_to_mat(G)
   n <- nrow(M)
@@ -85,6 +154,17 @@
        note = "kinship from ALL markers contains the tested marker; that is the confounding")
 }
 
+#' .fixed_effect_scan
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param G See Usage.
+#' @param covariates Defaults to \code{integer(0)}.
+#' @param K Defaults to \code{NULL}.
+#' @return A list with \code{p}, \code{beta}, \code{covariates}, \code{note}.
+#' @export
 .fixed_effect_scan <- function(y, G, covariates = integer(0), K = NULL) {
   yv <- .to_vec(y)
   M <- .farmlmm_to_mat(G)
@@ -117,6 +197,17 @@
        note = "associated markers enter as COVARIATES, which is what controls false positives")
 }
 
+#' .random_effect_step
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param G See Usage.
+#' @param selected See Usage.
+#' @param bins Defaults to \code{NULL}.
+#' @return A list with \code{K}, \code{markers_used}, \code{blup}, \code{note}.
+#' @export
 .random_effect_step <- function(y, G, selected, bins = NULL) {
   sel <- as.integer(selected) + 1L
   if (length(sel) == 0L) {
@@ -133,6 +224,18 @@
        note = "kinship from a SMALL selected set, so it no longer contains the marker under test")
 }
 
+#' .farmcpu
+#'
+#' Part of the farmlmm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param G See Usage.
+#' @param max_iter Defaults to \code{10L}.
+#' @param threshold Defaults to \code{NULL}.
+#' @param seed Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations}, \code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method}, \code{note}.
+#' @export
 .farmcpu <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
   yv <- .to_vec(y)
   M <- .farmlmm_to_mat(G)

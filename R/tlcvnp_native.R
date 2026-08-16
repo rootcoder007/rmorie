@@ -217,6 +217,13 @@ cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
        note = "adapts to the unknown smoothness instead of assuming it, and still supplies formal inference")
 }
 
+#' .tlcvnp_cheatsheet
+#'
+#' Part of the tlcvnp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlcvnp_cheatsheet <- function() {
   paste("tlcvnp: a density or regression curve AT A POINT is ",
         "NONpathwise differentiable -- no efficient influence ",

@@ -1,0 +1,20 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{.morie_mcmc_autocov}
+\alias{.morie_mcmc_autocov}
+\title{Autocovariance by FFT, matching _mcmc.autocov: zero-padded to a power}
+\usage{
+.morie_mcmc_autocov(x, max_lag = NULL)
+}
+\arguments{
+\item{x}{See Usage.}
+\item{max_lag}{Defaults to \code{NULL}.}
+}
+\description{
+of two at least 2n, divided by n (biased, which is what keeps the sequence positive semi-definite).
+}
+\value{
+The value of \code{[}.
+}
+\keyword{internal}

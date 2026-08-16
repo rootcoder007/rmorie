@@ -57,6 +57,15 @@
 # Neither language's sum() is a plain double loop -- R accumulates in
 # long double, CPython 3.12 and later compensate -- and they are not
 # unfaithful in the same way.
+#' Compensated accumulation, so both language arms agree bit for bit
+#'
+#' Neither language\'s sum() is a plain double loop -- R accumulates in
+#' long double, CPython 3.12 and later compensate -- and they are not
+#' unfaithful in the same way.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .ecstcr_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -69,12 +78,51 @@
   s + cc
 }
 
+#' .ecstcr_mean
+#'
+#' Part of the ecsTCR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .ecstcr_mean <- function(v)
   if (length(v)) .ecstcr_csum(v) / length(v) else NA_real_
 
+#' .ecstcr_deriv
+#'
+#' Part of the ecsTCR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param TD See Usage.
+#' @param F See Usage.
+#' @param lam See Usage.
+#' @param gam See Usage.
+#' @param eps See Usage.
+#' @param C See Usage.
+#' @param CD See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .ecstcr_deriv <- function(T, TD, F, lam, gam, eps, C, CD)
   c((F - lam * T - eps * gam * (T - TD)) / C, gam * (T - TD) / CD)
 
+#' .ecstcr_rk4
+#'
+#' Part of the ecsTCR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param TD See Usage.
+#' @param F See Usage.
+#' @param lam See Usage.
+#' @param gam See Usage.
+#' @param eps See Usage.
+#' @param C See Usage.
+#' @param CD See Usage.
+#' @param h See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .ecstcr_rk4 <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   k1 <- .ecstcr_deriv(T, TD, F, lam, gam, eps, C, CD)
   k2 <- .ecstcr_deriv(T + 0.5 * h * k1[1], TD + 0.5 * h * k1[2], F, lam,
@@ -90,6 +138,22 @@
     TD + h * .ecstcr_csum(c(k1[2], 2 * k2[2], 2 * k3[2], k4[2])) / 6)
 }
 
+#' .ecstcr_euler
+#'
+#' Part of the ecsTCR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param TD See Usage.
+#' @param F See Usage.
+#' @param lam See Usage.
+#' @param gam See Usage.
+#' @param eps See Usage.
+#' @param C See Usage.
+#' @param CD See Usage.
+#' @param h See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .ecstcr_euler <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   d <- .ecstcr_deriv(T, TD, F, lam, gam, eps, C, CD)
   c(T + h * d[1], TD + h * d[2])
@@ -98,6 +162,22 @@
 # One step of the exact solution for a forcing held constant over the
 # step. The system is linear, so diagonalising the 2x2 matrix gives the
 # answer outright: no tolerance, no step-size sensitivity.
+#' One step of the exact solution for a forcing held constant over the
+#'
+#' step. The system is linear, so diagonalising the 2x2 matrix gives the
+#' answer outright: no tolerance, no step-size sensitivity.
+#'
+#' @param T See Usage.
+#' @param TD See Usage.
+#' @param F See Usage.
+#' @param lam See Usage.
+#' @param gam See Usage.
+#' @param eps See Usage.
+#' @param C See Usage.
+#' @param CD See Usage.
+#' @param h See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .ecstcr_analytic <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   if (gam == 0) {
     # The one-layer model is not a degenerate case to be nursed through
@@ -203,6 +283,15 @@ morie_ecsTCR_integrate <- function(forcing, lam, gamma = 0.7,
 morie_ecsTCR_co2_forcing <- function(ratio, f2x = .ECSTCR_F2X)
   f2x * (log(ratio) / log(2))
 
+#' .ecstcr_ols
+#'
+#' Part of the ecsTCR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .ecstcr_ols <- function(x, y) {
   mx <- .ecstcr_mean(x)
   my <- .ecstcr_mean(y)

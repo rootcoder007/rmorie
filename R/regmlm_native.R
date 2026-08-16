@@ -37,6 +37,16 @@
 
 CV_SCHEMES <- c("kfold", "loo")
 
+#' .regmlm_lambda_grid
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param n See Usage.
+#' @param n_ridge Defaults to \code{5}.
+#' @return A numeric value.
+#' @export
 .regmlm_lambda_grid <- function(p, n, n_ridge = 5) {
   j <- as.integer(n_ridge)
   if (j < 1) stop("regmlm: need at least one ridge predictor")
@@ -44,6 +54,16 @@ CV_SCHEMES <- c("kfold", "loo")
   p * (1 - hs) / hs
 }
 
+#' .regmlm_folds
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @param scheme See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .regmlm_folds <- function(n, k, scheme) {
   if (scheme == "loo") {
     return(lapply(seq_len(n), function(i) i))
@@ -52,6 +72,15 @@ CV_SCHEMES <- c("kfold", "loo")
   lapply(seq_len(k) - 1, function(f) which((seq_len(n) - 1) %% k == f))
 }
 
+#' .regmlm_residualise
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param cols See Usage.
+#' @return A numeric value.
+#' @export
 .regmlm_residualise <- function(v, cols) {
   if (!is.matrix(cols)) {
     cols <- do.call(cbind, cols)
@@ -360,6 +389,13 @@ morie_regmlm <- function(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 
 
 whole_genome_regression <- morie_regmlm
 
+#' .regmlm_cheatsheet
+#'
+#' Part of the regmlm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .regmlm_cheatsheet <- function() {
   "regmlm: Step 1 is two stacked ridges. Level 0 fits J ridges per block of B markers at DIFFERENT shrinkages (MAP under a Gaussian prior), turning 500k markers into 2.5k local polygenic scores at B=1000, J=5. Level 1 combines them under cross-validation -- in-sample would be circular. The combined predictor is split by chromosome, each background EXCLUDING its own chromosome, because testing a variant against a background containing it is proximal contamination. Step 2 tests each variant with that background as an offset."
 }

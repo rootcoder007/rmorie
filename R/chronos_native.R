@@ -14,6 +14,14 @@
 .chronos_PAD <- -1L
 .chronos_EOS <- -2L
 
+#' .chronos_vec
+#'
+#' Part of the chronos_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .chronos_vec <- function(x) as.numeric(x)
 
 #' mean_scale

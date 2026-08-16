@@ -16,8 +16,24 @@
 
 .PAINN_EPS <- 1e-12
 
+#' .painn_vec
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .painn_vec <- function(v) as.numeric(unlist(v))
 
+#' .painn_mat
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .painn_mat <- function(M) {
   if (is.matrix(M)) {
     storage.mode(M) <- "double"
@@ -225,6 +241,13 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   )
 }
 
+#' .painn_cheatsheet
+#'
+#' Part of the painn_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .painn_cheatsheet <- function() {
   paste("painn: message passing was LESS DATA EFFICIENT than kernel ",
         "methods, and the diagnosis is INVARIANT representations -- a ",

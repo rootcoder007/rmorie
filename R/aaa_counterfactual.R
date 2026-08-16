@@ -16,6 +16,15 @@
 # stats::.  When several u reproduce the evidence, the result reports it
 # (n_compatible_u, counterfactual_unique) instead of silently picking one.
 
+#' .morie_scm_solve
+#'
+#' Part of the counterfactual implementation; see the file header for
+#' the source it follows.
+#'
+#' @param u See Usage.
+#' @param equations See Usage.
+#' @return The value of \code{vals}, as built in the body.
+#' @export
 .morie_scm_solve <- function(u, equations) {
   vals <- as.list(u)
   remaining <- names(equations)
@@ -45,6 +54,18 @@
   vals
 }
 
+#' Compact Nelder-Mead (reflection 1, expansion 2, contraction 0.5,
+#'
+#' shrink 0.5) -- enough for the small abduction problems this serves.
+#' ponytail: fold into a shared native optimizer when the stats::optim
+#' sweep reaches the 680 call sites.
+#'
+#' @param f See Usage.
+#' @param x0 See Usage.
+#' @param maxit Defaults to \code{400}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{par}, \code{value}.
+#' @export
 .morie_neldermead <- function(f, x0, maxit = 400, tol = 1e-10) {
   # compact Nelder-Mead (reflection 1, expansion 2, contraction 0.5,
   # shrink 0.5) -- enough for the small abduction problems this serves.

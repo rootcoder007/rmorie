@@ -14,6 +14,19 @@
 # two-value-head decomposition V = V_E + V_I of section 2.3.
 
 # Private: frozen random target net x -> tanh(W1 x + b1) W2, W fixed at init.
+#' Private: frozen random target net x -> tanh(W1 x + b1) W2, W fixed at
+#' init
+#'
+#' Part of the rndnet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_in See Usage.
+#' @param n_hidden See Usage.
+#' @param n_out See Usage.
+#' @param rng See Usage.
+#' @param scale Defaults to \code{1}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .rndnet_random_features_new <- function(n_in, n_hidden, n_out, rng, scale=1.0) {
   s1 <- scale / sqrt(max(1, n_in))
   s2 <- scale / sqrt(max(1, n_hidden))
@@ -64,6 +77,17 @@
 
 # Private: predictor with the same random feature layer but a trainable
 # output weight matrix W, updated by plain SGD on the MSE.
+#' Private: predictor with the same random feature layer but a trainable
+#'
+#' output weight matrix W, updated by plain SGD on the MSE.
+#'
+#' @param n_in See Usage.
+#' @param n_hidden See Usage.
+#' @param n_out See Usage.
+#' @param rng See Usage.
+#' @param scale Defaults to \code{1}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .rndnet_predictor_new <- function(n_in, n_hidden, n_out, rng, scale=1.0) {
   e <- new.env()
   e$n_in <- n_in
@@ -100,6 +124,14 @@
 }
 
 # Private: Welford running mean and variance for the normalisers.
+#' Private: Welford running mean and variance for the normalisers
+#'
+#' Part of the rndnet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .rndnet_running_stats_new <- function(n) {
   e <- new.env()
   e$n <- 0
@@ -323,6 +355,13 @@ morie_rndnet_combine_returns <- function(reward_ext, reward_int,
 }
 
 # Private one-line reminder of what this module is for.
+#' Private one-line reminder of what this module is for
+#'
+#' Part of the rndnet_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .rndnet_cheatsheet <- function() {
   paste("rndnet: RND bonus r^i = ||fhat(x) - f(x)||^2 with f a",
         "FROZEN random net (Burda 2019). Random deterministic",

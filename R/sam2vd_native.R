@@ -61,6 +61,14 @@
 
 # ---- private helpers --------------------------------------------------
 
+#' .sam2vd_to_num
+#'
+#' Part of the sam2vd_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .sam2vd_to_num <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x)) return(as.numeric(unlist(x)))

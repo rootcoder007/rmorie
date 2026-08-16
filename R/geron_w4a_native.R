@@ -16,8 +16,26 @@
 # Remaining 34 modules in rw4_a.txt were not reached in this pass (see
 # report); they still need the same read+wrap treatment.
 
+#' .w4a_need
+#'
+#' Part of the geron_w4a_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param cond See Usage.
+#' @param msg See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .w4a_need <- function(cond, msg) if (!isTRUE(cond)) stop(msg, call. = FALSE)
 
+#' .w4a_lcg_u
+#'
+#' Part of the geron_w4a_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{u}, as built in the body.
+#' @export
 .w4a_lcg_u <- function(n, seed) {
   s <- as.integer(seed) %% 2^32
   u <- numeric(n)

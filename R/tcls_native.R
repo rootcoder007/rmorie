@@ -15,6 +15,15 @@
 # from the printed recursion but does not reproduce the paper's stated
 # 0.278 for Table 5's Disease attribute.  Prefer ordered or equal.
 
+#' .morie_tcls_dist
+#'
+#' Part of the tcls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param labels See Usage.
+#' @param domain See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .morie_tcls_dist <- function(labels, domain) {
   n <- length(labels)
   if (n < 1) stop("morie_tcls: empty group of records")
@@ -29,8 +38,26 @@
   p
 }
 
+#' .morie_tcls_equal
+#'
+#' Part of the tcls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return A numeric value.
+#' @export
 .morie_tcls_equal <- function(p, q) 0.5 * sum(abs(p - q))
 
+#' .morie_tcls_ordered
+#'
+#' Part of the tcls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return A numeric value.
+#' @export
 .morie_tcls_ordered <- function(p, q) {
   m <- length(p)
   if (m < 2) return(0)
@@ -43,12 +70,32 @@
   tot / (m - 1)
 }
 
+#' .morie_tcls_height
+#'
+#' Part of the tcls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param children See Usage.
+#' @return A numeric value.
+#' @export
 .morie_tcls_height <- function(n, children) {
   if (is.null(children[[n]])) return(0L)
   1L + max(vapply(children[[n]],
                   function(c) .morie_tcls_height(c, children), integer(1)))
 }
 
+#' .morie_tcls_hier
+#'
+#' Part of the tcls_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param hierarchy See Usage.
+#' @param domain See Usage.
+#' @return The value of \code{cost}, as built in the body.
+#' @export
 .morie_tcls_hier <- function(p, q, hierarchy, domain) {
   children <- hierarchy
   named <- names(children)

@@ -19,6 +19,15 @@
 # consistency correction. Row indices are 0-based here, as they are in
 # the Python arm; R subscripts add one at the point of use.
 
+#' .forwsr_prep
+#'
+#' Part of the forwsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{M}, \code{y}, \code{n}, \code{p}.
+#' @export
 .forwsr_prep <- function(X, y) {
   M <- as.matrix(X); storage.mode(M) <- "double"
   yy <- as.numeric(y)
@@ -34,6 +43,17 @@
   list(M = M, y = yy, n = n, p = p)
 }
 
+#' CPython\'s builtin sum() switched to Neumaier compensated summation
+#'
+#' for floats in 3.12. R\'s sum() accumulates in long double, and a
+#' plain loop accumulates in double; neither reproduces it. The forward
+#' search orders residuals that differ in their last digits, so the
+#' summation algorithm decides which row enters next and the two arms
+#' part company about a dozen steps in. Do what CPython does.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .forwsr_dsum <- function(v) {
   # CPython's builtin sum() switched to Neumaier compensated summation
   # for floats in 3.12. R's sum() accumulates in long double, and a
@@ -53,6 +73,15 @@
   s + cs
 }
 
+#' .forwsr_solve
+#'
+#' Part of the forwsr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .forwsr_solve <- function(A, b) {
   p <- length(b)
   Ab <- cbind(A, b)
@@ -72,6 +101,16 @@
   vapply(seq_len(p), function(i) Ab[i, p + 1L] / Ab[i, i], numeric(1))
 }
 
+#' R\'s qnorm IS Wichura AS 241 (PPND16); the Python arm implements the
+#'
+#' same rational approximation with the same coefficients, and the two
+#' agree bit for bit. Bisecting on erf/pnorm instead lands on different
+#' sides of the root in the last ulp, which is enough to move the
+#' consistency factor and, through it, the deletion residual.
+#'
+#' @param p See Usage.
+#' @return The value of \code{qnorm}.
+#' @export
 .forwsr_norm_ppf <- function(p) {
   # R's qnorm IS Wichura AS 241 (PPND16); the Python arm implements the
   # same rational approximation with the same coefficients, and the two

@@ -19,13 +19,38 @@
 
 .tmldgp_EPS <- 1e-12
 
+#' .tmldgp_logit
+#'
+#' Part of the tmldgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tmldgp_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
+#' .tmldgp_expit
+#'
+#' Part of the tmldgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmldgp_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
 
+#' .soft
+#'
+#' Part of the tmldgp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param t See Usage.
+#' @return A numeric value.
+#' @export
 .soft <- function(x, t) sign(x) * max(abs(x) - t, 0)
 
 #' Coordinate descent for the L1-penalised least squares fit

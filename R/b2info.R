@@ -18,6 +18,15 @@
 # both R trees (morie/r-package/morie and r-morie-oss) and in
 # _lazy_map.json at the time of writing.
 
+#' .b2logb
+#'
+#' Part of the b2info implementation; see the file header for the source
+#' it follows.
+#'
+#' @param v See Usage.
+#' @param base Defaults to \code{2}.
+#' @return A numeric value.
+#' @export
 .b2logb <- function(v, base = 2) {
   out <- log(as.numeric(v))
   if (is.null(base)) return(out)
@@ -26,6 +35,14 @@
   out / log(b)
 }
 
+#' .b2pnorm
+#'
+#' Part of the b2info implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .b2pnorm <- function(p) {
   p <- as.numeric(p)
   if (any(p < 0)) stop("probabilities must be non-negative", call. = FALSE)
@@ -34,13 +51,41 @@
   p / tot
 }
 
+#' .b2xlogx
+#'
+#' Part of the b2info implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @param base Defaults to \code{2}.
+#' @return The value of \code{ifelse}.
+#' @export
 .b2xlogx <- function(p, base = 2) {
   p <- as.numeric(p)
   ifelse(p > 0, p * .b2logb(ifelse(p > 0, p, 1), base), 0)
 }
 
+#' .b2ent
+#'
+#' Part of the b2info implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @param base Defaults to \code{2}.
+#' @return A numeric value.
+#' @export
 .b2ent <- function(p, base = 2) -sum(.b2xlogx(p, base))
 
+#' .b2kl
+#'
+#' Part of the b2info implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param base Defaults to \code{2}.
+#' @return A numeric value.
+#' @export
 .b2kl <- function(p, q, base = 2) {
   p <- as.numeric(p)
   q <- as.numeric(q)
@@ -99,6 +144,14 @@ Cndmi <- function(pxyz, base = 2) {
        method = "Conditional mutual information I(X;Y|Z) -- Cover & Thomas (2006) eq. (2.60)")
 }
 
+#' .b2as3d
+#'
+#' Part of the b2info implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .b2as3d <- function(p) {
   if (is.array(p) && length(dim(p)) == 3L) {
     storage.mode(p) <- "double"
@@ -122,6 +175,14 @@ Cndmi <- function(pxyz, base = 2) {
   out
 }
 
+#' .b2as2d
+#'
+#' Part of the b2info implementation; see the file header for the source
+#' it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .b2as2d <- function(p) {
   m <- if (is.matrix(p)) p else do.call(rbind, lapply(p, as.numeric))
   storage.mode(m) <- "double"

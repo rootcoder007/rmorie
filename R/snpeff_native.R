@@ -77,6 +77,14 @@ translate <- function(seq, to_stop = FALSE) {
   paste0(out, collapse = "")
 }
 
+#' .snpeff_impact
+#'
+#' Part of the snpeff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param effect See Usage.
+#' @return A character value.
+#' @export
 .snpeff_impact <- function(effect) {
   if (effect %in% .SNPEFF_HIGH) return("HIGH")
   if (effect %in% .SNPEFF_MODERATE) return("MODERATE")
@@ -84,6 +92,23 @@ translate <- function(seq, to_stop = FALSE) {
   "MODIFIER"
 }
 
+#' .snpeff_pack
+#'
+#' Part of the snpeff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param effect See Usage.
+#' @param ref_codon See Usage.
+#' @param alt_codon See Usage.
+#' @param ref_aa See Usage.
+#' @param alt_aa See Usage.
+#' @param ref See Usage.
+#' @param alt See Usage.
+#' @param pos See Usage.
+#' @param codon_index Defaults to \code{NULL}.
+#' @param hgvs_p Defaults to \code{NULL}.
+#' @return A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon}, \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c}, \code{pos}, \code{ref}, \code{alt}.
+#' @export
 .snpeff_pack <- function(effect, ref_codon, alt_codon, ref_aa, alt_aa,
                          ref, alt, pos, codon_index = NULL,
                          hgvs_p = NULL) {
@@ -255,6 +280,13 @@ snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
                      "is 1-based, as the notation requires"))
 }
 
+#' .snpeff_cheatsheet
+#'
+#' Part of the snpeff_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .snpeff_cheatsheet <- function() {
   paste0("snpeff: variant annotation (Cingolani et al. 2012). ",
          "Classify by codon change: synonymous, missense, ",

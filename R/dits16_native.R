@@ -53,6 +53,14 @@ gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
 }
 
 # Flatten to a numeric vector (mirrors s03core.vec).
+#' Flatten to a numeric vector (mirrors s03core.vec)
+#'
+#' Part of the dits16_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .dits16_vec <- function(x) {
   as.numeric(x)
 }

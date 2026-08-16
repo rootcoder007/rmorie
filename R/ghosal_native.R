@@ -20,6 +20,16 @@
 # 1e10, which overflow R's 32-bit integer and silently become NA.
 # Python's int has no such limit, so coercing here would break parity
 # exactly where the asymptotics become interesting.
+#' N is kept as a DOUBLE, not coerced with as.integer(): these rate
+#'
+#' formulas are routinely evaluated at hypothetical sample sizes like
+#' 1e10, which overflow R\'s 32-bit integer and silently become NA.
+#' Python\'s int has no such limit, so coercing here would break parity
+#' exactly where the asymptotics become interesting.
+#'
+#' @param n See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .morie_gh_n <- function(n) {
   v <- as.numeric(n)
   if (!is.finite(v) || v < 2) {
@@ -28,6 +38,16 @@
   v
 }
 
+#' .morie_gh_minimax_rate
+#'
+#' Part of the ghosal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param s See Usage.
+#' @param d Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .morie_gh_minimax_rate <- function(n, s, d = 1) {
   n <- .morie_gh_n(n)
   s <- as.numeric(s)
@@ -39,16 +59,48 @@
   n^(-s / (2 * s + as.numeric(d)))
 }
 
+#' .morie_gh_trapz
+#'
+#' Part of the ghosal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xx See Usage.
+#' @param yy See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gh_trapz <- function(xx, yy) {
   sum(diff(xx) * (utils::head(yy, -1L) + utils::tail(yy, -1L)) / 2)
 }
 
+#' .morie_gh_hellinger
+#'
+#' Part of the ghosal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param grid See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gh_hellinger <- function(p, q, grid) {
   pv <- pmax(as.numeric(p), 0)
   qv <- pmax(as.numeric(q), 0)
   sqrt(0.5 * .morie_gh_trapz(as.numeric(grid), (sqrt(pv) - sqrt(qv))^2))
 }
 
+#' .morie_gh_polya_tree
+#'
+#' Part of the ghosal_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param grid See Usage.
+#' @param levels Defaults to \code{6L}.
+#' @param a_fn Defaults to \code{NULL}.
+#' @param lo Defaults to \code{NULL}.
+#' @param hi Defaults to \code{NULL}.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_gh_polya_tree <- function(x, grid, levels = 6L, a_fn = NULL,
                                  lo = NULL, hi = NULL) {
   xv <- as.numeric(x)
@@ -89,6 +141,14 @@
 
 # Stick-breaking: w_k = V_k prod_{j<k}(1 - V_j), V_k ~ Beta(1, alpha),
 # with the last stick closing so the weights sum to one exactly.
+#' Stick-breaking: w_k = V_k prod_{j<k}(1 - V_j), V_k ~ Beta(1, alpha),
+#'
+#' with the last stick closing so the weights sum to one exactly.
+#'
+#' @param alpha See Usage.
+#' @param K See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gh_stick <- function(alpha, K) {
   v <- stats::rbeta(K, 1, alpha)
   v[K] <- 1

@@ -54,21 +54,55 @@
 
 # ---- Private grammar utilities ----------------------------------------
 
+#' .prsLR_grammar
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .prsLR_grammar <- function(g) {
   if (is.list(g) && !is.null(g$rules) && !is.null(g$start)) return(g)
   stop("prsLR: grammar must be a list with $rules and $start")
 }
 
+#' .prsLR_nonterminals
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{unique}.
+#' @export
 .prsLR_nonterminals <- function(g) {
   unique(sapply(g$rules, function(r) r[[1]]))
 }
 
+#' .prsLR_terminals
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{setdiff}.
+#' @export
 .prsLR_terminals <- function(g) {
   nt_set <- .prsLR_nonterminals(g)
   terms  <- unique(unlist(lapply(g$rules, function(r) r[[2]])))
   setdiff(terms, nt_set)
 }
 
+#' .prsLR_first_seq
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq See Usage.
+#' @param first See Usage.
+#' @param nts See Usage.
+#' @return The value of \code{unique}.
+#' @export
 .prsLR_first_seq <- function(seq, first, nts) {
   out <- character(0)
   if (length(seq) == 0) return(c(.prsLR_EPSILON))
@@ -86,6 +120,14 @@
   unique(out)
 }
 
+#' .prsLR_first_sets
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return The value of \code{first}, as built in the body.
+#' @export
 .prsLR_first_sets <- function(g) {
   nts   <- .prsLR_nonterminals(g)
   first <- list()
@@ -107,6 +149,15 @@
   first
 }
 
+#' .prsLR_follow_sets
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param first See Usage.
+#' @return The value of \code{follow}, as built in the body.
+#' @export
 .prsLR_follow_sets <- function(g, first) {
   nts    <- .prsLR_nonterminals(g)
   follow <- list()
@@ -138,6 +189,14 @@
   follow
 }
 
+#' .prsLR_linearise
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return A character value.
+#' @export
 .prsLR_linearise <- function(tree) {
   if (is.null(tree$children)) return(tree$symbol)
   paste(sapply(tree$children, .prsLR_linearise), collapse = " ")
@@ -145,6 +204,14 @@
 
 # ---- Core LR machinery -------------------------------------------------
 
+#' .prsLR_augment
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @return A list with \code{rules}, \code{start}, \code{original_start}.
+#' @export
 .prsLR_augment <- function(g) {
   tag <- .prsLR_AUG
   nts <- .prsLR_nonterminals(g)
@@ -154,6 +221,18 @@
   list(rules = new_rules, start = tag, original_start = g$start)
 }
 
+#' .prsLR_closure
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param items See Usage.
+#' @param ag See Usage.
+#' @param first See Usage.
+#' @param nts See Usage.
+#' @param k See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .prsLR_closure <- function(items, ag, first, nts, k) {
   out <- unique(as.character(items))
   changed <- TRUE
@@ -200,6 +279,19 @@
   sort(unique(out))
 }
 
+#' .prsLR_goto
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param sym See Usage.
+#' @param ag See Usage.
+#' @param first See Usage.
+#' @param nts See Usage.
+#' @param k See Usage.
+#' @return The value of \code{.prsLR_closure}.
+#' @export
 .prsLR_goto <- function(state, sym, ag, first, nts, k) {
   moved <- character(0)
   for (it in state) {
@@ -220,6 +312,14 @@
   .prsLR_closure(moved, ag, first, nts, k)
 }
 
+#' .prsLR_core
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .prsLR_core <- function(state) {
   cores <- character(0)
   for (it in state) {
@@ -229,6 +329,15 @@
   sort(unique(cores))
 }
 
+#' .prsLR_canonical_collection
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ag See Usage.
+#' @param k See Usage.
+#' @return A list with \code{states}, \code{index}, \code{transitions}, \code{first}, \code{nonterminals}.
+#' @export
 .prsLR_canonical_collection <- function(ag, k) {
   g0 <- list(rules = ag$rules, start = ag$start)
   first <- .prsLR_first_sets(g0)
@@ -262,6 +371,15 @@
        first = first, nonterminals = nts)
 }
 
+#' .prsLR_build_tables
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param method See Usage.
+#' @return A list with \code{action}, \code{goto}, \code{states}, \code{n_states}, \code{conflicts}, \code{rules}, \code{augmented}, \code{method}.
+#' @export
 .prsLR_build_tables <- function(g, method) {
   if (!(method %in% .prsLR_METHODS)) {
     stop(sprintf("prsLR: method must be one of %s, got %s",
@@ -380,10 +498,29 @@
        rules = ag$rules, augmented = ag, method = method)
 }
 
+#' .prsLR_leaf
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sym See Usage.
+#' @return A list with \code{symbol}, \code{children}.
+#' @export
 .prsLR_leaf <- function(sym) {
   list(symbol = sym, children = NULL)
 }
 
+#' .prsLR_parse
+#'
+#' Part of the prsLR_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param tokens See Usage.
+#' @param method See Usage.
+#' @param tables See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .prsLR_parse <- function(g, tokens, method, tables) {
   t <- if (!is.null(tables)) tables else .prsLR_build_tables(g, method)
   if (length(t$conflicts) > 0) {

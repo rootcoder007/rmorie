@@ -20,6 +20,16 @@
 # Indices that sort v ascending, ties broken by the lower index.  Written out
 # rather than delegated to order() because the C-step selects "the h smallest
 # distances": which of two tied points is taken changes the subset.
+#' Indices that sort v ascending, ties broken by the lower index.
+#' Written out
+#'
+#' rather than delegated to order() because the C-step selects "the h
+#' smallest distances": which of two tied points is taken changes the
+#' subset.
+#'
+#' @param v See Usage.
+#' @return The value of \code{idx}, as built in the body.
+#' @export
 .rsosort <- function(v) {
   idx <- seq_along(v)
   n <- length(idx)
@@ -50,6 +60,14 @@
 
 # LU with partial pivoting.  Returns list(M, piv, sign, singular).  Singularity
 # is judged RELATIVE to the largest entry of A, not against exact zero.
+#' LU with partial pivoting.  Returns list(M, piv, sign, singular).
+#' Singularity
+#'
+#' is judged RELATIVE to the largest entry of A, not against exact zero.
+#'
+#' @param A See Usage.
+#' @return A list with \code{M}, \code{piv}, \code{sign}, \code{singular}.
+#' @export
 .rslufactor <- function(A) {
   n <- nrow(A)
   M <- matrix(as.numeric(A), n, n)
@@ -86,11 +104,34 @@
 # returns whichever subset happened to round furthest below zero.  Clamping at
 # zero makes the comparison pick the FIRST exactly-degenerate subset instead,
 # which is both correct and identical in the two language arms.
+#' Determinant of a COVARIANCE matrix, which cannot be negative.
+#' .rsludet is a
+#'
+#' general determinant and may return a small negative number for a
+#' positive-semidefinite matrix that is singular to working precision.
+#' Every objective in this shelf is minimised over such determinants, so
+#' an unclamped negative rounding artefact wins the minimisation
+#' outright and the search returns whichever subset happened to round
+#' furthest below zero.  Clamping at zero makes the comparison pick the
+#' FIRST exactly-degenerate subset instead, which is both correct and
+#' identical in the two language arms.
+#'
+#' @param S See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .rscovdet <- function(S) {
   d <- .rsludet(S)
   if (d > 0) d else 0
 }
 
+#' .rsludet
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{d}, as built in the body.
+#' @export
 .rsludet <- function(A) {
   n <- nrow(A)
   if (n == 0L) return(1)
@@ -102,6 +143,15 @@
 }
 
 # Solve A x = b; NULL when A is singular.
+#' Solve A x = b; NULL when A is singular
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .rslusolve <- function(A, b) {
   n <- nrow(A)
   f <- .rslufactor(A)
@@ -123,6 +173,15 @@
 }
 
 # Mean vector and covariance matrix (divisor |idx| - 1) of a subset.
+#' Mean vector and covariance matrix (divisor |idx| - 1) of a subset
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param idx See Usage.
+#' @return A list with \code{mu}, \code{S}.
+#' @export
 .rsmeancov <- function(X, idx) {
   m <- length(idx)
   p <- ncol(X)
@@ -140,6 +199,17 @@
 }
 
 # Squared Mahalanobis distances of every row of X; NULL if S is singular.
+#' Squared Mahalanobis distances of every row of X; NULL if S is
+#' singular
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param mu See Usage.
+#' @param S See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .rsmahal2 <- function(X, mu, S) {
   n <- nrow(X); p <- length(mu)
   f <- .rslufactor(S)
@@ -167,6 +237,15 @@
   out
 }
 
+#' .rsnchoosek
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .rsnchoosek <- function(n, k) {
   if (k < 0L || k > n) return(0)
   k <- min(k, n - k)
@@ -176,6 +255,16 @@
 }
 
 # Lexicographic k-subsets of 1..n, at most cap of them.  Returns a list.
+#' Lexicographic k-subsets of 1..n, at most cap of them.  Returns a list
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @param cap Defaults to \code{NULL}.
+#' @return The value of \code{repeat}.
+#' @export
 .rscombos <- function(n, k, cap = NULL) {
   out <- list()
   if (k > n || k < 0L) return(out)
@@ -199,6 +288,23 @@
 # increases, which is what makes the iteration terminate.
 # Returns list(idx, det) or NULL when S1 is singular, in which case the
 # objective is already zero and the subset lies on a hyperplane.
+#' One C-step of Rousseeuw and Van Driessen (1999).  Theorem, restated
+#' in
+#'
+#' Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045,
+#' "COMPUTATION": from H1 of size h with mean mu1 and covariance S1,
+#' taking H2 to be the h observations with the smallest distances d(x_i,
+#' mu1, S1) gives |S2| <= |S1|, with equality iff mu2 = mu1 and S2 = S1.
+#' The determinant therefore never increases, which is what makes the
+#' iteration terminate. Returns list(idx, det) or NULL when S1 is
+#' singular, in which case the objective is already zero and the subset
+#' lies on a hyperplane.
+#'
+#' @param X See Usage.
+#' @param idx See Usage.
+#' @param h See Usage.
+#' @return A list with \code{idx}, \code{det}.
+#' @export
 .rscstep <- function(X, idx, h) {
   mc <- .rsmeancov(X, idx)
   d0 <- .rscovdet(mc$S)
@@ -209,9 +315,28 @@
 }
 
 # The maximal-breakdown h of Rousseeuw (1984) Remark 1, [n/2] + [(p+1)/2].
+#' The maximal-breakdown h of Rousseeuw (1984) Remark 1, [n/2] +
+#' [(p+1)/2]
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .rstrimmedh <- function(n, p) n %/% 2L + (p + 1L) %/% 2L
 
 # The most robust MCD subset size, [(n + p + 1) / 2].
+#' The most robust MCD subset size, [(n + p + 1) / 2]
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .rsmcdh <- function(n, p) (n + p + 1L) %/% 2L
 
 # Shortest window of h points in a sorted univariate sample.  Rousseeuw (1984)
@@ -219,6 +344,19 @@
 # shortest half, found as the smallest of y_{h:n} - y_{1:n}, ...,
 # y_{n:n} - y_{n-h+1:n}.  The same contiguity argument gives the univariate MCD
 # and MVE subsets.  Returns list(start, width, sorted) with a 1-based start.
+#' Shortest window of h points in a sorted univariate sample.  Rousseeuw
+#' (1984)
+#'
+#' Theorem 2, p. 873: in one dimension the LMS location is the midpoint
+#' of the shortest half, found as the smallest of y_{h:n} - y_{1:n},
+#' ..., y_{n:n} - y_{n-h+1:n}.  The same contiguity argument gives the
+#' univariate MCD and MVE subsets.  Returns list(start, width, sorted)
+#' with a 1-based start.
+#'
+#' @param v See Usage.
+#' @param h See Usage.
+#' @return A list with \code{start}, \code{width}, \code{sorted}.
+#' @export
 .rsshortesthalf <- function(v, h) {
   s <- sort(v)
   n <- length(s)
@@ -234,6 +372,18 @@
 # c0 = alpha / F_chi2_{p+2}(q_alpha), alpha = h/n, q_alpha the chi2_p quantile.
 # Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045, "Definition".
 # Pchisq and Qchisq are the package's own native mirrors, not stats::.
+#' C0 = alpha / F_chi2_{p+2}(q_alpha), alpha = h/n, q_alpha the chi2_p
+#' quantile
+#'
+#' Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045,
+#' "Definition". Pchisq and Qchisq are the package\'s own native
+#' mirrors, not stats::.
+#'
+#' @param h See Usage.
+#' @param n See Usage.
+#' @param p See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .rsconsistency <- function(h, n, p) {
   alpha <- h / n
   if (alpha >= 1) return(1)
@@ -243,6 +393,14 @@
 }
 
 # med_i r_i^2, the objective of Rousseeuw (1984) equation (1.8).
+#' Med_i r_i^2, the objective of Rousseeuw (1984) equation (1.8)
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param r See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .rsmedsq <- function(r) {
   sq <- sort(r * r)
   n <- length(sq)
@@ -250,6 +408,16 @@
 }
 
 # Index of the first all-ones design column, or 0 when there is none.
+#' Index of the first all-ones design column, or 0 when there is none
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Xm See Usage.
+#' @param n See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .rsintercept <- function(Xm, n, p) {
   for (j in seq_len(p)) {
     allone <- TRUE
@@ -260,6 +428,17 @@
 }
 
 # Ordinary least squares on a subset, by the normal equations.
+#' Ordinary least squares on a subset, by the normal equations
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Xm See Usage.
+#' @param yy See Usage.
+#' @param idx See Usage.
+#' @param p See Usage.
+#' @return The value of \code{.rslusolve}.
+#' @export
 .rsltsfit <- function(Xm, yy, idx, p) {
   A <- matrix(0, p, p)
   b <- numeric(p)
@@ -273,6 +452,19 @@
 }
 
 # The h smallest squared residuals, their sum, and their indices.
+#' The h smallest squared residuals, their sum, and their indices
+#'
+#' Part of the helpers_rouss implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Xm See Usage.
+#' @param yy See Usage.
+#' @param th See Usage.
+#' @param n See Usage.
+#' @param p See Usage.
+#' @param h See Usage.
+#' @return A list with \code{tot}, \code{idx}, \code{sq}.
+#' @export
 .rsltsobj <- function(Xm, yy, th, n, p, h) {
   sq <- numeric(n)
   for (i in seq_len(n)) {
@@ -303,6 +495,18 @@
 # Striding keeps the determinism -- both arms visit the same subsets in the same
 # order -- while spreading the seeds over the whole index range the way random
 # draws would.
+#' Striding keeps the determinism -- both arms visit the same subsets in
+#' the same
+#'
+#' order -- while spreading the seeds over the whole index range the way
+#' random draws would.
+#'
+#' @param n See Usage.
+#' @param k See Usage.
+#' @param want See Usage.
+#' @param max_walk Defaults to \code{5e+06}.
+#' @return The value of \code{repeat}.
+#' @export
 .rscombosstride <- function(n, k, want, max_walk = 5000000) {
   total <- .rsnchoosek(n, k)
   if (total == 0) return(list())

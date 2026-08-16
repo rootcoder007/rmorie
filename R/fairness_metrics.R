@@ -42,6 +42,20 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' .morie_fairness_result
+#'
+#' Part of the fairness_metrics implementation; see the file header for
+#' the source it follows.
+#'
+#' @param title See Usage.
+#' @param summary_lines Defaults to \code{list()}.
+#' @param tables Defaults to \code{list()}.
+#' @param sections Defaults to \code{list()}.
+#' @param warnings Defaults to \code{character(0)}.
+#' @param interpretation Defaults to \code{""}.
+#' @param payload Defaults to \code{list()}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_fairness_result <- function(title, summary_lines = list(),
                                    tables = list(), sections = list(),
                                    warnings = character(0),

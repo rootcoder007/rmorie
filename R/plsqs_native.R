@@ -84,6 +84,13 @@ morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
                      "component regression"))
 }
 
+#' .plsqs_cheatsheet
+#'
+#' Part of the plsqs_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .plsqs_cheatsheet <- function() {
   paste0("plsqs: morie_plsqs_pls_regression(X, Y, n_components) -> NIPALS ",
          "PLS1 (Wold, Sjostrom & Eriksson 2001)")

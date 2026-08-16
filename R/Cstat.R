@@ -63,6 +63,16 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
        tied = as.integer(tied), comparable = as.integer(comparable))
 }
 
+#' .cstat_uno
+#'
+#' Part of the Cstat implementation; see the file header for the source
+#' it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param risk_score See Usage.
+#' @return A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.
+#' @export
 .cstat_uno <- function(time, event, risk_score) {
   n <- length(time)
   cen_event <- as.numeric(event == 0)

@@ -18,6 +18,15 @@
 
 # Balanced panel matrix from long-format columns.  Units and periods
 # are taken in sorted order, matching numpy's unique().
+#' Balanced panel matrix from long-format columns.  Units and periods
+#'
+#' are taken in sorted order, matching numpy\'s unique().
+#'
+#' @param y See Usage.
+#' @param unit See Usage.
+#' @param time See Usage.
+#' @return A list with \code{Y}, \code{units}, \code{periods}.
+#' @export
 .mor_did_panel <- function(y, unit, time) {
   y <- as.numeric(y)
   u <- as.vector(unit); t <- as.vector(time)
@@ -44,6 +53,18 @@
 }
 
 # First treated period index (0-based) per unit; Inf if never treated.
+#' First treated period index (0-based) per unit; Inf if never treated
+#'
+#' Part of the cssant_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param D See Usage.
+#' @param unit See Usage.
+#' @param time See Usage.
+#' @param units Defaults to \code{NULL}.
+#' @param periods Defaults to \code{NULL}.
+#' @return A list with \code{g}, \code{Dm}, \code{units}, \code{periods}.
+#' @export
 .mor_did_first <- function(D, unit, time, units = NULL, periods = NULL) {
   p <- .mor_did_panel(D, unit, time)
   Dm <- p$Y

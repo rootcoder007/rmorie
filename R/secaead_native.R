@@ -44,6 +44,14 @@
 .secaead_CONST <- c(0x61707865, 0x3320646e, 0x79622d32, 0x6b206574)
 .secaead_B26 <- 67108864               # 2^26
 
+#' Return an integer vector of byte values (0..255)
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .secaead_as_bytes <- function(x) {
   # Return an integer vector of byte values (0..255).
   if (is.raw(x)) {
@@ -58,10 +66,27 @@
   as.integer(x) %% 256L
 }
 
+#' .secaead_hexlify
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param bs See Usage.
+#' @return A character value.
+#' @export
 .secaead_hexlify <- function(bs) {
   paste(sprintf("%02x", .secaead_as_bytes(bs)), collapse="")
 }
 
+#' .secaead_constant_time_equal
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .secaead_constant_time_equal <- function(a, b) {
   x <- .secaead_as_bytes(a)
   y <- .secaead_as_bytes(b)
@@ -88,6 +113,15 @@
 # 32-bit words are held as doubles in [0, 2^32) to sidestep R's signed
 # 32-bit integer range in bitwXor.
 
+#' .secaead_xor32
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .secaead_xor32 <- function(a, b) {
   ah <- a %/% 65536
   al <- a %% 65536
@@ -96,12 +130,32 @@
   bitwXor(ah, bh) * 65536 + bitwXor(al, bl)
 }
 
+#' Left-rotate a 32-bit word by n (n in {7, 8, 12, 16}); x*2^n stays
+#'
+#' below 2^48 for these n, well within double precision
+#'
+#' @param x See Usage.
+#' @param n See Usage.
+#' @return A numeric value.
+#' @export
 .secaead_rotl <- function(x, n) {
   # left-rotate a 32-bit word by n (n in {7, 8, 12, 16}); x*2^n stays
   # below 2^48 for these n, well within double precision
   ((x * (2 ^ n)) %% .secaead_MASK32) + (x %/% (2 ^ (32 - n)))
 }
 
+#' .secaead_qr
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param s See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param d See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .secaead_qr <- function(s, a, b, c, d) {
   s[a] <- (s[a] + s[b]) %% .secaead_MASK32
   s[d] <- .secaead_rotl(.secaead_xor32(s[d], s[a]), 16)
@@ -114,6 +168,14 @@
   s
 }
 
+#' B is an integer byte vector whose length is a multiple of 4
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param b See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .secaead_words_le <- function(b) {
   # b is an integer byte vector whose length is a multiple of 4
   n <- length(b)
@@ -126,6 +188,14 @@
   out
 }
 
+#' .secaead_le_bytes
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param words See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .secaead_le_bytes <- function(words) {
   out <- integer(length(words) * 4L)
   for (i in seq_along(words)) {
@@ -210,6 +280,14 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 # as doubles. Multiplication carries after each partial product so no
 # intermediate exceeds 2^53.
 
+#' Bs: integer bytes LSB first -> base 2^26 limbs
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param bs See Usage.
+#' @return The value of \code{limbs}, as built in the body.
+#' @export
 .secaead_limbs_from_bytes <- function(bs) {
   # bs: integer bytes LSB first -> base 2^26 limbs
   limbs <- numeric(0)
@@ -230,6 +308,15 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   limbs
 }
 
+#' .secaead_bytes_from_limbs
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param limbs See Usage.
+#' @param nbytes See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .secaead_bytes_from_limbs <- function(limbs, nbytes) {
   out <- integer(nbytes)
   cur <- 0
@@ -258,6 +345,13 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   out
 }
 
+#' Normalize base 2^26 in place; returns limbs each < 2^26 plus a
+#'
+#' possible extra high limb
+#'
+#' @param limbs See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .secaead_p_carry <- function(limbs) {
   # normalize base 2^26 in place; returns limbs each < 2^26 plus a
   # possible extra high limb
@@ -275,6 +369,15 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   out
 }
 
+#' .secaead_p_add
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.secaead_p_carry}.
+#' @export
 .secaead_p_add <- function(a, b) {
   n <- max(length(a), length(b))
   a <- c(a, rep(0, n - length(a)))
@@ -282,6 +385,13 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   .secaead_p_carry(a + b)
 }
 
+#' Fold limbs at index >= 6 (weight >= 2^130) back with factor 5,
+#'
+#' since 2^130 == 5 (mod 2^130 - 5), then carry-normalize; repeat
+#'
+#' @param res See Usage.
+#' @return The value of \code{[}.
+#' @export
 .secaead_p_reduce <- function(res) {
   # fold limbs at index >= 6 (weight >= 2^130) back with factor 5,
   # since 2^130 == 5 (mod 2^130 - 5), then carry-normalize; repeat
@@ -302,6 +412,13 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   res[1:5]
 }
 
+#' Reduce to the canonical residue in [0, 2^130 - 5): one conditional
+#'
+#' subtraction of P suffices because acc < 2^130 < 2P
+#'
+#' @param acc See Usage.
+#' @return The value of \code{acc}, as built in the body.
+#' @export
 .secaead_p_final <- function(acc) {
   # reduce to the canonical residue in [0, 2^130 - 5): one conditional
   # subtraction of P suffices because acc < 2^130 < 2P
@@ -323,6 +440,15 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   acc
 }
 
+#' .secaead_p_mulmod
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.secaead_p_reduce}.
+#' @export
 .secaead_p_mulmod <- function(a, b) {
   la <- length(a)
   lb <- length(b)
@@ -343,6 +469,14 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   .secaead_p_reduce(res)
 }
 
+#' K: 32 integer bytes; clamp the low 16 (r) per RFC 8439 Sec 2.5
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param k See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .secaead_clamp_key <- function(k) {
   # k: 32 integer bytes; clamp the low 16 (r) per RFC 8439 Sec 2.5
   r <- k[1:16]
@@ -406,10 +540,26 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
   morie_secaead_chacha20_block(key, 0, nonce)[1:32]
 }
 
+#' .secaead_pad16
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param b See Usage.
+#' @return The value of \code{rep}.
+#' @export
 .secaead_pad16 <- function(b) {
   rep(0L, (16L - length(b) %% 16L) %% 16L)
 }
 
+#' .secaead_len8
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .secaead_len8 <- function(n) {
   out <- integer(8)
   v <- n
@@ -420,6 +570,15 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
   out
 }
 
+#' .secaead_mac_data
+#'
+#' Part of the secaead_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param aad See Usage.
+#' @param ciphertext See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .secaead_mac_data <- function(aad, ciphertext) {
   a <- .secaead_as_bytes(aad)
   c <- .secaead_as_bytes(ciphertext)

@@ -81,6 +81,16 @@ morie_slbpdg_weights <- function(v) {
   list(w = w, rest = rest)
 }
 
+#' .slbpdg_dnorm
+#'
+#' Part of the slbpdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param mu See Usage.
+#' @param s2 See Usage.
+#' @return A numeric value.
+#' @export
 .slbpdg_dnorm <- function(x, mu, s2) {
   d <- x - mu
   exp(-0.5 * d * d / s2) / sqrt(2 * pi * s2)
@@ -103,6 +113,21 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 # needs for components it has to invent to cover the slice -- they are
 # not fitted to anything, so their parameters must come from the prior
 # and not from some neighbour.
+#' Conjugate normal / inverse-gamma draw for one component. With no
+#'
+#' members this is a draw from the PRIOR, which is what the slice
+#' sampler needs for components it has to invent to cover the slice --
+#' they are not fitted to anything, so their parameters must come from
+#' the prior and not from some neighbour.
+#'
+#' @param e See Usage.
+#' @param ys See Usage.
+#' @param m0 See Usage.
+#' @param kappa0 See Usage.
+#' @param a0 See Usage.
+#' @param b0 See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .slbpdg_theta <- function(e, ys, m0, kappa0, a0, b0) {
   n <- length(ys)
   if (n > 0L) {
@@ -127,6 +152,17 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 # compensated one, because the comparison is against a uniform scaled by
 # the same total -- consistency between the two sums is what matters,
 # not their accuracy.
+#' Inverse-CDF draw on UNNORMALISED weights, one uniform each. The
+#'
+#' cumulative sum is a plain running sum in both arms rather than a
+#' compensated one, because the comparison is against a uniform scaled
+#' by the same total -- consistency between the two sums is what
+#' matters, not their accuracy.
+#'
+#' @param e See Usage.
+#' @param weights See Usage.
+#' @return A numeric value.
+#' @export
 .slbpdg_categorical <- function(e, weights) {
   tot <- .w3_csum(weights)
   if (tot <= 0) return(-1L)
@@ -144,6 +180,17 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 # exponent is repeated squaring and Python's `**` calls pow(), and the
 # two part company in the last bit exactly where the comparison
 # xi_k > u_i decides how many components to carry.
+#' The deterministic bound xi_k = (1 - kappa) kappa^(k-1), built by
+#'
+#' repeated multiplication rather than kappa^(k-1): R\'s `^` on an
+#' integer exponent is repeated squaring and Python\'s `**` calls pow(),
+#' and the two part company in the last bit exactly where the comparison
+#' xi_k > u_i decides how many components to carry.
+#'
+#' @param kappa See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .slbpdg_xi <- function(kappa, k) {
   p <- 1
   if (k > 0L) for (i in seq_len(k)) p <- p * kappa
@@ -151,6 +198,16 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 }
 
 # Linear interpolation, used only to integrate the density grid.
+#' Linear interpolation, used only to integrate the density grid
+#'
+#' Part of the slbpdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param xs See Usage.
+#' @param ys See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .slbpdg_interp <- function(xs, ys, x) {
   n <- length(xs)
   if (x <= xs[1]) return(ys[1])

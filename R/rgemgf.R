@@ -95,6 +95,13 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 .RGEMGF_MVC_FRACTION <- 0.10
 .RGEMGF_REFINE_FRACTION <- 0.70
 
+#' The p. 290 two-stage delineation; ranges are returned zero-based and
+#'
+#' half-open, c(start, stop), to match the Python arm exactly
+#'
+#' @param f See Usage.
+#' @return The value of \code{fine}, as built in the body.
+#' @export
 .rgemgf_intervals <- function(f) {
   # the p. 290 two-stage delineation; ranges are returned zero-based and
   # half-open, c(start, stop), to match the Python arm exactly
@@ -132,11 +139,28 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
   fine
 }
 
+#' .rgemgf_zcr
+#'
+#' Part of the rgemgf implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .rgemgf_zcr <- function(x) {
   s <- ifelse(x >= 0, 1, -1)
   sum(s[-1] != s[-length(s)])
 }
 
+#' Equation (5.28), p. 292, written exactly as the book prints it
+#'
+#' Part of the rgemgf implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A numeric value.
+#' @export
 .rgemgf_r2 <- function(x, y) {
   # equation (5.28), p. 292, written exactly as the book prints it
   n <- length(x)
@@ -148,6 +172,15 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
   (num * num) / den
 }
 
+#' .rgemgf_linfit
+#'
+#' Part of the rgemgf implementation; see the file header for the source
+#' it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .rgemgf_linfit <- function(x, y) {
   n <- length(x)
   den <- n * sum(x * x) - sum(x)^2

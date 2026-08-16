@@ -15,6 +15,15 @@
 # because they are standard and correct, and are documented as not being
 # from this text.
 
+#' .morie_rg_gcd
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{a}, as built in the body.
+#' @export
 .morie_rg_gcd <- function(a, b) {
   a <- abs(a)
   b <- abs(b)
@@ -26,6 +35,15 @@
   a
 }
 
+#' An exact rational as a list, so counts-based ratios are not rounded
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param d See Usage.
+#' @return The value of \code{structure}.
+#' @export
 .morie_rg_frac <- function(n, d) {
   # an exact rational as a list, so counts-based ratios are not rounded
   if (d == 0) stop("a rational cannot have a zero denominator")
@@ -38,6 +56,14 @@
   structure(list(n = n / g, d = d / g), class = "morie_frac")
 }
 
+#' .morie_rg_asfrac
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param v See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .morie_rg_asfrac <- function(v) {
   if (inherits(v, "morie_frac")) {
     return(v)
@@ -57,12 +83,39 @@
   )
 }
 
+#' .morie_rg_fadd
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.morie_rg_frac}.
+#' @export
 .morie_rg_fadd <- function(a, b) {
   .morie_rg_frac(a$n * b$d + b$n * a$d, a$d * b$d)
 }
+#' .morie_rg_fsub
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.morie_rg_frac}.
+#' @export
 .morie_rg_fsub <- function(a, b) {
   .morie_rg_frac(a$n * b$d - b$n * a$d, a$d * b$d)
 }
+#' .morie_rg_fmul
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return The value of \code{.morie_rg_frac}.
+#' @export
 .morie_rg_fmul <- function(a, b) .morie_rg_frac(a$n * b$n, a$d * b$d)
 
 # as.numeric() dispatches to as.double methods, not as.numeric ones
@@ -112,12 +165,30 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
   a$n == b$n && a$d == b$d
 }
 
+#' Sum of (x - mu)(x - mu)^T: the SCATTER, not divided by n
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param mu See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 .morie_rg_scatter <- function(X, mu) {
   # sum of (x - mu)(x - mu)^T: the SCATTER, not divided by n
   d <- sweep(as.matrix(X), 2, mu, "-")
   t(d) %*% d
 }
 
+#' Split rows by label, preserving first-seen order
+#'
+#' Part of the rangayyan_class implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{order}, \code{groups}.
+#' @export
 .morie_rg_groups <- function(X, y) {
   # split rows by label, preserving first-seen order
   order <- unique(y)
@@ -1895,6 +1966,18 @@ LooCv <- function(X, y, classifier = NULL) {
   )
 }
 
+#' Shared SMO-style coordinate ascent on pairs, which respects the
+#'
+#' equality constraint sum a_i y_i = 0 that single-coordinate updates
+#' cannot
+#'
+#' @param K See Usage.
+#' @param ys See Usage.
+#' @param Cv See Usage.
+#' @param maxiter See Usage.
+#' @param tol See Usage.
+#' @return A list with \code{a}, \code{b}, \code{it}.
+#' @export
 .morie_rg_smo <- function(K, ys, Cv, maxiter, tol) {
   # shared SMO-style coordinate ascent on pairs, which respects the
   # equality constraint sum a_i y_i = 0 that single-coordinate updates

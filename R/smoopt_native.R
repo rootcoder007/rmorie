@@ -25,9 +25,25 @@
 
 .SMOOPT_EPS <- 1e-12
 
+#' .smoopt_kvec
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .smoopt_kvec <- function(x) if (is.null(dim(x))) as.numeric(x) else
   as.numeric(x)
 
+#' .smoopt_make_rng
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return A list with \code{uniform}.
+#' @export
 .smoopt_make_rng <- function(seed) {
   e <- .ghc_rng(seed)
   list(uniform = function() .ghc_unif(e, 1L))
@@ -266,6 +282,13 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
                      "NEGATIVE of the LIBSVM convention used in svmopt"))
 }
 
+#' .smoopt_cheatsheet
+#'
+#' Part of the smoopt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .smoopt_cheatsheet <- function() {
   paste0("smoopt: same SVM dual as svmopt, different CHOICE of ",
          "pair. Two multipliers because the equality constraint ",

@@ -39,6 +39,14 @@ Trmwgt <- function(weights, quantile = 0.99) {
        method = "weight truncation at the type-7 q-th percentile [Potter 1990]")
 }
 
+#' .trmwgt_cv
+#'
+#' Part of the Trmwgt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .trmwgt_cv <- function(w) {
   n <- length(w); m <- sum(w) / n
   if (m == 0) return(NaN)

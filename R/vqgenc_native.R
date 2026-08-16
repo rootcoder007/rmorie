@@ -54,6 +54,14 @@
 # straight-through estimator this builds on.
 # """
 
+#' .vqgenc_as_matrix
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .vqgenc_as_matrix <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -84,6 +92,14 @@
   stop("vqgenc: cannot convert input to matrix")
 }
 
+#' .vqgenc_as_vector
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .vqgenc_as_vector <- function(x) {
   if (is.matrix(x)) {
     if (nrow(x) == 1L) {
@@ -106,6 +122,15 @@
   stop("vqgenc: cannot convert input to vector")
 }
 
+#' .vqgenc_quantize
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vectors See Usage.
+#' @param codebook See Usage.
+#' @return A list with \code{indices}, \code{codes}, \code{distance}, \code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.
+#' @export
 .vqgenc_quantize <- function(vectors, codebook) {
   Z <- .vqgenc_as_matrix(codebook)
   V <- .vqgenc_as_matrix(vectors)
@@ -151,6 +176,16 @@
   )
 }
 
+#' .vqgenc_straight_through
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param encoder_output See Usage.
+#' @param quantized See Usage.
+#' @param upstream_gradient See Usage.
+#' @return A list with \code{forward}, \code{backward}, \code{jacobian_is_identity}, \code{note}.
+#' @export
 .vqgenc_straight_through <- function(encoder_output, quantized, upstream_gradient) {
   e <- .vqgenc_as_vector(encoder_output)
   q <- .vqgenc_as_vector(quantized)
@@ -168,6 +203,15 @@
   )
 }
 
+#' .vqgenc_codebook_loss
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param encoder_output See Usage.
+#' @param quantized See Usage.
+#' @return A list with \code{loss}, \code{gradient_flows_to}, \code{note}.
+#' @export
 .vqgenc_codebook_loss <- function(encoder_output, quantized) {
   e <- .vqgenc_as_vector(encoder_output)
   q <- .vqgenc_as_vector(quantized)
@@ -185,6 +229,16 @@
   )
 }
 
+#' .vqgenc_commitment_loss
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param encoder_output See Usage.
+#' @param quantized See Usage.
+#' @param beta Defaults to \code{0.25}.
+#' @return A list with \code{loss}, \code{beta}, \code{gradient_flows_to}, \code{note}.
+#' @export
 .vqgenc_commitment_loss <- function(encoder_output, quantized, beta = 0.25) {
   e <- .vqgenc_as_vector(encoder_output)
   q <- .vqgenc_as_vector(quantized)
@@ -208,6 +262,16 @@
   )
 }
 
+#' .vqgenc_sequence_length
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param height See Usage.
+#' @param width See Usage.
+#' @param downsample Defaults to \code{16L}.
+#' @return A list with \code{tokens}, \code{pixels}, \code{compression}, \code{attention_cost_pixels}, \code{attention_cost_tokens}, \code{speedup}, \code{note}.
+#' @export
 .vqgenc_sequence_length <- function(height, width, downsample = 16L) {
   H <- as.integer(height)
   W <- as.integer(width)
@@ -230,6 +294,17 @@
   )
 }
 
+#' .vqgenc_encode
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vectors See Usage.
+#' @param codebook See Usage.
+#' @param beta Defaults to \code{0.25}.
+#' @param target Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{indices}, \code{codes}, \code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss}, \code{usage_fraction}, \code{method}, \code{note}.
+#' @export
 .vqgenc_encode <- function(vectors, codebook, beta = 0.25, target = NULL) {
   q <- .vqgenc_quantize(vectors, codebook)
   V <- .vqgenc_as_matrix(vectors)
@@ -266,6 +341,13 @@
   )
 }
 
+#' .vqgenc_cheatsheet
+#'
+#' Part of the vqgenc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .vqgenc_cheatsheet <- function() {
   paste("vqgenc: transformers have no locality prior and cost O(n^2),",
         "so shorten the SEQUENCE rather than cheapen the attention --",

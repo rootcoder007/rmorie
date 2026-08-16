@@ -86,6 +86,16 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
   list(h = hn, y = y)
 }
 
+#' .linear
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param Wm See Usage.
+#' @param b See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .linear <- function(x, Wm, b) {
   out <- numeric(nrow(Wm))
   for (r in seq_len(nrow(Wm))) {
@@ -96,6 +106,14 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
   out
 }
 
+#' .sigmoid
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .sigmoid <- function(z) 1.0 / (1.0 + exp(-as.numeric(z)))
 
 #' selective_scan
@@ -202,6 +220,13 @@ s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
   selective_scan(X, A, W_B, W_C, W_delta, ...)$y
 }
 
+#' .mambss_cheatsheet
+#'
+#' Part of the mambss_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .mambss_cheatsheet <- function() {
   "mambss: S6. B, C, Delta are FUNCTIONS of x (Alg. 2), so the model is time-varying and only the scan works -- no convolution. ZOH: Abar = exp(Delta A), Bbar = (exp(Delta A) - 1) B / A. s_Delta projects to ONE dim then broadcasts over D. Theorem 1: N=1, A=-1, B=1, softplus gives exactly g = sigmoid(Linear(x)), h = (1-g)h + g x."
 }

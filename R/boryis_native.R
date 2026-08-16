@@ -21,6 +21,16 @@
 # same alternating two-way solve, same tolerance, same exact linear
 # estimator weights and the same unit-clustered score sum.
 
+#' .mor_bjs_check
+#'
+#' Part of the boryis_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param obs See Usage.
+#' @param n See Usage.
+#' @param T See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .mor_bjs_check <- function(obs, n, T) {
   if (sum(obs) < n + T - 1L)
     stop(sprintf(paste("only %d untreated cells for %d unit and period",
@@ -39,6 +49,19 @@
 
 # Alternating solve of the two-way (unit, period) normal equations
 # restricted to `obs`, plus optional covariate coefficients.
+#' Alternating solve of the two-way (unit, period) normal equations
+#'
+#' restricted to `obs`, plus optional covariate coefficients.
+#'
+#' @param obs See Usage.
+#' @param u_a See Usage.
+#' @param u_l See Usage.
+#' @param u_b See Usage.
+#' @param Xc See Usage.
+#' @param max_iter Defaults to \code{2000L}.
+#' @param tol Defaults to \code{1e-13}.
+#' @return A list with \code{a}, \code{lam}, \code{b}.
+#' @export
 .mor_bjs_solve <- function(obs, u_a, u_l, u_b, Xc, max_iter = 2000L,
                            tol = 1e-13) {
   n <- nrow(obs); T <- ncol(obs)
@@ -114,6 +137,17 @@ morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
 
 # Exact linear weights v with sum(v * Y) == the estimate, used for the
 # unit-clustered variance.
+#' Exact linear weights v with sum(v * Y) == the estimate, used for the
+#'
+#' unit-clustered variance.
+#'
+#' @param W See Usage.
+#' @param treated See Usage.
+#' @param Xc See Usage.
+#' @param max_iter Defaults to \code{2000L}.
+#' @param tol Defaults to \code{1e-13}.
+#' @return The value of \code{ifelse}.
+#' @export
 .mor_bjs_weights <- function(W, treated, Xc, max_iter = 2000L, tol = 1e-13) {
   obs <- !treated
   n <- nrow(W); T <- ncol(W)

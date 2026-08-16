@@ -46,6 +46,14 @@
   list(comm = comm, sweeps = sweeps)
 }
 
+#' .k02relabel
+#'
+#' Part of the sgtcoml implementation; see the file header for the
+#' source it follows.
+#'
+#' @param comm See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .k02relabel <- function(comm) {
   seen <- integer(0); out <- integer(length(comm))
   for (i in seq_along(comm)) {

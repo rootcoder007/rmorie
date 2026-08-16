@@ -14,6 +14,13 @@
 
 # Lehmer minstd: s <- 48271 s mod (2^31 - 1).  Every intermediate fits
 # exactly in a double, which is what makes the streams identical.
+#' Lehmer minstd: s <- 48271 s mod (2^31 - 1).  Every intermediate fits
+#'
+#' exactly in a double, which is what makes the streams identical.
+#'
+#' @param seed Defaults to \code{1}.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .mor_lcg_new <- function(seed = 1) {
   s <- as.numeric(seed) %% 2147483647
   e <- new.env(parent = emptyenv())
@@ -21,6 +28,14 @@
   e
 }
 
+#' .mor_lcg_unif
+#'
+#' Part of the reportm_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param e See Usage.
+#' @return A numeric value.
+#' @export
 .mor_lcg_unif <- function(e) {
   e$s <- (48271 * e$s) %% 2147483647
   e$s / 2147483647

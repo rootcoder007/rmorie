@@ -4,6 +4,16 @@
 # Equation numbers verified in the PDF: 3.81, 3.91, 3.96, 4.24-4.32,
 # 4.33-4.49, 4.53-4.57, 6.32-6.43.
 
+#' .morie_rg_xcorr
+#'
+#' Part of the rangayyan_corr implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param maxlag Defaults to \code{NULL}.
+#' @return A list with \code{lags}, \code{values}.
+#' @export
 .morie_rg_xcorr <- function(x, y, maxlag = NULL) {
   n <- length(x)
   m <- length(y)

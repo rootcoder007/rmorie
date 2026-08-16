@@ -199,6 +199,14 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 }
 
 # Pure base-R SHA-256 (FIPS 180-4). Slow but exact, no package.
+#' Pure base-R SHA-256 (FIPS 180-4). Slow but exact, no package
+#'
+#' Part of the sechsh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bytes See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .sech_sha256 <- function(bytes) {
   bs <- as.integer(as.raw(bytes))
   blen <- length(bs) * 8L
@@ -274,6 +282,15 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
   out
 }
 
+#' .sech_hmac
+#'
+#' Part of the sechsh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param key See Usage.
+#' @param msg See Usage.
+#' @return The value of \code{.sech_sha256}.
+#' @export
 .sech_hmac <- function(key, msg) {
   key <- as.raw(key)
   if (length(key) > 64L) key <- .sech_sha256(key)
@@ -283,10 +300,27 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
   .sech_sha256(c(opad, .sech_sha256(c(ipad, as.raw(msg)))))
 }
 
+#' .sech_hexlify
+#'
+#' Part of the sechsh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param bs See Usage.
+#' @return A character value.
+#' @export
 .sech_hexlify <- function(bs) {
   paste(format(as.hexmode(as.integer(bs)), width = 2L), collapse = "")
 }
 
+#' .sech_cteq
+#'
+#' Part of the sechsh_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .sech_cteq <- function(a, b) {
   a <- as.raw(a); b <- as.raw(b)
   if (length(a) != length(b)) return(FALSE)

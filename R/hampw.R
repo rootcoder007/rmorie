@@ -45,6 +45,17 @@ Hampw <- function(y, a = 2, b = 4, c = 8) {
        method = "Hampel three-part redescending weight")
 }
 
+#' .hampel_check
+#'
+#' Part of the hampw implementation; see the file header for the source
+#' it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param who See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .hampel_check <- function(a, b, c, who) {
   a <- as.numeric(a); b <- as.numeric(b); c <- as.numeric(c)
   if (!(a > 0 && a <= b && b < c)) {

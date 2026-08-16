@@ -142,6 +142,16 @@ morie_bnppct_quantile <- function(q, w, mu, s2, lo = NULL, hi = NULL) {
 # Weighted empirical quantile: the smallest point whose cumulative
 # weight reaches q. The inverse of the weighted ECDF, which is a step
 # function, so nothing is interpolated between the steps.
+#' Weighted empirical quantile: the smallest point whose cumulative
+#'
+#' weight reaches q. The inverse of the weighted ECDF, which is a step
+#' function, so nothing is interpolated between the steps.
+#'
+#' @param ys_sorted See Usage.
+#' @param weights See Usage.
+#' @param q See Usage.
+#' @return The value of \code{[}.
+#' @export
 .bnppct_wq <- function(ys_sorted, weights, q) {
   acc <- 0
   for (i in seq_along(ys_sorted)) {

@@ -11,6 +11,15 @@
 # draws. Comparing individual releases across two generators would be
 # comparing two different random numbers.
 
+#' .morie_dp_check_budget
+#'
+#' Part of the dp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param epsilon See Usage.
+#' @param delta Defaults to \code{NULL}.
+#' @return A list with \code{epsilon}, \code{delta}.
+#' @export
 .morie_dp_check_budget <- function(epsilon, delta = NULL) {
   epsilon <- as.numeric(epsilon)[1L]
   if (!is.finite(epsilon) || epsilon <= 0) {
@@ -25,11 +34,30 @@
 }
 
 # Laplace(0, b) by inverse transform; R has no rlaplace in base.
+#' Laplace(0, b) by inverse transform; R has no rlaplace in base
+#'
+#' Part of the dp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param scale See Usage.
+#' @return A numeric value.
+#' @export
 .morie_dp_rlaplace <- function(n, scale) {
   u <- stats::runif(n) - 0.5
   -scale * sign(u) * log1p(-2 * abs(u))
 }
 
+#' .morie_dp_gaussian_sigma
+#'
+#' Part of the dp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sensitivity See Usage.
+#' @param epsilon See Usage.
+#' @param delta See Usage.
+#' @return A numeric value.
+#' @export
 .morie_dp_gaussian_sigma <- function(sensitivity, epsilon, delta) {
   if (delta <= 0) {
     stop(paste(
@@ -40,6 +68,16 @@
   as.numeric(sensitivity) * sqrt(2 * log(1.25 / delta)) / as.numeric(epsilon)
 }
 
+#' .morie_dp_clip
+#'
+#' Part of the dp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{x}, \code{a}, \code{b}.
+#' @export
 .morie_dp_clip <- function(x, a, b) {
   a <- as.numeric(a)
   b <- as.numeric(b)
@@ -49,6 +87,14 @@
   list(x = pmin(pmax(as.numeric(x), a), b), a = a, b = b)
 }
 
+#' .morie_dp_seed
+#'
+#' Part of the dp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{old}, as built in the body.
+#' @export
 .morie_dp_seed <- function(seed) {
   if (is.null(seed)) {
     return(NULL)
@@ -62,6 +108,14 @@
   old
 }
 
+#' .morie_dp_unseed
+#'
+#' Part of the dp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param old See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_dp_unseed <- function(old) {
   if (!is.null(old)) assign(".Random.seed", old, envir = globalenv())
 }

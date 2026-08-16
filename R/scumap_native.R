@@ -35,6 +35,14 @@
 
 .scumap_EPS <- 0.001
 
+#' .scumap_matrix
+#'
+#' Part of the scumap_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 .scumap_matrix <- function(X) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -50,6 +58,15 @@
   M
 }
 
+#' .scumap_dist
+#'
+#' Part of the scumap_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .scumap_dist <- function(a, b) {
   sqrt(sum((a - b) ^ 2))
 }
@@ -275,6 +292,13 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
   list(a=a, b=b)
 }
 
+#' Exact 31-bit LCG in doubles: split the state so no intermediate
+#'
+#' product exceeds 2^53.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{function}.
+#' @export
 .scumap_rng <- function(seed) {
   # Exact 31-bit LCG in doubles: split the state so no intermediate
   # product exceeds 2^53.
@@ -291,6 +315,15 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
   }
 }
 
+#' The reference implementation clips gradients to +/- 4
+#'
+#' Part of the scumap_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param lim Defaults to \code{4}.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .scumap_clip <- function(v, lim=4.0) {
   # The reference implementation clips gradients to +/- 4.
   if (v > lim) {

@@ -102,6 +102,15 @@ Fnlm <- function(X, Y, basis_X, basis_Y, s = NULL, t = NULL) {
        method = "Ramsay-Silverman (2005) eqs. (16.3), (16.6)-(16.9), unregularised tensor-product fit")
 }
 
+#' .fnlm_trapz
+#'
+#' Part of the fnlm implementation; see the file header for the source
+#' it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .fnlm_trapz <- function(t, v) {
   s <- 0
   n <- length(t)

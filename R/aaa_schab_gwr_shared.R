@@ -67,12 +67,29 @@
 
 .schab_gwr_kernels <- c("gaussian", "bisquare", "tricube", "boxcar")
 
+#' .schab_pairwise_distances
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @return A matrix, from \code{as.matrix}.
+#' @export
 .schab_pairwise_distances <- function(coords) {
   coords <- as.matrix(coords)
   if (ncol(coords) < 1L) stop("coords must have at least one column")
   as.matrix(stats::dist(coords, method = "euclidean"))
 }
 
+#' .schab_reshape_like
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param values See Usage.
+#' @param template See Usage.
+#' @return The value of \code{array}.
+#' @export
 .schab_reshape_like <- function(values, template) {
   d <- dim(template)
   if (is.null(d)) {
@@ -81,6 +98,17 @@
   array(values, dim = d)
 }
 
+#' .schab_kernel_weights
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param distance See Usage.
+#' @param bandwidth See Usage.
+#' @param kernel Defaults to \code{"gaussian"}.
+#' @param normalized Defaults to \code{FALSE}.
+#' @return The value of \code{.schab_reshape_like}.
+#' @export
 .schab_kernel_weights <- function(distance, bandwidth, kernel = "gaussian",
                                   normalized = FALSE) {
   d <- as.numeric(distance)
@@ -111,6 +139,17 @@
 # mgwr/kernels.py: the n_neighbours-th order statistic, nudged by eps so the
 # neighbour itself falls strictly inside a truncated kernel's support. The
 # regression point counts as its own first neighbour.
+#' Mgwr/kernels.py: the n_neighbours-th order statistic, nudged by eps
+#' so the
+#'
+#' neighbour itself falls strictly inside a truncated kernel\'s support.
+#' The regression point counts as its own first neighbour.
+#'
+#' @param distance_row See Usage.
+#' @param n_neighbours See Usage.
+#' @param eps Defaults to \code{1.0000001}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .schab_adaptive_bandwidth <- function(distance_row, n_neighbours,
                                       eps = 1.0000001) {
   d <- sort(as.numeric(distance_row))
@@ -121,6 +160,17 @@
   as.numeric(d[k] * eps)
 }
 
+#' .schab_local_weights
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param d_row See Usage.
+#' @param bandwidth See Usage.
+#' @param kernel See Usage.
+#' @param adaptive See Usage.
+#' @return The value of \code{.schab_kernel_weights}.
+#' @export
 .schab_local_weights <- function(d_row, bandwidth, kernel, adaptive) {
   h <- if (adaptive) .schab_adaptive_bandwidth(d_row, bandwidth) else bandwidth
   .schab_kernel_weights(d_row, h, kernel)
@@ -140,6 +190,15 @@
 # The cutoff is numpy.linalg.pinv's default: max(dim) * eps * largest
 # singular value. Written out rather than taken from MASS::ginv because MASS
 # is only in Suggests.
+#' The cutoff is numpy.linalg.pinv\'s default: max(dim) * eps * largest
+#'
+#' singular value. Written out rather than taken from MASS::ginv because
+#' MASS is only in Suggests.
+#'
+#' @param X See Usage.
+#' @param w See Usage.
+#' @return The value of \code{op}, as built in the body.
+#' @export
 .schab_wls_operator <- function(X, w) {
   sw <- sqrt(w)
   Xw <- X * sw
@@ -158,6 +217,19 @@
   op
 }
 
+#' .schab_gwr_fit
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param distances See Usage.
+#' @param bandwidth See Usage.
+#' @param kernel Defaults to \code{"gaussian"}.
+#' @param adaptive Defaults to \code{FALSE}.
+#' @return A list with \code{se_params}, \code{sigma2_gwr}, \code{edf_resid}, \code{v1}, \code{v2}, \code{params}, \code{fitted}, \code{resid}, \code{S}, \code{tr_S}, \code{tr_STS}, \code{effective_parameters}, \code{rss}, \code{sigma2}, \code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel}, \code{adaptive}, \code{n_rank_deficient}.
+#' @export
 .schab_gwr_fit <- function(y, X, distances, bandwidth, kernel = "gaussian",
                            adaptive = FALSE) {
   y <- as.numeric(y)
@@ -215,6 +287,16 @@
 
 # Charlton white paper p. 8; spgwr::gwr.aic.f; mgwr.diagnostics.get_AICc.
 # Fotheringham et al. (2002) p. 61 eq (2.33) / p. 96 eq (4.21).
+#' Charlton white paper p. 8; spgwr::gwr.aic.f;
+#' mgwr.diagnostics.get_AICc
+#'
+#' Fotheringham et al. (2002) p. 61 eq (2.33) / p. 96 eq (4.21).
+#'
+#' @param n See Usage.
+#' @param sigma2 See Usage.
+#' @param tr_S See Usage.
+#' @return A numeric value.
+#' @export
 .schab_aicc_from_parts <- function(n, sigma2, tr_S) {
   n <- as.numeric(n)
   tr_S <- as.numeric(tr_S)
@@ -226,12 +308,35 @@
 }
 
 # Fotheringham et al. (2002) p. 96 eq (4.22).
+#' Fotheringham et al. (2002) p. 96 eq (4.22)
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n See Usage.
+#' @param sigma2 See Usage.
+#' @param tr_S See Usage.
+#' @return A numeric value.
+#' @export
 .schab_aic_from_parts <- function(n, sigma2, tr_S) {
   n <- as.numeric(n)
   2 * n * log(sqrt(sigma2)) + n * log(2 * pi) + n + as.numeric(tr_S)
 }
 
 # spgwr::gwr.cv.f -- leave-one-out; y_i never predicts itself.
+#' Spgwr::gwr.cv.f -- leave-one-out; y_i never predicts itself
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param distances See Usage.
+#' @param bandwidth See Usage.
+#' @param kernel Defaults to \code{"gaussian"}.
+#' @param adaptive Defaults to \code{FALSE}.
+#' @return The value of \code{total}, as built in the body.
+#' @export
 .schab_cv_score <- function(y, X, distances, bandwidth, kernel = "gaussian",
                             adaptive = FALSE) {
   y <- as.numeric(y)
@@ -252,6 +357,20 @@
   total
 }
 
+#' .schab_gwr_criterion
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param distances See Usage.
+#' @param bandwidth See Usage.
+#' @param kernel Defaults to \code{"gaussian"}.
+#' @param adaptive Defaults to \code{FALSE}.
+#' @param criterion Defaults to \code{"cv"}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .schab_gwr_criterion <- function(y, X, distances, bandwidth,
                                  kernel = "gaussian", adaptive = FALSE,
                                  criterion = "cv") {
@@ -275,6 +394,19 @@
 # Golden section rather than R's optimize (Brent): deterministic and with no
 # parabolic-interpolation step whose tie-breaking the Python arm would have
 # to match bit for bit.
+#' Golden section rather than R\'s optimize (Brent): deterministic and
+#' with no
+#'
+#' parabolic-interpolation step whose tie-breaking the Python arm would
+#' have to match bit for bit.
+#'
+#' @param func See Usage.
+#' @param lower See Usage.
+#' @param upper See Usage.
+#' @param tol Defaults to \code{1e-04}.
+#' @param max_iter Defaults to \code{200L}.
+#' @return A list with \code{x}, \code{value}.
+#' @export
 .schab_golden_section <- function(func, lower, upper, tol = 1e-4,
                                   max_iter = 200L) {
   invphi <- (sqrt(5) - 1) / 2
@@ -307,6 +439,13 @@
 
 # spgwr::gwr.sel's search interval: the bounding-box diagonal and a
 # thousandth of it.
+#' Spgwr::gwr.sel\'s search interval: the bounding-box diagonal and a
+#'
+#' thousandth of it.
+#'
+#' @param coords See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .schab_default_bounds <- function(coords) {
   coords <- as.matrix(coords)
   span <- apply(coords, 2, max) - apply(coords, 2, min)
@@ -317,6 +456,21 @@
   c(diag_len / 1000, diag_len)
 }
 
+#' .schab_select_bandwidth
+#'
+#' Part of the schab_gwr_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param coords See Usage.
+#' @param kernel Defaults to \code{"gaussian"}.
+#' @param criterion Defaults to \code{"cv"}.
+#' @param adaptive Defaults to \code{FALSE}.
+#' @param bounds Defaults to \code{NULL}.
+#' @param tol Defaults to \code{1e-04}.
+#' @return A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds}, \code{adaptive}.
+#' @export
 .schab_select_bandwidth <- function(y, X, coords, kernel = "gaussian",
                                     criterion = "cv", adaptive = FALSE,
                                     bounds = NULL, tol = 1e-4) {
@@ -380,6 +534,32 @@
 # of a fixture with two genuinely different scales this happened twice. It
 # is a property of the criterion, not of this port -- the reference uses the
 # same score and the same default tolerance. `at_search_boundary` flags it.
+#' A caution the SOC makes necessary: both scores measure how much the
+#' fit
+#'
+#' MOVED, not how good it is. When the initial single-bandwidth GWR
+#' already sits at the wide end of the interval, the first sweep can
+#' leave every covariate there, the score is tiny, and the loop stops
+#' after two or three sweeps having found no scale separation at all.
+#' Measured over eight seeds of a fixture with two genuinely different
+#' scales this happened twice. It is a property of the criterion, not of
+#' this port -- the reference uses the same score and the same default
+#' tolerance. `at_search_boundary` flags it.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param coords See Usage.
+#' @param kernel Defaults to \code{"gaussian"}.
+#' @param criterion Defaults to \code{"aicc"}.
+#' @param adaptive Defaults to \code{FALSE}.
+#' @param tol Defaults to \code{1e-05}.
+#' @param max_iter Defaults to \code{200L}.
+#' @param rss_score Defaults to \code{FALSE}.
+#' @param bws_same_times Defaults to \code{5L}.
+#' @param init_bandwidth Defaults to \code{NULL}.
+#' @param standardize Defaults to \code{TRUE}.
+#' @return A list with \code{bandwidths}, \code{at_search_boundary}, \code{standardized}, \code{y_centre}, \code{y_scale}, \code{x_centre}, \code{x_scale}, \code{params}, \code{fitted}, \code{resid}, \code{bandwidth_gwr}, \code{bandwidth_history}, \code{score_history}, \code{n_iter}, \code{converged}, \code{criterion}, \code{kernel}.
+#' @export
 .schab_mgwr_backfit <- function(y, X, coords, kernel = "gaussian",
                                 criterion = "aicc", adaptive = FALSE,
                                 tol = 1e-5, max_iter = 200L,

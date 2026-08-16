@@ -11,6 +11,14 @@
 .lsa_EPS <- 1e-12
 .WEIGHTS <- c("raw", "log_entropy", "tfidf")
 
+#' .ghc_svd
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return A list with \code{T}, \code{S}, \code{Dt}.
+#' @export
 .ghc_svd <- function(A) {
   A <- as.matrix(A)
   s <- svd(A, nu = nrow(A), nv = ncol(A))
@@ -166,6 +174,13 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
        n_documents = nD)
 }
 
+#' .lsa_cheatsheet
+#'
+#' Part of the lsa_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .lsa_cheatsheet <- function() {
   "lsa: literal term matching fails through SYNONYMY (the right document uses other words) and POLYSEMY (the wrong one shares a word). Take the SVD of the term-document matrix and keep ~100 factors: the TRUNCATION is the method, since k = full rank reproduces X exactly and generalises nothing. Queries are FOLDED IN as pseudo-documents, q' T S^-1, then ranked by cosine -- no re-decomposition, but new documents do not reshape the space. Weight the counts first; log-entropy is standard."
 }

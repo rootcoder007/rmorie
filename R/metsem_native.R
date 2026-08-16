@@ -67,6 +67,15 @@ morie_metsem_kmers <- function(seq, k) {
          character(1))
 }
 
+#' .metsem_index
+#'
+#' Part of the metsem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param k See Usage.
+#' @return A list with \code{out}, \code{inc}, \code{nodes}.
+#' @export
 .metsem_index <- function(edges, k) {
   out <- list(); inc <- list(); nodes <- character(0)
   for (km in sort(names(edges), method = "radix")) {
@@ -104,11 +113,38 @@ morie_metsem_graph <- function(reads, k) {
        k = k, short = short, used = used)
 }
 
+#' .metsem_outdeg
+#'
+#' Part of the metsem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .metsem_outdeg <- function(g, v)
   if (v %in% names(g$out)) length(g$out[[v]]) else 0L
+#' .metsem_indeg
+#'
+#' Part of the metsem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .metsem_indeg <- function(g, v)
   if (v %in% names(g$inc)) length(g$inc[[v]]) else 0L
 
+#' .metsem_walk
+#'
+#' Part of the metsem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param first See Usage.
+#' @return The value of \code{path}, as built in the body.
+#' @export
 .metsem_walk <- function(g, first) {
   path <- first
   v <- substr(first, 2L, nchar(first))
@@ -121,6 +157,14 @@ morie_metsem_graph <- function(reads, k) {
   path
 }
 
+#' .metsem_seq
+#'
+#' Part of the metsem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param path See Usage.
+#' @return A character value.
+#' @export
 .metsem_seq <- function(path) {
   if (length(path) == 1L) return(path[1])
   paste0(path[1],
@@ -196,6 +240,15 @@ morie_metsem_n50 <- function(lengths) {
   ls[length(ls)]
 }
 
+#' .metsem_drop
+#'
+#' Part of the metsem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param g See Usage.
+#' @param es See Usage.
+#' @return The value of \code{g}, as built in the body.
+#' @export
 .metsem_drop <- function(g, es) {
   for (e in es) if (!is.null(g$edges[[e]])) g$edges[[e]] <- NULL
   ix <- .metsem_index(g$edges, g$k)

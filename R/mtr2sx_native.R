@@ -62,7 +62,22 @@
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
+#' Base R has no erf/erfc; both are pnorm in disguise. Defined here so
+#'
+#' the arm stays base-R only, as the package requires.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .mtr2sx_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+#' .mtr2sx_erfc
+#'
+#' Part of the mtr2sx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .mtr2sx_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 #' morie_mtr2sx

@@ -18,8 +18,24 @@
 
 .OPNCLP_EPS <- 1e-12
 
+#' .opnclp_vec
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .opnclp_vec <- function(v) as.numeric(unlist(v))
 
+#' .opnclp_mat
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .opnclp_mat <- function(m) {
   if (is.matrix(m)) {
     storage.mode(m) <- "double"
@@ -95,6 +111,15 @@ fit_power_law <- function(x, y) {
   )
 }
 
+#' .opnclp_predict
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param compute See Usage.
+#' @return A list with \code{value}, \code{extrapolation_decades}, \code{interpolated}, \code{note}.
+#' @export
 .opnclp_predict <- function(fit, compute) {
   c <- as.numeric(compute)
   if (c <= 0.0)
@@ -207,6 +232,13 @@ infonce <- function(image_embeddings, text_embeddings,
   )
 }
 
+#' .opnclp_cheatsheet
+#'
+#' Part of the opnclp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .opnclp_cheatsheet <- function() {
   paste("opnclp: CLIP-scale laws had been measured on PRIVATE data ",
         "and models; re-run on public LAION with an open ",

@@ -1,5 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 ## Default exposure summary: fraction of neighbours treated.
+#' SPDX-License-Identifier: AGPL-3.0-or-later
+#'
+#' # Default exposure summary: fraction of neighbours treated.
+#'
+#' @param D See Usage.
+#' @param A See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .tmlspl_frac_treated <- function(D, A) {
   n <- length(D)
   out <- numeric(n)

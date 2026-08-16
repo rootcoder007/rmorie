@@ -69,6 +69,15 @@
 # solution -- the reference the approximate step should agree with.
 
 
+#' .safrl_mat
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param name See Usage.
+#' @return The value of \code{rows}, as built in the body.
+#' @export
 .safrl_mat <- function(M, name) {
   rows <- NULL
   if (is.matrix(M)) {
@@ -98,6 +107,15 @@
 }
 
 
+#' .safrl_vec
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param name See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .safrl_vec <- function(v, name) {
   out <- NULL
   if (is.list(v)) {
@@ -112,6 +130,15 @@
 }
 
 
+#' .safrl_solve
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return The value of \code{[}.
+#' @export
 .safrl_solve <- function(A, b) {
   n <- length(b)
   M <- matrix(0, nrow = n, ncol = n + 1)
@@ -156,6 +183,21 @@
 }
 
 
+#' .safrl_dual
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param q See Usage.
+#' @param r See Usage.
+#' @param S See Usage.
+#' @param c See Usage.
+#' @param delta See Usage.
+#' @param m See Usage.
+#' @param tol See Usage.
+#' @param max_iter See Usage.
+#' @return A list with \code{lam}, \code{nu}.
+#' @export
 .safrl_dual <- function(q, r, S, c, delta, m, tol, max_iter) {
   nu <- rep(0.0, m)
 
@@ -217,6 +259,23 @@
 }
 
 
+#' .safrl_finish
+#'
+#' Part of the safrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param step See Usage.
+#' @param g See Usage.
+#' @param cols See Usage.
+#' @param cv See Usage.
+#' @param H See Usage.
+#' @param delta See Usage.
+#' @param lam See Usage.
+#' @param nu See Usage.
+#' @param feasible See Usage.
+#' @param recovery See Usage.
+#' @return A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu}, \code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation}, \code{kl}, \code{delta}, \code{method}.
+#' @export
 .safrl_finish <- function(step, g, cols, cv, H, delta, lam, nu,
                            feasible, recovery) {
   n <- length(g)

@@ -20,6 +20,15 @@
 # stream the Python arm uses when it seeds default_rng(seed). The
 # u = r - 0.5 form below matches rng.random() - 0.5 exactly.
 
+#' .pate_lap_draw
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param gamma See Usage.
+#' @return A numeric value.
+#' @export
 .pate_lap_draw <- function(e, gamma) {
   u <- .ghc_unif(e, 1L) - 0.5
   -sign(u) * log(1 - 2 * abs(u)) / gamma
@@ -307,6 +316,13 @@ pate <- function(teacher_predicts, queries, gamma = 0.05,
   )
 }
 
+#' .pate_cheatsheet
+#'
+#' Part of the pate_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .pate_cheatsheet <- function() {
   paste("pate: private aggregation of teacher ensembles (Papernot et ",
         "al. 2017). Teachers trained on disjoint partitions vote; the ",

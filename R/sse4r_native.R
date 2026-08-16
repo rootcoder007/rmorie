@@ -52,6 +52,15 @@
 # Recommendation", *ICDM 2018*, 197-206, arXiv:1808.09781. SASRec, the
 # unpersonalised model being extended; implemented in :mod:`sasRec`.
 
+#' .sse4r_personalise
+#'
+#' Part of the sse4r_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param item_embeddings See Usage.
+#' @param user_embedding See Usage.
+#' @return A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width}, \code{length}, \code{note}.
+#' @export
 .sse4r_personalise <- function(item_embeddings, user_embedding) {
   I <- as.matrix(item_embeddings)
   storage.mode(I) <- "double"
@@ -70,6 +79,17 @@
   )
 }
 
+#' .sse4r_sse_replace
+#'
+#' Part of the sse4r_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param indices See Usage.
+#' @param table_size See Usage.
+#' @param p Defaults to \code{0}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{indices}, \code{replaced}, \code{p}, \code{rate}, \code{note}.
+#' @export
 .sse4r_sse_replace <- function(indices, table_size, p = 0.0, seed = 0) {
   idx <- as.integer(indices)
   n <- as.integer(table_size)
@@ -129,6 +149,15 @@
   )
 }
 
+#' .sse4r_expected_replacement
+#'
+#' Part of the sse4r_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @param table_size See Usage.
+#' @return A list with \code{expected_rate}, \code{p}, \code{table_size}, \code{note}.
+#' @export
 .sse4r_expected_replacement <- function(p, table_size) {
   pr <- as.numeric(p)
   n <- as.integer(table_size)
@@ -143,6 +172,17 @@
   )
 }
 
+#' .sse4r_parameter_count
+#'
+#' Part of the sse4r_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_users See Usage.
+#' @param n_items See Usage.
+#' @param user_dim See Usage.
+#' @param item_dim See Usage.
+#' @return A list with \code{user_params}, \code{item_params}, \code{total}, \code{user_share}, \code{note}.
+#' @export
 .sse4r_parameter_count <- function(n_users, n_items, user_dim, item_dim) {
   nu <- as.integer(n_users)
   ni <- as.integer(n_items)

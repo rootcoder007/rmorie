@@ -90,6 +90,16 @@ Matern <- function(lambda_p, mu, r, t = NULL) {
 
 # Area common to two discs of radius r whose centres are v apart: Matern
 # (1960) V_n(A, A; v) of eq. (3.4.4) p. 38, at n = 2.  Shared with Hcoreg.
+#' Area common to two discs of radius r whose centres are v apart:
+#' Matern
+#'
+#' (1960) V_n(A, A; v) of eq. (3.4.4) p. 38, at n = 2.  Shared with
+#' Hcoreg.
+#'
+#' @param r See Usage.
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .s03lens <- function(r, v) {
   if (v >= 2 * r) return(0)
   if (v <= 0) return(pi * r * r)
@@ -99,6 +109,15 @@ Matern <- function(lambda_p, mu, r, t = NULL) {
 }
 
 # Integral of gamma over the disc of radius t; 1 for t >= 2r.
+#' Integral of gamma over the disc of radius t; 1 for t >= 2r
+#'
+#' Part of the matern implementation; see the file header for the source
+#' it follows.
+#'
+#' @param t See Usage.
+#' @param r See Usage.
+#' @return A numeric value.
+#' @export
 .s03lensH <- function(t, r) {
   if (t <= 0) return(0)
   S <- t / (2 * r)

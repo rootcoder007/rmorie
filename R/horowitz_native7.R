@@ -27,11 +27,31 @@
 # uniform density with itself, whose characteristic function is
 # sinc^4. Compact support in tau is the point: it stops the integrand
 # being evaluated where the denominator has died.
+#' Psi_zeta: a bounded real characteristic function supported on
+#'
+#' [-1, 1] -- the book\'s example is the fourfold convolution of the
+#' uniform density with itself, whose characteristic function is sinc^4.
+#' Compact support in tau is the point: it stops the integrand being
+#' evaluated where the denominator has died.
+#'
+#' @param u See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_hrz_smoothing_cf <- function(u) {
   s <- ifelse(u == 0, 1, (sin(u / 4) / (u / 4))^4)
   ifelse(abs(u) <= 1, s, 0)
 }
 
+#' .morie_hrz_panel_residuals
+#'
+#' Part of the horowitz_native7 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @param beta See Usage.
+#' @return A list with \code{W}, \code{eta}, \code{n}, \code{T}.
+#' @export
 .morie_hrz_panel_residuals <- function(y, x, beta) {
   Y <- if (is.matrix(y)) y else matrix(as.numeric(y), nrow = 1L)
   b <- as.numeric(beta)
@@ -79,6 +99,20 @@
   list(W = as.numeric(w), eta = as.numeric(eta), n = n, T = tt)
 }
 
+#' .morie_hrz_deconvolve_pair
+#'
+#' Part of the horowitz_native7 implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w See Usage.
+#' @param eta See Usage.
+#' @param grid_u See Usage.
+#' @param grid_z See Usage.
+#' @param nu_U See Usage.
+#' @param nu_eps See Usage.
+#' @param n_tau Defaults to \code{2001L}.
+#' @return A list with \code{f_U}, \code{f_eps}.
+#' @export
 .morie_hrz_deconvolve_pair <- function(w, eta, grid_u, grid_z, nu_U, nu_eps,
                                        n_tau = 2001L) {
   if (nu_U <= 0 || nu_eps <= 0) {

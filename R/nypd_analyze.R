@@ -7,6 +7,19 @@
 # (felony/misdemeanour), so a felony-charge disparate-impact analysis by
 # race is computable directly from the data.
 
+#' .morie_nypd_result
+#'
+#' Part of the nypd_analyze implementation; see the file header for the
+#' source it follows.
+#'
+#' @param title See Usage.
+#' @param summary_lines Defaults to \code{list()}.
+#' @param tables Defaults to \code{list()}.
+#' @param interpretation Defaults to \code{""}.
+#' @param warnings Defaults to \code{""}.
+#' @param payload Defaults to \code{list()}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_nypd_result <- function(title, summary_lines = list(), tables = list(),
                                interpretation = "", warnings = "",
                                payload = list()) {
@@ -17,6 +30,14 @@
   out
 }
 
+#' .morie_nypd_load_sample
+#'
+#' Part of the nypd_analyze implementation; see the file header for the
+#' source it follows.
+#'
+#' @param which Defaults to \code{c("arrests", "complaint")}.
+#' @return The value of \code{utils::read.csv}.
+#' @export
 .morie_nypd_load_sample <- function(which = c("arrests", "complaint")) {
   which <- match.arg(which)
   file <- switch(which,

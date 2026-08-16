@@ -9,6 +9,16 @@
 # Ported from the Python at full precision, so the two languages agree
 # to machine precision on every function here (all are deterministic).
 
+#' .morie_cox_prepare
+#'
+#' Part of the cox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @return A list with \code{t}, \code{e}, \code{X}.
+#' @export
 .morie_cox_prepare <- function(time, event, X = NULL) {
   t <- as.numeric(time)
   e <- as.numeric(event)
@@ -38,6 +48,18 @@
 
 # Score and information at a FIXED beta. Shared by the fitter and by
 # the stratified model, which needs the pieces without taking a step.
+#' Score and information at a FIXED beta. Shared by the fitter and by
+#'
+#' the stratified model, which needs the pieces without taking a step.
+#'
+#' @param ts See Usage.
+#' @param es See Usage.
+#' @param Xs See Usage.
+#' @param beta See Usage.
+#' @param offs See Usage.
+#' @param ties See Usage.
+#' @return A list with \code{loglik}, \code{U}, \code{I}.
+#' @export
 .morie_cox_score <- function(ts, es, Xs, beta, offs, ties) {
   p <- ncol(Xs)
   eta <- pmax(pmin(as.vector(Xs %*% beta) + offs, 500), -500)
@@ -85,6 +107,20 @@
   list(loglik = ll, U = U, I = I)
 }
 
+#' .morie_cox_fit
+#'
+#' Part of the cox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param ties Defaults to \code{"efron"}.
+#' @param max_iter Defaults to \code{50L}.
+#' @param tol Defaults to \code{1e-09}.
+#' @param offset Defaults to \code{NULL}.
+#' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter}, \code{converged}.
+#' @export
 .morie_cox_fit <- function(t, e, X, ties = "efron", max_iter = 50L,
                            tol = 1e-9, offset = NULL) {
   p <- ncol(X)
@@ -121,6 +157,18 @@
   )
 }
 
+#' .morie_cox_baseline
+#'
+#' Part of the cox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @param offset Defaults to \code{NULL}.
+#' @return A list with \code{times}, \code{hazard}, \code{cumhazard}.
+#' @export
 .morie_cox_baseline <- function(t, e, X, beta, offset = NULL) {
   off <- if (is.null(offset)) numeric(length(t)) else as.numeric(offset)
   w <- exp(pmax(pmin(as.vector(X %*% beta) + off, 500), -500))
@@ -134,6 +182,15 @@
   list(times = utimes, hazard = dH, cumhazard = cumsum(dH))
 }
 
+#' .morie_km_estimate
+#'
+#' Part of the cox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @return A list with \code{times}, \code{survival}.
+#' @export
 .morie_km_estimate <- function(t, e) {
   utimes <- unique(sort(t[e == 1]))
   surv <- numeric(length(utimes))
@@ -148,6 +205,19 @@
   list(times = utimes, survival = surv)
 }
 
+#' .morie_cox_result
+#'
+#' Part of the cox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param fit See Usage.
+#' @param label See Usage.
+#' @param method See Usage.
+#' @return A list with \code{beta}, \code{se}, \code{z}, \code{p_value}, \code{hazard_ratio}, \code{loglik}, \code{cov}, \code{information}, \code{n_ties}, \code{n_events}, \code{n}, \code{n_iter}, \code{converged}, \code{ties}, \code{time}, \code{event}, \code{X}, \code{method}.
+#' @export
 .morie_cox_result <- function(t, e, X, fit, label, method) {
   I <- fit$I
   cov <- tryCatch(solve(I), error = function(err) NULL)

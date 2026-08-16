@@ -1,6 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Internal: closure operator -- rescale each row to unit sum.
+#' Internal: closure operator -- rescale each row to unit sum
+#'
+#' Part of the aitsbm implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @return A numeric value.
+#' @export
 .aitsbm_close <- function(X) X / rowSums(X)
 
 #' Spurious correlation of compositional parts, and its cure

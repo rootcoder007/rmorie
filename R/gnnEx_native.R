@@ -31,6 +31,14 @@
 
 .gnnEx_EPS <- 1e-12
 
+#' Vectorised sigmoid with overflow protection (matches Python _sig)
+#'
+#' Part of the gnnEx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .gnnEx_sig <- function(x) {
   # Vectorised sigmoid with overflow protection (matches Python _sig).
   out <- numeric(length(x))
@@ -40,6 +48,15 @@
   out
 }
 
+#' Adj is a list: names are node IDs (as character or integer), values
+#'
+#' are integer vectors of neighbours. Falls back to 1-based integer
+#' indexing when the list has no names.
+#'
+#' @param adj See Usage.
+#' @param u See Usage.
+#' @return A vector, from \code{integer}.
+#' @export
 .gnnEx_get_neighbors <- function(adj, u) {
   # adj is a list: names are node IDs (as character or integer), values
   # are integer vectors of neighbours. Falls back to 1-based integer

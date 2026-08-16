@@ -2,6 +2,14 @@
 
 # Internal: least squares with an intercept prepended. Returns the
 # coefficients and the residuals in one list so callers do not refit.
+#' Internal: least squares with an intercept prepended. Returns the
+#'
+#' coefficients and the residuals in one list so callers do not refit.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{beta}, \code{resid}.
+#' @export
 .sensmi_ols <- function(X, y) {
   D <- cbind(1, X)
   beta <- drop(qr.solve(D, y))

@@ -17,6 +17,16 @@
 
 .ttrace_EPS <- 1e-12
 
+#' .gamma_draw
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param shape See Usage.
+#' @param scale See Usage.
+#' @param e See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 .gamma_draw <- function(shape, scale, e) {
   a <- as.numeric(shape)
   if (a < 1.0) {
@@ -35,6 +45,15 @@
   }
 }
 
+#' .poisson_draw
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lam See Usage.
+#' @param e See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 .poisson_draw <- function(lam, e) {
   lm <- as.numeric(lam)
   if (lm <= 0.0) return(0L)
@@ -280,6 +299,13 @@ effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
                      "window is measured from that point"))
 }
 
+#' .ttrace_cheatsheet
+#'
+#' Part of the ttrace_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .ttrace_cheatsheet <- function() {
   paste0("ttrace: branching process. Offspring ~ NegBinom(mean R0, ",
          "dispersion k), variance R0(1 + R0/k) -- overdispersion ",

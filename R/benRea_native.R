@@ -24,11 +24,27 @@ bio_labels <- function(types) {
   out
 }
 
+#' .parts
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param label See Usage.
+#' @return The value of \code{substr}.
+#' @export
 .parts <- function(label) {
   if (label == "O") return(c("O", NA))
   substr(label, 1, 1)
 }
 
+#' .parts_full
+#'
+#' Part of the benRea_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param label See Usage.
+#' @return A list with \code{p}, \code{t}.
+#' @export
 .parts_full <- function(label) {
   if (label == "O") return(list(p = "O", t = NA))
   list(p = substr(label, 1, 1), t = substr(label, 3, nchar(label)))

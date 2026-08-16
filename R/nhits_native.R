@@ -48,10 +48,28 @@
 # forecasting", *International Conference on Learning Representations*,
 # arXiv:1905.10437. The doubly residual stack N-HiTS inherits.
 
+#' .nhits_vec
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .nhits_vec <- function(y) {
   as.numeric(y)
 }
 
+#' .nhits_lstsq
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .nhits_lstsq <- function(X, y, ridge = 1e-8) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -62,6 +80,16 @@
   as.numeric(theta)
 }
 
+#' .nhits_max_pool
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param kernel See Usage.
+#' @param stride Defaults to \code{NULL}.
+#' @return A vector, from \code{vapply}.
+#' @export
 .nhits_max_pool <- function(x, kernel, stride = NULL) {
   xv <- as.numeric(x)
   kk <- as.integer(kernel)
@@ -75,6 +103,15 @@
   vapply(starts, function(s) max(xv[s:(s + kk - 1L)]), numeric(1L))
 }
 
+#' .nhits_expressiveness_knots
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param horizon See Usage.
+#' @param ratio See Usage.
+#' @return A numeric value.
+#' @export
 .nhits_expressiveness_knots <- function(horizon, ratio) {
   r <- as.numeric(ratio)
   if (r <= 0 || r > 1) {
@@ -84,6 +121,15 @@
   max(2L, as.integer(ceiling(r * H)))
 }
 
+#' .nhits_linear_interpolate
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param knots See Usage.
+#' @param horizon See Usage.
+#' @return A numeric value.
+#' @export
 .nhits_linear_interpolate <- function(knots, horizon) {
   kv <- as.numeric(knots)
   n <- length(kv)
@@ -99,6 +145,19 @@
   (1 - w) * kv[lo + 1L] + w * kv[hi + 1L]
 }
 
+#' .nhits_nhits_block
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param window See Usage.
+#' @param horizon See Usage.
+#' @param kernel Defaults to \code{1L}.
+#' @param ratio Defaults to \code{1}.
+#' @param degree Defaults to \code{2L}.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{backcast}, \code{forecast}, \code{knots}, \code{pooled}.
+#' @export
 .nhits_nhits_block <- function(window, horizon, kernel = 1L, ratio = 1.0,
                                 degree = 2L, ridge = 1e-8) {
   w <- as.numeric(window)
@@ -133,6 +192,17 @@
        knots = knots, pooled = pooled)
 }
 
+#' .nhits_nhits_stack
+#'
+#' Part of the nhits_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param window See Usage.
+#' @param horizon See Usage.
+#' @param blocks See Usage.
+#' @param ridge Defaults to \code{1e-08}.
+#' @return A list with \code{total}, \code{resid}, \code{trace}.
+#' @export
 .nhits_nhits_stack <- function(window, horizon, blocks, ridge = 1e-8) {
   resid <- as.numeric(window)
   total <- rep(0.0, as.integer(horizon))

@@ -13,6 +13,15 @@
 # number of steps, because an early exit on one language arm and not the
 # other silently breaks Py<->R parity.
 
+#' .t2_lvl
+#'
+#' Part of the tail2_t01 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .t2_lvl <- function(a, b) sort(unique(c(a, b)))
 
 #' Cohen (1960) kappa for two raters
@@ -40,6 +49,15 @@ KappaCoh <- function(rater1, rater2) {
        method = "Cohen (1960) kappa, two raters, nominal scale")
 }
 
+#' .t2_wmat
+#'
+#' Part of the tail2_t01 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @param k See Usage.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 .t2_wmat <- function(weights, k) {
   if (is.character(weights)) {
     nm <- tolower(weights)
@@ -125,6 +143,15 @@ CooksD <- function(y, X) {
 # eq. (6) S(d, alpha), eq. (7) scalers tensor aggregators.
 .t2_pna_eps <- 1e-5
 
+#' .t2_agg
+#'
+#' Part of the tail2_t01 implementation; see the file header for the
+#' source it follows.
+#'
+#' @param name See Usage.
+#' @param vals See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .t2_agg <- function(name, vals) {
   m <- length(vals)
   if (m == 0L) return(0)

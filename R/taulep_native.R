@@ -6,6 +6,15 @@
 # interarrival counting method on the shared SplitMix64 uniform
 # stream, consumed draw for draw.
 
+#' .taulep_poisson
+#'
+#' Part of the taulep_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param e See Usage.
+#' @param lam See Usage.
+#' @return The value of \code{repeat}.
+#' @export
 .taulep_poisson <- function(e, lam) {
   if (lam <= 0) return(0L)
   k <- 0L

@@ -35,6 +35,20 @@
 # Minimal honest CART builder. Each tree gets half the observations
 # chosen uniformly without replacement; honesty is enforced by
 # splitting each tree's bag into a structure half and a leaf half.
+#' Minimal honest CART builder. Each tree gets half the observations
+#'
+#' chosen uniformly without replacement; honesty is enforced by
+#' splitting each tree\'s bag into a structure half and a leaf half.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param indices See Usage.
+#' @param min_leaf See Usage.
+#' @param alpha See Usage.
+#' @param max_depth See Usage.
+#' @param e See Usage.
+#' @return The value of \code{build}.
+#' @export
 .grow_one_tree <- function(X, y, indices, min_leaf, alpha,
                            max_depth, e) {
   n <- length(indices)
@@ -79,6 +93,22 @@
   build(struct, 0L)
 }
 
+#' .orfgrf_grow_forest
+#'
+#' Part of the orfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param W Defaults to \code{NULL}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param n_trees Defaults to \code{100}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param max_depth Defaults to \code{12}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{trees}, \code{bags}, \code{s}.
+#' @export
 .orfgrf_grow_forest <- function(X, y, W = NULL, kind = "double-sample",
                         n_trees = 100, min_leaf = 5, alpha = 0.05,
                         max_depth = 12, seed = 0) {
@@ -103,6 +133,15 @@
 }
 
 # Recursive descent through one tree to the leaf containing x.
+#' Recursive descent through one tree to the leaf containing x
+#'
+#' Part of the orfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param x See Usage.
+#' @return The value of \code{.predict_tree}.
+#' @export
 .predict_tree <- function(tree, x) {
   if (isTRUE(tree$leaf)) return(tree$value)
   if (x[tree$j] <= tree$cut) return(.predict_tree(tree$left, x))
@@ -112,6 +151,16 @@
 # Forest kernel weights alpha_i(x) for a single evaluation point.
 # Each unit that lands in the same leaf as x in tree t contributes
 # 1 / (#units from tree t's leaf-sample in that leaf).
+#' Forest kernel weights alpha_i(x) for a single evaluation point
+#'
+#' Each unit that lands in the same leaf as x in tree t contributes 1 /
+#' (#units from tree t\'s leaf-sample in that leaf).
+#'
+#' @param trees See Usage.
+#' @param X See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .orfgrf_forest_weights <- function(trees, X, x) {
   n <- nrow(X)
   w <- rep(0, n)
@@ -320,6 +369,13 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                       " residualization", sep = ""))
 }
 
+#' .orfgrf_cheatsheet
+#'
+#' Part of the orfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .orfgrf_cheatsheet <- function() {
   paste("orfgrf: ORF. Moment E[Y - theta(x) T - f(x,W) | X=x] = 0. ",
         "Residualize BOTH Y and T on the controls W, then ",

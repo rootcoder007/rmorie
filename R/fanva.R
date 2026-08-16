@@ -80,6 +80,15 @@ Fanva <- function(functions, groups, t = NULL) {
        method = "Ramsay-Silverman (2005) Ch.13 one-way functional ANOVA, pointwise decomposition integrated over the whole interval")
 }
 
+#' .fanva_trapz
+#'
+#' Part of the fanva implementation; see the file header for the source
+#' it follows.
+#'
+#' @param t See Usage.
+#' @param v See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .fanva_trapz <- function(t, v) {
   s <- 0
   n <- length(t)

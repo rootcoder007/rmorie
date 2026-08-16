@@ -18,11 +18,27 @@
 
 .tmlcou_EPS <- 1e-12
 
+#' .tmlcou_logit
+#'
+#' Part of the tmlcou_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tmlcou_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
+#' .tmlcou_expit
+#'
+#' Part of the tmlcou_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmlcou_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
 
 #' Map the outcome to [0,1] by an affine transform

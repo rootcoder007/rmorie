@@ -152,6 +152,13 @@ training_stage <- function(stage) {
        note = "tuning the language model first would tune it against features that do not yet mean anything")
 }
 
+#' .llavx_cheatsheet
+#'
+#' Part of the llavx_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .llavx_cheatsheet <- function() {
   paste("llavx: instruction tuning works in language and lacked ",
         "MULTIMODAL data, so generate it with a LANGUAGE-ONLY ",

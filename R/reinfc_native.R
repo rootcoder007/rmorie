@@ -9,6 +9,14 @@
 # Modes:  immediate (Thm 1), episodic (Thm 2).
 # Theorem 1: E{Delta W}' grad E{r} >= 0 for any baseline b.
 
+#' .reinfc_logistic
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param s See Usage.
+#' @return A numeric value.
+#' @export
 .reinfc_logistic <- function(s) {
   if (s >= 0.0) {
     return(1.0 / (1.0 + exp(-s)))
@@ -17,6 +25,15 @@
   return(e / (1.0 + e))
 }
 
+#' .reinfc_as_matrix
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param name See Usage.
+#' @return The value of \code{x_mat}, as built in the body.
+#' @export
 .reinfc_as_matrix <- function(x, name) {
   if (is.null(x)) {
     stop(sprintf("reinfc: %s must be non-empty", name))
@@ -37,6 +54,16 @@
   return(x_mat)
 }
 
+#' .reinfc_baseline_series
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rewards See Usage.
+#' @param baseline See Usage.
+#' @param gamma See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .reinfc_baseline_series <- function(rewards, baseline, gamma) {
   n <- length(rewards)
   if (baseline == "none") {
@@ -59,6 +86,17 @@
   return(out)
 }
 
+#' .reinfc_finish
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param param See Usage.
+#' @param rewards See Usage.
+#' @param bs See Usage.
+#' @param traj See Usage.
+#' @return A list with \code{estimate}, \code{rewards}, \code{baseline}, \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last}, \code{method}.
+#' @export
 .reinfc_finish <- function(param, rewards, bs, traj) {
   n <- length(rewards)
   tenth <- max(1, n %/% 10)
@@ -76,6 +114,16 @@
   )
 }
 
+#' .reinfc_running_baseline
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param baseline See Usage.
+#' @param gamma See Usage.
+#' @return A numeric value.
+#' @export
 .reinfc_running_baseline <- function(state, baseline, gamma) {
   if (baseline == "none") {
     return(0.0)
@@ -89,6 +137,17 @@
   return(state$v1 / state$v2)
 }
 
+#' .reinfc_advance_baseline
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param state See Usage.
+#' @param baseline See Usage.
+#' @param gamma See Usage.
+#' @param r See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .reinfc_advance_baseline <- function(state, baseline, gamma, r) {
   if (baseline == "comparison") {
     state$v1 <- gamma * state$v1 + (1.0 - gamma) * r
@@ -98,6 +157,22 @@
   }
 }
 
+#' .reinfc_run_bernoulli
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reward_fn See Usage.
+#' @param pv See Usage.
+#' @param baseline See Usage.
+#' @param mode See Usage.
+#' @param rho See Usage.
+#' @param gamma See Usage.
+#' @param k See Usage.
+#' @param trials See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{.reinfc_finish}.
+#' @export
 .reinfc_run_bernoulli <- function(reward_fn, pv, baseline, mode, rho, gamma, k, trials, rng) {
   n <- length(pv)
   p <- pv
@@ -136,6 +211,24 @@
   .reinfc_finish(p, rewards, bs, traj)
 }
 
+#' .reinfc_run_logistic
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reward_fn See Usage.
+#' @param xs See Usage.
+#' @param wm See Usage.
+#' @param baseline See Usage.
+#' @param mode See Usage.
+#' @param alpha See Usage.
+#' @param gamma See Usage.
+#' @param k See Usage.
+#' @param trials See Usage.
+#' @param eligibility See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 .reinfc_run_logistic <- function(reward_fn, xs, wm, baseline, mode, alpha, gamma, k, trials,
                                  eligibility, rng) {
   n_units <- nrow(wm)
@@ -192,6 +285,24 @@
   result
 }
 
+#' .reinfc_run_gaussian
+#'
+#' Part of the reinfc_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param reward_fn See Usage.
+#' @param mu See Usage.
+#' @param sigma See Usage.
+#' @param baseline See Usage.
+#' @param mode See Usage.
+#' @param alpha See Usage.
+#' @param gamma See Usage.
+#' @param k See Usage.
+#' @param trials See Usage.
+#' @param rate_scaling See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{result}, as built in the body.
+#' @export
 .reinfc_run_gaussian <- function(reward_fn, mu, sigma, baseline, mode, alpha, gamma, k,
                                  trials, rate_scaling, rng) {
   if (!(rate_scaling %in% c("sigma2", "none"))) {

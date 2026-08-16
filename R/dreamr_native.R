@@ -75,12 +75,30 @@
 # make the estimators checkable against closed forms, which is what the
 # anchors do.
 
+#' .dreamr_vec
+#'
+#' Part of the dreamr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param name See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .dreamr_vec <- function(x, name) {
   v <- as.numeric(x)
   if (length(v) == 0L) stop(sprintf("dreamr: %s must be non-empty", name))
   v
 }
 
+#' .dreamr_pack
+#'
+#' Part of the dreamr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param vals See Usage.
+#' @param name See Usage.
+#' @return A list with \code{estimate}, \code{returns}, \code{n}, \code{method}.
+#' @export
 .dreamr_pack <- function(vals, name) {
   list(
     estimate = vals,

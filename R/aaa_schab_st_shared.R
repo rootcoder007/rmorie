@@ -21,6 +21,15 @@
 #
 # Internal; `aaa_` collates it before its callers.
 
+#' .schab_st_as_lags
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @return A list with \code{h}, \code{k}.
+#' @export
 .schab_st_as_lags <- function(h, k) {
   h <- as.numeric(h)
   k <- abs(as.numeric(k))
@@ -29,6 +38,15 @@
   list(h = rep_len(h, n), k = rep_len(k, n))
 }
 
+#' .schab_st_lag_matrices
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param times See Usage.
+#' @return A list with \code{d}, \code{k}.
+#' @export
 .schab_st_lag_matrices <- function(coords, times) {
   coords <- as.matrix(coords)
   times <- as.numeric(times)
@@ -42,6 +60,18 @@
 
 # --- Sec. 9.2, separable covariance functions ------------------------------
 
+#' .schab_st_separable_covariance
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param cov_spatial See Usage.
+#' @param cov_temporal See Usage.
+#' @param form Defaults to \code{"product"}.
+#' @return The value of \code{switch}.
+#' @export
 .schab_st_separable_covariance <- function(h, k, cov_spatial, cov_temporal,
                                            form = "product") {
   lg <- .schab_st_as_lags(h, k)
@@ -57,6 +87,14 @@
   )
 }
 
+#' .schab_st_is_separable
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param form See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .schab_st_is_separable <- function(form) {
   if (form %in% c("product", "sum")) {
     return(TRUE)
@@ -67,6 +105,18 @@
   stop(sprintf("unknown form '%s'", form), call. = FALSE)
 }
 
+#' .schab_st_anisotropic_correlation
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param theta_s See Usage.
+#' @param theta_t See Usage.
+#' @param corr_fn See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .schab_st_anisotropic_correlation <- function(h, k, theta_s, theta_t, corr_fn) {
   lg <- .schab_st_as_lags(h, k)
   if (theta_s <= 0 || theta_t <= 0) {
@@ -75,6 +125,17 @@
   as.numeric(corr_fn(theta_s * lg$h^2 + theta_t * lg$k^2)) # eq (9.3)
 }
 
+#' .schab_st_exponential_separable
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param theta_s See Usage.
+#' @param theta_t See Usage.
+#' @return A numeric value.
+#' @export
 .schab_st_exponential_separable <- function(h, k, theta_s, theta_t) {
   lg <- .schab_st_as_lags(h, k) # eq (9.4)
   if (theta_s <= 0 || theta_t <= 0) {
@@ -85,6 +146,22 @@
 
 # --- Sec. 9.3.1, Gneiting's monotone construction --------------------------
 
+#' .schab_st_gneiting
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @param a Defaults to \code{1}.
+#' @param c Defaults to \code{1}.
+#' @param alpha Defaults to \code{1}.
+#' @param beta Defaults to \code{1}.
+#' @param gamma Defaults to \code{1}.
+#' @param d Defaults to \code{2}.
+#' @return A numeric value.
+#' @export
 .schab_st_gneiting <- function(h, k, sigma2 = 1, a = 1, c = 1, alpha = 1,
                                beta = 1, gamma = 1, d = 2) {
   lg <- .schab_st_as_lags(h, k)
@@ -97,6 +174,23 @@
   (sigma2 / psi^(beta * d / 2)) * exp(-c * lg$h^(2 * gamma) / psi^(beta * gamma))
 }
 
+#' .schab_st_gneiting_with_temporal
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @param a Defaults to \code{1}.
+#' @param c Defaults to \code{1}.
+#' @param alpha Defaults to \code{1}.
+#' @param beta Defaults to \code{1}.
+#' @param beta_t Defaults to \code{1}.
+#' @param gamma Defaults to \code{1}.
+#' @param d Defaults to \code{2}.
+#' @return A numeric value.
+#' @export
 .schab_st_gneiting_with_temporal <- function(h, k, sigma2 = 1, a = 1, c = 1,
                                              alpha = 1, beta = 1, beta_t = 1,
                                              gamma = 1, d = 2) {
@@ -112,6 +206,16 @@
     exp(-c * lg$h^(2 * gamma) / psi^(beta * gamma))
 }
 
+#' Sec. 6.2.3 states the rule outright: on the boundary of the parameter
+#'
+#' space the statistic is a mixture of a degenerate distribution at zero
+#' and a chi-square, so "simply divide the p-value ... by 2" (Self and
+#' Liang, 1987; Littell, Milliken, Stroup and Wolfinger, 1996).
+#'
+#' @param neg2_unrestricted See Usage.
+#' @param neg2_separable See Usage.
+#' @return A list with \code{statistic}, \code{p_value}, \code{p_value_naive_chi2_1}, \code{reference}.
+#' @export
 .schab_st_separability_test <- function(neg2_unrestricted, neg2_separable) {
   # Sec. 6.2.3 states the rule outright: on the boundary of the parameter
   # space the statistic is a mixture of a degenerate distribution at zero and
@@ -128,6 +232,17 @@
 
 # --- Sec. 9.3.3, Ma's mixtures ---------------------------------------------
 
+#' .schab_st_power_mixture
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rs See Usage.
+#' @param rt See Usage.
+#' @param distribution Defaults to \code{"poisson"}.
+#' @param ... Passed through.
+#' @return Nothing; this branch always raises.
+#' @export
 .schab_st_power_mixture <- function(rs, rt, distribution = "poisson", ...) {
   rs <- as.numeric(rs)
   rt <- as.numeric(rt)
@@ -152,6 +267,16 @@
   stop("`distribution` must be 'poisson' or 'binomial'", call. = FALSE)
 }
 
+#' .schab_st_bivariate_power_mixture
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rs See Usage.
+#' @param rt See Usage.
+#' @param pmf See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .schab_st_bivariate_power_mixture <- function(rs, rt, pmf) {
   rs <- as.numeric(rs)
   rt <- as.numeric(rt)
@@ -173,6 +298,19 @@
   out
 }
 
+#' .schab_st_scale_mixture
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param cov_spatial See Usage.
+#' @param cov_temporal See Usage.
+#' @param nodes See Usage.
+#' @param weights See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .schab_st_scale_mixture <- function(h, k, cov_spatial, cov_temporal, nodes,
                                     weights) {
   lg <- .schab_st_as_lags(h, k)
@@ -196,6 +334,17 @@
 
 # --- Sec. 9.3.4, the differential equation approach ------------------------
 
+#' Golub and Welsch (1969), Math. Comp. 23(106):221-230 -- NOT a
+#'
+#' Schabenberger & Gotway result. Nodes are the eigenvalues of the
+#' Jacobi matrix; weights are mu_0 times the squared first eigenvector
+#' components, with mu_0 the ZEROTH MOMENT of the weight function -- 2
+#' for Legendre on [-1, 1]. The Hermite rule elsewhere carries no such
+#' factor because there the Gaussian weight integrates to 1.
+#'
+#' @param n See Usage.
+#' @return A list with \code{nodes}, \code{weights}.
+#' @export
 .schab_gauss_legendre <- function(n) {
   # Golub and Welsch (1969), Math. Comp. 23(106):221-230 -- NOT a
   # Schabenberger & Gotway result. Nodes are the eigenvalues of the Jacobi
@@ -218,6 +367,16 @@
   list(nodes = e$values[ord], weights = 2 * (e$vectors[1, ord])^2)
 }
 
+#' J_0(x) = (1/pi) integral_0^pi cos(x sin theta) dtheta. The integrand
+#' is
+#'
+#' smooth and periodic so the trapezoid rule converges geometrically;
+#' base R\'s besselJ() is deliberately not used, see the file header.
+#'
+#' @param x See Usage.
+#' @param n_quad Defaults to \code{200L}.
+#' @return A vector, from \code{vapply}.
+#' @export
 .schab_bessel_j0 <- function(x, n_quad = 200L) {
   # J_0(x) = (1/pi) integral_0^pi cos(x sin theta) dtheta. The integrand is
   # smooth and periodic so the trapezoid rule converges geometrically; base
@@ -231,6 +390,16 @@
   vapply(x, function(xi) sum(wt * cos(xi * sin(theta))) * step / pi, numeric(1))
 }
 
+#' K_1(z) = integral_0^inf exp{-z cosh u} cosh u du
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @param upper Defaults to \code{40}.
+#' @param n_quad Defaults to \code{400L}.
+#' @return A vector, from \code{vapply}.
+#' @export
 .schab_bessel_k1 <- function(z, upper = 40, n_quad = 400L) {
   # K_1(z) = integral_0^inf exp{-z cosh u} cosh u du
   gl <- .schab_gauss_legendre(n_quad)
@@ -240,6 +409,16 @@
   vapply(as.numeric(z), function(zi) sum(wu * exp(-zi * ch) * ch), numeric(1))
 }
 
+#' .schab_whittle_covariance
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @param theta Defaults to \code{1}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .schab_whittle_covariance <- function(h, sigma2 = 1, theta = 1) {
   h <- as.numeric(h) # Whittle (1954)
   if (any(h < 0)) stop("lag `h` must be non-negative", call. = FALSE)
@@ -251,6 +430,16 @@
   out
 }
 
+#' .schab_st_tail_bound_j0
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param t See Usage.
+#' @param h See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .schab_st_tail_bound_j0 <- function(t, h, p) {
   if (t <= 0) {
     return(Inf)
@@ -264,6 +453,22 @@
   Inf
 }
 
+#' .schab_st_hankel_panels
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param hval See Usage.
+#' @param kval See Usage.
+#' @param theta See Usage.
+#' @param c See Usage.
+#' @param p See Usage.
+#' @param n_quad Defaults to \code{40L}.
+#' @param rtol Defaults to \code{1e-10}.
+#' @param max_panels Defaults to \code{20000L}.
+#' @param quiet_runs Defaults to \code{4L}.
+#' @return A list with \code{value}, \code{upper}, \code{last_rel}, \code{tail_bound}.
+#' @export
 .schab_st_hankel_panels <- function(hval, kval, theta, c, p, n_quad = 40L,
                                     rtol = 1e-10, max_panels = 20000L,
                                     quiet_runs = 4L) {
@@ -300,6 +505,21 @@
   )
 }
 
+#' .schab_st_jones_zhang
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param sigma2 Defaults to \code{1}.
+#' @param theta Defaults to \code{1}.
+#' @param c Defaults to \code{1}.
+#' @param p Defaults to \code{1.5}.
+#' @param d Defaults to \code{2}.
+#' @param n_quad Defaults to \code{40L}.
+#' @return A list with \code{covariance}, \code{quadrature}.
+#' @export
 .schab_st_jones_zhang <- function(h, k, sigma2 = 1, theta = 1, c = 1, p = 1.5,
                                   d = 2, n_quad = 40L) {
   lg <- .schab_st_as_lags(h, k) # eq (9.17)
@@ -337,11 +557,36 @@
 
 # --- eq (9.5), validity ----------------------------------------------------
 
+#' .schab_st_covariance_matrix
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param times See Usage.
+#' @param cov_fn See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .schab_st_covariance_matrix <- function(coords, times, cov_fn) {
   lm_ <- .schab_st_lag_matrices(coords, times)
   matrix(as.numeric(cov_fn(lm_$d, lm_$k)), nrow = nrow(lm_$d))
 }
 
+#' Eq (9.5) is positive semi-definiteness. Checked by
+#' eigendecomposition,
+#'
+#' not by sampling random coefficient vectors: the minimum eigenvalue IS
+#' the minimum of the quadratic form, so one eigensolve settles what no
+#' finite number of random draws can. Sec. 9.3 records that Gneiting
+#' (2002) found published covariance functions in Cressie and Huang
+#' (1999) to be invalid, so construction alone is not proof.
+#'
+#' @param coords See Usage.
+#' @param times See Usage.
+#' @param cov_fn See Usage.
+#' @param tol Defaults to \code{NULL}.
+#' @return A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue}, \code{tolerance}, \code{reason}.
+#' @export
 .schab_st_is_valid_covariance <- function(coords, times, cov_fn, tol = NULL) {
   # eq (9.5) is positive semi-definiteness. Checked by eigendecomposition,
   # not by sampling random coefficient vectors: the minimum eigenvalue IS the
@@ -369,12 +614,36 @@
 
 # --- Sec. 9.4, the spatio-temporal semivariogram ---------------------------
 
+#' .schab_st_semivariogram_from_cov
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param k See Usage.
+#' @param cov_fn See Usage.
+#' @return A numeric value.
+#' @export
 .schab_st_semivariogram_from_cov <- function(h, k, cov_fn) {
   lg <- .schab_st_as_lags(h, k) # gamma = C(0,0) - C(h,k)
   c0 <- as.numeric(cov_fn(0, 0))[1]
   c0 - as.numeric(cov_fn(lg$h, lg$k))
 }
 
+#' .schab_st_empirical_semivariogram
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param times See Usage.
+#' @param z See Usage.
+#' @param n_space_bins Defaults to \code{10L}.
+#' @param n_time_bins Defaults to \code{5L}.
+#' @param max_dist Defaults to \code{NULL}.
+#' @param max_time Defaults to \code{NULL}.
+#' @return A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags}, \code{space_edges}, \code{time_edges}.
+#' @export
 .schab_st_empirical_semivariogram <- function(coords, times, z, n_space_bins = 10L,
                                               n_time_bins = 5L, max_dist = NULL,
                                               max_time = NULL) {
@@ -426,6 +695,20 @@
   )
 }
 
+#' .schab_st_conditional_semivariogram
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param times See Usage.
+#' @param z See Usage.
+#' @param at_time See Usage.
+#' @param n_bins Defaults to \code{10L}.
+#' @param max_dist Defaults to \code{NULL}.
+#' @param tol Defaults to \code{0}.
+#' @return A list with \code{gamma}, \code{counts}, \code{n_at_time}, \code{lags}, \code{edges}.
+#' @export
 .schab_st_conditional_semivariogram <- function(coords, times, z, at_time,
                                                 n_bins = 10L, max_dist = NULL,
                                                 tol = 0) {
@@ -466,6 +749,15 @@
   )
 }
 
+#' .schab_st_wls_objective
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param emp See Usage.
+#' @param model_fn See Usage.
+#' @return A numeric value.
+#' @export
 .schab_st_wls_objective <- function(emp, model_fn) {
   gamma_hat <- emp$gamma
   counts <- emp$counts
@@ -484,6 +776,14 @@
 
 # --- Sec. 9.5, spatio-temporal point processes -----------------------------
 
+#' .schab_st_region_box
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param region See Usage.
+#' @return The value of \code{r}, as built in the body.
+#' @export
 .schab_st_region_box <- function(region) {
   r <- as.numeric(region)
   if (length(r) != 4L) stop("`region` must be (xmin, xmax, ymin, ymax)", call. = FALSE)
@@ -493,6 +793,17 @@
   r
 }
 
+#' .schab_st_intensity
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param points See Usage.
+#' @param times See Usage.
+#' @param region See Usage.
+#' @param time_interval See Usage.
+#' @return A list with \code{intensity}, \code{n}, \code{area}, \code{duration}, \code{volume}.
+#' @export
 .schab_st_intensity <- function(points, times, region, time_interval) {
   pts <- as.matrix(points)
   t <- as.numeric(times)
@@ -509,6 +820,19 @@
   )
 }
 
+#' .schab_st_marginal_intensities
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param points See Usage.
+#' @param times See Usage.
+#' @param region See Usage.
+#' @param time_interval See Usage.
+#' @param n_space_bins Defaults to \code{4L}.
+#' @param n_time_bins Defaults to \code{4L}.
+#' @return A list with \code{marginal_spatial}, \code{marginal_temporal}, \code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
+#' @export
 .schab_st_marginal_intensities <- function(points, times, region, time_interval,
                                            n_space_bins = 4L, n_time_bins = 4L) {
   pts <- as.matrix(points)
@@ -540,6 +864,16 @@
   )
 }
 
+#' .schab_cstr_reference
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param area See Usage.
+#' @param duration See Usage.
+#' @param lam See Usage.
+#' @return A list with \code{expected_count}, \code{variance}, \code{intensity}, \code{second_order_intensity}, \code{volume}.
+#' @export
 .schab_cstr_reference <- function(area, duration, lam) {
   area <- as.numeric(area)
   duration <- as.numeric(duration)
@@ -554,6 +888,19 @@
   )
 }
 
+#' .schab_cstr_test
+#'
+#' Part of the schab_st_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param points See Usage.
+#' @param times See Usage.
+#' @param region See Usage.
+#' @param time_interval See Usage.
+#' @param n_space_bins Defaults to \code{3L}.
+#' @param n_time_bins Defaults to \code{3L}.
+#' @return A list with \code{index_of_dispersion}, \code{df}, \code{p_value}, \code{counts}, \code{mean_count}, \code{var_count}.
+#' @export
 .schab_cstr_test <- function(points, times, region, time_interval,
                              n_space_bins = 3L, n_time_bins = 3L) {
   # Chapter 9 defines the CSTR benchmark but gives no test. This is the
@@ -596,6 +943,16 @@
   )
 }
 
+#' P(chi^2_df > x) = Q(df/2, x/2). The HALVING of x is the whole content
+#' of
+#'
+#' the mapping and is easy to drop: Q(df/2, x) is a perfectly
+#' well-behaved number, just not this one.
+#'
+#' @param x See Usage.
+#' @param df See Usage.
+#' @return A numeric value.
+#' @export
 .schab_st_chi2_sf <- function(x, df) {
   # P(chi^2_df > x) = Q(df/2, x/2). The HALVING of x is the whole content of
   # the mapping and is easy to drop: Q(df/2, x) is a perfectly well-behaved

@@ -56,6 +56,14 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 }
 
 # Internal: KS statistic for a sorted sample against CDF values.
+#' Internal: KS statistic for a sorted sample against CDF values
+#'
+#' Part of the reds_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cdf_vals See Usage.
+#' @return A numeric value.
+#' @export
 .rn_ks_stat <- function(cdf_vals) {
   n <- length(cdf_vals)
   i <- seq_len(n)
@@ -65,6 +73,16 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 # Internal: Monte Carlo null of the KS statistic with fitted Gaussian
 # parameters (the Lilliefors construction; parameter-free for a fitted
 # location-scale family).
+#' Internal: Monte Carlo null of the KS statistic with fitted Gaussian
+#'
+#' parameters (the Lilliefors construction; parameter-free for a fitted
+#' location-scale family).
+#'
+#' @param d_obs See Usage.
+#' @param n See Usage.
+#' @param n_mc See Usage.
+#' @return A numeric value.
+#' @export
 .rn_mc_p_fitted <- function(d_obs, n, n_mc) {
   count <- 0L
   for (b in seq_len(n_mc)) {

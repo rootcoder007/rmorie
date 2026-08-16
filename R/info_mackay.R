@@ -16,6 +16,14 @@
 # RNG, no tolerance-driven early exit -- so this arm reproduces the
 # Python arm to machine precision.
 
+#' .morie_mk_pinv
+#'
+#' Part of the info_mackay implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 .morie_mk_pinv <- function(a) {
   s <- svd(a)
   tol <- max(dim(a)) * max(s$d) * .Machine$double.eps

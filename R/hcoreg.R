@@ -123,6 +123,13 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 
 # Coerce coords to a two-column matrix of (x, y).  Accepts a two-column
 # matrix or data frame, or a flat vector of even length in x, y order.
+#' Coerce coords to a two-column matrix of (x, y).  Accepts a two-column
+#'
+#' matrix or data frame, or a flat vector of even length in x, y order.
+#'
+#' @param coords See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .s03pairs <- function(coords) {
   if (is.matrix(coords) || is.data.frame(coords)) {
     m <- as.matrix(coords)
@@ -143,15 +150,44 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 }
 
 # Matern eq. (3.4.7) p. 38 at n = 2: area of the union of two discs.
+#' Matern eq. (3.4.7) p. 38 at n = 2: area of the union of two discs
+#'
+#' Part of the hcoreg implementation; see the file header for the source
+#' it follows.
+#'
+#' @param r See Usage.
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .s03hcU <- function(r, v) 2 * pi * r * r - .s03lens(r, v)
 
 # Equation (3.6.4) p. 47.
+#' Equation (3.6.4) p. 47
+#'
+#' Part of the hcoreg implementation; see the file header for the source
+#' it follows.
+#'
+#' @param r See Usage.
+#' @param v See Usage.
+#' @param lam See Usage.
+#' @return A numeric value.
+#' @export
 .s03hcK1 <- function(r, v, lam) {
   if (v < r) return(0)
   exp(-lam * .s03hcU(r, v))
 }
 
 # Equation (3.6.9) p. 48.
+#' Equation (3.6.9) p. 48
+#'
+#' Part of the hcoreg implementation; see the file header for the source
+#' it follows.
+#'
+#' @param r See Usage.
+#' @param v See Usage.
+#' @param lam See Usage.
+#' @return A numeric value.
+#' @export
 .s03hcK2 <- function(r, v, lam) {
   if (v < r) return(0)
   gam <- pi * r * r

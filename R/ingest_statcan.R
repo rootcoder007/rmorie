@@ -315,6 +315,18 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
 # only (download.file + unzip + read.csv); replaces cansim::get_cansim.
 # Column set is StatCan's raw CSV schema (REF_DATE, GEO, VALUE, ...),
 # which is the subset of get_cansim() output the callers use.
+#' Native StatCan Web Data Service client -- fetches the full-table
+#'
+#' CSV for a table id ("NN-MM-XXXX" or "NN-MM-XXXX-NN" cansim style, or
+#' a bare 8-digit PID) via the getFullTableDownloadCSV endpoint. Base R
+#' only (download.file + unzip + read.csv); replaces cansim::get_cansim.
+#' Column set is StatCan\'s raw CSV schema (REF_DATE, GEO, VALUE, ...),
+#' which is the subset of get_cansim() output the callers use.
+#'
+#' @param table_id See Usage.
+#' @param language Defaults to \code{"en"}.
+#' @return The value of \code{utils::read.csv}.
+#' @export
 .morie_statcan_wds_table <- function(table_id, language = "en") {
   pid <- gsub("[^0-9]", "", table_id)
   if (nchar(pid) >= 10L) pid <- substr(pid, 1, 8L)

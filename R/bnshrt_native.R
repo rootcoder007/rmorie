@@ -7,6 +7,14 @@
 
 .bnshrt_GHC_EPS <- 1e-9
 
+#' .bnshrt_logistic
+#'
+#' Part of the bnshrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .bnshrt_logistic <- function(z) 1 / (1 + exp(-max(-500, min(500, z))))
 
 #' morie_sequence_probabilities
@@ -81,6 +89,14 @@ morie_sequence_frequencies <- function(Y) {
   out
 }
 
+#' .bnshrt_project_simplex
+#'
+#' Part of the bnshrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{pmax}.
+#' @export
 .bnshrt_project_simplex <- function(v) {
   n <- length(v)
   u <- sort(v, decreasing = TRUE)

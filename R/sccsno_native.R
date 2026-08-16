@@ -38,6 +38,18 @@
 
 .sccsno_EPS <- 1e-12
 
+#' Ordered distinct cutpoints for one individual (Fig. 1)
+#'
+#' Part of the sccsno_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param start See Usage.
+#' @param end See Usage.
+#' @param exposure See Usage.
+#' @param risk_periods See Usage.
+#' @param age_breaks See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .sccsno_cuts <- function(start, end, exposure, risk_periods, age_breaks) {
   # Ordered distinct cutpoints for one individual (Fig. 1).
   pts <- c(as.numeric(start), as.numeric(end))
@@ -60,6 +72,15 @@
   sort(unique(pts))
 }
 
+#' Index of the age band containing t (0-based, matching alpha[j+1])
+#'
+#' Part of the sccsno_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param age_breaks See Usage.
+#' @return The value of \code{j}, as built in the body.
+#' @export
 .sccsno_band <- function(t, age_breaks) {
   # Index of the age band containing t (0-based, matching alpha[j+1]).
   j <- 0L
@@ -73,6 +94,16 @@
   j
 }
 
+#' Index of the risk period containing t; 0 is the control period
+#'
+#' Part of the sccsno_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param exposure See Usage.
+#' @param risk_periods See Usage.
+#' @return A numeric value.
+#' @export
 .sccsno_risk <- function(t, exposure, risk_periods) {
   # Index of the risk period containing t; 0 is the control period.
   if (is.null(exposure)) {
@@ -159,6 +190,14 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
   cells
 }
 
+#' .sccsno_rp
+#'
+#' Part of the sccsno_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param risk_periods See Usage.
+#' @return The value of \code{rp}, as built in the body.
+#' @export
 .sccsno_rp <- function(risk_periods) {
   if (is.matrix(risk_periods)) {
     rp <- risk_periods
@@ -219,6 +258,17 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
   ll
 }
 
+#' .sccsno_grad_hess
+#'
+#' Part of the sccsno_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param params See Usage.
+#' @param cells_by_person See Usage.
+#' @param n_risk See Usage.
+#' @param n_age See Usage.
+#' @return A list with \code{g}, \code{H}.
+#' @export
 .sccsno_grad_hess <- function(params, cells_by_person, n_risk, n_age) {
   p <- n_risk + n_age - 1L
   g <- rep(0.0, p)

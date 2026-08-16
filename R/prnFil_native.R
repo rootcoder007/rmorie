@@ -52,6 +52,20 @@
 
 .prnFil_eps <- 1e-12
 
+#' .prnFil_changepoint_path
+#'
+#' Part of the prnFil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param y See Usage.
+#' @param taus Defaults to \code{NULL}.
+#' @param n_changepoints Defaults to \code{15}.
+#' @param changepoint_range Defaults to \code{0.8}.
+#' @param seasonalities Defaults to \code{NULL}.
+#' @param ... Passed through.
+#' @return The value of \code{rows}, as built in the body.
+#' @export
 .prnFil_changepoint_path <- function(t, y, taus = NULL, n_changepoints = 15,
                                       changepoint_range = 0.8,
                                       seasonalities = NULL, ...) {
@@ -80,6 +94,20 @@
   rows
 }
 
+#' .prnFil_select_changepoints
+#'
+#' Part of the prnFil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param y See Usage.
+#' @param tau Defaults to \code{0.05}.
+#' @param n_changepoints Defaults to \code{15}.
+#' @param changepoint_range Defaults to \code{0.8}.
+#' @param seasonalities Defaults to \code{NULL}.
+#' @param ... Passed through.
+#' @return A list with \code{estimate}, \code{selected}, \code{selected_index}, \code{deltas}, \code{candidates}, \code{n_selected}, \code{n_candidates}, \code{tau}, \code{fit}, \code{last_candidate_fraction}, \code{changepoint_range}, \code{rmse}, \code{method}.
+#' @export
 .prnFil_select_changepoints <- function(t, y, tau = 0.05,
                                         n_changepoints = 15,
                                         changepoint_range = 0.8,
@@ -109,6 +137,17 @@
   )
 }
 
+#' .prnFil_simulate_future_trend
+#'
+#' Part of the prnFil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param t_future See Usage.
+#' @param n_sims Defaults to \code{200}.
+#' @param seed Defaults to \code{0}.
+#' @return The value of \code{sims}, as built in the body.
+#' @export
 .prnFil_simulate_future_trend <- function(fit, t_future, n_sims = 200,
                                            seed = 0) {
   tv <- fit[["t"]]
@@ -149,6 +188,18 @@
   sims
 }
 
+#' .prnFil_trend_intervals
+#'
+#' Part of the prnFil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fit See Usage.
+#' @param t_future See Usage.
+#' @param level Defaults to \code{0.8}.
+#' @param n_sims Defaults to \code{200}.
+#' @param seed Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{median}, \code{lower}, \code{upper}, \code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.
+#' @export
 .prnFil_trend_intervals <- function(fit, t_future, level = 0.8,
                                      n_sims = 200, seed = 0) {
   sims <- .prnFil_simulate_future_trend(fit, t_future, n_sims = n_sims,
@@ -172,6 +223,13 @@
   )
 }
 
+#' .prnFil_cheatsheet
+#'
+#' Part of the prnFil_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .prnFil_cheatsheet <- function() {
   paste0("prnFil: lay down many candidate changepoints, let ",
          "delta_j ~ Laplace(0, tau) decide. Small tau = straight ",

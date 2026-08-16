@@ -12,6 +12,14 @@
 
 .fgam_EPS <- 1e-12
 
+#' .fgam_grid_weights
+#'
+#' Part of the fgam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n_t See Usage.
+#' @return The value of \code{w}, as built in the body.
+#' @export
 .fgam_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
@@ -19,6 +27,17 @@
   w
 }
 
+#' .fgam_knots
+#'
+#' Part of the fgam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param n_basis See Usage.
+#' @param degree Defaults to \code{3L}.
+#' @return A vector, from \code{c}.
+#' @export
 .fgam_knots <- function(lo, hi, n_basis, degree = 3L) {
   n_int <- n_basis - degree - 1L
   if (n_int < 0L)
@@ -31,6 +50,17 @@
   c(rep(lo, degree + 1L), inner, rep(hi, degree + 1L))
 }
 
+#' .fgam_bspline
+#'
+#' Part of the fgam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param kn See Usage.
+#' @param n_basis See Usage.
+#' @param degree Defaults to \code{3L}.
+#' @return The value of \code{[}.
+#' @export
 .fgam_bspline <- function(x, kn, n_basis, degree = 3L) {
   hi <- kn[length(kn)]
   if (x >= hi) x <- hi - .fgam_EPS
@@ -52,6 +82,15 @@
   B[seq_len(n_basis)]
 }
 
+#' .fgam_diff_penalty
+#'
+#' Part of the fgam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param order Defaults to \code{2L}.
+#' @return A matrix, from \code{crossprod}.
+#' @export
 .fgam_diff_penalty <- function(n, order = 2L) {
   rows <- n - order
   D <- matrix(0.0, max(rows, 0L), n)
@@ -194,6 +233,13 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
   )
 }
 
+#' .fgam_cheatsheet
+#'
+#' Part of the fgam_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .fgam_cheatsheet <- function() {
   paste0("fgam: morie_fgam_functional_gam(X, Y, n_x, n_t, lam_x, lam_t) -> ",
          "E[Y|X] = theta0 + int F(X(t), t) dt by tensor-product penalised ",

@@ -126,6 +126,17 @@ morie_spatial_variogram_fit <- function(coords, values,
 # (Cressie 1985 weights n_h / h^2) -- the gstat::fit.variogram
 # analogue. Milliseconds at any n; the full Gaussian-likelihood MLE
 # stays available via morie_spatial_variogram_fit().
+#' Fast WLS fit of a variogram model on the binned empirical variogram
+#'
+#' (Cressie 1985 weights n_h / h^2) -- the gstat::fit.variogram
+#' analogue. Milliseconds at any n; the full Gaussian-likelihood MLE
+#' stays available via morie_spatial_variogram_fit().
+#'
+#' @param coords See Usage.
+#' @param values See Usage.
+#' @param model Defaults to \code{"exponential"}.
+#' @return A list with \code{model}, \code{nugget}, \code{psill}, \code{range}, \code{method}.
+#' @export
 .morie_vgm_wls_fit <- function(coords, values, model = "exponential") {
   emp <- morie_spatial_variogram(coords, values)
   h <- emp$dist

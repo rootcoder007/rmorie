@@ -49,6 +49,16 @@
 
 METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 
+#' .replwt_design
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @param strata Defaults to \code{NULL}.
+#' @param psu Defaults to \code{NULL}.
+#' @return A list with \code{weights}, \code{strata}, \code{psu}, \code{n}, \code{psu_order}, \code{psu_units}, \code{stratum_psus}, \code{stratum_order}.
+#' @export
 .replwt_design <- function(weights, strata = NULL, psu = NULL) {
   w <- as.numeric(weights)
   n <- length(w)
@@ -121,6 +131,14 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   )
 }
 
+#' .replwt_hadamard
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param order See Usage.
+#' @return The value of \code{H}, as built in the body.
+#' @export
 .replwt_hadamard <- function(order) {
   k <- as.integer(order)
   if (k < 1L || bitwAnd(k, k - 1L) != 0L) {
@@ -134,6 +152,15 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   H
 }
 
+#' .replwt_psu_totals
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param values See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .replwt_psu_totals <- function(d, values) {
   out <- numeric(length(d$psu_order))
   for (k in seq_along(d$psu_order)) {
@@ -143,6 +170,15 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   out
 }
 
+#' .replwt_jackknife_weights
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param method Defaults to \code{"jkn"}.
+#' @return A list with \code{weights}, \code{dropped}, \code{scale}, \code{method}.
+#' @export
 .replwt_jackknife_weights <- function(d, method = "jkn") {
   if (!method %in% c("jk1", "jkn")) {
     stop(sprintf("replwt: jackknife method must be jk1 or jkn, got %s", method))
@@ -197,6 +233,15 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   )
 }
 
+#' .replwt_brr_weights
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param fay Defaults to \code{0}.
+#' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{hadamard_order}, \code{fay}, \code{method}.
+#' @export
 .replwt_brr_weights <- function(d, fay = 0.0) {
   rho <- as.numeric(fay)
   if (rho < 0.0 || rho >= 1.0) {
@@ -250,6 +295,16 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   )
 }
 
+#' .replwt_bootstrap_weights
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param R Defaults to \code{200}.
+#' @param seed Defaults to \code{1}.
+#' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed}, \code{method}.
+#' @export
 .replwt_bootstrap_weights <- function(d, R = 200, seed = 1) {
   R <- as.integer(R)
   if (R < 2L) {
@@ -288,6 +343,17 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   )
 }
 
+#' .replwt_replicate_variance
+#'
+#' Part of the replwt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param estimator See Usage.
+#' @param d See Usage.
+#' @param rep See Usage.
+#' @param values Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error}, \code{replicates}, \code{n_replicates}, \code{method}.
+#' @export
 .replwt_replicate_variance <- function(estimator, d, rep, values = NULL) {
   call_est <- function(w) {
     if (is.null(values)) {

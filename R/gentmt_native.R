@@ -10,10 +10,27 @@
 #     Incomplete-Data Perspectives, Wiley, 73-84.
 #   Hernan M. A. & Robins J. M. (2020) Causal Inference: What If, Sec. 12.3.
 
+#' .gentmt_vec
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .gentmt_vec <- function(x) {
   as.numeric(x)
 }
 
+#' .gentmt_ols_core
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
+#' @export
 .gentmt_ols_core <- function(X, y) {
   n <- nrow(X)
   X_full <- cbind(1, X)
@@ -30,6 +47,16 @@
        residuals = resid, sigma2 = sigma2)
 }
 
+#' .gentmt_wls
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
+#' @export
 .gentmt_wls <- function(X, y, w) {
   n <- nrow(X)
   X_full <- cbind(1, X)
@@ -50,6 +77,16 @@
        residuals = resid, sigma2 = sigma2)
 }
 
+#' .gentmt_treatment_density
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param kind Defaults to \code{"normal"}.
+#' @return A list with \code{dens}, \code{info}.
+#' @export
 .gentmt_treatment_density <- function(A, H, kind = "normal") {
   A <- .gentmt_vec(A)
   H <- as.matrix(H)
@@ -61,6 +98,18 @@
   list(dens = dens, info = list(mu = mu, sigma2 = sigma2))
 }
 
+#' .gentmt_ip_weights
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param kind Defaults to \code{"normal"}.
+#' @param stabilize Defaults to \code{TRUE}.
+#' @param trim Defaults to \code{NULL}.
+#' @return A list with \code{w}, \code{info}.
+#' @export
 .gentmt_ip_weights <- function(A, H, kind = "normal", stabilize = TRUE, trim = NULL) {
   td <- .gentmt_treatment_density(A, H, kind)
   mu <- td$info$mu
@@ -96,6 +145,18 @@
   ))
 }
 
+#' .gentmt_gps_subclassify
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param n_strata Defaults to \code{5}.
+#' @param degree Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{se}, \code{stratum_slopes}, \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n}, \code{degree}.
+#' @export
 .gentmt_gps_subclassify <- function(y, A, H, n_strata = 5, degree = 1) {
   yv <- .gentmt_vec(y)
   av <- .gentmt_vec(A)
@@ -150,6 +211,18 @@
   )
 }
 
+#' .gentmt_dose_response_curve
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param H See Usage.
+#' @param doses Defaults to \code{NULL}.
+#' @param degree Defaults to \code{1}.
+#' @return A list with \code{estimate}, \code{se}, \code{doses}, \code{curve}, \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
+#' @export
 .gentmt_dose_response_curve <- function(y, A, H, doses = NULL, degree = 1) {
   yv <- .gentmt_vec(y)
   av <- .gentmt_vec(A)
@@ -292,6 +365,13 @@ morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
   return(out)
 }
 
+#' .gentmt_cheatsheet
+#'
+#' Part of the gentmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .gentmt_cheatsheet <- function() {
   paste0("gentmt: continuous-dose MSM. weight = SW = f(A)/f(A|L) ",
          "(Robins-Hernan-Brumback 2000, default); subclassify = GPS ",

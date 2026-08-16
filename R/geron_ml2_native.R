@@ -2297,6 +2297,15 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 }
 # ------------------------------------------------------------------ trees
 
+#' .morie_gr2_leaf
+#'
+#' Part of the geron_ml2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param criterion See Usage.
+#' @return A list with \code{leaf}, \code{value}, \code{proba}, \code{n}, \code{impurity}.
+#' @export
 .morie_gr2_leaf <- function(y, criterion) {
   if (criterion == "mse") {
     yv <- as.numeric(y)
@@ -2317,6 +2326,17 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
   )
 }
 
+#' .morie_gr2_best_split
+#'
+#' Part of the geron_ml2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param criterion See Usage.
+#' @param min_samples_leaf See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 .morie_gr2_best_split <- function(X, y, criterion, min_samples_leaf) {
   best <- NULL
   m <- nrow(X)
@@ -2348,6 +2368,22 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
   best
 }
 
+#' .morie_gr2_grow
+#'
+#' Part of the geron_ml2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param criterion See Usage.
+#' @param max_depth See Usage.
+#' @param min_samples_split See Usage.
+#' @param min_samples_leaf See Usage.
+#' @param min_impurity_decrease See Usage.
+#' @param depth See Usage.
+#' @param stats See Usage.
+#' @return The value of \code{lf}, as built in the body.
+#' @export
 .morie_gr2_grow <- function(X, y, criterion, max_depth, min_samples_split,
                             min_samples_leaf, min_impurity_decrease, depth,
                             stats) {
@@ -2562,6 +2598,16 @@ morie_geron_classification_tree <- function(X, y, criterion = "gini",
 
 # ---------------------------------------------------- softmax cross-entropy
 
+#' .morie_gr2_onehot
+#'
+#' Part of the geron_ml2_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Y See Usage.
+#' @param m See Usage.
+#' @param K See Usage.
+#' @return The value of \code{Yoh}, as built in the body.
+#' @export
 .morie_gr2_onehot <- function(Y, m, K) {
   Yarr <- Y
   if (is.null(dim(Yarr)) || (length(dim(Yarr)) == 2L && K != 1L &&
@@ -3076,6 +3122,18 @@ morie_geron_classification_localization <- function(image, model,
 # every occurrence becomes its own node here. For expressions written
 # out literally -- which is every documented use -- the two agree,
 # because distinct Python literals are distinct objects too.
+#' Forward evaluation of the expression DAG. Python memoises on object
+#'
+#' IDENTITY (id(node)); R has no stable object identity for literals, so
+#' every occurrence becomes its own node here. For expressions written
+#' out literally -- which is every documented use -- the two agree,
+#' because distinct Python literals are distinct objects too.
+#'
+#' @param node See Usage.
+#' @param env See Usage.
+#' @param st See Usage.
+#' @return The value of \code{length}.
+#' @export
 .morie_gr2_forward <- function(node, env, st) {
   if (is.numeric(node) && length(node) == 1L) {
     st$nodes[[length(st$nodes) + 1L]] <-

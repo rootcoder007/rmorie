@@ -37,6 +37,13 @@ morie_timesf <- function(history, predictor, horizon, input_patch_len,
 .timesfm_foundation <- morie_timesf
 
 # Cheatsheet summarising the re-export relationship.
+#' Cheatsheet summarising the re-export relationship
+#'
+#' Part of the timesf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .timesf_cheatsheet <- function() {
   paste0("timesf: the same ledger method as `timesfm` -- one ",
          "paper, one implementation, re-exported so the two ",

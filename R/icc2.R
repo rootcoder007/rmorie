@@ -56,6 +56,16 @@ Icc2 <- function(y, subject, rater) {
 }
 
 # The Shrout-Fleiss two-way ANOVA of Hedderich et al., pp. 427-428.
+#' The Shrout-Fleiss two-way ANOVA of Hedderich et al., pp. 427-428
+#'
+#' Part of the icc2 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param rows See Usage.
+#' @param n See Usage.
+#' @param k See Usage.
+#' @return A list with \code{bms}, \code{wms}, \code{jms}, \code{ems}.
+#' @export
 .icc_mean_squares <- function(rows, n, k) {
   tot <- 0; tot2 <- 0; ssa <- 0
   colsum <- numeric(k)

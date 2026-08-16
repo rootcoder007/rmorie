@@ -13,6 +13,15 @@
 
 .NASHQ_SELECTIONS <- c("global_optimal", "saddle", "first", "best_for_agent")
 
+#' .nashq_mat
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param name See Usage.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 .nashq_mat <- function(M, name) {
   M <- as.matrix(M)
   if (!is.numeric(M)) {
@@ -25,6 +34,15 @@
   M
 }
 
+#' .nashq_solve
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return The value of \code{[}.
+#' @export
 .nashq_solve <- function(A, b) {
   n <- nrow(A)
   M <- cbind(A, b)
@@ -49,6 +67,15 @@
   M[, n + 1L]
 }
 
+#' Unknowns x_0..x_{k-1}, v
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param payoff See Usage.
+#' @param k See Usage.
+#' @return The value of \code{[}.
+#' @export
 .nashq_indifference <- function(payoff, k) {
   # unknowns x_0..x_{k-1}, v
   Aeq <- matrix(0, nrow = k + 1L, ncol = k + 1L)
@@ -64,6 +91,16 @@
   sol[seq_len(k)]
 }
 
+#' .nashq_payoff
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param p See Usage.
+#' @param q See Usage.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
 .nashq_payoff <- function(M, p, q) {
   tot <- 0
   for (i in seq_along(p)) {
@@ -75,6 +112,18 @@
   tot
 }
 
+#' .nashq_is_equilibrium
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param tol See Usage.
+#' @return A logical value.
+#' @export
 .nashq_is_equilibrium <- function(A, B, p, q, tol) {
   va <- .nashq_payoff(A, p, q)
   vb <- .nashq_payoff(B, p, q)
@@ -140,6 +189,18 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
   out
 }
 
+#' Definition 13: each agent gains when the OTHER deviates
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param p See Usage.
+#' @param q See Usage.
+#' @param tol See Usage.
+#' @return A logical value.
+#' @export
 .nashq_is_saddle <- function(A, B, p, q, tol) {
   # Definition 13: each agent gains when the OTHER deviates.
   for (j in seq_len(ncol(A))) {
@@ -199,6 +260,18 @@ stage_game_type <- function(A, B, tol = 1e-9) {
                        "Defs 12-13)"))
 }
 
+#' .nashq_select
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @param selection See Usage.
+#' @param agent See Usage.
+#' @param tol See Usage.
+#' @return The value of \code{[[}.
+#' @export
 .nashq_select <- function(A, B, selection, agent, tol) {
   eqs <- nash_equilibria_bimatrix(A, B, tol)
   if (length(eqs) == 0L) return(NULL)
@@ -235,6 +308,18 @@ stage_game_type <- function(A, B, tol = 1e-9) {
   eqs[[1]]
 }
 
+#' .nashq_pick
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @param A See Usage.
+#' @param who See Usage.
+#' @param epsilon See Usage.
+#' @param rng_e See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .nashq_pick <- function(M, A, who, epsilon, rng_e) {
   if (.ghc_unif(rng_e, 1L) < epsilon) {
     return(as.integer(.ghc_unif(rng_e, 1L) * length(A)) + 1L)
@@ -404,6 +489,13 @@ nashq <- morie_nashq
 nash_q_learning <- morie_nashq
 nashqlearning <- morie_nashq
 
+#' .nashq_cheatsheet
+#'
+#' Part of the nashq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .nashq_cheatsheet <- function() {
   paste0("nashq: Q^i over JOINT actions; update with the stage-game ",
          "Nash payoff instead of a max -- Q^i <- (1-a)Q^i + ",

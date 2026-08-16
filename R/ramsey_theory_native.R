@@ -37,6 +37,15 @@
   "3,8" = "Grinstead and Roberts (1982); DRAT-verified"
 )
 
+#' .morie_es_bound
+#'
+#' Part of the ramsey_theory_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param k See Usage.
+#' @param l See Usage.
+#' @return The value of \code{choose}.
+#' @export
 .morie_es_bound <- function(k, l) choose(k + l - 2, k - 1)
 
 #' Ramsey number R(k, l), exactly or as an interval

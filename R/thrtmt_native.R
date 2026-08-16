@@ -6,11 +6,27 @@
 # van der Laan, M. J. & Rose, S. (2018) "Targeted Learning in Data
 # Science", Springer, doi:10.1007/978-3-319-65304-4, Ch. 12.
 
+#' .thrtmt_vec
+#'
+#' Part of the thrtmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .thrtmt_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
 }
 
+#' .thrtmt_mat
+#'
+#' Part of the thrtmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param W See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .thrtmt_mat <- function(W) {
   if (is.null(W)) return(matrix(0, nrow=0, ncol=0))
   m <- as.matrix(W)
@@ -18,6 +34,15 @@
   m
 }
 
+#' .thrtmt_design
+#'
+#' Part of the thrtmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param rows See Usage.
+#' @param n See Usage.
+#' @return The value of \code{Z}, as built in the body.
+#' @export
 .thrtmt_design <- function(rows, n) {
   if (length(rows) == 0 || n == 0) {
     return(matrix(0, nrow=n, ncol=0))
@@ -33,6 +58,15 @@
   Z
 }
 
+#' Z: n x p, y: length n
+#'
+#' Returns b solving (Z\'Z + ridge I) b = Z\' y
+#'
+#' @param Z See Usage.
+#' @param y See Usage.
+#' @param ridge See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .thrtmt_lstsq <- function(Z, y, ridge) {
   # Z: n x p, y: length n
   # Returns b solving (Z'Z + ridge I) b = Z' y
@@ -53,6 +87,15 @@
   as.numeric(b)
 }
 
+#' .thrtmt_matvec
+#'
+#' Part of the thrtmt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param Z See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .thrtmt_matvec <- function(Z, b) {
   if (length(b) == 0 || ncol(Z) == 0) {
     return(rep(0, nrow(Z)))

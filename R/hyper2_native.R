@@ -67,6 +67,15 @@
 .HYPER2_KERNELS <- c("squared_exponential", "matern32", "matern52")
 .HYPER2_ROUTES <- c("marginal", "whitened", "surrogate")
 
+#' .hyper2_dist
+#'
+#' Part of the hyper2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .hyper2_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Covariance between two sets of inputs
@@ -101,6 +110,15 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
   out
 }
 
+#' .hyper2_jit
+#'
+#' Part of the hyper2_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param K See Usage.
+#' @param v See Usage.
+#' @return The value of \code{K}, as built in the body.
+#' @export
 .hyper2_jit <- function(K, v) {
   n <- nrow(K)
   for (i in seq_len(n)) K[i, i] <- K[i, i] + v
@@ -137,6 +155,16 @@ morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
 # improper posterior whenever the data cannot rule out an arbitrarily
 # long one, and a sampler will wander off into that region without ever
 # saying so.
+#' Standard normal on each log-hyperparameter. A lognormal prior, which
+#'
+#' is proper -- an improper flat prior on a log lengthscale gives an
+#' improper posterior whenever the data cannot rule out an arbitrarily
+#' long one, and a sampler will wander off into that region without ever
+#' saying so.
+#'
+#' @param theta See Usage.
+#' @return The value of \code{.w3_csum}.
+#' @export
 .hyper2_logprior <- function(theta)
   .w3_csum(-0.5 * theta * theta - 0.5 * log(2 * pi))
 
@@ -173,6 +201,18 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
 # proposal is an exact ellipse through the current point and a fresh
 # prior draw, so the prior term cancels and only the likelihood enters
 # the acceptance test. No rejection and no step size.
+#' Elliptical slice sampling for a latent with prior N(0, L L\'). The
+#'
+#' proposal is an exact ellipse through the current point and a fresh
+#' prior draw, so the prior term cancels and only the likelihood enters
+#' the acceptance test. No rejection and no step size.
+#'
+#' @param logl See Usage.
+#' @param f See Usage.
+#' @param L See Usage.
+#' @param e See Usage.
+#' @return The value of \code{f}, as built in the body.
+#' @export
 .hyper2_elliptical <- function(logl, f, L, e) {
   n <- length(f)
   nu <- vapply(seq_len(n), function(i) .ghc_norm(e, 1L), numeric(1))

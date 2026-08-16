@@ -57,6 +57,16 @@
 .LCFSDQ_METRICS <- c("euclidean", "manhattan", "chebyshev")
 .LCFSDQ_EDGE <- c("none", "donnelly", "buffer")
 
+#' .lcfsdq_d
+#'
+#' Part of the lcfsdq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param metric See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .lcfsdq_d <- function(a, b, metric) {
   if (metric == "euclidean") return(sqrt(.w3_csum((a - b) * (a - b))))
   if (metric == "manhattan") return(.w3_csum(abs(a - b)))
@@ -95,6 +105,14 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 }
 
 # Bounding box area and perimeter, in the first two coordinates.
+#' Bounding box area and perimeter, in the first two coordinates
+#'
+#' Part of the lcfsdq_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param coords See Usage.
+#' @return A list with \code{area}, \code{perimeter}, \code{bb}.
+#' @export
 .lcfsdq_window <- function(coords) {
   xs <- coords[, 1]; ys <- coords[, 2]
   w <- max(xs) - min(xs)

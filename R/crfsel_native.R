@@ -39,6 +39,16 @@
 # Split counts by (depth, feature), depth 1 at the root. Mirrors
 # morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
 # that depth, so the caller indexes by depth directly.
+#' Split counts by (depth, feature), depth 1 at the root. Mirrors
+#'
+#' morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
+#' that depth, so the caller indexes by depth directly.
+#'
+#' @param tree See Usage.
+#' @param max_depth See Usage.
+#' @param d See Usage.
+#' @return The value of \code{counts}, as built in the body.
+#' @export
 .depth_counts <- function(tree, max_depth, d) {
   counts <- lapply(seq_len(max_depth), function(i) numeric(d))
   walk <- function(nd, depth) {
@@ -51,6 +61,20 @@
   counts
 }
 
+#' .center_cate
+#'
+#' Part of the crfsel_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param W See Usage.
+#' @param X See Usage.
+#' @param n_folds See Usage.
+#' @param n_trees See Usage.
+#' @param min_leaf See Usage.
+#' @param seed See Usage.
+#' @return A list with \code{m_hat}, \code{e_hat}.
+#' @export
 .center_cate <- function(y, W, X, n_folds, n_trees, min_leaf, seed) {
   n <- length(y)
   if (n_folds < 2L) n_folds <- 2L

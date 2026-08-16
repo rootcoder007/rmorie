@@ -47,15 +47,42 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
         penalty = penalty)
 }
 
+#' .ctmle_logit
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .ctmle_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
+#' .ctmle_expit
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .ctmle_expit <- function(x) {
   if (x > -700) 1 / (1 + exp(-x)) else 0
 }
 
+#' .ctmle_fluct
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param Q See Usage.
+#' @param H See Usage.
+#' @param Y See Usage.
+#' @param iters Defaults to \code{60L}.
+#' @return A list with \code{epsilon}, \code{q}.
+#' @export
 .ctmle_fluct <- function(Q, H, Y, iters = 60L) {
   q <- as.numeric(Q)
   h <- as.numeric(H)
@@ -256,6 +283,13 @@ ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
        note = "collaboration changes WHICH g is targeted against, not whether the score equation is solved")
 }
 
+#' .tlctmle_cheatsheet
+#'
+#' Part of the tlctmle_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlctmle_cheatsheet <- function() {
   paste("tlctmle: fitting g as well as possible ON ITS OWN TERMS ",
         "is the wrong objective -- a covariate that predicts ",

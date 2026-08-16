@@ -342,14 +342,38 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 .propinf_REPRS <- c("baseline", "sorting", "set")
 .propinf_CONTEXTS <- c("paired", "as_printed", "none")
 
+#' .propinf_relu
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .propinf_relu <- function(v) if (v > 0) v else 0
 
+#' .propinf_sigmoid
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param z See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .propinf_sigmoid <- function(z) {
   if (z >= 0) 1 / (1 + exp(-z)) else {
     e <- exp(z); e / (1 + e)
   }
 }
 
+#' .propinf_rng
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .propinf_rng <- function(seed) {
   st <- as.integer(seed)
   # 2^31 exceeds .Machine$integer.max, so it cannot be an integer
@@ -363,11 +387,28 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   e
 }
 
+#' .propinf_rng_next
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param e See Usage.
+#' @return A numeric value.
+#' @export
 .propinf_rng_next <- function(e) {
   e$st <- .ghc_lcg31(e$st)
   e$st / 2147483647
 }
 
+#' .propinf_normal
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param rnd See Usage.
+#' @param scale Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .propinf_normal <- function(rnd, scale = 1) {
   u <- max(.propinf_rng_next(rnd$parent$dummy %||% rnd), 1e-12)  # placeholder
   scale * sqrt(-2 * log(u)) * cos(2 * pi)
@@ -376,16 +417,43 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 # The normal draws in the Python arm go through math.log and math.cos
 # directly on the LCG output. Mirror that exactly.
 
+#' .propinf_lcg_draw
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param e See Usage.
+#' @return A numeric value.
+#' @export
 .propinf_lcg_draw <- function(e) {
   e$st <- .ghc_lcg31(e$st)
   e$st / 2147483647
 }
 
+#' .propinf_normal_lcg
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param e See Usage.
+#' @param scale Defaults to \code{1}.
+#' @return A numeric value.
+#' @export
 .propinf_normal_lcg <- function(e, scale = 1) {
   u <- max(.propinf_lcg_draw(e), 1e-12)
   scale * sqrt(-2 * log(u)) * cos(2 * pi * .propinf_lcg_draw(e))
 }
 
+#' .propinf_init_net
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param n_in See Usage.
+#' @param hidden See Usage.
+#' @param rnd See Usage.
+#' @return The value of \code{net}, as built in the body.
+#' @export
 .propinf_init_net <- function(n_in, hidden, rnd) {
   sizes <- c(as.integer(n_in), as.integer(hidden), 1L)
   net <- list()
@@ -401,6 +469,15 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   net
 }
 
+#' .propinf_forward
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @param x See Usage.
+#' @return A list with \code{acts}, \code{pre}.
+#' @export
 .propinf_forward <- function(net, x) {
   acts <- list(as.numeric(x))
   pre <- list()
@@ -418,6 +495,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   list(acts = acts, pre = pre)
 }
 
+#' .propinf_rows
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .propinf_rows <- function(X) {
   if (!is.matrix(X)) X <- as.matrix(X)
   out <- lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -434,10 +519,29 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   out
 }
 
+#' .propinf_node_metric
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param layer See Usage.
+#' @param i See Usage.
+#' @return A numeric value.
+#' @export
 .propinf_node_metric <- function(layer, i) {
   abs(sum(layer$W[i, ]))
 }
 
+#' .propinf_permute_hidden_layer_internal
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @param t See Usage.
+#' @param sigma See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .propinf_permute_hidden_layer_internal <- function(net, t, sigma) {
   out <- lapply(net, function(L) list(W = L$W, b = as.numeric(L$b)))
   out[[t + 1L]]$W <- net[[t + 1L]]$W[sigma + 1L, , drop = FALSE]
@@ -446,6 +550,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   out
 }
 
+#' .propinf_flat_representation_internal
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @return The value of \code{F}, as built in the body.
+#' @export
 .propinf_flat_representation_internal <- function(net) {
   F <- numeric(0)
   for (L in net) {
@@ -456,6 +568,15 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   F
 }
 
+#' .propinf_sorted_representation_internal
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @param metric Defaults to \code{NULL}.
+#' @return The value of \code{.propinf_flat_representation_internal}.
+#' @export
 .propinf_sorted_representation_internal <- function(net, metric = NULL) {
   if (is.null(metric)) metric <- .propinf_node_metric
   cur <- lapply(net, function(L) list(W = L$W, b = as.numeric(L$b)))
@@ -468,6 +589,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   .propinf_flat_representation_internal(cur)
 }
 
+#' .propinf_set_representation_internal
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .propinf_set_representation_internal <- function(net) {
   lapply(net, function(L) lapply(seq_len(nrow(L$W)),
                                  function(i) c(L$W[i, ], L$b[i])))
@@ -475,6 +604,15 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 # ----- meta-classifier MLPs (vector and set) -----
 
+#' .propinf_mlp_init
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sizes See Usage.
+#' @param rnd See Usage.
+#' @return The value of \code{net}, as built in the body.
+#' @export
 .propinf_mlp_init <- function(sizes, rnd) {
   net <- list()
   for (t in 2:length(sizes)) {
@@ -488,6 +626,17 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   net
 }
 
+#' .propinf_mlp_forward
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @param x See Usage.
+#' @param final Defaults to \code{"relu"}.
+#' @param hidden_act Defaults to \code{"relu"}.
+#' @return A list with \code{acts}, \code{pre}.
+#' @export
 .propinf_mlp_forward <- function(net, x, final = "relu",
                                  hidden_act = "relu") {
   acts <- list(as.numeric(x))
@@ -512,6 +661,20 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   list(acts = acts, pre = pre)
 }
 
+#' .propinf_mlp_backward
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @param acts See Usage.
+#' @param pre See Usage.
+#' @param dout See Usage.
+#' @param grads See Usage.
+#' @param final Defaults to \code{"relu"}.
+#' @param hidden_act Defaults to \code{"relu"}.
+#' @return The value of \code{delta}, as built in the body.
+#' @export
 .propinf_mlp_backward <- function(net, acts, pre, dout, grads, final = "relu",
                                   hidden_act = "relu") {
   delta <- as.numeric(dout)
@@ -537,12 +700,31 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   delta
 }
 
+#' .propinf_zero_like
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .propinf_zero_like <- function(net) {
   lapply(net, function(L) list(W = matrix(0, nrow = nrow(L$W),
                                           ncol = ncol(L$W)),
                                 b = rep(0, length(L$b))))
 }
 
+#' .propinf_sgd_step
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @param grads See Usage.
+#' @param lr See Usage.
+#' @param scale See Usage.
+#' @return The value of \code{net}, as built in the body.
+#' @export
 .propinf_sgd_step <- function(net, grads, lr, scale) {
   for (k in seq_along(net)) {
     net[[k]]$W <- net[[k]]$W - lr * scale * grads[[k]]$W
@@ -551,6 +733,19 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   net
 }
 
+#' .propinf_train_vector_meta
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param feats See Usage.
+#' @param labels See Usage.
+#' @param hidden See Usage.
+#' @param epochs See Usage.
+#' @param lr See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{net}, as built in the body.
+#' @export
 .propinf_train_vector_meta <- function(feats, labels, hidden, epochs, lr,
                                         seed) {
   rnd <- .propinf_rng(as.integer(seed) + 7L)
@@ -578,10 +773,27 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   net
 }
 
+#' .propinf_vector_meta_predict
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param net See Usage.
+#' @param f See Usage.
+#' @return The value of \code{[[}.
+#' @export
 .propinf_vector_meta_predict <- function(net, f) {
   .propinf_mlp_forward(net, f, final = "sigmoid")$acts[[length(net) + 1L]][[1L]]
 }
 
+#' .propinf_layer_scalers
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sets_list See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .propinf_layer_scalers <- function(sets_list) {
   out <- list()
   for (t in seq_along(sets_list[[1L]])) {
@@ -600,6 +812,20 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   out
 }
 
+#' .propinf_deepsets_init
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param shapes See Usage.
+#' @param phi_hidden See Usage.
+#' @param repr_dim See Usage.
+#' @param rho_hidden See Usage.
+#' @param rnd See Usage.
+#' @param context Defaults to \code{"paired"}.
+#' @param edge_hidden Defaults to \code{NULL}.
+#' @return A list with \code{phis}, \code{psis}, \code{rho}, \code{repr_dim}, \code{shapes}, \code{context}, \code{scalers}.
+#' @export
 .propinf_deepsets_init <- function(shapes, phi_hidden, repr_dim, rho_hidden,
                                    rnd, context = "paired",
                                    edge_hidden = NULL) {
@@ -633,6 +859,15 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
        shapes = shapes, context = context, scalers = NULL)
 }
 
+#' .propinf_deepsets_forward
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param model See Usage.
+#' @param sets See Usage.
+#' @return The value of \code{list}.
+#' @export
 .propinf_deepsets_forward <- function(model, sets) {
   phis <- model$phis; psis <- model$psis; r <- model$repr_dim
   ctx <- model$context
@@ -692,6 +927,18 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
        list(caches = caches, L = L, F = F, racts = r_ap$acts, rpre = r_ap$pre))
 }
 
+#' .propinf_deepsets_backward
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param model See Usage.
+#' @param sets See Usage.
+#' @param cache See Usage.
+#' @param dout See Usage.
+#' @param grads See Usage.
+#' @return The value of \code{for}.
+#' @export
 .propinf_deepsets_backward <- function(model, sets, cache, dout, grads) {
   r <- model$repr_dim
   ctx <- model$context
@@ -736,6 +983,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   }
 }
 
+#' .propinf_zero_grads
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param model See Usage.
+#' @return A list with \code{phis}, \code{psis}, \code{rho}.
+#' @export
 .propinf_zero_grads <- function(model) {
   list(phis = lapply(model$phis, .propinf_zero_like),
        psis = lapply(model$psis, function(p)
@@ -743,6 +998,22 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
        rho = .propinf_zero_like(model$rho))
 }
 
+#' .propinf_train_set_meta
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sets_list See Usage.
+#' @param labels See Usage.
+#' @param phi_hidden See Usage.
+#' @param repr_dim See Usage.
+#' @param rho_hidden See Usage.
+#' @param epochs See Usage.
+#' @param lr See Usage.
+#' @param seed See Usage.
+#' @param context Defaults to \code{"paired"}.
+#' @return The value of \code{model}, as built in the body.
+#' @export
 .propinf_train_set_meta <- function(sets_list, labels, phi_hidden, repr_dim,
                                     rho_hidden, epochs, lr, seed,
                                     context = "paired") {
@@ -781,6 +1052,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   model
 }
 
+#' .propinf_standardise
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param feats See Usage.
+#' @return A list with \code{feats}, \code{mu}, \code{sd}.
+#' @export
 .propinf_standardise <- function(feats) {
   d <- length(feats[[1L]])
   n <- as.numeric(length(feats))
@@ -794,6 +1073,16 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   list(feats = lapply(feats, function(f) (f - mu) / sd), mu = mu, sd = sd)
 }
 
+#' .propinf_apply_standardise
+#'
+#' Part of the propinf_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param f See Usage.
+#' @param mu See Usage.
+#' @param sd See Usage.
+#' @return A numeric value.
+#' @export
 .propinf_apply_standardise <- function(f, mu, sd) {
   (f - mu) / sd
 }

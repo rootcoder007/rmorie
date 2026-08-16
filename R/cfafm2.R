@@ -4,6 +4,14 @@
 .CFA_TOL <- 1e-13
 
 # Item covariance from data, or pass a covariance matrix through.
+#' Item covariance from data, or pass a covariance matrix through
+#'
+#' Part of the cfafm2 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @return The value of \code{S}, as built in the body.
+#' @export
 .cfa_cov <- function(X) {
   M <- .s03mat(X)
   if (!nrow(M)) stop("empty input: X has no rows")
@@ -19,6 +27,14 @@
   S
 }
 
+#' .cfa_inv
+#'
+#' Part of the cfafm2 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .cfa_inv <- function(A) {
   m <- nrow(A)
   cols <- lapply(seq_len(m), function(k) {
@@ -30,6 +46,14 @@
   out
 }
 
+#' .cfa_logdet
+#'
+#' Part of the cfafm2 implementation; see the file header for the source
+#' it follows.
+#'
+#' @param A See Usage.
+#' @return A numeric value.
+#' @export
 .cfa_logdet <- function(A) {
   L <- .s03chol(A)
   2 * sum(log(diag(L)))
@@ -38,6 +62,15 @@
 # Masked EM factor analysis (Rubin & Thayer 1982 E- and M-steps).
 # mask[i, j] is 1 where item i may load on factor j.  Factors are
 # standardised and orthogonal, so Sigma = Lambda Lambda' + Psi.
+#' Masked EM factor analysis (Rubin & Thayer 1982 E- and M-steps)
+#'
+#' mask[i, j] is 1 where item i may load on factor j.  Factors are
+#' standardised and orthogonal, so Sigma = Lambda Lambda\' + Psi.
+#'
+#' @param S See Usage.
+#' @param mask See Usage.
+#' @return A list with \code{lam}, \code{psi}, \code{fml}, \code{resid}, \code{it}.
+#' @export
 .cfa_em <- function(S, mask) {
   p <- nrow(S)
   k <- ncol(mask)

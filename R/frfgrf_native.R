@@ -53,6 +53,16 @@
 # Machine Learning Research 13, 1063-1095. Earlier consistency analysis
 # of the same shape.
 
+#' .frfgrf_beta_min
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param d See Usage.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @return A numeric value.
+#' @export
 .frfgrf_beta_min <- function(d, alpha = 0.05, pi = 0.5) {
   if (alpha <= 0.0 || alpha >= 0.5) {
     stop(sprintf("frfgrf: alpha must be in (0, 0.5), got %s",
@@ -68,6 +78,14 @@
   return(1.0 - (1.0 + (as.numeric(d) / pi) * ratio)^(-1.0))
 }
 
+#' .frfgrf_structure
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .frfgrf_structure <- function(tree) {
   if (isTRUE(tree$leaf)) {
     return(list("leaf"))
@@ -79,6 +97,19 @@
   return(c(list(c(feat, thr)), left_struct, right_struct))
 }
 
+#' .frfgrf_honesty_test
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param seed Defaults to \code{11}.
+#' @param n_permutations Defaults to \code{3}.
+#' @return A list with \code{honest}, \code{splits_stable_under_I_permutation}, \code{splits_move_under_J_permutation}, \code{n_splits}.
+#' @export
 .frfgrf_honesty_test <- function(X, y, kind = "double-sample", min_leaf = 5,
                                  seed = 11, n_permutations = 3) {
   ht_out <- honest_tree(X, y, kind = kind, min_leaf = min_leaf, seed = seed)
@@ -146,6 +177,15 @@
   ))
 }
 
+#' .frfgrf_split_share_walk
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nd See Usage.
+#' @param counts See Usage.
+#' @return The value of \code{counts}, as built in the body.
+#' @export
 .frfgrf_split_share_walk <- function(nd, counts) {
   if (!isTRUE(nd$leaf)) {
     counts[nd$feature] <- counts[nd$feature] + 1
@@ -155,6 +195,15 @@
   return(counts)
 }
 
+#' .frfgrf_split_share
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param trees See Usage.
+#' @param d See Usage.
+#' @return The value of \code{list}.
+#' @export
 .frfgrf_split_share <- function(trees, d) {
   counts <- numeric(d)
   for (t in trees) {
@@ -165,6 +214,14 @@
   return(list(as.numeric(counts) / tot, counts))
 }
 
+#' .frfgrf_leaf_count
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nd See Usage.
+#' @return A numeric value.
+#' @export
 .frfgrf_leaf_count <- function(nd) {
   if (isTRUE(nd$leaf)) {
     return(nd$n_I)
@@ -172,6 +229,15 @@
   return(.frfgrf_leaf_count(nd$left) + .frfgrf_leaf_count(nd$right))
 }
 
+#' .frfgrf_regularity_walk
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param nd See Usage.
+#' @param worst See Usage.
+#' @return The value of \code{worst}, as built in the body.
+#' @export
 .frfgrf_regularity_walk <- function(nd, worst) {
   if (isTRUE(nd$leaf)) {
     return(worst)
@@ -187,6 +253,14 @@
   return(worst)
 }
 
+#' .frfgrf_regularity
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param trees See Usage.
+#' @return The value of \code{worst}, as built in the body.
+#' @export
 .frfgrf_regularity <- function(trees) {
   worst <- 1.0
   for (t in trees) {
@@ -195,6 +269,23 @@
   return(worst)
 }
 
+#' .frfgrf_forest_fit_check
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param n_trees Defaults to \code{100}.
+#' @param min_leaf Defaults to \code{5}.
+#' @param subsample_frac Defaults to \code{0.5}.
+#' @param alpha Defaults to \code{0.05}.
+#' @param pi Defaults to \code{0.5}.
+#' @param seed Defaults to \code{0}.
+#' @param kind Defaults to \code{"double-sample"}.
+#' @param sizes Defaults to \code{NULL}.
+#' @return A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty}, \code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share}, \code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity}, \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d}, \code{n_trees}, \code{kind}, \code{failed}, \code{method}.
+#' @export
 .frfgrf_forest_fit_check <- function(y, X, n_trees = 100, min_leaf = 5,
                                       subsample_frac = 0.5, alpha = 0.05,
                                       pi = 0.5, seed = 0,
@@ -280,6 +371,13 @@
   ))
 }
 
+#' .frfgrf_cheatsheet
+#'
+#' Part of the frfgrf_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .frfgrf_cheatsheet <- function() {
   return(paste0(
     "frfgrf: audit the conditions the theory needs -- honesty ",

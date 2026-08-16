@@ -8,6 +8,14 @@
 
 .lcwphr_EPS <- 1e-12
 
+#' .lcwphr_rows
+#'
+#' Part of the lcwphr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .lcwphr_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -22,12 +30,33 @@
   m
 }
 
+#' .lcwphr_cholsolve
+#'
+#' Part of the lcwphr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .lcwphr_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
 }
 
 # Logistic regression by IRLS; the ridge is scaled to the design.
+#' Logistic regression by IRLS; the ridge is scaled to the design
+#'
+#' Part of the lcwphr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-11}.
+#' @param ridge_rel Defaults to \code{1e-08}.
+#' @return A list with \code{beta}, \code{fitted}.
+#' @export
 .lcwphr_logit_irls <- function(X, y, max_iter = 100L, tol = 1e-11,
                                ridge_rel = 1e-8) {
   n <- nrow(X); p <- ncol(X)
@@ -222,6 +251,13 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
                      "model is identified only up to relabelling"))
 }
 
+#' .lcwphr_cheatsheet
+#'
+#' Part of the lcwphr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .lcwphr_cheatsheet <- function() {
   paste0("lcwphr: morie_lcwphr_latent_class_weighted(y, A, H, K) -> latent ",
          "classes plus IPW class-specific treatment effects (Lanza, Coffman ",

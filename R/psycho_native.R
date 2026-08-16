@@ -24,6 +24,17 @@
 # table. An unbalanced table makes the mean squares non-orthogonal and
 # every downstream ICC ill-defined, so it is an error rather than a
 # number from whatever cells happen to be present.
+#' Two-way ANOVA mean squares for a complete crossed subjects-by-raters
+#'
+#' table. An unbalanced table makes the mean squares non-orthogonal and
+#' every downstream ICC ill-defined, so it is an error rather than a
+#' number from whatever cells happen to be present.
+#'
+#' @param y See Usage.
+#' @param subject See Usage.
+#' @param rater See Usage.
+#' @return A list with \code{MSR}, \code{MSC}, \code{MSE}, \code{MSW}, \code{n}, \code{k}, \code{matrix}.
+#' @export
 .psy_anova2 <- function(y, subject, rater) {
   yv <- as.numeric(y)
   s <- as.vector(subject)
@@ -64,6 +75,15 @@
 # Spearman-Brown: reliability of a mean of k measurements. Always at
 # least the single-measure value, which is why every average-measure
 # ICC exceeds its single-measure counterpart.
+#' Spearman-Brown: reliability of a mean of k measurements. Always at
+#'
+#' least the single-measure value, which is why every average-measure
+#' ICC exceeds its single-measure counterpart.
+#'
+#' @param icc1 See Usage.
+#' @param k See Usage.
+#' @return A numeric value.
+#' @export
 .psy_spearman_brown <- function(icc1, k) {
   den <- 1 + (k - 1) * icc1
   if (den == 0) return(NA_real_)
@@ -72,12 +92,33 @@
 
 # 3PL item response function. c is the lower asymptote (guessing):
 # with c > 0 the curve never reaches zero.
+#' 3PL item response function. c is the lower asymptote (guessing):
+#'
+#' with c > 0 the curve never reaches zero.
+#'
+#' @param theta See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param cc See Usage.
+#' @return A numeric value.
+#' @export
 .psy_p3pl <- function(theta, a, b, cc) {
   z <- pmin(pmax(outer(theta, b, function(t, bb) a * (t - bb)), -500), 500)
   sweep(1 / (1 + exp(-z)), 2L, 1 - cc, "*") +
     matrix(cc, nrow = length(theta), ncol = length(b), byrow = TRUE)
 }
 
+#' .psy_dp3pl
+#'
+#' Part of the psycho_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param cc See Usage.
+#' @return The value of \code{sweep}.
+#' @export
 .psy_dp3pl <- function(theta, a, b, cc) {
   P <- .psy_p3pl(theta, a, b, cc)
   star <- sweep(P, 2L, cc, "-")
@@ -85,6 +126,17 @@
   sweep(star * (1 - star), 2L, a * (1 - cc), "*")
 }
 
+#' .psy_items
+#'
+#' Part of the psycho_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param m See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param cc See Usage.
+#' @return A list with \code{a}, \code{b}, \code{c}.
+#' @export
 .psy_items <- function(m, a, b, cc) {
   if (is.null(b)) stop("item difficulties b are required.", call. = FALSE)
   bv <- as.numeric(b)
@@ -99,6 +151,14 @@
   list(a = av, b = bv, c = cv)
 }
 
+#' .psy_check_y
+#'
+#' Part of the psycho_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @return The value of \code{yv}, as built in the body.
+#' @export
 .psy_check_y <- function(y) {
   yv <- as.numeric(y)
   if (!all(yv %in% c(0, 1))) {
@@ -107,17 +167,45 @@
   yv
 }
 
+#' .psy_ll
+#'
+#' Part of the psycho_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param grid See Usage.
+#' @param yv See Usage.
+#' @param it See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .psy_ll <- function(grid, yv, it) {
   P <- pmin(pmax(.psy_p3pl(grid, it$a, it$b, it$c), 1e-12), 1 - 1e-12)
   as.numeric(log(P) %*% yv + log(1 - P) %*% (1 - yv))
 }
 
+#' .psy_info
+#'
+#' Part of the psycho_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param it See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .psy_info <- function(theta, it) {
   P <- pmin(pmax(.psy_p3pl(theta, it$a, it$b, it$c), 1e-12), 1 - 1e-12)
   dP <- .psy_dp3pl(theta, it$a, it$b, it$c)
   as.numeric(rowSums(dP^2 / (P * (1 - P))))
 }
 
+#' .psy_fixed_pool
+#'
+#' Part of the psycho_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param yi See Usage.
+#' @param vi See Usage.
+#' @return A list with \code{mu}, \code{Q}, \code{w}, \code{k}.
+#' @export
 .psy_fixed_pool <- function(yi, vi) {
   y <- as.numeric(yi)
   v <- as.numeric(vi)
@@ -140,6 +228,15 @@
 # DerSimonian-Laird: closed-form, downward-biased, and the truncation
 # at zero is not symmetric -- a biased tau^2 that hits the floor
 # understates heterogeneity AND overstates precision together.
+#' DerSimonian-Laird: closed-form, downward-biased, and the truncation
+#'
+#' at zero is not symmetric -- a biased tau^2 that hits the floor
+#' understates heterogeneity AND overstates precision together.
+#'
+#' @param yi See Usage.
+#' @param vi See Usage.
+#' @return A numeric value.
+#' @export
 .psy_dl <- function(yi, vi) {
   f <- .psy_fixed_pool(yi, vi)
   den <- sum(f$w) - sum(f$w^2) / sum(f$w)

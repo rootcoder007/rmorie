@@ -19,6 +19,15 @@
   c(3.96, 3.66, 3.41, 3.12, 1.25, 0.94, 0.66, 0.33))
 
 # Interpolated Dickey-Fuller critical values at sample size n.
+#' Interpolated Dickey-Fuller critical values at sample size n
+#'
+#' Part of the pptest implementation; see the file header for the source
+#' it follows.
+#'
+#' @param n See Usage.
+#' @param kind Defaults to \code{"Z(t_alpha)"}.
+#' @return A vector, from \code{vapply}.
+#' @export
 .t4_ppcrit <- function(n, kind = "Z(t_alpha)") {
   tab <- if (kind == "Z(alpha)") .t4_PP_ALPHA else .t4_PP_TALPHA
   vapply(seq_along(.t4_PP_P),

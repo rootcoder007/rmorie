@@ -40,6 +40,15 @@
 .MORIE_PHILOX_W1 <- 3144134277 # 0xBB67AE85, sqrt(3) - 1
 .MORIE_PHILOX_ROUNDS <- 10L
 
+#' XOR of two 32-bit words held as doubles. bitwXor() only accepts
+#' values
+#'
+#' inside the signed 32-bit range, so split into 16-bit halves first.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .morie_xor32 <- function(a, b) {
   # XOR of two 32-bit words held as doubles. bitwXor() only accepts values
   # inside the signed 32-bit range, so split into 16-bit halves first.
@@ -50,6 +59,16 @@
   bitwXor(ah, bh) * 65536 + bitwXor(al, bl)
 }
 
+#' Exact 32x32 -> 64 bit product, returned as (hi, lo) 32-bit halves.
+#' The
+#'
+#' full product can reach 2^64, past the 2^53 where doubles stop being
+#' exact integers, so it is assembled from 16-bit partial products.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A list with \code{hi}, \code{lo}.
+#' @export
 .morie_mulhilo32 <- function(a, b) {
   # Exact 32x32 -> 64 bit product, returned as (hi, lo) 32-bit halves. The
   # full product can reach 2^64, past the 2^53 where doubles stop being exact
@@ -68,6 +87,17 @@
   list(hi = hi %% 4294967296, lo = lo %% 4294967296)
 }
 
+#' Counter: an (n x 4) numeric matrix of 32-bit words; key: length-2
+#' numeric
+#'
+#' Part of the rng_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counter See Usage.
+#' @param key See Usage.
+#' @param rounds Defaults to \code{.MORIE_PHILOX_ROUNDS}.
+#' @return The value of \code{ctr}, as built in the body.
+#' @export
 .morie_philox4x32 <- function(counter, key, rounds = .MORIE_PHILOX_ROUNDS) {
   # counter: an (n x 4) numeric matrix of 32-bit words; key: length-2 numeric.
   ctr <- matrix(as.numeric(counter), ncol = 4)
@@ -90,6 +120,16 @@
   ctr
 }
 
+#' N uniforms in the OPEN interval (0, 1). The open interval matters: a
+#'
+#' normal quantile at 0 or 1 is infinite, and (w + 0.5)/2^32 reaches
+#' neither endpoint.
+#'
+#' @param n See Usage.
+#' @param seed Defaults to \code{0}.
+#' @param stream Defaults to \code{0}.
+#' @return A numeric value.
+#' @export
 .morie_random_uniform <- function(n, seed = 0, stream = 0) {
   # n uniforms in the OPEN interval (0, 1). The open interval matters: a
   # normal quantile at 0 or 1 is infinite, and (w + 0.5)/2^32 reaches
@@ -150,12 +190,30 @@
   2.04426310338993978564e-15
 )
 
+#' .morie_as241_poly
+#'
+#' Part of the rng_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param coef See Usage.
+#' @param x See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_as241_poly <- function(coef, x) {
   out <- rep(coef[length(coef)], length(x))
   for (i in (length(coef) - 1L):1L) out <- out * x + coef[i]
   out
 }
 
+#' Wichura\'s AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <=
+#' 5
+#'
+#' Part of the rng_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_normal_quantile <- function(p) {
   # Wichura's AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <= 5.
   p <- as.numeric(p)
@@ -186,10 +244,32 @@
   out
 }
 
+#' .morie_random_normal
+#'
+#' Part of the rng_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param seed Defaults to \code{0}.
+#' @param stream Defaults to \code{0}.
+#' @return The value of \code{.morie_normal_quantile}.
+#' @export
 .morie_random_normal <- function(n, seed = 0, stream = 0) {
   .morie_normal_quantile(.morie_random_uniform(n, seed = seed, stream = stream))
 }
 
+#' .morie_random_multivariate_normal
+#'
+#' Part of the rng_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param mean See Usage.
+#' @param cov See Usage.
+#' @param seed Defaults to \code{0}.
+#' @param stream Defaults to \code{0}.
+#' @param jitter Defaults to \code{1e-10}.
+#' @return A numeric value.
+#' @export
 .morie_random_multivariate_normal <- function(mean, cov, seed = 0, stream = 0,
                                               jitter = 1e-10) {
   # Z = mean + L e with L L' = cov, the construction Schabenberger & Gotway

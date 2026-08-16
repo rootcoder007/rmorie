@@ -23,19 +23,63 @@
 # data, and bijections that move a bounded problem onto the whole
 # line and back.
 
+#' .fz_K
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .fz_K <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
 
 # W(u) = int_{-inf}^u K(v) dv, the INTEGRATED kernel of (2.2). A
 # distribution-function estimator smooths with the kernel's integral,
 # not the kernel, which is what makes it continuous where the
 # empirical df jumps and why its bias carries f' rather than f''.
+#' W(u) = int_{-inf}^u K(v) dv, the INTEGRATED kernel of (2.2). A
+#'
+#' distribution-function estimator smooths with the kernel\'s integral,
+#' not the kernel, which is what makes it continuous where the empirical
+#' df jumps and why its bias carries f\' rather than f\'\'.
+#'
+#' @param u See Usage.
+#' @return The value of \code{stats::pnorm}.
+#' @export
 .fz_W <- function(u) stats::pnorm(u)
 
 # V(u) = 1 - W(u), the survival counterpart used throughout Ch. 4.
+#' V(u) = 1 - W(u), the survival counterpart used throughout Ch. 4
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param u See Usage.
+#' @return A numeric value.
+#' @export
 .fz_V <- function(u) 1 - stats::pnorm(u)
 
+#' .fz_trapz
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .fz_trapz <- function(y, x) sum(diff(x) * (y[-1L] + y[-length(y)])) / 2
 
+#' .fz_seq
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param from See Usage.
+#' @param to See Usage.
+#' @param n See Usage.
+#' @return The value of \code{seq}.
+#' @export
 .fz_seq <- function(from, to, n) seq(from, to, length.out = n)
 
 # Bandwidth for a DISTRIBUTION-function-type estimator:
@@ -48,6 +92,21 @@
 # n^(-1/3). Sec. 5.3.2 states the same conclusion in words, citing
 # Azzalini (1981). Identical to .morie_kdfe_h in
 # aaa_helpers_fauzi.R; kept local so this file stands alone.
+#' Bandwidth for a DISTRIBUTION-function-type estimator:
+#'
+#' 4^(1/3) sigma n^(-1/3). A cube root, not the fifth root of the
+#' density rule. Equations (2.3)-(2.4) put the bandwidth in the variance
+#' at O(h/n) with a NEGATIVE sign -- smoothing REDUCES variance here --
+#' rather than at O(1/(nh)), so minimising the MISE gives h_opt = (2 r_1
+#' / (n mu_2^2 R(f\')))^(1/3), which for a Gaussian kernel against a
+#' normal reference is 4^(1/3) sigma n^(-1/3). Sec. 5.3.2 states the
+#' same conclusion in words, citing Azzalini (1981). Identical to
+#' .morie_kdfe_h in aaa_helpers_fauzi.R; kept local so this file stands
+#' alone.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .fz_kdfe_h <- function(x) {
   n <- length(x)
   s <- stats::sd(x)
@@ -62,6 +121,16 @@
 # bias coefficients b_1, b_2, b_3 of (4.14), (4.15) and (4.21): the
 # transformation does not remove the bias, it makes it computable and
 # O(h^2) everywhere including at the edge.
+#' A bijection g from the whole line onto the support, with inverse
+#'
+#' and first two derivatives. The derivatives are what appear in the
+#' bias coefficients b_1, b_2, b_3 of (4.14), (4.15) and (4.21): the
+#' transformation does not remove the bias, it makes it computable and
+#' O(h^2) everywhere including at the edge.
+#'
+#' @param kind Defaults to \code{"log"}.
+#' @return Nothing; this branch always raises.
+#' @export
 .fz_transform <- function(kind = "log") {
   if (identical(kind, "log")) {
     return(list(
@@ -84,6 +153,16 @@
 # pays for it by taking NEGATIVE values, so the density estimate can
 # go negative and the distribution estimate non-monotone. That is the
 # trade the book makes explicit.
+#' Order-m kernel (Mueller 1991). Higher order buys an O(h^m) bias and
+#'
+#' pays for it by taking NEGATIVE values, so the density estimate can go
+#' negative and the distribution estimate non-monotone. That is the
+#' trade the book makes explicit.
+#'
+#' @param u See Usage.
+#' @param m Defaults to \code{4L}.
+#' @return Nothing; this branch always raises.
+#' @export
 .fz_muller <- function(u, m = 4L) {
   m <- as.integer(m)
   if (m == 2L) {
@@ -98,6 +177,15 @@
   stop("m must be 2, 4 or 6.", call. = FALSE)
 }
 
+#' .fz_check_sample
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param min_n Defaults to \code{2L}.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .fz_check_sample <- function(x, min_n = 2L) {
   x <- as.numeric(x)
   if (length(x) < min_n) {
@@ -109,6 +197,14 @@
   x
 }
 
+#' .fz_check_h
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @return The value of \code{h}, as built in the body.
+#' @export
 .fz_check_h <- function(h) {
   h <- as.numeric(h)
   if (h <= 0) {
@@ -425,6 +521,17 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
 }
 
 
+#' .fz_cs_common
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param t_grid See Usage.
+#' @param h See Usage.
+#' @param transform See Usage.
+#' @return A list with \code{tr}, \code{tg}, \code{zx}, \code{zt}, \code{hh}, \code{n}.
+#' @export
 .fz_cs_common <- function(x, t_grid, h, transform) {
   xv <- .fz_check_sample(x)
   tr <- .fz_transform(transform)
@@ -538,6 +645,16 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 }
 
 
+#' .fz_bias_common
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param f_X See Usage.
+#' @param transform See Usage.
+#' @return A list with \code{tv}, \code{fx}, \code{tr}, \code{zt}, \code{gp}, \code{gpp}.
+#' @export
 .fz_bias_common <- function(t, f_X, transform) {
   tv <- as.numeric(t)
   fx <- as.numeric(f_X)
@@ -558,6 +675,14 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
   )
 }
 
+#' .fz_bias_payload
+#'
+#' Part of the fauzi_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cm See Usage.
+#' @return A list with \code{g_prime}, \code{g_double_prime}, \code{bias_order}, \code{contrast}, \code{transform}.
+#' @export
 .fz_bias_payload <- function(cm) {
   list(
     g_prime = cm$gp, g_double_prime = cm$gpp,

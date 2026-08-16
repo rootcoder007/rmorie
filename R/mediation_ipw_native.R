@@ -12,6 +12,19 @@
 # probabilities. stats::pnorm/dnorm are used as the normal CDF and
 # density -- arithmetic primitives, in the same sense as exp() -- not
 # as a model-fitting delegate.
+#' Newton-Raphson binary choice, probit or logit, returning fitted
+#'
+#' probabilities. stats::pnorm/dnorm are used as the normal CDF and
+#' density -- arithmetic primitives, in the same sense as exp() -- not
+#' as a model-fitting delegate.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param link Defaults to \code{"probit"}.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_binchoice_fit <- function(X, y, link = "probit",
                                  max_iter = 100L, tol = 1e-9) {
   D <- cbind(1, X)
@@ -45,8 +58,29 @@
 # Normalised weighted mean: sum(y * w) / sum(w). Huber's Section 3
 # normalises so the weights within each treatment state add to unity,
 # following Imbens (2004) and Busso, DiNardo and McCrary (2009).
+#' Normalised weighted mean: sum(y * w) / sum(w). Huber\'s Section 3
+#'
+#' normalises so the weights within each treatment state add to unity,
+#' following Imbens (2004) and Busso, DiNardo and McCrary (2009).
+#'
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A numeric value.
+#' @export
 .morie_wmean <- function(y, w) sum(y * w) / sum(w)
 
+#' The four normalised means, exactly as written in Huber (2014)
+#'
+#' Section 3. Reading the two subtracted terms of theta(1) and theta(0)
+#' as potential-outcome means gives, in order, E[Y(1,M(1))],
+#' E[Y(0,M(1))], E[Y(1,M(0))], E[Y(0,M(0))].
+#'
+#' @param y See Usage.
+#' @param d See Usage.
+#' @param pm See Usage.
+#' @param px See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_medweight_point <- function(y, d, pm, px) {
   # The four normalised means, exactly as written in Huber (2014)
   # Section 3. Reading the two subtracted terms of theta(1) and

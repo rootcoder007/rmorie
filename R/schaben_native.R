@@ -10,6 +10,15 @@
 # estimator, the composite likelihood and the Prasad-Rao prediction-error
 # correction had no R counterpart.
 
+#' .morie_sb_pairs
+#'
+#' Part of the schaben_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param coords See Usage.
+#' @param z See Usage.
+#' @return A list with \code{h}, \code{d}.
+#' @export
 .morie_sb_pairs <- function(coords, z) {
   P <- as.matrix(coords)
   zz <- as.numeric(z)
@@ -27,6 +36,17 @@
        d = zz[i] - zz[j])
 }
 
+#' .morie_sb_groups
+#'
+#' Part of the schaben_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param bins See Usage.
+#' @param cutoff See Usage.
+#' @param exact See Usage.
+#' @return A list with \code{centres}, \code{idx}.
+#' @export
 .morie_sb_groups <- function(h, bins, cutoff, exact) {
   if (isTRUE(exact)) {
     u <- unique(round(h, 12))
@@ -129,6 +149,18 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
        method = "Matheron classical semivariogram estimator")
 }
 
+#' .morie_sb_vgm
+#'
+#' Part of the schaben_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param h See Usage.
+#' @param model See Usage.
+#' @param nugget See Usage.
+#' @param psill See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_sb_vgm <- function(h, model, nugget, psill, rng) {
   a <- max(rng, 1e-12)
   g <- switch(

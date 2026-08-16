@@ -11,12 +11,31 @@
                     53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
                     109, 113)
 
+#' .sschin_cholsolve
+#'
+#' Part of the sschin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .sschin_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
 }
 
 # Least squares with a ridge scaled to the design, plus sigma.
+#' Least squares with a ridge scaled to the design, plus sigma
+#'
+#' Part of the sschin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param ridge_rel Defaults to \code{1e-08}.
+#' @return A list with \code{beta}, \code{sigma}.
+#' @export
 .sschin_ols <- function(X, y, ridge_rel = 1e-8) {
   n <- nrow(X); p <- ncol(X)
   A <- crossprod(X)
@@ -30,6 +49,18 @@
 }
 
 # Cox partial likelihood, Breslow ties, Newton-Raphson.
+#' Cox partial likelihood, Breslow ties, Newton-Raphson
+#'
+#' Part of the sschin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param max_iter Defaults to \code{100L}.
+#' @param tol Defaults to \code{1e-10}.
+#' @return A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.
+#' @export
 .sschin_cox_breslow <- function(t, e, X, max_iter = 100L, tol = 1e-10) {
   n <- length(t); p <- ncol(X)
   if (p == 0L) stop("sschin: the Cox model needs at least one covariate")
@@ -83,6 +114,15 @@
 }
 
 # Two-sided Student-t quantile by Cornish-Fisher on the normal.
+#' Two-sided Student-t quantile by Cornish-Fisher on the normal
+#'
+#' Part of the sschin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pq See Usage.
+#' @param df See Usage.
+#' @return A numeric value.
+#' @export
 .sschin_t_quantile <- function(pq, df) {
   z <- qnorm(pq)
   if (df > 1e8) return(z)
@@ -255,6 +295,13 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
                      "of the final variance came from not knowing the fills"))
 }
 
+#' .sschin_cheatsheet
+#'
+#' Part of the sschin_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .sschin_cheatsheet <- function() {
   paste0("sschin: morie_sschin_chained_imputation(time, event, X, mi_iter) ",
          "-> MICE imputation, per-imputation Cox fits and Rubin-pooled ",

@@ -15,6 +15,17 @@
 .DOMAINS <- c("simplex", "box")
 
 # Linear minimisation oracle
+#' Linear minimisation oracle
+#'
+#' Part of the qpdual_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param gradient See Usage.
+#' @param domain See Usage.
+#' @param lower See Usage.
+#' @param upper See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .lmo <- function(gradient, domain, lower, upper) {
   n <- length(gradient)
   if (domain == "simplex") {

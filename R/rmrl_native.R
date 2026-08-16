@@ -34,11 +34,27 @@
 # the honest baseline that sees the same information but gets only one
 # update per step.
 
+#' .rmrl_key
+#'
+#' Part of the rmrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return A character value.
+#' @export
 .rmrl_key <- function(...) {
   paste(vapply(list(...), function(x) as.character(x), character(1)),
         collapse="\r")
 }
 
+#' .rmrl_compile
+#'
+#' Part of the rmrl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param phi See Usage.
+#' @return The value of \code{function}.
+#' @export
 .rmrl_compile <- function(phi) {
   if (is.null(phi) ||
       (is.character(phi) && length(phi) == 1L && tolower(phi) == "true")) {
@@ -152,6 +168,19 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
   )
 }
 
+#' Epsilon-greedy with ties broken UNIFORMLY AT RANDOM. The table
+#'
+#' starts all-zero, so every action ties; deterministic tie-breaking
+#' would turn the initial behaviour into a systematic drift. rng is a
+#' .ghc_rng state: the Python arm draws rng.random() from
+#' np.random.default_rng(seed), bit-identical to .ghc_unif here.
+#'
+#' @param row See Usage.
+#' @param A See Usage.
+#' @param epsilon See Usage.
+#' @param rng See Usage.
+#' @return The value of \code{[[}.
+#' @export
 .rmrl_eps_greedy <- function(row, A, epsilon, rng) {
   # epsilon-greedy with ties broken UNIFORMLY AT RANDOM. The table
   # starts all-zero, so every action ties; deterministic tie-breaking

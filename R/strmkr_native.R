@@ -6,6 +6,14 @@
 
 .strmkr_EPS <- 1e-12
 
+#' .strmkr_rows
+#'
+#' Part of the strmkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .strmkr_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -179,6 +187,13 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
   out
 }
 
+#' .strmkr_cheatsheet
+#'
+#' Part of the strmkr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .strmkr_cheatsheet <- function() {
   paste0("strmkr: morie_strmkr_strauss_process(coords, r, gamma) -> ",
          "pseudolikelihood beta and gamma for the Strauss inhibition model ",

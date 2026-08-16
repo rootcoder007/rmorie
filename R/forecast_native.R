@@ -104,6 +104,15 @@ morie_drift_forecast <- function(y, h = 1) {
 }
 
 
+#' .morie_ses_run
+#'
+#' Part of the forecast_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param series See Usage.
+#' @return A list with \code{fitted}, \code{level}.
+#' @export
 .morie_ses_run <- function(a, series) {
   lev <- series[1L]
   fit <- numeric(length(series))
@@ -170,6 +179,20 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 
 
 # One Holt-Winters recursion, additive or multiplicative.
+#' One Holt-Winters recursion, additive or multiplicative
+#'
+#' Part of the forecast_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param period See Usage.
+#' @param alpha See Usage.
+#' @param beta See Usage.
+#' @param gamma See Usage.
+#' @param horizon See Usage.
+#' @param mult See Usage.
+#' @return A list with \code{forecast}, \code{level}, \code{trend}, \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma}, \code{period}, \code{horizon}.
+#' @export
 .morie_holt_winters <- function(y, period, alpha, beta, gamma, horizon,
                                 mult) {
   y <- as.numeric(y)

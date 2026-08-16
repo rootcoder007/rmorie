@@ -9,6 +9,20 @@
 # CBPS (Imai-Ratkovic GMM) and the NNLS SuperLearner ensemble.
 # Cross-validated against WeightIt / CBPS in tests.
 
+#' .morie_weight_result
+#'
+#' Part of the weight_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param weights See Usage.
+#' @param propensity See Usage.
+#' @param method See Usage.
+#' @param estimand See Usage.
+#' @param call See Usage.
+#' @param stabilize Defaults to \code{FALSE}.
+#' @param trim Defaults to \code{NULL}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_weight_result <- function(weights, propensity, method, estimand,
                                  call, stabilize = FALSE, trim = NULL) {
   ess <- sum(weights)^2 / sum(weights^2)
@@ -39,6 +53,16 @@ print.morie_weight <- function(x, ...) {
   invisible(x)
 }
 
+#' .morie_weight_from_ps
+#'
+#' Part of the weight_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ps See Usage.
+#' @param t01 See Usage.
+#' @param estimand See Usage.
+#' @return The value of \code{switch}.
+#' @export
 .morie_weight_from_ps <- function(ps, t01, estimand) {
   switch(estimand,
     ATE = ifelse(t01 == 1, 1 / ps, 1 / (1 - ps)),
@@ -313,6 +337,18 @@ morie_weight_super <- function(data, treatment, covariates,
 # convergent for the convex NNLS objective and immune to the singular
 # normal-equation solves that break active-set methods when learner
 # predictions are collinear.
+#' Non-negative least squares via projected coordinate descent --
+#'
+#' convergent for the convex NNLS objective and immune to the singular
+#' normal-equation solves that break active-set methods when learner
+#' predictions are collinear.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @param tol Defaults to \code{1e-10}.
+#' @param max_iter Defaults to \code{2000L}.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .morie_nnls <- function(A, b, tol = 1e-10, max_iter = 2000L) {
   p <- ncol(A)
   x <- rep(0, p)

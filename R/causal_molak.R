@@ -17,6 +17,14 @@
 # morie/fn/bdcrt._paths and ._blocked exactly, including their
 # depth-first stack order, so path counts match the Python arm.
 
+#' .morie_ml_pinv
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @return The value of \code{%*%}.
+#' @export
 .morie_ml_pinv <- function(a) {
   a <- as.matrix(a)
   s <- svd(a)
@@ -30,6 +38,14 @@
 # A DAG is a two-column character matrix / data frame of edges, or a
 # list(node = c(children)). Both spellings normalize to a sorted
 # character matrix of edges.
+#' A DAG is a two-column character matrix / data frame of edges, or a
+#'
+#' list(node = c(children)). Both spellings normalize to a sorted
+#' character matrix of edges.
+#'
+#' @param dag See Usage.
+#' @return The value of \code{[}.
+#' @export
 .morie_ml_edges <- function(dag) {
   if (is.list(dag) && !is.data.frame(dag)) {
     nm <- names(dag)
@@ -49,10 +65,28 @@
   e[!duplicated(paste(e[, 1], e[, 2], sep = "\r")), , drop = FALSE]
 }
 
+#' .morie_ml_nodes
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param extra Defaults to \code{character(0)}.
+#' @return A vector, from \code{sort}.
+#' @export
 .morie_ml_nodes <- function(edges, extra = character(0)) {
   sort(unique(c(as.character(edges), as.character(extra))))
 }
 
+#' .morie_ml_children
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param nodes See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .morie_ml_children <- function(edges, nodes) {
   out <- setNames(vector("list", length(nodes)), nodes)
   for (n in nodes) out[[n]] <- character(0)
@@ -64,6 +98,15 @@
   lapply(out, sort)
 }
 
+#' .morie_ml_parents
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param nodes See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .morie_ml_parents <- function(edges, nodes) {
   out <- setNames(vector("list", length(nodes)), nodes)
   for (n in nodes) out[[n]] <- character(0)
@@ -75,6 +118,15 @@
   lapply(out, sort)
 }
 
+#' .morie_ml_desc
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param children See Usage.
+#' @return The value of \code{seen}, as built in the body.
+#' @export
 .morie_ml_desc <- function(node, children) {
   seen <- character(0)
   stack <- node
@@ -91,6 +143,17 @@
   seen
 }
 
+#' .morie_ml_paths
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param children See Usage.
+#' @param parents See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_ml_paths <- function(x, y, children, parents) {
   out <- list()
   stack <- list(list(cur = x, path = x, dirs = character(0)))
@@ -117,6 +180,17 @@
   out
 }
 
+#' .morie_ml_blocked
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param path See Usage.
+#' @param dirs See Usage.
+#' @param z See Usage.
+#' @param children See Usage.
+#' @return A logical value.
+#' @export
 .morie_ml_blocked <- function(path, dirs, z, children) {
   n <- length(path)
   if (n < 3L) return(FALSE)
@@ -135,6 +209,18 @@
   FALSE
 }
 
+#' .morie_ml_dsep
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param z Defaults to \code{character(0)}.
+#' @param nodes Defaults to \code{NULL}.
+#' @return A logical value.
+#' @export
 .morie_ml_dsep <- function(edges, x, y, z = character(0), nodes = NULL) {
   nodes <- if (is.null(nodes)) .morie_ml_nodes(edges, c(x, y, z)) else nodes
   ch <- .morie_ml_children(edges, nodes)
@@ -147,26 +233,70 @@
   all(vapply(ps, function(p) .morie_ml_blocked(p$path, p$dirs, z, ch), logical(1)))
 }
 
+#' .morie_ml_cutin
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param targets See Usage.
+#' @return The value of \code{[}.
+#' @export
 .morie_ml_cutin <- function(edges, targets) {
   if (!nrow(edges)) return(edges)
   edges[!(edges[, 2] %in% targets), , drop = FALSE]
 }
 
+#' .morie_ml_cutout
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param sources See Usage.
+#' @return The value of \code{[}.
+#' @export
 .morie_ml_cutout <- function(edges, sources) {
   if (!nrow(edges)) return(edges)
   edges[!(edges[, 1] %in% sources), , drop = FALSE]
 }
 
+#' .morie_ml_skeleton
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .morie_ml_skeleton <- function(edges) {
   if (!nrow(edges)) return(character(0))
   sort(unique(apply(edges, 1, function(r) paste(sort(r), collapse = "\r"))))
 }
 
+#' .morie_ml_adj
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .morie_ml_adj <- function(edges, a, b) {
   if (!nrow(edges)) return(FALSE)
   any(edges[, 1] == a & edges[, 2] == b) || any(edges[, 1] == b & edges[, 2] == a)
 }
 
+#' .morie_ml_acyclic
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @return A logical value.
+#' @export
 .morie_ml_acyclic <- function(edges) {
   nodes <- .morie_ml_nodes(edges)
   ch <- .morie_ml_children(edges, nodes)
@@ -186,6 +316,14 @@
   TRUE
 }
 
+#' .morie_ml_colliders
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param edges See Usage.
+#' @return A vector, from \code{sort}.
+#' @export
 .morie_ml_colliders <- function(edges) {
   if (!nrow(edges)) return(character(0))
   out <- character(0)
@@ -449,6 +587,15 @@ morie_faithchk <- function(dag, x, y, z = character(0), indep = TRUE) {
 
 # --- ch. 13, p. 354: HSIC ---------------------------------------------
 
+#' .morie_ml_gram
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param sigma Defaults to \code{NULL}.
+#' @return A numeric value.
+#' @export
 .morie_ml_gram <- function(a, sigma = NULL) {
   a <- as.numeric(a)
   d2 <- outer(a, a, function(p, q) (p - q)^2)
@@ -597,6 +744,15 @@ morie_rlearn <- function(y, t, m, e, x = NULL) {
 
 # --- separating sets ---------------------------------------------------
 
+#' .morie_ml_combn
+#'
+#' Part of the causal_molak implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq_ See Usage.
+#' @param k See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_ml_combn <- function(seq_, k) {
   if (k == 0L) return(list(character(0)))
   if (length(seq_) < k) return(list())

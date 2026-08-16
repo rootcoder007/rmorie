@@ -69,6 +69,19 @@
 # being weighted; see :mod:`morie.fn.coxph` for the unweighted fit this
 # must reduce to.
 
+#' .svycox_prep
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param weights See Usage.
+#' @param strata See Usage.
+#' @param cluster See Usage.
+#' @return A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c}, \code{n}, \code{p}.
+#' @export
 .svycox_prep <- function(time, event, X, weights, strata, cluster) {
     T <- as.numeric(time)
     E <- as.integer(event)
@@ -137,6 +150,20 @@
                 n = n, p = p))
 }
 
+#' .svycox_score_and_info
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param T See Usage.
+#' @param E See Usage.
+#' @param M See Usage.
+#' @param w See Usage.
+#' @param beta See Usage.
+#' @param n See Usage.
+#' @param p See Usage.
+#' @return A list with \code{U}, \code{I}, \code{resid}.
+#' @export
 .svycox_score_and_info <- function(T, E, M, w, beta, n, p) {
     eta <- numeric(n)
     for (i in seq_len(n)) {
@@ -190,6 +217,15 @@
     return(list(U = U, I = I_mat, resid = resid))
 }
 
+#' .svycox_solve
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{sapply}.
+#' @export
 .svycox_solve <- function(A, b) {
     p <- length(b)
     Ab <- cbind(A, b)
@@ -222,6 +258,14 @@
     return(sapply(seq_len(p), function(i) Ab[i, p + 1L] / Ab[i, i]))
 }
 
+#' .svycox_inverse
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .svycox_inverse <- function(A) {
     p <- nrow(A)
     out <- matrix(0.0, p, p)
@@ -234,6 +278,18 @@
     return(out)
 }
 
+#' .svycox_design_variance
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param contrib See Usage.
+#' @param w See Usage.
+#' @param h See Usage.
+#' @param c See Usage.
+#' @param p See Usage.
+#' @return The value of \code{V}, as built in the body.
+#' @export
 .svycox_design_variance <- function(contrib, w, h, c, p) {
     n <- length(w)
     keys <- paste(h, c, sep = "\r")
@@ -272,6 +328,18 @@
     return(V)
 }
 
+#' .svycox_score_residuals
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @return The value of \code{$}.
+#' @export
 .svycox_score_residuals <- function(time, event, X, beta, weights = NULL) {
     prep <- .svycox_prep(time, event, X, weights, NULL, NULL)
     T <- prep$T
@@ -285,6 +353,21 @@
     return(si$resid)
 }
 
+#' .svycox_svycoxph
+#'
+#' Part of the svycox_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param weights Defaults to \code{NULL}.
+#' @param strata Defaults to \code{NULL}.
+#' @param cluster Defaults to \code{NULL}.
+#' @param max_iter Defaults to \code{100}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios}, \code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information}, \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events}, \code{n_iterations}, \code{ties}, \code{method}.
+#' @export
 .svycox_svycoxph <- function(time, event, X, weights = NULL, strata = NULL,
                              cluster = NULL, max_iter = 100, tol = 1e-9) {
     prep <- .svycox_prep(time, event, X, weights, strata, cluster)

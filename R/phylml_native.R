@@ -62,6 +62,14 @@
 
 .phylml_BASES <- c("A", "C", "G", "T")
 
+#' .phylml_pi
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param pi See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .phylml_pi <- function(pi) {
   if (is.null(pi)) {
     return(rep(0.25, 4))
@@ -106,6 +114,14 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   return(M)
 }
 
+#' .phylml_tip_vector
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param base See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .phylml_tip_vector <- function(base) {
   b <- toupper(as.character(base))
   if (b %in% c("-", "N", "?")) {
@@ -119,6 +135,18 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   return(v)
 }
 
+#' .phylml_prune
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param site See Usage.
+#' @param pi See Usage.
+#' @param u See Usage.
+#' @param seqs See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .phylml_prune <- function(node, site, pi, u, seqs) {
   if (!is.list(node)) {
     return(.phylml_tip_vector(substr(seqs[[node]], site, site)))
@@ -283,6 +311,13 @@ optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi =
   return(result)
 }
 
+#' .phylml_cheatsheet
+#'
+#' Part of the phylml_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .phylml_cheatsheet <- function() {
   return("phylml: Felsenstein (1981) pruning. L_s(k) = prod over children of sum_x P_sx(v) L_x(child); tips are 0/1 indicators; L = sum_s pi_s L_s(root) (eq. 5). Turns a 2^(2n-2)-term sum into a linear traversal. F81 model P_ij(t) = e^-ut delta_ij + (1-e^-ut) pi_j (eq. 7), reversible, and the PULLEY PRINCIPLE means the two root branches matter only through their sum.")
 }

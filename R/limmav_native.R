@@ -71,6 +71,14 @@
 # every gene gets the same variance. moderate=False returns the ordinary
 # weighted-least-squares t instead.
 
+#' .limmav_digamma
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .limmav_digamma <- function(x) {
   x <- as.numeric(x)
   if (length(x) > 1L) return(vapply(x, .limmav_digamma, numeric(1)))
@@ -84,6 +92,14 @@
   tot + log(x) - 0.5 / x - inv2 * (1.0/12.0 - inv2 * (1.0/120.0 - inv2 / 252.0))
 }
 
+#' .limmav_trigamma
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .limmav_trigamma <- function(x) {
   x <- as.numeric(x)
   if (x <= 0) stop("limmav: trigamma needs x > 0")
@@ -98,6 +114,14 @@
     1.0/6.0 + inv2 * (-1.0/30.0 + inv2 * (1.0/42.0 - inv2 / 30.0))))
 }
 
+#' .limmav_tetragamma
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .limmav_tetragamma <- function(x) {
   x <- as.numeric(x)
   tot <- 0.0
@@ -111,6 +135,16 @@
     1.0/6.0 - inv2 * (1.0/6.0 - 3.0 * inv2 / 10.0))))
 }
 
+#' .limmav_trigamma_inverse
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param tol Defaults to \code{1e-08}.
+#' @param max_iter Defaults to \code{60}.
+#' @return The value of \code{y}, as built in the body.
+#' @export
 .limmav_trigamma_inverse <- function(x, tol = 1e-8, max_iter = 60) {
   x <- as.numeric(x)
   if (x <= 0) stop("limmav: trigamma_inverse needs x > 0")
@@ -128,6 +162,14 @@
   y
 }
 
+#' .limmav_erf
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .limmav_erf <- function(x) {
   a1 <-  0.254829592
   a2 <- -0.284496736
@@ -142,6 +184,14 @@
   sign * y
 }
 
+#' .limmav_benjamini_hochberg
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .limmav_benjamini_hochberg <- function(p) {
   p <- as.numeric(p)
   n <- length(p)
@@ -161,6 +211,16 @@
   out
 }
 
+#' .limmav_ebayes
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param sigma2 See Usage.
+#' @param df See Usage.
+#' @param robust_floor Defaults to \code{1e-12}.
+#' @return A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total}, \code{no_gene_variation}.
+#' @export
 .limmav_ebayes <- function(sigma2, df, robust_floor = 1e-12) {
   s2 <- as.numeric(sigma2)
   G <- length(s2)
@@ -201,6 +261,16 @@
        df_total = dg + d0, no_gene_variation = FALSE)
 }
 
+#' .limmav_ols
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w Defaults to \code{NULL}.
+#' @return A list with \code{beta}, \code{fit}, \code{sd}, \code{inv}, \code{df}.
+#' @export
 .limmav_ols <- function(X, y, w = NULL) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -225,6 +295,17 @@
   list(beta = beta, fit = fit, sd = sqrt(rss / df), inv = inv, df = df)
 }
 
+#' .limmav_log_cpm
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param lib_sizes Defaults to \code{NULL}.
+#' @param prior_count Defaults to \code{0.5}.
+#' @param lib_offset Defaults to \code{1}.
+#' @return A list with \code{y}, \code{R}.
+#' @export
 .limmav_log_cpm <- function(counts, lib_sizes = NULL, prior_count = 0.5,
                             lib_offset = 1.0) {
   counts <- as.matrix(counts)
@@ -247,6 +328,17 @@
   list(y = y, R = R)
 }
 
+#' .limmav_lowess
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param span Defaults to \code{0.5}.
+#' @param iterations Defaults to \code{3}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .limmav_lowess <- function(x, y, span = 0.5, iterations = 3) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -309,6 +401,17 @@
   out
 }
 
+#' .limmav_voom_weights
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param counts See Usage.
+#' @param design See Usage.
+#' @param lib_sizes Defaults to \code{NULL}.
+#' @param span Defaults to \code{0.5}.
+#' @return A list with \code{log_cpm}, \code{weights}, \code{mean_log_count}, \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{lo}.
+#' @export
 .limmav_voom_weights <- function(counts, design, lib_sizes = NULL, span = 0.5) {
   lc <- .limmav_log_cpm(counts, lib_sizes)
   y <- lc$y
@@ -371,6 +474,17 @@
        lib_sizes = R, lo = lo)
 }
 
+#' .limmav_weighted_lm
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param w See Usage.
+#' @param contrast See Usage.
+#' @return A list with \code{est}, \code{se}, \code{t}, \code{df}, \code{sd}, \code{v_un}.
+#' @export
 .limmav_weighted_lm <- function(y, X, w, contrast) {
   ols <- .limmav_ols(X, y, w)
   beta <- ols$beta
@@ -392,6 +506,15 @@
   list(est = est, se = se, t = t_val, df = df, sd = sd, v_un = v_un)
 }
 
+#' .limmav_t_sf
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param df See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .limmav_t_sf <- function(t, df) {
   x <- df / (df + t^2)
 
@@ -571,6 +694,13 @@ morie_voom <- morie_limmav
 morie_limma_voom <- morie_limmav
 morie_limmavoom <- morie_limmav
 
+#' .limmav_cheatsheet
+#'
+#' Part of the limmav_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .limmav_cheatsheet <- function() {
   paste("limmav: voom (Law, Chen, Shi & Smyth 2014). log-cpm = ",
         "log2((r + 0.5)/(R + 1) * 1e6) -- 0.5 keeps the log finite and ",

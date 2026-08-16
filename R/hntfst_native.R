@@ -16,8 +16,29 @@
 ._KINDS <- c("double-sample", "propensity", "adaptive")
 ._EPS <- 1e-12
 
+#' ._mean
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 ._mean <- function(v) if (length(v) == 0L) 0.0 else mean(v)
 
+#' ._best_split
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param rows See Usage.
+#' @param feats See Usage.
+#' @param min_leaf See Usage.
+#' @param alpha See Usage.
+#' @return The value of \code{best}, as built in the body.
+#' @export
 ._best_split <- function(X, y, rows, feats, min_leaf, alpha) {
   n <- length(rows)
   if (n < 2L * min_leaf) return(NULL)
@@ -168,6 +189,15 @@ leaf_of <- function(tree, x) {
   list(node = node, path = path)
 }
 
+#' .hntfst_tree_predict
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tree See Usage.
+#' @param x See Usage.
+#' @return The value of \code{$}.
+#' @export
 .hntfst_tree_predict <- function(tree, x) {
   leaf_of(tree, x)$node$value
 }
@@ -435,6 +465,13 @@ morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
                 pi, max_depth, seed, at, level, correction)
 }
 
+#' .hntfst_cheatsheet
+#'
+#' Part of the hntfst_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .hntfst_cheatsheet <- function() {
   paste("hntfst: honest forest. Procedure 1 splits the subsample into I and J, places splits with J's responses and I's features but NEVER I's responses, and estimates leaves from I alone (Def. 2). Procedure 2 splits on W instead of Y. Def. 3: each feature has prob >= pi/d of being split on. Variance is the IJ, eq. (8), with the n(n-1)/(n-s)^2 correction for subsampling without replacement.")
 }

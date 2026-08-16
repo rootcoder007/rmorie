@@ -46,6 +46,14 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 .surxgb_FLOOR <- 1e-16
 .surxgb_SQRT2PI <- sqrt(2.0 * pi)
 
+#' .surxgb_check_dist
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dist See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .surxgb_check_dist <- function(dist) {
   if (!(dist %in% morie_surxgb_DISTRIBUTIONS)) {
     stop(sprintf("surxgb: distribution must be one of %s, got %s",
@@ -153,6 +161,16 @@ morie_surxgb_ddpdf <- function(z, dist="normal") {
   f * ((1.0 - e) ^ 2 - e)
 }
 
+#' .surxgb_s
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param u See Usage.
+#' @param sigma See Usage.
+#' @return A numeric value.
+#' @export
 .surxgb_s <- function(y, u, sigma) {
   if (is.infinite(y) && y > 0) {
     return(Inf)
@@ -301,6 +319,22 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
   0.5 * (term(GL, HL) + term(GR, HR) - term(GL + GR, HL + HR)) - gamma
 }
 
+#' .surxgb_build
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param g See Usage.
+#' @param h See Usage.
+#' @param idx See Usage.
+#' @param depth See Usage.
+#' @param max_depth See Usage.
+#' @param lam See Usage.
+#' @param gamma See Usage.
+#' @param min_child See Usage.
+#' @return A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain}, \code{left}, \code{right}.
+#' @export
 .surxgb_build <- function(X, g, h, idx, depth, max_depth, lam, gamma,
                           min_child) {
   G <- sum(g[idx])
@@ -345,6 +379,15 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
                            lam, gamma, min_child))
 }
 
+#' .surxgb_eval_tree
+#'
+#' Part of the surxgb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param x See Usage.
+#' @return The value of \code{$}.
+#' @export
 .surxgb_eval_tree <- function(node, x) {
   while (!node$leaf) {
     node <- if (x[node$variable] > node$cut) node$right else node$left

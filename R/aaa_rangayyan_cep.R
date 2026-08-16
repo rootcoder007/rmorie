@@ -8,6 +8,14 @@
 # not linear; and the low/high lifters must partition the quefrency axis
 # (|q| <= k and |q| > k), or q = 0 and q = k are counted twice.
 
+#' .morie_rg_dft
+#'
+#' Part of the rangayyan_cep implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A list with \code{re}, \code{im}.
+#' @export
 .morie_rg_dft <- function(x) {
   n <- length(x)
   idx <- seq_len(n) - 1L
@@ -22,6 +30,15 @@
   list(re = re, im = im)
 }
 
+#' .morie_rg_idft_re
+#'
+#' Part of the rangayyan_cep implementation; see the file header for the
+#' source it follows.
+#'
+#' @param re See Usage.
+#' @param im See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_rg_idft_re <- function(re, im) {
   n <- length(re)
   idx <- seq_len(n) - 1L
@@ -31,6 +48,14 @@
   }, numeric(1))
 }
 
+#' .morie_rg_unwrap
+#'
+#' Part of the rangayyan_cep implementation; see the file header for the
+#' source it follows.
+#'
+#' @param phase See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_rg_unwrap <- function(phase) {
   out <- numeric(length(phase))
   if (!length(phase)) {

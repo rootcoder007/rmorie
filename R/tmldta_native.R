@@ -23,13 +23,38 @@
 .TMLDTA_METHODS <- c("cv-tmle", "sample-split", "naive")
 .tmldta_EPS <- 1e-9
 
+#' .tmldta_logit
+#'
+#' Part of the tmldta_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tmldta_logit <- function(p) {
   q <- min(max(as.numeric(p), .tmldta_EPS), 1 - .tmldta_EPS)
   log(q / (1 - q))
 }
 
+#' .tmldta_expit
+#'
+#' Part of the tmldta_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmldta_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
 
+#' .levels
+#'
+#' Part of the tmldta_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param candidate_strata See Usage.
+#' @return The value of \code{lv}, as built in the body.
+#' @export
 .levels <- function(A, candidate_strata) {
   if (!is.null(candidate_strata)) {
     lv <- as.numeric(candidate_strata)
@@ -41,6 +66,19 @@
   lv
 }
 
+#' .fit_q
+#'
+#' Part of the tmldta_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param levels See Usage.
+#' @param rows See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{q}, \code{b}.
+#' @export
 .fit_q <- function(y, A, W, levels, rows, ridge) {
   ref <- levels[1]; others <- levels[-1]
   n <- length(y); p <- ncol(W)
@@ -66,6 +104,20 @@
   list(q = q_fn, b = b)
 }
 
+#' .fit_g
+#'
+#' Part of the tmldta_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param W See Usage.
+#' @param aL See Usage.
+#' @param aH See Usage.
+#' @param rows See Usage.
+#' @param ridge See Usage.
+#' @param trim See Usage.
+#' @return A list with \code{gH}, \code{gL}.
+#' @export
 .fit_g <- function(A, W, aL, aH, rows, ridge, trim) {
   n <- length(A)
   X <- if (ncol(W) > 0) cbind(1, W) else matrix(1, nrow = n, ncol = 1)
@@ -180,6 +232,15 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
   list(psi = psi, D = D, info = list(eps = eps, max_weight = max_w))
 }
 
+#' .tmldta_folds
+#'
+#' Part of the tmldta_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param n See Usage.
+#' @param n_folds See Usage.
+#' @return The value of \code{lapply}.
+#' @export
 .tmldta_folds <- function(n, n_folds) {
   V <- max(2L, min(as.integer(n_folds), n))
   lapply(seq_len(V) - 1L, function(v) which(seq_len(n) %% V == v))

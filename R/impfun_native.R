@@ -59,6 +59,14 @@
 
 .impfun_eps <- 1e-12
 
+#' .impfun_as_double_matrix
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A matrix, from \code{matrix}.
+#' @export
 .impfun_as_double_matrix <- function(x) {
   if (is.matrix(x)) {
     storage.mode(x) <- "double"
@@ -71,11 +79,27 @@
   matrix(as.numeric(x), nrow = 1L)
 }
 
+#' .impfun_as_double_vec
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .impfun_as_double_vec <- function(x) {
   if (is.list(x)) return(unlist(lapply(x, as.numeric)))
   as.numeric(x)
 }
 
+#' .impfun_as_int_list
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{list}.
+#' @export
 .impfun_as_int_list <- function(x) {
   if (is.list(x)) return(lapply(x, as.integer))
   if (is.matrix(x)) {
@@ -281,6 +305,13 @@ concordance <- function(imputed, truth) {
   )
 }
 
+#' .impfun_cheatsheet
+#'
+#' Part of the impfun_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .impfun_cheatsheet <- function() {
   "impfun: imputation is bounded by the REFERENCE PANEL, and panels disagree about which SNPs they carry -- merging by INTERSECTION discards the coverage that motivated merging. IMPUTE2 merges by ROLE: SNPs typed in the study align the haplotypes, the rest are targets. Underneath is Li-Stephens copying, the study haplotype as a MOSAIC of references switching at the recombination rate. Dosages carry uncertainty, and accuracy is measured on MASKED truth, because a confident model can be confidently wrong."
 }

@@ -68,17 +68,50 @@ morie_gwasem_gower <- function(S) {
   S * f
 }
 
+#' .gwasem_eigh
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @return A list with \code{values}, \code{vectors}.
+#' @export
 .gwasem_eigh <- function(M) {
   ee <- eigen(as.matrix(M), symmetric = TRUE)
   list(values = ee$values, vectors = ee$vectors)
 }
 
+#' .gwasem_solve
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .gwasem_solve <- function(A, b) {
   as.numeric(solve(A, b))
 }
 
+#' .gwasem_inv
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return A matrix, from \code{solve}.
+#' @export
 .gwasem_inv <- function(A) solve(A)
 
+#' .gwasem_slogdet
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param M See Usage.
+#' @return A list with \code{sign}, \code{logdet}.
+#' @export
 .gwasem_slogdet <- function(M) {
   v <- svd(M)
   prod(v$d)
@@ -87,6 +120,17 @@ morie_gwasem_gower <- function(S) {
   list(sign = sign, logdet = as.numeric(logdet))
 }
 
+#' .gwasem_loglik
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param yt See Usage.
+#' @param Xt See Usage.
+#' @param d See Usage.
+#' @param ml See Usage.
+#' @return A numeric value.
+#' @export
 .gwasem_loglik <- function(yt, Xt, d, ml) {
   n <- length(yt); p <- ncol(Xt)
   M <- matrix(0, p, p)
@@ -105,6 +149,22 @@ morie_gwasem_gower <- function(S) {
   -0.5 * (df * log(2 * pi * rss / df) + df + logdetV + ms$logdet)
 }
 
+#' .gwasem_reml_delta
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param evals See Usage.
+#' @param evecs See Usage.
+#' @param ml Defaults to \code{FALSE}.
+#' @param lo Defaults to \code{-10}.
+#' @param hi Defaults to \code{10}.
+#' @param n_grid Defaults to \code{100L}.
+#' @param refine Defaults to \code{60L}.
+#' @return A list with \code{delta}, \code{sigma_a2}, \code{sigma_e2}, \code{loglik}.
+#' @export
 .gwasem_reml_delta <- function(y, X, evals, evecs, ml = FALSE,
                                 lo = -10, hi = 10, n_grid = 100L,
                                 refine = 60L) {
@@ -192,6 +252,16 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
        shift = shift)
 }
 
+#' .gwasem_f_sf
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param f See Usage.
+#' @param df1 See Usage.
+#' @param df2 See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gwasem_f_sf <- function(f, df1, df2) {
   if (f <= 0) return(1.0)
   x <- df2 / (df2 + df1 * f)
@@ -227,6 +297,14 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
   else 1 - exp(log_beta) * cf(b, a, 1 - x) / b
 }
 
+#' .gwasem_norm_sf
+#'
+#' Part of the gwasem_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{pnorm}.
+#' @export
 .gwasem_norm_sf <- function(z) pnorm(abs(z), lower.tail = FALSE)
 
 #' Genomic-control inflation factor

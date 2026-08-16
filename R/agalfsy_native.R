@@ -13,6 +13,15 @@
 .agalfsy_TRANS <- 0.1
 .agalfsy_ROT <- 1.0
 
+#' .agalfsy_coords
+#'
+#' Part of the agalfsy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @param what See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .agalfsy_coords <- function(x, what) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -25,11 +34,28 @@
   m
 }
 
+#' .agalfsy_centroid
+#'
+#' Part of the agalfsy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param P See Usage.
+#' @return A numeric value.
+#' @export
 .agalfsy_centroid <- function(P) colSums(P) / nrow(P)
 
 # Same atom order, no superposition: the ligand moves rigidly so the
 # correspondence is fixed, and fitting it away would hide the very
 # displacement the reward is scoring.
+#' Same atom order, no superposition: the ligand moves rigidly so the
+#'
+#' correspondence is fixed, and fitting it away would hide the very
+#' displacement the reward is scoring.
+#'
+#' @param A See Usage.
+#' @param B See Usage.
+#' @return A numeric value.
+#' @export
 .agalfsy_rmsd <- function(A, B) {
   n <- nrow(A)
   s <- 0.0
@@ -40,6 +66,16 @@
   sqrt(s / n)
 }
 
+#' .agalfsy_rotate
+#'
+#' Part of the agalfsy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param P See Usage.
+#' @param axis See Usage.
+#' @param deg See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .agalfsy_rotate <- function(P, axis, deg) {
   cen <- .agalfsy_centroid(P)
   t <- deg * pi / 180.0
@@ -59,6 +95,16 @@
   out
 }
 
+#' .agalfsy_translate
+#'
+#' Part of the agalfsy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param P See Usage.
+#' @param axis See Usage.
+#' @param step See Usage.
+#' @return The value of \code{P}, as built in the body.
+#' @export
 .agalfsy_translate <- function(P, axis, step) {
   P[, axis + 1L] <- P[, axis + 1L] + step
   P
@@ -67,6 +113,15 @@
 # The twelve actions: 0-5 translations, 6-11 rotations. Indexing stays
 # 0-based here to match the Python arm's action numbering, which is a
 # REPORTED quantity (it appears in the trajectory).
+#' The twelve actions: 0-5 translations, 6-11 rotations. Indexing stays
+#'
+#' 0-based here to match the Python arm\'s action numbering, which is a
+#' REPORTED quantity (it appears in the trajectory).
+#'
+#' @param P See Usage.
+#' @param a See Usage.
+#' @return The value of \code{.agalfsy_rotate}.
+#' @export
 .agalfsy_apply <- function(P, a) {
   if (a < 6L)
     return(.agalfsy_translate(P, a %/% 2L,
@@ -77,6 +132,16 @@
                   if (a %% 2L == 0L) .agalfsy_ROT else -.agalfsy_ROT)
 }
 
+#' .agalfsy_reward
+#'
+#' Part of the agalfsy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param site See Usage.
+#' @param before See Usage.
+#' @param after See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .agalfsy_reward <- function(site, before, after) {
   r <- exp(-.agalfsy_rmsd(site, after) / .agalfsy_BOX) -
     exp(-.agalfsy_rmsd(site, before) / .agalfsy_BOX)
@@ -210,6 +275,13 @@ morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
                      "not at all."))
 }
 
+#' .agalfsy_cheatsheet
+#'
+#' Part of the agalfsy_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .agalfsy_cheatsheet <- function() {
   paste0("agalfsy: morie_agalfsy_rl_pose_search(receptor, ligand, site) -> ",
          "ligand pose by the A3C docking MDP of Wang et al. (2022), ",

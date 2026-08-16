@@ -77,6 +77,21 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
 }
 
 
+#' .morie_fg_newton
+#'
+#' Part of the competing_risks_native implementation; see the file
+#' header for the source it follows.
+#'
+#' @param t See Usage.
+#' @param e See Usage.
+#' @param X See Usage.
+#' @param competing See Usage.
+#' @param Gfun See Usage.
+#' @param Gi See Usage.
+#' @param max_iter Defaults to \code{50L}.
+#' @param tol Defaults to \code{1e-09}.
+#' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}.
+#' @export
 .morie_fg_newton <- function(t, e, X, competing, Gfun, Gi, max_iter = 50L,
                              tol = 1e-9) {
   p <- ncol(X)

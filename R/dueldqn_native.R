@@ -14,6 +14,14 @@
 
 .dueldqn_AGGS <- c("mean", "max", "naive")
 
+#' .dueldqn_check_mode
+#'
+#' Part of the dueldqn_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param mode See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .dueldqn_check_mode <- function(mode) {
   if (!(mode %in% .dueldqn_AGGS))
     stop(sprintf("duel: mode must be one of %s, got '%s'",
@@ -21,6 +29,15 @@
          call. = FALSE)
 }
 
+#' .dueld_anchor
+#'
+#' Part of the dueldqn_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param a See Usage.
+#' @param mode See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .dueld_anchor <- function(a, mode) {
   if (mode == "mean") {
     sum(a) / length(a)
@@ -93,6 +110,17 @@ duelingdqn <- dueling_q
 # values it. Using one net for both over-estimates because the max of a
 # noisy estimate is biased upward and the same noise supplies the value.
 # ---------------------------------------------------------------------------
+#' .dueldqn_argmax
+#'
+#' Double-DQN target: the ONLINE net picks the action, the TARGET net
+#' values it. Using one net for both over-estimates because the max of a
+#' noisy estimate is biased upward and the same noise supplies the
+#' value.
+#' ---------------------------------------------------------------------------
+#'
+#' @param x See Usage.
+#' @return The value of \code{b}, as built in the body.
+#' @export
 .dueldqn_argmax <- function(x) {
   b <- 1L
   if (length(x) > 1L) {

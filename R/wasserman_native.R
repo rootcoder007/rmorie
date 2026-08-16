@@ -13,6 +13,15 @@
 #     R side uses t(M) before as.vector, and byrow = TRUE to rebuild.
 #   * 0-based indices in payloads stay 0-based; +1 only when subsetting.
 
+#' .morie_wsm_need
+#'
+#' Part of the wasserman_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param ok See Usage.
+#' @param msg See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_wsm_need <- function(ok, msg) if (!isTRUE(ok)) stop(msg, call. = FALSE)
 
 #' Variance Var(X) = E\\[X^2\\] - E\\[X\\]^2 (Wasserman Ch 3, morie.fn wsmvar)
@@ -299,6 +308,15 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 # resampling indices -- and therefore every replicate -- agree
 # bit-for-bit across the two languages.
 
+#' .morie_wsm_lcg_u
+#'
+#' Part of the wasserman_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param count See Usage.
+#' @param seed Defaults to \code{13}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_wsm_lcg_u <- function(count, seed = 13) {
   s <- as.numeric(seed); out <- numeric(count)
   m <- 4294967296
@@ -309,6 +327,17 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
   out
 }
 
+#' .morie_wsm_boot_reps
+#'
+#' Part of the wasserman_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param data See Usage.
+#' @param T See Usage.
+#' @param B See Usage.
+#' @param seed See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_wsm_boot_reps <- function(data, T, B, seed) {
   n <- length(data)
   u <- .morie_wsm_lcg_u(B * n, seed)
@@ -317,6 +346,15 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
   vapply(seq_len(B), function(b) as.numeric(T(data[M[b, ]])), numeric(1))
 }
 
+#' .morie_wsm_q1
+#'
+#' Part of the wasserman_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param sorted_vals See Usage.
+#' @param p See Usage.
+#' @return The value of \code{[}.
+#' @export
 .morie_wsm_q1 <- function(sorted_vals, p) sorted_vals[ceiling(p * length(sorted_vals))]
 
 #' Nonparametric bootstrap standard error (Ch 8, wsmnpb)
@@ -698,6 +736,15 @@ morie_wasserman_chi_sq_gof <- function(observed, expected) {
 
 # --- Bayesian grid inference ------------------------------------------
 
+#' .morie_wsm_trapz
+#'
+#' Part of the wasserman_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .morie_wsm_trapz <- function(y, x) {
   dx <- diff(x)
   sum(0.5 * dx * (y[-1] + y[-length(y)]))
@@ -1647,6 +1694,15 @@ morie_wasserman_viterbi <- function(obs, A, B, pi) {
 # (|error| < 1.15e-9). The PYTHON side uses this too: stats::qnorm is
 # more accurate, but parity requires the same approximation in both
 # languages, so LCG-driven chains agree draw for draw.
+#' Acklam\'s rational approximation of the standard normal quantile
+#'
+#' (|error| < 1.15e-9). The PYTHON side uses this too: stats::qnorm is
+#' more accurate, but parity requires the same approximation in both
+#' languages, so LCG-driven chains agree draw for draw.
+#'
+#' @param u See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_wsm_norm_inv <- function(u) {
   a <- c(-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
          1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00)

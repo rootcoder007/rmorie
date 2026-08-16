@@ -46,6 +46,15 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
        method = "FAO-56 Penman-Monteith ET0 (Allen et al. 1998, Eq. 6)")
 }
 
+#' .morie_qm_ecdf
+#'
+#' Part of the climate_w511_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param sx See Usage.
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .morie_qm_ecdf <- function(sx, v) {
   n <- length(sx)
   if (n == 1L) return(0.5)
@@ -60,6 +69,15 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
   (lo - 1L + g) / (n - 1L)
 }
 
+#' .morie_qm_quant
+#'
+#' Part of the climate_w511_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param sx See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .morie_qm_quant <- function(sx, p) {
   n <- length(sx)
   if (n == 1L) return(sx[1])

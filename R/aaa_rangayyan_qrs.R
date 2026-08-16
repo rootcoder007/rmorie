@@ -8,8 +8,27 @@
 # therefore always written x[i + 1L].  Sample positions in the payloads are
 # zero-based for the same reason -- they must compare equal across the arms.
 
+#' .morie_qrs_pad
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param k See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_qrs_pad <- function(v, k) c(rep(0, k), v)
 
+#' Causal m-point moving average; the first m-1 outputs use a short
+#' window
+#'
+#' The running sum is accumulated in the same order as the Python arm,
+#' so the rounding sequence matches term for term.
+#'
+#' @param x See Usage.
+#' @param m See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_qrs_mavg <- function(x, m) {
   # Causal m-point moving average; the first m-1 outputs use a short window.
   # The running sum is accumulated in the same order as the Python arm, so
@@ -27,6 +46,14 @@
   out
 }
 
+#' Plain O(n^2) DFT.  The angle is formed as w * j with w = -2 pi k / n,
+#'
+#' NOT as -2 pi k j / n: the two differ in the last bits and the Python
+#' arm uses the former.
+#'
+#' @param x See Usage.
+#' @return A list with \code{re}, \code{im}.
+#' @export
 .morie_qrs_dft <- function(x) {
   # Plain O(n^2) DFT.  The angle is formed as w * j with w = -2 pi k / n,
   # NOT as -2 pi k j / n: the two differ in the last bits and the Python arm
@@ -44,6 +71,15 @@
   list(re = re, im = im)
 }
 
+#' One-sided periodogram; power in units^2/Hz
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{freqs}, \code{power}.
+#' @export
 .morie_qrs_psd <- function(x, fs) {
   # One-sided periodogram; power in units^2/Hz.
   n <- length(x)
@@ -61,6 +97,15 @@
   list(freqs = fs * ks / n, power = power)
 }
 
+#' Peak set {p} of eq (4.6): above th and strictly greater than the m
+#'
+#' neighbours on each side.
+#'
+#' @param g See Usage.
+#' @param th See Usage.
+#' @param m See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_qrs_peaks <- function(g, th, m) {
   # Peak set {p} of eq (4.6): above th and strictly greater than the m
   # neighbours on each side.
@@ -80,6 +125,14 @@
   out
 }
 
+#' Pan-Tompkins bandpass: eq (4.8) lowpass then eq (4.13) highpass.  The
+#'
+#' coefficients are integers tied to fs = 200 Hz (book, Section 4.3.2)
+#' and are NOT rescaled here.
+#'
+#' @param x See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .morie_qrs_ptbp <- function(x) {
   # Pan-Tompkins bandpass: eq (4.8) lowpass then eq (4.13) highpass.  The
   # coefficients are integers tied to fs = 200 Hz (book, Section 4.3.2) and
@@ -104,6 +157,14 @@
   p
 }
 
+#' Pan-Tompkins derivative, eq (4.14)
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_qrs_ptderiv <- function(x) {
   # Pan-Tompkins derivative, eq (4.14).
   n <- length(x)
@@ -116,6 +177,15 @@
   out
 }
 
+#' Full Pan-Tompkins front end: bandpass, derivative, square, integrate
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{bp}, \code{dv}, \code{sq}, \code{ig}, \code{w}.
+#' @export
 .morie_qrs_chain <- function(x, fs) {
   # Full Pan-Tompkins front end: bandpass, derivative, square, integrate.
   bp <- .morie_qrs_ptbp(x)
@@ -125,6 +195,15 @@
   list(bp = bp, dv = dv, sq = sq, ig = .morie_qrs_mavg(sq, w), w = w)
 }
 
+#' .morie_qrs_corr
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .morie_qrs_corr <- function(a, b) {
   n <- length(a)
   if (n != length(b) || n < 2L) {
@@ -140,6 +219,16 @@
   .morie_fsum((a - ma) * (b - mb)) / sqrt(sa * sb)
 }
 
+#' .morie_qrs_check
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param least Defaults to \code{1L}.
+#' @param what Defaults to \code{"signal"}.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .morie_qrs_check <- function(x, least = 1L, what = "signal") {
   v <- if (is.null(x)) numeric(0) else as.numeric(x)
   if (length(v) < least) {
@@ -148,26 +237,69 @@
   v
 }
 
+#' .morie_qrs_fs
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param fs See Usage.
+#' @return The value of \code{fs}, as built in the body.
+#' @export
 .morie_qrs_fs <- function(fs) {
   fs <- as.numeric(fs)
   if (!(length(fs) == 1L && is.finite(fs) && fs > 0)) stop("fs must be positive")
   fs
 }
 
+#' .morie_qrs_median
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_qrs_median <- function(v) {
   s <- sort(v)
   m <- length(s)
   if (m %% 2L) s[m %/% 2L + 1L] else 0.5 * (s[m %/% 2L] + s[m %/% 2L + 1L])
 }
 
+#' .morie_qrs_mean
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_qrs_mean <- function(v) if (length(v)) .morie_fsum(v) / length(v) else NULL
 
+#' 0-based argmax over the half-open range [lo, hi); first max on ties,
+#'
+#' exactly as Python\'s max(range(...), key=...).
+#'
+#' @param v See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return A numeric value.
+#' @export
 .morie_qrs_argmax <- function(v, lo, hi) {
   # 0-based argmax over the half-open range [lo, hi); first max on ties,
   # exactly as Python's max(range(...), key=...).
   lo + which.max(v[(lo + 1L):hi]) - 1L
 }
 
+#' .morie_qrs_argmin
+#'
+#' Part of the rangayyan_qrs implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @return A numeric value.
+#' @export
 .morie_qrs_argmin <- function(v, lo, hi) {
   lo + which.min(v[(lo + 1L):hi]) - 1L
 }

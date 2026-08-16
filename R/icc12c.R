@@ -89,6 +89,18 @@ Icc12c <- function(X, model = "2,k") {
 # is accepted -- "ICC(2,k)", "2-k", "2k" -- and, because the paper labels its
 # own table with the concrete number of judges (ICC(1,4) for k = 4), a trailing
 # integer equal to k is read as the average-measure form.
+#' Normalise a form label to one of the six keys. Anything spelling out
+#' a form
+#'
+#' is accepted -- "ICC(2,k)", "2-k", "2k" -- and, because the paper
+#' labels its own table with the concrete number of judges (ICC(1,4) for
+#' k = 4), a trailing integer equal to k is read as the average-measure
+#' form.
+#'
+#' @param model See Usage.
+#' @param k See Usage.
+#' @return The value of \code{s}, as built in the body.
+#' @export
 .icc12c_form <- function(model, k) {
   s <- gsub("[^0-9k]", "", tolower(as.character(model)))
   if (nchar(s) == 2L && grepl("^[0-9]$", substr(s, 2L, 2L)) &&

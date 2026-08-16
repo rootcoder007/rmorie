@@ -81,6 +81,15 @@ FormFactor <- function(x) {
   )
 }
 
+#' .morie_rg_turns
+#'
+#' Part of the rangayyan_stat implementation; see the file header for
+#' the source it follows.
+#'
+#' @param seg See Usage.
+#' @param threshold See Usage.
+#' @return A list with \code{turns}, \code{positions}.
+#' @export
 .morie_rg_turns <- function(seg, threshold) {
   if (length(seg) < 3L) {
     return(list(turns = 0L, positions = integer(0)))
@@ -362,6 +371,15 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
   )
 }
 
+#' .morie_rg_periodogram
+#'
+#' Part of the rangayyan_stat implementation; see the file header for
+#' the source it follows.
+#'
+#' @param xs See Usage.
+#' @param fs See Usage.
+#' @return A list with \code{psd}, \code{freqs}.
+#' @export
 .morie_rg_periodogram <- function(xs, fs) {
   m <- length(xs)
   mu <- .morie_fsum(xs) / m

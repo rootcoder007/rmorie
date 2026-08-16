@@ -7,6 +7,14 @@
 
 .funmix_EPS <- 1e-12
 
+#' .funmix_rows
+#'
+#' Part of the funmix_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .funmix_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -22,6 +30,17 @@
 }
 
 # Clamped uniform knot vector for n_basis B-splines.
+#' Clamped uniform knot vector for n_basis B-splines
+#'
+#' Part of the funmix_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tmin See Usage.
+#' @param tmax See Usage.
+#' @param n_basis See Usage.
+#' @param degree See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .funmix_knots <- function(tmin, tmax, n_basis, degree) {
   n_int <- n_basis - degree - 1L
   if (n_int < 0L) stop("funmix: n_basis must be at least degree + 1")
@@ -31,6 +50,18 @@
 }
 
 # One row of the B-spline design, by the Cox-de Boor recursion.
+#' One row of the B-spline design, by the Cox-de Boor recursion
+#'
+#' Part of the funmix_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param kn See Usage.
+#' @param degree See Usage.
+#' @param n_basis See Usage.
+#' @param tmax See Usage.
+#' @return The value of \code{[}.
+#' @export
 .funmix_bspline_row <- function(x, kn, degree, n_basis, tmax) {
   m <- length(kn) - 1L
   N <- numeric(m)
@@ -54,6 +85,15 @@
 }
 
 # First principal direction by power iteration -- deterministic start.
+#' First principal direction by power iteration -- deterministic start
+#'
+#' Part of the funmix_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param C See Usage.
+#' @param p See Usage.
+#' @return A list with \code{score}, \code{pc}.
+#' @export
 .funmix_first_pc <- function(C, p) {
   n <- nrow(C)
   mean_ <- colMeans(C)
@@ -75,6 +115,15 @@
   list(score = as.numeric(Z %*% v), pc = v)
 }
 
+#' .funmix_cholsolve
+#'
+#' Part of the funmix_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @param b See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .funmix_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
@@ -237,6 +286,13 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
                      "two correct fits comparable"))
 }
 
+#' .funmix_cheatsheet
+#'
+#' Part of the funmix_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .funmix_cheatsheet <- function() {
   paste0("funmix: morie_funmix_functional_mixture(Y, K) -> EM clustering of ",
          "curves through a spline basis, canonically ordered components ",

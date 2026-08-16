@@ -71,6 +71,15 @@
 .sacrb_PUNCT_CHARS <- strsplit(.sacrb_PUNCT, "")[[1]]
 .sacrb_EPS <- 1e-12
 
+#' .sacrb_tokenize_13a
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param text See Usage.
+#' @param lowercase Defaults to \code{FALSE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .sacrb_tokenize_13a <- function(text, lowercase = FALSE) {
   s <- as.character(text)
   if (lowercase) {
@@ -91,6 +100,15 @@
   out
 }
 
+#' .sacrb_tokenize_intl
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param text See Usage.
+#' @param lowercase Defaults to \code{FALSE}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .sacrb_tokenize_intl <- function(text, lowercase = FALSE) {
   s <- as.character(text)
   if (lowercase) {
@@ -122,6 +140,16 @@
   out
 }
 
+#' .sacrb_tok
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param text See Usage.
+#' @param scheme See Usage.
+#' @param lowercase See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .sacrb_tok <- function(text, scheme, lowercase) {
   if (scheme == "13a") {
     return(.sacrb_tokenize_13a(text, lowercase))
@@ -145,6 +173,15 @@
                as.character(scheme)))
 }
 
+#' .sacrb_ngram_counts
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tokens See Usage.
+#' @param n See Usage.
+#' @return The value of \code{c}, as built in the body.
+#' @export
 .sacrb_ngram_counts <- function(tokens, n) {
   if (as.integer(n) < 1L) {
     stop("sacrb: n must be at least 1")
@@ -166,6 +203,16 @@
   c
 }
 
+#' .sacrb_modified_precision
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param cand_tokens See Usage.
+#' @param refs_tokens See Usage.
+#' @param n See Usage.
+#' @return A list with \code{numerator}, \code{denominator}, \code{precision}.
+#' @export
 .sacrb_modified_precision <- function(cand_tokens, refs_tokens, n) {
   cc <- .sacrb_ngram_counts(cand_tokens, n)
   if (length(cc) == 0L) {
@@ -200,6 +247,15 @@
   )
 }
 
+#' .sacrb_brevity_penalty
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param c See Usage.
+#' @param r See Usage.
+#' @return A numeric value.
+#' @export
 .sacrb_brevity_penalty <- function(c, r) {
   cv <- as.numeric(c)
   rv <- as.numeric(r)
@@ -212,6 +268,15 @@
   exp(1.0 - rv / cv)
 }
 
+#' .sacrb_best_match
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param clen See Usage.
+#' @param rlens See Usage.
+#' @return A numeric value.
+#' @export
 .sacrb_best_match <- function(clen, rlens) {
   if (length(rlens) == 0L) {
     return(0L)
@@ -313,6 +378,18 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
   )
 }
 
+#' .sacrb_signature
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param tokenizer Defaults to \code{"13a"}.
+#' @param lowercase Defaults to \code{FALSE}.
+#' @param max_n Defaults to \code{4L}.
+#' @param n_refs Defaults to \code{1L}.
+#' @param version Defaults to \code{"morie-sacrb-1"}.
+#' @return A character value.
+#' @export
 .sacrb_signature <- function(tokenizer = "13a", lowercase = FALSE,
                             max_n = 4L, n_refs = 1L,
                             version = "morie-sacrb-1") {
@@ -323,6 +400,13 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
          "|version:", version)
 }
 
+#' .sacrb_cheatsheet
+#'
+#' Part of the sacrb_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .sacrb_cheatsheet <- function() {
   paste0("sacrb: BLEU = BP * exp(sum w_n log p_n), with clipped ",
          "n-gram precision and BP = 1 if c > r else exp(1 - r/c). ",

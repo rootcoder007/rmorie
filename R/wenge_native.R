@@ -41,10 +41,28 @@
 
 .wenge_STRATEGIES <- c("em", "ye", "ym", "all")
 
+#' .wenge_key
+#'
+#' Part of the wenge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param row See Usage.
+#' @return A character value.
+#' @export
 .wenge_key <- function(row) {
   paste(sprintf("%.12g", round(as.numeric(row), 12)), collapse="|")
 }
 
+#' Nonparametric cell estimates of f(E|X) and f(M|E,X)
+#'
+#' Part of the wenge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ev See Usage.
+#' @param Mm See Usage.
+#' @param Xm See Usage.
+#' @return A list with \code{fe1}, \code{fm}.
+#' @export
 .wenge_saturated_models <- function(ev, Mm, Xm) {
   # Nonparametric cell estimates of f(E|X) and f(M|E,X).
   n <- length(ev)
@@ -84,6 +102,17 @@
   list(fe1=fe1, fm=fm)
 }
 
+#' Nonparametric E(Y | E, M, X) as a cell mean
+#'
+#' Part of the wenge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param yv See Usage.
+#' @param ev See Usage.
+#' @param Mm See Usage.
+#' @param Xm See Usage.
+#' @return The value of \code{function}.
+#' @export
 .wenge_saturated_outcome <- function(yv, ev, Mm, Xm) {
   # Nonparametric E(Y | E, M, X) as a cell mean.
   n <- length(yv)
@@ -104,6 +133,18 @@
   }
 }
 
+#' Logistic f(E|X), Gaussian f(M|E,X), linear E(Y|E,M,X)
+#'
+#' Part of the wenge_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param yv See Usage.
+#' @param ev See Usage.
+#' @param Mm See Usage.
+#' @param Xm See Usage.
+#' @param ridge See Usage.
+#' @return A list with \code{fe1}, \code{fm}, \code{ey}.
+#' @export
 .wenge_parametric_models <- function(yv, ev, Mm, Xm, ridge) {
   # Logistic f(E|X), Gaussian f(M|E,X), linear E(Y|E,M,X).
   n <- length(yv)

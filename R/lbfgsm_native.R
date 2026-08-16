@@ -28,6 +28,15 @@
 ## curvature condition is precisely what makes y's > 0, so the two
 ## conditions are load-bearing together.
 
+#' .lbfgsm_dot
+#'
+#' Part of the lbfgsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .lbfgsm_dot <- function(a, b) {
   sum(a * b)
 }
@@ -186,6 +195,13 @@ morie_lbfgsm <- function(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-8,
 lbfgs_minimize <- morie_lbfgsm
 lbfgsm <- morie_lbfgsm
 
+#' .lbfgsm_cheatsheet
+#'
+#' Part of the lbfgsm_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .lbfgsm_cheatsheet <- function() {
   "lbfgsm: L-BFGS two-loop recursion, H0 = (s'y/y'y) I, curvature pairs with y's <= 0 skipped, Armijo backtracking."
 }

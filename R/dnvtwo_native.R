@@ -31,6 +31,14 @@
 .dnvtwo_eps <- 1e-12
 
 # L2-normalise a single row vector.  Mirrors Python's _norm().
+#' L2-normalise a single row vector.  Mirrors Python\'s _norm()
+#'
+#' Part of the dnvtwo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .dnvtwo_norm_vec <- function(v) {
   v <- as.numeric(v)
   s2 <- sum(v * v)
@@ -38,6 +46,15 @@
 }
 
 # Cosine similarity between two numeric vectors.
+#' Cosine similarity between two numeric vectors
+#'
+#' Part of the dnvtwo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .dnvtwo_cos_raw <- function(a, b) {
   a <- .dnvtwo_norm_vec(a)
   b <- .dnvtwo_norm_vec(b)
@@ -45,6 +62,14 @@
 }
 
 # Coerce to list-of-rows of doubles (mirrors k.mat).
+#' Coerce to list-of-rows of doubles (mirrors k.mat)
+#'
+#' Part of the dnvtwo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{list}.
+#' @export
 .dnvtwo_mat <- function(x) {
   if (is.null(x)) return(list())
   if (is.matrix(x)) {
@@ -57,6 +82,14 @@
 }
 
 # Coerce to a single numeric vector (mirrors k.vec).
+#' Coerce to a single numeric vector (mirrors k.vec)
+#'
+#' Part of the dnvtwo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .dnvtwo_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)

@@ -89,6 +89,15 @@ morie_hook_lengths <- function(shape) {
 }
 
 # helper: exponent of prime p in n!, by Legendre's formula
+#' Helper: exponent of prime p in n!, by Legendre\'s formula
+#'
+#' Part of the algebraic_combinatorics_native implementation; see the
+#' file header for the source it follows.
+#'
+#' @param n See Usage.
+#' @param p See Usage.
+#' @return The value of \code{e}, as built in the body.
+#' @export
 .morie_legendre <- function(n, p) {
   e <- 0
   q <- p
@@ -106,6 +115,18 @@ morie_hook_lengths <- function(shape) {
 # remainder is itself prime -- it must still be RECORDED, not discarded.
 # Dropping it silently would understate the hook product and make the
 # division look inexact.
+#' Trial division stops once p^2 exceeds what is left, at which point
+#' the
+#'
+#' remainder is itself prime -- it must still be RECORDED, not
+#' discarded. Dropping it silently would understate the hook product and
+#' make the division look inexact.
+#'
+#' @param x See Usage.
+#' @param exps See Usage.
+#' @param primes See Usage.
+#' @return A list with \code{exps}, \code{remainder}.
+#' @export
 .morie_factorise <- function(x, exps, primes) {
   for (idx in seq_along(primes)) {
     p <- primes[idx]
@@ -224,6 +245,14 @@ morie_standard_tableaux_count <- function(shape) {
 }
 
 # small sieve; hook lengths never exceed n, so this is all we need
+#' Small sieve; hook lengths never exceed n, so this is all we need
+#'
+#' Part of the algebraic_combinatorics_native implementation; see the
+#' file header for the source it follows.
+#'
+#' @param n See Usage.
+#' @return The value of \code{which}.
+#' @export
 .morie_primes_upto <- function(n) {
   n <- as.integer(n)
   if (n < 2L) {

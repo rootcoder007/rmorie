@@ -36,7 +36,22 @@ LOG10E <- log10(exp(1))
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
+#' Base R has no erf/erfc; both are pnorm in disguise. Defined here so
+#'
+#' the arm stays base-R only, as the package requires.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .rqtmpl_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+#' .rqtmpl_erfc
+#'
+#' Part of the rqtmpl_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .rqtmpl_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 #' morie_haldane
@@ -99,6 +114,14 @@ morie_genotype_probabilities <- function(left, right, r_left, r_right) {
 
 # Gaussian log-likelihood of a residual vector with variance sigma2.
 # Internal helper mirroring _normal_ll.
+#' Gaussian log-likelihood of a residual vector with variance sigma2
+#'
+#' Internal helper mirroring _normal_ll.
+#'
+#' @param resid See Usage.
+#' @param sigma2 See Usage.
+#' @return A numeric value.
+#' @export
 .normal_ll <- function(resid, sigma2) {
   n <- length(resid)
   -0.5 * n * log(2 * pi * sigma2) - sum(resid * resid) / (2 * sigma2)

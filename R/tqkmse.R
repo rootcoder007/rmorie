@@ -19,6 +19,15 @@
 #'   "vdLaan-ICLR2026-arxiv-2504.19874"; arXiv 2504.19874 is Zandieh et
 #'   al.'s TurboQuant, not a van der Laan paper.
 
+#' .kvmse_rotation
+#'
+#' Part of the tqkmse implementation; see the file header for the source
+#' it follows.
+#'
+#' @param d See Usage.
+#' @param seed See Usage.
+#' @return The value of \code{Q}, as built in the body.
+#' @export
 .kvmse_rotation <- function(d, seed) {
   g <- .t1_lcg(seed)
   A <- matrix(0, d, d)
@@ -35,6 +44,18 @@
   Q
 }
 
+#' .kvmse_codebook
+#'
+#' Part of the tqkmse implementation; see the file header for the source
+#' it follows.
+#'
+#' @param b See Usage.
+#' @param iters Defaults to \code{200}.
+#' @param grid Defaults to \code{2001}.
+#' @param lo Defaults to \code{-6}.
+#' @param hi Defaults to \code{6}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .kvmse_codebook <- function(b, iters = 200, grid = 2001, lo = -6, hi = 6) {
   K <- 2^as.integer(b)
   n <- as.integer(grid)
@@ -54,6 +75,15 @@
   as.numeric(c0)
 }
 
+#' .kvmse_quantize
+#'
+#' Part of the tqkmse implementation; see the file header for the source
+#' it follows.
+#'
+#' @param y See Usage.
+#' @param cb See Usage.
+#' @return A numeric value.
+#' @export
 .kvmse_quantize <- function(y, cb) {
   d <- abs(outer(as.numeric(y), cb, "-"))
   as.integer(max.col(-d, ties.method = "first")) - 1L

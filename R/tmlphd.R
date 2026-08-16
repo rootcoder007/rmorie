@@ -1,9 +1,31 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+#' SPDX-License-Identifier: AGPL-3.0-or-later
+#'
+#' Part of the tmlphd implementation; see the file header for the source
+#' it follows.
+#'
+#' @param z See Usage.
+#' @param t See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .tmlphd_soft <- function(z, t) if (z > t) z - t else if (z < -t) z + t else 0
 
 ## Cyclic coordinate descent for a weighted lasso; column 1 unpenalised.
 ## Fixed sweep count and fixed cyclic order, so both language arms take
 ## the same path even where the objective has a flat direction.
+#' # Cyclic coordinate descent for a weighted lasso; column 1
+#' unpenalised
+#'
+#' # Fixed sweep count and fixed cyclic order, so both language arms
+#' take # the same path even where the objective has a flat direction.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lam See Usage.
+#' @param w Defaults to \code{NULL}.
+#' @param sweeps Defaults to \code{400L}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .tmlphd_lasso <- function(X, y, lam, w = NULL, sweeps = 400L) {
   X <- as.matrix(X); y <- as.numeric(y)
   n <- nrow(X); p <- ncol(X)
@@ -25,6 +47,18 @@
 }
 
 ## Proximal-Newton L1 logistic: IRLS outside, weighted lasso inside.
+#' # Proximal-Newton L1 logistic: IRLS outside, weighted lasso inside
+#'
+#' Part of the tmlphd implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param lam See Usage.
+#' @param outer Defaults to \code{15L}.
+#' @param sweeps Defaults to \code{60L}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .tmlphd_lasso_logit <- function(X, y, lam, outer = 15L, sweeps = 60L) {
   X <- as.matrix(X); y <- as.numeric(y)
   beta <- numeric(ncol(X))

@@ -50,6 +50,14 @@
 
 STEP_RULES <- c("fixed", "backtracking", "fista")
 
+#' .pgdsdg_norm
+#'
+#' Part of the pgdsdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @return A numeric value.
+#' @export
 .pgdsdg_norm <- function(v) {
   sqrt(sum(v * v))
 }
@@ -133,6 +141,15 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
   c + d * r / nrm
 }
 
+#' .pgdsdg_project_simplex
+#'
+#' Part of the pgdsdg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param total Defaults to \code{1}.
+#' @return The value of \code{pmax}.
+#' @export
 .pgdsdg_project_simplex <- function(x, total = 1.0) {
   s <- as.numeric(total)
   if (s <= 0) {

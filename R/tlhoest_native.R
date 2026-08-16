@@ -29,6 +29,15 @@
 
 .tlhoest_EPS <- 1e-12
 
+#' .tlhoest_first_order_expansion
+#'
+#' Part of the tlhoest_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param D1 See Usage.
+#' @param psi_plugin See Usage.
+#' @return A list with \code{estimate}, \code{mean_D1}, \code{order}, \code{note}.
+#' @export
 .tlhoest_first_order_expansion <- function(D1, psi_plugin) {
   d <- as.numeric(D1)
   n <- length(d)
@@ -44,6 +53,16 @@
   )
 }
 
+#' .tlhoest_second_order_term
+#'
+#' Part of the tlhoest_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param D2_kernel See Usage.
+#' @param O See Usage.
+#' @param exclude_diagonal Defaults to \code{TRUE}.
+#' @return A list with \code{value}, \code{n_pairs}, \code{cost}, \code{note}.
+#' @export
 .tlhoest_second_order_term <- function(D2_kernel, O, exclude_diagonal = TRUE) {
   obs <- as.list(O)
   n <- length(obs)

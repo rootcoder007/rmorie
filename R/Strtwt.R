@@ -47,6 +47,16 @@ Strtwt <- function(A, H = NULL, S = NULL) {
        method = "sw = f(A|S) / f(A|H,S), stabilized IPTW [Cole & Hernan 2008]")
 }
 
+#' .strtwt_cols
+#'
+#' Part of the Strtwt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param X See Usage.
+#' @param n See Usage.
+#' @param nm See Usage.
+#' @return The value of \code{M}, as built in the body.
+#' @export
 .strtwt_cols <- function(X, n, nm) {
   if (is.null(X)) return(matrix(numeric(0), n, 0))
   M <- .s03mat(X)
@@ -54,6 +64,15 @@ Strtwt <- function(A, H = NULL, S = NULL) {
   M
 }
 
+#' .strtwt_fit
+#'
+#' Part of the Strtwt implementation; see the file header for the source
+#' it follows.
+#'
+#' @param Z See Usage.
+#' @param a See Usage.
+#' @return The value of \code{pmin}.
+#' @export
 .strtwt_fit <- function(Z, a) {
   b <- .s03logit(Z, a, 60L)
   p <- vapply(.s03matvec(Z, b), .s03sigmoid, 0)

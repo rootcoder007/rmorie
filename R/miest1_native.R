@@ -4,6 +4,15 @@
 # Mirrors Python morie.fn.miest1 exactly (same max-norm, same
 # tie-breaking on the joint-neighbour ordering).
 
+#' .mi_maxnorm
+#'
+#' Part of the miest1_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .mi_maxnorm <- function(a, b) max(abs(a - b))
 
 #' Mutual information by k-nearest-neighbour statistics (KSG)

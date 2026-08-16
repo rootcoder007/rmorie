@@ -29,6 +29,20 @@
 # Refinement stops while adjacent grid values still differ by far more than
 # floating-point noise. Going finer would push the comparison back below the
 # noise floor and reintroduce exactly the disagreement this exists to remove.
+#' Refinement stops while adjacent grid values still differ by far more
+#' than
+#'
+#' floating-point noise. Going finer would push the comparison back
+#' below the noise floor and reintroduce exactly the disagreement this
+#' exists to remove.
+#'
+#' @param f See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param points Defaults to \code{201L}.
+#' @param stages Defaults to \code{4L}.
+#' @return The value of \code{a}, as built in the body.
+#' @export
 .rrblpr_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
   a <- as.numeric(lo); b <- as.numeric(hi)
   npt <- as.integer(points)
@@ -50,6 +64,14 @@
   a
 }
 
+#' .rrblpr_rows
+#'
+#' Part of the rrblpr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .rrblpr_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -60,6 +82,14 @@
 }
 
 # Cholesky factor, lower triangular, with a scaled jitter.
+#' Cholesky factor, lower triangular, with a scaled jitter
+#'
+#' Part of the rrblpr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .rrblpr_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -81,6 +111,15 @@
   L
 }
 
+#' .rrblpr_chol_solve
+#'
+#' Part of the rrblpr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .rrblpr_chol_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -98,9 +137,28 @@
   x
 }
 
+#' .rrblpr_logdet
+#'
+#' Part of the rrblpr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @return A numeric value.
+#' @export
 .rrblpr_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 # Restricted log likelihood at lambda, profiled over sigma_e^2.
+#' Restricted log likelihood at lambda, profiled over sigma_e^2
+#'
+#' Part of the rrblpr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param loglam See Usage.
+#' @param G See Usage.
+#' @param y See Usage.
+#' @param X See Usage.
+#' @return A list with \code{ll}, \code{lam}, \code{beta}, \code{s2e}, \code{L}.
+#' @export
 .rrblpr_reml_at <- function(loglam, G, y, X) {
   n <- length(y); p <- ncol(X)
   lam <- exp(loglam)
@@ -257,6 +315,13 @@ morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
                      "rather than merely plausible"))
 }
 
+#' .rrblpr_cheatsheet
+#'
+#' Part of the rrblpr_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .rrblpr_cheatsheet <- function() {
   paste0("rrblpr: morie_rrblpr_rr_blup(y, M, lam) -> marker effects and ",
          "breeding values from the mixed model equations, lambda by REML ",

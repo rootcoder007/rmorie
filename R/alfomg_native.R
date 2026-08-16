@@ -44,6 +44,14 @@
 #   Vaswani, A. et al. (2017) "Attention is all you need." NeurIPS 30,
 #     5998-6008.
 
+#' .alfomg_shape
+#'
+#' Part of the alfomg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param msa See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .alfomg_shape <- function(msa) {
   s <- length(msa)
   if (s == 0L) stop("an alignment with no sequences has nothing to say")

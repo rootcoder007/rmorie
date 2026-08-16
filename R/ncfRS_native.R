@@ -57,6 +57,14 @@
 
 .ncfRS_EPS <- 1e-12
 
+#' .ncfRS_sig
+#'
+#' Part of the ncfRS_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .ncfRS_sig <- function(x) {
   if (x > -700) {
     1.0 / (1.0 + exp(-x))

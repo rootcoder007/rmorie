@@ -3,6 +3,14 @@
 # Park-Miller multiplicative LCG: a bootstrap needs an INDEPENDENT
 # stream, not a low-discrepancy one -- a shared quasi-random sequence
 # correlates the resample positions and shrinks the bootstrap spread.
+#' Park-Miller multiplicative LCG: a bootstrap needs an INDEPENDENT
+#'
+#' stream, not a low-discrepancy one -- a shared quasi-random sequence
+#' correlates the resample positions and shrinks the bootstrap spread.
+#'
+#' @param seed See Usage.
+#' @return The value of \code{function}.
+#' @export
 .msm_lcg <- function(seed) {
   st <- as.numeric(seed) %% 2147483647
   if (st == 0) st <- 1

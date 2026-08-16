@@ -12,6 +12,15 @@
 #
 # R mirror of morie/src/morie/fn/survmore.py.
 
+#' .ms_check
+#'
+#' Part of the survival_more implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @return A list with \code{t}, \code{e}.
+#' @export
 .ms_check <- function(time, event) {
   t <- as.numeric(time); e <- as.integer(event)
   if (length(t) != length(e))
@@ -22,6 +31,15 @@
   list(t = t, e = e)
 }
 
+#' .ms_km
+#'
+#' Part of the survival_more implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @return A list with \code{time}, \code{surv}, \code{n_risk}, \code{n_event}, \code{greenwood}.
+#' @export
 .ms_km <- function(time, event) {
   z <- .ms_check(time, event); t <- z$t; e <- z$e
   ut <- sort(unique(t[e == 1L]))
@@ -37,6 +55,17 @@
   list(time = ut, surv = S, n_risk = nr, n_event = ne, greenwood = gw)
 }
 
+#' Breslow cumulative baseline hazard, what survival::basehaz returns
+#'
+#' Part of the survival_more implementation; see the file header for the
+#' source it follows.
+#'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X See Usage.
+#' @param beta See Usage.
+#' @return A list with \code{time}, \code{cumhaz}, \code{weight}.
+#' @export
 .ms_baseline <- function(time, event, X, beta) {
   # Breslow cumulative baseline hazard, what survival::basehaz returns
   z <- .ms_check(time, event); t <- z$t; e <- z$e
@@ -57,6 +86,16 @@
   list(time = ut, cumhaz = H, weight = w)
 }
 
+#' .ms_h0_at
+#'
+#' Part of the survival_more implementation; see the file header for the
+#' source it follows.
+#'
+#' @param ut See Usage.
+#' @param H See Usage.
+#' @param t See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .ms_h0_at <- function(ut, H, t) {
   vapply(t, function(x) {
     k <- sum(ut <= x)
@@ -696,6 +735,17 @@ Turnbull <- function(left, right, max_iter = 1000L,
 
 .ms_dists <- c("exponential", "weibull", "lognormal", "loglogistic")
 
+#' .ms_logsf_logpdf
+#'
+#' Part of the survival_more implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dist See Usage.
+#' @param y See Usage.
+#' @param mu See Usage.
+#' @param logsig See Usage.
+#' @return Nothing; this branch always raises.
+#' @export
 .ms_logsf_logpdf <- function(dist, y, mu, logsig) {
   sig <- exp(logsig); z <- (y - mu) / sig
   if (dist %in% c("weibull", "exponential")) {
@@ -715,6 +765,17 @@ Turnbull <- function(left, right, max_iter = 1000L,
                paste(.ms_dists, collapse = ", ")))
 }
 
+#' .ms_fit_lls
+#'
+#' Part of the survival_more implementation; see the file header for the
+#' source it follows.
+#'
+#' @param dist See Usage.
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @return A list with \code{dist}, \code{coef}, \code{log_scale}, \code{scale}, \code{loglik}, \code{n_par}, \code{n}, \code{n_events}, \code{aic}, \code{bic}, \code{fixed_scale}, \code{convergence}.
+#' @export
 .ms_fit_lls <- function(dist, time, event, X = NULL) {
   z <- .ms_check(time, event); t <- z$t; e <- z$e
   if (any(t <= 0))

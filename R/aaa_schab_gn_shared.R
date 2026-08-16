@@ -28,6 +28,19 @@
 # Internal. The `aaa_` prefix collates this before its callers -- R never
 # sources a file whose name starts with a non-alphanumeric character.
 
+#' D gamma(h; c0, sigma0^2, a) / d(c0, sigma0^2, a), one row per lag
+#'
+#' d gamma / d c0 = 1 d gamma / d sigma0^2 = 1 - R(h; a) d gamma / d a =
+#' -sigma0^2 dR/da Every row is zero at h = 0, where gamma(0) = 0 by
+#' definition whatever the nugget (Sec. 4.3.6).
+#'
+#' @param h See Usage.
+#' @param nugget See Usage.
+#' @param sill See Usage.
+#' @param rng See Usage.
+#' @param model See Usage.
+#' @return The value of \code{jac}, as built in the body.
+#' @export
 .schab_semivariogram_jacobian <- function(h, nugget, sill, rng, model) {
   # d gamma(h; c0, sigma0^2, a) / d(c0, sigma0^2, a), one row per lag.
   #   d gamma / d c0       = 1
@@ -57,6 +70,16 @@
   jac
 }
 
+#' OLS is R = phi I, so the weights are 1. WLS uses Cressie\'s (1985)
+#'
+#' approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|,
+#' whose reciprocal is the weight in (4.34).
+#'
+#' @param kind See Usage.
+#' @param fitted See Usage.
+#' @param counts See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .schab_gn_weights <- function(kind, fitted, counts) {
   # OLS is R = phi I, so the weights are 1. WLS uses Cressie's (1985)
   # approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|, whose
@@ -68,12 +91,36 @@
   ifelse(denom > 0, counts / ifelse(denom > 0, denom, 1), 0)
 }
 
+#' Onto the parameter space of Sec. 4.3: variances >= 0, a range > 0.
+#' This is
+#'
+#' the constraint the model imposes, not a search box.
+#'
+#' @param theta See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .schab_gn_project <- function(theta) {
   # Onto the parameter space of Sec. 4.3: variances >= 0, a range > 0. This is
   # the constraint the model imposes, not a search box.
   c(max(theta[1], 0), max(theta[2], 0), max(theta[3], .Machine$double.xmin))
 }
 
+#' .schab_gauss_newton
+#'
+#' Part of the schab_gn_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param lags See Usage.
+#' @param ghat See Usage.
+#' @param counts See Usage.
+#' @param start See Usage.
+#' @param model Defaults to \code{"exponential"}.
+#' @param kind Defaults to \code{"wls"}.
+#' @param max_iter Defaults to \code{200L}.
+#' @param tol Defaults to \code{1e-12}.
+#' @param max_halvings Defaults to \code{40L}.
+#' @return A list with \code{theta}, \code{objective}, \code{converged}, \code{iterations}.
+#' @export
 .schab_gauss_newton <- function(lags, ghat, counts, start, model = "exponential",
                                 kind = "wls", max_iter = 200L, tol = 1e-12,
                                 max_halvings = 40L) {

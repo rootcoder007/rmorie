@@ -87,6 +87,16 @@ morie_phacf3_bin <- function(d, edges) {
 # a is strictly smaller. Written out rather than leaning on a string
 # encoding, so the ordering is the ordering of the numbers and not of
 # their spellings.
+#' Lexicographic comparison of two length-six integer vectors: TRUE when
+#'
+#' a is strictly smaller. Written out rather than leaning on a string
+#' encoding, so the ordering is the ordering of the numbers and not of
+#' their spellings.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A logical value.
+#' @export
 .phacf3_less <- function(a, b) {
   for (i in seq_len(6L)) {
     if (a[i] < b[i]) return(TRUE)
@@ -133,6 +143,14 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 # A key's string form, zero padded so that byte order is numeric order.
 # Only used to index the lookup table; the ORDERING of the bit space is
 # done on the numbers themselves.
+#' A key\'s string form, zero padded so that byte order is numeric order
+#'
+#' Only used to index the lookup table; the ORDERING of the bit space is
+#' done on the numbers themselves.
+#'
+#' @param k See Usage.
+#' @return A character value.
+#' @export
 .phacf3_str <- function(k)
   sprintf("%02d,%02d,%02d,%02d,%02d,%02d", k[1], k[2], k[3], k[4], k[5],
           k[6])
@@ -177,6 +195,15 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
   list(keys = keep, strings = seen, index = idx)
 }
 
+#' .phacf3_dist
+#'
+#' Part of the phacf3_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .phacf3_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Tanimoto coefficient of two equal-length fingerprints

@@ -5,6 +5,15 @@
 # genome.pdf).  Mirrors Python morie.fn.hapblk exactly (same grid
 # profile-likelihood CI).
 
+#' .hapblk_ci
+#'
+#' Part of the hapblk_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param h See Usage.
+#' @param grid Defaults to \code{200}.
+#' @return A vector, from \code{c}.
+#' @export
 .hapblk_ci <- function(h, grid = 200) {
   n <- sum(h)
   if (n == 0) return(c(0, 0, 0))

@@ -4,6 +4,15 @@
 # (fetched-wave3/Evolutionary trees from DNA sequences- A maximum
 # likelihood approach.pdf).  Mirrors Python morie.fn.felsen exactly.
 
+#' .felsen_pij
+#'
+#' Part of the felsen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param t See Usage.
+#' @param pi See Usage.
+#' @return The value of \code{P}, as built in the body.
+#' @export
 .felsen_pij <- function(t, pi) {
   e <- exp(-t)
   P <- matrix(rep(pi, each = 4) * (1 - e), 4, 4)
@@ -11,6 +20,16 @@
   P
 }
 
+#' .felsen_prune
+#'
+#' Part of the felsen_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param node See Usage.
+#' @param site See Usage.
+#' @param pi See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .felsen_prune <- function(node, site, pi) {
   if (is.character(node)) {
     s <- match(site[[node]], c("A", "C", "G", "T"))

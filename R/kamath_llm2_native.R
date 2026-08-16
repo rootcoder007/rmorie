@@ -29,25 +29,66 @@
 
 # ---------------------------------------------------------------- helpers
 
+#' .morie_km2_soft
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param z See Usage.
+#' @return A numeric value.
+#' @export
 .morie_km2_soft <- function(z) {
   z <- as.numeric(z)
   e <- exp(z - max(z))
   e / sum(e)
 }
 
+#' .morie_km2_sig
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param z See Usage.
+#' @return The value of \code{ifelse}.
+#' @export
 .morie_km2_sig <- function(z) {
   ifelse(z >= 0, 1 / (1 + exp(-abs(z))), exp(-abs(z)) / (1 + exp(-abs(z))))
 }
 
+#' .morie_km2_lse_rows
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param M See Usage.
+#' @return A numeric value.
+#' @export
 .morie_km2_lse_rows <- function(M) {
   m <- apply(M, 1, max)
   m + log(rowSums(exp(M - m)))
 }
 
+#' .morie_km2_rowce
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param logits See Usage.
+#' @return A numeric value.
+#' @export
 .morie_km2_rowce <- function(logits) {
   .morie_km2_lse_rows(logits) - diag(logits)
 }
 
+#' .morie_km2_dist
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param p See Usage.
+#' @param name See Usage.
+#' @return The value of \code{p}, as built in the body.
+#' @export
 .morie_km2_dist <- function(p, name) {
   p <- as.numeric(p)
   if (length(p) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -60,11 +101,36 @@
   p
 }
 
+#' .morie_km2_ord
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{order}.
+#' @export
 .morie_km2_ord <- function(v) order(v, decreasing = TRUE)
 
 # Stable descending order matching numpy argsort(-v, kind="stable").
+#' Stable descending order matching numpy argsort(-v, kind="stable")
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param v See Usage.
+#' @return The value of \code{order}.
+#' @export
 .morie_km2_stable_desc <- function(v) order(-v, seq_along(v))
 
+#' .morie_km2_ngrams
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param tokens See Usage.
+#' @param n See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_km2_ngrams <- function(tokens, n) {
   L <- length(tokens)
   if (L < n) return(character(0))
@@ -73,12 +139,29 @@
          character(1))
 }
 
+#' .morie_km2_counts
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param keys See Usage.
+#' @return The value of \code{stats::setNames}.
+#' @export
 .morie_km2_counts <- function(keys) {
   if (length(keys) == 0L) return(integer(0))
   tb <- table(keys)
   stats::setNames(as.integer(tb), names(tb))
 }
 
+#' .morie_km2_layer_norm
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param x See Usage.
+#' @param eps Defaults to \code{1e-05}.
+#' @return A numeric value.
+#' @export
 .morie_km2_layer_norm <- function(x, eps = 1e-5) {
   x <- as.matrix(x)
   mu <- rowMeans(x)
@@ -87,6 +170,16 @@
 }
 
 # kmclm's core: causal-LM cross entropy over non-ignored positions.
+#' Kmclm\'s core: causal-LM cross entropy over non-ignored positions
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param logits See Usage.
+#' @param targets See Usage.
+#' @param ignore_index Defaults to \code{-100L}.
+#' @return A list with \code{loss}, \code{perplexity}, \code{token_losses}, \code{n_tokens}, \code{vocab_size}.
+#' @export
 .morie_km2_causal_lm_loss <- function(logits, targets, ignore_index = -100L) {
   logits <- as.matrix(logits)
   tgt <- as.integer(targets)
@@ -109,6 +202,16 @@
 }
 
 # rmsnr's core.
+#' Rmsnr\'s core
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param x See Usage.
+#' @param gamma Defaults to \code{NULL}.
+#' @param eps Defaults to \code{1e-06}.
+#' @return A list with \code{tensor}, \code{rms}.
+#' @export
 .morie_km2_rms <- function(x, gamma = NULL, eps = 1e-6) {
   X <- if (is.matrix(x)) x else matrix(as.numeric(x), nrow = 1L)
   r <- sqrt(rowMeans(X^2) + eps)
@@ -118,6 +221,16 @@
 }
 
 # toppd's core: nucleus truncation of temperature-scaled logits.
+#' Toppd\'s core: nucleus truncation of temperature-scaled logits
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param z See Usage.
+#' @param p See Usage.
+#' @param T Defaults to \code{1}.
+#' @return A list with \code{tensor}, \code{keep_mask}, \code{n_kept}.
+#' @export
 .morie_km2_top_p <- function(z, p, T = 1) {
   q <- .morie_km2_soft(as.numeric(z) / T)
   ord <- order(q, decreasing = TRUE)
@@ -133,6 +246,16 @@
 # Exact min-cost transport (successive shortest augmenting path with
 # Bellman-Ford potentials); ports km122's _solve_transport, and km/kmmsc's
 # WMD reads its objective off the same core.
+#' Exact min-cost transport (successive shortest augmenting path with
+#'
+#' Bellman-Ford potentials); ports km122\'s _solve_transport, and
+#' km/kmmsc\'s WMD reads its objective off the same core.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param C See Usage.
+#' @return A list with \code{flow}, \code{u}, \code{v}.
+#' @export
 .morie_km2_transport <- function(a, b, C) {
   m <- length(a); n <- length(b)
   Fm <- matrix(0, m, n)
@@ -337,6 +460,16 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
        method = "cloze knowledge probe (Kamath Eq 3.4)")
 }
 
+#' .morie_km2_fill_template
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param template See Usage.
+#' @param x See Usage.
+#' @param z See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_fill_template <- function(template, x, z) {
   if (!is.character(template) || !grepl("[x]", template, fixed = TRUE)) {
     stop("the template must be a string with an [x] slot.", call. = FALSE)
@@ -353,6 +486,17 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
   list(gsub("[z]", z, out, fixed = TRUE), TRUE)
 }
 
+#' .morie_km2_tmpl_result
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param prompt See Usage.
+#' @param filled See Usage.
+#' @param eq See Usage.
+#' @param template See Usage.
+#' @return A list with \code{prompt}, \code{slot_filled}, \code{template}, \code{tokens}, \code{estimate}, \code{n}, \code{method}.
+#' @export
 .morie_km2_tmpl_result <- function(prompt, filled, eq, template) {
   tokens <- strsplit(trimws(prompt), "\\s+")[[1]]
   list(prompt = prompt, slot_filled = filled, template = template,
@@ -542,6 +686,18 @@ morie_kamath_ch3_prefix_tuning_obj <- function(phi, x, y, h, Y_idx = NULL) {
 
 # ------------------------------------------------------------ Ch 4: PEFT
 
+#' .morie_km2_adapter_core
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param H_o See Usage.
+#' @param H_in See Usage.
+#' @param W_down See Usage.
+#' @param W_up See Usage.
+#' @param f See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_adapter_core <- function(H_o, H_in, W_down, W_up, f) {
   H_o <- as.matrix(H_o); H_in <- as.matrix(H_in)
   Wd <- as.matrix(W_down); Wu <- as.matrix(W_up)
@@ -589,6 +745,16 @@ morie_kamath_ch4_parallel_adapter <- function(H_o, H_i, W_down, W_up,
        method = "parallel adapter (Kamath Eq 4.2)")
 }
 
+#' .morie_km2_seq_obj
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param model See Usage.
+#' @param x See Usage.
+#' @param y See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_seq_obj <- function(model, x, y) {
   xs <- as.list(x); ys <- lapply(y, as.list)
   if (length(xs) == 0L) stop("Z is empty.", call. = FALSE)
@@ -713,6 +879,17 @@ morie_kamath_ch4_krona_efficient <- function(A, B, x) {
        method = "KronA matrix-free product (Kamath Eq 4.7)")
 }
 
+#' .morie_km2_tuned
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param W See Usage.
+#' @param A_k See Usage.
+#' @param B_k See Usage.
+#' @param s See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_tuned <- function(W, A_k, B_k, s) {
   Wm <- as.matrix(W)
   K <- kronecker(as.matrix(A_k), as.matrix(B_k))
@@ -756,6 +933,16 @@ morie_kamath_ch4_krona_output <- function(X, W, A_k, B_k, s) {
        method = "KronA layer output (Kamath Eq 4.8)")
 }
 
+#' .morie_km2_diag
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param v See Usage.
+#' @param name See Usage.
+#' @param size See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .morie_km2_diag <- function(v, name, size) {
   v <- if (is.matrix(v)) {
     if (nrow(v) != ncol(v) || !isTRUE(all.equal(v, diag(diag(v)),
@@ -824,6 +1011,14 @@ morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
 
 # ------------------------------------------------------- Ch 5: alignment
 
+#' .morie_km2_bt_loss
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param margins See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_bt_loss <- function(margins) {
   m <- as.numeric(margins)
   if (length(m) == 0L) stop("no preference pairs.", call. = FALSE)
@@ -1086,6 +1281,16 @@ morie_kamath_ch5_pref_sigmoid_form <- function(r_star) {
        method = "preference as sigmoid of the margin (Kamath Eq 5.9)")
 }
 
+#' .morie_km2_implicit_rewards
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param pi_star See Usage.
+#' @param pi_ref See Usage.
+#' @param beta See Usage.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_km2_implicit_rewards <- function(pi_star, pi_ref, beta) {
   beta <- as.numeric(beta)
   if (beta <= 0) stop("beta must be strictly positive.", call. = FALSE)
@@ -1257,6 +1462,16 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
        method = "AlignScore joint loss (Kamath Eq 6.3)")
 }
 
+#' .morie_km2_cos_mean
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param a See Usage.
+#' @param W See Usage.
+#' @param name See Usage.
+#' @return A numeric value.
+#' @export
 .morie_km2_cos_mean <- function(a, W, name) {
   A <- as.matrix(W)
   if (nrow(A) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -1270,11 +1485,32 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
   mean(as.numeric(A %*% a) / (nw * na))
 }
 
+#' .morie_km2_weat_s
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param a See Usage.
+#' @param W_1 See Usage.
+#' @param W_2 See Usage.
+#' @return A numeric value.
+#' @export
 .morie_km2_weat_s <- function(a, W_1, W_2) {
   a <- as.numeric(a)
   .morie_km2_cos_mean(a, W_1, "W_1") - .morie_km2_cos_mean(a, W_2, "W_2")
 }
 
+#' .morie_km2_weat_sums
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param A_1 See Usage.
+#' @param A_2 See Usage.
+#' @param W_1 See Usage.
+#' @param W_2 See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_weat_sums <- function(A_1, A_2, W_1, W_2) {
   a1 <- as.matrix(A_1); a2 <- as.matrix(A_2)
   if (nrow(a1) == 0L || nrow(a2) == 0L) {
@@ -1430,6 +1666,16 @@ morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
        method = "Categorical Bias Score (Kamath Eq 6.9)")
 }
 
+#' .morie_km2_log_probs
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param items See Usage.
+#' @param scorer See Usage.
+#' @param name See Usage.
+#' @return A vector, from \code{vapply}.
+#' @export
 .morie_km2_log_probs <- function(items, scorer, name) {
   seqv <- as.list(items)
   if (length(seqv) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -1566,11 +1812,28 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
        method = "Co-Occurrence Bias Score (Kamath Eq 6.14)")
 }
 
+#' .morie_km2_tokens
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param Y See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_km2_tokens <- function(Y) {
   if (is.character(Y) && length(Y) == 1L) strsplit(trimws(Y), "\\s+")[[1]]
   else unlist(Y)
 }
 
+#' .morie_km2_count_word
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param word See Usage.
+#' @param outputs See Usage.
+#' @return A numeric value.
+#' @export
 .morie_km2_count_word <- function(word, outputs) {
   sum(vapply(outputs, function(Y) sum(.morie_km2_tokens(Y) == word),
              numeric(1)))
@@ -1646,6 +1909,16 @@ morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
        n = length(groups), method = "HONEST score (Kamath Eq 6.17)")
 }
 
+#' .morie_km2_pair_vectors
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param A See Usage.
+#' @param E See Usage.
+#' @param name See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_km2_pair_vectors <- function(A, E, name) {
   emb <- if (is.function(E)) E else function(a) {
     if (!(a %in% names(E))) stop("a word has no embedding.", call. = FALSE)
@@ -1790,6 +2063,16 @@ morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
        method = "equalising log-probability-ratio regulariser (Eq 6.22)")
 }
 
+#' .morie_km2_tox_scores
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param Yhat See Usage.
+#' @param c See Usage.
+#' @param name Defaults to \code{"Yhat"}.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_tox_scores <- function(Yhat, c, name = "Yhat") {
   outs <- as.list(Yhat)
   if (length(outs) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -1876,6 +2159,16 @@ morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
        method = "chain rule sequence probability (Kamath Eq 6.26)")
 }
 
+#' .morie_km2_hidden
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param f See Usage.
+#' @param c See Usage.
+#' @param name See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
 .morie_km2_hidden <- function(f, c, name) {
   v <- if (is.null(f)) c else if (is.function(f)) f(c) else f
   v <- as.numeric(v)
@@ -2273,6 +2566,16 @@ morie_kamath_ch8_rouge_n <- function(S, gram_n, candidate = NULL) {
        n = length(refs), method = sprintf("ROUGE-%d recall (Kamath Eq 8.6)", n))
 }
 
+#' .morie_km2_sim_matrix
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param x See Usage.
+#' @param xhat See Usage.
+#' @param normalize See Usage.
+#' @return The value of \code{list}.
+#' @export
 .morie_km2_sim_matrix <- function(x, xhat, normalize) {
   X <- as.matrix(x); Y <- as.matrix(xhat)
   if (length(X) == 0L || length(Y) == 0L) stop("empty embeddings.",
@@ -5659,6 +5962,16 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 
 # ---- unigram / SentencePiece tokenizers -------------------------------
 
+#' .morie_km2_pieces_by_end
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param text See Usage.
+#' @param vocab See Usage.
+#' @param maxlen See Usage.
+#' @return The value of \code{ends}, as built in the body.
+#' @export
 .morie_km2_pieces_by_end <- function(text, vocab, maxlen) {
   L <- nchar(text)
   ends <- vector("list", L + 1L)
@@ -5673,6 +5986,16 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
   ends
 }
 
+#' .morie_km2_forward
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param text See Usage.
+#' @param probs See Usage.
+#' @param maxlen See Usage.
+#' @return A list with \code{alpha}, \code{ends}.
+#' @export
 .morie_km2_forward <- function(text, probs, maxlen) {
   L <- nchar(text)
   ends <- .morie_km2_pieces_by_end(text, probs, maxlen)
@@ -5686,6 +6009,16 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
   list(alpha = alpha, ends = ends)
 }
 
+#' .morie_km2_backward
+#'
+#' Part of the kamath_llm2_native implementation; see the file header
+#' for the source it follows.
+#'
+#' @param text See Usage.
+#' @param probs See Usage.
+#' @param maxlen See Usage.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .morie_km2_backward <- function(text, probs, maxlen) {
   L <- nchar(text)
   beta <- rep(0, L + 1L)

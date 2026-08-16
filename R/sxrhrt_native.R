@@ -29,6 +29,20 @@
 # Refinement stops while adjacent grid values still differ by far more than
 # floating-point noise. Going finer would push the comparison back below the
 # noise floor and reintroduce exactly the disagreement this exists to remove.
+#' Refinement stops while adjacent grid values still differ by far more
+#' than
+#'
+#' floating-point noise. Going finer would push the comparison back
+#' below the noise floor and reintroduce exactly the disagreement this
+#' exists to remove.
+#'
+#' @param f See Usage.
+#' @param lo See Usage.
+#' @param hi See Usage.
+#' @param points Defaults to \code{201L}.
+#' @param stages Defaults to \code{4L}.
+#' @return The value of \code{a}, as built in the body.
+#' @export
 .sxrhrt_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
   a <- as.numeric(lo); b <- as.numeric(hi)
   npt <- as.integer(points)
@@ -50,6 +64,14 @@
   a
 }
 
+#' .sxrhrt_rows
+#'
+#' Part of the sxrhrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return The value of \code{m}, as built in the body.
+#' @export
 .sxrhrt_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -59,6 +81,14 @@
   m
 }
 
+#' .sxrhrt_chol
+#'
+#' Part of the sxrhrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param A See Usage.
+#' @return The value of \code{L}, as built in the body.
+#' @export
 .sxrhrt_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -79,6 +109,15 @@
   L
 }
 
+#' .sxrhrt_solve
+#'
+#' Part of the sxrhrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @param b See Usage.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 .sxrhrt_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -96,9 +135,29 @@
   x
 }
 
+#' .sxrhrt_logdet
+#'
+#' Part of the sxrhrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param L See Usage.
+#' @return A numeric value.
+#' @export
 .sxrhrt_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 # Restricted log likelihood at (s2gm, s2gf, rg, s2em, s2ef).
+#' Restricted log likelihood at (s2gm, s2gf, rg, s2em, s2ef)
+#'
+#' Part of the sxrhrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param theta See Usage.
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param Km See Usage.
+#' @param male See Usage.
+#' @return A list with \code{ll}, \code{beta}, \code{L}.
+#' @export
 .sxrhrt_reml <- function(theta, y, X, Km, male) {
   s2gm <- theta[1]; s2gf <- theta[2]; rg <- theta[3]
   s2em <- theta[4]; s2ef <- theta[5]
@@ -264,6 +323,13 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
                      "likelihood looks"))
 }
 
+#' .sxrhrt_cheatsheet
+#'
+#' Part of the sxrhrt_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .sxrhrt_cheatsheet <- function() {
   paste0("sxrhrt: morie_sxrhrt_sex_specific_h2(y, sex, K) -> per-sex ",
          "heritability and the cross-sex genetic correlation by bivariate ",

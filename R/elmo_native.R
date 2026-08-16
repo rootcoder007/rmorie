@@ -194,6 +194,13 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
        method = "ELMo layer mixture, Peters et al. (2018) eq. (1)")
 }
 
+#' .elmo_cheatsheet
+#'
+#' Part of the elmo_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .elmo_cheatsheet <- function() {
   paste0("elmo: ELMo_k = gamma * sum_j s_j h_{k,j}, s SOFTMAX-",
          "normalised (eq. 1). The simplex constraint means s chooses ",

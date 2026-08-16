@@ -9,6 +9,15 @@
 # The `aaa_` prefix keeps these collated before their callers -- R never
 # sources a file whose name begins with a non-alphanumeric character.
 
+#' Accept the list the empirical estimator returns, or a plain matrix
+#'
+#' Counts default to 1 so an unweighted table still fits; that makes the
+#' WLS weights degenerate to 1/(2 gamma^2), the right limiting form
+#' rather than a silent failure.
+#'
+#' @param ev See Usage.
+#' @return A list with \code{lags}, \code{gamma}, \code{counts}.
+#' @export
 .schab_as_empirical_variogram <- function(ev) {
   # Accept the list the empirical estimator returns, or a plain matrix.
   # Counts default to 1 so an unweighted table still fits; that makes the WLS
@@ -42,6 +51,18 @@
   list(lags = arr[, 1], gamma = arr[, 2], counts = counts)
 }
 
+#' The bounds ARE the parameter space of Sec. 4.3: a nugget and a
+#' partial
+#'
+#' sill are variances so they are non-negative, and a range is a
+#' distance so it is strictly positive. Nothing narrower -- a fit that
+#' cannot reach sill = 0 cannot report "no spatial structure", and one
+#' that cannot reach nugget = 0 cannot report a continuous field.
+#'
+#' @param lags See Usage.
+#' @param ghat See Usage.
+#' @return A list with \code{start}, \code{lo}, \code{hi}.
+#' @export
 .schab_start_and_bounds <- function(lags, ghat) {
   # The bounds ARE the parameter space of Sec. 4.3: a nugget and a partial
   # sill are variances so they are non-negative, and a range is a distance so
@@ -59,6 +80,18 @@
   )
 }
 
+#' .schab_objective
+#'
+#' Part of the schab_fit_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param kind See Usage.
+#' @param lags See Usage.
+#' @param ghat See Usage.
+#' @param counts See Usage.
+#' @param model See Usage.
+#' @return The value of \code{function}.
+#' @export
 .schab_objective <- function(kind, lags, ghat, counts, model) {
   ok <- is.finite(ghat) & is.finite(lags) & counts > 0
   h <- lags[ok]
@@ -91,6 +124,18 @@
   }
 }
 
+#' .schab_fit_semivariogram
+#'
+#' Part of the schab_fit_shared implementation; see the file header for
+#' the source it follows.
+#'
+#' @param lags See Usage.
+#' @param ghat See Usage.
+#' @param counts See Usage.
+#' @param model Defaults to \code{"exponential"}.
+#' @param kind Defaults to \code{"wls"}.
+#' @return A list with \code{nugget}, \code{partial_sill}, \code{range}, \code{objective}, \code{converged}.
+#' @export
 .schab_fit_semivariogram <- function(lags, ghat, counts, model = "exponential",
                                      kind = "wls") {
   # Fit by Gauss-Newton, the algorithm Sec. 4.5 names for this problem: the
@@ -116,6 +161,19 @@
   )
 }
 
+#' Sigma(theta) for the model of Sec. 4.3. C(0) = c0 + sigma0^2 and
+#'
+#' C(h) = sigma0^2 R(h) for h > 0, so the nugget enters only on the
+#' diagonal -- it is a discontinuity at the origin, not a term added
+#' everywhere.
+#'
+#' @param coords See Usage.
+#' @param nugget See Usage.
+#' @param sill See Usage.
+#' @param rng See Usage.
+#' @param model See Usage.
+#' @return The value of \code{sigma}, as built in the body.
+#' @export
 .schab_covariance_matrix <- function(coords, nugget, sill, rng, model) {
   # Sigma(theta) for the model of Sec. 4.3. C(0) = c0 + sigma0^2 and
   # C(h) = sigma0^2 R(h) for h > 0, so the nugget enters only on the
@@ -131,6 +189,17 @@
   sigma
 }
 
+#' A matrix K of error contrasts: full row rank, K X = 0. Sec. 4.5.2
+#' builds
+#'
+#' K explicitly for the intercept-only case and notes, citing Harville
+#' (1974), that the choice of K does not matter for estimation. Taking
+#' the orthogonal complement of the column space of X gives one such K
+#' for any linear mean structure.
+#'
+#' @param X See Usage.
+#' @return A matrix, from \code{t}.
+#' @export
 .schab_error_contrasts <- function(X) {
   # A matrix K of error contrasts: full row rank, K X = 0. Sec. 4.5.2 builds
   # K explicitly for the intercept-only case and notes, citing Harville

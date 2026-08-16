@@ -6,6 +6,15 @@
 # (2005), Quantile Regression, CUP (delivered).  Mirrors Python
 # morie.fn.quanrg exactly.
 
+#' .quanrg_loss
+#'
+#' Part of the quanrg_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param res See Usage.
+#' @param theta See Usage.
+#' @return A numeric value.
+#' @export
 .quanrg_loss <- function(res, theta) {
   sum(ifelse(res >= 0, theta * res, (theta - 1) * res))
 }

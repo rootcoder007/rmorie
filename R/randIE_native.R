@@ -10,6 +10,15 @@
 .randIE_EPS <- 1e-12
 .randIE_ROUTES <- c("gformula", "weighting")
 
+#' .labels
+#'
+#' Part of the randIE_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param v See Usage.
+#' @param name See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .labels <- function(v, name) {
   out <- as.character(v)
   if (length(out) == 0L) stop(paste0("randIE: ", name, " is empty"))

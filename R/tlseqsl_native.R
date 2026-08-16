@@ -46,6 +46,16 @@
 .tlseqsl_EPS <- 1e-12
 .tlseqsl_LOSSES <- c("squared", "log")
 
+#' .tlseqsl_loss
+#'
+#' Part of the tlseqsl_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param kind See Usage.
+#' @param y See Usage.
+#' @param p See Usage.
+#' @return A numeric value.
+#' @export
 .tlseqsl_loss <- function(kind, y, p) {
   if (kind == "squared") {
     return((y - p) ^ 2)

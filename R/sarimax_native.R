@@ -13,6 +13,16 @@ MAX_SEASONAL <- 2
 ROOT_TOL <- 1.001
 .SEARCHING <- FALSE
 
+#' .filter_column
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w See Usage.
+#' @param ar See Usage.
+#' @param ma See Usage.
+#' @return A list with \code{v}, \code{f}.
+#' @export
 .filter_column <- function(w, ar, ma) {
   ss <- .sarima_state_space(ar, ma)
   T <- ss$T; R <- ss$R; r <- ss$r
@@ -36,6 +46,16 @@ ROOT_TOL <- 1.001
   list(v = v_out, f = f_out)
 }
 
+#' .residual_column
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param w See Usage.
+#' @param ar See Usage.
+#' @param ma See Usage.
+#' @return A list with \code{v}, \code{f}.
+#' @export
 .residual_column <- function(w, ar, ma) {
   r <- css(w, ar, ma, full = TRUE)
   list(v = r$residuals, f = rep(1.0, length(w)))
@@ -99,6 +119,15 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
        information = A, sum_log_f = sum(log(f)))
 }
 
+#' .columns
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param X See Usage.
+#' @param n See Usage.
+#' @return The value of \code{cols}, as built in the body.
+#' @export
 .columns <- function(X, n) {
   if (is.null(X)) return(list())
   if (is.list(X)) {
@@ -116,6 +145,20 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
   cols
 }
 
+#' .sarimax_fit
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param X Defaults to \code{NULL}.
+#' @param order Defaults to \code{c(0, 1, 1)}.
+#' @param seasonal_order Defaults to \code{c(0, 1, 1)}.
+#' @param s Defaults to \code{12}.
+#' @param include_constant Defaults to \code{NULL}.
+#' @param method Defaults to \code{"ml"}.
+#' @return A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2}, \code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals}, \code{innovation_variance}, \code{include_constant}, \code{order}, \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
+#' @export
 .sarimax_fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
                 s = 12, include_constant = NULL, method = "ml") {
   if (!method %in% c("ml", "uls", "css")) {
@@ -287,6 +330,20 @@ neighbours <- function(order, seasonal_order, constant, s) {
   out
 }
 
+#' .try_fit
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param order See Usage.
+#' @param seasonal_order See Usage.
+#' @param s See Usage.
+#' @param constant See Usage.
+#' @param method See Usage.
+#' @return The value of \code{tryCatch}.
+#' @export
 .try_fit <- function(y, X, order, seasonal_order, s, constant, method) {
   if (constant && (order[2L] + seasonal_order[2L]) >= 2L) return(NULL)
   if (sum(order) + sum(seasonal_order) - order[2L] - seasonal_order[2L] == 0 &&
@@ -373,6 +430,13 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
+#' .sarimax_cheatsheet
+#'
+#' Part of the sarimax_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @return A character value.
+#' @export
 .sarimax_cheatsheet <- function() {
   paste("sarimax: y = beta'x + n with seasonal ARIMA errors. beta",
         "is profiled out by exact GLS on the Kalman innovations,",

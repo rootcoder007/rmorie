@@ -21,6 +21,25 @@
 # Bland's rule (always the lowest-index eligible column and row)
 # trades speed for a cycling-freedom guarantee, which is the right
 # trade at the problem sizes identification bounds produce.
+#' .bnd_simplex
+#'
+#' A small dense two-phase simplex with Bland\'s rule, written here
+#' because base R has no linear programming and this package does not
+#' take dependencies for what eighty lines can do. Solves min c\'x s.t.
+#' A_ub x <= b_ub, A_eq x = b_eq, l <= x <= u. Bland\'s rule (always the
+#' lowest-index eligible column and row) trades speed for a
+#' cycling-freedom guarantee, which is the right trade at the problem
+#' sizes identification bounds produce.
+#'
+#' @param cv See Usage.
+#' @param A_ub Defaults to \code{NULL}.
+#' @param b_ub Defaults to \code{NULL}.
+#' @param A_eq Defaults to \code{NULL}.
+#' @param b_eq Defaults to \code{NULL}.
+#' @param lower See Usage.
+#' @param upper See Usage.
+#' @return A list with \code{status}, \code{x}, \code{fun}.
+#' @export
 .bnd_simplex <- function(cv, A_ub = NULL, b_ub = NULL, A_eq = NULL,
                          b_eq = NULL, lower, upper) {
   k <- length(cv)

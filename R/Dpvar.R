@@ -1,6 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Inverse Laplace CDF at u in (0, 1), location zero.
+#' Inverse Laplace CDF at u in (0, 1), location zero
+#'
+#' Part of the Dpvar implementation; see the file header for the source
+#' it follows.
+#'
+#' @param u See Usage.
+#' @param scale See Usage.
+#' @return A numeric value.
+#' @export
 .dpvar_laplace <- function(u, scale) {
   d <- u - 0.5
   s <- if (d >= 0) 1 else -1

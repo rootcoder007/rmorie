@@ -183,6 +183,13 @@ counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
   tot
 }
 
+#' .tlgcmp_cheatsheet
+#'
+#' Part of the tlgcmp_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
 .tlgcmp_cheatsheet <- function() {
   paste("tlgcmp: the causal parameter lives on the FULL data ",
         "(U, X); identification maps it to a functional of the ",

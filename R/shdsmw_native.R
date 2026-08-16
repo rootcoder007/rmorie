@@ -19,8 +19,25 @@
 # maximum weight) along a path of penalties that runs from the
 # unpenalized fit to the unadjusted limit.
 
+#' .vec
+#'
+#' Part of the shdsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .vec <- function(x) as.numeric(as.matrix(x))
 
+#' .hist
+#'
+#' Part of the shdsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param obj See Usage.
+#' @param allow_none Defaults to \code{FALSE}.
+#' @return The value of \code{list}.
+#' @export
 .hist <- function(obj, allow_none = FALSE) {
   if (is.null(obj)) return(if (allow_none) list(NULL) else list())
   if (is.list(obj) && (length(obj) == 0L ||
@@ -31,6 +48,16 @@
   list(obj)
 }
 
+#' .shdsmw_wls
+#'
+#' Part of the shdsmw_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param w See Usage.
+#' @return A list with \code{coef}, \code{se}.
+#' @export
 .shdsmw_wls <- function(X, y, w) {
   X <- as.matrix(X); storage.mode(X) <- "double"
   y <- .vec(y); w <- .vec(w)

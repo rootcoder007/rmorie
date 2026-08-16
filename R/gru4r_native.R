@@ -17,6 +17,14 @@
 .GRU4R_EPS <- 1e-12
 
 # Numerically stable sigmoid matching the Python helper.
+#' Numerically stable sigmoid matching the Python helper
+#'
+#' Part of the gru4r_native implementation; see the file header for the
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .gh_sig <- function(x) {
   if (x > -700) 1 / (1 + exp(-x)) else 0
 }

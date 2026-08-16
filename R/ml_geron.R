@@ -24,6 +24,15 @@
 # base. 32-bit values are carried as doubles and XORed in 16-bit
 # halves, because R's integers are signed 32-bit and would overflow.
 
+#' .morie_gr_xor32
+#'
+#' Part of the ml_geron implementation; see the file header for the
+#' source it follows.
+#'
+#' @param a See Usage.
+#' @param b See Usage.
+#' @return A numeric value.
+#' @export
 .morie_gr_xor32 <- function(a, b) {
   ah <- a %/% 65536; al <- a %% 65536
   bh <- b %/% 65536; bl <- b %% 65536
@@ -42,6 +51,14 @@
   tab
 })
 
+#' .morie_gr_crc32
+#'
+#' Part of the ml_geron implementation; see the file header for the
+#' source it follows.
+#'
+#' @param value See Usage.
+#' @return The value of \code{.morie_gr_xor32}.
+#' @export
 .morie_gr_crc32 <- function(value) {
   v <- value
   if (v < 0 || v >= 2^53) {
@@ -297,6 +314,15 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 
 # --- ch. 12, p. 476: object tracking -----------------------------------
 
+#' .morie_gr_perms
+#'
+#' Part of the ml_geron implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq_ See Usage.
+#' @param k See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_gr_perms <- function(seq_, k) {
   if (k == 0L) return(list(integer(0)))
   out <- list()
@@ -308,6 +334,15 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
   out
 }
 
+#' .morie_gr_combos
+#'
+#' Part of the ml_geron implementation; see the file header for the
+#' source it follows.
+#'
+#' @param seq_ See Usage.
+#' @param k See Usage.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_gr_combos <- function(seq_, k) {
   if (k == 0L) return(list(integer(0)))
   if (length(seq_) < k) return(list())

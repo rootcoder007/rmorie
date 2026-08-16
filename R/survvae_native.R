@@ -54,7 +54,22 @@
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
+#' Base R has no erf/erfc; both are pnorm in disguise. Defined here so
+#'
+#' the arm stays base-R only, as the package requires.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .survvae_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+#' .survvae_erfc
+#'
+#' Part of the survvae_native implementation; see the file header for
+#' the source it follows.
+#'
+#' @param x See Usage.
+#' @return A numeric value.
+#' @export
 .survvae_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .GHC_SURVVAE_PRIMITIVES <- c("weibull", "lognormal")
@@ -62,6 +77,13 @@
 
 # Internal: validate the primitive argument. Single source of the error
 # message, mirroring the Python arm's .check().
+#' Internal: validate the primitive argument. Single source of the error
+#'
+#' message, mirroring the Python arm\'s .check().
+#'
+#' @param primitive See Usage.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .ghc_survvae_check_primitive <- function(primitive) {
   if (!(length(primitive) == 1L && is.character(primitive) &&
         !is.na(primitive) && primitive %in% .GHC_SURVVAE_PRIMITIVES))
@@ -74,6 +96,17 @@
 # log_shapes | log_scales) into named pieces. Mirrors the Python
 # arm's .unpack(): W is a list of K length-d vectors, bias is length
 # K, shapes and scales are length K (positives, recovered via exp()).
+#' Internal: unpack the flat parameter vector v = (W | bias |
+#'
+#' log_shapes | log_scales) into named pieces. Mirrors the Python arm\'s
+#' .unpack(): W is a list of K length-d vectors, bias is length K,
+#' shapes and scales are length K (positives, recovered via exp()).
+#'
+#' @param v See Usage.
+#' @param K See Usage.
+#' @param d See Usage.
+#' @return A list with \code{W}, \code{bias}, \code{shapes}, \code{scales}.
+#' @export
 .ghc_survvae_unpack <- function(v, K, d) {
   v <- as.numeric(v)
   expected <- K * d + 3L * K
@@ -98,6 +131,21 @@
 # outer loop in morie_survvae(), which calls this helper up to six
 # times per restart, each time from the current point -- exactly
 # mirroring the "for _ in range(6)" loop in fit().
+#' Internal: Nelder-Mead wrapper. The Python arm uses
+#'
+#' _sci_core.minimize with method="Nelder-Mead"; optim(method=
+#' "Nelder-Mead") in base R runs the same algorithm and gives
+#' numerically equivalent results on smooth objectives like this one.
+#' The Python arm\'s six-inner-iteration structure is preserved by the
+#' outer loop in morie_survvae(), which calls this helper up to six
+#' times per restart, each time from the current point -- exactly
+#' mirroring the "for _ in range(6)" loop in fit().
+#'
+#' @param objective See Usage.
+#' @param x0 See Usage.
+#' @param maxit Defaults to \code{NULL}.
+#' @return A list with \code{x}, \code{value}.
+#' @export
 .ghc_minimize_nm <- function(objective, x0, maxit = NULL) {
   n <- length(x0)
   if (is.null(maxit)) maxit <- 200L * n
@@ -114,6 +162,17 @@
 # where the earlier observation is an event; non-events at the
 # shorter time do not contribute because their true event time is
 # unknown.
+#' Internal: Harrell\'s concordance index in base R, mirroring
+#'
+#' morie.fn.survrsf.c_index. Counts over comparable pairs (i, j) where
+#' the earlier observation is an event; non-events at the shorter time
+#' do not contribute because their true event time is unknown.
+#'
+#' @param times See Usage.
+#' @param events See Usage.
+#' @param risks See Usage.
+#' @return A numeric value.
+#' @export
 .ghc_c_index <- function(times, events, risks) {
   times <- as.numeric(times)
   events <- as.numeric(events)
