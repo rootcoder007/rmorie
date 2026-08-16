@@ -19,3 +19,13 @@ Aggregate ATT(g,t)
 A list with the estimate and the scheme details.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+n <- 12
+Y <- matrix(rnorm(n * 5, 10), n, 5)
+ft <- as.list(c(rep(3L, 4), rep(4L, 4), rep(NA_real_, 4)))
+ft[9:12] <- list(NULL)
+gt <- morie_didfst_group_time_att(Y, ft)
+r <- morie_didfst_aggregate_att(gt, scheme = "simple")
+str(r, max.level = 1)
+}

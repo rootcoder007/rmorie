@@ -19,3 +19,11 @@ With \code{weights = NULL} every unit counts equally and this is the textbook es
 A list with \code{estimate}, \code{treated_mean},   \code{control_mean}, \code{treated_weight}, \code{control_weight}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+Y <- matrix(rnorm(40, 10), 8, 5)
+D <- rep(c(1, 0), 4)
+Y[D == 1, 4:5] <- Y[D == 1, 4:5] + 2
+delta <- morie_didfst_panel_differences(Y, event_time = 3)
+morie_didfst_did_estimate(delta, D)
+}

@@ -20,3 +20,11 @@ The density at x: sum_h w_h(x) k(y | theta_h(x))
 Named list with estimate, density, grid, x, n_components,   method, note.
 }
 \keyword{internal}
+\examples{
+G <- morie_ddpest_single_atoms(xs = c(0, 1), alpha = 1, K = 5,
+                               weight_fn = function(x, h)
+                                 exp(-abs(h - 2 * x)))$G
+r <- morie_ddpest_predict_density(G, 0, grid = seq(-1, 5, by = 0.5),
+                                  kernel = function(y, a) dnorm(y - a))
+str(r, max.level = 1)
+}

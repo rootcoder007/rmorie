@@ -19,3 +19,12 @@ Callaway-Sant\'Anna ATT(g,t) under staggered adoption
 A list with \code{att}, \code{cohorts} and the cohort   details.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+n <- 12
+Y <- matrix(rnorm(n * 5, 10), n, 5)
+ft <- as.list(c(rep(3L, 4), rep(4L, 4), rep(NA_real_, 4)))
+ft[9:12] <- list(NULL)
+r <- morie_didfst_group_time_att(Y, ft)
+str(r, max.level = 1)
+}

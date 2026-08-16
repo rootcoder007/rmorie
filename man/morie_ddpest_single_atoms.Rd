@@ -22,3 +22,9 @@ weight_fn(x, h) returns an unnormalised weight; each G_x is renormalised so it r
 Named list with G, kind, atoms, K, note.
 }
 \keyword{internal}
+\examples{
+r <- morie_ddpest_single_atoms(xs = c(0, 1), alpha = 1, K = 5,
+                               weight_fn = function(x, h)
+                                 exp(-abs(h - 2 * x)))
+str(r, max.level = 1)
+}

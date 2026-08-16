@@ -64,7 +64,9 @@ phi <- function(x, fields, W) {
   }
   tot <- 0
   for (a in seq_along(nz)) {
-    for (b in seq.int(a + 1L, length(nz))) {
+    # seq_len guard: seq.int DESCENDS when a is already the last
+    # non-zero and reads nz[[length + 1]]
+    for (b in seq_len(length(nz) - a) + a) {
       j1 <- nz[[a]]$j
       v1 <- nz[[a]]$v
       j2 <- nz[[b]]$j
@@ -157,7 +159,9 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
         if (v != 0) nz[[length(nz) + 1L]] <- list(j = j, v = v)
       }
       for (a in seq_along(nz)) {
-        for (b in seq.int(a + 1L, length(nz))) {
+        # seq_len guard: seq.int DESCENDS when a is already the last
+    # non-zero and reads nz[[length + 1]]
+    for (b in seq_len(length(nz) - a) + a) {
           j1 <- nz[[a]]$j
           v1 <- nz[[a]]$v
           j2 <- nz[[b]]$j

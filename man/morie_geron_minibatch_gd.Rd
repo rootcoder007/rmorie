@@ -30,3 +30,11 @@ the permutation out of Python and pass it in); with \code{order = NULL}
 the identity order is used. This is the one honest divergence in
 this file.
 }
+\examples{
+set.seed(4)
+X <- cbind(1, rnorm(30))
+y <- X \%*\% c(1, 2) + rnorm(30, 0, 0.2)
+r <- morie_geron_minibatch_gd(X, as.numeric(y), theta = c(0, 0),
+                              eta = 0.05, b = 10, n_steps = 20)
+str(r, max.level = 1)
+}

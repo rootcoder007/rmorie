@@ -19,3 +19,9 @@ A step of the ffmFM_native implementation. Called by \code{explor}, \code{fit_ff
 The value of \code{tot}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+W <- lapply(1:4, function(j) lapply(1:2, function(f) rnorm(3, 0, 0.3)))
+x <- list(list(0L, 1.0), list(2L, 1.0))
+phi(x, fields = c(0L, 0L, 1L, 1L), W)
+}

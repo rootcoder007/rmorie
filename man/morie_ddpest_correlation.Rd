@@ -20,3 +20,9 @@ region is a predicate on an atom.
 Named list with G_x1, G_x2, shared_mass, abs_difference,   identical, note.
 }
 \keyword{internal}
+\examples{
+G <- morie_ddpest_single_atoms(xs = c(0, 1), alpha = 1, K = 5,
+                               weight_fn = function(x, h)
+                                 exp(-abs(h - 2 * x)))$G
+morie_ddpest_correlation(G, 0, 1, region = function(a) a <= 2)
+}

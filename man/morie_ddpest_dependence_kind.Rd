@@ -17,3 +17,6 @@ Returns a description of which part of the stick-breaking form G_x(.) = sum_h w_
 Named list with kind, varies_with_x, effect.
 }
 \keyword{internal}
+\examples{
+morie_ddpest_dependence_kind("single_weights")
+}

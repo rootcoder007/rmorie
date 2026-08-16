@@ -18,3 +18,8 @@ Periods \code{1..H} are pre-treatment for every unit and \code{H+1..T} post, exa
 Numeric vector of length n.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+Y <- matrix(rnorm(40, 10), 8, 5)
+morie_didfst_panel_differences(Y, event_time = 3)
+}
