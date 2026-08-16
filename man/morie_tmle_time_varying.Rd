@@ -34,3 +34,12 @@ loss-based estimation of causal effects of multiple time point
 interventions. \emph{The International Journal of Biostatistics}
 8(1), Article 9.
 }
+\examples{
+set.seed(3)
+n <- 150
+L <- matrix(rnorm(n * 2), n, 2)
+A <- matrix(rbinom(n * 2, 1, 0.5), n, 2)
+y <- 1 + 0.5 * rowSums(A) + L[, 1] + rnorm(n, 0, 0.5)
+r <- morie_tmle_time_varying(y, A, L, regime = 1)
+str(r, max.level = 1)
+}

@@ -33,3 +33,13 @@ Imbens GW, Angrist JD (1994). Identification and
 estimation of local average treatment effects. \emph{Econometrica}
 62(2), 467-475.
 }
+\examples{
+set.seed(3)
+n <- 150
+X <- matrix(rnorm(n), n, 1)
+z <- rbinom(n, 1, 0.5)
+d <- rbinom(n, 1, plogis(-0.5 + 1.5 * z))
+y <- 1 + 0.8 * d + X[, 1] + rnorm(n, 0, 0.5)
+r <- morie_tmle_late(y, d, z, covariates = X)
+str(r, max.level = 1)
+}

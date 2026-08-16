@@ -22,3 +22,13 @@ The cheap rotation, and the reason the envelope exists.
 List with \code{wrapped} (==\code{estimate}), \code{n},   \code{records_reencrypted}, \code{kek_id}, \code{method},   \code{note}.
 }
 \keyword{internal}
+\examples{
+seed <- as.raw(1:32)
+dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+kek1 <- as.raw(rev(1:32))
+kek2 <- as.raw(rep(7L, 32))
+w <- morie_secrtt_wrap_dek(dek, kek1, nonce = as.raw(1:12))
+r <- morie_secrtt_rotate_kek(list(w), kek1, kek2,
+                             new_nonces = list(as.raw(2:13)))
+r$kek_id
+}

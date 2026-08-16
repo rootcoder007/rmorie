@@ -209,15 +209,26 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .sech_sha256 <- function(bytes) {
+  # Words live as DOUBLES in [0, 2^32): R integers are signed 32-bit,
+  # so bitwAnd/bitwXor on anything >= 2^31 returns NA and the old code
+  # packed NaN bit patterns as the digest. XOR/AND run on 16-bit
+  # halves; rotation and addition are exact double arithmetic mod 2^32.
+  bx <- function(a, b) {
+    bitwXor(a %/% 65536, b %/% 65536) * 65536 +
+      bitwXor(a %% 65536, b %% 65536)
+  }
+  ba <- function(a, b) {
+    bitwAnd(a %/% 65536, b %/% 65536) * 65536 +
+      bitwAnd(a %% 65536, b %% 65536)
+  }
+  bn <- function(a) 4294967295 - a
+  rotr <- function(x, n) (x %/% 2^n) + (x %% 2^n) * 2^(32 - n)
+  shr <- function(x, n) x %/% 2^n
   bs <- as.integer(as.raw(bytes))
-  blen <- length(bs) * 8L
-  bs <- c(bs, 0x80)
-  while (length(bs) %% 64L != 56L) bs <- c(bs, 0x00)
-  bs <- c(bs,
-          as.integer(writeBin(bitwShiftR(bitwAnd(blen, -1L), 32L), raw(),
-                              size = 4L, endian = "big")),
-          as.integer(writeBin(bitwAnd(blen, 0xFFFFFFFFL), raw(),
-                              size = 4L, endian = "big")))
+  blen <- length(bs) * 8
+  bs <- c(bs, 0x80L)
+  while (length(bs) %% 64L != 56L) bs <- c(bs, 0x00L)
+  bs <- c(bs, (blen %/% 2^c(56, 48, 40, 32, 24, 16, 8, 0)) %% 256)
   H <- c(0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
          0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19)
   K <- c(0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b,
@@ -234,53 +245,42 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
          0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
          0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2)
   for (block in seq(1L, length(bs), by = 64L)) {
-    W <- integer(64L)
+    W <- numeric(64L)
     for (i in 0:15) {
-      W[i + 1L] <- sum(bs[block + 4L * i + 0:3] *
-                         bitwShiftL(c(24L, 16L, 8L, 0L), 1L))
+      W[i + 1L] <- sum(bs[block + 4L * i + 0:3] * c(2^24, 2^16, 2^8, 1))
     }
     for (i in 16:63) {
-      s0 <- bitwXor(bitwXor(bitwShiftR(W[i + 1L], 7L),
-                            bitwShiftR(W[i + 1L], 18L)),
-                    bitwShiftR(W[i + 1L], 3L))
-      s1 <- bitwXor(bitwXor(bitwShiftR(W[i - 6L + 1L], 17L),
-                            bitwShiftR(W[i - 6L + 1L], 19L)),
-                    bitwShiftR(W[i - 6L + 1L], 10L))
-      W[i + 1L] <- bitwAnd(W[i - 15L + 1L] + s0 + W[i - 2L + 1L] + s1,
-                            0xFFFFFFFFL)
+      w15 <- W[i - 15L + 1L]
+      w2 <- W[i - 2L + 1L]
+      s0 <- bx(bx(rotr(w15, 7), rotr(w15, 18)), shr(w15, 3))
+      s1 <- bx(bx(rotr(w2, 17), rotr(w2, 19)), shr(w2, 10))
+      W[i + 1L] <- (W[i - 16L + 1L] + s0 + W[i - 7L + 1L] + s1) %% 2^32
     }
     a <- H[1]; b <- H[2]; cc <- H[3]; d <- H[4]
     e <- H[5]; f <- H[6]; g <- H[7]; hh <- H[8]
     for (i in 0:63) {
-      S1 <- bitwXor(bitwXor(bitwShiftR(e, 6L), bitwShiftR(e, 11L)),
-                    bitwShiftR(e, 25L))
-      ch <- bitwXor(bitwAnd(e, f), bitwAnd(bitwXor(e, 0xFFFFFFFFL), g))
-      T1 <- bitwAnd(hh + S1 + ch + K[i + 1L] + W[i + 1L], 0xFFFFFFFFL)
-      S0 <- bitwXor(bitwXor(bitwShiftR(a, 2L), bitwShiftR(a, 13L)),
-                    bitwShiftR(a, 22L))
-      mj <- bitwXor(bitwXor(bitwAnd(a, b), bitwAnd(a, cc)),
-                    bitwAnd(b, cc))
-      T2 <- bitwAnd(S0 + mj, 0xFFFFFFFFL)
+      S1 <- bx(bx(rotr(e, 6), rotr(e, 11)), rotr(e, 25))
+      ch <- bx(ba(e, f), ba(bn(e), g))
+      T1 <- (hh + S1 + ch + K[i + 1L] + W[i + 1L]) %% 2^32
+      S0 <- bx(bx(rotr(a, 2), rotr(a, 13)), rotr(a, 22))
+      mj <- bx(bx(ba(a, b), ba(a, cc)), ba(b, cc))
+      T2 <- (S0 + mj) %% 2^32
       hh <- g; g <- f; f <- e
-      e <- bitwAnd(d + T1, 0xFFFFFFFFL)
+      e <- (d + T1) %% 2^32
       d <- cc; cc <- b; b <- a
-      a <- bitwAnd(T1 + T2, 0xFFFFFFFFL)
+      a <- (T1 + T2) %% 2^32
     }
-    H[1] <- bitwAnd(H[1] + a, 0xFFFFFFFFL)
-    H[2] <- bitwAnd(H[2] + b, 0xFFFFFFFFL)
-    H[3] <- bitwAnd(H[3] + cc, 0xFFFFFFFFL)
-    H[4] <- bitwAnd(H[4] + d, 0xFFFFFFFFL)
-    H[5] <- bitwAnd(H[5] + e, 0xFFFFFFFFL)
-    H[6] <- bitwAnd(H[6] + f, 0xFFFFFFFFL)
-    H[7] <- bitwAnd(H[7] + g, 0xFFFFFFFFL)
-    H[8] <- bitwAnd(H[8] + hh, 0xFFFFFFFFL)
+    H[1] <- (H[1] + a) %% 2^32
+    H[2] <- (H[2] + b) %% 2^32
+    H[3] <- (H[3] + cc) %% 2^32
+    H[4] <- (H[4] + d) %% 2^32
+    H[5] <- (H[5] + e) %% 2^32
+    H[6] <- (H[6] + f) %% 2^32
+    H[7] <- (H[7] + g) %% 2^32
+    H[8] <- (H[8] + hh) %% 2^32
   }
-  out <- raw(32L)
-  for (i in 1:8) {
-    out[(4L * (i - 1L) + 1):(4L * i)] <- writeBin(H[i], raw(), size = 4L,
-                                                    endian = "big")
-  }
-  out
+  as.raw(as.vector(vapply(H, function(w)
+    (w %/% 2^c(24, 16, 8, 0)) %% 256, numeric(4))))
 }
 
 #' .sech_hmac
@@ -297,8 +297,9 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
   key <- as.raw(key)
   if (length(key) > 64L) key <- .sech_sha256(key)
   if (length(key) < 64L) key <- c(key, rep(as.raw(0x00), 64L - length(key)))
-  opad <- bitwXor(key, rep(as.raw(0x5c), 64L))
-  ipad <- bitwXor(key, rep(as.raw(0x36), 64L))
+  # bitwXor() rejects raw vectors; XOR the byte VALUES and re-pack
+  opad <- as.raw(bitwXor(as.integer(key), 0x5cL))
+  ipad <- as.raw(bitwXor(as.integer(key), 0x36L))
   .sech_sha256(c(opad, .sech_sha256(c(ipad, as.raw(msg)))))
 }
 
@@ -329,7 +330,9 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
   a <- as.raw(a); b <- as.raw(b)
   if (length(a) != length(b)) return(FALSE)
   r <- as.integer(0)
-  for (i in seq_along(a)) r <- bitwXor(r, bitwXor(a[i], b[i]))
+  for (i in seq_along(a)) {
+    r <- bitwXor(r, bitwXor(as.integer(a[i]), as.integer(b[i])))
+  }
   r == 0L
 }
 

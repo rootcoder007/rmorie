@@ -22,3 +22,8 @@ Boyd section 11.4: minimise \eqn{s} subject to \eqn{f_i(x) <= s}. The original p
 List with \code{x}, \code{s}, \code{feasible}, \code{outer},   \code{newton}.
 }
 \keyword{internal}
+\examples{
+cons <- list(function(x) 1 - x[1], function(x) x[1] - 5)
+r <- phase1(cons, x0 = c(0.5, 0))
+str(r, max.level = 1)
+}

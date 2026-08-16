@@ -112,7 +112,9 @@ morie_secrtt_open_record <- function(sealed, dek) {
                                    as.raw(sealed$aad %||% raw()))
   if (!isTRUE(r$valid))
     stop("secrtt: the record failed authentication")
-  r$plaintext
+  # the ChaCha20 core hands back byte VALUES as integers; the documented
+  # return type is raw
+  as.raw(r$plaintext)
 }
 
 #' Rotate the KEK: re-wrap every DEK, no record ciphertext touched

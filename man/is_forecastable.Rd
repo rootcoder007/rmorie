@@ -19,3 +19,8 @@ A step of the bats_native implementation. Called by \code{morie_bats}. See the f
 A logical value.
 }
 \keyword{internal}
+\examples{
+spec <- BatsSpec()
+theta <- rep(0.1, n_free(spec))
+is_forecastable(spec, theta)
+}

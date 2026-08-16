@@ -17,3 +17,7 @@ A step of the bats_native implementation. Called by \code{.fit_spec}. See the fi
 The value of \code{n}, as built in the body.
 }
 \keyword{internal}
+\examples{
+spec <- BatsSpec(periods = c(4), use_trend = TRUE)
+n_free(spec)
+}

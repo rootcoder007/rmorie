@@ -29,3 +29,12 @@ Mirrors \code{morie.fn.tmlpoy}.
 van der Laan MJ, Rose S (2011). \emph{Targeted Learning}.
 Springer, Ch. 4-5.
 }
+\examples{
+set.seed(1)
+n <- 120
+X <- matrix(rnorm(n * 2), n, 2)
+d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
+r <- morie_tmle_propensity_only(y, d, X)
+str(r, max.level = 1)
+}

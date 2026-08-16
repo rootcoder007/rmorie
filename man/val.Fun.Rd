@@ -18,3 +18,7 @@ A step of the barerp_native implementation. No other function in the package cal
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+f <- .Fun(function(x) sum(x^2))
+val.Fun(f, c(1, 2))
+}

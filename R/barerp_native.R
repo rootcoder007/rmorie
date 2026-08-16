@@ -190,7 +190,7 @@ centering_steps <- function(m, eps, t0, mu) {
   f0 <- f(x)
   for (a in seq_len(n)) {
     sa <- h * max(1.0, abs(x[a]))
-    for (b in seq_len(a, n)) {
+    for (b in seq.int(a, n)) {
       sb <- h * max(1.0, abs(x[b]))
       xpp <- x; xpm <- x; xmp <- x; xmm <- x
       xpp[a] <- xpp[a] + sa; xpp[b] <- xpp[b] + sb
@@ -311,7 +311,23 @@ hess.Fun <- function(self, x) {
 .solve_kkt <- function(hmat, grad, aeq) {
   n <- length(grad)
   if (is.null(aeq) || length(aeq) == 0L) {
-    sol <- solve(hmat, -grad)
+    # phase1 lifts m constraints into n+1 variables, so the barrier
+    # Hessian J^T D J has rank at most m and plain solve() throws on
+    # the (routine) singular case; the minimum-norm Newton step via
+    # the pseudoinverse is what the reference arm computes.
+    sol <- tryCatch(solve(hmat, -grad), error = function(e) {
+      # Levenberg ridge, escalated until the solve goes through: keeps
+      # the step finite but still lets it move along the near-null
+      # directions a pseudoinverse would zero out.
+      lam <- max(abs(diag(hmat)), 1) * 1e-10
+      for (k in 1:16) {
+        s2 <- tryCatch(solve(hmat + diag(lam, n), -grad),
+                       error = function(e2) NULL)
+        if (!is.null(s2)) return(s2)
+        lam <- lam * 100
+      }
+      stop("barerp: KKT system unsolvable even with ridge")
+    })
     return(as.numeric(sol))
   }
   aeq <- as.matrix(aeq)
@@ -393,8 +409,8 @@ central_point <- function(f0, cons, x, t,
   iters <- 0L
   for (iters in seq_len(as.integer(max_iter))) {
     fv <- vapply(cons, function(c) c$f(x), numeric(1))
-    jac <- do.call(rbind, lapply(cons, function(c) c$g(x)))
-    g0 <- f0$g(x)
+    jac <- do.call(rbind, lapply(cons, function(c) grad.Fun(c, x)))
+    g0 <- grad.Fun(f0, x)
     gphi <- log_barrier_gradient(fv, jac)
     grad <- t * g0 + gphi
 
@@ -402,13 +418,13 @@ central_point <- function(f0, cons, x, t,
       if (any(!vapply(cons, function(c) c$affine, logical(1)))) {
         hs <- lapply(cons, function(c) {
           if (c$affine) return(NULL)
-          c$H(x)
+          hess.Fun(c, x)
         })
       } else {
         hs <- NULL
       }
       hmat <- log_barrier_hessian(fv, jac, hs)
-      h0 <- f0$H(x)
+      h0 <- hess.Fun(f0, x)
       hmat <- hmat + t * h0
       step <- tryCatch(.solve_kkt(hmat, grad, aeq),
                        error = function(e) NULL)
@@ -467,7 +483,7 @@ phase1 <- function(cons, x0, aeq = NULL, beq = NULL,
 
   lift <- function(c) {
     .Fun(function(z, cc = c) cc$f(z[seq_len(n)]) - z[n + 1L],
-         function(z, cc = c) c(cc$g(z[seq_len(n)]), -1.0),
+         function(z, cc = c) c(grad.Fun(cc, z[seq_len(n)]), -1.0),
          NULL, affine = c$affine)
   }
   lifted <- lapply(cons, lift)
@@ -648,6 +664,10 @@ barrier_lp <- function(c, A_ub, b_ub, A_eq = NULL, b_eq = NULL,
               grad = function(z) c,
               affine = TRUE)
   make_con <- function(row, bi) {
+    # force() the promises: without it every closure in the loop below
+    # evaluates rows[i, ] at first CALL, when i has already advanced to
+    # the last row, and all the constraints collapse into one.
+    force(row); force(bi)
     list(f = function(z, r = row, bb = bi) sum(r * z) - bb,
          grad = function(z, r = row) r,
          affine = TRUE)
