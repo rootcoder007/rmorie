@@ -19,3 +19,6 @@ Part of the safrl_native implementation; see the file header for the source it f
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_safrl_worst_case_violation(delta = 0.5, gamma = 0.5, epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

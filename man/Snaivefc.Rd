@@ -23,3 +23,6 @@ Hyndman & Athanasopoulos, FPP 3rd ed., Sec. 5.2.
 \references{
 Hyndman & Athanasopoulos, FPP3, Sec. 5.2.
 }
+\examples{
+Snaivefc(y = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+}

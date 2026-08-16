@@ -41,3 +41,6 @@ doi:10.1137/1.9781611970791. Self-concordance, which is what makes
 the barrier method\'s complexity claim hold.
 }
 \keyword{internal}
+\examples{
+sdpwts_central_path_gap(t = 5L, m = 5L)
+}

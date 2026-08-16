@@ -31,3 +31,6 @@ Formula: E Be(c h, c(1 - h)) = h.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.3.1.
 }
+\examples{
+Ghosalbpdiscrete()
+}

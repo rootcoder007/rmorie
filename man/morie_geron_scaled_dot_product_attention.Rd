@@ -18,3 +18,6 @@ List with \code{output}, \code{weights}, \code{scores}, \code{d_k}.
 The shared kernel behind grsa, grmha, grflash, grswin, grpvt, grpio,
 grteb and grtdb here.
 }
+\examples{
+morie_geron_scaled_dot_product_attention(Q = 0.5, K = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

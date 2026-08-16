@@ -21,3 +21,6 @@ a different rule from \code{\link[=morie_geron_bpe_tokenizer]{morie_geron_bpe_to
 appearance; both are deterministic, and they can disagree. Merging
 stops early when no adjacent pair occurs more than once.
 }
+\examples{
+morie_geron_bpe_merge(corpus = c(1, 2, 3, 4, 5, 6, 7, 8), n_merges = 5L)
+}

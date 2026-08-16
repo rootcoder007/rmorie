@@ -22,3 +22,6 @@ Mass is split across blocks in proportion to their dimension, which is the right
 A single numeric variance bound.
 }
 \keyword{internal}
+\examples{
+morie_tqipb_variance(bits = 5L, d = 5L)
+}

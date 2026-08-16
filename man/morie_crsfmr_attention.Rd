@@ -19,3 +19,6 @@ Mirrors \code{attention}: \code{out = softmax(Q K^T / sqrt(d_k)) V} with the row
 A list with \code{out} and \code{weights}.
 }
 \keyword{internal}
+\examples{
+morie_crsfmr_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

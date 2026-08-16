@@ -53,3 +53,6 @@ Schabenberger O, Gotway CA (2005), Sec 5.5.4, eq
 (5.51)-(5.53), pp. 263-266. Kackar RN, Harville DA (1984).
 Prasad NGN, Rao JNK (1990).
 }
+\examples{
+morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

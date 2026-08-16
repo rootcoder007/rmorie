@@ -20,3 +20,6 @@ Part of the nbeats_native implementation; see the file header for the source it 
 A matrix, from \code{t}.
 }
 \keyword{internal}
+\examples{
+nbeats_trend_basis(length = 5L, degree = 5L)
+}

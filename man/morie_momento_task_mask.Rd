@@ -20,3 +20,6 @@ Construct a task-appropriate mask
 Integer vector of mask indices.
 }
 \keyword{internal}
+\examples{
+morie_momento_task_mask(n_patches = 5L)
+}

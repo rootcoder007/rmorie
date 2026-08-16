@@ -21,3 +21,6 @@ Learnable vector per degree, added at the input layer
 List with encoding, degrees, note.
 }
 \keyword{internal}
+\examples{
+centrality_encoding(adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L, z_in = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

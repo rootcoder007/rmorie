@@ -19,3 +19,6 @@ with a single minimum, so a vanishing gradient is the optimum and not merely a s
 A list with \code{gradient}, \code{norm}, \code{at_optimum}, \code{order}, \code{surface}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MseGrad(phi = 0.5, theta = 0.5, w = 5L)
+}

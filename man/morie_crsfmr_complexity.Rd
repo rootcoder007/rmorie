@@ -19,3 +19,6 @@ Cross-time is \code{O(D L^2)}. Cross-dimension is \code{O(c D L)} through the ro
 A list of named integer counts.
 }
 \keyword{internal}
+\examples{
+morie_crsfmr_complexity(L = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

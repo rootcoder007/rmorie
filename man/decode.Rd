@@ -21,3 +21,6 @@ Part of the cdaeRC_native implementation; see the file header for the source it 
 A vector, from \code{sapply}.
 }
 \keyword{internal}
+\examples{
+decode(z = c(1, 2, 3, 4, 5, 6, 7, 8), Wp = c(1, 2, 3, 4, 5, 6, 7, 8), bp = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

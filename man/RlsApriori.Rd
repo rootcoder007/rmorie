@@ -19,3 +19,6 @@ made with the PREVIOUS weights.  Using the updated weights gives the a posterior
 A list with \code{alpha}, \code{prediction}, \code{order}, \code{uses_previous_weights}, \code{not_the_a_posteriori_error}, \code{method}.
 }
 \keyword{internal}
+\examples{
+RlsApriori(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8), w_prev = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

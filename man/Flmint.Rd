@@ -14,3 +14,6 @@ Y = mu + int_0^T x(t) beta(t) dt + E.  The integral of the product of the center
 A list with \code{integral}, \code{fitted}, \code{mu}, \code{n_points}.
 }
 \keyword{internal}
+\examples{
+Flmint(t = c(1, 2, 3, 4, 5, 6, 7, 8), x_values = c(1, 2, 3, 4, 5, 6, 7, 8), beta_values = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

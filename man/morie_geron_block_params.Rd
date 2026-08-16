@@ -20,3 +20,6 @@ List with \code{self_attention}, \code{ffn}, \code{layer_norms},
 \description{
 Exact transformer block parameter count, itemised (hmdctr)
 }
+\examples{
+morie_geron_block_params(d_model = 5L)
+}

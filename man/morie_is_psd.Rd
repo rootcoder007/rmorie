@@ -14,3 +14,6 @@ morie_is_psd
 A list with \code{psd}, \code{eigenvalues}.
 }
 \keyword{internal}
+\examples{
+morie_is_psd(K = 5L)
+}

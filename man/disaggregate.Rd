@@ -19,3 +19,6 @@ Equal weights assume demand is uniform within the bucket. Any supplied profile i
 Numeric vector of length \code{m}.
 }
 \keyword{internal}
+\examples{
+disaggregate(aggregate_value = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+}

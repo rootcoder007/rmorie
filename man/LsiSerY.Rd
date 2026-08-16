@@ -19,3 +19,6 @@ a second time -- the content of the equation is that the cascade IS a single fil
 A list with \code{y}, \code{h}, \code{s}, \code{equivalent}, \code{max_difference}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LsiSerY(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8), h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

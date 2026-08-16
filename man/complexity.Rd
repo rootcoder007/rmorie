@@ -18,3 +18,6 @@ Part of the sasRec_native implementation; see the file header for the source it 
 A list with \code{attention_ops}, \code{rnn_ops}, \code{attention_sequential_steps}, \code{rnn_sequential_steps}, \code{note}.
 }
 \keyword{internal}
+\examples{
+complexity(n = 5L, d = 5L)
+}

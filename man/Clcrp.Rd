@@ -38,3 +38,6 @@ exchangeable, which is the point: distance carries information.
 Blei & Frazier (2011), J. Machine Learning Research
 12:2461-2488.
 }
+\examples{
+Clcrp(y = 5L, distances = 5L)
+}

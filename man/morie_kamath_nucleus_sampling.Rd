@@ -20,3 +20,6 @@ List with \code{probabilities}, \code{kept}, \code{n_kept}, \code{kept_mass}.
 Temperature-scaled softmax truncated to the smallest set with cumulative
 mass >= p, then renormalised. \code{kept} is 0-BASED.
 }
+\examples{
+morie_kamath_nucleus_sampling(logits = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

@@ -43,3 +43,6 @@ Crossref; VanderWeele (2015), Explanation in Causal Inference, OUP,
 ch. 5. Neither source was in the local corpus; the
 parallel-mediator products above are the standard published form.
 }
+\examples{
+MultM(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M_list = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

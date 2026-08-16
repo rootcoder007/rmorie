@@ -44,3 +44,6 @@ Formula: cov(f_l(x), f_m(x')) = K^f_{lm} k^x(x, x').
 Bonilla, Chai and Williams (2008), Multi-task Gaussian
 process prediction, NIPS 20, eqs. (1)-(2).
 }
+\examples{
+Gpmlt(X = 5L, y_tasks = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

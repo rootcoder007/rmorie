@@ -22,3 +22,6 @@ Part of the tlcvnp_native implementation; see the file header for the source it 
 A list with \code{h}, \code{fit}, \code{criterion}, \code{all}, \code{note}.
 }
 \keyword{internal}
+\examples{
+select_bandwidth(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

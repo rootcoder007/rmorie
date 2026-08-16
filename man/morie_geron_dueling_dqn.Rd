@@ -18,3 +18,6 @@ List with \code{Q}, \code{centered_advantage}, \code{mean_advantage},
 \description{
 Q = V + (A - rowMeans(A)); \code{best_action} is 0-based.
 }
+\examples{
+morie_geron_dueling_dqn(V = 5L, A = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -38,3 +38,6 @@ Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
 baseline cumulative hazard estimator used here.
 }
 \keyword{internal}
+\examples{
+morie_survnnr_forward(W = 5L, b = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

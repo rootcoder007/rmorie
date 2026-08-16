@@ -38,3 +38,6 @@ privacy, International Journal of Uncertainty, Fuzziness and
 Knowledge-Based Systems 10(5):557-570.
 \doi{10.1142/S0218488502001648}
 }
+\examples{
+Kanon(y = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

@@ -29,3 +29,6 @@ A list with the edge weights, the adjacency, the nodes and   the read counts.
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+morie_metsem_graph(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
+}

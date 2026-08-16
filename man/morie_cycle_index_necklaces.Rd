@@ -26,3 +26,6 @@ Polya G (1937). Kombinatorische Anzahlbestimmungen fuer
 Gruppen, Graphen und chemische Verbindungen. \emph{Acta
 Mathematica}, 68, 145-254.
 }
+\examples{
+morie_cycle_index_necklaces(n = 5L, k = 5L)
+}

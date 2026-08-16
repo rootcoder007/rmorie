@@ -17,3 +17,6 @@ A list of integer vectors, each weakly decreasing.
 \description{
 Every partition of an integer
 }
+\examples{
+morie_partitions_of(n = 5L)
+}

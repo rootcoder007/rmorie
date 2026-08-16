@@ -23,3 +23,6 @@ Solves the LP relaxation by simplex (the only choice safe for branch and bound) 
 A list with feasible, x, value, note.
 }
 \keyword{internal}
+\examples{
+morie_miprgr_solve_relaxation(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

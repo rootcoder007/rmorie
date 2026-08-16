@@ -25,3 +25,6 @@ always true and never useful.
 \references{
 Chernoff H (1952) \emph{Ann Math Stat} 23(4):493-507.
 }
+\examples{
+morie_chernoff_bound(n = 5L, p = 0.5, t = 5L)
+}

@@ -18,3 +18,6 @@ whose transform has sidelobes that leak energy from strong components into neigh
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+WindowFn(N = 5L)
+}

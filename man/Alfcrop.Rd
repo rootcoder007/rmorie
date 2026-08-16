@@ -50,3 +50,6 @@ alongside the crop.
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. section 1.2.8
 }
+\examples{
+Alfcrop(seqlen = 5L, cropsize = 5L)
+}

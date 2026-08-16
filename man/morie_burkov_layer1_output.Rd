@@ -20,3 +20,6 @@ First hidden layer phi(W1 x + b1) (Burkov Eq 1.6)
 A list with \code{output}, \code{preactivation}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_layer1_output(W_1 = c(1, 2, 3, 4, 5, 6, 7, 8), x = 5L, b_1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

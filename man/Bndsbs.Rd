@@ -36,3 +36,6 @@ Journal of Statistical Planning and Inference 138(9), 2786-2807.
 distinction is Section 4.3.3 of Molinari, F. (2021), Handbook of
 Econometrics 7A (arXiv:2004.11751 p. 101).
 }
+\examples{
+Bndsbs(theta_full = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), subset_idx = list(a = 1, b = 2))
+}

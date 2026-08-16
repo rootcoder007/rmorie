@@ -20,3 +20,6 @@ MfMaxSnr(x, noise_power, t = NULL, dt = 1)
 A list with \code{snr}, \code{snr_db}, \code{energy}, \code{noise_power}, \code{n0}, \code{depends_only_on_energy}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MfMaxSnr(x = c(1, 2, 3, 4, 5, 6, 7, 8), noise_power = 5L)
+}

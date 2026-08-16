@@ -25,3 +25,6 @@ Fits an autoencoder on X_unlab (via \code{morie_geron_autoencoder}),
 pushes X_lab through the frozen encoder, fits a linear head on codes,
 compares exact leave-one-out MSE against a raw-feature control.
 }
+\examples{
+morie_geron_unsupervised_pretraining(X_unlab = c(1, 2, 3, 4, 5, 6, 7, 8), X_lab = c(1, 2, 3, 4, 5, 6, 7, 8), y_lab = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

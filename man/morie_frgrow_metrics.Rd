@@ -44,3 +44,6 @@ A list with pKd, the free energy and the five metrics.
     464-469.
 }
 \keyword{internal}
+\examples{
+morie_frgrow_metrics(kd = 5L, hac = 5L)
+}

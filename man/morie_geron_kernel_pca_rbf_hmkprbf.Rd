@@ -19,3 +19,6 @@ List with X_projected, eigenvalues, alphas, K, explained_variance_ratio, gamma, 
 \description{
 Kernel PCA with RBF kernel (Geron Ch 7, morie.fn hmkprbf)
 }
+\examples{
+morie_geron_kernel_pca_rbf_hmkprbf(X = c(1, 2, 3, 4, 5, 6, 7, 8), n_components = 5L)
+}

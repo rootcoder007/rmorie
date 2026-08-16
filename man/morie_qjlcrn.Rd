@@ -20,3 +20,6 @@ Draws a \code{d}-by-\code{k} matrix \code{R} from the chosen Achlioptas distribu
 A list with \code{estimate}, \code{embedding} \code{E},   \code{matrix} \code{R}, \code{k}, \code{d}, \code{n},   \code{distribution}, \code{nonzero_fraction}, \code{norm},   \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_qjlcrn(A = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

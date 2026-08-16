@@ -14,3 +14,6 @@ Simulated sign-test power over supplied samples -- Sec. 5.4.5, p. 175
 A list with \code{power}, \code{rejections}, \code{nsim}, \code{kmean}, \code{kcrit}.
 }
 \keyword{internal}
+\examples{
+Signsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8), kcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

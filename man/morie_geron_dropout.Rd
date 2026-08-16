@@ -20,3 +20,6 @@ List with \code{output}, \code{mask}, \code{keep_prob}, \code{fraction_dropped},
 \description{
 Mask ~ \verb{1\{u < 1-p\}} over the LCG uniform stream, output a * mask / (1-p).
 }
+\examples{
+morie_geron_dropout(a = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

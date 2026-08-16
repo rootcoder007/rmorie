@@ -18,3 +18,6 @@ integers and never divides. Counts balanced bracket sequences,
 triangulations of a convex \eqn{(n+2)}-gon and binary trees on
 \eqn{n} nodes, among many others.
 }
+\examples{
+morie_catalan_number(n = 5L)
+}

@@ -23,3 +23,6 @@ List with \code{estimate}, \code{score}, \code{weights}.
 Weighted helpful / harmless / honest rubric score; the default weights
 are 1/3 each.
 }
+\examples{
+morie_kamath_3h_alignment(helpful_score = c(1, 2, 3, 4, 5, 6, 7, 8), harmless_score = c(1, 2, 3, 4, 5, 6, 7, 8), honest_score = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

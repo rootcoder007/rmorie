@@ -19,3 +19,6 @@ TOP1 ranking loss
 Scalar loss.
 }
 \keyword{internal}
+\examples{
+top1_loss(r_target = 5L, r_negatives = 5L)
+}

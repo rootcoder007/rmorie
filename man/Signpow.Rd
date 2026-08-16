@@ -14,3 +14,6 @@ Power of the sign test -- eq. (5.4.8), Table 5.4.1, p. 174
 A list with \code{power}, \code{power_exact}, \code{k_alpha}, \code{alpha_exact}, \code{n}, \code{theta}.
 }
 \keyword{internal}
+\examples{
+Signpow(n = 5L, theta = 0.5)
+}

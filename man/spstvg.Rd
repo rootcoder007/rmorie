@@ -67,3 +67,6 @@ filled. An unestimated semivariogram and a zero one are different claims.
 \references{
 Schabenberger Ch 9, Sec 9.4, eqs (9.18)-(9.19)
 }
+\examples{
+spstvg(coords = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

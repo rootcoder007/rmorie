@@ -29,3 +29,6 @@ Chung (1997), Spectral Graph Theory, CBMS 92, Sections
 of 0 equals the number of connected components. Fetched from the
 author's own copy of the chapter.
 }
+\examples{
+Lapspec(W = 5L)
+}

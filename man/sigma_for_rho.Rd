@@ -18,3 +18,6 @@ The noise scale that buys a given rho
 A scalar numeric: the Gaussian standard deviation sigma.
 }
 \keyword{internal}
+\examples{
+sigma_for_rho(sensitivity = 5L, rho = 0.5)
+}

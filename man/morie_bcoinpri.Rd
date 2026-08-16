@@ -15,3 +15,6 @@ list(density, inside, logdensity)
 \description{
 Uniform prior density on the bent-coin bias (eq. 3.9, p. 51)
 }
+\examples{
+morie_bcoinpri(pa = 5L)
+}

@@ -17,3 +17,6 @@ on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_sctraj_cosine_cdf(u = 5L)
+}

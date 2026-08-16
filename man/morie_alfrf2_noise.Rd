@@ -30,3 +30,6 @@ The noised structure.
     sets of vectors." Acta Crystallographica A32(5), 922-923.
 }
 \keyword{internal}
+\examples{
+morie_alfrf2_noise(x0 = c(1, 2, 3, 4, 5, 6, 7, 8), abar_t = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
+}

@@ -19,3 +19,6 @@ Computes \code{alpha_eps} at level \code{m} under a stated rule. \code{"m_square
 A list with \code{alpha}, \code{level} and \code{rule}.
 }
 \keyword{internal}
+\examples{
+poltrx_level_parameters(level = 1)
+}

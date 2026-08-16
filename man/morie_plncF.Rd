@@ -33,3 +33,6 @@ Stefan-Boltzmann total emissive power \eqn{\sigma T^4}.
 Rybicki, G. B. and Lightman, A. P. (1979). Radiative
 Processes in Astrophysics. Wiley, Sections 1.5-1.6.
 }
+\examples{
+morie_plncF(lam = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
+}

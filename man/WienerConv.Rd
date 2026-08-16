@@ -19,3 +19,6 @@ of the tap weights with the ACF.  It holds only for a stationary process; that p
 A list with \code{lhs}, \code{theta}, \code{max_difference}, \code{holds}, \code{order}, \code{requires_stationarity}, \code{method}.
 }
 \keyword{internal}
+\examples{
+WienerConv(w = 5L, phi = 0.5, theta = 0.5)
+}

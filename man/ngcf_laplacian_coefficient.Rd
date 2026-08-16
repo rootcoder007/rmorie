@@ -43,3 +43,6 @@ implemented in :mod:`ncfRS`.
 """
 }
 \keyword{internal}
+\examples{
+ngcf_laplacian_coefficient(n_u = 5L, n_i = 5L)
+}

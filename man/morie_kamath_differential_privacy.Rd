@@ -19,3 +19,6 @@ List with \code{estimate}, \code{guarantee}, \code{slack}, \code{worst_event}.
 \description{
 Checks P_D <= e^eps P_D' + delta BOTH ways and reports the worst slack.
 }
+\examples{
+morie_kamath_differential_privacy(eps = 0.5, delta = 0.5)
+}

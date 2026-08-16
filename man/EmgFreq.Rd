@@ -19,3 +19,6 @@ fatigues, but they are not interchangeable: the median is far less sensitive to 
 A list with \code{mean_frequency}, \code{median_frequency}, \code{difference}, \code{bandwidth}, \code{total_power}, \code{psd}, \code{freqs}, \code{fs}, \code{nperseg}, \code{method}.
 }
 \keyword{internal}
+\examples{
+EmgFreq(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+}

@@ -20,3 +20,6 @@ Part of the nbeats_native implementation; see the file header for the source it 
 The value of \code{do.call}.
 }
 \keyword{internal}
+\examples{
+nbeats_seasonality_basis(length = 5L, harmonics = 5L)
+}

@@ -22,3 +22,6 @@ resolution with cross-terms; decompose first and the interaction is known, so th
 A list with \code{tfd}, \code{times}, \code{frequencies}, \code{ep}, \code{esp}, \code{fp}, \code{fsp}, \code{coefficients}, \code{method}.
 }
 \keyword{internal}
+\examples{
+VagTfd(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+}

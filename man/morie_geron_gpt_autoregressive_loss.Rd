@@ -20,3 +20,6 @@ List with \code{loss}, \code{mean_loss}, \code{perplexity},
 \description{
 Autoregressive next-token cross-entropy (Geron Ch 16, morie.fn grgptl)
 }
+\examples{
+morie_geron_gpt_autoregressive_loss(logits = c(1, 2, 3, 4, 5, 6, 7, 8), targets = 5L)
+}

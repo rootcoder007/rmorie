@@ -19,3 +19,6 @@ IDFT.  Low quefrency estimates the slowly varying component (the vocal tract, th
 A list with \code{y}, \code{cepstrum}, \code{liftered}, \code{cutoff}, \code{keep}, \code{n}, \code{linear_phase_removed}, \code{imaginary_energy}, \code{stages}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HomDeconv(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5)
+}

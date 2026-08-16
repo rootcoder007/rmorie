@@ -14,3 +14,6 @@ Moments of a uniform order statistic -- Sec. 2.4, p. 38
 A list with \code{moment}, \code{mean}, \code{var}, \code{r}, \code{n}, \code{k}.
 }
 \keyword{internal}
+\examples{
+Ostatmom(r = 5L, n = 5L)
+}

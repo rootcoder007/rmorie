@@ -29,3 +29,6 @@ List with X_projected, eigenvalues, alphas, K, feature_space_dim, estimate, n, m
 \description{
 Kernel PCA with polynomial kernel (Geron Ch 7, morie.fn hmkppl)
 }
+\examples{
+morie_geron_kernel_pca_poly(X = c(1, 2, 3, 4, 5, 6, 7, 8), n_components = 5L)
+}

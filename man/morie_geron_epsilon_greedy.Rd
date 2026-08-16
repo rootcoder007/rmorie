@@ -22,3 +22,6 @@ List with \code{action}, \code{greedy_action}, \code{explored},
 Greedy w.p. 1-eps, otherwise uniform over ALL actions, so
 P(greedy) = 1 - eps + eps/|A|. Actions returned 0-based.
 }
+\examples{
+morie_geron_epsilon_greedy(Q_s = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
+}

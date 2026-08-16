@@ -40,3 +40,6 @@ A list with the latents, the decoded strings, and validity,   uniqueness and nov
     Frontiers in Pharmacology 11, 565644.
 }
 \keyword{internal}
+\examples{
+morie_genmol(model = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n_samples = 5L)
+}

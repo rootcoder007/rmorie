@@ -35,3 +35,6 @@ A list with the information, the support and the cells seen.
     Information Theory in Psychology, 95-100.
 }
 \keyword{internal}
+\examples{
+morie_rnacov_mi(alignment = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8), j = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

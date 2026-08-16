@@ -18,3 +18,6 @@ Part of the edgrn_native implementation; see the file header for the source it f
 A list with \code{effective}, \code{offset}, \code{note}.
 }
 \keyword{internal}
+\examples{
+edgrn_effective_library_size(library_size = 5L, factor = 5L)
+}

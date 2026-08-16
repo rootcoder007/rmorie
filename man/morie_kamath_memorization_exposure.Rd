@@ -17,3 +17,6 @@ List with \code{estimate}, \code{rank}, \code{max_exposure}.
 \description{
 log2(candidate space) - log2(the canary's rank).
 }
+\examples{
+morie_kamath_memorization_exposure(canary_ll = 5L, candidate_lls = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -25,3 +25,6 @@ applies to the eigenvalues of D^-1/2 W D^-1/2.
 \references{
 Schabenberger & Gotway (2005), eq (6.48), p. 340.
 }
+\examples{
+car_rho_bounds(W = 5L)
+}

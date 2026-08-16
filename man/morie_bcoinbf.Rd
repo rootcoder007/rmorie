@@ -17,3 +17,6 @@ list(evidence1, evidence0, ratio, logratio)
 \description{
 Free-bias against fixed-bias coin (eq. 3.12, 3.20, 3.22, pp. 52-53)
 }
+\examples{
+morie_bcoinbf(fa = 5L, fb = 5L)
+}

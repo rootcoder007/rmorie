@@ -15,3 +15,6 @@ A \code{morie_bigint}.
 \description{
 Exact factorial
 }
+\examples{
+morie_big_factorial(n = 5L)
+}

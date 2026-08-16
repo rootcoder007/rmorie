@@ -37,3 +37,6 @@ Aitchison (1986), The Statistical Analysis of
 Compositional Data, Chapter 6. The reference part is the LAST,
 matching aitalr and aitalri.
 }
+\examples{
+Lgtnsim(mu = 5L, Sigma = 0.5, n = 5L)
+}

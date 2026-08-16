@@ -20,3 +20,6 @@ Part of the bndbye_native implementation; see the file header for the source it 
 A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value}, \code{target}, \code{level}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_frequentist_confidence_set(theta_set = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), se_phi = 5L)
+}

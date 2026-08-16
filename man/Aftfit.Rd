@@ -30,3 +30,6 @@ Coefficients act MULTIPLICATIVELY ON TIME rather than on the hazard, so exp(beta
 \references{
 Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley, Chapter 3.
 }
+\examples{
+Aftfit(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

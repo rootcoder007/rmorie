@@ -27,3 +27,6 @@ Distributional Reinforcement Learning", AISTATS 2018
 (arXiv:1802.08163) contraction in Cramer distance.
 }
 \keyword{internal}
+\examples{
+greedy_action(next_probs_by_action = c(1, 2, 3, 4, 5, 6, 7, 8), z = 5L)
+}

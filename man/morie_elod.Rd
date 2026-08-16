@@ -18,3 +18,6 @@ Equations (5a)-(5c) of Lander & Botstein (1989): the exact expected LOD and the 
 A named list with keys \code{elod}, \code{approximation},   \code{gap}, \code{ratio}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_elod(var_qtl = 5L, var_residual = 5L)
+}

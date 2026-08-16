@@ -17,3 +17,6 @@ Lemma 1.8: any function of the output keeps the same rho
 A list with \code{rho} and a \code{note} explaining that   the parameter is invariant under post-processing -- unlike   Dwork and Rothblum\'s mCDP, which is not closed under   post-processing.
 }
 \keyword{internal}
+\examples{
+postprocessing(rho = 0.5)
+}

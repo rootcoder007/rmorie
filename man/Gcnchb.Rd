@@ -35,3 +35,6 @@ Defferrard, Bresson and Vandergheynst (2016),
 Convolutional neural networks on graphs with fast localized
 spectral filtering, NIPS 29, eqs. (4)-(5). arXiv:1606.09375
 }
+\examples{
+Gcnchb(L = 5L, X = 5L)
+}

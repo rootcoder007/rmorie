@@ -18,3 +18,6 @@ exponentially weighted correlations.  Solving it outright each sample is what th
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+RlsNormal(phi = 0.5, theta = 0.5)
+}

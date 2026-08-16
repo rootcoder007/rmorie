@@ -20,3 +20,6 @@ Evaluates the first `n_basis` Fourier (or monomial) basis functions on the obser
 numeric matrix with one row per grid point
 }
 \keyword{internal}
+\examples{
+morie_fda_basis(t = c(1, 2, 3, 4, 5, 6, 7, 8), n_basis = 5L)
+}

@@ -37,3 +37,6 @@ index (Sutton & Barto 2018, Sec. 4.4 boxed algorithm, p. 83).
 Sutton, R. S. and Barto, A. G. (2018). Reinforcement
 Learning: An Introduction, 2nd ed. MIT Press, Section 4.4.
 }
+\examples{
+morie_mdpval(P = 1, R = 5L, gamma = 0.5)
+}

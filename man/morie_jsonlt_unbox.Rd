@@ -24,3 +24,6 @@ Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
   Interchange Format." RFC 8259.
 }
 \keyword{internal}
+\examples{
+morie_jsonlt_unbox(x = 5L)
+}

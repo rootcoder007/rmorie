@@ -28,3 +28,6 @@ Andrews and Soares (2010), Econometrica 78(1), 119-157,
 Sects. 3-4.  Standard published form; the article is not in the
 local corpus and was not read.
 }
+\examples{
+Gmsbound(mbar = 5L, sigma = 0.5, n = 5L)
+}

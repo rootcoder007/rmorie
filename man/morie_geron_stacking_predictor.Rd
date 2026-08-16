@@ -28,3 +28,6 @@ List with \code{predictions}, \code{weights}, \code{rmse}, \code{base_rmse},
 Least-squares meta-learner (minimum-norm, matching numpy.lstsq) over
 out-of-fold base predictions, with an intercept by default.
 }
+\examples{
+morie_geron_stacking_predictor(base_preds = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
+}

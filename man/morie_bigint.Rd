@@ -15,3 +15,6 @@ An object of class \code{morie_bigint}.
 \description{
 Arbitrary-precision integer from a string or a double
 }
+\examples{
+morie_bigint(x = 5L)
+}

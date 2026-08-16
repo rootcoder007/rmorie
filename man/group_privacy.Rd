@@ -18,3 +18,6 @@ Proposition 1.9: groups of size k cost k^2 rho
 A list with \code{rho}, \code{k}, and a \code{growth}   string noting the quadratic, exactly tight bound.
 }
 \keyword{internal}
+\examples{
+group_privacy(rho = 0.5, k = 5L)
+}

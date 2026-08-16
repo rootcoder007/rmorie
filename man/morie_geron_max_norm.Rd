@@ -23,3 +23,6 @@ and only its length is capped at \code{r}. \code{axis} follows numpy on a
 matrix: 0 = down columns, 1 (or -1) = across rows; NULL treats the
 whole array as one vector.
 }
+\examples{
+morie_geron_max_norm(w = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L)
+}

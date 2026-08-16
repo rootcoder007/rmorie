@@ -18,3 +18,6 @@ Random sign flip on the positional encoding
 Sign-flipped encoding.
 }
 \keyword{internal}
+\examples{
+random_sign_flip(pe = c(1, 2, 3, 4, 5, 6, 7, 8), rng = list(a = 1, b = 2))
+}

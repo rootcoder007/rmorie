@@ -22,3 +22,6 @@ Keeps the k highest probabilities (ties broken by the lower index,
 matching numpy's lexsort on (-p, index)), renormalises by their mass
 and zeroes the rest. \code{kept_indices} are 0-based and ascending.
 }
+\examples{
+morie_geron_topk_sampling(logits = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

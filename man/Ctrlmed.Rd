@@ -14,3 +14,6 @@ Control median test -- Sec. 6.5, eq. (6.5.1), p. 256
 A list with \code{statistic}, \code{p_value}, \code{z}, \code{mean}, \code{var}, \code{pmf}, \code{r}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Ctrlmed(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
+}

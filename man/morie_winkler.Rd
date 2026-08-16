@@ -24,3 +24,6 @@ primary source: W = (u - l) + (2/alpha)(l - y) if y < l, +
 67(337):187-191, in the form of Gneiting and Raftery (2007), JASA
 102(477):359-378, eq. (43). Lower is better.
 }
+\examples{
+morie_winkler(y = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -22,3 +22,6 @@ T rounds of eq. (1)
 Final states.
 }
 \keyword{internal}
+\examples{
+morie_mpfn_message_passing(H0 = c(1, 2, 3, 4, 5, 6, 7, 8), adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), edge_features = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

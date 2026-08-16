@@ -39,3 +39,6 @@ The binding free energy.
     464-469.
 }
 \keyword{internal}
+\examples{
+morie_frgrow_dg(kd = 5L)
+}

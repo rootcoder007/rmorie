@@ -18,3 +18,6 @@ Part of the pate_native implementation; see the file header for the source it fo
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+lemma4_bound(counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+}

@@ -22,3 +22,6 @@ the generalised ESD critical values.
 Rosner, B. (1983). Percentage points for a generalized
 ESD many-outlier procedure. Technometrics, 25(2), 165-172.
 }
+\examples{
+morie_t_quantile(p = 0.5, v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

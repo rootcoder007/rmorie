@@ -19,3 +19,6 @@ A set of edges is independent exactly when it is acyclic. This is the
 matroid that makes Kruskal's algorithm correct: minimum spanning tree
 IS the greedy algorithm here.
 }
+\examples{
+morie_graphic_matroid(edges = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n_vertices = 5L)
+}

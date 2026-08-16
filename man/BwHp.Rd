@@ -20,3 +20,6 @@ pole radius -- and the N zeros move from z = -1 to z = +1.  The gain is renormal
 A list with \code{b}, \code{a}, \code{gain}, \code{H}, \code{N}, \code{cutoff_hz}, \code{fs}, \code{order}, \code{kind}, \code{zeros_at_plus_one}, \code{dc_gain}, \code{nyquist_gain}, \code{prewarped}, \code{normalized_at_nyquist}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwHp(cutoff_hz = 5L)
+}

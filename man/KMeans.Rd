@@ -21,3 +21,6 @@ terminates -- at a LOCAL minimum that depends on where the centroids started.  T
 A list with \code{labels}, \code{centroids}, \code{wcss}, \code{k}, \code{sizes}, \code{iterations}, \code{converged}, \code{local_minimum_only}, \code{depends_on_the_starting_centroids}, \code{unsupervised_groups_need_not_be_the_classes}, \code{method}.
 }
 \keyword{internal}
+\examples{
+KMeans(X = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

@@ -14,3 +14,6 @@ Rank-sum normal approximation -- Sec. 8.2, p. 291
 A list with \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{var_uncorrected}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Wrsz(w = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L, n = 5L)
+}

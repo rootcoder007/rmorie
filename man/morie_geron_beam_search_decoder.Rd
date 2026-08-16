@@ -29,3 +29,6 @@ Every step expands the whole vocabulary and keeps the top-k by
 cumulative log-probability. Prefix-independent scores make the beam
 exhaustive over the retained hypotheses. Tokens are 0-based.
 }
+\examples{
+morie_geron_beam_search_decoder(scores = c(1, 2, 3, 4, 5, 6, 7, 8), beam_width = 5L)
+}

@@ -18,3 +18,6 @@ Masked-position MSE
 A list with mse, n_scored, scored.
 }
 \keyword{internal}
+\examples{
+morie_momento_masked_loss(truth = c(1, 2, 3, 4, 5, 6, 7, 8), reconstruction = c(1, 2, 3, 4, 5, 6, 7, 8), mask = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

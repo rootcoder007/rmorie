@@ -15,3 +15,6 @@ list(approx, exact, relerr, logapprox)
 \description{
 Gaussian approximation to the central binomial (eq. 1.40, p. 17)
 }
+\examples{
+morie_cbcapx(n = 5L)
+}

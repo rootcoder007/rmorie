@@ -14,3 +14,6 @@ Sign test efficacy -- eq. (13.3.3), p. 489
 A list with \code{efficacy}, \code{per_obs}, \code{n}, \code{fmed}.
 }
 \keyword{internal}
+\examples{
+Effsign(n = 5L, fmed = 5L)
+}

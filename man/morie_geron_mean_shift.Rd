@@ -32,3 +32,6 @@ List with labels, modes, n_clusters, trajectories_iters, estimate, n, method.
 \description{
 Mean shift: mode-seeking via kernel density gradient ascent (Geron Ch 8, morie.fn hmmnsh)
 }
+\examples{
+morie_geron_mean_shift(X = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
+}

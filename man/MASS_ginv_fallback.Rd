@@ -17,3 +17,6 @@ Part of the evt_coles implementation; see the file header for the source it foll
 The value of \code{%*%}.
 }
 \keyword{internal}
+\examples{
+MASS_ginv_fallback(H = 0.5)
+}

@@ -34,3 +34,6 @@ Zheng W, van der Laan MJ (2012). Targeted maximum
 likelihood estimation of natural direct effects. \emph{The
 International Journal of Biostatistics} 8(1), Article 3.
 }
+\examples{
+morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1, 0), mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

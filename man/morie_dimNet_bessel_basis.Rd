@@ -19,3 +19,6 @@ morie_dimNet_bessel_basis(d, cutoff = 5, n_basis = 8L)
 Numeric vector of length \code{n_basis}.
 }
 \keyword{internal}
+\examples{
+morie_dimNet_bessel_basis(d = 5L)
+}

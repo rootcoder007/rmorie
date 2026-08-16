@@ -20,3 +20,6 @@ List with \code{estimate}, \code{argmin}, \code{losses}.
 Mean squared error between projected features and tau_X(t), minimised
 over candidates. \code{argmin} is 0-BASED.
 }
+\examples{
+morie_kamath_ch9_output_projector_mse(H_X = c(1, 2, 3, 4, 5, 6, 7, 8), tau_X = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

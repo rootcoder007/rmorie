@@ -32,3 +32,6 @@ List with labels, centers, inertia, n_iter, distances, counts, estimate, n, meth
 \description{
 k-means clustering via Lloyd's algorithm, k-means++ seeded (Geron Ch 8, morie.fn hmkmn)
 }
+\examples{
+morie_geron_kmeans(X = c(1, 2, 3, 4, 5, 6, 7, 8), n_clusters = 5L)
+}

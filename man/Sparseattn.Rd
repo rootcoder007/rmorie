@@ -28,3 +28,6 @@ arXiv:1904.10509, Sects. 3-4 (in the local corpus); Beltagy, Peters
 and Cohan (2020), arXiv:2004.05150; scaled dot-product attention is
 Vaswani et al. (2017), Equation (1).
 }
+\examples{
+Sparseattn(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

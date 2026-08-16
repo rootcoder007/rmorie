@@ -29,3 +29,6 @@ Comput. Sci. 25(2), 64-73.  Standard published form; the article is
 paywalled and was not read.  The folding hash is this
 implementation's own choice, stated rather than attributed.
 }
+\examples{
+Atompairfp(adjacency = 5L, atomtype = 5L)
+}

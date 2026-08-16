@@ -32,3 +32,6 @@ A list with the outer product mean, the attention bias and   weights, the update
     5998-6008.
 }
 \keyword{internal}
+\examples{
+morie_alfomg(msa = c(1, 2, 3, 4, 5, 6, 7, 8), pair = 5L)
+}

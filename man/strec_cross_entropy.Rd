@@ -47,3 +47,6 @@ important, where STAMP explicitly privileges the last click;
 implemented in :mod:`narm`.
 }
 \keyword{internal}
+\examples{
+strec_cross_entropy(probability = c(1, 2, 3, 4, 5, 6, 7, 8), target_index = 5L)
+}

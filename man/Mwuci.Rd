@@ -14,3 +14,6 @@ Mann-Whitney shift CI -- Sec. 6.6.2, p. 267
 A list with \code{lower}, \code{upper}, \code{estimate}, \code{k}, \code{ndiff}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Mwuci(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

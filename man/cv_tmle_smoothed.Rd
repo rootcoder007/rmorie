@@ -22,3 +22,6 @@ Part of the tlcvnp_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{psi}, \code{se}, \code{ci}, \code{bandwidths}, \code{fold_estimates}, \code{V}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+cv_tmle_smoothed(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

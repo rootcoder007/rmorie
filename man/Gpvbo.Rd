@@ -41,3 +41,6 @@ optimization of expensive black-box functions, Journal of Global
 Optimization 13(4):455-492, eq. (15).
 \doi{10.1023/A:1008306431147}
 }
+\examples{
+Gpvbo(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

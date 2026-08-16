@@ -51,3 +51,6 @@ Code/GraphMol/Fingerprints/FingerprintUtil.cpp lines 172-192 and
 revision fetched 2026-08-09.  RDKit: Open-Source Cheminformatics,
 https://www.rdkit.org.
 }
+\examples{
+Fcfp4(adjacency = 5L, features = 5L)
+}

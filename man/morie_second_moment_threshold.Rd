@@ -18,3 +18,6 @@ companion to the first moment: together they make threshold results
 sharp, since the first shows a property vanishes below the threshold
 and the second shows it appears above. Neither alone establishes one.
 }
+\examples{
+morie_second_moment_threshold(expectation = 5L, variance = 5L)
+}

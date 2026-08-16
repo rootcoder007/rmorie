@@ -37,3 +37,6 @@ A list with the designed backbone, the motif it was built   around, the motif RM
     sets of vectors." Acta Crystallographica A32(5), 922-923.
 }
 \keyword{internal}
+\examples{
+morie_alfrf2(target_motif = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), scaffold = 5L)
+}

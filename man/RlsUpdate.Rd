@@ -19,3 +19,6 @@ Part of the rangayyan_adapt implementation; see the file header for the source i
 A list with \code{w_next}, \code{correction}, \code{alpha}, \code{order}, \code{sign}, \code{erratum}, \code{method}.
 }
 \keyword{internal}
+\examples{
+RlsUpdate(w_prev = 5L, k = 5L, alpha = 0.5)
+}

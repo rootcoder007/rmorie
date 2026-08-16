@@ -36,3 +36,6 @@ than fixed.
 Kemp, Tenenbaum, Griffiths, Yamada & Ueda (2006),
 AAAI-06:381-388.
 }
+\examples{
+Dpsbm(adjacency = 5L)
+}

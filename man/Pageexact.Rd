@@ -14,3 +14,6 @@ Exact null distribution of Page\'s L -- Sec. 12.3, p. 448
 A list with \code{support}, \code{pmf}, \code{pmf_l}, \code{sf_l}, \code{mean}, \code{var}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Pageexact(k = 5L, n = 5L)
+}

@@ -34,3 +34,6 @@ Dwork, C. and Roth, A. (2014). The Algorithmic
 Foundations of Differential Privacy. Foundations and Trends in
 Theoretical Computer Science, 9(3-4), Claim 3.9.
 }
+\examples{
+morie_reportm(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}

@@ -35,3 +35,6 @@ The penalty, zero at or beyond the radius.
     Proteins 52(4), 609-623.
 }
 \keyword{internal}
+\examples{
+morie_chemsc_clash(r = 5L)
+}

@@ -18,3 +18,6 @@ list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2)) after the paper\\'
 A list with \code{Z}, \code{pihat}.
 }
 \keyword{internal}
+\examples{
+morie_snpqc1_ibd_moments(genotypes = list(a = 1, b = 2))
+}

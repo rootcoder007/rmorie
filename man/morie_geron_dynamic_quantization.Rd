@@ -18,3 +18,6 @@ List with \code{output}, \code{reference}, \code{max_abs_error},
 Per-tensor scales max|.|/127, INT32 accumulate, dequantize by sx*sw.
 np.rint and R's round both break ties to even.
 }
+\examples{
+morie_geron_dynamic_quantization(x = 5L, w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

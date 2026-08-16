@@ -19,3 +19,6 @@ normalized rho are returned: rho is what a threshold can be set on, phi is what 
 A list with \code{acf}, \code{normalized}, \code{lags}, \code{fs}, \code{peak_lag}, \code{peak_lag_seconds}, \code{implied_frequency_hz}, \code{peak_value}, \code{a_rhythm_gives_a_periodic_acf}, \code{robust_to_amplitude_variation}, \code{method}.
 }
 \keyword{internal}
+\examples{
+EegAcf(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+}

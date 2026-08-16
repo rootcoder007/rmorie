@@ -39,3 +39,6 @@ Hansen, M. H. & Hurwitz, W. N. (1943). On the theory of
 sampling from finite populations. Annals of Mathematical Statistics
 14(4):333-362. \doi{10.1214/aoms/1177731356}.
 }
+\examples{
+Ppsamp(y = c(1, 2, 3, 4, 5, 6, 7, 8), size = c(1, 2, 3, 4, 5, 6, 7, 8), n = 3L)
+}

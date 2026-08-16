@@ -14,3 +14,6 @@ Exact runs-test critical region -- Sec. 3.2, p. 84; Table D
 A list with \code{lower}, \code{upper}, \code{alpha_lower}, \code{alpha_upper}, \code{alpha_exact}, \code{n1}, \code{n2}.
 }
 \keyword{internal}
+\examples{
+Runscrit(n1 = 5L, n2 = 5L)
+}

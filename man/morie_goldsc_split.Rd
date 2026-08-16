@@ -37,3 +37,6 @@ The energy.
     defaults and the two split potentials.
 }
 \keyword{internal}
+\examples{
+morie_goldsc_split(r = 5L, r0 = 5L, eps = 0.5)
+}

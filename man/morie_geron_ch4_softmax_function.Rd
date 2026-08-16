@@ -19,3 +19,6 @@ List with \code{probability}, \code{probabilities}, \code{argmax}.
 \description{
 Max-shifted normalized exponential; \code{k} and \code{argmax} are 0-based.
 }
+\examples{
+morie_geron_ch4_softmax_function(s = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

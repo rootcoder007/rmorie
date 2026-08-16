@@ -14,3 +14,6 @@ Spatial factor Poisson log-risk (Lawson eq. 11.1)
 A list with \code{logrisk}, \code{risk}, \code{n}, \code{n_components}.
 }
 \keyword{internal}
+\examples{
+Facrisk(alpha0 = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), phi = 0.5)
+}

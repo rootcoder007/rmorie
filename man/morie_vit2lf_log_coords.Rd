@@ -35,3 +35,6 @@ The two log-spaced offsets.
     sequence models." Transactions of the ACL 8, 156-171.
 }
 \keyword{internal}
+\examples{
+morie_vit2lf_log_coords(dx = 5L, dy = 5L)
+}

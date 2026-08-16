@@ -34,3 +34,6 @@ The value of \code{out}, as built in the body.
   Hernan M. A. & Robins J. M. (2020) Causal Inference: What If, Sec. 12.3.
 }
 \keyword{internal}
+\examples{
+morie_gentmt(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

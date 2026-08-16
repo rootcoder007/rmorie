@@ -18,3 +18,6 @@ per parameter is log(N), larger than AIC\\'s 2 for any N > 7, so MDL picks the s
 A list with \code{order}, \code{criterion}, \code{aic}, \code{aic_order}, \code{n}, \code{start_order}, \code{penalty_per_parameter}, \code{stricter_than_aic}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MdlOrder(errors = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
+}

@@ -37,3 +37,6 @@ analysis of survival time data. Journal of the Royal Statistical
 Society Series B, 40(2), 214-221. Cox, D. R. (1972). Regression
 models and life-tables. JRSS B, 34(2), 187-220.
 }
+\examples{
+Npbcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

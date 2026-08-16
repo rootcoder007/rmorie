@@ -20,3 +20,6 @@ Draws K sticks Y_n ~ Beta(1 - alpha, theta + n alpha) for 0 <= alpha < 1 and the
 A list with `weights`, `Y`, `remaining`, `kept_mass`,   `alpha`, `theta`, `note`.
 }
 \keyword{internal}
+\examples{
+morie_pmpfit(alpha = 0.5, theta = 0.5, K = 5L)
+}

@@ -17,3 +17,6 @@ For each non-zero cause label \code{lab}, refits the model treating \code{lab} a
 Named list with \code{estimate} (number of risks),   \code{risks} (sorted unique non-zero labels), \code{fits}   (one fit per risk keyed by the label as a string) and   \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_survvae_fit_competing(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), causes = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

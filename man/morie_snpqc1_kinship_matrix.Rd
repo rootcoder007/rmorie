@@ -17,3 +17,6 @@ K_ik = (1/M) sum_j (g_ij - 2p_j)(g_kj - 2p_j) / (2 p_j (1 - p_j)). On the same s
 The value of \code{K}, as built in the body.
 }
 \keyword{internal}
+\examples{
+morie_snpqc1_kinship_matrix(genotypes = list(a = 1, b = 2))
+}

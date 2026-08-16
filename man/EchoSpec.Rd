@@ -20,3 +20,6 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{Y}, \code{echo_factor}, \code{magnitude}, \code{phase}, \code{omega}, \code{ripple_period}, \code{a}, \code{n_0}, \code{method}.
 }
 \keyword{internal}
+\examples{
+EchoSpec(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

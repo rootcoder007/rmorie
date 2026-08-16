@@ -33,3 +33,6 @@ Tawn (1988), Biometrika 75(3):397-415; Coles (2001), An
 Introduction to Statistical Modeling of Extreme Values, Springer,
 eq. (8.10) p. 146.
 }
+\examples{
+Evmsexp(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+}

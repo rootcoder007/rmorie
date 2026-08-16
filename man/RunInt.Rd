@@ -19,3 +19,6 @@ The window is clipped at the start of the record, and how many windows that affe
 A list with \code{y}, \code{n}, \code{tau}, \code{clipped_windows}, \code{trapezoidal}, \code{continuous_counterpart_of_the_ma_filter}, \code{method}.
 }
 \keyword{internal}
+\examples{
+RunInt(x = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+}

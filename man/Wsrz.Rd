@@ -14,3 +14,6 @@ Signed-rank normal approximation -- eq. (5.7.9), p. 202
 A list with \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{statistic}, \code{n}, \code{alternative}.
 }
 \keyword{internal}
+\examples{
+Wsrz(tplus = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

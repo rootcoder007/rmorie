@@ -30,3 +30,6 @@ maximum and \code{improvement} is signed.
 \references{
 Alon N, Spencer JH (2016), Ch 3.
 }
+\examples{
+morie_alteration_ramsey(k = 5L)
+}

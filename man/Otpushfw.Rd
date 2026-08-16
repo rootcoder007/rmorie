@@ -25,3 +25,6 @@ Peyre & Cuturi (2019), Remark 2.6, eq. (2.8), which writes
 \references{
 Peyre & Cuturi (2019), eq. (2.8).
 }
+\examples{
+Otpushfw(mu_grid = c(1, 2, 3, 4, 5, 6, 7, 8), T_jac = c(1, 2, 3, 4, 5, 6, 7, 8), T_inv_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

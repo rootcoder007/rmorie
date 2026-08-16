@@ -65,3 +65,6 @@ implementation, Code/GraphMol/Fingerprints/MorganGenerator.cpp lines
 242-265, master revision fetched 2026-08-09.  RDKit: Open-Source
 Cheminformatics, https://www.rdkit.org.
 }
+\examples{
+Ecfp6(adjacency = 5L, atomnum = 5L)
+}

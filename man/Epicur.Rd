@@ -34,3 +34,6 @@ bandwidth in day units replaces Cleveland's nearest-neighbour span.
 Cleveland (1979), JASA 74(368):829-836,
 doi:10.1080/01621459.1979.10481038.
 }
+\examples{
+Epicur(dates = c(1, 2, 3, 4, 5, 6, 7, 8), cases = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
+}

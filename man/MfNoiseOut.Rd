@@ -20,3 +20,6 @@ holds only because the input was white, so the density factored out.
 A list with \code{psd}, \code{power}, \code{rms}, \code{input_power}, \code{input_density}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MfNoiseOut(power = 5L, H = 0.5)
+}

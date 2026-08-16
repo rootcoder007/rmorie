@@ -22,3 +22,6 @@ List with \code{selected}, \code{similarities}, \code{estimate}.
 Ranks the exemplar pool by cosine or dot similarity to the query;
 \code{selected} is 0-BASED and the order is STABLE.
 }
+\examples{
+morie_kamath_few_shot_exemplar_selection(D = c(1, 2, 3, 4, 5, 6, 7, 8), query_embed = 5L, K = 5L)
+}

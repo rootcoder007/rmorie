@@ -31,3 +31,6 @@ De Maesschalck, R., Jouan-Rimbaud, D. and Massart, D. L.
 (2000). Chemometrics and Intelligent Laboratory Systems 50(1):1-18.
 \doi{10.1016/S0169-7439(99)00047-7}.
 }
+\examples{
+Otmd(X = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8), Sigma = 0.5)
+}

@@ -21,3 +21,6 @@ error decays like \eqn{n^{-1/2}} and is still 4.6 per cent at
 \eqn{n = 100} -- and the point of returning both is that the
 formula's fame should not be mistaken for accuracy.
 }
+\examples{
+morie_hardy_ramanujan_partitions(n = 5L)
+}

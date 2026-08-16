@@ -21,3 +21,6 @@ List with \code{penalty}, \code{gradient}, \code{prox}, \code{n_zero},
 \code{skip_bias} zeroes the mask at the FIRST element of the row-major
 flattening, which for a matrix \code{theta} is entry [1, 1].
 }
+\examples{
+morie_geron_l1_regularization(theta = 0.5, alpha = 0.5)
+}

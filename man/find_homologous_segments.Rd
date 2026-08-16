@@ -27,3 +27,6 @@ Part of the mafft_native implementation; see the file header for the source it f
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+find_homologous_segments(group1 = c(1, 2, 3, 4, 5, 6, 7, 8), group2 = c(1, 2, 3, 4, 5, 6, 7, 8), scoring = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

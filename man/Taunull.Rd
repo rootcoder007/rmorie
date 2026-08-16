@@ -14,3 +14,6 @@ Null distribution of S = P - Q -- Sec. 11.2.1, p. 395
 A list with \code{support}, \code{pmf}, \code{pmf_s}, \code{cdf_s}, \code{sf_s}, \code{var_tau}, \code{var_s}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Taunull(n = 5L)
+}

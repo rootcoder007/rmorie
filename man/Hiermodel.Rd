@@ -35,3 +35,6 @@ author's own copy. A flat prior on tau is used and the additive
 constant dropped, so the value is comparable across tau but is not an
 absolute density.
 }
+\examples{
+Hiermodel(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+}

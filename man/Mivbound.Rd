@@ -23,3 +23,6 @@ Manski and Pepper (2000), Econometrica 68(4), 997-1010.
 Standard published form; the article could not be obtained (JSTOR
 access stub, NBER t0224 zero-page PDF) and was not read.
 }
+\examples{
+Mivbound(lower = 5L, upper = 5L, prob = 0.5)
+}

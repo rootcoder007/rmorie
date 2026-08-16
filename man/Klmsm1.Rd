@@ -39,3 +39,6 @@ techniques for language modeling, Proceedings of the 34th Annual
 Meeting of the ACL, pp. 310-318, section 2.1.
 \doi{10.3115/981863.981904}
 }
+\examples{
+Klmsm1(p = 0.5, q = 0.5, eps = 0.5)
+}

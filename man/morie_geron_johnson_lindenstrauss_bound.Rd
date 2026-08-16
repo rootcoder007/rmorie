@@ -17,3 +17,6 @@ List with \code{min_dimension}, \code{exact}, \code{denominator}, \code{eps}.
 \description{
 d >= 4 log(m) / (eps^2/2 - eps^3/3), ceiling-rounded.
 }
+\examples{
+morie_geron_johnson_lindenstrauss_bound(n_samples = 5L, eps = 0.5)
+}

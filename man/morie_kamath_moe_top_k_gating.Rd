@@ -18,3 +18,6 @@ List with \code{weights}, \code{selected_experts}, \code{kept_mass}.
 Keeps the top-k gates and renormalises them -- NOT a masked softmax.
 \code{selected_experts} is 0-BASED and sorted.
 }
+\examples{
+morie_kamath_moe_top_k_gating(gates = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

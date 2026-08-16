@@ -19,3 +19,6 @@ defining Butterworth property.  At the cutoff the squared magnitude is exactly 1
 A list with \code{squared_magnitude}, \code{magnitude}, \code{Omega}, \code{Omega_c}, \code{N}, \code{half_power_at_cutoff}, \code{monotonic}, \code{no_ripple}, \code{cutoff_is_half_power_for_every_order}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwSqMag(Omega = c(1, 2, 3, 4, 5, 6, 7, 8), Omega_c = 5L, N = 5L)
+}

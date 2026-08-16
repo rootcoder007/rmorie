@@ -35,3 +35,6 @@ The restricted mean.
     Oncology 32(22), 2380-2385.
 }
 \keyword{internal}
+\examples{
+morie_crsfst_rmst(curve = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), tau = 0.5)
+}

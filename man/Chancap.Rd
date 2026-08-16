@@ -20,3 +20,6 @@ Formula: q(x|y) = r(x) P(y|x) / sum_x' r(x') P(y|x'); r(x) <- exp(sum_y P(y|x) l
 \references{
 Blahut (1972), Computation of channel capacity and rate-distortion functions, IEEE Transactions on Information Theory 18:460-473; Arimoto (1972), same volume, 14-20. Neither is held locally; the alternating update is the standard published form of the algorithm.
 }
+\examples{
+Chancap(P = 1)
+}

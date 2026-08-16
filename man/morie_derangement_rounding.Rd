@@ -23,3 +23,6 @@ digit for digit. The alternating tail of the sum is what supplies
 the \eqn{1/(n+1)} bound, so agreement of the two routes IS the
 identity. Past \eqn{n = 18}, \eqn{n!/e} does not fit a double.
 }
+\examples{
+morie_derangement_rounding(n = 5L)
+}

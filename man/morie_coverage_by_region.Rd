@@ -22,3 +22,6 @@ Part of the bndpcb_native implementation; see the file header for the source it 
 A list with \code{marginal_coverage}, \code{subset_coverage}, \code{subset_share}, \code{mean_width}, \code{p_empty}, \code{split}, \code{theta}, \code{draws}.
 }
 \keyword{internal}
+\examples{
+morie_coverage_by_region(theta = 0.5)
+}

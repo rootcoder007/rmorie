@@ -53,3 +53,6 @@ local to central differential privacy via anonymity. Proceedings of the
 Thirtieth Annual ACM-SIAM Symposium on Discrete Algorithms, 2468-2479,
 Theorem 7. \doi{10.1137/1.9781611975482.151}
 }
+\examples{
+Shfflm(epsilon0 = 5L, n = 5L, delta = 0.5)
+}

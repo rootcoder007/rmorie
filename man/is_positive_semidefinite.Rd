@@ -18,3 +18,6 @@ Test whether a matrix is positive semi-definite
 List with eigenvalues, min_eigenvalue, psd.
 }
 \keyword{internal}
+\examples{
+is_positive_semidefinite(S = 5L)
+}

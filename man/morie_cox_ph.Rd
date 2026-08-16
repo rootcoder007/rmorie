@@ -37,3 +37,6 @@ common, as they are whenever follow-up is recorded in whole days.
 The baseline hazard is left unspecified, which is the point of the
 model; \code{exp(beta)} is a hazard ratio assumed constant over time.
 }
+\examples{
+morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -14,3 +14,6 @@ Exact sign-test p-value -- eq. (5.4.3), p. 169
 A list with \code{p_value}, \code{p_lower}, \code{p_upper}, \code{statistic}, \code{n}, \code{alternative}.
 }
 \keyword{internal}
+\examples{
+Signp(k = 5L, n = 5L)
+}

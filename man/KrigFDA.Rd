@@ -14,3 +14,6 @@ KrigFDA
 A list with \code{estimate}, \code{se}, \code{beta}, \code{residuals}, \code{weights}, \code{n}, \code{p}, \code{method}.
 }
 \keyword{internal}
+\examples{
+KrigFDA(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8), new_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -19,3 +19,6 @@ Part of the tlltmle_native implementation; see the file header for the source it
 A list with \code{estimate}, \code{psi}, \code{epsilons}, \code{Q_star}, \code{T}, \code{method}.
 }
 \keyword{internal}
+\examples{
+tlltmle_ltmle(Q_seq = c(1, 2, 3, 4, 5, 6, 7, 8), H_seq = c(1, 2, 3, 4, 5, 6, 7, 8), Y_seq = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

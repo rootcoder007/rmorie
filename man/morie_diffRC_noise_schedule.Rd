@@ -20,3 +20,6 @@ A linear \code{beta} schedule as in Ho et al. (2020), scaled by \code{scale}. At
 A list with \code{beta}, \code{alpha_bar}, \code{T},   \code{scale}, \code{signal_retained} and a note.
 }
 \keyword{internal}
+\examples{
+morie_diffRC_noise_schedule(T = 5L)
+}

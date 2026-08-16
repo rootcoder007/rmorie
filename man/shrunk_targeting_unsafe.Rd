@@ -20,3 +20,6 @@ Kept so the cost is measurable: shrinking the fluctuation pulls the estimator ba
 A list with \code{epsilon}, \code{Q_star}, \code{score},   \code{caveat}.
 }
 \keyword{internal}
+\examples{
+shrunk_targeting_unsafe(Q = 0.5, H = 0.5, Y = 5L)
+}

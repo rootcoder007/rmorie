@@ -19,3 +19,6 @@ Computes E[K_n] by the exact recursion ek_{i+1} = ek_i + (theta + ek_i * alpha) 
 A list with `expected`, `n`, `alpha`, `theta`, `regime`,   `note`.
 }
 \keyword{internal}
+\examples{
+morie_pmpfit_expected(n = 5L, alpha = 0.5, theta = 0.5)
+}

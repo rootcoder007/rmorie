@@ -29,3 +29,6 @@ is visible.
 \references{
 Turan P (1941). Bollobas B (2004), Ch VI.
 }
+\examples{
+morie_turan_number(n = 5L, r = 5L)
+}

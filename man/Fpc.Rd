@@ -31,3 +31,6 @@ without replacement. Cross-checked against the reference
 implementation in the CRAN package samplingbook 1.2.4, whose Smean
 uses the variance (N - n)/N * (1/(n(n-1))) sum (y - ybar)^2.
 }
+\examples{
+Fpc(N = 5L, n = 5L)
+}

@@ -17,3 +17,6 @@ Part of the poltrx_native implementation; see the file header for the source it 
 The value of \code{as.integer}.
 }
 \keyword{internal}
+\examples{
+poltrx_eps_from_key(key = 5L)
+}

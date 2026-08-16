@@ -29,3 +29,6 @@ A character vector.
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+morie_metsem_kmers(seq = 5L, k = 5L)
+}

@@ -35,3 +35,6 @@ The affordable rho.
     privacy." arXiv:1603.01887.
 }
 \keyword{internal}
+\examples{
+morie_tcmech_rho(epsilon = 5L, delta = 0.5)
+}

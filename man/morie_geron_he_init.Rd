@@ -21,3 +21,6 @@ List with \code{W}, \code{target_variance}, \code{achieved_variance},
 W ~ N(0, 2/fan_in) from the reference LCG, reshaped ROW-MAJOR into
 (fan_out, fan_in). \code{achieved_variance} uses ddof = 1.
 }
+\examples{
+morie_geron_he_init(fan_in = 5L)
+}

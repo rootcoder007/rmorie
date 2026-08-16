@@ -34,3 +34,6 @@ A value in the unit interval.
     Proteins 52(4), 609-623.
 }
 \keyword{internal}
+\examples{
+morie_chemsc_metal(r = 5L)
+}

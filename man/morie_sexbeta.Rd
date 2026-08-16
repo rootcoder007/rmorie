@@ -15,3 +15,6 @@ list(onepbeta, beta, gamma)
 \description{
 Dynamic-equilibrium fitness-variance factor (eq. 19.7, p. 271)
 }
+\examples{
+morie_sexbeta(gamma = 0.5)
+}

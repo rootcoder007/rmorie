@@ -44,3 +44,6 @@ of the American Society for Information Science* 41(6), 391-407. The
 unsupervised alternative being displaced.
 }
 \keyword{internal}
+\examples{
+morie_dssm_letter_ngrams(word = 5L)
+}

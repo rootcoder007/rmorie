@@ -34,3 +34,6 @@ the Tanimoto distance the objectives are measured in; see
 morie.fn.sasimi.
 }
 \keyword{internal}
+\examples{
+maxmin_selection(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

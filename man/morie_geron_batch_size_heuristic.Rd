@@ -25,3 +25,6 @@ Largest power of two in \verb{\{32, 64, 128, 256, 512\}} not exceeding
 n_train / steps_per_epoch_target (and memory_limit if supplied),
 flooring at min(32, n_train) when nothing is feasible.
 }
+\examples{
+morie_geron_batch_size_heuristic(n_train = 5L)
+}

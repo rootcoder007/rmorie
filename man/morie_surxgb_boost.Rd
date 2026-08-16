@@ -46,3 +46,6 @@ Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
 reused here from survrsf.
 }
 \keyword{internal}
+\examples{
+morie_surxgb_boost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y_lower = c(1, 2, 3, 4, 5, 6, 7, 8), y_upper = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

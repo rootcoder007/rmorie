@@ -32,3 +32,6 @@ instantaneous reproduction number, Rhat_t = I_t / Lambda_t.
 Fraser (2007), PLoS ONE 2(8):e758,
 doi:10.1371/journal.pone.0000758.
 }
+\examples{
+Ferror(incidence = c(1, 2, 3, 4, 5, 6, 7, 8), Rt = c(1, 2, 3, 4, 5, 6, 7, 8), gen_int = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -29,3 +29,6 @@ List with \code{total_parameters}, \code{parameters_per_layer}, \code{breakdown}
 \description{
 GPT-3 175B architecture accounting: exact params, shape trace, KV-cache (hmgpt3)
 }
+\examples{
+morie_geron_gpt3(prompt = c(1, 2, 3, 4, 5, 6, 7, 8), n_tokens = 5L)
+}

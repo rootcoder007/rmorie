@@ -37,3 +37,6 @@ Su et al. (2024), RoFormer, Neurocomputing 568:127063.
 The NTK-aware base rescaling is bloc97 (2023), a LocalLLaMA
 community note, cited as such because no peer-reviewed source exists.
 }
+\examples{
+Ropedy(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5, m = 5L)
+}

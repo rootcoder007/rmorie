@@ -25,3 +25,6 @@ which generalises the Section 1.2 definition to weighted graphs with
 loops exactly as written above. Fetched from the author's own copy of
 the chapter.
 }
+\examples{
+Graphlap(W = 5L)
+}

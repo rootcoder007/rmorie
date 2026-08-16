@@ -20,3 +20,6 @@ Part of the unclr implementation; see the file header for the source it follows.
 A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.
 }
 \keyword{internal}
+\examples{
+morie_unclr_lr_impute(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, n_iter = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

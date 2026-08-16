@@ -45,3 +45,6 @@ doi:10.1145/192844.192905. The collaborative half; implemented in
 """
 }
 \keyword{internal}
+\examples{
+cascade(primary = list(a = 1, b = 2), secondary = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

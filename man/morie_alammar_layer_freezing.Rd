@@ -17,3 +17,6 @@ morie_alammar_layer_freezing
 A list with \code{masks}, \code{n_stages}, \code{trainable_per_stage}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_layer_freezing(n_layers = 5L)
+}

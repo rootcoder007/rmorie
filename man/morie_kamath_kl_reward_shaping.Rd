@@ -19,3 +19,6 @@ List with \code{shaped}, \code{estimate}, \code{mean_kl}, \code{penalty}.
 \description{
 r_phi - beta * KL; a negative KL or a negative beta is refused.
 }
+\examples{
+morie_kamath_kl_reward_shaping(r_phi = c(1, 2, 3, 4, 5, 6, 7, 8), kl_divergence = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}

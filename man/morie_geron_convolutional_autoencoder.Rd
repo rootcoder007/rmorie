@@ -31,3 +31,6 @@ decoder with ReLU after every layer but the last. Transposed conv
 gives (n-1)s + k per axis, so a decoder that does not land back on
 the input size is an error rather than a silent crop.
 }
+\examples{
+morie_geron_convolutional_autoencoder(x = 5L, encoder_weights = c(1, 2, 3, 4, 5, 6, 7, 8), decoder_weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

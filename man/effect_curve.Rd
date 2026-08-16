@@ -22,3 +22,6 @@ effect_curve(xi, A, grid, fit = "kernel", bandwidth = NULL, n_folds = 5)
 A list with the curve and \code{info} (bandwidth, coef).
 }
 \keyword{internal}
+\examples{
+effect_curve(xi = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,6 @@ computed here by solving the system -- the inverse is never formed, which is bot
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+WienerOpt(phi = 0.5, theta = 0.5)
+}

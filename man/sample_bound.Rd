@@ -20,3 +20,6 @@ Part of the meglt_native implementation; see the file header for the source it f
 A list with \code{m}, \code{fraction}, \code{n}, \code{r}, \code{exponent}, \code{note}.
 }
 \keyword{internal}
+\examples{
+sample_bound(n = 5L, r = 5L)
+}

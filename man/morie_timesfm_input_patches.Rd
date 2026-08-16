@@ -19,3 +19,6 @@ Part of the timesfm_native implementation; see the file header for the source it
 A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{n_padded}, \code{L}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_timesfm_input_patches(x = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
+}

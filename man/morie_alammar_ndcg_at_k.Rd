@@ -17,3 +17,6 @@ morie_alammar_ndcg_at_k
 A list with \code{estimate}, \code{dcg}, \code{idcg}, \code{k}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_ndcg_at_k(relevances = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

@@ -46,3 +46,6 @@ for Non-Homogeneous Markov Chains Based on Censored Observations",
 Scandinavian Journal of Statistics 5(3), 141-150.
 }
 \keyword{internal}
+\examples{
+cause_specific_hazards(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -39,3 +39,6 @@ reproduction ratio R0 in models for infectious diseases in
 heterogeneous populations. Journal of Mathematical Biology
 28(4):365-382. \doi{10.1007/BF00178324}.
 }
+\examples{
+Reffec(R0 = 5L, S = 5L, N = 5L)
+}

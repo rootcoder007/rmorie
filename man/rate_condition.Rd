@@ -19,3 +19,6 @@ Part of the tlhaltm_native implementation; see the file header for the source it
 A list with \code{sum}, \code{required}, \code{satisfied}, \code{product_order}, \code{root_n_order}, \code{note}.
 }
 \keyword{internal}
+\examples{
+rate_condition(rate_Q = 5L, rate_g = 5L, n = 5L)
+}

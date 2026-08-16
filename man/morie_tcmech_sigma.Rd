@@ -33,3 +33,6 @@ The Gaussian noise scale.
     privacy." arXiv:1603.01887.
 }
 \keyword{internal}
+\examples{
+morie_tcmech_sigma(sensitivity = 5L, rho = 0.5)
+}

@@ -19,3 +19,6 @@ list(p, pnot, pmap)
 \description{
 Posterior predictive probability for the next draw (eq. 2.29-2.31, p. 29)
 }
+\examples{
+morie_urnpred(nb = 5L, ntot = 5L)
+}

@@ -19,3 +19,6 @@ separately so the property is demonstrated, not assumed.
 A list with \code{y}, \code{Y}, \code{XH}, \code{z}, \code{max_difference}, \code{holds}, \code{method}.
 }
 \keyword{internal}
+\examples{
+ZtConv(x = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

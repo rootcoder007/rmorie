@@ -15,3 +15,6 @@ A list with \code{ground}, \code{independent}, \code{rank}.
 \description{
 Every subset of size at most \eqn{k} is independent.
 }
+\examples{
+morie_uniform_matroid(n = 5L, k = 5L)
+}

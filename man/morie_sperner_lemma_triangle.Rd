@@ -33,3 +33,6 @@ exactly the case where the lemma is false, so it is refused loudly.
 Sperner E (1928) \emph{Abh Math Sem Univ Hamburg}
 6:265-272.
 }
+\examples{
+morie_sperner_lemma_triangle(subdivisions = 5L)
+}

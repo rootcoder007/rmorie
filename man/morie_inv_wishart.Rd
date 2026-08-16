@@ -14,3 +14,6 @@ morie_inv_wishart
 The value of \code{morie_pinv}.
 }
 \keyword{internal}
+\examples{
+morie_inv_wishart(nu = 0.5, S = 5L)
+}

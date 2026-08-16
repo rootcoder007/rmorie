@@ -30,3 +30,6 @@ Gelman et al. (2013), Bayesian Data Analysis, 3rd edn,
 Sects. 2.4-2.5 and Appendix A.  Standard published form; the book is
 not in the local corpus and was not read.
 }
+\examples{
+Betabinom(y = 5L, n = 5L)
+}

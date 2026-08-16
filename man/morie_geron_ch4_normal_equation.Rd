@@ -17,3 +17,6 @@ List with \code{theta}, \code{cost}, \code{residuals}, \code{rank},
 theta = (X^T X)^-1 X^T y, solved not inverted, with the rank and
 condition number reported.
 }
+\examples{
+morie_geron_ch4_normal_equation(X = 5L, y = 5L)
+}

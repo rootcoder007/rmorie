@@ -19,3 +19,6 @@ Classification and NER heads (Alammar Ch 4)
 A list with \code{logits}, \code{probabilities}, \code{predicted_class}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_classification_head(h_cls = 5L, W_cls = 5L, b = 5L)
+}

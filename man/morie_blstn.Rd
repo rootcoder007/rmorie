@@ -32,3 +32,6 @@ Part of the blstn_native implementation; see the file header for the source it f
 A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps}, \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam}, \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_blstn(query = 5L, subjects = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -32,3 +32,6 @@ harmonic mean sample size -- Miller (1978).
 Miller, J. J. (1978). The American Statistician 32(4):138.
 \doi{10.1080/00031305.1978.10479283}.
 }
+\examples{
+Mafrti(ft = c(1, 2, 3, 4, 5, 6, 7, 8), n_harmonic = 5L)
+}

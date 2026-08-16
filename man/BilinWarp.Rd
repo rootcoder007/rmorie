@@ -18,3 +18,6 @@ Equation (3.141). The mapping is nonlinear, so a digital cutoff cannot be given 
 A list with the analog frequency \code{Omega} and flags   recording that the map is nonlinear, that prewarping is required and   that the compression is severe near Nyquist.
 }
 \keyword{internal}
+\examples{
+BilinWarp(omega = list(a = 1, b = 2))
+}

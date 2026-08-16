@@ -46,3 +46,6 @@ Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
 Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 }
 \keyword{internal}
+\examples{
+morie_sdxlcd_size_conditioning(h_original = 5L, w_original = 5L)
+}
