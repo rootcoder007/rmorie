@@ -14,3 +14,6 @@ Total runs asymptotic normality -- eq. (3.2.9), p. 82
 A list with \code{z}, \code{z_exact}, \code{p_value}, \code{mean}, \code{var}, \code{mean_exact}, \code{var_exact}, \code{lam}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Runsz(r = 9, n1 = 10, n2 = 10)
+}

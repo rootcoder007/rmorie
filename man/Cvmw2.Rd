@@ -14,3 +14,7 @@ Cramer-von Mises W^2 -- Problem 4.14, p. 150
 A list with \code{statistic}, \code{nw2}, \code{z}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+Cvmw2(rnorm(25), cdf = pnorm)
+}

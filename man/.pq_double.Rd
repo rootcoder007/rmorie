@@ -26,3 +26,7 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+r <- .pq_reader(writeBin(3.14, raw(), size = 8, endian = "little"))
+.pq_double(r)
+}
