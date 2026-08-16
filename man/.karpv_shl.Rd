@@ -18,3 +18,7 @@ A step of the karpV_native implementation. Called by \code{.karpv_u32}. See the 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.karpv_shl(V, V)
+}

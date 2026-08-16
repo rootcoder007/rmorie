@@ -14,3 +14,6 @@ Internal helper: Morie Did Have Bacondecomp
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.morie_did_have_bacondecomp()
+}

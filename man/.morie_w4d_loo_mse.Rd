@@ -18,3 +18,6 @@ A step of the geron_w4d_native implementation. Called by \code{morie_geron_unsup
 A list with \code{theta}, \code{loo}, \code{train}.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_loo_mse(D = 5L, t = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

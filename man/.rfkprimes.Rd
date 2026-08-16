@@ -17,3 +17,6 @@ A step of the rfkrn implementation. Called by \code{Rfkrn}. See the file header 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.rfkprimes(k = 5L)
+}

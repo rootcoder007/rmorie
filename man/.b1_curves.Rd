@@ -19,3 +19,6 @@ A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot},
 A list with \code{mu1}, \code{mu0}, \code{ic1}, \code{ic0}.
 }
 \keyword{internal}
+\examples{
+.b1_curves(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), fit = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

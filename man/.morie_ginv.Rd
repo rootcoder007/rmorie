@@ -14,3 +14,7 @@ Exact re-implementation of \code{MASS::ginv} for real matrices: the SVD pseudo-i
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ginv(V)
+}

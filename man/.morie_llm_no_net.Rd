@@ -14,3 +14,6 @@
 The value of \code{&&}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_no_net()
+}

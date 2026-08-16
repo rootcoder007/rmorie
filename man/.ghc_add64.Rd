@@ -18,3 +18,7 @@ A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.
 A list with \code{hi}, \code{lo}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.ghc_add64(D, D)
+}

@@ -32,3 +32,7 @@ Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
 Chapman & Hall/CRC, Sec. 21.2.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.polkrn_logistic(V, V)
+}

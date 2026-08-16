@@ -18,3 +18,7 @@ A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bn
 A list with \code{p1}, \code{m1}, \code{p0}, \code{m0}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bnd_cellmeans(V, V)
+}

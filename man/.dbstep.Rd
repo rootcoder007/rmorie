@@ -19,3 +19,6 @@ A step of the wave implementation. Called by \code{.dbforward}, \code{Wvltdb}. S
 A list with \code{a}, \code{d}.
 }
 \keyword{internal}
+\examples{
+.dbstep(a = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, g = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

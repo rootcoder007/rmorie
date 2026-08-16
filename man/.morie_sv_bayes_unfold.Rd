@@ -14,3 +14,7 @@ Internal helper: native Bayesian unfolding sampler
 A list with \code{stimuli}, \code{ideal_points}, \code{acceptance}, \code{n_samples}, \code{engine}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_sv_bayes_unfold(M)
+}

@@ -14,3 +14,7 @@ Internal helper: Gh Have
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gh_have(V)
+}

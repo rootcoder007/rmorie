@@ -18,3 +18,7 @@ at zero is not symmetric -- a biased tau^2 that hits the floor understates heter
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.psy_dl(V, V)
+}

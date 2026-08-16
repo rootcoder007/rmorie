@@ -20,3 +20,6 @@ Section 3. Reading the two subtracted terms of theta(1) and theta(0) as potentia
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.morie_medweight_point(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L, pm = c(1, 2, 3, 4, 5, 6, 7, 8), px = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

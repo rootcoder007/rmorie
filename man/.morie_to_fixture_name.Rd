@@ -14,3 +14,6 @@ Internal helper: Morie To Fixture Name
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.morie_to_fixture_name(version = 5L)
+}

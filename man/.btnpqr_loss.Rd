@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.btnpqr_loss(Xm = 5L, yy = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, tau = 0.5)
+}

@@ -18,3 +18,6 @@ findInterval has the same effect but is documented to return the leftmost interv
 The value of \code{lo}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.smcsam_pick(cum = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

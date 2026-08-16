@@ -14,3 +14,6 @@
 A vector.
 }
 \keyword{internal}
+\examples{
+.bleu_mp(cand = c(1, 2, 3, 4, 5, 6, 7, 8), refs = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

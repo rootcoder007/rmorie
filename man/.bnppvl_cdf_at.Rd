@@ -35,3 +35,6 @@ A numeric value.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+.bnppvl_cdf_at(u = 5L, q = 0.5, k = 5L)
+}

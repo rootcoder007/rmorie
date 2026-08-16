@@ -19,3 +19,7 @@ A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the
 A list with \code{paths}, \code{totters}, \code{fraction}, \code{excluded_reverse}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.dmlqs_count_totters(M)
+}

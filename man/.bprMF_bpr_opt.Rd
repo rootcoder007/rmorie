@@ -48,3 +48,6 @@ item, negative item) plus up to 100 more for the negative-item
 rejection guard, exactly as the Python arm does.
 }
 \keyword{internal}
+\examples{
+.bprMF_bpr_opt(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, pos = c(1, 2, 3, 4, 5, 6, 7, 8), n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

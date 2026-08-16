@@ -14,3 +14,7 @@ Internal helper: Tps Alias Factory
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tps_alias_factory(V)
+}

@@ -19,3 +19,6 @@ A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_inf
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.pibmd_kl_kde(q = 0.5, p = 0.5, n_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

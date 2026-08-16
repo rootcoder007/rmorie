@@ -19,3 +19,6 @@ A step of the dpoF_native implementation. Called by \code{morie_dpoF}. See the f
 A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards}, \code{beta}, \code{n}, \code{model}, \code{method}.
 }
 \keyword{internal}
+\examples{
+.dpoF_plackett_luce(logp = c(1, 2, 3, 4, 5, 6, 7, 8), logp_ref = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}

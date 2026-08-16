@@ -17,3 +17,7 @@ A step of the causal_native implementation. Called by \code{morie_backdoor_crite
 A list with \code{children}, \code{parents}, \code{nodes}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.bd_parse(M)
+}

@@ -18,3 +18,7 @@ A step of the helpers_s03 implementation. No other function in the package calls
 The value of \code{morie_jsonlt_prettify}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03json_pretty(V)
+}

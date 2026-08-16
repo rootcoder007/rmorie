@@ -18,3 +18,7 @@ A step of the rangayyan_class2 implementation. Called by \code{CadPipe}, \code{P
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_bx_sd(V)
+}

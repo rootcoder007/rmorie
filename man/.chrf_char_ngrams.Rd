@@ -18,3 +18,6 @@ A step of the chrF_native implementation. Called by \code{chrf_score}. See the f
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.chrf_char_ngrams(s = 5L, n = 5L)
+}

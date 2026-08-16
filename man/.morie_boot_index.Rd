@@ -19,3 +19,6 @@ A step of the boot_native implementation. Called by \code{morie_boot}. See the f
 The value of \code{output}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_boot_index(n = 5L, R = 5L)
+}

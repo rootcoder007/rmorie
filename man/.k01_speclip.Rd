@@ -19,3 +19,6 @@ A step of the acclso implementation. Called by \code{Agdproj}, \code{Fistalasso}
 The value of \code{lam}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.k01_speclip(Xm = 5L, p = 0.5)
+}

@@ -17,3 +17,7 @@ A step of the mcmc_native implementation. Called by \code{morie_effective_sample
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ess_from_chains(V)
+}

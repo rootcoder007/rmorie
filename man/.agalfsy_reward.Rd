@@ -19,3 +19,6 @@ A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_po
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.agalfsy_reward(site = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), before = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), after = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

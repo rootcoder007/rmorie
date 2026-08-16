@@ -19,3 +19,6 @@ M_0 and T = sum_j M_j S_j.  B is omitted because it depends on the allocation ra
 A list with \code{A}, \code{C}, \code{M0}, \code{T}.
 }
 \keyword{internal}
+\examples{
+.s03allocABC(M = 5L, S = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

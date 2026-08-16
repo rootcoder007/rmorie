@@ -19,3 +19,6 @@ Rosenbaum sensitivity bounds for the Wilcoxon signed-rank statistic (Rosenbaum 2
 The value of \code{.morie_psens_wilcoxon_d}.
 }
 \keyword{internal}
+\examples{
+.morie_psens_wilcoxon(treated = list(a = 1, b = 2), control = list(a = 1, b = 2), gamma = 1)
+}

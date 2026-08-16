@@ -18,3 +18,6 @@ A step of the causrddc_native implementation. Called by \code{.causrddc_global_d
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.causrddc_solve(M = 5L, b = 5L)
+}

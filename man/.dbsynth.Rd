@@ -20,3 +20,6 @@ A step of the wvltdb implementation. Called by \code{Wvltdb}. See the file heade
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.dbsynth(a = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L, h = 0.5, g = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -33,3 +33,6 @@ The value of \code{adj}, as built in the body.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+.avalon_adj(n = 5L, bonds = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

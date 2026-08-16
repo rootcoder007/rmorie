@@ -14,3 +14,6 @@ Internal helper: Tps Hwka Neg Loglik General
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tps_hwka_neg_loglik_general(theta = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), T_ = c(1, 2, 3, 4, 5, 6, 7, 8), kernel_kind = c(1, 2, 3, 4, 5, 6, 7, 8), baseline_kind = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -43,3 +43,6 @@ implemented in :mod:`ncfRS`.
 """
 }
 \keyword{internal}
+\examples{
+.ngcf_leaky(x = 5L)
+}

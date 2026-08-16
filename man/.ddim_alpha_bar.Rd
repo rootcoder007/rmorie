@@ -18,3 +18,7 @@ A step of the ddimst implementation. Called by \code{Ddimst}. See the file heade
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ddim_alpha_bar(V, V)
+}

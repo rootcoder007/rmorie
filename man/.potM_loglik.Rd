@@ -19,3 +19,6 @@ A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_ml
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.potM_loglik(z = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
+}

@@ -46,3 +46,7 @@ Estimation", ICML 2018, PMLR 80, 531-540, arXiv:1801.04062. The
 Donsker-Varadhan estimator being replaced.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.infmax_jsd_estimator(V, V)
+}

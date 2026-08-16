@@ -22,3 +22,6 @@ A step of the mass_native implementation. Called by \code{morie_glm_nb}. See the
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.morie_theta_ml(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), mu = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

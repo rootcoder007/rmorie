@@ -14,3 +14,6 @@
 A list with \code{p}, \code{eta}.
 }
 \keyword{internal}
+\examples{
+.irt_rsm_probs(theta = 0.5, b = 5L, tau = 0.5)
+}

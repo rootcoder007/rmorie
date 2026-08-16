@@ -20,3 +20,6 @@ A step of the forsnp_native implementation. Called by \code{morie_forsnp}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.forsnp_locus(a1 = 5L, a2 = 5L, fr = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5)
+}

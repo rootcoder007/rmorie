@@ -14,3 +14,7 @@ Internal helper: Tps Hwka N Baseline Params
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tps_hwka_n_baseline_params(V)
+}

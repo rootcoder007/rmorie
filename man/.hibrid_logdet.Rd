@@ -17,3 +17,7 @@ A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}. Se
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.hibrid_logdet(V)
+}

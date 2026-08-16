@@ -17,3 +17,7 @@ one place the Python arm uses `x += ...` in a loop instead of fsum, so the two a
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_bx_nsum(V)
+}

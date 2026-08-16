@@ -18,3 +18,7 @@ A step of the infcrv implementation. Called by \code{.if_wvar}. See the file hea
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.if_wmean(V, V)
+}

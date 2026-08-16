@@ -17,3 +17,7 @@ A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_rowc
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_km2_lse_rows(M)
+}

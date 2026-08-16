@@ -17,3 +17,7 @@ A step of the twostg_native implementation. No other function in the package cal
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_xi_po(V)
+}

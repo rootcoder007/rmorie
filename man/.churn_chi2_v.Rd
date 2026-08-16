@@ -14,3 +14,7 @@ Internal helper: Churn Chi2 V
 A list with \code{chi2}, \code{p}, \code{v}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.churn_chi2_v(V)
+}

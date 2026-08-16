@@ -18,3 +18,7 @@ A step of the helpers_vit implementation. Called by \code{.vitlnrows}, \code{Vit
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vitln(V)
+}

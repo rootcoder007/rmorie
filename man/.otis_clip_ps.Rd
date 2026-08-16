@@ -14,3 +14,7 @@ Internal helper: Otis Clip Ps
 The value of \code{pmin}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.otis_clip_ps(V)
+}

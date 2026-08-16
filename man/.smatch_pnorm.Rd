@@ -17,3 +17,7 @@ A step of the smatch_native implementation. No other function in the package cal
 The value of \code{pnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.smatch_pnorm(V)
+}

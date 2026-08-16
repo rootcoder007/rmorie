@@ -18,3 +18,7 @@ A step of the kamath_llm2_native implementation. No other function in the packag
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_km2_count_word(V, V)
+}

@@ -34,3 +34,6 @@ treatment and structural parameters", The Econometrics Journal 21(1),
 C1-C68, doi:10.1111/ectj.12097. Neyman orthogonality and cross-fitting.
 }
 \keyword{internal}
+\examples{
+.plrgrf_cheatsheet()
+}

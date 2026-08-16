@@ -19,3 +19,6 @@ base-R fallback. Extracted from the morie_tgarch_model() optimiser closure so th
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tgarch_negll(p = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

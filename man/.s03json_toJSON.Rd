@@ -21,3 +21,7 @@ A step of the helpers_s03 implementation. Called by \code{.morie_to_json}, \code
 The value of \code{morie_jsonlt_to_json}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03json_toJSON(V)
+}

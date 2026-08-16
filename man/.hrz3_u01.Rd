@@ -17,3 +17,7 @@ support of (X, W) may be taken to be [0, 1]^2 with no loss of generality, "becau
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.hrz3_u01(V)
+}

@@ -17,3 +17,6 @@ A step of the contam implementation. Called by \code{Contam}. See the file heade
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.huber_k(eps = 0.5)
+}

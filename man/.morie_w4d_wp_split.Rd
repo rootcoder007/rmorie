@@ -17,3 +17,7 @@ A step of the geron_w4d_native implementation. No other function in the package 
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.morie_w4d_wp_split(S)
+}

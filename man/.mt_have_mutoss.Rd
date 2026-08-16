@@ -14,3 +14,6 @@ Internal helper: Mt Have Mutoss
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.mt_have_mutoss()
+}

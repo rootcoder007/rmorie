@@ -46,3 +46,6 @@ Sarwar, B., Karypis, G., Konstan, J. & Riedl, J. (2001)
 transpose of this.
 }
 \keyword{internal}
+\examples{
+.ucfR_predict_rating(target = c(1, 2, 3, 4, 5, 6, 7, 8), others = c(1, 2, 3, 4, 5, 6, 7, 8), item = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

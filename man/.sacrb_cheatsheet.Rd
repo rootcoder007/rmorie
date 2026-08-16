@@ -35,3 +35,6 @@ a version signature.
 """
 }
 \keyword{internal}
+\examples{
+.sacrb_cheatsheet()
+}

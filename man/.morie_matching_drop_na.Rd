@@ -14,3 +14,6 @@
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.morie_matching_drop_na(data = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), cols = factor(c("lo", "hi", "lo", "hi")))
+}

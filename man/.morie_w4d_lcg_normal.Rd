@@ -18,3 +18,6 @@ A step of the geron_w4d_native implementation. Called by \code{morie_geron_vae}.
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_lcg_normal(n = 5L, seed = 5L)
+}

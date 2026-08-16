@@ -19,3 +19,6 @@ A step of the helpers_gp_core implementation. Called by \code{Msm329}. See the f
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.gpzapcpredict(theta_hat = 5L, mu_hat = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

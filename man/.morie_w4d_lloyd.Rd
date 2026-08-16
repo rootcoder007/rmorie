@@ -20,3 +20,6 @@ A step of the geron_w4d_native implementation. Called by \code{morie_geron_semis
 A list with \code{labels}, \code{centers}.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_lloyd(Z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 5L)
+}

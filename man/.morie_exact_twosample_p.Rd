@@ -14,3 +14,6 @@ For a two-group design the linear statistic is the sum of the response scores in
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_exact_twosample_p(scores = c(1, 2, 3, 4, 5, 6, 7, 8), n1 = 5L, obs = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

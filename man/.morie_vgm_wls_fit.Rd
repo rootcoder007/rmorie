@@ -19,3 +19,7 @@
 A list with \code{model}, \code{nugget}, \code{psill}, \code{range}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_vgm_wls_fit(V, V)
+}

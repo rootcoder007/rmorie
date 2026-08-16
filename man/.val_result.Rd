@@ -14,3 +14,6 @@ Internal helper: Val Result
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.val_result()
+}

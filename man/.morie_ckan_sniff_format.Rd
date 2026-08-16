@@ -14,3 +14,6 @@ Internal helper: Morie Ckan Sniff Format
 The value of \code{tolower}.
 }
 \keyword{internal}
+\examples{
+.morie_ckan_sniff_format(url = 5L)
+}

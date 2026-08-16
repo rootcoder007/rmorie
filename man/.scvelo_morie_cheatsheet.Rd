@@ -38,3 +38,6 @@ doi:10.1038/s41586-018-0414-6, for the steady-state model this
 generalises.
 }
 \keyword{internal}
+\examples{
+.scvelo_morie_cheatsheet()
+}

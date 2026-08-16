@@ -20,3 +20,6 @@ A step of the causal_native implementation. Called by \code{morie_backdoor_crite
 A logical value.
 }
 \keyword{internal}
+\examples{
+.bd_blocked(p = 0.5, d = 5L, Z = c(1, 2, 3, 4, 5, 6, 7, 8), ch = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

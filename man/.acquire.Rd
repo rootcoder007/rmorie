@@ -14,3 +14,6 @@ Acquisition dispatch
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.acquire(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = c(1, 2, 3, 4, 5, 6, 7, 8), f_best = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

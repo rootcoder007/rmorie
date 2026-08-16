@@ -17,3 +17,6 @@ A step of the phylby_native implementation. Called by \code{morie_phylby}. See t
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+.phylby_rng(seed = 5L)
+}

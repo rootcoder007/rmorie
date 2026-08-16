@@ -21,3 +21,6 @@ A step of the rng_native implementation. No other function in the package calls 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_random_multivariate_normal(mean = c("a", "b", "c"), cov = matrix(c(4, 1, 0, 1, 3, 1, 0, 1, 2), nrow = 3))
+}

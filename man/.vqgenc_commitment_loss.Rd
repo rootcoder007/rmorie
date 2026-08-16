@@ -41,3 +41,7 @@ straight-through estimator this builds on.
 """
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vqgenc_commitment_loss(V, V)
+}

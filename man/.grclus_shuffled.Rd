@@ -18,3 +18,6 @@ A step of the grclus_native implementation. Called by \code{.grclus_match_vertic
 The value of \code{idx}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.grclus_shuffled(n = 5L, seed = 5L)
+}

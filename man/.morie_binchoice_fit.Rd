@@ -21,3 +21,7 @@ probabilities. stats::pnorm/dnorm are used as the normal CDF and density -- arit
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_binchoice_fit(V, V)
+}

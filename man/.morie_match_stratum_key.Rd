@@ -14,3 +14,6 @@ Internal helper: stratum key
 The value of \code{do.call}.
 }
 \keyword{internal}
+\examples{
+.morie_match_stratum_key(df = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), vars = factor(c("lo", "hi", "lo", "hi")))
+}

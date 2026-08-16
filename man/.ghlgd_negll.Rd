@@ -14,3 +14,6 @@ Internal helper: Ghlgd Negll
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghlgd_negll(theta = c(1, 2, 3, 4, 5, 6, 7, 8), Bx = c(1, 2, 3, 4, 5, 6, 7, 8), Bg = c(1, 2, 3, 4, 5, 6, 7, 8), gz = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

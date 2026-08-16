@@ -18,3 +18,6 @@ A step of the mdpval_native implementation. Called by \code{morie_ddqn}, \code{m
 A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 }
 \keyword{internal}
+\examples{
+.mdp_args(P = 1, R = 5L)
+}

@@ -24,3 +24,6 @@ A step of the schab_rest_shared implementation. Called by \code{spmwst}. See the
 A list with \code{prediction}, \code{local_sill}, \code{local_range}, \code{window_sizes}, \code{converged}, \code{theta_is_global}, \code{global_sill}, \code{global_range}, \code{caveats}.
 }
 \keyword{internal}
+\examples{
+.schab_moving_window_krige(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), targets = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

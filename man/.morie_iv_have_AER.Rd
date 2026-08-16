@@ -14,3 +14,6 @@ Internal helper: Morie Iv Have AER
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.morie_iv_have_AER()
+}

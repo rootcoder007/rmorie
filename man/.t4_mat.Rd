@@ -17,3 +17,7 @@ A step of the tail4_core implementation. No other function in the package calls 
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t4_mat(V)
+}

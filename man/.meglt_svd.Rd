@@ -17,3 +17,7 @@ A step of the meglt_native implementation. Called by \code{coherence}, \code{nuc
 A list with \code{U}, \code{s}, \code{Vt}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.meglt_svd(M)
+}

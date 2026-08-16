@@ -19,3 +19,6 @@ The value of \code{requireNamespace}.
   Revelle (2024). psych R package.
 }
 \keyword{internal}
+\examples{
+.has_psych()
+}

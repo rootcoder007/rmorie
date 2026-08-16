@@ -18,3 +18,6 @@ A SAR/CAR/Durbin likelihood exists only where the implied precision (or |I - rho
 Numeric length-2 vector (lo, hi), an open interval.
 }
 \keyword{internal}
+\examples{
+.sp_rho_bounds(W = 5L)
+}

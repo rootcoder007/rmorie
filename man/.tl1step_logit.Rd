@@ -37,3 +37,7 @@ one-dimensional submodels", *International Journal of Biostatistics*
 chapter relies on.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tl1step_logit(V)
+}

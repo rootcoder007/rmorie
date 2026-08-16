@@ -31,3 +31,7 @@ A list with \code{w}, \code{info}.
   Hernan M. A. & Robins J. M. (2020) Causal Inference: What If, Sec. 12.3.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gentmt_ip_weights(V, V)
+}

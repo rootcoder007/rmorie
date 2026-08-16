@@ -19,3 +19,6 @@ cumulative normalised weight reaches tau.  With equal weights this is the usual 
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.hrz3_wquant(v = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+}

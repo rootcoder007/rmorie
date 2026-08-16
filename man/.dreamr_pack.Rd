@@ -18,3 +18,7 @@ A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_
 A list with \code{estimate}, \code{returns}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dreamr_pack(V, V)
+}

@@ -17,3 +17,7 @@ Rejects option-injection (leading \\'-\\', e.g. "--upload-pack=...") and any whi
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_valid_git_ref(V)
+}

@@ -14,3 +14,6 @@
 A list with \code{beta}, \code{se}, \code{n}, \code{fit_value}.
 }
 \keyword{internal}
+\examples{
+.morie_rdd_local_poly_fit(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), y = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

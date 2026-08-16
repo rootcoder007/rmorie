@@ -14,3 +14,6 @@ Internal helper: Snappy raw-format decompressor (pure R)
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.mpq_snappy(buf = 5L)
+}

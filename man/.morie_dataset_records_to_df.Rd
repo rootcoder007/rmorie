@@ -14,3 +14,7 @@ Convert a list-of-records / data.frame response into a clean data.frame.
 The value of \code{do.call}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.morie_dataset_records_to_df(D)
+}

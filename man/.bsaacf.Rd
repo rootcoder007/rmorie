@@ -18,3 +18,7 @@ A step of the rangayyan_phys implementation. Called by \code{.bsalpc}, \code{Inf
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bsaacf(V, V)
+}

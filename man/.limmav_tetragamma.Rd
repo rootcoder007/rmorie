@@ -17,3 +17,6 @@ A step of the limmav_native implementation. Called by \code{.limmav_trigamma_inv
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.limmav_tetragamma(x = 5L)
+}

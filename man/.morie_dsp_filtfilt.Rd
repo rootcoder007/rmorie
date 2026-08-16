@@ -14,3 +14,6 @@ Odd-extension padding of length 3 * (filter order), forward pass, reversed pass,
 The value of \code{y}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_dsp_filtfilt(b = 5L, a = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

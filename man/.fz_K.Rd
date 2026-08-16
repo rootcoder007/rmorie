@@ -17,3 +17,7 @@ A step of the fauzi_native implementation. Called by \code{.fz_muller}, \code{mo
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fz_K(V)
+}

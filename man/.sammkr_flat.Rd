@@ -17,3 +17,7 @@ A step of the sammkr_native implementation. Called by \code{iou}, \code{whole_pa
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sammkr_flat(V)
+}

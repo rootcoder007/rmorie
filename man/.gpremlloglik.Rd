@@ -21,3 +21,6 @@ A step of the helpers_gp_core implementation. Called by \code{Msm011}. See the f
 A list with \code{value}, \code{beta}.
 }
 \keyword{internal}
+\examples{
+.gpremlloglik(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+}

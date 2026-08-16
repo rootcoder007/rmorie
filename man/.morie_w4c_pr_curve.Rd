@@ -18,3 +18,7 @@ score order, one vertex per distinct score, leading (recall=0, precision=1) poin
 A list with \code{precision}, \code{recall}, \code{average_precision}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_w4c_pr_curve(V, V)
+}

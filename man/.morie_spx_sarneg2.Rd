@@ -20,3 +20,6 @@ A step of the sp_fill implementation. Called by \code{SpErrMod}. See the file he
 A list with \code{v}, \code{b}, \code{s2}.
 }
 \keyword{internal}
+\examples{
+.morie_spx_sarneg2(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), rho = 0.5)
+}

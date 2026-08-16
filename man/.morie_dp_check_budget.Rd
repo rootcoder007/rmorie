@@ -18,3 +18,7 @@ A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \
 A list with \code{epsilon}, \code{delta}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dp_check_budget(V)
+}

@@ -39,3 +39,6 @@ a version signature.
 """
 }
 \keyword{internal}
+\examples{
+.sacrb_tokenize_13a(text = 5L)
+}

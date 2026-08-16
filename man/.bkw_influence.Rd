@@ -19,3 +19,7 @@ Returns a list with n, p, e, h, sse and inv (inv[[k]] is COLUMN k of the inverse
 A list with \code{n}, \code{p}, \code{e}, \code{h}, \code{sse}, \code{inv}, \code{D}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bkw_influence(V, V)
+}

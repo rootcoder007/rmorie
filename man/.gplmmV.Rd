@@ -19,3 +19,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.gplmmV(Z = 5L, D = 5L)
+}

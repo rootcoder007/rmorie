@@ -14,3 +14,6 @@ Internal helper: Siu Discover Max Drid
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.siu_discover_max_drid()
+}

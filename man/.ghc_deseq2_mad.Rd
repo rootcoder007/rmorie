@@ -17,3 +17,7 @@ A step of the deseq2_native implementation. Called by \code{deseq2}. See the fil
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ghc_deseq2_mad(V)
+}

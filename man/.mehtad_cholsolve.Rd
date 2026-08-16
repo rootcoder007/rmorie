@@ -18,3 +18,6 @@ A step of the mehtad_native implementation. No other function in the package cal
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.mehtad_cholsolve(M = 5L, rhs = 5L)
+}

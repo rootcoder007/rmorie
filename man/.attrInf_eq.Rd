@@ -18,3 +18,7 @@ all match (R\\'s == coerces); int vs str does not (mirrors Python: 1 == "1" is F
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.attrInf_eq(V, V)
+}

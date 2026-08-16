@@ -14,3 +14,7 @@ Internal helper: Run Figures Module Internal
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.run_figures_module_internal(V)
+}

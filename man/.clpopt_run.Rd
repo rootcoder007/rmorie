@@ -22,3 +22,6 @@ A step of the clpopt_native implementation. Called by \code{simplex}. See the fi
 A character value.
 }
 \keyword{internal}
+\examples{
+.clpopt_run(T = c(1, 2, 3, 4, 5, 6, 7, 8), basis = c(1, 2, 3, 4, 5, 6, 7, 8), cols = 5L, rule = c(1, 2, 3, 4, 5, 6, 7, 8), blocked = c(1, 2, 3, 4, 5, 6, 7, 8), max_iter = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

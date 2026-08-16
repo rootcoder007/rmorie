@@ -20,3 +20,6 @@ large nu does not overflow (z/2)^nu before Gamma(nu) divides it out again.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.s03maternk(d = 5L, nu = 0.5, rho = 0.5, sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

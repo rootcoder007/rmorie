@@ -17,3 +17,6 @@ A step of the helpers_ghc_rng implementation. No other function in the package c
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghc_lcg31_unif(env = list(a = 1, b = 2))
+}

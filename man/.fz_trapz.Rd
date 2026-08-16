@@ -18,3 +18,7 @@ A step of the fauzi_native implementation. Called by \code{morie_fauzi_b2_coeffi
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fz_trapz(V, V)
+}

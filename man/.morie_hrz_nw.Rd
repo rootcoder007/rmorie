@@ -20,3 +20,6 @@ A step of the horowitz_native8 implementation. Called by \code{morie_direct_disc
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+.morie_hrz_nw(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), grid = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

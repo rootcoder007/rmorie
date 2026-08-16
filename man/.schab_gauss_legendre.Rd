@@ -17,3 +17,6 @@ Schabenberger & Gotway result. Nodes are the eigenvalues of the Jacobi matrix; w
 A list with \code{nodes}, \code{weights}.
 }
 \keyword{internal}
+\examples{
+.schab_gauss_legendre(n = 5L)
+}

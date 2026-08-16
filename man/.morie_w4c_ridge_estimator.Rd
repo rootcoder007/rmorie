@@ -17,3 +17,7 @@ A step of the geron_w4c_native implementation. No other function in the package 
 A list with \code{fit}, \code{predict}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.morie_w4c_ridge_estimator(D)
+}

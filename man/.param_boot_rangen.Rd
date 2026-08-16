@@ -14,3 +14,6 @@ Internal helper: Param Boot Rangen
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.param_boot_rangen(distribution = 5L, n = 5L)
+}

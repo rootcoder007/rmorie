@@ -31,3 +31,6 @@ A vector, from \code{c}.
     Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 }
 \keyword{internal}
+\examples{
+.alfqud_score(program = c(1, 2, 3, 4, 5, 6, 7, 8), inputs = c(1, 2, 3, 4, 5, 6, 7, 8), targets = c(1, 2, 3, 4, 5, 6, 7, 8), n_reg = c(1, 2, 3, 4, 5, 6, 7, 8), lw = c(1, 2, 3, 4, 5, 6, 7, 8), rf = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

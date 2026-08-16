@@ -19,3 +19,6 @@ A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseud
 A list with \code{beta}, \code{cov_beta}.
 }
 \keyword{internal}
+\examples{
+.schab_gls_beta(X = 5L, Sigma_nu = 5L, nu = 0.5)
+}

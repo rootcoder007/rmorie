@@ -19,3 +19,6 @@ A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{Ecg
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_qrs_argmin(v = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

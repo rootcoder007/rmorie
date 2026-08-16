@@ -40,3 +40,6 @@ Statistics* 86(1), 4-29, doi:10.1162/003465304323023651. The
 sample/population distinction.
 }
 \keyword{internal}
+\examples{
+.tlsate_cheatsheet()
+}

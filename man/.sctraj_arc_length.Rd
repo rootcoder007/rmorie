@@ -17,3 +17,7 @@ A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.sctraj_arc_length(M)
+}

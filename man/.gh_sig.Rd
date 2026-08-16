@@ -17,3 +17,6 @@ A step of the gru4r_native implementation. Called by \code{bpr_loss}, \code{gru_
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.gh_sig(x = 5L)
+}

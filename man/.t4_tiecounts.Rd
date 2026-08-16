@@ -17,3 +17,7 @@ A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}, \code
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t4_tiecounts(V)
+}

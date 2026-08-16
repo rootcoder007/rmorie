@@ -19,3 +19,6 @@ A step of the schab_st_shared implementation. Called by \code{.schab_st_hankel_p
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_st_tail_bound_j0(t = 5L, h = 0.5, p = 0.5)
+}

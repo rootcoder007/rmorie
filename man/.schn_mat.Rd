@@ -17,3 +17,7 @@ A step of the schN_native implementation. Called by \code{cfconv}, \code{forces_
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.schn_mat(M)
+}

@@ -18,3 +18,8 @@ A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq}, \code{.
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_spx_matvec(M, V)
+}

@@ -14,3 +14,6 @@ Internal helper: Morie Llm Env
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_env(name = 5L)
+}

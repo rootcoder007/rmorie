@@ -14,3 +14,6 @@ Internal helper: class-probability prediction from a Gini tree
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tree_predict_gini(node = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), K = 5L)
+}

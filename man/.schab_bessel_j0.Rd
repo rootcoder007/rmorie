@@ -18,3 +18,7 @@ is smooth and periodic so the trapezoid rule converges geometrically; base R\\'s
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_bessel_j0(V)
+}

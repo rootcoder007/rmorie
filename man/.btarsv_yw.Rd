@@ -18,3 +18,6 @@ A step of the btarsv_native implementation. Called by \code{morie_btarsv}. See t
 A list with \code{phi}, \code{v}.
 }
 \keyword{internal}
+\examples{
+.btarsv_yw(xc = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

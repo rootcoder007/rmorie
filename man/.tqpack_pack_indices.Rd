@@ -18,3 +18,6 @@ A step of the tqpack_native implementation. No other function in the package cal
 The value of \code{result}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tqpack_pack_indices(indices = c(1, 2, 3, 4, 5, 6, 7, 8), bits = 5L)
+}

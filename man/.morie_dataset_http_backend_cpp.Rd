@@ -14,3 +14,6 @@ available. The Rcpp export only exists when the package was built with libcurl v
 The value of \code{exists}.
 }
 \keyword{internal}
+\examples{
+.morie_dataset_http_backend_cpp()
+}

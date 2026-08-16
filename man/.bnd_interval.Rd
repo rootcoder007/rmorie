@@ -18,3 +18,8 @@ A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}
 A list with \code{yl}, \code{yu}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.bnd_interval(D, V)
+}

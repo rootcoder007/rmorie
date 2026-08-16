@@ -18,3 +18,7 @@ A step of the geron_w4d_native implementation. Called by \code{morie_geron_trans
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_w4d_layernorm(M)
+}

@@ -14,3 +14,6 @@ Internal helper: cosine windows
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.morie_dsp_window(name = 5L, n = 5L)
+}

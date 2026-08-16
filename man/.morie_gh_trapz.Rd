@@ -18,3 +18,7 @@ A step of the ghosal_native implementation. Called by \code{.morie_gh_hellinger}
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gh_trapz(V, V)
+}

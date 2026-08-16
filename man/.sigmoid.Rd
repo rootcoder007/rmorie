@@ -17,3 +17,7 @@ A step of the mambss_native implementation. Called by \code{gated_rnn_equivalent
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sigmoid(V)
+}

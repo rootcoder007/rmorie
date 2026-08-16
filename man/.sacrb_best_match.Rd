@@ -39,3 +39,7 @@ a version signature.
 """
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sacrb_best_match(V, V)
+}

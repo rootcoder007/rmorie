@@ -23,3 +23,6 @@ Szegedy, C. et al. (2015) "Going deeper with convolutions", CVPR 2015,
 1-9.
 }
 \keyword{internal}
+\examples{
+.resnxt_cheatsheet()
+}

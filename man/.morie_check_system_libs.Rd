@@ -14,3 +14,6 @@ Internal helper: Morie Check System Libs
 A list with \code{libcurl}, \code{libsodium}, \code{liboqs}.
 }
 \keyword{internal}
+\examples{
+.morie_check_system_libs()
+}

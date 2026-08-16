@@ -14,3 +14,6 @@ Internal helper: native PLR DML engine (median-aggregated reps)
 A list with \code{theta}, \code{se}.
 }
 \keyword{internal}
+\examples{
+.morie_dml_plr_native(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

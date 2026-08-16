@@ -14,3 +14,7 @@ Internal helper: Newey-West (Bartlett) HAC covariance for OLS
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_nw_vcov(M, M)
+}

@@ -22,3 +22,6 @@ Cuturi\\'s exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v) then v <- b/
 A list with \code{T}, \code{u}, \code{v}, \code{a}, \code{b}, \code{trace}.
 }
 \keyword{internal}
+\examples{
+.b2sinkhorn(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}

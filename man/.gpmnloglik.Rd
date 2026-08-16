@@ -21,3 +21,6 @@ A step of the helpers_gp_core implementation. Called by \code{.gppenmnloglik}. S
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.gpmnloglik(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}

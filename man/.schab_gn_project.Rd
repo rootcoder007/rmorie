@@ -17,3 +17,7 @@ This is the constraint the model imposes, not a search box.
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_gn_project(V)
+}

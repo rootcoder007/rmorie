@@ -20,3 +20,6 @@ A step of the fmFM_native implementation. Called by \code{fit_fm}. See the file 
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.fmFM_predict(x = c(1, 2, 3, 4, 5, 6, 7, 8), w0 = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

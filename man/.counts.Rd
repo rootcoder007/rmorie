@@ -20,3 +20,6 @@ A step of the bigtm_native implementation. Called by \code{.log_evidence}, \code
 A list with \code{N_ijk}, \code{N_jk}, \code{N_kd}, \code{N_d}.
 }
 \keyword{internal}
+\examples{
+.counts(D = 5L, Tn = 5L, Vn = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

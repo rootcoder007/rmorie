@@ -14,3 +14,6 @@ Internal helper: Morie Check Scalar
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_check_scalar(x = 5L)
+}

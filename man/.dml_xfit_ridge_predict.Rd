@@ -14,3 +14,6 @@ Internal helper: Dml Xfit Ridge Predict
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.dml_xfit_ridge_predict(X_tr = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y_tr = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), X_te = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

@@ -21,3 +21,6 @@ A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_
 A list with \code{deriv}, \code{sigma2}.
 }
 \keyword{internal}
+\examples{
+.causrddc_global_derivative(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), side = 5L, order = 5L, deriv = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

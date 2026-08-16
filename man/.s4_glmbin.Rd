@@ -20,3 +20,7 @@ A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn}, 
 The value of \code{beta}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_glmbin(V, V)
+}

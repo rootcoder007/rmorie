@@ -19,3 +19,7 @@ A step of the limmav_native implementation. Called by \code{.limmav_voom_weights
 A list with \code{beta}, \code{fit}, \code{sd}, \code{inv}, \code{df}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.limmav_ols(V, V)
+}

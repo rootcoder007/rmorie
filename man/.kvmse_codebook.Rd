@@ -21,3 +21,7 @@ A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \co
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.kvmse_codebook(V)
+}

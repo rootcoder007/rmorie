@@ -14,3 +14,6 @@ A step of the metabd_native implementation. Called by \code{morie_metabd}. See t
 A character value.
 }
 \keyword{internal}
+\examples{
+.metabd_cheatsheet()
+}

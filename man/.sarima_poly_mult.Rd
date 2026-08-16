@@ -18,3 +18,7 @@ A step of the sarima_native implementation. Called by \code{.sarima_diff_poly}, 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sarima_poly_mult(V, V)
+}

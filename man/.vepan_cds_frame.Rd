@@ -18,3 +18,8 @@ A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}
 A list with \code{cds}, \code{coding}, \code{sg}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.vepan_cds_frame(D, V)
+}

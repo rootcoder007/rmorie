@@ -17,3 +17,6 @@ A step of the ts_joseph implementation. Called by \code{.morie_jo_daynum}, \code
 A logical value.
 }
 \keyword{internal}
+\examples{
+.morie_jo_leap(y = 5L)
+}

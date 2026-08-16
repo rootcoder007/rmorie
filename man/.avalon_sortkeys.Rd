@@ -32,3 +32,7 @@ A vector, from \code{sort}.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.avalon_sortkeys(V)
+}

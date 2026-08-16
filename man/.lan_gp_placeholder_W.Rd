@@ -14,3 +14,7 @@ Internal helper: Lan Gp Placeholder W
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.lan_gp_placeholder_W(V)
+}

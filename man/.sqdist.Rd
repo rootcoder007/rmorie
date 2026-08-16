@@ -18,3 +18,7 @@ A step of the egnnL_native implementation. Called by \code{edge_message}. See th
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sqdist(V, V)
+}

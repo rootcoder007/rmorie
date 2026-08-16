@@ -18,3 +18,7 @@ A step of the cox_native implementation. Called by \code{morie_censoring_at_risk
 A list with \code{times}, \code{survival}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_km_estimate(V, V)
+}

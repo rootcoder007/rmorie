@@ -17,3 +17,7 @@ A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}. See t
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.gwr_default_bounds(M)
+}

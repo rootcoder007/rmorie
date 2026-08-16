@@ -19,3 +19,6 @@ A step of the rng_native implementation. Called by \code{.morie_random_multivari
 The value of \code{.morie_normal_quantile}.
 }
 \keyword{internal}
+\examples{
+.morie_random_normal(n = 5L)
+}

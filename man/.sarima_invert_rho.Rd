@@ -17,3 +17,6 @@ A step of the sarima_native implementation. Called by \code{moment_estimate}, \c
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.sarima_invert_rho(rho = 0.5)
+}

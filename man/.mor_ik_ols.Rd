@@ -18,3 +18,7 @@ A step of the causrddh_native implementation. Called by \code{morie_causrddh}. S
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_ik_ols(V, V)
+}

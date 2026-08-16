@@ -18,3 +18,7 @@ A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.causrddc_density_at_zero(V)
+}

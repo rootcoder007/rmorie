@@ -18,3 +18,7 @@ A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic}, \
 A vector, from \code{sort}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ml_nodes(V)
+}

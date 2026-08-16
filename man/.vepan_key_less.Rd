@@ -18,3 +18,7 @@ A step of the vepan_native implementation. Called by \code{morie_vepan_pick}. Se
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vepan_key_less(V, V)
+}

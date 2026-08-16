@@ -17,3 +17,6 @@ A step of the deseq2_native implementation. Called by \code{deseq2}. See the fil
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghc_deseq2_norm_ppf(pr = 5L)
+}

@@ -18,3 +18,6 @@ The ZAP pmf printed above it, the Var(Y) line below it, and the p.652 estimating
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.gpzappredict(theta_hat = c(1, 2, 3, 4, 5, 6, 7, 8), mu_hat = 5L)
+}

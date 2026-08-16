@@ -38,3 +38,6 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+.tmlcic_fluct(y = 5L, off = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)
+}

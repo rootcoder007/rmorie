@@ -17,3 +17,7 @@ A step of the schN_native implementation. No other function in the package calls
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schn_vec(V)
+}

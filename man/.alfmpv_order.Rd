@@ -31,3 +31,6 @@ The value of \code{order}.
     Communications 13, 1265, doi:10.1038/s41467-022-28865-w
 }
 \keyword{internal}
+\examples{
+.alfmpv_order(tab = c(1, 2, 3, 4, 5, 6, 7, 8), mode = 5L, idx = c(1, 2, 3, 4, 5, 6, 7, 8), pos = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,6 @@ A step of the helpers_s03 implementation. Called by \code{.morie_datasette_get_j
 The value of \code{morie_jsonlt_from_json}.
 }
 \keyword{internal}
+\examples{
+.s03json_fromJSON(txt = 5L)
+}

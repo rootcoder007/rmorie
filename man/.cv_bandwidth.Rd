@@ -20,3 +20,6 @@ A step of the tmlcps_native implementation. Called by \code{effect_curve}. See t
 The value of \code{best_h}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.cv_bandwidth(xv = c(1, 2, 3, 4, 5, 6, 7, 8), av = c(1, 2, 3, 4, 5, 6, 7, 8), fit = c(1, 2, 3, 4, 5, 6, 7, 8), n_folds = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

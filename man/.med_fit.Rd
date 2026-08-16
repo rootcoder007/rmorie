@@ -21,3 +21,6 @@ A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tni
 A list with \code{beta}, \code{theta}, \code{cbar}, \code{n}.
 }
 \keyword{internal}
+\examples{
+.med_fit(X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8), who = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

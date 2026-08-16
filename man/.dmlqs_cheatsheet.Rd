@@ -14,3 +14,6 @@ A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the
 A character value.
 }
 \keyword{internal}
+\examples{
+.dmlqs_cheatsheet()
+}

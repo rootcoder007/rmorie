@@ -14,3 +14,6 @@ Scaled dot-product attention with explicit projections
 A list with \code{O}, \code{W}.
 }
 \keyword{internal}
+\examples{
+.setT_attend(X = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8), Wq = c(1, 2, 3, 4, 5, 6, 7, 8), Wk = c(1, 2, 3, 4, 5, 6, 7, 8), Wv = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

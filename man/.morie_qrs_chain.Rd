@@ -18,3 +18,7 @@ A step of the rangayyan_qrs implementation. Called by \code{QrsDetect}. See the 
 A list with \code{bp}, \code{dv}, \code{sq}, \code{ig}, \code{w}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_qrs_chain(V, V)
+}

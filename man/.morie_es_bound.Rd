@@ -18,3 +18,7 @@ A step of the ramsey_theory_native implementation. Called by \code{morie_ramsey_
 The value of \code{choose}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_es_bound(V, V)
+}

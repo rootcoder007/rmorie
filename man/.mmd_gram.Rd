@@ -19,3 +19,6 @@ A step of the twosample implementation. Called by \code{morie_mmd_test}. See the
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.mmd_gram(Z = c(1, 2, 3, 4, 5, 6, 7, 8), kernel = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), gamma = 0.5)
+}

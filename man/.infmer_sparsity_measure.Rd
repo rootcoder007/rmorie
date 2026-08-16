@@ -29,3 +29,7 @@ See Also
 :mod:`morie.fn.informer` -- the implementation.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.infmer_sparsity_measure(V, V)
+}

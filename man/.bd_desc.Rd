@@ -18,3 +18,7 @@ A step of the causal_native implementation. Called by \code{.bd_blocked}, \code{
 The value of \code{seen}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bd_desc(V, V)
+}

@@ -14,3 +14,6 @@
 A vector.
 }
 \keyword{internal}
+\examples{
+.morie_dsp_fir1(n = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

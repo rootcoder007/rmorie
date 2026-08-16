@@ -18,3 +18,7 @@ A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}, \code
 The value of \code{.morie_fsum}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_spx_dot(V, V)
+}

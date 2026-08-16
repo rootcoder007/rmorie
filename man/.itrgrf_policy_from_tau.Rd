@@ -40,3 +40,7 @@ Manski, C. F. (2004) "Statistical Treatment Rules for
   object of inference.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.itrgrf_policy_from_tau(V)
+}

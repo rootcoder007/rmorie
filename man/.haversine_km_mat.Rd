@@ -14,3 +14,6 @@ Internal helper: Haversine Km Mat
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.haversine_km_mat(lat1 = c(1, 2, 3, 4, 5, 6, 7, 8), lon1 = c(1, 2, 3, 4, 5, 6, 7, 8), lat2 = c(1, 2, 3, 4, 5, 6, 7, 8), lon2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

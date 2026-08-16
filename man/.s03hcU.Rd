@@ -18,3 +18,6 @@ A step of the hcoreg implementation. Called by \code{.s03hcK1}, \code{.s03hcK2}.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.s03hcU(r = 5L, v = 5L)
+}

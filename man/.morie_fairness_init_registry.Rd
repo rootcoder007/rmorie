@@ -14,3 +14,6 @@ Internal helper: Morie Fairness Init Registry
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_fairness_init_registry()
+}

@@ -35,3 +35,7 @@ A vector, from \code{c}.
     doi:10.1175/JCLI-D-12-00195.1
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ecstcr_ols(V, V)
+}

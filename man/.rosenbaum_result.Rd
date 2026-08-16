@@ -14,3 +14,6 @@ Internal helper: Rosenbaum Result
 The value of \code{structure}.
 }
 \keyword{internal}
+\examples{
+.rosenbaum_result(gamma_values = c(1, 2, 3, 4, 5, 6, 7, 8), p_upper = c(1, 2, 3, 4, 5, 6, 7, 8), p_lower = c(1, 2, 3, 4, 5, 6, 7, 8), critical_gamma = c(1, 2, 3, 4, 5, 6, 7, 8), method = c(1, 2, 3, 4, 5, 6, 7, 8), interpretation = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

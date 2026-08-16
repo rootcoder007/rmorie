@@ -41,3 +41,6 @@ Studies by Use of Localized Haplotype Clustering", *American Journal
 of Human Genetics* 81(5), 1084-1097, doi:10.1086/521987.
 }
 \keyword{internal}
+\examples{
+.impfun_cheatsheet()
+}

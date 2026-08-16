@@ -18,3 +18,6 @@ A step of the rangayyan_qrs implementation. Called by \code{QrsDeriv}, \code{Qrs
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.morie_qrs_pad(v = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

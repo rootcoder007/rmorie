@@ -22,3 +22,6 @@ A step of the helpers_rouss implementation. Called by \code{Ltsreg}. See the fil
 A list with \code{tot}, \code{idx}, \code{sq}.
 }
 \keyword{internal}
+\examples{
+.rsltsobj(Xm = c(1, 2, 3, 4, 5, 6, 7, 8), yy = c(1, 2, 3, 4, 5, 6, 7, 8), th = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, p = 0.5, h = 0.5)
+}

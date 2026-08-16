@@ -18,3 +18,6 @@ A step of the dueldqn_native implementation. Called by \code{dueling_aggregate}.
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.dueld_anchor(a = c(1, 2, 3, 4, 5, 6, 7, 8), mode = 5L)
+}

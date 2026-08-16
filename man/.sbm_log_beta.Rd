@@ -18,3 +18,7 @@ A step of the dpsbm implementation. Called by \code{Dpsbm}. See the file header 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sbm_log_beta(V, V)
+}

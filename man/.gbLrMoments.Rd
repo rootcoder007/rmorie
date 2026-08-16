@@ -14,3 +14,6 @@ Theorem 7.3.2 moments of sum a_i Z_i under H0
 A list with \code{mean}, \code{var}.
 }
 \keyword{internal}
+\examples{
+.gbLrMoments(a = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L, n = 5L)
+}

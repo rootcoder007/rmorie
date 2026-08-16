@@ -19,3 +19,6 @@ A step of the ts_joseph implementation. Called by \code{morie_dirmulti}, \code{m
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_jo_fitpred(rows = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8), newrow = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

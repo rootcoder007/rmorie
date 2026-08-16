@@ -14,3 +14,7 @@ Internal helper: Morie Check Data
 The value of \code{data}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_check_data(M)
+}

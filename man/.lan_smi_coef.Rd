@@ -14,3 +14,6 @@ Internal helper: Lan Smi Coef
 A list with \code{name}, \code{estimate}, \code{std_error}.
 }
 \keyword{internal}
+\examples{
+.lan_smi_coef(name = c(1, 2, 3, 4, 5, 6, 7, 8), estimate = c(1, 2, 3, 4, 5, 6, 7, 8), std_error = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

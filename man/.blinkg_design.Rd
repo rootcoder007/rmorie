@@ -34,3 +34,6 @@ The value of \code{d}, as built in the body.
     studies." Biometrics 55(4), 997-1004.
 }
 \keyword{internal}
+\examples{
+.blinkg_design(n = 5L, covars = c(1, 2, 3, 4, 5, 6, 7, 8), cols = c("a", "b", "c"))
+}

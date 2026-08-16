@@ -17,3 +17,7 @@ A step of the patchT_native implementation. Called by \code{instance_norm}, \cod
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.patcht_vec(V)
+}

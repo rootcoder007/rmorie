@@ -19,3 +19,6 @@ A step of the fastxt_native implementation. Called by \code{fasttext}, \code{wor
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.gram_slot(g = c(1, 2, 3, 4, 5, 6, 7, 8), gram_index = c(1, 2, 3, 4, 5, 6, 7, 8), hash_buckets = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

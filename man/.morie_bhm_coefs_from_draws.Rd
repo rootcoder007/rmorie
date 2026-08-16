@@ -14,3 +14,8 @@ Internal helper: Morie Bhm Coefs From Draws
 A data frame.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+.morie_bhm_coefs_from_draws(M, S)
+}

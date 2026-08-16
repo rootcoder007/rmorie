@@ -14,3 +14,6 @@ A step of the pate_native implementation. No other function in the package calls
 A character value.
 }
 \keyword{internal}
+\examples{
+.pate_cheatsheet()
+}

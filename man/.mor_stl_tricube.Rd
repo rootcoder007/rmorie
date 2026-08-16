@@ -17,3 +17,6 @@ A step of the stlAn_native implementation. Called by \code{.mor_stl_loess_at}. S
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.mor_stl_tricube(u = 5L)
+}

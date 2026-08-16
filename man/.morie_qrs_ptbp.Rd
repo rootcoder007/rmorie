@@ -17,3 +17,7 @@ coefficients are integers tied to fs = 200 Hz (book, Section 4.3.2) and are NOT 
 The value of \code{p}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_qrs_ptbp(V)
+}

@@ -22,3 +22,7 @@ A step of the svdd_native implementation. Called by \code{morie_svdd}. See the f
 The value of \code{K}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_svdd_kernel_matrix(M)
+}

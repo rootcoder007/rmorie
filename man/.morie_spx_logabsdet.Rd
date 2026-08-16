@@ -17,3 +17,7 @@ A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}. See t
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_spx_logabsdet(M)
+}

@@ -18,3 +18,7 @@ The sw - sum(w^2)/sw denominator reduces to n - 1 at equal weights, so the weigh
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.smd_moments(V, V)
+}

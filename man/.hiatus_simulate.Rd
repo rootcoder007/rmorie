@@ -26,3 +26,6 @@ A step of the hiatus_native implementation. Called by \code{morie_hiatus}. See t
 A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj}, \code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables}, \code{n_variables_history_based}, \code{surviving}, \code{method}.
 }
 \keyword{internal}
+\examples{
+.hiatus_simulate(beta = 0.5, nu = 0.5, mu = 5L, sigma = 0.5)
+}

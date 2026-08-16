@@ -14,3 +14,6 @@ Internal helper: Churn Parse Placement Bin
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.churn_parse_placement_bin(label = 5L)
+}

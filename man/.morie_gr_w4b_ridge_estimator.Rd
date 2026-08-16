@@ -19,3 +19,7 @@ A step of the geron_w4b_native implementation. No other function in the package 
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gr_w4b_ridge_estimator(V, V)
+}

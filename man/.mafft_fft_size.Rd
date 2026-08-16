@@ -18,3 +18,6 @@ A step of the mafft_native implementation. Called by \code{.mafft_xcorr_fft}, \c
 The value of \code{size}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.mafft_fft_size(n = 5L, m = 5L)
+}

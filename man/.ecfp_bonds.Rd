@@ -17,3 +17,6 @@ A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{
 A list with \code{a}, \code{i}, \code{j}, \code{o}.
 }
 \keyword{internal}
+\examples{
+.ecfp_bonds(adjacency = 5L)
+}

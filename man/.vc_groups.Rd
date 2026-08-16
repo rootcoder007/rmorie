@@ -18,3 +18,7 @@ A step of the ranova_native implementation. Called by \code{morie_ranova}. See t
 A list with \code{keys}, \code{gs}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vc_groups(V, V)
+}

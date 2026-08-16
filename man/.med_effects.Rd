@@ -21,3 +21,6 @@ A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tni
 A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te}, \code{mediated_interaction}, \code{beta}, \code{theta}.
 }
 \keyword{internal}
+\examples{
+.med_effects(beta = 0.5, theta = 0.5, cbar = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), astar = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

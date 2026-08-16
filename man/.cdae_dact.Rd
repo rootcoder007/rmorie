@@ -18,3 +18,6 @@ A step of the cdaeRC_native implementation. Called by \code{fit_cdae}. See the f
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.cdae_dact(name = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

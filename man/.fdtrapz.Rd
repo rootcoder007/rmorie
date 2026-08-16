@@ -18,3 +18,7 @@ A step of the helpers_fda implementation. Called by \code{Scfd}. See the file he
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fdtrapz(V, V)
+}

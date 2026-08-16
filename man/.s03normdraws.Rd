@@ -18,3 +18,7 @@ A step of the helpers_s03 implementation. Called by \code{.ot_directions}, \code
 The value of \code{qnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03normdraws(V)
+}

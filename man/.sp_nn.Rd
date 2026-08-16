@@ -17,3 +17,7 @@ Internal: nearest-neighbour distances h_i.
 Numeric vector of length n.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sp_nn(V)
+}

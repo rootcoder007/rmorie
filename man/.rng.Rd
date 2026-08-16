@@ -17,3 +17,6 @@ A step of the birl_native implementation. Called by \code{policy_walk}. See the 
 The value of \code{f}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.rng(seed = 5L)
+}

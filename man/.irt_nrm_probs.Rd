@@ -14,3 +14,6 @@
 A list with \code{p}, \code{eta}.
 }
 \keyword{internal}
+\examples{
+.irt_nrm_probs(theta = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

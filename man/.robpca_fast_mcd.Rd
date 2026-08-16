@@ -20,3 +20,7 @@ A step of the robpca_native implementation. Called by \code{morie_robpca}. See t
 The value of \code{best}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.robpca_fast_mcd(V, V)
+}

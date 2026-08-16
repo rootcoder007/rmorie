@@ -14,3 +14,6 @@ Internal helper: Build Folds
 The value of \code{split}.
 }
 \keyword{internal}
+\examples{
+.build_folds(n = 5L, n_folds = c(1, 2, 3, 4, 5, 6, 7, 8), stratify = c(1, 2, 3, 4, 5, 6, 7, 8), groups = c("a", "b", "c"))
+}

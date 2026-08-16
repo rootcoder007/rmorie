@@ -20,3 +20,6 @@ A step of the mehtad_native implementation. Called by \code{newton_direction}. S
 The value of \code{backsolve}.
 }
 \keyword{internal}
+\examples{
+.mehtad_solve_normal(A = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L, rhs = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

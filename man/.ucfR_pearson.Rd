@@ -45,3 +45,6 @@ Sarwar, B., Karypis, G., Konstan, J. & Riedl, J. (2001)
 transpose of this.
 }
 \keyword{internal}
+\examples{
+.ucfR_pearson(ratings_a = list(a = 1, b = 2), ratings_b = list(a = 1, b = 2))
+}

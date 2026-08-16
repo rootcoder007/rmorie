@@ -19,3 +19,6 @@ A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_k05_lr_uc(p = 0.5, t = 5L, n = 5L)
+}

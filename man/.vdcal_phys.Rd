@@ -36,3 +36,7 @@ The value of \code{p}, as built in the body.
     Disposition 47(12), 1380-1387.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vdcal_phys(V)
+}

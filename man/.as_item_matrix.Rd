@@ -19,3 +19,7 @@ The value of \code{X}, as built in the body.
   Revelle (2024). psych R package.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.as_item_matrix(V)
+}

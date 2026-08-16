@@ -27,3 +27,7 @@ The value of \code{.w3_csum}.
     Machine Learning." MIT Press, chapters 2 and 4.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.hyper2_logprior(V)
+}

@@ -17,3 +17,7 @@ A step of the chronos_native implementation. Called by \code{forecast_summary}, 
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.chronos_vec(V)
+}

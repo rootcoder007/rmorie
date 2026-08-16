@@ -28,3 +28,7 @@ A list with \code{P}, \code{c}.
     sets of vectors." Acta Crystallographica A32(5), 922-923.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.alfrf2_centre(M)
+}

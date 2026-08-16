@@ -31,3 +31,6 @@ doi:10.1016/S0019-9958(65)90426-2, for the LR(k) classes against
 which the LL(1) restriction is measured.
 }
 \keyword{internal}
+\examples{
+.prsLL_first_seq(seq = c(1, 2, 3, 4, 5, 6, 7, 8), first = c(1, 2, 3, 4, 5, 6, 7, 8), nts = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

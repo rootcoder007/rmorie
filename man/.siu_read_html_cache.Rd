@@ -14,3 +14,7 @@ Internal helper: Siu Read Html Cache
 The value of \code{rawToChar}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.siu_read_html_cache(V, V)
+}

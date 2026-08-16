@@ -19,3 +19,6 @@ Returns b solving (Z\\'Z + ridge I) b = Z\\' y
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.thrtmt_lstsq(Z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), ridge = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

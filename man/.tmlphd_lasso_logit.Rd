@@ -21,3 +21,6 @@ A step of the tmlphd implementation. Called by \code{Tmlphd}. See the file heade
 The value of \code{beta}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tmlphd_lasso_logit(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

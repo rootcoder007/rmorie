@@ -18,3 +18,7 @@ A step of the flxipt_native implementation. Called by \code{super_learner}. See 
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.flxipt_folds(V, V)
+}

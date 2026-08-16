@@ -17,3 +17,6 @@ A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code
 The value of \code{h}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.fz_check_h(h = 0.5)
+}

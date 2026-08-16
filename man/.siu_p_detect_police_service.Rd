@@ -14,3 +14,7 @@ Internal helper: Siu P Detect Police Service
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.siu_p_detect_police_service(V)
+}

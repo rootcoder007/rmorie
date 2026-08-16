@@ -19,3 +19,7 @@ A step of the Dssoot implementation. Called by \code{Dssoot}. See the file heade
 The value of \code{.s03lstsq}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dssoot_ols(V, V)
+}

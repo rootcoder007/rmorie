@@ -14,3 +14,6 @@ Internal helper: Hajek Diff
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.hajek_diff(y1 = c(1, 2, 3, 4, 5, 6, 7, 8), w1 = c(1, 2, 3, 4, 5, 6, 7, 8), y0 = c(1, 2, 3, 4, 5, 6, 7, 8), w0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

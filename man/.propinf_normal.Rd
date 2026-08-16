@@ -18,3 +18,6 @@ A step of the propinf_native implementation. No other function in the package ca
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.propinf_normal(rnd = list(a = 1, b = 2))
+}

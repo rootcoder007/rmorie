@@ -26,3 +26,6 @@ of mixed-model association methods", Nature Genetics 46(2),
 100-106.
 }
 \keyword{internal}
+\examples{
+.regmlm_cheatsheet()
+}

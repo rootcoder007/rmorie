@@ -17,3 +17,7 @@ A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ}
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_spx_p2(V)
+}

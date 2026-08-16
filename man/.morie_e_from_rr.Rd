@@ -14,3 +14,6 @@ Internal helper: E-value from a risk-ratio-scale point
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_e_from_rr(rr = 5L)
+}

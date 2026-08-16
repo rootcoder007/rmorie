@@ -14,3 +14,7 @@ Internal helper: Mean Ci
 A vector.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mean_ci(V)
+}

@@ -14,3 +14,6 @@ Internal helper: Siu Fetch To Iso
 A character value.
 }
 \keyword{internal}
+\examples{
+.siu_fetch_to_iso(date_str = 5L)
+}

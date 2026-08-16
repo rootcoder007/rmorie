@@ -18,3 +18,7 @@ A step of the s04core implementation. No other function in the package calls it.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_euclid(V, V)
+}

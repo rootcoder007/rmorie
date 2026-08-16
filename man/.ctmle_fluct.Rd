@@ -20,3 +20,6 @@ A step of the tlctmle_native implementation. Called by \code{ctmle}. See the fil
 A list with \code{epsilon}, \code{q}.
 }
 \keyword{internal}
+\examples{
+.ctmle_fluct(Q = 0.5, H = 0.5, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

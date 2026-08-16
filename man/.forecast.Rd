@@ -22,3 +22,6 @@ have mean zero, so the point forecast just runs equations 3b-3f forward from the
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.forecast(spec = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5, x0 = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

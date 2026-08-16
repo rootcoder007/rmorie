@@ -18,3 +18,6 @@ A step of the tail2_t04 implementation. Called by \code{Dpll}. See the file head
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_t2_simplify(clauses = c(1, 2, 3, 4, 5, 6, 7, 8), lit = 5L)
+}

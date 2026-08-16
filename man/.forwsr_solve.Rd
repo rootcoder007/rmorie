@@ -18,3 +18,8 @@ A step of the forwsr_native implementation. Called by \code{morie_forwsr_ols_fit
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.forwsr_solve(M, D)
+}

@@ -17,3 +17,7 @@ half-open, c(start, stop), to match the Python arm exactly
 The value of \code{fine}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rgemgf_intervals(V)
+}

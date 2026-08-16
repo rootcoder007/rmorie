@@ -18,3 +18,7 @@ with the last stick closing so the weights sum to one exactly.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gh_stick(V, V)
+}

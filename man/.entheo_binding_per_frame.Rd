@@ -14,3 +14,7 @@ Internal helper: Entheo Binding Per Frame
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.entheo_binding_per_frame(V, V)
+}

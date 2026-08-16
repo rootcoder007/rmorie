@@ -20,3 +20,6 @@ A step of the helpers_bnd implementation. Called by \code{Bndtfm}, \code{Bnscbo}
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.bnd_wc_ate(yv = c(1, 2, 3, 4, 5, 6, 7, 8), dv = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

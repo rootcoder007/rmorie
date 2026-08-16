@@ -27,3 +27,6 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+.pq_encode_levels(levels = c("a", "b", "c"), width = 5L)
+}

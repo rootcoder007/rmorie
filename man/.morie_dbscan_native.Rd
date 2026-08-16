@@ -20,3 +20,7 @@ Native implementation; the metric is honoured and the reported core points are t
 A list with \code{labels} (0-based cluster ids, -1 for   noise) and \code{core} (logical, one per point).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dbscan_native(V)
+}

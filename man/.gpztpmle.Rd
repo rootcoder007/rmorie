@@ -19,3 +19,7 @@ A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gpztpmle(V)
+}

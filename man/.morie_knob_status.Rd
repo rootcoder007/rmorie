@@ -14,3 +14,6 @@ diagnostics so the active posture is visible).
 A data frame.
 }
 \keyword{internal}
+\examples{
+.morie_knob_status()
+}

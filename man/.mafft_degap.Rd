@@ -17,3 +17,7 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}. Se
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.mafft_degap(S)
+}

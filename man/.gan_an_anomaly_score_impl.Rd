@@ -44,3 +44,6 @@ Representation Learning with Deep Convolutional Generative Adversarial
 Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 }
 \keyword{internal}
+\examples{
+.gan_an_anomaly_score_impl(x = c(1, 2, 3, 4, 5, 6, 7, 8), g_z = c(1, 2, 3, 4, 5, 6, 7, 8), f_x = c(1, 2, 3, 4, 5, 6, 7, 8), f_gz = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

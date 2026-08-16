@@ -20,3 +20,6 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_regre
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_lcg_uniform(rows = 5L, cols = 5L, seed = 5L, scale = TRUE)
+}

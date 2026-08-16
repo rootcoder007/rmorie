@@ -17,3 +17,7 @@
 A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means}, \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between}, \code{ms_within}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.gponeway(D)
+}

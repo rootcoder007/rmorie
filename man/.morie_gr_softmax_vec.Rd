@@ -17,3 +17,7 @@ A step of the geron_train_native implementation. Called by \code{morie_geron_ch4
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gr_softmax_vec(V)
+}

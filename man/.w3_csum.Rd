@@ -17,3 +17,7 @@ A step of the helpers_w3num implementation. Called by \code{.alfrf2_centre}, \co
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.w3_csum(V)
+}

@@ -24,3 +24,6 @@ A step of the schab_reml_shared implementation. Called by \code{spreml}. See the
 A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget}, \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
 }
 \keyword{internal}
+\examples{
+.schab_fit_reml(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

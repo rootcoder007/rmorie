@@ -14,3 +14,7 @@ Internal helper: Siu P Extract Summary
 The value of \code{substr}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.siu_p_extract_summary(S)
+}

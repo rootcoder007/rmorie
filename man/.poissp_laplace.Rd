@@ -31,3 +31,6 @@ with two applications in spatial statistics", Annals of the Institute
 of Statistical Mathematics 43(1), 1-20, doi:10.1007/BF00116466.
 }
 \keyword{internal}
+\examples{
+.poissp_laplace(y = c(1, 2, 3, 4, 5, 6, 7, 8), u = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L, Q = 0.5, constrain = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

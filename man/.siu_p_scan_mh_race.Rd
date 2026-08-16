@@ -14,3 +14,6 @@ Internal helper: Siu P Scan Mh Race
 A character value.
 }
 \keyword{internal}
+\examples{
+.siu_p_scan_mh_race(narrative = 5L)
+}

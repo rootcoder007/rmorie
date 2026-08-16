@@ -18,3 +18,7 @@ A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{Cad
 A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz}, \code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bsapsdmom(V, V)
+}

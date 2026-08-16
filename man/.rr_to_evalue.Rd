@@ -14,3 +14,6 @@ Internal helper: Rr To Evalue
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.rr_to_evalue(rr = 5L)
+}

@@ -17,3 +17,7 @@ A step of the secarg_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.secarg_hexlify(V)
+}

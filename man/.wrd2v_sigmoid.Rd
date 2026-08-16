@@ -17,3 +17,6 @@ A step of the wrd2v_native implementation. Called by \code{.wrd2v_neg_step}. See
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.wrd2v_sigmoid(z = 5L)
+}

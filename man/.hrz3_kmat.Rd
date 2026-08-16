@@ -19,3 +19,6 @@ A step of the helpers_hrz3 implementation. Called by \code{.hrz3_fxw_grid}, \cod
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.hrz3_kmat(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, h = 0.5)
+}

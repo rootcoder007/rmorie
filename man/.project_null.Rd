@@ -18,3 +18,8 @@ A step of the barerp_native implementation. Called by \code{central_point}. See 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+.project_null(S, M)
+}

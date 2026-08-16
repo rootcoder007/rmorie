@@ -20,3 +20,6 @@ the same order -- while spreading the seeds over the whole index range the way r
 The value of \code{repeat}.
 }
 \keyword{internal}
+\examples{
+.rscombosstride(n = 3L, k = 5L, want = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

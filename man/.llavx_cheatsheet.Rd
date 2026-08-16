@@ -14,3 +14,6 @@ A step of the llavx_native implementation. Called by \code{morie_llavx}. See the
 A character value.
 }
 \keyword{internal}
+\examples{
+.llavx_cheatsheet()
+}

@@ -18,3 +18,6 @@ A step of the ml_geron implementation. Called by \code{morie_trkassign}. See the
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gr_combos(seq_ = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

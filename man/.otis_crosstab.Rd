@@ -14,3 +14,6 @@ Internal helper: Otis Crosstab
 A list with \code{title}, \code{headers}, \code{rows}.
 }
 \keyword{internal}
+\examples{
+.otis_crosstab(df = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), row = c(1, 2, 3, 4, 5, 6, 7, 8), col = c("a", "b", "c"), value = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

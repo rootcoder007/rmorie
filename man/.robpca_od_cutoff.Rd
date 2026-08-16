@@ -18,3 +18,7 @@ A step of the robpca_native implementation. Called by \code{morie_robpca}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.robpca_od_cutoff(V, V)
+}

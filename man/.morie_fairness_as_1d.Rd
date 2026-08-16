@@ -18,3 +18,7 @@ A step of the frns_metrics implementation. Called by \code{morie_fairness_averag
 The value of \code{arr}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_fairness_as_1d(V, V)
+}

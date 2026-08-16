@@ -22,3 +22,7 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_moving_wi
 The value of \code{repeat}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_haas_window(V, V)
+}

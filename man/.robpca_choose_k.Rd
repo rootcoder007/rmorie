@@ -20,3 +20,6 @@ A step of the robpca_native implementation. Called by \code{morie_robpca}. See t
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.robpca_choose_k(l0 = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L, kmax = c(1, 2, 3, 4, 5, 6, 7, 8), r1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

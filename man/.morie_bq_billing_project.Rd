@@ -14,3 +14,6 @@ Internal helper: Morie Bq Billing Project
 Nothing; the function is called for its effect.
 }
 \keyword{internal}
+\examples{
+.morie_bq_billing_project()
+}

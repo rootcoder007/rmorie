@@ -17,3 +17,7 @@ A step of the sgtcoml implementation. Called by \code{louv}, \code{sgtcoml}. See
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.k02relabel(V)
+}

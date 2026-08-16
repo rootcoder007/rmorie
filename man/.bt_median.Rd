@@ -17,3 +17,7 @@ A step of the btcimed implementation. Called by \code{Btcimed}. See the file hea
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bt_median(V)
+}

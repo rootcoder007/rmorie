@@ -18,3 +18,7 @@ A step of the mvsml_rf_shared implementation. Called by \code{Rfmdi}, \code{Rfml
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rfmtry(V)
+}

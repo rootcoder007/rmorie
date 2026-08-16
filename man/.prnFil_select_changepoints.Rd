@@ -40,3 +40,7 @@ American Statistical Association* 103(482), 681-686,
 doi:10.1198/016214508000000337. The Laplace-prior formulation.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.prnFil_select_changepoints(V, V)
+}

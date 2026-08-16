@@ -19,3 +19,6 @@ A step of the helpers_gp_core implementation. Called by \code{Msm128}. See the f
 A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals}, \code{loss}, \code{penalty}, \code{objective}.
 }
 \keyword{internal}
+\examples{
+.gprkhsfitsq(K = 5L, y = 5L)
+}

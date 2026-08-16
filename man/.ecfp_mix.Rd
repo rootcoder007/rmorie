@@ -18,3 +18,7 @@ A step of the ecfp4 implementation. Called by \code{.ecfp_conninv}, \code{.ecfp_
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ecfp_mix(V, V)
+}

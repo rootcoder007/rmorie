@@ -14,3 +14,6 @@ Internal helper: Tbl Stars
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+.tbl_stars(p = 0.5)
+}

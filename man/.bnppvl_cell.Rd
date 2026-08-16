@@ -35,3 +35,6 @@ The value of \code{k}, as built in the body.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+.bnppvl_cell(u = 5L, q = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

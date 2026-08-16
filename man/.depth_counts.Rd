@@ -19,3 +19,6 @@ morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at that depth,
 The value of \code{counts}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.depth_counts(tree = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), max_depth = 5L, d = 5L)
+}

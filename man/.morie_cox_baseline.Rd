@@ -21,3 +21,6 @@ A step of the cox_native implementation. Called by \code{morie_cox_breslow_step}
 A list with \code{times}, \code{hazard}, \code{cumhazard}.
 }
 \keyword{internal}
+\examples{
+.morie_cox_baseline(t = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, beta = 0.5)
+}

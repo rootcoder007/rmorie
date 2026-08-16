@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_fauzi_ksone(d = 5L, n = 5L)
+}

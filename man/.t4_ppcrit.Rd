@@ -18,3 +18,6 @@ A step of the pptest implementation. Called by \code{Pptest}. See the file heade
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.t4_ppcrit(n = 5L)
+}

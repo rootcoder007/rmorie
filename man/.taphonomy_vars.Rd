@@ -14,3 +14,6 @@ Internal helper: Taphonomy Vars
 A list with \code{treatment}, \code{covariates}, \code{measurements}, \code{outcome}.
 }
 \keyword{internal}
+\examples{
+.taphonomy_vars()
+}

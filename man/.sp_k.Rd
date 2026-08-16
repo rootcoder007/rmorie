@@ -20,3 +20,6 @@ E_tilde(h) = (1/n) sum_i sum_{j != i} I(h_ij <= h); K = E / lambda_hat. The naiv
 Numeric vector K(r).
 }
 \keyword{internal}
+\examples{
+.sp_k(points = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), region = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

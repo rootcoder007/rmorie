@@ -18,3 +18,7 @@ A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the
 A list with \code{estimate}, \code{representation}, \code{learned_dim}, \code{descriptor_dim}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dmlqs_concat_descriptors(V, V)
+}

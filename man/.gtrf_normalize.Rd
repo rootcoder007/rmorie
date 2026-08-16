@@ -14,3 +14,6 @@
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.gtrf_normalize(X = c(1, 2, 3, 4, 5, 6, 7, 8), how = 5L)
+}

@@ -17,3 +17,7 @@ For each pair \code{(i, j)} returns the fraction of label draws in which regions
 A list with \code{matrix} (n x n), \code{n_draws}, \code{n},   \code{symmetric}, \code{unit_diagonal}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dpgrf_coclustering(V)
+}

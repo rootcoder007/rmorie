@@ -18,3 +18,7 @@ A step of the memb_native implementation. Called by \code{memb}. See the file he
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.memb_sorted_features(V)
+}

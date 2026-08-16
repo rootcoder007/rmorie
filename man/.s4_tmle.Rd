@@ -20,3 +20,6 @@ A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte}, \c
 A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1}, \code{Q0}, \code{ic}, \code{n}.
 }
 \keyword{internal}
+\examples{
+.s4_tmle(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

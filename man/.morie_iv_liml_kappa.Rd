@@ -14,3 +14,6 @@ kappa = smallest eigenvalue of (W\' M_1 W)(W\' M_Z W)^{-1} where W = \[y, endoge
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_iv_liml_kappa(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), X_endo = 5L, Z_full = c(1, 2, 3, 4, 5, 6, 7, 8), X_exo = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

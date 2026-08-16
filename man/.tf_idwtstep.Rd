@@ -20,3 +20,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_idwt}. See the fi
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tf_idwtstep(lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, g = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

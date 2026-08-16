@@ -18,3 +18,7 @@ A step of the phylby_native implementation. Called by \code{.phylby_log_posterio
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.phylby_branch_paths(V)
+}

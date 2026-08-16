@@ -17,3 +17,7 @@ Every unit after the first begins with U+2581 so a naive \code{strsplit} on the 
 Character vector of units.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.sentpc_units(S)
+}

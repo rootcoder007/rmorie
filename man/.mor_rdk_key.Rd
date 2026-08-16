@@ -17,3 +17,7 @@ ordering because every tuple compared shares a length
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_rdk_key(V)
+}

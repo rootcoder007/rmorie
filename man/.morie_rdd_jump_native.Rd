@@ -14,3 +14,6 @@
 A list with \code{estimate}, \code{se}, \code{n}, \code{left}, \code{right}.
 }
 \keyword{internal}
+\examples{
+.morie_rdd_jump_native(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5, h = 0.5)
+}

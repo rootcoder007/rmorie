@@ -17,3 +17,7 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}, \c
 The value of \code{rep}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mafft_weights(V)
+}

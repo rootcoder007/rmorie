@@ -14,3 +14,6 @@ Internal helper: Level From Spec
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+.level_from_spec(col_name = 5L, dtype = 5L, valid_values = c(1, 2, 3, 4, 5, 6, 7, 8), dataset_name = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

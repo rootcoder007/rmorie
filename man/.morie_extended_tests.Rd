@@ -14,3 +14,6 @@ Internal helper: Morie Extended Tests
 The value of \code{\%in\%}.
 }
 \keyword{internal}
+\examples{
+.morie_extended_tests()
+}

@@ -19,3 +19,6 @@ rational approximation and exactly as accurate as the CDF it inverts, which is t
 The value of \code{.w3_bisect}.
 }
 \keyword{internal}
+\examples{
+.w3_nppf(p = 0.5)
+}

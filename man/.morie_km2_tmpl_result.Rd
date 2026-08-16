@@ -20,3 +20,6 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch
 A list with \code{prompt}, \code{slot_filled}, \code{template}, \code{tokens}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+.morie_km2_tmpl_result(prompt = c(1, 2, 3, 4, 5, 6, 7, 8), filled = c(1, 2, 3, 4, 5, 6, 7, 8), eq = c(1, 2, 3, 4, 5, 6, 7, 8), template = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,6 @@ The exact finite-n value, not the limit; they differ by about 1\% at n = 20, whi
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.esl_inclusion(n = 5L)
+}

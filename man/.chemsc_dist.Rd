@@ -33,3 +33,7 @@ A numeric value.
     Proteins 52(4), 609-623.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.chemsc_dist(V, V)
+}

@@ -14,3 +14,6 @@
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.irt_broadcast(v = 5L, n = 5L, name = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

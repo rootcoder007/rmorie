@@ -33,3 +33,6 @@ One of two values, depending on the branch taken.
     Proteins 52(4), 609-623.
 }
 \keyword{internal}
+\examples{
+.chemsc_over(r = 5L, r1 = 5L)
+}

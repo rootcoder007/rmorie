@@ -17,3 +17,7 @@ A step of the offlrl_native implementation. Called by \code{offlrl}. See the fil
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.offlrl_softmax(V)
+}

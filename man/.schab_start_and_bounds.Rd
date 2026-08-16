@@ -18,3 +18,7 @@ partial sill are variances so they are non-negative, and a range is a distance s
 A list with \code{start}, \code{lo}, \code{hi}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_start_and_bounds(V, V)
+}

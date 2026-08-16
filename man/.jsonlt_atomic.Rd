@@ -19,3 +19,6 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code
 A character value.
 }
 \keyword{internal}
+\examples{
+.jsonlt_atomic(x = c(1, 2, 3, 4, 5, 6, 7, 8), o = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), unbox_ok = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

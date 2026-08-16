@@ -19,3 +19,6 @@
 A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
 }
 \keyword{internal}
+\examples{
+.gpolsfit(X = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

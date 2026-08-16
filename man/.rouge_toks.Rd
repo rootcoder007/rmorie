@@ -17,3 +17,7 @@ A step of the rouge_native implementation. Called by \code{.rouge_get_refs_compl
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rouge_toks(V)
+}

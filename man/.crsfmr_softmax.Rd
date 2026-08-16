@@ -17,3 +17,7 @@ Numerically stable softmax over a numeric vector.
 Numeric vector, same length as \code{x}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.crsfmr_softmax(V)
+}

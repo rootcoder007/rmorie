@@ -18,3 +18,7 @@ A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl}, \code{Ed
 A list with \code{freqs}, \code{power}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_qrs_psd(V, V)
+}

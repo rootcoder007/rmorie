@@ -18,3 +18,6 @@ A step of the geron_w4b_native implementation. Called by \code{morie_geron_model
 The value of \code{assign}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gr_w4b_mpp_partition(w = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

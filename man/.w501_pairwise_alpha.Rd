@@ -18,3 +18,6 @@ Part of the w501_changepoint_native implementation; see the file header for the 
 The value of \code{D}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.w501_pairwise_alpha(Z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), alpha = 0.5)
+}

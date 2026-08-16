@@ -19,3 +19,6 @@ Part of the median_frames_dose_native implementation; see the file header for th
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.morie_domain_total(y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), mask = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

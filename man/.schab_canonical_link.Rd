@@ -17,3 +17,6 @@ A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseud
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.schab_canonical_link(family = 5L)
+}

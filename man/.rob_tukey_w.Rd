@@ -18,3 +18,7 @@ redescending part is what buys breakdown -- a gross outlier gets no vote at all,
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rob_tukey_w(V, V)
+}

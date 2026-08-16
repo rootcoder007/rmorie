@@ -14,3 +14,6 @@ Internal helper: Morie Llm System Prompt
 A character value.
 }
 \keyword{internal}
+\examples{
+.morie_llm_system_prompt()
+}

@@ -42,3 +42,6 @@ doi:10.2307/2533838. Sieve analysis.
 """
 }
 \keyword{internal}
+\examples{
+.tlsieve_cheatsheet()
+}

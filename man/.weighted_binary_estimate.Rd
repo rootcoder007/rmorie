@@ -14,3 +14,7 @@ Internal helper: Weighted Binary Estimate
 A list with \code{p}, \code{se}, \code{ci}, \code{n}, \code{n_eff}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.weighted_binary_estimate(V, V)
+}

@@ -23,3 +23,6 @@ A step of the schab_st_shared implementation. Called by \code{spstvg}. See the f
 A list with \code{gamma}, \code{counts}, \code{n_at_time}, \code{lags}, \code{edges}.
 }
 \keyword{internal}
+\examples{
+.schab_st_conditional_semivariogram(coords = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), at_time = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

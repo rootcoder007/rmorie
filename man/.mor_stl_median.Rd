@@ -17,3 +17,7 @@ A step of the stlAn_native implementation. Called by \code{morie_stl_decompose},
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_stl_median(V)
+}

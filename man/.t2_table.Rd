@@ -17,3 +17,7 @@ A step of the tail2_t02 implementation. Called by \code{CttAlpha}, \code{CttAlph
 The value of \code{X}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t2_table(V)
+}

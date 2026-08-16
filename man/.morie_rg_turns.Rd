@@ -18,3 +18,7 @@ A step of the rangayyan_stat implementation. Called by \code{TurnsCount}. See th
 A list with \code{turns}, \code{positions}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_turns(V, V)
+}

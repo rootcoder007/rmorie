@@ -40,3 +40,7 @@ doi:10.1016/0196-8858(85)90002-8. The reward-maximising tradition
 this departs from.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tlbandt_sequential_ci(V)
+}

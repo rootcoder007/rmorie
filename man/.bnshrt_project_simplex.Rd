@@ -17,3 +17,7 @@ A step of the bnshrt_native implementation. Called by \code{morie_in_identified_
 The value of \code{pmax}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bnshrt_project_simplex(V)
+}

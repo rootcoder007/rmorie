@@ -28,3 +28,7 @@ A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}
   Hernan M. A. & Robins J. M. (2020) Causal Inference: What If, Sec. 12.3.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gentmt_ols_core(V, V)
+}

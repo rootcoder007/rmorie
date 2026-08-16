@@ -14,3 +14,6 @@ A step of the bats_native implementation. No other function in the package calls
 A character value.
 }
 \keyword{internal}
+\examples{
+.bats_cheatsheet()
+}

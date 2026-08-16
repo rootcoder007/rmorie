@@ -14,3 +14,6 @@ Internal helper: Tps Sp Round
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tps_sp_round(x = 5L)
+}

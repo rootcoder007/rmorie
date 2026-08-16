@@ -19,3 +19,6 @@ A step of the bayopt_native implementation. Called by \code{gp_posterior_gradien
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.dkernel_dr2(name = 5L, amplitude = c(1, 2, 3, 4, 5, 6, 7, 8), r2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

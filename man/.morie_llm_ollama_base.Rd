@@ -14,3 +14,6 @@ The Ollama endpoint. Point \code{OLLAMA_HOST} (or \code{OLLAMA_BASE_URL}) at ANY
 The value of \code{sub}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_ollama_base()
+}

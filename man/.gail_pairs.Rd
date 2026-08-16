@@ -14,3 +14,6 @@
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+.gail_pairs(states = c(1, 2, 3, 4, 5, 6, 7, 8), actions = c(1, 2, 3, 4, 5, 6, 7, 8), name = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

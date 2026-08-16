@@ -17,3 +17,6 @@ A step of the snpeff_native implementation. Called by \code{.snpeff_pack}. See t
 A character value.
 }
 \keyword{internal}
+\examples{
+.snpeff_impact(effect = 5L)
+}

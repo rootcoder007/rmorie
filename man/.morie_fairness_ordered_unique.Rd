@@ -17,3 +17,7 @@ A step of the frns_metrics implementation. Called by \code{.morie_fairness_favor
 The value of \code{unique}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_fairness_ordered_unique(V)
+}

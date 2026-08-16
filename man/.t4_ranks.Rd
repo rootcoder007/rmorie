@@ -17,3 +17,7 @@ A step of the tail4_core implementation. Called by \code{Pettitt}. See the file 
 The value of \code{rank}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t4_ranks(V)
+}

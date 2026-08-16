@@ -17,3 +17,7 @@ A step of the opnclp_native implementation. Called by \code{infonce}. See the fi
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.opnclp_mat(V)
+}

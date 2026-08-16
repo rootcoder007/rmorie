@@ -18,3 +18,7 @@ A step of the remlfn_native implementation. Called by \code{.remlfn_ranova}, \co
 A list with \code{keys}, \code{gs}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.remlfn_groups(V, V)
+}

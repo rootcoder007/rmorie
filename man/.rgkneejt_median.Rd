@@ -17,3 +17,7 @@ A step of the rgkneejt implementation. Called by \code{rgkneejt}. See the file h
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rgkneejt_median(V)
+}

@@ -19,3 +19,7 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_moving_wi
 A list with \code{h}, \code{gamma}, \code{counts}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_empirical_variogram(V, V)
+}

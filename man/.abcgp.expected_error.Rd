@@ -19,3 +19,6 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}. S
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.abcgp.expected_error(alphas = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+}

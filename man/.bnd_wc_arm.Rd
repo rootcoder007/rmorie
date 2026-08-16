@@ -20,3 +20,6 @@ A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bn
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.bnd_wc_arm(m_t = c(1, 2, 3, 4, 5, 6, 7, 8), p_t = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,7 @@ correspondence is fixed, and fitting it away would hide the very displacement th
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.agalfsy_rmsd(M, M)
+}

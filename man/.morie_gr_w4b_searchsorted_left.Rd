@@ -18,3 +18,7 @@ A step of the geron_w4b_native implementation. Called by \code{morie_geron_histo
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gr_w4b_searchsorted_left(V, V)
+}

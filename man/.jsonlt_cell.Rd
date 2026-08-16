@@ -19,3 +19,6 @@ jsonlite does for NA inside rows when na is unset.
 The value of \code{.jsonlt_scalar}.
 }
 \keyword{internal}
+\examples{
+.jsonlt_cell(col = c("a", "b", "c"), i = 5L, o = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

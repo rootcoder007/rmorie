@@ -14,3 +14,6 @@ Internal helper: Siu An Interval
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+.siu_an_interval(label = c(1, 2, 3, 4, 5, 6, 7, 8), a_iso = c(1, 2, 3, 4, 5, 6, 7, 8), b_iso = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

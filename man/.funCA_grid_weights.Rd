@@ -17,3 +17,6 @@ A step of the funCA_native implementation. Called by \code{morie_funCA_functiona
 The value of \code{w}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.funCA_grid_weights(n_t = 5L)
+}

@@ -20,3 +20,6 @@ A step of the geron_train_native implementation. Called by \code{morie_geron_blo
 A list with \code{output}, \code{weights}, \code{scores}.
 }
 \keyword{internal}
+\examples{
+.morie_gr_attend(Q = 0.5, K = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

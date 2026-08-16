@@ -18,3 +18,6 @@ follow Part of the evpot implementation; see the file header for the source it f
 A list with \code{xi}, \code{sigma}, \code{g}.
 }
 \keyword{internal}
+\examples{
+.gpd_profile(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L)
+}

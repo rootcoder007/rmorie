@@ -18,3 +18,7 @@ A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \c
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.wrd2v_scores(V, V)
+}

@@ -19,3 +19,6 @@ A step of the optim_native implementation. Called by \code{morie_adagrad}, \code
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_opt_state(state = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L)
+}

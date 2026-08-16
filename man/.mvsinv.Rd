@@ -18,3 +18,7 @@ symmetrised so that the two arms cannot drift on round-off.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.mvsinv(M)
+}

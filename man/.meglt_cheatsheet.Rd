@@ -14,3 +14,6 @@ A step of the meglt_native implementation. Called by \code{morie_meglt}. See the
 A character value.
 }
 \keyword{internal}
+\examples{
+.meglt_cheatsheet()
+}

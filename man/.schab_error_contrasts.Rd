@@ -17,3 +17,7 @@ builds K explicitly for the intercept-only case and notes, citing Harville (1974
 A matrix, from \code{t}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_error_contrasts(V)
+}

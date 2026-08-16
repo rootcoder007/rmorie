@@ -32,3 +32,6 @@ The value of \code{out}, as built in the body.
     et Appliquees 5, 380-440.
 }
 \keyword{internal}
+\examples{
+.flexrd_grid(nchi = 5L, angles = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

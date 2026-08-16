@@ -14,3 +14,6 @@
 A list with \code{converged}, \code{x}.
 }
 \keyword{internal}
+\examples{
+.ghc_mipinterior(M = 5L, rhs = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

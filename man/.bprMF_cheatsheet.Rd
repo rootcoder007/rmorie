@@ -41,3 +41,6 @@ item, negative item) plus up to 100 more for the negative-item
 rejection guard, exactly as the Python arm does.
 }
 \keyword{internal}
+\examples{
+.bprMF_cheatsheet()
+}

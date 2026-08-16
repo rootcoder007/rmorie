@@ -18,3 +18,6 @@ A step of the schab_hermite_shared implementation. Called by \code{.schab_hermit
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.schab_hermite_e(x = c(1, 2, 3, 4, 5, 6, 7, 8), degree = 5L)
+}

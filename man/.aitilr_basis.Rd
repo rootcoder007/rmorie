@@ -17,3 +17,6 @@ Column i holds +sqrt(i/(i+1))/i on rows 1..i, -sqrt(i/(i+1)) on row i+1 and zero
 a D-by-(D-1) numeric contrast matrix.
 }
 \keyword{internal}
+\examples{
+.aitilr_basis(D = 5L)
+}

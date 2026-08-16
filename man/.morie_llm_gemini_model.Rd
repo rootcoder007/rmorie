@@ -14,3 +14,6 @@ Internal helper: Morie Llm Gemini Model
 The value of \code{.morie_llm_env}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_gemini_model()
+}

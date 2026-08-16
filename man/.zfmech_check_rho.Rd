@@ -17,3 +17,6 @@ A step of the zfmech_native implementation. Called by \code{group_privacy}, \cod
 The value of \code{rho}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.zfmech_check_rho(rho = 0.5)
+}

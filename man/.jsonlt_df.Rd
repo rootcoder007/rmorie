@@ -18,3 +18,7 @@ columns. That is morie_jsonlt_flatten\\'s job, opt-in, and doing it here would m
 The value of \code{structure}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.jsonlt_df(V, V)
+}

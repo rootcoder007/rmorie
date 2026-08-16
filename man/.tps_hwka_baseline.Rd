@@ -14,3 +14,6 @@ Internal helper: Tps Hwka Baseline
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.tps_hwka_baseline(t = c(1, 2, 3, 4, 5, 6, 7, 8), kind = 5L, alpha = 0.5, T_ = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

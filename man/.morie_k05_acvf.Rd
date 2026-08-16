@@ -19,3 +19,6 @@ A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf}, \c
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.morie_k05_acvf(v = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, max_lag = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

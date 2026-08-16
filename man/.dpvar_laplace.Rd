@@ -18,3 +18,6 @@ A step of the Dpvar implementation. Called by \code{Dpvar}. See the file header 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.dpvar_laplace(u = 5L, scale = TRUE)
+}

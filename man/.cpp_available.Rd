@@ -14,3 +14,6 @@ Internal helper: Cpp Available
 The value of \code{tryCatch}.
 }
 \keyword{internal}
+\examples{
+.cpp_available()
+}

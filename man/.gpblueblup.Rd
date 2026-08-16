@@ -21,3 +21,6 @@ A step of the helpers_gp_core implementation. Called by \code{.gpmultitrait}, \c
 A list with \code{beta}, \code{u}.
 }
 \keyword{internal}
+\examples{
+.gpblueblup(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), Sigma = 0.5)
+}

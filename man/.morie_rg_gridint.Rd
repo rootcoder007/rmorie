@@ -18,3 +18,7 @@ O(h^4)); trapezoid otherwise, which is what a non-uniform grid admits without in
 The value of \code{.morie_fsum}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_gridint(V)
+}

@@ -22,3 +22,6 @@ A step of the k05_tranche2 implementation. Called by \code{.morie_k05_info}, \co
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_k05_prob(theta = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), u = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

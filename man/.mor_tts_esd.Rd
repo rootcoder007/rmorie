@@ -20,3 +20,6 @@ A step of the ttsAn_native implementation. Called by \code{morie_ttsAn}. See the
 A list with \code{anoms}, \code{stats}, \code{lams}.
 }
 \keyword{internal}
+\examples{
+.mor_tts_esd(res = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L, alpha = 0.5)
+}

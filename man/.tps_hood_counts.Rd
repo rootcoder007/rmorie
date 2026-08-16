@@ -14,3 +14,7 @@ Internal helper: Tps Hood Counts
 The value of \code{sort}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tps_hood_counts(V)
+}

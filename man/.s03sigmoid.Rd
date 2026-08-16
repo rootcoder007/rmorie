@@ -17,3 +17,6 @@ A step of the helpers_s03 implementation. Called by \code{.dnnact}, \code{.dw_sk
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.s03sigmoid(z = 5L)
+}

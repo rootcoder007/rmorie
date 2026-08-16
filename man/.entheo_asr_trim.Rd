@@ -14,3 +14,7 @@ Internal helper: Entheo Asr Trim
 A list with \code{arr}, \code{n_bad}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.entheo_asr_trim(M, M)
+}

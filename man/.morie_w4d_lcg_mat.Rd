@@ -20,3 +20,6 @@ A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_sae_tr
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_lcg_mat(nr = 5L, nc = 5L, seed = 5L)
+}

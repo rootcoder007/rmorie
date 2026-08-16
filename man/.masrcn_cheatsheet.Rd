@@ -14,3 +14,6 @@ A step of the masrcn_native implementation. Called by \code{morie_masrcn}. See t
 A character value.
 }
 \keyword{internal}
+\examples{
+.masrcn_cheatsheet()
+}

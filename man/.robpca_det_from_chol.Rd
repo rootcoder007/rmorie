@@ -17,3 +17,7 @@ A step of the robpca_native implementation. Called by \code{.robpca_c_steps}, \c
 The value of \code{prod}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.robpca_det_from_chol(V)
+}

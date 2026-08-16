@@ -17,3 +17,7 @@ A step of the metabd_native implementation. Called by \code{bin_contigs}. See th
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.metabd_mat(V)
+}

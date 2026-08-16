@@ -18,3 +18,7 @@ A step of the tail2_t01 implementation. Called by \code{KappaCoh}, \code{KappaWt
 A vector, from \code{sort}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t2_lvl(V, V)
+}

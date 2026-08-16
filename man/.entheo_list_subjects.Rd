@@ -14,3 +14,6 @@
 The value of \code{sort}.
 }
 \keyword{internal}
+\examples{
+.entheo_list_subjects(root = 5L)
+}

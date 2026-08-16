@@ -17,3 +17,6 @@ exactly in a double, which is what makes the streams identical.
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.mor_lcg_new()
+}

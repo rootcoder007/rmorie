@@ -42,3 +42,7 @@ Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
 4015-4026, arXiv:2304.02643. The image model generalised here.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sam2vd_to_num(V)
+}

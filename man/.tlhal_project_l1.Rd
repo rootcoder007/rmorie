@@ -18,3 +18,6 @@ A step of the tlhal_native implementation. Called by \code{hal_fit}. See the fil
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tlhal_project_l1(v = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+}

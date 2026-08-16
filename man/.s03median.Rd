@@ -17,3 +17,7 @@ A step of the helpers_s03 implementation. Called by \code{.dnnheadweights}, \cod
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03median(V)
+}

@@ -18,3 +18,7 @@ g : n x p transformation of the covariate (e.g. group indicators) h : n x q infl
 A list with \code{T}, \code{mu}, \code{Sigma}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_sw_moments(V, V)
+}

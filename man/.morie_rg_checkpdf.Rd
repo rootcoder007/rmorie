@@ -18,3 +18,7 @@ A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfK
 A list with \code{pdf_mass}, \code{pdf_mass_ok}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_checkpdf(V)
+}

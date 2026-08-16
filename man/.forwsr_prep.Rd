@@ -18,3 +18,7 @@ A step of the forwsr_native implementation. Called by \code{morie_forwsr}, \code
 A list with \code{M}, \code{y}, \code{n}, \code{p}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.forwsr_prep(V, V)
+}

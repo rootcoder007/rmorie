@@ -19,3 +19,6 @@ A step of the defdtr implementation. Called by \code{Defdtr}. See the file heade
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.defdtr_bilinear(F = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

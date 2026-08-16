@@ -20,3 +20,6 @@ A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}. See 
 A logical value.
 }
 \keyword{internal}
+\examples{
+.morie_ml_blocked(path = c(1, 2, 3, 4, 5, 6, 7, 8), dirs = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), children = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

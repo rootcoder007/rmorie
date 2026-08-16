@@ -18,3 +18,8 @@ A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol}, 
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.w3_solve_chol(M, V)
+}

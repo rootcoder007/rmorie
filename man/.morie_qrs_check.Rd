@@ -19,3 +19,7 @@ A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPu
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_qrs_check(V)
+}

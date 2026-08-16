@@ -45,3 +45,7 @@ item, negative item) plus up to 100 more for the negative-item
 rejection guard, exactly as the Python arm does.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bprMF_triples(V, V)
+}

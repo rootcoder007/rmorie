@@ -20,3 +20,7 @@ A step of the rapaf_native implementation. Called by \code{morie_rapaf_rate_rati
 The value of \code{beta}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rapaf_logit_irls(V, V)
+}

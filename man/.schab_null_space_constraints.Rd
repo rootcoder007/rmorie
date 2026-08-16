@@ -18,3 +18,6 @@ A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the
 A list with \code{A}, \code{e}, \code{n_constraints}, \code{rank_deficiency}.
 }
 \keyword{internal}
+\examples{
+.schab_null_space_constraints(R_delta = 5L)
+}

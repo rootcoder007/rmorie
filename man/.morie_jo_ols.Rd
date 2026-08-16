@@ -18,3 +18,7 @@ A step of the ts_joseph implementation. Called by \code{.morie_jo_fitpred}, \cod
 The value of \code{.morie_jo_solve}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_jo_ols(V, V)
+}

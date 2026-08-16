@@ -17,3 +17,7 @@ A step of the vepan_native implementation. Called by \code{.vepan_transcript}. S
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vepan_exons(V)
+}

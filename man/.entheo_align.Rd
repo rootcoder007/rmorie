@@ -14,3 +14,7 @@ Internal helper: Entheo Align
 A list with \code{e}, \code{f}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.entheo_align(V, V)
+}

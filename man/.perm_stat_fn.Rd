@@ -14,3 +14,6 @@ Internal helper: Perm Stat Fn
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.perm_stat_fn(statistic = 5L)
+}

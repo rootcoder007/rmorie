@@ -17,3 +17,7 @@ A step of the tmldta_native implementation. Called by \code{split_specific_tmle}
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tmldta_logit(V)
+}

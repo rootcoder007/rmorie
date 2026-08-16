@@ -18,3 +18,8 @@ A step of the karpV_native implementation. Called by \code{morie_karpV}. See the
 The value of \code{node}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.karpv_get(D, V)
+}

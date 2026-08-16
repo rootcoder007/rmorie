@@ -17,3 +17,7 @@ when it is a dict that carries a "label" key).
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.leaf(V)
+}

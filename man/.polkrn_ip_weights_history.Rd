@@ -35,3 +35,6 @@ Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
 Chapman & Hall/CRC, Sec. 21.2.
 }
 \keyword{internal}
+\examples{
+.polkrn_ip_weights_history(A_hist = 5L, L_hist = c(1, 2, 3, 4, 5, 6, 7, 8), kind = c(1, 2, 3, 4, 5, 6, 7, 8), stabilize = c(1, 2, 3, 4, 5, 6, 7, 8), trim = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

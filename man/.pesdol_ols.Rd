@@ -18,3 +18,7 @@ A step of the pesdol_native implementation. Called by \code{morie_pesdol_ardl_bo
 A list with \code{beta}, \code{fit}, \code{res}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.pesdol_ols(M, M)
+}

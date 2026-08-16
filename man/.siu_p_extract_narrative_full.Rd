@@ -14,3 +14,7 @@ Internal helper: Siu P Extract Narrative Full
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.siu_p_extract_narrative_full(V, V)
+}

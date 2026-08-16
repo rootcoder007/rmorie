@@ -14,3 +14,6 @@ Internal helper: Kernel Fn
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.kernel_fn(kernel_type = 5L)
+}

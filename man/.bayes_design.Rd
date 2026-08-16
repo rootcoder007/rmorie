@@ -14,3 +14,6 @@ Internal helper: Bayes Design
 A list with \code{y}, \code{X}, \code{p}.
 }
 \keyword{internal}
+\examples{
+.bayes_design(formula = y ~ x, data = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

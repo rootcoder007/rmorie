@@ -14,3 +14,6 @@ Internal helper: Stat Result
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.stat_result(method = c(1, 2, 3, 4, 5, 6, 7, 8), test_statistic = c(1, 2, 3, 4, 5, 6, 7, 8), p_value = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

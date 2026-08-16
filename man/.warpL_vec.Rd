@@ -44,3 +44,7 @@ ECML 2010 paper above is the one held locally and is the text this
 module follows.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.warpL_vec(V)
+}

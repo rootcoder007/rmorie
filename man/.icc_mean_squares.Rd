@@ -19,3 +19,6 @@ A step of the icc2 implementation. Called by \code{Icc2}, \code{Icc3}. See the f
 A list with \code{bms}, \code{wms}, \code{jms}, \code{ems}.
 }
 \keyword{internal}
+\examples{
+.icc_mean_squares(rows = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), n = c(1, 2, 3, 4, 5, 6, 7, 8), k = 3L)
+}

@@ -25,3 +25,6 @@ American Statistical Association* 90(429), 330-341,
 doi:10.1080/01621459.1995.10476517.
 }
 \keyword{internal}
+\examples{
+.stahdo_combn(n = 5L, p = 0.5)
+}

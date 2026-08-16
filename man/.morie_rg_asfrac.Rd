@@ -17,3 +17,6 @@ A step of the rangayyan_class implementation. Called by \code{Accuracy}. See the
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.morie_rg_asfrac(v = 5L)
+}

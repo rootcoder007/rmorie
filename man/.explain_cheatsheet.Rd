@@ -14,3 +14,6 @@ Mirrors the \code{morie cheatsheet} CLI subcommand: a one-screen reference of in
 Invisibly returns a character scalar of the cheatsheet.   Called for its side effect of printing to the console.
 }
 \keyword{internal}
+\examples{
+.explain_cheatsheet()
+}

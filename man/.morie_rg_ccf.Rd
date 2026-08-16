@@ -19,3 +19,6 @@ A step of the rangayyan_adapt implementation. Called by \code{Whopf}. See the fi
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.morie_rg_ccf(x = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 5L)
+}

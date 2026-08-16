@@ -14,3 +14,6 @@ Internal helper: Morie Db Handle
 A list with \code{type}, \code{dir}, \code{close}.
 }
 \keyword{internal}
+\examples{
+.morie_db_handle()
+}

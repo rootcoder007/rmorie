@@ -14,3 +14,6 @@ Internal helper: Otis Causal Available
 The value of \code{&&}.
 }
 \keyword{internal}
+\examples{
+.otis_causal_available()
+}

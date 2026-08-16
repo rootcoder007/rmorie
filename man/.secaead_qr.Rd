@@ -33,3 +33,6 @@ Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
 code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 }
 \keyword{internal}
+\examples{
+.secaead_qr(s = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L)
+}

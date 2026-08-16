@@ -17,3 +17,7 @@ A step of the geron_ml_native implementation. Called by \code{morie_geron_bf16},
 The value of \code{.morie_gr_bits_f32}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gr_f32(V)
+}

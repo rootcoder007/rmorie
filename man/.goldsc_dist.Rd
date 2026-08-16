@@ -34,3 +34,7 @@ A numeric value.
     defaults and the two split potentials.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.goldsc_dist(V, V)
+}

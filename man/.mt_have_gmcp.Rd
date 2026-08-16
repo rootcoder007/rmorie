@@ -14,3 +14,6 @@ Internal helper: Mt Have Gmcp
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.mt_have_gmcp()
+}

@@ -18,3 +18,7 @@ A step of the schab_st_shared implementation. Called by \code{.schab_st_covarian
 A list with \code{d}, \code{k}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_st_lag_matrices(V, V)
+}

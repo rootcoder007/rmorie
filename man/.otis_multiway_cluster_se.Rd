@@ -14,3 +14,6 @@ Internal helper: Otis Multiway Cluster Se
 The value of \code{.otis_cluster_se}.
 }
 \keyword{internal}
+\examples{
+.otis_multiway_cluster_se(scores = 5L, clusters = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

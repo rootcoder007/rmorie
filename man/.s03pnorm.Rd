@@ -17,3 +17,7 @@ A step of the helpers_s03 implementation. Called by \code{.huber_k}, \code{Augmn
 The value of \code{pnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03pnorm(V)
+}

@@ -17,3 +17,7 @@ A step of the helpers_fda implementation. Called by \code{Scfd}. See the file he
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fdgrid(V)
+}

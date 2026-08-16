@@ -19,3 +19,7 @@ A step of the limmav_native implementation. Called by \code{morie_limmav}. See t
 A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total}, \code{no_gene_variation}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.limmav_ebayes(V, V)
+}

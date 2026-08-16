@@ -17,3 +17,7 @@ A step of the geron_ml_native implementation. Called by \code{Ops.morie_gvar}. S
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gvar_wrap(V)
+}

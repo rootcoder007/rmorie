@@ -19,3 +19,6 @@ A step of the scintg_native implementation. Called by \code{.scintg_maximum_dive
 The value of \code{centres}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.scintg_kmeans_init(Zn = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), K = 5L, seed = 5L)
+}

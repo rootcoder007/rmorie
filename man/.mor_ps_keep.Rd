@@ -19,3 +19,7 @@ CHANGES THE ESTIMAND.  The result is no longer the ATE on the whole sample but t
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_ps_keep(V)
+}

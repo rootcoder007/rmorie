@@ -28,3 +28,6 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+.pq_convert(vals = c(1, 2, 3, 4, 5, 6, 7, 8), ptype = 5L, converted = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

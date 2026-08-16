@@ -17,3 +17,7 @@ A step of the mehtad_native implementation. Called by \code{mehtad_residuals}. S
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mehtad_vec(V)
+}

@@ -22,3 +22,6 @@ Extracted from the sarre() optimiser closure so the singular-GLS, non-positive-v
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.sarre_negll(lam = c(1, 2, 3, 4, 5, 6, 7, 8), I = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

@@ -20,3 +20,7 @@ Newton steps on the penalised binomial log-likelihood. The penalty is what keeps
 The coefficient vector.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tmldyn_logit_irls(V, V)
+}

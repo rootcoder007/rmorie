@@ -18,3 +18,6 @@ A step of the helpers_s03 implementation. Called by \code{.bt_counts}, \code{.rf
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.s03vdc(i = 5L)
+}

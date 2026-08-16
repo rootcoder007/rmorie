@@ -19,3 +19,6 @@ basis {1, sqrt(2) cos(pi k v)}, for which the coefficients in (5.79) are literal
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.hrz3_sieve(z = c(1, 2, 3, 4, 5, 6, 7, 8), J = 5L)
+}

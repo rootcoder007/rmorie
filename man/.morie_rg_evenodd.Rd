@@ -18,3 +18,7 @@ A step of the rangayyan_xfrm implementation. Called by \code{EvenOdd}, \code{Eve
 A list with \code{n}, \code{even}, \code{odd}, \code{x}, \code{reconstruction_error}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.morie_rg_evenodd(S)
+}

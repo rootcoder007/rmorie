@@ -18,3 +18,6 @@ A step of the rgemgfd implementation. Called by \code{rgemgfd}. See the file hea
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.rg_higuchi_fd(x = c(1, 2, 3, 4, 5, 6, 7, 8), kmax = 5L)
+}

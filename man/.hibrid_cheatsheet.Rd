@@ -14,3 +14,6 @@ A step of the hibrid_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+.hibrid_cheatsheet()
+}

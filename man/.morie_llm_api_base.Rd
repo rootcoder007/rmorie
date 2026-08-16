@@ -14,3 +14,6 @@ Internal helper: Morie Llm Api Base
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_api_base()
+}

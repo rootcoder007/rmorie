@@ -38,3 +38,6 @@ database; the citation appears to be fabricated and has been
 replaced with the three verifiable sources above.
 }
 \keyword{internal}
+\examples{
+.tmlcll_morie_cheatsheet()
+}

@@ -17,3 +17,7 @@ A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.thrtmt_vec(V)
+}

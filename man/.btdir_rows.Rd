@@ -14,3 +14,6 @@
 The value of \code{W}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.btdir_rows(n = 5L, B = 5L)
+}

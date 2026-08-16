@@ -17,3 +17,7 @@ A step of the tmlcou_native implementation. Called by \code{morie_tmlcou}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tmlcou_logit(V)
+}

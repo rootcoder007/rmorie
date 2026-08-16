@@ -25,3 +25,7 @@ A step of the orfgrf_native implementation. Called by \code{orthogonal_random_fo
 A list with \code{trees}, \code{bags}, \code{s}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.orfgrf_grow_forest(V, V)
+}

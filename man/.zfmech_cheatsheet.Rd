@@ -14,3 +14,6 @@ One-line summary of zCDP for the cheatsheet
 A single character string summarising zCDP, the Gaussian   mechanism, composition, post-processing, group privacy, and   both conversions.
 }
 \keyword{internal}
+\examples{
+.zfmech_cheatsheet()
+}

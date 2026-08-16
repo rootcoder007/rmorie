@@ -20,3 +20,6 @@ A step of the causal_native implementation. Called by \code{morie_backdoor_crite
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.bd_paths(x = 5L, y = 5L, ch = c(1, 2, 3, 4, 5, 6, 7, 8), pa = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

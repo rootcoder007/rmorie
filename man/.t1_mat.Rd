@@ -17,3 +17,7 @@ A step of the tail1_core implementation. Called by \code{.ecfp_bonds}, \code{Adm
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t1_mat(V)
+}

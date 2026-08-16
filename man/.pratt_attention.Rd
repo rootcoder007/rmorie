@@ -33,3 +33,6 @@ Sukhbaatar, S., Szlam, A., Weston, J. & Fergus, R. (2015)
 "End-To-End Memory Networks", NIPS 2015, 2440-2448, arXiv:1503.08895.
 }
 \keyword{internal}
+\examples{
+.pratt_attention(H = 0.5, W = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), u_context = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -14,3 +14,6 @@ Mirrors Python \code{morie.fn.qjlcrn.cheatsheet}: a single character string summ
 A character string.
 }
 \keyword{internal}
+\examples{
+.qjlcrn_cheatsheet()
+}

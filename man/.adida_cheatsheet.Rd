@@ -14,3 +14,6 @@ One-sentence ADIDA cheatsheet
 Character string summarising the framework.
 }
 \keyword{internal}
+\examples{
+.adida_cheatsheet()
+}

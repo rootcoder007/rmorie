@@ -41,3 +41,6 @@ Dirichlet prior that removes the per-document parameter growth;
 implemented in lda.
 }
 \keyword{internal}
+\examples{
+.plsa_cheatsheet()
+}

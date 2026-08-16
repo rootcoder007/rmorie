@@ -17,3 +17,6 @@ A step of the geron_w4b_native implementation. Called by \code{morie_geron_doubl
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_gr_w4b_double_center(D = 5L)
+}

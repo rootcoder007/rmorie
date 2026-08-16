@@ -14,3 +14,6 @@ Runs pmf helper for the two-sample test -- eq. (3.2.3), p. 79
 The value of \code{.gbRunsPmf}.
 }
 \keyword{internal}
+\examples{
+.gbRunsPmf2(m = 5L, n = 5L)
+}

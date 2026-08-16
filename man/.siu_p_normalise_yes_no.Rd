@@ -14,3 +14,6 @@ Internal helper: Siu P Normalise Yes No
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+.siu_p_normalise_yes_no(v = 5L)
+}

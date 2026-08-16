@@ -20,3 +20,6 @@ A step of the schab_glmm_shared implementation. No other function in the package
 A list with \code{mean}, \code{variance}, \code{n_neighbours}.
 }
 \keyword{internal}
+\examples{
+.schab_lcar_full_conditional(u = c(1, 2, 3, 4, 5, 6, 7, 8), adjacency = c(1, 2, 3, 4, 5, 6, 7, 8), rho = 0.5)
+}

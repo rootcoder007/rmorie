@@ -19,3 +19,6 @@ A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_lcar_precision(R = 5L, rho = 0.5)
+}

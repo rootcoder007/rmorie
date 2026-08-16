@@ -17,3 +17,6 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.propinf_rng(seed = 5L)
+}

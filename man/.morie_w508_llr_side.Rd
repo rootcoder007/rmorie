@@ -19,3 +19,6 @@ A step of the rdd_w508_native implementation. Called by \code{Causrdd}. See the 
 A list with \code{a}, \code{b}, \code{v}.
 }
 \keyword{internal}
+\examples{
+.morie_w508_llr_side(dm = c(1, 2, 3, 4, 5, 6, 7, 8), ym = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

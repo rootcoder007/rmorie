@@ -18,3 +18,8 @@ A step of the bayopt_native implementation. Called by \code{gp_posterior}, \code
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.chol_solve(M, V)
+}

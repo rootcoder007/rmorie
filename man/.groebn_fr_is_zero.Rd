@@ -17,3 +17,7 @@ A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.groebn_fr_is_zero(V)
+}

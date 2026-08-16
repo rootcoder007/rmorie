@@ -18,3 +18,7 @@ A step of the esl_native2 implementation. Called by \code{morie_esl_thin_plate_s
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_tps_kernel(M, M)
+}

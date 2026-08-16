@@ -19,3 +19,6 @@ A step of the edgrn_native implementation. Called by \code{edgrn_exact_test}. Se
 The value of \code{(}.
 }
 \keyword{internal}
+\examples{
+.edgrn_nb_logpmf(y = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), phi = 0.5)
+}

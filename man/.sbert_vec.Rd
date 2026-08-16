@@ -17,3 +17,7 @@ A step of the sbert_native implementation. Called by \code{classification_featur
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sbert_vec(V)
+}

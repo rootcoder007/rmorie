@@ -14,3 +14,6 @@ Internal helper: Siu P Parse Date
 A list with \code{iso}, \code{raw}.
 }
 \keyword{internal}
+\examples{
+.siu_p_parse_date(raw = 5L)
+}

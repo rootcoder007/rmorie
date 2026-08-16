@@ -17,3 +17,7 @@ columns, the G determined from the first non-empty row.
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.caltbR_to_pgi(M)
+}

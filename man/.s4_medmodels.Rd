@@ -20,3 +20,6 @@ mediator # model M = b0 + b1 a + b2\\'c; cbar is where the decomposition is read
 A list with \code{theta}, \code{beta}, \code{cbar}.
 }
 \keyword{internal}
+\examples{
+.s4_medmodels(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

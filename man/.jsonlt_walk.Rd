@@ -22,3 +22,6 @@ this walks characters instead of running a regex over the text.
 A character value.
 }
 \keyword{internal}
+\examples{
+.jsonlt_walk(txt = c(1, 2, 3, 4, 5, 6, 7, 8), open_pad = c(1, 2, 3, 4, 5, 6, 7, 8), close_pad = c(1, 2, 3, 4, 5, 6, 7, 8), comma_pad = c(1, 2, 3, 4, 5, 6, 7, 8), colon_txt = c(1, 2, 3, 4, 5, 6, 7, 8), keep_ws = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

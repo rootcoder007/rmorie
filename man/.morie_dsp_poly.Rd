@@ -14,3 +14,7 @@ Internal helper: polynomial from roots (real coefficients)
 The value of \code{re}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dsp_poly(V)
+}

@@ -17,3 +17,7 @@ Strips the leading `morie_` prefix and the legacy `describe_` prefix; also strip
 Normalised name (lowercase mnemonic).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_normalise_describe_name(V)
+}

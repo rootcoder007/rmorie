@@ -19,3 +19,6 @@ A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otsinkh}.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.b2margerr(T = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

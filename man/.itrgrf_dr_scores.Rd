@@ -44,3 +44,6 @@ Manski, C. F. (2004) "Statistical Treatment Rules for
   object of inference.
 }
 \keyword{internal}
+\examples{
+.itrgrf_dr_scores(y = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8), mu1 = c(1, 2, 3, 4, 5, 6, 7, 8), mu0 = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L)
+}

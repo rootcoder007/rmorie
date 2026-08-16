@@ -19,3 +19,7 @@ numeric Part of the rng_native implementation; see the file header for the sourc
 The value of \code{ctr}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_philox4x32(V, V)
+}

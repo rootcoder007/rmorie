@@ -17,3 +17,6 @@ order (i ascending, then j > i ascending)
 A list with \code{a}, \code{i}, \code{j}, \code{o}.
 }
 \keyword{internal}
+\examples{
+.mor_fp_bonds(adjacency = 5L)
+}

@@ -17,3 +17,7 @@ A step of the mafft_native implementation. Called by \code{.mafft_xcorr_fft}. Se
 The value of \code{fft}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mafft_fft(V)
+}

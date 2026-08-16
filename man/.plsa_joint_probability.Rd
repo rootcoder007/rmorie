@@ -46,3 +46,6 @@ Dirichlet prior that removes the per-document parameter growth;
 implemented in lda.
 }
 \keyword{internal}
+\examples{
+.plsa_joint_probability(Pz = c(1, 2, 3, 4, 5, 6, 7, 8), Pd_z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), Pw_z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

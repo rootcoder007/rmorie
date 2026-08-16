@@ -17,3 +17,6 @@ A step of the tlctmle_native implementation. Called by \code{.ctmle_fluct}, \cod
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.ctmle_expit(x = 5L)
+}

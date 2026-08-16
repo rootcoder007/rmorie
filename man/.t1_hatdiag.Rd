@@ -18,3 +18,6 @@ A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitso
 The value of \code{rowSums}.
 }
 \keyword{internal}
+\examples{
+.t1_hatdiag(X = c(1, 2, 3, 4, 5, 6, 7, 8), xtxinv = 5L)
+}

@@ -17,3 +17,6 @@ A step of the smoopt_native implementation. Called by \code{smo_platt}. See the 
 A list with \code{uniform}.
 }
 \keyword{internal}
+\examples{
+.smoopt_make_rng(seed = 5L)
+}

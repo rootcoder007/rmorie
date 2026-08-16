@@ -14,3 +14,6 @@ A step of the strmkr_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+.strmkr_cheatsheet()
+}

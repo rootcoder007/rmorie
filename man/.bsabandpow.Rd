@@ -20,3 +20,6 @@ A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{Ca
 The value of \code{.morie_fsum}.
 }
 \keyword{internal}
+\examples{
+.bsabandpow(freqs = c(1, 2, 3, 4, 5, 6, 7, 8), power = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

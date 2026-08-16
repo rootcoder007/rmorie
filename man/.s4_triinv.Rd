@@ -18,3 +18,6 @@ rather # than testing a condition number, so a rank-deficient design gives the #
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.s4_triinv(R = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

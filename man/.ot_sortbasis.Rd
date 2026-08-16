@@ -17,3 +17,7 @@ A step of the helpers_ot implementation. Called by \code{.ot_complete_tree}, \co
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ot_sortbasis(V)
+}

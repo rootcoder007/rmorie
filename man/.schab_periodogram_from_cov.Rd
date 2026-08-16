@@ -17,3 +17,7 @@ A step of the schab_rest_shared implementation. Called by \code{spperiod}. See t
 A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{covariance}, \code{lags_j}, \code{lags_k}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.schab_periodogram_from_cov(M)
+}

@@ -17,3 +17,6 @@ A step of the fgam_native implementation. Called by \code{morie_fgam_functional_
 The value of \code{w}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.fgam_grid_weights(n_t = 5L)
+}

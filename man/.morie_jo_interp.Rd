@@ -18,3 +18,6 @@ A step of the ts_joseph implementation. Called by \code{morie_nhitsnet}. See the
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.morie_jo_interp(theta = 0.5, length_ = 5L)
+}

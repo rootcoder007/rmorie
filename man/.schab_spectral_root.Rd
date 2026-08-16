@@ -18,3 +18,6 @@ only come from rounding on a matrix positive semi-definite in exact arithmetic, 
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+.schab_spectral_root(cov = matrix(c(4, 1, 0, 1, 3, 1, 0, 1, 2), nrow = 3))
+}

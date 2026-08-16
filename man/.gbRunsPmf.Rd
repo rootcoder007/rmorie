@@ -14,3 +14,6 @@ Exact null distribution of R -- Theorem 3.2.2, eq. (3.2.3), p. 79
 A vector.
 }
 \keyword{internal}
+\examples{
+.gbRunsPmf(n1 = 5L, n2 = 5L)
+}

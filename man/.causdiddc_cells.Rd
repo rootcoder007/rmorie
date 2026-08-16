@@ -20,3 +20,6 @@ A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m}
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.causdiddc_cells(Y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

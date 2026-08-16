@@ -14,3 +14,6 @@ Internal helper: Siu Llm Providers
 A list with \code{gemini}, \code{claude}, \code{vertex}, \code{ollama}, \code{openai}, \code{openai_compatible}.
 }
 \keyword{internal}
+\examples{
+.siu_llm_providers()
+}

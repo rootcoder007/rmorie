@@ -14,3 +14,6 @@ Internal helper: Otis To Int
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.otis_to_int(x = 5L)
+}

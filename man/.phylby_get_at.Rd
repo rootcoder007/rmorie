@@ -18,3 +18,6 @@ A step of the phylby_native implementation. Called by \code{.phylby_log_posterio
 The value of \code{node}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.phylby_get_at(node = c(1, 2, 3, 4, 5, 6, 7, 8), path = 5L)
+}

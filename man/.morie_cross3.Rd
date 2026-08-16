@@ -19,3 +19,6 @@ Part of the geometric_combinatorics_native implementation; see the file header f
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_cross3(o = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

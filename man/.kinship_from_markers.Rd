@@ -30,3 +30,7 @@ approach for genome-wide association studies in structured
 populations", Nature Genetics 44(7), 825-830.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.kinship_from_markers(V)
+}

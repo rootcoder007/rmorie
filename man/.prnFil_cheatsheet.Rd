@@ -31,3 +31,6 @@ American Statistical Association* 103(482), 681-686,
 doi:10.1198/016214508000000337. The Laplace-prior formulation.
 }
 \keyword{internal}
+\examples{
+.prnFil_cheatsheet()
+}

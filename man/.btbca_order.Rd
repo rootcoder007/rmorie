@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.btbca_order(sv = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L)
+}

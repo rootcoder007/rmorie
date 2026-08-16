@@ -14,3 +14,7 @@ The published VanderWeele-Ding approximate conversions used by the EValue packag
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rr_approx(V)
+}

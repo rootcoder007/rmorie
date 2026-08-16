@@ -14,3 +14,6 @@ Internal helper: Dmlc Cluster Se
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.dmlc_cluster_se(infl = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

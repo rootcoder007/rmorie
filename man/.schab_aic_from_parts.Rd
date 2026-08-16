@@ -19,3 +19,6 @@ A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criter
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_aic_from_parts(n = 5L, sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), tr_S = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

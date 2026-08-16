@@ -17,3 +17,6 @@ A step of the reinfc_native implementation. No other function in the package cal
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.reinfc_logistic(s = 5L)
+}

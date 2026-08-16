@@ -28,3 +28,6 @@ The value of \code{[}.
     through morie_slbpdg.
 }
 \keyword{internal}
+\examples{
+.bnppct_wq(ys_sorted = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
+}

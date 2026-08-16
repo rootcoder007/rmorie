@@ -14,3 +14,7 @@ Lower confidence bound (Snoek 2012, Equation 3)
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.lower_confidence_bound(V, V)
+}

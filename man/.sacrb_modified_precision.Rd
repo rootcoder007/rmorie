@@ -40,3 +40,6 @@ a version signature.
 """
 }
 \keyword{internal}
+\examples{
+.sacrb_modified_precision(cand_tokens = c(1, 2, 3, 4, 5, 6, 7, 8), refs_tokens = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

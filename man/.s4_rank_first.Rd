@@ -17,3 +17,7 @@ A step of the s04core implementation. Called by \code{Matrim}. See the file head
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_rank_first(V)
+}

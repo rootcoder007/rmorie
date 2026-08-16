@@ -23,3 +23,6 @@ A step of the cox_native implementation. Called by \code{morie_breslow_tie_corre
 A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter}, \code{converged}.
 }
 \keyword{internal}
+\examples{
+.morie_cox_fit(t = 5L, e = c(1, 2, 3, 4, 5, 6, 7, 8), X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

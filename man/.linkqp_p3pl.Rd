@@ -20,3 +20,6 @@ A step of the linkqp_native implementation. Called by \code{morie_linkqp}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.linkqp_p3pl(theta = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

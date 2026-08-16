@@ -17,3 +17,7 @@ A step of the rrblpr_native implementation. Called by \code{morie_rrblpr_rr_blup
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rrblpr_rows(V)
+}

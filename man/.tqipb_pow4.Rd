@@ -17,3 +17,6 @@ integer exponent is repeated squaring while Python\\'s `**` calls libm pow(); th
 The value of \code{p}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tqipb_pow4(b = 5L)
+}
