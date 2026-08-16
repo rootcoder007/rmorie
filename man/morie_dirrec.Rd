@@ -23,3 +23,6 @@ horizon; like Recursive, each successive model may also use the
 forecasts already produced, so the input space GROWS by one column
 at every step.
 }
+\examples{
+morie_dirrec(x = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 3L, horizon = 5L)
+}

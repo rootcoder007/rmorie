@@ -48,3 +48,11 @@ A list with the posterior mean quantile function, the   predictive mean and stan
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+X <- vapply(0:39, function(i) {
+    v <- ((i * 37)%%101)/100
+    v * v
+}, numeric(1))
+morie_bnppvl(X, m = 3L, c = 2.5, likelihood = "exact", sweeps = 400L, 
+    burn = 100L, thin = 4L, seed = 7, init = "empirical")
+}

@@ -18,3 +18,6 @@ Every \eqn{(g, t)}{(g, t)} cell with \eqn{t \ge g}{t >= g} gets its own coeffici
 A named list mirroring the RichResult payload: \code{estimate},   \code{att} (named numeric vector keyed by \code{"<g>|<t>"}),   \code{cells} (list of \code{c(g, t)} pairs), \code{n_cells},   \code{coef}, \code{cohorts}, \code{periods}, \code{n},   \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_etwfe(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8), first_treated = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

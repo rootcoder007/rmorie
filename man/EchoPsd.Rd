@@ -20,3 +20,6 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{power}, \code{wavelet_power}, \code{echo_power}, \code{z}, \code{a}, \code{n_0}, \code{method}.
 }
 \keyword{internal}
+\examples{
+EchoPsd(H = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

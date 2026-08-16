@@ -20,3 +20,6 @@ Part of the bigtm_native implementation; see the file header for the source it f
 A list with \code{predictive}, \code{lambda}, \code{eq15_as_printed}, \code{note}.
 }
 \keyword{internal}
+\examples{
+lda_predictive(N_ik = c(1, 2, 3, 4, 5, 6, 7, 8), N_k = 5L, beta = 0.5, m = 5L)
+}

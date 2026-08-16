@@ -20,3 +20,6 @@ List with \code{eta}, \code{schedule}, \code{half_life},
 \description{
 eta_t = eta_0 gamma^t with half-life ln2 / ln(1/gamma).
 }
+\examples{
+morie_geron_lr_exponential_schedule(eta0 = 5L, gamma = 0.5, t = 5L)
+}

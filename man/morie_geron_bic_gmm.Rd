@@ -19,3 +19,6 @@ List with \code{bic}, \code{penalty}, \code{penalty_per_param}, \code{stricter_t
 \description{
 BIC = p log n - 2 log L; \code{stricter_than_aic} is log n > 2.
 }
+\examples{
+morie_geron_bic_gmm(log_likelihood = 5L, n = 5L, n_params = 5L)
+}

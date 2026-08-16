@@ -20,3 +20,6 @@ Part of the fmFM_native implementation; see the file header for the source it fo
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+predict_naive(x = c(1, 2, 3, 4, 5, 6, 7, 8), w0 = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

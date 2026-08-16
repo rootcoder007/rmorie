@@ -23,3 +23,6 @@ Part of the mtr2sx_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{ci}, \code{ratio_estimates}, \code{variances}, \code{weights_used}, \code{model}, \code{phi_multiplicative}, \code{tau2}, \code{Q}, \code{df}, \code{I2}, \code{se_fixed}, \code{regression_estimate}, \code{regression_se_fixed}, \code{n_variants}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_mtr2sx(beta_x = c(1, 2, 3, 4, 5, 6, 7, 8), se_x = c(1, 2, 3, 4, 5, 6, 7, 8), beta_y = c(1, 2, 3, 4, 5, 6, 7, 8), se_y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

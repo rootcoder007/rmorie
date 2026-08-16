@@ -32,3 +32,8 @@ A three by three rotation matrix.
     124-132.
 }
 \keyword{internal}
+\examples{
+e <- .ghc_rng(5)
+e <- .ghc_rng(5)
+morie_alf3df_rotation(e)
+}

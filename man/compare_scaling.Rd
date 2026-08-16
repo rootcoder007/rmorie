@@ -22,3 +22,6 @@ Part of the opnclp_native implementation; see the file header for the source it 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+compare_scaling(x_a = c(1, 2, 3, 4, 5, 6, 7, 8), y_a = c(1, 2, 3, 4, 5, 6, 7, 8), x_b = c(1, 2, 3, 4, 5, 6, 7, 8), y_b = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

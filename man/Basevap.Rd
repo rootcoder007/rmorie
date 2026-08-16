@@ -37,3 +37,6 @@ Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.
 Example 18. Local: fetched-wave3/fao56-x0490e0{6,7,8}.html,
 zotarelli-2010-fao56-step-by-step-AE459.pdf.
 }
+\examples{
+Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

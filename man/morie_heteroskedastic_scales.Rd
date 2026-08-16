@@ -28,3 +28,6 @@ Mirrors \code{morie.fn.hsirt} (with fixed items).
 Lauderdale BE (2010). Unpredictable voters in ideal
 point estimation. \emph{Political Analysis} 18(2), 151-171.
 }
+\examples{
+morie_heteroskedastic_scales(votes = c("a", "b", "c"), ideal_points = c("a", "b", "c"), alpha = 0.5, beta = 0.5)
+}

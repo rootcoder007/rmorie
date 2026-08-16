@@ -22,3 +22,6 @@ with k = 1 "the nearest neighbor may happen to be an outlier that is not represe
 A list with \code{assigned}, \code{votes}, \code{k}, \code{metric}, \code{neighbours}, \code{tie}, \code{tied_classes}, \code{nearest_distance}, \code{nearest_label}, \code{single_neighbour_may_be_an_outlier}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Knn(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), query = 5L)
+}

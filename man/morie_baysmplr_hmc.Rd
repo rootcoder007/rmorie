@@ -36,3 +36,30 @@ A list with the draws, the acceptance rate and the settings.
   Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 }
 \keyword{internal}
+\examples{
+MU3 <- c(1, -0.5, 2)
+Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2), 
+    3, 3, byrow = TRUE)
+lp3 <- function(x) {
+    dv <- x - MU3
+    terms <- numeric(9)
+    k <- 1L
+    for (i in 1:3) for (j in 1:3) {
+        terms[k] <- dv[i] * Q3[i, j] * dv[j]
+        k <- k + 1L
+    }
+    -0.5 * .w3_csum(terms)
+}
+gr3 <- function(x) {
+    dv <- x - MU3
+    vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i, 
+        j] * dv[j], numeric(1))), numeric(1))
+}
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+morie_baysmplr_hmc(lp3, gr3, c(0, 0, 0), 60L, e, 0.25, 8L)
+}

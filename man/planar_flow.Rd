@@ -18,3 +18,6 @@ The Jacobian is rank-one, so the matrix determinant lemma gives \code{|1 + u\'ps
 A list with \code{z, log_det, det, invertibility_adjusted,   note}.
 }
 \keyword{internal}
+\examples{
+planar_flow(z = c(1, 2, 3, 4, 5, 6, 7, 8), u = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

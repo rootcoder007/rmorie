@@ -19,3 +19,6 @@ List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l1_norm}, \code{n_ze
 \description{
 J = MSE + alpha * \verb{sum_\{i>=1\}} |theta_i|, on the shared MSE core.
 }
+\examples{
+morie_geron_lasso_cost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, theta = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+}

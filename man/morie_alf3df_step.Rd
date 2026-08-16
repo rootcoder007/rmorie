@@ -41,3 +41,10 @@ A list with the stepped coordinates, the churned level and   the direction.
     124-132.
 }
 \keyword{internal}
+\examples{
+NA_ <- 6L
+TRUEX <- matrix(0, NA_, 3L)
+oracle <- function(x, sigma) TRUEX
+start <- matrix(0, NA_, 3L)
+morie_alf3df_step(start, 4, oracle, 1, order = "euler")
+}

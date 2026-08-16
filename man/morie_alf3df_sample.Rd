@@ -43,3 +43,8 @@ A list with the final coordinates, the schedule and the   churned levels visited
     124-132.
 }
 \keyword{internal}
+\examples{
+NA_ <- 6L
+shrink <- function(x, sigma) (1/(1 + sigma)) * x
+morie_alf3df_sample(NA_, shrink, 5L, seed = 3)
+}

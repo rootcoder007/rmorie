@@ -32,3 +32,6 @@ Optimization, 2nd edn, Eqs. (6.17) and (6.19).  Standard published
 form; none of the 1970 papers is in the local corpus and none was
 read.
 }
+\examples{
+Bfgsupd(H = 0.5, s = 5L, y = 5L)
+}

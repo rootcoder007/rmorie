@@ -55,3 +55,6 @@ The bootstrap is Efron (1979), Annals of Statistics 7(1), 1-26; van
 der Laan & Rose (2011), Targeted Learning, recommend the
 influence-curve interval as the default and the bootstrap as a check.
 }
+\examples{
+Tmleboot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

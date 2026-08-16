@@ -36,3 +36,6 @@ covariates. The stabilizing role of that bound is the subject of
 Gruber & van der Laan (2010), International Journal of Biostatistics
 6(1), Article 26, which this row cites.
 }
+\examples{
+Tmlestab(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

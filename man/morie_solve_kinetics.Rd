@@ -46,3 +46,6 @@ doi:10.1038/s41586-018-0414-6, for the steady-state model this
 generalises.
 }
 \keyword{internal}
+\examples{
+morie_solve_kinetics(tau = 0.5, alpha = 0.5, beta = 0.5, gamma = 0.5)
+}

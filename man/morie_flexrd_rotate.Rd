@@ -33,3 +33,6 @@ The rotated point.
     et Appliquees 5, 380-440.
 }
 \keyword{internal}
+\examples{
+morie_flexrd_rotate(p = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

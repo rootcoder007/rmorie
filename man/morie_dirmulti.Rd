@@ -21,3 +21,6 @@ One model PER horizon, each trained to predict h steps ahead
 directly from the same observed lags, so no forecast is ever fed
 back and errors cannot compound.
 }
+\examples{
+morie_dirmulti(x = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 3L, horizon = 5L)
+}

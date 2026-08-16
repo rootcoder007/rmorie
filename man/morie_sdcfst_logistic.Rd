@@ -34,3 +34,14 @@ The coefficient vector, intercept first.
     113(523), 1228-1242.
 }
 \keyword{internal}
+\examples{
+N <- 120L
+ii <- 0:(N - 1L)
+x1 <- sin(1.7 * ii)
+x2 <- cos(0.9 * ii) + 0.4 * sin(0.31 * ii)
+x3 <- ((ii%%5L) - 2)/2
+X <- cbind(x1, x2, x3)
+lin <- 0.9 * x1 - 0.7 * x2 + 0.5 * x3
+D <- ifelse(lin + 0.35 * sin(4.1 * ii) > 0, 1, 0)
+morie_sdcfst_logistic(X, D, seq_len(N))
+}

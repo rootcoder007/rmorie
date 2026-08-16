@@ -14,3 +14,6 @@ Rank-sum shift CI -- Sec. 8.2, p. 292
 A list with \code{lower}, \code{upper}, \code{k}, \code{estimate}, \code{ndiff}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Wrsci(x = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), wcrit = 5L)
+}

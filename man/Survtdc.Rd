@@ -28,3 +28,6 @@ marker ties counting one half -- Antolini, Boracchi and Biganzoli
 Antolini, L., Boracchi, P. and Biganzoli, E. (2005),
 Statistics in Medicine 24(24), 3927-3944.
 }
+\examples{
+Survtdc(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), marker = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

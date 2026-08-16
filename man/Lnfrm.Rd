@@ -36,3 +36,6 @@ McGilchrist and Aisbett (1991), Biometrics 47(2), 461-466;
 Therneau, Grambsch and Pankratz (2003), Journal of Computational
 and Graphical Statistics 12(1), 156-175.
 }
+\examples{
+Lnfrm(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

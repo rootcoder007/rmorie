@@ -35,3 +35,6 @@ Formula: augment with \code{cos(2 pi j t/p), sin(2 pi j t/p)} for
 Westreich, D. & Cole, S. R. (2010). Am J Epidemiol
 171:674-677; van der Laan & Rubin (2006) IJB 2(1):11.
 }
+\examples{
+Tmlper(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

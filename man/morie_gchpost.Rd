@@ -19,3 +19,6 @@ list(mean, var, sd, wdata, marginalvar)
 \description{
 Posterior over the input of a Gaussian channel (eq. 11.27-11.29, p. 182)
 }
+\examples{
+morie_gchpost(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = 5L, s2 = 5L)
+}

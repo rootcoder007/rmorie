@@ -21,3 +21,6 @@ list(info, rate, deviation, member)
 \description{
 Typical-set membership test (eq. 4.29, p. 80)
 }
+\examples{
+morie_typset(p = 0.5, n = 5L, h = 0.5, beta = 0.5)
+}

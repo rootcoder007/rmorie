@@ -46,3 +46,6 @@ Analysis 35(4):437-460, \doi{10.3102/0162373713493129}; Frank
 coefficient, Sociological Methods and Research 29(2):147-194.
 \doi{10.1177/0049124100029002001}
 }
+\examples{
+Konfound(est = 5L, se = 5L, n = 5L, threshold = 0.5)
+}

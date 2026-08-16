@@ -41,3 +41,12 @@ A list with the parent's metrics, each analogue's metrics and   group efficiency
     464-469.
 }
 \keyword{internal}
+\examples{
+PARENT <- list(0.001, 12, 0.9, 165, 42, "frag")
+LIB <- list(list(2e-04, 15, 1.6, 205, 51, "methylamide"), list(1e-05, 
+    20, 2.8, 268, 60, "biaryl"), list(5e-04, 27, 4.4, 360, 66, 
+    "greasy_tail"), list(0.001, 14, 1, 190, 45, "inert_stub"), 
+    list(0.004, 18, 2.2, 240, 58, "worse"), list(8e-07, 22, NULL, 
+        NULL, NULL, "no_descriptors"))
+morie_frgrow(PARENT, LIB)
+}

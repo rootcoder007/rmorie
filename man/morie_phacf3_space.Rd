@@ -32,3 +32,8 @@ A list with the key matrix, their string forms and a lookup   environment from s
     classification and prediction." IBM internal report.
 }
 \keyword{internal}
+\examples{
+FS <- c("donor", "acceptor", "hydrophobic", "aromatic")
+EDGES <- c(2, 4.5, 7, 10, 14)
+morie_phacf3_space(FS, length(EDGES) - 1L, EDGES)
+}

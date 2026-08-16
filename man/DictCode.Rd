@@ -20,3 +20,6 @@ coefficients and reconstruction error as features; the least-squares reprojectio
 A list with \code{coefficients}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{method}.
 }
 \keyword{internal}
+\examples{
+DictCode(Y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), sparsity = 5L)
+}

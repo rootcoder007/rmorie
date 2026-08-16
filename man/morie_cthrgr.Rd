@@ -43,3 +43,16 @@ A list with per-point direct, indirect and total effects,   their averages, the 
     for Mediation and Interaction." Oxford University Press.
 }
 \keyword{internal}
+\examples{
+N <- 40L
+X <- matrix(0, N, 2)
+D <- vapply(0:(N - 1L), function(i) if (((i * 3)%%7) >= 3) 1L else 0L, 
+    integer(1))
+M <- vapply(0:(N - 1L), function(i) round(1 + 2 * (if (((i * 
+    3)%%7) >= 3) 1 else 0) + 1.5 * (((i * 7)%%11)/10) + ((i * 
+    11)%%5) * 0.2, 4), numeric(1))
+Y <- vapply(0:(N - 1L), function(i) round(0.5 + 1.2 * M[i + 1L] + 
+    0.9 * D[i + 1L] + 0.7 * (((i * 5)%%7)/6) + ((i * 13)%%7) * 
+    0.1, 4), numeric(1))
+morie_cthrgr(Y, D, M, X, "gcomputed", 6L, 3L, 3L, 5, 8L)
+}

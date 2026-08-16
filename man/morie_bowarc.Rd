@@ -29,3 +29,6 @@ Technical Report R-432, p. 15, citing Brito, C. and Pearl, J. (2002),
 Structural Equation Modeling 9(4):459-474. identified reports
 Theorem 4 itself: acyclic AND bow-free.
 }
+\examples{
+morie_bowarc(dag = c(1, 2, 3, 4, 5, 6, 7, 8), bidirected = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

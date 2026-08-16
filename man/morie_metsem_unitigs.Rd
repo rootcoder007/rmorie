@@ -28,3 +28,11 @@ A list of unitigs, longest first.
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+ABUNDANT <- "ACGTACGGTCAGTTGCAAGT"
+RARE <- "TTGCCATGAACCGGTTAACA"
+READS <- c(rep(ABUNDANT, 4L), RARE)
+K <- 7L
+g <- morie_metsem_graph(READS, K)
+morie_metsem_unitigs(g)
+}

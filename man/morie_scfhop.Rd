@@ -36,3 +36,9 @@ A list with the ranked candidates, each with its similarity,   whether its scaff
     Journal of Machine Learning Research 12, 2539-2561.
 }
 \keyword{internal}
+\examples{
+LEAD <- "OCCc1ccccc1"
+DB <- c("OCCc1ccccc1", "OCCc1ccncc1", "OCCC1CCCCC1", "OCCCCCC", 
+    "Cc1ccccc1", "CC(=O)O")
+morie_scfhop(LEAD, DB)
+}

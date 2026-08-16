@@ -19,3 +19,6 @@ Part of the narm_native implementation; see the file header for the source it fo
 A list with \code{estimate}, \code{scores}, \code{probabilities}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+narm_bilinear_scores(embeddings = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L, c_t = 5L)
+}

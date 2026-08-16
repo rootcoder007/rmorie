@@ -31,3 +31,6 @@ maps onto this call as \code{h = encoder_states}, \code{s_prev = decoder_state},
 \code{W = Ws}, \code{U = Wh}. Both payload spellings are returned (\code{alpha} is
 hmbdn's, \code{weights} grbah's), and \code{argmax} is 0-based in both.
 }
+\examples{
+morie_geron_bahdanau_attention(h = 0.5, s_prev = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8), U = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

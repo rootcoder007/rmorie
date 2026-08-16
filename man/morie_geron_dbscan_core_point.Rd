@@ -23,3 +23,6 @@ List with \code{is_core}, \code{is_border}, \code{is_noise}, \code{neighbor_coun
 The eps-neighbourhood INCLUDES the point itself, so min_samples = 1
 makes everything core. \code{neighbors} entries are 0-based index vectors.
 }
+\examples{
+morie_geron_dbscan_core_point(X = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5, min_samples = 5L)
+}

@@ -21,3 +21,6 @@ Part of the prphet_native implementation; see the file header for the source it 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+morie_prphet_piecewise_trend(t = c(1, 2, 3, 4, 5, 6, 7, 8), k.rate = c(1, 2, 3, 4, 5, 6, 7, 8), m.off = c(1, 2, 3, 4, 5, 6, 7, 8), deltas = c(1, 2, 3, 4, 5, 6, 7, 8), cps = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

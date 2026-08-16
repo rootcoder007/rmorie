@@ -55,3 +55,21 @@ A list with the GScore, each weighted contribution, and the   raw energies.
     Journal of Computer-Aided Molecular Design 11(5), 425-445.
 }
 \keyword{internal}
+\examples{
+RAD <- list(list("C", 1.9), list("N", 1.7), list("O", 1.6), list("S", 
+    2))
+DEP <- list(list("C", 0.15), list("N", 0.16), list("O", 0.2), 
+    list("S", 0.25))
+CHG <- list(list("C", 0.05), list("N", -0.35), list("O", -0.5), 
+    list("S", 0.2))
+LIPS <- c("C", "S")
+REC <- list(list(0, 0, 0, "C"), list(5, 0, 0, "N"), list(0, 5.5, 
+    0, "O"), list(3, 3, 3, "S"))
+LIG <- list(list(3.8, 0, 0, "C"), list(2, 4, 0, "N"), list(6, 
+    6, 1, "O"))
+HBN <- list(list("neutral_neutral", 1), list("neutral_charged", 
+    0.8), list("charged_charged", 0.6), list("neutral_neutral", 
+    0.4))
+morie_glides(REC, LIG, RAD, DEP, CHG, LIPS, HBN, metal = 1.2, 
+    buryp = -0.8, n_rot = 3, site = 0.4)
+}

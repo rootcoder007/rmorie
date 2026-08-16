@@ -39,3 +39,6 @@ censored, both from pooled logistic hazards.
 Rytgaard, H. C., Gerds, T. A. & van der Laan, M. J.
 (2022). Annals of Statistics 50(5).
 }
+\examples{
+Tmlmpc(time = c(1, 2, 3, 4, 5, 6, 7, 8), state = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -22,3 +22,6 @@ Part of the elmo_native implementation; see the file header for the source it fo
 A list with \code{h}, \code{c}.
 }
 \keyword{internal}
+\examples{
+lstm_step(x = c(1, 2, 3, 4, 5, 6, 7, 8), h = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), Wx = c(1, 2, 3, 4, 5, 6, 7, 8), Wh = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

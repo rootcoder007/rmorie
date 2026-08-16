@@ -22,3 +22,6 @@ Part of the mehtad_native implementation; see the file header for the source it 
 A list with \code{dx}, \code{dy}, \code{ds}.
 }
 \keyword{internal}
+\examples{
+newton_direction(A = c(1, 2, 3, 4, 5, 6, 7, 8), x = 5L, s = 5L, rp = c(1, 2, 3, 4, 5, 6, 7, 8), rd = c(1, 2, 3, 4, 5, 6, 7, 8), rc = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

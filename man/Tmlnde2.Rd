@@ -34,3 +34,6 @@ Formula: \code{E[Y(1, M_a*) - Y(0, M_a*)]}, targeted with
 Vansteelandt, S. & Daniel, R. M. (2017). Epidemiology
 28:258-265.
 }
+\examples{
+Tmlnde2(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, M = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

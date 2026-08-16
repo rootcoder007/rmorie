@@ -13,3 +13,6 @@ Maximum-likelihood spatial models, point-pattern K, co-kriging and the local dif
 A list with components \code{prediction}, \code{variance}, \code{lambda}, \code{mu}, \code{n}, \code{range}.
 }
 \keyword{internal}
+\examples{
+morie_cokrig(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z1 = c(1, 2, 3, 4, 5, 6, 7, 8), z2 = c(1, 2, 3, 4, 5, 6, 7, 8), s0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
