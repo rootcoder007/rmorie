@@ -52,6 +52,25 @@ NULL
 }
 
 #' @keywords internal
+.morie_matching_distance <- function(df, ps) {
+  # MatchIt reads a numeric `distance` as the propensity score itself,
+  # so a supplied score needs no refit. Alignment mirrors the Python
+  # arm's ps.reindex(df.index): by name when the vector is named, by
+  # position when it is already one-per-retained-row. Anything else is
+  # refused -- recycling a mis-sized score silently matches on the
+  # wrong units.
+  if (is.null(ps)) return("glm")
+  ps <- as.numeric(ps)
+  if (!is.null(names(ps)) && all(rownames(df) %in% names(ps)))
+    return(unname(ps[rownames(df)]))
+  if (length(ps) == nrow(df)) return(ps)
+  stop("`ps` has length ", length(ps), " but ", nrow(df),
+       " rows remain after dropping incomplete cases; supply one score ",
+       "per retained row, or a named vector covering them.",
+       call. = FALSE)
+}
+
+#' @keywords internal
 .morie_matching_logit <- function(p, eps = 1e-6) {
   p <- pmin(pmax(p, eps), 1 - eps)
   log(p / (1 - p))
@@ -298,7 +317,8 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
     n_neighbors = n_neighbors,
     caliper = caliper,
     replace = replace,
-    alpha = alpha
+    alpha = alpha,
+    ps = ps
   )
 }
 
@@ -459,7 +479,7 @@ morie_matching_full <- function(data, treatment, covariates,
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
   f <- stats::as.formula(paste(treatment, "~",
                                paste(covariates, collapse = " + ")))
-  mi <- MatchIt::matchit(f, data = df, method = "full", distance = "glm")
+  mi <- MatchIt::matchit(f, data = df, method = "full", distance = .morie_matching_distance(df, ps))
   .morie_matching_matchit_to_result(
     mi, df, treatment,
     method_label = "full_matching (MatchIt + optmatch)",
@@ -497,7 +517,7 @@ morie_matching_subclassify <- function(data, treatment, covariates,
   f <- stats::as.formula(paste(treatment, "~",
                                paste(covariates, collapse = " + ")))
   mi <- MatchIt::matchit(f, data = df, method = "subclass",
-                         distance = "glm", subclass = as.integer(n_strata))
+                         distance = .morie_matching_distance(df, ps), subclass = as.integer(n_strata))
   md <- MatchIt::match.data(mi)
   if (!is.null(md$distance)) md[["._ps"]] <- as.numeric(md$distance)
   md[["._stratum"]] <- as.integer(md$subclass)
@@ -666,7 +686,7 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
     mi <- MatchIt::matchit(
       f, data = df,
       method       = "nearest",
-      distance     = "glm",
+      distance     = .morie_matching_distance(df, ps),
       ratio        = target,
       min.controls = min_ratio,
       max.controls = max_ratio,
@@ -678,7 +698,7 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
     mi <- MatchIt::matchit(
       f, data = df,
       method   = "nearest",
-      distance = "glm",
+      distance = .morie_matching_distance(df, ps),
       ratio    = max_ratio,
       caliper  = caliper,
       replace  = FALSE
