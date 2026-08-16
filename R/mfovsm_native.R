@@ -174,6 +174,40 @@
 #' @export
 .mfovsm_ip_weights <- function(ak, den, num, kind = "binary", stabilize = TRUE) {
   n <- length(ak)
+  if (!kind %in% c("binary", "normal")) {
+    stop("ip_weights: kind must be 'binary' or 'normal', got '", kind,
+         "'.", call. = FALSE)
+  }
+  if (kind == "normal") {
+    # A continuous dose: the density is the normal one at the observed
+    # value, not the logistic probability the binary branch computes.
+    dens_of <- function(X) {
+      # No covariates is not "no model": it is the MARGINAL density
+      # f(A), the intercept-only fit, which is what stabilizes the
+      # weight. Returning 1 here would give the nonstabilized weight
+      # under the name of the stabilized one.
+      Z <- if (is.null(X)) matrix(1, n, 1) else cbind(1, X)
+      b <- qr.solve(Z, ak)
+      mu <- as.numeric(Z %*% b)
+      r <- ak - mu
+      df <- max(n - ncol(Z), 1L)
+      s2 <- sum(r * r) / df
+      if (s2 <= 0) {
+        stop("ip_weights: the treatment model fits the dose exactly, ",
+             "so no IP weight exists.", call. = FALSE)
+      }
+      stats::dnorm(ak, mean = mu, sd = sqrt(s2))
+    }
+    pden <- dens_of(den)
+    if (any(pden <= 0)) {
+      stop("ip_weights: f(A|L) is zero for at least one observation, ",
+           "so positivity fails in the sample and the weight is ",
+           "undefined.", call. = FALSE)
+    }
+    w <- 1 / pden
+    if (isTRUE(stabilize)) w <- dens_of(num) * w
+    return(list(weights = as.numeric(w), fitted = pden))
+  }
 
   if (is.null(den) && is.null(num)) {
     return(list(weights = rep(1.0, n), fitted = rep(NA_real_, n)))

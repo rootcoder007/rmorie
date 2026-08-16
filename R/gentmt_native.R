@@ -94,12 +94,60 @@
 .gentmt_treatment_density <- function(A, H, kind = "normal") {
   A <- .gentmt_vec(A)
   H <- as.matrix(H)
+  if (!kind %in% c("normal", "binary")) {
+    stop("treatment_density: kind must be 'binary' or 'normal', got '",
+         kind, "'.", call. = FALSE)
+  }
+  if (kind == "binary") {
+    # The density of a binary treatment at the value received: g when
+    # A = 1, 1 - g when A = 0. Scoring a binary dose with a Gaussian
+    # density, which is what this function used to do whatever was
+    # asked, gives a weight with no probabilistic meaning.
+    Z <- cbind(1, H)
+    fit <- .gentmt_logit_irls(A, Z)
+    g <- fit$fitted
+    g <- pmin(pmax(g, 1e-12), 1 - 1e-12)
+    dens <- ifelse(A > 0.5, g, 1 - g)
+    return(list(dens = dens, info = list(coef = fit$coef, prob = g)))
+  }
   fit <- .gentmt_ols_core(H, A)
   mu <- fit$fitted
   sigma2 <- fit$sigma2
-  sigma <- sqrt(sigma2)
-  dens <- dnorm(A, mean = mu, sd = sigma)
+  if (sigma2 <= 0) {
+    stop("treatment_density: the treatment model fits the dose exactly, ",
+         "so f(A|X) is degenerate and no IP weight exists.",
+         call. = FALSE)
+  }
+  dens <- dnorm(A, mean = mu, sd = sqrt(sigma2))
   list(dens = dens, info = list(mu = mu, sigma2 = sigma2))
+}
+
+#' Internal: logistic fit by IRLS, for the binary treatment density
+#'
+#' Newton steps on the binomial log-likelihood with a small ridge, so a
+#' separated design still returns rather than diverging.
+#'
+#' @param y Binary outcome.
+#' @param Z Design matrix, intercept included.
+#' @param max_iter Iteration cap.
+#' @param ridge Ridge added to the information matrix.
+#' @return A list with \code{coef} and \code{fitted}.
+#' @keywords internal
+.gentmt_logit_irls <- function(y, Z, max_iter = 60L, ridge = 1e-8) {
+  y <- as.numeric(y)
+  Z <- as.matrix(Z)
+  b <- rep(0, ncol(Z))
+  for (i in seq_len(max_iter)) {
+    eta <- as.numeric(Z %*% b)
+    p <- 1 / (1 + exp(-eta))
+    w <- pmax(p * (1 - p), 1e-10)
+    I <- crossprod(Z, w * Z) + diag(ridge, ncol(Z))
+    step <- tryCatch(solve(I, crossprod(Z, y - p)),
+                     error = function(e) rep(0, ncol(Z)))
+    b <- b + as.numeric(step)
+    if (max(abs(step)) < 1e-10) break
+  }
+  list(coef = b, fitted = 1 / (1 + exp(-as.numeric(Z %*% b))))
 }
 
 #' .gentmt_ip_weights
