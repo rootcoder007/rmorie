@@ -37,3 +37,8 @@ Derivative at mean (equation 4.9), percent correct (4.12), Cox and
 Snell R squared (4.13), model chi square (4.14), Wald (4.15), z (4.16)
 and likelihood-ratio chi square (4.18). Mirrors ca4e9 to ca4e18.
 }
+\examples{
+morie_logistic_effects(ybar = 0.3, b = 0.8, se = 0.25,
+                       n_correct = 78, n_total = 100,
+                       neg2ll_null = 240, neg2ll_full = 215, n = 100)
+}

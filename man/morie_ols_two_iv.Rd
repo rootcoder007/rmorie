@@ -17,3 +17,7 @@ List with b1 and b2.
 \description{
 Equations 2.7 and 2.8 of Weisburd et al. (2022). Mirrors ca2e7 / ca2e8.
 }
+\examples{
+morie_ols_two_iv(r_y1 = 0.5, r_y2 = 0.35, r_12 = 0.3,
+                 s_y = 10, s_1 = 2, s_2 = 4)
+}

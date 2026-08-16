@@ -28,3 +28,7 @@ sigma2_u equals (MSbetween - MSwithin) / n (equation 7.6), the
 intraclass correlation (7.7) and the LR chi square -2 (LL1 - LL2)
 (7.8). Mirrors ca7e6 to ca7e8.
 }
+\examples{
+morie_hlm_components(ms_between = 40, ms_within = 10, n_per_cluster = 12,
+                     ll_null = -520, ll_full = -505)
+}

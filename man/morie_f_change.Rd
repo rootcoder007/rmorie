@@ -31,3 +31,7 @@ either pair of inputs may be NA to skip that form.
 Equations 2.18 (sums of squares form) and 2.19 (R squared form) of
 Weisburd et al. (2022). Mirrors ca2e18 / ca2e19.
 }
+\examples{
+morie_f_change(ss_resid_restricted = 480, ss_resid_full = 400,
+               k_full = 5, k_restricted = 3, n = 100)
+}
