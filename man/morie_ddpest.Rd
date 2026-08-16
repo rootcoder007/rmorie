@@ -18,3 +18,8 @@ Dispatches to one of the operations on the DDP collection: "dependence_kind", "s
 Whatever the chosen operation returns.
 }
 \keyword{internal}
+\examples{
+r <- morie_ddpest("single_weights", xs = c(0, 1), alpha = 1, K = 5,
+                  atom_fn = function(x, h) h + 0.1 * x)
+str(r, max.level = 1)
+}

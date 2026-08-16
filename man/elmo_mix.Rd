@@ -20,3 +20,14 @@ A step of the elmo_native implementation. Called by \code{elmo_representation}. 
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+d <- 2
+X <- matrix(rnorm(6, 0, 0.5), 3, d)
+mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+              Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+reps <- bilm_forward(X, list(layer))
+r <- elmo_mix(reps, raw_weights = c(0.5, -0.5))
+str(r, max.level = 1)
+}

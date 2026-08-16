@@ -21,3 +21,9 @@ which is stable where -log(p) is not. Probabilities are delegated
 to \code{morie_geron_logistic_probability}, as hmlogcl delegates to
 hmlogp. The class-rate baseline is the bar to beat.
 }
+\examples{
+set.seed(4)
+X <- cbind(1, rnorm(30))
+y <- rbinom(30, 1, plogis(X \%*\% c(-0.5, 1.5)))
+morie_geron_logistic_cost(X, y, theta = c(-0.5, 1.5))
+}

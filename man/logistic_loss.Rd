@@ -18,3 +18,6 @@ A step of the ffmFM_native implementation. Called by \code{fit_ffm}. See the fil
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+logistic_loss(y = 1, phi_val = 0.7)
+}

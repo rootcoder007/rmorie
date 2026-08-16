@@ -17,3 +17,10 @@ Vector of leaf values, one per row.
 \description{
 Route rows down a fitted CART tree (morie.fn hmcart::predict_tree)
 }
+\examples{
+set.seed(5)
+X <- matrix(rnorm(60), 30, 2)
+y <- as.integer(X[, 1] > 0)
+fit <- morie_geron_cart_algorithm(X, y)
+morie_geron_predict_tree(fit$tree, X[1:5, , drop = FALSE])
+}
