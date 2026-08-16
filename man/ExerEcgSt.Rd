@@ -12,7 +12,7 @@ ExerEcgSt(x, qrs, fs, jofs = 0.06, thresh = 0.1)
 \item{qrs}{Coerced to integer by the body, with \code{as.integer}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{jofs}{Numeric; combined arithmetically in the body. Defaults to \code{0.06}.}
-\item{thresh}{Defaults to \code{0.1}.}
+\item{thresh}{Carried through into a list the body builds. Defaults to \code{0.1}.}
 }
 \description{
 slope of the segment that follows (Section 1.2.4).  The 0.1 mV threshold is the conventional clinical figure, NOT a book value -- the payload says so.

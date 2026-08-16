@@ -215,9 +215,9 @@ centering_steps <- function(m, eps, t0, mu) {
 #'
 #' the Python _Fun class field-for-field.
 #'
-#' @param f See Usage.
-#' @param grad Defaults to \code{NULL}.
-#' @param hess Defaults to \code{NULL}.
+#' @param f Carried through into a list the body builds.
+#' @param grad Carried through into a list the body builds.
+#' @param hess Carried through into a list the body builds.
 #' @param affine A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{self}, as built in the body.
 #' @export

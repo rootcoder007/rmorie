@@ -72,7 +72,7 @@
 #' @param k Passed to \code{.schab_st_as_lags}.
 #' @param cov_spatial See Usage.
 #' @param cov_temporal See Usage.
-#' @param form Defaults to \code{"product"}.
+#' @param form The body requires: `form` must be 'product', 'sum' or 'product_sum'. Defaults to \code{"product"}.
 #' @return The value of \code{switch}.
 #' @export
 .schab_st_separable_covariance <- function(h, k, cov_spatial, cov_temporal,
@@ -248,7 +248,7 @@
 #'
 #' @param rs Numeric; passed to \code{abs}.
 #' @param rt Numeric; passed to \code{abs}.
-#' @param distribution Defaults to \code{"poisson"}.
+#' @param distribution The body requires: `distribution` must be 'poisson' or 'binomial'. Defaults to \code{"poisson"}.
 #' @param ... Passed through.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -601,7 +601,7 @@
 #' @param coords Passed to \code{.schab_st_covariance_matrix}.
 #' @param times Passed to \code{.schab_st_covariance_matrix}.
 #' @param cov_fn Passed to \code{.schab_st_covariance_matrix}.
-#' @param tol Defaults to \code{NULL}.
+#' @param tol Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue}, \code{tolerance}, \code{reason}.
 #' @export
 .schab_st_is_valid_covariance <- function(coords, times, cov_fn, tol = NULL) {
@@ -659,8 +659,8 @@
 #' @param z A vector; its length is taken and its elements indexed.
 #' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param n_time_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
-#' @param max_dist Defaults to \code{NULL}.
-#' @param max_time Defaults to \code{NULL}.
+#' @param max_dist The body requires: `max_dist` and `max_time` must be positive.
+#' @param max_time The body requires: `max_dist` and `max_time` must be positive.
 #' @return A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags}, \code{space_edges}, \code{time_edges}.
 #' @export
 .schab_st_empirical_semivariogram <- function(coords, times, z, n_space_bins = 10L,

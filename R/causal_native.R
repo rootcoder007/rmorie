@@ -206,7 +206,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Carried through into a list the body builds.
 #' @param y See Usage.
 #' @param ch A vector; indexed elementwise.
 #' @param pa A vector; indexed elementwise.

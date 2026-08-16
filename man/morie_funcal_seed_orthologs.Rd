@@ -9,8 +9,8 @@ morie_funcal_seed_orthologs(hits, evalue = 0.001, score = 60, query_cov = 0.2, t
 }
 \arguments{
 \item{hits}{See Usage.}
-\item{evalue}{Defaults to \code{0.001}.}
-\item{score}{Defaults to \code{60}.}
+\item{evalue}{The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{0.001}.}
+\item{score}{The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{60}.}
 \item{query_cov}{Defaults to \code{0.2}.}
 \item{target_cov}{Defaults to \code{0.2}.}
 \item{searcher}{Defaults to \code{"diamond"}.}

@@ -11,7 +11,7 @@ LogFT(x, p, omega, t = NULL, dt = NULL)
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{omega}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
+\item{t}{The body requires: eq. (4.59) needs x(t) != 0 and p(t) != 0 for all t.}
 \item{dt}{Defaults to \code{NULL}.}
 }
 \description{

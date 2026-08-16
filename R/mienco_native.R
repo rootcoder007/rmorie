@@ -153,8 +153,8 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #' source it follows.
 #'
 #' @param summary Passed to \code{morie_mienco}.
-#' @param whole See Usage.
-#' @param other_whole See Usage.
+#' @param whole Carried through into a list the body builds.
+#' @param other_whole Carried through into a list the body builds.
 #' @param critic Passed to \code{morie_mienco}.
 #' @param estimator Passed to \code{morie_mienco}. Defaults to \code{"jsd"}.
 #' @return The value of \code{morie_mienco}.

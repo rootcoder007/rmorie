@@ -8,7 +8,7 @@
 .bd_paths(x, y, ch, pa)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Carried through into a list the body builds.}
 \item{y}{See Usage.}
 \item{ch}{A vector; indexed elementwise.}
 \item{pa}{A vector; indexed elementwise.}

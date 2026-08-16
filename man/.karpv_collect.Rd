@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{node}{A list; the body reads \code{$args} from it.}
-\item{path}{See Usage.}
+\item{path}{Carried through into a list the body builds.}
 \item{out}{A vector; its length is taken and its elements indexed.}
 }
 \description{

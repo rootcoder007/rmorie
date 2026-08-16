@@ -1391,8 +1391,8 @@ CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
 #' @param rank Passed to \code{.morie_bx_nmfmu}. Defaults to \code{4}.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param maxiter Passed to \code{.morie_bx_nmfmu}. Defaults to \code{150}.
-#' @param taum Defaults to \code{0.6}.
-#' @param tauf Defaults to \code{0.45}.
+#' @param taum The body requires: taum and tauf must lie in (0, 1]. Defaults to \code{0.6}.
+#' @param tauf The body requires: taum and tauf must lie in (0, 1]. Defaults to \code{0.45}.
 #' @param seed Passed to \code{.morie_bx_nmfmu}. Defaults to \code{1}.
 #' @return A list with \code{fetal}, \code{maternal}, \code{fetalrow}, \code{maternalrow}, \code{peaks}, \code{W}, \code{H}, \code{error}, \code{method}.
 #' @export

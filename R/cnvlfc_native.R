@@ -387,10 +387,10 @@ cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param E Defaults to \code{2L}.
-#' @param tau Defaults to \code{1L}.
+#' @param x Carried through into a list the body builds.
+#' @param y Carried through into a list the body builds.
+#' @param E Carried through into a list the body builds. Defaults to \code{2L}.
+#' @param tau Carried through into a list the body builds. Defaults to \code{1L}.
 #' @param ... Passed through.
 #' @return The value of \code{do.call}.
 #' @export

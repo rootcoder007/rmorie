@@ -13,7 +13,7 @@ fixed_length_ci(beta, sigma, n_pre, n_post, M = 0, family = "SD", l_vec = NULL, 
 \item{n_pre}{See Usage.}
 \item{n_post}{See Usage.}
 \item{M}{Defaults to \code{0}.}
-\item{family}{Defaults to \code{"SD"}.}
+\item{family}{Carried through into a list the body builds. Defaults to \code{"SD"}.}
 \item{l_vec}{Defaults to \code{NULL}.}
 \item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 }

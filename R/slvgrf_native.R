@@ -220,7 +220,7 @@ qini_curve <- function(scores, priority, cost = NULL) {
 #'
 #' @param scores Passed to \code{.slvgrf_check}.
 #' @param priority Passed to \code{.slvgrf_check}.
-#' @param weight Defaults to \code{"autoc"}.
+#' @param weight Carried through into a list the body builds. Defaults to \code{"autoc"}.
 #' @param reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{weight}, \code{reps}, \code{n}, \code{null}, \code{method}.

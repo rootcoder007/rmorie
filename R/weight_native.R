@@ -17,11 +17,11 @@
 #'
 #' @param weights A vector; its length is taken.
 #' @param propensity Coerced to numeric by the body, with \code{as.numeric}.
-#' @param method See Usage.
-#' @param estimand See Usage.
-#' @param call See Usage.
-#' @param stabilize Defaults to \code{FALSE}.
-#' @param trim Defaults to \code{NULL}.
+#' @param method Carried through into a list the body builds.
+#' @param estimand Carried through into a list the body builds.
+#' @param call Carried through into a list the body builds.
+#' @param stabilize Carried through into a list the body builds. Defaults to \code{FALSE}.
+#' @param trim Carried through into a list the body builds.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_weight_result <- function(weights, propensity, method, estimand,
@@ -62,7 +62,7 @@ print.morie_weight <- function(x, ...) {
 #'
 #' @param ps Numeric; combined arithmetically in the body.
 #' @param t01 See Usage.
-#' @param estimand See Usage.
+#' @param estimand The body requires: estimand must be ATE, ATT, or ATC.
 #' @return The value of \code{switch}.
 #' @export
 .morie_weight_from_ps <- function(ps, t01, estimand) {

@@ -9,7 +9,7 @@ morie_qrntcq_efficacy_test_and_release(t.Q, t.T, t.R, false.negative, generation
 }
 \arguments{
 \item{t.Q}{Passed to \code{morie_qrntcq_quarantine_efficacy}.}
-\item{t.T}{See Usage.}
+\item{t.T}{Carried through into a list the body builds.}
 \item{t.R}{Passed to \code{morie_qrntcq_quarantine_efficacy}.}
 \item{false.negative}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{generation.time}{Defaults to \code{NULL}.}

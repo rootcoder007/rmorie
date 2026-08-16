@@ -116,7 +116,7 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 #' source it follows.
 #'
 #' @param t.Q Passed to \code{morie_qrntcq_quarantine_efficacy}.
-#' @param t.T See Usage.
+#' @param t.T Carried through into a list the body builds.
 #' @param t.R Passed to \code{morie_qrntcq_quarantine_efficacy}.
 #' @param false.negative Coerced to numeric by the body, with \code{as.numeric}.
 #' @param generation.time Defaults to \code{NULL}.

@@ -11,7 +11,7 @@ Pcf(points, region = NULL, r = NULL, correction = "border")
 \item{points}{A matrix; passed to \code{as.matrix}.}
 \item{region}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{r}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{correction}{Defaults to \code{"border"}.}
+\item{correction}{The body requires: `correction` must be "border" or "none". Defaults to \code{"border"}.}
 }
 \description{
 intensity of eq (3.8).  The naive estimator is NEGATIVELY BIASED (the book says so outright), hence the border correction by default.

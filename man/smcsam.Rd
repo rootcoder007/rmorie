@@ -19,7 +19,7 @@ smcsam(log_gamma, initial, n_particles = 500L, ladder = NULL, n_steps = 20L, ker
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{weight_rule}{One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.}
 \item{log_forward}{Defaults to \code{NULL}.}
-\item{log_backward}{Defaults to \code{NULL}.}
+\item{log_backward}{The body requires: log_backward densities (equation 12).}
 }
 \description{
 A step of the smcsam_native implementation. No other function in the package calls it. See the file header for the source the module follows.

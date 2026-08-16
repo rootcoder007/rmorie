@@ -10,7 +10,7 @@ bert_encoder(X, blocks, n_heads, pad_mask = NULL, pre_norm = FALSE)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{blocks}{A vector; its length is taken.}
-\item{n_heads}{See Usage.}
+\item{n_heads}{Carried through into a list the body builds.}
 \item{pad_mask}{Defaults to \code{NULL}.}
 \item{pre_norm}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.}
 }

@@ -8,7 +8,7 @@
 .schab_canonical_link(family)
 }
 \arguments{
-\item{family}{See Usage.}
+\item{family}{The body requires: unknown family.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseudo_likelihood}, \code{spglmm}, \code{sppql}. See the file header for the source the module follows.

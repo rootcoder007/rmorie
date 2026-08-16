@@ -104,7 +104,7 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 #'
 #' @param m See Usage.
 #' @param instruments A list; the body reads \code{$instruments} from it.
-#' @param form Defaults to \code{"sum"}.
+#' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @return A list with \code{statistic}, \code{argmax}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
 #' @export
@@ -187,7 +187,7 @@ ks_critical_value <- function(m, instruments, form = "sum",
 #' @param moment_fn See Usage.
 #' @param theta_grid See Usage.
 #' @param X See Usage.
-#' @param form Defaults to \code{"sum"}.
+#' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param n_levels Defaults to \code{2L}.
@@ -223,7 +223,7 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
 #'
 #' @param m See Usage.
 #' @param instruments A list; the body reads \code{$instruments} from it.
-#' @param form Defaults to \code{"sum"}.
+#' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
 #' @param n_equality Defaults to \code{0L}.
 #' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.

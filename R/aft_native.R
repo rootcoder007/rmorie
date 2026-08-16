@@ -92,7 +92,7 @@
 #' @param e See Usage.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param family Passed to \code{.morie_aft_log_dens_surv}. Defaults to \code{"weibull"}.
-#' @param max_iter Defaults to \code{500L}.
+#' @param max_iter Carried through into a list the body builds. Defaults to \code{500L}.
 #' @param tol Defaults to \code{1e-06}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
@@ -139,11 +139,11 @@
 #'
 #' @param t A vector; its length is taken.
 #' @param e Numeric; passed to \code{sum}.
-#' @param X See Usage.
+#' @param X Carried through into a list the body builds.
 #' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$cov}, \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.
-#' @param family See Usage.
+#' @param family Carried through into a list the body builds.
 #' @param title See Usage.
-#' @param method See Usage.
+#' @param method Carried through into a list the body builds.
 #' @return A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma}, \code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events}, \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X}, \code{method}.
 #' @export
 .morie_aft_result <- function(t, e, X, fit, family, title, method) {

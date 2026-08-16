@@ -641,9 +641,9 @@ Nernst <- function(T = 310.15, z = 1, conc_out = 5, conc_in = 140,
 #'
 #' @param V Passed to \code{.bsahhrates}.
 #' @param dt Numeric; combined arithmetically in the body. Defaults to \code{0.01}.
-#' @param m Defaults to \code{NULL}.
-#' @param h Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
+#' @param m Carried through into a list the body builds.
+#' @param h Carried through into a list the body builds.
+#' @param n Carried through into a list the body builds.
 #' @param steps Numeric; combined arithmetically in the body. Defaults to \code{1L}.
 #' @return A list with \code{V_mV}, \code{dt_ms}, \code{steps}, \code{m}, \code{h}, \code{n}, \code{m_inf}, \code{h_inf}, \code{n_inf}, \code{tau_m_ms}, \code{tau_h_ms}, \code{tau_n_ms}, \code{alpha_per_ms}, \code{beta_per_ms}, \code{units}, \code{method}.
 #' @export
@@ -3278,10 +3278,10 @@ CLogProd <- function(X, H, omega = NULL) {
 #' @param b_k Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.
 #' @param c_k Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.
 #' @param d_k Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.
-#' @param M_I Defaults to \code{NULL}.
-#' @param M_O Defaults to \code{NULL}.
-#' @param N_I Defaults to \code{NULL}.
-#' @param N_O Defaults to \code{NULL}.
+#' @param M_I Carried through into a list the body builds.
+#' @param M_O Carried through into a list the body builds.
+#' @param N_I Carried through into a list the body builds.
+#' @param N_O Carried through into a list the body builds.
 #' @return A list with \code{z_real}, \code{z_imag}, \code{xhat_real}, \code{xhat_imag}, \code{X_real}, \code{X_imag}, \code{max_abs_error}, \code{terms}, \code{counts}, \code{units}, \code{method}.
 #' @export
 CLogPz <- function(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0),

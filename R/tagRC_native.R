@@ -61,7 +61,7 @@ tripartite_graph <- function(triples) {
 #' source it follows.
 #'
 #' @param nodes Coerced to list by the body, with \code{as.list}.
-#' @param focus See Usage.
+#' @param focus The body requires: tagRC: none of the focus nodes are in the graph.
 #' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.
 #' @return A list with \code{p}, \code{focus}, \code{mass}.
 #' @export

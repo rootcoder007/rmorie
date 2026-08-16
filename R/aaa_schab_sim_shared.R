@@ -72,7 +72,7 @@
 #'
 #' @param mean A vector; its length is taken.
 #' @param cov A matrix; passed to \code{dim}.
-#' @param method Defaults to \code{"cholesky"}.
+#' @param method The body requires: `method` must be 'cholesky' or 'spectral'. Defaults to \code{"cholesky"}.
 #' @param seed Passed to \code{.morie_random_normal}. Defaults to \code{0}.
 #' @param stream Passed to \code{.morie_random_normal}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.

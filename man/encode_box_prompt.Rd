@@ -8,7 +8,7 @@
 encode_box_prompt(box, dim = 8, type_embeddings = NULL)
 }
 \arguments{
-\item{box}{See Usage.}
+\item{box}{The body requires: samseg: the box is empty or inverted.}
 \item{dim}{Passed to \code{.samseg_pos_enc}. Defaults to \code{8}.}
 \item{type_embeddings}{Defaults to \code{NULL}.}
 }

@@ -59,7 +59,7 @@
 #'
 #' @param token_vectors Passed to \code{.sbert_mat}.
 #' @param mode One of \code{"cls"}, \code{"max"}. Defaults to \code{"mean"}.
-#' @param mask Defaults to \code{NULL}.
+#' @param mask The body requires: sbert: the mask excludes every token.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 pool <- function(token_vectors, mode = "mean", mask = NULL) {

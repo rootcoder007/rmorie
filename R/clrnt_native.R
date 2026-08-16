@@ -107,7 +107,7 @@ blood_from_plasma <- function(cl_plasma, fu_plasma,
 #' @param clint_in_vitro Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_incubation Coerced to numeric by the body, with \code{as.numeric}.
 #' @param system One of \code{"hepatocytes"}, \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
-#' @param species Defaults to \code{"human"}.
+#' @param species The body requires: clrnt: species must be 'human' or 'rat'. Defaults to \code{"human"}.
 #' @param pbsf Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param liver_weight Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -141,7 +141,7 @@ scale_to_liver <- function(clint_in_vitro, fu_incubation,
 #'
 #' @param cl_h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_blood Coerced to numeric by the body, with \code{as.numeric}.
-#' @param species Defaults to \code{"human"}.
+#' @param species The body requires: clrnt: species must be 'human' or 'rat'. Defaults to \code{"human"}.
 #' @param qh Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param liver_model One of \code{"parallel_tube"}, \code{"well_stirred"}. Defaults to \code{"well_stirred"}.
 #' @return One of two values, depending on the branch taken.
@@ -207,15 +207,15 @@ prediction_accuracy <- function(predicted, observed, fold = 2.0) {
 #' @param clint_in_vitro A vector; its length is taken.
 #' @param cl_h Defaults to \code{NULL}.
 #' @param fu_blood Defaults to \code{NULL}.
-#' @param log_pd Defaults to \code{NULL}.
-#' @param fu_incubation Defaults to \code{NULL}.
+#' @param log_pd The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.
+#' @param fu_incubation The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.
 #' @param system Compared against \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
-#' @param species Defaults to \code{"human"}.
-#' @param liver_model Defaults to \code{"well_stirred"}.
+#' @param species Carried through into a list the body builds. Defaults to \code{"human"}.
+#' @param liver_model Carried through into a list the body builds. Defaults to \code{"well_stirred"}.
 #' @param protein Iterated over elementwise, with \code{vapply}. Defaults to \code{1}.
 #' @param volume_ratio Iterated over elementwise, with \code{vapply}. Defaults to \code{0.005}.
 #' @param cl_plasma Defaults to \code{NULL}.
-#' @param fu_plasma Defaults to \code{NULL}.
+#' @param fu_plasma The body requires: clrnt: plasma clearance needs fu_plasma too.
 #' @param blood_plasma_ratio Defaults to \code{NULL}.
 #' @param charge Defaults to \code{"neutral"}.
 #' @param fold Defaults to \code{2}.

@@ -556,16 +556,16 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @param phenotype Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param trait One of \code{"binary"}, \code{"quantitative"}. Defaults to \code{"binary"}.
-#' @param geno_relaxed Defaults to \code{0.2}.
-#' @param mind_relaxed Defaults to \code{0.2}.
-#' @param geno Defaults to \code{0.02}.
-#' @param mind Defaults to \code{0.02}.
-#' @param maf_threshold Defaults to \code{0.01}.
-#' @param hwe_case Defaults to \code{1e-10}.
-#' @param hwe_control Defaults to \code{1e-06}.
-#' @param hwe_quantitative Defaults to \code{1e-06}.
+#' @param geno_relaxed Carried through into a list the body builds. Defaults to \code{0.2}.
+#' @param mind_relaxed Carried through into a list the body builds. Defaults to \code{0.2}.
+#' @param geno Carried through into a list the body builds. Defaults to \code{0.02}.
+#' @param mind Carried through into a list the body builds. Defaults to \code{0.02}.
+#' @param maf_threshold The body requires: snpqc1: maf_threshold must lie in [0, 0.5). Defaults to \code{0.01}.
+#' @param hwe_case Carried through into a list the body builds. Defaults to \code{1e-10}.
+#' @param hwe_control Carried through into a list the body builds. Defaults to \code{1e-06}.
+#' @param hwe_quantitative Carried through into a list the body builds. Defaults to \code{1e-06}.
 #' @param het_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
-#' @param pihat Defaults to \code{0.2}.
+#' @param pihat Carried through into a list the body builds. Defaults to \code{0.2}.
 #' @param hwe_test Passed to \code{morie_snpqc1_hwe_pvalue}. Defaults to \code{"exact"}.
 #' @param x_genotypes Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.

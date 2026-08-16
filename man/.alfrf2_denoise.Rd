@@ -8,8 +8,8 @@
 .alfrf2_denoise(route, denoiser, x, t, fixed, spacing, passes)
 }
 \arguments{
-\item{route}{See Usage.}
-\item{denoiser}{See Usage.}
+\item{route}{The body requires: the denoiser route is prior or ideal.}
+\item{denoiser}{The body requires: the denoiser route is prior or ideal.}
 \item{x}{A matrix; passed to \code{nrow}.}
 \item{t}{See Usage.}
 \item{fixed}{Passed to \code{morie_alfrf2_ideal}.}

@@ -348,10 +348,10 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
 #' the source it follows.
 #'
 #' @param table Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param tp Defaults to \code{NULL}.
-#' @param tn Defaults to \code{NULL}.
-#' @param fp Defaults to \code{NULL}.
-#' @param fn Defaults to \code{NULL}.
+#' @param tp The body requires: give a 2x2 table or all four of tp, tn, fp, fn.
+#' @param tn The body requires: give a 2x2 table or all four of tp, tn, fp, fn.
+#' @param fp The body requires: give a 2x2 table or all four of tp, tn, fp, fn.
+#' @param fn The body requires: give a 2x2 table or all four of tp, tn, fp, fn.
 #' @param prevalence Optional; may be \code{NULL}. Passed to \code{.morie_rg_asfrac}.
 #' @param kind Defaults to \code{NULL}.
 #' @param exact A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -1942,7 +1942,7 @@ KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param classifier Defaults to \code{NULL}.
+#' @param classifier The body requires: leaves one class; the classifier.
 #' @return A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{misclassified}, \code{n}, \code{n_fits}, \code{deterministic}, \code{nearly_unbiased}, \code{high_variance}, \code{method}.
 #' @export
 LooCv <- function(X, y, classifier = NULL) {

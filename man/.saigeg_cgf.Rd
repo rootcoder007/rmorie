@@ -11,7 +11,7 @@
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{G}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{order}{Defaults to \code{0}.}
+\item{order}{The body requires: saigeg: order must be 0, 1 or 2. Defaults to \code{0}.}
 }
 \description{
 A step of the saigeg_native implementation. Called by \code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}. See the file header for the source the module follows.

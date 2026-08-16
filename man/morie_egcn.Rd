@@ -8,8 +8,8 @@
 morie_egcn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 }
 \arguments{
-\item{H}{See Usage.}
-\item{X}{See Usage.}
+\item{H}{Carried through into a list the body builds.}
+\item{X}{Carried through into a list the body builds.}
 \item{layers}{Coerced to integer by the body, with \code{as.integer}.}
 \item{phi_e}{See Usage.}
 \item{phi_x}{See Usage.}

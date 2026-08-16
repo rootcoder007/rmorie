@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{buf}{A list; the body reads \code{$capacity}, \code{$data} from it.}
-\item{s}{See Usage.}
+\item{s}{Carried through into a list the body builds.}
 \item{a}{Coerced to integer by the body, with \code{as.integer}.}
 \item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{s2}{Coerced to integer by the body, with \code{as.integer}.}

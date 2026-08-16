@@ -789,7 +789,7 @@ EvenOdd <- function(x, n = NULL) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @param omega See Usage.
-#' @param t Defaults to \code{NULL}.
+#' @param t The body requires: eq. (4.59) needs x(t) != 0 and p(t) != 0 for all t.
 #' @param dt Defaults to \code{NULL}.
 #' @return A list with \code{y}, \code{Yl}, \code{Xl}, \code{Pl}, \code{max_difference}, \code{additive}, \code{method}.
 #' @export

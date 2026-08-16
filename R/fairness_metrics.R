@@ -48,13 +48,13 @@ NULL
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param title See Usage.
-#' @param summary_lines Defaults to \code{list()}.
-#' @param tables Defaults to \code{list()}.
-#' @param sections Defaults to \code{list()}.
-#' @param warnings Defaults to \code{character(0)}.
-#' @param interpretation Defaults to \code{""}.
-#' @param payload Defaults to \code{list()}.
+#' @param title Carried through into a list the body builds.
+#' @param summary_lines Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param tables Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param sections Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param warnings Carried through into a list the body builds. Defaults to \code{character(0)}.
+#' @param interpretation Carried through into a list the body builds. Defaults to \code{""}.
+#' @param payload Carried through into a list the body builds. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_fairness_result <- function(title, summary_lines = list(),

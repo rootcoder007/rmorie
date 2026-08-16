@@ -11,7 +11,7 @@ morie_funcal_transfer_terms(assignments, annotations, sources = NULL, min_suppor
 \item{assignments}{A vector; indexed elementwise.}
 \item{annotations}{A vector; indexed elementwise.}
 \item{sources}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
-\item{min_support}{Defaults to \code{1}.}
+\item{min_support}{The body requires: funcal: min_support must be at least 1. Defaults to \code{1}.}
 }
 \description{
 A step of the funcal_native implementation. Called by \code{morie_funcal}. See the file header for the source the module follows.

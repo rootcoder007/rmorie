@@ -449,7 +449,7 @@ Whopf <- function(x, d, order) {
 #' the source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param desired Defaults to \code{NULL}.
+#' @param desired The body requires: give either a desired signal (time-domain route,.
 #' @param order Defaults to \code{8}.
 #' @param sd Defaults to \code{NULL}.
 #' @param seta Defaults to \code{NULL}.
@@ -1713,7 +1713,7 @@ Anc <- function(primary, reference, order = 8, mu = 0.01,
 #'
 #' @param abdominal Coerced to numeric by the body, with \code{as.numeric}.
 #' @param chest Coerced to numeric by the body, with \code{as.numeric}.
-#' @param order Defaults to \code{32}.
+#' @param order Carried through into a list the body builds. Defaults to \code{32}.
 #' @param mu Defaults to \code{0.005}.
 #' @param method Defaults to \code{"lms"}.
 #' @return A list with \code{fetal}, \code{maternal_estimate}, \code{order}, \code{input_power}, \code{output_power}, \code{suppression_db}, \code{reference_leakage}, \code{single_reference}, \code{widrow_used_multiple_references}, \code{method}.

@@ -73,7 +73,7 @@
 #' separated by up to 3 standard deviations.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param rule Defaults to \code{"3.31"}.
+#' @param rule The body requires: rule must be '3.28', '3.29' or '3.31'. Defaults to \code{"3.31"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .wsm_bandwidth <- function(x, rule = "3.31") {

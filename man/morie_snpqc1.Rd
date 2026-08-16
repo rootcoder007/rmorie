@@ -11,16 +11,16 @@ morie_snpqc1(genotypes, phenotype = NULL, trait = "binary", geno_relaxed = 0.2, 
 \item{genotypes}{Passed to \code{.snpqc1_check}.}
 \item{phenotype}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{trait}{One of \code{"binary"}, \code{"quantitative"}. Defaults to \code{"binary"}.}
-\item{geno_relaxed}{Defaults to \code{0.2}.}
-\item{mind_relaxed}{Defaults to \code{0.2}.}
-\item{geno}{Defaults to \code{0.02}.}
-\item{mind}{Defaults to \code{0.02}.}
-\item{maf_threshold}{Defaults to \code{0.01}.}
-\item{hwe_case}{Defaults to \code{1e-10}.}
-\item{hwe_control}{Defaults to \code{1e-06}.}
-\item{hwe_quantitative}{Defaults to \code{1e-06}.}
+\item{geno_relaxed}{Carried through into a list the body builds. Defaults to \code{0.2}.}
+\item{mind_relaxed}{Carried through into a list the body builds. Defaults to \code{0.2}.}
+\item{geno}{Carried through into a list the body builds. Defaults to \code{0.02}.}
+\item{mind}{Carried through into a list the body builds. Defaults to \code{0.02}.}
+\item{maf_threshold}{The body requires: snpqc1: maf_threshold must lie in [0, 0.5). Defaults to \code{0.01}.}
+\item{hwe_case}{Carried through into a list the body builds. Defaults to \code{1e-10}.}
+\item{hwe_control}{Carried through into a list the body builds. Defaults to \code{1e-06}.}
+\item{hwe_quantitative}{Carried through into a list the body builds. Defaults to \code{1e-06}.}
 \item{het_sd}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
-\item{pihat}{Defaults to \code{0.2}.}
+\item{pihat}{Carried through into a list the body builds. Defaults to \code{0.2}.}
 \item{hwe_test}{Passed to \code{morie_snpqc1_hwe_pvalue}. Defaults to \code{"exact"}.}
 \item{x_genotypes}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{reported_sex}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}

@@ -13,7 +13,7 @@
 \item{Xs}{A matrix; indexed by row and column.}
 \item{beta}{A matrix; passed to \code{\%*\%}.}
 \item{offs}{Numeric; combined arithmetically in the body.}
-\item{ties}{See Usage.}
+\item{ties}{The body requires: ties must be "breslow" or "efron".}
 }
 \description{
 the stratified model, which needs the pieces without taking a step.

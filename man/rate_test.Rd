@@ -10,7 +10,7 @@ rate_test(scores, priority, weight = "autoc", reps = 500, seed = 0)
 \arguments{
 \item{scores}{Passed to \code{.slvgrf_check}.}
 \item{priority}{Passed to \code{.slvgrf_check}.}
-\item{weight}{Defaults to \code{"autoc"}.}
+\item{weight}{Carried through into a list the body builds. Defaults to \code{"autoc"}.}
 \item{reps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }

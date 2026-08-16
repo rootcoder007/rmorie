@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{T}{A vector; its length is taken and its elements indexed.}
-\item{gamma}{See Usage.}
+\item{gamma}{The body requires: birl: gamma must be in [0, 1).}
 }
 \description{
 A step of the birl_native implementation. Called by \code{birl}, \code{policy_iteration}, \code{policy_values} and 2 others in the module. See the file header for the source the module follows.

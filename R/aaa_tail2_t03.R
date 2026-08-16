@@ -500,8 +500,8 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #' objective, n_iter, lr, relaxation, step_norm, method) \' @export
 #'
 #' @param f See Usage.
-#' @param grad_f See Usage.
-#' @param prox_g See Usage.
+#' @param grad_f The body requires: grad_f returned the wrong length.
+#' @param prox_g The body requires: prox_g returned the wrong length.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.

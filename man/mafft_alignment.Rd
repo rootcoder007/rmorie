@@ -15,11 +15,11 @@ mafft_alignment(sequences, method = "FFT-NS-2", seq_type = NULL, raw_matrix = NU
 \item{freqs}{Defaults to \code{NULL}.}
 \item{s_a}{Defaults to \code{0.06}.}
 \item{s_op}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.}
-\item{matrix}{Defaults to \code{"normalized"}.}
-\item{window}{Defaults to \code{30L}.}
-\item{n_peaks}{Defaults to \code{20L}.}
-\item{threshold}{Defaults to \code{0.7}.}
-\item{max_len}{Defaults to \code{150L}.}
+\item{matrix}{Carried through into a list the body builds. Defaults to \code{"normalized"}.}
+\item{window}{Carried through into a list the body builds. Defaults to \code{30L}.}
+\item{n_peaks}{Carried through into a list the body builds. Defaults to \code{20L}.}
+\item{threshold}{Carried through into a list the body builds. Defaults to \code{0.7}.}
+\item{max_len}{Carried through into a list the body builds. Defaults to \code{150L}.}
 \item{max_iterate}{Defaults to \code{16L}.}
 }
 \description{

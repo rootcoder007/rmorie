@@ -13,7 +13,7 @@ morie_polkrn(y, A_history, H_history, degree = 2, basis = "both", summary = "cum
 \item{H_history}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
 \item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 \item{basis}{One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.}
-\item{summary}{Defaults to \code{"cumulative"}.}
+\item{summary}{Carried through into a list the body builds. Defaults to \code{"cumulative"}.}
 \item{n_centres}{Defaults to \code{5}.}
 \item{width}{Defaults to \code{NULL}.}
 \item{kind}{Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{"binary"}.}

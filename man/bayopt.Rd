@@ -13,7 +13,7 @@ bayopt(f, bounds, n_iter = 20, n_init = 5, acq = "ei", kernel = "matern52", ampl
 \item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
 \item{n_init}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{acq}{One of \code{"ei"}, \code{"lcb"}, \code{"pi"}. Defaults to \code{"ei"}.}
-\item{kernel}{Defaults to \code{"matern52"}.}
+\item{kernel}{Carried through into a list the body builds. Defaults to \code{"matern52"}.}
 \item{amplitude}{Defaults to \code{1}.}
 \item{length_scale}{Defaults to \code{1}.}
 \item{noise}{Defaults to \code{1e-08}.}
@@ -24,7 +24,7 @@ bayopt(f, bounds, n_iter = 20, n_init = 5, acq = "ei", kernel = "matern52", ampl
 \item{X0}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{y0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{inner}{One of \code{"gradient"}, \code{"random"}. Defaults to \code{"gradient"}.}
-\item{n_starts}{Defaults to \code{8}.}
+\item{n_starts}{The body requires: bayopt: n_starts must be positive. Defaults to \code{8}.}
 }
 \description{
 A step of the bayopt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

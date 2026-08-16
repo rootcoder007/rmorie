@@ -8,7 +8,7 @@
 .karpv_tnode(term)
 }
 \arguments{
-\item{term}{See Usage.}
+\item{term}{Carried through into a list the body builds.}
 }
 \description{
 A step of the karpV_native implementation. Called by \code{.karpv_copy}, \code{.karpv_random_terminal}. See the file header for the source the module follows.

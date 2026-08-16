@@ -98,7 +98,7 @@ Icc12c <- function(X, model = "2,k") {
 #' form.
 #'
 #' @param model Coerced to character by the body, with \code{as.character}.
-#' @param k See Usage.
+#' @param k The body requires: ICC(1,1), ICC(1,k), ICC(2,1), ICC(2,k), ICC(3,1), ICC(3,k).
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .icc12c_form <- function(model, k) {

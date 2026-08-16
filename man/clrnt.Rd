@@ -11,15 +11,15 @@ clrnt(clint_in_vitro, cl_h = NULL, fu_blood = NULL, log_pd = NULL, fu_incubation
 \item{clint_in_vitro}{A vector; its length is taken.}
 \item{cl_h}{Defaults to \code{NULL}.}
 \item{fu_blood}{Defaults to \code{NULL}.}
-\item{log_pd}{Defaults to \code{NULL}.}
-\item{fu_incubation}{Defaults to \code{NULL}.}
+\item{log_pd}{The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.}
+\item{fu_incubation}{The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.}
 \item{system}{Compared against \code{"microsomes"}. Defaults to \code{"hepatocytes"}.}
-\item{species}{Defaults to \code{"human"}.}
-\item{liver_model}{Defaults to \code{"well_stirred"}.}
+\item{species}{Carried through into a list the body builds. Defaults to \code{"human"}.}
+\item{liver_model}{Carried through into a list the body builds. Defaults to \code{"well_stirred"}.}
 \item{protein}{Iterated over elementwise, with \code{vapply}. Defaults to \code{1}.}
 \item{volume_ratio}{Iterated over elementwise, with \code{vapply}. Defaults to \code{0.005}.}
 \item{cl_plasma}{Defaults to \code{NULL}.}
-\item{fu_plasma}{Defaults to \code{NULL}.}
+\item{fu_plasma}{The body requires: clrnt: plasma clearance needs fu_plasma too.}
 \item{blood_plasma_ratio}{Defaults to \code{NULL}.}
 \item{charge}{Defaults to \code{"neutral"}.}
 \item{fold}{Defaults to \code{2}.}

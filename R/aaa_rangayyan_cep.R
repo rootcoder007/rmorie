@@ -695,7 +695,7 @@ HomoFilt <- function(y, cutoff, keep = "low") {
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cutoff Coerced to integer by the body, with \code{as.integer}.
-#' @param keep Defaults to \code{"low"}.
+#' @param keep Carried through into a list the body builds. Defaults to \code{"low"}.
 #' @return A list with \code{y}, \code{cepstrum}, \code{liftered}, \code{cutoff}, \code{keep}, \code{n}, \code{linear_phase_removed}, \code{imaginary_energy}, \code{stages}, \code{method}.
 #' @export
 HomDeconv <- function(y, cutoff, keep = "low") {
@@ -885,7 +885,7 @@ MinPhase <- function(x) {
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_filters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{26}.
 #' @param n_coeffs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{13}.
-#' @param fmin Defaults to \code{0}.
+#' @param fmin The body requires: need 0 <= fmin < fmax <= fs/2. Defaults to \code{0}.
 #' @param fmax Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mfcc}, \code{filterbank_energies}, \code{log_energies}, \code{edges}, \code{n_filters}, \code{n_coeffs}, \code{fs}, \code{empty_filters}, \code{c0_is_energy}, \code{method}.
 #' @export

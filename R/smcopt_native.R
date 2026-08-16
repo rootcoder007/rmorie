@@ -49,7 +49,7 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param objective See Usage.
+#' @param objective The body requires: smcopt: the objective was never evaluated.
 #' @param initial See Usage.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param n_steps Defaults to \code{30}.

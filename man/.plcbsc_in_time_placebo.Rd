@@ -12,7 +12,7 @@
 \item{y_donors}{Iterated over elementwise, with \code{lapply}.}
 \item{t0}{Numeric; combined arithmetically in the body.}
 \item{fake_t0}{A count; the body uses it as \code{seq_len(...)}.}
-\item{v}{Defaults to \code{NULL}.}
+\item{v}{Carried through into a list the body builds.}
 \item{...}{Passed through.}
 }
 \description{

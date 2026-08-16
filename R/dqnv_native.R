@@ -151,7 +151,7 @@
 #' source it follows.
 #'
 #' @param buf A list; the body reads \code{$capacity}, \code{$data} from it.
-#' @param s See Usage.
+#' @param s Carried through into a list the body builds.
 #' @param a Coerced to integer by the body, with \code{as.integer}.
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param s2 Coerced to integer by the body, with \code{as.integer}.

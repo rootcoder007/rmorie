@@ -138,7 +138,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param corpus See Usage.
+#' @param corpus The body requires: fasttext: corpus must not be None.
 #' @return The value of \code{docs}, as built in the body.
 #' @export
 .as_docs <- function(corpus) {
@@ -171,7 +171,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param negative Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
-#' @param min_count Defaults to \code{1}.
+#' @param min_count The body requires: word(s) above min_count=. Defaults to \code{1}.
 #' @param boundary Defaults to \code{TRUE}.
 #' @param whole_word Defaults to \code{TRUE}.
 #' @param hash_buckets Optional; may be \code{NULL}. Passed to \code{.gram_slot}.

@@ -61,7 +61,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param symbol See Usage.
+#' @param symbol Carried through into a list the body builds.
 #' @param args See Usage.
 #' @return The value of \code{do.call}.
 #' @export
@@ -491,8 +491,8 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
 #' source it follows.
 #'
 #' @param rules A vector; its length is taken.
-#' @param why See Usage.
-#' @param pair See Usage.
+#' @param why Carried through into a list the body builds.
+#' @param pair Carried through into a list the body builds.
 #' @return A list with \code{estimate}, \code{rules}, \code{complete}, \code{reason}, \code{pair}, \code{n_rules}, \code{method}.
 #' @export
 .trmRew_incomplete <- function(rules, why, pair) {

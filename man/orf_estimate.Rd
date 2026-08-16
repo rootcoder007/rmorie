@@ -14,7 +14,7 @@ orf_estimate(Y, T, X, W, x, trees, residualize = "local", ridge = 1e-08, leave_o
 \item{W}{See Usage.}
 \item{x}{Passed to \code{.orfgrf_forest_weights}.}
 \item{trees}{Passed to \code{.orfgrf_forest_weights}.}
-\item{residualize}{Defaults to \code{"local"}.}
+\item{residualize}{The body requires: orfgrf: residualize must be local or global, got. Defaults to \code{"local"}.}
 \item{ridge}{Defaults to \code{1e-08}.}
 \item{leave_one_out}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

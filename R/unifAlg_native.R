@@ -115,8 +115,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param sub See Usage.
-#' @param why See Usage.
+#' @param sub Carried through into a list the body builds.
+#' @param why Carried through into a list the body builds.
 #' @param oc Coerced to logical by the body, with \code{as.logical}.
 #' @return A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason}, \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
 #' @export
