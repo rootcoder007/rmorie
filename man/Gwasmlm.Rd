@@ -14,3 +14,11 @@ Unified mixed-model per-SNP association test (Yu et al. 2006)
 A list with \code{beta}, \code{se}, \code{statistic}, \code{df}, \code{coefficients}, \code{sigma2}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 30
+X <- cbind(1, rnorm(n))
+snp <- rbinom(n, 2, 0.3)
+y <- X \%*\% c(1, 0.5) + 0.4 * snp + rnorm(n, 0, 0.5)
+Gwasmlm(as.numeric(y), X, snp, diag(n))
+}

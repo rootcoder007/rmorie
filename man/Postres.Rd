@@ -14,3 +14,10 @@ Posterior-averaged Poisson residual (Lawson eq. 5.2)
 A list with \code{residual}, \code{fitted}, \code{n}, \code{n_draws}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+e <- runif(20, 5, 15)
+theta <- matrix(rgamma(80, 2, 2), 4, 20)
+y <- rpois(20, e * colMeans(theta))
+Postres(y, e, theta)
+}

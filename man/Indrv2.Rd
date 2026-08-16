@@ -14,3 +14,7 @@ Independence of two random variables (Deshmukh eq. 5.3)
 A list with \code{max_deviation}, \code{independent}, \code{margin_row}, \code{margin_col}.
 }
 \keyword{internal}
+\examples{
+J <- outer(c(0.3, 0.7), c(0.4, 0.6))
+Indrv2(J)
+}

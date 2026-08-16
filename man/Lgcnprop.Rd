@@ -14,3 +14,8 @@ LightGCN layer combination (He et al. 2020)
 A list with \code{E}, \code{K}, \code{alpha}, \code{n_nodes}, \code{dim}.
 }
 \keyword{internal}
+\examples{
+A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
+E <- matrix(rnorm(6), 3, 2)
+Lgcnprop(A, E, K = 2)
+}

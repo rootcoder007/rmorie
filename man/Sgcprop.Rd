@@ -14,3 +14,8 @@ Simplified graph convolution propagation (Wu et al. 2019, SGC)
 A list with \code{X}, \code{K}, \code{n_nodes}, \code{dim}.
 }
 \keyword{internal}
+\examples{
+A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
+X <- matrix(1:6, 3, 2)
+Sgcprop(A, X, K = 2)
+}
