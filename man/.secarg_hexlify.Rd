@@ -8,7 +8,7 @@
 .secarg_hexlify(bs)
 }
 \arguments{
-\item{bs}{See Usage.}
+\item{bs}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the secarg_native implementation. No other function in the package calls it. See the file header for the source the module follows.

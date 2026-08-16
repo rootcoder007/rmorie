@@ -11,7 +11,7 @@ ngcf_stack_layers(E0, adjacency, Ws, affinity = TRUE, slope = 0.2)
 \item{E0}{A matrix; passed to \code{as.matrix}.}
 \item{adjacency}{See Usage.}
 \item{Ws}{A vector; its length is taken.}
-\item{affinity}{Defaults to \code{TRUE}.}
+\item{affinity}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
 \item{slope}{Defaults to \code{0.2}.}
 }
 \description{

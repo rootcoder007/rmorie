@@ -8,9 +8,9 @@
 .morie_dp_clip(x, a, b)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \code{morie_dp_kmeans}, \code{morie_dp_quantile} and 2 others in the module. See the file header for the source the module follows.

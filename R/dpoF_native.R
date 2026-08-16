@@ -76,7 +76,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name See Usage.
 #' @return The value of \code{v}, as built in the body.
 #' @export
@@ -102,7 +102,7 @@
 #' @param model Compared against \code{"plackett-luce"}. Defaults to \code{"bradley-terry"}.
 #' @param logp Passed to \code{.dpoF_plackett_luce}.
 #' @param logp_ref Passed to \code{.dpoF_plackett_luce}.
-#' @param label_smoothing Defaults to \code{0}.
+#' @param label_smoothing Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{reward_w}, \code{reward_l}, \code{margin}, \code{grad_weight}, \code{accuracy}, \code{beta}, \code{n}, \code{model}, \code{method}.
 #' @export
 morie_dpoF <- function(logp_w = NULL, logp_l = NULL,

@@ -18,8 +18,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
+#' @param time Coerced to numeric by the body, with \code{as.numeric}.
+#' @param event Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{t}, \code{e}.
 #' @export
 .ms_check <- function(time, event) {
@@ -97,7 +97,7 @@
 #'
 #' @param ut See Usage.
 #' @param H A vector; indexed elementwise.
-#' @param t See Usage.
+#' @param t Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .ms_h0_at <- function(ut, H, t) {

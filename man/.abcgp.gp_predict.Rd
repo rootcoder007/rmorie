@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol}, \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel}, \code{$lengthscale}, \code{$n}, \code{$tau2} from it.}
-\item{theta}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.implausible}, \code{morie_abcgp}. See the file header for the source the module follows.

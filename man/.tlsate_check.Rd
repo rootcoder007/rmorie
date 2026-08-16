@@ -8,11 +8,11 @@
 .tlsate_check(A, Y, Q1, Q0, g)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{Y}{See Usage.}
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
-\item{g}{See Usage.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Q1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Q0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlsate_native implementation. Called by \code{.tlsate_pate_influence_curve}, \code{.tlsate_sate_influence_curve}, \code{.tlsate_sate_tmle} and 1 others in the module. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .propinf_zero_like(net)
 }
 \arguments{
-\item{net}{See Usage.}
+\item{net}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 A step of the propinf_native implementation. Called by \code{.propinf_train_vector_meta}, \code{.propinf_zero_grads}. See the file header for the source the module follows.

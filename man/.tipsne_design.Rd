@@ -8,7 +8,7 @@
 .tipsne_design(arm, X, n)
 }
 \arguments{
-\item{arm}{See Usage.}
+\item{arm}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{n}{A count; the body uses it as \code{rep(...)}.}
 }

@@ -8,7 +8,7 @@
 morie_vqgdec_decode_indices(indices, codebook)
 }
 \arguments{
-\item{indices}{See Usage.}
+\item{indices}{Coerced to integer by the body, with \code{as.integer}.}
 \item{codebook}{Passed to \code{.vqgdec_to_matrix}.}
 }
 \description{

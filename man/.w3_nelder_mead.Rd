@@ -8,10 +8,10 @@
 .w3_nelder_mead(f, x0, step = 0.1, iters = 400L, alpha = 1, gamma = 2, rho = 0.5, sigma = 0.5)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Iterated over elementwise, with \code{vapply}.}
 \item{x0}{A vector; its length is taken.}
 \item{step}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
-\item{iters}{Defaults to \code{400L}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400L}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 \item{rho}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}

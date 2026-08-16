@@ -28,7 +28,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{mask}, as built in the body.
 #' @export
 causal_mask <- function(n) {
@@ -86,7 +86,7 @@ self_attention <- function(E, WQ, WK, WV, mask = NULL) {
 #' source it follows.
 #'
 #' @param weights See Usage.
-#' @param position Defaults to \code{NULL}.
+#' @param position Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{mean_lookback}, \code{mass_on_last}, \code{effective_order}, \code{note}.
 #' @export
 attention_span <- function(weights, position = NULL) {
@@ -110,7 +110,7 @@ attention_span <- function(weights, position = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
+#' @param state Coerced to numeric by the body, with \code{as.numeric}.
 #' @param item_embeddings See Usage.
 #' @param top_k Numeric; passed to \code{min}. Defaults to \code{5}.
 #' @param exclude Defaults to \code{numeric(0)}.
@@ -139,8 +139,8 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param d See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param d Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{attention_ops}, \code{rnn_ops}, \code{attention_sequential_steps}, \code{rnn_sequential_steps}, \code{note}.
 #' @export
 complexity <- function(n, d) {

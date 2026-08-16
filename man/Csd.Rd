@@ -8,9 +8,9 @@
 Csd(x, y, fs = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 CSD -- the transform of the CCF and the product -- are computed and compared; they agree only for the full CIRCULAR lag range, since a truncated CCF gives a smoothed CSD, a different estimator.

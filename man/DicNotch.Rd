@@ -10,7 +10,7 @@ DicNotch(cp, fs, qrs = NULL, mwin = 16)
 \arguments{
 \item{cp}{A vector; its length is taken and its elements indexed.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{qrs}{Defaults to \code{NULL}.}
+\item{qrs}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{mwin}{Numeric; combined arithmetically in the body. Defaults to \code{16}.}
 }
 \description{

@@ -8,8 +8,8 @@
 morie_smatch_relative_efficiency(r, log_ri)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{log_ri}{See Usage.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{log_ri}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the smatch_native implementation. No other function in the package calls it. See the file header for the source the module follows.

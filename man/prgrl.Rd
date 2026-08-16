@@ -16,7 +16,7 @@ prgrl(X, y, difficulty, X_test = NULL, y_test = NULL, updates = 200, n_steps = 5
 \item{updates}{Passed to \code{.prgrl_perceptron}. Defaults to \code{200}.}
 \item{n_steps}{Defaults to \code{5}.}
 \item{seed}{Passed to \code{.prgrl_rng}. Defaults to \code{0}.}
-\item{n_repeats}{Defaults to \code{50}.}
+\item{n_repeats}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.}
 \item{order}{One of \code{"sampled"}, \code{"sorted"}. Defaults to \code{"sampled"}.}
 }
 \description{

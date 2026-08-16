@@ -8,13 +8,13 @@
 IirDiff(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{b_k}{See Usage.}
-\item{a_k}{Defaults to \code{NULL}.}
-\item{y}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_k}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{a_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{N}{Defaults to \code{NULL}.}
 \item{M}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_filt implementation. Called by \code{IirDiffGen}. See the file header for the source the module follows.

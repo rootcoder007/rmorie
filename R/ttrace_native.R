@@ -23,7 +23,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param shape See Usage.
+#' @param shape Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scale Passed to \code{.gamma_draw}.
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{repeat}.
@@ -52,7 +52,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lam See Usage.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @param e Passed to \code{.ghc_norm}.
 #' @return The value of \code{repeat}.
 #' @export
@@ -80,8 +80,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R0 See Usage.
-#' @param dispersion See Usage.
+#' @param R0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dispersion Coerced to numeric by the body, with \code{as.numeric}.
 #' @param e Passed to \code{.gamma_draw}.
 #' @return The value of \code{.poisson_draw}.
 #' @export
@@ -108,8 +108,8 @@ negbinom_offspring <- function(R0, dispersion, e) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mean See Usage.
-#' @param sd See Usage.
+#' @param mean Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sd Coerced to numeric by the body, with \code{as.numeric}.
 #' @param e Passed to \code{.ghc_norm}.
 #' @param allow_presymptomatic A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{v}, as built in the body.
@@ -133,16 +133,16 @@ serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
 #'
 #' @param R0 Defaults to \code{2.5}.
 #' @param dispersion Defaults to \code{0.16}.
-#' @param n_initial Defaults to \code{20}.
-#' @param trace_prob Defaults to \code{0.8}.
-#' @param delay_mean Defaults to \code{3.83}.
-#' @param delay_sd Defaults to \code{2.4}.
+#' @param n_initial Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param trace_prob Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
+#' @param delay_mean Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3.83}.
+#' @param delay_sd Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.
 #' @param si_mean Defaults to \code{4.7}.
 #' @param si_sd Defaults to \code{2.9}.
-#' @param subclinical Defaults to \code{0}.
-#' @param max_cases Defaults to \code{5000}.
-#' @param max_weeks Defaults to \code{12}.
-#' @param seed Defaults to \code{0}.
+#' @param subclinical Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param max_cases Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
+#' @param max_weeks Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param allow_presymptomatic Defaults to \code{TRUE}.
 #' @return A list with \code{controlled}, \code{total_cases}, \code{weekly}, \code{hit_cap}, \code{extinct}.
 #' @export
@@ -230,8 +230,8 @@ simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reps Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param reps Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{probability_of_control}, \code{se}, \code{reps}, \code{median_size}, \code{max_size}, \code{max_cases}, \code{max_weeks}, \code{definition}, \code{method}.
 #' @export
@@ -268,15 +268,15 @@ probability_of_control <- function(reps = 200, seed = 0, ...) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R0 See Usage.
-#' @param si_mean See Usage.
-#' @param si_sd See Usage.
-#' @param delay_mean See Usage.
-#' @param delay_sd See Usage.
-#' @param trace_prob See Usage.
-#' @param subclinical Defaults to \code{0}.
-#' @param draws Defaults to \code{20000}.
-#' @param seed Defaults to \code{0}.
+#' @param R0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param si_mean Coerced to numeric by the body, with \code{as.numeric}.
+#' @param si_sd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delay_mean Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delay_sd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param trace_prob Coerced to numeric by the body, with \code{as.numeric}.
+#' @param subclinical Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param draws Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{20000}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{R_eff}, \code{R0}, \code{fraction_before_isolation}, \code{controlled_in_expectation}, \code{note}.
 #' @export
 effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,

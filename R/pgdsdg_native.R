@@ -69,7 +69,7 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{pmin}.
@@ -108,7 +108,7 @@ project_box <- function(x, lower = NULL, upper = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{pmax}.
 #' @export
 project_nonneg <- function(x) {
@@ -121,9 +121,9 @@ project_nonneg <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param radius Defaults to \code{1}.
-#' @param centre Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param radius Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param centre Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 project_ball <- function(x, radius = 1.0, centre = NULL) {
@@ -151,8 +151,8 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param total Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param total Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{pmax}.
 #' @export
 .pgdsdg_project_simplex <- function(x, total = 1.0) {
@@ -188,9 +188,9 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #'
 #' @param f See Usage.
 #' @param grad See Usage.
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param project See Usage.
-#' @param step Defaults to \code{NULL}.
+#' @param step Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rule One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.
 #' @param tol Defaults to \code{1e-10}.

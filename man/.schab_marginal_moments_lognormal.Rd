@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{\%*\%}.}
-\item{beta}{See Usage.}
-\item{sigma2_S}{See Usage.}
-\item{sigma2}{Defaults to \code{1}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sigma2_S}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sigma2}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{rho}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

@@ -8,10 +8,10 @@
 hyperparameter_design(mode, curvature, step = 1, dim = NULL)
 }
 \arguments{
-\item{mode}{See Usage.}
-\item{curvature}{See Usage.}
-\item{step}{Defaults to \code{1}.}
-\item{dim}{Defaults to \code{NULL}.}
+\item{mode}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{curvature}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{step}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{dim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the inlasm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the geron_w4d_native implementation. No other function in the package calls it. See the file header for the source the module follows.

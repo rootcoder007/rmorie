@@ -8,7 +8,7 @@
 .tmlcic_sig(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 A step of the tmlcic_native implementation. Called by \code{.tmlcic_fluct}, \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm} and 1 others in the module. See the file header for the source the module follows.

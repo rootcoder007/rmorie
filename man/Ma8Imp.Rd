@@ -8,7 +8,7 @@
 Ma8Imp(n = NULL)
 }
 \arguments{
-\item{n}{Defaults to \code{NULL}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 attenuation is poor -- the book notes no more than about -20 dB at most frequencies, so a filtered noisy ECG is still visibly noisy.

@@ -8,9 +8,9 @@
 smoothed_parameter(X, x0, h, kernel = "epanechnikov")
 }
 \arguments{
-\item{X}{See Usage.}
-\item{x0}{See Usage.}
-\item{h}{See Usage.}
+\item{X}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kernel}{Defaults to \code{"epanechnikov"}.}
 }
 \description{

@@ -174,7 +174,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{stats::sd}.
 #' @export
 .t1_sd <- function(x) stats::sd(as.numeric(x))
@@ -186,7 +186,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seed Defaults to \code{1}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .t1_lcg <- function(seed = 1) {

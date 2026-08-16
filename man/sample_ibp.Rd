@@ -8,8 +8,8 @@
 sample_ibp(n, alpha, seed = 0L)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{alpha}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
 }
 \description{

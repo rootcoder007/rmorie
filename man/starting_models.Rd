@@ -10,7 +10,7 @@ starting_models(d, D, s)
 \arguments{
 \item{d}{See Usage.}
 \item{D}{See Usage.}
-\item{s}{See Usage.}
+\item{s}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the sarimax_native implementation. Called by \code{auto_order}. See the file header for the source the module follows.

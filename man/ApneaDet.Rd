@@ -8,12 +8,12 @@
 ApneaDet(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4)
 }
 \arguments{
-\item{ecg}{See Usage.}
-\item{spo2}{See Usage.}
-\item{snore}{See Usage.}
+\item{ecg}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{spo2}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{snore}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{epoch_s}{Numeric; combined arithmetically in the body. Defaults to \code{60}.}
-\item{desat_pct}{Defaults to \code{4}.}
+\item{desat_pct}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -93,7 +93,7 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fps See Usage.
+#' @param fps Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{D}, as built in the body.
 #' @export
 distance_matrix <- function(fps) {
@@ -118,7 +118,7 @@ distance_matrix <- function(fps) {
 #' source it follows.
 #'
 #' @param D A matrix; passed to \code{nrow}.
-#' @param seed See Usage.
+#' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{which.max}.
 #' @export
 .tncomp_seed <- function(D, seed) {
@@ -141,7 +141,7 @@ distance_matrix <- function(fps) {
 #' source it follows.
 #'
 #' @param fps See Usage.
-#' @param k See Usage.
+#' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @param objective Compared against \code{"maxmin"}.
 #' @param seed Passed to \code{.tncomp_seed}.
 #' @param D Defaults to \code{NULL}.
@@ -212,7 +212,7 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 #' source it follows.
 #'
 #' @param fps See Usage.
-#' @param subset See Usage.
+#' @param subset Coerced to integer by the body, with \code{as.integer}.
 #' @param D Defaults to \code{NULL}.
 #' @return A list with \code{min_distance}, \code{mean_distance}, \code{max_distance}, \code{n_pairs}.
 #' @export

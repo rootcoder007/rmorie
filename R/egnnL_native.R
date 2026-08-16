@@ -45,8 +45,8 @@
 #'
 #' makes the message invariant.
 #'
-#' @param h_i See Usage.
-#' @param h_j See Usage.
+#' @param h_i Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h_j Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x_i Passed to \code{.sqdist}.
 #' @param x_j Passed to \code{.sqdist}.
 #' @param phi_e See Usage.
@@ -68,7 +68,7 @@ edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
 #' @param X A vector; its length is taken and its elements indexed.
 #' @param M A vector; indexed elementwise.
 #' @param phi_x See Usage.
-#' @param C Defaults to \code{NULL}.
+#' @param C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 coord_update <- function(X, M, phi_x, C = NULL) {
@@ -104,11 +104,11 @@ coord_update <- function(X, M, phi_x, C = NULL) {
 #' @param phi_x See Usage.
 #' @param phi_h See Usage.
 #' @param A Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param C Defaults to \code{NULL}.
+#' @param C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param V Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param mode Compared against \code{"position"}. Defaults to \code{"position"}.
 #' @param phi_v Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{X}, \code{V}, \code{messages}.
 #' @export
 egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
@@ -173,9 +173,9 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param X See Usage.
-#' @param layers See Usage.
+#' @param H Iterated over elementwise, with \code{lapply}.
+#' @param X Iterated over elementwise, with \code{lapply}.
+#' @param layers Coerced to integer by the body, with \code{as.integer}.
 #' @param phi_e See Usage.
 #' @param phi_x See Usage.
 #' @param phi_h See Usage.

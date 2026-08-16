@@ -8,7 +8,7 @@
 .survrsf_rng(seed = 0)
 }
 \arguments{
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 to the Python 64-bit generator is not required -- the forest\\'s randomness only needs to be reproducible.)

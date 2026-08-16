@@ -14,7 +14,7 @@
 \item{Q0}{Passed to \code{.tlroad_eic_ate}.}
 \item{g}{Passed to \code{.tlroad_eic_ate}.}
 \item{psi}{Passed to \code{.tlroad_eic_ate}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the tlroad_native implementation. No other function in the package calls it. See the file header for the source the module follows.

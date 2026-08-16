@@ -8,7 +8,7 @@
 .bsahjorth(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 (5.25-26) Part of the rangayyan_phys implementation; see the file header for the source it follows.

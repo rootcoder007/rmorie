@@ -26,7 +26,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .comet_vec <- function(x) as.numeric(x)
@@ -67,7 +67,7 @@ pooled_features <- function(hyp, src, ref) {
 #' @param src See Usage.
 #' @param ref See Usage.
 #' @param W A matrix; passed to \code{nrow}.
-#' @param b Defaults to \code{NULL}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
 #' @export
 estimator_score <- function(hyp, src, ref, W, b = NULL) {
@@ -111,7 +111,7 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #' @param worse Passed to \code{.comet_dist}.
 #' @param src Passed to \code{.comet_dist}.
 #' @param ref Passed to \code{.comet_dist}.
-#' @param margin Defaults to \code{1}.
+#' @param margin Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{loss}, \code{source_term}, \code{reference_term}, \code{satisfied}, \code{note}.
 #' @export
 triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
@@ -165,7 +165,7 @@ kendall_tau <- function(scores, human) {
 #' @param hyp Passed to \code{.comet_vec}.
 #' @param src Passed to \code{.comet_vec}.
 #' @param W A matrix; passed to \code{nrow}.
-#' @param b Defaults to \code{NULL}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{score}, \code{reference_used}, \code{note}.
 #' @export
 reference_free <- function(hyp, src, W, b = NULL) {

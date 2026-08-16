@@ -159,7 +159,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' @param X Passed to \code{.columns}.
 #' @param order A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.
 #' @param seasonal_order A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.
-#' @param s Defaults to \code{12}.
+#' @param s Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
 #' @param include_constant Optional; may be \code{NULL}. A flag; the body branches on it.
 #' @param method One of \code{"css"}, \code{"ml"}, \code{"uls"}. Defaults to \code{"ml"}.
 #' @return A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2}, \code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals}, \code{innovation_variance}, \code{include_constant}, \code{order}, \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
@@ -260,8 +260,8 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param loglik See Usage.
-#' @param n_par See Usage.
+#' @param loglik Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_par Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 aic <- function(loglik, n_par) {
@@ -275,7 +275,7 @@ aic <- function(loglik, n_par) {
 #' the source it follows.
 #'
 #' @param loglik See Usage.
-#' @param n_par See Usage.
+#' @param n_par Coerced to integer by the body, with \code{as.integer}.
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
@@ -293,7 +293,7 @@ aicc <- function(loglik, n_par, n) {
 #'
 #' @param d See Usage.
 #' @param D See Usage.
-#' @param s See Usage.
+#' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 starting_models <- function(d, D, s) {
@@ -313,7 +313,7 @@ starting_models <- function(d, D, s) {
 #' @param order A vector; indexed elementwise.
 #' @param seasonal_order A vector; indexed elementwise.
 #' @param constant A flag; the body branches on it.
-#' @param s See Usage.
+#' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 neighbours <- function(order, seasonal_order, constant, s) {
@@ -375,7 +375,7 @@ neighbours <- function(order, seasonal_order, constant, s) {
 #' @param D Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param s Passed to \code{.try_fit}. Defaults to \code{1}.
 #' @param method Passed to \code{.try_fit}. Defaults to \code{"css"}.
-#' @param max_steps Defaults to \code{20}.
+#' @param max_steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @return A list with \code{estimate}, \code{aic}, \code{fit}, \code{order}, \code{seasonal_order}, \code{constant}, \code{steps}, \code{n_models_tried}, \code{tried}, \code{s}, \code{search_method}, \code{differencing_note}, \code{method}.
 #' @export
 auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",

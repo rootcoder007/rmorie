@@ -8,11 +8,11 @@
 .morie_irt_link(a_ref, b_ref, a_focal, b_focal, n_quad, theta_range, aggregate_first)
 }
 \arguments{
-\item{a_ref}{See Usage.}
-\item{b_ref}{See Usage.}
-\item{a_focal}{See Usage.}
-\item{b_focal}{See Usage.}
-\item{n_quad}{See Usage.}
+\item{a_ref}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_ref}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{a_focal}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_focal}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_quad}{Coerced to integer by the body, with \code{as.integer}.}
 \item{theta_range}{Numeric; combined arithmetically in the body.}
 \item{aggregate_first}{A flag; the body branches on it.}
 }

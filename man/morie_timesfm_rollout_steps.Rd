@@ -8,8 +8,8 @@
 morie_timesfm_rollout_steps(horizon, output_patch_len)
 }
 \arguments{
-\item{horizon}{See Usage.}
-\item{output_patch_len}{See Usage.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
+\item{output_patch_len}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the timesfm_native implementation. Called by \code{morie_timesfm}, \code{morie_timesfm_horizon_plan}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 morie_surxgb_leaf_weight(G, H, lam = 1)
 }
 \arguments{
-\item{G}{See Usage.}
+\item{G}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{H}{Numeric; combined arithmetically in the body.}
 \item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }

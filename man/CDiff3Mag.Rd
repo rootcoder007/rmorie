@@ -8,8 +8,8 @@
 CDiff3Mag(omega, T = 1)
 }
 \arguments{
-\item{omega}{See Usage.}
-\item{T}{Defaults to \code{1}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 highpass factor, at Nyquist from the moving-average factor -- peaking at w = pi/2.

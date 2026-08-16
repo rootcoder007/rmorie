@@ -8,8 +8,8 @@
 .vdcal_fut_descriptors(elogd, fi, fu, coefficients)
 }
 \arguments{
-\item{elogd}{See Usage.}
-\item{fi}{See Usage.}
+\item{elogd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fi}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fu}{Numeric; combined arithmetically in the body.}
 \item{coefficients}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }

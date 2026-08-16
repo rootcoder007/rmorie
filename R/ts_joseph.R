@@ -30,7 +30,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name Defaults to \code{"x"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
@@ -1143,7 +1143,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param w See Usage.
+#' @param w A matrix; the body checks with \code{is.matrix}.
 #' @param v A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export

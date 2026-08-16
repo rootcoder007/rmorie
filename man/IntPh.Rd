@@ -8,7 +8,7 @@
 IntPh(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A constant phase is NOT a constant delay: the group delay is the derivative, which is zero, so the integrator delays nothing.

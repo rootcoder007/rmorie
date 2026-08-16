@@ -8,7 +8,7 @@
 .morie_jo_vec(x, name = "x")
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{name}{Defaults to \code{"x"}.}
 }
 \description{

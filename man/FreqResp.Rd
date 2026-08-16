@@ -8,10 +8,10 @@
 FreqResp(b, a = NULL, fs = 1000, n_freqs = 512)
 }
 \arguments{
-\item{b}{See Usage.}
-\item{a}{Defaults to \code{NULL}.}
-\item{fs}{Defaults to \code{1000}.}
-\item{n_freqs}{Defaults to \code{512}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{a}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.}
+\item{n_freqs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512}.}
 }
 \description{
 one-sided response, since for real coefficients the other half is the conjugate mirror.  `a` follows the eq (3.67) convention with a_0 = 1 included, the form BwLp and BwHp return.

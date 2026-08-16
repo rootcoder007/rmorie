@@ -87,7 +87,7 @@
 #' difference from the complex cepstrum of eq (4.64).  It still shows
 #' the echo impulses of eq (4.80), which is what it is used for.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{cepstrum}, \code{log_magnitude}, \code{n}, \code{zero_bins}, \code{invertible}, \code{method}.
 #' @export
 Cepstrum <- function(x) {
@@ -116,7 +116,7 @@ Cepstrum <- function(x) {
 #' the linear term (the z^r delay of eq 4.68) is r =
 #' round(phase(pi)/pi).
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{cepstrum}, \code{log_magnitude}, \code{phase}, \code{detrended_phase}, \code{linear_phase_removed}, \code{delay_removed}, \code{n}, \code{method}.
 #' @export
 CCepstrum <- function(x) {
@@ -179,8 +179,8 @@ CCepX <- function(x) {
 #'
 #' system addresses.
 #'
-#' @param x See Usage.
-#' @param p See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{x}, \code{p}, \code{n}, \code{separable_by_log}, \code{method}.
 #' @export
 MultModel <- function(x, p) {
@@ -202,8 +202,8 @@ MultModel <- function(x, p) {
 #' book states that side condition, so a zero is rejected rather than
 #' giving -Inf; a negative factor needs the complex-log route.
 #'
-#' @param x See Usage.
-#' @param p See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{log_y}, \code{log_x}, \code{log_p}, \code{sum}, \code{max_difference}, \code{additive}, \code{method}.
 #' @export
 LogSep <- function(x, p) {
@@ -234,8 +234,8 @@ LogSep <- function(x, p) {
 #'
 #' addresses.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{method}.
 #' @export
 ConvModel <- function(x, h) {
@@ -258,8 +258,8 @@ ConvModel <- function(x, h) {
 #' because the cepstrum is of infinite duration (eq 4.73) and the DFT
 #' truncates it; the size of the residual is the useful number.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{truncation_note}, \code{method}.
 #' @export
 CCepSum <- function(x, h) {
@@ -298,13 +298,13 @@ CCepSum <- function(x, h) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gain See Usage.
-#' @param r See Usage.
-#' @param zeros_in See Usage.
-#' @param zeros_out See Usage.
-#' @param poles_in See Usage.
-#' @param poles_out See Usage.
-#' @param z Defaults to \code{NULL}.
+#' @param gain Coerced to complex by the body, with \code{as.complex}.
+#' @param r Coerced to integer by the body, with \code{as.integer}.
+#' @param zeros_in Coerced to complex by the body, with \code{as.complex}.
+#' @param zeros_out Coerced to complex by the body, with \code{as.complex}.
+#' @param poles_in Coerced to complex by the body, with \code{as.complex}.
+#' @param poles_out Coerced to complex by the body, with \code{as.complex}.
+#' @param z Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
@@ -366,12 +366,12 @@ RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gain See Usage.
-#' @param zeros_in See Usage.
-#' @param zeros_out See Usage.
-#' @param poles_in See Usage.
-#' @param poles_out See Usage.
-#' @param nmax Defaults to \code{32}.
+#' @param gain Coerced to complex by the body, with \code{as.complex}.
+#' @param zeros_in Coerced to complex by the body, with \code{as.complex}.
+#' @param zeros_out Coerced to complex by the body, with \code{as.complex}.
+#' @param poles_in Coerced to complex by the body, with \code{as.complex}.
+#' @param poles_out Coerced to complex by the body, with \code{as.complex}.
+#' @param nmax Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.
 #' @return A list with \code{cepstrum}, \code{quefrency}, \code{c0}, \code{positive}, \code{negative}, \code{causal}, \code{anticausal}, \code{infinite_duration}, \code{nmax}, \code{method}.
 #' @export
 CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
@@ -413,12 +413,12 @@ CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param zeros_in See Usage.
-#' @param zeros_out See Usage.
-#' @param poles_in See Usage.
-#' @param poles_out See Usage.
-#' @param nmax Defaults to \code{32}.
-#' @param constant Defaults to \code{NULL}.
+#' @param zeros_in Coerced to complex by the body, with \code{as.complex}.
+#' @param zeros_out Coerced to complex by the body, with \code{as.complex}.
+#' @param poles_in Coerced to complex by the body, with \code{as.complex}.
+#' @param poles_out Coerced to complex by the body, with \code{as.complex}.
+#' @param nmax Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.
+#' @param constant Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{alpha}, \code{K}, \code{bound}, \code{quefrency}, \code{decays_at_least_as_one_over_n}, \code{near_unit_circle}, \code{method}.
 #' @export
 CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
@@ -451,10 +451,10 @@ CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
 #' amplitudes (-1)^(k+1) a^k / k.  The expansion needs |a| < 1, which
 #' the book states and which is enforced.
 #'
-#' @param a See Usage.
-#' @param n0 See Usage.
-#' @param terms Defaults to \code{10}.
-#' @param omega Defaults to \code{NULL}.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n0 Coerced to integer by the body, with \code{as.integer}.
+#' @param terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
@@ -504,7 +504,7 @@ EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
 #' only when the cross-term is negligible; WITHOUT it, no cross-term
 #' arises and eq (4.82) is exact.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param square A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{cepstrum}, \code{unsquared}, \code{log_power}, \code{n}, \code{squared}, \code{zero_bins}, \code{retains_phase}, \code{additivity_exact}, \code{method}.
 #' @export
@@ -536,8 +536,8 @@ PCepstrum <- function(x, square = TRUE) {
 #' that reason; TRUE reproduces the book\'s definition and shows how
 #' large the neglected cross-term is on the caller\'s own data.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param square A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{squared}, \code{exact}, \code{method}.
 #' @export
@@ -574,7 +574,7 @@ PCepSum <- function(x, h, square = FALSE) {
 #' is annihilated by the folding, which is exactly why the power
 #' cepstrum loses the phase.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{from_complex}, \code{direct}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{phase_lost}, \code{n}, \code{method}.
 #' @export
 PCepRel <- function(x) {
@@ -608,9 +608,9 @@ PCepRel <- function(x) {
 #' mixed-phase signal is two-sided (eq 4.72) and keeping only the causal
 #' half would discard the maximum-phase component.
 #'
-#' @param cepstrum_values See Usage.
-#' @param low Defaults to \code{NULL}.
-#' @param high Defaults to \code{NULL}.
+#' @param cepstrum_values Coerced to numeric by the body, with \code{as.numeric}.
+#' @param low Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param high Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param keep One of \code{"band"}, \code{"high"}, \code{"low"}. Defaults to \code{"low"}.
 #' @return A list with \code{liftered}, \code{n}, \code{low}, \code{high}, \code{keep}, \code{symmetric}, \code{n_kept}, \code{energy_kept}, \code{method}.
 #' @export
@@ -653,8 +653,8 @@ Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
 #' crosses zero needs the complex-log route of HomDeconv.  Rejected
 #' rather than clipped, since clipping changes the factorization.
 #'
-#' @param y See Usage.
-#' @param cutoff See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Coerced to integer by the body, with \code{as.integer}.
 #' @param keep One of \code{"high"}, \code{"low"}. Defaults to \code{"low"}.
 #' @return A list with \code{y}, \code{log_domain}, \code{log_input}, \code{cutoff}, \code{keep}, \code{n}, \code{stages}, \code{method}.
 #' @export
@@ -693,8 +693,8 @@ HomoFilt <- function(y, cutoff, keep = "low") {
 #' IDFT.  Low quefrency estimates the slowly varying component (the
 #' vocal tract, the basic wavelet); high quefrency the excitation.
 #'
-#' @param y See Usage.
-#' @param cutoff See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Coerced to integer by the body, with \code{as.integer}.
 #' @param keep Defaults to \code{"low"}.
 #' @return A list with \code{y}, \code{cepstrum}, \code{liftered}, \code{cutoff}, \code{keep}, \code{n}, \code{linear_phase_removed}, \code{imaginary_energy}, \code{stages}, \code{method}.
 #' @export
@@ -732,8 +732,8 @@ HomDeconv <- function(y, cutoff, keep = "low") {
 #' of the components -- reconstructing linearly leaves a wrap-around
 #' error that looks like a failure of the separation.
 #'
-#' @param y See Usage.
-#' @param cutoff See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{low_time}, \code{high_time}, \code{cutoff}, \code{n}, \code{reconstruction}, \code{reconstruction_error}, \code{relative_error}, \code{separation_premise}, \code{method}.
 #' @export
 HomPred <- function(y, cutoff) {
@@ -775,10 +775,10 @@ HomPred <- function(y, cutoff) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param fs See Usage.
-#' @param pitch_period Defaults to \code{NULL}.
-#' @param cutoff Defaults to \code{NULL}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param pitch_period Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param pitch_range A vector; indexed elementwise. Defaults to \code{c(0.002, 0.02)}.
 #' @return A list with \code{response}, \code{cepstrum}, \code{cutoff}, \code{pitch_period}, \code{pitch_hz}, \code{peak_quefrency}, \code{fs}, \code{n}, \code{method}.
 #' @export
@@ -833,7 +833,7 @@ VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
 #' leaving the magnitude spectrum untouched -- which is what
 #' "correspondent" means, and is the check returned.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{cepstrum}, \code{n}, \code{magnitude_error}, \code{magnitude_preserved}, \code{energy_front_loaded}, \code{method}.
 #' @export
 MinPhase <- function(x) {
@@ -881,12 +881,12 @@ MinPhase <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
-#' @param n_filters Defaults to \code{26}.
-#' @param n_coeffs Defaults to \code{13}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_filters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{26}.
+#' @param n_coeffs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{13}.
 #' @param fmin Defaults to \code{0}.
-#' @param fmax Defaults to \code{NULL}.
+#' @param fmax Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mfcc}, \code{filterbank_energies}, \code{log_energies}, \code{edges}, \code{n_filters}, \code{n_coeffs}, \code{fs}, \code{empty_filters}, \code{c0_is_energy}, \code{method}.
 #' @export
 Mfcc <- function(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0,

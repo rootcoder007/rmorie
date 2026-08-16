@@ -66,11 +66,11 @@
 #' @param log_lik See Usage.
 #' @param log_lik_d1 See Usage.
 #' @param log_lik_d2 See Usage.
-#' @param prior_mean See Usage.
-#' @param prior_precision See Usage.
-#' @param x0 Defaults to \code{0}.
-#' @param iters Defaults to \code{60}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param prior_mean Coerced to numeric by the body, with \code{as.numeric}.
+#' @param prior_precision Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{mode}, \code{precision}, \code{sd}, \code{iterations}, \code{log_norm}, \code{note}.
 #' @export
 gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
@@ -112,8 +112,8 @@ gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param third_derivative See Usage.
-#' @param precision See Usage.
+#' @param third_derivative Coerced to numeric by the body, with \code{as.numeric}.
+#' @param precision Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{skewness}, \code{gaussian_adequate}, \code{note}.
 #' @export
 skewness_correction <- function(third_derivative, precision) {
@@ -136,7 +136,7 @@ skewness_correction <- function(third_derivative, precision) {
 #' source it follows.
 #'
 #' @param log_joint See Usage.
-#' @param x_grid See Usage.
+#' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @param theta See Usage.
 #' @return A list with \code{x}, \code{density}, \code{mean}, \code{sd}, \code{log_scale}.
 #' @export
@@ -182,10 +182,10 @@ laplace_marginal <- function(log_joint, x_grid, theta) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mode See Usage.
-#' @param curvature See Usage.
-#' @param step Defaults to \code{1}.
-#' @param dim Defaults to \code{NULL}.
+#' @param mode Coerced to numeric by the body, with \code{as.numeric}.
+#' @param curvature Coerced to numeric by the body, with \code{as.numeric}.
+#' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{points}, \code{n_points}, \code{dim}, \code{cost_scaling}, \code{note}.
 #' @export
 hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
@@ -225,9 +225,9 @@ hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param conditional_marginals See Usage.
-#' @param log_weights See Usage.
-#' @param x_grid See Usage.
+#' @param conditional_marginals Iterated over elementwise, with \code{lapply}.
+#' @param log_weights Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{mean}, \code{sd}, \code{density}, \code{x}, \code{theta_weights}, \code{n_theta}, \code{method}, \code{note}.
 #' @export
 integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {

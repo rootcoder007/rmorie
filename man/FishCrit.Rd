@@ -8,8 +8,8 @@
 FishCrit(x1, x2)
 }
 \arguments{
-\item{x1}{See Usage.}
-\item{x2}{See Usage.}
+\item{x1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the same measure: that divides |m1 - m2| by (s1 + s2).  They rank features identically only when the dispersions are equal.

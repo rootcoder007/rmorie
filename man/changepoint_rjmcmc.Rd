@@ -8,7 +8,7 @@
 changepoint_rjmcmc(y = numeric(0), L = 1, n_iter = 40000L, burn_in = 4000L, lam = 3, k_max = 30L, alpha = 1, beta = 200, seed = 0L, cap = 0.9, use_likelihood = TRUE, k_init = 0L, thin = 1L, keep_chain = FALSE)
 }
 \arguments{
-\item{y}{Defaults to \code{numeric(0)}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.}
 \item{L}{Numeric; passed to \code{log}. Defaults to \code{1}.}
 \item{n_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40000L}.}
 \item{burn_in}{Numeric; combined arithmetically in the body. Defaults to \code{4000L}.}

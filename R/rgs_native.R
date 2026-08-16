@@ -37,7 +37,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param Y See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param basis Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals}, \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve}, \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
 #' @export

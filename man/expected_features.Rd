@@ -8,8 +8,8 @@
 expected_features(n, alpha)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{alpha}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it. See the file header for the source the module follows.

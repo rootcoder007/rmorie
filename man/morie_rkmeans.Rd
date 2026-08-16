@@ -12,8 +12,8 @@ morie_rkmeans(X, k = 2, alpha = 0.1, penalty = "square", n_start = 20, max_iter 
 \item{k}{A count; the body uses it as \code{integer(...)}. Defaults to \code{2}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{penalty}{Compared against \code{"huber"}. Defaults to \code{"square"}.}
-\item{n_start}{Defaults to \code{20}.}
-\item{max_iter}{Defaults to \code{100}.}
+\item{n_start}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{huber_c}{Passed to \code{.rkmeans_concentrate}. Defaults to \code{1.345}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{centers}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}

@@ -8,9 +8,9 @@
 .svdpp_implicit_term(rated_items, y, exponent = -0.5)
 }
 \arguments{
-\item{rated_items}{See Usage.}
+\item{rated_items}{Coerced to list by the body, with \code{as.list}.}
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{exponent}{Defaults to \code{-0.5}.}
+\item{exponent}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-0.5}.}
 }
 \description{
 A step of the svdpp_native implementation. Called by \code{.svdpp_predict}. See the file header for the source the module follows.

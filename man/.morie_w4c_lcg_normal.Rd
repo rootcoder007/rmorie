@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{numeric(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).

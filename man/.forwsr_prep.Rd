@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the forwsr_native implementation. Called by \code{morie_forwsr}, \code{morie_forwsr_forward_search}, \code{morie_forwsr_lms_start} and 1 others in the module. See the file header for the source the module follows.

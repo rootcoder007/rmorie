@@ -69,9 +69,9 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param row See Usage.
+#' @param row Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W A matrix; passed to \code{as.matrix}.
-#' @param b Defaults to \code{NULL}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .proj <- function(row, W, b = NULL) {
@@ -216,7 +216,7 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #' @param blocks A vector; its length is taken.
 #' @param n_heads See Usage.
 #' @param pad_mask Defaults to \code{NULL}.
-#' @param pre_norm Defaults to \code{FALSE}.
+#' @param pre_norm Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{output}, \code{attention}, \code{pooled}, \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm}, \code{bidirectional}, \code{method}.
 #' @export
 bert_encoder <- function(X, blocks, n_heads, pad_mask = NULL,

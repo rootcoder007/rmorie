@@ -8,7 +8,7 @@
 sdpwts_lmi(x, F0, Fs)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{F0}{A matrix; passed to \code{as.matrix}.}
 \item{Fs}{A vector; its length is taken and its elements indexed.}
 }

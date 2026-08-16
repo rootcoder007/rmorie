@@ -8,7 +8,7 @@
 OrthFilt(order = 4)
 }
 \arguments{
-\item{order}{Defaults to \code{4}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

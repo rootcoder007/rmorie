@@ -10,11 +10,11 @@ morie_dynamical_fit(u, s, alpha0 = NULL, beta0 = 1, gamma0 = 0.5, t_switch0 = NU
 \arguments{
 \item{u}{A vector; its length is taken and its elements indexed.}
 \item{s}{A vector; its length is taken and its elements indexed.}
-\item{alpha0}{Defaults to \code{NULL}.}
+\item{alpha0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{beta0}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{gamma0}{Defaults to \code{0.5}.}
-\item{t_switch0}{Defaults to \code{NULL}.}
-\item{n_iter}{Defaults to \code{25}.}
+\item{gamma0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
+\item{t_switch0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.}
 \item{grid}{Passed to \code{.scvelo_residual}. Defaults to \code{120}.}
 }
 \description{

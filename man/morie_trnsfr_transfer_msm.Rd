@@ -11,8 +11,8 @@ morie_trnsfr_transfer_msm(Y, A, H, cohort, target = 0, e = NULL, trim = 0.001, r
 \item{Y}{Passed to \code{.s03vec}.}
 \item{A}{Passed to \code{.s03vec}.}
 \item{H}{Passed to \code{.s03mat}.}
-\item{cohort}{See Usage.}
-\item{target}{Defaults to \code{0}.}
+\item{cohort}{Coerced to character by the body, with \code{as.character}.}
+\item{target}{Coerced to character by the body, with \code{as.character}. Defaults to \code{0}.}
 \item{e}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{trim}{Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{0.001}.}
 \item{ridge}{Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{1e-06}.}

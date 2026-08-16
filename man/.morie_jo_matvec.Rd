@@ -8,7 +8,7 @@
 .morie_jo_matvec(w, v)
 }
 \arguments{
-\item{w}{See Usage.}
+\item{w}{A matrix; the body checks with \code{is.matrix}.}
 \item{v}{A matrix; passed to \code{\%*\%}.}
 }
 \description{

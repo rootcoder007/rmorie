@@ -300,7 +300,7 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #' source it follows.
 #'
 #' @param beta A vector; indexed elementwise.
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .sdcfst_logit_predict <- function(beta, x) {

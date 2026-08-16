@@ -11,7 +11,7 @@ decode(z, Wp, bp, items = NULL, activation = "sigmoid")
 \item{z}{Numeric; combined arithmetically in the body.}
 \item{Wp}{A vector; indexed elementwise.}
 \item{bp}{A vector; its length is taken and its elements indexed.}
-\item{items}{Defaults to \code{NULL}.}
+\item{items}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{activation}{Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.}
 }
 \description{

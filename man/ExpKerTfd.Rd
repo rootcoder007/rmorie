@@ -12,7 +12,7 @@ ExpKerTfd(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL)
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{nfreq}{Defaults to \code{NULL}.}
-\item{maxlag}{Defaults to \code{NULL}.}
+\item{maxlag}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

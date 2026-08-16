@@ -12,7 +12,7 @@
 \item{y}{A vector; indexed elementwise.}
 \item{n_bins}{A count; the body uses it as \code{seq_len(...)}.}
 \item{l2}{Numeric; combined arithmetically in the body.}
-\item{iters}{See Usage.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lr}{Numeric; combined arithmetically in the body.}
 }
 \description{

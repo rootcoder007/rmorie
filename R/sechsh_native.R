@@ -308,7 +308,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bs See Usage.
+#' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
 .sech_hexlify <- function(bs) {

@@ -8,7 +8,7 @@
 Qgamma(p, shape, rate = 1)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Iterated over elementwise, with \code{vapply}.}
 \item{shape}{See Usage.}
 \item{rate}{Defaults to \code{1}.}
 }

@@ -8,8 +8,8 @@
 morie_word_hits(query, subject, w, mode = "exact", threshold = NULL, match = 5, mismatch = -4, matrix = NULL, alphabet = "ACGT")
 }
 \arguments{
-\item{query}{See Usage.}
-\item{subject}{See Usage.}
+\item{query}{Coerced to character by the body, with \code{as.character}.}
+\item{subject}{Coerced to character by the body, with \code{as.character}.}
 \item{w}{A count; the body uses it as \code{seq_len(...)}.}
 \item{mode}{One of \code{"exact"}, \code{"neighborhood"}. Defaults to \code{"exact"}.}
 \item{threshold}{Defaults to \code{NULL}.}

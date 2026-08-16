@@ -224,7 +224,7 @@ morie_alfqud_text <- function(program) {
 #' @param inputs Passed to \code{morie_alfqud_correctness}.
 #' @param targets Passed to \code{morie_alfqud_correctness}.
 #' @param n_reg Passed to \code{morie_alfqud_correctness}.
-#' @param lw See Usage.
+#' @param lw Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rf See Usage.
 #' @return A vector, from \code{c}.
 #' @export
@@ -245,7 +245,7 @@ morie_alfqud_text <- function(program) {
 #' @param targets Passed to \code{.alfqud_score}.
 #' @param acts See Usage.
 #' @param n_reg Passed to \code{.alfqud_score}.
-#' @param max_len See Usage.
+#' @param max_len Coerced to integer by the body, with \code{as.integer}.
 #' @param lw Passed to \code{.alfqud_score}.
 #' @param rf Passed to \code{.alfqud_score}.
 #' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
@@ -280,10 +280,10 @@ morie_alfqud_text <- function(program) {
 #' @param targets Passed to \code{.alfqud_score}.
 #' @param acts A vector; its length is taken and its elements indexed.
 #' @param n_reg Passed to \code{.alfqud_score}.
-#' @param max_len See Usage.
+#' @param max_len Coerced to integer by the body, with \code{as.integer}.
 #' @param lw Passed to \code{.alfqud_score}.
 #' @param rf Passed to \code{.alfqud_score}.
-#' @param n_sim See Usage.
+#' @param n_sim Coerced to integer by the body, with \code{as.integer}.
 #' @param c_puct Numeric; combined arithmetically in the body.
 #' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
 #' @export

@@ -8,8 +8,8 @@
 KatzFd(x, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 length, d the greatest distance from the first point, n = L/a. Rangayyan (2024) Section 5.13.2 covers the ruler, box-counting and Higuchi methods instead, so this is cited to Katz.  It mixes the amplitude and time axes, so rescaling the signal changes the answer.

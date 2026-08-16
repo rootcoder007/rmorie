@@ -8,7 +8,7 @@
 DftTw(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the structure the FFT exploits via eqs (3.88)-(3.89).  Checked against Dft() rather than assumed equal.

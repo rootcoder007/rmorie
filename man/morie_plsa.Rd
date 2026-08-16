@@ -10,7 +10,7 @@ morie_plsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0)
 \arguments{
 \item{n_dw}{Passed to \code{.plsa_check}.}
 \item{K}{A count; the body uses it as \code{seq_len(...)}.}
-\item{iters}{Defaults to \code{100}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-08}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }

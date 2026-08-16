@@ -11,7 +11,7 @@ morie_survrsf_grow_tree(X, times, events, mtry = NULL, min_deaths = 3, rule = "l
 \item{X}{A matrix; indexed by row and column.}
 \item{times}{A vector; its length is taken and its elements indexed.}
 \item{events}{A vector; indexed elementwise.}
-\item{mtry}{Defaults to \code{NULL}.}
+\item{mtry}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{min_deaths}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
 \item{rule}{Passed to \code{.survrsf_check_rule}. Defaults to \code{"logrank"}.}
 \item{seed}{Passed to \code{.survrsf_rng}. Defaults to \code{0}.}

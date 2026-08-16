@@ -9,7 +9,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P See Usage.
+#' @param P Iterated over elementwise, with \code{lapply}.
 #' @param R A vector; its length is taken and its elements indexed.
 #' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 #' @export
@@ -53,10 +53,10 @@
 #' @param P Passed to \code{.mdppol_args}.
 #' @param R A matrix; indexed by row and column.
 #' @param gamma Numeric; combined arithmetically in the body.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @param max_eval A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1e+05}.
 #' @param max_improve A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
-#' @param pi0 Defaults to \code{NULL}.
+#' @param pi0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve}, \code{n_eval}, \code{policy_stable}, \code{method}.
 #' @export
 morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,

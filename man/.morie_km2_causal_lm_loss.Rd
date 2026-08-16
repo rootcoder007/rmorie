@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{logits}{A matrix; indexed by row and column.}
-\item{targets}{See Usage.}
+\item{targets}{Coerced to integer by the body, with \code{as.integer}.}
 \item{ignore_index}{Defaults to \code{-100L}.}
 }
 \description{

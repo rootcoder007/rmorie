@@ -8,7 +8,7 @@
 .twoT_as_vec(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_corrected_logits}, \code{morie_twoT_retrieve} and 1 others in the module. See the file header for the source the module follows.

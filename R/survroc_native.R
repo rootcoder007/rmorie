@@ -63,9 +63,9 @@ ROUTES <- c("km", "empirical")
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param times See Usage.
-#' @param events See Usage.
-#' @param marker Defaults to \code{NULL}.
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
+#' @param events Coerced to integer by the body, with \code{as.integer}.
+#' @param marker Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{T}, \code{E}, \code{M}.
 #' @export
 .survroc_clean <- function(times, events, marker = NULL) {
@@ -103,7 +103,7 @@ ROUTES <- c("km", "empirical")
 #'
 #' @param times Passed to \code{.survroc_clean}.
 #' @param events Passed to \code{.survroc_clean}.
-#' @param at Defaults to \code{NULL}.
+#' @param at Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{val}, as built in the body.
 #' @export
 morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
@@ -224,8 +224,8 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' @param times Passed to \code{.survroc_clean}.
 #' @param events Passed to \code{.survroc_clean}.
 #' @param marker Passed to \code{.survroc_clean}.
-#' @param c See Usage.
-#' @param t See Usage.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param route Compared against \code{"empirical"}.
 #' @return The value of \code{.survroc_km_pair}.
 #' @export

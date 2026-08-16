@@ -26,7 +26,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Numeric; the body checks with \code{is.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .nrfrad_vec <- function(p) {
@@ -68,7 +68,7 @@
 #' source it follows.
 #'
 #' @param p Passed to \code{.nrfrad_vec}.
-#' @param L Defaults to \code{10}.
+#' @param L Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param include_input A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -95,10 +95,10 @@ positional_encoding <- function(p, L = 10, include_input = TRUE) {
 #'
 #' @param origin Passed to \code{.nrfrad_vec}.
 #' @param direction Passed to \code{.nrfrad_vec}.
-#' @param t_near See Usage.
-#' @param t_far See Usage.
-#' @param n_samples See Usage.
-#' @param seed Defaults to \code{0}.
+#' @param t_near Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t_far Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_samples Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param stratified A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{t}, \code{points}, \code{direction}.
 #' @export
@@ -183,9 +183,9 @@ volume_render <- function(sigma, colour, t) {
 #'
 #' @param bins Passed to \code{.nrfrad_vec}.
 #' @param weights Passed to \code{.nrfrad_vec}.
-#' @param n_samples See Usage.
-#' @param seed Defaults to \code{0}.
-#' @param eps Defaults to \code{1e-05}.
+#' @param n_samples Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param eps Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.
 #' @return A vector, from \code{sort}.
 #' @export
 sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
@@ -220,8 +220,8 @@ sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
 #'
 #' @param model See Usage.
 #' @param point Passed to \code{.nrfrad_vec}.
-#' @param directions See Usage.
-#' @param tol Defaults to \code{1e-09}.
+#' @param directions Iterated over elementwise, with \code{vapply}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{sigmas}, \code{max_deviation}, \code{view_independent}, \code{note}.
 #' @export
 density_is_view_independent <- function(model, point, directions,

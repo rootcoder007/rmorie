@@ -8,13 +8,13 @@
 morie_sxrhrt_sex_specific_h2(y, sex, K, X = NULL, max_cycles = 60L, tol = 1e-09, male_label = 1)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{sex}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sex}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{K}{Passed to \code{.sxrhrt_rows}.}
 \item{X}{Optional; may be \code{NULL}. Passed to \code{.sxrhrt_rows}.}
-\item{max_cycles}{Defaults to \code{60L}.}
+\item{max_cycles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60L}.}
 \item{tol}{Defaults to \code{1e-09}.}
-\item{male_label}{Defaults to \code{1}.}
+\item{male_label}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the sxrhrt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 precision_recall(pred, truth)
 }
 \arguments{
-\item{pred}{See Usage.}
-\item{truth}{See Usage.}
+\item{pred}{Coerced to integer by the body, with \code{as.integer}.}
+\item{truth}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}. See the file header for the source the module follows.

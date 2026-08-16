@@ -8,7 +8,7 @@
 weighted(scores, weights = NULL)
 }
 \arguments{
-\item{scores}{See Usage.}
+\item{scores}{Iterated over elementwise, with \code{lapply}.}
 \item{weights}{Optional; may be \code{NULL}. Passed to \code{.hybRC_vec}.}
 }
 \description{

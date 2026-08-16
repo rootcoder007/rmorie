@@ -10,8 +10,8 @@ VagKnee(vag, fs, weights = NULL, bias = NULL, n_segments = 8)
 \arguments{
 \item{vag}{See Usage.}
 \item{fs}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
-\item{bias}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{bias}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_segments}{Defaults to \code{8}.}
 }
 \description{

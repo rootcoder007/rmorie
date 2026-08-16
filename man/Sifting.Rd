@@ -8,10 +8,10 @@
 Sifting(x, t0, lower, upper)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t0}{See Usage.}
-\item{lower}{See Usage.}
-\item{upper}{See Usage.}
+\item{x}{A function; the body checks with \code{is.function}.}
+\item{t0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lower}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{upper}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 T1 < to < T2, else 0.  Both inequalities are strict, so an impulse sitting on a limit contributes nothing.

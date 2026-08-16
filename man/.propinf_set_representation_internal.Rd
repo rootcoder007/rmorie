@@ -8,7 +8,7 @@
 .propinf_set_representation_internal(net)
 }
 \arguments{
-\item{net}{See Usage.}
+\item{net}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 A step of the propinf_native implementation. Called by \code{morie_propinf_property_inference}. See the file header for the source the module follows.

@@ -10,9 +10,9 @@ sample_pdf(bins, weights, n_samples, seed = 0, eps = 1e-05)
 \arguments{
 \item{bins}{Passed to \code{.nrfrad_vec}.}
 \item{weights}{Passed to \code{.nrfrad_vec}.}
-\item{n_samples}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
-\item{eps}{Defaults to \code{1e-05}.}
+\item{n_samples}{Coerced to integer by the body, with \code{as.integer}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{eps}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.}
 }
 \description{
 A step of the nrfrad_native implementation. No other function in the package calls it. See the file header for the source the module follows.

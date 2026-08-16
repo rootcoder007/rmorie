@@ -8,9 +8,9 @@
 basic_reproduction_numbers(beta, nu, mu)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nu}{A vector; its length is taken.}
-\item{mu}{See Usage.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \code{endemic_equilibrium}. See the file header for the source the module follows.

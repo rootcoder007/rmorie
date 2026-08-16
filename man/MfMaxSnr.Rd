@@ -8,10 +8,10 @@
 MfMaxSnr(x, noise_power, t = NULL, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{noise_power}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{noise_power}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 2E/N0.  It depends on the signal ONLY through its energy -- the same detectability from a short loud transient as from a long quiet one of equal energy.  That is the substantive content of the theorem.

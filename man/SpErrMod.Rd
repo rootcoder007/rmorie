@@ -12,7 +12,7 @@ SpErrMod(x, y, w, n_grid = 201L, refine = 60L)
 \item{y}{Passed to \code{.morie_spx_chkv}.}
 \item{w}{Passed to \code{.morie_spx_chkw}.}
 \item{n_grid}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{201L}.}
-\item{refine}{Defaults to \code{60L}.}
+\item{refine}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60L}.}
 }
 \description{
 spatially lagged model of eq (6.38).  Whitening by A = I - rho W profiles beta and sigma^2 out, so only a ONE-dimensional search in rho remains; the -2 log|A| Jacobian is what makes naive OLS-in-rho wrong.

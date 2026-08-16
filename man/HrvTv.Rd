@@ -9,10 +9,10 @@ HrvTv(rr_intervals, fs_resamp = 4, window_len = 64, noverlap = NULL, standard = 
 }
 \arguments{
 \item{rr_intervals}{Passed to \code{.tf_need}.}
-\item{fs_resamp}{Defaults to \code{4}.}
-\item{window_len}{Defaults to \code{64}.}
+\item{fs_resamp}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.}
+\item{window_len}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.}
 \item{noverlap}{Defaults to \code{NULL}.}
-\item{standard}{Defaults to \code{"taskforce"}.}
+\item{standard}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"taskforce"}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

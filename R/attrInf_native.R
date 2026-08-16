@@ -17,7 +17,7 @@
 #'
 #' it is a dict that carries a "label" key).
 #'
-#' @param node See Usage.
+#' @param node Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A logical value.
 #' @export
 .leaf <- function(node) {
@@ -388,7 +388,7 @@ confusion_error <- function(C, labels = NULL) {
 #' @param candidates A vector; its length is taken.
 #' @param err See Usage.
 #' @param priors A vector; indexed elementwise.
-#' @param sensitive Defaults to \code{0L}.
+#' @param sensitive Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{scores}.
 #' @export
 map_invert <- function(model, y, known, candidates, err, priors,
@@ -425,8 +425,8 @@ map_invert <- function(model, y, known, candidates, err, priors,
 #' @param known See Usage.
 #' @param candidates A vector; its length is taken.
 #' @param priors A vector; indexed elementwise.
-#' @param sensitive Defaults to \code{0L}.
-#' @param unknown Defaults to \code{NULL}.
+#' @param sensitive Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.
+#' @param unknown Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{scores}, \code{n_paths}, \code{N}.
 #' @export
 wbwc_invert <- function(tree, known, candidates, priors,

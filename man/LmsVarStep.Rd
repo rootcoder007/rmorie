@@ -8,10 +8,10 @@
 LmsVarStep(w, e, rvec, mu_n)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{e}{See Usage.}
-\item{rvec}{See Usage.}
-\item{mu_n}{See Usage.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{e}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rvec}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu_n}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.

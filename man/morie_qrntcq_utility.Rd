@@ -8,8 +8,8 @@
 morie_qrntcq_utility(efficacy, days.in.quarantine)
 }
 \arguments{
-\item{efficacy}{See Usage.}
-\item{days.in.quarantine}{See Usage.}
+\item{efficacy}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{days.in.quarantine}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the qrntcq_native implementation. No other function in the package calls it. See the file header for the source the module follows.

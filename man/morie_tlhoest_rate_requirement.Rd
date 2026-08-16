@@ -8,8 +8,8 @@
 morie_tlhoest_rate_requirement(order, n = 1000L)
 }
 \arguments{
-\item{order}{See Usage.}
-\item{n}{Defaults to \code{1000L}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.}
 }
 \description{
 A step of the tlhoest_native implementation. No other function in the package calls it. See the file header for the source the module follows.

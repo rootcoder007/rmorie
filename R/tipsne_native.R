@@ -223,7 +223,7 @@ morie_tipsne_ancova <- function(y, design) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param arm See Usage.
+#' @param arm Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return A matrix, from \code{matrix}.

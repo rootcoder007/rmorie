@@ -10,7 +10,7 @@
 \arguments{
 \item{fit}{Passed to \code{.prnFil_simulate_future_trend}.}
 \item{t_future}{A vector; its length is taken.}
-\item{level}{Defaults to \code{0.8}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.}
 \item{n_sims}{Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{200}.}
 \item{seed}{Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{0}.}
 }

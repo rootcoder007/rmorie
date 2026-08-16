@@ -10,7 +10,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param types See Usage.
+#' @param types Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 bio_labels <- function(types) {
@@ -251,7 +251,7 @@ span_f1 <- function(pred, gold) {
 #' @param types See Usage.
 #' @param decoder One of \code{"greedy"}, \code{"viterbi"}. Defaults to \code{"viterbi"}.
 #' @param transition_scores Defaults to \code{NULL}.
-#' @param gold Defaults to \code{NULL}.
+#' @param gold Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 ner_decode <- function(emissions, types, decoder = "viterbi",

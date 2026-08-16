@@ -8,8 +8,8 @@
 .nhits_nhits_block(window, horizon, kernel = 1L, ratio = 1, degree = 2L, ridge = 1e-08)
 }
 \arguments{
-\item{window}{See Usage.}
-\item{horizon}{See Usage.}
+\item{window}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{kernel}{Passed to \code{.nhits_max_pool}. Defaults to \code{1L}.}
 \item{ratio}{Passed to \code{.nhits_expressiveness_knots}. Defaults to \code{1}.}
 \item{degree}{Numeric; combined arithmetically in the body. Defaults to \code{2L}.}

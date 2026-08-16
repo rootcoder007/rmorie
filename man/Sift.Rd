@@ -9,8 +9,8 @@ Sift(x, max_imfs = 10, tol = 0.05)
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
-\item{max_imfs}{Defaults to \code{10}.}
-\item{tol}{Defaults to \code{0.05}.}
+\item{max_imfs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

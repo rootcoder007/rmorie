@@ -25,7 +25,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .tmldgp_logit <- function(p) {

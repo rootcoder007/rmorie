@@ -8,9 +8,9 @@
 CLogProd(X, H, omega = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{H}{See Usage.}
-\item{omega}{Defaults to \code{NULL}.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
+\item{H}{Coerced to complex by the body, with \code{as.complex}.}
+\item{omega}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 Rangayyan (2024) eq. (4.63), Section 4.8.

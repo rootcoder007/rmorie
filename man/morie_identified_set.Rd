@@ -13,7 +13,7 @@ morie_identified_set(Y, x, beta_grid, gamma_grid, alpha_grid, beta_fixed = NULL,
 \item{beta_grid}{See Usage.}
 \item{gamma_grid}{See Usage.}
 \item{alpha_grid}{Passed to \code{morie_in_identified_set}.}
-\item{beta_fixed}{Defaults to \code{NULL}.}
+\item{beta_fixed}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{link}{Passed to \code{morie_in_identified_set}. Defaults to \code{"logit"}.}
 \item{tol}{Passed to \code{morie_in_identified_set}. Defaults to \code{0.001}.}
 }

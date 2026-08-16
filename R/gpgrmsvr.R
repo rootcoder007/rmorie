@@ -32,7 +32,7 @@
 #' phat = colMeans(X)/2.
 #'
 #' @param M A matrix; passed to \code{as.matrix}.
-#' @param freq Defaults to \code{NULL}.
+#' @param freq Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .s02freq <- function(M, freq = NULL) {

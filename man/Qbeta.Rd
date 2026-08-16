@@ -8,7 +8,7 @@
 Qbeta(p, shape1, shape2)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Iterated over elementwise, with \code{vapply}.}
 \item{shape1}{See Usage.}
 \item{shape2}{See Usage.}
 }

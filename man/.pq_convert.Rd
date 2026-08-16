@@ -8,7 +8,7 @@
 .pq_convert(vals, ptype, converted)
 }
 \arguments{
-\item{vals}{See Usage.}
+\item{vals}{Iterated over elementwise, with \code{vapply}.}
 \item{ptype}{See Usage.}
 \item{converted}{See Usage.}
 }

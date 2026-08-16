@@ -11,7 +11,7 @@
 \item{policy}{See Usage.}
 \item{transitions}{See Usage.}
 \item{rewards}{See Usage.}
-\item{gamma}{See Usage.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the geron_train_native implementation. Called by \code{.morie_gr_policy_evaluation}. See the file header for the source the module follows.

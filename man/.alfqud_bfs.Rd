@@ -12,7 +12,7 @@
 \item{targets}{Passed to \code{.alfqud_score}.}
 \item{acts}{See Usage.}
 \item{n_reg}{Passed to \code{.alfqud_score}.}
-\item{max_len}{See Usage.}
+\item{max_len}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lw}{Passed to \code{.alfqud_score}.}
 \item{rf}{Passed to \code{.alfqud_score}.}
 }

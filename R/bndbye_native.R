@@ -12,8 +12,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param phi_hat See Usage.
-#' @param half_width See Usage.
+#' @param phi_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param half_width Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{phi_hat}.
 #' @export
 morie_identified_set_interval <- function(phi_hat, half_width) {
@@ -30,7 +30,7 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 #' source it follows.
 #'
 #' @param theta_set A list; the body reads \code{$lower}, \code{$upper} from it.
-#' @param n_grid Defaults to \code{401L}.
+#' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{401L}.
 #' @return A list with \code{grid}, \code{density}.
 #' @export
 morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
@@ -49,7 +49,7 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
 #' source it follows.
 #'
 #' @param theta_set Passed to \code{morie_conditional_prior_uniform}.
-#' @param level Defaults to \code{0.95}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param conditional_prior Defaults to \code{NULL}.
 #' @param n_grid Passed to \code{morie_conditional_prior_uniform}. Defaults to \code{401L}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{level}, \code{covered}, \code{n_grid_points}, \code{method}.
@@ -89,8 +89,8 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
 #' source it follows.
 #'
 #' @param theta_set A list; the body reads \code{$lower}, \code{$upper}, \code{$width} from it.
-#' @param se_phi See Usage.
-#' @param level Defaults to \code{0.95}.
+#' @param se_phi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param target One of \code{"parameter"}, \code{"set"}. Defaults to \code{"parameter"}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value}, \code{target}, \code{level}, \code{note}.
 #' @export

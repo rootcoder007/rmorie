@@ -14,11 +14,11 @@ egcl(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL, V = NULL, mode = "position",
 \item{phi_x}{See Usage.}
 \item{phi_h}{See Usage.}
 \item{A}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{C}{Defaults to \code{NULL}.}
+\item{C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{V}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{mode}{Compared against \code{"position"}. Defaults to \code{"position"}.}
 \item{phi_v}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the egnnL_native implementation. Called by \code{run_egnn}. See the file header for the source the module follows.

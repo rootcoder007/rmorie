@@ -23,8 +23,8 @@
 #' are taken in sorted order, matching numpy\'s unique().
 #'
 #' @param y A vector; its length is taken.
-#' @param unit See Usage.
-#' @param time See Usage.
+#' @param unit Coerced to vector by the body, with \code{as.vector}.
+#' @param time Coerced to vector by the body, with \code{as.vector}.
 #' @return A list with \code{Y}, \code{units}, \code{periods}.
 #' @export
 .mor_did_panel <- function(y, unit, time) {

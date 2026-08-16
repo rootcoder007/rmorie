@@ -10,7 +10,7 @@ CovXY(x, y, ddof = 0)
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}
 \item{y}{Passed to \code{.morie_rg_aslist}.}
-\item{ddof}{Defaults to \code{0}.}
+\item{ddof}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 }
 \description{
 A step of the rangayyan_ch3 implementation. No other function in the package calls it. See the file header for the source the module follows.

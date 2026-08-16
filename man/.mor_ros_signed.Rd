@@ -8,8 +8,8 @@
 .mor_ros_signed(pairs, Gamma = 1)
 }
 \arguments{
-\item{pairs}{See Usage.}
-\item{Gamma}{Defaults to \code{1}.}
+\item{pairs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the rosenb_native implementation. Called by \code{morie_rosenb}. See the file header for the source the module follows.

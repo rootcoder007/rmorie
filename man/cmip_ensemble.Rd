@@ -8,8 +8,8 @@
 cmip_ensemble(models, weights)
 }
 \arguments{
-\item{models}{See Usage.}
-\item{weights}{See Usage.}
+\item{models}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 Part of the caCMIP_mixedcase_native implementation; see the file header for the source it follows.

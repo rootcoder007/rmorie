@@ -8,10 +8,10 @@
 ContProj(x, y, t = NULL, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 the discrete inner product SCALED BY dt; dropping the dt turns an integral into a sum and leaves the answer wrong by a factor of the sampling interval.

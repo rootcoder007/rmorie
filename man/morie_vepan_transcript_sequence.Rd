@@ -9,7 +9,7 @@ morie_vepan_transcript_sequence(tr, genome)
 }
 \arguments{
 \item{tr}{Passed to \code{.vepan_transcript}.}
-\item{genome}{See Usage.}
+\item{genome}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 of its bases (returns list(seq, gpos)).

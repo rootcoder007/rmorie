@@ -8,8 +8,8 @@
 LmsOut(w, r)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{r}{See Usage.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 primary input.  Filtering the primary would cancel the signal too.

@@ -27,10 +27,10 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param D See Usage.
-#' @param group See Usage.
-#' @param period See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param D Coerced to numeric by the body, with \code{as.numeric}.
+#' @param group Coerced to vector by the body, with \code{as.vector}.
+#' @param period Coerced to vector by the body, with \code{as.vector}.
 #' @return A list with \code{Y}, \code{D}, \code{g}, \code{t}, \code{n}.
 #' @export
 .causdiddc_panel <- function(Y, D, group, period) {
@@ -93,9 +93,9 @@
 #' fixed effects.  Alternating projections, iterated to convergence --
 #' the within-transformation solver, not the matrix-form Frisch-Waugh.
 #'
-#' @param D See Usage.
-#' @param group See Usage.
-#' @param period See Usage.
+#' @param D Coerced to numeric by the body, with \code{as.numeric}.
+#' @param group Coerced to vector by the body, with \code{as.vector}.
+#' @param period Coerced to vector by the body, with \code{as.vector}.
 #' @param weights Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{weights}, \code{residual}.
 #' @export

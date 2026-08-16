@@ -8,22 +8,22 @@
 BiDomain(n_nodes = 100, dx_cm = 0.02, duration_ms = 60, dt_ms = 0.005, sigma_i = 1, sigma_e = 2, C_m = 1, Sv = 1000, I_ion = NULL, stim_nodes = 5, I_stim = 50, stim_ms = 1, v_rest = -85, v_peak = 20, I_ion_peak = 10, threshold_frac = 0.25)
 }
 \arguments{
-\item{n_nodes}{Defaults to \code{100}.}
-\item{dx_cm}{Defaults to \code{0.02}.}
-\item{duration_ms}{Defaults to \code{60}.}
-\item{dt_ms}{Defaults to \code{0.005}.}
-\item{sigma_i}{Defaults to \code{1}.}
-\item{sigma_e}{Defaults to \code{2}.}
+\item{n_nodes}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
+\item{dx_cm}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
+\item{duration_ms}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{60}.}
+\item{dt_ms}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.005}.}
+\item{sigma_i}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{sigma_e}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
 \item{C_m}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{Sv}{Numeric; combined arithmetically in the body. Defaults to \code{1000}.}
-\item{I_ion}{Defaults to \code{NULL}.}
-\item{stim_nodes}{Defaults to \code{5}.}
+\item{I_ion}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}
+\item{stim_nodes}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{I_stim}{Numeric; combined arithmetically in the body. Defaults to \code{50}.}
-\item{stim_ms}{Defaults to \code{1}.}
+\item{stim_ms}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{v_rest}{A count; the body uses it as \code{rep(...)}. Defaults to \code{-85}.}
 \item{v_peak}{Numeric; combined arithmetically in the body. Defaults to \code{20}.}
-\item{I_ion_peak}{Defaults to \code{10}.}
-\item{threshold_frac}{Defaults to \code{0.25}.}
+\item{I_ion_peak}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
+\item{threshold_frac}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.}
 }
 \description{
 field; Rangayyan (2024) eqs. (7.143)-(7.149), Section 7.8.2.

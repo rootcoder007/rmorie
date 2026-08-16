@@ -8,7 +8,7 @@
 PCepstrum(x, square = TRUE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{square}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

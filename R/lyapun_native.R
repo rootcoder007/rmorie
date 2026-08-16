@@ -34,7 +34,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .lyapun_as_series <- function(y) {

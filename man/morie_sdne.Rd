@@ -12,8 +12,8 @@ morie_sdne(adjacency, reconstruction, embeddings, beta = 5, alpha = 0.1, nu = 0,
 \item{reconstruction}{Passed to \code{.sdne_second_order_loss}.}
 \item{embeddings}{Passed to \code{.sdne_first_order_loss}.}
 \item{beta}{Passed to \code{.sdne_second_order_loss}. Defaults to \code{5}.}
-\item{alpha}{Defaults to \code{0.1}.}
-\item{nu}{Defaults to \code{0}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{nu}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{parameters}{Optional; may be \code{NULL}. Passed to \code{.sdne_mat}.}
 }
 \description{

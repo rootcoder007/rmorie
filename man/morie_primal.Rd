@@ -12,13 +12,13 @@ morie_primal(K, Kt, prox_f_star, prox_g, x0, y0, tau = NULL, sigma = NULL, theta
 \item{Kt}{See Usage.}
 \item{prox_f_star}{See Usage.}
 \item{prox_g}{See Usage.}
-\item{x0}{See Usage.}
-\item{y0}{See Usage.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{tau}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{sigma}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{theta}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{norm_K}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
-\item{max_iter}{Defaults to \code{500}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{

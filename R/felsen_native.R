@@ -27,7 +27,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
+#' @param node Character; the body checks with \code{is.character}.
 #' @param site A vector; indexed elementwise.
 #' @param pi Passed to \code{.felsen_prune}.
 #' @return The value of \code{out}, as built in the body.

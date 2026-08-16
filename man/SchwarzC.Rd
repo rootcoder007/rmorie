@@ -8,9 +8,9 @@
 SchwarzC(A, B, grid)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{B}{See Usage.}
-\item{grid}{See Usage.}
+\item{A}{Coerced to complex by the body, with \code{as.complex}.}
+\item{B}{Coerced to complex by the body, with \code{as.complex}.}
+\item{grid}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A = H and B = X exp(+j2 pi f t0), IS the matched-filter derivation.

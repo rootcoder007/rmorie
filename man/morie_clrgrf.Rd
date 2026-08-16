@@ -8,16 +8,16 @@
 morie_clrgrf(y, X, clusters, at = NULL, n_trees = 200L, min_leaf = 5L, subsample_frac = 0.5, seed = 0L, unit = "cluster", level = 0.95, cluster_sampling = TRUE)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{clusters}{A vector; its length is taken and its elements indexed.}
 \item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{n_trees}{Defaults to \code{200L}.}
-\item{min_leaf}{Defaults to \code{5L}.}
-\item{subsample_frac}{Defaults to \code{0.5}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
+\item{min_leaf}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
+\item{subsample_frac}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{unit}{One of \code{"cluster"}, \code{"row"}. Defaults to \code{"cluster"}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 \item{cluster_sampling}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

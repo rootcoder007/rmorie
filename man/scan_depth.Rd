@@ -8,7 +8,7 @@
 scan_depth(length)
 }
 \arguments{
-\item{length}{See Usage.}
+\item{length}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the ssmpar_native implementation. No other function in the package calls it. See the file header for the source the module follows.

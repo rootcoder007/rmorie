@@ -8,7 +8,7 @@
 .bsaacf(x, maxlag)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{maxlag}{Numeric; passed to \code{min}.}
 }
 \description{

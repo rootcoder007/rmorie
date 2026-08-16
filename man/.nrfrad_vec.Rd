@@ -8,7 +8,7 @@
 .nrfrad_vec(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Numeric; the body checks with \code{is.numeric}.}
 }
 \description{
 A step of the nrfrad_native implementation. Called by \code{density_is_view_independent}, \code{positional_encoding}, \code{ray_points} and 2 others in the module. See the file header for the source the module follows.

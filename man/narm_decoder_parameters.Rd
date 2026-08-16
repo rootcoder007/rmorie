@@ -8,9 +8,9 @@
 narm_decoder_parameters(n_items, hidden, emb_dim)
 }
 \arguments{
-\item{n_items}{See Usage.}
-\item{hidden}{See Usage.}
-\item{emb_dim}{See Usage.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{hidden}{Coerced to integer by the body, with \code{as.integer}.}
+\item{emb_dim}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the narm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

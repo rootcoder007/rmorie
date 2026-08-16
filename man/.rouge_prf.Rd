@@ -8,7 +8,7 @@
 .rouge_prf(match, n_cand, n_ref, beta)
 }
 \arguments{
-\item{match}{See Usage.}
+\item{match}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_cand}{Numeric; combined arithmetically in the body.}
 \item{n_ref}{Numeric; combined arithmetically in the body.}
 \item{beta}{Numeric; combined arithmetically in the body.}

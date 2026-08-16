@@ -8,8 +8,8 @@
 morie_coarsen_interval(times, deltas)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{deltas}{See Usage.}
+\item{times}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{deltas}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 monitoring, Sec. 8.5.

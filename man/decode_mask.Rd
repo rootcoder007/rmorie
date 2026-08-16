@@ -11,9 +11,9 @@ decode_mask(prompt_tokens, image_tokens, grid_shape, n_blocks = 2, upsample_fact
 \item{prompt_tokens}{Passed to \code{.samdec_mat}.}
 \item{image_tokens}{Passed to \code{.samdec_mat}.}
 \item{grid_shape}{A vector; indexed elementwise.}
-\item{n_blocks}{Defaults to \code{2}.}
-\item{upsample_factor}{Defaults to \code{2}.}
-\item{output_index}{Defaults to \code{0}.}
+\item{n_blocks}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
+\item{upsample_factor}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
+\item{output_index}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 }
 \description{
 A step of the samdec_native implementation. Called by \code{morie_samdec}. See the file header for the source the module follows.

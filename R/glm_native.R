@@ -121,9 +121,9 @@
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param p0 A vector; its length is taken.
 #' @param p1 A vector; its length is taken.
-#' @param threshold Defaults to \code{NULL}.
-#' @param family Defaults to \code{"bernoulli"}.
-#' @param sd Defaults to \code{1}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param family Coerced to character by the body, with \code{as.character}. Defaults to \code{"bernoulli"}.
+#' @param sd Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
 morie_glr_test <- function(x, p0, p1, threshold = NULL,

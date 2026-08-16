@@ -8,7 +8,7 @@
 .sigmoid(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mambss_native implementation. Called by \code{gated_rnn_equivalent}. See the file header for the source the module follows.

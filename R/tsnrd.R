@@ -67,7 +67,7 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
 #' @param x A matrix; passed to \code{nrow}.
 #' @param dims A count; the body uses it as \code{matrix(...)}. Defaults to \code{2L}.
 #' @param perplexity Numeric; passed to \code{log}. Defaults to \code{30}.
-#' @param n_iter Defaults to \code{1000L}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @param eta Passed to \code{.morie_tsne_descent_cpp}. Defaults to \code{"auto"}.
 #' @return A list with \code{Y}, \code{kl}.
 #' @export

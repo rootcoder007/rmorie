@@ -8,7 +8,7 @@
 morie_tv_denoise_1d(signal, lam = 1, max_iter = 1000, tol = 1e-12, theta = 1)
 }
 \arguments{
-\item{signal}{See Usage.}
+\item{signal}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{max_iter}{Passed to \code{morie_primal}. Defaults to \code{1000}.}
 \item{tol}{Passed to \code{morie_primal}. Defaults to \code{1e-12}.}

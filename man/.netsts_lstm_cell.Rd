@@ -8,7 +8,7 @@
 .netsts_lstm_cell(x, h, c, W, b, forget_bias = 0)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{A vector; its length is taken.}
 \item{c}{A vector; its length is taken.}
 \item{W}{A matrix; indexed by row and column.}

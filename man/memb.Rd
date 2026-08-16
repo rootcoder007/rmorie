@@ -14,9 +14,9 @@ memb(target_predict, shadow_data, eval_in, eval_out, train_fn = NULL, attack_tra
 \item{eval_out}{A vector; indexed elementwise.}
 \item{train_fn}{Defaults to \code{NULL}.}
 \item{attack_train_fn}{Defaults to \code{NULL}.}
-\item{n_shadow}{Defaults to \code{NULL}.}
+\item{n_shadow}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{sort_features}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{threshold}{Defaults to \code{0.5}.}
+\item{threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
 }
 \description{
 A step of the memb_native implementation. Called by \code{morie_memb}. See the file header for the source the module follows.

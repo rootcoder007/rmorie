@@ -13,7 +13,7 @@
 \item{u_l}{Numeric; combined arithmetically in the body.}
 \item{u_b}{Numeric; combined arithmetically in the body.}
 \item{Xc}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
-\item{max_iter}{Defaults to \code{2000L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.}
 \item{tol}{Defaults to \code{1e-13}.}
 }
 \description{

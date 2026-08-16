@@ -8,10 +8,10 @@
 .plcbsc_synthetic_control(x_treated, x_donors, v = NULL, max_iter = 5000, tol = 1e-12, step = NULL)
 }
 \arguments{
-\item{x_treated}{See Usage.}
-\item{x_donors}{See Usage.}
-\item{v}{Defaults to \code{NULL}.}
-\item{max_iter}{Defaults to \code{5000}.}
+\item{x_treated}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x_donors}{Iterated over elementwise, with \code{lapply}.}
+\item{v}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.}
 \item{step}{Defaults to \code{NULL}.}
 }

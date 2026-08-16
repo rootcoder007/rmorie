@@ -8,8 +8,8 @@
 .sacrb_brevity_penalty(c, r)
 }
 \arguments{
-\item{c}{See Usage.}
-\item{r}{See Usage.}
+\item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}. See the file header for the source the module follows.

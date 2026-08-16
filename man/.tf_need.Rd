@@ -8,9 +8,9 @@
 .tf_need(x, name = "x", minlen = 2L)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{name}{Defaults to \code{"x"}.}
-\item{minlen}{Defaults to \code{2L}.}
+\item{minlen}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{AtomTfd}, \code{BiorDwt}, \code{CDemod} and 28 others in the module. See the file header for the source the module follows.

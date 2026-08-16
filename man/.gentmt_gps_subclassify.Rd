@@ -11,8 +11,8 @@
 \item{y}{Passed to \code{.gentmt_vec}.}
 \item{A}{Passed to \code{.gentmt_vec}.}
 \item{H}{Passed to \code{.gentmt_treatment_density}.}
-\item{n_strata}{Defaults to \code{5}.}
-\item{degree}{Defaults to \code{1}.}
+\item{n_strata}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
+\item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 A step of the gentmt_native implementation. Called by \code{morie_gentmt}. See the file header for the source the module follows.

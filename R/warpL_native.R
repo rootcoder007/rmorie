@@ -62,7 +62,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .warpL_vec <- function(x) {
@@ -77,7 +77,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param scheme Defaults to \code{"reciprocal"}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
@@ -109,7 +109,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rank See Usage.
+#' @param rank Coerced to integer by the body, with \code{as.integer}.
 #' @param alphas A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
@@ -126,8 +126,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_draws See Usage.
-#' @param n_labels See Usage.
+#' @param n_draws Coerced to integer by the body, with \code{as.integer}.
+#' @param n_labels Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{as.integer}.
 #' @export
 .warpL_estimate_rank <- function(n_draws, n_labels) {
@@ -143,12 +143,12 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param score_positive See Usage.
+#' @param score_positive Coerced to numeric by the body, with \code{as.numeric}.
 #' @param negative_scorer See Usage.
-#' @param n_labels See Usage.
+#' @param n_labels Coerced to integer by the body, with \code{as.integer}.
 #' @param rng Passed to \code{.ghc_unif}.
-#' @param margin Defaults to \code{1}.
-#' @param max_draws Defaults to \code{NULL}.
+#' @param margin Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param max_draws Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{violated}, \code{draws}, \code{negative}, \code{estimated_rank}, \code{capped}, \code{note}.
 #' @export
 .warpL_sample_violation <- function(score_positive, negative_scorer, n_labels,
@@ -191,11 +191,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param score_positive See Usage.
-#' @param score_negative See Usage.
-#' @param estimated_rank See Usage.
+#' @param score_positive Coerced to numeric by the body, with \code{as.numeric}.
+#' @param score_negative Coerced to numeric by the body, with \code{as.numeric}.
+#' @param estimated_rank Coerced to integer by the body, with \code{as.integer}.
 #' @param alphas Passed to \code{.warpL_rank_weight}.
-#' @param margin Defaults to \code{1}.
+#' @param margin Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{loss}, \code{hinge}, \code{rank_weight}, \code{estimated_rank}.
 #' @export
 .warpL_warp_loss <- function(score_positive, score_negative, estimated_rank,
@@ -300,7 +300,7 @@ morie_warpL_warp_loss <- function(score_positive, score_negative, estimated_rank
 #' @param embed_user Passed to \code{.warpL_vec}.
 #' @param rng Passed to \code{.warpL_sample_violation}.
 #' @param alphas Passed to \code{.warpL_warp_loss}.
-#' @param lr Defaults to \code{0.05}.
+#' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param margin Passed to \code{.warpL_sample_violation}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{updated}, \code{loss}, \code{user}, \code{draws}, \code{estimated_rank}, \code{rank_weight}, \code{negative}, \code{method}, \code{note}.
 #' @export

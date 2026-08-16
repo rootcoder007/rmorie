@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{A}{A matrix; passed to \code{ncol}.}
-\item{b}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 which differs from qr.solve on rank-deficient designs.

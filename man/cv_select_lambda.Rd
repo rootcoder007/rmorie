@@ -9,10 +9,10 @@ cv_select_lambda(X, y, lambdas, V = 5L, seed = 0L, ...)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lambdas}{See Usage.}
-\item{V}{Defaults to \code{5L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{V}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{...}{Passed through.}
 }
 \description{

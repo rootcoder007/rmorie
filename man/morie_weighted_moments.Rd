@@ -9,7 +9,7 @@ morie_weighted_moments(m, g)
 }
 \arguments{
 \item{m}{A matrix; passed to \code{as.matrix}.}
-\item{g}{See Usage.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic}, \code{morie_gms_critical_value}. See the file header for the source the module follows.

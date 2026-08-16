@@ -115,7 +115,7 @@
 #' the source it follows.
 #'
 #' @param G Passed to \code{.farmlmm_to_mat}.
-#' @param markers Defaults to \code{NULL}.
+#' @param markers Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{K}, \code{markers_used}, \code{n_markers}, \code{all_markers}.
 #' @export
 .kinship_from_markers <- function(G, markers = NULL) {
@@ -145,7 +145,7 @@
 #'
 #' @param G Passed to \code{.farmlmm_to_mat}.
 #' @param K A matrix; passed to \code{\%*\%}.
-#' @param marker See Usage.
+#' @param marker Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{correlation}, \code{marker}, \code{note}.
 #' @export
 .confounding <- function(G, K, marker) {
@@ -169,7 +169,7 @@
 #'
 #' @param y Passed to \code{.to_vec}.
 #' @param G Passed to \code{.farmlmm_to_mat}.
-#' @param covariates Defaults to \code{integer(0)}.
+#' @param covariates Coerced to integer by the body, with \code{as.integer}. Defaults to \code{integer(0)}.
 #' @param K Defaults to \code{NULL}.
 #' @return A list with \code{p}, \code{beta}, \code{covariates}, \code{note}.
 #' @export
@@ -213,7 +213,7 @@
 #'
 #' @param y Passed to \code{.to_vec}.
 #' @param G Passed to \code{.kinship_from_markers}.
-#' @param selected See Usage.
+#' @param selected Coerced to integer by the body, with \code{as.integer}.
 #' @param bins Defaults to \code{NULL}.
 #' @return A list with \code{K}, \code{markers_used}, \code{blup}, \code{note}.
 #' @export
@@ -241,8 +241,8 @@
 #'
 #' @param y Passed to \code{.to_vec}.
 #' @param G Passed to \code{.farmlmm_to_mat}.
-#' @param max_iter Defaults to \code{10L}.
-#' @param threshold Defaults to \code{NULL}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param seed Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations}, \code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method}, \code{note}.
 #' @export

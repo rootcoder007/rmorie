@@ -8,7 +8,7 @@
 translate(seq, to_stop = FALSE)
 }
 \arguments{
-\item{seq}{See Usage.}
+\item{seq}{Coerced to character by the body, with \code{as.character}.}
 \item{to_stop}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

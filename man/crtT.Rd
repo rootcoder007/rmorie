@@ -8,8 +8,8 @@
 crtT(residues, moduli)
 }
 \arguments{
-\item{residues}{See Usage.}
-\item{moduli}{See Usage.}
+\item{residues}{Coerced to integer by the body, with \code{as.integer}.}
+\item{moduli}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the crtT_mixedcase_native implementation. No other function in the package calls it. See the file header for the source the module follows.

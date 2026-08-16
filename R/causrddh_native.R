@@ -21,7 +21,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_ik_median <- function(v) {
@@ -40,7 +40,7 @@
 #' the source it follows.
 #'
 #' @param X Passed to \code{.ghc_pinv}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .mor_ik_ols <- function(X, y) as.numeric(.ghc_pinv(X) %*% as.numeric(y))

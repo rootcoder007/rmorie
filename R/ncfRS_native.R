@@ -80,9 +80,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p_u See Usage.
-#' @param q_i See Usage.
-#' @param h Defaults to \code{NULL}.
+#' @param p_u Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q_i Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param activation Defaults to \code{"sigmoid"}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -113,8 +113,8 @@ morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p_u See Usage.
-#' @param q_i See Usage.
+#' @param p_u Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q_i Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Ws A vector; its length is taken and its elements indexed.
 #' @param bs A vector; indexed elementwise.
 #' @return The value of \code{z}, as built in the body.
@@ -137,13 +137,13 @@ morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p_gmf See Usage.
-#' @param q_gmf See Usage.
+#' @param p_gmf Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q_gmf Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p_mlp Passed to \code{morie_ncfRS_mlp_layers}.
 #' @param q_mlp Passed to \code{morie_ncfRS_mlp_layers}.
 #' @param Ws Passed to \code{morie_ncfRS_mlp_layers}.
 #' @param bs Passed to \code{morie_ncfRS_mlp_layers}.
-#' @param h See Usage.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{score}, \code{gmf_part}, \code{mlp_part}, \code{note}.
 #' @export
 morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
@@ -168,8 +168,8 @@ morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param y_hat See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_ncfRS_log_loss <- function(y, y_hat) {
@@ -185,12 +185,12 @@ morie_ncfRS_log_loss <- function(y, y_hat) {
 #' source it follows.
 #'
 #' @param pos A vector; indexed elementwise.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param k_dim Defaults to \code{8}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param iters Defaults to \code{2000}.
-#' @param n_neg Defaults to \code{4}.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
+#' @param k_dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
+#' @param n_neg Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param learn_h A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{P}, \code{Q}, \code{h}, \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.

@@ -8,10 +8,10 @@
 .svdpp_fit(ratings, n_users, n_items, factors = 4, epochs = 30, lr = 0.007, reg = 0.015, exponent = -0.5, seed = 0, implicit = TRUE)
 }
 \arguments{
-\item{ratings}{See Usage.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{factors}{Defaults to \code{4}.}
+\item{ratings}{Iterated over elementwise, with \code{lapply}.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{factors}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 \item{epochs}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.}
 \item{lr}{Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.007}.}
 \item{reg}{Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.015}.}

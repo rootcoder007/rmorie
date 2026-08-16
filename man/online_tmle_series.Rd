@@ -8,13 +8,13 @@
 online_tmle_series(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{A}{See Usage.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{Z}{A matrix; indexed by row and column.}
 \item{Q_fn}{See Usage.}
 \item{g_fn}{See Usage.}
-\item{target_prob}{See Usage.}
-\item{burn_in}{Defaults to \code{10}.}
+\item{target_prob}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{burn_in}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 }
 \description{
 A step of the tlonts_native implementation. No other function in the package calls it. See the file header for the source the module follows.

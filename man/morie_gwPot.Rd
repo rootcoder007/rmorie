@@ -8,8 +8,8 @@
 morie_gwPot(gas, horizon = 100)
 }
 \arguments{
-\item{gas}{See Usage.}
-\item{horizon}{Defaults to \code{100}.}
+\item{gas}{Coerced to character by the body, with \code{as.character}.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 }
 \description{
 Part of the gwPot_mixedcase_native implementation; see the file header for the source it follows.

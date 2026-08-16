@@ -8,7 +8,7 @@
 morie_vepan_most_severe_consequence(terms)
 }
 \arguments{
-\item{terms}{See Usage.}
+\item{terms}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}. See the file header for the source the module follows.

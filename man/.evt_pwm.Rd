@@ -8,7 +8,7 @@
 .evt_pwm(x, r)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{r}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{

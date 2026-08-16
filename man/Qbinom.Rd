@@ -8,7 +8,7 @@
 Qbinom(p, size, prob)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Iterated over elementwise, with \code{vapply}.}
 \item{size}{See Usage.}
 \item{prob}{See Usage.}
 }

@@ -321,7 +321,7 @@ cv_risk <- function(y, Z, loss = "l2") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param library Defaults to \code{NULL}.
 #' @param n_folds Passed to \code{.flxipt_folds}. Defaults to \code{10}.
@@ -419,12 +419,12 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H See Usage.
 #' @param library Defaults to \code{NULL}.
 #' @param n_folds Defaults to \code{10}.
 #' @param meta Defaults to \code{"nnls"}.
-#' @param trim Defaults to \code{0.01}.
+#' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param ridge Defaults to \code{1e-08}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{propensity}, \code{weights}, \code{estimate}, \code{sl_weights}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n}, \code{trim}, \code{stabilized}, \code{library}, \code{method}.
@@ -474,15 +474,15 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H See Usage.
 #' @param library Defaults to \code{NULL}.
 #' @param n_folds Defaults to \code{10}.
 #' @param meta Defaults to \code{"nnls"}.
 #' @param trim Defaults to \code{0.01}.
 #' @param ridge Defaults to \code{1e-08}.
-#' @param level Defaults to \code{0.95}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated}, \code{mean_control}, \code{propensity}, \code{weights}, \code{sl_weights}, \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{n}, \code{level}, \code{method}.
 #' @export
 iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,

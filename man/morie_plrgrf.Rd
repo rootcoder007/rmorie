@@ -8,8 +8,8 @@
 morie_plrgrf(y, W, X, at = NULL, n_trees = 200, n_folds = 5, min_leaf = 5, seed = 0, center = TRUE, level = 0.95)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{W}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{n_trees}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}

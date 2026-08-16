@@ -74,8 +74,8 @@
 #' source it follows.
 #'
 #' @param cases See Usage.
-#' @param risk_periods See Usage.
-#' @param age_breaks Defaults to \code{numeric(0)}.
+#' @param risk_periods Iterated over elementwise, with \code{lapply}.
+#' @param age_breaks Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
 #' @return A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age}, \code{n_people}, \code{n_rows}.
 #' @export
 morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
@@ -127,7 +127,7 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
 #' @param cases Passed to \code{morie_smatch_poisson_design}.
 #' @param risk_periods Passed to \code{morie_smatch_poisson_design}.
 #' @param age_breaks Passed to \code{morie_smatch_poisson_design}. Defaults to \code{numeric(0)}.
-#' @param iters Defaults to \code{200}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-12}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{age_effects}, \code{individual_effects}, \code{coef}, \code{converged}, \code{iterations}, \code{n_rows}, \code{n_people}, \code{method}, \code{identical_to}.
@@ -200,11 +200,11 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_ri See Usage.
-#' @param r See Usage.
-#' @param p_exposed See Usage.
-#' @param alpha Defaults to \code{0.05}.
-#' @param power Defaults to \code{0.8}.
+#' @param log_ri Coerced to numeric by the body, with \code{as.numeric}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p_exposed Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
 #' @return A list with \code{n_events}, \code{n_events_ceiling}, \code{rho}, \code{A}, \code{B}, \code{C}, \code{z_alpha_2}, \code{z_power}, \code{log_ri}, \code{r}, \code{p_exposed}, \code{assumes}, \code{method}.
 #' @export
 morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
@@ -250,7 +250,7 @@ morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power =
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_events See Usage.
+#' @param n_events Coerced to numeric by the body, with \code{as.numeric}.
 #' @param log_ri Passed to \code{morie_smatch_sample_size}.
 #' @param r Passed to \code{morie_smatch_sample_size}.
 #' @param p_exposed Passed to \code{morie_smatch_sample_size}.
@@ -273,8 +273,8 @@ morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
-#' @param log_ri See Usage.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param log_ri Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri}, \code{interpretation}.
 #' @export
 morie_smatch_relative_efficiency <- function(r, log_ri) {

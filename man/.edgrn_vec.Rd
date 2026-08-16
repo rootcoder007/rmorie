@@ -8,7 +8,7 @@
 .edgrn_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the edgrn_native implementation. Called by \code{edgrn_moderate_dispersion}, \code{edgrn_tmm_factor}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .secaead_as_bytes(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.}
 }
 \description{
 A step of the secaead_native implementation. Called by \code{.secaead_constant_time_equal}, \code{.secaead_hexlify}, \code{.secaead_mac_data} and 4 others in the module. See the file header for the source the module follows.

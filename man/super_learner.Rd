@@ -8,7 +8,7 @@
 super_learner(y, X, library = NULL, n_folds = 10, meta = "nnls", binary = NULL, loss = "l2", ridge = 1e-08, honest_level_one = TRUE)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{library}{Defaults to \code{NULL}.}
 \item{n_folds}{Passed to \code{.flxipt_folds}. Defaults to \code{10}.}

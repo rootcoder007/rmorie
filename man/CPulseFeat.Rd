@@ -10,7 +10,7 @@ CPulseFeat(cp, fs, qrs, hr = NULL)
 \arguments{
 \item{cp}{A vector; its length is taken.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{qrs}{See Usage.}
+\item{qrs}{Coerced to integer by the body, with \code{as.integer}.}
 \item{hr}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }
 \description{

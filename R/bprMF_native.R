@@ -89,7 +89,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .bprMF_sigmoid <- function(x) {
@@ -122,7 +122,7 @@
 #' source it follows.
 #'
 #' @param pos A vector; indexed elementwise.
-#' @param n_items See Usage.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .bprMF_triples <- function(pos, n_items) {
@@ -157,7 +157,7 @@
 #' @param H Passed to \code{.bprMF_predict}.
 #' @param pos A vector; indexed elementwise.
 #' @param n_items A count; the body uses it as \code{seq_len(...)}.
-#' @param lam Defaults to \code{0.01}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{bpr_opt}, \code{loglik}, \code{penalty}, \code{n_triples}.
 #' @export
 .bprMF_bpr_opt <- function(W, H, pos, n_items, lam = 0.01) {
@@ -251,15 +251,15 @@
 #' default is the sign that actually ascends BPR-Opt.
 #'
 #' @param pos A vector; indexed elementwise.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param k_dim Defaults to \code{8L}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param lam Defaults to \code{0.01}.
-#' @param iters Defaults to \code{2000L}.
-#' @param seed Defaults to \code{0L}.
-#' @param regularizer_sign Defaults to \code{"correct"}.
-#' @param init_scale Defaults to \code{0.1}.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
+#' @param k_dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
+#' @param regularizer_sign Coerced to character by the body, with \code{as.character}. Defaults to \code{"correct"}.
+#' @param init_scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{estimate}, \code{W}, \code{H}, \code{k}, \code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc}, \code{param_norm}, \code{regularizer_sign}, \code{method}, \code{caveat}.
 #' @export
 .bprMF_learn_bpr <- function(pos, n_users, n_items, k_dim = 8L,
@@ -352,7 +352,7 @@
 #'
 #' @param W Passed to \code{.bprMF_predict}.
 #' @param H Passed to \code{.bprMF_predict}.
-#' @param u See Usage.
+#' @param u Coerced to integer by the body, with \code{as.integer}.
 #' @param n_items A count; the body uses it as \code{seq_len(...)}.
 #' @param top_k Numeric; passed to \code{min}. Defaults to \code{5L}.
 #' @param exclude Defaults to \code{integer(0)}.

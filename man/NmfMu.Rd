@@ -10,8 +10,8 @@ NmfMu(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1)
 \arguments{
 \item{V}{Passed to \code{.morie_bx_mat}.}
 \item{r}{Passed to \code{.morie_bx_nmfmu}.}
-\item{maxiter}{Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.}
 \item{cost}{One of \code{"kld"}, \code{"ls"}. Defaults to \code{"ls"}.}
 \item{seed}{Passed to \code{.morie_bx_nmfmu}. Defaults to \code{1}.}
 }

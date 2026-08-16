@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{pdf}{Defaults to \code{NULL}.}
-\item{x}{Defaults to \code{NULL}.}
+\item{pdf}{A function; the body checks with \code{is.function}.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lower}{Defaults to \code{-Inf}.}
 \item{upper}{Defaults to \code{Inf}.}
 }

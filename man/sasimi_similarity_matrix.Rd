@@ -8,7 +8,7 @@
 sasimi_similarity_matrix(fps, coefficient = "tanimoto")
 }
 \arguments{
-\item{fps}{See Usage.}
+\item{fps}{Iterated over elementwise, with \code{lapply}.}
 \item{coefficient}{Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.}
 }
 \description{

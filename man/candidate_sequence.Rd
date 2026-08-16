@@ -8,7 +8,7 @@
 candidate_sequence(A, W, g_models)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W}{A matrix; passed to \code{as.matrix}.}
 \item{g_models}{A vector; its length is taken and its elements indexed.}
 }

@@ -59,9 +59,9 @@ morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rate_Q See Usage.
-#' @param rate_g See Usage.
-#' @param n See Usage.
+#' @param rate_Q Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rate_g Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{sum}, \code{required}, \code{satisfied}, \code{product_order}, \code{root_n_order}, \code{note}.
 #' @export
 rate_condition <- function(rate_Q, rate_g, n) {
@@ -80,9 +80,9 @@ rate_condition <- function(rate_Q, rate_g, n) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param err_Q See Usage.
-#' @param err_g See Usage.
-#' @param delta See Usage.
+#' @param err_Q Coerced to numeric by the body, with \code{as.numeric}.
+#' @param err_g Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{bound}, \code{delta}, \code{err_Q}, \code{err_g}, \code{note}.
 #' @export
 remainder_bound <- function(err_Q, err_g, delta) {
@@ -104,8 +104,8 @@ remainder_bound <- function(err_Q, err_g, delta) {
 #'
 #' @param err_Q See Usage.
 #' @param err_g See Usage.
-#' @param delta See Usage.
-#' @param n See Usage.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param donsker A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{remainder_bound}, \code{root_n}, \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient}, \code{positivity_delta}, \code{method}, \code{note}.
 #' @export
@@ -130,7 +130,7 @@ efficiency_check <- function(err_Q, err_g, delta, n, donsker = TRUE) {
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param V A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @return A list with \code{folds}, \code{training}, \code{V}, \code{note}.
 #' @export
 cv_tmle_split <- function(n, V = 10L, seed = 0L) {

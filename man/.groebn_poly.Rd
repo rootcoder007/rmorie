@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{terms}{A vector; its length is taken and its elements indexed.}
-\item{nvars}{Defaults to \code{NULL}.}
+\item{nvars}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 Polynomial constructor ---------------------------------------------------------------------------

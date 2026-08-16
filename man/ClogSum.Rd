@@ -8,9 +8,9 @@
 ClogSum(x, h, z)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{z}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 principal value in (-pi, pi], so the two sides can differ by an integer multiple of 2 pi j; that is reported as branch_offset rather than papered over -- it is the phase-unwrapping problem itself.

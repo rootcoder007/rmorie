@@ -8,7 +8,7 @@
 .sarima_diff_poly(k, s)
 }
 \arguments{
-\item{k}{See Usage.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}.}
 \item{s}{Numeric; combined arithmetically in the body.}
 }
 \description{

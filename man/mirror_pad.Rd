@@ -9,7 +9,7 @@ mirror_pad(image, pad)
 }
 \arguments{
 \item{image}{Passed to \code{.unetbk_as_matrix}.}
-\item{pad}{See Usage.}
+\item{pad}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the unetbk_native implementation. No other function in the package calls it. See the file header for the source the module follows.

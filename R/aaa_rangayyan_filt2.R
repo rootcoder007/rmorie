@@ -38,7 +38,7 @@
 #' attenuation is poor -- the book notes no more than about -20 dB at
 #' most frequencies, so a filtered noisy ECG is still visibly noisy.
 #'
-#' @param n Defaults to \code{NULL}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum}, \code{finite}, \code{equal_weights}, \code{attenuation_is_poor}, \code{method}.
 #' @export
 Ma8Imp <- function(n = NULL) {
@@ -87,7 +87,7 @@ Ma8Tf <- function(z) {
 #' brackets -- as the placeholder docstring did -- is a different and
 #' wrong function.  Both forms are computed and compared.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{H}, \code{factored}, \code{omega}, \code{magnitude}, \code{max_difference}, \code{factored_form_agrees}, \code{bracket_is_inside_the_product}, \code{method}.
 #' @export
 Ma8Fr <- function(omega) {
@@ -128,8 +128,8 @@ Ma8Fr <- function(omega) {
 #' forgets, where the direct form flushes a perturbation after 8
 #' samples.
 #'
-#' @param x See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{direct_form}, \code{max_difference}, \code{agrees_with_direct_form}, \code{additions_per_sample}, \code{direct_form_additions}, \code{error_accumulates}, \code{method}.
 #' @export
 Ma8Rec <- function(x, n = NULL) {
@@ -172,7 +172,7 @@ Ma8Rec <- function(x, n = NULL) {
 #' so the filter is still FIR despite the recursive implementation.  At
 #' z = 1 the ratio is 0/0 and the limit is the DC gain, 1.
 #'
-#' @param z See Usage.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{H}, \code{z}, \code{pole_at_dc_cancelled_by_a_zero}, \code{still_fir}, \code{dc_gain}, \code{removable_singularity_at_z_equals_one}, \code{method}.
 #' @export
 Ma8RecTf <- function(z) {
@@ -205,7 +205,7 @@ Ma8RecTf <- function(z) {
 #' in Equation 3.111", and both are recomputed and compared.  The delay
 #' is not an integer -- the price of an even-length filter.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{H}, \code{omega}, \code{direct_sum}, \code{max_difference}, \code{agrees_with_eq_3_111}, \code{group_delay}, \code{delay_is_not_an_integer}, \code{method}.
 #' @export
 Ma8Sinc <- function(omega) {
@@ -250,9 +250,9 @@ Ma8Sinc <- function(omega) {
 #' window is clipped at the start of the record, and how many windows
 #' that affects is reported rather than left to be discovered.
 #'
-#' @param x See Usage.
-#' @param t See Usage.
-#' @param tau See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{n}, \code{tau}, \code{clipped_windows}, \code{trapezoidal}, \code{continuous_counterpart_of_the_ma_filter}, \code{method}.
 #' @export
 RunInt <- function(x, t, tau) {
@@ -308,8 +308,8 @@ RunInt <- function(x, t, tau) {
 #' is arbitrary.  The discrete counterpart has a pole ON the unit circle
 #' at DC, which is why the book says it is seldom used for filtering.
 #'
-#' @param x See Usage.
-#' @param t See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{n}, \code{total}, \code{lower_limit}, \code{constant_of_integration_is_arbitrary}, \code{discrete_pole_on_the_unit_circle}, \code{seldom_used_for_filtering}, \code{method}.
 #' @export
 RunIntAll <- function(x, t) {
@@ -341,9 +341,9 @@ RunIntAll <- function(x, t) {
 #' there.  It is returned as its WEIGHT, pi X(0); a delta has no value
 #' at a point.
 #'
-#' @param X See Usage.
-#' @param omega See Usage.
-#' @param X0 Defaults to \code{NULL}.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param X0 Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{Y}, \code{omega}, \code{delta_weight}, \code{at_dc}, \code{dc_term_carried_by_the_delta}, \code{undefined_at_zero_without_the_delta}, \code{method}.
 #' @export
 IntFt <- function(X, omega, X0 = NULL) {
@@ -383,7 +383,7 @@ IntFt <- function(X, omega, X0 = NULL) {
 #' book does.  The gain falls as frequency rises, so it is a lowpass,
 #' and it is unbounded at w = 0 -- refused rather than returned as Inf.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{H}, \code{omega}, \code{lowpass}, \code{dc_term_set_aside}, \code{gain_falls_nonlinearly_with_frequency}, \code{method}.
 #' @export
 IntFr <- function(omega) {
@@ -411,7 +411,7 @@ IntFr <- function(omega) {
 #' the response is plotted; a magnitude cannot be negative, so the
 #' absolute value is taken here.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{magnitude}, \code{omega}, \code{book_prints_one_over_omega}, \code{absolute_value_needed_for_negative_omega}, \code{method}.
 #' @export
 IntMag <- function(omega) {
@@ -436,7 +436,7 @@ IntMag <- function(omega) {
 #' A constant phase is NOT a constant delay: the group delay is the
 #' derivative, which is zero, so the integrator delays nothing.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{phase}, \code{omega}, \code{constant}, \code{group_delay}, \code{constant_phase_is_not_constant_delay}, \code{sign_flips_for_negative_omega}, \code{method}.
 #' @export
 IntPh <- function(omega) {
@@ -464,9 +464,9 @@ IntPh <- function(omega) {
 #' respect to the true time".  Highpass, and it amplifies noise -- eq
 #' (3.128) is the book\'s remedy.
 #'
-#' @param x See Usage.
-#' @param T Defaults to \code{1}.
-#' @param n Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{T}, \code{scale_factor_gives_true_time_rate}, \code{highpass}, \code{amplifies_noise}, \code{removes_dc}, \code{method}.
 #' @export
 FDiff <- function(x, T = 1, n = NULL) {
@@ -498,7 +498,7 @@ FDiff <- function(x, T = 1, n = NULL) {
 #' the whole of the operator\'s highpass character.
 #'
 #' @param z Passed to \code{.morie_rg_polyz}.
-#' @param T Defaults to \code{1}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{z}, \code{T}, \code{zeros}, \code{zero_at_dc}, \code{dc_gain}, \code{method}.
 #' @export
 FDiffTf <- function(z, T = 1) {
@@ -520,8 +520,8 @@ FDiffTf <- function(z, T = 1) {
 #' gain; the factor of j is what puts the phase a quarter turn ahead,
 #' the +pi/2 of eq (3.127).
 #'
-#' @param omega See Usage.
-#' @param T Defaults to \code{1}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{omega}, \code{T}, \code{split_form}, \code{max_difference}, \code{forms_agree}, \code{half_sample_delay}, \code{method}.
 #' @export
 FDiffFr <- function(omega, T = 1) {
@@ -551,8 +551,8 @@ FDiffFr <- function(omega, T = 1) {
 #' it.  Largest at Nyquist, which is why the operator amplifies
 #' high-frequency noise.
 #'
-#' @param omega See Usage.
-#' @param T Defaults to \code{1}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{magnitude}, \code{omega}, \code{T}, \code{dc_gain}, \code{nyquist_gain}, \code{roughly_proportional_to_frequency}, \code{book_omits_the_absolute_value}, \code{method}.
 #' @export
 FDiffMag <- function(omega, T = 1) {
@@ -578,7 +578,7 @@ FDiffMag <- function(omega, T = 1) {
 #' quarter turn from the j of eq (3.125).  A half-sample delay cannot be
 #' undone by shifting samples.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope}, \code{quarter_turn_offset}, \code{linear_phase}, \code{method}.
 #' @export
 FDiffPh <- function(omega) {
@@ -600,9 +600,9 @@ FDiffPh <- function(omega) {
 #' controls the noise amplification.  The book warns the price is
 #' accuracy -- the approximation to d/dt "is poor after about fs/10".
 #'
-#' @param x See Usage.
-#' @param T Defaults to \code{1}.
-#' @param n Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{T}, \code{as_averaged_first_differences}, \code{max_difference}, \code{derivation_agrees}, \code{controls_noise_amplification}, \code{poor_above_fs_over_10}, \code{method}.
 #' @export
 CDiff3 <- function(x, T = 1, n = NULL) {
@@ -640,8 +640,8 @@ CDiff3 <- function(x, T = 1, n = NULL) {
 #' it may be built as that cascade.  Zeros at z = 1 and z = -1 make it a
 #' bandpass, and the one at Nyquist is what kills the noise boost.
 #'
-#' @param z See Usage.
-#' @param T Defaults to \code{1}.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{z}, \code{T}, \code{cascade}, \code{max_difference}, \code{cascade_agrees}, \code{zeros}, \code{bandpass}, \code{is_first_difference_times_two_point_ma}, \code{method}.
 #' @export
 CDiff3Tf <- function(z, T = 1) {
@@ -674,8 +674,8 @@ CDiff3Tf <- function(z, T = 1) {
 #' highpass factor, at Nyquist from the moving-average factor -- peaking
 #' at w = pi/2.
 #'
-#' @param omega See Usage.
-#' @param T Defaults to \code{1}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{magnitude}, \code{omega}, \code{T}, \code{dc_gain}, \code{nyquist_gain}, \code{peak_at}, \code{bandpass}, \code{method}.
 #' @export
 CDiff3Mag <- function(omega, T = 1) {
@@ -699,7 +699,7 @@ CDiff3Mag <- function(omega, T = 1) {
 #' half sample of the plain difference.  An integer delay can be undone
 #' by shifting the output back.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope}, \code{quarter_turn_offset}, \code{integer_delay_can_be_undone_by_shifting}, \code{method}.
 #' @export
 CDiff3Ph <- function(omega) {
@@ -721,7 +721,7 @@ CDiff3Ph <- function(omega) {
 #' highpass character is visible.
 #'
 #' @param x See Usage.
-#' @param T Defaults to \code{1}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 Diff1 <- function(x, T = 1) {
@@ -742,9 +742,9 @@ Diff1 <- function(x, T = 1) {
 #' with frequency, and the book notes it "may be realized as a cascade
 #' of two" first differences.  Both are computed and compared.
 #'
-#' @param x See Usage.
-#' @param T Defaults to \code{1}.
-#' @param n Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{T}, \code{as_cascaded_first_differences}, \code{max_difference}, \code{cascade_agrees}, \code{b}, \code{a}, \code{zeros}, \code{double_zero_at_dc}, \code{gain_rises_quadratically}, \code{method}.
 #' @export
 Diff2 <- function(x, T = 1, n = NULL) {
@@ -830,9 +830,9 @@ BWander <- function(z, T = 1, pole = 0.995) {
 #' is the distance to the zero at 1, denominator the distance to the
 #' pole.
 #'
-#' @param z See Usage.
-#' @param T Defaults to \code{1}.
-#' @param pole Defaults to \code{0.995}.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param pole Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.995}.
 #' @return A list with \code{H}, \code{z}, \code{T}, \code{pole}, \code{max_difference_from_eq_3_132}, \code{forms_agree}, \code{numerator_is_the_distance_to_the_zero}, \code{denominator_is_the_distance_to_the_pole}, \code{method}.
 #' @export
 BWanderZ <- function(z, T = 1, pole = 0.995) {
@@ -917,9 +917,9 @@ BWanderEq <- function(x, T = 1, pole = 0.995, n = NULL) {
 #' is exactly 1/2 FOR EVERY ORDER, so raising N steepens the transition
 #' without moving the half-power point.
 #'
-#' @param Omega See Usage.
-#' @param Omega_c See Usage.
-#' @param N See Usage.
+#' @param Omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Omega_c Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{squared_magnitude}, \code{magnitude}, \code{Omega}, \code{Omega_c}, \code{N}, \code{half_power_at_cutoff}, \code{monotonic}, \code{no_ripple}, \code{cutoff_is_half_power_for_every_order}, \code{method}.
 #' @export
 BwSqMag <- function(Omega, Omega_c, N) {
@@ -948,9 +948,9 @@ BwSqMag <- function(Omega, Omega_c, N) {
 #'
 #' filter until the N left-half-plane ones are selected by eq (3.138).
 #'
-#' @param s See Usage.
-#' @param Omega_c See Usage.
-#' @param N See Usage.
+#' @param s Coerced to complex by the body, with \code{as.complex}.
+#' @param Omega_c Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{H}, \code{s}, \code{Omega_c}, \code{N}, \code{n_poles}, \code{half_are_right_half_plane}, \code{not_a_filter_until_the_poles_are_selected}, \code{method}.
 #' @export
 BwSqLap <- function(s, Omega_c, N) {
@@ -980,9 +980,9 @@ BwSqLap <- function(s, Omega_c, N) {
 #' a pole falls on the real axis.  Complex poles come in conjugate
 #' pairs, which keeps the filter coefficients real.
 #'
-#' @param Omega_c See Usage.
-#' @param N See Usage.
-#' @param k Defaults to \code{NULL}.
+#' @param Omega_c Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Coerced to integer by the body, with \code{as.integer}.
+#' @param k Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{poles}, \code{left_half_plane}, \code{value}, \code{k}, \code{Omega_c}, \code{N}, \code{radius}, \code{angular_spacing}, \code{n_left_half_plane}, \code{none_on_the_imaginary_axis}, \code{real_pole_for_odd_order}, \code{method}.
 #' @export
 BwPoles <- function(Omega_c, N, k = NULL) {
@@ -1226,11 +1226,11 @@ BilinUnwarp <- function(Omega, T = 1) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Omega_c Defaults to \code{NULL}.
-#' @param N Defaults to \code{NULL}.
-#' @param T Defaults to \code{1}.
-#' @param fc Defaults to \code{NULL}.
-#' @param fs Defaults to \code{NULL}.
+#' @param Omega_c Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param fc Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{poles_z}, \code{H}, \code{N}, \code{Omega_c}, \code{T}, \code{prewarped_here}, \code{zeros_at_minus_one}, \code{zeros_are_forced_by_the_bilinear_transform}, \code{dc_gain}, \code{leading_a_is_one}, \code{method}.
 #' @export
@@ -1321,9 +1321,9 @@ IirDiffGen <- function(x, b_k, a_k = NULL, n = NULL) {
 #' phase, which is only usable with the whole record in hand -- it is
 #' not causal and cannot be run sample by sample.
 #'
-#' @param omega See Usage.
-#' @param omega_c See Usage.
-#' @param N See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega_c Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{squared_magnitude}, \code{magnitude}, \code{omega}, \code{omega_c}, \code{N}, \code{half_power_at_cutoff}, \code{no_warping}, \code{zero_phase}, \code{not_causal}, \code{method}.
 #' @export
 BwDirect <- function(omega, omega_c, N) {
@@ -1352,11 +1352,11 @@ BwDirect <- function(omega, omega_c, N) {
 #' H(k) = H(K-k).  The book defines kc = ceil(K wc/ws) and that CEILING
 #' matters: rounding down puts the realized cutoff below the request.
 #'
-#' @param K See Usage.
-#' @param kc Defaults to \code{NULL}.
-#' @param N Defaults to \code{2}.
-#' @param fc Defaults to \code{NULL}.
-#' @param fs Defaults to \code{NULL}.
+#' @param K Coerced to integer by the body, with \code{as.integer}.
+#' @param kc Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param N Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param fc Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{squared_magnitude}, \code{magnitude}, \code{half_spectrum}, \code{K}, \code{kc}, \code{N}, \code{dc_gain}, \code{reflected}, \code{cutoff_index_uses_a_ceiling}, \code{method}.
 #' @export
 BwLpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
@@ -1405,11 +1405,11 @@ BwLpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #' book uses to strip baseline drift, eighth order at 2 Hz.  It leaves
 #' high-frequency noise untouched; a highpass is not a denoiser.
 #'
-#' @param K See Usage.
-#' @param kc Defaults to \code{NULL}.
-#' @param N Defaults to \code{2}.
-#' @param fc Defaults to \code{NULL}.
-#' @param fs Defaults to \code{NULL}.
+#' @param K Coerced to integer by the body, with \code{as.integer}.
+#' @param kc Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param N Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param fc Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{squared_magnitude}, \code{magnitude}, \code{half_spectrum}, \code{K}, \code{kc}, \code{N}, \code{dc_gain}, \code{reflected}, \code{leaves_high_frequency_noise_untouched}, \code{method}.
 #' @export
 BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
@@ -1460,8 +1460,8 @@ BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #' there is exactly nought.  With zeros alone the notch is wide, which
 #' is why the book goes on to add poles just inside them.
 #'
-#' @param fs See Usage.
-#' @param f0 Defaults to \code{60}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param f0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{60}.
 #' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{zeros}, \code{H}, \code{f0}, \code{fs}, \code{omega_0}, \code{gain_at_the_notch}, \code{dc_gain}, \code{fir}, \code{linear_phase}, \code{notch_is_wide_without_poles}, \code{method}.
 #' @export
@@ -1508,10 +1508,10 @@ Notch60 <- function(fs, f0 = 60, z = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param notch_freq See Usage.
-#' @param bandwidth Defaults to \code{NULL}.
-#' @param fs Defaults to \code{1000}.
-#' @param r Defaults to \code{NULL}.
+#' @param notch_freq Coerced to numeric by the body, with \code{as.numeric}.
+#' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
+#' @param r Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{H}, \code{f0}, \code{fs}, \code{r}, \code{bandwidth_hz}, \code{omega_0}, \code{zeros}, \code{poles}, \code{gain_at_the_notch}, \code{dc_gain}, \code{iir}, \code{poles_narrow_the_notch}, \code{method}.
 #' @export
@@ -1586,8 +1586,8 @@ Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
 #' powerline interference is.  The zero at DC is not optional, so a comb
 #' removes the mean along with the interference.
 #'
-#' @param period_samples See Usage.
-#' @param fs Defaults to \code{1000}.
+#' @param period_samples Coerced to integer by the body, with \code{as.integer}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
 #' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{H}, \code{period_samples}, \code{fs}, \code{notch_frequencies_hz}, \code{n_zeros}, \code{notch_spacing_hz}, \code{dc_gain}, \code{removes_dc_as_well}, \code{fir}, \code{linear_phase}, \code{method}.
 #' @export
@@ -1623,10 +1623,10 @@ Comb <- function(period_samples, fs = 1000, z = NULL) {
 #' conjugate mirror.  `a` follows the eq (3.67) convention with a_0 = 1
 #' included, the form BwLp and BwHp return.
 #'
-#' @param b See Usage.
-#' @param a Defaults to \code{NULL}.
-#' @param fs Defaults to \code{1000}.
-#' @param n_freqs Defaults to \code{512}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
+#' @param n_freqs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512}.
 #' @return A list with \code{f}, \code{H}, \code{magnitude}, \code{magnitude_db}, \code{phase}, \code{fs}, \code{n_freqs}, \code{one_sided}, \code{includes_nyquist}, \code{method}.
 #' @export
 FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
@@ -1740,10 +1740,10 @@ PhaseResp <- function(b, a = NULL, fs = 1000, n_freqs = 512,
 #' derivative spikes.  A three-point mean has such a zero at w = 2pi/3
 #' and its phase-differentiated delay comes out near 0 instead of 1.
 #'
-#' @param b See Usage.
-#' @param a Defaults to \code{NULL}.
-#' @param fs Defaults to \code{1000}.
-#' @param n_freqs Defaults to \code{512}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
+#' @param n_freqs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512}.
 #' @return A list with \code{f}, \code{group_delay}, \code{fs}, \code{mean}, \code{max_deviation}, \code{approximately_constant}, \code{defined}, \code{n_undefined}, \code{from_the_coefficients}, \code{phase_differentiation_breaks_at_unit_circle_zeros}, \code{method}.
 #' @export
 GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
@@ -1807,9 +1807,9 @@ GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 #' bilinear transform of eq (3.139) to reach eq (3.143).  Prewarping is
 #' done here; without it the realized cutoff sits below the request.
 #'
-#' @param cutoff_hz See Usage.
-#' @param order Defaults to \code{4}.
-#' @param fs Defaults to \code{1000}.
+#' @param cutoff_hz Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
 #' @param z Defaults to \code{NULL}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
@@ -1846,9 +1846,9 @@ BwLp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' is renormalized at NYQUIST, since a highpass has no DC gain to
 #' normalize against and dividing there would be division by zero.
 #'
-#' @param cutoff_hz See Usage.
-#' @param order Defaults to \code{4}.
-#' @param fs Defaults to \code{1000}.
+#' @param cutoff_hz Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
 #' @param z Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.
 #' @return A list with \code{b}, \code{a}, \code{gain}, \code{H}, \code{N}, \code{cutoff_hz}, \code{fs}, \code{order}, \code{kind}, \code{zeros_at_plus_one}, \code{dc_gain}, \code{nyquist_gain}, \code{prewarped}, \code{normalized_at_nyquist}, \code{method}.
 #' @export
@@ -1900,7 +1900,7 @@ BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' main lobe than the Hann.  It does NOT reach zero at the ends -- w(0)
 #' = 0.08 -- which matters when windows are overlapped and added.
 #'
-#' @param N See Usage.
+#' @param N Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{w}, \code{N}, \code{sum}, \code{endpoints}, \code{reaches_zero_at_the_ends}, \code{coherent_gain}, \code{symmetric}, \code{method}.
 #' @export
 HammingW <- function(N) {
@@ -1936,7 +1936,7 @@ HammingW <- function(N) {
 #' Not to be confused with the Hann FILTER of eq (3.100), a three-tap
 #' 1:2:1 smoother; this is a taper applied to a data segment.
 #'
-#' @param N See Usage.
+#' @param N Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{w}, \code{N}, \code{sum}, \code{endpoints}, \code{reaches_zero_at_the_ends}, \code{coherent_gain}, \code{not_the_hann_filter_of_eq_3_100}, \code{symmetric}, \code{method}.
 #' @export
 HannW <- function(N) {
@@ -2014,7 +2014,7 @@ BlackmanW <- function(N) {
 #' the default -- doing nothing is choosing it -- and naming it makes
 #' that choice explicit.
 #'
-#' @param N See Usage.
+#' @param N Coerced to integer by the body, with \code{as.integer}.
 #' @param window_type Defaults to \code{"hamming"}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
@@ -2055,9 +2055,9 @@ WindowFn <- function(N, window_type = "hamming") {
 #' ripples: Gibbs\' phenomenon, and it does not improve with M -- only
 #' the ripples narrow, they do not shrink.  A window fixes it.
 #'
-#' @param fc See Usage.
-#' @param fs Defaults to \code{1000}.
-#' @param M Defaults to \code{64}.
+#' @param fc Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
+#' @param M Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
 #' @param window Defaults to \code{NULL}.
 #' @return A list with \code{h}, \code{n_taps}, \code{fc}, \code{fs}, \code{M}, \code{window}, \code{window_values}, \code{delay_samples}, \code{dc_gain}, \code{truncation_causes_gibbs_ripple}, \code{ripple_height_does_not_shrink_with_M}, \code{method}.
 #' @export
@@ -2105,7 +2105,7 @@ SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {
 #' is the whole content -- convolving with the unreversed template
 #' correlates with a mirrored pattern and peaks in the wrong place.
 #'
-#' @param g See Usage.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @param normalize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{h}, \code{template}, \code{n}, \code{energy}, \code{normalized}, \code{peak_index}, \code{time_reversed}, \code{output_is_the_cross_correlation}, \code{method}.
 #' @export

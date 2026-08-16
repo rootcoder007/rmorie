@@ -78,8 +78,8 @@
 #' Part of the droSPI_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param precip See Usage.
-#' @param scale Defaults to \code{3L}.
+#' @param precip Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scale Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @param by_month A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{spi}, \code{totals}, \code{params}, \code{scale}, \code{by_month}, \code{method}.
 #' @export

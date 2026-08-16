@@ -8,8 +8,8 @@
 morie_tlonsl_update_weights(cum_losses, eta = 1)
 }
 \arguments{
-\item{cum_losses}{See Usage.}
-\item{eta}{Defaults to \code{1}.}
+\item{cum_losses}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{eta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 cumulative losses are sufficient, so the update is O(1) in memory.

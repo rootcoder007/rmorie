@@ -9,13 +9,13 @@ morie_tlbandt(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0, greedy = FALSE, burn_in
 }
 \arguments{
 \item{W}{A matrix; passed to \code{as.matrix}.}
-\item{Y1}{See Usage.}
-\item{Y0}{See Usage.}
+\item{Y1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Y0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{blip_fn}{See Usage.}
 \item{delta}{Passed to \code{.tlbandt_design_probability}. Defaults to \code{0.1}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{greedy}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{burn_in}{Defaults to \code{20L}.}
+\item{burn_in}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.}
 }
 \description{
 A step of the tlbandt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

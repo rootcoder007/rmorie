@@ -29,7 +29,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .tmldyn_logit <- function(p) {
@@ -56,7 +56,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param covariate_history See Usage.
+#' @param covariate_history Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
 #' @param n See Usage.
 #' @return A list with \code{L0}, \code{L1}.
 #' @export
@@ -80,7 +80,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param basis Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n See Usage.
 #' @param ridge Numeric; combined arithmetically in the body.
@@ -157,7 +157,7 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' @param A0 A vector; indexed elementwise.
 #' @param L1 A matrix; indexed by row and column.
 #' @param A1 A vector; indexed elementwise.
-#' @param idx See Usage.
+#' @param idx Iterated over elementwise, with \code{lapply}.
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{q2}, \code{b}.
 #' @export
@@ -187,7 +187,7 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' @param pseudo A vector; indexed elementwise.
 #' @param L0 A matrix; indexed by row and column.
 #' @param A0 A vector; indexed elementwise.
-#' @param idx See Usage.
+#' @param idx Iterated over elementwise, with \code{lapply}.
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{q1}, \code{b}.
 #' @export
@@ -299,7 +299,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #' @param offset_logit A vector; indexed elementwise.
 #' @param H A vector; indexed elementwise.
 #' @param rows A vector; its length is taken.
-#' @param iters Defaults to \code{100}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
@@ -330,7 +330,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param n_folds See Usage.
+#' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{lapply}.
 #' @export
 .tmldyn_folds <- function(n, n_folds) {

@@ -9,15 +9,15 @@ morie_funkM(ratings, n_users, n_items, factors = 8, epochs = 60, lr = 0.005, reg
 }
 \arguments{
 \item{ratings}{Passed to \code{.funkM_as_ratings}.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{factors}{Defaults to \code{8}.}
-\item{epochs}{Defaults to \code{60}.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{factors}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
+\item{epochs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.}
 \item{lr}{Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.005}.}
 \item{reg}{Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.02}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{incremental}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{epochs_per_factor}{Defaults to \code{20}.}
+\item{epochs_per_factor}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
 }
 \description{
 A step of the funkM_native implementation. No other function in the package calls it. See the file header for the source the module follows.

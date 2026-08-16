@@ -8,9 +8,9 @@
 WienerConv(w, phi, theta)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{phi}{See Usage.}
-\item{theta}{See Usage.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{phi}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 of the tap weights with the ACF.  It holds only for a stationary process; that premise is recorded because nothing in the arithmetic checks it.

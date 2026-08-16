@@ -9,7 +9,7 @@ WienerHopf(phi, theta)
 }
 \arguments{
 \item{phi}{A matrix; passed to \code{as.matrix}.}
-\item{theta}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 error are orthogonal, and so are the output and the error -- the orthogonality principle, which is what makes the solution optimal.

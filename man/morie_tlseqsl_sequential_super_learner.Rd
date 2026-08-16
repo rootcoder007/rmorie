@@ -9,7 +9,7 @@ morie_tlseqsl_sequential_super_learner(histories, outcomes, library, T, V = 5, s
 }
 \arguments{
 \item{histories}{A vector; its length is taken and its elements indexed.}
-\item{outcomes}{See Usage.}
+\item{outcomes}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{library}{Passed to \code{morie_tlseqsl_ensemble_super_learner}.}
 \item{T}{Numeric; combined arithmetically in the body.}
 \item{V}{Passed to \code{morie_tlseqsl_ensemble_super_learner}. Defaults to \code{5}.}

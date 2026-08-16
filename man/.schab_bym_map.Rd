@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{y}{A vector; its length is taken.}
-\item{c_exp}{See Usage.}
+\item{c_exp}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{adjacency}{Passed to \code{.schab_neighbour_structure}.}
 \item{kappa}{Numeric; combined arithmetically in the body.}
 \item{lam}{Numeric; combined arithmetically in the body.}
-\item{max_iter}{Defaults to \code{200L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{tol}{Defaults to \code{1e-11}.}
 }
 \description{

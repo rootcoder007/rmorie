@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{fps}{See Usage.}
-\item{k}{See Usage.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}.}
 \item{objective}{Compared against \code{"maxmin"}.}
 \item{seed}{Passed to \code{.tncomp_seed}.}
 \item{D}{Defaults to \code{NULL}.}

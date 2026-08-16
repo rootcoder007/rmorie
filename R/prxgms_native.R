@@ -37,9 +37,9 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #' @param fun See Usage.
 #' @param grad See Usage.
 #' @param prox See Usage.
-#' @param x0 See Usage.
-#' @param L Defaults to \code{1}.
-#' @param max.iter Defaults to \code{500L}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param L Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param max.iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param accelerate A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param backtrack A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -102,7 +102,7 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
-#' @param b See Usage.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Numeric; combined arithmetically in the body.
 #' @param max.iter Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{500L}.
 #' @param tol Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{1e-10}.

@@ -12,7 +12,7 @@
 \item{treatment}{See Usage.}
 \item{covariates}{Passed to \code{.mor_ps_design}.}
 \item{ps_model}{One of \code{"mle"}, \code{"ridge"}. Defaults to \code{"mle"}.}
-\item{ridge_lambda}{Defaults to \code{1}.}
+\item{ridge_lambda}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the causal implementation. Called by \code{.fit_propensity_weightit}, \code{morie_estimate_propensity_scores}, \code{morie_weight_ow} and 1 others in the module. See the file header for the source the module follows.

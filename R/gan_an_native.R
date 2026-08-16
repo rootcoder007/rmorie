@@ -62,7 +62,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .gan_an_as_num <- function(x) {
@@ -122,7 +122,7 @@
 #' @param g_z Passed to \code{.gan_an_residual_loss_impl}.
 #' @param f_x Passed to \code{.gan_an_discrimination_loss_impl}.
 #' @param f_gz Passed to \code{.gan_an_discrimination_loss_impl}.
-#' @param lam Defaults to \code{0.1}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{score}, \code{residual}, \code{discrimination}, \code{lambda}.
 #' @export
 .gan_an_anomaly_score_impl <- function(x, g_z, f_x, f_gz, lam = 0.1) {
@@ -149,13 +149,13 @@
 #' @param x Passed to \code{.gan_an_anomaly_score_impl}.
 #' @param generator See Usage.
 #' @param feature_fn See Usage.
-#' @param z_dim See Usage.
-#' @param steps Defaults to \code{200}.
-#' @param lr Defaults to \code{0.05}.
+#' @param z_dim Coerced to integer by the body, with \code{as.integer}.
+#' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param lam Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
-#' @param step_decay Defaults to \code{0.05}.
+#' @param step_decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @return A list with \code{estimate}, \code{score}, \code{z}, \code{reconstruction}, \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step}, \code{method}, \code{note}.
 #' @export
 morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,

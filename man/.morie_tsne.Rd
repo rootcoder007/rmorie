@@ -11,7 +11,7 @@
 \item{x}{A matrix; passed to \code{nrow}.}
 \item{dims}{A count; the body uses it as \code{matrix(...)}. Defaults to \code{2L}.}
 \item{perplexity}{Numeric; passed to \code{log}. Defaults to \code{30}.}
-\item{n_iter}{Defaults to \code{1000L}.}
+\item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.}
 \item{eta}{Passed to \code{.morie_tsne_descent_cpp}. Defaults to \code{"auto"}.}
 }
 \description{

@@ -8,9 +8,9 @@
 PzResp(zeros, poles, omega, gain = 1)
 }
 \arguments{
-\item{zeros}{See Usage.}
-\item{poles}{See Usage.}
-\item{omega}{See Usage.}
+\item{zeros}{Coerced to complex by the body, with \code{as.complex}.}
+\item{poles}{Coerced to complex by the body, with \code{as.complex}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{gain}{Numeric; passed to \code{abs}. Defaults to \code{1}.}
 }
 \description{

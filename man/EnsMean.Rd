@@ -9,7 +9,7 @@ EnsMean(observations, index = NULL)
 }
 \arguments{
 \item{observations}{Passed to \code{.morie_rg_aslist}.}
-\item{index}{Defaults to \code{NULL}.}
+\item{index}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_ch3 implementation. No other function in the package calls it. See the file header for the source the module follows.

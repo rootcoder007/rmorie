@@ -8,9 +8,9 @@
 .cnvlfc_embed(series, E = 2, tau = 1)
 }
 \arguments{
-\item{series}{See Usage.}
-\item{E}{Defaults to \code{2}.}
-\item{tau}{Defaults to \code{1}.}
+\item{series}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{E}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
+\item{tau}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{.cnvlfc_cross_map}, \code{cnvlfc_embed}. See the file header for the source the module follows.

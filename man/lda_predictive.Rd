@@ -8,10 +8,10 @@
 lda_predictive(N_ik, N_k, beta, m)
 }
 \arguments{
-\item{N_ik}{See Usage.}
-\item{N_k}{See Usage.}
-\item{beta}{See Usage.}
-\item{m}{See Usage.}
+\item{N_ik}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N_k}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bigtm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

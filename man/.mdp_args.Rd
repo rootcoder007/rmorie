@@ -8,7 +8,7 @@
 .mdp_args(P, R)
 }
 \arguments{
-\item{P}{See Usage.}
+\item{P}{Iterated over elementwise, with \code{lapply}.}
 \item{R}{A matrix; passed to \code{dim}.}
 }
 \description{

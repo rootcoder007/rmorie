@@ -10,7 +10,7 @@ synthesize_marginals(X, n, seed = 0)
 \arguments{
 \item{X}{A vector; its length is taken and its elements indexed.}
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the memb_native implementation. Called by \code{morie_memb}. See the file header for the source the module follows.

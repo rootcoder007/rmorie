@@ -8,7 +8,7 @@
 .morie_km2_hidden(f, c, name)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}
 \item{c}{See Usage.}
 \item{name}{See Usage.}
 }

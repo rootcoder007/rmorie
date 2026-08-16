@@ -13,7 +13,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq See Usage.
+#' @param seq Iterated over elementwise, with \code{lapply}.
 #' @param name See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -91,12 +91,12 @@
 #' source it follows.
 #'
 #' @param episodes Passed to \code{._as_states}.
-#' @param actions Defaults to \code{NULL}.
-#' @param goals Defaults to \code{NULL}.
+#' @param actions Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.
+#' @param goals Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.
 #' @param strategy Passed to \code{._sample_goals}. Defaults to \code{"future"}.
 #' @param k Passed to \code{._sample_goals}. Defaults to \code{4L}.
 #' @param tol Passed to \code{._sparse_reward}. Defaults to \code{1e-06}.
-#' @param reward_fn Defaults to \code{NULL}.
+#' @param reward_fn Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
 #' @param state_to_goal Defaults to \code{NULL}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @param history Optional; may be \code{NULL}. Passed to \code{._as_states}.

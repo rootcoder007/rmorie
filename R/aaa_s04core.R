@@ -180,8 +180,8 @@ NULL
 #'
 #' @param K A matrix; passed to \code{nrow}.
 #' @param Ks A matrix; passed to \code{crossprod}.
-#' @param Kss See Usage.
-#' @param y See Usage.
+#' @param Kss Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param noise A matrix; passed to \code{diag}. Defaults to \code{1e-06}.
 #' @return A list with \code{mean}, \code{var}.
 #' @export
@@ -224,8 +224,8 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .s4_euclid <- function(a, b) sqrt(sum((as.numeric(a) - as.numeric(b))^2))
@@ -503,9 +503,9 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param subject See Usage.
-#' @param rater See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param subject Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rater Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{ms_r}, \code{ms_c}, \code{ms_e}, \code{k}, \code{n}.
 #' @export
 .s4_icc_ms <- function(y, subject, rater) {

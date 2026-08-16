@@ -8,9 +8,9 @@
 CircConv(x, h, npoints = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{npoints}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{npoints}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 equal periods.  Both routes -- the modular sum and the inverse DFT of X(k)H(k) -- are computed; their agreement is eq (3.87) at equal N.

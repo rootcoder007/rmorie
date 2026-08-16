@@ -142,10 +142,10 @@
 #'
 #' @param Y Passed to \code{.funmix_rows}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
-#' @param t Defaults to \code{NULL}.
-#' @param n_basis Defaults to \code{5L}.
+#' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_basis Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param degree Passed to \code{.funmix_knots}. Defaults to \code{3L}.
-#' @param max_iter Defaults to \code{300L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param var_floor Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{labels}, \code{posterior}, \code{proportions}, \code{coefficients}, \code{variances}, \code{mean_curves}, \code{basis}, \code{knots}, \code{curve_coefficients}, \code{grid}, \code{loglik}, \code{loglik_path}, \code{bic}, \code{aic}, \code{entropy}, \code{n_parameters}, \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{n_basis}, \code{degree}, \code{method}, \code{note}.

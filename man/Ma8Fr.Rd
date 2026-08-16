@@ -8,7 +8,7 @@
 Ma8Fr(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 sum over lags -3..3, and exp(-j4w) shifts that to lags 1..7, which with the leading 1 is the whole sum.  Rendering it as a product of two brackets -- as the placeholder docstring did -- is a different and wrong function.  Both forms are computed and compared.

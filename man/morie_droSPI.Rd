@@ -8,8 +8,8 @@
 morie_droSPI(precip, scale = 3L, by_month = TRUE)
 }
 \arguments{
-\item{precip}{See Usage.}
-\item{scale}{Defaults to \code{3L}.}
+\item{precip}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{scale}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
 \item{by_month}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

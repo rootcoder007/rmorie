@@ -8,9 +8,9 @@
 .sccsno_cuts(start, end, exposure, risk_periods, age_breaks)
 }
 \arguments{
-\item{start}{See Usage.}
-\item{end}{See Usage.}
-\item{exposure}{See Usage.}
+\item{start}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{end}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{exposure}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{risk_periods}{A matrix; indexed by row and column.}
 \item{age_breaks}{See Usage.}
 }

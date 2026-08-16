@@ -223,7 +223,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e See Usage.
+#' @param e Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
 .groebn_format_key <- function(e) {
@@ -239,7 +239,7 @@
 #' ---------------------------------------------------------------------------
 #'
 #' @param terms A vector; its length is taken and its elements indexed.
-#' @param nvars Defaults to \code{NULL}.
+#' @param nvars Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .groebn_poly <- function(terms, nvars = NULL) {
@@ -470,7 +470,7 @@
 #' source it follows.
 #'
 #' @param f Passed to \code{.groebn_add}.
-#' @param g See Usage.
+#' @param g Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{.groebn_add}.
 #' @export
 .groebn_sub <- function(f, g) {
@@ -519,7 +519,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Iterated over elementwise, with \code{lapply}.
 #' @param c Passed to \code{.groebn_as_fr}.
 #' @return The value of \code{lapply}.
 #' @export
@@ -594,7 +594,7 @@
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param G See Usage.
+#' @param G Iterated over elementwise, with \code{Filter}.
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return A list with \code{quotients}, \code{remainder}.
 #' @export
@@ -656,7 +656,7 @@
 #' Buchberger completion and reduce_basis
 #' ---------------------------------------------------------------------------
 #'
-#' @param F See Usage.
+#' @param F Iterated over elementwise, with \code{lapply}.
 #' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
 #' @param prune A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param reduced A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -733,7 +733,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param G See Usage.
+#' @param G Iterated over elementwise, with \code{Filter}.
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
@@ -817,7 +817,7 @@
 #' Entry point
 #' ---------------------------------------------------------------------------
 #'
-#' @param polys See Usage.
+#' @param polys Iterated over elementwise, with \code{lapply}.
 #' @param order Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.
 #' @param prune Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.
 #' @param reduced Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.

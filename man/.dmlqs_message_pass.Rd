@@ -10,10 +10,10 @@
 \arguments{
 \item{h0}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{adj}{Passed to \code{.dmlqs_norm_adj}.}
-\item{T}{Defaults to \code{3L}.}
-\item{W}{Defaults to \code{NULL}.}
-\item{activation}{Defaults to \code{"relu"}.}
-\item{exclude_reverse}{Defaults to \code{TRUE}.}
+\item{T}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
+\item{W}{Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.}
+\item{activation}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"relu"}.}
+\item{exclude_reverse}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
 }
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 Lpc(x, order, method = "autocorrelation")
 }
 \arguments{
-\item{x}{See Usage.}
-\item{order}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
 \item{method}{Compared against \code{"autocorrelation"}. Defaults to \code{"autocorrelation"}.}
 }
 \description{

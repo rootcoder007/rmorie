@@ -192,7 +192,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param what Defaults to \code{"X"}.
 #' @return A list with \code{X}, \code{y}.
 #' @export

@@ -67,7 +67,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .infmax_softplus <- function(z) {
@@ -140,8 +140,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param global_features See Usage.
-#' @param feature_maps See Usage.
+#' @param global_features Iterated over elementwise, with \code{lapply}.
+#' @param feature_maps Iterated over elementwise, with \code{lapply}.
 #' @param critic See Usage.
 #' @param estimator Defaults to \code{"jsd"}.
 #' @return A list with \code{objective}, \code{estimator}, \code{n_positive}, \code{n_negative}, \code{note}.
@@ -189,8 +189,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param global_features See Usage.
-#' @param feature_maps See Usage.
+#' @param global_features Iterated over elementwise, with \code{lapply}.
+#' @param feature_maps Iterated over elementwise, with \code{lapply}.
 #' @param critic See Usage.
 #' @param estimator Defaults to \code{"jsd"}.
 #' @return A list with \code{estimate}, \code{objective}, \code{estimator}, \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.

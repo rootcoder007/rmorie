@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{P}{A matrix; passed to \code{nrow}.}
-\item{radii}{See Usage.}
+\item{radii}{Iterated over elementwise, with \code{vapply}.}
 \item{area}{Numeric; combined arithmetically in the body.}
 }
 \description{

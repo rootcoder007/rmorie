@@ -31,7 +31,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param log_pd See Usage.
+#' @param log_pd Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .clrnt_binding_term <- function(log_pd) {
@@ -46,7 +46,7 @@
 #' source it follows.
 #'
 #' @param log_pd Passed to \code{.clrnt_binding_term}.
-#' @param protein Defaults to \code{1}.
+#' @param protein Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 fu_microsomes <- function(log_pd, protein = 1.0) {
@@ -62,7 +62,7 @@ fu_microsomes <- function(log_pd, protein = 1.0) {
 #' source it follows.
 #'
 #' @param log_pd Passed to \code{.clrnt_binding_term}.
-#' @param volume_ratio Defaults to \code{0.005}.
+#' @param volume_ratio Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.005}.
 #' @return A numeric value.
 #' @export
 fu_hepatocytes <- function(log_pd, volume_ratio = 0.005) {
@@ -78,9 +78,9 @@ fu_hepatocytes <- function(log_pd, volume_ratio = 0.005) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cl_plasma See Usage.
-#' @param fu_plasma See Usage.
-#' @param blood_plasma_ratio Defaults to \code{NULL}.
+#' @param cl_plasma Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fu_plasma Coerced to numeric by the body, with \code{as.numeric}.
+#' @param blood_plasma_ratio Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param charge One of \code{"acidic"}, \code{"basic"}, \code{"neutral"}. Defaults to \code{"neutral"}.
 #' @return A list with \code{cl_blood}, \code{fu_blood}, \code{rb}.
 #' @export
@@ -104,12 +104,12 @@ blood_from_plasma <- function(cl_plasma, fu_plasma,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param clint_in_vitro See Usage.
-#' @param fu_incubation See Usage.
+#' @param clint_in_vitro Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fu_incubation Coerced to numeric by the body, with \code{as.numeric}.
 #' @param system One of \code{"hepatocytes"}, \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
 #' @param species Defaults to \code{"human"}.
-#' @param pbsf Defaults to \code{NULL}.
-#' @param liver_weight Defaults to \code{NULL}.
+#' @param pbsf Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param liver_weight Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 scale_to_liver <- function(clint_in_vitro, fu_incubation,
@@ -139,10 +139,10 @@ scale_to_liver <- function(clint_in_vitro, fu_incubation,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cl_h See Usage.
-#' @param fu_blood See Usage.
+#' @param cl_h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fu_blood Coerced to numeric by the body, with \code{as.numeric}.
 #' @param species Defaults to \code{"human"}.
-#' @param qh Defaults to \code{NULL}.
+#' @param qh Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param liver_model One of \code{"parallel_tube"}, \code{"well_stirred"}. Defaults to \code{"well_stirred"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -175,8 +175,8 @@ observed_clint_u <- function(cl_h, fu_blood, species = "human",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param predicted See Usage.
-#' @param observed See Usage.
+#' @param predicted Coerced to numeric by the body, with \code{as.numeric}.
+#' @param observed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fold Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf}, \code{average_esf}, \code{within_fold}, \code{beyond_fold}, \code{n}, \code{fold}.
 #' @export
@@ -212,8 +212,8 @@ prediction_accuracy <- function(predicted, observed, fold = 2.0) {
 #' @param system Compared against \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
 #' @param species Defaults to \code{"human"}.
 #' @param liver_model Defaults to \code{"well_stirred"}.
-#' @param protein Defaults to \code{1}.
-#' @param volume_ratio Defaults to \code{0.005}.
+#' @param protein Iterated over elementwise, with \code{vapply}. Defaults to \code{1}.
+#' @param volume_ratio Iterated over elementwise, with \code{vapply}. Defaults to \code{0.005}.
 #' @param cl_plasma Defaults to \code{NULL}.
 #' @param fu_plasma Defaults to \code{NULL}.
 #' @param blood_plasma_ratio Defaults to \code{NULL}.

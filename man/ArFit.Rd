@@ -10,8 +10,8 @@ ArFit(x, order, fs = 1, nfreq = 256)
 \arguments{
 \item{x}{See Usage.}
 \item{order}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{nfreq}{Defaults to \code{256}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{nfreq}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.}
 }
 \description{
 spectrum from P+1 parameters.  That smoothness is also the trap: the model can only make P/2 peaks, so extra resonances merge silently.

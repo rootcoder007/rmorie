@@ -8,12 +8,12 @@
 .morie_gh_polya_tree(x, grid, levels = 6L, a_fn = NULL, lo = NULL, hi = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{grid}{See Usage.}
-\item{levels}{Defaults to \code{6L}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{grid}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6L}.}
 \item{a_fn}{Defaults to \code{NULL}.}
-\item{lo}{Defaults to \code{NULL}.}
-\item{hi}{Defaults to \code{NULL}.}
+\item{lo}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{hi}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the ghosal_native implementation. Called by \code{morie_polya_tree_density}, \code{morie_polya_tree_mixture}. See the file header for the source the module follows.

@@ -242,7 +242,7 @@
 #'
 #' @param encoder_output Passed to \code{.vqgenc_as_vector}.
 #' @param quantized Passed to \code{.vqgenc_as_vector}.
-#' @param beta Defaults to \code{0.25}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @return A list with \code{loss}, \code{beta}, \code{gradient_flows_to}, \code{note}.
 #' @export
 .vqgenc_commitment_loss <- function(encoder_output, quantized, beta = 0.25) {
@@ -274,9 +274,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param height See Usage.
-#' @param width See Usage.
-#' @param downsample Defaults to \code{16L}.
+#' @param height Coerced to integer by the body, with \code{as.integer}.
+#' @param width Coerced to integer by the body, with \code{as.integer}.
+#' @param downsample Coerced to integer by the body, with \code{as.integer}. Defaults to \code{16L}.
 #' @return A list with \code{tokens}, \code{pixels}, \code{compression}, \code{attention_cost_pixels}, \code{attention_cost_tokens}, \code{speedup}, \code{note}.
 #' @export
 .vqgenc_sequence_length <- function(height, width, downsample = 16L) {

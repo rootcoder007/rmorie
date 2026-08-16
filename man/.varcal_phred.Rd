@@ -8,7 +8,7 @@
 .varcal_phred(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the varcal_native implementation. Called by \code{varcal_genotype_posterior}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 MfSnr(my, noise_power)
 }
 \arguments{
-\item{my}{See Usage.}
-\item{noise_power}{See Usage.}
+\item{my}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{noise_power}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 SNR.  The matched filter maximizes the output at ONE INSTANT, which is the right criterion for a known transient and the wrong one for a continuous signal.

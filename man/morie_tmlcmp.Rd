@@ -12,10 +12,10 @@ morie_tmlcmp(time, event_type, D, X, times = NULL, cause = 1, horizon = NULL, g 
 \item{event_type}{Passed to \code{.tmlcmp_vec}.}
 \item{D}{Passed to \code{.tmlcmp_vec}.}
 \item{X}{Passed to \code{.tmlcmp_mat}.}
-\item{times}{Defaults to \code{NULL}.}
-\item{cause}{Defaults to \code{1}.}
-\item{horizon}{Defaults to \code{NULL}.}
-\item{g}{Defaults to \code{NULL}.}
+\item{times}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cause}{Coerced to character by the body, with \code{as.character}. Defaults to \code{1}.}
+\item{horizon}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{g}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{iters}{Defaults to \code{50}.}
 }
 \description{

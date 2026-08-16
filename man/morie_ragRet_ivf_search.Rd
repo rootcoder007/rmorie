@@ -8,11 +8,11 @@
 morie_ragRet_ivf_search(query, corpus, index, k.top = 5L, nprobe = 1L, metric = "inner_product")
 }
 \arguments{
-\item{query}{See Usage.}
+\item{query}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{corpus}{A vector; indexed elementwise.}
 \item{index}{A list; the body reads \code{$centroids}, \code{$lists}, \code{$n}, \code{$n.cells} from it.}
-\item{k.top}{Defaults to \code{5L}.}
-\item{nprobe}{Defaults to \code{1L}.}
+\item{k.top}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
+\item{nprobe}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.}
 \item{metric}{Passed to \code{morie_ragRet_top_k}. Defaults to \code{"inner_product"}.}
 }
 \description{

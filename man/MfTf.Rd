@@ -8,10 +8,10 @@
 MfTf(X, freqs, t0, gain = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{freqs}{See Usage.}
-\item{t0}{See Usage.}
-\item{gain}{Defaults to \code{1}.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
+\item{freqs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{gain}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 cancels the signal\'s phase so every component arrives in step at t0 -- that coherent addition is the whole gain of the method.

@@ -11,7 +11,7 @@
 \item{Q}{Passed to \code{.tl1step_as_numvec}.}
 \item{H_fn}{See Usage.}
 \item{Y}{Passed to \code{.tl1step_as_numvec}.}
-\item{max_iter}{Defaults to \code{25}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{

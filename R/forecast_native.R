@@ -187,7 +187,7 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 #' the source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param period See Usage.
+#' @param period Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @param beta Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.

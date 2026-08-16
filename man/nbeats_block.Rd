@@ -9,7 +9,7 @@ nbeats_block(window, horizon, kind = "generic", degree = 2, harmonics = 3, ridge
 }
 \arguments{
 \item{window}{A vector; its length is taken.}
-\item{horizon}{See Usage.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{kind}{One of \code{"generic"}, \code{"seasonality"}, \code{"trend"}. Defaults to \code{"generic"}.}
 \item{degree}{Defaults to \code{2}.}
 \item{harmonics}{Defaults to \code{3}.}

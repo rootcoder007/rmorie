@@ -8,7 +8,7 @@
 .jsonlt_b64(data)
 }
 \arguments{
-\item{data}{See Usage.}
+\item{data}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the jsonlt_native implementation. Called by \code{.jsonlt_raw_enc}, \code{.jsonlt_ser}. See the file header for the source the module follows.

@@ -15,7 +15,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param P See Usage.
+#' @param P Iterated over elementwise, with \code{lapply}.
 #' @param R A matrix; passed to \code{dim}.
 #' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 #' @export

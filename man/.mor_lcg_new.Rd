@@ -8,7 +8,7 @@
 .mor_lcg_new(seed = 1)
 }
 \arguments{
-\item{seed}{Defaults to \code{1}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 exactly in a double, which is what makes the streams identical.

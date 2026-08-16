@@ -12,7 +12,7 @@ Nernst(T = 310.15, z = 1, conc_out = 5, conc_in = 140, ion = "K+")
 \item{z}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{conc_out}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 \item{conc_in}{Numeric; combined arithmetically in the body. Defaults to \code{140}.}
-\item{ion}{Defaults to \code{"K+"}.}
+\item{ion}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"K+"}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

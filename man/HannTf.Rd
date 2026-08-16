@@ -8,7 +8,7 @@
 HannTf(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 Nyquist.  The double zero is why the response reaches nought there smoothly and why the attenuation nearby is second order.

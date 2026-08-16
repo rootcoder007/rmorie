@@ -8,7 +8,7 @@
 gradient(x, V, f, i)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{V}{A vector; indexed elementwise.}
 \item{f}{See Usage.}
 \item{i}{See Usage.}

@@ -95,9 +95,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param param See Usage.
+#' @param param Coerced to list by the body, with \code{as.list}.
 #' @param rewards A vector; its length is taken and its elements indexed.
-#' @param bs See Usage.
+#' @param bs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param traj See Usage.
 #' @return A list with \code{estimate}, \code{rewards}, \code{baseline}, \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last}, \code{method}.
 #' @export
@@ -368,16 +368,16 @@
 #' @param reward_fn Passed to \code{.reinfc_run_gaussian}.
 #' @param x Optional; may be \code{NULL}. Passed to \code{.reinfc_as_matrix}.
 #' @param w Optional; may be \code{NULL}. Passed to \code{.reinfc_as_matrix}.
-#' @param p Defaults to \code{NULL}.
-#' @param mu Defaults to \code{0}.
+#' @param p Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param sigma Passed to \code{.reinfc_run_gaussian}. Defaults to \code{1}.
 #' @param unit One of \code{"bernoulli"}, \code{"gaussian"}. Defaults to \code{"bernoulli-logistic"}.
 #' @param baseline Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"comparison"}.
 #' @param mode Compared against \code{"immediate"}. Defaults to \code{"immediate"}.
-#' @param alpha Defaults to \code{0.1}.
-#' @param gamma Defaults to \code{0.9}.
-#' @param rho Defaults to \code{0.1}.
-#' @param episode_length Defaults to \code{1}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.
+#' @param rho Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
+#' @param episode_length Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param trials Passed to \code{.reinfc_run_gaussian}. Defaults to \code{100}.
 #' @param eligibility One of \code{"p"}, \code{"ybar"}. Defaults to \code{"p"}.
 #' @param rate_scaling Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"sigma2"}.

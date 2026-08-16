@@ -8,7 +8,7 @@
 softplus(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mambss_native implementation. Called by \code{morie_geron_blip_itm_itc}, \code{selective_scan}. See the file header for the source the module follows.

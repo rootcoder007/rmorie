@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{M}{A matrix; passed to \code{nrow}.}
-\item{rhs}{See Usage.}
+\item{rhs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{

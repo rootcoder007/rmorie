@@ -51,9 +51,9 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param b See Usage.
-#' @param iters Defaults to \code{200}.
-#' @param grid Defaults to \code{2001}.
+#' @param b Coerced to integer by the body, with \code{as.integer}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @param grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2001}.
 #' @param lo Numeric; combined arithmetically in the body. Defaults to \code{-6}.
 #' @param hi Numeric; combined arithmetically in the body. Defaults to \code{6}.
 #' @return A vector, from \code{as.numeric}.
@@ -83,7 +83,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cb See Usage.
 #' @return A numeric value.
 #' @export

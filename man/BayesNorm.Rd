@@ -8,10 +8,10 @@
 BayesNorm(x, means, covs, priors = NULL, full = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{means}{A vector; its length is taken and its elements indexed.}
 \item{covs}{A vector; its length is taken and its elements indexed.}
-\item{priors}{Defaults to \code{NULL}.}
+\item{priors}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{full}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

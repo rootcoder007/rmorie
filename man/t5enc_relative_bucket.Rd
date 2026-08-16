@@ -8,10 +8,10 @@
 t5enc_relative_bucket(relative_position, bidirectional = TRUE, num_buckets = 32L, max_distance = 128)
 }
 \arguments{
-\item{relative_position}{See Usage.}
+\item{relative_position}{Coerced to integer by the body, with \code{as.integer}.}
 \item{bidirectional}{A flag; the body branches on it. Defaults to \code{TRUE}.}
-\item{num_buckets}{Defaults to \code{32L}.}
-\item{max_distance}{Defaults to \code{128}.}
+\item{num_buckets}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32L}.}
+\item{max_distance}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{128}.}
 }
 \description{
 A step of the t5enc_native implementation. Called by \code{morie_t5enc}. See the file header for the source the module follows.

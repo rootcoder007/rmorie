@@ -9,8 +9,8 @@ stage_one_objectives(query_out, text_out, temperature = 0.07)
 }
 \arguments{
 \item{query_out}{A matrix; passed to \code{as.matrix}.}
-\item{text_out}{See Usage.}
-\item{temperature}{Defaults to \code{0.07}.}
+\item{text_out}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{temperature}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.07}.}
 }
 \description{
 A step of the blip2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.

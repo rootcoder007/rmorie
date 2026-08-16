@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{maxlag}{Defaults to \code{NULL}.}
+\item{maxlag}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_corr implementation. Called by \code{MfAcf}, \code{RefPattern}. See the file header for the source the module follows.

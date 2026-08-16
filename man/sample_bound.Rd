@@ -8,10 +8,10 @@
 sample_bound(n, r, C = 1, exponent = 1.2)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{r}{See Usage.}
-\item{C}{Defaults to \code{1}.}
-\item{exponent}{Defaults to \code{1.2}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{r}{Coerced to integer by the body, with \code{as.integer}.}
+\item{C}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{exponent}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.2}.}
 }
 \description{
 A step of the meglt_native implementation. Called by \code{morie_meglt}. See the file header for the source the module follows.

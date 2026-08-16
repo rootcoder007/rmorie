@@ -9,7 +9,7 @@ corrupt(y, q, rng)
 }
 \arguments{
 \item{y}{A vector; its length is taken.}
-\item{q}{See Usage.}
+\item{q}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{

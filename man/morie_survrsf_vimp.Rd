@@ -10,7 +10,7 @@ morie_survrsf_vimp(fit, X, variables = NULL, seed = 1)
 \arguments{
 \item{fit}{A list; the body reads \code{$events}, \code{$times} from it.}
 \item{X}{A matrix; passed to \code{ncol}.}
-\item{variables}{Defaults to \code{NULL}.}
+\item{variables}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Passed to \code{morie_survrsf_mortality}. Defaults to \code{1}.}
 }
 \description{

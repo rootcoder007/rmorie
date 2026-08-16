@@ -8,8 +8,8 @@
 .morie_km2_tox_scores(Yhat, c, name = "Yhat")
 }
 \arguments{
-\item{Yhat}{See Usage.}
-\item{c}{See Usage.}
+\item{Yhat}{Coerced to list by the body, with \code{as.list}.}
+\item{c}{A function; the body checks with \code{is.function}.}
 \item{name}{Defaults to \code{"Yhat"}.}
 }
 \description{

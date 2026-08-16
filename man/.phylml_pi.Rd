@@ -8,7 +8,7 @@
 .phylml_pi(pi)
 }
 \arguments{
-\item{pi}{See Usage.}
+\item{pi}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the phylml_native implementation. Called by \code{morie_phylml}, \code{site_likelihood}, \code{substitution_matrix}. See the file header for the source the module follows.

@@ -9,9 +9,9 @@ morie_yolovx_decode_box(ltrb, cx, cy, stride = 1)
 }
 \arguments{
 \item{ltrb}{Passed to \code{.s03vec}.}
-\item{cx}{See Usage.}
-\item{cy}{See Usage.}
-\item{stride}{Defaults to \code{1}.}
+\item{cx}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cy}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{stride}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the yolovx_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 HannMag(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 between.  The book\'s absolute value is redundant -- 1 + cos is never negative -- and is kept only because the book writes it.

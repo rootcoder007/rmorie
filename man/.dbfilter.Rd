@@ -8,7 +8,7 @@
 .dbfilter(name)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}. See the file header for the source the module follows.

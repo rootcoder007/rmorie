@@ -271,11 +271,11 @@ morie_brr_variance <- function(estimates, full_estimate = NULL, fay_k = 0) {
 #' squaring, which is exactly the difference between matching every item
 #' and matching the test as a whole.
 #'
-#' @param a_ref See Usage.
-#' @param b_ref See Usage.
-#' @param a_focal See Usage.
-#' @param b_focal See Usage.
-#' @param n_quad See Usage.
+#' @param a_ref Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_ref Coerced to numeric by the body, with \code{as.numeric}.
+#' @param a_focal Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_focal Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_quad Coerced to integer by the body, with \code{as.integer}.
 #' @param theta_range Numeric; combined arithmetically in the body.
 #' @param aggregate_first A flag; the body branches on it.
 #' @return A list with \code{A}, \code{B}, \code{criterion}, \code{a_transformed}, \code{b_transformed}, \code{n_items}, \code{converged}, \code{warnings}.

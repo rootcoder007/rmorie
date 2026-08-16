@@ -8,9 +8,9 @@
 Template(x, ref, threshold = NULL, subtract_mean = TRUE)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{ref}{See Usage.}
-\item{threshold}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{ref}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{subtract_mean}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

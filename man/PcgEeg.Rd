@@ -8,10 +8,10 @@
 PcgEeg(pcg, eeg, fs, n_segments = 8, band = c(1, 100))
 }
 \arguments{
-\item{pcg}{See Usage.}
-\item{eeg}{See Usage.}
+\item{pcg}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{eeg}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{n_segments}{Defaults to \code{8}.}
+\item{n_segments}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 \item{band}{A vector; indexed elementwise. Defaults to \code{c(1, 100)}.}
 }
 \description{

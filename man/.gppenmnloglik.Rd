@@ -12,7 +12,7 @@
 \item{y}{Passed to \code{.gpmnloglik}.}
 \item{beta0}{Passed to \code{.gpmnloglik}.}
 \item{beta}{Passed to \code{.gpmnloglik}.}
-\item{lam}{See Usage.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{penalty}{Defaults to \code{"ridge"}.}
 \item{baseline_last}{Passed to \code{.gpmnloglik}. Defaults to \code{TRUE}.}
 }

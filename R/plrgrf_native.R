@@ -175,8 +175,8 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param W Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n_trees Numeric; combined arithmetically in the body. Defaults to \code{200}.

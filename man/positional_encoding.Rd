@@ -9,7 +9,7 @@ positional_encoding(p, L = 10, include_input = TRUE)
 }
 \arguments{
 \item{p}{Passed to \code{.nrfrad_vec}.}
-\item{L}{Defaults to \code{10}.}
+\item{L}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{include_input}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

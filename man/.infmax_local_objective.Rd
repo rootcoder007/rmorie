@@ -8,8 +8,8 @@
 .infmax_local_objective(global_features, feature_maps, critic, estimator = "jsd")
 }
 \arguments{
-\item{global_features}{See Usage.}
-\item{feature_maps}{See Usage.}
+\item{global_features}{Iterated over elementwise, with \code{lapply}.}
+\item{feature_maps}{Iterated over elementwise, with \code{lapply}.}
 \item{critic}{See Usage.}
 \item{estimator}{Defaults to \code{"jsd"}.}
 }

@@ -63,7 +63,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
 #' @export
 .mienco_softplus <- function(z) {
@@ -77,8 +77,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param paired See Usage.
-#' @param unpaired See Usage.
+#' @param paired Coerced to numeric by the body, with \code{as.numeric}.
+#' @param unpaired Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .mienco_jsd_estimate <- function(paired, unpaired) {
@@ -96,8 +96,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param paired See Usage.
-#' @param unpaired See Usage.
+#' @param paired Coerced to numeric by the body, with \code{as.numeric}.
+#' @param unpaired Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .mienco_dv_estimate <- function(paired, unpaired) {
@@ -169,8 +169,8 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param samples See Usage.
-#' @param prior_samples See Usage.
+#' @param samples Iterated over elementwise, with \code{sapply}.
+#' @param prior_samples Iterated over elementwise, with \code{sapply}.
 #' @param discriminator See Usage.
 #' @return A numeric value.
 #' @export

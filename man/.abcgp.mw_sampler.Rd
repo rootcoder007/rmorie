@@ -11,18 +11,18 @@
 \item{sim}{See Usage.}
 \item{obs}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
 \item{log_prior}{Passed to \code{.abcgp.alpha_terms}.}
-\item{theta0}{See Usage.}
+\item{theta0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_iter}{Numeric; combined arithmetically in the body.}
-\item{n_sim}{See Usage.}
+\item{n_sim}{Coerced to integer by the body, with \code{as.integer}.}
 \item{epsilon}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
-\item{proposal_sd}{See Usage.}
+\item{proposal_sd}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{summary}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
 \item{seed}{Passed to \code{.ghc_rng}.}
 \item{adaptive}{A flag; the body branches on it.}
 \item{xi}{See Usage.}
-\item{delta_s}{See Usage.}
-\item{n_alpha}{See Usage.}
-\item{max_sim}{Defaults to \code{NULL}.}
+\item{delta_s}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_alpha}{Coerced to integer by the body, with \code{as.integer}.}
+\item{max_sim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc}, \code{.abcgp.synthetic_abc}. See the file header for the source the module follows.

@@ -8,9 +8,9 @@
 .replwt_design(weights, strata = NULL, psu = NULL)
 }
 \arguments{
-\item{weights}{See Usage.}
-\item{strata}{Defaults to \code{NULL}.}
-\item{psu}{Defaults to \code{NULL}.}
+\item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{strata}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{psu}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the replwt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

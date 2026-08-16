@@ -8,9 +8,9 @@
 discretize_zoh(delta, A, B, rule = "zoh")
 }
 \arguments{
-\item{delta}{See Usage.}
-\item{A}{See Usage.}
-\item{B}{See Usage.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{B}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rule}{One of \code{"euler"}, \code{"zoh"}. Defaults to \code{"zoh"}.}
 }
 \description{

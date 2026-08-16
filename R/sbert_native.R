@@ -27,7 +27,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
 .sbert_mat <- function(x) {
@@ -43,7 +43,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .sbert_vec <- function(x) {
@@ -131,7 +131,7 @@ classification_features <- function(u, v) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param mode One of \code{"bi-encoder"}, \code{"cross-encoder"}. Defaults to \code{"cross-encoder"}.
 #' @return A list with \code{forward_passes}, \code{cross_encoder}, \code{bi_encoder}, \code{speedup}, \code{n}, \code{note}.
 #' @export

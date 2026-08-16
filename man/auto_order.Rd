@@ -14,7 +14,7 @@ auto_order(y, X = NULL, d = 0, D = 0, s = 1, method = "css", max_steps = 20)
 \item{D}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{s}{Passed to \code{.try_fit}. Defaults to \code{1}.}
 \item{method}{Passed to \code{.try_fit}. Defaults to \code{"css"}.}
-\item{max_steps}{Defaults to \code{20}.}
+\item{max_steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
 }
 \description{
 A step of the sarimax_native implementation. No other function in the package calls it. See the file header for the source the module follows.

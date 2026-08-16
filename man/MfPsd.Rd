@@ -8,7 +8,7 @@
 MfPsd(x, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{dt}{Defaults to \code{1}.}
 }
 \description{

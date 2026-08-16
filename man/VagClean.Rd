@@ -8,10 +8,10 @@
 VagClean(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02, adaptive_mu = TRUE)
 }
 \arguments{
-\item{vag}{See Usage.}
-\item{emg_ref}{See Usage.}
-\item{fs}{See Usage.}
-\item{n_taps}{Defaults to \code{8}.}
+\item{vag}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{emg_ref}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_taps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 \item{mu}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.02}.}
 \item{adaptive_mu}{A flag; the body branches on it. Defaults to \code{TRUE}.}

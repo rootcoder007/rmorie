@@ -42,8 +42,8 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param residues See Usage.
-#' @param moduli See Usage.
+#' @param residues Coerced to integer by the body, with \code{as.integer}.
+#' @param moduli Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{modulus}, \code{residues}, \code{moduli}, \code{method}.
 #' @export
 crtT <- function(residues, moduli) {

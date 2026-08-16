@@ -8,10 +8,10 @@
 observed_clint_u(cl_h, fu_blood, species = "human", qh = NULL, liver_model = "well_stirred")
 }
 \arguments{
-\item{cl_h}{See Usage.}
-\item{fu_blood}{See Usage.}
+\item{cl_h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fu_blood}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{species}{Defaults to \code{"human"}.}
-\item{qh}{Defaults to \code{NULL}.}
+\item{qh}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{liver_model}{One of \code{"parallel_tube"}, \code{"well_stirred"}. Defaults to \code{"well_stirred"}.}
 }
 \description{

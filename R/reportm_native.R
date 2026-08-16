@@ -18,7 +18,7 @@
 #'
 #' exactly in a double, which is what makes the streams identical.
 #'
-#' @param seed Defaults to \code{1}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .mor_lcg_new <- function(seed = 1) {

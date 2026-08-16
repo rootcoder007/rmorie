@@ -86,7 +86,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .impfun_as_double_vec <- function(x) {
@@ -165,10 +165,10 @@ merge_panels <- function(panels, study_snps) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param study_hap See Usage.
+#' @param study_hap Coerced to integer by the body, with \code{as.integer}.
 #' @param reference_haps Passed to \code{.impfun_as_int_list}.
-#' @param rho Defaults to \code{0.001}.
-#' @param theta Defaults to \code{0.01}.
+#' @param rho Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{posterior}, \code{n_templates}, \code{n_sites}, \code{log_likelihood}.
 #' @export
 copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) {
@@ -231,7 +231,7 @@ copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
 #'
 #' @param posterior Passed to \code{.impfun_as_double_matrix}.
 #' @param reference_haps Passed to \code{.impfun_as_double_matrix}.
-#' @param site See Usage.
+#' @param site Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{dosage}, \code{allele_freq}, \code{certainty}, \code{note}.
 #' @export
 impute_dosage <- function(posterior, reference_haps, site) {

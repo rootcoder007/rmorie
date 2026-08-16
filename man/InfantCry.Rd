@@ -8,12 +8,12 @@
 InfantCry(cry, fs, window_ms = 40, f0_range = c(200, 1000), order = NULL, flat_tolerance = 0.06)
 }
 \arguments{
-\item{cry}{See Usage.}
+\item{cry}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{window_ms}{Numeric; combined arithmetically in the body. Defaults to \code{40}.}
 \item{f0_range}{A vector; indexed elementwise. Defaults to \code{c(200, 1000)}.}
-\item{order}{Defaults to \code{NULL}.}
-\item{flat_tolerance}{Defaults to \code{0.06}.}
+\item{order}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{flat_tolerance}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.06}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

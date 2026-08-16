@@ -8,8 +8,8 @@
 DftK(x, k_points)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{k_points}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{k_points}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 finely; K < N folds and the signal cannot be recovered.

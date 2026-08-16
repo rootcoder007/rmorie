@@ -80,7 +80,7 @@
 #' who wants to see that happen should be able to.
 #'
 #' @param level Numeric; combined arithmetically in the body.
-#' @param c See Usage.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param schedule One of \code{"constant"}, \code{"cubic"}.
 #' @return Nothing; this branch always raises.
 #' @export

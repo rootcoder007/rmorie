@@ -8,9 +8,9 @@
 S_function(std_moments, form = "sum", n_equality = 0L)
 }
 \arguments{
-\item{std_moments}{See Usage.}
+\item{std_moments}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{form}{One of \code{"max"}, \code{"sum"}. Defaults to \code{"sum"}.}
-\item{n_equality}{Defaults to \code{0L}.}
+\item{n_equality}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{
 A step of the bnskmt_native implementation. Called by \code{cvm_statistic}, \code{ks_critical_value}, \code{ks_statistic}. See the file header for the source the module follows.

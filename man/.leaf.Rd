@@ -8,7 +8,7 @@
 .leaf(node)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.}
 }
 \description{
 when it is a dict that carries a "label" key).

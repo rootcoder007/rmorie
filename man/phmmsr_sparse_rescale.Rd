@@ -8,9 +8,9 @@
 phmmsr_sparse_rescale(values, floor = 1e-30, target = 1)
 }
 \arguments{
-\item{values}{See Usage.}
-\item{floor}{Defaults to \code{1e-30}.}
-\item{target}{Defaults to \code{1}.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{floor}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-30}.}
+\item{target}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the phmmsr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

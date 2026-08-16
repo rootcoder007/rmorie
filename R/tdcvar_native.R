@@ -48,7 +48,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tdcvar_vec <- function(x) {
@@ -244,8 +244,8 @@
 #' source it follows.
 #'
 #' @param y Passed to \code{.tdcvar_vec}.
-#' @param A See Usage.
-#' @param L_t See Usage.
+#' @param A A list; the body checks with \code{is.list}.
+#' @param L_t A list; the body checks with \code{is.list}.
 #' @param time Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
 #' @param kind Passed to \code{.tdcvar_ip_weights_history}. Defaults to \code{"binary"}.

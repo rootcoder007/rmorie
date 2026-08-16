@@ -12,8 +12,8 @@
 \item{k}{Passed to \code{.schab_st_as_lags}.}
 \item{cov_spatial}{See Usage.}
 \item{cov_temporal}{See Usage.}
-\item{nodes}{See Usage.}
-\item{weights}{See Usage.}
+\item{nodes}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstcn}. See the file header for the source the module follows.

@@ -10,7 +10,7 @@
 \arguments{
 \item{A}{Passed to \code{.tlstoch_vec}.}
 \item{W}{Passed to \code{.tlstoch_mat}.}
-\item{delta}{See Usage.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{g_fn}{See Usage.}
 \item{lower}{Defaults to \code{NULL}.}
 \item{upper}{Defaults to \code{NULL}.}

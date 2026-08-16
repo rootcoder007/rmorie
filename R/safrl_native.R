@@ -114,7 +114,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v A list; the body checks with \code{is.list}.
 #' @param name See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -199,7 +199,7 @@
 #' @param delta Numeric; combined arithmetically in the body.
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @param tol See Usage.
-#' @param max_iter See Usage.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{lam}, \code{nu}.
 #' @export
 .safrl_dual <- function(q, r, S, c, delta, m, tol, max_iter) {
@@ -274,11 +274,11 @@
 #' @param cols A vector; its length is taken and its elements indexed.
 #' @param cv A vector; indexed elementwise.
 #' @param H A vector; indexed elementwise.
-#' @param delta See Usage.
-#' @param lam See Usage.
-#' @param nu See Usage.
-#' @param feasible See Usage.
-#' @param recovery See Usage.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lam Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param nu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param feasible Coerced to logical by the body, with \code{as.logical}.
+#' @param recovery Coerced to logical by the body, with \code{as.logical}.
 #' @return A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu}, \code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation}, \code{kl}, \code{delta}, \code{method}.
 #' @export
 .safrl_finish <- function(step, g, cols, cv, H, delta, lam, nu,
@@ -466,14 +466,14 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 #' source it follows.
 #'
 #' @param policy See Usage.
-#' @param states See Usage.
-#' @param actions See Usage.
+#' @param states Coerced to list by the body, with \code{as.list}.
+#' @param actions Coerced to list by the body, with \code{as.list}.
 #' @param step See Usage.
 #' @param reward See Usage.
-#' @param costs See Usage.
+#' @param costs Coerced to list by the body, with \code{as.list}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
-#' @param start Defaults to \code{NULL}.
-#' @param iters Defaults to \code{5000}.
+#' @param start Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
 #' @param tol Defaults to \code{1e-14}.
 #' @return A list with \code{estimate}, \code{J}, \code{J_C}, \code{gamma}, \code{method}.
 #' @export
@@ -543,7 +543,7 @@ morie_safrl_cmdp_returns <- function(policy, states, actions, step,
 #'
 #' @param delta Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.
-#' @param epsilon See Usage.
+#' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_safrl_worst_case_violation <- function(delta, gamma, epsilon) {

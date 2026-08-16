@@ -10,11 +10,11 @@ gnnEx_explain_node(predict, adj, v, y, n_features, L = 2, iters = 300, lr = 0.1,
 \arguments{
 \item{predict}{See Usage.}
 \item{adj}{See Usage.}
-\item{v}{See Usage.}
+\item{v}{Coerced to character by the body, with \code{as.character}.}
 \item{y}{See Usage.}
-\item{n_features}{See Usage.}
+\item{n_features}{Coerced to integer by the body, with \code{as.integer}.}
 \item{L}{Defaults to \code{2}.}
-\item{iters}{Defaults to \code{300}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{size_coef}{Defaults to \code{0.005}.}
 \item{entropy_coef}{Defaults to \code{1}.}

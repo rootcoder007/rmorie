@@ -8,11 +8,11 @@
 SeizDet(eeg, fs, epoch_s = 1, ratio_threshold = 2, baseline_epochs = NULL)
 }
 \arguments{
-\item{eeg}{See Usage.}
+\item{eeg}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{epoch_s}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{ratio_threshold}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
-\item{baseline_epochs}{Defaults to \code{NULL}.}
+\item{baseline_epochs}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

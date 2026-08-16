@@ -8,8 +8,8 @@
 .tlsieve_vaccine_efficacy(F_vaccine, F_placebo)
 }
 \arguments{
-\item{F_vaccine}{See Usage.}
-\item{F_placebo}{See Usage.}
+\item{F_vaccine}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{F_placebo}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlsieve_native implementation. Called by \code{morie_tlsieve}. See the file header for the source the module follows.

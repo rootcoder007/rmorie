@@ -11,9 +11,9 @@ verify_gradient(psi_of_P, D, score, weights = NULL, h = 1e-05, tol = 1e-04)
 \item{psi_of_P}{See Usage.}
 \item{D}{A vector; its length is taken.}
 \item{score}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Defaults to \code{1e-05}.}
-\item{tol}{Defaults to \code{1e-04}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.}
 }
 \description{
 A step of the tlheic_native implementation. Called by \code{morie_tlheic}. See the file header for the source the module follows.

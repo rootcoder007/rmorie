@@ -44,7 +44,7 @@
 #' @param schedule One of \code{"geometric"}, \code{"linear"}.
 #' @param T0 Numeric; combined arithmetically in the body.
 #' @param k Numeric; combined arithmetically in the body.
-#' @param n_iter See Usage.
+#' @param n_iter Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
@@ -66,14 +66,14 @@
 #' source it follows.
 #'
 #' @param fun See Usage.
-#' @param x0 See Usage.
-#' @param step Defaults to \code{1}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param T0 Passed to \code{.sa_opt_temperature}. Defaults to \code{1}.
 #' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
-#' @param schedule Defaults to \code{"geometric"}.
+#' @param schedule Coerced to character by the body, with \code{as.character}. Defaults to \code{"geometric"}.
 #' @param alpha Passed to \code{.sa_opt_temperature}. Defaults to \code{0.99}.
-#' @param lower Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param lower Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param upper Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export

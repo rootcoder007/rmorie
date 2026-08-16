@@ -8,7 +8,7 @@
 .morie_km2_top_p(z, p, T = 1)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{T}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }

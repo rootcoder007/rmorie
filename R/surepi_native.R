@@ -45,7 +45,7 @@
 #' @param t Numeric; combined arithmetically in the body.
 #' @param lag Numeric; combined arithmetically in the body.
 #' @param width Numeric; combined arithmetically in the body.
-#' @param sigma_floor See Usage.
+#' @param sigma_floor Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{m}, \code{s}, \code{used}.
 #' @export
 .surepi_baseline <- function(counts, t, lag, width, sigma_floor) {
@@ -147,9 +147,9 @@ surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
+#' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @param method Compared against \code{"C3"}. Defaults to \code{"C2"}.
-#' @param threshold Defaults to \code{3}.
+#' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param sigma_floor Passed to \code{.surepi_stat}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged}, \code{method}, \code{threshold}, \code{baseline_lag}, \code{baseline_width}, \code{sigma_floor}, \code{n}, \code{n_evaluable}, \code{reference}, \code{caveat}.
 #' @export
@@ -215,12 +215,12 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
+#' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu0 A vector; its length is taken.
 #' @param sigma A vector; its length is taken.
-#' @param k_shift Defaults to \code{1}.
-#' @param decision Defaults to \code{0.5}.
-#' @param min_count Defaults to \code{5}.
+#' @param k_shift Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param decision Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param min_count Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return A list with \code{cusum}, \code{flag}, \code{estimate}, \code{n_flagged}, \code{decision}, \code{k}, \code{min_count}, \code{method}.
 #' @export
 surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
@@ -275,10 +275,10 @@ surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
-#' @param current See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
+#' @param current Coerced to numeric by the body, with \code{as.numeric}.
 #' @param passes Numeric; passed to \code{max}. Defaults to \code{c(4, 2, 5, 3)}.
-#' @param multiplier Defaults to \code{2}.
+#' @param multiplier Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @return A list with \code{smoothed}, \code{baseline}, \code{sigma}, \code{threshold}, \code{flag}, \code{current}, \code{method}.
 #' @export
 surepi_compound_smoothing <- function(values, current,

@@ -10,7 +10,7 @@
 \arguments{
 \item{edge_states}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{adj}{Passed to \code{.dmlqs_norm_adj}.}
-\item{n}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the file header for the source the module follows.

@@ -127,7 +127,7 @@ morie_tqipb_constant <- function(bits, d, route = "table") {
 #' the dimension does not divide.
 #'
 #' @param d Numeric; combined arithmetically in the body.
-#' @param n_blocks See Usage.
+#' @param n_blocks Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{ifelse}.
 #' @export
 .tqipb_blocks <- function(d, n_blocks) {

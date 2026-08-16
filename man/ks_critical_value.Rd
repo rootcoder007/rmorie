@@ -8,14 +8,14 @@
 ks_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, reps = 200L, seed = 0L, kappa = NULL)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{A matrix; the body checks with \code{is.matrix}.}
 \item{instruments}{A list; the body reads \code{$instruments} from it.}
 \item{form}{Defaults to \code{"sum"}.}
 \item{n_equality}{Defaults to \code{0L}.}
-\item{level}{Defaults to \code{0.95}.}
-\item{reps}{Defaults to \code{200L}.}
-\item{seed}{Defaults to \code{0L}.}
-\item{kappa}{Defaults to \code{NULL}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
+\item{reps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
+\item{kappa}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}. See the file header for the source the module follows.

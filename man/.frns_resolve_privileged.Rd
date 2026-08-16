@@ -8,8 +8,8 @@
 .frns_resolve_privileged(privileged, rates)
 }
 \arguments{
-\item{privileged}{See Usage.}
-\item{rates}{See Usage.}
+\item{privileged}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{rates}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 A step of the frns_metrics implementation. No other function in the package calls it. See the file header for the source the module follows.

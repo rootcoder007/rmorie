@@ -69,7 +69,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tlnetlg_vec <- function(x) {
@@ -283,7 +283,7 @@ morie_tlnetlg_network_variance <- function(ic, friends) {
 #' @param friends Passed to \code{morie_tlnetlg_community_estimand}.
 #' @param W Passed to \code{.tlnetlg_mat}.
 #' @param policy Passed to \code{morie_tlnetlg_community_estimand}.
-#' @param T See Usage.
+#' @param T Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{T}, \code{network}, \code{method}, \code{note}.
 #' @export
 morie_tlnetlg_longitudinal_network_gcomp <- function(Q_seq, friends, W, policy, T) {

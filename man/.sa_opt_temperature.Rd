@@ -11,7 +11,7 @@
 \item{schedule}{One of \code{"geometric"}, \code{"linear"}.}
 \item{T0}{Numeric; combined arithmetically in the body.}
 \item{k}{Numeric; combined arithmetically in the body.}
-\item{n_iter}{See Usage.}
+\item{n_iter}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{

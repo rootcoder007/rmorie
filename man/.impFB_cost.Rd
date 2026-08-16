@@ -12,7 +12,7 @@
 \item{X}{A matrix; passed to \code{\%*\%}.}
 \item{Y}{A matrix; passed to \code{t}.}
 \item{alpha}{Passed to \code{.impFB_confidence}. Defaults to \code{40}.}
-\item{lam}{Defaults to \code{0.1}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \description{
 A step of the impFB_native implementation. Called by \code{morie_impFB}. See the file header for the source the module follows.

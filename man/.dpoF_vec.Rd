@@ -8,7 +8,7 @@
 .dpoF_vec(x, name)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{name}{See Usage.}
 }
 \description{

@@ -141,7 +141,7 @@
 #' stream 2u - 1 scaled.
 #'
 #' @param count A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_gr_lcg_u <- function(count, seed) {
@@ -198,7 +198,7 @@
 #' which differs from qr.solve on rank-deficient designs.
 #'
 #' @param A A matrix; passed to \code{ncol}.
-#' @param b See Usage.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .morie_gr_lstsq <- function(A, b) {
@@ -4813,7 +4813,7 @@ morie_geron_bf16_range <- function(x) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param value See Usage.
+#' @param value Coerced to numeric by the body, with \code{as.numeric}.
 #' @param parents Defaults to \code{list()}.
 #' @param op Defaults to \code{"leaf"}.
 #' @return The value of \code{e}, as built in the body.

@@ -8,8 +8,8 @@
 .morie_gr_sorted_counts(y_true, y_scores)
 }
 \arguments{
-\item{y_true}{See Usage.}
-\item{y_scores}{See Usage.}
+\item{y_true}{Coerced to vector by the body, with \code{as.vector}.}
+\item{y_scores}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the geron_train_native implementation. Called by \code{morie_geron_precision_recall_curve}, \code{morie_geron_roc_curve}. See the file header for the source the module follows.

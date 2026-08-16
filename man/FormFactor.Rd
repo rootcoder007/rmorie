@@ -8,7 +8,7 @@
 FormFactor(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 form factor = mobility(x\')/mobility(x) = (sd(x\'\')/sd(x\'))/(sd(x\')/sd(x)). The book states a sinusoid has complexity 1 and that more variable waveforms give larger values. Ratios are dimensionless, so no fs.

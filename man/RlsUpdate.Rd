@@ -8,9 +8,9 @@
 RlsUpdate(w_prev, k, alpha)
 }
 \arguments{
-\item{w_prev}{See Usage.}
-\item{k}{See Usage.}
-\item{alpha}{See Usage.}
+\item{w_prev}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{k}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.

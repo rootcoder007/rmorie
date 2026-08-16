@@ -9,7 +9,7 @@ Sens(tp, fn = NULL)
 }
 \arguments{
 \item{tp}{A matrix; passed to \code{as.matrix}.}
-\item{fn}{Defaults to \code{NULL}.}
+\item{fn}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 capability to DETECT and says nothing about false alarms -- a test calling everyone positive scores 1, which is why the book always reports it beside the specificity.

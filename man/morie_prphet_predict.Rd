@@ -9,7 +9,7 @@ morie_prphet_predict(fit, t.new, seasonalities = NULL, holidays = NULL, holiday_
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$beta}, \code{$changepoints}, \code{$columns} from it.}
-\item{t.new}{See Usage.}
+\item{t.new}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{seasonalities}{Passed to \code{morie_prphet_design}.}
 \item{holidays}{Passed to \code{morie_prphet_design}.}
 \item{holiday_window}{Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.}

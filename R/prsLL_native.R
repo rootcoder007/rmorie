@@ -89,7 +89,7 @@
 #' source it follows.
 #'
 #' @param rules See Usage.
-#' @param start Defaults to \code{NULL}.
+#' @param start Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{g}, as built in the body.
 #' @export
 .prsLL_grammar <- function(rules, start = NULL) {
@@ -262,7 +262,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq See Usage.
+#' @param seq Coerced to character by the body, with \code{as.character}.
 #' @param g Passed to \code{.prsLL_first_sets}.
 #' @param first Defaults to \code{NULL}.
 #' @return The value of \code{.prsLL_first_seq}.
@@ -619,7 +619,7 @@
 #' source it follows.
 #'
 #' @param g A list; the body reads \code{$start} from it.
-#' @param tokens See Usage.
+#' @param tokens Coerced to character by the body, with \code{as.character}.
 #' @param route Compared against \code{"table"}. Defaults to \code{"table"}.
 #' @return The value of \code{tree}, as built in the body.
 #' @export

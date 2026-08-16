@@ -8,8 +8,8 @@
 ngcf_message(e_i, e_u, W1, W2, p_ui, affinity = TRUE)
 }
 \arguments{
-\item{e_i}{See Usage.}
-\item{e_u}{See Usage.}
+\item{e_i}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{e_u}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W1}{A matrix; indexed by row and column.}
 \item{W2}{A matrix; indexed by row and column.}
 \item{p_ui}{Numeric; combined arithmetically in the body.}

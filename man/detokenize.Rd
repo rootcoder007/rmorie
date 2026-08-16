@@ -10,7 +10,7 @@ detokenize(tokens, bins, scale)
 \arguments{
 \item{tokens}{See Usage.}
 \item{bins}{See Usage.}
-\item{scale}{See Usage.}
+\item{scale}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the chronos_native implementation. No other function in the package calls it. See the file header for the source the module follows.

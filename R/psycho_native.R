@@ -30,9 +30,9 @@
 #' every downstream ICC ill-defined, so it is an error rather than a
 #' number from whatever cells happen to be present.
 #'
-#' @param y See Usage.
-#' @param subject See Usage.
-#' @param rater See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param subject Coerced to vector by the body, with \code{as.vector}.
+#' @param rater Coerced to vector by the body, with \code{as.vector}.
 #' @return A list with \code{MSR}, \code{MSC}, \code{MSE}, \code{MSW}, \code{n}, \code{k}, \code{matrix}.
 #' @export
 .psy_anova2 <- function(y, subject, rater) {
@@ -134,9 +134,9 @@
 #' source it follows.
 #'
 #' @param m A count; the body uses it as \code{rep(...)}.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param cc See Usage.
+#' @param a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cc Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{a}, \code{b}, \code{c}.
 #' @export
 .psy_items <- function(m, a, b, cc) {
@@ -159,7 +159,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{yv}, as built in the body.
 #' @export
 .psy_check_y <- function(y) {
@@ -208,8 +208,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param yi See Usage.
-#' @param vi See Usage.
+#' @param yi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param vi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mu}, \code{Q}, \code{w}, \code{k}.
 #' @export
 .psy_fixed_pool <- function(yi, vi) {

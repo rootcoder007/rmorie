@@ -15,8 +15,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
+#' @param time Coerced to numeric by the body, with \code{as.numeric}.
+#' @param event Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{t}, \code{e}, \code{X}.
 #' @export
@@ -120,7 +120,7 @@
 #' @param ties Passed to \code{.morie_cox_score}. Defaults to \code{"efron"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-09}.
-#' @param offset Defaults to \code{NULL}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter}, \code{converged}.
 #' @export
 .morie_cox_fit <- function(t, e, X, ties = "efron", max_iter = 50L,
@@ -169,7 +169,7 @@
 #' @param e See Usage.
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param beta A matrix; passed to \code{\%*\%}.
-#' @param offset Defaults to \code{NULL}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{times}, \code{hazard}, \code{cumhazard}.
 #' @export
 .morie_cox_baseline <- function(t, e, X, beta, offset = NULL) {

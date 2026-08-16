@@ -8,7 +8,7 @@
 Qpois(p, lambda)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Iterated over elementwise, with \code{vapply}.}
 \item{lambda}{See Usage.}
 }
 \description{

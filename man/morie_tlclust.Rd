@@ -8,7 +8,7 @@
 morie_tlclust(Q_seq, H_seq, Y, cluster, ic = NULL)
 }
 \arguments{
-\item{Q_seq}{See Usage.}
+\item{Q_seq}{A list; the body checks with \code{is.list}.}
 \item{H_seq}{See Usage.}
 \item{Y}{See Usage.}
 \item{cluster}{See Usage.}

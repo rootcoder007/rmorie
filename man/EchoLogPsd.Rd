@@ -10,8 +10,8 @@ EchoLogPsd(H, a, n_0, omega)
 \arguments{
 \item{H}{A vector; its length is taken.}
 \item{a}{Numeric; combined arithmetically in the body.}
-\item{n_0}{See Usage.}
-\item{omega}{See Usage.}
+\item{n_0}{Coerced to integer by the body, with \code{as.integer}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

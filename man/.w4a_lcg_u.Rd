@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the geron_w4a_native implementation. Called by \code{morie_geron_dataloader}, \code{morie_geron_dropout_alt}, \code{morie_lcg_normal}. See the file header for the source the module follows.

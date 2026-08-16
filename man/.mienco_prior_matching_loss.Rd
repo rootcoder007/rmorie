@@ -8,8 +8,8 @@
 .mienco_prior_matching_loss(samples, prior_samples, discriminator)
 }
 \arguments{
-\item{samples}{See Usage.}
-\item{prior_samples}{See Usage.}
+\item{samples}{Iterated over elementwise, with \code{sapply}.}
+\item{prior_samples}{Iterated over elementwise, with \code{sapply}.}
 \item{discriminator}{See Usage.}
 }
 \description{

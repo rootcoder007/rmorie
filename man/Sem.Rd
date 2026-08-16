@@ -8,8 +8,8 @@
 Sem(psd, reference)
 }
 \arguments{
-\item{psd}{See Usage.}
-\item{reference}{See Usage.}
+\item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{reference}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 difference of the LOG spectra.  Taking logs is what makes it scale-free -- a pure gain change shifts every log bin by the same constant, so it lands entirely in mean_offset and leaves shape_only at zero.

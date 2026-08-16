@@ -295,7 +295,7 @@ leapfrog <- function(theta, r, eps, grad) {
 #' @param grad See Usage.
 #' @param rnd See Usage.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param max_doublings Defaults to \code{100}.
+#' @param max_doublings Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
 find_reasonable_epsilon <- function(theta, logp, grad, rnd,

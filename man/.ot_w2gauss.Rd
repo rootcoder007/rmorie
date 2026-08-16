@@ -8,9 +8,9 @@
 .ot_w2gauss(m1, S1, m2, S2)
 }
 \arguments{
-\item{m1}{See Usage.}
+\item{m1}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{S1}{A matrix; passed to \code{as.matrix}.}
-\item{m2}{See Usage.}
+\item{m2}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{S2}{A matrix; passed to \code{as.matrix}.}
 }
 \description{

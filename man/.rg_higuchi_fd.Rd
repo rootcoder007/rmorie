@@ -8,8 +8,8 @@
 .rg_higuchi_fd(x, kmax)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{kmax}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{kmax}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rgemgfd implementation. Called by \code{rgemgfd}. See the file header for the source the module follows.

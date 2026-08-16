@@ -8,7 +8,7 @@
 .sctraj_non_outlier_range(vals)
 }
 \arguments{
-\item{vals}{See Usage.}
+\item{vals}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.

@@ -11,7 +11,7 @@
 \item{y}{See Usage.}
 \item{spec}{A list; the body reads \code{$use_box_cox} from it.}
 \item{long_run_b}{Defaults to \code{0}.}
-\item{maxiter}{Defaults to \code{2000}.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.}
 }
 \description{
 A step of the bats_native implementation. Called by \code{morie_bats}. See the file header for the source the module follows.

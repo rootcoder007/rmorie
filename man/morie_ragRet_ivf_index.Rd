@@ -8,10 +8,10 @@
 morie_ragRet_ivf_index(corpus, n.cells = 4L, iters = 25L, seed = 0L)
 }
 \arguments{
-\item{corpus}{See Usage.}
-\item{n.cells}{Defaults to \code{4L}.}
-\item{iters}{Defaults to \code{25L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{corpus}{Iterated over elementwise, with \code{lapply}.}
+\item{n.cells}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{
 A step of the ragRet_native implementation. No other function in the package calls it. See the file header for the source the module follows.

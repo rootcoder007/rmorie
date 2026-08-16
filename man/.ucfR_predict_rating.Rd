@@ -10,7 +10,7 @@
 \arguments{
 \item{target}{Passed to \code{.ucfR_neighbours}.}
 \item{others}{A vector; indexed elementwise.}
-\item{item}{See Usage.}
+\item{item}{Coerced to character by the body, with \code{as.character}.}
 \item{min_common}{Passed to \code{.ucfR_neighbours}. Defaults to \code{2}.}
 \item{top_k}{Passed to \code{.ucfR_neighbours}.}
 \item{significance}{Passed to \code{.ucfR_neighbours}. Defaults to \code{FALSE}.}

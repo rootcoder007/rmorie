@@ -12,7 +12,7 @@ morie_sse4r(sequence, user_embedding, item_table, attend = NULL, top_k = 3)
 \item{user_embedding}{Passed to \code{.sse4r_personalise}.}
 \item{item_table}{A matrix; passed to \code{as.matrix}.}
 \item{attend}{Defaults to \code{NULL}.}
-\item{top_k}{Defaults to \code{3}.}
+\item{top_k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 }
 \description{
 A step of the sse4r_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,10 +8,10 @@
 morie_vqgdec_sliding_windows(height, width, window, stride = NULL)
 }
 \arguments{
-\item{height}{See Usage.}
-\item{width}{See Usage.}
-\item{window}{See Usage.}
-\item{stride}{Defaults to \code{NULL}.}
+\item{height}{Coerced to integer by the body, with \code{as.integer}.}
+\item{width}{Coerced to integer by the body, with \code{as.integer}.}
+\item{window}{Coerced to integer by the body, with \code{as.integer}.}
+\item{stride}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 transformer\'s context.

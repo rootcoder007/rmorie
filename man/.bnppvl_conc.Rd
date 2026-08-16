@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{level}{Numeric; combined arithmetically in the body.}
-\item{c}{See Usage.}
+\item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{schedule}{One of \code{"constant"}, \code{"cubic"}.}
 }
 \description{

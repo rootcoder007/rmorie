@@ -21,7 +21,7 @@ policy_walk(T, observations, gamma, n_iter = 1000, delta = 0.25, alpha = 1, prio
 \item{H}{Defaults to \code{0}.}
 \item{burn}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{R0}{Defaults to \code{NULL}.}
+\item{R0}{Optional; may be \code{NULL}. Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 A step of the birl_native implementation. Called by \code{birl}. See the file header for the source the module follows.

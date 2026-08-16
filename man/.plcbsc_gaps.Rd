@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{y_treated}{Numeric; combined arithmetically in the body.}
-\item{y_donors}{See Usage.}
+\item{y_donors}{Iterated over elementwise, with \code{lapply}.}
 \item{weights}{A matrix; passed to \code{crossprod}.}
 }
 \description{

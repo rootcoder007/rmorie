@@ -11,7 +11,7 @@
 \item{Q}{A matrix; passed to \code{ncol}.}
 \item{K}{A matrix; passed to \code{nrow}.}
 \item{V}{A matrix; passed to \code{nrow}.}
-\item{mask}{Defaults to \code{NULL}.}
+\item{mask}{Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.}
 }
 \description{
 A step of the geron_train_native implementation. Called by \code{morie_geron_block_multi_head_attention}, \code{morie_geron_flash_attention_tile}, \code{morie_geron_multi_head_attention} and 5 others in the module. See the file header for the source the module follows.

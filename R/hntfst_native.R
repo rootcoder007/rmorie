@@ -87,7 +87,7 @@
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param W Defaults to \code{NULL}.
+#' @param W Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kind One of \code{"double-sample"}, \code{"propensity"}. Defaults to \code{"double-sample"}.
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
 #' @param alpha Passed to \code{._best_split}. Defaults to \code{0.05}.
@@ -214,7 +214,7 @@ leaf_of <- function(tree, x) {
 #' source it follows.
 #'
 #' @param preds A vector; its length is taken.
-#' @param in_bag See Usage.
+#' @param in_bag A matrix; the body checks with \code{is.matrix}.
 #' @param n Numeric; combined arithmetically in the body.
 #' @param s Numeric; combined arithmetically in the body.
 #' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -253,10 +253,10 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Defaults to \code{NULL}.
 #' @param kind Compared against \code{"adaptive"}. Defaults to \code{"double-sample"}.
-#' @param n_trees Defaults to \code{200L}.
+#' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param subsample_frac Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
 #' @param alpha Defaults to \code{0.05}.
@@ -264,7 +264,7 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
 #' @param max_depth Defaults to \code{12L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param level Defaults to \code{0.95}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{s}, \code{n_trees}, \code{split_counts}, \code{split_share}, \code{mean_depth}, \code{kind}, \code{honest}, \code{correction}, \code{level}, \code{method}.
 #' @export
@@ -357,14 +357,14 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 #' @param y A vector; its length is taken.
 #' @param W Defaults to \code{NULL}.
 #' @param kind Defaults to \code{"double-sample"}.
-#' @param n_trees Defaults to \code{200L}.
+#' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param subsample_frac Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
 #' @param alpha Defaults to \code{0.05}.
 #' @param pi Defaults to \code{0.5}.
 #' @param max_depth Defaults to \code{12L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
-#' @param clusters Defaults to \code{NULL}.
+#' @param clusters Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{trees}, \code{bags}, \code{s}.
 #' @export
 grow_forest <- function(X, y, W = NULL, kind = "double-sample",

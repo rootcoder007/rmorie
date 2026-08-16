@@ -19,8 +19,8 @@
 #'
 #' @param adj A vector; indexed elementwise.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param rounds Defaults to \code{2}.
-#' @param initial Defaults to \code{NULL}.
+#' @param rounds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param initial Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{c}, as built in the body.
 #' @export
 wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
@@ -50,9 +50,9 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param features See Usage.
-#' @param k_keep See Usage.
-#' @param sort_channel Defaults to \code{-1}.
+#' @param features A matrix; the body checks with \code{is.matrix}.
+#' @param k_keep Coerced to integer by the body, with \code{as.integer}.
+#' @param sort_channel Coerced to integer by the body, with \code{as.integer}. Defaults to \code{-1}.
 #' @return A list with \code{pooled}, \code{order}, \code{n_truncated}, \code{n_padded}, \code{k}, \code{sort_channel}, \code{note}.
 #' @export
 sort_pooling <- function(features, k_keep, sort_channel = -1) {
@@ -83,8 +83,8 @@ sort_pooling <- function(features, k_keep, sort_channel = -1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param graph_sizes See Usage.
-#' @param coverage Defaults to \code{0.6}.
+#' @param graph_sizes Coerced to integer by the body, with \code{as.integer}.
+#' @param coverage Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.6}.
 #' @return A list with \code{k}, \code{coverage}, \code{fraction_untruncated}, \code{note}.
 #' @export
 choose_k <- function(graph_sizes, coverage = 0.6) {
@@ -107,11 +107,11 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param features See Usage.
+#' @param features A matrix; the body checks with \code{is.matrix}.
 #' @param adj See Usage.
 #' @param perm A vector; indexed elementwise.
 #' @param k_keep See Usage.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{max_deviation}, \code{invariant}, \code{note}.
 #' @export
 order_is_graph_determined <- function(features, adj, perm, k_keep,

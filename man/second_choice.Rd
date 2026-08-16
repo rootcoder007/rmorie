@@ -8,11 +8,11 @@
 second_choice(i1, alpha, y, E, C, rng, tol = 0.001)
 }
 \arguments{
-\item{i1}{See Usage.}
-\item{alpha}{See Usage.}
+\item{i1}{Coerced to integer by the body, with \code{as.integer}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{y}{See Usage.}
 \item{E}{A vector; indexed elementwise.}
-\item{C}{See Usage.}
+\item{C}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rng}{A list; the body reads \code{$uniform} from it.}
 \item{tol}{Defaults to \code{0.001}.}
 }

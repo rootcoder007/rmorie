@@ -8,14 +8,14 @@
 morie_cmlmer_compressed_lmm(y, M, K, clusters = NULL, X = NULL, compare_levels = NULL, log_delta_lo = -10, log_delta_hi = 10, max_iter = 200L)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{M}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{K}{Passed to \code{.cmlmer_rows}.}
-\item{clusters}{Defaults to \code{NULL}.}
+\item{clusters}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{X}{Optional; may be \code{NULL}. Passed to \code{.cmlmer_rows}.}
 \item{compare_levels}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{log_delta_lo}{Defaults to \code{-10}.}
-\item{log_delta_hi}{Defaults to \code{10}.}
+\item{log_delta_lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-10}.}
+\item{log_delta_hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
 \item{max_iter}{Defaults to \code{200L}.}
 }
 \description{

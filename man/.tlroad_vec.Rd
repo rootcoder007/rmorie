@@ -8,7 +8,7 @@
 .tlroad_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlroad_native implementation. Called by \code{.tlroad_eic_ate}, \code{.tlroad_plugin}, \code{.tlroad_score_spans_eic}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 NccfTpl(x, template)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{template}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{template}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 one -- that is the whole reason to normalize rather than take the raw CCF.

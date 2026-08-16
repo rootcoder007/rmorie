@@ -8,10 +8,10 @@
 copying_model(study_hap, reference_haps, rho = 0.001, theta = 0.01)
 }
 \arguments{
-\item{study_hap}{See Usage.}
+\item{study_hap}{Coerced to integer by the body, with \code{as.integer}.}
 \item{reference_haps}{Passed to \code{.impfun_as_int_list}.}
-\item{rho}{Defaults to \code{0.001}.}
-\item{theta}{Defaults to \code{0.01}.}
+\item{rho}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 }
 \description{
 A step of the impfun_native implementation. No other function in the package calls it. See the file header for the source the module follows.

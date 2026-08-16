@@ -8,7 +8,7 @@
 .project(values, basis, n, ridge)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{basis}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{n}{See Usage.}
 \item{ridge}{Numeric; combined arithmetically in the body.}

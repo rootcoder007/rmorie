@@ -8,8 +8,8 @@
 narm_session_repr(h_t_global, c_local)
 }
 \arguments{
-\item{h_t_global}{See Usage.}
-\item{c_local}{See Usage.}
+\item{h_t_global}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{c_local}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the narm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

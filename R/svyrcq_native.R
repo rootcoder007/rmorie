@@ -12,11 +12,11 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tau Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param max_iter Defaults to \code{200}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param eps Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{residuals}, \code{fitted}, \code{objective}, \code{objective_path}, \code{weighted_fraction_below}, \code{tau}, \code{iterations}, \code{converged}, \code{n}, \code{p}, \code{sum_weights}, \code{method}, \code{note}.

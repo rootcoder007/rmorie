@@ -8,8 +8,8 @@
 IeiStats(event_times, T = NULL, n_bins = 20)
 }
 \arguments{
-\item{event_times}{See Usage.}
-\item{T}{Defaults to \code{NULL}.}
+\item{event_times}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_bins}{Numeric; combined arithmetically in the body. Defaults to \code{20}.}
 }
 \description{

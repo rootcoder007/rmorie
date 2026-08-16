@@ -8,10 +8,10 @@
 .samseg_pos_enc(x, y, dim = 8, scale = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{dim}{Defaults to \code{8}.}
-\item{scale}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dim}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
+\item{scale}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the samseg_native implementation. Called by \code{encode_box_prompt}, \code{encode_point_prompt}. See the file header for the source the module follows.

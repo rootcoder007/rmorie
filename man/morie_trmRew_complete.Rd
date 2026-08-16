@@ -8,11 +8,11 @@
 morie_trmRew_complete(equations, precedence, max_rules = 60, max_steps = 10000, max_iter = 4000)
 }
 \arguments{
-\item{equations}{See Usage.}
+\item{equations}{Iterated over elementwise, with \code{lapply}.}
 \item{precedence}{Passed to \code{.trmRew_interreduce}.}
-\item{max_rules}{Defaults to \code{60}.}
+\item{max_rules}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.}
 \item{max_steps}{Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.}
-\item{max_iter}{Defaults to \code{4000}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4000}.}
 }
 \description{
 A step of the trmRew_native implementation. No other function in the package calls it. See the file header for the source the module follows.

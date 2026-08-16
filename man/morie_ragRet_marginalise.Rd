@@ -8,8 +8,8 @@
 morie_ragRet_marginalise(doc.scores, token.probs, mode = "sequence")
 }
 \arguments{
-\item{doc.scores}{See Usage.}
-\item{token.probs}{See Usage.}
+\item{doc.scores}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{token.probs}{Iterated over elementwise, with \code{lapply}.}
 \item{mode}{One of \code{"sequence"}, \code{"token"}. Defaults to \code{"sequence"}.}
 }
 \description{

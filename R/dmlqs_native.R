@@ -32,8 +32,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param w See Usage.
+#' @param v Coerced to character by the body, with \code{as.character}.
+#' @param w Coerced to character by the body, with \code{as.character}.
 #' @return A character value.
 #' @export
 .dmlqs_edge_key <- function(v, w) paste(as.character(v), as.character(w),
@@ -111,8 +111,8 @@
 #' source it follows.
 #'
 #' @param adj Passed to \code{.dmlqs_norm_adj}.
-#' @param length Defaults to \code{3L}.
-#' @param exclude_reverse Defaults to \code{TRUE}.
+#' @param length Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
+#' @param exclude_reverse Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @return A list with \code{paths}, \code{totters}, \code{fraction}, \code{excluded_reverse}.
 #' @export
 .dmlqs_count_totters <- function(adj, length = 3L, exclude_reverse = TRUE) {
@@ -166,8 +166,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param activation See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param activation Coerced to character by the body, with \code{as.character}.
 #' @return Nothing; this branch always raises.
 #' @export
 .dmlqs_act <- function(x, activation) {
@@ -185,10 +185,10 @@
 #'
 #' @param h0 Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param adj Passed to \code{.dmlqs_norm_adj}.
-#' @param T Defaults to \code{3L}.
-#' @param W Defaults to \code{NULL}.
-#' @param activation Defaults to \code{"relu"}.
-#' @param exclude_reverse Defaults to \code{TRUE}.
+#' @param T Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
+#' @param W Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
+#' @param activation Coerced to character by the body, with \code{as.character}. Defaults to \code{"relu"}.
+#' @param exclude_reverse Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @return A list with \code{edge_states}, \code{T}, \code{excluded_reverse}, \code{note}.
 #' @export
 .dmlqs_message_pass <- function(h0, adj, T = 3L, W = NULL,
@@ -280,7 +280,7 @@
 #'
 #' @param edge_states Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param adj Passed to \code{.dmlqs_norm_adj}.
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .dmlqs_atom_readout <- function(edge_states, adj, n) {
@@ -314,8 +314,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param learned See Usage.
-#' @param descriptors See Usage.
+#' @param learned Coerced to numeric by the body, with \code{as.numeric}.
+#' @param descriptors Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{representation}, \code{learned_dim}, \code{descriptor_dim}, \code{method}.
 #' @export
 .dmlqs_concat_descriptors <- function(learned, descriptors) {
@@ -357,7 +357,7 @@
 #' module-level functions. Defaults to the message pass to match the
 #' "deepml_qsar" / "directedmpnn" aliases.
 #'
-#' @param what Defaults to \code{"dmpnn_message_pass"}.
+#' @param what Coerced to character by the body, with \code{as.character}. Defaults to \code{"dmpnn_message_pass"}.
 #' @param ... Passed through.
 #' @return Nothing; this branch always raises.
 #' @export

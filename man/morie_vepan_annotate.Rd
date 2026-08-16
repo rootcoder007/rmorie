@@ -9,8 +9,8 @@ morie_vepan_annotate(variant, transcripts, genome, upstream = 5000, downstream =
 }
 \arguments{
 \item{variant}{Passed to \code{.vepan_variant}.}
-\item{transcripts}{See Usage.}
-\item{genome}{See Usage.}
+\item{transcripts}{Iterated over elementwise, with \code{lapply}.}
+\item{genome}{Coerced to character by the body, with \code{as.character}.}
 \item{upstream}{Defaults to \code{5000}.}
 \item{downstream}{Defaults to \code{5000}.}
 }

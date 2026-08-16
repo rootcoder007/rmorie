@@ -84,7 +84,7 @@
 #' for the source it follows.
 #'
 #' @param count A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param clamp A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{[}.
 #' @export
@@ -118,7 +118,7 @@
 #' for the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{perm}, as built in the body.
 #' @export
 .morie_gr_lcg_perm <- function(n, seed) {
@@ -187,7 +187,7 @@
 #' @param Q A matrix; passed to \code{ncol}.
 #' @param K A matrix; passed to \code{nrow}.
 #' @param V A matrix; passed to \code{nrow}.
-#' @param mask Defaults to \code{NULL}.
+#' @param mask Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.
 #' @return A list with \code{output}, \code{weights}, \code{scores}.
 #' @export
 .morie_gr_attend <- function(Q, K, V, mask = NULL) {
@@ -3715,7 +3715,7 @@ morie_geron_ch4_softmax_function <- function(s, k, K = NULL) {
 #' for the source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
-#' @param theta See Usage.
+#' @param theta A matrix; the body checks with \code{is.matrix}.
 #' @return A list with \code{X}, \code{theta}, \code{scores}.
 #' @export
 .morie_gr_score_matrix <- function(X, theta) {
@@ -4625,8 +4625,8 @@ morie_geron_ppo_clipped_objective <- function(ratios, advantages, eps = 0.2) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param y_true See Usage.
-#' @param y_scores See Usage.
+#' @param y_true Coerced to vector by the body, with \code{as.vector}.
+#' @param y_scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{s}, \code{P}, \code{N}.
 #' @export
 .morie_gr_sorted_counts <- function(y_true, y_scores) {
@@ -5118,7 +5118,7 @@ morie_geron_pyramid_vit_stage <- function(X, WQ, WK, WV, reduction_ratio = 2) {
 #' @param policy See Usage.
 #' @param transitions See Usage.
 #' @param rewards See Usage.
-#' @param gamma See Usage.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{pi}, \code{P}, \code{R}, \code{gamma}, \code{S}, \code{A}.
 #' @export
 .morie_gr_check_mdp <- function(policy, transitions, rewards, gamma) {

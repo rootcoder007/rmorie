@@ -8,9 +8,9 @@
 query_tokens(n_queries, dim, seed = 0, scale = 0.02)
 }
 \arguments{
-\item{n_queries}{See Usage.}
-\item{dim}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
+\item{n_queries}{Coerced to integer by the body, with \code{as.integer}.}
+\item{dim}{Coerced to integer by the body, with \code{as.integer}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 \item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.02}.}
 }
 \description{

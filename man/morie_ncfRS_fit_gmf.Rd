@@ -9,12 +9,12 @@ morie_ncfRS_fit_gmf(pos, n_users, n_items, k_dim = 8, alpha = 0.05, iters = 2000
 }
 \arguments{
 \item{pos}{A vector; indexed elementwise.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{k_dim}{Defaults to \code{8}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{iters}{Defaults to \code{2000}.}
-\item{n_neg}{Defaults to \code{4}.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k_dim}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.}
+\item{n_neg}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{learn_h}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

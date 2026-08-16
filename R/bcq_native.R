@@ -17,12 +17,12 @@
 #' source it follows.
 #'
 #' @param dataset See Usage.
-#' @param states Defaults to \code{NULL}.
-#' @param actions Defaults to \code{NULL}.
-#' @param tau Defaults to \code{0.3}.
+#' @param states Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
+#' @param actions Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
-#' @param iters Defaults to \code{2000}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
 #' @param loss One of \code{"huber"}, \code{"squared"}. Defaults to \code{"huber"}.
 #' @param huber_c Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param behavior Optional; may be \code{NULL}. A vector; indexed elementwise.

@@ -88,7 +88,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param template A matrix; passed to \code{dim}.
 #' @return The value of \code{array}.
 #' @export
@@ -107,7 +107,7 @@
 #' the source it follows.
 #'
 #' @param distance Passed to \code{.schab_reshape_like}.
-#' @param bandwidth See Usage.
+#' @param bandwidth Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Compared against \code{"gaussian"}. Defaults to \code{"gaussian"}.
 #' @param normalized A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{.schab_reshape_like}.
@@ -148,8 +148,8 @@
 #' neighbour itself falls strictly inside a truncated kernel\'s support.
 #' The regression point counts as its own first neighbour.
 #'
-#' @param distance_row See Usage.
-#' @param n_neighbours See Usage.
+#' @param distance_row Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_neighbours Coerced to integer by the body, with \code{as.integer}.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1.0000001}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -321,7 +321,7 @@
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param sigma2 Numeric; passed to \code{sqrt}.
-#' @param tr_S See Usage.
+#' @param tr_S Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .schab_aic_from_parts <- function(n, sigma2, tr_S) {
@@ -409,8 +409,8 @@
 #' have to match bit for bit.
 #'
 #' @param func See Usage.
-#' @param lower See Usage.
-#' @param upper See Usage.
+#' @param lower Coerced to numeric by the body, with \code{as.numeric}.
+#' @param upper Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Defaults to \code{1e-04}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A list with \code{x}, \code{value}.

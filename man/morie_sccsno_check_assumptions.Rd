@@ -9,8 +9,8 @@ morie_sccsno_check_assumptions(fit_with_pre, pre_index = 0, tol = 0.25)
 }
 \arguments{
 \item{fit_with_pre}{A list; the body reads \code{$relative_incidence} from it.}
-\item{pre_index}{Defaults to \code{0}.}
-\item{tol}{Defaults to \code{0.25}.}
+\item{pre_index}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.}
 }
 \description{
 A step of the sccsno_native implementation. No other function in the package calls it. See the file header for the source the module follows.

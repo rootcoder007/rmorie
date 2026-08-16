@@ -44,7 +44,7 @@
 #'
 #' mass -- mirrors _norm in the Python arm.
 #'
-#' @param v See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .caltbR_norm <- function(v) {

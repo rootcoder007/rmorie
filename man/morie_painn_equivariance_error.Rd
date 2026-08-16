@@ -13,7 +13,7 @@ morie_painn_equivariance_error(model, s, v, R, Q, tol = 1e-09)
 \item{v}{Passed to \code{.painn_mat}.}
 \item{R}{Passed to \code{.painn_mat}.}
 \item{Q}{Passed to \code{.painn_mat}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.}
 }
 \description{
 A step of the painn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

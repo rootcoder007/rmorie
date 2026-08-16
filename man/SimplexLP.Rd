@@ -11,7 +11,7 @@ SimplexLP(c, A, b, max_iter = 1000L, tol = 1e-12)
 \item{c}{A vector; its length is taken.}
 \item{A}{A matrix; passed to \code{nrow}.}
 \item{b}{A vector; its length is taken.}
-\item{max_iter}{Defaults to \code{1000L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.}
 }
 \description{

@@ -10,9 +10,9 @@ morie_informer_select_queries(Q, K, factor = 5, measure = "maxmean", n_sample = 
 \arguments{
 \item{Q}{Passed to \code{.informer_to_rows}.}
 \item{K}{Passed to \code{.informer_to_rows}.}
-\item{factor}{Defaults to \code{5}.}
+\item{factor}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.}
 \item{measure}{Passed to \code{morie_informer_sparsity_measure}. Defaults to \code{"maxmean"}.}
-\item{n_sample}{Defaults to \code{NULL}.}
+\item{n_sample}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

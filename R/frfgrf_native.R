@@ -59,7 +59,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d See Usage.
+#' @param d Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
 #' @param pi Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A numeric value.
@@ -110,7 +110,7 @@
 #' @param kind Compared against \code{"propensity"}. Defaults to \code{"double-sample"}.
 #' @param min_leaf Defaults to \code{5}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{11}.
-#' @param n_permutations Defaults to \code{3}.
+#' @param n_permutations Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @return A list with \code{honest}, \code{splits_stable_under_I_permutation}, \code{splits_move_under_J_permutation}, \code{n_splits}.
 #' @export
 .frfgrf_honesty_test <- function(X, y, kind = "double-sample", min_leaf = 5,
@@ -283,9 +283,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param n_trees Defaults to \code{100}.
+#' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param min_leaf Passed to \code{.frfgrf_honesty_test}. Defaults to \code{5}.
 #' @param subsample_frac Defaults to \code{0.5}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.

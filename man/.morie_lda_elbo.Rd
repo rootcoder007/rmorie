@@ -8,11 +8,11 @@
 .morie_lda_elbo(doc, alpha, beta, phi, gamma)
 }
 \arguments{
-\item{doc}{See Usage.}
+\item{doc}{Coerced to integer by the body, with \code{as.integer}.}
 \item{alpha}{A vector; its length is taken.}
 \item{beta}{A matrix; passed to \code{as.matrix}.}
 \item{phi}{A matrix; indexed by row and column.}
-\item{gamma}{See Usage.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}. See the file header for the source the module follows.

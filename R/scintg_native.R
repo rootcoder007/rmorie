@@ -215,7 +215,7 @@
 #'
 #' @param Zn A matrix; indexed by row and column.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{centres}, as built in the body.
 #' @export
 .scintg_kmeans_init <- function(Zn, K, seed) {
@@ -382,7 +382,7 @@
 #' @param K Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{2}.
-#' @param max_iter Defaults to \code{25}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @param seed Passed to \code{.scintg_kmeans_init}. Defaults to \code{0}.
 #' @param Y Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -480,7 +480,7 @@
 #' @param sigma Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{0.1}.
 #' @param theta Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{2}.
 #' @param lam Passed to \code{.scintg_correct_batch}. Defaults to \code{1}.
-#' @param max_iter Defaults to \code{10}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param cluster_iter Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{25}.
 #' @param tol Defaults to \code{1e-04}.
 #' @param seed Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{0}.

@@ -8,7 +8,7 @@
 .propinf_rng(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}, \code{.propinf_train_vector_meta}, \code{morie_propinf_train_fcnn}. See the file header for the source the module follows.

@@ -62,7 +62,7 @@ series_g <- function(log = FALSE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param d A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.
 #' @param D A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.
 #' @param s Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -122,9 +122,9 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param phi Defaults to \code{numeric(0)}.
+#' @param phi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
 #' @param Phi A vector; its length is taken. Defaults to \code{numeric(0)}.
-#' @param theta Defaults to \code{numeric(0)}.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
 #' @param Theta A vector; its length is taken. Defaults to \code{numeric(0)}.
 #' @param s Passed to \code{.sarima_seasonal_lift}. Defaults to \code{12}.
 #' @return A list with \code{ar}, \code{ma}.
@@ -171,8 +171,8 @@ sample_acf <- function(x, lags) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param Theta See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sigma2 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{gamma}, \code{rho}, \code{rho_1}, \code{rho_12}, \code{nonzero_lags}.
 #' @export
@@ -197,7 +197,7 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rho See Usage.
+#' @param rho Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .sarima_invert_rho <- function(rho) {
@@ -226,7 +226,7 @@ moment_estimate <- function(rho) .sarima_invert_rho(rho)
 #' source it follows.
 #'
 #' @param w See Usage.
-#' @param s Defaults to \code{12}.
+#' @param s Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
 #' @return A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1}, \code{r_s}, \code{method}.
 #' @export
 preliminary_estimates <- function(w, s = 12) {
@@ -561,15 +561,15 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w A vector; its length is taken.
 #' @param phi A vector; its length is taken.
 #' @param theta A vector; its length is taken.
 #' @param Phi A vector; its length is taken.
 #' @param Theta A vector; its length is taken.
-#' @param s See Usage.
-#' @param order See Usage.
-#' @param seasonal_order See Usage.
+#' @param s Coerced to integer by the body, with \code{as.integer}.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
+#' @param seasonal_order Coerced to integer by the body, with \code{as.integer}.
 #' @param ll A list; the body reads \code{$loglik}, \code{$sigma2} from it.
 #' @param cs A list; the body reads \code{$residuals}, \code{$sigma2}, \code{$ssq} from it.
 #' @param method One of \code{"ml"}, \code{"uls"}.
@@ -603,7 +603,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param k See Usage.
+#' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -686,8 +686,8 @@ forecast <- function(fitted, h = 12) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
-#' @param Theta See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A list with \code{var_theta}, \code{var_Theta}, \code{se_theta}, \code{se_Theta}, \code{cov}, \code{off_diagonal_term}.
 #' @export

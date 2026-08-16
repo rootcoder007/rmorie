@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{points}{A matrix; passed to \code{as.matrix}.}
-\item{times}{See Usage.}
+\item{times}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{region}{Passed to \code{.schab_st_region_box}.}
 \item{time_interval}{A vector; indexed elementwise.}
 }

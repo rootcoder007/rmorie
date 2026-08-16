@@ -10,10 +10,10 @@ edgrn_tmm_factor(counts_sample, counts_reference, trim_m = 0.3, trim_a = 0.05, l
 \arguments{
 \item{counts_sample}{Passed to \code{.edgrn_vec}.}
 \item{counts_reference}{Passed to \code{.edgrn_vec}.}
-\item{trim_m}{Defaults to \code{0.3}.}
-\item{trim_a}{Defaults to \code{0.05}.}
-\item{lib_sample}{Defaults to \code{NULL}.}
-\item{lib_reference}{Defaults to \code{NULL}.}
+\item{trim_m}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.}
+\item{trim_a}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{lib_sample}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lib_reference}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

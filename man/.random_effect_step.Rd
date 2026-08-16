@@ -10,7 +10,7 @@
 \arguments{
 \item{y}{Passed to \code{.to_vec}.}
 \item{G}{Passed to \code{.kinship_from_markers}.}
-\item{selected}{See Usage.}
+\item{selected}{Coerced to integer by the body, with \code{as.integer}.}
 \item{bins}{Defaults to \code{NULL}.}
 }
 \description{

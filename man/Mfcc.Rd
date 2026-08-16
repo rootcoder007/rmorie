@@ -8,12 +8,12 @@
 Mfcc(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0, fmax = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{n_filters}{Defaults to \code{26}.}
-\item{n_coeffs}{Defaults to \code{13}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_filters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{26}.}
+\item{n_coeffs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{13}.}
 \item{fmin}{Defaults to \code{0}.}
-\item{fmax}{Defaults to \code{NULL}.}
+\item{fmax}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_cep implementation. No other function in the package calls it. See the file header for the source the module follows.

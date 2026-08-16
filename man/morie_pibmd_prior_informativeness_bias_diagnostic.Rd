@@ -8,9 +8,9 @@
 morie_pibmd_prior_informativeness_bias_diagnostic(samples, prior, n_grid = 512L)
 }
 \arguments{
-\item{samples}{See Usage.}
+\item{samples}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{prior}{A list; the body reads \code{$mean}, \code{$sd} from it.}
-\item{n_grid}{Defaults to \code{512L}.}
+\item{n_grid}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512L}.}
 }
 \description{
 A step of the pibmd_native implementation. No other function in the package calls it. See the file header for the source the module follows.

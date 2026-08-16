@@ -8,7 +8,7 @@
 .poisson_draw(lam, e)
 }
 \arguments{
-\item{lam}{See Usage.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{e}{Passed to \code{.ghc_norm}.}
 }
 \description{

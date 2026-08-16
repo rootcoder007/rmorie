@@ -8,9 +8,9 @@
 .tqpack_unpack_indices(data, bits, count)
 }
 \arguments{
-\item{data}{See Usage.}
-\item{bits}{See Usage.}
-\item{count}{See Usage.}
+\item{data}{Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.}
+\item{bits}{Coerced to integer by the body, with \code{as.integer}.}
+\item{count}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the tqpack_native implementation. No other function in the package calls it. See the file header for the source the module follows.

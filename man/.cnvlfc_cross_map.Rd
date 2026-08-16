@@ -8,13 +8,13 @@
 .cnvlfc_cross_map(driver, response, E = 2L, tau = 1L, library = NULL, seed = 1L, exclude = 0L)
 }
 \arguments{
-\item{driver}{See Usage.}
-\item{response}{See Usage.}
+\item{driver}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{response}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{E}{Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.}
 \item{tau}{Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.}
-\item{library}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{1L}.}
-\item{exclude}{Defaults to \code{0L}.}
+\item{library}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.}
+\item{exclude}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{
 A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{cnvlfc_cross_map}. See the file header for the source the module follows.

@@ -10,7 +10,7 @@ KFoldCv(X, y, k = 5, classifier = NULL, stratified = TRUE)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{k}{Defaults to \code{5}.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{classifier}{Defaults to \code{NULL}.}
 \item{stratified}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

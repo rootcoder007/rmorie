@@ -44,7 +44,7 @@
 #' source it follows.
 #'
 #' @param W A matrix; passed to \code{\%*\%}.
-#' @param x See Usage.
+#' @param x Coerced to vector by the body, with \code{as.vector}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .matvec <- function(W, x) {
@@ -76,15 +76,15 @@
 #' @param states Passed to \code{.mat}.
 #' @param actions Passed to \code{.mat}.
 #' @param next_states Passed to \code{.mat}.
-#' @param n_actions Defaults to \code{NULL}.
-#' @param n_features Defaults to \code{8}.
+#' @param n_actions Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_features Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param beta Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
-#' @param epochs Defaults to \code{1}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param features Compared against \code{"identity"}. Defaults to \code{"inverse"}.
 #' @param discrete A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
 explor <- function(states, actions, next_states, n_actions = NULL,

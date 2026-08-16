@@ -8,8 +8,8 @@
 .ot_wp1d(x, y, p = 2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{p}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 }
 \description{

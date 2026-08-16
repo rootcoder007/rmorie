@@ -9,8 +9,8 @@ morie_crkbsg_cokriging(coords, y, z, s_predict, cross_variogram = NULL, coords_z
 }
 \arguments{
 \item{coords}{Passed to \code{.crkbsg_rows}.}
-\item{y}{See Usage.}
-\item{z}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{s_predict}{Passed to \code{.crkbsg_rows}.}
 \item{cross_variogram}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{coords_z}{Optional; may be \code{NULL}. Passed to \code{.crkbsg_rows}.}

@@ -8,9 +8,9 @@
 .merge_height(s_left, s_mid, s_right, h_left, h_right)
 }
 \arguments{
-\item{s_left}{See Usage.}
-\item{s_mid}{See Usage.}
-\item{s_right}{See Usage.}
+\item{s_left}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s_mid}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s_right}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h_left}{Numeric; passed to \code{log}.}
 \item{h_right}{Numeric; passed to \code{log}.}
 }

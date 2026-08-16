@@ -9,7 +9,7 @@ attention_span(weights, position = NULL)
 }
 \arguments{
 \item{weights}{See Usage.}
-\item{position}{Defaults to \code{NULL}.}
+\item{position}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the sasRec_native implementation. No other function in the package calls it. See the file header for the source the module follows.

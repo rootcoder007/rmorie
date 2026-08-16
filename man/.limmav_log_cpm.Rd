@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{counts}{A matrix; passed to \code{nrow}.}
-\item{lib_sizes}{Defaults to \code{NULL}.}
+\item{lib_sizes}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{prior_count}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{lib_offset}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }

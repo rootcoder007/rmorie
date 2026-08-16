@@ -8,8 +8,8 @@
 airline_autocovariances(theta, Theta, sigma2 = 1)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{Theta}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{sigma2}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{

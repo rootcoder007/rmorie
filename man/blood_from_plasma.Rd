@@ -8,9 +8,9 @@
 blood_from_plasma(cl_plasma, fu_plasma, blood_plasma_ratio = NULL, charge = "neutral")
 }
 \arguments{
-\item{cl_plasma}{See Usage.}
-\item{fu_plasma}{See Usage.}
-\item{blood_plasma_ratio}{Defaults to \code{NULL}.}
+\item{cl_plasma}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fu_plasma}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{blood_plasma_ratio}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{charge}{One of \code{"acidic"}, \code{"basic"}, \code{"neutral"}. Defaults to \code{"neutral"}.}
 }
 \description{

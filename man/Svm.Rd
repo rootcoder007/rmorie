@@ -9,8 +9,8 @@ Svm(X, y, C = 1, maxiter = 2000, tol = 1e-06)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
-\item{C}{Defaults to \code{1}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{C}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{maxiter}{Passed to \code{.morie_rg_smo}. Defaults to \code{2000}.}
 \item{tol}{Passed to \code{.morie_rg_smo}. Defaults to \code{1e-06}.}
 }

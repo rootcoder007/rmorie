@@ -8,7 +8,7 @@
 alpha_pq(d_tx, p, q)
 }
 \arguments{
-\item{d_tx}{See Usage.}
+\item{d_tx}{Coerced to integer by the body, with \code{as.integer}.}
 \item{p}{See Usage.}
 \item{q}{See Usage.}
 }

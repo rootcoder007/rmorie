@@ -24,8 +24,8 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
-#' @param base Defaults to \code{2}.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
+#' @param base Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
 .b2logb <- function(v, base = 2) {
@@ -87,7 +87,7 @@
 #' it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
-#' @param q See Usage.
+#' @param q Coerced to numeric by the body, with \code{as.numeric}.
 #' @param base Passed to \code{.b2logb}. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
@@ -187,7 +187,7 @@ Cndmi <- function(pxyz, base = 2) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param p See Usage.
+#' @param p A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .b2as2d <- function(p) {

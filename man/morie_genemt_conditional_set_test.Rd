@@ -8,9 +8,9 @@
 morie_genemt_conditional_set_test(z_scores, set_a, set_b, covariates = NULL)
 }
 \arguments{
-\item{z_scores}{See Usage.}
-\item{set_a}{See Usage.}
-\item{set_b}{See Usage.}
+\item{z_scores}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{set_a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{set_b}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{covariates}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

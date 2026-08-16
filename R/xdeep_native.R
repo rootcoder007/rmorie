@@ -56,7 +56,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .xdeep_to_vec <- function(a) {
@@ -175,7 +175,7 @@ xdeep_cin <- function(X0, Ws) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param layer_index See Usage.
+#' @param layer_index Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{layer}, \code{degree}, \code{note}.
 #' @export
 xdeep_interaction_degree <- function(layer_index) {
@@ -202,9 +202,9 @@ xdeep_interaction_degree <- function(layer_index) {
 #' @param X0 See Usage.
 #' @param Ws See Usage.
 #' @param w_cin Passed to \code{.xdeep_to_vec}.
-#' @param dnn_output Defaults to \code{0}.
-#' @param w_dnn Defaults to \code{1}.
-#' @param bias Defaults to \code{0}.
+#' @param dnn_output Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param w_dnn Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param bias Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{logit}, \code{probability}, \code{linear}, \code{cin}, \code{dnn}, \code{note}.
 #' @export
 xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,

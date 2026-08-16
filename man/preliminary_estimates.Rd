@@ -9,7 +9,7 @@ preliminary_estimates(w, s = 12)
 }
 \arguments{
 \item{w}{See Usage.}
-\item{s}{Defaults to \code{12}.}
+\item{s}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.}
 }
 \description{
 A step of the sarima_native implementation. Called by \code{.sarima_fit}. See the file header for the source the module follows.

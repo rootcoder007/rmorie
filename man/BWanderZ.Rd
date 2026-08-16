@@ -8,9 +8,9 @@
 BWanderZ(z, T = 1, pole = 0.995)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{T}{Defaults to \code{1}.}
-\item{pole}{Defaults to \code{0.995}.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{pole}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.995}.}
 }
 \description{
 this form because the graphical method reads it directly -- numerator is the distance to the zero at 1, denominator the distance to the pole.

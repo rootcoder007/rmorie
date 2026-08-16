@@ -8,7 +8,7 @@
 .morie_km2_log_probs(items, scorer, name)
 }
 \arguments{
-\item{items}{See Usage.}
+\item{items}{Coerced to list by the body, with \code{as.list}.}
 \item{scorer}{See Usage.}
 \item{name}{See Usage.}
 }

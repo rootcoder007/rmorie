@@ -55,9 +55,9 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
-#' @param strata Defaults to \code{NULL}.
-#' @param psu Defaults to \code{NULL}.
+#' @param weights Coerced to numeric by the body, with \code{as.numeric}.
+#' @param strata Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param psu Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{weights}, \code{strata}, \code{psu}, \code{n}, \code{psu_order}, \code{psu_units}, \code{stratum_psus}, \code{stratum_order}.
 #' @export
 .replwt_design <- function(weights, strata = NULL, psu = NULL) {
@@ -138,7 +138,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param order See Usage.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{H}, as built in the body.
 #' @export
 .replwt_hadamard <- function(order) {
@@ -244,7 +244,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' source it follows.
 #'
 #' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
-#' @param fay Defaults to \code{0}.
+#' @param fay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{hadamard_order}, \code{fay}, \code{method}.
 #' @export
 .replwt_brr_weights <- function(d, fay = 0.0) {
@@ -308,7 +308,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
 #' @param R A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
-#' @param seed Defaults to \code{1}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed}, \code{method}.
 #' @export
 .replwt_bootstrap_weights <- function(d, R = 200, seed = 1) {

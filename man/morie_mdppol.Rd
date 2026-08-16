@@ -11,10 +11,10 @@ morie_mdppol(P, R, gamma, tol = 1e-12, max_eval = 1e+05, max_improve = 1000, pi0
 \item{P}{Passed to \code{.mdppol_args}.}
 \item{R}{A matrix; indexed by row and column.}
 \item{gamma}{Numeric; combined arithmetically in the body.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.}
 \item{max_eval}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1e+05}.}
 \item{max_improve}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.}
-\item{pi0}{Defaults to \code{NULL}.}
+\item{pi0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mdppol_native implementation. No other function in the package calls it. See the file header for the source the module follows.

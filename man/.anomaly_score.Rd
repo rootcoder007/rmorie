@@ -10,7 +10,7 @@
 \arguments{
 \item{X}{Passed to \code{.flow_an_to_mat}.}
 \item{layers}{Passed to \code{.log_prob}.}
-\item{threshold_quantile}{Defaults to \code{0.95}.}
+\item{threshold_quantile}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 \item{reference}{Optional; may be \code{NULL}. Passed to \code{.flow_an_to_mat}.}
 }
 \description{

@@ -8,8 +8,8 @@
 loss(y, y_hat, kind = "square")
 }
 \arguments{
-\item{y}{See Usage.}
-\item{y_hat}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kind}{One of \code{"hinge"}, \code{"log"}, \code{"square"}. Defaults to \code{"square"}.}
 }
 \description{

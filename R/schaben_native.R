@@ -17,7 +17,7 @@
 #' the source it follows.
 #'
 #' @param coords A matrix; passed to \code{as.matrix}.
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{h}, \code{d}.
 #' @export
 .morie_sb_pairs <- function(coords, z) {
@@ -45,7 +45,7 @@
 #'
 #' @param h A vector; indexed elementwise.
 #' @param bins Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param cutoff See Usage.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param exact A flag; the body branches on it.
 #' @return A list with \code{centres}, \code{idx}.
 #' @export

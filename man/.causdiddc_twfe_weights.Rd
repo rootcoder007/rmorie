@@ -8,9 +8,9 @@
 .causdiddc_twfe_weights(D, group, period, weights = NULL)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{group}{See Usage.}
-\item{period}{See Usage.}
+\item{D}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{group}{Coerced to vector by the body, with \code{as.vector}.}
+\item{period}{Coerced to vector by the body, with \code{as.vector}.}
 \item{weights}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{

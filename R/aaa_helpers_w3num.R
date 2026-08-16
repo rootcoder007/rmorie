@@ -495,10 +495,10 @@
 #' parameter and huge in a small one. A fixed iteration count keeps the
 #' arms in step.
 #'
-#' @param f See Usage.
+#' @param f Iterated over elementwise, with \code{vapply}.
 #' @param x0 A vector; its length is taken.
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
-#' @param iters Defaults to \code{400L}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400L}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @param rho Numeric; combined arithmetically in the body. Defaults to \code{0.5}.

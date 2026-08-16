@@ -13,8 +13,8 @@ morie_prtcl_kalman_filter_1d(y, a, q, c, r, m0 = 0, p0 = 1)
 \item{q}{Numeric; combined arithmetically in the body.}
 \item{c}{Numeric; combined arithmetically in the body.}
 \item{r}{Numeric; combined arithmetically in the body.}
-\item{m0}{Defaults to \code{0}.}
-\item{p0}{Defaults to \code{1}.}
+\item{m0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{p0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the prtcl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

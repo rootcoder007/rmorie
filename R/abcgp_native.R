@@ -86,7 +86,7 @@
 #'
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @param dim A count; the body uses it as \code{seq_len(...)}.
-#' @param skip Defaults to \code{0}.
+#' @param skip Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .abcgp.sobol_sequence <- function(n, dim, skip = 0) {
@@ -213,7 +213,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param theta See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
 .abcgp.basis <- function(theta)
@@ -225,7 +225,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nugget See Usage.
+#' @param nugget Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{pmax}.
 #' @export
@@ -314,11 +314,11 @@
 #' source it follows.
 #'
 #' @param design A matrix; passed to \code{as.matrix}.
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nugget Passed to \code{.abcgp.mle_lengthscale}.
-#' @param lengthscale Defaults to \code{NULL}.
+#' @param lengthscale Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Passed to \code{.abcgp.mle_lengthscale}. Defaults to \code{"sqexp"}.
-#' @param tau2 Defaults to \code{NULL}.
+#' @param tau2 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{design}, \code{values}, \code{beta}, \code{tau2}, \code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r}, \code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
 #' @export
 .abcgp.gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
@@ -367,7 +367,7 @@
 #' source it follows.
 #'
 #' @param fit A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol}, \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel}, \code{$lengthscale}, \code{$n}, \code{$tau2} from it.
-#' @param theta See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
 .abcgp.gp_predict <- function(fit, theta) {
@@ -413,7 +413,7 @@
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param prior_ppf A vector; its length is taken and its elements indexed.
-#' @param dim Defaults to \code{NULL}.
+#' @param dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param skip Passed to \code{.abcgp.sobol_sequence}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -454,7 +454,7 @@
 #' @param summary Passed to \code{.abcgp.summarise}.
 #' @param kernel One of \code{"gaussian"}, \code{"uniform"}. Defaults to \code{"gaussian"}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param bootstrap Defaults to \code{25}.
+#' @param bootstrap Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @return A vector, from \code{c}.
 #' @export
 .abcgp.gabc_log_likelihood <- function(sim, obs, theta, n_sim = 50, epsilon = 1,
@@ -498,7 +498,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param draws See Usage.
+#' @param draws Iterated over elementwise, with \code{lapply}.
 #' @param obs Passed to \code{.abcgp.summarise}.
 #' @param epsilon Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param summary Passed to \code{.abcgp.summarise}.
@@ -530,8 +530,8 @@
 #' @param sim Passed to \code{.abcgp.gabc_log_likelihood}.
 #' @param obs Passed to \code{.abcgp.gabc_log_likelihood}.
 #' @param prior_ppf Passed to \code{.abcgp.design_from_prior}.
-#' @param n_waves Defaults to \code{3}.
-#' @param n_design Defaults to \code{32}.
+#' @param n_waves Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @param n_design Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.
 #' @param n_sim Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{50}.
 #' @param epsilon Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{1}.
 #' @param summary Passed to \code{.abcgp.gabc_log_likelihood}.
@@ -539,7 +539,7 @@
 #' @param n_sd Passed to \code{.abcgp.implausible}. Defaults to \code{3}.
 #' @param kernel Passed to \code{.abcgp.gp_fit}. Defaults to \code{"sqexp"}.
 #' @param accept_kernel Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{"gaussian"}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{fit}, \code{waves}.
 #' @export
 .abcgp.history_match <- function(sim, obs, prior_ppf, n_waves = 3,
@@ -720,18 +720,18 @@
 #' @param sim See Usage.
 #' @param obs Passed to \code{.abcgp.synthetic_log_likelihood}.
 #' @param log_prior Passed to \code{.abcgp.alpha_terms}.
-#' @param theta0 See Usage.
+#' @param theta0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_iter Numeric; combined arithmetically in the body.
-#' @param n_sim See Usage.
+#' @param n_sim Coerced to integer by the body, with \code{as.integer}.
 #' @param epsilon Passed to \code{.abcgp.synthetic_log_likelihood}.
-#' @param proposal_sd See Usage.
+#' @param proposal_sd Coerced to numeric by the body, with \code{as.numeric}.
 #' @param summary Passed to \code{.abcgp.synthetic_log_likelihood}.
 #' @param seed Passed to \code{.ghc_rng}.
 #' @param adaptive A flag; the body branches on it.
 #' @param xi See Usage.
-#' @param delta_s See Usage.
-#' @param n_alpha See Usage.
-#' @param max_sim Defaults to \code{NULL}.
+#' @param delta_s Coerced to integer by the body, with \code{as.integer}.
+#' @param n_alpha Coerced to integer by the body, with \code{as.integer}.
+#' @param max_sim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations}, \code{unresolved_steps}.
 #' @export
 .abcgp.mw_sampler <- function(sim, obs, log_prior, theta0, n_iter, n_sim,

@@ -8,9 +8,9 @@
 XCorr(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{maxlag}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{maxlag}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{normalize}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{biased}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

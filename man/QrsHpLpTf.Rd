@@ -8,7 +8,7 @@
 QrsHpLpTf(freq, fs = 200)
 }
 \arguments{
-\item{freq}{See Usage.}
+\item{freq}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 }
 \description{

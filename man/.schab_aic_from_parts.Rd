@@ -10,7 +10,7 @@
 \arguments{
 \item{n}{Numeric; combined arithmetically in the body.}
 \item{sigma2}{Numeric; passed to \code{sqrt}.}
-\item{tr_S}{See Usage.}
+\item{tr_S}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{spgwrb}. See the file header for the source the module follows.

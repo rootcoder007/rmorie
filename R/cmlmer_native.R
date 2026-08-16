@@ -37,10 +37,10 @@
 #' exists to remove.
 #'
 #' @param f See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param points Defaults to \code{201L}.
-#' @param stages Defaults to \code{4L}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.
+#' @param stages Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .cmlmer_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
@@ -256,14 +256,14 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param M Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param K Passed to \code{.cmlmer_rows}.
-#' @param clusters Defaults to \code{NULL}.
+#' @param clusters Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param X Optional; may be \code{NULL}. Passed to \code{.cmlmer_rows}.
 #' @param compare_levels Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param log_delta_lo Defaults to \code{-10}.
-#' @param log_delta_hi Defaults to \code{10}.
+#' @param log_delta_lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-10}.
+#' @param log_delta_hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
 #' @param max_iter Defaults to \code{200L}.
 #' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value}, \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship}, \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n}, \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.
 #' @export

@@ -8,8 +8,8 @@
 negbinom_offspring(R0, dispersion, e)
 }
 \arguments{
-\item{R0}{See Usage.}
-\item{dispersion}{See Usage.}
+\item{R0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dispersion}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{e}{Passed to \code{.gamma_draw}.}
 }
 \description{

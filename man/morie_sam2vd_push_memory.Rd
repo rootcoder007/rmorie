@@ -9,7 +9,7 @@ morie_sam2vd_push_memory(bank, frame_index, features, prompted = FALSE, object_p
 }
 \arguments{
 \item{bank}{A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.}
-\item{frame_index}{See Usage.}
+\item{frame_index}{Coerced to integer by the body, with \code{as.integer}.}
 \item{features}{Passed to \code{.sam2vd_to_num}.}
 \item{prompted}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{object_pointer}{Optional; may be \code{NULL}. Passed to \code{.sam2vd_to_num}.}

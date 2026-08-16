@@ -266,7 +266,7 @@ NULL
 #' @param y Numeric; passed to \code{mean}.
 #' @param alpha Passed to \code{.morie_coord_descent_cpp}.
 #' @param lambda Passed to \code{.morie_coord_descent_cpp}.
-#' @param max_iter Defaults to \code{1000L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @param tol Passed to \code{.morie_coord_descent_cpp}. Defaults to \code{1e-06}.
 #' @param warm Defaults to \code{NULL}.
 #' @return A list with \code{beta}, \code{beta_std}, \code{intercept}, \code{n_iter}.

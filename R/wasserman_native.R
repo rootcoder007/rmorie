@@ -316,7 +316,7 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 #' the source it follows.
 #'
 #' @param count A count; the body uses it as \code{seq_len(...)}.
-#' @param seed Defaults to \code{13}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{13}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_wsm_lcg_u <- function(count, seed = 13) {
@@ -1705,7 +1705,7 @@ morie_wasserman_viterbi <- function(obs, A, B, pi) {
 #' more accurate, but parity requires the same approximation in both
 #' languages, so LCG-driven chains agree draw for draw.
 #'
-#' @param u See Usage.
+#' @param u Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_wsm_norm_inv <- function(u) {

@@ -8,8 +8,8 @@
 HannFilt(x, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 ratio 1:2:1.  It is a delaying smoother, not a symmetric one: the output lags the input by exactly one sample.

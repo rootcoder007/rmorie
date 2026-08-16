@@ -8,10 +8,10 @@
 .sse4r_parameter_count(n_users, n_items, user_dim, item_dim)
 }
 \arguments{
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{user_dim}{See Usage.}
-\item{item_dim}{See Usage.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{user_dim}{Coerced to integer by the body, with \code{as.integer}.}
+\item{item_dim}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the sse4r_native implementation. No other function in the package calls it. See the file header for the source the module follows.

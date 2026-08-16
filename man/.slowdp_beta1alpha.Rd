@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{e}{Passed to \code{.ghc_unif}.}
-\item{alpha}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the slowdp_native implementation. Called by \code{stick_breaking}. See the file header for the source the module follows.

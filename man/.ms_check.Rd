@@ -8,8 +8,8 @@
 .ms_check(time, event)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
+\item{time}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{event}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the survival_more implementation. Called by \code{.ms_baseline}, \code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module. See the file header for the source the module follows.

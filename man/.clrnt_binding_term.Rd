@@ -8,7 +8,7 @@
 .clrnt_binding_term(log_pd)
 }
 \arguments{
-\item{log_pd}{See Usage.}
+\item{log_pd}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the clrnt_native implementation. Called by \code{fu_hepatocytes}, \code{fu_microsomes}. See the file header for the source the module follows.

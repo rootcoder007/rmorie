@@ -8,8 +8,8 @@
 CauchySch(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 between the vectors, which is exactly the correlation coefficient of eq (4.25) on mean-removed signals.

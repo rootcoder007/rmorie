@@ -55,7 +55,7 @@
 #' indexing when the list has no names.
 #'
 #' @param adj Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param u See Usage.
+#' @param u Coerced to integer by the body, with \code{as.integer}.
 #' @return A vector, from \code{integer}.
 #' @export
 .gnnEx_get_neighbors <- function(adj, u) {
@@ -83,8 +83,8 @@
 #' source it follows.
 #'
 #' @param adj Passed to \code{.gnnEx_get_neighbors}.
-#' @param v See Usage.
-#' @param L See Usage.
+#' @param v Coerced to integer by the body, with \code{as.integer}.
+#' @param L Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{nodes}, \code{edges}, \code{hops}, \code{size}.
 #' @export
 gnnEx_computation_graph <- function(adj, v, L) {
@@ -127,7 +127,7 @@ gnnEx_computation_graph <- function(adj, v, L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param probs See Usage.
+#' @param probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 gnnEx_conditional_entropy <- function(probs) {
@@ -151,7 +151,7 @@ gnnEx_conditional_entropy <- function(probs) {
 #' @param edges See Usage.
 #' @param edge_logits Passed to \code{.gnnEx_sig}.
 #' @param feature_logits Passed to \code{.gnnEx_sig}.
-#' @param y See Usage.
+#' @param y Coerced to integer by the body, with \code{as.integer}.
 #' @param size_coef Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
 #' @param entropy_coef Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{loss}, \code{fit}, \code{size}, \code{entropy}, \code{edge_mask}, \code{feature_mask}, \code{prediction}.
@@ -188,11 +188,11 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
 #'
 #' @param predict See Usage.
 #' @param adj See Usage.
-#' @param v See Usage.
+#' @param v Coerced to character by the body, with \code{as.character}.
 #' @param y See Usage.
-#' @param n_features See Usage.
+#' @param n_features Coerced to integer by the body, with \code{as.integer}.
 #' @param L Defaults to \code{2}.
-#' @param iters Defaults to \code{300}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param size_coef Defaults to \code{0.005}.
 #' @param entropy_coef Defaults to \code{1}.

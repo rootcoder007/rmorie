@@ -8,8 +8,8 @@
 edgrn_effective_library_size(library_size, factor)
 }
 \arguments{
-\item{library_size}{See Usage.}
-\item{factor}{See Usage.}
+\item{library_size}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{factor}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

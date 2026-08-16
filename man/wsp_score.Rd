@@ -8,7 +8,7 @@
 wsp_score(alignment, scoring, s_op = 2.4, weights = NULL)
 }
 \arguments{
-\item{alignment}{See Usage.}
+\item{alignment}{Iterated over elementwise, with \code{vapply}.}
 \item{scoring}{A list; the body reads \code{$matrix} from it.}
 \item{s_op}{Numeric; combined arithmetically in the body. Defaults to \code{2.4}.}
 \item{weights}{Defaults to \code{NULL}.}

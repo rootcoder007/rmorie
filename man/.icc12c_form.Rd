@@ -8,7 +8,7 @@
 .icc12c_form(model, k)
 }
 \arguments{
-\item{model}{See Usage.}
+\item{model}{Coerced to character by the body, with \code{as.character}.}
 \item{k}{See Usage.}
 }
 \description{

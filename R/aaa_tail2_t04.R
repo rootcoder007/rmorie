@@ -250,7 +250,7 @@ BipartSpec <- function(A) {
 #' n_clauses, \' decisions, propagations, pure_literals, method) \'
 #' @export
 #'
-#' @param cnf See Usage.
+#' @param cnf Iterated over elementwise, with \code{lapply}.
 #' @return A list with \code{satisfiable}, \code{assignment}, \code{model}, \code{n_vars}, \code{n_clauses}, \code{decisions}, \code{propagations}, \code{pure_literals}, \code{method}.
 #' @export
 Dpll <- function(cnf) {
@@ -353,7 +353,7 @@ Dpll <- function(cnf) {
 #'
 #' @param log_lik See Usage.
 #' @param Q See Usage.
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param steps A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{theta}, \code{loglik}, \code{trace}, \code{increments}, \code{min_increment}, \code{monotone}, \code{steps}, \code{method}.
 #' @export
@@ -419,7 +419,7 @@ EmAlgo <- function(log_lik, Q, x0, steps) {
 #' @param c A vector; its length is taken.
 #' @param A A matrix; passed to \code{nrow}.
 #' @param b A vector; its length is taken.
-#' @param max_iter Defaults to \code{1000L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @return A list with \code{status}, \code{x}, \code{objective}, \code{slack}, \code{basis}, \code{dual}, \code{iterations}, \code{n_var}, \code{n_con}, \code{method}.
 #' @export

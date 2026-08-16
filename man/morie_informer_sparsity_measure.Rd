@@ -11,7 +11,7 @@ morie_informer_sparsity_measure(q, K, measure = "exact", scale = NULL)
 \item{q}{See Usage.}
 \item{K}{Passed to \code{.informer_to_rows}.}
 \item{measure}{Compared against \code{"maxmean"}. Defaults to \code{"exact"}.}
-\item{scale}{Defaults to \code{NULL}.}
+\item{scale}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the informer_native implementation. Called by \code{morie_informer_kl_from_uniform}, \code{morie_informer_select_queries}. See the file header for the source the module follows.

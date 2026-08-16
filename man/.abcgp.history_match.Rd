@@ -11,8 +11,8 @@
 \item{sim}{Passed to \code{.abcgp.gabc_log_likelihood}.}
 \item{obs}{Passed to \code{.abcgp.gabc_log_likelihood}.}
 \item{prior_ppf}{Passed to \code{.abcgp.design_from_prior}.}
-\item{n_waves}{Defaults to \code{3}.}
-\item{n_design}{Defaults to \code{32}.}
+\item{n_waves}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
+\item{n_design}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.}
 \item{n_sim}{Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{50}.}
 \item{epsilon}{Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{1}.}
 \item{summary}{Passed to \code{.abcgp.gabc_log_likelihood}.}
@@ -20,7 +20,7 @@
 \item{n_sd}{Passed to \code{.abcgp.implausible}. Defaults to \code{3}.}
 \item{kernel}{Passed to \code{.abcgp.gp_fit}. Defaults to \code{"sqexp"}.}
 \item{accept_kernel}{Passed to \code{.abcgp.gabc_log_likelihood}. Defaults to \code{"gaussian"}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{morie_abcgp}. See the file header for the source the module follows.

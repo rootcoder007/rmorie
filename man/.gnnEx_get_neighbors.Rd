@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{adj}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
-\item{u}{See Usage.}
+\item{u}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 are integer vectors of neighbours. Falls back to 1-based integer indexing when the list has no names.

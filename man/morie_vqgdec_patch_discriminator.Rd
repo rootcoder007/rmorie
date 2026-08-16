@@ -9,7 +9,7 @@ morie_vqgdec_patch_discriminator(image, patch = 4, scorer = NULL)
 }
 \arguments{
 \item{image}{Passed to \code{.vqgdec_to_matrix}.}
-\item{patch}{Defaults to \code{4}.}
+\item{patch}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 \item{scorer}{Defaults to \code{NULL}.}
 }
 \description{

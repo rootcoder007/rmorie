@@ -9,9 +9,9 @@ k02gold(f, lo, hi, iters = 80L)
 }
 \arguments{
 \item{f}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
-\item{iters}{Defaults to \code{80L}.}
+\item{lo}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{hi}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80L}.}
 }
 \description{
 A step of the k02util implementation. Called by \code{magpa}, \code{matrl}. See the file header for the source the module follows.

@@ -72,8 +72,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param edges See Usage.
-#' @param extra Defaults to \code{character(0)}.
+#' @param edges Coerced to character by the body, with \code{as.character}.
+#' @param extra Coerced to character by the body, with \code{as.character}. Defaults to \code{character(0)}.
 #' @return A vector, from \code{sort}.
 #' @export
 .morie_ml_nodes <- function(edges, extra = character(0)) {

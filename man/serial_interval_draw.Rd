@@ -8,8 +8,8 @@
 serial_interval_draw(mean, sd, e, allow_presymptomatic = TRUE)
 }
 \arguments{
-\item{mean}{See Usage.}
-\item{sd}{See Usage.}
+\item{mean}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sd}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{e}{Passed to \code{.ghc_norm}.}
 \item{allow_presymptomatic}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

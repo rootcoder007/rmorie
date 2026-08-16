@@ -8,9 +8,9 @@
 strec_mlp_cell(m, W, b = NULL, activation = "tanh")
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W}{A matrix; passed to \code{nrow}.}
-\item{b}{Defaults to \code{NULL}.}
+\item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{activation}{One of \code{"identity"}, \code{"tanh"}. Defaults to \code{"tanh"}.}
 }
 \description{

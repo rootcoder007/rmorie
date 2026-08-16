@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{v}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
+\item{lo}{Coerced to integer by the body, with \code{as.integer}.}
+\item{hi}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the ocrwit_native implementation. Called by \code{normalise_bbox}. See the file header for the source the module follows.

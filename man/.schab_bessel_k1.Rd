@@ -8,7 +8,7 @@
 .schab_bessel_k1(z, upper = 40, n_quad = 400L)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{upper}{Numeric; combined arithmetically in the body. Defaults to \code{40}.}
 \item{n_quad}{Passed to \code{.schab_gauss_legendre}. Defaults to \code{400L}.}
 }

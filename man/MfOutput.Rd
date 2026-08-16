@@ -8,9 +8,9 @@
 MfOutput(x, h, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 the frequency-domain route would need fine enough sampling to avoid wrap-around.  eq (4.38) reads M_y off the peak returned here.

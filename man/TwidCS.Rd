@@ -8,9 +8,9 @@
 TwidCS(npoints, n, k)
 }
 \arguments{
-\item{npoints}{See Usage.}
-\item{n}{See Usage.}
-\item{k}{See Usage.}
+\item{npoints}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 the DFT projects onto the conjugated exponential, and that sign is the commonest transcription error in a hand-written DFT.

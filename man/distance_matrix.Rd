@@ -8,7 +8,7 @@
 distance_matrix(fps)
 }
 \arguments{
-\item{fps}{See Usage.}
+\item{fps}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 A step of the tncomp_native implementation. Called by \code{.tncomp_select}, \code{diversity}. See the file header for the source the module follows.

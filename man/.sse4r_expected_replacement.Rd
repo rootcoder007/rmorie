@@ -8,8 +8,8 @@
 .sse4r_expected_replacement(p, table_size)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{table_size}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{table_size}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the sse4r_native implementation. No other function in the package calls it. See the file header for the source the module follows.

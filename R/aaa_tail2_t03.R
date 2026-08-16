@@ -140,7 +140,7 @@ CohensD <- function(m1, m2, s1, s2, n1, n2) {
 #' @export
 #'
 #' @param fisher_info A matrix; passed to \code{nrow}.
-#' @param var_estimate Defaults to \code{NULL}.
+#' @param var_estimate Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{bound}, \code{variance}, \code{se}, \code{information}, \code{k}, \code{efficiency}, \code{attained}, \code{method}.
 #' @export
 CramerRao <- function(fisher_info, var_estimate = NULL) {
@@ -277,7 +277,7 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #' @param event A vector; its length is taken.
 #' @param X A matrix; passed to \code{nrow}.
 #' @param beta Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param max_iter Defaults to \code{50L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{loglik}, \code{score}, \code{information}, \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event}, \code{iterations}, \code{converged}, \code{method}.
 #' @export
@@ -338,7 +338,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param constraints See Usage.
+#' @param constraints Iterated over elementwise, with \code{vapply}.
 #' @param x See Usage.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -415,15 +415,15 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #'
 #' @param f Passed to \code{.morie_t2_qpen}.
 #' @param constraints Passed to \code{.morie_t2_qpen}.
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu Numeric; combined arithmetically in the body.
-#' @param n_outer Defaults to \code{8L}.
+#' @param n_outer Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.
 #' @param growth Numeric; combined arithmetically in the body. Defaults to \code{10}.
-#' @param n_inner Defaults to \code{200L}.
-#' @param step0 Defaults to \code{1}.
+#' @param n_inner Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
+#' @param step0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param h Passed to \code{.morie_t2_fdgrad}. Defaults to \code{1e-06}.
 #' @param armijo Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
-#' @param max_halving Defaults to \code{40L}.
+#' @param max_halving Coerced to integer by the body, with \code{as.integer}. Defaults to \code{40L}.
 #' @return A list with \code{x}, \code{f}, \code{penalty}, \code{violation}, \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner}, \code{method}.
 #' @export
 PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
@@ -502,9 +502,9 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #' @param f See Usage.
 #' @param grad_f See Usage.
 #' @param prox_g See Usage.
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lr Numeric; combined arithmetically in the body.
-#' @param n_iter Defaults to \code{200L}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param relaxation Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr}, \code{relaxation}, \code{step_norm}, \code{method}.
 #' @export
@@ -565,7 +565,7 @@ ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
 #' @param Xs A matrix; indexed by row and column.
 #' @param Xt A matrix; indexed by row and column.
 #' @param epsilon Numeric; combined arithmetically in the body.
-#' @param n_iter Defaults to \code{1000L}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @return A list with \code{Xs_adapted}, \code{gamma}, \code{cost}, \code{transport_cost}, \code{row_error}, \code{col_error}, \code{ns}, \code{nt}, \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
 #' @export
 OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {

@@ -8,10 +8,10 @@
 CcfOuter(x, y, order, tol = 0.001)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{order}{See Usage.}
-\item{tol}{Defaults to \code{0.001}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.}
 }
 \description{
 pairwise delays -- which is why the outer product appears in the Wiener and RLS normal equations.  Under stationarity the entries depend only on i - j; that Toeplitz structure is MEASURED, and the deviation is the number to look at, not the boolean.

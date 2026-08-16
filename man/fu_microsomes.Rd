@@ -9,7 +9,7 @@ fu_microsomes(log_pd, protein = 1)
 }
 \arguments{
 \item{log_pd}{Passed to \code{.clrnt_binding_term}.}
-\item{protein}{Defaults to \code{1}.}
+\item{protein}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the clrnt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

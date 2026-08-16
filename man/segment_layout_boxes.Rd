@@ -9,7 +9,7 @@ segment_layout_boxes(boxes, segment_ids, width, height, scale = 1000)
 }
 \arguments{
 \item{boxes}{A matrix; indexed by row and column.}
-\item{segment_ids}{See Usage.}
+\item{segment_ids}{Coerced to list by the body, with \code{as.list}.}
 \item{width}{See Usage.}
 \item{height}{See Usage.}
 \item{scale}{Defaults to \code{1000}.}

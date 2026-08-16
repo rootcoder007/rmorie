@@ -8,7 +8,7 @@
 .genemt_norm_ppf(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the genemt_native implementation. Called by \code{morie_genemt_gene_statistic}. See the file header for the source the module follows.

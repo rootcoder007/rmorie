@@ -8,8 +8,8 @@
 .gpzappredict(theta_hat, mu_hat)
 }
 \arguments{
-\item{theta_hat}{See Usage.}
-\item{mu_hat}{See Usage.}
+\item{theta_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 The ZAP pmf printed above it, the Var(Y) line below it, and the p.652 estimating equation for mu all carry the mu, so the internally consistent mean (1 - theta) mu / (1 - exp(-mu)) is what is implemented.

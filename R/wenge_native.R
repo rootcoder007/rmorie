@@ -47,7 +47,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param row See Usage.
+#' @param row Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A character value.
 #' @export
 .wenge_key <- function(row) {

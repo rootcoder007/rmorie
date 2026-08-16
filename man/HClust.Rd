@@ -10,7 +10,7 @@ HClust(X, linkage = "single", k = NULL)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{linkage}{One of \code{"average"}, \code{"complete"}, \code{"single"}. Defaults to \code{"single"}.}
-\item{k}{Defaults to \code{NULL}.}
+\item{k}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 clusters together through a bridge of intermediate points -- while complete linkage is compact and splits elongated clusters.  The choice is not cosmetic: on the same data they routinely give different partitions, which is why the full merge history is returned rather than only a labelling.

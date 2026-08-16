@@ -92,8 +92,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param length See Usage.
-#' @param vector_width Defaults to \code{4}.
+#' @param length Coerced to integer by the body, with \code{as.integer}.
+#' @param vector_width Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @return A list with \code{order}, \code{segments}, \code{width}, \code{note}.
 #' @export
 phmmsr_striped_layout <- function(length, vector_width = 4) {
@@ -125,9 +125,9 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq See Usage.
+#' @param seq Coerced to list by the body, with \code{as.list}.
 #' @param profile Passed to \code{.phmmsr_to_matrix}.
-#' @param tau Defaults to \code{0.02}.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
 #' @param lam Defaults to \code{0.7}.
 #' @return A list with \code{score}, \code{note}.
 #' @export
@@ -180,9 +180,9 @@ phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param score See Usage.
-#' @param mu See Usage.
-#' @param lam See Usage.
+#' @param score Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 phmmsr_gumbel_pvalue <- function(score, mu, lam) {
@@ -204,9 +204,9 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
-#' @param floor Defaults to \code{1e-30}.
-#' @param target Defaults to \code{1}.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
+#' @param floor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-30}.
+#' @param target Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{values}, \code{rescaled}, \code{factor}, \code{log_offset}, \code{note}.
 #' @export
 phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
@@ -235,7 +235,7 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 #'
 #' @param sequences A vector; its length is taken and its elements indexed.
 #' @param profile See Usage.
-#' @param msv_threshold Defaults to \code{0.02}.
+#' @param msv_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
 #' @param mu Defaults to \code{10}.
 #' @param lam Defaults to \code{0.7}.
 #' @param full_score Defaults to \code{NULL}.

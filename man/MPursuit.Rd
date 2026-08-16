@@ -12,7 +12,7 @@ MPursuit(x, dictionary = NULL, natoms = 20, tol = 1e-10, decaystop = NULL)
 \item{dictionary}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 \item{natoms}{Numeric; passed to \code{min}. Defaults to \code{20}.}
 \item{tol}{Defaults to \code{1e-10}.}
-\item{decaystop}{Defaults to \code{NULL}.}
+\item{decaystop}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_class2 implementation. Called by \code{VagTfd}. See the file header for the source the module follows.

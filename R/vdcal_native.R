@@ -154,8 +154,8 @@ morie_vdcal_fut <- function(vss, fu, par = NULL) {
 #' coefficients are fitted quantities that belong to the papers. This
 #' module will not guess them: pass them, or use the measured route.
 #'
-#' @param elogd See Usage.
-#' @param fi See Usage.
+#' @param elogd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu Numeric; combined arithmetically in the body.
 #' @param coefficients Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{fut}, as built in the body.

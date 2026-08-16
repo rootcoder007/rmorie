@@ -13,7 +13,7 @@ morie_warpL_warp_step(positive, negatives, embed_user, rng, alphas, lr = 0.05, m
 \item{embed_user}{Passed to \code{.warpL_vec}.}
 \item{rng}{Passed to \code{.warpL_sample_violation}.}
 \item{alphas}{Passed to \code{.warpL_warp_loss}.}
-\item{lr}{Defaults to \code{0.05}.}
+\item{lr}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 \item{margin}{Passed to \code{.warpL_sample_violation}. Defaults to \code{1}.}
 }
 \description{

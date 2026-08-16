@@ -8,10 +8,10 @@
 LmsDescent(w, e, rvec, mu)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{e}{See Usage.}
-\item{rvec}{See Usage.}
-\item{mu}{See Usage.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{e}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rvec}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 steepest descent gives w - mu grad, which is exactly Widrow-Hoff.

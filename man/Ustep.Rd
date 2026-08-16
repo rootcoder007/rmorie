@@ -9,7 +9,7 @@ Ustep(t, shift = 0)
 }
 \arguments{
 \item{t}{Passed to \code{.morie_rg_aslist}.}
-\item{shift}{Defaults to \code{0}.}
+\item{shift}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 whereas the discrete step of eq (3.35) has u(0) = 1.  They are separate definitions, not one sampled from the other.

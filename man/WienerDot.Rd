@@ -8,8 +8,8 @@
 WienerDot(w, xvec)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{xvec}{See Usage.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{xvec}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 runs BACKWARDS in time, its first entry being the current sample; getting that order wrong reverses the filter without any error being raised, which is why the length check is not the only thing recorded.

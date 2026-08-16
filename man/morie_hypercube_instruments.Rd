@@ -9,7 +9,7 @@ morie_hypercube_instruments(X, n_levels = 3L)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{n_levels}{Defaults to \code{3L}.}
+\item{n_levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
 }
 \description{
 A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}. See the file header for the source the module follows.

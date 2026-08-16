@@ -8,10 +8,10 @@
 aipw_scores(Y, W, mu1, mu0, e)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{W}{See Usage.}
-\item{mu1}{See Usage.}
-\item{mu0}{See Usage.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{W}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{e}{A vector; its length is taken.}
 }
 \description{

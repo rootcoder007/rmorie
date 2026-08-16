@@ -8,8 +8,8 @@
 ConvModel(x, h)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 addresses.

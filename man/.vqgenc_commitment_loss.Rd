@@ -10,7 +10,7 @@
 \arguments{
 \item{encoder_output}{Passed to \code{.vqgenc_as_vector}.}
 \item{quantized}{Passed to \code{.vqgenc_as_vector}.}
-\item{beta}{Defaults to \code{0.25}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.}
 }
 \description{
 A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}. See the file header for the source the module follows.

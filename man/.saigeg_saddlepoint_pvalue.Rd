@@ -8,7 +8,7 @@
 .saigeg_saddlepoint_pvalue(s, G, mu, two_sided = TRUE)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{G}{Passed to \code{.saigeg_cgf}.}
 \item{mu}{Passed to \code{.saigeg_cgf}.}
 \item{two_sided}{A flag; the body branches on it. Defaults to \code{TRUE}.}

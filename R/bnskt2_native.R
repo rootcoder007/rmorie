@@ -14,7 +14,7 @@
 #' source it follows.
 #'
 #' @param rows See Usage.
-#' @param ys See Usage.
+#' @param ys Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}.
 #' @export
@@ -34,9 +34,9 @@
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @param y A vector; indexed elementwise.
-#' @param k_pt See Usage.
-#' @param bandwidth See Usage.
-#' @param order See Usage.
+#' @param k_pt Coerced to numeric by the body, with \code{as.numeric}.
+#' @param bandwidth Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @param side One of \code{"left"}, \code{"right"}.
 #' @param kernel Compared against \code{"triangular"}.
 #' @return A list with \code{slope}, \code{coef}, \code{n}.
@@ -73,7 +73,7 @@
 #' @param y Passed to \code{.side_fit}.
 #' @param kink Passed to \code{.side_fit}.
 #' @param bandwidth Passed to \code{.side_fit}.
-#' @param order Defaults to \code{2L}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param side One of \code{"left"}, \code{"right"}. Defaults to \code{"right"}.
 #' @param kernel One of \code{"triangular"}, \code{"uniform"}. Defaults to \code{"triangular"}.
 #' @return The value of \code{.side_fit}.
@@ -97,14 +97,14 @@ local_polynomial_slope <- function(v, y, kink, bandwidth, order = 2L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param V See Usage.
-#' @param Y See Usage.
+#' @param V Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kink Passed to \code{.side_fit}.
 #' @param bandwidth Passed to \code{.side_fit}.
-#' @param order Defaults to \code{2L}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param kernel Passed to \code{.side_fit}. Defaults to \code{"triangular"}.
-#' @param policy_slope_change Defaults to \code{NULL}.
-#' @param B Defaults to \code{NULL}.
+#' @param policy_slope_change Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param B Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fuzzy A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{tau}, \code{outcome_kink}, \code{policy_kink}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{bandwidth}, \code{order}, \code{kernel}, \code{fuzzy}, \code{denominator_source}, \code{method}, \code{requires}.
 #' @export
@@ -152,11 +152,11 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param V See Usage.
-#' @param kink See Usage.
-#' @param bandwidth See Usage.
-#' @param n_bins Defaults to \code{20L}.
-#' @param order Defaults to \code{1L}.
+#' @param V Coerced to numeric by the body, with \code{as.numeric}.
+#' @param kink Coerced to numeric by the body, with \code{as.numeric}.
+#' @param bandwidth Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @return A list with \code{slope_change}, \code{relative}, \code{slope_right}, \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth}, \code{interpretation}.
 #' @export
 density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
@@ -191,7 +191,7 @@ density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
 #' @param Z Passed to \code{.side_fit}.
 #' @param kink Passed to \code{.side_fit}.
 #' @param bandwidth Passed to \code{.side_fit}.
-#' @param order Defaults to \code{2L}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param kernel Passed to \code{.side_fit}. Defaults to \code{"triangular"}.
 #' @return A list with \code{slope_change}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{interpretation}.
 #' @export

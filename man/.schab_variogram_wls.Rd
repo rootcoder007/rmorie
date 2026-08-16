@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{h}{A vector; indexed elementwise.}
-\item{gamma}{See Usage.}
-\item{counts}{See Usage.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{counts}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_rest_shared implementation. Called by \code{.schab_moving_window_krige}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 logmeanexp(values)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the pftrep_native implementation. Called by \code{replicated_pfilter}. See the file header for the source the module follows.

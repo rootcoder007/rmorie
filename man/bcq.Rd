@@ -9,12 +9,12 @@ bcq(dataset, states = NULL, actions = NULL, tau = 0.3, gamma = 0.99, lr = 0.5, i
 }
 \arguments{
 \item{dataset}{See Usage.}
-\item{states}{Defaults to \code{NULL}.}
-\item{actions}{Defaults to \code{NULL}.}
-\item{tau}{Defaults to \code{0.3}.}
+\item{states}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
+\item{actions}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
+\item{tau}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.}
 \item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.99}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
-\item{iters}{Defaults to \code{2000}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.}
 \item{loss}{One of \code{"huber"}, \code{"squared"}. Defaults to \code{"huber"}.}
 \item{huber_c}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{behavior}{Optional; may be \code{NULL}. A vector; indexed elementwise.}

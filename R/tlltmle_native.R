@@ -69,7 +69,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .tlltmle_logit <- function(p) {
@@ -96,9 +96,9 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param g See Usage.
-#' @param rule Defaults to \code{1}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rule Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{max}, \code{mean}, \code{note}.
 #' @export
 tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
@@ -123,11 +123,11 @@ tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param H See Usage.
-#' @param Y See Usage.
-#' @param iters Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param Q Coerced to numeric by the body, with \code{as.numeric}.
+#' @param H Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.
 #' @return A list with \code{epsilon}, \code{Q_star}, \code{score}.
 #' @export
 tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
@@ -160,11 +160,11 @@ tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{initial_plugin}, \code{method}, \code{note}.
 #' @export
 tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
@@ -233,7 +233,7 @@ tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param d See Usage.
+#' @param d Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 tlltmle_influence_curve_se <- function(d) {

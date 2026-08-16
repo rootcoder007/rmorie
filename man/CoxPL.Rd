@@ -13,7 +13,7 @@ CoxPL(time, event, X, beta = NULL, max_iter = 50L, tol = 1e-10)
 \item{event}{A vector; its length is taken.}
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{beta}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{max_iter}{Defaults to \code{50L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{

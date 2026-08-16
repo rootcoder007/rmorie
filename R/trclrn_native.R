@@ -69,7 +69,7 @@
 #' @param A See Usage.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param propensity Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param min_propensity See Usage.
+#' @param min_propensity Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{a}, \code{Xm}, \code{p}, \code{n}, \code{arms}.
 #' @export
 .trclrn_check <- function(Y, A, X, propensity, min_propensity) {
@@ -216,9 +216,9 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #' @param propensity Passed to \code{.trclrn_check}.
 #' @param method Compared against \code{"augmented"}. Defaults to \code{"ipw"}.
 #' @param outcome_model Optional; may be \code{NULL}. Passed to \code{.trclrn_best_treatment}.
-#' @param max_depth Defaults to \code{3}.
-#' @param min_leaf Defaults to \code{10}.
-#' @param n_thresholds Defaults to \code{20}.
+#' @param max_depth Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @param min_leaf Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param n_thresholds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return The value of \code{result}, as built in the body.
 #' @export

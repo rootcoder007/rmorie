@@ -9,7 +9,7 @@ morie_snpqc1(genotypes, phenotype = NULL, trait = "binary", geno_relaxed = 0.2, 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}
-\item{phenotype}{Defaults to \code{NULL}.}
+\item{phenotype}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{trait}{One of \code{"binary"}, \code{"quantitative"}. Defaults to \code{"binary"}.}
 \item{geno_relaxed}{Defaults to \code{0.2}.}
 \item{mind_relaxed}{Defaults to \code{0.2}.}
@@ -23,7 +23,7 @@ morie_snpqc1(genotypes, phenotype = NULL, trait = "binary", geno_relaxed = 0.2, 
 \item{pihat}{Defaults to \code{0.2}.}
 \item{hwe_test}{Passed to \code{morie_snpqc1_hwe_pvalue}. Defaults to \code{"exact"}.}
 \item{x_genotypes}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{reported_sex}{Defaults to \code{NULL}.}
+\item{reported_sex}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{relatedness}{One of \code{"kinship"}, \code{"pihat"}. Defaults to \code{"pihat"}.}
 \item{ibd_correction}{Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.}
 }

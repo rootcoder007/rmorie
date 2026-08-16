@@ -133,7 +133,7 @@ NULL
 #' it follows.
 #'
 #' @param data A vector; indexed elementwise.
-#' @param covariates See Usage.
+#' @param covariates Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{cbind}.
 #' @export
 .mor_ps_design <- function(data, covariates) {
@@ -193,8 +193,8 @@ NULL
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
-#' @param lam Defaults to \code{0}.
-#' @param max_iter Defaults to \code{200L}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
@@ -228,7 +228,7 @@ NULL
 #' @param treatment See Usage.
 #' @param covariates Passed to \code{.mor_ps_design}.
 #' @param ps_model One of \code{"mle"}, \code{"ridge"}. Defaults to \code{"mle"}.
-#' @param ridge_lambda Defaults to \code{1}.
+#' @param ridge_lambda Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .fit_propensity <- function(data, treatment, covariates,
@@ -366,7 +366,7 @@ NULL
 #' 656-664.
 #'
 #' @param w See Usage.
-#' @param weight_trim Defaults to \code{NULL}.
+#' @param weight_trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param side One of \code{"both"}, \code{"upper"}. Defaults to \code{"upper"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -427,7 +427,7 @@ NULL
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param ps See Usage.
+#' @param ps Coerced to numeric by the body, with \code{as.numeric}.
 #' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.01, 0.99)}.
 #' @param trim_type One of \code{"discard"}, \code{"quantile"}, \code{"value"}. Defaults to \code{"value"}.
 #' @return The value of \code{pmin}.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{fps}{A vector; its length is taken.}
-\item{threshold}{Defaults to \code{0.8}.}
+\item{threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.}
 }
 \description{
 Neighbour lists: for each compound, the set of others within threshold. --------------------------------------------------------------------------- Returns a list of integer vectors (sorted ascending); index i holds the indices j != i with Tanimoto(fp_i, fp_j) >= threshold. Mirrors the Python neighbour_lists() function.

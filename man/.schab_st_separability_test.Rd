@@ -8,8 +8,8 @@
 .schab_st_separability_test(neg2_unrestricted, neg2_separable)
 }
 \arguments{
-\item{neg2_unrestricted}{See Usage.}
-\item{neg2_separable}{See Usage.}
+\item{neg2_unrestricted}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{neg2_separable}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 space the statistic is a mixture of a degenerate distribution at zero and a chi-square, so "simply divide the p-value ... by 2" (Self and Liang, 1987; Littell, Milliken, Stroup and Wolfinger, 1996).

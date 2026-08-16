@@ -42,7 +42,7 @@
 #' outlier moves the standard deviation a long way and the interquartile
 #' range hardly at all.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .wsm_spread <- function(x) {
@@ -72,7 +72,7 @@
 #' log-normals with skewness up to about 1.8, and normal mixtures
 #' separated by up to 3 standard deviations.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rule Defaults to \code{"3.31"}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -103,7 +103,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
+#' @param data A matrix; the body checks with \code{is.matrix}.
 #' @param statistic See Usage.
 #' @param B A count; the body uses it as \code{seq_len(...)}.
 #' @param seed See Usage.

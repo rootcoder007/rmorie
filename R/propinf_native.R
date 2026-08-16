@@ -374,7 +374,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .propinf_rng <- function(seed) {
@@ -457,8 +457,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n_in See Usage.
-#' @param hidden See Usage.
+#' @param n_in Coerced to integer by the body, with \code{as.integer}.
+#' @param hidden Coerced to integer by the body, with \code{as.integer}.
 #' @param rnd Passed to \code{.propinf_normal_lcg}.
 #' @return The value of \code{net}, as built in the body.
 #' @export
@@ -484,7 +484,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' the source it follows.
 #'
 #' @param net A vector; its length is taken and its elements indexed.
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{acts}, \code{pre}.
 #' @export
 .propinf_forward <- function(net, x) {
@@ -587,7 +587,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param net See Usage.
+#' @param net Iterated over elementwise, with \code{lapply}.
 #' @param metric Defaults to \code{NULL}.
 #' @return The value of \code{.propinf_flat_representation_internal}.
 #' @export
@@ -609,7 +609,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param net See Usage.
+#' @param net Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{lapply}.
 #' @export
 .propinf_set_representation_internal <- function(net) {
@@ -649,7 +649,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' the source it follows.
 #'
 #' @param net A vector; its length is taken and its elements indexed.
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param final One of \code{"linear"}, \code{"sigmoid"}, \code{"tanh"}. Defaults to \code{"relu"}.
 #' @param hidden_act Compared against \code{"tanh"}. Defaults to \code{"relu"}.
 #' @return A list with \code{acts}, \code{pre}.
@@ -687,7 +687,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param net A vector; its length is taken and its elements indexed.
 #' @param acts A vector; indexed elementwise.
 #' @param pre A vector; indexed elementwise.
-#' @param dout See Usage.
+#' @param dout Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grads A vector; indexed elementwise.
 #' @param final One of \code{"linear"}, \code{"sigmoid"}, \code{"tanh"}. Defaults to \code{"relu"}.
 #' @param hidden_act Compared against \code{"tanh"}. Defaults to \code{"relu"}.
@@ -724,7 +724,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param net See Usage.
+#' @param net Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{lapply}.
 #' @export
 .propinf_zero_like <- function(net) {
@@ -761,10 +761,10 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'
 #' @param feats A vector; its length is taken and its elements indexed.
 #' @param labels A vector; indexed elementwise.
-#' @param hidden See Usage.
-#' @param epochs See Usage.
+#' @param hidden Coerced to integer by the body, with \code{as.integer}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}.
 #' @param lr Passed to \code{.propinf_sgd_step}.
-#' @param seed See Usage.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{net}, as built in the body.
 #' @export
 .propinf_train_vector_meta <- function(feats, labels, hidden, epochs, lr,
@@ -842,12 +842,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' the source it follows.
 #'
 #' @param shapes A vector; its length is taken and its elements indexed.
-#' @param phi_hidden See Usage.
+#' @param phi_hidden Coerced to integer by the body, with \code{as.integer}.
 #' @param repr_dim Numeric; combined arithmetically in the body.
-#' @param rho_hidden See Usage.
+#' @param rho_hidden Coerced to integer by the body, with \code{as.integer}.
 #' @param rnd Passed to \code{.propinf_mlp_init}.
 #' @param context One of \code{"none"}, \code{"paired"}. Defaults to \code{"paired"}.
-#' @param edge_hidden Defaults to \code{NULL}.
+#' @param edge_hidden Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{phis}, \code{psis}, \code{rho}, \code{repr_dim}, \code{shapes}, \code{context}, \code{scalers}.
 #' @export
 .propinf_deepsets_init <- function(shapes, phi_hidden, repr_dim, rho_hidden,
@@ -1036,9 +1036,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param phi_hidden Passed to \code{.propinf_deepsets_init}.
 #' @param repr_dim Passed to \code{.propinf_deepsets_init}.
 #' @param rho_hidden Passed to \code{.propinf_deepsets_init}.
-#' @param epochs See Usage.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}.
 #' @param lr Passed to \code{.propinf_sgd_step}.
-#' @param seed See Usage.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @param context Passed to \code{.propinf_deepsets_init}. Defaults to \code{"paired"}.
 #' @return The value of \code{model}, as built in the body.
 #' @export

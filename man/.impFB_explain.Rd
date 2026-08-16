@@ -11,8 +11,8 @@
 \item{Y}{A matrix; indexed by row and column.}
 \item{C_row}{A vector; indexed elementwise.}
 \item{p_row}{A vector; indexed elementwise.}
-\item{i}{See Usage.}
-\item{lam}{Defaults to \code{0.1}.}
+\item{i}{Coerced to integer by the body, with \code{as.integer}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \description{
 A step of the impFB_native implementation. No other function in the package calls it. See the file header for the source the module follows.

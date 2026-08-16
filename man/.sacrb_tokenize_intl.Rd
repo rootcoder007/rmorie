@@ -8,7 +8,7 @@
 .sacrb_tokenize_intl(text, lowercase = FALSE)
 }
 \arguments{
-\item{text}{See Usage.}
+\item{text}{Coerced to character by the body, with \code{as.character}.}
 \item{lowercase}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

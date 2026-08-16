@@ -8,7 +8,7 @@
 .rng(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the birl_native implementation. Called by \code{policy_walk}. See the file header for the source the module follows.

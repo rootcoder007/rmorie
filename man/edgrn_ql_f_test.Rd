@@ -8,11 +8,11 @@
 edgrn_ql_f_test(lrt, q, quasi_dispersion, df_residual, df_prior = NULL)
 }
 \arguments{
-\item{lrt}{See Usage.}
-\item{q}{See Usage.}
-\item{quasi_dispersion}{See Usage.}
-\item{df_residual}{See Usage.}
-\item{df_prior}{Defaults to \code{NULL}.}
+\item{lrt}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{q}{Coerced to integer by the body, with \code{as.integer}.}
+\item{quasi_dispersion}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{df_residual}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{df_prior}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

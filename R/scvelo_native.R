@@ -78,7 +78,7 @@
 #' e^-bt)/(g - b) term, which is t*e^-bt at g = b, not a genuine
 #' singularity.
 #'
-#' @param tau See Usage.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @param beta Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.
@@ -114,8 +114,8 @@ morie_solve_kinetics <- function(tau, alpha, beta, gamma,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
-#' @param s See Usage.
+#' @param u Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s Coerced to numeric by the body, with \code{as.numeric}.
 #' @param beta Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -278,11 +278,11 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 #'
 #' @param u A vector; its length is taken and its elements indexed.
 #' @param s A vector; its length is taken and its elements indexed.
-#' @param alpha0 Defaults to \code{NULL}.
+#' @param alpha0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param beta0 Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param gamma0 Defaults to \code{0.5}.
-#' @param t_switch0 Defaults to \code{NULL}.
-#' @param n_iter Defaults to \code{25}.
+#' @param gamma0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param t_switch0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @param grid Passed to \code{.scvelo_residual}. Defaults to \code{120}.
 #' @return A list with \code{estimate}, \code{alpha}, \code{beta}, \code{gamma}, \code{t_switch}, \code{rss}, \code{rss_history}, \code{latent}, \code{velocity}, \code{steady_on}, \code{method}.
 #' @export

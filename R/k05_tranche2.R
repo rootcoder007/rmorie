@@ -74,7 +74,7 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 #' source it follows.
 #'
 #' @param a See Usage.
-#' @param b See Usage.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c Defaults to \code{NULL}.
 #' @param upper Defaults to \code{NULL}.
 #' @return A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.

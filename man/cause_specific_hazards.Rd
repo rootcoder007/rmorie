@@ -12,7 +12,7 @@ cause_specific_hazards(time, event_type, times, A = NULL, arm = NULL, weights = 
 \item{event_type}{Passed to \code{.tmlcmp_vec}.}
 \item{times}{A vector; its length is taken and its elements indexed.}
 \item{A}{Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.}
-\item{arm}{Defaults to \code{NULL}.}
+\item{arm}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{weights}{Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.}
 }
 \description{

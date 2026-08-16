@@ -8,7 +8,7 @@
 .gponeway(groups)
 }
 \arguments{
-\item{groups}{See Usage.}
+\item{groups}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 ------------------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

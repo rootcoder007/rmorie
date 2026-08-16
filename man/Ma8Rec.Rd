@@ -8,8 +8,8 @@
 Ma8Rec(x, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 sample instead of eight, and it "clearly depicts the integration aspect".  The cost is that error accumulates -- the recursion never forgets, where the direct form flushes a perturbation after 8 samples.

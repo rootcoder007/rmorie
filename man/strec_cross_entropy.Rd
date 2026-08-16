@@ -8,8 +8,8 @@
 strec_cross_entropy(probability, target_index)
 }
 \arguments{
-\item{probability}{See Usage.}
-\item{target_index}{See Usage.}
+\item{probability}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{target_index}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the strec_native implementation. No other function in the package calls it. See the file header for the source the module follows.

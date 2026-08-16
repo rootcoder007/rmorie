@@ -9,9 +9,9 @@ morie_polkrn(y, A_history, H_history, degree = 2, basis = "both", summary = "cum
 }
 \arguments{
 \item{y}{Passed to \code{.polkrn_vec}.}
-\item{A_history}{See Usage.}
-\item{H_history}{See Usage.}
-\item{degree}{Defaults to \code{2}.}
+\item{A_history}{Coerced to list by the body, with \code{as.list}.}
+\item{H_history}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
+\item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 \item{basis}{One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.}
 \item{summary}{Defaults to \code{"cumulative"}.}
 \item{n_centres}{Defaults to \code{5}.}

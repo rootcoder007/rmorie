@@ -35,7 +35,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .opnclp_mat <- function(m) {
@@ -53,8 +53,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param samples_seen See Usage.
-#' @param model_params See Usage.
+#' @param samples_seen Coerced to numeric by the body, with \code{as.numeric}.
+#' @param model_params Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{compute}, \code{samples_seen}, \code{params}, \code{gmac_scale}.
 #' @export
 total_compute <- function(samples_seen, model_params) {
@@ -122,7 +122,7 @@ fit_power_law <- function(x, y) {
 #' source it follows.
 #'
 #' @param fit A list; the body reads \code{$alpha}, \code{$beta}, \code{$range} from it.
-#' @param compute See Usage.
+#' @param compute Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{value}, \code{extrapolation_decades}, \code{interpolated}, \code{note}.
 #' @export
 .opnclp_predict <- function(fit, compute) {
@@ -185,7 +185,7 @@ compare_scaling <- function(x_a, y_a, x_b, y_b,
 #'
 #' @param image_embeddings Passed to \code{.opnclp_mat}.
 #' @param text_embeddings Passed to \code{.opnclp_mat}.
-#' @param temperature Defaults to \code{0.07}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.07}.
 #' @return A list with \code{loss}, \code{image_to_text}, \code{text_to_image}, \code{logits}, \code{note}.
 #' @export
 infonce <- function(image_embeddings, text_embeddings,

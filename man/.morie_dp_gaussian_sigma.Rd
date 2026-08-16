@@ -8,8 +8,8 @@
 .morie_dp_gaussian_sigma(sensitivity, epsilon, delta)
 }
 \arguments{
-\item{sensitivity}{See Usage.}
-\item{epsilon}{See Usage.}
+\item{sensitivity}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{epsilon}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{delta}{Numeric; combined arithmetically in the body.}
 }
 \description{

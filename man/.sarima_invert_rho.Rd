@@ -8,7 +8,7 @@
 .sarima_invert_rho(rho)
 }
 \arguments{
-\item{rho}{See Usage.}
+\item{rho}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the sarima_native implementation. Called by \code{moment_estimate}, \code{preliminary_estimates}. See the file header for the source the module follows.

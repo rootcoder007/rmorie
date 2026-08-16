@@ -11,11 +11,11 @@ andrews_monahan_hac(e, X = NULL, prewhiten = TRUE, var_order = 1, kernel = "qs",
 \item{e}{A matrix; passed to \code{as.matrix}.}
 \item{X}{Defaults to \code{NULL}.}
 \item{prewhiten}{A flag; the body branches on it. Defaults to \code{TRUE}.}
-\item{var_order}{Defaults to \code{1}.}
+\item{var_order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{kernel}{Defaults to \code{"qs"}.}
-\item{bandwidth}{Defaults to \code{NULL}.}
+\item{bandwidth}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{weights}{Defaults to \code{NULL}.}
-\item{n_params}{Defaults to \code{NULL}.}
+\item{n_params}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{cap}{Numeric; combined arithmetically in the body. Defaults to \code{0.97}.}
 \item{adjust}{Defaults to \code{TRUE}.}
 }

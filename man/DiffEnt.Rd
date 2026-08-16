@@ -9,7 +9,7 @@ DiffEnt(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
 }
 \arguments{
 \item{pdf}{Passed to \code{.morie_rg_pdfint}.}
-\item{x}{Defaults to \code{NULL}.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lower}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.}
 \item{upper}{Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.}
 }

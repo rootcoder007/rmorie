@@ -8,7 +8,7 @@
 .morie_key(s)
 }
 \arguments{
-\item{s}{See Usage.}
+\item{s}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 Part of the matroid_optimisation_native implementation; see the file header for the source it follows.

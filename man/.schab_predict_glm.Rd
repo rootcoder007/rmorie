@@ -8,9 +8,9 @@
 .schab_predict_glm(nu0_hat, sigma2_nu0, mu0_hat, link_kind)
 }
 \arguments{
-\item{nu0_hat}{See Usage.}
-\item{sigma2_nu0}{See Usage.}
-\item{mu0_hat}{See Usage.}
+\item{nu0_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sigma2_nu0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu0_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{link_kind}{Passed to \code{.schab_link_derivative}.}
 }
 \description{

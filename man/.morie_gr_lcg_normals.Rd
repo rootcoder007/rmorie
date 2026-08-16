@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{count}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{clamp}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

@@ -10,7 +10,7 @@
 \arguments{
 \item{t}{Passed to \code{morie_prphet_fit}.}
 \item{y}{Passed to \code{morie_prphet_fit}.}
-\item{taus}{Defaults to \code{NULL}.}
+\item{taus}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_changepoints}{Passed to \code{morie_prphet_fit}. Defaults to \code{15}.}
 \item{changepoint_range}{Passed to \code{morie_prphet_fit}. Defaults to \code{0.8}.}
 \item{seasonalities}{Passed to \code{morie_prphet_fit}.}

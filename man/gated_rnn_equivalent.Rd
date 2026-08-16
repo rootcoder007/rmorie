@@ -9,8 +9,8 @@ gated_rnn_equivalent(x, w, b = 0)
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}
-\item{w}{See Usage.}
-\item{b}{Defaults to \code{0}.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the mambss_native implementation. No other function in the package calls it. See the file header for the source the module follows.

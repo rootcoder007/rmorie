@@ -10,7 +10,7 @@
 \arguments{
 \item{X}{A matrix; passed to \code{ncol}.}
 \item{y}{A matrix; passed to \code{crossprod}.}
-\item{w}{Defaults to \code{NULL}.}
+\item{w}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}, \code{.limmav_weighted_lm}. See the file header for the source the module follows.

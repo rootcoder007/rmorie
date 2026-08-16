@@ -8,7 +8,7 @@
 .morie_gh_n(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 formulas are routinely evaluated at hypothetical sample sizes like 1e10, which overflow R\\'s 32-bit integer and silently become NA. Python\\'s int has no such limit, so coercing here would break parity exactly where the asymptotics become interesting.

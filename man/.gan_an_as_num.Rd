@@ -8,7 +8,7 @@
 .gan_an_as_num(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the gan_an_native implementation. Called by \code{.gan_an_discrimination_loss_impl}, \code{.gan_an_residual_loss_impl}, \code{morie_gan_an} and 2 others in the module. See the file header for the source the module follows.

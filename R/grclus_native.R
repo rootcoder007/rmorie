@@ -131,7 +131,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
 .grclus_rows_to_mat <- function(A) {
@@ -492,7 +492,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param target Numeric; combined arithmetically in the body.
 #' @param tolerance Numeric; combined arithmetically in the body.
 #' @param boundary A flag; the body branches on it.
-#' @param max_passes See Usage.
+#' @param max_passes Coerced to integer by the body, with \code{as.integer}.
 #' @param patience See Usage.
 #' @return A list with \code{parts}, \code{cut}.
 #' @export
@@ -606,7 +606,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param initial Compared against \code{"gggp"}.
 #' @param refinement Compared against \code{"bkl"}.
 #' @param tolerance Passed to \code{.grclus_kl}.
-#' @param coarsest See Usage.
+#' @param coarsest Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return The value of \code{.grclus_balance_bisection}.
 #' @export

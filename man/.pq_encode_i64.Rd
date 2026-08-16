@@ -8,7 +8,7 @@
 .pq_encode_i64(values)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 low half back into signed range because that is all writeBin takes.

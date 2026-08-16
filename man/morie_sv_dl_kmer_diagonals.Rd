@@ -8,10 +8,10 @@
 morie_sv_dl_kmer_diagonals(read, ref, k = 7, k_min = 3, require_half = TRUE)
 }
 \arguments{
-\item{read}{See Usage.}
-\item{ref}{See Usage.}
+\item{read}{Coerced to character by the body, with \code{as.character}.}
+\item{ref}{Coerced to character by the body, with \code{as.character}.}
 \item{k}{Numeric; combined arithmetically in the body. Defaults to \code{7}.}
-\item{k_min}{Defaults to \code{3}.}
+\item{k_min}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 \item{require_half}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

@@ -14,7 +14,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name Defaults to \code{"g"}.
 #' @return The value of \code{a}, as built in the body.
 #' @export

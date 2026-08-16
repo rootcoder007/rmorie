@@ -10,9 +10,9 @@ EmdSpec(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05)
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{max_imfs}{Defaults to \code{8}.}
-\item{nfreq}{Defaults to \code{32}.}
-\item{tol}{Defaults to \code{0.05}.}
+\item{max_imfs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
+\item{nfreq}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

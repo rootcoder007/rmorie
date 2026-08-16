@@ -9,7 +9,7 @@ logistic_trainer(l2 = 0.001, epochs = 300L, lr = 0.5, seed = 0)
 }
 \arguments{
 \item{l2}{Numeric; combined arithmetically in the body. Defaults to \code{0.001}.}
-\item{epochs}{Defaults to \code{300L}.}
+\item{epochs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{seed}{Defaults to \code{0}.}
 }

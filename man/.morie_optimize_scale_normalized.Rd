@@ -10,9 +10,9 @@
 \arguments{
 \item{fn}{See Usage.}
 \item{d}{Numeric; combined arithmetically in the body.}
-\item{n_restarts}{Defaults to \code{8L}.}
+\item{n_restarts}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.}
 \item{seed}{Defaults to \code{0L}.}
-\item{x0}{Defaults to \code{NULL}.}
+\item{x0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the horowitz_native4 implementation. Called by \code{morie_choice_based_max_score}, \code{morie_ordered_max_score}, \code{morie_panel_max_score}. See the file header for the source the module follows.

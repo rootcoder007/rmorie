@@ -8,8 +8,8 @@
 morie_sv_dl_split_read_consensus(reads, starts = NULL)
 }
 \arguments{
-\item{reads}{See Usage.}
-\item{starts}{Defaults to \code{NULL}.}
+\item{reads}{Coerced to character by the body, with \code{as.character}.}
+\item{starts}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 places each read in a common frame. Returns list(consensus, start).

@@ -8,8 +8,8 @@
 .dmlqs_act(x, activation)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{activation}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{activation}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the dmlqs_native implementation. Called by \code{.dmlqs_message_pass}. See the file header for the source the module follows.

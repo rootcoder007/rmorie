@@ -11,7 +11,7 @@
 \item{nr}{A count; the body uses it as \code{matrix(...)}.}
 \item{nc}{A count; the body uses it as \code{matrix(...)}.}
 \item{skip}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{scale}{Defaults to \code{1}.}
+\item{scale}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber}, \code{Vaecf} and 4 others in the module. See the file header for the source the module follows.

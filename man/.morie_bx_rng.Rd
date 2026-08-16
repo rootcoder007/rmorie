@@ -8,7 +8,7 @@
 .morie_bx_rng(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 below 2^53, so the double arithmetic here is exact and matches the Python arm\\'s 32-bit masked integer step for step.

@@ -8,10 +8,10 @@
 counterfactual_mean(Y, A, L, a_star, strata_probs = NULL)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{A}{See Usage.}
-\item{L}{See Usage.}
-\item{a_star}{See Usage.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{L}{Coerced to character by the body, with \code{as.character}.}
+\item{a_star}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{strata_probs}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{

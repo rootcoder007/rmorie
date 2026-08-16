@@ -11,7 +11,7 @@
 \item{Y}{A matrix; indexed by row and column.}
 \item{C_row}{A vector; indexed elementwise.}
 \item{p_row}{Numeric; combined arithmetically in the body.}
-\item{lam}{See Usage.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fast}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

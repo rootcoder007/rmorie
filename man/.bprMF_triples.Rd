@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{pos}{A vector; indexed elementwise.}
-\item{n_items}{See Usage.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the bprMF_native implementation. No other function in the package calls it. See the file header for the source the module follows.

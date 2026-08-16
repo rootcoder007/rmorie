@@ -65,9 +65,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
-#' @param lo Defaults to \code{-1}.
-#' @param hi Defaults to \code{1}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .dqnv_clip_reward <- function(r, lo = -1.0, hi = 1.0) {
@@ -80,11 +80,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
-#' @param s2 See Usage.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s2 Coerced to integer by the body, with \code{as.integer}.
 #' @param Q_target A vector; indexed elementwise.
-#' @param gamma Defaults to \code{0.99}.
-#' @param done Defaults to \code{FALSE}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.99}.
+#' @param done Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @return A numeric value.
 #' @export
 .dqnv_td_target <- function(r, s2, Q_target, gamma = 0.99, done = FALSE) {
@@ -104,7 +104,7 @@
 #' @param Q A vector; its length is taken and its elements indexed.
 #' @param P A vector; indexed elementwise.
 #' @param R A vector; indexed elementwise.
-#' @param gamma Defaults to \code{0.99}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.99}.
 #' @return The value of \code{worst}, as built in the body.
 #' @export
 .dqnv_bellman_residual <- function(Q, P, R, gamma = 0.99) {
@@ -135,7 +135,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param capacity See Usage.
+#' @param capacity Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{capacity}, \code{data}.
 #' @export
 .dqnv_replay_buffer_new <- function(capacity) {
@@ -152,10 +152,10 @@
 #'
 #' @param buf A list; the body reads \code{$capacity}, \code{$data} from it.
 #' @param s See Usage.
-#' @param a See Usage.
-#' @param r See Usage.
-#' @param s2 See Usage.
-#' @param done Defaults to \code{FALSE}.
+#' @param a Coerced to integer by the body, with \code{as.integer}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s2 Coerced to integer by the body, with \code{as.integer}.
+#' @param done Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @return The value of \code{buf}, as built in the body.
 #' @export
 .dqnv_replay_buffer_add <- function(buf, s, a, r, s2, done = FALSE) {
@@ -175,7 +175,7 @@
 #' source it follows.
 #'
 #' @param buf A list; the body reads \code{$data} from it.
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param rng_state Passed to \code{.ghc_unif}.
 #' @return A list with \code{state}, \code{samples}.
 #' @export
@@ -215,12 +215,12 @@
 #'
 #' @param P A vector; indexed elementwise.
 #' @param R A vector; indexed elementwise.
-#' @param n_states See Usage.
-#' @param n_actions See Usage.
+#' @param n_states Coerced to integer by the body, with \code{as.integer}.
+#' @param n_actions Coerced to integer by the body, with \code{as.integer}.
 #' @param gamma Passed to \code{.dqnv_td_target}. Defaults to \code{0.99}.
-#' @param alpha Defaults to \code{0.1}.
-#' @param steps Defaults to \code{20000}.
-#' @param C Defaults to \code{100}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
+#' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000}.
+#' @param C Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param buffer_size Passed to \code{.dqnv_replay_buffer_new}. Defaults to \code{1000}.
 #' @param batch Passed to \code{.dqnv_replay_buffer_sample}. Defaults to \code{16}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.

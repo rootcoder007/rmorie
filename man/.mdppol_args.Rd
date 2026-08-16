@@ -8,7 +8,7 @@
 .mdppol_args(P, R)
 }
 \arguments{
-\item{P}{See Usage.}
+\item{P}{Iterated over elementwise, with \code{lapply}.}
 \item{R}{A vector; its length is taken and its elements indexed.}
 }
 \description{

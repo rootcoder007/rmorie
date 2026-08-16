@@ -9,8 +9,8 @@ morie_frequentist_confidence_set(theta_set, se_phi, level = 0.95, target = "para
 }
 \arguments{
 \item{theta_set}{A list; the body reads \code{$lower}, \code{$upper}, \code{$width} from it.}
-\item{se_phi}{See Usage.}
-\item{level}{Defaults to \code{0.95}.}
+\item{se_phi}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 \item{target}{One of \code{"parameter"}, \code{"set"}. Defaults to \code{"parameter"}.}
 }
 \description{

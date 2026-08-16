@@ -8,7 +8,7 @@
 IdftRI(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 residue is reported, not discarded -- a large one means the spectrum was not conjugate-symmetric and the "real signal" reading is wrong.

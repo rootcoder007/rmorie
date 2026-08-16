@@ -8,8 +8,8 @@
 FDiffMag(omega, T = 1)
 }
 \arguments{
-\item{omega}{See Usage.}
-\item{T}{Defaults to \code{1}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 0 <= w <= pi, the range plotted; the absolute value is needed outside it.  Largest at Nyquist, which is why the operator amplifies high-frequency noise.

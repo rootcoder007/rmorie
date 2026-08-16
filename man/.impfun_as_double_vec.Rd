@@ -8,7 +8,7 @@
 .impfun_as_double_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A list; the body checks with \code{is.list}.}
 }
 \description{
 A step of the impfun_native implementation. Called by \code{concordance}, \code{info_score}. See the file header for the source the module follows.

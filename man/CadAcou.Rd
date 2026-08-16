@@ -8,7 +8,7 @@
 CadAcou(coronary_sound, fs, order = 8, hf_band = c(300, 900), ref_band = c(50, 300))
 }
 \arguments{
-\item{coronary_sound}{See Usage.}
+\item{coronary_sound}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{order}{Numeric; combined arithmetically in the body. Defaults to \code{8}.}
 \item{hf_band}{A vector; indexed elementwise. Defaults to \code{c(300, 900)}.}

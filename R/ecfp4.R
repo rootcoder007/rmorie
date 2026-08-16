@@ -98,7 +98,7 @@
 #' it follows.
 #'
 #' @param B A list; the body reads \code{$a}, \code{$i}, \code{$j}, \code{$o} from it.
-#' @param invariants See Usage.
+#' @param invariants Coerced to numeric by the body, with \code{as.numeric}.
 #' @param radius A count; the body uses it as \code{seq_len(...)}.
 #' @param nbits A count; the body uses it as \code{integer(...)}.
 #' @param use_bond_order A flag; the body branches on it. Defaults to \code{TRUE}.

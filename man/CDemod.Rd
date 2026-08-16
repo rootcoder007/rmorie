@@ -11,7 +11,7 @@ CDemod(x, fs = 1, f0 = NULL, bandwidth = NULL)
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{f0}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
-\item{bandwidth}{Defaults to \code{NULL}.}
+\item{bandwidth}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

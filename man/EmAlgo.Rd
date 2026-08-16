@@ -11,7 +11,7 @@ EmAlgo(log_lik, Q, x0, steps)
 \item{steps}{A count; the body uses it as \code{seq_len(...)}.}
 \item{log_lik}{See Usage.}
 \item{Q}{See Usage.}
-\item{x0}{See Usage.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 \\' \\' Theorem 1 of Dempster, Laird & Rubin (1977) says every EM step \\' increases the observed-data log likelihood.  That is not assumed but \\' checked: the log likelihood is evaluated at every iterate and the \\' increments are returned along with a monotone flag. \\' \\' @param log_lik function(theta) giving the observed-data log likelihood \\' @param Q function(theta) giving the next iterate (combined E and M step) \\' @param x0 starting parameter vector \\'

@@ -10,7 +10,7 @@
 \arguments{
 \item{g}{Passed to \code{.fnv1a}.}
 \item{gram_index}{A vector; indexed elementwise.}
-\item{hash_buckets}{See Usage.}
+\item{hash_buckets}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}. See the file header for the source the module follows.

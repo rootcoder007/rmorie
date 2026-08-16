@@ -79,7 +79,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{qnorm}.
 #' @export
 .genemt_norm_ppf <- function(p) {
@@ -127,7 +127,7 @@
 #' source it follows.
 #'
 #' @param G A matrix; passed to \code{as.matrix}.
-#' @param keep Defaults to \code{0.999}.
+#' @param keep Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.999}.
 #' @return A list with \code{components}, \code{n_components}, \code{n_markers}, \code{variance_explained}, \code{note}.
 #' @export
 morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
@@ -183,7 +183,7 @@ morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Passed to \code{morie_genemt_ld_principal_components}.
 #' @param keep Passed to \code{morie_genemt_ld_principal_components}. Defaults to \code{0.999}.
 #' @return A list with \code{F}, \code{df1}, \code{df2}, \code{p}, \code{z}, \code{n_markers}, \code{note}.
@@ -226,9 +226,9 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_markers See Usage.
-#' @param gene_length See Usage.
-#' @param ld_scores Defaults to \code{NULL}.
+#' @param n_markers Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gene_length Coerced to numeric by the body, with \code{as.numeric}.
+#' @param ld_scores Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{covariates}, \code{names}, \code{note}.
 #' @export
 morie_genemt_gene_covariates <- function(n_markers, gene_length,
@@ -262,8 +262,8 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z_scores See Usage.
-#' @param membership See Usage.
+#' @param z_scores Coerced to numeric by the body, with \code{as.numeric}.
+#' @param membership Coerced to numeric by the body, with \code{as.numeric}.
 #' @param covariates Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p}, \code{n_genes}, \code{covariates_used}, \code{method}, \code{note}.
 #' @export
@@ -311,9 +311,9 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z_scores See Usage.
-#' @param set_a See Usage.
-#' @param set_b See Usage.
+#' @param z_scores Coerced to numeric by the body, with \code{as.numeric}.
+#' @param set_a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param set_b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param covariates Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta}, \code{conditional_p}, \code{attenuation}, \code{note}.
 #' @export

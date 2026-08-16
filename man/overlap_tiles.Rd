@@ -8,10 +8,10 @@
 overlap_tiles(height, width, tile, border)
 }
 \arguments{
-\item{height}{See Usage.}
-\item{width}{See Usage.}
-\item{tile}{See Usage.}
-\item{border}{See Usage.}
+\item{height}{Coerced to integer by the body, with \code{as.integer}.}
+\item{width}{Coerced to integer by the body, with \code{as.integer}.}
+\item{tile}{Coerced to integer by the body, with \code{as.integer}.}
+\item{border}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the unetbk_native implementation. No other function in the package calls it. See the file header for the source the module follows.

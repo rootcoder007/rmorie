@@ -11,7 +11,7 @@
 #' @param length A count; the body uses it as \code{seq_len(...)}.
 #' @param degree Numeric; combined arithmetically in the body.
 #' @param offset Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param scale Defaults to \code{NULL}.
+#' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A matrix, from \code{t}.
 #' @export
 nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
@@ -35,7 +35,7 @@ nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
 #' @param length A count; the body uses it as \code{seq_len(...)}.
 #' @param harmonics A count; the body uses it as \code{seq_len(...)}.
 #' @param offset Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param period Defaults to \code{NULL}.
+#' @param period Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{do.call}.
 #' @export
 nbeats_seasonality_basis <- function(length, harmonics, offset = 0, period = NULL) {
@@ -77,7 +77,7 @@ nbeats_lstsq <- function(X, y, ridge = 1e-8) {
 #' source it follows.
 #'
 #' @param window A vector; its length is taken.
-#' @param horizon See Usage.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param kind One of \code{"generic"}, \code{"seasonality"}, \code{"trend"}. Defaults to \code{"generic"}.
 #' @param degree Defaults to \code{2}.
 #' @param harmonics Defaults to \code{3}.
@@ -116,8 +116,8 @@ nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param window See Usage.
-#' @param horizon See Usage.
+#' @param window Coerced to numeric by the body, with \code{as.numeric}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param blocks See Usage.
 #' @param ridge Defaults to \code{1e-08}.
 #' @return A list with \code{forecast}, \code{residual}, \code{trace}.
@@ -145,9 +145,9 @@ nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param horizon See Usage.
-#' @param lookback Defaults to \code{NULL}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
+#' @param lookback Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param blocks Defaults to \code{NULL}.
 #' @param ridge Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{backcast}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{residual_norm}, \code{window_norm}, \code{n_blocks}, \code{method}.

@@ -8,7 +8,7 @@
 .memb_sorted_features(vec, top = NULL)
 }
 \arguments{
-\item{vec}{See Usage.}
+\item{vec}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{top}{Optional; may be \code{NULL}. Numeric; passed to \code{min}.}
 }
 \description{

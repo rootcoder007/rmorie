@@ -47,9 +47,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param channels See Usage.
-#' @param reduced Defaults to \code{256}.
-#' @param n_classes Defaults to \code{80}.
+#' @param channels Coerced to integer by the body, with \code{as.integer}.
+#' @param reduced Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.
+#' @param n_classes Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80}.
 #' @return A list with \code{reduce_params}, \code{cls_params}, \code{reg_params}, \code{total}, \code{coupled_total}, \code{branches}, \code{extra_latency_ms}, \code{note}.
 #' @export
 morie_yolovx_decoupled_head <- function(channels, reduced=256,
@@ -79,10 +79,10 @@ morie_yolovx_decoupled_head <- function(channels, reduced=256,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param box See Usage.
-#' @param cx See Usage.
-#' @param cy See Usage.
-#' @param stride Defaults to \code{1}.
+#' @param box Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cx Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cy Coerced to numeric by the body, with \code{as.numeric}.
+#' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{ltrb}, \code{center}, \code{stride}.
 #' @export
 morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
@@ -110,9 +110,9 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
 #' source it follows.
 #'
 #' @param ltrb Passed to \code{.s03vec}.
-#' @param cx See Usage.
-#' @param cy See Usage.
-#' @param stride Defaults to \code{1}.
+#' @param cx Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cy Coerced to numeric by the body, with \code{as.numeric}.
+#' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A vector, from \code{c}.
 #' @export
 morie_yolovx_decode_box <- function(ltrb, cx, cy, stride=1.0) {
@@ -156,11 +156,11 @@ morie_yolovx_box_iou <- function(a, b) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param box See Usage.
-#' @param grid_w See Usage.
-#' @param grid_h See Usage.
-#' @param stride Defaults to \code{1}.
-#' @param radius Defaults to \code{1.5}.
+#' @param box Coerced to numeric by the body, with \code{as.numeric}.
+#' @param grid_w Coerced to integer by the body, with \code{as.integer}.
+#' @param grid_h Coerced to integer by the body, with \code{as.integer}.
+#' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param radius Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
 #' @return A list with \code{in_box}, \code{in_center}, \code{candidates}, \code{n_candidates}, \code{single_center}, \code{note}.
 #' @export
 morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride=1.0,
@@ -218,8 +218,8 @@ morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride=1.0,
 #'
 #' @param costs Passed to \code{.s03mat}.
 #' @param ious Passed to \code{.s03mat}.
-#' @param top_q Defaults to \code{10}.
-#' @param max_k Defaults to \code{NULL}.
+#' @param top_q Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param max_k Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{assignment}, \code{dynamic_k}, \code{n_positives}, \code{contested}, \code{method}, \code{note}.
 #' @export
 morie_yolovx_simota_assign <- function(costs, ious, top_q=10, max_k=NULL) {

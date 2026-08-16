@@ -37,9 +37,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mu See Usage.
-#' @param b_user See Usage.
-#' @param b_item See Usage.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_user Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_item Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .svdpp_baseline <- function(mu, b_user, b_item) {
@@ -52,9 +52,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rated_items See Usage.
+#' @param rated_items Coerced to list by the body, with \code{as.list}.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param exponent Defaults to \code{-0.5}.
+#' @param exponent Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-0.5}.
 #' @return A list with \code{term}, \code{n_rated}, \code{scale}, \code{exponent}, \code{raw_sum}.
 #' @export
 .svdpp_implicit_term <- function(rated_items, y, exponent = -0.5) {
@@ -98,8 +98,8 @@
 #' @param mu Passed to \code{.svdpp_baseline}.
 #' @param b_user Passed to \code{.svdpp_baseline}.
 #' @param b_item Passed to \code{.svdpp_baseline}.
-#' @param p_u See Usage.
-#' @param q_i See Usage.
+#' @param p_u Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q_i Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rated_items Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param y Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param exponent Passed to \code{.svdpp_implicit_term}. Defaults to \code{-0.5}.
@@ -141,7 +141,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rating See Usage.
+#' @param rating Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu Passed to \code{.svdpp_predict}.
 #' @param b_user Passed to \code{.svdpp_predict}.
 #' @param b_item Passed to \code{.svdpp_predict}.
@@ -149,8 +149,8 @@
 #' @param q_i Passed to \code{.svdpp_predict}.
 #' @param rated_items A vector; its length is taken.
 #' @param y A vector; indexed elementwise.
-#' @param lr Defaults to \code{0.007}.
-#' @param reg Defaults to \code{0.015}.
+#' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.007}.
+#' @param reg Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.015}.
 #' @param exponent Passed to \code{.svdpp_predict}. Defaults to \code{-0.5}.
 #' @return A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u}, \code{q_i}, \code{y}, \code{note}.
 #' @export
@@ -193,10 +193,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ratings See Usage.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param factors Defaults to \code{4}.
+#' @param ratings Iterated over elementwise, with \code{lapply}.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
+#' @param factors Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param epochs A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.
 #' @param lr Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.007}.
 #' @param reg Passed to \code{.svdpp_sgd_step}. Defaults to \code{0.015}.

@@ -8,8 +8,8 @@
 parallel_scan(pairs, x0 = 0)
 }
 \arguments{
-\item{pairs}{See Usage.}
-\item{x0}{Defaults to \code{0}.}
+\item{pairs}{Iterated over elementwise, with \code{lapply}.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 Same states as sequential_scan, O(log L) depth.

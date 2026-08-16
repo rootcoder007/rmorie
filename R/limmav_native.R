@@ -223,7 +223,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sigma2 See Usage.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param df A vector; its length is taken.
 #' @param robust_floor Defaults to \code{1e-12}.
 #' @return A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total}, \code{no_gene_variation}.
@@ -276,7 +276,7 @@
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y A matrix; passed to \code{crossprod}.
-#' @param w Defaults to \code{NULL}.
+#' @param w Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{fit}, \code{sd}, \code{inv}, \code{df}.
 #' @export
 .limmav_ols <- function(X, y, w = NULL) {
@@ -310,7 +310,7 @@
 #' source it follows.
 #'
 #' @param counts A matrix; passed to \code{nrow}.
-#' @param lib_sizes Defaults to \code{NULL}.
+#' @param lib_sizes Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param prior_count Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param lib_offset Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{R}.
@@ -346,7 +346,7 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param span Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
-#' @param iterations Defaults to \code{3}.
+#' @param iterations Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .limmav_lowess <- function(x, y, span = 0.5, iterations = 3) {
@@ -494,7 +494,7 @@
 #' @param y Passed to \code{.limmav_ols}.
 #' @param X Passed to \code{.limmav_ols}.
 #' @param w Passed to \code{.limmav_ols}.
-#' @param contrast See Usage.
+#' @param contrast Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{est}, \code{se}, \code{t}, \code{df}, \code{sd}, \code{v_un}.
 #' @export
 .limmav_weighted_lm <- function(y, X, w, contrast) {

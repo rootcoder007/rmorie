@@ -8,7 +8,7 @@
 .patcht_mat(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the patchT_native implementation. Called by \code{channel_independent_tokens}, \code{channel_mixed_tokens}, \code{patchtst_encode}. See the file header for the source the module follows.

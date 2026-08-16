@@ -8,8 +8,8 @@
 morie_msp_exact(query, subject, match = 5, mismatch = -4, matrix = NULL, alphabet = "ACGT")
 }
 \arguments{
-\item{query}{See Usage.}
-\item{subject}{See Usage.}
+\item{query}{Coerced to character by the body, with \code{as.character}.}
+\item{subject}{Coerced to character by the body, with \code{as.character}.}
 \item{match}{Defaults to \code{5}.}
 \item{mismatch}{Defaults to \code{-4}.}
 \item{matrix}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}

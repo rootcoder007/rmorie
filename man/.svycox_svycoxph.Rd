@@ -14,7 +14,7 @@
 \item{weights}{Passed to \code{.svycox_prep}.}
 \item{strata}{Passed to \code{.svycox_prep}.}
 \item{cluster}{Passed to \code{.svycox_prep}.}
-\item{max_iter}{Defaults to \code{100}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{

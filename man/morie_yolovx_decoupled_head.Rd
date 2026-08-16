@@ -8,9 +8,9 @@
 morie_yolovx_decoupled_head(channels, reduced = 256, n_classes = 80)
 }
 \arguments{
-\item{channels}{See Usage.}
-\item{reduced}{Defaults to \code{256}.}
-\item{n_classes}{Defaults to \code{80}.}
+\item{channels}{Coerced to integer by the body, with \code{as.integer}.}
+\item{reduced}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.}
+\item{n_classes}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80}.}
 }
 \description{
 A step of the yolovx_native implementation. No other function in the package calls it. See the file header for the source the module follows.

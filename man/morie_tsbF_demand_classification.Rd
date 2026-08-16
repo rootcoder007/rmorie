@@ -8,7 +8,7 @@
 morie_tsbF_demand_classification(y, adi_cut = 1.32, cv2_cut = 0.49)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{adi_cut}{Defaults to \code{1.32}.}
 \item{cv2_cut}{Defaults to \code{0.49}.}
 }

@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{adj}{Passed to \code{.dmlqs_norm_adj}.}
-\item{length}{Defaults to \code{3L}.}
-\item{exclude_reverse}{Defaults to \code{TRUE}.}
+\item{length}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
+\item{exclude_reverse}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
 }
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .hbvMod_maxbas_weights(maxbas)
 }
 \arguments{
-\item{maxbas}{See Usage.}
+\item{maxbas}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 c(i) = int_{i-1}^{i} of (2/M - |u - M/2| * 4/M^2) du

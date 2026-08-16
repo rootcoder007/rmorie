@@ -8,7 +8,7 @@
 .caltbR_norm(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 non-positive mass -- mirrors _norm in the Python arm.

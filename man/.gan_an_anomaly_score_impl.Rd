@@ -12,7 +12,7 @@
 \item{g_z}{Passed to \code{.gan_an_residual_loss_impl}.}
 \item{f_x}{Passed to \code{.gan_an_discrimination_loss_impl}.}
 \item{f_gz}{Passed to \code{.gan_an_discrimination_loss_impl}.}
-\item{lam}{Defaults to \code{0.1}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \description{
 A step of the gan_an_native implementation. Called by \code{anomaly_score}, \code{morie_gan_an}. See the file header for the source the module follows.

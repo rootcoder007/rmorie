@@ -8,8 +8,8 @@
 weighted_moments(m, g)
 }
 \arguments{
-\item{m}{See Usage.}
-\item{g}{See Usage.}
+\item{m}{A matrix; the body checks with \code{is.matrix}.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bnskmt_native implementation. Called by \code{cvm_statistic}, \code{ks_critical_value}, \code{ks_statistic}. See the file header for the source the module follows.

@@ -8,10 +8,10 @@
 SchwarzR(a, b, grid = NULL, dt = 1)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{grid}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{grid}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 functions collinear as vectors in function space.

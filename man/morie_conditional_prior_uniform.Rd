@@ -9,7 +9,7 @@ morie_conditional_prior_uniform(theta_set, n_grid = 401L)
 }
 \arguments{
 \item{theta_set}{A list; the body reads \code{$lower}, \code{$upper} from it.}
-\item{n_grid}{Defaults to \code{401L}.}
+\item{n_grid}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{401L}.}
 }
 \description{
 A step of the bndbye_native implementation. Called by \code{morie_posterior_hpd}. See the file header for the source the module follows.

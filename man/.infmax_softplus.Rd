@@ -8,7 +8,7 @@
 .infmax_softplus(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the infmax_native implementation. Called by \code{.infmax_jsd_estimator}. See the file header for the source the module follows.

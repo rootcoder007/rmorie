@@ -8,9 +8,9 @@
 TwidConj(npoints, n, k)
 }
 \arguments{
-\item{npoints}{See Usage.}
-\item{n}{See Usage.}
-\item{k}{See Usage.}
+\item{npoints}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 a sign flip, one of the two properties the FFT is built on.

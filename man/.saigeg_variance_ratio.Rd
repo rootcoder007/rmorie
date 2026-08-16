@@ -8,8 +8,8 @@
 .saigeg_variance_ratio(scores_full, scores_naive)
 }
 \arguments{
-\item{scores_full}{See Usage.}
-\item{scores_naive}{See Usage.}
+\item{scores_full}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{scores_naive}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the saigeg_native implementation. No other function in the package calls it. See the file header for the source the module follows.

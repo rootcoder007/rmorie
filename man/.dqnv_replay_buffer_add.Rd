@@ -10,10 +10,10 @@
 \arguments{
 \item{buf}{A list; the body reads \code{$capacity}, \code{$data} from it.}
 \item{s}{See Usage.}
-\item{a}{See Usage.}
-\item{r}{See Usage.}
-\item{s2}{See Usage.}
-\item{done}{Defaults to \code{FALSE}.}
+\item{a}{Coerced to integer by the body, with \code{as.integer}.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s2}{Coerced to integer by the body, with \code{as.integer}.}
+\item{done}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.}
 }
 \description{
 A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.

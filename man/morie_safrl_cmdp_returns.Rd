@@ -9,14 +9,14 @@ morie_safrl_cmdp_returns(policy, states, actions, step, reward, costs, gamma = 0
 }
 \arguments{
 \item{policy}{See Usage.}
-\item{states}{See Usage.}
-\item{actions}{See Usage.}
+\item{states}{Coerced to list by the body, with \code{as.list}.}
+\item{actions}{Coerced to list by the body, with \code{as.list}.}
 \item{step}{See Usage.}
 \item{reward}{See Usage.}
-\item{costs}{See Usage.}
+\item{costs}{Coerced to list by the body, with \code{as.list}.}
 \item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
-\item{start}{Defaults to \code{NULL}.}
-\item{iters}{Defaults to \code{5000}.}
+\item{start}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.}
 \item{tol}{Defaults to \code{1e-14}.}
 }
 \description{

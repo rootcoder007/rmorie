@@ -9,11 +9,11 @@ adapted_pagerank(adjacency, nodes, p = NULL, d = 0.7, iters = 200, tol = 1e-12)
 }
 \arguments{
 \item{adjacency}{A vector; indexed elementwise.}
-\item{nodes}{See Usage.}
+\item{nodes}{Coerced to list by the body, with \code{as.list}.}
 \item{p}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{d}{Defaults to \code{0.7}.}
-\item{iters}{Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{d}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.7}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the tagRC_native implementation. Called by \code{folkrank}. See the file header for the source the module follows.

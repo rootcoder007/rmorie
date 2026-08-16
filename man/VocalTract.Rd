@@ -8,10 +8,10 @@
 VocalTract(y, fs, pitch_period = NULL, cutoff = NULL, pitch_range = c(0.002, 0.02))
 }
 \arguments{
-\item{y}{See Usage.}
-\item{fs}{See Usage.}
-\item{pitch_period}{Defaults to \code{NULL}.}
-\item{cutoff}{Defaults to \code{NULL}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{pitch_period}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cutoff}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{pitch_range}{A vector; indexed elementwise. Defaults to \code{c(0.002, 0.02)}.}
 }
 \description{

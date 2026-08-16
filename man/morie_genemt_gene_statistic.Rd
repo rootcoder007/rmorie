@@ -8,7 +8,7 @@
 morie_genemt_gene_statistic(y, G, keep = 0.999)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{G}{Passed to \code{morie_genemt_ld_principal_components}.}
 \item{keep}{Passed to \code{morie_genemt_ld_principal_components}. Defaults to \code{0.999}.}
 }

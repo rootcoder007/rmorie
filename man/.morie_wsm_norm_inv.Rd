@@ -8,7 +8,7 @@
 .morie_wsm_norm_inv(u)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 (|error| < 1.15e-9). The PYTHON side uses this too: stats::qnorm is more accurate, but parity requires the same approximation in both languages, so LCG-driven chains agree draw for draw.

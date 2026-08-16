@@ -8,9 +8,9 @@
 CardioResp(ecg_rate, resp, fs, band = c(0.15, 0.4), nperseg = NULL)
 }
 \arguments{
-\item{ecg_rate}{See Usage.}
-\item{resp}{See Usage.}
-\item{fs}{See Usage.}
+\item{ecg_rate}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{resp}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{band}{A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.}
 \item{nperseg}{Defaults to \code{NULL}.}
 }

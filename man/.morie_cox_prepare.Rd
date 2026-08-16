@@ -8,8 +8,8 @@
 .morie_cox_prepare(time, event, X = NULL)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
+\item{time}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{event}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

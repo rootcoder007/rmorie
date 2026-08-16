@@ -35,8 +35,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param D1 See Usage.
-#' @param psi_plugin See Usage.
+#' @param D1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param psi_plugin Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{mean_D1}, \code{order}, \code{note}.
 #' @export
 .tlhoest_first_order_expansion <- function(D1, psi_plugin) {
@@ -61,7 +61,7 @@
 #' the source it follows.
 #'
 #' @param D2_kernel See Usage.
-#' @param O See Usage.
+#' @param O Coerced to list by the body, with \code{as.list}.
 #' @param exclude_diagonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{value}, \code{n_pairs}, \code{cost}, \code{note}.
 #' @export
@@ -126,8 +126,8 @@ morie_tlhoest_second_order_term <- .tlhoest_second_order_term
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param order See Usage.
-#' @param n Defaults to \code{1000L}.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
+#' @param n Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @return A list with \code{order}, \code{required_rate_per_nuisance}, \code{example_n}, \code{error_at_that_rate}, \code{note}.
 #' @export
 morie_tlhoest_rate_requirement <- function(order, n = 1000L) {
@@ -151,7 +151,7 @@ morie_tlhoest_rate_requirement <- function(order, n = 1000L) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param order See Usage.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{expansion_order}, \code{remainder_order}, \code{must_be}, \code{note}.
 #' @export
 morie_tlhoest_remainder_order <- function(order) {

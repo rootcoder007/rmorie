@@ -9,7 +9,7 @@ morie_rmrl_machine_step(machine, u, sigma)
 }
 \arguments{
 \item{machine}{A list; the body reads \code{$edges}, \code{$terminal} from it.}
-\item{u}{See Usage.}
+\item{u}{Coerced to character by the body, with \code{as.character}.}
 \item{sigma}{See Usage.}
 }
 \description{

@@ -12,7 +12,7 @@ estimator_score(hyp, src, ref, W, b = NULL)
 \item{src}{See Usage.}
 \item{ref}{See Usage.}
 \item{W}{A matrix; passed to \code{nrow}.}
-\item{b}{Defaults to \code{NULL}.}
+\item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the comet_native implementation. Called by \code{morie_comet}. See the file header for the source the module follows.

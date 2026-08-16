@@ -9,7 +9,7 @@ alfRap(Tf, x)
 }
 \arguments{
 \item{Tf}{A list; the body reads \code{$R}, \code{$t} from it.}
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the alf_core implementation. Called by \code{Alfipa}, \code{alfRcomp}, \code{Alfschn}. See the file header for the source the module follows.

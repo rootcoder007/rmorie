@@ -10,12 +10,12 @@ morie_dqnv(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1, steps = 20000, 
 \arguments{
 \item{P}{A vector; indexed elementwise.}
 \item{R}{A vector; indexed elementwise.}
-\item{n_states}{See Usage.}
-\item{n_actions}{See Usage.}
+\item{n_states}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_actions}{Coerced to integer by the body, with \code{as.integer}.}
 \item{gamma}{Passed to \code{.dqnv_td_target}. Defaults to \code{0.99}.}
-\item{alpha}{Defaults to \code{0.1}.}
-\item{steps}{Defaults to \code{20000}.}
-\item{C}{Defaults to \code{100}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000}.}
+\item{C}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{buffer_size}{Passed to \code{.dqnv_replay_buffer_new}. Defaults to \code{1000}.}
 \item{batch}{Passed to \code{.dqnv_replay_buffer_sample}. Defaults to \code{16}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}

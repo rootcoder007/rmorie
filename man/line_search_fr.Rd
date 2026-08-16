@@ -14,7 +14,7 @@ line_search_fr(f, grad, x, p, f0, g0, est = NULL, max_double = 60L, max_cubic = 
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{f0}{Numeric; combined arithmetically in the body.}
 \item{g0}{Passed to \code{.cgnonl_dot}.}
-\item{est}{Defaults to \code{NULL}.}
+\item{est}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{max_double}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 \item{max_cubic}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.}

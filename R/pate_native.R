@@ -41,7 +41,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param teacher_predicts See Usage.
+#' @param teacher_predicts Coerced to list by the body, with \code{as.list}.
 #' @param rows See Usage.
 #' @param n_classes Defaults to \code{NULL}.
 #' @return The value of \code{split}.
@@ -89,7 +89,7 @@ teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
 #'
 #' @param counts A vector; its length is taken and its elements indexed.
 #' @param gamma Passed to \code{.pate_lap_draw}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{arg}, as built in the body.
 #' @export
 noisy_argmax <- function(counts, gamma, seed = 0) {
@@ -139,7 +139,7 @@ epsilon_data_independent <- function(T, gamma, delta) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
+#' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
@@ -195,7 +195,7 @@ theorem3_moment <- function(q, gamma, l) {
 #' @param vote_counts A vector; its length is taken.
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @param delta Numeric; combined arithmetically in the body.
-#' @param lambdas Defaults to \code{NULL}.
+#' @param lambdas Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param data_dependent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{epsilon}, \code{lambda}, \code{alpha}, \code{delta}, \code{queries}, \code{used}.
 #' @export
@@ -255,13 +255,13 @@ moments_accountant <- function(vote_counts, gamma, delta,
 #' source it follows.
 #'
 #' @param teacher_predicts A vector; its length is taken.
-#' @param queries See Usage.
-#' @param gamma Defaults to \code{0.05}.
-#' @param delta Defaults to \code{1e-05}.
+#' @param queries Coerced to list by the body, with \code{as.list}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.
 #' @param n_classes Defaults to \code{NULL}.
 #' @param student_train_fn Defaults to \code{NULL}.
-#' @param student_features Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param student_features Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param lambdas Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{labels}, \code{clean_labels}, \code{votes}, \code{agreement}, \code{epsilon}, \code{epsilon_accountant}, \code{epsilon_data_independent}, \code{accountant}, \code{delta}, \code{gamma}, \code{n_teachers}, \code{n_queries}, \code{student}, \code{note}, \code{method}.
 #' @export

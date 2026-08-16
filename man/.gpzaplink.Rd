@@ -8,8 +8,8 @@
 .gpzaplink(mu_pred, theta_pred)
 }
 \arguments{
-\item{mu_pred}{See Usage.}
-\item{theta_pred}{See Usage.}
+\item{mu_pred}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{theta_pred}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 ----------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

@@ -8,9 +8,9 @@
 nbeats_forecast(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{horizon}{See Usage.}
-\item{lookback}{Defaults to \code{NULL}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
+\item{lookback}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{blocks}{Defaults to \code{NULL}.}
 \item{ridge}{Defaults to \code{1e-08}.}
 }

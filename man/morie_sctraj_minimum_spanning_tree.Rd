@@ -9,7 +9,7 @@ morie_sctraj_minimum_spanning_tree(D, clusters, ends = NULL)
 }
 \arguments{
 \item{D}{A matrix; indexed by row and column.}
-\item{clusters}{See Usage.}
+\item{clusters}{Coerced to character by the body, with \code{as.character}.}
 \item{ends}{Defaults to \code{NULL}.}
 }
 \description{

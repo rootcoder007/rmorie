@@ -37,10 +37,10 @@
 #' exists to remove.
 #'
 #' @param f See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param points Defaults to \code{201L}.
-#' @param stages Defaults to \code{4L}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.
+#' @param stages Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .rrblpr_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
@@ -193,13 +193,13 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param M Passed to \code{.rrblpr_rows}.
-#' @param lam Defaults to \code{NULL}.
+#' @param lam Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.
 #' @param M_new Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.
-#' @param log_lam_lo Defaults to \code{-12}.
-#' @param log_lam_hi Defaults to \code{12}.
+#' @param log_lam_lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-12}.
+#' @param log_lam_hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.
 #' @param max_iter Defaults to \code{200L}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{marker_effects}, \code{coefficients}, \code{breeding_values}, \code{breeding_values_kernel}, \code{kernel_identity_gap}, \code{fitted}, \code{residuals}, \code{lambda}, \code{lambda_estimated}, \code{sigma2_e}, \code{sigma2_u}, \code{sigma2_g}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{prediction_new}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.

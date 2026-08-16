@@ -8,8 +8,8 @@
 .hrz3_kmat(a, b, h)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{

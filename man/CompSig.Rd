@@ -8,10 +8,10 @@
 CompSig(g, shifts, scales = NULL, n = NULL)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{shifts}{See Usage.}
-\item{scales}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{shifts}{Coerced to integer by the body, with \code{as.integer}.}
+\item{scales}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 together than the pattern is long OVERLAP, and the count is reported because an overlap is what breaks a peak-picking detector.

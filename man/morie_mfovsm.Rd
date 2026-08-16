@@ -14,7 +14,7 @@ morie_mfovsm(y, feature, A, H, v_in_numerator = TRUE, contrast = "cumulative", t
 \item{H}{Passed to \code{.mfovsm_hist}.}
 \item{v_in_numerator}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{contrast}{One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.}
-\item{trim}{Defaults to \code{NULL}.}
+\item{trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mfovsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

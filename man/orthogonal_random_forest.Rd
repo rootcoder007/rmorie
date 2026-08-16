@@ -8,16 +8,16 @@
 orthogonal_random_forest(Y, T, X, W, x_eval = NULL, n_trees = 100, min_leaf = 5, alpha = 0.05, max_depth = 12, seed = 0, residualize = "local", ridge = 1e-08, kind = "double-sample", leave_one_out = TRUE)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{T}{See Usage.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{W}{A matrix; passed to \code{as.matrix}.}
 \item{x_eval}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{n_trees}{Defaults to \code{100}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{max_depth}{Defaults to \code{12}.}
-\item{seed}{Defaults to \code{0}.}
+\item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
+\item{min_leaf}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{max_depth}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{residualize}{Defaults to \code{"local"}.}
 \item{ridge}{Defaults to \code{1e-08}.}
 \item{kind}{Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.}

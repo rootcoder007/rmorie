@@ -131,8 +131,8 @@ torsion_similarity <- function(t1, t2) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param torsion_sets See Usage.
-#' @param activities See Usage.
+#' @param torsion_sets Iterated over elementwise, with \code{lapply}.
+#' @param activities Coerced to numeric by the body, with \code{as.numeric}.
 #' @param permutations A count; the body uses it as \code{seq_len(...)}.
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{vector}, \code{descriptors}, \code{length}, \code{null_mean}, \code{null_sd}, \code{z}.

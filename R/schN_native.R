@@ -25,7 +25,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
 .schn_mat <- function(x) {
@@ -40,7 +40,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .schn_vec <- function(x) {
@@ -54,11 +54,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
-#' @param mu_min Defaults to \code{0}.
-#' @param mu_max Defaults to \code{6}.
-#' @param n_gaussians Defaults to \code{25}.
-#' @param gamma Defaults to \code{NULL}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu_min Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param mu_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{6}.
+#' @param n_gaussians Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
+#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
@@ -80,8 +80,8 @@ gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r See Usage.
-#' @param cutoff Defaults to \code{5}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 cosine_cutoff <- function(r, cutoff = 5.0) {

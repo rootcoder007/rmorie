@@ -8,7 +8,7 @@
 .kdf_hex(bs)
 }
 \arguments{
-\item{bs}{See Usage.}
+\item{bs}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the seckdf_native implementation. Called by \code{morie_seckdf_hkdf}. See the file header for the source the module follows.

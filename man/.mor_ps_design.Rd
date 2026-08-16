@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{data}{A vector; indexed elementwise.}
-\item{covariates}{See Usage.}
+\item{covariates}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 A step of the causal implementation. Called by \code{.fit_propensity}, \code{morie_estimate_aipw}. See the file header for the source the module follows.

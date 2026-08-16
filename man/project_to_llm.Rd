@@ -10,7 +10,7 @@ project_to_llm(query_out, W, b = NULL)
 \arguments{
 \item{query_out}{A matrix; passed to \code{as.matrix}.}
 \item{W}{A matrix; passed to \code{nrow}.}
-\item{b}{Defaults to \code{NULL}.}
+\item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the blip2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.

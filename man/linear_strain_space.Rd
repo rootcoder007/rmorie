@@ -8,9 +8,9 @@
 linear_strain_space(n, width = 2, floor = 0)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{width}{Defaults to \code{2}.}
-\item{floor}{Defaults to \code{0}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{width}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
+\item{floor}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the hiatus_native implementation. No other function in the package calls it. See the file header for the source the module follows.

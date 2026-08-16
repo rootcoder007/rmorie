@@ -32,7 +32,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .patcht_mat <- function(M) {
@@ -51,8 +51,8 @@
 #' source it follows.
 #'
 #' @param x Passed to \code{.patcht_vec}.
-#' @param patch_len See Usage.
-#' @param stride Defaults to \code{NULL}.
+#' @param patch_len Coerced to integer by the body, with \code{as.integer}.
+#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{stride}, \code{L}, \code{covers}.
 #' @export
 patchify <- function(x, patch_len, stride = NULL) {
@@ -90,7 +90,7 @@ patchify <- function(x, patch_len, stride = NULL) {
 #' source it follows.
 #'
 #' @param X Passed to \code{.patcht_mat}.
-#' @param patch_len See Usage.
+#' @param patch_len Coerced to integer by the body, with \code{as.integer}.
 #' @param stride Defaults to \code{NULL}.
 #' @return A list with \code{tokens}, \code{D}, \code{n_patches}, \code{patch_len}, \code{n_tokens_total}, \code{design}, \code{note}.
 #' @export
@@ -176,10 +176,10 @@ instance_norm <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L See Usage.
-#' @param patch_len See Usage.
-#' @param stride Defaults to \code{NULL}.
-#' @param D Defaults to \code{1}.
+#' @param L Coerced to integer by the body, with \code{as.integer}.
+#' @param patch_len Coerced to integer by the body, with \code{as.integer}.
+#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param D Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param channel_independent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{n_patches}, \code{pointwise}, \code{patched}, \code{reduction}, \code{stride}, \code{patch_len}, \code{note}.
 #' @export

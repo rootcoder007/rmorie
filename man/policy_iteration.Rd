@@ -11,7 +11,7 @@ policy_iteration(T, R, gamma, policy = NULL, max_iter = 200)
 \item{T}{Passed to \code{.mdp}.}
 \item{R}{A vector; its length is taken.}
 \item{gamma}{Passed to \code{.mdp}.}
-\item{policy}{Defaults to \code{NULL}.}
+\item{policy}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 }
 \description{

@@ -51,7 +51,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .tmlcic_logit <- function(p) {
@@ -65,7 +65,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .tmlcic_sig <- function(z) {
@@ -82,7 +82,7 @@
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}. Defaults to \code{1e-10}.
-#' @param obs_weights Defaults to \code{NULL}.
+#' @param obs_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .tmlcic_wlogit <- function(X, y, ridge=1e-10, obs_weights=NULL) {
@@ -116,7 +116,7 @@
 #' @param off A vector; indexed elementwise.
 #' @param H A vector; indexed elementwise.
 #' @param rows Defaults to \code{NULL}.
-#' @param obs_weights Defaults to \code{NULL}.
+#' @param obs_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
 .tmlcic_fluct <- function(y, off, H, rows=NULL, obs_weights=NULL) {
@@ -200,7 +200,7 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 #' @param A A vector; indexed elementwise.
 #' @param W Passed to \code{.tmlcic_row_fun}.
 #' @param cand Passed to \code{.tmlcic_row_fun}.
-#' @param rows See Usage.
+#' @param rows Iterated over elementwise, with \code{lapply}.
 #' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{q}, \code{b}.
 #' @export
@@ -222,7 +222,7 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 #' @param A A vector; indexed elementwise.
 #' @param W A matrix; indexed by row and column.
 #' @param cand A list; the body reads \code{$cols} from it.
-#' @param rows See Usage.
+#' @param rows Iterated over elementwise, with \code{lapply}.
 #' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{g1}, \code{b}.
 #' @export
@@ -330,7 +330,7 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cluster See Usage.
+#' @param cluster Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{lapply}.
 #' @export
@@ -454,7 +454,7 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' source it follows.
 #'
 #' @param groups See Usage.
-#' @param n_folds See Usage.
+#' @param n_folds Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param design Compared against \code{"unmatched"}.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{Filter}.
@@ -573,7 +573,7 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
 #' @param n_folds Passed to \code{morie_tmlcic_adaptive_prespecification}.
 #' @param adapt A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param ridge Passed to \code{morie_tmlcic_adaptive_prespecification}. Defaults to \code{1e-08}.
-#' @param level Defaults to \code{0.95}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{se}, \code{n}, \code{ci}, \code{level}, \code{unadjusted}, \code{se_unadjusted}, \code{variance_ratio}, \code{q_selected}, \code{q_risks}, \code{g_selected}, \code{g_risks}, \code{epsilon}, \code{influence_curve}, \code{eic_mean}, \code{rho}, \code{independent_units}, \code{unit}, \code{design}, \code{target}, \code{n_folds}, \code{adapt}, \code{method}.
 #' @export
 morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
@@ -695,8 +695,8 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
 #' et al. (2019) require sum_i alpha_ij = 1 within each cluster. The
 #' default alpha_ij = 1/N_j is their stated choice.
 #'
-#' @param cluster See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param cluster Coerced to character by the body, with \code{as.character}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{alpha}, \code{groups}.
 #' @export
 morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
@@ -779,7 +779,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param a See Usage.
 #' @param trim Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}.
-#' @param known_g See Usage.
+#' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
 .tmlcic_hier_cluster_arm <- function(yc, Aj, Zj, groups, a, trim, ridge,
@@ -828,7 +828,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param a See Usage.
 #' @param trim Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}.
-#' @param known_g See Usage.
+#' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
 .tmlcic_hier_individual_arm <- function(y, Ai, Zi, alpha, groups, a, trim,
@@ -882,9 +882,9 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param arm One of \code{"both"}, \code{"cluster"}, \code{"individual"}. Defaults to \code{"both"}.
 #' @param weights Passed to \code{morie_tmlcic_cluster_weights}.
 #' @param known_g Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param trim Defaults to \code{0.01}.
+#' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param ridge Passed to \code{.tmlcic_hier_cluster_arm}. Defaults to \code{1e-08}.
-#' @param level Defaults to \code{0.95}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
 morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",

@@ -8,7 +8,7 @@
 .morie_rappor_bloom(value, k, h, cohort = 0)
 }
 \arguments{
-\item{value}{See Usage.}
+\item{value}{Coerced to character by the body, with \code{as.character}.}
 \item{k}{Numeric; combined arithmetically in the body.}
 \item{h}{A count; the body uses it as \code{seq_len(...)}.}
 \item{cohort}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}

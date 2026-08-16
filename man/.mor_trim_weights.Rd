@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{w}{See Usage.}
-\item{weight_trim}{Defaults to \code{NULL}.}
+\item{weight_trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{side}{One of \code{"both"}, \code{"upper"}. Defaults to \code{"upper"}.}
 }
 \description{

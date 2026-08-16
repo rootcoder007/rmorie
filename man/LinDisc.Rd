@@ -8,9 +8,9 @@
 LinDisc(x, weights, w0 = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{weights}{A matrix; passed to \code{as.matrix}.}
-\item{w0}{Defaults to \code{NULL}.}
+\item{w0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 surfaces between classes are hyperplanes, so a linear machine carves the space into CONVEX regions -- which is why it cannot separate classes whose regions are not convex, however many features are added.

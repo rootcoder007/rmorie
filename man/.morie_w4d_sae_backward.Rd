@@ -10,8 +10,8 @@
 \arguments{
 \item{A}{A matrix; passed to \code{nrow}.}
 \item{Ws}{A vector; its length is taken and its elements indexed.}
-\item{bs}{See Usage.}
-\item{cs}{See Usage.}
+\item{bs}{Iterated over elementwise, with \code{lapply}.}
+\item{cs}{Iterated over elementwise, with \code{lapply}.}
 \item{hs}{A vector; indexed elementwise.}
 \item{rs}{A vector; indexed elementwise.}
 }

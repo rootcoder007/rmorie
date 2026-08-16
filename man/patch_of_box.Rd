@@ -11,7 +11,7 @@ patch_of_box(box, width, height, patch_grid = 14)
 \item{box}{See Usage.}
 \item{width}{See Usage.}
 \item{height}{See Usage.}
-\item{patch_grid}{Defaults to \code{14}.}
+\item{patch_grid}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{14}.}
 }
 \description{
 A step of the ocrwit_native implementation. Called by \code{word_patch_alignment}. See the file header for the source the module follows.

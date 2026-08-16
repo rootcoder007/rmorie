@@ -8,9 +8,9 @@
 .s4_icc_ms(y, subject, rater)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{subject}{See Usage.}
-\item{rater}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{subject}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rater}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the s04core implementation. Called by \code{Icc12c}, \code{IccA}, \code{IccC}. See the file header for the source the module follows.

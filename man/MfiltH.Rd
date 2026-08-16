@@ -8,7 +8,7 @@
 MfiltH(g, normalize = FALSE)
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{normalize}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

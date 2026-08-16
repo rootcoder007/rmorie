@@ -8,8 +8,8 @@
 t5enc_task_prefix(task, text)
 }
 \arguments{
-\item{task}{See Usage.}
-\item{text}{See Usage.}
+\item{task}{Coerced to character by the body, with \code{as.character}.}
+\item{text}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the t5enc_native implementation. Called by \code{morie_t5enc}. See the file header for the source the module follows.

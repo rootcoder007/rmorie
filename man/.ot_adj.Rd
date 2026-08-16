@@ -8,7 +8,7 @@
 .ot_adj(basis, n)
 }
 \arguments{
-\item{basis}{See Usage.}
+\item{basis}{Iterated over elementwise, with \code{vapply}.}
 \item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{

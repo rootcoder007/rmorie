@@ -10,8 +10,8 @@ Spectrogram(x, fs = 1, nperseg = 64, noverlap = NULL, window = "hann")
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{nperseg}{Defaults to \code{64}.}
-\item{noverlap}{Defaults to \code{NULL}.}
+\item{nperseg}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.}
+\item{noverlap}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{window}{Passed to \code{.tf_win}. Defaults to \code{"hann"}.}
 }
 \description{

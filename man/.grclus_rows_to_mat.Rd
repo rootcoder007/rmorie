@@ -8,7 +8,7 @@
 .grclus_rows_to_mat(A)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the grclus_native implementation. Called by \code{.grclus_as_graph}. See the file header for the source the module follows.

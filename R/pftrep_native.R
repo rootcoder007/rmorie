@@ -8,7 +8,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 logmeanexp <- function(values) {
@@ -30,7 +30,7 @@ logmeanexp <- function(values) {
 #' @param init See Usage.
 #' @param step See Usage.
 #' @param loglik See Usage.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A list with \code{loglik}, \code{min_ess}.
 #' @export
 particle_filter_simple <- function(y, n_particles, init, step, loglik,
@@ -66,11 +66,11 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param n_particles See Usage.
+#' @param n_particles Coerced to integer by the body, with \code{as.integer}.
 #' @param init See Usage.
 #' @param step See Usage.
 #' @param loglik See Usage.
-#' @param n_reps Defaults to \code{10L}.
+#' @param n_reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{loglik}, \code{logmeanexp}, \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps}, \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
 #' @export
@@ -102,10 +102,10 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #' source it follows.
 #'
 #' @param y See Usage.
-#' @param grid See Usage.
+#' @param grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @param make_model See Usage.
-#' @param n_particles Defaults to \code{200L}.
-#' @param n_reps Defaults to \code{5L}.
+#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
+#' @param n_reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik}, \code{se}, \code{max_loglik}, \code{n_particles}, \code{n_reps}, \code{method}.
 #' @export

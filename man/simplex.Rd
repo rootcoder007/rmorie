@@ -8,12 +8,12 @@
 simplex(c, A, b, rule = "bland", max_iter = 10000, initial_basis = NULL)
 }
 \arguments{
-\item{c}{See Usage.}
+\item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A}{Passed to \code{.clpopt_mat}.}
-\item{b}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rule}{Passed to \code{.clpopt_run}. Defaults to \code{"bland"}.}
 \item{max_iter}{Passed to \code{.clpopt_run}. Defaults to \code{10000}.}
-\item{initial_basis}{Defaults to \code{NULL}.}
+\item{initial_basis}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the clpopt_native implementation. Called by \code{morie_clpopt}. See the file header for the source the module follows.

@@ -8,10 +8,10 @@
 .tlsieve_cause_specific_hazard(time, event_type, times, weights = NULL)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event_type}{See Usage.}
+\item{time}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{event_type}{Coerced to integer by the body, with \code{as.integer}.}
 \item{times}{A vector; its length is taken and its elements indexed.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlsieve_native implementation. Called by \code{.tlsieve_aalen_johansen}. See the file header for the source the module follows.

@@ -26,7 +26,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{M}, \code{y}, \code{n}, \code{p}.
 #' @export
 .forwsr_prep <- function(X, y) {

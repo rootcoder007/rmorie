@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{buf}{A list; the body reads \code{$data} from it.}
-\item{n}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 \item{rng_state}{Passed to \code{.ghc_unif}.}
 }
 \description{

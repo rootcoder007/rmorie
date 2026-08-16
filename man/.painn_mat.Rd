@@ -8,7 +8,7 @@
 .painn_mat(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module. See the file header for the source the module follows.

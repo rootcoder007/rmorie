@@ -90,7 +90,7 @@
 #' source it follows.
 #'
 #' @param adjacency Passed to \code{.sdne_mat}.
-#' @param beta Defaults to \code{5}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return A list with \code{B}, \code{beta}, \code{n_nonzero}, \code{n_zero}.
 #' @export
 .sdne_penalty_matrix <- function(adjacency, beta = 5.0) {
@@ -207,8 +207,8 @@
 #' @param reconstruction Passed to \code{.sdne_second_order_loss}.
 #' @param embeddings Passed to \code{.sdne_first_order_loss}.
 #' @param beta Passed to \code{.sdne_second_order_loss}. Defaults to \code{5}.
-#' @param alpha Defaults to \code{0.1}.
-#' @param nu Defaults to \code{0}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
+#' @param nu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param parameters Optional; may be \code{NULL}. Passed to \code{.sdne_mat}.
 #' @return A list with \code{estimate}, \code{loss}, \code{second_order}, \code{first_order}, \code{regulariser}, \code{alpha}, \code{beta}, \code{method}, \code{note}.
 #' @export

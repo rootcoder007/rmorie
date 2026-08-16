@@ -14,7 +14,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{log1p}.
 #' @export
 softplus <- function(z) {
@@ -30,9 +30,9 @@ softplus <- function(z) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param delta See Usage.
-#' @param A See Usage.
-#' @param B See Usage.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param B Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rule One of \code{"euler"}, \code{"zoh"}. Defaults to \code{"zoh"}.
 #' @return A list with \code{Abar}, \code{Bbar}.
 #' @export
@@ -66,7 +66,7 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A vector; its length is taken and its elements indexed.
 #' @param A A vector; its length is taken.
 #' @param B See Usage.
@@ -116,7 +116,7 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .sigmoid <- function(z) 1.0 / (1.0 + exp(-as.numeric(z)))
@@ -132,12 +132,12 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' @param W_B A matrix; passed to \code{as.matrix}.
 #' @param W_C A matrix; passed to \code{as.matrix}.
 #' @param W_delta A matrix; passed to \code{as.matrix}.
-#' @param delta_bias Defaults to \code{NULL}.
-#' @param b_B Defaults to \code{NULL}.
-#' @param b_C Defaults to \code{NULL}.
-#' @param b_delta Defaults to \code{0}.
+#' @param delta_bias Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_B Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param rule Defaults to \code{"zoh"}.
-#' @param D_skip Defaults to \code{NULL}.
+#' @param D_skip Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L}, \code{D}, \code{N}, \code{rule}, \code{time_invariant}, \code{method}.
 #' @export
 selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
@@ -195,8 +195,8 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
 #' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param w See Usage.
-#' @param b Defaults to \code{0}.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{h}, \code{g}.
 #' @export
 gated_rnn_equivalent <- function(x, w, b = 0.0) {

@@ -94,8 +94,8 @@
 #' the input.  The first M-1 outputs run on a partly empty delay line
 #' and are reported as unsettled rather than trimmed away.
 #'
-#' @param w See Usage.
-#' @param x See Usage.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{d_hat}, \code{n}, \code{order}, \code{settled_from}, \code{method}.
 #' @export
 WienerOut <- function(w, x) {
@@ -125,8 +125,8 @@ WienerOut <- function(w, x) {
 #' that order wrong reverses the filter without any error being raised,
 #' which is why the length check is not the only thing recorded.
 #'
-#' @param w See Usage.
-#' @param xvec See Usage.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param xvec Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{d_hat}, \code{order}, \code{vector_is_time_reversed}, \code{method}.
 #' @export
 WienerDot <- function(w, xvec) {
@@ -156,8 +156,8 @@ WienerDot <- function(w, xvec) {
 #' merely a stationary point.
 #'
 #' @param phi A matrix; passed to \code{as.matrix}.
-#' @param theta See Usage.
-#' @param w See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{gradient}, \code{norm}, \code{at_optimum}, \code{order}, \code{surface}, \code{method}.
 #' @export
 MseGrad <- function(phi, theta, w) {
@@ -188,7 +188,7 @@ MseGrad <- function(phi, theta, w) {
 #' orthogonality principle, which is what makes the solution optimal.
 #'
 #' @param phi A matrix; passed to \code{as.matrix}.
-#' @param theta See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{w}, \code{residual}, \code{max_residual}, \code{order}, \code{condition}, \code{orthogonality}, \code{method}.
 #' @export
 WienerHopf <- function(phi, theta) {
@@ -245,8 +245,8 @@ WienerOpt <- function(phi, theta) {
 #' from the same process.
 #'
 #' @param phi See Usage.
-#' @param theta See Usage.
-#' @param var_d See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param var_d Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{j_min}, \code{w_o}, \code{var_d}, \code{explained}, \code{consistent}, \code{fraction_explained}, \code{method}.
 #' @export
 WienerMin <- function(phi, theta, var_d) {
@@ -278,9 +278,9 @@ WienerMin <- function(phi, theta, var_d) {
 #' process; that premise is recorded because nothing in the arithmetic
 #' checks it.
 #'
-#' @param w See Usage.
-#' @param phi See Usage.
-#' @param theta See Usage.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param phi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{lhs}, \code{theta}, \code{max_difference}, \code{holds}, \code{order}, \code{requires_stationarity}, \code{method}.
 #' @export
 WienerConv <- function(w, phi, theta) {
@@ -312,9 +312,9 @@ WienerConv <- function(w, phi, theta) {
 #'
 #' no information about W and are listed, not silently satisfied.
 #'
-#' @param W See Usage.
-#' @param sxx See Usage.
-#' @param sxd See Usage.
+#' @param W Coerced to complex by the body, with \code{as.complex}.
+#' @param sxx Coerced to complex by the body, with \code{as.complex}.
+#' @param sxd Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{lhs}, \code{sxd}, \code{max_difference}, \code{holds}, \code{undetermined_bins}, \code{n_undetermined}, \code{method}.
 #' @export
 WienerFreqR <- function(W, sxx, sxd) {
@@ -345,8 +345,8 @@ WienerFreqR <- function(W, sxx, sxd) {
 #' the ratio is undefined; returning zero there is a choice, and it is
 #' flagged so a caller can tell it apart from a genuine zero response.
 #'
-#' @param sxx See Usage.
-#' @param sxd See Usage.
+#' @param sxx Coerced to complex by the body, with \code{as.complex}.
+#' @param sxd Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{W}, \code{magnitude}, \code{undetermined_bins}, \code{n_undetermined}, \code{zero_where_undetermined}, \code{n}, \code{method}.
 #' @export
 WienerFreq <- function(sxx, sxd) {
@@ -374,8 +374,8 @@ WienerFreq <- function(sxx, sxd) {
 #' restore), unity where the noise is absent (nothing to suppress), and
 #' falling monotonically with the SNR in between.
 #'
-#' @param sd See Usage.
-#' @param seta See Usage.
+#' @param sd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param seta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{W}, \code{snr}, \code{undetermined_bins}, \code{zero_where_signal_absent}, \code{unity_where_noise_absent}, \code{n}, \code{method}.
 #' @export
 WienerSnr <- function(sd, seta) {
@@ -408,9 +408,9 @@ WienerSnr <- function(sd, seta) {
 #' The biased (1/N) ACF estimate is used, which is what makes Phi
 #' nonnegative-definite and so keeps the system solvable.
 #'
-#' @param x See Usage.
-#' @param d See Usage.
-#' @param order See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param d Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{w}, \code{phi}, \code{theta}, \code{Phi}, \code{order}, \code{j_min}, \code{var_d}, \code{toeplitz}, \code{acf_biased}, \code{condition}, \code{method}.
 #' @export
 Whopf <- function(x, d, order) {
@@ -448,12 +448,12 @@ Whopf <- function(x, d, order) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param desired Defaults to \code{NULL}.
 #' @param order Defaults to \code{8}.
 #' @param sd Defaults to \code{NULL}.
 #' @param seta Defaults to \code{NULL}.
-#' @param fs Defaults to \code{1}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{W}, \code{route}, \code{fs}, \code{n}, \code{method}.
 #' @export
 WienerFilt <- function(x, desired = NULL, order = 8, sd = NULL,
@@ -524,8 +524,8 @@ WienerFilt <- function(x, desired = NULL, order = 8, sd = NULL,
 #' correlation between them is returned so that premise is testable
 #' instead of assumed.
 #'
-#' @param v See Usage.
-#' @param m See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{x}, \code{v}, \code{m}, \code{n}, \code{correlation}, \code{independent}, \code{assumption}, \code{method}.
 #' @export
 AncInput <- function(v, m) {
@@ -565,8 +565,8 @@ AncInput <- function(v, m) {
 #' you keep, because minimizing it drives y toward the interference and
 #' leaves the signal behind in e.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{e}, \code{v_hat}, \code{n}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{error_is_the_output}, \code{method}.
 #' @export
 AncOut <- function(x, y) {
@@ -596,8 +596,8 @@ AncOut <- function(x, y) {
 #'
 #' primary input.  Filtering the primary would cancel the signal too.
 #'
-#' @param w See Usage.
-#' @param r See Usage.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{n}, \code{order}, \code{settled_from}, \code{filters_the_reference}, \code{method}.
 #' @export
 LmsOut <- function(w, r) {
@@ -626,9 +626,9 @@ LmsOut <- function(w, r) {
 #' standing in for the expectation -- that substitution is the whole of
 #' LMS, and the reason the algorithm converges only in the mean.
 #'
-#' @param x See Usage.
-#' @param rvec See Usage.
-#' @param w See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rvec Coerced to numeric by the body, with \code{as.numeric}.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{e}, \code{e_squared}, \code{expanded}, \code{max_difference}, \code{agrees}, \code{nonnegative}, \code{instantaneous_not_expected}, \code{method}.
 #' @export
 LmsSqErr <- function(x, rvec, w) {
@@ -660,10 +660,10 @@ LmsSqErr <- function(x, rvec, w) {
 #'
 #' steepest descent gives w - mu grad, which is exactly Widrow-Hoff.
 #'
-#' @param w See Usage.
-#' @param e See Usage.
-#' @param rvec See Usage.
-#' @param mu See Usage.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param e Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rvec Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{gradient}, \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{equals_widrow_hoff}, \code{method}.
 #' @export
 LmsDescent <- function(w, e, rvec, mu) {
@@ -691,10 +691,10 @@ LmsDescent <- function(w, e, rvec, mu) {
 #' every step size a reader transcribes from the text.  The stability
 #' bound 0 < mu < 1/lambda_max is reported against the input power.
 #'
-#' @param w See Usage.
-#' @param e See Usage.
-#' @param rvec See Usage.
-#' @param mu See Usage.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param e Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rvec Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{factor_of_two_is_in_the_equation}, \code{stable_bound}, \code{within_bound}, \code{method}.
 #' @export
 WidrowHoff <- function(w, e, rvec, mu) {
@@ -726,10 +726,10 @@ WidrowHoff <- function(w, e, rvec, mu) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param w See Usage.
-#' @param e See Usage.
-#' @param rvec See Usage.
-#' @param mu_n See Usage.
+#' @param w Coerced to numeric by the body, with \code{as.numeric}.
+#' @param e Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rvec Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu_n Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{time_varying}, \code{method}.
 #' @export
 LmsVarStep <- function(w, e, rvec, mu_n) {
@@ -758,11 +758,11 @@ LmsVarStep <- function(w, e, rvec, mu_n) {
 #' it tracks the instantaneous sample and reintroduces the very jitter
 #' the averaging removes, so a value above 0.5 is refused.
 #'
-#' @param mu See Usage.
-#' @param order See Usage.
-#' @param r See Usage.
-#' @param alpha Defaults to \code{0.02}.
-#' @param power_prev Defaults to \code{NULL}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
+#' @param power_prev Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mu}, \code{power}, \code{power_prev}, \code{alpha}, \code{order}, \code{base_mu}, \code{method}.
 #' @export
 LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
@@ -803,10 +803,10 @@ LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param primary See Usage.
-#' @param reference See Usage.
-#' @param order Defaults to \code{8}.
-#' @param mu Defaults to \code{0.01}.
+#' @param primary Coerced to numeric by the body, with \code{as.numeric}.
+#' @param reference Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param variable A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param alpha Defaults to \code{0.02}.
 #' @return A list with \code{e}, \code{output}, \code{y}, \code{final_weights}, \code{order}, \code{mu}, \code{variable_step}, \code{step_history}, \code{stable_bound}, \code{within_bound}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{converges_in_the_mean_only}, \code{method}.
@@ -877,8 +877,8 @@ LmsFilt <- function(primary, reference, order = 8, mu = 0.01,
 #' errors, giving an effective memory of 1/(1-lambda) samples; lambda =
 #' 1 is the growing window, which never forgets and so cannot track.
 #'
-#' @param errors See Usage.
-#' @param lam See Usage.
+#' @param errors Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{xi}, \code{weights}, \code{lam}, \code{n}, \code{memory}, \code{growing_window}, \code{method}.
 #' @export
 RlsObj <- function(errors, lam) {
@@ -975,9 +975,9 @@ AbcdLemma <- function(A, B, C, D) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param w_prev See Usage.
-#' @param k See Usage.
-#' @param alpha See Usage.
+#' @param w_prev Coerced to numeric by the body, with \code{as.numeric}.
+#' @param k Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{w_next}, \code{correction}, \code{alpha}, \code{order}, \code{sign}, \code{erratum}, \code{method}.
 #' @export
 RlsUpdate <- function(w_prev, k, alpha) {
@@ -1011,9 +1011,9 @@ RlsUpdate <- function(w_prev, k, alpha) {
 #' posteriori error, a different and always smaller quantity, and the
 #' recursion is not valid with it.
 #'
-#' @param x See Usage.
-#' @param rvec See Usage.
-#' @param w_prev See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rvec Coerced to numeric by the body, with \code{as.numeric}.
+#' @param w_prev Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{alpha}, \code{prediction}, \code{order}, \code{uses_previous_weights}, \code{not_the_a_posteriori_error}, \code{method}.
 #' @export
 RlsApriori <- function(x, rvec, w_prev) {
@@ -1042,11 +1042,11 @@ RlsApriori <- function(x, rvec, w_prev) {
 #' until P loses positive definiteness and the filter diverges.  The
 #' size of that drift is returned rather than hidden.
 #'
-#' @param primary See Usage.
-#' @param reference See Usage.
-#' @param order Defaults to \code{8}.
-#' @param lam Defaults to \code{0.98}.
-#' @param delta Defaults to \code{1}.
+#' @param primary Coerced to numeric by the body, with \code{as.numeric}.
+#' @param reference Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.98}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{e}, \code{output}, \code{y}, \code{final_weights}, \code{P}, \code{order}, \code{lam}, \code{delta}, \code{memory}, \code{p_symmetry_error}, \code{p_symmetrized}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{method}.
 #' @export
 RlsFilt <- function(primary, reference, order = 8, lam = 0.98, delta = 1) {
@@ -1121,10 +1121,10 @@ RlsFilt <- function(primary, reference, order = 8, lam = 0.98, delta = 1) {
 #' direct form.  |gamma| < 1 at every stage is the stability condition,
 #' the same one as eq. (7.39).
 #'
-#' @param x See Usage.
-#' @param order Defaults to \code{4}.
-#' @param lam Defaults to \code{0.98}.
-#' @param delta Defaults to \code{0.01}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.98}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{reflection}, \code{forward_error}, \code{backward_error}, \code{all_orders_forward}, \code{order}, \code{lam}, \code{stable}, \code{every_stage_is_a_predictor}, \code{method}.
 #' @export
 RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
@@ -1187,13 +1187,13 @@ RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param reference Defaults to \code{NULL}.
-#' @param order Defaults to \code{8}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param reference Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param lam Defaults to \code{0.98}.
-#' @param settle Defaults to \code{NULL}.
-#' @param threshold Defaults to \code{3}.
-#' @param window Defaults to \code{NULL}.
+#' @param settle Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
+#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{error}, \code{error_power}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{baseline}, \code{baseline_sd}, \code{settle}, \code{window}, \code{order}, \code{transient_excluded}, \code{method}.
 #' @export
 RlsMonitor <- function(x, reference = NULL, order = 8, lam = 0.98,
@@ -1259,7 +1259,7 @@ RlsMonitor <- function(x, reference = NULL, order = 8, lam = 0.98,
 #' @param H A matrix; passed to \code{as.matrix}.
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param R A matrix; passed to \code{as.matrix}.
-#' @param x0 Defaults to \code{NULL}.
+#' @param x0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param P0 Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{states}, \code{covariances}, \code{gains}, \code{innovations}, \code{n}, \code{state_dim}, \code{obs_dim}, \code{p_symmetry_error}, \code{p_symmetrized}, \code{joseph_form}, \code{method}.
 #' @export
@@ -1333,7 +1333,7 @@ Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
 #' @param H A matrix; passed to \code{as.matrix}.
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param R A matrix; passed to \code{as.matrix}.
-#' @param maxiter Defaults to \code{1000L}.
+#' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{P}, \code{K}, \code{iterations}, \code{change}, \code{converged}, \code{n}, \code{steady_state_is_the_wiener_solution}, \code{method}.
 #' @export
@@ -1387,8 +1387,8 @@ Riccati <- function(F, H, Q, R, maxiter = 1000L, tol = 1e-12) {
 #' pure gain change shifts every log bin by the same constant, so it
 #' lands entirely in mean_offset and leaves shape_only at zero.
 #'
-#' @param psd See Usage.
-#' @param reference See Usage.
+#' @param psd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param reference Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sem}, \code{log_difference}, \code{n_bins}, \code{mean_offset}, \code{shape_only}, \code{gain_change_only}, \code{zero_bins}, \code{scale_free}, \code{method}.
 #' @export
 Sem <- function(psd, reference) {
@@ -1424,11 +1424,11 @@ Sem <- function(psd, reference) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param test See Usage.
-#' @param reference See Usage.
-#' @param lags Defaults to \code{NULL}.
-#' @param thp Defaults to \code{1}.
-#' @param thf Defaults to \code{1}.
+#' @param test Coerced to numeric by the body, with \code{as.numeric}.
+#' @param reference Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lags Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param thp Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param thf Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{distance}, \code{power_distance}, \code{spectral_distance}, \code{lags}, \code{lags_auto}, \code{acf_test}, \code{acf_reference}, \code{power_test}, \code{power_reference}, \code{boundary}, \code{th_power}, \code{th_spectral}, \code{amplitude_invariant}, \code{method}.
 #' @export
 Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
@@ -1507,12 +1507,12 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
-#' @param window Defaults to \code{NULL}.
-#' @param step Defaults to \code{NULL}.
-#' @param order Defaults to \code{6}.
-#' @param threshold Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param step Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sem}, \code{sem_fixed_reference}, \code{times}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad}, \code{window}, \code{step}, \code{order}, \code{fs}, \code{reference_restarted_at_boundaries}, \code{robust_threshold}, \code{method}.
 #' @export
 PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
@@ -1607,7 +1607,7 @@ PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
 #' version instead, and the size of that difference is returned -- the
 #' distinction is the reason the periodogram is inconsistent.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{psd}, \code{via_circular_acf}, \code{acf_circular}, \code{acf_linear}, \code{max_difference}, \code{holds}, \code{linear_difference}, \code{linear_acf_is_smoothed}, \code{n}, \code{method}.
 #' @export
 PsdAcf <- function(x) {
@@ -1663,7 +1663,7 @@ PsdAcf <- function(x) {
 #' the source it follows.
 #'
 #' @param primary See Usage.
-#' @param reference See Usage.
+#' @param reference Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Defaults to \code{8}.
 #' @param mu Defaults to \code{0.01}.
 #' @param method One of \code{"lms"}, \code{"rls"}. Defaults to \code{"lms"}.
@@ -1711,8 +1711,8 @@ Anc <- function(primary, reference, order = 8, mu = 0.01,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param abdominal See Usage.
-#' @param chest See Usage.
+#' @param abdominal Coerced to numeric by the body, with \code{as.numeric}.
+#' @param chest Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Defaults to \code{32}.
 #' @param mu Defaults to \code{0.005}.
 #' @param method Defaults to \code{"lms"}.

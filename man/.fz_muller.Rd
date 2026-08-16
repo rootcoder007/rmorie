@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{u}{Numeric; combined arithmetically in the body.}
-\item{m}{Defaults to \code{4L}.}
+\item{m}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
 }
 \description{
 pays for it by taking NEGATIVE values, so the density estimate can go negative and the distribution estimate non-monotone. That is the trade the book makes explicit.

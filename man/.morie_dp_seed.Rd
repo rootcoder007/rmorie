@@ -8,7 +8,7 @@
 .morie_dp_seed(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the dp_native implementation. Called by \code{morie_approx_dp}, \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in the module. See the file header for the source the module follows.

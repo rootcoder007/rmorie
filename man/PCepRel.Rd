@@ -8,7 +8,7 @@
 PCepRel(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 part of the complex cepstrum.  The odd part, where the phase lives, is annihilated by the folding, which is exactly why the power cepstrum loses the phase.

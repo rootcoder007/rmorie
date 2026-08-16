@@ -8,8 +8,8 @@
 .fz_bias_common(t, f_X, transform)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{f_X}{See Usage.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{f_X}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{transform}{Passed to \code{.fz_transform}.}
 }
 \description{

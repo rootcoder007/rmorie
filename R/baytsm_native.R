@@ -11,11 +11,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param V Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param W Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
-#' @param m0 Defaults to \code{0}.
-#' @param C0 Defaults to \code{1e+06}.
+#' @param m0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param C0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e+06}.
 #' @return A list with \code{estimate}, \code{smoothed}, \code{smoothed_var}, \code{filtered}, \code{filtered_var}, \code{forecast}, \code{forecast_var}, \code{adaptive_coefficient}, \code{forecast_error}, \code{loglik}, \code{signal_to_noise}, \code{n}, \code{V}, \code{W}, \code{method}, \code{note}.
 #' @export
 morie_baytsm_dlm_local_level <- function(y, V = 1.0, W = 0.1, m0 = 0.0,

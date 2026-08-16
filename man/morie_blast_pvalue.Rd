@@ -8,9 +8,9 @@
 morie_blast_pvalue(score, m, n, lam, K, c = 1L)
 }
 \arguments{
-\item{score}{See Usage.}
-\item{m}{See Usage.}
-\item{n}{See Usage.}
+\item{score}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lam}{Numeric; combined arithmetically in the body.}
 \item{K}{Numeric; combined arithmetically in the body.}
 \item{c}{Numeric; combined arithmetically in the body. Defaults to \code{1L}.}

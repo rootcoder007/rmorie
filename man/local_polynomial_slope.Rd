@@ -12,7 +12,7 @@ local_polynomial_slope(v, y, kink, bandwidth, order = 2L, side = "right", kernel
 \item{y}{Passed to \code{.side_fit}.}
 \item{kink}{Passed to \code{.side_fit}.}
 \item{bandwidth}{Passed to \code{.side_fit}.}
-\item{order}{Defaults to \code{2L}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
 \item{side}{One of \code{"left"}, \code{"right"}. Defaults to \code{"right"}.}
 \item{kernel}{One of \code{"triangular"}, \code{"uniform"}. Defaults to \code{"triangular"}.}
 }

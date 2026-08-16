@@ -8,7 +8,7 @@
 mint_reconcile(base, S, method = "shrink", residuals = NULL, W = NULL, ridge = 1e-10)
 }
 \arguments{
-\item{base}{See Usage.}
+\item{base}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{S}{A matrix; passed to \code{as.matrix}.}
 \item{method}{Defaults to \code{"shrink"}.}
 \item{residuals}{Defaults to \code{NULL}.}

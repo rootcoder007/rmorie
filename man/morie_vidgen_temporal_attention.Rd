@@ -8,7 +8,7 @@
 morie_vidgen_temporal_attention(video, identity = FALSE)
 }
 \arguments{
-\item{video}{See Usage.}
+\item{video}{Iterated over elementwise, with \code{lapply}.}
 \item{identity}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

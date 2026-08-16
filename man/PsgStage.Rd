@@ -8,9 +8,9 @@
 PsgStage(eeg, eog, emg, fs, epoch_len = 30)
 }
 \arguments{
-\item{eeg}{See Usage.}
-\item{eog}{See Usage.}
-\item{emg}{See Usage.}
+\item{eeg}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{eog}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{emg}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{epoch_len}{Numeric; combined arithmetically in the body. Defaults to \code{30}.}
 }

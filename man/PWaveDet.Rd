@@ -9,7 +9,7 @@ PWaveDet(x, qrs, fs, template = NULL)
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}
-\item{qrs}{See Usage.}
+\item{qrs}{Coerced to integer by the body, with \code{as.integer}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{template}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }

@@ -12,7 +12,7 @@ triplet_loss(better, worse, src, ref, margin = 1)
 \item{worse}{Passed to \code{.comet_dist}.}
 \item{src}{Passed to \code{.comet_dist}.}
 \item{ref}{Passed to \code{.comet_dist}.}
-\item{margin}{Defaults to \code{1}.}
+\item{margin}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the comet_native implementation. No other function in the package calls it. See the file header for the source the module follows.

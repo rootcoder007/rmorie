@@ -9,7 +9,7 @@ morie_krpkrg_ordinary_kriging(coords, values, targets, model = "spherical", nugg
 }
 \arguments{
 \item{coords}{A matrix; passed to \code{as.matrix}.}
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{targets}{A matrix; passed to \code{as.matrix}.}
 \item{model}{Passed to \code{.krpkrg_gamma}. Defaults to \code{"spherical"}.}
 \item{nugget}{Passed to \code{.krpkrg_gamma}. Defaults to \code{0}.}

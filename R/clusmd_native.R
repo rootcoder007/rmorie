@@ -63,7 +63,7 @@
 #' deduped).
 #'
 #' @param bits A matrix; indexed by row and column.
-#' @param n_bits Defaults to \code{NULL}.
+#' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A vector, from \code{sort}.
 #' @export
 .clusmd_fp <- function(bits, n_bits = NULL) {
@@ -146,7 +146,7 @@
 #' the Python neighbour_lists() function.
 #'
 #' @param fps A vector; its length is taken.
-#' @param threshold Defaults to \code{0.8}.
+#' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
 #' @return The value of \code{nb}, as built in the body.
 #' @export
 .clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
@@ -303,7 +303,7 @@
 #' @param summary_lines Defaults to \code{list()}.
 #' @param tables Defaults to \code{list()}.
 #' @param interpretation Defaults to \code{""}.
-#' @param warnings Defaults to \code{character()}.
+#' @param warnings Coerced to character by the body, with \code{as.character}. Defaults to \code{character()}.
 #' @param payload A vector; its length is taken and its elements indexed. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

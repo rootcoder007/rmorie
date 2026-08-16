@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k}, \code{$m}, \code{$t} from it.}
-\item{t_future}{See Usage.}
-\item{n_sims}{Defaults to \code{200}.}
+\item{t_future}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_sims}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

@@ -8,9 +8,9 @@
 ArmaFit(x, p, q, fs = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p}{Coerced to integer by the body, with \code{as.integer}.}
+\item{q}{Coerced to integer by the body, with \code{as.integer}.}
 \item{fs}{Defaults to \code{1}.}
 }
 \description{

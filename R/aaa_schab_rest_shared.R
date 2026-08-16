@@ -120,7 +120,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .schab_kurtosis_b <- function(z) {
@@ -177,9 +177,9 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param points See Usage.
+#' @param points Coerced to numeric by the body, with \code{as.numeric}.
 #' @param region A vector; indexed elementwise.
-#' @param radii See Usage.
+#' @param radii Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
 #' @export
 .schab_ripley_weights <- function(points, region, radii) {
@@ -233,7 +233,7 @@
 #' @param p1 A matrix; indexed by row and column.
 #' @param p2 A matrix; indexed by row and column.
 #' @param region A vector; indexed elementwise.
-#' @param r See Usage.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param correction One of \code{"none"}, \code{"ripley"}. Defaults to \code{"ripley"}.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -306,7 +306,7 @@
 #'
 #' @param p A matrix; indexed by row and column.
 #' @param region A vector; indexed elementwise.
-#' @param r See Usage.
+#' @param r Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .schab_k_border <- function(p, region, r) {
@@ -492,7 +492,7 @@
 #' the source it follows.
 #'
 #' @param coords A matrix; passed to \code{as.matrix}.
-#' @param source See Usage.
+#' @param source Coerced to numeric by the body, with \code{as.numeric}.
 #' @param theta1 Numeric; combined arithmetically in the body.
 #' @param theta2 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param theta3 Numeric; combined arithmetically in the body. Defaults to \code{0}.
@@ -574,11 +574,11 @@
 #' the source it follows.
 #'
 #' @param coords A matrix; passed to \code{as.matrix}.
-#' @param target See Usage.
-#' @param min_sites Defaults to \code{35L}.
-#' @param step Defaults to \code{5L}.
-#' @param lag_classes Defaults to \code{NULL}.
-#' @param max_sites Defaults to \code{NULL}.
+#' @param target Coerced to numeric by the body, with \code{as.numeric}.
+#' @param min_sites Coerced to integer by the body, with \code{as.integer}. Defaults to \code{35L}.
+#' @param step Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
+#' @param lag_classes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param max_sites Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{repeat}.
 #' @export
 .schab_haas_window <- function(coords, target, min_sites = 35L, step = 5L,
@@ -667,8 +667,8 @@
 #' the source it follows.
 #'
 #' @param h A vector; indexed elementwise.
-#' @param gamma See Usage.
-#' @param counts See Usage.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
+#' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sill}, \code{range}, \code{converged}, \code{wls}.
 #' @export
 .schab_variogram_wls <- function(h, gamma, counts) {
@@ -712,7 +712,7 @@
 #'
 #' @param coords A matrix; passed to \code{as.matrix}.
 #' @param z Numeric; combined arithmetically in the body.
-#' @param target See Usage.
+#' @param target Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sill Numeric; combined arithmetically in the body.
 #' @param rng Numeric; combined arithmetically in the body.
 #' @param mu Numeric; combined arithmetically in the body.

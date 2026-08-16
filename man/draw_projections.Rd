@@ -10,7 +10,7 @@ draw_projections(m, d, seed = 0L, orthogonal = TRUE)
 \arguments{
 \item{m}{A count; the body uses it as \code{seq_len(...)}.}
 \item{d}{A count; the body uses it as \code{matrix(...)}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 \item{orthogonal}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

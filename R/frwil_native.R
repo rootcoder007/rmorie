@@ -59,7 +59,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param compounds See Usage.
+#' @param compounds Iterated over elementwise, with \code{lapply}.
 #' @param activity See Usage.
 #' @return A list with \code{C}, \code{y}, \code{k}.
 #' @export
@@ -86,7 +86,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param compounds See Usage.
+#' @param compounds Iterated over elementwise, with \code{lapply}.
 #' @param constraint Compared against \code{"reference"}. Defaults to \code{"reference"}.
 #' @return A list with \code{matrix}, \code{names}, \code{groups}, \code{columns}, \code{constraint}, \code{n_positions}, \code{reference}.
 #' @export

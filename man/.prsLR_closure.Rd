@@ -8,7 +8,7 @@
 .prsLR_closure(items, ag, first, nts, k)
 }
 \arguments{
-\item{items}{See Usage.}
+\item{items}{Coerced to character by the body, with \code{as.character}.}
 \item{ag}{A list; the body reads \code{$rules} from it.}
 \item{first}{Passed to \code{.prsLR_first_seq}.}
 \item{nts}{Passed to \code{.prsLR_first_seq}.}

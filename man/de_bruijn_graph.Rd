@@ -8,7 +8,7 @@
 de_bruijn_graph(reads, k, multiplicity = "set")
 }
 \arguments{
-\item{reads}{See Usage.}
+\item{reads}{Coerced to character by the body, with \code{as.character}.}
 \item{k}{Numeric; combined arithmetically in the body.}
 \item{multiplicity}{One of \code{"count"}, \code{"set"}. Defaults to \code{"set"}.}
 }

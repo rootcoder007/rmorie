@@ -8,7 +8,7 @@
 DftRI(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 imaginary part is MINUS the projection onto the corresponding sine.

@@ -8,7 +8,7 @@
 naive_variance(ic)
 }
 \arguments{
-\item{ic}{See Usage.}
+\item{ic}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}. See the file header for the source the module follows.

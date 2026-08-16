@@ -76,7 +76,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param terminal See Usage.
+#' @param terminal Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 .mor_rl_terminal <- function(terminal) as.integer(terminal) + 1L

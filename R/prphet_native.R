@@ -17,9 +17,9 @@
 #' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
-#' @param n.cp See Usage.
+#' @param n.cp Coerced to integer by the body, with \code{as.integer}.
 #' @param range Numeric; combined arithmetically in the body. Defaults to \code{0.8}.
-#' @param cps Defaults to \code{NULL}.
+#' @param cps Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .changepoints <- function(t, n.cp, range = 0.8, cps = NULL) {
@@ -85,7 +85,7 @@ morie_prphet_trend_matrix <- function(t, cps) {
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param period Numeric; combined arithmetically in the body.
-#' @param order See Usage.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
 morie_prphet_fourier_terms <- function(t, period, order) {
@@ -173,15 +173,15 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param y See Usage.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_changepoints Passed to \code{.changepoints}. Defaults to \code{10L}.
 #' @param changepoint_range Passed to \code{.changepoints}. Defaults to \code{0.8}.
 #' @param changepoints Passed to \code{.changepoints}.
 #' @param seasonalities Optional; may be \code{NULL}. Passed to \code{morie_prphet_design}.
 #' @param holidays Passed to \code{morie_prphet_design}.
 #' @param holiday_window Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.
-#' @param changepoint_prior Defaults to \code{0.05}.
+#' @param changepoint_prior Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{fitted}, \code{residual}, \code{coef}, \code{beta}, \code{columns}, \code{changepoints}, \code{deltas}, \code{k}, \code{m}, \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior}, \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.
 #' @export
@@ -252,7 +252,7 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
 #' source it follows.
 #'
 #' @param fit A list; the body reads \code{$beta}, \code{$changepoints}, \code{$columns} from it.
-#' @param t.new See Usage.
+#' @param t.new Coerced to numeric by the body, with \code{as.numeric}.
 #' @param seasonalities Passed to \code{morie_prphet_design}.
 #' @param holidays Passed to \code{morie_prphet_design}.
 #' @param holiday_window Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{a}{A vector; its length is taken.}
-\item{b}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 Part of the caCMIP_mixedcase_native implementation; see the file header for the source it follows.

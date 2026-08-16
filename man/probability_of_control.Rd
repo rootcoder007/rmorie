@@ -8,8 +8,8 @@
 probability_of_control(reps = 200, seed = 0, ...)
 }
 \arguments{
-\item{reps}{Defaults to \code{200}.}
-\item{seed}{Defaults to \code{0}.}
+\item{reps}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 \item{...}{Passed through.}
 }
 \description{

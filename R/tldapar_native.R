@@ -67,7 +67,7 @@ morie_tldapar <- function(n, V = 10L, seed = 0L,
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param V A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @return A list with \code{estimation}, \code{training}, \code{V}.
 #' @export
 split_sample <- function(n, V = 10L, seed = 0L) {
@@ -137,9 +137,9 @@ data_adaptive_parameter <- function(define_on_training,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param fold_estimates See Usage.
-#' @param fold_ics See Usage.
-#' @param n See Usage.
+#' @param fold_estimates Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fold_ics Iterated over elementwise, with \code{lapply}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{psi}, \code{se}, \code{ci}, \code{mean_ic}, \code{note}.
 #' @export
 cv_tmle <- function(fold_estimates, fold_ics, n) {
@@ -213,7 +213,7 @@ variable_importance <- function(X, Y, screen, effect, V = 5L,
 #' the source it follows.
 #'
 #' @param define_and_estimate See Usage.
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{warning}.
 #' @export

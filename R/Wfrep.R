@@ -42,7 +42,7 @@ Wfrep <- function(y, weights = NULL, cells = NULL) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param v See Usage.
+#' @param v Numeric; the body checks with \code{is.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .wfrep_lab <- function(v) {

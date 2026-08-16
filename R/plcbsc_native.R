@@ -33,10 +33,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x_treated See Usage.
-#' @param x_donors See Usage.
-#' @param v Defaults to \code{NULL}.
-#' @param max_iter Defaults to \code{5000}.
+#' @param x_treated Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x_donors Iterated over elementwise, with \code{lapply}.
+#' @param v Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @param step Defaults to \code{NULL}.
 #' @return A list with \code{weights}, \code{loss}, \code{fitted}, \code{n_iter}, \code{converged}.
@@ -122,7 +122,7 @@
 #' source it follows.
 #'
 #' @param y_treated Numeric; combined arithmetically in the body.
-#' @param y_donors See Usage.
+#' @param y_donors Iterated over elementwise, with \code{lapply}.
 #' @param weights A matrix; passed to \code{crossprod}.
 #' @return A numeric value.
 #' @export
@@ -176,8 +176,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y_treated See Usage.
-#' @param y_donors See Usage.
+#' @param y_treated Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y_donors Iterated over elementwise, with \code{lapply}.
 #' @param t0 A count; the body uses it as \code{seq_len(...)}.
 #' @param x_treated Defaults to \code{NULL}.
 #' @param x_donors Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -271,8 +271,8 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y_treated See Usage.
-#' @param y_donors See Usage.
+#' @param y_treated Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y_donors Iterated over elementwise, with \code{lapply}.
 #' @param t0 Numeric; combined arithmetically in the body.
 #' @param fake_t0 A count; the body uses it as \code{seq_len(...)}.
 #' @param v Defaults to \code{NULL}.

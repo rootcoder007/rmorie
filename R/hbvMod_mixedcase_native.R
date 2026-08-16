@@ -27,7 +27,7 @@
 #'
 #' c(i) = int_{i-1}^{i} of (2/M - |u - M/2| * 4/M^2) du
 #'
-#' @param maxbas See Usage.
+#' @param maxbas Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .hbvMod_maxbas_weights <- function(maxbas) {
@@ -56,9 +56,9 @@
 #' Part of the hbvMod_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param precip See Usage.
-#' @param temp See Usage.
-#' @param epot See Usage.
+#' @param precip Coerced to numeric by the body, with \code{as.numeric}.
+#' @param temp Coerced to numeric by the body, with \code{as.numeric}.
+#' @param epot Coerced to numeric by the body, with \code{as.numeric}.
 #' @param params A list; the body reads \code{$beta}, \code{$cfmax}, \code{$cfr}, \code{$fc}, \code{$k0}, \code{$k1}, \code{$k2}, \code{$lp}, \code{$maxbas}, \code{$perc}, \code{$tt}, \code{$uzl} from it.
 #' @param init Optional; may be \code{NULL}. A list; the body reads \code{$slz}, \code{$snow}, \code{$soil}, \code{$suz}, \code{$swater} from it.
 #' @return The value of \code{out}, as built in the body.

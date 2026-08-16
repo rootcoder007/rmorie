@@ -9,7 +9,7 @@ diversity(fps, subset, D = NULL)
 }
 \arguments{
 \item{fps}{See Usage.}
-\item{subset}{See Usage.}
+\item{subset}{Coerced to integer by the body, with \code{as.integer}.}
 \item{D}{Defaults to \code{NULL}.}
 }
 \description{

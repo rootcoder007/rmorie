@@ -8,9 +8,9 @@
 martingale_check(D, past, tol = 0.2)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{past}{See Usage.}
-\item{tol}{Defaults to \code{0.2}.}
+\item{D}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{past}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.}
 }
 \description{
 A step of the tlonts_native implementation. No other function in the package calls it. See the file header for the source the module follows.

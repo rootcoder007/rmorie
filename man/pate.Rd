@@ -9,13 +9,13 @@ pate(teacher_predicts, queries, gamma = 0.05, delta = 1e-05, n_classes = NULL, s
 }
 \arguments{
 \item{teacher_predicts}{A vector; its length is taken.}
-\item{queries}{See Usage.}
-\item{gamma}{Defaults to \code{0.05}.}
-\item{delta}{Defaults to \code{1e-05}.}
+\item{queries}{Coerced to list by the body, with \code{as.list}.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.}
 \item{n_classes}{Defaults to \code{NULL}.}
 \item{student_train_fn}{Defaults to \code{NULL}.}
-\item{student_features}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
+\item{student_features}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{lambdas}{Defaults to \code{NULL}.}
 }
 \description{

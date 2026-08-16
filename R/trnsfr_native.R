@@ -99,7 +99,7 @@
 #'
 #' @param X Passed to \code{.s03mat}.
 #' @param S Passed to \code{.trnsfr_cohort}.
-#' @param trim Defaults to \code{0.001}.
+#' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @param ridge Passed to \code{.s03logit}. Defaults to \code{1e-06}.
 #' @return A list with \code{weights}, \code{pi}, \code{max_weight}, \code{ess}, \code{ess_fraction}, \code{n_source}, \code{coef}, \code{method}.
 #' @export
@@ -302,8 +302,8 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
 #' @param Y Passed to \code{.s03vec}.
 #' @param A Passed to \code{.s03vec}.
 #' @param H Passed to \code{.s03mat}.
-#' @param cohort See Usage.
-#' @param target Defaults to \code{0}.
+#' @param cohort Coerced to character by the body, with \code{as.character}.
+#' @param target Coerced to character by the body, with \code{as.character}. Defaults to \code{0}.
 #' @param e Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param trim Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{0.001}.
 #' @param ridge Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{1e-06}.

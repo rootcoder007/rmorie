@@ -8,8 +8,8 @@
 FDiffFr(omega, T = 1)
 }
 \arguments{
-\item{omega}{See Usage.}
-\item{T}{Defaults to \code{1}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 real gain; the factor of j is what puts the phase a quarter turn ahead, the +pi/2 of eq (3.127).

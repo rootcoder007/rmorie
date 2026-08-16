@@ -8,7 +8,7 @@
 .groebn_buchberger(F, order = "lex", prune = TRUE, reduced = TRUE)
 }
 \arguments{
-\item{F}{See Usage.}
+\item{F}{Iterated over elementwise, with \code{lapply}.}
 \item{order}{Passed to \code{.groebn_key}. Defaults to \code{"lex"}.}
 \item{prune}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{reduced}{A flag; the body branches on it. Defaults to \code{TRUE}.}

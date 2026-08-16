@@ -8,7 +8,7 @@
 .le32(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the secarg_native implementation. Called by \code{morie_secarg_prehash}, \code{morie_secarg_variable_hash}. See the file header for the source the module follows.

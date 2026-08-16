@@ -8,10 +8,10 @@
 error_cache(alpha, y, K, b)
 }
 \arguments{
-\item{alpha}{See Usage.}
-\item{y}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{K}{A matrix; indexed by row and column.}
-\item{b}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}. See the file header for the source the module follows.

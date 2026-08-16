@@ -8,8 +8,8 @@
 ErpArtifact(epochs, reject = NULL)
 }
 \arguments{
-\item{epochs}{See Usage.}
-\item{reject}{Defaults to \code{NULL}.}
+\item{epochs}{Iterated over elementwise, with \code{lapply}.}
+\item{reject}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 large artifact is NOT zero-mean over the epochs it contaminates, so it does not average away at any M; the remedy is to reject those epochs first.  Averaging without rejection and quoting the sqrt(M) gain overstates the result by exactly the artifact that survived.

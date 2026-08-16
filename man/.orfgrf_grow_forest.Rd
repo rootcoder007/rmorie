@@ -12,11 +12,11 @@
 \item{y}{A vector; its length is taken.}
 \item{W}{Defaults to \code{NULL}.}
 \item{kind}{Defaults to \code{"double-sample"}.}
-\item{n_trees}{Defaults to \code{100}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{max_depth}{Defaults to \code{12}.}
-\item{seed}{Defaults to \code{0}.}
+\item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
+\item{min_leaf}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{max_depth}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the orfgrf_native implementation. Called by \code{orthogonal_random_forest}. See the file header for the source the module follows.

@@ -8,10 +8,10 @@
 stochastic_intervention(A, nodes, shift = NULL, prob = NULL)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{nodes}{See Usage.}
-\item{shift}{Defaults to \code{NULL}.}
-\item{prob}{Defaults to \code{NULL}.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{nodes}{Coerced to integer by the body, with \code{as.integer}.}
+\item{shift}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{prob}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlonts_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -61,7 +61,7 @@ LOG10E <- log10(exp(1))
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param distance See Usage.
+#' @param distance Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_haldane <- function(distance) {

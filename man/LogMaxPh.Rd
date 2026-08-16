@@ -8,9 +8,9 @@
 LogMaxPh(beta, terms = 20, z = NULL)
 }
 \arguments{
-\item{beta}{See Usage.}
-\item{terms}{Defaults to \code{20}.}
-\item{z}{Defaults to \code{NULL}.}
+\item{beta}{Coerced to complex by the body, with \code{as.complex}.}
+\item{terms}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
+\item{z}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 mirror of eq (4.70): positive powers of z, so the maximum-phase part of the cepstrum is anticausal -- which is why liftering windows for homomorphic deconvolution are two-sided.

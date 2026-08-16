@@ -10,7 +10,7 @@ MsCoh(x, y, nperseg = NULL, overlap = 0.5)
 \arguments{
 \item{x}{Passed to \code{.morie_spx_chkv}.}
 \item{y}{Passed to \code{.morie_spx_chkv}.}
-\item{nperseg}{Defaults to \code{NULL}.}
+\item{nperseg}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{overlap}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{

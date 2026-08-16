@@ -35,9 +35,9 @@
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}. Defaults to \code{"linear"}.
-#' @param gamma Defaults to \code{1}.
-#' @param degree Defaults to \code{3}.
-#' @param coef0 Defaults to \code{0}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @param coef0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{K}, as built in the body.
 #' @export
 kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
@@ -70,8 +70,8 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alpha See Usage.
-#' @param y See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
@@ -118,7 +118,7 @@ dual_objective <- function(alpha, y, K) {
 #'
 #' @param i Passed to \code{.svmopt_bounds}.
 #' @param j Passed to \code{.svmopt_bounds}.
-#' @param alpha See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y A vector; indexed elementwise.
 #' @param K A matrix; indexed by row and column.
 #' @param grad A vector; indexed elementwise.
@@ -157,8 +157,8 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alpha See Usage.
-#' @param y See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grad A vector; indexed elementwise.
 #' @param C Numeric; combined arithmetically in the body.
 #' @return A list with \code{gap}, \code{i}, \code{j}, \code{n_up}, \code{n_low}.
@@ -187,8 +187,8 @@ kkt_violation <- function(alpha, y, grad, C) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alpha See Usage.
-#' @param y See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grad A vector; indexed elementwise.
 #' @param C Numeric; combined arithmetically in the body.
 #' @return A list with \code{b}, \code{n_free}, \code{bracketed}, \code{note}.
@@ -215,11 +215,11 @@ recover_bias <- function(alpha, y, grad, C) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K A matrix; indexed by row and column.
-#' @param C Defaults to \code{1}.
-#' @param tol Defaults to \code{1e-08}.
-#' @param max_iter Defaults to \code{20000}.
+#' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000}.
 #' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{gap}, \code{iterations}, \code{converged}, \code{support_vectors}, \code{n_sv}, \code{n_free}, \code{equality_residual}, \code{objective}, \code{method}, \code{note}.
 #' @export
 smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {

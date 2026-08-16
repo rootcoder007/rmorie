@@ -8,11 +8,11 @@
 morie_smatch_sample_size(log_ri, r, p_exposed, alpha = 0.05, power = 0.8)
 }
 \arguments{
-\item{log_ri}{See Usage.}
-\item{r}{See Usage.}
-\item{p_exposed}{See Usage.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{power}{Defaults to \code{0.8}.}
+\item{log_ri}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p_exposed}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{power}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.}
 }
 \description{
 A step of the smatch_native implementation. Called by \code{morie_smatch_power}. See the file header for the source the module follows.

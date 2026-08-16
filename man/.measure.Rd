@@ -8,7 +8,7 @@
 .measure(protected, measure, step, normalize, caveat = NULL)
 }
 \arguments{
-\item{protected}{See Usage.}
+\item{protected}{Coerced to logical by the body, with \code{as.logical}.}
 \item{measure}{Passed to \code{.raw}.}
 \item{step}{Passed to \code{.raw}.}
 \item{normalize}{A flag; the body branches on it.}

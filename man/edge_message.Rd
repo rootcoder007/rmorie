@@ -8,8 +8,8 @@
 edge_message(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL)
 }
 \arguments{
-\item{h_i}{See Usage.}
-\item{h_j}{See Usage.}
+\item{h_i}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h_j}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{x_i}{Passed to \code{.sqdist}.}
 \item{x_j}{Passed to \code{.sqdist}.}
 \item{phi_e}{See Usage.}

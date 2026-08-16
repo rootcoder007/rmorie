@@ -8,8 +8,8 @@
 .infmer_complexity(L_Q, L_K, c = 5)
 }
 \arguments{
-\item{L_Q}{See Usage.}
-\item{L_K}{See Usage.}
+\item{L_Q}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{L_K}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{c}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 }
 \description{

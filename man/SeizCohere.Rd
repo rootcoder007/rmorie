@@ -8,12 +8,12 @@
 SeizCohere(channels, fs, window, step = NULL, bands = NULL, nperseg = NULL)
 }
 \arguments{
-\item{channels}{See Usage.}
-\item{fs}{See Usage.}
-\item{window}{See Usage.}
-\item{step}{Defaults to \code{NULL}.}
+\item{channels}{Iterated over elementwise, with \code{lapply}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{window}{Coerced to integer by the body, with \code{as.integer}.}
+\item{step}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{bands}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
-\item{nperseg}{Defaults to \code{NULL}.}
+\item{nperseg}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_corr implementation. No other function in the package calls it. See the file header for the source the module follows.
