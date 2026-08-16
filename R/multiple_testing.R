@@ -869,7 +869,12 @@ fallback_procedure <- function(p_values, weights, alpha = 0.05,
 #'
 #' @param p_values_by_family List of numeric vectors, one per family.
 #' @param alpha Overall FWER level.
-#' @param propagate_alpha Logical; currently keeps alpha constant
+#' @param propagate_alpha Not implemented. Alpha recycling between
+#'   families would need a named procedure; what runs instead is that
+#'   every family is tested at the full alpha and the gate closes on
+#'   the first family with no rejection. Passing this argument
+#'   explicitly warns, and \code{alpha_propagated} in the result is
+#'   \code{FALSE}. Ignored; kept so the signature is stable
 #'   across families (mirrors the Python reference).
 #' @return A \code{morie_rich_result} list with one stage entry per
 #'   family and an \code{overall_rejected} logical vector.

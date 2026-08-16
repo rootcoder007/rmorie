@@ -9,13 +9,12 @@ morie_tolerance_limits(x, coverage = 0.9, confidence = 0.95)
 \arguments{
 \item{x}{Numeric vector.}
 
-\item{coverage}{Desired population coverage \code{beta} (default 0.90).}
+\item{coverage}{Desired population coverage `beta` (default 0.90).}
 
-\item{confidence}{Desired confidence (default 0.95).}
+\item{confidence}{The confidence the caller wants the interval to carry (default 0.95). Wilks' limits are the sample extremes whatever is asked for, so this is CHECKED rather than used: when \code{n} is too small to deliver it, the function warns and \code{confidence_achieved} reports what the sample does support.}
 }
 \value{
-Named list: lower, upper, coverage_requested,
-confidence_achieved, n, method.
+Named list: lower, upper, coverage_requested, confidence_achieved, n, method.
 }
 \description{
 Closed-form Wilks (1941) tolerance-interval probability that the

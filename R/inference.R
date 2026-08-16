@@ -320,11 +320,14 @@ morie_proportion_ci <- function(successes, n, alpha = 0.05,
   list(p_hat = p, ci_lower = pmax(0, ci[1]), ci_upper = pmin(1, ci[2]))
 }
 
-#' Odds ratio and 95% CI from a 2x2 contingency table
+#' Odds ratio and confidence interval from a 2x2 contingency table
 #'
 #' @param table_2x2 A 2x2 matrix: rows are treatment, columns are outcome.
-#' @param alpha Significance level.
-#' @return Named list: `or`, `ci_lower`, `ci_upper`, `p_value`.
+#' @param alpha Significance level; sets the width of the interval,
+#'   which is Woolf's on the log scale (Haldane-Anscombe corrected when
+#'   a cell is empty).
+#' @return Named list: `odds_ratio` (the sample odds ratio), `ci_lower`,
+#'   `ci_upper` at the requested level, and the exact `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
