@@ -19,3 +19,7 @@ entirely last maximises the deviation at every cut-off.
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+normalizer(rep(c(1L, 0L), 25), measure = "rND", step = 10)
+}

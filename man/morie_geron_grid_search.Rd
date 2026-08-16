@@ -30,3 +30,10 @@ List with \code{best_params}, \code{best_score}, \code{results}, \code{n_candida
 \description{
 Exhaustive grid search scored by K-fold CV, delegated to \code{morie_geron_cross_validation_score} (hmgrs)
 }
+\examples{
+set.seed(3)
+X <- matrix(rnorm(60), 30, 2)
+y <- 1 + X[, 1] + rnorm(30, 0, 0.2)
+r <- morie_geron_grid_search(list(alpha = c(0.1, 1)), X, y, K = 3)
+r$best_params
+}

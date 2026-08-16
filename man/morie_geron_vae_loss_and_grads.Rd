@@ -21,3 +21,13 @@ list(loss, recon, kl, grads) with grads a same-shaped list as params.
 \description{
 ELBO loss and exact gradients for fixed reparameterisation noise
 }
+\examples{
+set.seed(5)
+X <- matrix(rnorm(20), 5, 4)
+params <- list(matrix(rnorm(8, 0, 0.3), 4, 2), rep(0, 2),
+               matrix(rnorm(8, 0, 0.3), 4, 2), rep(0, 2),
+               matrix(rnorm(8, 0, 0.3), 2, 4), rep(0, 4))
+eps <- matrix(rnorm(10), 5, 2)
+r <- morie_geron_vae_loss_and_grads(X, params, eps)
+c(r$loss, r$recon, r$kl)
+}

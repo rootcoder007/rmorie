@@ -25,3 +25,9 @@ Scores an already-produced forecast series fold by fold on an
 expanding-window layout and reports the fold RMSEs plus their mean
 and spread.
 }
+\examples{
+set.seed(1)
+y <- as.numeric(arima.sim(list(ar = 0.6), 60))
+yhat <- y + rnorm(60, 0, 0.3)
+morie_walkfwd(y, yhat, initial = 30, testsize = 5)
+}

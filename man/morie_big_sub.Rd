@@ -15,3 +15,8 @@ A \code{morie_bigint}.
 \description{
 Subtract arbitrary-precision integers
 }
+\examples{
+a <- morie_bigint("100000000000000000000")
+b <- morie_bigint("1")
+as.character(morie_big_sub(a, b))
+}

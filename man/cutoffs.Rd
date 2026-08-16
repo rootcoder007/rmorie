@@ -18,3 +18,6 @@ A step of the fairRC_native implementation. Called by \code{.measure}, \code{.ra
 The value of \code{seq}.
 }
 \keyword{internal}
+\examples{
+cutoffs(45, step = 10)
+}

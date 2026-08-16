@@ -33,3 +33,9 @@ List with \code{prediction}, \code{zero_shot_prediction}, \code{prompt}, \code{c
 \description{
 Few-shot in-context prompt construction with a zero-shot control (hmfsf)
 }
+\examples{
+model <- function(prompt) if (grepl("2 -> 4", prompt, fixed = TRUE)) "6" else "?"
+ex <- list(list("1", "2"), list("2", "4"))
+r <- morie_geron_few_shot(model, ex, query = "3")
+r$prediction
+}

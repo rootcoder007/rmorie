@@ -21,3 +21,10 @@ List with \code{class_map}, \code{scores}, \code{segmentation}, \code{out_shape}
 \description{
 Each convolution delegated to \code{morie_geron_conv2d_forward}.
 }
+\examples{
+set.seed(2)
+img <- array(rnorm(1 * 6 * 6), c(1, 6, 6))
+K <- array(rnorm(2 * 1 * 3 * 3, 0, 0.3), c(2, 1, 3, 3))
+r <- morie_geron_fcn(img, list(list(K, 0, 1L)))
+str(r, max.level = 1)
+}

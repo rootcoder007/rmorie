@@ -19,3 +19,7 @@ group is the minority -- it does not treat the two groups symmetrically.
 The value of \code{.measure}.
 }
 \keyword{internal}
+\examples{
+prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
+rRD(prot, step = 10)
+}

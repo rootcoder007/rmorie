@@ -22,3 +22,13 @@ Per-pixel argmax over model(image) -> (H,W,K) scores; when y_true is
 given, per-class IoU = |P_k & G_k| / |P_k | G_k|, mean over classes
 present, pixel accuracy, confusion matrix.
 }
+\examples{
+set.seed(6)
+model <- function(img) {
+  s <- array(rnorm(4 * 4 * 3), c(4, 4, 3))
+  s[1:2, , 1] <- 5
+  s
+}
+r <- morie_geron_semantic_segmentation(array(0, c(4, 4, 1)), model)
+str(r, max.level = 1)
+}
