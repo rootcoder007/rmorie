@@ -20,3 +20,7 @@ p -> 0, so zero-density points contribute nothing.  This is a density inside the
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+xg <- seq(-6, 6, by = 0.01)
+DiffEnt(x = xg, p = dnorm(xg))
+}

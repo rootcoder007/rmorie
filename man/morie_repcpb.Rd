@@ -17,3 +17,6 @@ list(leading, approx1, approx2, logapprox2)
 \description{
 Block error probability of the RN repetition code (eq. 1.42-1.43, p. 17)
 }
+\examples{
+morie_repcpb(n = 61, f = 0.1)
+}

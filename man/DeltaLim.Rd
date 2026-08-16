@@ -18,3 +18,6 @@ negative for every a in (0,1), so the function diverges at t = 0 (NA, not a larg
 A list with \code{values}, \code{t}, \code{a}, \code{area_symmetric}, \code{half_width}, \code{method}.
 }
 \keyword{internal}
+\examples{
+DeltaLim(t = seq(-1, 1, by = 0.05), a = 0.01)
+}

@@ -26,3 +26,8 @@ algorithm, the occurs check, and the factorisation
 :math:`\theta = \delta \circ \sigma` reproduced above.
 }
 \keyword{internal}
+\examples{
+x <- morie_unifAlg_var("x")
+t <- morie_unifAlg_app("f", x, morie_unifAlg_var("y"))
+morie_unifAlg_variables(t)
+}
