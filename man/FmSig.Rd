@@ -21,3 +21,6 @@ unlike AM in Section 5.5.1, so the standard definition is used and said so: y = 
 A list with \code{y}, \code{phase}, \code{instantaneous_frequency}, \code{fc}, \code{fs}, \code{kf}, \code{max_instantaneous_frequency}, \code{min_instantaneous_frequency}, \code{aliases}, \code{method}.
 }
 \keyword{internal}
+\examples{
+FmSig(c(rep(0, 10), rep(50, 10)), fc = 100, fs = 1000, kf = 1)
+}

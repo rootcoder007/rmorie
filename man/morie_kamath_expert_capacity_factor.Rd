@@ -19,3 +19,6 @@ List with \code{estimate}, \code{slots}, \code{total_slots}, \code{min_dropped}.
 \description{
 C * tokens / experts, with the drop threshold reported.
 }
+\examples{
+morie_kamath_expert_capacity_factor(100, 8, 1.25)
+}

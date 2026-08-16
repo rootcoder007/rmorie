@@ -23,3 +23,13 @@ treatment-covariate interactions. Mirrors \code{morie.fn.causmrop}.
 \references{
 Robins JM (1986). \emph{Mathematical Modelling} 7, 1393-1512.
 }
+\examples{
+n <- 3000
+x <- stats::rnorm(n)
+e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
+tr <- as.numeric(stats::runif(n) < e)
+y <- x + stats::rnorm(n) + 3 * tr
+L <- stats::rnorm(n)
+a <- as.numeric(stats::runif(n) < 1/(1 + exp(-1.5 * L)))
+morie_g_formula(y, a, L)
+}

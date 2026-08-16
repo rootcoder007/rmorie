@@ -19,3 +19,6 @@ A step of the dist_native implementation. Called by \code{Qt}. See the file head
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+Pt(2.015, 5)
+}

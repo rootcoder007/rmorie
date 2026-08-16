@@ -28,3 +28,8 @@ List with \code{W}, \code{b}, \code{losses}, \code{accuracy}, \code{predict},
 trained by full-batch gradient descent with the exact gradient
 X^T (p - onehot) / n. Labels and predictions are 0-based.
 }
+\examples{
+ident <- function(A) as.matrix(A)
+morie_geron_bert_finetune(ident, matrix(c(1, 0, 0, 1, 1, 1), 
+    3, 2, byrow = TRUE), c(0, 1, 0), epochs = 25, lr = 0.5, l2 = 0.01)
+}

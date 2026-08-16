@@ -14,3 +14,8 @@ Internal helper: native Bayesian MDS sampler
 A list with \code{positions}, \code{sigma}, \code{acceptance}, \code{n_samples}, \code{engine}.
 }
 \keyword{internal}
+\examples{
+Xt <- matrix(rnorm(20), 10, 2)
+Dt <- as.matrix(stats::dist(Xt))
+.morie_sv_bayes_mds(Dt, n_dims = 2L, n_samples = 200L, burn_in = 100L)
+}

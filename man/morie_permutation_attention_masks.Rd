@@ -30,3 +30,6 @@ for later positions.
 Yang Z, Dai Z, Yang Y, Carbonell J, Salakhutdinov R,
 Le QV (2019) XLNet. arXiv:1906.08237, eq (3).
 }
+\examples{
+morie_permutation_attention_masks(c(2L, 0L, 3L, 1L))
+}

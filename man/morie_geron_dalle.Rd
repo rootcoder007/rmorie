@@ -36,3 +36,7 @@ Per-step scoring is delegated to
 \code{morie_geron_dalle_autoregressive_token}; this wrapper runs the
 generation loop and reshapes into the token grid.
 }
+\examples{
+skewed <- function(ctx) c(0, 5)
+morie_geron_dalle(0, skewed, n_image_tokens = 4)
+}

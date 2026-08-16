@@ -25,3 +25,6 @@ that do.
 \references{
 Azuma K (1967) \emph{Tohoku Math J} 19(3):357-367.
 }
+\examples{
+morie_azuma_bound(100, 1, 30)
+}

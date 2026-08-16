@@ -30,3 +30,8 @@ List with \code{grad_weights}, \code{grad_biases}, \code{deltas}, \code{loss}, \
 Squared-error loss L = 0.5 sum ||a_L - y||^2, derivatives taken from
 the POST-activation values, which is why only activations are needed.
 }
+\examples{
+morie_geron_backpropagation_gradient(list(matrix(c(1, 2), 1, 
+    2), matrix(3, 1, 1)), list(matrix(c(1, 1), 2, 1)), matrix(1, 
+    1, 1), activation = "sigmoid")
+}

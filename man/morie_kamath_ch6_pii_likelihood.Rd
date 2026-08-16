@@ -22,3 +22,7 @@ List with \code{estimate}, \code{log_likelihood}, \code{context_lengths}.
 \description{
 Product of the target PII's per-token probabilities.
 }
+\examples{
+morie_kamath_ch6_pii_likelihood(c(0.5, 0.25), c("a"), c("q"), 
+    1, 2)
+}

@@ -21,3 +21,6 @@ List with \code{derivative}, \code{derivative_2h}, \code{richardson},
 (f(x+h) - f(x-h)) / 2h with a Richardson extrapolation cross-check
 from the 2h estimate.
 }
+\examples{
+morie_geron_numerical_differentiation(function(t) sin(t)^2, 0.7)
+}

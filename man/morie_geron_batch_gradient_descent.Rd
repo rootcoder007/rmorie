@@ -21,3 +21,7 @@ List with \code{theta}, \code{theta_path}, \code{loss_history}, \code{gradient},
 \code{loss_history} has n_iter + 1 entries: the initial MSE then one per
 step. \code{eta_max_stable} is 2 / lambda_max of (2/m) X^T X.
 }
+\examples{
+morie_geron_batch_gradient_descent(matrix(c(1, 2), ncol = 1), 
+    c(2, 4), 0, eta = 0.1, n_iter = 3)
+}

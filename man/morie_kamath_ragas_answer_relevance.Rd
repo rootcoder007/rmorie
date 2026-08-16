@@ -27,3 +27,7 @@ List with \code{estimate}, \code{score}, \code{similarities}.
 Generates reverse questions, embeds them, then delegates the cosine mean
 to \code{morie_kamath_ch7_answer_relevance} (km112).
 }
+\examples{
+morie_kamath_ragas_answer_relevance("ans", c(1, 1), function(a) list(c(1, 
+    0), c(0, 1)))
+}

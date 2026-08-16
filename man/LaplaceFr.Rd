@@ -20,3 +20,8 @@ imaginary axis lies inside the region of convergence, which holds for a causal s
 A list with \code{H}, \code{omega}, \code{magnitude}, \code{phase}, \code{t_min}, \code{t_max}, \code{valid_only_inside_the_roc}, \code{method}.
 }
 \keyword{internal}
+\examples{
+t <- (0:200)/200
+h <- rep(1, 201)
+LaplaceFr(h, 3, t = t)
+}

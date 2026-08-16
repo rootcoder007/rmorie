@@ -18,3 +18,7 @@ only), \code{bias}.
 \description{
 y_hat = theta_0 + sum_j theta_j x_j.
 }
+\examples{
+morie_geron_ch4_linear_regression_prediction(c(1, 2, -0.5), matrix(c(1, 
+    4, 2, 0), 2, byrow = TRUE))
+}

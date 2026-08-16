@@ -23,3 +23,8 @@ List with labels, centers, inertia, counts, n_iter, estimate, n, method.
 \description{
 Batch draws via the shared LCG stream, not numpy PCG64 choice.
 }
+\examples{
+X <- matrix(c(1, 2, 3, 4), ncol = 1)
+morie_geron_minibatch_kmeans(X, n_clusters = 2, batch_size = 2, 
+    seed = 0, n_iter = 200)
+}

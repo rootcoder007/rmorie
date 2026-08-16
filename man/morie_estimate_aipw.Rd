@@ -27,3 +27,7 @@ A step of the causal implementation. Called by \code{morie_dag_estimate}, \code{
 A list with \code{n_used}, \code{n_discarded}, \code{estimand}, \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}.
 }
 \keyword{internal}
+\examples{
+df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
+morie_estimate_aipw(df, "t", "y", "x", outcome_model = "linear")
+}

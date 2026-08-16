@@ -21,3 +21,6 @@ carrier -- with synchronous demodulation x_d = y cos(wc t) = 0.5 x + 0.5 x cos(2
 A list with \code{y}, \code{carrier}, \code{demodulated}, \code{fc}, \code{fs}, \code{suppressed_carrier}, \code{baseband_gain}, \code{image_frequency}, \code{method}.
 }
 \keyword{internal}
+\examples{
+AmSig(rep(1, 8), fc = 1, fs = 8)
+}

@@ -22,3 +22,8 @@ List with \code{estimate}, \code{satisfied}, \code{p_A}, \code{p_B}, \code{bound
 Checks P[M(A) in S] <= e^eps P[M(B) in S] and reports the epsilon that
 would be required.
 }
+\examples{
+morie_kamath_ch6_differential_privacy(function(D) if (D == "A") c(s1 = 0.6, 
+    s2 = 0.4) else c(s1 = 0.4, s2 = 0.6), "A", "B", c("s1"), 
+    0.5)
+}

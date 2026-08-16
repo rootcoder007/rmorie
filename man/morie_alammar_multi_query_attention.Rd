@@ -17,3 +17,9 @@ morie_alammar_multi_query_attention
 A list with \code{output}, \code{kv_cache_ratio}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
+Ks <- matrix(stats::rnorm(6), 3, 2)
+Vs <- matrix(stats::rnorm(6), 3, 2)
+morie_alammar_multi_query_attention(Qh, Ks, Vs, 4)
+}

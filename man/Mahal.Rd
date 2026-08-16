@@ -19,3 +19,6 @@ the data\'s own scatter: a point far along an axis of natural variation is NEAR,
 A list with \code{d2}, \code{distance}, \code{squared}, \code{euclidean}, \code{differs_from_euclidean}, \code{scale_free}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Mahal(c(2, 0), c(0, 0), matrix(c(4, 0, 0, 1), 2, 2))
+}

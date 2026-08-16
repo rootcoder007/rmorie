@@ -15,3 +15,6 @@ List with \code{estimate}, \code{normalised_log_i}, \code{normalised_log_j}.
 \description{
 Difference of prior-normalised log probabilities.
 }
+\examples{
+morie_kamath_ch6_lpbs_bias(c(0.6, 0.4), c(0.5, 0.5))
+}

@@ -20,3 +20,7 @@ A list of integer vectors.
 The empty set is checked too: if it is admissible there is no
 confounding to adjust for, and adjusting anyway costs precision.
 }
+\examples{
+A <- matrix(FALSE, 3, 3)
+morie_backdoor_sets(A, 2, 3)
+}

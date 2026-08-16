@@ -33,3 +33,7 @@ List with \code{x_0}, \code{trajectory}, \code{means}, \code{betas}, \code{alpha
 Uses the shared \code{morie_beta_schedule_values}/\code{morie_lcg_normal} (hmdfw)
 so forward and reverse schedules cannot drift apart.
 }
+\examples{
+zero <- function(x, t) rep(0, length(x))
+morie_geron_diffusion_reverse(1, zero, T = 1, beta_schedule = 0.75)
+}

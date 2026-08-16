@@ -23,3 +23,9 @@ List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty},
 J = MSE + r alpha L1 + ((1-r)/2) alpha L2, stacked on
 \code{\link[=morie_geron_lasso_cost]{morie_geron_lasso_cost()}} at \code{r * alpha}.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+th <- c(0.5, 1.1)
+morie_geron_elastic_net_cost(X, y, th, 0.4, 0.6)
+}

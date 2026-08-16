@@ -21,3 +21,6 @@ List with \code{eta}, \code{schedule}, \code{halfway_value},
 eta_t = eta_min + 0.5 (eta_max - eta_min)(1 + cos(pi t / T)); the full
 0..T curve is returned and its monotonicity checked.
 }
+\examples{
+morie_geron_lr_cosine_annealing(0.001, 0.1, 3, 10)
+}

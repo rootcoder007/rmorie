@@ -22,3 +22,7 @@ List with \code{estimate}, \code{action}, \code{ctx}, \code{scores}.
 Grades the retrieved documents, then keeps them, falls back to the web,
 or mixes.
 }
+\examples{
+morie_kamath_corrective_rag("q", list("d1", "d2", "d3"), function(q, 
+    d) c(d1 = 0.9, d2 = 0.5, d3 = 0.1)[[d]], 0.8, 0.2)
+}

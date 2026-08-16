@@ -18,3 +18,7 @@ morie_alammar_contextualized_embedding
 A list with \code{embedding}, \code{context_varies}, \code{estimate}, \code{layer}, \code{position}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+L <- array(0, dim = c(2, 2, 2))
+morie_alammar_contextualized_embedding(L, -1, 1)
+}

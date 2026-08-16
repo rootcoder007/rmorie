@@ -25,3 +25,7 @@ Summed cross-entropy over the masked image regions. 1-D \code{labels} are
 0-BASED class indices; 2-D labels must be one-hot rows. \code{as_printed}
 carries the book's sign, which is the negative of a loss.
 }
+\examples{
+morie_kamath_ch9_moc_loss(NULL, NULL, NULL, matrix(c(0.7, 0.2, 
+    0.3, 0.8), 2), labels = c(0, 1))
+}

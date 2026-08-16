@@ -26,3 +26,8 @@ than a restatement.
 Ford LR, Fulkerson DR (1956) \emph{Canad J Math}
 8:399-404.
 }
+\examples{
+C <- matrix(c(0, 3, 2, 0, 0, 0, 5, 2, 0, 0, 0, 3, 0, 0, 0, 0), 
+    4, 4, byrow = TRUE)
+morie_max_flow_min_cut(C, 1, 4)
+}

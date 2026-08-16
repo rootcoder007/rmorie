@@ -32,3 +32,6 @@ knots (0, peak, T-1) with values (eta_min, eta_max, eta_min) and the
 momentum mirrors it. T = 2 collapses the peak onto step 0, which is
 the two-knot branch.
 }
+\examples{
+morie_geron_1cycle_schedule(0.1, 0.5, t = 1, T = 7)
+}

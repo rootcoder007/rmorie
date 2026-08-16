@@ -30,3 +30,8 @@ Teacher-forced log-likelihood of the prefix plus the next-token
 distribution after temperature and optional top-k truncation.
 \code{logits_fn} receives the 0-based context as a numeric vector.
 }
+\examples{
+skew <- function(ctx) c(0, 1, 2) + 0.1 * length(ctx)
+morie_geron_dalle_autoregressive_token(c(0, 1), c(2, 0), skew, 
+    temperature = 0.5)
+}

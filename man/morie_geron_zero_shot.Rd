@@ -24,3 +24,7 @@ Scores labels under model(prompt, labels) or model(prompt) with no
 weight updates; softmax-normalises. If null_prompt given, subtracts
 the null-prompt scores before normalising (contextual calibration).
 }
+\examples{
+scores <- c(negative = 0, positive = 1)
+morie_geron_zero_shot(function(p) scores, "Review: it was great. Sentiment:")
+}

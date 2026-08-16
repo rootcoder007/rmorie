@@ -15,3 +15,6 @@ List with \code{estimate} (the product), \code{log_prob}, \code{per_step}.
 \description{
 Chain-rule sequence probability (Kamath Eq 6.26)
 }
+\examples{
+morie_kamath_ch6_lstm_chain_rule(c(0.5, 0.25, 0.5))
+}

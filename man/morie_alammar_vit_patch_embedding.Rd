@@ -20,3 +20,7 @@ ViT patch embedding (Dosovitskiy et al. 2021)
 A list with \code{sequence}, \code{n_patches}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+img <- matrix(0:15, 4, 4, byrow = TRUE)
+morie_alammar_vit_patch_embedding(img, 2, diag(4))
+}

@@ -19,3 +19,7 @@ List with \code{loss}, \code{per_pair}, \code{probabilities}, \code{accuracy},
 A 1-D \code{logits} vector is promoted to (n, 2) with a zero first column,
 so a single score is read as the IsNext logit.
 }
+\examples{
+morie_geron_bert_nsp_loss(matrix(c(1, 2, 0.5, -1, 0, 0), 3, byrow = TRUE), 
+    c(1, 0, 1))
+}

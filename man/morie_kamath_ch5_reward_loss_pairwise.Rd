@@ -32,3 +32,12 @@ km065: km065 -> \code{morie_kamath_ch5_reward_loss_pairwise} (choice vector
 \code{i}, 0 = y_0 wins), km067 -> \code{morie_kamath_ch5_rm_bradley_terry} (winner
 fixed, so i is all zeros).
 }
+\examples{
+A <- matrix(c(1, 0, 2, 1), 2)
+B <- diag(2)
+x <- c(1, 2, 3, 4)
+y <- morie_kamath_ch4_krona_efficient(A, B, x)$y
+morie_kamath_ch5_reward_loss_pairwise(function(x, y) c(a = 2, 
+    b = 0.5)[[y]], list("p1", "p2"), list("a", "b"), list("b", 
+    "a"), c(0, 1))
+}

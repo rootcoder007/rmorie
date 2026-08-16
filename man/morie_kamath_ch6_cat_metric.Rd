@@ -20,3 +20,6 @@ List with \code{estimate}, \code{per_token}, \code{n_context}.
 MEAN log P(modified token | unmodified context) -- a mean, not the sum
 that Eq 6.10 takes.
 }
+\examples{
+morie_kamath_ch6_cat_metric(c(0.5, 0.25), c("u1", "u2"))
+}

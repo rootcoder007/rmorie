@@ -20,3 +20,7 @@ n_batches, estimate, n, method.
 \description{
 Incremental PCA via streaming co-moment updates (Geron Ch 7, morie.fn hmipca)
 }
+\examples{
+X <- matrix(c(1, 2, 3, 4), ncol = 1)
+morie_geron_incremental_pca(X, n_components = 1, batch_size = 2)
+}

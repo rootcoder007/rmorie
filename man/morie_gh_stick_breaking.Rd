@@ -26,3 +26,7 @@ Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
 }
+\examples{
+V <- c(1/2, 1/3, 1/4, 1/5)
+morie_gh_stick_breaking(V)
+}

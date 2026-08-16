@@ -32,3 +32,9 @@ Grambsch and Therneau's scaled version tests proportional hazards by regressing 
 \references{
 Grambsch, P. M. and Therneau, T. M. (1994). Proportional hazards tests and diagnostics based on weighted residuals. Biometrika 81(3), 515-526.
 }
+\examples{
+ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
+SE <- c(1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1)
+SX <- matrix((seq_along(ST) - 1)\%\%2, ncol = 1)
+Schoenfeld(ST, SE, SX, 0.3, vcov = matrix(0.25, 1, 1))
+}

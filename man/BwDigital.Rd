@@ -22,3 +22,6 @@ A step of the rangayyan_filt2 implementation. Called by \code{BwHp}, \code{BwLp}
 A list with \code{b}, \code{a}, \code{gain}, \code{poles_z}, \code{H}, \code{N}, \code{Omega_c}, \code{T}, \code{prewarped_here}, \code{zeros_at_minus_one}, \code{zeros_are_forced_by_the_bilinear_transform}, \code{dc_gain}, \code{leading_a_is_one}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwDigital(N = 4, fc = 100, fs = 1000)
+}

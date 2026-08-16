@@ -18,3 +18,6 @@ List with \code{log_likelihood}, \code{per_pair}, \code{probabilities}.
 sum log softmax(u_o . v_c) over the (center, context) pairs. Indices are
 0-BASED.
 }
+\examples{
+morie_kamath_word2vec_skipgram(c(0, 1), c(1, 0), diag(2), diag(2))
+}

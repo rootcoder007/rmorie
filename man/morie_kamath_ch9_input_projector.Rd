@@ -30,3 +30,7 @@ directions: km131 -> \code{morie_kamath_ch9_input_projector} (P_X =
 IN_ALIGN(F_X)), km147 -> \code{morie_kamath_ch9_output_alignment} (H_X =
 OUT_ALIGN(S_X)). Both accept a matrix (right-multiplied) or a function.
 }
+\examples{
+morie_kamath_ch9_input_projector(matrix(c(1, 2), 1), in_align = diag(c(1, 
+    2)))
+}

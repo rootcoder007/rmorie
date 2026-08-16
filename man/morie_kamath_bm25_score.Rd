@@ -23,3 +23,7 @@ List with \code{estimate}, \code{per_term}, \code{term_frequencies}.
 \description{
 IDF-weighted saturated term frequency with length normalisation.
 }
+\examples{
+morie_kamath_bm25_score(c("cat", "dog"), c("cat", "cat", "fish"), 
+    c(cat = 1.5, dog = 2), 3)
+}

@@ -21,3 +21,7 @@ augmentation, TSDAE
 A list with \code{caption}, \code{projected}, \code{feature_dim}, \code{projected_dim}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_image_captioning("img", function(im) c(1, 2), rbind(c(1, 
+    0)), function(z, p) "cap")
+}

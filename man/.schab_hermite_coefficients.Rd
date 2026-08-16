@@ -19,3 +19,6 @@ quadrature -- exact for polynomial g, so the Example 5.12 identities come out ex
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.schab_hermite_coefficients(function(v) v, 6)
+}

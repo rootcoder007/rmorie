@@ -20,3 +20,10 @@ A step of the rangayyan_sig implementation. No other function in the package cal
 A list with \code{psd}, \code{freqs}, \code{n_segments}, \code{segment_length}, \code{method}.
 }
 \keyword{internal}
+\examples{
+n <- 100
+fs <- 64
+f0 <- 8
+x <- sin(2 * pi * f0 * (0:(n - 1))/fs)
+BartlettPSD(x, fs = fs, n_segments = 4)
+}

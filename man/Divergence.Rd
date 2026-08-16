@@ -20,3 +20,6 @@ eq (10.115): D = (1/2) tr[(Ci - Cj)(Cj^-1 - Ci^-1)] + (1/2) tr[(Ci^-1 + Cj^-1)(m
 A list with \code{divergence}, \code{covariance_term}, \code{mean_term}, \code{nonnegative}, \code{symmetric}, \code{zero_for_identical_pdfs}, \code{separates_equal_means_via_the_covariance_term}, \code{additive_over_independent_features}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Divergence(c(0, 0), c(0, 0), diag(2), diag(3, 2))
+}

@@ -57,3 +57,7 @@ Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).
 Inferring causal impact using Bayesian structural time-series
 models. \emph{Annals of Applied Statistics}, 9(1):247-274.
 }
+\examples{
+morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)), 
+    pre_period = c(1, 5), post_period = c(6, 10))
+}

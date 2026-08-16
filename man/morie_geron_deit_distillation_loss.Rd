@@ -29,3 +29,8 @@ List with \code{loss}, \code{loss_cls}, \code{loss_dist}, \code{teacher_labels},
 L = (1 - alpha) CE(cls, y) + alpha CE(dist, argmax teacher). Labels
 are 0-based; \code{teacher_labels} comes back 0-based too.
 }
+\examples{
+morie_geron_deit_distillation_loss(matrix(c(1, 0, 0, 2), 2, 2, 
+    byrow = TRUE), matrix(c(0.5, 0.5, 1, 0), 2, 2, byrow = TRUE), 
+    c(0, 1), matrix(c(1, 0, 1, 0), 2, 2, byrow = TRUE), alpha = 0.3)
+}

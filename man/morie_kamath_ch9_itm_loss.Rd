@@ -19,3 +19,6 @@ List with \code{estimate}, \code{per_pair}, \code{scores}.
 \description{
 Binary cross-entropy on the match scores.
 }
+\examples{
+morie_kamath_ch9_itm_loss(c(0.9, 0.2), NULL, NULL, c(1, 0))
+}

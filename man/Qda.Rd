@@ -20,3 +20,9 @@ eqs (10.68)-(10.69).  Each class keeps its OWN covariance, so the boundaries are
 A list with \code{g}, \code{assigned}, \code{assigned_index}, \code{classes}, \code{means}, \code{covariances}, \code{priors}, \code{reduces_to_lda_when_covariances_are_equal}, \code{parameters_per_class}, \code{method}.
 }
 \keyword{internal}
+\examples{
+XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3, 
+    2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
+YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
+Qda(XC, YC, c(1.1, 1))
+}

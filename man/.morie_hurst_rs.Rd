@@ -18,3 +18,7 @@ Hurst exponent via simple rescaled-range (R/S) analysis -- an exact replica of p
 A numeric value.
 }
 \keyword{internal}
+\examples{
+x <- cumsum(rnorm(4096))
+.morie_hurst_rs(x)
+}

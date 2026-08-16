@@ -29,3 +29,9 @@ imports km094's \verb{_pair_vectors}: km094 ->
 distances), km095 -> \code{morie_kamath_ch6_gender_direction}
 (mean of E(second) - E(first) over the pairs).
 }
+\examples{
+E <- list(m1 = c(1, 0), f1 = c(0, 1), m2 = c(2, 0), f2 = c(0, 
+    2))
+P <- list(c("m1", "f1"), c("m2", "f2"))
+morie_kamath_ch6_debias_regularizer(P, E, 0.5)
+}

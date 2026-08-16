@@ -21,3 +21,7 @@ and omega domains.  s = j omega recovers the frequency-domain form, so one funct
 A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{s}, \code{max_difference}, \code{holds}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LtiProd(c(1, 2, 1), c(1, -1), s = complex(real = 0.3, imaginary = 1.1), 
+    dt = 0.5)
+}

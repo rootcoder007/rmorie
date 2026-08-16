@@ -30,3 +30,7 @@ List with \code{prompt}, \code{k_shot}, \code{answer}, \code{prompt_chars},
 \description{
 In-context / few-shot prompt assembly (Geron Ch 16, morie.fn grinc)
 }
+\examples{
+morie_geron_in_context_learning(list(list("a", "1"), list("bb", 
+    "2")), "cc")
+}

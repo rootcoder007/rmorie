@@ -19,3 +19,6 @@ List with \code{estimate}, \code{mean_nll}, \code{log_probs}.
 \description{
 exp(mean negative log-likelihood per token).
 }
+\examples{
+morie_kamath_ch8_perplexity(c("a", "b"), p_theta = c(0.5, 0.25))
+}

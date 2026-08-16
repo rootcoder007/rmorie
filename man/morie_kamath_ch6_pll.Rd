@@ -31,3 +31,6 @@ km087 -> \code{morie_kamath_ch6_cps_metric} (the same sum over the unmodified
 tokens, conditioned on the modified ones). \code{theta} receives 0-BASED
 positions.
 }
+\examples{
+morie_kamath_ch6_pll(c(0.5, 0.25, 0.5))
+}

@@ -21,3 +21,7 @@ VECTORS -- enter the solution, so the boundary is set by the samples nearest it 
 A list with \code{w}, \code{b}, \code{alpha}, \code{support_vectors}, \code{n_support}, \code{margin}, \code{C}, \code{iterations}, \code{converged}, \code{training_accuracy}, \code{boundary_set_by_the_support_vectors_only}, \code{large_c_contorts_around_outliers}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Svm(matrix(c(1, 1, 2, 2, 4, 4, 5, 5), ncol = 2, byrow = TRUE), 
+    c(-1, -1, 1, 1))
+}

@@ -18,3 +18,8 @@ list with graph, output, replay, max_diff, n_nodes, shapes, estimate, n, method.
 Traces an op sequence into a static graph (shapes frozen at each
 node), then verifies by replay.
 }
+\examples{
+W <- diag(2)
+morie_geron_torchscript(list(list(kind = "linear", param = W), 
+    list(kind = "relu")), matrix(c(1, -1), 1, 2))
+}

@@ -19,3 +19,6 @@ List with \code{f1}, \code{precision}, \code{recall}, \code{tp}, \code{fp}, \cod
 \description{
 F1 score from a confusion matrix delegated to hmcfm (hmf1)
 }
+\examples{
+morie_geron_f1_score_alt(c(0, 0, 1, 1), c(0, 1, 1, 1))
+}

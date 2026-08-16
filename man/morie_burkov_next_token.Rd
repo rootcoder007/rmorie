@@ -18,3 +18,6 @@ Eq 2.2 DEFINES a language model rather than giving an estimator, so the operatio
 A list with \code{estimate}, \code{context}, \code{distribution}, \code{notations_agree}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_next_token("b", c("a", "b", "a", "c", "a", "b"))
+}

@@ -20,3 +20,6 @@ A step of the dist_native implementation. No other function in the package calls
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+Dbeta(0.5, 2, 3)
+}

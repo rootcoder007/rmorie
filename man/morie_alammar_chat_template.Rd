@@ -18,3 +18,7 @@ morie_alammar_chat_template
 A list with \code{prompt}, \code{n_turns}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_chat_template(list(c("user", "hi")), list(user = c("<u>", 
+    "</u>")))
+}

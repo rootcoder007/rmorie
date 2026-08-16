@@ -20,3 +20,6 @@ is the wavelet\'s cepstrum plus impulses at n0 and its multiples, amplitudes (-1
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+EchoSeries(0.5, 8, terms = 4)
+}

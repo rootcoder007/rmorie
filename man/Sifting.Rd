@@ -20,3 +20,6 @@ T1 < to < T2, else 0.  Both inequalities are strict, so an impulse sitting on a 
 A list with \code{value}, \code{inside}, \code{t0}, \code{lower}, \code{upper}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Sifting(function(t) t^2 + 1, 2, 0, 5)
+}

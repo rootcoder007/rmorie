@@ -20,3 +20,8 @@ List with \code{probabilities}, \code{logits}, \code{predicted_class}
 \description{
 Classification MLP softmax head (Geron Ch 10, morie.fn grmlc)
 }
+\examples{
+morie_geron_classification_mlp_output(matrix(c(1, 2, 0.5, -1), 
+    2, byrow = TRUE), matrix(c(1, -1, 0.5, 2, 0, 1), 3, byrow = TRUE), 
+    c(0.1, 0.2, -0.1))
+}

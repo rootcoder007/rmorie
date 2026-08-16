@@ -21,3 +21,6 @@ H(k) = H(K-k).  The book defines kc = ceil(K wc/ws) and that CEILING matters: ro
 A list with \code{squared_magnitude}, \code{magnitude}, \code{half_spectrum}, \code{K}, \code{kc}, \code{N}, \code{dc_gain}, \code{reflected}, \code{cutoff_index_uses_a_ceiling}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BwLpDft(16, kc = 4, N = 2)
+}

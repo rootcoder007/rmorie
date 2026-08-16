@@ -30,3 +30,7 @@ Delegates the InfoNCE loss to \code{morie_geron_contrastive_infonce}; this
 wrapper builds the negative set from \code{positives} (every other row of
 the batch except the anchor and its positive).
 }
+\examples{
+morie_geron_contrastive_learning(matrix(c(1, 0, 1, 0, 0, 1), 
+    3, 2, byrow = TRUE), c(1, 0, 0), tau = 1)
+}

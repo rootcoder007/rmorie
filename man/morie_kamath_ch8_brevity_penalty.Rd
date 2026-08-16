@@ -17,3 +17,6 @@ List with \code{estimate}, \code{penalized}.
 \description{
 1 when the candidate is longer than the reference, exp(1 - r/c) otherwise.
 }
+\examples{
+morie_kamath_ch8_brevity_penalty(5, 7)
+}

@@ -19,3 +19,8 @@ Reward function R(s, a, s\'): per-transition rewards and the backward discounted
 A list with \code{rewards}, \code{total_reward}, \code{returns}, \code{discounted_return}, \code{gamma}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+tbl <- array(c(0, 0, 2, 0, 1, 0, 0, 2), dim = c(2, 2, 2))
+morie_geron_reward_function(c(0, 1, 1), c(0, 0, 1), c(1, 0, 1), 
+    R = tbl, gamma = 0.5)
+}

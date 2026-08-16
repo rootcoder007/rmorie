@@ -19,3 +19,11 @@ morie_alammar_augmented_sbert
 A list with \code{n_silver}, \code{n_gold}, \code{silver_labels}, \code{cross_encoder_gold_agreement}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+b <- morie_alammar_bag_of_words(c("a", "b", "a", "z"), c("a", 
+    "b", "c"))
+morie_alammar_augmented_sbert(list(c("x", "x"), c("x", "y")), 
+    function(a, b) if (a == b) 1 else 0, gold_pairs = list(c("p", 
+        "p"), c("p", "q"), c("r", "r"), c("r", "s")), gold_labels = c(1, 
+        0, 1, 0))
+}

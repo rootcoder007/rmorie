@@ -20,3 +20,6 @@ A step of the dist_native implementation. Called by \code{Qf}. See the file head
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+Pf(4.26, 3, 10)
+}

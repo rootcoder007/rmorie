@@ -18,3 +18,9 @@ means is optimal only for equal priors AND equal variances, so the error-minimiz
 A list with \code{w}, \code{threshold}, \code{midpoint_threshold}, \code{classes}, \code{first_class_is_above}, \code{training_errors}, \code{midpoint_errors}, \code{training_accuracy}, \code{n}, \code{projected}, \code{midpoint_optimal_only_for_equal_priors_and_spread}, \code{resubstitution_error_is_optimistic}, \code{method}.
 }
 \keyword{internal}
+\examples{
+XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3, 
+    2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
+YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
+LinDSep(XC, YC)
+}

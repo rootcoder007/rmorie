@@ -18,3 +18,6 @@ morie_kamath_moe_topk_gating
 A list with \code{weights}, \code{selected_experts}, \code{n_active}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_moe_topk_gating(1, rbind(c(3, 1, 2, 0.5)), k = 2)
+}

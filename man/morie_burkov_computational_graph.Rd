@@ -18,3 +18,12 @@ morie_burkov_computational_graph(graph, inputs)
 A list with \code{output}, \code{estimate}, \code{gradients}, \code{values}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+g <- list(list(name = "wx", op = "mul", args = c("w", "x")), 
+    list(name = "z", op = "add", args = c("wx", "b")), list(name = "a", 
+        op = "sigmoid", args = "z"), list(name = "d", op = "sub", 
+        args = c("a", "y")), list(name = "loss", op = "square", 
+        args = "d"))
+inputs <- list(w = 0.7, x = 1.3, b = -0.2, y = 1)
+morie_burkov_computational_graph(g, inputs)
+}

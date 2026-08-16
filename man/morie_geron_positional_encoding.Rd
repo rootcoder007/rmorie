@@ -23,3 +23,6 @@ PE[p, 2i] = sin(p / base^(2i/d)), PE[p, 2i+1] = cos(...). The
 a fixed rotation of PE(p) -- the property that lets the encoding
 extrapolate past the training length. It should be ~1e-16.
 }
+\examples{
+morie_geron_positional_encoding(c(0, 1, 2, 7), 6)
+}

@@ -29,3 +29,7 @@ List with \code{estimate}, \code{per_expert}, \code{imbalance_ratio}.
 \description{
 alpha * N * sum f_i P_i; equals alpha under perfect balance.
 }
+\examples{
+morie_kamath_moe_load_balance_loss(c(0.7, 0.3), c(0.6, 0.4), 
+    2, 0.01)
+}

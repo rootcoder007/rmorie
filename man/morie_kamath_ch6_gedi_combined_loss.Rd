@@ -17,3 +17,6 @@ List with \code{estimate}, \code{contributions}.
 \description{
 lam L_g + (1 - lam) L_d, a convex combination, so lam is confined to [0, 1].
 }
+\examples{
+morie_kamath_ch6_gedi_combined_loss(2, 4, 0.25)
+}

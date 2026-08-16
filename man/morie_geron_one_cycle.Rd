@@ -21,3 +21,6 @@ List with lr, momentum, lr_schedule, momentum_schedule, peak_step, phase, estima
 \description{
 1cycle learning-rate policy (Geron Ch 11, morie.fn hml1c)
 }
+\examples{
+morie_geron_one_cycle(t = 0, T = 5, lr_max = 0.5, lr_min = 0.1)
+}

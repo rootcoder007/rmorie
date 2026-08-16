@@ -33,3 +33,6 @@ km100 import km101's \verb{_scores}/\verb{_flags}: km099 ->
 toxic generation), km101 -> \code{morie_kamath_ch6_toxic_fraction} (share of
 generations at or above the threshold). \code{argmax_index} is 0-BASED.
 }
+\examples{
+morie_kamath_ch6_emt_metric(c("a", "b", "c"), c(0.1, 0.9, 0.4))
+}

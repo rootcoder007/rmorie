@@ -18,3 +18,6 @@ capability to DETECT and says nothing about false alarms -- a test calling every
 A list with \code{sensitivity}, \code{tpf}, \code{fnf}, \code{n_diseased}, \code{tp}, \code{fn}, \code{says_nothing_about_false_alarms}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Sens(45, 5)
+}

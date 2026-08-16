@@ -22,3 +22,6 @@ eta_t = eta0 / (t + t0). The Robbins-Monro partial sums over
 0..max(t) are returned so the divergence of sum eta and the
 convergence of sum eta^2 can be checked directly.
 }
+\examples{
+morie_geron_learning_rate_schedule(c(0, 1, 4), 1, 2)
+}

@@ -23,3 +23,7 @@ List with mean, var, std, sem, samples, predictive_entropy, estimate, n, method.
 \description{
 Masks via the shared LCG stream, not numpy PCG64.
 }
+\examples{
+f <- function(z) sum(z)
+morie_geron_mc_dropout(f, c(1, 2, 3), K = 10, p = 0)
+}

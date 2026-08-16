@@ -18,3 +18,7 @@ Sliding-window causal attention (Beltagy et al. 2020)
 A list with \code{output}, \code{attention}, \code{window}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+X <- matrix(stats::rnorm(6), 3, 2)
+morie_alammar_sliding_window_attention(X, X, X, 2)
+}

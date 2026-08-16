@@ -29,3 +29,9 @@ List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty},
 \description{
 J = MSE + 2 r alpha L1 + (1-r)(alpha/m) L2.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+th <- c(0.5, 1.1)
+morie_geron_ch4_elastic_net_cost_function(X, y, th, 0.4, 0.6)
+}

@@ -16,3 +16,6 @@ TRUE or FALSE.
 Anything with magnitude above 2^53 is not, and converting it silently
 loses low-order digits.
 }
+\examples{
+morie_big_fits_double("9007199254740992")
+}
