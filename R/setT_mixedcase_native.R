@@ -107,3 +107,9 @@ morie_setT_set_transformer <- function(X = NULL, k = NULL, S = NULL,
 
 # house entry point: the package exports one morie_<module>
 morie_setT <- morie_setT_setT
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+Sett <- morie_setT

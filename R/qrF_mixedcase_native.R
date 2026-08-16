@@ -33,3 +33,9 @@ morie_qrF <- function(y_true, y_pred, theta = 0.5) {
     method = "quantile/pinball loss (Koenker-Bassett 1978)"
   )
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_qrf <- morie_qrF

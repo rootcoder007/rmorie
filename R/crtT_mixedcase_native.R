@@ -63,3 +63,9 @@ morie_crtT <- crtT
 crtT_cheatsheet <- function() {
   "crtT: fold pairs via x + (b-x)*c*m with cm+dn=1 (ext. Euclid)"
 }
+
+# The 2026-08-11 arm of this module was a second
+# implementation of the same paper; it has been removed and
+# its exported name kept as an alias. The formals were
+# identical, so this is exact and the man page still applies.
+morie_crtt <- morie_crtT
