@@ -17,3 +17,7 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}, \c
 A vector, from \code{rev}.
 }
 \keyword{internal}
+\examples{
+segs <- list(c(0L, 0L, 4L, 5L), c(5L, 6L, 3L, 3L), c(2L, 1L, 2L, 4L))
+arrange_segments(segs)
+}

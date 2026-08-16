@@ -18,3 +18,7 @@ A step of the chronos_native implementation. No other function in the package ca
 A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}, \code{caveat}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+quantile_bins(rnorm(500), n_bins = 16L)
+}

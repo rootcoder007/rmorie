@@ -18,3 +18,9 @@ A step of the mafft_native implementation. No other function in the package call
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+r <- morie_mafft("guide_tree",
+                 sixtuple_distance(c("MKVLATLLPLAA", "MKVLATLLPLAG",
+                                     "MRVLATGLPLAA")))
+str(r, max.level = 1)
+}

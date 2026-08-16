@@ -25,3 +25,12 @@ Native R arm of \code{morie.fn.awltrn}. Dispatches to \code{fit_stages} when \co
 A named list; see \code{fit_aol} and \code{fit_stages}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+n <- 40
+H <- matrix(rnorm(n * 2), n, 2)
+A <- sample(c(-1, 1), n, replace = TRUE)
+R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+r <- morie_awltrn(R, A, H, method = "aol")
+str(r, max.level = 1)
+}

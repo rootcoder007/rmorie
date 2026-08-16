@@ -29,3 +29,8 @@ A step of the mafft_native implementation. Called by \code{morie_mafft}. See the
 A list with \code{estimate}, \code{alignment}, \code{score}, \code{method}, \code{seq_type}, \code{length}, \code{n}, \code{s_a}, \code{s_op}, \code{matrix_mode}, \code{tree}, \code{refine_rounds}, \code{note}.
 }
 \keyword{internal}
+\examples{
+r <- mafft_alignment(c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA"),
+                     method = "FFT-NS-2")
+str(r, max.level = 1)
+}

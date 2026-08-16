@@ -17,3 +17,7 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}, \c
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+seqs <- c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA")
+guide_tree(sixtuple_distance(seqs))
+}

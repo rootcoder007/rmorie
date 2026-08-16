@@ -23,3 +23,8 @@ A step of the mafft_native implementation. Called by \code{mafft_alignment}, \co
 A vector, from \code{unlist}.
 }
 \keyword{internal}
+\examples{
+sc <- normalized_similarity_matrix(seq_type = "aa")
+progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA"),
+                  sc, use_fft = FALSE)
+}

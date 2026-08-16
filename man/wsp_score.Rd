@@ -20,3 +20,9 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}, \c
 The value of \code{total}, as built in the body.
 }
 \keyword{internal}
+\examples{
+sc <- normalized_similarity_matrix(seq_type = "aa")
+aln <- progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG",
+                           "MRVLATGLPLAA"), sc, use_fft = FALSE)
+wsp_score(aln, sc)
+}

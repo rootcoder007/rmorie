@@ -18,3 +18,8 @@ A step of the chronos_native implementation. Called by \code{tokenize}. See the 
 A list with \code{tokens}, \code{n_clipped}, \code{clipped_fraction}, \code{in_range}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+b <- uniform_bins(-3, 3, n_bins = 16L)
+quantize(c(-2.5, 0, 1.7), b)
+}

@@ -24,3 +24,10 @@ A step of the mafft_native implementation. Called by \code{mafft_alignment}, \co
 A list with \code{aln}, \code{score}, \code{rounds}.
 }
 \keyword{internal}
+\examples{
+sc <- normalized_similarity_matrix(seq_type = "aa")
+aln <- progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG",
+                           "MRVLATGLPLAA"), sc, use_fft = FALSE)
+r <- iterative_refine(aln, sc, max_iterate = 2L)
+str(r, max.level = 1)
+}
