@@ -269,12 +269,16 @@
 #' @param C A matrix; indexed by row and column.
 #' @return A list with \code{flow}, \code{u}, \code{v}.
 #' @export
-.morie_km2_transport <- function(a, b, C) {
+.morie_km2_transport <- function(a, b, C, max_iter = 10000L) {
   m <- length(a); n <- length(b)
   Fm <- matrix(0, m, n)
   supply <- as.numeric(a); demand <- as.numeric(b)
   tol <- 1e-12
+  # The worst-case augmentation count for this algorithm; the
+  # caller's cap is honoured but cannot fall below it, or large-but-
+  # solvable problems would be refused as divergent.
   guard <- (m + 1) * (n + 1) + m + n + 10
+  guard <- max(guard, as.integer(max_iter))
   ok <- FALSE
   for (g in seq_len(guard)) {
     if (sum(supply) <= tol) { ok <- TRUE; break }
@@ -5080,7 +5084,8 @@ morie_kamath_moverscore <- function(hypothesis_embeddings,
 #' @export
 morie_kamath_word_movers_distance <- function(cost, p, q, max_iter = 10000) {
   C <- as.matrix(cost)
-  sum(C * .morie_km2_transport(as.numeric(p), as.numeric(q), C)$flow)
+  sum(C * .morie_km2_transport(as.numeric(p), as.numeric(q), C,
+                               max_iter = max_iter)$flow)
 }
 
 #' NF4 equal-mass normal quantile grid (Kamath Ch 4)
