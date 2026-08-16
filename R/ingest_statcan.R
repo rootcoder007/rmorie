@@ -268,7 +268,7 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
   if (is.na(periods) || periods < 1L) {
     stop("`periods` must be a positive integer.", call. = FALSE)
   }
-  body <- jsonlite::toJSON(
+  body <- .s03json_toJSON(
     data.frame(vectorId = ids, latestN = periods),
     auto_unbox = TRUE
   )
@@ -283,7 +283,7 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
     stop("StatCan WDS vector request failed (HTTP ",
          resp$status_code, ").", call. = FALSE)
   }
-  parsed <- jsonlite::fromJSON(resp$body, simplifyVector = FALSE)
+  parsed <- .s03json_fromJSON(resp$body, simplifyVector = FALSE)
   rows <- lapply(parsed, function(el) {
     if (!identical(el$status, "SUCCESS")) return(NULL)
     ob <- el$object

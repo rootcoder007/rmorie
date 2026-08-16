@@ -23,7 +23,7 @@
 #'
 #' @param txt A single JSON string (or raw vector).
 #' @param simplify Simplify arrays to vectors / data frames
-#'   (default TRUE, mirroring \code{jsonlite::fromJSON}).
+#'   (default TRUE, mirroring \code{.s03json_fromJSON}).
 #' @return The parsed R object.
 #' @examples
 #' morie_fetch_json('{"a": [1, 2, 3], "b": "x"}')
@@ -368,7 +368,7 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
 #' @noRd
 .morie_from_json <- function(txt, ...) {
   if (requireNamespace("jsonlite", quietly = TRUE)) {
-    return(jsonlite::fromJSON(txt, ...))
+    return(.s03json_fromJSON(txt, ...))
   }
   args <- list(...)
   simplify <- !isFALSE(args$simplifyVector)
@@ -379,11 +379,11 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
   morie_fetch_json(txt, simplify = simplify)
 }
 
-#' Internal shim: prefer jsonlite::toJSON, fall back to native
+#' Internal shim: prefer .s03json_toJSON, fall back to native
 #' @noRd
 .morie_to_json <- function(x, ...) {
   if (requireNamespace("jsonlite", quietly = TRUE)) {
-    return(jsonlite::toJSON(x, ...))
+    return(.s03json_toJSON(x, ...))
   }
   morie_json_stringify(x)
 }

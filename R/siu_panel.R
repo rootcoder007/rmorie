@@ -206,7 +206,7 @@ morie_siu_panel <- function(html,
   parse_one <- function(txt) {
     m <- regmatches(txt, regexpr("\\{[\\s\\S]*\\}", txt, perl = TRUE))
     if (!length(m)) return(NULL)
-    tryCatch(jsonlite::fromJSON(m[[1L]]), error = function(e) NULL)
+    tryCatch(.s03json_fromJSON(m[[1L]]), error = function(e) NULL)
   }
   if (is.list(raw)) {
     for (fn in intersect(names(raw), field_names)) {
