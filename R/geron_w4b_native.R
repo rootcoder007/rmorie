@@ -1199,10 +1199,23 @@ morie_geron_knowledge_distillation <- function(teacher, student, X = NULL, y = N
   .morie_gr_need(is.finite(temp) && temp > 0, "geron_knowledge_distillation: T must be positive and finite")
   a <- as.numeric(alpha)
   .morie_gr_need(a >= 0 && a <= 1, "geron_knowledge_distillation: alpha must lie in [0, 1]")
-  tl <- as.matrix(teacher)
-  storage.mode(tl) <- "double"
-  sl <- as.matrix(student)
-  storage.mode(sl) <- "double"
+  # A model may be handed over as logits already computed, or as a
+  # function to evaluate at X. The second is what X is for, and
+  # refusing a callable outright made the argument dead.
+  as_logits <- function(obj, name) {
+    if (is.function(obj)) {
+      if (is.null(X)) {
+        stop("geron_knowledge_distillation: ", name, " is a function ",
+             "but X was not supplied to evaluate it on.", call. = FALSE)
+      }
+      obj <- obj(X)
+    }
+    m <- as.matrix(obj)
+    storage.mode(m) <- "double"
+    m
+  }
+  tl <- as_logits(teacher, "teacher")
+  sl <- as_logits(student, "student")
   .morie_gr_need(all(dim(tl) == dim(sl)), "geron_knowledge_distillation: teacher/student shape mismatch")
   m <- nrow(tl)
   C <- ncol(tl)

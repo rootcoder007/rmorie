@@ -39,6 +39,17 @@ morie_deep_learning_genomic <- function(x, y, markers, hidden = 16,
   M_sd <- apply(M, 2, stats::sd)
   M_sd[M_sd == 0] <- 1
   Ms <- sweep(sweep(M, 2, M_mu), 2, M_sd, "/")
+  # The fixed-effect block: covariates that enter the prediction
+  # linearly, alongside the network on the markers. Dropping it, as
+  # this function used to, pushes their effect into the marker weights.
+  Xa <- if (is.null(x)) matrix(0, n, 0) else as.matrix(x)
+  if (length(Xa) && is.null(dim(x))) Xa <- matrix(as.numeric(x), ncol = 1)
+  if (ncol(Xa) && nrow(Xa) != n) {
+    stop("dlgen: `x` has ", nrow(Xa), " rows; expected ", n, ".",
+         call. = FALSE)
+  }
+  q <- ncol(Xa)
+  gamma <- numeric(q)
   W1 <- matrix(stats::rnorm(m * hidden, 0, 1 / sqrt(m)), m, hidden)
   b1 <- rep(0, hidden)
   w2 <- stats::rnorm(hidden, 0, 1 / sqrt(hidden))
@@ -47,7 +58,8 @@ morie_deep_learning_genomic <- function(x, y, markers, hidden = 16,
   for (ep in seq_len(n_epochs)) {
     z1 <- sweep(Ms %*% W1, 2, b1, "+")
     h <- tanh(z1)
-    y_hat <- as.numeric(h %*% w2) + b2
+    y_hat <- as.numeric(h %*% w2) + b2 +
+      (if (q) as.numeric(Xa %*% gamma) else 0)
     resid <- y_hat - y
     dy <- resid / n
     dw2 <- as.numeric(crossprod(h, dy)) + l2 * w2
@@ -60,11 +72,13 @@ morie_deep_learning_genomic <- function(x, y, markers, hidden = 16,
     b1 <- b1 - lr * db1
     w2 <- w2 - lr * dw2
     b2 <- b2 - lr * db2
+    if (q) gamma <- gamma - lr * as.numeric(crossprod(Xa, dy))
     losses[ep] <- mean(resid^2)
   }
   z1 <- sweep(Ms %*% W1, 2, b1, "+")
   h <- tanh(z1)
-  y_hat <- as.numeric(h %*% w2) + b2
+  y_hat <- as.numeric(h %*% w2) + b2 +
+    (if (q) as.numeric(Xa %*% gamma) else 0)
   resid <- y - y_hat
   list(
     estimate = mean(y_hat), y_hat = y_hat, beta = numeric(0),
