@@ -57,9 +57,29 @@
                                         n_neighbors = 1L,
                                         caliper = NULL,
                                         replace = FALSE,
-                                        alpha = 0.05) {
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  lp <- .morie_match_ps_logit(df, treatment, covariates)
+                                        alpha = 0.05,
+                                        ps = NULL) {
+  keep <- stats::complete.cases(data[, c(treatment, covariates),
+                                     drop = FALSE])
+  df <- data[keep, , drop = FALSE]
+  # A supplied score replaces the fit; it is aligned to the rows that
+  # survived the NA drop, by name when named and by position when it is
+  # already one per retained row.
+  lp <- if (is.null(ps)) {
+    .morie_match_ps_logit(df, treatment, covariates)
+  } else {
+    p <- as.numeric(ps)
+    if (!is.null(names(ps)) && all(rownames(df) %in% names(ps))) {
+      p <- unname(p[match(rownames(df), names(ps))])
+    } else if (length(p) == length(keep)) {
+      p <- p[keep]
+    } else if (length(p) != nrow(df)) {
+      stop("`ps` has length ", length(p), "; expected ", length(keep),
+           " (one per row of `data`) or ", nrow(df),
+           " (one per retained row).", call. = FALSE)
+    }
+    .morie_matching_logit(p)
+  }
   tr <- df[[treatment]] == 1
   idx_t <- which(tr)
   idx_c <- which(!tr)
