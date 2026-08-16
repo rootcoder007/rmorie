@@ -1,0 +1,16 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{Kwalt}
+\alias{Kwalt}
+\title{Kruskal-Wallis defining form -- eqs. (10.4.2)/(10.4.7), pp. 354, 357}
+\usage{
+Kwalt(rank_sums, ns)
+}
+\description{
+Kruskal-Wallis defining form -- eqs. (10.4.2)/(10.4.7), pp. 354, 357
+}
+\value{
+A list with \code{statistic}, \code{h_computing}, \code{resid}, \code{df}, \code{k}, \code{n}.
+}
+\keyword{internal}
