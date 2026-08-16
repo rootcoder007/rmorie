@@ -499,232 +499,32 @@
        ey1 = lo + rng * m1, ey0 = lo + rng * m0, scale = rng, shift = lo)
 }
 # ---------------------------------------------------------------- JSON
-# Native JSON, so the package does not call out for it. RFC 8259.
+# The four functions the package calls, over the full mapping in
+# jsonlt_native.R. That file is the implementation and the place to read
+# about the options; these are the historical entry points.
 #
-# jsonlite was the last runtime dependency doing real work in the R arms,
-# which contradicted the package's own claim that nothing else is called at
-# runtime. These cover the whole surface that was in use: parse, serialise,
-# write, and newline-delimited streams.
+# The defaults here are the ones the call sites were written against and
+# differ from jsonlite's in two places on purpose. NULL serialises as
+# null, not as {}. And an array of objects parses back as a list, not as
+# a data.frame -- jsonlite simplifies by default, but 28 call sites here
+# index the result as a list and simplification would silently change
+# what they read.
 #
-# Two jsonlite behaviours are deliberately reproduced because call sites
-# rely on them: a length-one vector serialises as a bare scalar when
-# auto_unbox is TRUE, and a data.frame serialises row-wise as an array of
-# objects. Two are deliberately NOT: no digits rounding by default (the
-# full double is written, since silently shortening numbers is how parity
-# gets lost), and no factor coercion.
+# digits: NULL keeps every significant digit, which is the only choice
+# that round-trips a double. A number rounds to that many DECIMAL places,
+# reproducing jsonlite::toJSON exactly -- pass digits = 4 for its default.
 
-.s03json_esc <- function(s) {
-  s <- gsub("\\\\", "\\\\\\\\", s)
-  s <- gsub("\"", "\\\\\"", s)
-  s <- gsub("\b", "\\\\b", s, fixed = TRUE)
-  s <- gsub("\f", "\\\\f", s, fixed = TRUE)
-  s <- gsub("\n", "\\\\n", s, fixed = TRUE)
-  s <- gsub("\r", "\\\\r", s, fixed = TRUE)
-  s <- gsub("\t", "\\\\t", s, fixed = TRUE)
-  # control characters must be \u escaped, not passed through
-  # from 1, not 0: R strings cannot contain NUL, so rawToChar(as.raw(0))
-  # is the empty string and gsub rejects a zero-length pattern
-  for (cc in c(1:7, 11, 14:31)) {
-    ch <- rawToChar(as.raw(cc))
-    if (grepl(ch, s, fixed = TRUE))
-      s <- gsub(ch, sprintf("\\\\u%04x", cc), s, fixed = TRUE)
-  }
-  s
-}
-
-.s03json_num <- function(x, digits = NULL) {
-  if (is.na(x)) return("null")
-  if (is.infinite(x)) return(if (x > 0) "1e999" else "-1e999")
-  if (!is.null(digits)) x <- round(x, as.integer(digits))
-  if (x == as.integer(round(x)) && abs(x) < 2147483647)
-    return(format(as.integer(round(x))))
-  if (!is.null(digits))
-    return(format(x, nsmall = 0L, scientific = FALSE, trim = TRUE))
-  # 17 significant digits round-trips a double exactly, which is what the
-  # default has to be: parity is checked on the written value, and a
-  # shortened number that still LOOKS right is the worst kind of wrong.
-  format(x, digits = 17, scientific = FALSE, trim = TRUE)
-}
-
-.s03json_write_value <- function(x, auto_unbox = TRUE, digits = NULL) {
-  if (is.null(x)) return("null")
-  if (is.data.frame(x)) {
-    rows <- vapply(seq_len(nrow(x)), function(i) {
-      parts <- vapply(names(x), function(nm)
-        paste0("\"", .s03json_esc(nm), "\":",
-               .s03json_write_value(x[[nm]][i], TRUE, digits)), character(1))
-      paste0("{", paste(parts, collapse = ","), "}")
-    }, character(1))
-    return(paste0("[", paste(rows, collapse = ","), "]"))
-  }
-  if (is.list(x)) {
-    nm <- names(x)
-    if (!is.null(nm) && all(nzchar(nm))) {
-      parts <- vapply(seq_along(x), function(i)
-        paste0("\"", .s03json_esc(nm[i]), "\":",
-               .s03json_write_value(x[[i]], auto_unbox, digits)), character(1))
-      return(paste0("{", paste(parts, collapse = ","), "}"))
-    }
-    parts <- vapply(x, function(v) .s03json_write_value(v, auto_unbox, digits),
-                    character(1))
-    return(paste0("[", paste(parts, collapse = ","), "]"))
-  }
-  if (is.matrix(x)) {
-    rows <- vapply(seq_len(nrow(x)), function(i)
-      .s03json_write_value(as.vector(x[i, ]), FALSE, digits), character(1))
-    return(paste0("[", paste(rows, collapse = ","), "]"))
-  }
-  n <- length(x)
-  one <- function(v) {
-    if (is.na(v)) return("null")
-    if (is.logical(v)) return(if (v) "true" else "false")
-    if (is.numeric(v)) return(.s03json_num(as.numeric(v), digits))
-    paste0("\"", .s03json_esc(as.character(v)), "\"")
-  }
-  if (n == 1L && auto_unbox) return(one(x))
-  paste0("[", paste(vapply(seq_len(n), function(i) one(x[i]), character(1)),
-                    collapse = ","), "]")
-}
-
-# Indent a compact JSON string. Structural braces/brackets and commas only
-# -- anything inside a string literal is copied through untouched, so a
-# comma in a value never becomes a line break.
-.s03json_pretty <- function(txt, indent = 2L) {
-  ch <- strsplit(txt, "", fixed = TRUE)[[1]]
-  out <- character(0); depth <- 0L; instr <- FALSE; esc <- FALSE
-  pad <- function(d) paste(rep(" ", d * indent), collapse = "")
-  for (c0 in ch) {
-    if (instr) {
-      out <- c(out, c0)
-      if (esc) esc <- FALSE
-      else if (c0 == "\\") esc <- TRUE
-      else if (c0 == "\"") instr <- FALSE
-      next
-    }
-    if (c0 == "\"") { instr <- TRUE; out <- c(out, c0); next }
-    if (c0 == "{" || c0 == "[") {
-      depth <- depth + 1L
-      out <- c(out, c0, "\n", pad(depth))
-    } else if (c0 == "}" || c0 == "]") {
-      depth <- depth - 1L
-      out <- c(out, "\n", pad(depth), c0)
-    } else if (c0 == ",") {
-      out <- c(out, ",", "\n", pad(depth))
-    } else if (c0 == ":") {
-      out <- c(out, ": ")
-    } else out <- c(out, c0)
-  }
-  paste(out, collapse = "")
-}
-
-# digits: NULL keeps every significant digit (the default, and the only
-# choice that round-trips a double). A number rounds to that many DECIMAL
-# places, which is what jsonlite::toJSON does -- pass digits = 4 to
-# reproduce its default exactly.
 .s03json_toJSON <- function(x, auto_unbox = TRUE, digits = NULL,
-                            pretty = FALSE, ...) {
-  s <- .s03json_write_value(x, auto_unbox, digits)
-  if (isTRUE(pretty)) .s03json_pretty(s) else s
-}
+                            pretty = FALSE, ...)
+  morie_jsonlt_to_json(x, pretty = pretty, auto_unbox = auto_unbox,
+                       digits = digits, na = "null", null = "null", ...)
 
-# ---- parser: recursive descent over the character vector
-.s03json_parse <- function(txt) {
-  s <- paste(txt, collapse = "\n")
-  ch <- strsplit(s, "", fixed = TRUE)[[1]]
-  n <- length(ch)
-  i <- 1L
+.s03json_pretty <- function(txt, indent = 2L)
+  morie_jsonlt_prettify(txt, indent)
 
-  skip <- function() {
-    while (i <= n && (ch[i] == " " || ch[i] == "\t" || ch[i] == "\n" ||
-                      ch[i] == "\r")) i <<- i + 1L
-  }
-  value <- NULL
-
-  str_ <- function() {
-    i <<- i + 1L                       # opening quote
-    out <- character(0)
-    while (i <= n && ch[i] != "\"") {
-      if (ch[i] == "\\") {
-        i <<- i + 1L
-        e <- ch[i]
-        out <- c(out,
-                 if (e == "n") "\n" else if (e == "t") "\t"
-                 else if (e == "r") "\r" else if (e == "b") "\b"
-                 else if (e == "f") "\f"
-                 else if (e == "u") {
-                   hex <- paste(ch[(i + 1L):(i + 4L)], collapse = "")
-                   i <<- i + 4L
-                   intToUtf8(strtoi(hex, 16L))
-                 } else e)
-      } else out <- c(out, ch[i])
-      i <<- i + 1L
-    }
-    i <<- i + 1L                       # closing quote
-    paste(out, collapse = "")
-  }
-
-  num_ <- function() {
-    st <- i
-    while (i <= n && (grepl("[0-9+.eE-]", ch[i]))) i <<- i + 1L
-    as.numeric(paste(ch[st:(i - 1L)], collapse = ""))
-  }
-
-  value <- function() {
-    skip()
-    if (i > n) return(NULL)
-    c0 <- ch[i]
-    if (c0 == "{") {
-      i <<- i + 1L
-      out <- list()
-      skip()
-      if (i <= n && ch[i] == "}") { i <<- i + 1L; return(out) }
-      repeat {
-        skip()
-        key <- str_()
-        skip()
-        i <<- i + 1L                   # colon
-        out[[key]] <- value()
-        skip()
-        if (i <= n && ch[i] == ",") { i <<- i + 1L; next }
-        if (i <= n && ch[i] == "}") { i <<- i + 1L; break }
-        break
-      }
-      return(out)
-    }
-    if (c0 == "[") {
-      i <<- i + 1L
-      out <- list()
-      skip()
-      if (i <= n && ch[i] == "]") { i <<- i + 1L; return(out) }
-      repeat {
-        out[[length(out) + 1L]] <- value()
-        skip()
-        if (i <= n && ch[i] == ",") { i <<- i + 1L; next }
-        if (i <= n && ch[i] == "]") { i <<- i + 1L; break }
-        break
-      }
-      # simplify a flat array of one atomic type, as jsonlite does
-      if (length(out) && all(vapply(out, function(v)
-          is.atomic(v) && length(v) == 1L, logical(1))))
-        return(unlist(out))
-      return(out)
-    }
-    if (c0 == "\"") return(str_())
-    if (substr(s, i, i + 3L) == "true") { i <<- i + 4L; return(TRUE) }
-    if (substr(s, i, i + 4L) == "false") { i <<- i + 5L; return(FALSE) }
-    if (substr(s, i, i + 3L) == "null") { i <<- i + 4L; return(NULL) }
-    num_()
-  }
-
-  value()
-}
-
-.s03json_fromJSON <- function(txt, ...) {
-  if (length(txt) == 1L && !grepl("[{\\[]", substr(txt, 1L, 1L)) &&
-      file.exists(txt))
-    txt <- readLines(txt, warn = FALSE)
-  .s03json_parse(txt)
-}
+.s03json_fromJSON <- function(txt, ...)
+  morie_jsonlt_from_json(txt, simplifyDataFrame = FALSE,
+                         simplifyMatrix = FALSE)
 
 .s03json_write <- function(x, path, auto_unbox = TRUE, digits = NULL,
                            pretty = FALSE, ...) {
@@ -734,8 +534,7 @@
 
 # newline-delimited JSON: one object per line
 .s03json_stream_in <- function(con, ...) {
-  lines <- if (inherits(con, "connection")) readLines(con, warn = FALSE)
-           else readLines(con, warn = FALSE)
+  lines <- readLines(con, warn = FALSE)
   lines <- lines[nzchar(trimws(lines))]
-  lapply(lines, .s03json_parse)
+  lapply(lines, .s03json_fromJSON)
 }
