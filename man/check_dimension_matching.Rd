@@ -18,3 +18,16 @@ A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_m
 The value of \code{by_pair}, as built in the body.
 }
 \keyword{internal}
+\examples{
+models <- list(m1 = list(dim = 1L, logpost = function(th) -sum(th^2)),
+               m2 = list(dim = 2L, logpost = function(th) -sum(th^2)))
+moves <- list(
+  list(frm = "m1", to = "m2", n_u = 1L, n_u_rev = 0L,
+       propose = function(theta, uni) qnorm(uni()),
+       transform = function(theta, u) list(c(theta, u), numeric(0))),
+  list(frm = "m2", to = "m1", n_u = 0L, n_u_rev = 1L,
+       propose = function(theta, uni) numeric(0),
+       transform = function(theta, u) list(theta[1], theta[2]))
+)
+names(check_dimension_matching(models, moves))
+}

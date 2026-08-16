@@ -65,14 +65,16 @@
   for (col in 1:n) {
     piv <- col
     best <- abs(m[col, col])
-    for (r in (col + 1):n) {
+    # seq_len, not (col+1):n -- the colon counts DOWN on the last
+    # column and indexes row n+1
+    for (r in seq_len(n - col) + col) {
       v <- abs(m[r, col])
       if (v > best) { best <- v; piv <- r }
     }
     if (best < 1e-300) return(-Inf)
     if (piv != col) { tmp <- m[col, ]; m[col, ] <- m[piv, ]; m[piv, ] <- tmp }
     total <- total + log(abs(m[col, col]))
-    for (r in (col + 1):n) {
+    for (r in seq_len(n - col) + col) {
       f <- m[r, col] / m[col, col]
       if (f == 0) next
       m[r, (col):n] <- m[r, (col):n] - f * m[col, (col):n]
@@ -285,8 +287,8 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
     opts <- list(list(kind = "within", mv = NULL, w = within_weight))
     for (mv in moves) if (mv$frm == name) {
       opts[[length(opts) + 1L]] <- list(kind = "jump", mv = mv,
-                                       w = if (is.null(mv$weight)) move_weight
-                                           else mv$weight)
+                                       w = if (is.null(mv[["weight"]])) move_weight
+                                           else mv[["weight"]])
     }
     tot <- sum(sapply(opts, function(o) o$w))
     if (tot <= 0)
@@ -334,7 +336,7 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
       }
     } else {
       mv <- chosen$mv
-      label <- if (is.null(mv$name)) paste(mv$frm, mv$to, sep = "->") else mv$name
+      label <- if (is.null(mv[["name"]])) paste(mv$frm, mv$to, sep = "->") else mv[["name"]]
       tried[[label]] <- if (is.null(tried[[label]])) 1L else tried[[label]] + 1L
       u <- as.numeric(mv$propose(theta, uni))
       if (length(u) != as.integer(mv$n_u))
@@ -351,8 +353,8 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
                            "the move declares n_u_rev = %d"),
                      label, length(theta2), length(u2), dim2,
                      as.integer(mv$n_u_rev)))
-      if (jacobian == "numeric" || is.null(mv$logjac)) {
-        if (jacobian == "analytic" && is.null(mv$logjac)) {
+      if (jacobian == "numeric" || is.null(mv[["logjac"]])) {
+        if (jacobian == "analytic" && is.null(mv[["logjac"]])) {
           logjac <- 0
         } else {
           n_from <- length(theta)
@@ -364,16 +366,16 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
           logjac <- numeric_log_jacobian(flat, c(theta, u))
         }
       } else {
-        logjac <- as.numeric(mv$logjac(theta, u, theta2, u2))
+        logjac <- as.numeric(mv[["logjac"]](theta, u, theta2, u2))
       }
       rev <- by_pair[[paste(mv$to, mv$frm, sep = "->")]]
       opts2 <- avail[[mv$to]]$opts; tot2 <- avail[[mv$to]]$tot
-      w_rev <- if (is.null(rev$weight)) move_weight else rev$weight
+      w_rev <- if (is.null(rev[["weight"]])) move_weight else rev[["weight"]]
       log_j_from <- log(chosen$w) - log(tot)
       log_j_to <- log(w_rev) - log(tot2)
-      logq_u <- if (is.null(mv$logq)) 0 else as.numeric(mv$logq(theta, u))
-      logq_rev <- if (is.null(mv$logq_rev)) 0
-                  else as.numeric(mv$logq_rev(theta2, u2))
+      logq_u <- if (is.null(mv[["logq"]])) 0 else as.numeric(mv[["logq"]](theta, u))
+      logq_rev <- if (is.null(mv[["logq_rev"]])) 0
+                  else as.numeric(mv[["logq_rev"]](theta2, u2))
       lp_new <- as.numeric(models[[mv$to]]$logpost(theta2))
       log_alpha <- rj_log_acceptance(logp, lp_new, log_j_from, log_j_to,
                                      logq_u, logq_rev, logjac)

@@ -23,3 +23,8 @@ A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_m
 A numeric value.
 }
 \keyword{internal}
+\examples{
+rj_log_acceptance(logpost_from = -4.2, logpost_to = -3.1,
+                  log_j_from = log(0.5), log_j_to = log(0.5),
+                  logq_u = -0.9, logq_u_rev = 0, log_jacobian = 0)
+}

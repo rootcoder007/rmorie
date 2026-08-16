@@ -15,3 +15,6 @@ List with tolerance and vif.
 \description{
 Equations 3.1 and 3.2 of Weisburd et al. (2022). Mirrors ca3e1 / ca3e2.
 }
+\examples{
+morie_vif_tolerance(r2_x = 0.65)
+}

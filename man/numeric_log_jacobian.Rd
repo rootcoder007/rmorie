@@ -19,3 +19,9 @@ A step of the bayrjmcmc_native implementation. Called by \code{reversible_jump_m
 The value of \code{.logabsdet}.
 }
 \keyword{internal}
+\examples{
+j <- numeric_log_jacobian(function(z) c(z[1] + z[2], z[1] - z[2]),
+                          c(0.4, 0.2))
+stopifnot(abs(j - log(2)) < 1e-5)
+j
+}

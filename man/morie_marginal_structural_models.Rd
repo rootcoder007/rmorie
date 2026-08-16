@@ -45,3 +45,9 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+set.seed(1)
+A <- matrix(rbinom(60, 1, 0.5), 30, 2)
+y <- 1 + 0.8 * rowMeans(A) + rnorm(30, 0, 0.3)
+morie_msm_linear(y, A)
+}
