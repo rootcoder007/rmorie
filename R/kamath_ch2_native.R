@@ -418,7 +418,7 @@ morie_kamath_ffn_relu <- function(z, W_1, W_2, b_1, b_2) {
 #' @param eps Unused stabiliser kept for the signature.
 #' @export
 morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
-                                    eps = 1e-5) {
+                                    eps = 1e-12) {
   h <- as.numeric(h_i)
   if (length(h) < 2L && is.null(mu)) {
     stop("layer norm over a single element is 0/0; supply mu and sigma or a longer vector.",
@@ -431,8 +431,17 @@ morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
     stop("sigma must be positive; a constant vector cannot be layer-normalised.",
          call. = FALSE)
   }
-  out <- as.numeric(g) * (h - m) / s
-  list(output = out, normalised = (h - m) / s, mu = m, sigma = s,
+  # 1/sqrt(var + eps), as the Python arm computes it: the epsilon is
+  # the whole reason the argument exists, and dividing by s alone left
+  # a near-constant vector at the mercy of an arbitrarily small scale.
+  # A sigma the caller supplied is taken as given -- they chose that
+  # scale -- so eps enters only the derived one.
+  # from the VARIANCE, not from squaring the sd back up: sqrt then
+  # square does not round-trip, and the Python arm works from var
+  denom <- if (is.null(sigma))
+    sqrt(mean((h - m)^2) + as.numeric(eps)) else s
+  out <- as.numeric(g) * (h - m) / denom
+  list(output = out, normalised = (h - m) / denom, mu = m, sigma = s,
        estimate = out[1], n = length(h),
        method = "Layer normalisation g(h - mu)/sigma (Kamath Eq 2.18)")
 }
