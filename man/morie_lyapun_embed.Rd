@@ -19,3 +19,8 @@ A step of the lyapun_native implementation. Called by \code{divergence_curve}, \
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+y <- as.numeric(arima.sim(list(ar = 0.9), 200))
+str(morie_lyapun_embed(y, m = 3, tau = 2), max.level = 1)
+}

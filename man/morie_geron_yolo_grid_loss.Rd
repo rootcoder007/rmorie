@@ -25,3 +25,11 @@ List with \code{loss}, \code{loss_coord}, \code{loss_obj}, \code{loss_noobj},
 lam_coord (xy + sqrt-wh) + obj + lam_noobj noobj + class, every term
 but objectness masked to the cells that contain an object.
 }
+\examples{
+set.seed(5)
+P <- array(runif(2 * 2 * 6), c(2, 2, 6))
+Tg <- array(0, c(2, 2, 6))
+Tg[1, 1, ] <- c(0.5, 0.5, 0.3, 0.3, 1, 1)
+r <- morie_geron_yolo_grid_loss(P, Tg)
+str(r, max.level = 1)
+}

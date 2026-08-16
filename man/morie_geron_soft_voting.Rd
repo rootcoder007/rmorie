@@ -19,3 +19,10 @@ List with \code{y_hat} (0-based), \code{mean_probabilities},
 \description{
 y_hat = argmax of the weight-averaged class probabilities.
 }
+\examples{
+P <- array(0, c(2, 2, 2))
+P[1, , ] <- rbind(c(0.7, 0.3), c(0.6, 0.4))
+P[2, , ] <- rbind(c(0.2, 0.8), c(0.4, 0.6))
+r <- morie_geron_soft_voting(P)
+str(r, max.level = 1)
+}

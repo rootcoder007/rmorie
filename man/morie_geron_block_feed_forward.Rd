@@ -17,3 +17,10 @@ Matrix of the same shape as \code{X}.
 \description{
 Position-wise feed-forward used by the transformer blocks
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(12), 3, 4)
+r <- morie_geron_block_feed_forward(X, list(W1 = matrix(rnorm(32, 0, 0.4), 4, 8),
+                                            W2 = matrix(rnorm(32, 0, 0.4), 8, 4)))
+str(r, max.level = 1)
+}

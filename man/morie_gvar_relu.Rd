@@ -17,3 +17,6 @@ ReLU on a reverse-mode tape node
 The value of \code{.morie_gvar}.
 }
 \keyword{internal}
+\examples{
+morie_gvar_relu(.morie_gvar(-1.5))$value
+}

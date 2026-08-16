@@ -30,3 +30,8 @@ here, and its reduction to the empirical estimator without
 censoring), and the time-dependent area under the curve.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+str(morie_survroc_kaplan_meier(tt, ev), max.level = 1)
+}
