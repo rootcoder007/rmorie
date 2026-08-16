@@ -52,7 +52,28 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{lapply}.
 #' @export
+# The k.* helper names the port carried never existed in either arm;
+# these are their concrete forms.
+.informer_vec <- function(x) as.numeric(x)
+
+.informer_mat <- function(x) .informer_to_rows(x)
+
+.informer_softmax <- function(z) {
+  m <- max(z)
+  e <- exp(z - m)
+  e / sum(e)
+}
+
+.informer_logsumexp <- function(z) {
+  m <- max(z)
+  m + log(sum(exp(z - m)))
+}
+
 .informer_to_rows <- function(x) {
+  # pass a list of rows straight through: select_queries hands the
+  # sampled key subset back in as a list, and as.matrix() on a list
+  # cannot coerce
+  if (is.list(x)) return(lapply(x, as.numeric))
   M <- as.matrix(x)
   lapply(seq_len(nrow(M)), function(i) as.numeric(M[i, ]))
 }
@@ -89,7 +110,7 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
     stop(sprintf("informer: measure must be exact or maxmean, got '%s'", measure))
   }
   Km <- .informer_to_rows(K)
-  qv <- as.numeric(k.vec(q))
+  qv <- as.numeric(.informer_vec(q))
   if (length(Km) == 0L) {
     stop("informer: the key set is empty")
   }
@@ -104,7 +125,7 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
   if (measure == "maxmean") {
     return(max(z) - mean_z)
   }
-  return(k.logsumexp(z) - mean_z)
+  return(.informer_logsumexp(z) - mean_z)
 }
 
 #' morie_informer_kl_from_uniform
@@ -119,7 +140,7 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
 #' @return A numeric value.
 #' @export
 morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
-  Km <- k.mat(K)
+  Km <- .informer_mat(K)
   return(morie_informer_sparsity_measure(q, K, measure = "exact",
                                          scale = scale) - log(length(Km)))
 }
@@ -197,7 +218,7 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
   out <- vector("list", length(Qm))
   for (qi in seq_along(Qm)) {
     q <- Qm[[qi]]
-    w <- k.softmax(.informer_logits(q, Km, sc))
+    w <- .informer_softmax(.informer_logits(q, Km, sc))
     out[[qi]] <- sapply(seq_along(Vm[[1]]), function(a) {
       sum(w * sapply(seq_along(Vm), function(j) Vm[[j]][a]))
     })
@@ -243,7 +264,7 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
   })
   out <- lapply(seq_along(Qm), function(i) as.numeric(vbar))
   for (i in sel$top) {
-    w <- k.softmax(.informer_logits(Qm[[i]], Km, sc))
+    w <- .informer_softmax(.informer_logits(Qm[[i]], Km, sc))
     out[[i]] <- sapply(seq_len(dv), function(a) {
       sum(w * sapply(seq_along(Vm), function(j) Vm[[j]][a]))
     })

@@ -28,3 +28,6 @@ Distributional Reinforcement Learning", AISTATS 2018
 (arXiv:1802.08163) contraction in Cramer distance.
 }
 \keyword{internal}
+\examples{
+atoms(v_min = -10, v_max = 10, n_atoms = 5)
+}

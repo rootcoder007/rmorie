@@ -19,7 +19,10 @@
 #' @export
 S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   v <- as.numeric(std_moments); J <- length(v); ne <- as.integer(n_equality)
-  ineq <- v[seq_len(J - ne)]; eq <- v[(J - ne + 1L):J]
+  ineq <- v[seq_len(J - ne)]
+  # guard: with no equality moments the colon slice DESCENDS through
+  # v[J + 1] and poisons the statistic with NA
+  eq <- if (ne > 0L) v[(J - ne + 1L):J] else numeric(0)
   neg <- pmin(ineq, 0.0)
   s <- if (form == "sum") sum(neg * neg)
        else if (form == "max") max(c(neg * neg, 0.0))

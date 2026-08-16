@@ -18,3 +18,6 @@ One draw from Lap(0, b) by inverse transform
 A scalar.
 }
 \keyword{internal}
+\examples{
+laplace_noise(scale = 0.5, e = .ghc_rng(1))
+}

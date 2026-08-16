@@ -20,3 +20,10 @@ A step of the bnskmt_native implementation. No other function in the package cal
 A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm}, \code{argmax_instrument}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(runif(60), 30, 2)
+inst <- hypercube_instruments(X, n_levels = 2L)
+r <- compare_forms(X[, 1] - 0.4, inst)
+str(r, max.level = 1)
+}

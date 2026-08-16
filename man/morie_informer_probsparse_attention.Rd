@@ -33,3 +33,11 @@ Vaswani, A. et al. (2017) "Attention is all you need", Advances in
 Neural Information Processing Systems 30, arXiv:1706.03762.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+Q <- matrix(rnorm(32), 8, 4)
+K <- matrix(rnorm(32), 8, 4)
+V <- matrix(rnorm(32), 8, 4)
+r <- morie_informer_probsparse_attention(Q, K, V, factor = 2)
+str(r, max.level = 1)
+}

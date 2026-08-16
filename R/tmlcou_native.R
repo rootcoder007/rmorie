@@ -41,7 +41,9 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
-.tmlcou_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
+# vectorised: the scalar if() errors the moment a linear predictor
+# VECTOR arrives, which is every call site
+.tmlcou_expit <- function(x) ifelse(x > -700, 1 / (1 + exp(-x)), 0)
 
 #' Map the outcome to [0,1] by an affine transform
 #'
