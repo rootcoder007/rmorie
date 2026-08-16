@@ -24,3 +24,9 @@ Solves y equals rho W y plus xb plus e as the reduced form
 model of equation 12.3. Equations 12.3 and 12.4. Mirrors ca12e3 /
 ca12e4.
 }
+\examples{
+set.seed(5)
+W <- matrix(0, 5, 5)
+W[abs(row(W) - col(W)) == 1] <- 0.5
+morie_sar_lag(rho = 0.3, w = W, xb = rnorm(5), e = rnorm(5, 0, 0.2))
+}

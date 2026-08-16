@@ -23,3 +23,7 @@ Cumulative probability (equation 5.6), cumulative logit (5.7) and the
 two threshold parameterizations tau plus or minus Xb (5.8, 5.9).
 Mirrors ca5e6 to ca5e9.
 }
+\examples{
+morie_ordinal_logit_ca(probs = c(0.2, 0.5, 0.3), m = 2,
+                       tau_m = 1.1, xb = 0.4)
+}
