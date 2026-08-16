@@ -19,3 +19,8 @@ A step of the rangayyan_tf implementation. Called by \code{Dwt}, \code{Dwt2Tap},
 A list with \code{approx}, \code{details}, \code{lengths}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- sin(2 * pi * (1:64) / 16) + rnorm(64, 0, 0.1)
+.tf_dwt(x, wavelet = "db4", levels = 3L)
+}

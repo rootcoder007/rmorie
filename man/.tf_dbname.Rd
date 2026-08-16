@@ -17,3 +17,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_filters}, \code{W
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.tf_dbname("db4")
+}

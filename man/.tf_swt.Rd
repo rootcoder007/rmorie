@@ -19,3 +19,8 @@ A step of the rangayyan_tf implementation. Called by \code{Swt}, \code{WtVar}, \
 A list with \code{approx}, \code{details}, \code{approxes}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- sin(2 * pi * (1:64) / 16) + rnorm(64, 0, 0.1)
+.tf_swt(x, wavelet = "db4", levels = 2L)
+}

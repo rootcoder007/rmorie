@@ -18,3 +18,6 @@ A step of the geron_w4d_native implementation. Called by \code{morie_geron_symbo
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_symd_diff(list("+", list("var", "x"), list("num", 2)), var = "x")
+}

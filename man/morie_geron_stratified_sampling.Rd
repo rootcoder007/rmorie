@@ -26,3 +26,9 @@ Largest-remainder (Hamilton) allocation: floor(n_total * N_h / N) per
 stratum, leftover units to largest fractional remainders (ties to
 larger stratum); within-stratum draw via Fisher-Yates on an LCG stream.
 }
+\examples{
+set.seed(6)
+X <- matrix(rnorm(60), 30, 2)
+y <- rep(c(0L, 1L, 2L), each = 10)
+morie_geron_stratified_sampling(X, y, n_total = 12, seed = 1)
+}
