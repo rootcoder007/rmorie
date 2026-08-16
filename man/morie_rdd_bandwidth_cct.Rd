@@ -13,17 +13,14 @@ bandwidth selectors + density tests that don't take a
 
 \item{y}{Numeric vector of outcome values aligned with \code{x}.}
 
-\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
-\code{0} (the canonical normalisation).}
+\item{cutoff}{The threshold.}
 
-\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
-\code{"uniform"}, or \code{"gaussian"}.}
+\item{kernel}{One of \code{"triangular"}, \code{"epanechnikov"}, \code{"uniform"}, \code{"gaussian"}.}
 
-\item{p}{Integer; local-polynomial order (default 1 for local-
-linear). 2 picks up quadratic curvature for bias correction.}
+\item{p}{Polynomial order for the local fit.}
 }
 \value{
-A named list with elements \code{bandwidth}, \code{method}, \code{details}.
+A named list with \code{bandwidth}, \code{method} and \code{details} carrying \code{h_mse}, \code{h_cer}, \code{bias_sq} and \code{variance}.
 }
 \description{
 Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth

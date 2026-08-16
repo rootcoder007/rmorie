@@ -293,8 +293,11 @@ morie_matching_common_support <- function(data, treatment,
 #' @param caliper Maximum logit-propensity distance for a valid match,
 #'   expressed in SD units of the logit (or \code{NULL} for no caliper).
 #' @param replace If \code{TRUE}, controls may be re-used.
-#' @param ps Optional pre-computed propensity scores
-#'   (ignored; retained for back-compat).
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model: matching is done on the score you pass, aligned
+#'   to the rows that survive the NA drop -- by name when the vector is
+#'   named, by position when it is one per retained row. A mis-sized
+#'   vector is refused rather than recycled.
 #' @param alpha Significance level (carried through to \code{details}).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
@@ -730,7 +733,9 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param balance_threshold Maximum absolute SMD tolerated (default 0.1).
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model and become the matching distance directly,
+#'   aligned to the rows that survive the NA drop.
 #' @return A list of class \code{morie_match_result}.
 #' @references Zubizarreta, J. R. (2012). Using mixed integer programming for
 #'   matching in an observational study of kidney failure after surgery.
@@ -1299,7 +1304,9 @@ morie_matching_rosenbaum_bounds <- function(data, outcome, treatment,
 #' @param data Data frame.
 #' @param outcome,treatment Column names.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model and become the matching distance directly,
+#'   aligned to the rows that survive the NA drop.
 #' @param n_bootstrap Number of bootstrap replications.
 #' @param seed Random seed.
 #' @param alpha Significance level.
@@ -1584,7 +1591,9 @@ morie_matching_quality <- function(unmatched_data, matched_data,
 #' @param data Data frame.
 #' @param treatment Binary treatment column.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model and become the matching distance directly,
+#'   aligned to the rows that survive the NA drop.
 #' @return A list with \code{ps_summary} (per-group quantiles),
 #'   \code{overlap_region}, \code{n_off_support}, \code{pct_off_support},
 #'   and \code{effective_sample_size}.
