@@ -14,3 +14,7 @@ KS vs Cramer-von Mises on one sample -- Sec. 4.9, p. 146
 A list with \code{d}, \code{w2}, \code{argmax}, \code{share}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+Kscvmcmp(rnorm(30), cdf = pnorm)
+}

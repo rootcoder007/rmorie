@@ -14,3 +14,6 @@ Composite Simpson on (0, 1), fixed odd node count
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.gbSimpson(function(u) u^2, nodes = 201)
+}

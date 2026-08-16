@@ -14,3 +14,7 @@ Median-test confidence interval -- Sec. 6.4.2, p. 251
 A list with \code{lower}, \code{upper}, \code{estimate}, \code{c}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+Medtestci(rnorm(15), rnorm(15, 0.5), c = 3)
+}

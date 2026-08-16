@@ -17,3 +17,7 @@ A step of the propinf_native implementation. Called by \code{.propinf_normal}. S
 A numeric value.
 }
 \keyword{internal}
+\examples{
+e <- .propinf_rng(7L)
+c(.propinf_rng_next(e), .propinf_rng_next(e))
+}

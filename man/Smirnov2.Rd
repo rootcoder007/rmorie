@@ -14,3 +14,6 @@ Exact two-sided Smirnov distribution -- Sec. 6.3, p. 239
 A list with \code{sf}, \code{cdf}, \code{npaths}, \code{inside}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Smirnov2(d = 0.4, m = 10, n = 12)
+}

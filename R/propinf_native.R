@@ -135,16 +135,19 @@ morie_propinf_permute_hidden_layer <- function(net, t, sigma) {
   if (t < 0L || t >= length(net))
     stop("propinf: t must index a hidden layer")
   sigma <- as.integer(sigma)
-  m <- length(net[[t + 1L]]$W)
+  # rows = units of the layer; length() of a matrix counts every
+  # element, the list-of-rows leftover that broke permutation
+  m <- nrow(net[[t + 1L]]$W)
   if (!identical(sort(sigma), seq_len(m) - 1L))
     stop("propinf: sigma is not a permutation of the layer")
-  out <- lapply(net, function(L) list(W = lapply(L$W, function(r) as.numeric(r)),
-                                      b = as.numeric(L$b)))
-  out[[t + 1L]]$W <- lapply(sigma + 1L, function(s) net[[t + 1L]]$W[[s]])
+  # W is a matrix throughout: permute the layer ROWS, and the next
+  # layer COLUMNS, exactly as the internal twin does. The lapply body
+  # walked matrix elements and rebuilt W as a list of scalars.
+  out <- lapply(net, function(L) list(W = L$W, b = as.numeric(L$b)))
+  out[[t + 1L]]$W <- net[[t + 1L]]$W[sigma + 1L, , drop = FALSE]
   out[[t + 1L]]$b <- net[[t + 1L]]$b[sigma + 1L]
-  Wnext <- net[[t + 2L]]$W
-  for (i in seq_along(Wnext)) {
-    out[[t + 2L]]$W[[i]] <- Wnext[[i]][sigma + 1L]
+  if (t + 2L <= length(net)) {
+    out[[t + 2L]]$W <- net[[t + 2L]]$W[, sigma + 1L, drop = FALSE]
   }
   out
 }
@@ -181,10 +184,12 @@ morie_propinf_flat_representation <- function(net) {
 #' @export
 morie_propinf_sorted_representation <- function(net, metric = NULL) {
   if (is.null(metric)) metric <- .propinf_node_metric
-  cur <- lapply(net, function(L) list(W = lapply(L$W, function(r) as.numeric(r)),
-                                      b = as.numeric(L$b)))
+  # W stays a matrix: lapply over a matrix walks its ELEMENTS and
+  # rebuilt W as a list of scalars, and the metric indexes rows
+  # 1-based, not the 0-based counter the old loop handed it.
+  cur <- lapply(net, function(L) list(W = L$W, b = as.numeric(L$b)))
   for (t in seq_len(length(cur) - 1L) - 1L) {
-    vals <- vapply(seq_len(length(cur[[t + 1L]]$W)) - 1L,
+    vals <- vapply(seq_len(nrow(cur[[t + 1L]]$W)),
                    function(i) metric(cur[[t + 1L]], i), numeric(1))
     sigma <- order(-vals) - 1L
     cur <- .propinf_permute_hidden_layer_internal(cur, t, sigma)

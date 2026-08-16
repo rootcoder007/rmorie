@@ -14,3 +14,6 @@ Exact one-sided Smirnov distribution -- Sec. 6.3, p. 241
 A list with \code{sf}, \code{cdf}, \code{sf_asymp}, \code{k}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Smirnov1(d = 0.4, m = 10, n = 12)
+}
