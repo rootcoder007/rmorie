@@ -39,3 +39,6 @@ least precise.
 Kaplan EL, Meier P (1958) \emph{JASA} 53:457-481.
 Greenwood M (1926). Kalbfleisch & Prentice (2002), Sec 1.4.
 }
+\examples{
+morie_km_native(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
+}

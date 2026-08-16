@@ -21,3 +21,6 @@ Part of the sarimax_native implementation; see the file header for the source it
 A list with \code{beta}, \code{ssq}, \code{v}, \code{f}, \code{information}, \code{sum_log_f}.
 }
 \keyword{internal}
+\examples{
+profile_beta(wy = 5L, wX = 5L)
+}

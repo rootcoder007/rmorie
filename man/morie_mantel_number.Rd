@@ -20,3 +20,6 @@ bipartite graph. The floor matters at odd \eqn{n}.
 Mantel W (1907). Problem 28. \emph{Wiskundige Opgaven},
 10, 60-61.
 }
+\examples{
+morie_mantel_number(n = 5L)
+}

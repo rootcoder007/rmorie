@@ -25,3 +25,6 @@ never needs long division.
 100891344545564193334812497256, so the two differ from the
 thirteenth significant digit.
 }
+\examples{
+morie_big_binom(n = 5L, k = 5L)
+}

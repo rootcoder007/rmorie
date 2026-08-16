@@ -18,3 +18,6 @@ Part of the timesfm_native implementation; see the file header for the source it
 A list with \code{steps}, \code{horizon}, \code{output_patch_len}, \code{single_step}.
 }
 \keyword{internal}
+\examples{
+morie_timesfm_rollout_steps(horizon = 5L, output_patch_len = 5L)
+}

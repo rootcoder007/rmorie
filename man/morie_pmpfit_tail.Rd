@@ -19,3 +19,6 @@ Computes the expected number of clusters at the same theta for a sequence of dis
 A list with `estimate`, `expected_clusters`, `n`, `theta`,   `monotone_in_alpha`, `method`, `note`.
 }
 \keyword{internal}
+\examples{
+morie_pmpfit_tail(n = 5L)
+}

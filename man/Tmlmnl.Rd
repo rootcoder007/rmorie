@@ -39,3 +39,6 @@ the input order, so both language arms use the same partition.
 Chernozhukov, V. et al. (2018). Econometrics Journal
 21(1):C1-C68; van der Laan, M. J. & Rubin, D. (2006). IJB 2(1):11.
 }
+\examples{
+Tmlmnl(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

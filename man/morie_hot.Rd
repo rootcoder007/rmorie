@@ -36,3 +36,6 @@ Keogh, E., Lin, J. and Fu, A. (2005). HOT SAX:
 efficiently finding the most unusual time series subsequence.
 ICDM 2005, 226-233.
 }
+\examples{
+morie_hot(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 3L)
+}

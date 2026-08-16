@@ -17,3 +17,6 @@ Part of the k02util implementation; see the file header for the source it follow
 A list with \code{x}, \code{w}.
 }
 \keyword{internal}
+\examples{
+k02gh(n = 5L)
+}

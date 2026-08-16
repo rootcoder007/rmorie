@@ -20,3 +20,6 @@ orthogonalised variant.  Pati, Rezaiifar and Krishnaprasad, Proc. 27th Asilomar 
 A list with \code{coefficients}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{energyratio}, \code{method}.
 }
 \keyword{internal}
+\examples{
+OmpFit(x = 5L, D = 5L)
+}

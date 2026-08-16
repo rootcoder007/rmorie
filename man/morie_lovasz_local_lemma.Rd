@@ -32,3 +32,6 @@ Erdos P, Lovasz L (1975). Problems and results on
 \emph{Infinite and Finite Sets} (Colloquia Mathematica Societatis
 Janos Bolyai, Vol. 10), North-Holland.
 }
+\examples{
+morie_lovasz_local_lemma(p = 0.5, d = 5L)
+}

@@ -22,3 +22,6 @@ potential Part of the rangayyan_phys implementation; see the file header for the
 A list with \code{V_mV}, \code{dt_ms}, \code{steps}, \code{m}, \code{h}, \code{n}, \code{m_inf}, \code{h_inf}, \code{n_inf}, \code{tau_m_ms}, \code{tau_h_ms}, \code{tau_n_ms}, \code{alpha_per_ms}, \code{beta_per_ms}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HhGate(V = 5L)
+}

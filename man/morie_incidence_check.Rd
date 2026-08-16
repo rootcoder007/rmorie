@@ -19,3 +19,6 @@ Counts how many blocks contain each point and each pair. This checks
 that a claimed design IS one, as opposed to having parameters that
 would permit one.
 }
+\examples{
+morie_incidence_check(blocks = 5L, v = 5L)
+}

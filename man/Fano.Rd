@@ -31,3 +31,6 @@ the copy of Ghosal & van der Vaart (2017) held in the corpus was
 searched in full and the word "Fano" does NOT occur in it, so the
 attribution could not be confirmed and the primary sources are cited.
 }
+\examples{
+Fano(M = 5L, mutual_info = 5L)
+}

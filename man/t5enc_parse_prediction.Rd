@@ -44,3 +44,6 @@ doi:10.18653/v1/N19-1423. The single-token masking objective span
 corruption replaces.
 }
 \keyword{internal}
+\examples{
+t5enc_parse_prediction(text = 5L)
+}

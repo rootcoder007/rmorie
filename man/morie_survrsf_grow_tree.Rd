@@ -40,3 +40,6 @@ Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
 R", R News 7(2), 25-31.
 }
 \keyword{internal}
+\examples{
+morie_survrsf_grow_tree(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

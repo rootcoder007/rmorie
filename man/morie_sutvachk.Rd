@@ -21,3 +21,6 @@ list(maxinterference, nointerference, consistent, holds, n)
 The printed statement (ch. 7 p. 164) is that the fact that one unit
 receives treatment does not influence any other units.
 }
+\examples{
+morie_sutvachk(interference = 5L)
+}

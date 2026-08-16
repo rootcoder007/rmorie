@@ -18,3 +18,6 @@ Tokens: T = (I/p)^2. Halving p quadruples T at essentially constant parameter co
 list with tokens, grid, patch, latent_size, note.
 }
 \keyword{internal}
+\examples{
+patch_grid(latent_size = 5L, patch = 5L)
+}

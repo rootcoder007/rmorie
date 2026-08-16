@@ -24,3 +24,6 @@ Latents cross-attend to the input, then self-attend, \code{n_iter} times;
 output queries decode the final latent. All attention through the
 shared kernel, with no learned projections.
 }
+\examples{
+morie_geron_perceiver_io(X = c(1, 2, 3, 4, 5, 6, 7, 8), Z_latent = c(1, 2, 3, 4, 5, 6, 7, 8), output_queries = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

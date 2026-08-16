@@ -19,3 +19,6 @@ must be strictly positive (eq 4.59\\'s side condition); a signal that crosses ze
 A list with \code{y}, \code{log_domain}, \code{log_input}, \code{cutoff}, \code{keep}, \code{n}, \code{stages}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HomoFilt(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5)
+}

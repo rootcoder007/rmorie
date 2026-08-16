@@ -19,3 +19,6 @@ List with \code{output}, \code{direct_output}, \code{max_abs_error}, \code{n_blo
 \description{
 FlashAttention: tiled online-softmax, exact (hmfa)
 }
+\examples{
+morie_geron_flash_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

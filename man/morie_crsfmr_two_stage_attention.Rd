@@ -19,3 +19,6 @@ Cross-time then cross-dimension.
 A list with \code{output}, \code{cross_time} and the   operation counts.
 }
 \keyword{internal}
+\examples{
+morie_crsfmr_two_stage_attention(Z = 5L)
+}

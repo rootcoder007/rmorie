@@ -14,3 +14,6 @@ Null moments of T+ -- eq. (5.7.2), p. 197
 A list with \code{mean}, \code{var}, \code{sd}, \code{total}, \code{skew}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Wsrmom(n = 5L)
+}

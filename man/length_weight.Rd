@@ -19,3 +19,6 @@ Part of the metabd_native implementation; see the file header for the source it 
 A list with \code{weight}, \code{length}, \code{below_minimum}.
 }
 \keyword{internal}
+\examples{
+length_weight(length = 5L)
+}

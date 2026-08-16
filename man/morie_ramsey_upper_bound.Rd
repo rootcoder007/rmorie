@@ -33,3 +33,6 @@ Greenwood RE, Gleason AM (1955) \emph{Canadian Journal of
 Mathematics} 7:1-7. Erdos P, Szekeres G (1935)
 \emph{Compositio Mathematica} 2:463-470.
 }
+\examples{
+morie_ramsey_upper_bound(k = 5L, l = 5L)
+}

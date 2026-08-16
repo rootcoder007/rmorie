@@ -18,3 +18,6 @@ filter is one factor multiplying the input transform.  Dividing out X(z) gives e
 A list with \code{Y}, \code{H}, \code{X}, \code{z}, \code{transfer_function_is_input_independent}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HannZ(X = c(1, 2, 3, 4, 5, 6, 7, 8), z = 5L)
+}

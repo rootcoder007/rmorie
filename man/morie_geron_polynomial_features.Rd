@@ -22,3 +22,6 @@ the column order is (bias), then all features at power 1, then all at
 power 2, and so on. \code{powers} entries are 0-based (feature, power)
 pairs with (0, 0) marking the bias.
 }
+\examples{
+morie_geron_polynomial_features(X = c(1, 2, 3, 4, 5, 6, 7, 8), degree = 5L)
+}

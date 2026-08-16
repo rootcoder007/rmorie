@@ -25,3 +25,6 @@ theta <- theta - eta * 2 x_i (x_i^T theta - y_i). With \code{index} NULL
 the row is picked from ONE LCG draw, i = floor(u * n) capped at
 n - 1, and is reported 0-based in \code{index}.
 }
+\examples{
+morie_geron_sgd_update(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5)
+}

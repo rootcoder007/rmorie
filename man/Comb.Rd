@@ -19,3 +19,6 @@ so it notches DC and every harmonic of fs/N at once -- which is what powerline i
 A list with \code{b}, \code{a}, \code{H}, \code{period_samples}, \code{fs}, \code{notch_frequencies_hz}, \code{n_zeros}, \code{notch_spacing_hz}, \code{dc_gain}, \code{removes_dc_as_well}, \code{fir}, \code{linear_phase}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Comb(period_samples = 5L)
+}

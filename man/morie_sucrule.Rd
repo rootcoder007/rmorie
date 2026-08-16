@@ -15,3 +15,6 @@ list(p, pnot, mle)
 \description{
 Rule of succession (eq. 3.16, p. 52)
 }
+\examples{
+morie_sucrule(fa = 5L, fb = 5L)
+}

@@ -23,3 +23,6 @@ List with \code{splits} (each \code{train} / \code{val}), \code{val_folds},
 Folds follow numpy's array_split: the first \code{n \%\% K} folds get one
 extra member. All indices are 0-based.
 }
+\examples{
+morie_geron_kfold_cv(n = 5L, K = 5L)
+}

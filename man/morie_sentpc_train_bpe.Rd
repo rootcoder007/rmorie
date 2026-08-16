@@ -19,3 +19,6 @@ Merge the most frequent adjacent pair until the vocabulary budget is met. Greedy
 List with \code{merges}, \code{vocab}, \code{vocab_size},   \code{requested}, \code{algorithm}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_sentpc_train_bpe(corpus = c(1, 2, 3, 4, 5, 6, 7, 8), vocab_size = 5L)
+}

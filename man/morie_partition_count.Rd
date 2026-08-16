@@ -29,3 +29,6 @@ odd parts. Euler's theorem says those two counts are EQUAL at every
 \references{
 Andrews GE (1976), The Theory of Partitions.
 }
+\examples{
+morie_partition_count(n = 5L)
+}

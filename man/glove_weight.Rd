@@ -30,3 +30,6 @@ for online learning and stochastic optimization", JMLR 12, 2121-2159
 -- the AdaGrad the paper uses.
 }
 \keyword{internal}
+\examples{
+glove_weight(x = 5L)
+}

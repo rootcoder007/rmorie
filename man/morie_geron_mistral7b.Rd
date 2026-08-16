@@ -33,3 +33,6 @@ kv_cache_saving, attention_mask, effective_context, estimate, n, method.
 \description{
 Mistral-7B architecture accounting (Geron Ch 15, morie.fn hmmis7)
 }
+\examples{
+morie_geron_mistral7b(prompt = c(1, 2, 3, 4, 5, 6, 7, 8), n_tokens = 5L)
+}

@@ -15,3 +15,6 @@ A list with \code{valid}, \code{rows_ok}, \code{columns_ok}.
 \description{
 Is every symbol used once in each row and each column?
 }
+\examples{
+morie_is_latin_square(square = 5L)
+}

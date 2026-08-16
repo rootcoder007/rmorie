@@ -14,3 +14,6 @@ Exact P(D_n < d) -- Theorem 4.3.2 via Durbin\'s matrix identity, p. 111
 A list with \code{cdf}, \code{sf}, \code{k}, \code{t}, \code{n}, \code{d}.
 }
 \keyword{internal}
+\examples{
+Ksexact(d = 5L, n = 5L)
+}

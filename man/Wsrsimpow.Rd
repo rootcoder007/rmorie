@@ -14,3 +14,6 @@ Simulated signed-rank power over supplied samples -- Sec. 5.7.3, p. 204
 A list with \code{power}, \code{rejections}, \code{nsim}, \code{tmean}, \code{tcrit}.
 }
 \keyword{internal}
+\examples{
+Wsrsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

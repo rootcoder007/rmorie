@@ -19,3 +19,6 @@ A = H and B = X exp(+j2 pi f t0), IS the matched-filter derivation.
 A list with \code{lhs}, \code{rhs}, \code{holds}, \code{ratio}, \code{equality}, \code{k}, \code{collinear}, \code{method}.
 }
 \keyword{internal}
+\examples{
+SchwarzC(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8), grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

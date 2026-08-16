@@ -18,3 +18,6 @@ Proposition 1.6: rho = Delta^2 / (2 sigma^2)
 A scalar numeric: the zCDP parameter rho.
 }
 \keyword{internal}
+\examples{
+zcdp_of_gaussian(sensitivity = 5L, sigma = 0.5)
+}

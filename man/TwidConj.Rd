@@ -19,3 +19,6 @@ a sign flip, one of the two properties the FFT is built on.
 A list with \code{negative_power}, \code{conjugate}, \code{difference}, \code{holds}, \code{N}, \code{n}, \code{k}, \code{method}.
 }
 \keyword{internal}
+\examples{
+TwidConj(npoints = 5L, n = 5L, k = 5L)
+}

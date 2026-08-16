@@ -23,3 +23,6 @@ Petropoulos & Kourentzes: rather than choosing one aggregation level, forecast a
 Named list: \code{estimate}, \code{forecast}, \code{levels},   \code{per_level}, \code{weights}, \code{spread}, \code{method}.
 }
 \keyword{internal}
+\examples{
+temporal_combination(y = c(1, 2, 3, 4, 5, 6, 7, 8), levels = factor(c("lo", "hi", "lo", "hi")))
+}

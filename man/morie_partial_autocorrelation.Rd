@@ -14,3 +14,6 @@ morie_partial_autocorrelation
 A list with \code{pacf}, \code{acf}, \code{phi}, \code{lag_max}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_partial_autocorrelation(y = c(1, 2, 3, 4, 5, 6, 7, 8), lag_max = 5L)
+}

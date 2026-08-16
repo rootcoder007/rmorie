@@ -19,3 +19,6 @@ Recursive chunking, buffer memory, templates (Alammar Ch 6-12)
 A list with \code{chunks}, \code{n_chunks}, \code{max_chunk_length}, \code{overlap}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_recursive_chunking(text = 5L)
+}

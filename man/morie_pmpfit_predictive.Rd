@@ -19,3 +19,6 @@ Each occupied cluster gets (n_j - alpha) / (theta + n); a new cluster gets (thet
 A list with `occupied`, `new`, `total`, `n`, `K`,   `discount_transferred`, `note`.
 }
 \keyword{internal}
+\examples{
+morie_pmpfit_predictive(counts = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, theta = 0.5)
+}

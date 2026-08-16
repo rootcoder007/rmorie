@@ -18,3 +18,6 @@ Part of the schN_native implementation; see the file header for the source it fo
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+cosine_cutoff(r = 5L)
+}

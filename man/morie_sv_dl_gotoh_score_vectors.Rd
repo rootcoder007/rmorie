@@ -22,3 +22,6 @@ Part of the sv_dl_native implementation; see the file header for the source it f
 A list with \code{f}, \code{f_at}, \code{r}, \code{r_at}.
 }
 \keyword{internal}
+\examples{
+morie_sv_dl_gotoh_score_vectors(consensus = 5L, ref = 5L)
+}

@@ -27,3 +27,6 @@ ties one half.
 Wolbers, M., Blanche, P., Koller, M. T., Witteman,
 J. C. M. and Gerds, T. A. (2014), Biostatistics 15(3), 526-539.
 }
+\examples{
+Sscompv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8), predicted_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

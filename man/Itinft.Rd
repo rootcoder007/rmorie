@@ -31,3 +31,6 @@ Formula: I_j(theta) = a_j^2 P_j(theta) (1 - P_j(theta)).
 Lord (1980), Applications of Item Response Theory to
 Practical Testing Problems, Lawrence Erlbaum, ch. 5.
 }
+\examples{
+Itinft(theta = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

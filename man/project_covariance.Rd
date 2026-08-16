@@ -19,3 +19,6 @@ Project a 3D covariance to a 2D one: J W Sigma W\' J\'
 List with projected, dim, note.
 }
 \keyword{internal}
+\examples{
+project_covariance(S = 5L, W = 5L, J = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

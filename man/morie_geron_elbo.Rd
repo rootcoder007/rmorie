@@ -30,3 +30,6 @@ List with \code{elbo}, \code{loss}, \code{kl}, \code{reconstruction_log_lik}, \c
 \description{
 VAE evidence lower bound with closed-form Gaussian KL (hmelb)
 }
+\examples{
+morie_geron_elbo(x = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), log_sigma = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,6 @@ The clique as an integer vector, or NULL.
 \description{
 Exhaustive, which is the only honest answer for a certificate.
 }
+\examples{
+morie_has_clique(adjacency = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 5L)
+}

@@ -21,3 +21,6 @@ uniform k, so the stream is stable when n changes
 The value of \code{Qnorm}.
 }
 \keyword{internal}
+\examples{
+Rnorm(n = 5L)
+}

@@ -17,3 +17,6 @@ list(w, lam, mean, var, n)
 \description{
 w = (x^lambda - 1)/lambda for lambda != 0, w = log(x) otherwise.
 }
+\examples{
+morie_boxcox(x = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+}

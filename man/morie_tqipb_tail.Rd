@@ -21,3 +21,6 @@ delta such that Pr[|error| > eps ||x|| ||y||] <= delta.
 A probability bound, clamped at 1 since a bound above 1 says   nothing.
 }
 \keyword{internal}
+\examples{
+morie_tqipb_tail(var = 5L, eps = 0.5)
+}

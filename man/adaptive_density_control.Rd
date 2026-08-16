@@ -22,3 +22,6 @@ Adaptive density control: clone, split or prune each Gaussian
 List with clone, split, prune, n_before, n_after, method,   note.
 }
 \keyword{internal}
+\examples{
+adaptive_density_control(gradients = c(1, 2, 3, 4, 5, 6, 7, 8), scales = c(1, 2, 3, 4, 5, 6, 7, 8), opacities = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

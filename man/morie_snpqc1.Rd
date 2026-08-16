@@ -34,3 +34,6 @@ Part of the snpqc1_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals}, \code{removed}, \code{n_snps_kept}, \code{n_individuals_kept}, \code{call_rate_snp}, \code{call_rate_ind}, \code{maf}, \code{hwe_p}, \code{heterozygosity}, \code{relatedness_matrix}, \code{kinship}, \code{ibd_states}, \code{relatedness}, \code{pruned_snps}, \code{thresholds}, \code{trait}, \code{hwe_test}, \code{note}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_snpqc1(genotypes = list(a = 1, b = 2))
+}

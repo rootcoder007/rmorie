@@ -32,3 +32,6 @@ The implied rho.
     privacy." arXiv:1603.01887.
 }
 \keyword{internal}
+\examples{
+morie_tcmech_rho_from_pure(epsilon = 5L)
+}

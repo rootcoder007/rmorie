@@ -20,3 +20,6 @@ Part of the slowdp_native implementation; see the file header for the source it 
 A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass}, \code{K}, \code{alpha}, \code{note}.
 }
 \keyword{internal}
+\examples{
+stick_breaking(alpha = 0.5, K = 5L)
+}

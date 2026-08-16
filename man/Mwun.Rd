@@ -14,3 +14,6 @@ Mann-Whitney sample size -- eq. (6.6.18), p. 269 (Noether 1987)
 A list with \code{n}, \code{n_raw}, \code{m}, \code{n_y}, \code{z_alpha}, \code{z_beta}, \code{c}, \code{p}.
 }
 \keyword{internal}
+\examples{
+Mwun(p = 0.05)
+}

@@ -27,3 +27,6 @@ Each family is fitted by maximum likelihood and ranked by AIC, with BIC reported
 \references{
 Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
 }
+\examples{
+Paracompare(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
+}

@@ -15,3 +15,6 @@ List with \code{gradient}, \code{cost}, \code{grad_norm}.
 \description{
 grad = (2/m) X^T (X theta - y), differentiating the shared MSE core.
 }
+\examples{
+morie_geron_ch4_mse_gradient_vector(X = 5L, y = 5L, theta = 0.5)
+}

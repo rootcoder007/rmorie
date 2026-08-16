@@ -14,3 +14,6 @@ Signed-rank efficacy -- eq. (13.3.4), p. 490
 A list with \code{efficacy}, \code{limit}, \code{integral}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Effwsr(n = 5L, f0 = c(1, 2, 3, 4, 5, 6, 7, 8), integral = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

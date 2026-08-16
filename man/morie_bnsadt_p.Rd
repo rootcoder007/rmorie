@@ -19,3 +19,6 @@ Publication probability of a study with z-statistic z
 A single probability.
 }
 \keyword{internal}
+\examples{
+morie_bnsadt_p(z = 5L)
+}

@@ -43,3 +43,6 @@ Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
 implemented in :mod:`svdpp`.
 }
 \keyword{internal}
+\examples{
+morie_timeRS_deviation(t = 5L, t_user = 5L)
+}

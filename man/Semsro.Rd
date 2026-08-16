@@ -47,3 +47,6 @@ Hu, L. & Bentler, P. M. (1999). Cutoff criteria for fit indexes in
 covariance structure analysis. Structural Equation Modeling 6(1), 1-55.
 \doi{10.1080/10705519909540118}
 }
+\examples{
+Semsro(sample_cov = 5L, fitted_cov = 5L)
+}

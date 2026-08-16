@@ -15,3 +15,6 @@ n x n logical matrix, upper-triangular (excl. diagonal) TRUE.
 \description{
 Causal mask: TRUE where attention is forbidden (strictly future) (hmdctr)
 }
+\examples{
+morie_geron_causal_mask(n = 5L)
+}

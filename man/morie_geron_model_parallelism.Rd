@@ -17,3 +17,6 @@ List with assignment, device_loads, max_load, imbalance, naive_utilisation, cut_
 \description{
 Optimal contiguous model-parallel layer partition (Geron Ch 17, morie.fn hmmpp)
 }
+\examples{
+morie_geron_model_parallelism(model = c(1, 2, 3, 4, 5, 6, 7, 8), n_devices = 5L)
+}

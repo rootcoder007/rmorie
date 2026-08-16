@@ -48,3 +48,6 @@ Haarnoja, T., Zhou, A., Abbeel, P. and Levine, S.
 Lemmas 1-2, Theorem 1. Local source:
 fetched-wave3/haarnoja-etal-2018-sac-arxiv1801.01290.pdf.
 }
+\examples{
+Sacc(P = 1, R = 5L, gamma = 0.5)
+}

@@ -34,3 +34,6 @@ eq. (7)-(8); Morris and DeShon (2002).
 Morris, S. B. (2008). Organizational Research Methods
 11(2):364-386. \doi{10.1177/1094428106291059}.
 }
+\examples{
+Marba(g = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, rho = 0.5)
+}

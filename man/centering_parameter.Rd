@@ -19,3 +19,6 @@ Part of the mehtad_native implementation; see the file header for the source it 
 A list with \code{sigma}, \code{ratio}, \code{nu}, \code{approximation}, \code{note}.
 }
 \keyword{internal}
+\examples{
+centering_parameter(mu = 5L, mu_affine = 5L)
+}

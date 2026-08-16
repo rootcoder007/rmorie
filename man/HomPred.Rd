@@ -18,3 +18,6 @@ HomPred(y, cutoff)
 A list with \code{low_time}, \code{high_time}, \code{cutoff}, \code{n}, \code{reconstruction}, \code{reconstruction_error}, \code{relative_error}, \code{separation_premise}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HomPred(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 1)
+}

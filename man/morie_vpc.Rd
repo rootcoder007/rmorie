@@ -26,3 +26,6 @@ Goldstein, H., Browne, W. and Rasbash, J. (2002).
 Partitioning variation in multilevel models. Understanding
 Statistics, 1(4), 223-231.
 }
+\examples{
+morie_vpc(sigma2_u = 5L)
+}

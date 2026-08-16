@@ -19,3 +19,6 @@ list(mean, sd, min, max, nrows, lastmean, meanofmeans)
 \description{
 Rolling-window features (ch. 6 p. 176)
 }
+\examples{
+morie_rollfeat(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+}

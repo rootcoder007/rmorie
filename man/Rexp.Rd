@@ -20,3 +20,6 @@ Part of the dist_native implementation; see the file header for the source it fo
 The value of \code{Qexp}.
 }
 \keyword{internal}
+\examples{
+Rexp(n = 5L)
+}

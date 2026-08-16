@@ -17,3 +17,6 @@ Part of the ibpfa_native implementation; see the file header for the source it f
 A list with \code{Z}, \code{order}, \code{note}.
 }
 \keyword{internal}
+\examples{
+left_ordered_form(Z = 5L)
+}

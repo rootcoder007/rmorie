@@ -14,3 +14,6 @@ Kendall partial tau -- Sec. 12.6, eq. (12.6.1), p. 467
 A list with \code{statistic}, \code{x11}, \code{x12}, \code{x21}, \code{x22}, \code{dropped}, \code{npairs}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Taupartial(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

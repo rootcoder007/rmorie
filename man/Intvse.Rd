@@ -39,3 +39,6 @@ VanderWeele, T. J., Vansteelandt, S. & Robins, J. M.
 (2014). Epidemiology 25:300-306; VanderWeele (2014) Epidemiology
 25:749-761.
 }
+\examples{
+Intvse(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)
+}

@@ -45,3 +45,6 @@ Adamopoulos, P. & Tuzhilin, A. (2014). On unexpectedness in recommender
 systems: or how to better expect the unexpected. ACM Transactions on
 Intelligent Systems and Technology 5(4), 54. \doi{10.1145/2559952}
 }
+\examples{
+ServR(pred = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -27,3 +27,6 @@ Formula: \code{PM = NIE / (NIE + NDE)}.
 VanderWeele, T. J. (2013). Epidemiology 24:175-176;
 VanderWeele (2015), Explanation in Causal Inference, section 2.7.
 }
+\examples{
+PropMd(NIE = 5L, NDE = 5L)
+}

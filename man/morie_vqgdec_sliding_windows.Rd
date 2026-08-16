@@ -43,3 +43,6 @@ Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
 Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 }
 \keyword{internal}
+\examples{
+morie_vqgdec_sliding_windows(height = 5L, width = 5L, window = 5L)
+}

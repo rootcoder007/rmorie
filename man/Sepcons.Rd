@@ -31,3 +31,6 @@ Nonparametric Bayesian Inference, Section 6.8.1: Definition 6.43,
 Lemma 6.44 and Theorem 6.45. Read from the copy of the book held in
 the corpus.
 }
+\examples{
+Sepcons(delta = 0.5, k = 5L, n = 5L)
+}

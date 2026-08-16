@@ -19,3 +19,6 @@ so one function; the equivalence in eq (3.44) is measured, not asserted -- filte
 A list with \code{s}, \code{y}, \code{h}, \code{y_via_combined}, \code{max_difference}, \code{equivalent}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LsiSer(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8), h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -23,3 +23,6 @@ least squares on the lag design, so the STRATEGY -- which is what
 the book teaches -- is what is demonstrated, and nothing is fitted
 at random.
 }
+\examples{
+morie_recmulti(x = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 5L, horizon = 5L)
+}

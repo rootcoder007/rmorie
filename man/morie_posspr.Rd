@@ -19,3 +19,6 @@ Repeatedly draws the next cluster label from the urn: with probability \code{alp
 A list with \code{labels}, \code{counts},   \code{n_clusters}, \code{alpha}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_posspr(n = 5L, alpha = 0.5)
+}

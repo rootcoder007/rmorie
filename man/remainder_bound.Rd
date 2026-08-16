@@ -19,3 +19,6 @@ Part of the tlhaltm_native implementation; see the file header for the source it
 A list with \code{bound}, \code{delta}, \code{err_Q}, \code{err_g}, \code{note}.
 }
 \keyword{internal}
+\examples{
+remainder_bound(err_Q = c(1, 2, 3, 4, 5, 6, 7, 8), err_g = c(1, 2, 3, 4, 5, 6, 7, 8), delta = 0.5)
+}

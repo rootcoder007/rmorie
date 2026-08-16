@@ -23,3 +23,6 @@ stated here: candidates are drawn from the union of the adjacencies
 of x and y, in sorted order and increasing size, and the FIRST
 separating set found is returned.
 }
+\examples{
+morie_sepset(dag = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

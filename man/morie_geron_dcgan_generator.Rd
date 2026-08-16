@@ -33,3 +33,6 @@ norm + ReLU on every layer but the last, tanh on the output (which is
 why DCGAN data is scaled to [-1, 1]). The batch norm here is the
 whole-tensor population form, as in Python.
 }
+\examples{
+morie_geron_dcgan_generator(z = 5L, weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

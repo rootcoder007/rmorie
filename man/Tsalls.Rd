@@ -25,3 +25,6 @@ Formula: \code{S_q = (1 - sum_i p_i^q) / (q - 1)}.
 \references{
 Tsallis, C. (1988). J Stat Phys 52:479-487, equation (1).
 }
+\examples{
+Tsalls(p = 0.5, q = 0.5)
+}

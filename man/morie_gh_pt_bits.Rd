@@ -22,3 +22,6 @@ containing \code{x}. The input is first clamped to
 \eqn{[0, 1 - 10^{-15}]}, so values outside the unit interval are
 silently pulled to the nearest end.
 }
+\examples{
+morie_gh_pt_bits(x = c(1, 2, 3, 4, 5, 6, 7, 8), depth = 5L)
+}

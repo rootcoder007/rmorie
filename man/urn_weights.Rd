@@ -18,3 +18,6 @@ Returns the urn\'s mixture weights at the current state. The new-cluster weight 
 A list with \code{existing}, \code{new}, \code{n},   \code{K}, \code{total}, \code{note}.
 }
 \keyword{internal}
+\examples{
+urn_weights(counts = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+}

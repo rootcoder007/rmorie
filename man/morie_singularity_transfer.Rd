@@ -21,3 +21,6 @@ A list with \code{exact_coefficient}, \code{asymptotic}, \code{corrected},
 (Flajolet-Sedgewick Theorem VI.1), with the first-order correction
 \eqn{1 + \alpha(\alpha-1)/(2n)}.
 }
+\examples{
+morie_singularity_transfer(alpha = 0.5, n = 5L)
+}

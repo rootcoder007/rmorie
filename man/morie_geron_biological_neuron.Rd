@@ -21,3 +21,6 @@ List with \code{a}, \code{z}, \code{fires}, \code{threshold}.
 \description{
 a = phi(w . x + b); phi in step, sign, sigmoid, tanh, relu, identity.
 }
+\examples{
+morie_geron_biological_neuron(x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

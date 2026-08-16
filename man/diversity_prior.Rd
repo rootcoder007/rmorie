@@ -19,3 +19,6 @@ Calibration alone never introduces an unplayed genre; mixing in a diversity prio
 Numeric vector \eqn{\bar p(g)} of length G.
 }
 \keyword{internal}
+\examples{
+diversity_prior(p_u = c(1, 2, 3, 4, 5, 6, 7, 8), p0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}

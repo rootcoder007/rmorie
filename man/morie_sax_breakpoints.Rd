@@ -21,3 +21,6 @@ al. 2003, Table 3).
 Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 symbolic representation of time series. DMKD 2003.
 }
+\examples{
+morie_sax_breakpoints(alphabet = 5L)
+}

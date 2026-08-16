@@ -34,3 +34,6 @@ prevention: an algorithm for detecting Salmonella outbreaks",
 Emerging Infectious Diseases 3(3), 395-400.
 }
 \keyword{internal}
+\examples{
+surepi_salmonella_cusum(counts = c(1, 2, 3, 4, 5, 6, 7, 8), mu0 = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+}

@@ -19,3 +19,6 @@ List with \code{estimate}, \code{embedding}, \code{window}.
 \description{
 Sum of idf over the n tokens of one window. \code{i} is a 0-BASED start.
 }
+\examples{
+morie_kamath_ch8_ngram_embedding(x = c(1, 2, 3, 4, 5, 6, 7, 8), i = 5L, n = 3L)
+}

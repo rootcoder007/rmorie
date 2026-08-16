@@ -14,3 +14,6 @@ y = 1_n mu + X_E beta_E + X beta + X_EF beta_EF + e, which adds to (14.13) the e
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+Fregint(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

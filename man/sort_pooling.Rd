@@ -19,3 +19,6 @@ Part of the sortP_native implementation; see the file header for the source it f
 A list with \code{pooled}, \code{order}, \code{n_truncated}, \code{n_padded}, \code{k}, \code{sort_channel}, \code{note}.
 }
 \keyword{internal}
+\examples{
+sort_pooling(features = c(1, 2, 3, 4, 5, 6, 7, 8), k_keep = 5L)
+}

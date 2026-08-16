@@ -21,3 +21,6 @@ Part of the rangayyan_qrs implementation; see the file header for the source it 
 A list with \code{qrsdurms}, \code{qrswide}, \code{lbbbdur}, \code{rbbbdur}, \code{sdurok}, \code{rdurok}, \code{qabsent}, \code{stdev}, \code{stfinding}, \code{required}, \code{method}.
 }
 \keyword{internal}
+\examples{
+EcgWaveShp(qrsdur = 5L, stdev = 5L)
+}

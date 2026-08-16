@@ -39,3 +39,6 @@ Radziszowski SP, \emph{Small Ramsey Numbers}, Electronic
 Journal of Combinatorics, Dynamic Survey DS1, revision 17 (2024),
 \doi{10.37236/21}, Tables Ia and Ib.
 }
+\examples{
+morie_ramsey_number(k = 5L)
+}

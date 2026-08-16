@@ -23,3 +23,6 @@ Statistics and Computing 17(4), 395-416, Section 3, which defines
 L_rw = I - D^-1 W and notes it is "closely related to a random walk".
 Fetched from arXiv:0711.0189.
 }
+\examples{
+Rwlap(W = 5L)
+}

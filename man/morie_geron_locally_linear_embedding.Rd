@@ -26,3 +26,6 @@ List with embedding, weights, reconstruction_error, eigenvalues, estimate, n, me
 \description{
 Locally linear embedding (Geron Ch 7, morie.fn hmlle)
 }
+\examples{
+morie_geron_locally_linear_embedding(X = c(1, 2, 3, 4, 5, 6, 7, 8), n_components = 5L)
+}

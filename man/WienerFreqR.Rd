@@ -19,3 +19,6 @@ no information about W and are listed, not silently satisfied.
 A list with \code{lhs}, \code{sxd}, \code{max_difference}, \code{holds}, \code{undetermined_bins}, \code{n_undetermined}, \code{method}.
 }
 \keyword{internal}
+\examples{
+WienerFreqR(W = c(1, 2, 3, 4, 5, 6, 7, 8), sxx = c(1, 2, 3, 4, 5, 6, 7, 8), sxd = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

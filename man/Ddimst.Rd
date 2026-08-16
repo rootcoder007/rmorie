@@ -49,3 +49,6 @@ so the map is a function of its arguments alone.
 Song, Meng & Ermon (2021), Denoising Diffusion Implicit
 Models, ICLR 2021.
 }
+\examples{
+Ddimst(x_t = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L, eps_theta = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

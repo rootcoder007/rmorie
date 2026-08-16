@@ -14,3 +14,6 @@ KS critical value (Table F) by exact bisection -- p. 565
 A list with \code{dcrit}, \code{dcrit_asymp}, \code{k_alpha}, \code{n}, \code{alpha}.
 }
 \keyword{internal}
+\examples{
+Kscrit(n = 5L)
+}

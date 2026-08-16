@@ -19,3 +19,6 @@ Fitting a Gaussian to a positive parameter directly puts mass on impossible valu
 A list with \code{real, log_jacobian, inverse}.
 }
 \keyword{internal}
+\examples{
+transform_to_real(value = 5L)
+}

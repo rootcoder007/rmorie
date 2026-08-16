@@ -20,3 +20,6 @@ Part of the ocrwit_native implementation; see the file header for the source it 
 A list with \code{masked}, \code{kept}, \code{rate}, \code{block}, \code{note}.
 }
 \keyword{internal}
+\examples{
+mask_units(n_units = 5L)
+}

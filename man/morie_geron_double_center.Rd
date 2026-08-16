@@ -17,3 +17,6 @@ Double-centre a squared-distance matrix (Geron Ch 7, morie.fn hmmds helper)
 The value of \code{.morie_gr_w4b_double_center}.
 }
 \keyword{internal}
+\examples{
+morie_geron_double_center(D = 5L)
+}

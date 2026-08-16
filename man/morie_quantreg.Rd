@@ -24,3 +24,6 @@ with a fixed iteration count and a fixed smoothing floor -- no
 convergence test, so both arms take identical steps. An intercept is
 added to x.
 }
+\examples{
+morie_quantreg(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
+}

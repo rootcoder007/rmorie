@@ -15,3 +15,6 @@ Integer parameter count.
 \description{
 Parameter count of a transformer encoder stack
 }
+\examples{
+morie_geron_encoder_params(d_model = c(1, 2, 3, 4, 5, 6, 7, 8), d_ff = c(1, 2, 3, 4, 5, 6, 7, 8), n_layers = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

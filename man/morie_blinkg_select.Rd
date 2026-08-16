@@ -36,3 +36,6 @@ A list with the chosen indices, the score path and the chosen   count.
     studies." Biometrics 55(4), 997-1004.
 }
 \keyword{internal}
+\examples{
+morie_blinkg_select(y = c(1, 2, 3, 4, 5, 6, 7, 8), geno = c(1, 2, 3, 4, 5, 6, 7, 8), candidates = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

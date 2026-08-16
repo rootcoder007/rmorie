@@ -19,3 +19,6 @@ List with embedding, eigenvalues, stress, distance_matrix, n_negative_eigenvalue
 \description{
 Classical (Torgerson) multidimensional scaling (Geron Ch 7, morie.fn hmmds)
 }
+\examples{
+morie_geron_mds(X = c(1, 2, 3, 4, 5, 6, 7, 8), n_components = 5L)
+}

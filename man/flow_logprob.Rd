@@ -14,3 +14,6 @@ log q_phi(x | theta), change of variables
 A numeric value.
 }
 \keyword{internal}
+\examples{
+flow_logprob(flow = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), x = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,6 @@ Proposition 1.4: epsilon-DP is 0.5 epsilon^2-zCDP
 A list with \code{rho} and \code{epsilon}.
 }
 \keyword{internal}
+\examples{
+from_pure_dp(epsilon = 5L)
+}

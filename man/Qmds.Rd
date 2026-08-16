@@ -34,3 +34,6 @@ Wood et al. (2004) Climatic Change 62, 189-216; Boe et al.
 (2007) Int J Climatology 27, 1643-1655; Maraun (2013) J Climate
 26, 2137-2143.
 }
+\examples{
+Qmds(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

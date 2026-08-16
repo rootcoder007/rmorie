@@ -20,3 +20,6 @@ A \code{d}-by-\code{k} matrix whose entries are drawn from the chosen Achlioptas
 A length-\code{d} list whose elements are length-\code{k}   numeric vectors; together they form the matrix \code{R}.
 }
 \keyword{internal}
+\examples{
+projection_matrix(d = 5L, k = 5L)
+}

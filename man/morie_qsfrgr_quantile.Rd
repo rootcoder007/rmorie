@@ -38,3 +38,6 @@ The quantile time, or NA.
     Machine Learning Research 7, 983-999.
 }
 \keyword{internal}
+\examples{
+morie_qsfrgr_quantile(curve = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), q = 0.5)
+}

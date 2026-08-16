@@ -57,3 +57,6 @@ which grows with the variance of the latent field.
 \references{
 Schabenberger Ch 6, Sec 6.3.4, eqs (6.73)-(6.74), Example 6.6
 }
+\examples{
+spglmm(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, S = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

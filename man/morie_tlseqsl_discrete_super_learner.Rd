@@ -35,3 +35,6 @@ data and causal inference models", Biometrics 61(4), 962-973,
 doi:10.1111/j.1541-0420.2005.00377.x.
 }
 \keyword{internal}
+\examples{
+morie_tlseqsl_discrete_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), library = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

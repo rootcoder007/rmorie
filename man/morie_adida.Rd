@@ -25,3 +25,6 @@ morie_adida(y, m, horizon = 1L, method = "tsb", alpha = 0.1, beta = 0.05, overla
 Named list mirroring the Python payload: \code{estimate},   \code{forecast}, \code{aggregate_forecast}, \code{lead_time_demand},   \code{aggregated}, \code{m}, \code{zero_fraction_original},   \code{zero_fraction_aggregated}, \code{n_buckets}, \code{overlapping},   \code{base_method}, \code{disaggregation_sums_back}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_adida(y = c(1, 2, 3, 4, 5, 6, 7, 8), m = 3L)
+}

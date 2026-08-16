@@ -19,3 +19,6 @@ Part of the pate_native implementation; see the file header for the source it fo
 A numeric value.
 }
 \keyword{internal}
+\examples{
+epsilon_data_independent(T = 5L, gamma = 0.5, delta = 0.5)
+}

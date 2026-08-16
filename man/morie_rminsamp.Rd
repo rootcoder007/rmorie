@@ -17,3 +17,6 @@ list(log2rmin, log10rmin, rmin)
 \description{
 Uniform draws needed to hit the typical set once (eq. 29.19, p. 366)
 }
+\examples{
+morie_rminsamp(n = 5L, h = 0.5)
+}

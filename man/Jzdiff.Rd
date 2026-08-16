@@ -37,3 +37,6 @@ entropy, IEEE Transactions on Information Theory 37(1):145-151,
 Transactions on Information Theory 49(7):1858-1860.
 \doi{10.1109/TIT.2003.813506}
 }
+\examples{
+Jzdiff(y = 5L, p = 0.5, q = 0.5)
+}

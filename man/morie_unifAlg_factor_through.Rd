@@ -28,3 +28,6 @@ algorithm, the occurs check, and the factorisation
 :math:`\theta = \delta \circ \sigma` reproduced above.
 }
 \keyword{internal}
+\examples{
+morie_unifAlg_factor_through(general = c(1, 2, 3, 4, 5, 6, 7, 8), other = c(1, 2, 3, 4, 5, 6, 7, 8), over = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

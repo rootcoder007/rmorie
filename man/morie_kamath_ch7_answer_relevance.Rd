@@ -20,3 +20,6 @@ List with \code{estimate}, \code{similarities}.
 Mean cosine between the reverse-generated question embeddings and the
 original query embedding.
 }
+\examples{
+morie_kamath_ch7_answer_relevance(E_g = c(1, 2, 3, 4, 5, 6, 7, 8), E_o = 5L)
+}

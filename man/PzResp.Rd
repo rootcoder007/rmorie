@@ -20,3 +20,6 @@ of distances to the zeros over the product of distances to the poles, and the ph
 A list with \code{H}, \code{magnitude}, \code{phase}, \code{zero_distances}, \code{pole_distances}, \code{omega}, \code{magnitude_matches_product}, \code{method}.
 }
 \keyword{internal}
+\examples{
+PzResp(zeros = c(1, 2, 3, 4, 5, 6, 7, 8), poles = c(1, 2, 3, 4, 5, 6, 7, 8), omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

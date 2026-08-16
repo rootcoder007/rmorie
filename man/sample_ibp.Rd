@@ -19,3 +19,6 @@ Part of the ibpfa_native implementation; see the file header for the source it f
 A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n}, \code{features_per_object}, \code{note}.
 }
 \keyword{internal}
+\examples{
+sample_ibp(n = 5L, alpha = 0.5)
+}

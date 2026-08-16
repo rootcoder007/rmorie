@@ -20,3 +20,6 @@ list with path, keys, shapes, n_params, bytes, loaded, exact, max_diff, estimate
 Round-trips a named list of numeric arrays through an RDS file and
 checks keys/shapes/values match exactly on reload.
 }
+\examples{
+morie_geron_save_load_pytorch(model = c(1, 2, 3, 4, 5, 6, 7, 8), path = 5L)
+}

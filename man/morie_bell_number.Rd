@@ -24,3 +24,6 @@ which is why this returns a \code{morie_bigint}.
 \references{
 Stanley RP (2011) vol. 1, Sec 1.9.
 }
+\examples{
+morie_bell_number(n = 5L)
+}

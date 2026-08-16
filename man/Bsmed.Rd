@@ -45,3 +45,6 @@ Shrout, P. E. and Bolger, N. (2002), Mediation in experimental and
 nonexperimental studies: New procedures and recommendations,
 Psychological Methods 7(4), 422-445, doi:10.1037/1082-989X.7.4.422.
 }
+\examples{
+Bsmed(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

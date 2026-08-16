@@ -18,3 +18,6 @@ Part of the dist_native implementation; see the file header for the source it fo
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+Qpois(p = 0.5, lambda = 0.5)
+}

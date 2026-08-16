@@ -34,3 +34,6 @@ sum_{c=0}^{m} exp(sum_{v=1}^{c} (theta - delta_v)), empty sum zero.
 Masters (1982), A Rasch model for partial credit
 scoring, Psychometrika 47(2):149-174. \doi{10.1007/BF02296272}
 }
+\examples{
+Irtprc(y = 5L, theta = 0.5, delta_j = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

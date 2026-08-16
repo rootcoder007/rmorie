@@ -19,3 +19,6 @@ Part of the linwlr_native implementation; see the file header for the source it 
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+morie_linwlr_blip(a = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), psi = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -24,3 +24,6 @@ separable, and unlike perfect codes MDS codes are plentiful.
 Singleton RC (1964) \emph{IEEE Trans Inform Theory}
 10(2):116-118.
 }
+\examples{
+morie_singleton_bound(n = 5L, d = 5L)
+}

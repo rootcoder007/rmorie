@@ -20,3 +20,6 @@ Part of the patchT_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{tokens}, \code{D}, \code{n_patches}, \code{n_tokens_total}, \code{norm_stats}, \code{normalised}, \code{cost}, \code{method}.
 }
 \keyword{internal}
+\examples{
+patchtst_encode(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
+}

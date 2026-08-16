@@ -19,3 +19,6 @@ Part of the pace_native implementation; see the file header for the source it fo
 A list with \code{estimate}, \code{se}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_pace(Y = c(1, 2, 3, 4, 5, 6, 7, 8), argvals = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
+}

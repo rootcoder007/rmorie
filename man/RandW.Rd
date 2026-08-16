@@ -32,3 +32,6 @@ kernels: hardness results and efficient alternatives. Learning
 Theory and Kernel Machines, LNCS 2777, pages 129-143.
 \doi{10.1007/978-3-540-45167-9_11}.
 }
+\examples{
+RandW(G1 = 5L, G2 = 5L)
+}

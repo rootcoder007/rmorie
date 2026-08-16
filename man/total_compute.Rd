@@ -18,3 +18,6 @@ Part of the opnclp_native implementation; see the file header for the source it 
 A list with \code{compute}, \code{samples_seen}, \code{params}, \code{gmac_scale}.
 }
 \keyword{internal}
+\examples{
+total_compute(samples_seen = 5L, model_params = 5L)
+}

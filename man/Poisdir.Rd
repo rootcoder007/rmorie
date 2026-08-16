@@ -38,3 +38,6 @@ equation (14.20). Read from the copy of the book held in the corpus.
 Only the sigma in [0, 1) branch is implemented; the negative-sigma
 branch is a finite-support family and is refused.
 }
+\examples{
+Poisdir(sigma = 0.5, M = 5L, k = 5L)
+}

@@ -17,3 +17,6 @@ ends, so overlapped Hann windows add to a constant at 50 per cent overlap -- the
 A list with \code{w}, \code{N}, \code{sum}, \code{endpoints}, \code{reaches_zero_at_the_ends}, \code{coherent_gain}, \code{not_the_hann_filter_of_eq_3_100}, \code{symmetric}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HannW(N = 5L)
+}

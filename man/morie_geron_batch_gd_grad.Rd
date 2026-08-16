@@ -21,3 +21,6 @@ List with \code{gradient}, \code{cost}, \code{residuals}, \code{theta_next}, \co
 \description{
 grad J = (2/m) X^T (X theta - y); with \code{eta} one descent step too.
 }
+\examples{
+morie_geron_batch_gd_grad(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5)
+}

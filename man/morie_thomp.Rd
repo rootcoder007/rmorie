@@ -21,3 +21,6 @@ Part of the thomp_native implementation; see the file header for the source it f
 A list with \code{estimate}, \code{actions}, \code{rewards}, \code{alpha}, \code{beta}, \code{post_mean}, \code{counts}, \code{total_reward}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_thomp(p = 0.5, T = 5L)
+}

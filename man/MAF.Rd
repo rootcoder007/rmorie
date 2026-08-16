@@ -14,3 +14,6 @@ Build a Masked Autoregressive Flow
 A list with \code{layers}, \code{dim_x}, \code{dim_t}.
 }
 \keyword{internal}
+\examples{
+MAF(dim_x = 5L, dim_t = 5L)
+}

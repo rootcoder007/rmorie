@@ -18,3 +18,6 @@ Part of the node2v_native implementation; see the file header for the source it 
 A list with \code{p}, \code{q}.
 }
 \keyword{internal}
+\examples{
+node2v_check_pq(p = 0.5, q = 0.5)
+}

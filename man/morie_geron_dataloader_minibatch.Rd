@@ -31,3 +31,6 @@ List with \code{batches} (list of 0-based index vectors),
 Shuffles 0..n-1 once with the reference LCG Fisher-Yates, then slices
 into consecutive batches of \code{b}. Returned indices are 0-based.
 }
+\examples{
+morie_geron_dataloader_minibatch(n = 5L, b = 5L)
+}

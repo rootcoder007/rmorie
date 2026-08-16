@@ -33,3 +33,6 @@ of mixed-model association methods", Nature Genetics 46(2),
 100-106.
 }
 \keyword{internal}
+\examples{
+level1_stack(preds = list(a = 1, b = 2), y = 5L)
+}

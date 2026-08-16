@@ -22,3 +22,6 @@ List with \code{y}, \code{q}, \code{ste_mask}, \code{grad_x}, \code{clipped_frac
 y = s clip(round(x/s)); the straight-through estimator passes the
 gradient in range and kills it where clipped.
 }
+\examples{
+morie_geron_quantization_aware_training(x = c(1, 2, 3, 4, 5, 6, 7, 8), s = 5L)
+}

@@ -15,3 +15,6 @@ A \code{morie_bigint}.
 \description{
 \eqn{D_n = n D_{n-1} + (-1)^n}.
 }
+\examples{
+morie_derangements(n = 5L)
+}

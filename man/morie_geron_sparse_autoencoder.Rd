@@ -22,3 +22,6 @@ List with \code{loss}, \code{reconstruction_loss}, \code{l1_penalty},
 \description{
 L = ||x - dec||^2 + lam ||h||_1; the L1 zeroes units outright.
 }
+\examples{
+morie_geron_sparse_autoencoder(x = c(1, 2, 3, 4, 5, 6, 7, 8), hidden = c(1, 2, 3, 4, 5, 6, 7, 8), decoded = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

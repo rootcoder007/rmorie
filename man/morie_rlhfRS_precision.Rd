@@ -33,3 +33,6 @@ A number between zero and one.
     evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 }
 \keyword{internal}
+\examples{
+morie_rlhfRS_precision(relevance = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

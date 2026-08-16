@@ -19,3 +19,6 @@ Sec. 3.2 unsupervised graph-based loss
 Scalar negative log-likelihood.
 }
 \keyword{internal}
+\examples{
+unsupervised_loss(z_u = c(1, 2, 3, 4, 5, 6, 7, 8), z_v = c(1, 2, 3, 4, 5, 6, 7, 8), z_negatives = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

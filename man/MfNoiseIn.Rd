@@ -18,3 +18,6 @@ convention: integrating the flat density over all f returns P, not twice it.  Ge
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+MfNoiseIn(power = 5L)
+}

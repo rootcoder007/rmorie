@@ -22,3 +22,6 @@ exactly \eqn{k} non-empty unlabelled blocks, by the recurrence
 \references{
 Stanley RP (2011) vol. 1, Sec 1.9.
 }
+\examples{
+morie_stirling_second(n = 5L)
+}

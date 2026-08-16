@@ -31,3 +31,6 @@ modification and \code{g1 + g3 v} the stratum-specific effect.
 \references{
 VanderWeele, T. J. (2009). Epidemiology 20:863-871.
 }
+\examples{
+Fxidf(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), C_mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

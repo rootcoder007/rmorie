@@ -18,3 +18,6 @@ A list with \code{adjacency}, \code{parts}, \code{edges}.
 It contains no \eqn{K_{r+1}}, because any \eqn{r+1} vertices must
 repeat a part and two vertices in the same part are non-adjacent.
 }
+\examples{
+morie_turan_graph(n = 5L, r = 5L)
+}

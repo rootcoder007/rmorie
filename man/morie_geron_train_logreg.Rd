@@ -24,3 +24,6 @@ Numeric coefficient vector of length n + 1.
 Prepends a bias column, starts at zero, and runs \code{n_iter} full-batch
 gradient steps on the mean log-loss.
 }
+\examples{
+morie_geron_train_logreg(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
+}

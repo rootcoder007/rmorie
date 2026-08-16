@@ -14,3 +14,6 @@ beta_0 + beta_1 x_1 + ... + beta_p x_p = 0 defines a (p-1)-dimensional flat subs
 A list with \code{value}, \code{side}, \code{below}, \code{above}, \code{on_plane}, \code{distance}, \code{norm_beta}.
 }
 \keyword{internal}
+\examples{
+Hyperpl(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}

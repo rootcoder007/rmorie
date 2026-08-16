@@ -26,3 +26,6 @@ a starting value for maximum likelihood.
 Schabenberger & Gotway (2005), p. 340, citing
 Haining (1990), p. 130.
 }
+\examples{
+car_rho_ols(Z = 5L, W = 5L)
+}

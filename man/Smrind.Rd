@@ -22,3 +22,6 @@ Formula: SMR = O / E; exact Poisson limits chi2_{alpha/2, 2O}/2 and chi2_{1-alph
 \references{
 Breslow and Day (1987), Statistical Methods in Cancer Research Volume II: The Design and Analysis of Cohort Studies, IARC. Not held locally; SMR = O/E with exact Poisson limits on O is the standard published form, and is what the existing morie.fn.smr implements.
 }
+\examples{
+Smrind(observed = 5L, expected = 5L)
+}

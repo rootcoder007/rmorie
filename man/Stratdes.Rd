@@ -36,3 +36,6 @@ Chapter 5 read from the scanned original. Cross-checked against the
 CRAN package samplingbook 1.2.4, whose stratasamp uses exactly these
 three weight rules.
 }
+\examples{
+Stratdes(Nh = 5L, Sh = 5L, n = 5L)
+}

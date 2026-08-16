@@ -20,3 +20,6 @@ Equation (3.138), built from the N left-half-plane poles ONLY -- the right-half-
 A list with the poles, the real denominator coefficients, the   gain, the transfer function where it was asked for, and the   imaginary residue that shows the coefficients really are real.
 }
 \keyword{internal}
+\examples{
+BwAnalog(Omega_c = 5L, N = 5L)
+}

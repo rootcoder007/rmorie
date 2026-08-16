@@ -35,3 +35,6 @@ doi:10.1201/9780203492024. The sparse GMRF computations the
 method rests on.
 }
 \keyword{internal}
+\examples{
+skewness_correction(third_derivative = c(1, 2, 3, 4, 5, 6, 7, 8), precision = 5L)
+}

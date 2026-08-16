@@ -22,3 +22,6 @@ Z = X R with R_ij ~ N(0, 1/d) drawn from the reference LCG and
 reshaped ROW-MAJOR into (n, d). \code{achieved_variance} is the ddof = 1
 variance, matching the payload (not the ddof = 0 summary line).
 }
+\examples{
+morie_geron_gaussian_random_projection(X = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L)
+}

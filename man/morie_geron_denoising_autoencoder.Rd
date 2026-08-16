@@ -24,3 +24,6 @@ List with \code{loss}, \code{mse_per_element}, \code{per_sample_loss},
 Scoring against x rather than x_tilde is the point: copying the input
 is now a losing strategy. \code{denoising_gain} = noise_energy / loss.
 }
+\examples{
+morie_geron_denoising_autoencoder(x = c(1, 2, 3, 4, 5, 6, 7, 8), noise = c(1, 2, 3, 4, 5, 6, 7, 8), decoded = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

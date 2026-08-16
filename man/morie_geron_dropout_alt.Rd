@@ -21,3 +21,6 @@ List with \code{y}, \code{mask}, \code{scale}, \code{n_dropped}, \code{drop_frac
 \description{
 Inverted dropout: y = mask * x / (1 - p) (hmdrp)
 }
+\examples{
+morie_geron_dropout_alt(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

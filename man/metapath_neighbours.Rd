@@ -19,3 +19,6 @@ Part of the hetgnn_native implementation; see the file header for the source it 
 A list with \code{neighbours}, \code{metapath}, \code{note}.
 }
 \keyword{internal}
+\examples{
+metapath_neighbours(edges = c(1, 2, 3, 4, 5, 6, 7, 8), types = c("a", "b", "c"), metapath = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

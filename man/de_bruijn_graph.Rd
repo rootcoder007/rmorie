@@ -19,3 +19,6 @@ an edge from its prefix to its suffix. multiplicity="set" gives one edge per dis
 A list with \code{edges}, \code{indeg}, \code{outdeg}.
 }
 \keyword{internal}
+\examples{
+de_bruijn_graph(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
+}

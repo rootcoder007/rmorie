@@ -18,3 +18,6 @@ Part of the ibpfa_native implementation; see the file header for the source it f
 A list with \code{expected_total_features}, \code{harmonic}, \code{expected_per_object}, \code{expected_nonzeros}, \code{note}.
 }
 \keyword{internal}
+\examples{
+expected_features(n = 5L, alpha = 0.5)
+}

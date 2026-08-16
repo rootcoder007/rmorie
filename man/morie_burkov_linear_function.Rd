@@ -19,3 +19,6 @@ List with \code{predictions}.
 \description{
 Linear model f(x) = wx + b (Burkov Eq 1.1)
 }
+\examples{
+morie_burkov_linear_function(x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

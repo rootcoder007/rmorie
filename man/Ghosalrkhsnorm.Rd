@@ -41,3 +41,6 @@ small-ball exponent = -log P(sqrt(sum_i lambda_i Z_i^2) < eps).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, eq. (11.11).
 }
+\examples{
+Ghosalrkhsnorm(f0_coefs = c(1, 2, 3, 4, 5, 6, 7, 8), lambdas = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
+}

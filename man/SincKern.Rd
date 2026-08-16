@@ -20,3 +20,6 @@ taps and delayed by M/2 to make it causal.  Truncation is multiplying by a recta
 A list with \code{h}, \code{n_taps}, \code{fc}, \code{fs}, \code{M}, \code{window}, \code{window_values}, \code{delay_samples}, \code{dc_gain}, \code{truncation_causes_gibbs_ripple}, \code{ripple_height_does_not_shrink_with_M}, \code{method}.
 }
 \keyword{internal}
+\examples{
+SincKern(fc = 5L)
+}

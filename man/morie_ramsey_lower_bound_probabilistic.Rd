@@ -28,3 +28,6 @@ union-bound calculation is also stronger than the clean
 \references{
 Erdos P (1947) \emph{Bulletin of the AMS} 53:292-294.
 }
+\examples{
+morie_ramsey_lower_bound_probabilistic(k = 5L)
+}

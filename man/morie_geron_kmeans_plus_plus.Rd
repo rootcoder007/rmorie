@@ -19,3 +19,6 @@ List with centers, indices, d2, min_pair_distance, estimate, n, method.
 \description{
 RNG substitute via the shared LCG stream (not numpy PCG64).
 }
+\examples{
+morie_geron_kmeans_plus_plus(X = c(1, 2, 3, 4, 5, 6, 7, 8), n_clusters = 5L)
+}

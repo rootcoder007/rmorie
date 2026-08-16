@@ -47,3 +47,6 @@ The book was not in the local corpus and could not be obtained; the
 quantity is implemented exactly as the ratio printed above, its
 standard published form, stated in full so it can be checked.
 }
+\examples{
+Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

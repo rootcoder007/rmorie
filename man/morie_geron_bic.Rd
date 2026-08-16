@@ -19,3 +19,6 @@ List with \code{bic}, \code{delta}, \code{weights}, \code{best_index}, \code{pen
 \description{
 BIC = -2 log L + k log n. \code{best_index} is 0-based.
 }
+\examples{
+morie_geron_bic(log_lik = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L, n = 5L)
+}

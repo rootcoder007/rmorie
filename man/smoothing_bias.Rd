@@ -20,3 +20,6 @@ Part of the tlcvnp_native implementation; see the file header for the source it 
 A list with \code{bias_order}, \code{h}, \code{smoothness}, \code{note}.
 }
 \keyword{internal}
+\examples{
+smoothing_bias(true_density = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

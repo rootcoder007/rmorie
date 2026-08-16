@@ -36,3 +36,6 @@ Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
 reused here from survrsf.
 }
 \keyword{internal}
+\examples{
+morie_surxgb_leaf_weight(G = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)
+}

@@ -22,3 +22,6 @@ not reach zero under exact conditional independence. Mirrors
 Gibbons JD, Chakraborti S (2011). \emph{Nonparametric
 Statistical Inference}, 5th ed., Sec. 12.5.
 }
+\examples{
+morie_partial_tau(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

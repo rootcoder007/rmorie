@@ -36,3 +36,6 @@ del Barrio, E., Cuesta-Albertos, J. A. and Matran, C.
 Cuturi, M. and Doucet, A. (2014). Proceedings of Machine Learning
 Research 32:685-693 (ICML).
 }
+\examples{
+Otmcluster(X_list = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

@@ -14,3 +14,6 @@ Placement / exceedance null law -- Problem 2.28(c), p. 70
 A list with \code{pmf}, \code{pmf_j}, \code{cdf_j}, \code{mean}, \code{var}, \code{i}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Exceed(i = 5L, m = 5L, n = 5L)
+}

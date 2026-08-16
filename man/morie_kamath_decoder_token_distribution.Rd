@@ -17,3 +17,6 @@ morie_kamath_decoder_token_distribution
 A list with \code{distribution}, \code{predicted_token}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_decoder_token_distribution(s_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8), y_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

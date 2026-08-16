@@ -18,3 +18,6 @@ Part of the tlcvnp_native implementation; see the file header for the source it 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+kernel_smooth(u = 5L)
+}

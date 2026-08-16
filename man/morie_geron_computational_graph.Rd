@@ -28,3 +28,6 @@ with bare strings for variables and bare numbers for constants.
 Supported ops: add, sub, mul, div, pow, neg, exp, log, sin, cos,
 tanh, sqrt, square.
 }
+\examples{
+morie_geron_computational_graph(expr = 5L)
+}

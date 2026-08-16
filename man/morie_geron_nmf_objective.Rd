@@ -16,3 +16,6 @@ List with \code{objective}, \code{reconstruction}, \code{residual},
 \description{
 NMF Frobenius objective (Geron Ch 8, morie.fn grnmfo)
 }
+\examples{
+morie_geron_nmf_objective(X = 5L, W = 5L, H = 0.5)
+}

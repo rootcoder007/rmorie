@@ -21,3 +21,6 @@ Y_l(omega) = X_l(omega) + P_l(omega).  Eq (4.59) needs both factors nonzero, so 
 A list with \code{y}, \code{Yl}, \code{Xl}, \code{Pl}, \code{max_difference}, \code{additive}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LogFT(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8), omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

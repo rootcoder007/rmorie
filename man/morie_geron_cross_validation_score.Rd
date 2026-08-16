@@ -37,3 +37,6 @@ R^2. \code{shuffle} is not supported, because numpy's default_rng stream
 cannot be reproduced in R -- passing TRUE is an error rather than a
 silently different split.
 }
+\examples{
+morie_geron_cross_validation_score(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), K = 3L)
+}

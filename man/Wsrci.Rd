@@ -14,3 +14,6 @@ Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209
 A list with \code{lower}, \code{upper}, \code{coverage}, \code{tail}, \code{nwalsh}, \code{n}, \code{tcrit}, \code{estimate}.
 }
 \keyword{internal}
+\examples{
+Wsrci(x = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = 5L)
+}

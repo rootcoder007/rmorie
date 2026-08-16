@@ -19,3 +19,6 @@ Part of the smcsam_native implementation; see the file header for the source it 
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+resample(weights = 5L, rng = list(a = 1, b = 2))
+}

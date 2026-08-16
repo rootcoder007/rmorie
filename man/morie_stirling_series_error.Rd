@@ -30,3 +30,6 @@ measure the rounding of the comparison, not the series, so
 \code{error_within_bound} is judged against bound plus the
 double-precision floor, reported separately as \code{double_floor}.
 }
+\examples{
+morie_stirling_series_error(n = 5L)
+}

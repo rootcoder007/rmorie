@@ -40,3 +40,6 @@ Kermack & McKendrick (1927), Proc. R. Soc. Lond. A
 115(772):700-721, doi:10.1098/rspa.1927.0118; Ma & Earn (2006),
 Bull. Math. Biol. 68(3):679-702, doi:10.1007/s11538-005-9047-7.
 }
+\examples{
+Finalsz(R0 = 5L)
+}

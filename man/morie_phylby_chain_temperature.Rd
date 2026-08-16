@@ -18,3 +18,6 @@ Part of the phylby_native implementation; see the file header for the source it 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_phylby_chain_temperature(j = 5L)
+}

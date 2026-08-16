@@ -35,3 +35,6 @@ The levels, with a zero appended.
     124-132.
 }
 \keyword{internal}
+\examples{
+morie_alf3df_schedule(n_steps = 5L)
+}

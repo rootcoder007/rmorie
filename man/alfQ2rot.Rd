@@ -19,3 +19,6 @@ lines 2-3.  Fixing the leading component to 1 before normalisation both guarante
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+alfQ2rot(b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L)
+}

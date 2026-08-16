@@ -17,3 +17,6 @@ morie_kamath_scaled_dot_attention
 A list with \code{output}, \code{attention}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_scaled_dot_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

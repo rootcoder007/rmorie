@@ -19,3 +19,6 @@ Part of the rmrl_native implementation; see the file header for the source it fo
 A list with \code{u}, \code{reward}.
 }
 \keyword{internal}
+\examples{
+morie_rmrl_machine_step(machine = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), u = 5L, sigma = 0.5)
+}

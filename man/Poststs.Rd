@@ -34,3 +34,6 @@ Journal of the Royal Statistical Society Series A 142(1):33-46.
 \doi{10.2307/2344652}. Standard form; the paper is paywalled and not
 held locally.
 }
+\examples{
+Poststs(y = c(1, 2, 3, 4, 5, 6, 7, 8), stratum = c(1, 2, 3, 4, 5, 6, 7, 8), Nh = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -22,3 +22,6 @@ maximum-weight independent set.
 \references{
 Edmonds J (1971) \emph{Math Prog} 1:127-136.
 }
+\examples{
+morie_greedy_independent_set(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

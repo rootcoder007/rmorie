@@ -22,3 +22,6 @@ Part of the rangayyan_filt implementation; see the file header for the source it
 A list with \code{y}, \code{n}, \code{window}, \code{kind}, \code{alpha}, \code{trimmed_each_end}, \code{order}, \code{nonlinear}, \code{no_frequency_response}, \code{edges}, \code{method}.
 }
 \keyword{internal}
+\examples{
+OsFilt(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+}

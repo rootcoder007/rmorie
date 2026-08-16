@@ -14,3 +14,6 @@ RVN null moments -- Sec. 3.5, p. 95 (Bartels 1982)
 A list with \code{mean}, \code{var}, \code{var_approx}, \code{sd}, \code{denom}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Rvnmom(n = 5L)
+}

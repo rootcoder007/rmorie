@@ -28,3 +28,6 @@ Part of the explor_native implementation; see the file header for the source it 
 The value of \code{payload}, as built in the body.
 }
 \keyword{internal}
+\examples{
+explor(states = c(1, 2, 3, 4, 5, 6, 7, 8), actions = c(1, 2, 3, 4, 5, 6, 7, 8), next_states = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -32,3 +32,6 @@ Cross-checked against the reference implementation in the CRAN
 package samplingbook 1.2.4, whose stratasamp(type = "prop") sets
 wh <- Nh/N.
 }
+\examples{
+Propalloc(Nh = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

@@ -40,3 +40,6 @@ zero -- the cheapest check of the sign convention.
 Robins, J., Li, L., Mukherjee, R., Tchetgen Tchetgen, E.
 & van der Vaart, A. (2017). Annals of Statistics 45(5).
 }
+\examples{
+Tmlres(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

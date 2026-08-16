@@ -19,3 +19,6 @@ checked against the square itself.  This is the INSTANTANEOUS squared error stan
 A list with \code{e}, \code{e_squared}, \code{expanded}, \code{max_difference}, \code{agrees}, \code{nonnegative}, \code{instantaneous_not_expected}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LmsSqErr(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

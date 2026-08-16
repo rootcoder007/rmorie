@@ -19,3 +19,6 @@ The S0, S1 and S2 totals of a spatial weights matrix:
 \verb{S2 = sum_i (sum_j w_ij + sum_j w_ji)^2}.  Every asymptotic test of
 spatial autocorrelation is a function of these three.
 }
+\examples{
+morie_weights_totals(W = 5L)
+}

@@ -18,3 +18,6 @@ round_trip(epsilon, delta)
 A list with \code{epsilon_in}, \code{rho},   \code{epsilon_out}, \code{inflation}, \code{delta}.
 }
 \keyword{internal}
+\examples{
+round_trip(epsilon = 5L, delta = 0.5)
+}

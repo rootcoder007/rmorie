@@ -20,3 +20,6 @@ Part of the perfat_native implementation; see the file header for the source it 
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+draw_projections(m = 5L, d = 5L)
+}

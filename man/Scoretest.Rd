@@ -32,3 +32,6 @@ score test. Wasserman (2004), All of Statistics, does NOT give the
 score test, so it is not cited for this formula; the full text of
 the book was fetched and searched to establish that.
 }
+\examples{
+Scoretest(successes = 5L, n = 5L)
+}

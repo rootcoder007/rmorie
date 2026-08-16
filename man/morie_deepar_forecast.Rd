@@ -23,3 +23,6 @@ Fit, sample, and read the quantiles off the trajectories
 A list with \code{mean}, \code{quantiles}, \code{paths},   \code{width} and the same metadata as the Python arm.
 }
 \keyword{internal}
+\examples{
+morie_deepar_forecast(z = c(1, 2, 3, 4, 5, 6, 7, 8), horizon = 5L)
+}

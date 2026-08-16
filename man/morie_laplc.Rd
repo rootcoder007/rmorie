@@ -22,3 +22,6 @@ Dwork, C., McSherry, F., Nissim, K. and Smith, A.
 (2006). Calibrating noise to sensitivity in private data
 analysis. TCC 2006, LNCS 3876, 265-284.
 }
+\examples{
+morie_laplc(value = c(1, 2, 3, 4, 5, 6, 7, 8), sensitivity = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

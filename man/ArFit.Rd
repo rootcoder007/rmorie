@@ -20,3 +20,6 @@ spectrum from P+1 parameters.  That smoothness is also the trap: the model can o
 The value of \code{fit}, as built in the body.
 }
 \keyword{internal}
+\examples{
+ArFit(x = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+}

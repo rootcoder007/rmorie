@@ -14,3 +14,6 @@ Chi-square approximation to H -- Sec. 10.4.1, p. 357
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{table_k}, \code{k}.
 }
 \keyword{internal}
+\examples{
+Kwchi(h = 0.5, k = 5L)
+}

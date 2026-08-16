@@ -21,3 +21,6 @@ Exact uniform-cube nearest-neighbour radius
 r = exp((lgamma(d/2 + 1) - log n - (d/2) log pi) / d), the mean
 pairwise distance sqrt(d/6), and the border share.
 }
+\examples{
+morie_geron_curse_dimensionality(d = 5L, n = 5L)
+}

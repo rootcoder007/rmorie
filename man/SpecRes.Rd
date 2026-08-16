@@ -19,3 +19,6 @@ interpolates the same spectrum more finely and does NOT improve resolution -- th
 A list with \code{delta_f}, \code{resolution}, \code{main_lobe_bins}, \code{sidelobe_db}, \code{equivalent_noise_bandwidth_bins}, \code{duration}, \code{n}, \code{fs}, \code{window}, \code{zero_padding_helps}, \code{method}.
 }
 \keyword{internal}
+\examples{
+SpecRes(n = 5L)
+}

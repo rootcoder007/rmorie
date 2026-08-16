@@ -21,3 +21,6 @@ dictionary learning (9.5), not basis pursuit.  Chen, Donoho and Saunders, SIAM J
 A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{l1norm}, \code{objective}, \code{iterations}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BPursuit(x = 5L, D = 5L)
+}

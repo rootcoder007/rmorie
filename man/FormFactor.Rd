@@ -17,3 +17,6 @@ form factor = mobility(x\\')/mobility(x) = (sd(x\\'\\')/sd(x\\'))/(sd(x\\')/sd(x
 A list with \code{form_factor}, \code{complexity}, \code{mobility}, \code{activity}, \code{mobility_of_derivative}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+FormFactor(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+}

@@ -19,3 +19,6 @@ List with segmented, labels, palette, inertia, compression_ratio, estimate, n, m
 \description{
 Colour segmentation by k-means on pixels (Geron Ch 8, morie.fn hmiseg)
 }
+\examples{
+morie_geron_image_segmentation(image = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), n_clusters = 5L)
+}

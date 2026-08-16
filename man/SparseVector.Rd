@@ -22,3 +22,6 @@ Part of the sp_fill implementation; see the file header for the source it follow
 A list with \code{above}, \code{released}, \code{halted_at}, \code{n_above}, \code{noisy_threshold}, \code{noise_scales}, \code{epsilon_split}, \code{epsilon}, \code{c}, \code{cost_scales_with_c_not_with_m}, \code{answered}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+SparseVector(queries = c(1, 2, 3, 4, 5, 6, 7, 8), threshold = 0.5)
+}

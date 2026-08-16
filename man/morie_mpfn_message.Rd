@@ -20,3 +20,6 @@ Eq. (1)\'s M_t
 A message vector.
 }
 \keyword{internal}
+\examples{
+morie_mpfn_message(h_v = c(1, 2, 3, 4, 5, 6, 7, 8), h_w = c(1, 2, 3, 4, 5, 6, 7, 8), e_vw = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

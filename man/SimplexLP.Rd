@@ -21,3 +21,6 @@ SimplexLP(c, A, b, max_iter = 1000L, tol = 1e-12)
 A list with \code{status}, \code{x}, \code{objective}, \code{slack}, \code{basis}, \code{dual}, \code{iterations}, \code{n_var}, \code{n_con}, \code{method}.
 }
 \keyword{internal}
+\examples{
+SimplexLP(c = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

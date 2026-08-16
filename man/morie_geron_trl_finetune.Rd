@@ -32,3 +32,6 @@ list (shape depends on method) with theta, loss, loss_curve, ..., estimate, n, m
 Optimisation, loss = -log sigmoid(beta*(Delta_policy - Delta_ref)).
 "ppo": clipped surrogate min(rA, clip(r,1-eps,1+eps)A).
 }
+\examples{
+morie_geron_trl_finetune(dataset = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

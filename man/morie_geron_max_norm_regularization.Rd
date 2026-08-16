@@ -22,3 +22,6 @@ Per-row (axis = 1) or per-column (axis = 0) w *= min(1, r/||w||); a
 constraint applied after the step, not a penalty. \code{rows_projected}
 is 0-based.
 }
+\examples{
+morie_geron_max_norm_regularization(W = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L)
+}

@@ -14,3 +14,6 @@ morie_msm_gmm
 A list with \code{beta}, \code{residuals}, \code{moments}.
 }
 \keyword{internal}
+\examples{
+morie_msm_gmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), Z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

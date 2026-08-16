@@ -29,3 +29,6 @@ be zero for a genuine partition.
 Doubles stop being exact integers past \eqn{2^{53}}, so \code{factorial},
 \code{hook_product} and \code{count} are accompanied by exact decimal strings.
 }
+\examples{
+morie_standard_tableaux_count(shape = 5L)
+}

@@ -44,3 +44,6 @@ doi:10.18653/v1/N19-1423. The single-token masking objective span
 corruption replaces.
 }
 \keyword{internal}
+\examples{
+t5enc_task_prefix(task = 5L, text = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

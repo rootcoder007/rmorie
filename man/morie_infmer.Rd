@@ -31,3 +31,6 @@ See Also
 :mod:`morie.fn.informer` -- the implementation.
 }
 \keyword{internal}
+\examples{
+morie_infmer(q = 0.5, k = 5L, v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

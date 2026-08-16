@@ -21,3 +21,6 @@ Draws the branch probabilities \code{Y_eps ~ Beta(a, a)} down to a stated level 
 A list with \code{Y}, \code{levels}, \code{rule}, \code{c},   \code{n_nodes} and \code{note}.
 }
 \keyword{internal}
+\examples{
+poltrx_finite_tree(levels = 5L)
+}

@@ -21,3 +21,6 @@ Draws Box-Muller cosine-branch normals from the shared generator using two unifo
 A list with \code{release}, \code{sigma}, \code{rho},   \code{sensitivity}.
 }
 \keyword{internal}
+\examples{
+morie_zfmech(value = c(1, 2, 3, 4, 5, 6, 7, 8), sensitivity = 5L, rho = 0.5)
+}

@@ -25,3 +25,6 @@ Part of the rangayyan_class2 implementation; see the file header for the source 
 A list with \code{ahi}, \code{severity}, \code{apnea}, \code{hypopnea}, \code{events}, \code{hours}, \code{baseline}, \code{envsec}, \code{oxygenchecked}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Ahi(airflow = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+}

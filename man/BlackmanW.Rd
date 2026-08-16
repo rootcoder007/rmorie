@@ -17,3 +17,6 @@ A third cosine term buys much deeper sidelobes than the Hamming window -- about 
 A list with the window \code{w}, its length, its sum, its two   endpoints and its coherent gain, together with the note that it has   the widest main lobe of the three classical windows.
 }
 \keyword{internal}
+\examples{
+BlackmanW(N = 5L)
+}

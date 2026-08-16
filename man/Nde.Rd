@@ -44,3 +44,6 @@ Explanation in Causal Inference, OUP. Standard published form of the
 linear-SEM decomposition; neither source was in the local corpus, so
 the equations are stated in full above.
 }
+\examples{
+Nde(X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

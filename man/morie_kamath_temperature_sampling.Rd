@@ -17,3 +17,6 @@ List with \code{probabilities}, \code{entropy}, \code{max_entropy}, \code{argmax
 \description{
 softmax(z / T), max-shifted; T <= 0 is greedy decoding and is refused.
 }
+\examples{
+morie_kamath_temperature_sampling(logits = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
+}

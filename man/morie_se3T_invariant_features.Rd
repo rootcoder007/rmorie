@@ -47,3 +47,6 @@ Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
 equivariant.
 }
 \keyword{internal}
+\examples{
+morie_se3T_invariant_features(positions = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8), j = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

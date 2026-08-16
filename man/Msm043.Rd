@@ -26,3 +26,6 @@ Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (6.2) p.172. DOI 10.1007/978-3-030-89010-0.
 }
+\examples{
+Msm043(sigma2 = 5L)
+}

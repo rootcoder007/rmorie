@@ -18,3 +18,6 @@ Part of the bhltmsm_native implementation; see the file header for the source it
 A list with \code{cumulative}, \code{states}, \code{periods}, \code{note}.
 }
 \keyword{internal}
+\examples{
+cumulative_episodes(histories = list(a = 1, b = 2))
+}

@@ -19,3 +19,6 @@ Part of the pate_native implementation; see the file header for the source it fo
 The value of \code{arg}, as built in the body.
 }
 \keyword{internal}
+\examples{
+noisy_argmax(counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+}

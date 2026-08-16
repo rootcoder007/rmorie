@@ -18,3 +18,6 @@ Part of the edgrn_native implementation; see the file header for the source it f
 A list with \code{variance}, \code{poisson}, \code{biological}, \code{bcv}, \code{note}.
 }
 \keyword{internal}
+\examples{
+edgrn_nb_variance(mu = 5L, dispersion = 5L)
+}

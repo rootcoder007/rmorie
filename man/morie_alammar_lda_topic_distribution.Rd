@@ -19,3 +19,6 @@ morie_alammar_lda_topic_distribution(documents, n_topics, alpha = 0.1, beta = 0.
 A list with \code{theta}, \code{phi}, \code{vocabulary}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_alammar_lda_topic_distribution(documents = c(1, 2, 3, 4, 5, 6, 7, 8), n_topics = 5L)
+}
