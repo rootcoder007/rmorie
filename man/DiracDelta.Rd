@@ -18,3 +18,7 @@ generalized function has no pointwise value at the origin, so NA is returned the
 A list with \code{delta}, \code{t}, \code{width}, \code{height}, \code{undefined_at_zero}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DiracDelta(V)
+}

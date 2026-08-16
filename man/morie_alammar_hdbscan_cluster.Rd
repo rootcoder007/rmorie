@@ -18,3 +18,7 @@ Core distance to the min_samples-th neighbour, mutual reachability, single-linka
 A list with \code{labels}, \code{n_clusters}, \code{n_noise}, \code{core_distances}, \code{cut_threshold}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_hdbscan_cluster(V)
+}

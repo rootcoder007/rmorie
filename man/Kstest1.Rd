@@ -29,3 +29,7 @@ Wasserman (2004), All of Statistics, Section 15.4 and
 Theorem 15.12, equation (15.14). Fetched as the full text of the
 book.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kstest1(V, V)
+}

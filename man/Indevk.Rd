@@ -14,3 +14,8 @@ Independence of k events (Deshmukh eq. 5.1)
 A list with \code{n_conditions}, \code{max_deviation}, \code{independent}, \code{k}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+S <- c("a", "b", "c")
+Indevk(S, V)
+}

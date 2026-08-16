@@ -28,3 +28,7 @@ Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
 Bayesian Data Analysis, 3rd edition, Section 6.3. Fetched as the full
 text of the book from the author's own copy.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ppmean(V)
+}

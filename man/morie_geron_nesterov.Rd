@@ -27,3 +27,7 @@ Pass \code{grads} as a function to get the true look-ahead evaluation;
 pass a vector for the pre-evaluated form (the look-ahead point is
 still reported).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_nesterov(V)
+}

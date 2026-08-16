@@ -17,3 +17,7 @@ morie_alammar_tokenizer_vocab_overlap
 A list with \code{estimate}, \code{intersection}, \code{union}, \code{only_a}, \code{only_b}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_tokenizer_vocab_overlap(V, V)
+}

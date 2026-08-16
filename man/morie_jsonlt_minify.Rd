@@ -24,3 +24,7 @@ Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
   Interchange Format." RFC 8259.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_jsonlt_minify(V)
+}

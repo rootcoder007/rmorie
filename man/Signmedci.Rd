@@ -14,3 +14,7 @@ Median CI from sign-test inversion -- eq. (5.4.11), p. 179
 A list with \code{lower}, \code{upper}, \code{r}, \code{s}, \code{coverage}, \code{tail}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Signmedci(V)
+}

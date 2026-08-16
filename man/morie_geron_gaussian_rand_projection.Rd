@@ -19,3 +19,7 @@ List with \code{X_projected}, \code{R}, \code{d_in}, \code{d_out}, \code{max_dis
 \description{
 Gaussian random projection X' = X R, R_ij ~ N(0, 1/d') (hmgrp)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gaussian_rand_projection(V, V)
+}

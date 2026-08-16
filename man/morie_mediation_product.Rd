@@ -31,3 +31,7 @@ respects that asymmetry.
 MacKinnon DP (2008), Ch 3-4. Sobel ME (1982)
 \emph{Sociological Methodology} 13:290-312.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mediation_product(V, V)
+}

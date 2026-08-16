@@ -19,3 +19,7 @@ Peyre & Cuturi (2019), Sec. 2.4.
 \references{
 Peyre & Cuturi (2019), Sec. 2.4.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otcostsq(V, V)
+}

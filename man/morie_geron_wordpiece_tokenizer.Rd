@@ -20,3 +20,7 @@ Greedily merges the pair maximising freq(AB)/(freq(A)*freq(B)) (not
 raw frequency, that is BPE); continuation pieces carry "##"; final
 segmentation is greedy longest-match-first.
 }
+\examples{
+S <- c("a", "b", "c")
+morie_geron_wordpiece_tokenizer(S)
+}

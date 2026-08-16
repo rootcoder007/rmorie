@@ -34,3 +34,7 @@ One entropy per query row.
     sequence models." Transactions of the ACL 8, 156-171.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_vit2lf_entropy(M)
+}

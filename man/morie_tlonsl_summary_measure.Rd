@@ -32,3 +32,7 @@ Learner", Statistical Applications in Genetics and Molecular
 Biology 6(1), Article 25, doi:10.2202/1544-6115.1309.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tlonsl_summary_measure(V)
+}

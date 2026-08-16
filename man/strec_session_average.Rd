@@ -46,3 +46,7 @@ important, where STAMP explicitly privileges the last click;
 implemented in :mod:`narm`.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+strec_session_average(V)
+}

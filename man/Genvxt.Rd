@@ -33,3 +33,7 @@ Cronbach, Gleser, Nanda and Rajaratnam (1972), The
 Dependability of Behavioral Measurements, Wiley; Brennan (2001),
 Generalizability Theory, Springer, ch. 2.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Genvxt(M)
+}

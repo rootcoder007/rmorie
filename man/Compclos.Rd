@@ -24,3 +24,7 @@ implementation in the CRAN package compositions 2.0-9 (van den
 Boogaart & Tolosana-Delgado), whose clo/acomp divide by the row sum
 and rescale to the requested total.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compclos(V)
+}

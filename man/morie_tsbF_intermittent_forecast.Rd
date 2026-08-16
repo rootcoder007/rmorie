@@ -90,3 +90,7 @@ Production Economics* 265, 109013, doi:10.1016/j.ijpe.2023.109013.
 The state-space formulation that puts Croston and TSB in one family.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tsbF_intermittent_forecast(V)
+}

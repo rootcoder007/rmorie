@@ -20,3 +20,7 @@ delay must be at least the reference duration or the filter is not causal; the b
 A list with \code{h}, \code{t0}, \code{shift_samples}, \code{gain}, \code{causal}, \code{reversed}, \code{n_reference}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MfImpulse(V)
+}

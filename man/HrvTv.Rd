@@ -21,3 +21,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{times}, \code{vlf}, \code{lf}, \code{hf}, \code{total_power}, \code{lf_hf_ratio}, \code{lf_percent}, \code{hf_percent}, \code{bands}, \code{standard}, \code{mean_rr}, \code{mean_hr}, \code{resampled}, \code{fs_resamp}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HrvTv(V)
+}

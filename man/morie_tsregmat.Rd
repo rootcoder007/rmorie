@@ -19,3 +19,8 @@ list(rows, y, lags, horizon, nrows, ncols, ymean, xmean)
 \description{
 Time series recast as a regression problem (ch. 5 p. 118)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_tsregmat(V, M)
+}

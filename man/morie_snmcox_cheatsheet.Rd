@@ -27,3 +27,6 @@ with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
 477-491, doi:10.1002/pds.1064.
 }
 \keyword{internal}
+\examples{
+morie_snmcox_cheatsheet()
+}

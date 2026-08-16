@@ -36,3 +36,6 @@ Formula: growth = log(var(R_1) / var(R_{1/4})) / log 4, which equals
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.6, eq. (11.2).
 }
+\examples{
+Ghosalrlprocess()
+}

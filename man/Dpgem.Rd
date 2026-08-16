@@ -32,3 +32,6 @@ Sethuraman (1994), Statistica Sinica 4(2):639-650;
 Pitman (2002), Poisson-Dirichlet and GEM invariant distributions,
 Technical Report 621, U.C. Berkeley.
 }
+\examples{
+Dpgem()
+}

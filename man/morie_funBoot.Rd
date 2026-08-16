@@ -23,3 +23,7 @@ Part of the funBoot_mixedcase_native implementation; see the file header for the
 A list with \code{center}, \code{radius}, \code{estimate}, \code{distances}, \code{n_within}, \code{metric}, \code{alpha}, \code{B}, \code{seed}, \code{method}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_funBoot(D)
+}

@@ -18,3 +18,7 @@ Part of the opnclp_native implementation; see the file header for the source it 
 A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared}, \code{range}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+fit_power_law(V, V)
+}

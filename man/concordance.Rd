@@ -45,3 +45,7 @@ Studies by Use of Localized Haplotype Clustering", *American Journal
 of Human Genetics* 81(5), 1084-1097, doi:10.1086/521987.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+concordance(V, V)
+}

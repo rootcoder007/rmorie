@@ -46,3 +46,7 @@ Wellner (1993), Efficient and Adaptive Estimation for Semiparametric
 Models, Section 2.5.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Onestep(V, V)
+}

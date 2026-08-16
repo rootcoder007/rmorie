@@ -27,3 +27,7 @@ linearity is what the plot is read for.
 \references{
 Davison & Smith (1990), JRSS B 52(3):393-442.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Evmrlp(V)
+}

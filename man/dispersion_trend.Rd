@@ -20,3 +20,7 @@ Gamma-family GLM with an identity link, iterating with genes whose dispersion/fi
 A list with \code{a1}, \code{a0} and \code{fitted}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+dispersion_trend(V, V)
+}

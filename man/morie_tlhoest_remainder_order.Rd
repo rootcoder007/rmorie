@@ -42,3 +42,7 @@ David A. Freedman*, IMS, 335-421, doi:10.1214/193940307000000527.
 Higher-order influence functions.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tlhoest_remainder_order(V)
+}

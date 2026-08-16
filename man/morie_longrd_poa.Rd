@@ -33,3 +33,7 @@ The consensus sequence.
     Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_longrd_poa(V)
+}

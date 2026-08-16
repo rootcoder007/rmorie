@@ -33,3 +33,7 @@ Loh, W.-Y. (1991). Bootstrap calibration for
 confidence interval construction and selection. Statistica
 Sinica, 1(2), 477-491.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_btcalib(V)
+}

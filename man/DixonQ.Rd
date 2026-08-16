@@ -19,3 +19,7 @@ list(statistic, type, outlier, side, numerator, denominator, n)
 \description{
 Dixon (1953) ratio for the most extreme observation
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DixonQ(V)
+}

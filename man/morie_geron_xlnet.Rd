@@ -21,3 +21,7 @@ two-stream masks (\code{morie_geron_permutation_masks}), scores each
 conditional from the visible (query-stream) context under an
 embedding-based softmax head.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_xlnet(V)
+}

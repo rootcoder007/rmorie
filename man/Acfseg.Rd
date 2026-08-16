@@ -21,3 +21,7 @@ Part of the rangayyan_adapt implementation; see the file header for the source i
 A list with \code{distance}, \code{power_distance}, \code{spectral_distance}, \code{lags}, \code{lags_auto}, \code{acf_test}, \code{acf_reference}, \code{power_test}, \code{power_reference}, \code{boundary}, \code{th_power}, \code{th_spectral}, \code{amplitude_invariant}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Acfseg(V, V)
+}

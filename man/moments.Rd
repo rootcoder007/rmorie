@@ -17,3 +17,6 @@ Both Achlioptas distributions have mean \code{0} and variance \code{1} exactly, 
 A list with \code{mean}, \code{variance},   \code{fourth_moment}, \code{support}, \code{density},   \code{note}.
 }
 \keyword{internal}
+\examples{
+moments()
+}

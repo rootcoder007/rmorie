@@ -28,3 +28,7 @@ unnormalised Laplacian L = D - W, embeds via its n_clusters smallest
 eigenvectors, k-means (Lloyd/k-means++ on an LCG stream) in that
 embedding.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_spectral_clustering(V)
+}

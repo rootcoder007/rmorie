@@ -19,3 +19,7 @@ Policy pi(a|s): probabilities, entropy and a reproducible sampled action (Geron 
 A list with \code{probabilities}, \code{action}, \code{greedy_action}, \code{entropy}, \code{deterministic}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_policy(V, V)
+}

@@ -19,3 +19,7 @@ The RDP epsilon at \code{alpha}.
 \description{
 Gaussian RDP curve (Mironov 2017, Corollary 3)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rdp_gaussian(V, V)
+}

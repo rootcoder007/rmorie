@@ -18,3 +18,7 @@ List with \code{loss}, \code{sum_squared_error}, \code{per_sample},
 \description{
 DDPM simplified noise-prediction loss (Geron Ch 18, morie.fn grdpml)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_ddpm_simple_loss(V, V)
+}

@@ -21,3 +21,7 @@ The lower and upper ideal fourths of Wilcox (2017) eq. (2.6)-(2.7),
 and the interquartile range they define, eq. (2.8).  These are the
 quartile estimates the book uses for outlier detection.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ideal_fourths(V)
+}

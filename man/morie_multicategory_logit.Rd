@@ -37,3 +37,6 @@ baseline-category logits and probabilities, one-at-a-time Wald
 intervals, proportional and non-proportional odds forms, the polr()
 parameterization, and category probabilities from cumulatives.
 }
+\examples{
+morie_multicategory_logit()
+}

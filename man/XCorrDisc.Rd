@@ -19,3 +19,7 @@ instant IS this sum, so its peak locates the pattern.  Neither XCorr mode gives 
 A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{normalized}, \code{is_the_matched_filter_output}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+XCorrDisc(V, V)
+}

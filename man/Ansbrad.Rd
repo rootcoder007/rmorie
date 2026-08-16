@@ -14,3 +14,7 @@ Freund-Ansari-Bradley-David-Barton test -- eq. (9.3.1), p. 316
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{scores}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ansbrad(V, V)
+}

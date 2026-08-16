@@ -15,3 +15,7 @@ Integer edge count.
 \description{
 Number of edges in a simple undirected graph
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_count_edges(V)
+}

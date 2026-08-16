@@ -18,3 +18,7 @@ Regression of the phenotype on one marker genotype; returns the LOD both from th
 A named list with keys \code{estimate}, \code{lod},   \code{lod_likelihood}, \code{a}, \code{b}, \code{sigma2},   \code{rss}, \code{rss_null}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_single_marker(V, V)
+}

@@ -38,3 +38,7 @@ List with \code{estimate}, \code{wmd}, \code{normalizer}.
 1 - exact WMD / max pair cost. The transport LP is the same core the Eq
 8.10 module uses, so the two cannot drift.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_moverscore(V, V)
+}

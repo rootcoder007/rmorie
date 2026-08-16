@@ -19,3 +19,7 @@ log_barrier_hessian(fvals, jac, hess = NULL)
 Square numeric matrix.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+log_barrier_hessian(V, V)
+}

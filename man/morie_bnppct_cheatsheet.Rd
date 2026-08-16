@@ -23,3 +23,6 @@ A character scalar.
     through morie_slbpdg.
 }
 \keyword{internal}
+\examples{
+morie_bnppct_cheatsheet()
+}

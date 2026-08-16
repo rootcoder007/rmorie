@@ -19,3 +19,7 @@ List with \code{predictions}, \code{member_rate}, optionally \code{accuracy}.
 \description{
 Predict member iff loss < tau; with labels, TPR / FPR / advantage follow.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_membership_inference(V, V)
+}

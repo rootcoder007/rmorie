@@ -36,3 +36,7 @@ blocks, an MLM head tied to the embedding matrix, and an NSP head on the
 pooled first position. Masked positions come from the same LCG draw as
 Python and are returned 0-based.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bert(V)
+}

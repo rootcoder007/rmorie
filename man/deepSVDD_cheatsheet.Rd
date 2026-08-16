@@ -14,3 +14,6 @@ Part of the deepSVDD_native implementation; see the file header for the source i
 A character value.
 }
 \keyword{internal}
+\examples{
+deepSVDD_cheatsheet()
+}

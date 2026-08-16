@@ -21,3 +21,7 @@ Default base forecaster used by \code{morie_adida}, implementing the Teunter-Syn
 Named list with \code{forecast}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+intermittent_forecast(V)
+}

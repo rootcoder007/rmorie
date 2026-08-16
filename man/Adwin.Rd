@@ -26,3 +26,7 @@ Bifet and Gavalda (2007), Proc. SIAM SDM, 443-448,
 Section 3 and Figure 1.  Read from the authors' own PDF at
 www.cs.upc.edu/~gavalda.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Adwin(V)
+}

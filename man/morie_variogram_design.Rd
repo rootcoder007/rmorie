@@ -36,3 +36,6 @@ Fisher information, variance of the kriging variance, the augmented
 kriging variance, expected squared prediction shift, and the
 estimation-adjusted criterion.
 }
+\examples{
+morie_variogram_design()
+}

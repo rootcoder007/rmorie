@@ -30,3 +30,7 @@ List with \code{probs}, \code{log_likelihood}, \code{segmentations}.
 Forward-backward expected counts over every segmentation, then Viterbi
 segmentations at the fitted piece probabilities.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_unigram_lm_tokenizer(V, V)
+}

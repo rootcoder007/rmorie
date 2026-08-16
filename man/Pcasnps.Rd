@@ -48,3 +48,7 @@ Patterson, N., Price, A. L. & Reich, D. (2006).
 Population structure and eigenanalysis. PLoS Genetics, 2(12),
 e190. doi:10.1371/journal.pgen.0020190
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Pcasnps(M)
+}

@@ -27,3 +27,6 @@ A character scalar.
   Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 }
 \keyword{internal}
+\examples{
+morie_baysmplr_cheatsheet()
+}

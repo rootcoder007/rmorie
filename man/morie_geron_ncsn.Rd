@@ -19,3 +19,7 @@ Noise conditional score network: affine score models per noise level (Geron Ch 1
 A list with \code{models}, \code{analytic}, \code{max_deviation}, \code{loss_history}, \code{samples}, \code{sigmas}, \code{mean}, \code{covariance}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_ncsn(V)
+}

@@ -22,3 +22,7 @@ list with \code{time}, \code{cumhaz}, \code{se} and \code{surv = exp(-H)}
 samples, and the natural scale on which to judge proportional
 hazards.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_nelson_aalen(V, V)
+}

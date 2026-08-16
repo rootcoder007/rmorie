@@ -19,3 +19,6 @@ so the useful computation is the check on a candidate approximation.
 A list with \code{area}, \code{unit_area}, \code{method}.
 }
 \keyword{internal}
+\examples{
+DeltaArea()
+}

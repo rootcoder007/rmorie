@@ -31,3 +31,7 @@ A number, larger meaning closer.
     Journal of Machine Learning Research 12, 2539-2561.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_scfhop_similarity(V, V)
+}

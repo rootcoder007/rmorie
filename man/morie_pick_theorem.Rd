@@ -40,3 +40,7 @@ detection, not a defect.
 \references{
 Pick G (1899) \emph{Lotos} 19:311-319.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_pick_theorem(D)
+}

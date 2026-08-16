@@ -25,3 +25,7 @@ transfer entropy exactly for Gaussian processes. Mirrors
 Barnett L, Barrett AB, Seth AK (2009). \emph{Physical Review
 Letters} 103(23), 238701.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_transfer_entropy_gaussian(V, V)
+}

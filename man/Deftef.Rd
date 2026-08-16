@@ -26,3 +26,7 @@ vectors, in which case the ratio is taken element by element.
 \references{
 Kish (1965), Survey Sampling, Wiley, section 8.2.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Deftef(V, V)
+}

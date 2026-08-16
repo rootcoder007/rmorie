@@ -54,3 +54,7 @@ Hensman, Fusi and Lawrence (2013), Gaussian processes for
 big data, UAI 2013, arXiv:1309.6835; Titsias (2009), AISTATS 2009,
 PMLR 5:567-574.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gpsvi(V, V)
+}

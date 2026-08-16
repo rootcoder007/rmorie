@@ -17,3 +17,7 @@ pure delay of 7/2 samples.  The book states it "is equivalent to that in Equatio
 A list with \code{H}, \code{omega}, \code{direct_sum}, \code{max_difference}, \code{agrees_with_eq_3_111}, \code{group_delay}, \code{delay_is_not_an_integer}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ma8Sinc(V)
+}

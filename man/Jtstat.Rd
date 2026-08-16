@@ -14,3 +14,7 @@ Jonckheere-Terpstra B -- Sec. 10.6, eqs. (10.6.2)-(10.6.3), p. 365
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Jtstat(V)
+}

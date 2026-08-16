@@ -24,3 +24,6 @@ List with \code{layers}, \code{total_params}, \code{flatten_dim}, \code{fc_share
 \description{
 Output sizes delegated to \code{morie_geron_conv_output_size}.
 }
+\examples{
+morie_geron_fashion_mnist()
+}

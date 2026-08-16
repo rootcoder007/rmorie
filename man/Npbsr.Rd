@@ -37,3 +37,7 @@ Hjort, N. L. (1990). Nonparametric Bayes estimators
 based on beta processes in models for life history data. Annals of
 Statistics, 18(3), 1259-1294. doi:10.1214/aos/1176347749
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Npbsr(V)
+}

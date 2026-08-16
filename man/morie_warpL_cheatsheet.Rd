@@ -41,3 +41,6 @@ ECML 2010 paper above is the one held locally and is the text this
 module follows.
 }
 \keyword{internal}
+\examples{
+morie_warpL_cheatsheet()
+}

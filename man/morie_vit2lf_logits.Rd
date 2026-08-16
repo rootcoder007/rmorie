@@ -40,3 +40,7 @@ A list with the logit matrix and the scale actually applied.
     sequence models." Transactions of the ACL 8, 156-171.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_vit2lf_logits(V, V)
+}

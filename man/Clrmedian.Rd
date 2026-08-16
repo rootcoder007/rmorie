@@ -28,3 +28,7 @@ Filzmoser and Hron (2008), Mathematical Geosciences 40(3),
 Weiszfeld's (1937).  The article is paywalled and was not read; only
 the stated construction is claimed.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Clrmedian(M)
+}

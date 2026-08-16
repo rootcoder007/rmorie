@@ -18,3 +18,7 @@ max_d, argmax_d, threshold, p, n)
 \description{
 Cook (1977) distance for a linear model
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CooksD(V, V)
+}

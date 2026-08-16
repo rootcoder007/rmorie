@@ -17,3 +17,6 @@ h(n) = d(n) + 2 d(n-1) + 3 d(n-2) -- the same three numbers reversed. The book n
 A list with \code{g}, \code{h}, \code{y}, \code{acf}, \code{delay}, \code{max_difference}, \code{output_is_acf}, \code{method}.
 }
 \keyword{internal}
+\examples{
+RefPattern()
+}

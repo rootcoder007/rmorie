@@ -36,3 +36,6 @@ Var(f_1) = ((K^(-1) + W)^(-1))_{11}.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.7.5.
 }
+\examples{
+Ghosalgplaplace()
+}

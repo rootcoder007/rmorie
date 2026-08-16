@@ -17,3 +17,7 @@ the bracketed group is exactly y(n) of eq (4.10), so the running-sum state is re
 A list with \code{p}, \code{y}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsHPassDf(V)
+}

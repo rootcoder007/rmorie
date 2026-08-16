@@ -17,3 +17,6 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{dec_lo}, \code{dec_hi}, \code{rec_lo}, \code{rec_hi}, \code{order}, \code{length}, \code{vanishing_moments}, \code{sum_lo}, \code{norm_lo}, \code{max_shift_inner_product}, \code{method}.
 }
 \keyword{internal}
+\examples{
+OrthFilt()
+}

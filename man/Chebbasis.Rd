@@ -20,3 +20,7 @@ Formula: T_0 = 1, T_1 = x, T_{n+1}(x) = 2 x T_n(x) - T_{n-1}(x); equivalently T_
 \references{
 Chebyshev (1853). The original is not held locally; the recurrence T_{n+1} = 2 x T_n - T_{n-1} with T_0 = 1, T_1 = x and the identity T_n(cos t) = cos(n t) are the standard published definitions.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Chebbasis(V)
+}

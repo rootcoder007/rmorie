@@ -18,3 +18,8 @@ Token lookup, masked pooling, contextual extraction (Alammar Ch 2/8)
 A list with \code{embeddings}, \code{estimate}, \code{vocab_size}, \code{dim}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_alammar_token_embedding_lookup(M, V)
+}

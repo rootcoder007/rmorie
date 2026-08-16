@@ -19,3 +19,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{variances}, \code{scales}, \code{n_used}, \code{total_variance}, \code{sample_variance}, \code{dominant_scale}, \code{is_allan}, \code{wavelet}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+WtVar(V)
+}

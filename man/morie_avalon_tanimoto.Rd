@@ -32,3 +32,7 @@ A number between zero and one.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_avalon_tanimoto(V, V)
+}

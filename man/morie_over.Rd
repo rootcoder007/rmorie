@@ -31,3 +31,7 @@ Crump, R. K., Hotz, V. J., Imbens, G. W. and Mitnik,
 O. A. (2009). Dealing with limited overlap in estimation of
 average treatment effects. Biometrika, 96(1), 187-199.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_over(V, V)
+}

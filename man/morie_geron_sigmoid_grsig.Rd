@@ -16,3 +16,7 @@ List with \code{sigma} and \code{derivative}.
 The overflow-safe two-branch form; the shared kernel behind every
 logistic routine in this file.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_sigmoid_grsig(V)
+}

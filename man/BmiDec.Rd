@@ -22,3 +22,8 @@ Part of the rangayyan_class2 implementation; see the file header for the source 
 A list with \code{states}, \code{innovations}, \code{gain}, \code{predicted}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+BmiDec(D, M)
+}

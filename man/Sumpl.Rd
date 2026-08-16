@@ -14,3 +14,7 @@ Graph readout by sum pooling (standard; Xu et al. 2019 for its power)
 A list with \code{sum}, \code{mean}, \code{max}, \code{n_nodes}, \code{dim}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sumpl(V)
+}

@@ -17,3 +17,7 @@ sum over lags -3..3, and exp(-j4w) shifts that to lags 1..7, which with the lead
 A list with \code{H}, \code{factored}, \code{omega}, \code{magnitude}, \code{max_difference}, \code{factored_form_agrees}, \code{bracket_is_inside_the_product}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ma8Fr(V)
+}

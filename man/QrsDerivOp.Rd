@@ -17,3 +17,7 @@ antisymmetric taps make it exactly zero on any constant or linear baseline.
 A list with \code{y}, \code{b}, \code{n}, \code{fsnote}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsDerivOp(V)
+}

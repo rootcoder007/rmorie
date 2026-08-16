@@ -17,3 +17,7 @@ List with \code{gini}, \code{proportions}, \code{classes}, \code{counts},
 G = 1 - sum_k p_k^2, with the K-class ceiling 1 - 1/K reported so a
 value can be read against its own maximum.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gini_impurity(V)
+}

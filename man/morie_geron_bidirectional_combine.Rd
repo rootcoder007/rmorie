@@ -26,3 +26,7 @@ Pairs already-computed forward and backward states. Set
 \code{backward_in_reverse_order = TRUE} when the backward stack is still in
 emission order (last time step first) -- the classic silent bug.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bidirectional_combine(V, V)
+}

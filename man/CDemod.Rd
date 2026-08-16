@@ -20,3 +20,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{amplitude}, \code{phase}, \code{demodulated}, \code{f0}, \code{bandwidth}, \code{mean_amplitude}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CDemod(V)
+}

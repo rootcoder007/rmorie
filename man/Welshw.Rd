@@ -28,3 +28,7 @@ Formula: \code{w(r) = exp(-(r/c)^2)},
 Dennis, J. E. & Welsch, R. E. (1978). Commun Statist B
 7:345-359.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Welshw(V)
+}

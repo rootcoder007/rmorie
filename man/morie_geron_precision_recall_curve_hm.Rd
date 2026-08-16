@@ -19,3 +19,7 @@ Precision-recall curve: best-F1 point and recall at 90% precision (Geron Ch 3, h
 A list with \code{precision}, \code{recall}, \code{thresholds}, \code{average_precision}, \code{f1}, \code{best_f1}, \code{best_threshold}, \code{recall_at_90_precision}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_precision_recall_curve_hm(V, V)
+}

@@ -17,3 +17,7 @@ List with \code{gap}, \code{final_gap}, \code{max_gap}, \code{max_gap_epoch},
 gap_t = train_t - val_t; \code{best_val_epoch} and \code{max_gap_epoch} are
 0-based.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_overfitting_gap(V, V)
+}

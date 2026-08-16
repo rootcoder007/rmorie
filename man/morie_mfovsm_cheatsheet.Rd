@@ -26,3 +26,6 @@ Chapman & Hall/CRC, Sec. 12.5 (effect modification and marginal
 structural models) and Sec. 21.2 (the time-varying weights).
 }
 \keyword{internal}
+\examples{
+morie_mfovsm_cheatsheet()
+}

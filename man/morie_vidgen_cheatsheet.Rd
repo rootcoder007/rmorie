@@ -40,3 +40,6 @@ Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
 arXiv:2207.12598. The guidance framework this parallels.
 }
 \keyword{internal}
+\examples{
+morie_vidgen_cheatsheet()
+}

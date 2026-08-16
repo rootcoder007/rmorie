@@ -47,3 +47,7 @@ semiparametric median regression modeling. Journal of the American
 Statistical Association, 96(456), 1458-1468.
 doi:10.1198/016214501753382363
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Npbqr(V, V)
+}

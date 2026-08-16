@@ -15,3 +15,7 @@ list(kappa, p_observed, p_expected, se, z, n, n_categories)
 \description{
 Cohen (1960) kappa for two raters
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+KappaCoh(V, V)
+}

@@ -32,3 +32,6 @@ A character scalar.
     Journal of Computer-Aided Molecular Design 11(5), 425-445.
 }
 \keyword{internal}
+\examples{
+morie_glides_cheatsheet()
+}

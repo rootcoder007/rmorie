@@ -18,3 +18,7 @@ morie_ma_cochran_q, written by another agent against this same Python module whi
 The value of \code{morie_ma_cochran_q}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_cochran_q(V, V)
+}

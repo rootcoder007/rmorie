@@ -32,3 +32,7 @@ of mixed-model association methods", Nature Genetics 46(2),
 100-106.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+test_variant(V, V)
+}

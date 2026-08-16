@@ -20,3 +20,6 @@ A distribution of bandit tasks
 A list of per-task arm-probability vectors.
 }
 \keyword{internal}
+\examples{
+morie_mtdrl_bandit_tasks()
+}

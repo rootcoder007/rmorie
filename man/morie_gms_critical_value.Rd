@@ -24,3 +24,7 @@ Part of the bndsmw_native implementation; see the file header for the source it 
 A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}, \code{method}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_gms_critical_value(D, D)
+}

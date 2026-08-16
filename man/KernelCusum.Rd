@@ -55,3 +55,7 @@ scan statistic), Section 2 (running maximum strategy),
 Corollary 2. Source: fetched-wave3/harchaoui-moulines-bach-2008-
 kernel-changepoint-analysis-nips.pdf
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+KernelCusum(V)
+}

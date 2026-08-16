@@ -19,3 +19,7 @@ Part of the rgs_native implementation; see the file header for the source it fol
 A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals}, \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve}, \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rgs_functional_regression(V, V)
+}

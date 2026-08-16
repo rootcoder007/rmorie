@@ -18,3 +18,7 @@ List with \code{explained_variance_ratio}, \code{cumulative},
 \description{
 Explained variance ratio (Geron Ch 8, morie.fn grevr)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_explained_variance_ratio(V)
+}

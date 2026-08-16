@@ -21,3 +21,7 @@ List with \code{total_params}, \code{non_embedding_params}, \code{config}, \code
 \description{
 GPT-2 released configurations resolved through hmdctr (hmgpt2)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gpt2(V)
+}

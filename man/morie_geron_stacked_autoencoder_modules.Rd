@@ -35,3 +35,7 @@ Greedy layer-wise pretraining (each layer its own tied-weight
 autoencoder), optionally followed by end-to-end fine-tuning of the
 unrolled symmetric encoder/decoder stack.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_stacked_autoencoder_modules(V)
+}

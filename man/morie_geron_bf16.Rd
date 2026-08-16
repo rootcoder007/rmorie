@@ -21,3 +21,7 @@ Keeps the top 16 bits of the binary32 encoding: 1 sign, 8 exponent,
 hardware does; "truncate" drops the low bits. NaN lanes are restored
 so a rounding carry cannot turn a NaN into an infinity.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bf16(V)
+}

@@ -16,3 +16,7 @@ List with \code{a}, \code{sigma}, \code{grad}, \code{estimate}, \code{n}.
 Overflow-safe two-branch evaluation, with the elementwise
 derivative a (1 - a). The slope peaks at 0.25.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_sigmoid(V)
+}

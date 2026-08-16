@@ -17,3 +17,7 @@ only when a file path is actually given, and fall back to a minimal deparse so t
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+jsonlite_toJSON_or_stub(V)
+}

@@ -27,3 +27,7 @@ One L2 distance serves both Python modules exactly as km126
 calls km123: km123 -> \code{morie_kamath_ch8_moverscore_distance}, km126 ->
 \code{morie_kamath_ch8_smd}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ch8_moverscore_distance(V, V)
+}

@@ -48,3 +48,7 @@ Antoniak (1974), Ann. Statist. 2(6):1152-1174;
 Escobar & West (1995), JASA 90(430):577-588; Neal (2000),
 J. Comput. Graph. Statist. 9(2):249-265.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dpmem(V)
+}

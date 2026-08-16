@@ -17,3 +17,7 @@ Nyquist.  The double zero is why the response reaches nought there smoothly and 
 A list with \code{H}, \code{z}, \code{zeros}, \code{zero_multiplicity}, \code{zeros_at_nyquist}, \code{dc_gain}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HannTf(V)
+}

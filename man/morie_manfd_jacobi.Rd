@@ -32,3 +32,7 @@ A list with descending eigenvalues and their vectors as   columns, each signed s
     Mathematik 30, 51-94.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_manfd_jacobi(M)
+}

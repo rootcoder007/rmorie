@@ -36,3 +36,8 @@ Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
 baseline cumulative hazard estimator used here.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_survnnr_risk_score(D, V)
+}

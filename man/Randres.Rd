@@ -31,3 +31,7 @@ Formula: \code{pi = (lambda - (1 - p))/(2p - 1)},
 \references{
 Warner, S. L. (1965). JASA 60:63-69, equations (1), (3).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Randres(V)
+}

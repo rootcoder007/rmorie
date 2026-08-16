@@ -44,3 +44,8 @@ Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
 arXiv:2207.12598. The guidance framework this parallels.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+S <- c("a", "b", "c")
+morie_vidgen_space_only_conv(D, S)
+}

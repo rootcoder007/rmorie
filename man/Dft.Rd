@@ -17,3 +17,7 @@ with no power-of-two requirement.  eq (3.85) is the same sum split into cos and 
 A list with \code{X}, \code{real}, \code{imag}, \code{n}, \code{magnitude}, \code{conjugate_symmetric}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dft(V)
+}

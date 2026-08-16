@@ -21,3 +21,7 @@ Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (1.5) p.18. DOI 10.1007/978-3-030-89010-0.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Msm006(D)
+}

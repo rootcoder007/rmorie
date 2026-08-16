@@ -28,3 +28,6 @@ List with or, or_lower, or_upper, var_xb, pi, pi_lower, pi_upper.
 Equations 2.11, 2.14 to 2.16 of Bilder & Loughin (2025); also the
 ordinal odds-ratio interval behind stub 3e50.
 }
+\examples{
+morie_logistic_wald()
+}

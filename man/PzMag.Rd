@@ -20,3 +20,7 @@ drives the response to nought, approaching a pole drives it up, and a pole ON th
 A list with \code{magnitude}, \code{zero_product}, \code{pole_product}, \code{n_zeros}, \code{n_poles}, \code{on_a_zero}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PzMag(V, V)
+}

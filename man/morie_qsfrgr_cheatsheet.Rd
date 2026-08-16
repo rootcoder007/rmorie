@@ -34,3 +34,6 @@ A character scalar.
     Machine Learning Research 7, 983-999.
 }
 \keyword{internal}
+\examples{
+morie_qsfrgr_cheatsheet()
+}

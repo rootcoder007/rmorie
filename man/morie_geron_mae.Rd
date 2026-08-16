@@ -17,3 +17,7 @@ List with \code{mae}, \code{rmse}, \code{max_error},
 Reported next to RMSE: the ratio is how much a handful of large
 residuals is driving the squared-error metric.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_mae(V, V)
+}

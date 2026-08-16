@@ -26,3 +26,7 @@ Part of the prphet_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{fitted}, \code{residual}, \code{coef}, \code{beta}, \code{columns}, \code{changepoints}, \code{deltas}, \code{k}, \code{m}, \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior}, \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_prphet_fit(V, V)
+}

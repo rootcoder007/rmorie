@@ -21,3 +21,6 @@ Part of the sarima_native implementation; see the file header for the source it 
 A list with \code{ar}, \code{ma}.
 }
 \keyword{internal}
+\examples{
+expand_polynomials()
+}

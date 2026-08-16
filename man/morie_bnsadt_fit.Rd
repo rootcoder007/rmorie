@@ -23,3 +23,8 @@ tau and every beta are optimised on the log scale, so the simplex cannot step to
 A list with mu, tau, the betas and the log-likelihood.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_bnsadt_fit(M, V)
+}

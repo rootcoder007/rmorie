@@ -29,3 +29,7 @@ observation stream.
 A list with \code{estimate}, \code{intrinsic_reward}, \code{raw_error}, \code{returns}, \code{mse}, \code{mean_first}, \code{mean_last}, \code{n}, \code{target}, \code{predictor}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rndnet(V)
+}

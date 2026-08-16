@@ -18,3 +18,7 @@ large artifact is NOT zero-mean over the epochs it contaminates, so it does not 
 A list with \code{average}, \code{sd}, \code{m}, \code{m_kept}, \code{rejected}, \code{n_rejected}, \code{peaks}, \code{n}, \code{snr_gain}, \code{snr_gain_db}, \code{artifact_factor}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ErpArtifact(V)
+}

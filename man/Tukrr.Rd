@@ -36,3 +36,7 @@ Beaton, A. E. & Tukey, J. W. (1974). Technometrics
 16:147-185; Holland, P. W. & Welsch, R. E. (1977). Commun Statist
 6:813-827.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tukrr(V, V)
+}

@@ -20,3 +20,7 @@ filter is actually run over data.  The feedback is SUBTRACTED, as in eq (3.68), 
 The value of \code{IirDiff}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IirDiffGen(V, V)
+}

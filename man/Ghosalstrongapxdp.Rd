@@ -31,3 +31,6 @@ for the uniform truth.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.2.1.
 }
+\examples{
+Ghosalstrongapxdp()
+}

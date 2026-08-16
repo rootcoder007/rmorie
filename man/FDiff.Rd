@@ -19,3 +19,7 @@ FDiff(x, T = 1, n = NULL)
 A list with \code{y}, \code{value}, \code{index}, \code{T}, \code{scale_factor_gives_true_time_rate}, \code{highpass}, \code{amplifies_noise}, \code{removes_dc}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FDiff(V)
+}

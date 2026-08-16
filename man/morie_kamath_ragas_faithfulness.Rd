@@ -19,3 +19,7 @@ faithfulness = supported claims / total claims. `answer` is a character vector o
 A list with \code{estimate}, \code{supported}, \code{n_claims}, \code{claims}, \code{claim_supported}, \code{judge}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ragas_faithfulness(V, V)
+}

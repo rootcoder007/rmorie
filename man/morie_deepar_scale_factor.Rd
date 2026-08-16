@@ -18,3 +18,7 @@ morie_deepar_scale_factor(z, t0 = NULL)
 A single numeric.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_deepar_scale_factor(V)
+}

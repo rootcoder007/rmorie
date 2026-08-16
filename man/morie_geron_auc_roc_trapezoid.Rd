@@ -22,3 +22,7 @@ the trapezoid sum equals the Mann-Whitney statistic. Same numbers as
 \code{\link[=morie_geron_auc_roc]{morie_geron_auc_roc()}}, different construction -- the two are each
 other's independent check.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_auc_roc_trapezoid(V, V)
+}

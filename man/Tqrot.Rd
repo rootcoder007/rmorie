@@ -32,3 +32,7 @@ Formula: \code{A ~ N(0,1)^{d x d}}, \code{Q, R = QR(A)}, return Q.
 Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
 section 4.1 (orthogonalized JL transform).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tqrot(V)
+}

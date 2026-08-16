@@ -32,3 +32,7 @@ The symmetric InfoNCE is DELEGATED to
 off-diagonal pairs are the negatives, so a bigger batch is a harder
 task and the chance loss log(B) rises with it.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_clip(V, V)
+}

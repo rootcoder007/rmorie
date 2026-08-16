@@ -18,3 +18,7 @@ morie_evt_bayes_gev(x, n_draws = 2000, seed = 42, prior_sd = c(100, 10, 1))
 A list with \code{draws}, \code{accept_rate}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_evt_bayes_gev(V)
+}

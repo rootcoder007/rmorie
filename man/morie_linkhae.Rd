@@ -32,3 +32,7 @@ Haebara, T. (1980). Equating logistic ability scales
 by a weighted least squares method. Japanese Psychological
 Research, 22, 144-149.  Weeks, J. P. (2010). JSS, 35(12).
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_linkhae(M, M)
+}

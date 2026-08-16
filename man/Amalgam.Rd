@@ -29,3 +29,7 @@ Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 2, which defines amalgamation and notes that it does
 not preserve the log-ratio structure.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Amalgam(V, V)
+}

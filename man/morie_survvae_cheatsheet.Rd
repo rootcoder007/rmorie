@@ -14,3 +14,6 @@ Returns the Python arm\'s \code{cheatsheet()} string, so both arms carry the sam
 Character scalar.
 }
 \keyword{internal}
+\examples{
+morie_survvae_cheatsheet()
+}

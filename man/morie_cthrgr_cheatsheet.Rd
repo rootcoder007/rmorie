@@ -30,3 +30,6 @@ A character scalar.
     for Mediation and Interaction." Oxford University Press.
 }
 \keyword{internal}
+\examples{
+morie_cthrgr_cheatsheet()
+}

@@ -28,3 +28,7 @@ List with \code{variance}, \code{bias2}, \code{root_splits}, \code{structural_in
 \description{
 Growth delegated to \code{morie_geron_cart_algorithm}/\code{morie_geron_predict_tree}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tree_high_variance(V, V)
+}

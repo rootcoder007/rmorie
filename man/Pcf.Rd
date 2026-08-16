@@ -20,3 +20,7 @@ intensity of eq (3.8).  The naive estimator is NEGATIVELY BIASED (the book says 
 A list with \code{r}, \code{k}, \code{pcf}, \code{lambda}, \code{area}, \code{csr_k}, \code{csr_pcf_is_one}, \code{correction}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Pcf(D)
+}

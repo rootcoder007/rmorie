@@ -18,3 +18,7 @@ sample, so any mass before it is unobserved and the constant of integration is a
 A list with \code{y}, \code{n}, \code{total}, \code{lower_limit}, \code{constant_of_integration_is_arbitrary}, \code{discrete_pole_on_the_unit_circle}, \code{seldom_used_for_filtering}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+RunIntAll(V, V)
+}

@@ -19,3 +19,7 @@ Term frequency and TF-IDF (Burkov Ch 2)
 A list with \code{estimate}, \code{count}, \code{doc_length}, \code{normalised}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_burkov_term_frequency(V, V)
+}

@@ -47,3 +47,7 @@ Hyndman, Koehler, Snyder & Grose (2002), International
 Journal of Forecasting 18(3):439-454,
 doi:10.1016/S0169-2070(01)00110-8.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Etsmod(V)
+}

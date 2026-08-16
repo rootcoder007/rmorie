@@ -19,3 +19,7 @@ List with \code{matrix}, \code{accuracy}, \code{precision}, \code{recall}, \code
 Rows are truth, columns prediction. Labels are 0-based class indices,
 as in Python; the returned matrix is K x K in that same order.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_confusion_matrix(V, V)
+}

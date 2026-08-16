@@ -14,3 +14,7 @@ Two-sided median test with exact region -- Sec. 6.4, p. 247
 A list with \code{statistic}, \code{p_value}, \code{lower}, \code{upper}, \code{alpha_exact}, \code{t}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Medtest2(V, V)
+}

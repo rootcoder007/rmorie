@@ -24,3 +24,7 @@ Formula: c_i = argmin ||y_i - B c||^2 per curve, then Lloyd k-means on the coeff
 \references{
 Abraham, Cornillon, Matzner-Lober and Molinari (2003), Unsupervised curve clustering using B-splines, Scandinavian Journal of Statistics 30(3):581-595. The article itself is behind a paywall and could not be obtained; the two-stage form implemented here -- fit B-spline coefficients per curve, then k-means on the coefficient vectors -- is as the method is described in the functional-clustering review literature (arXiv:1803.00276).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Fdaclust(V)
+}

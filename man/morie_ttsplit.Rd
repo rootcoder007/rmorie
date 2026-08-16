@@ -20,3 +20,7 @@ goes to the test set when crc32(int64(id)) < testratio * 2^32. It is
 a pure function of the identifiers, which is why the book prefers it
 -- and why it survives translation to R unchanged.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ttsplit(V)
+}

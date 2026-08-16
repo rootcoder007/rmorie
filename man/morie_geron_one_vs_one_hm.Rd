@@ -19,3 +19,7 @@ One-vs-one multiclass: K(K-1)/2 pairwise classifiers with voting (Geron Ch 3, hm
 A list with \code{predict}, \code{predictions}, \code{classes}, \code{pairs}, \code{n_classifiers}, \code{votes}, \code{accuracy}, \code{tie_fraction}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_one_vs_one_hm(V, V)
+}

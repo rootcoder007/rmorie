@@ -14,3 +14,7 @@ Kendall tau trend test -- Sec. 11.2.5, p. 406
 A list with \code{tau}, \code{statistic}, \code{P}, \code{Q}, \code{z}, \code{p_value}, \code{var}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tautrend(V)
+}

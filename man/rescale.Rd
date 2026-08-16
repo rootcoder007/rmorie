@@ -19,3 +19,7 @@ Map the outcome to [0,1] by an affine transform
 A list with \code{scaled}, \code{lower}, \code{upper},   \code{range}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+rescale(V)
+}

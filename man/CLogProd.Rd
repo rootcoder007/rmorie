@@ -19,3 +19,7 @@ Rangayyan (2024) eq. (4.63), Section 4.8.
 A list with \code{omega}, \code{Y_real}, \code{Y_imag}, \code{log_Y_real}, \code{log_Y_imag}, \code{log_X_real}, \code{log_X_imag}, \code{log_H_real}, \code{log_H_imag}, \code{max_abs_error}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CLogProd(V, V)
+}

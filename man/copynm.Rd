@@ -23,3 +23,7 @@ Segment a copy-number profile by circular binary segmentation. Recursively finds
 list with `segments` (list of (start, end, mean) half-open),         `changepoints`, `n_segments`, `fitted`, `pvalues`,         `estimate` (alias of segments), `alpha`, `n`,         `multiplicity_note`, `method`.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+copynm(V)
+}

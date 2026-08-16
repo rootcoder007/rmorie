@@ -17,3 +17,7 @@ morie_kamath_gpt_combined
 A list with \code{estimate}, \code{L1}, \code{L2}, \code{lambda}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_gpt_combined(V, V)
+}

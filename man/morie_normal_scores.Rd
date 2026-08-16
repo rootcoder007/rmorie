@@ -21,3 +21,7 @@ infinite score, which plain \eqn{i/n} would do to the largest value.
 \references{
 Schabenberger Ch 5, Sec 5.6.2, eq (5.60)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_normal_scores(V)
+}

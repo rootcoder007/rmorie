@@ -38,3 +38,7 @@ Differential Privacy, Foundations and Trends in Theoretical
 Computer Science 9(3-4):211-407, section 3.5, Theorem 3.16.
 \doi{10.1561/0400000042}
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kcompo(V, V)
+}

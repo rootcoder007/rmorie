@@ -30,3 +30,7 @@ A list with the coefficients, the deviance, the iteration   count and the score.
     2nd edition, Chapman and Hall.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_cypin_fit(V, V)
+}

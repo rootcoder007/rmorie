@@ -31,3 +31,7 @@ F_n(t)(1 - F_n(t)) identically.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.3.1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosaleffinflfn(V, V)
+}

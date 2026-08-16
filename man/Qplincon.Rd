@@ -14,3 +14,7 @@ minimize z\'z subject to a\'z >= c.  The Wolfe dual (9.17) is L = z\'z - 2 alpha
 A list with \code{x}, \code{alpha}, \code{dual_quadratic}, \code{dual_linear}, \code{dual_value}, \code{primal_value}, \code{constraint}, \code{active}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Qplincon(V, V)
+}

@@ -42,3 +42,7 @@ Representation Learning with Deep Convolutional Generative Adversarial
 Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+residual_map(V, V)
+}

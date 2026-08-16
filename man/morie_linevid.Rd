@@ -25,3 +25,7 @@ slope = FALSE is the horizontal-line model H1 (w1 = 0); slope = TRUE
 is H2 with w1 free. Closed form: t is Normal(0, priorsd^2 X X' +
 sigma^2 I).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_linevid(V, V)
+}

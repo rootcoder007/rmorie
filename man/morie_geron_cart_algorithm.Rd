@@ -49,3 +49,7 @@ This one function serves the whole tree family: hmcdt
 but hmdtr, hmdthv, hmdtst, hmext, hmgbrt, hmrdt and hmrfc all route
 their growth through this same core in Python.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_cart_algorithm(V, V)
+}

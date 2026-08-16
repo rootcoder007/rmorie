@@ -20,3 +20,7 @@ the fit at EVERY order up to the one requested -- an order need not be chosen in
 A list with \code{reflection}, \code{forward_error}, \code{backward_error}, \code{all_orders_forward}, \code{order}, \code{lam}, \code{stable}, \code{every_stage_is_a_predictor}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+RlsLattice(V)
+}

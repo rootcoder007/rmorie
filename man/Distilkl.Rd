@@ -31,3 +31,7 @@ Hinton, Vinyals and Dean (2015), arXiv:1503.02531, Sect. 2
 and Equation (1).  Read from the ar5iv rendering; the same paper is
 in the local corpus.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Distilkl(V, V)
+}

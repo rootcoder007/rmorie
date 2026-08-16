@@ -17,3 +17,7 @@ Mean proportion of alleles shared identical by state across markers, one of the 
 n x n symmetric matrix.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gwasem_kinship(V)
+}

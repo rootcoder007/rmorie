@@ -23,3 +23,7 @@ t_end, n_windows, n)
 \description{
 Cori et al. (2013) instantaneous reproduction number
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+RtSi(V, V)
+}

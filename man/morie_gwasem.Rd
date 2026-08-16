@@ -25,3 +25,7 @@ Three-step procedure: Gower-normalise \code{S} (eq.5), estimate \code{sigma_a^2,
 A list with the per-marker statistics, the variance   components, the genomic-control inflation factor and the   skipped-marker indices.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gwasem(V, V)
+}

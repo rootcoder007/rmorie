@@ -37,3 +37,7 @@ A list with the mean, its variance, the total weight, the   cell counts and the 
     Environment 116, 140-158.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_hadcrut_area_mean(M)
+}

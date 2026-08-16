@@ -17,3 +17,6 @@ FINITE, which is what "FIR" names, and it sums to 1, so a constant passes throug
 A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum}, \code{finite}, \code{symmetric}, \code{method}.
 }
 \keyword{internal}
+\examples{
+HannImp()
+}

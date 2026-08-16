@@ -33,3 +33,6 @@ Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
 R", R News 7(2), 25-31.
 }
 \keyword{internal}
+\examples{
+morie_survrsf_rule_status()
+}

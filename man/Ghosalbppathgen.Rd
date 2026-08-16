@@ -34,3 +34,6 @@ path is the running total of the jumps in time order.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.3.3.
 }
+\examples{
+Ghosalbppathgen()
+}

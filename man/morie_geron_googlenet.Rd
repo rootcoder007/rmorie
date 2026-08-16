@@ -20,3 +20,6 @@ List with \code{layers}, \code{modules}, \code{total_params}, \code{final_featur
 \description{
 GoogLeNet architecture resolved to concrete shapes and exact params (hmgoog)
 }
+\examples{
+morie_geron_googlenet()
+}

@@ -21,3 +21,7 @@ List with \code{encoded}, \code{categories}, \code{names}, \code{n_columns},
 Levels default to the sorted unique values of each column. Column
 names are \verb{x<j>=<level>} with j 0-based, as in Python.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_one_hot_encoding(V)
+}

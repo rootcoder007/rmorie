@@ -18,3 +18,7 @@ weight at alpha_i is x(alpha_i) times a trapezoidal spacing, so the weights sum 
 A list with \code{locations}, \code{weights}, \code{amplitudes}, \code{total_weight}, \code{integral}, \code{reconstruction_error}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DeltaDecomp(V)
+}

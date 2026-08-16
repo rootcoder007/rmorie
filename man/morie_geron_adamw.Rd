@@ -41,3 +41,7 @@ List with \code{theta}, \code{step}, \code{adam_step}, \code{decay_step}, \code{
 The decay is applied to the parameters, not folded into the gradient,
 so it is NOT rescaled by the adaptive denominator.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_adamw(V)
+}

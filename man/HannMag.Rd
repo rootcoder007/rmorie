@@ -17,3 +17,7 @@ between.  The book\\'s absolute value is redundant -- 1 + cos is never negative 
 A list with \code{magnitude}, \code{omega}, \code{dc_gain}, \code{nyquist_gain}, \code{lowpass}, \code{absolute_value_is_redundant}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HannMag(V)
+}

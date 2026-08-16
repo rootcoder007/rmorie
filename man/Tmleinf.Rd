@@ -34,3 +34,7 @@ Verified against the CRAN package tmle 2.1.1 (Gruber & van
 der Laan), whose calcParameters computes var.psi <- var(IC)/n, the
 qnorm-based interval and pvalue <- 2*pnorm(-abs(psi/sqrt(var.psi))).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tmleinf(V, V)
+}

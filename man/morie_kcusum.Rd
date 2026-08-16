@@ -51,3 +51,7 @@ Harchaoui, Z., Moulines, E. and Bach, F. (2008).
 Kernel change-point analysis. Advances in Neural Information
 Processing Systems, 21.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kcusum(V)
+}

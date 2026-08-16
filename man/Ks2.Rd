@@ -14,3 +14,7 @@ Two-sample KS test -- Sec. 6.3, p. 239
 A list with \code{statistic}, \code{p_value}, \code{dplus}, \code{dminus}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ks2(V, V)
+}

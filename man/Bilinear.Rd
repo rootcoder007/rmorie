@@ -18,3 +18,7 @@ Maps the whole left half-plane into the unit disc, so a stable analog filter alw
 A list with the image \code{s}, the inputs, and the three   properties that make the transformation worth using: that it maps   the left half-plane into the unit disc, that stability is preserved   and that nothing aliases.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bilinear(V)
+}

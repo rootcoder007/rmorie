@@ -25,3 +25,7 @@ image queries over text keys/values -> attention_v2t; text queries
 over image keys/values -> attention_t2v (both via
 \code{morie_geron_scaled_dot_product}).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_vilbert(V, V)
+}

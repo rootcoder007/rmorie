@@ -24,3 +24,7 @@ Part of the rangayyan_phys implementation; see the file header for the source it
 A list with \code{t_ms}, \code{V_mV}, \code{amplitude_mV}, \code{peak_time_ms}, \code{v_rest_mV}, \code{v_peak_mV}, \code{t_rise_ms}, \code{t_fall_ms}, \code{width_half_ms}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ApWave(V)
+}

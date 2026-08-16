@@ -35,3 +35,7 @@ v <- beta v + g; theta <- theta - eta v. On a constant gradient the
 step approaches eta g / (1 - beta), which is the \code{terminal_step}
 field: momentum effectively multiplies the learning rate.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_momentum(V)
+}

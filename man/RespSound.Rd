@@ -26,3 +26,6 @@ Rangayyan (2024) eqs. (7.122), (7.127), (7.128), (7.129), Section 7.7.1.
 A list with \code{freq_hz}, \code{transfer_mag}, \code{transfer_db}, \code{La_kg_per_m4}, \code{Ca_m3_per_Pa}, \code{Ra_Pa_s_per_m3}, \code{Ga_m3_per_Pa_s}, \code{resonance_hz}, \code{area_m2}, \code{circumference_m}, \code{volume_m3}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+RespSound()
+}

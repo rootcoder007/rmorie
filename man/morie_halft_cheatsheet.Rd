@@ -24,3 +24,6 @@ A character scalar.
     763-766.
 }
 \keyword{internal}
+\examples{
+morie_halft_cheatsheet()
+}

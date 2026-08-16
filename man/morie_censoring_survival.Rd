@@ -41,3 +41,7 @@ software package instead. The two sources above are what this is built
 from.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_censoring_survival(V, V)
+}

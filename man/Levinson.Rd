@@ -18,3 +18,7 @@ gamma_i = -(1/eps_{i-1})[phi(i) + sum_j a_{i-1,j} phi(i-j)] a_{i,i} = gamma_i; a
 A list with \code{a}, \code{reflection}, \code{error}, \code{errors}, \code{gain}, \code{order}, \code{stable}, \code{monotone}, \code{normalized_error}, \code{sign_convention}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Levinson(V)
+}

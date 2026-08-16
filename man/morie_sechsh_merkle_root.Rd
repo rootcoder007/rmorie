@@ -17,3 +17,7 @@ Leaves are prefixed 0x00 and interior nodes 0x01, so a node can never be present
 Raw 32-byte root.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_sechsh_merkle_root(V)
+}

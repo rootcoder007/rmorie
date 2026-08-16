@@ -18,3 +18,7 @@ List with \code{ranking}, \code{scores}, \code{appearances}.
 sum_r 1/(k + rank_r(d)); documents missing from a list simply score
 nothing there. Ties break on the document label.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_reciprocal_rank_fusion(V)
+}

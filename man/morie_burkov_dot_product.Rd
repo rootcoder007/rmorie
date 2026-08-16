@@ -17,3 +17,7 @@ Dot product, L2 norm and unit vector (Burkov Ch 1)
 A list with \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_burkov_dot_product(V, V)
+}

@@ -14,3 +14,7 @@ Rosenbaum outside-extremes scale test -- eq. (9.9.2), p. 329
 A list with \code{statistic}, \code{p_value}, \code{pmf}, \code{ymin}, \code{ymax}, \code{mean}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Rosenbm(V, V)
+}

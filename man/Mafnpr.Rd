@@ -33,3 +33,7 @@ Light and Pillemer (1984), Chapter 3.
 Light, R. J. and Pillemer, D. B. (1984). Summing Up: The
 Science of Reviewing Research. Harvard University Press, Chapter 3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Mafnpr(V, V)
+}

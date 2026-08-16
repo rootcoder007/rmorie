@@ -19,3 +19,7 @@ Part of the blip2v_native implementation; see the file header for the source it 
 A list with \code{per_query_similarity}, \code{image_text_similarity}, \code{best_query}, \code{logit}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+stage_one_objectives(V, V)
+}

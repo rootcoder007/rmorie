@@ -23,3 +23,7 @@ potentials Part of the rangayyan_phys implementation; see the file header for th
 A list with \code{t_ms}, \code{muap_uV}, \code{peak_to_peak_uV}, \code{peak_uV}, \code{duration_ms}, \code{n_phases_observed}, \code{delays_ms}, \code{n_fibers}, \code{conduction_vel_m_s}, \code{in_normal_duration_band}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MuapModel(V)
+}

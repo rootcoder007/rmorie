@@ -43,3 +43,7 @@ Weights come from one continuing LCG stream: Wxh (V x H) then Whh
 A uniform model scores log V, so \code{final_loss} below that is
 structure the RNN has captured.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_geron_char_rnn(D)
+}

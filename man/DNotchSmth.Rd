@@ -18,3 +18,7 @@ Squaring discards the sign of the curvature; the linearly decaying weight smooth
 A list with \code{s}, \code{weights}, \code{mwin}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DNotchSmth(V)
+}

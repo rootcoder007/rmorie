@@ -39,3 +39,6 @@ implemented in :mod:`ncfRS`.
 """
 }
 \keyword{internal}
+\examples{
+ngcf_cheatsheet()
+}

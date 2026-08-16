@@ -17,3 +17,7 @@ list(indices, z_q) with indices 0-based.
 \description{
 Nearest-codebook-entry assignment
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_quantize(M, M)
+}

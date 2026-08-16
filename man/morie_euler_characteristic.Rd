@@ -15,3 +15,7 @@ A list with \code{chi}, \code{f_vector}, \code{dimension}.
 \description{
 \eqn{\chi = \sum_k (-1)^k f_k} from the closed face set.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_euler_characteristic(V)
+}

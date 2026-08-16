@@ -24,3 +24,7 @@ Part of the robpca_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{loadings}, \code{eigenvalues}, \code{center}, \code{scores}, \code{k}, \code{k0}, \code{h}, \code{alpha}, \code{rank}, \code{subspace_rank}, \code{outlyingness}, \code{h_subset}, \code{reweighted_kept}, \code{consistency_factor}, \code{score_distance}, \code{orthogonal_distance}, \code{sd_cutoff}, \code{od_cutoff}, \code{classification}, \code{n_outliers}, \code{n}, \code{p}, \code{reweighted}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_robpca(D)
+}

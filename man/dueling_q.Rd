@@ -19,3 +19,7 @@ Applies \code{\link{dueling_aggregate}} row-wise.
 List of numeric Q(s, .) vectors.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+dueling_q(V, V)
+}

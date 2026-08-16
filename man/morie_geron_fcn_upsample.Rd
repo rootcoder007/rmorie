@@ -20,3 +20,7 @@ List with \code{output}, \code{output_shape}, \code{contribution_counts},
 \description{
 Transposed convolution / FCN upsampling (Geron Ch 14, morie.fn grfcn)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_fcn_upsample(V, V)
+}

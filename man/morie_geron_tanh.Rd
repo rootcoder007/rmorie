@@ -15,3 +15,7 @@ List with \code{a}, \code{grad}, \code{estimate}, \code{n}.
 \description{
 Hyperbolic tangent activation (Geron Ch 10, morie.fn hmtanh)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tanh(V)
+}

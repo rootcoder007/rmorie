@@ -22,3 +22,7 @@ Renormalises both inputs to sum to one and returns
 Hellinger distance \eqn{h^2(p, q) = \sum_i (\sqrt{p_i} -
 \sqrt{q_i})^2} and lies in \eqn{[0, 1]}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_hellinger2(V, V)
+}

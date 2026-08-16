@@ -21,3 +21,6 @@ logit, inverse logit, odds and the one-unit odds ratio exp(b):
 equations 1.3, 4.1 to 4.8 of Weisburd et al. (2022). Mirrors ca1e3,
 ca4e1 to ca4e8.
 }
+\examples{
+morie_logit_link()
+}

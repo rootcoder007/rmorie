@@ -26,3 +26,7 @@ The method is Gibbs, I. and Candes, E. (2021), Adaptive Conformal
 Inference Under Distribution Shift, NeurIPS 34 (arXiv:2106.00170),
 the book's Reference 13.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_aci(V)
+}

@@ -34,3 +34,6 @@ l_j = log m_{K_j}(y) + log prior weight of model j.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.2.3.
 }
+\examples{
+Ghosaltwomodeladp()
+}

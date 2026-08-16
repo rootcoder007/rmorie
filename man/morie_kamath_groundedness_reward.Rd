@@ -19,3 +19,7 @@ List with \code{estimate}, \code{n_grounded}, \code{ungrounded}.
 \description{
 |answer tokens present in the context| / |answer tokens|.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_groundedness_reward(V, V)
+}

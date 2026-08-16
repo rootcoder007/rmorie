@@ -42,3 +42,7 @@ Optimal detection of changepoints with a linear computational
 cost. Journal of the American Statistical Association, 107(500),
 1590-1598.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_pelt(V)
+}

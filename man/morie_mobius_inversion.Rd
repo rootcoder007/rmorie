@@ -25,3 +25,7 @@ That is an identity, and the residual is returned rather than assumed.
 \references{
 Stanley RP (2011) vol. 1, Sec 3.7.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mobius_inversion(V)
+}

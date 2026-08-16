@@ -17,3 +17,7 @@ multiple of fs/8 except DC.  For fs = 1000 Hz the book puts them at 125, 250, 37
 A list with \code{H}, \code{z}, \code{n_taps}, \code{n_zeros}, \code{zeros_at_multiples_of_fs_over_8}, \code{dc_gain}, \code{always_stable}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ma8Tf(V)
+}

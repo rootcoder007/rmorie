@@ -35,3 +35,7 @@ from WRS use the R one.  \code{morie_mad_median_rule} is the Hampel
 identifier of eq. (2.14): declare X an outlier when
 \verb{|X - M| / MADN > 2.24}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mad(V)
+}

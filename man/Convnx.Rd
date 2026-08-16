@@ -37,3 +37,7 @@ the check that the residual path is wired the right way round.
 Liu et al. (2022), A ConvNet for the 2020s,
 CVPR 2022:11976-11986.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Convnx(V)
+}

@@ -44,3 +44,6 @@ A list with the total, the weighted parts and their order.
     Journal of Computer-Aided Molecular Design 11(5), 425-445.
 }
 \keyword{internal}
+\examples{
+morie_glides_score()
+}

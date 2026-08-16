@@ -19,3 +19,7 @@ cannot be minimized -- the choice is the KNEE.  Located here as the point of max
 A list with \code{k}, \code{wcss}, \code{knee}, \code{monotonic}, \code{wcss_cannot_be_minimized}, \code{heuristic_only}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Elbow(V)
+}

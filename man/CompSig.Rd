@@ -20,3 +20,7 @@ together than the pattern is long OVERLAP, and the count is reported because an 
 A list with \code{x}, \code{n}, \code{shifts}, \code{scales}, \code{peaks_expected_at}, \code{overlapping_pairs}, \code{pattern}, \code{pattern_length}, \code{n_copies}, \code{copies_add}, \code{overlap_breaks_peak_picking}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CompSig(V, V)
+}

@@ -24,3 +24,7 @@ List with \code{predictions}, \code{init}, \code{trees}, \code{loss_history}, \c
 \description{
 Trees delegated to \code{morie_geron_cart_algorithm} with criterion="mse".
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gradient_boosting(V, V)
+}

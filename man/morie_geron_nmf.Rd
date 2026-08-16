@@ -19,3 +19,7 @@ Non-negative matrix factorization by multiplicative updates (Geron Ch 7, hmnmf)
 A list with \code{W}, \code{H}, \code{reconstruction}, \code{reconstruction_error}, \code{relative_error}, \code{n_iter}, \code{n_components}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_nmf(M)
+}

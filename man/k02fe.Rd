@@ -18,3 +18,7 @@ Part of the k02util implementation; see the file header for the source it follow
 A list with \code{mu}, \code{var}, \code{sw}, \code{Q}, \code{df}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+k02fe(V, V)
+}

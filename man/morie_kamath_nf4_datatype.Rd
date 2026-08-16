@@ -20,3 +20,6 @@ List with \code{levels}, \code{normalized}, \code{bin_widths}, \code{n_bits}.
 \description{
 q_i = Phi^-1((i + 0.5)/n) plus the max-normalised levels and bin widths.
 }
+\examples{
+morie_kamath_nf4_datatype()
+}

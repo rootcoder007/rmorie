@@ -37,3 +37,7 @@ so the standard published form is used; the finite-population factor
 matches the samplingbook 1.2.4 convention (N - n)/N used throughout
 the sibling Cochran modules.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ratioest(V, V)
+}

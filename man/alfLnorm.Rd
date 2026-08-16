@@ -20,3 +20,7 @@ population variance (divide by n), matching the Python arm.
 The value of \code{o}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+alfLnorm(V)
+}

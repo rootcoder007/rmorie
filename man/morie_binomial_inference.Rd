@@ -21,3 +21,7 @@ true_level when interval_fn is given.
 \description{
 Equations 1.1, 1.3, 1.4, 1.6 of Bilder & Loughin (2025).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_binomial_inference(V, V)
+}

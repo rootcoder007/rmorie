@@ -27,3 +27,6 @@ A character scalar.
     ledger entry names.
 }
 \keyword{internal}
+\examples{
+morie_rfppos_cheatsheet()
+}

@@ -17,3 +17,7 @@ Cosine similarity (Burkov Eq 1.5)
 A list with \code{estimate}, \code{angle_radians}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_burkov_cosine_similarity(V, V)
+}

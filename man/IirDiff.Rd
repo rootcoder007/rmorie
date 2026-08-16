@@ -23,3 +23,7 @@ Part of the rangayyan_filt implementation; see the file header for the source it
 A list with \code{y}, \code{value}, \code{index}, \code{N}, \code{M}, \code{recursive}, \code{feedback_is_subtracted}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IirDiff(V, V)
+}

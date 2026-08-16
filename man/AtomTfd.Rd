@@ -22,3 +22,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{tfd}, \code{times}, \code{freqs}, \code{atoms}, \code{n_atoms}, \code{decay}, \code{residual_energy}, \code{explained}, \code{peak_freq}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+AtomTfd(V)
+}

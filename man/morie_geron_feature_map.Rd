@@ -30,3 +30,7 @@ List with \code{feature_map}, \code{pre_activation}, \code{out_shape}, \code{n_f
 \description{
 Feature map: activation(conv(x, K) + b), convolution delegated to hmfmap's core (hmfmap)
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_feature_map(M, M)
+}

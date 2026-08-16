@@ -18,3 +18,8 @@ Array of \code{shape} with row-major (Python) fill order.
 Draw-for-draw match to Python \code{morie.fn.hmdfw.lcg_normal}: odd-length
 shapes draw one extra pair and discard the last value.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_lcg_normal(M, V)
+}

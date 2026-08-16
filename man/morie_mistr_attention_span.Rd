@@ -18,3 +18,7 @@ Theoretical attention span
 The span (window * n_layers).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mistr_attention_span(V, V)
+}

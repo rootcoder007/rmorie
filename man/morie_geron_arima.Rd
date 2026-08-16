@@ -25,3 +25,7 @@ autoregression of order k supplies the innovations and the ARMA
 coefficients come from OLS on lags plus fitted innovations. \code{forecast}
 is a closure taking a horizon h.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_arima(V)
+}

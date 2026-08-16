@@ -19,3 +19,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{approx}, \code{details}, \code{levels}, \code{wavelet}, \code{redundancy}, \code{energy_per_level}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Swt(V)
+}

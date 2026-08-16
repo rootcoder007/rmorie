@@ -17,3 +17,7 @@ Boyd equation 11.5: \code{phi(x) = -sum log(-f_i(x))}. Returns \code{+Inf} outsi
 Scalar barrier value, or \code{Inf} if any entry is >= 0.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+log_barrier(V)
+}

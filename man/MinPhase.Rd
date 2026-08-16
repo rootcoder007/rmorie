@@ -17,3 +17,7 @@ complex cepstrum.  Folding the anticausal half onto the causal half reflects eve
 A list with \code{y}, \code{cepstrum}, \code{n}, \code{magnitude_error}, \code{magnitude_preserved}, \code{energy_front_loaded}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MinPhase(V)
+}

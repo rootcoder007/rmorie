@@ -17,3 +17,7 @@ Part of the snpqc1_native implementation; see the file header for the source it 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+morie_snpqc1_maf(S)
+}

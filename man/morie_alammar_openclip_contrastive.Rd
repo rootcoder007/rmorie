@@ -17,3 +17,7 @@ morie_alammar_openclip_contrastive
 A list with \code{estimate}, \code{image_to_text_loss}, \code{text_to_image_loss}, \code{similarity_matrix}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_openclip_contrastive(V, V)
+}

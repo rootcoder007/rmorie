@@ -18,3 +18,7 @@ List with \code{answer}, \code{votes}, \code{agreement}, \code{tie}.
 Mode of the parsed answers; ties are reported and broken by first
 appearance, exactly as in Python.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_self_consistency(V)
+}

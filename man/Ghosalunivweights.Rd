@@ -35,3 +35,6 @@ log pi_k = -c k log n - log Z,  n eps_k^2 = eps_scale k log n.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.2.1.
 }
+\examples{
+Ghosalunivweights()
+}

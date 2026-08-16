@@ -15,3 +15,7 @@ Numeric vector of norms.
 \description{
 Per-layer gradient L2 norms, ordered input side first
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_layer_norms(V)
+}

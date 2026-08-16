@@ -18,3 +18,7 @@ signal and the interference statistically independent; the sample correlation be
 A list with \code{x}, \code{v}, \code{m}, \code{n}, \code{correlation}, \code{independent}, \code{assumption}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+AncInput(V, V)
+}

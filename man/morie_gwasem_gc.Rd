@@ -18,3 +18,7 @@ Median observed chi-square divided by its null median. A well-calibrated analysi
 Scalar.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gwasem_gc(V)
+}

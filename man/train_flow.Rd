@@ -14,3 +14,8 @@ The paper backpropagates through autograd; we run central differences on the mas
 The value of \code{flow}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+train_flow(D, V)
+}

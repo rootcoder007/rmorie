@@ -18,3 +18,7 @@ Formula: R_n = sum_i 1{X_i > max(X_1..X_{i-1})}; E\link{R_n} = sum_i 1/i; Var\li
 \references{
 Arnold, Balakrishnan and Nagaraja (1998), Records, Wiley. Not held locally; the indicator representation and the resulting harmonic mean and variance are standard published results for iid continuous data.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Evtrecords(V)
+}

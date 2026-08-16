@@ -17,3 +17,7 @@ List with \code{estimate} (recall), \code{precision}, \code{f1}, \code{n_matched
 \description{
 Clipped n-gram matches / reference n-grams, with precision and F1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_rouge_n(V, V)
+}

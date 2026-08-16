@@ -27,3 +27,6 @@ data and causal inference models", Biometrics 61(4), 962-973,
 doi:10.1111/j.1541-0420.2005.00377.x.
 }
 \keyword{internal}
+\examples{
+morie_tlseqsl_cheatsheet()
+}

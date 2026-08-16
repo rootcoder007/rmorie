@@ -19,3 +19,7 @@ morie_mistr_rms_norm(x, weight = NULL, eps = 1e-06)
 The normalised vector.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mistr_rms_norm(V)
+}

@@ -14,3 +14,7 @@ beta(t) = sum_{l=1}^{L1} beta_l phi_l(t), the device that makes (14.1) estimable
 A list with \code{beta_t}, \code{t}, \code{n_basis}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Basexp(V, V)
+}

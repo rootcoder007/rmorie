@@ -18,3 +18,7 @@ addresses.
 A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ConvModel(V, V)
+}

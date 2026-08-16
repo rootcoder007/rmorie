@@ -50,3 +50,7 @@ here the conjugate normal case is used so the two can be compared.
 Neal (2000), J. Comput. Graph. Statist. 9(2):249-265,
 algorithm 8.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Crpgib(V)
+}

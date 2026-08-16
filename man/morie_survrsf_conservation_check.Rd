@@ -34,3 +34,7 @@ Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
 R", R News 7(2), 25-31.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_survrsf_conservation_check(V, V)
+}

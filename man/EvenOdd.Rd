@@ -18,3 +18,7 @@ error checks the index bookkeeping, not the arithmetic.
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+EvenOdd(S)
+}

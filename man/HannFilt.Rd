@@ -18,3 +18,7 @@ ratio 1:2:1.  It is a delaying smoother, not a symmetric one: the output lags th
 A list with \code{y}, \code{value}, \code{index}, \code{n}, \code{taps}, \code{delay_samples}, \code{settled_from}, \code{dc_gain}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HannFilt(V)
+}

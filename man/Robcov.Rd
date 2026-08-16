@@ -33,3 +33,7 @@ Formula: \code{V = (X'X)^-1 X' Omega X (X'X)^-1},
 White, H. (1980). Econometrica 48:817-838; MacKinnon &
 White (1985) J Econometrics 29:305-325.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Robcov(V, V)
+}

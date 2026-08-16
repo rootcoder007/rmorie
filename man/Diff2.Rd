@@ -19,3 +19,7 @@ with frequency, and the book notes it "may be realized as a cascade of two" firs
 A list with \code{y}, \code{value}, \code{index}, \code{T}, \code{as_cascaded_first_differences}, \code{max_difference}, \code{cascade_agrees}, \code{b}, \code{a}, \code{zeros}, \code{double_zero_at_dc}, \code{gain_rises_quadratically}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Diff2(V)
+}

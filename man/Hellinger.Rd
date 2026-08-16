@@ -18,3 +18,7 @@ morie.fn.helld.hellinger_dist; this is the same arithmetic, kept here because th
 A list with \code{hellinger}, \code{squared}, \code{bhattacharyya_coefficient}, \code{identity_h2_equals_one_minus_bc}, \code{is_a_true_metric}, \code{satisfies_the_triangle_inequality}, \code{bhattacharyya_distance_does_not}, \code{normalization}, \code{in_unit_interval}, \code{reference}, \code{not_from_this_book}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hellinger(V, V)
+}

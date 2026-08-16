@@ -18,3 +18,7 @@ intrinsic_information, gain_ratio, estimate, n, method.
 \description{
 Information gain from a split, entropy criterion (Geron Ch 5, morie.fn hmigr)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_information_gain_hmigr(V, V)
+}

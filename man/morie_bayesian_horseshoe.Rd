@@ -32,3 +32,7 @@ The horseshoe estimator for sparse signals. \emph{Biometrika},
 sampler for the horseshoe estimator. \emph{IEEE Signal Processing
 Letters}, 23(1), 179-182.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_bayesian_horseshoe(V, V)
+}

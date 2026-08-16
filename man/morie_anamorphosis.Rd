@@ -22,3 +22,7 @@ empirical CDF carries no information beyond its support.
 \references{
 Schabenberger Ch 5, Sec 5.6.2, eq (5.60)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_anamorphosis(V, V)
+}

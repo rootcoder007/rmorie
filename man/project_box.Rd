@@ -30,3 +30,7 @@ Beck, A. & Teboulle, M. (2009) "A fast iterative shrinkage-
   on Imaging Sciences 2(1), 183-202, doi:10.1137/080716542.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+project_box(V)
+}

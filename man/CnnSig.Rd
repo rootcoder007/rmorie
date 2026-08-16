@@ -21,3 +21,7 @@ equations; the convolution, rectifier and pooling used here are those of LeCun, 
 A list with \code{maps}, \code{pooled}, \code{features}, \code{scores}, \code{predicted}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CnnSig(V, V)
+}

@@ -14,3 +14,7 @@ Sign-test statistic K -- Sec. 5.4, eq. (5.4.1), p. 168
 A list with \code{statistic}, \code{n}, \code{nzero}, \code{mean}, \code{var}, \code{n_raw}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Signk(V)
+}

@@ -18,3 +18,7 @@ whereas the discrete step of eq (3.35) has u(0) = 1.  They are separate definiti
 A list with \code{u}, \code{t}, \code{shift}, \code{value_at_origin}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ustep(V)
+}

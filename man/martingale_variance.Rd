@@ -43,3 +43,7 @@ Learning for Time Series", in Targeted Learning in Data Science,
 Springer, doi:10.1007/978-3-319-65304-4_19.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+martingale_variance(V)
+}

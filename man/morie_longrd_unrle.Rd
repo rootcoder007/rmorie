@@ -31,3 +31,7 @@ A character scalar.
     Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_longrd_unrle(D)
+}

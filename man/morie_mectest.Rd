@@ -17,3 +17,7 @@ ncolliders1, ncolliders2)
 Two DAGs are Markov equivalent iff they share a skeleton and a set
 of colliders.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mectest(V, V)
+}

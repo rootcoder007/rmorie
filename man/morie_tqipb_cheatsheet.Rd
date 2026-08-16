@@ -14,3 +14,6 @@ One-line summary of the tqipb module
 A character scalar.
 }
 \keyword{internal}
+\examples{
+morie_tqipb_cheatsheet()
+}

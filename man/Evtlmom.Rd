@@ -35,3 +35,7 @@ sample mean and lambda_2 the L-scale.
 Elamir & Seheult (2003), Comput. Statist. Data Anal.
 43(3):299-314.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Evtlmom(V)
+}

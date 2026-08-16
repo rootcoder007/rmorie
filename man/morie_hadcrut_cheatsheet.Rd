@@ -32,3 +32,6 @@ A character scalar.
     Environment 116, 140-158.
 }
 \keyword{internal}
+\examples{
+morie_hadcrut_cheatsheet()
+}

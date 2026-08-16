@@ -18,3 +18,7 @@ the input.  The first M-1 outputs run on a partly empty delay line and are repor
 A list with \code{d_hat}, \code{n}, \code{order}, \code{settled_from}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+WienerOut(V, V)
+}

@@ -29,3 +29,6 @@ A character scalar.
     Information Theory in Psychology, 95-100.
 }
 \keyword{internal}
+\examples{
+morie_rnacov_cheatsheet()
+}

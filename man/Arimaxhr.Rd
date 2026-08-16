@@ -32,3 +32,7 @@ models); disturbance estimation by Hannan and Rissanen (1982),
 Biometrika 69(1), 81-94.  Standard published form; neither source is
 in the local corpus and neither was read.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Arimaxhr(V, V)
+}

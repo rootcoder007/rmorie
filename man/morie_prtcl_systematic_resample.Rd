@@ -19,3 +19,7 @@ Part of the prtcl_native implementation; see the file header for the source it f
 The value of \code{idx}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_prtcl_systematic_resample(V)
+}

@@ -28,3 +28,7 @@ largest \code{min(0.2 S, 3 sqrt(S))}.
 Watanabe, S. (2013). JMLR 14:867-897; Vehtari, Gelman &
 Gabry (2017) Statist Comput 27:1413-1432.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Infcrt(V)
+}

@@ -41,3 +41,7 @@ Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.3.1 and ch. 11;
 van der Vaart & van Zanten.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalgpdenscrt(V)
+}

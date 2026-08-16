@@ -28,3 +28,7 @@ List with \code{loss_history}, \code{final_loss}, \code{loss_by_t}, \code{A}, \c
 \description{
 DDPM: per-timestep affine eps-model trained on the noise-prediction objective (hmddpm)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_ddpm(V)
+}

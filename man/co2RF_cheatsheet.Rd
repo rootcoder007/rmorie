@@ -14,3 +14,6 @@ Part of the co2RF_native implementation; see the file header for the source it f
 A character value.
 }
 \keyword{internal}
+\examples{
+co2RF_cheatsheet()
+}

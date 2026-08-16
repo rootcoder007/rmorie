@@ -37,3 +37,7 @@ A list with the total and the per-pair contributions.
     Journal of Computer-Aided Molecular Design 11(5), 425-445.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_glides_lipo(V)
+}

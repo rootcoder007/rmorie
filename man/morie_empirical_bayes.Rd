@@ -26,3 +26,7 @@ Morris, C. N. (1983). Parametric empirical Bayes
 inference: theory and applications. \emph{Journal of the American
 Statistical Association}, 78(381), 47-55.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_empirical_bayes(V, V)
+}

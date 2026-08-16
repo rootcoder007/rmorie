@@ -31,3 +31,6 @@ Formula: S(1) = prod over events t_j <= 1 of
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.4.1.
 }
+\examples{
+Ghosalntrconsist()
+}

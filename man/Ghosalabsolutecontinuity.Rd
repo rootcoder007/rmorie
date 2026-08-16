@@ -35,3 +35,7 @@ l_i = log p(X | theta_i) + log pi(theta_i).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 1.3.1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalabsolutecontinuity(V)
+}

@@ -31,3 +31,6 @@ A character scalar.
     sequence models." Transactions of the ACL 8, 156-171.
 }
 \keyword{internal}
+\examples{
+morie_vit2lf_cheatsheet()
+}

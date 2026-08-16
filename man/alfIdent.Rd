@@ -14,3 +14,6 @@ Part of the alf_core implementation; see the file header for the source it follo
 A list with \code{R}, \code{t}.
 }
 \keyword{internal}
+\examples{
+alfIdent()
+}

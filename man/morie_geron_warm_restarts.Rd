@@ -23,3 +23,7 @@ factor, estimate, n, method.
 eta = eta_min + 0.5*(eta_max-eta_min)\emph{(1+cos(pi}T_cur/T_i)); cycle
 lengths grow geometrically \verb{T_\{i+1\}} = round(T_i * factor).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_warm_restarts(V)
+}

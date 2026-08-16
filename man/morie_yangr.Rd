@@ -31,3 +31,7 @@ Yang, J. et al. (2010). Common SNPs explain a large
 proportion of the heritability for human height. Nature
 Genetics, 42, 565-569.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_yangr(V)
+}

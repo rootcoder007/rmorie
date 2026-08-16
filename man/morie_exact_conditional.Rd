@@ -26,3 +26,6 @@ List with loglik and/or probs, p_at_t.
 Equations 6.4 to 6.6 of Bilder & Loughin (2025): the sufficiency form
 of the logistic joint probability and the exact conditional PMF.
 }
+\examples{
+morie_exact_conditional()
+}

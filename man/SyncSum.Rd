@@ -17,3 +17,7 @@ and a zero-mean noise sum growing only as sqrt(M).  The SUM is returned, because
 A list with \code{sum}, \code{average}, \code{m}, \code{n}, \code{signal_growth}, \code{noise_growth}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SyncSum(V)
+}

@@ -41,3 +41,7 @@ doi:10.1093/bioinformatics/btr509, for the conventional genotype
 likelihood this replaces.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+varcal_genotype_posterior(D)
+}

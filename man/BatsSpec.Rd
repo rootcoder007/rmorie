@@ -23,3 +23,6 @@ Part of the bats_native implementation; see the file header for the source it fo
 The value of \code{structure}.
 }
 \keyword{internal}
+\examples{
+BatsSpec()
+}

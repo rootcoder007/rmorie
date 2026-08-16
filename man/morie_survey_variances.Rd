@@ -50,3 +50,6 @@ small-area mean (14.15), trend weights (15.4), GLS estimator (15.10),
 linear working model (16.1), OLS beta and prediction variance (20.2,
 20.3), classification indicator (25.8).
 }
+\examples{
+morie_survey_variances()
+}

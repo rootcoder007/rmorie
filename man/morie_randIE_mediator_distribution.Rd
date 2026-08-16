@@ -20,3 +20,7 @@ Part of the randIE_native implementation; see the file header for the source it 
 A list with \code{p}, \code{levels}, \code{strata}, \code{arms}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_randIE_mediator_distribution(V, V)
+}

@@ -14,3 +14,7 @@ Terry-Hoeffding normal-scores test -- Sec. 8.3.1, p. 299
 A list with \code{statistic}, \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{scores}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Normscores(V, V)
+}

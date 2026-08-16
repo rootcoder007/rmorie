@@ -18,3 +18,7 @@ index grid has to be symmetric; reflecting a causal sequence about 0 instead com
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+EvenPart(S)
+}

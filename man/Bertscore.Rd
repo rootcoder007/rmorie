@@ -25,3 +25,7 @@ the recall sum.
 Zhang, Kishore, Wu, Weinberger and Artzi (2020), ICLR;
 arXiv:1904.09675, Sect. 3.  Read from the ar5iv rendering.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bertscore(V, V)
+}

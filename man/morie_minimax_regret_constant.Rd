@@ -30,3 +30,6 @@ attainment claim against simulation.
 Hirano K, Porter JR (2009) \emph{Econometrica}
 77(5):1683-1701, doi:10.3982/ECTA6630.
 }
+\examples{
+morie_minimax_regret_constant()
+}

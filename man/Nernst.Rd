@@ -21,3 +21,6 @@ Part of the rangayyan_phys implementation; see the file header for the source it
 A list with \code{ion}, \code{potential_mV}, \code{potential_V}, \code{slope_mV}, \code{ratio}, \code{T_K}, \code{z}, \code{conc_out_mM}, \code{conc_in_mM}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Nernst()
+}

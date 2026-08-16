@@ -30,3 +30,7 @@ List with \code{total_params}, \code{encoder_params}, \code{decoder_params}, \co
 Block costs delegated to \code{morie_geron_block_params}; only the decoder
 block carries the extra cross-attention sub-layer.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_encoder_decoder_transformer(V, V)
+}

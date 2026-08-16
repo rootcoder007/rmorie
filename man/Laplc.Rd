@@ -14,3 +14,7 @@ Alias of \code{morie_dp_laplace_mechanism}: releases \eqn{f(D) + Lap(\Delta f / 
 The value of \code{morie_dp_laplace_mechanism}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Laplc(V)
+}

@@ -17,3 +17,7 @@ x(n-12)] Adds and one shift by 32 -- which is why it was chosen for real time.
 A list with \code{y}, \code{delay}, \code{n}, \code{fsnote}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsLPassDf(V)
+}

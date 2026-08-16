@@ -19,3 +19,7 @@ List with pooled, argmax, output_shape, parameters, estimate, n, method.
 \description{
 Max pooling over a sliding window, per channel (Geron Ch 12, morie.fn hmmxp)
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_max_pool(M)
+}

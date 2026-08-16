@@ -39,3 +39,7 @@ and Cuturi (2018), Section 3.
 Genevay, A., Peyre, G. and Cuturi, M. (2018). Proceedings
 of Machine Learning Research 84:1608-1617 (AISTATS).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otker(V, V)
+}

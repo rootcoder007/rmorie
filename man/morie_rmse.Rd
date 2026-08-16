@@ -17,3 +17,7 @@ list(rmse, mse, mae, bias, n)
 \description{
 Root mean squared error (ch. 19 p. 566)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rmse(V, V)
+}

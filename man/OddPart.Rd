@@ -18,3 +18,7 @@ Part of the rangayyan_xfrm implementation; see the file header for the source it
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+OddPart(S)
+}

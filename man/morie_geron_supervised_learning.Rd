@@ -24,3 +24,7 @@ Delegates the fit to \code{morie_geron_batch_learning} (closed-form
 ridge/least squares); adds exact leave-one-out risk from the hat
 matrix, e_loo_i = e_i / (1 - h_ii).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_supervised_learning(V, V)
+}

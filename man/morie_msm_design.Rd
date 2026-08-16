@@ -14,3 +14,7 @@ morie_msm_design
 A list with \code{X}, \code{a_bar}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_msm_design(M)
+}

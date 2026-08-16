@@ -29,3 +29,7 @@ avoids refitting n times.  Cut-off 2/sqrt(n).
 Belsley, Kuh & Welsch (1980), Regression Diagnostics,
 Wiley, ch. 2.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dfbetb(V, V)
+}

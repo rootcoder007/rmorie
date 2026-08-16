@@ -18,3 +18,7 @@ List with \code{prediction}, \code{mse}, \code{std}, \code{n_leaf}.
 The leaf value is the mean of its targets, the squared-error
 minimiser.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tree_regression_leaf(V)
+}

@@ -34,3 +34,7 @@ its convergence for zero-sum games is Robinson (1951), Annals of
 Mathematics 54(2), 296-301; neither is von Neumann's and both are
 cited to their own sources.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Matgame(V)
+}

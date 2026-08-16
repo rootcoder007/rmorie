@@ -41,3 +41,6 @@ Formula: score = 1{prior mass ok} - lan_remainder
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.3.2.
 }
+\examples{
+Ghosalstrictsbvm()
+}

@@ -32,3 +32,7 @@ inverse-variance pooled estimate -- Galbraith (1988).
 Galbraith, R. F. (1988). Statistics in Medicine
 7(8):889-894. \doi{10.1002/sim.4780070807}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Magal(V, V)
+}

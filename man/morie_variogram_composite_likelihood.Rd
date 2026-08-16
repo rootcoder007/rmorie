@@ -48,3 +48,7 @@ then shrink its own weight by inflating gamma.
 Schabenberger O, Gotway CA (2005), Sec 4.5.3, eq (4.43)
 and (4.44), pp. 169-172. Lindsay BG (1988).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_variogram_composite_likelihood(V, V)
+}

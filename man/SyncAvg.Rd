@@ -17,3 +17,7 @@ into a signal sum that grows as M and a zero-mean noise sum that grows only as s
 A list with \code{average}, \code{sd}, \code{m}, \code{n}, \code{se}, \code{snr_gain}, \code{snr_gain_db}, \code{alignment_note}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SyncAvg(V)
+}

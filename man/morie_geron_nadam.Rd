@@ -41,3 +41,7 @@ m_hat = b1 m / (1 - b1^(t+1)) + (1 - b1) g / (1 - b1^t). Note the
 t+1 exponent in the first term: it is not a typo, it is what pulls
 the current gradient into the step without a second evaluation.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_nadam(V)
+}

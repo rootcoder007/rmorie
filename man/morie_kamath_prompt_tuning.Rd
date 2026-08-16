@@ -17,3 +17,7 @@ List with \code{X_aug}, \code{prompt_len}, \code{n_trainable}.
 \description{
 X_aug = [P; X]; only the L_p x d prompt is trained.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_prompt_tuning(V, V)
+}

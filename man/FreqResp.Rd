@@ -20,3 +20,7 @@ one-sided response, since for real coefficients the other half is the conjugate 
 A list with \code{f}, \code{H}, \code{magnitude}, \code{magnitude_db}, \code{phase}, \code{fs}, \code{n_freqs}, \code{one_sided}, \code{includes_nyquist}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FreqResp(V)
+}

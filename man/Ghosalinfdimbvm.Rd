@@ -33,3 +33,6 @@ over theta-hat +/- 6 sd, by midpoint rule.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.1.
 }
+\examples{
+Ghosalinfdimbvm()
+}

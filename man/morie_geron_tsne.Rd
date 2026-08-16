@@ -27,3 +27,7 @@ High-d affinities: perplexity-calibrated Gaussians, symmetrised
 p_ij=(p_j|i+p_i|j)/2n. Low-d: Student-t kernel q_ij ~ (1+||yi-yj||^2)^-1.
 KL(P||Q) minimised by momentum gradient descent.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tsne(V)
+}

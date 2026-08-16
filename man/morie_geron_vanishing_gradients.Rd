@@ -20,3 +20,7 @@ Reports per-layer ratio ||\verb{g_\{l+1\}}||/||g_l|| and the geometric mean
 ratio (constant per-layer factor); flags "vanishing" if the geometric
 mean falls below tol.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_vanishing_gradients(V)
+}

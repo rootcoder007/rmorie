@@ -32,3 +32,6 @@ field; Rangayyan (2024) eqs. (7.143)-(7.149), Section 7.8.2.
 A list with \code{x_cm}, \code{Vm_mV}, \code{phi_e_mV}, \code{phi_i_mV}, \code{Im_uA_cm2}, \code{activation_ms}, \code{n_activated}, \code{cv_cm_per_ms}, \code{D_cm2_per_ms}, \code{sigma_bulk_mS_cm}, \code{dt_ms}, \code{dx_cm}, \code{stability_limit_ms}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+BiDomain()
+}

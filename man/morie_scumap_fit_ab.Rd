@@ -20,3 +20,6 @@ Part of the scumap_native implementation; see the file header for the source it 
 A list with \code{a}, \code{b}.
 }
 \keyword{internal}
+\examples{
+morie_scumap_fit_ab()
+}

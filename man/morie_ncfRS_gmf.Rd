@@ -37,3 +37,7 @@ Techniques for Recommender Systems", *Computer* 42(8), 30-37,
 doi:10.1109/MC.2009.263. The inner-product model being generalised.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ncfRS_gmf(V, V)
+}

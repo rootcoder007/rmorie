@@ -20,3 +20,7 @@ floating hulls on nearly-collinear input. Collinear boundary points
 are dropped; the hull is the minimal vertex set, counter-clockwise
 from the lexicographic minimum.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_lattice_convex_hull(D)
+}

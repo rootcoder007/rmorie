@@ -22,3 +22,7 @@ Mirror of \code{morie_geron_vanishing_gradients}: geometric-mean
 amplification per layer towards the input; optional global-norm
 clipping g <- g * clip_norm / ||g||_global.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_exploding_gradients(V)
+}

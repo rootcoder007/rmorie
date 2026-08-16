@@ -38,3 +38,7 @@ priors. Journal of the American Statistical Association, 100(472),
 1278-1291. Ghosal, S. & van der Vaart, A. (2017). Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 14.6.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nrmprc(V)
+}

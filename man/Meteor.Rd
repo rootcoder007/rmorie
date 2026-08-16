@@ -40,3 +40,7 @@ penalty and score formulas with the worked example, Section
 2.1, p. 68. Local source:
 library/pdf/fetched-wave3/Banerjee-Lavie-2005-METEOR-ACL.pdf.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Meteor(V, V)
+}

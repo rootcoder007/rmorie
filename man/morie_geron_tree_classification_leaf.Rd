@@ -19,3 +19,7 @@ List with \code{prediction}, \code{proportions}, \code{counts}, \code{gini},
 The leaf predicts the majority class (0-based, first maximum);
 proportions are the tree's probabilities.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tree_classification_leaf(V)
+}

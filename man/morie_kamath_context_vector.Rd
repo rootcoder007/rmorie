@@ -18,3 +18,7 @@ morie_kamath_context_vector
 A list with \code{context}, \code{mapping}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_context_vector(V)
+}

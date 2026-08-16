@@ -16,3 +16,7 @@ a list of sorted integer vectors in lexicographic order.
 \description{
 Close maximal simplices under taking faces
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_simplicial_complex_faces(V)
+}

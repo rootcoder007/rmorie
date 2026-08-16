@@ -35,3 +35,7 @@ A list with the best program, its score, its correctness, and   how much of the 
     Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alfqud(V)
+}

@@ -51,3 +51,7 @@ basic statistics documentation, het and missing reports
 (cog-genomics.org/plink/1.9/basic_stats, fetched 2026-08-09).
 Nei, M. (1978). Genetics 89(3), 583-590.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Smplqc(V)
+}

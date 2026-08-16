@@ -37,3 +37,8 @@ doi:10.1201/9780203492024. The sparse GMRF computations the
 method rests on.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+hyperparameter_design(M, V)
+}

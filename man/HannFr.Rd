@@ -17,3 +17,7 @@ Part of the rangayyan_filt implementation; see the file header for the source it
 A list with \code{H}, \code{omega}, \code{magnitude}, \code{on_the_unit_circle}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HannFr(V)
+}

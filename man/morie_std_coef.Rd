@@ -23,3 +23,7 @@ Beta equals b times s_x over s_y for OLS (equation 2.20), b times s for
 logistic (equation 4.10), and b times 2 s under the Gelman-Hill
 convention (equation 4.11). Mirrors ca2e20, ca4e10, ca4e11.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_std_coef(V, V)
+}

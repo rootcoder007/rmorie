@@ -19,3 +19,7 @@ mirror of eq (4.70): positive powers of z, so the maximum-phase part of the ceps
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LogMaxPh(V)
+}

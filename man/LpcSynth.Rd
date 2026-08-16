@@ -20,3 +20,7 @@ follows from A(z) = 1 + sum a_k z^-k.  Coefficients from the other convention gi
 A list with \code{y}, \code{n}, \code{order}, \code{gain}, \code{diverged}, \code{sign_convention}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LpcSynth(V, V)
+}

@@ -19,3 +19,7 @@ squaring of eq (4.81) is omitted.  square defaults to FALSE here for that reason
 A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{squared}, \code{exact}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PCepSum(V, V)
+}

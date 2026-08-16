@@ -21,3 +21,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{correlations}, \code{best_lags}, \code{covariances}, \code{scales}, \code{overall_correlation}, \code{levels}, \code{max_lag}, \code{wavelet}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+WtXcor(V, V)
+}

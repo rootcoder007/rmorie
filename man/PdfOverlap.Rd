@@ -18,3 +18,7 @@ bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built from, D_B =
 A list with \code{coefficient}, \code{overlap}, \code{distance}, \code{identical}, \code{disjoint}, \code{in_unit_interval}, \code{the_overlap_is_where_errors_must_happen}, \code{not_from_this_book}, \code{reference}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PdfOverlap(V, V)
+}

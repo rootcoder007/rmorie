@@ -23,3 +23,7 @@ List with \code{encoded}, \code{levels}, \code{columns}, \code{n_columns}.
 \description{
 One-hot encoding (Geron Ch 2, morie.fn grohe)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_one_hot_encoding_grohe(V)
+}

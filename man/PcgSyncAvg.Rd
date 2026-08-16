@@ -18,3 +18,7 @@ SPECTRA, not waveforms, and that is the point: successive PCG cycles are not sam
 A list with \code{average_psd}, \code{psd_of_average}, \code{mean_waveform}, \code{freqs}, \code{m}, \code{n}, \code{power_retained}, \code{method}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+PcgSyncAvg(D)
+}

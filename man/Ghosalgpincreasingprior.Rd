@@ -34,3 +34,7 @@ Formula: F(x_i) = F(x_{i-1})
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 2.2.2.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalgpincreasingprior(V)
+}

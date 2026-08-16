@@ -17,3 +17,7 @@ CIRCULAR autocorrelation.  The linear (biased) ACF gives a smoothed version inst
 A list with \code{psd}, \code{via_circular_acf}, \code{acf_circular}, \code{acf_linear}, \code{max_difference}, \code{holds}, \code{linear_difference}, \code{linear_acf_is_smoothed}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+PsdAcf(V)
+}

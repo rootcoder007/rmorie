@@ -17,3 +17,7 @@ List with \code{kl}, \code{per_dimension}, \code{per_sample}, \code{variance},
 KL = -0.5 sum(1 + logvar - mu^2 - exp(logvar)); zero exactly at the
 prior.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_kl_divergence_gaussian(V, V)
+}

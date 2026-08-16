@@ -27,3 +27,7 @@ Formula: \code{MRR = (1/|Q|) sum_q 1/rank_q}.
 Voorhees, E. M. (1999). TREC-8 question answering track
 report, 77-82.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Mrr(V, V)
+}

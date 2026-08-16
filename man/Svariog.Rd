@@ -30,3 +30,7 @@ Bivand, Pebesma and Gomez-Rubio (2013), Applied Spatial
 Data Analysis with R, 2nd edn, Equation (8.4), p. 218.  Read from
 the corpus PDF.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Svariog(V, V)
+}

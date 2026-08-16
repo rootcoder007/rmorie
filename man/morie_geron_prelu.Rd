@@ -19,3 +19,7 @@ Parametric ReLU: per-channel learnable negative slope (Geron Ch 11, hmprel)
 A list with \code{a}, \code{output}, \code{grad_z}, \code{grad_alpha}, \code{alpha}, \code{negative_fraction}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_prelu(V)
+}

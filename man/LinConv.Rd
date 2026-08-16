@@ -19,3 +19,7 @@ causality assumed as the book states under eq (3.37).  eq (3.39) reads the same 
 A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{contributions}, \code{commutes}, \code{causal}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LinConv(V, V)
+}

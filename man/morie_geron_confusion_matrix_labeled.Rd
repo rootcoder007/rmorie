@@ -33,3 +33,7 @@ string form, matching \code{sorted(..., key=str)}.
 This is the metrics core: hmeaf, hmf1 and hmmlb all read their
 precision/recall/F1 out of this same routine in Python.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_confusion_matrix_labeled(V, V)
+}

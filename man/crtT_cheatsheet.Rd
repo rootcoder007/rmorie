@@ -14,3 +14,6 @@ Part of the crtT_mixedcase_native implementation; see the file header for the so
 A character value.
 }
 \keyword{internal}
+\examples{
+crtT_cheatsheet()
+}

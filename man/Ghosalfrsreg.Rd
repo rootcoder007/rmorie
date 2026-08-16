@@ -30,3 +30,6 @@ evidence(K) = -n log(RSS/n)/2 - K log(n)/2.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.2.
 }
+\examples{
+Ghosalfrsreg()
+}

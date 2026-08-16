@@ -35,3 +35,7 @@ Rabin, J., Peyre, G., Delon, J. and Bernot, M. (2012).
 Lecture Notes in Computer Science 6667:435-446.
 \doi{10.1007/978-3-642-24785-9_37}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otsd(V, V)
+}

@@ -18,3 +18,7 @@ Part of the llavx_native implementation; see the file header for the source it f
 A list with \code{prompt}, \code{kind}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+instruction_prompt(D)
+}

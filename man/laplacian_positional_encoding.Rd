@@ -20,3 +20,7 @@ Laplacian eigenvector positional encoding
 List with encoding, eigenvalues, caveat.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+laplacian_positional_encoding(V, V)
+}

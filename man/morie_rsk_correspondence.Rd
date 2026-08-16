@@ -24,3 +24,7 @@ statistic falls out of an algebraic construction.
 Robinson G de B (1938); Schensted C (1961)
 \emph{Canad J Math} 13:179-191; Knuth DE (1970).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rsk_correspondence(V)
+}

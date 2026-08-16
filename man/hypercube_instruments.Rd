@@ -18,3 +18,7 @@ Part of the bnskmt_native implementation; see the file header for the source it 
 A list with \code{instruments}, \code{n_instruments}, \code{n_levels}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+hypercube_instruments(M)
+}

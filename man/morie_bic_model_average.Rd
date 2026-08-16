@@ -17,3 +17,7 @@ List with taus, theta_ma, var_ma.
 \description{
 Equations 5.2 to 5.4 of Bilder & Loughin (2025).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_bic_model_average(V)
+}

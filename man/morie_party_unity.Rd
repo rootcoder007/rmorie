@@ -31,3 +31,7 @@ Press. Rice SA (1925). The behavior of legislative groups: a
 method of measurement. \emph{Political Science Quarterly} 40(1),
 60-72.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_party_unity(V, V)
+}

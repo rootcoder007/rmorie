@@ -29,3 +29,7 @@ Cuturi (2019) Remark 2.30.
 Bobkov, S. and Ledoux, M. (2019). Memoirs of the American
 Mathematical Society 261(1259). \doi{10.1090/memo/1259}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otws2(V, V)
+}

@@ -24,3 +24,6 @@ A character scalar.
     Machine Learning." MIT Press, chapters 2 and 4.
 }
 \keyword{internal}
+\examples{
+morie_hyper2_cheatsheet()
+}

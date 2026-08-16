@@ -20,3 +20,7 @@ plus the nugget of Sec. 4.3.6; covariance eq (4.14).  gamma(0) = 0 ALWAYS -- the
 A list with \code{h}, \code{gamma}, \code{cov}, \code{nugget}, \code{psill}, \code{sill}, \code{range}, \code{true_range}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SphVario(V)
+}

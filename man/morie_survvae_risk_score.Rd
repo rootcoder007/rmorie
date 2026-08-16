@@ -18,3 +18,8 @@ Default horizon is the median observation time -- the \code{len // 2}-th element
 Numeric vector of risks, one per row of \code{X}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_survvae_risk_score(D, V)
+}

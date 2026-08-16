@@ -15,3 +15,7 @@ Scalar IoU.
 \description{
 Intersection over union of two (x1,y1,x2,y2) boxes
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_box_iou(V, V)
+}

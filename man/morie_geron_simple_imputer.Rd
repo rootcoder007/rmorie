@@ -20,3 +20,7 @@ Fills NA per column with the mean / median / most frequent observed
 value. numpy's mode takes the SMALLEST value among ties, which
 \code{sort(unique(.))} reproduces here.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_simple_imputer(V)
+}

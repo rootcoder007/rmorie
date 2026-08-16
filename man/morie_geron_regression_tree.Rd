@@ -18,3 +18,7 @@ CART regression tree minimising per-leaf MSE (Geron Ch 5, hmrdt)
 A list with \code{tree}, \code{predict}, \code{predictions}, \code{mse}, \code{n_leaves}, \code{depth}, \code{feature_importance}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_regression_tree(V, V)
+}

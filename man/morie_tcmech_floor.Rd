@@ -33,3 +33,7 @@ The floor, zero when untruncated.
     privacy." arXiv:1603.01887.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tcmech_floor(V)
+}

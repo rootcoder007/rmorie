@@ -20,3 +20,7 @@ Max-shift stabilised softmax. \code{axis} follows numpy: -1 (default) or
 1 is row-wise for a matrix, 0 is column-wise. For a vector input the
 full Jacobian diag(p) - p p^T is returned as well.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_softmax_function(V)
+}

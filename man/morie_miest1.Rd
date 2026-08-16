@@ -32,3 +32,7 @@ smaller statistical error for it at equal k).  Units are nats.
 Kraskov, A., Stogbauer, H. and Grassberger, P. (2004).
 Estimating mutual information. Physical Review E, 69, 066138.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_miest1(V, V)
+}

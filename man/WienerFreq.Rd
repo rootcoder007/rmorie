@@ -18,3 +18,7 @@ vanishes the ratio is undefined; returning zero there is a choice, and it is fla
 A list with \code{W}, \code{magnitude}, \code{undetermined_bins}, \code{n_undetermined}, \code{zero_where_undetermined}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+WienerFreq(V, V)
+}

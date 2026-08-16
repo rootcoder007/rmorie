@@ -31,3 +31,7 @@ One effective sample size per coordinate.
   Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_baysmplr_ess(V)
+}

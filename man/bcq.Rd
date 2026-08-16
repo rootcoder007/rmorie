@@ -27,3 +27,7 @@ Part of the bcq_native implementation; see the file header for the source it fol
 A list with \code{estimate}, \code{q}, \code{policy}, \code{allowed}, \code{behavior}, \code{value}, \code{n_eliminated}, \code{bellman_error}, \code{tau}, \code{gamma}, \code{n_transitions}, \code{method}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+bcq(D)
+}

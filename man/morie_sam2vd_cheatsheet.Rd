@@ -39,3 +39,6 @@ Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
 4015-4026, arXiv:2304.02643. The image model generalised here.
 }
 \keyword{internal}
+\examples{
+morie_sam2vd_cheatsheet()
+}

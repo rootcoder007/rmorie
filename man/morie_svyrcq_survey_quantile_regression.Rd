@@ -24,3 +24,7 @@ Part of the svyrcq_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{coefficients}, \code{residuals}, \code{fitted}, \code{objective}, \code{objective_path}, \code{weighted_fraction_below}, \code{tau}, \code{iterations}, \code{converged}, \code{n}, \code{p}, \code{sum_weights}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_svyrcq_survey_quantile_regression(V, V)
+}

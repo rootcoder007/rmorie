@@ -19,3 +19,6 @@ MSbetween, MSwithin and F (equations 9.5 to 9.7, 9.12) and the block
 design with treatment and block effects (9.13). Mirrors ca9e5 to
 ca9e7, ca9e12, ca9e13.
 }
+\examples{
+morie_experiment_anova()
+}

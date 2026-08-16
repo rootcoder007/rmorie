@@ -45,3 +45,7 @@ PLINK 1.9 LD documentation (genotype-allele-count correlation),
 fetched 2026-08-09. EM phase resolution follows CRAN package
 genetics R/LD.R as documented in twoldp.R.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ldcmpr(V, V)
+}

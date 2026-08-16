@@ -14,3 +14,6 @@ morie_rqtmpl
 A list with \code{haldane}, \code{inverse_haldane}, \code{genotype_probabilities}, \code{single_marker}, \code{interval_map}, \code{scan_interval}, \code{interval_mapping}, \code{elod}, \code{threshold}, \code{progeny_required}, \code{cheatsheet}, \code{LOG10E}.
 }
 \keyword{internal}
+\examples{
+morie_rqtmpl()
+}

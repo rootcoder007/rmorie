@@ -37,3 +37,7 @@ The signed coverage error, or NA when either average is   undefined.
     Environment 116, 140-158.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_hadcrut_coverage_error(M, M)
+}

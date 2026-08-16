@@ -38,3 +38,7 @@ List with \code{theta}, \code{step}, \code{m}, \code{v}, \code{m_hat}, \code{v_h
 m <- b1 m + (1-b1) g; v <- b2 v + (1-b2) g^2; bias-correct with the
 1-based timestep t; step = -eta m_hat / (sqrt(v_hat) + eps).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_adam(V)
+}
