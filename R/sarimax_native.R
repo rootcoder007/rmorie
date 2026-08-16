@@ -297,10 +297,20 @@ aicc <- function(loglik, n_par, n) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 starting_models <- function(d, D, s) {
+  # Each candidate is a PAIR: the non-seasonal order and the seasonal
+  # one. Returning only the first half made the seasonal branch
+  # identical to the non-seasonal one, so a seasonal search began from
+  # four models none of which had a seasonal term.
   if (as.integer(s) > 1L) {
-    list(c(2, d, 2), c(0, d, 0), c(1, d, 0), c(0, d, 1))
+    list(list(c(2, d, 2), c(1, D, 1)),
+         list(c(0, d, 0), c(0, D, 0)),
+         list(c(1, d, 0), c(1, D, 0)),
+         list(c(0, d, 1), c(0, D, 1)))
   } else {
-    list(c(2, d, 2), c(0, d, 0), c(1, d, 0), c(0, d, 1))
+    list(list(c(2, d, 2), c(0, D, 0)),
+         list(c(0, d, 0), c(0, D, 0)),
+         list(c(1, d, 0), c(0, D, 0)),
+         list(c(0, d, 1), c(0, D, 0)))
   }
 }
 
