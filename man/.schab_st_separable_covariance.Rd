@@ -12,7 +12,7 @@
 \item{k}{Passed to \code{.schab_st_as_lags}.}
 \item{cov_spatial}{See Usage.}
 \item{cov_temporal}{See Usage.}
-\item{form}{Defaults to \code{"product"}.}
+\item{form}{The body requires: `form` must be 'product', 'sum' or 'product_sum'. Defaults to \code{"product"}.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstcv}. See the file header for the source the module follows.

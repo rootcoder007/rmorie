@@ -201,7 +201,7 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 #' @param n_pre See Usage.
 #' @param n_post See Usage.
 #' @param Ms Iterated over elementwise, with \code{lapply}.
-#' @param family Defaults to \code{"SD"}.
+#' @param family Carried through into a list the body builds. Defaults to \code{"SD"}.
 #' @param l_vec Defaults to \code{NULL}.
 #' @return A list with \code{curve}, \code{family}, \code{M}, \code{width}.
 #' @export
@@ -226,7 +226,7 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
 #' @param beta See Usage.
 #' @param n_pre See Usage.
 #' @param n_post See Usage.
-#' @param family Defaults to \code{"SD"}.
+#' @param family Carried through into a list the body builds. Defaults to \code{"SD"}.
 #' @param l_vec Defaults to \code{NULL}.
 #' @param sign One of \code{"negative"}, \code{"positive"}. Defaults to \code{"positive"}.
 #' @param M_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
@@ -270,7 +270,7 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
 #' @param n_pre See Usage.
 #' @param n_post See Usage.
 #' @param M Defaults to \code{0}.
-#' @param family Defaults to \code{"SD"}.
+#' @param family Carried through into a list the body builds. Defaults to \code{"SD"}.
 #' @param l_vec Defaults to \code{NULL}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{lower}, \code{upper}, \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family}, \code{level}, \code{conservative}, \code{method}.

@@ -186,7 +186,7 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 #'
 #' @param base Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S A matrix; passed to \code{as.matrix}.
-#' @param method Defaults to \code{"shrink"}.
+#' @param method Carried through into a list the body builds. Defaults to \code{"shrink"}.
 #' @param residuals Defaults to \code{NULL}.
 #' @param W Defaults to \code{NULL}.
 #' @param ridge Defaults to \code{1e-10}.

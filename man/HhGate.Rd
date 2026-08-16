@@ -10,9 +10,9 @@ HhGate(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L)
 \arguments{
 \item{V}{Passed to \code{.bsahhrates}.}
 \item{dt}{Numeric; combined arithmetically in the body. Defaults to \code{0.01}.}
-\item{m}{Defaults to \code{NULL}.}
-\item{h}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{m}{Carried through into a list the body builds.}
+\item{h}{Carried through into a list the body builds.}
+\item{n}{Carried through into a list the body builds.}
 \item{steps}{Numeric; combined arithmetically in the body. Defaults to \code{1L}.}
 }
 \description{

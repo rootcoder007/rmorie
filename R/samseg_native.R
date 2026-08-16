@@ -83,7 +83,7 @@ encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL)
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param box See Usage.
+#' @param box The body requires: samseg: the box is empty or inverted.
 #' @param dim Passed to \code{.samseg_pos_enc}. Defaults to \code{8}.
 #' @param type_embeddings Defaults to \code{NULL}.
 #' @return A list with \code{tokens}, \code{n_prompts}, \code{sparse}.
@@ -159,7 +159,7 @@ amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
 #'
 #' @param image_embedding See Usage.
 #' @param prompt_tokens See Usage.
-#' @param decoder See Usage.
+#' @param decoder The body requires: samseg: the decoder returned no mask; the task requires a valid mask for ANY prompt.
 #' @param multimask Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask}, \code{method}, \code{note}.
 #' @export

@@ -291,7 +291,7 @@ morie_attrInf <- function(tree, targets, priors,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree The body requires: attrInf: the tree has no paths.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 tree_paths <- function(tree) {

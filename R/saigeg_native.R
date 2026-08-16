@@ -273,7 +273,7 @@
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
-#' @param order Defaults to \code{0}.
+#' @param order The body requires: saigeg: order must be 0, 1 or 2. Defaults to \code{0}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .saigeg_cgf <- function(t, G, mu, order=0) {

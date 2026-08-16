@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{A}{A matrix; indexed by row and column.}
-\item{x}{See Usage.}
+\item{x}{Carried through into a list the body builds.}
 \item{Z}{See Usage.}
 }
 \description{

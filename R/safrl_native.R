@@ -469,7 +469,7 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 #' @param states Coerced to list by the body, with \code{as.list}.
 #' @param actions Coerced to list by the body, with \code{as.list}.
 #' @param step See Usage.
-#' @param reward See Usage.
+#' @param reward Carried through into a list the body builds.
 #' @param costs Coerced to list by the body, with \code{as.list}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param start Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.

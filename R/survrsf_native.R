@@ -56,7 +56,7 @@ morie_survrsf_SPLIT_RULES <- c("logrank", "logrankrandom", "conserve",
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rule Defaults to \code{NULL}.
+#' @param rule Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{rule}, \code{available}, \code{reason}.
 #' @export
 morie_survrsf_rule_status <- function(rule=NULL) {

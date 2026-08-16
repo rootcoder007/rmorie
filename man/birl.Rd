@@ -14,7 +14,7 @@ birl(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25, alpha = 1, prior
 \item{n_iter}{Defaults to \code{1000}.}
 \item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
-\item{prior}{Defaults to \code{"uniform"}.}
+\item{prior}{Carried through into a list the body builds. Defaults to \code{"uniform"}.}
 \item{scale}{Defaults to \code{1}.}
 \item{r_max}{Defaults to \code{1}.}
 \item{J}{Defaults to \code{0.1}.}

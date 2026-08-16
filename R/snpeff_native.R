@@ -102,15 +102,15 @@ translate <- function(seq, to_stop = FALSE) {
 #' source it follows.
 #'
 #' @param effect Passed to \code{.snpeff_impact}.
-#' @param ref_codon See Usage.
-#' @param alt_codon See Usage.
-#' @param ref_aa See Usage.
-#' @param alt_aa See Usage.
-#' @param ref See Usage.
-#' @param alt See Usage.
+#' @param ref_codon Carried through into a list the body builds.
+#' @param alt_codon Carried through into a list the body builds.
+#' @param ref_aa Carried through into a list the body builds.
+#' @param alt_aa Carried through into a list the body builds.
+#' @param ref Carried through into a list the body builds.
+#' @param alt Carried through into a list the body builds.
 #' @param pos Numeric; combined arithmetically in the body.
-#' @param codon_index Defaults to \code{NULL}.
-#' @param hgvs_p Defaults to \code{NULL}.
+#' @param codon_index Carried through into a list the body builds.
+#' @param hgvs_p Carried through into a list the body builds.
 #' @return A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon}, \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c}, \code{pos}, \code{ref}, \code{alt}.
 #' @export
 .snpeff_pack <- function(effect, ref_codon, alt_codon, ref_aa, alt_aa,

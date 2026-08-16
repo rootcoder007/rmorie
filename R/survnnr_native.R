@@ -337,7 +337,7 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
 #' the source it follows.
 #'
 #' @param fit_result Passed to \code{morie_survnnr_baseline_hazard}.
-#' @param x See Usage.
+#' @param x Carried through into a list the body builds.
 #' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{time}, \code{survival}.
 #' @export

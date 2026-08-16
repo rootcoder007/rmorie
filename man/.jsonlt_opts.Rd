@@ -8,17 +8,17 @@
 .jsonlt_opts(dataframe = "rows", matrix = "rowmajor", Date = "ISO8601", POSIXt = "string", factor = "string", complex = "string", raw = "base64", null = "list", na = NULL, auto_unbox = FALSE, digits = 4, force = FALSE)
 }
 \arguments{
-\item{dataframe}{Defaults to \code{"rows"}.}
-\item{matrix}{Defaults to \code{"rowmajor"}.}
-\item{Date}{Defaults to \code{"ISO8601"}.}
-\item{POSIXt}{Defaults to \code{"string"}.}
-\item{factor}{Defaults to \code{"string"}.}
-\item{complex}{Defaults to \code{"string"}.}
-\item{raw}{Defaults to \code{"base64"}.}
-\item{null}{Defaults to \code{"list"}.}
-\item{na}{Defaults to \code{NULL}.}
+\item{dataframe}{Carried through into a list the body builds. Defaults to \code{"rows"}.}
+\item{matrix}{Carried through into a list the body builds. Defaults to \code{"rowmajor"}.}
+\item{Date}{Carried through into a list the body builds. Defaults to \code{"ISO8601"}.}
+\item{POSIXt}{Carried through into a list the body builds. Defaults to \code{"string"}.}
+\item{factor}{Carried through into a list the body builds. Defaults to \code{"string"}.}
+\item{complex}{Carried through into a list the body builds. Defaults to \code{"string"}.}
+\item{raw}{Carried through into a list the body builds. Defaults to \code{"base64"}.}
+\item{null}{Carried through into a list the body builds. Defaults to \code{"list"}.}
+\item{na}{Carried through into a list the body builds.}
 \item{auto_unbox}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{digits}{Defaults to \code{4}.}
+\item{digits}{Carried through into a list the body builds. Defaults to \code{4}.}
 \item{force}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

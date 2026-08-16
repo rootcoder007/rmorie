@@ -320,7 +320,7 @@ morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @param rank Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
-#' @param fill Defaults to \code{"zero"}.
+#' @param fill Carried through into a list the body builds. Defaults to \code{"zero"}.
 #' @return A list with \code{rmse_on_observed}, \code{fill}, \code{rank}, \code{note}.
 #' @export
 morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,

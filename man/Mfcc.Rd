@@ -12,7 +12,7 @@ Mfcc(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0, fmax = NULL)
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_filters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{26}.}
 \item{n_coeffs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{13}.}
-\item{fmin}{Defaults to \code{0}.}
+\item{fmin}{The body requires: need 0 <= fmin < fmax <= fs/2. Defaults to \code{0}.}
 \item{fmax}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

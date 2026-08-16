@@ -60,7 +60,7 @@ symbolic_representation <- function(captions, boxes) {
 #' source it follows.
 #'
 #' @param symbolic A list; the body reads \code{$text} from it.
-#' @param kind Defaults to \code{"conversation"}.
+#' @param kind Carried through into a list the body builds. Defaults to \code{"conversation"}.
 #' @return A list with \code{prompt}, \code{kind}.
 #' @export
 instruction_prompt <- function(symbolic, kind = "conversation") {

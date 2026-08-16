@@ -9,15 +9,15 @@
 }
 \arguments{
 \item{effect}{Passed to \code{.snpeff_impact}.}
-\item{ref_codon}{See Usage.}
-\item{alt_codon}{See Usage.}
-\item{ref_aa}{See Usage.}
-\item{alt_aa}{See Usage.}
-\item{ref}{See Usage.}
-\item{alt}{See Usage.}
+\item{ref_codon}{Carried through into a list the body builds.}
+\item{alt_codon}{Carried through into a list the body builds.}
+\item{ref_aa}{Carried through into a list the body builds.}
+\item{alt_aa}{Carried through into a list the body builds.}
+\item{ref}{Carried through into a list the body builds.}
+\item{alt}{Carried through into a list the body builds.}
 \item{pos}{Numeric; combined arithmetically in the body.}
-\item{codon_index}{Defaults to \code{NULL}.}
-\item{hgvs_p}{Defaults to \code{NULL}.}
+\item{codon_index}{Carried through into a list the body builds.}
+\item{hgvs_p}{Carried through into a list the body builds.}
 }
 \description{
 A step of the snpeff_native implementation. Called by \code{annotate_variant}. See the file header for the source the module follows.

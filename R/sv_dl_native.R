@@ -411,7 +411,7 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
 #' @param sd Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.
 #' @param orientation Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_insert_size_stats}.
 #' @param n_sd Passed to \code{morie_sv_dl_classify_pair}. Defaults to \code{3}.
-#' @param min_support Defaults to \code{2}.
+#' @param min_support The body requires: sv_dl: min_support must be at least 1. Defaults to \code{2}.
 #' @param window Passed to \code{morie_sv_dl_build_sv_graph}.
 #' @param spread Passed to \code{morie_sv_dl_insert_size_stats}. Defaults to \code{"mad"}.
 #' @return The value of \code{calls}, as built in the body.

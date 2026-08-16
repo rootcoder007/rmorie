@@ -503,7 +503,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' header for the source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
-#' @param x See Usage.
+#' @param x Carried through into a list the body builds.
 #' @param Z See Usage.
 #' @return The value of \code{setdiff}.
 #' @export

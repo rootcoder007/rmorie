@@ -97,8 +97,8 @@
 #'
 #' @param p A vector; indexed elementwise.
 #' @param q A vector; indexed elementwise.
-#' @param hierarchy See Usage.
-#' @param domain See Usage.
+#' @param hierarchy The body requires: morie_tcls: hierarchy must have exactly one root, found.
+#' @param domain The body requires: is not a domain value.
 #' @return The value of \code{cost}, as built in the body.
 #' @export
 .morie_tcls_hier <- function(p, q, hierarchy, domain) {

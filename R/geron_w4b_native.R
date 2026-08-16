@@ -453,7 +453,7 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param node See Usage.
+#' @param node Carried through into a list the body builds.
 #' @param binned A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export

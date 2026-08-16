@@ -9,8 +9,8 @@ TwaSpectr(twaves, noiselo = 0.33, noisehi = 0.45)
 }
 \arguments{
 \item{twaves}{A vector; its length is taken.}
-\item{noiselo}{Defaults to \code{0.33}.}
-\item{noisehi}{Defaults to \code{0.45}.}
+\item{noiselo}{The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5. Defaults to \code{0.33}.}
+\item{noisehi}{The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5. Defaults to \code{0.45}.}
 }
 \description{
 Alternation every other beat is a period of exactly two beats, so it lands on 0.5 cycles per beat -- the last bin of the beat-series spectrum. An EVEN beat count is required or that is not an exact bin.

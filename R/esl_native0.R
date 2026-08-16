@@ -59,7 +59,7 @@
 #' parameters, not laws.
 #'
 #' @param p Numeric; passed to \code{sqrt}.
-#' @param task Defaults to \code{"regression"}.
+#' @param task The body requires: task must be 'regression' or 'classification'. Defaults to \code{"regression"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .esl_mtry <- function(p, task = "regression") {

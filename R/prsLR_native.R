@@ -517,7 +517,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sym See Usage.
+#' @param sym Carried through into a list the body builds.
 #' @return A list with \code{symbol}, \code{children}.
 #' @export
 .prsLR_leaf <- function(sym) {

@@ -10,7 +10,7 @@ promptable_segment(image_embedding, prompt_tokens, decoder, multimask = TRUE)
 \arguments{
 \item{image_embedding}{See Usage.}
 \item{prompt_tokens}{See Usage.}
-\item{decoder}{See Usage.}
+\item{decoder}{The body requires: samseg: the decoder returned no mask; the task requires a valid mask for ANY prompt.}
 \item{multimask}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
 }
 \description{

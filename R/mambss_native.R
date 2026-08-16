@@ -136,7 +136,7 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' @param b_B Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param rule Defaults to \code{"zoh"}.
+#' @param rule Carried through into a list the body builds. Defaults to \code{"zoh"}.
 #' @param D_skip Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L}, \code{D}, \code{N}, \code{rule}, \code{time_invariant}, \code{method}.
 #' @export

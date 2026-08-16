@@ -2058,7 +2058,7 @@ WindowFn <- function(N, window_type = "hamming") {
 #' @param fc Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
 #' @param M Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
-#' @param window Defaults to \code{NULL}.
+#' @param window Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{h}, \code{n_taps}, \code{fc}, \code{fs}, \code{M}, \code{window}, \code{window_values}, \code{delay_samples}, \code{dc_gain}, \code{truncation_causes_gibbs_ripple}, \code{ripple_height_does_not_shrink_with_M}, \code{method}.
 #' @export
 SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {

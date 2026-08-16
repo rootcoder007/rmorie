@@ -12,7 +12,7 @@ andrews_monahan_hac(e, X = NULL, prewhiten = TRUE, var_order = 1, kernel = "qs",
 \item{X}{Defaults to \code{NULL}.}
 \item{prewhiten}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{var_order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
-\item{kernel}{Defaults to \code{"qs"}.}
+\item{kernel}{Carried through into a list the body builds. Defaults to \code{"qs"}.}
 \item{bandwidth}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{weights}{Defaults to \code{NULL}.}
 \item{n_params}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}

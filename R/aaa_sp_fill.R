@@ -657,7 +657,7 @@ MoranRes <- function(residuals, w, x = NULL) {
 #' @param points A matrix; passed to \code{as.matrix}.
 #' @param region Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param r Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param correction Defaults to \code{"border"}.
+#' @param correction The body requires: `correction` must be "border" or "none". Defaults to \code{"border"}.
 #' @return A list with \code{r}, \code{k}, \code{pcf}, \code{lambda}, \code{area}, \code{csr_k}, \code{csr_pcf_is_one}, \code{correction}, \code{n}, \code{method}.
 #' @export
 Pcf <- function(points, region = NULL, r = NULL, correction = "border") {

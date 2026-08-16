@@ -8,7 +8,7 @@
 .baygsl_slice_1d(logf, x0, e, w = 1, max_steps = 50L, lower = .baygsl_NEG_INF, upper = .baygsl_POS_INF)
 }
 \arguments{
-\item{logf}{See Usage.}
+\item{logf}{The body requires: baygsl: the shrinkage loop did not terminate; is logf returning a constant or NaN?.}
 \item{x0}{Numeric; combined arithmetically in the body.}
 \item{e}{Passed to \code{.baygsl_expo}.}
 \item{w}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}

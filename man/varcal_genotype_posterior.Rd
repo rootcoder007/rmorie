@@ -9,7 +9,7 @@ varcal_genotype_posterior(image, scorer = NULL, prior = NULL)
 }
 \arguments{
 \item{image}{A list; the body reads \code{$read_rows}, \code{$width} from it.}
-\item{scorer}{Defaults to \code{NULL}.}
+\item{scorer}{The body requires: varcal: the scorer must return three non-negative scores.}
 \item{prior}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{

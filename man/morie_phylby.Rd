@@ -16,10 +16,10 @@ morie_phylby(alignment, n_iter = 2000, burnin = NULL, n_chains = 4, lam = 0.2, s
 \item{swap_every}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{sample_every}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{pi}{Passed to \code{.phylby_step}.}
-\item{rate}{Defaults to \code{1}.}
+\item{rate}{Carried through into a list the body builds. Defaults to \code{1}.}
 \item{branch_prior_mean}{Passed to \code{.phylby_step}. Defaults to \code{0.1}.}
 \item{partitions}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{tree}{Defaults to \code{NULL}.}
+\item{tree}{Optional; may be \code{NULL}. Carried through into a list the body builds.}
 \item{n_runs}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 \item{tune}{Passed to \code{.phylby_step}. Defaults to \code{1}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}

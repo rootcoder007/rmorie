@@ -13,8 +13,8 @@
 \item{z}{A vector; its length is taken and its elements indexed.}
 \item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
 \item{n_time_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
-\item{max_dist}{Defaults to \code{NULL}.}
-\item{max_time}{Defaults to \code{NULL}.}
+\item{max_dist}{The body requires: `max_dist` and `max_time` must be positive.}
+\item{max_time}{The body requires: `max_dist` and `max_time` must be positive.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstvg}. See the file header for the source the module follows.

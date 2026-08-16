@@ -146,8 +146,8 @@ NULL
 #'
 #' @param t_mask A flag; the body branches on it.
 #' @param X A matrix; indexed by row and column.
-#' @param max_iter Defaults to \code{200L}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param max_iter Carried through into a list the body builds. Defaults to \code{200L}.
+#' @param tol Carried through into a list the body builds. Defaults to \code{1e-08}.
 #' @return A list with \code{w}, \code{converged}, \code{max_imbalance}.
 #' @export
 .morie_entropy_balance <- function(t_mask, X, max_iter = 200L, tol = 1e-8) {

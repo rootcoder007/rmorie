@@ -106,8 +106,8 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' source it follows.
 #'
 #' @param hits See Usage.
-#' @param evalue Defaults to \code{0.001}.
-#' @param score Defaults to \code{60}.
+#' @param evalue The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{0.001}.
+#' @param score The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{60}.
 #' @param query_cov Defaults to \code{0.2}.
 #' @param target_cov Defaults to \code{0.2}.
 #' @param searcher Defaults to \code{"diamond"}.
@@ -267,7 +267,7 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 #' @param assignments A vector; indexed elementwise.
 #' @param annotations A vector; indexed elementwise.
 #' @param sources Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
-#' @param min_support Defaults to \code{1}.
+#' @param min_support The body requires: funcal: min_support must be at least 1. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL,

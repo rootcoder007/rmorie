@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{m}{A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.}
-\item{alternative}{Defaults to \code{"two.sided"}.}
+\item{alternative}{The body requires: bad alternative. Defaults to \code{"two.sided"}.}
 }
 \description{
 A step of the coin_native implementation. Called by \code{morie_indep_test}. See the file header for the source the module follows.

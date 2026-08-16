@@ -12,7 +12,7 @@ morie_safrl_cmdp_returns(policy, states, actions, step, reward, costs, gamma = 0
 \item{states}{Coerced to list by the body, with \code{as.list}.}
 \item{actions}{Coerced to list by the body, with \code{as.list}.}
 \item{step}{See Usage.}
-\item{reward}{See Usage.}
+\item{reward}{Carried through into a list the body builds.}
 \item{costs}{Coerced to list by the body, with \code{as.list}.}
 \item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 \item{start}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}

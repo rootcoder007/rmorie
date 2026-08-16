@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{col}{A list; the body reads \code{$-}, \code{$A}, \code{$C}, \code{$G}, \code{$T} from it.}
-\item{draft_base}{See Usage.}
+\item{draft_base}{Carried through into a list the body builds.}
 \item{min_depth}{See Usage.}
 \item{min_frac}{See Usage.}
 }

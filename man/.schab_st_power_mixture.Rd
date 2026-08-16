@@ -10,7 +10,7 @@
 \arguments{
 \item{rs}{Numeric; passed to \code{abs}.}
 \item{rt}{Numeric; passed to \code{abs}.}
-\item{distribution}{Defaults to \code{"poisson"}.}
+\item{distribution}{The body requires: `distribution` must be 'poisson' or 'binomial'. Defaults to \code{"poisson"}.}
 \item{...}{Passed through.}
 }
 \description{

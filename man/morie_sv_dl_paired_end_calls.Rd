@@ -13,7 +13,7 @@ morie_sv_dl_paired_end_calls(pairs, median = NULL, sd = NULL, orientation = NULL
 \item{sd}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.}
 \item{orientation}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_insert_size_stats}.}
 \item{n_sd}{Passed to \code{morie_sv_dl_classify_pair}. Defaults to \code{3}.}
-\item{min_support}{Defaults to \code{2}.}
+\item{min_support}{The body requires: sv_dl: min_support must be at least 1. Defaults to \code{2}.}
 \item{window}{Passed to \code{morie_sv_dl_build_sv_graph}.}
 \item{spread}{Passed to \code{morie_sv_dl_insert_size_stats}. Defaults to \code{"mad"}.}
 }

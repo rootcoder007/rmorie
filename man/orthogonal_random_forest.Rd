@@ -18,7 +18,7 @@ orthogonal_random_forest(Y, T, X, W, x_eval = NULL, n_trees = 100, min_leaf = 5,
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 \item{max_depth}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
-\item{residualize}{Defaults to \code{"local"}.}
+\item{residualize}{Carried through into a list the body builds. Defaults to \code{"local"}.}
 \item{ridge}{Defaults to \code{1e-08}.}
 \item{kind}{Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.}
 \item{leave_one_out}{Defaults to \code{TRUE}.}

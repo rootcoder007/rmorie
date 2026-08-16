@@ -166,7 +166,7 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 #' @param V A matrix; passed to \code{as.matrix}.
 #' @param n_features Coerced to integer by the body, with \code{as.integer}. Defaults to \code{128L}.
 #' @param seed Defaults to \code{0L}.
-#' @param kind Defaults to \code{"positive"}.
+#' @param kind Carried through into a list the body builds. Defaults to \code{"positive"}.
 #' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind}, \code{orthogonal}, \code{causal}, \code{L}, \code{d}, \code{d_v}, \code{method}.

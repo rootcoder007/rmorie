@@ -101,7 +101,7 @@
 #' the source it follows.
 #'
 #' @param mu A vector; its length is taken.
-#' @param family See Usage.
+#' @param family The body requires: `family` must be 'poisson', 'binomial' or 'gaussian'.
 #' @return Nothing; this branch always raises.
 #' @export
 .schab_variance_function <- function(mu, family) {
@@ -124,7 +124,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param family See Usage.
+#' @param family The body requires: unknown family.
 #' @return The value of \code{switch}.
 #' @export
 .schab_canonical_link <- function(family) {
@@ -603,7 +603,7 @@
 #'
 #' @param R A matrix; passed to \code{nrow}.
 #' @param rho Numeric; combined arithmetically in the body.
-#' @param sigma2 Defaults to \code{1}.
+#' @param sigma2 The body requires: `sigma2` must be positive. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .schab_lcar_precision <- function(R, rho, sigma2 = 1) {
@@ -904,7 +904,7 @@
 #'
 #' @param R_space A matrix; passed to \code{as.matrix}.
 #' @param R_time A matrix; passed to \code{as.matrix}.
-#' @param kind See Usage.
+#' @param kind The body requires: `kind` must be one of I, II, III, IV.
 #' @return A list with \code{structure}, \code{kind}, \code{rank}, \code{rank_deficiency}, \code{n_constraints_required}.
 #' @export
 .schab_interaction_structure <- function(R_space, R_time, kind) {

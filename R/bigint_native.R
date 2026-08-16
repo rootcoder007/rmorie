@@ -48,7 +48,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sign See Usage.
+#' @param sign Carried through into a list the body builds.
 #' @param limbs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{structure}.
 #' @export

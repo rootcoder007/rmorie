@@ -58,7 +58,7 @@
 #' @param Xs A matrix; indexed by row and column.
 #' @param beta A matrix; passed to \code{\%*\%}.
 #' @param offs Numeric; combined arithmetically in the body.
-#' @param ties See Usage.
+#' @param ties The body requires: ties must be "breslow" or "efron".
 #' @return A list with \code{loglik}, \code{U}, \code{I}.
 #' @export
 .morie_cox_score <- function(ts, es, Xs, beta, offs, ties) {
@@ -217,10 +217,10 @@
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e Numeric; passed to \code{sum}.
-#' @param X See Usage.
+#' @param X Carried through into a list the body builds.
 #' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$I}, \code{$loglik}, \code{$n_iter} from it.
 #' @param label Character; passed to \code{tolower}.
-#' @param method See Usage.
+#' @param method Carried through into a list the body builds.
 #' @return A list with \code{beta}, \code{se}, \code{z}, \code{p_value}, \code{hazard_ratio}, \code{loglik}, \code{cov}, \code{information}, \code{n_ties}, \code{n_events}, \code{n}, \code{n_iter}, \code{converged}, \code{ties}, \code{time}, \code{event}, \code{X}, \code{method}.
 #' @export
 .morie_cox_result <- function(t, e, X, fit, label, method) {

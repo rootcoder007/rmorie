@@ -10,7 +10,7 @@
 \arguments{
 \item{R_space}{A matrix; passed to \code{as.matrix}.}
 \item{R_time}{A matrix; passed to \code{as.matrix}.}
-\item{kind}{See Usage.}
+\item{kind}{The body requires: `kind` must be one of I, II, III, IV.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the file header for the source the module follows.

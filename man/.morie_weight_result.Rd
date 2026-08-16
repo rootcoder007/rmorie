@@ -10,11 +10,11 @@
 \arguments{
 \item{weights}{A vector; its length is taken.}
 \item{propensity}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{method}{See Usage.}
-\item{estimand}{See Usage.}
-\item{call}{See Usage.}
-\item{stabilize}{Defaults to \code{FALSE}.}
-\item{trim}{Defaults to \code{NULL}.}
+\item{method}{Carried through into a list the body builds.}
+\item{estimand}{Carried through into a list the body builds.}
+\item{call}{Carried through into a list the body builds.}
+\item{stabilize}{Carried through into a list the body builds. Defaults to \code{FALSE}.}
+\item{trim}{Carried through into a list the body builds.}
 }
 \description{
 A step of the weight_native implementation. Called by \code{morie_weight_cbps}, \code{morie_weight_entropy}, \code{morie_weight_ow} and 2 others in the module. See the file header for the source the module follows.

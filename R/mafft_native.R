@@ -1159,11 +1159,11 @@ iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
 #' @param freqs Defaults to \code{NULL}.
 #' @param s_a Defaults to \code{0.06}.
 #' @param s_op Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.
-#' @param matrix Defaults to \code{"normalized"}.
-#' @param window Defaults to \code{30L}.
-#' @param n_peaks Defaults to \code{20L}.
-#' @param threshold Defaults to \code{0.7}.
-#' @param max_len Defaults to \code{150L}.
+#' @param matrix Carried through into a list the body builds. Defaults to \code{"normalized"}.
+#' @param window Carried through into a list the body builds. Defaults to \code{30L}.
+#' @param n_peaks Carried through into a list the body builds. Defaults to \code{20L}.
+#' @param threshold Carried through into a list the body builds. Defaults to \code{0.7}.
+#' @param max_len Carried through into a list the body builds. Defaults to \code{150L}.
 #' @param max_iterate Defaults to \code{16L}.
 #' @return A list with \code{estimate}, \code{alignment}, \code{score}, \code{method}, \code{seq_type}, \code{length}, \code{n}, \code{s_a}, \code{s_op}, \code{matrix_mode}, \code{tree}, \code{refine_rounds}, \code{note}.
 #' @export

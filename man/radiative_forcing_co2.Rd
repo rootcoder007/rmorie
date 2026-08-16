@@ -11,7 +11,7 @@ radiative_forcing_co2(C, C0 = .C0_FIT, N = 273.87, method = "ar6", erf_adjustmen
 \item{C}{Numeric; combined arithmetically in the body.}
 \item{C0}{Numeric; combined arithmetically in the body. Defaults to \code{.C0_FIT}.}
 \item{N}{Numeric; passed to \code{sqrt}. Defaults to \code{273.87}.}
-\item{method}{Defaults to \code{"ar6"}.}
+\item{method}{The body requires: co2RF: method must be 'ar6' or 'myhre1998'. Defaults to \code{"ar6"}.}
 \item{erf_adjustment}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

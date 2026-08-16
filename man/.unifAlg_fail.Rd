@@ -8,8 +8,8 @@
 .unifAlg_fail(sub, why, oc)
 }
 \arguments{
-\item{sub}{See Usage.}
-\item{why}{See Usage.}
+\item{sub}{Carried through into a list the body builds.}
+\item{why}{Carried through into a list the body builds.}
 \item{oc}{Coerced to logical by the body, with \code{as.logical}.}
 }
 \description{

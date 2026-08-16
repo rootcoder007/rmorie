@@ -12,7 +12,7 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' source it follows.
 #'
 #' @param T A vector; its length is taken and its elements indexed.
-#' @param gamma See Usage.
+#' @param gamma The body requires: birl: gamma must be in [0, 1).
 #' @return A list with \code{nS}, \code{nA}.
 #' @export
 .mdp <- function(T, gamma) {
@@ -316,7 +316,7 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 #' @param n_iter Defaults to \code{1000}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param prior Defaults to \code{"uniform"}.
+#' @param prior Carried through into a list the body builds. Defaults to \code{"uniform"}.
 #' @param scale Defaults to \code{1}.
 #' @param r_max Defaults to \code{1}.
 #' @param J Defaults to \code{0.1}.

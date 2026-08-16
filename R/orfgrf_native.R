@@ -271,7 +271,7 @@ orthogonal_moment <- function(y_res, t_res, weights) {
 #' @param W See Usage.
 #' @param x Passed to \code{.orfgrf_forest_weights}.
 #' @param trees Passed to \code{.orfgrf_forest_weights}.
-#' @param residualize Defaults to \code{"local"}.
+#' @param residualize The body requires: orfgrf: residualize must be local or global, got. Defaults to \code{"local"}.
 #' @param ridge Defaults to \code{1e-08}.
 #' @param leave_one_out A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{theta}, \code{den}, \code{w}.
@@ -326,7 +326,7 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param max_depth Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param residualize Defaults to \code{"local"}.
+#' @param residualize Carried through into a list the body builds. Defaults to \code{"local"}.
 #' @param ridge Defaults to \code{1e-08}.
 #' @param kind Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.
 #' @param leave_one_out Defaults to \code{TRUE}.

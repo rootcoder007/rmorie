@@ -15,8 +15,8 @@ FecgNmf(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0, maxiter = 150, taum = 0
 \item{rank}{Passed to \code{.morie_bx_nmfmu}. Defaults to \code{4}.}
 \item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{maxiter}{Passed to \code{.morie_bx_nmfmu}. Defaults to \code{150}.}
-\item{taum}{Defaults to \code{0.6}.}
-\item{tauf}{Defaults to \code{0.45}.}
+\item{taum}{The body requires: taum and tauf must lie in (0, 1]. Defaults to \code{0.6}.}
+\item{tauf}{The body requires: taum and tauf must lie in (0, 1]. Defaults to \code{0.45}.}
 \item{seed}{Passed to \code{.morie_bx_nmfmu}. Defaults to \code{1}.}
 }
 \description{

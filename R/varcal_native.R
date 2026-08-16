@@ -163,8 +163,8 @@ varcal_pileup_column <- function(reads, position, reference) {
 #'
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param reference A vector; its length is taken.
-#' @param min_alt_count Defaults to \code{2}.
-#' @param min_alt_fraction Defaults to \code{0.05}.
+#' @param min_alt_count The body requires: varcal: min_alt_count must be at least 1. Defaults to \code{2}.
+#' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in [0, 1]. Defaults to \code{0.05}.
 #' @param min_bq Defaults to \code{10}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -306,7 +306,7 @@ varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
 #' source it follows.
 #'
 #' @param image A list; the body reads \code{$read_rows}, \code{$width} from it.
-#' @param scorer Defaults to \code{NULL}.
+#' @param scorer The body requires: varcal: the scorer must return three non-negative scores.
 #' @param prior Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{posterior}, \code{call}, \code{quality}, \code{scores}, \code{source}.
 #' @export

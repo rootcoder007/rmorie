@@ -64,7 +64,7 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
 #' @param subject Coerced to character by the body, with \code{as.character}.
 #' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @param mode One of \code{"exact"}, \code{"neighborhood"}. Defaults to \code{"exact"}.
-#' @param threshold Defaults to \code{NULL}.
+#' @param threshold The body requires: blstn: mode='neighborhood' needs a threshold T.
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
 #' @param matrix Optional; may be \code{NULL}. A matrix; indexed by row and column.

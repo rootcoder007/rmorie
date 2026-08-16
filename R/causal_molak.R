@@ -154,7 +154,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Carried through into a list the body builds.
 #' @param y See Usage.
 #' @param children A vector; indexed elementwise.
 #' @param parents A vector; indexed elementwise.

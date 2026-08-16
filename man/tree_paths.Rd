@@ -8,7 +8,7 @@
 tree_paths(tree)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{The body requires: attrInf: the tree has no paths.}
 }
 \description{
 A step of the attrInf_native implementation. Called by \code{morie_attrInf}, \code{wbwc_invert}. See the file header for the source the module follows.

@@ -10,7 +10,7 @@
 \arguments{
 \item{mean}{A vector; its length is taken.}
 \item{cov}{A matrix; passed to \code{dim}.}
-\item{method}{Defaults to \code{"cholesky"}.}
+\item{method}{The body requires: `method` must be 'cholesky' or 'spectral'. Defaults to \code{"cholesky"}.}
 \item{seed}{Passed to \code{.morie_random_normal}. Defaults to \code{0}.}
 \item{stream}{Passed to \code{.morie_random_normal}. Defaults to \code{0}.}
 }

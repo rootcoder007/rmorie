@@ -12,7 +12,7 @@ morie_funkM_imputed_svd_error(ratings, n_users, n_items, rank = 2, fill = "zero"
 \item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
 \item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
 \item{rank}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
-\item{fill}{Defaults to \code{"zero"}.}
+\item{fill}{Carried through into a list the body builds. Defaults to \code{"zero"}.}
 }
 \description{
 A step of the funkM_native implementation. No other function in the package calls it. See the file header for the source the module follows.

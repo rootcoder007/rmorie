@@ -75,7 +75,7 @@ term_weighting <- function(X, how = "log_entropy") {
 #'
 #' @param X See Usage.
 #' @param k_dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param how Defaults to \code{"log_entropy"}.
+#' @param how Carried through into a list the body builds. Defaults to \code{"log_entropy"}.
 #' @return A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k}, \code{full_rank}, \code{weighting}, \code{method}, \code{note}.
 #' @export
 lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {

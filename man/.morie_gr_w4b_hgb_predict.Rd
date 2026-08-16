@@ -8,7 +8,7 @@
 .morie_gr_w4b_hgb_predict(node, binned)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{Carried through into a list the body builds.}
 \item{binned}{A matrix; indexed by row and column.}
 }
 \description{

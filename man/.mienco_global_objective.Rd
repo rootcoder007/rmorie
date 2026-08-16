@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{summary}{Passed to \code{morie_mienco}.}
-\item{whole}{See Usage.}
-\item{other_whole}{See Usage.}
+\item{whole}{Carried through into a list the body builds.}
+\item{other_whole}{Carried through into a list the body builds.}
 \item{critic}{Passed to \code{morie_mienco}.}
 \item{estimator}{Passed to \code{morie_mienco}. Defaults to \code{"jsd"}.}
 }

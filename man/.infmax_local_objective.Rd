@@ -11,7 +11,7 @@
 \item{global_features}{Iterated over elementwise, with \code{lapply}.}
 \item{feature_maps}{Iterated over elementwise, with \code{lapply}.}
 \item{critic}{See Usage.}
-\item{estimator}{Defaults to \code{"jsd"}.}
+\item{estimator}{Carried through into a list the body builds. Defaults to \code{"jsd"}.}
 }
 \description{
 A step of the infmax_native implementation. Called by \code{morie_infmax}. See the file header for the source the module follows.

@@ -181,7 +181,7 @@
 #' @param t0 A count; the body uses it as \code{seq_len(...)}.
 #' @param x_treated Defaults to \code{NULL}.
 #' @param x_donors Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param v Defaults to \code{NULL}.
+#' @param v Carried through into a list the body builds.
 #' @param statistic One of \code{"effect"}, \code{"rmspe_ratio"}. Defaults to \code{"effect"}.
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{gaps}, \code{weights}, \code{fit_loss}, \code{placebo}, \code{pvalue}, \code{rank}, \code{n_donors}, \code{t0}, \code{statistic}, \code{rmspe_pre}, \code{rmspe_post}, \code{note}, \code{method}.
@@ -275,7 +275,7 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #' @param y_donors Iterated over elementwise, with \code{lapply}.
 #' @param t0 Numeric; combined arithmetically in the body.
 #' @param fake_t0 A count; the body uses it as \code{seq_len(...)}.
-#' @param v Defaults to \code{NULL}.
+#' @param v Carried through into a list the body builds.
 #' @param ... Passed through.
 #' @return A list with \code{weights}, \code{gaps}, \code{placebo_effect}, \code{rmspe_pre}, \code{rmspe_placebo}.
 #' @export

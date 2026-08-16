@@ -8,7 +8,7 @@
 .trmRew_app(symbol, args)
 }
 \arguments{
-\item{symbol}{See Usage.}
+\item{symbol}{Carried through into a list the body builds.}
 \item{args}{See Usage.}
 }
 \description{

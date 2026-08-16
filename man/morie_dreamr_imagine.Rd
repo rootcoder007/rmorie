@@ -8,7 +8,7 @@
 morie_dreamr_imagine(state, action_model, transition, reward_model, horizon, value_model = NULL)
 }
 \arguments{
-\item{state}{See Usage.}
+\item{state}{Carried through into a list the body builds.}
 \item{action_model}{See Usage.}
 \item{transition}{See Usage.}
 \item{reward_model}{See Usage.}
