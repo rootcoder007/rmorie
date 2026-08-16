@@ -22,3 +22,8 @@ A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}, 
 A list with \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{neighbour}, \code{d0}, \code{points}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n_obs}.
 }
 \keyword{internal}
+\examples{
+r0 <- 3.9; x <- numeric(300); x[1] <- 0.4
+for (i in 2:300) x[i] <- r0 * x[i - 1] * (1 - x[i - 1])
+str(divergence_curve(x, m = 3, tau = 1), max.level = 1)
+}

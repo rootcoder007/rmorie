@@ -31,3 +31,10 @@ Row-major patches (top-to-bottom, left-to-right), each flattened
 ROW-MAJOR over (row, col, channel), projected by E, with the CLS token
 prepended and the positional table added.
 }
+\examples{
+set.seed(4)
+img <- array(rnorm(8 * 8), c(8, 8))
+E <- matrix(rnorm(16 * 4, 0, 0.3), 16, 4)
+r <- morie_geron_vit_patch_embedding(img, patch_size = 4, E = E)
+str(r, max.level = 1)
+}

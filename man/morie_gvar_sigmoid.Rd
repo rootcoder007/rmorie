@@ -17,3 +17,6 @@ Logistic sigmoid on a reverse-mode tape node
 The value of \code{.morie_gvar}.
 }
 \keyword{internal}
+\examples{
+morie_gvar_sigmoid(.morie_gvar(0))$value
+}

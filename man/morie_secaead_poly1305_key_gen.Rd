@@ -30,3 +30,10 @@ Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
 code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 }
 \keyword{internal}
+\examples{
+key <- as.raw(c(0x80:0x8f, 0x90:0x9f))
+nonce <- as.raw(c(0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7))
+otk <- morie_secaead_poly1305_key_gen(key, nonce)
+stopifnot(otk[1] == 0x8a, otk[2] == 0xd5)
+head(otk, 8)
+}

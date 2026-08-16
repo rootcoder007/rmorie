@@ -23,3 +23,18 @@ List with \code{output}, \code{self_attention_weights},
 LN(x + masked MHA) -> LN(h1 + cross(h1, enc)) -> LN(h2 + FFN); the
 causal mask is built in and the cross-attention is unmasked.
 }
+\examples{
+set.seed(3)
+X <- matrix(rnorm(12), 3, 4)
+E <- matrix(rnorm(20), 5, 4)
+h1 <- matrix(rnorm(8, 0, 0.4), 4, 2)
+mk <- function() list(WQ = list(h1, h1), WK = list(h1, h1), WV = list(h1, h1),
+                      WO = matrix(rnorm(16, 0, 0.4), 4, 4),
+                      gamma = rep(1, 4), beta = rep(0, 4))
+w <- list(self = mk(), cross = mk(),
+          ffn = list(W1 = matrix(rnorm(32, 0, 0.4), 4, 8),
+                     W2 = matrix(rnorm(32, 0, 0.4), 8, 4),
+                     gamma = rep(1, 4), beta = rep(0, 4)))
+r <- morie_geron_transformer_decoder_block(X, E, w)
+str(r, max.level = 1)
+}

@@ -24,3 +24,11 @@ List with \code{V}, \code{policy}, \code{Q}, \code{iterations}, \code{residual},
 V*(s) = max_a [R(s,a) + gamma sum_s' P(s'|s,a) V*(s')]. \code{policy} is
 0-based.
 }
+\examples{
+P <- array(0, c(2, 2, 2))
+P[1, , ] <- rbind(c(0.9, 0.1), c(0.2, 0.8))
+P[2, , ] <- rbind(c(0.5, 0.5), c(0.1, 0.9))
+R <- matrix(c(1, 0.5, 0.2, 0), 2, 2)
+r <- morie_geron_value_iteration(c(0, 0), P, R, gamma = 0.9)
+str(r, max.level = 1)
+}

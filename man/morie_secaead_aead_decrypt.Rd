@@ -33,3 +33,15 @@ Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
 code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 }
 \keyword{internal}
+\examples{
+key <- as.raw(c(0x80:0x8f, 0x90:0x9f))
+nonce <- as.raw(c(0x07, 0, 0, 0, 0x40, 0x41, 0x42, 0x43,
+                  0x44, 0x45, 0x46, 0x47))
+aad <- as.raw(c(0x50, 0x51, 0x52, 0x53, 0xc0, 0xc1, 0xc2, 0xc3,
+                0xc4, 0xc5, 0xc6, 0xc7))
+pt <- charToRaw("attack at dawn")
+enc <- morie_secaead_aead_encrypt(key, nonce, pt, aad)
+dec <- morie_secaead_aead_decrypt(key, nonce, enc$ciphertext, enc$tag, aad)
+stopifnot(dec$valid, identical(as.raw(dec$plaintext), pt))
+rawToChar(as.raw(dec$plaintext))
+}

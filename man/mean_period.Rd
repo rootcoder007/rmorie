@@ -18,3 +18,7 @@ A step of the lyapun_native implementation. Called by \code{divergence_curve}, \
 A numeric value.
 }
 \keyword{internal}
+\examples{
+y <- sin(2 * pi * (1:400) / 25)
+mean_period(y)
+}

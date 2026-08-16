@@ -18,3 +18,8 @@ A step of the lyapun_native implementation. No other function in the package cal
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+y <- sin(2 * pi * (1:400) / 25)
+r <- morie_lyapun("mean_period", y)
+str(r, max.level = 1)
+}
