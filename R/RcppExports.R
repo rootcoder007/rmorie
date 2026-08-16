@@ -213,7 +213,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
 #' Synchronous HTTP(S) POST via the shared libcurl backend (C++).
 #'
 #' Phase-3YY helper. Body is sent verbatim; for JSON payloads call
-#' `jsonlite::toJSON(...)` before passing in. Default content_type
+#' `.s03json_toJSON(...)` before passing in. Default content_type
 #' is "application/json"; pass "" to skip the Content-Type header
 #' (caller can set it explicitly via `headers`).
 #'

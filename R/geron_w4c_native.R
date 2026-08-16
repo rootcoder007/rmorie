@@ -670,7 +670,7 @@ morie_geron_onnx_export <- function(model, args, file = NULL) {
 # actually given, and fall back to a minimal deparse so the optional side effect never hard-fails.
 jsonlite_toJSON_or_stub <- function(x) {
   if (requireNamespace("jsonlite", quietly = TRUE)) {
-    jsonlite::toJSON(x, auto_unbox = TRUE, pretty = TRUE)
+    .s03json_toJSON(x, auto_unbox = TRUE, pretty = TRUE)
   } else {
     paste(utils::capture.output(str(x)), collapse = "\n")
   }

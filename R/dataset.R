@@ -442,7 +442,7 @@ morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
   }
   if (suffix == "jsonl") {
     if (requireNamespace("jsonlite", quietly = TRUE)) {
-      return(jsonlite::stream_in(file(path), verbose = FALSE, ...))
+      return(.s03json_stream_in(file(path), verbose = FALSE, ...))
     }
     # Module 23: native fallback — parse each line, bind rows.
     lines <- readLines(path, warn = FALSE)

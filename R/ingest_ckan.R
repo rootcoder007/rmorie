@@ -18,7 +18,7 @@
 #   * `morie_ingest_ckan_fetch_package_csvs()` - all CSV/TSV resources
 #   * `morie_ingest_ckan_search_packages()`    - search -> flat df
 #
-# HTTP: routes via .morie_dataset_http_text + .morie_dataset_http_bytes (3YY -> libcurl C++ backend with httr2 fallback). JSON: jsonlite::fromJSON (which delegates to
+# HTTP: routes via .morie_dataset_http_text + .morie_dataset_http_bytes (3YY -> libcurl C++ backend with httr2 fallback). JSON: .s03json_fromJSON (which delegates to
 # jsonlite).  CSV/TSV: prefer `readr` when installed; fall back to
 # `utils::read.csv` / `read.delim`.  XLSX needs `readxl` (Suggests).
 # Parquet needs `arrow` (Suggests).  Each optional dep errors cleanly
