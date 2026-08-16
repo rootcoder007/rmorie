@@ -1057,6 +1057,8 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
                                     n_bootstrap = 200L, seed = 42L,
                                     alpha = 0.05,
                                     se_convention = "reference") {
+  ps_model <- match.arg(as.character(ps_model), c("logistic"))
+  or_model <- match.arg(as.character(or_model), c("linear"))
   rng <- if (exists(".Random.seed", envir = .GlobalEnv)) {
     get(".Random.seed", envir = .GlobalEnv)
   } else {
@@ -1065,6 +1067,17 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
   on.exit({
     if (!is.null(rng)) assign(".Random.seed", rng, envir = .GlobalEnv)
   })
+  cl <- NULL
+  if (!is.null(cluster)) {
+    if (!cluster %in% names(data)) {
+      stop("did_doubly_robust: `cluster` names a column that is not in ",
+           "`data`: ", cluster, ".", call. = FALSE)
+    }
+    keep <- stats::complete.cases(
+      data[, unique(c(outcome, treatment, post, covariates, cluster)),
+           drop = FALSE])
+    cl <- data[[cluster]][keep]
+  }
   df <- .morie_did_drop_na(data, c(outcome, treatment, post, covariates))
   y <- as.numeric(df[[outcome]])
   d <- as.numeric(df[[treatment]])
@@ -1077,7 +1090,11 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
   se_est <- .morie_did_if_se(fit$IF, se_convention)
   if (n_bootstrap > 0L) {
     mb <- .morie_did_mboot(matrix(fit$IF, ncol = 1L),
-      biters = n_bootstrap, seed = seed
+      biters = n_bootstrap, seed = seed,
+      # The helper aggregates the influence function within cluster
+      # before drawing multipliers; without this the bootstrap resamples
+      # individuals and the interval is too narrow.
+      cluster = cl
     )
     if (is.finite(mb$se) && mb$se > 0) se_est <- mb$se
   }
