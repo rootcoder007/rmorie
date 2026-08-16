@@ -31,3 +31,8 @@ doi:10.1016/S0019-9958(65)90426-2, for the LR(k) classes against
 which the LL(1) restriction is measured.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.prsLL_first_of(V, D)
+}

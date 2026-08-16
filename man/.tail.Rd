@@ -18,3 +18,6 @@
 A single numeric.
 }
 \keyword{internal}
+\examples{
+.tail(B = 5L, m = 5L)
+}

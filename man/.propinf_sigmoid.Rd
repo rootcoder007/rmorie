@@ -17,3 +17,6 @@ A step of the propinf_native implementation. No other function in the package ca
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.propinf_sigmoid(z = 5L)
+}

@@ -43,3 +43,7 @@ representations by mutual information estimation and maximization",
 :mod:`mienco`.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.grace_cos(V, V)
+}

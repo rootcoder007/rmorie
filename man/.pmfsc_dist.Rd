@@ -38,3 +38,7 @@ sources in words rather than given as formulas, so they are named here
 as choices rather than attributed.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.pmfsc_dist(V, V)
+}

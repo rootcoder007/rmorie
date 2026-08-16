@@ -17,3 +17,7 @@ Singularity is judged RELATIVE to the largest entry of A, not against exact zero
 A list with \code{M}, \code{piv}, \code{sign}, \code{singular}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.rslufactor(M)
+}

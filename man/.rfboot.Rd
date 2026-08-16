@@ -18,3 +18,6 @@ A step of the mvsml_rf_shared implementation. Called by \code{.rfforest}. See th
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.rfboot(b = 5L, n = 5L)
+}

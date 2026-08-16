@@ -18,3 +18,6 @@ A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+.schab_random_walk_structure(n_time = 5L)
+}

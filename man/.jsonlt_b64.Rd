@@ -17,3 +17,7 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_raw_enc}, \c
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.jsonlt_b64(V)
+}

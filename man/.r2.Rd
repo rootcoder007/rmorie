@@ -19,3 +19,6 @@ A step of the bayopt_native implementation. Called by \code{gp_posterior_gradien
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.r2(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, ls = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

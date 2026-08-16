@@ -17,3 +17,7 @@ A step of the funmix_native implementation. Called by \code{morie_funmix_functio
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.funmix_rows(V)
+}

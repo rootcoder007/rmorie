@@ -17,3 +17,7 @@ A step of the causal_molak implementation. Called by \code{morie_bicdag}, \code{
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ml_pinv(V)
+}

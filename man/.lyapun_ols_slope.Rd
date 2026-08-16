@@ -18,3 +18,7 @@ A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}. 
 A list with \code{slope}, \code{intercept}, \code{se}, \code{r2}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.lyapun_ols_slope(V, V)
+}

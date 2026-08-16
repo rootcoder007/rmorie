@@ -19,3 +19,6 @@ the residual variance is a quadratic in a, so the minimising a is the ordinary-l
 A list with \code{f}, \code{a}, \code{mu}, \code{sd}.
 }
 \keyword{internal}
+\examples{
+.ht_prof(xv = c(1, 2, 3, 4, 5, 6, 7, 8), yv = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

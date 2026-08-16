@@ -39,3 +39,6 @@ representations by mutual information estimation and maximization",
 :mod:`mienco`.
 }
 \keyword{internal}
+\examples{
+.grace_cheatsheet()
+}

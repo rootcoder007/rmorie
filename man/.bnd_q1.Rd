@@ -18,3 +18,6 @@ A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndtfm}
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.bnd_q1(v = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

@@ -14,3 +14,7 @@ Build a SQL-ish `WHERE` clause for an "OCC_YEAR = ?" or "1=1" filter.
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dataset_year_where(V)
+}

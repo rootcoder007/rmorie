@@ -18,3 +18,7 @@ A step of the rng_native implementation. Called by \code{.morie_normal_quantile}
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_as241_poly(V, V)
+}

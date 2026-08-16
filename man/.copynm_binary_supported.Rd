@@ -21,3 +21,6 @@ A step of the copynm_native implementation. Called by \code{copynm}. See the fil
 A logical value.
 }
 \keyword{internal}
+\examples{
+.copynm_binary_supported(v = 5L, cut = 5L, alpha = 0.5, perms = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

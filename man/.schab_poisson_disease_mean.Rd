@@ -20,3 +20,6 @@ A step of the schab_glmm_shared implementation. No other function in the package
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_poisson_disease_mean(expected = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, psi = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

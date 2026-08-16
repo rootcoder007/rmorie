@@ -18,3 +18,7 @@ A step of the miest1_native implementation. Called by \code{morie_miest1}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mi_maxnorm(V, V)
+}

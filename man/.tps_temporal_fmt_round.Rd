@@ -14,3 +14,6 @@ Internal helper: Tps Temporal Fmt Round
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tps_temporal_fmt_round(x = 5L, k = 5L)
+}

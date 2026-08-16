@@ -14,3 +14,7 @@ Internal helper: Otis Age 50plus Indicator
 The value of \code{as.integer}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.otis_age_50plus_indicator(V)
+}

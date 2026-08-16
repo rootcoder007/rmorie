@@ -14,3 +14,7 @@ Internal helper: Otis Chi2 Cramer
 A list with \code{chi2}, \code{dof}, \code{pvalue}, \code{cramer_v}, \code{n}, \code{min_cell}, \code{min_expected}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.otis_chi2_cramer(V)
+}

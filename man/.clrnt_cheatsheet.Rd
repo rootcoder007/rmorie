@@ -14,3 +14,6 @@ A step of the clrnt_native implementation. No other function in the package call
 A character value.
 }
 \keyword{internal}
+\examples{
+.clrnt_cheatsheet()
+}

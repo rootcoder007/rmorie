@@ -18,3 +18,6 @@ A step of the lyapun_native implementation. Called by \code{divergence_curve}. S
 A list with \code{nn}, \code{d0}.
 }
 \keyword{internal}
+\examples{
+.lyapun_nearest_neighbours(pts = c(1, 2, 3, 4, 5, 6, 7, 8), min_sep = 5L)
+}

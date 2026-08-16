@@ -42,3 +42,7 @@ Graph Contrastive Representation Learning", arXiv:2006.04131. The
 graph-domain descendant; implemented in :mod:`grace`.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mienco_jsd_estimate(V, V)
+}

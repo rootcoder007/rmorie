@@ -38,3 +38,6 @@ software package instead. The two sources above are what this is built
 from.
 }
 \keyword{internal}
+\examples{
+.tmlcen_logit_irls(Z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = 5L)
+}

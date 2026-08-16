@@ -39,3 +39,6 @@ doi:10.1093/bioinformatics/btr509, for the conventional genotype
 likelihood this replaces.
 }
 \keyword{internal}
+\examples{
+.varcal_base_code(b = 5L)
+}

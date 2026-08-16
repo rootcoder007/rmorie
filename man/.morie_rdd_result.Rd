@@ -14,3 +14,6 @@ Internal helper: Morie Rdd Result
 A list with \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
 }
 \keyword{internal}
+\examples{
+.morie_rdd_result(estimate = c(1, 2, 3, 4, 5, 6, 7, 8), se = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, method = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,6 @@ A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \co
 The value of \code{Q}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.kvmse_rotation(d = 5L, seed = 5L)
+}

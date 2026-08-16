@@ -14,3 +14,6 @@ Internal helper: Mt Check P
 The value of \code{pmin}.
 }
 \keyword{internal}
+\examples{
+.mt_check_p(p = 0.5)
+}

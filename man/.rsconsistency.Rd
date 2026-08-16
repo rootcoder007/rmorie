@@ -19,3 +19,6 @@ quantile Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045, "Definition". 
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.rsconsistency(h = 0.5, n = 5L, p = 0.5)
+}

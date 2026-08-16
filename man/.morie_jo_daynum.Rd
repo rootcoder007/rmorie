@@ -19,3 +19,6 @@ A step of the ts_joseph implementation. Called by \code{morie_calfeat}. See the 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_jo_daynum(y = 5L, m = 5L, d = 5L)
+}

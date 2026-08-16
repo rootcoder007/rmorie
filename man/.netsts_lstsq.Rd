@@ -40,3 +40,6 @@ doi:10.1016/j.ijforecast.2020.06.008. Recursive versus direct
 strategies, and preprocessing.
 }
 \keyword{internal}
+\examples{
+.netsts_lstsq(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), ridge = 5L)
+}

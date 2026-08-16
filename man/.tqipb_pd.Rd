@@ -14,3 +14,6 @@ A step of the tqipb_native implementation. Called by \code{morie_tqipb_constant}
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tqipb_pd()
+}

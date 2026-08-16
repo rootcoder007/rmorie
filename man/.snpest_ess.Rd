@@ -31,3 +31,7 @@ A numeric value.
   Escobar, M.D. and West, M. (1995) JASA 90(430), 577-588.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.snpest_ess(V)
+}

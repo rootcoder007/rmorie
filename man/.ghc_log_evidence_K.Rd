@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghc_log_evidence_K(y = c(1, 2, 3, 4, 5, 6, 7, 8), n_prec = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
+}

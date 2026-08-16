@@ -14,3 +14,7 @@ Internal helper: Siu P Re Escape
 The value of \code{gsub}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.siu_p_re_escape(V)
+}

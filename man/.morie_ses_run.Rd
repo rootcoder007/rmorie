@@ -18,3 +18,7 @@ A step of the forecast_native implementation. Called by \code{morie_joseph_simpl
 A list with \code{fitted}, \code{level}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ses_run(V, V)
+}

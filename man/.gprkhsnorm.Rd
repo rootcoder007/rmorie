@@ -18,3 +18,6 @@
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.gprkhsnorm(beta = 0.5, K = 5L)
+}

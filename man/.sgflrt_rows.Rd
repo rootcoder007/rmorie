@@ -17,3 +17,7 @@ A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sgflrt_rows(V)
+}

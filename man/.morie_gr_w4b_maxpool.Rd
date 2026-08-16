@@ -19,3 +19,6 @@ A step of the geron_w4b_native implementation. Called by \code{morie_geron_max_p
 A list with \code{y}, \code{argmax}, \code{output_shape}.
 }
 \keyword{internal}
+\examples{
+.morie_gr_w4b_maxpool(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L, s = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,6 @@ of every sink that spawns an external process.
 Invisibly,a logical value.
 }
 \keyword{internal}
+\examples{
+.morie_ensure_exec_allowed()
+}

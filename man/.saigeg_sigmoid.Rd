@@ -47,3 +47,7 @@ doi:10.1016/j.ajhg.2016.02.012. GMMAT, the Gaussian-approximation
 predecessor whose calibration SAIGE repairs.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.saigeg_sigmoid(V)
+}

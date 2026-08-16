@@ -17,3 +17,7 @@ A step of the rangayyan_class2 implementation. Called by \code{EegBands}. See th
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_bx_dftmag(V)
+}

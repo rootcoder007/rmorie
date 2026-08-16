@@ -40,3 +40,6 @@ Medicine 32(30), 5260-5277, doi:10.1002/sim.5907. Modified-treatment
 policies.
 }
 \keyword{internal}
+\examples{
+.tlstoch_cheatsheet()
+}

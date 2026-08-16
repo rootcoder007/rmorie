@@ -19,3 +19,6 @@ weighted least squares of y on (1, x); returns the intercept
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.t4_wls_int(xs = c(1, 2, 3, 4, 5, 6, 7, 8), ys = c(1, 2, 3, 4, 5, 6, 7, 8), ws = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

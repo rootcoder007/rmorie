@@ -14,3 +14,6 @@ Internal helper: Morie Db Indexes For
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+.morie_db_indexes_for(table_name = 5L)
+}

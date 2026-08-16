@@ -34,3 +34,6 @@ A numeric value.
     Proteins 52(4), 609-623.
 }
 \keyword{internal}
+\examples{
+.chemsc_angle(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

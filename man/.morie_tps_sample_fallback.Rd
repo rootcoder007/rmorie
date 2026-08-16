@@ -14,3 +14,7 @@ Internal helper: Morie Tps Sample Fallback
 The value of \code{.morie_tps_apply_nrows}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_tps_sample_fallback(V)
+}

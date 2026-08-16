@@ -25,3 +25,6 @@ A step of the schab_st_shared implementation. Called by \code{.schab_st_jones_zh
 A list with \code{value}, \code{upper}, \code{last_rel}, \code{tail_bound}.
 }
 \keyword{internal}
+\examples{
+.schab_st_hankel_panels(hval = 5L, kval = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5, c = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

@@ -40,3 +40,6 @@ doi:10.1109/MC.2009.263. The explicit-feedback factorisation this is
 adapted from.
 }
 \keyword{internal}
+\examples{
+.impFB_cost(R = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), Y = 5L)
+}

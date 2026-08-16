@@ -14,3 +14,6 @@ Internal helper: Morie Beta Weights
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_beta_weights(t1 = c(1, 2, 3, 4, 5, 6, 7, 8), t2 = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
+}

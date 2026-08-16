@@ -18,3 +18,7 @@ A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_stl_ma(V, V)
+}

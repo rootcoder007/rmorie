@@ -14,3 +14,6 @@ Internal helper: Role From Name
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+.role_from_name(col_name = 5L)
+}

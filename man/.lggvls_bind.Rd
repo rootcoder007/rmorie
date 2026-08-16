@@ -29,3 +29,8 @@ Raton: Chapman & Hall/CRC, Sec. 21.2 for the product-over-time weights
 and Ch. 20 for why conditioning fails where weighting works.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.lggvls_bind(D, V)
+}

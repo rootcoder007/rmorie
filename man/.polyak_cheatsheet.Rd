@@ -42,3 +42,6 @@ doi:10.1038/nature14236. The periodic-copy target network;
 implemented in dqnv.
 }
 \keyword{internal}
+\examples{
+.polyak_cheatsheet()
+}

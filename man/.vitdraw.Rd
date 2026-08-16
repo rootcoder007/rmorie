@@ -20,3 +20,6 @@ A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber},
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+.vitdraw(nr = 5L, nc = 5L)
+}

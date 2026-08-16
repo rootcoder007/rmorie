@@ -18,3 +18,7 @@ singular value. Written out rather than taken from MASS::ginv because MASS is on
 The value of \code{op}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_wls_operator(V, V)
+}

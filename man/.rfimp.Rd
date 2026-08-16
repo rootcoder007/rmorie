@@ -19,3 +19,6 @@ A step of the mvsml_rf_shared implementation. Called by \code{.rfgrow}. See the 
 The value of \code{tot}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.rfimp(Y = c(1, 2, 3, 4, 5, 6, 7, 8), rows = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
+}

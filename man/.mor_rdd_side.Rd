@@ -19,3 +19,6 @@ the intercept (the boundary value that the RDD contrast uses)
 A list with \code{a}, \code{b}, \code{v}.
 }
 \keyword{internal}
+\examples{
+.mor_rdd_side(dm = c(1, 2, 3, 4, 5, 6, 7, 8), ym = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

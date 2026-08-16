@@ -17,3 +17,6 @@ A step of the dpoF_native implementation. No other function in the package calls
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.dpoF_logsigmoid(z = 5L)
+}

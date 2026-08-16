@@ -17,3 +17,6 @@ A step of the karpV_native implementation. Called by \code{morie_karpV}. See the
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.karpv_rng(seed = 5L)
+}

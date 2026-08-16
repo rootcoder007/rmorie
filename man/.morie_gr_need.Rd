@@ -18,3 +18,6 @@ A step of the geron_ml_native implementation. Called by \code{.morie_gr_attend},
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.morie_gr_need(cond = 5L, msg = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

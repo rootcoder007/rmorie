@@ -14,3 +14,6 @@ Internal helper: Uof Fmt Pct
 A character value.
 }
 \keyword{internal}
+\examples{
+.uof_fmt_pct(p = 0.5)
+}

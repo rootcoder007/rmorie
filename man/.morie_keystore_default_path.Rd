@@ -14,3 +14,6 @@ Internal helper: Morie Keystore Default Path
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_keystore_default_path()
+}

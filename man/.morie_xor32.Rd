@@ -18,3 +18,7 @@ values inside the signed 32-bit range, so split into 16-bit halves first.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_xor32(V, V)
+}

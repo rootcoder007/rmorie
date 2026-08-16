@@ -14,3 +14,6 @@ Internal helper: Morie Morphosource Search Params
 The value of \code{params}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_morphosource_search_params()
+}

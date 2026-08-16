@@ -17,3 +17,7 @@ A step of the tail4_core implementation. Called by \code{Beggtest}, \code{Boxpie
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t4_vec(V)
+}

@@ -39,3 +39,6 @@ strategy", Annals of Statistics 44(2), 713-742, doi:10.1214/15-AOS1384.
 The nonexceptional law condition.
 }
 \keyword{internal}
+\examples{
+.tloilr_cheatsheet()
+}

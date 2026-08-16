@@ -19,3 +19,6 @@ A step of the mafft_native implementation. Called by \code{find_homologous_segme
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.mafft_peaks(lags = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), n_peaks = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

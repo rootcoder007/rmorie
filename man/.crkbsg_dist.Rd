@@ -18,3 +18,7 @@ A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokrigi
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.crkbsg_dist(V, V)
+}

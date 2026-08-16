@@ -14,3 +14,7 @@ Internal helper: Tbl Footnotes Render
 A character value.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.tbl_footnotes_render(D)
+}

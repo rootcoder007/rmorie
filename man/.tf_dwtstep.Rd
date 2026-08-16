@@ -19,3 +19,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{Wpt}.
 A list with \code{lo}, \code{hi}.
 }
 \keyword{internal}
+\examples{
+.tf_dwtstep(a = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, g = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

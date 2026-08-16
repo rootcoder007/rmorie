@@ -19,3 +19,6 @@ A step of the survey_psych_native implementation. Called by \code{.morie_irt_lin
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_irt_icc(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5)
+}

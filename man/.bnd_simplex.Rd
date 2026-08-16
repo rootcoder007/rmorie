@@ -23,3 +23,6 @@ A small dense two-phase simplex with Bland\\'s rule, written here because base R
 A list with \code{status}, \code{x}, \code{fun}.
 }
 \keyword{internal}
+\examples{
+.bnd_simplex(cv = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,7 @@ A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth}, \c
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.pibmd_moments(V)
+}

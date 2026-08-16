@@ -20,3 +20,7 @@
 A list with \code{tau}, \code{inf}, \code{se}, \code{pi}, \code{mu0}, \code{w1}, \code{w0}, \code{gamma}, \code{beta0}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03drdid(V, V)
+}

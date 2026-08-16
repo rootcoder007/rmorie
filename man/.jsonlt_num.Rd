@@ -18,3 +18,6 @@ with the same format string, so the bytes match; each language\\'s own float-to-
 The value of \code{.jsonlt_tidy}.
 }
 \keyword{internal}
+\examples{
+.jsonlt_num(x = 5L, digits = 5L)
+}

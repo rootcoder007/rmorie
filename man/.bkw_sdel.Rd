@@ -21,3 +21,6 @@ A step of the dffit implementation. Called by \code{Covrat}, \code{Dfbetb}, \cod
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.bkw_sdel(sse = c(1, 2, 3, 4, 5, 6, 7, 8), e_i = c(1, 2, 3, 4, 5, 6, 7, 8), h_i = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, p = 0.5)
+}

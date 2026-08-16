@@ -14,3 +14,6 @@
 A list with \code{P}, \code{R}, \code{S}, \code{A}.
 }
 \keyword{internal}
+\examples{
+.w505_mdp_args(P = 1, R = 5L)
+}

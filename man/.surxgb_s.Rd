@@ -36,3 +36,6 @@ Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
 reused here from survrsf.
 }
 \keyword{internal}
+\examples{
+.surxgb_s(y = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+}

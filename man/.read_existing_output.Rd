@@ -14,3 +14,6 @@ Internal helper: Read Existing Output
 The value of \code{fallback}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.read_existing_output(output_dir = 5L, file_name = 5L)
+}

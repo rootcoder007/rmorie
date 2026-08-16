@@ -18,3 +18,7 @@ A step of the linwlr_native implementation. Called by \code{morie_linwlr}. See t
 The value of \code{cbind}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.linwlr_design(V, V)
+}

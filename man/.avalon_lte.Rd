@@ -33,3 +33,7 @@ A logical value.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.avalon_lte(S, S)
+}

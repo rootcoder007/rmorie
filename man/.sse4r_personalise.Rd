@@ -41,3 +41,7 @@ Recommendation", *ICDM 2018*, 197-206, arXiv:1808.09781. SASRec, the
 unpersonalised model being extended; implemented in :mod:`sasRec`.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sse4r_personalise(V, V)
+}

@@ -30,3 +30,6 @@ One of two values, depending on the branch taken.
     20(3), 626-637, doi:10.1137/0720042
 }
 \keyword{internal}
+\examples{
+.trupek_boundary(z = 5L, d = 5L, delta = 0.5)
+}

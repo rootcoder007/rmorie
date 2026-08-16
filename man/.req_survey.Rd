@@ -14,3 +14,6 @@ Internal helper: Req Survey
 The value of \code{morie_ensure_extras}.
 }
 \keyword{internal}
+\examples{
+.req_survey()
+}

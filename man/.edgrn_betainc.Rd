@@ -20,3 +20,6 @@ A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}. See
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.edgrn_betainc(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, x = 5L)
+}

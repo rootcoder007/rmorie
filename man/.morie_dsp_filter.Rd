@@ -14,3 +14,6 @@ Internal helper: direct-form II transposed IIR/FIR filter
 A vector.
 }
 \keyword{internal}
+\examples{
+.morie_dsp_filter(b = 5L, a = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

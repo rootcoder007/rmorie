@@ -14,3 +14,7 @@ Codes 98 / 99 (CPADS "don\'t know" / "refused") collapse to `NA`.
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_cpads_recode_yn(V)
+}

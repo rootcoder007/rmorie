@@ -18,3 +18,6 @@ A step of the toptor_native implementation. Called by \code{topological_torsions
 The value of \code{as.integer}.
 }
 \keyword{internal}
+\examples{
+.pi_electrons(n_atoms = 5L, bonds = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

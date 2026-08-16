@@ -14,3 +14,6 @@ A step of the sxrhrt_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+.sxrhrt_cheatsheet()
+}

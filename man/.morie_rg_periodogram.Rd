@@ -18,3 +18,7 @@ A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdV
 A list with \code{psd}, \code{freqs}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_periodogram(V, V)
+}

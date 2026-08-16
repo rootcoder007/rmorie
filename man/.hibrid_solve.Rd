@@ -18,3 +18,8 @@ A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}, \c
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.hibrid_solve(M, V)
+}

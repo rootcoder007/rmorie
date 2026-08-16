@@ -18,3 +18,6 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_bl
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.morie_km2_ngrams(tokens = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

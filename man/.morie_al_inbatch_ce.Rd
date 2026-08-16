@@ -17,3 +17,7 @@ A step of the alammar_llm_native implementation. Called by \code{morie_alammar_m
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_al_inbatch_ce(M)
+}

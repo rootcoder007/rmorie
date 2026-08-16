@@ -19,3 +19,6 @@ A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}. See the
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.hdb_points_under(node = list(a = 1, b = 2), children = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

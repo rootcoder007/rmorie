@@ -17,3 +17,6 @@ A step of the tail1_core implementation. Called by \code{.btdir_rows}, \code{.bt
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.t1_lcg()
+}

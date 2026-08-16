@@ -21,3 +21,6 @@ A step of the schab_sim_shared implementation. Called by \code{.schab_simulate_c
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.schab_simulate_unconditional(mean = c("a", "b", "c"), cov = matrix(c(4, 1, 0, 1, 3, 1, 0, 1, 2), nrow = 3))
+}

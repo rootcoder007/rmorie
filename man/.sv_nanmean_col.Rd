@@ -14,3 +14,7 @@ Internal helper: Sv Nanmean Col
 The value of \code{apply}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.sv_nanmean_col(M)
+}

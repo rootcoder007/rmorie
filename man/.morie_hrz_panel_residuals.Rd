@@ -19,3 +19,6 @@ A step of the horowitz_native7 implementation. Called by \code{morie_panel_decon
 A list with \code{W}, \code{eta}, \code{n}, \code{T}.
 }
 \keyword{internal}
+\examples{
+.morie_hrz_panel_residuals(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), beta = 0.5)
+}

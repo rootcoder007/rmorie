@@ -17,3 +17,7 @@ A step of the esl_native0 implementation. No other function in the package calls
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.esl_K(V)
+}

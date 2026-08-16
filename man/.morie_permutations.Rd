@@ -17,3 +17,6 @@ A step of the gibbons_native implementation. Called by \code{morie_rank_exact_nu
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_permutations(n = 5L)
+}

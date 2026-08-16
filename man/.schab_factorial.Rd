@@ -17,3 +17,6 @@ A step of the schab_hermite_shared implementation. Called by \code{.schab_indica
 The value of \code{prod}.
 }
 \keyword{internal}
+\examples{
+.schab_factorial(p = 0.5)
+}

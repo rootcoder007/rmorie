@@ -33,3 +33,6 @@ The value of \code{switch}.
     defaults and the two split potentials.
 }
 \keyword{internal}
+\examples{
+.goldsc_outer(p = 0.5)
+}

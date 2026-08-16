@@ -14,3 +14,7 @@ Internal helper: Morie Pkg Installed
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_pkg_installed(V)
+}

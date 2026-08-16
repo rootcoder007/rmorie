@@ -14,3 +14,6 @@ Internal helper: Tbl Fmt Num
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tbl_fmt_num(x = 5L)
+}

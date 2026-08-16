@@ -14,3 +14,6 @@ Internal helper: Morie Morphosource Api
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_morphosource_api()
+}

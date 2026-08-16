@@ -29,3 +29,6 @@ Sablayrolles, A., Douze, M., Schmid, C. & Jegou, H. (2019)
 arXiv:1806.03198.
 }
 \keyword{internal}
+\examples{
+.dnvtwo_cheatsheet()
+}

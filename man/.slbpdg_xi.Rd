@@ -29,3 +29,6 @@ A numeric value.
     stick-breaking priors." JASA 96(453), 161-173.
 }
 \keyword{internal}
+\examples{
+.slbpdg_xi(kappa = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

@@ -29,3 +29,6 @@ Szegedy, C. et al. (2015) "Going deeper with convolutions", CVPR 2015,
 1-9.
 }
 \keyword{internal}
+\examples{
+.resnxt_grouped_block(x = c(1, 2, 3, 4, 5, 6, 7, 8), Wins = c(1, 2, 3, 4, 5, 6, 7, 8), Wmids = c(1, 2, 3, 4, 5, 6, 7, 8), Wout_concat = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

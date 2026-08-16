@@ -14,3 +14,6 @@ Internal shim: prefer jsonlite, fall back to the native parser
 The value of \code{morie_fetch_json}.
 }
 \keyword{internal}
+\examples{
+.morie_from_json(txt = 5L)
+}

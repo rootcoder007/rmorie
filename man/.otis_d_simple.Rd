@@ -14,3 +14,6 @@ Internal helper: Otis D Simple
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+.otis_d_simple(ds_id = c(1, 2, 3, 4, 5, 6, 7, 8), description = c(1, 2, 3, 4, 5, 6, 7, 8), by = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

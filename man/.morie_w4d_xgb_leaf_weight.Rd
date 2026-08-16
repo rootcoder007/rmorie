@@ -19,3 +19,6 @@ A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_xgb_bu
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_xgb_leaf_weight(G = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, lam = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

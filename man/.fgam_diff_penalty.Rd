@@ -18,3 +18,6 @@ A step of the fgam_native implementation. Called by \code{morie_fgam_functional_
 A matrix, from \code{crossprod}.
 }
 \keyword{internal}
+\examples{
+.fgam_diff_penalty(n = 5L)
+}

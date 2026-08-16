@@ -14,3 +14,6 @@ Internal helper: Causal Have Stdreg
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.causal_have_stdreg()
+}

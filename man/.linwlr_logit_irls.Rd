@@ -20,3 +20,6 @@ A step of the linwlr_native implementation. Called by \code{morie_linwlr}. See t
 The value of \code{beta}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.linwlr_logit_irls(Z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = 5L, max_iter = c(1, 2, 3, 4, 5, 6, 7, 8), ridge = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

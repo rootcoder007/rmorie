@@ -19,3 +19,6 @@ A step of the b1_tmle implementation. Called by \code{.b1_logit}, \code{.b1_targ
 The value of \code{pmin}.
 }
 \keyword{internal}
+\examples{
+.b1_bound(v = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -41,3 +41,6 @@ straight-through estimator this builds on.
 """
 }
 \keyword{internal}
+\examples{
+.vqgenc_straight_through(encoder_output = c(1, 2, 3, 4, 5, 6, 7, 8), quantized = c(1, 2, 3, 4, 5, 6, 7, 8), upstream_gradient = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

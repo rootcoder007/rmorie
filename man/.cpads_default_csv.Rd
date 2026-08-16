@@ -14,3 +14,6 @@ Internal helper: Cpads Default Csv
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.cpads_default_csv()
+}

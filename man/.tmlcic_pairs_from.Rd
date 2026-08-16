@@ -35,3 +35,6 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+.tmlcic_pairs_from(cluster = c("a", "b", "c"), n = 3L)
+}

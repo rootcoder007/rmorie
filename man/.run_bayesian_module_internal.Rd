@@ -14,3 +14,7 @@ Internal helper: Run Bayesian Module Internal
 A list with \code{bayesian_posterior_summaries}, \code{bayesian_bayes_factors}, \code{bayesian_vs_frequentist_ci}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.run_bayesian_module_internal(D)
+}

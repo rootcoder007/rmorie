@@ -17,3 +17,7 @@ A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.scalar(V)
+}

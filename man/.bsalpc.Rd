@@ -18,3 +18,6 @@ error) Part of the rangayyan_phys implementation; see the file header for the so
 A list with \code{a}, \code{e}.
 }
 \keyword{internal}
+\examples{
+.bsalpc(x = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+}

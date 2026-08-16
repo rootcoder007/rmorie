@@ -20,3 +20,6 @@ A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoull
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.reinfc_advance_baseline(state = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = 5L, gamma = 0.5, r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

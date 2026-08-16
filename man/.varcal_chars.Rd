@@ -39,3 +39,7 @@ doi:10.1093/bioinformatics/btr509, for the conventional genotype
 likelihood this replaces.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.varcal_chars(V)
+}

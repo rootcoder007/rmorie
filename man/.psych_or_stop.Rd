@@ -19,3 +19,7 @@ The value of \code{if}.
   Revelle (2024). psych R package.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.psych_or_stop(V)
+}

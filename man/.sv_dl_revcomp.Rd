@@ -17,3 +17,7 @@ A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_deletion_
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sv_dl_revcomp(V)
+}

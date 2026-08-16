@@ -17,3 +17,6 @@ Enumerates the unordered pairs of regions with a nonzero entry in the (symmetric
 A list with \code{pairs} (list of \code{c(i, j)} with   \code{i < j}), \code{n_pairs}, \code{n_regions}, \code{degrees}   (row sums).
 }
 \keyword{internal}
+\examples{
+.dpgrf_adjacency_pairs(W = 5L)
+}

@@ -18,3 +18,7 @@ A step of the causal implementation. Called by \code{.fit_propensity}, \code{mor
 The value of \code{cbind}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_ps_design(V, V)
+}

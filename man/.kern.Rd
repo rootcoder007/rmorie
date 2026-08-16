@@ -17,3 +17,7 @@ A step of the tmlcps_native implementation. Called by \code{.smooth_at}. See the
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.kern(V)
+}

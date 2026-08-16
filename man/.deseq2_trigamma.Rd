@@ -17,3 +17,6 @@
 Numeric scalar.
 }
 \keyword{internal}
+\examples{
+.deseq2_trigamma(x = 5L)
+}

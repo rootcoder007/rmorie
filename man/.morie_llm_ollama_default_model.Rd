@@ -14,3 +14,6 @@ No hardcoded model name -- models are pulled per-machine and upstream tags get r
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_ollama_default_model()
+}

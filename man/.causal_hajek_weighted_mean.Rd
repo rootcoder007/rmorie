@@ -18,3 +18,7 @@ The ratio (Hajek) estimator \eqn{\bar{y}_H = \sum_i w_i y_i / \sum_i w_i}, which
 A list with \code{mean}, \code{se}, \code{ci_lower},   \code{ci_upper}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.causal_hajek_weighted_mean(V, V)
+}

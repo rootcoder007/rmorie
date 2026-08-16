@@ -18,3 +18,6 @@ A step of the evtlmom implementation. Called by \code{Evtlmom}. See the file hea
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tl_lchoose(n = 5L, k = 5L)
+}

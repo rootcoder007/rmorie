@@ -18,3 +18,6 @@ A step of the ttsAn_native implementation. Called by \code{morie_t_quantile}. Se
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.mor_tts_t_cdf(t = 5L, v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

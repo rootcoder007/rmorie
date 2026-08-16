@@ -17,3 +17,6 @@ A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+.prgrl_rng(seed = 5L)
+}

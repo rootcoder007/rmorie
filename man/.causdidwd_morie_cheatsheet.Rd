@@ -14,3 +14,6 @@ A step of the causdidwd_native implementation. No other function in the package 
 A character value.
 }
 \keyword{internal}
+\examples{
+.causdidwd_morie_cheatsheet()
+}

@@ -14,3 +14,6 @@ Internal helper: Siu P Normalise Sex
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.siu_p_normalise_sex(s = 5L)
+}

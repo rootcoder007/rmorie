@@ -17,3 +17,6 @@ A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}.
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.mor_stl_next_odd(v = 5L)
+}

@@ -14,3 +14,6 @@ Internal helper: Binary Ci
 A list with \code{p}, \code{se}, \code{ci}.
 }
 \keyword{internal}
+\examples{
+.binary_ci(successes = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

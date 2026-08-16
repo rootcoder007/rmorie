@@ -30,3 +30,6 @@ A numeric value.
     re-analyse, locate the crossing).
 }
 \keyword{internal}
+\examples{
+.tipsne_betainc(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, x = 5L)
+}

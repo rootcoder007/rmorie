@@ -14,3 +14,7 @@ Internal helper: Otis Year Trend
 A list with \code{title}, \code{headers}, \code{rows}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.otis_year_trend(V, V)
+}

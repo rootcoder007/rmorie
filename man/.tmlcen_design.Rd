@@ -36,3 +36,6 @@ software package instead. The two sources above are what this is built
 from.
 }
 \keyword{internal}
+\examples{
+.tmlcen_design(rows = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

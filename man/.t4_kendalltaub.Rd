@@ -18,3 +18,7 @@ stats::cor.test(method = "kendall", exact = FALSE).
 A list with \code{tau}, \code{z}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t4_kendalltaub(V, V)
+}

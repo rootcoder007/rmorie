@@ -20,3 +20,6 @@ A step of the psycho_native implementation. Called by \code{.psy_info}. See the 
 The value of \code{sweep}.
 }
 \keyword{internal}
+\examples{
+.psy_dp3pl(theta = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, cc = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

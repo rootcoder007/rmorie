@@ -14,3 +14,6 @@ Internal helper: Boot Ci Extract
 A vector.
 }
 \keyword{internal}
+\examples{
+.boot_ci_extract(bci = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), ci_method = 5L)
+}

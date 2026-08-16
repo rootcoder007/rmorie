@@ -14,3 +14,6 @@ A step of the cmlmer_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+.cmlmer_cheatsheet()
+}

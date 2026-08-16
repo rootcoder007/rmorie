@@ -20,3 +20,7 @@ A step of the schab_gwr_shared implementation. Called by \code{.schab_local_weig
 The value of \code{.schab_reshape_like}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_kernel_weights(V, V)
+}

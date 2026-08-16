@@ -17,3 +17,7 @@ Exponent keys ------------------------------------------------------------------
 The value of \code{as.integer}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.groebn_parse_key(S)
+}

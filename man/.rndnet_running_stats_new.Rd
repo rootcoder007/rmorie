@@ -17,3 +17,6 @@ A step of the rndnet_native implementation. Called by \code{morie_rndnet}. See t
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.rndnet_running_stats_new(n = 5L)
+}

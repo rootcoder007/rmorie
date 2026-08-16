@@ -38,3 +38,6 @@ Graph Contrastive Representation Learning", arXiv:2006.04131. The
 graph-domain descendant; implemented in :mod:`grace`.
 }
 \keyword{internal}
+\examples{
+.mienco_cheatsheet()
+}

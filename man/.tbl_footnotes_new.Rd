@@ -14,3 +14,6 @@ Internal helper: Tbl Footnotes New
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tbl_footnotes_new()
+}

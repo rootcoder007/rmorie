@@ -19,3 +19,6 @@ conditional normal -- avoids a mvtnorm dependency.
 The value of \code{$}.
 }
 \keyword{internal}
+\examples{
+.morie_bvn_cdf(x = 5L, y = 5L, rho = 0.5)
+}

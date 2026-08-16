@@ -18,3 +18,6 @@ d \%\% n_blocks blocks get one extra, which is what a packer does when the dimen
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+.tqipb_blocks(d = 5L, n_blocks = 5L)
+}

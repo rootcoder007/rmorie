@@ -18,3 +18,7 @@ A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_po
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.agalfsy_coords(V, V)
+}

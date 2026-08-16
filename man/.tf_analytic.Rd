@@ -17,3 +17,7 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_wvd}, \code{AtomT
 The value of \code{.tf_idft}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_analytic(V)
+}

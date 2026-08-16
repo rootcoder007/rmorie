@@ -19,3 +19,6 @@ A step of the boryis_native implementation. Called by \code{morie_impute_untreat
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.mor_bjs_check(obs = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), n = 5L, T = 5L)
+}

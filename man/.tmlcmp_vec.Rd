@@ -41,3 +41,7 @@ for Non-Homogeneous Markov Chains Based on Censored Observations",
 Scandinavian Journal of Statistics 5(3), 141-150.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tmlcmp_vec(V)
+}

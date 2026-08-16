@@ -14,3 +14,6 @@
 A list with \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_treated}, \code{n_control}, \code{method}, \code{details}.
 }
 \keyword{internal}
+\examples{
+.morie_did_result(estimate = 5L, std_error = 5L, n_treated = c(1, 2, 3, 4, 5, 6, 7, 8), n_control = c(1, 2, 3, 4, 5, 6, 7, 8), method = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

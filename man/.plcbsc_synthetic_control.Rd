@@ -22,3 +22,6 @@ A step of the plcbsc_native implementation. No other function in the package cal
 A list with \code{weights}, \code{loss}, \code{fitted}, \code{n_iter}, \code{converged}.
 }
 \keyword{internal}
+\examples{
+.plcbsc_synthetic_control(x_treated = 5L, x_donors = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

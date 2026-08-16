@@ -20,3 +20,6 @@ A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}, \cod
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_ml_paths(x = 5L, y = 5L, children = c(1, 2, 3, 4, 5, 6, 7, 8), parents = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

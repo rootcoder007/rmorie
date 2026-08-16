@@ -17,3 +17,7 @@ A step of the tail1_core implementation. Called by \code{Bayeslogit}, \code{Dfbe
 The value of \code{cbind}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t1_cbind1(V)
+}

@@ -14,3 +14,6 @@ Internal helper: Tps Stoch Round
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tps_stoch_round(x = 5L, k = 5L)
+}

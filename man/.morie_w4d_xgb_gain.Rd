@@ -22,3 +22,6 @@ A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_xgb_bu
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_xgb_gain(GL = c(1, 2, 3, 4, 5, 6, 7, 8), HL = c(1, 2, 3, 4, 5, 6, 7, 8), GR = c(1, 2, 3, 4, 5, 6, 7, 8), HR = c(1, 2, 3, 4, 5, 6, 7, 8), lam = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+}

@@ -20,3 +20,8 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_princ
 A list with \code{components}, \code{scores}, \code{explained_variance}, \code{explained_variance_ratio}, \code{singular_values}, \code{Xc}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_w4c_pca_svd(M, V)
+}

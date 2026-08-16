@@ -19,3 +19,6 @@ A step of the helpers_ot implementation. Called by \code{.ot_emd}. See the file 
 The value of \code{.ot_sortbasis}.
 }
 \keyword{internal}
+\examples{
+.ot_complete_tree(basis = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L, m = 5L)
+}

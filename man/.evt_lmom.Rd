@@ -17,3 +17,7 @@ A step of the evt_native implementation. Called by \code{morie_evt_gev_lmoments}
 A list with \code{l1}, \code{l2}, \code{l3}, \code{t3}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.evt_lmom(V)
+}

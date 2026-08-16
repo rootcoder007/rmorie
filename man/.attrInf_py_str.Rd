@@ -17,3 +17,7 @@ is "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None"; reproduci
 A character value.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.attrInf_py_str(D)
+}

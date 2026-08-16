@@ -21,3 +21,6 @@ A step of the bounds_native implementation. Called by \code{morie_efficiency_bou
 A list with \code{beta}, \code{fitted}, \code{separated}.
 }
 \keyword{internal}
+\examples{
+.morie_bounds_logit(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = 5L)
+}

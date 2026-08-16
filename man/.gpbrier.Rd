@@ -20,3 +20,6 @@ A step of the helpers_gp_core implementation. Called by \code{Msm009}. See the f
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.gpbrier(probs = c(1, 2, 3, 4, 5, 6, 7, 8), y_true = 5L)
+}

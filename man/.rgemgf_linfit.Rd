@@ -18,3 +18,7 @@ A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgem
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rgemgf_linfit(V, V)
+}

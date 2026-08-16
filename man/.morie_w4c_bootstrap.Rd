@@ -18,3 +18,6 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_rando
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_bootstrap(n = 5L, seed = 5L)
+}

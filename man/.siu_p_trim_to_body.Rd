@@ -14,3 +14,7 @@ Internal helper: Siu P Trim To Body
 The value of \code{text}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.siu_p_trim_to_body(V)
+}

@@ -19,3 +19,6 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_cross_k}.
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+.schab_ripley_weights(points = c(1, 2, 3, 4, 5, 6, 7, 8), region = c(1, 2, 3, 4, 5, 6, 7, 8), radii = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

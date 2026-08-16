@@ -14,3 +14,6 @@ Internal helper: Legacy Reference Root
 The value of \code{file.path}.
 }
 \keyword{internal}
+\examples{
+.legacy_reference_root()
+}

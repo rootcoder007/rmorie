@@ -17,3 +17,7 @@ A step of the ChiDep implementation. Called by \code{ChiDep}. See the file heade
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.chidep_ranks01(V)
+}

@@ -19,3 +19,6 @@ A step of the geron_train_native implementation. Called by \code{morie_geron_ch4
 A list with \code{cost}, \code{rmse}, \code{residuals}, \code{predictions}, \code{n}.
 }
 \keyword{internal}
+\examples{
+.morie_gr_mse_core(X = 5L, y = 5L, theta = 0.5)
+}

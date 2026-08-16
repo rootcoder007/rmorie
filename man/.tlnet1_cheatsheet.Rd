@@ -14,3 +14,6 @@ One-line description of the module.
 A character value.
 }
 \keyword{internal}
+\examples{
+.tlnet1_cheatsheet()
+}

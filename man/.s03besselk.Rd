@@ -19,3 +19,6 @@ A step of the helpers_s03 implementation. Called by \code{.s03maternk}, \code{.s
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.s03besselk(nu = 0.5, x = 5L)
+}

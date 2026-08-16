@@ -18,3 +18,6 @@ A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_po
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.smatch_cholsolve(M = 5L, b = 5L)
+}

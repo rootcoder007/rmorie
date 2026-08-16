@@ -14,3 +14,6 @@ Internal helper: Mt Adjusted
 The value of \code{.mt_result}.
 }
 \keyword{internal}
+\examples{
+.mt_adjusted(method = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5, alpha = 0.5, adjusted = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

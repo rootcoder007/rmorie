@@ -17,3 +17,7 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}, \code{
 The value of \code{r}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_lcg_step(V)
+}

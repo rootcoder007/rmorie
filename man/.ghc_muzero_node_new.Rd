@@ -14,3 +14,6 @@
 A list with \code{visits}, \code{value_sum}, \code{prior}, \code{children}, \code{state}, \code{reward}, \code{expanded}.
 }
 \keyword{internal}
+\examples{
+.ghc_muzero_node_new()
+}

@@ -34,3 +34,6 @@ International Journal of Biostatistics 6(1), article 26,
 doi:10.2202/1557-4679.1260.
 }
 \keyword{internal}
+\examples{
+.tmlcds_propensity(d = 5L, cols = factor(c("lo", "hi", "lo", "hi")), n = 5L)
+}

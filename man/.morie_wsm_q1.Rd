@@ -18,3 +18,7 @@ A step of the wasserman_native implementation. Called by \code{morie_wasserman_b
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_wsm_q1(V, V)
+}

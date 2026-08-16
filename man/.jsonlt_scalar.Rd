@@ -18,3 +18,6 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_atomic}, \co
 The value of \code{.jsonlt_esc}.
 }
 \keyword{internal}
+\examples{
+.jsonlt_scalar(v = 5L, o = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -18,3 +18,7 @@ A step of the vepan_native implementation. Called by \code{.vepan_cds_frame}, \c
 The value of \code{substr}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vepan_char(V, V)
+}

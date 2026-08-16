@@ -18,3 +18,7 @@ A step of the dmlqs_native implementation. Called by \code{.dmlqs_atom_readout},
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dmlqs_edge_key(V, V)
+}

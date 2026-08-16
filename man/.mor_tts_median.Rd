@@ -17,3 +17,7 @@ A step of the ttsAn_native implementation. Called by \code{.mor_tts_esd}, \code{
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_tts_median(V)
+}

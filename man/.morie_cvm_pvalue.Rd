@@ -14,3 +14,6 @@ Internal helper: Morie Cvm Pvalue
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+.morie_cvm_pvalue(w2 = 5L)
+}

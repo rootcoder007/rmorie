@@ -14,3 +14,6 @@ A step of the rdrobu_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+.rdrobu_cheatsheet()
+}

@@ -20,3 +20,6 @@ stream, so byrow = TRUE.
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+.morie_gr_init(nrow = 5L, ncol = 5L, seed = 5L)
+}

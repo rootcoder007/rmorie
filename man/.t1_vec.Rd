@@ -17,3 +17,7 @@ A step of the tail1_core implementation. Called by \code{.ecfp_percol}, \code{Ad
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t1_vec(V)
+}

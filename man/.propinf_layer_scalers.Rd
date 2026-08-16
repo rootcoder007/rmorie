@@ -17,3 +17,7 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.propinf_layer_scalers(V)
+}

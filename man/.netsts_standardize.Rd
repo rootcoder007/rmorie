@@ -38,3 +38,7 @@ doi:10.1016/j.ijforecast.2020.06.008. Recursive versus direct
 strategies, and preprocessing.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.netsts_standardize(V)
+}

@@ -17,3 +17,6 @@ A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Begg
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.t4_result()
+}

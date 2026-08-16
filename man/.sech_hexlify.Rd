@@ -17,3 +17,7 @@ A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_c
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sech_hexlify(V)
+}

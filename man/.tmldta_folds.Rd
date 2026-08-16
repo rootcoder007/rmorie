@@ -18,3 +18,7 @@ A step of the tmldta_native implementation. Called by \code{morie_tmldta}. See t
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tmldta_folds(V, V)
+}

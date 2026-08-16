@@ -18,3 +18,7 @@ A step of the intf implementation. Called by \code{Intf}. See the file header fo
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.intf_trapz(V, V)
+}

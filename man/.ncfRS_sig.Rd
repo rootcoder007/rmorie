@@ -34,3 +34,6 @@ Techniques for Recommender Systems", *Computer* 42(8), 30-37,
 doi:10.1109/MC.2009.263. The inner-product model being generalised.
 }
 \keyword{internal}
+\examples{
+.ncfRS_sig(x = 5L)
+}

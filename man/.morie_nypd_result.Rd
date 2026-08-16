@@ -22,3 +22,7 @@ A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analys
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_nypd_result(V)
+}

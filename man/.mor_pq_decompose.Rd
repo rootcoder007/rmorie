@@ -17,3 +17,7 @@ A step of the polqnt_native implementation. Called by \code{morie_polqnt}. See t
 A list with \code{levels}, \code{radius}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_pq_decompose(V)
+}

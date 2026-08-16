@@ -25,3 +25,6 @@ A step of the schab_glmm_shared implementation. Called by \code{sppql}. See the 
 A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta}, \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged}, \code{link}, \code{family}.
 }
 \keyword{internal}
+\examples{
+.schab_fit_pseudo_likelihood(z = 5L, X = 5L, Sigma_S = 5L)
+}

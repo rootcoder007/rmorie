@@ -18,3 +18,6 @@ A step of the helpers_s03 implementation. Called by \code{Llamablock}, \code{Mbc
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.s03swish(z = 5L)
+}

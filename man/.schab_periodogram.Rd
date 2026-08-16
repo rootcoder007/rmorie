@@ -18,3 +18,7 @@ A step of the schab_rest_shared implementation. Called by \code{spperiod}. See t
 A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{j}, \code{k}, \code{zero_index}, \code{nonzero_mask}, \code{mean_invariant}, \code{r}, \code{c}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.schab_periodogram(M)
+}

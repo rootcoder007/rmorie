@@ -14,3 +14,6 @@ Internal helper: Siu P Has Rvest
 The value of \code{&&}.
 }
 \keyword{internal}
+\examples{
+.siu_p_has_rvest()
+}

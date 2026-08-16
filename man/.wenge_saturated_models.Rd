@@ -32,3 +32,6 @@ doi:10.1037/a0020761.
 Pearl, J. (2001) "Direct and indirect effects", UAI 17, 411-420.
 }
 \keyword{internal}
+\examples{
+.wenge_saturated_models(ev = 5L, Mm = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), Xm = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

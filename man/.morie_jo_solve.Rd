@@ -18,3 +18,8 @@ A step of the ts_joseph implementation. Called by \code{.morie_jo_ols}, \code{mo
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+S <- c("a", "b", "c")
+.morie_jo_solve(V, S)
+}

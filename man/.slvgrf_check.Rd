@@ -18,3 +18,7 @@ A step of the slvgrf_native implementation. Called by \code{qini_curve}, \code{r
 A list with \code{g}, \code{s}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.slvgrf_check(V, V)
+}

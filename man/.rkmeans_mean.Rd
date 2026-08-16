@@ -17,3 +17,7 @@ A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrat
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rkmeans_mean(V)
+}

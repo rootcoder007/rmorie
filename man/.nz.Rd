@@ -14,3 +14,6 @@ Internal helper: Nz
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+.nz()
+}

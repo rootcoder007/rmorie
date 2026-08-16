@@ -17,3 +17,6 @@ A step of the benRea_native implementation. No other function in the package cal
 The value of \code{substr}.
 }
 \keyword{internal}
+\examples{
+.parts(label = 5L)
+}

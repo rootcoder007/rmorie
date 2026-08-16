@@ -14,3 +14,6 @@
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.ghc_rng()
+}

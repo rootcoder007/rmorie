@@ -18,3 +18,6 @@ A step of the htpfn implementation. Called by \code{Htpfn}. See the file header 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.htpinvspd(A = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), ridge = 5L)
+}

@@ -43,3 +43,6 @@ reinforcement learning, planning and teaching", *Machine Learning* 8,
 293-321, doi:10.1007/BF00992699. Experience replay.
 }
 \keyword{internal}
+\examples{
+.dqnv_bellman_residual(Q = 0.5, P = 0.5, R = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -14,3 +14,6 @@ Internal helper: covariance-model semivariance
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_vgm_gamma(h = 0.5, model = 5L, nugget = c(1, 2, 3, 4, 5, 6, 7, 8), psill = c(1, 2, 3, 4, 5, 6, 7, 8), range_ = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

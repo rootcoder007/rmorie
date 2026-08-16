@@ -19,3 +19,6 @@ A step of the linwlr_native implementation. Called by \code{morie_linwlr}. See t
 A list with \code{coef}, \code{se}, \code{resid}.
 }
 \keyword{internal}
+\examples{
+.linwlr_wls(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

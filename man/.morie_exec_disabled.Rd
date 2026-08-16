@@ -14,3 +14,6 @@ A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allo
 The value of \code{.morie_env_true}.
 }
 \keyword{internal}
+\examples{
+.morie_exec_disabled()
+}

@@ -17,3 +17,7 @@ each value a sorted unique integer vector of neighbours (with v itself excluded 
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.dmlqs_norm_adj(M)
+}

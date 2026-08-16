@@ -17,3 +17,7 @@ A step of the opnclp_native implementation. Called by \code{fit_power_law}. See 
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.opnclp_vec(V)
+}

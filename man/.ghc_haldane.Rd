@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghc_haldane(d = 5L)
+}

@@ -39,3 +39,7 @@ doi:10.1007/978-1-4419-9782-1. The first book, which this one is a
 sequel to.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tlroad_vec(V)
+}

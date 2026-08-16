@@ -45,3 +45,6 @@ Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
 implemented in :mod:`svdpp`.
 }
 \keyword{internal}
+\examples{
+.timeRS_item_bias(b_i = c(1, 2, 3, 4, 5, 6, 7, 8), bins = 5L, t = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,7 @@ A step of the causrddh_native implementation. Called by \code{morie_causrddh}. S
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_ik_median(V)
+}

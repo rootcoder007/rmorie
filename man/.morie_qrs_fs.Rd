@@ -17,3 +17,6 @@ A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPu
 The value of \code{fs}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_qrs_fs(fs = 5L)
+}

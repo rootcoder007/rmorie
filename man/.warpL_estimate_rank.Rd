@@ -45,3 +45,6 @@ ECML 2010 paper above is the one held locally and is the text this
 module follows.
 }
 \keyword{internal}
+\examples{
+.warpL_estimate_rank(n_draws = 5L, n_labels = 5L)
+}

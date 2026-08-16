@@ -46,3 +46,7 @@ Tang, J., Qu, M., Wang, M., Zhang, M., Yan, J. & Mei, Q. (2015)
 shallow model whose two proximities this deepens.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sdne_penalty_matrix(V)
+}

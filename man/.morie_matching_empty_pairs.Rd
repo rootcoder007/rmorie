@@ -14,3 +14,6 @@
 A data frame.
 }
 \keyword{internal}
+\examples{
+.morie_matching_empty_pairs()
+}

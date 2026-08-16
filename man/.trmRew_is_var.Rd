@@ -31,3 +31,7 @@ Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
 Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.trmRew_is_var(V)
+}

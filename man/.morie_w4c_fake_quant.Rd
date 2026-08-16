@@ -18,3 +18,6 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_quant
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_fake_quant(w = c(1, 2, 3, 4, 5, 6, 7, 8), bits = 5L)
+}

@@ -14,3 +14,7 @@ Internal helper: Morie Resolve Path
 The value of \code{normalizePath}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.morie_resolve_path(S)
+}

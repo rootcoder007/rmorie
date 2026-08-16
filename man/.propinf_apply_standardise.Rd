@@ -19,3 +19,6 @@ A step of the propinf_native implementation. Called by \code{morie_propinf_prope
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.propinf_apply_standardise(f = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

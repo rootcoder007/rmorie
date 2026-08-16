@@ -19,3 +19,7 @@ A step of the rangayyan_tf implementation. Called by \code{EmdEns}, \code{EmdSpe
 A list with \code{imfs}, \code{residual}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_emd(V)
+}

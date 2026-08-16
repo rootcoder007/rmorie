@@ -19,3 +19,6 @@ normal quantile at 0 or 1 is infinite, and (w + 0.5)/2^32 reaches neither endpoi
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_random_uniform(n = 5L)
+}

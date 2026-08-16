@@ -35,3 +35,8 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.tmlcic_row_fun(V, D)
+}

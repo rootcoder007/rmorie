@@ -20,3 +20,6 @@
 A matrix, from \code{t}.
 }
 \keyword{internal}
+\examples{
+.gpmnprobs(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}

@@ -14,3 +14,8 @@ Internal helper: Siu Fetch Extract Links
 The value of \code{do.call}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+S <- c("a", "b", "c")
+.siu_fetch_extract_links(S, V)
+}

@@ -14,3 +14,6 @@
 A list with \code{value}, \code{pos}.
 }
 \keyword{internal}
+\examples{
+.mpq_varint(buf = c(1, 2, 3, 4, 5, 6, 7, 8), pos = 5L)
+}

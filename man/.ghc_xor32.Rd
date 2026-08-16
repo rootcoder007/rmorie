@@ -18,3 +18,7 @@ A step of the helpers_ghc_rng implementation. Called by \code{.ghc_xor64}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ghc_xor32(V, V)
+}

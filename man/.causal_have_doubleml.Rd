@@ -14,3 +14,6 @@ Internal helper: Causal Have Doubleml
 The value of \code{&&}.
 }
 \keyword{internal}
+\examples{
+.causal_have_doubleml()
+}

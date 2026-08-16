@@ -41,3 +41,7 @@ for YouTube Recommendations", *RecSys 2016*, 191-198,
 doi:10.1145/2959100.2959190. The retrieval setting.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.twoT_as_vec(V)
+}

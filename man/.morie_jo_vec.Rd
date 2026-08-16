@@ -18,3 +18,7 @@ A step of the ts_joseph implementation. Called by \code{.morie_jo_pair}, \code{m
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_jo_vec(V)
+}

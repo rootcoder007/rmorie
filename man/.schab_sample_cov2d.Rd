@@ -17,3 +17,7 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_periodogr
 A list with \code{cov}, \code{lags_j}, \code{lags_k}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.schab_sample_cov2d(M)
+}

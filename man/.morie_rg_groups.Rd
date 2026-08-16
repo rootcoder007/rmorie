@@ -18,3 +18,8 @@ A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{Qd
 A list with \code{order}, \code{groups}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.morie_rg_groups(D, V)
+}

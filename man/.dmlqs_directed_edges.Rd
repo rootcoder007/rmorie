@@ -17,3 +17,7 @@ A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.dmlqs_directed_edges(M)
+}

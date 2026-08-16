@@ -21,3 +21,6 @@ A step of the sschin_native implementation. Called by \code{morie_sschin_chained
 A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.
 }
 \keyword{internal}
+\examples{
+.sschin_cox_breslow(t = 5L, e = c(1, 2, 3, 4, 5, 6, 7, 8), X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

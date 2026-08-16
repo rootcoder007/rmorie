@@ -14,3 +14,7 @@ Internal helper: local maxima above a height, minimum spacing
 The value of \code{sort}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dsp_findpeaks(V)
+}

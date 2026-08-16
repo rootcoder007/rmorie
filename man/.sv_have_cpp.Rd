@@ -14,3 +14,6 @@
 The value of \code{exists}.
 }
 \keyword{internal}
+\examples{
+.sv_have_cpp()
+}

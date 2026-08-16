@@ -14,3 +14,6 @@ Internal helper: Sglm Negll
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.sglm_negll(log_phi = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, n = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

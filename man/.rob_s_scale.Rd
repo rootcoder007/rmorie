@@ -19,3 +19,7 @@ b = 1/2 -- the 50\%-breakdown calibration. The fixed-point iteration s^2 <- s^2 
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rob_s_scale(V)
+}

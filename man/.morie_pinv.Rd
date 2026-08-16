@@ -18,3 +18,7 @@ A step of the tail1_core implementation. Called by \code{.schab_disjunctive_krig
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_pinv(V)
+}

@@ -18,3 +18,6 @@ A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}, 
 A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv}, \code{fitted}, \code{chol}.
 }
 \keyword{internal}
+\examples{
+.w3_ols(y = 5L, design = matrix(c(4, 1, 0, 1, 3, 1, 0, 1, 2), nrow = 3))
+}

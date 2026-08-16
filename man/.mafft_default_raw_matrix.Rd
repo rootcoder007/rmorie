@@ -18,3 +18,6 @@ A step of the mafft_native implementation. Called by \code{normalized_similarity
 A list with \code{M}, \code{freqs}.
 }
 \keyword{internal}
+\examples{
+.mafft_default_raw_matrix(seq_type = 5L)
+}

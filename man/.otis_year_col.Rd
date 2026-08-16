@@ -14,3 +14,7 @@ Internal helper: Otis Year Col
 Nothing; the function is called for its effect.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.otis_year_col(V)
+}

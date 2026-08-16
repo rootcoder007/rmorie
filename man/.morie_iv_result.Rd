@@ -14,3 +14,6 @@
 A list with \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 }
 \keyword{internal}
+\examples{
+.morie_iv_result(coef_vec = c(1, 2, 3, 4, 5, 6, 7, 8), se_vec = c(1, 2, 3, 4, 5, 6, 7, 8), n_obs = c(1, 2, 3, 4, 5, 6, 7, 8), method = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

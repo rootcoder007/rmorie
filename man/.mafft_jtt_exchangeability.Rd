@@ -14,3 +14,6 @@ A step of the mafft_native implementation. Called by \code{jtt_matrix}. See the 
 A list with \code{S}, \code{f}.
 }
 \keyword{internal}
+\examples{
+.mafft_jtt_exchangeability()
+}

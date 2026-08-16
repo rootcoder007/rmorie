@@ -18,3 +18,7 @@ A step of the caus_native implementation. Called by \code{morie_caus_iv_2sls}. S
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.caus_first_stage_f(V, V)
+}

@@ -14,3 +14,6 @@ Internal helper: Morie Rdd Have Rdrobust
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.morie_rdd_have_rdrobust()
+}

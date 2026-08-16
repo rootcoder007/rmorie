@@ -18,3 +18,6 @@ A step of the rouge_native implementation. Called by \code{morie_rouge_n}. See t
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+.rouge_ngrams(toks = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

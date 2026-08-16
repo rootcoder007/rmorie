@@ -28,3 +28,6 @@ Implicit Feedback Datasets", ICDM 2008, 263-272,
 doi:10.1109/ICDM.2008.22. The purely implicit alternative.
 }
 \keyword{internal}
+\examples{
+.svdpp_cheatsheet()
+}

@@ -18,3 +18,6 @@ A step of the geron_w4a_native implementation. Called by \code{morie_geron_datal
 The value of \code{u}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.w4a_lcg_u(n = 5L, seed = 5L)
+}

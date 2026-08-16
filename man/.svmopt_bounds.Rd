@@ -21,3 +21,6 @@ A step of the svmopt_native implementation. Called by \code{solve_pair}. See the
 A list with \code{L}, \code{H}.
 }
 \keyword{internal}
+\examples{
+.svmopt_bounds(i = 5L, j = 5L, a = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

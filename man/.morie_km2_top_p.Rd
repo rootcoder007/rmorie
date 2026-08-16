@@ -19,3 +19,7 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_nu
 A list with \code{tensor}, \code{keep_mask}, \code{n_kept}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_km2_top_p(V, V)
+}

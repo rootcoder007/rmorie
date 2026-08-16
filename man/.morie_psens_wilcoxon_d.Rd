@@ -18,3 +18,7 @@ Exact replica of rbounds::psens(): both bounds share the variance computed at p+
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_psens_wilcoxon_d(V, V)
+}

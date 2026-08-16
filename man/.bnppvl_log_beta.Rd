@@ -35,3 +35,6 @@ A numeric value.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+.bnppvl_log_beta(v = 5L, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

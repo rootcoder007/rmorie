@@ -17,3 +17,7 @@ A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03mat(V)
+}

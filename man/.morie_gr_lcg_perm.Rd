@@ -18,3 +18,6 @@ down) Part of the geron_train_native implementation; see the file header for the
 The value of \code{perm}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gr_lcg_perm(n = 5L, seed = 5L)
+}

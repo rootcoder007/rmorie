@@ -21,3 +21,6 @@ A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_js
 The value of \code{kids}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.jsonlt_simplify(x = c(1, 2, 3, 4, 5, 6, 7, 8), sv = c(1, 2, 3, 4, 5, 6, 7, 8), sdf = c(1, 2, 3, 4, 5, 6, 7, 8), sm = c(1, 2, 3, 4, 5, 6, 7, 8), flat = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

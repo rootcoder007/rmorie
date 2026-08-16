@@ -19,3 +19,6 @@ A step of the plcbsc_native implementation. Called by \code{.plcbsc_in_time_plac
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.plcbsc_gaps(y_treated = c(1, 2, 3, 4, 5, 6, 7, 8), y_donors = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

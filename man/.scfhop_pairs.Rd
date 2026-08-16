@@ -27,3 +27,6 @@ The value of \code{out}, as built in the body.
     Journal of Machine Learning Research 12, 2539-2561.
 }
 \keyword{internal}
+\examples{
+.scfhop_pairs()
+}

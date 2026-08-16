@@ -25,3 +25,6 @@ Raton: Chapman & Hall/CRC, Sec. 21.2 for the product-over-time weights
 and Ch. 20 for why conditioning fails where weighting works.
 }
 \keyword{internal}
+\examples{
+.lggvls_cheatsheet()
+}

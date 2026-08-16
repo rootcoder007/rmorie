@@ -17,3 +17,6 @@ formulas are routinely evaluated at hypothetical sample sizes like 1e10, which o
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gh_n(n = 5L)
+}

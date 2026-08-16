@@ -14,3 +14,6 @@ Internal helper: Morie Env
 The value of \code{trimws}.
 }
 \keyword{internal}
+\examples{
+.morie_env(name = 5L)
+}

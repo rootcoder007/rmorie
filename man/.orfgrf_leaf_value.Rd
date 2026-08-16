@@ -25,3 +25,6 @@ chosen uniformly without replacement; honesty is enforced by splitting each tree
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.orfgrf_leaf_value(y = c(1, 2, 3, 4, 5, 6, 7, 8), leaf = c(1, 2, 3, 4, 5, 6, 7, 8), idxs = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

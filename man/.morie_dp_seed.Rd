@@ -17,3 +17,7 @@ A step of the dp_native implementation. Called by \code{morie_approx_dp}, \code{
 The value of \code{old}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dp_seed(V)
+}

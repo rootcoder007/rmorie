@@ -17,3 +17,7 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_peeph
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_w4c_sigmoid(V)
+}

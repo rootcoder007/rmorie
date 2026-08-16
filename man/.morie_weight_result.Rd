@@ -23,3 +23,6 @@ A step of the weight_native implementation. Called by \code{morie_weight_cbps}, 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_weight_result(weights = c(1, 2, 3, 4, 5, 6, 7, 8), propensity = c(1, 2, 3, 4, 5, 6, 7, 8), method = c(1, 2, 3, 4, 5, 6, 7, 8), estimand = c(1, 2, 3, 4, 5, 6, 7, 8), call = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

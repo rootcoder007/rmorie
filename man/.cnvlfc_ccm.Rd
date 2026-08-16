@@ -23,3 +23,7 @@ A step of the cnvlfc_native implementation. Called by \code{cnvlfc_ccm}. See the
 A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x}, \code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.cnvlfc_ccm(V, V)
+}

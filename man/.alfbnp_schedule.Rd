@@ -21,3 +21,6 @@ A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sam
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.alfbnp_schedule(T = 5L, sigma_data = c(1, 2, 3, 4, 5, 6, 7, 8), s_max = c(1, 2, 3, 4, 5, 6, 7, 8), s_min = c(1, 2, 3, 4, 5, 6, 7, 8), rho = 0.5)
+}

@@ -17,3 +17,7 @@ NOT as -2 pi k j / n: the two differ in the last bits and the Python arm uses th
 A list with \code{re}, \code{im}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_qrs_dft(V)
+}

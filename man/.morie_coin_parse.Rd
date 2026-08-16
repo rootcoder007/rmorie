@@ -18,3 +18,7 @@ A step of the coin_native implementation. Called by \code{morie_indep_test}, \co
 A list with \code{y}, \code{x}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.morie_coin_parse(D, D)
+}

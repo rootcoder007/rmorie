@@ -19,3 +19,6 @@ A step of the helpers_rouss implementation. Called by \code{.rscombosstride}, \c
 The value of \code{repeat}.
 }
 \keyword{internal}
+\examples{
+.rscombos(n = 5L, k = 5L)
+}

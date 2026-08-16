@@ -19,3 +19,7 @@ A step of the causal_shared_native implementation. Called by \code{morie_dr_lear
 A matrix, from \code{solve}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ridge_fit(V, V)
+}

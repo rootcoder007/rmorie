@@ -18,3 +18,7 @@ A step of the psycho_native implementation. Called by \code{.psy_dl}, \code{mori
 A list with \code{mu}, \code{Q}, \code{w}, \code{k}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.psy_fixed_pool(V, V)
+}

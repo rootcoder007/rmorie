@@ -32,3 +32,6 @@ doi:10.1057/jors.1969.103. Why combining decorrelated forecasts beats
 choosing among them.
 }
 \keyword{internal}
+\examples{
+.ngnest_cheatsheet()
+}

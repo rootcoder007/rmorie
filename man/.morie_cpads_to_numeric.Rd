@@ -14,3 +14,7 @@ Coerce numeric, mapping non-numeric strings to `NA_real_` (silent).
 The value of \code{suppressWarnings}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_cpads_to_numeric(V)
+}

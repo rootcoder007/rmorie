@@ -29,3 +29,8 @@ The value of \code{x}, as built in the body.
     20(3), 626-637, doi:10.1137/0720042
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.trupek_chol_solve(M, V)
+}

@@ -18,3 +18,7 @@ A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel},
 A list with \code{mu}, \code{C}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_bx_cov(M)
+}

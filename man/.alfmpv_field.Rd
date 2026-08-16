@@ -31,3 +31,6 @@ The value of \code{v}, as built in the body.
     Communications 13, 1265, doi:10.1038/s41467-022-28865-w
 }
 \keyword{internal}
+\examples{
+.alfmpv_field(chain = c(1, 2, 3, 4, 5, 6, 7, 8), name = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, default = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

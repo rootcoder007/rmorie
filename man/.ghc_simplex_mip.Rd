@@ -14,3 +14,6 @@
 A list with \code{feasible}, \code{x}, \code{value}.
 }
 \keyword{internal}
+\examples{
+.ghc_simplex_mip(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

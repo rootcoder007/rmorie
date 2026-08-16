@@ -18,3 +18,7 @@ A step of the groebn_native implementation. No other function in the package cal
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.groebn_leading_term(V)
+}

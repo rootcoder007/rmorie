@@ -18,3 +18,7 @@ A step of the fnDist implementation. Called by \code{FnDist}. See the file heade
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fnDist_trapz(V, V)
+}

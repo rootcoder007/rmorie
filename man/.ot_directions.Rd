@@ -18,3 +18,6 @@ A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \c
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ot_directions(d = 5L, n_proj = 5L)
+}

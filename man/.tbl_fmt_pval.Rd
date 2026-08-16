@@ -14,3 +14,6 @@ Internal helper: Tbl Fmt Pval
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tbl_fmt_pval(p = 0.5)
+}

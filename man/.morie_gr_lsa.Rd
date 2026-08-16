@@ -17,3 +17,7 @@ grdetr._linear_sum_assignment. Returns 0-based rows/cols.
 A list with \code{rows}, \code{cols}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gr_lsa(V)
+}

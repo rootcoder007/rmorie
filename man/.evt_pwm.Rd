@@ -18,3 +18,6 @@ Hosking-Wallis-Wood 1985 Eq. 4) -- not the plotting-position approximation, whos
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.evt_pwm(x = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L)
+}

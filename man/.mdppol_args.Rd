@@ -18,3 +18,7 @@ A step of the mdppol_native implementation. Called by \code{morie_mdppol}. See t
 A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mdppol_args(V, V)
+}

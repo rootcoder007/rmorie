@@ -17,3 +17,7 @@ Counts default to 1 so an unweighted table still fits; that makes the WLS weight
 A list with \code{lags}, \code{gamma}, \code{counts}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.schab_as_empirical_variogram(M)
+}

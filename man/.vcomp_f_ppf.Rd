@@ -20,3 +20,6 @@ A step of the vcomp_native implementation. Called by \code{morie_vcomp}. See the
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.vcomp_f_ppf(p = 1, d1 = c(1, 2, 3, 4, 5, 6, 7, 8), d2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

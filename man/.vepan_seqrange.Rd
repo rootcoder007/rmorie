@@ -18,3 +18,6 @@ A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.vepan_seqrange(lo = 5L, hi = 5L)
+}

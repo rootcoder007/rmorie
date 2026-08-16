@@ -18,3 +18,7 @@ A step of the mafft_native implementation. Called by \code{correlation}. See the
 A list with \code{out}, \code{size}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mafft_xcorr_fft(V, V)
+}

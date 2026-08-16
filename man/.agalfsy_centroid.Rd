@@ -17,3 +17,7 @@ A step of the agalfsy_native implementation. Called by \code{.agalfsy_rotate}, \
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.agalfsy_centroid(M)
+}

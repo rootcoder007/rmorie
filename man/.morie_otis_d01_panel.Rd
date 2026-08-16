@@ -14,3 +14,6 @@ Internal helper: Morie Otis D01 Panel
 A data frame.
 }
 \keyword{internal}
+\examples{
+.morie_otis_d01_panel()
+}

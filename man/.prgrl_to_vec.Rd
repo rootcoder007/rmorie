@@ -17,3 +17,7 @@ A step of the prgrl_native implementation. Called by \code{curriculum_schedule},
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.prgrl_to_vec(V)
+}

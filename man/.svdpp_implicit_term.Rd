@@ -33,3 +33,8 @@ Implicit Feedback Datasets", ICDM 2008, 263-272,
 doi:10.1109/ICDM.2008.22. The purely implicit alternative.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.svdpp_implicit_term(V, D)
+}

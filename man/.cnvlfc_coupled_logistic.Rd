@@ -24,3 +24,6 @@ A step of the cnvlfc_native implementation. Called by \code{cnvlfc_coupled_logis
 A list with \code{x}, \code{y}, \code{bxy}, \code{byx}.
 }
 \keyword{internal}
+\examples{
+.cnvlfc_coupled_logistic(n = 5L)
+}

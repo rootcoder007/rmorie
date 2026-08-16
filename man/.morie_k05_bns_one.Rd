@@ -17,3 +17,7 @@ A step of the k05_tranche1 implementation. Called by \code{morie_bns_jump_test}.
 A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_k05_bns_one(V)
+}

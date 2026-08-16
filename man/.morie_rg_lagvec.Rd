@@ -19,3 +19,6 @@ record starts
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+.morie_rg_lagvec(r = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+}

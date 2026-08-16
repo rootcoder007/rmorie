@@ -14,3 +14,7 @@ Internal helper: Entheo San Per Frame
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.entheo_san_per_frame(V, V)
+}

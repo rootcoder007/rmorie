@@ -14,3 +14,6 @@
 A list with \code{subject_id}, \code{condition_order}, \code{eeg}, \code{fmri}, \code{behavioural}, \code{.synthetic}, \code{.paths}.
 }
 \keyword{internal}
+\examples{
+.entheo_load_real(subject_id = 5L, root = 5L)
+}

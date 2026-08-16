@@ -14,3 +14,6 @@ Internal helper: Morie Project Root
 The value of \code{stop}.
 }
 \keyword{internal}
+\examples{
+.morie_project_root()
+}

@@ -14,3 +14,6 @@ Internal helper: Morie Bq Require
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_bq_require()
+}

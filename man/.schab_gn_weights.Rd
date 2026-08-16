@@ -19,3 +19,6 @@ approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|, whose reciproc
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+.schab_gn_weights(kind = c(1, 2, 3, 4, 5, 6, 7, 8), fitted = c(1, 2, 3, 4, 5, 6, 7, 8), counts = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

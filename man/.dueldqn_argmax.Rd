@@ -17,3 +17,7 @@ Double-DQN target: the ONLINE net picks the action, the TARGET net values it. Us
 The value of \code{b}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dueldqn_argmax(V)
+}

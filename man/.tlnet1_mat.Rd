@@ -17,3 +17,7 @@ of k.mat) Part of the tlnet1_native implementation; see the file header for the 
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tlnet1_mat(V)
+}

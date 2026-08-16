@@ -19,3 +19,7 @@ A step of the helpers_gp_core implementation. Called by \code{Msm325}. See the f
 A list with \code{threshold}, \code{loglik}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gpzapbestsplit(V, V)
+}

@@ -23,3 +23,6 @@ A step of the schab_gwr_shared implementation. Called by \code{.schab_select_ban
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.schab_gwr_criterion(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), distances = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
+}

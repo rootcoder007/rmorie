@@ -14,3 +14,6 @@ Internal helper: Tbl Footnotes Add
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.tbl_footnotes_add(reg = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), text = 5L)
+}

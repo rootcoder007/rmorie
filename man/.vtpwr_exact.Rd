@@ -14,3 +14,6 @@ Internal helper: Vtpwr Exact
 A list with \code{banzhaf}, \code{shapley_shubik}, \code{quota}, \code{weights}, \code{method}.
 }
 \keyword{internal}
+\examples{
+.vtpwr_exact(w = c(1, 2, 3, 4, 5, 6, 7, 8), quota = 5L, n = 5L)
+}

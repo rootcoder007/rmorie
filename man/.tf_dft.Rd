@@ -17,3 +17,7 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_analytic}, \code{
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_dft(V)
+}

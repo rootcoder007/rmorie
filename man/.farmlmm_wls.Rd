@@ -32,3 +32,6 @@ approach for genome-wide association studies in structured
 populations", Nature Genetics 44(7), 825-830.
 }
 \keyword{internal}
+\examples{
+.farmlmm_wls(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), rcond = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

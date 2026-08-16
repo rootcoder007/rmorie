@@ -14,3 +14,6 @@ Internal helper: Uof Cramers V
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.uof_cramers_v(chi2 = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, r = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

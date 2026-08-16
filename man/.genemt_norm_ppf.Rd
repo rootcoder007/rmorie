@@ -38,3 +38,7 @@ Association and Population-Based Linkage Analyses", *American Journal
 of Human Genetics* 81(3), 559-575, doi:10.1086/519795.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.genemt_norm_ppf(V)
+}

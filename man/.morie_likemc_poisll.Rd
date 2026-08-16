@@ -18,3 +18,7 @@ A step of the likemc_native implementation. Called by \code{morie_likemc}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_likemc_poisll(V, V)
+}

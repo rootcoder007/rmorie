@@ -18,3 +18,7 @@ A step of the schaben_native implementation. Called by \code{morie_cressie_hawki
 A list with \code{h}, \code{d}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_sb_pairs(V, V)
+}

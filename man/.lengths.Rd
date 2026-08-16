@@ -18,3 +18,6 @@ A step of the bayopt_native implementation. Called by \code{gp_posterior_gradien
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.lengths(ls = 5L, d = 5L)
+}

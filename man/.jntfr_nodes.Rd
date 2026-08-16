@@ -14,3 +14,6 @@
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.jntfr_nodes(theta = 0.5)
+}

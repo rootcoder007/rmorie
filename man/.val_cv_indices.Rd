@@ -14,3 +14,6 @@ Internal helper: Val Cv Indices
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.val_cv_indices(n = 5L, n_folds = c(1, 2, 3, 4, 5, 6, 7, 8), method = 5L)
+}

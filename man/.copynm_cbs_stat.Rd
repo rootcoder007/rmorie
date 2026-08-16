@@ -17,3 +17,7 @@ where indices are 0-based half-open into v (i < j), matching Python.
 A list with \code{z}, \code{i}, \code{j}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.copynm_cbs_stat(V)
+}

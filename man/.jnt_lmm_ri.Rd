@@ -14,3 +14,6 @@
 A list with \code{beta}, \code{t2}, \code{s2}, \code{b}.
 }
 \keyword{internal}
+\examples{
+.jnt_lmm_ri(y = 5L, X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), grp = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), ord = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

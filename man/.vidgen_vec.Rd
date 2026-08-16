@@ -43,3 +43,7 @@ Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
 arXiv:2207.12598. The guidance framework this parallels.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vidgen_vec(V)
+}

@@ -19,3 +19,6 @@ A step of the deseq2_native implementation. Called by \code{cox_reid_loglik}. Se
 The value of \code{ld}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.ghc_deseq2_xtwx_logdet(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), mu = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+}

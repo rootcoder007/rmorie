@@ -19,3 +19,6 @@ sigma^2 = sum_i M_i (M_i - m_i) S_i^2 / m_i.
 The value of \code{tot}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.s03allocVar(M = 5L, S = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+}

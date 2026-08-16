@@ -14,3 +14,7 @@ Internal helper: Sv Safe Pinv
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sv_safe_pinv(V)
+}

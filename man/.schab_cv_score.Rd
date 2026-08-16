@@ -22,3 +22,6 @@ A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criter
 The value of \code{total}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.schab_cv_score(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), distances = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
+}

@@ -14,3 +14,6 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}. See th
 The value of \code{.jsonlt_opts}.
 }
 \keyword{internal}
+\examples{
+.jsonlt_ser_opts()
+}

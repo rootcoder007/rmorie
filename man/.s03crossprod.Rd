@@ -17,3 +17,7 @@ A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code
 The value of \code{.s03matmul}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.s03crossprod(M)
+}

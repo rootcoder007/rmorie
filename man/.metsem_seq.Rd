@@ -28,3 +28,7 @@ A character value.
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.metsem_seq(V)
+}

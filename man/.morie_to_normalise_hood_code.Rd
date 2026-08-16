@@ -14,3 +14,7 @@ Internal helper: Morie To Normalise Hood Code
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_to_normalise_hood_code(V)
+}

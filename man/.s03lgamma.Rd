@@ -17,3 +17,7 @@ A step of the helpers_s03 implementation. Called by \code{.sgflrt_corr}, \code{V
 The value of \code{lgamma}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03lgamma(V)
+}

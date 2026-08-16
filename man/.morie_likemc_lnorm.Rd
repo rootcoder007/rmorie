@@ -19,3 +19,6 @@ A step of the likemc_native implementation. Called by \code{morie_likemc}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_likemc_lnorm(x = 5L, mu = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+}

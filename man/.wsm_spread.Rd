@@ -17,3 +17,7 @@ range / 1.34). The divisor is 1.34 as the book prints it; 1.349 is the normal-th
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.wsm_spread(V)
+}

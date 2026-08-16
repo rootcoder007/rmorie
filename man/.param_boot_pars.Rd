@@ -14,3 +14,6 @@ Internal helper: Param Boot Pars
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.param_boot_pars(distribution = 5L, data = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), dp = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

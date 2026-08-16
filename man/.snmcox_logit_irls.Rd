@@ -34,3 +34,6 @@ with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
 477-491, doi:10.1002/pds.1064.
 }
 \keyword{internal}
+\examples{
+.snmcox_logit_irls(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = 5L)
+}

@@ -14,3 +14,6 @@ A step of the memb_native implementation. Called by \code{morie_memb}. See the f
 A character value.
 }
 \keyword{internal}
+\examples{
+.memb_cheatsheet()
+}

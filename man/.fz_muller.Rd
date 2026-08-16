@@ -18,3 +18,7 @@ pays for it by taking NEGATIVE values, so the density estimate can go negative a
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fz_muller(V)
+}

@@ -14,3 +14,6 @@ Internal helper: Siu Field List
 A vector.
 }
 \keyword{internal}
+\examples{
+.siu_field_list()
+}

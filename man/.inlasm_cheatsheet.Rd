@@ -31,3 +31,6 @@ doi:10.1201/9780203492024. The sparse GMRF computations the
 method rests on.
 }
 \keyword{internal}
+\examples{
+.inlasm_cheatsheet()
+}

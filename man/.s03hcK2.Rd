@@ -19,3 +19,6 @@ A step of the hcoreg implementation. Called by \code{Hcoreg}. See the file heade
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.s03hcK2(r = 5L, v = 5L, lam = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

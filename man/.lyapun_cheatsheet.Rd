@@ -14,3 +14,6 @@ A step of the lyapun_native implementation. Called by \code{morie_lyapun}. See t
 A character value.
 }
 \keyword{internal}
+\examples{
+.lyapun_cheatsheet()
+}

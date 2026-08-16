@@ -14,3 +14,6 @@
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.mpq_zigzag(v = 5L)
+}

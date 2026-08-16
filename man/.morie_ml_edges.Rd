@@ -17,3 +17,7 @@ list(node = c(children)). Both spellings normalize to a sorted character matrix 
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ml_edges(V)
+}

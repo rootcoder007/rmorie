@@ -14,3 +14,6 @@ Internal helper: Random.seed Safe
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.Random.seed_safe()
+}

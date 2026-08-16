@@ -26,3 +26,8 @@ A step of the scintg_native implementation. Called by \code{morie_scintg}. See t
 A list with \code{R}, \code{Y}, \code{K}, \code{objective}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.scintg_maximum_diversity_clustering(M, D)
+}

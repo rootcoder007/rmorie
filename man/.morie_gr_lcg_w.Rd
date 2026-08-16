@@ -19,3 +19,6 @@ A step of the geron_ml_native implementation. Called by \code{.morie_gr_init}, \
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_gr_lcg_w(count = 5L, seed = 5L)
+}

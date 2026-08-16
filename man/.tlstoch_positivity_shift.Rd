@@ -46,3 +46,7 @@ Medicine 32(30), 5260-5277, doi:10.1002/sim.5907. Modified-treatment
 policies.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tlstoch_positivity_shift(V, V)
+}

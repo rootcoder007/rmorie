@@ -18,3 +18,6 @@ window The running sum is accumulated in the same order as the Python arm, so th
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_qrs_mavg(x = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+}

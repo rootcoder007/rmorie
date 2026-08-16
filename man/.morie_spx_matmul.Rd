@@ -18,3 +18,7 @@ A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq}, \code{.
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_spx_matmul(M, M)
+}

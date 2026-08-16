@@ -17,3 +17,7 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_emd}, \code{.tf_s
 A list with \code{mx}, \code{mn}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_extrema(V)
+}

@@ -22,3 +22,7 @@ A step of the flxipt_native implementation. Called by \code{.flxipt_fit}. See th
 The value of \code{b}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.flxipt_logit_irls(V, V)
+}

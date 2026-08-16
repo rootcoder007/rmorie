@@ -35,3 +35,6 @@ One of two values, depending on the branch taken.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+.bnppvl_density_at(u = 5L, q = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

@@ -29,3 +29,8 @@ A list with \code{out}, \code{inc}, \code{nodes}.
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.metsem_index(D, V)
+}

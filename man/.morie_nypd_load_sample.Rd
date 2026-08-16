@@ -17,3 +17,6 @@ A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analys
 The value of \code{utils::read.csv}.
 }
 \keyword{internal}
+\examples{
+.morie_nypd_load_sample()
+}

@@ -20,3 +20,6 @@ A step of the mvsml_rf_shared implementation. Called by \code{.rfgrow}. See the 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.rfcand(b = 5L, s = 5L, p = 0.5, mtry = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

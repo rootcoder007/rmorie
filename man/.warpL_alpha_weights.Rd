@@ -45,3 +45,6 @@ ECML 2010 paper above is the one held locally and is the text this
 module follows.
 }
 \keyword{internal}
+\examples{
+.warpL_alpha_weights(n = 5L)
+}

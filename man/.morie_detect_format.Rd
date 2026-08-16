@@ -14,3 +14,6 @@ Internal helper: Morie Detect Format
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.morie_detect_format(url = 5L)
+}

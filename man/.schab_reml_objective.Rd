@@ -19,3 +19,6 @@ A step of the schab_glmm_shared implementation. Called by \code{sppql}. See the 
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.schab_reml_objective(X = 5L, Sigma_nu = 5L, nu = 0.5)
+}

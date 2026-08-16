@@ -19,3 +19,6 @@ A step of the robpca_native implementation. Called by \code{outlyingness}. See t
 The value of \code{do.call}.
 }
 \keyword{internal}
+\examples{
+.robpca_directions(rows = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), n_dirs = 5L, seed = 5L)
+}

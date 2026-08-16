@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.kpm_hw_crit(alpha = 0.5)
+}

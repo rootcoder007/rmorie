@@ -17,3 +17,6 @@ Jacobi matrix (zero diagonal, sqrt(k) off-diagonal for the probabilists\\' Hermi
 A list with \code{nodes}, \code{weights}.
 }
 \keyword{internal}
+\examples{
+.schab_gauss_hermite(n = 5L)
+}

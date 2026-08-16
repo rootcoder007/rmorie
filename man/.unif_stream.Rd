@@ -18,3 +18,7 @@ A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcm
 The value of \code{uni}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.unif_stream(V)
+}

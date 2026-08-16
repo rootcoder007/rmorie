@@ -18,3 +18,6 @@ minimising the maximum device load (prefix-sum greedy assignment).
 A list with \code{assignment}, \code{device_loads}, \code{max_load}, \code{imbalance}.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_model_parallel(sizes = c(1, 2, 3, 4, 5, 6, 7, 8), n_stages = 5L)
+}

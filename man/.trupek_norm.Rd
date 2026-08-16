@@ -28,3 +28,7 @@ A numeric value.
     20(3), 626-637, doi:10.1137/0720042
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.trupek_norm(V)
+}

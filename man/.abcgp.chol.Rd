@@ -18,3 +18,7 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.draw_mean}, \c
 The value of \code{L}, as built in the body.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.abcgp.chol(D)
+}

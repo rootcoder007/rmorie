@@ -18,3 +18,7 @@ Single-marker LOD (marker regression)
 The LOD.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ghc_mqtmpl_single_marker(V, V)
+}

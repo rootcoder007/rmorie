@@ -18,3 +18,7 @@ A step of the karpV_native implementation. Called by \code{.karpv_copy}, \code{.
 A list with \code{op}, \code{args}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.karpv_fnode(V, V)
+}

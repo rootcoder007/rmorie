@@ -45,3 +45,7 @@ Factorization", *NIPS 2007*, 1257-1264. The probabilistic reading of
 the same objective.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.funkM_global_mean(D)
+}

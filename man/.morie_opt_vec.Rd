@@ -18,3 +18,7 @@ A step of the optim_native implementation. Called by \code{morie_adagrad}, \code
 The value of \code{a}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_opt_vec(V)
+}

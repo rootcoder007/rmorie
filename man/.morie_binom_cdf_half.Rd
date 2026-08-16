@@ -18,3 +18,6 @@ Part of the median_frames_dose_native implementation; see the file header for th
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_binom_cdf_half(k = 5L, n = 5L)
+}

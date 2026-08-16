@@ -20,3 +20,7 @@ A step of the k05_tranche2 implementation. Called by \code{morie_tcc}, \code{mor
 A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_k05_item_params(V, V)
+}

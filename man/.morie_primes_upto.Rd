@@ -17,3 +17,6 @@ Part of the algebraic_combinatorics_native implementation; see the file header f
 The value of \code{which}.
 }
 \keyword{internal}
+\examples{
+.morie_primes_upto(n = 5L)
+}

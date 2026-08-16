@@ -42,3 +42,6 @@ Factorization", *NIPS 2007*, 1257-1264. The probabilistic reading of
 the same objective.
 }
 \keyword{internal}
+\examples{
+.funkM_cheatsheet()
+}

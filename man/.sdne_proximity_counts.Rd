@@ -45,3 +45,7 @@ Tang, J., Qu, M., Wang, M., Zhang, M., Yan, J. & Mei, Q. (2015)
 shallow model whose two proximities this deepens.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.sdne_proximity_counts(M)
+}

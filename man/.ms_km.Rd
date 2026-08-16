@@ -18,3 +18,6 @@ A step of the survival_more implementation. Called by \code{Cif}, \code{Finegray
 A list with \code{time}, \code{surv}, \code{n_risk}, \code{n_event}, \code{greenwood}.
 }
 \keyword{internal}
+\examples{
+.ms_km(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
+}

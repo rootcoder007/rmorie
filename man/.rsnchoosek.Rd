@@ -18,3 +18,6 @@ A step of the helpers_rouss implementation. Called by \code{.rscombosstride}, \c
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.rsnchoosek(n = 5L, k = 5L)
+}

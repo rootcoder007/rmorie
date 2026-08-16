@@ -18,3 +18,7 @@ A step of the robust_native implementation. Called by \code{morie_rob_huber}, \c
 A list with \code{X}, \code{y}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rob_design(V, V)
+}

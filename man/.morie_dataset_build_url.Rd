@@ -14,3 +14,7 @@ Mirrors httr2::req_url_query() but doesn\'t require httr2 at the call site -- ne
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dataset_build_url(V)
+}

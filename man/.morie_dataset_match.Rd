@@ -14,3 +14,6 @@ Case-insensitive single-pattern search.
 The value of \code{grepl}.
 }
 \keyword{internal}
+\examples{
+.morie_dataset_match(name = 5L, key = 5L)
+}

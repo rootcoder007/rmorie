@@ -17,3 +17,7 @@ Lemma 1.7: rho simply adds
 A list with \code{rho} (the sum), \code{k} (the count),   and a \code{note} explaining that composition is additive in   rho with no delta budget and no advanced composition theorem.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.zfmech_compose(V)
+}

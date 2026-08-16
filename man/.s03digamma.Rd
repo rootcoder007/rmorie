@@ -17,3 +17,7 @@ agree term for term rather than relying on R\\'s digamma matching a Python serie
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03digamma(V)
+}

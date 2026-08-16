@@ -18,3 +18,7 @@ A step of the schab_glmm_shared implementation. Called by \code{spbayr}, \code{s
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_smr(V, V)
+}

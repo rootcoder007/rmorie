@@ -18,3 +18,6 @@ A step of the tmlphd implementation. Called by \code{.tmlphd_lasso}. See the fil
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.tmlphd_soft(z = 5L, t = 5L)
+}

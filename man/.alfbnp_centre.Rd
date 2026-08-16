@@ -17,3 +17,7 @@ A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sam
 The value of \code{X}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.alfbnp_centre(M)
+}

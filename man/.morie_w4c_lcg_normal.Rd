@@ -18,3 +18,6 @@ morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_lcg_normal(n = 5L, seed = 5L)
+}

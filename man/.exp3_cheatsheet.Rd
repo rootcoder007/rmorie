@@ -14,3 +14,6 @@ A step of the exp3_native implementation. No other function in the package calls
 A character value.
 }
 \keyword{internal}
+\examples{
+.exp3_cheatsheet()
+}

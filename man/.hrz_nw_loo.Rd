@@ -14,3 +14,6 @@ Internal helper: Hrz Nw Loo
 A vector.
 }
 \keyword{internal}
+\examples{
+.hrz_nw_loo(z = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

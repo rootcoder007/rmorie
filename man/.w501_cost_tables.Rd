@@ -17,3 +17,7 @@ Part of the w501_changepoint_native implementation; see the file header for the 
 A list with \code{cs}, \code{css}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.w501_cost_tables(V)
+}

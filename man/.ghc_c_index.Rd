@@ -19,3 +19,6 @@ morie.fn.survrsf.c_index. Counts over comparable pairs (i, j) where the earlier 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghc_c_index(times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8), risks = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

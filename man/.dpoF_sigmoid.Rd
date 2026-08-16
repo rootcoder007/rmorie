@@ -17,3 +17,6 @@ A step of the dpoF_native implementation. Called by \code{morie_dpoF}. See the f
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.dpoF_sigmoid(z = 5L)
+}

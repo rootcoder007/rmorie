@@ -14,3 +14,7 @@ Internal helper: Trfbl Layer Norm
 The value of \code{sweep}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.trfbl_layer_norm(M)
+}

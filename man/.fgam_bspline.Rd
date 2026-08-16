@@ -20,3 +20,6 @@ A step of the fgam_native implementation. Called by \code{morie_fgam_functional_
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.fgam_bspline(x = 5L, kn = c(1, 2, 3, 4, 5, 6, 7, 8), n_basis = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

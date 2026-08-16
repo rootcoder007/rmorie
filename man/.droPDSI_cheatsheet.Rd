@@ -14,3 +14,6 @@ A step of the droPDSI_native implementation. No other function in the package ca
 A character value.
 }
 \keyword{internal}
+\examples{
+.droPDSI_cheatsheet()
+}

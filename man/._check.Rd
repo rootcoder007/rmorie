@@ -20,3 +20,6 @@ A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \
 A list with \code{b}, \code{nv}, \code{m}, \code{sg}, \code{n}.
 }
 \keyword{internal}
+\examples{
+._check(beta = 0.5, nu = 0.5, mu = 5L, sigma = 0.5)
+}

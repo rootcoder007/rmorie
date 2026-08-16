@@ -21,3 +21,6 @@ A step of the schab_rest_shared implementation. Called by \code{spkcrs}. See the
 A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star}, \code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.
 }
 \keyword{internal}
+\examples{
+.schab_cross_k_combined(p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8), region = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

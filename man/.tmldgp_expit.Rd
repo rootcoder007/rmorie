@@ -17,3 +17,6 @@ A step of the tmldgp_native implementation. Called by \code{morie_tmldgp}, \code
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.tmldgp_expit(x = 5L)
+}

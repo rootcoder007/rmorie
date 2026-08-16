@@ -14,3 +14,6 @@ Internal helper: Bridge Log
 A list with \code{write}, \code{call}, \code{getvalue}.
 }
 \keyword{internal}
+\examples{
+.bridge_log()
+}

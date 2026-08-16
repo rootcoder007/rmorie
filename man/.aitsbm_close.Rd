@@ -17,3 +17,7 @@ A step of the aitsbm implementation. Called by \code{morie_subcompositional_inco
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.aitsbm_close(M)
+}

@@ -14,3 +14,6 @@ Load the included describe corpus (lazy, cached for the session).
 Named character vector. Names are the callable mnemonics   (the short 4--7 character forms); values are the markdown   narrative bodies.
 }
 \keyword{internal}
+\examples{
+.morie_load_describe_corpus()
+}

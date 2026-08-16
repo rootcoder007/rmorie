@@ -19,3 +19,7 @@ A step of the sschin_native implementation. Called by \code{morie_sschin_chained
 A list with \code{beta}, \code{sigma}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.sschin_ols(M, M)
+}

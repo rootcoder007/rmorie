@@ -19,3 +19,6 @@ A step of the jsdivg implementation. Called by \code{Jsdiv}. See the file header
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.t4_jsd(p = 0.5, q = 0.5, base = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

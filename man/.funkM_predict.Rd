@@ -49,3 +49,6 @@ Factorization", *NIPS 2007*, 1257-1264. The probabilistic reading of
 the same objective.
 }
 \keyword{internal}
+\examples{
+.funkM_predict(mu = c(1, 2, 3, 4, 5, 6, 7, 8), b_user = c(1, 2, 3, 4, 5, 6, 7, 8), b_item = c(1, 2, 3, 4, 5, 6, 7, 8), p_u = c(1, 2, 3, 4, 5, 6, 7, 8), q_i = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

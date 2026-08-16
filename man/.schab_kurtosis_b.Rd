@@ -17,3 +17,7 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_moran_mom
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_kurtosis_b(V)
+}

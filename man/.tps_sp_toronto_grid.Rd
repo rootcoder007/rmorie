@@ -14,3 +14,6 @@ Internal helper: Tps Sp Toronto Grid
 A list with \code{gx}, \code{gy}.
 }
 \keyword{internal}
+\examples{
+.tps_sp_toronto_grid()
+}

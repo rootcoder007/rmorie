@@ -18,3 +18,7 @@ A step of the helpers_ghc_rng implementation. Called by \code{.ghc_mul64}. See t
 A list with \code{hi}, \code{lo}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ghc_mul32(V, V)
+}

@@ -33,3 +33,6 @@ Learner", Statistical Applications in Genetics and Molecular
 Biology 6(1), Article 25, doi:10.2202/1544-6115.1309.
 }
 \keyword{internal}
+\examples{
+.tlonsl_loss(kind = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

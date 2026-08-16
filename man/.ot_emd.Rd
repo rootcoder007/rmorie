@@ -20,3 +20,6 @@ A step of the helpers_ot implementation. Called by \code{.ot_partial_plan}, \cod
 A list with \code{T}, \code{cost}.
 }
 \keyword{internal}
+\examples{
+.ot_emd(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

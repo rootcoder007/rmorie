@@ -18,3 +18,6 @@ A step of the qmDS_native implementation. Called by \code{morie_qmDS}. See the f
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.mor_qm_ecdf(sorted_x = 5L, v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

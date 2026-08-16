@@ -17,3 +17,6 @@ stream, not a low-discrepancy one -- a shared quasi-random sequence correlates t
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+.msm_lcg(seed = 5L)
+}

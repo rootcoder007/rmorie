@@ -17,3 +17,6 @@ A step of the gwasem_native implementation. Called by \code{morie_gwasem_reml}. 
 A list with \code{values}, \code{vectors}.
 }
 \keyword{internal}
+\examples{
+.gwasem_eigh(M = 5L)
+}

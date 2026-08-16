@@ -17,3 +17,7 @@ Written out rather than delegated to order() because the C-step selects "the h s
 The value of \code{idx}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rsosort(V)
+}

@@ -21,3 +21,6 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_cross_k_c
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.schab_cross_k(p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8), region = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

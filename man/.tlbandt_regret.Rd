@@ -41,3 +41,6 @@ doi:10.1016/0196-8858(85)90002-8. The reward-maximising tradition
 this departs from.
 }
 \keyword{internal}
+\examples{
+.tlbandt_regret(Y = c(1, 2, 3, 4, 5, 6, 7, 8), Y1 = c(1, 2, 3, 4, 5, 6, 7, 8), Y0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

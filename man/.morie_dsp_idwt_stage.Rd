@@ -14,3 +14,6 @@ Exact adjoint of the analysis stage: the transform is orthonormal, so the invers
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_dsp_idwt_stage(W = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

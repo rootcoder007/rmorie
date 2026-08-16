@@ -18,3 +18,7 @@ The full product can reach 2^64, past the 2^53 where doubles stop being exact in
 A list with \code{hi}, \code{lo}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_mulhilo32(V, V)
+}

@@ -14,3 +14,7 @@ The three weight sums every Moran/Geary moment is built from (Cliff & Ord 1981):
 A list with \code{S0}, \code{S1}, \code{S2}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.tps_moran_wconst(D)
+}

@@ -36,3 +36,6 @@ Manski, C. F. (2004) "Statistical Treatment Rules for
   object of inference.
 }
 \keyword{internal}
+\examples{
+.itrgrf_cheatsheet()
+}

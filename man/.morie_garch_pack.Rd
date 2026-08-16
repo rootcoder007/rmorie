@@ -18,3 +18,6 @@ A step of the garch_coint_native implementation. Called by \code{morie_garch_spe
 The value of \code{p}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_garch_pack(spec = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

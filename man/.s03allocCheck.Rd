@@ -19,3 +19,6 @@ stratum arguments; S is all ones when S_h is NULL, which turns Neyman allocation
 A list with \code{M}, \code{S}, \code{m0}, \code{H}.
 }
 \keyword{internal}
+\examples{
+.s03allocCheck(N_h = c(1, 2, 3, 4, 5, 6, 7, 8), S_h = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

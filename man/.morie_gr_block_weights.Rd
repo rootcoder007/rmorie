@@ -19,3 +19,6 @@ A step of the geron_ml_native implementation. Called by \code{morie_geron_albert
 A list with \code{Wq}, \code{Wk}, \code{Wv}, \code{Wo}, \code{W1}, \code{b1}, \code{W2}, \code{b2}.
 }
 \keyword{internal}
+\examples{
+.morie_gr_block_weights(d_model = 5L, d_ff = 5L, seed = 5L)
+}

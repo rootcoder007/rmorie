@@ -18,3 +18,6 @@ A step of the geron_w4d_native implementation. No other function in the package 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_lcg_u(n = 5L, seed = 5L)
+}

@@ -14,3 +14,7 @@ Internal helper: Vtpwr Perms
 The value of \code{do.call}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.vtpwr_perms(V)
+}

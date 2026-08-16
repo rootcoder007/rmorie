@@ -17,3 +17,7 @@ A step of the rgemgf implementation. Called by \code{rgemgf}. See the file heade
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rgemgf_zcr(V)
+}

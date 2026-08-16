@@ -30,3 +30,7 @@ studies with a sustained exposure period", Mathematical Modelling
 problem and the weighted solution were first set out.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tdcvar_logreg_pred(V, V)
+}

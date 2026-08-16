@@ -20,3 +20,6 @@ rfmlt.R Part of the mvsml_rf_shared implementation; see the file header for the 
 The value of \code{g}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.rfgain(Y = c(1, 2, 3, 4, 5, 6, 7, 8), left = c(1, 2, 3, 4, 5, 6, 7, 8), right = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
+}

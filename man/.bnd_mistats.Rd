@@ -18,3 +18,7 @@ A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}
 A list with \code{n}, \code{mL}, \code{sL}, \code{mU}, \code{sU}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bnd_mistats(V, V)
+}

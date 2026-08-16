@@ -14,3 +14,7 @@ Internal helper: Boot Statistic Adapter
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.boot_statistic_adapter(V)
+}

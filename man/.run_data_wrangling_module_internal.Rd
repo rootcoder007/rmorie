@@ -14,3 +14,7 @@ Internal helper: Run Data Wrangling Module Internal
 A list with \code{data_na_summary}, \code{data_wrangling_log}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.run_data_wrangling_module_internal(D)
+}

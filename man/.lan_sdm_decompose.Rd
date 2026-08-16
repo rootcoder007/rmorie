@@ -14,3 +14,6 @@ Internal helper: Lan Sdm Decompose
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+.lan_sdm_decompose(rho = 0.5, beta_direct = c(1, 2, 3, 4, 5, 6, 7, 8), beta_spatial = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), coefficient_names = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

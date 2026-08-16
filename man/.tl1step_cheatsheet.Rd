@@ -34,3 +34,6 @@ one-dimensional submodels", *International Journal of Biostatistics*
 chapter relies on.
 }
 \keyword{internal}
+\examples{
+.tl1step_cheatsheet()
+}

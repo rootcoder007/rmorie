@@ -21,3 +21,7 @@ A step of the lcwphr_native implementation. Called by \code{morie_lcwphr_latent_
 A list with \code{beta}, \code{fitted}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.lcwphr_logit_irls(M, M)
+}

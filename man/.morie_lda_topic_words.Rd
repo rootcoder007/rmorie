@@ -35,3 +35,7 @@ Intelligence (UAI 1999), 289-296, arXiv:1301.6705. The aspect model
 LDA places a Dirichlet prior over; implemented in plsa.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_lda_topic_words(V)
+}

@@ -30,3 +30,6 @@ A numeric value.
     stick-breaking priors." JASA 96(453), 161-173.
 }
 \keyword{internal}
+\examples{
+.slbpdg_dnorm(x = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), s2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

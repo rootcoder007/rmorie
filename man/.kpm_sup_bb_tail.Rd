@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.kpm_sup_bb_tail(h = 0.5)
+}

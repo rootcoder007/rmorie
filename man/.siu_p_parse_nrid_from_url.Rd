@@ -14,3 +14,6 @@ Internal helper: Siu P Parse Nrid From Url
 The value of \code{as.integer}.
 }
 \keyword{internal}
+\examples{
+.siu_p_parse_nrid_from_url(url = 5L)
+}

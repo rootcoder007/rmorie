@@ -14,3 +14,6 @@ A step of the glm implementation. Called by \code{morie_deviance_residuals}, \co
 A list with \code{binomial}, \code{poisson}, \code{gaussian}, \code{gamma}.
 }
 \keyword{internal}
+\examples{
+.morie_glm_families()
+}

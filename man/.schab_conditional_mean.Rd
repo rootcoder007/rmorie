@@ -20,3 +20,6 @@ A step of the schab_glmm_shared implementation. Called by \code{spglmm}. See the
 The value of \code{.schab_link}.
 }
 \keyword{internal}
+\examples{
+.schab_conditional_mean(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, S = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

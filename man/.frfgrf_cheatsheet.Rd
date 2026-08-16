@@ -31,3 +31,6 @@ Machine Learning Research 13, 1063-1095. Earlier consistency analysis
 of the same shape.
 }
 \keyword{internal}
+\examples{
+.frfgrf_cheatsheet()
+}

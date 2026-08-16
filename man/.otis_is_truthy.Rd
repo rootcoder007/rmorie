@@ -14,3 +14,7 @@ Internal helper: Otis Is Truthy
 The value of \code{as.integer}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.otis_is_truthy(V)
+}

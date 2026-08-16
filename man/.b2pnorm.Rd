@@ -17,3 +17,7 @@ A step of the b2info implementation. Called by \code{Compshan}, \code{Crsent}, \
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.b2pnorm(V)
+}

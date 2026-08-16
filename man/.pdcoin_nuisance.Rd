@@ -20,3 +20,6 @@ Returns L11^2, lambda_i and sigma^2_i.
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.pdcoin_nuisance(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), Zx = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), e = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
+}

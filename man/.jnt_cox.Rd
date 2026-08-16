@@ -14,3 +14,6 @@
 A list with \code{beta}, \code{se}, \code{ll}.
 }
 \keyword{internal}
+\examples{
+.jnt_cox(t = 5L, d = 5L, Z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

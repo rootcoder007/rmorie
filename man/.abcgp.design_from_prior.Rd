@@ -20,3 +20,6 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.abcgp.design_from_prior(n = 5L, prior_ppf = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

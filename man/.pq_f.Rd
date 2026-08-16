@@ -28,3 +28,6 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+.pq_f(st = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), id = 5L)
+}

@@ -18,3 +18,8 @@ A step of the tail2_t04 implementation. Called by \code{BipartSpec}, \code{Signl
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_t2_neigh(M, V)
+}

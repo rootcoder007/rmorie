@@ -18,3 +18,6 @@ A step of the geron_w4c_native implementation. Called by \code{.morie_w4c_grow}.
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_leaf_value(y = c(1, 2, 3, 4, 5, 6, 7, 8), criterion = 5L)
+}

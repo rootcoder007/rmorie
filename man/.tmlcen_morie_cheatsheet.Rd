@@ -32,3 +32,6 @@ software package instead. The two sources above are what this is built
 from.
 }
 \keyword{internal}
+\examples{
+.tmlcen_morie_cheatsheet()
+}

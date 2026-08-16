@@ -14,3 +14,7 @@ Internal helper: Morie Url With Params
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_url_with_params(V)
+}

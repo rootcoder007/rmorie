@@ -18,3 +18,7 @@ MASS::negative.binomial for the log link path used by glm.nb).
 The value of \code{structure}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_negbin_family(V)
+}

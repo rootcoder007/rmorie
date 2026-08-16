@@ -34,3 +34,6 @@ A list with \code{m1}, \code{m2}.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+.bnppvl_moments(draws = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 3L)
+}

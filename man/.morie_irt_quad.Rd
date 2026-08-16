@@ -14,3 +14,6 @@ Internal helper: normal quadrature grid
 A list with \code{theta}, \code{w}.
 }
 \keyword{internal}
+\examples{
+.morie_irt_quad()
+}

@@ -17,3 +17,7 @@ stats::var uses ddof = 1 and would weight the split criterion differently
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.esl_var_p(V)
+}

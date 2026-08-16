@@ -18,3 +18,7 @@ A step of the rangayyan_cep implementation. Called by \code{CCepstrum}, \code{Ce
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_idft_re(V, V)
+}

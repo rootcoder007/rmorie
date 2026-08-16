@@ -17,3 +17,7 @@ A step of the lsa_native implementation. Called by \code{lsa_decompose}. See the
 A list with \code{T}, \code{S}, \code{Dt}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ghc_svd(V)
+}

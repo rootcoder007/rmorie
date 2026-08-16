@@ -17,3 +17,7 @@ A step of the kamath_llm2_native implementation. No other function in the packag
 The value of \code{order}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_km2_ord(V)
+}

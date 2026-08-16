@@ -31,3 +31,6 @@ Chapman & Hall/CRC, Sec. 12.5 (effect modification and marginal
 structural models) and Sec. 21.2 (the time-varying weights).
 }
 \keyword{internal}
+\examples{
+.mfovsm_wls(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

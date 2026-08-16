@@ -14,3 +14,6 @@ Internal helper: Morie Seed Stat Commands
 The value of \code{invisible}.
 }
 \keyword{internal}
+\examples{
+.morie_seed_stat_commands()
+}

@@ -18,3 +18,6 @@ A step of the geron_ml_native implementation. Called by \code{morie_geron_cross_
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gr_array_split(idx = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
+}

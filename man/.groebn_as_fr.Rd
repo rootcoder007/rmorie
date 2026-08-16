@@ -17,3 +17,6 @@ A step of the groebn_native implementation. Called by \code{.groebn_poly}, \code
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.groebn_as_fr(x = 5L)
+}

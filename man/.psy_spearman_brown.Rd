@@ -18,3 +18,6 @@ least the single-measure value, which is why every average-measure ICC exceeds i
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.psy_spearman_brown(icc1 = 5L, k = 5L)
+}

@@ -20,3 +20,6 @@ A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_
 A list with \code{G}, \code{th}, \code{P}.
 }
 \keyword{internal}
+\examples{
+.causrddc_kernel_constants(p = 0.5, q = 0.5)
+}

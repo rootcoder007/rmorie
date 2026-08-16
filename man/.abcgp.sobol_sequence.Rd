@@ -19,3 +19,6 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.design_from_pr
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.abcgp.sobol_sequence(n = 5L, dim = 5L)
+}

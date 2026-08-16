@@ -17,3 +17,7 @@ fraction of its own, and the tail comes straight from the CF branch of the incom
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_erfc(V)
+}

@@ -20,3 +20,6 @@ A step of the deepSVDD_native implementation. Called by \code{svdd}. See the fil
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.deep_svdd_kernel(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, kern = 5L, gamma = 0.5)
+}

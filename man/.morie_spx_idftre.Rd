@@ -18,3 +18,7 @@ A step of the sp_fill implementation. Called by \code{SpecAnom}. See the file he
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_spx_idftre(V, V)
+}

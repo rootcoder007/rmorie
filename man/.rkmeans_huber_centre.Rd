@@ -20,3 +20,6 @@ A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrat
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.rkmeans_huber_centre(pts = c(1, 2, 3, 4, 5, 6, 7, 8), c_val = 5L)
+}

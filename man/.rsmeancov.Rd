@@ -18,3 +18,8 @@ A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fas
 A list with \code{mu}, \code{S}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.rsmeancov(D, V)
+}

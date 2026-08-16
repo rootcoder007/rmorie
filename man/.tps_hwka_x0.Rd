@@ -14,3 +14,6 @@ Internal helper: Tps Hwka X0
 A vector.
 }
 \keyword{internal}
+\examples{
+.tps_hwka_x0(kernel_kind = 5L, baseline_kind = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, T_ = c(1, 2, 3, 4, 5, 6, 7, 8), mean_dt = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

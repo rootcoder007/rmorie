@@ -14,3 +14,6 @@ Internal helper: Siu Fetch Parse Case Page
 The value of \code{rec}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.siu_fetch_parse_case_page(html = 5L, case_number = c(1, 2, 3, 4, 5, 6, 7, 8), url = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

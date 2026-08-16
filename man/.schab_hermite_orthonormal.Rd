@@ -18,3 +18,6 @@ A step of the schab_hermite_shared implementation. Called by \code{.schab_disjun
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_hermite_orthonormal(x = c(1, 2, 3, 4, 5, 6, 7, 8), degree = 5L)
+}

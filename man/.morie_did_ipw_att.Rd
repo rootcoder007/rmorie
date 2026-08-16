@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_did_ipw_att(y = c(1, 2, 3, 4, 5, 6, 7, 8), treat = c(0, 1, 0, 1, 1, 0, 1, 0), ps = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

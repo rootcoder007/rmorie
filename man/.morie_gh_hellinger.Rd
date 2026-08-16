@@ -19,3 +19,6 @@ A step of the ghosal_native implementation. No other function in the package cal
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_gh_hellinger(p = 0.5, q = 0.5, grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

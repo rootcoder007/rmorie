@@ -18,3 +18,7 @@ A step of the alammar_llm_native implementation. Called by \code{morie_alammar_c
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_al_cos(V, V)
+}

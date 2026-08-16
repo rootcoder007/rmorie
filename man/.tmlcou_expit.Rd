@@ -17,3 +17,6 @@ A step of the tmlcou_native implementation. Called by \code{morie_tmlcou}. See t
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.tmlcou_expit(x = 5L)
+}

@@ -37,3 +37,6 @@ Representation Learning with Deep Convolutional Generative Adversarial
 Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 }
 \keyword{internal}
+\examples{
+.gan_an_cheatsheet()
+}

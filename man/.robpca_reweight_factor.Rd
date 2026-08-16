@@ -18,3 +18,6 @@ A step of the robpca_native implementation. Called by \code{morie_robpca}. See t
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.robpca_reweight_factor(q = 0.5, k = 5L)
+}

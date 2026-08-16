@@ -14,3 +14,6 @@ Internal helper: Siu Fetch Resolve Url
 A vector.
 }
 \keyword{internal}
+\examples{
+.siu_fetch_resolve_url(rel = c("a", "b", "c"), base_url = 5L)
+}

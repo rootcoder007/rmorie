@@ -36,3 +36,7 @@ complex survey data, Journal of the American Statistical
 Association 83(401), 231-241, doi:10.1080/01621459.1988.10478591.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.replwt_brr_weights(D)
+}

@@ -14,3 +14,6 @@ Internal helper: Morie Llm Openai Key
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_openai_key()
+}

@@ -14,3 +14,6 @@ Internal helper: Ghebp Negll
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghebp_negll(a = c(1, 2, 3, 4, 5, 6, 7, 8), K_n = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

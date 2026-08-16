@@ -14,3 +14,7 @@ Internal helper: Is Boolean Value Set
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.is_boolean_value_set(V)
+}

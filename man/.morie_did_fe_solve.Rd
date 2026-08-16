@@ -20,3 +20,6 @@ cells by alternating projections; returns per-level lookups.
 A list with \code{a}, \code{g}.
 }
 \keyword{internal}
+\examples{
+.morie_did_fe_solve(y0 = c(1, 2, 3, 4, 5, 6, 7, 8), u0 = c(1, 2, 3, 4, 5, 6, 7, 8), t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

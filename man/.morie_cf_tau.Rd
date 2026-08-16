@@ -18,3 +18,7 @@ A step of the causal_forest_honest implementation. Called by \code{.morie_cf_gro
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_cf_tau(V, V)
+}

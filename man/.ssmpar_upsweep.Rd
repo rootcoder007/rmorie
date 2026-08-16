@@ -30,3 +30,7 @@ Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
 Mellon University.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ssmpar_upsweep(V)
+}

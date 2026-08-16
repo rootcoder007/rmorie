@@ -20,3 +20,6 @@ A step of the prphet_native implementation. Called by \code{morie_prphet_fit}. S
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.changepoints(t = c(1, 2, 3, 4, 5, 6, 7, 8), n.cp = 5L)
+}

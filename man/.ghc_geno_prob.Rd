@@ -14,3 +14,6 @@
 A vector.
 }
 \keyword{internal}
+\examples{
+.ghc_geno_prob(gL = 5L, gR = 5L, rL = c(1, 2, 3, 4, 5, 6, 7, 8), rR = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
