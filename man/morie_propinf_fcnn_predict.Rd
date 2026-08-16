@@ -18,3 +18,11 @@ Output of the network on each row of \code{X}.
 Numeric vector of predicted probabilities.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(60), 20, 3)
+y <- as.integer(X[, 1] + rnorm(20, 0, 0.3) > 0)
+net <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 5L,
+                                seed = 1L)
+morie_propinf_fcnn_predict(net, X[1:3, , drop = FALSE])
+}

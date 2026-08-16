@@ -23,3 +23,11 @@ Cross-entropy loss, ReLU hidden units, logistic output, with a Fisher-Yates shuf
 A list of layers, each \code{list(W=, b=)}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(60), 20, 3)
+y <- as.integer(X[, 1] + rnorm(20, 0, 0.3) > 0)
+net <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 5L,
+                                seed = 1L)
+str(net, max.level = 1)
+}
