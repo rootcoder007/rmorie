@@ -805,23 +805,64 @@ morie_iv_split_sample <- function(data, outcome, endogenous, instruments,
 #' df <- data.frame(y, d, z)
 #' morie_iv_control_function(df, "y", "d", "z")
 #' @export
-morie_iv_control_function <- function(data, outcome, endogenous, instruments,
-                                      exogenous = NULL, robust = TRUE,
-                                      alpha = 0.05) {
-  if (length(endogenous) != 1)
-    stop("morie_iv_control_function currently supports 1 endogenous regressor")
-  e   <- endogenous
-  rhs <- paste(c(instruments, exogenous), collapse = " + ")
-  fs  <- stats::lm(stats::as.formula(paste(e, "~", rhs)), data = data)
-  data$.cf_resid_ <- stats::residuals(fs)
-  rhs2 <- paste(c(endogenous, exogenous, ".cf_resid_"), collapse = " + ")
-  ss <- stats::lm(stats::as.formula(paste(outcome, "~", rhs2)), data = data)
-  cf <- stats::coef(ss)
-  se <- sqrt(diag(stats::vcov(ss)))
-  .morie_iv_result(cf, se, length(ss$residuals),
-                   method = "control function",
-                   alpha = alpha, dof = ss$df.residual,
-                   details = list(first_stage = fs, second_stage = ss))
+morie_iv_control_function <- function(data, outcome, endogenous,
+                                      instruments, exogenous = NULL,
+                                      robust = TRUE, alpha = 0.05,
+                                      dist = c("normal", "t")) {
+  dist <- match.arg(dist)
+  cols <- unique(c(outcome, endogenous, instruments, exogenous))
+  miss <- setdiff(cols, names(data))
+  if (length(miss)) {
+    stop("control_function: no such column(s) in `data`: ",
+         paste(miss, collapse = ", "), ".", call. = FALSE)
+  }
+  df <- data[stats::complete.cases(data[, cols, drop = FALSE]), ,
+             drop = FALSE]
+  y <- as.numeric(df[[outcome]])
+  n <- length(y)
+  D <- as.matrix(df[, endogenous, drop = FALSE])
+  Zx <- as.matrix(df[, instruments, drop = FALSE])
+  W <- if (length(exogenous))
+    as.matrix(df[, exogenous, drop = FALSE]) else NULL
+
+  # First stage, one per endogenous regressor: the residual is the part
+  # of D the instruments cannot explain, and carrying it into the second
+  # stage is what controls the endogeneity.
+  Z_first <- cbind(1, Zx, W)
+  V_hat <- matrix(0, n, ncol(D))
+  for (j in seq_len(ncol(D))) {
+    b <- qr.solve(Z_first, D[, j])
+    V_hat[, j] <- D[, j] - Z_first %*% b
+  }
+
+  X <- cbind(1, D, W, V_hat)
+  colnames(X) <- c("const", endogenous,
+                   if (length(exogenous)) exogenous else NULL,
+                   paste0("v_hat_", endogenous))
+  beta <- as.numeric(qr.solve(X, y))
+  names(beta) <- colnames(X)
+  resid <- as.numeric(y - X %*% beta)
+  k <- ncol(X)
+  XtX_inv <- tryCatch(solve(crossprod(X)),
+                      error = function(e) .morie_ginv(crossprod(X)))
+  if (isTRUE(robust)) {
+    meat <- crossprod(X, resid^2 * X)
+    V <- (n / (n - k)) * (XtX_inv %*% meat %*% XtX_inv)
+  } else {
+    V <- (sum(resid^2) / (n - k)) * XtX_inv
+  }
+  se <- sqrt(pmax(diag(V), 0))
+  names(se) <- colnames(X)
+
+  .morie_iv_result(beta, se, n,
+                   method = "control_function",
+                   alpha = alpha,
+                   dof = if (dist == "t") n - k else NA,
+                   details = list(vcov = V, residuals = resid,
+                                  v_hat = V_hat,
+                                  se_type = if (isTRUE(robust)) "HC1"
+                                            else "const",
+                                  dist = dist))
 }
 
 #' IV Probit (Rivers-Vuong control function)
