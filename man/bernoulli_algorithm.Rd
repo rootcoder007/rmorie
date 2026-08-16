@@ -31,3 +31,7 @@ Distributional Reinforcement Learning", AISTATS 2018
 (arXiv:1802.08163) contraction in Cramer distance.
 }
 \keyword{internal}
+\examples{
+bernoulli_algorithm(reward = 1, gamma = 0.9, next_probs = rep(0.2, 5),
+                    v_min = -10, v_max = 10)
+}

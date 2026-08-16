@@ -19,3 +19,6 @@ One observation enters through the clever covariate, so the bound carries 1/g_mi
 A list with \code{sensitivity}, \code{naive_1_over_n},   \code{inflation}, \code{g_min}, \code{n}, \code{note}.
 }
 \keyword{internal}
+\examples{
+ate_sensitivity(n = 100, g_min = 0.05)
+}

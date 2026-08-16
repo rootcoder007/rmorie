@@ -22,3 +22,7 @@ Var = Var_sampling + 2(Delta f / epsilon)^2.
 A list with \code{estimate}, \code{se_private},   \code{se_sampling}, \code{ci}, \code{width_ratio},   \code{epsilon}.
 }
 \keyword{internal}
+\examples{
+r <- private_ci(value = 0.4, sensitivity = 0.02, epsilon = 1, se = 0.05)
+str(r, max.level = 1)
+}

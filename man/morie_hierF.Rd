@@ -22,3 +22,10 @@ A step of the hierF_native implementation. No other function in the package call
 The value of \code{mint_reconcile}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+S <- summing_matrix(list(c(0L, 1L)), 2L)
+res <- matrix(rnorm(30), 10, 3)
+r <- morie_hierF(c(10.5, 4.9, 5.4), S, residuals = res)
+str(r, max.level = 1)
+}

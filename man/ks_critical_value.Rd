@@ -24,3 +24,10 @@ A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}. 
 A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+X <- matrix(runif(60), 30, 2)
+inst <- hypercube_instruments(X, n_levels = 2L)
+r <- ks_critical_value(X[, 1] - 0.4, inst)
+str(r, max.level = 1)
+}

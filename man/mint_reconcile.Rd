@@ -22,3 +22,12 @@ A step of the hierF_native implementation. Called by \code{morie_hierF}. See the
 A list with \code{estimate}, \code{reconciled}, \code{bottom}, \code{base}, \code{P}, \code{S}, \code{method}, \code{shrinkage}, \code{n_series}, \code{n_bottom}, \code{coherent}, \code{ps_identity_error}, \code{adjustment}, \code{cite}, \code{method_detail}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+S <- summing_matrix(list(c(0L, 1L)), 2L)
+res <- matrix(rnorm(30), 10, 3)
+base <- c(10.5, 4.9, 5.4)
+r <- mint_reconcile(base, S, residuals = res)
+stopifnot(r$coherent)
+r$reconciled
+}

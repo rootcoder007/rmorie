@@ -18,3 +18,7 @@ A step of the hierF_native implementation. No other function in the package call
 The value of \code{rbind}.
 }
 \keyword{internal}
+\examples{
+S <- summing_matrix(list(c(0L, 1L, 2L, 3L), c(0L, 1L), c(2L, 3L)), 4L)
+S
+}

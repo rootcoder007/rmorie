@@ -29,3 +29,9 @@ Vaswani, A. et al. (2017) "Attention is all you need", Advances in
 Neural Information Processing Systems 30, arXiv:1706.03762.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+q <- rnorm(4)
+K <- matrix(rnorm(24), 6, 4)
+morie_informer_sparsity_measure(q, K)
+}
