@@ -20,3 +20,11 @@ an adaptive noise canceller whose primary input is the abdominal lead, so the re
 A list with \code{fetal}, \code{maternal}, \code{weights}, \code{order}, \code{mu}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(8)
+n <- 800
+mecg <- sin(2 * pi * 2 * (1:n) / 200)
+thor <- sin(2 * pi * 1.2 * (1:n) / 200)
+abd <- 0.6 * thor + 0.3 * mecg + rnorm(n, 0, 0.05)
+MEcgFilt(abd, thor)
+}

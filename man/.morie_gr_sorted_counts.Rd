@@ -18,3 +18,9 @@ A step of the geron_train_native implementation. Called by \code{morie_geron_pre
 A list with \code{y}, \code{s}, \code{P}, \code{N}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+y <- rbinom(30, 1, 0.5)
+s <- y + rnorm(30, 0, 0.7)
+.morie_gr_sorted_counts(y, s)
+}

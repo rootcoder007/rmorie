@@ -19,3 +19,10 @@ book gives for the carotid pulse in Section 4.3.5 (eqs 4.22, 4.23), because the 
 A list with \code{systolic}, \code{notch}, \code{diastolic}, \code{onset}, \code{amplitude}, \code{ac}, \code{dc}, \code{pi}, \code{rate}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(8)
+fs <- 100
+tv <- seq(0, 5, by = 1 / fs)
+ppg <- sin(2 * pi * 1.2 * tv) + 0.1 * rnorm(length(tv))
+PpgFeat(ppg, fs = fs)
+}

@@ -18,3 +18,9 @@ List with \code{fpr}, \code{tpr}, \code{thresholds}, \code{auc}.
 TPR against FPR over the distinct scores (ties collapsed into one
 point), AUC by the trapezoid rule.
 }
+\examples{
+set.seed(1)
+y <- rbinom(30, 1, 0.5)
+s <- y + rnorm(30, 0, 0.7)
+morie_geron_roc_curve(y, s)
+}

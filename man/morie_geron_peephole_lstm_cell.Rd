@@ -37,3 +37,12 @@ List with \code{h}, \code{c}, \code{f}, \code{i}, \code{g}, \code{o}.
 f and i peep at \verb{c_\{t-1\}}, o peeps at the NEW c_t, g has no peephole;
 the U vectors are diagonal.
 }
+\examples{
+x_t <- c(0.5, -0.1)
+h_prev <- c(0.2, 0.3); c_prev <- c(0.1, 0.1)
+W <- matrix(0.1, 2, 4); U <- rep(0.1, 2); b <- rep(0, 2)
+morie_geron_peephole_lstm_cell(x_t, h_prev, c_prev,
+                               Wf = W, Wi = W, Wg = W, Wo = W,
+                               Uf = U, Ui = U, Uo = U,
+                               bf = b, bi = b, bg = b, bo = b)
+}

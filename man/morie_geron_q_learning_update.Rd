@@ -27,3 +27,8 @@ List with \code{Q}, \code{old_value}, \code{new_value}, \code{target},
 Q(s,a) += alpha [r + gamma max_a' Q(s',a') - Q(s,a)]; \code{done} drops the
 bootstrap. State and action indices are 0-based.
 }
+\examples{
+Q <- matrix(0.2, 4, 2)
+morie_geron_q_learning_update(Q, s = 0L, a = 1L, r = 1, s_next = 2L,
+                              alpha = 0.1, gamma = 0.9)
+}

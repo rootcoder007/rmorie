@@ -19,3 +19,8 @@ List with \code{W_pruned}, \code{mask}, \code{threshold},
 Zeroes the k = round(sparsity * size) smallest |W| using a STABLE
 sort, so ties are broken by position exactly as numpy's mergesort.
 }
+\examples{
+set.seed(2)
+W <- matrix(rnorm(20), 4, 5)
+morie_geron_weight_pruning(W, sparsity = 0.5)
+}

@@ -19,3 +19,9 @@ List with \code{precision}, \code{recall}, \code{thresholds}, \code{f1},
 Precision and recall at each distinct score; AP = sum (R_k - \verb{R_\{k-1\}})
 P_k, with no interpolation. \code{best_f1} picks the first maximum.
 }
+\examples{
+set.seed(1)
+y <- rbinom(30, 1, 0.5)
+s <- y + rnorm(30, 0, 0.7)
+morie_geron_precision_recall_curve(y, s)
+}

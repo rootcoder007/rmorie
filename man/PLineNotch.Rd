@@ -20,3 +20,10 @@ H(1) = 2 - 2 cos(wo) so the passband gain at DC is unity.  Extra zeros at n fo /
 A list with \code{y}, \code{coeffs}, \code{notched}, \code{f0}, \code{fs}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+fs <- 360
+tv <- seq(0, 2, by = 1 / fs)
+x <- sin(2 * pi * 5 * tv) + 0.5 * sin(2 * pi * 60 * tv)
+PLineNotch(x, fs = fs, f0 = 60)
+}
