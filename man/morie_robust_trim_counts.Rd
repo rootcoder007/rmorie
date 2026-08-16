@@ -14,3 +14,6 @@ morie_robust_trim_counts
 The value of \code{floor}.
 }
 \keyword{internal}
+\examples{
+morie_robust_trim_counts(n = 20, tr = 0.2)
+}

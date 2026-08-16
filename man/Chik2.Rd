@@ -14,3 +14,6 @@ k x 2 equal-proportions test -- eq. (14.3.2), p. 514
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{phat}, \code{props}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Chik2(successes = c(18, 12, 25), ns = c(30, 30, 40))
+}

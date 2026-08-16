@@ -17,3 +17,8 @@ A \code{morie_gr_dual}.
 \description{
 Elementary functions on dual numbers
 }
+\examples{
+x <- morie_gr_dual(2, 1)
+y <- exp(x)
+c(y$value, y$deriv)
+}

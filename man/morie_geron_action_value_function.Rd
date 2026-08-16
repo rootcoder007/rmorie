@@ -26,3 +26,12 @@ List with \code{q_value}, \code{q_values}, \code{values}, \code{advantage},
 Q = r_sa + gamma sum_s' P V^pi(s'); V from
 \code{\link[=morie_geron_state_value_function]{morie_geron_state_value_function()}}'s evaluation. Indices 0-based.
 }
+\examples{
+P <- array(0, c(2, 2, 2))
+P[1, , ] <- rbind(c(0.9, 0.1), c(0.2, 0.8))
+P[2, , ] <- rbind(c(0.5, 0.5), c(0.1, 0.9))
+R <- array(1, c(2, 2, 2))
+R[2, , ] <- 0.2
+pi <- rbind(c(0.5, 0.5), c(0.5, 0.5))
+morie_geron_action_value_function(0L, 1L, pi, P, R, gamma = 0.9)
+}

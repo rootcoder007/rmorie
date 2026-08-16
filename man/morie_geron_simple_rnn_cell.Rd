@@ -23,3 +23,9 @@ List with \code{h}, \code{pre_activation}, \code{derivative},
 h_t = tanh(Whh \verb{h_\{t-1\}} + Wxh x_t + b); the spectral norm of Whh
 decides vanishing versus exploding gradients.
 }
+\examples{
+set.seed(4)
+morie_geron_simple_rnn_cell(x_t = c(0.5, -0.2), h_prev = c(0.1, 0.3, 0),
+                            Whh = matrix(0.2, 3, 3),
+                            Wxh = matrix(0.1, 3, 2), b = rep(0, 3))
+}

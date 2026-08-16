@@ -15,3 +15,8 @@ A \code{morie_gr_dual}.
 \description{
 Arithmetic on dual numbers
 }
+\examples{
+x <- morie_gr_dual(2, 1)
+y <- x * x + 3 * x
+c(y$value, y$deriv)
+}

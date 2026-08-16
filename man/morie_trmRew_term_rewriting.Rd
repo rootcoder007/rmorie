@@ -34,3 +34,10 @@ Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
 Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 }
 \keyword{internal}
+\examples{
+x <- morie_unifAlg_var("x")
+zero <- morie_unifAlg_const("0")
+r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+t <- morie_unifAlg_app("plus", zero, morie_unifAlg_const("a"))
+morie_trmRew_term_rewriting(t, list(r1))
+}
