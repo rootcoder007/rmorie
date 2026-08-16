@@ -21,3 +21,10 @@ List with \code{output}, \code{scale}, \code{squeeze}, \code{hidden},
 z = GAP(X); s = sigmoid(W2 relu(W1 z)); Y = s * X per channel --
 sigmoid, not softmax, so channels are gated independently.
 }
+\examples{
+set.seed(4)
+X <- array(rnorm(4 * 4 * 3), c(4, 4, 3))
+r <- morie_geron_senet_squeeze_excite(X, W1 = matrix(0.3, 2, 3),
+                                      W2 = matrix(0.3, 3, 2))
+r$scale
+}

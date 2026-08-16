@@ -18,3 +18,9 @@ List with \code{silhouette}, \code{per_sample}, \code{per_cluster}, \code{a}, \c
 s_i = (b - a) / max(a, b) with \code{a} excluding the point itself;
 singleton clusters score 0.
 }
+\examples{
+set.seed(5)
+X <- rbind(matrix(rnorm(20, 0), 10, 2), matrix(rnorm(20, 4), 10, 2))
+lab <- rep(c(0L, 1L), each = 10)
+morie_geron_silhouette_score(X, lab)
+}

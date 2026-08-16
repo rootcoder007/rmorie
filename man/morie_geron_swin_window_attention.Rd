@@ -24,3 +24,11 @@ Attention inside M x M windows, O(HW M^2) rather than O((HW)^2);
 a non-zero \code{shift} rolls the partition by -shift on both spatial axes
 before windowing and rolls the output back.
 }
+\examples{
+set.seed(7)
+X <- array(rnorm(4 * 4 * 3), c(4, 4, 3))
+W <- diag(3)
+r <- morie_geron_swin_window_attention(X, window_size = 2,
+                                       WQ = W, WK = W, WV = W)
+str(r, max.level = 1)
+}

@@ -46,3 +46,7 @@ Wilcox, R. R. (2017) \emph{Modern Statistics for the Social and
 Behavioral Sciences: A Practical Introduction}, 2nd ed. CRC Press.
 }
 \keyword{robust}
+\examples{
+set.seed(5)
+morie_brunner_munzel(rnorm(20), rnorm(20, 0.8))
+}

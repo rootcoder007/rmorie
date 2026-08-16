@@ -25,3 +25,10 @@ activation scale per tensor from the requested percentile of |a|.
 numpy's default (linear) percentile interpolation is matched by
 stats::quantile(type = 7).
 }
+\examples{
+set.seed(1)
+model <- list(function(a) pmax(a, 0), function(a) a * 0.5)
+calib <- matrix(rnorm(20), 5, 4)
+r <- morie_geron_static_ptq(model, calib, bits = 8)
+str(r, max.level = 1)
+}

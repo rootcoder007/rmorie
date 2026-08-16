@@ -31,3 +31,10 @@ List with \code{theta_new}, \code{gradient}, \code{advantages}, \code{baseline},
 theta += alpha sum_t (G_t - b) grad log pi_t; \code{log_probs} must be
 score VECTORS, one row per step.
 }
+\examples{
+set.seed(2)
+S <- matrix(rnorm(15), 5, 3)
+G <- c(1, 0.9, 0.8, 0.7, 0.6)
+morie_geron_reinforce_policy_gradient(c(0, 0, 0), S, G, alpha = 0.01,
+                                      baseline = "mean")
+}

@@ -31,3 +31,11 @@ List with \code{reconstruction}, \code{code}, \code{activations},
 Encoder matrices in, tied transposes back out; the bottleneck is
 enforced and the tower's symmetry checked. No biases.
 }
+\examples{
+set.seed(6)
+x <- matrix(rnorm(12), 3, 4)
+W1 <- matrix(rnorm(8, 0, 0.3), 4, 2)
+r <- morie_geron_stacked_autoencoder(x, list(W1), activation = "relu",
+                                     tied = TRUE)
+str(r, max.level = 1)
+}

@@ -14,3 +14,6 @@ Multinomial goodness of fit -- Sec. 14.6, p. 528
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{expected}, \code{prob}, \code{n}, \code{k}.
 }
 \keyword{internal}
+\examples{
+Multgof(observed = c(22, 18, 20, 40), probs = c(0.2, 0.2, 0.2, 0.4))
+}

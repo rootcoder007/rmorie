@@ -46,3 +46,9 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+set.seed(5)
+X <- matrix(rnorm(20), 10, 2)
+y <- rep(c(-1, 1), 5)
+morie_svm_label_matrix(X, y)
+}

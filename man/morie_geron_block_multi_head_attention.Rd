@@ -22,3 +22,13 @@ List with \code{output} and \code{weights} (one per head).
 \description{
 Per-head multi-head attention used by the transformer blocks
 }
+\examples{
+set.seed(7)
+Q <- matrix(rnorm(12), 3, 4)
+KV <- matrix(rnorm(20), 5, 4)
+h1 <- matrix(rnorm(8, 0, 0.5), 4, 2)
+wts <- list(WQ = list(h1, h1), WK = list(h1, h1), WV = list(h1, h1),
+            WO = matrix(rnorm(16, 0, 0.5), 4, 4))
+r <- morie_geron_block_multi_head_attention(Q, KV, wts)
+dim(r$output)
+}
