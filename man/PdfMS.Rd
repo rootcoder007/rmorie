@@ -20,3 +20,6 @@ are returned rather than one being assumed for the other.
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+PdfMS(x = seq(-4, 4, by = 0.01), p = dnorm(seq(-4, 4, by = 0.01)))
+}

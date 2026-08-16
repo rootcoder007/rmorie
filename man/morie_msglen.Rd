@@ -17,3 +17,6 @@ list(length, p, nats)
 \description{
 Message length and its probability, in bits (eq. 28.15, p. 352)
 }
+\examples{
+morie_msglen(p = 1 / 8)
+}

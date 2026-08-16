@@ -17,3 +17,6 @@ list(likelihood, loglik, fa, fb)
 \description{
 Bent-coin likelihood (eq. 3.8, p. 51)
 }
+\examples{
+morie_bcoinlik(pa = 0.3, fa = 3, fb = 7)
+}

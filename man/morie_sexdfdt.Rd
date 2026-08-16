@@ -19,3 +19,6 @@ list(dfbardt, eta, g)
 \description{
 Mean-fitness growth rate under recombination (eq. 19.13, p. 273)
 }
+\examples{
+morie_sexdfdt(f = 0.6, g = 1000)
+}

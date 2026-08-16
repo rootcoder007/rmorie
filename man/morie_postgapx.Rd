@@ -17,3 +17,7 @@ list(quadform, logratio, ratio, errorbars)
 \description{
 Quadratic approximation to a posterior (eq. 28.5, p. 344)
 }
+\examples{
+A <- rbind(c(2, 0.3), c(0.3, 1.5))
+morie_postgapx(dw = c(0.2, -0.1), a = A)
+}
