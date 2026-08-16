@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{func}{See Usage.}
-\item{lower}{See Usage.}
-\item{upper}{See Usage.}
+\item{lower}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{upper}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{tol}{Defaults to \code{1e-04}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 }

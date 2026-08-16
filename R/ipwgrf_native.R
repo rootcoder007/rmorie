@@ -124,7 +124,7 @@
 #' @param mu1 A vector; indexed elementwise.
 #' @param mu0 A vector; indexed elementwise.
 #' @param e A vector; indexed elementwise.
-#' @param trim Defaults to \code{0.02}.
+#' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
 #' @return A list with \code{g}, \code{weights}.
 #' @export
 .ipwgrf_aipw_scores <- function(y, W, mu1, mu0, e, trim = 0.02) {
@@ -156,15 +156,15 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param W Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param n_folds Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.
 #' @param n_trees Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{120}.
 #' @param min_leaf Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.
 #' @param trim Passed to \code{.ipwgrf_aipw_scores}. Defaults to \code{0.02}.
 #' @param seed Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{0}.
-#' @param level Defaults to \code{0.95}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param break_outcome A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param break_propensity A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{ate}, \code{se}, \code{ci}, \code{scores}, \code{mu1}, \code{mu0}, \code{propensity}, \code{plug_in}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{trim}, \code{n}, \code{level}, \code{broken_outcome}, \code{broken_propensity}, \code{method}.

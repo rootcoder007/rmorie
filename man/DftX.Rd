@@ -9,7 +9,7 @@ DftX(x, fs = 1)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 the folding frequency fs/2 are the two real-valued bins.

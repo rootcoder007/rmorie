@@ -239,9 +239,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param G See Usage.
-#' @param mu See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param G Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{score}, \code{variance}, \code{n}.
 #' @export
 .saigeg_score_statistic <- function(y, G, mu) {
@@ -270,9 +270,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param G See Usage.
-#' @param mu See Usage.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param G Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Defaults to \code{0}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -340,7 +340,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Passed to \code{.saigeg_cgf}.
 #' @param mu Passed to \code{.saigeg_cgf}.
 #' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -394,8 +394,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param variance See Usage.
+#' @param s Coerced to numeric by the body, with \code{as.numeric}.
+#' @param variance Coerced to numeric by the body, with \code{as.numeric}.
 #' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{p_value}, \code{z}, \code{method}.
 #' @export
@@ -422,8 +422,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores_full See Usage.
-#' @param scores_naive See Usage.
+#' @param scores_full Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scores_naive Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{ratio}, \code{var_full}, \code{var_naive}, \code{n_variants}.
 #' @export
 .saigeg_variance_ratio <- function(scores_full, scores_naive) {
@@ -465,11 +465,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Passed to \code{.saigeg_score_statistic}.
 #' @param X Passed to \code{.saigeg_fit_null}.
 #' @param mu Optional; may be \code{NULL}. Passed to \code{.saigeg_score_statistic}.
-#' @param ratio Defaults to \code{1}.
+#' @param ratio Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param two_sided Passed to \code{.saigeg_normal_pvalue}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{p_value}, \code{p_normal}, \code{score}, \code{variance}, \code{z}, \code{case_control_ratio}, \code{n_cases}, \code{n_controls}, \code{variance_ratio}, \code{saddlepoint}, \code{method}, \code{why}.
 #' @export

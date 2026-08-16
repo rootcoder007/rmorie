@@ -8,9 +8,9 @@
 .morie_hrz_panel_residuals(y, x, beta)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{A matrix; the body checks with \code{is.matrix}.}
 \item{x}{A matrix; indexed by row and column.}
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}. See the file header for the source the module follows.

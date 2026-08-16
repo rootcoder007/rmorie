@@ -8,7 +8,7 @@
 .mfovsm_hist(obj, allow_one = FALSE)
 }
 \arguments{
-\item{obj}{See Usage.}
+\item{obj}{Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.}
 \item{allow_one}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

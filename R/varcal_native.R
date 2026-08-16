@@ -85,7 +85,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .varcal_phred <- function(p) {
@@ -112,7 +112,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reads See Usage.
+#' @param reads Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{lapply}.
 #' @export
 .varcal_norm_reads <- function(reads) {
@@ -230,7 +230,7 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #' @param candidate A list; the body reads \code{$position} from it.
 #' @param width Numeric; combined arithmetically in the body. Defaults to \code{21}.
 #' @param height Defaults to \code{100}.
-#' @param channels Defaults to \code{"base_quality_strand"}.
+#' @param channels Coerced to character by the body, with \code{as.character}. Defaults to \code{"base_quality_strand"}.
 #' @return A list with \code{reference_row}, \code{read_rows}, \code{n_reads}, \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
 #' @export
 varcal_encode_pileup <- function(reads, reference, candidate, width = 21,

@@ -13,7 +13,7 @@ ks_confidence_set(moment_fn, theta_grid, X, form = "sum", n_equality = 0L, level
 \item{X}{See Usage.}
 \item{form}{Defaults to \code{"sum"}.}
 \item{n_equality}{Defaults to \code{0L}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 \item{n_levels}{Defaults to \code{2L}.}
 \item{reps}{Defaults to \code{100L}.}
 \item{seed}{Defaults to \code{0L}.}

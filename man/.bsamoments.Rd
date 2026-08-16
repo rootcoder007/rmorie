@@ -8,7 +8,7 @@
 .bsamoments(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 standardised moment (3.0 for a Gaussian).

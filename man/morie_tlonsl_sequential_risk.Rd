@@ -8,10 +8,10 @@
 morie_tlonsl_sequential_risk(y, algorithm, loss = "squared", burn_in = 5, lags = 1)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{algorithm}{See Usage.}
 \item{loss}{Passed to \code{.tlonsl_loss}. Defaults to \code{"squared"}.}
-\item{burn_in}{Defaults to \code{5}.}
+\item{burn_in}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{lags}{Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.}
 }
 \description{

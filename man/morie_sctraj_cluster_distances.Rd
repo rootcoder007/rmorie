@@ -9,7 +9,7 @@ morie_sctraj_cluster_distances(X, labels, cov = "full", weights = NULL)
 }
 \arguments{
 \item{X}{Passed to \code{.sctraj_matrix}.}
-\item{labels}{See Usage.}
+\item{labels}{Coerced to character by the body, with \code{as.character}.}
 \item{cov}{One of \code{"diagonal"}, \code{"euclidean"}. Defaults to \code{"full"}.}
 \item{weights}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }

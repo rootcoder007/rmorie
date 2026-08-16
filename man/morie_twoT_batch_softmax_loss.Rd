@@ -11,7 +11,7 @@ morie_twoT_batch_softmax_loss(query_embeddings, item_embeddings, probabilities =
 \item{query_embeddings}{Passed to \code{.twoT_as_mat}.}
 \item{item_embeddings}{Passed to \code{.twoT_as_mat}.}
 \item{probabilities}{Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.}
-\item{temperature}{Defaults to \code{0.05}.}
+\item{temperature}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 }
 \description{
 A step of the twoT_native implementation. No other function in the package calls it. See the file header for the source the module follows.

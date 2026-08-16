@@ -266,7 +266,7 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 #'
 #' @param assignments A vector; indexed elementwise.
 #' @param annotations A vector; indexed elementwise.
-#' @param sources Defaults to \code{NULL}.
+#' @param sources Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @param min_support Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

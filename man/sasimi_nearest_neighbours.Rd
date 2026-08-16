@@ -10,7 +10,7 @@ sasimi_nearest_neighbours(query, fps, k = 5L, coefficient = "tanimoto")
 \arguments{
 \item{query}{See Usage.}
 \item{fps}{A vector; its length is taken and its elements indexed.}
-\item{k}{Defaults to \code{5L}.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{coefficient}{Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.}
 }
 \description{

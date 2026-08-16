@@ -8,7 +8,7 @@
 t3nodes(m = 401L, lim = 8)
 }
 \arguments{
-\item{m}{Defaults to \code{401L}.}
+\item{m}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{401L}.}
 \item{lim}{Numeric; combined arithmetically in the body. Defaults to \code{8}.}
 }
 \description{

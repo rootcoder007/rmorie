@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{

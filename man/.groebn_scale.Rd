@@ -8,7 +8,7 @@
 .groebn_scale(f, c)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Iterated over elementwise, with \code{lapply}.}
 \item{c}{Passed to \code{.groebn_as_fr}.}
 }
 \description{

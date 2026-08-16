@@ -230,7 +230,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param least Defaults to \code{1L}.
 #' @param what Defaults to \code{"signal"}.
 #' @return The value of \code{v}, as built in the body.
@@ -323,9 +323,9 @@
 #' survives. The 1/T factor is applied as written, so the output is
 #' scaled by fs.
 #'
-#' @param ecg See Usage.
-#' @param fs See Usage.
-#' @param pole Defaults to \code{0.995}.
+#' @param ecg Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param pole Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.995}.
 #' @return A list with \code{ecg_detrended}, \code{n}, \code{fs}, \code{pole}, \code{gain_dc}, \code{gain_at_half_hz}, \code{gain_at_nyquist}, \code{gain_relative_at_half_hz}, \code{dc_is_rejected}, \code{zero_at_z_equals_one}, \code{pole_restores_gain_above_the_wander_band}, \code{differentiates_by_the_one_over_T_factor}, \code{method}.
 #' @export
 BlWander <- function(ecg, fs, pole = 0.995) {
@@ -386,7 +386,7 @@ BlWander <- function(ecg, fs, pole = 0.995) {
 #'
 #' @param cp A vector; its length is taken and its elements indexed.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param qrs Defaults to \code{NULL}.
+#' @param qrs Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param mwin Numeric; combined arithmetically in the body. Defaults to \code{16}.
 #' @return A list with \code{notch}, \code{upstroke}, \code{s}, \code{p}, \code{mwin}, \code{fs}, \code{tolerancems}, \code{method}.
 #' @export
@@ -465,7 +465,7 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
 #'
 #' @param cp A vector; its length is taken.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param qrs See Usage.
+#' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param hr Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{upstroke}, \code{percussion}, \code{notch}, \code{dicwave}, \code{pep}, \code{et}, \code{pepc}, \code{etc}, \code{peppmean}, \code{etmean}, \code{pepcmean}, \code{etcmean}, \code{hr}, \code{fs}, \code{normpepc}, \code{normetcmale}, \code{normetcfemale}, \code{method}.
 #' @export
@@ -536,7 +536,7 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
 #'
 #' @param x Numeric; passed to \code{abs}.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param thresh Defaults to \code{1}.
+#' @param thresh Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{qrs}, \code{y0}, \code{y1}, \code{y2}, \code{y3}, \code{mask}, \code{thresh}, \code{fs}, \code{hr}, \code{method}.
 #' @export
 QrsDeriv <- function(x, fs, thresh = 1) {
@@ -606,7 +606,7 @@ QrsDeriv <- function(x, fs, thresh = 1) {
 #'
 #' @param ecg A vector; its length is taken.
 #' @param emg A vector; its length is taken and its elements indexed.
-#' @param qrs See Usage.
+#' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{hr}, \code{rms}, \code{meanfreq}, \code{rrms}, \code{rmnf}, \code{nbeats}, \code{fs}, \code{method}.
 #' @export
@@ -666,7 +666,7 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
 #' offset.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param qrs See Usage.
+#' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{pamp}, \code{qamp}, \code{ramp}, \code{samp}, \code{tamp}, \code{qrsdur}, \code{pdur}, \code{tdur}, \code{prdur}, \code{qtdur}, \code{qrsdurmean}, \code{prdurmean}, \code{qtdurmean}, \code{rampmean}, \code{nbeats}, \code{fs}, \code{method}.
 #' @export
@@ -769,10 +769,10 @@ EcgFeat <- function(x, qrs, fs) {
 #' source it follows.
 #'
 #' @param qrsdur Numeric; combined arithmetically in the body.
-#' @param stdev See Usage.
-#' @param rdur Defaults to \code{NULL}.
-#' @param sdur Defaults to \code{NULL}.
-#' @param qpresent Defaults to \code{NULL}.
+#' @param stdev Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rdur Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sdur Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param qpresent Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.
 #' @return A list with \code{qrsdurms}, \code{qrswide}, \code{lbbbdur}, \code{rbbbdur}, \code{sdurok}, \code{rdurok}, \code{qabsent}, \code{stdev}, \code{stfinding}, \code{required}, \code{method}.
 #' @export
 EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
@@ -828,7 +828,7 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
 #' says so.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param qrs See Usage.
+#' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param jofs Numeric; combined arithmetically in the body. Defaults to \code{0.06}.
 #' @param thresh Defaults to \code{0.1}.
@@ -1488,7 +1488,7 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
 #' it tolerant of P-wave amplitude and shape variation.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param qrs See Usage.
+#' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param template Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{p}, \code{template}, \code{windows}, \code{bandpass}, \code{fs}, \code{method}.
@@ -1598,7 +1598,7 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
 #' sensor.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param qrs See Usage.
+#' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param fsr Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @return A list with \code{edr}, \code{amp}, \code{times}, \code{resprate}, \code{fsr}, \code{nbeats}, \code{method}.
@@ -1673,7 +1673,7 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param hours Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param mindur Numeric; combined arithmetically in the body. Defaults to \code{10}.
-#' @param desat Defaults to \code{3}.
+#' @param desat Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @return A list with \code{events}, \code{nevents}, \code{ahi}, \code{desatdepth}, \code{hours}, \code{mindur}, \code{desat}, \code{fs}, \code{method}.
 #' @export
 ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
@@ -1846,7 +1846,7 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
 #' is what makes T detection tractable.
 #'
 #' @param chans A vector; its length is taken.
-#' @param qrs See Usage.
+#' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param tdur Numeric; combined arithmetically in the body. Defaults to \code{0.16}.
 #' @return A list with \code{t}, \code{onset}, \code{offset}, \code{length}, \code{tdur}, \code{nchan}, \code{fs}, \code{method}.
@@ -1930,8 +1930,8 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param win Numeric; combined arithmetically in the body. Defaults to \code{4}.
-#' @param conc Defaults to \code{0.6}.
-#' @param crest Defaults to \code{4}.
+#' @param conc Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.6}.
+#' @param crest Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.
 #' @return A list with \code{flag}, \code{domfreq}, \code{concentration}, \code{crest}, \code{rate}, \code{conc}, \code{crestmax}, \code{nwin}, \code{fraction}, \code{win}, \code{fs}, \code{method}.
 #' @export
 VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
@@ -2141,7 +2141,7 @@ QrsDrvSmth <- function(g1, mwin = 8) {
 #' pole at z = 1 is removed exactly rather than numerically.  fc = 11
 #' Hz, 5-sample delay, >35 dB at 60 Hz -- all tied to fs = 200 Hz.
 #'
-#' @param freq See Usage.
+#' @param freq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{a}, \code{fs}, \code{fsnote}, \code{method}.
 #' @export
@@ -2217,7 +2217,7 @@ QrsLPassDf <- function(x) {
 #'
 #' Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
 #'
-#' @param freq See Usage.
+#' @param freq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{fs}, \code{method}.
 #' @export
@@ -2278,7 +2278,7 @@ QrsHpLpDf <- function(x) {
 #' delay) minus a scaled lowpass, so it shares the running sum already
 #' computed.  fc = 5 Hz and 80 ms delay hold at fs = 200 Hz.
 #'
-#' @param freq See Usage.
+#' @param freq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{fs}, \code{fsnote}, \code{method}.
 #' @export
@@ -2444,7 +2444,7 @@ QrsMwInt <- function(x, nwin = 30, fs = NULL) {
 #' @param peaki Numeric; combined arithmetically in the body.
 #' @param spki Numeric; combined arithmetically in the body.
 #' @param npki Numeric; combined arithmetically in the body.
-#' @param issignal See Usage.
+#' @param issignal Coerced to logical by the body, with \code{as.logical}.
 #' @return A list with \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2}, \code{peaki}, \code{issignal}, \code{method}.
 #' @export
 QrsThresh <- function(peaki, spki, npki, issignal) {

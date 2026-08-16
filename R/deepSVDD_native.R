@@ -29,10 +29,10 @@
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param C Numeric; passed to \code{min}. Defaults to \code{1}.
-#' @param kernel Defaults to \code{"linear"}.
+#' @param kernel Coerced to character by the body, with \code{as.character}. Defaults to \code{"linear"}.
 #' @param gamma Passed to \code{.deep_svdd_kernel}. Defaults to \code{1}.
 #' @param tol Defaults to \code{1e-10}.
-#' @param max_sweeps Defaults to \code{500L}.
+#' @param max_sweeps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
 #' @return A list with \code{alpha}, \code{center}, \code{radius2}, \code{support}, \code{outliers}, \code{kkt_violation}, \code{kernel}, \code{C}, \code{method}.
 #' @export
 svdd <- function(X, C = 1.0, kernel = "linear", gamma = 1.0,

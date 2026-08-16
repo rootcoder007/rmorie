@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{B}{A list; the body reads \code{$a}, \code{$i}, \code{$j}, \code{$o} from it.}
-\item{invariants}{See Usage.}
+\item{invariants}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{radius}{A count; the body uses it as \code{seq_len(...)}.}
 \item{nbits}{A count; the body uses it as \code{integer(...)}.}
 \item{use_bond_order}{A flag; the body branches on it. Defaults to \code{TRUE}.}

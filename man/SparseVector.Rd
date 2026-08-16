@@ -9,10 +9,10 @@ SparseVector(queries, threshold, c = 1L, epsilon = 1, threshold_noise = 0, query
 }
 \arguments{
 \item{queries}{Passed to \code{.morie_spx_chkv}.}
-\item{threshold}{See Usage.}
-\item{c}{Defaults to \code{1L}.}
-\item{epsilon}{Defaults to \code{1}.}
-\item{threshold_noise}{Defaults to \code{0}.}
+\item{threshold}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{c}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.}
+\item{epsilon}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{threshold_noise}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{query_noise}{Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkv}.}
 }
 \description{

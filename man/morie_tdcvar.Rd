@@ -9,8 +9,8 @@ morie_tdcvar(y, A, L_t, time = NULL, contrast = "cumulative", kind = "binary", s
 }
 \arguments{
 \item{y}{Passed to \code{.tdcvar_vec}.}
-\item{A}{See Usage.}
-\item{L_t}{See Usage.}
+\item{A}{A list; the body checks with \code{is.list}.}
+\item{L_t}{A list; the body checks with \code{is.list}.}
 \item{time}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{contrast}{One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.}
 \item{kind}{Passed to \code{.tdcvar_ip_weights_history}. Defaults to \code{"binary"}.}

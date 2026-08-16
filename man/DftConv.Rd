@@ -8,8 +8,8 @@
 DftConv(x, h)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 PERIODIC: multiplying N-point DFTs gives the circular convolution of eq (3.90), and the linear one needs L >= Nx + Nh - 1 with both sequences zero-padded.  Both are returned so the wrap is visible.

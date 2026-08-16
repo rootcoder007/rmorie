@@ -12,10 +12,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param N_ij See Usage.
-#' @param N_j See Usage.
-#' @param beta See Usage.
-#' @param m See Usage.
+#' @param N_ij Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N_j Coerced to numeric by the body, with \code{as.numeric}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{predictive}, \code{lambda}, \code{f}, \code{interpolated}, \code{note}.
 #' @export
 dirichlet_predictive <- function(N_ij, N_j, beta, m) {
@@ -42,10 +42,10 @@ dirichlet_predictive <- function(N_ij, N_j, beta, m) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param N_ik See Usage.
-#' @param N_k See Usage.
-#' @param beta See Usage.
-#' @param m See Usage.
+#' @param N_ik Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N_k Coerced to numeric by the body, with \code{as.numeric}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{predictive}, \code{lambda}, \code{eq15_as_printed}, \code{note}.
 #' @export
 lda_predictive <- function(N_ik, N_k, beta, m) {
@@ -69,11 +69,11 @@ lda_predictive <- function(N_ik, N_k, beta, m) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param N_ijk See Usage.
-#' @param N_jk See Usage.
-#' @param beta See Usage.
-#' @param m See Usage.
-#' @param prior Defaults to \code{1}.
+#' @param N_ijk Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N_jk Coerced to numeric by the body, with \code{as.numeric}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
+#' @param prior Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{predictive}, \code{prior}, \code{smoothed_by}.
 #' @export
 bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
@@ -131,7 +131,7 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' arms on different generators, so this takes the bit-identical mirror
 #' of default_rng that .ghc_rng already provides.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Passed to \code{.ghc_unif}.
 #' @return The value of \code{.ghc_unif}.
 #' @export
@@ -145,17 +145,17 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param docs See Usage.
-#' @param T See Usage.
-#' @param V See Usage.
-#' @param alpha Defaults to \code{0.5}.
-#' @param beta Defaults to \code{0.5}.
-#' @param m Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
-#' @param prior Defaults to \code{1}.
-#' @param iters Defaults to \code{200L}.
+#' @param docs Iterated over elementwise, with \code{lapply}.
+#' @param T Coerced to integer by the body, with \code{as.integer}.
+#' @param V Coerced to integer by the body, with \code{as.integer}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param m Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param prior Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param seed Passed to \code{.lcg_uniform}. Defaults to \code{0L}.
-#' @param burn Defaults to \code{50L}.
+#' @param burn Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.
 #' @return A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta}, \code{N_ijk}, \code{N_jk}, \code{T}, \code{V}, \code{prior}, \code{iterations}, \code{burn_in}, \code{samples_kept}, \code{method}, \code{caveat}.
 #' @export
 gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
@@ -301,14 +301,14 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param docs See Usage.
-#' @param T See Usage.
-#' @param V See Usage.
+#' @param docs Iterated over elementwise, with \code{lapply}.
+#' @param T Coerced to integer by the body, with \code{as.integer}.
+#' @param V Coerced to integer by the body, with \code{as.integer}.
 #' @param z Passed to \code{.log_evidence}.
-#' @param alpha Defaults to \code{0.5}.
-#' @param beta Defaults to \code{0.5}.
-#' @param m Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param m Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{.log_evidence}.
 #' @export
 log_evidence <- function(docs, T, V, z, alpha = 0.5, beta = 0.5,

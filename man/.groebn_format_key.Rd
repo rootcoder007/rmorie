@@ -8,7 +8,7 @@
 .groebn_format_key(e)
 }
 \arguments{
-\item{e}{See Usage.}
+\item{e}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module. See the file header for the source the module follows.

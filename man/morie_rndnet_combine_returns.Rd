@@ -8,11 +8,11 @@
 morie_rndnet_combine_returns(reward_ext, reward_int, gamma_ext = 0.999, gamma_int = 0.99, done = NULL)
 }
 \arguments{
-\item{reward_ext}{See Usage.}
-\item{reward_int}{See Usage.}
+\item{reward_ext}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{reward_int}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{gamma_ext}{Numeric; combined arithmetically in the body. Defaults to \code{0.999}.}
 \item{gamma_int}{Numeric; combined arithmetically in the body. Defaults to \code{0.99}.}
-\item{done}{Defaults to \code{NULL}.}
+\item{done}{Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.}
 }
 \description{
 stream is episodic (truncated at each `done`), the intrinsic stream is non-episodic.

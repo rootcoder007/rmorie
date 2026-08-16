@@ -8,7 +8,7 @@
 morie_unifAlg_occurs(name, t)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Coerced to character by the body, with \code{as.character}.}
 \item{t}{Passed to \code{morie_unifAlg_variables}.}
 }
 \description{

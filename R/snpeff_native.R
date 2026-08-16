@@ -53,7 +53,7 @@ codon_table <- function() .SNPEFF_CODONS
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq See Usage.
+#' @param seq Coerced to character by the body, with \code{as.character}.
 #' @param to_stop A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A character value.
 #' @export
@@ -131,14 +131,14 @@ translate <- function(seq, to_stop = FALSE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cds See Usage.
+#' @param cds Coerced to character by the body, with \code{as.character}.
 #' @param pos Numeric; combined arithmetically in the body.
 #' @param ref A vector; its length is taken.
 #' @param alt A vector; its length is taken.
 #' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param upstream Defaults to \code{5000}.
 #' @param downstream Defaults to \code{5000}.
-#' @param transcript_len Defaults to \code{NULL}.
+#' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{.snpeff_pack}.
 #' @export
 annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
@@ -228,12 +228,12 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cds See Usage.
+#' @param cds Coerced to character by the body, with \code{as.character}.
 #' @param variants A vector; its length is taken and its elements indexed.
 #' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param upstream Defaults to \code{5000}.
 #' @param downstream Defaults to \code{5000}.
-#' @param transcript_len Defaults to \code{NULL}.
+#' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{annotations}, \code{effect_counts}, \code{impact_counts}, \code{n_variants}, \code{protein}, \code{method}, \code{note}.
 #' @export
 snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,

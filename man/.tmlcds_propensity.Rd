@@ -11,7 +11,7 @@
 \item{d}{Passed to \code{.tmlcds_logit_irls}.}
 \item{cols}{Passed to \code{.tmlcds_design}.}
 \item{n}{Passed to \code{.tmlcds_design}.}
-\item{penalty}{Defaults to \code{0}.}
+\item{penalty}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{trim}{Numeric; combined arithmetically in the body. Defaults to \code{0.005}.}
 }
 \description{

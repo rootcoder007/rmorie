@@ -10,7 +10,7 @@ morie_rouge(candidate, reference, variant = "L", n = 1, alpha = 1.2, beta = 1)
 \arguments{
 \item{candidate}{Passed to \code{morie_rouge_l}.}
 \item{reference}{Passed to \code{morie_rouge_l}.}
-\item{variant}{Defaults to \code{"L"}.}
+\item{variant}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"L"}.}
 \item{n}{Passed to \code{morie_rouge_n}. Defaults to \code{1}.}
 \item{alpha}{Passed to \code{morie_rouge_w}. Defaults to \code{1.2}.}
 \item{beta}{Passed to \code{morie_rouge_l}. Defaults to \code{1}.}

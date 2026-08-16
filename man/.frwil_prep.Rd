@@ -8,7 +8,7 @@
 .frwil_prep(compounds, activity)
 }
 \arguments{
-\item{compounds}{See Usage.}
+\item{compounds}{Iterated over elementwise, with \code{lapply}.}
 \item{activity}{See Usage.}
 }
 \description{

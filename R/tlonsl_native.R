@@ -63,8 +63,8 @@
 #'
 #' summary, which is exactly the i.i.d. case.
 #'
-#' @param history See Usage.
-#' @param lags Defaults to \code{1}.
+#' @param history Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lags Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return The value of \code{z}, as built in the body.
 #' @export
 morie_tlonsl_summary_measure <- function(history, lags=1) {
@@ -92,10 +92,10 @@ morie_tlonsl_summary_measure <- function(history, lags=1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param algorithm See Usage.
 #' @param loss Passed to \code{.tlonsl_loss}. Defaults to \code{"squared"}.
-#' @param burn_in Defaults to \code{5}.
+#' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param lags Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.
 #' @return A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \code{note}.
 #' @export
@@ -136,8 +136,8 @@ morie_tlonsl_sequential_risk <- function(y, algorithm, loss="squared",
 #'
 #' cumulative losses are sufficient, so the update is O(1) in memory.
 #'
-#' @param cum_losses See Usage.
-#' @param eta Defaults to \code{1}.
+#' @param cum_losses Coerced to numeric by the body, with \code{as.numeric}.
+#' @param eta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 morie_tlonsl_update_weights <- function(cum_losses, eta=1.0) {
@@ -158,7 +158,7 @@ morie_tlonsl_update_weights <- function(cum_losses, eta=1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param library A vector; its length is taken and its elements indexed.
 #' @param loss Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{"squared"}.
 #' @param burn_in Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{5}.

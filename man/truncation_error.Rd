@@ -8,8 +8,8 @@
 truncation_error(alpha, K)
 }
 \arguments{
-\item{alpha}{See Usage.}
-\item{K}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{K}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the slowdp_native implementation. Called by \code{decay_diagnostics}, \code{sticks_for_tolerance}, \code{truncated_dp}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 difference(y, d = 0, D = 0, s = 1)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{d}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.}
 \item{D}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.}
 \item{s}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}

@@ -10,10 +10,10 @@ Gtfd(x, fs = 1, kernel = "spwvd", nfreq = NULL, tsmooth = NULL, fsmooth = NULL)
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{kernel}{Defaults to \code{"spwvd"}.}
+\item{kernel}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"spwvd"}.}
 \item{nfreq}{Defaults to \code{NULL}.}
-\item{tsmooth}{Defaults to \code{NULL}.}
-\item{fsmooth}{Defaults to \code{NULL}.}
+\item{tsmooth}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{fsmooth}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

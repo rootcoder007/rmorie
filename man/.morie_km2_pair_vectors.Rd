@@ -8,7 +8,7 @@
 .morie_km2_pair_vectors(A, E, name)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Coerced to list by the body, with \code{as.list}.}
 \item{E}{A vector; indexed elementwise.}
 \item{name}{See Usage.}
 }

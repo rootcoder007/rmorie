@@ -8,7 +8,7 @@
 .morie_fairness_as_1d(x, name)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to vector by the body, with \code{as.vector}.}
 \item{name}{See Usage.}
 }
 \description{

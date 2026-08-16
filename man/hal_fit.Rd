@@ -9,11 +9,11 @@ hal_fit(X, y, lam = 1, iters = 2000L, step = 0.05, max_order = 2L, knots = NULL,
 }
 \arguments{
 \item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{lam}{Defaults to \code{1}.}
-\item{iters}{Defaults to \code{2000L}.}
-\item{step}{Defaults to \code{0.05}.}
-\item{max_order}{Defaults to \code{2L}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.}
+\item{step}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{max_order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
 \item{knots}{Defaults to \code{NULL}.}
 \item{intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

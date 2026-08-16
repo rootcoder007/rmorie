@@ -8,9 +8,9 @@
 RespSound(length_m = 0.1, radius_m = 0.009, freqs = NULL, rho = 1.2, c = 343, mu = 1.8e-05, P0 = 101325, eta = 1.4, lam = 0.026, cp = 1005)
 }
 \arguments{
-\item{length_m}{Defaults to \code{0.1}.}
-\item{radius_m}{Defaults to \code{0.009}.}
-\item{freqs}{Defaults to \code{NULL}.}
+\item{length_m}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{radius_m}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.009}.}
+\item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rho}{Numeric; passed to \code{min}. Defaults to \code{1.2}.}
 \item{c}{Numeric; passed to \code{min}. Defaults to \code{343}.}
 \item{mu}{Numeric; passed to \code{min}. Defaults to \code{1.8e-05}.}

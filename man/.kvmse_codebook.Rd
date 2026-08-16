@@ -8,9 +8,9 @@
 .kvmse_codebook(b, iters = 200, grid = 2001, lo = -6, hi = 6)
 }
 \arguments{
-\item{b}{See Usage.}
-\item{iters}{Defaults to \code{200}.}
-\item{grid}{Defaults to \code{2001}.}
+\item{b}{Coerced to integer by the body, with \code{as.integer}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
+\item{grid}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2001}.}
 \item{lo}{Numeric; combined arithmetically in the body. Defaults to \code{-6}.}
 \item{hi}{Numeric; combined arithmetically in the body. Defaults to \code{6}.}
 }

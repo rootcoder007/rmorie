@@ -8,8 +8,8 @@
 truncated_dp(alpha, K, base_sampler = NULL, rng = NULL, seed = 0, renormalise = TRUE)
 }
 \arguments{
-\item{alpha}{See Usage.}
-\item{K}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{K}{Coerced to integer by the body, with \code{as.integer}.}
 \item{base_sampler}{Defaults to \code{NULL}.}
 \item{rng}{Defaults to \code{NULL}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}

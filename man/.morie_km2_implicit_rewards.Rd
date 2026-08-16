@@ -8,8 +8,8 @@
 .morie_km2_implicit_rewards(pi_star, pi_ref, beta)
 }
 \arguments{
-\item{pi_star}{See Usage.}
-\item{pi_ref}{See Usage.}
+\item{pi_star}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{pi_ref}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{beta}{Numeric; combined arithmetically in the body.}
 }
 \description{

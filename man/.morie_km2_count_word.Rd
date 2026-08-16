@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{word}{See Usage.}
-\item{outputs}{See Usage.}
+\item{outputs}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. No other function in the package calls it. See the file header for the source the module follows.

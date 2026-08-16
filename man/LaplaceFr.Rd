@@ -8,10 +8,10 @@
 LaplaceFr(h, omega, t = NULL, T = NULL)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{omega}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
-\item{T}{Defaults to \code{NULL}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 imaginary axis lies inside the region of convergence, which holds for a causal stable system and fails for an unstable one.

@@ -8,7 +8,7 @@
 #' stream, not a low-discrepancy one -- a shared quasi-random sequence
 #' correlates the resample positions and shrinks the bootstrap spread.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
 .msm_lcg <- function(seed) {

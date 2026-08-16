@@ -8,7 +8,7 @@
 .jsonlt_rtype(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Numeric; the body checks with \code{is.numeric}.}
 }
 \description{
 A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}. See the file header for the source the module follows.

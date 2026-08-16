@@ -10,7 +10,7 @@ encode_mask_prompt(mask, image_embedding, weight = 1)
 \arguments{
 \item{mask}{See Usage.}
 \item{image_embedding}{See Usage.}
-\item{weight}{Defaults to \code{1}.}
+\item{weight}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the samseg_native implementation. No other function in the package calls it. See the file header for the source the module follows.

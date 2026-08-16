@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{G}{See Usage.}
+\item{G}{Iterated over elementwise, with \code{Filter}.}
 \item{order}{Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.}
 }
 \description{

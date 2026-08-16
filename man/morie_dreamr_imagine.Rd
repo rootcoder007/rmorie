@@ -12,7 +12,7 @@ morie_dreamr_imagine(state, action_model, transition, reward_model, horizon, val
 \item{action_model}{See Usage.}
 \item{transition}{See Usage.}
 \item{reward_model}{See Usage.}
-\item{horizon}{See Usage.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{value_model}{Defaults to \code{NULL}.}
 }
 \description{

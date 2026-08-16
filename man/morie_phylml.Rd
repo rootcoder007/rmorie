@@ -11,7 +11,7 @@ morie_phylml(tree, seqs, pi = NULL, u = 1)
 \item{tree}{See Usage.}
 \item{seqs}{A vector; its length is taken.}
 \item{pi}{Passed to \code{.phylml_pi}.}
-\item{u}{Defaults to \code{1}.}
+\item{u}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the phylml_native implementation. Called by \code{.phylby_log_posterior}, \code{optimise_branch}. See the file header for the source the module follows.

@@ -10,7 +10,7 @@
 \arguments{
 \item{n}{Numeric; combined arithmetically in the body.}
 \item{k}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 LCG-seeded Part of the geron_w4c_native implementation; see the file header for the source it follows.

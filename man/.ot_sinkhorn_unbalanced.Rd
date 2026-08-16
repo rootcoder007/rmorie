@@ -13,7 +13,7 @@
 \item{C}{Numeric; combined arithmetically in the body.}
 \item{eps}{Numeric; combined arithmetically in the body.}
 \item{lam}{Numeric; combined arithmetically in the body.}
-\item{n_iter}{Defaults to \code{200L}.}
+\item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 }
 \description{
 A step of the helpers_ot implementation. Called by \code{Otunbal}. See the file header for the source the module follows.

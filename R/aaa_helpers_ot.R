@@ -14,7 +14,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param normalise A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
@@ -104,7 +104,7 @@
 #' @param b A vector; its length is taken.
 #' @param C A matrix; indexed by row and column.
 #' @param eps Numeric; combined arithmetically in the body.
-#' @param n_iter Defaults to \code{200L}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @return A list with \code{T}, \code{f}, \code{g}.
 #' @export
 .ot_sinkhorn <- function(a, b, C, eps, n_iter = 200L) {
@@ -139,7 +139,7 @@
 #' @param C Numeric; combined arithmetically in the body.
 #' @param eps Numeric; combined arithmetically in the body.
 #' @param lam Numeric; combined arithmetically in the body.
-#' @param n_iter Defaults to \code{200L}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
 .ot_sinkhorn_unbalanced <- function(a, b, C, eps, lam, n_iter = 200L) {
@@ -250,7 +250,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param basis See Usage.
+#' @param basis Iterated over elementwise, with \code{vapply}.
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
@@ -333,7 +333,7 @@
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
 #' @param C A matrix; passed to \code{nrow}.
-#' @param max_pivots Defaults to \code{20000L}.
+#' @param max_pivots Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000L}.
 #' @return A list with \code{T}, \code{cost}.
 #' @export
 .ot_emd <- function(a, b, C, max_pivots = 20000L) {
@@ -430,9 +430,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m1 See Usage.
+#' @param m1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S1 A matrix; passed to \code{as.matrix}.
-#' @param m2 See Usage.
+#' @param m2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S2 A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
@@ -457,8 +457,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
@@ -476,8 +476,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param grid See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param grid Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .ot_quantiles <- function(x, grid) {
@@ -513,7 +513,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param theta See Usage.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .ot_project <- function(X, theta) as.numeric(as.matrix(X) %*% as.numeric(theta))

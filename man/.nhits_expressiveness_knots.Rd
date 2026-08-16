@@ -8,8 +8,8 @@
 .nhits_expressiveness_knots(horizon, ratio)
 }
 \arguments{
-\item{horizon}{See Usage.}
-\item{ratio}{See Usage.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
+\item{ratio}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}. See the file header for the source the module follows.

@@ -8,9 +8,9 @@
 FDiff(x, T = 1, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{T}{Defaults to \code{1}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 "is required in order to obtain the rate of change of the signal with respect to the true time".  Highpass, and it amplifies noise -- eq (3.128) is the book\'s remedy.

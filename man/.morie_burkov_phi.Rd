@@ -8,7 +8,7 @@
 .morie_burkov_phi(name)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{A function; the body checks with \code{is.function}.}
 }
 \description{
 A step of the burkov_lm_native implementation. Called by \code{morie_burkov_layer1_output}, \code{morie_burkov_layer2_output}. See the file header for the source the module follows.

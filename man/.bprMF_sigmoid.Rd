@@ -8,7 +8,7 @@
 .bprMF_sigmoid(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bprMF_native implementation. Called by \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr}, \code{bpr_sigmoid}. See the file header for the source the module follows.

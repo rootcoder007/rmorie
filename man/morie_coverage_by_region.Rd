@@ -8,12 +8,12 @@
 morie_coverage_by_region(theta, level = 0.95, lower_bound = 0, draws = 20000L, seed = 0, split = NULL)
 }
 \arguments{
-\item{theta}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{level}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
-\item{lower_bound}{Defaults to \code{0}.}
-\item{draws}{Defaults to \code{20000L}.}
+\item{lower_bound}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{draws}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000L}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
-\item{split}{Defaults to \code{NULL}.}
+\item{split}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bndpcb_native implementation. Called by \code{morie_bet_violation}. See the file header for the source the module follows.

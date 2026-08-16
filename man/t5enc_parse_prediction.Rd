@@ -8,8 +8,8 @@
 t5enc_parse_prediction(text, labels = NULL)
 }
 \arguments{
-\item{text}{See Usage.}
-\item{labels}{Defaults to \code{NULL}.}
+\item{text}{Coerced to character by the body, with \code{as.character}.}
+\item{labels}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the t5enc_native implementation. Called by \code{morie_t5enc}. See the file header for the source the module follows.

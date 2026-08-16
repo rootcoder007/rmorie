@@ -8,8 +8,8 @@
 .schab_random_walk_structure(n_time, order = 1L)
 }
 \arguments{
-\item{n_time}{See Usage.}
-\item{order}{Defaults to \code{1L}.}
+\item{n_time}{Coerced to integer by the body, with \code{as.integer}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the file header for the source the module follows.

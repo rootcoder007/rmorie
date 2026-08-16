@@ -10,8 +10,8 @@
 \arguments{
 \item{w}{See Usage.}
 \item{eta}{See Usage.}
-\item{grid_u}{See Usage.}
-\item{grid_z}{See Usage.}
+\item{grid_u}{Iterated over elementwise, with \code{vapply}.}
+\item{grid_z}{Iterated over elementwise, with \code{vapply}.}
 \item{nu_U}{Numeric; combined arithmetically in the body.}
 \item{nu_eps}{Numeric; combined arithmetically in the body.}
 \item{n_tau}{Defaults to \code{2001L}.}

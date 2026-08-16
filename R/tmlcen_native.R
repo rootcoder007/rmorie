@@ -262,8 +262,8 @@
 #'
 #' monitoring, Sec. 8.5.
 #'
-#' @param times See Usage.
-#' @param deltas See Usage.
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
+#' @param deltas Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{L}, \code{R}.
 #' @export
 morie_coarsen_interval <- function(times, deltas) {
@@ -297,9 +297,9 @@ morie_coarsen_interval <- function(times, deltas) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param times See Usage.
-#' @param censored See Usage.
-#' @param A Defaults to \code{NULL}.
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
+#' @param censored Coerced to numeric by the body, with \code{as.numeric}.
+#' @param A Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Passed to \code{.tmlcen_W_mat}.
 #' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param by_covariate Defaults to \code{TRUE}.
@@ -374,7 +374,7 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 #' source it follows.
 #'
 #' @param W Passed to \code{.tmlcen_W_mat}.
-#' @param A See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param times Passed to \code{.tmlcen_coerce_subject_list}.
 #' @param deltas Passed to \code{.tmlcen_coerce_subject_list}.
 #' @param a Defaults to \code{1}.
@@ -448,7 +448,7 @@ morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
 #'
 #' @param time Passed to \code{morie_ipcw_interval}.
 #' @param event Passed to \code{morie_ipcw_interval}.
-#' @param censor See Usage.
+#' @param censor Coerced to numeric by the body, with \code{as.numeric}.
 #' @param treatment Passed to \code{morie_ipcw_interval}.
 #' @param covariates Passed to \code{morie_ipcw_interval}.
 #' @param kind Compared against \code{"interval"}. Defaults to \code{"right"}.

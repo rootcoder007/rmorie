@@ -11,7 +11,7 @@
 \item{pseudo}{A vector; indexed elementwise.}
 \item{L0}{A matrix; indexed by row and column.}
 \item{A0}{A vector; indexed elementwise.}
-\item{idx}{See Usage.}
+\item{idx}{Iterated over elementwise, with \code{lapply}.}
 \item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{

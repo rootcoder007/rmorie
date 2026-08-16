@@ -13,12 +13,12 @@ selective_scan(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NUL
 \item{W_B}{A matrix; passed to \code{as.matrix}.}
 \item{W_C}{A matrix; passed to \code{as.matrix}.}
 \item{W_delta}{A matrix; passed to \code{as.matrix}.}
-\item{delta_bias}{Defaults to \code{NULL}.}
-\item{b_B}{Defaults to \code{NULL}.}
-\item{b_C}{Defaults to \code{NULL}.}
-\item{b_delta}{Defaults to \code{0}.}
+\item{delta_bias}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_B}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{rule}{Defaults to \code{"zoh"}.}
-\item{D_skip}{Defaults to \code{NULL}.}
+\item{D_skip}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mambss_native implementation. Called by \code{morie_mambss}, \code{s6_layer}. See the file header for the source the module follows.

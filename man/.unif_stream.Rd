@@ -8,7 +8,7 @@
 .unif_stream(seed, block = 8192L)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}.}
 \item{block}{Defaults to \code{8192L}.}
 }
 \description{

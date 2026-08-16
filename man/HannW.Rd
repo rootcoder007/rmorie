@@ -8,7 +8,7 @@
 HannW(N)
 }
 \arguments{
-\item{N}{See Usage.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 ends, so overlapped Hann windows add to a constant at 50 per cent overlap -- the property that makes it the default for overlap-add analysis. Not to be confused with the Hann FILTER of eq (3.100), a three-tap 1:2:1 smoother; this is a taper applied to a data segment.

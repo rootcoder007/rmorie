@@ -8,9 +8,9 @@
 amortised_cost(encoder_ms, decoder_ms, n_prompts)
 }
 \arguments{
-\item{encoder_ms}{See Usage.}
-\item{decoder_ms}{See Usage.}
-\item{n_prompts}{See Usage.}
+\item{encoder_ms}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{decoder_ms}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_prompts}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the samseg_native implementation. No other function in the package calls it. See the file header for the source the module follows.

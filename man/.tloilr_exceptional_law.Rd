@@ -8,7 +8,7 @@
 .tloilr_exceptional_law(B, tol = 1e-09)
 }
 \arguments{
-\item{B}{See Usage.}
+\item{B}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }
 \description{

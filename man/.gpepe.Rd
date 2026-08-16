@@ -8,7 +8,7 @@
 .gpepe(sigma2, x_star, eigenvalues)
 }
 \arguments{
-\item{sigma2}{See Usage.}
+\item{sigma2}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{x_star}{Passed to \code{.gpflat}.}
 \item{eigenvalues}{Passed to \code{.gpflat}.}
 }

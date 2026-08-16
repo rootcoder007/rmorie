@@ -8,8 +8,8 @@
 morie_tmlcic_cluster_weights(cluster, weights = NULL)
 }
 \arguments{
-\item{cluster}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{cluster}{Coerced to character by the body, with \code{as.character}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 et al. (2019) require sum_i alpha_ij = 1 within each cluster. The default alpha_ij = 1/N_j is their stated choice.

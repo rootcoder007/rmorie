@@ -8,7 +8,7 @@
 EngCap(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70), amp_range = c(0.5, 2), width_ms = 0.3)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{distance_m}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{n_fibers}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40}.}
 \item{cv_range}{A vector; indexed elementwise. Defaults to \code{c(45, 70)}.}

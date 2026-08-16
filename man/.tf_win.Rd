@@ -8,7 +8,7 @@
 .tf_win(name, m)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Coerced to character by the body, with \code{as.character}.}
 \item{m}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{

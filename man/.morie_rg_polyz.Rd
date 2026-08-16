@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{coefs}{A vector; its length is taken.}
-\item{z}{See Usage.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{BwHp}, \code{Comb} and 6 others in the module. See the file header for the source the module follows.

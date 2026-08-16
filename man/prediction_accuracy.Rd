@@ -8,8 +8,8 @@
 prediction_accuracy(predicted, observed, fold = 2)
 }
 \arguments{
-\item{predicted}{See Usage.}
-\item{observed}{See Usage.}
+\item{predicted}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{observed}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fold}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 }
 \description{

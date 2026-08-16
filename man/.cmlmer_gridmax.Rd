@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{f}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
-\item{points}{Defaults to \code{201L}.}
-\item{stages}{Defaults to \code{4L}.}
+\item{lo}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{hi}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{points}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.}
+\item{stages}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
 }
 \description{
 than floating-point noise. Going finer would push the comparison back below the noise floor and reintroduce exactly the disagreement this exists to remove.

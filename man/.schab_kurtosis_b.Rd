@@ -8,7 +8,7 @@
 .schab_kurtosis_b(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_rest_shared implementation. Called by \code{.schab_moran_moments}. See the file header for the source the module follows.

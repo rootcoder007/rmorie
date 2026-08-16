@@ -8,7 +8,7 @@
 morie_haldane(distance)
 }
 \arguments{
-\item{distance}{See Usage.}
+\item{distance}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rqtmpl_native implementation. Called by \code{morie_scan_interval}. See the file header for the source the module follows.

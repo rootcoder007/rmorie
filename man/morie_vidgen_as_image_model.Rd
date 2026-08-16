@@ -8,7 +8,7 @@
 morie_vidgen_as_image_model(video, block)
 }
 \arguments{
-\item{video}{See Usage.}
+\item{video}{Iterated over elementwise, with \code{lapply}.}
 \item{block}{See Usage.}
 }
 \description{

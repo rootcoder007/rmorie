@@ -186,7 +186,7 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 #' 4 (T/100)^(2/9).
 #'
 #' @param u A vector; its length is taken.
-#' @param bandwidth Defaults to \code{NULL}.
+#' @param bandwidth Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 .nw_lrv <- function(u, bandwidth = NULL) {

@@ -8,13 +8,13 @@
 CLogPz(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0), c_k = complex(0), d_k = complex(0), M_I = NULL, M_O = NULL, N_I = NULL, N_O = NULL)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 \item{A}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{r}{A flag; the body branches on it. Defaults to \code{0}.}
-\item{a_k}{Defaults to \code{complex(0)}.}
-\item{b_k}{Defaults to \code{complex(0)}.}
-\item{c_k}{Defaults to \code{complex(0)}.}
-\item{d_k}{Defaults to \code{complex(0)}.}
+\item{a_k}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.}
+\item{b_k}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.}
+\item{c_k}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.}
+\item{d_k}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.}
 \item{M_I}{Defaults to \code{NULL}.}
 \item{M_O}{Defaults to \code{NULL}.}
 \item{N_I}{Defaults to \code{NULL}.}

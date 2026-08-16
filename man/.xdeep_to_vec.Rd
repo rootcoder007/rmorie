@@ -8,7 +8,7 @@
 .xdeep_to_vec(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the xdeep_native implementation. Called by \code{xdeep_hadamard}, \code{xdeep_xdeepfm_score}. See the file header for the source the module follows.

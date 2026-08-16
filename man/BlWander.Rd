@@ -8,9 +8,9 @@
 BlWander(ecg, fs, pole = 0.995)
 }
 \arguments{
-\item{ecg}{See Usage.}
-\item{fs}{See Usage.}
-\item{pole}{Defaults to \code{0.995}.}
+\item{ecg}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{pole}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.995}.}
 }
 \description{
 zero at z = 1 kills DC (which is what baseline wander is); the pole close to it restores the gain to roughly unity by about 0.5 Hz so the QRS survives. The 1/T factor is applied as written, so the output is scaled by fs.

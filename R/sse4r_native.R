@@ -59,7 +59,7 @@
 #' source it follows.
 #'
 #' @param item_embeddings A matrix; passed to \code{as.matrix}.
-#' @param user_embedding See Usage.
+#' @param user_embedding Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width}, \code{length}, \code{note}.
 #' @export
 .sse4r_personalise <- function(item_embeddings, user_embedding) {
@@ -86,9 +86,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param indices See Usage.
-#' @param table_size See Usage.
-#' @param p Defaults to \code{0}.
+#' @param indices Coerced to integer by the body, with \code{as.integer}.
+#' @param table_size Coerced to integer by the body, with \code{as.integer}.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{indices}, \code{replaced}, \code{p}, \code{rate}, \code{note}.
 #' @export
@@ -157,8 +157,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param table_size See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
+#' @param table_size Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{expected_rate}, \code{p}, \code{table_size}, \code{note}.
 #' @export
 .sse4r_expected_replacement <- function(p, table_size) {
@@ -181,10 +181,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param user_dim See Usage.
-#' @param item_dim See Usage.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
+#' @param user_dim Coerced to integer by the body, with \code{as.integer}.
+#' @param item_dim Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{user_params}, \code{item_params}, \code{total}, \code{user_share}, \code{note}.
 #' @export
 .sse4r_parameter_count <- function(n_users, n_items, user_dim, item_dim) {
@@ -216,7 +216,7 @@
 #' @param user_embedding Passed to \code{.sse4r_personalise}.
 #' @param item_table A matrix; passed to \code{as.matrix}.
 #' @param attend Defaults to \code{NULL}.
-#' @param top_k Defaults to \code{3}.
+#' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @return A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context}, \code{method}, \code{note}.
 #' @export
 morie_sse4r <- function(sequence, user_embedding, item_table,

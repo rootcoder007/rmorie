@@ -8,7 +8,7 @@
 exposure_summary(A_history, how = "cumulative")
 }
 \arguments{
-\item{A_history}{See Usage.}
+\item{A_history}{Iterated over elementwise, with \code{lapply}.}
 \item{how}{One of \code{"cumulative"}, \code{"duration"}, \code{"final"}. Defaults to \code{"cumulative"}.}
 }
 \description{

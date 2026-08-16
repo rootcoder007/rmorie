@@ -8,8 +8,8 @@
 PCepSum(x, h, square = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{square}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

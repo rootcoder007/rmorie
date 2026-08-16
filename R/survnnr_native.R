@@ -77,7 +77,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' the source it follows.
 #'
 #' @param d See Usage.
-#' @param hidden See Usage.
+#' @param hidden Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{W}, \code{b}.
 #' @export
@@ -114,7 +114,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #'
 #' @param W A vector; its length is taken and its elements indexed.
 #' @param b A vector; indexed elementwise.
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param activation Passed to \code{.survnnr_act}. Defaults to \code{"tanh"}.
 #' @return A list with \code{output}, \code{pre}, \code{acts}.
 #' @export
@@ -208,7 +208,7 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 #' @param activation Passed to \code{morie_survnnr_forward}. Defaults to \code{"tanh"}.
 #' @param l2 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
-#' @param n_epochs Defaults to \code{400}.
+#' @param n_epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.
 #' @param seed Passed to \code{.survnnr_init}. Defaults to \code{0}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{W}, \code{b}, \code{activation}, \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk}, \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties}, \code{scale_note}, \code{method}.
@@ -292,7 +292,7 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
 #' the source it follows.
 #'
 #' @param fit_result A list; the body reads \code{$activation}, \code{$b}, \code{$W} from it.
-#' @param X See Usage.
+#' @param X Iterated over elementwise, with \code{sapply}.
 #' @return A vector, from \code{sapply}.
 #' @export
 morie_survnnr_risk_score <- function(fit_result, X) {
@@ -338,7 +338,7 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
 #'
 #' @param fit_result Passed to \code{morie_survnnr_baseline_hazard}.
 #' @param x See Usage.
-#' @param times Defaults to \code{NULL}.
+#' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{time}, \code{survival}.
 #' @export
 morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {

@@ -8,10 +8,10 @@
 fit_msm(outcome, cumulative, weights = NULL, states = .STATES)
 }
 \arguments{
-\item{outcome}{See Usage.}
+\item{outcome}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{cumulative}{A matrix; passed to \code{as.matrix}.}
-\item{weights}{Defaults to \code{NULL}.}
-\item{states}{Defaults to \code{.STATES}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{states}{Coerced to character by the body, with \code{as.character}. Defaults to \code{.STATES}.}
 }
 \description{
 A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

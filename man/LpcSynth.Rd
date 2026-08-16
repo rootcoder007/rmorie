@@ -8,10 +8,10 @@
 LpcSynth(a, excitation, gain = 1, initial = NULL)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{excitation}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{excitation}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{gain}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{initial}{Defaults to \code{NULL}.}
+\item{initial}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 follows from A(z) = 1 + sum a_k z^-k.  Coefficients from the other convention give a filter with different poles, usually unstable, so divergence is reported rather than a wall of infinities returned.

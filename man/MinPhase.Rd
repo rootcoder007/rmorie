@@ -8,7 +8,7 @@
 MinPhase(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 complex cepstrum.  Folding the anticausal half onto the causal half reflects every root outside the unit circle to its reciprocal inside, leaving the magnitude spectrum untouched -- which is what "correspondent" means, and is the check returned.

@@ -9,7 +9,7 @@ PcaSig(X, ncomp = NULL)
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}
-\item{ncomp}{Defaults to \code{NULL}.}
+\item{ncomp}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 the same sources through different paths, so the channels are redundant; rotating onto the covariance eigenvectors puts most power in a few components and makes the truncation error the sum of the DISCARDED eigenvalues, which is why decreasing order minimises the MSE.

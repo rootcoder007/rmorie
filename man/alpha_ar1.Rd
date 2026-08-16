@@ -9,7 +9,7 @@ alpha_ar1(v, q = 2, weights = NULL)
 }
 \arguments{
 \item{v}{A matrix; passed to \code{as.matrix}.}
-\item{q}{Defaults to \code{2}.}
+\item{q}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 \item{weights}{Optional; may be \code{NULL}. Compared against \code{"drop_first"}.}
 }
 \description{

@@ -12,7 +12,7 @@
 \item{e}{See Usage.}
 \item{X}{A matrix; passed to \code{\%*\%}.}
 \item{beta}{A matrix; passed to \code{\%*\%}.}
-\item{offset}{Defaults to \code{NULL}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the cox_native implementation. Called by \code{morie_cox_breslow_step}, \code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the module. See the file header for the source the module follows.

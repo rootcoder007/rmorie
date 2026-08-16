@@ -8,9 +8,9 @@
 morie_qrntcq_gamma_generation_time(shape = 2.83, scale = 1.86, grid = NULL, t.max = 30, n = 3001L)
 }
 \arguments{
-\item{shape}{Defaults to \code{2.83}.}
-\item{scale}{Defaults to \code{1.86}.}
-\item{grid}{Defaults to \code{NULL}.}
+\item{shape}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.83}.}
+\item{scale}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.86}.}
+\item{grid}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{t.max}{Defaults to \code{30}.}
 \item{n}{Defaults to \code{3001L}.}
 }

@@ -8,7 +8,7 @@
 .sbert_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the sbert_native implementation. Called by \code{pool}, \code{rank_by_similarity}. See the file header for the source the module follows.

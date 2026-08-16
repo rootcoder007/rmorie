@@ -8,7 +8,7 @@
 .groebn_reduce_basis(G, order = "lex")
 }
 \arguments{
-\item{G}{See Usage.}
+\item{G}{Iterated over elementwise, with \code{Filter}.}
 \item{order}{Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.}
 }
 \description{

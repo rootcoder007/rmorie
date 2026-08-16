@@ -8,7 +8,7 @@
 .propinf_sorted_representation_internal(net, metric = NULL)
 }
 \arguments{
-\item{net}{See Usage.}
+\item{net}{Iterated over elementwise, with \code{lapply}.}
 \item{metric}{Defaults to \code{NULL}.}
 }
 \description{

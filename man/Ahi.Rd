@@ -11,11 +11,11 @@ Ahi(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.1, hypofrac = 0.5, min
 \item{airflow}{Passed to \code{.morie_bx_vec}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{spo2}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
-\item{hours}{Defaults to \code{NULL}.}
+\item{hours}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{apneafrac}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{hypofrac}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{minsec}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
-\item{desat}{Defaults to \code{0}.}
+\item{desat}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{envsec}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{

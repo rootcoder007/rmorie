@@ -8,9 +8,9 @@
 DtftZ(x, omega, fs = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{omega}{See Usage.}
-\item{fs}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 circle, z = exp(j omega T).  fs = NULL reads omega as normalized.

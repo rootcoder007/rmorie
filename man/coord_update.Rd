@@ -11,7 +11,7 @@ coord_update(X, M, phi_x, C = NULL)
 \item{X}{A vector; its length is taken and its elements indexed.}
 \item{M}{A vector; indexed elementwise.}
 \item{phi_x}{See Usage.}
-\item{C}{Defaults to \code{NULL}.}
+\item{C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the egnnL_native implementation. Called by \code{egcl}. See the file header for the source the module follows.

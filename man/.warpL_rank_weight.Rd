@@ -8,7 +8,7 @@
 .warpL_rank_weight(rank, alphas)
 }
 \arguments{
-\item{rank}{See Usage.}
+\item{rank}{Coerced to integer by the body, with \code{as.integer}.}
 \item{alphas}{A vector; its length is taken and its elements indexed.}
 }
 \description{

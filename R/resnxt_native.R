@@ -35,7 +35,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .resnxt_vec <- function(x) {
@@ -127,7 +127,7 @@
 #' @param Wins Passed to \code{.resnxt_aggregated_block}.
 #' @param Wmids Passed to \code{.resnxt_aggregated_block}.
 #' @param Wouts A vector; indexed elementwise.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{equivalent}, \code{max_deviation}, \code{aggregated}, \code{grouped}, \code{note}.
 #' @export
 .resnxt_block_equivalence <- function(x, Wins, Wmids, Wouts, tol = 1e-9) {
@@ -152,9 +152,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param width See Usage.
-#' @param cardinality See Usage.
-#' @param bottleneck See Usage.
+#' @param width Coerced to integer by the body, with \code{as.integer}.
+#' @param cardinality Coerced to integer by the body, with \code{as.integer}.
+#' @param bottleneck Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{parameters}, \code{cardinality}, \code{bottleneck}, \code{width}.
 #' @export
 .resnxt_block_parameters <- function(width, cardinality, bottleneck) {
@@ -176,9 +176,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param width See Usage.
-#' @param cardinality See Usage.
-#' @param target_parameters See Usage.
+#' @param width Coerced to integer by the body, with \code{as.integer}.
+#' @param cardinality Coerced to integer by the body, with \code{as.integer}.
+#' @param target_parameters Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{bottleneck}, \code{rounded}, \code{parameters}, \code{target}, \code{cardinality}.
 #' @export
 .resnxt_match_complexity <- function(width, cardinality, target_parameters) {

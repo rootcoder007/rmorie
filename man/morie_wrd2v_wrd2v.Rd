@@ -8,13 +8,13 @@
 morie_wrd2v_wrd2v(corpus, size = 16, window = 5, architecture = "skip-gram", lr = 0.05, epochs = 20, min_count = 1, dynamic_window = TRUE, loss = "softmax", negative = 5, noise_power = 0.75, subsample = NULL, seed = 0)
 }
 \arguments{
-\item{corpus}{See Usage.}
+\item{corpus}{Iterated over elementwise, with \code{lapply}.}
 \item{size}{A count; the body uses it as \code{matrix(...)}. Defaults to \code{16}.}
 \item{window}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 \item{architecture}{One of \code{"cbow"}, \code{"skip-gram"}. Defaults to \code{"skip-gram"}.}
 \item{lr}{Passed to \code{.wrd2v_cbow_step}. Defaults to \code{0.05}.}
-\item{epochs}{Defaults to \code{20}.}
-\item{min_count}{Defaults to \code{1}.}
+\item{epochs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
+\item{min_count}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{dynamic_window}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{loss}{One of \code{"neg"}, \code{"softmax"}. Defaults to \code{"softmax"}.}
 \item{negative}{Passed to \code{.wrd2v_neg_step}. Defaults to \code{5}.}

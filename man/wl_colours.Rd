@@ -10,8 +10,8 @@ wl_colours(adj, n, rounds = 2, initial = NULL)
 \arguments{
 \item{adj}{A vector; indexed elementwise.}
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{rounds}{Defaults to \code{2}.}
-\item{initial}{Defaults to \code{NULL}.}
+\item{rounds}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
+\item{initial}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the sortP_native implementation. No other function in the package calls it. See the file header for the source the module follows.

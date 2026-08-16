@@ -141,22 +141,22 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_atoms Defaults to \code{NULL}.
+#' @param n_atoms Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param denoiser Defaults to \code{NULL}.
 #' @param clean Optional; may be \code{NULL}. Passed to \code{.alfbnp_clean_list}.
-#' @param steps Defaults to \code{20L}.
+#' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.
 #' @param sigma_data Compared against \code{"fit"}. Defaults to \code{16}.
-#' @param s_max Defaults to \code{160}.
-#' @param s_min Defaults to \code{4e-04}.
-#' @param rho Defaults to \code{7}.
-#' @param gamma_0 Defaults to \code{0.8}.
-#' @param gamma_min Defaults to \code{1}.
-#' @param noise_scale Defaults to \code{1.003}.
-#' @param step_scale Defaults to \code{1.5}.
-#' @param noise Defaults to \code{NULL}.
-#' @param seed Defaults to \code{2}.
+#' @param s_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{160}.
+#' @param s_min Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4e-04}.
+#' @param rho Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{7}.
+#' @param gamma_0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
+#' @param gamma_min Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param noise_scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.003}.
+#' @param step_scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
+#' @param noise Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param x_init Optional; may be \code{NULL}. Passed to \code{.alfbnp_atoms}.
-#' @param ridge Defaults to \code{1e-06}.
+#' @param ridge Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{coords}, \code{sigmas}, \code{trace}, \code{denoiser_coefs}, \code{sigma_data}, \code{steps}, \code{rmsd_to_reference}, \code{n_atoms}, \code{route}, \code{method}, \code{note}.
 #' @export
 morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,

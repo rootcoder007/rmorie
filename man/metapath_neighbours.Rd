@@ -10,7 +10,7 @@ metapath_neighbours(edges, types, metapath)
 \arguments{
 \item{edges}{A vector; indexed elementwise.}
 \item{types}{A vector; indexed elementwise.}
-\item{metapath}{See Usage.}
+\item{metapath}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the hetgnn_native implementation. Called by \code{han_forward}. See the file header for the source the module follows.

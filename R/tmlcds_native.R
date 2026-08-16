@@ -63,7 +63,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tmlcds_vec <- function(x) {
@@ -150,7 +150,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param tol Defaults to \code{1e-13}.
-#' @param penalty Defaults to \code{0}.
+#' @param penalty Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .tmlcds_logit_irls <- function(X, y, iters = 60L, ridge = 1e-10,
@@ -241,7 +241,7 @@
 #' @param d Passed to \code{.tmlcds_logit_irls}.
 #' @param cols Passed to \code{.tmlcds_design}.
 #' @param n Passed to \code{.tmlcds_design}.
-#' @param penalty Defaults to \code{0}.
+#' @param penalty Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param trim Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
 #' @return A list with \code{g}, \code{b}.
 #' @export
@@ -267,7 +267,7 @@
 #' @param penalties Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param trim Passed to \code{.tmlcds_propensity}. Defaults to \code{0.005}.
 #' @param scale Optional; may be \code{NULL}. A flag; the body branches on it.
-#' @param q_covariates Defaults to \code{NULL}.
+#' @param q_covariates Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{steps}, \code{info}.
 #' @export
 ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,

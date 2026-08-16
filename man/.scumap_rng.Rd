@@ -8,7 +8,7 @@
 .scumap_rng(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 product exceeds 2^53.

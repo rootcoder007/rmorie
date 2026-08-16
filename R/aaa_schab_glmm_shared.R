@@ -145,8 +145,8 @@
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{\%*\%}.
-#' @param beta See Usage.
-#' @param S See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param S Coerced to numeric by the body, with \code{as.numeric}.
 #' @param link_kind Passed to \code{.schab_link}. Defaults to \code{"log"}.
 #' @return The value of \code{.schab_link}.
 #' @export
@@ -165,7 +165,7 @@
 #' the source it follows.
 #'
 #' @param mu Passed to \code{.schab_variance_function}.
-#' @param sigma2 See Usage.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param family Passed to \code{.schab_variance_function}.
 #' @return A numeric value.
 #' @export
@@ -180,9 +180,9 @@
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{\%*\%}.
-#' @param beta See Usage.
-#' @param sigma2_S See Usage.
-#' @param sigma2 Defaults to \code{1}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sigma2_S Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param rho Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -214,7 +214,7 @@
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{\%*\%}.
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param link_kind Passed to \code{.schab_link}. Defaults to \code{"log"}.
 #' @return The value of \code{.schab_link}.
 #' @export
@@ -248,7 +248,7 @@
 #' sides. Distinct from .schab_data_covariance -- see .schab_pql_score.
 #'
 #' @param mu A vector; its length is taken.
-#' @param sigma2 See Usage.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param family Passed to \code{.schab_variance_function}.
 #' @param link_kind Passed to \code{.schab_link_derivative}.
 #' @param R Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -274,7 +274,7 @@
 #' Psi^2.
 #'
 #' @param mu A vector; its length is taken.
-#' @param sigma2 See Usage.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param family Passed to \code{.schab_variance_function}.
 #' @param R Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
@@ -320,9 +320,9 @@
 #'
 #' @param Sigma_S A matrix; passed to \code{as.matrix}.
 #' @param Sigma_nu A matrix; passed to \code{as.matrix}.
-#' @param nu See Usage.
+#' @param nu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .schab_predict_random_field <- function(Sigma_S, Sigma_nu, nu, X, beta) {
@@ -369,7 +369,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @param family See Usage.
 #' @return The value of \code{z}, as built in the body.
 #' @export
@@ -397,7 +397,7 @@
 #' @param link_kind Optional; may be \code{NULL}. Passed to \code{.schab_pseudo_data}.
 #' @param sigma2 Passed to \code{.schab_sigma_mu}. Defaults to \code{1}.
 #' @param R Passed to \code{.schab_sigma_mu}.
-#' @param max_iter Defaults to \code{100L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta}, \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged}, \code{link}, \code{family}.
 #' @export
@@ -461,7 +461,7 @@
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @param X A matrix; passed to \code{t}.
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S A matrix; passed to \code{solve}.
 #' @param Sigma_S A matrix; passed to \code{as.matrix}.
 #' @param family Passed to \code{.schab_data_covariance}.
@@ -496,9 +496,9 @@
 #' predictor (6.87), whose delta-method variance (6.88) the text says
 #' belongs to a different predictor.
 #'
-#' @param nu0_hat See Usage.
-#' @param sigma2_nu0 See Usage.
-#' @param mu0_hat See Usage.
+#' @param nu0_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sigma2_nu0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu0_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @param link_kind Passed to \code{.schab_link_derivative}.
 #' @return A list with \code{prediction}, \code{mspe}, \code{prediction_error}, \code{inverse_link_prediction}, \code{pseudo_scale_prediction}, \code{pseudo_scale_mspe}, \code{mspe_is_for}.
 #' @export
@@ -559,7 +559,7 @@
 #' the source it follows.
 #'
 #' @param R A matrix; passed to \code{as.matrix}.
-#' @param sigma2 Defaults to \code{1}.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .schab_icar_covariance <- function(R, sigma2 = 1) {
@@ -579,7 +579,7 @@
 #'
 #' @param u A matrix; passed to \code{\%*\%}.
 #' @param adjacency A matrix; passed to \code{as.matrix}.
-#' @param sigma2 Defaults to \code{1}.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{mean}, \code{variance}, \code{n_neighbours}.
 #' @export
 .schab_icar_full_conditional <- function(u, adjacency, sigma2 = 1) {
@@ -623,7 +623,7 @@
 #' @param u A matrix; passed to \code{\%*\%}.
 #' @param adjacency A matrix; passed to \code{as.matrix}.
 #' @param rho Numeric; combined arithmetically in the body.
-#' @param sigma2 Defaults to \code{1}.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{mean}, \code{variance}, \code{n_neighbours}.
 #' @export
 .schab_lcar_full_conditional <- function(u, adjacency, rho, sigma2 = 1) {
@@ -681,8 +681,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param counts See Usage.
-#' @param expected See Usage.
+#' @param counts Coerced to numeric by the body, with \code{as.numeric}.
+#' @param expected Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .schab_smr <- function(counts, expected) {
@@ -701,10 +701,10 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param expected See Usage.
+#' @param expected Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param beta See Usage.
-#' @param psi See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param psi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .schab_poisson_disease_mean <- function(expected, X, beta, psi) {
@@ -761,7 +761,7 @@
 #' the source it follows.
 #'
 #' @param y A vector; its length is taken.
-#' @param c_exp See Usage.
+#' @param c_exp Coerced to numeric by the body, with \code{as.numeric}.
 #' @param u A vector; its length is taken.
 #' @param v A vector; its length is taken.
 #' @param kappa Numeric; combined arithmetically in the body.
@@ -800,11 +800,11 @@
 #' the source it follows.
 #'
 #' @param y A vector; its length is taken.
-#' @param c_exp See Usage.
+#' @param c_exp Coerced to numeric by the body, with \code{as.numeric}.
 #' @param adjacency Passed to \code{.schab_neighbour_structure}.
 #' @param kappa Numeric; combined arithmetically in the body.
 #' @param lam Numeric; combined arithmetically in the body.
-#' @param max_iter Defaults to \code{200L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param tol Defaults to \code{1e-11}.
 #' @return A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted}, \code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total}, \code{observed_total}, \code{log_posterior}.
 #' @export
@@ -877,8 +877,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n_time See Usage.
-#' @param order Defaults to \code{1L}.
+#' @param n_time Coerced to integer by the body, with \code{as.integer}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @return The value of \code{%*%}.
 #' @export
 .schab_random_walk_structure <- function(n_time, order = 1L) {
@@ -958,7 +958,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param delta See Usage.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
@@ -977,11 +977,11 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param alpha See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param u A vector; its length is taken.
-#' @param beta_t See Usage.
-#' @param delta_i See Usage.
-#' @param times See Usage.
+#' @param beta_t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta_i Coerced to numeric by the body, with \code{as.numeric}.
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .schab_linear_trend_log_risk <- function(alpha, u, beta_t, delta_i, times) {
@@ -1001,10 +1001,10 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param alpha See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param u Numeric; combined arithmetically in the body.
 #' @param phi A vector; its length is taken.
-#' @param gamma See Usage.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @param delta Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

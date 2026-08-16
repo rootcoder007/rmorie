@@ -8,11 +8,11 @@
 FdVag(x, fs, fmin = 100, fmax = 500, nperseg = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fmin}{Defaults to \code{100}.}
 \item{fmax}{Defaults to \code{500}.}
-\item{nperseg}{Defaults to \code{NULL}.}
+\item{nperseg}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 self-affine signal, applied to knee-joint VAG signals.  The band is an argument because it decides the answer -- a band that reaches down into baseline drift fits the drift\'s slope, not the signal\'s.

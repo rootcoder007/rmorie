@@ -22,7 +22,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .edgrn_vec <- function(x) as.numeric(x)
@@ -143,8 +143,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mu See Usage.
-#' @param dispersion See Usage.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dispersion Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{variance}, \code{poisson}, \code{biological}, \code{bcv}, \code{note}.
 #' @export
 edgrn_nb_variance <- function(mu, dispersion) {
@@ -164,10 +164,10 @@ edgrn_nb_variance <- function(mu, dispersion) {
 #'
 #' @param counts_sample Passed to \code{.edgrn_vec}.
 #' @param counts_reference Passed to \code{.edgrn_vec}.
-#' @param trim_m Defaults to \code{0.3}.
-#' @param trim_a Defaults to \code{0.05}.
-#' @param lib_sample Defaults to \code{NULL}.
-#' @param lib_reference Defaults to \code{NULL}.
+#' @param trim_m Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
+#' @param trim_a Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param lib_sample Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lib_reference Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{factor}, \code{log2_factor}, \code{n_used}, \code{n_genes}, \code{trimmed_m}, \code{trimmed_a}, \code{note}.
 #' @export
 edgrn_tmm_factor <- function(counts_sample, counts_reference,
@@ -218,8 +218,8 @@ edgrn_tmm_factor <- function(counts_sample, counts_reference,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param library_size See Usage.
-#' @param factor See Usage.
+#' @param library_size Coerced to numeric by the body, with \code{as.numeric}.
+#' @param factor Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{effective}, \code{offset}, \code{note}.
 #' @export
 edgrn_effective_library_size <- function(library_size, factor) {
@@ -237,9 +237,9 @@ edgrn_effective_library_size <- function(library_size, factor) {
 #' source it follows.
 #'
 #' @param gene_dispersions Passed to \code{.edgrn_vec}.
-#' @param common Defaults to \code{NULL}.
-#' @param prior_df Defaults to \code{10}.
-#' @param df_residual Defaults to \code{1}.
+#' @param common Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param prior_df Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
+#' @param df_residual Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{dispersion}, \code{common}, \code{shrinkage}, \code{prior_df}, \code{df_residual}, \code{note}.
 #' @export
 edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
@@ -277,11 +277,11 @@ edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param count_a See Usage.
-#' @param count_b See Usage.
-#' @param lib_a See Usage.
-#' @param lib_b See Usage.
-#' @param dispersion See Usage.
+#' @param count_a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param count_b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lib_a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lib_b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dispersion Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{p_value}, \code{logFC}, \code{dispersion}, \code{note}.
 #' @export
 edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
@@ -314,11 +314,11 @@ edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lrt See Usage.
-#' @param q See Usage.
-#' @param quasi_dispersion See Usage.
-#' @param df_residual See Usage.
-#' @param df_prior Defaults to \code{NULL}.
+#' @param lrt Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q Coerced to integer by the body, with \code{as.integer}.
+#' @param quasi_dispersion Coerced to numeric by the body, with \code{as.numeric}.
+#' @param df_residual Coerced to numeric by the body, with \code{as.numeric}.
+#' @param df_prior Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{F}, \code{df1}, \code{df2}, \code{p_value}, \code{lrt_p_value}, \code{method}, \code{note}.
 #' @export
 edgrn_ql_f_test <- function(lrt, q, quasi_dispersion, df_residual,

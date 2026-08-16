@@ -8,7 +8,7 @@
 .pq_prep_write(v, inf)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{inf}{See Usage.}
 }
 \description{

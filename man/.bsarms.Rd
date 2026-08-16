@@ -8,7 +8,7 @@
 .bsarms(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_phys implementation. Called by \code{.bsaenvelope}, \code{ApneaDet}, \code{InfantCry} and 3 others in the module. See the file header for the source the module follows.

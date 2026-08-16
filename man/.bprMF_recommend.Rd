@@ -10,7 +10,7 @@
 \arguments{
 \item{W}{Passed to \code{.bprMF_predict}.}
 \item{H}{Passed to \code{.bprMF_predict}.}
-\item{u}{See Usage.}
+\item{u}{Coerced to integer by the body, with \code{as.integer}.}
 \item{n_items}{A count; the body uses it as \code{seq_len(...)}.}
 \item{top_k}{Numeric; passed to \code{min}. Defaults to \code{5L}.}
 \item{exclude}{Defaults to \code{integer(0)}.}

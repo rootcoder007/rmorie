@@ -10,8 +10,8 @@
 \arguments{
 \item{K}{A matrix; passed to \code{nrow}.}
 \item{Ks}{A matrix; passed to \code{crossprod}.}
-\item{Kss}{See Usage.}
-\item{y}{See Usage.}
+\item{Kss}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{noise}{A matrix; passed to \code{diag}. Defaults to \code{1e-06}.}
 }
 \description{

@@ -13,10 +13,10 @@ morie_agalfsy_rl_pose_search(receptor, ligand, site = NULL, policy = NULL, criti
 \item{site}{Optional; may be \code{NULL}. Passed to \code{.agalfsy_coords}.}
 \item{policy}{Defaults to \code{NULL}.}
 \item{critic}{Defaults to \code{NULL}.}
-\item{max_steps}{Defaults to \code{600L}.}
-\item{min_steps}{Defaults to \code{300L}.}
-\item{window}{Defaults to \code{50L}.}
-\item{tol}{Defaults to \code{0.3}.}
+\item{max_steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{600L}.}
+\item{min_steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.}
+\item{window}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.}
 \item{box}{Numeric; combined arithmetically in the body. Defaults to \code{18}.}
 \item{seed}{Defaults to \code{2}.}
 }

@@ -83,10 +83,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param input_size See Usage.
+#' @param input_size Coerced to integer by the body, with \code{as.integer}.
 #' @param depth A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4L}.
-#' @param convs_per_block Defaults to \code{2L}.
-#' @param kernel Defaults to \code{3L}.
+#' @param convs_per_block Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
+#' @param kernel Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @return A list with \code{output}, \code{input}, \code{border_lost}, \code{skip_sizes}, \code{note}.
 #' @export
 valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L) {
@@ -136,7 +136,7 @@ valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kern
 #' source it follows.
 #'
 #' @param image Passed to \code{.unetbk_as_matrix}.
-#' @param pad See Usage.
+#' @param pad Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 mirror_pad <- function(image, pad) {
@@ -168,10 +168,10 @@ mirror_pad <- function(image, pad) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param height See Usage.
-#' @param width See Usage.
-#' @param tile See Usage.
-#' @param border See Usage.
+#' @param height Coerced to integer by the body, with \code{as.integer}.
+#' @param width Coerced to integer by the body, with \code{as.integer}.
+#' @param tile Coerced to integer by the body, with \code{as.integer}.
+#' @param border Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{tiles}, \code{n_tiles}, \code{output_size}, \code{note}.
 #' @export
 overlap_tiles <- function(height, width, tile, border) {

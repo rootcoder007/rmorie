@@ -9,10 +9,10 @@ morie_impFB(R, f = 8, alpha = 40, lam = 0.1, iters = 15, seed = 0, fast = TRUE)
 }
 \arguments{
 \item{R}{A matrix; passed to \code{as.matrix}.}
-\item{f}{Defaults to \code{8}.}
+\item{f}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 \item{alpha}{Passed to \code{.impFB_confidence}. Defaults to \code{40}.}
 \item{lam}{Passed to \code{.impFB_als_step}. Defaults to \code{0.1}.}
-\item{iters}{Defaults to \code{15}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{fast}{Passed to \code{.impFB_als_step}. Defaults to \code{TRUE}.}
 }

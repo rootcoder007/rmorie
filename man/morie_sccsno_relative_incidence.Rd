@@ -9,7 +9,7 @@ morie_sccsno_relative_incidence(fit, level = 0.95)
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$log_ri}, \code{$se_log_ri} from it.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 }
 \description{
 A step of the sccsno_native implementation. No other function in the package calls it. See the file header for the source the module follows.

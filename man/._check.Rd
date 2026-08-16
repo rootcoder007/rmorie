@@ -8,9 +8,9 @@
 ._check(beta, nu, mu, sigma)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nu}{A vector; its length is taken.}
-\item{mu}{See Usage.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{sigma}{A matrix; passed to \code{as.matrix}.}
 }
 \description{

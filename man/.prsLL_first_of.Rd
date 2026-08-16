@@ -8,7 +8,7 @@
 .prsLL_first_of(seq, g, first = NULL)
 }
 \arguments{
-\item{seq}{See Usage.}
+\item{seq}{Coerced to character by the body, with \code{as.character}.}
 \item{g}{Passed to \code{.prsLL_first_sets}.}
 \item{first}{Defaults to \code{NULL}.}
 }

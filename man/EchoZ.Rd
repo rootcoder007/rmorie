@@ -9,8 +9,8 @@ EchoZ(a, n_0, z, H = NULL)
 }
 \arguments{
 \item{a}{Numeric; combined arithmetically in the body.}
-\item{n_0}{See Usage.}
-\item{z}{See Usage.}
+\item{n_0}{Coerced to integer by the body, with \code{as.integer}.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 \item{H}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{

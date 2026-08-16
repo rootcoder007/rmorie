@@ -8,13 +8,13 @@
 .sdpwts_centre(x0, c_vec, F0, Fs, t, iters = 200, tol = 1e-12, h = 1e-06)
 }
 \arguments{
-\item{x0}{See Usage.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{c_vec}{Passed to \code{.sdpwts_objective}.}
 \item{F0}{Passed to \code{.sdpwts_objective}.}
 \item{Fs}{Passed to \code{.sdpwts_objective}.}
 \item{t}{Passed to \code{.sdpwts_objective}.}
-\item{iters}{Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }
 \description{

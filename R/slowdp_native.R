@@ -24,7 +24,7 @@
 #' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
-#' @param alpha See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .slowdp_beta1alpha <- function(e, alpha) {
@@ -39,8 +39,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alpha See Usage.
-#' @param K See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param K Coerced to integer by the body, with \code{as.integer}.
 #' @param rng Defaults to \code{NULL}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass}, \code{K}, \code{alpha}, \code{note}.
@@ -75,8 +75,8 @@ stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alpha See Usage.
-#' @param K See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param K Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{expected_tail}, \code{kept}, \code{alpha}, \code{K}, \code{per_stick_factor}, \code{note}.
 #' @export
 truncation_error <- function(alpha, K) {
@@ -96,8 +96,8 @@ truncation_error <- function(alpha, K) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alpha See Usage.
-#' @param tol Defaults to \code{0.001}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return A list with \code{K}, \code{expected_tail}, \code{tolerance}, \code{note}.
 #' @export
 sticks_for_tolerance <- function(alpha, tol = 1e-3) {
@@ -121,7 +121,7 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param weights See Usage.
+#' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha See Usage.
 #' @return A list with \code{realised_tail}, \code{expected_tail}, \code{ratio}, \code{largest_index}, \code{monotone}, \code{note}.
 #' @export
@@ -152,8 +152,8 @@ decay_diagnostics <- function(weights, alpha) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alpha See Usage.
-#' @param K See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param K Coerced to integer by the body, with \code{as.integer}.
 #' @param base_sampler Defaults to \code{NULL}.
 #' @param rng Defaults to \code{NULL}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.

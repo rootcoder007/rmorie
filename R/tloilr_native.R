@@ -60,8 +60,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
+#' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .tloilr_blip <- function(Q1, Q0) {
@@ -79,8 +79,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param B See Usage.
-#' @param kappa See Usage.
+#' @param B Coerced to numeric by the body, with \code{as.numeric}.
+#' @param kappa Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding}, \code{fraction_positive_blip}, \code{note}.
 #' @export
 .tloilr_resource_threshold <- function(B, kappa) {
@@ -110,7 +110,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param B See Usage.
+#' @param B Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kappa Passed to \code{.tloilr_resource_threshold}.
 #' @return A list with \code{rule}, \code{tau}, \code{treated_fraction}, \code{binding}.
 #' @export
@@ -130,8 +130,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
+#' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kappa Passed to \code{.tloilr_constrained_rule}.
 #' @return A list with \code{estimate}, \code{value}, \code{unconstrained_value}, \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa}, \code{binding}, \code{method}, \code{note}.
 #' @export
@@ -161,7 +161,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param B See Usage.
+#' @param B Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{mass_at_zero}, \code{exceptional}, \code{n_at_zero}, \code{note}.
 #' @export

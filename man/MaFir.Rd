@@ -8,10 +8,10 @@
 MaFir(x, b_k = NULL, N = NULL, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{b_k}{Defaults to \code{NULL}.}
-\item{N}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 used.  Equal weights are the worst choice for stopband attenuation -- a rectangle\'s sidelobes fall off slowly -- which is what the window functions of Section 3.4 exist to fix.

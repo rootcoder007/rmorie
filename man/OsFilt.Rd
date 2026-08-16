@@ -8,12 +8,12 @@
 OsFilt(x, window, kind = "median", alpha = 0, weights = NULL, order = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{window}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{window}{Coerced to integer by the body, with \code{as.integer}.}
 \item{kind}{One of \code{"l"}, \code{"order"}, \code{"trimmed"}. Defaults to \code{"median"}.}
-\item{alpha}{Defaults to \code{0}.}
-\item{weights}{Defaults to \code{NULL}.}
-\item{order}{Defaults to \code{NULL}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_filt implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -10,7 +10,7 @@
 \arguments{
 \item{y}{Passed to \code{.to_vec}.}
 \item{G}{Passed to \code{.farmlmm_to_mat}.}
-\item{covariates}{Defaults to \code{integer(0)}.}
+\item{covariates}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{integer(0)}.}
 \item{K}{Defaults to \code{NULL}.}
 }
 \description{

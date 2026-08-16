@@ -10,7 +10,7 @@ morie_tmle_censoring(time, event, censor, treatment, covariates, kind = "right",
 \arguments{
 \item{time}{Passed to \code{morie_ipcw_interval}.}
 \item{event}{Passed to \code{morie_ipcw_interval}.}
-\item{censor}{See Usage.}
+\item{censor}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{treatment}{Passed to \code{morie_ipcw_interval}.}
 \item{covariates}{Passed to \code{morie_ipcw_interval}.}
 \item{kind}{Compared against \code{"interval"}. Defaults to \code{"right"}.}

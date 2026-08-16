@@ -8,7 +8,7 @@
 training_stage(stage)
 }
 \arguments{
-\item{stage}{See Usage.}
+\item{stage}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the llavx_native implementation. Called by \code{morie_llavx}. See the file header for the source the module follows.

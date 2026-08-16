@@ -8,7 +8,7 @@
 .opnclp_mat(m)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the opnclp_native implementation. Called by \code{infonce}. See the file header for the source the module follows.

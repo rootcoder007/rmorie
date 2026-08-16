@@ -8,9 +8,9 @@
 morie_timesfm_horizon_plan(horizon, input_patch_len, output_patch_len)
 }
 \arguments{
-\item{horizon}{See Usage.}
-\item{input_patch_len}{See Usage.}
-\item{output_patch_len}{See Usage.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
+\item{input_patch_len}{Coerced to integer by the body, with \code{as.integer}.}
+\item{output_patch_len}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the timesfm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -388,11 +388,11 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 #' _gp_core.fda_basis_derivative, including its polynomial convention u
 #' = (t - lo) / span, which differs from morie_fda_basis above.
 #'
-#' @param t See Usage.
-#' @param n_basis See Usage.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_basis Coerced to integer by the body, with \code{as.integer}.
 #' @param p A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.
 #' @param kind Defaults to \code{"fourier"}.
-#' @param period Defaults to \code{NULL}.
+#' @param period Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",

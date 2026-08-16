@@ -8,7 +8,7 @@
 Pbeta(q, shape1, shape2, lower_tail = TRUE)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Iterated over elementwise, with \code{vapply}.}
 \item{shape1}{Passed to \code{.morie_betainc}.}
 \item{shape2}{Passed to \code{.morie_betainc}.}
 \item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}

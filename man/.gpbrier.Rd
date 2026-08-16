@@ -10,7 +10,7 @@
 \arguments{
 \item{probs}{Passed to \code{.gpmat}.}
 \item{y_true}{Passed to \code{.gpflat}.}
-\item{n_classes}{Defaults to \code{NULL}.}
+\item{n_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{halved}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

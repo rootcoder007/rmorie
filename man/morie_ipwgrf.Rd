@@ -8,15 +8,15 @@
 morie_ipwgrf(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5, trim = 0.02, seed = 0, level = 0.95, break_outcome = FALSE, break_propensity = FALSE)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{W}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{n_folds}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.}
 \item{n_trees}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{120}.}
 \item{min_leaf}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{5}.}
 \item{trim}{Passed to \code{.ipwgrf_aipw_scores}. Defaults to \code{0.02}.}
 \item{seed}{Passed to \code{.ipwgrf_forest_nuisances}. Defaults to \code{0}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 \item{break_outcome}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{break_propensity}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }

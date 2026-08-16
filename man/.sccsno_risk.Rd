@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{t}{See Usage.}
-\item{exposure}{See Usage.}
+\item{exposure}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{risk_periods}{A matrix; indexed by row and column.}
 }
 \description{

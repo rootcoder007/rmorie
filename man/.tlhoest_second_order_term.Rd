@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{D2_kernel}{See Usage.}
-\item{O}{See Usage.}
+\item{O}{Coerced to list by the body, with \code{as.list}.}
 \item{exclude_diagonal}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

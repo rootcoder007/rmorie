@@ -8,9 +8,9 @@
 preference_vector(nodes, focus, weight = 0.9)
 }
 \arguments{
-\item{nodes}{See Usage.}
+\item{nodes}{Coerced to list by the body, with \code{as.list}.}
 \item{focus}{See Usage.}
-\item{weight}{Defaults to \code{0.9}.}
+\item{weight}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.}
 }
 \description{
 A step of the tagRC_native implementation. Called by \code{folkrank}. See the file header for the source the module follows.

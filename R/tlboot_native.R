@@ -27,12 +27,12 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
+#' @param data Coerced to list by the body, with \code{as.list}.
 #' @param estimator See Usage.
 #' @param B A vector; its length is taken. Defaults to \code{200L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param method One of \code{"naive"}, \code{"targeted"}.
-#' @param ic Defaults to \code{NULL}.
+#' @param ic Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{replicates}, \code{mean}, \code{se}, \code{influence_curve_se}, \code{ratio}, \code{note}.
 #' @export
 morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
@@ -173,10 +173,10 @@ multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param replicates See Usage.
-#' @param target_mean See Usage.
-#' @param target_se See Usage.
-#' @param tol Defaults to \code{0.15}.
+#' @param replicates Coerced to numeric by the body, with \code{as.numeric}.
+#' @param target_mean Coerced to numeric by the body, with \code{as.numeric}.
+#' @param target_se Coerced to numeric by the body, with \code{as.numeric}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
 #' @return A list with \code{mean}, \code{se}, \code{mean_error}, \code{se_ratio}, \code{first_two_moments_ok}, \code{note}.
 #' @export
 moment_check <- function(replicates, target_mean, target_se,

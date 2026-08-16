@@ -10,7 +10,7 @@ CprWt(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21))
 \arguments{
 \item{ecg}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{250}.}
-\item{scales}{Defaults to \code{NULL}.}
+\item{scales}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{w0}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 \item{band}{A vector; indexed elementwise. Defaults to \code{c(3, 21)}.}
 }

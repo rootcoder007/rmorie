@@ -8,11 +8,11 @@
 gaussian_expansion(r, mu_min = 0, mu_max = 6, n_gaussians = 25, gamma = NULL)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{mu_min}{Defaults to \code{0}.}
-\item{mu_max}{Defaults to \code{6}.}
-\item{n_gaussians}{Defaults to \code{25}.}
-\item{gamma}{Defaults to \code{NULL}.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu_min}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{mu_max}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{6}.}
+\item{n_gaussians}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.}
+\item{gamma}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schN_native implementation. Called by \code{cfconv}. See the file header for the source the module follows.

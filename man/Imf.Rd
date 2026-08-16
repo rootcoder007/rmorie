@@ -9,8 +9,8 @@ Imf(x, max_iter = 50, tol = 0.05)
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
-\item{max_iter}{Defaults to \code{50}.}
-\item{tol}{Defaults to \code{0.05}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

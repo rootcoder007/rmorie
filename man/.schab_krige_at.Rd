@@ -10,7 +10,7 @@
 \arguments{
 \item{coords}{A matrix; passed to \code{as.matrix}.}
 \item{z}{Numeric; combined arithmetically in the body.}
-\item{target}{See Usage.}
+\item{target}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{sill}{Numeric; combined arithmetically in the body.}
 \item{rng}{Numeric; combined arithmetically in the body.}
 \item{mu}{Numeric; combined arithmetically in the body.}

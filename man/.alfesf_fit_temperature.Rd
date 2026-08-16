@@ -10,7 +10,7 @@
 \arguments{
 \item{L}{A matrix; indexed by row and column.}
 \item{y}{A vector; indexed elementwise.}
-\item{iters}{Defaults to \code{200L}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{

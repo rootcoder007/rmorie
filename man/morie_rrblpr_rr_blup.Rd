@@ -8,13 +8,13 @@
 morie_rrblpr_rr_blup(y, M, lam = NULL, X = NULL, M_new = NULL, log_lam_lo = -12, log_lam_hi = 12, max_iter = 200L, tol = 1e-09)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{M}{Passed to \code{.rrblpr_rows}.}
-\item{lam}{Defaults to \code{NULL}.}
+\item{lam}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.}
 \item{M_new}{Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.}
-\item{log_lam_lo}{Defaults to \code{-12}.}
-\item{log_lam_hi}{Defaults to \code{12}.}
+\item{log_lam_lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-12}.}
+\item{log_lam_hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.}
 \item{max_iter}{Defaults to \code{200L}.}
 \item{tol}{Defaults to \code{1e-09}.}
 }

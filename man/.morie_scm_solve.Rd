@@ -8,7 +8,7 @@
 .morie_scm_solve(u, equations)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Coerced to list by the body, with \code{as.list}.}
 \item{equations}{A vector; indexed elementwise.}
 }
 \description{

@@ -8,9 +8,9 @@
 ZtConv(x, h, z)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{z}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 separately so the property is demonstrated, not assumed.

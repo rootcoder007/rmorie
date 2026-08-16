@@ -8,7 +8,7 @@
 .mfovsm_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.}
 }
 \description{
 A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}. See the file header for the source the module follows.

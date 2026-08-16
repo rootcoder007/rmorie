@@ -12,7 +12,7 @@
 \item{off}{A vector; indexed elementwise.}
 \item{H}{A vector; indexed elementwise.}
 \item{rows}{Defaults to \code{NULL}.}
-\item{obs_weights}{Defaults to \code{NULL}.}
+\item{obs_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 sum w H (y - sigmoid(off + eps H)) = 0 for eps on the given rows.

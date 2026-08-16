@@ -8,7 +8,7 @@
 .b2se(spec = NULL)
 }
 \arguments{
-\item{spec}{Defaults to \code{NULL}.}
+\item{spec}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}
 }
 \description{
 A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \code{Gpresid} and 1 others in the module. See the file header for the source the module follows.

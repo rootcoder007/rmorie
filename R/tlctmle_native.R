@@ -54,7 +54,7 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .ctmle_logit <- function(p) {
@@ -81,9 +81,9 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q See Usage.
-#' @param H See Usage.
-#' @param Y See Usage.
+#' @param Q Coerced to numeric by the body, with \code{as.numeric}.
+#' @param H Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @return A list with \code{epsilon}, \code{q}.
 #' @export
@@ -113,8 +113,8 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q_star See Usage.
-#' @param Y See Usage.
+#' @param Q_star Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 targeted_loss <- function(Q_star, Y) {
@@ -135,7 +135,7 @@ targeted_loss <- function(Q_star, Y) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W A matrix; passed to \code{as.matrix}.
 #' @param g_models A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -187,8 +187,8 @@ candidate_sequence <- function(A, W, g_models) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param g_small See Usage.
-#' @param g_large See Usage.
+#' @param g_small Coerced to numeric by the body, with \code{as.numeric}.
+#' @param g_large Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{small}, \code{large}, \code{ratio}, \code{note}.
 #' @export
 instrument_penalty <- function(g_small, g_large) {
@@ -205,14 +205,14 @@ instrument_penalty <- function(g_small, g_large) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W See Usage.
 #' @param g_models See Usage.
-#' @param V Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
+#' @param V Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param penalty A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{psi}, \code{selected}, \code{selected_covariates}, \code{cv_risks}, \code{cv_losses}, \code{variance_penalties}, \code{penalized}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method}, \code{note}.
 #' @export

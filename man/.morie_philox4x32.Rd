@@ -8,7 +8,7 @@
 .morie_philox4x32(counter, key, rounds = .MORIE_PHILOX_ROUNDS)
 }
 \arguments{
-\item{counter}{See Usage.}
+\item{counter}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{key}{A vector; indexed elementwise.}
 \item{rounds}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{.MORIE_PHILOX_ROUNDS}.}
 }

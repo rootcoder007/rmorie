@@ -54,7 +54,7 @@
 #' source it follows.
 #'
 #' @param pairs A vector; its length is taken.
-#' @param x0 Defaults to \code{0}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{states}, \code{steps}, \code{depth}, \code{note}.
 #' @export
 sequential_scan <- function(pairs, x0 = 0.0) {
@@ -114,8 +114,8 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 #'
 #' Same states as sequential_scan, O(log L) depth.
 #'
-#' @param pairs See Usage.
-#' @param x0 Defaults to \code{0}.
+#' @param pairs Iterated over elementwise, with \code{lapply}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{states}, \code{prefix}, \code{depth}, \code{work}, \code{note}.
 #' @export
 parallel_scan <- function(pairs, x0 = 0.0) {
@@ -177,7 +177,7 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 #' @param a Passed to \code{.ssmpar_compose}.
 #' @param b Passed to \code{.ssmpar_compose}.
 #' @param c Passed to \code{.ssmpar_compose}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{left}, \code{right}, \code{deviation}, \code{associative}, \code{note}.
 #' @export
 check_associativity <- function(a, b, c, tol = 1e-12) {
@@ -197,7 +197,7 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param length See Usage.
+#' @param length Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth}, \code{work}, \code{speedup}, \code{method}, \code{note}.
 #' @export
 scan_depth <- function(length) {

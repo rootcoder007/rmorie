@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{theta}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}. See the file header for the source the module follows.

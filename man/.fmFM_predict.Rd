@@ -8,8 +8,8 @@
 .fmFM_predict(x, w0, w, V)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{w0}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{w0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{w}{Numeric; combined arithmetically in the body.}
 \item{V}{A vector; indexed elementwise.}
 }

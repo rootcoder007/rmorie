@@ -11,8 +11,8 @@ Cwt(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5)
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{wavelet}{Passed to \code{.tf_cwt}. Defaults to \code{"morlet"}.}
-\item{scales}{Defaults to \code{NULL}.}
-\item{w0}{Defaults to \code{5}.}
+\item{scales}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{w0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{Scalogram}. See the file header for the source the module follows.

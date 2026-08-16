@@ -312,7 +312,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
 .phylby_rng <- function(seed) {
@@ -416,7 +416,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param j See Usage.
+#' @param j Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @return A numeric value.
 #' @export
@@ -525,11 +525,11 @@ morie_phylby_clade_credibility <- function(samples) {
 #'
 #' @param alignment A vector; indexed elementwise.
 #' @param n_iter Numeric; combined arithmetically in the body. Defaults to \code{2000}.
-#' @param burnin Defaults to \code{NULL}.
+#' @param burnin Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param n_chains Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @param lam Passed to \code{morie_phylby_chain_temperature}. Defaults to \code{0.2}.
-#' @param swap_every Defaults to \code{10}.
-#' @param sample_every Defaults to \code{10}.
+#' @param swap_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param sample_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param pi Passed to \code{.phylby_step}.
 #' @param rate Defaults to \code{1}.
 #' @param branch_prior_mean Passed to \code{.phylby_step}. Defaults to \code{0.1}.

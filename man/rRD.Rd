@@ -8,7 +8,7 @@
 rRD(protected, step = 10, normalize = TRUE)
 }
 \arguments{
-\item{protected}{See Usage.}
+\item{protected}{Coerced to logical by the body, with \code{as.logical}.}
 \item{step}{Passed to \code{.measure}. Defaults to \code{10}.}
 \item{normalize}{Passed to \code{.measure}. Defaults to \code{TRUE}.}
 }

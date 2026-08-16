@@ -110,7 +110,7 @@ morie_asmnvr <- function(reads, k = NULL, multiplicity = "set") {
 #' edges/indeg/outdeg are environments keyed by vertex (string),
 #' paralleling the Python dict-of-lists + counter-dicts.
 #'
-#' @param reads See Usage.
+#' @param reads Coerced to character by the body, with \code{as.character}.
 #' @param k Numeric; combined arithmetically in the body.
 #' @param multiplicity One of \code{"count"}, \code{"set"}. Defaults to \code{"set"}.
 #' @return A list with \code{edges}, \code{indeg}, \code{outdeg}.

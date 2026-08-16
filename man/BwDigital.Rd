@@ -8,11 +8,11 @@
 BwDigital(Omega_c = NULL, N = NULL, T = 1, fc = NULL, fs = NULL, z = NULL)
 }
 \arguments{
-\item{Omega_c}{Defaults to \code{NULL}.}
-\item{N}{Defaults to \code{NULL}.}
-\item{T}{Defaults to \code{1}.}
-\item{fc}{Defaults to \code{NULL}.}
-\item{fs}{Defaults to \code{NULL}.}
+\item{Omega_c}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{fc}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{

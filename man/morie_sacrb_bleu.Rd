@@ -8,10 +8,10 @@
 morie_sacrb_bleu(candidates, references, max_n = 4L, weights = NULL, tokenizer = "13a", lowercase = FALSE)
 }
 \arguments{
-\item{candidates}{See Usage.}
-\item{references}{See Usage.}
-\item{max_n}{Defaults to \code{4L}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{candidates}{Coerced to character by the body, with \code{as.character}.}
+\item{references}{Iterated over elementwise, with \code{lapply}.}
+\item{max_n}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{tokenizer}{Passed to \code{.sacrb_tok}. Defaults to \code{"13a"}.}
 \item{lowercase}{Passed to \code{.sacrb_tok}. Defaults to \code{FALSE}.}
 }

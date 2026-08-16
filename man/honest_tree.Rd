@@ -10,7 +10,7 @@ honest_tree(X, y, W = NULL, kind = "double-sample", min_leaf = 5L, alpha = 0.05,
 \arguments{
 \item{X}{A matrix; indexed by row and column.}
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{W}{Defaults to \code{NULL}.}
+\item{W}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kind}{One of \code{"double-sample"}, \code{"propensity"}. Defaults to \code{"double-sample"}.}
 \item{min_leaf}{Numeric; combined arithmetically in the body. Defaults to \code{5L}.}
 \item{alpha}{Passed to \code{._best_split}. Defaults to \code{0.05}.}

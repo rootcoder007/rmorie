@@ -8,8 +8,8 @@
 morie_sam2vd_memory_bank(n_recent = 7, m_prompted = 1)
 }
 \arguments{
-\item{n_recent}{Defaults to \code{7}.}
-\item{m_prompted}{Defaults to \code{1}.}
+\item{n_recent}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{7}.}
+\item{m_prompted}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}. See the file header for the source the module follows.

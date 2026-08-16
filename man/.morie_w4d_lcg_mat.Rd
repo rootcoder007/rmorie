@@ -10,7 +10,7 @@
 \arguments{
 \item{nr}{A count; the body uses it as \code{matrix(...)}.}
 \item{nc}{A count; the body uses it as \code{matrix(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 }
 \description{

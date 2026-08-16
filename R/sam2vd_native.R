@@ -67,7 +67,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .sam2vd_to_num <- function(x) {
@@ -84,8 +84,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_recent Defaults to \code{7}.
-#' @param m_prompted Defaults to \code{1}.
+#' @param n_recent Coerced to integer by the body, with \code{as.integer}. Defaults to \code{7}.
+#' @param m_prompted Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{recent}, \code{prompted}, \code{pointers}, \code{n_recent}, \code{m_prompted}, \code{note}.
 #' @export
 morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
@@ -111,7 +111,7 @@ morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
 #' source it follows.
 #'
 #' @param bank A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.
-#' @param frame_index See Usage.
+#' @param frame_index Coerced to integer by the body, with \code{as.integer}.
 #' @param features Passed to \code{.sam2vd_to_num}.
 #' @param prompted A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param object_pointer Optional; may be \code{NULL}. Passed to \code{.sam2vd_to_num}.
@@ -164,9 +164,9 @@ morie_sam2vd_push_memory <- function(bank, frame_index, features,
 #' source it follows.
 #'
 #' @param entry A list; the body reads \code{$features}, \code{$frame}, \code{$prompted} from it.
-#' @param current_frame See Usage.
-#' @param dim Defaults to \code{NULL}.
-#' @param scale Defaults to \code{0.1}.
+#' @param current_frame Coerced to integer by the body, with \code{as.integer}.
+#' @param dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{features}, \code{embedded}, \code{distance}.
 #' @export
 morie_sam2vd_temporal_embedding <- function(entry, current_frame,
@@ -205,7 +205,7 @@ morie_sam2vd_temporal_embedding <- function(entry, current_frame,
 #' @param frame_features Passed to \code{.sam2vd_to_num}.
 #' @param bank A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.
 #' @param current_frame Passed to \code{morie_sam2vd_temporal_embedding}.
-#' @param n_blocks Defaults to \code{1}.
+#' @param n_blocks Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param include_pointers A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{features}, \code{attended}, \code{n_memories}, \code{weights}, \code{note}.
 #' @export

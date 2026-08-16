@@ -121,7 +121,7 @@ q_values <- function(T, R, gamma, V) {
 #' @param T Passed to \code{.mdp}.
 #' @param R A vector; its length is taken.
 #' @param gamma Passed to \code{.mdp}.
-#' @param policy Defaults to \code{NULL}.
+#' @param policy Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
 #' @export
@@ -209,7 +209,7 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{f}, as built in the body.
 #' @export
 .rng <- function(seed) {
@@ -240,7 +240,7 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' @param H Defaults to \code{0}.
 #' @param burn Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param R0 Defaults to \code{NULL}.
+#' @param R0 Optional; may be \code{NULL}. Iterated over elementwise, with \code{vapply}.
 #' @return A list with \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{final_policy}.
 #' @export
 policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
@@ -311,11 +311,11 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 #' source it follows.
 #'
 #' @param T Passed to \code{.mdp}.
-#' @param observations See Usage.
+#' @param observations Iterated over elementwise, with \code{lapply}.
 #' @param gamma Passed to \code{.mdp}. Defaults to \code{0.9}.
 #' @param n_iter Defaults to \code{1000}.
-#' @param delta Defaults to \code{0.25}.
-#' @param alpha Defaults to \code{1}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param prior Defaults to \code{"uniform"}.
 #' @param scale Defaults to \code{1}.
 #' @param r_max Defaults to \code{1}.

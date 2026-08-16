@@ -8,7 +8,7 @@
 Pgamma(q, shape, rate = 1, lower_tail = TRUE)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Iterated over elementwise, with \code{vapply}.}
 \item{shape}{Passed to \code{.morie_gammainc_p}.}
 \item{rate}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}

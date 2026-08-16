@@ -8,9 +8,9 @@
 phmmsr_msv_score(seq, profile, tau = 0.02, lam = 0.7)
 }
 \arguments{
-\item{seq}{See Usage.}
+\item{seq}{Coerced to list by the body, with \code{as.list}.}
 \item{profile}{Passed to \code{.phmmsr_to_matrix}.}
-\item{tau}{Defaults to \code{0.02}.}
+\item{tau}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
 \item{lam}{Defaults to \code{0.7}.}
 }
 \description{

@@ -168,7 +168,7 @@ morie_vepan_consequence_impact <- function(term) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param terms See Usage.
+#' @param terms Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{[}.
 #' @export
 morie_vepan_most_severe_consequence <- function(terms) {
@@ -206,7 +206,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ex See Usage.
+#' @param ex A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{[}.
 #' @export
 .vepan_exons <- function(ex) {
@@ -284,7 +284,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #' of its bases (returns list(seq, gpos)).
 #'
 #' @param tr Passed to \code{.vepan_transcript}.
-#' @param genome See Usage.
+#' @param genome Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{seq}, \code{gpos}.
 #' @export
 morie_vepan_transcript_sequence <- function(tr, genome) {
@@ -750,8 +750,8 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' source it follows.
 #'
 #' @param variant Passed to \code{.vepan_variant}.
-#' @param transcripts See Usage.
-#' @param genome See Usage.
+#' @param transcripts Iterated over elementwise, with \code{lapply}.
+#' @param genome Coerced to character by the body, with \code{as.character}.
 #' @param upstream Defaults to \code{5000}.
 #' @param downstream Defaults to \code{5000}.
 #' @return The value of \code{[}.
@@ -990,7 +990,7 @@ morie_vepan_pick <- function(records, per_gene=FALSE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param variants See Usage.
+#' @param variants Iterated over elementwise, with \code{lapply}.
 #' @param transcripts See Usage.
 #' @param genome Passed to \code{morie_vepan_annotate}.
 #' @param upstream Passed to \code{morie_vepan_annotate}. Defaults to \code{5000}.

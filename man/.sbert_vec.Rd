@@ -8,7 +8,7 @@
 .sbert_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A list; the body checks with \code{is.list}.}
 }
 \description{
 A step of the sbert_native implementation. Called by \code{classification_features}, \code{cosine_similarity}. See the file header for the source the module follows.

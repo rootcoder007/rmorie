@@ -8,7 +8,7 @@
 PsdAcf(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 CIRCULAR autocorrelation.  The linear (biased) ACF gives a smoothed version instead, and the size of that difference is returned -- the distinction is the reason the periodogram is inconsistent.

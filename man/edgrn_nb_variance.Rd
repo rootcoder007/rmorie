@@ -8,8 +8,8 @@
 edgrn_nb_variance(mu, dispersion)
 }
 \arguments{
-\item{mu}{See Usage.}
-\item{dispersion}{See Usage.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dispersion}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

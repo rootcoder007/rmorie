@@ -13,9 +13,9 @@ xdeep_xdeepfm_score(x_linear, w_linear, X0, Ws, w_cin, dnn_output = 0, w_dnn = 1
 \item{X0}{See Usage.}
 \item{Ws}{See Usage.}
 \item{w_cin}{Passed to \code{.xdeep_to_vec}.}
-\item{dnn_output}{Defaults to \code{0}.}
-\item{w_dnn}{Defaults to \code{1}.}
-\item{bias}{Defaults to \code{0}.}
+\item{dnn_output}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{w_dnn}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{bias}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the xdeep_native implementation. No other function in the package calls it. See the file header for the source the module follows.

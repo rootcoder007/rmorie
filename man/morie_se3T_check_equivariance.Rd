@@ -15,7 +15,7 @@ morie_se3T_check_equivariance(positions, type0, type1, layer = NULL, axis = c(0.
 \item{axis}{Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{c(0.3, -0.7, 0.4)}.}
 \item{angle}{Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{1.1}.}
 \item{translation}{Passed to \code{.se3T_vec}. Defaults to \code{c(2, -1, 0.5)}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.}
 }
 \description{
 follow Part of the se3T_native implementation; see the file header for the source it follows.

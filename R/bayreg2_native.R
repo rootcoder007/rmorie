@@ -12,9 +12,9 @@
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nu Numeric; combined arithmetically in the body. Defaults to \code{4}.
-#' @param max_iter Defaults to \code{200}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{weights}, \code{residuals}, \code{scale2}, \code{fitted}, \code{iterations}, \code{converged}, \code{nu}, \code{loglik}, \code{n}, \code{p}, \code{method}, \code{note}.

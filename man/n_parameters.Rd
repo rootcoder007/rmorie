@@ -8,9 +8,9 @@
 n_parameters(n_features, n_fields, k_dim, model = "ffm")
 }
 \arguments{
-\item{n_features}{See Usage.}
-\item{n_fields}{See Usage.}
-\item{k_dim}{See Usage.}
+\item{n_features}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_fields}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k_dim}{Coerced to integer by the body, with \code{as.integer}.}
 \item{model}{One of \code{"ffm"}, \code{"fm"}. Defaults to \code{"ffm"}.}
 }
 \description{

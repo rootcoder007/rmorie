@@ -8,8 +8,8 @@
 RlsObj(errors, lam)
 }
 \arguments{
-\item{errors}{See Usage.}
-\item{lam}{See Usage.}
+\item{errors}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 errors, giving an effective memory of 1/(1-lambda) samples; lambda = 1 is the growing window, which never forgets and so cannot track.

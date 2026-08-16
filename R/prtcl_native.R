@@ -102,12 +102,12 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param n.particles See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n.particles Coerced to integer by the body, with \code{as.integer}.
 #' @param init See Usage.
 #' @param step See Usage.
 #' @param loglik See Usage.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @param resample.threshold Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param systematic A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{filtered.mean}, \code{loglik}, \code{ess}, \code{min.ess}, \code{resampled}, \code{n.particles}, \code{n.obs}, \code{systematic}, \code{particles}, \code{method}.
@@ -167,8 +167,8 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
 #' @param q Numeric; combined arithmetically in the body.
 #' @param c Numeric; combined arithmetically in the body.
 #' @param r Numeric; combined arithmetically in the body.
-#' @param m0 Defaults to \code{0}.
-#' @param p0 Defaults to \code{1}.
+#' @param m0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param p0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{means}, \code{loglik}.
 #' @export
 morie_prtcl_kalman_filter_1d <- function(y, a, q, c, r, m0 = 0, p0 = 1) {

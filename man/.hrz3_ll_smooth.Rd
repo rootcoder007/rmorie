@@ -10,7 +10,7 @@
 \arguments{
 \item{z}{A vector; its length is taken.}
 \item{y}{A vector; its length is taken.}
-\item{zq}{See Usage.}
+\item{zq}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{

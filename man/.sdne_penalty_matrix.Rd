@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{adjacency}{Passed to \code{.sdne_mat}.}
-\item{beta}{Defaults to \code{5}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.}
 }
 \description{
 A step of the sdne_native implementation. Called by \code{.sdne_second_order_loss}. See the file header for the source the module follows.

@@ -128,7 +128,7 @@
 #' source it follows.
 #'
 #' @param axis Passed to \code{.se3T_vec}.
-#' @param angle See Usage.
+#' @param angle Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 morie_se3T_rotation_matrix <- function(axis, angle) {
@@ -179,9 +179,9 @@ morie_se3T_invariant_features <- function(positions, i, j) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param distance See Usage.
+#' @param distance Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.se3T_vec}.
-#' @param sigma Defaults to \code{1}.
+#' @param sigma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 morie_se3T_radial_kernel <- function(distance, weights=NULL, sigma=1.0) {
@@ -210,7 +210,7 @@ morie_se3T_radial_kernel <- function(distance, weights=NULL, sigma=1.0) {
 #' @param type1 Passed to \code{.se3T_mat}.
 #' @param weights Passed to \code{morie_se3T_radial_kernel}.
 #' @param sigma Passed to \code{morie_se3T_radial_kernel}. Defaults to \code{1}.
-#' @param temperature Defaults to \code{1}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{type1}, \code{type0}, \code{weights}, \code{note}.
 #' @export
 morie_se3T_se3_attention <- function(positions, type0, type1, weights=NULL,
@@ -272,7 +272,7 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights=NULL,
 #' @param axis Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{c(0.3, -0.7, 0.4)}.
 #' @param angle Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{1.1}.
 #' @param translation Passed to \code{.se3T_vec}. Defaults to \code{c(2, -1, 0.5)}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{type1_deviation}, \code{type0_deviation}, \code{weight_deviation}, \code{equivariant}, \code{weights_invariant}, \code{method}, \code{note}.
 #' @export
 morie_se3T_check_equivariance <- function(positions, type0, type1, layer=NULL,

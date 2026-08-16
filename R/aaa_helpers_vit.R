@@ -38,7 +38,7 @@
 #' @param nr A count; the body uses it as \code{matrix(...)}.
 #' @param nc A count; the body uses it as \code{matrix(...)}.
 #' @param skip Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param scale Defaults to \code{1}.
+#' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .vitdraw <- function(nr, nc, skip = 0, scale = 1) {

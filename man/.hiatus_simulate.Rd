@@ -12,12 +12,12 @@
 \item{nu}{Passed to \code{._check}.}
 \item{mu}{Passed to \code{._check}.}
 \item{sigma}{Passed to \code{._check}.}
-\item{S0}{Defaults to \code{NULL}.}
-\item{I0}{Defaults to \code{NULL}.}
+\item{S0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{I0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{t_end}{Numeric; combined arithmetically in the body. Defaults to \code{2000}.}
-\item{dt}{Defaults to \code{0.05}.}
-\item{mutation}{Defaults to \code{0}.}
-\item{record_every}{Defaults to \code{100L}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{mutation}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{record_every}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
 }
 \description{
 A step of the hiatus_native implementation. Called by \code{morie_hiatus}. See the file header for the source the module follows.

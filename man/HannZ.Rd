@@ -8,8 +8,8 @@
 HannZ(X, z)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{z}{See Usage.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 filter is one factor multiplying the input transform.  Dividing out X(z) gives eq (3.103) -- which is why the transfer function does not depend on the input.

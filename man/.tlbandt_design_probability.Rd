@@ -8,8 +8,8 @@
 .tlbandt_design_probability(blip_estimate, delta = 0.1, greedy = FALSE)
 }
 \arguments{
-\item{blip_estimate}{See Usage.}
-\item{delta}{Defaults to \code{0.1}.}
+\item{blip_estimate}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 \item{greedy}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

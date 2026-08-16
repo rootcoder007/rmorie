@@ -35,7 +35,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .s03mat <- function(x) {
@@ -509,7 +509,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param i See Usage.
+#' @param i Coerced to integer by the body, with \code{as.integer}.
 #' @param base Numeric; combined arithmetically in the body. Defaults to \code{2L}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
@@ -531,7 +531,7 @@
 #' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param base Defaults to \code{2L}.
+#' @param base Iterated over elementwise, with \code{vapply}. Defaults to \code{2L}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .s03unif <- function(n, base = 2L) vapply(seq_len(n) - 1L, .s03vdc, 0, base = base)
@@ -801,7 +801,7 @@
 #' @param y Passed to \code{.s03vec}.
 #' @param D Passed to \code{.s03vec}.
 #' @param X Passed to \code{.s03design}.
-#' @param trim Defaults to \code{0}.
+#' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param link Defaults to \code{"logit"}.
 #' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0}, \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
 #' @export

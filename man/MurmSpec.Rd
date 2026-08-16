@@ -10,9 +10,9 @@ MurmSpec(pcg, fs, f1 = 25, f2 = 75, f3 = 150)
 \arguments{
 \item{pcg}{Passed to \code{.bsapsd}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{f1}{Defaults to \code{25}.}
-\item{f2}{Defaults to \code{75}.}
-\item{f3}{Defaults to \code{150}.}
+\item{f1}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{25}.}
+\item{f2}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{75}.}
+\item{f3}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{150}.}
 }
 \description{
 (6.45) Part of the rangayyan_phys implementation; see the file header for the source it follows.

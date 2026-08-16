@@ -9,9 +9,9 @@ cooccurrence(corpus, window = 10, harmonic = TRUE, min_count = 1)
 }
 \arguments{
 \item{corpus}{Passed to \code{.glove_as_docs}.}
-\item{window}{Defaults to \code{10}.}
+\item{window}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{harmonic}{A flag; the body branches on it. Defaults to \code{TRUE}.}
-\item{min_count}{Defaults to \code{1}.}
+\item{min_count}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 Sec. 4.2: a token d positions away contributes 1/d to the count when harmonic = TRUE.

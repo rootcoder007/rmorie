@@ -8,7 +8,7 @@
 .dqnv_replay_buffer_new(capacity)
 }
 \arguments{
-\item{capacity}{See Usage.}
+\item{capacity}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.

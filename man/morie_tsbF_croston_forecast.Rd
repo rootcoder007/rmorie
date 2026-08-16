@@ -8,9 +8,9 @@
 morie_tsbF_croston_forecast(y, alpha = 0.1, horizon = 1, init = "global", z0 = NULL, x0 = NULL, burn_in = 0)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{alpha}{Defaults to \code{0.1}.}
-\item{horizon}{Defaults to \code{1}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{init}{Passed to \code{.tsbF_init}. Defaults to \code{"global"}.}
 \item{z0}{Passed to \code{.tsbF_init}.}
 \item{x0}{Passed to \code{.tsbF_init}.}

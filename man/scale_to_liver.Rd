@@ -8,12 +8,12 @@
 scale_to_liver(clint_in_vitro, fu_incubation, system = "hepatocytes", species = "human", pbsf = NULL, liver_weight = NULL)
 }
 \arguments{
-\item{clint_in_vitro}{See Usage.}
-\item{fu_incubation}{See Usage.}
+\item{clint_in_vitro}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fu_incubation}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{system}{One of \code{"hepatocytes"}, \code{"microsomes"}. Defaults to \code{"hepatocytes"}.}
 \item{species}{Defaults to \code{"human"}.}
-\item{pbsf}{Defaults to \code{NULL}.}
-\item{liver_weight}{Defaults to \code{NULL}.}
+\item{pbsf}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{liver_weight}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the clrnt_native implementation. Called by \code{clrnt}. See the file header for the source the module follows.

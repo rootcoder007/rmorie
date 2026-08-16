@@ -8,9 +8,9 @@
 .proj(row, W, b = NULL)
 }
 \arguments{
-\item{row}{See Usage.}
+\item{row}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W}{A matrix; passed to \code{as.matrix}.}
-\item{b}{Defaults to \code{NULL}.}
+\item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the berte_native implementation. No other function in the package calls it. See the file header for the source the module follows.

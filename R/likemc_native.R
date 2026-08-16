@@ -60,8 +60,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param observed See Usage.
-#' @param expected See Usage.
+#' @param observed Coerced to numeric by the body, with \code{as.numeric}.
+#' @param expected Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .morie_likemc_poisll <- function(observed, expected) {
@@ -100,12 +100,12 @@
 #' source it follows.
 #'
 #' @param model A list; the body reads \code{$dt}, \code{$I0}, \code{$N}, \code{$S0} from it.
-#' @param data See Usage.
+#' @param data Coerced to numeric by the body, with \code{as.numeric}.
 #' @param priors See Usage.
-#' @param n_iter See Usage.
-#' @param seed Defaults to \code{1}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.15}.
-#' @param burn Defaults to \code{0}.
+#' @param burn Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{beta_mean}, \code{gamma_mean}, \code{chain}, \code{n_draws}, \code{n_iter}, \code{acceptance_rate}, \code{R0_mean}, \code{R0_q025}, \code{R0_median}, \code{R0_q975}, \code{logpost_final}, \code{seed}, \code{step}, \code{method}.
 #' @export
 morie_likemc <- function(model, data, priors, n_iter, seed = 1,

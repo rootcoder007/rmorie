@@ -235,7 +235,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param items See Usage.
+#' @param items Coerced to character by the body, with \code{as.character}.
 #' @param ag A list; the body reads \code{$rules} from it.
 #' @param first Passed to \code{.prsLR_first_seq}.
 #' @param nts Passed to \code{.prsLR_first_seq}.
@@ -531,7 +531,7 @@
 #' source it follows.
 #'
 #' @param g Passed to \code{.prsLR_build_tables}.
-#' @param tokens See Usage.
+#' @param tokens Coerced to character by the body, with \code{as.character}.
 #' @param method Passed to \code{.prsLR_build_tables}.
 #' @param tables See Usage.
 #' @return Nothing; this branch always raises.

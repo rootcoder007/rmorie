@@ -116,7 +116,7 @@ cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 #' @param p Numeric; combined arithmetically in the body.
 #' @param f0 Numeric; combined arithmetically in the body.
 #' @param g0 Passed to \code{.cgnonl_dot}.
-#' @param est Defaults to \code{NULL}.
+#' @param est Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param max_double A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @param max_cubic A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
@@ -218,10 +218,10 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #'
 #' @param f See Usage.
 #' @param grad See Usage.
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param beta Passed to \code{.cgnonl_beta}. Defaults to \code{"fletcher-reeves"}.
 #' @param restart Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @param max_iter Defaults to \code{NULL}.
+#' @param max_iter Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param est Defaults to \code{NULL}.
 #' @param line_search Compared against \code{"exact-quadratic"}. Defaults to \code{"fletcher-reeves"}.

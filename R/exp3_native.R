@@ -22,9 +22,9 @@
 #' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
-#' @param gamma_ See Usage.
-#' @param T Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param gamma_ Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{probs}, \code{weights}, \code{total_reward}, \code{method}.
 #' @export
 morie_exp3 <- function(x, gamma_, T = NULL, seed = 0) {

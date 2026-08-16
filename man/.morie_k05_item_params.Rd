@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{c}{Defaults to \code{NULL}.}
 \item{upper}{Defaults to \code{NULL}.}
 }

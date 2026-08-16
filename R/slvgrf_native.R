@@ -28,8 +28,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
-#' @param priority See Usage.
+#' @param scores Coerced to numeric by the body, with \code{as.numeric}.
+#' @param priority Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{g}, \code{s}.
 #' @export
 .slvgrf_check <- function(scores, priority) {
@@ -49,10 +49,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param W See Usage.
-#' @param mu1 See Usage.
-#' @param mu0 See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param W Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param e A vector; its length is taken.
 #' @return A vector, from \code{as.numeric}.
 #' @export
@@ -221,7 +221,7 @@ qini_curve <- function(scores, priority, cost = NULL) {
 #' @param scores Passed to \code{.slvgrf_check}.
 #' @param priority Passed to \code{.slvgrf_check}.
 #' @param weight Defaults to \code{"autoc"}.
-#' @param reps Defaults to \code{500}.
+#' @param reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{weight}, \code{reps}, \code{n}, \code{null}, \code{method}.
 #' @export

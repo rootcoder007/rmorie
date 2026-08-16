@@ -8,7 +8,7 @@
 Cepstrum(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 so it discards the phase and is NOT invertible -- the whole difference from the complex cepstrum of eq (4.64).  It still shows the echo impulses of eq (4.80), which is what it is used for.

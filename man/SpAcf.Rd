@@ -11,7 +11,7 @@ SpAcf(coords, z, bins = NULL, cutoff = NULL)
 \item{coords}{A matrix; passed to \code{as.matrix}.}
 \item{z}{Passed to \code{.morie_spx_chkv}.}
 \item{bins}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{cutoff}{Defaults to \code{NULL}.}
+\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 Sec. 1.4.2 and Chapter problem 1.14.  C(0) uses the 1/n divisor.

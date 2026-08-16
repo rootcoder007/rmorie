@@ -8,8 +8,8 @@
 .morie_dp_check_budget(epsilon, delta = NULL)
 }
 \arguments{
-\item{epsilon}{See Usage.}
-\item{delta}{Defaults to \code{NULL}.}
+\item{epsilon}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delta}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \code{morie_dp_count}, \code{morie_dp_covariance} and 12 others in the module. See the file header for the source the module follows.

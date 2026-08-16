@@ -8,7 +8,7 @@
 .wsm_bandwidth(x, rule = "3.31")
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rule}{Defaults to \code{"3.31"}.}
 }
 \description{

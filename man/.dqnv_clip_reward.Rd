@@ -8,9 +8,9 @@
 .dqnv_clip_reward(r, lo = -1, hi = 1)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{lo}{Defaults to \code{-1}.}
-\item{hi}{Defaults to \code{1}.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1}.}
+\item{hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.

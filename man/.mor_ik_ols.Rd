@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{Passed to \code{.ghc_pinv}.}
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the causrddh_native implementation. Called by \code{morie_causrddh}. See the file header for the source the module follows.

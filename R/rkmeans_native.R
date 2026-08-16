@@ -223,8 +223,8 @@
 #' @param k A count; the body uses it as \code{integer(...)}. Defaults to \code{2}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param penalty Compared against \code{"huber"}. Defaults to \code{"square"}.
-#' @param n_start Defaults to \code{20}.
-#' @param max_iter Defaults to \code{100}.
+#' @param n_start Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param huber_c Passed to \code{.rkmeans_concentrate}. Defaults to \code{1.345}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param centers Optional; may be \code{NULL}. A matrix; indexed by row and column.

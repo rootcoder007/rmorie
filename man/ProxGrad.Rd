@@ -11,9 +11,9 @@ ProxGrad(f, grad_f, prox_g, x0, lr, n_iter = 200L, relaxation = 1)
 \item{f}{smooth part, reported only as the objective \' @param}
 \item{grad_f}{See Usage.}
 \item{prox_g}{See Usage.}
-\item{x0}{See Usage.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lr}{Numeric; combined arithmetically in the body.}
-\item{n_iter}{Defaults to \code{200L}.}
+\item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{relaxation}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }
 \description{

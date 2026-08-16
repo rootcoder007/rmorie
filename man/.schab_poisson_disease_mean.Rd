@@ -8,10 +8,10 @@
 .schab_poisson_disease_mean(expected, X, beta, psi)
 }
 \arguments{
-\item{expected}{See Usage.}
+\item{expected}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{beta}{See Usage.}
-\item{psi}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{psi}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. No other function in the package calls it. See the file header for the source the module follows.

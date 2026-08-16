@@ -11,9 +11,9 @@ SeizWt(eeg, fs = 1, wavelet = "db4", levels = 5, scales = c(3, 4, 5), threshold 
 \item{eeg}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{wavelet}{Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.}
-\item{levels}{Defaults to \code{5}.}
-\item{scales}{Defaults to \code{c(3, 4, 5)}.}
-\item{threshold}{Defaults to \code{NULL}.}
+\item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
+\item{scales}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{c(3, 4, 5)}.}
+\item{threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

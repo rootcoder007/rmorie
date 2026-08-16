@@ -61,7 +61,7 @@ COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 #' source it follows.
 #'
 #' @param bits A vector; its length is taken.
-#' @param n_bits Defaults to \code{NULL}.
+#' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A vector, from \code{sort}.
 #' @export
 sasimi_fingerprint <- function(bits, n_bits = NULL) {
@@ -203,8 +203,8 @@ sasimi_cosine <- function(fp_a, fp_b) {
 #'
 #' @param fp_a See Usage.
 #' @param fp_b See Usage.
-#' @param alpha Defaults to \code{1}.
-#' @param beta Defaults to \code{1}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
@@ -264,7 +264,7 @@ sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fps See Usage.
+#' @param fps Iterated over elementwise, with \code{lapply}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
@@ -295,7 +295,7 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #'
 #' @param query See Usage.
 #' @param fps A vector; its length is taken and its elements indexed.
-#' @param k Defaults to \code{5L}.
+#' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{result}, as built in the body.
 #' @export

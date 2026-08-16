@@ -10,8 +10,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param z Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param z Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
 #' @param n0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -66,9 +66,9 @@ Ztrans <- function(x, z = NULL, n0 = 0) {
 #'
 #' separately so the property is demonstrated, not assumed.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param z See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{y}, \code{Y}, \code{XH}, \code{z}, \code{max_difference}, \code{holds}, \code{method}.
 #' @export
 ZtConv <- function(x, h, z) {
@@ -101,9 +101,9 @@ ZtConv <- function(x, h, z) {
 #'
 #' circle, z = exp(j omega T).  fs = NULL reads omega as normalized.
 #'
-#' @param x See Usage.
-#' @param omega See Usage.
-#' @param fs Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{X}, \code{z}, \code{omega}, \code{T}, \code{n}, \code{on_unit_circle}, \code{method}.
 #' @export
 DtftZ <- function(x, omega, fs = NULL) {
@@ -131,8 +131,8 @@ DtftZ <- function(x, omega, fs = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param omega See Usage.
-#' @param t Defaults to \code{0}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{value}, \code{real}, \code{imag}, \code{angle}, \code{unit_modulus}, \code{method}.
 #' @export
 Euler <- function(omega, t = 0) {
@@ -161,11 +161,11 @@ Euler <- function(omega, t = 0) {
 #' omega = 2 pi f.  Integrated over the supplied samples, so the limits
 #' are the duration of the signal.
 #'
-#' @param x See Usage.
-#' @param t Defaults to \code{NULL}.
-#' @param omega Defaults to \code{NULL}.
-#' @param f Defaults to \code{NULL}.
-#' @param dt Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param f Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{X}, \code{omega}, \code{f}, \code{variable}, \code{duration}, \code{method}.
 #' @export
 Ctft <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
@@ -240,10 +240,10 @@ Fourier <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
 #'
 #' factor wrong scales the synthesis by 6.28, so the branch is explicit.
 #'
-#' @param X See Usage.
-#' @param t See Usage.
-#' @param omega Defaults to \code{NULL}.
-#' @param f Defaults to \code{NULL}.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param f Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{x}, \code{t}, \code{variable}, \code{scale}, \code{method}.
 #' @export
 Ictft <- function(X, t, omega = NULL, f = NULL) {
@@ -291,8 +291,8 @@ Ictft <- function(X, t, omega = NULL, f = NULL) {
 #' distinction from the DFT of eq (3.80), which samples this at N
 #' points.
 #'
-#' @param x See Usage.
-#' @param omega See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{X}, \code{omega}, \code{n0}, \code{n}, \code{method}.
 #' @export
@@ -321,8 +321,8 @@ Dtft <- function(x, omega, n0 = 0) {
 #'
 #' finely; K < N folds and the signal cannot be recovered.
 #'
-#' @param x See Usage.
-#' @param k_points See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param k_points Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{X}, \code{K}, \code{n}, \code{aliased}, \code{method}.
 #' @export
 DftK <- function(x, k_points) {
@@ -351,7 +351,7 @@ DftK <- function(x, k_points) {
 #' with no power-of-two requirement.  eq (3.85) is the same sum split
 #' into cos and sin parts, returned here so the two cannot disagree.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{X}, \code{real}, \code{imag}, \code{n}, \code{magnitude}, \code{conjugate_symmetric}, \code{method}.
 #' @export
 Dft <- function(x) {
@@ -385,7 +385,7 @@ Dft <- function(x) {
 #' the folding frequency fs/2 are the two real-valued bins.
 #'
 #' @param x See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 DftX <- function(x, fs = 1) {
@@ -406,8 +406,8 @@ DftX <- function(x, fs = 1) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param npoints See Usage.
-#' @param power Defaults to \code{1}.
+#' @param npoints Coerced to integer by the body, with \code{as.integer}.
+#' @param power Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{W}, \code{N}, \code{power}, \code{root_of_unity}, \code{method}.
 #' @export
 Twiddle <- function(npoints, power = 1) {
@@ -433,7 +433,7 @@ Twiddle <- function(npoints, power = 1) {
 #' the structure the FFT exploits via eqs (3.88)-(3.89).  Checked
 #' against Dft() rather than assumed equal.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{X}, \code{W}, \code{n}, \code{max_difference}, \code{agrees_with_definition}, \code{method}.
 #' @export
 DftTw <- function(x) {
@@ -468,9 +468,9 @@ DftTw <- function(x) {
 #' the DFT projects onto the conjugated exponential, and that sign is
 #' the commonest transcription error in a hand-written DFT.
 #'
-#' @param npoints See Usage.
-#' @param n See Usage.
-#' @param k See Usage.
+#' @param npoints Coerced to integer by the body, with \code{as.integer}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{W}, \code{cos}, \code{sin}, \code{angle}, \code{N}, \code{n}, \code{k}, \code{method}.
 #' @export
 TwidCS <- function(npoints, n, k) {
@@ -493,7 +493,7 @@ TwidCS <- function(npoints, n, k) {
 #'
 #' imaginary part is MINUS the projection onto the corresponding sine.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{X}, \code{cos_projection}, \code{sin_projection}, \code{real}, \code{imag}, \code{n}, \code{method}.
 #' @export
 DftRI <- function(x) {
@@ -524,7 +524,7 @@ DftRI <- function(x) {
 #' residue is reported, not discarded -- a large one means the spectrum
 #' was not conjugate-symmetric and the "real signal" reading is wrong.
 #'
-#' @param X See Usage.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{x}, \code{complex}, \code{n}, \code{max_imaginary}, \code{method}.
 #' @export
 IdftRI <- function(X) {
@@ -552,8 +552,8 @@ IdftRI <- function(X) {
 #' eq (3.90), and the linear one needs L >= Nx + Nh - 1 with both
 #' sequences zero-padded.  Both are returned so the wrap is visible.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{linear}, \code{circular}, \code{from_dft}, \code{padded_length}, \code{n_linear}, \code{n_circular}, \code{max_difference}, \code{holds}, \code{wraps_if_unpadded}, \code{method}.
 #' @export
 DftConv <- function(x, h) {
@@ -593,9 +593,9 @@ DftConv <- function(x, h) {
 #'
 #' a sign flip, one of the two properties the FFT is built on.
 #'
-#' @param npoints See Usage.
-#' @param n See Usage.
-#' @param k See Usage.
+#' @param npoints Coerced to integer by the body, with \code{as.integer}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{negative_power}, \code{conjugate}, \code{difference}, \code{holds}, \code{N}, \code{n}, \code{k}, \code{method}.
 #' @export
 TwidConj <- function(npoints, n, k) {
@@ -620,9 +620,9 @@ TwidConj <- function(npoints, n, k) {
 #'
 #' reused at every FFT stage, and why every DFT relation is periodic.
 #'
-#' @param npoints See Usage.
-#' @param n See Usage.
-#' @param k See Usage.
+#' @param npoints Coerced to integer by the body, with \code{as.integer}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{base}, \code{shift_k}, \code{shift_n}, \code{max_difference}, \code{holds}, \code{N}, \code{n}, \code{k}, \code{method}.
 #' @export
 TwidPer <- function(npoints, n, k) {
@@ -654,9 +654,9 @@ TwidPer <- function(npoints, n, k) {
 #' equal periods.  Both routes -- the modular sum and the inverse DFT of
 #' X(k)H(k) -- are computed; their agreement is eq (3.87) at equal N.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param npoints Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param npoints Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{via_dft}, \code{N}, \code{max_difference}, \code{agrees}, \code{equals_linear}, \code{linear_length}, \code{method}.
 #' @export
 CircConv <- function(x, h, npoints = NULL) {
@@ -699,8 +699,8 @@ CircConv <- function(x, h, npoints = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{n}, \code{even}, \code{odd}, \code{x}, \code{reconstruction_error}.
 #' @export
 .morie_rg_evenodd <- function(x, n = NULL) {
@@ -786,8 +786,8 @@ EvenOdd <- function(x, n = NULL) {
 #' Y_l(omega) = X_l(omega) + P_l(omega).  Eq (4.59) needs both factors
 #' nonzero, so zeros are rejected rather than yielding -Inf.
 #'
-#' @param x See Usage.
-#' @param p See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @param omega See Usage.
 #' @param t Defaults to \code{NULL}.
 #' @param dt Defaults to \code{NULL}.
@@ -827,10 +827,10 @@ LogFT <- function(x, p, omega, t = NULL, dt = NULL) {
 #' scaled by dt as in eq (3.30), so the identity holds in the
 #' continuous-time sense rather than up to a sampling-interval factor.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param omega See Usage.
-#' @param dt Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{max_difference}, \code{holds}, \code{method}.
 #' @export
 FtConv <- function(x, h, omega, dt = 1) {
@@ -879,9 +879,9 @@ FtConv <- function(x, h, omega, dt = 1) {
 #' integer multiple of 2 pi j; that is reported as branch_offset rather
 #' than papered over -- it is the phase-unwrapping problem itself.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param z See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{y}, \code{Y_hat}, \code{X_hat}, \code{H_hat}, \code{magnitude_difference}, \code{branch_offset}, \code{holds_up_to_branch}, \code{method}.
 #' @export
 ClogSum <- function(x, h, z) {
@@ -930,8 +930,8 @@ ClogSum <- function(x, h, z) {
 #'
 #' is exactly 1, so |x| >= 1 is refused instead of diverging quietly.
 #'
-#' @param x See Usage.
-#' @param terms Defaults to \code{20}.
+#' @param x Coerced to complex by the body, with \code{as.complex}.
+#' @param terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @return A list with \code{value}, \code{exact}, \code{error}, \code{error_bound}, \code{terms}, \code{method}.
 #' @export
 LogSeries <- function(x, terms = 20) {
@@ -969,9 +969,9 @@ LogSeries <- function(x, terms = 20) {
 #' The coefficients sit at POSITIVE quefrency and decay at least as fast
 #' as 1/n: the minimum-phase cepstrum is causal.
 #'
-#' @param alpha See Usage.
-#' @param terms Defaults to \code{20}.
-#' @param z Defaults to \code{NULL}.
+#' @param alpha Coerced to complex by the body, with \code{as.complex}.
+#' @param terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param z Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 LogMinPh <- function(alpha, terms = 20, z = NULL) {
@@ -1006,9 +1006,9 @@ LogMinPh <- function(alpha, terms = 20, z = NULL) {
 #' of the cepstrum is anticausal -- which is why liftering windows for
 #' homomorphic deconvolution are two-sided.
 #'
-#' @param beta See Usage.
-#' @param terms Defaults to \code{20}.
-#' @param z Defaults to \code{NULL}.
+#' @param beta Coerced to complex by the body, with \code{as.complex}.
+#' @param terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param z Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 LogMaxPh <- function(beta, terms = 20, z = NULL) {

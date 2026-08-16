@@ -8,8 +8,8 @@
 PdfOverlap(p1, p2)
 }
 \arguments{
-\item{p1}{See Usage.}
-\item{p2}{See Usage.}
+\item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built from, D_B = -ln BC, and what makes the error bound work: the overlap of the two class-conditional densities IS the region where the optimal classifier must make mistakes.  NOT FROM THIS BOOK.

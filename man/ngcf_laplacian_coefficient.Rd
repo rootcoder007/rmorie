@@ -8,8 +8,8 @@
 ngcf_laplacian_coefficient(n_u, n_i)
 }
 \arguments{
-\item{n_u}{See Usage.}
-\item{n_i}{See Usage.}
+\item{n_u}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_i}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the ngcf_native implementation. Called by \code{ngcf_propagate}. See the file header for the source the module follows.

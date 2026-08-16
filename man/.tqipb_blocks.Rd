@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{d}{Numeric; combined arithmetically in the body.}
-\item{n_blocks}{See Usage.}
+\item{n_blocks}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 d \%\% n_blocks blocks get one extra, which is what a packer does when the dimension does not divide.

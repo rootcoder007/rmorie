@@ -8,8 +8,8 @@
 morie_sdxlcd_size_conditioning(h_original, w_original, dim = 8)
 }
 \arguments{
-\item{h_original}{See Usage.}
-\item{w_original}{See Usage.}
+\item{h_original}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{w_original}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{dim}{Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.}
 }
 \description{

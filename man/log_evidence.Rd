@@ -8,14 +8,14 @@
 log_evidence(docs, T, V, z, alpha = 0.5, beta = 0.5, m = NULL, n = NULL)
 }
 \arguments{
-\item{docs}{See Usage.}
-\item{T}{See Usage.}
-\item{V}{See Usage.}
+\item{docs}{Iterated over elementwise, with \code{lapply}.}
+\item{T}{Coerced to integer by the body, with \code{as.integer}.}
+\item{V}{Coerced to integer by the body, with \code{as.integer}.}
 \item{z}{Passed to \code{.log_evidence}.}
-\item{alpha}{Defaults to \code{0.5}.}
-\item{beta}{Defaults to \code{0.5}.}
-\item{m}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
+\item{m}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bigtm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

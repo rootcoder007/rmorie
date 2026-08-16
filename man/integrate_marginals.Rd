@@ -8,9 +8,9 @@
 integrate_marginals(conditional_marginals, log_weights, x_grid)
 }
 \arguments{
-\item{conditional_marginals}{See Usage.}
-\item{log_weights}{See Usage.}
-\item{x_grid}{See Usage.}
+\item{conditional_marginals}{Iterated over elementwise, with \code{lapply}.}
+\item{log_weights}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x_grid}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the inlasm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

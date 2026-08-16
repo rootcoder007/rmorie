@@ -8,7 +8,7 @@
 .prgrl_to_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to vector by the body, with \code{as.vector}.}
 }
 \description{
 A step of the prgrl_native implementation. Called by \code{curriculum_schedule}, \code{easy_only_fit}, \code{prgrl}. See the file header for the source the module follows.

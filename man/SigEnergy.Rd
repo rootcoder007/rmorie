@@ -8,11 +8,11 @@
 SigEnergy(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL)
 }
 \arguments{
-\item{x}{Defaults to \code{NULL}.}
-\item{t}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
-\item{X}{Defaults to \code{NULL}.}
-\item{freqs}{Defaults to \code{NULL}.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{X}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
+\item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 for the role it plays here -- E_x is constant for a given signal, so maximizing eq (4.41) is equivalent to maximizing eq (4.39).

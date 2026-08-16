@@ -8,9 +8,9 @@
 BwSqMag(Omega, Omega_c, N)
 }
 \arguments{
-\item{Omega}{See Usage.}
-\item{Omega_c}{See Usage.}
-\item{N}{See Usage.}
+\item{Omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Omega_c}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 defining Butterworth property.  At the cutoff the squared magnitude is exactly 1/2 FOR EVERY ORDER, so raising N steepens the transition without moving the half-power point.

@@ -9,7 +9,7 @@ Anc(primary, reference, order = 8, mu = 0.01, method = "lms", lam = 0.98, delta 
 }
 \arguments{
 \item{primary}{See Usage.}
-\item{reference}{See Usage.}
+\item{reference}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{order}{Defaults to \code{8}.}
 \item{mu}{Defaults to \code{0.01}.}
 \item{method}{One of \code{"lms"}, \code{"rls"}. Defaults to \code{"lms"}.}

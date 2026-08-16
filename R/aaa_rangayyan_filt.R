@@ -13,7 +13,7 @@
 #' the source it follows.
 #'
 #' @param coefs A vector; its length is taken.
-#' @param z See Usage.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_rg_polyz <- function(coefs, z) {
@@ -31,9 +31,9 @@
 #' responses.  Convolution commutes, so a filter chain may be reordered,
 #' and the result is len(h1) + len(h2) - 1 long.
 #'
-#' @param h_1 See Usage.
-#' @param h_2 See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param h_1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h_2 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index}, \code{commutes}, \code{longer_than_either_input}, \code{method}.
 #' @export
 LsiSerH <- function(h_1, h_2, n = NULL) {
@@ -68,9 +68,9 @@ LsiSerH <- function(h_1, h_2, n = NULL) {
 #' result is as long as the LONGER branch -- not longer, the contrast
 #' with the series case where the lengths add.
 #'
-#' @param h_1 See Usage.
-#' @param h_2 See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param h_1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h_2 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index}, \code{length_is_the_longer_branch}, \code{method}.
 #' @export
 LsiParH <- function(h_1, h_2, n = NULL) {
@@ -103,9 +103,9 @@ LsiParH <- function(h_1, h_2, n = NULL) {
 #' is returned is the transform OF THE SAMPLED RECORD over the interval
 #' it covers, which is why the limits come back with it.
 #'
-#' @param h See Usage.
-#' @param t See Usage.
-#' @param s See Usage.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{H}, \code{s}, \code{t_min}, \code{t_max}, \code{n}, \code{trapezoidal}, \code{over_the_sampled_interval_only}, \code{method}.
 #' @export
 Laplace <- function(h, t, s) {
@@ -137,10 +137,10 @@ Laplace <- function(h, t, s) {
 #' imaginary axis lies inside the region of convergence, which holds for
 #' a causal stable system and fails for an unstable one.
 #'
-#' @param h See Usage.
-#' @param omega See Usage.
-#' @param t Defaults to \code{NULL}.
-#' @param T Defaults to \code{NULL}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{H}, \code{omega}, \code{magnitude}, \code{phase}, \code{t_min}, \code{t_max}, \code{valid_only_inside_the_roc}, \code{method}.
 #' @export
 LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
@@ -182,11 +182,11 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
 #' a leading 1 silently doubles the order, so the denominator actually
 #' used comes back for checking.
 #'
-#' @param b_k See Usage.
-#' @param a_k See Usage.
+#' @param b_k Coerced to numeric by the body, with \code{as.numeric}.
+#' @param a_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param z Passed to \code{.morie_rg_polyz}.
-#' @param N Defaults to \code{NULL}.
-#' @param M Defaults to \code{NULL}.
+#' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param M Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{H}, \code{z}, \code{numerator}, \code{denominator}, \code{N}, \code{M}, \code{leading_one_is_implicit}, \code{method}.
 #' @export
 IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
@@ -224,13 +224,13 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param b_k See Usage.
-#' @param a_k Defaults to \code{NULL}.
-#' @param y Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_k Coerced to numeric by the body, with \code{as.numeric}.
+#' @param a_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param N Defaults to \code{NULL}.
 #' @param M Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{N}, \code{M}, \code{recursive}, \code{feedback_is_subtracted}, \code{method}.
 #' @export
 IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
@@ -275,10 +275,10 @@ IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
 #' pole ON the evaluation point makes it unbounded -- which is why a
 #' vanishing pole distance is refused rather than returning Inf.
 #'
-#' @param l_k See Usage.
-#' @param r_k See Usage.
-#' @param N Defaults to \code{NULL}.
-#' @param M Defaults to \code{NULL}.
+#' @param l_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param r_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param M Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{magnitude}, \code{zero_product}, \code{pole_product}, \code{n_zeros}, \code{n_poles}, \code{on_a_zero}, \code{method}.
 #' @export
 PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
@@ -317,11 +317,11 @@ PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
 #' since it vanishes when N = M, and leaves the phase wrong by a
 #' multiple of angle(z_0) whenever they differ.
 #'
-#' @param z_0 See Usage.
-#' @param alpha_k See Usage.
-#' @param beta_k See Usage.
-#' @param N Defaults to \code{NULL}.
-#' @param M Defaults to \code{NULL}.
+#' @param z_0 Coerced to complex by the body, with \code{as.complex}.
+#' @param alpha_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param beta_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param M Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{phase}, \code{wrapped}, \code{origin_term}, \code{zero_angle_sum}, \code{pole_angle_sum}, \code{z_0_angle}, \code{n_zeros}, \code{n_poles}, \code{origin_term_vanishes_when_orders_match}, \code{method}.
 #' @export
 PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
@@ -357,10 +357,10 @@ PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
 #' a rectangle\'s sidelobes fall off slowly -- which is what the window
 #' functions of Section 3.4 exist to fix.
 #'
-#' @param x See Usage.
-#' @param b_k Defaults to \code{NULL}.
-#' @param N Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{b}, \code{N}, \code{settled_from}, \code{dc_gain}, \code{equal_weights}, \code{delay_samples}, \code{method}.
 #' @export
 MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
@@ -405,9 +405,9 @@ MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
 #'
 #' so an FIR filter is stable whatever its coefficients.
 #'
-#' @param b_k See Usage.
+#' @param b_k Coerced to numeric by the body, with \code{as.numeric}.
 #' @param z Passed to \code{.morie_rg_polyz}.
-#' @param N Defaults to \code{NULL}.
+#' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{H}, \code{z}, \code{b}, \code{N}, \code{dc_gain}, \code{always_stable}, \code{poles_only_at_the_origin}, \code{method}.
 #' @export
 MaTf <- function(b_k, z, N = NULL) {
@@ -432,8 +432,8 @@ MaTf <- function(b_k, z, N = NULL) {
 #' ratio 1:2:1.  It is a delaying smoother, not a symmetric one: the
 #' output lags the input by exactly one sample.
 #'
-#' @param x See Usage.
-#' @param n Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{n}, \code{taps}, \code{delay_samples}, \code{settled_from}, \code{dc_gain}, \code{method}.
 #' @export
 HannFilt <- function(x, n = NULL) {
@@ -466,7 +466,7 @@ HannFilt <- function(x, n = NULL) {
 #' FINITE, which is what "FIR" names, and it sums to 1, so a constant
 #' passes through unchanged.
 #'
-#' @param n Defaults to \code{NULL}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum}, \code{finite}, \code{symmetric}, \code{method}.
 #' @export
 HannImp <- function(n = NULL) {
@@ -492,8 +492,8 @@ HannImp <- function(n = NULL) {
 #' X(z) gives eq (3.103) -- which is why the transfer function does not
 #' depend on the input.
 #'
-#' @param X See Usage.
-#' @param z See Usage.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{Y}, \code{H}, \code{X}, \code{z}, \code{transfer_function_is_input_independent}, \code{method}.
 #' @export
 HannZ <- function(X, z) {
@@ -516,7 +516,7 @@ HannZ <- function(X, z) {
 #' Nyquist.  The double zero is why the response reaches nought there
 #' smoothly and why the attenuation nearby is second order.
 #'
-#' @param z See Usage.
+#' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{H}, \code{z}, \code{zeros}, \code{zero_multiplicity}, \code{zeros_at_nyquist}, \code{dc_gain}, \code{method}.
 #' @export
 HannTf <- function(z) {
@@ -542,7 +542,7 @@ HannTf <- function(z) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{H}, \code{omega}, \code{magnitude}, \code{on_the_unit_circle}, \code{method}.
 #' @export
 HannFr <- function(omega) {
@@ -564,7 +564,7 @@ HannFr <- function(omega) {
 #' That factorization is the point -- it proves the filter has exactly
 #' linear phase, so the waveform is shifted, not distorted.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{H}, \code{omega}, \code{envelope}, \code{max_difference_from_eq_3_104}, \code{agrees_with_raw_form}, \code{real_factor_times_a_pure_delay}, \code{linear_phase}, \code{method}.
 #' @export
 HannFrs <- function(omega) {
@@ -592,7 +592,7 @@ HannFrs <- function(omega) {
 #' between.  The book\'s absolute value is redundant -- 1 + cos is never
 #' negative -- and is kept only because the book writes it.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{magnitude}, \code{omega}, \code{dc_gain}, \code{nyquist_gain}, \code{lowpass}, \code{absolute_value_is_redundant}, \code{method}.
 #' @export
 HannMag <- function(omega) {
@@ -614,7 +614,7 @@ HannMag <- function(omega) {
 #' sample at every frequency.  Constant group delay is what "no phase
 #' distortion" means.
 #'
-#' @param omega See Usage.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope}, \code{linear_phase}, \code{constant_group_delay}, \code{method}.
 #' @export
 HannPh <- function(omega) {
@@ -637,12 +637,12 @@ HannPh <- function(omega) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param window See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param window Coerced to integer by the body, with \code{as.integer}.
 #' @param kind One of \code{"l"}, \code{"order"}, \code{"trimmed"}. Defaults to \code{"median"}.
-#' @param alpha Defaults to \code{0}.
-#' @param weights Defaults to \code{NULL}.
-#' @param order Defaults to \code{NULL}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{n}, \code{window}, \code{kind}, \code{alpha}, \code{trimmed_each_end}, \code{order}, \code{nonlinear}, \code{no_frequency_response}, \code{edges}, \code{method}.
 #' @export
 OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,

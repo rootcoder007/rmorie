@@ -8,8 +8,8 @@
 cascade(primary, secondary, tol = 1e-09)
 }
 \arguments{
-\item{primary}{See Usage.}
-\item{secondary}{See Usage.}
+\item{primary}{Coerced to list by the body, with \code{as.list}.}
+\item{secondary}{Coerced to list by the body, with \code{as.list}.}
 \item{tol}{Numeric; passed to \code{max}. Defaults to \code{1e-09}.}
 }
 \description{

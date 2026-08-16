@@ -8,7 +8,7 @@
 HannFrs(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 That factorization is the point -- it proves the filter has exactly linear phase, so the waveform is shifted, not distorted.

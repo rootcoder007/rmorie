@@ -10,10 +10,10 @@
 \arguments{
 \item{feats}{A vector; its length is taken and its elements indexed.}
 \item{labels}{A vector; indexed elementwise.}
-\item{hidden}{See Usage.}
-\item{epochs}{See Usage.}
+\item{hidden}{Coerced to integer by the body, with \code{as.integer}.}
+\item{epochs}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lr}{Passed to \code{.propinf_sgd_step}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the propinf_native implementation. Called by \code{morie_propinf_property_inference}. See the file header for the source the module follows.

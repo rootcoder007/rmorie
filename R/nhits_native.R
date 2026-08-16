@@ -54,7 +54,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .nhits_vec <- function(y) {
@@ -88,9 +88,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param kernel See Usage.
-#' @param stride Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param kernel Coerced to integer by the body, with \code{as.integer}.
+#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .nhits_max_pool <- function(x, kernel, stride = NULL) {
@@ -112,8 +112,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param horizon See Usage.
-#' @param ratio See Usage.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
+#' @param ratio Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .nhits_expressiveness_knots <- function(horizon, ratio) {
@@ -131,8 +131,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param knots See Usage.
-#' @param horizon See Usage.
+#' @param knots Coerced to numeric by the body, with \code{as.numeric}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 .nhits_linear_interpolate <- function(knots, horizon) {
@@ -156,8 +156,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param window See Usage.
-#' @param horizon See Usage.
+#' @param window Coerced to numeric by the body, with \code{as.numeric}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param kernel Passed to \code{.nhits_max_pool}. Defaults to \code{1L}.
 #' @param ratio Passed to \code{.nhits_expressiveness_knots}. Defaults to \code{1}.
 #' @param degree Numeric; combined arithmetically in the body. Defaults to \code{2L}.
@@ -204,7 +204,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param window See Usage.
+#' @param window Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Passed to \code{.nhits_nhits_block}.
 #' @param blocks A vector; its length is taken and its elements indexed.
 #' @param ridge Passed to \code{.nhits_nhits_block}. Defaults to \code{1e-08}.
@@ -240,8 +240,8 @@
 #' source it follows.
 #'
 #' @param y Passed to \code{.nhits_vec}.
-#' @param horizon See Usage.
-#' @param lookback Defaults to \code{NULL}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
+#' @param lookback Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param blocks Defaults to \code{NULL}.
 #' @param ridge Passed to \code{.nhits_nhits_stack}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{total_knots}, \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.

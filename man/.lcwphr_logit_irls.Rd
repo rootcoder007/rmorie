@@ -10,7 +10,7 @@
 \arguments{
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{y}{Numeric; combined arithmetically in the body.}
-\item{max_iter}{Defaults to \code{100L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-11}.}
 \item{ridge_rel}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }

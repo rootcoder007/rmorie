@@ -8,8 +8,8 @@
 morie_snpqc1_ibs_given_ibd(x_count, y_count, correction = TRUE)
 }
 \arguments{
-\item{x_count}{See Usage.}
-\item{y_count}{See Usage.}
+\item{x_count}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y_count}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{correction}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

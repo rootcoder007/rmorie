@@ -8,8 +8,8 @@
 FdPsd(psd, freqs, fmin = NULL, fmax = NULL)
 }
 \arguments{
-\item{psd}{See Usage.}
-\item{freqs}{See Usage.}
+\item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{freqs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fmin}{Defaults to \code{NULL}.}
 \item{fmax}{Defaults to \code{NULL}.}
 }

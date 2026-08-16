@@ -8,8 +8,8 @@
 total_compute(samples_seen, model_params)
 }
 \arguments{
-\item{samples_seen}{See Usage.}
-\item{model_params}{See Usage.}
+\item{samples_seen}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{model_params}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the opnclp_native implementation. No other function in the package calls it. See the file header for the source the module follows.

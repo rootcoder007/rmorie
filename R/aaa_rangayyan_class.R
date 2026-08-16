@@ -64,7 +64,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to character by the body, with \code{as.character}.
 #' @return Nothing; this branch always raises.
 #' @export
 .morie_rg_asfrac <- function(v) {
@@ -217,7 +217,7 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' reports it beside the specificity.
 #'
 #' @param tp A matrix; passed to \code{as.matrix}.
-#' @param fn Defaults to \code{NULL}.
+#' @param fn Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sensitivity}, \code{tpf}, \code{fnf}, \code{n_diseased}, \code{tp}, \code{fn}, \code{says_nothing_about_false_alarms}, \code{method}.
 #' @export
 Sens <- function(tp, fn = NULL) {
@@ -256,7 +256,7 @@ Sens <- function(tp, fn = NULL) {
 #' the source it follows.
 #'
 #' @param tn A matrix; passed to \code{as.matrix}.
-#' @param fp Defaults to \code{NULL}.
+#' @param fp Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{specificity}, \code{tnf}, \code{fpf}, \code{n_healthy}, \code{tn}, \code{fp}, \code{method}.
 #' @export
 Spec <- function(tn, fp = NULL) {
@@ -291,10 +291,10 @@ Spec <- function(tn, fp = NULL) {
 #' the source it follows.
 #'
 #' @param tp A matrix; passed to \code{as.matrix}.
-#' @param fp Defaults to \code{NULL}.
-#' @param prevalence Defaults to \code{NULL}.
-#' @param sensitivity Defaults to \code{NULL}.
-#' @param specificity Defaults to \code{NULL}.
+#' @param fp Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param prevalence Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sensitivity Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param specificity Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
@@ -484,7 +484,7 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
 #' area whenever scores tie, which they do whenever a classifier emits a
 #' class rather than a probability.
 #'
-#' @param scores See Usage.
+#' @param scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @param labels A vector; its length is taken.
 #' @param positive Defaults to \code{1}.
 #' @return A list with \code{fpf}, \code{tpf}, \code{sensitivity}, \code{one_minus_specificity}, \code{thresholds}, \code{auc}, \code{az}, \code{mann_whitney}, \code{trapezoidal_equals_mann_whitney}, \code{n_positive}, \code{n_negative}, \code{best_index}, \code{best_operating_point}, \code{ties_counted_as_half}, \code{method}.
@@ -599,10 +599,10 @@ McNemar <- function(table, correct = NULL) {
 #' m1 = m2, however different the dispersions, so classes separated only
 #' by variance score zero.  The divergence has no such blind spot.
 #'
-#' @param m1 See Usage.
-#' @param m2 See Usage.
-#' @param s1 See Usage.
-#' @param s2 See Usage.
+#' @param m1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m2 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{dn}, \code{mean_difference}, \code{sd_sum}, \code{blind_to_variance_when_means_match}, \code{denominator_is_the_sum_not_the_quadrature_sum}, \code{method}.
 #' @export
 NormDist <- function(m1, m2, s1, s2) {
@@ -640,8 +640,8 @@ NormDist <- function(m1, m2, s1, s2) {
 #' This is the measure the book uses; Bhattacharyya appears nowhere in
 #' it.
 #'
-#' @param m1 See Usage.
-#' @param m2 See Usage.
+#' @param m1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param C1 A matrix; passed to \code{as.matrix}.
 #' @param C2 A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{divergence}, \code{covariance_term}, \code{mean_term}, \code{nonnegative}, \code{symmetric}, \code{zero_for_identical_pdfs}, \code{separates_equal_means_via_the_covariance_term}, \code{additive_over_independent_features}, \code{method}.
@@ -729,8 +729,8 @@ DivAv <- function(means, covs) {
 #' are returned so the asymmetry is visible rather than a trap.  Their
 #' sum is exactly the divergence of eq (10.115).
 #'
-#' @param p1 See Usage.
-#' @param p2 See Usage.
+#' @param p1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{kld}, \code{reversed}, \code{symmetric_sum}, \code{asymmetric}, \code{weighted_by_the_second_pdf}, \code{symmetric_sum_is_the_divergence_of_eq_10_115}, \code{nonnegative}, \code{method}.
 #' @export
 Kld <- function(p1, p2) {
@@ -781,8 +781,8 @@ Kld <- function(p1, p2) {
 #' of the two class-conditional densities IS the region where the
 #' optimal classifier must make mistakes.  NOT FROM THIS BOOK.
 #'
-#' @param p1 See Usage.
-#' @param p2 See Usage.
+#' @param p1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{coefficient}, \code{overlap}, \code{distance}, \code{identical}, \code{disjoint}, \code{in_unit_interval}, \code{the_overlap_is_where_errors_must_happen}, \code{not_from_this_book}, \code{reference}, \code{method}.
 #' @export
 PdfOverlap <- function(p1, p2) {
@@ -831,10 +831,10 @@ PdfOverlap <- function(p1, p2) {
 #' P2^(1-a) rho_a; the minimum gives the best of them. NOT FROM
 #' RANGAYYAN (2024).
 #'
-#' @param p1 See Usage.
-#' @param p2 See Usage.
-#' @param alpha Defaults to \code{NULL}.
-#' @param n_grid Defaults to \code{201}.
+#' @param p1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p2 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201}.
 #' @return A list with \code{coefficient}, \code{alpha}, \code{information}, \code{bhattacharyya_coefficient}, \code{bhattacharyya_is_alpha_one_half}, \code{alpha_searched}, \code{at_least_as_tight_as_bhattacharyya}, \code{reference}, \code{not_from_this_book}, \code{method}.
 #' @export
 Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
@@ -905,8 +905,8 @@ Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
 #' so the convention is reported rather than assumed.  NOT FROM
 #' RANGAYYAN (2024).
 #'
-#' @param p1 See Usage.
-#' @param p2 See Usage.
+#' @param p1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{hellinger}, \code{squared}, \code{bhattacharyya_coefficient}, \code{identity_h2_equals_one_minus_bc}, \code{is_a_true_metric}, \code{satisfies_the_triangle_inequality}, \code{bhattacharyya_distance_does_not}, \code{normalization}, \code{in_unit_interval}, \code{reference}, \code{not_from_this_book}, \code{method}.
 #' @export
 Hellinger <- function(p1, p2) {
@@ -956,8 +956,8 @@ Hellinger <- function(p1, p2) {
 #' the divergence of eqs (10.115)-(10.117), which is the symmetric sum
 #' of the two KLDs, and cites Swain for them.
 #'
-#' @param m1 See Usage.
-#' @param m2 See Usage.
+#' @param m1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param C1 A matrix; passed to \code{as.matrix}.
 #' @param C2 A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{bhattacharyya}, \code{mean_term}, \code{covariance_term}, \code{not_from_this_book}, \code{book_uses_divergence_eq_10_115}, \code{reference}, \code{method}.
@@ -1026,9 +1026,9 @@ GaussOverlap <- function(m1, m2, C1, C2) {
 #' would give a number that looks like a bound and is not one.  The
 #' bound is on the OPTIMAL classifier, a floor no real one can beat.
 #'
-#' @param p1 See Usage.
-#' @param p2 See Usage.
-#' @param db See Usage.
+#' @param p1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p2 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param db Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{bound}, \code{priors}, \code{bhattacharyya}, \code{tightest_at_equal_priors}, \code{bounds_the_optimal_classifier_not_yours}, \code{not_from_this_book}, \code{pairs_with_the_overlap_not_with_divergence}, \code{reference}, \code{method}.
 #' @export
 ErrBound <- function(p1, p2, db) {
@@ -1065,8 +1065,8 @@ ErrBound <- function(p1, p2, db) {
 #' the same measure: that divides |m1 - m2| by (s1 + s2).  They rank
 #' features identically only when the dispersions are equal.
 #'
-#' @param x1 See Usage.
-#' @param x2 See Usage.
+#' @param x1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{j}, \code{means}, \code{variances}, \code{normalized_distance}, \code{agrees_with_eq_10_112_ranking_only_for_equal_spread}, \code{is_not_eq_10_112}, \code{method}.
 #' @export
 FishCrit <- function(x1, x2) {
@@ -1212,8 +1212,8 @@ FishLda <- function(X, y) {
 #' distance would quietly favour whichever feature has the largest
 #' units.
 #'
-#' @param x See Usage.
-#' @param mu See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param C A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{d2}, \code{distance}, \code{squared}, \code{euclidean}, \code{differs_from_euclidean}, \code{scale_free}, \code{method}.
 #' @export
@@ -1249,9 +1249,9 @@ Mahal <- function(x, mu, C) {
 #' classes whose regions are not convex, however many features are
 #' added.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights A matrix; passed to \code{as.matrix}.
-#' @param w0 Defaults to \code{NULL}.
+#' @param w0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{d}, \code{assigned}, \code{margin}, \code{n_classes}, \code{regions_are_convex}, \code{decision_surfaces_are_hyperplanes}, \code{method}.
 #' @export
 LinDisc <- function(x, weights, w0 = NULL) {
@@ -1338,8 +1338,8 @@ LinDSep <- function(X, y) {
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param query See Usage.
-#' @param k Defaults to \code{1}.
+#' @param query Coerced to numeric by the body, with \code{as.numeric}.
+#' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param metric One of \code{"euclidean"}, \code{"mahalanobis"}. Defaults to \code{"euclidean"}.
 #' @param C Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{assigned}, \code{votes}, \code{k}, \code{metric}, \code{neighbours}, \code{tie}, \code{tied_classes}, \code{nearest_distance}, \code{nearest_label}, \code{single_neighbour_may_be_an_outlier}, \code{method}.
@@ -1408,8 +1408,8 @@ Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
 #' classes are unequally common: for a rare disease the prior is
 #' precisely what stops the classifier calling everything positive.
 #'
-#' @param likelihoods See Usage.
-#' @param priors Defaults to \code{NULL}.
+#' @param likelihoods Coerced to numeric by the body, with \code{as.numeric}.
+#' @param priors Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{d}, \code{posterior}, \code{assigned}, \code{maximum_likelihood_choice}, \code{prior_changed_the_decision}, \code{priors}, \code{uniform_priors}, \code{method}.
 #' @export
 BayesCls <- function(likelihoods, priors = NULL) {
@@ -1451,10 +1451,10 @@ BayesCls <- function(likelihoods, priors = NULL) {
 #' density, so both forms are returned.  The surfaces are hyperquadrics
 #' and reduce to hyperplanes exactly when the covariances are equal.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param means A vector; its length is taken and its elements indexed.
 #' @param covs A vector; its length is taken and its elements indexed.
-#' @param priors Defaults to \code{NULL}.
+#' @param priors Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param full A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{d}, \code{d_full}, \code{d_dropped_constant}, \code{assigned}, \code{priors}, \code{constant_term}, \code{surfaces_are_hyperquadrics}, \code{linear_when_covariances_are_equal}, \code{log_form_avoids_underflow}, \code{method}.
 #' @export
@@ -1518,8 +1518,8 @@ BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y A vector; its length is taken.
-#' @param query See Usage.
-#' @param priors Defaults to \code{NULL}.
+#' @param query Coerced to numeric by the body, with \code{as.numeric}.
+#' @param priors Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{g}, \code{assigned}, \code{assigned_index}, \code{classes}, \code{means}, \code{covariances}, \code{priors}, \code{reduces_to_lda_when_covariances_are_equal}, \code{parameters_per_class}, \code{method}.
 #' @export
 Qda <- function(X, y, query, priors = NULL) {
@@ -1582,10 +1582,10 @@ Qda <- function(X, y, query, priors = NULL) {
 #' stopped.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
-#' @param maxiter Defaults to \code{100}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-08}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
 #' @return A list with \code{intercept}, \code{coefficients}, \code{w}, \code{fitted}, \code{predicted}, \code{loglik}, \code{iterations}, \code{converged}, \code{separable}, \code{ridge}, \code{training_accuracy}, \code{n}, \code{models_the_posterior_directly}, \code{no_gaussian_assumption}, \code{method}.
 #' @export
 LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
@@ -1647,8 +1647,8 @@ LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
 #' clusterings from the same call.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param k See Usage.
-#' @param maxiter Defaults to \code{100}.
+#' @param k Coerced to integer by the body, with \code{as.integer}.
+#' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param init Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{labels}, \code{centroids}, \code{wcss}, \code{k}, \code{sizes}, \code{iterations}, \code{converged}, \code{local_minimum_only}, \code{depends_on_the_starting_centroids}, \code{unsupervised_groups_need_not_be_the_classes}, \code{method}.
@@ -1725,8 +1725,8 @@ KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
 #' the knee is wherever the arithmetic puts it.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param kmax Defaults to \code{8}.
-#' @param kmin Defaults to \code{1}.
+#' @param kmax Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param kmin Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{k}, \code{wcss}, \code{knee}, \code{monotonic}, \code{wcss_cannot_be_minimized}, \code{heuristic_only}, \code{method}.
 #' @export
 Elbow <- function(X, kmax = 8, kmin = 1) {
@@ -1777,7 +1777,7 @@ Elbow <- function(X, kmax = 8, kmin = 1) {
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param linkage One of \code{"average"}, \code{"complete"}, \code{"single"}. Defaults to \code{"single"}.
-#' @param k Defaults to \code{NULL}.
+#' @param k Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{history}, \code{labels}, \code{linkage}, \code{n}, \code{k}, \code{merge_distances}, \code{monotonic_merges}, \code{single_linkage_chains}, \code{linkage_changes_the_partition}, \code{method}.
 #' @export
 HClust <- function(X, linkage = "single", k = NULL) {
@@ -1864,7 +1864,7 @@ HClust <- function(X, linkage = "single", k = NULL) {
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param k Defaults to \code{5}.
+#' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param classifier Defaults to \code{NULL}.
 #' @param stratified A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{n}, \code{k}, \code{per_fold}, \code{stratified}, \code{train_and_test_must_be_separate}, \code{method}.
@@ -1989,7 +1989,7 @@ LooCv <- function(X, y, classifier = NULL) {
 #' @param K A matrix; indexed by row and column.
 #' @param ys A vector; its length is taken and its elements indexed.
 #' @param Cv Numeric; passed to \code{min}.
-#' @param maxiter See Usage.
+#' @param maxiter Coerced to integer by the body, with \code{as.integer}.
 #' @param tol Numeric; combined arithmetically in the body.
 #' @return A list with \code{a}, \code{b}, \code{it}.
 #' @export
@@ -2051,8 +2051,8 @@ LooCv <- function(X, y, classifier = NULL) {
 #' outlier.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
-#' @param C Defaults to \code{1}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param maxiter Passed to \code{.morie_rg_smo}. Defaults to \code{2000}.
 #' @param tol Passed to \code{.morie_rg_smo}. Defaults to \code{1e-06}.
 #' @return A list with \code{w}, \code{b}, \code{alpha}, \code{support_vectors}, \code{n_support}, \code{margin}, \code{C}, \code{iterations}, \code{converged}, \code{training_accuracy}, \code{boundary_set_by_the_support_vectors_only}, \code{large_c_contorts_around_outliers}, \code{method}.
@@ -2100,13 +2100,13 @@ Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
-#' @param query Defaults to \code{NULL}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param query Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}. Defaults to \code{"rbf"}.
-#' @param gamma Defaults to \code{NULL}.
-#' @param degree Defaults to \code{3}.
-#' @param coef0 Defaults to \code{0}.
-#' @param C Defaults to \code{1}.
+#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @param coef0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param maxiter Passed to \code{.morie_rg_smo}. Defaults to \code{2000}.
 #' @param tol Passed to \code{.morie_rg_smo}. Defaults to \code{1e-06}.
 #' @return The value of \code{out}, as built in the body.

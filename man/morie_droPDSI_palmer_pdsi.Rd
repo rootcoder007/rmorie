@@ -8,10 +8,10 @@
 morie_droPDSI_palmer_pdsi(precip, pet, awc = 100, month = NULL)
 }
 \arguments{
-\item{precip}{See Usage.}
-\item{pet}{See Usage.}
+\item{precip}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{pet}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{awc}{Numeric; passed to \code{min}. Defaults to \code{100}.}
-\item{month}{Defaults to \code{NULL}.}
+\item{month}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the droPDSI_native implementation. No other function in the package calls it. See the file header for the source the module follows.

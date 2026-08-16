@@ -11,7 +11,7 @@
 \item{K}{A matrix; indexed by row and column.}
 \item{ys}{A vector; its length is taken and its elements indexed.}
 \item{Cv}{Numeric; passed to \code{min}.}
-\item{maxiter}{See Usage.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}.}
 \item{tol}{Numeric; combined arithmetically in the body.}
 }
 \description{

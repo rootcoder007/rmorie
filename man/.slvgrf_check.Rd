@@ -8,8 +8,8 @@
 .slvgrf_check(scores, priority)
 }
 \arguments{
-\item{scores}{See Usage.}
-\item{priority}{See Usage.}
+\item{scores}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{priority}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the slvgrf_native implementation. Called by \code{qini_curve}, \code{rate_test}, \code{toc_curve}. See the file header for the source the module follows.

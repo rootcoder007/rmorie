@@ -8,8 +8,8 @@
 .tqpack_pack_indices(indices, bits)
 }
 \arguments{
-\item{indices}{See Usage.}
-\item{bits}{See Usage.}
+\item{indices}{Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.}
+\item{bits}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the tqpack_native implementation. No other function in the package calls it. See the file header for the source the module follows.

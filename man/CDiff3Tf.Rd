@@ -8,8 +8,8 @@
 CDiff3Tf(z, T = 1)
 }
 \arguments{
-\item{z}{See Usage.}
-\item{T}{Defaults to \code{1}.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 first-order difference in series with a two-point moving average, so it may be built as that cascade.  Zeros at z = 1 and z = -1 make it a bandpass, and the one at Nyquist is what kills the noise boost.

@@ -14,7 +14,7 @@ map_invert(model, y, known, candidates, err, priors, sensitive = 0L)
 \item{candidates}{A vector; its length is taken.}
 \item{err}{See Usage.}
 \item{priors}{A vector; indexed elementwise.}
-\item{sensitive}{Defaults to \code{0L}.}
+\item{sensitive}{Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.}
 }
 \description{
 A step of the attrInf_native implementation. Called by \code{morie_attrInf}. See the file header for the source the module follows.

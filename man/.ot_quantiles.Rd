@@ -8,8 +8,8 @@
 .ot_quantiles(x, grid)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{grid}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{grid}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 A step of the helpers_ot implementation. Called by \code{Otsd}. See the file header for the source the module follows.

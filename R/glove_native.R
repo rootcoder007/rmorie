@@ -118,9 +118,9 @@ glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
 #' harmonic = TRUE.
 #'
 #' @param corpus Passed to \code{.glove_as_docs}.
-#' @param window Defaults to \code{10}.
+#' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param harmonic A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param min_count Defaults to \code{1}.
+#' @param min_count Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{X}, \code{vocab}, \code{index}.
 #' @export
 cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
@@ -215,15 +215,15 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' source it follows.
 #'
 #' @param corpus See Usage.
-#' @param dim Defaults to \code{50}.
-#' @param window Defaults to \code{10}.
-#' @param epochs Defaults to \code{25}.
-#' @param lr Defaults to \code{0.05}.
-#' @param x_max Defaults to \code{100}.
-#' @param alpha Defaults to \code{0.75}.
-#' @param harmonic Defaults to \code{TRUE}.
+#' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
+#' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
+#' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param x_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{100}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.75}.
+#' @param harmonic Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @param min_count Defaults to \code{1}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param combine One of \code{"concat"}, \code{"sum"}, \code{"w"}, \code{"wtilde"}. Defaults to \code{"sum"}.
 #' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{W}, \code{W_tilde}, \code{b}, \code{b_tilde}, \code{cooccurrence}, \code{loss_history}, \code{running_loss}, \code{final_loss}, \code{n_vocab}, \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max}, \code{alpha}, \code{combine}, \code{method}.
 #' @export

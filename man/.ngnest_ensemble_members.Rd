@@ -8,8 +8,8 @@
 .ngnest_ensemble_members(y, horizon, lookback_multiples = c(2, 3, 4, 5, 6, 7), block_sets = NULL, ridge = 1e-08)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{horizon}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lookback_multiples}{Defaults to \code{c(2, 3, 4, 5, 6, 7)}.}
 \item{block_sets}{Defaults to \code{NULL}.}
 \item{ridge}{Passed to \code{.ngnest_nbeats_stack}. Defaults to \code{1e-08}.}

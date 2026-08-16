@@ -10,9 +10,9 @@ SwtDen(x, wavelet = "db4", levels = 3, threshold = NULL, threshold_type = "soft"
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
 \item{wavelet}{Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.}
-\item{levels}{Defaults to \code{3}.}
-\item{threshold}{Defaults to \code{NULL}.}
-\item{threshold_type}{Defaults to \code{"soft"}.}
+\item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
+\item{threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{threshold_type}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"soft"}.}
 }
 \description{
 Donoho Part of the rangayyan_tf implementation; see the file header for the source it follows.

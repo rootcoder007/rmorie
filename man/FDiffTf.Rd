@@ -9,7 +9,7 @@ FDiffTf(z, T = 1)
 }
 \arguments{
 \item{z}{Passed to \code{.morie_rg_polyz}.}
-\item{T}{Defaults to \code{1}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 the whole of the operator\'s highpass character.

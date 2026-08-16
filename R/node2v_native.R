@@ -24,8 +24,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{p}, \code{q}.
 #' @export
 node2v_check_pq <- function(p, q) {
@@ -42,7 +42,7 @@ node2v_check_pq <- function(p, q) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d_tx See Usage.
+#' @param d_tx Coerced to integer by the body, with \code{as.integer}.
 #' @param p See Usage.
 #' @param q See Usage.
 #' @return Nothing; this branch always raises.
@@ -65,7 +65,7 @@ alpha_pq <- function(d_tx, p, q) {
 #'
 #' @param adj A vector; indexed elementwise.
 #' @param t See Usage.
-#' @param x See Usage.
+#' @param x Coerced to character by the body, with \code{as.character}.
 #' @return A numeric value.
 #' @export
 .node2v_dist <- function(adj, t, x) {
@@ -129,11 +129,11 @@ transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
 #' source it follows.
 #'
 #' @param adj See Usage.
-#' @param start See Usage.
-#' @param length See Usage.
+#' @param start Coerced to character by the body, with \code{as.character}.
+#' @param length Coerced to integer by the body, with \code{as.integer}.
 #' @param p Defaults to \code{1}.
 #' @param q Defaults to \code{1}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param weights Defaults to \code{NULL}.
 #' @return The value of \code{path}, as built in the body.
 #' @export
@@ -171,11 +171,11 @@ walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
 #' source it follows.
 #'
 #' @param adj See Usage.
-#' @param num_walks Defaults to \code{10}.
-#' @param length Defaults to \code{10}.
-#' @param p Defaults to \code{1}.
-#' @param q Defaults to \code{1}.
-#' @param seed Defaults to \code{0}.
+#' @param num_walks Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param length Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param q Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param weights Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{walks}, \code{p}, \code{q}, \code{n_walks}, \code{length}, \code{method}, \code{note}.
 #' @export
@@ -215,7 +215,7 @@ node2vec <- generate_walks
 #' source it follows.
 #'
 #' @param walks See Usage.
-#' @param window Defaults to \code{2}.
+#' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return The value of \code{do.call}.
 #' @export
 skipgram_pairs <- function(walks, window = 2) {

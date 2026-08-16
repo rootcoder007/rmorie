@@ -12,10 +12,10 @@
 \item{targets}{Passed to \code{.alfqud_score}.}
 \item{acts}{A vector; its length is taken and its elements indexed.}
 \item{n_reg}{Passed to \code{.alfqud_score}.}
-\item{max_len}{See Usage.}
+\item{max_len}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lw}{Passed to \code{.alfqud_score}.}
 \item{rf}{Passed to \code{.alfqud_score}.}
-\item{n_sim}{See Usage.}
+\item{n_sim}{Coerced to integer by the body, with \code{as.integer}.}
 \item{c_puct}{Numeric; combined arithmetically in the body.}
 }
 \description{

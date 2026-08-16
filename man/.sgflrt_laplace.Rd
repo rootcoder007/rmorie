@@ -12,7 +12,7 @@
 \item{X}{A matrix; passed to \code{ncol}.}
 \item{Sig}{Passed to \code{.sgflrt_chol}.}
 \item{family}{Passed to \code{.sgflrt_family}.}
-\item{inner_iter}{See Usage.}
+\item{inner_iter}{Coerced to integer by the body, with \code{as.integer}.}
 \item{tol}{See Usage.}
 \item{disp}{Passed to \code{.sgflrt_family}. Defaults to \code{1}.}
 }

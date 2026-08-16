@@ -19,8 +19,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param w0 See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param w0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w Numeric; combined arithmetically in the body.
 #' @param V A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
@@ -48,8 +48,8 @@ predict_naive <- function(x, w0, w, V) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param w0 See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param w0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w Numeric; combined arithmetically in the body.
 #' @param V A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
@@ -75,7 +75,7 @@ predict_naive <- function(x, w0, w, V) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param V A vector; indexed elementwise.
 #' @param f See Usage.
 #' @param i See Usage.
@@ -96,10 +96,10 @@ gradient <- function(x, V, f, i) {
 #' One indicator for the user, one for the item. The only non-zero
 #' interaction is then <v_u, v_i>.
 #'
-#' @param u See Usage.
-#' @param i See Usage.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
+#' @param u Coerced to integer by the body, with \code{as.integer}.
+#' @param i Coerced to integer by the body, with \code{as.integer}.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 design_mf <- function(u, i, n_users, n_items) {
@@ -117,11 +117,11 @@ design_mf <- function(u, i, n_users, n_items) {
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
-#' @param k_dim Defaults to \code{4}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param k_dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
-#' @param alpha Defaults to \code{0.02}.
-#' @param lam Defaults to \code{0.01}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param seed Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{w0}, \code{w}, \code{V}, \code{mse_history}, \code{final_mse}, \code{k}, \code{n_features}, \code{method}.
 #' @export

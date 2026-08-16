@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{net}{A vector; its length is taken and its elements indexed.}
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the propinf_native implementation. Called by \code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 SyncSum(observations)
 }
 \arguments{
-\item{observations}{See Usage.}
+\item{observations}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 and a zero-mean noise sum growing only as sqrt(M).  The SUM is returned, because that is the equation; the average is beside it so the division by M is explicit.

@@ -8,7 +8,7 @@
 .morie_w4d_symd_tokenize(src)
 }
 \arguments{
-\item{src}{See Usage.}
+\item{src}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the geron_w4d_native implementation. Called by \code{morie_geron_symd_parse}. See the file header for the source the module follows.

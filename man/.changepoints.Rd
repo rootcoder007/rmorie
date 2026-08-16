@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}
-\item{n.cp}{See Usage.}
+\item{n.cp}{Coerced to integer by the body, with \code{as.integer}.}
 \item{range}{Numeric; combined arithmetically in the body. Defaults to \code{0.8}.}
-\item{cps}{Defaults to \code{NULL}.}
+\item{cps}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the prphet_native implementation. Called by \code{morie_prphet_fit}. See the file header for the source the module follows.

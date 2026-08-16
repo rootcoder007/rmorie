@@ -8,10 +8,10 @@
 RespFeat(resp, fs, signal_type = "flow", min_breath_s = 1)
 }
 \arguments{
-\item{resp}{See Usage.}
+\item{resp}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{signal_type}{One of \code{"flow"}, \code{"volume"}. Defaults to \code{"flow"}.}
-\item{min_breath_s}{Defaults to \code{1}.}
+\item{min_breath_s}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

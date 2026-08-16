@@ -8,8 +8,8 @@
 XCorrDisc(x, y, delays = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{delays}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{

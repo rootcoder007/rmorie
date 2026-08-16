@@ -56,7 +56,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .polkrn_vec <- function(x) {
@@ -213,7 +213,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A_history See Usage.
+#' @param A_history Iterated over elementwise, with \code{lapply}.
 #' @param how One of \code{"cumulative"}, \code{"duration"}, \code{"final"}. Defaults to \code{"cumulative"}.
 #' @return The value of \code{rowSums}.
 #' @export
@@ -248,8 +248,8 @@ exposure_summary <- function(A_history, how="cumulative") {
 #' source it follows.
 #'
 #' @param x Passed to \code{.polkrn_vec}.
-#' @param n_centres Defaults to \code{5}.
-#' @param width Defaults to \code{NULL}.
+#' @param n_centres Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
+#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{X}, \code{centres}, \code{width}.
 #' @export
 rbf_basis <- function(x, n_centres=5, width=NULL) {
@@ -290,9 +290,9 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
 #' source it follows.
 #'
 #' @param y Passed to \code{.polkrn_vec}.
-#' @param A_history See Usage.
-#' @param H_history See Usage.
-#' @param degree Defaults to \code{2}.
+#' @param A_history Coerced to list by the body, with \code{as.list}.
+#' @param H_history Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
+#' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param basis One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.
 #' @param summary Defaults to \code{"cumulative"}.
 #' @param n_centres Defaults to \code{5}.

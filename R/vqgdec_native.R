@@ -89,7 +89,7 @@
 #'
 #' vectors. Indices are 0-based, matching the Python implementation.
 #'
-#' @param indices See Usage.
+#' @param indices Coerced to integer by the body, with \code{as.integer}.
 #' @param codebook Passed to \code{.vqgdec_to_matrix}.
 #' @return A list with \code{codes}, \code{n}, \code{note}.
 #' @export
@@ -122,10 +122,10 @@ morie_vqgdec_decode_indices <- function(indices, codebook) {
 #'
 #' Balances the two losses at the decoder\'s last layer.
 #'
-#' @param grad_rec See Usage.
-#' @param grad_gan See Usage.
-#' @param delta Defaults to \code{1e-06}.
-#' @param clip Defaults to \code{10000}.
+#' @param grad_rec Coerced to numeric by the body, with \code{as.numeric}.
+#' @param grad_gan Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
+#' @param clip Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10000}.
 #' @return A list with \code{lambda}, \code{raw}, \code{clipped}, \code{note}.
 #' @export
 morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
@@ -154,7 +154,7 @@ morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
 #' dense signal about local texture.
 #'
 #' @param image Passed to \code{.vqgdec_to_matrix}.
-#' @param patch Defaults to \code{4}.
+#' @param patch Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param scorer Defaults to \code{NULL}.
 #' @return A list with \code{scores}, \code{n_patches}, \code{mean}, \code{note}.
 #' @export
@@ -205,10 +205,10 @@ morie_vqgdec_patch_discriminator <- function(image, patch = 4,
 #'
 #' transformer\'s context.
 #'
-#' @param height See Usage.
-#' @param width See Usage.
-#' @param window See Usage.
-#' @param stride Defaults to \code{NULL}.
+#' @param height Coerced to integer by the body, with \code{as.integer}.
+#' @param width Coerced to integer by the body, with \code{as.integer}.
+#' @param window Coerced to integer by the body, with \code{as.integer}.
+#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{windows}, \code{n_windows}, \code{covers_everything}, \code{context}, \code{note}.
 #' @export
 morie_vqgdec_sliding_windows <- function(height, width, window,

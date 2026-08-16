@@ -8,7 +8,7 @@
 .warpL_alpha_weights(n, scheme = "reciprocal")
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 \item{scheme}{Defaults to \code{"reciprocal"}.}
 }
 \description{

@@ -8,8 +8,8 @@
 RcMemb(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{I_inj}{Defaults to \code{0}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{I_inj}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{C_m}{Numeric; combined arithmetically in the body. Defaults to \code{0.2}.}
 \item{R_m}{Numeric; combined arithmetically in the body. Defaults to \code{100}.}
 \item{V_rest}{Numeric; combined arithmetically in the body. Defaults to \code{-65}.}

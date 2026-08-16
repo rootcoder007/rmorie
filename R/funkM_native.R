@@ -69,15 +69,15 @@
 #' source it follows.
 #'
 #' @param ratings Passed to \code{.funkM_as_ratings}.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param factors Defaults to \code{8}.
-#' @param epochs Defaults to \code{60}.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
+#' @param factors Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
 #' @param lr Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.005}.
 #' @param reg Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.02}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param incremental A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param epochs_per_factor Defaults to \code{20}.
+#' @param epochs_per_factor Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_funkM <- function(ratings, n_users, n_items, factors = 8,
@@ -212,9 +212,9 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mu See Usage.
-#' @param b_user See Usage.
-#' @param b_item See Usage.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_user Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b_item Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p_u A vector; its length is taken.
 #' @param q_i A vector; its length is taken.
 #' @return A numeric value.
@@ -243,7 +243,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' @param Q A matrix; indexed by row and column.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @param reg Numeric; combined arithmetically in the body.
-#' @param factor Defaults to \code{NULL}.
+#' @param factor Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 .funkM_sgd_epoch <- function(R, mu, bu, bi, P, Q, lr, reg, factor = NULL) {
@@ -317,9 +317,9 @@ morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
 #' source it follows.
 #'
 #' @param ratings Passed to \code{.funkM_as_ratings}.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param rank Defaults to \code{2}.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
+#' @param rank Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param fill Defaults to \code{"zero"}.
 #' @return A list with \code{rmse_on_observed}, \code{fill}, \code{rank}, \code{note}.
 #' @export

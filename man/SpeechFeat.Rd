@@ -8,9 +8,9 @@
 SpeechFeat(speech, fs, order = NULL, n_formants = 4, f0_range = c(60, 400))
 }
 \arguments{
-\item{speech}{See Usage.}
+\item{speech}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{order}{Defaults to \code{NULL}.}
+\item{order}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{n_formants}{Passed to \code{.bsapeaks}. Defaults to \code{4}.}
 \item{f0_range}{A vector; indexed elementwise. Defaults to \code{c(60, 400)}.}
 }

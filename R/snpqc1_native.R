@@ -121,9 +121,9 @@ morie_snpqc1_maf <- function(genotypes) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_hom_minor See Usage.
-#' @param n_het See Usage.
-#' @param n_hom_major See Usage.
+#' @param n_hom_minor Coerced to integer by the body, with \code{as.integer}.
+#' @param n_het Coerced to integer by the body, with \code{as.integer}.
+#' @param n_hom_major Coerced to integer by the body, with \code{as.integer}.
 #' @param test One of \code{"chisq"}, \code{"exact"}. Defaults to \code{"exact"}.
 #' @return A numeric value.
 #' @export
@@ -227,7 +227,7 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #' source it follows.
 #'
 #' @param x_genotypes Passed to \code{.snpqc1_check}.
-#' @param reported_sex Defaults to \code{NULL}.
+#' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param male_min Defaults to \code{0.8}.
 #' @param female_max Defaults to \code{0.2}.
 #' @return The value of \code{res}, as built in the body.
@@ -277,8 +277,8 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
 #'
 #' rows Z=0,1,2 and columns I=0,1,2 (lower triangle zero).
 #'
-#' @param x_count See Usage.
-#' @param y_count See Usage.
+#' @param x_count Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y_count Coerced to numeric by the body, with \code{as.numeric}.
 #' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{rbind}.
 #' @export
@@ -554,7 +554,7 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
 #' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
-#' @param phenotype Defaults to \code{NULL}.
+#' @param phenotype Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param trait One of \code{"binary"}, \code{"quantitative"}. Defaults to \code{"binary"}.
 #' @param geno_relaxed Defaults to \code{0.2}.
 #' @param mind_relaxed Defaults to \code{0.2}.
@@ -568,7 +568,7 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
 #' @param pihat Defaults to \code{0.2}.
 #' @param hwe_test Passed to \code{morie_snpqc1_hwe_pvalue}. Defaults to \code{"exact"}.
 #' @param x_genotypes Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param reported_sex Defaults to \code{NULL}.
+#' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param relatedness One of \code{"kinship"}, \code{"pihat"}. Defaults to \code{"pihat"}.
 #' @param ibd_correction Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals}, \code{removed}, \code{n_snps_kept}, \code{n_individuals_kept}, \code{call_rate_snp}, \code{call_rate_ind}, \code{maf}, \code{hwe_p}, \code{heterozygosity}, \code{relatedness_matrix}, \code{kinship}, \code{ibd_states}, \code{relatedness}, \code{pruned_snps}, \code{thresholds}, \code{trait}, \code{hwe_test}, \code{note}, \code{method}.

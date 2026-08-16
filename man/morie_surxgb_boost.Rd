@@ -11,15 +11,15 @@ morie_surxgb_boost(X, y_lower, y_upper, n_rounds = 50, eta = 0.1, max_depth = 3,
 \item{X}{A matrix; indexed by row and column.}
 \item{y_lower}{A vector; its length is taken.}
 \item{y_upper}{A vector; its length is taken.}
-\item{n_rounds}{Defaults to \code{50}.}
+\item{n_rounds}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.}
 \item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
-\item{max_depth}{Defaults to \code{3}.}
-\item{lam}{Defaults to \code{1}.}
-\item{gamma}{Defaults to \code{0}.}
-\item{min_child}{Defaults to \code{5}.}
+\item{max_depth}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{min_child}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{sigma}{Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{1}.}
 \item{dist}{Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.}
-\item{base_score}{Defaults to \code{NULL}.}
+\item{base_score}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{derivatives}{Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{"analytic"}.}
 }
 \description{

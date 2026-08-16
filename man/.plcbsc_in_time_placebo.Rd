@@ -8,8 +8,8 @@
 .plcbsc_in_time_placebo(y_treated, y_donors, t0, fake_t0, v = NULL, ...)
 }
 \arguments{
-\item{y_treated}{See Usage.}
-\item{y_donors}{See Usage.}
+\item{y_treated}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y_donors}{Iterated over elementwise, with \code{lapply}.}
 \item{t0}{Numeric; combined arithmetically in the body.}
 \item{fake_t0}{A count; the body uses it as \code{seq_len(...)}.}
 \item{v}{Defaults to \code{NULL}.}

@@ -8,8 +8,8 @@
 .tf_emd(x, maxmodes = 10L, tol = 0.05)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{maxmodes}{Defaults to \code{10L}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{maxmodes}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
 \item{tol}{Passed to \code{.tf_sift}. Defaults to \code{0.05}.}
 }
 \description{

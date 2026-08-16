@@ -8,12 +8,12 @@
 flexible_iptw(A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, ridge = 1e-08, stabilize = FALSE)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{H}{See Usage.}
 \item{library}{Defaults to \code{NULL}.}
 \item{n_folds}{Defaults to \code{10}.}
 \item{meta}{Defaults to \code{"nnls"}.}
-\item{trim}{Defaults to \code{0.01}.}
+\item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 \item{ridge}{Defaults to \code{1e-08}.}
 \item{stabilize}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }

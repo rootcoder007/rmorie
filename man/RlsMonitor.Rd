@@ -8,13 +8,13 @@
 RlsMonitor(x, reference = NULL, order = 8, lam = 0.98, settle = NULL, threshold = 3, window = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{reference}{Defaults to \code{NULL}.}
-\item{order}{Defaults to \code{8}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{reference}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 \item{lam}{Defaults to \code{0.98}.}
-\item{settle}{Defaults to \code{NULL}.}
-\item{threshold}{Defaults to \code{3}.}
-\item{window}{Defaults to \code{NULL}.}
+\item{settle}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.}
+\item{window}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.

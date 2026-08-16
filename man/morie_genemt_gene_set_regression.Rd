@@ -8,8 +8,8 @@
 morie_genemt_gene_set_regression(z_scores, membership, covariates = NULL)
 }
 \arguments{
-\item{z_scores}{See Usage.}
-\item{membership}{See Usage.}
+\item{z_scores}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{membership}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{covariates}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

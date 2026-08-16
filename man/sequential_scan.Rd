@@ -9,7 +9,7 @@ sequential_scan(pairs, x0 = 0)
 }
 \arguments{
 \item{pairs}{A vector; its length is taken.}
-\item{x0}{Defaults to \code{0}.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the ssmpar_native implementation. No other function in the package calls it. See the file header for the source the module follows.

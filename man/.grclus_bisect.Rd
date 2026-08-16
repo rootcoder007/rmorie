@@ -15,7 +15,7 @@
 \item{initial}{Compared against \code{"gggp"}.}
 \item{refinement}{Compared against \code{"bkl"}.}
 \item{tolerance}{Passed to \code{.grclus_kl}.}
-\item{coarsest}{See Usage.}
+\item{coarsest}{Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Numeric; combined arithmetically in the body.}
 }
 \description{

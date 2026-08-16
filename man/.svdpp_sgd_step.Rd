@@ -8,7 +8,7 @@
 .svdpp_sgd_step(rating, mu, b_user, b_item, p_u, q_i, rated_items, y, lr = 0.007, reg = 0.015, exponent = -0.5)
 }
 \arguments{
-\item{rating}{See Usage.}
+\item{rating}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{mu}{Passed to \code{.svdpp_predict}.}
 \item{b_user}{Passed to \code{.svdpp_predict}.}
 \item{b_item}{Passed to \code{.svdpp_predict}.}
@@ -16,8 +16,8 @@
 \item{q_i}{Passed to \code{.svdpp_predict}.}
 \item{rated_items}{A vector; its length is taken.}
 \item{y}{A vector; indexed elementwise.}
-\item{lr}{Defaults to \code{0.007}.}
-\item{reg}{Defaults to \code{0.015}.}
+\item{lr}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.007}.}
+\item{reg}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.015}.}
 \item{exponent}{Passed to \code{.svdpp_predict}. Defaults to \code{-0.5}.}
 }
 \description{

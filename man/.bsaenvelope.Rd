@@ -8,7 +8,7 @@
 .bsaenvelope(x, fs, win_s)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{win_s}{Numeric; combined arithmetically in the body.}
 }

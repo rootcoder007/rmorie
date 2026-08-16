@@ -8,7 +8,7 @@
 project_box(x, lower = NULL, upper = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lower}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{upper}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 }

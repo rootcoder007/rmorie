@@ -8,9 +8,9 @@
 .causscd_grid(Y, treated, t_post)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{treated}{See Usage.}
-\item{t_post}{See Usage.}
+\item{Y}{Iterated over elementwise, with \code{lapply}.}
+\item{treated}{Coerced to logical by the body, with \code{as.logical}.}
+\item{t_post}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the causscd_native implementation. Called by \code{sdid}, \code{time_weights}, \code{unit_weights}. See the file header for the source the module follows.

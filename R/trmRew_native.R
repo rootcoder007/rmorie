@@ -218,7 +218,7 @@ morie_trmRew_rewrite_step <- function(t, rules, strategy="innermost") {
 #' @param t See Usage.
 #' @param rules Passed to \code{morie_trmRew_rewrite_step}.
 #' @param strategy Passed to \code{morie_trmRew_rewrite_step}. Defaults to \code{"innermost"}.
-#' @param max_steps Defaults to \code{10000}.
+#' @param max_steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10000}.
 #' @return Nothing; this branch always raises.
 #' @export
 morie_trmRew_normal_form <- function(t, rules, strategy="innermost",
@@ -573,11 +573,11 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps=10000) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param equations See Usage.
+#' @param equations Iterated over elementwise, with \code{lapply}.
 #' @param precedence Passed to \code{.trmRew_interreduce}.
-#' @param max_rules Defaults to \code{60}.
+#' @param max_rules Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
 #' @param max_steps Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.
-#' @param max_iter Defaults to \code{4000}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4000}.
 #' @return The value of \code{.trmRew_incomplete}.
 #' @export
 morie_trmRew_complete <- function(equations, precedence, max_rules=60,

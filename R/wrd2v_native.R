@@ -116,9 +116,9 @@
 #'
 #' @param architecture Compared against \code{"cbow"}.
 #' @param D Numeric; combined arithmetically in the body.
-#' @param V See Usage.
-#' @param N Defaults to \code{NULL}.
-#' @param C Defaults to \code{NULL}.
+#' @param V Coerced to numeric by the body, with \code{as.numeric}.
+#' @param N Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param hierarchical A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
@@ -149,7 +149,7 @@ morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
 #' source it follows.
 #'
 #' @param counts A vector; indexed elementwise.
-#' @param power Defaults to \code{0.75}.
+#' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.75}.
 #' @return The value of \code{stats::setNames}.
 #' @export
 morie_wrd2v_noise_distribution <- function(counts, power=0.75) {
@@ -306,13 +306,13 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param corpus See Usage.
+#' @param corpus Iterated over elementwise, with \code{lapply}.
 #' @param size A count; the body uses it as \code{matrix(...)}. Defaults to \code{16}.
 #' @param window Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @param architecture One of \code{"cbow"}, \code{"skip-gram"}. Defaults to \code{"skip-gram"}.
 #' @param lr Passed to \code{.wrd2v_cbow_step}. Defaults to \code{0.05}.
-#' @param epochs Defaults to \code{20}.
-#' @param min_count Defaults to \code{1}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param min_count Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param dynamic_window A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param loss One of \code{"neg"}, \code{"softmax"}. Defaults to \code{"softmax"}.
 #' @param negative Passed to \code{.wrd2v_neg_step}. Defaults to \code{5}.

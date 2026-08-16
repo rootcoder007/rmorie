@@ -9,7 +9,7 @@ laplace_marginal(log_joint, x_grid, theta)
 }
 \arguments{
 \item{log_joint}{See Usage.}
-\item{x_grid}{See Usage.}
+\item{x_grid}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{theta}{See Usage.}
 }
 \description{

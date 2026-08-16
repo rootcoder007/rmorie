@@ -9,7 +9,7 @@ morie_rgs_functional_regression(X, Y, basis = NULL)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{Y}{See Usage.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{basis}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

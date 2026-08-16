@@ -8,8 +8,8 @@
 cluster_variance(ic, cluster)
 }
 \arguments{
-\item{ic}{See Usage.}
-\item{cluster}{See Usage.}
+\item{ic}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cluster}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}. See the file header for the source the module follows.

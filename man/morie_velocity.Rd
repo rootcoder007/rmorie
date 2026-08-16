@@ -8,8 +8,8 @@
 morie_velocity(u, s, beta, gamma)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{s}{See Usage.}
+\item{u}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{beta}{Numeric; combined arithmetically in the body.}
 \item{gamma}{Numeric; combined arithmetically in the body.}
 }

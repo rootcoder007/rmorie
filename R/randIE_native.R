@@ -16,7 +16,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to character by the body, with \code{as.character}.
 #' @param name See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -80,12 +80,12 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Passed to \code{.labels}.
 #' @param M Passed to \code{.labels}.
 #' @param C Optional; may be \code{NULL}. Passed to \code{.labels}.
-#' @param a Defaults to \code{"1"}.
-#' @param a.star Defaults to \code{"0"}.
+#' @param a Coerced to character by the body, with \code{as.character}. Defaults to \code{"1"}.
+#' @param a.star Coerced to character by the body, with \code{as.character}. Defaults to \code{"0"}.
 #' @param route Compared against \code{"weighting"}. Defaults to \code{"gformula"}.
 #' @param laplace Passed to \code{morie_randIE_mediator_distribution}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{a}, \code{a.star}, \code{route}, \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
@@ -184,8 +184,8 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
 #' @param A Passed to \code{morie_randIE_interventional_mean}.
 #' @param M Passed to \code{morie_randIE_interventional_mean}.
 #' @param C Passed to \code{morie_randIE_interventional_mean}.
-#' @param treated Defaults to \code{"1"}.
-#' @param control Defaults to \code{"0"}.
+#' @param treated Coerced to character by the body, with \code{as.character}. Defaults to \code{"1"}.
+#' @param control Coerced to character by the body, with \code{as.character}. Defaults to \code{"0"}.
 #' @param route Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{"gformula"}.
 #' @param laplace Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{total}, \code{direct}, \code{indirect}, \code{direct.control.arm}, \code{psi}, \code{route}, \code{treated}, \code{control}, \code{identity}, \code{method}.

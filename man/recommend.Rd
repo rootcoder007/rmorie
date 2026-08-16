@@ -10,9 +10,9 @@ recommend(model, pos, u, n_items, top_k = 5L, activation = "sigmoid")
 \arguments{
 \item{model}{A list; the body reads \code{$b}, \code{$b_prime}, \code{$V}, \code{$W}, \code{$W_prime} from it.}
 \item{pos}{A vector; indexed elementwise.}
-\item{u}{See Usage.}
-\item{n_items}{See Usage.}
-\item{top_k}{Defaults to \code{5L}.}
+\item{u}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{top_k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{activation}{Defaults to \code{"sigmoid"}.}
 }
 \description{

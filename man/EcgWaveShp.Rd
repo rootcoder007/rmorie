@@ -9,10 +9,10 @@ EcgWaveShp(qrsdur, stdev, rdur = NULL, sdur = NULL, qpresent = NULL)
 }
 \arguments{
 \item{qrsdur}{Numeric; combined arithmetically in the body.}
-\item{stdev}{See Usage.}
-\item{rdur}{Defaults to \code{NULL}.}
-\item{sdur}{Defaults to \code{NULL}.}
-\item{qpresent}{Defaults to \code{NULL}.}
+\item{stdev}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rdur}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sdur}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{qpresent}{Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.}
 }
 \description{
 A step of the rangayyan_qrs implementation. No other function in the package calls it. See the file header for the source the module follows.

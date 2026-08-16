@@ -30,7 +30,7 @@
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_w4d_lcg_u <- function(n, seed) {
@@ -221,7 +221,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 #'
 #' @param nr A count; the body uses it as \code{matrix(...)}.
 #' @param nc A count; the body uses it as \code{matrix(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @return A matrix, from \code{matrix}.
 #' @export
@@ -312,8 +312,8 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param Ws A vector; its length is taken and its elements indexed.
-#' @param bs See Usage.
-#' @param cs See Usage.
+#' @param bs Iterated over elementwise, with \code{lapply}.
+#' @param cs Iterated over elementwise, with \code{lapply}.
 #' @param hs A vector; indexed elementwise.
 #' @param rs A vector; indexed elementwise.
 #' @return A list with \code{dW}, \code{db}, \code{dc}.
@@ -568,7 +568,7 @@ morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -969,7 +969,7 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 #'
 #' @param Z A matrix; indexed by row and column.
 #' @param k Numeric; combined arithmetically in the body.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
 #' @return A list with \code{labels}, \code{centers}.
 #' @export
@@ -1491,7 +1491,7 @@ morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param src See Usage.
+#' @param src Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_w4d_symd_tokenize <- function(src) {
@@ -1615,7 +1615,7 @@ morie_geron_symd_parse <- function(src) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{list}.
 #' @export
 .morie_w4d_symd_num <- function(v) list("num", as.numeric(v))
@@ -2840,7 +2840,7 @@ morie_geron_vanishing_gradients <- function(grads, tol = 0.5) {
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{[}.
 #' @export
 .morie_w4d_lcg_normal <- function(n, seed) {

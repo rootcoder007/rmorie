@@ -8,7 +8,7 @@
 .wsm_boot_reps(data, statistic, B, seed)
 }
 \arguments{
-\item{data}{See Usage.}
+\item{data}{A matrix; the body checks with \code{is.matrix}.}
 \item{statistic}{See Usage.}
 \item{B}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{See Usage.}

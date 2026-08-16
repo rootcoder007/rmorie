@@ -8,8 +8,8 @@
 .morie_fairness_resolve_privileged(privileged, rates, warnings_env)
 }
 \arguments{
-\item{privileged}{See Usage.}
-\item{rates}{See Usage.}
+\item{privileged}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{rates}{Iterated over elementwise, with \code{vapply}.}
 \item{warnings_env}{A list; the body reads \code{$w} from it.}
 }
 \description{

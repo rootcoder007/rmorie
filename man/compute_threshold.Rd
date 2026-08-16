@@ -8,16 +8,16 @@
 compute_threshold(i1, i2, a1_new, a2_new, alpha, y, E, K, b, C)
 }
 \arguments{
-\item{i1}{See Usage.}
-\item{i2}{See Usage.}
-\item{a1_new}{See Usage.}
-\item{a2_new}{See Usage.}
-\item{alpha}{See Usage.}
-\item{y}{See Usage.}
+\item{i1}{Coerced to integer by the body, with \code{as.integer}.}
+\item{i2}{Coerced to integer by the body, with \code{as.integer}.}
+\item{a1_new}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{a2_new}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{E}{A vector; indexed elementwise.}
 \item{K}{A matrix; indexed by row and column.}
-\item{b}{See Usage.}
-\item{C}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{C}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}. See the file header for the source the module follows.

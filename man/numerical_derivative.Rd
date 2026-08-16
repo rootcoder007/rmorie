@@ -9,8 +9,8 @@ numerical_derivative(psi_of_P, weights, score, h = 1e-05)
 }
 \arguments{
 \item{psi_of_P}{See Usage.}
-\item{weights}{See Usage.}
-\item{score}{See Usage.}
+\item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{score}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{

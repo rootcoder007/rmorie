@@ -9,7 +9,7 @@ morie_sctraj_lineages_from_tree(tree, root)
 }
 \arguments{
 \item{tree}{A list; the body reads \code{$adjacency} from it.}
-\item{root}{See Usage.}
+\item{root}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See the file header for the source the module follows.

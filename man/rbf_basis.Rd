@@ -9,8 +9,8 @@ rbf_basis(x, n_centres = 5, width = NULL)
 }
 \arguments{
 \item{x}{Passed to \code{.polkrn_vec}.}
-\item{n_centres}{Defaults to \code{5}.}
-\item{width}{Defaults to \code{NULL}.}
+\item{n_centres}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
+\item{width}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the polkrn_native implementation. Called by \code{morie_polkrn}. See the file header for the source the module follows.

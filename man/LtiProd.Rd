@@ -8,11 +8,11 @@
 LtiProd(x, h, s = NULL, omega = NULL, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{s}{Defaults to \code{NULL}.}
-\item{omega}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
+\item{omega}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 and omega domains.  s = j omega recovers the frequency-domain form, so one function covers both.

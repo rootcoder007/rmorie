@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{G}{Passed to \code{.farmlmm_to_mat}.}
-\item{markers}{Defaults to \code{NULL}.}
+\item{markers}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the farmlmm_native implementation. Called by \code{.random_effect_step}. See the file header for the source the module follows.

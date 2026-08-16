@@ -8,7 +8,7 @@
 .morie_k05_hits(hits)
 }
 \arguments{
-\item{hits}{See Usage.}
+\item{hits}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}. See the file header for the source the module follows.

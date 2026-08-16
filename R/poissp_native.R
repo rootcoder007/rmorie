@@ -152,7 +152,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param off Numeric; passed to \code{sum}.
 #' @param Q A matrix; passed to \code{\%*\%}.
 #' @param constrain A flag; the body branches on it.
-#' @param iters See Usage.
+#' @param iters Coerced to integer by the body, with \code{as.integer}.
 #' @param tol See Usage.
 #' @param ridge Passed to \code{.poissp_ridgesolve}.
 #' @return A list with \code{beta}, \code{u}, \code{m}, \code{eta}.

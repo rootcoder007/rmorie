@@ -10,7 +10,7 @@ morie_funcal_transfer_terms(assignments, annotations, sources = NULL, min_suppor
 \arguments{
 \item{assignments}{A vector; indexed elementwise.}
 \item{annotations}{A vector; indexed elementwise.}
-\item{sources}{Defaults to \code{NULL}.}
+\item{sources}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
 \item{min_support}{Defaults to \code{1}.}
 }
 \description{

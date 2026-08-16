@@ -9,11 +9,11 @@ newton_direction(A, x, s, rp, rd, rc)
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}
-\item{x}{See Usage.}
-\item{s}{See Usage.}
-\item{rp}{See Usage.}
-\item{rd}{See Usage.}
-\item{rc}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rp}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rc}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mehtad_native implementation. Called by \code{solve_lp}. See the file header for the source the module follows.

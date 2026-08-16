@@ -8,10 +8,10 @@
 morie_tlsurvy_horvitz_thompson(values, pi, selected, N = NULL)
 }
 \arguments{
-\item{values}{See Usage.}
-\item{pi}{See Usage.}
-\item{selected}{See Usage.}
-\item{N}{Defaults to \code{NULL}.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{pi}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{selected}{Coerced to integer by the body, with \code{as.integer}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 y_i/pi_i Unbiased for the FULL-data mean, which is the quantity of interest -- the sample is a computational device, not the population.

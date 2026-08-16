@@ -13,7 +13,7 @@ ApneaEdr(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3)
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{hours}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{mindur}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
-\item{desat}{Defaults to \code{3}.}
+\item{desat}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.}
 }
 \description{
 algorithm, so none is attributed to it.  Requiring BOTH a respiratory pause and an SpO2 desaturation is what keeps a motion-induced flat stretch of EDR from being scored as an apnea.

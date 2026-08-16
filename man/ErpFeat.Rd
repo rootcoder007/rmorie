@@ -8,7 +8,7 @@
 ErpFeat(erp, fs, t0 = 0, components = NULL, baseline_ms = list(NULL, 0))
 }
 \arguments{
-\item{erp}{See Usage.}
+\item{erp}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{t0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{components}{Optional; may be \code{NULL}. A vector; indexed elementwise.}

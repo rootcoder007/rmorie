@@ -8,11 +8,11 @@
 morie_tlsurvy_inclusion_probabilities(V, n, design = "adaptive", influence = NULL, floor = 0.01)
 }
 \arguments{
-\item{V}{See Usage.}
-\item{n}{See Usage.}
+\item{V}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 \item{design}{One of \code{"proportional"}, \code{"uniform"}. Defaults to \code{"adaptive"}.}
-\item{influence}{Defaults to \code{NULL}.}
-\item{floor}{Defaults to \code{0.01}.}
+\item{influence}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{floor}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 }
 \description{
 adaptive sets pi_i proportional to the expected influence given V_i, which minimises the variance for a fixed n. A floor keeps every unit reachable -- a zero inclusion probability makes the estimand unidentifiable for that stratum.

@@ -8,7 +8,7 @@
 .tlnetlg_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.}
 }
 \description{
 A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_exposure_summary}, \code{morie_tlnetlg_network_variance}. See the file header for the source the module follows.

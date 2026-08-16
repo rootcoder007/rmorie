@@ -8,11 +8,11 @@
 birth_split_heights(h_j, u, s_left, s_star, s_right)
 }
 \arguments{
-\item{h_j}{See Usage.}
-\item{u}{See Usage.}
-\item{s_left}{See Usage.}
-\item{s_star}{See Usage.}
-\item{s_right}{See Usage.}
+\item{h_j}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{u}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s_left}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s_star}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s_right}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.

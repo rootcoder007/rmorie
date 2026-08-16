@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the robust_native implementation. Called by \code{morie_rob_huber}, \code{morie_rob_m}, \code{morie_rob_mm} and 2 others in the module. See the file header for the source the module follows.

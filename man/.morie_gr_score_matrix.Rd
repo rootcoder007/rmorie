@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{ncol}.}
-\item{theta}{See Usage.}
+\item{theta}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the geron_train_native implementation. Called by \code{.morie_gr_probability_matrix}, \code{morie_geron_softmax_score_grsmxs}. See the file header for the source the module follows.

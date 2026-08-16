@@ -10,7 +10,7 @@ morie_survroc_kaplan_meier(times, events, at = NULL)
 \arguments{
 \item{times}{Passed to \code{.survroc_clean}.}
 \item{events}{Passed to \code{.survroc_clean}.}
-\item{at}{Defaults to \code{NULL}.}
+\item{at}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the survroc_native implementation. Called by \code{.survroc_km_pair}, \code{morie_survroc}. See the file header for the source the module follows.

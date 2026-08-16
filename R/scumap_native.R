@@ -79,11 +79,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param distances See Usage.
-#' @param n_neighbors See Usage.
+#' @param distances Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_neighbors Coerced to integer by the body, with \code{as.integer}.
 #' @param rho Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param tol Defaults to \code{1e-05}.
-#' @param max_iter Defaults to \code{64}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
 #' @param min_scale Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @return A list with \code{sigma}, \code{rho}.
 #' @export
@@ -140,7 +140,7 @@ morie_scumap_smooth_knn_dist <- function(distances, n_neighbors,
 #' source it follows.
 #'
 #' @param X Passed to \code{.scumap_matrix}.
-#' @param n_neighbors Defaults to \code{15}.
+#' @param n_neighbors Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.
 #' @param symmetrize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{A}, \code{B}, \code{rho}, \code{sigma}, \code{neighbours}, \code{n}.
 #' @export
@@ -190,7 +190,7 @@ morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors=15,
 #' source it follows.
 #'
 #' @param B A matrix; indexed by row and column.
-#' @param n_components Defaults to \code{2}.
+#' @param n_components Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param laplacian One of \code{"as_printed"}, \code{"normalised"}. Defaults to \code{"normalised"}.
 #' @return The value of \code{Y}, as built in the body.
 #' @export
@@ -248,7 +248,7 @@ morie_scumap_spectral_layout <- function(B, n_components=2,
 #' @param min_dist Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param spread Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param n_grid A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
-#' @param iters Defaults to \code{200}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @return A list with \code{a}, \code{b}.
 #' @export
 morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
@@ -302,7 +302,7 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
 #'
 #' product exceeds 2^53.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
 .scumap_rng <- function(seed) {
@@ -351,13 +351,13 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
 #' @param X Passed to \code{.scumap_matrix}.
 #' @param n_neighbors Passed to \code{morie_scumap_fuzzy_simplicial_set}. Defaults to \code{15}.
 #' @param min_dist Passed to \code{morie_scumap_fit_ab}. Defaults to \code{0.1}.
-#' @param n_components Defaults to \code{2}.
+#' @param n_components Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param n_epochs A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param learning_rate Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param spread Passed to \code{morie_scumap_fit_ab}. Defaults to \code{1}.
-#' @param negative_sample_rate Defaults to \code{5}.
+#' @param negative_sample_rate Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param init One of \code{"random"}, \code{"spectral"}. Defaults to \code{"spectral"}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param laplacian Passed to \code{morie_scumap_spectral_layout}. Defaults to \code{"normalised"}.
 #' @param a Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param b Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.

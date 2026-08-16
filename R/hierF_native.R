@@ -184,7 +184,7 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param base See Usage.
+#' @param base Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S A matrix; passed to \code{as.matrix}.
 #' @param method Defaults to \code{"shrink"}.
 #' @param residuals Defaults to \code{NULL}.

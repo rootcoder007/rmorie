@@ -67,7 +67,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .twoT_as_vec <- function(v) {
@@ -139,7 +139,7 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
 #'
 #' @param scores Passed to \code{.twoT_as_vec}.
 #' @param probabilities Passed to \code{.twoT_as_vec}.
-#' @param temperature Defaults to \code{1}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{corrected}, \code{raw}, \code{shift}, \code{note}.
 #' @export
 morie_twoT_corrected_logits <- function(scores, probabilities,
@@ -190,8 +190,8 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #'
 #' @param hits Passed to \code{.twoT_get_items}.
 #' @param n_steps A count; the body uses it as \code{seq_len(...)}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param init Defaults to \code{NULL}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param init Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
 #' @export
 morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
@@ -235,7 +235,7 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
 #' @param query_embeddings Passed to \code{.twoT_as_mat}.
 #' @param item_embeddings Passed to \code{.twoT_as_mat}.
 #' @param probabilities Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
-#' @param temperature Defaults to \code{0.05}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @return A list with \code{loss}, \code{per_example}, \code{corrected}.
 #' @export
 morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
@@ -281,7 +281,7 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
 #' @param query_embedding Passed to \code{.twoT_as_vec}.
 #' @param item_embeddings Passed to \code{.twoT_as_mat}.
 #' @param probabilities Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
-#' @param top_k Defaults to \code{5}.
+#' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param temperature Passed to \code{morie_twoT_corrected_logits}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{top_k}, \code{uncorrected_top_k}, \code{scores}, \code{corrected_scores}, \code{changed}, \code{method}, \code{note}.
 #' @export

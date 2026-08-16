@@ -103,7 +103,7 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 #' to the Python 64-bit generator is not required -- the forest\'s
 #' randomness only needs to be reproducible.)
 #'
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .survrsf_rng <- function(seed=0) {
@@ -329,7 +329,7 @@ morie_survrsf_logrank_scores <- function(times, events) {
 #' @param times A vector; its length is taken.
 #' @param events Passed to \code{morie_survrsf_logrank_scores}.
 #' @param group A vector; its length is taken.
-#' @param scores Defaults to \code{NULL}.
+#' @param scores Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_survrsf_logrank_score_statistic <- function(times, events, group,
@@ -501,7 +501,7 @@ morie_survrsf_best_split <- function(X, times, events, features,
 #' @param X A matrix; indexed by row and column.
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param events A vector; indexed elementwise.
-#' @param mtry Defaults to \code{NULL}.
+#' @param mtry Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param min_deaths Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param rule Passed to \code{.survrsf_check_rule}. Defaults to \code{"logrank"}.
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{0}.
@@ -593,7 +593,7 @@ morie_survrsf_predict_tree <- function(tree, x, random_variable=NULL,
 #' @param X A matrix; indexed by row and column.
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param events A vector; indexed elementwise.
-#' @param n_trees Defaults to \code{50}.
+#' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @param mtry Passed to \code{morie_survrsf_grow_tree}.
 #' @param min_deaths Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param rule Passed to \code{.survrsf_check_rule}. Defaults to \code{"logrank"}.
@@ -792,7 +792,7 @@ morie_survrsf_c_index <- function(times, events, predicted) {
 #'
 #' @param fit A list; the body reads \code{$events}, \code{$times} from it.
 #' @param X A matrix; passed to \code{ncol}.
-#' @param variables Defaults to \code{NULL}.
+#' @param variables Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Passed to \code{morie_survrsf_mortality}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{vimp}, \code{baseline_error}, \code{note}, \code{method}.
 #' @export

@@ -23,7 +23,7 @@
 #' approximation, whose small-sample bias is exactly what these methods
 #' exist to avoid.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param r A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
@@ -70,7 +70,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export

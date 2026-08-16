@@ -10,8 +10,8 @@ Knn(X, y, query, k = 1, metric = "euclidean", C = NULL)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{query}{See Usage.}
-\item{k}{Defaults to \code{1}.}
+\item{query}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{metric}{One of \code{"euclidean"}, \code{"mahalanobis"}. Defaults to \code{"euclidean"}.}
 \item{C}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }

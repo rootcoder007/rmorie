@@ -152,7 +152,7 @@
 #' @param event_type Passed to \code{.tmlcmp_vec}.
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param A Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.
-#' @param arm Defaults to \code{NULL}.
+#' @param arm Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}, \code{n}.
 #' @export
@@ -258,7 +258,7 @@ cumulative_incidence <- function(hazards, times) {
 #'
 #' @param hazards A vector; indexed elementwise.
 #' @param times A vector; its length is taken.
-#' @param cause See Usage.
+#' @param cause Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{caveat}.
 #' @export
 one_minus_km <- function(hazards, times, cause) {
@@ -288,10 +288,10 @@ one_minus_km <- function(hazards, times, cause) {
 #' @param event_type Passed to \code{.tmlcmp_vec}.
 #' @param D Passed to \code{.tmlcmp_vec}.
 #' @param X Passed to \code{.tmlcmp_mat}.
-#' @param times Defaults to \code{NULL}.
-#' @param cause Defaults to \code{1}.
-#' @param horizon Defaults to \code{NULL}.
-#' @param g Defaults to \code{NULL}.
+#' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cause Coerced to character by the body, with \code{as.character}. Defaults to \code{1}.
+#' @param horizon Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param iters Defaults to \code{50}.
 #' @return A list with \code{estimate}, \code{psi}, \code{F_treated}, \code{F_control}, \code{curve_treated}, \code{curve_control}, \code{se}, \code{ci}, \code{horizon}, \code{cause}, \code{times}, \code{closure_treated}, \code{method}, \code{note}.
 #' @export

@@ -8,8 +8,8 @@
 .warpL_estimate_rank(n_draws, n_labels)
 }
 \arguments{
-\item{n_draws}{See Usage.}
-\item{n_labels}{See Usage.}
+\item{n_draws}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_labels}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the warpL_native implementation. Called by \code{.warpL_sample_violation}, \code{morie_warpL_estimate_rank}. See the file header for the source the module follows.

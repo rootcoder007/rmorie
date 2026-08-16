@@ -8,8 +8,8 @@
 BayesCls(likelihoods, priors = NULL)
 }
 \arguments{
-\item{likelihoods}{See Usage.}
-\item{priors}{Defaults to \code{NULL}.}
+\item{likelihoods}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{priors}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 MAXIMUM A POSTERIORI rule.  Comparing likelihoods alone is maximum likelihood, a different classifier, and they differ whenever the classes are unequally common: for a rare disease the prior is precisely what stops the classifier calling everything positive.

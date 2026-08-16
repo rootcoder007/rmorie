@@ -8,9 +8,9 @@
 EegAcf(x, fs, maxlag = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{maxlag}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{maxlag}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 normalized rho are returned: rho is what a threshold can be set on, phi is what the equation says, and conflating them makes any threshold depend on the signal amplitude.

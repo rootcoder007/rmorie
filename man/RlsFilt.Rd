@@ -8,11 +8,11 @@
 RlsFilt(primary, reference, order = 8, lam = 0.98, delta = 1)
 }
 \arguments{
-\item{primary}{See Usage.}
-\item{reference}{See Usage.}
-\item{order}{Defaults to \code{8}.}
-\item{lam}{Defaults to \code{0.98}.}
-\item{delta}{Defaults to \code{1}.}
+\item{primary}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{reference}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.98}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 symmetrized every sample: in exact arithmetic the update preserves symmetry, in floating point it does not, and the asymmetry grows until P loses positive definiteness and the filter diverges.  The size of that drift is returned rather than hidden.

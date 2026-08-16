@@ -10,7 +10,7 @@
 \arguments{
 \item{y_true}{Passed to \code{.gpflat}.}
 \item{y_pred}{Passed to \code{.gpflat}.}
-\item{n_classes}{Defaults to \code{NULL}.}
+\item{n_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 ------------- Part of the helpers_gp_core implementation; see the file header for the source it follows.

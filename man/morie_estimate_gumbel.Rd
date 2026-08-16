@@ -8,15 +8,15 @@
 morie_estimate_gumbel(m, n, letter_freqs, match = 5, mismatch = -4, matrix = NULL, alphabet = "ACGT", n_sim = 200, seed = 0, quantiles = c(0.2, 0.9))
 }
 \arguments{
-\item{m}{See Usage.}
-\item{n}{See Usage.}
-\item{letter_freqs}{See Usage.}
+\item{m}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{letter_freqs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{match}{Passed to \code{morie_msp_exact}. Defaults to \code{5}.}
 \item{mismatch}{Passed to \code{morie_msp_exact}. Defaults to \code{-4}.}
 \item{matrix}{Passed to \code{morie_msp_exact}.}
 \item{alphabet}{Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.}
 \item{n_sim}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 \item{quantiles}{A vector; indexed elementwise. Defaults to \code{c(0.2, 0.9)}.}
 }
 \description{

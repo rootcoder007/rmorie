@@ -22,11 +22,11 @@
 #'
 #' @param curves A matrix; indexed by row and column.
 #' @param statistic Defaults to \code{NULL}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param B Defaults to \code{500L}.
-#' @param metric Defaults to \code{"l2"}.
-#' @param smooth Defaults to \code{0}.
-#' @param seed Defaults to \code{0}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param B Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
+#' @param metric Coerced to character by the body, with \code{as.character}. Defaults to \code{"l2"}.
+#' @param smooth Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{center}, \code{radius}, \code{estimate}, \code{distances}, \code{n_within}, \code{metric}, \code{alpha}, \code{B}, \code{seed}, \code{method}.
 #' @export
 morie_funBoot <- function(curves, statistic = NULL, alpha = 0.05, B = 500L,

@@ -8,7 +8,7 @@
 .morie_qrs_check(x, least = 1L, what = "signal")
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{least}{Defaults to \code{1L}.}
 \item{what}{Defaults to \code{"signal"}.}
 }

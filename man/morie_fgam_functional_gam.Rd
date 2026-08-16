@@ -9,8 +9,8 @@ morie_fgam_functional_gam(X, Y, basis = NULL, n_x = 6, n_t = 6, lam_x = 1, lam_t
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{Y}{See Usage.}
-\item{basis}{Defaults to \code{NULL}.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{basis}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{n_x}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.}
 \item{n_t}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.}
 \item{lam_x}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}

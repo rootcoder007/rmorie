@@ -8,8 +8,8 @@
 TvLsi(x, h)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{A list; the body checks with \code{is.list}.}
 }
 \description{
 y(n) = sum_m h(n, m) x(n - m). The convolution sum still holds instant by instant, but the kernel is no longer shift-invariant, so no single transfer function describes it -- the contrast with eq (3.36) is the point.

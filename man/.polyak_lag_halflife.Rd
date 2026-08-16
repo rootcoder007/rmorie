@@ -8,7 +8,7 @@
 .polyak_lag_halflife(tau)
 }
 \arguments{
-\item{tau}{See Usage.}
+\item{tau}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the polyak_native implementation. No other function in the package calls it. See the file header for the source the module follows.

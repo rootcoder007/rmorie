@@ -8,12 +8,12 @@
 cv_tmle_smoothed(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{x0}{See Usage.}
 \item{bandwidths}{See Usage.}
 \item{kernel}{Defaults to \code{"epanechnikov"}.}
-\item{V}{Defaults to \code{5L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{V}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 }
 \description{
 A step of the tlcvnp_native implementation. Called by \code{morie_tlcvnp}. See the file header for the source the module follows.

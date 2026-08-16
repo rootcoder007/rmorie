@@ -8,12 +8,12 @@
 morie_tlboot(data, estimator, B = 200L, seed = 0L, method = c("naive", "targeted", "multiplier"), ic = NULL)
 }
 \arguments{
-\item{data}{See Usage.}
+\item{data}{Coerced to list by the body, with \code{as.list}.}
 \item{estimator}{See Usage.}
 \item{B}{A vector; its length is taken. Defaults to \code{200L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{method}{One of \code{"naive"}, \code{"targeted"}.}
-\item{ic}{Defaults to \code{NULL}.}
+\item{ic}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap}, \code{naive_bootstrap}, \code{targeted_bootstrap}. See the file header for the source the module follows.

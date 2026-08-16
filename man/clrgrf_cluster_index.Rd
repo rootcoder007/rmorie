@@ -8,7 +8,7 @@
 clrgrf_cluster_index(clusters)
 }
 \arguments{
-\item{clusters}{See Usage.}
+\item{clusters}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}. See the file header for the source the module follows.

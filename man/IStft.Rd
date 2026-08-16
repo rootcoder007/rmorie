@@ -10,7 +10,7 @@ IStft(stft, window = "hann", hop = NULL)
 \arguments{
 \item{stft}{A matrix; indexed by row and column.}
 \item{window}{Passed to \code{.tf_win}. Defaults to \code{"hann"}.}
-\item{hop}{Defaults to \code{NULL}.}
+\item{hop}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

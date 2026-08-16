@@ -11,7 +11,7 @@
 \item{xv}{A vector; its length is taken and its elements indexed.}
 \item{av}{A vector; indexed elementwise.}
 \item{fit}{Passed to \code{.smooth_at}.}
-\item{n_folds}{See Usage.}
+\item{n_folds}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the tmlcps_native implementation. Called by \code{effect_curve}. See the file header for the source the module follows.

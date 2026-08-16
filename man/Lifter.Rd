@@ -8,9 +8,9 @@
 Lifter(cepstrum_values, low = NULL, high = NULL, keep = "low")
 }
 \arguments{
-\item{cepstrum_values}{See Usage.}
-\item{low}{Defaults to \code{NULL}.}
-\item{high}{Defaults to \code{NULL}.}
+\item{cepstrum_values}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{low}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{high}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{keep}{One of \code{"band"}, \code{"high"}, \code{"low"}. Defaults to \code{"low"}.}
 }
 \description{

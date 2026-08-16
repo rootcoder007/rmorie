@@ -8,11 +8,11 @@
 morie_perK(x1, x2 = NULL, period = 1, lengthscale = 1, variance = 1)
 }
 \arguments{
-\item{x1}{See Usage.}
-\item{x2}{Defaults to \code{NULL}.}
-\item{period}{Defaults to \code{1}.}
-\item{lengthscale}{Defaults to \code{1}.}
-\item{variance}{Defaults to \code{1}.}
+\item{x1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x2}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{period}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{lengthscale}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{variance}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the perK_mixedcase_native implementation. No other function in the package calls it. See the file header for the source the module follows.

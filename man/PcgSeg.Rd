@@ -8,12 +8,12 @@
 PcgSeg(x, fs, window = NULL, step = NULL, order = 6, threshold = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{window}{Defaults to \code{NULL}.}
-\item{step}{Defaults to \code{NULL}.}
-\item{order}{Defaults to \code{6}.}
-\item{threshold}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{window}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{step}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6}.}
+\item{threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.

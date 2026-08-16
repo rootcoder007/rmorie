@@ -11,7 +11,7 @@ OtAdapt(Xs, Xt, epsilon, n_iter = 1000L)
 \item{Xs}{A matrix; indexed by row and column.}
 \item{Xt}{A matrix; indexed by row and column.}
 \item{epsilon}{Numeric; combined arithmetically in the body.}
-\item{n_iter}{Defaults to \code{1000L}.}
+\item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.}
 }
 \description{
 \\' \\' The entropy-regularised plan of equation (9) is found by a fixed \\' number of Sinkhorn-Knopp sweeps, then the source samples are moved by \\' the barycentric mapping of equation (14), \\' Xs_hat = diag(gamma 1_nt)^-1 gamma Xt, with squared Euclidean cost. \\' \\'

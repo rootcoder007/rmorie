@@ -8,8 +8,8 @@
 tetranucleotide_frequency(seq, kk = 4L, canonical = TRUE)
 }
 \arguments{
-\item{seq}{See Usage.}
-\item{kk}{Defaults to \code{4L}.}
+\item{seq}{Coerced to character by the body, with \code{as.character}.}
+\item{kk}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
 \item{canonical}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

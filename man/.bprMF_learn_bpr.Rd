@@ -9,15 +9,15 @@
 }
 \arguments{
 \item{pos}{A vector; indexed elementwise.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{k_dim}{Defaults to \code{8L}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{lam}{Defaults to \code{0.01}.}
-\item{iters}{Defaults to \code{2000L}.}
-\item{seed}{Defaults to \code{0L}.}
-\item{regularizer_sign}{Defaults to \code{"correct"}.}
-\item{init_scale}{Defaults to \code{0.1}.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k_dim}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
+\item{regularizer_sign}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"correct"}.}
+\item{init_scale}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \description{
 drawn from D_S. Mirrors morie.fn.bprMF.learn_bpr step for step, with the same draw order from the shared SplitMix64 stream: U*K uniforms fill W, I*K uniforms fill H, then per iteration three uniforms (user index, positive item, negative item) plus up to 100 negative-item rejection-guard uniforms.  regularizer_sign="paper" reproduces the printed Figure 4 update whose +lambda*Theta term diverges; the default is the sign that actually ascends BPR-Opt.

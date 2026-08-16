@@ -8,9 +8,9 @@
 BwDirect(omega, omega_c, N)
 }
 \arguments{
-\item{omega}{See Usage.}
-\item{omega_c}{See Usage.}
-\item{N}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{omega_c}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 there is no warping to prewarp for.  The filter so defined has zero phase, which is only usable with the whole record in hand -- it is not causal and cannot be run sample by sample.

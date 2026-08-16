@@ -8,7 +8,7 @@
 Parseval(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the unnormalized forward transform of eq (3.80) the spectral sum is N times the time-domain energy, so omitting the 1/N inflates it by the record length.

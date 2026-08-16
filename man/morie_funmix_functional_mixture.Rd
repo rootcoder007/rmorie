@@ -10,10 +10,10 @@ morie_funmix_functional_mixture(Y, K, t = NULL, n_basis = 5L, degree = 3L, max_i
 \arguments{
 \item{Y}{Passed to \code{.funmix_rows}.}
 \item{K}{A count; the body uses it as \code{seq_len(...)}.}
-\item{t}{Defaults to \code{NULL}.}
-\item{n_basis}{Defaults to \code{5L}.}
+\item{t}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_basis}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{degree}{Passed to \code{.funmix_knots}. Defaults to \code{3L}.}
-\item{max_iter}{Defaults to \code{300L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 \item{var_floor}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }

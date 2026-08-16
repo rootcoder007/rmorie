@@ -10,8 +10,8 @@ Qda(X, y, query, priors = NULL)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{A vector; its length is taken.}
-\item{query}{See Usage.}
-\item{priors}{Defaults to \code{NULL}.}
+\item{query}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{priors}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 eqs (10.68)-(10.69).  Each class keeps its OWN covariance, so the boundaries are quadrics; a single pooled covariance would make this LDA.  A class needs more samples than features or its covariance is singular -- QDA estimates p(p+1)/2 covariance parameters PER CLASS, so it is the first thing to break on small samples.

@@ -8,7 +8,7 @@
 .snmtst_split(beta, n_pre, n_post)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_pre}{A count; the body uses it as \code{seq_len(...)}.}
 \item{n_post}{A count; the body uses it as \code{seq_len(...)}.}
 }

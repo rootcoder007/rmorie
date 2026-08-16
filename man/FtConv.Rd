@@ -8,10 +8,10 @@
 FtConv(x, h, omega, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{omega}{See Usage.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 product, which eq (4.63) then turns into a sum.  The convolution is scaled by dt as in eq (3.30), so the identity holds in the continuous-time sense rather than up to a sampling-interval factor.

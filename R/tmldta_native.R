@@ -29,7 +29,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .tmldta_logit <- function(p) {
@@ -54,8 +54,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param candidate_strata See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param candidate_strata Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{lv}, as built in the body.
 #' @export
 .levels <- function(A, candidate_strata) {
@@ -79,7 +79,7 @@
 #' @param A A vector; indexed elementwise.
 #' @param W A matrix; indexed by row and column.
 #' @param levels A vector; indexed elementwise.
-#' @param rows See Usage.
+#' @param rows Iterated over elementwise, with \code{lapply}.
 #' @param ridge See Usage.
 #' @return A list with \code{q}, \code{b}.
 #' @export
@@ -244,7 +244,7 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
 #' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param n_folds See Usage.
+#' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{lapply}.
 #' @export
 .tmldta_folds <- function(n, n_folds) {

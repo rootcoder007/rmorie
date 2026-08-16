@@ -10,7 +10,7 @@
 \arguments{
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{n}{See Usage.}
-\item{n_ridge}{Defaults to \code{5}.}
+\item{n_ridge}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 }
 \description{
 A step of the regmlm_native implementation. Called by \code{level0_predictors}. See the file header for the source the module follows.

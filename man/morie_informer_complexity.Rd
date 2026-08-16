@@ -8,9 +8,9 @@
 morie_informer_complexity(L_Q, L_K, factor = 5)
 }
 \arguments{
-\item{L_Q}{See Usage.}
-\item{L_K}{See Usage.}
-\item{factor}{Defaults to \code{5}.}
+\item{L_Q}{Coerced to integer by the body, with \code{as.integer}.}
+\item{L_K}{Coerced to integer by the body, with \code{as.integer}.}
+\item{factor}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.}
 }
 \description{
 A step of the informer_native implementation. Called by \code{morie_informer_probsparse_attention}. See the file header for the source the module follows.

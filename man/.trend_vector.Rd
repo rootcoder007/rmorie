@@ -8,8 +8,8 @@
 .trend_vector(torsion_sets, activities, permutations, seed)
 }
 \arguments{
-\item{torsion_sets}{See Usage.}
-\item{activities}{See Usage.}
+\item{torsion_sets}{Iterated over elementwise, with \code{lapply}.}
+\item{activities}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{permutations}{A count; the body uses it as \code{seq_len(...)}.}
 \item{seed}{Passed to \code{.ghc_rng}.}
 }

@@ -13,9 +13,9 @@ morie_gms_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 
 \item{form}{Passed to \code{morie_S_function}. Defaults to \code{"sum"}.}
 \item{n_equality}{Passed to \code{morie_S_function}. Defaults to \code{0L}.}
 \item{level}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
-\item{reps}{Defaults to \code{200L}.}
+\item{reps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
-\item{kappa}{Defaults to \code{NULL}.}
+\item{kappa}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}. See the file header for the source the module follows.

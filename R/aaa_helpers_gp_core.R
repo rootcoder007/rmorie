@@ -103,7 +103,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param groups See Usage.
+#' @param groups Iterated over elementwise, with \code{lapply}.
 #' @return A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means}, \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between}, \code{ms_within}.
 #' @export
 .gponeway <- function(groups) {
@@ -140,7 +140,7 @@
 #'
 #' @param y_true Passed to \code{.gpflat}.
 #' @param y_pred Passed to \code{.gpflat}.
-#' @param n_classes Defaults to \code{NULL}.
+#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .gpconf <- function(y_true, y_pred, n_classes = NULL) {
@@ -158,7 +158,7 @@
 #' the source it follows.
 #'
 #' @param conf A matrix; indexed by row and column.
-#' @param i See Usage.
+#' @param i Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all}, \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
 #' @export
 .gpclassmetrics <- function(conf, i) {
@@ -180,7 +180,7 @@
 #'
 #' @param probs Passed to \code{.gpmat}.
 #' @param y_true Passed to \code{.gpflat}.
-#' @param n_classes Defaults to \code{NULL}.
+#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param halved A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -435,7 +435,7 @@
 #' @param y Passed to \code{.gpmnloglik}.
 #' @param beta0 Passed to \code{.gpmnloglik}.
 #' @param beta Passed to \code{.gpmnloglik}.
-#' @param lam See Usage.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @param penalty Defaults to \code{"ridge"}.
 #' @param baseline_last Passed to \code{.gpmnloglik}. Defaults to \code{TRUE}.
 #' @return A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.
@@ -471,7 +471,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param sigma2 See Usage.
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x_star Passed to \code{.gpflat}.
 #' @param eigenvalues Passed to \code{.gpflat}.
 #' @return A numeric value.
@@ -490,8 +490,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param mu_pred See Usage.
-#' @param theta_pred See Usage.
+#' @param mu_pred Coerced to numeric by the body, with \code{as.numeric}.
+#' @param theta_pred Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mu}, \code{theta}.
 #' @export
 .gpzaplink <- function(mu_pred, theta_pred)
@@ -510,8 +510,8 @@
 #' consistent mean (1 - theta) mu / (1 - exp(-mu)) is what is
 #' implemented.
 #'
-#' @param theta_hat See Usage.
-#' @param mu_hat See Usage.
+#' @param theta_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .gpzappredict <- function(theta_hat, mu_hat) {
@@ -526,9 +526,9 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param theta_hat See Usage.
-#' @param mu_hat See Usage.
-#' @param threshold Defaults to \code{0.5}.
+#' @param theta_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .gpzapcpredict <- function(theta_hat, mu_hat, threshold = 0.5)
@@ -558,7 +558,7 @@
 #'
 #' @param y_positive Passed to \code{.gpflat}.
 #' @param tol Defaults to \code{1e-12}.
-#' @param max_iter Defaults to \code{200}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @return A numeric value.
 #' @export
 .gpztpmle <- function(y_positive, tol = 1e-12, max_iter = 200) {
@@ -656,7 +656,7 @@
 #'
 #' @param K_new Passed to \code{.gpmat}.
 #' @param beta Passed to \code{.gpflat}.
-#' @param eta0 Defaults to \code{0}.
+#' @param eta0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
 .gprkhspredict <- function(K_new, beta, eta0 = 0)
@@ -670,7 +670,7 @@
 #'
 #' @param K Passed to \code{.gpmat}.
 #' @param y Passed to \code{.gpflat}.
-#' @param lam Defaults to \code{1}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals}, \code{loss}, \code{penalty}, \code{objective}.
 #' @export
 .gprkhsfitsq <- function(K, y, lam = 1) {

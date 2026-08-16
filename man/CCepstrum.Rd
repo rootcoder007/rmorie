@@ -8,7 +8,7 @@
 CCepstrum(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 The phase is unwrapped over k = 0..N/2 and mirrored by odd symmetry; the linear term (the z^r delay of eq 4.68) is r = round(phase(pi)/pi).

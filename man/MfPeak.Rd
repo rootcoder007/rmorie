@@ -8,10 +8,10 @@
 MfPeak(X, H, freqs, t0)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{H}{See Usage.}
-\item{freqs}{See Usage.}
-\item{t0}{See Usage.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
+\item{H}{Coerced to complex by the body, with \code{as.complex}.}
+\item{freqs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t0}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 maximizes.  It is a MAGNITUDE, so the phase of X H at t0 is what the optimal filter of eq (4.48) is chosen to align.

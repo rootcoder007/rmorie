@@ -12,7 +12,7 @@
 \item{summary_lines}{Defaults to \code{list()}.}
 \item{tables}{Defaults to \code{list()}.}
 \item{interpretation}{Defaults to \code{""}.}
-\item{warnings}{Defaults to \code{character()}.}
+\item{warnings}{Coerced to character by the body, with \code{as.character}. Defaults to \code{character()}.}
 \item{payload}{A vector; its length is taken and its elements indexed. Defaults to \code{list()}.}
 }
 \description{

@@ -8,12 +8,12 @@
 surepi_salmonella_cusum(counts, mu0, sigma, k_shift = 1, decision = 0.5, min_count = 5)
 }
 \arguments{
-\item{counts}{See Usage.}
+\item{counts}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{mu0}{A vector; its length is taken.}
 \item{sigma}{A vector; its length is taken.}
-\item{k_shift}{Defaults to \code{1}.}
-\item{decision}{Defaults to \code{0.5}.}
-\item{min_count}{Defaults to \code{5}.}
+\item{k_shift}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{decision}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
+\item{min_count}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.}
 }
 \description{
 A step of the surepi_native implementation. No other function in the package calls it. See the file header for the source the module follows.

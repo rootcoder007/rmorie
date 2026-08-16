@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{edges}{A vector; its length is taken and its elements indexed.}
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{

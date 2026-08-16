@@ -9,9 +9,9 @@ morie_funkM_imputed_svd_error(ratings, n_users, n_items, rank = 2, fill = "zero"
 }
 \arguments{
 \item{ratings}{Passed to \code{.funkM_as_ratings}.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{rank}{Defaults to \code{2}.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{rank}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 \item{fill}{Defaults to \code{"zero"}.}
 }
 \description{

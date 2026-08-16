@@ -8,10 +8,10 @@
 morie_vidgen_reconstruction_guidance(x_hat, observed, index, weight = 2, downsample = NULL)
 }
 \arguments{
-\item{x_hat}{See Usage.}
-\item{observed}{See Usage.}
-\item{index}{See Usage.}
-\item{weight}{Defaults to \code{2}.}
+\item{x_hat}{Iterated over elementwise, with \code{lapply}.}
+\item{observed}{Iterated over elementwise, with \code{lapply}.}
+\item{index}{Coerced to integer by the body, with \code{as.integer}.}
+\item{weight}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
 \item{downsample}{Defaults to \code{NULL}.}
 }
 \description{

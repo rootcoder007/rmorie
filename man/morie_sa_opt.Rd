@@ -9,14 +9,14 @@ morie_sa_opt(fun, x0, step = 1, T0 = 1, n_iter = 1000, schedule = "geometric", a
 }
 \arguments{
 \item{fun}{See Usage.}
-\item{x0}{See Usage.}
-\item{step}{Defaults to \code{1}.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{step}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{T0}{Passed to \code{.sa_opt_temperature}. Defaults to \code{1}.}
 \item{n_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.}
-\item{schedule}{Defaults to \code{"geometric"}.}
+\item{schedule}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"geometric"}.}
 \item{alpha}{Passed to \code{.sa_opt_temperature}. Defaults to \code{0.99}.}
-\item{lower}{Defaults to \code{NULL}.}
-\item{upper}{Defaults to \code{NULL}.}
+\item{lower}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{upper}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

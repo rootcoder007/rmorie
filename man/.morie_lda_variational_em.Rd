@@ -8,14 +8,14 @@
 .morie_lda_variational_em(docs, K, V, alpha = 0.1, iters = 30, inner = 50, seed = 0, tol = 1e-06)
 }
 \arguments{
-\item{docs}{See Usage.}
+\item{docs}{Iterated over elementwise, with \code{lapply}.}
 \item{K}{A count; the body uses it as \code{seq_len(...)}.}
 \item{V}{A count; the body uses it as \code{matrix(...)}.}
 \item{alpha}{Passed to \code{.morie_lda_variational_inference}. Defaults to \code{0.1}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.}
 \item{inner}{Passed to \code{.morie_lda_variational_inference}. Defaults to \code{50}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
-\item{tol}{Defaults to \code{1e-06}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.}
 }
 \description{
 A step of the lda_native implementation. No other function in the package calls it. See the file header for the source the module follows.

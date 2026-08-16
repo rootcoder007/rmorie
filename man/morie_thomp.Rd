@@ -10,8 +10,8 @@ morie_thomp(p, T, alpha0 = NULL, beta0 = NULL, seed = 0)
 \arguments{
 \item{p}{A vector; its length is taken and its elements indexed.}
 \item{T}{A count; the body uses it as \code{seq_len(...)}.}
-\item{alpha0}{Defaults to \code{NULL}.}
-\item{beta0}{Defaults to \code{NULL}.}
+\item{alpha0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{beta0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

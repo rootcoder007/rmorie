@@ -8,7 +8,7 @@
 Roc(scores, labels, positive = 1)
 }
 \arguments{
-\item{scores}{See Usage.}
+\item{scores}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{labels}{A vector; its length is taken.}
 \item{positive}{Defaults to \code{1}.}
 }

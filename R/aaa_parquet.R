@@ -265,7 +265,7 @@
 #' source it follows.
 #'
 #' @param st A vector; indexed elementwise.
-#' @param id See Usage.
+#' @param id Coerced to character by the body, with \code{as.character}.
 #' @param default Defaults to \code{NULL}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -912,7 +912,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vals See Usage.
+#' @param vals Iterated over elementwise, with \code{vapply}.
 #' @param ptype See Usage.
 #' @param converted See Usage.
 #' @return The value of \code{vals}, as built in the body.
@@ -1232,7 +1232,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' bare DOUBLE of seconds: readable, but no longer a timestamp to any
 #' other engine, and off by a factor of 1e6 from where it started.
 #'
-#' @param v See Usage.
+#' @param v Numeric; the body checks with \code{is.numeric}.
 #' @return A list with \code{type}, \code{converted}.
 #' @export
 .pq_infer <- function(v) {
@@ -1264,7 +1264,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @param inf See Usage.
 #' @return The value of \code{v}, as built in the body.
 #' @export
@@ -1282,7 +1282,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #'
 #' low half back into signed range because that is all writeBin takes.
 #'
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{writeBin}.
 #' @export
 .pq_encode_i64 <- function(values) {

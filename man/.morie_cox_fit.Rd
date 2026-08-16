@@ -14,7 +14,7 @@
 \item{ties}{Passed to \code{.morie_cox_score}. Defaults to \code{"efron"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{1e-09}.}
-\item{offset}{Defaults to \code{NULL}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the cox_native implementation. Called by \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard}, \code{morie_cox_breslow_step} and 4 others in the module. See the file header for the source the module follows.

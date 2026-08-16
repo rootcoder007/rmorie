@@ -10,7 +10,7 @@ morie_prphet_fourier_terms(t, period, order)
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}
 \item{period}{Numeric; combined arithmetically in the body.}
-\item{order}{See Usage.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the prphet_native implementation. Called by \code{morie_prphet_design}, \code{prophe_additive_components}. See the file header for the source the module follows.

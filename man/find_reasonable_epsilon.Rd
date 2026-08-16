@@ -13,7 +13,7 @@ find_reasonable_epsilon(theta, logp, grad, rnd, eps = 1, max_doublings = 100)
 \item{grad}{See Usage.}
 \item{rnd}{See Usage.}
 \item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{max_doublings}{Defaults to \code{100}.}
+\item{max_doublings}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 }
 \description{
 acceptance probability crosses one half. The argument `rnd` is the single-value normal generator (the closure around the shared RNG).

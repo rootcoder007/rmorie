@@ -220,8 +220,8 @@
 #' and a chi-square, so "simply divide the p-value ... by 2" (Self and
 #' Liang, 1987; Littell, Milliken, Stroup and Wolfinger, 1996).
 #'
-#' @param neg2_unrestricted See Usage.
-#' @param neg2_separable See Usage.
+#' @param neg2_unrestricted Coerced to numeric by the body, with \code{as.numeric}.
+#' @param neg2_separable Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{statistic}, \code{p_value}, \code{p_value_naive_chi2_1}, \code{reference}.
 #' @export
 .schab_st_separability_test <- function(neg2_unrestricted, neg2_separable) {
@@ -318,8 +318,8 @@
 #' @param k Passed to \code{.schab_st_as_lags}.
 #' @param cov_spatial See Usage.
 #' @param cov_temporal See Usage.
-#' @param nodes See Usage.
-#' @param weights See Usage.
+#' @param nodes Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .schab_st_scale_mixture <- function(h, k, cov_spatial, cov_temporal, nodes,
@@ -384,8 +384,8 @@
 #' smooth and periodic so the trapezoid rule converges geometrically;
 #' base R\'s besselJ() is deliberately not used, see the file header.
 #'
-#' @param x See Usage.
-#' @param n_quad Defaults to \code{200L}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_quad Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .schab_bessel_j0 <- function(x, n_quad = 200L) {
@@ -407,7 +407,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @param upper Numeric; combined arithmetically in the body. Defaults to \code{40}.
 #' @param n_quad Passed to \code{.schab_gauss_legendre}. Defaults to \code{400L}.
 #' @return A vector, from \code{vapply}.
@@ -657,8 +657,8 @@
 #' @param coords A matrix; indexed by row and column.
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param z A vector; its length is taken and its elements indexed.
-#' @param n_space_bins Defaults to \code{10L}.
-#' @param n_time_bins Defaults to \code{5L}.
+#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
+#' @param n_time_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param max_dist Defaults to \code{NULL}.
 #' @param max_time Defaults to \code{NULL}.
 #' @return A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags}, \code{space_edges}, \code{time_edges}.
@@ -723,10 +723,10 @@
 #' @param coords A matrix; indexed by row and column.
 #' @param times Numeric; combined arithmetically in the body.
 #' @param z A vector; indexed elementwise.
-#' @param at_time See Usage.
-#' @param n_bins Defaults to \code{10L}.
+#' @param at_time Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param max_dist Defaults to \code{NULL}.
-#' @param tol Defaults to \code{0}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{gamma}, \code{counts}, \code{n_at_time}, \code{lags}, \code{edges}.
 #' @export
 .schab_st_conditional_semivariogram <- function(coords, times, z, at_time,
@@ -803,7 +803,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param region See Usage.
+#' @param region Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .schab_st_region_box <- function(region) {
@@ -822,7 +822,7 @@
 #' the source it follows.
 #'
 #' @param points A matrix; passed to \code{as.matrix}.
-#' @param times See Usage.
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param region Passed to \code{.schab_st_region_box}.
 #' @param time_interval A vector; indexed elementwise.
 #' @return A list with \code{intensity}, \code{n}, \code{area}, \code{duration}, \code{volume}.
@@ -850,11 +850,11 @@
 #' the source it follows.
 #'
 #' @param points A matrix; passed to \code{as.matrix}.
-#' @param times See Usage.
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param region Passed to \code{.schab_st_region_box}.
 #' @param time_interval A vector; indexed elementwise.
-#' @param n_space_bins Defaults to \code{4L}.
-#' @param n_time_bins Defaults to \code{4L}.
+#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
+#' @param n_time_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return A list with \code{marginal_spatial}, \code{marginal_temporal}, \code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
 #' @export
 .schab_st_marginal_intensities <- function(points, times, region, time_interval,
@@ -920,11 +920,11 @@
 #' the source it follows.
 #'
 #' @param points A matrix; passed to \code{as.matrix}.
-#' @param times See Usage.
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param region Passed to \code{.schab_st_region_box}.
 #' @param time_interval A vector; indexed elementwise.
-#' @param n_space_bins Defaults to \code{3L}.
-#' @param n_time_bins Defaults to \code{3L}.
+#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
+#' @param n_time_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @return A list with \code{index_of_dispersion}, \code{df}, \code{p_value}, \code{counts}, \code{mean_count}, \code{var_count}.
 #' @export
 .schab_cstr_test <- function(points, times, region, time_interval,
@@ -976,7 +976,7 @@
 #' well-behaved number, just not this one.
 #'
 #' @param x Numeric; passed to \code{log}.
-#' @param df See Usage.
+#' @param df Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .schab_st_chi2_sf <- function(x, df) {

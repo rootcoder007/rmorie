@@ -8,9 +8,9 @@
 LsiSerH(h_1, h_2, n = NULL)
 }
 \arguments{
-\item{h_1}{See Usage.}
-\item{h_2}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
+\item{h_1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h_2}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 responses.  Convolution commutes, so a filter chain may be reordered, and the result is len(h1) + len(h2) - 1 long.

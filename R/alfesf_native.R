@@ -108,7 +108,7 @@
 #' @param y A vector; indexed elementwise.
 #' @param n_bins A count; the body uses it as \code{seq_len(...)}.
 #' @param l2 Numeric; combined arithmetically in the body.
-#' @param iters See Usage.
+#' @param iters Coerced to integer by the body, with \code{as.integer}.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @return A list with \code{W}, \code{b}.
 #' @export
@@ -151,7 +151,7 @@
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
-#' @param iters Defaults to \code{200L}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A numeric value.
 #' @export
@@ -184,8 +184,8 @@
 #' @param pae_logits Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.
 #' @param features Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.
 #' @param weights Optional; may be \code{NULL}. A list; the body reads \code{$b}, \code{$W} from it.
-#' @param lddt Defaults to \code{NULL}.
-#' @param chain_id Defaults to \code{NULL}.
+#' @param lddt Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param chain_id Optional; may be \code{NULL}. Coerced to vector by the body, with \code{as.vector}.
 #' @param temperature Compared against \code{"fit"}. Defaults to \code{1}.
 #' @param l2 Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{0.001}.
 #' @param iters Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{300L}.

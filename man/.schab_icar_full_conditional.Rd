@@ -10,7 +10,7 @@
 \arguments{
 \item{u}{A matrix; passed to \code{\%*\%}.}
 \item{adjacency}{A matrix; passed to \code{as.matrix}.}
-\item{sigma2}{Defaults to \code{1}.}
+\item{sigma2}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. No other function in the package calls it. See the file header for the source the module follows.

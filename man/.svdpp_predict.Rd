@@ -11,8 +11,8 @@
 \item{mu}{Passed to \code{.svdpp_baseline}.}
 \item{b_user}{Passed to \code{.svdpp_baseline}.}
 \item{b_item}{Passed to \code{.svdpp_baseline}.}
-\item{p_u}{See Usage.}
-\item{q_i}{See Usage.}
+\item{p_u}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{q_i}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rated_items}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{y}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{exponent}{Passed to \code{.svdpp_implicit_term}. Defaults to \code{-0.5}.}

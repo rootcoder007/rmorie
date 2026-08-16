@@ -214,7 +214,7 @@
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
-#' @param iters Defaults to \code{100}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{P_z}, \code{P_d_given_z}, \code{P_w_given_z}, \code{loglik_history}, \code{final_loglik}, \code{iterations}, \code{K}, \code{n_docs}, \code{vocab}, \code{n_parameters}, \code{method}, \code{caveat}.

@@ -8,8 +8,8 @@
 sdpwts_central_path_gap(t, m)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{m}{See Usage.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}. See the file header for the source the module follows.

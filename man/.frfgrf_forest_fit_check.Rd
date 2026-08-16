@@ -8,9 +8,9 @@
 .frfgrf_forest_fit_check(y, X, n_trees = 100, min_leaf = 5, subsample_frac = 0.5, alpha = 0.05, pi = 0.5, seed = 0, kind = "double-sample", sizes = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{n_trees}{Defaults to \code{100}.}
+\item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{min_leaf}{Passed to \code{.frfgrf_honesty_test}. Defaults to \code{5}.}
 \item{subsample_frac}{Defaults to \code{0.5}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}

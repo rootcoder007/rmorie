@@ -26,9 +26,9 @@
 #' (n_atoms - 1), and the spacing. n must be at least 2 and v_max >
 #' v_min.
 #'
-#' @param v_min See Usage.
-#' @param v_max See Usage.
-#' @param n_atoms See Usage.
+#' @param v_min Coerced to numeric by the body, with \code{as.numeric}.
+#' @param v_max Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_atoms Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{z}, \code{dz}.
 #' @export
 .distq_atoms <- function(v_min, v_max, n_atoms) {
@@ -52,7 +52,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param next_probs See Usage.
+#' @param next_probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_atoms See Usage.
 #' @param name See Usage.
 #' @return The value of \code{p}, as built in the body.

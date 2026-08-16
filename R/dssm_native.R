@@ -69,7 +69,7 @@
 #' or anything that as.numeric() can flatten. Mirrors k.vec() on the
 #' Python side which is forgiving about list/array inputs.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Numeric; the body checks with \code{is.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .dssm_to_vec <- function(x) {

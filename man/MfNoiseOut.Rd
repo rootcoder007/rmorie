@@ -8,10 +8,10 @@
 MfNoiseOut(power, H, freqs = NULL, df = 1)
 }
 \arguments{
-\item{power}{See Usage.}
-\item{H}{See Usage.}
-\item{freqs}{Defaults to \code{NULL}.}
-\item{df}{Defaults to \code{1}.}
+\item{power}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{H}{Coerced to complex by the body, with \code{as.complex}.}
+\item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{df}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 holds only because the input was white, so the density factored out.

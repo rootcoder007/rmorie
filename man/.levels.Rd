@@ -8,8 +8,8 @@
 .levels(A, candidate_strata)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{candidate_strata}{See Usage.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{candidate_strata}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tmldta_native implementation. Called by \code{morie_tmldta}. See the file header for the source the module follows.

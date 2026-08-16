@@ -15,7 +15,7 @@ morie_survnnr_fit(X, times, events, hidden = c(), activation = "tanh", l2 = 0, l
 \item{activation}{Passed to \code{morie_survnnr_forward}. Defaults to \code{"tanh"}.}
 \item{l2}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
-\item{n_epochs}{Defaults to \code{400}.}
+\item{n_epochs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.}
 \item{seed}{Passed to \code{.survnnr_init}. Defaults to \code{0}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }

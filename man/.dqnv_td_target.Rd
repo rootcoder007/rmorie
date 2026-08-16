@@ -8,11 +8,11 @@
 .dqnv_td_target(r, s2, Q_target, gamma = 0.99, done = FALSE)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{s2}{See Usage.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s2}{Coerced to integer by the body, with \code{as.integer}.}
 \item{Q_target}{A vector; indexed elementwise.}
-\item{gamma}{Defaults to \code{0.99}.}
-\item{done}{Defaults to \code{FALSE}.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.99}.}
+\item{done}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.}
 }
 \description{
 A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.

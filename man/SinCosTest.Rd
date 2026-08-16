@@ -8,13 +8,13 @@
 SinCosTest(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1, fs = 100, duration = 1)
 }
 \arguments{
-\item{n}{Defaults to \code{NULL}.}
-\item{f1}{Defaults to \code{5}.}
-\item{f2}{Defaults to \code{20}.}
-\item{a1}{Defaults to \code{1}.}
-\item{a2}{Defaults to \code{1}.}
-\item{fs}{Defaults to \code{100}.}
-\item{duration}{Defaults to \code{1}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{f1}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.}
+\item{f2}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{20}.}
+\item{a1}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{a2}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{100}.}
+\item{duration}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the rangayyan_ccf implementation. No other function in the package calls it. See the file header for the source the module follows.

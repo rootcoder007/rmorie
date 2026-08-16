@@ -8,7 +8,7 @@
 .msm_lcg(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 stream, not a low-discrepancy one -- a shared quasi-random sequence correlates the resample positions and shrinks the bootstrap spread.

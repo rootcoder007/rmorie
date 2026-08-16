@@ -8,7 +8,7 @@
 EnsAvg(observations)
 }
 \arguments{
-\item{observations}{See Usage.}
+\item{observations}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 signal, a filtered version of the M observations.

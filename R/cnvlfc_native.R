@@ -19,9 +19,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param series See Usage.
-#' @param E Defaults to \code{2}.
-#' @param tau Defaults to \code{1}.
+#' @param series Coerced to numeric by the body, with \code{as.numeric}.
+#' @param E Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param tau Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{points}, \code{index}, \code{E}, \code{tau}.
 #' @export
 .cnvlfc_embed <- function(series, E = 2, tau = 1) {
@@ -107,13 +107,13 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param driver See Usage.
-#' @param response See Usage.
+#' @param driver Coerced to numeric by the body, with \code{as.numeric}.
+#' @param response Coerced to numeric by the body, with \code{as.numeric}.
 #' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.
 #' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.
-#' @param library Defaults to \code{NULL}.
-#' @param seed Defaults to \code{1L}.
-#' @param exclude Defaults to \code{0L}.
+#' @param library Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
+#' @param exclude Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A list with \code{rho}, \code{observed}, \code{predicted}, \code{n_predicted}, \code{library}, \code{E}, \code{tau}.
 #' @export
 .cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
@@ -194,11 +194,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.
 #' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.
-#' @param lib_sizes Defaults to \code{NULL}.
+#' @param lib_sizes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.
 #' @param exclude Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x}, \code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict}, \code{method}.
@@ -267,14 +267,14 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param rx Numeric; combined arithmetically in the body. Defaults to \code{3.8}.
 #' @param ry Numeric; combined arithmetically in the body. Defaults to \code{3.5}.
 #' @param bxy Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param byx Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
-#' @param x0 Defaults to \code{0.4}.
-#' @param y0 Defaults to \code{0.2}.
-#' @param burn Defaults to \code{300L}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.4}.
+#' @param y0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.
+#' @param burn Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @return A list with \code{x}, \code{y}, \code{bxy}, \code{byx}.
 #' @export
 .cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,

@@ -77,11 +77,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param g See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{a}, \code{y}, \code{q1}, \code{q0}, \code{gg}, \code{n}.
 #' @export
 .tlsate_check <- function(A, Y, Q1, Q0, g) {
@@ -288,8 +288,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pair_ids See Usage.
-#' @param ic See Usage.
+#' @param pair_ids Coerced to character by the body, with \code{as.character}.
+#' @param ic Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{se}, \code{n_pairs}, \code{note}.
 #' @export
 .tlsate_paired_variance <- function(pair_ids, ic) {

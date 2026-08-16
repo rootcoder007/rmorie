@@ -8,7 +8,7 @@
 .morie_km2_bt_loss(margins)
 }
 \arguments{
-\item{margins}{See Usage.}
+\item{margins}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch5_dpo_loss}, \code{morie_kamath_ch5_reward_loss_pairwise}. See the file header for the source the module follows.

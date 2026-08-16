@@ -8,7 +8,7 @@
 Idft(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 forward transform of eq (3.80); getting either wrong scales the signal by N or reverses it in time, neither visible on a magnitude plot.

@@ -8,11 +8,11 @@
 CorSound(diameter, flow_velocity, stenosis_pct = 0, p2max = 1, freqs = NULL, nu = 3.5e-06)
 }
 \arguments{
-\item{diameter}{See Usage.}
-\item{flow_velocity}{See Usage.}
-\item{stenosis_pct}{Defaults to \code{0}.}
+\item{diameter}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{flow_velocity}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{stenosis_pct}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{p2max}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{freqs}{Defaults to \code{NULL}.}
+\item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nu}{Numeric; combined arithmetically in the body. Defaults to \code{3.5e-06}.}
 }
 \description{

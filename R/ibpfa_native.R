@@ -15,8 +15,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param alpha See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @return A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n}, \code{features_per_object}, \code{note}.
 #' @export
@@ -76,8 +76,8 @@ sample_ibp <- function(n, alpha, seed = 0L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param alpha See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{expected_total_features}, \code{harmonic}, \code{expected_per_object}, \code{expected_nonzeros}, \code{note}.
 #' @export
 expected_features <- function(n, alpha) {
@@ -127,7 +127,7 @@ left_ordered_form <- function(Z) {
 #' source it follows.
 #'
 #' @param Z A matrix; passed to \code{as.matrix}.
-#' @param alpha See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{lp}, as built in the body.
 #' @export
 ibp_log_probability <- function(Z, alpha) {

@@ -9,7 +9,7 @@ morie_scumap_fuzzy_simplicial_set(X, n_neighbors = 15, symmetrize = TRUE)
 }
 \arguments{
 \item{X}{Passed to \code{.scumap_matrix}.}
-\item{n_neighbors}{Defaults to \code{15}.}
+\item{n_neighbors}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.}
 \item{symmetrize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

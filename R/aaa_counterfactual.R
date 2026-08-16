@@ -22,7 +22,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param u See Usage.
+#' @param u Coerced to list by the body, with \code{as.list}.
 #' @param equations A vector; indexed elementwise.
 #' @return The value of \code{vals}, as built in the body.
 #' @export

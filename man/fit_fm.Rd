@@ -9,11 +9,11 @@ fit_fm(X, y, k_dim = 4, iters = 300, alpha = 0.02, lam = 0.01, seed = 0)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
-\item{k_dim}{Defaults to \code{4}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{k_dim}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.}
-\item{alpha}{Defaults to \code{0.02}.}
-\item{lam}{Defaults to \code{0.01}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 \item{seed}{Defaults to \code{0}.}
 }
 \description{

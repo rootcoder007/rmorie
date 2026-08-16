@@ -8,7 +8,7 @@
 Qt(p, df)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Iterated over elementwise, with \code{vapply}.}
 \item{df}{See Usage.}
 }
 \description{

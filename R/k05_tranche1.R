@@ -55,7 +55,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hits See Usage.
+#' @param hits Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{h}, \code{t}, \code{n}.
 #' @export
 .morie_k05_hits <- function(hits) {

@@ -12,7 +12,7 @@
 \item{A}{A vector; indexed elementwise.}
 \item{W}{Passed to \code{.tmlcic_row_fun}.}
 \item{cand}{Passed to \code{.tmlcic_row_fun}.}
-\item{rows}{See Usage.}
+\item{rows}{Iterated over elementwise, with \code{lapply}.}
 \item{ridge}{Numeric; passed to \code{max}.}
 }
 \description{

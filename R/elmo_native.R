@@ -145,8 +145,8 @@ bilm_forward <- function(X, layers) {
 #'
 #' @param reps A vector; its length is taken and its elements indexed.
 #' @param raw_weights A vector; its length is taken.
-#' @param gamma Defaults to \code{1}.
-#' @param position Defaults to \code{NULL}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param position Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
@@ -178,8 +178,8 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
 #'
 #' @param X See Usage.
 #' @param layers See Usage.
-#' @param raw_weights Defaults to \code{NULL}.
-#' @param gamma Defaults to \code{1}.
+#' @param raw_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights}, \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
 #' @export
 elmo_representation <- function(X, layers, raw_weights = NULL,

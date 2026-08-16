@@ -12,7 +12,7 @@ gnnEx_mask_objective(predict, edges, edge_logits, feature_logits, y, size_coef =
 \item{edges}{See Usage.}
 \item{edge_logits}{Passed to \code{.gnnEx_sig}.}
 \item{feature_logits}{Passed to \code{.gnnEx_sig}.}
-\item{y}{See Usage.}
+\item{y}{Coerced to integer by the body, with \code{as.integer}.}
 \item{size_coef}{Numeric; combined arithmetically in the body. Defaults to \code{0.005}.}
 \item{entropy_coef}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }

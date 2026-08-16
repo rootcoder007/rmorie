@@ -9,8 +9,8 @@ gnnEx_computation_graph(adj, v, L)
 }
 \arguments{
 \item{adj}{Passed to \code{.gnnEx_get_neighbors}.}
-\item{v}{See Usage.}
-\item{L}{See Usage.}
+\item{v}{Coerced to integer by the body, with \code{as.integer}.}
+\item{L}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the gnnEx_native implementation. Called by \code{gnnEx_explain_node}. See the file header for the source the module follows.

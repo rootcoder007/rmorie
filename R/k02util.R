@@ -126,9 +126,9 @@ k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param iters Defaults to \code{80L}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80L}.
 #' @return A numeric value.
 #' @export
 k02gold <- function(f, lo, hi, iters = 80L) {

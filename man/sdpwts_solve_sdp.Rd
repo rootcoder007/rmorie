@@ -8,14 +8,14 @@
 sdpwts_solve_sdp(c, F0, Fs, x0, t0 = 1, mu = 10, tol = 1e-08, max_outer = 60)
 }
 \arguments{
-\item{c}{See Usage.}
+\item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{F0}{A matrix; passed to \code{as.matrix}.}
 \item{Fs}{Passed to \code{.sdpwts_centre}.}
-\item{x0}{See Usage.}
-\item{t0}{Defaults to \code{1}.}
-\item{mu}{Defaults to \code{10}.}
-\item{tol}{Defaults to \code{1e-08}.}
-\item{max_outer}{Defaults to \code{60}.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
+\item{max_outer}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.}
 }
 \description{
 A step of the sdpwts_native implementation. Called by \code{sdpwts_min_eigenvalue_sdp}. See the file header for the source the module follows.

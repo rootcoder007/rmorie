@@ -8,7 +8,7 @@
 .mor_trim_ps(ps, trim = c(0.01, 0.99), trim_type = "value")
 }
 \arguments{
-\item{ps}{See Usage.}
+\item{ps}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{trim}{Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.01, 0.99)}.}
 \item{trim_type}{One of \code{"discard"}, \code{"quantile"}, \code{"value"}. Defaults to \code{"value"}.}
 }

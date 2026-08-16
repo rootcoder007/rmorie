@@ -8,8 +8,8 @@
 SpecEntropy(psd, freqs = NULL, fmin = NULL, fmax = NULL)
 }
 \arguments{
-\item{psd}{See Usage.}
-\item{freqs}{Defaults to \code{NULL}.}
+\item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fmin}{Defaults to \code{NULL}.}
 \item{fmax}{Defaults to \code{NULL}.}
 }

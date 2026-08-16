@@ -54,8 +54,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tau See Usage.
-#' @param cost Defaults to \code{0}.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cost Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{ifelse}.
 #' @export
 .itrgrf_policy_from_tau <- function(tau, cost = 0.0) {
@@ -162,15 +162,15 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param W See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param W Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param cost Passed to \code{.itrgrf_policy_from_tau}. Defaults to \code{0}.
 #' @param n_trees Passed to \code{.itrgrf_fit_arm}. Defaults to \code{150}.
 #' @param min_leaf Passed to \code{.itrgrf_fit_arm}. Defaults to \code{5}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param evaluate One of \code{"in-sample"}, \code{"split"}. Defaults to \code{"split"}.
-#' @param propensity Defaults to \code{NULL}.
+#' @param propensity Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{value}, \code{se}, \code{ci}, \code{rule}, \code{tau}, \code{mu1}, \code{mu0}, \code{treated_fraction}, \code{value_treat_all}, \code{value_treat_none}, \code{gain_over_treat_all}, \code{gain_over_treat_none}, \code{scores}, \code{cost}, \code{evaluate}, \code{n}, \code{n_scored}, \code{level}, \code{method}.
 #' @export

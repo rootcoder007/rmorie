@@ -31,7 +31,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rho See Usage.
+#' @param rho Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{rho}, as built in the body.
 #' @export
 .zfmech_check_rho <- function(rho) {

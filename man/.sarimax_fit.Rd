@@ -12,7 +12,7 @@
 \item{X}{Passed to \code{.columns}.}
 \item{order}{A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.}
 \item{seasonal_order}{A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.}
-\item{s}{Defaults to \code{12}.}
+\item{s}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.}
 \item{include_constant}{Optional; may be \code{NULL}. A flag; the body branches on it.}
 \item{method}{One of \code{"css"}, \code{"ml"}, \code{"uls"}. Defaults to \code{"ml"}.}
 }

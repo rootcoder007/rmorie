@@ -8,9 +8,9 @@
 MaTf(b_k, z, N = NULL)
 }
 \arguments{
-\item{b_k}{See Usage.}
+\item{b_k}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{z}{Passed to \code{.morie_rg_polyz}.}
-\item{N}{Defaults to \code{NULL}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 so an FIR filter is stable whatever its coefficients.

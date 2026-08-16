@@ -8,8 +8,8 @@
 FpeOrder(errors, n_samples)
 }
 \arguments{
-\item{errors}{See Usage.}
-\item{n_samples}{See Usage.}
+\item{errors}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_samples}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 variance falls monotonically with p (eq 7.39), so without a penalty the criterion would always pick the largest order offered. Rangayyan gives AIC at eq (7.60); FPE is not printed in the book.

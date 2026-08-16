@@ -45,13 +45,13 @@
 #' @param Kt See Usage.
 #' @param prox_f_star See Usage.
 #' @param prox_g See Usage.
-#' @param x0 See Usage.
-#' @param y0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tau Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param sigma Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param norm_K Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @param max_iter Defaults to \code{500}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
@@ -147,7 +147,7 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param signal See Usage.
+#' @param signal Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param max_iter Passed to \code{morie_primal}. Defaults to \code{1000}.
 #' @param tol Passed to \code{morie_primal}. Defaults to \code{1e-12}.

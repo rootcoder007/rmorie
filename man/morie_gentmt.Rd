@@ -12,7 +12,7 @@ morie_gentmt(y, A, H, method = "weight", degree = 1, n_strata = 5, doses = NULL,
 \item{A}{Passed to \code{.gentmt_vec}.}
 \item{H}{Passed to \code{.gentmt_ip_weights}.}
 \item{method}{One of \code{"subclassify"}, \code{"weight"}. Defaults to \code{"weight"}.}
-\item{degree}{Defaults to \code{1}.}
+\item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{n_strata}{Passed to \code{.gentmt_gps_subclassify}. Defaults to \code{5}.}
 \item{doses}{Passed to \code{.gentmt_dose_response_curve}.}
 \item{trim}{Passed to \code{.gentmt_ip_weights}.}

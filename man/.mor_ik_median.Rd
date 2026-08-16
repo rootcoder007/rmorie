@@ -8,7 +8,7 @@
 .mor_ik_median(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the causrddh_native implementation. Called by \code{morie_causrddh}. See the file header for the source the module follows.

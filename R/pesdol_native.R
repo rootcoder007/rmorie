@@ -35,7 +35,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @param p Numeric; passed to \code{max}. Defaults to \code{1}.
 #' @param q Numeric; passed to \code{max}. Defaults to \code{1}.

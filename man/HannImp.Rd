@@ -8,7 +8,7 @@
 HannImp(n = NULL)
 }
 \arguments{
-\item{n}{Defaults to \code{NULL}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 FINITE, which is what "FIR" names, and it sums to 1, so a constant passes through unchanged.

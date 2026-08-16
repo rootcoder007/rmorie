@@ -193,8 +193,8 @@ morie_surxgb_ddpdf <- function(z, dist="normal") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y_lower See Usage.
-#' @param y_upper See Usage.
+#' @param y_lower Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y_upper Coerced to numeric by the body, with \code{as.numeric}.
 #' @param u Passed to \code{.surxgb_s}.
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param dist Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.
@@ -296,7 +296,7 @@ morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param G See Usage.
+#' @param G Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H Numeric; combined arithmetically in the body.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
@@ -416,15 +416,15 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
 #' @param X A matrix; indexed by row and column.
 #' @param y_lower A vector; its length is taken.
 #' @param y_upper A vector; its length is taken.
-#' @param n_rounds Defaults to \code{50}.
+#' @param n_rounds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
-#' @param max_depth Defaults to \code{3}.
-#' @param lam Defaults to \code{1}.
-#' @param gamma Defaults to \code{0}.
-#' @param min_child Defaults to \code{5}.
+#' @param max_depth Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param min_child Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param sigma Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{1}.
 #' @param dist Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.
-#' @param base_score Defaults to \code{NULL}.
+#' @param base_score Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param derivatives Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{"analytic"}.
 #' @return A list with \code{estimate}, \code{trees}, \code{eta}, \code{lam}, \code{gamma}, \code{sigma}, \code{dist}, \code{base_score}, \code{derivatives}, \code{loss_history}, \code{prediction}, \code{n_rounds}, \code{max_depth}, \code{method}.
 #' @export

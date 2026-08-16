@@ -8,9 +8,9 @@
 LogMinPh(alpha, terms = 20, z = NULL)
 }
 \arguments{
-\item{alpha}{See Usage.}
-\item{terms}{Defaults to \code{20}.}
-\item{z}{Defaults to \code{NULL}.}
+\item{alpha}{Coerced to complex by the body, with \code{as.complex}.}
+\item{terms}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
+\item{z}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 The coefficients sit at POSITIVE quefrency and decay at least as fast as 1/n: the minimum-phase cepstrum is causal.

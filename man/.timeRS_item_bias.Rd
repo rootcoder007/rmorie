@@ -8,7 +8,7 @@
 .timeRS_item_bias(b_i, bins, t, bin_days = 70, n_bins = 30)
 }
 \arguments{
-\item{b_i}{See Usage.}
+\item{b_i}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{bins}{A vector; its length is taken and its elements indexed.}
 \item{t}{Passed to \code{.timeRS_time_bin}.}
 \item{bin_days}{Passed to \code{.timeRS_time_bin}. Defaults to \code{70}.}

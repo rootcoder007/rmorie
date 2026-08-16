@@ -634,7 +634,7 @@ morie_geron_hidden_layers_heuristic <- function(model, X, y, max_layers = 10, mi
 #' the source it follows.
 #'
 #' @param Xtr A matrix; passed to \code{as.matrix}.
-#' @param ytr See Usage.
+#' @param ytr Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{function}.
 #' @export
@@ -655,7 +655,7 @@ morie_geron_hidden_layers_heuristic <- function(model, X, y, max_layers = 10, mi
 #'
 #' @param param_grid See Usage.
 #' @param X Passed to \code{.morie_gr_mat}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param estimator Defaults to \code{NULL}.
 #' @param K Passed to \code{morie_geron_cross_validation_score}. Defaults to \code{3}.
 #' @param score Passed to \code{morie_geron_cross_validation_score}.

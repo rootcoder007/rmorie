@@ -19,7 +19,7 @@ morie_tmlcic_tmle_cluster_ic(y, D, X, cluster = NULL, target = "SATE", design = 
 \item{n_folds}{Passed to \code{morie_tmlcic_adaptive_prespecification}.}
 \item{adapt}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{ridge}{Passed to \code{morie_tmlcic_adaptive_prespecification}. Defaults to \code{1e-08}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 }
 \description{
 A step of the tmlcic_native implementation. No other function in the package calls it. See the file header for the source the module follows.

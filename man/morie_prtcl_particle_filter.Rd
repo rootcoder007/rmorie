@@ -8,12 +8,12 @@
 morie_prtcl_particle_filter(y, n.particles, init, step, loglik, seed = 0L, resample.threshold = 1, systematic = TRUE)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{n.particles}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n.particles}{Coerced to integer by the body, with \code{as.integer}.}
 \item{init}{See Usage.}
 \item{step}{See Usage.}
 \item{loglik}{See Usage.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 \item{resample.threshold}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{systematic}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

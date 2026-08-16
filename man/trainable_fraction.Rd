@@ -8,9 +8,9 @@
 trainable_fraction(qformer_params, frozen_vision_params, frozen_llm_params)
 }
 \arguments{
-\item{qformer_params}{See Usage.}
-\item{frozen_vision_params}{See Usage.}
-\item{frozen_llm_params}{See Usage.}
+\item{qformer_params}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{frozen_vision_params}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{frozen_llm_params}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the blip2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.

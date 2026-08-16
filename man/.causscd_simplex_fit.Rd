@@ -11,7 +11,7 @@
 \item{cols}{A vector; its length is taken and its elements indexed.}
 \item{target}{A vector; its length is taken.}
 \item{penalty}{Numeric; combined arithmetically in the body.}
-\item{iters}{Defaults to \code{2000L}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{

@@ -65,7 +65,7 @@
 #' source it follows.
 #'
 #' @param l2 Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
-#' @param epochs Defaults to \code{300L}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param seed Defaults to \code{0}.
 #' @return The value of \code{train}, as built in the body.
@@ -196,12 +196,12 @@ attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
 #' @param c Numeric; combined arithmetically in the body.
 #' @param n_features A count; the body uses it as \code{seq_len(...)}.
 #' @param feature_values Defaults to \code{NULL}.
-#' @param k_max Defaults to \code{NULL}.
+#' @param k_max Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param k_min Numeric; passed to \code{max}. Defaults to \code{1L}.
 #' @param conf_min Defaults to \code{0.8}.
 #' @param iter_max A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.
 #' @param rej_max Defaults to \code{10L}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return Nothing; the function is called for its effect.
 #' @export
 synthesize <- function(target_predict, c, n_features, feature_values = NULL,
@@ -280,7 +280,7 @@ synthesize <- function(target_predict, c, n_features, feature_values = NULL,
 #'
 #' @param X A vector; its length is taken and its elements indexed.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 synthesize_marginals <- function(X, n, seed = 0) {
@@ -309,7 +309,7 @@ synthesize_marginals <- function(X, n, seed = 0) {
 #' @param X A vector; indexed elementwise.
 #' @param fraction Defaults to \code{0.1}.
 #' @param feature_values Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
@@ -343,8 +343,8 @@ synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pred See Usage.
-#' @param truth See Usage.
+#' @param pred Coerced to integer by the body, with \code{as.integer}.
+#' @param truth Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{precision}, \code{recall}, \code{accuracy}, \code{tp}, \code{fp}, \code{fn}, \code{tn}.
 #' @export
 precision_recall <- function(pred, truth) {
@@ -366,7 +366,7 @@ precision_recall <- function(pred, truth) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vec See Usage.
+#' @param vec Coerced to numeric by the body, with \code{as.numeric}.
 #' @param top Optional; may be \code{NULL}. Numeric; passed to \code{min}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -387,9 +387,9 @@ precision_recall <- function(pred, truth) {
 #' @param eval_out A vector; indexed elementwise.
 #' @param train_fn Defaults to \code{NULL}.
 #' @param attack_train_fn Defaults to \code{NULL}.
-#' @param n_shadow Defaults to \code{NULL}.
+#' @param n_shadow Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param sort_features A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param threshold Defaults to \code{0.5}.
+#' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @return A list with \code{estimate}, \code{metrics}, \code{per_class}, \code{predictions}, \code{scores}, \code{truth}, \code{n_shadow}, \code{attack_train_size}, \code{attack_classes}, \code{threshold}, \code{note}, \code{method}.
 #' @export
 memb <- function(target_predict, shadow_data, eval_in, eval_out,

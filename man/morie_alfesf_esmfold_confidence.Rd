@@ -12,8 +12,8 @@ morie_alfesf_esmfold_confidence(lddt_logits = NULL, pae_logits = NULL, features 
 \item{pae_logits}{Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.}
 \item{features}{Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.}
 \item{weights}{Optional; may be \code{NULL}. A list; the body reads \code{$b}, \code{$W} from it.}
-\item{lddt}{Defaults to \code{NULL}.}
-\item{chain_id}{Defaults to \code{NULL}.}
+\item{lddt}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{chain_id}{Optional; may be \code{NULL}. Coerced to vector by the body, with \code{as.vector}.}
 \item{temperature}{Compared against \code{"fit"}. Defaults to \code{1}.}
 \item{l2}{Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{0.001}.}
 \item{iters}{Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{300L}.}

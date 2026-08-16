@@ -13,7 +13,7 @@
 \item{K}{Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.}
 \item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{theta}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
-\item{max_iter}{Defaults to \code{25}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 \item{seed}{Passed to \code{.scintg_kmeans_init}. Defaults to \code{0}.}
 \item{Y}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}

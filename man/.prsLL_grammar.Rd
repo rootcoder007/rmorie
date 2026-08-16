@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{rules}{See Usage.}
-\item{start}{Defaults to \code{NULL}.}
+\item{start}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the prsLL_native implementation. Called by \code{.prsLL_remove_left_recursion}, \code{morie_prsLL}. See the file header for the source the module follows.

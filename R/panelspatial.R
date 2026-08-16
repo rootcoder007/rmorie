@@ -200,7 +200,7 @@ morie_jacquez_knn <- function(coords, time, k = 3L, B = 999L) {
 #' the simulated patterns, drawn in the same window, so it cancels.
 #'
 #' @param P A matrix; passed to \code{nrow}.
-#' @param radii See Usage.
+#' @param radii Iterated over elementwise, with \code{vapply}.
 #' @param area Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export

@@ -94,7 +94,7 @@
 #' the source it follows.
 #'
 #' @param first_treated A vector; its length is taken and its elements indexed.
-#' @param period See Usage.
+#' @param period Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{G}, \code{ts}, \code{order}.
 #' @export
 .causdidwd_cohorts <- function(first_treated, period) {

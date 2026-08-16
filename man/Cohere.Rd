@@ -8,11 +8,11 @@
 Cohere(x, y, fs = 1, nperseg = NULL, noverlap = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{nperseg}{Defaults to \code{NULL}.}
-\item{noverlap}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{nperseg}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{noverlap}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 observations the magnitude is UNITY AT EVERY FREQUENCY, which is incorrect; each density must be estimated by AVERAGING over several observations.  So a single segment is refused rather than returning the meaningless all-ones answer.

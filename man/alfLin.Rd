@@ -8,9 +8,9 @@
 alfLin(v, W, b = NULL)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W}{A matrix; passed to \code{\%*\%}.}
-\item{b}{Defaults to \code{NULL}.}
+\item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfdgram}, \code{Alfembed} and 11 others in the module. See the file header for the source the module follows.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{f}{Passed to \code{.groebn_add}.}
-\item{g}{See Usage.}
+\item{g}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_spoly}. See the file header for the source the module follows.

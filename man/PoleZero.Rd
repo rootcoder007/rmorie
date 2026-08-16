@@ -8,8 +8,8 @@
 PoleZero(b, a = NULL)
 }
 \arguments{
-\item{b}{See Usage.}
-\item{a}{Defaults to \code{NULL}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{a}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 roots of the denominator.  The denominator is in the book\'s normalized form, so pass `a` WITHOUT the leading 1.

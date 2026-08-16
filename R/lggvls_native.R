@@ -48,7 +48,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .lggvls_vec <- function(x) {
@@ -337,14 +337,14 @@ lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Passed to \code{.lggvls_as_history}.
 #' @param H Passed to \code{.lggvls_as_history}.
 #' @param lag Passed to \code{.lggvls_lagged_design}. Defaults to \code{1}.
 #' @param Y_hist Passed to \code{.lggvls_lagged_design}.
 #' @param stabilize Passed to \code{.lggvls_ip_weights}. Defaults to \code{TRUE}.
 #' @param kind Passed to \code{.lggvls_ip_weights}. Defaults to \code{"binary"}.
-#' @param trim Defaults to \code{NULL}.
+#' @param trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
 #' @return A list with \code{estimate}, \code{se}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{cumulative_exposure}, \code{per_time}, \code{n_times}, \code{lag}, \code{n}, \code{contrast}, \code{method}.
 #' @export

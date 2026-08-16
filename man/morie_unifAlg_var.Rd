@@ -8,7 +8,7 @@
 morie_unifAlg_var(name)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{.trmRew_rename}, \code{morie_unifAlg_factor_through}. See the file header for the source the module follows.

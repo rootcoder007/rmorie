@@ -8,11 +8,11 @@
 caCMIP(models, obs, sigma_d, sigma_s, projections = NULL)
 }
 \arguments{
-\item{models}{See Usage.}
-\item{obs}{See Usage.}
-\item{sigma_d}{See Usage.}
-\item{sigma_s}{See Usage.}
-\item{projections}{Defaults to \code{NULL}.}
+\item{models}{Iterated over elementwise, with \code{lapply}.}
+\item{obs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sigma_d}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sigma_s}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{projections}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 Part of the caCMIP_mixedcase_native implementation; see the file header for the source it follows.

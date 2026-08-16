@@ -121,7 +121,7 @@ two_way_block <- function(prompt_tokens, image_tokens) {
 #' source it follows.
 #'
 #' @param grid Passed to \code{.samdec_mat}.
-#' @param factor Defaults to \code{2}.
+#' @param factor Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 upsample <- function(grid, factor = 2) {
@@ -209,10 +209,10 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param prob See Usage.
-#' @param target See Usage.
-#' @param gamma Defaults to \code{2}.
-#' @param alpha Defaults to \code{0.25}.
+#' @param prob Coerced to numeric by the body, with \code{as.numeric}.
+#' @param target Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @return A list with \code{loss}, \code{modulating}, \code{gamma}, \code{note}.
 #' @export
 focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
@@ -241,8 +241,8 @@ focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param prob See Usage.
-#' @param target See Usage.
+#' @param prob Coerced to numeric by the body, with \code{as.numeric}.
+#' @param target Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{loss}, \code{dice}.
 #' @export
 dice_loss <- function(prob, target) {
@@ -268,9 +268,9 @@ dice_loss <- function(prob, target) {
 #' @param prompt_tokens Passed to \code{.samdec_mat}.
 #' @param image_tokens Passed to \code{.samdec_mat}.
 #' @param grid_shape A vector; indexed elementwise.
-#' @param n_blocks Defaults to \code{2}.
-#' @param upsample_factor Defaults to \code{2}.
-#' @param output_index Defaults to \code{0}.
+#' @param n_blocks Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param upsample_factor Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param output_index Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{mask}, \code{logits}, \code{shape}, \code{n_blocks}, \code{method}, \code{note}.
 #' @export
 decode_mask <- function(prompt_tokens, image_tokens, grid_shape,

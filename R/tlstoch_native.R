@@ -66,7 +66,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tlstoch_vec <- function(x) {
@@ -112,9 +112,9 @@
 #' the source it follows.
 #'
 #' @param A Passed to \code{.tlstoch_vec}.
-#' @param delta See Usage.
-#' @param lower Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lower Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param upper Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{shifted}, \code{delta}, \code{n_clipped}, \code{fraction_clipped}.
 #' @export
 .tlstoch_shift_regime <- function(A, delta, lower=NULL, upper=NULL) {
@@ -146,9 +146,9 @@
 #' the source it follows.
 #'
 #' @param A Passed to \code{.tlstoch_vec}.
-#' @param delta See Usage.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Optional; may be \code{NULL}. Passed to \code{.tlstoch_vec}.
-#' @param bins Defaults to \code{5}.
+#' @param bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @return A list with \code{fraction_outside}, \code{delta}, \code{bins}, \code{satisfied}, \code{note}.
 #' @export
 .tlstoch_positivity_shift <- function(A, delta, W=NULL, bins=5) {
@@ -224,7 +224,7 @@
 #'
 #' @param A Passed to \code{.tlstoch_vec}.
 #' @param W Passed to \code{.tlstoch_mat}.
-#' @param delta See Usage.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param g_fn See Usage.
 #' @param lower Defaults to \code{NULL}.
 #' @param upper Defaults to \code{NULL}.
@@ -264,7 +264,7 @@
 #' @param delta Passed to \code{.tlstoch_density_ratio}.
 #' @param lower Passed to \code{.tlstoch_density_ratio}.
 #' @param upper Passed to \code{.tlstoch_density_ratio}.
-#' @param iters Defaults to \code{60}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{delta}, \code{max_density_ratio}, \code{method}, \code{note}.
 #' @export
 .tlstoch_shift_tmle <- function(Y, A, W, Q_fn, g_fn, delta,

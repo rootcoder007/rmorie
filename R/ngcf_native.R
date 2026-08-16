@@ -87,8 +87,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_u See Usage.
-#' @param n_i See Usage.
+#' @param n_u Coerced to integer by the body, with \code{as.integer}.
+#' @param n_i Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 ngcf_laplacian_coefficient <- function(n_u, n_i) {
@@ -106,8 +106,8 @@ ngcf_laplacian_coefficient <- function(n_u, n_i) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param e_i See Usage.
-#' @param e_u See Usage.
+#' @param e_i Coerced to numeric by the body, with \code{as.numeric}.
+#' @param e_u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W1 A matrix; indexed by row and column.
 #' @param W2 A matrix; indexed by row and column.
 #' @param p_ui Numeric; combined arithmetically in the body.
@@ -176,7 +176,7 @@ ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
 #' @param E0 A matrix; passed to \code{as.matrix}.
 #' @param adjacency See Usage.
 #' @param Ws A vector; its length is taken.
-#' @param affinity Defaults to \code{TRUE}.
+#' @param affinity Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @param slope Defaults to \code{0.2}.
 #' @return A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers}, \code{affinity}, \code{method}, \code{note}.
 #' @export
@@ -215,8 +215,8 @@ ngcf_stack_layers <- function(E0, adjacency, Ws, affinity=TRUE, slope=0.2) {
 #' source it follows.
 #'
 #' @param final A matrix; indexed by row and column.
-#' @param u See Usage.
-#' @param i See Usage.
+#' @param u Coerced to integer by the body, with \code{as.integer}.
+#' @param i Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 ngcf_score <- function(final, u, i) {

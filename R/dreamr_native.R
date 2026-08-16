@@ -81,7 +81,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name See Usage.
 #' @return The value of \code{v}, as built in the body.
 #' @export
@@ -120,7 +120,7 @@
 #' @param action_model See Usage.
 #' @param transition See Usage.
 #' @param reward_model See Usage.
-#' @param horizon See Usage.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param value_model Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{method}.
 #' @export
@@ -175,7 +175,7 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @param estimator One of \code{"k-step"}, \code{"lambda"}, \code{"reward"}. Defaults to \code{"lambda"}.
-#' @param k Defaults to \code{1}.
+#' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return The value of \code{.dreamr_pack}.
 #' @export
 morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95,

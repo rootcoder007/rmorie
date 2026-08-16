@@ -8,7 +8,7 @@
 .pq_infer(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; the body checks with \code{is.numeric}.}
 }
 \description{
 Without this a column read as TIMESTAMP_MICROS was written back as a bare DOUBLE of seconds: readable, but no longer a timestamp to any other engine, and off by a factor of 1e6 from where it started.

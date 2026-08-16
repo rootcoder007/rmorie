@@ -9,7 +9,7 @@ StepSeq(n, shift = 0)
 }
 \arguments{
 \item{n}{A vector; its length is taken.}
-\item{shift}{Defaults to \code{0}.}
+\item{shift}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 }
 \description{
 u(0) = 1 -- the opposite of eq (3.27).

@@ -8,9 +8,9 @@
 LsiPar(x, h1, h2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h1}{See Usage.}
-\item{h2}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 The shorter response is zero-extended before the addition; truncating instead would silently drop the tail of the longer filter.

@@ -8,7 +8,7 @@
 .morie_bx_vec(v, name = "x")
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{name}{Defaults to \code{"x"}.}
 }
 \description{

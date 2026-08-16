@@ -10,9 +10,9 @@ morie_prsclm_prs_cs_clump(sumstats, ld_ref, p_threshold = NULL, r2 = 0.1, window
 \arguments{
 \item{sumstats}{A list; the body reads \code{$beta}, \code{$p}, \code{$position}, \code{$snp} from it.}
 \item{ld_ref}{Passed to \code{.prsclm_rows}.}
-\item{p_threshold}{Defaults to \code{NULL}.}
-\item{r2}{Defaults to \code{0.1}.}
-\item{window}{Defaults to \code{250000}.}
+\item{p_threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{r2}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{window}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{250000}.}
 \item{genotypes}{Optional; may be \code{NULL}. Passed to \code{.prsclm_rows}.}
 \item{standardize}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }

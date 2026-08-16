@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{r}{A matrix; passed to \code{as.matrix}.}
-\item{alpha}{Defaults to \code{40}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{40}.}
 }
 \description{
 A step of the impFB_native implementation. Called by \code{.impFB_cost}, \code{morie_impFB}. See the file header for the source the module follows.

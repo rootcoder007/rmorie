@@ -8,7 +8,7 @@
 morie_groebn(polys, order = "lex", prune = TRUE, reduced = TRUE)
 }
 \arguments{
-\item{polys}{See Usage.}
+\item{polys}{Iterated over elementwise, with \code{lapply}.}
 \item{order}{Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.}
 \item{prune}{Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.}
 \item{reduced}{Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.}

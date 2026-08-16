@@ -98,7 +98,7 @@
 #' source it follows.
 #'
 #' @param X Passed to \code{.sctraj_matrix}.
-#' @param labels See Usage.
+#' @param labels Coerced to character by the body, with \code{as.character}.
 #' @param cov One of \code{"diagonal"}, \code{"euclidean"}. Defaults to \code{"full"}.
 #' @param weights Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{distances}, \code{clusters}, \code{centers}, \code{covariances}.
@@ -188,7 +188,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
 #' each terminal is attached to its nearest non-terminal neighbour.
 #'
 #' @param D A matrix; indexed by row and column.
-#' @param clusters See Usage.
+#' @param clusters Coerced to character by the body, with \code{as.character}.
 #' @param ends Defaults to \code{NULL}.
 #' @return A list with \code{edges}, \code{adjacency}, \code{nodes}.
 #' @export
@@ -248,7 +248,7 @@ morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends=NULL) {
 #' source it follows.
 #'
 #' @param tree A list; the body reads \code{$adjacency} from it.
-#' @param root See Usage.
+#' @param root Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{[}.
 #' @export
 morie_sctraj_lineages_from_tree <- function(tree, root) {
@@ -381,7 +381,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #' @param X Passed to \code{.sctraj_matrix}.
 #' @param init A matrix; passed to \code{as.matrix}.
 #' @param weights Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param max_iter Defaults to \code{15}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @param span Passed to \code{.sctraj_smooth}. Defaults to \code{0.4}.
 #' @param n_knots Defaults to \code{NULL}.
@@ -587,7 +587,7 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param vals See Usage.
+#' @param vals Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .sctraj_non_outlier_range <- function(vals) {
@@ -623,7 +623,7 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
 #' source it follows.
 #'
 #' @param X Passed to \code{.sctraj_matrix}.
-#' @param labels See Usage.
+#' @param labels Coerced to character by the body, with \code{as.character}.
 #' @param root Passed to \code{morie_sctraj_lineages_from_tree}.
 #' @param ends Passed to \code{morie_sctraj_minimum_spanning_tree}.
 #' @param cov Passed to \code{morie_sctraj_cluster_distances}. Defaults to \code{"full"}.

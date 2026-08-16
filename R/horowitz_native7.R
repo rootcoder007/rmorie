@@ -48,9 +48,9 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y See Usage.
+#' @param y A matrix; the body checks with \code{is.matrix}.
 #' @param x A matrix; indexed by row and column.
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{W}, \code{eta}, \code{n}, \code{T}.
 #' @export
 .morie_hrz_panel_residuals <- function(y, x, beta) {
@@ -108,8 +108,8 @@
 #'
 #' @param w See Usage.
 #' @param eta See Usage.
-#' @param grid_u See Usage.
-#' @param grid_z See Usage.
+#' @param grid_u Iterated over elementwise, with \code{vapply}.
+#' @param grid_z Iterated over elementwise, with \code{vapply}.
 #' @param nu_U Numeric; combined arithmetically in the body.
 #' @param nu_eps Numeric; combined arithmetically in the body.
 #' @param n_tau Defaults to \code{2001L}.

@@ -8,15 +8,15 @@
 .timeRS_predict_time(mu, b_u, alpha_u, t_user, b_i, item_bins, t, p_u = NULL, q_i = NULL, per_day = NULL, bin_days = 70, beta = .timeRS_BETA)
 }
 \arguments{
-\item{mu}{See Usage.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{b_u}{Passed to \code{.timeRS_user_bias}.}
 \item{alpha_u}{Passed to \code{.timeRS_user_bias}.}
 \item{t_user}{Passed to \code{.timeRS_user_bias}.}
 \item{b_i}{Passed to \code{.timeRS_item_bias}.}
 \item{item_bins}{A vector; its length is taken.}
 \item{t}{Passed to \code{.timeRS_user_bias}.}
-\item{p_u}{Defaults to \code{NULL}.}
-\item{q_i}{Defaults to \code{NULL}.}
+\item{p_u}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{q_i}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{per_day}{Passed to \code{.timeRS_user_bias}.}
 \item{bin_days}{Passed to \code{.timeRS_item_bias}. Defaults to \code{70}.}
 \item{beta}{Passed to \code{.timeRS_user_bias}. Defaults to \code{.timeRS_BETA}.}

@@ -75,12 +75,12 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
+#' @param time Coerced to numeric by the body, with \code{as.numeric}.
+#' @param event Coerced to integer by the body, with \code{as.integer}.
 #' @param X A matrix; indexed by row and column.
-#' @param weights See Usage.
-#' @param strata See Usage.
-#' @param cluster See Usage.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param strata Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param cluster Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c}, \code{n}, \code{p}.
 #' @export
 .svycox_prep <- function(time, event, X, weights, strata, cluster) {
@@ -371,7 +371,7 @@
 #' @param weights Passed to \code{.svycox_prep}.
 #' @param strata Passed to \code{.svycox_prep}.
 #' @param cluster Passed to \code{.svycox_prep}.
-#' @param max_iter Defaults to \code{100}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios}, \code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information}, \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events}, \code{n_iterations}, \code{ties}, \code{method}.
 #' @export

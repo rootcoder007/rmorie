@@ -8,7 +8,7 @@
 ._as_states(seq, name)
 }
 \arguments{
-\item{seq}{See Usage.}
+\item{seq}{Iterated over elementwise, with \code{lapply}.}
 \item{name}{See Usage.}
 }
 \description{

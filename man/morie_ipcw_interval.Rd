@@ -9,7 +9,7 @@ morie_ipcw_interval(W, A, times, deltas, a = 1, r = NULL, g = NULL, gc = NULL, r
 }
 \arguments{
 \item{W}{Passed to \code{.tmlcen_W_mat}.}
-\item{A}{See Usage.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{times}{Passed to \code{.tmlcen_coerce_subject_list}.}
 \item{deltas}{Passed to \code{.tmlcen_coerce_subject_list}.}
 \item{a}{Defaults to \code{1}.}

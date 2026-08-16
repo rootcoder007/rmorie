@@ -10,7 +10,7 @@
 \arguments{
 \item{n}{A count; the body uses it as \code{matrix(...)}.}
 \item{dim}{A count; the body uses it as \code{seq_len(...)}.}
-\item{skip}{Defaults to \code{0}.}
+\item{skip}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.design_from_prior}. See the file header for the source the module follows.

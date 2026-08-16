@@ -17,8 +17,8 @@
 #' model is stable exactly when every |gamma_i| < 1; both are checked,
 #' not trusted.
 #'
-#' @param acf See Usage.
-#' @param order Defaults to \code{NULL}.
+#' @param acf Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{a}, \code{reflection}, \code{error}, \code{errors}, \code{gain}, \code{order}, \code{stable}, \code{monotone}, \code{normalized_error}, \code{sign_convention}, \code{method}.
 #' @export
 Levinson <- function(acf, order = NULL) {
@@ -69,8 +69,8 @@ Levinson <- function(acf, order = NULL) {
 #' (divide by N): that is what makes the Toeplitz system
 #' positive-definite and hence the model stable; 1/(N-m) does not.
 #'
-#' @param x See Usage.
-#' @param order See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @param method Compared against \code{"autocorrelation"}. Defaults to \code{"autocorrelation"}.
 #' @return A list with \code{a}, \code{gain}, \code{error}, \code{reflection}, \code{acf}, \code{order}, \code{residual}, \code{residual_energy}, \code{stable}, \code{normalized_error}, \code{sign_convention}, \code{method}.
 #' @export
@@ -116,10 +116,10 @@ Lpc <- function(x, order, method = "autocorrelation") {
 #' convention give a filter with different poles, usually unstable, so
 #' divergence is reported rather than a wall of infinities returned.
 #'
-#' @param a See Usage.
-#' @param excitation See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param excitation Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param initial Defaults to \code{NULL}.
+#' @param initial Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{n}, \code{order}, \code{gain}, \code{diverged}, \code{sign_convention}, \code{method}.
 #' @export
 LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
@@ -162,8 +162,8 @@ LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
 #'
 #' @param x See Usage.
 #' @param order See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param nfreq Defaults to \code{256}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param nfreq Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
 ArFit <- function(x, order, fs = 1, nfreq = 256) {
@@ -200,8 +200,8 @@ ArFit <- function(x, order, fs = 1, nfreq = 256) {
 #' the criterion would always pick the largest order offered. Rangayyan
 #' gives AIC at eq (7.60); FPE is not printed in the book.
 #'
-#' @param errors See Usage.
-#' @param n_samples See Usage.
+#' @param errors Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_samples Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{order}, \code{criterion}, \code{n}, \code{start_order}, \code{method}.
 #' @export
 FpeOrder <- function(errors, n_samples) {
@@ -233,8 +233,8 @@ FpeOrder <- function(errors, n_samples) {
 #' picks the same order or a lower one -- and unlike AIC it is
 #' consistent.  AIC is returned alongside for comparison.
 #'
-#' @param errors See Usage.
-#' @param n_samples See Usage.
+#' @param errors Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_samples Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{order}, \code{criterion}, \code{aic}, \code{aic_order}, \code{n}, \code{start_order}, \code{penalty_per_parameter}, \code{stricter_than_aic}, \code{method}.
 #' @export
 MdlOrder <- function(errors, n_samples) {
@@ -266,10 +266,10 @@ MdlOrder <- function(errors, n_samples) {
 #' on the unit circle makes H undefined there; outside it, a causal
 #' system is unstable.  Both are reported.
 #'
-#' @param zeros See Usage.
-#' @param poles See Usage.
-#' @param z Defaults to \code{NULL}.
-#' @param gain Defaults to \code{1}.
+#' @param zeros Coerced to complex by the body, with \code{as.complex}.
+#' @param poles Coerced to complex by the body, with \code{as.complex}.
+#' @param z Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
+#' @param gain Coerced to complex by the body, with \code{as.complex}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 PzForm <- function(zeros, poles, z = NULL, gain = 1) {
@@ -313,10 +313,10 @@ PzForm <- function(zeros, poles, z = NULL, gain = 1) {
 #' what the change of variable produces; dropping it multiplies H by a
 #' pure delay, invisible in the magnitude and fatal to the phase.
 #'
-#' @param zeros See Usage.
-#' @param poles See Usage.
-#' @param z Defaults to \code{NULL}.
-#' @param gain Defaults to \code{1}.
+#' @param zeros Coerced to complex by the body, with \code{as.complex}.
+#' @param poles Coerced to complex by the body, with \code{as.complex}.
+#' @param z Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
+#' @param gain Coerced to complex by the body, with \code{as.complex}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
@@ -370,9 +370,9 @@ PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
 #' spectral null; a pole near it makes one distance small -- a
 #' resonance.  The distances are returned so that reading can be made.
 #'
-#' @param zeros See Usage.
-#' @param poles See Usage.
-#' @param omega See Usage.
+#' @param zeros Coerced to complex by the body, with \code{as.complex}.
+#' @param poles Coerced to complex by the body, with \code{as.complex}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Numeric; passed to \code{abs}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{magnitude}, \code{phase}, \code{zero_distances}, \code{pole_distances}, \code{omega}, \code{magnitude_matches_product}, \code{method}.
 #' @export
@@ -427,8 +427,8 @@ PzResp <- function(zeros, poles, omega, gain = 1) {
 #' roots of the denominator.  The denominator is in the book\'s
 #' normalized form, so pass `a` WITHOUT the leading 1.
 #'
-#' @param b See Usage.
-#' @param a Defaults to \code{NULL}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{zeros}, \code{poles}, \code{n_zeros}, \code{n_poles}, \code{stable}, \code{minimum_phase}, \code{zeros_on_unit_circle}, \code{method}.
 #' @export
 PoleZero <- function(b, a = NULL) {
@@ -467,9 +467,9 @@ PoleZero <- function(b, a = NULL) {
 #' sit close to the poles.  The stage structure is stated, not presented
 #' as an optimal fit.
 #'
-#' @param x See Usage.
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p Coerced to integer by the body, with \code{as.integer}.
+#' @param q Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Defaults to \code{1}.
 #' @return A list with \code{a}, \code{b}, \code{p}, \code{q}, \code{gain}, \code{poles}, \code{zeros}, \code{stable}, \code{ar_error}, \code{two_stage}, \code{method}.
 #' @export
@@ -526,9 +526,9 @@ ArmaFit <- function(x, p, q, fs = 1) {
 #' for a real signal the poles are conjugate pairs, and listing both
 #' halves would double-count every resonance.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
-#' @param order Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param segment Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
@@ -577,10 +577,10 @@ PcgAr <- function(x, fs, order = NULL, segment = NULL) {
 #' ~0.8 s dwarfs the variability and would leak a huge DC pole into the
 #' VLF band.
 #'
-#' @param rr See Usage.
-#' @param order Defaults to \code{16}.
-#' @param fs Defaults to \code{4}.
-#' @param nfreq Defaults to \code{512}.
+#' @param rr Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{16}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.
+#' @param nfreq Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512}.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
 HrvAr <- function(rr, order = 16, fs = 4, nfreq = 512) {

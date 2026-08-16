@@ -12,8 +12,8 @@ morie_randIE_randomized_interventional_effect(Y, A, M, C = NULL, treated = "1", 
 \item{A}{Passed to \code{morie_randIE_interventional_mean}.}
 \item{M}{Passed to \code{morie_randIE_interventional_mean}.}
 \item{C}{Passed to \code{morie_randIE_interventional_mean}.}
-\item{treated}{Defaults to \code{"1"}.}
-\item{control}{Defaults to \code{"0"}.}
+\item{treated}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"1"}.}
+\item{control}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"0"}.}
 \item{route}{Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{"gformula"}.}
 \item{laplace}{Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{0}.}
 }

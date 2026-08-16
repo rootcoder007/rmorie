@@ -9,11 +9,11 @@ FecgNmf(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0, maxiter = 150, taum = 0
 }
 \arguments{
 \item{x}{A vector; its length is taken.}
-\item{fs}{See Usage.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nwin}{Numeric; combined arithmetically in the body. Defaults to \code{64}.}
 \item{hop}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_stft}.}
 \item{rank}{Passed to \code{.morie_bx_nmfmu}. Defaults to \code{4}.}
-\item{lam}{Defaults to \code{0}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{maxiter}{Passed to \code{.morie_bx_nmfmu}. Defaults to \code{150}.}
 \item{taum}{Defaults to \code{0.6}.}
 \item{tauf}{Defaults to \code{0.45}.}

@@ -200,14 +200,14 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param temp See Usage.
-#' @param rh See Usage.
-#' @param wind See Usage.
-#' @param rain See Usage.
+#' @param temp Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rh Coerced to numeric by the body, with \code{as.numeric}.
+#' @param wind Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rain Coerced to numeric by the body, with \code{as.numeric}.
 #' @param month A vector; its length is taken.
-#' @param ffmc_init Defaults to \code{85}.
-#' @param dmc_init Defaults to \code{6}.
-#' @param dc_init Defaults to \code{15}.
+#' @param ffmc_init Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{85}.
+#' @param dmc_init Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{6}.
+#' @param dc_init Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{15}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_fwxF <- function(temp, rh, wind, rain, month,

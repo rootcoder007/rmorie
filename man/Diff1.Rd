@@ -9,7 +9,7 @@ Diff1(x, T = 1)
 }
 \arguments{
 \item{x}{See Usage.}
-\item{T}{Defaults to \code{1}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 highpass character is visible.

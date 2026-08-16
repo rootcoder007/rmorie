@@ -12,7 +12,7 @@
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param maxlag Defaults to \code{NULL}.
+#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{lags}, \code{values}.
 #' @export
 .morie_rg_xcorr <- function(x, y, maxlag = NULL) {
@@ -36,8 +36,8 @@
 #' 3.97), which is a DIFFERENT quantity -- without removal gamma is the
 #' cosine between the raw vectors, with it, Pearson\'s r.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param subtract_mean A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{dot_product}, \code{gamma}, \code{energy_x}, \code{energy_y}, \code{n}, \code{mean_removed}, \code{method}.
 #' @export
@@ -72,10 +72,10 @@ DotProd <- function(x, y, subtract_mean = FALSE) {
 #' integral into a sum and leaves the answer wrong by a factor of the
 #' sampling interval.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param t Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{theta}, \code{integrand}, \code{discrete_sum}, \code{duration}, \code{n}, \code{method}.
 #' @export
 ContProj <- function(x, y, t = NULL, dt = 1) {
@@ -105,10 +105,10 @@ ContProj <- function(x, y, t = NULL, dt = 1) {
 #' depend only on i - j; that Toeplitz structure is MEASURED, and the
 #' deviation is the number to look at, not the boolean.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param order See Usage.
-#' @param tol Defaults to \code{0.001}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param order Coerced to integer by the body, with \code{as.integer}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return A list with \code{theta}, \code{order}, \code{n_positions}, \code{toeplitz_deviation}, \code{relative_deviation}, \code{tol}, \code{toeplitz}, \code{method}.
 #' @export
 CcfOuter <- function(x, y, order, tol = 1e-3) {
@@ -155,9 +155,9 @@ CcfOuter <- function(x, y, order, tol = 1e-3) {
 #' compared; they agree only for the full CIRCULAR lag range, since a
 #' truncated CCF gives a smoothed CSD, a different estimator.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{csd}, \code{via_ccf}, \code{ccf_circular}, \code{freqs}, \code{max_difference}, \code{agrees}, \code{n}, \code{method}.
 #' @export
 Csd <- function(x, y, fs = 1) {
@@ -198,11 +198,11 @@ Csd <- function(x, y, fs = 1) {
 #' observations.  So a single segment is refused rather than returning
 #' the meaningless all-ones answer.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param nperseg Defaults to \code{NULL}.
-#' @param noverlap Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param noverlap Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{coherence}, \code{phase}, \code{sxx}, \code{syy}, \code{sxy}, \code{freqs}, \code{n_segments}, \code{nperseg}, \code{method}.
 #' @export
 Cohere <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
@@ -293,9 +293,9 @@ Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #' convolution -- a large low-frequency excursion cannot produce a
 #' spurious match because the normalization divides the amplitude out.
 #'
-#' @param x See Usage.
-#' @param ref See Usage.
-#' @param threshold Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param ref Coerced to numeric by the body, with \code{as.numeric}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param subtract_mean A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -355,9 +355,9 @@ Template <- function(x, ref, threshold = NULL, subtract_mean = TRUE) {
 #'
 #' so it carries the sampling interval.
 #'
-#' @param x See Usage.
-#' @param omega See Usage.
-#' @param dt Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{X}, \code{omega}, \code{dt}, \code{n}, \code{method}.
 #' @export
 MfInput <- function(x, omega, dt = 1) {
@@ -391,9 +391,9 @@ MfInput <- function(x, omega, dt = 1) {
 #' the frequency-domain route would need fine enough sampling to avoid
 #' wrap-around.  eq (4.38) reads M_y off the peak returned here.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param dt Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{t}, \code{peak_index}, \code{peak_time}, \code{peak_magnitude}, \code{dt}, \code{method}.
 #' @export
 MfOutput <- function(x, h, dt = 1) {
@@ -421,7 +421,7 @@ MfOutput <- function(x, h, dt = 1) {
 #' convention: integrating the flat density over all f returns P, not
 #' twice it.  Getting it wrong is a factor of two in every SNR below.
 #'
-#' @param power See Usage.
+#' @param power Coerced to numeric by the body, with \code{as.numeric}.
 #' @param freqs Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -446,10 +446,10 @@ MfNoiseIn <- function(power, freqs = NULL) {
 #'
 #' holds only because the input was white, so the density factored out.
 #'
-#' @param power See Usage.
-#' @param H See Usage.
-#' @param freqs Defaults to \code{NULL}.
-#' @param df Defaults to \code{1}.
+#' @param power Coerced to numeric by the body, with \code{as.numeric}.
+#' @param H Coerced to complex by the body, with \code{as.complex}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param df Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{psd}, \code{power}, \code{rms}, \code{input_power}, \code{input_density}, \code{method}.
 #' @export
 MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
@@ -481,10 +481,10 @@ MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
 #' maximizes.  It is a MAGNITUDE, so the phase of X H at t0 is what the
 #' optimal filter of eq (4.48) is chosen to align.
 #'
-#' @param X See Usage.
-#' @param H See Usage.
-#' @param freqs See Usage.
-#' @param t0 See Usage.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
+#' @param H Coerced to complex by the body, with \code{as.complex}.
+#' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{my}, \code{y}, \code{t0}, \code{phase}, \code{method}.
 #' @export
 MfPeak <- function(X, H, freqs, t0) {
@@ -519,8 +519,8 @@ MfPeak <- function(X, H, freqs, t0) {
 #' is the right criterion for a known transient and the wrong one for a
 #' continuous signal.
 #'
-#' @param my See Usage.
-#' @param noise_power See Usage.
+#' @param my Coerced to numeric by the body, with \code{as.numeric}.
+#' @param noise_power Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{snr}, \code{snr_db}, \code{amplitude_snr}, \code{my}, \code{noise_power}, \code{peak_to_mean}, \code{method}.
 #' @export
 MfSnr <- function(my, noise_power) {
@@ -544,11 +544,11 @@ MfSnr <- function(my, noise_power) {
 #' for the role it plays here -- E_x is constant for a given signal, so
 #' maximizing eq (4.41) is equivalent to maximizing eq (4.39).
 #'
-#' @param x Defaults to \code{NULL}.
-#' @param t Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
-#' @param X Defaults to \code{NULL}.
-#' @param freqs Defaults to \code{NULL}.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param X Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
@@ -587,11 +587,11 @@ SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
 #' something Schwarz\'s inequality applies to; by eq (4.46) the ratio
 #' cannot exceed 2/P_eta_i, with equality exactly at eq (4.48).
 #'
-#' @param X See Usage.
-#' @param H See Usage.
-#' @param freqs See Usage.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
+#' @param H Coerced to complex by the body, with \code{as.complex}.
+#' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t0 See Usage.
-#' @param noise_power See Usage.
+#' @param noise_power Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{ratio}, \code{bound}, \code{optimality}, \code{numerator}, \code{energy_h}, \code{energy_x}, \code{method}.
 #' @export
 MfRatio <- function(X, H, freqs, t0, noise_power) {
@@ -626,9 +626,9 @@ MfRatio <- function(X, H, freqs, t0, noise_power) {
 #'
 #' A = H and B = X exp(+j2 pi f t0), IS the matched-filter derivation.
 #'
-#' @param A See Usage.
-#' @param B See Usage.
-#' @param grid See Usage.
+#' @param A Coerced to complex by the body, with \code{as.complex}.
+#' @param B Coerced to complex by the body, with \code{as.complex}.
+#' @param grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{ratio}, \code{equality}, \code{k}, \code{collinear}, \code{method}.
 #' @export
 SchwarzC <- function(A, B, grid) {
@@ -667,10 +667,10 @@ SchwarzC <- function(A, B, grid) {
 #'
 #' functions collinear as vectors in function space.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param grid Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param grid Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{k}, \code{collinear}, \code{method}.
 #' @export
 SchwarzR <- function(a, b, grid = NULL, dt = 1) {
@@ -706,8 +706,8 @@ SchwarzR <- function(a, b, grid = NULL, dt = 1) {
 #' between the vectors, which is exactly the correlation coefficient of
 #' eq (4.25) on mean-removed signals.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{cosine}, \code{equality}, \code{norm_a}, \code{norm_b}, \code{method}.
 #' @export
 CauchySch <- function(a, b) {
@@ -736,8 +736,8 @@ CauchySch <- function(a, b) {
 #' amplitude than their amplitudes sum to -- the reason uncorrelated
 #' noise adds in POWER, not in amplitude.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{norm_sum}, \code{norm_a}, \code{norm_b}, \code{method}.
 #' @export
 Triangle <- function(a, b) {
@@ -765,10 +765,10 @@ Triangle <- function(a, b) {
 #' cancels the signal\'s phase so every component arrives in step at t0
 #' -- that coherent addition is the whole gain of the method.
 #'
-#' @param X See Usage.
-#' @param freqs See Usage.
-#' @param t0 See Usage.
-#' @param gain Defaults to \code{1}.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
+#' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude}, \code{conjugate_of_signal}, \code{method}.
 #' @export
 MfTf <- function(X, freqs, t0, gain = 1) {
@@ -795,10 +795,10 @@ MfTf <- function(X, freqs, t0, gain = 1) {
 #' causal; the book notes an N-point DFT of an N-sample template gives
 #' only N-1, one sample short.
 #'
-#' @param x See Usage.
-#' @param t0 Defaults to \code{NULL}.
-#' @param gain Defaults to \code{1}.
-#' @param dt Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{h}, \code{t0}, \code{shift_samples}, \code{gain}, \code{causal}, \code{reversed}, \code{n_reference}, \code{method}.
 #' @export
 MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
@@ -834,8 +834,8 @@ MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' CORRELATION, so y(t) = K phi_x(t - t0): the output is a delayed copy
 #' of the reference\'s ACF and peaks at t0 with K times its energy.
 #'
-#' @param x See Usage.
-#' @param gain Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param dt Defaults to \code{1}.
 #' @return A list with \code{y}, \code{acf}, \code{lags}, \code{peak_index}, \code{peak_value}, \code{expected_peak}, \code{energy}, \code{max_difference}, \code{equals_acf}, \code{method}.
 #' @export
@@ -878,7 +878,7 @@ MfAcf <- function(x, gain = 1, dt = 1) {
 #' The book notes the output around the peak reproduces the ACF of g,
 #' which is checked here rather than asserted.
 #'
-#' @param amplitudes Defaults to \code{NULL}.
+#' @param amplitudes Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{g}, \code{h}, \code{y}, \code{acf}, \code{delay}, \code{max_difference}, \code{output_is_acf}, \code{method}.
 #' @export
 RefPattern <- function(amplitudes = NULL) {
@@ -947,7 +947,7 @@ MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' nonnegative -- the phase has been cancelled exactly, the
 #' frequency-domain statement of the coherent addition at t0.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Defaults to \code{1}.
 #' @return A list with \code{Y}, \code{psd}, \code{max_imaginary}, \code{max_difference}, \code{is_psd}, \code{n}, \code{method}.
 #' @export
@@ -976,10 +976,10 @@ MfPsd <- function(x, dt = 1) {
 #' detectability from a short loud transient as from a long quiet one of
 #' equal energy.  That is the substantive content of the theorem.
 #'
-#' @param x See Usage.
-#' @param noise_power See Usage.
-#' @param t Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param noise_power Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{snr}, \code{snr_db}, \code{energy}, \code{noise_power}, \code{n0}, \code{depends_only_on_energy}, \code{method}.
 #' @export
 MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
@@ -1008,13 +1008,13 @@ MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param ref See Usage.
-#' @param x Defaults to \code{NULL}.
-#' @param noise_psd Defaults to \code{NULL}.
-#' @param freqs Defaults to \code{NULL}.
-#' @param t0 Defaults to \code{NULL}.
-#' @param gain Defaults to \code{1}.
-#' @param dt Defaults to \code{1}.
+#' @param ref Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param noise_psd Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 MatchedFilt <- function(ref, x = NULL, noise_psd = NULL, freqs = NULL,
@@ -1078,7 +1078,7 @@ MatchedFilt <- function(ref, x = NULL, noise_psd = NULL, freqs = NULL,
 #' signal by N or reverses it in time, neither visible on a magnitude
 #' plot.
 #'
-#' @param X See Usage.
+#' @param X Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{x}, \code{complex}, \code{n}, \code{max_imaginary}, \code{method}.
 #' @export
 Idft <- function(X) {
@@ -1106,7 +1106,7 @@ Idft <- function(X) {
 #' times the time-domain energy, so omitting the 1/N inflates it by the
 #' record length.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{energy_time}, \code{energy_freq}, \code{psd}, \code{max_difference}, \code{holds}, \code{n}, \code{method}.
 #' @export
 Parseval <- function(x) {
@@ -1134,7 +1134,7 @@ Parseval <- function(x) {
 #' returned, because that is the equation; the average is beside it so
 #' the division by M is explicit.
 #'
-#' @param observations See Usage.
+#' @param observations Iterated over elementwise, with \code{lapply}.
 #' @return A list with \code{sum}, \code{average}, \code{m}, \code{n}, \code{signal_growth}, \code{noise_growth}, \code{method}.
 #' @export
 SyncSum <- function(observations) {
@@ -1165,9 +1165,9 @@ SyncSum <- function(observations) {
 #' whole period double-counts every frequency and pins the mean at fs/2
 #' regardless of the signal.
 #'
-#' @param psd See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param freqs Defaults to \code{NULL}.
+#' @param psd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{total_power}, \code{mean_frequency}, \code{median_frequency}, \code{variance}, \code{bandwidth}, \code{skewness}, \code{kurtosis}, \code{fm3}, \code{fm4}, \code{n_bins}, \code{uniformity}, \code{method}.
 #' @export
 SpecMoments <- function(psd, fs = 1, freqs = NULL) {
@@ -1214,9 +1214,9 @@ SpecMoments <- function(psd, fs = 1, freqs = NULL) {
 #' mostly instrumentation noise, so it is the more stable fatigue index
 #' and the two diverge exactly when the tail is contaminated.
 #'
-#' @param x See Usage.
-#' @param fs See Usage.
-#' @param nperseg Defaults to \code{NULL}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{mean_frequency}, \code{median_frequency}, \code{difference}, \code{bandwidth}, \code{total_power}, \code{psd}, \code{freqs}, \code{fs}, \code{nperseg}, \code{method}.
 #' @export
 EmgFreq <- function(x, fs, nperseg = NULL) {
@@ -1249,8 +1249,8 @@ EmgFreq <- function(x, fs, nperseg = NULL) {
 #' Every window that suppresses leakage widens the main lobe, so a
 #' window buys dynamic range with resolution.
 #'
-#' @param n See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param window Character; passed to \code{tolower}. Defaults to \code{"rectangular"}.
 #' @return A list with \code{delta_f}, \code{resolution}, \code{main_lobe_bins}, \code{sidelobe_db}, \code{equivalent_noise_bandwidth_bins}, \code{duration}, \code{n}, \code{fs}, \code{window}, \code{zero_padding_helps}, \code{method}.
 #' @export
@@ -1295,10 +1295,10 @@ SpecRes <- function(n, fs = 1, window = "rectangular") {
 #' into a power; omitting it leaves a quantity that changes with the
 #' record length, so two band powers at different N are not comparable.
 #'
-#' @param psd See Usage.
-#' @param fs See Usage.
-#' @param n Defaults to \code{NULL}.
-#' @param bands Defaults to \code{NULL}.
+#' @param psd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param bands Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
@@ -1341,8 +1341,8 @@ PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
 #' exactly the murmur being measured.  Both are computed so the
 #' difference is visible.
 #'
-#' @param cycles See Usage.
-#' @param fs Defaults to \code{1}.
+#' @param cycles Iterated over elementwise, with \code{lapply}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{average_psd}, \code{psd_of_average}, \code{mean_waveform}, \code{freqs}, \code{m}, \code{n}, \code{power_retained}, \code{method}.
 #' @export
 PcgSyncAvg <- function(cycles, fs = 1) {
@@ -1395,8 +1395,8 @@ PcgSyncAvg <- function(cycles, fs = 1) {
 #' epochs first.  Averaging without rejection and quoting the sqrt(M)
 #' gain overstates the result by exactly the artifact that survived.
 #'
-#' @param epochs See Usage.
-#' @param reject Defaults to \code{NULL}.
+#' @param epochs Iterated over elementwise, with \code{lapply}.
+#' @param reject Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{average}, \code{sd}, \code{m}, \code{m_kept}, \code{rejected}, \code{n_rejected}, \code{peaks}, \code{n}, \code{snr_gain}, \code{snr_gain_db}, \code{artifact_factor}, \code{method}.
 #' @export
 ErpArtifact <- function(epochs, reject = NULL) {
@@ -1446,12 +1446,12 @@ ErpArtifact <- function(epochs, reject = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param channels See Usage.
-#' @param fs See Usage.
-#' @param window See Usage.
-#' @param step Defaults to \code{NULL}.
+#' @param channels Iterated over elementwise, with \code{lapply}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param window Coerced to integer by the body, with \code{as.integer}.
+#' @param step Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param bands Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param nperseg Defaults to \code{NULL}.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{times}, \code{coherence}, \code{bands}, \code{window}, \code{step}, \code{nperseg}, \code{n_windows}, \code{n_channels}, \code{sustained_criterion}, \code{method}.
 #' @export
 SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
@@ -1521,9 +1521,9 @@ SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param ecg_rate See Usage.
-#' @param resp See Usage.
-#' @param fs See Usage.
+#' @param ecg_rate Coerced to numeric by the body, with \code{as.numeric}.
+#' @param resp Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param band A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.
 #' @param nperseg Defaults to \code{NULL}.
 #' @return A list with \code{plv}, \code{mean_phase_difference}, \code{phase_difference}, \code{coherence_peak}, \code{coherence_mean}, \code{coherence}, \code{freqs}, \code{band}, \code{n}, \code{fs}, \code{method}.

@@ -10,11 +10,11 @@ BatsSpec(periods = numeric(0), harmonics = NULL, use_box_cox = FALSE, use_trend 
 \arguments{
 \item{periods}{A vector; its length is taken and its elements indexed. Defaults to \code{numeric(0)}.}
 \item{harmonics}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
-\item{use_box_cox}{Defaults to \code{FALSE}.}
-\item{use_trend}{Defaults to \code{TRUE}.}
-\item{damped}{Defaults to \code{FALSE}.}
-\item{p}{Defaults to \code{0L}.}
-\item{q}{Defaults to \code{0L}.}
+\item{use_box_cox}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.}
+\item{use_trend}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
+\item{damped}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.}
+\item{p}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
+\item{q}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{
 A step of the bats_native implementation. Called by \code{morie_bats}. See the file header for the source the module follows.

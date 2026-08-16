@@ -9,7 +9,7 @@ Spec(tn, fp = NULL)
 }
 \arguments{
 \item{tn}{A matrix; passed to \code{as.matrix}.}
-\item{fp}{Defaults to \code{NULL}.}
+\item{fp}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_class implementation. No other function in the package calls it. See the file header for the source the module follows.

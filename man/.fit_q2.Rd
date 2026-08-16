@@ -13,7 +13,7 @@
 \item{A0}{A vector; indexed elementwise.}
 \item{L1}{A matrix; indexed by row and column.}
 \item{A1}{A vector; indexed elementwise.}
-\item{idx}{See Usage.}
+\item{idx}{Iterated over elementwise, with \code{lapply}.}
 \item{ridge}{Numeric; combined arithmetically in the body.}
 }
 \description{

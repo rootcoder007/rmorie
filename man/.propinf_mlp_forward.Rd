@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{net}{A vector; its length is taken and its elements indexed.}
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{final}{One of \code{"linear"}, \code{"sigmoid"}, \code{"tanh"}. Defaults to \code{"relu"}.}
 \item{hidden_act}{Compared against \code{"tanh"}. Defaults to \code{"relu"}.}
 }

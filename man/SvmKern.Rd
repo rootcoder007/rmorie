@@ -9,13 +9,13 @@ SvmKern(X, y, query = NULL, kernel = "rbf", gamma = NULL, degree = 3, coef0 = 0,
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
-\item{query}{Defaults to \code{NULL}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{query}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kernel}{One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}. Defaults to \code{"rbf"}.}
-\item{gamma}{Defaults to \code{NULL}.}
-\item{degree}{Defaults to \code{3}.}
-\item{coef0}{Defaults to \code{0}.}
-\item{C}{Defaults to \code{1}.}
+\item{gamma}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
+\item{coef0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{C}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{maxiter}{Passed to \code{.morie_rg_smo}. Defaults to \code{2000}.}
 \item{tol}{Passed to \code{.morie_rg_smo}. Defaults to \code{1e-06}.}
 }

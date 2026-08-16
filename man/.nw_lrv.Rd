@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{u}{A vector; its length is taken.}
-\item{bandwidth}{Defaults to \code{NULL}.}
+\item{bandwidth}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 4 (T/100)^(2/9).

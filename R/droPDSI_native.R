@@ -10,10 +10,10 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param precip See Usage.
-#' @param pet See Usage.
+#' @param precip Coerced to numeric by the body, with \code{as.numeric}.
+#' @param pet Coerced to numeric by the body, with \code{as.numeric}.
 #' @param awc Numeric; passed to \code{min}. Defaults to \code{100}.
-#' @param month Defaults to \code{NULL}.
+#' @param month Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{pdsi}, \code{z_index}, \code{departure}, \code{cafec_precip}, \code{alpha}, \code{beta}, \code{gamma}, \code{delta}, \code{K}, \code{K_month}, \code{mean_abs_departure}, \code{evapotranspiration}, \code{recharge}, \code{runoff}, \code{loss}, \code{soil_surface_capacity}, \code{soil_under_capacity}, \code{n}, \code{duration_factor}, \code{duration_divisor}, \code{method}, \code{note}.
 #' @export
 morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,

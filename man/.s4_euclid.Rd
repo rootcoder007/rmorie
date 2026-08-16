@@ -8,8 +8,8 @@
 .s4_euclid(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the s04core implementation. No other function in the package calls it. See the file header for the source the module follows.

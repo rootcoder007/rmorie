@@ -10,7 +10,7 @@ Pcf(points, region = NULL, r = NULL, correction = "border")
 \arguments{
 \item{points}{A matrix; passed to \code{as.matrix}.}
 \item{region}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{r}{Defaults to \code{NULL}.}
+\item{r}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{correction}{Defaults to \code{"border"}.}
 }
 \description{

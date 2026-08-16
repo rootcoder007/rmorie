@@ -11,7 +11,7 @@ morie_sam2vd_memory_attention(frame_features, bank, current_frame, n_blocks = 1,
 \item{frame_features}{Passed to \code{.sam2vd_to_num}.}
 \item{bank}{A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.}
 \item{current_frame}{Passed to \code{morie_sam2vd_temporal_embedding}.}
-\item{n_blocks}{Defaults to \code{1}.}
+\item{n_blocks}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{include_pointers}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

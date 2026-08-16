@@ -39,9 +39,9 @@
 #'
 #' @param fn See Usage.
 #' @param d Numeric; combined arithmetically in the body.
-#' @param n_restarts Defaults to \code{8L}.
+#' @param n_restarts Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.
 #' @param seed Defaults to \code{0L}.
-#' @param x0 Defaults to \code{NULL}.
+#' @param x0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{value}.
 #' @export
 .morie_optimize_scale_normalized <- function(fn, d, n_restarts = 8L, seed = 0L,

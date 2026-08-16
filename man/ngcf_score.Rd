@@ -9,8 +9,8 @@ ngcf_score(final, u, i)
 }
 \arguments{
 \item{final}{A matrix; indexed by row and column.}
-\item{u}{See Usage.}
-\item{i}{See Usage.}
+\item{u}{Coerced to integer by the body, with \code{as.integer}.}
+\item{i}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the ngcf_native implementation. No other function in the package calls it. See the file header for the source the module follows.

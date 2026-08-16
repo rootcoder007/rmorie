@@ -8,7 +8,7 @@
 .tf_wvd(x, fs, nfreq = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{nfreq}{Defaults to \code{NULL}.}
 }

@@ -9,7 +9,7 @@ morie_genemt_ld_principal_components(G, keep = 0.999)
 }
 \arguments{
 \item{G}{A matrix; passed to \code{as.matrix}.}
-\item{keep}{Defaults to \code{0.999}.}
+\item{keep}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.999}.}
 }
 \description{
 A step of the genemt_native implementation. Called by \code{morie_genemt_gene_statistic}. See the file header for the source the module follows.

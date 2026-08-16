@@ -10,7 +10,7 @@ impute_dosage(posterior, reference_haps, site)
 \arguments{
 \item{posterior}{Passed to \code{.impfun_as_double_matrix}.}
 \item{reference_haps}{Passed to \code{.impfun_as_double_matrix}.}
-\item{site}{See Usage.}
+\item{site}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the impfun_native implementation. No other function in the package calls it. See the file header for the source the module follows.

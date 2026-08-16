@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{W}{A matrix; passed to \code{\%*\%}.}
-\item{x}{See Usage.}
+\item{x}{Coerced to vector by the body, with \code{as.vector}.}
 }
 \description{
 A step of the explor_native implementation. Called by \code{explor}. See the file header for the source the module follows.

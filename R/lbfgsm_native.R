@@ -49,14 +49,14 @@
 #' source it follows.
 #'
 #' @param fun See Usage.
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grad See Usage.
-#' @param m Defaults to \code{10}.
-#' @param max_iter Defaults to \code{200}.
+#' @param m Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param tol Defaults to \code{1e-08}.
 #' @param c1 Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @param c2 Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
-#' @param max_ls Defaults to \code{60}.
+#' @param max_ls Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{grad}, \code{grad_norm}, \code{iterations}, \code{n_fun}, \code{memory}, \code{converged}, \code{history}, \code{method}.
 #' @export
 morie_lbfgsm <- function(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-8,

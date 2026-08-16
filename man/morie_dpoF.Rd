@@ -16,7 +16,7 @@ morie_dpoF(logp_w = NULL, logp_l = NULL, logp_ref_w = NULL, logp_ref_l = NULL, b
 \item{model}{Compared against \code{"plackett-luce"}. Defaults to \code{"bradley-terry"}.}
 \item{logp}{Passed to \code{.dpoF_plackett_luce}.}
 \item{logp_ref}{Passed to \code{.dpoF_plackett_luce}.}
-\item{label_smoothing}{Defaults to \code{0}.}
+\item{label_smoothing}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the dpoF_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,12 +8,12 @@
 WienerFilt(x, desired = NULL, order = 8, sd = NULL, seta = NULL, fs = 1)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{desired}{Defaults to \code{NULL}.}
 \item{order}{Defaults to \code{8}.}
 \item{sd}{Defaults to \code{NULL}.}
 \item{seta}{Defaults to \code{NULL}.}
-\item{fs}{Defaults to \code{1}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.

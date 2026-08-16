@@ -20,7 +20,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{Mod}.
 #' @export
 morie_unclr_dft_amp <- function(x) Mod(stats::fft(as.numeric(x)))
@@ -405,8 +405,8 @@ morie_unclr_alr_inv <- function(z, total) {
 #' it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param dl See Usage.
-#' @param n_iter See Usage.
+#' @param dl Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}.
 #' @param draw Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.
 #' @export

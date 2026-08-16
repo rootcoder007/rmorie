@@ -11,7 +11,7 @@
 \item{t}{A vector; its length is taken and its elements indexed.}
 \item{e}{A vector; indexed elementwise.}
 \item{X}{A matrix; indexed by row and column.}
-\item{max_iter}{Defaults to \code{100L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{

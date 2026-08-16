@@ -8,12 +8,12 @@
 .svycox_prep(time, event, X, weights, strata, cluster)
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
+\item{time}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{event}{Coerced to integer by the body, with \code{as.integer}.}
 \item{X}{A matrix; indexed by row and column.}
-\item{weights}{See Usage.}
-\item{strata}{See Usage.}
-\item{cluster}{See Usage.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{strata}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{cluster}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}. See the file header for the source the module follows.

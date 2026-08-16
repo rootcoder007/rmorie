@@ -8,7 +8,7 @@
 .safrl_vec(v, name)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{A list; the body checks with \code{is.list}.}
 \item{name}{See Usage.}
 }
 \description{

@@ -8,7 +8,7 @@
 morie_sv_dl_deletion_type_reference(ref, sv_type)
 }
 \arguments{
-\item{ref}{See Usage.}
+\item{ref}{Coerced to character by the body, with \code{as.character}.}
 \item{sv_type}{One of \code{"DEL"}, \code{"DUP"}, \code{"INV"}.}
 }
 \description{

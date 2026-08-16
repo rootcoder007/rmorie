@@ -37,10 +37,10 @@
 #' exists to remove.
 #'
 #' @param f See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param points Defaults to \code{201L}.
-#' @param stages Defaults to \code{4L}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{201L}.
+#' @param stages Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .sxrhrt_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
@@ -199,13 +199,13 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param sex See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sex Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K Passed to \code{.sxrhrt_rows}.
 #' @param X Optional; may be \code{NULL}. Passed to \code{.sxrhrt_rows}.
-#' @param max_cycles Defaults to \code{60L}.
+#' @param max_cycles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60L}.
 #' @param tol Defaults to \code{1e-09}.
-#' @param male_label Defaults to \code{1}.
+#' @param male_label Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{h2_male}, \code{h2_female}, \code{rg}, \code{sigma2_g_male}, \code{sigma2_g_female}, \code{sigma2_g_cross}, \code{sigma2_e_male}, \code{sigma2_e_female}, \code{coefficients}, \code{reml_loglik}, \code{reml_path}, \code{lrt_rg_equals_one}, \code{p_rg_equals_one}, \code{lrt_equal_h2}, \code{p_equal_h2}, \code{n}, \code{n_male}, \code{n_female}, \code{p}, \code{max_cross_sex_relatedness}, \code{cycles}, \code{converged}, \code{method}, \code{note}.
 #' @export
 morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,

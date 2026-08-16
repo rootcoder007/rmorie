@@ -9,7 +9,7 @@ MedPolish(values, grid = NULL, iters = 10L)
 }
 \arguments{
 \item{values}{A matrix; passed to \code{as.matrix}.}
-\item{grid}{Defaults to \code{NULL}.}
+\item{grid}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.}
 }
 \description{

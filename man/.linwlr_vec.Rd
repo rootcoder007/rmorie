@@ -8,7 +8,7 @@
 .linwlr_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the linwlr_native implementation. Called by \code{morie_linwlr}, \code{morie_linwlr_blip}. See the file header for the source the module follows.

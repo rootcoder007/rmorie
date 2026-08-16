@@ -104,16 +104,16 @@
 #' source it follows.
 #'
 #' @param dataset See Usage.
-#' @param states Defaults to \code{NULL}.
-#' @param actions Defaults to \code{NULL}.
+#' @param states Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
+#' @param actions Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
 #' @param variant One of \code{"H"}, \code{"mu"}, \code{"rho"}. Defaults to \code{"H"}.
 #' @param backup One of \code{"max"}, \code{"pi"}. Defaults to \code{"max"}.
 #' @param policy Passed to \code{.offlrl_as_dist}.
 #' @param mu Passed to \code{.offlrl_as_dist}.
-#' @param lr Defaults to \code{0.5}.
-#' @param iters Defaults to \code{2000}.
+#' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{estimate}, \code{q}, \code{value}, \code{greedy}, \code{behavior}, \code{counts}, \code{penalty}, \code{bellman_error}, \code{objective}, \code{alpha}, \code{variant}, \code{backup}, \code{n_transitions}, \code{method}.
 #' @export

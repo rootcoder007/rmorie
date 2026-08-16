@@ -10,8 +10,8 @@ elmo_mix(reps, raw_weights, gamma = 1, position = NULL)
 \arguments{
 \item{reps}{A vector; its length is taken and its elements indexed.}
 \item{raw_weights}{A vector; its length is taken.}
-\item{gamma}{Defaults to \code{1}.}
-\item{position}{Defaults to \code{NULL}.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{position}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the elmo_native implementation. Called by \code{elmo_representation}. See the file header for the source the module follows.

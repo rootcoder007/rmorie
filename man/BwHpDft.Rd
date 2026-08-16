@@ -8,11 +8,11 @@
 BwHpDft(K, kc = NULL, N = 2, fc = NULL, fs = NULL)
 }
 \arguments{
-\item{K}{See Usage.}
-\item{kc}{Defaults to \code{NULL}.}
-\item{N}{Defaults to \code{2}.}
-\item{fc}{Defaults to \code{NULL}.}
-\item{fs}{Defaults to \code{NULL}.}
+\item{K}{Coerced to integer by the body, with \code{as.integer}.}
+\item{kc}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
+\item{fc}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 is unbounded and the response is exactly nought -- the filter the book uses to strip baseline drift, eighth order at 2 Hz.  It leaves high-frequency noise untouched; a highpass is not a denoiser.

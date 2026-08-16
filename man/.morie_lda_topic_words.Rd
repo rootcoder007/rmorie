@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{beta}{A matrix; passed to \code{as.matrix}.}
-\item{n_top}{Defaults to \code{5}.}
+\item{n_top}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{vocab}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{

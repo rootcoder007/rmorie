@@ -10,7 +10,7 @@ test_variant(g, y, offset = NULL, covariates = list())
 \arguments{
 \item{g}{A vector; its length is taken.}
 \item{y}{A vector; its length is taken.}
-\item{offset}{Defaults to \code{NULL}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{covariates}{A vector; its length is taken. Defaults to \code{list()}.}
 }
 \description{

@@ -9,9 +9,9 @@ morie_sam2vd_temporal_embedding(entry, current_frame, dim = NULL, scale = 0.1)
 }
 \arguments{
 \item{entry}{A list; the body reads \code{$features}, \code{$frame}, \code{$prompted} from it.}
-\item{current_frame}{See Usage.}
-\item{dim}{Defaults to \code{NULL}.}
-\item{scale}{Defaults to \code{0.1}.}
+\item{current_frame}{Coerced to integer by the body, with \code{as.integer}.}
+\item{dim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{scale}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \description{
 A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}. See the file header for the source the module follows.

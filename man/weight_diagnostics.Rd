@@ -8,7 +8,7 @@
 weight_diagnostics(weights)
 }
 \arguments{
-\item{weights}{See Usage.}
+\item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

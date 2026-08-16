@@ -8,8 +8,8 @@
 LogFT(x, p, omega, t = NULL, dt = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{omega}{See Usage.}
 \item{t}{Defaults to \code{NULL}.}
 \item{dt}{Defaults to \code{NULL}.}

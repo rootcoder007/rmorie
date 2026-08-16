@@ -11,7 +11,7 @@ morie_remlfn(y, group, tol = 1e-10, max_iter = 5000, solver = "auto")
 \item{y}{A vector; its length is taken.}
 \item{group}{A vector; its length is taken.}
 \item{tol}{Passed to \code{.remlfn_nelder_mead}. Defaults to \code{1e-10}.}
-\item{max_iter}{Defaults to \code{5000}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.}
 \item{solver}{One of \code{"auto"}, \code{"closed"}, \code{"optim"}. Defaults to \code{"auto"}.}
 }
 \description{

@@ -78,8 +78,8 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param kmax See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param kmax Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{[}.
 #' @export
 .rg_higuchi_fd <- function(x, kmax) {

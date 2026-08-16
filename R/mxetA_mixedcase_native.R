@@ -23,9 +23,9 @@
 #' header for the source it follows.
 #'
 #' @param F A matrix; passed to \code{as.matrix}.
-#' @param n_sim Defaults to \code{1}.
+#' @param n_sim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param max_points Defaults to \code{100000L}.
+#' @param max_points Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100000L}.
 #' @return A list with \code{fields}, \code{scales}, \code{n_points}, \code{frechet_uniform}, \code{seed}, \code{method}.
 #' @export
 morie_mxetA <- function(F, n_sim = 1, seed = 0, max_points = 100000L) {

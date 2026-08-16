@@ -8,7 +8,7 @@
 .jsonlt_posix(v, o)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{o}{A list; the body reads \code{$digits}, \code{$POSIXt} from it.}
 }
 \description{

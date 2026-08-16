@@ -117,8 +117,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L_Q See Usage.
-#' @param L_K See Usage.
+#' @param L_Q Coerced to numeric by the body, with \code{as.numeric}.
+#' @param L_K Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A list with \code{full_attention_flops}, \code{probsparse_flops}, \code{ratio}, \code{u}.
 #' @export

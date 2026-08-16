@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{groups}{See Usage.}
-\item{n_folds}{See Usage.}
+\item{n_folds}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{design}{Compared against \code{"unmatched"}.}
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
 }

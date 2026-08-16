@@ -8,7 +8,7 @@
 univariate_mcd(values, h = NULL, consistent = TRUE)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{consistent}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

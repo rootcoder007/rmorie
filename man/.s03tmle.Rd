@@ -11,7 +11,7 @@
 \item{y}{Passed to \code{.s03vec}.}
 \item{D}{Passed to \code{.s03vec}.}
 \item{X}{Passed to \code{.s03design}.}
-\item{trim}{Defaults to \code{0}.}
+\item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{link}{Defaults to \code{"logit"}.}
 }
 \description{

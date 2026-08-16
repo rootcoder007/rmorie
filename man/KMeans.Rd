@@ -9,8 +9,8 @@ KMeans(X, k, maxiter = 100, tol = 1e-10, init = NULL)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{k}{See Usage.}
-\item{maxiter}{Defaults to \code{100}.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-10}.}
 \item{init}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }

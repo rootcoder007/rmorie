@@ -10,7 +10,7 @@ estimate_eic(psi_of_P, basis, weights = NULL, h = 1e-05, ridge = 1e-08)
 \arguments{
 \item{psi_of_P}{See Usage.}
 \item{basis}{A matrix; passed to \code{as.matrix}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Defaults to \code{1e-05}.}
 \item{ridge}{A matrix; passed to \code{diag}. Defaults to \code{1e-08}.}
 }

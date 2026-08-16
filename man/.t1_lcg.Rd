@@ -8,7 +8,7 @@
 .t1_lcg(seed = 1)
 }
 \arguments{
-\item{seed}{Defaults to \code{1}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the tail1_core implementation. Called by \code{.btdir_rows}, \code{.btmbb_reps}, \code{.kvmse_rotation} and 32 others in the module. See the file header for the source the module follows.

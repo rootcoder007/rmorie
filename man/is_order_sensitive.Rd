@@ -8,7 +8,7 @@
 is_order_sensitive(method)
 }
 \arguments{
-\item{method}{See Usage.}
+\item{method}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

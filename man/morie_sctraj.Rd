@@ -9,7 +9,7 @@ morie_sctraj(X, labels, root, ends = NULL, cov = "full", max_iter = 15, shrink =
 }
 \arguments{
 \item{X}{Passed to \code{.sctraj_matrix}.}
-\item{labels}{See Usage.}
+\item{labels}{Coerced to character by the body, with \code{as.character}.}
 \item{root}{Passed to \code{morie_sctraj_lineages_from_tree}.}
 \item{ends}{Passed to \code{morie_sctraj_minimum_spanning_tree}.}
 \item{cov}{Passed to \code{morie_sctraj_cluster_distances}. Defaults to \code{"full"}.}

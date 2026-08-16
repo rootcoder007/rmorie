@@ -8,7 +8,7 @@
 variation_norm(beta)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlhal_native implementation. Called by \code{hal_fit}, \code{morie_tlhal}. See the file header for the source the module follows.

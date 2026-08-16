@@ -10,7 +10,7 @@
 \arguments{
 \item{Z}{A matrix; indexed by row and column.}
 \item{k}{Numeric; combined arithmetically in the body.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.}
 }
 \description{

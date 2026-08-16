@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{natoms}{See Usage.}
+\item{natoms}{Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Defaults to \code{1}.}
 }
 \description{

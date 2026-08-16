@@ -18,7 +18,7 @@
 #'
 #' @param edges A vector; indexed elementwise.
 #' @param types A vector; indexed elementwise.
-#' @param metapath See Usage.
+#' @param metapath Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{neighbours}, \code{metapath}, \code{note}.
 #' @export
 metapath_neighbours <- function(edges, types, metapath) {
@@ -103,7 +103,7 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
 #'
 #' @param Z_per_metapath A vector; indexed elementwise.
 #' @param W A matrix; passed to \code{\%*\%}.
-#' @param b See Usage.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{scores}, \code{metapaths}, \code{note}.
 #' @export

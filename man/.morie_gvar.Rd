@@ -8,7 +8,7 @@
 .morie_gvar(value, parents = list(), op = "leaf")
 }
 \arguments{
-\item{value}{See Usage.}
+\item{value}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{parents}{Defaults to \code{list()}.}
 \item{op}{Defaults to \code{"leaf"}.}
 }

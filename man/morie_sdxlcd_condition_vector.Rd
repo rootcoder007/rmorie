@@ -12,7 +12,7 @@ morie_sdxlcd_condition_vector(h_original, w_original, c_top = 0, c_left = 0, tim
 \item{w_original}{Passed to \code{morie_sdxlcd_size_conditioning}.}
 \item{c_top}{Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.}
 \item{c_left}{Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.}
-\item{timestep_embedding}{Defaults to \code{NULL}.}
+\item{timestep_embedding}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{dim}{Passed to \code{morie_sdxlcd_size_conditioning}. Defaults to \code{8}.}
 }
 \description{

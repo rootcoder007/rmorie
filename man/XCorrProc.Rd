@@ -8,9 +8,9 @@
 XCorrProc(x, y, lags = NULL, remove_mean = TRUE)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{lags}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lags}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{remove_mean}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

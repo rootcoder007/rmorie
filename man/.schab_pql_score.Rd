@@ -10,7 +10,7 @@
 \arguments{
 \item{z}{Numeric; combined arithmetically in the body.}
 \item{X}{A matrix; passed to \code{t}.}
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{S}{A matrix; passed to \code{solve}.}
 \item{Sigma_S}{A matrix; passed to \code{as.matrix}.}
 \item{family}{Passed to \code{.schab_data_covariance}.}

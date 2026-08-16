@@ -8,7 +8,7 @@
 morie_vepan_vep_annotation(variants, transcripts, genome, upstream = 5000, downstream = 5000, mode = "all", no_intergenic = FALSE)
 }
 \arguments{
-\item{variants}{See Usage.}
+\item{variants}{Iterated over elementwise, with \code{lapply}.}
 \item{transcripts}{See Usage.}
 \item{genome}{Passed to \code{morie_vepan_annotate}.}
 \item{upstream}{Passed to \code{morie_vepan_annotate}. Defaults to \code{5000}.}

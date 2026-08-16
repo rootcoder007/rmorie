@@ -8,7 +8,7 @@
 morie_phylby_chain_temperature(j, lam = 0.2)
 }
 \arguments{
-\item{j}{See Usage.}
+\item{j}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{0.2}.}
 }
 \description{

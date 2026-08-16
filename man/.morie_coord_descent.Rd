@@ -12,7 +12,7 @@
 \item{y}{Numeric; passed to \code{mean}.}
 \item{alpha}{Passed to \code{.morie_coord_descent_cpp}.}
 \item{lambda}{Passed to \code{.morie_coord_descent_cpp}.}
-\item{max_iter}{Defaults to \code{1000L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.}
 \item{tol}{Passed to \code{.morie_coord_descent_cpp}. Defaults to \code{1e-06}.}
 \item{warm}{Defaults to \code{NULL}.}
 }

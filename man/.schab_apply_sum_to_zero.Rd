@@ -8,7 +8,7 @@
 .schab_apply_sum_to_zero(delta, A)
 }
 \arguments{
-\item{delta}{See Usage.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A}{A matrix; passed to \code{nrow}.}
 }
 \description{

@@ -13,7 +13,7 @@ particle_filter_simple(y, n_particles, init, step, loglik, seed = 0L)
 \item{init}{See Usage.}
 \item{step}{See Usage.}
 \item{loglik}{See Usage.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{
 A step of the pftrep_native implementation. Called by \code{replicated_pfilter}. See the file header for the source the module follows.

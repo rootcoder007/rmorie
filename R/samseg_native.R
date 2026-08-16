@@ -27,10 +27,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param dim Defaults to \code{8}.
-#' @param scale Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .samseg_pos_enc <- function(x, y, dim = 8, scale = 1.0) {
@@ -48,7 +48,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param points See Usage.
+#' @param points Iterated over elementwise, with \code{lapply}.
 #' @param labels See Usage.
 #' @param dim Passed to \code{.samseg_pos_enc}. Defaults to \code{8}.
 #' @param type_embeddings Defaults to \code{NULL}.
@@ -110,7 +110,7 @@ encode_box_prompt <- function(box, dim = 8, type_embeddings = NULL) {
 #'
 #' @param mask See Usage.
 #' @param image_embedding See Usage.
-#' @param weight Defaults to \code{1}.
+#' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{embedding}, \code{sparse}, \code{note}.
 #' @export
 encode_mask_prompt <- function(mask, image_embedding, weight = 1.0) {
@@ -134,9 +134,9 @@ encode_mask_prompt <- function(mask, image_embedding, weight = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param encoder_ms See Usage.
-#' @param decoder_ms See Usage.
-#' @param n_prompts See Usage.
+#' @param encoder_ms Coerced to numeric by the body, with \code{as.numeric}.
+#' @param decoder_ms Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_prompts Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{total_ms}, \code{per_prompt_ms}, \code{naive_ms}, \code{speedup}, \code{interactive}, \code{note}.
 #' @export
 amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
@@ -160,7 +160,7 @@ amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
 #' @param image_embedding See Usage.
 #' @param prompt_tokens See Usage.
 #' @param decoder See Usage.
-#' @param multimask Defaults to \code{TRUE}.
+#' @param multimask Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask}, \code{method}, \code{note}.
 #' @export
 promptable_segment <- function(image_embedding, prompt_tokens, decoder,

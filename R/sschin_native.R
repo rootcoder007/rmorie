@@ -60,7 +60,7 @@
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e A vector; indexed elementwise.
 #' @param X A matrix; indexed by row and column.
-#' @param max_iter Defaults to \code{100L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-10}.
 #' @return A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.
 #' @export
@@ -142,11 +142,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param time See Usage.
-#' @param event See Usage.
+#' @param time Coerced to numeric by the body, with \code{as.numeric}.
+#' @param event Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param mi_iter Defaults to \code{5L}.
-#' @param cycles Defaults to \code{10L}.
+#' @param mi_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
+#' @param cycles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param ties Compared against \code{"breslow"}. Defaults to \code{"breslow"}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratio}, \code{std_error}, \code{total_variance}, \code{within_variance}, \code{between_variance}, \code{ci_lower}, \code{ci_upper}, \code{t_quantile}, \code{df}, \code{relative_increase_variance}, \code{fraction_missing_info}, \code{per_imputation}, \code{complete_case_coefficients}, \code{complete_case_se}, \code{n_complete_cases}, \code{n}, \code{p}, \code{m}, \code{cycles}, \code{n_missing}, \code{columns_imputed}, \code{n_events}, \code{df_complete}, \code{method}, \code{note}.
 #' @export

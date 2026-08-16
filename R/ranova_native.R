@@ -16,7 +16,7 @@
 #' source it follows.
 #'
 #' @param y A vector; indexed elementwise.
-#' @param group See Usage.
+#' @param group Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{keys}, \code{gs}.
 #' @export
 .vc_groups <- function(y, group) {

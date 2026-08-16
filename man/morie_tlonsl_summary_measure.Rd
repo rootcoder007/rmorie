@@ -8,8 +8,8 @@
 morie_tlonsl_summary_measure(history, lags = 1)
 }
 \arguments{
-\item{history}{See Usage.}
-\item{lags}{Defaults to \code{1}.}
+\item{history}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lags}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 summary, which is exactly the i.i.d. case.

@@ -11,9 +11,9 @@ morie_prxgms_prox_gradient(fun, grad, prox, x0, L = 1, max.iter = 500L, tol = 1e
 \item{fun}{See Usage.}
 \item{grad}{See Usage.}
 \item{prox}{See Usage.}
-\item{x0}{See Usage.}
-\item{L}{Defaults to \code{1}.}
-\item{max.iter}{Defaults to \code{500L}.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{L}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{max.iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
 \item{tol}{Defaults to \code{1e-10}.}
 \item{accelerate}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{backtrack}{A flag; the body branches on it. Defaults to \code{FALSE}.}

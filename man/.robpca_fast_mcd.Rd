@@ -10,7 +10,7 @@
 \arguments{
 \item{rows}{A matrix; indexed by row and column.}
 \item{h}{See Usage.}
-\item{n_start}{Defaults to \code{250L}.}
+\item{n_start}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{250L}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{17L}.}
 }
 \description{

@@ -8,8 +8,8 @@
 Ztrans(x, z = NULL, n0 = 0)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{z}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{z}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
 \item{n0}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{

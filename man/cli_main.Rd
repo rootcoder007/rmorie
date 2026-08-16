@@ -10,7 +10,7 @@ cli_main(subject, json = "{}")
 \item{subject}{Character scalar naming the analysis subject.}
 
 \item{json}{Character scalar: a JSON object of options forwarded from the
-CLI flags (default \code{"\{\}"}). Unknown keys are ignored.}
+CLI flags (default \code{"\\\{\\\}"}). Unknown keys are ignored.}
 }
 \value{
 Invisibly, the analysis result (a list). As a side effect, prints

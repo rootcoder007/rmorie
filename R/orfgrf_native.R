@@ -103,11 +103,11 @@
 #' @param y A vector; its length is taken.
 #' @param W Defaults to \code{NULL}.
 #' @param kind Defaults to \code{"double-sample"}.
-#' @param n_trees Defaults to \code{100}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param max_depth Defaults to \code{12}.
-#' @param seed Defaults to \code{0}.
+#' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
+#' @param min_leaf Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param max_depth Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{trees}, \code{bags}, \code{s}.
 #' @export
 .orfgrf_grow_forest <- function(X, y, W = NULL, kind = "double-sample",
@@ -201,8 +201,8 @@
 #'
 #' @param target A matrix; passed to \code{crossprod}.
 #' @param W A matrix; passed to \code{as.matrix}.
-#' @param weights See Usage.
-#' @param exclude Defaults to \code{NULL}.
+#' @param weights Coerced to numeric by the body, with \code{as.numeric}.
+#' @param exclude Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{fit}, \code{coef}.
 #' @export
@@ -316,16 +316,16 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param T See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param T Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param W A matrix; passed to \code{as.matrix}.
 #' @param x_eval Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param n_trees Defaults to \code{100}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param max_depth Defaults to \code{12}.
-#' @param seed Defaults to \code{0}.
+#' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
+#' @param min_leaf Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param max_depth Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param residualize Defaults to \code{"local"}.
 #' @param ridge Defaults to \code{1e-08}.
 #' @param kind Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.

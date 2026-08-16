@@ -8,11 +8,11 @@
 .cnvlfc_ccm(x, y, E = 2L, tau = 1L, lib_sizes = NULL, seed = 1L, exclude = 0L)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{E}{Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.}
 \item{tau}{Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.}
-\item{lib_sizes}{Defaults to \code{NULL}.}
+\item{lib_sizes}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.}
 \item{exclude}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.}
 }

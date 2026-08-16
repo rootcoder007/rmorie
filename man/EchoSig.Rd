@@ -8,9 +8,9 @@
 EchoSig(h, a, n_0, n = NULL)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{a}{Numeric; combined arithmetically in the body.}
-\item{n_0}{See Usage.}
+\item{n_0}{Coerced to integer by the body, with \code{as.integer}.}
 \item{n}{Passed to \code{.tf_echo_idx}.}
 }
 \description{

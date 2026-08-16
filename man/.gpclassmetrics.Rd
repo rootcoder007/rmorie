@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{conf}{A matrix; indexed by row and column.}
-\item{i}{See Usage.}
+\item{i}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}. See the file header for the source the module follows.

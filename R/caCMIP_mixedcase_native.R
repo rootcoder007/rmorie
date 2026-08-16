@@ -14,7 +14,7 @@
 #' header for the source it follows.
 #'
 #' @param a A vector; its length is taken.
-#' @param b See Usage.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .ca_rms <- function(a, b) {
@@ -27,11 +27,11 @@
 #' Part of the caCMIP_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param models See Usage.
-#' @param obs See Usage.
-#' @param sigma_d See Usage.
-#' @param sigma_s See Usage.
-#' @param projections Defaults to \code{NULL}.
+#' @param models Iterated over elementwise, with \code{lapply}.
+#' @param obs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sigma_d Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sigma_s Coerced to numeric by the body, with \code{as.numeric}.
+#' @param projections Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{weights}, \code{unweighted_mean}, \code{d}, \code{n_models}, \code{effective_n}, \code{method}.
 #' @export
 caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
@@ -88,8 +88,8 @@ caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
 #' Part of the caCMIP_mixedcase_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param models See Usage.
-#' @param weights See Usage.
+#' @param models Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{n}, \code{method}.
 #' @export
 cmip_ensemble <- function(models, weights) {

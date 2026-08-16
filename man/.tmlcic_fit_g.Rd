@@ -11,7 +11,7 @@
 \item{A}{A vector; indexed elementwise.}
 \item{W}{A matrix; indexed by row and column.}
 \item{cand}{A list; the body reads \code{$cols} from it.}
-\item{rows}{See Usage.}
+\item{rows}{Iterated over elementwise, with \code{lapply}.}
 \item{ridge}{Numeric; passed to \code{max}.}
 }
 \description{

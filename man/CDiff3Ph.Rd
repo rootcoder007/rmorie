@@ -8,7 +8,7 @@
 CDiff3Ph(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 half sample of the plain difference.  An integer delay can be undone by shifting the output back.

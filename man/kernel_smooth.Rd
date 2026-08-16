@@ -8,7 +8,7 @@
 kernel_smooth(u, kernel = "epanechnikov")
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kernel}{One of \code{"epanechnikov"}, \code{"uniform"}. Defaults to \code{"epanechnikov"}.}
 }
 \description{

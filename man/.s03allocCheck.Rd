@@ -10,7 +10,7 @@
 \arguments{
 \item{N_h}{Passed to \code{.s03vec}.}
 \item{S_h}{Optional; may be \code{NULL}. Passed to \code{.s03vec}.}
-\item{n}{See Usage.}
+\item{n}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 stratum arguments; S is all ones when S_h is NULL, which turns Neyman allocation into proportional allocation.

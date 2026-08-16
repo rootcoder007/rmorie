@@ -18,9 +18,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param shape Defaults to \code{2.83}.
-#' @param scale Defaults to \code{1.86}.
-#' @param grid Defaults to \code{NULL}.
+#' @param shape Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.83}.
+#' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.86}.
+#' @param grid Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t.max Defaults to \code{30}.
 #' @param n Defaults to \code{3001L}.
 #' @return A list with \code{t}, \code{density}.
@@ -80,10 +80,10 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t.Q See Usage.
-#' @param t.R See Usage.
+#' @param t.Q Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t.R Coerced to numeric by the body, with \code{as.numeric}.
 #' @param generation.time Defaults to \code{NULL}.
-#' @param t.E Defaults to \code{0}.
+#' @param t.E Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{efficacy}, \code{prevented.mass}, \code{remaining.mass}, \code{t.Q}, \code{t.R}, \code{max.attainable}, \code{pre.quarantine.mass}.
 #' @export
 morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
@@ -118,7 +118,7 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 #' @param t.Q Passed to \code{morie_qrntcq_quarantine_efficacy}.
 #' @param t.T See Usage.
 #' @param t.R Passed to \code{morie_qrntcq_quarantine_efficacy}.
-#' @param false.negative See Usage.
+#' @param false.negative Coerced to numeric by the body, with \code{as.numeric}.
 #' @param generation.time Defaults to \code{NULL}.
 #' @param t.R.positive Defaults to \code{NULL}.
 #' @return A list with \code{efficacy}, \code{efficacy.detained}, \code{efficacy.released}, \code{false.negative}, \code{t.T}, \code{t.R}, \code{bound}, \code{note}.
@@ -153,8 +153,8 @@ morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param efficacy See Usage.
-#' @param days.in.quarantine See Usage.
+#' @param efficacy Coerced to numeric by the body, with \code{as.numeric}.
+#' @param days.in.quarantine Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {

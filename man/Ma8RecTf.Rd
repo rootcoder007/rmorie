@@ -8,7 +8,7 @@
 Ma8RecTf(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 zeros, so the filter is still FIR despite the recursive implementation.  At z = 1 the ratio is 0/0 and the limit is the DC gain, 1.

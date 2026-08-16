@@ -8,9 +8,9 @@
 BwHp(cutoff_hz, order = 4, fs = 1000, z = NULL)
 }
 \arguments{
-\item{cutoff_hz}{See Usage.}
-\item{order}{Defaults to \code{4}.}
-\item{fs}{Defaults to \code{1000}.}
+\item{cutoff_hz}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.}
 \item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{

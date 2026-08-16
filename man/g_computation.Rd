@@ -8,9 +8,9 @@
 g_computation(strata, outcome_means, covariate_probs)
 }
 \arguments{
-\item{strata}{See Usage.}
-\item{outcome_means}{See Usage.}
-\item{covariate_probs}{See Usage.}
+\item{strata}{Coerced to list by the body, with \code{as.list}.}
+\item{outcome_means}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{covariate_probs}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}. See the file header for the source the module follows.

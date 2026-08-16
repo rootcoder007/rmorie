@@ -8,7 +8,7 @@
 .morie_lda_e_log_theta(gamma)
 }
 \arguments{
-\item{gamma}{See Usage.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the lda_native implementation. Called by \code{.morie_lda_elbo}, \code{.morie_lda_variational_inference}. See the file header for the source the module follows.

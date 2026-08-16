@@ -8,7 +8,7 @@
 morie_solve_kinetics(tau, alpha, beta, gamma, u0 = 0, s0 = 0)
 }
 \arguments{
-\item{tau}{See Usage.}
+\item{tau}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{alpha}{Numeric; combined arithmetically in the body.}
 \item{beta}{Numeric; combined arithmetically in the body.}
 \item{gamma}{Numeric; combined arithmetically in the body.}

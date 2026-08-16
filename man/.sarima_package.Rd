@@ -8,15 +8,15 @@
 .sarima_package(y, w, phi, theta, Phi, Theta, s, order, seasonal_order, ll, cs, method, res)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{w}{A vector; its length is taken.}
 \item{phi}{A vector; its length is taken.}
 \item{theta}{A vector; its length is taken.}
 \item{Phi}{A vector; its length is taken.}
 \item{Theta}{A vector; its length is taken.}
-\item{s}{See Usage.}
-\item{order}{See Usage.}
-\item{seasonal_order}{See Usage.}
+\item{s}{Coerced to integer by the body, with \code{as.integer}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
+\item{seasonal_order}{Coerced to integer by the body, with \code{as.integer}.}
 \item{ll}{A list; the body reads \code{$loglik}, \code{$sigma2} from it.}
 \item{cs}{A list; the body reads \code{$residuals}, \code{$sigma2}, \code{$ssq} from it.}
 \item{method}{One of \code{"ml"}, \code{"uls"}.}

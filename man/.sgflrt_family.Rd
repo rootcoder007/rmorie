@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{family}{One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.}
-\item{disp}{Defaults to \code{1}.}
+\item{disp}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 V/phi the IRLS weight. They coincide for the canonical links with a fixed dispersion, which is why writing the working response as eta + (y - mu) / W looks correct and is -- right up until a family with a real dispersion parameter arrives, where it is off by exactly that factor. The working response is eta + (y - mu) / V(mu) and nothing else.

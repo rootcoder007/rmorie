@@ -10,7 +10,7 @@ QrsDeriv(x, fs, thresh = 1)
 \arguments{
 \item{x}{Numeric; passed to \code{abs}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{thresh}{Defaults to \code{1}.}
+\item{thresh}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 as y2 = 1.3 y0 + 1.1 y1 (eq 4.3), scanned with a threshold of 1.0 on a maximum-normalised ECG.  Six of eight successive samples must pass, which is what makes the decision robust to single-sample derivative spikes.

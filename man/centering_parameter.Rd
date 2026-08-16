@@ -8,9 +8,9 @@
 centering_parameter(mu, mu_affine, nu = 3)
 }
 \arguments{
-\item{mu}{See Usage.}
-\item{mu_affine}{See Usage.}
-\item{nu}{Defaults to \code{3}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu_affine}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{nu}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.}
 }
 \description{
 A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}. See the file header for the source the module follows.

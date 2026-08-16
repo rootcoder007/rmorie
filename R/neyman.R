@@ -99,7 +99,7 @@ Neyman <- function(y, N_h, S_h, n) {
 #'
 #' @param N_h Passed to \code{.s03vec}.
 #' @param S_h Optional; may be \code{NULL}. Passed to \code{.s03vec}.
-#' @param n See Usage.
+#' @param n Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{M}, \code{S}, \code{m0}, \code{H}.
 #' @export
 .s03allocCheck <- function(N_h, S_h, n) {

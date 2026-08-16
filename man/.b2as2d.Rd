@@ -8,7 +8,7 @@
 .b2as2d(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the b2info implementation. Called by \code{Cndent}, \code{Jntent}, \code{Klchain} and 1 others in the module. See the file header for the source the module follows.

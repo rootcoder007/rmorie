@@ -11,7 +11,7 @@
 \item{X}{A vector; its length is taken and its elements indexed.}
 \item{W}{Passed to \code{.netsts_lstm_cell}.}
 \item{b}{Passed to \code{.netsts_lstm_cell}.}
-\item{hidden}{See Usage.}
+\item{hidden}{Coerced to integer by the body, with \code{as.integer}.}
 \item{forget_bias}{Passed to \code{.netsts_lstm_cell}. Defaults to \code{0}.}
 }
 \description{

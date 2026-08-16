@@ -10,7 +10,7 @@ morie_locdp(x, epsilon = 1, seed = NULL)
 \arguments{
 \item{x}{A vector; its length is taken.}
 \item{epsilon}{A vector; its length is taken. Defaults to \code{1}.}
-\item{seed}{Defaults to \code{NULL}.}
+\item{seed}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 Named list (RichResult payload) with components: y : numeric vector, randomized responses (same length as x) epsilon : numeric, the privacy parameter used p : numeric, the flip probability 1 / (1 + exp(epsilon)) n : integer, length of x rng : the RNG state returned by .ghc_rng / .ghc_unif

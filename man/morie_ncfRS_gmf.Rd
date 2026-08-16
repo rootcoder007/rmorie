@@ -8,9 +8,9 @@
 morie_ncfRS_gmf(p_u, q_i, h = NULL, activation = "sigmoid")
 }
 \arguments{
-\item{p_u}{See Usage.}
-\item{q_i}{See Usage.}
-\item{h}{Defaults to \code{NULL}.}
+\item{p_u}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{q_i}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{activation}{Defaults to \code{"sigmoid"}.}
 }
 \description{

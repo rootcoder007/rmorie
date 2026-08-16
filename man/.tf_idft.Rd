@@ -8,7 +8,7 @@
 .tf_idft(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_analytic}, \code{CDemod}, \code{CprWt} and 2 others in the module. See the file header for the source the module follows.

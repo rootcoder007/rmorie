@@ -8,7 +8,7 @@
 .wenge_key(row)
 }
 \arguments{
-\item{row}{See Usage.}
+\item{row}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the wenge_native implementation. Called by \code{.wenge_saturated_models}, \code{.wenge_saturated_outcome}, \code{morie_wenge_mediation_functional}. See the file header for the source the module follows.

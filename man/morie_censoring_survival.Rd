@@ -8,9 +8,9 @@
 morie_censoring_survival(times, censored, A = NULL, W = NULL, grid = NULL, by_covariate = TRUE, ridge = 1e-08)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{censored}{See Usage.}
-\item{A}{Defaults to \code{NULL}.}
+\item{times}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{censored}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{A}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W}{Passed to \code{.tmlcen_W_mat}.}
 \item{grid}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{by_covariate}{Defaults to \code{TRUE}.}

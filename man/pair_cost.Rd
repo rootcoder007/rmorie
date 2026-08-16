@@ -8,7 +8,7 @@
 pair_cost(n, mode = "cross-encoder")
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 \item{mode}{One of \code{"bi-encoder"}, \code{"cross-encoder"}. Defaults to \code{"cross-encoder"}.}
 }
 \description{

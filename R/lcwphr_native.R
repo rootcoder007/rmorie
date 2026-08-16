@@ -55,7 +55,7 @@
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
-#' @param max_iter Defaults to \code{100L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-11}.
 #' @param ridge_rel Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{fitted}.
@@ -88,13 +88,13 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param A See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H Passed to \code{.lcwphr_rows}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
-#' @param trim Defaults to \code{0}.
+#' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param max_iter Defaults to \code{500L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.
 #' @return A list with \code{estimate}, \code{class_ate}, \code{class_mean_treated}, \code{class_mean_control}, \code{naive_class_ate}, \code{naive_class_mean_treated}, \code{naive_class_mean_control}, \code{ate}, \code{naive_ate}, \code{marginal_ate}, \code{unweighted_ate}, \code{class_prevalence}, \code{item_probabilities}, \code{posterior}, \code{labels}, \code{propensity}, \code{propensity_coefficients}, \code{weights}, \code{effective_sample_size}, \code{weight_max}, \code{weight_mean}, \code{loglik}, \code{loglik_path}, \code{bic}, \code{entropy}, \code{n_parameters}, \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{Q}, \code{stabilized}, \code{trim}, \code{method}, \code{note}.
 #' @export

@@ -10,7 +10,7 @@
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{prior_ppf}{A vector; its length is taken and its elements indexed.}
-\item{dim}{Defaults to \code{NULL}.}
+\item{dim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{skip}{Passed to \code{.abcgp.sobol_sequence}. Defaults to \code{1}.}
 }
 \description{

@@ -134,7 +134,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param video See Usage.
+#' @param video Iterated over elementwise, with \code{lapply}.
 #' @param kernel Passed to \code{.vidgen_mat}.
 #' @return A list with \code{video}, \code{frames}, \code{note}.
 #' @export
@@ -203,7 +203,7 @@ morie_vidgen_spatial_attention <- function(video) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param video See Usage.
+#' @param video Iterated over elementwise, with \code{lapply}.
 #' @param identity A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{video}, \code{identity}, \code{note}.
 #' @export
@@ -251,7 +251,7 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param video See Usage.
+#' @param video Iterated over elementwise, with \code{lapply}.
 #' @param block See Usage.
 #' @return A list with \code{video}, \code{note}.
 #' @export
@@ -268,8 +268,8 @@ morie_vidgen_as_image_model <- function(video, block) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param frames See Usage.
-#' @param spatial_positions See Usage.
+#' @param frames Coerced to integer by the body, with \code{as.integer}.
+#' @param spatial_positions Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{joint}, \code{factorised}, \code{ratio}, \code{note}.
 #' @export
 morie_vidgen_attention_cost <- function(frames, spatial_positions) {
@@ -294,10 +294,10 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x_hat See Usage.
-#' @param observed See Usage.
-#' @param index See Usage.
-#' @param weight Defaults to \code{2}.
+#' @param x_hat Iterated over elementwise, with \code{lapply}.
+#' @param observed Iterated over elementwise, with \code{lapply}.
+#' @param index Coerced to integer by the body, with \code{as.integer}.
+#' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @param downsample Defaults to \code{NULL}.
 #' @return A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight}, \code{guided_frames}, \code{method}, \code{note}.
 #' @export

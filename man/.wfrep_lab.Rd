@@ -8,7 +8,7 @@
 .wfrep_lab(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Numeric; the body checks with \code{is.numeric}.}
 }
 \description{
 A step of the Wfrep implementation. Called by \code{Svytbl}, \code{Wfrep}. See the file header for the source the module follows.

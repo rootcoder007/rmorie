@@ -10,7 +10,7 @@ semantic_attention(Z_per_metapath, W, b, q)
 \arguments{
 \item{Z_per_metapath}{A vector; indexed elementwise.}
 \item{W}{A matrix; passed to \code{\%*\%}.}
-\item{b}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{q}{Numeric; combined arithmetically in the body.}
 }
 \description{

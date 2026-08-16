@@ -14,7 +14,7 @@ morie_causrddc_rd_bandwidth(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, p
 \item{p}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{kernel}{Passed to \code{.causrddc_kernel_constants}. Defaults to \code{"triangular"}.}
 \item{s}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{prelim_order}{Defaults to \code{NULL}.}
+\item{prelim_order}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the causrddc_native implementation. Called by \code{morie_causrddc}. See the file header for the source the module follows.

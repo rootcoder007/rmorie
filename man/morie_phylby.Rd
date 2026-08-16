@@ -10,11 +10,11 @@ morie_phylby(alignment, n_iter = 2000, burnin = NULL, n_chains = 4, lam = 0.2, s
 \arguments{
 \item{alignment}{A vector; indexed elementwise.}
 \item{n_iter}{Numeric; combined arithmetically in the body. Defaults to \code{2000}.}
-\item{burnin}{Defaults to \code{NULL}.}
+\item{burnin}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{n_chains}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
 \item{lam}{Passed to \code{morie_phylby_chain_temperature}. Defaults to \code{0.2}.}
-\item{swap_every}{Defaults to \code{10}.}
-\item{sample_every}{Defaults to \code{10}.}
+\item{swap_every}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
+\item{sample_every}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{pi}{Passed to \code{.phylby_step}.}
 \item{rate}{Defaults to \code{1}.}
 \item{branch_prior_mean}{Passed to \code{.phylby_step}. Defaults to \code{0.1}.}

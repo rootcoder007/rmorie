@@ -8,7 +8,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 narm_softmax <- function(z) {
@@ -24,7 +24,7 @@ narm_softmax <- function(z) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h_t See Usage.
+#' @param h_t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H A matrix; passed to \code{as.matrix}.
 #' @param A1 A matrix; passed to \code{\%*\%}.
 #' @param A2 A matrix; passed to \code{\%*\%}.
@@ -53,7 +53,7 @@ narm_attention_weights <- function(h_t, H, A1, A2, v) {
 #' source it follows.
 #'
 #' @param H A matrix; passed to \code{as.matrix}.
-#' @param alpha See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 narm_local_encoder <- function(H, alpha) {
@@ -71,8 +71,8 @@ narm_local_encoder <- function(H, alpha) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h_t_global See Usage.
-#' @param c_local See Usage.
+#' @param h_t_global Coerced to numeric by the body, with \code{as.numeric}.
+#' @param c_local Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
 narm_session_repr <- function(h_t_global, c_local) {
@@ -87,7 +87,7 @@ narm_session_repr <- function(h_t_global, c_local) {
 #'
 #' @param embeddings A matrix; passed to \code{as.matrix}.
 #' @param B A matrix; passed to \code{ncol}.
-#' @param c_t See Usage.
+#' @param c_t Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{scores}, \code{probabilities}, \code{method}, \code{note}.
 #' @export
 narm_bilinear_scores <- function(embeddings, B, c_t) {
@@ -115,9 +115,9 @@ narm_bilinear_scores <- function(embeddings, B, c_t) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_items See Usage.
-#' @param hidden See Usage.
-#' @param emb_dim See Usage.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
+#' @param hidden Coerced to integer by the body, with \code{as.integer}.
+#' @param emb_dim Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{fully_connected}, \code{bilinear}, \code{ratio}, \code{note}.
 #' @export
 narm_decoder_parameters <- function(n_items, hidden, emb_dim) {

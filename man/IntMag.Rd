@@ -8,7 +8,7 @@
 IntMag(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the response is plotted; a magnitude cannot be negative, so the absolute value is taken here.

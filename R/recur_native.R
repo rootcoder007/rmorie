@@ -13,14 +13,14 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param start See Usage.
-#' @param stop See Usage.
-#' @param event See Usage.
+#' @param start Coerced to numeric by the body, with \code{as.numeric}.
+#' @param stop Coerced to numeric by the body, with \code{as.numeric}.
+#' @param event Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param strata Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Defaults to \code{1e-09}.
-#' @param offset Defaults to \code{NULL}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter}, \code{n_events}.
 #' @export
 .morie_cox_counting <- function(start, stop, event, X, strata = NULL,

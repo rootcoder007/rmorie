@@ -65,8 +65,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param task See Usage.
-#' @param text See Usage.
+#' @param task Coerced to character by the body, with \code{as.character}.
+#' @param text Coerced to character by the body, with \code{as.character}.
 #' @return A character value.
 #' @export
 t5enc_task_prefix <- function(task, text) {
@@ -83,11 +83,11 @@ t5enc_task_prefix <- function(task, text) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tokens See Usage.
-#' @param rate Defaults to \code{0.15}.
-#' @param mean_span Defaults to \code{3}.
+#' @param tokens Coerced to character by the body, with \code{as.character}.
+#' @param rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
+#' @param mean_span Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param sentinel Defaults to \code{"<extra_id_\%d>"}.
+#' @param sentinel Defaults to \code{"<extra_id_\\\%d>"}.
 #' @return A list with \code{input}, \code{target}, \code{n_spans}, \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by}, \code{note}.
 #' @export
 t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
@@ -172,10 +172,10 @@ t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param relative_position See Usage.
+#' @param relative_position Coerced to integer by the body, with \code{as.integer}.
 #' @param bidirectional A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param num_buckets Defaults to \code{32L}.
-#' @param max_distance Defaults to \code{128}.
+#' @param num_buckets Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32L}.
+#' @param max_distance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{128}.
 #' @return A numeric value.
 #' @export
 t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
@@ -209,10 +209,10 @@ t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param value See Usage.
-#' @param increment Defaults to \code{0.2}.
-#' @param lo Defaults to \code{1}.
-#' @param hi Defaults to \code{5}.
+#' @param value Coerced to numeric by the body, with \code{as.numeric}.
+#' @param increment Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return A character value.
 #' @export
 t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) {
@@ -230,8 +230,8 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param text See Usage.
-#' @param labels Defaults to \code{NULL}.
+#' @param text Coerced to character by the body, with \code{as.character}.
+#' @param labels Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{label}, \code{valid}, \code{note}.
 #' @export
 t5enc_parse_prediction <- function(text, labels = NULL) {

@@ -11,8 +11,8 @@
 \item{a}{Passed to \code{.b2close}.}
 \item{b}{Passed to \code{.b2close}.}
 \item{C}{Passed to \code{.b2mat}.}
-\item{epsilon}{See Usage.}
-\item{max_iter}{Defaults to \code{200L}.}
+\item{epsilon}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{trace}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

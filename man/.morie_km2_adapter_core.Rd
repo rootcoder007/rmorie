@@ -12,7 +12,7 @@
 \item{H_in}{A matrix; passed to \code{nrow}.}
 \item{W_down}{A matrix; passed to \code{as.matrix}.}
 \item{W_up}{A matrix; passed to \code{as.matrix}.}
-\item{f}{See Usage.}
+\item{f}{A function; the body checks with \code{is.function}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_parallel_adapter}, \code{morie_kamath_ch4_series_adapter}. See the file header for the source the module follows.

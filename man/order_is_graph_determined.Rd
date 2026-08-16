@@ -8,11 +8,11 @@
 order_is_graph_determined(features, adj, perm, k_keep, tol = 1e-09)
 }
 \arguments{
-\item{features}{See Usage.}
+\item{features}{A matrix; the body checks with \code{is.matrix}.}
 \item{adj}{See Usage.}
 \item{perm}{A vector; indexed elementwise.}
 \item{k_keep}{See Usage.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.}
 }
 \description{
 A step of the sortP_native implementation. No other function in the package calls it. See the file header for the source the module follows.

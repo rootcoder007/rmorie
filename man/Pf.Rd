@@ -8,7 +8,7 @@
 Pf(q, df1, df2, lower_tail = TRUE)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Iterated over elementwise, with \code{vapply}.}
 \item{df1}{Numeric; combined arithmetically in the body.}
 \item{df2}{Numeric; combined arithmetically in the body.}
 \item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}

@@ -8,8 +8,8 @@
 CCepSum(x, h)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 because the cepstrum is of infinite duration (eq 4.73) and the DFT truncates it; the size of the residual is the useful number.

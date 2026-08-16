@@ -12,7 +12,7 @@
 \item{A}{See Usage.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{propensity}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{min_propensity}{See Usage.}
+\item{min_propensity}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}, \code{trclrn_rule_value}. See the file header for the source the module follows.

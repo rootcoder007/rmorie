@@ -8,9 +8,9 @@
 morie_se3T_radial_kernel(distance, weights = NULL, sigma = 1)
 }
 \arguments{
-\item{distance}{See Usage.}
+\item{distance}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{weights}{Optional; may be \code{NULL}. Passed to \code{.se3T_vec}.}
-\item{sigma}{Defaults to \code{1}.}
+\item{sigma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the se3T_native implementation. Called by \code{morie_se3T_se3_attention}. See the file header for the source the module follows.

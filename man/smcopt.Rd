@@ -10,7 +10,7 @@ smcopt(objective, initial, n_particles = 200, n_steps = 30, phi_max = 50, phi_mi
 \arguments{
 \item{objective}{See Usage.}
 \item{initial}{See Usage.}
-\item{n_particles}{Defaults to \code{200}.}
+\item{n_particles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{n_steps}{Defaults to \code{30}.}
 \item{phi_max}{Defaults to \code{50}.}
 \item{phi_min}{Defaults to \code{0.1}.}

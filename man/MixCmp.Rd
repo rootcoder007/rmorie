@@ -9,7 +9,7 @@ MixCmp(X, ncomp = NULL, maxiter = 200, seed = 1)
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}
-\item{ncomp}{Defaults to \code{NULL}.}
+\item{ncomp}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{maxiter}{Defaults to \code{200}.}
 \item{seed}{Defaults to \code{1}.}
 }

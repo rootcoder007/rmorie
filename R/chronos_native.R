@@ -20,7 +20,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .chronos_vec <- function(x) as.numeric(x)
@@ -32,7 +32,7 @@
 #' the source it follows.
 #'
 #' @param x Passed to \code{.chronos_vec}.
-#' @param context Defaults to \code{NULL}.
+#' @param context Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{scaled}, \code{scale}, \code{degenerate}, \code{context}, \code{preserves_zero}.
 #' @export
 mean_scale <- function(x, context = NULL) {
@@ -66,9 +66,9 @@ mean_scale <- function(x, context = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param lo Defaults to \code{-15}.
-#' @param hi Defaults to \code{15}.
-#' @param n_bins Defaults to \code{4096L}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-15}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{15}.
+#' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4096L}.
 #' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}.
 #' @export
 uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
@@ -89,7 +89,7 @@ uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
 #' the source it follows.
 #'
 #' @param samples Passed to \code{.chronos_vec}.
-#' @param n_bins Defaults to \code{4096L}.
+#' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4096L}.
 #' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}, \code{caveat}.
 #' @export
 quantile_bins <- function(samples, n_bins = 4096L) {
@@ -180,7 +180,7 @@ dequantize <- function(tokens, bins) {
 #' @param bins A list; the body reads \code{$n_bins} from it.
 #' @param context Defaults to \code{NULL}.
 #' @param add_eos A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param pad_to Defaults to \code{NULL}.
+#' @param pad_to Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped}, \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
 #' @export
 tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
@@ -207,7 +207,7 @@ tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
 #'
 #' @param tokens See Usage.
 #' @param bins See Usage.
-#' @param scale See Usage.
+#' @param scale Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 detokenize <- function(tokens, bins, scale) {

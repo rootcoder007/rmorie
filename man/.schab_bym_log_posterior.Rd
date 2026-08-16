@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{y}{A vector; its length is taken.}
-\item{c_exp}{See Usage.}
+\item{c_exp}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{u}{A vector; its length is taken.}
 \item{v}{A vector; its length is taken.}
 \item{kappa}{Numeric; combined arithmetically in the body.}

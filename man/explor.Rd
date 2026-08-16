@@ -11,15 +11,15 @@ explor(states, actions, next_states, n_actions = NULL, n_features = 8, eta = 1, 
 \item{states}{Passed to \code{.mat}.}
 \item{actions}{Passed to \code{.mat}.}
 \item{next_states}{Passed to \code{.mat}.}
-\item{n_actions}{Defaults to \code{NULL}.}
-\item{n_features}{Defaults to \code{8}.}
+\item{n_actions}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{n_features}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 \item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{beta}{Numeric; combined arithmetically in the body. Defaults to \code{0.2}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
-\item{epochs}{Defaults to \code{1}.}
+\item{epochs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{features}{Compared against \code{"identity"}. Defaults to \code{"inverse"}.}
 \item{discrete}{A flag; the body branches on it. Defaults to \code{TRUE}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the explor_native implementation. Called by \code{morie_explor}. See the file header for the source the module follows.

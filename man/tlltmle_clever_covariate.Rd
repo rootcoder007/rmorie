@@ -8,9 +8,9 @@
 tlltmle_clever_covariate(A, g, rule = 1)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{g}{See Usage.}
-\item{rule}{Defaults to \code{1}.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rule}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the tlltmle_native implementation. No other function in the package calls it. See the file header for the source the module follows.

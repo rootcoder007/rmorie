@@ -8,8 +8,8 @@
 .smcsam_rwk(scale, n_moves)
 }
 \arguments{
-\item{scale}{See Usage.}
-\item{n_moves}{See Usage.}
+\item{scale}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_moves}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 random_walk_kernel(scale, n_moves), performs n_moves of x\\' = x + Normal(0, scale^2) and returns the average accept rate over the inner moves.

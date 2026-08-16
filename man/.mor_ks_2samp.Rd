@@ -8,8 +8,8 @@
 .mor_ks_2samp(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the over_native implementation. Called by \code{morie_over}. See the file header for the source the module follows.

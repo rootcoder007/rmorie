@@ -11,9 +11,9 @@
 #' it follows.
 #'
 #' @param f See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
-#' @param iters Defaults to \code{80L}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80L}.
 #' @return A numeric value.
 #' @export
 t3golden <- function(f, lo, hi, iters = 80L) {
@@ -39,7 +39,7 @@ t3golden <- function(f, lo, hi, iters = 80L) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param m Defaults to \code{401L}.
+#' @param m Coerced to integer by the body, with \code{as.integer}. Defaults to \code{401L}.
 #' @param lim Numeric; combined arithmetically in the body. Defaults to \code{8}.
 #' @return A list with \code{u}, \code{w}.
 #' @export

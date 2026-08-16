@@ -8,8 +8,8 @@
 cutoffs(N, step = 10)
 }
 \arguments{
-\item{N}{See Usage.}
-\item{step}{Defaults to \code{10}.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
+\item{step}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 }
 \description{
 A step of the fairRC_native implementation. Called by \code{.measure}, \code{.raw}. See the file header for the source the module follows.

@@ -59,7 +59,7 @@ morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param value See Usage.
+#' @param value Coerced to character by the body, with \code{as.character}.
 #' @param k Numeric; combined arithmetically in the body.
 #' @param h A count; the body uses it as \code{seq_len(...)}.
 #' @param cohort Numeric; combined arithmetically in the body. Defaults to \code{0}.

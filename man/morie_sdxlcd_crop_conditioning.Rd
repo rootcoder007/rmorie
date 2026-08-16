@@ -8,8 +8,8 @@
 morie_sdxlcd_crop_conditioning(c_top = 0, c_left = 0, dim = 8)
 }
 \arguments{
-\item{c_top}{Defaults to \code{0}.}
-\item{c_left}{Defaults to \code{0}.}
+\item{c_top}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{c_left}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{dim}{Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.}
 }
 \description{

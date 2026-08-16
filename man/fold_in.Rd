@@ -8,7 +8,7 @@
 fold_in(query, model)
 }
 \arguments{
-\item{query}{See Usage.}
+\item{query}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{model}{A list; the body reads \code{$S}, \code{$T} from it.}
 }
 \description{

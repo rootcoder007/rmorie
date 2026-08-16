@@ -8,8 +8,8 @@
 instrument_penalty(g_small, g_large)
 }
 \arguments{
-\item{g_small}{See Usage.}
-\item{g_large}{See Usage.}
+\item{g_small}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{g_large}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlctmle_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -12,7 +12,7 @@ Riccati(F, H, Q, R, maxiter = 1000L, tol = 1e-12)
 \item{H}{A matrix; passed to \code{as.matrix}.}
 \item{Q}{A matrix; passed to \code{as.matrix}.}
 \item{R}{A matrix; passed to \code{as.matrix}.}
-\item{maxiter}{Defaults to \code{1000L}.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{

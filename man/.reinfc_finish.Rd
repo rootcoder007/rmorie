@@ -8,9 +8,9 @@
 .reinfc_finish(param, rewards, bs, traj)
 }
 \arguments{
-\item{param}{See Usage.}
+\item{param}{Coerced to list by the body, with \code{as.list}.}
 \item{rewards}{A vector; its length is taken and its elements indexed.}
-\item{bs}{See Usage.}
+\item{bs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{traj}{See Usage.}
 }
 \description{

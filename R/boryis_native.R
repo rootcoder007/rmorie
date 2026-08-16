@@ -59,7 +59,7 @@
 #' @param u_l Numeric; combined arithmetically in the body.
 #' @param u_b Numeric; combined arithmetically in the body.
 #' @param Xc Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param max_iter Defaults to \code{2000L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
 #' @param tol Defaults to \code{1e-13}.
 #' @return A list with \code{a}, \code{lam}, \code{b}.
 #' @export

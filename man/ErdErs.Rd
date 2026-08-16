@@ -8,7 +8,7 @@
 ErdErs(eeg, fs, ref_window, active_window, band = c(8, 13))
 }
 \arguments{
-\item{eeg}{See Usage.}
+\item{eeg}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{ref_window}{A vector; indexed elementwise.}
 \item{active_window}{A vector; indexed elementwise.}

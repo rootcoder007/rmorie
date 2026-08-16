@@ -9,9 +9,9 @@ WtEntropy(x, wavelet = "db4", levels = 3, base = "e")
 }
 \arguments{
 \item{x}{See Usage.}
-\item{wavelet}{Defaults to \code{"db4"}.}
-\item{levels}{Defaults to \code{3}.}
-\item{base}{Defaults to \code{"e"}.}
+\item{wavelet}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"db4"}.}
+\item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
+\item{base}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"e"}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

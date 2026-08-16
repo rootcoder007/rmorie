@@ -9,8 +9,8 @@ MseGrad(phi, theta, w)
 }
 \arguments{
 \item{phi}{A matrix; passed to \code{as.matrix}.}
-\item{theta}{See Usage.}
-\item{w}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 with a single minimum, so a vanishing gradient is the optimum and not merely a stationary point.

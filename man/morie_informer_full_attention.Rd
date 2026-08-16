@@ -11,7 +11,7 @@ morie_informer_full_attention(Q, K, V, scale = NULL)
 \item{Q}{Passed to \code{.informer_to_rows}.}
 \item{K}{Passed to \code{.informer_to_rows}.}
 \item{V}{Passed to \code{.informer_to_rows}.}
-\item{scale}{Defaults to \code{NULL}.}
+\item{scale}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the informer_native implementation. No other function in the package calls it. See the file header for the source the module follows.

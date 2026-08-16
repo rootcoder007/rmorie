@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{count}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 s <- (1664525 s + 1013904223) mod 2^32 `.morie_gr_lcg_u` returns the (s + 0.5)/2^32 uniform stream, `.morie_gr_lcg_w` the symmetric weight stream 2u - 1 scaled.

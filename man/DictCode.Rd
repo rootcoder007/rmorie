@@ -11,7 +11,7 @@ DictCode(Y, D, sparsity, tol = 1e-12)
 \item{Y}{Passed to \code{.morie_bx_mat}.}
 \item{D}{Passed to \code{.morie_bx_mat}.}
 \item{sparsity}{Passed to \code{.morie_bx_omp}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.}
 }
 \description{
 coefficients and reconstruction error as features; the least-squares reprojection is Pati, Rezaiifar and Krishnaprasad, Asilomar 1993, which Rangayyan does not cover.  Learning a dictionary and using one are separate steps: here the coefficients, not the signals, are the feature vectors.

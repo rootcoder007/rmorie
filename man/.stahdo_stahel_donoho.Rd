@@ -12,7 +12,7 @@
 \item{directions}{Passed to \code{.stahdo_outlyingness}. Defaults to \code{"subsample"}.}
 \item{n_directions}{Passed to \code{.stahdo_outlyingness}. Defaults to \code{500}.}
 \item{seed}{Passed to \code{.stahdo_outlyingness}. Defaults to \code{1}.}
-\item{cutoff}{Defaults to \code{NULL}.}
+\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the stahdo_native implementation. Called by \code{morie_stahdo}. See the file header for the source the module follows.

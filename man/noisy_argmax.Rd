@@ -10,7 +10,7 @@ noisy_argmax(counts, gamma, seed = 0)
 \arguments{
 \item{counts}{A vector; its length is taken and its elements indexed.}
 \item{gamma}{Passed to \code{.pate_lap_draw}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the pate_native implementation. No other function in the package calls it. See the file header for the source the module follows.

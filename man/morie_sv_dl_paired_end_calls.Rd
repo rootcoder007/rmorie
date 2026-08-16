@@ -8,7 +8,7 @@
 morie_sv_dl_paired_end_calls(pairs, median = NULL, sd = NULL, orientation = NULL, n_sd = 3, min_support = 2, window = NULL, spread = "mad")
 }
 \arguments{
-\item{pairs}{See Usage.}
+\item{pairs}{Iterated over elementwise, with \code{lapply}.}
 \item{median}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.}
 \item{sd}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.}
 \item{orientation}{Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_insert_size_stats}.}
