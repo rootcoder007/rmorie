@@ -14,3 +14,6 @@ Exact P(D+ >= c) -- Theorem 4.3.4, Birnbaum-Tingey, p. 115
 A list with \code{sf}, \code{cdf}, \code{terms}, \code{n}, \code{c}.
 }
 \keyword{internal}
+\examples{
+Ksplusdist(c = 0.2, n = 20)
+}

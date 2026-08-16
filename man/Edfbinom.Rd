@@ -14,3 +14,6 @@ EDF count is binomial -- Gibbons Theorem 2.3.1 (book p. 33)
 A list with \code{mean}, \code{var}, \code{pmf}, \code{cdf}, \code{n}, \code{fx}.
 }
 \keyword{internal}
+\examples{
+Edfbinom(n = 10, fx = 0.5)
+}

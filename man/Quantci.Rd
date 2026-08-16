@@ -14,3 +14,8 @@ Distribution-free quantile confidence interval -- Sec. 5.2, p. 158
 A list with \code{lower}, \code{upper}, \code{coverage}, \code{alpha}, \code{r}, \code{s}, \code{n}, \code{p}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- rnorm(20)
+Quantci(x, p = 0.5, r = 6, s = 15)
+}

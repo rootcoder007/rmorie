@@ -26,3 +26,9 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+w <- .pq_writer()
+.pq_wzigzag(w, -3L)
+r <- .pq_reader(do.call(c, w$parts))
+.pq_zigzag(r)
+}
