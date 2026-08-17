@@ -18,3 +18,12 @@ Vaswani, A. et al. (2017), Attention Is All You Need, NIPS 2017 --
 (2003), Laplacian Eigenmaps for Dimensionality Reduction and Data
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+H <- matrix(rnorm(6), 3, 2)
+adj <- list("0" = c("1" = 1, "2" = 1),
+            "1" = c("0" = 1, "2" = 1),
+            "2" = c("0" = 1, "1" = 1))
+W <- matrix(rnorm(4), 2, 2)
+morie_gtrf_sparse_attention(H, adj, W, W, W)
+}

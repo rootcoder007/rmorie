@@ -21,3 +21,6 @@ The composed RDP epsilon.
 \description{
 Compose identical sampled Gaussians (Mironov 2017, Proposition 1)
 }
+\examples{
+morie_rdp_compose(2, 0.01, 1.0, steps = 100)
+}
