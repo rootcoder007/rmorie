@@ -22,3 +22,7 @@ A step of the blstn_native implementation. Called by \code{morie_blstn}. See the
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_blast_pvalue(score = 35, m = 1000, n = 1e6, lam = 0.192,
+                   K = 0.176)
+}

@@ -34,3 +34,8 @@ A list with the rings and a per-atom ring-membership flag.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+p <- morie_avalon_parse("c1ccccc1")
+r <- morie_avalon_rings(length(p$el), p$bonds, p$closures)
+str(r, max.level = 1)
+}

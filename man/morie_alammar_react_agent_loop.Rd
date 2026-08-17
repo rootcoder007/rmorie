@@ -18,3 +18,16 @@ morie_alammar_react_agent_loop
 A list with \code{answer}, \code{trace}, \code{steps_used}, \code{exhausted}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+calc <- function(x) as.character(eval(parse(text = x)))
+model <- function(ctx) {
+  if (length(ctx) == 1L) {
+    list(thought = "need arithmetic", tool = "calc", input = "6 * 7")
+  } else {
+    list(final = "42")
+  }
+}
+r <- morie_alammar_react_agent_loop("what is 6 times 7?",
+                                    list(calc = calc), model)
+str(r, max.level = 1)
+}

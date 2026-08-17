@@ -76,7 +76,9 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #' @export
 .proj <- function(row, W, b = NULL) {
   W <- as.matrix(W); storage.mode(W) <- "double"
-  v <- as.numeric(W) %*% as.numeric(row)
+  # W is (out x in); as.numeric(W) flattened it to a vector and the
+  # product was non-conformable for every real layer
+  v <- as.numeric(W %*% as.numeric(row))
   if (is.null(b)) v else v + as.numeric(b)
 }
 
