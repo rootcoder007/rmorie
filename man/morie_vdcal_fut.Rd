@@ -38,3 +38,6 @@ The implied tissue free fraction.
     Disposition 47(12), 1380-1387.
 }
 \keyword{internal}
+\examples{
+morie_vdcal_fut(0.7, 0.10)
+}

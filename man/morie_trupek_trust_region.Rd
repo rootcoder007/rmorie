@@ -43,3 +43,9 @@ a list with x, fval, gnorm, delta, iterations, accepted,   rejected, converged, 
     20(3), 626-637, doi:10.1137/0720042
 }
 \keyword{internal}
+\examples{
+f <- function(x) sum(x^2)
+gf <- function(x) 2 * x
+hf <- function(x) 2 * diag(length(x))
+morie_trupek_trust_region(f, gf, hf, x0 = c(1.5, -1.0))
+}

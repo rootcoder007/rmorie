@@ -44,3 +44,9 @@ Adaptive Survey Sampling", in Targeted Learning in Data Science,
 Springer, doi:10.1007/978-3-319-65304-4_29.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+morie_tlsurvy_inclusion_probabilities(V = runif(20), n = 10,
+                                      design = "adaptive",
+                                      influence = abs(rnorm(20)))
+}
