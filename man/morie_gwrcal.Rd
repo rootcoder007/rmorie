@@ -23,3 +23,11 @@ Minimises CV, AIC or AICc over a bandwidth grid. AICc is the default: the small-
 A list with \code{bandwidth}, \code{score},   \code{criterion}, \code{kernel}, \code{adaptive}, \code{search},   \code{grid}, \code{profile}, \code{at_boundary},   \code{coefficients}, \code{fitted}, \code{residuals},   \code{tr_S}, \code{sigma2}, \code{aicc}, \code{r_squared},   \code{ols_aicc}, \code{aicc_improvement}, \code{method},   \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 30
+X <- cbind(1, rnorm(n))
+coords <- matrix(runif(2 * n), n, 2)
+y <- X \%*\% c(1, 2) + rnorm(n)
+morie_gwrcal(y, X, coords, n_points = 8L)
+}

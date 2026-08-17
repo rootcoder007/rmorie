@@ -27,3 +27,7 @@ A step of the bigtm_native implementation. No other function in the package call
 A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta}, \code{N_ijk}, \code{N_jk}, \code{T}, \code{V}, \code{prior}, \code{iterations}, \code{burn_in}, \code{samples_kept}, \code{method}, \code{caveat}.
 }
 \keyword{internal}
+\examples{
+docs <- list(c(0, 1, 2, 0), c(1, 2, 0, 1), c(2, 0, 1, 2))
+gibbs_bigram_topic(docs, T = 2, V = 3, iters = 20L, burn = 5L)
+}

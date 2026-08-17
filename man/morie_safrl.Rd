@@ -23,3 +23,8 @@ A step of the safrl_native implementation. No other function in the package call
 The value of \code{.safrl_finish}.
 }
 \keyword{internal}
+\examples{
+g <- c(1, -1)
+H <- diag(2)
+morie_safrl(g, H)
+}

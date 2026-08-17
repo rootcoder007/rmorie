@@ -20,3 +20,9 @@ A step of the rdrobu_native implementation. No other function in the package cal
 The value of \code{morie_rdrobu}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- runif(200, -1, 1)
+y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+morie_calonico_cattaneo_titiunik(y, x)
+}
