@@ -23,3 +23,11 @@ ProxGrad(f, grad_f, prox_g, x0, lr, n_iter = 200L, relaxation = 1)
 A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr}, \code{relaxation}, \code{step_norm}, \code{method}.
 }
 \keyword{internal}
+\examples{
+f <- function(x) 0.5 * sum((x - c(2, -1))^2)
+gf <- function(x) x - c(2, -1)
+soft <- function(x, t) sign(x) * pmax(abs(x) - t, 0)
+prox <- function(x, t) soft(x, 0.5 * t)
+r <- ProxGrad(f, gf, prox, x0 = c(0, 0), lr = 0.5)
+str(r, max.level = 1)
+}

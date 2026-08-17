@@ -24,3 +24,13 @@ standard Gaussian one, stated so nothing is attributed to the book
 that the book does not say:
 score(G) = sum_j [-n/2 (log(2 pi s2_j) + 1)] - (log n / 2) k.
 }
+\examples{
+set.seed(1)
+n <- 60
+x <- rnorm(n)
+y <- 0.8 * x + rnorm(n, 0, 0.5)
+d <- cbind(x, y)
+dag <- rbind(c("x", "y"))
+r <- morie_bicdag(d, dag, names = c("x", "y"))
+str(r, max.level = 1)
+}

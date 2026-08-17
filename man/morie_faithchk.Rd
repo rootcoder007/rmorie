@@ -22,3 +22,7 @@ list(dseparated, indep, faithful, markov, violation)
 The printed formulation is X indep_P Y | Z implies X indep_G Y | Z:
 an independence in the DISTRIBUTION must be reflected in the GRAPH.
 }
+\examples{
+dag <- rbind(c("x", "z"), c("z", "y"))
+morie_faithchk(dag, "x", "y", "z", indep = TRUE)
+}

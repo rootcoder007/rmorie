@@ -22,3 +22,13 @@ Optimal-overlap estimands and their trimming rules
 A list with \code{estimate}, \code{osate}, \code{ate_full},   \code{owate}, \code{owate_weights}, \code{alpha}, \code{gamma},   \code{keep}, \code{n}, \code{n_kept}, \code{n_trimmed},   \code{no_trimming}, \code{variance_bound},   \code{variance_bound_full}, \code{estimand}, \code{note},   \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 120
+X <- rnorm(n)
+e <- plogis(0.8 * X)
+w <- rbinom(n, 1, e)
+y <- 1 + 0.8 * w + X + rnorm(n, 0, 0.5)
+r <- morie_tmlefp(y, w, e)
+str(r, max.level = 1)
+}

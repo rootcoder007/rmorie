@@ -17,3 +17,6 @@ Names the consequence of a parameter rule for the realised draw.
 A list with \code{rule}, \code{draws} and \code{reason}.
 }
 \keyword{internal}
+\examples{
+poltrx_continuity_regime("m_squared")
+}

@@ -20,3 +20,10 @@ OtAdapt(Xs, Xt, epsilon, n_iter = 1000L)
 A list with \code{Xs_adapted}, \code{gamma}, \code{cost}, \code{transport_cost}, \code{row_error}, \code{col_error}, \code{ns}, \code{nt}, \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+Xs <- matrix(rnorm(20), 10, 2)
+Xt <- matrix(rnorm(24, 2), 12, 2)
+r <- OtAdapt(Xs, Xt, epsilon = 0.5, n_iter = 200)
+str(r, max.level = 1)
+}

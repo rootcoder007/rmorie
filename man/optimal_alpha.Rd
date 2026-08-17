@@ -21,3 +21,8 @@ Solves gamma = 2 E[k(X) | k(X) < gamma] by the fixed-point iteration the equatio
 A list with \code{alpha}, \code{gamma}, \code{keep},   \code{trim}, \code{no_trimming}, \code{k}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+e <- runif(100, 0.02, 0.98)
+str(optimal_alpha(e), max.level = 1)
+}

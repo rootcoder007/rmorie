@@ -17,3 +17,6 @@ The rung names, actions, and questions are transcribed from the
 printed table. needsgraph and needsscm follow the book's own account
 of what each rung requires.
 }
+\examples{
+morie_causrung(2)
+}

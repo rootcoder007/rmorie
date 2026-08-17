@@ -27,3 +27,9 @@ penalty \\' \\' Q(x; mu) = f(x) + mu sum_i max(0, g_i(x))^2, minimised for an \\
 A list with \code{x}, \code{f}, \code{penalty}, \code{violation}, \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner}, \code{method}.
 }
 \keyword{internal}
+\examples{
+f <- function(x) sum(x^2)
+cons <- list(function(x) 1 - x[1])
+r <- PenaltyMin(f, cons, x0 = c(2, 0), mu = 1)
+str(r, max.level = 1)
+}
