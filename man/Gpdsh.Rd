@@ -38,3 +38,7 @@ Kullback and Leibler (1951), On information and
 sufficiency, Annals of Mathematical Statistics 22(1):79-86.
 \doi{10.1214/aoms/1177729694}
 }
+\examples{
+set.seed(1)
+Gpdsh(rnorm(30), window = 10)
+}

@@ -33,3 +33,6 @@ Formula: repeat a <- A' h, h <- A a until max|dh| <= tol.
 Kleinberg (1999), Journal of the ACM 46(5):604-632.
 \doi{10.1145/324133.324140}
 }
+\examples{
+Hubsa(y = c(1, 1, 1), A = matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
+}
