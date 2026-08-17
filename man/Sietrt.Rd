@@ -46,3 +46,7 @@ Pastor-Satorras, R. & Vespignani, A. (2001). Epidemic dynamics
 and endemic states in complex networks. Physical Review E 63, 066117,
 eqs. (7)-(10). \doi{10.1103/PhysRevE.63.066117}
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+Sietrt(G, beta = 0.3, gamma = 0.1, initial = c(1, 0, 0))
+}

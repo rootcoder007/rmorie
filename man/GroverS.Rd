@@ -30,3 +30,8 @@ k* = round(pi/(4 theta) - 1/2).
 Grover (1996), A fast quantum mechanical algorithm for
 database search, STOC '96, pp. 212-219. \doi{10.1145/237814.237866}
 }
+\examples{
+oracle <- rep(0, 8)
+oracle[4] <- 1
+GroverS(oracle, N = 8)
+}
