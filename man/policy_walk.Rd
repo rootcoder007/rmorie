@@ -30,3 +30,9 @@ A step of the birl_native implementation. Called by \code{birl}. See the file he
 A list with \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{final_policy}.
 }
 \keyword{internal}
+\examples{
+T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
+obs <- list(c(1L, 1L), c(2L, 2L), c(1L, 1L))
+r <- policy_walk(T, obs, gamma = 0.9, n_iter = 100, seed = 1)
+str(r, max.level = 1)
+}

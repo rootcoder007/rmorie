@@ -19,3 +19,10 @@ Forward-backward posterior genotype probabilities
 A list of per-individual posterior matrices.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+g <- lapply(1:6, function(i) c(rbinom(1, 1, 0.5), NA, rbinom(1, 1, 0.5)))
+pos <- c(0, 0.1, 0.2)
+r <- morie_mqtmpl_hmm_genotype_probabilities(g, pos)
+str(r[[1]])
+}

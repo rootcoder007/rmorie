@@ -22,3 +22,11 @@ A step of the smatch_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{age_effects}, \code{individual_effects}, \code{coef}, \code{converged}, \code{iterations}, \code{n_rows}, \code{n_people}, \code{method}, \code{identical_to}.
 }
 \keyword{internal}
+\examples{
+cases <- list(
+  list(start = 0, end = 365, exposure = 100, events = c(110, 250)),
+  list(start = 0, end = 365, exposure = 200, events = c(215)),
+  list(start = 0, end = 365, exposure = 50, events = c(60, 70)))
+r <- morie_smatch_sccs_poisson_fit(cases, risk_periods = list(c(0, 30)))
+str(r, max.level = 1)
+}
