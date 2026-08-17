@@ -18,3 +18,10 @@ Print method for \code{morie_etas} objects
 The value of \code{invisible}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+times <- sort(runif(80, 0, 200))
+fit <- morie_crim_etas(times)
+out <- capture.output(print(fit))
+any(grepl("ETAS", out))
+}
