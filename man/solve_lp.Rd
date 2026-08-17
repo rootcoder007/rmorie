@@ -24,3 +24,9 @@ A step of the mehtad_native implementation. Called by \code{morie_mehtad}. See t
 A list with \code{estimate}, \code{x}, \code{y}, \code{s}, \code{mu}, \code{objective}, \code{dual_objective}, \code{iterations}, \code{corrector}, \code{primal_residual}, \code{dual_residual}, \code{converged}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+A <- matrix(c(1, 1, 1, 0, 0, 1, 0, 1), 2, 4, byrow = TRUE)
+b <- c(4, 2)
+cc <- c(-1, -2, 0, 0)
+solve_lp(A, b, cc)
+}

@@ -19,3 +19,6 @@ Positional encodings, FFN, layer norm (Eq 2.13-2.14, 2.17-2.18)
 A list with \code{estimate}, \code{wavelength}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_positional_sin(5, 0, 16)
+}

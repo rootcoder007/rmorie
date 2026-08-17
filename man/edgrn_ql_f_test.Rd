@@ -21,3 +21,6 @@ A step of the edgrn_native implementation. No other function in the package call
 A list with \code{estimate}, \code{F}, \code{df1}, \code{df2}, \code{p_value}, \code{lrt_p_value}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+edgrn_ql_f_test(5.0, 1, 1.2, 10)
+}

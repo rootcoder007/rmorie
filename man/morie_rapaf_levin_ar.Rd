@@ -18,3 +18,6 @@ Computes Levin\'s p(R - 1) / (1 + p(R - 1)) from the population exposure prevale
 Numeric attributable risk.
 }
 \keyword{internal}
+\examples{
+morie_rapaf_levin_ar(0.2, 2.5)
+}

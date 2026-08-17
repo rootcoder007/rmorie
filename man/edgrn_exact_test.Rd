@@ -21,3 +21,6 @@ A step of the edgrn_native implementation. No other function in the package call
 A list with \code{p_value}, \code{logFC}, \code{dispersion}, \code{note}.
 }
 \keyword{internal}
+\examples{
+edgrn_exact_test(10, 25, 1000, 1000, 0.1)
+}

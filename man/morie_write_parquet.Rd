@@ -20,3 +20,8 @@ morie_write_parquet(df, path, compression = "snappy")
 Native Parquet writer: single row group, PLAIN encoding, all columns
 OPTIONAL. Output is read back unchanged by pyarrow and nanoparquet.
 }
+\examples{
+df <- data.frame(a = 1:3, b = c("x", "y", "z"), stringsAsFactors = FALSE)
+p <- tempfile(fileext = ".parquet")
+morie_write_parquet(df, p)
+}

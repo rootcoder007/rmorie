@@ -31,3 +31,8 @@ The covariance matrix.
     Machine Learning." MIT Press, chapters 2 and 4.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(6), 3, 2)
+morie_hyper2_kernel(X, X, log_ls = 0, log_sf = 0)
+}
