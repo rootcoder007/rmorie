@@ -23,3 +23,11 @@ One depth of Algorithm 1
 Updated node feature matrix.
 }
 \keyword{internal}
+\examples{
+adj <- list(`0` = c(`1` = 1, `3` = 1), `1` = c(`0` = 1, `2` = 1),
+            `2` = c(`1` = 1, `3` = 1), `3` = c(`2` = 1, `0` = 1))
+H <- matrix(runif(12), 4, 3)
+W <- matrix(rnorm(6 * 4, 0, 0.3), nrow = 4, ncol = 6)
+Z <- sage_layer(H, adj, W, how = "mean")
+dim(Z)
+}
