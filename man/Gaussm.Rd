@@ -38,3 +38,6 @@ Differential Privacy, Foundations and Trends in Theoretical
 Computer Science 9(3-4):211-407, Theorem A.1.
 \doi{10.1561/0400000042}
 }
+\examples{
+Gaussm(c(1, 2, 3), l2_sens = 1, epsilon = 0.5, delta = 1e-5)
+}

@@ -42,3 +42,13 @@ VanRaden (2008), Efficient methods to compute genomic
 predictions, Journal of Dairy Science 91(11):4414-4423.
 \doi{10.3168/jds.2007-0980}
 }
+\examples{
+set.seed(1)
+n <- 30; q <- 5
+X <- cbind(1, rnorm(n))
+Z <- matrix(rbinom(n * q, 1, 0.5), n, q)
+G <- diag(q)
+u <- rnorm(q)
+y <- X \%*\% c(1, 0.5) + Z \%*\% u + rnorm(n)
+Gblupr(y, X, Z, G)
+}

@@ -36,3 +36,6 @@ analysis of lattice systems, JRSS B 36(2):192-236,
 (1991), Annals of the Institute of Statistical Mathematics
 43(1):1-20. \doi{10.1007/BF00116466}
 }
+\examples{
+Icarbm(matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE))
+}

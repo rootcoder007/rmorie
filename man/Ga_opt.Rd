@@ -34,3 +34,8 @@ one parent and a suffix from another; a mutation is then added.
 Holland (1975), Adaptation in Natural and Artificial
 Systems, University of Michigan Press.
 }
+\examples{
+set.seed(1)
+Ga_opt(function(x) -sum(x^2), population = matrix(rnorm(20), 10, 2),
+       generations = 10)
+}

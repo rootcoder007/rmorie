@@ -42,3 +42,8 @@ Neal (2011), MCMC using Hamiltonian dynamics, in Brooks,
 Gelman, Jones and Meng (eds), Handbook of Markov Chain Monte Carlo,
 CRC Press, ch. 5. \doi{10.1201/b10905}
 }
+\examples{
+set.seed(1)
+Hmcsam(function(x) -0.5 * sum(x^2), function(x) -x, x0 = c(0, 0),
+       n_iter = 50)
+}

@@ -34,3 +34,8 @@ assessing discriminant validity in variance-based structural
 equation modeling, Journal of the Academy of Marketing Science
 43(1):115-135, eq. (6). \doi{10.1007/s11747-014-0403-8}
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(80), 20, 4)
+Hetero(X, construct_assignment = c(1, 1, 2, 2))
+}

@@ -38,3 +38,7 @@ Makhorin, GNU Linear Programming Kit reference manual;
 Bland (1977), Mathematics of Operations Research 2(2):103-107.
 \doi{10.1287/moor.2.2.103}
 }
+\examples{
+Glpopt(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
+       b = c(4, 2, 3))
+}
