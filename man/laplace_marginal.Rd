@@ -36,3 +36,9 @@ doi:10.1201/9780203492024. The sparse GMRF computations the
 method rests on.
 }
 \keyword{internal}
+\examples{
+lm <- laplace_marginal(
+  log_joint = function(x, theta) -0.5 * (x - theta)^2,
+  x_grid = seq(-4, 6, by = 0.05), theta = 2)
+abs(lm$mean - 2) < 0.01
+}

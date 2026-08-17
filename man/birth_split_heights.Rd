@@ -21,3 +21,7 @@ A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcm
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+birth_split_heights(h_j = 2, u = 0.6, s_left = 0, s_star = 0.5,
+                    s_right = 1)
+}
