@@ -32,3 +32,8 @@ rendering.  ADMIXTURE maximises that likelihood by block relaxation;
 this routine uses the EM algorithm for the same likelihood (FRAPPE,
 Tang et al. 2005).
 }
+\examples{
+set.seed(1)
+G <- matrix(rbinom(50, 2, 0.3), 10, 5)
+Admixq(G, K = 2, steps = 20)
+}
