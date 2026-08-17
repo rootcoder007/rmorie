@@ -17,3 +17,6 @@ numeric vector of log-densities (-Inf off support, eq. 3.8)
 \description{
 GEV log-density (Coles 2001 eq. 3.7 integrand; Gumbel eq. 3.9)
 }
+\examples{
+morie_evt_gev_logpdf(x = c(1, 2, 3), mu = 0, sigma = 1, xi = 0.1)
+}

@@ -25,3 +25,7 @@ A step of the dpoF_native implementation. No other function in the package calls
 A list with \code{estimate}, \code{loss}, \code{losses}, \code{reward_w}, \code{reward_l}, \code{margin}, \code{grad_weight}, \code{accuracy}, \code{beta}, \code{n}, \code{model}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_dpoF(logp_w = c(-1, -2), logp_l = c(-3, -4),
+           logp_ref_w = c(-1.5, -2.5), logp_ref_l = c(-2.5, -3.5))
+}

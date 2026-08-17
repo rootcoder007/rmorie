@@ -30,3 +30,7 @@ and then bisected.
 \references{
 Heffernan & Tawn (2004), JRSS B 66(3):497-546.
 }
+\examples{
+set.seed(1)
+Evhpvr(matrix(rnorm(40), 20, 2), u = 1)
+}
