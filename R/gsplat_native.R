@@ -93,7 +93,7 @@ alpha_composite <- function(colours, alphas, depths = NULL) {
   if (nrow(C) != length(a))
     stop(paste0("gsplat: ", nrow(C), " colours but ", length(a),
                 " alphas"))
-  if (any(a < 0 || a > 1))
+  if (any(a < 0 | a > 1))
     stop("gsplat: alphas must lie in [0,1]")
   order <- if (is.null(depths)) seq_along(a) - 1L
            else order(as.numeric(depths), decreasing = FALSE) - 1L

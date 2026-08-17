@@ -21,3 +21,10 @@ A step of the blip2v_native implementation. No other function in the package cal
 A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches}, \code{compression}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+Q <- matrix(rnorm(8), 2, 4)
+Im <- matrix(rnorm(12), 3, 4)
+W <- matrix(rnorm(16), 4, 4)
+qformer_attend(Q, Im, W, W, W)
+}

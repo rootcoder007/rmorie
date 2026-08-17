@@ -19,3 +19,6 @@ A step of the blip2v_native implementation. No other function in the package cal
 A list with \code{trainable}, \code{total}, \code{fraction}, \code{frozen_fraction}, \code{note}.
 }
 \keyword{internal}
+\examples{
+trainable_fraction(1e6, 3e8, 7e9)
+}

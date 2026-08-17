@@ -29,3 +29,9 @@ A numeric scalar.
     sets of vectors." Acta Crystallographica A32(5), 922-923.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+P <- matrix(rnorm(15), 5, 3)
+Q <- P + 0.1
+morie_alfrf2_rmsd(P, Q)
+}

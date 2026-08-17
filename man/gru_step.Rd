@@ -24,3 +24,10 @@ One GRU update
 New hidden state.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+h <- c(0, 0)
+x <- c(1, -1)
+W <- matrix(rnorm(4), 2, 2)
+gru_step(x, h, W, W, W, W, W, W)
+}

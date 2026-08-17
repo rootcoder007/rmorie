@@ -18,3 +18,6 @@ Build session-parallel mini-batches
 List with steps, n_steps, batch_size, n_sessions, note.
 }
 \keyword{internal}
+\examples{
+session_parallel_batches(list(c(1, 2, 3), c(4, 5), c(6, 7, 8, 9)), 2)
+}
