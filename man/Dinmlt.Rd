@@ -46,3 +46,7 @@ constant output.
 Caron et al. (2021), Emerging Properties in
 Self-Supervised Vision Transformers, ICCV 2021:9650-9660.
 }
+\examples{
+set.seed(1)
+r <- Dinmlt(image = rnorm(10)); TRUE
+}
