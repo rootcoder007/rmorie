@@ -47,3 +47,11 @@ implemented in :mod:`ncfRS`.
 """
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+d <- 3
+W1 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+W2 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+m <- ngcf_message(rnorm(d), rnorm(d), W1, W2, p_ui = 0.5)
+length(m) == d
+}

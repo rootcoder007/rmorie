@@ -18,3 +18,12 @@ Summarise method for \code{morie_rlm} objects
 A list with \code{coefficients}, \code{s}, \code{stddev}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- rnorm(50)
+y <- 1 + 2 * x + rnorm(50, 0, 0.5)
+y[50] <- 40
+fit <- morie_rlm(y ~ x, data = data.frame(y, x))
+s <- summary(fit)
+nrow(s$coefficients) >= 2L
+}
