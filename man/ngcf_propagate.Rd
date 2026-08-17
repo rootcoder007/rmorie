@@ -47,3 +47,13 @@ implemented in :mod:`ncfRS`.
 """
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+d <- 3
+E <- matrix(rnorm(12), 4, 3)
+adjacency <- list(c(2, 4), c(1, 3), c(2, 4), c(1, 3))
+W1 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+W2 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+Z <- ngcf_propagate(E, adjacency, W1, W2)
+dim(Z)
+}
