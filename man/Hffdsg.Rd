@@ -34,3 +34,6 @@ Hoeffding (1963), Probability inequalities for sums of
 bounded random variables, JASA 58(301):13-30, Theorem 2.
 \doi{10.1080/01621459.1963.10500830}
 }
+\examples{
+Hffdsg(a = 0, b = 1, n = 100, t = 0.1)
+}

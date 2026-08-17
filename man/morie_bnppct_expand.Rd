@@ -29,3 +29,6 @@ A list with the widened lo and hi.
     through morie_slbpdg.
 }
 \keyword{internal}
+\examples{
+morie_bnppct_expand(function(x) x - 1, lo = 0, hi = 0.5)
+}

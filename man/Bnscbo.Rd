@@ -35,3 +35,8 @@ Distributions. Springer, New York. Worst-case form as equation (2.11)
 of Molinari, F. (2021), Handbook of Econometrics 7A
 (arXiv:2004.11751 p. 17).
 }
+\examples{
+set.seed(1)
+Bnscbo(y_components = matrix(rnorm(80), 40, 2), D = rbinom(40, 1, 0.5),
+       X = c(0.5, 0.5))
+}

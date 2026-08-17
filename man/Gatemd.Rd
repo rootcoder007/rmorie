@@ -34,3 +34,8 @@ Velickovic, Cucurull, Casanova, Romero, Lio and Bengio
 (2018), Graph attention networks, ICLR 2018, eqs. (1)-(4) and (6).
 arXiv:1710.10903
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+X <- matrix(rnorm(6), 3, 2)
+Gatemd(G, X)
+}
