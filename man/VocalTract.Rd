@@ -21,3 +21,8 @@ A step of the rangayyan_cep implementation. No other function in the package cal
 A list with \code{response}, \code{cepstrum}, \code{cutoff}, \code{pitch_period}, \code{pitch_hz}, \code{peak_quefrency}, \code{fs}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+y <- sin(2 * pi * 120 * (0:1599) / 8000) + rnorm(1600) * 0.01
+VocalTract(y, fs = 8000)
+}

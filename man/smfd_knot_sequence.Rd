@@ -20,3 +20,6 @@ Mirrors Python knot_sequence(xmin, xmax, nseg, degree) in smfd.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+smfd_knot_sequence(0, 1, nseg = 10L, degree = 3L)
+}

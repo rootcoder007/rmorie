@@ -21,3 +21,7 @@ A step of the ocrwit_native implementation. No other function in the package cal
 A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{note}.
 }
 \keyword{internal}
+\examples{
+boxes <- matrix(c(10, 10, 60, 30, 70, 10, 110, 30), 2, 4, byrow = TRUE)
+segment_layout_boxes(boxes, c(0, 1), width = 200, height = 100)
+}
