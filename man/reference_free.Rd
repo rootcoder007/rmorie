@@ -20,3 +20,9 @@ A step of the comet_native implementation. No other function in the package call
 A list with \code{score}, \code{reference_used}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+hyp <- rnorm(4); src <- rnorm(4)
+W <- matrix(rnorm(16, 0, 0.3), 1, 16)
+reference_free(hyp, src, W)
+}

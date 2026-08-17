@@ -27,3 +27,13 @@ Eq. (9.9)-(9.13): one split\'s TMLE at fixed levels
 \code{psi}, \code{D}, info with \code{eps} and   \code{max_weight}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 60
+W <- matrix(rnorm(n * 2), n, 2)
+A <- sample(0:2, n, replace = TRUE)
+y <- plogis(0.5 * A + W[, 1] + rnorm(n, 0, 0.4))
+r <- split_specific_tmle(y, A, W, levels = 0:2, aL = 0, aH = 2,
+                         fit_rows = seq_len(n), est_rows = seq_len(n))
+str(r, max.level = 1)
+}

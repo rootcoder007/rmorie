@@ -132,7 +132,7 @@
   X <- if (ncol(W) > 0) cbind(1, W) else matrix(1, nrow = n, ncol = 1)
   cat_fit <- function(mask) {
     b <- as.numeric(suppressWarnings(
-      coef(glm(mask[rows] ~ .,
+      coef(glm(mask[rows] ~ . - 1,
                data = data.frame(X[rows, , drop = FALSE]),
                family = binomial()))))
     .tmldta_expit(as.numeric(X %*% b))
@@ -167,7 +167,7 @@
 discover_levels <- function(y, A, W, levels, rows = NULL,
                             eval_rows = NULL, ridge = 1e-8) {
   n <- length(y)
-  if (is.null(rows)) rows <- seq_len(n) else rows <- as.integer(rows) + 1L
+  if (is.null(rows)) rows <- seq_len(n) else rows <- as.integer(rows)
   if (is.null(eval_rows)) eval_rows <- rows
   fq <- .fit_q(y, A, W, levels, rows, ridge)
   means <- vapply(levels, function(a)

@@ -26,3 +26,11 @@ A step of the dreamr_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{returns}, \code{objective}, \code{value_loss}, \code{residual}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{gamma}, \code{lam}, \code{estimator}, \code{method}.
 }
 \keyword{internal}
+\examples{
+am <- function(s) 1
+tr <- function(s, a) s * 0.9 + 0.1
+rm <- function(s) sum(s)
+vm <- function(s) sum(s) * 2
+r <- morie_dreamr(c(1, 0.5), am, tr, rm, vm, horizon = 5)
+str(r, max.level = 1)
+}

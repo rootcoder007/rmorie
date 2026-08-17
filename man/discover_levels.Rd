@@ -23,3 +23,12 @@ predicted outcome
 \code{aL}, \code{aH}, info with \code{means} and   \code{spread}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 60
+W <- matrix(rnorm(n * 2), n, 2)
+A <- sample(0:2, n, replace = TRUE)
+y <- plogis(0.5 * A + W[, 1] + rnorm(n, 0, 0.4))
+r <- discover_levels(y, A, W, levels = 0:2)
+str(r, max.level = 1)
+}
