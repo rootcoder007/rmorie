@@ -18,3 +18,13 @@ Print method for \code{morie_iv} objects
 The value of \code{invisible}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 200
+z <- rnorm(n)
+xend <- 0.8 * z + rnorm(n)
+yy <- 1 + 2 * xend + rnorm(n)
+df <- data.frame(y = yy, x = xend, z = z)
+fit <- morie_iv_2sls(df, "y", "x", "z")
+print(fit)
+}
