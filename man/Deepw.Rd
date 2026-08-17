@@ -54,3 +54,7 @@ proportional to degree.
 Perozzi, Al-Rfou & Skiena (2014), DeepWalk, KDD
 2014:701-710.
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0), 4, 4, byrow = TRUE)
+Deepw(G, dim = 4, walk_len = 5, n_walks = 2)
+}

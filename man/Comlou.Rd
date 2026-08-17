@@ -33,3 +33,6 @@ rather than merely good.
 Blondel, Guillaume, Lambiotte & Lefebvre (2008),
 J. Stat. Mech. 2008(10):P10008.
 }
+\examples{
+Comlou(matrix(c(0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0), 4, 4, byrow = TRUE))
+}

@@ -21,3 +21,6 @@ A step of the co2RF_native implementation. No other function in the package call
 A list with \code{estimate}, \code{sarf}, \code{alpha_prime}, \code{method_used}, \code{C}, \code{C0}, \code{N}, \code{erf_adjustment}, \code{method}.
 }
 \keyword{internal}
+\examples{
+radiative_forcing_co2(C = 420)
+}

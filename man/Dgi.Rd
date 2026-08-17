@@ -35,3 +35,9 @@ log 2 -- the value that pins the sign convention.
 \references{
 Velickovic et al. (2019), Deep Graph Infomax, ICLR 2019.
 }
+\examples{
+set.seed(1)
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+X <- matrix(rnorm(6), 3, 2)
+Dgi(G, X)
+}

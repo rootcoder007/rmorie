@@ -50,3 +50,7 @@ at 1e-9 forever and tell nobody anything.
 Perozzi, Al-Rfou & Skiena (2014), DeepWalk, KDD
 2014:701-710.
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0), 4, 4, byrow = TRUE)
+Deepwk(G, dim = 4, walk_len = 5, n_walks = 2)
+}

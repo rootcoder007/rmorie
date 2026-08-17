@@ -19,3 +19,6 @@ Equation (1.3) of Christiano & Fitzgerald (2003): \code{B_0 = (b-a)/pi} and \cod
 A list with \code{B}, \code{a}, \code{b}, \code{p_low},   \code{p_high}, \code{B0} and a note.
 }
 \keyword{internal}
+\examples{
+morie_crfflt_ideal_weights(p_low = 3, p_high = 6, n = 100)
+}
