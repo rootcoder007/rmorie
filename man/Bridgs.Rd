@@ -29,3 +29,12 @@ Meng, X.-L. and Wong, W. H. (1996), Statistica Sinica
 6, 831-860, eq. (3.5), Sec. 4 (local:
 fetched-wave3/meng-wong-1996-bridge-sampling-statsinica.pdf).
 }
+\examples{
+set.seed(2)
+d1 <- rnorm(400, 0, 1)
+d2 <- rnorm(400, 0.5, 1.2)
+r <- Bridgs(d1, d2,
+            log_q1 = function(x) -0.5 * x^2,
+            log_q2 = function(x) -0.5 * ((x - 0.5) / 1.2)^2)
+str(r, max.level = 1)
+}

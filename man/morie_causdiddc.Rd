@@ -19,3 +19,12 @@ The two-way fixed effects coefficient \code{beta_fe} and the paper\'s \code{DID_
 A list mirroring the Python RichResult payload:   \code{estimate} (DID_M), \code{beta_fe}, \code{did_m},   \code{weights}, \code{n_negative}, \code{negative_mass},   \code{weight_sum}, \code{n_switches}, \code{gap}, \code{n},   \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+n_g <- 6; n_t <- 4
+grid <- expand.grid(g = seq_len(n_g), t = seq_len(n_t))
+D <- as.numeric(grid$g <= 2 & grid$t >= 3)
+Y <- 1 + 0.5 * grid$t + 2 * D + rnorm(nrow(grid), 0, 0.2)
+r <- morie_causdiddc(Y, D, grid$g, grid$t)
+str(r, max.level = 1)
+}

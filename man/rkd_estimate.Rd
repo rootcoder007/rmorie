@@ -25,3 +25,11 @@ A step of the bnskt2_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{tau}, \code{outcome_kink}, \code{policy_kink}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{bandwidth}, \code{order}, \code{kernel}, \code{fuzzy}, \code{denominator_source}, \code{method}, \code{requires}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+v <- runif(300, -1, 1)
+y <- 1 + 0.5 * v + 0.8 * pmax(v, 0) + rnorm(300, 0, 0.1)
+r <- rkd_estimate(v, y, kink = 0, bandwidth = 0.5,
+                  policy_slope_change = 1)
+str(r, max.level = 1)
+}

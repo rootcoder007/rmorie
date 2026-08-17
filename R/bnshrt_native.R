@@ -43,7 +43,7 @@ morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
   g <- as.numeric(gamma); a <- as.numeric(alpha)
   if (!(link %in% c("logit", "probit")))
     stop("bnshrt: link must be logit or probit")
-  Ff <- if (link == "logit") .logit else pnorm
+  Ff <- if (link == "logit") .bnshrt_logistic else pnorm
   out <- list()
   for (code in seq_len(2L ^ T_) - 1L) {
     seq_ <- integer(T_)
@@ -197,7 +197,9 @@ morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
     b <- if (is.null(beta_fixed)) c(bv) else c(bv, as.numeric(beta_fixed))
     r <- morie_in_identified_set(freq, b, gv, x, alpha_grid, link = link,
                                  tol = tol)
-    disc[[paste(bv, gv, sep = "|")]] <- r$discrepancy
+    # collapse the beta vector first: paste() vectorises over a
+    # multi-entry beta and [[<- cannot take two keys
+    disc[[paste(paste(bv, collapse = ","), gv, sep = "|")]] <- r$discrepancy
     if (r$feasible) keep[[length(keep) + 1L]] <- c(bv, gv)
   }
   if (length(keep) == 0L)

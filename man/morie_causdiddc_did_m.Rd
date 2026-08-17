@@ -14,3 +14,12 @@ The \code{DID_M} estimator of de Chaisemartin & D\'Haultfoeuille (2020): for eac
 A list with \code{estimate}, \code{did_m}, \code{switches},   \code{n_switches}, \code{n_switching_obs}, \code{n},   \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+n_g <- 6; n_t <- 4
+grid <- expand.grid(g = seq_len(n_g), t = seq_len(n_t))
+D <- as.numeric(grid$g <= 2 & grid$t >= 3)
+Y <- 1 + 0.5 * grid$t + 2 * D + rnorm(nrow(grid), 0, 0.2)
+r <- morie_causdiddc_did_m(Y, D, grid$g, grid$t)
+str(r, max.level = 1)
+}

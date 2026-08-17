@@ -21,3 +21,9 @@ A step of the bnskt2_native implementation. No other function in the package cal
 A list with \code{slope_change}, \code{relative}, \code{slope_right}, \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth}, \code{interpretation}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+v <- runif(400, -1, 1)
+r <- density_kink_test(v, kink = 0, bandwidth = 0.5)
+str(r, max.level = 1)
+}
