@@ -30,3 +30,6 @@ and Larcker's rule is AVE >= 0.5 with CR >= 0.7.
 Fornell & Larcker (1981), J. Marketing Research
 18(1):39-50.
 }
+\examples{
+Convgs(loadings = c(0.7, 0.8, 0.75, 0.6))
+}

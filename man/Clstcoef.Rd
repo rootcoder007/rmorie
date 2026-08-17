@@ -27,3 +27,6 @@ the mean over nodes with \code{k_v >= 2}.
 \references{
 Watts, D. J. & Strogatz, S. H. (1998). Nature 393:440-442.
 }
+\examples{
+Clstcoef(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3))
+}
