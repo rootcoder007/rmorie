@@ -115,7 +115,7 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
   w <- numeric(length(names_v))
   for (idx in seq_along(names_v)) {
     nm <- names_v[idx]
-    Z <- as.matrix(Z_per_metapath[[nm]])
+    Z <- do.call(rbind, lapply(Z_per_metapath[[nm]], as.numeric))
     acc <- 0.0
     for (i in seq_len(nrow(Z))) {
       proj <- tanh(as.numeric(b) + as.numeric(W %*% Z[i, ]))
@@ -159,6 +159,7 @@ han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
   } else {
     feats <- lapply(H, as.numeric)
   }
+  if (is.null(names(feats))) names(feats) <- as.character(seq_along(feats))
   per <- list()
   for (name in names(metapaths)) {
     mp <- metapaths[[name]]
