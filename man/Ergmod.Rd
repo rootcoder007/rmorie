@@ -45,3 +45,7 @@ doi:10.2307/2289017; Hunter & Handcock (2006), Journal of
 Computational and Graphical Statistics 15(3):565-583,
 doi:10.1198/106186006X133069.
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+Ergmod(G, statistics = "edges", iters = 20)
+}

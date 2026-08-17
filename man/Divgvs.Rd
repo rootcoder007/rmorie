@@ -31,3 +31,8 @@ over all off-diagonal pairs: positive means the whole model passes.
 Fornell & Larcker (1981), J. Marketing Research
 18(1):39-50.
 }
+\examples{
+AVE <- c(0.6, 0.7)
+factor_correlations <- matrix(c(1, 0.4, 0.4, 1), 2, 2)
+Divgvs(AVE, factor_correlations)
+}

@@ -33,3 +33,6 @@ formula stays continuous.
 \references{
 McNeil & Frey (2000), J. Empirical Finance 7(3-4):271-300.
 }
+\examples{
+Evvarpot(u = 1, sigma = 0.5, xi = 0.1, zeta_u = 0.1, p = 0.99)
+}
