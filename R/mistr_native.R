@@ -49,8 +49,9 @@ morie_mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
 morie_mistr_swiglu <- function(x, W1, W2, W3) {
   W1 <- as.matrix(W1); W2 <- as.matrix(W2); W3 <- as.matrix(W3)
   x <- as.numeric(x)
-  a <- as.numeric(crossprod(c(1, x, 0) * 0, W1)[1, ]) +
-    as.numeric(x %*% W1)
+  # the old zero crossprod term used a wrongly sized vector and made
+  # every call non-conformable; the gate path is just x W1
+  a <- as.numeric(x %*% W1)
   b <- as.numeric(x %*% W3)
   if (length(a) != length(b))
     stop("mistr: W1 and W3 must have the same width")

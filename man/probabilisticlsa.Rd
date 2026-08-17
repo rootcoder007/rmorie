@@ -48,3 +48,9 @@ Dirichlet prior that removes the per-document parameter growth;
 implemented in lda.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n_dw <- matrix(rpois(30, 3), 6, 5)
+r <- probabilisticlsa(n_dw, K = 2, iters = 40)
+str(r, max.level = 1)
+}

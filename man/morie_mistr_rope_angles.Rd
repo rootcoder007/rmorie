@@ -18,3 +18,6 @@ RoPE angles
 Length d/2 vector of angles.
 }
 \keyword{internal}
+\examples{
+morie_mistr_rope_angles(d = 8)
+}

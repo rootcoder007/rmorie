@@ -22,3 +22,13 @@ Grouped-query attention
 An L x d matrix of per-token output.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+L <- 4
+Q <- matrix(rnorm(L * 8), L, 8)
+K <- matrix(rnorm(L * 4), L, 4)
+V <- matrix(rnorm(L * 4), L, 4)
+r <- morie_mistr_grouped_query_attention(Q, K, V, n_heads = 2,
+                                         n_kv_heads = 1)
+str(r, max.level = 1)
+}

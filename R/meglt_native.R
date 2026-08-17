@@ -49,6 +49,8 @@
 #' @return A list with \code{U}, \code{s}, \code{Vt}.
 #' @export
 .meglt_svd <- function(M) {
+  # .meglt_mat hands rows back as a LIST; svd() needs the matrix
+  if (is.list(M)) M <- do.call(rbind, lapply(M, as.numeric))
   s <- svd(M, nu = nrow(M), nv = ncol(M))
   list(U = s$u, s = s$d, Vt = s$v)
 }
@@ -158,9 +160,14 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
   for (it in seq_len(as.integer(iters))) {
     Amat <- do.call(rbind, A)
     sv <- .meglt_svd(Y)
-    U <- sv$U; s <- sv$s; Vt <- sv$Vt
+    U <- sv$U; s <- sv$s; V <- sv$Vt
     sh <- pmax(0, s - t)
-    X <- U %*% diag(sh) %*% Vt
+    # truncate to the singular values that exist and transpose V:
+    # the full-rank U was non-conformable with diag(sh), and Vt held
+    # the UNtransposed right factor
+    k <- length(sh)
+    X <- U[, seq_len(k), drop = FALSE] %*% diag(sh, k) %*%
+      t(V[, seq_len(k), drop = FALSE])
     res <- 0
     for (r in seq_len(nrow(obs))) {
       i <- obs[r, 1L]; j <- obs[r, 2L]

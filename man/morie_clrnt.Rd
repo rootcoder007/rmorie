@@ -31,3 +31,8 @@ A step of the clrnt_native implementation. No other function in the package call
 The value of \code{clrnt}.
 }
 \keyword{internal}
+\examples{
+r <- morie_clrnt(clint_in_vitro = 15, cl_h = 12, fu_blood = 0.1,
+                 fu_incubation = 0.8)
+str(r, max.level = 1)
+}

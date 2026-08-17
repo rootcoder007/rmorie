@@ -229,24 +229,21 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 
   state <- .ghc_rng(seed)
 
-  res <- .ghc_unif(state, K)
-  state <- res$st
-  tmp <- 0.5 + res$x
+  # .ghc_unif draws from the environment-backed stream directly;
+  # the res$st / res$x protocol belonged to a different rng API and
+  # made every draw error
+  tmp <- 0.5 + .ghc_unif(state, K)
   Pz <- tmp / sum(tmp)
 
   Pd_z <- matrix(0, nrow = K, ncol = D)
   for (z in seq_len(K)) {
-    res <- .ghc_unif(state, D)
-    state <- res$st
-    tmp <- 0.5 + res$x
+    tmp <- 0.5 + .ghc_unif(state, D)
     Pd_z[z, ] <- tmp / sum(tmp)
   }
 
   Pw_z <- matrix(0, nrow = K, ncol = V)
   for (z in seq_len(K)) {
-    res <- .ghc_unif(state, V)
-    state <- res$st
-    tmp <- 0.5 + res$x
+    tmp <- 0.5 + .ghc_unif(state, V)
     Pw_z[z, ] <- tmp / sum(tmp)
   }
 
@@ -379,7 +376,10 @@ m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
 #' @param Pw_z Passed to \code{.plsa_joint_probability}.
 #' @return The value of \code{sum}.
 #' @export
-.plsa_log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, Pd_z, Pw_z)
+# the public alias the reference arm exports; the old line re-bound
+# the INTERNAL name to itself, clobbering the real helper with
+# infinite recursion
+log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, Pd_z, Pw_z)
 #' joint_probability
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.

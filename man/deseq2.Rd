@@ -25,3 +25,15 @@ Full pipeline: size factors, gene-wise dispersion, trend, MAP dispersion (with o
 A list mirroring the Python \code{RichResult} payload.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+design <- as.list(rep(c("A", "B"), each = 3))
+counts <- lapply(1:30, function(g) {
+  base <- exp(rnorm(1, 5, 0.4))
+  fc <- if (g <= 8) 2.5 else 1
+  c(rnbinom(3, mu = base, size = 15),
+    rnbinom(3, mu = base * fc, size = 15))
+})
+r <- deseq2(counts, design)
+str(r, max.level = 1)
+}

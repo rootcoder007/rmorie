@@ -47,3 +47,10 @@ Dirichlet prior that removes the per-document parameter growth;
 implemented in lda.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n_dw <- matrix(rpois(30, 3), 6, 5)
+fit <- morie_plsa(n_dw, K = 2, iters = 10)
+post <- e_step(n_dw, fit$P_z, fit$P_d_given_z, fit$P_w_given_z)
+str(post)
+}

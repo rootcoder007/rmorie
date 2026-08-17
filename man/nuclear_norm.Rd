@@ -17,3 +17,7 @@ A step of the meglt_native implementation. Called by \code{morie_meglt}, \code{s
 A numeric value.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+nuclear_norm(matrix(rnorm(12), 3, 4))
+}
