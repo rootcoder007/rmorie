@@ -31,3 +31,9 @@ of mixed-model association methods", Nature Genetics 46(2),
 100-106.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(60), 20, 3)
+y <- X \%*\% c(1, -0.5, 0.2) + rnorm(20, 0, 0.3)
+str(ridge_fit(X, as.numeric(y), lam = 0.5), max.level = 1)
+}

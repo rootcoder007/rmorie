@@ -23,3 +23,11 @@ A step of the mambss_native implementation. Called by \code{selective_scan}. See
 A list with \code{h}, \code{y}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+N <- 3
+r <- selective_ssm_step(x = 0.5, h = rep(0, N),
+                        A = -abs(rnorm(N)), B = rnorm(N), C = rnorm(N),
+                        delta = 0.1)
+str(r, max.level = 1)
+}

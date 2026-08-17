@@ -19,3 +19,7 @@ A step of the cdaeRC_native implementation. Called by \code{fit_cdae}. See the f
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+rng <- .ghc_rng(1)
+corrupt(c(1, 0, 1, 1, 0), q = 0.4, rng)
+}

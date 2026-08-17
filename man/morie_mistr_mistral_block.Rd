@@ -23,3 +23,16 @@ One Mistral decoder block
 A list with output, attention_mask, and bookkeeping.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+L <- 4; d <- 8
+X <- matrix(rnorm(L * d, 0, 0.5), L, d)
+W <- function(o) matrix(rnorm(d * o, 0, 0.3), d, o)
+r <- morie_mistr_mistral_block(X, Wq = W(8), Wk = W(4), Wv = W(4),
+                               Wo = matrix(rnorm(8 * d, 0, 0.3), 8, d),
+                               W1 = W(16),
+                               W2 = matrix(rnorm(16 * d, 0, 0.3), 16, d),
+                               W3 = W(16),
+                               n_heads = 2, n_kv_heads = 1, window = 3)
+str(r, max.level = 1)
+}

@@ -17,3 +17,6 @@ Recombination fraction back to Morgans.
 Map distance in Morgans.
 }
 \keyword{internal}
+\examples{
+morie_inverse_haldane(morie_haldane(0.2))
+}

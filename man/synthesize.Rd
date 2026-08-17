@@ -26,3 +26,12 @@ A step of the memb_native implementation. Called by \code{morie_memb}. See the f
 Nothing; the function is called for its effect.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+target <- function(rows) lapply(rows, function(r)
+  {z <- c(sum(r), -sum(r)); p <- exp(z - max(z)); p / sum(p)})
+r <- synthesize(target, c = 0L, n_features = 3,
+                feature_values = list(c(-1, 0, 1), c(-1, 0, 1),
+                                      c(-1, 0, 1)))
+str(r, max.level = 1)
+}

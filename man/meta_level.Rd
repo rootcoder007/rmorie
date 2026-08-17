@@ -45,3 +45,10 @@ doi:10.1145/192844.192905. The collaborative half; implemented in
 """
 }
 \keyword{internal}
+\examples{
+mb <- function(data) lm(y ~ x, data = data)
+cons <- function(model) unname(coef(model)[2])
+d <- data.frame(x = 1:10, y = 2 * (1:10) + rnorm(10, 0, 0.1))
+r <- meta_level(mb, cons, d)
+str(r, max.level = 1)
+}

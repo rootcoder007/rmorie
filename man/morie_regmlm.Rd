@@ -35,3 +35,11 @@ of mixed-model association methods", Nature Genetics 46(2),
 100-106.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 30
+G <- matrix(rbinom(n * 20, 2, 0.3), n, 20)
+y <- G[, 1] - G[, 10] + rnorm(n, 0, 0.5)
+r <- morie_regmlm(G, y, block_size = 10, n_ridge = 3)
+str(r, max.level = 1)
+}
