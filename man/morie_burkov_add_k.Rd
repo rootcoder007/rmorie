@@ -19,3 +19,6 @@ Add-k smoothing (Burkov Ch 2)
 A list with \code{estimate}, \code{count_ngram}, \code{count_prefix}, \code{vocab_size}, \code{k}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_add_k(counts_ngram = 3, counts_prefix = 10, V = 100, k = 0.5)
+}

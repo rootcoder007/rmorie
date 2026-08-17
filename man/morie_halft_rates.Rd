@@ -30,3 +30,6 @@ A list with alpha, beta and the micro rate constants.
     763-766.
 }
 \keyword{internal}
+\examples{
+morie_halft_rates(V1 = 50, V2 = 30, CL = 5, Q = 2)
+}

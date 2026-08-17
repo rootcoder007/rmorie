@@ -32,3 +32,6 @@ A list with the score and the two gapped sequences.
     Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 }
 \keyword{internal}
+\examples{
+morie_longrd_align("ACGTACGT", "ACGAACGT")
+}

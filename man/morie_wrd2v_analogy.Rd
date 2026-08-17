@@ -21,3 +21,9 @@ excluded from the answer.
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+vecs <- list(king = rnorm(5), man = rnorm(5), woman = rnorm(5),
+             queen = rnorm(5))
+morie_wrd2v_analogy(vecs, a = "king", b = "man", c = "woman")
+}

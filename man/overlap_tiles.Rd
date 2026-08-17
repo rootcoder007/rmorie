@@ -45,3 +45,6 @@ networks for semantic segmentation", *CVPR 2015*, 3431-3440,
 doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 }
 \keyword{internal}
+\examples{
+overlap_tiles(height = 100L, width = 100L, tile = 32L, border = 8L)
+}

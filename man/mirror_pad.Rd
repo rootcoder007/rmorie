@@ -43,3 +43,6 @@ networks for semantic segmentation", *CVPR 2015*, 3431-3440,
 doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 }
 \keyword{internal}
+\examples{
+mirror_pad(matrix(as.numeric(1:16), 4, 4), pad = 2L)
+}

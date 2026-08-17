@@ -19,3 +19,6 @@ A step of the node2v_native implementation. Called by \code{transition_probabili
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+c(alpha_pq(0L, 1, 1), alpha_pq(1L, 1, 2), alpha_pq(2L, 1, 0.5))
+}
