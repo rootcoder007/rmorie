@@ -55,3 +55,7 @@ D. C., Doherty, I. A., Leone, P. A., Serre, M. L. & Miller, W. C.
 evaluation using an E911 database. Geocarto International 25(6),
 443-452. \doi{10.1080/10106049.2010.496496}
 }
+\examples{
+set.seed(1)
+Sdcdis(matrix(runif(20), 10, 2), noise_radius = 0.1)
+}

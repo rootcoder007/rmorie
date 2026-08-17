@@ -19,3 +19,6 @@ A step of the dist_native implementation. No other function in the package calls
 The value of \code{Dgamma}.
 }
 \keyword{internal}
+\examples{
+Dchisq(3, df = 2)
+}
