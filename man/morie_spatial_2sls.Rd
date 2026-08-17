@@ -24,3 +24,13 @@ endogenous, so it is instrumented with \verb{[X, WX, W^2 X]} -- the
 Kelejian and Prucha (1998) instrument set that \code{spatialreg::stsls}
 uses.  Ordinary least squares on this model is inconsistent.
 }
+\examples{
+set.seed(1)
+n <- 20
+W <- matrix(0, n, n)
+for (i in 1:(n - 1)) { W[i, i + 1] <- 1; W[i + 1, i] <- 1 }
+W <- W / pmax(rowSums(W), 1)
+X <- matrix(rnorm(n), n, 1)
+y <- as.numeric(solve(diag(n) - 0.3 * W) \%*\% (2 * X[, 1] + rnorm(n)))
+morie_spatial_2sls(y, X, W)
+}

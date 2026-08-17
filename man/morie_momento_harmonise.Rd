@@ -19,3 +19,8 @@ Per-series normalisation, truncation to a whole number of patches, channels kept
 A list with batch, meta, n_series, n_patches, patch_len,   note.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+series_list <- list(rnorm(20), rnorm(24), rnorm(18))
+morie_momento_harmonise(series_list, patch_len = 4)
+}

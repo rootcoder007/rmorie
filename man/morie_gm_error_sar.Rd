@@ -24,3 +24,14 @@ Prucha (1999) moment conditions, solved as nonlinear least squares.
 Unlike maximum likelihood this never needs \verb{det(I - lambda W)}.
 Mirrors \code{spatialreg::GMerrorsar}.
 }
+\examples{
+set.seed(1)
+n <- 20
+W <- matrix(0, n, n)
+for (i in 1:(n - 1)) { W[i, i + 1] <- 1; W[i + 1, i] <- 1 }
+W <- W / pmax(rowSums(W), 1)
+X <- matrix(rnorm(n), n, 1)
+u <- as.numeric(solve(diag(n) - 0.4 * W) \%*\% rnorm(n))
+y <- as.numeric(2 * X[, 1] + u)
+morie_gm_error_sar(y, X, W)
+}

@@ -18,3 +18,6 @@ first differences starting from the identity. Mirrors Python difference_matrix(p
 The value of \code{D}, as built in the body.
 }
 \keyword{internal}
+\examples{
+smfd_difference_matrix(10L, order = 2L)
+}
