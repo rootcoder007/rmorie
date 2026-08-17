@@ -22,3 +22,8 @@ A step of the dreamr_native implementation. Called by \code{morie_dreamr}. See t
 The value of \code{.dreamr_pack}.
 }
 \keyword{internal}
+\examples{
+r <- morie_dreamr_lambda_return(rewards = c(1, 0.8, 0.6, 0.4),
+                                values = c(2, 1.6, 1.2, 0.8, 0.4))
+str(r, max.level = 1)
+}

@@ -40,7 +40,9 @@
     inter <- matrix(0, nrow = n, ncol = p * (p - 1L) / 2L)
     if (ncol(inter) > 0L) {
       k <- 0L
-      for (a in seq_len(p)) for (b in (a + 1L):p) {
+      # seq_len guard: (a+1):p counts DOWN at a = p and indexes
+      # column p+1
+      for (a in seq_len(p)) for (b in seq_len(p - a) + a) {
         k <- k + 1L
         inter[, k] <- W[, a] * W[, b]
       }
@@ -281,7 +283,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
   }
 
   best_vertex <- which.min(diag(G) - 2 * c)
-  vert <- if (seq_len(J) == best_vertex) 1 else 0
+  vert <- as.numeric(seq_len(J) == best_vertex)
   if (obj(a) <= obj(vert)) a else vert
 }
 

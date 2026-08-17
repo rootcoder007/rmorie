@@ -25,3 +25,12 @@ A step of the flxipt_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated}, \code{mean_control}, \code{propensity}, \code{weights}, \code{sl_weights}, \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{n}, \code{level}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 60
+H <- matrix(rnorm(n * 2), n, 2)
+A <- rbinom(n, 1, plogis(0.5 * H[, 1]))
+y <- 1 + 0.8 * A + H[, 1] + rnorm(n, 0, 0.3)
+r <- iptw_ate(y, A, H, n_folds = 4)
+str(r, max.level = 1)
+}

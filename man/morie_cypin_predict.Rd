@@ -27,3 +27,8 @@ A probability.
     2nd edition, Chapman and Hall.
 }
 \keyword{internal}
+\examples{
+x <- morie_cypin_descriptors("c1ccccc1O")
+coef <- c(-0.5, rep(0.01, length(x)))
+morie_cypin_predict(x, coef)
+}

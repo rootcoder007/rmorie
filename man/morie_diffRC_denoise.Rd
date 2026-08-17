@@ -20,3 +20,9 @@ With \code{scale = 0} the schedule is the identity and this returns its input un
 A list with the denoised estimate, the path and the   schedule summary.
 }
 \keyword{internal}
+\examples{
+sched <- morie_diffRC_noise_schedule(10L)
+model <- function(x, t) x * 0.9
+r <- morie_diffRC_denoise(c(0.5, -0.3, 0.2), model, sched)
+str(r, max.level = 1)
+}
