@@ -21,3 +21,7 @@ A step of the remlfn_native implementation. Called by \code{morie_vcomp}. See th
 A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik}, \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form}, \code{solver}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_remlfn(y = rnorm(10), group = rbinom(10, 1, 0.5)); TRUE
+}

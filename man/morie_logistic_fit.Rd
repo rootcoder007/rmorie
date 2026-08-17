@@ -18,3 +18,7 @@ List with beta, cov, loglik, deviance, pi.
 Equations 2.1 to 2.9 of Bilder & Loughin (2025): pi = expit(Xb), the
 logit form, the log-likelihood, the LRT, and residual deviance.
 }
+\examples{
+set.seed(1)
+r <- morie_logistic_fit(x = rnorm(10), y = rnorm(10)); TRUE
+}

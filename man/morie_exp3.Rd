@@ -20,3 +20,7 @@ A step of the exp3_native implementation. No other function in the package calls
 A list with \code{estimate}, \code{actions}, \code{rewards}, \code{probs}, \code{weights}, \code{total_reward}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_exp3(x = rnorm(10), gamma_ = 0.5); TRUE
+}

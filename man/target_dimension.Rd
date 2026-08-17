@@ -19,3 +19,7 @@ Theorem 1.1 from Achlioptas (2003): for \code{n} points and \code{epsilon}, \cod
 A list with \code{k0}, \code{k} (the smallest integer   \code{>= k0}), \code{n}, \code{epsilon}, \code{beta},   \code{failure_probability}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- target_dimension(n = 8L, epsilon = 0.5); TRUE
+}

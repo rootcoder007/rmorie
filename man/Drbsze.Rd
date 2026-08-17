@@ -37,3 +37,7 @@ White, H. (1985). Journal of Econometrics 29(3), 305-325.  Bell,
 R. M. and McCaffrey, D. F. (2002). Survey Methodology 28(2),
 169-181.
 }
+\examples{
+set.seed(1)
+r <- Drbsze(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
+}

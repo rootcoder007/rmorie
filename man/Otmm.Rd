@@ -36,3 +36,7 @@ Fatras, K., Zine, Y., Flamary, R., Gribonval, R. and
 Courty, N. (2020). Proceedings of Machine Learning Research
 108:2131-2141 (AISTATS).
 }
+\examples{
+set.seed(1)
+r <- Otmm(X = rnorm(10), Y = rnorm(10), batch_size = 8L, n_batches = 8L, epsilon = 0.5); TRUE
+}

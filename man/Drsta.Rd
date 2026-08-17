@@ -36,3 +36,7 @@ Econometrics 225(2), 200-230.  Sant'Anna, P. H. C. and Zhao, J.
 Roth, J. and Sant'Anna, P. H. C. (2023). Journal of Political
 Economy Microeconomics 1(4), 669-709.
 }
+\examples{
+set.seed(1)
+r <- Drsta(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
+}

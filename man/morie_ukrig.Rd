@@ -16,3 +16,7 @@ A list with components \code{nrow}, \code{ncol}, \code{exponential}, \code{h}, \
 ' @references Schabenberger & Gotway (2005), Ch 4.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_ukrig(x = rnorm(10), coords = rnorm(10), target = rnorm(10)); TRUE
+}
