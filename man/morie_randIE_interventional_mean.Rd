@@ -24,3 +24,13 @@ A step of the randIE_native implementation. Called by \code{morie_randIE_randomi
 A list with \code{estimate}, \code{a}, \code{a.star}, \code{route}, \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 200
+C <- as.character(rbinom(n, 1, 0.5))
+A <- as.character(rbinom(n, 1, plogis(0.5 * (C == "1"))))
+M <- as.character(rbinom(n, 1, plogis(0.6 * (A == "1") + 0.3 * (C == "1"))))
+Y <- 1 + 0.8 * (A == "1") + 0.5 * (M == "1") + 0.4 * (C == "1") + rnorm(n)
+im <- morie_randIE_interventional_mean(Y, A, M, C = C)
+is.list(im)
+}
