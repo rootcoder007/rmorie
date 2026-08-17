@@ -21,3 +21,8 @@ A step of the causal implementation. Called by \code{morie_estimate_aipw}. See t
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+morie_estimate_aipw(df, "t", "y", "x")
+}

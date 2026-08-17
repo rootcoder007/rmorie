@@ -17,3 +17,7 @@ A step of the bayrjmcmc_native implementation. Called by \code{numeric_log_jacob
 The value of \code{total}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.logabsdet(M)
+}
