@@ -47,3 +47,7 @@ for interpreting genome-wide expression profiles, PNAS 102(43),
 sign-separated significance, p. 15546. Local source:
 library/pdf/fetched-wave3/Subramanian-2005-GSEA-PNAS.pdf.
 }
+\examples{
+set.seed(1)
+Gnsetenr(correlations = rnorm(20), in_set = c(rep(TRUE, 5), rep(FALSE, 15)))
+}

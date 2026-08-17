@@ -35,3 +35,6 @@ Nonparametric Bayesian Inference, Lemma 6.46 (Le Cam). Read from the
 copy of the book held in the corpus. NOTE: the worklist filed this
 under "Appendix D"; in the book it is Lemma 6.46 in Section 6.8.2.
 }
+\examples{
+Lecam(dtv = 0.3, p0_phi = 0.4, prior_mass = 0.5, integral = 0.2)
+}

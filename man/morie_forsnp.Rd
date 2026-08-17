@@ -28,3 +28,8 @@ recovers the Hardy-Weinberg product rule.
 Buckleton, J., Triggs, C. M. and Walsh, S. J. (2005).
 Forensic DNA Evidence Interpretation. CRC Press.
 }
+\examples{
+genotype <- list(c("A", "a"), c("B", "B"))
+freqs <- list(c(A = 0.6, a = 0.4), c(B = 0.7, b = 0.3))
+morie_forsnp(genotype, freqs)
+}

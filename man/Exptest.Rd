@@ -31,3 +31,6 @@ Nonparametric Bayesian Inference, Theorem 6.16 (Schwartz) and its
 proof, which invokes Lemma D.11. Read from the copy of the book held
 in the corpus.
 }
+\examples{
+Exptest(err_null = 0.1, err_alt = 0.2, n = 100)
+}

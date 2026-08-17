@@ -32,3 +32,6 @@ pseudoinverse is needed.
 Klein & Randic (1993), Journal of Mathematical Chemistry
 12(1):81-95, doi:10.1007/BF01164627.
 }
+\examples{
+Esumtv(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3), u = 0, v = 1)
+}

@@ -34,3 +34,6 @@ Nonparametric Bayesian Inference, Theorem 6.17 (Extended Schwartz)
 together with Theorem 6.16. Read from the copy of the book held in
 the corpus.
 }
+\examples{
+Kldsupp(prior_mass = 0.5, kl_radius = 0.1, test_rate = 0.2, n = 100)
+}

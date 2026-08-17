@@ -22,3 +22,13 @@ One graph transformer layer
 Updated node feature matrix.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+H <- matrix(rnorm(6), 3, 2)
+adj <- list("0" = c("1" = 1, "2" = 1), "1" = c("0" = 1, "2" = 1),
+            "2" = c("0" = 1, "1" = 1))
+W <- matrix(rnorm(4), 2, 2)
+W1 <- matrix(rnorm(8), 4, 2)
+W2 <- matrix(rnorm(8), 2, 4)
+graph_transformer_layer(H, adj, W, W, W, W1, W2)
+}
