@@ -19,3 +19,6 @@ A step of the tlhaltm_native implementation. Called by \code{morie_tlhaltm}. See
 A list with \code{folds}, \code{training}, \code{V}, \code{note}.
 }
 \keyword{internal}
+\examples{
+cv_tmle_split(50, V = 5, seed = 1L)
+}
