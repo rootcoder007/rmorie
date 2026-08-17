@@ -20,3 +20,7 @@ The probabilities at a level sum to 1 by construction, whatever the branch draws
 A list with \code{estimate}, \code{density},   \code{probabilities}, \code{edges}, \code{level}, \code{total},   \code{method} and \code{note}.
 }
 \keyword{internal}
+\examples{
+tr <- poltrx_finite_tree(levels = 3, seed = 1)
+str(poltrx_tree_density(tr, level = 2), max.level = 1)
+}

@@ -19,3 +19,7 @@ A step of the ttrace_native implementation. No other function in the package cal
 The value of \code{probability_of_control}.
 }
 \keyword{internal}
+\examples{
+r <- morie_ttrace(reps = 20, seed = 1, R0 = 1.5, trace_prob = 0.8)
+str(r, max.level = 1)
+}
