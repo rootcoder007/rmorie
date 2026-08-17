@@ -47,3 +47,6 @@ Gillespie, D. T. (1977). Exact stochastic simulation of
 coupled chemical reactions. Journal of Physical Chemistry 81(25),
 2340-2361. \doi{10.1021/j100540a008}
 }
+\examples{
+Sirstn(S0 = 990, I0 = 10, beta = 0.3, gamma = 0.1, T = 100)
+}

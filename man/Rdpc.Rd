@@ -33,3 +33,6 @@ Mironov, I. (2017). Renyi differential privacy. IEEE CSF
 Table II.
 Local source: fetched-wave3/mironov-2017-renyi-differential-privacy-arxiv1702.07476.pdf
 }
+\examples{
+Rdpc(alpha = 2, sigma = 1.0)
+}

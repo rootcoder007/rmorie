@@ -42,3 +42,9 @@ Nucleic Acids Research 45(D1):D353-D361,
 \doi{10.1093/nar/gkw1092}; Benjamini and Hochberg (1995), JRSS-B
 57(1):289-300. \doi{10.1111/j.2517-6161.1995.tb02031.x}
 }
+\examples{
+genes <- c(1, 0, 1, 0, 1)
+kegg_pathways <- matrix(c(1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0),
+                        5, 3, byrow = TRUE)
+Keggp(genes, kegg_pathways)
+}

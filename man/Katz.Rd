@@ -27,3 +27,6 @@ Formula: x = (I - alpha A)^{-1} 1 = sum_{k >= 0} alpha^k A^k 1.
 Katz (1953), A new status index derived from sociometric
 analysis, Psychometrika 18(1):39-43. \doi{10.1007/BF02289026}
 }
+\examples{
+Katz(matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
+}
