@@ -19,3 +19,12 @@ List with output, activations, pre_activations, n_parameters, estimate, n, metho
 \description{
 MLP forward pass (Geron Ch 9, morie.fn hmmlpf)
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(5 * 3), 5, 3)
+Ws <- list(matrix(rnorm(3 * 4, 0, 0.3), 3, 4),
+           matrix(rnorm(4 * 2, 0, 0.3), 4, 2))
+bs <- list(rep(0, 4), rep(0, 2))
+out <- morie_geron_mlp(X, Ws, bs, list("relu", "softmax"))
+dim(as.matrix(out))
+}

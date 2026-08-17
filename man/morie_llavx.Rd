@@ -18,3 +18,7 @@ A step of the llavx_native implementation. No other function in the package call
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+r <- morie_llavx("training_stage", 2)
+r$stage == 2L
+}

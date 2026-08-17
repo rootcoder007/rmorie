@@ -18,3 +18,9 @@ A step of the masrcn_native implementation. No other function in the package cal
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+features <- matrix(as.numeric(1:36), 6, 6)
+r <- morie_masrcn("roi_pool", features, box = c(0, 0, 4, 4),
+                  out_size = 2L)
+is.list(r)
+}
