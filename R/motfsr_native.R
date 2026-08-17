@@ -75,7 +75,7 @@
 .ghc_mot_theta_from_subsequence <- function(coded, i, j, w, L, mu, weight) {
   theta <- list(as.numeric(mu))
   for (t in seq_len(w)) {
-    k <- coded[[i]][j + t + 1L]
+    k <- coded[[i]][j + t]
     rest <- if (L > 1L) (1 - weight) / (L - 1) else 0
     row <- rep(rest, L); row[k + 1L] <- if (L > 1L) weight else 1
     theta[[length(theta) + 1L]] <- row
@@ -88,7 +88,7 @@
 .ghc_mot_log_component <- function(theta, coded, i, j, w, comp) {
   tot <- 0
   for (t in seq_len(w)) {
-    k <- coded[[i]][j + t + 1L]
+    k <- coded[[i]][j + t]
     f <- if (comp == 1L) theta[[t + 1L]][k + 1L] else theta[[1L]][k + 1L]
     if (f <= 0) return(.GHC_MOT_NEG_INF)
     tot <- tot + log(f)
@@ -203,8 +203,8 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
       e <- if (is.null(eps)) 1
            else if (erase_by == "start") eps[[i]][j + 1L] else NA
       for (t in seq_len(w)) {
-        k <- coded[[i]][j + t + 1L]
-        if (!is.null(eps) && erase_by == "letter") e <- eps[[i]][j + t + 1L]
+        k <- coded[[i]][j + t]
+        if (!is.null(eps) && erase_by == "letter") e <- eps[[i]][j + t]
         ccount[[t + 1L]][k + 1L] <- ccount[[t + 1L]][k + 1L] + e * z1
         ccount[[1L]][k + 1L] <- ccount[[1L]][k + 1L] + z2
       }

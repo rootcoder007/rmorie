@@ -18,3 +18,11 @@ Print method for \code{morie_mv_hawkes} objects
 The value of \code{invisible}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+times <- sort(runif(60, 0, 200))
+marks <- sample(c("A", "B"), 60, replace = TRUE)
+fit <- morie_crim_hawkes_multivariate(times, marks)
+out <- capture.output(print(fit))
+any(grepl("Hawkes", out))
+}
