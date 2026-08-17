@@ -20,3 +20,8 @@ Eq. (1)-(2): segment each dimension, then embed each segment. The output is a 3D
 A list with \code{H}, \code{n_seg}, \code{D}, \code{d_model},   \code{seg_len} and \code{shape}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(40), 20, 2)
+morie_crsfmr_dsw_embed(X, seg_len = 4)
+}

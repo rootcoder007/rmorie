@@ -21,3 +21,9 @@ A step of the rdrobu_native implementation. Called by \code{morie_calonico_catta
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- runif(200, -1, 1)
+y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+morie_rdrobu(y, x)
+}

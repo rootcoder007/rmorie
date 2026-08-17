@@ -23,3 +23,9 @@ A step of the causrddc_native implementation. Called by \code{morie_causrddc}. S
 A list with \code{h}, \code{h_unclamped}, \code{at_bound}, \code{C}, \code{B}, \code{V}, \code{f}, \code{mu_plus}, \code{mu_minus}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- runif(200, -1, 1)
+y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+morie_causrddc_rd_bandwidth(x, y)
+}

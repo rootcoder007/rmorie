@@ -24,3 +24,7 @@ with two applications in spatial statistics", Annals of the Institute
 of Statistical Mathematics 43(1), 1-20, doi:10.1007/BF00116466.
 }
 \keyword{internal}
+\examples{
+W <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
+morie_poissp_car_precision(W, tau = 1.0, rho = 0.5)
+}

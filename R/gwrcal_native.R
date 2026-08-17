@@ -100,9 +100,7 @@
   rdef <- 0L
   for (k in seq_len(n)) {
     candidates <- which(!used)
-    diags <- M[candidates, candidates]
-    diags <- diags[seq_len(nrow(diags)) * (seq_len(nrow(diags)) - 0L) +
-                     seq_len(nrow(diags)) * 0L]
+    diags <- diag(M)[candidates]
     p <- candidates[which.max(diags)]
     piv[k] <- p; used[p] <- TRUE
     Mk <- M[p, p]
@@ -149,22 +147,13 @@
       XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
       if (rcond$rdef > 0L) {
-        XtWX <- XtWX + diag(rcond$rdef) * 1e-10 * max(diag(XtWX))
+        XtWX <- XtWX + diag(p) * 1e-10 * max(diag(XtWX))
         rdef_total <- rdef_total + rcond$rdef
       }
-      L <- rcond$L; Pp <- rcond$piv
-      P <- matrix(0, p, p); for (k in seq_len(p)) P[k, Pp[k]] <- 1
-      LP <- L %*% P
-      z <- backsolve(LP, XtWy, transpose = TRUE)
-      beta <- backsolve(LP, z)
+      beta <- as.numeric(solve(XtWX, XtWy))
       Params[i, ] <- beta
       xb <- as.numeric(X %*% beta)
-      s <- XtWX + diag(1e-10, p)
-      Linv <- backsolve(LP, diag(p), transpose = TRUE)
-      Linv <- backsolve(LP, Linv)
-      Pinv <- t(P)
-      cov_beta <- Linv %*% t(Linv)
-      cov_beta <- Pinv %*% cov_beta %*% t(Pinv)
+      cov_beta <- solve(XtWX)
       SE[i, ] <- sqrt(pmax(diag(cov_beta), 0))
       Fitted[i] <- xb[i]
       Resid[i] <- y[i] - xb[i]
@@ -181,21 +170,13 @@
       XtWX <- crossprod(Xw, X); XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
       if (rcond$rdef > 0L) {
-        XtWX <- XtWX + diag(rcond$rdef) * 1e-10 * max(diag(XtWX))
+        XtWX <- XtWX + diag(p) * 1e-10 * max(diag(XtWX))
         rdef_total <- rdef_total + rcond$rdef
       }
-      L <- rcond$L; Pp <- rcond$piv
-      P <- matrix(0, p, p); for (k in seq_len(p)) P[k, Pp[k]] <- 1
-      LP <- L %*% P
-      z <- backsolve(LP, XtWy, transpose = TRUE)
-      beta <- backsolve(LP, z)
+      beta <- as.numeric(solve(XtWX, XtWy))
       Params[i, ] <- beta
       xb <- as.numeric(X %*% beta)
-      Linv <- backsolve(LP, diag(p), transpose = TRUE)
-      Linv <- backsolve(LP, Linv)
-      Pinv <- t(P)
-      cov_beta <- Linv %*% t(Linv)
-      cov_beta <- Pinv %*% cov_beta %*% t(Pinv)
+      cov_beta <- solve(XtWX)
       SE[i, ] <- sqrt(pmax(diag(cov_beta), 0))
       Fitted[i] <- xb[i]; Resid[i] <- y[i] - xb[i]
       S_i <- as.numeric(X[i, , drop = FALSE] %*% solve(XtWX) %*% t(Xw))
@@ -272,7 +253,7 @@
       XtWX <- crossprod(Xw, X); XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
       if (rcond$rdef > 0L)
-        XtWX <- XtWX + diag(rcond$rdef) * 1e-10 * max(diag(XtWX))
+        XtWX <- XtWX + diag(p) * 1e-10 * max(diag(XtWX))
       L <- rcond$L; Pp <- rcond$piv
       P <- matrix(0, p, p); for (k in seq_len(p)) P[k, Pp[k]] <- 1
       LP <- L %*% P
@@ -288,7 +269,7 @@
       XtWX <- crossprod(Xw, X); XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
       if (rcond$rdef > 0L)
-        XtWX <- XtWX + diag(rcond$rdef) * 1e-10 * max(diag(XtWX))
+        XtWX <- XtWX + diag(p) * 1e-10 * max(diag(XtWX))
       L <- rcond$L; Pp <- rcond$piv
       P <- matrix(0, p, p); for (k in seq_len(p)) P[k, Pp[k]] <- 1
       LP <- L %*% P
@@ -369,7 +350,7 @@ morie_gwrcal_prepare <- function(y, X, coords) {
 #' @export
 morie_gwrcal_global_aicc <- function(y, X) {
   pr <- morie_gwrcal_prepare(y, X, matrix(0, length(y), 1))
-  beta <- as.numeric(solve(pr$X, pr$y))
+  beta <- as.numeric(qr.solve(pr$X, pr$y))
   resid <- pr$y - as.numeric(pr$X %*% beta)
   sigma2 <- sum(resid^2) / pr$n
   if (sigma2 <= 0) return(-Inf)
