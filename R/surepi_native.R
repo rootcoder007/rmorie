@@ -180,7 +180,8 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
     stat <- rep(NA_real_, length(cv))
     for (t in seq_along(cv)) {
       idx <- c(t, t - 1L, t - 2L)
-      idx <- idx[idx >= 1L & !is.na(base[idx])]
+      idx <- idx[idx >= 1L]
+      idx <- idx[!is.na(base[idx])]
       # C3 accumulates only over days that HAVE a C2 statistic
       if (length(idx) == 3L) {
         stat[t] <- sum(base[idx])

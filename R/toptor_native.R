@@ -94,10 +94,11 @@ topological_torsions <- function(elements, bonds, common_types = NULL) {
               degree[p] - if (k %in% c(1L, 4L)) 1L else 2L)
           })
           rev_code <- code[4:1]
-          canon <- if (do.call(min, lapply(list(code, rev_code),
-                                           function(x)
-            do.call(paste, c(lapply(x, paste, collapse = ":"),
-                              sep = "|"))))) code else rev_code
+          code_s <- do.call(paste, c(lapply(code, paste, collapse = ":"),
+                                     sep = "|"))
+          rev_s <- do.call(paste, c(lapply(rev_code, paste, collapse = ":"),
+                                    sep = "|"))
+          canon <- if (code_s <= rev_s) code else rev_code
           if (a + 1L > d) next
           key <- paste0(sapply(canon, function(tr) paste(tr, collapse = ":")),
                         collapse = "|")

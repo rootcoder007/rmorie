@@ -43,3 +43,7 @@ for Non-Homogeneous Markov Chains Based on Censored Observations",
 Scandinavian Journal of Statistics 5(3), 141-150.
 }
 \keyword{internal}
+\examples{
+hazards <- list("1" = c(0.10, 0.15, 0.20), "2" = c(0.05, 0.05, 0.10))
+one_minus_km(hazards, times = c(1, 2, 3), cause = 1)
+}
