@@ -32,3 +32,8 @@ prevention: an algorithm for detecting Salmonella outbreaks",
 Emerging Infectious Diseases 3(3), 395-400.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+counts <- c(rpois(20, 5), rpois(6, 20))
+surepi_ears_detect(counts, method = "C2")
+}

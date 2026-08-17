@@ -202,7 +202,7 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
   labels <- list()
   covered <- list()
   for (i in seq_along(text_boxes)) {
-    if (i - 1L %in% mt) next
+    if ((i - 1L) %in% mt) next
     b <- text_boxes[[i]]
     ps <- patch_of_box(b, width, height, patch_grid)
     covered[[as.character(i - 1L)]] <- ps
