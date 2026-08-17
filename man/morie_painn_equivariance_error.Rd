@@ -22,3 +22,15 @@ A step of the painn_native implementation. No other function in the package call
 A list with \code{scalar_error}, \code{vector_error}, \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+F <- 4
+s <- rnorm(F)
+v <- matrix(rnorm(3 * F), 3, F)
+R <- matrix(rnorm(9), 3, 3)
+th <- pi / 5
+Q <- matrix(c(cos(th), -sin(th), 0, sin(th), cos(th), 0, 0, 0, 1), 3, 3)
+model <- function(s, V, pos) list(s = s, v = V)
+e <- morie_painn_equivariance_error(model, s, v, R, Q)
+is.list(e)
+}

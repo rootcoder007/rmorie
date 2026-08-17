@@ -22,3 +22,15 @@ A step of the painn_native implementation. No other function in the package call
 A list with \code{ds}, \code{dv}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+F <- 4; D <- 3
+s <- rnorm(F)
+v <- matrix(rnorm(D * F), D, F)
+r <- c(1, 0.5, -0.5)
+phi_s <- function(s, w) s
+phi_v <- function(s, w) rep(0.1, 2 * length(s))
+W_rbf <- function(d) rep(1, 5)
+m <- scalar_vector_message(s, v, r, phi_s, phi_v, W_rbf)
+c(length(m$ds), nrow(m$dv), ncol(m$dv))
+}
