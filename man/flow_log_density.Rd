@@ -19,3 +19,9 @@ flow_log_density(z0, log_q0, layers)
 A list with \code{estimate, log_q, z, log_dets, depth,   method, note}.
 }
 \keyword{internal}
+\examples{
+layers <- list(list(u = c(0.3, 0.1), w = c(0.2, -0.4), b = 0.1),
+               list(u = c(-0.1, 0.2), w = c(0.3, 0.1), b = 0))
+r <- flow_log_density(z0 = c(0.5, -0.2), log_q0 = -1.5, layers)
+str(r, max.level = 1)
+}

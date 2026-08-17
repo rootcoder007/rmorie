@@ -22,3 +22,10 @@ Log-likelihood of the published estimates under the selection model
 The log-likelihood.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- rnorm(20, 0.3, 0.1)
+sigma <- rep(0.1, 20)
+morie_bnsadt_loglik(x, sigma, mu = 0.2, tau = 0.05,
+                    family = "symmetric_step", params = 0.3)
+}

@@ -22,3 +22,7 @@ A step of the bndbye_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{identified_set}, \code{credible_hpd}, \code{confidence_set}, \code{hpd_inside_identified_set}, \code{cs_contains_identified_set}, \code{width_ratio_hpd_over_cs}, \code{conditional_prior_reported}, \code{method}, \code{recommendation}.
 }
 \keyword{internal}
+\examples{
+r <- morie_compare_sets(phi_hat = 0.5, half_width = 0.2, se_phi = 0.1)
+str(r, max.level = 1)
+}

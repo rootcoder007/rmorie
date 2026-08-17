@@ -19,3 +19,9 @@ A group with NO observations is not identified from below: nothing in the data d
 An integer count per free group.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- c(rnorm(10, 0.3, 0.1), rnorm(5, -0.05, 0.1))
+sigma <- rep(0.1, 15)
+morie_bnsadt_group_counts(x, sigma, family = "symmetric_step")
+}

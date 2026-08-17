@@ -17,3 +17,8 @@ BipartSpec(A)
 A list with \code{bipartite}, \code{evidence}, \code{max_odd_trace}, \code{colouring}, \code{part_sizes}, \code{n_components}, \code{n}, \code{m}, \code{method}.
 }
 \keyword{internal}
+\examples{
+A <- rbind(c(0, 1, 0, 0), c(1, 0, 1, 0), c(0, 1, 0, 1), c(0, 0, 1, 0))
+r <- BipartSpec(A)
+str(r, max.level = 1)
+}

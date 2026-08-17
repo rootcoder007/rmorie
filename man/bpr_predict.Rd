@@ -47,3 +47,9 @@ item, negative item) plus up to 100 more for the negative-item
 rejection guard, exactly as the Python arm does.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+W <- lapply(1:4, function(i) rnorm(3, 0, 0.3))
+H <- lapply(1:5, function(i) rnorm(3, 0, 0.3))
+bpr_predict(W, H, u = 0L, i = 2L)
+}
