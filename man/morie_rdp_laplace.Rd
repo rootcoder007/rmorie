@@ -21,3 +21,6 @@ Evaluated in log space: the first term carries exp((alpha-1)/lambda),
 which overflows for large alpha -- and large alpha is exactly where
 the curve is read, since the epsilon tends to the pure-DP 1/lambda.
 }
+\examples{
+morie_rdp_laplace(2, 1.0)
+}

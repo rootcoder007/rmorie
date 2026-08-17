@@ -37,7 +37,7 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
                                        holiday_window = c(0, 0), ...) {
   fit <- morie_prphet_fit(t, y, seasonalities = seasonalities,
                             holidays = holidays,
-                            holiday.window = holiday_window, ...)
+                            holiday_window = holiday_window, ...)
   tv <- fit$t
   n <- length(tv)
   coef <- fit$coef

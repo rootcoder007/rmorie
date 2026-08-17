@@ -22,3 +22,9 @@ A step of the prophe_native implementation. No other function in the package cal
 The value of \code{prophe_additive_components}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+t <- 1:60
+y <- sin(2 * pi * t / 12) + 0.05 * t + rnorm(60) * 0.1
+morie_prophe(t, y)
+}
