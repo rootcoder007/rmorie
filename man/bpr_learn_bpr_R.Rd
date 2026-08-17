@@ -53,3 +53,11 @@ item, negative item) plus up to 100 more for the negative-item
 rejection guard, exactly as the Python arm does.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+pos <- list("0" = c(0L, 1L), "1" = c(1L, 2L), "2" = c(0L, 3L),
+            "3" = c(2L, 4L))
+r <- bpr_learn_bpr_R(pos, n_users = 4, n_items = 5, k_dim = 3,
+                     iters = 200L)
+str(r, max.level = 1)
+}

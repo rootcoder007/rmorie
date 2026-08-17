@@ -24,3 +24,8 @@ A step of the bayopt_native implementation. Called by \code{maximise_acquisition
 A numeric value.
 }
 \keyword{internal}
+\examples{
+r <- acquisition_gradient(gmu = c(0.2, -0.1), gsd = c(-0.05, 0.03),
+                          mu = 1.2, sd = 0.4, best = 1.0, acq = "ei")
+r
+}

@@ -33,3 +33,10 @@ A step of the bayopt_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{x_best}, \code{y_best}, \code{X}, \code{y}, \code{trace}, \code{acq}, \code{kernel}, \code{inner}, \code{n_eval}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+f <- function(x) -sum((x - c(0.3, 0.7))^2)
+r <- bayopt(f, bounds = list(c(0, 1), c(0, 1)), n_iter = 5,
+            n_init = 4, seed = 1)
+str(r, max.level = 1)
+}

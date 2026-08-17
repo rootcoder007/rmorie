@@ -18,3 +18,9 @@ elbo(log_joint, log_q, samples)
 A list with \code{elbo, se, n_samples, note}.
 }
 \keyword{internal}
+\examples{
+lj <- function(s) -0.5 * s^2 - 1
+lq <- function(s) -0.5 * (s - 0.2)^2 - 0.9
+r <- elbo(lj, lq, samples = c(-0.5, 0, 0.5, 1))
+str(r, max.level = 1)
+}
