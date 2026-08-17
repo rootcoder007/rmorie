@@ -50,3 +50,11 @@ Factorization", *NIPS 2007*, 1257-1264. The probabilistic reading of
 the same objective.
 }
 \keyword{internal}
+\examples{
+ratings <- list(c(0, 0, 5), c(0, 1, 3), c(1, 0, 4), c(1, 2, 2),
+                c(2, 1, 5), c(2, 2, 1))
+fit <- morie_funkM(ratings, n_users = 3, n_items = 3, factors = 2,
+                   epochs = 30, seed = 1)
+round(morie_funkM_rmse(ratings, fit$mu, fit$b_user, fit$b_item,
+                       fit$P, fit$Q), 4)
+}

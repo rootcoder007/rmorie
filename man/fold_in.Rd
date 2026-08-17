@@ -18,3 +18,9 @@ A step of the lsa_native implementation. Called by \code{morie_lsa}. See the fil
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+X <- matrix(c(2, 0, 1, 0, 3, 1, 1, 1, 0, 0, 2, 1), nrow = 3, byrow = TRUE)
+model <- lsa_decompose(X, k_dim = 2)
+q_hat <- fold_in(c(1, 0, 2), model)
+length(q_hat)
+}
