@@ -49,3 +49,10 @@ Factorization", *NIPS 2007*, 1257-1264. The probabilistic reading of
 the same objective.
 }
 \keyword{internal}
+\examples{
+ratings <- list(c(0, 0, 5), c(0, 1, 3), c(1, 0, 4), c(1, 2, 2),
+                c(2, 1, 5), c(2, 2, 1))
+e <- morie_funkM_imputed_svd_error(ratings, n_users = 3, n_items = 3,
+                                   rank = 2, fill = "mean")
+is.numeric(e) || is.list(e)
+}
