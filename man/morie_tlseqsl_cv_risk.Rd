@@ -35,3 +35,13 @@ data and causal inference models", Biometrics 61(4), 962-973,
 doi:10.1111/j.1541-0420.2005.00377.x.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(100), 50, 2)
+y <- X \%*\% c(1, -1) + rnorm(50)
+algo <- function(Xtr, ytr) {
+  b <- qr.solve(cbind(1, Xtr), ytr)
+  function(xrow) sum(c(1, xrow) * b)
+}
+morie_tlseqsl_cv_risk(X, y, algo, V = 5, seed = 1)$risk
+}

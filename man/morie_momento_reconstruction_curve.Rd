@@ -20,3 +20,9 @@ Reconstruction error vs mask rate
 A list with curve, n_patches, rates, mse.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+patches <- lapply(1:6, function(i) rnorm(8))
+recon <- function(masked, mask) masked
+morie_momento_reconstruction_curve(patches, recon, rates = c(0.2, 0.5, 0.8))
+}

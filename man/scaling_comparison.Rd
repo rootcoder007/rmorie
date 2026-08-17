@@ -17,3 +17,8 @@ Each entry is c(name, latent, patch, depth, width). Three axes (depth, width, to
 list with ranked entries and a note.
 }
 \keyword{internal}
+\examples{
+configs <- list(list("small", 224, 16, 6, 384),
+                list("base", 224, 16, 12, 768))
+scaling_comparison(configs)
+}
