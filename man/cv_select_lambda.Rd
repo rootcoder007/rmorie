@@ -22,3 +22,10 @@ A step of the tlhal_native implementation. Called by \code{morie_tlhal}. See the
 A list with \code{lambda}, \code{cv_risks}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(runif(60), 30, 2)
+y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
+r <- cv_select_lambda(X, y, lambdas = c(0.5, 1, 2), V = 3L, iters = 150L)
+str(r, max.level = 1)
+}

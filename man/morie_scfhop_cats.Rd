@@ -32,3 +32,7 @@ A numeric vector.
     Journal of Machine Learning Research 12, 2539-2561.
 }
 \keyword{internal}
+\examples{
+r <- morie_scfhop_cats("c1ccccc1CCN")
+str(r, max.level = 1)
+}

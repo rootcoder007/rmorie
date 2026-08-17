@@ -14,3 +14,14 @@ Computes \eqn{\ln \sum_k g_k \exp(\cdot)} rather than the Jensen-relaxed sum. Th
 Named list with \code{loglik}, \code{uncensored},   \code{censored}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- lapply(1:20, function(i) rnorm(3))
+tt <- rexp(20, 0.1)
+ev <- rbinom(20, 1, 0.7)
+W <- matrix(rnorm(9, 0, 0.3), 3, 3)
+bias <- rep(0, 3)
+r <- morie_survvae_exact_loglik(X, tt, ev, W, bias, shapes = c(1, 1.5, 2),
+                                scales = c(5, 10, 15))
+str(r, max.level = 1)
+}

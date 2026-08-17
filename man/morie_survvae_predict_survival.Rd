@@ -19,3 +19,11 @@ morie_survvae_predict_survival(fit_result, x, times)
 Named list with \code{time}, \code{survival}, \code{gates}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+X <- lapply(1:40, function(i) rnorm(2))
+tt <- rexp(40, 0.1)
+ev <- rbinom(40, 1, 0.7)
+fit <- morie_survvae(X, tt, ev, K = 2L, restarts = 2L)
+morie_survvae_predict_survival(fit, rnorm(2), times = c(5, 10, 20))
+}
