@@ -21,3 +21,6 @@ A step of the smatch_native implementation. Called by \code{morie_smatch_power}.
 A list with \code{n_events}, \code{n_events_ceiling}, \code{rho}, \code{A}, \code{B}, \code{C}, \code{z_alpha_2}, \code{z_power}, \code{log_ri}, \code{r}, \code{p_exposed}, \code{assumes}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_smatch_sample_size(log_ri = log(2), r = 0.1, p_exposed = 0.8)
+}

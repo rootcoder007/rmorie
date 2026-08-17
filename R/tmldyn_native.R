@@ -33,7 +33,7 @@
 #' @return A numeric value.
 #' @export
 .tmldyn_logit <- function(p) {
-  q <- min(max(as.numeric(p), .tmldyn_EPS), 1 - .tmldyn_EPS)
+  q <- pmin(pmax(as.numeric(p), .tmldyn_EPS), 1 - .tmldyn_EPS)
   log(q / (1 - q))
 }
 
@@ -46,8 +46,10 @@
 #' @param z Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+# vectorised: every call site hands a linear-predictor VECTOR in
 .tmldyn_expit <- function(z) {
-  if (z > 700) 1 else if (z < -700) 0 else 1 / (1 + exp(-z))
+  zc <- pmin(pmax(z, -700), 700)
+  1 / (1 + exp(-zc))
 }
 
 #' .blocks
@@ -522,7 +524,12 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
     rules <- list(list(d0 = d0, d1 = d1))
   }
   follow0 <- ifelse(A0 == d0, 1, 0)
-  follow1 <- ifelse(A1 == d1[[as.integer(A0) + 1L]], 1, 0)
+  # d1 is a list of two second-stage rules keyed by the FIRST
+  # treatment; [[as.integer(A0) + 1]] with the whole vector is
+  # recursive indexing and errors on any n > 1
+  d1_obs <- vapply(seq_len(n), function(i)
+    d1[[as.integer(A0[i]) + 1L]][i], numeric(1))
+  follow1 <- ifelse(A1 == d1_obs, 1, 0)
   H1 <- follow0 / g0
   H2 <- follow0 * follow1 / (g0 * g1)
   if (method == "ipw") {
@@ -576,7 +583,7 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
               level = as.numeric(level),
               d0 = d0, d1 = d1, blip1 = blip1, blip2 = blip2,
               treated_first = mean(d0),
-              treated_second = mean(d1[[as.integer(A0) + 1L]]),
+              treated_second = mean(d1_obs),
               eic_mean = mean(eic), epsilon = c(eps1, eps2),
               max_weight = ginfo$max_weight,
               min_g0 = ginfo$min_g0, min_g1 = ginfo$min_g1,

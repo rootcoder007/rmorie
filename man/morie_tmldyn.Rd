@@ -28,3 +28,14 @@ morie_tmldyn(y, treatment_history, covariate_history, regime = "optimal", method
 A list with \code{estimate}, \code{se}, \code{n}, \code{ci},   \code{level}, \code{d0}, \code{d1}, \code{blip1}, \code{blip2},   \code{treated_first}, \code{treated_second}, \code{eic_mean},   \code{epsilon}, \code{max_weight}, \code{min_g0}, \code{min_g1},   \code{known_g}, \code{exceptional_share_1},   \code{exceptional_share_2}, \code{value_gcomp},   \code{best_static}, \code{n_folds}, \code{method},   \code{rule_source}, \code{algorithm}, plus four \code{static_*}   keys.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 80
+L0 <- rnorm(n)
+A0 <- rbinom(n, 1, 0.5)
+L1 <- rnorm(n) + 0.4 * A0
+A1 <- rbinom(n, 1, 0.5)
+y <- plogis(0.3 * A0 + 0.5 * A1 + 0.4 * L0 + rnorm(n, 0, 0.4))
+r <- morie_tmldyn(y, cbind(A0, A1), list(L0, L1), method = "tmle")
+str(r, max.level = 1)
+}

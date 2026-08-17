@@ -19,3 +19,11 @@ A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_po
 A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age}, \code{n_people}, \code{n_rows}.
 }
 \keyword{internal}
+\examples{
+cases <- list(
+  list(start = 0, end = 365, exposure = 100, events = c(110, 250)),
+  list(start = 0, end = 365, exposure = 200, events = c(215)),
+  list(start = 0, end = 365, exposure = 50, events = c(60, 70)))
+r <- morie_smatch_poisson_design(cases, risk_periods = list(c(0, 30)))
+str(r, max.level = 1)
+}

@@ -21,3 +21,7 @@ A step of the smatch_native implementation. No other function in the package cal
 A list with \code{power}, \code{z_power}, \code{n_events}, \code{A}, \code{B}, \code{C}.
 }
 \keyword{internal}
+\examples{
+morie_smatch_power(n_events = 120, log_ri = log(2), r = 0.1,
+                   p_exposed = 0.8)
+}
