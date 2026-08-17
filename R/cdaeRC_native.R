@@ -187,7 +187,8 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
   for (it in seq_len(as.integer(iters))) {
     tot <- 0.0
     for (u in seq_len(U) - 1L) {
-      seen <- sort(unique(as.integer(pos[[as.character(u) + 1L]] %||% pos[[u + 1L]] %||% c())))
+      seen_raw <- if (!is.null(names(pos))) pos[[as.character(u)]] else pos[[u + 1L]]
+      seen <- sort(unique(as.integer(seen_raw %||% c())))
       if (length(seen) == 0L) next
       seen_set <- as.integer(seen) + 1L
       y <- ifelse(seq_len(I) %in% seen_set, 1.0, 0.0)

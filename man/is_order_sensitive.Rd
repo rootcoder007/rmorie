@@ -43,3 +43,6 @@ doi:10.1145/192844.192905. The collaborative half; implemented in
 """
 }
 \keyword{internal}
+\examples{
+is_order_sensitive("mixed")
+}

@@ -20,3 +20,11 @@ cox_reid_loglik(alpha, K, mu, X)
 Numeric scalar.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+m <- 6
+X <- cbind(1, rep(c(0, 1), each = 3))
+mu <- rep(c(50, 80), each = 3)
+K <- rpois(m, mu)
+cox_reid_loglik(0.1, K, mu, X)
+}

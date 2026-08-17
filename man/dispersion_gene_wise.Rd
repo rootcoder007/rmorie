@@ -20,3 +20,10 @@ Maximises equation 7 with the fitted values from an initial GLM held fixed, exac
 A list with \code{dispersion} and \code{mu0}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+m <- 6
+X <- cbind(1, rep(c(0, 1), each = 3))
+K <- c(rnbinom(3, mu = 50, size = 10), rnbinom(3, mu = 90, size = 10))
+dispersion_gene_wise(K, X, s = rep(1, m))
+}

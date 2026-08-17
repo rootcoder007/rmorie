@@ -27,3 +27,13 @@ A step of the mambss_native implementation. No other function in the package cal
 The value of \code{selective_scan}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+L <- 5; D <- 2; N <- 3
+X <- matrix(rnorm(L * D), L, D)
+r <- morie_mambss(X, A = matrix(-abs(rnorm(D * N)), D, N),
+                  W_B = matrix(rnorm(N * D, 0, 0.3), N, D),
+                  W_C = matrix(rnorm(N * D, 0, 0.3), N, D),
+                  W_delta = matrix(rnorm(D, 0, 0.3), 1, D))
+str(r, max.level = 1)
+}

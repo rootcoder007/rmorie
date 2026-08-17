@@ -20,3 +20,7 @@ Backcross coding, 0 or 1 at every locus, no interference, so the two intervals c
 Numeric vector of length 2, \code{c(G(0), G(1))}.
 }
 \keyword{internal}
+\examples{
+morie_genotype_probabilities(left = 1L, right = 0L, r_left = 0.1,
+                             r_right = 0.15)
+}

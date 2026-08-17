@@ -24,3 +24,11 @@ Update is the paper\'s own: \code{beta <- (X\' W X + lambda I)^{-1} X\' W z} wit
 A list with \code{beta}, \code{mu}, \code{sigma},   \code{converged}, \code{n_iter}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+m <- 6
+X <- cbind(1, rep(c(0, 1), each = 3))
+K <- c(rpois(3, 50), rpois(3, 90))
+r <- nb_glm_fit(K, X, alpha = 0.1)
+str(r, max.level = 1)
+}

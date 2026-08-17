@@ -18,3 +18,10 @@ morie_mistr_swiglu(x, W1, W2, W3)
 The gated projection.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- rnorm(4)
+morie_mistr_swiglu(x, W1 = matrix(rnorm(32, 0, 0.3), 4, 8),
+                   W2 = matrix(rnorm(32, 0, 0.3), 8, 4),
+                   W3 = matrix(rnorm(32, 0, 0.3), 4, 8))
+}

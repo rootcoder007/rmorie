@@ -23,3 +23,12 @@ Implements the EM algorithm of Lander & Botstein (1989) for the two-component mi
 A named list with keys \code{estimate}, \code{lod},   \code{a}, \code{b}, \code{sigma2}, \code{loglik},   \code{loglik_null}, \code{iterations}, \code{loglik_history},   \code{posterior}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 50
+g1 <- rbinom(n, 1, 0.5)
+g2 <- ifelse(runif(n) < 0.85, g1, 1 - g1)
+y <- 1 + 0.9 * g1 + rnorm(n, 0, 0.5)
+r <- morie_interval_map(y, g1, g2, r_left = 0.075, r_right = 0.075)
+str(r, max.level = 1)
+}

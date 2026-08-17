@@ -22,3 +22,14 @@ A step of the meglt_native implementation. Called by \code{morie_meglt}. See the
 A list with \code{estimate}, \code{X}, \code{residual_history}, \code{final_residual}, \code{tau}, \code{n_observed}, \code{fraction_observed}, \code{nuclear_norm}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+U <- matrix(rnorm(10), 5, 2)
+V <- matrix(rnorm(8), 4, 2)
+M <- U \%*\% t(V)
+obs <- list()
+for (i in 0:4) for (j in 0:3) if (runif(1) < 0.7)
+  obs[[length(obs) + 1]] <- c(i, j)
+r <- svt(M, obs, tau = 1, iters = 100)
+str(r, max.level = 1)
+}

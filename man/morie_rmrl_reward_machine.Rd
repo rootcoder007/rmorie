@@ -19,3 +19,8 @@ Edges are list(u, formula, u_next, reward). formula is either the string "true" 
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+edges <- list(list(0L, "a", 1L, 0), list(1L, "b", 2L, 1))
+m <- morie_rmrl_reward_machine(edges, u0 = 0, terminal = c(2L))
+str(m, max.level = 1)
+}
