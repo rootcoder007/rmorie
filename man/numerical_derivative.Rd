@@ -20,3 +20,10 @@ A step of the tlheic_native implementation. Called by \code{estimate_eic}, \code
 A numeric value.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+w <- rep(1 / 20, 20)
+score <- rnorm(20)
+psi <- function(wv) sum(wv * (1:20))
+numerical_derivative(psi, w, score)
+}

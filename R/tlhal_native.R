@@ -87,14 +87,16 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
     K <- as.matrix(knots)
     if (is.null(dim(K))) K <- matrix(as.numeric(knots), ncol = 1)
   }
+  # seq_len guards: (a+1):d counts DOWN when a = d and fabricates
+  # a subset with a non-existent column
   subsets <- lapply(seq_len(d), function(j) j)
   if (max_order >= 2L)
     subsets <- c(subsets, lapply(seq_len(d), function(a)
-      lapply((a + 1L):d, function(b) c(a, b))))
+      lapply(seq_len(d - a) + a, function(b) c(a, b))))
   if (max_order >= 3L)
     subsets <- c(subsets, lapply(seq_len(d), function(a)
-      lapply((a + 1L):d, function(b)
-        lapply((b + 1L):d, function(c) c(a, b, c)))))
+      lapply(seq_len(d - a) + a, function(b)
+        lapply(seq_len(d - b) + b, function(c) c(a, b, c)))))
   subsets <- unlist(subsets, recursive = FALSE)
   cols <- list()
   for (S in subsets) {

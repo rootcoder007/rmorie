@@ -24,3 +24,10 @@ A step of the tlhal_native implementation. Called by \code{cv_select_lambda}, \c
 A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns}, \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history}, \code{max_order}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(runif(60), 30, 2)
+y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
+r <- hal_fit(X, y, lam = 1, iters = 300L)
+str(r, max.level = 1)
+}

@@ -30,3 +30,7 @@ A list with the surviving zero-based atom indices and the   surviving bonds.
     Journal of Machine Learning Research 12, 2539-2561.
 }
 \keyword{internal}
+\examples{
+r <- morie_scfhop_murcko("c1ccccc1CCN")
+str(r, max.level = 1)
+}

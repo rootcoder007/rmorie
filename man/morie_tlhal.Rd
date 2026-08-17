@@ -28,3 +28,10 @@ A step of the tlhal_native implementation. No other function in the package call
 The value of \code{hal_fit}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(runif(60), 30, 2)
+y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
+r <- morie_tlhal(X, y, lam = 1, iters = 300L)
+str(r, max.level = 1)
+}

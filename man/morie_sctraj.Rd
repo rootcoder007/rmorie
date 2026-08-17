@@ -26,3 +26,12 @@ A step of the sctraj_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{pseudotime}, \code{weights}, \code{lineages}, \code{curves}, \code{tree}, \code{distance}, \code{clusters}, \code{centers}, \code{n_lineages}, \code{root}, \code{cov}, \code{shrink}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+X <- rbind(matrix(rnorm(40, 0), 20, 2),
+           matrix(rnorm(40, 4), 20, 2),
+           matrix(rnorm(40, c(8, 0)), 20, 2))
+labels <- rep(0:2, each = 20)
+r <- morie_sctraj(X, labels, root = 0L)
+str(r, max.level = 1)
+}

@@ -22,3 +22,10 @@ A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap
 A list with \code{replicates}, \code{mean}, \code{se}, \code{influence_curve_se}, \code{ratio}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+d <- rnorm(50, 1)
+r <- morie_tlboot(d, estimator = function(s) mean(unlist(s)),
+                  B = 200L, method = "naive")
+str(r, max.level = 1)
+}
