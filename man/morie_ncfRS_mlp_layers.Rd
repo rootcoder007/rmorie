@@ -37,3 +37,12 @@ Techniques for Recommender Systems", *Computer* 42(8), 30-37,
 doi:10.1109/MC.2009.263. The inner-product model being generalised.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+p_u <- rnorm(4); q_i <- rnorm(4)
+Ws <- list(matrix(rnorm(4 * 8, 0, 0.3), 4, 8),
+           matrix(rnorm(2 * 4, 0, 0.3), 2, 4))
+bs <- list(rep(0, 4), rep(0, 2))
+z <- morie_ncfRS_mlp_layers(p_u, q_i, Ws, bs)
+length(z) == 2L
+}

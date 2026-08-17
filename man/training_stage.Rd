@@ -17,3 +17,7 @@ A step of the llavx_native implementation. Called by \code{morie_llavx}. See the
 A list with \code{stage}, \code{trainable}, \code{frozen}, \code{data}, \code{note}.
 }
 \keyword{internal}
+\examples{
+s <- training_stage(1)
+s$stage == 1L
+}

@@ -30,3 +30,12 @@ List with loss, ce_loss, kl_loss, teacher_probs, student_probs, agreement, estim
 \description{
 Knowledge distillation loss (Geron Ch 17, morie.fn hmkd)
 }
+\examples{
+set.seed(1)
+teacher <- matrix(rnorm(5 * 3), 5, 3)
+student <- matrix(rnorm(5 * 3), 5, 3)
+y <- sample(0:2, 5, replace = TRUE)
+kd <- morie_geron_knowledge_distillation(teacher, student, y = y,
+                                         T = 2, alpha = 0.5)
+is.list(kd)
+}

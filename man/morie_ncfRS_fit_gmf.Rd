@@ -42,3 +42,10 @@ Techniques for Recommender Systems", *Computer* 42(8), 30-37,
 doi:10.1109/MC.2009.263. The inner-product model being generalised.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+pos <- list(`1` = c(1, 2), `2` = c(1, 3), `3` = c(2, 3))
+fit <- morie_ncfRS_fit_gmf(pos, n_users = 3, n_items = 3, k_dim = 4,
+                           iters = 200, seed = 1)
+is.list(fit)
+}

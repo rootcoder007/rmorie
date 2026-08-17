@@ -20,3 +20,8 @@ A step of the masrcn_native implementation. Called by \code{morie_masrcn}. See t
 A list with \code{feature_shift}, \code{input_pixel_shift}, \code{stride}, \code{note}.
 }
 \keyword{internal}
+\examples{
+features <- matrix(as.numeric(1:36), 6, 6)
+a <- alignment_error(features, box = c(0.3, 0.3, 4.7, 4.7))
+is.list(a)
+}

@@ -20,3 +20,8 @@ A step of the masrcn_native implementation. Called by \code{alignment_error}, \c
 A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift}, \code{caveat}.
 }
 \keyword{internal}
+\examples{
+features <- matrix(as.numeric(1:36), 6, 6)
+p <- roi_pool(features, box = c(0, 0, 4, 4), out_size = 2L)
+is.list(p)
+}
