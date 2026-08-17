@@ -25,3 +25,10 @@ One pass of MM: fit the two-component mixture by EM
 A list with theta, motif, background, lambda1, z,   log_likelihood, log_likelihood_trace, n_iter, converged, alphabet,   w.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT",
+          "ACGTAACCGG", "TTACGTACGT")
+fit <- morie_motfsr_mm_fit(seqs, w = 4)
+is.list(fit)
+}

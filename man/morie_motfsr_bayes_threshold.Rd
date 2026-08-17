@@ -18,3 +18,6 @@ Bayes-optimal threshold
 The threshold t.
 }
 \keyword{internal}
+\examples{
+morie_motfsr_bayes_threshold(lambda1 = 0.3)
+}
