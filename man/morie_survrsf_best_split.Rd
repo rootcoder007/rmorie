@@ -39,3 +39,13 @@ Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
 R", R News 7(2), 25-31.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 120
+X <- matrix(rnorm(n * 3), n, 3)
+times <- rexp(n, exp(0.3 * (X[, 1] - 0.5 * X[, 2])))
+events <- rbinom(n, 1, 0.75)
+sp <- morie_survrsf_best_split(X, times, events, features = 0:2,
+                               min_deaths = 3)
+is.list(sp)
+}
