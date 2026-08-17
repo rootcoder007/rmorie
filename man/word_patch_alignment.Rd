@@ -22,3 +22,7 @@ A step of the ocrwit_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples}, \code{positive_rate}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+text_boxes <- list(c(10, 10, 60, 30), c(70, 10, 120, 30))
+word_patch_alignment(text_boxes, list(0, 5), width = 200, height = 100)
+}
