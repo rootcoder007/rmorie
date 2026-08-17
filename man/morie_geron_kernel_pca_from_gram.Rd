@@ -17,3 +17,10 @@ List(projection, eigenvalues, alphas, K_centered).
 \description{
 Eigen-decomposition step shared by every kernel-PCA variant (Geron Ch 7, morie.fn hmkprbf helper)
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(6 * 3), 6, 3)
+K <- tcrossprod(X)
+pc <- morie_geron_kernel_pca_from_gram(K, 2)
+is.list(pc) || is.matrix(pc)
+}
