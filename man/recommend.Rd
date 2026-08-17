@@ -22,3 +22,9 @@ A step of the cdaeRC_native implementation. No other function in the package cal
 A list with \code{ranking}, \code{n_scored}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
+m <- fit_cdae(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
+recommend(m, pos, u = 0L, n_items = 4, top_k = 2)
+}

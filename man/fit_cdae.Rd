@@ -28,3 +28,9 @@ A step of the cdaeRC_native implementation. Called by \code{morie_cdaeRC}. See t
 A list with \code{estimate}, \code{W}, \code{W_prime}, \code{V}, \code{b}, \code{b_prime}, \code{loss_history}, \code{final_loss}, \code{k}, \code{q}, \code{n_neg}, \code{activation}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
+m <- fit_cdae(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
+str(m, max.level = 1)
+}

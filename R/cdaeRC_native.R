@@ -25,8 +25,8 @@
 #' @export
 .cdae_act <- function(name, x) {
   if (name == "sigmoid") {
-    if (x >= -700) return(1.0 / (1.0 + exp(-x)))
-    return(0.0)
+    # vectorised clamp: the scalar if() errors on vector activations
+    return(1.0 / (1.0 + exp(-pmax(x, -700))))
   }
   if (name == "identity") return(x)
   if (name == "tanh") return(tanh(x))
@@ -177,9 +177,11 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 
   rand <- function() (as.numeric(.ghc_unif(rng, 1L)) - 0.5) * 2.0 * init_scale
 
-  W  <- replicate(I, replicate(K, rand(), simplify = FALSE), simplify = FALSE)
-  Wp <- replicate(I, replicate(K, rand(), simplify = FALSE), simplify = FALSE)
-  V  <- replicate(U, replicate(K, rand(), simplify = FALSE), simplify = FALSE)
+  # inner replicate must SIMPLIFY: with simplify = FALSE each weight
+  # row was a list of scalar lists and every update was numeric * list
+  W  <- replicate(I, replicate(K, rand()), simplify = FALSE)
+  Wp <- replicate(I, replicate(K, rand()), simplify = FALSE)
+  V  <- replicate(U, replicate(K, rand()), simplify = FALSE)
   b  <- rep(0.0, K)
   bp <- rep(0.0, I)
   a <- as.numeric(alpha); lm <- as.numeric(lam)
@@ -198,7 +200,9 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
       guard <- 0L
       n_neg_i <- as.integer(n_neg)
       while (length(neg) < n_neg_i && guard < 100L * n_neg_i) {
-        j <- as.integer(.ghc_unif(rng, 1L) * I) %% I
+        # 1-based, to match seen_set: the 0-based draw put item 0 into
+        # tgt and Wp[[0]] cannot exist
+        j <- as.integer(.ghc_unif(rng, 1L) * I) %% I + 1L
         if (!(j %in% seen_set)) neg <- c(neg, j)
         guard <- guard + 1L
       }
@@ -261,7 +265,7 @@ recommend <- function(model, pos, u, n_items, top_k = 5L,
   W <- model$W; Wp <- model$W_prime; V <- model$V
   b <- model$b; bp <- model$b_prime
   u_int <- as.integer(u)
-  seen <- unique(as.integer(pos[[as.character(u_int) + 1L]] %||% pos[[u_int + 1L]] %||% c()))
+  seen <- unique(as.integer((if (!is.null(names(pos))) pos[[as.character(u_int)]] else pos[[u_int + 1L]]) %||% c()))
   seen_set <- seen + 1L
   I <- as.integer(n_items)
   y <- ifelse(seq_len(I) %in% seen_set, 1.0, 0.0)
