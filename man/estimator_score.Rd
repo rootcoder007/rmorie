@@ -21,3 +21,9 @@ A step of the comet_native implementation. Called by \code{morie_comet}. See the
 A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+hyp <- rnorm(4); src <- rnorm(4); ref <- rnorm(4)
+W <- matrix(rnorm(24, 0, 0.3), 1, 24)
+estimator_score(hyp, src, ref, W)
+}

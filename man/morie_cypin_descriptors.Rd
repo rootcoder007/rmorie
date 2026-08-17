@@ -26,3 +26,7 @@ A numeric vector in the order given by the module's names.
     2nd edition, Chapman and Hall.
 }
 \keyword{internal}
+\examples{
+r <- morie_cypin_descriptors("c1ccccc1O")
+str(r, max.level = 1)
+}

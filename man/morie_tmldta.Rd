@@ -26,3 +26,12 @@ morie_tmldta(y, D, X, candidate_strata = NULL, method = "cv-tmle", n_folds = 10,
 A list with \code{estimate}, \code{se}, \code{n},   \code{ci}, \code{level}, \code{levels_by_split},   \code{level_counts}, \code{modal_levels}, \code{level_agreement},   \code{separation}, \code{near_tie}, \code{level_means},   \code{split_estimates}, \code{n_splits}, \code{epsilon},   \code{candidate_levels}, \code{method}, \code{sigma},   \code{algorithm}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 120
+X <- matrix(rnorm(n * 2), n, 2)
+D <- rbinom(n, 1, 0.5)
+y <- plogis(0.8 * D + X[, 1] + rnorm(n, 0, 0.4))
+r <- morie_tmldta(y, D, X, method = "sample-split")
+str(r, max.level = 1)
+}

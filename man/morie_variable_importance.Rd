@@ -23,3 +23,11 @@ Loop the contrast over every column of X in turn
 A list of per-variable results, sorted by absolute estimate.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 120
+X <- cbind(rbinom(n, 2, 0.5), rbinom(n, 1, 0.5), rbinom(n, 2, 0.4))
+y <- plogis(0.6 * X[, 1] + 0.4 * X[, 2] + rnorm(n, 0, 0.5))
+r <- morie_variable_importance(y, X, method = "naive")
+str(r, max.level = 1)
+}

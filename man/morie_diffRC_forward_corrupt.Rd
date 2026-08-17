@@ -19,3 +19,9 @@ Closed form, so no simulation is needed to check it.
 A list with \code{x_t}, \code{mean}, \code{std} and   \code{sampled}.
 }
 \keyword{internal}
+\examples{
+rng <- .ghc_rng(1)
+r <- morie_diffRC_forward_corrupt(x0 = c(1, -1, 0.5),
+                                  alpha_bar_t = 0.7, rng = rng)
+str(r, max.level = 1)
+}

@@ -20,3 +20,7 @@ One indicator for the user, one for the item. The only non-zero interaction is t
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+r <- design_mf(u = 0L, i = 1L, n_users = 3, n_items = 4)
+r
+}

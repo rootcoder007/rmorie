@@ -24,3 +24,11 @@ A step of the flxipt_native implementation. Called by \code{iptw_ate}. See the f
 A list with \code{propensity}, \code{weights}, \code{estimate}, \code{sl_weights}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n}, \code{trim}, \code{stabilized}, \code{library}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 60
+H <- matrix(rnorm(n * 2), n, 2)
+A <- rbinom(n, 1, plogis(0.5 * H[, 1]))
+r <- flexible_iptw(A, H, n_folds = 4)
+str(r, max.level = 1)
+}

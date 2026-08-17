@@ -25,3 +25,11 @@ A step of the flxipt_native implementation. Called by \code{flexible_iptw}. See 
 A list with \code{fitted}, \code{estimate}, \code{weights}, \code{weight_vector}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{best_candidate_risk}, \code{discrete_choice}, \code{level_one}, \code{candidate_fits}, \code{library}, \code{n}, \code{n_folds}, \code{meta}, \code{loss}, \code{binary}, \code{honest_level_one}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 40
+X <- matrix(rnorm(n * 2), n, 2)
+y <- 1 + X[, 1] - 0.5 * X[, 2] + rnorm(n, 0, 0.3)
+r <- super_learner(y, X, n_folds = 4)
+str(r, max.level = 1)
+}

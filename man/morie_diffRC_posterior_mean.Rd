@@ -21,3 +21,9 @@ DDPM posterior mean
 A list with the mean and the two coefficients.
 }
 \keyword{internal}
+\examples{
+r <- morie_diffRC_posterior_mean(x_t = c(0.8, -0.9), x0_hat = c(1, -1),
+                                 alpha_bar_t = 0.7, alpha_bar_prev = 0.8,
+                                 beta_t = 0.1)
+str(r, max.level = 1)
+}
