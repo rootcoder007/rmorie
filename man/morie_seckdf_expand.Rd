@@ -19,3 +19,10 @@ Counter-mode expansion; the counter is a single octet so output is capped at \co
 List with \code{okm}, \code{blocks}, \code{length}.
 }
 \keyword{internal}
+\examples{
+prk <- morie_seckdf_extract(rep(as.raw(0x0b), 22), as.raw(0:12))$prk
+info <- as.raw(c(0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7,
+                 0xf8, 0xf9))
+r <- morie_seckdf_expand(prk, info, 42L)
+str(r, max.level = 1)
+}

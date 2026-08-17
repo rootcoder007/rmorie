@@ -22,3 +22,10 @@ A step of the clpopt_native implementation. Called by \code{morie_clpopt}. See t
 The value of \code{.clpopt_report}.
 }
 \keyword{internal}
+\examples{
+sf <- standard_form(c = c(-3, -5), A_ub = rbind(c(1, 0), c(0, 2),
+                                                c(3, 2)),
+                    b_ub = c(4, 12, 18))
+r <- simplex(sf$c, sf$A, sf$b)
+str(r, max.level = 1)
+}

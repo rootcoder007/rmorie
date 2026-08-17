@@ -14,3 +14,6 @@ morie_act
 The value of \code{stop}.
 }
 \keyword{internal}
+\examples{
+morie_act("relu", c(-1, 0.5))
+}
