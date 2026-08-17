@@ -39,3 +39,13 @@ Callaway, B. and Sant'Anna, P. H. C. (2021).
 Difference-in-differences with multiple time periods. Journal of
 Econometrics, 225(2), 200-230.
 }
+\examples{
+set.seed(1)
+nu <- 6; T <- 5
+unit <- rep(1:nu, each = T)
+time <- rep(1:T, nu)
+ft <- rep(c(Inf, Inf, Inf, 4, 4, 3), each = T)
+D <- as.integer(time >= ft)
+y <- rnorm(nu * T) + D * 1.5
+morie_cssant(y, D, unit, time)
+}
