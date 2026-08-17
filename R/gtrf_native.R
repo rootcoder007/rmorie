@@ -180,7 +180,7 @@ graph_transformer_layer <- function(H, adj, WQ, WK, WV, W1, W2,
   res <- .gtrf_normalize(res, norm)
   W1 <- as.matrix(W1); W2 <- as.matrix(W2)
   storage.mode(W1) <- "double"; storage.mode(W2) <- "double"
-  H1 <- pmax(0, res %*% t(W1))
+  H1 <- pmax(res %*% t(W1), 0)
   ff <- H1 %*% t(W2)
   out <- res + ff
   .gtrf_normalize(out, norm)

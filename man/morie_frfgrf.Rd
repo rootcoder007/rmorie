@@ -43,3 +43,9 @@ Machine Learning Research 13, 1063-1095. Earlier consistency analysis
 of the same shape.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+y <- rnorm(50)
+X <- matrix(rnorm(100), 50, 2)
+morie_frfgrf(y, X, n_trees = 20)
+}

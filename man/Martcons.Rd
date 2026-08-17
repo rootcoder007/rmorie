@@ -31,3 +31,6 @@ and (6.18), and Lemma 6.52. The approach is due to Walker (2003,
 2004) as the book's historical notes record. Read from the copy of
 the book held in the corpus.
 }
+\examples{
+Martcons(dh2 = c(0.1, 0.2, 0.15))
+}

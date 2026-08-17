@@ -25,3 +25,10 @@ Splits the vertices into \code{k} nearly-balanced parts whose between-part edge 
 A list with \code{estimate} (= edge-cut), \code{partition},   \code{edge_cut}, \code{k}, \code{sizes}, \code{part_weights},   \code{balance}, \code{total_edge_weight}, \code{cut_fraction},   \code{matching}, \code{initial}, \code{refinement}, \code{tolerance},   \code{n}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+A <- matrix(rbinom(900, 1, 0.2), 30, 30)
+A <- (A + t(A) > 0) * 1
+diag(A) <- 0
+morie_grclus(A, k = 2L)
+}

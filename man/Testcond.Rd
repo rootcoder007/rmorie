@@ -42,3 +42,7 @@ Nonparametric Bayesian Inference, Theorem 8.9, Section 8.2,
 conditions (8.4), (8.5) and (8.6). Read from the copy of the book
 held in the corpus.
 }
+\examples{
+Testcond(prior_ball = 0.5, log_entropy = 10, sieve_mass = 0.1,
+         eps_bar = 0.1, eps = 0.2, n = 100, Cconst = 1)
+}
