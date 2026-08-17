@@ -41,3 +41,9 @@ doi:10.1093/bioinformatics/btr509, for the conventional genotype
 likelihood this replaces.
 }
 \keyword{internal}
+\examples{
+reads <- list(list(pos = 0L, seq = "ACGTACGT"),
+              list(pos = 2L, seq = "GTTCGT"))
+r <- varcal_pileup_column(reads, position = 3L, reference = "ACGTACGTAC")
+str(r, max.level = 1)
+}

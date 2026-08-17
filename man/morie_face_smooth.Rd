@@ -49,3 +49,10 @@ a two-component Karhunen-Loeve design with sigma^2 = 0.09 it returned
 Xiao L, Zipunnikov V, Ruppert D, Crainiceanu C (2016)
 \emph{Stat Comput} 26:409-421, \doi{10.1007/s11222-014-9485-x}.
 }
+\examples{
+set.seed(1)
+tt <- seq(0, 1, length.out = 30)
+Y <- t(replicate(8, sin(2 * pi * tt) + rnorm(30, 0, 0.2)))
+r <- morie_face_smooth(Y, argvals = tt, n_basis = 8L)
+str(r, max.level = 1)
+}

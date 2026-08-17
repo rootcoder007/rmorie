@@ -18,3 +18,9 @@ A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfschn}. 
 A list with \code{R}, \code{t}.
 }
 \keyword{internal}
+\examples{
+A <- list(R = diag(2), t = c(1, 0))
+B <- list(R = diag(2), t = c(0, 2))
+C <- alfRcomp(A, B)
+alfRap(C, c(0, 0))
+}
