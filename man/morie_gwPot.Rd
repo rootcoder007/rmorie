@@ -18,3 +18,6 @@ Part of the gwPot_mixedcase_native implementation; see the file header for the s
 A list with \code{estimate}, \code{agwp}, \code{agwp_co2}, \code{gwp_from_agwp}, \code{lifetime}, \code{radiative_efficiency}, \code{gas}, \code{horizon}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_gwPot("CO2")
+}

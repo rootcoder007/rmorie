@@ -38,3 +38,7 @@ Lai, T. L. (1995). Sequential changepoint detection in
 quality control and dynamical systems. Journal of the Royal
 Statistical Society B, 57(4), 613-658.
 }
+\examples{
+set.seed(1)
+morie_glrtest(x = rbinom(50, 1, 0.5), p0 = 0.3, p1 = 0.6)
+}
