@@ -20,3 +20,14 @@ A step of the egnnL_native implementation. Called by \code{egcl}. See the file h
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- lapply(1:3, function(i) rnorm(3))
+phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+phi_x <- function(m) sum(m) * 0.01
+M <- lapply(seq_len(3), function(i) vector("list", 3))
+for (i in 1:3) for (j in 1:3) if (i != j)
+  M[[i]][[j]] <- edge_message(rnorm(2), rnorm(2), X[[i]], X[[j]], phi_e)
+Xn <- coord_update(X, M, phi_x)
+length(Xn)
+}
