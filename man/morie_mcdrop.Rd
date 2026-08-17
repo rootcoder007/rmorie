@@ -20,3 +20,9 @@ same structure -- an n by T by k array -- supplied by the caller, so
 the dropout masks live outside this function and both language arms
 see identical numbers.
 }
+\examples{
+set.seed(1)
+logits <- array(rnorm(2 * 5 * 3), dim = c(2, 5, 3))
+r <- morie_mcdrop(logits)
+c(length(r$pred), r$k)
+}
