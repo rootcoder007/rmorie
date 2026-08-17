@@ -18,3 +18,7 @@ Quantise angles to 2^bits uniform sectors
 A list with \code{estimate}, \code{indices}, \code{values},   \code{errors}, \code{mse}, \code{max_abs_error}, \code{delta},   \code{half_delta}, \code{mse_bound}, \code{bits}, \code{levels},   \code{method}.
 }
 \keyword{internal}
+\examples{
+q <- morie_tqang(c(0.1, 0.5, 1.0, -2.0), bits = 8)
+is.list(q) || is.numeric(q)
+}

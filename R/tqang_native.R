@@ -16,8 +16,10 @@
 #' @param theta Angle in radians.
 #' @return Angle in [-pi, pi).
 #' @export
+.tqang_fmod <- function(x, y) x - y * trunc(x / y)
+
 wrap_angle <- function(theta) {
-  t <- fmod(as.numeric(theta) + pi, .TWO_PI)
+  t <- .tqang_fmod(as.numeric(theta) + pi, .TWO_PI)
   if (t < 0) t <- t + .TWO_PI
   t - pi
 }
