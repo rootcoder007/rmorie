@@ -35,3 +35,9 @@ Meng, X.-L. and Wong, W. H. (1996). Simulating ratios
 of normalizing constants via a simple identity. Statistica
 Sinica, 6, 831-860.
 }
+\examples{
+set.seed(1)
+morie_bridgs(draws1 = as.list(rnorm(100)), draws2 = as.list(rnorm(100, 0.5)),
+             log_q1 = function(x) -0.5 * x^2,
+             log_q2 = function(x) -0.5 * (x - 0.5)^2)
+}

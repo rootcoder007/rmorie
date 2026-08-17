@@ -22,3 +22,11 @@ A step of the crkbsg_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{kriging_prediction}, \code{kriging_variance}, \code{variance_reduction}, \code{weights_primary}, \code{weights_secondary}, \code{lagrange}, \code{targets}, \code{coregionalisation}, \code{nugget_matrix}, \code{model}, \code{range}, \code{n_primary}, \code{n_secondary}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+coords <- matrix(runif(20), 10, 2)
+y <- rnorm(10)
+z <- rnorm(10)
+s_predict <- matrix(runif(4), 2, 2)
+morie_crkbsg_cokriging(coords, y, z, s_predict)
+}

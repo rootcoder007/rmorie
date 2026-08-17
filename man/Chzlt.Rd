@@ -40,3 +40,8 @@ check this implementation.
 Cinelli & Hazlett (2020), Making Sense of Sensitivity,
 JRSS B 82(1):39-67.
 }
+\examples{
+set.seed(1)
+Chzlt(model = rnorm(50), treat = rbinom(50, 1, 0.5),
+      cov = matrix(rnorm(100), 50, 2), R2_yu = 0.1, R2_du = 0.1)
+}

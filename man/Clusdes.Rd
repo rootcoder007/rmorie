@@ -37,3 +37,6 @@ against the linear cost function c1 m + c2 m k. Chapter 9 was NOT in
 the scanned excerpt available to this batch, so the standard
 published form is used.
 }
+\examples{
+Clusdes(rho = 0.05, S2 = 1, c1 = 10, c2 = 1, budget = 1000)
+}
