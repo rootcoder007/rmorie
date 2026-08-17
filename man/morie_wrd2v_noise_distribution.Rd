@@ -18,3 +18,7 @@ A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}. S
 The value of \code{stats::setNames}.
 }
 \keyword{internal}
+\examples{
+morie_wrd2v_noise_distribution(counts = c(the = 100, cat = 20, sat = 5),
+                               power = 0.75)
+}

@@ -34,3 +34,6 @@ A list with the half-life, the elimination rate constant,   mean residence time,
     763-766.
 }
 \keyword{internal}
+\examples{
+morie_halft(Vd = 50, Cl = 5)
+}

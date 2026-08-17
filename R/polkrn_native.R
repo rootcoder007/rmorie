@@ -259,7 +259,7 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
     stop(sprintf("rbf_basis: need at least one centre, got %s", n_centres))
   }
   centres <- sapply(seq_len(m), function(j) {
-    .polkrn_quantile7(xs, (j + 0.5) / m)
+    .polkrn_quantile7(xs, (j - 0.5) / m)
   })
   uniq <- sort(unique(centres))
   if (length(uniq) < 2L) {
