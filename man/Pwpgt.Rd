@@ -29,3 +29,13 @@ lambda_0k(t - t_(k-1)) exp(beta' X).
 Prentice, R. L., Williams, B. J. and Peterson, A. V.
 (1981), Biometrika 68(2), 373-379.
 }
+\examples{
+set.seed(1)
+occ <- rep(1:3, times = 20)
+start <- (occ - 1) * 10
+stop <- occ * 10 - runif(60, 0, 3)
+event <- rbinom(60, 1, 0.6)
+X <- matrix(rnorm(60 * 2), 60, 2)
+fit <- Pwpgt(start, stop, event, X, occurrence = occ)
+length(fit$estimate) == 2L
+}
