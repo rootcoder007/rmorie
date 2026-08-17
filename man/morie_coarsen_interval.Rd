@@ -36,3 +36,8 @@ software package instead. The two sources above are what this is built
 from.
 }
 \keyword{internal}
+\examples{
+times <- c(1.2, 3.4, 2.1, 5.0)
+deltas <- c(1, 0, 1, 1)
+morie_coarsen_interval(times, deltas)
+}

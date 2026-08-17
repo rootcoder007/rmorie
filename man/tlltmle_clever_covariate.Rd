@@ -19,3 +19,9 @@ A step of the tlltmle_native implementation. No other function in the package ca
 A list with \code{H}, \code{max}, \code{mean}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+A <- rbinom(50, 1, 0.5)
+g <- runif(50, 0.2, 0.8)
+tlltmle_clever_covariate(A, g)
+}

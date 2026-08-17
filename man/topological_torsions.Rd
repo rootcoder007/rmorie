@@ -19,3 +19,8 @@ Every topological torsion in a molecule, with multiplicities
 Canonical torsion code -> count.
 }
 \keyword{internal}
+\examples{
+elements <- c("C", "C", "C", "C")
+bonds <- list(c(0, 1), c(1, 2), c(2, 3))
+topological_torsions(elements, bonds)
+}

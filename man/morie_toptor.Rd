@@ -23,3 +23,8 @@ Topological torsions for a molecule, or for a set of molecules
 A list with \code{estimate}, \code{torsions},   \code{n_distinct}, \code{n_total}, \code{method}, and optionally   \code{reference_torsions}, \code{similarity}, \code{ranking},   \code{trend}.
 }
 \keyword{internal}
+\examples{
+elements <- c("C", "C", "C", "C")
+bonds <- list(c(0, 1), c(1, 2), c(2, 3))
+morie_toptor(elements, bonds)
+}
