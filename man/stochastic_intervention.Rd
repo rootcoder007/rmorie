@@ -46,3 +46,8 @@ Learning for Time Series", in Targeted Learning in Data Science,
 Springer, doi:10.1007/978-3-319-65304-4_19.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+A <- rnorm(10)
+stochastic_intervention(A, nodes = c(0, 1, 2), shift = 0.5)
+}
