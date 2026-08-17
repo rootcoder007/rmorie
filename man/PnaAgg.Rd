@@ -28,3 +28,8 @@ n_columns)
 \description{
 Principal Neighbourhood Aggregation (Corso et al. 2020, eq. 7)
 }
+\examples{
+A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+X <- matrix(rnorm(6), 3, 2)
+PnaAgg(A, X)
+}

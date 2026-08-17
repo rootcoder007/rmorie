@@ -35,3 +35,8 @@ Smith, A. F. M. and Gelfand, A. E. (1992). Bayesian
 statistics without tears. The American Statistician, 46(2),
 84-88.
 }
+\examples{
+set.seed(1)
+morie_bayisr(samples = as.list(rnorm(100)), log_target = function(x) -0.5 * x^2,
+             log_proposal = function(x) -0.5 * x^2, m = 20)
+}

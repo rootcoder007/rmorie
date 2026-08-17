@@ -29,3 +29,8 @@ Standard published form; the article could not be obtained (JSTOR
 returned an access stub and NBER t0224 a zero-page PDF), so it was
 not read; only the bound stated here is claimed.
 }
+\examples{
+set.seed(1)
+Mtsbound(y = rnorm(50), z = rbinom(50, 1, 0.5), d = rbinom(50, 1, 0.5),
+         ymin = -3, ymax = 3)
+}

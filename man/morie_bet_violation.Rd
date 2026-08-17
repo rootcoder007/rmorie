@@ -22,3 +22,6 @@ A step of the bndpcb_native implementation. No other function in the package cal
 A list with \code{max_shortfall}, \code{at_cut}, \code{subset_coverage}, \code{subset_share}, \code{bet_proof}, \code{level}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_bet_violation(theta = 0.3, draws = 2000L)
+}

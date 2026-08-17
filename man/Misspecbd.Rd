@@ -34,3 +34,6 @@ Sect. 2.  The worklist attributed this row to Andrews and Kasy
 as the source.  The Quantitative Economics article is not in the
 local corpus and was not read.
 }
+\examples{
+Misspecbd(estimate = 0.5, sensitivity = c(0.1, 0.2), c = 0.3, se = 0.1)
+}
