@@ -34,3 +34,10 @@ ponytail: centre crop to a square, then nearest-neighbour subsample.
 weights.transforms() uses bilinear resizing; swap the sampler if you
 need to match torchvision to the last decimal.
 }
+\examples{
+set.seed(1)
+img <- array(runif(8 * 8 * 3), dim = c(8, 8, 3))
+out <- morie_pretprep(img, size = 4, mean = c(0.5, 0.5, 0.5),
+                      sd = c(0.25, 0.25, 0.25))
+dim(out$image)
+}
