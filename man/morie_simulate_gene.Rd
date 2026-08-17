@@ -45,3 +45,8 @@ doi:10.1038/s41586-018-0414-6, for the steady-state model this
 generalises.
 }
 \keyword{internal}
+\examples{
+sim <- morie_simulate_gene(alpha = 5, beta = 0.3, gamma = 0.2,
+                           t_switch = 8, times = seq(0, 20, by = 2))
+length(sim$observations)
+}
