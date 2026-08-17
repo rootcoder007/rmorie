@@ -28,3 +28,6 @@ the constraints \verb{sum lambda = 1} and \verb{sum mu = 0}.  The covariate
 contributes only through the cross-variogram: set it to zero and the
 mu weights vanish, leaving ordinary kriging on Z1.
 }
+\examples{
+cokrg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2), target = rnorm(50))
+}

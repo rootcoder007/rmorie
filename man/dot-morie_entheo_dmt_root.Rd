@@ -17,3 +17,6 @@ Resolve the DMT_Imaging dataset root, honouring
 Parity with Python \code{DATASET_ROOT} / \verb{_require_root}.
 }
 \keyword{internal}
+\examples{
+.morie_entheo_dmt_root()
+}
