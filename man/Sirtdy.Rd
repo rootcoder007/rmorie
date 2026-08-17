@@ -48,3 +48,10 @@ Mossong, J. et al. (2008). Social contacts and mixing
 patterns relevant to the spread of infectious diseases. PLoS Medicine
 5(3), e74. \doi{10.1371/journal.pmed.0050074}
 }
+\examples{
+S <- c(500, 500)
+I <- c(5, 5)
+R <- c(0, 0)
+contact_matrix <- matrix(c(2, 1, 1, 2), 2, 2)
+Sirtdy(S, I, R, contact_matrix, gamma = 0.1)
+}

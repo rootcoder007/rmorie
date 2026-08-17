@@ -22,3 +22,9 @@ A step of the rangayyan_adapt implementation. No other function in the package c
 A list with \code{y}, \code{W}, \code{route}, \code{fs}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+s <- sin(2 * pi * (1:200) / 20)
+x <- s + rnorm(200) * 0.3
+WienerFilt(x, desired = s, order = 8)
+}

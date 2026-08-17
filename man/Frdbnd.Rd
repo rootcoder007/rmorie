@@ -33,3 +33,6 @@ marges sont donnees, Annales de l'Universite de Lyon A 14:53-77;
 Hoeffding (1940), Masstabinvariante Korrelationstheorie, Schriften
 des Mathematischen Instituts der Universitat Berlin 5:181-233.
 }
+\examples{
+Frdbnd(F_0 = c(0.2, 0.5, 0.8), F_1 = c(0.3, 0.6, 0.9))
+}

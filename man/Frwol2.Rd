@@ -36,3 +36,8 @@ Frank and Wolfe (1956), An algorithm for quadratic
 programming, Naval Research Logistics Quarterly 3(1-2):95-110.
 \doi{10.1002/nav.3800030109}
 }
+\examples{
+V <- rbind(c(0, 0), c(1, 0), c(0, 1))
+Frwol2(function(x) sum((x - 0.3)^2), function(x) 2 * (x - 0.3),
+       domain = V, x0 = c(0.3, 0.3))
+}

@@ -30,3 +30,6 @@ Phi(n) = var_p / (var_p + (var_i + var_pi)/n).
 \references{
 Brennan (2001), Generalizability Theory, Springer, ch. 3.
 }
+\examples{
+Genvdm(c(0.5, 0.2, 0.3), n_proposed = 20)
+}

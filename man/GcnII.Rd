@@ -37,3 +37,8 @@ Chen, Wei, Huang, Ding and Li (2020), Simple and deep
 graph convolutional networks, ICML 2020, PMLR 119:1725-1735, eq.
 (3). arXiv:2007.02133
 }
+\examples{
+A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+H0 <- matrix(rnorm(6), 3, 2)
+GcnII(A, H0)
+}
