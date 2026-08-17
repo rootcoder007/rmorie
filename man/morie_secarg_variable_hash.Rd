@@ -18,3 +18,7 @@ BLAKE2b stretched past 64 bytes; the first 32 bytes of every subsequent 64-byte 
 Raw vector of \code{length} bytes.
 }
 \keyword{internal}
+\examples{
+r <- morie_secarg_variable_hash(charToRaw("hello"), 64L)
+length(r)
+}

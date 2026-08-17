@@ -22,3 +22,7 @@ Mirrors clpopt.standard_form.
 A list with \code{A}, \code{b}, \code{c}, \code{n_original}, \code{n_slack}, \code{row_kinds}.
 }
 \keyword{internal}
+\examples{
+sf <- standard_form(c = c(1, 2), A_ub = rbind(c(1, 1)), b_ub = 4)
+str(sf, max.level = 1)
+}

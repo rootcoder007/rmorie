@@ -22,3 +22,9 @@ A step of the snmtst_native implementation. No other function in the package cal
 A list with \code{curve}, \code{family}, \code{M}, \code{width}.
 }
 \keyword{internal}
+\examples{
+beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
+r <- sensitivity_curve(beta, n_pre = 2, n_post = 3,
+                       Ms = c(0, 0.05, 0.1))
+str(r, max.level = 1)
+}

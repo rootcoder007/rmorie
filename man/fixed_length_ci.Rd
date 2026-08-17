@@ -24,3 +24,8 @@ A step of the snmtst_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{lower}, \code{upper}, \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family}, \code{level}, \code{conservative}, \code{method}.
 }
 \keyword{internal}
+\examples{
+beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
+r <- fixed_length_ci(beta, sigma = 0.1, n_pre = 2, n_post = 3, M = 0.1)
+str(r, max.level = 1)
+}

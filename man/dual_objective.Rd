@@ -19,3 +19,10 @@ A step of the svmopt_native implementation. Called by \code{smo}. See the file h
 A numeric value.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- rbind(matrix(rnorm(10, -1), 5, 2), matrix(rnorm(10, 1), 5, 2))
+y <- rep(c(-1, 1), each = 5)
+K <- X \%*\% t(X)
+dual_objective(rep(0.1, 10), y, K)
+}
