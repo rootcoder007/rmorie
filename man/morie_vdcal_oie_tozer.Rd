@@ -38,3 +38,6 @@ A list with the total and the plasma, extracellular and   tissue terms.
     Disposition 47(12), 1380-1387.
 }
 \keyword{internal}
+\examples{
+morie_vdcal_oie_tozer(0.10, 0.05)
+}

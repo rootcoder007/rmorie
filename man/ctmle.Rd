@@ -25,3 +25,14 @@ A step of the tlctmle_native implementation. Called by \code{morie_tlctmle}. See
 A list with \code{estimate}, \code{psi}, \code{selected}, \code{selected_covariates}, \code{cv_risks}, \code{cv_losses}, \code{variance_penalties}, \code{penalized}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 100
+W <- matrix(rnorm(n * 3), n, 3)
+A <- rbinom(n, 1, plogis(W[, 1]))
+Y <- rbinom(n, 1, plogis(0.5 * A + W[, 2]))
+Q1 <- plogis(0.5 + W[, 2])
+Q0 <- plogis(W[, 2])
+g_models <- list(1, c(1, 2), c(1, 2, 3))
+ctmle(A, Y, Q1, Q0, W, g_models, V = 3L)
+}
