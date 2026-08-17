@@ -41,3 +41,11 @@ doi:10.1201/9780203492024. The sparse GMRF computations the
 method rests on.
 }
 \keyword{internal}
+\examples{
+ga <- gaussian_approximation(
+  log_lik = function(x) -0.5 * (x - 2)^2,
+  log_lik_d1 = function(x) -(x - 2),
+  log_lik_d2 = function(x) -1,
+  prior_mean = 0, prior_precision = 1)
+abs(ga$mode - 1) < 1e-8
+}
