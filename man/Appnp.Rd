@@ -32,3 +32,8 @@ softmax on the last step.
 Klicpera, Bojchevski and Guennemann (2019), ICLR;
 arXiv:1810.05997, Sect. 3.  Read from the ar5iv rendering.
 }
+\examples{
+A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+H <- matrix(rnorm(6), 3, 2)
+Appnp(A, H)
+}

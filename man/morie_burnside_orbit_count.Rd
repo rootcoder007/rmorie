@@ -29,3 +29,7 @@ wrong whenever some arrangements have extra symmetry of their own.
 necklaces of length 4 have 16 colourings and 4 rotations but 6
 orbits, not 4.
 }
+\examples{
+group_permutations <- list(c(0, 1, 2), c(1, 2, 0), c(2, 0, 1))
+morie_burnside_orbit_count(group_permutations, n_colours = 2)
+}

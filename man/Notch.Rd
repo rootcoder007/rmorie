@@ -21,3 +21,6 @@ A step of the rangayyan_filt2 implementation. No other function in the package c
 A list with \code{b}, \code{a}, \code{gain}, \code{H}, \code{f0}, \code{fs}, \code{r}, \code{bandwidth_hz}, \code{omega_0}, \code{zeros}, \code{poles}, \code{gain_at_the_notch}, \code{dc_gain}, \code{iir}, \code{poles_narrow_the_notch}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Notch(notch_freq = 60, bandwidth = 5, fs = 1000)
+}

@@ -17,3 +17,6 @@ List with x2 (Pearson), lrt, or_hat, or_lower, or_upper.
 \description{
 Equations 1.7, 1.8, 1.10 of Bilder & Loughin (2025).
 }
+\examples{
+morie_two_group_binomial(30, 100, 45, 100)
+}
