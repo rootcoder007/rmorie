@@ -16,7 +16,9 @@
 #' @keywords internal
 #' @noRd
 .ghc_mpfn_sig <- function(x) {
-  if (x > -700) 1 / (1 + exp(-x)) else 0
+  # vectorised clamp: the scalar if() errors on any vector input
+  xc <- pmax(x, -700)
+  1 / (1 + exp(-xc))
 }
 
 #' Eq. (1)'s M_t

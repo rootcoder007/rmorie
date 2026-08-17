@@ -67,11 +67,9 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ncfRS_sig <- function(x) {
-  if (x > -700) {
-    1.0 / (1.0 + exp(-x))
-  } else {
-    0.0
-  }
+  # vectorised clamp: the scalar if() errors on any vector input
+  xc <- pmax(x, -700)
+  1.0 / (1.0 + exp(-xc))
 }
 
 #' morie_ncfRS_gmf
