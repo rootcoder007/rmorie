@@ -58,3 +58,9 @@ Hensman, Matthews and Ghahramani (2015), Scalable
 variational Gaussian process classification, AISTATS 2015, PMLR
 38:351-360. arXiv:1411.2005
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(20), 10, 2)
+y <- rbinom(10, 1, 0.5)
+Gpcgs(X, y)
+}

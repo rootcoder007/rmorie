@@ -36,3 +36,10 @@ V = h^2 K + (1 - h^2) I.
 VanRaden (2008), Journal of Dairy Science
 91(11):4414-4423. \doi{10.3168/jds.2007-0980}
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(20), 10, 2)
+K <- X \%*\% t(X)
+y <- rnorm(10)
+Hertbg(y, K)
+}

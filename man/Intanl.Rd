@@ -37,3 +37,8 @@ Formula: E[Y^a|V] = b0 + b1 a + b2 V a + b3 V.
 Hernan and Robins (2020), Causal Inference: What If,
 Chapman and Hall/CRC, section 12.5, p. 171.
 }
+\examples{
+set.seed(1)
+Intanl(y = rnorm(20), A = rbinom(20, 1, 0.5), V = rbinom(20, 1, 0.5),
+       H = runif(20, 0.5, 1.5))
+}
