@@ -18,3 +18,9 @@ A step of the alf_core implementation. Called by \code{Alffape}, \code{Alfipa}. 
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+th <- pi / 6
+Tf <- list(R = rbind(c(cos(th), -sin(th)), c(sin(th), cos(th))),
+           t = c(1, -1))
+alfRinvap(Tf, alfRap(Tf, c(2, 3)))
+}

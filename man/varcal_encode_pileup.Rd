@@ -44,3 +44,12 @@ doi:10.1093/bioinformatics/btr509, for the conventional genotype
 likelihood this replaces.
 }
 \keyword{internal}
+\examples{
+reads <- c(
+  lapply(1:3, function(i) list(pos = 0L, seq = "ACGTTCGT")),
+  lapply(1:3, function(i) list(pos = 0L, seq = "ACGTACGT")))
+cands <- varcal_find_candidates(reads, reference = "ACGTACGTAC")
+enc <- varcal_encode_pileup(reads, "ACGTACGTAC", cands[[1]], width = 7,
+                            height = 8)
+str(enc, max.level = 1)
+}

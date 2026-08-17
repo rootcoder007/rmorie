@@ -43,3 +43,10 @@ doi:10.1093/bioinformatics/btr509, for the conventional genotype
 likelihood this replaces.
 }
 \keyword{internal}
+\examples{
+reads <- c(
+  lapply(1:3, function(i) list(pos = 0L, seq = "ACGTTCGT")),
+  lapply(1:3, function(i) list(pos = 0L, seq = "ACGTACGT")))
+r <- morie_varcal(reads, reference = "ACGTACGTAC")
+str(r, max.level = 1)
+}

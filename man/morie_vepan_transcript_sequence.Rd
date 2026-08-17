@@ -18,3 +18,8 @@ of its bases (returns list(seq, gpos)).
 A list with \code{seq}, \code{gpos}.
 }
 \keyword{internal}
+\examples{
+genome <- "AATGGCCTAGGCTTAA"
+tr <- list(exons = rbind(c(3L, 8L), c(11L, 14L)), strand = "+")
+morie_vepan_transcript_sequence(tr, genome)
+}

@@ -57,3 +57,14 @@ seeding from the leading singular vectors reached -6913 and 0.990 in
 Poole KT, Rosenthal H (1985) \emph{AJPS} 29(2):357-384,
 \doi{10.2307/2111172}.
 }
+\examples{
+set.seed(3)
+n_leg <- 20; n_votes <- 15
+ideal <- rnorm(n_leg)
+votes <- sapply(1:n_votes, function(j) {
+  cut <- rnorm(1)
+  as.integer(ideal > cut + rnorm(n_leg, 0, 0.3))
+})
+r <- morie_wnominate_fit(votes, n_dims = 1L)
+str(r, max.level = 1)
+}
