@@ -18,3 +18,13 @@ Print method for \code{morie_rdd} objects
 The value of \code{invisible}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 500
+xr <- runif(n, -1, 1)
+tr <- as.integer(xr >= 0)
+yy <- 0.5 * xr + 0.4 * tr + rnorm(n) * 0.3
+df <- data.frame(y = yy, x = xr)
+fit <- morie_rdd(df, "y", "x", cutoff = 0)
+print(fit)
+}

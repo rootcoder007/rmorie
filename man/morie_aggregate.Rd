@@ -19,3 +19,14 @@ Collapse the ATT(g, t) to one number or a profile (Sec. 7)
 A named list: for \code{"simple"} \code{estimate},   \code{weights}, \code{scheme}; for \code{"event"} or   \code{"cohort"} \code{profile}, \code{scheme}, \code{estimate}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+nu <- 4; T <- 5
+unit <- rep(1:nu, each = T)
+period <- rep(1:T, nu)
+first_treated <- rep(c(NA, NA, 4, 4), each = T)
+treated_now <- !is.na(first_treated) & period >= first_treated
+Y <- rnorm(nu * T) + treated_now * 2
+res <- morie_imputation(Y, unit, period, first_treated)
+morie_aggregate(res, scheme = "simple")
+}
