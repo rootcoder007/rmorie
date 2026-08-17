@@ -43,3 +43,12 @@ treatment and structural parameters", The Econometrics Journal 21(1),
 C1-C68, doi:10.1111/ectj.12097. Neyman orthogonality and cross-fitting.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 120
+X <- matrix(rnorm(n * 3), n, 3)
+W <- rbinom(n, 1, 0.5)
+y <- W * (1 + X[, 1]) + X[, 2] + rnorm(n, 0, 0.5)
+lc <- local_centering(y, W, X, n_folds = 3, n_trees = 40)
+c(length(lc$mh), length(lc$eh))
+}
