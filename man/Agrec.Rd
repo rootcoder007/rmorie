@@ -30,3 +30,13 @@ ordinary Cox model.
 Andersen, P. K. and Gill, R. D. (1982), Annals of
 Statistics 10(4), 1100-1120.
 }
+\examples{
+set.seed(1)
+occ <- rep(1:3, times = 20)
+start <- (occ - 1) * 10
+stop <- occ * 10 - runif(60, 0, 3)
+event <- rbinom(60, 1, 0.6)
+X <- matrix(rnorm(60 * 2), 60, 2)
+fit <- Agrec(start, stop, event, X)
+length(fit$estimate) == 2L
+}
