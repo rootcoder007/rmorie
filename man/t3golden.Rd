@@ -20,3 +20,6 @@ A step of the t3util implementation. No other function in the package calls it. 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+t3golden(function(x) (x - 2)^2, 0, 5)
+}
