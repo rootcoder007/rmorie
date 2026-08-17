@@ -20,3 +20,8 @@ of S1 and S2.  A pole p gives a resonance at (fs/2pi) Arg(p) with bandwidth -(fs
 The value of \code{fit}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- sin(2 * pi * 40 * (1:500) / 1000) + rnorm(500) * 0.1
+PcgAr(x, fs = 1000)
+}

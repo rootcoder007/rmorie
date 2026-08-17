@@ -33,3 +33,6 @@ Aitchison (1986), The Statistical Analysis of
 Compositional Data, Chapter 6. The reference part is the LAST,
 matching the sibling module aitalr.
 }
+\examples{
+Lgtnpdf(c(0.3, 0.3, 0.4), mu = c(0, 0), Sigma = diag(2))
+}
