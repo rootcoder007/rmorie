@@ -29,3 +29,9 @@ A list with the rotation, the translation, the root-mean-   square deviation and
     sets of vectors." Acta Crystallographica A32(5), 922-923.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+P <- matrix(rnorm(15), 5, 3)
+Q <- P \%*\% matrix(c(0,-1,0, 1,0,0, 0,0,1), 3, 3) + 0.05
+morie_alfrf2_kabsch(P, Q)
+}

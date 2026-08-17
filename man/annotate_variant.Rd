@@ -24,3 +24,6 @@ A step of the snpeff_native implementation. Called by \code{snpeff}. See the fil
 The value of \code{.snpeff_pack}.
 }
 \keyword{internal}
+\examples{
+annotate_variant("ATGAAACCCGGGTTTTAA", 4, "A", "T")
+}

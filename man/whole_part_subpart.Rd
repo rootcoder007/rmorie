@@ -18,3 +18,6 @@ A step of the sammkr_native implementation. No other function in the package cal
 A list with \code{assignment}, \code{sizes}, \code{nested}, \code{note}.
 }
 \keyword{internal}
+\examples{
+whole_part_subpart(list(c(1, 1, 1, 0), c(1, 1, 0, 0), c(1, 0, 0, 0)))
+}

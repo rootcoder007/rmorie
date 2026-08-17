@@ -14,3 +14,6 @@ morie_kamath_positional_cos
 A list with \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_positional_cos(5, 1, 16)
+}

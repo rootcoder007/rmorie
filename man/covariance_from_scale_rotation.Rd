@@ -18,3 +18,6 @@ Build a covariance matrix from a scale vector and a quaternion
 List with covariance, rotation, scale, note.
 }
 \keyword{internal}
+\examples{
+covariance_from_scale_rotation(c(1, 2, 0.5), c(1, 0, 0, 0))
+}

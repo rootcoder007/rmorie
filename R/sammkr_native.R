@@ -125,7 +125,7 @@ whole_part_subpart <- function(masks, target_hierarchy = NULL) {
   named <- list()
   for (rank in 0:2)
     named[[.SAMMKR_NESTING[rank + 1L]]] <- order_idx[rank + 1L] - 1L
-  flat_order <- lapply(order_idx, function(i) .sammkr_flat(masks[[i + 1L]]))
+  flat_order <- lapply(order_idx, function(i) .sammkr_flat(masks[[i]]))
   nested <- TRUE
   for (r in 1:2) {
     inner <- which(flat_order[[r + 1]] > 0.5)

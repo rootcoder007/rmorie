@@ -19,3 +19,7 @@ Front-to-back alpha compositing
 List with colour, transmittance, coverage, note.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+alpha_composite(matrix(runif(6), 2, 3), c(0.5, 0.7))
+}
