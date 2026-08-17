@@ -22,3 +22,7 @@ The theta for which the published X has median x, solved by bisection; the publi
 The corrected estimate.
 }
 \keyword{internal}
+\examples{
+morie_bnsadt_median_unbiased(x = 0.25, sigma = 0.1,
+                             family = "symmetric_step", params = 0.3)
+}

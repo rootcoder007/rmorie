@@ -18,3 +18,8 @@ A step of the bndbye_native implementation. Called by \code{morie_posterior_hpd}
 A list with \code{grid}, \code{density}.
 }
 \keyword{internal}
+\examples{
+r <- morie_conditional_prior_uniform(list(lower = 0.2, upper = 0.8),
+                                     n_grid = 21L)
+str(r, max.level = 1)
+}
