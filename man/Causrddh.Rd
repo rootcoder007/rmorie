@@ -36,3 +36,10 @@ published as Review of Economic Studies 79(3), 933-959 (2012),
 \doi{10.1093/restud/rdr043}. Local source:
 fetched-wave3/imbens-kalyanaraman-2009-w14726-optimal-bandwidth-rdd.pdf.
 }
+\examples{
+set.seed(1)
+x <- runif(200, -1, 1)
+y <- 1 + 2 * x + 0.5 * (x >= 0) + rnorm(200, 0, 0.3)
+h <- Causrddh(x, y, cutoff = 0)
+is.numeric(h$estimate)
+}

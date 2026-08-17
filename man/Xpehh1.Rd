@@ -34,3 +34,12 @@ Sabeti, P. C., Varilly, P. et al. (2007), Nature
 449(7164), 913-918, Methods pp. 5-6. Local: fetched-wave3
 Sabeti-2007 PDF.
 }
+\examples{
+set.seed(1)
+hapA <- matrix(rbinom(40 * 21, 1, 0.4), 40, 21)
+hapB <- matrix(rbinom(40 * 21, 1, 0.5), 40, 21)
+hapA[, 11] <- rep(c(0, 1), each = 20)
+hapB[, 11] <- rep(c(0, 1), each = 20)
+r <- Xpehh1(hapA, hapB, core = 11, positions = 1:21)
+is.list(r)
+}
