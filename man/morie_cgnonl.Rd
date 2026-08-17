@@ -27,3 +27,9 @@ A step of the cgnonl_native implementation. No other function in the package cal
 The value of \code{nonlinear_cg}.
 }
 \keyword{internal}
+\examples{
+f <- function(x) sum((x - c(1, 2))^2)
+g <- function(x) 2 * (x - c(1, 2))
+r <- morie_cgnonl(f, g, x0 = c(0, 0))
+str(r, max.level = 1)
+}

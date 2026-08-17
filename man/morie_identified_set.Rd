@@ -24,3 +24,12 @@ A step of the bnshrt_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{set}, \code{n_feasible}, \code{beta_bounds}, \code{gamma_bounds}, \code{beta_width}, \code{gamma_width}, \code{point_identified}, \code{discrepancy}, \code{method}, \code{assumes}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+x <- matrix(c(0.5, -0.2, 0.1, 0.4), 2, 2)
+Y <- matrix(rbinom(60, 1, 0.5), 30, 2)
+r <- morie_identified_set(Y, x, beta_grid = list(c(0.5, -0.3)),
+                          gamma_grid = c(0, 0.8),
+                          alpha_grid = c(-0.5, 0, 0.5))
+str(r, max.level = 1)
+}

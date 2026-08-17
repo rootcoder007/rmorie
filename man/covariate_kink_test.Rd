@@ -22,3 +22,10 @@ A step of the bnskt2_native implementation. No other function in the package cal
 A list with \code{slope_change}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{interpretation}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+v <- runif(300, -1, 1)
+Z <- cbind(rnorm(300), rnorm(300))
+r <- covariate_kink_test(v, Z, kink = 0, bandwidth = 0.5)
+str(r, max.level = 1)
+}
