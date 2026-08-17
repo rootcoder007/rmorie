@@ -18,3 +18,7 @@ Signed shortest difference a - b, in [-pi, pi)
 Wrapped difference in [-pi, pi).
 }
 \keyword{internal}
+\examples{
+d <- angular_difference(0.1, 2 * pi + 0.4)
+abs(d - (-0.3)) < 1e-9
+}
