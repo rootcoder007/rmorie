@@ -32,3 +32,13 @@ A step of the berte_native implementation. Called by \code{bert_encoder}. See th
 A list with \code{out}, \code{weights}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+X <- matrix(rnorm(12), 3, 4)
+W <- function() matrix(rnorm(16, 0, 0.4), 4, 4)
+r <- encoder_block(X, W(), W(), W(), W(),
+                   W1 = matrix(rnorm(32, 0, 0.4), 8, 4), b1 = rep(0, 8),
+                   W2 = matrix(rnorm(32, 0, 0.4), 4, 8), b2 = rep(0, 4),
+                   n_heads = 2)
+str(r, max.level = 1)
+}

@@ -20,3 +20,8 @@ volume-preserving, which lets a single Metropolis test on the energy correct the
 A list with \code{theta}, \code{r}.
 }
 \keyword{internal}
+\examples{
+logp <- function(t) -0.5 * sum(t^2)
+grad <- function(t) -t
+leapfrog(c(1, -1), r = c(0.2, 0.1), eps = 0.1, grad)
+}

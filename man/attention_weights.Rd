@@ -21,3 +21,10 @@ A step of the berte_native implementation. Called by \code{multi_head_attention}
 The value of \code{heads}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+Q <- matrix(rnorm(12), 3, 4)
+K <- matrix(rnorm(12), 3, 4)
+w <- attention_weights(Q, K, n_heads = 2)
+str(w, max.level = 1)
+}

@@ -19,3 +19,10 @@ morie_alammar_output_verification
 A list with \code{passed}, \code{verdicts}, \code{failed_criteria}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+verifier <- function(response, criterion)
+  if (grepl(criterion, response, fixed = TRUE)) "PASS" else "FAIL"
+r <- morie_alammar_output_verification("The answer is 42.",
+                                       c("42", "answer"), verifier)
+str(r, max.level = 1)
+}

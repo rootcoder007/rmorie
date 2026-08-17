@@ -22,3 +22,11 @@ A step of the berte_native implementation. Called by \code{encoder_block}. See t
 A list with \code{out}, \code{weights}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+Q <- matrix(rnorm(12), 3, 4)
+K <- matrix(rnorm(12), 3, 4)
+V <- matrix(rnorm(12), 3, 4)
+r <- multi_head_attention(Q, K, V, n_heads = 2)
+str(r, max.level = 1)
+}

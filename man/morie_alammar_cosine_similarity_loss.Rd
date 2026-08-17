@@ -18,3 +18,10 @@ Contrastive and ranking losses of the SBERT/CLIP family
 A list with \code{estimate}, \code{losses}, \code{similarities}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+A <- matrix(rnorm(12), 3, 4)
+B <- A + matrix(rnorm(12, 0, 0.2), 3, 4)
+r <- morie_alammar_cosine_similarity_loss(A, B, c(1, 1, -1))
+str(r, max.level = 1)
+}

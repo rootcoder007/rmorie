@@ -32,3 +32,7 @@ A list with el, arom, chg, hexp, bonds and closures.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+p <- morie_avalon_parse("c1ccccc1O")
+str(p, max.level = 1)
+}

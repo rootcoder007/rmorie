@@ -22,3 +22,8 @@ Returns the draw, the number of log-density evaluations, and the final slice int
 List with \code{x}, \code{n_eval}, \code{interval}.
 }
 \keyword{internal}
+\examples{
+e <- .ghc_rng(1)
+logf <- function(x) -0.5 * x^2
+morie_slice_sample_1d(logf, x0 = 0.5, e)
+}

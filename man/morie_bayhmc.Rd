@@ -28,3 +28,8 @@ Draws from an unnormalised target by Hamiltonian Monte Carlo, with the trajector
 A list with \code{estimate}, \code{samples},   \code{mean}, \code{variance}, \code{sd}, \code{acceptance},   \code{eps}, \code{eps_trace}, \code{depths}, \code{n_samples},   \code{warmup}, \code{sampler}, \code{delta}, \code{method},   \code{note}.
 }
 \keyword{internal}
+\examples{
+logp <- function(t) -0.5 * sum(t^2)
+r <- morie_bayhmc(logp, c(1, -1), n_iter = 200L, seed = 1)
+str(r, max.level = 1)
+}

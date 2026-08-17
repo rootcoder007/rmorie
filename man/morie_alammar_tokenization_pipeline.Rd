@@ -19,3 +19,8 @@ WordPiece tokenisation pipeline (Alammar Ch 2)
 A list with \code{tokens}, \code{n_unk}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+vocab <- c("[CLS]", "[SEP]", "[UNK]", "the", "cat", "sat")
+r <- morie_alammar_tokenization_pipeline("The cat sat down", vocab)
+str(r, max.level = 1)
+}
