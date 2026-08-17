@@ -23,3 +23,12 @@ A step of the pftrep_native implementation. Called by \code{loglik_profile}. See
 A list with \code{estimate}, \code{loglik}, \code{logmeanexp}, \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps}, \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+y <- cumsum(rnorm(20, 0, 0.5)) + rnorm(20, 0, 1)
+init <- function(n) rnorm(n, 0, 2)
+step <- function(parts, t) parts + rnorm(length(parts), 0, 0.5)
+loglik <- function(p, obs) dnorm(obs, p, 1, log = TRUE)
+r <- replicated_pfilter(y, 200L, init, step, loglik, n_reps = 5L, seed = 1)
+is.list(r)
+}

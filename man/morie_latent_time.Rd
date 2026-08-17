@@ -41,3 +41,10 @@ doi:10.1038/s41586-018-0414-6, for the steady-state model this
 generalises.
 }
 \keyword{internal}
+\examples{
+mk <- function(v) lapply(v, function(x) list(t = x))
+fits <- list(list(latent = mk(c(0.1, 0.5, 0.9, 0.3))),
+             list(latent = mk(c(0.2, 0.4, 0.8, 0.35))))
+lt <- morie_latent_time(fits)
+is.list(lt) || is.numeric(lt)
+}
