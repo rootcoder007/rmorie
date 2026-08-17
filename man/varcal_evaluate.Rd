@@ -41,3 +41,9 @@ doi:10.1093/bioinformatics/btr509, for the conventional genotype
 likelihood this replaces.
 }
 \keyword{internal}
+\examples{
+called <- list(list(position = 4L, alternate = "T"))
+truth <- list(list(position = 4L, alternate = "T"),
+              list(position = 7L, alternate = "G"))
+varcal_evaluate(called, truth)
+}

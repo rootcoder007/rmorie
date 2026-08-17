@@ -17,3 +17,10 @@ A step of the alf_core implementation. No other function in the package calls it
 A list with \code{R}, \code{t}.
 }
 \keyword{internal}
+\examples{
+th <- pi / 6
+Tf <- list(R = rbind(c(cos(th), -sin(th)), c(sin(th), cos(th))),
+           t = c(1, -1))
+inv <- alfRinv(Tf)
+alfRap(inv, alfRap(Tf, c(2, 3)))
+}

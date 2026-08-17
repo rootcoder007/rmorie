@@ -61,3 +61,13 @@ identical from outside.
 \references{
 Veitch V, Sridhar D, Blei DM (2020) arXiv:1905.12741.
 }
+\examples{
+set.seed(2)
+n <- 60
+emb <- matrix(rnorm(n * 5), n, 5)
+T <- rbinom(n, 1, plogis(emb[, 1]))
+Y <- 1 + 0.8 * T + emb[, 1] + rnorm(n, 0, 0.5)
+texts <- replicate(n, paste(sample(letters, 5), collapse = " "))
+r <- morie_text_ate(texts, T, Y, n_components = 3L, embedding = emb)
+str(r, max.level = 1)
+}

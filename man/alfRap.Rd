@@ -18,3 +18,7 @@ A step of the alf_core implementation. Called by \code{Alfipa}, \code{alfRcomp},
 A numeric value.
 }
 \keyword{internal}
+\examples{
+Tf <- list(R = diag(2), t = c(1, -1))
+alfRap(Tf, c(2, 3))
+}
