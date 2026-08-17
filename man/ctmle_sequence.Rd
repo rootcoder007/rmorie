@@ -37,3 +37,7 @@ International Journal of Biostatistics 6(1), article 26,
 doi:10.2202/1557-4679.1260.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- ctmle_sequence(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+}

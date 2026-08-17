@@ -35,3 +35,7 @@ Sciences. Harvard University Press. Intersection-bound form as equation
 (2.15) of Molinari, F. (2021), Handbook of Econometrics 7A
 (arXiv:2004.11751 p. 19).
 }
+\examples{
+set.seed(1)
+r <- Bnstvr(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+}

@@ -33,3 +33,7 @@ reported alongside the mixture itself.
 \references{
 Huber (1964), Ann. Math. Statist. 35(1):73-101.
 }
+\examples{
+set.seed(1)
+r <- Contam(epsilon = 0.5, H = rnorm(10)); TRUE
+}
