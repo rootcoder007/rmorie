@@ -20,3 +20,10 @@ Draw pseudomarker genotypes from p(g | m)
 A list of draws.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+g <- lapply(1:6, function(i) c(rbinom(1, 1, 0.5), NA, rbinom(1, 1, 0.5)))
+pos <- c(0, 0.1, 0.2)
+r <- morie_mqtmpl_sample_genotypes(g, pos, grid = pos, n_imp = 4)
+str(r, max.level = 1)
+}

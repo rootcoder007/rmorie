@@ -52,7 +52,9 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
   for (c in 1:n) {
     piv <- c
     best <- abs(M[c, c])
-    for (r in (c + 1):n) {
+    # seq_len guard: the colon counts DOWN on the last column and
+    # indexes row n + 1
+    for (r in seq_len(n - c) + c) {
       v <- abs(M[r, c])
       if (v > best) { best <- v; piv <- r }
     }

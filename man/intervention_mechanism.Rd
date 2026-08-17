@@ -23,3 +23,13 @@ intervention_mechanism(L0, A0, L1, A1, trim = 0.01, known = NULL, penalty = 0)
 \code{g0}, \code{g1}, info with \code{p0}, \code{p1},   \code{min_g0}, \code{min_g1}, \code{max_weight}, \code{known}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 60
+L0 <- matrix(rnorm(n), n, 1)
+A0 <- rbinom(n, 1, plogis(L0[, 1]))
+L1 <- matrix(rnorm(n) + 0.4 * A0, n, 1)
+A1 <- rbinom(n, 1, plogis(0.5 * L1[, 1]))
+r <- intervention_mechanism(L0, A0, L1, A1)
+str(r, max.level = 1)
+}

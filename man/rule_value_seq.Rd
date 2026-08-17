@@ -26,3 +26,15 @@ No targeting: this is the g-computation arm.
 Scalar mean outcome.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 60
+L0 <- matrix(rnorm(n), n, 1)
+A0 <- rbinom(n, 1, 0.5)
+L1 <- matrix(rnorm(n) + 0.4 * A0, n, 1)
+A1 <- rbinom(n, 1, 0.5)
+y <- plogis(0.3 * A0 + 0.5 * A1 + 0.4 * L0[, 1] + rnorm(n, 0, 0.4))
+d <- optimal_rule(y, L0, A0, L1, A1)
+im <- intervention_mechanism(L0, A0, L1, A1)
+rule_value_seq(y, L0, A0, L1, A1, d$d0, d$d1, im$g0, im$g1)
+}

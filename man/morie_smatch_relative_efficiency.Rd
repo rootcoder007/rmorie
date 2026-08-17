@@ -18,3 +18,6 @@ A step of the smatch_native implementation. No other function in the package cal
 A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri}, \code{interpretation}.
 }
 \keyword{internal}
+\examples{
+morie_smatch_relative_efficiency(r = 0.1, log_ri = log(2))
+}

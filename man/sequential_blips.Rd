@@ -26,3 +26,14 @@ Fitted on \code{idx} (all rows by default) and evaluated on \code{eval_idx}. Spl
 A list with \code{blip1}, \code{blip2}, \code{d0},   \code{d1}, \code{q2}, \code{q1}, \code{coef_q2}, \code{coef_q1},   \code{pseudo}, \code{eval_idx}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 60
+L0 <- matrix(rnorm(n), n, 1)
+A0 <- rbinom(n, 1, 0.5)
+L1 <- matrix(rnorm(n) + 0.4 * A0, n, 1)
+A1 <- rbinom(n, 1, 0.5)
+y <- plogis(0.3 * A0 + 0.5 * A1 + 0.4 * L0[, 1] + rnorm(n, 0, 0.4))
+r <- sequential_blips(y, L0, A0, L1, A1)
+str(r, max.level = 1)
+}
