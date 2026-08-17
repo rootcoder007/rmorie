@@ -30,3 +30,10 @@ Discover motifs by fitting the MM mixture model
 A list with estimate / motifs, alphabet, w, n_subsequences,   erasing, method.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT",
+          "ACGTAACCGG", "TTACGTACGT")
+r <- morie_motfsr(seqs, w = 4, n_motifs = 1)
+is.list(r)
+}
