@@ -47,3 +47,7 @@ online rating-based collaborative filtering. Proceedings of the 2005
 SIAM International Conference on Data Mining, 471-475.
 \doi{10.1137/1.9781611972757.43}
 }
+\examples{
+R <- matrix(c(5, 3, NA, 4, NA, 2, NA, 5, 3), 3, 3, byrow = TRUE)
+Slope1(R, u = 0, i = 2)
+}

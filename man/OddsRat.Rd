@@ -21,3 +21,6 @@ p_value, n)
 \description{
 Cross-product odds ratio for a 2 x 2 table, with a Woolf interval
 }
+\examples{
+OddsRat(10, 20, 15, 25)
+}
