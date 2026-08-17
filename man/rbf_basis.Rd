@@ -33,3 +33,7 @@ Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
 Chapman & Hall/CRC, Sec. 21.2.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+rbf_basis(runif(20), n_centres = 5)
+}

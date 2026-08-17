@@ -18,3 +18,6 @@ Laplace add-1 smoothing (Burkov Ch 2)
 A list with \code{estimate}, \code{count_ngram}, \code{count_prefix}, \code{vocab_size}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_laplace(counts_ngram = 3, counts_prefix = 10, V = 100)
+}

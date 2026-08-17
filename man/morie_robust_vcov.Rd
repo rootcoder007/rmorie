@@ -24,3 +24,10 @@ list with \code{vcov}, \code{se} and the leverages
 heteroskedastic: the coefficients stay unbiased but the textbook
 standard errors do not.  Matches \code{sandwich::vcovHC}.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(40), 20, 2)
+y <- 1 + X[, 1] + rnorm(20, 0, 0.3)
+fit <- morie_ols(y, X)
+dim(morie_robust_vcov(fit, kind = "HC1"))
+}

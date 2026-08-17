@@ -19,3 +19,6 @@ A step of the metabd_native implementation. Called by \code{morie_metabd}. See t
 A list with \code{frequency}, \code{vector}, \code{kmers}, \code{n_kmers}, \code{canonical}.
 }
 \keyword{internal}
+\examples{
+tetranucleotide_frequency("ACGTACGTACGTTGCAACGT")
+}
