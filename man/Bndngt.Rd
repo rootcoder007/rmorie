@@ -34,3 +34,7 @@ Econometrica 65(6), 1311-1334. \doi{10.2307/2171738}. Equation (2.13)
 of Molinari, F. (2021), Handbook of Econometrics 7A
 (arXiv:2004.11751 pp. 18-19), read with the treatment order reversed.
 }
+\examples{
+set.seed(1)
+Bndngt(y = rnorm(40), D = rbinom(40, 1, 0.5), y_min = -3)
+}

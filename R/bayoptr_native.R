@@ -80,8 +80,8 @@
 .gp_posterior <- function(X, y, Xnew, amplitude = 1, length_scale = 1,
                           noise = 1e-8) {
   pd <- function(A, B) {
-    sqrt(pmax(0, outer(rowSums(A^2), rowSums(B^2), "+") -
-                2 * A %*% t(B)))
+    sqrt(pmax(outer(rowSums(A^2), rowSums(B^2), "+") -
+                2 * A %*% t(B), 0))
   }
   Dxx <- pd(X, X)
   Dxs <- pd(X, Xnew)

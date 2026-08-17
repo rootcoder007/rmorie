@@ -20,3 +20,6 @@ Formula: a x + b y = gcd(a, b)
 \references{
 Bezout (1779), Theorie generale des equations algebriques. Not held locally; the extended Euclidean algorithm and the identity a x + b y = gcd(a, b) are standard published results.
 }
+\examples{
+Bezout(240, 46)
+}

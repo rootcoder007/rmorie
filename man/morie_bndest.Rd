@@ -39,3 +39,7 @@ for those who received the other treatment.
 Manski, C. F. (2007). Identification for Prediction and
 Decision. Harvard University Press, Sections 2.1 and 7.1.
 }
+\examples{
+set.seed(1)
+morie_bndest(y = rnorm(40), observed = rbinom(40, 1, 0.7), support = c(-3, 3))
+}

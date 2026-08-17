@@ -28,3 +28,8 @@ Mirrors Python \code{morie.fn.bayoptr.bayoptr}: it resolves an acquisition spell
 Named list whose element names match the Python payload   keys, including \code{best_x}, \code{best_y}, \code{X}, \code{y},   \code{x_trace}, \code{y_trace}, the hyperparameters, \code{acq},   \code{acquisition} (the spelling the caller used), and   \code{note} (the underlying optimiser\'s note with the   "ucb"/"lcb" suffix appended).
 }
 \keyword{internal}
+\examples{
+f <- function(x) -sum((x - c(0.3, 0.7))^2)
+morie_bayoptr(f, bounds = list(c(0, 1), c(0, 1)), n_iter = 8L, n_init = 5L,
+              seed = 1L)
+}

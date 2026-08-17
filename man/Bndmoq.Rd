@@ -49,3 +49,7 @@ Distributions. Springer, Section 1.3. The two expressions are
 \code{r(alpha, x)} and \code{s(alpha, x)} on pp. 12-13 of Molinari, F.
 (2021), Handbook of Econometrics 7A (arXiv:2004.11751).
 }
+\examples{
+set.seed(1)
+Bndmoq(y = rnorm(40), D = rbinom(40, 1, 0.5), X = rnorm(40), quantile = 0.5)
+}

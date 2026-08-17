@@ -35,3 +35,7 @@ Econometrica 65(6), 1311-1334. \doi{10.2307/2171738}. Binary-treatment
 form as equation (2.13) and the paragraph beneath it in Molinari, F.
 (2021), Handbook of Econometrics 7A (arXiv:2004.11751 pp. 18-19).
 }
+\examples{
+set.seed(1)
+Bndpos(y = rnorm(40), D = rbinom(40, 1, 0.5), y_max = 3)
+}

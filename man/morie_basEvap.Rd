@@ -42,3 +42,6 @@ Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.
 (1998). Crop evapotranspiration. FAO Irrigation and Drainage
 Paper 56.
 }
+\examples{
+morie_basEvap(T = 25, R_n = 15, u2 = 2, VPD = 1.5)
+}
