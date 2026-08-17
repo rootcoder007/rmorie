@@ -27,3 +27,10 @@ cross-correlation, as the book's own footnote 6 on p. 419 points
 out. Exported as morie_convlayer because morie_conv2d was already
 taken by R/gp_ch13_15.R.
 }
+\examples{
+set.seed(1)
+x <- array(rnorm(5 * 5 * 2), dim = c(5, 5, 2))
+kernel <- array(rnorm(3 * 3 * 2 * 4), dim = c(3, 3, 2, 4))
+z <- morie_convlayer(x, kernel)
+dim(z)
+}

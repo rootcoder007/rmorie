@@ -23,3 +23,14 @@ Principal Analysis by Conditional Expectation: the method for functional data ob
 A list with \code{scores} (one vector per subject),   \code{eigenvalues}, \code{eigenfunctions} (on the grid),   \code{mean}, \code{grid}, \code{sigma2}, \code{fve},   \code{fitted}, \code{n}, \code{K}, \code{n_grid}, \code{bw_mu},   \code{bw_cov}, \code{kernel}, \code{shrink}, \code{n_obs} and   \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+Y <- list(); argvals <- list()
+for (i in 1:25) {
+  ti <- sort(runif(7))
+  Y[[i]] <- sin(2 * pi * ti) + rnorm(7, 0, 0.2)
+  argvals[[i]] <- ti
+}
+r <- morie_pace(Y, argvals, K = 2L, n_grid = 15L)
+length(r$mu) == 15L
+}
