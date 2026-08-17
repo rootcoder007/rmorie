@@ -35,3 +35,7 @@ Learning, Springer.  Rasmussen, C. E. and Williams, C. K. I.
 (2006). Gaussian Processes for Machine Learning, MIT Press,
 Sec. 4.2.3.
 }
+\examples{
+set.seed(1)
+r <- morie_perk(x1 = rnorm(10)); TRUE
+}

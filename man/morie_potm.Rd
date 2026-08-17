@@ -33,3 +33,7 @@ Davison, A. C. and Smith, R. L. (1990). JRSS-B, 52, 393-442.
 Coles, S. (2001). An Introduction to Statistical Modeling of
 Extreme Values. Springer.
 }
+\examples{
+set.seed(1)
+r <- morie_potm(y = rnorm(10), u = rnorm(10)); TRUE
+}

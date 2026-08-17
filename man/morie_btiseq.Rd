@@ -31,3 +31,7 @@ Beran, R. (1988). Prepivoting test statistics: a
 bootstrap view of asymptotic refinements. JASA, 83(403),
 687-697.
 }
+\examples{
+set.seed(1)
+r <- morie_btiseq(x = rnorm(10)); TRUE
+}

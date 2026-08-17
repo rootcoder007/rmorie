@@ -20,3 +20,7 @@ A step of the RcppExports implementation. Called by \code{morie_matching_abadie_
 The value of \code{.Call}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_matching_abadie_imbens_kernel_cpp(y = rnorm(10), t = rnorm(10), treated_pos = rbinom(10, 1, 0.5), control_pos = rnorm(10)); TRUE
+}

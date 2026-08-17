@@ -28,3 +28,7 @@ hypergeometric variance.  Ties in time are pooled into one risk set.
 \references{
 Mantel (1966), Cancer Chemotherapy Reports 50:163-170; Peto and Peto (1972), JRSS A 135:185-207.  The coded form was read from Therneau's survival package, src/survdiff2.c, rho = 0 branch of the G-rho family.
 }
+\examples{
+set.seed(1)
+r <- Logrank(time = sort(runif(10)), event = rbinom(10, 1, 0.5), group = rbinom(10, 1, 0.5)); TRUE
+}

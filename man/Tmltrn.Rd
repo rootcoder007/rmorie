@@ -33,3 +33,7 @@ Target-population outcomes are never used; only its covariates enter.
 Rudolph, K. E. & van der Laan, M. J. (2017). JRSS B
 79(5):1509-1525.
 }
+\examples{
+set.seed(1)
+r <- Tmltrn(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), S = rnorm(10)); TRUE
+}

@@ -47,3 +47,7 @@ terms associated with a list of genes, Bioinformatics 20(18),
 Algorithm section, p. 3711. Source: PMC3037731 (saved as
 library/pdf/fetched-wave3/Boyle-2004-GO-TermFinder-Bioinformatics.html).
 }
+\examples{
+set.seed(1)
+r <- Goenr(hits = rnorm(10), list_size = 8L, term_size = 8L, background_size = 8L); TRUE
+}

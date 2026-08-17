@@ -39,3 +39,7 @@ Athey, S. (2021). Confidence intervals for policy evaluation in
 adaptive experiments. PNAS 118(15), e2014602118; arXiv:1911.02768
 equation (12).
 }
+\examples{
+set.seed(1)
+r <- Drbnk(y = rnorm(10), D_t = rnorm(10)); TRUE
+}

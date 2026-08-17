@@ -19,3 +19,7 @@ A step of the RcppExports implementation. Called by \code{morie_dsp_cross_correl
 The value of \code{.Call}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_dsp_cross_correlation_cpp(x = rnorm(10), y = rnorm(10), max_lag = 8L); TRUE
+}

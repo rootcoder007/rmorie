@@ -38,3 +38,7 @@ The log prior density.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_bnppvl_log_prior(q = matrix(rnorm(20), 5, 4), m = matrix(rnorm(20), 5, 4)); TRUE
+}

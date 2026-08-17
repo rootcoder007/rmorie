@@ -26,3 +26,7 @@ Formula: [[X'R^-1 X, X'R^-1 Z], [Z'R^-1 X, Z'R^-1 Z + Sigma^-1]] [beta; u] = [X'
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 2, Eq. (2.2) p. 37: Henderson's mixed model equations, whose solution for beta is the BLUE and for u is the BLUP.  Delegates to the chapter-2 MME solver already verified against the book for this shelf.  Read from the chapter PDF, not recalled.
 }
+\examples{
+set.seed(1)
+r <- Hendmme(X = rnorm(10), Z = rnorm(10), y = rnorm(10), Sigma_inv = 0.5); TRUE
+}

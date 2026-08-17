@@ -38,3 +38,7 @@ The log predictive density.
   Escobar, M.D. and West, M. (1995) JASA 90(430), 577-588.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_snpest_predictive(x = rnorm(10), n = 8L, s = rnorm(10), ss = rnorm(10), m0 = rnorm(10), kappa0 = rnorm(10), a0 = rnorm(10), b0 = rnorm(10)); TRUE
+}

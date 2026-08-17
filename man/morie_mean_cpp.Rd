@@ -17,3 +17,7 @@ A step of the RcppExports implementation. Called by \code{morie_mean}. See the f
 The value of \code{.Call}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_mean_cpp(x = rnorm(10)); TRUE
+}

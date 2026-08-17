@@ -23,3 +23,7 @@ Fits the CIM model of Zeng (1994) eq. (5)-(6) at a single interval by iterating 
 A list with the LOD score, fitted coefficients, the   posterior probabilities, the null log-likelihood, and the   iteration history.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_cqtmpl(y = rnorm(10), left = rnorm(10), right = rnorm(10), r_left = rnorm(10), r_right = rnorm(10)); TRUE
+}

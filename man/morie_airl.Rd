@@ -25,3 +25,7 @@ Fits the AIRL discriminator (Fu, Luo & Levine 2018, eq. 4) on expert and policy 
 A named list with \code{estimate}, \code{reward}, \code{g},   \code{h}, \code{f_policy}, \code{f_expert}, \code{D_policy},   \code{D_expert}, \code{accuracy}, \code{log_likelihood},   \code{gamma}, \code{state_only}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_airl(expert_states = rnorm(10), expert_actions = rnorm(10), expert_next = rnorm(10), expert_log_policy = rnorm(10), policy_states = rnorm(10), policy_actions = rnorm(10), policy_next = rnorm(10), policy_log_policy = rnorm(10)); TRUE
+}

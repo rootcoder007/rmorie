@@ -37,3 +37,7 @@ Identification and estimation of treatment effects with a
 regression-discontinuity design. Econometrica 69(1):201-209.
 \doi{10.1111/1468-0262.00183}.
 }
+\examples{
+set.seed(1)
+r <- Rdksrn(y = rnorm(10), x = rnorm(10)); TRUE
+}
