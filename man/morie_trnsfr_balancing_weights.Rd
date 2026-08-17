@@ -29,3 +29,11 @@ transfer-learning MSM across cohorts"; no paper of that title was
 located and the implementation follows Wager (2025).
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 60
+X <- matrix(rnorm(n * 2), n, 2)
+S <- rbinom(n, 1, plogis(0.3 * X[, 1]))
+r <- morie_trnsfr_balancing_weights(X, S)
+str(r, max.level = 1)
+}

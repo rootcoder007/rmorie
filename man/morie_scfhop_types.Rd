@@ -30,3 +30,6 @@ A list of character vectors, one per atom.
     Journal of Machine Learning Research 12, 2539-2561.
 }
 \keyword{internal}
+\examples{
+morie_scfhop_types("c1ccccc1O")
+}

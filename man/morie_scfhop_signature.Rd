@@ -31,3 +31,6 @@ A sorted numeric vector, empty for an acyclic molecule.
     Journal of Machine Learning Research 12, 2539-2561.
 }
 \keyword{internal}
+\examples{
+morie_scfhop_signature("c1ccccc1CCc1ccccc1")
+}

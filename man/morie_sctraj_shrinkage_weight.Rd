@@ -20,3 +20,6 @@ A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_sctraj_shrinkage_weight(t = 5, t_min = 0, t_max = 10)
+}

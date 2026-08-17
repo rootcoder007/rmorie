@@ -18,3 +18,8 @@ A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See t
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+tree <- list(adjacency = list("1" = c("2", "3"), "2" = c("4"),
+                              "3" = character(0), "4" = character(0)))
+morie_sctraj_lineages_from_tree(tree, root = "1")
+}
