@@ -28,3 +28,8 @@ Rule 2 (intervention as observation): in G_Xbar,Zunder.
 Rule 3 (ignore an intervention): in G_Xbar,Zbar(W), where Z(W) is
 the subset of Z that are not ancestors of any W node in G_Xbar.
 }
+\examples{
+dag <- rbind(c("x", "z"), c("z", "y"), c("u", "x"), c("u", "y"))
+r <- morie_docalc(dag, y = "y", z = "z", x = "x")
+str(r, max.level = 1)
+}

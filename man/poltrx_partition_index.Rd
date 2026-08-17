@@ -20,3 +20,6 @@ Returns the binary string, which IS the address in the tree.
 A list with \code{epsilon}, \code{interval} and   \code{level}.
 }
 \keyword{internal}
+\examples{
+poltrx_partition_index(0.3, level = 2)
+}

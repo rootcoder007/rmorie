@@ -18,3 +18,7 @@ Accumulated product of branch probabilities down to \code{B_epsilon}.
 A list with \code{probability}, \code{epsilon} and   \code{level}.
 }
 \keyword{internal}
+\examples{
+tr <- poltrx_finite_tree(levels = 3, seed = 1)
+poltrx_set_probability(c(0L, 1L), tr)
+}

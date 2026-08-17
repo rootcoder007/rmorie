@@ -19,3 +19,8 @@ A step of the ttrace_native implementation. Called by \code{morie_ttrace}. See t
 A list with \code{estimate}, \code{probability_of_control}, \code{se}, \code{reps}, \code{median_size}, \code{max_size}, \code{max_cases}, \code{max_weeks}, \code{definition}, \code{method}.
 }
 \keyword{internal}
+\examples{
+r <- probability_of_control(reps = 20, seed = 1, R0 = 1.5,
+                            trace_prob = 0.8)
+str(r, max.level = 1)
+}

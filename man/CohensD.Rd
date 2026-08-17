@@ -23,3 +23,6 @@ CohensD(m1, m2, s1, s2, n1, n2)
 A list with \code{d}, \code{s_pooled}, \code{var_d}, \code{se_d}, \code{j}, \code{j_approx}, \code{hedges_g}, \code{var_g}, \code{se_g}, \code{df}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+CohensD(m1 = 10, m2 = 8, s1 = 2, s2 = 2.5, n1 = 30, n2 = 28)
+}

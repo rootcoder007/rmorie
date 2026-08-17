@@ -20,3 +20,9 @@ A*_t = {x : e(x) <= alpha_t}, with alpha_t = 1 (no trimming) when sup_x 1 / (1 -
 A list with \code{alpha_t}, \code{keep}, \code{trim},   \code{no_trimming}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+e <- runif(100, 0.02, 0.98)
+w <- rbinom(100, 1, e)
+str(optimal_alpha_att(e, w), max.level = 1)
+}

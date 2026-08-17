@@ -21,3 +21,7 @@ Mirrors morie.fn._dsep.d_separated; the counts come from the same
 path enumeration so a caller can see why the answer came out as it
 did.
 }
+\examples{
+dag <- rbind(c("x", "z"), c("z", "y"))
+morie_dseptest(dag, "x", "y", "z")
+}

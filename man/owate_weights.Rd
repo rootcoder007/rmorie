@@ -19,3 +19,8 @@ omega*(x) = (sigma1^2 / e + sigma0^2 / (1 - e))^{-1}, which is e(x)(1 - e(x)) un
 Weight vector.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+e <- runif(20, 0.05, 0.95)
+owate_weights(e)
+}

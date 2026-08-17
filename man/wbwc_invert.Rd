@@ -22,3 +22,12 @@ A step of the attrInf_native implementation. Called by \code{morie_attrInf}. See
 A list with \code{estimate}, \code{scores}, \code{n_paths}, \code{N}.
 }
 \keyword{internal}
+\examples{
+tree <- list(feature = 0L, branches = list(
+  "0" = list(label = 0L, count = 30),
+  "1" = list(label = 1L, count = 20)))
+priors <- list("0" = list("0" = 0.6, "1" = 0.4))
+r <- wbwc_invert(tree, known = list(), candidates = list("0", "1"),
+                 priors = priors)
+str(r, max.level = 1)
+}

@@ -17,3 +17,6 @@ Undefined below gamma = 4, where the quadratic has no real root.
 alpha in (0, 1/2].
 }
 \keyword{internal}
+\examples{
+alpha_from_gamma(gamma = 9)
+}

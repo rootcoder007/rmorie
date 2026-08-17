@@ -18,3 +18,7 @@ A step of the attrInf_native implementation. Called by \code{morie_attrInf}. See
 The value of \code{err}, as built in the body.
 }
 \keyword{internal}
+\examples{
+err <- confusion_error(rbind(c(40, 10), c(5, 45)))
+err(0L, 1L)
+}

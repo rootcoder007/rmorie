@@ -25,3 +25,12 @@ Runs the Fredrikson-Jha-Ristenpart (2015) model inversion attack over a set of t
 A named list mirroring the Python payload:   \code{estimate}, \code{guesses}, \code{accuracy},   \code{precision}, \code{recall}, \code{false_positives},   \code{true_positives}, \code{mode}, \code{candidates},   \code{n_paths}, \code{n_targets}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+tree <- list(feature = 0L, branches = list(
+  "0" = list(label = 0L, count = 30),
+  "1" = list(label = 1L, count = 20)))
+priors <- list("0" = list("0" = 0.6, "1" = 0.4))
+r <- morie_attrInf(tree, targets = list(list(known = list(), y = 1L)),
+                   priors = priors, mode = "whitebox")
+str(r, max.level = 1)
+}
