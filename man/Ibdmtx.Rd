@@ -30,3 +30,9 @@ American Journal of Human Genetics 81(3), 559-575, Table 1 and
 pp. 565-566. Local: fetched-wave3
 Purcell-2007-PLINK-AJHG81-559.pdf.
 }
+\examples{
+set.seed(1)
+G <- matrix(sample(0:2, 30 * 12, replace = TRUE), 30, 12)
+K <- Ibdmtx(G)
+c(nrow(K), ncol(K))
+}

@@ -39,3 +39,10 @@ J. K. (2006), PLoS Biology 4(3), e72, eqs. (1)-(2) and Materials
 and Methods "Calculation of iHS". Sabeti, P. C. et al. (2002),
 Nature 419, 832-837. Local: fetched-wave3 Voight-2006 PDF.
 }
+\examples{
+set.seed(1)
+hap <- matrix(rbinom(40 * 21, 1, 0.4), 40, 21)
+hap[, 11] <- rep(c(0, 1), each = 20)
+r <- Ihstst(hap, core = 11, positions = 1:21)
+is.list(r)
+}
