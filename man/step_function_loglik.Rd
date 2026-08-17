@@ -20,3 +20,7 @@ A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcm
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+y <- c(0.1, 0.15, 0.2, 0.7, 0.75, 0.85)
+step_function_loglik(y, s = 0.5, h = c(3, 4), L = 1)
+}

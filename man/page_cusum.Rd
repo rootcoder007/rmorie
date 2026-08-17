@@ -22,3 +22,9 @@ A step of the glm_native implementation. No other function in the package calls 
 The value of \code{morie_glr_test}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- c(rbinom(50, 1, 0.2), rbinom(50, 1, 0.75))
+res <- page_cusum(x, p0 = 0.2, p1 = 0.75, threshold = 5)
+c(res$detected, res$stop_index >= 0)
+}

@@ -22,3 +22,9 @@ A step of the glm_native implementation. Called by \code{glrtest}, \code{page_cu
 The value of \code{payload}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- c(rbinom(50, 1, 0.2), rbinom(50, 1, 0.75))
+res <- morie_glr_test(x, p0 = 0.2, p1 = 0.75, family = "bernoulli")
+abs(res$changepoint - 50) < 25
+}

@@ -36,3 +36,9 @@ doi:10.1201/9780203492024. The sparse GMRF computations the
 method rests on.
 }
 \keyword{internal}
+\examples{
+xs <- seq(-4, 6, by = 0.1)
+cm <- list(dnorm(xs, 0, 1), dnorm(xs, 3, 1))
+im <- integrate_marginals(cm, log_weights = c(log(0.5), log(0.5)), x_grid = xs)
+abs(im$mean - 1.5) < 0.05
+}
