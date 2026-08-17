@@ -22,3 +22,14 @@ A step of the pftrep_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik}, \code{se}, \code{max_loglik}, \code{n_particles}, \code{n_reps}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+y <- cumsum(rnorm(20, 0, 0.5)) + rnorm(20, 0, 1)
+make_model <- function(theta) list(
+  init = function(n) rnorm(n, 0, 2),
+  step = function(parts, t) parts + rnorm(length(parts), 0, 0.5),
+  loglik = function(p, obs) dnorm(obs, p, theta, log = TRUE))
+lp <- loglik_profile(y, grid = c(0.5, 1, 2), make_model,
+                     n_particles = 150L, n_reps = 3L, seed = 1)
+is.list(lp)
+}

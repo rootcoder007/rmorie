@@ -22,3 +22,12 @@ A step of the pftrep_native implementation. Called by \code{replicated_pfilter}.
 A list with \code{loglik}, \code{min_ess}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+y <- cumsum(rnorm(20, 0, 0.5)) + rnorm(20, 0, 1)
+init <- function(n) rnorm(n, 0, 2)
+step <- function(parts, t) parts + rnorm(length(parts), 0, 0.5)
+loglik <- function(p, obs) dnorm(obs, p, 1, log = TRUE)
+pf <- particle_filter_simple(y, 200L, init, step, loglik, seed = 1)
+is.list(pf)
+}
