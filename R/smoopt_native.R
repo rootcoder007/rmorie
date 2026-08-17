@@ -244,7 +244,7 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
       pick <- second_choice(i1, a, yy, E, C, rng, tol)
       i2 <- pick$index
       if (is.null(i2)) next
-      bounds <- morie_svmopt$.bounds(i1, i2, a, yy, C)
+      bounds <- morie_svmopt$.svmopt_bounds(i1, i2, a, yy, C)
       L <- bounds$L; H <- bounds$H
       if (H <= L + .SMOOPT_EPS) next
       eta <- K[i1, i1] + K[i2, i2] - 2.0 * K[i1, i2]

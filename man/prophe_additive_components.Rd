@@ -22,3 +22,9 @@ A step of the prophe_native implementation. Called by \code{morie_prophe}. See t
 A list with \code{estimate}, \code{components}, \code{total}, \code{fitted}, \code{residual}, \code{reconstruction_error}, \code{reconstructs}, \code{coef}, \code{changepoints}, \code{sigma}, \code{n}, \code{component_names}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+t <- 1:60
+y <- sin(2 * pi * t / 12) + 0.05 * t + rnorm(60) * 0.1
+prophe_additive_components(t, y)
+}

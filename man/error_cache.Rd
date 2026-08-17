@@ -20,3 +20,10 @@ A step of the smoopt_native implementation. Called by \code{smo_platt}. See the 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(20), 10, 2)
+y <- sign(X[, 1])
+K <- X \%*\% t(X)
+error_cache(rep(0, 10), y, K, 0)
+}
