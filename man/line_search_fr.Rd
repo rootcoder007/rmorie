@@ -26,3 +26,10 @@ A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}. See t
 A list with \code{t}, \code{x_new}, \code{f_new}, \code{g_new}, \code{n_eval}.
 }
 \keyword{internal}
+\examples{
+f <- function(x) sum((x - c(1, 2))^2)
+g <- function(x) 2 * (x - c(1, 2))
+x0 <- c(0, 0)
+r <- line_search_fr(f, g, x0, p = -g(x0), f0 = f(x0), g0 = g(x0))
+str(r, max.level = 1)
+}

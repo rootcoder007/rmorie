@@ -386,8 +386,18 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
       stop(paste0("sccsno: the information matrix is singular -- some ",
                   "interval carries no events or no exposure time"))
     }
-    par <- par + step
-    if (max(abs(step)) < tol) {
+    # step-halving safeguard: the undamped update oscillates and
+    # overflows on strong-effect fixtures (H -> 0, par -> Inf)
+    ll0 <- morie_sccsno_loglik(par, cells_by_person, n_risk, n_age)
+    lam <- 1.0
+    for (h in seq_len(30L)) {
+      cand <- par + lam * step
+      llc <- morie_sccsno_loglik(cand, cells_by_person, n_risk, n_age)
+      if (is.finite(llc) && llc >= ll0 - 1e-12) break
+      lam <- lam / 2
+    }
+    par <- par + lam * step
+    if (max(abs(lam * step)) < tol) {
       conv <- TRUE
       break
     }

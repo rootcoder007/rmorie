@@ -32,3 +32,11 @@ Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
 method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 }
 \keyword{internal}
+\examples{
+cells <- morie_sccsno_build_intervals(start = 0, end = 365,
+                                      exposure = 100,
+                                      event_times = c(110, 250),
+                                      risk_periods = list(c(0, 30)),
+                                      age_breaks = c(180))
+cells
+}

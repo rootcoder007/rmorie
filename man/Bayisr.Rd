@@ -31,3 +31,11 @@ Rubin, D. B. (1988), in Bayesian Statistics 3, Oxford
 UP, 395-402; Smith, A. F. M. and Gelfand, A. E. (1992), The
 American Statistician 46(2), 84-88.
 }
+\examples{
+set.seed(1)
+xs <- rnorm(500, 0, 2)
+r <- Bayisr(xs, log_target = function(x) -0.5 * x^2,
+            log_proposal = function(x) -0.5 * (x / 2)^2 - log(2),
+            m = 100)
+str(r, max.level = 1)
+}

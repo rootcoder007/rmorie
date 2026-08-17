@@ -30,3 +30,12 @@ Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
 method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 }
 \keyword{internal}
+\examples{
+cases <- list(
+  list(start = 0, end = 365, exposure = 100, events = c(110, 250)),
+  list(start = 0, end = 365, exposure = 200, events = c(215)))
+cbp <- lapply(cases, function(c)
+  morie_sccsno_build_intervals(c$start, c$end, c$exposure, c$events,
+                               list(c(0, 30)), c()))
+morie_sccsno_loglik(c(0.5), cbp, n_risk = 1L, n_age = 1L)
+}

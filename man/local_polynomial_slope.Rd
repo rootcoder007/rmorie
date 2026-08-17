@@ -23,3 +23,9 @@ A step of the bnskt2_native implementation. No other function in the package cal
 The value of \code{.side_fit}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+v <- runif(200, -1, 1)
+y <- 1 + 0.5 * v + 0.8 * pmax(v, 0) + rnorm(200, 0, 0.1)
+local_polynomial_slope(v, y, kink = 0, bandwidth = 0.5, side = "right")
+}
