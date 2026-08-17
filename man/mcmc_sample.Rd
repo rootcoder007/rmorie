@@ -14,3 +14,8 @@ Random-walk Metropolis, used to draw from the current posterior
 A list with \code{samples}, \code{acceptance}.
 }
 \keyword{internal}
+\examples{
+samples <- mcmc_sample(function(x) -0.5 * sum(x^2), x0 = 0, n = 200,
+                       burn = 50, seed = 1L)
+mean(samples)
+}

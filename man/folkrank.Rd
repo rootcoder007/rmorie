@@ -21,3 +21,8 @@ A step of the tagRC_native implementation. Called by \code{morie_tagRC}. See the
 A list with \code{estimate}, \code{ranking}, \code{difference}, \code{with_preference}, \code{without_preference}, \code{undifferenced_ranking}, \code{baseline_ranking}, \code{focus}, \code{n_nodes}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),
+                c("u2", "t1", "r1"), c("u2", "t3", "r3"))
+folkrank(triples, focus = "t:t1")
+}

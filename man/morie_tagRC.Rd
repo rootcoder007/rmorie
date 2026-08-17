@@ -21,3 +21,8 @@ A step of the tagRC_native implementation. No other function in the package call
 The value of \code{folkrank}.
 }
 \keyword{internal}
+\examples{
+triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),
+                c("u2", "t1", "r1"), c("u2", "t3", "r3"))
+morie_tagRC(triples, focus = "t:t1")
+}

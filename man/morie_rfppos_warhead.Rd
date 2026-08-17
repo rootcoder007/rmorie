@@ -31,3 +31,6 @@ A zero-based triple of electrophile, reference and torsion   atom, or NULL when 
     ledger entry names.
 }
 \keyword{internal}
+\examples{
+morie_rfppos_warhead("C=CC(=O)N", mode = "michael")
+}
