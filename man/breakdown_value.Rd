@@ -24,3 +24,8 @@ A step of the snmtst_native implementation. No other function in the package cal
 A list with \code{breakdown}, \code{family}, \code{sign}, \code{status}.
 }
 \keyword{internal}
+\examples{
+beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
+r <- breakdown_value(beta, n_pre = 2, n_post = 3)
+str(r, max.level = 1)
+}

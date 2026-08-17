@@ -26,3 +26,9 @@ Changing any of the parameters changes the digest, so a tag cannot silently be c
 Raw 64-byte BLAKE2b digest.
 }
 \keyword{internal}
+\examples{
+r <- morie_secarg_prehash(charToRaw("password"), charToRaw("somesalt"),
+                          parallelism = 1L, tag_length = 32L,
+                          memory = 32L, passes = 3L)
+str(r, max.level = 1)
+}

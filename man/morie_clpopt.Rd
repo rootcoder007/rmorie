@@ -25,3 +25,9 @@ Mirrors clpopt.linprog.
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+r <- morie_clpopt(c = c(3, 5), A_ub = rbind(c(1, 0), c(0, 2), c(3, 2)),
+                  b_ub = c(4, 12, 18), maximise = TRUE)
+stopifnot(abs(r$fun - 36) < 1e-6)
+str(r, max.level = 1)
+}

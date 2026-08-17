@@ -20,3 +20,9 @@ Deriving an encryption key and a MAC key from the same secret is safe precisely 
 List with \code{keys}, \code{hex}, \code{prk},   \code{all_distinct}, \code{note}.
 }
 \keyword{internal}
+\examples{
+r <- morie_seckdf_derive_context_keys(as.raw(1:32),
+                                      c("encrypt", "mac"))
+stopifnot(r$all_distinct)
+str(r, max.level = 1)
+}

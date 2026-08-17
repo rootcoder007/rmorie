@@ -22,3 +22,8 @@ Saarinen, M.-J. & Aumasson, J.-P. (2015) "BLAKE2", RFC 7693,
 doi:10.17487/RFC7693.
 }
 \keyword{internal}
+\examples{
+r <- morie_secarg_argon2(charToRaw("password"), charToRaw("somesalt"),
+                         memory = 32, passes = 1)
+str(r, max.level = 1)
+}
