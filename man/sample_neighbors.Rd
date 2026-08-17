@@ -20,3 +20,10 @@ Sample a fixed number of neighbours with replacement
 Vector of sampled neighbour ids.
 }
 \keyword{internal}
+\examples{
+rng <- .ghc_rng(0L)
+adj <- list(`0` = c(`1` = 1, `3` = 1), `1` = c(`0` = 1, `2` = 1),
+            `2` = c(`1` = 1, `3` = 1), `3` = c(`2` = 1, `0` = 1))
+nb <- sample_neighbors(adj, v = 0, size = 2, rng)
+length(nb) == 2L
+}
