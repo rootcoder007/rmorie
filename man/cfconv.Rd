@@ -21,3 +21,12 @@ A step of the schN_native implementation. No other function in the package calls
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 5; d <- 4
+X <- matrix(rnorm(n * d), n, d)
+R <- matrix(rnorm(n * 3), n, 3)
+filter_net <- function(g) rep(0.1, d)
+out <- cfconv(X, R, filter_net, cutoff = 5)
+dim(out)
+}

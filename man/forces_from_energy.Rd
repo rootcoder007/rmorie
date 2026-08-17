@@ -19,3 +19,10 @@ A step of the schN_native implementation. Called by \code{invariance_error}. See
 A list with \code{estimate}, \code{forces}, \code{net_force}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+R <- matrix(rnorm(4 * 3), 4, 3)
+energy_fn <- function(R) sum(R^2)
+Fm <- forces_from_energy(energy_fn, R)
+c(nrow(Fm$forces), max(abs(Fm$forces + 2 * R)) < 1e-3)
+}
