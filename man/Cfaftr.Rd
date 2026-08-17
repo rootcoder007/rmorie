@@ -32,3 +32,8 @@ alongside as an independent read of the same data.
 Joreskog (1969), Psychometrika 34(2):183-202;
 Spearman (1904), Am. J. Psychology 15(2):201-292.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(200), 50, 4)
+Cfaftr(X)
+}

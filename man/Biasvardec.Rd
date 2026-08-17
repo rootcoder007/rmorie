@@ -22,3 +22,9 @@ Formula: E(y - fhat)^2 = Var(e) + Bias\link{fhat}^2 + Var(fhat)
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.2 p. 113, which reproduces the decomposition of Hastie, Tibshirani and Friedman (2008) p. 223: the expected prediction error under quadratic loss splits into Var(e), the squared bias of fhat and the variance of fhat.  Averaged over the evaluation points here.  Read from the chapter PDF, not recalled.
 }
+\examples{
+set.seed(1)
+F <- matrix(rnorm(50), 5, 10)
+f <- rnorm(10)
+Biasvardec(F, f, sigma2 = 1)
+}

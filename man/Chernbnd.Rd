@@ -22,3 +22,6 @@ Formula: P(X >= a) <= min_{s>0} exp(-s a) E[exp(s X)]
 \references{
 Chernoff (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations, Annals of Mathematical Statistics 23:493-507. Not held locally; the exponential Markov bound is stated in this exact form in every standard reference.
 }
+\examples{
+Chernbnd(mgf = function(s) exp(0.5 * s^2), a = 2)
+}

@@ -34,3 +34,8 @@ overview, Statistics Surveys 3, 96-146, doi:10.1214/09-SS057,
 Eq. 25, Section 3.3.1; local copy
 fetched-wave3/pearl-2009-causal-inference-statistics-overview-StatSurveys3.pdf.
 }
+\examples{
+set.seed(1)
+Causbckd(y = rnorm(50), x = rbinom(50, 1, 0.5),
+         z = sample(c("a", "b"), 50, replace = TRUE))
+}
