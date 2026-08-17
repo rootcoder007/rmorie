@@ -30,3 +30,6 @@ Kleinberg (1999), Authoritative sources in a hyperlinked
 environment, Journal of the ACM 46(5):604-632.
 \doi{10.1145/324133.324140}
 }
+\examples{
+Hits(matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
+}

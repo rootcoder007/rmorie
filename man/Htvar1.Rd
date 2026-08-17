@@ -31,3 +31,9 @@ Horvitz and Thompson (1952), A generalization of sampling
 without replacement from a finite universe, JASA 47(260):663-685.
 \doi{10.1080/01621459.1952.10483446}
 }
+\examples{
+y <- c(10, 20, 15)
+pi <- c(0.5, 0.4, 0.6)
+pi_ij <- matrix(c(0.5, 0.2, 0.3, 0.2, 0.4, 0.25, 0.3, 0.25, 0.6), 3, 3)
+Htvar1(y, pi, pi_ij)
+}

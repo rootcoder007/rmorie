@@ -40,3 +40,11 @@ Knol, M. J. and VanderWeele, T. J. (2012).
 Recommendations for presenting analyses of effect modification and
 interaction. International Journal of Epidemiology 41(2), 514-520.
 }
+\examples{
+set.seed(1)
+n <- 100
+A <- rbinom(n, 1, 0.5)
+V <- rbinom(n, 1, 0.5)
+y <- rbinom(n, 1, 0.2 + 0.2 * A + 0.2 * V)
+Effmod(y = y, A = A, V = V)
+}
