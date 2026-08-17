@@ -18,3 +18,7 @@ A step of the RcppExports implementation. Called by \code{morie_var}. See the fi
 The value of \code{.Call}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_var_cpp(x = rnorm(10)); TRUE
+}

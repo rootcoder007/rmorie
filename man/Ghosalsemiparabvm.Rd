@@ -35,3 +35,7 @@ Var(sqrt(n)(psi(G_post) - 1/2)) -> 1/12.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.3.
 }
+\examples{
+set.seed(1)
+r <- Ghosalsemiparabvm(); TRUE
+}

@@ -26,3 +26,7 @@ Koenker, R. and Bassett, G. (1978). Regression
 quantiles. Econometrica, 46(1), 33-50.  Koenker, R. (2005).
 Quantile Regression. Cambridge University Press.
 }
+\examples{
+set.seed(1)
+r <- morie_qrf(y_true = rnorm(10), y_pred = rnorm(10)); TRUE
+}

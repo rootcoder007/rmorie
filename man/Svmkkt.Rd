@@ -14,3 +14,7 @@ Svmkkt(X, y, beta0, beta, alpha, delta, zeta, T)
 A list with \code{L}, \code{stationarity_beta}, \code{balance}, \code{multiplier_sum}, \code{complementary_alpha}, \code{complementary_delta}, \code{max_residual}, \code{kkt_satisfied}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- Svmkkt(X = rnorm(10), y = rnorm(10), beta0 = 0.5, beta = 0.5, alpha = 0.5, delta = rnorm(10), zeta = rnorm(10), T = rnorm(10)); TRUE
+}

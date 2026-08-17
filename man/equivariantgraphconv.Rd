@@ -24,3 +24,7 @@ A step of the egcn_native implementation. No other function in the package calls
 The value of \code{run_egnn}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- equivariantgraphconv(H = rnorm(10), X = rnorm(10), layers = rnorm(10), phi_e = rnorm(10), phi_x = rnorm(10), phi_h = rnorm(10)); TRUE
+}

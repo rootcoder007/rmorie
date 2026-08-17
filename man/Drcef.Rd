@@ -38,3 +38,7 @@ Econometrics 225(2), 200-230, equation (3.4).
 Sant'Anna, P. H. C. and Zhao, J. (2020). Journal of Econometrics
 219(1), 101-122, equation (2.6).
 }
+\examples{
+set.seed(1)
+r <- Drcef(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
+}

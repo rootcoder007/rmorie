@@ -17,3 +17,7 @@ source filename prefix via \code{.MORIE_CATEGORY_PREFIX_MAP}.  Safe to
 call repeatedly -- existing registrations are left untouched.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- .morie_auto_register_stat_commands(); TRUE
+}

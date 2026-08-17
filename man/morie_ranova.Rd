@@ -31,3 +31,7 @@ are returned.
 Searle, S. R., Casella, G. and McCulloch, C. E.
 (1992). Variance Components. Wiley, Eq. (21) and Chapters 4-5.
 }
+\examples{
+set.seed(1)
+r <- morie_ranova(y = rnorm(10), group = rbinom(10, 1, 0.5)); TRUE
+}

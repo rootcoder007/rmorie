@@ -33,3 +33,7 @@ contribution \code{D(y - m1)/pi - (1 - D)(y - m0)/(1 - pi)}.
 Tsiatis, A. A., Davidian, M., Zhang, M. & Lu, X. (2008).
 Statistics in Medicine 27:4658-4677, section 3.
 }
+\examples{
+set.seed(1)
+r <- Scbsft(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), baseline = rnorm(10)); TRUE
+}

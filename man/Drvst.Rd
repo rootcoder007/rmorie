@@ -36,3 +36,7 @@ Econometrics 219(1), 101-122, equation (2.6).  Kish, L. (1965).
 Survey Sampling, Wiley, section 11.7.  Crump, R. K., Hotz, V. J.,
 Imbens, G. W. and Mitnik, O. A. (2009). Biometrika 96(1), 187-199.
 }
+\examples{
+set.seed(1)
+r <- Drvst(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
+}

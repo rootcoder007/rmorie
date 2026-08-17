@@ -34,3 +34,7 @@ Var(sqrt(n)(F_post(t) - t)) -> t(1 - t).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.2.
 }
+\examples{
+set.seed(1)
+r <- Ghosaldpbvm(); TRUE
+}

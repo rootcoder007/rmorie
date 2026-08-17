@@ -42,3 +42,7 @@ A list with the estimate, its standard error from the   influence function, the 
     113(523), 1228-1242.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+r <- morie_sdcfst(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+}
