@@ -22,3 +22,12 @@ Walks a putative QTL along the interval between the two flanking markers and rep
 A named list with keys \code{estimate}, \code{peak_lod},   \code{peak_position}, \code{position}, \code{lod}, \code{fit},   \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 50
+g1 <- rbinom(n, 1, 0.5)
+g2 <- ifelse(runif(n) < 0.85, g1, 1 - g1)
+y <- 1 + 0.9 * g1 + rnorm(n, 0, 0.5)
+r <- morie_scan_interval(y, g1, g2, length = 0.15, step = 0.05)
+str(r, max.level = 1)
+}

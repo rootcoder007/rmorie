@@ -28,3 +28,9 @@ A step of the cdaeRC_native implementation. No other function in the package cal
 The value of \code{fit_cdae}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
+r <- morie_cdaeRC(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
+str(r, max.level = 1)
+}
