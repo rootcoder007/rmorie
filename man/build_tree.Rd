@@ -26,3 +26,14 @@ the new trajectory ends (theta_minus, r_minus, theta_plus, r_plus), the candidat
 A list, whose contents depend on the branch taken; across the branches its names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s}, \code{alpha}, \code{na}.
 }
 \keyword{internal}
+\examples{
+logp <- function(t) -0.5 * sum(t^2)
+grad <- function(t) -t
+e <- .ghc_rng(1)
+rnd <- function() .ghc_unif(e, 1L)
+th <- c(1, -1); rr <- c(0.2, 0.1)
+j0 <- .joint(logp, th, rr)
+r <- build_tree(th, rr, logu = j0 - 1, v = 1L, j = 2L, eps = 0.1,
+                logp, grad, rnd, j0)
+str(r, max.level = 1)
+}

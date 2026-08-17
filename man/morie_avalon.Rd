@@ -35,3 +35,7 @@ A list with the bits, the features that set them, and the   collision count.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+fp <- morie_avalon("c1ccccc1O", n_bits = 128L)
+str(fp, max.level = 1)
+}

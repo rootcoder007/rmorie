@@ -23,3 +23,10 @@ Each coordinate is updated in turn through one slice transition on its full cond
 RichResult-like list with \code{estimate}, \code{draws},   \code{mean}, \code{n_draws}, \code{n_eval}, \code{ess},   \code{method}.
 }
 \keyword{internal}
+\examples{
+lcs <- list(
+  function(x, others) -0.5 * (x - 0.5 * others[1])^2,
+  function(x, others) -0.5 * (x - 0.5 * others[1])^2)
+r <- morie_gibbs_slice(lcs, x0 = c(0, 0), n = 300L, seed = 1)
+str(r, max.level = 1)
+}

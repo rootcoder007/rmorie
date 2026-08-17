@@ -21,3 +21,13 @@ A step of the berte_native implementation. No other function in the package call
 A list with \code{estimate}, \code{output}, \code{attention}, \code{pooled}, \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm}, \code{bidirectional}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+X <- matrix(rnorm(12), 3, 4)
+W <- function() matrix(rnorm(16, 0, 0.4), 4, 4)
+blk <- list(Wq = W(), Wk = W(), Wv = W(), Wo = W(),
+            W1 = matrix(rnorm(32, 0, 0.4), 8, 4), b1 = rep(0, 8),
+            W2 = matrix(rnorm(32, 0, 0.4), 4, 8), b2 = rep(0, 4))
+r <- bert_encoder(X, list(blk), n_heads = 2)
+str(r, max.level = 1)
+}

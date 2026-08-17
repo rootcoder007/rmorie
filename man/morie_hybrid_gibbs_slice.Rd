@@ -14,3 +14,10 @@ Currently every coordinate is slice-updated; this name is preserved to mirror th
 Same payload as \code{morie_gibbs_slice}.
 }
 \keyword{internal}
+\examples{
+lcs <- list(
+  function(x, others) -0.5 * (x - 0.5 * others[1])^2,
+  function(x, others) -0.5 * (x - 0.5 * others[1])^2)
+r <- morie_hybrid_gibbs_slice(lcs, x0 = c(0, 0), n = 300L, seed = 1)
+str(r, max.level = 1)
+}

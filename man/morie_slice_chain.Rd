@@ -24,3 +24,8 @@ Runs \code{burn + n * thin} slice transitions and records every \code{thin}-th d
 List with \code{draws}, \code{n_eval}, \code{w},   \code{evals_per_draw}.
 }
 \keyword{internal}
+\examples{
+r <- morie_slice_chain(function(x) -0.5 * x^2, x0 = 0, n = 400L,
+                       seed = 1)
+str(r, max.level = 1)
+}

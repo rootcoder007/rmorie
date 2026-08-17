@@ -36,3 +36,7 @@ One count per atom.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+p <- morie_avalon_parse("CCO")
+morie_avalon_h(p$el, p$arom, p$chg, p$hexp, p$bonds)
+}

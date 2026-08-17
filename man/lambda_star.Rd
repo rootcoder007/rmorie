@@ -20,3 +20,7 @@ A step of the blstn_native implementation. Called by \code{morie_karlin_altschul
 A numeric value.
 }
 \keyword{internal}
+\examples{
+d <- list("5" = 0.25, "-4" = 0.75)
+lambda_star(d)
+}
