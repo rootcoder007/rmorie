@@ -22,3 +22,6 @@ A step of the cgmth_native implementation. No other function in the package call
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+cgmth(function(x) sum(x^2), function(x) 2 * x, x0 = c(1, 1))
+}

@@ -21,3 +21,8 @@ Part of the caCMIP_mixedcase_native implementation; see the file header for the 
 A list with \code{estimate}, \code{weights}, \code{unweighted_mean}, \code{d}, \code{n_models}, \code{effective_n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+models <- list(rnorm(10), rnorm(10), rnorm(10))
+caCMIP(models, obs = rnorm(10), sigma_d = 1, sigma_s = 1)
+}
