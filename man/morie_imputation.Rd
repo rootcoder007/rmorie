@@ -14,3 +14,14 @@ Fit the two-way model on **untreated** observations only, impute the untreated p
 A named list mirroring the RichResult payload: \code{estimate},   \code{att}, \code{n_cells}, \code{n_untreated_used}, \code{coef},   \code{method}, \code{identical_to}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+nu <- 4; T <- 5
+unit <- rep(1:nu, each = T)
+period <- rep(1:T, nu)
+ft_unit <- c(NA, NA, 4, 4)
+first_treated <- rep(ft_unit, each = T)
+treated_now <- !is.na(first_treated) & period >= first_treated
+Y <- rnorm(nu * T) + treated_now * 2
+morie_imputation(Y, unit, period, first_treated)
+}
