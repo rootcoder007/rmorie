@@ -77,7 +77,9 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tl1step_expit <- function(x) {
-  if (x > -700) 1 / (1 + exp(-x)) else 0
+  # vectorised clamp: the scalar if() errors on any vector input
+  xc <- pmax(x, -700)
+  1 / (1 + exp(-xc))
 }
 
 #' .tl1step_as_numvec

@@ -72,7 +72,9 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' @return One of two values, depending on the branch taken.
 #' @export
 .ctmle_expit <- function(x) {
-  if (x > -700) 1 / (1 + exp(-x)) else 0
+  # vectorised clamp: the scalar if() errors on any vector input
+  xc <- pmax(x, -700)
+  1 / (1 + exp(-xc))
 }
 
 #' .ctmle_fluct
