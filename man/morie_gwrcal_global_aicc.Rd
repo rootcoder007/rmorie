@@ -14,3 +14,10 @@ morie_gwrcal_global_aicc
 The value of \code{.gwr_aicc}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 50
+X <- cbind(1, rnorm(n))
+y <- X \%*\% c(1, 2) + rnorm(n)
+morie_gwrcal_global_aicc(y, X)
+}

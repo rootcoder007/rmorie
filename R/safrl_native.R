@@ -153,7 +153,7 @@
   }
   for (cc in seq_len(n)) {
     p <- cc
-    rng <- (cc + 1):n
+    rng <- if (cc < n) (cc + 1):n else integer(0)
     if (length(rng) > 0) {
       for (r in rng) {
         if (abs(M[r, cc]) > abs(M[p, cc])) {

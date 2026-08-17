@@ -29,3 +29,9 @@ A step of the causrddc_native implementation. Called by \code{morie_rdrobu}. See
 A list with \code{estimate}, \code{bias_corrected}, \code{se_conventional}, \code{se_robust}, \code{ci_conventional}, \code{ci_bias_corrected}, \code{ci_robust}, \code{pvalue_robust}, \code{h}, \code{b}, \code{rho}, \code{p}, \code{q}, \code{nu}, \code{kernel}, \code{vce}, \code{alpha}, \code{n}, \code{n_left}, \code{n_right}, \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- runif(200, -1, 1)
+y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+morie_causrddc(y, x)
+}
