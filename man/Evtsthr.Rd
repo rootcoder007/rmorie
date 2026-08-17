@@ -33,3 +33,7 @@ xi -- the first place the parameters stop drifting.
 \references{
 Northrop & Coleman (2014), Extremes 17(2):289-303.
 }
+\examples{
+set.seed(1)
+Evtsthr(rexp(200))
+}

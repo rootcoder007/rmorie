@@ -35,3 +35,7 @@ Ford & Fulkerson (1956), Canadian Journal of Mathematics
 8:399-404, doi:10.4153/CJM-1956-045-5; Edmonds & Karp (1972), JACM
 19(2):248-264, doi:10.1145/321694.321699.
 }
+\examples{
+G <- matrix(c(0, 3, 2, 0, 0, 0, 1, 2, 0, 0, 0, 3, 0, 0, 0, 0), 4, 4, byrow = TRUE)
+Flowmm(G, source = 0, sink = 3)
+}

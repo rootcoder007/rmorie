@@ -64,3 +64,7 @@ Farrington, Andrews, Beale & Catchpole (1996), JRSS-A
 Garthwaite, Andrews & Charlett (2013), Statistics in Medicine
 32(7):1206-1222, doi:10.1002/sim.5595.
 }
+\examples{
+set.seed(1)
+Farsig(rpois(300, 10))
+}

@@ -36,3 +36,9 @@ auxiliary link prediction loss is ||A - S S'||_F / n.
 Ying et al. (2018), Hierarchical Graph Representation
 Learning with Differentiable Pooling, NeurIPS 31:4800-4810.
 }
+\examples{
+set.seed(1)
+A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+X <- matrix(rnorm(6), 3, 2)
+DiffP(A, X, K_clusters = 2)
+}
