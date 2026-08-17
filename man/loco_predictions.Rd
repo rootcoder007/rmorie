@@ -32,3 +32,15 @@ of mixed-model association methods", Nature Genetics 46(2),
 100-106.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 30
+G <- matrix(rbinom(n * 20, 2, 0.3), n, 20)
+y <- G[, 1] - G[, 10] + rnorm(n, 0, 0.5)
+blocks <- make_blocks(20, chromosomes = rep(1:2, each = 10),
+                      block_size = 10)
+l0 <- level0_predictors(G, y, blocks, n_ridge = 3)
+l1 <- level1_stack(l0$predictors, y)
+r <- loco_predictions(l0$predictors, l0$meta, l1$weights)
+str(r, max.level = 1)
+}
