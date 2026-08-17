@@ -14,3 +14,11 @@ Internal helper: Tbl Extract Model
 A list with \code{params}, \code{se}, \code{pvalues}, \code{ci}, \code{nobs}, \code{rsquared}, \code{aic}, \code{bic}, \code{llf}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+df <- data.frame(x = rnorm(30))
+df$y <- df$x + rnorm(30)
+m <- lm(y ~ x, data = df)
+anova_table(m, typ = 1L)
+.tbl_extract_model(m = m)
+}

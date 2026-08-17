@@ -13,3 +13,7 @@ A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
 Trapezoidal integration on a 1-D grid.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_entheo_trapz(V, V)
+}
