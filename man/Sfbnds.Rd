@@ -59,3 +59,7 @@ from studies with imperfect compliance. Journal of the American
 Statistical Association 92(439), 1171-1176, eqs. (4)-(5) p. 1173.
 \doi{10.1080/01621459.1997.10474074}
 }
+\examples{
+set.seed(1)
+Sfbnds(y = rbinom(40, 1, 0.5), D = rbinom(40, 1, 0.5), Z = rbinom(40, 1, 0.5))
+}

@@ -28,3 +28,8 @@ Pepper (2000), Econometrica 68(4), 997-1010.  Standard published
 form; neither article is in the local corpus and neither could be
 downloaded, so neither was read.
 }
+\examples{
+set.seed(1)
+Mtrbound(y = rnorm(50), z = rbinom(50, 1, 0.5), d = rbinom(50, 1, 0.5),
+         ymin = -3, ymax = 3)
+}
