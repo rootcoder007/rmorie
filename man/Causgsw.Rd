@@ -42,3 +42,7 @@ generalizability of results from randomized trials, Journal of
 the Royal Statistical Society Series A 174(2), 369-386,
 doi:10.1111/j.1467-985x.2010.00673.x.
 }
+\examples{
+set.seed(1)
+Causgsw(s_sample = runif(50, 0.1, 0.9), s_target = runif(30, 0.1, 0.9))
+}

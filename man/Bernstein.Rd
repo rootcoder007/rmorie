@@ -24,3 +24,6 @@ Formula: P(S_n >= n t) <= exp(-n t^2 / (2 sigma^2 + 2 M t / 3))
 \references{
 Bernstein (1924). The original is not held locally and is in Russian; the inequality is stated in this exact form in every standard concentration-inequality reference consulted.
 }
+\examples{
+Bernstein(sigma2 = 1, M = 1, n = 100, t = 0.1)
+}

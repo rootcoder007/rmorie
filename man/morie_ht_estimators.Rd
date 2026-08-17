@@ -20,3 +20,6 @@ List with total, mean, weights.
 Equations 2.2 to 2.4 of Brus (2022): t_hat = sum z_k/pi_k with design
 weights 1/pi_k, and zbar_hat = t_hat/N. Mirrors the ch2 modules.
 }
+\examples{
+morie_ht_estimators(z = c(10, 20, 15), pi = c(0.1, 0.2, 0.15), n_population = 100)
+}

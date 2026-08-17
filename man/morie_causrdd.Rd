@@ -40,3 +40,9 @@ Hahn, J., Todd, P. and van der Klaauw, W. (2001).
 Identification and estimation of treatment effects with a
 regression-discontinuity design. Econometrica, 69(1), 201-209.
 }
+\examples{
+set.seed(1)
+x <- runif(200, -1, 1)
+y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+morie_causrdd(x, y)
+}

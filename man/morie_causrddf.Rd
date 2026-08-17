@@ -51,3 +51,10 @@ Imbens, G. and Lemieux, T. (2008). Regression
 discontinuity designs: a guide to practice. Journal of
 Econometrics, 142(2), 615-635.
 }
+\examples{
+set.seed(1)
+x <- runif(200, -1, 1)
+y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+treat <- as.integer((x >= 0) & (runif(200) < 0.85))
+morie_causrddf(x, y, treat)
+}
