@@ -41,3 +41,10 @@ of the Royal Statistical Society Series B 65(2):331-355,
 \doi{10.1111/1467-9868.00389}; Petersen et al (2014), Journal of
 Causal Inference 2(2):147-185. \doi{10.1515/jci-2013-0007}
 }
+\examples{
+state <- rep(c(0, 1), 8)
+action <- rep(c(1, 0), 8)
+reward <- rep(c(1, 0), 8)
+time <- rep(1:2, each = 8)
+Itrlrn(state, action, reward, time)
+}

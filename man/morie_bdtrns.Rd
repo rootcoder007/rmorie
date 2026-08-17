@@ -28,3 +28,6 @@ mean; the width is exactly (g1 - g0)(1 - p).
 Manski, C. F. (2007). Identification for Prediction
 and Decision. Harvard University Press.
 }
+\examples{
+morie_bdtrns(y_obs = c(1, 0, 1), p_obs = 0.6, y_lo = 0, y_hi = 1)
+}

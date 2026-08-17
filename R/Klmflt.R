@@ -31,7 +31,9 @@ Klmflt <- function(y, model) {
   x0 <- if (is.null(model$x0)) rep(0, d) else model$x0
   P0 <- if (is.null(model$P0)) diag(1, d) else model$P0
   res <- Kalmf(Y, Fm, need("H"), need("Q"), need("R"), x0, P0)
-  .t1_result(estimate = res$estimate, state = res$state, loglik = res$loglik,
+  .t1_result(estimate = res$estimate, state = res$state,
+             cov = res$cov, predicted = res$predicted,
+             predicted_cov = res$predicted_cov, loglik = res$loglik,
              n = res$n,
              method = "forward predict/update recursion, Kalman (1960); delegates to Kalmf")
 }

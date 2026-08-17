@@ -20,3 +20,7 @@ A step of the bigtm_native implementation. No other function in the package call
 A list with \code{predictive}, \code{lambda}, \code{f}, \code{interpolated}, \code{note}.
 }
 \keyword{internal}
+\examples{
+dirichlet_predictive(N_ij = c(3, 5, 2), N_j = 10, beta = 0.5,
+                     m = c(0.2, 0.3, 0.5))
+}

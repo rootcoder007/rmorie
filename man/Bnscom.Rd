@@ -45,3 +45,9 @@ effects using instrumental variables. Journal of the American
 Statistical Association 91(434), 444-455.
 \doi{10.1080/01621459.1996.10476902}.
 }
+\examples{
+set.seed(1)
+Z <- rbinom(40, 1, 0.5)
+D <- rbinom(40, 1, 0.2 + 0.6 * Z)
+Bnscom(y = rbinom(40, 1, 0.4), D = D, Z = Z)
+}
