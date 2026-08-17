@@ -403,7 +403,7 @@ morie_motfsr <- function(sequences, w, alphabet = NULL, n_motifs = 1,
       row <- fit$z[[i]]
       for (j in seq_along(row)) {
         sc <- 0
-        for (q in seq_len(w)) sc <- sc + spec[[q]][coded[[i]][j + q + 1L] + 1L]
+        for (q in seq_len(w)) sc <- sc + spec[[q]][coded[[i]][j + q - 1L] + 1L]
         if (sc >= t) sites[[length(sites) + 1L]] <- c(i - 1L, j - 1L, sc)
       }
     }
