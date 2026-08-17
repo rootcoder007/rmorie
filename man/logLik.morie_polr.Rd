@@ -18,3 +18,11 @@ Log-likelihood of method for \code{morie_polr} objects
 The value of \code{val}, as built in the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- rnorm(80)
+y <- factor(cut(1.5 * x + rnorm(80), 3), ordered = TRUE)
+fit <- morie_polr(y ~ x, data = data.frame(y, x))
+ll <- logLik(fit)
+inherits(ll, "logLik")
+}
