@@ -50,3 +50,11 @@ Econometrica 69(1), 201-209 (estimand); Imbens and Kalyanaraman
 registry); Imbens and Lemieux (2008), J Econometrics 142(2),
 615-635.
 }
+\examples{
+set.seed(1)
+x <- runif(300, -1, 1)
+treat <- rbinom(300, 1, ifelse(x >= 0, 0.85, 0.15))
+y <- 1 + 2 * x + 0.6 * treat + rnorm(300, 0, 0.3)
+r <- Causrddf(x, y, treat, cutoff = 0)
+is.list(r)
+}
