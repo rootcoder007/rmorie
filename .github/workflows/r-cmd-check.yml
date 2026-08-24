@@ -78,7 +78,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # The 2026-07-15 oldrel-1 failure was ENOSPC: a dep-cache miss (any
       # DESCRIPTION change reshuffles the lockfile hash) forces from-source
@@ -258,7 +258,7 @@ jobs:
       _R_CHECK_FORCE_SUGGESTS_: false
       R_KEEP_PKG_SOURCE: yes
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Debian toolchain
         run: |
           export DEBIAN_FRONTEND=noninteractive
