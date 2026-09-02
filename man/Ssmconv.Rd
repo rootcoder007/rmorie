@@ -3,7 +3,7 @@
 % the formals.
 \name{Ssmconv}
 \alias{Ssmconv}
-\title{Causal convolution y_t = sum_l K_l x_{t-l} (standard)}
+\title{Causal convolution y_t = sum_l K_l x_\{t-l\} (standard)}
 \usage{
 Ssmconv(K, x) 
 }

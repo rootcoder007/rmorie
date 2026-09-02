@@ -13,7 +13,7 @@ morie_alammar_grouped_query_attention(Q_heads, K_groups, V_groups, n_query_heads
 \item{n_query_heads,n_kv_groups}{Counts.}
 }
 \description{
-Shazeer 2019) head_i = Attn(Q_i, `K_{g(i)}, V_{g(i)}`) with g(i) = i mod G. G = 1 recovers MQA; G = H full multi-head. H must divide by G.
+Shazeer 2019) head_i = Attn(Q_i, `K_\{g(i)\}, V_\{g(i)\}`) with g(i) = i mod G. G = 1 recovers MQA; G = H full multi-head. H must divide by G.
 }
 \value{
 A list with \code{output}, \code{group_assignment}, \code{kv_cache_ratio}, \code{estimate}, \code{n}, \code{method}.

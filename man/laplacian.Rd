@@ -10,7 +10,7 @@ laplacian(adj, n, normalized = TRUE)
 \arguments{
 \item{adj}{Adjacency list.}
 \item{n}{Number of vertices.}
-\item{normalized}{If TRUE, return I - D^{-1/2} A D^{-1/2}.}
+\item{normalized}{If TRUE, return I - D^\{-1/2\} A D^\{-1/2\}.}
 }
 \description{
 Build the graph Laplacian

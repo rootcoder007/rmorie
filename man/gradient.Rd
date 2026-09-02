@@ -3,7 +3,7 @@
 % the formals.
 \name{gradient}
 \alias{gradient}
-\title{D/d v_{i,f} of hat y, used in the SGD step --------------------}
+\title{D/d v_\{i,f\} of hat y, used in the SGD step --------------------}
 \usage{
 gradient(x, V, f, i) 
 }

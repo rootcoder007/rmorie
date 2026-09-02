@@ -4,7 +4,7 @@
 \name{atoms}
 \alias{atoms}
 \alias{morie_distq}
-\title{The fixed support {z_i} and its spacing}
+\title{The fixed support \{z_i\} and its spacing}
 \usage{
 atoms(v_min, v_max, n_atoms) 
 

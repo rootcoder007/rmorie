@@ -3,7 +3,7 @@
 % the formals.
 \name{categorical_projection}
 \alias{categorical_projection}
-\title{Eq. (7) / Algorithm 1: project r + gamma * z onto {z_i}}
+\title{Eq. (7) / Algorithm 1: project r + gamma * z onto \{z_i\}}
 \usage{
 categorical_projection(reward, gamma, next_probs, v_min, v_max, n_atoms = NULL, done = FALSE) 
 }

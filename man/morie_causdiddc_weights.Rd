@@ -3,7 +3,7 @@
 % the formals.
 \name{morie_causdiddc_weights}
 \alias{morie_causdiddc_weights}
-\title{The w_{g,t} of Theorem 1}
+\title{The w_\{g,t\} of Theorem 1}
 \usage{
 morie_causdiddc_weights(D, group, period, weights = NULL) 
 }

@@ -3,7 +3,7 @@
 % the formals.
 \name{ShiftInt}
 \alias{ShiftInt}
-\title{Psi = E[ {g(A - delta | H) / g(A | H)} Y ] -- the density ratio at}
+\title{Psi = E[ \{g(A - delta | H) / g(A | H)\} Y ] -- the density ratio at}
 \usage{
 ShiftInt(y, a, h, delta = 1, trim = NULL) 
 }

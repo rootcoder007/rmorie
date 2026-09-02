@@ -3,7 +3,7 @@
 % the formals.
 \name{morie_sv_dl_optimal_split}
 \alias{morie_sv_dl_optimal_split}
-\title{Argmax_{i<j} f_i + r_j -- the split with a microinsertion gap}
+\title{Argmax_\{i<j\} f_i + r_j -- the split with a microinsertion gap}
 \usage{
 morie_sv_dl_optimal_split(f, r) 
 }
