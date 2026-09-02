@@ -24,7 +24,6 @@
 #' canonical loader.
 #'
 #' Year-lock invariant
-#' -------------------
 #' OTIS \code{UniqueIndividual_ID} (format \code{YYYY-XXXXX-AA}) is
 #' randomly reassigned every fiscal year and re-randomized per dataset
 #' file even within a year. The \code{variable_taxonomy.R} registry

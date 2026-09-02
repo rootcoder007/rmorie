@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpmnprobs}
 \alias{.gpmnprobs}
-\title{\subsection{Chapter 7: multinomial logistic model, eqs (7.6)-(7.10)}{
-}}
+\title{Chapter 7: multinomial logistic model, eqs (7.6)-(7.10)}
 \usage{
 .gpmnprobs(X, beta0, beta, baseline_last = TRUE)
 }

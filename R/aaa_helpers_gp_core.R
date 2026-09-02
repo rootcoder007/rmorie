@@ -97,7 +97,6 @@
 
 # --- chapter 1: balanced one-way layout, eqs (1.2)-(1.5) -------------------
 #' Chapter 1: balanced one-way layout, eqs (1.2)-(1.5)
-#' -------------------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{Msm002}, \code{Msm003}, \code{Msm005} and 1 others in the module.
 #' See the file header for the source the module follows.
@@ -132,7 +131,6 @@
 
 # --- chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14) -------------
 #' Chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14)
-#' -------------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}.
 #' See the file header for the source the module follows.
@@ -214,7 +212,6 @@
 
 # --- chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML ---------------
 #' Chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML
-#' ---------------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gplmmloglik}, \code{.gpremlloglik} and 1 others in the module.
 #' See the file header for the source the module follows.
@@ -309,7 +306,6 @@
 
 # --- chapter 3: least squares, eq (3.1) -----------------------------------
 #' Chapter 3: least squares, eq (3.1)
-#' -----------------------------------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{Msm042}, \code{Msm332}.
 #' See the file header for the source the module follows.
@@ -340,7 +336,6 @@
 
 # --- chapter 5: Kronecker products and the multi-trait model, eq (5.5) -----
 #' Chapter 5: Kronecker products and the multi-trait model, eq (5.5)
-#' -----
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{.gpmultitrait}.
 #' See the file header for the source the module follows.
@@ -384,7 +379,6 @@
 
 # --- chapter 7: multinomial logistic model, eqs (7.6)-(7.10) ---------------
 #' Chapter 7: multinomial logistic model, eqs (7.6)-(7.10)
-#' ---------------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{.gpmnloglik}.
 #' See the file header for the source the module follows.
@@ -451,7 +445,6 @@
 
 # --- chapter 10: ANN loss, eq (10.5) --------------------------------------
 #' Chapter 10: ANN loss, eq (10.5)
-#' --------------------------------------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{Msm249}.
 #' See the file header for the source the module follows.
@@ -465,7 +458,6 @@
 
 # --- chapter 3: expected prediction error, p.80 ---------------------------
 #' Chapter 3: expected prediction error, p.80
-#' ---------------------------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{Msm334}.
 #' See the file header for the source the module follows.
@@ -484,7 +476,6 @@
 
 # --- chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4) -----------
 #' Chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4)
-#' -----------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{Msm323}.
 #' See the file header for the source the module follows.
@@ -603,7 +594,6 @@
 
 # --- chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5) ----------
 #' Chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5)
-#' ----------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{Msm092}, \code{Msm098}.
 #' See the file header for the source the module follows.
@@ -634,7 +624,6 @@
 
 # --- chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3) ---------
 #' Chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3)
-#' ---------
 #'
 #' A step of the helpers_gp_core implementation. Called by \code{.gprkhsfitsq}, \code{Msm123}.
 #' See the file header for the source the module follows.

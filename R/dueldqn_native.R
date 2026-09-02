@@ -118,7 +118,6 @@ duelingdqn <- dueling_q
 #' values it. Using one net for both over-estimates because the max of a
 #' noisy estimate is biased upward and the same noise supplies the
 #' value.
-#' ---------------------------------------------------------------------------
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{b}, as built in the body.

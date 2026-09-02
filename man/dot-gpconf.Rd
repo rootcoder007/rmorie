@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpconf}
 \alias{.gpconf}
-\title{\subsection{Chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14)}{
-}}
+\title{Chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14)}
 \usage{
 .gpconf(y_true, y_pred, n_classes = NULL)
 }

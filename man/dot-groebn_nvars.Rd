@@ -13,6 +13,5 @@
 A numeric value.
 }
 \description{
-\subsection{Polynomial queries}{
-}
+Polynomial queries
 }

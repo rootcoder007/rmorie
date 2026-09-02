@@ -45,7 +45,6 @@ NULL
 #' \code{extra} list, so downstream code can post-process programmatically.
 #'
 #' Categories
-#' ----------
 #' \itemize{
 #'   \item Location: \code{one_sample_ttest}, \code{two_sample_ttest},
 #'     \code{welch_ttest}, \code{paired_ttest}

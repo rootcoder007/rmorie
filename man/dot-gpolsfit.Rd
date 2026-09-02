@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpolsfit}
 \alias{.gpolsfit}
-\title{\subsection{Chapter 3: least squares, eq (3.1)}{
-}}
+\title{Chapter 3: least squares, eq (3.1)}
 \usage{
 .gpolsfit(X, y, add_intercept = FALSE)
 }

@@ -17,6 +17,5 @@
 The value of \code{.groebn_sub}.
 }
 \description{
-\subsection{S-polynomial and division}{
-}
+S-polynomial and division
 }

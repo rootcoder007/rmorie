@@ -14,7 +14,6 @@
 #' as an alternative to manual bandwidth selection.
 #'
 #' Functions
-#' ---------
 #' \itemize{
 #'   \item \code{\link{kernel_eval}}: evaluate a kernel function.
 #'   \item \code{\link{nw_regression}}: Nadaraya-Watson kernel regression.

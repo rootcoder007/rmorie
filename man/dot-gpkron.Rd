@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpkron}
 \alias{.gpkron}
-\title{\subsection{Chapter 5: Kronecker products and the multi-trait model, eq (5.5)}{
-}}
+\title{Chapter 5: Kronecker products and the multi-trait model, eq (5.5)}
 \usage{
 .gpkron(A, B)
 }

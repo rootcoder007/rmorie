@@ -19,6 +19,5 @@
 A list with \code{estimate}, \code{basis}, \code{order}, \code{size}, \code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned}, \code{method}.
 }
 \description{
-\subsection{Buchberger completion and reduce_basis}{
-}
+Buchberger completion and reduce_basis
 }

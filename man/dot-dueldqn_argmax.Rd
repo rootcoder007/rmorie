@@ -13,9 +13,8 @@
 The value of \code{b}, as built in the body.
 }
 \description{
-\subsection{Double-DQN target: the ONLINE net picks the action, the TARGET net
+Double-DQN target: the ONLINE net picks the action, the TARGET net
 values it. Using one net for both over-estimates because the max of a
 noisy estimate is biased upward and the same noise supplies the
-value.}{
-}
+value.
 }

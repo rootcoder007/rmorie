@@ -34,7 +34,6 @@
 #' kernels lack the memorylessness required for O(n) recursion.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_tps_hawkes_advanced_fit}} -- fit one

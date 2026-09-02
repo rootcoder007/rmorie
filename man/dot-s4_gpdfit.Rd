@@ -19,11 +19,7 @@ Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid
 
 of
 }
-\section{30 + floor(sqrt(N)) points weighted by the profile likelihood -- no}{
+30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
 
-}
-
-\section{optimiser, so the arms cannot land on different local optima.}{
-
-}
+optimiser, so the arms cannot land on different local optima.
 
