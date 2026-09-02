@@ -97,8 +97,9 @@ test_that("parser rejects what yajl rejects, with a position", {
   expect_identical(morie_jsonlt_from_json("[123456789012]"), 123456789012)
   expect_identical(morie_jsonlt_from_json("[{\"$date\":\"2024-05-06T07:08:09Z\"}]"),
                    as.POSIXct("2024-05-06 07:08:09", tz = "UTC"))
-  expect_identical(morie_jsonlt_from_json('[{"$date":"2024-05-06T07:08:09"},{"$date":"2024-05-07T00:00:00"}]')[2],
-                   as.POSIXct("2024-05-07 00:00:00"))
+  d2 <- morie_jsonlt_from_json('[{"$date":"2024-05-06T07:08:09"},{"$date":"2024-05-07T00:00:00"}]')
+  expect_s3_class(d2, "POSIXct")
+  expect_identical(format(d2, "%Y-%m-%d %H:%M:%S"), c("2024-05-06 07:08:09", "2024-05-07 00:00:00"))  # local-time strings, tz-agnostic
   # a scalar list of dates collapses to a POSIXct vector (jsonlite's mongo-date rule)
   expect_identical(morie_jsonlt_from_json('{"a":{"$date":1714979289000}}'), structure(1714979289, class = c("POSIXct", "POSIXt")))
   expect_identical(morie_jsonlt_from_json('[{"$date":1714979289000},null]'), structure(c(1714979289, NA), class = c("POSIXct", "POSIXt")))
